@@ -1,0 +1,17 @@
+Übung Makroökonomik II
+Aufgabenblatt 7
+
+AUFGABE 3 Taylor-Regel
+Nehmen Sie an, die Zentralbank folgt einer Taylor-Regel der Form
+it = i∗ + α(πt − π ∗ ) − β(ut − un )
+a) Beschreiben Sie die Auswirkungen eines negativen Nachfrageschocks. Wie wird die Zentralbank
+darauf reagieren?
+b) Stellen Sie sich nun vor, die Zentralbank ist mit der folgenden Situation konfrontiert: πt > π ∗
+und ut > un . Was sollte sie gemäß der Taylor-Regel tun? Erklären Sie ihre Antwort kurz.
+c) Manche Ökonomen vertreten die Ansicht, dass eine Zentralbank nur das Ziel der Preisstabillität
+erreichen sollte. Unterstellen Sie, dass die Zentralbank diese Ansicht übernimmt. Wie würde
+sich die Taylor-Regel verändern und was wäre dann die optimale Strategie im Falle b)?
+
+1
+
+

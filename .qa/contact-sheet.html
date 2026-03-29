@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal QA Contact Sheet</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f3f8;
+      --card: #ffffff;
+      --text: #1f1728;
+      --muted: #6c6378;
+      --border: rgba(31, 23, 40, 0.12);
+      --shadow: 0 20px 48px rgba(31, 23, 40, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    p {
+      margin: 0 0 24px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .label {
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.72);
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>VWL Lernportal QA</h1>
+  <p>Desktop screenshots for the landing page and all 11 public course portals.</p>
+  <div class="grid">
+    <figure class="card"><figcaption class="label">Landing</figcaption><img src="./landing.png" alt="Landing"></figure>
+    <figure class="card"><figcaption class="label">Mikrooekonomik I</figcaption><img src="./mikro1.png" alt="Mikrooekonomik I"></figure>
+    <figure class="card"><figcaption class="label">Makrooekonomik I</figcaption><img src="./makro1.png" alt="Makrooekonomik I"></figure>
+    <figure class="card"><figcaption class="label">Makrooekonomik II</figcaption><img src="./makro2.png" alt="Makrooekonomik II"></figure>
+    <figure class="card"><figcaption class="label">Statistik</figcaption><img src="./statistik.png" alt="Statistik"></figure>
+    <figure class="card"><figcaption class="label">Einfuehrung in die Oekonometrie</figcaption><img src="./oekonometrie.png" alt="Einführung in die Oekonometrie"></figure>
+    <figure class="card"><figcaption class="label">Mathematik</figcaption><img src="./mathematik.png" alt="Mathematik"></figure>
+    <figure class="card"><figcaption class="label">Finanzwirtschaft des Unternehmens</figcaption><img src="./finanzwirtschaft.png" alt="Finanzwirtschaft des Unternehmens"></figure>
+    <figure class="card"><figcaption class="label">Grundlagen der internationalen Wirtschaftsbeziehungen</figcaption><img src="./internationale-wirtschaftsbeziehungen.png" alt="Grundlagen der internationalen Wirtschaftsbeziehungen"></figure>
+    <figure class="card"><figcaption class="label">Jahresabschluss</figcaption><img src="./jahresabschluss.png" alt="Jahresabschluss"></figure>
+    <figure class="card"><figcaption class="label">Recht</figcaption><img src="./recht.png" alt="Recht"></figure>
+    <figure class="card"><figcaption class="label">R</figcaption><img src="./r.png" alt="R"></figure>
+  </div>
+</body>
+</html>

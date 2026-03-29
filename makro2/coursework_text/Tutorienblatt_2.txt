@@ -1,0 +1,45 @@
+Gruppenname:
+
+Tutorium:
+
+Tutorium Makroökonomik II - Aufgabenblatt 2
+AUFGABE 1
+
+[15 Punkte]
+
+Bitte beantworten Sie die folgenden Fragen mit wenigen Worten/Sätzen. Verwenden Sie bitte ausschließlich den vorhandenen Raum.
+1. Welchen Effekt hat ein Rückgang des ausländischen Einkommens auf die inländische Produktion? Begründen Sie kurz.
+2. Ist folgende Aussage richtig, falsch oder unklar? “Den J-Kurven Effekt gibt es nur dann, wenn
+die Marshall-Lerner Bedingung gilt.” Erklären Sie kurz
+3. Nehmen Sie an, dass die Marshall-Lerner-Bedingung nicht gilt. Warum ist es dann nicht eindeutig klar, ob eine reale Abwertung zu einer Verbesserung oder zu einer Verschlechterung der
+Handelsbilanz führt?
+4. In einer geschlossenen Volkswirtschaft gilt, dass die gesamten Ersparnisse den Investitionen
+entsprechen. Wie wirkt sich in einer offenen Volkswirtschaft ein Anstieg der Investitionen aus,
+falls weder staatliche noch private Ersparnisse ansteigen?
+5. Vervollständigen Sie folgende Aussage und begründen Sie intuitiv. “Der Staatsausgabenmultiplikator in einer geschlossenen Volkswirtschaft ist . . . . . . . . . (kleiner, größer, gleich groß)
+als/wie der in einer offenen Volkswirtschaft.”
+AUFGABE 2
+
+[20 Punkte]
+
+Die Nachfrage nach inländischen Gütern sei gegeben durch:
+Z = C + I + G + X − IM/ϵ, ϵ = 1
+Gehen Sie von folgenden Verhaltensgleichungen aus:
+C = c0 + c1 (Y − T ), I = b0 + b1 Y − b2 i, IM = q1 Y, X = x1 Y ∗ ,
+wobei Y ∗ für das exogene ausländische Einkommen steht.
+a) Bestimmen Sie in allgemeiner Form die gleichgewichtige Produktion des Inlands.
+
+[7 Punkte]
+
+b) Bestimmen Sie den Staatsausgabenmultiplikator und vergleichen Sie diesen mit dem Multiplikator in einer geschlossenen (aber ansonsten identischen) Volkswirtschaft. Begründen Sie den
+beobachteten Größenunterschied ökonomisch.
+[7 Punkte]
+
+c) Bestimmen Sie die Wirkung eines Einkommensanstieg des Auslands auf die gleichgewichtige
+Produktion des Inlands.
+[3 Punkte]
+d) Wie hoch ist der Ausgabenmultiplikator wenn c1 + b1 = q1 ? Was bedeutet das? Begründen Sie
+intuitiv.
+[3 Punkte]
+
+

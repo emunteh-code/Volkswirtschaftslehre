@@ -1,0 +1,69 @@
+Gruppenname:
+
+Tutorium:
+
+Tutorium Makroökonomik II - Aufgabenblatt 1
+AUFGABE 1
+
+[15 Punkte]
+
+Bitte beantworten Sie die folgenden Fragen mit wenigen Worten/Sätzen. Verwenden Sie bitte ausschließlich den vorhandenen Raum.
+1. Können die Exporte eines Landes das BIP übersteigen? Begründen Sie kurz. [3 Punkte]
+
+2. Wie wirkt es sich jeweils auf die deutsche Leistungsbilanz, Kapitalbilanz und Nettoverschuldung
+aus, wenn:
+(a) Ein deutsches Unternehmen Autozubehör nach China exportiert und für den Erlös im gleichen Wert Solarzellen nach Deutschland einführt?
+(b) Ein deutsches Unternehmen Autozubehör nach China exportiert und die Erlöse des Geschäfts
+an der chinesischen Börse investiert? [3 Punkte]
+
+3. Ist folgende Aussage richtig, falsch oder unklar? “Wenn ein Land mehr exportiert als importiert,
+wird dies nicht notwendigerweise in einem Leistungsbilanzüberschuss resultieren.” Begründen
+Sie kurz. [3 Punkte]
+
+4. Nennen Sie zwei plausible Gründe, warum die Bilanz der Sekundäreinkommen eines Landes
+negativ sein kann. [3 Punkte]
+
+5. Gehen Sie davon aus, dass die ungedeckte Zinsparität gilt, und dass der nominale Zinssatz
+in Deutschland 3% beträgt und in den USA 5%. Nun steigt der Zinssatz in den USA um 1
+Prozentpunkt. Führt dies zu einer erwarteten Aufwertung oder zu einer erwarteten Abwertung
+des Euros im Vergleich zum US Dollar im kommenden Jahr? Wie hoch fällt diese aus? [3 Punkte]
+
+AUFGABE 2
+
+[20 Punkte]
+
+Gegeben sind die Preise eines Big Mac in verschiedenen Ländern sowie die Wechselkurse zwischen
+dem Britischen Pfund (GBP) und den jeweiligen Landeswährungen:
+Land
+Großbritannien
+USA
+Schweiz
+Vietnam
+
+Preis eines Big Mac
+4,59 GBP
+5,79 USD
+7,20 CHF
+76.000 VND
+
+Wechselkurs
+1 GBP = 1,33 USD
+1 GBP = 1,08 CHF
+1 GBP = 34.339,1 VND
+
+Tabelle 1: BigMac Preise und Wechselkurse
+
+1) Berechnen Sie für jedes Land den impliziten Wechselkurs in Mengennotierung gemäß dem Gesetz
+der Kaufkraftparität (PPP). [4 Punkte]
+2) Vergleichen Sie den impliziten Wechselkurs mit dem tatsächlichen Wechselkurs und bestimmen
+Sie, ob die jeweilige Währung unterbewertet oder überbewertet gegenüber dem Britischen Pfund
+ist – und um wie viel Prozent. [4 Punkte]
+3) Nennen Sie zwei Gründe, warum der Big Mac Index systematische Abweichungen vom nominalen Wechselkurs zeigen kann, ohne dass dies auf eine tatsächliche Fehlbewertung der Währung
+hinweist? [4 Punkte]
+4) Gehen Sie davon aus, dass die Inflation in Großbritannien 7%, in den USA 10%, in der Schweiz
+2% und in Vietnam 3% beträgt. Nehmen Sie an, dass im gleichen Zeitraum sowohl das Zinsniveau als auch der nominale Wechselkurs konstant geblieben sind. Wie beeinflusst dies die
+Unter- oder Überbewertung der Währungen gegenüber dem Britischen Pfund in einem Jahr?
+Berechnen Sie auf Basis der Big Mac Preise und vergleichen Sie mit den Ergebnissen aus 2).
+Runden Sie die Ergebnisse auf zwei Nachkommastellen. [8 Punkte]
+
+

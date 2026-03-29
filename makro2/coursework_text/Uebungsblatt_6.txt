@@ -1,0 +1,45 @@
+Übung Makroökonomik II
+Aufgabenblatt 6
+
+AUFGABE 1 Rückzahlung der Staatsschulden
+Nehmen Sie an, eine Volkswirtschaft weist bis zum Zeitpunkt t = 0 einen Schuldenstand von null auf.
+Die Staatsausgaben betragen über alle Perioden konstant G = 1000 und der Realzins ist ebenfalls
+konstant bei r = 10%. Gehen Sie von der Annahme einer Nullinflation aus und der staatlichen
+Budgetrestriktion
+Bt = (1 + r)Bt−1 + Gt − Tt
+a) Zum Zeitpunkt t = 1 beschließt die Regierung, die Nettosteuern (also Steuren minus Transfers)
+von T0 = 1000 auf T1 = 900 einmalig zu senken.
+i. Die Regierung plant die daraus resultierende Staatsschuld zum Zeitpunkt t = 4 zu tilgen.
+Zum Zeitpunkt t = 2 und t = 3 sei das Primärdefizit gleich null. Berechnen Sie die
+zusätzlichen Steuereinnahmen in Periode t = 4, die zur Tilgung der Staatsverschuldung
+benötigt werden.
+ii. Nehmen Sie nun an die Regierung plane die Staastschuld aus Periode t = 1 erst zum
+Zeitpunkt t = 10 zu tilgen. Von Zeitpunkt t = 2 bis t = 9 sei das Primärdefizit gleich null.
+Berechnen Sie die Steuereinnahmen in t = 10, die zur Tilgung der Staatsverschuldung
+benötigt werden.
+iii. Vergleichen Sie ihre Ergebnisse aus i) und ii) ökonomisch.
+b) Die Regierung beschließt anstatt einer Tilgung der Staatsverschuldung, die Staatsverschudlung
+ab Periode t = 2 durch eine Anpassung der Steuereinnahmen zu stabilisieren.
+i. Berechnen Sie die nötige Steuererhöhung.
+ii. Berechnen Sie die Schuldenquote zu den Zeitpunkten t − 1 und t. Kommt es zu einer
+Veränderung der Schuldenquote? Gehen Sie dabei von folgenden Werten aus: Bt−1 = 1120,
+Yt−1 = 2800, Gt = 1000, Tt = 900 und in allen Perioden g = 2%, r = 6% und P = 1 und
+begründen Sie ihre Antwort.
+iii. Geben Sie eine Gleichung für die Veränderung der Schudenquote über die Zeit an und
+interpretieren Sie diese ökonomisch. Welche Faktoren führen zu einem Anstieg (Rückgang)
+der Schuldenquote?
+
+1
+
+AUFGABE 2 Monetarisierung der Staatsschuld und hohe Inflation
+Die Regierung eines Landes hat zur Finanzierung zusätzlicher Staatsausgaben zwei Alternativen:
+1. Finanzierung über Kredite
+2. Finanzierung durch Geldschöpfung bzw. Monetarisierung der Staatsschulden.
+Zeigen Sie grafisch anhand des IS-LM-PC-Modells die kurz- und mittelfristigen Auswirkungen beider
+Finanzierungsalternativen auf Produktion, Zinssatz und Inflation. Gehen Sie davon aus, dass sich die
+Volkswirtschaft in der Ausgangssituation in einem mittelfristigen Gleichgewicht befindet. Erläutern
+Sie kurz die Mechanismen.
+
+2
+
+

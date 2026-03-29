@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "search_placeholder": "Konzept suchen…",
+    "home_label": "Startseite",
+    "progress_label": "FORTSCHRITT",
+    "dashboard": "Dashboard",
+    "quick_exam": "Schnelltest",
+    "review": "Wiederholen"
+  },
+  "tabs": {
+    "theorie": "Theorie",
+    "graph": "Grafik",
+    "aufgaben": "Aufgaben",
+    "formeln": "Formeln",
+    "intuition": "Intuition"
+  },
+  "topbar": {
+    "focus_btn": "Fokus",
+    "theme_light": "Hell",
+    "theme_dark": "Dunkel",
+    "focus_on": "Fokus-Modus aktiviert (F zum Deaktivieren)",
+    "focus_off": "Fokus-Modus deaktiviert",
+    "theme_switched_light": "Helles Theme",
+    "theme_switched_dark": "Dunkles Theme"
+  },
+  "consent": {
+    "title": "Datenspeicherung:",
+    "body": "Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.",
+    "dismiss": "Ignorieren",
+    "accept": "Verstanden & Weiter"
+  },
+  "srs": {
+    "all_done_heading": "Alle Karten gelernt",
+    "all_done_body": "Heute gibt es keine Karten zu wiederholen. Komm morgen wieder!",
+    "back_to_home": "Zurück zur Übersicht",
+    "due_heading": "Heute zu wiederholen",
+    "due_subheading_one": "{{count}} Konzept steht zur Wiederholung an.",
+    "due_subheading_other": "{{count}} Konzepte stehen zur Wiederholung an.",
+    "due_badge": "Wiederholen"
+  },
+  "exam": {
+    "start": "Schnelltest starten",
+    "submit": "Antwort prüfen",
+    "skip": "Überspringen",
+    "correct": "Richtig!",
+    "wrong": "Leider falsch.",
+    "timeout": "Zeit abgelaufen."
+  },
+  "content": {
+    "solution_show": "Lösung anzeigen",
+    "solution_hide": "Lösung ausblenden",
+    "copy_formula": "Formel kopiert!",
+    "mastery_check": "Als gemeistert markieren"
+  },
+  "errors": {
+    "content_not_found": "Inhalt für dieses Konzept konnte nicht geladen werden.",
+    "graph_failed": "Graphdarstellung fehlgeschlagen.",
+    "data_cleared": "Alle Daten wurden gelöscht.",
+    "data_clear_confirm": "Alle Lernfortschritte löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "shortcuts": {
+    "navigation": "Navigation",
+    "focus": "Fokus",
+    "solution": "Lösung"
+  }
+}

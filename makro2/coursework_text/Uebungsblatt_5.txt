@@ -1,0 +1,36 @@
+Übung Makroökonomik II
+Aufgabenblatt 5
+
+AUFGABE 1 Barro-Gordon Modell
+Die Regierung möchte die Arbeitslosenquote reduzieren und setzt sich ein Ziel unterhalb der natürlichen Arbeitslosenquote:
+u∗ = un − ∆
+Die Inflationsrate wird nachdem die Wirtschaftssubjekte ihre Inflationserwartungen gebildet haben,
+von der Geldpolitik festgesetzt. Sie minimiert dabei eine Verlustfunktion des Typs
+L = (π − π ∗ )2 + (u − u∗ )2
+Es gilt die Phillipskurve:
+π = πe −
+
+1
+(u − un )
+α
+
+a) Erläutern Sie die Verlustfunktion und skizzieren Sie die Iso-Verlustkurven (Indifferenzkurven
+der ZB).
+b) Erläutern Sie kurz die First-Best-Lösung in diesem Modell.
+c) Bestimmen Sie die Reaktionsfunktion der Zentralbank bei gegebenen Inflationserwartungen π e .
+d) Welche Inflationserwartungen werden rationale Wirtschaftssubjekte angesichts dieser Reaktionsfunktion bilden?
+e) Welche Arbeitslosenquote ergibt sich damit in dieser Ökonomie? Berechnen Sie auch den Wohlfahrtsverlust.
+f) Nehmen Sie nun an, die Zentralbank könnte eine Inflationsrate ankündigen, bevor die Wirtschaftssubjekte ihre Inflationserwartungen bilden. Hat eine solche Ankündigung einen Einfluss
+auf rationale Wirtschaftssubjekte?
+g) Gehen Sie nun davon aus, die Zentralbank könnte sich durch einen geeigneten Mechanismus
+vorab glaubwürdig zu einer bestimmten Inflationsrate verpflichten ( commitment“) und würde
+”
+diese dann auch wirklich durchsetzen. Für welche Inflationsrate sollte sie sich entscheiden?
+Berechnen Sie die Arbeitslosenquote und den Wohlfahrtsverlust.
+h) Skizzieren Sie die Lösungen aus b), e) und g) und vergleichen Sie sie.
+i) Wieso kann die Zentralbank ohne einen geeigneten Mechanismus die Second-Best-Lösung nicht
+erreichen?
+
+1
+
+

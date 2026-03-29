@@ -1,0 +1,69 @@
+Gruppenname:
+
+Tutorium:
+
+Tutorium Makroökonomik II - Aufgabenblatt 3
+AUFGABE 1
+
+[15 Punkte]
+
+Bitte beantworten Sie die folgenden Fragen mit wenigen Worten/Sätzen. Verwenden Sie bitte ausschließlich den vorhandenen Raum.
+1. Warum ist in einem System mit festen Wechselkursen die selbst-erfüllende Prophezeiung möglich,
+dass es im Inland tatsächlich zu einer Abwertung kommt, wenn die Märkte eine Abwertung erwarten?
+
+2. Nennen Sie zwei Gründe, warum die Zinsparität in der Realität eingeschränkt sein kann.
+
+3. Wodurch kann die große Volatilität flexibler nominaler Wechselkurse erklärt werden? Nennen
+Sie zwei Gründe.
+
+4. Ist folgende Aussage richtig, falsch oder unklar? “Laut dem sogenannten Trilemma der Geldund Währungspolitik kann ein Land, das eine unabhängige Geldpolitik betreiben möchte, nicht
+gleichzeitig einen freien Kapitalverkehr haben.” Begründen Sie kurz.
+
+5. Ist folgende Aussage richtig, falsch oder unklar? “Laut der Theorie der optimalen Währungsräume
+von Mundell ist die Eurozone ein optimaler Währungsraum.” Begründen Sie kurz.
+
+AUFGABE 2
+
+[20 Punkte]
+
+Eine kleine Volkswirtschaft wird durch folgende Gleichungen beschrieben:
+Y = C(Y − T ) + I(Y, r) + G + N X(Y, Y ∗ , ε) (Gütermarktgleichgewicht)
+ε = EP
+P ∗ (realer Wechselkurs)
+e
+
+i = i∗ − E E−E (Zinsparität)
+r = i − π e (Realzins)
+α
+π − πe = L
+(Y − Yn ) (Phillipskurve)
+
+E gibt den nominalen Wechselkurs in Mengennotierung aus Sicht des Inlands an, Ē den fixen Wechselkurs. Treffen Sie die Annahme, dass π e = π ∗ , wobei π ∗ das konstante Inflationsziel des Inlands ist.
+Die Zentralbank besitzt keine Devisenreserven.
+Nehmen Sie an, dass das ausländische Preisniveau, die ausländische Produktion und der ausländische
+Zinssatz fixiert sind, und dass die Marshall-Lerner-Bedingung gilt.
+Gehen Sie zunächst davon aus, dass sich das Inland im kurzfristigen Gleichgewicht über seinem Produktionspotenzial befindet, also: Y > Yn . Die Wechselkursbindung ist glaubwürdig, also: E e = Ē.
+a) Beschreiben Sie den Anpassungsprozess vom kurzfristigen zum mittelfristigen Gleichgewicht
+kurz ökonomisch. Beantworten Sie insbesondere, was die Bewegung hin zum mittelfristigen
+Gleichgewicht auslöst.
+[7 Punkte]
+
+Gehen Sie jetzt wieder vom kurzfristigen Gleichgewicht aus.
+b) Die Märkte gehen nun davon aus, dass die Währung überbewertet ist. Die Wechselkursbindung
+hat somit im kurzfristigen Gleichgewicht ihre Glaubwürdigkeit verloren und dadurch gilt jetzt,
+dass E e < Ē. Zeigen Sie diese Veränderung in einem IS-LM-ZP-Schaubild. Beschriften Sie die
+Achsen, benennen Sie alle Kurven und markieren Sie deutlich alle Gleichgewichte und eventuelle
+Verschiebungen von Kurven.
+[6 Punkte]
+c) Welche Auswirkungen ergeben sich für die Produktion und den inländischen Zinssatz, wenn die
+inländische Zentralbank Ē erhalten möchte und entsprechend reagiert? Gehen Sie davon aus,
+dass die Wechselkursbindung eingehalten wird. Zeichnen Sie dieses Szenario in das Schaubild
+aus b) und beschriften Sie die Achsen, Kurven und neuen Gleichgewichte.
+[4 Punkte]
+d) Die Märkte rechnen damit, dass die Wahrscheinlichkeit für eine Aufrechterhaltung der Parität
+50% beträgt, und es mit einer Wahrscheinlichkeit von 50% in der nächsten Zeitperiode zu einer
+Abwertung um 10% kommen wird. Um wieviele Prozentpunkte müsste die Zentralbank den
+Zinsssatz senken oder erhöhen, um die Wechselkurse konstant zu halten?
+[3 Punkte]
+
+

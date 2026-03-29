@@ -1,0 +1,149 @@
+// ============================================================
+// GRAPH PANEL RENDERER — Makrooekonomik II
+// Subject-correct interactive macro visuals for selected concepts
+// ============================================================
+
+export const GRAPH_CONCEPTS = new Set([
+  'wechselkurs',
+  'kaufkraftparitaet',
+  'zinsparitaet',
+  'nettoexporte',
+  'mundell_fleming',
+  'schuldenquote',
+  'taylor_regel',
+  'solow_basis',
+  'phillipskurve',
+  'geldmengen'
+]);
+
+export function renderGraphPanel(id) {
+  const graphConfigs = {
+    wechselkurs: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Realer Wechselkurs und Kaufkraftparität</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_e_nom">Nominaler WK E ($/€)</label><input type="range" id="g_e_nom" min="0.8" max="1.5" step="0.05" value="1.13" oninput="window.initGraph('wechselkurs', false)"><div class="val" id="v_e_nom" aria-live="polite">1.13</div></div>
+<div class="ctrl-group"><label for="g_p_dom">Inlandsniveau P</label><input type="range" id="g_p_dom" min="80" max="140" step="5" value="100" oninput="window.initGraph('wechselkurs', false)"><div class="val" id="v_p_dom" aria-live="polite">100</div></div>
+<div class="ctrl-group"><label for="g_p_for">Auslandsniveau P*</label><input type="range" id="g_p_for" min="80" max="140" step="5" value="100" oninput="window.initGraph('wechselkurs', false)"><div class="val" id="v_p_for" aria-live="polite">100</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Realer Wechselkurs als Funktion des nominalen Wechselkurses mit PPP-Linie."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    kaufkraftparitaet: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Kaufkraftparität im Kursdiagramm</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_e_nom">Nominaler WK E ($/€)</label><input type="range" id="g_e_nom" min="0.8" max="1.5" step="0.05" value="1.13" oninput="window.initGraph('kaufkraftparitaet', false)"><div class="val" id="v_e_nom" aria-live="polite">1.13</div></div>
+<div class="ctrl-group"><label for="g_p_dom">Inlandsniveau P</label><input type="range" id="g_p_dom" min="80" max="140" step="5" value="100" oninput="window.initGraph('kaufkraftparitaet', false)"><div class="val" id="v_p_dom" aria-live="polite">100</div></div>
+<div class="ctrl-group"><label for="g_p_for">Auslandsniveau P*</label><input type="range" id="g_p_for" min="80" max="140" step="5" value="100" oninput="window.initGraph('kaufkraftparitaet', false)"><div class="val" id="v_p_for" aria-live="polite">100</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Kaufkraftparität mit PPP-Gleichgewicht und aktuellem realen Wechselkurs."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    zinsparitaet: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Zinsparität und aktueller Wechselkurs</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_i_dom">Inlandszins i (%)</label><input type="range" id="g_i_dom" min="0" max="8" step="0.25" value="5" oninput="window.initGraph('zinsparitaet', false)"><div class="val" id="v_i_dom" aria-live="polite">5.00</div></div>
+<div class="ctrl-group"><label for="g_i_for">Auslandszins i* (%)</label><input type="range" id="g_i_for" min="0" max="8" step="0.25" value="2" oninput="window.initGraph('zinsparitaet', false)"><div class="val" id="v_i_for" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_e_future">Erwarteter Kurs E^e</label><input type="range" id="g_e_future" min="0.8" max="1.5" step="0.05" value="1.2" oninput="window.initGraph('zinsparitaet', false)"><div class="val" id="v_e_future" aria-live="polite">1.20</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Zinsparität mit aktuellem nominalem Wechselkurs in Abhängigkeit vom Inlandszins."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    nettoexporte: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Nettoexporte und realer Wechselkurs</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_domestic">Inlandsnachfrage</label><input type="range" id="g_domestic" min="0.6" max="1.8" step="0.1" value="1.1" oninput="window.initGraph('nettoexporte', false)"><div class="val" id="v_domestic" aria-live="polite">1.1</div></div>
+<div class="ctrl-group"><label for="g_foreign">Auslandsnachfrage</label><input type="range" id="g_foreign" min="0.6" max="1.8" step="0.1" value="1.2" oninput="window.initGraph('nettoexporte', false)"><div class="val" id="v_foreign" aria-live="polite">1.2</div></div>
+<div class="ctrl-group"><label for="g_eps">Realer WK ε</label><input type="range" id="g_eps" min="0.6" max="1.8" step="0.05" value="1.1" oninput="window.initGraph('nettoexporte', false)"><div class="val" id="v_eps" aria-live="polite">1.10</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Nettoexporte in Abhängigkeit vom realen Wechselkurs."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    mundell_fleming: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Mundell-Fleming: IS und ZP</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_fiscal">Fiskalimpuls</label><input type="range" id="g_fiscal" min="-1" max="2" step="0.1" value="0.6" oninput="window.initGraph('mundell_fleming', false)"><div class="val" id="v_fiscal" aria-live="polite">0.6</div></div>
+<div class="ctrl-group"><label for="g_iworld">Weltzins i*</label><input type="range" id="g_iworld" min="0.5" max="6" step="0.1" value="2.5" oninput="window.initGraph('mundell_fleming', false)"><div class="val" id="v_iworld" aria-live="polite">2.5</div></div>
+<div class="ctrl-group"><label for="g_risk">Risikopraemie</label><input type="range" id="g_risk" min="0" max="3" step="0.1" value="0.4" oninput="window.initGraph('mundell_fleming', false)"><div class="val" id="v_risk" aria-live="polite">0.4</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Mundell-Fleming-Modell mit IS-Kurve und horizontaler ZP-Linie."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    schuldenquote: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Schuldenquote im Zeitverlauf</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_b0">Startquote b₀</label><input type="range" id="g_b0" min="20" max="140" step="5" value="70" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_b0" aria-live="polite">70</div></div>
+<div class="ctrl-group"><label for="g_r">Zins r (%)</label><input type="range" id="g_r" min="0" max="8" step="0.5" value="4" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_r" aria-live="polite">4.0</div></div>
+<div class="ctrl-group"><label for="g_g">Wachstum g (%)</label><input type="range" id="g_g" min="0" max="6" step="0.5" value="2" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_g" aria-live="polite">2.0</div></div>
+<div class="ctrl-group"><label for="g_ps">Primaersaldo (%)</label><input type="range" id="g_ps" min="-4" max="4" step="0.5" value="1" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_ps" aria-live="polite">1.0</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Schuldenquote unter unterschiedlichen Zins-Wachstums-Differenzen und Primaersalden."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    taylor_regel: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Taylor-Regel</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_rstar">Natuerlicher Realzins r*</label><input type="range" id="g_rstar" min="0" max="5" step="0.25" value="2" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_rstar" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_pistar">Inflationsziel π*</label><input type="range" id="g_pistar" min="0" max="4" step="0.25" value="2" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_pistar" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_a">Inflationskoeff. a</label><input type="range" id="g_a" min="0.1" max="2.5" step="0.1" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_a" aria-live="polite">0.5</div></div>
+<div class="ctrl-group"><label for="g_b">Outputkoeff. b</label><input type="range" id="g_b" min="0" max="1.5" step="0.1" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_b" aria-live="polite">0.5</div></div>
+<div class="ctrl-group"><label for="g_pi_current">Aktuelle Inflation</label><input type="range" id="g_pi_current" min="0" max="6" step="0.25" value="3" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_pi_current" aria-live="polite">3.00</div></div>
+<div class="ctrl-group"><label for="g_y_gap">Outputluecke (y - yₙ)</label><input type="range" id="g_y_gap" min="-3" max="3" step="0.25" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_y_gap" aria-live="polite">0.50</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Taylor-Regel mit Inflations- und Outputluecke."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    solow_basis: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Solow-Modell: sf(k) und Break-even-Investition</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_s">Sparquote s</label><input type="range" id="g_s" min="0.1" max="0.6" step="0.02" value="0.3" oninput="window.initGraph('solow_basis', false)"><div class="val" id="v_s" aria-live="polite">0.30</div></div>
+<div class="ctrl-group"><label for="g_a">Produktivitaet A</label><input type="range" id="g_a" min="0.8" max="2" step="0.1" value="1.2" oninput="window.initGraph('solow_basis', false)"><div class="val" id="v_a" aria-live="polite">1.2</div></div>
+<div class="ctrl-group"><label for="g_break">δ+n</label><input type="range" id="g_break" min="0.05" max="0.25" step="0.01" value="0.12" oninput="window.initGraph('solow_basis', false)"><div class="val" id="v_break" aria-live="polite">0.12</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Solow-Diagramm mit Investitions- und Break-even-Kurve."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    phillipskurve: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Erwartungsaugmentierte Phillipskurve</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_pie">Erwartete Inflation πᵉ</label><input type="range" id="g_pie" min="0" max="5" step="0.25" value="2" oninput="window.initGraph('phillipskurve', false)"><div class="val" id="v_pie" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_un">Nat. Arbeitslosigkeit uₙ</label><input type="range" id="g_un" min="2" max="8" step="0.25" value="4.5" oninput="window.initGraph('phillipskurve', false)"><div class="val" id="v_un" aria-live="polite">4.50</div></div>
+<div class="ctrl-group"><label for="g_alpha">Steigung α</label><input type="range" id="g_alpha" min="0.2" max="1.5" step="0.1" value="0.8" oninput="window.initGraph('phillipskurve', false)"><div class="val" id="v_alpha" aria-live="polite">0.8</div></div>
+<div class="ctrl-group"><label for="g_u_current">Aktuelles u</label><input type="range" id="g_u_current" min="2" max="9" step="0.25" value="5.5" oninput="window.initGraph('phillipskurve', false)"><div class="val" id="v_u_current" aria-live="polite">5.50</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Phillipskurve mit aktuellem Arbeitslosigkeits- und Inflationspunkt."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    geldmengen: `
+<div class="graph-container">
+<h3 class="graph-panel-title">LM-Kurve</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_mp_real">Reale Geldmenge M/P</label><input type="range" id="g_mp_real" min="20" max="80" step="5" value="45" oninput="window.initGraph('geldmengen', false)"><div class="val" id="v_mp_real" aria-live="polite">45</div></div>
+<div class="ctrl-group"><label for="g_kappa">Transaktionssens. k</label><input type="range" id="g_kappa" min="0.2" max="0.8" step="0.05" value="0.45" oninput="window.initGraph('geldmengen', false)"><div class="val" id="v_kappa" aria-live="polite">0.45</div></div>
+<div class="ctrl-group"><label for="g_h">Zinssens. h</label><input type="range" id="g_h" min="4" max="14" step="1" value="9" oninput="window.initGraph('geldmengen', false)"><div class="val" id="v_h" aria-live="polite">9</div></div>
+<div class="ctrl-group"><label for="g_y_current">Aktuelles Y</label><input type="range" id="g_y_current" min="20" max="120" step="5" value="70" oninput="window.initGraph('geldmengen', false)"><div class="val" id="v_y_current" aria-live="polite">70</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: LM-Kurve in Abhängigkeit von Einkommen und Zins."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`
+  };
+
+  return `<div class="panel active">${graphConfigs[id] || '<div class="section-block"><h3>Grafik</h3><p>Dieses Thema wird hier ueber Theorie, Formeln und Aufgabenpfad gelernt. Eine zusaetzliche Makro-Grafik ist fuer dieses Konzept nicht noetig.</p></div>'}</div>`;
+}

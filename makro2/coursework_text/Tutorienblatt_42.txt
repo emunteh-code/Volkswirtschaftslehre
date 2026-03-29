@@ -1,0 +1,45 @@
+Gruppenname:
+
+Tutorium:
+
+Tutorium Makroökonomik II - Aufgabenblatt 4
+AUFGABE 1
+
+[15 Punkte]
+
+Bitte beantworten Sie die folgenden Fragen mit wenigen Worten/Sätzen. Verwenden Sie bitte ausschließlich den vorhandenen Raum.
+1. Vervollständigen Sie die folgende Aussage und erklären Sie kurz: “Die Veränderung der Staatsschuldenquote hängt . . . . . . . . . (positiv, negativ, nicht) mit der Wachstumsrate der Produktion
+zusammen.”
+
+2. Ist folgende Aussage richtig, falsch oder unklar? “Ist das Primärdefizit niedriger als die Zinszahlungen auf die Staatsverschuldung der Vorperiode, sinkt die Staatsverschuldung.” Begründen
+Sie kurz oder nennen Sie eine Formel.
+
+3. Ist folgende Aussage richtig, falsch oder unklar? “Wenn die Ricardianische Äquivalenz gilt, dann
+wird eine Steuersenkung den Konsum nicht erhöhen.” Begründen Sie kurz.
+
+4. Nennen Sie zwei Möglichkeiten, wie sich das Zeitinkonsistenzproblem der Geldpolitik verringern
+lässt.
+
+5. Wie hängen die Phillipskurve und die Möglichkeit politischer Konjunkturzyklen zusammen?
+
+AUFGABE 2
+
+[15 Punkte]
+
+Barro-Gordon-Modell: In einer Volkswirtschaft minimiert die Zentralbank die gesamtwirtschaftliche
+Verlustfunktion:
+L = 1,5πt2 + u2t
+unter der Nebenbedingung der folgenden Phillipskurve: πt = πte − (ut − 0,05)
+a) Bestimmen Sie die von der Zentralbank präferierte Inflationsrate, wenn der private Sektor ein
+stabiles Preisniveau erwartet. Berechnen Sie auch die Arbeitslosenquote, die sich einstellen wird.
+[7 Punkte]
+b) Ist die oben von Ihnen errechnete Lösung die beste erreichbare Lösung aus der sozialen Perspektive? Begründen Sie Ihre Antwort kurz.
+[3 Punkte]
+
+c) Gehen Sie nun davon aus, dass die präferierte Inflationsrate der Zentralbank von einem stabilen
+Preisniveau abweicht, und dass die Marktteilnehmer dies antizipieren. Wie wird sich dies auf
+die Inflationsrate und die Arbeitslosigkeit auswirken? Argumentieren Sie ohne zu rechnen, und
+beziehen Sie sich auf Ihre Antworten aus den Aufgabenteilen b) und c).
+[5 Punkte]
+
+

@@ -1,0 +1,37 @@
+Übung Makroökonomik II
+Aufgabenblatt 1
+
+AUFGABE 1 Kaufkraftparität und Wechselkursbestimmung
+Die Währung in Land A sei Mark, in Land B Schilling. Am 1.1.2017 kostet ein Schilling drei Mark.
+Die Inflationsrate in Land A beträgt 10% , in Land B 20% .
+a) Versetzen Sie sich in einen Menschen aus Land A. Welcher Wechselkurs ergibt sich gemäß der
+Mengennotierung, welcher gemäß der Preisnotierung?
+b) Versetzen Sie sich nun in einen Menschen aus Land B. Es kommt zu einer Abwertung der
+heimischen Währung. Wie verändert sich der Wechselkurs, wenn die Zentralbank von Land B
+den Wechselkurs in Preisnotierung angibt?
+Versetzen Sie sich für die folgenden Aufgaben in ein Wirtschaftssubjekt aus Land A. Verwenden Sie
+die Mengennotierung.
+c) Berechnen Sie den nominalen Wechselkurs am 1.1.2018, wenn die absolute Kaufkraftparität
+gilt.
+d) Am 1.1.2018 bringt eine Mark 0,4 Schilling. Ist die Mark gegenüber dem Schilling real auf- oder
+abgewertet?
+
+AUFGABE 2 Zinsparität
+Das Zinsniveau in der Schweiz war in der Vergangenheit häufig niedriger als in Deutschland. In der
+Vergangenheit hatten sich manche Unternehmen darauf spezialisiert, günstige Hypothekenkredite in
+der Schweiz an deutsche Hauskäufer zu vermitteln.
+Nehmen Sie an, Sie haben die Wahl zwischen einem Kredit in Deutschland zu einem Nominalzins
+von 8% und einem Kredit in der Schweiz zu einem Nominalzins von 5% .
+a) Ihr Finanzberater schlägt Ihnen die Finanzierung in der Schweiz vor, wodurch Sie bei Ihrem
+Finanzierungsbedarf von 200.000 Euro jährlich 6.000 Euro einsparen könnten. Sollten Sie ihm
+blind vertrauen?
+b) Angenommen, in der Schweiz und in Deutschland wäre der Realzins gleich groß. Was lässt sich
+dann - aus Ihrer Kenntnis über die Beziehung zwischen Nominal- und Realzinsen - über die
+erwartete Inflationsentwicklung in beiden Ländern sagen?
+c) Gehen Sie von der Gültigkeit der Zinsparität aus. Was folgt aus dem Zinsunterschied für die
+erwartete Wechselkursentwicklung?
+d) Stehen Ihre Antworten zu den letzten beiden Teilaufgaben in irgendeinem Widerspruch oder
+sind sie konsistent?
+1
+
+

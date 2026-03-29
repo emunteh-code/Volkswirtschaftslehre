@@ -1,0 +1,34 @@
+Übung Makroökonomik II
+Aufgabenblatt 3
+
+AUFGABE 1 Mundell-Fleming Modell
+Eine kleine Volkswirtschaft (das Inland) wird durch folgende Gleichungen beschrieben:
+Y = c0 + c1 (Y − T ) + b0 − b1 i + b2 Y + G + f1 Y ∗ − f2 Y − f3 E (Gütermarktgleichgewicht)
+M
+P = d1 Y − d2 i
+
+(Geldmarktgleichgewicht)
+
+1+i
+e (Zinsparität)
+E = 1+i
+∗ Ē
+
+E gibt den nominalen Wechselkurs in Mengennotierung aus Sicht des Inlands an.
+a) Stellen Sie das Gleichgewicht in einem geeigneten Schaubild grafisch dar.
+b) Berechnen Sie das gesamtwirtschaftliche Gleichgewicht und den Staatsausgabenmultiplikator.
+Wäre dieser in einer geschlossenen bzw. weniger offenen Volkswirtschaft größer oder kleiner als
+in einer offeneren Volkswirtschaft?
+c) Gehen Sie davon aus, dass das Ausland eine kontraktivere Geldpolitik durchführt und sich
+dementsprechend der ausländische Zinssatz i∗ erhöht. Zeigen Sie grafisch in einem geeigneten Schaubild das neue Gleichgewicht der inländischen Volkswirtschaft und erklären Sie die
+beobachteten Änderungen ökonomisch.
+
+AUFGABE 2 Fester Wechselkurs und das Trilemma der Geldpolitik
+Lesen Sie den Blogeintrag “Chinas Trilemma” von Mark Dittli.
+a) Beschreiben Sie die Situation Chinas anhand des Trilemma der Geldpolitik.
+b) Kann das Trilemma umgangen werden? Welche Strategie verfolgt China?
+c) Für welchen Lösungsweg hat sich China entschieden? Recherchieren Sie.
+
+1
+
+

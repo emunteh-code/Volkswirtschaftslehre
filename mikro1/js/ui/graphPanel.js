@@ -25,7 +25,7 @@ export function renderGraphPanel(id) {
   const graphConfigs = {
     budget: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Interaktive Budgetgerade</h3>
+<h3 class="graph-panel-title">Budgetgerade: Einkommen, Preise und erreichbare Buendel</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawBudget()"><div class="val" id="v_m" aria-live="polite">100</div></div>
 <div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="2" oninput="window.__drawBudget()"><div class="val" id="v_p1" aria-live="polite">2</div></div>
@@ -37,7 +37,7 @@ export function renderGraphPanel(id) {
 
     indiff: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Indifferenzkurven u(x₁,x₂) = x₁·x₂</h3>
+<h3 class="graph-panel-title">Indifferenzkurven: gleiches Nutzenniveau bei verschiedenen Buendeln</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_u1">Nutzenniveau ū₁</label><input type="range" id="g_u1" min="1" max="50" value="12" oninput="window.__drawIndiff()"><div class="val" id="v_u1" aria-live="polite">12</div></div>
 <div class="ctrl-group"><label for="g_u2">Nutzenniveau ū₂</label><input type="range" id="g_u2" min="1" max="50" value="24" oninput="window.__drawIndiff()"><div class="val" id="v_u2" aria-live="polite">24</div></div>
@@ -48,7 +48,7 @@ export function renderGraphPanel(id) {
 
     hausopt: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Haushaltsoptimum — u = x₁·x₂</h3>
+<h3 class="graph-panel-title">Haushaltsoptimum: Tangentialbedingung zwischen Budget und Praeferenz</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawHausopt()"><div class="val" id="v_m" aria-live="polite">100</div></div>
 <div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="4" oninput="window.__drawHausopt()"><div class="val" id="v_p1" aria-live="polite">4</div></div>
@@ -60,7 +60,7 @@ export function renderGraphPanel(id) {
 
     produktion: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Isoquanten der Produktionsfunktion</h3>
+<h3 class="graph-panel-title">Isoquanten: gleicher Output mit verschiedenen Faktorkombinationen</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_prod_alpha">Kapitalelastizität α</label><input type="range" id="g_prod_alpha" min="0.2" max="0.8" step="0.05" value="0.5" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_alpha" aria-live="polite">0.50</div></div>
 <div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
@@ -72,7 +72,7 @@ export function renderGraphPanel(id) {
 
     grts: `
 <div class="graph-container">
-<h3 class="graph-panel-title">GRTS entlang einer Isoquante</h3>
+<h3 class="graph-panel-title">GRTS: Steigung der Tangente an die Isoquante</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_prod_alpha">Kapitalelastizität α</label><input type="range" id="g_prod_alpha" min="0.2" max="0.8" step="0.05" value="0.35" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_alpha" aria-live="polite">0.35</div></div>
 <div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
@@ -84,7 +84,7 @@ export function renderGraphPanel(id) {
 
     kosten: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Kostenminimum: Isoquante und Isokostengerade</h3>
+<h3 class="graph-panel-title">Kostenminimum: Isoquante, Isokostengerade und Tangentialbedingung</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_cost_alpha">Kapitalelastizität α</label><input type="range" id="g_cost_alpha" min="0.2" max="0.8" step="0.05" value="0.5" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_alpha" aria-live="polite">0.50</div></div>
 <div class="ctrl-group"><label for="g_cost_y">Output ȳ</label><input type="range" id="g_cost_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_y" aria-live="polite">4.0</div></div>
@@ -97,7 +97,7 @@ export function renderGraphPanel(id) {
 
     markt: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Marktgleichgewicht und Wohlfahrt</h3>
+<h3 class="graph-panel-title">Marktgleichgewicht: Nachfrage, Angebot und Renten</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_d_int">Nachfrage-Intercept a</label><input type="range" id="g_d_int" min="40" max="120" step="5" value="100" oninput="window.initGraph('markt', false)"><div class="val" id="v_d_int" aria-live="polite">100</div></div>
 <div class="ctrl-group"><label for="g_d_slope">Nachfrage-Steigung b</label><input type="range" id="g_d_slope" min="0.2" max="1.2" step="0.05" value="0.6" oninput="window.initGraph('markt', false)"><div class="val" id="v_d_slope" aria-live="polite">0.60</div></div>
@@ -110,7 +110,7 @@ export function renderGraphPanel(id) {
 
     monopol: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Monopol: p = a − y, C = c·y²</h3>
+<h3 class="graph-panel-title">Monopol: GE = GK, Preisaufschlag und Wohlfahrtsverlust</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_a">Nachfragepreis a</label><input type="range" id="g_a" min="2" max="20" value="10" oninput="window.__drawMonopol()"><div class="val" id="v_a" aria-live="polite">10</div></div>
 <div class="ctrl-group"><label for="g_c">Grenzkostenpar. c</label><input type="range" id="g_c" min="0.1" max="5" step="0.1" value="1" oninput="window.__drawMonopol()"><div class="val" id="v_c" aria-live="polite">1</div></div>
@@ -121,7 +121,7 @@ export function renderGraphPanel(id) {
 
     slutsky: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Slutsky-Zerlegung (u = x₁·x₂)</h3>
+<h3 class="graph-panel-title">Slutsky-Zerlegung: Substitutions- und Einkommenseffekt sauber trennen</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" step="1" oninput="window.__drawSlutsky()"><div class="val" id="v_m" aria-live="polite">100</div></div>
 <div class="ctrl-group"><label for="g_p1_0">Preis p₁ (initial)</label><input type="range" id="g_p1_0" min="1" max="20" value="4" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_0" aria-live="polite">4.0</div></div>

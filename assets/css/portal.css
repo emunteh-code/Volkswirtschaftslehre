@@ -1,14 +1,14 @@
 body[data-page="landing"] {
-  --landing-accent: #7c3aed;
-  --landing-accent-soft: rgba(124, 58, 237, 0.22);
-  --landing-accent-faint: rgba(124, 58, 237, 0.08);
+  --landing-accent: #486b19;
+  --landing-accent-soft: rgba(72, 107, 25, 0.18);
+  --landing-accent-faint: rgba(72, 107, 25, 0.06);
   --landing-stage-bg: #101317;
   --landing-stage-ink: #f5f1e8;
   --landing-stage-muted: rgba(245, 241, 232, 0.76);
   margin: 0;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0) 28%),
-    linear-gradient(180deg, #f3efe8 0%, #ece7de 58%, #e6e0d7 100%);
+    linear-gradient(180deg, #f3efe8 0%, #ece8df 58%, #e7e2d9 100%);
   color: #16181c;
 }
 
@@ -726,13 +726,13 @@ body.theme-dark[data-page="landing"] .landing-footer p {
 .ambient-a {
   top: -12rem;
   right: -10rem;
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(8, 145, 178, 0.18));
+  background: linear-gradient(135deg, rgba(72, 107, 25, 0.12), rgba(100, 123, 95, 0.08));
 }
 
 .ambient-b {
   bottom: -16rem;
   left: -12rem;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(124, 58, 237, 0.2));
+  background: linear-gradient(135deg, rgba(100, 123, 95, 0.08), rgba(72, 107, 25, 0.1));
 }
 
 .site-header,

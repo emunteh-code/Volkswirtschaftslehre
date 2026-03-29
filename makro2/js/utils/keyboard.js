@@ -35,14 +35,13 @@ export function initKeyboard(appState) {
         const n = first.id.replace('sol_', '');
         appState.toggleSolution(+n);
       }
-    } else if (e.key === 'f' || e.key === 'F') {
+    } else if ((e.key === 'f' || e.key === 'F') && e.shiftKey) {
       appState.toggleFocus();
+    } else if (e.key === 'f' || e.key === 'F') {
+      e.preventDefault();
+      window.__openFormulaPanel?.();
     } else if (e.key === 'Escape') {
-      // Close mobile sidebar
-      const sidebar = document.getElementById('sidebar');
-      if (sidebar && sidebar.classList.contains('open')) {
-        sidebar.classList.remove('open');
-      }
+      window.__closeSidebar?.();
     }
   });
 }

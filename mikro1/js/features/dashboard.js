@@ -39,10 +39,10 @@ export function renderDashboard(onNavigate) {
     .sort((a, b) => a.accuracy - b.accuracy);
   const weakest = weak.length ? weak[0] : null;
 
-  let html = `<div class="dashboard">
+let html = `<div class="dashboard">
 <div class="dash-header">
-<h2>Lern-Dashboard</h2>
-<p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
+<h2>Lernstand</h2>
+<p style="color:var(--muted);font-size:13px">Wo du sicher bist, wo Wiederholung noetig ist und welches Konzept als naechstes den groessten Ertrag bringt.</p>
 </div>
 <div class="dash-stats">
 <div class="dash-stat"><div class="ds-val">${totalSeen}</div><div class="ds-lab">Konzepte gesehen</div></div>

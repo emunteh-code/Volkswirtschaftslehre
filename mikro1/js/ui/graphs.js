@@ -55,6 +55,18 @@ function hideTooltip() {
   if (_tooltipEl) _tooltipEl.classList.remove('visible');
 }
 
+function setGraphInfo(html) {
+  const info = document.getElementById('graph_info');
+  if (!info) return;
+  const normalized = String(html || '')
+    .replace(/^\s*<strong>\s*[^:]+:\s*<\/strong>\s*/i, '')
+    .trim();
+  info.innerHTML = `
+    <div class="graph-note-kicker">Interpretation</div>
+    <div class="graph-note-body">${normalized}</div>
+  `;
+}
+
 function registerTooltipPoints(canvas, points) {
   _tooltipPts = points;
   if (canvas._graphTooltipBound) return;
@@ -101,6 +113,14 @@ function drawDot(ctx, cx, cy, radius, fillColor, bgColor) {
   ctx.beginPath();
   ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
   ctx.stroke();
+}
+
+function drawChip(ge, ctx, x, y, text, options = {}) {
+  ge.drawLabelChip(ctx, x, y, text, {
+    textColor: ge._col?.text,
+    stroke: ge._col?.grid,
+    ...options
+  });
 }
 
 // ── Draw functions ─────────────────────────────────────────
@@ -151,18 +171,15 @@ function drawBudget(progress = 1) {
 
   // Labels + dots — appear once line is nearly complete
   if (progress >= 0.9) {
+    drawChip(ge, ctx, sx(x1max * 0.18), sy(x2max * 0.22), 'Budgetmenge', { stroke: col.accent });
+
     // y-intercept dot + label
     drawDot(ctx, sx(0), sy(x2max), 6, col.accent, col.bg);
-    ctx.fillStyle   = col.text;
-    ctx.font        = `bold 13px ${col.fontBody}`;
-    ctx.textAlign   = 'right';
-    ctx.fillText('m/p₂=' + x2max.toFixed(1), sx(0) - 10, sy(x2max) + 4);
+    drawChip(ge, ctx, sx(0) - 12, sy(x2max) + 2, 'm/p₂=' + x2max.toFixed(1), { align: 'right', stroke: col.accent });
 
     // x-intercept dot + label
     drawDot(ctx, sx(x1max), sy(0), 6, col.accent, col.bg);
-    ctx.fillStyle   = col.text;
-    ctx.textAlign   = 'center';
-    ctx.fillText('m/p₁=' + x1max.toFixed(1), sx(x1max), sy(0) + 28);
+    drawChip(ge, ctx, sx(x1max), sy(0) + 20, 'm/p₁=' + x1max.toFixed(1), { align: 'center', stroke: col.accent });
   }
 
   ge.drawLegend(ctx, w, [
@@ -171,8 +188,9 @@ function drawBudget(progress = 1) {
     { color: col.label,  label: `x₂-Abschn.: ${x2max.toFixed(1)}, x₁-Abschn.: ${x1max.toFixed(1)}` },
   ], col.accent2 + '59', 20);
 
-  document.getElementById('graph_info').innerHTML =
-    `<span style="color:var(--accent2)">Budgetgerade:</span> x₂ = <b>${x2max.toFixed(1)}</b> − ${(p1 / p2).toFixed(2)}·x₁ &nbsp;|&nbsp; Steigung = <b>${slope.toFixed(2)}</b> &nbsp;|&nbsp; x₁<sup>max</sup>= <b>${x1max.toFixed(1)}</b>, x₂<sup>max</sup>= <b>${x2max.toFixed(1)}</b>`;
+  setGraphInfo(
+    `<strong>Budgetgerade:</strong> x₂ = <b>${x2max.toFixed(1)}</b> − ${(p1 / p2).toFixed(2)}·x₁. Die schattierte <strong>Budgetmenge</strong> zeigt alle erreichbaren Buendel. Lies in Klausuren immer zuerst die beiden Achsenschnitte, dann die <strong>Steigung −p₁/p₂ = ${slope.toFixed(2)}</strong> und daraus den relativen Preis von Gut 1. Eine Preissteigerung von Gut 1 dreht die Gerade nach innen und macht den Spielraum für <strong>x₁</strong> enger.`
+  );
 
   // Tooltip registration — after full draw
   registerTooltipPoints(canvas, [
@@ -211,10 +229,7 @@ function drawIndiff(progress = 1) {
 
   // "higher utility" hint
   if (progress >= 0.9) {
-    ctx.fillStyle = col.accent2 + '99';
-    ctx.font      = `15px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('↗ höherer Nutzen', PAD + PW * 0.58, h - PAD - PH * 0.16);
+    drawChip(ge, ctx, PAD + PW * 0.58, h - PAD - PH * 0.16, '↗ höherer Nutzen', { stroke: col.accent2 });
   }
 
   ge.drawLegend(ctx, w, [
@@ -222,6 +237,10 @@ function drawIndiff(progress = 1) {
     { color: clr2,      label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
     { color: col.label, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
   ], col.accent2 + '66');
+
+  setGraphInfo(
+    `<strong>Indifferenzkurven:</strong> Alle Buendel auf derselben Kurve liefern denselben Nutzen. Weiter nordost liegende Kurven stehen fuer hoehere Nutzenniveaus; ihre Steigung entspricht der Grenzrate der Substitution. Entscheidend ist also nicht die absolute Lage eines einzelnen Punktes, sondern welche Kurve noch <strong>erreichbar</strong> ist und wie steil der Konsument bereit ist zu tauschen.`
+  );
 
   registerTooltipPoints(canvas, []);
 }
@@ -271,10 +290,7 @@ function drawHausopt(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.4) {
-    ctx.fillStyle = col.accent;
-    ctx.font      = `15px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Budgetgerade', sx(x1max * 0.52), sy(x2max * 0.42) - 10);
+    drawChip(ge, ctx, sx(x1max * 0.52), sy(x2max * 0.42) - 10, 'Budgetgerade', { stroke: col.accent });
   }
 
   // Indifference curve through optimum — animated
@@ -290,27 +306,33 @@ function drawHausopt(progress = 1) {
     ctx.setLineDash([]);
 
     // Axis value labels
-    ctx.fillStyle = col.warn;
-    ctx.font      = `bold 14px ${col.fontBody}`;
-    ctx.textAlign = 'center';
-    ctx.fillText('x₁*=' + x1s.toFixed(1), sx(x1s), sy(0) + 30);
-    ctx.textAlign = 'right';
-    ctx.fillText('x₂*=' + x2s.toFixed(1), sx(0) - 6, sy(x2s) + 4);
+    drawChip(ge, ctx, sx(x1s), sy(0) + 22, 'x₁*=' + x1s.toFixed(1), { align: 'center', stroke: col.warn });
+    drawChip(ge, ctx, sx(0) - 10, sy(x2s) + 2, 'x₂*=' + x2s.toFixed(1), { align: 'right', stroke: col.warn });
   }
 
   // Optimum dot + label — appear last
   if (progress >= 0.92) {
+    const tangentSlope = -(x2s / x1s);
+    const tangentSpan = Math.min(axMax * 0.14, 2.2);
+    const leftX = Math.max(0.25, x1s - tangentSpan);
+    const rightX = Math.min(axMax, x1s + tangentSpan);
+    const leftY = x2s + tangentSlope * (leftX - x1s);
+    const rightY = x2s + tangentSlope * (rightX - x1s);
+    ctx.strokeStyle = col.warn + '99';
+    ctx.lineWidth = 1.8;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(sx(leftX), sy(leftY));
+    ctx.lineTo(sx(rightX), sy(rightY));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
     drawDot(ctx, sx(x1s), sy(x2s), 7, col.warn, col.bg);
-    ctx.fillStyle = col.text;
-    ctx.font      = `bold 15px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('E* (Optimum)', sx(x1s) + 10, sy(x2s) - 8);
+    drawChip(ge, ctx, sx(x1s) + 10, sy(x2s) - 10, 'E* (Optimum)', { stroke: col.warn });
+    drawChip(ge, ctx, sx(Math.min(axMax * 0.68, x1s + 1.8)), sy(Math.min(axMax * 0.9, x2s + 1.7)) - 10, 'Tangente: beste erreichbare IK', { stroke: col.warn });
 
     // GRS annotation — offset right to avoid overlap with optimum label
-    ctx.fillStyle = col.warn + 'b3';
-    ctx.font      = `14px ${col.fontBody}`;
-    ctx.textAlign = 'right';
-    ctx.fillText('GRS = p₁/p₂ = ' + (p1 / p2).toFixed(2), w - 36, sy(x2s) + 20);
+    drawChip(ge, ctx, w - 36, sy(x2s) + 18, 'GRS = p₁/p₂ = ' + (p1 / p2).toFixed(2), { align: 'right', stroke: col.warn });
   }
 
   ge.drawLegend(ctx, w, [
@@ -320,8 +342,9 @@ function drawHausopt(progress = 1) {
     { color: col.warn + '80', dash: true, label: 'Hilfslinien zum Optimum' },
   ], col.accent2 + '59', 20);
 
-  document.getElementById('graph_info').innerHTML =
-    `<span style="color:var(--accent2)">Optimum E*:</span> x₁* = <b>${x1s.toFixed(2)}</b>, x₂* = <b>${x2s.toFixed(2)}</b> &nbsp;|&nbsp; u* = <b>${ustar.toFixed(2)}</b> &nbsp;|&nbsp; GRS = p₁/p₂ = <b>${(p1 / p2).toFixed(3)}</b>`;
+  setGraphInfo(
+    `<strong>Haushaltsoptimum:</strong> Im Punkt E* wird das Einkommen voll ausgeschoepft und die Budgetgerade beruehrt die beste erreichbare Indifferenzkurve. Genau diese <strong>Tangentialbedingung</strong> liefert <strong>GRS = p₁/p₂ = ${(p1 / p2).toFixed(3)}</strong>. In Klausuren ist das der Kernblick: Budget voll ausschöpfen, hoechste erreichbare IK finden, dann Steigung der IK gegen relative Preise lesen.`
+  );
 
   registerTooltipPoints(canvas, [
     {
@@ -355,16 +378,19 @@ function drawMonopol(progress = 1) {
 
   const xMax = a * 1.08;
   const yMax = a * 1.05;
-  const PAD  = 72;
-  const PW   = w - PAD - 40;
-  const PH   = h - PAD - 50;
+  const PAD_LEFT = 74;
+  const PAD_RIGHT = 34;
+  const PAD_TOP = 34;
+  const PAD_BOTTOM = 72;
+  const PW   = w - PAD_LEFT - PAD_RIGHT;
+  const PH   = h - PAD_TOP - PAD_BOTTOM;
 
-  const sx = x => PAD + (x / xMax) * PW;
-  const sy = y => h - PAD - (y / yMax) * PH;
+  const sx = x => PAD_LEFT + (x / xMax) * PW;
+  const sy = y => h - PAD_BOTTOM - (y / yMax) * PH;
 
   // Responsive font scale
-  const fsBase = Math.max(11, Math.round(w * 0.022));
-  const fsBold = Math.max(12, Math.round(w * 0.026));
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsBold = Math.max(13, Math.round(Math.min(w, h) * 0.028));
 
   // Background + grid
   ctx.fillStyle = col.bg;
@@ -377,13 +403,13 @@ function drawMonopol(progress = 1) {
     ctx.strokeStyle  = col.grid;
     ctx.globalAlpha  = 0.55;
     ctx.lineWidth    = 1;
-    ctx.beginPath(); ctx.moveTo(PAD, sy(gvy));   ctx.lineTo(w - 40, sy(gvy)); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(sx(gvx), h-PAD); ctx.lineTo(sx(gvx), 40);    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(PAD_LEFT, sy(gvy));   ctx.lineTo(w - PAD_RIGHT, sy(gvy)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx(gvx), h - PAD_BOTTOM); ctx.lineTo(sx(gvx), PAD_TOP);    ctx.stroke();
     ctx.globalAlpha  = 1;
     ctx.fillStyle    = col.tick;
     ctx.font         = `${fsBase}px ${col.fontBody}`;
-    ctx.textAlign    = 'center'; ctx.fillText(gvx.toFixed(1), sx(gvx), h - PAD + 16);
-    ctx.textAlign    = 'right';  ctx.fillText(gvy.toFixed(1), PAD - 6, sy(gvy) + 4);
+    ctx.textAlign    = 'center'; ctx.fillText(gvx.toFixed(1), sx(gvx), h - PAD_BOTTOM + 16);
+    ctx.textAlign    = 'right';  ctx.fillText(gvy.toFixed(1), PAD_LEFT - 8, sy(gvy) + 4);
   }
   ctx.setLineDash([]);
 
@@ -391,16 +417,16 @@ function drawMonopol(progress = 1) {
   ctx.strokeStyle = col.axis;
   ctx.lineWidth   = 1.5;
   ctx.beginPath();
-  ctx.moveTo(PAD, 40); ctx.lineTo(PAD, h - PAD); ctx.lineTo(w - 40, h - PAD);
+  ctx.moveTo(PAD_LEFT, PAD_TOP); ctx.lineTo(PAD_LEFT, h - PAD_BOTTOM); ctx.lineTo(w - PAD_RIGHT, h - PAD_BOTTOM);
   ctx.stroke();
 
   // Axis labels
   ctx.fillStyle = col.label;
-  ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
+  ctx.font      = `700 ${fsBold}px ${col.fontBody}`;
   ctx.textAlign = 'center';
-  ctx.fillText('Menge y', PAD + PW / 2, h - PAD + 34);
+  ctx.fillText('Menge y', PAD_LEFT + PW / 2, h - PAD_BOTTOM + 34);
   ctx.save();
-  ctx.translate(16, h - PAD - PH / 2);
+  ctx.translate(18, h - PAD_BOTTOM - PH / 2);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText('Preis p', 0, 0);
   ctx.restore();
@@ -422,14 +448,8 @@ function drawMonopol(progress = 1) {
   if (progress >= 0.3) {
     const dwlCX = (ym + ym + yvk) / 3;
     const dwlCY = (pm + mcAtYm + pvk) / 3;
-    ctx.fillStyle = col.warn + 'e6';
-    ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'center';
-    ctx.fillText('DWL', sx(dwlCX), sy(dwlCY) - 2);
-
-    ctx.fillStyle = col.accent2 + 'cc';
-    ctx.font      = `bold ${Math.max(11, fsBase - 2)}px ${col.fontBody}`;
-    ctx.fillText('π (Monopolgewinn)', sx(ym / 2), sy((pm + mcAtYm) / 2));
+    drawChip(ge, ctx, sx(dwlCX), sy(dwlCY) - 2, 'DWL', { align: 'center', stroke: col.warn });
+    drawChip(ge, ctx, sx(ym / 2), sy((pm + mcAtYm) / 2), 'π (Monopolgewinn)', { align: 'center', stroke: col.accent2 });
   }
 
   // Demand curve — animated
@@ -441,10 +461,7 @@ function drawMonopol(progress = 1) {
   ctx.stroke();
   if (progress >= 0.5) {
     const dx = a * 0.06;
-    ctx.fillStyle = col.accent;
-    ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Nachfrage D: p = ' + a + ' − y', sx(dx), sy(a * 0.86));
+    drawChip(ge, ctx, sx(dx), sy(a * 0.86) - 10, 'Nachfrage D: p = ' + a + ' − y', { stroke: col.accent });
   }
 
   // MR curve (dashed) — animated with slight delay
@@ -459,10 +476,7 @@ function drawMonopol(progress = 1) {
     ctx.stroke();
     ctx.setLineDash([]);
     if (progress >= 0.6) {
-      ctx.fillStyle = col.accent + 'd9';
-      ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
-      ctx.textAlign = 'left';
-      ctx.fillText('GE (MR): a − 2y', sx(a * 0.06), sy(a * 0.65));
+      drawChip(ge, ctx, sx(a * 0.06), sy(a * 0.65) - 10, 'GE (MR): a − 2y', { stroke: col.accent });
     }
   }
 
@@ -477,10 +491,7 @@ function drawMonopol(progress = 1) {
     ctx.stroke();
     if (progress >= 0.75) {
       const mcx = xMax * 0.88;
-      ctx.fillStyle = col.accent2;
-      ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
-      ctx.textAlign = 'right';
-      ctx.fillText('GK (MC): 2cy', sx(mcx) - 4, sy(2 * c * mcx) - 8);
+      drawChip(ge, ctx, sx(mcx) - 6, sy(2 * c * mcx) - 10, 'GK (MC): 2cy', { align: 'right', stroke: col.accent2 });
     }
   }
 
@@ -498,55 +509,44 @@ function drawMonopol(progress = 1) {
     ctx.setLineDash([]);
 
     // Axis value labels (monopoly)
-    ctx.fillStyle = col.warn;
-    ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'center';
-    ctx.fillText('yₘ=' + ym.toFixed(2), sx(ym), sy(0) + 30);
-    ctx.textAlign = 'right';
-    ctx.fillText('pₘ=' + pm.toFixed(2), sx(0) - 6, sy(pm) + 4);
+    drawChip(ge, ctx, sx(ym), sy(0) + 22, 'yₘ=' + ym.toFixed(2), { align: 'center', stroke: col.warn });
+    drawChip(ge, ctx, sx(0) - 10, sy(pm) + 2, 'pₘ=' + pm.toFixed(2), { align: 'right', stroke: col.warn });
+    drawDot(ctx, sx(ym), sy(mcAtYm), 5.5, col.warn, col.bg);
+    drawChip(ge, ctx, sx(ym) + 10, sy(mcAtYm) + 16, 'GE = GK', { stroke: col.warn });
 
     // Axis value labels (competitive) — use muted colour
-    ctx.fillStyle = col.muted;
-    ctx.font      = `${Math.max(10, fsBase - 1)}px ${col.fontBody}`;
-    ctx.textAlign = 'center';
-    ctx.fillText('y_vk=' + yvk.toFixed(2), sx(yvk), sy(0) + 44);
-    ctx.textAlign = 'right';
-    ctx.fillText('p_vk=' + pvk.toFixed(2), sx(0) - 6, sy(pvk) + 4);
+    drawChip(ge, ctx, sx(yvk), sy(0) + 38, 'y_vk=' + yvk.toFixed(2), { align: 'center', stroke: col.muted });
+    drawChip(ge, ctx, sx(0) - 10, sy(pvk) + 2, 'p_vk=' + pvk.toFixed(2), { align: 'right', stroke: col.muted });
   }
 
   // Equilibrium dots + labels — appear last
   if (progress >= 0.92) {
     // Monopoly (Cournotscher) point
     drawDot(ctx, sx(ym), sy(pm), 7, col.warn, col.bg);
-    ctx.fillStyle = col.text;
-    ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Cournotscher Punkt', sx(ym) + 10, sy(pm) - 8);
+    drawChip(ge, ctx, sx(ym) + 10, sy(pm) - 10, 'Monopoloptimum', { stroke: col.warn });
 
     // Competitive equilibrium point
     drawDot(ctx, sx(yvk), sy(pvk), 5, col.muted, col.bg);
-    ctx.fillStyle = col.muted;
-    ctx.font      = `${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Wettbewerb', sx(yvk) + 8, sy(pvk) + 4);
+    drawChip(ge, ctx, sx(yvk) + 10, sy(pvk) - 10, 'Wettbewerb', { stroke: col.muted });
   }
 
   ge.drawLegend(ctx, w, [
     { color: col.accent,                             label: 'Nachfrage D (p = a−y)' },
     { color: col.accent + 'b3',   dash: true,        label: 'Grenzerlös MR (a−2y)' },
     { color: col.accent2,                            label: 'Grenzkosten MC (2cy)' },
-    { color: col.warn,            dot: true,          label: 'Cournot: yₘ=' + ym.toFixed(2) + ', pₘ=' + pm.toFixed(2) },
+    { color: col.warn,            dot: true,          label: 'Monopoloptimum: yₘ=' + ym.toFixed(2) + ', pₘ=' + pm.toFixed(2) },
     { color: col.warn,            fill: col.warn+'30', label: 'Wohlfahrtsverlust DWL' },
     { color: col.accent2,         fill: col.accent2+'14', label: 'Monopolgewinn π' },
   ], col.accent2 + '59', 20);
 
-  document.getElementById('graph_info').innerHTML =
-    `<span style="color:var(--accent2)">Monopol:</span> yₘ = <b>${ym.toFixed(2)}</b>, pₘ = <b>${pm.toFixed(2)}</b> &nbsp;|&nbsp; <span style="color:var(--muted)">Wettbewerb:</span> y_vk = ${yvk.toFixed(2)}, p_vk = ${pvk.toFixed(2)} &nbsp;|&nbsp; <span style="color:var(--accent3)">DWL</span> = Harberger-Dreieck`;
+  setGraphInfo(
+    `<strong>Monopoloptimum:</strong> Der Monopolist bestimmt zuerst die Menge über <strong>GE = GK</strong> bei <b>yₘ = ${ym.toFixed(2)}</b> und liest den Preis danach auf der <strong>Nachfragekurve</strong> als <b>pₘ = ${pm.toFixed(2)}</b> ab. Im Wettbewerb gilt dagegen <strong>p = GK</strong> bei <strong>y_vk = ${yvk.toFixed(2)}</strong> und <strong>p_vk = ${pvk.toFixed(2)}</strong>. Die markierte DWL-Fläche zeigt genau den Wohlfahrtsverlust der zu geringen Monopolmenge.`
+  );
 
   registerTooltipPoints(canvas, [
     {
       cx: sx(ym), cy: sy(pm),
-      html: `<b>Cournotscher Punkt</b><br>Menge yₘ = ${ym.toFixed(3)}<br>Preis pₘ = ${pm.toFixed(3)}<br>MC = ${mcAtYm.toFixed(3)}`,
+      html: `<b>Monopoloptimum</b><br>Menge yₘ = ${ym.toFixed(3)}<br>Preis pₘ = ${pm.toFixed(3)}<br>GE = GK = ${mcAtYm.toFixed(3)}`,
     },
     {
       cx: sx(yvk), cy: sy(pvk),
@@ -609,10 +609,7 @@ function drawSlutsky(progress = 1) {
     ctx.stroke();
     ctx.setLineDash([]);
     if (label && progress >= 0.8) {
-      ctx.fillStyle = color;
-      ctx.font      = `bold 13px ${col.fontBody}`;
-      ctx.textAlign = 'left';
-      ctx.fillText(label, sx(xi * 0.75), sy(yi * 0.72));
+      drawChip(ge, ctx, sx(xi * 0.75), sy(yi * 0.72) - 10, label, { stroke: color });
     }
   }
   bLine(p1_0, col.accent,       'Budget (initial)', false);
@@ -633,10 +630,7 @@ function drawSlutsky(progress = 1) {
     ctx.stroke();
     ctx.setLineDash([]);
     if (progress >= 0.85) {
-      ctx.fillStyle = col.accent2;
-      ctx.font      = `bold 13px ${col.fontBody}`;
-      ctx.textAlign = 'left';
-      ctx.fillText('Kompensiertes Budget', sx(xi_c * 0.52), sy(yi_c * 0.48) - 8);
+      drawChip(ge, ctx, sx(xi_c * 0.52), sy(yi_c * 0.48) - 10, 'Kompensiertes Budget', { stroke: col.accent2 });
     }
   }
 
@@ -644,13 +638,8 @@ function drawSlutsky(progress = 1) {
   if (progress >= 0.88) {
     function dot(x, y, color, tag) {
       drawDot(ctx, sx(x), sy(y), 6, color, col.bg);
-      ctx.fillStyle = col.text;
-      ctx.font      = `13px ${col.fontBody}`;
-      ctx.textAlign = 'left';
-      ctx.fillText(tag, sx(x) + 9, sy(y) - 8);
-      ctx.fillStyle = color;
-      ctx.font      = `bold 11px ${col.fontBody}`;
-      ctx.fillText(`(${x.toFixed(2)}, ${y.toFixed(2)})`, sx(x) + 9, sy(y) + 5);
+      drawChip(ge, ctx, sx(x) + 10, sy(y) - 10, tag, { stroke: color });
+      drawChip(ge, ctx, sx(x) + 10, sy(y) + 16, `(${x.toFixed(2)}, ${y.toFixed(2)})`, { stroke: color });
     }
     dot(x1_0, x2_0, col.accent,  'A');
     dot(x1_c, x2_c, col.accent2, 'B');
@@ -662,6 +651,9 @@ function drawSlutsky(progress = 1) {
     ctx.beginPath(); ctx.moveTo(sx(x1_0), sy(x2_0)); ctx.lineTo(sx(x1_c), sy(x2_c)); ctx.stroke();
     ctx.strokeStyle = col.warn;
     ctx.beginPath(); ctx.moveTo(sx(x1_c), sy(x2_c)); ctx.lineTo(sx(x1_1), sy(x2_1)); ctx.stroke();
+
+    drawChip(ge, ctx, (sx(x1_0) + sx(x1_c)) / 2 + 8, (sy(x2_0) + sy(x2_c)) / 2 - 8, 'SE: relativer Preis', { stroke: col.accent2 });
+    drawChip(ge, ctx, (sx(x1_c) + sx(x1_1)) / 2 + 8, (sy(x2_c) + sy(x2_1)) / 2 + 14, 'EE: Kaufkraft', { stroke: col.warn });
   }
 
   ge.drawLegend(ctx, w, [
@@ -673,8 +665,9 @@ function drawSlutsky(progress = 1) {
     { color: col.text,    label: 'B → C = Einkommenseffekt' },
   ], col.accent2 + '59', 20);
 
-  document.getElementById('graph_info').innerHTML =
-    `<strong>SE (Substitution)</strong> = ${SE.toFixed(3)} &nbsp;&nbsp; <strong>EE (Einkommen)</strong> = ${EE.toFixed(3)} &nbsp;&nbsp; <strong>Total</strong> = ${total.toFixed(3)}`;
+  setGraphInfo(
+    `<strong>Slutsky-Zerlegung:</strong> A → B ist der <strong>Substitutionseffekt</strong> bei konstant gehaltener Kaufkraft, B → C der <strong>Einkommenseffekt</strong>. Lies also zuerst die Reaktion auf die <strong>veraenderten relativen Preise</strong> und erst danach den Kaufkrafteffekt. Fuer Gut 1 gilt hier: SE = <strong>${SE.toFixed(3)}</strong>, EE = <strong>${EE.toFixed(3)}</strong>, Gesamteffekt = <strong>${total.toFixed(3)}</strong>.`
+  );
 
   registerTooltipPoints(canvas, [
     { cx: sx(x1_0), cy: sy(x2_0), html: `<b>A — Initiales Optimum</b><br>x₁ = ${x1_0.toFixed(3)}<br>x₂ = ${x2_0.toFixed(3)}<br>u₀ = ${u0.toFixed(3)}` },
@@ -685,14 +678,17 @@ function drawSlutsky(progress = 1) {
 
 function setupRectPlot(ge, w, h, ctx, xMax, yMax, xLabel, yLabel) {
   const col = ge.refreshColors();
-  const PAD = 72;
-  const PW = w - PAD - 40;
-  const PH = h - PAD - 50;
-  const fsBase = Math.max(11, Math.round(w * 0.022));
-  const fsBold = Math.max(12, Math.round(w * 0.026));
+  const PAD_LEFT = 74;
+  const PAD_RIGHT = 34;
+  const PAD_TOP = 34;
+  const PAD_BOTTOM = 72;
+  const PW = w - PAD_LEFT - PAD_RIGHT;
+  const PH = h - PAD_TOP - PAD_BOTTOM;
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsBold = Math.max(13, Math.round(Math.min(w, h) * 0.028));
 
-  const sx = x => PAD + (x / xMax) * PW;
-  const sy = y => h - PAD - (y / yMax) * PH;
+  const sx = x => PAD_LEFT + (x / xMax) * PW;
+  const sy = y => h - PAD_BOTTOM - (y / yMax) * PH;
 
   ctx.fillStyle = col.bg;
   ctx.fillRect(0, 0, w, h);
@@ -704,38 +700,38 @@ function setupRectPlot(ge, w, h, ctx, xMax, yMax, xLabel, yLabel) {
     ctx.strokeStyle = col.grid;
     ctx.globalAlpha = 0.55;
     ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(PAD, sy(gvy)); ctx.lineTo(w - 40, sy(gvy)); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(sx(gvx), h - PAD); ctx.lineTo(sx(gvx), 40); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(PAD_LEFT, sy(gvy)); ctx.lineTo(w - PAD_RIGHT, sy(gvy)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx(gvx), h - PAD_BOTTOM); ctx.lineTo(sx(gvx), PAD_TOP); ctx.stroke();
     ctx.globalAlpha = 1;
 
     ctx.fillStyle = col.tick;
-    ctx.font = `${fsBase}px ${col.fontMono}`;
+    ctx.font = `${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'center';
-    ctx.fillText(gvx.toFixed(xMax <= 20 ? 1 : 0), sx(gvx), h - PAD + 16);
+    ctx.fillText(gvx.toFixed(xMax <= 20 ? 1 : 0), sx(gvx), h - PAD_BOTTOM + 16);
     ctx.textAlign = 'right';
-    ctx.fillText(gvy.toFixed(yMax <= 20 ? 1 : 0), PAD - 6, sy(gvy) + 4);
+    ctx.fillText(gvy.toFixed(yMax <= 20 ? 1 : 0), PAD_LEFT - 8, sy(gvy) + 4);
   }
   ctx.setLineDash([]);
 
   ctx.strokeStyle = col.axis;
   ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.moveTo(PAD, 40);
-  ctx.lineTo(PAD, h - PAD);
-  ctx.lineTo(w - 40, h - PAD);
+  ctx.moveTo(PAD_LEFT, PAD_TOP);
+  ctx.lineTo(PAD_LEFT, h - PAD_BOTTOM);
+  ctx.lineTo(w - PAD_RIGHT, h - PAD_BOTTOM);
   ctx.stroke();
 
   ctx.fillStyle = col.label;
-  ctx.font = `bold ${fsBold}px ${col.fontMono}`;
+  ctx.font = `700 ${fsBold}px ${col.fontBody}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, PAD + PW / 2, h - PAD + 34);
+  ctx.fillText(xLabel, PAD_LEFT + PW / 2, h - PAD_BOTTOM + 34);
   ctx.save();
-  ctx.translate(16, h - PAD - PH / 2);
+  ctx.translate(18, h - PAD_BOTTOM - PH / 2);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText(yLabel, 0, 0);
   ctx.restore();
 
-  return { col, PAD, PW, PH, sx, sy, fsBase, fsBold };
+  return { col, PAD: PAD_LEFT, PAD_LEFT, PAD_RIGHT, PAD_TOP, PAD_BOTTOM, PW, PH, sx, sy, fsBase, fsBold };
 }
 
 function isoCapital(alpha, output, labor) {
@@ -743,7 +739,7 @@ function isoCapital(alpha, output, labor) {
   return Math.pow(output / Math.pow(labor, 1 - alpha), 1 / alpha);
 }
 
-function drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, color, label, font, progress = 1, dash = []) {
+function drawIsoquantCurve(ge, ctx, sx, sy, xMax, yMax, alpha, output, color, label, font, progress = 1, dash = []) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2.5;
   ctx.setLineDash(dash);
@@ -767,10 +763,7 @@ function drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, color, label,
     const labelLabor = Math.min(xMax * 0.7, Math.max(1.2, output * 1.2));
     const labelCapital = isoCapital(alpha, output, labelLabor);
     if (Number.isFinite(labelCapital) && labelCapital <= yMax * 0.95) {
-      ctx.fillStyle = color;
-      ctx.font = `bold ${font}px ${getComputedStyle(document.body).getPropertyValue('--font-mono').trim() || 'SF Mono, monospace'}`;
-      ctx.textAlign = 'left';
-      ctx.fillText(label, sx(labelLabor) + 8, sy(labelCapital) - 8);
+      drawChip(ge, ctx, sx(labelLabor) + 10, sy(labelCapital) - 10, label, { stroke: color });
     }
   }
 }
@@ -800,18 +793,22 @@ function drawProduktionBase(progress = 1, showGrts = false) {
   const xMax = Math.max(12, laborPoint * 2.1, output * 2.2);
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Arbeit L', 'Kapital K');
 
-  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.accent, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
+  drawIsoquantCurve(ge, ctx, sx, sy, xMax, yMax, alpha, output, col.accent, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
 
   if (!showGrts) {
-    drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output * 1.5, col.accent2, `Isoquante ${(output * 1.5).toFixed(1)}`, Math.max(11, fsBase - 1), progress, [6, 4]);
+    drawIsoquantCurve(ge, ctx, sx, sy, xMax, yMax, alpha, output * 1.5, col.accent2, `Isoquante ${(output * 1.5).toFixed(1)}`, Math.max(11, fsBase - 1), progress, [6, 4]);
   }
 
   if (progress >= 0.85 && Number.isFinite(capitalPoint) && capitalPoint <= yMax) {
+    if (!showGrts) {
+      drawChip(ge, ctx, sx(Math.min(xMax * 0.66, laborPoint * 1.15)), sy(Math.min(yMax * 0.9, capitalPoint * 1.24)) - 10, 'weiter außen = mehr Output', {
+        stroke: col.accent2
+      });
+    }
     drawDot(ctx, sx(laborPoint), sy(capitalPoint), 6, showGrts ? col.warn : col.accent2, col.bg);
-    ctx.fillStyle = showGrts ? col.warn : col.text;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(showGrts ? 'Punkt mit GRTS' : 'Beobachteter Einsatz', sx(laborPoint) + 10, sy(capitalPoint) - 8);
+    drawChip(ge, ctx, sx(laborPoint) + 10, sy(capitalPoint) - 10, showGrts ? 'Punkt mit GRTS' : 'Beobachteter Einsatz', {
+      stroke: showGrts ? col.warn : col.accent2
+    });
   }
 
   if (showGrts && progress >= 0.88 && Number.isFinite(capitalPoint) && capitalPoint <= yMax) {
@@ -831,16 +828,18 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    ctx.fillStyle = col.warn;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(`Tangente: GRTS = ${grts.toFixed(2)}`, sx(Math.min(xMax * 0.58, laborPoint + 0.6)), sy(Math.min(yMax * 0.92, capitalPoint + 1.6)));
+    drawChip(
+      ge,
+      ctx,
+      sx(Math.min(xMax * 0.58, laborPoint + 0.6)),
+      sy(Math.min(yMax * 0.92, capitalPoint + 1.6)) - 10,
+      `Tangente: GRTS = ${grts.toFixed(2)}`,
+      { stroke: col.warn }
+    );
 
-    document.getElementById('graph_info').innerHTML =
-      `<strong>GRTS am markierten Punkt:</strong> ${grts.toFixed(2)} &nbsp;|&nbsp; 
-      Für <strong>F(K,L)=K<sup>${alpha.toFixed(2)}</sup>L<sup>${(1 - alpha).toFixed(2)}</sup></strong> gilt
-      <strong>GRTS = MP<sub>L</sub>/MP<sub>K</sub> = ((1−α)/α)·K/L</strong>. 
-      Hier kann eine zusätzliche Arbeitseinheit bei konstantem Output rund <strong>${grts.toFixed(2)}</strong> Einheiten Kapital ersetzen.`;
+    setGraphInfo(
+      `<strong>GRTS am markierten Punkt:</strong> ${grts.toFixed(2)}. Für <strong>F(K,L)=K<sup>${alpha.toFixed(2)}</sup>L<sup>${(1 - alpha).toFixed(2)}</sup></strong> gilt <strong>GRTS = MP<sub>L</sub>/MP<sub>K</sub> = ((1−α)/α)·K/L</strong>. Hier kann eine zusätzliche Arbeitseinheit bei konstantem Output rund <strong>${grts.toFixed(2)}</strong> Einheiten Kapital ersetzen.`
+    );
 
     registerTooltipPoints(canvas, [
       {
@@ -853,10 +852,9 @@ function drawProduktionBase(progress = 1, showGrts = false) {
   }
 
   const secondOutput = output * 1.5;
-  document.getElementById('graph_info').innerHTML =
-    `<strong>Produktionsfunktion:</strong> F(K,L) = K<sup>${alpha.toFixed(2)}</sup>L<sup>${(1 - alpha).toFixed(2)}</sup> &nbsp;|&nbsp;
-    Die innere Isoquante zeigt <strong>ȳ = ${output.toFixed(1)}</strong>, die äußere <strong>${secondOutput.toFixed(1)}</strong>.
-    Am markierten Punkt sind für ȳ = ${output.toFixed(1)} rund <strong>L = ${laborPoint.toFixed(1)}</strong> und <strong>K = ${capitalPoint.toFixed(2)}</strong> nötig.`;
+  setGraphInfo(
+    `<strong>Produktionsfunktion:</strong> F(K,L) = K<sup>${alpha.toFixed(2)}</sup>L<sup>${(1 - alpha).toFixed(2)}</sup>. Die innere Isoquante zeigt <strong>ȳ = ${output.toFixed(1)}</strong>, die aeussere <strong>${secondOutput.toFixed(1)}</strong>. Bewegungen entlang einer Isoquante tauschen Arbeit gegen Kapital, ohne den Output zu veraendern; <strong>weiter aussen liegende Isoquanten stehen fuer mehr Output</strong>. In Klausuren liest du also immer zuerst das Outputniveau und dann, welche Faktorkombinationen genau dieses Niveau tragen.`
+  );
 
   registerTooltipPoints(canvas, Number.isFinite(capitalPoint) ? [
     {
@@ -909,7 +907,7 @@ function drawKosten(progress = 1) {
   const yMax = Math.max(12, yIntercept * 1.15, capitalStar * 2.2);
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Arbeit L', 'Kapital K');
 
-  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.accent, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
+  drawIsoquantCurve(ge, ctx, sx, sy, xMax, yMax, alpha, output, col.accent, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
 
   ctx.strokeStyle = col.accent2;
   ctx.lineWidth = 2.5;
@@ -919,14 +917,11 @@ function drawKosten(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.82) {
-    ctx.fillStyle = col.accent2;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Isokostengerade', sx(xIntercept * 0.45), sy(yIntercept * 0.45) - 10);
+    drawChip(ge, ctx, sx(xIntercept * 0.45), sy(yIntercept * 0.45) - 10, 'Isokostengerade', { stroke: col.accent2 });
 
     drawDot(ctx, sx(laborStar), sy(capitalStar), 6, col.warn, col.bg);
-    ctx.fillStyle = col.text;
-    ctx.fillText('Kostenminimum', sx(laborStar) + 10, sy(capitalStar) - 8);
+    drawChip(ge, ctx, sx(laborStar) + 10, sy(capitalStar) - 10, 'Kostenminimum', { stroke: col.warn });
+    drawChip(ge, ctx, sx(Math.min(xMax * 0.74, laborStar + 1.8)), sy(Math.min(yMax * 0.92, capitalStar + 1.8)) - 10, `Steigung = −w/r = ${(-wage / rent).toFixed(2)}`, { stroke: col.accent2 });
 
     ctx.strokeStyle = col.warn + '88';
     ctx.lineWidth = 1.2;
@@ -936,10 +931,9 @@ function drawKosten(progress = 1) {
     ctx.setLineDash([]);
   }
 
-  document.getElementById('graph_info').innerHTML =
-    `<strong>Kostenminimum:</strong> Bei <strong>w = ${wage.toFixed(2)}</strong>, <strong>r = ${rent.toFixed(2)}</strong> und <strong>ȳ = ${output.toFixed(1)}</strong>
-    liegt das kostenminimale Bündel bei <strong>L* = ${laborStar.toFixed(2)}</strong>, <strong>K* = ${capitalStar.toFixed(2)}</strong>. 
-    Die Minimalbedingung lautet <strong>GRTS = w/r = ${(wage / rent).toFixed(2)}</strong>; die Minimalkosten betragen <strong>C = ${totalCost.toFixed(2)}</strong>.`;
+  setGraphInfo(
+    `<strong>Kostenminimum:</strong> Bei <strong>w = ${wage.toFixed(2)}</strong>, <strong>r = ${rent.toFixed(2)}</strong> und <strong>ȳ = ${output.toFixed(1)}</strong> liegt das kostenminimale Bündel bei <strong>L* = ${laborStar.toFixed(2)}</strong>, <strong>K* = ${capitalStar.toFixed(2)}</strong>. Die Tangentialbedingung lautet <strong>GRTS = w/r = ${(wage / rent).toFixed(2)}</strong>; dieselbe Zahl liest du als Steigung der Isokostengeraden <strong>−w/r</strong>. Die Minimalkosten betragen <strong>C = ${totalCost.toFixed(2)}</strong>.`
+  );
 
   registerTooltipPoints(canvas, [
     {
@@ -1017,20 +1011,13 @@ function drawMarkt(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.84) {
-    ctx.fillStyle = col.accent;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Nachfrage', sx(xMax * 0.68), sy(a - b * xMax * 0.68) - 8);
-
-    ctx.fillStyle = col.accent2;
-    ctx.fillText('Angebot', sx(xMax * 0.62), sy(c + d * xMax * 0.62) + 18);
+    drawChip(ge, ctx, sx(xMax * 0.68), sy(a - b * xMax * 0.68) - 10, 'Nachfrage', { stroke: col.accent });
+    drawChip(ge, ctx, sx(xMax * 0.62), sy(c + d * xMax * 0.62) + 18, 'Angebot', { stroke: col.accent2 });
   }
 
   if (hasTrade && progress >= 0.88) {
     drawDot(ctx, sx(qEq), sy(pEq), 6, col.warn, col.bg);
-    ctx.fillStyle = col.text;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.fillText('Gleichgewicht', sx(qEq) + 10, sy(pEq) - 8);
+    drawChip(ge, ctx, sx(qEq) + 10, sy(pEq) - 10, 'Gleichgewicht', { stroke: col.warn });
 
     ctx.strokeStyle = col.warn + '88';
     ctx.lineWidth = 1.2;
@@ -1038,12 +1025,14 @@ function drawMarkt(progress = 1) {
     ctx.beginPath(); ctx.moveTo(sx(qEq), sy(pEq)); ctx.lineTo(sx(qEq), sy(0)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx(qEq), sy(pEq)); ctx.lineTo(sx(0), sy(pEq)); ctx.stroke();
     ctx.setLineDash([]);
+
+    drawChip(ge, ctx, sx(qEq * 0.2), sy((a + pEq) / 2), 'Konsumentenrente', { stroke: col.accent });
+    drawChip(ge, ctx, sx(qEq * 0.2), sy((c + pEq) / 2), 'Produzentenrente', { stroke: col.accent2 });
   }
 
-  document.getElementById('graph_info').innerHTML = hasTrade
-    ? `<strong>Marktgleichgewicht:</strong> p* = <strong>${pEq.toFixed(2)}</strong>, q* = <strong>${qEq.toFixed(2)}</strong> &nbsp;|&nbsp;
-      Konsumentenrente ≈ <strong>${cs.toFixed(2)}</strong>, Produzentenrente ≈ <strong>${ps.toFixed(2)}</strong>.`
-    : `<strong>Kein positives Marktgleichgewicht:</strong> Das Angebotsniveau startet oberhalb der Zahlungsbereitschaft. In diesem Parameterbereich kommt kein Handel zustande.`;
+  setGraphInfo(hasTrade
+    ? `<strong>Marktgleichgewicht:</strong> p* = <strong>${pEq.toFixed(2)}</strong>, q* = <strong>${qEq.toFixed(2)}</strong>. Im Gleichgewicht gilt <strong>Nachfrage = Angebot</strong>. Die schattierten Dreiecke zeigen <strong>Konsumentenrente</strong> ≈ <strong>${cs.toFixed(2)}</strong> und <strong>Produzentenrente</strong> ≈ <strong>${ps.toFixed(2)}</strong>.`
+    : `<strong>Kein positives Marktgleichgewicht:</strong> Das Angebotsniveau startet oberhalb der Zahlungsbereitschaft. In diesem Parameterbereich kommt kein Handel zustande.`);
 
   registerTooltipPoints(canvas, hasTrade ? [
     {

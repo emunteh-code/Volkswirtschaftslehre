@@ -24,13 +24,15 @@ function setupPlot(xLabel, yLabel, ranges) {
   const col = engine.refreshColors();
   if (!ctx || !w || !h) return null;
 
-  const pad = { left: 74, right: 28, top: 26, bottom: 58 };
+  const pad = { left: 74, right: 34, top: 34, bottom: 72 };
   const xMin = ranges.xMin;
   const xMax = ranges.xMax;
   const yMin = ranges.yMin;
   const yMax = ranges.yMax;
   const innerW = w - pad.left - pad.right;
   const innerH = h - pad.top - pad.bottom;
+  const fsTick = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsAxis = Math.max(13, Math.round(Math.min(w, h) * 0.028));
 
   const px = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * innerW;
   const py = (y) => h - pad.bottom - ((y - yMin) / (yMax - yMin)) * innerH;
@@ -41,10 +43,10 @@ function setupPlot(xLabel, yLabel, ranges) {
 
   const drawTicks = (min, max, steps) => Array.from({ length: steps + 1 }, (_, index) => min + ((max - min) / steps) * index);
 
-  ctx.setLineDash([4, 6]);
+  ctx.setLineDash([4, 5]);
   ctx.lineWidth = 1;
   ctx.strokeStyle = col.grid;
-  ctx.globalAlpha = 0.65;
+  ctx.globalAlpha = 0.55;
 
   drawTicks(xMin, xMax, 5).forEach((tick) => {
     const x = px(tick);
@@ -65,7 +67,7 @@ function setupPlot(xLabel, yLabel, ranges) {
   ctx.globalAlpha = 1;
   ctx.setLineDash([]);
   ctx.strokeStyle = col.axis;
-  ctx.lineWidth = 1.6;
+  ctx.lineWidth = 1.5;
 
   ctx.beginPath();
   ctx.moveTo(pad.left, pad.top);
@@ -84,7 +86,7 @@ function setupPlot(xLabel, yLabel, ranges) {
   }
 
   ctx.fillStyle = col.tick;
-  ctx.font = `12px ${col.fontMono}`;
+  ctx.font = `${fsTick}px ${col.fontBody}`;
   ctx.textAlign = "center";
   drawTicks(xMin, xMax, 5).forEach((tick) => {
     ctx.fillText(tick.toFixed(xMax - xMin <= 10 ? 1 : 0), px(tick), h - pad.bottom + 18);
@@ -96,9 +98,9 @@ function setupPlot(xLabel, yLabel, ranges) {
   });
 
   ctx.fillStyle = col.label;
-  ctx.font = `600 13px ${col.fontMono}`;
+  ctx.font = `700 ${fsAxis}px ${col.fontBody}`;
   ctx.textAlign = "center";
-  ctx.fillText(xLabel, pad.left + innerW / 2, h - 18);
+  ctx.fillText(xLabel, pad.left + innerW / 2, h - 38);
   ctx.save();
   ctx.translate(18, pad.top + innerH / 2);
   ctx.rotate(-Math.PI / 2);
@@ -108,10 +110,18 @@ function setupPlot(xLabel, yLabel, ranges) {
   return { engine, ctx, col, w, h, pad, px, py, ranges };
 }
 
+function drawChip(plot, x, y, text, options = {}) {
+  plot.engine.drawLabelChip(plot.ctx, x, y, text, {
+    textColor: plot.col.text,
+    stroke: plot.col.border,
+    ...options
+  });
+}
+
 function drawCurve(plot, fn, options = {}) {
   const {
     color = plot.col.accent,
-    lineWidth = 2.8,
+    lineWidth = 2.5,
     xStart = plot.ranges.xMin,
     xEnd = plot.ranges.xMax,
     steps = 240,
@@ -149,10 +159,7 @@ function drawCurve(plot, fn, options = {}) {
     const x = labelX ?? (xStart + xEnd) / 2;
     const y = fn(x);
     if (Number.isFinite(y) && y >= plot.ranges.yMin && y <= plot.ranges.yMax) {
-      ctx.fillStyle = color;
-      ctx.font = `600 12px ${plot.col.fontMono}`;
-      ctx.textAlign = "left";
-      ctx.fillText(label, px(x) + 8, py(y) - 8);
+      drawChip(plot, px(x) + 10, py(y) - 10, label, { stroke: color });
     }
   }
 }
@@ -168,10 +175,7 @@ function drawHorizontal(plot, y, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 12px ${col.fontMono}`;
-    ctx.textAlign = "left";
-    ctx.fillText(label, px(ranges.xMax) - 72, py(y) - 8);
+    drawChip(plot, px(ranges.xMax) - 12, py(y) - 14, label, { align: "right", stroke: color });
   }
 }
 
@@ -186,10 +190,7 @@ function drawVertical(plot, x, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 12px ${col.fontMono}`;
-    ctx.textAlign = "left";
-    ctx.fillText(label, px(x) + 8, py(ranges.yMax) + 14);
+    drawChip(plot, px(x), py(ranges.yMax) - 16, label, { align: "center", stroke: color });
   }
 }
 
@@ -210,16 +211,20 @@ function drawPoint(plot, x, y, color, label) {
   ctx.stroke();
 
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 12px ${col.fontMono}`;
-    ctx.textAlign = "left";
-    ctx.fillText(label, cx + 10, cy - 8);
+    drawChip(plot, cx + 10, cy - 10, label, { stroke: color });
   }
 }
 
 function updateInfo(html) {
   const info = document.getElementById("graph_info");
-  if (info) info.innerHTML = html;
+  if (!info) return;
+  const normalized = String(html || "")
+    .replace(/^\s*<strong>\s*Interpretation:\s*<\/strong>\s*/i, "")
+    .trim();
+  info.innerHTML = `
+    <div class="graph-note-kicker">Interpretation</div>
+    <div class="graph-note-body">${normalized}</div>
+  `;
 }
 
 function drawWechselkurs() {
@@ -249,6 +254,7 @@ function drawWechselkurs() {
     label: "ε(E)",
     labelX: 1.22
   });
+  drawChip(plot, plot.px(1.34), plot.py(1.18), "oberhalb PPP: Inlandswaren relativ teuer", { align: "right", stroke: plot.col.accent2 });
 
   if (ePpp >= plot.ranges.xMin && ePpp <= plot.ranges.xMax) {
     drawVertical(plot, ePpp, plot.col.accent2, "E_PPP");
@@ -342,6 +348,7 @@ function drawNettoexporte() {
   });
   drawVertical(plot, eps, plot.col.accent2, "aktuelles ε");
   drawPoint(plot, eps, currentNx, plot.col.warn, `NX = ${currentNx.toFixed(0)}`);
+  drawChip(plot, plot.px(1.56), plot.py(nx(1.56)) - 26, "ε ↑ ⇒ NX ↓", { align: "right", stroke: plot.col.accent });
 
   updateInfo(`
     <strong>Interpretation:</strong> Bei höherem realem Wechselkurs fällt NX. 
@@ -387,6 +394,7 @@ function drawMundellFleming() {
   });
   drawHorizontal(plot, zp, plot.col.accent2, "ZP");
   drawPoint(plot, Math.max(plot.ranges.xMin, Math.min(plot.ranges.xMax, equilibriumY)), zp, plot.col.warn, "Gleichgewicht");
+  drawChip(plot, plot.px(84), plot.py(isShifted(84)) - 28, "Fiskalimpuls verschiebt IS nach rechts", { stroke: plot.col.accent2 });
 
   updateInfo(`
     <strong>Interpretation:</strong> Der Fiskalimpuls (${fiscal.toFixed(1)}) verschiebt die IS-Kurve nach rechts. 
@@ -489,6 +497,7 @@ function drawTaylorRegel() {
   });
   drawVertical(plot, piStar, plot.col.accent2, "π*");
   drawPoint(plot, piCurrent, currentI, plot.col.warn, `i = ${currentI.toFixed(1)}%`);
+  drawChip(plot, plot.px(5.15), plot.py(taylorLine(5.15)) - 26, "π über Ziel ⇒ i reagiert überproportional", { align: "right", stroke: plot.col.accent });
 
   updateInfo(`
     <strong>Interpretation:</strong> Die Grafik veranschaulicht die Regel
@@ -530,6 +539,8 @@ function drawSolowBasis() {
   });
   if (kStar >= plot.ranges.xMin && kStar <= plot.ranges.xMax) {
     drawPoint(plot, kStar, investment(kStar), plot.col.warn, `k* = ${kStar.toFixed(1)}`);
+    drawChip(plot, plot.px(Math.max(plot.ranges.xMin + 2, kStar * 0.56)), plot.py(investment(Math.max(plot.ranges.xMin + 2, kStar * 0.56))) - 24, "links: Kapitalaufbau", { stroke: plot.col.accent });
+    drawChip(plot, plot.px(Math.min(plot.ranges.xMax - 1.8, kStar * 1.28)), plot.py(breakLine(Math.min(plot.ranges.xMax - 1.8, kStar * 1.28))) + 26, "rechts: Kapitalabbau", { stroke: plot.col.accent2 });
   }
 
   updateInfo(`
@@ -568,6 +579,8 @@ function drawPhillipskurve() {
     labelX: 7.2
   });
   drawPoint(plot, uCurrent, currentPi, plot.col.warn, `π = ${currentPi.toFixed(1)}%`);
+  drawChip(plot, plot.px(3.25), plot.py(phillips(3.25)) - 24, "u < uₙ ⇒ π > πᵉ", { stroke: plot.col.accent });
+  drawChip(plot, plot.px(7.9), plot.py(phillips(7.9)) + 24, "u > uₙ ⇒ π < πᵉ", { align: "right", stroke: plot.col.accent2 });
 
   updateInfo(`
     <strong>Interpretation:</strong> Liegt die Arbeitslosigkeit unter uₙ = ${uNatural.toFixed(1)}%, steigt die Inflation über die erwartete Inflation von ${piExpected.toFixed(1)}%.
@@ -602,6 +615,7 @@ function drawGeldmengen() {
     labelX: 95
   });
   drawPoint(plot, yCurrent, Math.max(plot.ranges.yMin, currentI), plot.col.warn, `i = ${currentI.toFixed(1)}%`);
+  drawChip(plot, plot.px(93), plot.py(lm(93)) - 24, "mehr Einkommen ⇒ höhere Geldnachfrage", { align: "right", stroke: plot.col.accent });
 
   updateInfo(`
     <strong>Interpretation:</strong> Mehr reales Geldangebot (${mpReal.toFixed(0)}) verschiebt die LM-Kurve nach rechts/unten.

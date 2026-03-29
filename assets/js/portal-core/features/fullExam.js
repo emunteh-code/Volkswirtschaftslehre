@@ -85,9 +85,9 @@ export function createFullExamModule({
     const feedback = document.getElementById(`fefb_${qid}`);
     if (!feedback) return;
 
-    const accent = readThemeColor("--accent", "#7c3aed");
-    const accent2 = readThemeColor("--accent2", "#5cf0ff");
-    const accent3 = readThemeColor("--accent3", "#ff6b6b");
+    const accent = readThemeColor("--accent", "#486b19");
+    const accent2 = readThemeColor("--accent2", "#647b5f");
+    const accent3 = readThemeColor("--accent3", "#a55a4f");
     const safeAnswer = escapeHtml(userAnswer || "(keine)");
     const isWF = q.type === "wf";
 
@@ -102,8 +102,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       inner += '<hr style="border:none;border-top:1px solid var(--border);margin:10px 0">';
     }
     inner += `<div class="fe-fb-solution">
-<div class="fe-fb-sol-title">${revealOnly ? "Musterloesung" : (ok ? "Musterloesung" : "Musterloesung - so waere es richtig")}</div>
-<div class="fe-fb-sol-body">${q.feedback || "Keine Musterloesung verfuegbar."}</div>
+<div class="fe-fb-sol-title">${revealOnly ? "Musterlösung" : (ok ? "Musterlösung" : "Musterlösung - so wäre es richtig")}</div>
+<div class="fe-fb-sol-body">${q.feedback || "Keine Musterlösung verfügbar."}</div>
 </div>`;
 
     const borderColor = revealOnly ? accent2 : (ok ? accent : accent3);
@@ -198,8 +198,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
   oninput="window.__feText('${q.id}',this.value)" rows="4"
   aria-label="Antwort fuer Frage ${index + 1}"></textarea>
 <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-  <button class="btn" id="febtn_${q.id}" onclick="window.__feCheckText('${q.id}')" style="padding:6px 18px;font-size:13px">Pruefen</button>
-  <button class="btn secondary" id="ferevbtn_${q.id}" onclick="window.__feRevealAnswer('${q.id}')" style="padding:6px 14px;font-size:13px">Loesung anzeigen</button>
+  <button class="btn" id="febtn_${q.id}" onclick="window.__feCheckText('${q.id}')" style="padding:6px 18px;font-size:13px">Prüfen</button>
+  <button class="btn secondary" id="ferevbtn_${q.id}" onclick="window.__feRevealAnswer('${q.id}')" style="padding:6px 14px;font-size:13px">Lösung anzeigen</button>
 </div>
 <div class="fe-inline-feedback" id="fefb_${q.id}" style="display:none" aria-live="polite"></div>
 </div>`;
@@ -253,8 +253,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     const q = feState.questions.find((entry) => entry.id === qid);
     if (!q || feState.revealed[qid]) return;
 
-    const accent = readThemeColor("--accent", "#7c3aed");
-    const accent3 = readThemeColor("--accent3", "#ff6b6b");
+    const accent = readThemeColor("--accent", "#486b19");
+    const accent3 = readThemeColor("--accent3", "#a55a4f");
 
     feState.answers[qid] = val;
     labelEl.parentElement.querySelectorAll(".fe-mc-label").forEach((label) => label.classList.remove("selected"));
@@ -330,7 +330,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     if (revealBtn) revealBtn.style.display = "none";
     const ptsEl = document.getElementById(`fepts_${qid}`);
     if (ptsEl) {
-      ptsEl.textContent = "Musterloesung ↓";
+      ptsEl.textContent = "Musterlösung ↓";
       ptsEl.style.color = "var(--accent2)";
     }
     showFeedback(qid, false, q, feState.answers[qid], true);
@@ -347,7 +347,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     feState.submitted = true;
     if (feState.timerInterval) clearInterval(feState.timerInterval);
 
-    const accent = readThemeColor("--accent", "#7c3aed");
+    const accent = readThemeColor("--accent", "#486b19");
 
     feState.questions.forEach((q) => {
       if (!feState.revealed[q.id]) {
@@ -430,4 +430,3 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     showFullExamSelect
   };
 }
-

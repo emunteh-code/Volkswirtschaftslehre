@@ -2,8 +2,12 @@ import { FILTERS, PUBLIC_MODULES, getModuleBySlug } from "./modules.js";
 import { getModuleContent } from "./module-content.js";
 import { estimateGeneratedChapterCount } from "./generated-portal/dataFactory.js";
 import { mountRLabs } from "./r-lab.js";
+import { normalizeGermanCopy } from "./portal-core/utils/math.js";
 
 const THEME_KEY = "lernportal_theme_v1";
+const BRAND_ACCENT = "#486b19";
+const BRAND_ACCENT_STRONG = "#395214";
+const BRAND_ACCENT_SOFT = "rgba(72, 107, 25, 0.12)";
 
 function hexToSoft(hex, alpha = 0.14) {
   const normalized = hex.replace("#", "");
@@ -202,12 +206,12 @@ function getModuleHighlights(module) {
 }
 
 function getStageLabel(module) {
-  if (module.status === "live" || getModuleContent(module.slug)) return "Live-Portal";
-  return "Portal in Aufbau";
+  if (module.status === "live" || getModuleContent(module.slug)) return "Kursportal";
+  return "In Vorbereitung";
 }
 
 function getDisplayStageLabel(module) {
-  return getStageLabel(module) === "Live-Portal" ? "Aktiv" : "In Vorbereitung";
+  return getStageLabel(module) === "Kursportal" ? "Aktiv" : "In Vorbereitung";
 }
 
 function renderSourceList(sources = []) {
@@ -215,28 +219,28 @@ function renderSourceList(sources = []) {
 }
 
 const LANDING_DEGREE = "B.Sc. Volkswirtschaftslehre";
-const LANDING_UNIVERSITY = "Georg-August-Universitaet Goettingen";
+const LANDING_UNIVERSITY = "Georg-August-Universität Göttingen";
 
 const LANDING_STORIES = {
   mikro1: {
-    description: "Verstehe Haushalte, Unternehmen und Maerkte Schritt fuer Schritt mit sauberer Graphik, klaren Rechenwegen und klausurnahen Aufgaben.",
+    description: "Verstehe Haushalte, Unternehmen und Märkte Schritt für Schritt mit sauberer Graphik, klaren Rechenwegen und klausurnahen Aufgaben.",
     tile: "Haushaltswahl, Unternehmen und Marktlogik",
-    line: "Graphen, Aufgaben und Exam-Drills fuer die Mikro-Basis."
+    line: "Graphen, Aufgaben und Exam-Drills für die Mikro-Basis."
   },
   makro2: {
-    description: "Arbeite offene Makrooekonomik, Wachstum und Wirtschaftspolitik in einem Lernfluss durch, der Modelle, Intuition und Aufgaben sichtbar zusammenhaelt.",
+    description: "Arbeite offene Makroökonomik, Wachstum und Wirtschaftspolitik in einem Lernfluss durch, der Modelle, Intuition und Aufgaben sichtbar zusammenhält.",
     tile: "Offene Makro, Wachstum und Policy",
-    line: "Globale Makrologik mit Visuals, Theorie und Pruefungsmodus."
+    line: "Globale Makrologik mit Visuals, Theorie und Prüfungsmodus."
   },
   makro1: {
-    description: "Lerne Kennzahlen, Guetermarkt, IS-LM, Arbeitsmarkt und Phillipskurve als zusammenhaengende Makrospur mit echten Visuals und Exam-Routine.",
-    tile: "BIP, Guetermarkt, IS-LM und Arbeitsmarkt",
+    description: "Lerne Kennzahlen, Gütermarkt, IS-LM, Arbeitsmarkt und Phillipskurve als zusammenhängende Makrospur mit echten Visuals und Exam-Routine.",
+    tile: "BIP, Gütermarkt, IS-LM und Arbeitsmarkt",
     line: "Makrofundament mit Diagrammen, Richtungssinn und Klausurtraining."
   },
   statistik: {
-    description: "Beschreibe, teste und interpretiere Daten mit Visualisierungen, Aufgaben und R-Praxis, die direkt auf Statistik-Tutorien und Uebungen aufbauen.",
+    description: "Beschreibe, teste und interpretiere Daten mit Visualisierungen, Aufgaben und R-Praxis, die direkt auf Statistik-Tutorien und Übungen aufbauen.",
     tile: "Daten, Tests und Verteilungen mit R",
-    line: "Statistik mit Visuals, Datensaetzen und sauberer Output-Deutung."
+    line: "Statistik mit Visuals, Datensätzen und sauberer Output-Deutung."
   },
   oekonometrie: {
     description: "Baue OLS, Inferenz und Diagnostik so auf, dass Theorie, Regressionsoutput und R-Workflow in derselben Lernspur zusammenlaufen.",
@@ -259,18 +263,18 @@ const LANDING_STORIES = {
     line: "Globale VWL mit Modelllogik, Politikfolgen und offener Makro."
   },
   jahresabschluss: {
-    description: "Uebe Bilanz, Bewertung und Abschlusslogik mit kontierter Praxis, klarer Struktur und exam-tauglicher Sicherheit bei Ausweis und Buchung.",
+    description: "Übe Bilanz, Bewertung und Abschlusslogik mit kontierter Praxis, klarer Struktur und exam-tauglicher Sicherheit bei Ausweis und Buchung.",
     tile: "Bilanz, Bewertung und Abschluss",
     line: "Accounting mit Buchungslogik, Bewertung und Abschlussroutine."
   },
   recht: {
-    description: "Wiederhole Definitionen, Anspruchslogik und Faelle so, dass juristische Begriffe, Schemata und Subsumtion sofort abrufbar werden.",
-    tile: "Definitionen, Schemata und Faelle",
+    description: "Wiederhole Definitionen, Anspruchslogik und Fälle so, dass juristische Begriffe, Schemata und Subsumtion sofort abrufbar werden.",
+    tile: "Definitionen, Schemata und Fälle",
     line: "Recht mit klaren Anspruchspfaden und klausurnaher Fallarbeit."
   },
   r: {
     description: "Trainiere R direkt an Daten, Matrizen, Optimierung und Modellen, damit Syntax, Debugging und Interpretation im selben Arbeitsfluss sitzen.",
-    tile: "R-Praxis fuer Daten, Modelle und Visuals",
+    tile: "R-Praxis für Daten, Modelle und Visuals",
     line: "R mit Editorlogik, Outputkontrolle und numerischer Anwendung."
   },
   "politisches-system-brd": {
@@ -411,8 +415,8 @@ function buildLandingArtworkSvg(slug) {
 
 function buildLandingBackdrop(module) {
   return [
-    `radial-gradient(circle at 16% 18%, ${hexToSoft(module.accent, 0.34)}, rgba(255,255,255,0) 34%)`,
-    `radial-gradient(circle at 84% 12%, ${hexToSoft(module.accent, 0.16)}, rgba(255,255,255,0) 38%)`,
+    `radial-gradient(circle at 16% 18%, ${hexToSoft(BRAND_ACCENT, 0.18)}, rgba(255,255,255,0) 34%)`,
+    `radial-gradient(circle at 84% 12%, ${hexToSoft(BRAND_ACCENT, 0.08)}, rgba(255,255,255,0) 38%)`,
     "linear-gradient(135deg, rgba(10, 12, 15, 0.84) 0%, rgba(14, 17, 21, 0.96) 60%, rgba(19, 22, 27, 1) 100%)",
     svgToDataUri(buildLandingArtworkSvg(module.slug))
   ].join(",");
@@ -420,7 +424,7 @@ function buildLandingBackdrop(module) {
 
 function buildLandingArt(module) {
   return [
-    `radial-gradient(circle at 20% 24%, ${hexToSoft(module.accent, 0.28)}, rgba(255,255,255,0) 34%)`,
+    `radial-gradient(circle at 20% 24%, ${hexToSoft(BRAND_ACCENT, 0.16)}, rgba(255,255,255,0) 34%)`,
     `linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)`,
     "linear-gradient(145deg, rgba(11, 13, 17, 0.48) 0%, rgba(15, 18, 24, 0.72) 100%)",
     svgToDataUri(buildLandingArtworkSvg(module.slug))
@@ -429,7 +433,7 @@ function buildLandingArt(module) {
 
 function buildLandingTileVisual(module) {
   return [
-    `radial-gradient(circle at 18% 16%, ${hexToSoft(module.accent, 0.34)}, rgba(255,255,255,0) 34%)`,
+    `radial-gradient(circle at 18% 16%, ${hexToSoft(BRAND_ACCENT, 0.15)}, rgba(255,255,255,0) 34%)`,
     `linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)`,
     "linear-gradient(155deg, rgba(12, 14, 18, 0.96) 0%, rgba(17, 20, 25, 1) 100%)",
     svgToDataUri(buildLandingArtworkSvg(module.slug))
@@ -546,9 +550,9 @@ function renderLandingPage() {
   }
 
   function updateVisualLayers(module) {
-    document.documentElement.style.setProperty("--landing-accent", module.accent);
-    document.documentElement.style.setProperty("--landing-accent-soft", hexToSoft(module.accent, 0.22));
-    document.documentElement.style.setProperty("--landing-accent-faint", hexToSoft(module.accent, 0.08));
+    document.documentElement.style.setProperty("--landing-accent", BRAND_ACCENT);
+    document.documentElement.style.setProperty("--landing-accent-soft", hexToSoft(BRAND_ACCENT, 0.18));
+    document.documentElement.style.setProperty("--landing-accent-faint", hexToSoft(BRAND_ACCENT, 0.06));
 
     const nextBackdropIndex = reducedMotion ? activeBackdropIndex : (activeBackdropIndex === 0 ? 1 : 0);
     const nextArtIndex = reducedMotion ? activeArtIndex : (activeArtIndex === 0 ? 1 : 0);
@@ -569,19 +573,19 @@ function renderLandingPage() {
     const visitState = readVisitState(module);
     const visitLabel = formatShortVisitDate(visitState.visitedAt);
 
-    overlineNode.textContent = snapshot.started ? "Weiterlernen" : "Ausgewaehltes Modul";
+    overlineNode.textContent = snapshot.started ? "Weiterlernen" : "Ausgewähltes Modul";
     titleNode.textContent = module.title;
     descriptionNode.textContent = story.description;
     moduleLineNode.innerHTML = buildModuleLine(module, snapshot);
 
     if (snapshot.started && snapshot.total) {
       progressNode.hidden = false;
-      progressTextNode.textContent = `${snapshot.seen} von ${snapshot.total} Lernbausteinen geoeffnet`;
+      progressTextNode.textContent = `${snapshot.seen} von ${snapshot.total} Lernbausteinen geöffnet`;
       progressPercentNode.textContent = `${snapshot.percent}%`;
       progressFillNode.style.width = `${snapshot.percent}%`;
       footnoteNode.textContent = snapshot.due > 0
         ? `${snapshot.due} Wiederholungen warten auf dich.${visitLabel ? ` Zuletzt aktiv ${visitLabel}.` : ""}`
-        : `${visitLabel ? `Zuletzt aktiv ${visitLabel}. ` : ""}Der Kurs oeffnet wieder an deinem letzten Lernstand.`;
+        : `${visitLabel ? `Zuletzt aktiv ${visitLabel}. ` : ""}Der Kurs öffnet wieder an deinem letzten Lernstand.`;
     } else {
       const chapterCount = getLandingChapterCount(module);
       progressNode.hidden = true;
@@ -592,10 +596,11 @@ function renderLandingPage() {
     }
 
     primaryAction.href = module.href;
-    primaryAction.textContent = snapshot.started ? "Weiterlernen" : "Modul oeffnen";
-    primaryAction.setAttribute("aria-label", `${snapshot.started ? "Weiterlernen in" : "Modul oeffnen:"} ${module.title}`);
+    primaryAction.textContent = snapshot.started ? "Weiterlernen" : "Modul öffnen";
+    primaryAction.setAttribute("aria-label", `${snapshot.started ? "Weiterlernen in" : "Modul öffnen:"} ${module.title}`);
 
     updateVisualLayers(module);
+    normalizeGermanCopy(document.body);
   }
 
   function syncTileState() {
@@ -730,18 +735,18 @@ function buildModuleModes(module) {
   const modeMap = {
     quantitative: [
       "Theorie in kompakten Schrittketten statt langer Bloecke",
-      "Grafiken und visuelle Intuition fuer Rechen- und Modelllogik",
-      "Aufgaben- und Klausurmodus streng aus Uebungen, Tutorien und Altklausuren"
+      "Grafiken und visuelle Intuition für Rechen- und Modelllogik",
+      "Aufgaben- und Klausurmodus streng aus Übungen, Tutorien und Altklausuren"
     ],
     quantitative_coding: [
       "Theorie und Rechenwege werden mit R-nahem Workflow verbunden",
-      "R-Lab fuer Syntax, Modellschritte, Debugging und Ergebnisinterpretation",
+      "R-Lab für Syntax, Modellschritte, Debugging und Ergebnisinterpretation",
       "Graphen, Tests und Datensichten werden direkt mit Coding-Aufgaben verzahnt"
     ],
     text_doctrinal: [
-      "Definitionen, Tatbestandsmerkmale und Ausnahmen in Pruefungsschemata",
+      "Definitionen, Tatbestandsmerkmale und Ausnahmen in Prüfungsschemata",
       "Kurzfaelle statt rein graphischer Visualisierung",
-      "Subsumtions- und Argumentationspfade fuer klausurnahe Anwendung"
+      "Subsumtions- und Argumentationspfade für klausurnahe Anwendung"
     ],
     mixed: [
       "Theorie in kompakten Lernpfaden mit Kontext, Formel- oder Begriffsboxen",
@@ -760,18 +765,18 @@ function buildBlueprint(module) {
   const blueprints = {
     quantitative: [
       { title: "Theorie", body: "Kurze, verknuepfte Theoriepfade mit Formeln, Fehlerquellen und visualisierten Kurven." },
-      { title: "Aufgaben", body: "Uebungs- und Tutoriumsaufgaben werden als loesbare Drill-Sequenzen mit Teilschritten abgebildet." },
+      { title: "Aufgaben", body: "Übungs- und Tutoriumsaufgaben werden als lösbare Drill-Sequenzen mit Teilschritten abgebildet." },
       { title: "Klausur", body: "Exam-Modus mit Zeitdruck, Erwartungshorizont und Wiederholungslogik." }
     ],
     quantitative_coding: [
       { title: "Theorie + R", body: "Konzepte und Code stehen nebeneinander, damit sich Formel und Implementation gegenseitig verstaerken." },
-      { title: "R-Lab", body: "Starter-Code, Run, Reset, Check, Hinweise und Musterloesung in derselben Oberflaeche." },
+      { title: "R-Lab", body: "Starter-Code, Run, Reset, Check, Hinweise und Musterlösung in derselben Oberfläche." },
       { title: "Diagnostik", body: "Typische Fehler werden als Debugging- und Interpretationsfragen ausgespielt." }
     ],
     text_doctrinal: [
       { title: "Definitionen", body: "Begriffe, Voraussetzungen und Ausnahmen werden als aktive Karten und Checklisten organisiert." },
-      { title: "Falltraining", body: "Kurzfaelle fuehren Schritt fuer Schritt durch Anspruch, Merkmal und Subsumtion." },
-      { title: "Pruefungsschema", body: "Die Lernstruktur priorisiert issue-spotting und stringente Klausurgliederung." }
+      { title: "Falltraining", body: "Kurzfälle führen Schritt für Schritt durch Anspruch, Merkmal und Subsumtion." },
+      { title: "Prüfungsschema", body: "Die Lernstruktur priorisiert issue-spotting und stringente Klausurgliederung." }
     ],
     mixed: [
       { title: "Kernstoff", body: "Zentrale Konzepte werden in kurzen, gut scanbaren Lerneinheiten gebuendelt." },
@@ -786,7 +791,7 @@ function buildBlueprint(module) {
 function buildFactCards(module) {
   const content = getModuleContent(module.slug);
   const codingState = module.rLab ? "R-Lab aktiv" : "Kein Codefokus";
-  const statusText = getStageLabel(module) === "Live-Portal" ? "Aktiv" : "In Vorbereitung";
+  const statusText = getStageLabel(module) === "Kursportal" ? "Aktiv" : "In Vorbereitung";
   const theoryCount = content?.roadmap?.length || module.portalState?.chapterCount || estimateGeneratedChapterCount(module, content) || 0;
   const practiceCount = content?.practice?.length || 0;
 
@@ -997,7 +1002,7 @@ function buildConceptMapData(module, content) {
   }
 
   return {
-    caption: "Die Lernstruktur priorisiert Kernlogik, Uebung und Klausurvorbereitung in einer wiederkehrenden Lernschleife.",
+    caption: "Die Lernstruktur priorisiert Kernlogik, Übung und Klausurvorbereitung in einer wiederkehrenden Lernschleife.",
     nodes: [
       { id: "einstieg", label: "Kernidee", x: 96, y: 94 },
       { id: "theorie", label: "Theorie", x: 300, y: 60 },
@@ -1042,7 +1047,7 @@ function renderConceptMap(container, module) {
 
   container.innerHTML = `
     <p class="map-caption">${caption}</p>
-    <svg class="concept-map" viewBox="0 0 640 400" role="img" aria-label="Konzeptkarte fuer ${module.title}">
+    <svg class="concept-map" viewBox="0 0 640 400" role="img" aria-label="Konzeptkarte für ${module.title}">
       <defs>
         <linearGradient id="mapGlow" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.18"></stop>
@@ -1063,9 +1068,9 @@ function renderModulePage() {
 
   if (!module) return;
 
-  document.documentElement.style.setProperty("--accent", module.accent);
-  document.documentElement.style.setProperty("--accent-strong", module.accent);
-  document.documentElement.style.setProperty("--accent-soft", hexToSoft(module.accent));
+  document.documentElement.style.setProperty("--accent", BRAND_ACCENT);
+  document.documentElement.style.setProperty("--accent-strong", BRAND_ACCENT_STRONG);
+  document.documentElement.style.setProperty("--accent-soft", BRAND_ACCENT_SOFT);
   document.title = `${module.title} | VWL Lernportal`;
 
   const heroNode = document.getElementById("moduleHero");
@@ -1107,7 +1112,7 @@ function renderModulePage() {
 
   heroNode.innerHTML = `
     <div class="module-headline">
-      <a class="back-link" href="../index.html">Zurueck zu allen Modulen</a>
+      <a class="back-link" href="../index.html">Zurück zu allen Modulen</a>
       <p class="eyebrow">${getFilterLabel(module.type)} · ${getDisplayStageLabel(module)}</p>
       <h1>${module.title}</h1>
       <p class="hero-summary">${module.summary}</p>
@@ -1172,7 +1177,7 @@ function renderModulePage() {
       <div class="section-heading">
         <div>
           <p class="eyebrow">Theorie</p>
-          <h2>Themenuebersicht</h2>
+          <h2>Themenübersicht</h2>
         </div>
         <p class="section-note">Arbeite die Themenlinie der Reihe nach durch oder springe direkt zu den Bausteinen, die du wiederholen willst.</p>
       </div>
@@ -1230,6 +1235,7 @@ function renderModulePage() {
     labSection.hidden = true;
   }
 
+  normalizeGermanCopy(document.body);
   bindStudyUnitToggles(module);
   touchModuleVisit(module, {
     lastPath: window.location.pathname,
@@ -1259,6 +1265,8 @@ function boot() {
       footerCopy.textContent = "Dieses Modul verbindet Theorie, Aufgaben, Visuals und Wiederholung in derselben klaren Navigationslogik wie die anderen Kurse.";
     }
   }
+
+  normalizeGermanCopy(document.body);
 }
 
 boot();

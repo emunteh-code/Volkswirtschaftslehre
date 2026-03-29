@@ -39,10 +39,10 @@ class GraphEngine {
         this.colors = {
             grid:         cv('--border')     || '#38383a',
             axis:         cv('--muted')      || '#8e8e93',
-            budget:       cv('--accent')     || '#d4ff5c',
-            indifference: cv('--accent2')    || '#5cf0ff',
+            budget:       cv('--accent')     || '#486b19',
+            indifference: cv('--accent2')    || '#647b5f',
             optimum:      cv('--sys-orange') || '#ff9f0a',
-            vector:       cv('--accent3')    || '#ff6b6b',
+            vector:       cv('--accent3')    || '#a55a4f',
             text:         cv('--text')       || '#f5f5f7',
             fontBody:     resolvedFont,
             fontMono:     cv('--font-mono')  || resolvedFont,
@@ -307,9 +307,9 @@ class GraphEngine {
         muted:    cv('--muted')     || '#8e8e93',
         label:    cv('--text')      || '#1c1c1e',
         text:     cv('--text')      || '#1c1c1e',
-        accent:   cv('--accent')    || '#3a6b00',
-        accent2:  cv('--accent2')   || '#0066a0',
-        warn:     cv('--accent3')   || '#ff6b6b',
+        accent:   cv('--accent')    || '#486b19',
+        accent2:  cv('--accent2')   || '#647b5f',
+        warn:     cv('--accent3')   || '#a55a4f',
         card:     cv('--card')      || '#ffffff',
         fontMono: cv('--font-mono') || resolvedFont,
         fontBody: resolvedFont,
@@ -317,17 +317,64 @@ class GraphEngine {
       return this._col;
     }
 
+    drawLabelChip(ctx, x, y, text, {
+      align = 'left',
+      textColor = this._col.text,
+      fill = hexToRgba(this._col.card, 0.92),
+      stroke = hexToRgba(this._col.grid, 0.9),
+      font = `12px ${this._col.fontMono}`,
+      paddingX = 8,
+      paddingY = 5,
+      radius = 9
+    } = {}) {
+      if (!text) return;
+      ctx.save();
+      ctx.font = font;
+      ctx.textBaseline = 'middle';
+      const metrics = ctx.measureText(text);
+      const textWidth = metrics.width;
+      const textHeight = Math.max(12, Number.parseInt(font, 10) || 12);
+      let left = x;
+      let textX = x + paddingX;
+      if (align === 'center') left = x - textWidth / 2 - paddingX;
+      if (align === 'center') textX = x;
+      if (align === 'right') {
+        left = x - textWidth - paddingX * 2;
+        textX = x - paddingX;
+      }
+      const top = y - textHeight / 2 - paddingY;
+      const width = textWidth + paddingX * 2;
+      const height = textHeight + paddingY * 2;
+
+      ctx.fillStyle = fill;
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(left, top, width, height, radius);
+      else ctx.rect(left, top, width, height);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = textColor;
+      ctx.textAlign = align;
+      ctx.fillText(text, textX, y);
+      ctx.restore();
+    }
+
     // Draw background + grid + axes + tick labels + axis name labels
     // xLabel/yLabel default to 'x₁ (Menge Gut 1)' / 'x₂ (Menge Gut 2)'
     drawScene(w, h, ctx, axMax, xLabel, yLabel) {
       const col = this._col;
-      const PAD = 75;
-      const PW = w - PAD - 40;
-      const PH = h - PAD - 50;
+      const PAD_LEFT = 74;
+      const PAD_RIGHT = 34;
+      const PAD_TOP = 34;
+      const PAD_BOTTOM = 72;
+      const PW = w - PAD_LEFT - PAD_RIGHT;
+      const PH = h - PAD_TOP - PAD_BOTTOM;
 
       // Responsive font sizes
-      const fsSm = Math.max(11, Math.round(Math.min(w, h) * 0.026));
-      const fsMd = Math.max(12, Math.round(Math.min(w, h) * 0.032));
+      const fsSm = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+      const fsMd = Math.max(13, Math.round(Math.min(w, h) * 0.028));
 
       // Background
       ctx.fillStyle = col.bg;
@@ -337,20 +384,20 @@ class GraphEngine {
       ctx.setLineDash([4, 5]);
       for (let i = 1; i <= 5; i++) {
         const gv = (axMax / 5) * i;
-        const gx = PAD + (gv / axMax) * PW;
-        const gy = h - PAD - (gv / axMax) * PH;
+        const gx = PAD_LEFT + (gv / axMax) * PW;
+        const gy = h - PAD_BOTTOM - (gv / axMax) * PH;
 
         ctx.strokeStyle = col.grid;
         ctx.globalAlpha = 0.55;
         ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(PAD, gy);     ctx.lineTo(w - 30, gy);    ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(gx, h - PAD); ctx.lineTo(gx, 40);        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(PAD_LEFT, gy);        ctx.lineTo(w - PAD_RIGHT, gy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(gx, h - PAD_BOTTOM); ctx.lineTo(gx, PAD_TOP);       ctx.stroke();
         ctx.globalAlpha = 1;
 
         ctx.fillStyle = col.tick;
         ctx.font = `${fsSm}px ${col.fontBody}`;
-        ctx.textAlign = 'center'; ctx.fillText(gv.toFixed(0), gx, h - PAD + 16);
-        ctx.textAlign = 'right';  ctx.fillText(gv.toFixed(0), PAD - 6, gy + 4);
+        ctx.textAlign = 'center'; ctx.fillText(gv.toFixed(0), gx, h - PAD_BOTTOM + 16);
+        ctx.textAlign = 'right';  ctx.fillText(gv.toFixed(0), PAD_LEFT - 8, gy + 4);
       }
       ctx.setLineDash([]);
 
@@ -358,25 +405,25 @@ class GraphEngine {
       ctx.strokeStyle = col.axis;
       ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.moveTo(PAD, 40);
-      ctx.lineTo(PAD, h - PAD);
-      ctx.lineTo(w - 30, h - PAD);
+      ctx.moveTo(PAD_LEFT, PAD_TOP);
+      ctx.lineTo(PAD_LEFT, h - PAD_BOTTOM);
+      ctx.lineTo(w - PAD_RIGHT, h - PAD_BOTTOM);
       ctx.stroke();
 
       // Axis name labels
       ctx.fillStyle = col.label;
       ctx.font = `bold ${fsMd}px ${col.fontBody}`;
       ctx.textAlign = 'center';
-      ctx.fillText(xLabel || 'x₁ (Menge Gut 1)', PAD + PW / 2, h - PAD + 34);
+      ctx.fillText(xLabel || 'x₁ (Menge Gut 1)', PAD_LEFT + PW / 2, h - PAD_BOTTOM + 34);
       ctx.save();
-      ctx.translate(16, h - PAD - PH / 2);
+      ctx.translate(18, h - PAD_BOTTOM - PH / 2);
       ctx.rotate(-Math.PI / 2);
       ctx.fillText(yLabel || 'x₂ (Menge Gut 2)', 0, 0);
       ctx.restore();
 
-      const sx = x => PAD + (x / axMax) * PW;
-      const sy = y => h - PAD - (y / axMax) * PH;
-      return { PAD, PW, PH, sx, sy };
+      const sx = x => PAD_LEFT + (x / axMax) * PW;
+      const sy = y => h - PAD_BOTTOM - (y / axMax) * PH;
+      return { PAD: PAD_LEFT, PAD_LEFT, PAD_RIGHT, PAD_TOP, PAD_BOTTOM, PW, PH, sx, sy };
     }
 
     // Draw indifference curve u = x·y = const (Cobb-Douglas α = 0.5)
@@ -407,41 +454,46 @@ class GraphEngine {
         if (lx > maxV) lx = maxV;
         if (ly < minV) ly = minV;
         if (ly > maxV) ly = maxV;
-        const col = this._col;
-        ctx.fillStyle = color;
-        ctx.font = `bold 15px ${col.fontBody}`;
-        ctx.textAlign = 'left';
-        ctx.fillText(label, sx(lx) + 5, sy(ly) - 6);
+        this.drawLabelChip(ctx, sx(lx) + 10, sy(ly) - 10, label, {
+          textColor: this._col.text,
+          stroke: color
+        });
       }
     }
 
-    // Draw a legend box (top-right); entries = [{color, dash, dot, fill, label, lw}]
+    // Draw a quiet flat legend panel (top-right); entries = [{color, dash, dot, fill, label, lw}]
     drawLegend(ctx, w, entries, borderColor, margin) {
       const col = this._col;
-      const lh = 20;
+      const lh = 22;
       const swatchW = 20;
-      const textX = swatchW + 6;
+      const textX = swatchW + 10;
       const rightMargin = (typeof margin === 'number') ? margin : 14;
 
-      ctx.font = `13px ${col.fontBody}`;
+      ctx.font = `12px ${col.fontMono}`;
       let maxW = 0;
       entries.forEach(e => {
         const tw = ctx.measureText(e.label).width;
         if (tw > maxW) maxW = tw;
       });
-      const blockW = textX + maxW + 4;
+      const blockW = textX + maxW + 14;
+      const blockH = Math.max(1, entries.length) * lh + 14;
       let x = w - blockW - rightMargin;
       if (x < 20) x = 20;
-      const y = 46;
+      const y = 42;
 
       ctx.save();
       ctx.textBaseline = 'middle';
+      ctx.fillStyle = hexToRgba(col.card, 0.92);
+      ctx.strokeStyle = borderColor || hexToRgba(col.grid, 0.85);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x - 10, y - 12, blockW + 20, blockH, 14);
+      else ctx.rect(x - 10, y - 12, blockW + 20, blockH);
+      ctx.fill();
+      ctx.stroke();
 
       entries.forEach((entry, i) => {
         const cy = y + i * lh;
-
-        ctx.shadowColor = 'rgba(0,0,0,0.7)';
-        ctx.shadowBlur = 0;
 
         if (entry.dot) {
           ctx.fillStyle = entry.color;
@@ -463,11 +515,8 @@ class GraphEngine {
           ctx.setLineDash([]);
         }
 
-        // Subtle text shadow for readability — works on both light and dark backgrounds
-        ctx.shadowColor = 'rgba(0,0,0,0.55)';
-        ctx.shadowBlur = 3;
-        ctx.fillStyle = entry.color;
-        ctx.font = `13px ${col.fontBody}`;
+        ctx.fillStyle = col.text;
+        ctx.font = `12px ${col.fontMono}`;
         ctx.textAlign = 'left';
         ctx.fillText(entry.label, x + textX, cy + 1);
       });

@@ -1,7 +1,11 @@
+import { normalizeGermanCopy } from "./utils/math.js";
+
 export function createPortalApp({
   courseLabel,
   consentKey,
   chapters,
+  initialConceptId = null,
+  collapseSidebarByDefault = false,
   appState,
   storage,
   navigation,
@@ -40,8 +44,8 @@ export function createPortalApp({
     renderContent,
     renderHome,
     toggleSolution,
-    toggleExamDrill,
-    copyFormula,
+    toggleExamDrill = () => {},
+    copyFormula = () => {},
     showDashboard,
     setRendererState
   } = renderer;
@@ -87,7 +91,35 @@ export function createPortalApp({
     main.style.marginRight = hasContent ? "" : "0";
   }
 
+  function isSidebarOpen() {
+    return collapseSidebarByDefault
+      ? document.body.classList.contains("sidebar-open")
+      : Boolean(document.getElementById("sidebar")?.classList.contains("open"));
+  }
+
+  function setSidebarOpen(open) {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+    const btn = document.getElementById("mobileMenuBtn");
+
+    if (collapseSidebarByDefault) {
+      document.body.classList.toggle("sidebar-open", open);
+      if (sidebar) sidebar.classList.toggle("open", open);
+    } else if (sidebar) {
+      sidebar.classList.toggle("open", open);
+    }
+
+    if (overlay) overlay.classList.toggle("show", open);
+    if (btn) btn.setAttribute("aria-expanded", String(open));
+  }
+
+  function closeSidebar() {
+    if (!isSidebarOpen()) return;
+    setSidebarOpen(false);
+  }
+
   function navigate(id) {
+    closeSidebar();
     appState.setCurrent(id);
     appState.setCurrentTab("theorie");
     setRendererState(id, "theorie");
@@ -123,6 +155,7 @@ export function createPortalApp({
   }
 
   function showSRSReview() {
+    closeSidebar();
     const due = getDueCards();
     const content = document.getElementById("content");
     const tabRow = document.getElementById("tabRow");
@@ -140,7 +173,7 @@ export function createPortalApp({
 <h2 class="srs-heading">Alle Karten gelernt</h2>
 <p>Heute gibt es keine Karten zu wiederholen. Komm morgen wieder!</p>
 <div class="empty-state-actions">
-<button class="btn" onclick="window.__renderHome()">Zurueck zur Uebersicht</button>
+<button class="btn" onclick="window.__renderHome()">Zurück zur Übersicht</button>
 </div>
 </div>`;
       return;
@@ -178,6 +211,7 @@ export function createPortalApp({
     const notice = document.getElementById("consentNotice");
     const app = document.getElementById("app");
     if (!notice) return;
+    document.body.classList.add("consent-open");
     notice.classList.add("show");
     if (app) app.setAttribute("inert", "");
     requestAnimationFrame(() => {
@@ -190,18 +224,24 @@ export function createPortalApp({
     localStorage.setItem(consentKey, "1");
     const notice = document.getElementById("consentNotice");
     const app = document.getElementById("app");
+    document.body.classList.remove("consent-open");
     if (notice) notice.classList.remove("show");
     if (app) app.removeAttribute("inert");
   }
 
   function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    if (!sidebar) return;
-    const open = sidebar.classList.toggle("open");
-    const overlay = document.getElementById("sidebarOverlay");
-    if (overlay) overlay.classList.toggle("show", open);
-    const btn = document.getElementById("mobileMenuBtn");
-    if (btn) btn.setAttribute("aria-expanded", String(open));
+    setSidebarOpen(!isSidebarOpen());
+  }
+
+  function openFormulaPanel() {
+    if (!appState.current) return;
+    const button = document.querySelector('#tabRow button[data-tab="formeln"]');
+    if (!button || button.style.display === "none") {
+      showToast("Für dieses Konzept gibt es keine Formeln.", "info");
+      return;
+    }
+    switchTab("formeln");
+    document.getElementById("topbar")?.scrollIntoView({ block: "start", behavior: "smooth" });
   }
 
   function initResizeObserver() {
@@ -224,15 +264,16 @@ export function createPortalApp({
   }
 
   function toggleFocus() {
+    closeSidebar();
     document.body.classList.toggle("focus-mode");
     const active = document.body.classList.contains("focus-mode");
-    showToast(active ? "Fokus-Modus aktiviert (F zum Deaktivieren)" : "Fokus-Modus deaktiviert", "info");
+    showToast(active ? "Fokus-Modus aktiviert (⇧F zum Deaktivieren)" : "Fokus-Modus deaktiviert", "info");
   }
 
   function resetData() {
-    if (!confirm("Nur der Lernfortschritt dieses Moduls wird geloescht. Fortfahren?")) return;
+    if (!confirm("Nur der Lernfortschritt dieses Moduls wird gelöscht. Fortfahren?")) return;
     clearAllData();
-    showToast("Der Fortschritt dieses Moduls wurde geloescht.", "info");
+    showToast("Der Fortschritt dieses Moduls wurde gelöscht.", "info");
     updateNavBadges();
     updateProgressUI(loadProgress());
     renderHome();
@@ -241,24 +282,28 @@ export function createPortalApp({
   }
 
   function openDashboard() {
+    closeSidebar();
     showDashboard();
     clearRightPanel();
     syncRightPanelVisibility();
   }
 
   function openQuickExam() {
+    closeSidebar();
     clearRightPanel();
     syncRightPanelVisibility();
     startExam();
   }
 
   function openFullExamOverview() {
+    closeSidebar();
     clearRightPanel();
     syncRightPanelVisibility();
     showFullExamSelect();
   }
 
   function openFullExam(id) {
+    closeSidebar();
     clearRightPanel();
     syncRightPanelVisibility();
     startFullExam(id);
@@ -298,6 +343,8 @@ export function createPortalApp({
   window.initGraph = initGraph;
   window.__toggleTheme = toggleTheme;
   window.__toggleSidebar = toggleSidebar;
+  window.__closeSidebar = closeSidebar;
+  window.__openFormulaPanel = openFormulaPanel;
   window.__toggleFocus = toggleFocus;
   window.__resetData = resetData;
   window.__acceptConsent = acceptConsent;
@@ -307,6 +354,8 @@ export function createPortalApp({
 
   document.addEventListener("DOMContentLoaded", () => {
     window.__jsLoaded = true;
+    document.body.classList.toggle("sidebar-collapsible", collapseSidebarByDefault);
+    setSidebarOpen(false);
     initTheme();
     buildNav(navigate);
 
@@ -351,10 +400,15 @@ export function createPortalApp({
     updateStreakUI();
     initConsent();
     portalBridge?.();
+    normalizeGermanCopy(document.body);
 
     const lastId = loadLastId();
     const lastExists = lastId && chapters.find((chapter) => chapter.id === lastId);
+    const initialChapterExists = initialConceptId && chapters.find((chapter) => chapter.id === initialConceptId);
     if (lastExists) navigate(lastId);
+    else if (initialChapterExists) {
+      navigate(initialConceptId);
+    }
     else {
       setActiveNav(null);
       renderHome();

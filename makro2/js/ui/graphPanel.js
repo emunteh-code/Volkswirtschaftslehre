@@ -100,9 +100,9 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_a">Inflationskoeff. a</label><input type="range" id="g_a" min="0.1" max="2.5" step="0.1" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_a" aria-live="polite">0.5</div></div>
 <div class="ctrl-group"><label for="g_b">Outputkoeff. b</label><input type="range" id="g_b" min="0" max="1.5" step="0.1" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_b" aria-live="polite">0.5</div></div>
 <div class="ctrl-group"><label for="g_pi_current">Aktuelle Inflation</label><input type="range" id="g_pi_current" min="0" max="6" step="0.25" value="3" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_pi_current" aria-live="polite">3.00</div></div>
-<div class="ctrl-group"><label for="g_y_gap">Outputluecke (y - yₙ)</label><input type="range" id="g_y_gap" min="-3" max="3" step="0.25" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_y_gap" aria-live="polite">0.50</div></div>
+<div class="ctrl-group"><label for="g_y_gap">Outputlücke (y - yₙ)</label><input type="range" id="g_y_gap" min="-3" max="3" step="0.25" value="0.5" oninput="window.initGraph('taylor_regel', false)"><div class="val" id="v_y_gap" aria-live="polite">0.50</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Taylor-Regel mit Inflations- und Outputluecke."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Taylor-Regel mit Inflations- und Outputlücke."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -145,5 +145,5 @@ export function renderGraphPanel(id) {
 </div>`
   };
 
-  return `<div class="panel active">${graphConfigs[id] || '<div class="section-block"><h3>Grafik</h3><p>Dieses Thema wird hier ueber Theorie, Formeln und Aufgabenpfad gelernt. Eine zusaetzliche Makro-Grafik ist fuer dieses Konzept nicht noetig.</p></div>'}</div>`;
+  return `<div class="panel active">${graphConfigs[id] || '<div class="section-block"><h3>Grafik</h3><p>Dieses Thema wird hier über Theorie, Formeln und Aufgabenpfad gelernt. Eine zusätzliche Makro-Grafik ist für dieses Konzept nicht nötig.</p></div>'}</div>`;
 }

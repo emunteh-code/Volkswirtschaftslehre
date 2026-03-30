@@ -298,7 +298,7 @@ class GraphEngine {
       const s = getComputedStyle(document.body);
       const cv = n => s.getPropertyValue(n).trim();
       // Use the browser's resolved font so canvas always matches page typography
-      const resolvedFont = cv('--font-mono') || s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
+      const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
       this._col = {
         bg:       cv('--bg')        || '#f2f2f7',
         grid:     cv('--border')    || '#38383a',
@@ -311,7 +311,7 @@ class GraphEngine {
         accent2:  cv('--accent2')   || '#0066a0',
         warn:     cv('--accent3')   || '#ff6b6b',
         card:     cv('--card')      || '#ffffff',
-        fontMono: resolvedFont,
+        fontMono: cv('--font-mono') || resolvedFont,
         fontBody: resolvedFont,
       };
       return this._col;
@@ -422,6 +422,7 @@ class GraphEngine {
       const swatchW = 20;
       const textX = swatchW + 6;
       const rightMargin = (typeof margin === 'number') ? margin : 14;
+      const padX = 8, padY = 6;
 
       ctx.font = `13px ${col.fontBody}`;
       let maxW = 0;
@@ -437,21 +438,53 @@ class GraphEngine {
       ctx.save();
       ctx.textBaseline = 'middle';
 
+      // Semi-transparent backing rect — keeps legend readable on both light and dark backgrounds
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur  = 0;
+      ctx.fillStyle   = col.bg;
+      ctx.globalAlpha = 0.78;
+      ctx.beginPath();
+      const rx = x - padX, ry = y - padY - lh / 2;
+      const rw = blockW + padX * 2, rh = entries.length * lh + padY * 2;
+      const r = 6;
+      ctx.moveTo(rx + r, ry);
+      ctx.lineTo(rx + rw - r, ry);
+      ctx.quadraticCurveTo(rx + rw, ry, rx + rw, ry + r);
+      ctx.lineTo(rx + rw, ry + rh - r);
+      ctx.quadraticCurveTo(rx + rw, ry + rh, rx + rw - r, ry + rh);
+      ctx.lineTo(rx + r, ry + rh);
+      ctx.quadraticCurveTo(rx, ry + rh, rx, ry + rh - r);
+      ctx.lineTo(rx, ry + r);
+      ctx.quadraticCurveTo(rx, ry, rx + r, ry);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Optional border
+      if (borderColor) {
+        ctx.strokeStyle = borderColor;
+        ctx.lineWidth   = 1;
+        ctx.stroke();
+      }
+
       entries.forEach((entry, i) => {
         const cy = y + i * lh;
 
-        ctx.shadowColor = 'rgba(0,0,0,0.7)';
-        ctx.shadowBlur = 0;
-
         if (entry.dot) {
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur  = 0;
           ctx.fillStyle = entry.color;
           ctx.beginPath();
           ctx.arc(x + 10, cy, 4, 0, 2 * Math.PI);
           ctx.fill();
         } else if (entry.fill) {
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur  = 0;
           ctx.fillStyle = entry.fill;
           ctx.fillRect(x + 3, cy - 5, 14, 10);
         } else {
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur  = 0;
           ctx.strokeStyle = entry.color;
           ctx.lineWidth = entry.lw || 2.5;
           if (entry.dash) ctx.setLineDash([5, 3]);
@@ -463,9 +496,8 @@ class GraphEngine {
           ctx.setLineDash([]);
         }
 
-        // Subtle text shadow for readability — works on both light and dark backgrounds
-        ctx.shadowColor = 'rgba(0,0,0,0.55)';
-        ctx.shadowBlur = 3;
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur  = 0;
         ctx.fillStyle = entry.color;
         ctx.font = `13px ${col.fontBody}`;
         ctx.textAlign = 'left';

@@ -142,7 +142,6 @@ body {
 
 #main {
   margin-left: 260px;
-  margin-right: 240px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -829,7 +828,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
   display: none;
   margin-top: 16px;
   background: var(--surface2);
-  border: 1px solid rgba(192,132,252,0.2);
+  border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: 16px 20px;
 }
@@ -841,7 +840,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--muted);
   margin-bottom: 12px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
@@ -857,14 +856,14 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .step-num {
   min-width: 24px;
   height: 24px;
-  background: rgba(192,132,252,0.14);
+  background: rgba(92,240,255,0.12);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent2);
   margin-top: 2px;
   flex-shrink: 0;
 }
@@ -920,9 +919,9 @@ button:active:not(:disabled) { transform: scale(0.98); }
   margin-bottom: 10px;
   padding: 4px 10px;
   border-radius: var(--r-sm);
-  background: rgba(192,132,252,0.12);
-  border: 1px solid rgba(192,132,252,0.25);
-  color: var(--accent);
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
@@ -1951,24 +1950,25 @@ canvas {
    RIGHT PANEL
    ============================================================ */
 #rightPanel {
-  width: 240px; min-width: 240px;
-  background: var(--surface);
+  width: 240px;
+  min-width: 240px;
+  flex-shrink: 0;
+  background: var(--bg);
   border-left: 1px solid var(--border);
-  position: fixed;
-  top: 0; right: 0; bottom: 0;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
   overflow-y: auto;
   overflow-x: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  z-index: 90;
-  padding: 18px 14px;
+  padding: 24px 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  transition: transform 0.3s;
+  gap: 16px;
+  align-self: flex-start;
 }
-#rightPanel.hidden { transform: translateX(100%); }
-body.focus-mode #rightPanel { transform: translateX(100%); }
+body.focus-mode #rightPanel { display: none; }
 
 .rp-section h4 {
   font-family: var(--font-body);
@@ -2098,7 +2098,7 @@ body.focus-mode #rightPanel { transform: translateX(100%); }
    KEYBOARD SHORTCUT HINT BAR
    ============================================================ */
 #shortcutHint {
-  position: fixed; bottom: 0; left: 260px; right: 240px;
+  position: fixed; bottom: 0; left: 260px; right: 0;
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   border-top: 1px solid var(--border);
   backdrop-filter: blur(12px);
@@ -2120,7 +2120,7 @@ body.focus-mode #shortcutHint { transform: translateY(100%); }
    FOCUS MODE
    ============================================================ */
 body.focus-mode #sidebar { transform: translateX(-100%); }
-body.focus-mode #main    { margin-left: 0; margin-right: 0; }
+body.focus-mode #main    { margin-left: 0; }
 
 /* ============================================================
    MATHJAX HARMONIZATION
@@ -2401,14 +2401,13 @@ body.light-mode .dash-focus-rec {
    ============================================================ */
 @media (max-width: 1200px) {
   #rightPanel { display: none; }
-  #main { margin-right: 0; }
   #shortcutHint { right: 0; }
 }
 
 @media (max-width: 900px) {
   #sidebar { transform: translateX(-100%); }
   #sidebar.open { transform: none; }
-  #main { margin-left: 0; margin-right: 0; }
+  #main { margin-left: 0; }
   #content { padding: 24px 20px 70px; }
   .info-grid { grid-template-columns: 1fr; }
   .concept-title { font-size: 28px; }

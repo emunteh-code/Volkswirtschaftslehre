@@ -35,6 +35,10 @@ function setupPlot(xLabel, yLabel, ranges) {
   const px = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * innerW;
   const py = (y) => h - pad.bottom - ((y - yMin) / (yMax - yMin)) * innerH;
 
+  // Responsive font scale — proportional to smaller canvas dimension
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
+
   ctx.clearRect(0, 0, w, h);
   ctx.fillStyle = col.bg;
   ctx.fillRect(0, 0, w, h);
@@ -84,7 +88,7 @@ function setupPlot(xLabel, yLabel, ranges) {
   }
 
   ctx.fillStyle = col.tick;
-  ctx.font = `12px ${col.fontMono}`;
+  ctx.font = `${fsBase}px ${col.fontMono}`;
   ctx.textAlign = "center";
   drawTicks(xMin, xMax, 5).forEach((tick) => {
     ctx.fillText(tick.toFixed(xMax - xMin <= 10 ? 1 : 0), px(tick), h - pad.bottom + 18);
@@ -96,7 +100,7 @@ function setupPlot(xLabel, yLabel, ranges) {
   });
 
   ctx.fillStyle = col.label;
-  ctx.font = `600 13px ${col.fontMono}`;
+  ctx.font = `600 ${fsBold}px ${col.fontMono}`;
   ctx.textAlign = "center";
   ctx.fillText(xLabel, pad.left + innerW / 2, h - 18);
   ctx.save();
@@ -105,7 +109,7 @@ function setupPlot(xLabel, yLabel, ranges) {
   ctx.fillText(yLabel, 0, 0);
   ctx.restore();
 
-  return { engine, ctx, col, w, h, pad, px, py, ranges };
+  return { engine, ctx, col, w, h, pad, px, py, ranges, fsBase, fsBold };
 }
 
 function drawCurve(plot, fn, options = {}) {
@@ -150,7 +154,7 @@ function drawCurve(plot, fn, options = {}) {
     const y = fn(x);
     if (Number.isFinite(y) && y >= plot.ranges.yMin && y <= plot.ranges.yMax) {
       ctx.fillStyle = color;
-      ctx.font = `600 12px ${plot.col.fontMono}`;
+      ctx.font = `600 ${plot.fsBase}px ${plot.col.fontMono}`;
       ctx.textAlign = "left";
       ctx.fillText(label, px(x) + 8, py(y) - 8);
     }
@@ -158,7 +162,7 @@ function drawCurve(plot, fn, options = {}) {
 }
 
 function drawHorizontal(plot, y, color, label) {
-  const { ctx, px, py, ranges, col } = plot;
+  const { ctx, px, py, ranges, col, fsBase } = plot;
   ctx.strokeStyle = color;
   ctx.lineWidth = 2.4;
   ctx.setLineDash([8, 6]);
@@ -169,14 +173,14 @@ function drawHorizontal(plot, y, color, label) {
   ctx.setLineDash([]);
   if (label) {
     ctx.fillStyle = color;
-    ctx.font = `600 12px ${col.fontMono}`;
+    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
     ctx.textAlign = "left";
     ctx.fillText(label, px(ranges.xMax) - 72, py(y) - 8);
   }
 }
 
 function drawVertical(plot, x, color, label) {
-  const { ctx, px, py, ranges, col } = plot;
+  const { ctx, px, py, ranges, col, fsBase } = plot;
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.setLineDash([8, 6]);
@@ -187,14 +191,14 @@ function drawVertical(plot, x, color, label) {
   ctx.setLineDash([]);
   if (label) {
     ctx.fillStyle = color;
-    ctx.font = `600 12px ${col.fontMono}`;
+    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
     ctx.textAlign = "left";
     ctx.fillText(label, px(x) + 8, py(ranges.yMax) + 14);
   }
 }
 
 function drawPoint(plot, x, y, color, label) {
-  const { ctx, px, py, col } = plot;
+  const { ctx, px, py, col, fsBase } = plot;
   const cx = px(x);
   const cy = py(y);
 
@@ -211,7 +215,7 @@ function drawPoint(plot, x, y, color, label) {
 
   if (label) {
     ctx.fillStyle = color;
-    ctx.font = `600 12px ${col.fontMono}`;
+    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
     ctx.textAlign = "left";
     ctx.fillText(label, cx + 10, cy - 8);
   }
@@ -493,7 +497,7 @@ function drawTaylorRegel() {
   updateInfo(`
     <strong>Interpretation:</strong> Die Grafik veranschaulicht die Regel
     <strong>i = r* + π + a(π - π*) + b(y - yₙ)</strong>.
-    Bei r* = ${rStar.toFixed(1)}%, π* = ${piStar.toFixed(1)}%, a = ${a.toFixed(1)} und einer Outputluecke von <strong>${outputGap.toFixed(2)}</strong>
+    Bei r* = ${rStar.toFixed(1)}%, π* = ${piStar.toFixed(1)}%, a = ${a.toFixed(1)} und einer Outputlücke von <strong>${outputGap.toFixed(2)}</strong>
     empfiehlt die Regel bei aktueller Inflation von <strong>${piCurrent.toFixed(1)}%</strong> einen Leitzins von <strong>${currentI.toFixed(1)}%</strong>.
   `);
 }

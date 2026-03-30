@@ -17,7 +17,7 @@
                'Inconsolata', monospace;
 
   /* Characteristic academic accent colours — kept prominently */
-  --accent:   #c084fc;   /* neon-lime — maths, active nav, key values */
+  --accent:   #d4ff5c;   /* neon-lime — maths, active nav, key values */
   --accent2:  #5cf0ff;   /* cyan      — links, interactive */
   --accent3:  #ff6b6b;   /* coral-red — errors, warnings */
   --accent-fg: #000000;  /* text on accent-coloured backgrounds */
@@ -75,7 +75,7 @@ body.light-mode {
   --sys-red:   #ff3b30;
   --sys-orange:#ff9500;
 
-  --accent:    #7c3aed;   /* deep olive-green: AA contrast on white */
+  --accent:    #3a6b00;   /* deep olive-green: AA contrast on white */
   --accent2:   #0066a0;   /* deep cyan-blue: AA contrast on white */
   --accent3:   #c0392b;
   --accent-fg: #ffffff;   /* white text on dark-green button */
@@ -351,7 +351,7 @@ body {
 .nav-item.active {
   color: var(--accent);
   border-left-color: var(--accent);
-  background: rgba(192,132,252,0.07);
+  background: rgba(212,255,92,0.07);
   font-weight: 500;
 }
 .nav-item.hidden { display: none; }
@@ -374,7 +374,7 @@ body {
   border-radius: 4px;
   transition: background 0.2s;
 }
-.nav-item .mastery.done    { background: rgba(192,132,252,0.18); color: var(--accent); }
+.nav-item .mastery.done    { background: rgba(212,255,92,0.18); color: var(--accent); }
 .nav-item .mastery.partial { background: rgba(92,240,255,0.14); color: var(--accent2); }
 .nav-due-dot {
   width: 6px; height: 6px;
@@ -603,7 +603,7 @@ body {
   font-size: 15px;
   color: var(--muted);
   margin-top: 12px;
-  background: rgba(192,132,252,0.04);
+  background: rgba(212,255,92,0.04);
   line-height: 1.6;
 }
 
@@ -674,7 +674,7 @@ body {
 .math-block mjx-container * { color: var(--accent) !important; }
 
 .math-inline {
-  background: rgba(192,132,252,0.1);
+  background: rgba(212,255,92,0.1);
   color: var(--accent);
   padding: 1px 5px;
   border-radius: 4px;
@@ -873,8 +873,8 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 .result-badge {
   display: inline-block;
-  background: rgba(192,132,252,0.12);
-  border: 1px solid rgba(192,132,252,0.35);
+  background: rgba(212,255,92,0.12);
+  border: 1px solid rgba(212,255,92,0.35);
   border-radius: var(--r-sm);
   padding: 4px 10px;
   font-size: 12px;
@@ -1041,9 +1041,9 @@ button:active:not(:disabled) { transform: scale(0.98); }
    ============================================================ */
 .intuition-block {
   background: linear-gradient(135deg,
-    rgba(192,132,252,0.04) 0%,
+    rgba(212,255,92,0.04) 0%,
     rgba(92,240,255,0.04) 100%);
-  border: 1px solid rgba(192,132,252,0.18);
+  border: 1px solid rgba(212,255,92,0.18);
   border-radius: var(--r-md);
   padding: 20px 24px;
   margin-bottom: 16px;
@@ -1068,8 +1068,8 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 /* Intuition bridge block (Math → Verständnis) */
 .intuition-bridge {
-  background: rgba(192,132,252,0.03);
-  border-color: rgba(192,132,252,0.15);
+  background: rgba(212,255,92,0.03);
+  border-color: rgba(212,255,92,0.15);
   margin-top: 16px;
 }
 .intuition-bridge-title {
@@ -1208,7 +1208,7 @@ canvas {
    ============================================================ */
 .step-solver {
   background: var(--card);
-  border: 1px solid rgba(192,132,252,0.18);
+  border: 1px solid rgba(212,255,92,0.18);
   border-radius: var(--r-lg);
   padding: 22px;
   margin-bottom: 22px;
@@ -1302,8 +1302,8 @@ canvas {
 .sStep-btn:disabled { opacity: 0.38; cursor: default; }
 
 .sStep-hint-btn {
-  background: rgba(192,132,252,0.1);
-  border: 1px solid rgba(192,132,252,0.28);
+  background: rgba(212,255,92,0.1);
+  border: 1px solid rgba(212,255,92,0.28);
   color: var(--accent);
   border-radius: var(--r-sm);
   padding: 7px 12px;
@@ -1312,11 +1312,11 @@ canvas {
   white-space: nowrap;
   transition: background 0.15s;
 }
-.sStep-hint-btn:hover { background: rgba(192,132,252,0.16); }
+.sStep-hint-btn:hover { background: rgba(212,255,92,0.16); }
 
 .sStep-hint {
-  background: rgba(192,132,252,0.07);
-  border: 1px solid rgba(192,132,252,0.2);
+  background: rgba(212,255,92,0.07);
+  border: 1px solid rgba(212,255,92,0.2);
   border-radius: var(--r-sm);
   padding: 10px 14px;
   font-size: 13px;
@@ -1370,7 +1370,7 @@ canvas {
 .mastery-item:hover { background: var(--surface2); }
 .mastery-item.done {
   color: var(--accent);
-  background: rgba(192,132,252,0.07);
+  background: rgba(212,255,92,0.07);
   opacity: 0.9;
 }
 .mastery-item input {
@@ -1430,11 +1430,11 @@ canvas {
 }
 .cl-tag:hover { background: rgba(92,240,255,0.18); transform: translateY(-1px); }
 .cl-tag.secondary {
-  background: rgba(192,132,252,0.08);
-  border-color: rgba(192,132,252,0.24);
+  background: rgba(212,255,92,0.08);
+  border-color: rgba(212,255,92,0.24);
   color: var(--accent);
 }
-.cl-tag.secondary:hover { background: rgba(192,132,252,0.15); }
+.cl-tag.secondary:hover { background: rgba(212,255,92,0.15); }
 
 /* ============================================================
    HOME SCREEN
@@ -1499,8 +1499,8 @@ canvas {
 
 /* Continue card */
 .home-continue-card {
-  background: linear-gradient(135deg, rgba(192,132,252,0.07), rgba(92,240,255,0.07));
-  border: 1px solid rgba(192,132,252,0.25);
+  background: linear-gradient(135deg, rgba(212,255,92,0.07), rgba(92,240,255,0.07));
+  border: 1px solid rgba(212,255,92,0.25);
   border-radius: var(--r-md);
   padding: 14px 20px;
   cursor: pointer;
@@ -1777,8 +1777,8 @@ canvas {
   transition: all 0.2s;
 }
 .check-result.correct {
-  background: rgba(192,132,252,0.1);
-  border: 1px solid rgba(192,132,252,0.35);
+  background: rgba(212,255,92,0.1);
+  border: 1px solid rgba(212,255,92,0.35);
   color: var(--accent);
 }
 .check-result.wrong {
@@ -1860,7 +1860,7 @@ canvas {
   box-shadow: var(--shadow-sm);
 }
 .fe-question.answered { border-color: rgba(92,240,255,0.3); }
-.fe-question.correct-review { border-color: rgba(192,132,252,0.4); }
+.fe-question.correct-review { border-color: rgba(212,255,92,0.4); }
 .fe-question.wrong-review { border-color: rgba(255,69,58,0.35); }
 
 .fe-q-head {
@@ -1885,7 +1885,7 @@ canvas {
 .fe-mc-label:hover { border-color: var(--accent2); }
 .fe-mc-label input { accent-color: var(--accent2); cursor: pointer; }
 .fe-mc-label.selected      { border-color: var(--accent2); background: rgba(92,240,255,0.06); }
-.fe-mc-label.review-correct{ border-color: var(--accent);  background: rgba(192,132,252,0.08); }
+.fe-mc-label.review-correct{ border-color: var(--accent);  background: rgba(212,255,92,0.08); }
 .fe-mc-label.review-wrong  { border-color: var(--accent3); background: rgba(255,69,58,0.08); }
 
 .fe-input {
@@ -1902,8 +1902,8 @@ canvas {
 }
 .fe-feedback.show { display: block; animation: fadeIn 0.2s ease; }
 .fe-feedback.fb-correct {
-  background: rgba(192,132,252,0.08);
-  border: 1px solid rgba(192,132,252,0.28); color: var(--accent);
+  background: rgba(212,255,92,0.08);
+  border: 1px solid rgba(212,255,92,0.28); color: var(--accent);
 }
 .fe-feedback.fb-wrong {
   background: rgba(255,69,58,0.07);

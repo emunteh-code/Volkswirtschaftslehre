@@ -1,0 +1,33 @@
+Übung Makroökonomik II
+Aufgabenblatt 8
+
+AUFGABE 1 Produktionsfunktion
+a) Erläutern Sie anhand einer Cobb-Douglas-Produktionsfunktion den Begriff “fallende Grenzerträge” grafisch, verbal und formal.
+b) Erklären Sie den Unterschied zwischen den Begriffen Grenzerträge und Skalenerträge.
+Gehen Sie nun von einer Produktionsfunktion der folgenden Form aus:
+Y = K 0.5 N 0.5 .
+c) Bestimmen Sie die Gesamtproduktion für eine Ökonomie mit Kapital K=21 und Arbeit N=7.
+Welche Werte nehmen die Kapitalintensität, die Produktion pro Kopf sowie die Produktion pro
+Einheit eingesetzten Kapitals an?
+d) Bestimmen Sie die Größen aus Teilaufgabe c), wenn sich die Ausstattung der Ökonomie mit
+Kapital und Arbeit verdreifacht. Durch welche Art Skalenerträge ist die Funktion gekennzeichnet?
+e) Bestimmen Sie die Produktion, wenn der Einsatz von nur einem Faktor bei Konstanz des anderen Faktors um 10 Einheiten vermehrt wird. Bei welchem Faktor ist die zusätzliche Produktion
+jeweils größer? Erläutern Sie Ihr Ergebnis.
+f) Formulieren Sie die Produktionsfunktion so um, dass sie den Zusammenhang zwischen ProKopf-Output und Pro-Kopf-Kapitaleinsatz beschreibt. Ermitteln Sie den Pro-Kopf-Output für
+das Zahlenbeispiel aus c).
+
+1
+
+AUFGABE 2 BIP, Glück und das Easterlin-Paradox
+Bitte lesen Sie den Beitrag “Wellbeing measurements, Easterlin’s paradox and new growth models:
+A perspective through gross national happiness” von Sriram Balasubramanian, welcher 2019 auf
+VOXEU veröffentlicht wurde. Sie finden diesen Beitrag unter folgendem Link: https://voxeu.org/
+article/wellbeing-measurements-easterlin-s-paradox-and-new-growth-models.
+a) Diskutieren Sie, ob man für die in Tabelle 1 aufgeführten Länder Evidenz für das EasterlinParadox findet.
+b) Wie unterscheidet sich Bhutans Bruttonationalglück vom Index der Lebenszufriedenheit des
+World Happiness Reports? Recherchieren Sie.
+c) Diskutieren Sie ob das Bruttonationalglück als Entwicklungsindikator weltweit eingeführt werden soll? Welche Argumente führt der Autor auf?
+
+2
+
+

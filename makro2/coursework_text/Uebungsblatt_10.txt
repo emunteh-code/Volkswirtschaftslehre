@@ -1,0 +1,24 @@
+Übung Makroökonomik II Aufgabenblatt 10
+
+AUFGABE 1 Solow Modell mit technischem Fortschritt
+Gehen Sie von einer Produktionsfunktion der Form
+Y = K α (AN )1−α
+mit α = 0,4 aus. Die Sparquote der Volkswirtschaft beträgt s = 11%. Die Bevölkerung wächst mit
+einer Rate von gN = 3%, die Arbeitseffizienz mit einer Rate von gA = 1%. Die Abschreibungsrate
+beträgt δ = 7%.
+a) Berechnen Sie den Kapitalstock pro Arbeitseffizienzeinheit im Steady State.
+b) Berechnen Sie die Produktion pro Arbeitseffizienzeinheit im Steady State.
+c) Ermitteln Sie den Konsum pro Arbeitseffizienzeinheit und die Wachstumsrate des Konsums
+pro Kopf im Steady State.
+d) Ermitteln Sie die Wachstumsrate der Investition im Steady State.
+e) Erläutern Sie kurz (und unter Angabe des neuen Werts für die Produktion pro Arbeitseffizienzeinheit), wie sich folgende Änderungen auf die Produktion pro Arbeitseffizienzeinheit und
+das Wachstum der Produktion im Steady State auswirken:
+1. Ein Anstieg der Sparquote auf s = 30%.
+2. Ein Rückgang des Bevölkerungswachstums auf gN = 2%.
+3. Ein Anstieg des Wachstums der Arbeitsproduktivität auf gA = 2%.
+4. Ein Rückgang der Abschreibungsrate auf δ = 5%.
+f) Ermitteln Sie die Sparquote der Goldenen Regel.
+
+1
+
+

@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+coverage/
+dist/
+.qa/*.png
+.qa/.png
+.claude/
+source-materials/

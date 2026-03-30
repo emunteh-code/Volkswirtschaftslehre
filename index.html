@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Dein VWL Lernportal fuer Georg-August-Universitaet Goettingen: waehle ein Modul, setze am letzten Lernstand an und lerne mit Theorie, Aufgaben, Visuals und R-Praxis."
+  >
+  <meta name="theme-color" content="#111317">
+  <title>VWL Lernportal | Georg-August-Universitaet Goettingen</title>
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./assets/css/portal.css">
+</head>
+<body data-page="landing">
+  <header class="landing-header">
+    <a class="landing-brand" href="./index.html" aria-label="VWL Lernportal Startseite">
+      <span class="landing-brand-mark" aria-hidden="true">VWL</span>
+      <span class="landing-brand-copy">
+        <strong>VWL Lernportal</strong>
+        <small>B.Sc. Volkswirtschaftslehre · Georg-August-Universitaet Goettingen</small>
+      </span>
+    </a>
+    <p class="landing-header-note">Waehle ein Modul, bewege dich durch die Vorschau und oeffne den Kurs direkt aus dem Hero.</p>
+  </header>
+
+  <main class="landing-main">
+    <section class="landing-stage" aria-labelledby="stageTitle">
+      <div class="landing-stage-backdrop" aria-hidden="true">
+        <div class="landing-stage-layer is-active" id="stageBackdropA"></div>
+        <div class="landing-stage-layer" id="stageBackdropB"></div>
+      </div>
+
+      <div class="landing-stage-inner">
+        <div class="landing-stage-copy">
+          <p class="landing-stage-overline" id="stageOverline">Weiterlernen</p>
+          <h1 class="landing-stage-title" id="stageTitle">VWL Lernportal</h1>
+          <p class="landing-stage-description" id="stageDescription">
+            Waehle ein Modul und steige direkt in Theorie, Aufgaben, Visuals oder R-Praxis ein.
+          </p>
+
+          <div class="landing-degree-context" aria-label="Studiengangskontext">
+            <p class="landing-degree-kicker">Studiengang</p>
+            <p class="landing-degree-copy">
+              <strong>Volkswirtschaftslehre (B.Sc.)</strong> verbindet Datenanalyse, gesamtwirtschaftliche Zusammenhaenge
+              und wirtschaftspolitische Entscheidungen. Die Module auf dieser Plattform gehoeren in denselben
+              sechssemestrigen Studiengang mit internationaler Ausrichtung und deutsch- wie englischsprachigen
+              Lehranteilen.
+            </p>
+            <div class="landing-degree-meta">
+              <span>Bachelor of Science</span>
+              <span>6 Semester</span>
+              <span>Deutsch und Englisch</span>
+            </div>
+          </div>
+
+          <div class="landing-stage-academic">
+            <span>B.Sc. Volkswirtschaftslehre</span>
+            <span>Georg-August-Universitaet Goettingen</span>
+          </div>
+
+          <div class="landing-stage-module-line" id="stageModuleLine"></div>
+
+          <div class="landing-stage-progress" id="stageProgress" hidden>
+            <div class="landing-stage-progress-head">
+              <span id="stageProgressText">Lernstand</span>
+              <span id="stageProgressPercent">0%</span>
+            </div>
+            <div class="landing-stage-progress-track" aria-hidden="true">
+              <span class="landing-stage-progress-fill" id="stageProgressFill"></span>
+            </div>
+          </div>
+
+          <p class="landing-stage-footnote" id="stageFootnote">Alle Kurse oeffnen als eigenstaendige Lernraeume mit demselben klaren Arbeitsfluss.</p>
+
+          <div class="landing-stage-actions">
+            <a class="landing-stage-primary" id="stagePrimaryAction" href="./mikro1/index.html">Modul oeffnen</a>
+          </div>
+        </div>
+
+        <div class="landing-stage-art-shell" aria-hidden="true">
+          <div class="landing-stage-art-frame">
+            <div class="landing-stage-art is-active" id="stageArtA"></div>
+            <div class="landing-stage-art" id="stageArtB"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-browser" aria-labelledby="moduleBrowserTitle">
+      <div class="landing-browser-head">
+        <div>
+          <p class="landing-section-kicker">Kurse</p>
+          <h2 id="moduleBrowserTitle">Alle Module</h2>
+          <p class="landing-browser-note">
+            Hover, Fokus oder Auswahl aktualisieren den Hero sofort. So siehst du Einstieg, Lernstand und Schwerpunkt jedes Kurses auf einen Blick.
+          </p>
+        </div>
+        <p class="landing-browser-count" id="moduleBrowserCount">12 Kurse</p>
+      </div>
+
+      <div class="landing-module-shelf" id="moduleShelf" role="listbox" aria-label="Kursmodule"></div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    <p>Alle Kurse orientieren sich an den bereitgestellten Lehrmaterialien und sind fuer echte Studienarbeit, Wiederholung und Klausurvorbereitung gedacht.</p>
+    <p class="landing-footer-meta"><span id="footerYear"></span> · Theorie, Aufgaben, Visuals und R-Praxis im selben Lernsystem.</p>
+  </footer>
+
+  <script type="module" src="./assets/js/common.js"></script>
+</body>
+</html>

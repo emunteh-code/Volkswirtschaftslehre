@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jahresabschluss im VWL Lernportal.">
+  <meta name="theme-color" content="#f6f3ff">
+  <title>Jahresabschluss | VWL Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/common.css">
+  <link rel="stylesheet" href="../assets/css/portal.css">
+  <link rel="stylesheet" href="../assets/css/generated-portal.css">
+</head>
+<body data-page="module">
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">VWL</span>
+      <span class="brand-copy">
+        <strong>Lernportal</strong>
+        <small>Kursportal</small>
+      </span>
+    </a>
+    <div class="header-actions">
+      <span class="mono-chip">Live</span>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Farbschema wechseln">Dunkel</button>
+    </div>
+  </header>
+
+  <main class="site-shell module-shell">
+    <section class="hero-panel module-hero" id="moduleHero"></section>
+    <section class="fact-grid" id="moduleQuickFacts" aria-label="Modulfakten"></section>
+    <div class="content-grid">
+      <section class="content-panel" id="learningModes"></section>
+      <section class="content-panel" id="sourceMaterials"></section>
+    </div>
+    <section class="content-panel" id="portalBlueprint"></section>
+    <section class="concept-map-shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Visualisierung</p>
+          <h2>Konzeptkarte des Lernflusses</h2>
+        </div>
+        <p class="section-note">Die Visuals wechseln je nach Fach zwischen Graph, Schema, Fallkarte und Coding-Zyklus.</p>
+      </div>
+      <div id="conceptMapMount"></div>
+    </section>
+    <section class="lab-shell" id="rLabSection" hidden>
+      <div id="rLabMount" style="display: contents;"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Dieses Modul verbindet Theorie, Aufgaben, Visuals und Wiederholung in derselben klaren Lernlogik wie die anderen Kurse.</p>
+    <p class="footer-meta"><span id="footerYear"></span> · SF Mono fuer Code, Achsen, Legenden und technische UI.</p>
+  </footer>
+
+  <script type="module" src="../assets/js/generated-portal/main.js"></script>
+</body>
+</html>

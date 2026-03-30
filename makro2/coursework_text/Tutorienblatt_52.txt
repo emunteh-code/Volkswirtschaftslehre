@@ -1,0 +1,54 @@
+Gruppenname:
+
+Tutorium:
+
+Tutorium Makroökonomik II - Aufgabenblatt 5
+AUFGABE 1
+
+[15 Punkte]
+
+Bitte beantworten Sie die folgenden Fragen mit wenigen Worten/Sätzen. Verwenden Sie bitte ausschließlich den vorhandenen Raum.
+1. Nehmen Sie an, dass die Zentralbank einer Taylor-Regel der folgenden Form folgt: it = i∗ +
+α(πt − π ∗ ), wobei gilt α > 0. Vervollständigen Sie folgende Aussage: “Wenn die Inflation ihrem
+Zielwert entspricht und die Arbeitslosigkeit über ihrem natürlichen Niveau ist, wird die Zentralbank den Zinssatz ... (senken, anheben, unverändert lassen).” Begründen Sie kurz.
+
+2. Nehmen Sie an, dass die Zentralbank einer Taylor-Regel der folgenden Form folgt: it = i∗ +
+α(πt − π ∗ ) − β(ut − un ), wobei gilt α > 0 und β > 0. Ist folgende Aussage richtig, falsch oder
+unklar? “Wenn die Inflation über ihrem Zielwert ist und die Arbeitslosigkeit über ihrem natürlichen Niveau liegt, wird die Zentralbank den Zinssatz anheben.” Begründen Sie kurz.
+
+3. Was ist das Taylor-Prinzip und wie hängt es mit dem Realzins zusammen?
+
+4. Nennen Sie ein makroökonomisches Argument, warum die “Geldillusion” in Verbindung mit
+einer niedrigen Inflation gesamtwirtschaftlich von Vorteil sein kann.
+
+5. Ist folgende Aussage richtig, falsch oder unklar? “Werden die Nominallöhne von Arbeitnehmern
+mit der Inflationsrate angepasst, dann profitieren diese von der schleichenden Steuerprogression
+(‘kalte Progression’).” Begründen Sie kurz.
+
+AUFGABE 2
+
+[18 Punkte]
+
+Gehen Sie von der folgenden Produktionsfunktion aus: Y = (KN )α , wobei α = 0, 6 gilt.
+a) Nehmen Sie an, die Zahl der Erwerbstätigen sinkt um 5%. Wie verändert sich die Höhe der
+volkswirtschaftlichen Produktion (in %)?
+[3 Punkte]
+b) Warum fällt der Rückgang der Produktion geringer aus als der Rückgang des Faktors Arbeit
+um 5%? Begründen Sie.
+[3 Punkte]
+
+Gehen Sie nun davon aus, dass die Volkswirtschaft über 16 Einheiten an Arbeit und 4 Einheiten an
+Kapital verfügt.
+c) Berechnen Sie die Produktion. Wie verändert sich diese, wenn der Einsatz von beiden Faktoren
+verdoppelt wird?
+[3 Punkte]
+
+d) Welche Art der Skalenerträge weist die Produktionsfunktion auf? Begründen Sie.
+
+[3 Punkte]
+
+e) Erklären Sie anhand von drei Gedankenexperimenten beispielhaft, wann konstante, steigende,
+und sinkenden Skalenerträge vorliegen könnten.
+[6 Punkte]
+
+

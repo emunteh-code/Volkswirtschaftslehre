@@ -1,0 +1,80 @@
+Übung Makroökonomik II
+Aufgabenblatt 4: Unterschiedliche Wechselkursregime
+
+AUFGABE 1 Currency Board
+Argentinien hatte von 1991 bis Anfang 2002 ein Currency Board, in dem 1 Peso genau 1 US-Dollar
+wert war. Die folgende Tabelle enthält die jährliche Veränderung des Konsumentenpreisindex in
+Argentinien und den USA von 1989 bis 2002 (Quelle: IWF ).
+
+Argentinien
+USA
+
+1989
+3.079,8
+4,8
+
+1990
+2.314,0
+5,4
+
+1991
+171,1
+4,2
+
+1992
+24,9
+3,0
+
+1993
+10,6
+3,0
+
+1994
+4,2
+2,6
+
+1995
+3,4
+2,8
+
+1996
+0,2
+2,9
+
+1997
+0,5
+2,3
+
+1998
+0,9
+1,6
+
+1999
+-1,2
+2,2
+
+2000
+-0,9
+3,4
+
+2001
+-1,1
+2,8
+
+2002
+25,9
+1,6
+
+a) Berechnen Sie, wie sich der reale Wechselkurs Argentiniens gegenüber den USA von 1992 bis
+Anfang 1996 entwickelt hat.
+b) Beschreiben Sie die Konsequenzen der in a) aufgezeigten Entwicklung des realen Wechselkurses
+für die Volkswirtschaft Argentinien?
+c) Wieso hat Argentinien trotzdem am Currency Board festgehalten? Recherchieren Sie.
+d) Berechnen Sie nun, wie sich der reale Wechselkurs Argentiniens gegenüber den USA von 1996
+bis Anfang 2002 entwickelt hat.
+e) Diskutieren Sie mögliche Ursachen, warum es trotzdem zu einer Wirtschaftskrise Argentiniens
+kam. Recherchieren Sie.
+
+1
+
+

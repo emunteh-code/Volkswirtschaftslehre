@@ -1,0 +1,55 @@
+Gruppenname:
+
+Tutorium:
+
+Tutorium Makroökonomik II - Aufgabenblatt 6
+AUFGABE 1
+
+[15 Punkte]
+
+Bitte beantworten Sie die folgenden 5 Fragen mit wenigen Worten/Sätzen. Pro Frage können Sie 3
+Punkte erhalten. Verwenden Sie bitte ausschließlich den vorhandenen Raum.
+1. Betrachten Sie eine Volkswirtschaft, die sich anfangs im Steady State befindet. Wie wirkt sich
+nun ein Tornado, der Häuser und Fabriken zerstört, aber keine Menschenleben kostet, auf die
+Wachstumsrate des BIP pro Kopf (a) im Steady State und (b) auf dem Weg zum Steady State
+aus?
+
+2. Betrachten Sie eine Volkswirtschaft, die sich anfangs im Steady State befindet. Das Ausland
+wirbt nun Arbeitskräfte aus dem Inland an, wodurch die Bevölkerung im Inland einmalig sinkt.
+Wie wirkt sich dieser kurzfristige Schock im Inland auf die Wachstumsrate der Produktion pro
+Kopf (a) im Steady State und (b) auf dem Weg zum Steady State aus?
+
+3. Gehen Sie vom Solow-Modell ohne technologischen Fortschritt und ohne Bevölkerungswachstum aus. Nun kommt es zu einem einmaligen Anstieg der Sparquote. Wie wirkt sich dieser im
+Zeitverlauf auf die Produktion pro Kopf aus? Erklären sie kurz.
+
+4. Gehen Sie vom Solow-Modell ohne technologischen Fortschritt und ohne Bevölkerungswachstum aus. Ist die folgende Aussage richtig, falsch oder unklar? “Eine dauerhafte Erhöhung der
+Sparquote führt langfristig zu einem höheren Konsum pro Kopf.” Begründen Sie kurz.
+
+5. Gehen Sie vom Solow-Modell mit Bevölkerungswachstum und technologischem Fortschritt aus.
+Vervollständigen Sie folgende Aussage: “Wenn die Rate des technischen Fortschrittes bei 0 liegt,
+wächst im Steady State das Produktionsniveau schneller als/langsamer als/mit der gleichen Rate wie die Beschäftigung.” Begründen Sie kurz.
+
+AUFGABE 2
+
+[19 Punkte]
+
+Die Produktionsfunktion einer Volkswirtschaft D sei gegeben durch
+Y = K α (AN )1−α
+Weiterhin gilt: s bezeichnet die Sparquote der Volkswirtschaft und δ die Abschreibungsrate. Gehen
+D = 0) und einer Situation ohne technologischen FortSie von einer stagnierenden Bevölkerung (gN
+D = 0) aus.
+schritt (gA
+a) Leiten Sie den Kapitalstock, die Produktion, den Konsum und die Ersparnis jeweils je Arbeitseffizienzeinheit im Wachstumsgleichgewicht her.
+[8 Punkte]
+
+b) Treffen Sie die Annahme, dass auch eine Volkswirtschaft F existiert, die dieselbe Produktionsfunktion aufweist wie Volkswirtschaft D. Volkswirtschaft F weist ebenfalls keinen technologiF = 0), aber ein positives Bevölkerungswachstum (g F > 0) auf. Zeigen Sie
+schen Fortschritt (gA
+N
+grafisch die Wachstumsgleichgewichte der beiden Volkswirtschaften in einem geeigneten Schaubild. Beschriften Sie alle Achsen und Kurven und markieren Sie die Gleichgewichte eindeutig.
+[6 Punkte]
+
+c) Erklären Sie kurz verbal, ob und falls ja, durch welche Eigenschaften sich die Wachstumsgleichgewichte der Volkswirtschaften D und F unterscheiden. In welcher der beiden Volkswirtschaften
+wächst die Produktion pro Kopf schneller?
+[5 Punkte]
+
+

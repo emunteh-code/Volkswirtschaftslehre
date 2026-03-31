@@ -348,11 +348,12 @@ export const FULL_EXAMS = {
         ]
       },
       {
+      {
         label: 'Problem 2',
         points: 25,
         type: 'text-block',
         title: 'Block B: Solow-Grenzwerte',
-        preamble: String.raw`--- Transition: Kontextwechsel zum Solow-Modell. ---`,
+        preamble: String.raw`Ab hier betrachten wir die Volkswirtschaft unabhängig vom vorherigen Wechselkursregime. Produktionsfunktion $y = k^{0{,}5}$.`,
         questions: [
           {
             id: 'p2a',

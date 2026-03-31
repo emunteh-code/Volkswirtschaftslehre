@@ -163,7 +163,7 @@ probe_2024: {
         points: 30,
         type: 'text-block',
         title: 'Block A: Slutsky-Zerlegung & Graphen-Logik',
-        preamble: String.raw`Ein Haushalt hat $u(x_1, x_2) = x_1 x_2$. Der Preis $p_1$ sinkt von $4$ auf $1$ ($p_2 = 1, m = 40$). [Empfohlene Zeit: 20 Minuten].`,
+        preamble: String.raw`Ein Haushalt hat $u(x_1, x_2) = x_1 x_2$. Der Preis $p_1$ sinkt von $4$ auf $1$. Es gilt $p_2 = 1, m = 40$. Das aktuelle Produktionsniveau des Haushalts beträgt $y=50$ Einheiten. [Empfohlene Zeit: 20 Minuten].`,
         questions: [
           {
             id: 'm1a_1',
@@ -195,7 +195,7 @@ probe_2024: {
             type: 'text',
             text: '[1.4] Berechnen Sie die gesamte Nachfrageänderung $\Delta x_1$. (Hinweis: $x_1^{neu} = m/(2p_1^{neu})$).',
             correct: ['15', 'delta x1 = 15', 'steigt um 15', '20 - 5', '15.0'],
-            feedback: String.raw`$x_1^0 = 5$, $x_1^{final} = 40/(2 \cdot 1) = 20$. $\Delta x_1 = 20 - 5 = 15$. (Hinweis: Rechenweg wird anteilig gewertet).`,
+            feedback: String.raw`$x_1^0 = 5$, $x_1^{final} = 20$. $\Delta x_1 = 15$. (Bewertungslogik: Ein Score-Cap von 60% greift nur, wenn das Ergebnis die fundamentale ökonomische Identität (z.B. SE-Richtung) verletzt).`,
           }
         ]
       },
@@ -235,24 +235,32 @@ probe_2024: {
         label: 'Problem 3',
         points: 20,
         type: 'text-block',
-        title: 'Block C: Optimierung unter Unsicherheit',
+        title: 'Block C: Optimierung & Randbedingungen',
         preamble: String.raw`Ein Haushalt hat die Nutzenfunktion $u(x_1, x_2) = (x_1 + 2)x_2$. Das Einkommen beträgt $m = 10$, die Preise sind $p_1 = 10$ und $p_2 = 1$.`,
         questions: [
           {
             id: 'm3a',
-            points: 10,
+            points: 5,
             type: 'text',
-            text: '[3.1] Berechnen Sie die GRS und das Preisverhältnis. Würde eine rein mathematische Tangentialbedingung (GRS = p1/p2) eine zulässige Lösung ($x \geq 0$) liefern?',
-            correct: ['nein', 'x1 < 0', 'x1=-0.5', 'keine zulässige lösung'],
-            feedback: String.raw`GRS $= x_2/(x_1+2)$. Tangential: $x_2/(x_1+2) = 10 \implies x_2 = 10x_1 + 20$. In Budget: $10x_1 + (10x_1+20) = 10 \implies 20x_1 = -10 \implies x_1 = -0{,}5$. Da $x_1 < 0$ nicht möglich ist, liefert die Tangentialbedingung keine zulässige Lösung.`,
+            text: '[3.1] Berechnen Sie das x-Bündel rein formal über die Tangentialbedingung ($\text{GRS} = p_1/p_2$). Geben Sie den berechneten Wert für $x_1$ an.',
+            correct: ['-0.5', '-0,5', 'x1=-0.5', 'minus 0.5'],
+            feedback: String.raw`GRS $= x_2/(x_1+2)$. Tangential: $x_2/(x_1+2) = 10 \implies x_2 = 10x_1 + 20$. In Budget: $10x_1 + (10x_1+20) = 10 \implies 20x_1 = -10 \implies x_1 = -0{,}5$.`,
           },
           {
             id: 'm3b',
+            points: 5,
+            type: 'text',
+            text: '[3.2] Evaluieren Sie Ihr Ergebnis aus 3.1: Ist dieses Bündel ökonomisch konsumierbar? Begründen Sie kurz mit Bezug auf die KMM.',
+            correct: ['nein', 'x1 < 0', 'nichtnegativität', 'kmm verletzt', 'nicht konsumierbar'],
+            feedback: String.raw`Nein. $x_1 = -0{,}5$ verletzt die Nichtnegativitätsbedingung der KMM ($x_i \geq 0$). Das Bündel ist nicht physisch realisierbar.`,
+          },
+          {
+            id: 'm3c',
             points: 10,
             type: 'text',
-            text: '[3.2] Bestimmen Sie das tatsächliche Haushaltsoptimum. (Randlösung oder Innere Lösung?)',
-            correct: ['randlösung x1=0', 'x1=0 x2=10', '0, 10', 'corner solution', 'x1=0'],
-            feedback: String.raw`Da die innere Lösung negativ wäre, liegt ein Eckoptimum vor. Der Haushalt gibt sein gesamtes Budget für Gut 2 aus: $x^* = (0, 10)$.`,
+            text: '[3.3] Bestimmen Sie das tatsächliche Haushaltsoptimum unter Berücksichtigung der Randbedingungen.',
+            correct: ['randlösung x1=0', 'x1=0 x2=10', '0, 10', 'corner solution', 'x1=0', '(0,10)'],
+            feedback: String.raw`Da die innere Lösung unzulässig ist, liegt ein Eckoptimum vor. Vergleich der Ecken: $x=(0,10) \implies u=20$; $x=(1,0) \implies u=0$. Das Optimum ist $x^* = (0, 10)$.`,
           }
         ]
       },

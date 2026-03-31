@@ -146,18 +146,25 @@ const BASE_STEP_PROBLEMS = {
       context: 'Flexible Wechselkurse, perfekte Kapitalmobilität (UIP). G steigt.',
       steps: [
         { 
-          q: 'Welche Auswirkung hat der resultierende Zinsanstieg auf den Wechselkurs E (Mengennotierung)?', 
-          answer: ['Aufwertung', 'E steigt'], 
+          q: 'Schritt 1 (Interpretation): Welches Instrument der ZB ist in diesem Regime autonom? (Zins oder Wechselkurs?)', 
+          answer: ['Zins', 'Zinsautonomie', 'i'], 
+          hint: 'Bei flexiblen Kursen kann die ZB den Zins frei setzen.', 
+          explain: 'Flexible Wechselkurse erlauben eine autonome Geldpolitik. Die ZB steuert i, der Markt bestimmt E.', 
+          traps: [{ pattern: 'Wechselkurs', msg: 'Falsch. Der Wechselkurs ist bei flexiblen Regimen das Ergebnis der Marktanpassung.' }] 
+        },
+        { 
+          q: 'Schritt 2 (Decision): Welche Auswirkung hat der resultierende Zinsanstieg auf den Wechselkurs E (Mengennotierung)? (Symbol erlaubt)', 
+          answer: ['Aufwertung', 'E ↑', '↑', 'steigt'], 
           hint: 'Höhere Zinsen locken Kapital an.', 
           explain: 'Das höhere i führt zu Kapitalzuflüssen und einer sofortigen Aufwertung der heimischen Währung (E steigt).', 
           traps: [{ pattern: 'Abwertung', msg: 'Falsch. Höhere Zinsen machen die Währung attraktiver.' }] 
         },
         { 
-          q: 'Was passiert im neuen Gleichgewicht mit den Nettoexporten NX?', 
-          answer: ['sinken', 'fällt', 'Verschlechterung'], 
+          q: 'Schritt 3 (Execution): Was passiert im neuen Gleichgewicht mit den Nettoexporten NX?', 
+          answer: ['sinken', 'fällt', 'Verschlechterung', 'NX ↓', '↓'], 
           hint: 'Kombiniere den Einkommenseffekt (Y steigt) und den Wechselkurseffekt (E steigt).', 
-          explain: 'Die Aufwertung (E steigt) macht Exporte teurer und Importe billiger. Zudem erhöht das gestiegene Y die Importe zusätzlich. NX sinkt massiv.', 
-          traps: [{ pattern: 'steigen', msg: 'Die Fiskalpolitik verdrängt in der offenen VW die Nettoexporte (Crowding-out).' }] 
+          explain: 'Die Aufwertung (E steigt) macht Exporte teurer und Importe billiger. Zudem erhöht das gestiegene Y die Importe zusätzlich. NX sinkt massiv (Crowding-out).', 
+          traps: [{ pattern: 'steigen', msg: 'Die Fiskalpolitik verdrängt in der offenen VW die Nettoexporte.' }] 
         }
       ]
     }
@@ -268,22 +275,22 @@ const BASE_STEP_PROBLEMS = {
   ],
   solow_basis: [
     {
-      title: 'Solow: Wachstum vs. Niveau (High Difficulty)',
+      title: 'Solow: Wachstum vs. Niveau',
       context: 'Im Steady State steigt die Sparquote s dauerhaft an.',
       steps: [
         { 
-          q: 'Wie verändert sich die Wachstumsrate der Produktion pro Kopf (y) unmittelbar nach der Erhöhung?', 
-          answer: ['steigt', 'positiv'], 
-          hint: 'Ist die Investition nun größer oder kleiner als die Abschreibung?', 
-          explain: 'Da s*f(k) nun größer ist als delta*k, wird neues Kapital akkumuliert. Während dieses Übergangs wächst y.', 
-          traps: [{ pattern: 'konstant', msg: 'Nur im Steady State ist die Wachstumsrate konstant (hier 0).' }] 
+          q: 'Schritt 1 (Interpretation): Ändert dies die langfristige Wachstumsrate von y? (ja/nein)', 
+          answer: ['nein', 'no', '0', 'null'], 
+          hint: 'Denke an den Steady State ohne technischen Fortschritt.', 
+          explain: 'Langfristig kehrt das System in einen neuen Steady State zurück, in dem y konstant ist (Wachstumsrate = 0).', 
+          traps: [{ pattern: 'ja', msg: 'Nur das Niveau ändert sich langfristig, nicht die Wachstumsrate.' }] 
         },
         { 
-          q: 'Was ist die langfristige Wachstumsrate von y im neuen Steady State (ohne techn. Fortschritt)?', 
-          answer: ['0', 'Null'], 
-          hint: 'Kehrt die Ökonomie zu einem Gleichgewicht zurück?', 
-          explain: 'Langfristig erreichen die Abschreibungen wieder das Niveau der Investitionen. Das Wachstum von y kehrt auf 0 zurück. Nur das Niveau ist nun höher.', 
-          traps: [{ pattern: 'höher', msg: 'Die Sparquote beeinflusst das Niveaus des pro-Kopf-Einkommens, nicht dessen dauerhafte Wachstumsrate.' }] 
+          q: 'Schritt 2 (Decision): Was passiert mit dem Konsum c unmittelbar im Moment der Umstellung (t0)? (Symbol erlaubt)', 
+          answer: ['sinkt', 'fällt', 'c ↓', '↓', 'negativ'], 
+          hint: 'c = (1-s)y. Y ist in t0 noch fix.', 
+          explain: 'Da y im Moment t0 durch den alten Kapitalstock fixiert ist, führt s↑ zwingend zu einem Rückgang von c = (1-s)y.', 
+          traps: [{ pattern: 'steigt', msg: 'Der Konsum kann erst langfristig steigen, wenn y durch Akkumulation stark genug gewachsen ist.' }] 
         }
       ]
     }

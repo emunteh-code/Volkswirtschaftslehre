@@ -1,6 +1,6 @@
 // ============================================================
-// ANSWER CHECKER — Mikroökonomik I
-// Tolerant answer matching with numeric fuzzy comparison
+// ANSWER CHECKER — Volkswagenwirtschaftslehre Standard v6.5
+// Tolerant answer matching with numeric fuzzy comparison and symbolic logic
 // ============================================================
 
 /**
@@ -14,7 +14,7 @@ export function normalizeAnswer(str) {
     .replace(/\s+/g, '')
     .replace(/[_,]/g, '')
     .replace(/\*/g, '')
-    .replace(/[^a-z0-9+\-\/=.<>λαβγδεζ]/g, '')
+    .replace(/[^a-z0-9+\-\/=.<>λαβγδεζ↑↓→]/g, '')
     .trim();
 }
 

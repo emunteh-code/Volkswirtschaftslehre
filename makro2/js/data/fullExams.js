@@ -1,6 +1,6 @@
 // ============================================================
 // FULL EXAMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v12.0: Logic First Standard
+// FINAL BENCHMARK STANDARD v13.0: Precision Under Uncertainty
 // ============================================================
 
 export const FULL_EXAMS = {
@@ -28,8 +28,8 @@ export const FULL_EXAMS = {
   },
   hard_mock_2026: {
     id: 'hard_mock_2026',
-    title: 'Makro II - Simulation v9.0 (60 Min)',
-    subtitle: 'Decision Dependencies & Multiplicative Scoring',
+    title: 'Makro II - Simulation v13.0 (60 Min)',
+    subtitle: 'Orthogonal Scoring & Contextual Logic',
     duration: 60,
     aufgaben: [
       {
@@ -54,49 +54,22 @@ export const FULL_EXAMS = {
             type: 'text',
             text: '[1.2 Execution] Berechnen Sie den notwendigen Zins $i$, um $E=1{,}0$ zu halten.',
             correct: ['0.05', '5%'],
-            options: { problemId: 'hm2_final', dependsOn: 'press_dir' },
+            options: { problemId: 'hm2_final', stepId: 'zins_exec', dependsOn: 'press_dir' },
             feedback: String.raw`$i = 0{,}05$.`,
           },
           {
             id: 'p1a_3',
             points: 20,
             type: 'text',
-            text: '[1.3 Validation] Erklären Sie die Logik-Kette für die Kursverteidigung.',
+            text: '[1.3 Validation] Erklären Sie die theoretische Konsistenz.',
             correct: ['i↑ → e↑'],
-            options: { problemId: 'hm2_final', role: 'VALIDATION', premise: 'P1_UP' },
-            feedback: String.raw`Zinserhöhung neutralisiert den Abwertungsdruck.`,
-          }
-        ]
-      },
-      {
-        label: 'Block B',
-        points: 20,
-        type: 'text-block',
-        title: 'Solow-Grenzwerte',
-        preamble: String.raw`Steady State bei $k > k_{GR}$.`,
-        questions: [
-          {
-            id: 'p2a_1',
-            points: 10,
-            type: 'text',
-            text: '[2.1 Decision] Welcher Zustand liegt vor?',
-            correct: ['überakkumulation', 'over-accumulation'],
-            options: { problemId: 'hm2_final_b', stepId: 'solow_state', isDecision: true, contextType: 'growth' },
-            feedback: String.raw`Überakkumulation.`,
-          },
-          {
-            id: 'p2a_2',
-            points: 10,
-            type: 'text',
-            text: '[2.2 Validation] Effekt von $s \downarrow$ auf $c$?',
-            correct: ['steigt', '↑'],
             options: { 
-              problemId: 'hm2_final_b', 
+              problemId: 'hm2_final', 
               role: 'VALIDATION', 
-              allowedModels: [{ model: 'OVERACCUM', priority: 1 }],
-              dependsOn: 'solow_state' 
+              premise: 'P1_UP',
+              contextType: 'short_run_policy'
             },
-            feedback: String.raw`Weniger Sparen erhöht den Konsum langfristig.`,
+            feedback: String.raw`Zinserhöhung neutralisiert Abwertungsdruck.`,
           }
         ]
       }

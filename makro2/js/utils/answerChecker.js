@@ -1,6 +1,6 @@
 // ============================================================
-// VWL LOGIC ENGINE — Final Benchmark Standard v12.0
-// PRECISION UNDER UNCERTAINTY: Multiplicative Logic Dominance & Model Hierarchy
+// VWL LOGIC ENGINE — Final Benchmark Standard v13.0
+// PRECISION UNDER UNCERTAINTY: Orthogonal Scoring & Contextual Hierarchy
 // ============================================================
 
 /**
@@ -22,8 +22,8 @@ export function normalize(str) {
 export function mapToPrimitive(input, contextType = 'general') {
   const s = normalize(input);
   let dir = null;
-  if (s.includes('↑') || s.includes('steigt') || s.includes('rises') || s.includes('höher') || s.includes('increase')) dir = 'UP';
-  if (s.includes('↓') || s.includes('sinkt') || s.includes('falls') || s.includes('niedriger') || s.includes('decrease')) dir = 'DOWN';
+  if (s.includes('↑') || s.includes('steigt') || s.includes('rises') || s.includes('increase') || s.includes('höher')) dir = 'UP';
+  if (s.includes('↓') || s.includes('sinkt') || s.includes('falls') || s.includes('decrease') || s.includes('niedriger')) dir = 'DOWN';
   if (s.includes('ambig') || s.includes('uncertain') || s.includes('unbestimmt') || s.includes('abhängig')) dir = 'AMBIGUOUS';
 
   let concept = 'NONE';
@@ -41,28 +41,28 @@ export function mapToPrimitive(input, contextType = 'general') {
 }
 
 /**
- * Deterministic Scoring Weights (Sum = 1.0)
+ * Context-Dependent Model Priorities
  */
-const WEIGHTS = {
-  PREMISE: 0.45,
-  MODEL: 0.30,
-  INCONSISTENCY: 0.20,
-  CALC: 0.05
+const MODEL_HIERARCHY = {
+  'short_run_policy': { 'IS_LM': 1, 'AD_AS': 2 },
+  'inflation_dynamics': { 'AD_AS': 1, 'IS_LM': 2 },
+  'optimization': { 'CORNER': 1, 'INTERIOR': 2 },
+  'growth': { 'OVERACCUM': 1 }
 };
 
 /**
- * VWL Final Benchmark Evaluator
+ * VWL Final Benchmark Evaluator v13.0
  */
 export class VWLBenchmarkEvaluator {
   constructor(problemId, state = {}) {
     this.problemId = problemId;
-    this.state = state; // stepId -> { input, concept, dir }
+    this.state = state; // stepId -> prim
   }
 
   evaluate(input, options = {}) {
     const {
       role = 'general',
-      allowedModels = [], // [{ model: 'CORNER', priority: 1 }]
+      allowedModels = [], // ['CORNER', 'INTERIOR']
       premise = null,
       dependsOn = null,
       expectedAnswers = [],
@@ -72,56 +72,64 @@ export class VWLBenchmarkEvaluator {
     } = options;
 
     const prim = mapToPrimitive(input, contextType);
-    const res = { score: 0, correct: false, msg: '', state: this.state };
+    const res = { score: 0, logic_score: 1.0, calc_score: 1.0, correct: false, msg: '', state: this.state };
     
-    let weightedPenalty = 0;
-    let logicMultiplier = 1.0;
-    let calcMultiplier = 1.0;
+    let logicPenalty = 0;
+    let premiseError = false;
 
     // 1. Ambiguity Constraint
     if (prim.dir === 'AMBIGUOUS' && !ambiguityAllowed) {
-      weightedPenalty += WEIGHTS.PREMISE;
-      logicMultiplier = 0.4;
-      res.msg += "Unbegründete Uneindeutigkeit. ";
+      logicPenalty += 0.45;
+      premiseError = true;
+      res.msg += "Unzulässige Ambiguität in deterministischem Kontext. ";
     }
 
     // 2. Model Hierarchy Validation
     if (allowedModels.length > 0 && this.state.model_choice) {
       const chosen = this.state.model_choice.concept;
-      const modelDef = allowedModels.find(m => m.model === chosen);
-      
-      if (!modelDef) {
-        weightedPenalty += WEIGHTS.MODEL;
-        logicMultiplier = Math.min(logicMultiplier, 0.5);
-        res.msg += "Falsches Modell gewählt. ";
-      } else if (modelDef.priority > 1) {
-        weightedPenalty += (WEIGHTS.MODEL * 0.5); // Soft penalty for sub-optimal model
-        res.msg += "Suboptimales Modell gewählt. ";
+      if (!allowedModels.includes(chosen)) {
+        logicPenalty += 0.30;
+        res.msg += "Modell-Fehlwahl. ";
+      } else {
+        const hierarchy = MODEL_HIERARCHY[contextType];
+        if (hierarchy && hierarchy[chosen] > 1) {
+          logicPenalty += 0.15; // Soft penalty for lower priority valid model
+          res.msg += "Suboptimales Modell gewählt. ";
+        }
       }
     }
 
-    // 3. Premise & Dependency Check
+    // 3. Premise & Consistency
+    if (premise) {
+      // Internal consistency vs model premise
+      // MODEL_RULES logic (simplified check here)
+      // If prim.dir contradicts required model direction...
+    }
+
     if (dependsOn && this.state[dependsOn]) {
       const prev = this.state[dependsOn];
       if (prev.dir && prim.dir && prim.dir !== 'AMBIGUOUS' && prev.dir !== prim.dir) {
-        weightedPenalty += WEIGHTS.INCONSISTENCY;
-        logicMultiplier = Math.min(logicMultiplier, 0.6);
-        res.msg += "Logischer Widerspruch zur vorherigen Entscheidung. ";
+        logicPenalty += 0.20;
+        res.msg += "Logische Inkonsistenz zur Vor-Entscheidung. ";
       }
     }
 
-    // 4. Execution & Numeric Matching
+    // 4. Logic Score & Premise Cap
+    res.logic_score = Math.max(0, 1.0 - logicPenalty);
+    if (premiseError) {
+      res.logic_score = Math.min(res.logic_score, 0.4);
+    }
+
+    // 5. Calculation Score (Orthogonal)
     let numericFound = false;
     const numInput = parseFloat(input.replace(',', '.'));
+    const tolerance = (res.logic_score > 0.7) ? 0.10 : 0.02;
+
     for (const a of expectedAnswers) {
       const numA = parseFloat(String(a).replace(',', '.'));
       if (!isNaN(numInput) && !isNaN(numA)) {
-        const error = Math.abs(numInput - numA) / Math.max(1, Math.abs(numA));
-        // Strict tolerance (2%) unless logic is perfect (10%)
-        const tol = (weightedPenalty === 0) ? 0.10 : 0.02;
-        if (error < tol) {
+        if (Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < tolerance) {
           numericFound = true;
-          if (error >= 0.02) weightedPenalty += WEIGHTS.CALC;
           break;
         }
       } else if (normalize(input).includes(normalize(a))) {
@@ -131,22 +139,21 @@ export class VWLBenchmarkEvaluator {
     }
 
     if (!numericFound) {
-      calcMultiplier = 0.2; // Heavy penalty for wrong result
-      res.msg += "Ergebnis numerisch/inhaltlich inkorrekt. ";
+      res.calc_score = 0.2;
+      res.msg += "Ergebnis inkorrekt. ";
     }
 
-    // 5. Final Multiplicative Score Calculation
-    const baseScore = Math.max(0, 1 - weightedPenalty);
-    res.score = baseScore * logicMultiplier * calcMultiplier;
+    // 6. Final Combined Score
+    res.score = res.logic_score * res.calc_score;
     res.correct = res.score > 0.8;
 
-    // 6. Mandatory Validation Cap
-    if (role === 'VALIDATION' && res.score < 0.5) {
-      res.score = Math.min(res.score, 0.4); // Force fail on validation error
+    // Validation Override
+    if (role === 'VALIDATION' && !numericFound) {
+      res.score = Math.min(res.score, 0.4);
     }
 
     // Update State
-    if (isDecision || (res.score > 0.5)) {
+    if (isDecision || res.correct || (res.logic_score > 0.5 && numericFound)) {
       this.state[options.stepId || 'last'] = prim;
     }
 
@@ -154,9 +161,6 @@ export class VWLBenchmarkEvaluator {
   }
 }
 
-/**
- * Standard UI Bridge
- */
 export function checkAnswerWithTolerance(input, acceptedAnswers, options = {}) {
   const evaluator = new VWLBenchmarkEvaluator(options.problemId || 'anon');
   const result = evaluator.evaluate(input, { ...options, expectedAnswers: acceptedAnswers });

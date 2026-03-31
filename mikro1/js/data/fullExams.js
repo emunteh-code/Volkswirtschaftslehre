@@ -1,6 +1,6 @@
 // ============================================================
 // FULL EXAMS DATA — Mikroökonomik I
-// FINAL BENCHMARK STANDARD v12.0: Logic First Standard
+// FINAL BENCHMARK STANDARD v13.0: Precision Under Uncertainty
 // ============================================================
 
 export const FULL_EXAMS = {
@@ -24,8 +24,8 @@ probe_2024: {
 },
 hard_mock_mikro1_2026: {
     id: 'hard_mock_mikro1_2026',
-    title: 'Mikro I - Simulation v9.0 (60 Min)',
-    subtitle: 'Multiplicative Scoring & Model Hierarchy',
+    title: 'Mikro I - Simulation v13.0 (60 Min)',
+    subtitle: 'Orthogonal Scoring & Contextual Logic',
     duration: 60,
     aufgaben: [
       {
@@ -50,17 +50,17 @@ hard_mock_mikro1_2026: {
             type: 'text',
             text: '[1.2 Execution] Berechnen Sie den reinen Substitutionseffekt (SE).',
             correct: ['7.5', '7,5'],
-            options: { problemId: 'hm1_final', dependsOn: 'se_dir', role: 'consumption_quantity' },
+            options: { problemId: 'hm1_final', stepId: 'se_exec', dependsOn: 'se_dir', role: 'consumption_quantity' },
             feedback: String.raw`$SE = 7{,}5$.`,
           },
           {
             id: 'm1a_3',
             points: 10,
             type: 'text',
-            text: '[1.3 Validation] Erklären Sie, warum das Ergebnis für SE konsistent mit der Theorie ist.',
+            text: '[1.3 Validation] Erklären Sie die theoretische Konsistenz.',
             correct: ['p1↓ → se↑'],
             options: { problemId: 'hm1_final', role: 'VALIDATION', premise: 'P1_DOWN' },
-            feedback: String.raw`Theorie erzwingt positive Korrelation zwischen relativer Verbilligung und SE.`,
+            feedback: String.raw`Theorie erzwingt positive Korrelation zwischen Verbilligung und SE.`,
           }
         ]
       },
@@ -75,10 +75,10 @@ hard_mock_mikro1_2026: {
             id: 'm2a_1',
             points: 15,
             type: 'text',
-            text: '[2.1 Decision] Welches Modell ist hier physikalisch angemessen? (Corner oder Interior?)',
-            correct: ['corner', 'randlösung'],
-            options: { problemId: 'hm1_final_b', stepId: 'model_id', isDecision: true, contextType: 'optimization' },
-            feedback: String.raw`Tangential führt zu $x_1 < 0$. Daher Corner.`,
+            text: '[2.1 Decision] Welcher Lösungstyp liegt hier vor? (Rand oder Innen?)',
+            correct: ['randlösung', 'corner'],
+            options: { problemId: 'hm1_final_b', stepId: 'model_choice', isDecision: true, contextType: 'optimization' },
+            feedback: String.raw`Mathematische Tangentialbedingung liefert $x_1 < 0$.`,
           },
           {
             id: 'm2a_2',
@@ -88,9 +88,11 @@ hard_mock_mikro1_2026: {
             correct: ['0'],
             options: { 
               problemId: 'hm1_final_b', 
-              allowedModels: [{ model: 'CORNER', priority: 1 }], 
-              dependsOn: 'model_id',
-              role: 'consumption_quantity'
+              stepId: 'x1_exec',
+              allowedModels: ['CORNER', 'INTERIOR'], 
+              dependsOn: 'model_choice',
+              role: 'consumption_quantity',
+              contextType: 'optimization'
             },
             feedback: String.raw`$x_1=0$.`,
           }

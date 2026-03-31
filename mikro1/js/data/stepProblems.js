@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Mikroökonomik I
-// FINAL BENCHMARK STANDARD v12.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v13.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -15,7 +15,7 @@ const BASE_STEP_PROBLEMS = {
  steps: [
  { q: '[1. Interpretation] Bestimmen Sie das Preisverhältnis p₁/p₂.',
    answer: ['10'],
-   options: { problemId: 'm1_lagrange', role: 'price' },
+   options: { problemId: 'm1_lagrange', stepId: 'price_check', role: 'price' },
    hint: 'p₁ / p₂.',
    explain: '10 / 1 = 10.' },
  { q: '[2. Decision] Welcher Lösungstyp ist bei diesem Preisverhältnis theoretisch angemessen?',
@@ -27,9 +27,11 @@ const BASE_STEP_PROBLEMS = {
    answer: ['0'],
    options: { 
      problemId: 'm1_lagrange', 
+     stepId: 'exec_x1', 
      role: 'consumption_quantity', 
-     allowedModels: [{ model: 'CORNER', priority: 1 }, { model: 'INTERIOR', priority: 2 }],
-     dependsOn: 'model_choice' 
+     allowedModels: ['CORNER', 'INTERIOR'],
+     dependsOn: 'model_choice',
+     contextType: 'optimization'
    },
    hint: 'Nutzen Sie Ihre Entscheidung aus Schritt 2.',
    explain: 'Da Mengen nicht negativ sein können und eine Randlösung vorliegt, ist x₁=0.' },
@@ -53,12 +55,12 @@ const BASE_STEP_PROBLEMS = {
    explain: 'p₁ sinkt ⟹ Gut 1 wird attraktiver ⟹ SE positiv.' },
  { q: '[2. Decision] Ist das Vorzeichen des Einkommenseffekts (EE) ohne Information über die Gut-Klassifikation eindeutig?',
    answer: ['nein', 'ambig', 'uncertain'],
-   options: { problemId: 'm1_slutsky', ambiguityAllowed: true },
+   options: { problemId: 'm1_slutsky', stepId: 'ee_ambig', ambiguityAllowed: true },
    hint: 'Hängt davon ab, ob das Gut normal oder inferior ist.',
    explain: 'Ohne Klassifikation ist die Richtung des EE unbestimmt.' },
  { q: '[3. Execution] Bei u=x₁x₂ ist Gut 1 normal. In welche Richtung wirkt der EE bei p₁-Senkung?',
    answer: ['positiv', '↑', 'steigt'],
-   options: { problemId: 'm1_slutsky', dependsOn: 'se_dir' },
+   options: { problemId: 'm1_slutsky', stepId: 'ee_exec', dependsOn: 'se_dir' },
    hint: 'Preissenkung ⟹ Realeinkommen steigt.',
    explain: 'Da das Gut normal ist, erhöht das höhere Realeinkommen die Nachfrage.' }
  ]

@@ -235,24 +235,49 @@ probe_2024: {
         label: 'Problem 3',
         points: 20,
         type: 'text-block',
-        title: 'Block C: Perfekte Substitute & Steuer',
-        preamble: String.raw`Nutzenfunktion $u(x_1, x_2) = 2x_1 + x_2$. Preise $p_1=3, p_2=1, m=30$.`,
+        title: 'Block C: Optimierung unter Unsicherheit',
+        preamble: String.raw`Ein Haushalt hat die Nutzenfunktion $u(x_1, x_2) = (x_1 + 2)x_2$. Das Einkommen beträgt $m = 10$, die Preise sind $p_1 = 10$ und $p_2 = 1$.`,
         questions: [
           {
             id: 'm3a',
             points: 10,
             type: 'text',
-            text: '[3.1] Bestimmen Sie das Haushaltsoptimum. (Randlösung oder Tangentiallösung?)',
-            correct: ['randlösung x2=30', 'x2=30', '0, 30', 'randlösung x1=0', 'corner solution', 'x1=0'],
-            feedback: String.raw`$|GRS| = 2$. Preisverhältnis $p_1/p_2 = 3$. Da $|GRS| < p_1/p_2$, wird nur Gut 2 konsumiert: $x = (0, 30)$.`,
+            text: '[3.1] Berechnen Sie die GRS und das Preisverhältnis. Würde eine rein mathematische Tangentialbedingung (GRS = p1/p2) eine zulässige Lösung ($x \geq 0$) liefern?',
+            correct: ['nein', 'x1 < 0', 'x1=-0.5', 'keine zulässige lösung'],
+            feedback: String.raw`GRS $= x_2/(x_1+2)$. Tangential: $x_2/(x_1+2) = 10 \implies x_2 = 10x_1 + 20$. In Budget: $10x_1 + (10x_1+20) = 10 \implies 20x_1 = -10 \implies x_1 = -0{,}5$. Da $x_1 < 0$ nicht möglich ist, liefert die Tangentialbedingung keine zulässige Lösung.`,
           },
           {
             id: 'm3b',
             points: 10,
             type: 'text',
-            text: '[3.2] Die Regierung führt eine Subvention auf Gut 1 ein, sodass der Preis auf $p_1\' = 1{,}5$ sinkt. Wie ändert sich das Konsummuster?',
-            correct: ['wechsel zu x1', 'alles x1', 'x1=20', 'nur noch gut 1', 'switch to x1'],
-            feedback: String.raw`Neues Preisverhältnis $1{,}5/1 = 1{,}5$. Da $|GRS| = 2 > 1{,}5$, wechselt der Haushalt komplett zu Gut 1: $x = (20, 0)$.`,
+            text: '[3.2] Bestimmen Sie das tatsächliche Haushaltsoptimum. (Randlösung oder Innere Lösung?)',
+            correct: ['randlösung x1=0', 'x1=0 x2=10', '0, 10', 'corner solution', 'x1=0'],
+            feedback: String.raw`Da die innere Lösung negativ wäre, liegt ein Eckoptimum vor. Der Haushalt gibt sein gesamtes Budget für Gut 2 aus: $x^* = (0, 10)$.`,
+          }
+        ]
+      },
+      {
+        label: 'Problem 4',
+        points: 15,
+        type: 'text-block',
+        title: 'Block D: Policy-Szenario Mindestlohn',
+        preamble: String.raw`Ein Unternehmen produziert mit $f(L) = 10\sqrt{L}$. Der Produktpreis ist $P=4$, der Lohn $w=5$.`,
+        questions: [
+          {
+            id: 'm4a',
+            points: 5,
+            type: 'text',
+            text: '[4.1] Berechnen Sie den optimalen Arbeitseinsatz $L^*$ ohne staatliche Regulierung.',
+            correct: ['16', 'L=16'],
+            feedback: String.raw`$P \cdot MP_L = w \implies 4 \cdot (5/\sqrt{L}) = 5 \implies 20/\sqrt{L} = 5 \implies \sqrt{L}=4 \implies L^*=16$.`,
+          },
+          {
+            id: 'm4b',
+            points: 10,
+            type: 'text',
+            text: '[4.2] Die Regierung führt einen Mindestlohn von $w_{min} = 30$ ein. Berechnen Sie $L^{neu}$ und prüfen Sie kurz die Profitabilität ($\pi \geq 0$). Bleibt das Unternehmen am Markt?',
+            correct: ['ja', '4/9', '0.44', 'pi > 0', 'bleibt am markt'],
+            feedback: String.raw`Neu: $4 \cdot (5/\sqrt{L}) = 30 \implies \sqrt{L} = 2/3 \implies L = 4/9 \approx 0{,}44$. Output $y = 10 \cdot (2/3) = 6{,}67$. Gewinn $\pi = 4 \cdot 6{,}67 - 30 \cdot (4/9) = 26{,}67 - 13{,}33 = 13{,}33 > 0$. Das Unternehmen bleibt am Markt, stellt aber massiv weniger Leute ein.`,
           }
         ]
       }

@@ -38,7 +38,8 @@ function initTheme() {
   setTheme(storedTheme || (preferredDark ? "dark" : "light"));
   const button = document.getElementById("themeToggle");
   if (button) {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
       const nextTheme = document.body.classList.contains("theme-dark") ? "light" : "dark";
       setTheme(nextTheme);
     });
@@ -47,12 +48,24 @@ function initTheme() {
 
 function readStoredJson(key) {
   if (!key) return {};
-  try { return JSON.parse(localStorage.getItem(key) || "{}"); } catch { return {}; }
+  try { 
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : {}; 
+  } catch (err) { 
+    console.error(`Storage Error [${key}]:`, err);
+    // Safe fallback: reset corrupted key
+    localStorage.removeItem(key);
+    return {}; 
+  }
 }
 
 function writeStoredJson(key, value) {
   if (!key) return;
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.error(`Storage Write Error [${key}]:`, err);
+  }
 }
 
 function getPortalState(module) {
@@ -104,20 +117,23 @@ function pickInitialLandingModule() {
   return null;
 }
 
-function showOnboarding() {
-  if (localStorage.getItem(ONBOARDING_KEY)) return;
+function showOnboarding(force = false) {
+  if (!force && localStorage.getItem(ONBOARDING_KEY)) return;
+  const existing = document.querySelector(".onboarding-overlay");
+  if (existing) existing.remove();
+
   const overlay = document.createElement("div");
   overlay.className = "onboarding-overlay";
   overlay.innerHTML = `
     <div class="onboarding-card">
       <h2>Willkommen im VWL Lernportal</h2>
-      <p>Dieses System bewertet Ihr <strong>ökonomisches Verständnis</strong>, nicht nur das Endergebnis.</p>
+      <p>Dieses System simuliert reale Klausurbedingungen mit <strong>strenger Logikbewertung</strong>.</p>
       <ul class="onboarding-list">
-        <li><strong>Logic First:</strong> Ein richtiges Ergebnis bei falscher Logik gibt 0 Punkte.</li>
-        <li><strong>Validation:</strong> Jeder Schritt muss plausibel begründet werden.</li>
-        <li><strong>Consistency:</strong> Das System erkennt Widersprüche in Ihrer Argumentation.</li>
+        <li><strong>Reasoning > Ergebnis:</strong> Ein richtiger Wert bei falscher Logik verfällt (Hard Zero).</li>
+        <li><strong>Pfad-Abhängigkeit:</strong> Folgefehler in der Logik kappen die Gesamtpunktzahl.</li>
+        <li><strong>Validierung:</strong> Nur begründete Aussagen führen zum Erfolg.</li>
       </ul>
-      <button class="primary-btn" id="closeOnboarding">Verstanden</button>
+      <button class="primary-btn" id="closeOnboarding">Verstanden & Starten</button>
     </div>
   `;
   document.body.appendChild(overlay);
@@ -136,37 +152,58 @@ function renderLandingPage() {
 
   if (!gridNode) return;
 
+  // 1. Module Count
+  const countLabel = document.getElementById("moduleCountLabel");
+  if (countLabel) countLabel.textContent = `${PUBLIC_MODULES.length} Module verfügbar`;
+
+  // 2. Continue Section (Empty state handled by hidden attribute)
   const lastModule = pickInitialLandingModule();
   if (lastModule && continueSection && continueTitle && continueProgress && continueLink) {
     const snapshot = getModuleSnapshot(lastModule);
     if (snapshot.started) {
       continueSection.hidden = false;
       continueTitle.textContent = lastModule.title;
-      continueProgress.textContent = `${snapshot.percent}% abgeschlossen · ${snapshot.due} Wiederholungen`;
+      continueProgress.textContent = `${snapshot.percent}% abgeschlossen · ${snapshot.due} Wiederholungen ausstehend`;
       continueLink.href = lastModule.href;
+    } else {
+      continueSection.hidden = true;
     }
   }
 
-  gridNode.innerHTML = PUBLIC_MODULES.map((module) => {
-    const snapshot = getModuleSnapshot(module);
-    const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Start";
-    
-    return `
-      <a href="${module.href}" class="module-tile">
-        <div class="tile-head">
-          <span class="difficulty-badge ${module.difficulty.toLowerCase()}">${module.difficulty}</span>
-          <span class="time-badge">${module.time}</span>
-        </div>
-        <h3>${module.shortTitle}</h3>
-        <p class="summary">${module.summary}</p>
-        <div class="prereq">Voraussetzung: ${module.prereq}</div>
-        <div class="meta">
-          <span class="status-badge">${statusLabel}</span>
-          <span class="action-hint">Modul öffnen →</span>
-        </div>
-      </a>
-    `;
-  }).join("");
+  // 3. Module Grid
+  if (PUBLIC_MODULES.length === 0) {
+    gridNode.innerHTML = `<div class="empty-state">Keine Module verfügbar.</div>`;
+  } else {
+    gridNode.innerHTML = PUBLIC_MODULES.map((module) => {
+      const snapshot = getModuleSnapshot(module);
+      const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Start";
+      
+      return `
+        <a href="${module.href}" class="module-tile">
+          <div class="tile-head">
+            <span class="difficulty-badge ${module.difficulty.toLowerCase()}">${module.difficulty}</span>
+            <span class="time-badge">Dauer: ${module.time}</span>
+          </div>
+          <h3>${module.shortTitle}</h3>
+          <p class="summary">${module.summary}</p>
+          <div class="prereq">Voraussetzung: ${module.prereq}</div>
+          <div class="meta">
+            <span class="status-badge">${statusLabel}</span>
+            <span class="action-hint">Lernen →</span>
+          </div>
+        </a>
+      `;
+    }).join("");
+  }
+
+  // Footer Actions
+  const instructionsBtn = document.getElementById("showInstructions");
+  if (instructionsBtn) {
+    instructionsBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showOnboarding(true);
+    });
+  }
 
   showOnboarding();
 }
@@ -174,7 +211,10 @@ function renderLandingPage() {
 function renderModulePage() {
   const slug = inferModuleSlug();
   const module = getModuleBySlug(slug);
-  if (!module) return;
+  if (!module) {
+    console.warn("Module not found:", slug);
+    return;
+  }
 
   document.documentElement.style.setProperty("--accent", module.accent);
   document.documentElement.style.setProperty("--accent-strong", module.accent);
@@ -198,7 +238,7 @@ function renderModulePage() {
       <div class="portal-progress-card">
         <strong>Dein Lernstand</strong>
         <div class="progress-meter"><div class="progress-meter-fill" style="width:${snapshot.percent}%"></div></div>
-        <div class="resume-meta"><span>${snapshot.percent}% abgeschlossen</span><span>${visitLabel}</span></div>
+        <div class="resume-meta"><span>${snapshot.percent}% abgeschlossen</span><span>Zuletzt: ${visitLabel}</span></div>
       </div>
     </aside>
   `;
@@ -215,5 +255,11 @@ function boot() {
     renderModulePage();
   }
 }
+
+// Global error handler for UI resilience
+window.onerror = function(msg, url, line) {
+  console.error("Critical UI Error:", msg, "at", url, ":", line);
+  return false;
+};
 
 boot();

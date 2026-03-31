@@ -1,68 +1,93 @@
 // ============================================================
-// ANSWER CHECKER — Standard v6.5 (Final Benchmark)
-// Tolerant answer matching with numeric fuzzy comparison and symbolic logic
+// VWL LOGIC ENGINE — Final Benchmark Standard v7.0
+// Precision Under Uncertainty: Logic > Execution
 // ============================================================
 
 /**
- * Normalize an answer string for comparison.
- * Strips whitespace, common math symbols, and lowercases.
- * @param {string} str
- * @returns {string}
+ * Normalizes input for comparison.
  */
-export function normalizeAnswer(str) {
-  if (str === null || str === undefined) return '';
+export function normalize(str) {
+  if (!str) return '';
   return String(str).toLowerCase()
     .replace(/\s+/g, '')
     .replace(/[_,]/g, '')
     .replace(/\*/g, '')
-    // Standard alphanumeric + LaTeX fragments + Directional symbols + Logic
     .replace(/[^a-z0-9+\-\/=.<>λαβγδεζ↑↓→]/g, '')
     .trim();
 }
 
 /**
- * Check a user's answer against accepted answers and trap patterns.
- * Uses both numeric tolerance (2%) and normalized string matching.
- * @param {string} input - Raw user input
- * @param {string[]} acceptedAnswers - List of accepted answer strings
- * @param {{pattern:string, msg:string}[]} [traps] - Common wrong answers
- * @returns {{ correct: boolean, trap?: string }}
+ * Global Domain Validation
  */
-export function checkAnswerWithTolerance(input, acceptedAnswers, traps = []) {
-  if (!input) return { correct: false };
-  const val = input.toLowerCase().replace(/\s+/g, '');
+export function getDomainViolation(input, context = {}) {
+  const val = parseFloat(String(input).replace(',', '.'));
+  if (isNaN(val)) return null;
 
-  // 1. Check traps first (Specific feedback takes precedence)
+  if (val < 0 && (context.type === 'quantity' || context.type === 'price' || context.type === 'capital')) {
+    return "DOMAIN VIOLATION: Negative Werte sind ökonomisch unzulässig. Korrigieren Sie Ihre Annahme.";
+  }
+  return null;
+}
+
+/**
+ * Session Logic Tracker (Singleton-like)
+ */
+const LogicTracker = {
+  lastDecision: null,
+  setDecision(d) { this.lastDecision = d; },
+  getDecision() { return this.lastDecision; }
+};
+
+/**
+ * Main Answer Checker
+ */
+export function checkAnswerWithLogic(input, acceptedAnswers, options = {}) {
+  const { traps = [], context = {}, requiredChain = null, isDecision = false } = options;
+  const normInput = normalize(input);
+
+  const domainError = getDomainViolation(input, context);
+  if (domainError) return { correct: false, trap: domainError, capScore: 0.6 };
+
+  if (requiredChain) {
+    let score = 0;
+    requiredChain.forEach(comp => { if (normInput.includes(normalize(comp))) score++; });
+    const ratio = score / requiredChain.length;
+    if (ratio >= 0.66) return { correct: true, logicScore: ratio };
+  }
+
+  if (context.dependsOn) {
+    const prev = LogicTracker.getDecision();
+    if (prev && normalize(prev) !== normalize(context.dependsOn)) {
+      return { 
+        correct: false, 
+        trap: `LOGIC INCONSISTENCY: Ihr Ergebnis widerspricht der Entscheidung (${prev}).`,
+        capScore: 0.5 
+      };
+    }
+  }
+
   for (const trap of traps) {
-    if (val.includes(trap.pattern.toLowerCase().replace(/\s+/g, ''))) {
-      return { correct: false, trap: trap.msg };
+    if (normInput.includes(normalize(trap.pattern))) {
+      return { correct: false, trap: trap.msg, capScore: 0.6 };
     }
   }
 
-  // 2. Numeric tolerance check (2%)
-  const numInput = parseFloat(input.replace(',', '.'));
-  if (!isNaN(numInput)) {
-    for (const a of acceptedAnswers) {
-      const numA = parseFloat(String(a).replace(',', '.'));
-      if (!isNaN(numA) && Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < 0.02) {
-        return { correct: true };
-      }
-    }
-  }
-
-  // 3. Normalized String matching (Semantic/Keyword check)
-  const normVal = normalizeAnswer(input);
+  let isCorrect = false;
   for (const a of acceptedAnswers) {
-    const normA = normalizeAnswer(String(a));
+    const normA = normalize(a);
+    const numInput = parseFloat(String(input).replace(',', '.'));
+    const numA = parseFloat(String(a).replace(',', '.'));
+
+    if (!isNaN(numInput) && !isNaN(numA)) {
+      if (Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < 0.02) isCorrect = true;
+    } else if (normA.length <= 2) {
+      if (normInput === normA) isCorrect = true;
+    } else {
+      if (normInput.includes(normA) || normA.includes(normInput) && normInput.length > 3) isCorrect = true;
+    }
     
-    // Exact match for short strings/symbols
-    if (normA.length <= 2 && normVal === normA) return { correct: true };
-    
-    // Inclusion match for longer explanations/keywords
-    if (normA.length > 2 && (
-      normVal.includes(normA) || 
-      (normA.includes(normVal) && normVal.length >= Math.ceil(normA.length * 0.6))
-    )) {
+    if (isCorrect) {
+      if (isDecision) LogicTracker.setDecision(normInput);
       return { correct: true };
     }
   }

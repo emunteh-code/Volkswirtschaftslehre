@@ -64,6 +64,17 @@ const BASE_STEP_PROBLEMS = {
    hint: 'Preissenkung ⟹ Realeinkommen steigt.',
    explain: 'Da das Gut normal ist, erhöht das höhere Realeinkommen die Nachfrage.' }
  ]
+ },
+ {
+ title: 'Präzisions-Check (Continuous Scoring)',
+ context: 'Berechnen Sie x₁* bei m=40, p₁=4, p₂=1.',
+ steps: [
+ { q: 'Berechnen Sie x₁* (Cobb-Douglas u=x₁x₂).',
+   answer: ['5'],
+   options: { problemId: 'm1_precision', role: 'consumption_quantity' },
+   hint: 'x₁ = m / (2p₁).',
+   explain: '40 / 8 = 5.' }
+ ]
  }
  ]
 };

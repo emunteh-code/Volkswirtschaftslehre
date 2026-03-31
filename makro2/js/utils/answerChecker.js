@@ -1,6 +1,6 @@
 // ============================================================
-// VWL LOGIC ENGINE — Final Benchmark Standard v13.0
-// PRECISION UNDER UNCERTAINTY: Orthogonal Scoring & Contextual Hierarchy
+// VWL LOGIC ENGINE — Final Benchmark Standard v14.0
+// PRECISION UNDER UNCERTAINTY: Continuous Decay & Semantic Drift Detection
 // ============================================================
 
 /**
@@ -17,7 +17,7 @@ export function normalize(str) {
 }
 
 /**
- * Context-aware primitives.
+ * Context-aware primitives with model origin.
  */
 export function mapToPrimitive(input, contextType = 'general') {
   const s = normalize(input);
@@ -37,32 +37,38 @@ export function mapToPrimitive(input, contextType = 'general') {
     if (s.includes('interior') || s.includes('innen')) concept = 'INTERIOR';
   }
 
-  return { concept, dir, raw: s };
+  return { concept, dir, raw: s, context: contextType };
 }
 
 /**
- * Context-Dependent Model Priorities
+ * Validates reasoning transitions to prevent semantic drift.
  */
-const MODEL_HIERARCHY = {
-  'short_run_policy': { 'IS_LM': 1, 'AD_AS': 2 },
-  'inflation_dynamics': { 'AD_AS': 1, 'IS_LM': 2 },
-  'optimization': { 'CORNER': 1, 'INTERIOR': 2 },
-  'growth': { 'OVERACCUM': 1 }
-};
+function isTransitionValid(prev, next) {
+  if (!prev || !next || prev.concept === next.concept) return true;
+  
+  const validTransitions = [
+    ['SE', 'TOTAL_EFFECT'],
+    ['OVERACCUM', 'GROWTH'],
+    ['DEMAND', 'EXCESS_DEMAND']
+  ];
+
+  return validTransitions.some(([p, n]) => prev.concept === p && next.concept === n);
+}
 
 /**
- * VWL Final Benchmark Evaluator v13.0
+ * VWL Final Benchmark Evaluator v14.0
  */
 export class VWLBenchmarkEvaluator {
   constructor(problemId, state = {}) {
     this.problemId = problemId;
     this.state = state; // stepId -> prim
+    this.path = []; // Sequence of primitives in this session
   }
 
   evaluate(input, options = {}) {
     const {
       role = 'general',
-      allowedModels = [], // ['CORNER', 'INTERIOR']
+      allowedModels = [],
       premise = null,
       dependsOn = null,
       expectedAnswers = [],
@@ -77,83 +83,76 @@ export class VWLBenchmarkEvaluator {
     let logicPenalty = 0;
     let premiseError = false;
 
-    // 1. Ambiguity Constraint
+    // 1. Semantic Drift Detection
+    const lastPrim = this.path[this.path.length - 1];
+    if (lastPrim && !isTransitionValid(lastPrim, prim)) {
+      logicPenalty += 0.20; // Drift Penalty
+      res.msg += "Semantischer Drift erkannt: Unbegründeter Konzeptwechsel. ";
+    }
+
+    // 2. Ambiguity & Model Hierarchy
     if (prim.dir === 'AMBIGUOUS' && !ambiguityAllowed) {
       logicPenalty += 0.45;
       premiseError = true;
-      res.msg += "Unzulässige Ambiguität in deterministischem Kontext. ";
+      res.msg += "Unzulässige Ambiguität. ";
     }
 
-    // 2. Model Hierarchy Validation
     if (allowedModels.length > 0 && this.state.model_choice) {
       const chosen = this.state.model_choice.concept;
       if (!allowedModels.includes(chosen)) {
         logicPenalty += 0.30;
         res.msg += "Modell-Fehlwahl. ";
-      } else {
-        const hierarchy = MODEL_HIERARCHY[contextType];
-        if (hierarchy && hierarchy[chosen] > 1) {
-          logicPenalty += 0.15; // Soft penalty for lower priority valid model
-          res.msg += "Suboptimales Modell gewählt. ";
-        }
       }
-    }
-
-    // 3. Premise & Consistency
-    if (premise) {
-      // Internal consistency vs model premise
-      // MODEL_RULES logic (simplified check here)
-      // If prim.dir contradicts required model direction...
     }
 
     if (dependsOn && this.state[dependsOn]) {
       const prev = this.state[dependsOn];
       if (prev.dir && prim.dir && prim.dir !== 'AMBIGUOUS' && prev.dir !== prim.dir) {
-        logicPenalty += 0.20;
-        res.msg += "Logische Inkonsistenz zur Vor-Entscheidung. ";
+        logicPenalty += 0.25;
+        res.msg += "Logische Inkonsistenz. ";
       }
     }
 
-    // 4. Logic Score & Premise Cap
+    // 3. Logic Score & Premise Cap
     res.logic_score = Math.max(0, 1.0 - logicPenalty);
-    if (premiseError) {
-      res.logic_score = Math.min(res.logic_score, 0.4);
-    }
+    if (premiseError) res.logic_score = Math.min(res.logic_score, 0.4);
 
-    // 5. Calculation Score (Orthogonal)
-    let numericFound = false;
+    // 4. Continuous Calc Score (Linear Decay)
+    let minError = Infinity;
     const numInput = parseFloat(input.replace(',', '.'));
     const tolerance = (res.logic_score > 0.7) ? 0.10 : 0.02;
 
     for (const a of expectedAnswers) {
       const numA = parseFloat(String(a).replace(',', '.'));
       if (!isNaN(numInput) && !isNaN(numA)) {
-        if (Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < tolerance) {
-          numericFound = true;
-          break;
-        }
+        const error = Math.abs(numInput - numA) / Math.max(1, Math.abs(numA));
+        if (error < minError) minError = error;
       } else if (normalize(input).includes(normalize(a))) {
-        numericFound = true;
+        minError = 0;
         break;
       }
     }
 
-    if (!numericFound) {
-      res.calc_score = 0.2;
-      res.msg += "Ergebnis inkorrekt. ";
+    if (minError <= tolerance) {
+      res.calc_score = 1.0;
+      res.correct = true;
+    } else {
+      // k=3 slope decay
+      res.calc_score = Math.max(0.2, 1.0 - 3 * (minError - tolerance));
+      res.correct = false;
     }
 
-    // 6. Final Combined Score
+    // 5. Final Combined Score
     res.score = res.logic_score * res.calc_score;
-    res.correct = res.score > 0.8;
 
     // Validation Override
-    if (role === 'VALIDATION' && !numericFound) {
+    if (role === 'VALIDATION' && !res.correct) {
       res.score = Math.min(res.score, 0.4);
     }
 
-    // Update State
-    if (isDecision || res.correct || (res.logic_score > 0.5 && numericFound)) {
+    // Update State & Path
+    this.path.push(prim);
+    if (isDecision || res.correct || (res.logic_score > 0.5 && res.calc_score > 0.5)) {
       this.state[options.stepId || 'last'] = prim;
     }
 

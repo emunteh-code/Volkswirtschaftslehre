@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v11.0: Logic First
+// FINAL BENCHMARK STANDARD v12.0: Strict Logic Enforcement
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -10,29 +10,29 @@ import { ensureMinimumStepProblems } from '../../../assets/js/portal-core/data/e
 const BASE_STEP_PROBLEMS = {
   wechselkurs: [
     {
-      title: 'Realwechselkurs-Dynamik (Validation)',
+      title: 'Wechselkurs-Anpassung (Validation)',
       context: 'Inflation pi = 5%, pi* = 2%. Nominalkurs E sinkt um 1%.',
       steps: [
         { 
-          q: '[1. Interpretation] Liegt nominal eine Auf- oder Abwertung vor? (Symbol erlaubt)', 
-          answer: ['abwertung', '↓', 'e ↓'], 
-          options: { problemId: 'm2_wk_1', stepId: 'nom_dir', isDecision: true },
+          q: '[1. Decision] Liegt nominal eine Auf- oder Abwertung vor? (Symbol erlaubt)', 
+          answer: ['abwertung', '↓'], 
+          options: { problemId: 'm2_wk_strict', stepId: 'nom_dir', isDecision: true },
           hint: 'E sinkt in Mengennotierung.', 
           explain: 'E ↓ ⟹ Abwertung.' 
         },
         { 
           q: '[2. Execution] Berechnen Sie die Änderung des realen Wechselkurses epsilon.', 
           answer: ['2', '2%', '0.02'], 
-          options: { problemId: 'm2_wk_1', stepId: 'real_calc', dependsOn: 'nom_dir' },
+          options: { problemId: 'm2_wk_strict', stepId: 'real_calc', dependsOn: 'nom_dir' },
           hint: '%delta epsilon ≈ %delta E + pi - pi*.', 
           explain: '-1% + 5% - 2% = +2%.' 
         },
         { 
           q: '[3. Validation] Entspricht ein Anstieg von epsilon einer Verbesserung der Wettbewerbsfähigkeit?', 
           answer: ['nein', 'no', 'verschlechterung'], 
-          options: { problemId: 'm2_wk_1', role: 'VALIDATION' },
-          hint: 'epsilon ↑ ⟹ Inlandsgüter werden relativ teurer.', 
-          explain: 'Nein. Reale Aufwertung verschlechtert die Wettbewerbsfähigkeit.' 
+          options: { problemId: 'm2_wk_strict', role: 'VALIDATION' },
+          hint: 'Reale Aufwertung (epsilon↑) macht inländische Güter relativ teurer.', 
+          explain: 'Wettbewerbsfähigkeit sinkt.' 
         }
       ]
     }
@@ -45,23 +45,28 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[1. Interpretation] Welcher Zustand der Kapitalakkumulation liegt hier vor?', 
           answer: ['überakkumulation', 'over-accumulation'], 
-          options: { problemId: 'm2_solow_1', stepId: 'state_id', isDecision: true },
+          options: { problemId: 'm2_solow_strict', stepId: 'state_id', isDecision: true },
           hint: 'k > k_GR.', 
           explain: 'Die Wirtschaft hat zu viel Kapital.' 
         },
         { 
           q: '[2. Decision] Führt s↓ langfristig zu steigendem oder sinkendem Konsum c?', 
-          answer: ['steigend', '↑', 'höher', 'increase'], 
-          options: { problemId: 'm2_solow_1', stepId: 'cons_dir', dependsOn: 'state_id' },
-          hint: 'Überlegen Sie, ob das Land zu viel spart.', 
-          explain: 'In der Überakkumulation erhöht weniger Sparen den Konsum.' 
+          answer: ['steigend', '↑', 'höher'], 
+          options: { 
+            problemId: 'm2_solow_strict', 
+            stepId: 'cons_dir', 
+            dependsOn: 'state_id',
+            premise: 'OVERACCUM' 
+          },
+          hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
+          explain: 'Weniger Sparen erhöht den Konsum langfristig.' 
         },
         { 
-          q: '[3. Validation] Gilt hier die klassische "Sparen ist gut" Intuition? Begründen Sie (Ambiguität erlaubt).', 
-          answer: ['nein', 'ambig'], 
-          options: { problemId: 'm2_solow_1', role: 'VALIDATION', ambiguityAllowed: true },
-          hint: 'Betrachten Sie den Trade-off zwischen Niveau und Wachstum.', 
-          explain: 'Nein, wegen dynamischer Ineffizienz ist weniger Sparen wohlfahrtssteigernd. Die Intuition ist abhängig von der Lage zur Goldenen Regel.' 
+          q: '[3. Validation] Erklären Sie die J-Kurve bei der s-Senkung (Ambiguität erlaubt).', 
+          answer: ['ambig', 'c↑ sofort'], 
+          options: { problemId: 'm2_solow_strict', role: 'VALIDATION', ambiguityAllowed: true },
+          hint: 'Hängt vom Zeithorizont ab.', 
+          explain: 'Kurzfristig steigt der Konsum sofort (c=(1-s)y), langfristig konvergiert er gegen das höhere Steady-State-Niveau.' 
         }
       ]
     }

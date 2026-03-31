@@ -47,7 +47,7 @@ export function createPortalApp({
   } = renderer;
 
   const { renderRightPanel, clearRightPanel = () => {} } = rightPanel;
-  const { initGraph, drawBudget, drawIndiff, drawHausopt, drawMonopol, drawSlutsky } = graphs;
+  const { initGraph, ...graphRegistry } = graphs || {};
   const { startExam, submitExamAnswer, skipExamQ } = quickExam;
   const { startFullExam, feSelectWF, feCheckText, feRevealAnswer, feText, submitFE, showFullExamSelect } = fullExam;
   const { toggleMastery } = mastery;
@@ -291,11 +291,14 @@ export function createPortalApp({
       updateProgressUI(loadProgress());
     });
   };
-  window.__drawBudget = drawBudget;
-  window.__drawIndiff = drawIndiff;
-  window.__drawHausopt = drawHausopt;
-  window.__drawMonopol = drawMonopol;
-  window.__drawSlutsky = drawSlutsky;
+  
+  // Expose graph drawing functions from registry globally
+  Object.entries(graphRegistry).forEach(([key, fn]) => {
+    window[`__${key}`] = fn;
+    // Keep standard name if required
+    window[key] = fn;
+  });
+
   window.__drawHicksGraph = drawHicksGraph;
   window.__drawDemandGraph = drawDemandGraph;
   window.__drawIsoquantGraph = drawIsoquantGraph;

@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// Quick-exam prompts derived from the provided exercises/tutorials
+// Step-by-step solver problems upgraded to True Exam Difficulty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -10,400 +10,306 @@ import { ensureMinimumStepProblems } from '../../../assets/js/portal-core/data/e
 const BASE_STEP_PROBLEMS = {
   wechselkurs: [
     {
-      title: 'KKP mit Mark und Schilling',
-      context: 'Währungsnotation und Kaufkraftparität',
+      title: 'Realwechselkurs-Dynamik',
+      context: 'Inland (A) hat eine Inflation von 5%, Ausland (B) von 2%. Der nominale Wechselkurs E (Mengennotierung: B/A) sinkt um 1%.',
       steps: [
-        {
-          q: 'Wie lautet aus Sicht von Land A die Mengennotierung, wenn 1 Schilling = 3 Mark kostet?',
-          answer: ['1/3', '0.333', '0,333', 'einsdrittel'],
-          hint: 'Mengennotierung = Fremdwährung pro Inlandswährung.',
-          explain: 'Wenn 1 Schilling 3 Mark kostet, dann gilt aus Sicht von Land A: 1 Mark = 1/3 Schilling.',
-          traps: [{ pattern: '3', msg: '3 ist die Preisnotierung (Mark pro Schilling), nicht die Mengennotierung.' }],
+        { 
+          q: 'Berechne die prozentuale Änderung des Realwechselkurses epsilon = EP/P*.', 
+          answer: ['2', '2%', '0.02', '0,02'], 
+          hint: 'Nutze die Wachstumsraten-Approximation: %delta epsilon ≈ %delta E + pi_inland - pi_ausland.', 
+          explain: '-1% (E sinkt) + 5% (P steigt) - 2% (P* steigt) = 2%. In Mengennotierung bedeutet ein Anstieg von epsilon eine reale Aufwertung.', 
+          traps: [{ pattern: '4', msg: 'Haben Sie die Vorzeichen von E und den Inflationsraten korrekt beachtet?' }] 
         },
-        {
-          q: 'Welche Formel liefert den PPP-Kurs 2018 bei π_A = 10% und π_B = 20%?',
-          answer: ['e2018=e2017*(1+πb)/(1+πa)', '1.2/1.1', '(1+πb)/(1+πa)'],
-          hint: 'In Mengennotierung wächst E mit ausländischer und sinkt mit inländischer Inflation.',
-          explain: 'Unter absoluter Kaufkraftparität in Mengennotierung gilt: E_2018 = E_2017 · (1+π_B)/(1+π_A).',
-          traps: [{ pattern: '(1+πa)/(1+πb)', msg: 'Die Reihenfolge ist vertauscht: in Mengennotierung steht ausländische Inflation im Zähler.' }],
-        },
-        {
-          q: 'Wie groß ist der PPP-Kurs 2018 numerisch?',
-          answer: ['0.364', '0,364', '0.3636'],
-          hint: 'Rechne (1/3)·1,2/1,1.',
-          explain: 'E_2018 = (1/3)·1,2/1,1 ≈ 0,364 Schilling pro Mark.',
-          traps: [],
-        },
-        {
-          q: 'Wenn der tatsächliche Kurs 0,4 Schilling pro Mark beträgt: Ist die Mark real auf- oder abgewertet?',
-          answer: ['aufgewertet', 'realaufgewertet', 'überbewertet', 'ueberbewertet'],
-          hint: 'Vergleiche tatsächlichen Kurs mit dem PPP-Kurs.',
-          explain: '0,4 liegt über 0,364. Die Mark kauft also mehr Schilling als im PPP-Fall und ist real aufgewertet.',
-          traps: [{ pattern: 'abgewertet', msg: 'Der tatsächliche Mengenkurs liegt über dem KKP-Kurs, nicht darunter.' }],
-        },
-      ],
-    },
+        { 
+          q: 'Hat sich die preisliche Wettbewerbsfähigkeit des Inlands verbessert oder verschlechtert?', 
+          answer: ['verschlechtert'], 
+          hint: 'Eine reale Aufwertung (epsilon steigt) macht inländische Güter relativ teurer für das Ausland.', 
+          explain: 'Da epsilon um 2% gestiegen ist (reale Aufwertung), sind inländische Güter im Vergleich zu ausländischen Gütern teurer geworden. Die Wettbewerbsfähigkeit sinkt.', 
+          traps: [{ pattern: 'verbessert', msg: 'In Mengennotierung bedeutet ein steigender Kurs (Aufwertung), dass unsere Güter teurer werden.' }] 
+        }
+      ]
+    }
   ],
-
-  zinsparitaet: [
-    {
-      title: 'Hypothekenkredit Schweiz vs. Deutschland',
-      context: 'Zinsdifferenz, Inflation und Erwartungslogik',
-      steps: [
-        {
-          q: 'Wie groß ist der Nominalzinsunterschied zwischen Deutschland (8%) und der Schweiz (5%)?',
-          answer: ['3', '3%', '3prozentpunkte'],
-          hint: 'Einfach 8 minus 5.',
-          explain: 'Der Nominalzinsunterschied beträgt 3 Prozentpunkte.',
-          traps: [],
-        },
-        {
-          q: 'Wenn die Realzinsen gleich sind: In welchem Land ist die erwartete Inflation höher?',
-          answer: ['deutschland', 'in deutschland', 'de'],
-          hint: 'Nach Fisher: höherer Nominalzins bei gleichem Realzins bedeutet höhere Inflationserwartung.',
-          explain: 'Bei gleichem Realzins muss Deutschland die höhere erwartete Inflation haben, weil dort der Nominalzins höher ist.',
-          traps: [{ pattern: 'schweiz', msg: 'Der niedrigere Schweizer Nominalzins spricht bei gleichem Realzins gerade gegen höhere Inflation in der Schweiz.' }],
-        },
-        {
-          q: 'Welche Richtung impliziert die Zinsparität für die deutsche Währung gegenüber dem Franken?',
-          answer: ['abwertung', 'abwerten', 'deutschewährungabwerten', 'markabwerten'],
-          hint: 'Ein höherer Zinssatz wird durch erwartete Wechselkursverluste kompensiert.',
-          explain: 'Unter Zinsparität wird der deutsche Zinsvorteil durch eine erwartete Abwertung der deutschen Währung kompensiert.',
-          traps: [{ pattern: 'aufwertung', msg: 'Der Zinsvorteil darf kein Gratisgewinn sein; er wird durch erwartete Abwertung kompensiert.' }],
-        },
-      ],
-    },
-  ],
-
-  zahlungsbilanz: [
-    {
-      title: 'Leistungs- und Kapitalbilanz',
-      context: 'Leistungs- und Kapitalbilanz',
-      steps: [
-        {
-          q: 'Exportiert Deutschland Autozubehör nach China und importiert für denselben Erlös Solarzellen: Wie groß ist ΔNX?',
-          answer: ['0', 'null'],
-          hint: 'Exporte und Importe steigen um denselben Betrag.',
-          explain: 'Der Nettoexporteffekt ist null, weil sich Export- und Importwert gerade aufheben.',
-          traps: [],
-        },
-        {
-          q: 'Wie nennt man es in der Kapitalbilanz, wenn der Exporterlös an der chinesischen Börse angelegt wird?',
-          answer: ['kapitalexport', 'kapitalabfluss', 'capitaloutflow', 'auslandsanlage'],
-          hint: 'Deutschland erwirbt damit Auslandsvermögen.',
-          explain: 'Der Kauf chinesischer Wertpapiere ist ein Kapitalexport bzw. Kapitalabfluss.',
-          traps: [],
-        },
-        {
-          q: 'Kann ein Land trotz gleicher Exporte und Importe eine von null abweichende Leistungsbilanz haben? (ja/nein)',
-          answer: ['ja', 'yes'],
-          hint: 'Denk an Primär- und Sekundäreinkommen.',
-          explain: 'Ja. Die Leistungsbilanz umfasst zusätzlich Primär- und Sekundäreinkommen, nicht nur den Warenhandel.',
-          traps: [{ pattern: 'nein', msg: 'Die Leistungsbilanz ist breiter als Exporte minus Importe.' }],
-        },
-      ],
-    },
-  ],
-
   kaufkraftparitaet: [
     {
-      title: 'Big-Mac-Index',
-      context: 'PPP und Big-Mac-Index',
+      title: 'Relative Kaufkraftparität',
+      context: 'Der Big Mac kostet in der Eurozone 5,00 € und in den USA 6,00 $. Der aktuelle Wechselkurs liegt bei 1,10 $/€.',
       steps: [
-        {
-          q: 'Wie groß ist der implizite PPP-Kurs zwischen GBP und USD, wenn ein Big Mac 4,59 GBP bzw. 5,79 USD kostet?',
-          answer: ['1.261', '1,261', '1.26', '1,26'],
-          hint: 'Teile den US-Preis durch den UK-Preis.',
-          explain: 'E_PPP = 5,79 / 4,59 ≈ 1,261 USD pro GBP.',
-          traps: [],
+        { 
+          q: 'Berechne den impliziten PPP-Wechselkurs (Mengennotierung $/€).', 
+          answer: ['1.2', '1,2'], 
+          hint: 'PPP-Kurs = P* / P (Auslandspreis in $ durch Inlandspreis in €).', 
+          explain: '6.00 $ / 5.00 € = 1.20 $/€.', 
+          traps: [{ pattern: '0.83', msg: 'Reziprokfehler (P/P* gerechnet statt P*/P).' }] 
         },
-        {
-          q: 'Der tatsächliche Kurs ist 1,33 USD pro GBP. Ist der US-Dollar gegenüber dem Pfund unter- oder überbewertet?',
-          answer: ['unterbewertet', 'usdunterbewertet', 'dollarunterbewertet'],
-          hint: 'Der tatsächliche Kurs liegt über dem impliziten PPP-Kurs.',
-          explain: 'Der Dollar wirkt gegenüber dem Pfund leicht unterbewertet; das Pfund ist relativ stark.',
-          traps: [{ pattern: 'überbewertet', msg: 'Ein höherer Marktwert des GBP bedeutet hier, dass eher das Pfund relativ teuer ist.' }],
-        },
-        {
-          q: 'Nenne einen Grund, warum der Big-Mac-Index systematisch vom Marktwechselkurs abweichen kann.',
-          answer: ['nichthandelbar', 'dienstleistung', 'miete', 'lohn', 'steuer', 'produktivität'],
-          hint: 'Der Big Mac enthält mehr als nur handelbare Vorprodukte.',
-          explain: 'Typische Gründe sind nicht handelbare Komponenten wie lokale Löhne/Mieten oder Unterschiede bei Steuern und Produktivität.',
-          traps: [],
-        },
-      ],
-    },
+        { 
+          q: 'Ist der Euro gegenüber dem Dollar laut PPP über- oder unterbewertet?', 
+          answer: ['unterbewertet'], 
+          hint: 'Vergleiche den Marktkurs (1.10) mit dem PPP-Kurs (1.20).', 
+          explain: 'Da 1.10 < 1.20, bekommt man am Markt weniger Dollar für einen Euro als laut Kaufkraft gerechtfertigt wäre. Der Euro ist unterbewertet.', 
+          traps: [{ pattern: 'überbewertet', msg: 'Falsch. Ein Marktkurs unter dem PPP-Kurs bedeutet Unterbewertung der inländischen Währung.' }] 
+        }
+      ]
+    }
   ],
-
+  zinsparitaet: [
+    {
+      title: 'UIP mit Risikoprämie (High Difficulty)',
+      context: 'Weltzins i* = 2%. Erwarteter Wechselkurs in einem Jahr E^e = 1.05. Aktueller Kurs E = 1.10 (Mengennotierung $/€). Risikoprämie x = 4%.',
+      steps: [
+        { 
+          q: 'Wie hoch ist die erwartete Abwertungsrate des Euro (in %)?', 
+          answer: ['4.5', '4,5'], 
+          hint: '(E - E^e) / E. Ein Sinken von E bedeutet Abwertung.', 
+          explain: '(1.10 - 1.05) / 1.10 ≈ 0.0454, also ca. 4.5% Abwertungserwartung.', 
+          traps: [{ pattern: '-4.5', msg: 'In Mengennotierung ist eine Verringerung von E eine Abwertung (positiver Wert der Abwertungsrate).' }] 
+        },
+        { 
+          q: 'Welchen Inlandszins i muss die Zentralbank setzen, um die UIP (i ≈ i* + Abwertungserw. + x) zu erfüllen?', 
+          answer: ['10.5', '10,5'], 
+          hint: 'Addiere Weltzins, erwartete Abwertung und Risikoprämie.', 
+          explain: 'i = 2% (i*) + 4.5% (Abwertung) + 4% (Risiko) = 10.5%.', 
+          traps: [{ pattern: '1.5', msg: 'Haben Sie die Abwertungserwartung und das Risiko subtrahiert statt addiert?' }] 
+        }
+      ]
+    }
+  ],
+  zahlungsbilanz: [
+    {
+      title: 'Leistungsbilanz und Nettoauslandsvermögen',
+      context: 'Ein Land weist ein dauerhaftes Leistungsbilanzdefizit von 5% des BIP auf.',
+      steps: [
+        { 
+          q: 'Was muss spiegelbildlich in der Kapitalbilanz (Netto-Finanzierungsrechnung) vorliegen?', 
+          answer: ['Kapitalimport', 'Überschuss'], 
+          hint: 'LB + KB = 0 (vereinfacht).', 
+          explain: 'Ein Defizit in der Leistungsbilanz muss zwingend durch Kapitalimporte (Netto-Verschuldung gegenüber dem Ausland) finanziert werden.', 
+          traps: [{ pattern: 'Defizit', msg: 'Zwei Defizite würden die Zahlungsbilanz nicht ausgleichen.' }] 
+        },
+        { 
+          q: 'Wie verändert sich die Netto-Auslandsvermögensposition (NFA) über die Zeit?', 
+          answer: ['sinkt', 'verschlechtert'], 
+          hint: 'NFA = Forderungen - Verbindlichkeiten.', 
+          explain: 'Ständige Kapitalimporte bedeuten steigende Verbindlichkeiten gegenüber dem Ausland, wodurch das Netto-Auslandsvermögen sinkt (negativer wird).', 
+          traps: [{ pattern: 'steigt', msg: 'Das Land häuft Schulden an, kein Vermögen.' }] 
+        }
+      ]
+    }
+  ],
   offene_is: [
     {
-      title: 'Offene Volkswirtschaft und Fiskalpolitik',
-      context: 'Offene Nachfrage und Multiplikator',
+      title: 'Multiplikator mit Importleck und Steuern',
+      context: 'C = c0 + c1(Y-T), T = t1Y, IM = q1Y. G und X sind exogen.',
       steps: [
-        {
-          q: 'Was passiert mit der Produktion, wenn in den USA die Steuern sinken und alle übrigen exogenen Größen konstant bleiben?',
-          answer: ['steigt', 'höher', 'nimmtzu'],
-          hint: 'Niedrigere Steuern erhöhen das verfügbare Einkommen.',
-          explain: 'Die Produktion steigt, weil der private Konsum und damit die gesamtwirtschaftliche Nachfrage zunimmt.',
-          traps: [],
+        { 
+          q: 'Wie lautet der Staatsausgabenmultiplikator dY/dG?', 
+          answer: ['1/(1-c1(1-t1)+q1)', '1 / (1 - c1 * (1 - t1) + q1)'], 
+          hint: 'Stelle das Gleichgewicht Y = C + I + G + X - IM auf und isoliere Y.', 
+          explain: 'Y(1 - c1(1-t1) + q1) = Autonome Ausgaben. Der Multiplikator ist der Kehrwert der Klammer.', 
+          traps: [{ pattern: '1/(1-c1+q1)', msg: 'Die Einkommensteuer t1 reduziert das verfügbare Einkommen und damit den Multiplikatoreffekt.' }] 
         },
-        {
-          q: 'Was passiert dabei typischerweise mit der Handelsbilanz?',
-          answer: ['verschlechtert', 'defizitsteigt', 'schlechter'],
-          hint: 'Höheres Einkommen erhöht auch die Importe.',
-          explain: 'Die Handelsbilanz verschlechtert sich, weil mit steigendem Einkommen auch die Importe zunehmen.',
-          traps: [],
-        },
-        {
-          q: 'Wie lautet der Nenner des offenen Staatsausgabenmultiplikators in Y = (...) / Nenner?',
-          answer: ['1-c1-b1+q1', '1-c_1-b_1+q_1', '1-c1-b1+q_1'],
-          hint: 'Das Importleck q1 tritt positiv im Nenner auf.',
-          explain: 'Für die offene Volkswirtschaft lautet der Nenner 1 - c1 - b1 + q1.',
-          traps: [{ pattern: '1-c1-b1', msg: 'Das wäre der Nenner ohne Importleck, also eher die geschlossene Volkswirtschaft.' }],
-        },
-      ],
-    },
+        { 
+          q: 'Ist der Multiplikator in der offenen VW mit Steuern größer oder kleiner als 1?', 
+          answer: ['kleiner', '<'], 
+          hint: 'Betrachte typische Werte: c1=0.8, t1=0.25, q1=0.3.', 
+          explain: 'In der offenen VW sind die Sickerverluste (Sparen, Steuern, Importe) oft so groß, dass der Nenner > 1 wird, womit der Multiplikator < 1 fällt.', 
+          traps: [{ pattern: 'größer', msg: 'Nur in sehr simplen Modellen ohne Importe und Steuern ist er deutlich über 1.' }] 
+        }
+      ]
+    }
   ],
-
   marshall_lerner: [
     {
-      title: 'Marshall-Lerner und J-Kurve',
-      context: 'Abwertung, J-Kurve und Elastizitäten',
+      title: 'J-Kurve-Dynamik (High Difficulty)',
+      context: 'Nach einer Abwertung (E sinkt) sind Export- und Importmengen kurzfristig nahezu unveränderlich.',
       steps: [
-        {
-          q: 'Wie lautet die Marshall-Lerner-Bedingung?',
-          answer: ['|ηx|+|ηm|>1', '|etax|+|etam|>1', '>1'],
-          hint: 'Addiere die Betragswerte der Preiselastizitäten von Exporten und Importen.',
-          explain: 'Die Bedingung lautet |η_X| + |η_M| > 1.',
-          traps: [],
+        { 
+          q: 'Welcher Effekt dominiert unmittelbar nach der Abwertung die Handelsbilanz NX = X - IM/epsilon?', 
+          answer: ['Preiseffekt', 'Preis'], 
+          hint: 'epsilon = EP/P*. Wenn E sinkt, was passiert mit dem Wert der Importe in inländischen Gütern?', 
+          explain: 'Die Importe werden in inländischer Währung teurer (IM/epsilon steigt). Da die Mengen X und IM noch nicht reagieren, verschlechtert sich NX sofort.', 
+          traps: [{ pattern: 'Mengeneffekt', msg: 'Mengen reagieren erst zeitverzögert auf Preisänderungen.' }] 
         },
-        {
-          q: 'Was passiert bei erfüllter Marshall-Lerner-Bedingung langfristig mit NX nach einer Abwertung?',
-          answer: ['steigt', 'verbessert', 'nimmtzu'],
-          hint: 'Dann dominiert der Mengeneffekt.',
-          explain: 'Langfristig steigen die Nettoexporte bzw. die Handelsbilanz verbessert sich.',
-          traps: [],
-        },
-        {
-          q: 'Wie verläuft die J-Kurve kurzfristig direkt nach einer Abwertung?',
-          answer: ['verschlechtert', 'zunächst schlechter', 'erst schlechter'],
-          hint: 'Verträge und Mengen reagieren träge.',
-          explain: 'Kurzfristig verschlechtert sich die Handelsbilanz zunächst, bevor sie sich später verbessern kann.',
-          traps: [],
-        },
-      ],
-    },
+        { 
+          q: 'Wie nennt man die Bedingung, dass die Summe der Elastizitäten > 1 sein muss, damit NX langfristig steigt?', 
+          answer: ['Marshall-Lerner', 'Marshall Lerner'], 
+          hint: 'Benannt nach zwei Ökonomen.', 
+          explain: 'Die Marshall-Lerner-Bedingung garantiert, dass der positive Mengeneffekt den negativen Preiseffekt übersteigt.', 
+          traps: [{ pattern: 'Okun', msg: 'Okun bezieht sich auf Arbeitslosigkeit.' }] 
+        }
+      ]
+    }
   ],
-
   mundell_fleming: [
     {
-      title: 'Feste Parität und Trilemma',
-      context: 'Feste Parität und Trilemma',
+      title: 'Mundell-Fleming: Fiskalexpansion',
+      context: 'Flexible Wechselkurse, perfekte Kapitalmobilität (UIP). G steigt.',
       steps: [
-        {
-          q: 'Bei 50% Wahrscheinlichkeit einer 10%-Abwertung: Wie hoch ist die erwartete Abwertungsrate?',
-          answer: ['5', '5%', '5prozent'],
-          hint: 'Bildet den Erwartungswert aus Wahrscheinlichkeit mal Ereignis.',
-          explain: '0,5 · 10% = 5%.',
-          traps: [],
+        { 
+          q: 'Welche Auswirkung hat der resultierende Zinsanstieg auf den Wechselkurs E (Mengennotierung)?', 
+          answer: ['Aufwertung', 'E steigt'], 
+          hint: 'Höhere Zinsen locken Kapital an.', 
+          explain: 'Das höhere i führt zu Kapitalzuflüssen und einer sofortigen Aufwertung der heimischen Währung (E steigt).', 
+          traps: [{ pattern: 'Abwertung', msg: 'Falsch. Höhere Zinsen machen die Währung attraktiver.' }] 
         },
-        {
-          q: 'Um wie viele Prozentpunkte muss der Zins erhöht werden, um die Parität zu halten?',
-          answer: ['5', '5%', '5prozentpunkte'],
-          hint: 'Nach UIP muss der Zinsaufschlag die erwartete Abwertung kompensieren.',
-          explain: 'Die Zentralbank muss den Zins um 5 Prozentpunkte anheben.',
-          traps: [],
-        },
-        {
-          q: 'Kann ein Land gleichzeitig festen Wechselkurs, freien Kapitalverkehr und autonome Geldpolitik haben? (ja/nein)',
-          answer: ['nein', 'no'],
-          hint: 'Das ist genau die Kernaussage des Trilemmas.',
-          explain: 'Nein. Das Trilemma erlaubt immer nur zwei dieser drei Ziele gleichzeitig.',
-          traps: [{ pattern: 'ja', msg: 'Das widerspricht direkt dem Trilemma der Geld- und Währungspolitik.' }],
-        },
-      ],
-    },
+        { 
+          q: 'Was passiert im neuen Gleichgewicht mit den Nettoexporten NX?', 
+          answer: ['sinken', 'fällt', 'Verschlechterung'], 
+          hint: 'Kombiniere den Einkommenseffekt (Y steigt) und den Wechselkurseffekt (E steigt).', 
+          explain: 'Die Aufwertung (E steigt) macht Exporte teurer und Importe billiger. Zudem erhöht das gestiegene Y die Importe zusätzlich. NX sinkt massiv.', 
+          traps: [{ pattern: 'steigen', msg: 'Die Fiskalpolitik verdrängt in der offenen VW die Nettoexporte (Crowding-out).' }] 
+        }
+      ]
+    }
   ],
-
-  barro_gordon: [
+  wk_regime: [
     {
-      title: 'Inflationsbias im Barro-Gordon-Modell',
-      context: 'Inflationsbias und Zeitinkonsistenz',
+      title: 'Festkurssystem und Geldpolitik',
+      context: 'Ein Land fixiert seinen Kurs E dauerhaft. Es gilt vollkommene Kapitalmobilität.',
       steps: [
-        {
-          q: 'Bei L = 1,5π² + u² und π = πe − (u − 0,05), πe = 0: Welche Inflationsrate wählt die Zentralbank?',
-          answer: ['0.02', '0,02', '2', '2%'],
-          hint: 'Setze u = 0,05 − π in die Verlustfunktion ein und minimiere nach π.',
-          explain: 'Es ergibt sich π = 0,02, also 2%.',
-          traps: [],
-        },
-        {
-          q: 'Welche Arbeitslosenquote folgt daraus?',
-          answer: ['0.03', '0,03', '3', '3%'],
-          hint: 'Nutze u = 0,05 − π.',
-          explain: 'u = 0,05 − 0,02 = 0,03, also 3%.',
-          traps: [],
-        },
-        {
-          q: 'Was bleibt ohne glaubwürdiges Commitment bei rationalen Erwartungen übrig?',
-          answer: ['inflationsbias', 'höhere inflation', 'naturalerbeitslosigkeit', 'natürlichearbeitslosigkeit'],
-          hint: 'Denke an Zeitinkonsistenz: Inflation ja, dauerhafte Beschäftigungsgewinne nein.',
-          explain: 'Ohne Commitment entsteht ein Inflationsbias: höhere Inflation, während die Arbeitslosigkeit zur natürlichen Rate zurückkehrt.',
-          traps: [],
-        },
-      ],
-    },
+        { 
+          q: 'Verfügt das Land noch über eine autonome Geldpolitik (Steuerung von i)?', 
+          answer: ['nein', 'no'], 
+          hint: 'UIP: i = i* + Abwertungserw. Bei festem Kurs ist letzteres 0.', 
+          explain: 'Da i = i* gelten muss, kann die Zentralbank den Zins nicht mehr unabhängig vom Ankerland setzen.', 
+          traps: [{ pattern: 'ja', msg: 'Dies wäre nur bei Kapitalverkehrskontrollen möglich (Unmögliches Dreieck).' }] 
+        }
+      ]
+    }
   ],
-
+  zeitinkonsistenz: [
+    {
+      title: 'Barro-Gordon Nash-Gleichgewicht (High Difficulty)',
+      context: 'Verlustfunktion L = pi^2 + (u - 0.03)^2. Phillipskurve u = 0.05 - (pi - pi_e). Ziel: u* = 0.03, u_n = 0.05.',
+      steps: [
+        { 
+          q: 'Berechne die Inflationsrate pi im Nash-Gleichgewicht (Diskretion), wenn pi_e = pi.', 
+          answer: ['0.02', '2%', '0,02'], 
+          hint: 'Setze u in L ein, leite nach pi ab, setze dL/dpi = 0 und danach pi_e = pi.', 
+          explain: 'L = pi^2 + (0.05 - pi + pi_e - 0.03)^2. Ableitung nach pi: 2pi + 2(0.02 - pi + pi_e)*(-1) = 0. Mit pi = pi_e folgt: 2pi - 0.04 + 2pi - 2pi = 0 => 2pi = 0.04 => pi = 0.02.', 
+          traps: [{ pattern: '0', msg: 'Nullinflation wäre nur bei Commitment möglich.' }] 
+        },
+        { 
+          q: 'Wie hoch ist die Arbeitslosigkeit u im Nash-Gleichgewicht?', 
+          answer: ['0.05', '5%', '0,05'], 
+          hint: 'Nutze die Phillipskurve mit pi = pi_e.', 
+          explain: 'Da die Erwartungen rational sind (pi = pi_e), bleibt u auf dem natürlichen Niveau u_n = 0.05. Die Inflation ist nutzlos ("Inflation Bias").', 
+          traps: [{ pattern: '0.03', msg: 'Das Ziel u* wird nicht erreicht, da private Akteure die Täuschung antizipieren.' }] 
+        }
+      ]
+    }
+  ],
   budgetrestriktion: [
     {
-      title: 'Einmalige Steuersenkung und Schuldenrückzahlung',
-      context: 'Staatsschuld und Rückzahlungspfad',
+      title: 'Ricardianische Äquivalenz (High Difficulty)',
+      context: 'Lebenseinkommen-Barwert = 200. Zinssatz r = 10%. Die Regierung senkt heute die Steuern um 10 € und finanziert dies durch Schulden.',
       steps: [
-        {
-          q: 'Wie hoch ist die neu entstandene Staatsschuld direkt nach der einmaligen Steuersenkung von 1000 auf 900?',
-          answer: ['100'],
-          hint: 'Das Defizit entspricht genau der Steuersenkung.',
-          explain: 'Die einmalige Steuersenkung erzeugt ein Defizit und damit eine Schuld von 100.',
-          traps: [],
+        { 
+          q: 'Um wie viel müssen die Steuern in der nächsten Periode steigen, um die Schulden inkl. Zinsen zu tilgen?', 
+          answer: ['11', '11.0'], 
+          hint: 'Delta T2 = Delta T1 * (1 + r).', 
+          explain: '10 € Ersparnis heute führen zu 10 * 1.1 = 11 € Mehrbelastung morgen.', 
+          traps: [{ pattern: '10', msg: 'Zinsen müssen mitberücksichtigt werden.' }] 
         },
-        {
-          q: 'Wie hoch ist die Zusatzsteuer in t=4 bei r = 10%?',
-          answer: ['133.1', '133,1'],
-          hint: 'Verzinse 100 drei Perioden lang mit 1,1.',
-          explain: '100 · 1,1³ = 133,1.',
-          traps: [],
-        },
-        {
-          q: 'Wie hoch ist die Zusatzsteuer in t=10?',
-          answer: ['235.79', '235,79', '235.8', '235,8'],
-          hint: 'Verzinse 100 neun Perioden lang.',
-          explain: '100 · 1,1⁹ ≈ 235,79.',
-          traps: [],
-        },
-      ],
-    },
+        { 
+          q: 'Wie ändert sich der private Konsum heute, wenn die Konsumenten vorausschauend handeln?', 
+          answer: ['0', 'unverändert', 'gar nicht'], 
+          hint: 'Berechne die Änderung des Barwerts der lebenslangen Steuerlast.', 
+          explain: 'Barwert-Änderung: -10 + 11/1.1 = 0. Da das Lebensvermögen gleich bleibt, ändert sich der Konsum nicht.', 
+          traps: [{ pattern: '10', msg: 'Nur kurzsichtige Konsumenten würden die Steuersenkung sofort verkonsumieren.' }] 
+        }
+      ]
+    }
   ],
-
   taylor_regel: [
     {
-      title: 'Taylor-Regel und Taylor-Prinzip',
-      context: 'Taylor-Regel und Realzins',
+      title: 'Taylor-Prinzip',
+      context: 'i = r_n + pi + a*(pi - pi*).',
       steps: [
-        {
-          q: 'Wenn π = π* gilt und die Regel nur i_t = i* + α(π_t − π*) lautet: Bleibt der Zins unverändert, sinkt er oder steigt er?',
-          answer: ['unverändert', 'gleich', 'bleibtgleich'],
-          hint: 'Dann ist der gesamte Reaktionsterm null.',
-          explain: 'Der Zins bleibt unverändert, weil die Inflationslücke null ist.',
-          traps: [],
-        },
-        {
-          q: 'Bei der erweiterten Taylor-Regel mit −β(u_t−u_n): Was passiert bei u_t > u_n mit dem Zins?',
-          answer: ['sinkt', 'senkt', 'niedriger'],
-          hint: 'Der zusätzliche Term ist dann negativ.',
-          explain: 'Der Zins sinkt, weil die positive Arbeitslosigkeitslücke mit negativem Vorzeichen in die Regel eingeht.',
-          traps: [],
-        },
-        {
-          q: 'Was muss nach dem Taylor-Prinzip mit dem Realzins bei höherer Inflation passieren?',
-          answer: ['steigen', 'höher', 'realzinssteigt'],
-          hint: 'Der Nominalzins muss stärker als eins zu eins reagieren.',
-          explain: 'Der Realzins muss steigen; nur dann wirkt Geldpolitik inflationsdämpfend.',
-          traps: [],
-        },
-      ],
-    },
+        { 
+          q: 'Welche Bedingung muss für den Koeffizienten a gelten, damit die Geldpolitik stabilisierend wirkt?', 
+          answer: ['>0', 'positiv', 'a > 0'], 
+          hint: 'Der Realzins r = i - pi muss steigen, wenn die Inflation steigt.', 
+          explain: 'Wenn a > 0, führt ein Anstieg von pi um 1% zu einem Anstieg von i um mehr als 1%. Dadurch steigt der Realzins r.', 
+          traps: [{ pattern: '<0', msg: 'Dann würde der Realzins bei Inflation sinken, was die Nachfrage weiter anheizt (Instabilität).' }] 
+        }
+      ]
+    }
   ],
-
+  geldmengen: [
+    {
+      title: 'Seigniorage-Laffer-Kurve',
+      context: 'Realer Seigniorage-Ertrag S = g_M * (M/P). g_M ist das Geldmengenwachstum.',
+      steps: [
+        { 
+          q: 'Warum sinkt S ab einer sehr hohen Inflationsrate wieder?', 
+          answer: ['Geldnachfrage sinkt', 'reale Geldmenge sinkt'], 
+          hint: 'Was machen Menschen mit ihrem Geld bei Hyperinflation?', 
+          explain: 'Die Flucht aus der Währung reduziert die reale Geldmenge (Bemessungsgrundlage) schneller als der "Steuersatz" g_M steigt.', 
+          traps: [{ pattern: 'Preise sinken', msg: 'Falsch, die Preise explodieren.' }] 
+        }
+      ]
+    }
+  ],
   aggregierte_pf: [
     {
-      title: 'Produktionsfunktion und Skalenerträge',
-      context: 'Produktionsfunktion und Skalenerträge',
+      title: 'Produktionsfunktion und Kapitalintensität',
+      context: 'Y = K^0.3 * N^0.7.',
       steps: [
-        {
-          q: 'Wie groß ist Y bei Y = K^0,5 N^0,5, K = 21 und N = 7?',
-          answer: ['12.12', '12,12', '12.1'],
-          hint: 'Das ist die Wurzel aus 147.',
-          explain: 'Y = √147 ≈ 12,12.',
-          traps: [],
-        },
-        {
-          q: 'Wie groß ist die Kapitalintensität K/N?',
-          answer: ['3'],
-          hint: 'Teile 21 durch 7.',
-          explain: 'K/N = 21/7 = 3.',
-          traps: [],
-        },
-        {
-          q: 'Wenn beide Faktoren verdreifacht werden: Mit welchem Faktor steigt Y?',
-          answer: ['3', 'dreifach', 'verdreifacht'],
-          hint: 'Bei Cobb-Douglas mit Exponenten 0,5 und 0,5 addieren sich die Exponenten zu 1.',
-          explain: 'Die Produktion steigt genau um den Faktor 3. Das sind konstante Skalenerträge.',
-          traps: [],
-        },
-      ],
-    },
+        { 
+          q: 'Wie lautet die intensive Form der Produktionsfunktion y = f(k)?', 
+          answer: ['k^0.3', 'k^0,3'], 
+          hint: 'Teile die gesamte Funktion durch N.', 
+          explain: 'Y/N = K^0.3 * N^0.7 / N = K^0.3 / N^0.3 = (K/N)^0.3.', 
+          traps: [{ pattern: 'k^0.7', msg: 'Der Exponent von K bestimmt die Krümmung der intensiven Form.' }] 
+        }
+      ]
+    }
   ],
-
   solow_basis: [
     {
-      title: 'Solow-Grundmodell',
-      context: 'Solow-Dynamik und Sparquote',
+      title: 'Solow: Wachstum vs. Niveau (High Difficulty)',
+      context: 'Im Steady State steigt die Sparquote s dauerhaft an.',
       steps: [
-        {
-          q: 'Was passiert mit der Kapitalintensität k* nach einem dauerhaften Anstieg der Sparquote?',
-          answer: ['steigt', 'höher', 'nimmtzu'],
-          hint: 'Mehr Sparen bedeutet mehr Investition je Kopf.',
-          explain: 'Die Kapitalintensität steigt, weil die sf(k)-Kurve nach oben rückt.',
-          traps: [],
+        { 
+          q: 'Wie verändert sich die Wachstumsrate der Produktion pro Kopf (y) unmittelbar nach der Erhöhung?', 
+          answer: ['steigt', 'positiv'], 
+          hint: 'Ist die Investition nun größer oder kleiner als die Abschreibung?', 
+          explain: 'Da s*f(k) nun größer ist als delta*k, wird neues Kapital akkumuliert. Während dieses Übergangs wächst y.', 
+          traps: [{ pattern: 'konstant', msg: 'Nur im Steady State ist die Wachstumsrate konstant (hier 0).' }] 
         },
-        {
-          q: 'Wie hoch ist die langfristige Wachstumsrate von Y/N im Solow-Modell ohne technischen Fortschritt?',
-          answer: ['0', 'null', '0%'],
-          hint: 'Ohne technischen Fortschritt gibt es im Steady State kein dauerhaftes Wachstum pro Kopf.',
-          explain: 'Langfristig ist die Wachstumsrate von Y/N gleich null.',
-          traps: [],
-        },
-        {
-          q: 'Führt mehr Sparen immer zu höherem langfristigem Konsum pro Kopf? (ja/nein)',
-          answer: ['nein', 'no'],
-          hint: 'Denk an die Goldene Regel.',
-          explain: 'Nein. Oberhalb der Goldenen Regel kann eine höhere Sparquote den langfristigen Konsum pro Kopf senken.',
-          traps: [{ pattern: 'ja', msg: 'Der langfristige Konsum steigt nur bis zur Goldenen Regel sicher an.' }],
-        },
-      ],
-    },
+        { 
+          q: 'Was ist die langfristige Wachstumsrate von y im neuen Steady State (ohne techn. Fortschritt)?', 
+          answer: ['0', 'Null'], 
+          hint: 'Kehrt die Ökonomie zu einem Gleichgewicht zurück?', 
+          explain: 'Langfristig erreichen die Abschreibungen wieder das Niveau der Investitionen. Das Wachstum von y kehrt auf 0 zurück. Nur das Niveau ist nun höher.', 
+          traps: [{ pattern: 'höher', msg: 'Die Sparquote beeinflusst das Niveaus des pro-Kopf-Einkommens, nicht dessen dauerhafte Wachstumsrate.' }] 
+        }
+      ]
+    }
   ],
-
   tech_fortschritt: [
     {
-      title: 'Solow mit technischem Fortschritt',
-      context: 'Technischer Fortschritt im Solow-Modell',
+      title: 'Solow mit technischem Fortschritt (Numerical)',
+      context: 'Y = K^0.5 * (AN)^0.5. s = 0.4, delta = 0.05, g_A = 0.03, g_N = 0.02.',
       steps: [
-        {
-          q: 'Wie groß ist k~* bei α = 0,4, s = 11%, g_N = 3%, g_A = 1%, δ = 7%?',
-          answer: ['1'],
-          hint: 'Hier gilt zufällig s = g_N + g_A + δ.',
-          explain: 'k~* = (0,11 / 0,11)^(1/0,6) = 1.',
-          traps: [],
+        { 
+          q: 'Berechne die notwendigen Investitionen pro effektiver Arbeitseinheit (Rate).', 
+          answer: ['0.1', '10%', '0,1'], 
+          hint: 'Summe aus Abschreibung, techn. Fortschritt und Bevölkerungswachstum.', 
+          explain: '0.05 + 0.03 + 0.02 = 0.10.', 
+          traps: [{ pattern: '0.05', msg: 'Haben Sie g_A und g_N vergessen?' }] 
         },
-        {
-          q: 'Wie groß ist der Konsum pro Arbeitseffizienzeinheit c~*?',
-          answer: ['0.89', '0,89'],
-          hint: 'c~* = (1−s) y~* und y~* = 1.',
-          explain: 'c~* = 0,89 · 1 = 0,89.',
-          traps: [],
-        },
-        {
-          q: 'Wie hoch ist die Goldene-Regel-Sparquote bei Cobb-Douglas mit α = 0,4?',
-          answer: ['0.4', '0,4', '40', '40%'],
-          hint: 'Bei Cobb-Douglas gilt s_gold = α.',
-          explain: 'Die Goldene-Regel-Sparquote beträgt 0,4 bzw. 40%.',
-          traps: [],
-        },
-      ],
-    },
-  ],
+        { 
+          q: 'Berechne den Steady-State Kapitalstock pro effektiver Arbeitseinheit k**.', 
+          answer: ['16', '16.0'], 
+          hint: 's * sqrt(k) = (delta + g_A + g_N) * k.', 
+          explain: '0.4 * sqrt(k) = 0.1 * k  => 4 = sqrt(k) => k = 16.', 
+          traps: [{ pattern: '4', msg: 'Haben Sie vergessen, das Ergebnis zu quadrieren?' }] 
+        }
+      ]
+    }
+  ]
 };
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({

@@ -135,6 +135,128 @@ probe_2024: {
           correct:['27','isokost','optimal','x1=27','x2=27','minimum','kosten'], feedback: String.raw`Bei $w_1=1, w_2=4$: $(x_2/x_1)^{2/3}=1/4 \implies x_2/x_1 = (1/4)^{3/2} = 1/8 \implies x_2 = x_1/8$. Einsetzen: $y = (x_1^{1/3}+x_2^{1/3})^3 = x_1^{1/3}(1+(1/8)^{1/3})^3 x_1 = 27 \implies x_1^* = 24, x_2^* = 3$. Kosten: $C = 1\cdot 24 + 4\cdot 3 = 36$.` },
       ]
     },
-  ]
-}
+  },
+  hard_mock_mikro1_2026: {
+    id: 'hard_mock_mikro1_2026',
+    title: 'Mikro I - Master-Level Simulation v6.5 (60 Min)',
+    subtitle: 'Integrated Reasoning & Structural Consistency',
+    duration: 60,
+    aufgaben: [
+      {
+        label: 'Task 0',
+        points: 5,
+        type: 'text-block',
+        title: 'Axiomatische Grundlagen',
+        questions: [
+          {
+            id: 'm0',
+            points: 5,
+            type: 'text',
+            text: 'Welches Axiom der Präferenzrelation wird verletzt, wenn sich zwei Indifferenzkurven derselben Person schneiden?',
+            correct: ['transitivität', 'transitivitaet', 'transitivität verletzt', 'transitivity'],
+            feedback: 'Korrekt. Der Schnittpunkt impliziert einen logischen Widerspruch zur Transitivität.',
+          }
+        ]
+      },
+      {
+        label: 'Problem 1',
+        points: 30,
+        type: 'text-block',
+        title: 'Block A: Slutsky-Zerlegung & Graphen-Logik',
+        preamble: String.raw`Ein Haushalt hat $u(x_1, x_2) = x_1 x_2$. Der Preis $p_1$ sinkt von $4$ auf $1$ ($p_2 = 1, m = 40$). [Empfohlene Zeit: 20 Minuten].`,
+        questions: [
+          {
+            id: 'm1a_1',
+            points: 5,
+            type: 'text',
+            text: '[1.1] Extrahieren Sie das ursprüngliche Optimum $x^* = (x_1, x_2)$ aus der beigefügten Grafik (Gitter: 5 Einheiten).',
+            correct: ['5, 20', '5 20', '(5,20)', 'x1=5 x2=20', '5;20'],
+            feedback: String.raw`Das Optimum liegt bei $x_1^* = 5$ und $x_2^* = 20$.`,
+          },
+          {
+            id: 'm1a_2',
+            points: 5,
+            type: 'text',
+            text: '[1.2] Bestimmen Sie qualitativ: Liegt bei dieser Preissenkung ein positiver oder negativer Substitutionseffekt (SE) für Gut 1 vor? (Symbole ↑ ↓ erlaubt).',
+            correct: ['positiv', 'se > 0', 'se ↑', 'se positiv', 'steigt', 'positive'],
+            feedback: String.raw`Da Gut 1 relativ billiger wird, ist der SE für Gut 1 immer positiv ($x_1^s > x_1^0$).`,
+          },
+          {
+            id: 'm1a_3',
+            points: 5,
+            type: 'text',
+            text: '[1.3] Berechnen Sie das für die Slutsky-Zerlegung notwendige kompensierte Einkommen $m\'$, um das alte Bündel zu neuen Preisen gerade noch kaufbar zu machen.',
+            correct: ['25', 'm=25', 'm\'=25', '25.0'],
+            feedback: String.raw`$m\' = p_1^{neu} x_1^0 + p_2 x_2^0 = 1 \cdot 5 + 1 \cdot 20 = 25$.`,
+          },
+          {
+            id: 'm1b',
+            points: 15,
+            type: 'text',
+            text: '[1.4] Berechnen Sie die gesamte Nachfrageänderung $\Delta x_1$. (Hinweis: $x_1^{neu} = m/(2p_1^{neu})$).',
+            correct: ['15', 'delta x1 = 15', 'steigt um 15', '20 - 5', '15.0'],
+            feedback: String.raw`$x_1^0 = 5$, $x_1^{final} = 40/(2 \cdot 1) = 20$. $\Delta x_1 = 20 - 5 = 15$. (Hinweis: Rechenweg wird anteilig gewertet).`,
+          }
+        ]
+      },
+      {
+        label: 'Problem 2',
+        points: 25,
+        type: 'text-block',
+        title: 'Block B: Produktion & Markt-Exit',
+        preamble: String.raw`Ein Unternehmen produziert mit $f(L,K) = L^{0{,}5} K^{0{,}5}$. Faktorpreise sind $w=1, r=1$. Fixkosten $FC = 16$ (sunk).`,
+        questions: [
+          {
+            id: 'm2a',
+            points: 10,
+            type: 'text',
+            text: '[2.1] Interpretieren Sie die Skalenerträge dieser Funktion (Bedingung + Implikation).',
+            correct: [
+              'konstante skalenerträge homogen grad 1', 
+              'konstant grad 1', 
+              'crs homogen grad 1', 
+              'homogen grad 1 → konstant',
+              'konstante skalenerträge → f(tx) = t f(x)',
+              'konstant → output verdoppelt bei input verdopplung'
+            ],
+            feedback: String.raw`Die Funktion ist homogen vom Grad 1 ($0{,}5+0{,}5=1$), was konstante Skalenerträge (CRS) impliziert.`,
+          },
+          {
+            id: 'm2b',
+            points: 15,
+            type: 'text',
+            text: '[2.2] Ab welchem Preis $P$ bietet das Unternehmen langfristig eine positive Menge an? (Minimum der Durchschnittskosten $AC$).',
+            correct: ['p >= 2', 'p>=2', '2', 'mindestens 2', 'p > 2'],
+            feedback: String.raw`Kostenfunktion: $C(y) = 2y + 16$. $AC = 2 + 16/y$. Da $FC$ sunk sind, ist die langfristige Bedingung $P \geq MC$. Bei CRS sind $MC = 2$ konstant.`,
+          }
+        ]
+      },
+      {
+        label: 'Problem 3',
+        points: 20,
+        type: 'text-block',
+        title: 'Block C: Perfekte Substitute & Steuer',
+        preamble: String.raw`Nutzenfunktion $u(x_1, x_2) = 2x_1 + x_2$. Preise $p_1=3, p_2=1, m=30$.`,
+        questions: [
+          {
+            id: 'm3a',
+            points: 10,
+            type: 'text',
+            text: '[3.1] Bestimmen Sie das Haushaltsoptimum. (Randlösung oder Tangentiallösung?)',
+            correct: ['randlösung x2=30', 'x2=30', '0, 30', 'randlösung x1=0', 'corner solution', 'x1=0'],
+            feedback: String.raw`$|GRS| = 2$. Preisverhältnis $p_1/p_2 = 3$. Da $|GRS| < p_1/p_2$, wird nur Gut 2 konsumiert: $x = (0, 30)$.`,
+          },
+          {
+            id: 'm3b',
+            points: 10,
+            type: 'text',
+            text: '[3.2] Die Regierung führt eine Subvention auf Gut 1 ein, sodass der Preis auf $p_1\' = 1{,}5$ sinkt. Wie ändert sich das Konsummuster?',
+            correct: ['wechsel zu x1', 'alles x1', 'x1=20', 'nur noch gut 1', 'switch to x1'],
+            feedback: String.raw`Neues Preisverhältnis $1{,}5/1 = 1{,}5$. Da $|GRS| = 2 > 1{,}5$, wechselt der Haushalt komplett zu Gut 1: $x = (20, 0)$.`,
+          }
+        ]
+      }
+    ]
+  }
 };
+

@@ -14,7 +14,7 @@ export function normalizeAnswer(str) {
     .replace(/\s+/g, '')
     .replace(/[_,]/g, '')
     .replace(/\*/g, '')
-    .replace(/[^a-z0-9+\-\/=.<>λαβγδεζ]/g, '')
+    .replace(/[^a-z0-9+\-\/=.<>λαβγδεζ↑↓→]/g, '')
     .trim();
 }
 

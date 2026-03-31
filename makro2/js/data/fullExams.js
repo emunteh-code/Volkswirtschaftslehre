@@ -46,7 +46,7 @@ export const FULL_EXAMS = {
             ],
           },
           {
-            context: 'Geldpolitik, Schulden und Wachstum',
+            context: 'Geldpolitik, Schulden and Wachstum',
             questions: [
               {
                 id: '1_5',
@@ -56,7 +56,7 @@ export const FULL_EXAMS = {
               },
               {
                 id: '1_6',
-                text: 'Folgt die Zentralbank der Regel $i_t = i^* + \\alpha(\\pi_t-\\pi^*)$ und gilt $\\pi_t = \\pi^*$, dann bleibt der Zins trotz Arbeitslosigkeit oberhalb des natürlichen Niveaus unverändert.',
+                text: 'Folgt die Zentralbank der Regel $i_t = i^* + \\alpha(\\pi_t-\\pi^*)$ and gilt $\\pi_t = \\pi^*$, dann bleibt der Zins trotz Arbeitslosigkeit oberhalb des natürlichen Niveaus unverändert.',
                 correct: 'Wahr',
                 feedback: 'Wahr. Ohne zusätzlichen Arbeitslosigkeits- oder Outputlückenterm ist die Reaktion bei verschwindender Inflationslücke gleich null.',
               },
@@ -96,7 +96,7 @@ export const FULL_EXAMS = {
             id: '2b',
             points: 4,
             type: 'text',
-            text: 'Bei $\pi_A = 10\%$ und $\pi_B = 20\%$: Wie groß ist der nominale PPP-Kurs am 1.1.2018 in Mengennotierung?',
+            text: 'Bei $\pi_A = 10\%$ and $\pi_B = 20\%$: Wie groß ist der nominale PPP-Kurs am 1.1.2018 in Mengennotierung?',
             correct: ['0.364', '0,364', '0.3636'],
             feedback: String.raw`Unter absoluter KKP in Mengennotierung gilt $$E_{2018} = E_{2017}\cdot\frac{1+\pi_B}{1+\pi_A} = \frac{1}{3}\cdot\frac{1{,}20}{1{,}10} \approx 0{,}364.$$`,
           },
@@ -112,7 +112,7 @@ export const FULL_EXAMS = {
             id: '2d',
             points: 3,
             type: 'text',
-            text: 'Ein Big Mac kostet 4,59 GBP in Großbritannien und 5,79 USD in den USA. Wie groß ist der implizite PPP-Kurs USD/GBP?',
+            text: 'Ein Big Mac kostet 4,59 GBP in Großbritannien and 5,79 USD in den USA. Wie groß ist der implizite PPP-Kurs USD/GBP?',
             correct: ['1.261', '1,261', '1.26', '1,26'],
             feedback: String.raw`Der implizite PPP-Kurs lautet $$E_{\text{PPP}} = \frac{5{,}79}{4{,}59} \approx 1{,}261\ \text{USD pro GBP}.$$`,
           },
@@ -248,7 +248,7 @@ export const FULL_EXAMS = {
             id: '6a',
             points: 3,
             type: 'text',
-            text: String.raw`Bei $Y = K^{0{,}5}N^{0{,}5}$ mit $K = 21$ und $N = 7$: Wie groß ist die Produktion?`,
+            text: String.raw`Bei $Y = K^{0{,}5}N^{0{,}5}$ mit $K = 21$ and $N = 7$: Wie groß ist die Produktion?`,
             correct: ['12.12', '12,12', '12.1'],
             feedback: String.raw`Es gilt $$Y = \sqrt{21\cdot 7} = \sqrt{147} \approx 12{,}12.$$`,
           },
@@ -272,4 +272,166 @@ export const FULL_EXAMS = {
       },
     ],
   },
+  hard_mock_2026: {
+    id: 'hard_mock_2026',
+    title: 'VWL II - Master-Level Simulation v6.2 (60 Min)',
+    subtitle: 'High-Flex Semantic Recognition & Clustered Reasoning',
+    duration: 60,
+    aufgaben: [
+      {
+        label: 'Task 0',
+        points: 5,
+        type: 'text-block',
+        title: 'Die Trilemma-Prämisse',
+        questions: [
+          {
+            id: 'p0',
+            points: 5,
+            type: 'text',
+            text: 'Welches Ziel muss ein Land zwingend aufgeben, wenn es einen fixen Wechselkurs UND freien Kapitalverkehr beibehalten will?',
+            correct: ['autonome geldpolitik', 'geldpolitische autonomie', 'zinsautonomie', 'autonomy', 'monetary autonomy'],
+            feedback: 'Korrekt. Da der Zins durch die UIP an den Weltzins (plus Erwartung) gebunden ist, verliert die ZB ihre Autonomie.',
+          }
+        ]
+      },
+      {
+        label: 'Problem 1',
+        points: 30,
+        type: 'text-block',
+        title: 'Block A: Regime-Analyse & UIP',
+        preamble: String.raw`Analysieren Sie den Schock grafisch und leiten Sie die Zinsreaktion ab. [Empfohlene Zeit: 18–20 Minuten].`,
+        questions: [
+          {
+            id: 'p1a_1',
+            points: 5,
+            type: 'text',
+            text: '[1.1] Extrahieren Sie den Wert für $E^e$ aus der Grafik (Gitter: 0,01).',
+            correct: ['0.97', '0,97', '0.96', '0.98', '0.970'],
+            feedback: String.raw`$E^e = 0{,}97$.`,
+          },
+          {
+            id: 'p1a_1_5',
+            points: 5,
+            type: 'text',
+            text: '[1.2] Bestimmen Sie qualitativ: Liegt bei dieser Erwartung ($E^e < E$) Auf- oder Abwertungsdruck vor? (Symbole wie ↑ ↓ oder → erlaubt).',
+            correct: [
+              'abwertungsdruck', 
+              'abwertung', 
+              'druck nach unten', 
+              'downward', 
+              'e ↓', 
+              'e sinkt', 
+              'kurs ↓', 
+              'abwärts', 
+              'depreciation', 
+              'devaluation',
+              'pressure ↓'
+            ],
+            feedback: String.raw`Da $E^e < 1{,}0$, liegt Abwertungsdruck vor. (Hinweis: "downward" wird akzeptiert, da der Kontext E durch die Voraufgabe etabliert wurde).`,
+          },
+          {
+            id: 'p1a_2',
+            points: 5,
+            type: 'text',
+            text: '[1.3] Welche Zinsanpassung folgt aus Block A (Task 0)?',
+            correct: ['muss steigen', 'erhöhung', 'zinsautonomie aufgeben', 'increase', 'higher interest', 'steigt', 'hoch', 'i steigt', 'i ↑', 'zins ↑'],
+            feedback: String.raw`Um den fixen Kurs zu halten, muss die ZB den Zins exogen an den Marktdruck anpassen (Erhöhung).`,
+          },
+          {
+            id: 'p1b',
+            points: 15,
+            type: 'text',
+            text: '[1.4] Berechnen Sie den exakten Zins $i$, der den Druck neutralisiert ($i^*=2\%$).',
+            correct: ['0.05', '5', '5%', '0,05', '0.050'],
+            feedback: String.raw`UIP: $i = 0{,}05 = 5\%$. (Bewertungslogik: Ein Score-Cap von 60% greift nur, wenn das Endergebnis die gewählte Modellidentität fundamental konterkariert).`,
+          }
+        ]
+      },
+      {
+        label: 'Problem 2',
+        points: 25,
+        type: 'text-block',
+        title: 'Block B: Solow-Grenzwerte',
+        preamble: String.raw`--- Transition: Kontextwechsel zum Solow-Modell. ---`,
+        questions: [
+          {
+            id: 'p2a',
+            points: 5,
+            type: 'text',
+            text: '[2.1] Steady-State Konsum $c^*$ grafisch bestimmen.',
+            correct: ['1.28', '1,28', '1.27', '1.29', '1.280'],
+            feedback: String.raw`$c^* \approx 1{,}28$.`,
+          },
+          {
+            id: 'p2b_0',
+            points: 10,
+            type: 'text',
+            text: '[2.2] Bedeutung von $k > k_{GR}$. (Detektion: Mind. 2/3 nötig: Grenzreferenz, Ineffizienz-Aussage, Konsum-Folge).',
+            correct: [
+              'k > k_gr zu viel kapital', 
+              'k > k_gr überakkumulation',
+              'k > k_gr ineffizient',
+              'k > k_gr konsum nicht maximal',
+              'k > k_gr c sinkt',
+              'k > k_gr c ↓',
+              'zu viel kapital → konsum nicht maximal',
+              'zu viel kapital → c ↓',
+              'überakkumulation → c ↓',
+              'ineffizient → c ↓',
+              'ineffizient → zu viel kapital',
+              'dynamic inefficiency → too much capital',
+              'over-accumulation → consumption not maximal',
+              'kapitalstock zu hoch → konsum sinkt',
+              'k > k_gr → zu viel kapital → c sinkt'
+            ],
+            feedback: String.raw`Wirtschaft ist im Zustand der Überakkumulation (dynamisch ineffizient). Mehr Kapital senkt hier den Konsum.`,
+          },
+          {
+            id: 'p2b',
+            points: 10,
+            type: 'text',
+            text: '[2.3] Effekt von $\delta \downarrow$ auf Steady-State $c$?',
+            correct: ['sinkt', 'fällt', 'negativ', 'geht zurück', 'konsum sinkt', 'abnahme', 'decrease', 'falls', 'c ↓', 'c sinkt'],
+            feedback: String.raw`Da $k > k_{GR}$, führt ein Sinken von $\delta$ (Anstieg von $k^*$) zu einem weiteren Konsumrückgang.`,
+          }
+        ]
+      },
+      {
+        label: 'Problem 3',
+        points: 20,
+        type: 'text-block',
+        title: 'Block C: J-Kurve & Dynamik',
+        preamble: String.raw`Letzter Abschnitt – Fokus auf klare Ableitung, keine neuen Modelle erforderlich.`,
+        questions: [
+          {
+            id: 'p3a',
+            points: 10,
+            type: 'text',
+            text: '[3.1] $NX$ unmittelbar nach 10% Abwertung berechnen.',
+            correct: ['-11.1', '-11,1', '-11.11', '-11', 'minus 11', 'nx ↓'],
+            feedback: String.raw`$NX = 100 - 100/0{,}9 \approx -11{,}1$.`,
+          },
+          {
+            id: 'p3b',
+            points: 10,
+            type: 'text',
+            text: '[3.2] Warum ist dieses Ergebnis kurzfristig zwingend? (Modell-Implikation).',
+            correct: [
+              'j-kurve', 
+              'preiseffekt ↓', 
+              'mengeneffekt zeitverzögert', 
+              'mengen starr', 
+              'j curve', 
+              'price effect', 
+              'time lag', 
+              'mengenanpassung dauert',
+              'preiseffekt dominiert',
+              'starrheit → j-kurve'
+            ],
+            feedback: String.raw`Kurzfristige Starrheit der Mengen führt zum J-Kurven-Effekt (Dominanz des Preiseffekts).`,
+          }
+        ]
+      }
+    ]
+  }
 };

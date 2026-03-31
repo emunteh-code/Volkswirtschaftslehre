@@ -83,98 +83,97 @@ const BASE_STEP_PROBLEMS = {
  }
  ],
  slutsky: [
- {
- title: 'Slutsky-Zerlegung',
- context: 'Preis p₁ steigt. Gut 1 ist ein normales Gut.',
- steps: [
- { q: 'Hat der Substitutionseffekt (SE) immer ein negatives oder positives Vorzeichen?',
- answer: ['negativ', 'negatives', '<0', 'kleiner 0', 'immer negativ'],
- hint: 'Der SE misst die Hicks-Reaktion: Gut wird relativ teurer → weniger davon.',
- explain: 'SE = ∂h/∂p ≤ 0 immer — eine Preiserhöhung lässt die kompensierte Nachfrage stets sinken (Konvexität der IK).',
- traps: [{pattern:'positiv', msg:'Nein! Der SE ist IMMER ≤ 0. Nur der EE kann positiv sein (bei inferioren Gütern).'}] },
- { q: 'Für ein normales Gut: Welches Vorzeichen hat der Einkommenseffekt EE bei einer Preiserhöhung?',
- answer: ['negativ', '<0', 'negatives'],
- hint: 'Preiserhöhung = Realeinkommenssenkung. Was passiert bei einem normalen Gut mit sinkendem Einkommen?',
- explain: 'EE = −x·(∂x/∂m). Bei normalem Gut: ∂x/∂m >0. EE = −(pos)·(pos) < 0.',
- traps: [{pattern:'positiv', msg:'Bei NORMALEM Gut sinkt die Nachfrage bei Einkommenssenkung → EE negativ. Nur bei INFERIOREN Gütern ist EE >0.'}] },
- { q: 'Wann wird ein Gut zum Giffen-Gut?',
- answer: ['ee >se', '|ee|>|se|', 'einkommenseffekt größer', 'inferior ee dominiert'],
- hint: 'GE = SE + EE. GE >0 bedeutet... Nachfrage steigt bei Preiserhöhung.',
- explain: 'Giffen: GE >0 ↔ |EE| >|SE|. Das Gut muss inferior sein (EE >0) UND der EE muss den SE überwiegen.',
- traps: [] }
- ]
- }
+   {
+     title: 'Slutsky-Zerlegung (Numerisch)',
+     context: 'u(x₁,x₂) = x₁x₂, p₁ sinkt von 4 auf 1, p₂=1, m=40.',
+     steps: [
+       { q: 'Schritt 1: Berechne das ursprüngliche Optimum x₁* vor der Preissenkung.',
+         answer: ['5', 'x1=5'],
+         hint: 'CD-Nachfrage: x₁ = m/(2p₁).',
+         explain: 'x₁⁰ = 40 / (2 \cdot 4) = 5. (x₂⁰ = 20).',
+         traps: [] },
+       { q: 'Schritt 2: Berechne das kompensierte Einkommen m\', um das alte Bündel (5, 20) zu neuen Preisen (1, 1) gerade noch zu kaufen.',
+         answer: ['25', 'm\'=25', '25.0'],
+         hint: 'm\' = p₁_neu \cdot x₁⁰ + p₂ \cdot x₂⁰.',
+         explain: 'm\' = 1 \cdot 5 + 1 \cdot 20 = 25.',
+         traps: [{pattern:'40', msg:'Das ist das alte Einkommen. Für Slutsky-SE muss das Einkommen so angepasst werden, dass die Kaufkraft für das ALTE Bündel erhalten bleibt.'}] },
+       { q: 'Schritt 3: Berechne die Nachfrage x₁\' beim kompensierten Einkommen m\' und neuen Preisen.',
+         answer: ['12.5', '12,5', '25/2'],
+         hint: 'x₁\' = m\' / (2 \cdot p₁_neu) = 25 / (2 \cdot 1).',
+         explain: 'x₁\' = 25 / 2 = 12,5. Dies ist der Slutsky-Punkt.',
+         traps: [] },
+       { q: 'Schritt 4: Wie hoch ist der Substitutionseffekt SE (x₁\' − x₁⁰)?',
+         answer: ['7.5', '7,5', '12.5 - 5'],
+         hint: 'SE = Differenz zwischen kompensierter und ursprünglicher Nachfrage.',
+         explain: 'SE = 12,5 − 5 = 7,5.',
+         traps: [{pattern:'15', msg:'Das ist der Gesamteffekt (20 - 5 = 15). Der SE ist nur der Teil der Änderung durch die Preisrelation.'}] }
+     ]
+   }
  ],
- monopol: [
- {
- title: 'Monopoloptimum',
- context: 'p(y) = 10 − y, C(y) = 2y',
- steps: [
- { q: 'Wie lautet der Grenzerlös MR? (bei p = a − by gilt MR = a − 2by)',
- answer: ['10-2y', 'mr = 10-2y', 'a-2y'],
- hint: 'Bei linearer Nachfrage ist MR doppelt so steil. MR = ∂(p·y)/∂y',
- explain: 'E(y) = p·y = (10−y)y = 10y−y². MR = E\'(y) = 10−2y',
- traps: [{pattern:'10-y', msg:'Das ist der Preis p, nicht der Grenzerlös! MR = a − 2by (doppelte Steigung).'}] },
- { q: 'Gewinnmaximum: MR = MC → y_m = ?',
- answer: ['4', 'ym=4', 'y=4'],
- hint: 'Setze 10−2y = 2 (MC = ∂C/∂y = 2)',
- explain: '10−2y = 2 → 2y = 8 → y_m = 4',
- traps: [] },
- { q: 'Monopolpreis p_m = ? (von Nachfragekurve ablesen!)',
- answer: ['6', 'pm=6', 'p=6'],
- hint: 'p_m = p(y_m) = 10 − y_m. NICHT der Schnittpunkt von MR und MC!',
- explain: 'p_m = 10 − 4 = 6. Wichtig: Preis von der Nachfragekurve ablesen, nicht vom MR=MC-Punkt!',
- traps: [{pattern:'2', msg:'Das ist der MC, nicht der Monopolpreis! p_m von der NACHFRAGEKURVE ablesen: p_m = 10−y_m = 6.'}] }
- ]
- }
+ psubst: [
+   {
+     title: 'Perfekte Substitute & Subvention',
+     context: 'u = 2x₁ + x₂, p₁=3, p₂=1, m=30.',
+     steps: [
+       { q: 'Bestimme das Optimum: Welche Menge von Gut 1 wird konsumiert?',
+         answer: ['0', 'x1=0', 'keine', 'null'],
+         hint: 'Vergleiche GRS = 2 mit p₁/p₂ = 3.',
+         explain: 'Da GRS=2 < p₁/p₂=3, ist Gut 1 zu teuer. Optimum: x₁=0, x₂=30.',
+         traps: [{pattern:'10', msg:'Das wäre x₁ bei CD. Hier sind es Substitute → Randlösung!'}] },
+       { q: 'Die Regierung subventioniert Gut 1, sodass p₁ auf 1,5 sinkt. Welches Gut wird nun konsumiert?',
+         answer: ['x1', 'gut 1', 'nur gut 1', 'alles x1'],
+         hint: 'Neues Preisverhältnis p₁\'/p₂ = 1,5. Vergleiche mit GRS=2.',
+         explain: 'GRS=2 > p₁\'/p₂=1,5 → Gut 1 ist jetzt subjektiv wertvoller als sein Marktpreis. Kompletter Wechsel zu Gut 1.',
+         traps: [] },
+       { q: 'Berechne die neue Menge x₁*.',
+         answer: ['20', 'x1=20'],
+         hint: 'x₁* = m / p₁\' = 30 / 1,5.',
+         explain: 'x₁* = 30 / 1,5 = 20.',
+         traps: [] }
+     ]
+   }
  ],
- kmm: [
- {
-  title: 'Konsummöglichkeitenmenge',
-  context: 'Güterbündel im ersten Quadranten',
-  steps: [
-  { q: 'Schreibe die formale Bedingung für ein Bündel (x₁,x₂) in der KMM auf.',
-    answer: ['x1>=0 x2>=0', 'x₁≥0 x₂≥0', 'nichtnegativ', 'erster quadranten'],
-    hint: 'Die KMM beschreibt den logischen Konsumraum vor Preisen und Einkommen.',
-    explain: 'In Mikro I ist die KMM der nichtnegative Güterraum: {(x₁,x₂) | x₁ ≥ 0, x₂ ≥ 0}. Preise und Einkommen gehören erst zur Budgetmenge.',
-    traps: [{pattern:'p1x1', msg:'Das ist schon die Budgetrestriktion. Die KMM selbst enthält keine Preise und kein Einkommen.'}] },
-  { q: 'Ist das Bündel (3, −1) in der KMM? (ja/nein)',
-    answer: ['nein','no'],
-    hint: 'Prüfe nur die Nichtnegativität der Gütermengen.',
-    explain: '(3, −1) verletzt x₂ ≥ 0. Deshalb liegt das Bündel nicht in der KMM.',
-    traps: [{pattern:'ja', msg:'Ein negatives Gutbündel ist kein Element der KMM. Die KMM enthält nur nichtnegative Mengen.'}] },
-  { q: 'Ist die KMM eine konvexe Menge? (ja/nein)',
-    answer: ['ja','konvex','yes'],
-    hint: 'Nimm zwei Bündel aus der KMM — liegt ihr Mittelpunkt auch in der KMM?',
-    explain: 'Ja. Sind alle Komponenten zweier Bündel nichtnegativ, dann bleibt auch jede Konvexkombination komponentenweise nichtnegativ. Die KMM ist deshalb konvex.',
-    traps: [] }
-  ]
- }
+ gk_dk: [
+   {
+     title: 'Marktaustritt & Sunk Costs',
+     context: 'C(y) = 2y + 16. Fixkosten 16 sind "sunk" (nicht vermeidbar).',
+     steps: [
+       { q: 'Berechne die Grenzkosten MC.',
+         answer: ['2', 'mc=2'],
+         hint: 'Ableitung von C(y) nach y.',
+         explain: 'MC = 2.',
+         traps: [] },
+       { q: 'Das Unternehmen bietet langfristig an, wenn der Preis P ≥ ...? (Berücksichtige, dass FC sunk sind).',
+         answer: ['2', 'p>=2', 'mc'],
+         hint: 'Sunk Costs sind für die Entscheidung irrelevant. Die Bedingung ist P ≥ AVC.',
+         explain: 'Da FC sunk sind, sind sie nicht vermeidbar. Das Unternehmen produziert, solange die variablen Kosten gedeckt sind: P ≥ AVC = 2.',
+         traps: [{pattern:'dk', msg:'Falsch. Wären die FC vermeidbar, wäre P ≥ AC richtig. Da sie sunk sind, zählt nur P ≥ AVC = 2.'}] }
+     ]
+   }
  ],
  praeferenz: [
- {
-  title: 'Präferenzrelation — Axiome',
-  context: 'Bündel A, B, C; schwache Präferenzrelation ≿',
-  steps: [
-  { q: 'Nenne die zwei fundamentalen Rationalisierungsaxiome der Präferenzrelation.',
-    answer: ['vollständigkeit transitivität','vollstaendigkeit transitivitaet','transitiv vollständig','complete transitive'],
-    hint: 'Vollständigkeit: jedes Paar vergleichbar. Transitivität: wenn A≿B und B≿C, dann...?',
-    explain: 'Vollständigkeit: für alle A,B gilt A≿B oder B≿A. Transitivität: A≿B und B≿C ⟹ A≿C. Beide zusammen ermöglichen konsistente Wahlhandlungen.',
-    traps: [{pattern:'reflexiv', msg:'Reflexivität (A≿A) ist eine Folge der Vollständigkeit, kein eigenes Fundamentalaxiom.'}] },
-  { q: 'Wenn A≿B und B≿A gelten, in welcher Relation stehen A und B?',
-    answer: ['indifferent','indifferenz','~','a~b'],
-    hint: 'Weder strikt besser noch schlechter — welche Beziehung folgt?',
-    explain: 'A~B (Indifferenz): A≿B UND B≿A ⟺ A~B. Das ist die Definition der Indifferenzrelation.',
-    traps: [{pattern:'gleich', msg:'Nicht "gleich" — Bündel können verschieden sein und trotzdem indifferent. "Gleich" impliziert A=B, was hier nicht gemeint ist.'}] },
-  { q: 'Was beweist das "Money-Pump"-Argument?',
-    answer: ['transitivität', 'inkonsistenz', 'zyklische präferenzen', 'transitiv'],
-    hint: 'Wenn A≻B, B≻C, C≻A — was kann ein Händler mit dir machen?',
-    explain: 'Das Money-Pump-Argument zeigt: Zyklische Präferenzen (A≻B≻C≻A) erlauben einem Händler, den Agenten durch wiederholten Tausch zu entreichern. Transitivität ist nötig, um Money-Pumping zu verhindern.',
-    traps: [] }
-  ]
- }
- ],
- indiff: [
+   {
+     title: 'Indifferenz & MU-Logik',
+     context: 'u(x₁,x₂) = x₁ \cdot x₂. Punkt A=(4,10), B=(8,5).',
+     steps: [
+       { q: 'Liegen A und B auf derselben Indifferenzkurve? (ja/nein)',
+         answer: ['ja', 'yes'],
+         hint: 'Berechne u(A) und u(B).',
+         explain: 'u(A) = 4 \cdot 10 = 40. u(B) = 8 \cdot 5 = 40. Da u(A)=u(B), liegen sie auf derselben IK.',
+         traps: [] },
+       { q: 'Berechne die GRS in Punkt A (MU₁/MU₂).',
+         answer: ['2.5', '2,5', '10/4'],
+         hint: 'MU₁ = x₂, MU₂ = x₁. GRS = x₂/x₁.',
+         explain: 'GRS(A) = 10 / 4 = 2,5.',
+         traps: [{pattern:'0.4', msg:'Kehrwert! MU₁/MU₂ = x₂/x₁.'}] },
+       { q: 'Ist die GRS in Punkt B höher oder niedriger als in A?',
+         answer: ['niedriger', 'lower', 'kleiner', 'grs sinkt'],
+         hint: 'GRS(B) = 5 / 8 = 0,625.',
+         explain: 'GRS(B) = 0,625 < GRS(A) = 2,5. Die GRS sinkt entlang der IK nach rechts unten (Konvexität).',
+         traps: [] }
+     ]
+   }
+ ], indiff: [
  {
   title: 'Indifferenzkurven — Eigenschaften',
   context: 'u(x₁,x₂) = x₁·x₂, Niveaumengen',
@@ -590,24 +589,24 @@ const BASE_STEP_PROBLEMS = {
  ],
  anfang: [
  {
-  title: 'Anfangsausstattung — Budgetgerade und Slutsky-Zerlegung',
-  context: 'ω = (ω₁,ω₂) = (4,2), p₁=1, p₂=1 (Ausgangslage). Dann steigt p₁ auf 2.',
+  title: 'Anfangsausstattung — Netto-Nachfrage & Einkommenseffekt',
+  context: 'ω = (4, 2), p₁=1, p₂=1. Der Haushalt konsumiert im Optimum x₁* = 6.',
   steps: [
-  { q: 'Berechne das Einkommen m vor und nach der Preiserhöhung p₁: 1→2.',
-    answer: ['m=6','m vorher=6','m nachher=10'],
-    hint: 'm = p₁·ω₁ + p₂·ω₂. Vorher: 1·4+1·2=6. Nachher: 2·4+1·2=10.',
-    explain: 'm₀ = 1·4 + 1·2 = 6. m₁ = 2·4 + 1·2 = 10. Der Haushalt wird reicher, weil er Gut 1 besitzt.',
-    traps: [{pattern:'6', msg:'Richtig für m₀. Vergiss nicht: bei p₁=2 steigt m auf m₁ = 2·4+2 = 10.'}] },
-  { q: 'Um welchen Punkt dreht sich die Budgetgerade bei einer Preisänderung mit Ausstattung?',
-    answer: ['ausstattungspunkt','omega','(4,2)','endowment'],
-    hint: 'Das Ausstattungsbündel (ω₁,ω₂) ist immer auf der Budgetgeraden — unabhängig vom Preis.',
-    explain: 'p·ω = p₁ω₁ + p₂ω₂ = m. Das Ausstattungsbündel liegt immer auf der Budgetgeraden. Bei Preisänderung dreht sich die Gerade um den Punkt (ω₁,ω₂) = (4,2).',
-    traps: [{pattern:'ursprung', msg:'Nein — bei Ausstattungsökonomie dreht die Budgetgerade um den Ausstattungspunkt, nicht um den Ursprung.'}] },
-  { q: 'Enthält der Slutsky-Einkommenseffekt (ωᵢ − xᵢ*) oder xᵢ*? Erkläre den Unterschied zur Standardformel.',
-    answer: ['omega-x','(omega1-x1)','nettonachfrager','nettoanbieter'],
-    hint: 'Standard-EE: −xᵢ·(∂xᵢ/∂m). Mit Ausstattung: −(xᵢ*−ωᵢ)·(∂xᵢ/∂m).',
-    explain: 'Slutsky mit Ausstattung: ∂x₁/∂p₁ = ∂h₁/∂p₁ − (x₁*−ω₁)·(∂x₁/∂m). Wenn x₁* > ω₁ (Nettonachfrager): EE negativ bei Preisanstieg. Wenn x₁* < ω₁ (Nettoanbieter): EE positiv.',
-    traps: [{pattern:'xi', msg:'Mit Ausstattung: EE-Term = −(xᵢ−ωᵢ), nicht −xᵢ. Das Vorzeichen hängt davon ab, ob man Netto-Anbieter oder -Nachfrager ist.'}] }
+  { q: 'Ist der Haushalt bezüglich Gut 1 ein Netto-Anbieter oder ein Netto-Nachfrager?',
+    answer: ['nettonachfrager', 'netto-nachfrager', 'nachfrager'],
+    hint: 'Vergleiche die konsumierte Menge x₁* mit der Anfangsausstattung ω₁.',
+    explain: 'Da x₁*=6 > ω₁=4, konsumiert der Haushalt mehr als er besitzt. Er muss die Differenz von 2 Einheiten am Markt kaufen und ist somit Netto-Nachfrager.',
+    traps: [{pattern:'anbieter', msg:'Ein Netto-Anbieter konsumiert WENIGER als er besitzt (x₁* < ω₁).'}] },
+  { q: 'In welche Richtung wirkt der (gesamte) Einkommenseffekt auf die Nachfrage nach x₁, wenn p₁ auf 2 steigt? (Annahme: x₁ ist ein normales Gut)',
+    answer: ['negativ', 'sinkt', 'weniger', 'fällt'],
+    hint: 'Ein Preisanstieg macht einen Netto-Nachfrager ärmer. Wie reagiert die Nachfrage nach einem normalen Gut auf sinkendes Realeinkommen?',
+    explain: 'Für einen Netto-Nachfrager (x₁* > ω₁) wirkt ein Preisanstieg wie eine Einkommenskürzung. Bei einem normalen Gut führt dies zu einer Verringerung der Nachfrage (negativer EE).',
+    traps: [{pattern:'positiv', msg:'Ein positiver EE bei Preisanstieg würde voraussetzen, dass der Haushalt Netto-Anbieter ist oder das Gut inferior ist.'}] },
+  { q: 'Berechne das neue nominale Einkommen m\', das sich durch die Bewertung der Ausstattung zu den neuen Preisen (p₁=2, p₂=1) ergibt.',
+    answer: ['10', 'm\'=10', '10.0'],
+    hint: 'm\' = p₁_neu · ω₁ + p₂ · ω₂.',
+    explain: 'm\' = 2·4 + 1·2 = 8 + 2 = 10. Obwohl das nominale Einkommen von 6 auf 10 steigt, verliert der Netto-Nachfrager an Kaufkraft, da sein Konsumplan (6,0) nun 12 kosten würde.',
+    traps: [{pattern:'6', msg:'Das war das alte Einkommen (1·4 + 1·2).'}, {pattern:'12', msg:'Das wären die Kosten des alten Bündels (6·2 + 0·1), nicht das neue Einkommen.'}] }
   ]
  }
  ],

@@ -27,6 +27,53 @@ body[data-page="landing"] {
   padding-right: 24px;
 }
 
+/* Onboarding Overlay */
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.onboarding-card {
+  background: #1a1d23;
+  padding: 40px;
+  border-radius: 32px;
+  max-width: 540px;
+  width: 100%;
+  border: 1px solid var(--border);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.5);
+}
+
+.onboarding-card h2 {
+  margin: 0 0 20px;
+  font-family: var(--font-heading);
+}
+
+.onboarding-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+}
+
+.onboarding-list li {
+  margin-bottom: 16px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.onboarding-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
 /* Header */
 .landing-header {
   padding: 32px 0;
@@ -86,8 +133,17 @@ body[data-page="landing"] {
   font-size: clamp(1.125rem, 2vw, 1.5rem);
   color: var(--muted);
   max-width: 600px;
-  margin: 0 auto 48px;
+  margin: 0 auto 16px;
   text-wrap: balance;
+}
+
+.trust-signal {
+  font-size: 0.875rem;
+  color: var(--primary);
+  margin-bottom: 48px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .hero-actions {
@@ -107,6 +163,8 @@ body[data-page="landing"] {
   color: white;
   text-decoration: none;
   font-weight: 600;
+  border: 0;
+  cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -198,20 +256,45 @@ body[data-page="landing"] {
 
 .module-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
 
 .module-tile {
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 32px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 28px;
   text-decoration: none;
   color: var(--text);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tile-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.difficulty-badge {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+}
+
+.difficulty-badge.anfänger { color: #10b981; }
+.difficulty-badge.fortgeschritten { color: #f59e0b; }
+.difficulty-badge.experte { color: #ef4444; }
+
+.time-badge {
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
 .module-tile:hover {
@@ -222,7 +305,7 @@ body[data-page="landing"] {
 
 .module-tile h3 {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   margin: 0 0 12px;
   letter-spacing: -0.02em;
 }
@@ -230,8 +313,16 @@ body[data-page="landing"] {
 .module-tile .summary {
   font-size: 0.9375rem;
   color: var(--muted);
-  margin-bottom: 24px;
-  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.prereq {
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 20px;
+  margin-top: auto;
 }
 
 .module-tile .meta {
@@ -240,14 +331,19 @@ body[data-page="landing"] {
   align-items: center;
   font-size: 0.8125rem;
   color: var(--muted);
-  font-family: var(--font-mono);
 }
 
 .module-tile .status-badge {
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+}
+
+.action-hint {
+  font-weight: 600;
+  color: var(--primary);
 }
 
 /* How It Works */
@@ -339,6 +435,8 @@ body[data-page="landing"] {
 }
 
 @media (max-width: 768px) {
+  .hero-section { padding: 60px 0 80px; }
+  
   .section-card {
     flex-direction: column;
     text-align: center;
@@ -351,6 +449,10 @@ body[data-page="landing"] {
 
   .steps-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .module-grid {
+    grid-template-columns: 1fr;
   }
 }
 

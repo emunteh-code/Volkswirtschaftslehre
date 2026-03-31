@@ -4,17 +4,16 @@ import { estimateGeneratedChapterCount } from "./generated-portal/dataFactory.js
 import { mountRLabs } from "./r-lab.js";
 
 const THEME_KEY = "lernportal_theme_v1";
+const ONBOARDING_KEY = "lernportal_onboarding_v1";
 
 function hexToSoft(hex, alpha = 0.14) {
   const normalized = hex.replace("#", "");
   const value = normalized.length === 3
     ? normalized.split("").map((char) => char + char).join("")
     : normalized;
-
   const r = Number.parseInt(value.slice(0, 2), 16);
   const g = Number.parseInt(value.slice(2, 4), 16);
   const b = Number.parseInt(value.slice(4, 6), 16);
-
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
@@ -29,18 +28,14 @@ function setTheme(theme) {
   document.body.classList.remove("theme-light", "theme-dark");
   document.body.classList.add(theme === "dark" ? "theme-dark" : "theme-light");
   localStorage.setItem(THEME_KEY, theme);
-
   const button = document.getElementById("themeToggle");
-  if (button) {
-    button.textContent = theme === "dark" ? "Hell" : "Dunkel";
-  }
+  if (button) button.textContent = theme === "dark" ? "Hell" : "Dunkel";
 }
 
 function initTheme() {
   const storedTheme = localStorage.getItem(THEME_KEY);
   const preferredDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   setTheme(storedTheme || (preferredDark ? "dark" : "light"));
-
   const button = document.getElementById("themeToggle");
   if (button) {
     button.addEventListener("click", () => {
@@ -50,24 +45,9 @@ function initTheme() {
   }
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
-}
-
-function getFilterLabel(filterId) {
-  return FILTERS.find((filter) => filter.id === filterId)?.label || filterId;
-}
-
 function readStoredJson(key) {
   if (!key) return {};
-  try {
-    return JSON.parse(localStorage.getItem(key) || "{}");
-  } catch {
-    return {};
-  }
+  try { return JSON.parse(localStorage.getItem(key) || "{}"); } catch { return {}; }
 }
 
 function writeStoredJson(key, value) {
@@ -100,7 +80,7 @@ function touchModuleVisit(module, patch = {}) {
 }
 
 function formatVisitDate(timestamp) {
-  if (typeof timestamp !== "number" || Number.isNaN(timestamp)) return "Noch kein Lernstand gespeichert";
+  if (typeof timestamp !== "number" || Number.isNaN(timestamp)) return "Noch kein Lernstand";
   return new Intl.DateTimeFormat("de-DE", { dateStyle: "medium", timeStyle: "short" }).format(timestamp);
 }
 
@@ -116,13 +96,6 @@ function getModuleSnapshot(module) {
   return { seen, total, due, percent, started: seen > 0 };
 }
 
-function getLandingModeLabel(module) {
-  if (module.type === "quantitative_coding") return "Mit R-Lab";
-  if (module.type === "text_doctrinal") return "Falltraining";
-  if (module.type === "quantitative") return "Modelle";
-  return "Theorie";
-}
-
 function pickInitialLandingModule() {
   const withVisits = PUBLIC_MODULES
     .map((module) => ({ module, visit: readVisitState(module) }))
@@ -131,9 +104,31 @@ function pickInitialLandingModule() {
   return null;
 }
 
+function showOnboarding() {
+  if (localStorage.getItem(ONBOARDING_KEY)) return;
+  const overlay = document.createElement("div");
+  overlay.className = "onboarding-overlay";
+  overlay.innerHTML = `
+    <div class="onboarding-card">
+      <h2>Willkommen im VWL Lernportal</h2>
+      <p>Dieses System bewertet Ihr <strong>ökonomisches Verständnis</strong>, nicht nur das Endergebnis.</p>
+      <ul class="onboarding-list">
+        <li><strong>Logic First:</strong> Ein richtiges Ergebnis bei falscher Logik gibt 0 Punkte.</li>
+        <li><strong>Validation:</strong> Jeder Schritt muss plausibel begründet werden.</li>
+        <li><strong>Consistency:</strong> Das System erkennt Widersprüche in Ihrer Argumentation.</li>
+      </ul>
+      <button class="primary-btn" id="closeOnboarding">Verstanden</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.getElementById("closeOnboarding").addEventListener("click", () => {
+    overlay.remove();
+    localStorage.setItem(ONBOARDING_KEY, "true");
+  });
+}
+
 function renderLandingPage() {
   const gridNode = document.getElementById("moduleGrid");
-  const countLabel = document.getElementById("moduleCountLabel");
   const continueSection = document.getElementById("continue");
   const continueTitle = document.getElementById("continueTitle");
   const continueProgress = document.getElementById("continueProgress");
@@ -141,10 +136,6 @@ function renderLandingPage() {
 
   if (!gridNode) return;
 
-  // 1. Module Count
-  if (countLabel) countLabel.textContent = `${PUBLIC_MODULES.length} Module verfügbar`;
-
-  // 2. Continue Section
   const lastModule = pickInitialLandingModule();
   if (lastModule && continueSection && continueTitle && continueProgress && continueLink) {
     const snapshot = getModuleSnapshot(lastModule);
@@ -156,29 +147,33 @@ function renderLandingPage() {
     }
   }
 
-  // 3. Module Grid
   gridNode.innerHTML = PUBLIC_MODULES.map((module) => {
     const snapshot = getModuleSnapshot(module);
-    const modeLabel = getLandingModeLabel(module);
-    const statusLabel = module.status === "live" ? "Aktiv" : "Vorschau";
+    const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Start";
     
     return `
       <a href="${module.href}" class="module-tile">
+        <div class="tile-head">
+          <span class="difficulty-badge ${module.difficulty.toLowerCase()}">${module.difficulty}</span>
+          <span class="time-badge">${module.time}</span>
+        </div>
         <h3>${module.shortTitle}</h3>
         <p class="summary">${module.summary}</p>
+        <div class="prereq">Voraussetzung: ${module.prereq}</div>
         <div class="meta">
-          <span class="mode-label">${modeLabel}</span>
-          <span class="status-badge">${snapshot.started ? snapshot.percent + '%' : statusLabel}</span>
+          <span class="status-badge">${statusLabel}</span>
+          <span class="action-hint">Modul öffnen →</span>
         </div>
       </a>
     `;
   }).join("");
+
+  showOnboarding();
 }
 
 function renderModulePage() {
   const slug = inferModuleSlug();
   const module = getModuleBySlug(slug);
-  const content = getModuleContent(slug);
   if (!module) return;
 
   document.documentElement.style.setProperty("--accent", module.accent);
@@ -187,14 +182,7 @@ function renderModulePage() {
   document.title = `${module.title} | VWL Lernportal`;
 
   const heroNode = document.getElementById("moduleHero");
-  const factsNode = document.getElementById("moduleQuickFacts");
-  const learningNode = document.getElementById("learningModes");
-  const blueprintNode = document.getElementById("portalBlueprint");
-  const mapNode = document.getElementById("conceptMapMount");
-  const labSection = document.getElementById("rLabSection");
-  const labMount = document.getElementById("rLabMount");
-
-  if (!heroNode || !factsNode || !learningNode || !blueprintNode || !mapNode) return;
+  if (!heroNode) return;
 
   const snapshot = getModuleSnapshot(module);
   const visitState = readVisitState(module);
@@ -202,32 +190,18 @@ function renderModulePage() {
 
   heroNode.innerHTML = `
     <div class="module-headline">
-      <a class="back-link" href="../index.html">Zurück</a>
+      <a class="back-link" href="../index.html">← Zurück zur Übersicht</a>
       <h1>${module.title}</h1>
       <p class="hero-summary">${module.summary}</p>
     </div>
     <aside class="module-meta-card">
       <div class="portal-progress-card">
-        <strong>Lernstand</strong>
+        <strong>Dein Lernstand</strong>
         <div class="progress-meter"><div class="progress-meter-fill" style="width:${snapshot.percent}%"></div></div>
-        <div class="resume-meta"><span>${snapshot.percent}%</span><span>${visitLabel}</span></div>
+        <div class="resume-meta"><span>${snapshot.percent}% abgeschlossen</span><span>${visitLabel}</span></div>
       </div>
     </aside>
   `;
-  
-  // Minimal placeholder for existing UI nodes if they exist
-  if (factsNode) factsNode.innerHTML = "<!-- Quick facts -->";
-  if (learningNode) learningNode.innerHTML = "<!-- Learning modes -->";
-  if (blueprintNode) blueprintNode.innerHTML = "<!-- Blueprint -->";
-
-  if (module.rLab && labSection && labMount) {
-    labSection.hidden = false;
-    mountRLabs(labMount, module);
-  } else if (labSection) {
-    labSection.hidden = true;
-  }
-
-  touchModuleVisit(module, { lastPath: window.location.pathname });
 }
 
 function boot() {

@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Mikroökonomik I
-// FINAL BENCHMARK STANDARD v12.0: Strict Logic Enforcement
+// FINAL BENCHMARK STANDARD v12.1: Adversarial Hardening
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -20,7 +20,7 @@ const BASE_STEP_PROBLEMS = {
    explain: '10 / 1 = 10.' },
  { q: '[2. Decision] Welcher Lösungstyp liegt hier vor? (Innere oder Randlösung?)',
    answer: ['randlösung', 'corner'],
-   options: { problemId: 'm1_lagrange_strict', stepId: 'type_choice', isDecision: true },
+   options: { problemId: 'm1_lagrange_strict', stepId: 'type_choice', isDecision: true, modelId: 'CORNER' },
    hint: 'Prüfen Sie, ob GRS = p₁/p₂ zu x₁ < 0 führt.',
    explain: 'Mathematisch: x₁ = -0,5. Da Mengen nicht negativ sein können, muss eine Randlösung vorliegen.' },
  { q: '[3. Execution] Berechnen Sie die optimale Menge x₁*.',
@@ -29,7 +29,8 @@ const BASE_STEP_PROBLEMS = {
      problemId: 'm1_lagrange_strict', 
      stepId: 'exec_x1', 
      dependsOn: 'type_choice',
-     role: 'CON_SE' 
+     role: 'CON_SE',
+     targetVar: 'VAR_X1'
    },
    hint: 'Setzen Sie x₁ auf 0.',
    explain: 'Optimum am Rand: x₁ = 0.',
@@ -47,7 +48,7 @@ const BASE_STEP_PROBLEMS = {
  title: 'Slutsky-Zerlegung (Logic Path)',
  context: 'u = x₁x₂, p₁ sinkt von 4 auf 1, p₂=1, m = 40.',
  steps: [
- { q: '[1. Decision] Welches Vorzeichen hat der Substitutionseffekt (SE) für Gut 1?',
+ { q: '[1. Decision] Welches Vorzeichen hat der Substitutionseffekt (SE) für Gut 1 bei dieser Preissenkung?',
    answer: ['positiv', '↑', 'se > 0'],
    options: { problemId: 'm1_slutsky_strict', stepId: 'se_dir', isDecision: true },
    hint: 'Ein Gut wird billiger.',
@@ -59,7 +60,8 @@ const BASE_STEP_PROBLEMS = {
      stepId: 'se_calc', 
      dependsOn: 'se_dir',
      role: 'CON_SE',
-     premise: 'P1_DOWN' 
+     premise: 'P1_DOWN',
+     targetVar: 'VAR_X1'
    },
    hint: 'x₁_slutsky = 12,5. Altes x₁=5.',
    explain: '12,5 - 5 = 7,5.' },

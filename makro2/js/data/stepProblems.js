@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v12.0: Strict Logic Enforcement
+// FINAL BENCHMARK STANDARD v12.1: Adversarial Hardening
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -16,7 +16,7 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[1. Decision] Liegt nominal eine Auf- oder Abwertung vor? (Symbol erlaubt)', 
           answer: ['abwertung', '↓'], 
-          options: { problemId: 'm2_wk_strict', stepId: 'nom_dir', isDecision: true },
+          options: { problemId: 'm2_wk_strict', stepId: 'nom_dir', isDecision: true, targetVar: 'VAR_E' },
           hint: 'E sinkt in Mengennotierung.', 
           explain: 'E ↓ ⟹ Abwertung.' 
         },
@@ -31,7 +31,7 @@ const BASE_STEP_PROBLEMS = {
           q: '[3. Validation] Entspricht ein Anstieg von epsilon einer Verbesserung der Wettbewerbsfähigkeit?', 
           answer: ['nein', 'no', 'verschlechterung'], 
           options: { problemId: 'm2_wk_strict', role: 'VALIDATION' },
-          hint: 'Reale Aufwertung (epsilon↑) macht inländische Güter relativ teurer.', 
+          hint: 'epsilon ↑ ⟹ Inlandsgüter werden relativ teurer.', 
           explain: 'Wettbewerbsfähigkeit sinkt.' 
         }
       ]
@@ -45,7 +45,7 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[1. Interpretation] Welcher Zustand der Kapitalakkumulation liegt hier vor?', 
           answer: ['überakkumulation', 'over-accumulation'], 
-          options: { problemId: 'm2_solow_strict', stepId: 'state_id', isDecision: true },
+          options: { problemId: 'm2_solow_strict', stepId: 'state_id', isDecision: true, modelId: 'OVERACCUM' },
           hint: 'k > k_GR.', 
           explain: 'Die Wirtschaft hat zu viel Kapital.' 
         },
@@ -56,13 +56,14 @@ const BASE_STEP_PROBLEMS = {
             problemId: 'm2_solow_strict', 
             stepId: 'cons_dir', 
             dependsOn: 'state_id',
-            premise: 'OVERACCUM' 
+            premise: 'OVERACCUM',
+            targetVar: 'VAR_C'
           },
-          hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
-          explain: 'Weniger Sparen erhöht den Konsum langfristig.' 
+          hint: 'Überlegen Sie, ob das Land "zu viel" spart.', 
+          explain: 'In der Überakkumulation erhöht weniger Sparen den Konsum.' 
         },
         { 
-          q: '[3. Validation] Erklären Sie die J-Kurve bei der s-Senkung (Ambiguität erlaubt).', 
+          q: '[3. Validation] Erklären Sie die J-Kurve bei der s-Senkung (Ambiguity erlaubt).', 
           answer: ['ambig', 'c↑ sofort'], 
           options: { problemId: 'm2_solow_strict', role: 'VALIDATION', ambiguityAllowed: true },
           hint: 'Hängt vom Zeithorizont ab.', 

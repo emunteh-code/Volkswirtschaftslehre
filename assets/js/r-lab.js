@@ -1,5 +1,3 @@
-import { normalizeGermanCopy } from "./portal-core/utils/math.js";
-
 const WEBR_MODULE_URL = "https://webr.r-wasm.org/latest/webr.mjs";
 const STORAGE_PREFIX = "lernportal_r_lab_progress_v1";
 
@@ -112,7 +110,7 @@ ${runtimeChecks.map((check) => `      .portal_run_check("${escapeRString(check.e
     const [status, ...rest] = String(line).split("::");
     return {
       status: status === "OK" ? "ok" : "fail",
-      label: `Runtime: ${rest.join("::") || "Prüfung"}`.trim()
+      label: `Runtime: ${rest.join("::") || "Pruefung"}`.trim()
     };
   });
 
@@ -149,7 +147,7 @@ async function runChecks(lesson, code, output) {
         ...staticResult.details,
         {
           status: "info",
-          label: `Runtime-Prüfung nicht verfügbar: ${error instanceof Error ? error.message : String(error)}`
+          label: `Runtime-Pruefung nicht verfuegbar: ${error instanceof Error ? error.message : String(error)}`
         }
       ],
       verification: "formal"
@@ -211,13 +209,13 @@ export function mountRLabs(container, moduleDef) {
     const activeHints = activeLesson.hints || [];
     const hintText = activeHints.length
       ? activeHints[Math.min(hintIndex, activeHints.length - 1)]
-      : "Nutze Prompt, Check und Musterlösung, um den nächsten Schritt selbst abzuleiten.";
+      : "Nutze Prompt, Check und Musterloesung, um den naechsten Schritt selbst abzuleiten.";
 
     container.innerHTML = `
       <div class="lab-sidebar">
         <div class="content-panel">
           <p class="eyebrow">R-Lab</p>
-          <h2>Code direkt im Portal üben</h2>
+          <h2>Code direkt im Portal ueben</h2>
           <p>${moduleDef.rLab.intro}</p>
           <div class="fact-grid">
             <div class="fact-card">
@@ -246,7 +244,7 @@ export function mountRLabs(container, moduleDef) {
             <button class="lab-button" type="button" data-action="check">Check</button>
             <button class="lab-button" type="button" data-action="reset">Reset</button>
             <button class="lab-button" type="button" data-action="hint">Hint</button>
-            <button class="lab-button" type="button" data-action="solution">Lösung</button>
+            <button class="lab-button" type="button" data-action="solution">Loesung</button>
           </div>
           <textarea class="lab-editor" id="labEditor" spellcheck="false">${escapeHtml(activeCode)}</textarea>
           <div class="hint-row">
@@ -286,7 +284,7 @@ export function mountRLabs(container, moduleDef) {
     container.querySelector('[data-action="reset"]').addEventListener("click", () => {
       hintIndex = 0;
       editor.value = activeLesson.starterCode;
-      output.textContent = "[Editor auf Startcode zurückgesetzt]";
+      output.textContent = "[Editor auf Startcode zurueckgesetzt]";
       progress[activeLesson.id] = {
         ...(progress[activeLesson.id] || {}),
         code: activeLesson.starterCode,
@@ -303,7 +301,7 @@ export function mountRLabs(container, moduleDef) {
       if (hintNode) {
         hintNode.textContent = activeHints.length
           ? activeHints[Math.min(hintIndex, activeHints.length - 1)]
-          : "Nutze Prompt, Check und Musterlösung, um den nächsten Schritt selbst abzuleiten.";
+          : "Nutze Prompt, Check und Musterloesung, um den naechsten Schritt selbst abzuleiten.";
       }
     });
 
@@ -312,14 +310,14 @@ export function mountRLabs(container, moduleDef) {
       progress[activeLesson.id] = {
         ...(progress[activeLesson.id] || {}),
         code: activeLesson.solution,
-        lastOutput: progress[activeLesson.id]?.lastOutput || latestOutput || "[Lösung eingefügt]"
+        lastOutput: progress[activeLesson.id]?.lastOutput || latestOutput || "[Loesung eingefuegt]"
       };
       saveProgress(moduleDef.slug, progress);
     });
 
     container.querySelector('[data-action="check"]').addEventListener("click", async () => {
       const code = normalizeCode(editor.value);
-      runtimeStatus.textContent = activeLesson.runtimeChecks?.length ? "Runtime: prüft semantisch..." : "Runtime: formale Prüfung";
+      runtimeStatus.textContent = activeLesson.runtimeChecks?.length ? "Runtime: prueft semantisch..." : "Runtime: formale Pruefung";
       const result = await runChecks(activeLesson, code, latestOutput);
       output.textContent = `${result.passed ? "Alle Checks bestanden." : "Noch nicht alles passt."}\n${result.verification === "voll" ? "Verifikation: Code + Runtime." : "Verifikation: formale Checks, semantische Runtime optional."}\n\n${renderCheckOutput(result)}`;
       runtimeStatus.textContent = result.verification === "voll" ? "Runtime: WebR verifiziert" : "Runtime: formaler Fallback";
@@ -335,8 +333,8 @@ export function mountRLabs(container, moduleDef) {
 
     container.querySelector('[data-action="run"]').addEventListener("click", async () => {
       const code = normalizeCode(editor.value);
-      runtimeStatus.textContent = "Runtime: lädt WebR...";
-      output.textContent = "Code wird ausgeführt...";
+      runtimeStatus.textContent = "Runtime: laedt WebR...";
+      output.textContent = "Code wird ausgefuehrt...";
 
       try {
         const result = await executeR(code);
@@ -350,7 +348,7 @@ export function mountRLabs(container, moduleDef) {
         };
         saveProgress(moduleDef.slug, progress);
       } catch (error) {
-        latestOutput = `[Runtime nicht verfügbar]\n${error instanceof Error ? error.message : String(error)}\n\nDu kannst trotzdem mit Check, Hints und der Musterlösung arbeiten.`;
+        latestOutput = `[Runtime nicht verfuegbar]\n${error instanceof Error ? error.message : String(error)}\n\nDu kannst trotzdem mit Check, Hints und der Musterloesung arbeiten.`;
         output.textContent = latestOutput;
         runtimeStatus.textContent = "Runtime: Fallback-Modus";
         progress[activeLesson.id] = {
@@ -361,8 +359,6 @@ export function mountRLabs(container, moduleDef) {
         saveProgress(moduleDef.slug, progress);
       }
     });
-
-    normalizeGermanCopy(container);
   };
 
   render();

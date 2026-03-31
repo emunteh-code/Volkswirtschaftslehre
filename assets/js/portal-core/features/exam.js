@@ -49,7 +49,7 @@ export function createQuickExamModule({
     const correct = examState.correct;
     const pct = Math.round((correct / total) * 100);
     const color = pct >= 70 ? "var(--accent)" : pct >= 50 ? "var(--accent2)" : "var(--accent3)";
-    const msg = pct >= 70 ? "Sehr gut - weiter so!" : pct >= 50 ? "Gut - weiter üben!" : "Noch üben - schwache Konzepte wiederholen.";
+    const msg = pct >= 70 ? "Sehr gut - weiter so!" : pct >= 50 ? "Gut - weiter ueben!" : "Noch ueben - schwache Konzepte wiederholen.";
 
     content.innerHTML = `<div class="exam-container">
 <div class="exam-result">
@@ -59,11 +59,10 @@ export function createQuickExamModule({
   <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
     <button class="btn" onclick="window.__startExam()">Nochmal</button>
     <button class="btn secondary" onclick="window.__renderHome()">Startseite</button>
-    <button class="btn secondary" onclick="window.__showDashboard()">Lernstand</button>
+    <button class="btn secondary" onclick="window.__showDashboard()">Dashboard</button>
   </div>
 </div>
 </div>`;
-    renderMath(content);
     examState = null;
   }
 
@@ -216,3 +215,4 @@ export function createQuickExamModule({
     skipExamQ
   };
 }
+

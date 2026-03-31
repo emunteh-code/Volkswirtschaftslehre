@@ -4,3 +4,5 @@ coverage/
 dist/
 .qa/*.png
 .qa/.png
+.claude/
+source-materials/

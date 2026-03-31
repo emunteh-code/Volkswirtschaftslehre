@@ -1,11 +1,7 @@
-import { normalizeGermanCopy } from "./utils/math.js";
-
 export function createPortalApp({
   courseLabel,
   consentKey,
   chapters,
-  initialConceptId = null,
-  collapseSidebarByDefault = false,
   appState,
   storage,
   navigation,
@@ -44,14 +40,14 @@ export function createPortalApp({
     renderContent,
     renderHome,
     toggleSolution,
-    toggleExamDrill = () => {},
-    copyFormula = () => {},
+    toggleExamDrill,
+    copyFormula,
     showDashboard,
     setRendererState
   } = renderer;
 
   const { renderRightPanel, clearRightPanel = () => {} } = rightPanel;
-  const { initGraph, drawBudget, drawIndiff, drawHausopt, drawMonopol, drawSlutsky } = graphs;
+  const { initGraph, ...graphRegistry } = graphs || {};
   const { startExam, submitExamAnswer, skipExamQ } = quickExam;
   const { startFullExam, feSelectWF, feCheckText, feRevealAnswer, feText, submitFE, showFullExamSelect } = fullExam;
   const { toggleMastery } = mastery;
@@ -79,8 +75,7 @@ export function createPortalApp({
 
   function syncRightPanelVisibility() {
     const panel = document.getElementById("rightPanel");
-    const main = document.getElementById("main");
-    if (!panel || !main) return;
+    if (!panel) return;
 
     const visibleSections = Array.from(panel.querySelectorAll(".rp-section"))
       .filter((section) => !section.hidden && section.textContent?.trim());
@@ -88,41 +83,15 @@ export function createPortalApp({
 
     panel.classList.toggle("has-content", hasContent);
     panel.style.display = hasContent ? "" : "none";
-    main.style.marginRight = hasContent ? "" : "0";
-  }
-
-  function isSidebarOpen() {
-    return collapseSidebarByDefault
-      ? document.body.classList.contains("sidebar-open")
-      : Boolean(document.getElementById("sidebar")?.classList.contains("open"));
-  }
-
-  function setSidebarOpen(open) {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("sidebarOverlay");
-    const btn = document.getElementById("mobileMenuBtn");
-
-    if (collapseSidebarByDefault) {
-      document.body.classList.toggle("sidebar-open", open);
-      if (sidebar) sidebar.classList.toggle("open", open);
-    } else if (sidebar) {
-      sidebar.classList.toggle("open", open);
-    }
-
-    if (overlay) overlay.classList.toggle("show", open);
-    if (btn) btn.setAttribute("aria-expanded", String(open));
-  }
-
-  function closeSidebar() {
-    if (!isSidebarOpen()) return;
-    setSidebarOpen(false);
   }
 
   function navigate(id) {
-    closeSidebar();
     appState.setCurrent(id);
     appState.setCurrentTab("theorie");
     setRendererState(id, "theorie");
+
+    // Scroll to top instantly when switching topics
+    window.scrollTo(0, 0);
 
     if (id) {
       recordView(id);
@@ -135,6 +104,9 @@ export function createPortalApp({
       renderRightPanel(id, navigate);
       syncRightPanelVisibility();
       setActiveTab("theorie");
+      // Focus the main heading for keyboard and screen-reader users
+      const heading = document.querySelector("#content h1");
+      if (heading) heading.focus({ preventScroll: true });
     } else {
       setActiveNav(null);
       renderHome();
@@ -155,7 +127,6 @@ export function createPortalApp({
   }
 
   function showSRSReview() {
-    closeSidebar();
     const due = getDueCards();
     const content = document.getElementById("content");
     const tabRow = document.getElementById("tabRow");
@@ -211,7 +182,6 @@ export function createPortalApp({
     const notice = document.getElementById("consentNotice");
     const app = document.getElementById("app");
     if (!notice) return;
-    document.body.classList.add("consent-open");
     notice.classList.add("show");
     if (app) app.setAttribute("inert", "");
     requestAnimationFrame(() => {
@@ -224,24 +194,18 @@ export function createPortalApp({
     localStorage.setItem(consentKey, "1");
     const notice = document.getElementById("consentNotice");
     const app = document.getElementById("app");
-    document.body.classList.remove("consent-open");
     if (notice) notice.classList.remove("show");
     if (app) app.removeAttribute("inert");
   }
 
   function toggleSidebar() {
-    setSidebarOpen(!isSidebarOpen());
-  }
-
-  function openFormulaPanel() {
-    if (!appState.current) return;
-    const button = document.querySelector('#tabRow button[data-tab="formeln"]');
-    if (!button || button.style.display === "none") {
-      showToast("Für dieses Konzept gibt es keine Formeln.", "info");
-      return;
-    }
-    switchTab("formeln");
-    document.getElementById("topbar")?.scrollIntoView({ block: "start", behavior: "smooth" });
+    const sidebar = document.getElementById("sidebar");
+    if (!sidebar) return;
+    const open = sidebar.classList.toggle("open");
+    const overlay = document.getElementById("sidebarOverlay");
+    if (overlay) overlay.classList.toggle("show", open);
+    const btn = document.getElementById("mobileMenuBtn");
+    if (btn) btn.setAttribute("aria-expanded", String(open));
   }
 
   function initResizeObserver() {
@@ -264,10 +228,9 @@ export function createPortalApp({
   }
 
   function toggleFocus() {
-    closeSidebar();
     document.body.classList.toggle("focus-mode");
     const active = document.body.classList.contains("focus-mode");
-    showToast(active ? "Fokus-Modus aktiviert (⇧F zum Deaktivieren)" : "Fokus-Modus deaktiviert", "info");
+    showToast(active ? "Fokus-Modus aktiviert (F zum Deaktivieren)" : "Fokus-Modus deaktiviert", "info");
   }
 
   function resetData() {
@@ -282,28 +245,24 @@ export function createPortalApp({
   }
 
   function openDashboard() {
-    closeSidebar();
     showDashboard();
     clearRightPanel();
     syncRightPanelVisibility();
   }
 
   function openQuickExam() {
-    closeSidebar();
     clearRightPanel();
     syncRightPanelVisibility();
     startExam();
   }
 
   function openFullExamOverview() {
-    closeSidebar();
     clearRightPanel();
     syncRightPanelVisibility();
     showFullExamSelect();
   }
 
   function openFullExam(id) {
-    closeSidebar();
     clearRightPanel();
     syncRightPanelVisibility();
     startFullExam(id);
@@ -332,19 +291,20 @@ export function createPortalApp({
       updateProgressUI(loadProgress());
     });
   };
-  window.__drawBudget = drawBudget;
-  window.__drawIndiff = drawIndiff;
-  window.__drawHausopt = drawHausopt;
-  window.__drawMonopol = drawMonopol;
-  window.__drawSlutsky = drawSlutsky;
+  
+  // Expose graph drawing functions from registry globally
+  Object.entries(graphRegistry).forEach(([key, fn]) => {
+    window[`__${key}`] = fn;
+    // Keep standard name if required
+    window[key] = fn;
+  });
+
   window.__drawHicksGraph = drawHicksGraph;
   window.__drawDemandGraph = drawDemandGraph;
   window.__drawIsoquantGraph = drawIsoquantGraph;
   window.initGraph = initGraph;
   window.__toggleTheme = toggleTheme;
   window.__toggleSidebar = toggleSidebar;
-  window.__closeSidebar = closeSidebar;
-  window.__openFormulaPanel = openFormulaPanel;
   window.__toggleFocus = toggleFocus;
   window.__resetData = resetData;
   window.__acceptConsent = acceptConsent;
@@ -354,8 +314,6 @@ export function createPortalApp({
 
   document.addEventListener("DOMContentLoaded", () => {
     window.__jsLoaded = true;
-    document.body.classList.toggle("sidebar-collapsible", collapseSidebarByDefault);
-    setSidebarOpen(false);
     initTheme();
     buildNav(navigate);
 
@@ -400,15 +358,10 @@ export function createPortalApp({
     updateStreakUI();
     initConsent();
     portalBridge?.();
-    normalizeGermanCopy(document.body);
 
     const lastId = loadLastId();
     const lastExists = lastId && chapters.find((chapter) => chapter.id === lastId);
-    const initialChapterExists = initialConceptId && chapters.find((chapter) => chapter.id === initialConceptId);
     if (lastExists) navigate(lastId);
-    else if (initialChapterExists) {
-      navigate(initialConceptId);
-    }
     else {
       setActiveNav(null);
       renderHome();

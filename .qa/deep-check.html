@@ -158,10 +158,6 @@
         await waitFor(() => iframe.contentWindow?.__jsLoaded, 12000);
         const doc = iframe.contentDocument;
         const win = iframe.contentWindow;
-        if (typeof win.__acceptConsent === "function") {
-          win.__acceptConsent();
-          await new Promise((resolve) => setTimeout(resolve, 180));
-        }
         const clickNode = (node) => {
           if (!node) return;
           node.dispatchEvent(new win.MouseEvent("click", {
@@ -216,7 +212,7 @@
           }, 5000).catch(() => {});
         }
 
-        const preferredTabs = requestedTab ? [requestedTab] : ["formeln", "grafik", "aufgaben", "theorie"];
+        const preferredTabs = requestedTab ? [requestedTab] : ["grafik", "aufgaben", "theorie"];
         let chosen = "theorie";
         for (const tab of preferredTabs) {
           const button = doc.querySelector(`#tabRow button[data-tab="${tab}"]`);

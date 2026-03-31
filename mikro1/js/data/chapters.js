@@ -1095,37 +1095,36 @@ export const CONTENT = {
  { label:'Identität im Optimum', eq: String.raw`$$h_i(p,\bar{u}) \equiv x_i(p,m) \quad \text{wenn } m = e(p,\bar{u})$$`, desc:'Wenn m = e(p,ū)', variables: { 'h_i': 'Hickssche Nachfrage', 'x_i': 'Marshallsche Nachfrage', 'm': 'Einkommen = e(p,ū) im Optimum' } },
  ],
  aufgaben: [
-  {
-  text: String.raw`Für $u = x_1 \cdot x_2$ und $\bar{u} = 25$, $p_1 = 4$, $p_2 = 1$: Berechne die minimalen Ausgaben.`,
-  steps: [
-  { text: `Ausgabenfunktion:`, eq: String.raw`$$e = 2\sqrt{\bar{u}\, p_1 p_2} = 2\sqrt{25 \cdot 4 \cdot 1} = 2\sqrt{100} = 20$$` },
-  { text: `Optionale Prüfung — Hicks-Nachfragen:`, eq: String.raw`$$h_1 = \sqrt{\frac{\bar{u}\, p_2}{p_1}} = \sqrt{\frac{25}{4}} = 2{,}5 \qquad h_2 = \sqrt{\frac{\bar{u}\, p_1}{p_2}} = \sqrt{100} = 10$$` },
-  { text: `Ausgaben aus Hicksscher Nachfrage:`, eq: String.raw`$$e = 4 \cdot 2{,}5 + 1 \cdot 10 = 10 + 10 = 20 \checkmark$$` },
-  ],
- result: `Minimale Ausgaben = 20 €`
-          },
-          {
-          text: String.raw`Zeige: Die Hickssche Nachfragekurve $h_1(p_1,p_2,\bar{u})$ ist immer fallend im eigenen Preis.`,
+ {
+ text: String.raw`Leiten Sie die Hickssche Nachfragefunktion $h_1(p_1, p_2, \bar{u})$ für die Nutzenfunktion $u(x_1, x_2) = x_1 x_2$ her.`,
  steps: [
- { text: `Ableitung aus Shephards Lemma:`, eq: String.raw`$$\frac{\partial h_1}{\partial p_1} = \frac{\partial^2 e}{\partial p_1^2}$$` },
- { text: `Die Ausgabenfunktion $e$ ist konkav in Preisen (da Ausgabenminimierung bei Preisänderungen immer günstiger oder gleich wie passive Anpassung):`, eq: String.raw`$$\frac{\partial^2 e}{\partial p_1^2} \leq 0$$` },
- { text: `Daher:`, eq: String.raw`$$\frac{\partial h_1}{\partial p_1} = \frac{\partial^2 e}{\partial p_1^2} \leq 0 \quad \square$$` },
- { text: `Im Unterschied zur Marshallschen Nachfrage kann $h_1$ nie positiv geneigt sein — kein Giffen-Effekt.`, eq: null },
+ { text: String.raw`Das duale Problem der Ausgabenminimierung lautet:`, eq: String.raw`$$\min p_1 x_1 + p_2 x_2 \quad \text{u.d.N.} \quad x_1 x_2 = \bar{u}$$` },
+ { text: String.raw`Aus der Bedingung erster Ordnung (GRS = Preisverhältnis) folgt:`, eq: String.raw`$$\frac{x_2}{x_1} = \frac{p_1}{p_2} \implies x_2 = \frac{p_1}{p_2} x_1$$` },
+ { text: String.raw`Einsetzen in die Nutzennebenbedingung:`, eq: String.raw`$$x_1 \cdot \left(\frac{p_1}{p_2} x_1\right) = \bar{u} \implies x_1^2 = \bar{u} \frac{p_2}{p_1}$$` },
+ { text: String.raw`Daraus ergibt sich die Hickssche Nachfrage für Gut 1:`, eq: String.raw`$$h_1(p_1, p_2, \bar{u}) = \sqrt{\bar{u} \frac{p_2}{p_1}}$$` },
  ],
- result: String.raw`Hickssche NF ist immer fallend: $\partial h_1/\partial p_1 \leq 0$`
+ result: String.raw`$h_1(p_1, p_2, \bar{u}) = \sqrt{\bar{u} \frac{p_2}{p_1}}$`
  },
  {
- text: String.raw`Gegeben $u = x_1^{1/2} x_2^{1/2}$. Leite $h_1$ und $h_2$ her und prüfe, ob $\partial h_1/\partial p_2 = \partial h_2/\partial p_1$ (Symmetrie der Slutsky-Matrix).`,
+ text: String.raw`Erläutern Sie den Zusammenhang zwischen der Hicksschen Nachfrage und dem Substitutionseffekt (SE) in der Slutsky-Gleichung. Zeigen Sie dies formal für $u = x_1 x_2$.`,
  steps: [
- { text: `Ausgabenfunktion (aus voriger Aufgabe oder neu herleiten):`, eq: String.raw`$$e = 2\sqrt{\bar{u} p_1 p_2}$$` },
- { text: `Shephards Lemma:`, eq: String.raw`$$h_1 = \frac{\partial e}{\partial p_1} = \sqrt{\frac{\bar{u} p_2}{p_1}} \qquad h_2 = \sqrt{\frac{\bar{u} p_1}{p_2}}$$` },
- { text: `Kreuzableitungen:`, eq: String.raw`$$\frac{\partial h_1}{\partial p_2} = \frac{1}{2}\sqrt{\frac{\bar{u}}{p_1 p_2}} \qquad \frac{\partial h_2}{\partial p_1} = \frac{1}{2}\sqrt{\frac{\bar{u}}{p_1 p_2}}$$` },
- { text: `Symmetrie bestätigt:`, eq: String.raw`$$\frac{\partial h_1}{\partial p_2} = \frac{\partial h_2}{\partial p_1} \checkmark$$` },
+ { text: String.raw`Die Slutsky-Gleichung besagt, dass der SE der Ableitung der Hicksschen Nachfrage nach dem eigenen Preis entspricht:`, eq: String.raw`$$SE = \frac{\partial h_1(p, \bar{u})}{\partial p_1}$$` },
+ { text: String.raw`Berechnung der Ableitung für $h_1 = \bar{u}^{1/2} p_2^{1/2} p_1^{-1/2}$:`, eq: String.raw`$$\frac{\partial h_1}{\partial p_1} = -\frac{1}{2} \bar{u}^{1/2} p_2^{1/2} p_1^{-3/2} = -\frac{1}{2p_1} \sqrt{\bar{u} \frac{p_2}{p_1}}$$` },
+ { text: String.raw`Substitution von $x_1 = \sqrt{\bar{u} p_2 / p_1}$ im Optimum:`, eq: String.raw`$$SE = -\frac{1}{2p_1} x_1 = -\frac{x_1}{2p_1}$$` },
+ { text: String.raw`Dies entspricht dem reinem Substitutionseffekt, der die Nachfrageänderung bei konstantem Nutzen beschreibt.`, eq: null },
  ],
- result: String.raw`Symmetrie der Slutsky-Matrix: $\partial h_i/\partial p_j = \partial h_j/\partial p_i$`
+ result: String.raw`Der SE ist die Steigung der Hicksschen Nachfragekurve: $SE = \frac{\partial h_1}{\partial p_1} = -\frac{x_1}{2p_1}$.`
  },
- ]
+ {
+ text: String.raw`Verifizieren Sie die Identität $h_1(p, v(p, m)) = x_1(p, m)$ für die Nutzenfunktion $u = x_1 x_2$.`,
+ steps: [
+ { text: String.raw`Indirekte Nutzenfunktion für $u = x_1 x_2$:`, eq: String.raw`$$v(p, m) = \frac{m}{2p_1} \cdot \frac{m}{2p_2} = \frac{m^2}{4 p_1 p_2}$$` },
+ { text: String.raw`Einsetzen von $\bar{u} = v(p, m)$ in die Hickssche Nachfrage $h_1 = \sqrt{\bar{u} p_2 / p_1}$:`, eq: String.raw`$$h_1 = \sqrt{\frac{m^2}{4 p_1 p_2} \cdot \frac{p_2}{p_1}} = \sqrt{\frac{m^2}{4 p_1^2}} = \frac{m}{2 p_1}$$` },
+ { text: String.raw`Dies entspricht exakt der Marshallschen Nachfrage $x_1(p, m)$.`, eq: null },
+ ],
+ result: String.raw`$h_1(p, v(p, m)) = \frac{m}{2 p_1} = x_1(p, m)$ — Die Dualität zwischen Nutzenmaximierung und Ausgabenminimierung ist bestätigt.`
  },
+ ] },
  ausgaben: {
  motivation: 'Die Ausgabenfunktion gibt an, wie viel ein Haushalt mindestens ausgeben muss, um ein bestimmtes Nutzenniveau zu erreichen.',
  theorie: String.raw`
@@ -1432,35 +1431,34 @@ export const CONTENT = {
  ],
  aufgaben: [
  {
- text: String.raw`Bei CD $u = x_1 x_2$, $p_1 = 2$, $m = 40$: Zerlege $\partial x_1/\partial p_1$ in SE und EE. Prüfe die Slutsky-Gleichung.`,
+ text: String.raw`Analysieren Sie die Richtungs-Intuition des Substitutionseffekts (SE): Warum muss für eine Preissenkung von Gut 1 ($p_1 \downarrow$) der isolierte Substitutionseffekt auf die Menge $x_1$ stets nicht-negativ sein ($SE \geq 0$)?`,
  steps: [
- { text: `Marshallsche Nachfrage:`, eq: String.raw`$$x_1^* = \frac{m}{2p_1} \implies \frac{\partial x_1}{\partial p_1} = -\frac{m}{2p_1^2} = -\frac{40}{8} = -5$$` },
- { text: `Hicks-Nachfrage:`, eq: String.raw`$$h_1 = \sqrt{\bar{u}\, p_2/p_1}, \quad \bar{u} = x_1^* x_2^* = 50, \quad h_1 = \sqrt{50 \cdot 4/p_1}$$` },
- { text: String.raw`SE $= \partial h_1/\partial p_1$:`, eq: String.raw`$$SE = \frac{\partial h_1}{\partial p_1}\bigg|_{p_1=2} = -\frac{m}{4p_1^2} = -\frac{40}{16} = -2{,}5$$` },
- { text: String.raw`EE $= -(\partial x_1/\partial m) \cdot x_1$:`, eq: String.raw`$$\frac{\partial x_1}{\partial m} = \frac{1}{2p_1} = 0{,}25 \qquad EE = -0{,}25 \cdot 10 = -2{,}5$$` },
- { text: `Prüfung Slutsky:`, eq: String.raw`$$GE = SE + EE = -2{,}5 + (-2{,}5) = -5 \checkmark$$` },
+ { text: String.raw`Der SE betrachtet die Nachfrageänderung bei konstant gehaltener Kaufkraft (im Sinne von Slutsky: das alte Bündel bleibt gerade noch erschwinglich).`, eq: null },
+ { text: String.raw`Nach der Preissenkung von Gut 1 wird die Budgetgerade flacher und dreht sich durch das alte Bündel. Neue Bündel auf der Budgetgeraden enthalten mehr $x_1$ und weniger $x_2$ als das ursprüngliche Bündel.`, eq: null },
+ { text: String.raw`Da das alte Bündel auf der neuen Budgetgeraden liegt, kann der Haushalt nur dann ein neues Bündel wählen, wenn dieses mindestens so gut ist wie das alte. Bei konvexen Präferenzen liegen alle besseren Bündel in Richtung einer höheren Menge des nun relativ billigeren Gutes $x_1$.`, eq: null },
+ { text: String.raw`Formal folgt dies aus dem Gesetz der kompensierten Nachfrage: $(p' - p) \cdot (h(p') - h(p)) \leq 0$. Bei $dp_1 < 0$ muss $dx_1 \geq 0$ gelten.`, eq: String.raw`$$dp_1 < 0 \implies dx_1^{SE} \geq 0$$` },
  ],
- result: String.raw`SE $= -2{,}5$, EE $= -2{,}5$, GE $= -5$. Beide Effekte gleich groß bei CD.`
+ result: String.raw`Der SE ist stets invers zur Preisänderung: Eine Preissenkung führt via SE niemals zu einer geringeren Nachfrage.`
  },
  {
- text: String.raw`Giffen-Gut-Bedingung: Erkläre, wann $\partial x_1/\partial p_1 > 0$ möglich ist. Gib ein numerisches Beispiel.`,
+ text: String.raw`Ein Haushalt konsumiert das Bündel $(x_1, x_2) = (10, 5)$ bei Preisen $p_1 = 2$ und $p_2 = 4$. Der Preis von Gut 1 steigt auf $p_1' = 3$. Berechnen Sie die Slutsky-Kompensation $\Delta m$, die notwendig ist, um das ursprüngliche Bündel exakt wieder erschwinglich zu machen.`,
  steps: [
- { text: String.raw`Slutsky: $\partial x_1/\partial p_1 = SE + EE = \partial h_1/\partial p_1 - x_1 \cdot \partial x_1/\partial m$.`, eq: null },
- { text: String.raw`SE $\leq 0$ immer. EE = $-x_1 \cdot \partial x_1/\partial m$. Für inferiore Güter: $\partial x_1/\partial m < 0 \implies$ EE $>0$.`, eq: null },
- { text: String.raw`Giffen-Bedingung: EE $>$ |SE|, d.h. $x_1 |\partial x_1/\partial m| > |\partial h_1/\partial p_1|$.`, eq: String.raw`$$\text{Beispiel: } SE = -1,\; EE = +3 \implies GE = +2 > 0 \quad \text{(Giffen)}$$` },
- { text: String.raw`Voraussetzungen: (1) Gut muss inferior sein. (2) Es muss einen großen Einkommenseffekt geben (große $x_1$, starke Inferiorität). Giffen-Güter sind empirisch extrem selten.`, eq: null },
+ { text: String.raw`Ursprüngliches Einkommen $m$:`, eq: String.raw`$$m = p_1 x_1 + p_2 x_2 = 2 \cdot 10 + 4 \cdot 5 = 40$$` },
+ { text: String.raw`Kosten des alten Bündels zu neuen Preisen $m'$:`, eq: String.raw`$$m' = p_1' x_1 + p_2 x_2 = 3 \cdot 10 + 4 \cdot 5 = 50$$` },
+ { text: String.raw`Die Slutsky-Kompensation $\Delta m$ ist die Differenz:`, eq: String.raw`$$\Delta m = m' - m = x_1 \cdot \Delta p_1 = 10 \cdot (3 - 2) = 10$$` },
+ { text: String.raw`Der Haushalt benötigt somit 10 zusätzliche Geldeinheiten, um trotz der Preiserhöhung nicht an Kaufkraft zu verlieren.`, eq: null },
  ],
- result: String.raw`Giffen: inferior + EE dominiert SE. $\partial x_1/\partial p_1 > 0$ — aufwärts geneigte Nachfragekurve`
+ result: String.raw`$\Delta m = 10$ — Die Kompensation entspricht der Menge des teurer gewordenen Gutes multipliziert mit der Preisänderung.`
  },
  {
- text: String.raw`Berechne die Slutsky-Zerlegung des Kreuzpreiseffekts: Wie wirkt $p_2$-Änderung auf $x_1$?`,
+ text: String.raw`Gegeben sei die Nutzenfunktion $u(x_1, x_2) = x_1 x_2$. Zerlegen Sie den Gesamteffekt einer marginalen Änderung von $p_1$ auf $x_1$ in Substitutionseffekt (SE) und Einkommenseffekt (EE) unter Verwendung der Slutsky-Gleichung.`,
  steps: [
- { text: String.raw`Slutsky-Kreuzpreisformel:`, eq: String.raw`$$\frac{\partial x_1}{\partial p_2} = \frac{\partial h_1}{\partial p_2} - x_2 \cdot \frac{\partial x_1}{\partial m}$$` },
- { text: String.raw`Für CD $u=x_1 x_2$: $x_1^*=m/(2p_1)$, $x_2^*=m/(2p_2)$, $\partial x_1/\partial p_2=0$, $\partial x_1/\partial m = 1/(2p_1)$.`, eq: null },
- { text: String.raw`Hicks-Kreuzpreis (Symmetrie): $\partial h_1/\partial p_2 = \partial h_2/\partial p_1 = \frac{\bar{u}}{4p_1p_2} \cdot ... $ (aus e-Ableitung).`, eq: String.raw`$$0 = \frac{\partial h_1}{\partial p_2} - \frac{m}{2p_2}\cdot\frac{1}{2p_1} \implies \frac{\partial h_1}{\partial p_2} = \frac{m}{4p_1 p_2}$$` },
- { text: String.raw`GE = 0 = SE $+ m/(4p_1 p_2) - m/(4p_1 p_2)$ ✓ — SE und EE heben sich auf.`, eq: null },
+ { text: String.raw`Marshallsche Nachfrage: $x_1(p_1, m) = \frac{m}{2p_1}$. Gesamteffekt (GE):`, eq: String.raw`$$\frac{\partial x_1}{\partial p_1} = -\frac{m}{2p_1^2}$$` },
+ { text: String.raw`Einkommenseffekt (EE) nach Slutsky: $-x_1 \cdot \frac{\partial x_1}{\partial m}$:`, eq: String.raw`$$EE = -x_1 \cdot \frac{1}{2p_1} = -\frac{m}{2p_1} \cdot \frac{1}{2p_1} = -\frac{m}{4p_1^2}$$` },
+ { text: String.raw`Substitutionseffekt (SE) als Restgröße: $SE = GE - EE$:`, eq: String.raw`$$SE = -\frac{m}{2p_1^2} - \left(-\frac{m}{4p_1^2}\right) = -\frac{m}{4p_1^2}$$` },
+ { text: String.raw`Vergleich: Bei Cobb-Douglas-Präferenzen mit gleichen Exponenten sind SE und EE identisch groß.`, eq: null },
  ],
- result: String.raw`Kreuzpreis-Slutsky: GE = Hicks-SE $- x_2 \cdot \partial x_1/\partial m$. Bei CD: Beide Terme heben sich auf.`
+ result: String.raw`$SE = -\frac{m}{4p_1^2}$, $EE = -\frac{m}{4p_1^2}$ — Beide Effekte tragen gleichermaßen zum Gesamteffekt bei.`
  },
  ]
  },
@@ -1945,33 +1943,24 @@ export const CONTENT = {
  ],
  aufgaben: [
  {
- text: `$F(K,L) = K^{0{,}5} L^{0{,}5}$. Minimiere Kosten zur Produktion von $y = 4$ bei $w = 4$, $r = 1$.`,
+ text: String.raw`Leiten Sie die langfristige Kostenfunktion $C(w, r, y)$ für die Produktionsfunktion $f(L, K) = L^{0{,}5} K^{0{,}5}$ her.`,
  steps: [
- { text: `Optimalbedingung $GRTS = w/r$:`, eq: String.raw`$$\frac{MP_L}{MP_K} = \frac{K}{L} = \frac{w}{r} = \frac{4}{1} = 4 \implies K = 4L$$` },
- { text: `Einsetzen in Produktionsfunktion:`, eq: String.raw`$$(4L)^{0{,}5} L^{0{,}5} = 4 \implies 2L = 4 \implies L^* = 2$$` },
- { text: `Kosten:`, eq: String.raw`$$K^* = 8 \qquad C^* = 4 \cdot 2 + 1 \cdot 8 = 16$$` },
+ { text: String.raw`Kostenminimierung: $GRTS = \frac{MP_L}{MP_K} = \frac{K}{L} = \frac{w}{r} \implies K = \frac{w}{r} L$.`, eq: null },
+ { text: String.raw`Einsetzen in die Output-Bedingung $f(L, K) = y$:`, eq: String.raw`$$L^{0{,}5} \left(\frac{w}{r} L\right)^{0{,}5} = y \implies L \sqrt{\frac{w}{r}} = y$$` },
+ { text: String.raw`Daraus folgen die bedingten Faktornachfragen:`, eq: String.raw`$$L(w, r, y) = y \sqrt{\frac{r}{w}} \quad \text{und} \quad K(w, r, y) = y \sqrt{\frac{w}{r}}$$` },
+ { text: String.raw`Die Kostenfunktion ergibt sich als $C = wL + rK$:`, eq: String.raw`$$C(w, r, y) = w \left(y \sqrt{\frac{r}{w}}\right) + r \left(y \sqrt{\frac{w}{r}}\right) = y \sqrt{wr} + y \sqrt{wr} = 2y \sqrt{wr}$$` },
  ],
- result: `$L^* = 2$, $K^* = 8$, $C^* = 16$`
+ result: String.raw`$C(w, r, y) = 2y \sqrt{wr}$`
  },
  {
- text: `Leite für $F = K^{0{,}5} L^{0{,}5}$ die Kostenfunktion $C(w,r,y)$ her.`,
+ text: String.raw`Untersuchen Sie die Skaleneigenschaften der Kostenfunktion $C(y) = 2y \sqrt{wr}$ und leiten Sie Grenzkosten (MC) sowie Durchschnittskosten (AC) ab.`,
  steps: [
- { text: `Aus Optimalbedingung: $K = (w/r)L$. Einsetzen:`, eq: String.raw`$$\left(\frac{w}{r}L\right)^{0{,}5} L^{0{,}5} = y \implies \sqrt{\frac{w}{r}} \cdot L = y \implies L^*(w,r,y) = y\sqrt{r/w}$$` },
- { text: `Analog:`, eq: String.raw`$$K^*(w,r,y) = y\sqrt{w/r}$$` },
- { text: `Kostenfunktion:`, eq: String.raw`$$C(w,r,y) = wL^* + rK^* = w\cdot y\sqrt{r/w} + r\cdot y\sqrt{w/r} = 2y\sqrt{wr}$$` },
- { text: String.raw`Prüfung Shephards Lemma: $\partial C/\partial w = y\sqrt{r/w} = L^*$ `, eq: null },
+ { text: String.raw`Grenzkosten (MC):`, eq: String.raw`$$MC(y) = \frac{\partial C}{\partial y} = 2 \sqrt{wr}$$` },
+ { text: String.raw`Durchschnittskosten (AC):`, eq: String.raw`$$AC(y) = \frac{C(y)}{y} = 2 \sqrt{wr}$$` },
+ { text: String.raw`Da $MC = AC$ konstant ist, weist die Technologie konstante Skalenerträge auf ($k=1$).`, eq: null },
+ { text: String.raw`Dies korrespondiert mit der Produktionsfunktion $f = L^{0{,}5} K^{0{,}5}$, die homogen vom Grad $0{,}5 + 0{,}5 = 1$ ist.`, eq: null },
  ],
- result: String.raw`$C(w,r,y) = 2y\sqrt{wr}$`
- },
- {
- text: String.raw`Zeige: Für eine linear-homogene Produktionsfunktion ($k=1$) ist die Kostenfunktion linear in $y$: $C(w,r,y) = c(w,r) \cdot y$.`,
- steps: [
- { text: String.raw`Bei $k=1$: $F(\lambda K, \lambda L) = \lambda y$. Um $\lambda y$ zu produzieren, skaliere alle Inputs mit $\lambda$:`, eq: String.raw`$$K^*(w,r,\lambda y) = \lambda K^*(w,r,y) \qquad L^*(w,r,\lambda y) = \lambda L^*(w,r,y)$$` },
- { text: `Kostenfunktion:`, eq: String.raw`$$C(w,r,\lambda y) = w \lambda L^* + r \lambda K^* = \lambda(wL^* + rK^*) = \lambda C(w,r,y)$$` },
- { text: String.raw`Also ist $C$ linear in $y$: $C = c(w,r)\cdot y$ mit $c(w,r) = C(w,r,1)$.`, eq: null },
- { text: String.raw`Konsequenz: $MC = \partial C/\partial y = c(w,r) = AC$ — Grenzkosten = Stückkosten (konstant).`, eq: null },
- ],
- result: String.raw`Bei $k=1$: $C = c(w,r)\cdot y$ und $MC = AC = c(w,r)$ — konstante Stückkosten.`
+ result: String.raw`$MC = AC = 2 \sqrt{wr}$. Konstante Stückkosten sind charakteristisch für CRS-Technologien.`
  },
  ]
  },
@@ -2204,6 +2193,17 @@ export const CONTENT = {
  { text: `Jede Abweichung von $y^*$ erzeugt DWL: Für $y < y^*$ gilt $MZB >MC$ — unausgeschöpftes Wohlfahrtspotenzial.`, eq: String.raw`$$DWL = \int_{y_t}^{y^*} [MZB(y) - MC(y)]\, dy >0$$` },
  ],
  result: `Im GG: $MZB = MC$ — maximale Gesamtrente, kein DWL, Pareto-Effizienz.`
+ },
+ {
+ text: String.raw`Analysieren Sie den Wohlfahrtsverlust (Deadweight Loss, DWL) durch einen Höchstpreis. Gegeben seien die Marktnachfrage $D(p) = 100 - p$ und das Marktangebot $S(p) = p$. Berechnen Sie den DWL für einen staatlich verordneten Höchstpreis von $p_{max} = 40$.`,
+ steps: [
+ { text: String.raw`Schritt 1: Bestimmung des Marktgleichgewichts ohne Eingriff:`, eq: String.raw`$$100 - p = p \implies 2p = 100 \implies p^* = 50, \quad q^* = 50$$` },
+ { text: String.raw`Schritt 2: Analyse der Situation bei $p_{max} = 40$: Da der Höchstpreis unter dem Gleichgewichtspreis liegt, ist er bindend. Die angebotene Menge sinkt auf $q_S(40) = 40$. Da $q_S < q_D$, ist dies die tatsächlich am Markt gehandelte Menge (Short-side-Prinzip).`, eq: null },
+ { text: String.raw`Schritt 3: Bestimmung der marginalen Zahlungsbereitschaft bei $q = 40$:`, eq: String.raw`$$p_D(40) = 100 - 40 = 60$$` },
+ { text: String.raw`Schritt 4: Berechnung des Wohlfahrtsverlusts (DWL). Der DWL entspricht der Fläche des Dreiecks zwischen Nachfrage- und Angebotskurve im Bereich der nicht realisierten Einheiten zwischen $q = 40$ und $q^* = 50$:`, eq: String.raw`$$DWL = \frac{1}{2} \cdot (p_D(40) - p_S(40)) \cdot (q^* - q_S) = \frac{1}{2} \cdot (60 - 40) \cdot (50 - 40)$$` },
+ { text: String.raw`Berechnung:`, eq: String.raw`$$DWL = \frac{1}{2} \cdot 20 \cdot 10 = 100$$` },
+ ],
+ result: String.raw`$DWL = 100$. Der Höchstpreis führt zu einer ineffizient geringen Menge und einem Wohlfahrtsverlust von 100 Einheiten.`
  },
  ]
  },

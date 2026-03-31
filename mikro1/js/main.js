@@ -21,8 +21,6 @@ createPortalApp({
   courseLabel: COURSE_CONFIG.courseLabel,
   consentKey: COURSE_CONFIG.consentKey,
   chapters: CHAPTERS,
-  initialConceptId: CHAPTERS[0]?.id || null,
-  collapseSidebarByDefault: true,
   appState,
   storage,
   navigation,

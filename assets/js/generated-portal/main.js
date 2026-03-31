@@ -8,7 +8,6 @@ import { getModuleContent } from "../module-content.js";
 import { mountRLabs } from "../r-lab.js";
 import { mountLivePortalBridge } from "../live-portal-bridge.js";
 import { buildGeneratedPortalData } from "./dataFactory.js";
-import { ensureMathJax, normalizeGermanCopy, renderMath } from "../portal-core/utils/math.js";
 
 function inferSlug() {
   const parts = window.location.pathname.split("/").filter(Boolean);
@@ -24,15 +23,65 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
-function withAlpha(color, alpha = 1) {
-  const normalized = String(color || "").trim();
-  if (!normalized.startsWith("#")) return normalized;
-  const hex = normalized.slice(1);
-  const full = hex.length === 3 ? hex.split("").map((char) => char + char).join("") : hex;
+function accentForeground(hex) {
+  const normalized = String(hex || "#7c3aed").replace("#", "");
+  const full = normalized.length === 3
+    ? normalized.split("").map((char) => char + char).join("")
+    : normalized;
   const r = Number.parseInt(full.slice(0, 2), 16);
   const g = Number.parseInt(full.slice(2, 4), 16);
   const b = Number.parseInt(full.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance > 0.62 ? "#000000" : "#ffffff";
+}
+
+function ensureMathJax() {
+  if (document.getElementById("MathJax-script")) return;
+  window.MathJax = {
+    tex: {
+      inlineMath: [["$", "$"], ["\\(", "\\)"]],
+      displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+    },
+    options: {
+      skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"]
+    },
+    startup: { typeset: false }
+  };
+  const script = document.createElement("script");
+  script.id = "MathJax-script";
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.src = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js";
+  document.head.appendChild(script);
+}
+
+function renderMath(target) {
+  const el = target || document.getElementById("content");
+  if (!el) return;
+
+  const typeset = () => {
+    if (window.MathJax?.typesetPromise) {
+      MathJax.typesetPromise([el]).catch(() => {});
+    }
+  };
+
+  if (window.MathJax?.typesetPromise) {
+    typeset();
+    return;
+  }
+
+  if (window.MathJax?.startup?.promise) {
+    MathJax.startup.promise.then(typeset).catch(() => {});
+    return;
+  }
+
+  const poll = window.setInterval(() => {
+    if (window.MathJax?.typesetPromise) {
+      window.clearInterval(poll);
+      typeset();
+    }
+  }, 120);
+  window.setTimeout(() => window.clearInterval(poll), 10000);
 }
 
 function normalizeAnswer(value) {
@@ -97,125 +146,6 @@ function buildHomeIntro(module, contentProfile) {
     || module.summary;
 }
 
-function getMathematikSectionLabel(category) {
-  if (category === "Theorie") return "Theoriepfad";
-  if (category === "Aufgaben und Klausur") return "Übungspfad";
-  if (category === "R-Lab") return "R-Praxis";
-  return category;
-}
-
-function getMathematikCardMeta(chapter, viewed, indexWithinCategory) {
-  if (viewed) return { eyebrow: "Zuletzt gelernt", subline: "Direkt wieder einsteigen" };
-  if (chapter.cat === "Theorie") {
-    return { eyebrow: `Theorie ${indexWithinCategory + 1}`, subline: "Definitionen, Methoden und graphische Lesart" };
-  }
-  if (chapter.cat === "Aufgaben und Klausur") {
-    return { eyebrow: `Übung ${indexWithinCategory + 1}`, subline: "Rechenpraxis, Klausurzugriff und Transfer" };
-  }
-  if (chapter.cat === "R-Lab") {
-    return { eyebrow: "R-Lab", subline: "Code, numerische Kontrolle und Plot-Praxis" };
-  }
-  return { eyebrow: `Kapitel ${indexWithinCategory + 1}`, subline: chapter.cat };
-}
-
-function renderMathematikHome({ module, chapters, loadProgress, loadLastId, getDueCards, renderMath }) {
-  const content = document.getElementById("content");
-  const breadcrumb = document.getElementById("breadcrumb");
-  const tabRow = document.getElementById("tabRow");
-  if (!content) return;
-
-  if (tabRow) tabRow.classList.remove("visible");
-  if (breadcrumb) {
-    breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${escapeHtml(module.title)}</button> / Startseite`;
-  }
-
-  const progress = loadProgress();
-  const due = getDueCards();
-  const lastId = loadLastId();
-  const lastChapter = lastId && chapters.find((chapter) => chapter.id === lastId);
-  const theoryChapters = chapters.filter((chapter) => chapter.cat === "Theorie");
-  const practiceChapters = chapters.filter((chapter) => chapter.cat === "Aufgaben und Klausur");
-  const rLabChapters = chapters.filter((chapter) => chapter.cat === "R-Lab");
-  const recent = Object.entries(progress)
-    .filter(([, entry]) => entry && entry.lastSeen)
-    .sort(([, a], [, b]) => (b.lastSeen || 0) - (a.lastSeen || 0))
-    .slice(0, 3)
-    .map(([id]) => chapters.find((chapter) => chapter.id === id))
-    .filter(Boolean);
-
-  const categories = {};
-  chapters.forEach((chapter) => {
-    if (!categories[chapter.cat]) categories[chapter.cat] = [];
-    categories[chapter.cat].push(chapter);
-  });
-
-  let html = `<div class="hero hero-math">
-<div class="hero-kicker">VWL B.Sc. · Mathematik als Methodenfach</div>
-<h1>${escapeHtml(module.title)}<br><span>Rechnen, verstehen, sicher anwenden</span></h1>
-<p>Von Algebra und Mengenlehre bis zu Lagrange und Integralrechnung lernst du hier denselben Stofffluss wie in Vorlesung, Übung und R-Praxis. Jede Station verbindet Theorie, Rechenweg, Visualisierung und Prüfungstransfer in einer einzigen Lernoberfläche.</p>
-<div class="stat-row">
-<div class="stat-item"><div class="s-val">${theoryChapters.length}</div><div class="s-lab">Theoriepfade</div></div>
-<div class="stat-item"><div class="s-val">${practiceChapters.length}</div><div class="s-lab">Übungskapitel</div></div>
-<div class="stat-item"><div class="s-val">${module.rLab?.lessons?.length || rLabChapters.length}</div><div class="s-lab">R-Lab-Lektionen</div></div>
-<div class="stat-item"><div class="s-val">${due.length}</div><div class="s-lab">Heute fällig</div></div>
-</div>
-</div>`;
-
-  const entryChapter = lastChapter || theoryChapters[0] || chapters[0];
-  if (entryChapter) {
-    const entryLabel = lastChapter ? "Weitermachen" : "Jetzt starten";
-    html += `<div class="home-continue-card" onclick="window.__navigate('${entryChapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${entryChapter.id}')">
-<span class="hcc-label">${entryLabel}</span>
-<span class="hcc-title">${escapeHtml(entryChapter.title)}</span>
-<span class="hcc-cat">${escapeHtml(getMathematikSectionLabel(entryChapter.cat))}</span>
-</div>`;
-  }
-
-  html += `<div class="home-action-row">
-<div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showDashboard()">
-<div class="hac-title">Lernstand</div>
-<div class="hac-desc">Sieh sofort, welche Kapitel tragen, welche Wiederholungen fällig sind und wo du vor der Klausur nachziehen musst.</div>
-</div>
-<div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startExam()">
-<div class="hac-title">Schnelltest</div>
-<div class="hac-desc">Prüfe Definitionen, Rechenzugriffe und typische Klausurfehler unter Zeitdruck.</div>
-</div>
-<div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showSRSReview()">
-<div class="hac-title">Wiederholen</div>
-<div class="hac-desc">Hole Beweise, Ableitungslogik und Methoden zurück, bevor spätere Kapitel darauf aufbauen.</div>
-</div>
-</div>`;
-
-  if (recent.length) {
-    html += `<div class="home-recent-strip">
-<div class="section-sep">Zuletzt geöffnet</div>
-<div class="home-mini-grid">
-${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigate('${chapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')">
-<div class="hc-num">${escapeHtml(getMathematikSectionLabel(chapter.cat))}</div>
-<div class="hc-title">${escapeHtml(chapter.title)}</div>
-</div>`).join("")}
-</div>
-</div>`;
-  }
-
-  Object.entries(categories).forEach(([category, items]) => {
-    html += `<div class="section-sep">${escapeHtml(getMathematikSectionLabel(category))}</div><div class="home-grid">`;
-    items.forEach((item, index) => {
-      const viewed = progress[item.id];
-      const meta = getMathematikCardMeta(item, viewed, index);
-      html += `<div class="home-card" onclick="window.__navigate('${item.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${item.id}')">
-<div class="hc-num">${escapeHtml(meta.eyebrow)}</div>
-<div class="hc-title">${escapeHtml(item.title)}</div>
-<div class="hc-cat">${escapeHtml(meta.subline)}</div>
-</div>`;
-    });
-    html += "</div>";
-  });
-
-  content.innerHTML = html;
-  renderMath(content);
-}
-
 function createAppState() {
   return {
     current: null,
@@ -233,7 +163,7 @@ function createAppState() {
   };
 }
 
-function createNavigation(chapters, loadProgress, loadSRS, formatCategoryLabel = (category) => category) {
+function createNavigation(chapters, loadProgress, loadSRS) {
   function buildNav(onNavigate) {
     const categories = {};
     chapters.forEach((chapter, index) => {
@@ -248,7 +178,7 @@ function createNavigation(chapters, loadProgress, loadSRS, formatCategoryLabel =
     Object.entries(categories).forEach(([category, items]) => {
       const section = document.createElement("div");
       section.className = "nav-section";
-      section.innerHTML = `<div class="nav-section-title">${formatCategoryLabel(category)}</div>`;
+      section.innerHTML = `<div class="nav-section-title">${category}</div>`;
       items.forEach((item) => {
         const element = document.createElement("div");
         element.className = "nav-item";
@@ -584,8 +514,8 @@ function createDashboard(chapters, loadProgress, loadSRS, getDueCards, getPerfor
 
     let html = `<div class="dashboard">
 <div class="dash-header">
-  <h2>Lernstand</h2>
-  <p style="color:var(--muted);font-size:13px">Fortschritt, Wiederholungsdruck und unsichere Kapitel in einem Blick.</p>
+  <h2>Lern-Dashboard</h2>
+  <p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
 </div>
 <div class="dash-stats">
   <div class="dash-stat"><div class="ds-val">${totalSeen}</div><div class="ds-lab">Konzepte gesehen</div></div>
@@ -617,7 +547,7 @@ function createDashboard(chapters, loadProgress, loadSRS, getDueCards, getPerfor
       html += `<div class="dash-section"><h3>Schwache Bereiche</h3><div class="dash-bars">`;
       weak.slice(0, 6).forEach((stat) => {
         const percent = Math.round(stat.accuracy * 100);
-        const color = percent < 40 ? "var(--accent3)" : "var(--accent2)";
+        const color = percent < 40 ? "var(--accent3)" : percent < 60 ? "#f0c040" : "var(--accent2)";
         html += `<div class="dash-bar-row">
 <button class="dash-bar-label" onclick="window.__navigate('${stat.id}')">${stat.title}</button>
 <div class="dash-bar-bg"><div class="dash-bar-fg" style="width:${percent}%;background:${color}"></div></div>
@@ -683,13 +613,10 @@ function createKeyboard(chapters) {
           const n = first.id.replace("sol_", "");
           appState.toggleSolution(Number.parseInt(n, 10));
         }
-      } else if ((event.key === "f" || event.key === "F") && event.shiftKey) {
-        appState.toggleFocus();
       } else if (event.key === "f" || event.key === "F") {
-        event.preventDefault();
-        window.__openFormulaPanel?.();
+        appState.toggleFocus();
       } else if (event.key === "Escape") {
-        window.__closeSidebar?.();
+        document.getElementById("sidebar")?.classList.remove("open");
       }
     });
   }
@@ -710,26 +637,15 @@ function setGraphLabel(id, value, digits = 2, formatter = null) {
   element.textContent = formatter ? formatter(value) : value.toFixed(digits);
 }
 
-function formatGraphNumber(value, digits = 2) {
-  return Number(value).toFixed(digits).replace(/\.0+$/, "").replace(/(\.\d*[1-9])0+$/, "$1");
-}
-
-function formatSignedGraphTerm(value, digits = 2) {
-  return `${value >= 0 ? "+" : "-"} ${formatGraphNumber(Math.abs(value), digits)}`;
-}
-
 function graphPalette() {
   const styles = getComputedStyle(document.body);
   return {
-    accent: styles.getPropertyValue("--accent").trim() || "#486b19",
-    accent2: styles.getPropertyValue("--accent2").trim() || "#647b5f",
-    warn: styles.getPropertyValue("--accent3").trim() || "#a55a4f",
+    accent: styles.getPropertyValue("--accent").trim() || "#7c3aed",
+    accent2: styles.getPropertyValue("--accent2").trim() || "#5cf0ff",
+    warn: styles.getPropertyValue("--accent3").trim() || "#ff6b6b",
     text: styles.getPropertyValue("--text").trim() || "#f5f3ff",
     muted: styles.getPropertyValue("--muted").trim() || "#b8b5c6",
     border: styles.getPropertyValue("--border").trim() || "rgba(255,255,255,0.12)",
-    card: styles.getPropertyValue("--card").trim() || "rgba(255,255,255,0.96)",
-    bg: styles.getPropertyValue("--bg").trim() || "#0d110e",
-    body: styles.getPropertyValue("--font-body").trim() || "system-ui, sans-serif",
     grid: "rgba(255,255,255,0.08)",
     mono: styles.getPropertyValue("--font-mono").trim() || "'SF Mono', 'Cascadia Code', 'Fira Code', monospace"
   };
@@ -737,23 +653,15 @@ function graphPalette() {
 
 function updateGraphInfo(html) {
   const info = document.getElementById("graph_info");
-  if (!info) return;
-  const normalized = String(html || "")
-    .replace(/^\s*<strong>\s*Interpretation:\s*<\/strong>\s*/i, "")
-    .trim();
-  info.innerHTML = `
-    <div class="graph-note-kicker">Interpretation</div>
-    <div class="graph-note-body">${normalized}</div>
-  `;
+  if (info) info.innerHTML = html;
 }
 
 function setupGraphCanvas(xLabel, yLabel, ranges) {
   const canvas = document.getElementById("graph_canvas");
   if (!canvas) return null;
   const ctx = canvas.getContext("2d");
-  const width = Math.max(560, Math.round(canvas.clientWidth || 800));
-  const inferredHeight = Math.round(width * 0.625);
-  const height = Math.max(360, Math.round(canvas.clientHeight || inferredHeight));
+  const width = Math.max(520, Math.round(canvas.clientWidth || 800));
+  const height = Math.max(340, Math.round(canvas.clientHeight || 430));
   const dpr = window.devicePixelRatio || 1;
   canvas.width = Math.round(width * dpr);
   canvas.height = Math.round(height * dpr);
@@ -761,23 +669,20 @@ function setupGraphCanvas(xLabel, yLabel, ranges) {
   ctx.clearRect(0, 0, width, height);
 
   const col = graphPalette();
-  const m = { left: 74, right: 34, top: 34, bottom: 72 };
+  const m = { left: 64, right: 24, top: 26, bottom: 56 };
   const plotWidth = width - m.left - m.right;
   const plotHeight = height - m.top - m.bottom;
   const px = (x) => m.left + ((x - ranges.xMin) / (ranges.xMax - ranges.xMin)) * plotWidth;
   const py = (y) => m.top + plotHeight - ((y - ranges.yMin) / (ranges.yMax - ranges.yMin)) * plotHeight;
-  const fsTick = Math.max(11, Math.round(Math.min(width, height) * 0.022));
-  const fsAxis = Math.max(13, Math.round(Math.min(width, height) * 0.028));
 
-  ctx.fillStyle = col.bg;
-  ctx.fillRect(0, 0, width, height);
-  ctx.setLineDash([4, 5]);
+  ctx.fillStyle = "rgba(255,255,255,0.015)";
+  ctx.fillRect(m.left, m.top, plotWidth, plotHeight);
+
+  ctx.strokeStyle = col.grid;
+  ctx.lineWidth = 1;
   for (let i = 0; i <= 5; i += 1) {
     const x = m.left + (plotWidth / 5) * i;
     const y = m.top + (plotHeight / 5) * i;
-    ctx.strokeStyle = col.grid;
-    ctx.globalAlpha = 0.55;
-    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(x, m.top);
     ctx.lineTo(x, m.top + plotHeight);
@@ -787,11 +692,9 @@ function setupGraphCanvas(xLabel, yLabel, ranges) {
     ctx.lineTo(m.left + plotWidth, y);
     ctx.stroke();
   }
-  ctx.globalAlpha = 1;
-  ctx.setLineDash([]);
 
-  ctx.strokeStyle = col.muted;
-  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = col.border;
+  ctx.lineWidth = 1.4;
   ctx.beginPath();
   ctx.moveTo(m.left, m.top);
   ctx.lineTo(m.left, m.top + plotHeight);
@@ -799,17 +702,13 @@ function setupGraphCanvas(xLabel, yLabel, ranges) {
   ctx.stroke();
 
   ctx.fillStyle = col.muted;
-  ctx.font = `700 ${fsAxis}px ${col.body}`;
+  ctx.font = `12px ${col.mono}`;
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.fillText(xLabel, m.left + plotWidth / 2, height - 38);
+  ctx.fillText(xLabel, m.left + plotWidth / 2, height - 28);
 
-  ctx.save();
-  ctx.translate(18, m.top + plotHeight / 2);
-  ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
-  ctx.restore();
-  ctx.font = `${fsTick}px ${col.body}`;
+  ctx.textAlign = "left";
+  ctx.fillText(yLabel, 12, 8);
 
   for (let i = 0; i <= 5; i += 1) {
     const xv = ranges.xMin + ((ranges.xMax - ranges.xMin) / 5) * i;
@@ -822,10 +721,10 @@ function setupGraphCanvas(xLabel, yLabel, ranges) {
     ctx.fillText(Number(yv).toFixed(1).replace(/\.0$/, ""), m.left - 8, m.top + plotHeight - (plotHeight / 5) * i);
   }
 
-  return { ctx, width, height, m, px, py, ranges, col, fsTick, fsAxis };
+  return { ctx, width, height, m, px, py, ranges, col };
 }
 
-function drawPolyline(plot, points, { color, lineWidth = 2.5, dash = [] } = {}) {
+function drawPolyline(plot, points, { color, lineWidth = 2.6, dash = [] } = {}) {
   const { ctx } = plot;
   ctx.save();
   ctx.strokeStyle = color || plot.col.accent;
@@ -842,7 +741,7 @@ function drawPolyline(plot, points, { color, lineWidth = 2.5, dash = [] } = {}) 
   ctx.restore();
 }
 
-function drawScatter(plot, points, { color, radius = 4, alpha = 0.92 } = {}) {
+function drawScatter(plot, points, { color, radius = 3.6, alpha = 0.92 } = {}) {
   const { ctx } = plot;
   ctx.save();
   ctx.fillStyle = color || plot.col.accent2;
@@ -881,7 +780,10 @@ function drawVerticalMarker(plot, x, label, color = plot.col.warn) {
   ctx.lineTo(px, height - m.bottom);
   ctx.stroke();
   ctx.setLineDash([]);
-  drawGraphChip(plot, px, m.top - 14, label, { align: "center", textColor: plot.col.text, stroke: color });
+  ctx.fillStyle = color;
+  ctx.font = `12px ${plot.col.mono}`;
+  ctx.textAlign = "center";
+  ctx.fillText(label, px, m.top - 16);
   ctx.restore();
 }
 
@@ -897,7 +799,10 @@ function drawHorizontalMarker(plot, y, label, color = plot.col.muted) {
   ctx.lineTo(width - m.right, py);
   ctx.stroke();
   ctx.setLineDash([]);
-  drawGraphChip(plot, m.left + 10, py - 16, label, { align: "left", textColor: plot.col.text, stroke: color });
+  ctx.fillStyle = color;
+  ctx.font = `12px ${plot.col.mono}`;
+  ctx.textAlign = "left";
+  ctx.fillText(label, m.left + 8, py - 16);
   ctx.restore();
 }
 
@@ -922,39 +827,20 @@ function drawPointMarker(plot, x, y, label, color = plot.col.warn) {
   ctx.beginPath();
   ctx.arc(px, py, 4.8, 0, Math.PI * 2);
   ctx.fill();
-  ctx.strokeStyle = plot.col.bg;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.arc(px, py, 4.8, 0, Math.PI * 2);
-  ctx.stroke();
-  drawGraphChip(plot, px + 10, py - 10, label, { align: "left", textColor: plot.col.text, stroke: color });
+  ctx.font = `12px ${plot.col.mono}`;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(label, px + 8, py - 6);
   ctx.restore();
 }
 
 function drawLegend(plot, items) {
   const { ctx, width, m, col } = plot;
-  ctx.save();
-  ctx.font = `12px ${col.mono}`;
-  const swatchWidth = 20;
-  const gap = 10;
-  const lineHeight = 22;
-  const textWidths = items.map((item) => ctx.measureText(item.label).width);
-  const contentWidth = Math.max(...textWidths, 0);
-  const blockWidth = swatchWidth + gap + contentWidth + 18;
-  const blockHeight = Math.max(1, items.length) * lineHeight + 14;
-  let x = width - m.right - blockWidth - 10;
-  if (x < m.left + 12) x = m.left + 12;
+  let x = width - m.right - 176;
   const yStart = m.top + 14;
-  ctx.fillStyle = withAlpha(col.card, 0.92);
-  ctx.strokeStyle = withAlpha(col.border, 0.95);
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  if (ctx.roundRect) ctx.roundRect(x - 10, yStart - 12, blockWidth + 20, blockHeight, 14);
-  else ctx.rect(x - 10, yStart - 12, blockWidth + 20, blockHeight);
-  ctx.fill();
-  ctx.stroke();
   items.forEach((item, index) => {
-    const y = yStart + index * lineHeight;
+    const y = yStart + index * 18;
+    ctx.save();
     ctx.strokeStyle = item.color;
     ctx.fillStyle = item.color;
     ctx.lineWidth = 2.4;
@@ -969,42 +855,16 @@ function drawLegend(plot, items) {
       ctx.arc(x + 10, y, 3.6, 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.fillStyle = col.text;
+    ctx.fillStyle = col.muted;
     ctx.font = `12px ${col.mono}`;
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
-    ctx.fillText(item.label, x + 30, y);
+    ctx.fillText(item.label, x + 28, y);
+    ctx.restore();
   });
-  ctx.restore();
 }
 
-function drawGraphChip(plot, x, y, text, { align = "left", textColor = plot.col.text, stroke = plot.col.border } = {}) {
-  const { ctx, col } = plot;
-  ctx.save();
-  ctx.font = `12px ${col.mono}`;
-  ctx.textBaseline = "middle";
-  const metrics = ctx.measureText(text);
-  const width = metrics.width + 16;
-  const height = 22;
-  let left = x;
-  if (align === "center") left = x - width / 2;
-  if (align === "right") left = x - width;
-  const top = y - height / 2;
-  ctx.fillStyle = withAlpha(col.card, 0.92);
-  ctx.strokeStyle = withAlpha(stroke, 0.9);
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  if (ctx.roundRect) ctx.roundRect(left, top, width, height, 9);
-  else ctx.rect(left, top, width, height);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = textColor;
-  ctx.textAlign = align;
-  ctx.fillText(text, align === "center" ? x : align === "right" ? x : x + 8, y);
-  ctx.restore();
-}
-
-function drawFilledPolygon(plot, points, { fill = withAlpha(plot.col.accent, 0.18), stroke = null, lineWidth = 1.8 } = {}) {
+function drawFilledPolygon(plot, points, { fill = "rgba(124,58,237,0.18)", stroke = null, lineWidth = 1.8 } = {}) {
   const { ctx } = plot;
   if (!points?.length) return;
   ctx.save();
@@ -1114,13 +974,10 @@ function drawMathFunctions() {
 
   drawPolyline(plot, curve, { color: plot.col.accent, lineWidth: 2.8 });
   drawHorizontalMarker(plot, 0, "y = 0", plot.col.muted);
-  drawVerticalMarker(plot, 0, "x = 0", "rgba(255,255,255,0.28)");
   const y0 = fx(x0);
   drawPointMarker(plot, x0, y0, "P", plot.col.warn);
-  drawPointMarker(plot, 0, fx(0), "f(0)", plot.col.text);
 
   const disc = b * b - 4 * a * c;
-  const discAlmostZero = Math.abs(disc) < 1e-8;
   if (Math.abs(a) > 1e-8 && disc >= 0) {
     const root1 = (-b - Math.sqrt(disc)) / (2 * a);
     const root2 = (-b + Math.sqrt(disc)) / (2 * a);
@@ -1131,10 +988,7 @@ function drawMathFunctions() {
   if (Math.abs(a) > 1e-8) {
     const xVertex = -b / (2 * a);
     const yVertex = fx(xVertex);
-    if (xVertex >= -6 && xVertex <= 6) {
-      drawVerticalMarker(plot, xVertex, "xS", withAlpha(plot.col.accent2, 0.34));
-      drawPointMarker(plot, xVertex, yVertex, "S", plot.col.accent2);
-    }
+    if (xVertex >= -6 && xVertex <= 6) drawPointMarker(plot, xVertex, yVertex, "S", plot.col.accent2);
   }
 
   drawLegend(plot, [
@@ -1147,19 +1001,11 @@ function drawMathFunctions() {
     ? "Bei a = 0 wird aus der Parabel eine Gerade."
     : disc < 0
       ? "Die Diskriminante ist negativ; es gibt keine reellen Nullstellen."
-      : discAlmostZero
-        ? "Die Parabel berührt die x-Achse in genau einer doppelten Nullstelle."
+      : disc === 0
+        ? "Die Parabel beruehrt die x-Achse in genau einer doppelten Nullstelle."
         : "Die Parabel schneidet die x-Achse in zwei reellen Nullstellen.";
-  const opening = Math.abs(a) < 1e-8
-    ? "linear"
-    : a > 0
-      ? "nach oben geöffnet"
-      : "nach unten geöffnet";
-  const vertexText = Math.abs(a) < 1e-8
-    ? "Ein Scheitelpunkt existiert nur bei echten Parabeln."
-    : `Der Scheitel liegt bei <strong>S = (${formatGraphNumber(-b / (2 * a), 2)}, ${formatGraphNumber(fx(-b / (2 * a)), 2)})</strong>.`;
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Die Funktion <strong>f(x) = ${formatGraphNumber(a, 1)}x² ${formatSignedGraphTerm(b, 1)}x ${formatSignedGraphTerm(c, 1)}</strong> ist ${opening} und schneidet die y-Achse bei <strong>${formatGraphNumber(fx(0), 2)}</strong>. Der markierte Punkt <strong>P</strong> zeigt den Funktionswert <strong>f(${formatGraphNumber(x0, 1)}) = ${formatGraphNumber(y0, 2)}</strong>. ${vertexText} ${rootText} Genau diese vier Bausteine solltest du in Klausuren immer zusammenlesen: Definitionsbereich, markante Punkte, Öffnung und Achsenschnitte.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Die Funktion <strong>f(x) = ${a.toFixed(1)}x² ${b >= 0 ? "+" : "-"} ${Math.abs(b).toFixed(1)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c).toFixed(1)}</strong> liefert bei <strong>x0 = ${x0.toFixed(1)}</strong> den Wert <strong>${y0.toFixed(2)}</strong>. ${rootText}`);
 }
 
 function drawMathMatrix() {
@@ -1188,11 +1034,9 @@ function drawMathMatrix() {
   if (!plot) return;
 
   drawFilledPolygon(plot, unitSquare, { fill: "rgba(255,255,255,0.06)", stroke: plot.col.muted, lineWidth: 1.4 });
-  drawFilledPolygon(plot, imageSquare, { fill: withAlpha(plot.col.accent, 0.22), stroke: plot.col.accent, lineWidth: 2.2 });
+  drawFilledPolygon(plot, imageSquare, { fill: "rgba(124,58,237,0.22)", stroke: plot.col.accent, lineWidth: 2.2 });
   drawSegment(plot, 0, 0, 1, 0, plot.col.muted, 1.5);
   drawSegment(plot, 0, 0, 0, 1, plot.col.muted, 1.5);
-  drawPointMarker(plot, 1, 0, "e1", plot.col.muted);
-  drawPointMarker(plot, 0, 1, "e2", plot.col.muted);
   drawSegment(plot, 0, 0, e1.x, e1.y, plot.col.accent2, 2.4);
   drawSegment(plot, 0, 0, e2.x, e2.y, plot.col.warn, 2.4);
   drawPointMarker(plot, e1.x, e1.y, "Ae1", plot.col.accent2);
@@ -1204,8 +1048,7 @@ function drawMathMatrix() {
   ]);
 
   const invertible = Math.abs(det) > 1e-8;
-  const orientationText = det < 0 ? "Die Orientierung wird dabei gespiegelt." : "Die Orientierung bleibt erhalten.";
-  updateGraphInfo(`<strong>Interpretation:</strong> Die Matrix <strong>A = [[${formatGraphNumber(a11)}, ${formatGraphNumber(a12)}], [${formatGraphNumber(a21)}, ${formatGraphNumber(a22)}]]</strong> schickt das Einheitsquadrat auf das violette Parallelogramm. Die grauen Punkte <strong>e1</strong> und <strong>e2</strong> sind die Ausgangsbasis, <strong>Ae1</strong> und <strong>Ae2</strong> ihre Bilder. Die Determinante ist <strong>${formatGraphNumber(det, 3)}</strong>; damit ist A ${invertible ? "<strong>invertierbar</strong>" : "<strong>nicht invertierbar</strong>"} und skaliert orientierte Flaechen um den Faktor <strong>${formatGraphNumber(Math.abs(det), 3)}</strong>. ${orientationText} Genau daran liest du lineare Algebra geometrisch: Basisvektoren, Flaechenfaktor und Invertierbarkeit gehoeren zusammen.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Die Matrix <strong>A = [[${a11.toFixed(2)}, ${a12.toFixed(2)}], [${a21.toFixed(2)}, ${a22.toFixed(2)}]]</strong> bildet das Einheitsquadrat auf die violette Figur ab. Die Determinante ist <strong>${det.toFixed(3)}</strong>; damit ist A ${invertible ? "<strong>invertierbar</strong>" : "<strong>nicht invertierbar</strong>"} und skaliert orientierte Flaechen um den Faktor <strong>${Math.abs(det).toFixed(3)}</strong>.`);
 }
 
 function drawMathDerivative() {
@@ -1238,7 +1081,6 @@ function drawMathDerivative() {
 
   drawPolyline(plot, curve, { color: plot.col.accent, lineWidth: 2.8 });
   drawPolyline(plot, tangentLine, { color: plot.col.accent2, lineWidth: 2.2, dash: [7, 5] });
-  drawVerticalMarker(plot, x0, "x0", withAlpha(plot.col.accent2, 0.34));
   drawPointMarker(plot, x0, fx(x0), "P", plot.col.warn);
   drawLegend(plot, [
     { label: "Funktion", color: plot.col.accent },
@@ -1247,7 +1089,7 @@ function drawMathDerivative() {
   ]);
 
   const slope = dfx(x0);
-  updateGraphInfo(`<strong>Interpretation:</strong> Im Punkt <strong>x0 = ${formatGraphNumber(x0)}</strong> gilt <strong>f(x0) = ${formatGraphNumber(fx(x0), 2)}</strong> und <strong>f'(x0) = ${formatGraphNumber(slope, 2)}</strong>. Die gestrichelte Gerade ist die Tangente <strong>L(x) = f(x0) + f'(x0)(x - x0)</strong>; sie liefert also die lokale Linearisation der Funktion. Genau das ist der Ableitungsbegriff in Klausurform: Wert am Punkt, Steigung am Punkt, Tangente als beste lineare Naeherung in unmittelbarer Umgebung.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Im Punkt <strong>x0 = ${x0.toFixed(2)}</strong> hat die Funktion die Steigung <strong>f'(x0) = ${slope.toFixed(2)}</strong>. Die gestrichelte Tangente visualisiert genau diese lokale lineare Approximation.`);
 }
 
 function drawMathUnivarOpt() {
@@ -1275,25 +1117,19 @@ function drawMathUnivarOpt() {
   drawPolyline(plot, curve, { color: plot.col.accent, lineWidth: 2.8 });
   const roots = findZeroCrossings(dfx, -5, 5, 420);
   const labels = [];
-  let maxima = 0;
-  let minima = 0;
   roots.forEach((root, index) => {
     const second = ddfx(root);
     const kind = second < -0.05 ? "lokales Maximum" : second > 0.05 ? "lokales Minimum" : "stationaer";
     const y = fx(root);
-    drawVerticalMarker(plot, root, `x${index + 1}`, "rgba(255,255,255,0.2)");
     drawPointMarker(plot, root, y, `S${index + 1}`, second < 0 ? plot.col.warn : plot.col.accent2);
-    if (second < -0.05) maxima += 1;
-    if (second > 0.05) minima += 1;
     labels.push(`${kind} bei x ≈ ${root.toFixed(2)}`);
   });
   drawLegend(plot, [
     { label: "Zielfunktion", color: plot.col.accent },
-    { label: "lokales Maximum", color: plot.col.warn, point: true },
-    { label: "lokales Minimum", color: plot.col.accent2, point: true }
+    { label: "Maxima / Minima", color: plot.col.warn, point: true }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Stationäre Punkte entstehen dort, wo <strong>f'(x) = 0</strong>. Für die aktuelle Zielfunktion wurden ${roots.length ? labels.join("; ") : "keine stationären Punkte im dargestellten Bereich"} gefunden. Die zweite Ableitung klassifiziert diese Punkte lokal (${maxima} Maximum/Maxima, ${minima} Minimum/Minima); für ein <strong>globales</strong> Urteil brauchst du danach immer den Vergleich der Funktionswerte und gegebenenfalls der Randpunkte. Die Grafik trainiert also genau den Klausurablauf: Kandidaten über <strong>f'</strong>, Klassifikation über <strong>f''</strong>, Endentscheidung über Wertvergleich.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Stationaere Punkte entstehen dort, wo <strong>f'(x) = 0</strong>. Fuer die aktuelle Funktion wurden ${roots.length ? labels.join("; ") : "keine stationaeren Punkte im dargestellten Bereich"} gefunden. Genau danach folgt die Klassifikation ueber <strong>f''(x)</strong>.`);
 }
 
 function drawMathMultivar() {
@@ -1328,7 +1164,7 @@ function drawMathMultivar() {
       points.push({ x: r * cos, y: r * sin });
     }
     drawPolyline(plot, points, {
-      color: levelIndex === levels.length - 1 ? plot.col.accent : withAlpha(plot.col.accent, 0.55),
+      color: levelIndex === levels.length - 1 ? plot.col.accent : "rgba(124,58,237,0.55)",
       lineWidth: levelIndex === levels.length - 1 ? 2.4 : 1.6
     });
   });
@@ -1336,21 +1172,16 @@ function drawMathMultivar() {
   const gradX = 2 * x0 + c * y0;
   const gradY = 2 * k * y0 + c * x0;
   const scale = 0.45 / Math.max(0.6, Math.hypot(gradX, gradY));
-  const tangentLength = 0.72 / Math.max(0.6, Math.hypot(gradX, gradY));
-  const tangentDx = -gradY * tangentLength;
-  const tangentDy = gradX * tangentLength;
   drawPointMarker(plot, x0, y0, "P", plot.col.warn);
-  drawSegment(plot, x0 - tangentDx, y0 - tangentDy, x0 + tangentDx, y0 + tangentDy, "rgba(255,255,255,0.42)", 1.6);
   drawSegment(plot, x0, y0, x0 + gradX * scale, y0 + gradY * scale, plot.col.accent2, 2.5);
   drawPointMarker(plot, x0 + gradX * scale, y0 + gradY * scale, "∇f", plot.col.accent2);
   drawLegend(plot, [
     { label: "Levelkurven", color: plot.col.accent },
-    { label: "Tangente an die Levelkurve", color: "rgba(255,255,255,0.42)" },
     { label: "Gradient", color: plot.col.accent2, point: true },
     { label: "gewahlter Punkt", color: plot.col.warn, point: true }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Im Punkt <strong>P = (${formatGraphNumber(x0)}, ${formatGraphNumber(y0)})</strong> gilt <strong>f(P) = ${formatGraphNumber(q(x0, y0), 2)}</strong> und <strong>∇f(P) = (${formatGraphNumber(gradX, 2)}, ${formatGraphNumber(gradY, 2)})</strong>. Der helle Tangentenstrich liegt auf der lokalen Richtung der Levelkurve; der Gradient steht dazu senkrecht und zeigt den staerksten Anstieg. Genau diese Orthogonalitaet ist die Standardidee fuer partielle Ableitungen, Niveaukurven und spaetere Optimalitaetsbedingungen.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Im Punkt <strong>P = (${x0.toFixed(2)}, ${y0.toFixed(2)})</strong> gilt <strong>f(P) = ${q(x0, y0).toFixed(2)}</strong> und der Gradient ist <strong>∇f(P) = (${gradX.toFixed(2)}, ${gradY.toFixed(2)})</strong>. Der Gradient steht senkrecht auf der Levelkurve und zeigt die Richtung des staerksten Anstiegs.`);
 }
 
 function drawMathLagrange() {
@@ -1379,14 +1210,12 @@ function drawMathLagrange() {
       if (y >= 0 && y <= yMax) points.push({ x, y });
     }
     drawPolyline(plot, points, {
-      color: index === levels.length - 1 ? plot.col.accent : withAlpha(plot.col.accent, 0.42),
+      color: index === levels.length - 1 ? plot.col.accent : "rgba(124,58,237,0.42)",
       lineWidth: index === levels.length - 1 ? 2.5 : 1.4
     });
   });
 
   drawSegment(plot, 0, m / a, m, 0, plot.col.accent2, 2.4);
-  drawVerticalMarker(plot, optimum.x, "x*", "rgba(255,255,255,0.28)");
-  drawHorizontalMarker(plot, optimum.y, "y*", "rgba(255,255,255,0.28)");
   drawPointMarker(plot, optimum.x, optimum.y, "Optimum", plot.col.warn);
   drawLegend(plot, [
     { label: "Niveaukurven von x·y", color: plot.col.accent },
@@ -1395,7 +1224,7 @@ function drawMathLagrange() {
   ]);
 
   const lambda = optimum.y;
-  updateGraphInfo(`<strong>Interpretation:</strong> Unter der Nebenbedingung <strong>x + ${formatGraphNumber(a, 1)}y = ${formatGraphNumber(m, 1)}</strong> liegt das Tangentialoptimum bei <strong>x* = ${formatGraphNumber(optimum.x, 2)}</strong> und <strong>y* = ${formatGraphNumber(optimum.y, 2)}</strong>. Im Optimum berührt die höchste erreichbare Niveaukurve die Restriktionsgerade; deshalb stimmen dort die Steigungen überein: <strong>-y/x = -1/a</strong>. Der zugehörige Lagrange-Multiplikator ist <strong>λ = ${formatGraphNumber(lambda, 2)}</strong> und misst den marginalen Zielfunktionsgewinn einer kleinen Lockerung der Restriktion. Genau so liest du die Methode grafisch: Restriktion, Niveaukurvenfamilie und Tangentialbedingung.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Unter der Nebenbedingung <strong>x + ${a.toFixed(1)}y = ${m.toFixed(1)}</strong> liegt das Tangentialoptimum bei <strong>x* = ${optimum.x.toFixed(2)}</strong> und <strong>y* = ${optimum.y.toFixed(2)}</strong>. Der zugehoerige Lagrange-Multiplikator ist hier <strong>λ = ${lambda.toFixed(2)}</strong>.`);
 }
 
 function drawMathIntegral() {
@@ -1428,10 +1257,8 @@ function drawMathIntegral() {
     areaPoints.push({ x, y: fx(x) });
   }
   areaPoints.push({ x: b, y: 0 });
-  drawFilledPolygon(plot, areaPoints, { fill: withAlpha(plot.col.accent, 0.22), stroke: withAlpha(plot.col.accent, 0.55), lineWidth: 1.4 });
+  drawFilledPolygon(plot, areaPoints, { fill: "rgba(124,58,237,0.22)", stroke: "rgba(124,58,237,0.55)", lineWidth: 1.4 });
   drawPolyline(plot, curve, { color: plot.col.accent, lineWidth: 2.7 });
-  drawVerticalMarker(plot, a, "a", "rgba(255,255,255,0.3)");
-  drawVerticalMarker(plot, b, "b", "rgba(255,255,255,0.3)");
 
   const dx = (b - a) / n;
   let approx = 0;
@@ -1441,8 +1268,8 @@ function drawMathIntegral() {
     const height = fx(midpoint);
     approx += height * dx;
     plot.ctx.save();
-    plot.ctx.fillStyle = withAlpha(plot.col.accent2, 0.18);
-    plot.ctx.strokeStyle = withAlpha(plot.col.accent2, 0.55);
+    plot.ctx.fillStyle = "rgba(92,240,255,0.18)";
+    plot.ctx.strokeStyle = "rgba(92,240,255,0.55)";
     plot.ctx.lineWidth = 1;
     const leftPx = plot.px(xLeft);
     const rightPx = plot.px(xLeft + dx);
@@ -1454,14 +1281,13 @@ function drawMathIntegral() {
   }
 
   const exact = antiderivative(b) - antiderivative(a);
-  const error = approx - exact;
   drawLegend(plot, [
     { label: "Funktion", color: plot.col.accent },
     { label: "Integralfläche", color: plot.col.accent, point: false },
     { label: "Mittelpunkt-Rechtecke", color: plot.col.accent2 }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Das bestimmte Integral zwischen <strong>a = ${formatGraphNumber(a)}</strong> und <strong>b = ${formatGraphNumber(b)}</strong> betraegt hier exakt <strong>${formatGraphNumber(exact, 3)}</strong>. Die Mittelpunktnaeherung mit <strong>n = ${n}</strong> Rechtecken liefert <strong>${formatGraphNumber(approx, 3)}</strong>; der aktuelle Approximationsfehler liegt also bei <strong>${formatGraphNumber(error, 3)}</strong>. Die Grafik trainiert damit beide Klausurlesarten zugleich: Integral als orientierte Flaeche und Rechtecksumme als numerische Naeherung, deren Genauigkeit mit feinerer Zerlegung steigt.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Das bestimmte Integral zwischen <strong>a = ${a.toFixed(2)}</strong> und <strong>b = ${b.toFixed(2)}</strong> betraegt hier exakt <strong>${exact.toFixed(3)}</strong>. Die Mittelpunktnaeherung mit <strong>n = ${n}</strong> Rechtecken liefert <strong>${approx.toFixed(3)}</strong>.`);
 }
 
 function drawIwbRicardo() {
@@ -1655,7 +1481,7 @@ function drawIwbOvershooting() {
     { label: "Overshoot", color: plot.col.warn, point: true }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Der Kurs springt nach dem monetären Schock zunächst auf <strong>${eShort.toFixed(3)}</strong> und kehrt dann schrittweise zum langfristigen Niveau <strong>${eLong.toFixed(3)}</strong> zurück. Genau diese kurzfristige Überreaktion nennt der Kurs Overshooting.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Der Kurs springt nach dem monetaren Schock zunaechst auf <strong>${eShort.toFixed(3)}</strong> und kehrt dann schrittweise zum langfristigen Niveau <strong>${eLong.toFixed(3)}</strong> zurueck. Genau diese kurzfristige Ueberreaktion nennt der Kurs Overshooting.`);
 }
 
 function drawIwbTrilemma() {
@@ -1671,9 +1497,8 @@ function drawIwbTrilemma() {
   const canvas = document.getElementById("graph_canvas");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
-  const width = Math.max(560, Math.round(canvas.clientWidth || 800));
-  const inferredHeight = Math.round(width * 0.625);
-  const height = Math.max(360, Math.round(canvas.clientHeight || inferredHeight));
+  const width = Math.max(520, Math.round(canvas.clientWidth || 800));
+  const height = Math.max(340, Math.round(canvas.clientHeight || 430));
   const dpr = window.devicePixelRatio || 1;
   canvas.width = Math.round(width * dpr);
   canvas.height = Math.round(height * dpr);
@@ -1681,12 +1506,9 @@ function drawIwbTrilemma() {
   ctx.clearRect(0, 0, width, height);
 
   const col = graphPalette();
-  ctx.fillStyle = col.bg;
-  ctx.fillRect(0, 0, width, height);
-
-  const top = { x: width / 2, y: 78 };
-  const left = { x: 154, y: height - 94 };
-  const right = { x: width - 154, y: height - 94 };
+  const top = { x: width / 2, y: 64 };
+  const left = { x: 144, y: height - 92 };
+  const right = { x: width - 144, y: height - 92 };
   const activePairs = [
     [top, left],
     [top, right],
@@ -1718,21 +1540,10 @@ function drawIwbTrilemma() {
     ctx.beginPath();
     ctx.arc(point.x, point.y, 10, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = col.bg;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, 10, 0, Math.PI * 2);
-    ctx.stroke();
-    drawGraphChip(
-      { ctx, col },
-      point.x,
-      point === top ? point.y - 28 : point.y + 28,
-      label,
-      {
-        align: "center",
-        stroke: (activePairs[0] === point || activePairs[1] === point) ? col.accent : col.accent2
-      }
-    );
+    ctx.fillStyle = col.text;
+    ctx.font = `13px ${col.mono}`;
+    ctx.textAlign = "center";
+    ctx.fillText(label, point.x, point === top ? point.y - 18 : point.y + 28);
   });
 
   updateGraphInfo(`<strong>Interpretation:</strong> Gewaehlt ist <strong>${current.title}</strong>. Aufgegeben wird <strong>${current.sacrifice}</strong>. ${current.note}`);
@@ -1778,13 +1589,13 @@ function drawFinanceLiquidity() {
   drawHorizontalMarker(plot, 0, "Liquiditaetsgrenze", plot.col.muted);
   drawPointMarker(plot, balance[4].x, balance[4].y, "Saldo", plot.col.warn);
   drawLegend(plot, [
-    { label: "kumulierte verfügbare Mittel", color: plot.col.accent },
+    { label: "kumulierte verfuegbare Mittel", color: plot.col.accent },
     { label: "kumulierte Mittelbindung", color: plot.col.accent2, dash: [8, 5] },
-    { label: "Liquiditätssaldo", color: plot.col.warn }
+    { label: "Liquiditaetssaldo", color: plot.col.warn }
   ]);
 
   const deficit = Math.min(0, minBalance);
-  updateGraphInfo(`<strong>Interpretation:</strong> Bei Anfangsbestand <strong>${start.toFixed(0)}</strong>, operativen Einzahlungen von rund <strong>${ops.toFixed(0)}</strong> je Quartal und einer Investitionsspitze von <strong>${invest.toFixed(0)}</strong> in Q2 sinkt der schlechteste Liquiditätssaldo auf <strong>${minBalance.toFixed(1)}</strong>. ${deficit < 0 ? `Die Finanzierungslücke beträgt in der Spitze etwa <strong>${Math.abs(deficit).toFixed(1)}</strong>.` : "Die Planung bleibt in allen Quartalen liquide."}`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Bei Anfangsbestand <strong>${start.toFixed(0)}</strong>, operativen Einzahlungen von rund <strong>${ops.toFixed(0)}</strong> je Quartal und einer Investitionsspitze von <strong>${invest.toFixed(0)}</strong> in Q2 sinkt der schlechteste Liquiditaetssaldo auf <strong>${minBalance.toFixed(1)}</strong>. ${deficit < 0 ? `Die Finanzierungsluecke betraegt in der Spitze etwa <strong>${Math.abs(deficit).toFixed(1)}</strong>.` : "Die Planung bleibt in allen Quartalen liquide."}`);
 }
 
 function drawFinanceBudget() {
@@ -1922,7 +1733,7 @@ function drawFinanceUncertainty() {
     x: index + 1 - 0.14,
     y: value,
     width: 0.22,
-    color: withAlpha(plot.col.accent, 0.88)
+    color: "rgba(124,58,237,0.88)"
   }));
   const safeBars = safeTrack.map((value, index) => ({
     x: index + 1 + 0.14,
@@ -2317,7 +2128,7 @@ function drawStatsDistribution() {
     x,
     y: raw[index] / total,
     width: sigma * 0.4,
-    color: withAlpha(plot.col.accent, 0.72)
+    color: "rgba(124,58,237,0.72)"
   }));
   const yMax = Math.max(...bars.map((bar) => bar.y)) * 1.35;
   const mean = mu + 0.55 * skew * sigma;
@@ -2380,7 +2191,7 @@ function drawStatsBinomial() {
     x,
     y: binomialProbability(n, x, p),
     width: 0.72,
-    color: x === k ? plot.col.warn : withAlpha(plot.col.accent, 0.72)
+    color: x === k ? "#ff6b6b" : "rgba(124,58,237,0.72)"
   }));
   const plot = setupGraphCanvas("Erfolge k", "P(X = k)", {
     xMin: -0.5,
@@ -2454,7 +2265,7 @@ function drawStatsTest() {
     const x = xMin + (index * (xMax - xMin)) / 139;
     return { x, y: normalPdf(x, mu0, se) };
   });
-  const plot = setupGraphCanvas("Prüfwert", "Dichte unter H0", {
+  const plot = setupGraphCanvas("Pruefwert", "Dichte unter H0", {
     xMin,
     xMax,
     yMin: 0,
@@ -2631,7 +2442,7 @@ function drawEconTest() {
   drawVerticalMarker(plot, high, "CI oben", plot.col.muted);
 
   const significant = betaNull < low || betaNull > high;
-  updateGraphInfo(`<strong>Interpretation:</strong> Das ${conf}%-Intervall für den Koeffizienten lautet <strong>[${low.toFixed(2)}, ${high.toFixed(2)}]</strong>. Der Nullwert β₀ = ${betaNull.toFixed(2)} ist ${significant ? "<strong>nicht</strong>" : ""} im Intervall enthalten.`);
+  updateGraphInfo(`<strong>Interpretation:</strong> Das ${conf}%-Intervall fuer den Koeffizienten lautet <strong>[${low.toFixed(2)}, ${high.toFixed(2)}]</strong>. Der Nullwert β₀ = ${betaNull.toFixed(2)} ist ${significant ? "<strong>nicht</strong>" : ""} im Intervall enthalten.`);
 }
 
 function drawEconCollinearity() {
@@ -2833,7 +2644,7 @@ function drawGeneratedGraph(kind) {
 
 function createGraphs(graphPanelsById, graphConcepts, graphKindsById) {
   function renderGraphPanel(id) {
-    return graphPanelsById[id] || `<div class="panel active"><div class="section-block"><h3>Visualisierung</h3><p>Dieses Thema wird hier über Theorie, Aufgaben und Formeln gelernt. Eine zusätzliche Grafik ist für das Verständnis dieses Konzepts nicht nötig.</p></div></div>`;
+    return graphPanelsById[id] || `<div class="panel active"><div class="section-block"><h3>Visualisierung</h3><p>Dieses Thema wird hier ueber Theorie, Aufgaben und Formeln gelernt. Eine zusaetzliche Grafik ist fuer das Verstaendnis dieses Konzepts nicht noetig.</p></div></div>`;
   }
 
   function initGraph(id) {
@@ -2903,14 +2714,10 @@ function appendHomeSupplement(module, contentProfile) {
 function buildShell(module, chapterCount) {
   return `
 <div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-  <div class="consent-dialog">
-    <div class="consent-kicker">Lokaler Lernstand</div>
-    <h2 id="consentTitle">Fortschritt lokal speichern</h2>
-    <p>Damit Wiederholungen, geöffnete Kapitel und Lernstand erhalten bleiben, speichert das Portal diese Daten nur in deinem Browser. Es wird nichts übertragen.</p>
-    <div class="consent-actions">
-      <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ohne Speicherung fortfahren</button>
-      <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Lokalen Lernstand aktivieren</button>
-    </div>
+  <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
+  <div class="consent-actions">
+    <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
+    <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
   </div>
 </div>
 
@@ -2945,7 +2752,7 @@ function buildShell(module, chapterCount) {
     <div id="navList" role="list" aria-label="Konzepte"></div>
 
     <div class="sidebar-footer-btns">
-      <button class="sidebar-footer-btn" onclick="window.__showDashboard()" aria-label="Lernstand öffnen">Lernstand</button>
+      <button class="sidebar-footer-btn" onclick="window.__showDashboard()" aria-label="Dashboard öffnen">Dashboard</button>
       <button class="sidebar-footer-btn" onclick="window.__startExam()" aria-label="Schnelltest starten">Schnelltest</button>
       <button class="sidebar-footer-btn" onclick="window.__showSRSReview()" aria-label="Wiederholungsrunde starten">Wiederholen</button>
     </div>
@@ -2954,19 +2761,14 @@ function buildShell(module, chapterCount) {
   <div id="main">
     <div id="topbar">
       <div id="topbar-main">
-        <div id="topbar-left">
-          <button id="mobileMenuBtn" onclick="window.__toggleSidebar()" title="Navigation" aria-label="Navigation umschalten" aria-expanded="false" aria-controls="sidebar">
-            <span class="menu-btn-icon" aria-hidden="true">&#9776;</span>
-            <span class="menu-btn-label">Navigation</span>
-          </button>
-          <div class="breadcrumb" id="breadcrumb" aria-live="polite" role="navigation" aria-label="Breadcrumb">
+        <div class="breadcrumb" id="breadcrumb" aria-live="polite" role="navigation" aria-label="Breadcrumb">
           <button class="breadcrumb-link" onclick="window.__renderHome()">${escapeHtml(module.title)}</button> / Startseite
-          </div>
         </div>
         <div id="topbar-actions">
           <span id="streakBadge" class="streak-badge" style="display:none" aria-label="Lern-Streak"><span id="streakCount">0</span></span>
-          <button class="focus-btn" onclick="window.__toggleFocus()" title="Fokus-Modus (⇧F)" aria-label="Fokus-Modus umschalten">Fokus</button>
+          <button class="focus-btn" onclick="window.__toggleFocus()" title="Fokus-Modus (F)" aria-label="Fokus-Modus umschalten">Fokus</button>
           <button class="theme-btn" id="themeToggle" onclick="window.__toggleTheme()" title="Hell/Dunkel umschalten (T)" aria-label="Farbschema wechseln">Dunkel</button>
+          <button id="mobileMenuBtn" onclick="window.__toggleSidebar()" title="Navigation" aria-label="Seitenleiste öffnen" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
         </div>
       </div>
       <div class="tab-row" id="tabRow" role="tablist" aria-label="Inhalt">
@@ -2981,7 +2783,7 @@ function buildShell(module, chapterCount) {
     <div id="content" role="main" aria-live="polite" aria-label="Konzept-Inhalt" tabindex="-1"></div>
   </div>
 
-  <aside id="rightPanel" aria-label="Formeln, Verbindungen und Fehlerhinweise">
+  <aside id="rightPanel" aria-label="Formeln und Verbindungen">
     <div class="rp-section" id="rpFormulasSection">
       <h4>Formeln</h4>
       <div id="rpFormulas"><p style="font-size:12px;color:var(--muted)">Konzept auswählen…</p></div>
@@ -2999,8 +2801,7 @@ function buildShell(module, chapterCount) {
 
 <div id="shortcutHint" aria-hidden="true">
   <span class="sc-item"><kbd class="sc-key">&#8592;</kbd><kbd class="sc-key">&#8594;</kbd> Navigation</span>
-  <span class="sc-item"><kbd class="sc-key">F</kbd> Formeln</span>
-  <span class="sc-item"><kbd class="sc-key">⇧F</kbd> Fokus</span>
+  <span class="sc-item"><kbd class="sc-key">F</kbd> Fokus</span>
   <span class="sc-item"><kbd class="sc-key">Enter</kbd> Lösung</span>
 </div>
 <div id="toastContainer" aria-live="polite" aria-atomic="false"></div>
@@ -3018,23 +2819,17 @@ if (!module || !contentProfile) {
 const data = buildGeneratedPortalData(module, contentProfile);
 ensureMathJax();
 document.title = `${module.title} — Lernportal`;
-document.body.className = "generated-module";
+document.body.className = "";
 document.body.removeAttribute("data-page");
-document.body.dataset.moduleSlug = module.slug;
+document.body.style.setProperty("--accent", module.accent);
+document.body.style.setProperty("--accent2", "#5cf0ff");
+document.body.style.setProperty("--accent3", "#ff6b6b");
+document.body.style.setProperty("--accent-fg", accentForeground(module.accent));
 document.body.innerHTML = buildShell(module, data.chapters.length);
-if (module.slug === "mathematik") {
-  document.body.classList.add("mathematik-benchmark");
-}
-normalizeGermanCopy(document.body);
 
 const appState = createAppState();
 const storage = createStorageModule({ keys: data.keys });
-const navigation = createNavigation(
-  data.chapters,
-  storage.loadProgress,
-  storage.loadSRS,
-  module.slug === "mathematik" ? getMathematikSectionLabel : undefined
-);
+const navigation = createNavigation(data.chapters, storage.loadProgress, storage.loadSRS);
 const mastery = createMasteryModule(data.masteryById, storage.loadProgress, storage.saveMasteryChecks);
 const srs = createSrsModule(data.chapters, storage.loadSRS, storage.saveSRS);
 const dashboard = createDashboard(data.chapters, storage.loadProgress, storage.loadSRS, srs.getDueCards, srs.getPerformance);
@@ -3065,21 +2860,8 @@ const baseRenderer = createRenderer({
 const renderer = {
   ...baseRenderer,
   renderHome() {
-    if (module.slug === "mathematik") {
-      renderMathematikHome({
-        module,
-        chapters: data.chapters,
-        loadProgress: storage.loadProgress,
-        loadLastId: storage.loadLastId,
-        getDueCards: srs.getDueCards,
-        renderMath
-      });
-      return;
-    }
     baseRenderer.renderHome();
-    if (module.slug !== "mathematik") {
-      appendHomeSupplement(module, contentProfile);
-    }
+    appendHomeSupplement(module, contentProfile);
     renderMath(document.getElementById("content"));
   }
 };
@@ -3107,10 +2889,6 @@ createPortalApp({
   courseLabel: module.title,
   consentKey: `${module.slug}_consent_v1`,
   chapters: data.chapters,
-  collapseSidebarByDefault: true,
-  initialConceptId: module.slug === "mathematik"
-    ? data.chapters.find((chapter) => chapter.cat === "Theorie")?.id || data.chapters[0]?.id || null
-    : null,
   appState,
   storage,
   navigation,

@@ -40,7 +40,7 @@ function drawExamPlaceholder(canvasId, title) {
   ctx.fillStyle = cv("--muted", "#6f6783");
   ctx.font = `13px ${cv("--font-mono", "monospace")}`;
   ctx.fillText("Diese Aufgabe wird hier ohne Zusatzgrafik bearbeitet.", displayWidth / 2, displayHeight / 2 + 14);
-  ctx.fillText("Nutze Theorie, Formeln und Aufgabenpfad fuer die Loesung.", displayWidth / 2, displayHeight / 2 + 34);
+  ctx.fillText("Nutze Theorie, Formeln und Aufgabenpfad für die Lösung.", displayWidth / 2, displayHeight / 2 + 34);
 }
 
 function drawHicksGraph() {

@@ -132,8 +132,8 @@ export function createRenderer({
         `Arbeite "${formula.label}" bei "${chapter.title}" so auf, dass du die Beziehung in einer Klausur sicher einsetzen und deuten kannst.`,
         [
           { text: "Starte mit der zentralen Beziehung und halte die formale Struktur sauber fest.", eq: formula.eq },
-          { text: formula.desc || `Beschreibe, welche fachliche oder logische Beziehung diese Formel im Kapitel ${chapter.title} ausdrueckt.` },
-          { text: summarizeVariables(formula.variables) || "Ordne alle Variablen sauber zu und markiere, welche Groessen geaendert werden duerfen und welche als gegeben behandelt werden." },
+          { text: formula.desc || `Beschreibe, welche ökonomische oder logische Beziehung diese Formel im Kapitel ${chapter.title} ausdrückt.` },
+          { text: summarizeVariables(formula.variables) || "Ordne alle Variablen sauber zu und markiere, welche Größen geändert werden dürfen und welche als gegeben behandelt werden." },
           { text: warning ? `Fehlerkontrolle: ${warning.label}. ${warning.body}` : (normalizedIntuition?.bridge || `Leite aus der Beziehung eine typische Klausurfolge für ${chapter.title} ab.`) }
         ],
         `${formula.label}: Formel, Notation und Einsatzlogik sind für ${chapter.title} abrufbar.`
@@ -151,7 +151,7 @@ export function createRenderer({
           formula?.eq
             ? { text: "Verbinde die Theorie mit dem passenden formalen Anker.", eq: formula.eq }
             : { text: normalizedIntuition?.bridge || "Leite daraus die wichtigste Mechanik oder Richtungsaussage für die Klausur ab." },
-          { text: warning ? `Typischer Fehler: ${warning.label}. ${warning.body}` : "Schliesse mit einer Kontrollfrage ab: Welche Konsequenz folgt aus dem Theorieblock für Anwendung, Interpretation oder Vorzeichen?" }
+          { text: warning ? `Typischer Fehler: ${warning.label}. ${warning.body}` : "Schließe mit einer Kontrollfrage ab: Welche Konsequenz folgt aus dem Theorieblock für Anwendung, Interpretation oder Vorzeichen?" }
         ],
         `"${section.heading}" sitzt als Definition, Mechanismus und Konsequenz.`
       ));
@@ -161,7 +161,7 @@ export function createRenderer({
       const section = sections[index % Math.max(1, sections.length)];
       const formula = entry?.formeln?.[index % Math.max(1, entry?.formeln?.length || 1)];
       pushTask(createPracticeTask(
-        `Entschaerfe den typischen Fehler "${warning.label}" bei "${chapter.title}" anhand eines sauberen Gegenbeispiels.`,
+        `Entschärfe den typischen Fehler "${warning.label}" bei "${chapter.title}" anhand eines sauberen Gegenbeispiels.`,
         [
           { text: `Formuliere die Fehlvorstellung offen: ${warning.body}` },
           { text: section ? `Stelle die korrekte Kapitel-Logik daneben: ${section.paragraph}` : `Stelle die korrekte Kapitel-Logik daneben und benenne den richtigen Zugriff auf ${chapter.title}.` },
@@ -194,8 +194,8 @@ export function createRenderer({
         `Ordne "${chapter.title}" sauber in den Konzeptfluss des Portals ein.`,
         [
           { text: previousTitle ? `Benenne zuerst, was aus "${previousTitle}" für ${chapter.title} vorausgesetzt wird.` : `Benenne zuerst, welche Vorkenntnisse du für ${chapter.title} aktivierst.` },
-          { text: entry?.motivation || `${chapter.title} ist ein eigenstaendiger Baustein, muss aber in die Kurslogik einsortiert werden.` },
-          { text: nextTitle ? `Leite daraus ab, warum "${nextTitle}" auf diesem Kapitel aufbaut.` : "Leite daraus ab, welche Anschlussfrage im weiteren Stoff als naechstes folgt." },
+          { text: entry?.motivation || `${chapter.title} ist ein eigenständiger Baustein, der in die Kurslogik eingeordnet werden muss.` },
+          { text: nextTitle ? `Leite daraus ab, warum "${nextTitle}" auf diesem Kapitel aufbaut.` : "Leite daraus ab, welche Anschlussfrage im weiteren Stoff als nächstes folgt." },
           { text: "Schließe mit einer Kontrollformel, Leitdefinition oder Kernaussage ab, damit der Übergang im Klausurkopf verankert ist." }
         ],
         `${chapter.title} ist als Vorkenntnis-Folge-Logik im Stofffluss verankert.`
@@ -296,125 +296,66 @@ export function createRenderer({
   function buildExamDrills(chapter, entry, intuition) {
     const drills = [];
     const { sections, warnings } = extractTheorySignals(entry);
-    const normalizedIntuition = normalizeIntuitionData(intuition);
 
     drills.push({
       tag: "Kernidee",
       question: `Worum geht es beim Konzept "${chapter.title}" in einem klausurtauglichen Kernsatz?`,
-      answer: buildExamDrillAnswer({
-        approach: "Starte mit der Leitfrage des Konzepts und benenne direkt, welche mathematische Struktur oder Methode hier kontrolliert werden soll.",
-        steps: [
-          entry?.motivation || `${chapter.title} ist ein Grundbaustein aus ${chapter.cat}.`,
-          sections[0]?.paragraph || normalizedIntuition?.core || `Formuliere den Kern von ${chapter.title} so, dass Definition, Mechanik und Bearbeitungsziel in einem Zug sichtbar werden.`,
-          normalizedIntuition?.bridge || warnings[0]?.body || "Schliesse mit einem Satz ab, der zeigt, wie aus der Theorie ein klausurtauglicher Zugriff wird."
-        ],
-        check: warnings[0]?.body || `Kontrolliere zum Schluss, ob du bei "${chapter.title}" wirklich zuerst Struktur und erst danach Rechnung oder Symbolmanipulation eingesetzt hast.`
-      })
+      answer: entry?.motivation || `${chapter.title} ist ein Grundbaustein aus ${chapter.cat}.`
     });
 
-    (entry?.formeln || []).slice(0, 2).forEach((formula) => {
+    (entry?.formeln || []).forEach((formula) => {
       drills.push({
         tag: formula.label,
         question: `Welche Formel bzw. Beziehung musst du für "${formula.label}" bei "${chapter.title}" sicher beherrschen?`,
-        answer: buildExamDrillAnswer({
-          approach: `Schreibe "${formula.label}" zuerst sauber hin und entscheide erst danach, welche Groesse gegeben, gesucht oder zu deuten ist.`,
-          formula: formula.eq,
-          note: formula.desc || "",
-          steps: [
-            formula.desc || `Benenne, welche Rolle "${formula.label}" innerhalb von "${chapter.title}" spielt.`,
-            summarizeVariables(formula.variables) || "Ordne alle Variablen sauber zu und markiere, welche Richtungsaussagen oder Bedingungen spaeter geprueft werden muessen.",
-            warnings[0]?.body || normalizedIntuition?.bridge || "Halte zum Schluss fest, wie du die Beziehung in einer Klausur deuten und nicht nur hinschreiben wuerdest."
-          ],
-          check: `Kontrolliere bei "${formula.label}" immer Vorzeichen, Definitionsbereich und die fachliche Bedeutung jeder Variablen.`
-        })
+        answer: `${formula.eq}${formula.desc ? `<div class="exam-drill-note">${formula.desc}</div>` : ""}`
       });
 
       if (formula.variables && Object.keys(formula.variables).length) {
         drills.push({
           tag: "Notation",
           question: `Wie interpretierst du die Variablen in "${formula.label}"?`,
-          answer: buildExamDrillAnswer({
-            approach: "Lies die Notation nicht als Vokabelliste, sondern als Bearbeitungsanweisung: Welche Groesse bewegt sich, welche ist fix, und welche Bedeutung steckt dahinter?",
-            steps: Object.entries(formula.variables).map(([key, value]) => `$${key}$: ${value}`),
-            check: `Wenn du die Variablen von "${formula.label}" nicht in ganzen Saetzen erklaeren kannst, sitzt die Formel noch nicht klausursicher.`
-          })
+          answer: `<ul class="exam-drill-list">${Object.entries(formula.variables).map(([key, value]) => `<li><strong>$${key}$</strong>: ${value}</li>`).join("")}</ul>`
         });
       }
     });
 
-    (normalizedIntuition?.exam || []).slice(0, 2).forEach((pattern, index) => {
+    (intuition?.exam || []).forEach((pattern, index) => {
       drills.push({
         tag: `Klausurmuster ${index + 1}`,
         question: `Wenn in der Klausur ${pattern.if} auftaucht, woran musst du denken?`,
-        answer: buildExamDrillAnswer({
-          approach: "Ordne das Signalwort zuerst dem richtigen mathematischen Problemtyp zu, bevor du mit Rechnen oder Ableiten beginnst.",
-          steps: [
-            `Signal: ${pattern.if}`,
-            `Bearbeitung: ${pattern.then}`,
-            normalizedIntuition?.core || normalizedIntuition?.bridge || `Verknuepfe das Klausursignal direkt mit der Kernlogik von ${chapter.title}.`
-          ],
-          check: warnings[0]?.body || "Kontrolliere, ob deine erste Reaktion wirklich zur Aufgabenform passt und nicht nur zu einem vertrauten Schlagwort."
-        })
+        answer: pattern.then
       });
     });
 
-    (entry?.aufgaben || []).slice(0, 3).forEach((task, index) => {
+    (entry?.aufgaben || []).forEach((task, index) => {
       drills.push({
-        tag: `Prüfungstransfer ${index + 1}`,
+        tag: `Exam-Aufgabe ${index + 1}`,
         question: `Wie würdest du die folgende examensnahe Aufgabe zu "${chapter.title}" lösen? ${shortenText(task.text, 180)}`,
-        answer: buildExamDrillAnswer({
-          approach: `Ordne die Aufgabe zuerst "${chapter.title}" zu und halte fest, welche Definition, welcher Rechenweg oder welche Methode den Start bestimmt.`,
-          steps: (task.steps || []).slice(0, 4).map((step) => step.eq ? `${step.text}<div class="math-block">${step.eq}</div>` : step.text),
-          check: task.result || "Arbeite mit den im Portal gezeigten Rechenschritten und pruefe das Ergebnis formal."
-        })
+        answer: task.result || "Arbeite mit den im Portal gezeigten Rechenschritten und prüfe das Ergebnis formal."
       });
     });
 
-    sections.slice(0, 2).forEach((section, index) => {
+    sections.slice(0, 4).forEach((section, index) => {
       drills.push({
         tag: `Theorie ${index + 1}`,
         question: `Erkläre den Theorieblock "${section.heading}" in klausurgeeigneter Kurzform.`,
-        answer: buildExamDrillAnswer({
-          approach: `Formuliere "${section.heading}" erst als saubere Definition oder Mechanik und leite dann die unmittelbare Klausurfolge daraus ab.`,
-          steps: [
-            section.paragraph,
-            entry?.formeln?.[index]?.desc || normalizedIntuition?.bridge || "Verbinde den Theorieblock mit dem formalen Zugriff oder der typischen Bearbeitungsreihenfolge.",
-            warnings[index]?.body || "Lege zum Schluss fest, woran du in einer Aufgabe erkennst, dass genau dieser Theorieblock gebraucht wird."
-          ],
-          check: `Deine Kurzantwort zu "${section.heading}" ist erst dann prüfungsreif, wenn sie Definition, Konsequenz und Kontrollsatz zugleich enthält.`
-        })
+        answer: section.paragraph
       });
     });
 
-    warnings.slice(0, 2).forEach((warning, index) => {
+    warnings.slice(0, 4).forEach((warning, index) => {
       drills.push({
         tag: `Fehler ${index + 1}`,
         question: `Welcher typische Fehler lauert bei "${chapter.title}" unter dem Stichwort "${warning.label}"?`,
-        answer: buildExamDrillAnswer({
-          approach: "Benenne zuerst die falsche Abkuerzung oder Denkfalle und setze ihr dann den korrekten mathematischen Zugriff entgegen.",
-          steps: [
-            warning.body,
-            sections[index]?.paragraph || normalizedIntuition?.bridge || `Halte fest, welche saubere Logik stattdessen für ${chapter.title} gilt.`,
-            entry?.formeln?.[0]?.eq ? `Nutze die formale Beziehung ${entry.formeln[0].eq} nur dann, wenn ihre Voraussetzungen wirklich erfuellt sind.` : "Formuliere eine kurze Selbstkontrolle, die dich in der Klausur vor genau diesem Fehler schuetzt."
-          ],
-          check: `Wenn du "${warning.label}" in einem Satz aktiv widerlegen kannst, ist die Fehlerquelle für ${chapter.title} wirklich entschärft.`
-        })
+        answer: warning.body
       });
     });
 
-    if (normalizedIntuition?.bridge) {
+    if (intuition?.bridge) {
       drills.push({
         tag: "Verständnis",
-        question: `Wie verknüpfst du die formale Seite von "${chapter.title}" mit ihrer fachlichen Intuition?`,
-        answer: buildExamDrillAnswer({
-          approach: "Verbinde die formale Bearbeitung immer mit einem Bild, einer Bewegungsrichtung oder einer Kontrollidee, damit die Aufgabe unter Zeitdruck wiedererkennbar bleibt.",
-          steps: [
-            normalizedIntuition.bridge,
-            normalizedIntuition.core || normalizedIntuition.analogy || `Nutze für ${chapter.title} ein kurzes Denkmuster statt einer blossen Formelwiederholung.`,
-            normalizedIntuition.exam?.[0] ? `Klausursignal: Wenn ${normalizedIntuition.exam[0].if}, dann ${normalizedIntuition.exam[0].then}.` : "Leite zum Schluss einen klaren Prüfungsauslöser aus dem Verständnis ab."
-          ],
-          check: "Wenn Intuition und Methode denselben Schritt empfehlen, ist der Zugriff stabil genug für eine Prüfungssituation."
-        })
+        question: `Wie verknüpfst du die formale Seite von "${chapter.title}" mit ihrer ökonomischen Intuition?`,
+        answer: intuition.bridge
       });
     }
 
@@ -430,82 +371,36 @@ export function createRenderer({
       uniqueDrills.push({
         tag: "Prüfungsanker",
         question: `Welchen ersten formalen oder argumentativen Zugriff solltest du bei einer Prüfungsfrage zu "${chapter.title}" wählen?`,
-        answer: buildExamDrillAnswer({
-          approach: entry?.motivation || `${chapter.title} gehoert zu ${chapter.cat}. Starte mit der zentralen Definition und der Kernmechanik.`,
-          formula: entry?.formeln?.[0]?.eq || "",
-          note: entry?.formeln?.[0]?.desc || "",
-          steps: [
-            sections[0]?.paragraph || normalizedIntuition?.core || `Formuliere den ersten sauberen Zugriff auf ${chapter.title}.`,
-            normalizedIntuition?.bridge || warnings[0]?.body || "Leite daraus den naechsten Klausurschritt ab."
-          ],
-          check: `Beginne bei "${chapter.title}" nie mit Einzelrechnungen, wenn Definition, Struktur oder Bedingung noch nicht feststehen.`
-        })
+        answer: entry?.formeln?.[0]?.eq
+          ? `${entry.formeln[0].eq}${entry.formeln[0].desc ? `<div class="exam-drill-note">${entry.formeln[0].desc}</div>` : ""}`
+          : (entry?.motivation || `${chapter.title} gehört zu ${chapter.cat}. Starte mit der zentralen Definition und der ökonomischen Intuition.`)
       });
     }
 
     return uniqueDrills.slice(0, 10);
   }
 
-  function buildExamDrillAnswer({
-    approach = "",
-    formula = "",
-    note = "",
-    steps = [],
-    check = ""
-  }) {
-    const stepItems = steps.filter(hasMeaningfulText);
-    const hasFormula = hasMeaningfulText(formula);
-    const hasNote = hasMeaningfulText(note);
-
-    return `<div class="exam-drill-structure">
-${hasMeaningfulText(approach) ? `<div class="exam-drill-part">
-<div class="exam-drill-part-label">Zugriff</div>
-<p>${approach}</p>
-</div>` : ""}
-${hasFormula || hasNote ? `<div class="exam-drill-part">
-<div class="exam-drill-part-label">Formaler Anker</div>
-${hasFormula ? `<div class="math-block">${formula}</div>` : ""}
-${hasNote ? `<div class="exam-drill-note">${note}</div>` : ""}
-</div>` : ""}
-${stepItems.length ? `<div class="exam-drill-part">
-<div class="exam-drill-part-label">Bearbeitung</div>
-<div class="exam-drill-step-list">
-${stepItems.map((step, index) => `<div class="step">
-<div class="step-num" aria-hidden="true">${index + 1}</div>
-<div class="step-body"><div class="step-text">${step}</div></div>
-</div>`).join("")}
-</div>
-</div>` : ""}
-${hasMeaningfulText(check) ? `<div class="exam-drill-part exam-drill-check">
-<div class="exam-drill-part-label">Kontrolle</div>
-<p>${check}</p>
-</div>` : ""}
-</div>`;
-  }
-
   function renderExamDrillDeck(chapter, entry, intuition) {
     const drills = buildExamDrills(chapter, entry, intuition);
     return `<div class="exam-drill-panel">
-<div class="practice-intro">
-<div>
-<strong>Prüfungstransfer</strong>
-<p>Hier verdichtest du denselben Stoff auf klausurnahe Zugriffskarten. Jede Karte trainiert Ansatz, formalen Anker, Bearbeitungsreihenfolge und die kurze Selbstkontrolle unter Prüfungsbedingungen.</p>
-</div>
+<div class="section-block">
+<h3>Prüfungsfragen</h3>
+<p>Diese Kurzfragen verdichten Theorie, Formeln, typische Fehler und vorhandene Aufgaben zu einer kompakten klausurnahen Wiederholung.</p>
 </div>
 <div class="exam-drill-grid">
 ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, "_")}_${index}`;
   return renderQuestionCard({
-        label: `Transferfrage ${index + 1}`,
-        question: drill.question,
-        buttonId: `examDrillBtn_${drillId}`,
-        buttonText: "Transferlösung anzeigen",
-        openButtonText: "Transferlösung verbergen",
-        toggleCall: `window.__toggleExamDrill('${drillId}')`,
-        answerId: `examDrill_${drillId}`,
-        cardClass: "exam-drill-card",
+    label: `Prüfungsfrage ${index + 1}`,
+    question: drill.question,
+    buttonId: `examDrillBtn_${drillId}`,
+    buttonText: "Lösung anzeigen",
+    openButtonText: "Lösung verbergen",
+    toggleCall: `window.__toggleExamDrill('${drillId}')`,
+    answerId: `examDrill_${drillId}`,
+    cardClass: "exam-drill-card",
     answerClass: "exam-drill-answer",
-    answerMarkup: `<h4>Lösungsweg</h4>
+    answerMarkup: `<h4>Musterlösung</h4>
 ${drill.tag ? `<div class="exam-drill-meta">${drill.tag}</div>` : ""}
 <div class="exam-drill-solution">${drill.answer}</div>`
   });
@@ -576,16 +471,11 @@ ${answerMarkup}
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active"><div class="practice-intro"><div><strong>Aufgaben</strong><p>Für dieses Konzept liegt der Schwerpunkt direkt auf prüfungsnahen Zugriffskarten. Nutze sie nicht als Stichwortliste, sondern als kompakten Bearbeitungsgang mit Ansatz, Kernschritten und Kontrolle.</p></div></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active"><div class="section-block"><h3>Aufgaben</h3><p>Für dieses Konzept stehen Prüfungsfragen bereit. Sie verdichten Definition, Rechenweg, typische Fehler und Transferfragen in einer kompakten Übungsform.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
       return '<div class="panel active"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
-    let html = `<div class="panel active"><div class="practice-intro">
-<div>
-<strong>Geführte Aufgaben</strong>
-<p>Starte mit dem vollständigen Lösungsweg. Arbeite Definition, Rechenschritt und Plausibilitätskontrolle bewusst aus, bevor du in den verdichteten Prüfungstransfer wechselst.</p>
-</div>
-</div>`;
+    let html = '<div class="panel active">';
     tasks.forEach((task, taskIndex) => {
       html += renderQuestionCard({
         label: `Aufgabe ${taskIndex + 1}`,
@@ -595,7 +485,7 @@ ${answerMarkup}
         openButtonText: "Lösung verbergen",
         toggleCall: `window.__toggleSolution(${taskIndex})`,
         answerId: `sol_${taskIndex}`,
-        answerMarkup: `<h4>Lösungsweg</h4>
+        answerMarkup: `<h4>Musterlösung</h4>
 ${task.steps.map((step, stepIndex) => `
 <div class="step">
 <div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
@@ -604,7 +494,7 @@ ${task.steps.map((step, stepIndex) => `
 ${step.eq ? `<div class="math-block">${step.eq}</div>` : ""}
 </div>
 </div>`).join("")}
-<div class="result-badge">Ergebnis und Merksatz: ${task.result}</div>`
+<div class="result-badge">Ergebnis: ${task.result}</div>`
       });
     });
     if (chapter) {
@@ -707,7 +597,7 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
     }
     if (hasMeaningfulText(data.bridge)) {
       html += `<div class="section-block intuition-bridge">
-<h3 class="intuition-bridge-title">Verständnis</h3>
+<h3 class="intuition-bridge-title">Verstaendnis</h3>
 <p>${data.bridge}</p>
 </div>`;
     }
@@ -835,7 +725,7 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
 
     html += `<div class="home-action-row">
 <div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showDashboard()">
-<div class="hac-title">Lernstand</div>
+<div class="hac-title">Lern-Dashboard</div>
 <div class="hac-desc">Fortschritt, schwache Bereiche, Wiederholungen</div>
 </div>
 <div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startExam()">
@@ -899,7 +789,7 @@ ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigat
     const breadcrumb = document.getElementById("breadcrumb");
     if (!content) return;
     if (tabRow) tabRow.classList.remove("visible");
-    if (breadcrumb) breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / Lernstand`;
+    if (breadcrumb) breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / Dashboard`;
     content.innerHTML = renderDashboard();
     renderMath(content);
   }

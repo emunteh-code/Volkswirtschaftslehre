@@ -16657,7 +16657,7 @@ function buildWorkflowPanel(module, chapter, allItems, index) {
 
   if (isCodeWorkflow) {
     title = "Analyse-Workflow";
-    intro = `Lies "${chapter.title}" als Daten- und Analyseworkflow: Frage klar machen, Modell oder Test waehlen, Output lesen und fachlich interpretieren.`;
+    intro = `Lies "${chapter.title}" als Daten- und Analyseworkflow: Frage klar machen, Modell oder Test waehlen, Output lesen, oekonomisch interpretieren.`;
     caption = "Erst die fachliche Frage, dann der Code- oder Modellschritt, danach die Deutung des Outputs.";
     nodes = [
       { x: 110, y: 96, label: "Frage" },
@@ -16668,7 +16668,7 @@ function buildWorkflowPanel(module, chapter, allItems, index) {
     ];
   } else if (module.type === "quantitative") {
     title = "Mechanismusgrafik";
-    intro = `Diese Grafik zeigt "${chapter.title}" als Mechanismus: Ausgangspunkt, zentrale Beziehung, Wirkungsrichtung und fachliche Schlussfolgerung.`;
+    intro = `Diese Grafik zeigt "${chapter.title}" als Mechanismus: Ausgangspunkt, zentrale Beziehung, Wirkungsrichtung und oekonomische Schlussfolgerung.`;
     caption = `Merke dir bei "${chapter.title}" besonders Ursache, Richtung und Interpretation.`;
     nodes = [
       { x: 110, y: 96, label: previous?.title || "Ausgangspunkt" },
@@ -16807,7 +16807,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_functions: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Parabel lesen: Nullstellen, Scheitelpunkt und Funktionswert</h3>
+    <h3 class="graph-panel-title">Quadratische Funktion, Nullstellen und Funktionswert</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_a">a</label><input type="range" id="g_math_a" min="-2" max="2" step="0.1" value="1.0" oninput="${redraw}"><div class="val" id="v_math_a" aria-live="polite">1.0</div></div>
       <div class="ctrl-group"><label for="g_math_b">b</label><input type="range" id="g_math_b" min="-4" max="4" step="0.5" value="-1.0" oninput="${redraw}"><div class="val" id="v_math_b" aria-live="polite">-1.0</div></div>
@@ -16822,7 +16822,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_matrix: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Lineare Abbildung: Basisvektoren, Bildfigur und Determinante</h3>
+    <h3 class="graph-panel-title">2x2-Matrix als lineare Transformation</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_m11">a11</label><input type="range" id="g_math_m11" min="-2" max="2" step="0.25" value="1.5" oninput="${redraw}"><div class="val" id="v_math_m11" aria-live="polite">1.50</div></div>
       <div class="ctrl-group"><label for="g_math_m12">a12</label><input type="range" id="g_math_m12" min="-2" max="2" step="0.25" value="0.5" oninput="${redraw}"><div class="val" id="v_math_m12" aria-live="polite">0.50</div></div>
@@ -16837,7 +16837,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_derivative: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Tangente als lokale Linearisation</h3>
+    <h3 class="graph-panel-title">Tangente und Ableitungswert</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_der_a">Kubik-Term a</label><input type="range" id="g_math_der_a" min="0.0" max="0.4" step="0.02" value="0.12" oninput="${redraw}"><div class="val" id="v_math_der_a" aria-live="polite">0.12</div></div>
       <div class="ctrl-group"><label for="g_math_der_b">Linear-Term b</label><input type="range" id="g_math_der_b" min="-2" max="2" step="0.25" value="0.5" oninput="${redraw}"><div class="val" id="v_math_der_b" aria-live="polite">0.50</div></div>
@@ -16851,7 +16851,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_univar_opt: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Stationaere Punkte, Klassifikation und Wertvergleich</h3>
+    <h3 class="graph-panel-title">Univariate Optimierung mit stationaeren Punkten</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_opt_a">Kruemmung a</label><input type="range" id="g_math_opt_a" min="0.8" max="3.0" step="0.1" value="1.8" oninput="${redraw}"><div class="val" id="v_math_opt_a" aria-live="polite">1.8</div></div>
       <div class="ctrl-group"><label for="g_math_opt_b">Linear-Term b</label><input type="range" id="g_math_opt_b" min="-3" max="3" step="0.25" value="0.5" oninput="${redraw}"><div class="val" id="v_math_opt_b" aria-live="polite">0.5</div></div>
@@ -16864,7 +16864,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_multivar: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Levelkurven, Tangente und Gradient</h3>
+    <h3 class="graph-panel-title">Levelkurven und Gradient</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_multi_k">Gewicht y²</label><input type="range" id="g_math_multi_k" min="0.6" max="1.8" step="0.1" value="1.2" oninput="${redraw}"><div class="val" id="v_math_multi_k" aria-live="polite">1.2</div></div>
       <div class="ctrl-group"><label for="g_math_multi_c">Kreuzterm c</label><input type="range" id="g_math_multi_c" min="-0.7" max="0.7" step="0.05" value="0.2" oninput="${redraw}"><div class="val" id="v_math_multi_c" aria-live="polite">0.20</div></div>
@@ -16879,7 +16879,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_lagrange: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Lagrange grafisch: Restriktion, Niveaukurven und Tangentialoptimum</h3>
+    <h3 class="graph-panel-title">Lagrange: Zielfunktion und lineare Nebenbedingung</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_lag_m">Budget/Restriktion m</label><input type="range" id="g_math_lag_m" min="4" max="14" step="0.5" value="8" oninput="${redraw}"><div class="val" id="v_math_lag_m" aria-live="polite">8.0</div></div>
       <div class="ctrl-group"><label for="g_math_lag_a">Gewicht a</label><input type="range" id="g_math_lag_a" min="0.5" max="2.0" step="0.1" value="1.0" oninput="${redraw}"><div class="val" id="v_math_lag_a" aria-live="polite">1.0</div></div>
@@ -16892,7 +16892,7 @@ function buildInteractiveGraphPanel(kind, chapter) {
     math_integral: `
 <div class="panel active generated-graph-panel">
   <div class="graph-container">
-    <h3 class="graph-panel-title">Bestimmtes Integral: Flaeche und Mittelpunktregel</h3>
+    <h3 class="graph-panel-title">Integral als Flaeche und Rechtecknaeherung</h3>
     <div class="graph-controls">
       <div class="ctrl-group"><label for="g_math_int_a">untere Grenze a</label><input type="range" id="g_math_int_a" min="0" max="4" step="0.25" value="0.5" oninput="${redraw}"><div class="val" id="v_math_int_a" aria-live="polite">0.50</div></div>
       <div class="ctrl-group"><label for="g_math_int_b">obere Grenze b</label><input type="range" id="g_math_int_b" min="1" max="6" step="0.25" value="4.0" oninput="${redraw}"><div class="val" id="v_math_int_b" aria-live="polite">4.00</div></div>

@@ -7,9 +7,13 @@
     name="description"
     content="VWL Lernportal: Die reasoning-getriebene Lernplattform für B.Sc. Volkswirtschaftslehre an der Universität Göttingen."
   >
-  <meta name="theme-color" content="#111317">
+  <meta name="theme-color" content="#000000">
   <title>VWL Lernportal | Universität Göttingen</title>
-  <link rel="stylesheet" href="./assets/css/common.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./assets/css/portal.css">
 </head>
 <body data-page="landing">
@@ -22,6 +26,9 @@
           <small>Uni Göttingen</small>
         </span>
       </a>
+      <nav class="header-actions">
+        <button id="themeToggle" class="theme-btn">Dunkel</button>
+      </nav>
     </div>
   </header>
 
@@ -29,11 +36,10 @@
     <section class="hero-section container">
       <div class="hero-content">
         <h1>VWL Lernportal</h1>
-        <p class="hero-subtitle">Die reasoning-getriebene Lernplattform für das B.Sc. Volkswirtschaftslehre Studium.</p>
-        <p class="trust-signal">Simuliert reale Klausurbedingungen mit strenger Logikbewertung</p>
+        <p class="hero-subtitle">Klausurvorbereitung durch strukturiertes Reasoning — nicht durch Auswendiglernen.</p>
+        <p class="trust-signal">Reale Klausurbedingungen · Strenge Logikbewertung · Uni Göttingen</p>
         <div class="hero-actions">
-          <a href="#modules" class="primary-btn">Start Learning</a>
-          <a href="#how-it-works" class="secondary-btn">How it works</a>
+          <a href="#modules" class="primary-btn">Module erkunden</a>
         </div>
       </div>
     </section>
@@ -41,7 +47,7 @@
     <section id="continue" class="continue-section container" hidden>
       <div class="section-card">
         <div class="continue-info">
-          <p class="section-kicker">Weitermachen</p>
+          <p class="section-kicker">Weiterlernen</p>
           <h2 id="continueTitle">Modulname</h2>
           <p id="continueProgress">0% abgeschlossen</p>
         </div>
@@ -55,37 +61,36 @@
         <p class="section-note" id="moduleCountLabel">10 Module verfügbar</p>
       </div>
       <div class="module-grid" id="moduleGrid">
-        <!-- Dynamic Module Cards -->
       </div>
     </section>
 
     <section id="how-it-works" class="how-it-works-section container">
-      <h2>How it works</h2>
+      <h2>So funktioniert es</h2>
       <div class="steps-grid">
         <div class="step-card">
           <span class="step-num">1</span>
-          <h3>Problem</h3>
-          <p>Kontext & Datenaufnahme</p>
+          <h3>Aufgabe</h3>
+          <p>Kontext und Daten erfassen</p>
         </div>
         <div class="step-card">
           <span class="step-num">2</span>
-          <h3>Extraction</h3>
-          <p>Relevante Info filtern</p>
+          <h3>Extraktion</h3>
+          <p>Relevante Informationen filtern</p>
         </div>
         <div class="step-card">
           <span class="step-num">3</span>
-          <h3>Model</h3>
-          <p>Theoretische Wahl</p>
+          <h3>Modell</h3>
+          <p>Theoretischen Rahmen wählen</p>
         </div>
         <div class="step-card">
           <span class="step-num">4</span>
-          <h3>Calculation</h3>
-          <p>Präzise Ausführung</p>
+          <h3>Berechnung</h3>
+          <p>Präzise Herleitung und Lösung</p>
         </div>
         <div class="step-card">
           <span class="step-num">5</span>
-          <h3>Validation</h3>
-          <p>Plausibilitäts-Check</p>
+          <h3>Prüfung</h3>
+          <p>Plausibilität und Konsistenz</p>
         </div>
       </div>
     </section>
@@ -93,10 +98,9 @@
 
   <footer class="landing-footer container">
     <div class="footer-inner">
-      <p>&copy; <span id="footerYear"></span> VWL Lernportal. Georg-August-Universität Göttingen.</p>
+      <p>&copy; <span id="footerYear"></span> VWL Lernportal · Georg-August-Universität Göttingen</p>
       <nav class="footer-nav">
-        <a href="#" id="showInstructions">Anleitung zeigen</a>
-        <a href="#" id="themeToggle">Thema wechseln</a>
+        <a href="#" id="showInstructions">Anleitung</a>
       </nav>
     </div>
   </footer>

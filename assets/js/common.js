@@ -29,7 +29,7 @@ function setTheme(theme) {
   document.body.classList.add(theme === "dark" ? "theme-dark" : "theme-light");
   localStorage.setItem(THEME_KEY, theme);
   const button = document.getElementById("themeToggle");
-  if (button) button.textContent = theme === "dark" ? "Hell" : "Dunkel";
+  if (button) button.textContent = theme === "dark" ? "☀ Hell" : "☾ Dunkel";
 }
 
 function initTheme() {
@@ -163,7 +163,7 @@ function renderLandingPage() {
     if (snapshot.started) {
       continueSection.hidden = false;
       continueTitle.textContent = lastModule.title;
-      continueProgress.textContent = `${snapshot.percent}% abgeschlossen · ${snapshot.due} Wiederholungen ausstehend`;
+      continueProgress.textContent = `${snapshot.percent}% abgeschlossen — ${snapshot.due} Wiederholungen fällig`;
       continueLink.href = lastModule.href;
     } else {
       continueSection.hidden = true;
@@ -176,7 +176,7 @@ function renderLandingPage() {
   } else {
     gridNode.innerHTML = PUBLIC_MODULES.map((module) => {
       const snapshot = getModuleSnapshot(module);
-      const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Start";
+      const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
       
       return `
         <a href="${module.href}" class="module-tile">
@@ -184,12 +184,12 @@ function renderLandingPage() {
             <span class="difficulty-badge ${module.difficulty.toLowerCase()}">${module.difficulty}</span>
             <span class="time-badge">Dauer: ${module.time}</span>
           </div>
-          <h3>${module.shortTitle}</h3>
+          <h3>${module.title}</h3>
           <p class="summary">${module.summary}</p>
           <div class="prereq">Voraussetzung: ${module.prereq}</div>
           <div class="meta">
             <span class="status-badge">${statusLabel}</span>
-            <span class="action-hint">Lernen →</span>
+            <span class="action-hint">Modul öffnen →</span>
           </div>
         </a>
       `;

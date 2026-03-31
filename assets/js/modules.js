@@ -81,7 +81,13 @@ export const MODULES = [
       "Zusammenfassungen zu VL1 bis VL8 fuer die saubere Stofflinie",
       "Tutorien und Uebungsblaetter fuer Kurzfragen, Rechenwege und Diagrammtraining"
     ],
-    sourcePath: `${sourceRoot}/Makroökonomik I`
+    sourcePath: `${sourceRoot}/Makroökonomik I`,
+    portalState: {
+      progressKey: "makro1_progress_v1",
+      srsKey: "makro1_srs_v1",
+      lastKey: "makro1_last_v1",
+      chapterCount: 8
+    }
   },
   {
     slug: "statistik",

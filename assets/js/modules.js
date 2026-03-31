@@ -510,6 +510,28 @@ export const MODULES = [
     }
   },
   {
+    slug: "jahresabschluss",
+    title: "Jahresabschluss",
+    shortTitle: "Jahresabschluss",
+    summary: "Rechnungslegung, Bewertung und Bilanzierung nach HGB mit echten Buchungssaetzen und Abschlusslogik.",
+    accent: "#37474f",
+    type: "mixed",
+    status: "live",
+    href: "./jahresabschluss/index.html",
+    materials: [
+      "Bilanzierung nach HGB und IFRS im Vergleich",
+      "Bewertung von Anlage- und Umlaufvermoegen",
+      "Gewinn- und Verlustrechnung (GuV) und Anhang"
+    ],
+    sourcePath: `${sourceRoot}/Jahresabschluss`,
+    portalState: {
+      progressKey: "jahresabschluss_progress_v1",
+      srsKey: "jahresabschluss_srs_v1",
+      lastKey: "jahresabschluss_last_v1",
+      chapterCount: 7
+    }
+  },
+  {
     slug: "mathematik",
     title: "Mathematik",
     shortTitle: "Mathematik",

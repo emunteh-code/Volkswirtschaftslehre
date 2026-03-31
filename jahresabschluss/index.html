@@ -3,59 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jahresabschluss im VWL Lernportal.">
-  <meta name="theme-color" content="#f6f3ff">
-  <title>Jahresabschluss | VWL Lernportal</title>
-  <link rel="stylesheet" href="../assets/css/common.css">
-  <link rel="stylesheet" href="../assets/css/portal.css">
-  <link rel="stylesheet" href="../assets/css/generated-portal.css">
+  <meta name="description" content="Interaktives Lernportal für Jahresabschluss — Georg-August-Universität Göttingen.">
+  <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <title>Jahresabschluss — Lernportal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      },
+      startup: { typeset: false }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="module">
-  <div class="ambient ambient-a" aria-hidden="true"></div>
-  <div class="ambient ambient-b" aria-hidden="true"></div>
+<body>
 
-  <header class="site-header">
-    <a class="brand" href="../index.html">
-      <span class="brand-mark">VWL</span>
-      <span class="brand-copy">
-        <strong>Lernportal</strong>
-        <small>Kursportal</small>
-      </span>
-    </a>
-    <div class="header-actions">
-      <span class="mono-chip">Live</span>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Farbschema wechseln">Dunkel</button>
-    </div>
-  </header>
+<div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+  <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
+  <div class="consent-actions">
+    <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
+    <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+  </div>
+</div>
 
-  <main class="site-shell module-shell">
-    <section class="hero-panel module-hero" id="moduleHero"></section>
-    <section class="fact-grid" id="moduleQuickFacts" aria-label="Modulfakten"></section>
-    <div class="content-grid">
-      <section class="content-panel" id="learningModes"></section>
-      <section class="content-panel" id="sourceMaterials"></section>
+<div id="app">
+  <nav id="sidebar" aria-label="Konzept-Navigation">
+    <div class="sidebar-header" onclick="window.__renderHome()" role="button" tabindex="0">
+      <a class="portal-home-link" href="../index.html" onclick="event.stopPropagation()">Alle Module</a>
+      <h1>Jahresabschluss</h1>
+      <p>Georg-August-Universität Göttingen</p>
     </div>
-    <section class="content-panel" id="portalBlueprint"></section>
-    <section class="concept-map-shell">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Visualisierung</p>
-          <h2>Konzeptkarte des Lernflusses</h2>
-        </div>
-        <p class="section-note">Die Visuals wechseln je nach Fach zwischen Graph, Schema, Fallkarte und Coding-Zyklus.</p>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-label">
+        <span>FORTSCHRITT</span>
+        <span id="progressText">0 / 7</span>
       </div>
-      <div id="conceptMapMount"></div>
-    </section>
-    <section class="lab-shell" id="rLabSection" hidden>
-      <div id="rLabMount" style="display: contents;"></div>
-    </section>
-  </main>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
 
-  <footer class="site-footer">
-    <p>Dieses Modul verbindet Theorie, Aufgaben, Visuals und Wiederholung in derselben klaren Lernlogik wie die anderen Kurse.</p>
-    <p class="footer-meta"><span id="footerYear"></span> · SF Mono fuer Code, Achsen, Legenden und technische UI.</p>
-  </footer>
+    <div class="search-wrap">
+      <input class="search-input" id="navSearch" type="search" placeholder="Konzept suchen…" autocomplete="off">
+    </div>
 
-  <script type="module" src="../assets/js/generated-portal/main.js"></script>
+    <div id="navList" role="list"></div>
+
+    <div class="sidebar-footer-btns">
+      <button class="sidebar-footer-btn" onclick="window.__showDashboard()">Dashboard</button>
+      <button class="sidebar-footer-btn" onclick="window.__startExam()">Schnelltest</button>
+      <button class="sidebar-footer-btn" onclick="window.__showSRSReview()">Wiederholen</button>
+    </div>
+  </nav>
+
+  <div id="main">
+    <div id="topbar">
+      <div id="topbar-main">
+        <div class="breadcrumb" id="breadcrumb">
+          <button class="breadcrumb-link" onclick="window.__renderHome()">Jahresabschluss</button> / Startseite
+        </div>
+        <div id="topbar-actions">
+          <button class="focus-btn" onclick="window.__toggleFocus()">Fokus</button>
+          <button class="theme-btn" id="themeToggle" onclick="window.__toggleTheme()">Dunkel</button>
+          <button id="mobileMenuBtn" onclick="window.__toggleSidebar()">&#9776;</button>
+        </div>
+      </div>
+      <div class="tab-row" id="tabRow" role="tablist">
+        <button class="tab-btn active" data-tab="theorie" role="tab">Theorie</button>
+        <button class="tab-btn" data-tab="graph" role="tab" style="display:none">Grafik</button>
+        <button class="tab-btn" data-tab="aufgaben" role="tab">Aufgaben</button>
+        <button class="tab-btn" data-tab="formeln" role="tab">Formeln</button>
+        <button class="tab-btn" data-tab="intuition" role="tab">Intuition</button>
+      </div>
+    </div>
+    <div id="content" role="main" tabindex="-1"></div>
+  </div>
+
+  <aside id="rightPanel">
+    <div class="rp-section">
+      <h4>Formeln</h4>
+      <div id="rpFormulas"></div>
+    </div>
+    <div class="rp-section">
+      <h4>Verbindungen</h4>
+      <div id="rpConnections"></div>
+    </div>
+    <div class="rp-section">
+      <h4>Häufige Fehler</h4>
+      <div id="rpMistakes"></div>
+    </div>
+  </aside>
+</div>
+
+<div id="toastContainer"></div>
+<div id="sidebarOverlay"></div>
+
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/portalHub.js"></script>
+
 </body>
 </html>

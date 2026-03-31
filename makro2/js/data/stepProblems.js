@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v7.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v8.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -14,24 +14,24 @@ const BASE_STEP_PROBLEMS = {
       context: 'Inland hat Inflation pi = 5%, Ausland pi* = 2%. Nominalkurs E sinkt um 1%.',
       steps: [
         { 
-          q: '[1. Interpretation] Bestimmen Sie qualitativ die nominale Änderung. (Symbol erlaubt)', 
-          answer: ['abwertung', '↓', 'e ↓'], 
-          options: { isDecision: true },
+          q: '[1. Interpretation] Liegt nominal eine Auf- oder Abwertung vor?', 
+          answer: ['abwertung', '↓'], 
+          options: { problemId: 'm2_wk', stepId: 'nom_dir', isDecision: true },
           hint: 'E sinkt in Mengennotierung.', 
           explain: 'Ein sinkendes E bedeutet Abwertung.' 
         },
         { 
-          q: '[2. Execution] Berechnen Sie die prozentuale Änderung des realen Wechselkurses epsilon.', 
-          answer: ['2', '2%'], 
-          options: { context: { dependsOn: 'abwertung' } },
+          q: '[2. Execution] Berechnen Sie die Änderung des realen Wechselkurses epsilon.', 
+          answer: ['2', '2%', '0.02'], 
+          options: { problemId: 'm2_wk', stepId: 'real_calc', context: { dependsOn: 'abwertung' } },
           hint: '%delta epsilon ≈ %delta E + pi - pi*.', 
           explain: '-1% + 5% - 2% = +2%.' 
         },
         { 
-          q: '[3. Validation] Entspricht dies einer Verbesserung der Wettbewerbsfähigkeit? (ja/nein)', 
-          answer: ['nein', 'no'], 
-          hint: 'Reale Aufwertung bedeutet...', 
-          explain: 'Nein. Reale Aufwertung (epsilon↑) macht Inlandsgüter relativ teurer.' 
+          q: '[3. Validation] Entspricht dies einer Verbesserung oder Verschlechterung der Wettbewerbsfähigkeit?', 
+          answer: ['verschlechterung', 'worse'], 
+          hint: 'Reale Aufwertung (epsilon↑) macht Inlandsgüter relativ teurer.', 
+          explain: 'Wettbewerbsfähigkeit sinkt.' 
         }
       ]
     }
@@ -44,23 +44,45 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[1. Interpretation] Liegt auf dem Devisenmarkt Auf- oder Abwertungsdruck vor?', 
           answer: ['abwertungsdruck', '↓'], 
-          options: { isDecision: true },
+          options: { problemId: 'm2_uip', stepId: 'pressure_dir', isDecision: true },
           hint: 'E^e < E.', 
           explain: 'Markt erwartet Abwertung.' 
         },
         { 
           q: '[2. Execution] Welchen Zins i muss die ZB setzen, um E=1.0 zu halten?', 
           answer: ['5', '5%'], 
-          options: { context: { dependsOn: 'abwertungsdruck' } },
+          options: { problemId: 'm2_uip', stepId: 'zins_calc', context: { dependsOn: 'abwertungsdruck' } },
           hint: 'i = i* - (E^e - E)/E.', 
           explain: 'i = 2% + 3% = 5%.' 
         },
         { 
           q: '[3. Validation] Beschreiben Sie die Logik-Kette für die Kursverteidigung.', 
-          answer: ['e_erwartet ↓ → i ↑ → e fix'],
-          options: { requiredChain: ['e ↓', 'i ↑', 'e fix'] },
-          hint: 'Druck nach unten ⟹ Zins muss...?', 
-          explain: 'E^e ↓ ⟹ Kapitalabfluss ⟹ i ↑ nötig ⟹ E stabil.' 
+          answer: ['i↑ → cap inflow → e↑'],
+          options: { problemId: 'm2_uip', requiredChain: ['i↑', 'e↑'], context: { premise: 'i↑' } },
+          hint: 'Zinserhöhung führt zu...?', 
+          explain: 'Zins steigt ⟹ Kapitalzufluss ⟹ Nachfrage nach Währung steigt ⟹ Kurs stabilisiert.' 
+        }
+      ]
+    }
+  ],
+  solow_basis: [
+    {
+      title: 'Solow: Das Goldene-Regel-Limit',
+      context: 'Steady State bei k > k_GR.',
+      steps: [
+        { 
+          q: '[1. Interpretation] Welcher Zustand der Kapitalakkumulation liegt hier vor?', 
+          answer: ['überakkumulation', 'over-accumulation'], 
+          options: { problemId: 'm2_solow', stepId: 'state_id', isDecision: true },
+          hint: 'k > k_GR.', 
+          explain: 'Die Wirtschaft hat zu viel Kapital.' 
+        },
+        { 
+          q: '[2. Validation] Wie reagiert der Steady-State Konsum c langfristig auf ein Sinken von s?', 
+          answer: ['steigt', '↑', 'higher'], 
+          options: { problemId: 'm2_solow', requiredChain: ['k>kgr', 'c↑'], context: { premise: 'k>kgr' } },
+          hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
+          explain: 'Weniger Sparen erhöht den Konsum langfristig.' 
         }
       ]
     }

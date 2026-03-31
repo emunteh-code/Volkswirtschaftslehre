@@ -1,10 +1,10 @@
 // ============================================================
-// VWL LOGIC ENGINE — Final Benchmark Standard v7.0
-// Precision Under Uncertainty: Logic > Execution
+// VWL LOGIC ENGINE — Final Benchmark Standard v8.0
+// Precision Under Uncertainty: Semantic Logic & Contextual Constraints
 // ============================================================
 
 /**
- * Normalizes input for comparison.
+ * Normalizes input for robust comparison.
  */
 export function normalize(str) {
   if (!str) return '';
@@ -17,71 +17,131 @@ export function normalize(str) {
 }
 
 /**
- * Global Domain Validation
+ * Context-Aware Constraint Rules
  */
-export function getDomainViolation(input, context = {}) {
+const CONSTRAINTS = {
+  quantity: { min: 0, msg: "Mengen können nicht negativ sein." },
+  price: { min: 0, msg: "Preise können nicht negativ sein." },
+  capital: { min: 0, msg: "Kapitalstock muss ≥ 0 sein." },
+  probability: { min: 0, max: 1, msg: "Wahrscheinlichkeiten liegen in [0, 1]." },
+  variance: { min: 0, msg: "Varianz muss ≥ 0 sein." },
+  net_demand: { unrestricted: true },
+  excess_demand: { unrestricted: true }
+};
+
+/**
+ * Semantic Relations for Logic Chain Validation
+ */
+const SEMANTIC_RELATIONS = {
+  "k>kgr": { "c": "↓", "w": "↓", "y": "↑" },
+  "k<kgr": { "c": "↑", "w": "↑" },
+  "p1↓": { "se": "↑", "x1": "↑" },
+  "p1↑": { "se": "↓", "x1": "↓" },
+  "i↑": { "e": "↑", "cap": "inflow" },
+  "i↓": { "e": "↓", "cap": "outflow" }
+};
+
+/**
+ * Detects domain violations based on variable type.
+ */
+export function getDomainViolation(input, type) {
   const val = parseFloat(String(input).replace(',', '.'));
   if (isNaN(val)) return null;
 
-  if (val < 0 && (context.type === 'quantity' || context.type === 'price' || context.type === 'capital')) {
-    return "DOMAIN VIOLATION: Negative Werte sind ökonomisch unzulässig. Korrigieren Sie Ihre Annahme.";
-  }
+  const rule = CONSTRAINTS[type];
+  if (!rule || rule.unrestricted) return null;
+
+  if (rule.min !== undefined && val < rule.min) return rule.msg;
+  if (rule.max !== undefined && val > rule.max) return rule.msg;
+
   return null;
 }
 
 /**
- * Session Logic Tracker (Singleton-like)
- * Tracks reasoning path to enforce dependency.
+ * Problem-Scoped Logic Tracking (Session-based)
  */
-const LogicTracker = {
-  lastDecision: null,
-  setDecision(d) { this.lastDecision = d; },
-  getDecision() { return this.lastDecision; }
-};
+function updateLogicState(problemId, key, value) {
+  if (!window.__VWL_LOGIC_STATE__) window.__VWL_LOGIC_STATE__ = {};
+  if (!window.__VWL_LOGIC_STATE__[problemId]) window.__VWL_LOGIC_STATE__[problemId] = {};
+  window.__VWL_LOGIC_STATE__[problemId][key] = normalize(value);
+}
+
+function getLogicState(problemId, key) {
+  return window.__VWL_LOGIC_STATE__?.[problemId]?.[key] || null;
+}
 
 /**
- * Main Answer Checker with Dependency & Contradiction Logic
+ * Semantic Logic Chain Validation
  */
-export function checkAnswerWithLogic(input, acceptedAnswers, options = {}) {
-  const { traps = [], context = {}, requiredChain = null, isDecision = false } = options;
+export function validateChain(input, premise) {
+  const normInput = normalize(input);
+  const normPremise = normalize(premise);
+  const relations = SEMANTIC_RELATIONS[normPremise];
+  
+  if (!relations) return { valid: true }; // No semantic rules for this premise
+
+  for (const [variable, expected] of Object.entries(relations)) {
+    if (normInput.includes(normalize(variable))) {
+      const actual = normInput.includes('↑') ? '↑' : normInput.includes('↓') ? '↓' : null;
+      if (actual && actual !== expected) {
+        return { valid: false, msg: `Widerspruch: Laut Modell folgt aus ${premise} ein Sinken (↓) von ${variable}.` };
+      }
+    }
+  }
+  return { valid: true };
+}
+
+/**
+ * Main Answer Checker
+ */
+export function checkAnswerWithTolerance(input, acceptedAnswers, options = {}) {
+  const { 
+    problemId = 'default',
+    stepId = 'default',
+    traps = [], 
+    context = {}, 
+    isDecision = false,
+    requiredChain = null
+  } = options;
+
   const normInput = normalize(input);
 
-  // 1. Domain Check (Automatic Contradiction)
-  const domainError = getDomainViolation(input, context);
-  if (domainError) {
-    return { correct: false, trap: domainError, capScore: 0.6 };
+  // 1. Contextual Domain Check
+  const domainError = getDomainViolation(input, context.type);
+  if (domainError) return { correct: false, trap: `DOMAIN ERROR: ${domainError}`, capScore: 0.6 };
+
+  // 2. Semantic Chain Check
+  if (requiredChain && context.premise) {
+    const chainCheck = validateChain(input, context.premise);
+    if (!chainCheck.valid) return { correct: false, trap: chainCheck.msg, capScore: 0.5 };
   }
 
-  // 2. Logic Chain Verification (Structural reasoning)
-  if (requiredChain) {
-    let score = 0;
-    requiredChain.forEach(comp => {
-      if (normInput.includes(normalize(comp))) score++;
-    });
-    const ratio = score / requiredChain.length;
-    if (ratio >= 0.66) return { correct: true, logicScore: ratio };
-  }
-
-  // 3. Dependency Logic: Execution check vs. Previous Decision
+  // 3. Dependency Logic (Inconsistency vs. Wrong Assumption)
   if (context.dependsOn) {
-    const prev = LogicTracker.getDecision();
-    if (prev && normalize(prev) !== normalize(context.dependsOn)) {
-      return { 
-        correct: false, 
-        trap: `LOGIC INCONSISTENCY: Ihr Rechenergebnis widerspricht Ihrer vorherigen Entscheidung (${prev}).`,
-        capScore: 0.5 
-      };
+    const prevDecision = getLogicState(problemId, context.dependsOn);
+    if (prevDecision) {
+      // Check if current input contradicts the previous decision directionally
+      const currentDir = normInput.includes('↑') ? '↑' : normInput.includes('↓') ? '↓' : null;
+      const prevDir = prevDecision.includes('↑') ? '↑' : prevDecision.includes('↓') ? '↓' : null;
+      
+      if (currentDir && prevDir && currentDir !== prevDir) {
+        return { 
+          correct: false, 
+          trap: `LOGIK-WIDERSPRUCH: Ihr Ergebnis (${currentDir}) widerspricht Ihrer Annahme (${prevDir}).`,
+          capScore: 0.4 
+        };
+      }
     }
   }
 
-  // 4. Trap matching
+  // 4. Trap Check
   for (const trap of traps) {
     if (normInput.includes(normalize(trap.pattern))) {
       return { correct: false, trap: trap.msg, capScore: 0.6 };
     }
   }
 
-  // 5. Standard matching
+  // 5. Scoring & State Update
   let isCorrect = false;
   for (const a of acceptedAnswers) {
     const normA = normalize(a);
@@ -92,12 +152,12 @@ export function checkAnswerWithLogic(input, acceptedAnswers, options = {}) {
       if (Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < 0.02) isCorrect = true;
     } else if (normA.length <= 2) {
       if (normInput === normA) isCorrect = true;
-    } else {
-      if (normInput.includes(normA) || normA.includes(normInput) && normInput.length > 3) isCorrect = true;
+    } else if (normInput.includes(normA) || (normA.includes(normInput) && normInput.length > 3)) {
+      isCorrect = true;
     }
-    
+
     if (isCorrect) {
-      if (isDecision) LogicTracker.setDecision(normInput);
+      if (isDecision) updateLogicState(problemId, stepId, input);
       return { correct: true };
     }
   }

@@ -1,35 +1,13 @@
 // ============================================================
 // FULL EXAMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v13.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v11.0: Logic First
 // ============================================================
 
 export const FULL_EXAMS = {
-  probe_2025: {
-    id: 'probe_2025',
-    title: 'Probeklausur Makroökonomik II',
-    subtitle: 'Krisztina Kis-Katos, Georg-August-Universität Göttingen',
-    duration: 90,
-    aufgaben: [
-      {
-        label: 'Aufgabe 1',
-        points: 16,
-        type: 'wf-block',
-        preamble: `Beurteilen Sie die Aussagen als wahr oder falsch.`,
-        groups: [
-          {
-            context: 'Offene Volkswirtschaft & Trilemma',
-            questions: [
-              { id: '1_4', text: 'Ein Land kann bei freiem Kapitalverkehr einen festen Kurs und autonome Geldpolitik halten.', correct: 'Falsch', feedback: 'Widerspricht dem Trilemma.' },
-            ],
-          }
-        ],
-      },
-    ],
-  },
   hard_mock_2026: {
     id: 'hard_mock_2026',
-    title: 'Makro II - Simulation v13.0 (60 Min)',
-    subtitle: 'Orthogonal Scoring & Contextual Logic',
+    title: 'Makro II - Simulation v11.0 (60 Min)',
+    subtitle: 'Final Hardening: Regime Uncertainty & Validation',
     duration: 60,
     aufgaben: [
       {
@@ -54,22 +32,17 @@ export const FULL_EXAMS = {
             type: 'text',
             text: '[1.2 Execution] Berechnen Sie den notwendigen Zins $i$, um $E=1{,}0$ zu halten.',
             correct: ['0.05', '5%'],
-            options: { problemId: 'hm2_final', stepId: 'zins_exec', dependsOn: 'press_dir' },
-            feedback: String.raw`$i = 0{,}05$.`,
+            options: { problemId: 'hm2_final', dependsOn: 'press_dir' },
+            feedback: String.raw`$i = 0{,}02 - (0{,}97 - 1{,}0)/1{,}0 = 0{,}05$.`,
           },
           {
             id: 'p1a_3',
             points: 20,
             type: 'text',
-            text: '[1.3 Validation] Erklären Sie die theoretische Konsistenz.',
-            correct: ['i↑ → e↑'],
-            options: { 
-              problemId: 'hm2_final', 
-              role: 'VALIDATION', 
-              premise: 'P1_UP',
-              contextType: 'short_run_policy'
-            },
-            feedback: String.raw`Zinserhöhung neutralisiert Abwertungsdruck.`,
+            text: '[1.3 Validation] Ist eine Reservesenkung ohne Zinsänderung hier eine valide Verteidigung?',
+            correct: ['nein', 'no'],
+            options: { problemId: 'hm2_final', role: 'VALIDATION' },
+            feedback: String.raw`Nein, bei freiem Kapitalverkehr erzwingt die UIP eine Zinsanpassung.`,
           }
         ]
       }

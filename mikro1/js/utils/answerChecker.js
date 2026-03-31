@@ -1,15 +1,30 @@
 // ============================================================
-// VWL LOGIC ENGINE — Final Benchmark Standard v14.0
-// PRECISION UNDER UNCERTAINTY: Continuous Decay & Semantic Drift Detection
+// VWL SEMANTIC LOGIC ENGINE — Final Hardening v11.0
+// PRECISION UNDER UNCERTAINTY: Logic Precedence & Global Validation
 // ============================================================
+
+/**
+ * Notation Normalization Layer
+ * Unifies math and economic notation.
+ */
+function normalizeNotation(s) {
+  return s
+    .replace(/f'\(x\)/g, 'mu')
+    .replace(/∂u\/∂x[1₁]/g, 'mu1')
+    .replace(/∂u\/∂x[2₂]/g, 'mu2')
+    .replace(/marginalutility/g, 'mu')
+    .replace(/marginaleffect/g, 'marginal')
+    .replace(/dy\/dx/g, 'marginal');
+}
 
 /**
  * Normalizes input for robust comparison.
  */
 export function normalize(str) {
   if (!str) return '';
-  return String(str).toLowerCase()
-    .replace(/\s+/g, '')
+  let s = String(str).toLowerCase().replace(/\s+/g, '');
+  s = normalizeNotation(s);
+  return s
     .replace(/[_,]/g, '')
     .replace(/\*/g, '')
     .replace(/[^a-z0-9+\-\/=.<>λαβγδεζ↑↓→]/g, '')
@@ -17,58 +32,41 @@ export function normalize(str) {
 }
 
 /**
- * Context-aware primitives with model origin.
+ * Semantic Abstraction Mapping
  */
 export function mapToPrimitive(input, contextType = 'general') {
   const s = normalize(input);
   let dir = null;
-  if (s.includes('↑') || s.includes('steigt') || s.includes('rises') || s.includes('increase') || s.includes('höher')) dir = 'UP';
-  if (s.includes('↓') || s.includes('sinkt') || s.includes('falls') || s.includes('decrease') || s.includes('niedriger')) dir = 'DOWN';
-  if (s.includes('ambig') || s.includes('uncertain') || s.includes('unbestimmt') || s.includes('abhängig')) dir = 'AMBIGUOUS';
+  if (s.includes('↑') || s.includes('steigt') || s.includes('increase') || s.includes('higher') || s.includes('plus')) dir = 'UP';
+  if (s.includes('↓') || s.includes('sinkt') || s.includes('decrease') || s.includes('lower') || s.includes('minus')) dir = 'DOWN';
+  if (s.includes('ambig') || s.includes('uncertain') || s.includes('unbestimmt')) dir = 'AMBIGUOUS';
 
   let concept = 'NONE';
+  if (s.includes('mu') || s.includes('grenznutzen')) concept = 'MARGINAL_UTILITY';
   if (s.includes('se') || s.includes('substitution')) concept = 'SE';
-  if (s.includes('ie') || s.includes('ee') || s.includes('income')) concept = 'IE';
+  if (s.includes('ie') || s.includes('ie') || s.includes('einkommen')) concept = 'IE';
   
-  if (contextType === 'growth') {
-    if (s.includes('overaccum') || s.includes('k>kgr') || s.includes('überakk')) concept = 'OVERACCUM';
-  } else if (contextType === 'optimization') {
-    if (s.includes('corner') || s.includes('rand')) concept = 'CORNER';
-    if (s.includes('interior') || s.includes('innen')) concept = 'INTERIOR';
-  }
-
-  return { concept, dir, raw: s, context: contextType };
+  return { concept, dir, raw: s };
 }
 
 /**
- * Validates reasoning transitions to prevent semantic drift.
+ * Model Consistency Matrix
  */
-function isTransitionValid(prev, next) {
-  if (!prev || !next || prev.concept === next.concept) return true;
-  
-  const validTransitions = [
-    ['SE', 'TOTAL_EFFECT'],
-    ['OVERACCUM', 'GROWTH'],
-    ['DEMAND', 'EXCESS_DEMAND']
-  ];
+const MODEL_RULES = {
+  'P1_DOWN': { 'SE': 'UP', 'X1': 'UP' },
+  'P1_UP':   { 'SE': 'DOWN', 'X1': 'DOWN' },
+  'OVERACCUM': { 'C': 'DOWN', 'W': 'DOWN' }
+};
 
-  return validTransitions.some(([p, n]) => prev.concept === p && next.concept === n);
-}
-
-/**
- * VWL Final Benchmark Evaluator v14.0
- */
 export class VWLBenchmarkEvaluator {
   constructor(problemId, state = {}) {
     this.problemId = problemId;
-    this.state = state; // stepId -> prim
-    this.path = []; // Sequence of primitives in this session
+    this.state = state; // stepId -> { input, prim }
   }
 
   evaluate(input, options = {}) {
     const {
       role = 'general',
-      allowedModels = [],
       premise = null,
       dependsOn = null,
       expectedAnswers = [],
@@ -78,82 +76,87 @@ export class VWLBenchmarkEvaluator {
     } = options;
 
     const prim = mapToPrimitive(input, contextType);
-    const res = { score: 0, logic_score: 1.0, calc_score: 1.0, correct: false, msg: '', state: this.state };
+    const res = { score: 1.0, logic_score: 1.0, calc_score: 1.0, correct: false, msg: '', state: this.state };
     
-    let logicPenalty = 0;
-    let premiseError = false;
-
-    // 1. Semantic Drift Detection
-    const lastPrim = this.path[this.path.length - 1];
-    if (lastPrim && !isTransitionValid(lastPrim, prim)) {
-      logicPenalty += 0.20; // Drift Penalty
-      res.msg += "Semantischer Drift erkannt: Unbegründeter Konzeptwechsel. ";
-    }
-
-    // 2. Ambiguity & Model Hierarchy
-    if (prim.dir === 'AMBIGUOUS' && !ambiguityAllowed) {
-      logicPenalty += 0.45;
-      premiseError = true;
-      res.msg += "Unzulässige Ambiguität. ";
-    }
-
-    if (allowedModels.length > 0 && this.state.model_choice) {
-      const chosen = this.state.model_choice.concept;
-      if (!allowedModels.includes(chosen)) {
-        logicPenalty += 0.30;
-        res.msg += "Modell-Fehlwahl. ";
+    // 1. Ambiguity Validation (Must have justification)
+    if (prim.dir === 'AMBIGUOUS') {
+      const hasReasoning = prim.raw.length > 15 || (prim.raw.includes('↑') && prim.raw.includes('↓'));
+      if (!ambiguityAllowed || !hasReasoning) {
+        res.logic_score = 0.2;
+        res.msg += "AMBIGUITY REJECTED: Ambiguität muss durch konkurrierende Effekte (z.B. SE↑ vs IE↓) begründet werden. ";
       }
     }
 
+    // 2. Logic Precedence (Premise/Direction Check)
+    let logicError = false;
+    if (premise && MODEL_RULES[premise]) {
+      const expectedDir = MODEL_RULES[premise][options.role];
+      if (expectedDir && prim.dir && prim.dir !== expectedDir && prim.dir !== 'AMBIGUOUS') {
+        logicError = true;
+        res.msg += `INCONSISTENCY: Ihre Richtung widerspricht dem Modell ${premise}. `;
+      }
+    }
+
+    // 3. Dependency Enforcement
     if (dependsOn && this.state[dependsOn]) {
       const prev = this.state[dependsOn];
-      if (prev.dir && prim.dir && prim.dir !== 'AMBIGUOUS' && prev.dir !== prim.dir) {
-        logicPenalty += 0.25;
-        res.msg += "Logische Inkonsistenz. ";
+      if (prev.prim.dir && prim.dir && prim.dir !== 'AMBIGUOUS' && prev.prim.dir !== prim.dir) {
+        logicError = true;
+        res.logic_score = Math.min(res.logic_score, 0.5);
+        res.msg += "DEPENDENCY ERROR: Widerspruch zur vorherigen Entscheidung. ";
       }
     }
 
-    // 3. Logic Score & Premise Cap
-    res.logic_score = Math.max(0, 1.0 - logicPenalty);
-    if (premiseError) res.logic_score = Math.min(res.logic_score, 0.4);
+    // 4. Silent Inconsistency (Calculated Result Direction)
+    // If input is numeric, we infer direction from its value relative to a baseline if provided
+    // This is handled by comparing the numeric result to previous state in specific tasks
 
-    // 4. Continuous Calc Score (Linear Decay)
-    let minError = Infinity;
+    // 5. Calculation Score (Conditional on Logic)
+    let numericFound = false;
     const numInput = parseFloat(input.replace(',', '.'));
-    const tolerance = (res.logic_score > 0.7) ? 0.10 : 0.02;
+    
+    // Logic must be correct for full tolerance
+    const tolerance = (!logicError && res.logic_score > 0.8) ? 0.10 : 0.02;
 
     for (const a of expectedAnswers) {
       const numA = parseFloat(String(a).replace(',', '.'));
       if (!isNaN(numInput) && !isNaN(numA)) {
         const error = Math.abs(numInput - numA) / Math.max(1, Math.abs(numA));
-        if (error < minError) minError = error;
+        if (error < tolerance) {
+          numericFound = true;
+          res.calc_score = error < 0.02 ? 1.0 : 0.8;
+          break;
+        }
       } else if (normalize(input).includes(normalize(a))) {
-        minError = 0;
+        numericFound = true;
         break;
       }
     }
 
-    if (minError <= tolerance) {
-      res.calc_score = 1.0;
-      res.correct = true;
-    } else {
-      // k=3 slope decay
-      res.calc_score = Math.max(0.2, 1.0 - 3 * (minError - tolerance));
-      res.correct = false;
+    if (!numericFound) {
+      res.calc_score = 0.2;
+      res.msg += "ERGEBNIS FEHLER: Wert inkorrekt oder unplausibel. ";
     }
 
-    // 5. Final Combined Score
+    // Logic Precedence Rule: If logic is fundamentally wrong, numeric correctness is invalidated
+    if (logicError) {
+      res.calc_score = Math.min(res.calc_score, 0.2);
+      res.logic_score = Math.min(res.logic_score, 0.4);
+    }
+
+    // 6. Final Score Calculation
     res.score = res.logic_score * res.calc_score;
+    res.correct = res.score > 0.8;
 
-    // Validation Override
-    if (role === 'VALIDATION' && !res.correct) {
+    // 7. Global Validation Override
+    if (role === 'VALIDATION' && (!res.correct || res.score < 0.6)) {
       res.score = Math.min(res.score, 0.4);
+      res.msg = "VALIDATION FAILED: Fundamentaler Modell-Widerspruch erkannt. Gesamtes Problem-Ergebnis gedeckelt. " + res.msg;
     }
 
-    // Update State & Path
-    this.path.push(prim);
-    if (isDecision || res.correct || (res.logic_score > 0.5 && res.calc_score > 0.5)) {
-      this.state[options.stepId || 'last'] = prim;
+    // Update state
+    if (isDecision || res.correct) {
+      this.state[options.stepId || 'last'] = { input, prim };
     }
 
     return res;

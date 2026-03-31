@@ -15,11 +15,21 @@ export const CHAPTERS = [
 
 export const CONTENT = {
   grundlagen: {
-    motivation: 'Der Jahresabschluss informiert externe Adressaten über die wirtschaftliche Lage des Unternehmens. Er ist Rechenschaftslegung und Basis für die Gewinnverteilung.',
+    motivation: 'Der Jahresabschluss informiert externe Adressaten über die wirtschaftliche Lage des Unternehmens. Er ist Rechenschaftslegung, Gläubigerschutz und Basis für die Gewinnverteilung.',
     theorie: String.raw`
     <div class="section-block">
+      <h3>Bestandteile des Jahresabschlusses</h3>
+      <p>Nach § 242 HGB besteht der Jahresabschluss aus:</p>
+      <ul>
+        <li><strong>Bilanz:</strong> Stichtagsbezogene Gegenüberstellung von Vermögen und Kapital.</li>
+        <li><strong>GuV:</strong> Gegenüberstellung von Erträgen und Aufwendungen einer Periode.</li>
+        <li><strong>Anhang (bei Kapitalgesellschaften):</strong> Erläuterungen und Zusatzinformationen.</li>
+        <li><strong>Lagebericht (bei Kapitalgesellschaften):</strong> Zukunftsgerichtete Analyse.</li>
+      </ul>
+    </div>
+    <div class="section-block">
       <h3>Doppelte Buchführung</h3>
-      <p>Jeder Geschäftsvorfall wird auf mindestens zwei Konten gebucht (Soll an Haben). Die Bilanz ist das Ergebnis dieser Buchungen zum Stichtag.</p>
+      <p>Jeder Geschäftsvorfall wird auf mindestens zwei Konten gebucht (<strong>Soll an Haben</strong>). Die Bilanz ist das Ergebnis dieser Buchungen zum Stichtag. Jedes Konto hat eine Soll- und eine Habenseite. Bei Aktivkonten steht der Anfangsbestand im Soll, bei Passivkonten im Haben.</p>
     </div>
     <div class="section-block">
       <h3>Grundsätze ordnungsmäßiger Buchführung (GoB)</h3>
@@ -27,7 +37,17 @@ export const CONTENT = {
         <li><strong>Klarheit & Übersichtlichkeit:</strong> Dritte müssen sich in angemessener Zeit ein Bild machen können.</li>
         <li><strong>Vollständigkeit:</strong> Alle buchungspflichtigen Vorfälle müssen erfasst werden.</li>
         <li><strong>Vorsichtsprinzip:</strong> Vermögen eher zu niedrig, Schulden eher zu hoch bewerten (Gläubigerschutz).</li>
+        <li><strong>Realisationsprinzip:</strong> Gewinne erst erfassen, wenn sie realisiert sind (Lieferung/Leistung).</li>
+        <li><strong>Imparitätsprinzip:</strong> Drohende Verluste sofort erfassen, auch wenn noch nicht realisiert.</li>
       </ul>
+    </div>
+    <div class="section-block">
+      <h3>Stichtags- vs. Periodenprinzip</h3>
+      <p>Die Bilanz ist <strong>stichtagsbezogen</strong> (Vermögens- und Schuldenlage am 31.12.). Die GuV ist <strong>periodenbezogen</strong> (Erträge und Aufwendungen des Geschäftsjahres). Periodenabgrenzungen (RAP, Rückstellungen) sorgen dafür, dass Aufwand und Ertrag der richtigen Periode zugeordnet werden.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Realisations- vs. Imparitätsprinzip:</strong> Gewinne werden erst bei Realisation gebucht (vorsichtig), aber Verluste müssen sofort antizipiert werden (imparitätisch). Diese Asymmetrie ist gewollt — sie schützt Gläubiger.</div>
     </div>
     `,
     formeln: [
@@ -227,15 +247,34 @@ export const CONTENT = {
     ]
   },
   umlaufvermoegen: {
-    motivation: 'Posten, die nicht dauerhaft im Betrieb bleiben (Vorräte, Forderungen, Kasse). Sie unterliegen dem strengen Niederstwertprinzip.',
+    motivation: 'Das Umlaufvermögen umfasst Posten, die nicht dauerhaft im Betrieb bleiben — Vorräte, Forderungen, Wertpapiere, Kasse. Es unterliegt dem strengen Niederstwertprinzip.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Forderungen aus LuL</h3>
-      <p>Müssen zum Nennwert bewertet werden. Zweifelhafte Forderungen müssen einzelwertberichtigt (EWB) werden.</p>
+      <h3>Gliederung (§ 266 Abs. 2 B HGB)</h3>
+      <ol>
+        <li><strong>Vorräte:</strong> Roh-, Hilfs- und Betriebsstoffe, unfertige und fertige Erzeugnisse, Waren.</li>
+        <li><strong>Forderungen und sonstige Vermögensgegenstände:</strong> Forderungen aus LuL, Forderungen gegen verbundene Unternehmen.</li>
+        <li><strong>Wertpapiere:</strong> Kurzfristig gehaltene Anteile und Wertpapiere.</li>
+        <li><strong>Liquide Mittel:</strong> Kassenbestand, Bankguthaben, Schecks.</li>
+      </ol>
     </div>
     <div class="section-block">
-      <h3>Vorräte</h3>
-      <p>Bewertung zu AK oder Herstellungskosten (HK). Bei gesunkenen Marktpreisen muss auf den niedrigeren Stichtagswert abgewertet werden.</p>
+      <h3>Vorräte: Bewertung</h3>
+      <p>Erstbewertung zu Anschaffungs- oder Herstellungskosten (AK/HK). Bei gesunkenen Markt- oder Börsenpreisen greift das <strong>strenge Niederstwertprinzip</strong>: Es muss zwingend auf den niedrigeren Stichtagswert abgewertet werden.</p>
+      <p><strong>Bewertungsvereinfachungen:</strong> Wenn gleichartige Vorräte zu unterschiedlichen Preisen beschafft wurden, dürfen FiFo (First in, First out), LiFo (Last in, First out) oder Durchschnittsmethode angewandt werden.</p>
+    </div>
+    <div class="section-block">
+      <h3>Forderungen: Bewertung und Wertberichtigung</h3>
+      <p>Forderungen werden zum <strong>Nennwert</strong> bilanziert. Zweifelhafte Forderungen erfordern eine <strong>Einzelwertberichtigung (EWB)</strong>: Bilanzwert = Nennwert − geschätzter Ausfall. Für das allgemeine Kreditrisiko kann zusätzlich eine <strong>Pauschalwertberichtigung (PWB)</strong> gebildet werden.</p>
+    </div>
+    <div class="section-block">
+      <h3>Strenges Niederstwertprinzip</h3>
+      <p>Im Gegensatz zum Anlagevermögen (gemildertes NWP) gilt für das Umlaufvermögen: Jede Wertminderung am Stichtag — ob dauerhaft oder vorübergehend — muss sofort bilanziert werden. Es gibt kein Wahlrecht, sondern eine <strong>Pflicht</strong> zur Abwertung.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Strenges vs. gemildertes NWP:</strong> UV → streng (jede Wertminderung zwingend). AV → gemildert (nur bei dauerhafter Wertminderung zwingend). Verwechslung ist ein Standardfehler in der Klausur.</div>
+      <div class="warn-box"><strong>FiFo vs. LiFo:</strong> Bei steigenden Preisen führt FiFo zu höherem Vorratswert (und höherem Gewinn), LiFo zu niedrigerem. Die Wahl beeinflusst Bilanz und GuV direkt.</div>
     </div>
     `,
     formeln: [

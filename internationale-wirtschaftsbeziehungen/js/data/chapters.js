@@ -177,20 +177,32 @@ export const CONTENT = {
     ]
   },
   zoelle: {
-    motivation: 'Handelspolitik greift in den freien Austausch ein. Wir untersuchen die wohlfahrtseffekte von Importzöllen.',
+    motivation: 'Zölle sind das klassische Instrument der Handelspolitik. Ihre Wohlfahrtsanalyse zeigt, wer gewinnt und wer verliert — und warum der Nettoverlust fast immer überwiegt.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Wirkung eines Zolls</h3>
-      <p>Ein Zoll auf Importe erhöht den Inlandspreis. Dies schützt heimische Produzenten, belastet aber die Konsumenten.</p>
+      <h3>Mechanik eines Importzolls (kleines Land)</h3>
+      <p>Ein spezifischer Zoll $t$ erhöht den Inlandspreis um genau $t$:</p>
+      <div class="math-block">$$p_{Inland} = p^* + t$$</div>
+      <p>Der Weltmarktpreis $p^*$ bleibt unverändert (Annahme: kleines Land). Inländische Produzenten produzieren mehr, Konsumenten konsumieren weniger, die Importmenge sinkt.</p>
     </div>
     <div class="section-block">
-      <h3>Wohlfahrtseffekte</h3>
+      <h3>Wohlfahrtsanalyse</h3>
       <ul>
-        <li><strong>Produzentenrente:</strong> Steigt (+).</li>
-        <li><strong>Konsumentenrente:</strong> Sinkt (-).</li>
-        <li><strong>Staateinnahmen:</strong> Steigen (+).</li>
-        <li><strong>Nettowohlfahrtsverlust:</strong> Entsteht durch Effizienzverluste (Produktions- und Konsumverzerrung).</li>
+        <li><strong>Konsumentenrente:</strong> Sinkt um Fläche $a + b + c + d$ (höherer Preis, weniger Konsum).</li>
+        <li><strong>Produzentenrente:</strong> Steigt um Fläche $a$ (höherer Preis, mehr Produktion).</li>
+        <li><strong>Staateinnahmen:</strong> Steigen um Fläche $c$ (Zoll × Importmenge).</li>
+        <li><strong>Nettowohlfahrtsverlust:</strong> Dreiecke $b + d$ — <strong>Deadweight Loss</strong>.</li>
       </ul>
+      <p>$b$ ist die Produktionsverzerrung (ineffiziente heimische Produktion), $d$ die Konsumverzerrung (entgangener Konsum).</p>
+    </div>
+    <div class="section-block">
+      <h3>Großes Land: Optimalzoll</h3>
+      <p>Ein großes Land kann durch einen Zoll seine Terms of Trade verbessern: Der Weltmarktpreis sinkt, weil die geringere Nachfrage auf den Weltmarkt drückt. Der <strong>Optimalzoll</strong> maximiert den nationalen Nettogewinn aus verbessertem ToT minus Deadweight Loss. Vergeltungszölle des Auslands können diesen Vorteil zunichtemachen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Wohlfahrt = Summe, nicht Verteilung:</strong> Die Gesamtwohlfahrt sinkt ($b + d > 0$), obwohl Produzenten und Staat gewinnen. Das Ergebnis ist ein Verteilungskonflikt, kein Pareto-Gewinn.</div>
+      <div class="warn-box"><strong>Kleines vs. großes Land:</strong> Im kleinen Land ist der Zoll immer wohlfahrtsmindernd. Im großen Land kann er wohlfahrtssteigernd sein (Optimalzoll) — aber nur unter Ignorierung von Vergeltungsmaßnahmen.</div>
     </div>
     `,
     formeln: [

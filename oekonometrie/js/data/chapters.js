@@ -289,36 +289,52 @@ cor(data[, c("x1", "x2", "x3")])
     `
   },
   heteroskedasticity: {
-    motivation: 'Wenn die Fehlervarianz nicht konstant ist, verliert OLS seine Effizienz und Standardfehler werden ungültig.',
+    motivation: 'Wenn die Fehlervarianz nicht konstant ist, verliert OLS seine Effizienz und die Standardfehler werden ungültig. Die Inferenz bricht zusammen, obwohl die Schätzer selbst korrekt bleiben.',
     theorie: String.raw`
     <div class="section-block">
       <h3>Problemstellung</h3>
-      <p>Heteroskedastizität bedeutet $\text{Var}(u|x) = \sigma_i^2$. Die Streuung der Fehler hängt von $x$ ab (z.B. streut der Konsum bei hohem Einkommen stärker).</p>
+      <p>Heteroskedastizität bedeutet, dass die Varianz der Fehlerterme von den Regressoren abhängt: $\text{Var}(u_i|x_i) = \sigma_i^2 \neq \sigma^2$. Typisches Beispiel: Die Streuung des Konsums steigt mit dem Einkommen — Reiche konsumieren variabler als Arme.</p>
+      <p>Grafisch erkennbar: Im Residuenplot ($\hat{u}_i$ gegen $x_i$ oder $\hat{y}_i$) zeigt sich ein Trichter- oder Fächermuster statt gleichmäßiger Streuung.</p>
     </div>
     <div class="section-block">
-      <h3>Folgen</h3>
-      <p>OLS bleibt <strong>unverzerrt</strong> und konsistent, aber:</p>
+      <h3>Konsequenzen für OLS</h3>
+      <p>OLS bleibt <strong>unverzerrt</strong> und konsistent (A1–A4 sind nicht verletzt). Aber:</p>
       <ul>
-        <li>OLS ist nicht mehr BLUE (nicht mehr effizient).</li>
-        <li>Standardfehler sind verzerrt ⟹ t-Tests und Intervalle sind ungültig!</li>
+        <li>OLS ist <strong>nicht mehr BLUE</strong> — es gibt effizientere Schätzer (GLS/WLS).</li>
+        <li>Die üblichen Standardfehler $SE(\hat{\beta})$ sind <strong>verzerrt</strong>.</li>
+        <li>Alle auf ihnen beruhenden Tests (t-Test, F-Test) und Konfidenzintervalle sind <strong>ungültig</strong>.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Tests auf Heteroskedastizität</h3>
+      <ul>
+        <li><strong>Breusch-Pagan-Test:</strong> Regressiere $\hat{u}_i^2$ auf $x$. Wenn $R^2$ signifikant von Null verschieden → Heteroskedastizität.</li>
+        <li><strong>White-Test:</strong> Allgemeiner — regressiere $\hat{u}_i^2$ auf $x$, $x^2$ und Kreuzterme. Keine funktionale Form nötig.</li>
       </ul>
     </div>
     <div class="section-block">
       <h3>Abhilfe</h3>
-      <p>Nutzen Sie <strong>robuste Standardfehler</strong> (White-Standardfehler) oder WLS (Weighted Least Squares).</p>
+      <p><strong>Robuste Standardfehler (HC, White):</strong> Korrigieren die Varianzschätzung, ohne das Modell zu ändern. Der Schätzer $\hat{\beta}$ bleibt identisch, nur $SE(\hat{\beta})$ wird angepasst. In R: <code>vcovHC(model, type="HC1")</code>.</p>
+      <p><strong>WLS (Weighted Least Squares):</strong> Gewichtet Beobachtungen mit hoher Varianz herunter. Effizienter als OLS, aber erfordert Kenntnis der Varianzstruktur.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Robuste SE ändern den Schätzer nicht:</strong> $\hat{\beta}_{OLS}$ mit und ohne robuste Standardfehler ist identisch. Nur die Standardfehler, t-Werte und p-Werte ändern sich.</div>
+      <div class="warn-box"><strong>Heteroskedastizität ≠ Verzerrung:</strong> Der Schätzer bleibt unverzerrt. Das Problem betrifft ausschließlich die Inferenz (Tests und Intervalle), nicht die Punktschätzung.</div>
     </div>
     `,
     formeln: [
-      { label: 'Robuste Varianz', eq: String.raw`$$\text{Var}_{robust}(\hat{\beta}) = \dots$$`, desc: 'Korrektur nach White' }
+      { label: 'Breusch-Pagan', eq: String.raw`$$H_0: \text{Var}(u|x) = \sigma^2 \text{ (Homosked.)}$$`, desc: 'Test auf konstante Fehlervarianz' }
     ],
     aufgaben: [
       {
-        text: String.raw`Beeinflusst Heteroskedastizität die Unverzerrtheit des OLS-Schätzers?`,
+        text: String.raw`Sie schätzen ein Modell und finden $\hat{\beta}_1 = 3{,}2$ mit OLS-SE $= 1{,}0$ ($t = 3{,}2$). Mit robusten SE ergibt sich $SE_{robust} = 1{,}8$ ($t = 1{,}78$). Interpretieren Sie.`,
         steps: [
-          { text: `Interpretation: Welche Annahme wird durch Heteroskedastizität verletzt?`, eq: String.raw`\text{A5 (Homoskedastizität).}` },
-          { text: `Entscheidung: Ist A5 für Unverzerrtheit nötig?`, eq: String.raw`\text{Nein, für Unverzerrtheit sind nur A1-A4 nötig.}` }
+          { text: `Hat sich der Koeffizient geändert?`, eq: String.raw`\text{Nein, } \hat{\beta}_1 = 3{,}2 \text{ in beiden Fällen.}` },
+          { text: `Signifikanz bei $\alpha = 5\%$ (krit. Wert $\approx 1{,}96$)?`, eq: String.raw`\text{OLS: } 3{,}2 > 1{,}96 \text{ (signifikant). Robust: } 1{,}78 < 1{,}96 \text{ (nicht signifikant).}` },
+          { text: `Diagnose: Heteroskedastizität hat die OLS-SE nach unten verzerrt.`, eq: String.raw`\text{Scheinsignifikanz bei OLS.}` }
         ],
-        result: String.raw`Schätzer bleibt unverzerrt, aber Inferenz ist falsch.`
+        result: String.raw`Der Effekt ist bei korrekter Inferenz (robusten SE) nicht signifikant. OLS-SE waren zu klein.`
       }
     ],
     r_code: String.raw`
@@ -326,45 +342,99 @@ cor(data[, c("x1", "x2", "x3")])
 library(lmtest)
 library(sandwich)
 coeftest(model, vcov = vcovHC(model, type = "HC1"))
+
+# Breusch-Pagan-Test
+bptest(model)
     `
   },
   autocorrelation: {
-    motivation: 'In Zeitreihen hängen Fehlerterme oft zeitlich voneinander ab. Dies zerstört die Effizienz von OLS.',
+    motivation: 'In Zeitreihen hängen Fehlerterme oft zeitlich voneinander ab. Positive Autokorrelation führt dazu, dass OLS-Standardfehler systematisch zu klein ausfallen.',
     theorie: String.raw`
     <div class="section-block">
       <h3>Problemstellung</h3>
-      <p>Autokorrelation bedeutet $\text{Cov}(u_t, u_{t-s}) \neq 0$. Fehler aus der Vergangenheit beeinflussen die Gegenwart (z.B. Schocks in der Wirtschaft).</p>
+      <p>Autokorrelation bedeutet $\text{Cov}(u_t, u_{t-s}) \neq 0$ für $s \neq 0$. Das einfachste Modell ist AR(1):</p>
+      <div class="math-block">$$u_t = \rho\, u_{t-1} + \varepsilon_t, \quad |\rho| < 1$$</div>
+      <p>Positive Autokorrelation ($\rho > 0$): Auf einen positiven Fehler folgt wahrscheinlich ein weiterer positiver Fehler. Typisch bei Zeitreihen (BIP, Inflation), wo Schocks nachwirken.</p>
     </div>
     <div class="section-block">
-      <h3>Durbin-Watson Test</h3>
-      <p>Ein klassischer Test auf AR(1)-Autokorrelation. Der DW-Wert liegt zwischen 0 and 4. Ein Wert nahe 2 spricht gegen Autokorrelation.</p>
+      <h3>Konsequenzen</h3>
+      <p>Wie bei Heteroskedastizität: OLS bleibt <strong>unverzerrt</strong>, aber:</p>
+      <ul>
+        <li>$SE(\hat{\beta})$ wird <strong>unterschätzt</strong> bei positiver Autokorrelation → t-Werte zu groß → Scheinsignifikanz.</li>
+        <li>OLS ist nicht mehr BLUE — GLS (Generalized Least Squares) ist effizienter.</li>
+        <li>$R^2$ kann irreführend hoch sein.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Diagnostik: Durbin-Watson-Test</h3>
+      <p>Die DW-Statistik testet auf AR(1)-Autokorrelation:</p>
+      <div class="math-block">$$d = \frac{\sum_{t=2}^{n}(\hat{u}_t - \hat{u}_{t-1})^2}{\sum_{t=1}^n \hat{u}_t^2} \approx 2(1-\hat{\rho})$$</div>
+      <ul>
+        <li>$d \approx 2$: Keine Autokorrelation ($\rho \approx 0$).</li>
+        <li>$d \approx 0$: Starke positive Autokorrelation ($\rho \approx 1$).</li>
+        <li>$d \approx 4$: Starke negative Autokorrelation ($\rho \approx -1$).</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Abhilfe</h3>
+      <ul>
+        <li><strong>Newey-West-Standardfehler (HAC):</strong> Robuste Standardfehler, die sowohl Heteroskedastizität als auch Autokorrelation berücksichtigen.</li>
+        <li><strong>Cochrane-Orcutt:</strong> Transformiert das Modell, um die Autokorrelation herauszufiltern.</li>
+        <li><strong>Dynamisches Modell:</strong> Verzögerte abhängige Variable $y_{t-1}$ als Regressor aufnehmen.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>DW bei verzögerter abhängiger Variable:</strong> Enthält das Modell $y_{t-1}$ als Regressor, ist der DW-Test verzerrt (tendiert gegen 2). Nutzen Sie stattdessen den Breusch-Godfrey-Test.</div>
+      <div class="warn-box"><strong>Querschnittsdaten:</strong> Autokorrelation ist primär ein Zeitreihenproblem. Bei Querschnittsdaten ist die Reihenfolge der Beobachtungen irrelevant.</div>
     </div>
     `,
     formeln: [
-      { label: 'Durbin-Watson', eq: String.raw`$$d \approx 2(1-\hat{\rho})$$`, desc: 'Approximation via Korrelation' }
+      { label: 'AR(1)-Prozess', eq: String.raw`$$u_t = \rho\, u_{t-1} + \varepsilon_t$$`, desc: 'Autokorrelationsstruktur' },
+      { label: 'Durbin-Watson', eq: String.raw`$$d \approx 2(1-\hat{\rho})$$`, desc: 'Näherung via Autokorrelationskoeffizient' }
     ],
     aufgaben: [
       {
-        text: String.raw`Was passiert mit den OLS-Standardfehlern bei positiver Autokorrelation?`,
+        text: String.raw`Sie schätzen ein Zeitreihenmodell und erhalten $DW = 0{,}8$. Interpretieren Sie das Ergebnis und erklären Sie die Konsequenz für Ihre Standardfehler.`,
         steps: [
-          { text: `Interpretation:`, eq: String.raw`\text{Sie werden unterschätzt.}` },
-          { text: `Folge:`, eq: String.raw`\text{Die t-Werte werden künstlich zu groß (Scheinsignifikanz).}` }
+          { text: `$\hat{\rho}$ schätzen:`, eq: String.raw`\hat{\rho} \approx 1 - d/2 = 1 - 0{,}4 = 0{,}6` },
+          { text: `Interpretation: Starke positive Autokorrelation.`, eq: String.raw`\text{Fehler sind persistent — positiver Schock wird fortgesetzt.}` },
+          { text: `Konsequenz: OLS-SE sind zu klein.`, eq: String.raw`\text{t-Werte überschätzt → Variablen erscheinen fälschlicherweise signifikant.}` }
         ],
-        result: String.raw`Unterschätzung der Varianz.`
+        result: String.raw`$\hat{\rho} \approx 0{,}6$: Starke positive Autokorrelation. Standardfehler müssen korrigiert werden (z.B. Newey-West).`
       }
     ]
   },
   specification: {
-    motivation: 'Ein falsches Modell liefert falsche Antworten. Der Omitted Variable Bias ist das Hauptproblem der angewandten Ökonometrie.',
+    motivation: 'Ein falsches Modell liefert falsche Antworten. Der Omitted Variable Bias ist das zentrale Problem der angewandten Ökonometrie — er zerstört die Kausalinterpretation.',
     theorie: String.raw`
     <div class="section-block">
       <h3>Omitted Variable Bias (OVB)</h3>
-      <p>Wenn eine relevante Variable $z$ nicht im Modell ist UND $z$ mit $x$ korreliert, ist der OLS-Schätzer für $\beta_1$ verzerrt.</p>
-      <div class="math-block">$$E[\hat{\beta}_1] = \beta_1 + \beta_2 \frac{\text{Cov}(x,z)}{\text{Var}(x)}$$</div>
+      <p>Wahres Modell: $y = \beta_0 + \beta_1 x + \beta_2 z + u$. Geschätztes Modell (ohne $z$): $y = \gamma_0 + \gamma_1 x + v$. Dann gilt:</p>
+      <div class="math-block">$$E[\hat{\gamma}_1] = \beta_1 + \beta_2 \cdot \underbrace{\frac{\text{Cov}(x,z)}{\text{Var}(x)}}_{\delta_1}$$</div>
+      <p>Der Bias entsteht genau dann, wenn <strong>beide</strong> Bedingungen erfüllt sind: (1) $z$ hat einen Effekt auf $y$ ($\beta_2 \neq 0$) und (2) $z$ korreliert mit $x$ ($\delta_1 \neq 0$).</p>
     </div>
     <div class="section-block">
       <h3>Richtung des Bias</h3>
-      <p>Der Bias hängt vom Vorzeichen des Effekts der ausgelassenen Variable ($\beta_2$) und ihrer Korrelation mit $x$ ab.</p>
+      <p>Die Richtung ergibt sich aus dem Vorzeichen von $\beta_2 \cdot \delta_1$:</p>
+      <ul>
+        <li>$\beta_2 > 0$ und $\text{Cov}(x,z) > 0$ → <strong>positive Verzerrung</strong> (Überschätzung von $\beta_1$).</li>
+        <li>$\beta_2 > 0$ und $\text{Cov}(x,z) < 0$ → <strong>negative Verzerrung</strong> (Unterschätzung).</li>
+      </ul>
+      <p>Beispiel: Bildungsrendite. Fähigkeit ($z$) hat positiven Effekt auf Lohn ($\beta_2 > 0$) und korreliert positiv mit Bildung ($\delta_1 > 0$). Der OVB ist positiv — der Bildungseffekt wird <strong>überschätzt</strong>.</p>
+    </div>
+    <div class="section-block">
+      <h3>Inklusion irrelevanter Variablen</h3>
+      <p>Wird eine Variable aufgenommen, die keinen wahren Effekt hat ($\beta_2 = 0$), bleibt $\hat{\beta}_1$ unverzerrt. Der Preis: höhere Varianz (weniger Präzision). OVB existiert nur bei <strong>Weglassen relevanter</strong> Variablen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Proxy-Variablen und Kontrollen</h3>
+      <p>Wenn die ausgelassene Variable nicht messbar ist (z.B. Fähigkeit), kann ein <strong>Proxy</strong> (z.B. IQ-Test) den Bias reduzieren, aber nicht vollständig beseitigen. Je besser der Proxy mit $z$ korreliert, desto stärker wird der Bias reduziert.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Kontrollvariablen-Falle:</strong> Nicht jede Korrelation mit $y$ rechtfertigt die Aufnahme als Kontrollvariable. Eine Variable, die auf dem kausalen Pfad von $x$ nach $y$ liegt (Mediator), darf <strong>nicht</strong> kontrolliert werden — sonst wird der Effekt von $x$ fälschlich reduziert.</div>
+      <div class="warn-box"><strong>OVB ist nicht testbar:</strong> Man kann nicht testen, ob eine nicht beobachtete Variable den Schätzer verzerrt. Ökonomische Theorie und Argumentation sind nötig, nicht Statistik allein.</div>
     </div>
     `,
     formeln: [

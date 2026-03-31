@@ -50,19 +50,34 @@ export const CONTENT = {
     ]
   },
   vertretung: {
-    motivation: 'Man kann nicht überall gleichzeitig sein. Die Stellvertretung erlaubt rechtsgeschäftliches Handeln für einen anderen.',
+    motivation: 'Man kann nicht überall gleichzeitig sein. Die Stellvertretung erlaubt rechtsgeschäftliches Handeln für einen anderen — im Geschäftsleben unverzichtbar.',
     theorie: String.raw`
     <div class="section-block">
       <h3>Voraussetzungen (§ 164 BGB)</h3>
+      <p>Drei kumulative Voraussetzungen für wirksame Stellvertretung:</p>
       <ol>
-        <li>Eigene Willenserklärung des Vertreters.</li>
-        <li>In fremdem Namen (Offenkundigkeitsprinzip).</li>
-        <li>Innerhalb der Vertretungsmacht (Vollmacht oder Gesetz).</li>
+        <li><strong>Eigene Willenserklärung des Vertreters:</strong> Der Vertreter entscheidet selbst — er ist kein bloßer Bote (der nur eine fremde Erklärung übermittelt).</li>
+        <li><strong>Handeln in fremdem Namen (Offenkundigkeitsprinzip):</strong> Der Geschäftspartner muss erkennen können, dass nicht für den Vertreter selbst, sondern für einen anderen gehandelt wird.</li>
+        <li><strong>Innerhalb der Vertretungsmacht:</strong> Rechtsgeschäftlich durch Vollmacht (§ 166 ff.) oder kraft Gesetzes (z.B. Eltern für Minderjährige, § 1629).</li>
       </ol>
+      <p>Rechtsfolge: Die Wirkungen treffen direkt den <strong>Vertretenen</strong>, nicht den Vertreter.</p>
+    </div>
+    <div class="section-block">
+      <h3>Arten der Vertretungsmacht</h3>
+      <ul>
+        <li><strong>Vollmacht (gewillkürte Vertretungsmacht):</strong> Durch einseitige Erklärung des Vertretenen erteilt. Innenvollmacht (nur dem Vertreter gegenüber) vs. Außenvollmacht (dem Dritten gegenüber kundgetan).</li>
+        <li><strong>Prokura (§ 48 HGB):</strong> Handelsrechtliche Generalvollmacht — sehr weitreichend, nur durch eingetragenen Kaufmann erteilbar.</li>
+        <li><strong>Gesetzliche Vertretung:</strong> Eltern, Vormund, Geschäftsführer einer GmbH.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Vertreter ohne Vertretungsmacht (§ 177 BGB)</h3>
+      <p>Handelt jemand ohne oder über seine Vertretungsmacht hinaus, ist das Geschäft <strong>schwebend unwirksam</strong>. Der Vertretene kann genehmigen (§ 177 Abs. 1) oder ablehnen. Ohne Genehmigung haftet der Vertreter dem Geschäftspartner auf Schadensersatz (§ 179 BGB).</p>
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Handeln unter fremdem Namen:</strong> Hier tritt der Handelnde als der andere auf (Identitätstäuschung). Dies ist keine Stellvertretung!</div>
+      <div class="warn-box"><strong>Vertreter vs. Bote:</strong> Der Vertreter gibt eine eigene Willenserklärung ab. Der Bote übermittelt nur eine fremde Erklärung. Folge: Beim Vertreter kommt es auf dessen Geschäftsfähigkeit an, beim Boten auf die des Erklärenden.</div>
+      <div class="warn-box"><strong>Handeln unter fremdem Namen:</strong> Hier tritt der Handelnde als der andere auf (Identitätstäuschung). Dies ist keine Stellvertretung, sondern wird nach dem Empfängerhorizont beurteilt.</div>
     </div>
     `,
     formeln: [

@@ -96,16 +96,28 @@ export const CONTENT = {
     theorie: String.raw`
     <div class="section-block">
       <h3>Geldnachfrage</h3>
-      <p>Die Nachfrage nach Geld ($M^d$) steigt mit dem Nominaleinkommen ($PY$) und sinkt mit dem Zinssatz ($i$):</p>
-      <div class="math-block">$$M^d = PY \cdot L(i)$$</div>
+      <p>Haushalte halten Vermögen als Geld (liquide, kein Zins) oder als Anleihen (illiquide, Zins $i$). Die Nachfrage nach Geld ($M^d$) steigt mit dem Nominaleinkommen ($PY$) und sinkt mit dem Zinssatz ($i$):</p>
+      <div class="math-block">$$M^d = PY \cdot L(i), \quad L'(i) < 0$$</div>
+      <p>Höheres Einkommen → mehr Transaktionen → mehr Geld benötigt. Höherer Zins → Opportunitätskosten der Geldhaltung steigen → weniger Geld gehalten.</p>
     </div>
     <div class="section-block">
-      <h3>Zinsbestimmung</h3>
-      <p>Im Gleichgewicht entspricht das Geldangebot $M$ der Geldnachfrage $M^d$. Die Zentralbank steuert $M$ über Offenmarktgeschäfte.</p>
+      <h3>Gleichgewicht auf dem Finanzmarkt</h3>
+      <p>Die Zentralbank kontrolliert das Geldangebot $M^s$. Im Gleichgewicht:</p>
+      <div class="math-block">$$M^s = M^d = PY \cdot L(i)$$</div>
+      <p>Bei gegebenem $Y$ und $P$ bestimmt diese Gleichung den Gleichgewichtszins $i^*$. Eine Erhöhung von $M^s$ senkt $i$; eine Erhöhung von $Y$ erhöht $i$.</p>
+    </div>
+    <div class="section-block">
+      <h3>Offenmarktgeschäfte</h3>
+      <p>Die Zentralbank kauft Anleihen → Geldmenge steigt ($M \uparrow$) → Zins sinkt. Verkauft Anleihen → Geldmenge sinkt → Zins steigt. Anleihenpreis und Zins bewegen sich gegenläufig: $P_B = \frac{\text{Nennwert}}{1+i}$.</p>
     </div>
     <div class="section-block">
       <h3>Liquiditätsfalle</h3>
-      <p>Sinkt der Zins auf Null, wollen die Leute nur noch Geld halten (horizontale Geldnachfrage). Die Geldpolitik verliert ihre Wirkung auf den Zins.</p>
+      <p>Sinkt der Zins auf die Zinsuntergrenze (effektiv Null), wollen die Leute nur noch Geld halten. Die Geldnachfrage wird horizontal. Weitere Geldmengenerhöhungen senken den Zins nicht mehr — die konventionelle Geldpolitik ist wirkungslos.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Anleihenpreis vs. Zins:</strong> Steigt der Anleihenpreis, sinkt der Zins (und umgekehrt). Viele Studierende behandeln beides als unabhängig — sie sind aber zwei Seiten derselben Medaille.</div>
+      <div class="warn-box"><strong>Real vs. nominal:</strong> In diesem Kapitel ist der Zins nominal ($i$). Der Realzins ($r = i - \pi^e$) kommt erst im IS-LM-PC-Modell ins Spiel.</div>
     </div>
     `,
     formeln: [
@@ -126,17 +138,28 @@ export const CONTENT = {
     motivation: 'Das IS-LM-Modell führt Güter- und Finanzmärkte zusammen. Es zeigt, wie Fiskal- und Geldpolitik gemeinsam Produktion und Zins bestimmen.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Die IS-Kurve</h3>
-      <p>Beschreibt das Gleichgewicht auf dem Gütermarkt. Ein höherer Zins senkt Investitionen und damit die Produktion. Die IS-Kurve verläuft fallend.</p>
+      <h3>Die IS-Kurve (Gütermarkt)</h3>
+      <p>Die IS-Kurve zeigt alle $(Y, i)$-Kombinationen, bei denen der Gütermarkt im Gleichgewicht ist:</p>
       <div class="math-block">$$Y = C(Y-T) + I(Y, i) + G$$</div>
+      <p>Die IS-Kurve verläuft <strong>fallend</strong>: Höherer Zins → weniger Investitionen → weniger Produktion. Verschiebungen: $G \uparrow$ oder $T \downarrow$ verschiebt IS nach rechts.</p>
     </div>
     <div class="section-block">
-      <h3>Die LM-Kurve</h3>
-      <p>Beschreibt das Gleichgewicht auf dem Finanzmarkt. Die Zentralbank setzt heute meist direkt den Zins ($i = \bar{i}$). Dann verläuft die LM-Kurve horizontal.</p>
+      <h3>Die LM-Kurve (Finanzmarkt)</h3>
+      <p>Traditionell: $M/P = Y \cdot L(i)$ — bei gegebener Geldmenge eine steigende Kurve. Modern (Zinssteuerung): Die Zentralbank setzt den Zins direkt ($i = \bar{i}$), die LM-Kurve ist <strong>horizontal</strong>.</p>
+      <p>Verschiebung der LM: Zentralbank erhöht $\bar{i}$ → LM verschiebt sich nach oben.</p>
     </div>
     <div class="section-block">
-      <h3>Politik-Mix</h3>
-      <p>Fiskalexpansion ($G \uparrow$) verschiebt IS nach rechts. Geldpolitische Straffung ($i \uparrow$) verschiebt LM nach oben.</p>
+      <h3>Gleichgewicht und Politik-Mix</h3>
+      <p>Der Schnittpunkt von IS und LM bestimmt $(Y^*, i^*)$. Fiskalpolitik verschiebt IS, Geldpolitik verschiebt LM. Ein <strong>Policy-Mix</strong> (z.B. Fiskalexpansion + Geldpolitik hält $i$ konstant) vermeidet Crowding-Out und maximiert die Produktionswirkung.</p>
+    </div>
+    <div class="section-block">
+      <h3>Crowding-Out (bei fester Geldmenge)</h3>
+      <p>Wenn die LM steigend ist (feste Geldmenge): $G \uparrow$ → $Y \uparrow$ → Geldnachfrage steigt → $i \uparrow$ → Investitionen sinken. Der Zinsanstieg <strong>verdrängt</strong> (crowds out) private Investitionen teilweise. Der Multiplikator ist kleiner als im reinen Gütermarktmodell.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>IS-LM ist kurze Frist:</strong> Das Modell nimmt ein festes Preisniveau an. Es kann nicht erklären, was passiert, wenn Preise und Löhne sich anpassen — dafür braucht man das IS-LM-PC-Modell.</div>
+      <div class="warn-box"><strong>Crowding-Out bei Zinssteuerung:</strong> Wenn die Zentralbank den Zins fixiert (horizontale LM), gibt es kein Crowding-Out. Der Multiplikator entspricht dem des reinen Gütermarktmodells.</div>
     </div>
     `,
     formeln: [
@@ -158,18 +181,35 @@ export const CONTENT = {
     motivation: 'In der mittleren Frist passen sich Preise und Löhne an. Wir untersuchen die Verhandlungsmacht von Arbeitnehmern und die Preissetzung von Firmen.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Lohnsetzung (WS)</h3>
-      <p>Löhne hängen vom erwarteten Preisniveau ($P^e$), der Arbeitslosenquote ($u$) und Sammelvariablen ($z$) ab:</p>
-      <div class="math-block">$$W = P^e \cdot F(u, z)$$</div>
+      <h3>Lohnsetzung (WS-Kurve)</h3>
+      <p>Löhne werden verhandelt. Sie hängen vom erwarteten Preisniveau ($P^e$), der Arbeitslosenquote ($u$) und institutionellen Faktoren ($z$ wie Arbeitslosenversicherung, Mindestlohn, Gewerkschaftsmacht) ab:</p>
+      <div class="math-block">$$W = P^e \cdot F(u, z), \quad F_u < 0, \; F_z > 0$$</div>
+      <p>Höhere Arbeitslosigkeit schwächt die Verhandlungsposition der Arbeitnehmer → niedrigerer Nominallohn. In Reallohnschreibweise: $W/P = F(u, z)$ — die WS-Kurve verläuft <strong>fallend</strong> im $(u, W/P)$-Diagramm.</p>
     </div>
     <div class="section-block">
-      <h3>Preissetzung (PS)</h3>
-      <p>Firmen setzen Preise als Aufschlag ($\mu$) auf die Grenzkosten (Lohn $W$):</p>
-      <div class="math-block">$$P = (1 + \mu) W$$</div>
+      <h3>Preissetzung (PS-Kurve)</h3>
+      <p>Firmen setzen Preise als Aufschlag ($\mu$) auf die Grenzkosten. Bei konstanter Arbeitsproduktivität (1 Einheit Arbeit → 1 Einheit Output):</p>
+      <div class="math-block">$$P = (1 + \mu) W \quad \Rightarrow \quad \frac{W}{P} = \frac{1}{1+\mu}$$</div>
+      <p>Die PS-Kurve ist <strong>horizontal</strong> im $(u, W/P)$-Diagramm. Der Reallohn, den Firmen zahlen, ist unabhängig von der Arbeitslosigkeit — er hängt nur vom Markup $\mu$ ab.</p>
     </div>
     <div class="section-block">
-      <h3>Natürliche Arbeitslosigkeit</h3>
-      <p>Das Gleichgewicht auf dem Arbeitsmarkt ($W/P_{WS} = W/P_{PS}$) bestimmt die natürliche Arbeitslosenquote $u_n$.</p>
+      <h3>Natürliche Arbeitslosigkeit ($u_n$)</h3>
+      <p>Im Gleichgewicht stimmen die Reallohnforderungen (WS) mit dem von Firmen gezahlten Reallohn (PS) überein:</p>
+      <div class="math-block">$$F(u_n, z) = \frac{1}{1+\mu}$$</div>
+      <p>$u_n$ ist die <strong>strukturelle</strong> Arbeitslosenquote. Sie steigt, wenn $\mu$ (Marktmacht) oder $z$ (Arbeitsmarktrigiditäten) zunehmen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Komparative Statik</h3>
+      <ul>
+        <li><strong>Stärkere Gewerkschaften ($z \uparrow$):</strong> WS verschiebt sich nach oben → $u_n \uparrow$.</li>
+        <li><strong>Höherer Markup ($\mu \uparrow$):</strong> PS verschiebt sich nach unten → $u_n \uparrow$.</li>
+        <li><strong>Höhere Produktivität:</strong> PS steigt (Reallohn steigt), WS kann sich ebenfalls verschieben — Nettoeffekt auf $u_n$ ambivalent.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>WS ≠ Arbeitsangebot:</strong> Die WS-Kurve ist keine klassische Arbeitsangebotskurve. Sie beschreibt Lohnverhandlungsergebnisse, nicht individuelle Arbeitsangebotsentscheidungen.</div>
+      <div class="warn-box"><strong>$u_n$ ist nicht fix:</strong> Die natürliche Arbeitslosenquote ändert sich mit Institutionen, Regulierung und Marktstruktur. Sie ist kein physikalisches Gesetz, sondern ein Gleichgewichtskonzept.</div>
     </div>
     `,
     formeln: [

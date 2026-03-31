@@ -1,0 +1,21 @@
+// ============================================================
+// SRS CONFIGURATION — Jahresabschluss
+// Spaced Repetition System keys and interval levels
+// ============================================================
+
+export const SRS_KEY        = 'ja_srs_v1';
+export const PROGRESS_KEY   = 'ja_progress_v1';
+export const LAST_KEY       = 'ja_last_v1';
+export const STREAK_KEY     = 'ja_streak_v1';
+export const THEME_KEY      = 'ja_theme_v1';
+export const QUESTION_STATS_KEY = 'ja_question_stats_v1';
+export const FE_STATE_KEY   = 'ja_fe_state_v1';
+
+/** Default ease factor for a new SRS card */
+export const SRS_EASE_DEFAULT = 2.5;
+export const SRS_EASE_MIN     = 1.3;
+export const SRS_EASE_MAX     = 3.0;
+
+/** Number of questions in the quick exam */
+export const EXAM_QUESTIONS = 10;
+export const EXAM_DURATION_MS = 20 * 60 * 1000; // 20 minutes

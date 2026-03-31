@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v10.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v11.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -11,7 +11,7 @@ const BASE_STEP_PROBLEMS = {
   wechselkurs: [
     {
       title: 'Wechselkurs-Regime & Anpassung',
-      context: 'Inflation pi = 5%, pi* = 2%. Nominalkurs E sinkt um 1%.',
+      context: 'Inland hat Inflation pi = 5%, pi* = 2%. Nominalkurs E sinkt um 1%.',
       steps: [
         { 
           q: '[1. Interpretation] Liegt nominal eine Auf- oder Abwertung vor?', 
@@ -30,6 +30,7 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[3. Validation] Entspricht dies einer Verbesserung der Wettbewerbsfähigkeit?', 
           answer: ['nein', 'no'], 
+          options: { problemId: 'm2_wk', role: 'VALIDATION' },
           hint: 'Reale Aufwertung (epsilon↑) macht inländische Güter relativ teurer.', 
           explain: 'Wettbewerbsfähigkeit sinkt.' 
         }
@@ -57,8 +58,8 @@ const BASE_STEP_PROBLEMS = {
         },
         { 
           q: '[3. Validation] Erklären Sie die Logik-Kette für die Kursverteidigung.', 
-          answer: ['erwartung ↓ → i ↑'],
-          options: { problemId: 'm2_uip', premise: 'i↑', role: 'e' },
+          answer: ['i↑ → e↑'],
+          options: { problemId: 'm2_uip', role: 'VALIDATION', premise: 'P1_UP' },
           hint: 'Zinserhöhung führt zu...?', 
           explain: 'i↑ ⟹ Kapitalzufluss ⟹ E↑.' 
         }
@@ -73,14 +74,14 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[1. Interpretation] Welcher Zustand der Kapitalakkumulation liegt hier vor?', 
           answer: ['überakkumulation', 'over-accumulation'], 
-          options: { problemId: 'm2_solow', stepId: 'state_id', isDecision: true },
+          options: { problemId: 'm2_solow', stepId: 'state_id', isDecision: true, contextType: 'growth' },
           hint: 'k > k_GR.', 
           explain: 'Die Wirtschaft hat zu viel Kapital.' 
         },
         { 
           q: '[2. Validation] Erklären Sie die Konsequenz einer Sparquoten-Senkung (s↓).', 
           answer: ['k > kgr → c ↑'], 
-          options: { problemId: 'm2_solow', premise: 'OVERACCUM', role: 'C' },
+          options: { problemId: 'm2_solow', role: 'VALIDATION', premise: 'OVERACCUM_STATIC' },
           hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
           explain: 's↓ ⟹ weniger Kapital ⟹ c↑.' 
         }

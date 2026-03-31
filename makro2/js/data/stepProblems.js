@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v9.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v10.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -18,7 +18,7 @@ const BASE_STEP_PROBLEMS = {
           answer: ['abwertung', '↓'], 
           options: { problemId: 'm2_wk', stepId: 'nom_dir', isDecision: true },
           hint: 'E sinkt in Mengennotierung.', 
-          explain: 'E ↓ ⟹ Abwertung.' 
+          explain: 'Ein sinkendes E bedeutet Abwertung.' 
         },
         { 
           q: '[2. Execution] Berechnen Sie die Änderung des realen Wechselkurses epsilon.', 
@@ -56,9 +56,9 @@ const BASE_STEP_PROBLEMS = {
           explain: 'i = 2% + 3% = 5%.' 
         },
         { 
-          q: '[3. Validation] Beschreiben Sie die Logik-Kette für die Kursverteidigung.', 
-          answer: ['i↑ → e↑'],
-          options: { problemId: 'm2_uip', premise: 'i↑' },
+          q: '[3. Validation] Erklären Sie die Logik-Kette für die Kursverteidigung.', 
+          answer: ['erwartung ↓ → i ↑'],
+          options: { problemId: 'm2_uip', premise: 'i↑', role: 'e' },
           hint: 'Zinserhöhung führt zu...?', 
           explain: 'i↑ ⟹ Kapitalzufluss ⟹ E↑.' 
         }
@@ -78,9 +78,9 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Die Wirtschaft hat zu viel Kapital.' 
         },
         { 
-          q: '[2. Validation] Beschreiben Sie die Konsequenz einer Sparquoten-Senkung (s↓).', 
-          answer: ['k>kgr → c↑'], 
-          options: { problemId: 'm2_solow', premise: 'k>kgr' },
+          q: '[2. Validation] Erklären Sie die Konsequenz einer Sparquoten-Senkung (s↓).', 
+          answer: ['k > kgr → c ↑'], 
+          options: { problemId: 'm2_solow', premise: 'OVERACCUM', role: 'C' },
           hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
           explain: 's↓ ⟹ weniger Kapital ⟹ c↑.' 
         }

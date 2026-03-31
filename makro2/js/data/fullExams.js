@@ -1,6 +1,6 @@
 // ============================================================
 // FULL EXAMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v9.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v10.0: Precision Under Uncertainty
 // ============================================================
 
 export const FULL_EXAMS = {
@@ -36,7 +36,7 @@ export const FULL_EXAMS = {
         label: 'Block A',
         points: 40,
         type: 'text-block',
-        title: 'UIP-Verteidigung & Regime-Druck',
+        title: 'UIP-Verteidigung & Regime-Wahl',
         preamble: String.raw`Aktueller Kurs $E=1{,}0$. Erwartung $E^e=0{,}97$. Weltzins $i^*=2\%$. Freier Kapitalverkehr.`,
         questions: [
           {
@@ -62,8 +62,8 @@ export const FULL_EXAMS = {
             points: 20,
             type: 'text',
             text: '[1.3 Validation] Beschreiben Sie die Logik-Kette für die Kursverteidigung.',
-            correct: ['i↑ → e↑'],
-            options: { problemId: 'hm2_a', premise: 'i↑' },
+            correct: ['erwartung ↓ → i ↑'],
+            options: { problemId: 'hm2_a', premise: 'i↑', role: 'e' },
             feedback: String.raw`Zinserhöhung neutralisiert den Abwertungsdruck.`,
           }
         ]
@@ -88,9 +88,9 @@ export const FULL_EXAMS = {
             id: 'p2a_2',
             points: 10,
             type: 'text',
-            text: '[2.2 Validation] Beschreiben Sie die Konsequenz einer Sparquoten-Senkung (s↓).',
+            text: '[2.2 Validation] Erklären Sie die Konsequenz einer Sparquoten-Senkung (s↓).',
             correct: ['k>kgr → c↑'],
-            options: { problemId: 'hm2_b', premise: 'k>kgr' },
+            options: { problemId: 'hm2_b', premise: 'OVERACCUM', role: 'C' },
             feedback: String.raw`In der Überakkumulation erhöht weniger Sparen den Konsum.`,
           }
         ]

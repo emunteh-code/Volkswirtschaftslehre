@@ -93,17 +93,23 @@ export const MODULES = [
     slug: "statistik",
     title: "Statistik",
     shortTitle: "Statistik",
-    summary: "Statistik von Datenbeschreibung ueber Inferenz bis Regression mit Aufgaben, Visualisierungen und R-Training.",
+    summary: "Datenbeschreibung, Wahrscheinlichkeitsrechnung und induktive Statistik (Schaetzen und Testen).",
     accent: "#0288d1",
     type: "quantitative_coding",
     status: "live",
     href: "./statistik/index.html",
     materials: [
-      "Vorlesungsfolien VL_01 bis VL_14, Uebungen, Grossuebungen und Tutorien",
-      "Coding-nahe Statistikpraxis mit Wiederholung, Verteilungslogik und klausurrelevantem Datenmaterial",
-      "Datensaetze wie titanic.csv, GrowthSW.csv, HousePrices.csv und Zuckerrohr.csv"
+      "Deskriptive Statistik und Lage- und Streuungsmasse",
+      "Wahrscheinlichkeitsrechnung und Zufallsvariablen",
+      "Induktive Statistik: Hypothesentests und Intervalle"
     ],
     sourcePath: `${sourceRoot}/Statistik`,
+    portalState: {
+      progressKey: "statistik_progress_v1",
+      srsKey: "statistik_srs_v1",
+      lastKey: "statistik_last_v1",
+      chapterCount: 8
+    },
     rLab: {
       intro: "Diese Aufgaben greifen die typischen R-Arbeitsweisen aus Tutorium und Uebung auf. Wenn die Runtime nicht verfuegbar ist, bleibt die gleiche Uebungslogik mit Musterabgleich und Hinweisen erhalten.",
       lessons: [

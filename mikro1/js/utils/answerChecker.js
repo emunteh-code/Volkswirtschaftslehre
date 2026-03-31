@@ -1,6 +1,6 @@
 // ============================================================
-// VWL SEMANTIC LOGIC ENGINE — Adversarial Hardening v12.1
-// PRECISION UNDER UNCERTAINTY: Anti-Gaming & Global Model Lock
+// VWL SEMANTIC LOGIC ENGINE — Stability & Fairness v12.2
+// PRECISION UNDER UNCERTAINTY: Context Check & Conditional Revision
 // ============================================================
 
 const TOKEN_MAP = {
@@ -17,6 +17,7 @@ const TOKEN_MAP = {
   // Variables
   'x1': 'VAR_X1', 'x2': 'VAR_X2', 'nachfrage': 'VAR_D', 'demand': 'VAR_D', 'angebot': 'VAR_S', 'supply': 'VAR_S',
   'output': 'VAR_Y', 'y': 'VAR_Y', 'konsum': 'VAR_C', 'c': 'VAR_C', 'kapital': 'VAR_K', 'k': 'VAR_K',
+  'zins': 'VAR_I', 'preis': 'VAR_P', 'inflation': 'VAR_PI', 'kurs': 'VAR_E',
   // Causal Connectors
   'weil': 'CAUSAL', 'because': 'CAUSAL', 'da': 'CAUSAL', 'führt': 'CAUSAL', 'leads': 'CAUSAL', 'bewirkt': 'CAUSAL', 'due': 'CAUSAL',
   // Confidence Markers
@@ -43,7 +44,6 @@ export function tokenize(input) {
 }
 
 function hasSyntacticStructure(tokens) {
-  // Simple check for subject (Variable/Concept) -> Direction
   const hasSubject = tokens.some(t => t.startsWith('VAR_') || t.startsWith('CON_'));
   const hasDir = tokens.some(t => t.startsWith('DIR_'));
   return hasSubject && hasDir;
@@ -88,42 +88,58 @@ export class VWLBenchmarkEvaluator {
     const tokens = tokenize(input);
     const dir = tokens.find(t => t.startsWith('DIR_')) || null;
     const hasConfidence = tokens.includes('CONF_HIGH');
+    const hasCausal = tokens.includes('CAUSAL');
+    const hasAmbig = tokens.includes('DIR_AMBIG');
     
     const res = { score: 1.0, logic_score: 1.0, calc_score: 1.0, correct: false, msg: '', state: this.state };
+    const caps = [1.0];
 
-    // 1. Syntactic structure check (Anti-Token Gaming)
-    if (input.length > 5 && !hasSyntacticStructure(tokens)) {
-      res.logic_score *= 0.5;
-      res.msg += "GAMING DETECTED: Bitte formulieren Sie eine strukturierte ökonomische Begründung. ";
+    // 1. Syntactic structure check (Fairness: only for longer inputs)
+    if (input.trim().length > 12 && !hasSyntacticStructure(tokens)) {
+      res.logic_score *= 0.85;
+      res.msg += "HINWEIS: Bitte strukturieren Sie Ihre ökonomische Begründung deutlicher. ";
     }
 
-    // 2. Variable Target Validation
+    // 2. Variable Target Validation (Stability)
     if (targetVar && tokens.some(t => t.startsWith('VAR_'))) {
       const detectedVars = tokens.filter(t => t.startsWith('VAR_'));
       if (!detectedVars.includes(targetVar)) {
-        res.logic_score *= 0.5;
-        res.msg += `FALSCHE VARIABLE: Ihre Begründung bezieht sich nicht auf ${targetVar}. `;
+        caps.push(0.5);
+        res.msg += `FALSCHE VARIABLE: Ihre Begründung bezieht sich nicht auf das gesuchte Ziel (${targetVar}). `;
       }
     }
 
-    // 3. Ambiguity Hardening
-    if (dir === 'DIR_AMBIG') {
-      if (!validateAmbiguity(tokens)) {
-        res.logic_score = 0;
-        res.msg += "AMBIGUITY REJECTED: Kausale Begründung der konkurrierenden Effekte fehlt. ";
-      }
+    // 3. Mechanism-Context Check (v12.2)
+    if (role.startsWith('CON_') && tokens.some(t => t.startsWith('CON_'))) {
+        const detectedConcepts = tokens.filter(t => t.startsWith('CON_'));
+        if (!detectedConcepts.includes(role)) {
+            res.logic_score *= 0.9; 
+            res.msg += `KONTEXT: Der genannte Mechanismus ist eventuell ungenau. `;
+        }
     }
 
-    // 4. Model Lock & Consistency
+    // 4. Ambiguity Validation
+    if (dir === 'DIR_AMBIG' && !validateAmbiguity(tokens)) {
+      res.logic_score = 0;
+      res.msg += "AMBIGUITY REJECTED: Kausale Begründung konkurrierender Effekte fehlt. ";
+    }
+
+    // 5. Conditional Model Revision (v12.2)
     if (modelId && isDecision) {
-      this.state.modelLock = modelId;
-    }
-    if (this.state.modelLock && premise && premise !== this.state.modelLock) {
-      res.logic_score *= 0.4;
-      res.msg += `MODEL INCONSISTENCY: Sie widersprechen dem zuvor gewählten Modell (${this.state.modelLock}). `;
+        if (this.state.modelLock && this.state.modelLock !== modelId) {
+            if (!hasCausal && !hasAmbig) {
+                caps.push(0.4);
+                res.msg += `MODELL-INKONSISTENZ: Widerspruch zum zuvor gewählten Modell (${this.state.modelLock}) ohne explizite Begründung. `;
+            } else {
+                res.msg += `HINWEIS: Modell zu ${modelId} revidiert. `;
+                this.state.modelLock = modelId;
+            }
+        } else {
+            this.state.modelLock = modelId;
+        }
     }
 
-    // 5. Model alignment (Directional)
+    // 6. Model alignment (Directional)
     let logicError = false;
     if (premise && MODEL_CONSTRAINTS[premise]) {
       const expected = MODEL_CONSTRAINTS[premise][role];
@@ -133,13 +149,13 @@ export class VWLBenchmarkEvaluator {
       }
     }
 
-    // 6. Confidence Penalty
-    if (hasConfidence && logicError) {
+    // 7. Controlled Confidence Penalty (v12.2)
+    if (hasConfidence && logicError && !hasCausal) {
       res.logic_score *= 0.5;
-      res.msg += "CONFIDENCE PENALTY: Übersteigerte Gewissheit bei falscher Logik. ";
+      res.msg += "CONFIDENCE PENALTY: Übersteigerte Gewissheit bei falscher Logik ohne Begründung. ";
     }
 
-    // 7. Dependency & Escalation
+    // 8. Dependency & Escalation
     if (dependsOn && this.state.steps[dependsOn]) {
       const prev = this.state.steps[dependsOn];
       if (prev.logic_score < 0.5) {
@@ -152,21 +168,23 @@ export class VWLBenchmarkEvaluator {
       }
     }
 
-    // 8. Hard Zero Rule
+    // 9. Hard Zero Rule & Calculation
     const numInput = parseFloat(String(input).replace(',', '.'));
     if (logicError) {
       res.logic_score = Math.min(res.logic_score, 0.4);
       res.calc_score = 0; // HARD ZERO
-      res.msg += "HARD ZERO: Korrekte Logik ist Voraussetzung für numerische Punkte. ";
+      res.msg += "HARD ZERO: Korrekte Logik erforderlich für numerische Punkte. ";
       if (isDecision) this.state.fatalErrorCount++;
     } else {
       let numericMatch = false;
       for (const a of expectedAnswers) {
         const numA = parseFloat(String(a).replace(',', '.'));
         if (!isNaN(numInput) && !isNaN(numA)) {
-          if (Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < (res.logic_score > 0.9 ? 0.10 : 0.02)) {
+          // Minor Error Tolerance: slightly more generous threshold if logic is perfect
+          const baseTolerance = (res.logic_score > 0.95) ? 0.12 : 0.02;
+          if (Math.abs(numInput - numA) / Math.max(1, Math.abs(numA)) < baseTolerance) {
             numericMatch = true; 
-            res.calc_score = Math.abs(numInput - numA) < 0.001 ? 1.0 : 0.8; 
+            res.calc_score = Math.abs(numInput - numA) < 0.001 ? 1.0 : 0.85; 
             break;
           }
         } else if (input.toLowerCase().includes(String(a).toLowerCase())) {
@@ -180,17 +198,17 @@ export class VWLBenchmarkEvaluator {
       }
     }
 
-    // 9. Scoring & Global Caps
+    // 10. Scoring & Global Caps (Priority Rule: v12.2)
     res.score = res.logic_score * res.calc_score;
-    if (this.state.fatalErrorCount > 1) {
-      res.score = Math.min(res.score, 0.5); // Global escalation
-      res.msg += "GLOBAL ESCALATION: Multiple Logikfehler im Problem. ";
-    }
+    if (this.state.fatalErrorCount > 1) caps.push(0.5);
 
     if (role === 'VALIDATION' && res.score < 0.8) {
-      res.score = logicError ? 0.25 : 0.4;
-      res.msg = `VALIDATION CAP (${res.score}): ${res.msg}`;
+      caps.push(logicError ? 0.25 : 0.4);
+      res.msg = `VALIDATION CAP: ${res.msg}`;
     }
+
+    // Apply priority cap
+    res.score = Math.min(res.score, ...caps);
 
     res.correct = res.score > 0.8;
     if (isDecision || res.correct || res.score > 0.4) {

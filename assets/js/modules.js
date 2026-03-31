@@ -24,6 +24,28 @@ export const MODULES = [
     }
   },
   {
+    slug: "mikro2",
+    title: "Mikroökonomik II",
+    shortTitle: "Mikroökonomik II",
+    summary: "Spieltheorie, Oligopoltheorie, Allgemeines Gleichgewicht und Marktversagen.",
+    accent: "#1b5e20",
+    type: "quantitative",
+    status: "live",
+    href: "./mikro2/index.html",
+    materials: [
+      "Standardcurriculum der Mikroökonomik II",
+      "Übungsaufgaben zu strategischer Interaktion und Wohlfahrt",
+      "Interaktive Nash-Gleichgewichte und Marktversagens-Modelle"
+    ],
+    sourcePath: `${sourceRoot}/Mikroökonomik II`,
+    portalState: {
+      progressKey: "mikro2_progress_v1",
+      srsKey: "mikro2_srs_v1",
+      lastKey: "mikro2_last_v1",
+      chapterCount: 7
+    }
+  },
+  {
     slug: "makro2",
     title: "Makroökonomik II",
     shortTitle: "Makroökonomik II",

@@ -223,6 +223,11 @@ const LANDING_STORIES = {
     tile: "Haushaltswahl, Unternehmen und Marktlogik",
     line: "Graphen, Aufgaben und Exam-Drills fuer die Mikro-Basis."
   },
+  mikro2: {
+    description: "Lerne Spieltheorie, Oligopole und Marktversagen in einer dichten, logikorientierten Lernspur mit interaktiven Nash-Gleichgewichten.",
+    tile: "Strategie, Gleichgewicht und Marktversagen",
+    line: "Fortgeschrittene Mikro mit Graphen, Logikketten und Drills."
+  },
   makro2: {
     description: "Arbeite offene Makrooekonomik, Wachstum und Wirtschaftspolitik in einem Lernfluss durch, der Modelle, Intuition und Aufgaben sichtbar zusammenhaelt.",
     tile: "Offene Makro, Wachstum und Policy",
@@ -294,6 +299,13 @@ function buildLandingArtworkSvg(slug) {
         <path d="M104 400C182 312 250 246 396 206C492 180 562 166 632 138" stroke="#F7F2EA" stroke-opacity=".86" stroke-width="4"/>
         <path d="M120 394C206 360 272 280 344 208C404 148 492 120 618 104" stroke="#F7F2EA" stroke-opacity=".38" stroke-width="3"/>
         <circle cx="394" cy="206" r="10" fill="#F7F2EA" fill-opacity=".18"/>
+      </svg>`;
+    case "mikro2":
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" fill="none">
+        <path d="M100 400L250 150L400 400Z" stroke="#F7F2EA" stroke-opacity=".4" stroke-width="3"/>
+        <circle cx="250" cy="150" r="12" fill="#F7F2EA" fill-opacity=".2"/>
+        <path d="M120 350C200 300 300 300 380 350" stroke="#F7F2EA" stroke-opacity=".7" stroke-width="4"/>
+        <path d="M80 420H640" stroke="#F7F2EA" stroke-opacity=".3" stroke-width="2"/>
       </svg>`;
     case "makro2":
       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" fill="none">

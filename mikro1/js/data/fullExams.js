@@ -1,6 +1,6 @@
 // ============================================================
 // FULL EXAMS DATA — Mikroökonomik I
-// FINAL BENCHMARK STANDARD v10.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v12.0: Logic First Standard
 // ============================================================
 
 export const FULL_EXAMS = {
@@ -24,25 +24,25 @@ probe_2024: {
 },
 hard_mock_mikro1_2026: {
     id: 'hard_mock_mikro1_2026',
-    title: 'Mikro I - Simulation v8.0 (60 Min)',
-    subtitle: 'Diagnostic Pipeline & Logical Consistency',
+    title: 'Mikro I - Simulation v9.0 (60 Min)',
+    subtitle: 'Multiplicative Scoring & Model Hierarchy',
     duration: 60,
     aufgaben: [
       {
         label: 'Block A',
         points: 30,
         type: 'text-block',
-        title: 'Slutsky-Zerlegung (Diagnostic)',
+        title: 'Slutsky & GRS-Logik',
         preamble: String.raw`Nutzenfunktion $u = x_1 x_2$. Der Preis $p_1$ sinkt von $4$ auf $1$. ($p_2 = 1, m = 40$).`,
         questions: [
           {
             id: 'm1a_1',
             points: 10,
             type: 'text',
-            text: '[1.1 Interpretation] Bestimmen Sie qualitativ die Richtung des SE für Gut 1. (Symbol erlaubt)',
+            text: '[1.1 Interpretation] Bestimmen Sie qualitativ die Richtung des Substitutionseffekts (SE) für Gut 1. (Symbol erlaubt)',
             correct: ['positiv', '↑', 'se > 0'],
-            options: { problemId: 'hm1_a', stepId: 'se_dir', isDecision: true },
-            feedback: String.raw`Gut 1 wird relativ billiger ⟹ Substitutionseffekt ist positiv.`,
+            options: { problemId: 'hm1_final', stepId: 'se_dir', isDecision: true },
+            feedback: String.raw`Gut 1 wird relativ billiger ⟹ SE positiv.`,
           },
           {
             id: 'm1a_2',
@@ -50,17 +50,17 @@ hard_mock_mikro1_2026: {
             type: 'text',
             text: '[1.2 Execution] Berechnen Sie den reinen Substitutionseffekt (SE).',
             correct: ['7.5', '7,5'],
-            options: { problemId: 'hm1_a', dependsOn: 'se_dir', role: 'consumption_quantity' },
-            feedback: String.raw`$SE = 12{,}5 - 5 = 7{,}5$.`,
+            options: { problemId: 'hm1_final', dependsOn: 'se_dir', role: 'consumption_quantity' },
+            feedback: String.raw`$SE = 7{,}5$.`,
           },
           {
             id: 'm1a_3',
             points: 10,
             type: 'text',
-            text: '[1.3 Validation] Beschreiben Sie die Logik-Kette für dieses Ergebnis.',
-            correct: ['p1↓ → se↑ → x1↑'],
-            options: { problemId: 'hm1_a', premise: 'P1_DOWN', role: 'X1' },
-            feedback: String.raw`Preis sinkt ⟹ SE positiv ⟹ Nachfrage steigt.`,
+            text: '[1.3 Validation] Erklären Sie, warum das Ergebnis für SE konsistent mit der Theorie ist.',
+            correct: ['p1↓ → se↑'],
+            options: { problemId: 'hm1_final', role: 'VALIDATION', premise: 'P1_DOWN' },
+            feedback: String.raw`Theorie erzwingt positive Korrelation zwischen relativer Verbilligung und SE.`,
           }
         ]
       },
@@ -68,26 +68,31 @@ hard_mock_mikro1_2026: {
         label: 'Block B',
         points: 30,
         type: 'text-block',
-        title: 'Eckoptimum & Randbedingungen',
-        preamble: String.raw`Nutzenfunktion $u = (x_1 + 2)x_2$. Preise $p_1=10, p_2=1, m=10$.`,
+        title: 'Randlösung & Feasibility',
+        preamble: String.raw`Nutzenfunktion $u = (x_1 + 2)x_2, m=10, p_1=10, p_2=1$.`,
         questions: [
           {
             id: 'm2a_1',
             points: 15,
             type: 'text',
-            text: '[2.1 Decision] Welcher Lösungstyp liegt hier vor? (Innere oder Randlösung?)',
-            correct: ['randlösung', 'corner'],
-            options: { problemId: 'hm1_b', stepId: 'model_choice', isDecision: true },
-            feedback: String.raw`Da die Tangentialbedingung $x_1 < 0$ ergibt, liegt eine Randlösung vor.`,
+            text: '[2.1 Decision] Welches Modell ist hier physikalisch angemessen? (Corner oder Interior?)',
+            correct: ['corner', 'randlösung'],
+            options: { problemId: 'hm1_final_b', stepId: 'model_id', isDecision: true, contextType: 'optimization' },
+            feedback: String.raw`Tangential führt zu $x_1 < 0$. Daher Corner.`,
           },
           {
             id: 'm2a_2',
             points: 15,
             type: 'text',
-            text: '[2.2 Execution] Bestimmen Sie das optimale x-Bündel.',
-            correct: ['0, 10', 'x1=0 x2=10'],
-            options: { problemId: 'hm1_b', expectedModel: 'randlösung', dependsOn: 'model_choice', role: 'consumption_quantity' },
-            feedback: String.raw`$x_1=0, x_2=10$.`,
+            text: '[2.2 Execution] Geben Sie die Menge x1 an.',
+            correct: ['0'],
+            options: { 
+              problemId: 'hm1_final_b', 
+              allowedModels: [{ model: 'CORNER', priority: 1 }], 
+              dependsOn: 'model_id',
+              role: 'consumption_quantity'
+            },
+            feedback: String.raw`$x_1=0$.`,
           }
         ]
       }

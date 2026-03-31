@@ -1,6 +1,6 @@
 // ============================================================
 // FULL EXAMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v10.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v12.0: Logic First Standard
 // ============================================================
 
 export const FULL_EXAMS = {
@@ -28,8 +28,8 @@ export const FULL_EXAMS = {
   },
   hard_mock_2026: {
     id: 'hard_mock_2026',
-    title: 'Makro II - Simulation v8.0 (60 Min)',
-    subtitle: 'Decision Dependencies & Semantic Chains',
+    title: 'Makro II - Simulation v9.0 (60 Min)',
+    subtitle: 'Decision Dependencies & Multiplicative Scoring',
     duration: 60,
     aufgaben: [
       {
@@ -37,7 +37,7 @@ export const FULL_EXAMS = {
         points: 40,
         type: 'text-block',
         title: 'UIP-Verteidigung & Regime-Wahl',
-        preamble: String.raw`Aktueller Kurs $E=1{,}0$. Erwartung $E^e=0{,}97$. Weltzins $i^*=2\%$. Freier Kapitalverkehr.`,
+        preamble: String.raw`Kurs $E=1{,}0$. Erwartung $E^e=0{,}97$. Weltzins $i^*=2\%$. Freier Kapitalverkehr.`,
         questions: [
           {
             id: 'p1a_1',
@@ -45,7 +45,7 @@ export const FULL_EXAMS = {
             type: 'text',
             text: '[1.1 Interpretation] Liegt auf dem Devisenmarkt ein Aufwertungs- oder Abwertungsdruck vor?',
             correct: ['abwertungsdruck', '↓'],
-            options: { problemId: 'hm2_a', stepId: 'press_dir', isDecision: true },
+            options: { problemId: 'hm2_final', stepId: 'press_dir', isDecision: true },
             feedback: String.raw`$E^e < E \implies$ Abwertungsdruck.`,
           },
           {
@@ -54,16 +54,16 @@ export const FULL_EXAMS = {
             type: 'text',
             text: '[1.2 Execution] Berechnen Sie den notwendigen Zins $i$, um $E=1{,}0$ zu halten.',
             correct: ['0.05', '5%'],
-            options: { problemId: 'hm2_a', dependsOn: 'press_dir' },
-            feedback: String.raw`$i = 0{,}02 - (0{,}97 - 1{,}0)/1{,}0 = 0{,}05$.`,
+            options: { problemId: 'hm2_final', dependsOn: 'press_dir' },
+            feedback: String.raw`$i = 0{,}05$.`,
           },
           {
             id: 'p1a_3',
             points: 20,
             type: 'text',
-            text: '[1.3 Validation] Beschreiben Sie die Logik-Kette für die Kursverteidigung.',
-            correct: ['erwartung ↓ → i ↑'],
-            options: { problemId: 'hm2_a', premise: 'i↑', role: 'e' },
+            text: '[1.3 Validation] Erklären Sie die Logik-Kette für die Kursverteidigung.',
+            correct: ['i↑ → e↑'],
+            options: { problemId: 'hm2_final', role: 'VALIDATION', premise: 'P1_UP' },
             feedback: String.raw`Zinserhöhung neutralisiert den Abwertungsdruck.`,
           }
         ]
@@ -81,17 +81,22 @@ export const FULL_EXAMS = {
             type: 'text',
             text: '[2.1 Decision] Welcher Zustand liegt vor?',
             correct: ['überakkumulation', 'over-accumulation'],
-            options: { problemId: 'hm2_b', stepId: 'solow_state', isDecision: true },
-            feedback: String.raw`$k > k_{GR} \implies$ Überakkumulation.`,
+            options: { problemId: 'hm2_final_b', stepId: 'solow_state', isDecision: true, contextType: 'growth' },
+            feedback: String.raw`Überakkumulation.`,
           },
           {
             id: 'p2a_2',
             points: 10,
             type: 'text',
-            text: '[2.2 Validation] Erklären Sie die Konsequenz einer Sparquoten-Senkung (s↓).',
-            correct: ['k>kgr → c↑'],
-            options: { problemId: 'hm2_b', premise: 'OVERACCUM', role: 'C' },
-            feedback: String.raw`In der Überakkumulation erhöht weniger Sparen den Konsum.`,
+            text: '[2.2 Validation] Effekt von $s \downarrow$ auf $c$?',
+            correct: ['steigt', '↑'],
+            options: { 
+              problemId: 'hm2_final_b', 
+              role: 'VALIDATION', 
+              allowedModels: [{ model: 'OVERACCUM', priority: 1 }],
+              dependsOn: 'solow_state' 
+            },
+            feedback: String.raw`Weniger Sparen erhöht den Konsum langfristig.`,
           }
         ]
       }

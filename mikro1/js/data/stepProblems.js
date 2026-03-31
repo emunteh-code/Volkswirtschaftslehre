@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Mikroökonomik I
-// FINAL BENCHMARK STANDARD v11.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v12.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -10,57 +10,57 @@ import { ensureMinimumStepProblems } from '../../../assets/js/portal-core/data/e
 const BASE_STEP_PROBLEMS = {
  lagrange: [
  {
- title: 'Das Haushaltsoptimum (Diagnostik)',
+ title: 'Haushaltsoptimum: Der Ecklösungs-Check',
  context: 'u = (x₁ + 2)x₂, p₁ = 10, p₂ = 1, m = 10.',
  steps: [
- { q: '[1. Interpretation] Bestimmen Sie den relativen Preis p₁/p₂.',
+ { q: '[1. Interpretation] Bestimmen Sie das Preisverhältnis p₁/p₂.',
    answer: ['10'],
    options: { problemId: 'm1_lagrange', role: 'price' },
-   hint: 'p₁/p₂ = 10/1.',
-   explain: 'Der Preis von Gut 1 ist 10-mal so hoch wie der von Gut 2.' },
- { q: '[2. Decision] Welcher Lösungstyp liegt hier vor? (Innere oder Randlösung?)',
+   hint: 'p₁ / p₂.',
+   explain: '10 / 1 = 10.' },
+ { q: '[2. Decision] Welcher Lösungstyp ist bei diesem Preisverhältnis theoretisch angemessen?',
    answer: ['randlösung', 'corner'],
    options: { problemId: 'm1_lagrange', stepId: 'model_choice', isDecision: true, contextType: 'optimization' },
-   hint: 'Prüfen Sie, ob GRS = p₁/p₂ zu x₁ < 0 führt.',
-   explain: 'Mathematisch: x₁ = -0,5. Da Mengen nicht negativ sein können, muss eine Randlösung vorliegen.' },
+   hint: 'Vergleichen Sie die GRS am Rand x₁=0 (x₂=10) mit dem Preisverhältnis.',
+   explain: 'GRS(0,10) = 10/2 = 5. Da GRS < p₁/p₂, ist Gut 1 zu teuer.' },
  { q: '[3. Execution] Berechnen Sie die optimale Menge x₁*.',
    answer: ['0'],
    options: { 
      problemId: 'm1_lagrange', 
-     role: 'quantity', 
-     allowedModels: ['CORNER_SOLUTION'],
+     role: 'consumption_quantity', 
+     allowedModels: [{ model: 'CORNER', priority: 1 }, { model: 'INTERIOR', priority: 2 }],
      dependsOn: 'model_choice' 
    },
-   hint: 'Setzen Sie x₁ auf 0.',
-   explain: 'Optimum am Rand: x₁ = 0.' },
- { q: '[4. Validation] Berechnen Sie den Nutzen u* im Optimum.',
-   answer: ['20'],
+   hint: 'Nutzen Sie Ihre Entscheidung aus Schritt 2.',
+   explain: 'Da Mengen nicht negativ sein können und eine Randlösung vorliegt, ist x₁=0.' },
+ { q: '[4. Validation] Ist u(0,10) > u(1,0)? (ja/nein)',
+   answer: ['ja', 'yes'],
    options: { problemId: 'm1_lagrange', role: 'VALIDATION' },
-   hint: 'u = (0+2)*10.',
-   explain: 'u = 20.' }
+   hint: 'Berechnen Sie beide Nutzenniveaus.',
+   explain: 'u(0,10) = 20, u(1,0) = 0. Die Randlösung ist korrekt.' }
  ]
  }
  ],
  slutsky: [
  {
- title: 'Slutsky-Zerlegung (Logic Path)',
- context: 'u = x₁x₂, p₁ sinkt von 4 auf 1, p₂=1, m=40.',
+ title: 'Slutsky-Zerlegung: Richtungsentscheidung',
+ context: 'u = x₁x₂, p₁ sinkt, m fix.',
  steps: [
- { q: '[1. Interpretation] Welches Vorzeichen hat der SE für Gut 1 bei dieser Preissenkung?',
+ { q: '[1. Interpretation] Welches Vorzeichen hat der Substitutionseffekt (SE) für Gut 1?',
    answer: ['positiv', '↑', 'se > 0'],
    options: { problemId: 'm1_slutsky', stepId: 'se_dir', isDecision: true },
-   hint: 'Ein Gut wird billiger.',
-   explain: 'Substitutionseffekt (SE) ist bei Preissenkung immer positiv.' },
- { q: '[2. Execution] Berechnen Sie die Nachfrageänderung durch den SE.',
-   answer: ['7.5', '7,5'],
-   options: { problemId: 'm1_slutsky', role: 'quantity', dependsOn: 'se_dir' },
-   hint: 'x₁_slutsky = 12,5. Altes x₁=5.',
-   explain: '12,5 - 5 = 7,5.' },
- { q: '[3. Validation] Erklären Sie die Logik-Kette.',
-   answer: ['p1↓ → se↑ → x1↑'],
-   options: { problemId: 'm1_slutsky', role: 'VALIDATION', premise: 'P1_DOWN' },
-   hint: 'Nutzen Sie primitives Denken: p↓...',
-   explain: 'p₁ ↓ ⟹ SE ↑ ⟹ x₁ ↑.' }
+   hint: 'Relative Preise ändern sich.',
+   explain: 'p₁ sinkt ⟹ Gut 1 wird attraktiver ⟹ SE positiv.' },
+ { q: '[2. Decision] Ist das Vorzeichen des Einkommenseffekts (EE) ohne Information über die Gut-Klassifikation eindeutig?',
+   answer: ['nein', 'ambig', 'uncertain'],
+   options: { problemId: 'm1_slutsky', ambiguityAllowed: true },
+   hint: 'Hängt davon ab, ob das Gut normal oder inferior ist.',
+   explain: 'Ohne Klassifikation ist die Richtung des EE unbestimmt.' },
+ { q: '[3. Execution] Bei u=x₁x₂ ist Gut 1 normal. In welche Richtung wirkt der EE bei p₁-Senkung?',
+   answer: ['positiv', '↑', 'steigt'],
+   options: { problemId: 'm1_slutsky', dependsOn: 'se_dir' },
+   hint: 'Preissenkung ⟹ Realeinkommen steigt.',
+   explain: 'Da das Gut normal ist, erhöht das höhere Realeinkommen die Nachfrage.' }
  ]
  }
  ]

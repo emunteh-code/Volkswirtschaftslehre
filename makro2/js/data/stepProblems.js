@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v11.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v12.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -11,14 +11,14 @@ const BASE_STEP_PROBLEMS = {
   wechselkurs: [
     {
       title: 'Wechselkurs-Regime & Anpassung',
-      context: 'Inland hat Inflation pi = 5%, pi* = 2%. Nominalkurs E sinkt um 1%.',
+      context: 'Inflation pi = 5%, pi* = 2%. Nominalkurs E sinkt um 1%.',
       steps: [
         { 
           q: '[1. Interpretation] Liegt nominal eine Auf- oder Abwertung vor?', 
           answer: ['abwertung', '↓'], 
           options: { problemId: 'm2_wk', stepId: 'nom_dir', isDecision: true },
           hint: 'E sinkt in Mengennotierung.', 
-          explain: 'Ein sinkendes E bedeutet Abwertung.' 
+          explain: 'E ↓ ⟹ Abwertung.' 
         },
         { 
           q: '[2. Execution] Berechnen Sie die Änderung des realen Wechselkurses epsilon.', 
@@ -37,38 +37,9 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  zinsparitaet: [
-    {
-      title: 'UIP-Verteidigung (Logic Chain)',
-      context: 'Weltzins i* = 2%. Erwarteter Kurs E^e = 0.97. Aktueller Kurs E = 1.0.',
-      steps: [
-        { 
-          q: '[1. Interpretation] Liegt auf dem Devisenmarkt Auf- oder Abwertungsdruck vor?', 
-          answer: ['abwertungsdruck', '↓'], 
-          options: { problemId: 'm2_uip', stepId: 'press_dir', isDecision: true },
-          hint: 'E^e < E.', 
-          explain: 'Markt erwartet Abwertung.' 
-        },
-        { 
-          q: '[2. Execution] Welchen Zins i muss die ZB setzen, um E=1.0 zu halten?', 
-          answer: ['5', '5%'], 
-          options: { problemId: 'm2_uip', stepId: 'zins_calc', dependsOn: 'press_dir' },
-          hint: 'i = i* - (E^e - E)/E.', 
-          explain: 'i = 2% + 3% = 5%.' 
-        },
-        { 
-          q: '[3. Validation] Erklären Sie die Logik-Kette für die Kursverteidigung.', 
-          answer: ['i↑ → e↑'],
-          options: { problemId: 'm2_uip', role: 'VALIDATION', premise: 'P1_UP' },
-          hint: 'Zinserhöhung führt zu...?', 
-          explain: 'i↑ ⟹ Kapitalzufluss ⟹ E↑.' 
-        }
-      ]
-    }
-  ],
   solow_basis: [
     {
-      title: 'Solow: Das Goldene-Regel-Limit',
+      title: 'Wachstum: Das Goldene-Regel-Limit',
       context: 'Steady State bei k > k_GR.',
       steps: [
         { 
@@ -79,9 +50,14 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Die Wirtschaft hat zu viel Kapital.' 
         },
         { 
-          q: '[2. Validation] Erklären Sie die Konsequenz einer Sparquoten-Senkung (s↓).', 
-          answer: ['k > kgr → c ↑'], 
-          options: { problemId: 'm2_solow', role: 'VALIDATION', premise: 'OVERACCUM_STATIC' },
+          q: '[2. Validation] Wie reagiert der Steady-State Konsum c langfristig auf ein Sinken von s?', 
+          answer: ['steigt', '↑', 'higher'], 
+          options: { 
+            problemId: 'm2_solow', 
+            role: 'VALIDATION',
+            allowedModels: [{ model: 'OVERACCUM', priority: 1 }],
+            dependsOn: 'state_id'
+          },
           hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
           explain: 's↓ ⟹ weniger Kapital ⟹ c↑.' 
         }

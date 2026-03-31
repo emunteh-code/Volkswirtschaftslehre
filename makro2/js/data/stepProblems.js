@@ -1,6 +1,6 @@
 // ============================================================
 // STEP PROBLEMS DATA — Makroökonomik II
-// FINAL BENCHMARK STANDARD v8.0: Precision Under Uncertainty
+// FINAL BENCHMARK STANDARD v9.0: Precision Under Uncertainty
 // ============================================================
 
 import { CHAPTERS, CONTENT } from './chapters.js';
@@ -11,26 +11,26 @@ const BASE_STEP_PROBLEMS = {
   wechselkurs: [
     {
       title: 'Wechselkurs-Regime & Anpassung',
-      context: 'Inland hat Inflation pi = 5%, Ausland pi* = 2%. Nominalkurs E sinkt um 1%.',
+      context: 'Inflation pi = 5%, pi* = 2%. Nominalkurs E sinkt um 1%.',
       steps: [
         { 
           q: '[1. Interpretation] Liegt nominal eine Auf- oder Abwertung vor?', 
           answer: ['abwertung', '↓'], 
           options: { problemId: 'm2_wk', stepId: 'nom_dir', isDecision: true },
           hint: 'E sinkt in Mengennotierung.', 
-          explain: 'Ein sinkendes E bedeutet Abwertung.' 
+          explain: 'E ↓ ⟹ Abwertung.' 
         },
         { 
           q: '[2. Execution] Berechnen Sie die Änderung des realen Wechselkurses epsilon.', 
           answer: ['2', '2%', '0.02'], 
-          options: { problemId: 'm2_wk', stepId: 'real_calc', context: { dependsOn: 'abwertung' } },
+          options: { problemId: 'm2_wk', stepId: 'real_calc', dependsOn: 'nom_dir' },
           hint: '%delta epsilon ≈ %delta E + pi - pi*.', 
           explain: '-1% + 5% - 2% = +2%.' 
         },
         { 
-          q: '[3. Validation] Entspricht dies einer Verbesserung oder Verschlechterung der Wettbewerbsfähigkeit?', 
-          answer: ['verschlechterung', 'worse'], 
-          hint: 'Reale Aufwertung (epsilon↑) macht Inlandsgüter relativ teurer.', 
+          q: '[3. Validation] Entspricht dies einer Verbesserung der Wettbewerbsfähigkeit?', 
+          answer: ['nein', 'no'], 
+          hint: 'Reale Aufwertung (epsilon↑) macht inländische Güter relativ teurer.', 
           explain: 'Wettbewerbsfähigkeit sinkt.' 
         }
       ]
@@ -44,23 +44,23 @@ const BASE_STEP_PROBLEMS = {
         { 
           q: '[1. Interpretation] Liegt auf dem Devisenmarkt Auf- oder Abwertungsdruck vor?', 
           answer: ['abwertungsdruck', '↓'], 
-          options: { problemId: 'm2_uip', stepId: 'pressure_dir', isDecision: true },
+          options: { problemId: 'm2_uip', stepId: 'press_dir', isDecision: true },
           hint: 'E^e < E.', 
           explain: 'Markt erwartet Abwertung.' 
         },
         { 
           q: '[2. Execution] Welchen Zins i muss die ZB setzen, um E=1.0 zu halten?', 
           answer: ['5', '5%'], 
-          options: { problemId: 'm2_uip', stepId: 'zins_calc', context: { dependsOn: 'abwertungsdruck' } },
+          options: { problemId: 'm2_uip', stepId: 'zins_calc', dependsOn: 'press_dir' },
           hint: 'i = i* - (E^e - E)/E.', 
           explain: 'i = 2% + 3% = 5%.' 
         },
         { 
           q: '[3. Validation] Beschreiben Sie die Logik-Kette für die Kursverteidigung.', 
-          answer: ['i↑ → cap inflow → e↑'],
-          options: { problemId: 'm2_uip', requiredChain: ['i↑', 'e↑'], context: { premise: 'i↑' } },
+          answer: ['i↑ → e↑'],
+          options: { problemId: 'm2_uip', premise: 'i↑' },
           hint: 'Zinserhöhung führt zu...?', 
-          explain: 'Zins steigt ⟹ Kapitalzufluss ⟹ Nachfrage nach Währung steigt ⟹ Kurs stabilisiert.' 
+          explain: 'i↑ ⟹ Kapitalzufluss ⟹ E↑.' 
         }
       ]
     }
@@ -78,11 +78,11 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Die Wirtschaft hat zu viel Kapital.' 
         },
         { 
-          q: '[2. Validation] Wie reagiert der Steady-State Konsum c langfristig auf ein Sinken von s?', 
-          answer: ['steigt', '↑', 'higher'], 
-          options: { problemId: 'm2_solow', requiredChain: ['k>kgr', 'c↑'], context: { premise: 'k>kgr' } },
+          q: '[2. Validation] Beschreiben Sie die Konsequenz einer Sparquoten-Senkung (s↓).', 
+          answer: ['k>kgr → c↑'], 
+          options: { problemId: 'm2_solow', premise: 'k>kgr' },
           hint: 'In der Überakkumulation senkt Sparen den Konsum.', 
-          explain: 'Weniger Sparen erhöht den Konsum langfristig.' 
+          explain: 's↓ ⟹ weniger Kapital ⟹ c↑.' 
         }
       ]
     }

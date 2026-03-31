@@ -1,0 +1,31 @@
+import { createStorageModule } from '../../../assets/js/portal-core/state/storage.js';
+import { PROGRESS_KEY, SRS_KEY, STREAK_KEY, THEME_KEY, QUESTION_STATS_KEY, FE_STATE_KEY, LAST_KEY } from '../data/srsConfig.js';
+
+export const {
+  loadProgress,
+  saveProgressData,
+  recordView,
+  recordSolved,
+  recordAnswer,
+  loadSRS,
+  saveSRS,
+  loadStreak,
+  saveStreak,
+  loadLastId,
+  saveLastId,
+  loadQuestionStats,
+  saveQuestionStats,
+  updateQuestionStats,
+  saveMasteryChecks,
+  clearAllData
+} = createStorageModule({
+  keys: {
+    PROGRESS_KEY,
+    SRS_KEY,
+    STREAK_KEY,
+    THEME_KEY,
+    QUESTION_STATS_KEY,
+    FE_STATE_KEY,
+    LAST_KEY
+  }
+});

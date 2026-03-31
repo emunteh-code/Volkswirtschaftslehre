@@ -124,5 +124,259 @@ export const CONTENT = {
         result: String.raw`$t = 2{,}5$. (Bei $\alpha=0{,}05$ und kritischem Wert $2{,}06$ würden wir H0 ablehnen).`
       }
     ]
+  },
+  wahrscheinlichkeit: {
+    motivation: 'Die Wahrscheinlichkeitsrechnung liefert die mathematische Sprache für Unsicherheit. Ohne sie sind weder Verteilungen noch statistische Schlüsse möglich.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Grundbegriffe</h3>
+      <p>Ein <strong>Zufallsexperiment</strong> hat mehrere mögliche Ergebnisse. Die Menge aller Ergebnisse heißt <strong>Ergebnisraum</strong> $\Omega$. Ein <strong>Ereignis</strong> ist eine Teilmenge von $\Omega$.</p>
+    </div>
+    <div class="section-block">
+      <h3>Axiome von Kolmogorov</h3>
+      <ol>
+        <li>$P(A) \geq 0$ für jedes Ereignis $A$.</li>
+        <li>$P(\Omega) = 1$.</li>
+        <li>Für disjunkte Ereignisse: $P(A \cup B) = P(A) + P(B)$.</li>
+      </ol>
+    </div>
+    <div class="section-block">
+      <h3>Bedingte Wahrscheinlichkeit</h3>
+      <p>Die Wahrscheinlichkeit von $A$ gegeben $B$:</p>
+      <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$</div>
+      <p>Zwei Ereignisse sind <strong>unabhängig</strong>, wenn $P(A|B) = P(A)$, also $P(A \cap B) = P(A) \cdot P(B)$.</p>
+    </div>
+    <div class="section-block">
+      <h3>Satz von Bayes</h3>
+      <div class="math-block">$$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$</div>
+      <p>Bayes erlaubt es, eine a-priori-Wahrscheinlichkeit $P(A)$ durch neue Daten $B$ zu aktualisieren.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Unabhängigkeit vs. Disjunktheit:</strong> Disjunkte Ereignisse ($A \cap B = \emptyset$) sind in der Regel nicht unabhängig — im Gegenteil: wenn $A$ eintritt, ist $B$ ausgeschlossen.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Bedingte Wkt.', eq: String.raw`$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$`, desc: 'Definition' },
+      { label: 'Bayes', eq: String.raw`$$P(A|B) = \frac{P(B|A)\,P(A)}{P(B)}$$`, desc: 'Aktualisierung' },
+      { label: 'Totale Wkt.', eq: String.raw`$$P(B) = \sum_i P(B|A_i)\,P(A_i)$$`, desc: 'Zerlegung' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Ein Test erkennt eine Krankheit mit $P(\text{positiv}|\text{krank})=0{,}99$. Die Krankheit betrifft $1\%$ der Bevölkerung. Der Test hat eine Falsch-Positiv-Rate von $5\%$. Wie hoch ist $P(\text{krank}|\text{positiv})$?`,
+        steps: [
+          { text: `Totale Wahrscheinlichkeit für positiven Test:`, eq: String.raw`P(+) = 0{,}99 \cdot 0{,}01 + 0{,}05 \cdot 0{,}99 = 0{,}0099 + 0{,}0495 = 0{,}0594` },
+          { text: `Bayes anwenden:`, eq: String.raw`P(K|+) = \frac{0{,}99 \cdot 0{,}01}{0{,}0594} \approx 0{,}167` }
+        ],
+        result: String.raw`$P(\text{krank}|\text{positiv}) \approx 16{,}7\%$ — trotz gutem Test ist die Mehrheit der positiv Getesteten gesund (Basisraten-Effekt).`
+      }
+    ]
+  },
+  verteilungen: {
+    motivation: 'Zufallsvariablen ordnen jedem Ergebnis eine Zahl zu. Ihre Verteilung beschreibt, welche Werte wie wahrscheinlich sind.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Zufallsvariable</h3>
+      <p>Eine <strong>Zufallsvariable</strong> $X$ ist eine Funktion $X: \Omega \to \mathbb{R}$. Der <strong>Erwartungswert</strong> (Mittelwert der Verteilung) und die <strong>Varianz</strong> (Streuung) charakterisieren sie:</p>
+      <div class="math-block">$$E[X] = \sum_x x \cdot P(X=x) \quad\text{(diskret)}$$</div>
+      <div class="math-block">$$\text{Var}(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Binomialverteilung</h3>
+      <p>Zählt die Erfolge bei $n$ unabhängigen Versuchen mit Erfolgswahrscheinlichkeit $p$:</p>
+      <div class="math-block">$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$$</div>
+      <p>Erwartungswert $E[X] = np$, Varianz $\text{Var}(X) = np(1-p)$.</p>
+    </div>
+    <div class="section-block">
+      <h3>Normalverteilung</h3>
+      <p>Die wichtigste stetige Verteilung. Die Dichte der Standardnormalverteilung ($\mu=0, \sigma=1$):</p>
+      <div class="math-block">$$\varphi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$$</div>
+      <p>Jede Normalverteilung $X \sim N(\mu, \sigma^2)$ kann standardisiert werden: $Z = (X - \mu)/\sigma$.</p>
+    </div>
+    <div class="section-block">
+      <h3>Zentraler Grenzwertsatz</h3>
+      <p>Für eine Summe von $n$ unabhängigen, identisch verteilten Zufallsvariablen mit Erwartungswert $\mu$ und Varianz $\sigma^2$ gilt für großes $n$:</p>
+      <div class="math-block">$$\bar{X}_n \overset{approx}{\sim} N\!\left(\mu,\, \frac{\sigma^2}{n}\right)$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Varianz vs. Standardabweichung:</strong> Die Varianz hat die Einheit zum Quadrat. Für die Interpretation in Originaleinheiten immer die Standardabweichung $\sigma = \sqrt{\text{Var}}$ verwenden.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Erwartungswert', eq: String.raw`$$E[X] = \sum x\,P(X=x)$$`, desc: 'Diskret' },
+      { label: 'Verschiebungssatz', eq: String.raw`$$\text{Var}(X) = E[X^2] - (E[X])^2$$`, desc: 'Varianzberechnung' },
+      { label: 'Binomial', eq: String.raw`$$P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}$$`, desc: 'Erfolge bei n Versuchen' },
+      { label: 'Standardisierung', eq: String.raw`$$Z = \frac{X - \mu}{\sigma}$$`, desc: 'Transformation auf N(0,1)' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Eine faire Münze wird $100$-mal geworfen. Wie groß ist die Wahrscheinlichkeit, zwischen $45$ und $55$ Mal Kopf zu erhalten? Nutzen Sie die Normalapproximation.`,
+        steps: [
+          { text: `Parameter: $n=100$, $p=0{,}5$.`, eq: String.raw`E[X] = 50, \; \sigma = \sqrt{25} = 5` },
+          { text: `Standardisieren: $z_1 = (45-50)/5$, $z_2 = (55-50)/5$.`, eq: String.raw`z_1 = -1, \; z_2 = 1` },
+          { text: `Nachschlagen: $P(-1 < Z < 1)$.`, eq: String.raw`\approx 0{,}6827` }
+        ],
+        result: String.raw`$P(45 \leq X \leq 55) \approx 68{,}3\%$.`
+      }
+    ]
+  },
+  schaetzen: {
+    motivation: 'Wir beobachten eine Stichprobe und wollen auf die unbekannten Parameter der Grundgesamtheit schließen. Punktschätzer und Konfidenzintervalle sind die Werkzeuge dafür.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Punktschätzer</h3>
+      <p>Ein <strong>Punktschätzer</strong> $\hat{\theta}$ ist eine Funktion der Stichprobe, die einen Populationsparameter $\theta$ approximiert. Zentrale Eigenschaften:</p>
+      <ul>
+        <li><strong>Erwartungstreue:</strong> $E[\hat{\theta}] = \theta$ (kein systematischer Fehler).</li>
+        <li><strong>Effizienz:</strong> Unter allen erwartungstreuen Schätzern hat der effiziente die kleinste Varianz.</li>
+        <li><strong>Konsistenz:</strong> $\hat{\theta} \overset{p}{\to} \theta$ für $n \to \infty$.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Konfidenzintervall</h3>
+      <p>Ein $100(1-\alpha)\%$-Konfidenzintervall für $\mu$ bei bekanntem $\sigma$:</p>
+      <div class="math-block">$$\bar{x} \pm z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$</div>
+      <p>Bei unbekanntem $\sigma$ verwenden wir die t-Verteilung mit $n-1$ Freiheitsgraden:</p>
+      <div class="math-block">$$\bar{x} \pm t_{n-1,\,1-\alpha/2} \cdot \frac{s}{\sqrt{n}}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Interpretation</h3>
+      <p>Ein 95%-Konfidenzintervall bedeutet: Bei wiederholter Stichprobenziehung enthalten $95\%$ aller so berechneten Intervalle den wahren Parameter. Es sagt <strong>nicht</strong>, dass der Parameter mit $95\%$ im Intervall liegt.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Fehlinterpretation KI:</strong> Das Konfidenzintervall ist eine Eigenschaft der Methode, nicht des Parameters. Der Parameter ist fix — das Intervall ist zufällig.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'KI (z)', eq: String.raw`$$\bar{x} \pm z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$`, desc: 'Bei bekanntem σ' },
+      { label: 'KI (t)', eq: String.raw`$$\bar{x} \pm t_{n-1,\,1-\alpha/2} \cdot \frac{s}{\sqrt{n}}$$`, desc: 'Bei unbekanntem σ' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Aus einer Stichprobe mit $n=36$ ergibt sich $\bar{x}=120$ und $s=18$. Berechnen Sie das $95\%$-Konfidenzintervall für $\mu$.`,
+        steps: [
+          { text: `Standardfehler:`, eq: String.raw`SE = 18/\sqrt{36} = 3` },
+          { text: `Kritischer Wert: $t_{35,\,0{,}975} \approx 2{,}03$.`, eq: null },
+          { text: `Intervall berechnen:`, eq: String.raw`120 \pm 2{,}03 \cdot 3 = [113{,}91;\; 126{,}09]` }
+        ],
+        result: String.raw`$95\%$-KI: $[113{,}9;\; 126{,}1]$.`
+      }
+    ]
+  },
+  regression: {
+    motivation: 'Die lineare Regression modelliert den Zusammenhang zwischen einer abhängigen und einer oder mehreren unabhängigen Variablen. Sie ist das Kernwerkzeug der empirischen Wirtschaftsforschung.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Einfache lineare Regression</h3>
+      <p>Modell: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$. Die Kleinste-Quadrate-Methode (KQ/OLS) minimiert $\sum \hat{\varepsilon}_i^2$:</p>
+      <div class="math-block">$$\hat{\beta}_1 = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sum(x_i - \bar{x})^2} = \frac{s_{xy}}{s_x^2}$$</div>
+      <div class="math-block">$$\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Bestimmtheitsmaß R²</h3>
+      <p>$R^2$ misst den Anteil der erklärten Streuung an der Gesamtstreuung:</p>
+      <div class="math-block">$$R^2 = 1 - \frac{SSR}{SST} = \frac{SSE}{SST}$$</div>
+      <p>Dabei: $SST = \sum(y_i - \bar{y})^2$, $SSE = \sum(\hat{y}_i - \bar{y})^2$, $SSR = \sum \hat{\varepsilon}_i^2$.</p>
+    </div>
+    <div class="section-block">
+      <h3>Signifikanztest für β₁</h3>
+      <p>H0: $\beta_1 = 0$ (kein linearer Zusammenhang). Teststatistik:</p>
+      <div class="math-block">$$t = \frac{\hat{\beta}_1}{SE(\hat{\beta}_1)}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>R² und Kausalität:</strong> Ein hohes $R^2$ beweist keinen kausalen Zusammenhang. Es misst nur den linearen Erklärungsanteil in der Stichprobe.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Steigungsschätzer', eq: String.raw`$$\hat{\beta}_1 = \frac{s_{xy}}{s_x^2}$$`, desc: 'KQ-Schätzer' },
+      { label: 'Bestimmtheitsmaß', eq: String.raw`$$R^2 = 1 - \frac{SSR}{SST}$$`, desc: 'Erklärte Varianz' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Gegeben: $\bar{x}=5$, $\bar{y}=20$, $s_{xy}=15$, $s_x^2=5$. Bestimmen Sie die Regressionsgerade.`,
+        steps: [
+          { text: `Steigung berechnen:`, eq: String.raw`\hat{\beta}_1 = 15/5 = 3` },
+          { text: `Achsenabschnitt berechnen:`, eq: String.raw`\hat{\beta}_0 = 20 - 3 \cdot 5 = 5` }
+        ],
+        result: String.raw`$\hat{y} = 5 + 3x$.`
+      }
+    ]
+  },
+  rlab: {
+    motivation: 'R ist die Standardsprache für statistische Analysen in der Wissenschaft. Hier verbinden wir die gelernten Konzepte mit der praktischen Umsetzung.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Datenimport und Exploration</h3>
+      <p>Der erste Schritt jeder Analyse: Daten einlesen und erkunden.</p>
+      <pre><code>data <- read.csv("datensatz.csv")
+str(data)       # Struktur anzeigen
+summary(data)   # Deskriptive Statistiken
+head(data)      # Erste Zeilen</code></pre>
+    </div>
+    <div class="section-block">
+      <h3>Deskriptive Statistik in R</h3>
+      <pre><code>mean(x)    # Mittelwert
+median(x)  # Median
+sd(x)      # Standardabweichung
+var(x)     # Varianz
+quantile(x, probs = c(0.25, 0.5, 0.75))</code></pre>
+    </div>
+    <div class="section-block">
+      <h3>Hypothesentests in R</h3>
+      <pre><code># Einstichproben-t-Test
+t.test(x, mu = 100)
+
+# Zweistichproben-t-Test
+t.test(x, y)
+
+# Korrelationstest
+cor.test(x, y)</code></pre>
+    </div>
+    <div class="section-block">
+      <h3>Regression in R</h3>
+      <pre><code># Einfache Regression
+model <- lm(y ~ x, data = df)
+summary(model)
+
+# Multiple Regression
+model2 <- lm(y ~ x1 + x2 + x3, data = df)
+
+# Konfidenzintervalle für Koeffizienten
+confint(model, level = 0.95)</code></pre>
+    </div>
+    <div class="section-block">
+      <h3>Grafiken</h3>
+      <pre><code># Histogramm
+hist(x, breaks = 20, main = "Verteilung")
+
+# Streudiagramm mit Regressionsgerade
+plot(x, y)
+abline(model, col = "red")
+
+# QQ-Plot (Normalverteilung prüfen)
+qqnorm(residuals(model))
+qqline(residuals(model))</code></pre>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>summary() lesen:</strong> Der p-Wert im summary-Output bezieht sich auf den Test $H_0: \beta_j = 0$. Sterne markieren Signifikanzniveaus (* = 5%, ** = 1%, *** = 0.1%).</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'R-Syntax Regression', eq: String.raw`\texttt{lm(y \sim x1 + x2, data)}`, desc: 'Lineare Regression in R' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`In R haben Sie ein Modell geschätzt: \texttt{model <- lm(Lohn ~ Bildung + Erfahrung, data=df)}. Der Output zeigt $\hat{\beta}_{\text{Bildung}} = 2{,}5$ mit $p = 0{,}003$. Interpretieren Sie.`,
+        steps: [
+          { text: `Koeffizient interpretieren:`, eq: String.raw`\text{Ein zusätzliches Bildungsjahr erhöht den Lohn um 2,5 Einheiten (ceteris paribus).}` },
+          { text: `Signifikanz prüfen: $p = 0{,}003 < 0{,}05$.`, eq: String.raw`\text{H0 (}\beta = 0\text{) wird auf dem 5%-Niveau abgelehnt.}` }
+        ],
+        result: String.raw`Bildung hat einen signifikant positiven Effekt auf den Lohn ($p < 0{,}01$).`
+      }
+    ]
   }
 };

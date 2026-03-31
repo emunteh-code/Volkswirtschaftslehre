@@ -214,5 +214,93 @@ export const CONTENT = {
         result: String.raw`$\pi_t > \pi_{t-1}$ (Inflation steigt).`
       }
     ]
+  },
+  islmpc: {
+    motivation: 'Das IS-LM-PC-Modell verbindet die kurze Frist (IS-LM) mit der mittleren Frist (Phillips-Kurve). Es zeigt, wie die Wirtschaft nach einem Schock zum natürlichen Gleichgewicht zurückkehrt.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Vom IS-LM zum IS-LM-PC</h3>
+      <p>In der kurzen Frist bestimmen IS- und LM-Kurve Produktion und Zinssatz. Die Phillips-Kurve (PC) ergänzt die Inflationsdynamik:</p>
+      <div class="math-block">$$\pi_t - \pi_{t-1} = -\alpha(u_t - u_n)$$</div>
+      <p>Die Zentralbank reagiert auf Inflation mit dem Realzins. Im IS-LM-PC-Modell wird die LM-Kurve durch eine <strong>Zinsregel</strong> (Monetary Policy Rule) ersetzt:</p>
+      <div class="math-block">$$r_t = \bar{r} + \bar{\lambda}\,(\pi_t - \bar{\pi})$$</div>
+      <p>Steigt die Inflation über das Ziel $\bar{\pi}$, erhöht die Zentralbank den Realzins $r_t$.</p>
+    </div>
+    <div class="section-block">
+      <h3>IS-Kurve und Okuns Gesetz</h3>
+      <p>Die IS-Kurve liefert die Produktion $Y_t$ in Abhängigkeit vom Realzins. Okuns Gesetz verbindet Produktion und Arbeitslosigkeit:</p>
+      <div class="math-block">$$u_t - u_n = -\beta\,(Y_t - Y_n)/Y_n$$</div>
+      <p>Wenn $Y_t > Y_n$, liegt die Arbeitslosigkeit unter $u_n$ und die Inflation steigt.</p>
+    </div>
+    <div class="section-block">
+      <h3>Anpassungsdynamik</h3>
+      <p>Nach einem expansiven Schock ($\bar{G} \uparrow$): Kurzfristig steigt $Y$ über $Y_n$. Die Inflation steigt. Die Zentralbank reagiert mit höherem Realzins. Die Produktion sinkt Schritt für Schritt zurück auf $Y_n$, bis die Inflation wieder beim Ziel liegt.</p>
+      <p>Dieser Anpassungsprozess kann <strong>mehrere Perioden</strong> dauern. Die Geschwindigkeit hängt von $\alpha$ (Phillips-Sensitivität) und $\bar{\lambda}$ (Zentralbank-Aggressivität) ab.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Kurze vs. mittlere Frist:</strong> Im IS-LM (kurze Frist) ist das Preisniveau fix. Im IS-LM-PC (mittlere Frist) passt sich die Inflation endogen an. Der Übergang ist der Kern des Modells.</div>
+      <div class="warn-box"><strong>Zinsregel vs. LM:</strong> Die LM-Kurve setzt eine fixe Geldmenge voraus. Die Zinsregel setzt ein Inflationsziel voraus. Beide sind nicht gleichzeitig gültig.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Zinsregel (MP)', eq: String.raw`$$r_t = \bar{r} + \bar{\lambda}\,(\pi_t - \bar{\pi})$$`, desc: 'Monetary Policy Rule', variables: { 'r_t': 'Realzins', '\\bar{r}': 'Natürlicher Realzins', '\\bar{\\lambda}': 'Reaktionskoeffizient', '\\bar{\\pi}': 'Inflationsziel' } },
+      { label: 'Okuns Gesetz', eq: String.raw`$$u_t - u_n = -\beta\,\frac{Y_t - Y_n}{Y_n}$$`, desc: 'Produktionslücke → Arbeitslosigkeit' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Die Regierung erhöht die Staatsausgaben dauerhaft. Beschreiben Sie die Anpassungsdynamik im IS-LM-PC-Modell für die kurze und mittlere Frist.`,
+        steps: [
+          { text: `Kurze Frist: IS verschiebt sich nach rechts.`, eq: String.raw`Y_1 > Y_n, \; u_1 < u_n` },
+          { text: `Phillips-Kurve: Inflation steigt.`, eq: String.raw`\pi_1 > \pi_0` },
+          { text: `Zinsregel: Zentralbank erhöht Realzins.`, eq: String.raw`r_1 = \bar{r} + \bar{\lambda}(\pi_1 - \bar{\pi}) > r_0` },
+          { text: `Mittlere Frist: Höherer Zins senkt Investitionen, Y kehrt zurück auf $Y_n$.`, eq: String.raw`Y \to Y_n, \; \pi \to \bar{\pi} + \text{höheres Niveau}` }
+        ],
+        result: String.raw`Kurzfristig Boom; mittelfristig kehrt $Y$ zu $Y_n$ zurück, aber bei höherem Zinsniveau (Crowding-Out der Investitionen).`
+      }
+    ]
+  },
+  erwartungen: {
+    motivation: 'Erwartungen über die Zukunft beeinflussen heutige Entscheidungen. Die Geld- und Fiskalpolitik wirkt unterschiedlich, je nachdem ob sie antizipiert wird oder nicht.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Erwartungen in Konsum und Investition</h3>
+      <p>Der Konsum hängt nicht nur vom heutigen Einkommen ab, sondern vom <strong>erwarteten Lebenseinkommen</strong> (Permanente-Einkommens-Hypothese). Investitionen hängen vom erwarteten Barwert zukünftiger Gewinne ab:</p>
+      <div class="math-block">$$V(\pi^e_t) = \sum_{k=0}^{\infty} \frac{\pi^e_{t+k}}{(1+r)^k}$$</div>
+      <p>Steigen die erwarteten Gewinne, steigen die Investitionen heute.</p>
+    </div>
+    <div class="section-block">
+      <h3>Erwartungen und IS-Kurve</h3>
+      <p>Die IS-Kurve wird erwartungsabhängig. Eine Steuersenkung, die als <strong>temporär</strong> wahrgenommen wird, verschiebt die IS-Kurve kaum (Konsumenten passen ihr Lebenseinkommen kaum an). Eine <strong>permanente</strong> Senkung verschiebt sie stark.</p>
+    </div>
+    <div class="section-block">
+      <h3>Geldpolitik und Erwartungen</h3>
+      <p>Wenn die Zentralbank eine Zinssenkung ankündigt und diese glaubwürdig ist, sinken die langfristigen Zinsen sofort (bevor die kurzfristigen sich bewegen). Der <strong>Erwartungskanal</strong> wirkt schneller als der direkte Zinskanal.</p>
+      <div class="math-block">$$i_{lang} \approx \frac{1}{n}\sum_{k=0}^{n-1} i^e_{t+k}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Glaubwürdigkeit und Zeitinkonsistenz</h3>
+      <p>Politik wirkt nur, wenn die Agenten die Ankündigungen glauben. Eine Zentralbank, die ein Inflationsziel von $2\%$ ankündigt, muss glaubwürdig sein — sonst bleiben die Inflationserwartungen hoch und die Phillips-Kurve verschiebt sich nicht.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Temporär vs. permanent:</strong> Verwechseln Sie niemals die Wirkung temporärer und permanenter Politikmaßnahmen. Temporäre Maßnahmen wirken schwächer, weil sie das erwartete Lebenseinkommen kaum ändern.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Barwert erwarteter Gewinne', eq: String.raw`$$V = \sum_{k=0}^{\infty} \frac{\pi^e_{t+k}}{(1+r)^k}$$`, desc: 'Investitionsentscheidung' },
+      { label: 'Langfristiger Zinssatz', eq: String.raw`$$i_{lang} \approx \frac{1}{n}\sum_{k=0}^{n-1} i^e_{t+k}$$`, desc: 'Erwartungshypothese der Zinsstruktur' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Die Regierung kündigt eine Einkommensteuersenkung für genau ein Jahr an. Wie reagieren Konsum und die IS-Kurve im Vergleich zu einer permanenten Senkung?`,
+        steps: [
+          { text: `Interpretation: Was bestimmt den Konsum langfristig?`, eq: String.raw`\text{Das erwartete Lebenseinkommen (Permanente-Einkommens-Hypothese).}` },
+          { text: `Temporäre Senkung: Wirkung auf Lebenseinkommen?`, eq: String.raw`\text{Sehr gering (1 Jahr von vielen).}` },
+          { text: `Permanente Senkung: Wirkung auf Lebenseinkommen?`, eq: String.raw`\text{Deutlich (alle zukünftigen Perioden betroffen).}` }
+        ],
+        result: String.raw`Temporäre Senkung verschiebt IS kaum; permanente Senkung verschiebt IS deutlich nach rechts.`
+      }
+    ]
   }
 };

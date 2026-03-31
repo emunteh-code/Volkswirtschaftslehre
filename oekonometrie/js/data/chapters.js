@@ -228,6 +228,66 @@ summary(model)
 # Pr(>|t|): p-Wert
     `
   },
+  multicollinearity: {
+    motivation: 'Wenn die erklärenden Variablen stark miteinander korreliert sind, werden die OLS-Schätzer unpräzise. Die Koeffizienten sind weiterhin unverzerrt, aber die Standardfehler explodieren.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Definition</h3>
+      <p><strong>Multikollinearität</strong> liegt vor, wenn zwei oder mehr unabhängige Variablen stark linear korreliert sind. Perfekte Multikollinearität ($r_{x_1,x_2} = \pm 1$) macht die OLS-Schätzung unmöglich (Matrix $X'X$ ist singulär). Hohe, aber nicht perfekte Multikollinearität führt zu großen Standardfehlern.</p>
+    </div>
+    <div class="section-block">
+      <h3>Variance Inflation Factor (VIF)</h3>
+      <p>Der VIF misst, um welchen Faktor die Varianz eines Schätzers durch Multikollinearität aufgeblasen wird:</p>
+      <div class="math-block">$$VIF_j = \frac{1}{1 - R_j^2}$$</div>
+      <p>Hierbei ist $R_j^2$ das Bestimmtheitsmaß der Hilfsregression von $x_j$ auf alle übrigen $x$-Variablen. Faustregel: $VIF > 10$ deutet auf problematische Multikollinearität hin.</p>
+    </div>
+    <div class="section-block">
+      <h3>Konsequenzen</h3>
+      <ul>
+        <li><strong>Unverzerrtheit bleibt:</strong> OLS-Schätzer sind weiterhin erwartungstreu (Gauss-Markov-Annahmen sind nicht verletzt).</li>
+        <li><strong>Effizienz sinkt:</strong> Die Varianz der Schätzer steigt stark.</li>
+        <li><strong>t-Statistiken werden klein:</strong> Einzelne Koeffizienten erscheinen insignifikant, obwohl sie gemeinsam signifikant sein können (hohes $R^2$, aber kein signifikanter Koeffizient).</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Gegenmaßnahmen</h3>
+      <ul>
+        <li>Variable weglassen (Achtung: OVB-Risiko!)</li>
+        <li>Mehr Beobachtungen sammeln</li>
+        <li>Variablen transformieren (z.B. Differenzen bilden)</li>
+        <li>Ridge-Regression (außerhalb des Grundkurses)</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Multikollinearität ≠ Verzerrung:</strong> OLS bleibt unverzerrt. Das Problem ist die Präzision, nicht die Richtung der Schätzer. Verwechseln Sie dies nicht mit Omitted Variable Bias.</div>
+      <div class="warn-box"><strong>VIF-Falle:</strong> Ein hoher VIF bedeutet nicht automatisch, dass das Modell falsch ist. Wenn die Prognose im Vordergrund steht (statt Koeffizienteninterpretation), kann Multikollinearität toleriert werden.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Variance Inflation Factor', eq: String.raw`$$VIF_j = \frac{1}{1 - R_j^2}$$`, desc: 'Maß für Kollinearität', variables: { 'R_j^2': 'Bestimmtheitsmaß der Hilfsregression von x_j auf alle anderen x' } },
+      { label: 'Varianz bei Multikollinearität', eq: String.raw`$$\text{Var}(\hat{\beta}_j) = \frac{\sigma^2}{SST_j \cdot (1 - R_j^2)}$$`, desc: 'Aufgeblähte Varianz' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`In einer Regression mit zwei erklärenden Variablen ($x_1$, $x_2$) beträgt die Korrelation $r_{12} = 0{,}95$. Berechnen Sie den VIF und interpretieren Sie das Ergebnis.`,
+        steps: [
+          { text: `Hilfsregression: $R_1^2 \approx r_{12}^2$ bei nur zwei Regressoren.`, eq: String.raw`R_1^2 = 0{,}95^2 = 0{,}9025` },
+          { text: `VIF berechnen:`, eq: String.raw`VIF = \frac{1}{1 - 0{,}9025} = \frac{1}{0{,}0975} \approx 10{,}26` },
+          { text: `Interpretation: VIF > 10.`, eq: String.raw`\text{Problematische Multikollinearität. Standardfehler sind ca. 10-fach aufgeblasen.}` }
+        ],
+        result: String.raw`$VIF \approx 10{,}3$; Koeffizienten einzeln kaum interpretierbar, aber weiterhin unverzerrt.`
+      }
+    ],
+    r_code: String.raw`
+# VIF in R berechnen
+library(car)
+vif(model)
+
+# Korrelationsmatrix
+cor(data[, c("x1", "x2", "x3")])
+    `
+  },
   heteroskedasticity: {
     motivation: 'Wenn die Fehlervarianz nicht konstant ist, verliert OLS seine Effizienz und Standardfehler werden ungültig.',
     theorie: String.raw`

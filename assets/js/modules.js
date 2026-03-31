@@ -524,6 +524,12 @@ export const MODULES = [
       "Interaktive Visualisierungen fuer Funktionen, Matrizen, Ableitungen, Optimierung und Integrale"
     ],
     sourcePath: `${sourceRoot}/Mathematik`,
+    portalState: {
+      progressKey: "mathematik_progress_v1",
+      srsKey: "mathematik_srs_v1",
+      lastKey: "mathematik_last_v1",
+      chapterCount: 6
+    },
     rLab: {
       intro: "Diese R-Aufgaben verbinden mathematische Grundideen direkt mit Rechenwegen, Visualisierung und numerischer Umsetzung.",
       lessons: [

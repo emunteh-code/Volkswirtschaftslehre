@@ -1036,6 +1036,28 @@ export const MODULES = [
     }
   },
   {
+    slug: "recht",
+    title: "Recht",
+    shortTitle: "Recht",
+    summary: "Grundlagen des Privatrechts, BGB Allgemeiner Teil und Schuldrecht im Gutachtenstil.",
+    accent: "#c62828",
+    type: "text_doctrinal",
+    status: "live",
+    href: "./recht/index.html",
+    materials: [
+      "Willenserklaerungen und Vertragsschluss",
+      "Stellvertretung und Leistungsstoerungen",
+      "Gutachtenstil: Fallloesung und Subsumtion"
+    ],
+    sourcePath: `${sourceRoot}/Recht`,
+    portalState: {
+      progressKey: "recht_progress_v1",
+      srsKey: "recht_srs_v1",
+      lastKey: "recht_last_v1",
+      chapterCount: 6
+    }
+  },
+  {
     slug: "politisches-system-brd",
     title: "Einführung in das politische System der BRD",
     shortTitle: "Einführung in das politische System der BRD",

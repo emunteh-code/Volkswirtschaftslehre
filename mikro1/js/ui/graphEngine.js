@@ -37,13 +37,13 @@ class GraphEngine {
         const resolvedFont = cv('--font-mono') || s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
 
         this.colors = {
-            grid:         cv('--border')     || '#38383a',
-            axis:         cv('--muted')      || '#8e8e93',
-            budget:       cv('--accent')     || '#d4ff5c',
-            indifference: cv('--accent2')    || '#5cf0ff',
-            optimum:      cv('--sys-orange') || '#ff9f0a',
-            vector:       cv('--accent3')    || '#ff6b6b',
-            text:         cv('--text')       || '#f5f5f7',
+            grid:         cv('--border')     || '#2e3338',
+            axis:         cv('--muted')      || '#8a8f98',
+            budget:       cv('--accent')     || '#4a90d9',
+            indifference: cv('--accent2')    || '#5a9fd4',
+            optimum:      cv('--sys-orange') || '#d49a4a',
+            vector:       cv('--accent3')    || '#e05252',
+            text:         cv('--text')       || '#e8e8ed',
             fontBody:     resolvedFont,
             fontMono:     cv('--font-mono')  || resolvedFont,
         };
@@ -300,17 +300,17 @@ class GraphEngine {
       // Use the browser's resolved font so canvas always matches page typography
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
       this._col = {
-        bg:       cv('--bg')        || '#f2f2f7',
-        grid:     cv('--border')    || '#38383a',
-        axis:     cv('--muted')     || '#8e8e93',
-        tick:     cv('--muted')     || '#8e8e93',
-        muted:    cv('--muted')     || '#8e8e93',
-        label:    cv('--text')      || '#1c1c1e',
-        text:     cv('--text')      || '#1c1c1e',
-        accent:   cv('--accent')    || '#3a6b00',
-        accent2:  cv('--accent2')   || '#0066a0',
-        warn:     cv('--accent3')   || '#ff6b6b',
-        card:     cv('--card')      || '#ffffff',
+        bg:       cv('--bg')        || '#0f1114',
+        grid:     cv('--border')    || '#2e3338',
+        axis:     cv('--muted')     || '#8a8f98',
+        tick:     cv('--muted')     || '#8a8f98',
+        muted:    cv('--muted')     || '#8a8f98',
+        label:    cv('--text')      || '#e8e8ed',
+        text:     cv('--text')      || '#e8e8ed',
+        accent:   cv('--accent')    || '#4a90d9',
+        accent2:  cv('--accent2')   || '#5a9fd4',
+        warn:     cv('--accent3')   || '#e05252',
+        card:     cv('--card')      || '#1a1d21',
         fontMono: cv('--font-mono') || resolvedFont,
         fontBody: resolvedFont,
       };

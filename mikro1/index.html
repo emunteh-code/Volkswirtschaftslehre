@@ -39,10 +39,12 @@
 
 <!-- ── Privacy Consent Notice ──────────────────────────────── -->
 <div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-  <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
-  <div class="consent-actions">
-    <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
-    <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+  <div class="consent-notice-inner">
+    <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
+    <div class="consent-actions">
+      <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
+      <button class="consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+    </div>
   </div>
 </div>
 

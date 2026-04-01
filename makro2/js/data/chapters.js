@@ -188,7 +188,7 @@ export const CONTENT = {
         text: String.raw`Ein deutscher Tourist gibt in den USA 2000 $ aus. Erkläre die Buchung in Theorie und Formel.`,
         steps: [
           { text: `Theorie: Reiseverkehr ist ein Dienstleistungsimport.`, eq: String.raw`LB \downarrow` },
-          { text: `Formel: $\Delta LB + \Delta KB = 0$.`, eq: String.raw$$-2000 + \Delta KB = 0 \implies \Delta KB = +2000$$` }
+          { text: `Formel: $\\Delta LB + \\Delta KB = 0$.`, eq: String.raw`$-2000 + \Delta KB = 0 \implies \Delta KB = +2000$` }
         ],
         result: String.raw`LB sinkt, KB (Forderungsabbau) steigt.`
       }
@@ -354,7 +354,7 @@ export const CONTENT = {
       {
         text: String.raw`Geldmengenerhöhung ($M \uparrow$) bei festen Wechselkursen. Beschreibe die notwendige ZB-Intervention.`,
         steps: [
-          { text: `Theorie: $M \uparrow$ erzeugt Abwertungsdruck.`, eq: null },
+          { text: String.raw`Theorie: $M \uparrow$ erzeugt Abwertungsdruck.`, eq: null },
           { text: `Aktion: Die ZB muss eigene Währung kaufen und Devisen verkaufen.`, eq: null },
           { text: `Formel: $\Delta M$ wird durch $\Delta R$ (Reserven) neutralisiert.`, eq: String.raw`$$\Delta M = \Delta R_{neg} \implies M_{neu} = M_{alt}$$` }
         ],

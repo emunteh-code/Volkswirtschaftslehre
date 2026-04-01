@@ -95,7 +95,7 @@ export const MODULES = [
   {
     slug: "jahresabschluss",
     title: "Jahresabschluss",
-    shortTitle: "Accounting",
+    shortTitle: "Jahresabschluss",
     summary: "Bilanzierung, Bewertung und GoB nach HGB.",
     accent: "#7c3aed",
     difficulty: "Anfänger",
@@ -139,7 +139,7 @@ export const FILTERS = [
   { id: "quantitative", label: "Analytisch" },
   { id: "quantitative_coding", label: "Mit R-Lab" },
   { id: "text_doctrinal", label: "Textlastig" },
-  { id: "mixed", label: "Mixed" }
+  { id: "mixed", label: "Gemischt" }
 ];
 
 export function getModuleBySlug(slug) {

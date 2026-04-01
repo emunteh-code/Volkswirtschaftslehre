@@ -174,7 +174,12 @@ function drawBudget(progress = 1) {
   ], col.accent2 + '59', 20);
 
   document.getElementById('graph_info').innerHTML =
-    `<span style="color:var(--accent2)">Budgetgerade:</span> x₂ = <b>${x2max.toFixed(1)}</b> − ${(p1 / p2).toFixed(2)}·x₁ &nbsp;|&nbsp; Steigung = <b>${slope.toFixed(2)}</b> &nbsp;|&nbsp; x₁<sup>max</sup>= <b>${x1max.toFixed(1)}</b>, x₂<sup>max</sup>= <b>${x2max.toFixed(1)}</b>`;
+    `<span class="gi-label">Interpretation</span>
+    <div class="gi-eq">x₂ = ${x2max.toFixed(1)} − ${(p1 / p2).toFixed(2)} · x₁</div>
+    Bei einem Einkommen von <strong>m = ${m}</strong> und Preisen <strong>p₁ = ${p1}</strong>, <strong>p₂ = ${p2}</strong>
+    kann der Haushalt maximal <strong>${x1max.toFixed(1)}</strong> Einheiten von Gut 1 oder <strong>${x2max.toFixed(1)}</strong> Einheiten von Gut 2 kaufen.
+    Die Steigung <strong>${slope.toFixed(2)}</strong> zeigt das Tauschverhältnis: für jede zusätzliche Einheit x₁ muss der Haushalt auf <strong>${(p1/p2).toFixed(2)}</strong> Einheiten x₂ verzichten.
+    Alle Punkte unterhalb und auf der Geraden sind erreichbar — die Gerade selbst zeigt die Bündel, die das Budget genau ausschöpfen.`;
 
   // Tooltip registration — after full draw
   registerTooltipPoints(canvas, [
@@ -227,9 +232,12 @@ function drawIndiff(progress = 1) {
   ], col.accent2 + '66');
 
   document.getElementById('graph_info').innerHTML =
-    `<strong>Nutzenfunktion:</strong> u(x₁, x₂) = x₁ · x₂. `
-    + `Jeder Punkt auf einer Indifferenzkurve liefert dasselbe Nutzenniveau ū. `
-    + `Kurven weiter vom Ursprung bedeuten höheren Nutzen (Monotonie).`;
+    `<span class="gi-label">Interpretation</span>
+    <div class="gi-eq">u(x₁, x₂) = x₁ · x₂</div>
+    Die Grafik zeigt zwei Indifferenzkurven mit den Nutzenniveaus <strong>ū₁ = ${u1}</strong> und <strong>ū₂ = ${u2}</strong>.
+    Jeder Punkt auf einer Kurve liefert dem Haushalt exakt dasselbe Nutzenniveau — er ist zwischen allen diesen Bündeln indifferent.
+    ${u2 > u1 ? `Die äußere Kurve (ū = ${u2}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.` : `Die innere Kurve (ū = ${u1}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.`}
+    Die konvexe Form zeigt, dass Konsumenten gemischte Bündel gegenüber Extremen bevorzugen (abnehmende Grenzrate der Substitution).`;
 
   registerTooltipPoints(canvas, []);
 }
@@ -324,7 +332,10 @@ function drawHausopt(progress = 1) {
   ], col.accent2 + '59', 20);
 
   document.getElementById('graph_info').innerHTML =
-    `<span style="color:var(--accent2)">Optimum E*:</span> x₁* = <b>${x1s.toFixed(2)}</b>, x₂* = <b>${x2s.toFixed(2)}</b> &nbsp;|&nbsp; u* = <b>${ustar.toFixed(2)}</b> &nbsp;|&nbsp; GRS = p₁/p₂ = <b>${(p1 / p2).toFixed(3)}</b>`;
+    `<span class="gi-label">Interpretation</span>
+    Das Haushaltsoptimum liegt bei <strong>x₁* = ${x1s.toFixed(2)}</strong>, <strong>x₂* = ${x2s.toFixed(2)}</strong> mit einem maximalen Nutzen von <strong>u* = ${ustar.toFixed(2)}</strong>.
+    In diesem Punkt berührt die höchstmögliche Indifferenzkurve gerade noch die Budgetgerade — die Grenzrate der Substitution (GRS) entspricht exakt dem Preisverhältnis: <strong>GRS = p₁/p₂ = ${(p1/p2).toFixed(3)}</strong>.
+    Das bedeutet: der Haushalt bewertet die letzte Einheit x₁ subjektiv genauso wie der Markt sie bepreist. Jede Umschichtung des Budgets würde den Nutzen senken.`;
 
   registerTooltipPoints(canvas, [
     {
@@ -523,8 +534,14 @@ function drawMonopol(progress = 1) {
     { color: col.accent2,         fill: col.accent2+'14', label: 'Monopolgewinn π' },
   ], col.accent2 + '59', 20);
 
+  { const profitM = (pm - mcAtYm) * ym;
   document.getElementById('graph_info').innerHTML =
-    `<span style="color:var(--accent2)">Monopol:</span> yₘ = <b>${ym.toFixed(2)}</b>, pₘ = <b>${pm.toFixed(2)}</b> &nbsp;|&nbsp; <span style="color:var(--muted)">Wettbewerb:</span> y_vk = ${yvk.toFixed(2)}, p_vk = ${pvk.toFixed(2)} &nbsp;|&nbsp; <span style="color:var(--accent3)">DWL</span> = Harberger-Dreieck`;
+    `<span class="gi-label">Interpretation</span>
+    Der Monopolist wählt die Menge <strong>yₘ = ${ym.toFixed(2)}</strong> und setzt den Preis <strong>pₘ = ${pm.toFixed(2)}</strong> — dort, wo Grenzerlös gleich Grenzkosten ist (MR = MC).
+    Im Vergleich zum Wettbewerbsgleichgewicht (<strong>y = ${yvk.toFixed(2)}</strong>, <strong>p = ${pvk.toFixed(2)}</strong>) produziert der Monopolist weniger und verlangt mehr.
+    Der Monopolgewinn beträgt <strong>π ≈ ${profitM.toFixed(2)}</strong> (Rechteck zwischen pₘ und MC).
+    Das orange Dreieck (DWL) zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.`;
+  }
 
   registerTooltipPoints(canvas, [
     {
@@ -659,8 +676,16 @@ function drawSlutsky(progress = 1) {
     { color: col.text,    label: 'B → C = Einkommenseffekt' },
   ], col.accent2 + '59', 20);
 
+  { const direction = p1_1 > p1_0 ? 'gestiegen' : 'gesunken';
+  const seDir = SE > 0 ? 'erhöht' : 'gesenkt';
+  const eeDir = EE > 0 ? 'erhöht' : 'gesenkt';
   document.getElementById('graph_info').innerHTML =
-    `<strong>SE (Substitution)</strong> = ${SE.toFixed(3)} &nbsp;&nbsp; <strong>EE (Einkommen)</strong> = ${EE.toFixed(3)} &nbsp;&nbsp; <strong>Total</strong> = ${total.toFixed(3)}`;
+    `<span class="gi-label">Interpretation</span>
+    Der Preis von Gut 1 ist von <strong>p₁ = ${p1_0.toFixed(2)}</strong> auf <strong>${p1_1.toFixed(2)}</strong> ${direction}.
+    <strong>Substitutionseffekt (A → B):</strong> Bei konstantem Nutzenniveau u₀ = ${u0.toFixed(2)} ${seDir} der Haushalt x₁ um <strong>${Math.abs(SE).toFixed(3)}</strong> Einheiten — er substituiert entlang der ursprünglichen Indifferenzkurve.
+    <strong>Einkommenseffekt (B → C):</strong> Die Kaufkraftveränderung ${eeDir} x₁ um weitere <strong>${Math.abs(EE).toFixed(3)}</strong> Einheiten.
+    <strong>Gesamteffekt:</strong> x₁ verändert sich insgesamt um <strong>${total.toFixed(3)}</strong> Einheiten. ${Math.abs(SE) > Math.abs(EE) ? 'Der Substitutionseffekt dominiert.' : Math.abs(EE) > Math.abs(SE) ? 'Der Einkommenseffekt dominiert.' : 'Beide Effekte sind etwa gleich groß.'}`;
+  }
 
   registerTooltipPoints(canvas, [
     { cx: sx(x1_0), cy: sy(x2_0), html: `<b>A — Initiales Optimum</b><br>x₁ = ${x1_0.toFixed(3)}<br>x₂ = ${x2_0.toFixed(3)}<br>u₀ = ${u0.toFixed(3)}` },
@@ -823,10 +848,11 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     ctx.fillText(`Tangente: GRTS = ${grts.toFixed(2)}`, sx(Math.min(xMax * 0.58, laborPoint + 0.6)), sy(Math.min(yMax * 0.92, capitalPoint + 1.6)));
 
     document.getElementById('graph_info').innerHTML =
-      `<strong>GRTS am markierten Punkt:</strong> ${grts.toFixed(2)} &nbsp;|&nbsp; 
-      Für <strong>F(K,L)=K<sup>${alpha.toFixed(2)}</sup>L<sup>${(1 - alpha).toFixed(2)}</sup></strong> gilt
-      <strong>GRTS = MP<sub>L</sub>/MP<sub>K</sub> = ((1−α)/α)·K/L</strong>. 
-      Hier kann eine zusätzliche Arbeitseinheit bei konstantem Output rund <strong>${grts.toFixed(2)}</strong> Einheiten Kapital ersetzen.`;
+      `<span class="gi-label">Interpretation — GRTS</span>
+      <div class="gi-eq">GRTS = MP_L / MP_K = ((1−α)/α) · K/L = ${grts.toFixed(2)}</div>
+      Am markierten Punkt (L = ${laborPoint.toFixed(2)}, K = ${capitalPoint.toFixed(2)}) beträgt die Grenzrate der technischen Substitution <strong>${grts.toFixed(2)}</strong>.
+      Das bedeutet: eine zusätzliche Einheit Arbeit kann bei konstantem Output <strong>${grts.toFixed(2)}</strong> Einheiten Kapital ersetzen.
+      Die GRTS entspricht der Steigung der Isoquante — sie nimmt ab, je mehr Arbeit relativ zu Kapital eingesetzt wird (konvexe Isoquanten).`;
 
     registerTooltipPoints(canvas, [
       {
@@ -840,9 +866,12 @@ function drawProduktionBase(progress = 1, showGrts = false) {
 
   const secondOutput = output * 1.5;
   document.getElementById('graph_info').innerHTML =
-    `<strong>Produktionsfunktion:</strong> F(K,L) = K<sup>${alpha.toFixed(2)}</sup>L<sup>${(1 - alpha).toFixed(2)}</sup> &nbsp;|&nbsp;
-    Die innere Isoquante zeigt <strong>ȳ = ${output.toFixed(1)}</strong>, die äußere <strong>${secondOutput.toFixed(1)}</strong>.
-    Am markierten Punkt sind für ȳ = ${output.toFixed(1)} rund <strong>L = ${laborPoint.toFixed(1)}</strong> und <strong>K = ${capitalPoint.toFixed(2)}</strong> nötig.`;
+    `<span class="gi-label">Interpretation — Isoquanten</span>
+    <div class="gi-eq">F(K, L) = K^${alpha.toFixed(2)} · L^${(1 - alpha).toFixed(2)}</div>
+    Die innere Isoquante zeigt alle Kombinationen von Arbeit und Kapital, die den Output <strong>ȳ = ${output.toFixed(1)}</strong> erzeugen.
+    Die äußere Kurve (ȳ = ${secondOutput.toFixed(1)}) erfordert durchweg mehr Inputs — sie liegt weiter vom Ursprung.
+    Am markierten Punkt benötigt das Unternehmen für ȳ = ${output.toFixed(1)} rund <strong>L = ${laborPoint.toFixed(1)}</strong> Arbeit und <strong>K = ${capitalPoint.toFixed(2)}</strong> Kapital.
+    Entlang jeder Isoquante kann Arbeit durch Kapital ersetzt werden (und umgekehrt) — die konvexe Form zeigt, dass diese Substitution zunehmend schwieriger wird.`;
 
   registerTooltipPoints(canvas, Number.isFinite(capitalPoint) ? [
     {
@@ -923,9 +952,12 @@ function drawKosten(progress = 1) {
   }
 
   document.getElementById('graph_info').innerHTML =
-    `<strong>Kostenminimum:</strong> Bei <strong>w = ${wage.toFixed(2)}</strong>, <strong>r = ${rent.toFixed(2)}</strong> und <strong>ȳ = ${output.toFixed(1)}</strong>
-    liegt das kostenminimale Bündel bei <strong>L* = ${laborStar.toFixed(2)}</strong>, <strong>K* = ${capitalStar.toFixed(2)}</strong>. 
-    Die Minimalbedingung lautet <strong>GRTS = w/r = ${(wage / rent).toFixed(2)}</strong>; die Minimalkosten betragen <strong>C = ${totalCost.toFixed(2)}</strong>.`;
+    `<span class="gi-label">Interpretation — Kostenminimierung</span>
+    <div class="gi-eq">min C = w·L + r·K  s.t. F(K,L) = ȳ</div>
+    Bei Faktorpreisen <strong>w = ${wage.toFixed(2)}</strong> (Lohn) und <strong>r = ${rent.toFixed(2)}</strong> (Kapitalzins) und einem Zieloutput von <strong>ȳ = ${output.toFixed(1)}</strong>
+    liegt das kostenminimale Inputbündel bei <strong>L* = ${laborStar.toFixed(2)}</strong>, <strong>K* = ${capitalStar.toFixed(2)}</strong>.
+    Im Optimum gilt <strong>GRTS = w/r = ${(wage / rent).toFixed(2)}</strong> — die Isoquante berührt die Isokostengerade tangential.
+    Die minimalen Gesamtkosten betragen <strong>C = ${totalCost.toFixed(2)}</strong>. Jede andere Inputkombination auf derselben Isoquante wäre teurer.`;
 
   registerTooltipPoints(canvas, [
     {
@@ -1027,9 +1059,14 @@ function drawMarkt(progress = 1) {
   }
 
   document.getElementById('graph_info').innerHTML = hasTrade
-    ? `<strong>Marktgleichgewicht:</strong> p* = <strong>${pEq.toFixed(2)}</strong>, q* = <strong>${qEq.toFixed(2)}</strong> &nbsp;|&nbsp;
-      Konsumentenrente ≈ <strong>${cs.toFixed(2)}</strong>, Produzentenrente ≈ <strong>${ps.toFixed(2)}</strong>.`
-    : `<strong>Kein positives Marktgleichgewicht:</strong> Das Angebotsniveau startet oberhalb der Zahlungsbereitschaft. In diesem Parameterbereich kommt kein Handel zustande.`;
+    ? `<span class="gi-label">Interpretation — Marktgleichgewicht</span>
+      <div class="gi-eq">D: p = ${a.toFixed(0)} − ${b.toFixed(2)}·q &nbsp;&nbsp; S: p = ${c.toFixed(0)} + ${d.toFixed(2)}·q</div>
+      Im Gleichgewicht schneiden sich Angebots- und Nachfragekurve bei <strong>p* = ${pEq.toFixed(2)}</strong> und <strong>q* = ${qEq.toFixed(2)}</strong>.
+      Die <strong>Konsumentenrente ≈ ${cs.toFixed(2)}</strong> misst die Ersparnis der Käufer gegenüber ihrer maximalen Zahlungsbereitschaft (Dreieck über dem Gleichgewichtspreis).
+      Die <strong>Produzentenrente ≈ ${ps.toFixed(2)}</strong> misst den Gewinn der Verkäufer über ihre Mindestkosten hinaus (Dreieck unter dem Gleichgewichtspreis).
+      Gemeinsam bilden sie die gesamte Wohlfahrt — im Wettbewerbsgleichgewicht ist diese maximal.`
+    : `<span class="gi-label">Interpretation</span>
+      <strong>Kein Handel möglich:</strong> Die Mindestkosten der Anbieter liegen oberhalb der maximalen Zahlungsbereitschaft der Nachfrager. In diesem Parameterbereich existiert kein positives Marktgleichgewicht — die Kurven schneiden sich nicht im positiven Bereich.`;
 
   registerTooltipPoints(canvas, hasTrade ? [
     {

@@ -127,6 +127,8 @@ function drawBudget(progress = 1) {
   const x1max = m / p1, x2max = m / p2;
   const slope  = -(p1 / p2);
   const axMax  = Math.max(x1max, x2max) * 1.35;
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
   const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
@@ -154,7 +156,7 @@ function drawBudget(progress = 1) {
     // y-intercept dot + label
     drawDot(ctx, sx(0), sy(x2max), 6, col.accent, col.bg);
     ctx.fillStyle   = col.text;
-    ctx.font        = `bold 13px ${col.fontBody}`;
+    ctx.font        = `bold ${fsBold}px ${col.fontBody}`;
     ctx.textAlign   = 'right';
     ctx.fillText('m/p₂=' + x2max.toFixed(1), sx(0) - 10, sy(x2max) + 4);
 
@@ -198,6 +200,7 @@ function drawIndiff(progress = 1) {
   document.getElementById('v_u2').textContent = u2;
 
   const axMax = Math.sqrt(Math.max(u1, u2)) * 4;
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
   const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
@@ -212,7 +215,7 @@ function drawIndiff(progress = 1) {
   // "higher utility" hint — placed in upper-right to avoid curve-label zone
   if (progress >= 0.9) {
     ctx.fillStyle = col.accent2 + '99';
-    ctx.font      = `15px ${col.fontBody}`;
+    ctx.font      = `${fsBase + 2}px ${col.fontBody}`;
     ctx.textAlign = 'right';
     ctx.fillText('↗ höherer Nutzen', PAD + PW * 0.96, PAD + PH * 0.15);
   }
@@ -222,6 +225,11 @@ function drawIndiff(progress = 1) {
     { color: clr2,      label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
     { color: col.label, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
   ], col.accent2 + '66');
+
+  document.getElementById('graph_info').innerHTML =
+    `<strong>Nutzenfunktion:</strong> u(x₁, x₂) = x₁ · x₂. `
+    + `Jeder Punkt auf einer Indifferenzkurve liefert dasselbe Nutzenniveau ū. `
+    + `Kurven weiter vom Ursprung bedeuten höheren Nutzen (Monotonie).`;
 
   registerTooltipPoints(canvas, []);
 }
@@ -248,6 +256,8 @@ function drawHausopt(progress = 1) {
   const x1s = m / (2 * p1), x2s = m / (2 * p2), ustar = x1s * x2s;
   const x1max = m / p1, x2max = m / p2;
   const axMax = Math.max(x1max, x2max) * 1.35;
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
   const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
@@ -284,7 +294,7 @@ function drawHausopt(progress = 1) {
 
     // Axis value labels
     ctx.fillStyle = col.warn;
-    ctx.font      = `bold 14px ${col.fontBody}`;
+    ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
     ctx.textAlign = 'center';
     ctx.fillText('x₁* = ' + x1s.toFixed(1), sx(x1s), sy(0) + 30);
     ctx.textAlign = 'right';
@@ -293,15 +303,15 @@ function drawHausopt(progress = 1) {
 
   // Optimum dot + GRS label — appear last
   if (progress >= 0.92) {
-    drawDot(ctx, sx(x1s), sy(x2s), 7, col.warn, col.bg);
+    drawDot(ctx, sx(x1s), sy(x2s), 6, col.warn, col.bg);
     ctx.fillStyle = col.text;
-    ctx.font      = `bold 15px ${col.fontBody}`;
+    ctx.font      = `bold ${fsBold + 1}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('E* (Optimum)', sx(x1s) + 10, sy(x2s) - 8);
 
     // GRS annotation — placed below optimum label, well clear of legend area
     ctx.fillStyle = col.warn + 'b3';
-    ctx.font      = `13px ${col.fontBody}`;
+    ctx.font      = `${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('GRS = p₁/p₂ = ' + (p1 / p2).toFixed(2), sx(x1s) + 10, sy(x2s) + 8);
   }
@@ -490,14 +500,14 @@ function drawMonopol(progress = 1) {
   // Equilibrium dots + labels — appear last
   if (progress >= 0.92) {
     // Monopoly (Cournotscher) point
-    drawDot(ctx, sx(ym), sy(pm), 7, col.warn, col.bg);
+    drawDot(ctx, sx(ym), sy(pm), 6, col.warn, col.bg);
     ctx.fillStyle = col.text;
     ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('Cournotscher Punkt', sx(ym) + 10, sy(pm) - 8);
 
     // Competitive equilibrium point
-    drawDot(ctx, sx(yvk), sy(pvk), 5, col.muted, col.bg);
+    drawDot(ctx, sx(yvk), sy(pvk), 6, col.muted, col.bg);
     ctx.fillStyle = col.muted;
     ctx.font      = `${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
@@ -559,6 +569,8 @@ function drawSlutsky(progress = 1) {
   const x1max = Math.max(m / p1_0, m / p1_1, x1_c * 1.2);
   const x2max = Math.max(m / p2, x2_c * 1.2);
   const axMax = Math.max(x1max, x2max) * 1.35;
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
+  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
   const { sx, sy, PAD, PW, PH } = ge.drawScene(w, h, ctx, axMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
@@ -583,7 +595,7 @@ function drawSlutsky(progress = 1) {
     ctx.setLineDash([]);
     if (label && progress >= 0.8) {
       ctx.fillStyle = color;
-      ctx.font      = `bold 13px ${col.fontBody}`;
+      ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
       ctx.textAlign = 'left';
       ctx.fillText(label, sx(xi * 0.75), sy(yi * yFrac));
     }
@@ -608,7 +620,7 @@ function drawSlutsky(progress = 1) {
     ctx.setLineDash([]);
     if (progress >= 0.85) {
       ctx.fillStyle = col.accent2;
-      ctx.font      = `bold 13px ${col.fontBody}`;
+      ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
       ctx.textAlign = 'left';
       ctx.fillText('Kompensiertes Budget', sx(xi_c * 0.52), sy(yi_c * 0.48) - 8);
     }
@@ -619,11 +631,11 @@ function drawSlutsky(progress = 1) {
     function dot(x, y, color, tag) {
       drawDot(ctx, sx(x), sy(y), 6, color, col.bg);
       ctx.fillStyle = col.text;
-      ctx.font      = `13px ${col.fontBody}`;
+      ctx.font      = `${fsBase + 1}px ${col.fontBody}`;
       ctx.textAlign = 'left';
       ctx.fillText(tag, sx(x) + 9, sy(y) - 8);
       ctx.fillStyle = color;
-      ctx.font      = `bold 11px ${col.fontBody}`;
+      ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
       ctx.fillText(`(${x.toFixed(2)}, ${y.toFixed(2)})`, sx(x) + 9, sy(y) + 5);
     }
     dot(x1_0, x2_0, col.accent,  'A');

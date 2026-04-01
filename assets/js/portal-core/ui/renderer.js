@@ -641,7 +641,7 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
     updateTabButtons(activeTab, tabAvailability);
 
     if (breadcrumb) {
-      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / ${chapter.cat} / ${chapter.title}`;
+      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / ${chapter.cat} / ${chapter.title}`;
     }
 
     if (!entry) {
@@ -698,7 +698,7 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
     if (!content) return;
     if (tabRow) tabRow.classList.remove("visible");
     if (breadcrumb) {
-      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / Startseite`;
+      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button>`;
     }
 
     const categories = {};
@@ -789,7 +789,7 @@ ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigat
     const breadcrumb = document.getElementById("breadcrumb");
     if (!content) return;
     if (tabRow) tabRow.classList.remove("visible");
-    if (breadcrumb) breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / Dashboard`;
+    if (breadcrumb) breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / Dashboard`;
     content.innerHTML = renderDashboard();
     renderMath(content);
   }

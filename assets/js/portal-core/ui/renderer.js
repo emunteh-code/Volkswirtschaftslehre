@@ -383,10 +383,8 @@ export function createRenderer({
   function renderExamDrillDeck(chapter, entry, intuition) {
     const drills = buildExamDrills(chapter, entry, intuition);
     return `<div class="exam-drill-panel">
-<div class="section-block">
-<h3>Prüfungsfragen</h3>
-<p>Diese Kurzfragen verdichten Theorie, Formeln, typische Fehler und vorhandene Aufgaben zu einer kompakten klausurnahen Wiederholung.</p>
-</div>
+<div class="practice-section-header">Prüfungstransfer</div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px">Diese Kurzfragen verdichten Theorie, Formeln, typische Fehler und vorhandene Aufgaben zu einer kompakten klausurnahen Wiederholung.</p>
 <div class="exam-drill-grid">
 ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, "_")}_${index}`;
@@ -475,7 +473,12 @@ ${answerMarkup}
       }
       return '<div class="panel active"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
-    let html = '<div class="panel active">';
+    let html = `<div class="panel active">
+<div class="section-block" style="margin-bottom:24px">
+<h3>Arbeitsmodus</h3>
+<p>Bearbeite zuerst die <strong>Geführten Aufgaben</strong> — sie führen Schritt für Schritt durch den Rechenweg und sichern das Grundverständnis. Danach prüfen die <strong>Prüfungstransfer-Fragen</strong>, ob du Theorie, Formeln und typische Fehler unter Klausurbedingungen abrufen kannst.</p>
+</div>
+<div class="practice-section-header">Geführte Aufgaben</div>`;
     tasks.forEach((task, taskIndex) => {
       html += renderQuestionCard({
         label: `Aufgabe ${taskIndex + 1}`,

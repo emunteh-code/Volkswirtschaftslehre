@@ -880,8 +880,24 @@ button:active:not(:disabled) { transform: scale(0.98); }
   margin-top: 6px;
 }
 
+/* Unified practice section header (Geführte Aufgaben / Prüfungstransfer) */
+.practice-section-header {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  background: rgba(74,144,217,0.08);
+  border: 1px solid rgba(74,144,217,0.18);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 16px;
+}
+
 .exam-drill-panel {
-  margin-top: 28px;
+  margin-top: 32px;
   display: grid;
   gap: 16px;
 }
@@ -948,7 +964,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
   margin-bottom: 20px;
 }
 .formula-card {
-  background: var(--surface2);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 18px 20px;

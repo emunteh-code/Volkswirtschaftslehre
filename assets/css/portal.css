@@ -200,35 +200,36 @@ html { scroll-behavior: smooth; }
 
 /* ── Hero Section ───────────────────────────────────────────── */
 .hero-section {
-  padding: var(--space-xl) 0 60px;
+  padding: var(--space-lg) 0 var(--space-xl);
 }
 
 .hero-content {
-  max-width: 640px;
+  max-width: 580px;
 }
 
 .hero-content h1 {
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.125rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.03em;
   margin: 0 0 var(--space-sm);
 }
 
 .hero-subtitle {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   color: var(--muted);
   margin: 0 0 var(--space-xs);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .trust-signal {
-  font-size: 0.75rem;
-  color: var(--accent);
-  margin-bottom: var(--space-lg);
+  font-size: 0.6875rem;
+  color: var(--muted);
+  margin-bottom: var(--space-md);
   font-family: var(--font-mono);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .hero-actions {
@@ -297,14 +298,14 @@ html { scroll-behavior: smooth; }
 
 /* ── Module Grid ────────────────────────────────────────────── */
 .module-grid-section {
-  padding-bottom: 80px;
+  padding-bottom: 60px;
 }
 
 .section-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   gap: var(--space-sm);
 }
 
@@ -323,15 +324,15 @@ html { scroll-behavior: smooth; }
 
 .module-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
 }
 
 /* ── Module Card (mikro1 panel style) ───────────────────────── */
 .module-tile {
   display: flex;
   flex-direction: column;
-  padding: var(--space-md);
+  padding: 16px 18px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
@@ -406,67 +407,73 @@ html { scroll-behavior: smooth; }
 }
 
 .module-tile .status-badge {
-  padding: 3px 10px;
+  padding: 3px 8px;
   border-radius: var(--r-sm);
-  background: var(--accent);
-  color: var(--accent-fg);
+  background: rgba(74,144,217,0.08);
+  border: 1px solid rgba(74,144,217,0.18);
+  color: var(--accent);
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
 }
 
 .action-hint {
-  font-weight: 600;
-  color: var(--accent);
-  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.75rem;
 }
 
 /* ── How It Works ───────────────────────────────────────────── */
 .how-it-works-section {
-  padding-bottom: 80px;
+  padding-bottom: 60px;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-lg);
 }
 
 .how-it-works-section h2 {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  margin: 0 0 var(--space-lg);
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-md);
   letter-spacing: -0.02em;
+  color: var(--muted);
 }
 
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-sm);
+  gap: 10px;
 }
 
 .step-card {
-  padding: var(--space-md);
+  padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
 }
 
 .step-num {
   display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-fg);
+  background: rgba(74,144,217,0.10);
+  color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .step-card h3 {
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
 }
 
 .step-card p {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--muted);
   margin: 0;
   line-height: 1.45;

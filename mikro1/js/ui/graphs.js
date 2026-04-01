@@ -179,7 +179,8 @@ function drawBudget(progress = 1) {
     Bei einem Einkommen von <strong>m = ${m}</strong> und Preisen <strong>p₁ = ${p1}</strong>, <strong>p₂ = ${p2}</strong>
     kann der Haushalt maximal <strong>${x1max.toFixed(1)}</strong> Einheiten von Gut 1 oder <strong>${x2max.toFixed(1)}</strong> Einheiten von Gut 2 kaufen.
     Die Steigung <strong>${slope.toFixed(2)}</strong> zeigt das Tauschverhältnis: für jede zusätzliche Einheit x₁ muss der Haushalt auf <strong>${(p1/p2).toFixed(2)}</strong> Einheiten x₂ verzichten.
-    Alle Punkte unterhalb und auf der Geraden sind erreichbar — die Gerade selbst zeigt die Bündel, die das Budget genau ausschöpfen.`;
+    Alle Punkte unterhalb und auf der Geraden sind erreichbar — die Gerade selbst zeigt die Bündel, die das Budget genau ausschöpfen.
+    <strong>Klausurtipp:</strong> Steigt p₁, dreht sich die Gerade um den y-Achsenabschnitt nach innen. Steigt m, verschiebt sich die Gerade parallel nach außen. Beides verändert die erreichbare Menge — Grundlage der komparativen Statik.`;
 
   // Tooltip registration — after full draw
   registerTooltipPoints(canvas, [
@@ -237,7 +238,8 @@ function drawIndiff(progress = 1) {
     Die Grafik zeigt zwei Indifferenzkurven mit den Nutzenniveaus <strong>ū₁ = ${u1}</strong> und <strong>ū₂ = ${u2}</strong>.
     Jeder Punkt auf einer Kurve liefert dem Haushalt exakt dasselbe Nutzenniveau — er ist zwischen allen diesen Bündeln indifferent.
     ${u2 > u1 ? `Die äußere Kurve (ū = ${u2}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.` : `Die innere Kurve (ū = ${u1}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.`}
-    Die konvexe Form zeigt, dass Konsumenten gemischte Bündel gegenüber Extremen bevorzugen (abnehmende Grenzrate der Substitution).`;
+    Die konvexe Form zeigt, dass Konsumenten gemischte Bündel gegenüber Extremen bevorzugen (abnehmende Grenzrate der Substitution).
+    <strong>Klausurtipp:</strong> Indifferenzkurven schneiden sich nie — sonst wäre ein Bündel gleichzeitig besser und gleich gut, ein Widerspruch zur Transitivität.`;
 
   registerTooltipPoints(canvas, []);
 }
@@ -335,7 +337,8 @@ function drawHausopt(progress = 1) {
     `<span class="gi-label">Interpretation</span>
     Das Haushaltsoptimum liegt bei <strong>x₁* = ${x1s.toFixed(2)}</strong>, <strong>x₂* = ${x2s.toFixed(2)}</strong> mit einem maximalen Nutzen von <strong>u* = ${ustar.toFixed(2)}</strong>.
     In diesem Punkt berührt die höchstmögliche Indifferenzkurve gerade noch die Budgetgerade — die Grenzrate der Substitution (GRS) entspricht exakt dem Preisverhältnis: <strong>GRS = p₁/p₂ = ${(p1/p2).toFixed(3)}</strong>.
-    Das bedeutet: der Haushalt bewertet die letzte Einheit x₁ subjektiv genauso wie der Markt sie bepreist. Jede Umschichtung des Budgets würde den Nutzen senken.`;
+    Das bedeutet: der Haushalt bewertet die letzte Einheit x₁ subjektiv genauso wie der Markt sie bepreist. Jede Umschichtung des Budgets würde den Nutzen senken.
+    <strong>Klausurtipp:</strong> Die Tangentialbedingung GRS = p₁/p₂ ist die zentrale Optimierungsbedingung — sie wird fast immer abgefragt. In der Klausur: Lagrange aufstellen oder direkt GRS = MU₁/MU₂ = p₁/p₂ setzen.`;
 
   registerTooltipPoints(canvas, [
     {
@@ -540,7 +543,8 @@ function drawMonopol(progress = 1) {
     Der Monopolist wählt die Menge <strong>yₘ = ${ym.toFixed(2)}</strong> und setzt den Preis <strong>pₘ = ${pm.toFixed(2)}</strong> — dort, wo Grenzerlös gleich Grenzkosten ist (MR = MC).
     Im Vergleich zum Wettbewerbsgleichgewicht (<strong>y = ${yvk.toFixed(2)}</strong>, <strong>p = ${pvk.toFixed(2)}</strong>) produziert der Monopolist weniger und verlangt mehr.
     Der Monopolgewinn beträgt <strong>π ≈ ${profitM.toFixed(2)}</strong> (Rechteck zwischen pₘ und MC).
-    Das orange Dreieck (DWL) zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.`;
+    Das orange Dreieck (DWL) zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.
+    <strong>Klausurtipp:</strong> Optimierungsbedingung ist MR = MC, nicht P = MC. Das DWL-Dreieck lässt sich als ½ · (yᵥₖ − yₘ) · (pₘ − pᵥₖ) berechnen. Häufige Folgefrage: Wie verändert eine Steuer das Cournot-Gleichgewicht?`;
   }
 
   registerTooltipPoints(canvas, [
@@ -684,7 +688,8 @@ function drawSlutsky(progress = 1) {
     Der Preis von Gut 1 ist von <strong>p₁ = ${p1_0.toFixed(2)}</strong> auf <strong>${p1_1.toFixed(2)}</strong> ${direction}.
     <strong>Substitutionseffekt (A → B):</strong> Bei konstantem Nutzenniveau u₀ = ${u0.toFixed(2)} ${seDir} der Haushalt x₁ um <strong>${Math.abs(SE).toFixed(3)}</strong> Einheiten — er substituiert entlang der ursprünglichen Indifferenzkurve.
     <strong>Einkommenseffekt (B → C):</strong> Die Kaufkraftveränderung ${eeDir} x₁ um weitere <strong>${Math.abs(EE).toFixed(3)}</strong> Einheiten.
-    <strong>Gesamteffekt:</strong> x₁ verändert sich insgesamt um <strong>${total.toFixed(3)}</strong> Einheiten. ${Math.abs(SE) > Math.abs(EE) ? 'Der Substitutionseffekt dominiert.' : Math.abs(EE) > Math.abs(SE) ? 'Der Einkommenseffekt dominiert.' : 'Beide Effekte sind etwa gleich groß.'}`;
+    <strong>Gesamteffekt:</strong> x₁ verändert sich insgesamt um <strong>${total.toFixed(3)}</strong> Einheiten. ${Math.abs(SE) > Math.abs(EE) ? 'Der Substitutionseffekt dominiert.' : Math.abs(EE) > Math.abs(SE) ? 'Der Einkommenseffekt dominiert.' : 'Beide Effekte sind etwa gleich groß.'}
+    <strong>Klausurtipp:</strong> ${total < 0 ? 'Die Nachfrage sinkt bei Preisanstieg — normales Gut. ' : total > 0 ? 'Die Nachfrage steigt bei Preisanstieg — Giffen-Gut (EE überwiegt SE). ' : ''}In der Zerlegung: zuerst das kompensierte Budget berechnen (Slutsky: m\' = p₁\'·x₁⁰ + p₂·x₂⁰), dann die Optima vergleichen.`;
   }
 
   registerTooltipPoints(canvas, [
@@ -852,7 +857,8 @@ function drawProduktionBase(progress = 1, showGrts = false) {
       <div class="gi-eq">GRTS = MP_L / MP_K = ((1−α)/α) · K/L = ${grts.toFixed(2)}</div>
       Am markierten Punkt (L = ${laborPoint.toFixed(2)}, K = ${capitalPoint.toFixed(2)}) beträgt die Grenzrate der technischen Substitution <strong>${grts.toFixed(2)}</strong>.
       Das bedeutet: eine zusätzliche Einheit Arbeit kann bei konstantem Output <strong>${grts.toFixed(2)}</strong> Einheiten Kapital ersetzen.
-      Die GRTS entspricht der Steigung der Isoquante — sie nimmt ab, je mehr Arbeit relativ zu Kapital eingesetzt wird (konvexe Isoquanten).`;
+      Die GRTS entspricht der Steigung der Isoquante — sie nimmt ab, je mehr Arbeit relativ zu Kapital eingesetzt wird (konvexe Isoquanten).
+      <strong>Klausurtipp:</strong> Im Kostenminimum gilt GRTS = w/r. Ist die aktuelle GRTS größer als w/r, lohnt sich mehr Arbeit und weniger Kapital — und umgekehrt.`;
 
     registerTooltipPoints(canvas, [
       {
@@ -871,7 +877,9 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     Die innere Isoquante zeigt alle Kombinationen von Arbeit und Kapital, die den Output <strong>ȳ = ${output.toFixed(1)}</strong> erzeugen.
     Die äußere Kurve (ȳ = ${secondOutput.toFixed(1)}) erfordert durchweg mehr Inputs — sie liegt weiter vom Ursprung.
     Am markierten Punkt benötigt das Unternehmen für ȳ = ${output.toFixed(1)} rund <strong>L = ${laborPoint.toFixed(1)}</strong> Arbeit und <strong>K = ${capitalPoint.toFixed(2)}</strong> Kapital.
-    Entlang jeder Isoquante kann Arbeit durch Kapital ersetzt werden (und umgekehrt) — die konvexe Form zeigt, dass diese Substitution zunehmend schwieriger wird.`;
+    Entlang jeder Isoquante kann Arbeit durch Kapital ersetzt werden (und umgekehrt) — die konvexe Form zeigt, dass diese Substitution zunehmend schwieriger wird.
+    <strong>Klausurtipp:</strong> ${alpha.toFixed(2) === '0.50' ? 'Bei α = 0.5 sind die Skalenerträge konstant (α + (1−α) = 1) — eine Verdopplung aller Inputs verdoppelt den Output.' : parseFloat(alpha.toFixed(2)) + parseFloat((1 - alpha).toFixed(2)) > 1 ? 'Hier liegen steigende Skalenerträge vor (α + (1−α) > 1).' : parseFloat(alpha.toFixed(2)) + parseFloat((1 - alpha).toFixed(2)) < 1 ? 'Hier liegen sinkende Skalenerträge vor (α + (1−α) < 1).' : 'Bei α + (1−α) = 1 liegen konstante Skalenerträge vor.'}`;
+
 
   registerTooltipPoints(canvas, Number.isFinite(capitalPoint) ? [
     {
@@ -957,7 +965,8 @@ function drawKosten(progress = 1) {
     Bei Faktorpreisen <strong>w = ${wage.toFixed(2)}</strong> (Lohn) und <strong>r = ${rent.toFixed(2)}</strong> (Kapitalzins) und einem Zieloutput von <strong>ȳ = ${output.toFixed(1)}</strong>
     liegt das kostenminimale Inputbündel bei <strong>L* = ${laborStar.toFixed(2)}</strong>, <strong>K* = ${capitalStar.toFixed(2)}</strong>.
     Im Optimum gilt <strong>GRTS = w/r = ${(wage / rent).toFixed(2)}</strong> — die Isoquante berührt die Isokostengerade tangential.
-    Die minimalen Gesamtkosten betragen <strong>C = ${totalCost.toFixed(2)}</strong>. Jede andere Inputkombination auf derselben Isoquante wäre teurer.`;
+    Die minimalen Gesamtkosten betragen <strong>C = ${totalCost.toFixed(2)}</strong>. Jede andere Inputkombination auf derselben Isoquante wäre teurer.
+    <strong>Klausurtipp:</strong> Das Kostenminimum ergibt sich aus GRTS = w/r zusammen mit der Produktionsfunktion F(K,L) = ȳ — zwei Gleichungen, zwei Unbekannte. Steigt w relativ zu r, verschiebt sich das Optimum hin zu mehr Kapital.`;
 
   registerTooltipPoints(canvas, [
     {
@@ -1064,7 +1073,8 @@ function drawMarkt(progress = 1) {
       Im Gleichgewicht schneiden sich Angebots- und Nachfragekurve bei <strong>p* = ${pEq.toFixed(2)}</strong> und <strong>q* = ${qEq.toFixed(2)}</strong>.
       Die <strong>Konsumentenrente ≈ ${cs.toFixed(2)}</strong> misst die Ersparnis der Käufer gegenüber ihrer maximalen Zahlungsbereitschaft (Dreieck über dem Gleichgewichtspreis).
       Die <strong>Produzentenrente ≈ ${ps.toFixed(2)}</strong> misst den Gewinn der Verkäufer über ihre Mindestkosten hinaus (Dreieck unter dem Gleichgewichtspreis).
-      Gemeinsam bilden sie die gesamte Wohlfahrt — im Wettbewerbsgleichgewicht ist diese maximal.`
+      Gemeinsam bilden sie die gesamte Wohlfahrt — im Wettbewerbsgleichgewicht ist diese maximal.
+      <strong>Klausurtipp:</strong> Das Gleichgewicht ergibt sich aus D = S. Eine Steuer t verschiebt die Angebotskurve nach oben und erzeugt einen DWL. Typische Frage: Berechne die neue Gleichgewichtsmenge und die Steuerinzidenz.`
     : `<span class="gi-label">Interpretation</span>
       <strong>Kein Handel möglich:</strong> Die Mindestkosten der Anbieter liegen oberhalb der maximalen Zahlungsbereitschaft der Nachfrager. In diesem Parameterbereich existiert kein positives Marktgleichgewicht — die Kurven schneiden sich nicht im positiven Bereich.`;
 

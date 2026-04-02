@@ -114,7 +114,73 @@ function pickInitialLandingModule() {
     .map((module) => ({ module, visit: readVisitState(module) }))
     .filter(({ visit }) => typeof visit.visitedAt === "number");
   if (withVisits.length) return withVisits.sort((left, right) => right.visit.visitedAt - left.visit.visitedAt)[0].module;
-  return null;
+  return PUBLIC_MODULES[0] || null;
+}
+
+let focusedTileIndex = -1;
+let tileElements = [];
+
+function setFocusedTile(index) {
+  if (index < 0 || index >= tileElements.length) return;
+  
+  // Remove previous focus
+  tileElements.forEach((tile, i) => {
+    tile.classList.remove("is-focused", "is-selected");
+    tile.setAttribute("aria-selected", "false");
+  });
+  
+  // Set new focus
+  const newTile = tileElements[index];
+  newTile.classList.add("is-focused", "is-selected");
+  newTile.setAttribute("aria-selected", "true");
+  newTile.focus({ preventScroll: true });
+  
+  focusedTileIndex = index;
+  
+  // Update hero to show selected module
+  const slug = newTile.dataset.slug;
+  const module = PUBLIC_MODULES.find((m) => m.slug === slug);
+  if (module) updateHeroShelf(module);
+}
+
+function handleKeyboardNavigation(event) {
+  if (tileElements.length === 0) return;
+  
+  const cols = getComputedStyle(document.getElementById("moduleGrid")).gridTemplateColumns.split(" ").length;
+  
+  switch (event.key) {
+    case "ArrowRight":
+      event.preventDefault();
+      setFocusedTile(Math.min(focusedTileIndex + 1, tileElements.length - 1));
+      break;
+    case "ArrowLeft":
+      event.preventDefault();
+      setFocusedTile(Math.max(focusedTileIndex - 1, 0));
+      break;
+    case "ArrowDown":
+      event.preventDefault();
+      setFocusedTile(Math.min(focusedTileIndex + cols, tileElements.length - 1));
+      break;
+    case "ArrowUp":
+      event.preventDefault();
+      setFocusedTile(Math.max(focusedTileIndex - cols, 0));
+      break;
+    case "Enter":
+    case " ":
+      if (focusedTileIndex >= 0 && focusedTileIndex < tileElements.length) {
+        event.preventDefault();
+        tileElements[focusedTileIndex].click();
+      }
+      break;
+    case "Home":
+      event.preventDefault();
+      setFocusedTile(0);
+      break;
+    case "End":
+      event.preventDefault();
+      setFocusedTile(tileElements.length - 1);
+      break;
+  }
 }
 
 function showOnboarding(force = false) {
@@ -195,7 +261,13 @@ function updateHeroShelf(module) {
       meta.innerHTML = items.join("");
     }
     if (btn) {
-      btn.textContent = snapshot.started ? "Fortsetzen →" : "Modul starten →";
+      if (snapshot.started) {
+        btn.innerHTML = `<span class="btn-label">Lernstand fortsetzen</span><span class="btn-sublabel">→</span>`;
+        btn.classList.add("resume");
+      } else {
+        btn.innerHTML = `<span class="btn-label">${module.shortTitle || module.title} starten</span><span class="btn-sublabel">→</span>`;
+        btn.classList.remove("resume");
+      }
       btn.href = module.href;
     }
   }
@@ -226,7 +298,7 @@ function renderLandingPage() {
         : "";
 
       return `
-        <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}">
+        <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}" tabindex="-1">
           <h3 class="lp-tile-title">${module.title}</h3>
           <p class="lp-tile-summary">${module.summary}</p>
           <div class="lp-tile-footer">
@@ -237,17 +309,51 @@ function renderLandingPage() {
       `;
     }).join("");
 
+    // Build tile elements array for keyboard navigation
+    tileElements = Array.from(gridNode.querySelectorAll(".lp-tile"));
+    
+    // Find the index of the module with progress (or first module)
+    let initialIndex = 0;
+    if (lastModule) {
+      initialIndex = tileElements.findIndex(tile => tile.dataset.slug === lastModule.slug);
+      if (initialIndex === -1) initialIndex = 0;
+    }
+
+    // Set initial focus on page load
+    setFocusedTile(initialIndex);
+
     // Hover / focus → update hero
-    gridNode.querySelectorAll(".lp-tile").forEach((tile) => {
+    tileElements.forEach((tile, index) => {
       const slug = tile.dataset.slug;
       const module = PUBLIC_MODULES.find((m) => m.slug === slug);
       if (!module) return;
 
-      tile.addEventListener("mouseenter", () => updateHeroShelf(module));
-      tile.addEventListener("focus", () => updateHeroShelf(module));
+      tile.addEventListener("mouseenter", () => {
+        focusedTileIndex = index;
+        tileElements.forEach(t => t.classList.remove("is-focused", "is-selected"));
+        tile.classList.add("is-focused");
+        updateHeroShelf(module);
+      });
+      
+      tile.addEventListener("focus", () => {
+        focusedTileIndex = index;
+        tileElements.forEach(t => t.classList.remove("is-selected"));
+        tile.classList.add("is-focused");
+        updateHeroShelf(module);
+      });
     });
-    gridNode.addEventListener("mouseleave", () => updateHeroShelf(lastModule));
+    
+    gridNode.addEventListener("mouseleave", () => {
+      updateHeroShelf(lastModule);
+      // Restore selected state to the focused tile
+      if (focusedTileIndex >= 0 && focusedTileIndex < tileElements.length) {
+        tileElements[focusedTileIndex].classList.add("is-selected");
+      }
+    });
   }
+
+  // Keyboard navigation for module grid
+  document.addEventListener("keydown", handleKeyboardNavigation);
 
   // Footer Actions
   const instructionsBtn = document.getElementById("showInstructions");

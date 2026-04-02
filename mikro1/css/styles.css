@@ -668,8 +668,8 @@ body {
   font-size: 1.05em;
   line-height: 1.9;
 }
-.math-block mjx-container { color: var(--accent) !important; }
-.math-block mjx-container * { color: var(--accent) !important; }
+.math-block mjx-container { color: var(--semantic-green) !important; }
+.math-block mjx-container * { color: var(--semantic-green) !important; }
 
 .math-inline {
   color: var(--text);
@@ -987,7 +987,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .formula-card .f-eq {
   font-family: var(--font-mono);
   font-size: 1em;
-  color: var(--accent);
+  color: var(--semantic-green);
   margin-bottom: 10px;
   min-height: 2em;
   display: flex;
@@ -2176,19 +2176,19 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 .section-block p mjx-container *,
 .concept-motivation mjx-container * { color: inherit; }
 
-/* Accent color for formula cards and result badges only */
+/* Accent color for formula cards and result badges only — green for math semantics */
 .f-eq mjx-container,
-.f-eq mjx-container * { color: var(--accent) !important; font-size: 1.0em; }
+.f-eq mjx-container * { color: var(--semantic-green) !important; font-size: 1.0em; }
 .result-badge mjx-container,
-.result-badge mjx-container * { color: var(--accent); }
+.result-badge mjx-container * { color: var(--semantic-green); }
 
-/* Task/exam contexts: accent for scannability */
+/* Task/exam contexts: green for mathematical notation */
 .prob-text mjx-container,
 .sStep-q mjx-container,
-.exam-q-text mjx-container { color: var(--accent); }
+.exam-q-text mjx-container { color: var(--semantic-green); }
 .prob-text mjx-container *,
 .sStep-q mjx-container *,
-.exam-q-text mjx-container * { color: var(--accent); }
+.exam-q-text mjx-container * { color: var(--semantic-green); }
 
 .exam-q-card mjx-container { font-size: 1.15rem !important; }
 

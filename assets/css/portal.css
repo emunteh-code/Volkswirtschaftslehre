@@ -224,10 +224,23 @@ html { scroll-behavior: smooth; }
 .lp-hero {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 48px 0 52px;
-  min-height: 220px;
+  padding: 64px 0 72px;
+  min-height: 280px;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lp-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, var(--accent-soft, rgba(74,144,217,0.08)) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .lp-hero-inner {
@@ -245,30 +258,30 @@ html { scroll-behavior: smooth; }
 
 .lp-hero-kicker {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 10px;
+  margin: 0 0 14px;
 }
 
 .lp-hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.625rem, 3.5vw, 2.25rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  margin: 0 0 10px;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin: 0 0 14px;
   color: var(--text);
 }
 
 .lp-hero-desc {
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   color: var(--muted);
-  margin: 0 0 16px;
-  line-height: 1.55;
-  max-width: 520px;
+  margin: 0 0 20px;
+  line-height: 1.6;
+  max-width: 560px;
 }
 
 .lp-hero-meta {
@@ -322,31 +335,41 @@ html { scroll-behavior: smooth; }
 .lp-hero-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 22px;
-  border-radius: var(--r-sm);
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--r-md);
   background: var(--accent);
   color: var(--accent-fg);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
   border: none;
   cursor: pointer;
-  transition: transform 0.15s var(--ease-out), box-shadow 0.15s;
+  transition: transform 0.18s var(--ease-out), box-shadow 0.18s, background-color 0.15s;
 }
 
 .lp-hero-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(74,144,217,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74,144,217,0.35);
 }
 
 .lp-hero-btn.resume {
   background: var(--accent);
 }
 
+.lp-hero-btn .btn-label {
+  font-weight: 700;
+}
+
+.lp-hero-btn .btn-sublabel {
+  font-weight: 400;
+  opacity: 0.85;
+  font-size: 0.8125rem;
+}
+
 /* ── Module Shelf ──────────────────────────────────────────── */
 .lp-shelf {
-  padding: 36px 0 48px;
+  padding: 48px 0 64px;
   flex: 1;
 }
 
@@ -354,74 +377,84 @@ html { scroll-behavior: smooth; }
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .lp-shelf-header h2 {
   font-family: var(--font-heading);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
   letter-spacing: -0.02em;
 }
 
 .lp-shelf-count {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--muted);
   font-family: var(--font-mono);
 }
 
 .lp-shelf-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 /* ── Module Tile ───────────────────────────────────────────── */
 .lp-tile {
   display: flex;
   flex-direction: column;
-  padding: 16px 16px 14px;
+  padding: 20px 18px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   text-decoration: none;
   color: var(--text);
   cursor: pointer;
   position: relative;
   outline: none;
-  transition: transform 0.2s var(--ease-out),
-              box-shadow 0.2s var(--ease-out),
-              border-color 0.2s ease;
+  transition: transform 0.22s var(--ease-out),
+              box-shadow 0.22s var(--ease-out),
+              border-color 0.2s ease,
+              background-color 0.2s ease;
 }
 
 .lp-tile:hover,
-.lp-tile:focus-visible,
-.lp-tile.is-focused {
-  transform: scale(1.03);
+.lp-tile:focus-visible {
+  transform: translateY(-3px) scale(1.02);
   border-color: var(--accent);
-  box-shadow: var(--shadow-md), 0 0 0 1px var(--accent);
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--accent);
+  z-index: 2;
+}
+
+/* Selected / focused state - always visible without hover */
+.lp-tile.is-selected,
+.lp-tile.is-focused {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg), 0 0 0 2px var(--accent);
+  background: var(--surface2);
   z-index: 2;
 }
 
 .lp-tile:active {
-  transform: scale(0.99);
+  transform: translateY(0) scale(0.99);
   transition-duration: 0.08s;
 }
 
 .lp-tile-title {
   font-family: var(--font-heading);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   letter-spacing: -0.01em;
   line-height: 1.25;
 }
 
 .lp-tile-summary {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--muted);
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0;
   flex: 1;
 }
@@ -430,16 +463,16 @@ html { scroll-behavior: smooth; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid var(--border);
 }
 
 .lp-tile-status {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -449,8 +482,8 @@ html { scroll-behavior: smooth; }
 }
 
 .lp-tile-progress {
-  width: 48px;
-  height: 3px;
+  width: 56px;
+  height: 4px;
   background: var(--border);
   border-radius: 2px;
   overflow: hidden;
@@ -505,25 +538,25 @@ html { scroll-behavior: smooth; }
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .lp-hero {
-    padding: 32px 0 36px;
+    padding: 40px 0 44px;
     min-height: auto;
   }
 
   .lp-hero-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .lp-shelf-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
   }
 
   .lp-tile {
-    padding: 14px 14px 12px;
+    padding: 16px 14px 14px;
   }
 
   .lp-tile-title {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 }
 

@@ -136,7 +136,7 @@ export function createPortalApp({
     clearRightPanel();
     syncRightPanelVisibility();
     if (breadcrumb) {
-      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / Wiederholung`;
+      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / Wiederholung`;
     }
 
     if (!due.length) {

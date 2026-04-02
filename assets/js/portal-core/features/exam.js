@@ -85,7 +85,7 @@ export function createQuickExamModule({
     const tabRow = document.getElementById("tabRow");
     if (tabRow) tabRow.classList.remove("visible");
     document.getElementById("breadcrumb").innerHTML =
-      `<button class="breadcrumb-link" onclick="window.__renderHome()">${courseLabel}</button> / Schnelltest`;
+      `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / Schnelltest`;
 
     content.innerHTML = `<div class="exam-container">
 <div class="exam-topbar">
@@ -178,8 +178,14 @@ export function createQuickExamModule({
       window.__updateStreakUI?.();
     } else {
       if (feedbackEl) {
-        const msg = result.trap ? `Achtung: ${escapeHtml(result.trap)}` : q.step.explain;
-        setFeedbackContent(feedbackEl, "fb-wrong", "Nicht ganz. ", msg);
+        const trapMsg = result.trap ? `<div style="margin-bottom:6px">Achtung: ${escapeHtml(result.trap)}</div>` : "";
+        const correctAnswers = Array.isArray(q.step.answer) ? q.step.answer : [q.step.answer];
+        const correctDisplay = correctAnswers[0];
+        feedbackEl.innerHTML = "";
+        const span = document.createElement("span");
+        span.className = "fb-wrong";
+        span.innerHTML = `Nicht ganz. ${trapMsg}<div style="margin-top:6px"><strong style="color:var(--accent)">Richtige Antwort:</strong> <strong>${escapeHtml(String(correctDisplay))}</strong></div>${q.step.explain ? `<div style="margin-top:6px;color:var(--muted)">${q.step.explain}</div>` : ""}`;
+        feedbackEl.appendChild(span);
       }
       recordAnswer(q.conceptId, false);
       updateSRS(q.conceptId, false);

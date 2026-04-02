@@ -133,7 +133,7 @@ function showOnboarding(force = false) {
         <li><strong>Pfad-Abhängigkeit:</strong> Folgefehler in der Logik kappen die Gesamtpunktzahl.</li>
         <li><strong>Validierung:</strong> Nur begründete Aussagen führen zum Erfolg.</li>
       </ul>
-      <button class="primary-btn" id="closeOnboarding">Verstanden & Starten</button>
+      <button class="lp-hero-btn" id="closeOnboarding">Verstanden & Starten</button>
     </div>
   `;
   document.body.appendChild(overlay);
@@ -143,32 +143,75 @@ function showOnboarding(force = false) {
   });
 }
 
+function updateHeroShelf(module) {
+  const kicker = document.getElementById("heroKicker");
+  const title = document.getElementById("heroTitle");
+  const desc = document.getElementById("heroDesc");
+  const meta = document.getElementById("heroMeta");
+  const btn = document.getElementById("heroBtn");
+  const content = document.getElementById("heroContent");
+  if (!title) return;
+
+  if (!module) {
+    // Default state
+    if (kicker) kicker.textContent = "Willkommen";
+    title.textContent = "VWL Lernportal";
+    if (desc) desc.textContent = "Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.";
+    if (meta) meta.innerHTML = "";
+    if (btn) { btn.textContent = "Module erkunden"; btn.href = "#modules"; }
+    return;
+  }
+
+  const snapshot = getModuleSnapshot(module);
+
+  // Animate transition
+  if (content) {
+    content.classList.add("transitioning");
+    setTimeout(() => {
+      applyHero();
+      content.classList.remove("transitioning");
+    }, 150);
+  } else {
+    applyHero();
+  }
+
+  function applyHero() {
+    if (kicker) kicker.textContent = module.difficulty;
+    title.textContent = module.title;
+    if (desc) desc.textContent = module.summary;
+    if (meta) {
+      const items = [`<span class="lp-hero-meta-item">Dauer: <strong>${module.time}</strong></span>`];
+      if (module.prereq !== "Keine") {
+        items.push(`<span class="lp-hero-meta-item">Voraussetzung: <strong>${module.prereq}</strong></span>`);
+      }
+      if (snapshot.started) {
+        items.push(`
+          <span class="lp-hero-progress">
+            <span class="lp-hero-progress-bar"><span class="lp-hero-progress-fill" style="width:${snapshot.percent}%"></span></span>
+            ${snapshot.percent}%
+          </span>
+        `);
+      }
+      meta.innerHTML = items.join("");
+    }
+    if (btn) {
+      btn.textContent = snapshot.started ? "Fortsetzen →" : "Modul starten →";
+      btn.href = module.href;
+    }
+  }
+}
+
 function renderLandingPage() {
   const gridNode = document.getElementById("moduleGrid");
-  const continueSection = document.getElementById("continue");
-  const continueTitle = document.getElementById("continueTitle");
-  const continueProgress = document.getElementById("continueProgress");
-  const continueLink = document.getElementById("continueLink");
-
   if (!gridNode) return;
 
   // 1. Module Count
   const countLabel = document.getElementById("moduleCountLabel");
-  if (countLabel) countLabel.textContent = `${PUBLIC_MODULES.length} Module verfügbar`;
+  if (countLabel) countLabel.textContent = `${PUBLIC_MODULES.length} Module`;
 
-  // 2. Continue Section (Empty state handled by hidden attribute)
+  // 2. Hero: show last-visited module or default
   const lastModule = pickInitialLandingModule();
-  if (lastModule && continueSection && continueTitle && continueProgress && continueLink) {
-    const snapshot = getModuleSnapshot(lastModule);
-    if (snapshot.started) {
-      continueSection.hidden = false;
-      continueTitle.textContent = lastModule.title;
-      continueProgress.textContent = `${snapshot.percent}% abgeschlossen — ${snapshot.due} Wiederholungen fällig`;
-      continueLink.href = lastModule.href;
-    } else {
-      continueSection.hidden = true;
-    }
-  }
+  updateHeroShelf(lastModule);
 
   // 3. Module Grid
   if (PUBLIC_MODULES.length === 0) {
@@ -176,24 +219,34 @@ function renderLandingPage() {
   } else {
     gridNode.innerHTML = PUBLIC_MODULES.map((module) => {
       const snapshot = getModuleSnapshot(module);
+      const statusClass = snapshot.started ? " started" : "";
       const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
-      
+      const progressBar = snapshot.started
+        ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
+        : "";
+
       return `
-        <a href="${module.href}" class="module-tile">
-          <div class="tile-head">
-            <span class="difficulty-badge ${module.difficulty.toLowerCase()}">${module.difficulty}</span>
-            <span class="time-badge">Dauer: ${module.time}</span>
-          </div>
-          <h3>${module.title}</h3>
-          <p class="summary">${module.summary}</p>
-          <div class="prereq">Voraussetzung: ${module.prereq}</div>
-          <div class="meta">
-            <span class="status-badge">${statusLabel}</span>
-            <span class="action-hint">Modul öffnen →</span>
+        <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}">
+          <h3 class="lp-tile-title">${module.title}</h3>
+          <p class="lp-tile-summary">${module.summary}</p>
+          <div class="lp-tile-footer">
+            <span class="lp-tile-status${statusClass}">${statusLabel}</span>
+            ${progressBar}
           </div>
         </a>
       `;
     }).join("");
+
+    // Hover / focus → update hero
+    gridNode.querySelectorAll(".lp-tile").forEach((tile) => {
+      const slug = tile.dataset.slug;
+      const module = PUBLIC_MODULES.find((m) => m.slug === slug);
+      if (!module) return;
+
+      tile.addEventListener("mouseenter", () => updateHeroShelf(module));
+      tile.addEventListener("focus", () => updateHeroShelf(module));
+    });
+    gridNode.addEventListener("mouseleave", () => updateHeroShelf(lastModule));
   }
 
   // Footer Actions

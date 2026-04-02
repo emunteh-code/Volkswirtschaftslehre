@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta
     name="description"
-    content="VWL Lernportal: Die reasoning-getriebene Lernplattform für B.Sc. Volkswirtschaftslehre an der Universität Göttingen."
+    content="VWL Lernportal: Klausurvorbereitung für B.Sc. Volkswirtschaftslehre an der Universität Göttingen."
   >
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#0f1114">
   <title>VWL Lernportal | Universität Göttingen</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,89 +17,53 @@
   <link rel="stylesheet" href="./assets/css/portal.css">
 </head>
 <body data-page="landing">
-  <header class="landing-header">
-    <div class="container">
-      <a class="brand" href="./index.html">
-        <span class="brand-mark">VWL</span>
-        <span class="brand-copy">
+
+  <!-- ── TOP BAR ──────────────────────────────────────────────── -->
+  <header class="lp-header">
+    <div class="lp-container">
+      <a class="lp-brand" href="./index.html">
+        <span class="lp-brand-mark">VWL</span>
+        <span class="lp-brand-text">
           <strong>Lernportal</strong>
-          <small>Uni Göttingen</small>
+          <small>Georg-August-Universität Göttingen</small>
         </span>
       </a>
-      <nav class="header-actions">
-        <button id="themeToggle" class="theme-btn">Dunkel</button>
-      </nav>
+      <div class="lp-header-right">
+        <span class="lp-program-badge">B.Sc. Volkswirtschaftslehre</span>
+        <button id="themeToggle" class="lp-theme-btn" aria-label="Farbschema wechseln">Dunkel</button>
+      </div>
     </div>
   </header>
 
-  <main class="landing-main">
-    <section class="hero-section container">
-      <div class="hero-content">
-        <h1>VWL Lernportal</h1>
-        <p class="hero-subtitle">Klausurvorbereitung durch strukturiertes Reasoning — nicht durch Auswendiglernen.</p>
-        <p class="trust-signal">Reale Klausurbedingungen · Strenge Logikbewertung · Uni Göttingen</p>
-        <div class="hero-actions">
-          <a href="#modules" class="primary-btn">Module erkunden</a>
-        </div>
+  <!-- ── TOP SHELF / HERO ─────────────────────────────────────── -->
+  <section class="lp-hero" id="heroShelf" aria-live="polite">
+    <div class="lp-container lp-hero-inner">
+      <div class="lp-hero-content" id="heroContent">
+        <p class="lp-hero-kicker" id="heroKicker">Willkommen</p>
+        <h1 class="lp-hero-title" id="heroTitle">VWL Lernportal</h1>
+        <p class="lp-hero-desc" id="heroDesc">Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.</p>
+        <div class="lp-hero-meta" id="heroMeta"></div>
+        <a class="lp-hero-btn" id="heroBtn" href="#modules">Module erkunden</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="continue" class="continue-section container" hidden>
-      <div class="section-card">
-        <div class="continue-info">
-          <p class="section-kicker">Weiterlernen</p>
-          <h2 id="continueTitle">Modulname</h2>
-          <p id="continueProgress">0% abgeschlossen</p>
-        </div>
-        <a href="#" id="continueLink" class="primary-btn">Fortsetzen</a>
-      </div>
-    </section>
-
-    <section id="modules" class="module-grid-section container">
-      <div class="section-header">
+  <!-- ── MODULE SHELF ─────────────────────────────────────────── -->
+  <section class="lp-shelf" id="modules">
+    <div class="lp-container">
+      <div class="lp-shelf-header">
         <h2>Module</h2>
-        <p class="section-note" id="moduleCountLabel">10 Module verfügbar</p>
+        <span class="lp-shelf-count" id="moduleCountLabel"></span>
       </div>
-      <div class="module-grid" id="moduleGrid">
-      </div>
-    </section>
+      <div class="lp-shelf-grid" id="moduleGrid" role="listbox" aria-label="Module"></div>
+    </div>
+  </section>
 
-    <section id="how-it-works" class="how-it-works-section container">
-      <h2>So funktioniert es</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <span class="step-num">1</span>
-          <h3>Aufgabe</h3>
-          <p>Kontext und Daten erfassen</p>
-        </div>
-        <div class="step-card">
-          <span class="step-num">2</span>
-          <h3>Extraktion</h3>
-          <p>Relevante Informationen filtern</p>
-        </div>
-        <div class="step-card">
-          <span class="step-num">3</span>
-          <h3>Modell</h3>
-          <p>Theoretischen Rahmen wählen</p>
-        </div>
-        <div class="step-card">
-          <span class="step-num">4</span>
-          <h3>Berechnung</h3>
-          <p>Präzise Herleitung und Lösung</p>
-        </div>
-        <div class="step-card">
-          <span class="step-num">5</span>
-          <h3>Prüfung</h3>
-          <p>Plausibilität und Konsistenz</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="landing-footer container">
-    <div class="footer-inner">
-      <p>&copy; <span id="footerYear"></span> VWL Lernportal · Georg-August-Universität Göttingen</p>
-      <nav class="footer-nav">
+  <!-- ── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="lp-footer">
+    <div class="lp-container lp-footer-inner">
+      <p>&copy; <span id="footerYear"></span> VWL Lernportal &middot; Georg-August-Universit&auml;t G&ouml;ttingen</p>
+      <nav>
         <a href="#" id="showInstructions">Anleitung</a>
       </nav>
     </div>

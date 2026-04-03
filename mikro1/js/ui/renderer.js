@@ -55,18 +55,12 @@ function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
   const source = formalizeMarkupString(
     stripMarkup ? stripHtml(value) : decodeHtmlEntities(String(value ?? ''))
   );
-  return source
-    .split(MATH_TEX_REGEX)
-    .map((segment) => {
-      if (!segment) return '';
-      if (segment.startsWith('$')) return segment;
-      return buildSemanticMathMarkup(segment);
-    })
-    .join('');
+  return semanticizeMarkupString(source);
 }
 
 const MATH_TEX_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
 const MATH_SCRIPT_CHARS = '₀₁₂₃₄₅₆₇₈₉ₐₑₒₓₘₙₚᵢⱼᵣᵤᵥₖ*′';
+const MATH_SUPERSCRIPT_CHARS = '⁰¹²³⁴⁵⁶⁷⁸⁹';
 const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳ';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
 const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
@@ -74,10 +68,10 @@ const MATH_RANGE_PATTERNS = [
   /€/gu,
   /\d+(?:[.,]\d+)?\s*€/gu,
   /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|KR|PR|SE|EE|MZB|IK|BEO)\b/gu,
-  new RegExp(String.raw`\b(?:MU|MP)(?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
-  new RegExp(String.raw`(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}]+)?\s*\/\s*(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
-  new RegExp(String.raw`(?:[${MATH_GREEK_CHARS}A-Za-z]+)(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|\([^)]*\)|[${MATH_SCRIPT_CHARS}]+)+`, 'gu'),
-  new RegExp(String.raw`[${MATH_GREEK_CHARS}](?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`\b(?:MU|MP)(?:[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?\s*\/\s*(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`(?:[${MATH_GREEK_CHARS}A-Za-z]+)(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|\([^)]*\)|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)+`, 'gu'),
+  new RegExp(String.raw`[${MATH_GREEK_CHARS}](?:[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?`, 'gu'),
   new RegExp(String.raw`\b(?:x|p|u|v|e|h|m|q|w|r|L|K|C|F|y)(?:[${MATH_SCRIPT_CHARS}]+|\([^)]*\))`, 'gu'),
   /(?<![\p{L}\p{N}_])(?:m|p|w|r|L|K|C|F|y|q|u|v|e|h|x)(?![\p{L}\p{N}_])/gu
 ];
@@ -211,6 +205,34 @@ function semanticizeTextNode(node) {
   return true;
 }
 
+function decodeTextEntitiesInPlace(root) {
+  if (!root) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const value = node.textContent;
+      if (!value || !value.includes('&')) return NodeFilter.FILTER_REJECT;
+      const parent = node.parentElement;
+      if (!parent || parent.closest('script, style, textarea, input, select, option')) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach((node) => {
+    const decoded = decodeHtmlEntities(node.textContent);
+    if (decoded !== node.textContent) {
+      node.textContent = decoded;
+    }
+  });
+}
+
 function decorateSemanticMath(root) {
   if (!root) return;
 
@@ -241,22 +263,16 @@ function decorateSemanticMath(root) {
 
 function semanticizeElementContent(element) {
   if (!element || !element.innerHTML?.trim()) return;
-  if (element.querySelector('.math-semantic')) return;
-  const processed = semanticizeMarkupString(element.innerHTML);
-  if (processed !== element.innerHTML) {
-    element.innerHTML = processed;
-  }
+  decodeTextEntitiesInPlace(element);
+  decorateSemanticMath(element);
 }
 
 function semanticizeMarkupString(markup) {
-  if (markup.includes('class="math-semantic"')) {
-    return markup;
+  const source = decodeHtmlEntities(String(markup ?? ''));
+  if (!source || !hasSemanticMathToken(source.replace(/<[^>]+>/g, ' ').replace(MATH_TEX_REGEX, ' '))) {
+    return source;
   }
-  const normalizedMarkup = decodeHtmlEntities(String(markup ?? ''));
-  if (!markup || typeof markup !== 'string' || !hasSemanticMathToken(normalizedMarkup.replace(/<[^>]+>/g, ' ').replace(MATH_TEX_REGEX, ' '))) {
-    return markup;
-  }
-  return markup
+  return source
     .split(/(<[^>]+>|\$\$[\s\S]+?\$\$|\$[^$]+\$)/g)
     .map((segment) => {
       if (!segment) return '';
@@ -286,7 +302,7 @@ function semanticizeDataStrings(node, seen = new WeakSet()) {
   Object.keys(node).forEach((key) => {
     const value = node[key];
     if (typeof value === 'string') {
-      node[key] = semanticizeMarkupString(formalizeMarkupString(value));
+      node[key] = formalizeMarkupString(value);
     } else if (value && typeof value === 'object') {
       semanticizeDataStrings(value, seen);
     }
@@ -431,7 +447,7 @@ function renderNotationList(variables = {}) {
   const entries = Object.entries(variables);
   if (!entries.length) return '';
   return `<ul class="exam-drill-list">${entries
-    .map(([key, value]) => `<li><strong>$${key}$</strong>: ${value}</li>`)
+    .map(([key, value]) => `<li><strong>$${key}$</strong>: ${renderSemanticPlainText(value)}</li>`)
     .join('')}</ul>`;
 }
 

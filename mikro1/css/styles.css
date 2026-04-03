@@ -859,20 +859,25 @@ body {
   font-weight: 600;
 }
 .info-card.info-card-concept-title {
-  gap: 8px;
+  gap: 7px;
 }
 .info-card.info-card-concept-title .label {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.02em;
   text-transform: none;
   color: var(--text);
+  line-height: 1.34;
 }
 .info-card.info-card-concept-title .value {
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 11.5px;
   font-weight: 500;
   color: color-mix(in srgb, var(--math-ink) 92%, var(--muted) 8%);
+  line-height: 1.35;
 }
 .info-card p {
   font-size: 12.5px;

@@ -21,15 +21,25 @@ const SUBSCRIPT_MAP = {
 };
 
 const SUPERSCRIPT_MAP = {
+  '⁰': '0',
+  '¹': '1',
   '²': '2',
-  '³': '3'
+  '³': '3',
+  '⁴': '4',
+  '⁵': '5',
+  '⁶': '6',
+  '⁷': '7',
+  '⁸': '8',
+  '⁹': '9'
 };
 
-const TOKEN_SOURCE = String.raw`(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|MP(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|\([^)]*\)|\*)?|[πλσωαβμūȳ])`;
+const SUPERSCRIPT_CHARS = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+
+const TOKEN_SOURCE = String.raw`(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|[${SUPERSCRIPT_CHARS}]+)?|MP(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|[${SUPERSCRIPT_CHARS}]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|[${SUPERSCRIPT_CHARS}]+|\([^)]*\)|\*)?|[πλσωαβμūȳ](?:[${SUPERSCRIPT_CHARS}]+)?)`;
 const STANDALONE_TOKENS = [
   /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB)\b/gu,
-  /(?:MU|MP)(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?/gu,
-  new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(?:[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|\([^)]*\)|\*)?|[πλσωαβμūȳ])(?![\p{L}\p{N}])`, 'gu')
+  new RegExp(String.raw`(?:MU|MP)(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|[${SUPERSCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(?:[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|[${SUPERSCRIPT_CHARS}]+|\([^)]*\)|\*)?|[πλσωαβμūȳ](?:[${SUPERSCRIPT_CHARS}]+)?)(?![\p{L}\p{N}])`, 'gu')
 ];
 
 function decodeHtmlEntities(value) {
@@ -55,7 +65,7 @@ function normalizeSubscripts(token) {
 }
 
 function normalizeSuperscripts(token) {
-  return token.replace(/([A-Za-zπλσωαβμūȳ0-9])([²³]+)/gu, (_, base, suffix) => {
+  return token.replace(/([A-Za-zπλσωαβμūȳ0-9])([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/gu, (_, base, suffix) => {
     const normalized = Array.from(suffix).map((char) => SUPERSCRIPT_MAP[char] || char).join('');
     return `${base}^{${normalized}}`;
   });
@@ -139,17 +149,30 @@ function applyStandaloneTokenWrapping(text) {
   ), text);
 }
 
+function mergeAdjacentInlineMath(text) {
+  let result = String(text ?? '');
+  let previous = '';
+  const adjacentInlineMath = /\$([^$]+)\$\s*\$([^$]+)\$/g;
+  while (result !== previous) {
+    previous = result;
+    result = result.replace(adjacentInlineMath, (_, left, right) => `$${left} ${right}$`);
+  }
+  return result;
+}
+
 function formalizePlainSegment(text) {
   const decoded = decodeHtmlEntities(String(text ?? ''));
   const withExpressions = applyExpressionReplacements(decoded);
-  return withExpressions
+  return mergeAdjacentInlineMath(
+    withExpressions
     .split(TEX_SEGMENT_REGEX)
     .map((segment) => {
       if (!segment) return '';
       if (segment.startsWith('$')) return segment;
       return applyStandaloneTokenWrapping(segment);
     })
-    .join('');
+    .join('')
+  );
 }
 
 export function formalizeMarkupString(markup) {

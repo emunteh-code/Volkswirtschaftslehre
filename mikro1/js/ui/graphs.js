@@ -384,6 +384,7 @@ function drawHausopt(progress = 1) {
     <span class="gi-label">Interpretation</span>
     Das Haushaltsoptimum liegt bei <strong>x₁* = ${x1s.toFixed(2)}</strong>, <strong>x₂* = ${x2s.toFixed(2)}</strong> mit einem maximalen Nutzen von <strong>u* = ${ustar.toFixed(2)}</strong>.
     <div class="gi-eq">$x_1^* = ${x1s.toFixed(2)}, \; x_2^* = ${x2s.toFixed(2)}, \; GRS = \frac{p_1}{p_2} = ${(p1/p2).toFixed(3)}$</div>
+    <strong>Optimumspunkt E*:</strong> Im Tangentialpunkt $E^* = (${x1s.toFixed(2)}, ${x2s.toFixed(2)})$ trifft die Budgetgerade genau die höchstmögliche Indifferenzkurve.
     In diesem Punkt berührt die höchstmögliche Indifferenzkurve gerade noch die Budgetgerade — die Grenzrate der Substitution entspricht exakt dem Preisverhältnis.
     Das bedeutet: der Haushalt bewertet die letzte Einheit x₁ subjektiv genauso wie der Markt sie bepreist. Jede Umschichtung des Budgets würde den Nutzen senken.
     <strong>Klausurtipp:</strong> Die Tangentialbedingung $GRS = \frac{p_1}{p_2}$ ist die zentrale Optimierungsbedingung — sie wird fast immer abgefragt. In der Klausur: Lagrange aufstellen oder direkt $GRS = \frac{MU_1}{MU_2} = \frac{p_1}{p_2}$ setzen.`
@@ -591,6 +592,7 @@ function drawMonopol(progress = 1) {
     <span class="gi-label">Interpretation</span>
     <div class="gi-eq">$MR = MC,\; y_m = ${ym.toFixed(2)},\; p_m = ${pm.toFixed(2)}$</div>
     Der Monopolist wählt die Menge <strong>$y_m = ${ym.toFixed(2)}$</strong> und setzt den Preis <strong>$p_m = ${pm.toFixed(2)}$</strong> — dort, wo Grenzerlös gleich Grenzkosten ist.
+    <strong>Monopolpunkt M:</strong> Der markierte Cournot-Punkt verbindet die gewählte Menge $y_m$ direkt mit dem abgelesenen Preis $p_m$ auf der Nachfragekurve.
     Im Vergleich zum Wettbewerbsgleichgewicht (<strong>$y = ${yvk.toFixed(2)}$</strong>, <strong>$p = ${pvk.toFixed(2)}$</strong>) produziert der Monopolist weniger und verlangt mehr.
     Der Monopolgewinn beträgt <strong>$\pi \approx ${profitM.toFixed(2)}$</strong> (Rechteck zwischen $p_m$ und $MC$).
     Das markierte DWL-Dreieck zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.
@@ -711,13 +713,13 @@ function drawSlutsky(progress = 1) {
   }
 
   // IK curves — animated
-  ge.drawIK(ctx, axMax, u0, col.indiffBase, null, sx, sy, progress);
+  ge.drawIK(ctx, axMax, u0, col.indiffBase, 'u₀', sx, sy, progress);
   if (Math.abs(u1 - u0) > 0.01) {
-    ge.drawIK(ctx, axMax, u1, col.indiffAlt, null, sx, sy, progress, [9, 6]);
+    ge.drawIK(ctx, axMax, u1, col.indiffAlt, 'u₁', sx, sy, progress, [9, 6]);
   }
 
   // Budget lines helper
-  function bLine(p1, color, dash = []) {
+  function bLine(p1, color, dash = [], label = '') {
     const xi = m / p1, yi = m / p2;
     const xiEnd = xi * progress;
     ctx.strokeStyle = color;
@@ -728,9 +730,18 @@ function drawSlutsky(progress = 1) {
     ctx.lineTo(sx(xiEnd), sy(yi - (yi / xi) * xiEnd));
     ctx.stroke();
     ctx.setLineDash([]);
+
+    if (label && progress >= 0.84) {
+      const labelX = xi * 0.2;
+      const labelY = yi - (yi / xi) * labelX;
+      ctx.fillStyle = color;
+      ctx.font = `bold ${Math.max(11, fsBase - 1)}px ${col.fontBody}`;
+      ctx.textAlign = 'left';
+      ctx.fillText(label, sx(labelX) + 8, sy(labelY) - 10);
+    }
   }
-  bLine(p1_0, col.budgetBase);
-  bLine(p1_1, col.budgetShift);
+  bLine(p1_0, col.budgetBase, [], 'B⁰');
+  bLine(p1_1, col.budgetShift, [], 'B¹');
 
   // Compensated budget line
   if (progress >= 0.5) {
@@ -746,6 +757,15 @@ function drawSlutsky(progress = 1) {
     ctx.lineTo(sx(xiEndC), sy(yi_c - (yi_c / xi_c) * xiEndC));
     ctx.stroke();
     ctx.setLineDash([]);
+
+    if (progress >= 0.84) {
+      const labelX = xi_c * 0.22;
+      const labelY = yi_c - (yi_c / xi_c) * labelX;
+      ctx.fillStyle = col.budgetComp;
+      ctx.font = `bold ${Math.max(11, fsBase - 1)}px ${col.fontBody}`;
+      ctx.textAlign = 'left';
+      ctx.fillText('Bᶜ', sx(labelX) + 8, sy(labelY) - 10);
+    }
   }
 
   // Points A, B, C — appear at end
@@ -776,6 +796,9 @@ function drawSlutsky(progress = 1) {
     <span class="gi-label">Interpretation</span>
     <div class="gi-eq">$A = (${x1_0.toFixed(2)}, ${x2_0.toFixed(2)})$, $B = (${x1_c.toFixed(2)}, ${x2_c.toFixed(2)})$, $C = (${x1_1.toFixed(2)}, ${x2_1.toFixed(2)})$</div>
     Der Preis von Gut 1 ist von <strong>$p_1 = ${p1_0.toFixed(2)}$</strong> auf <strong>$p_1' = ${p1_1.toFixed(2)}$</strong> ${direction}.
+    <strong>Initiales Optimum A:</strong> Auf der initialen Budgetgeraden $B^0$ wählt der Haushalt <strong>$x_1^0 = ${x1_0.toFixed(2)}$</strong> und <strong>$x_2^0 = ${x2_0.toFixed(2)}$</strong>.
+    <strong>Kompensiertes Optimum B:</strong> Auf der kompensierten Budgetgeraden $B^c$ bleibt das alte Nutzenniveau <strong>$u_0 = ${u0.toFixed(2)}$</strong> erreichbar; Punkt B isoliert deshalb den reinen Substitutionseffekt.
+    <strong>Finales Optimum C:</strong> Auf der finalen Budgetgeraden $B^1$ landet der Haushalt nach voller Anpassung bei <strong>$x_1^1 = ${x1_1.toFixed(2)}$</strong> und <strong>$x_2^1 = ${x2_1.toFixed(2)}$</strong>.
     <strong>Substitutionseffekt (A → B):</strong> Bei konstantem Nutzenniveau $u_0 = ${u0.toFixed(2)}$ ${seDir} der Haushalt $x_1$ um <strong>${Math.abs(SE).toFixed(3)}</strong> Einheiten.
     <strong>Einkommenseffekt (B → C):</strong> Die Kaufkraftveränderung ${eeDir} $x_1$ um weitere <strong>${Math.abs(EE).toFixed(3)}</strong> Einheiten.
     <strong>Gesamteffekt:</strong> $x_1$ verändert sich insgesamt um <strong>${total.toFixed(3)}</strong> Einheiten. ${Math.abs(SE) > Math.abs(EE) ? 'Der Substitutionseffekt dominiert.' : Math.abs(EE) > Math.abs(SE) ? 'Der Einkommenseffekt dominiert.' : 'Beide Effekte sind etwa gleich groß.'}
@@ -1076,6 +1099,7 @@ function drawKosten(progress = 1) {
     <div class="gi-eq">$\min C = w \cdot L + r \cdot K \;\text{s.t.}\; F(K,L) = \bar{y}$</div>
     Bei Faktorpreisen <strong>$w = ${wage.toFixed(2)}$</strong> (Lohn) und <strong>$r = ${rent.toFixed(2)}$</strong> (Kapitalzins) und einem Zieloutput von <strong>$\bar{y} = ${output.toFixed(1)}$</strong>
     liegt das kostenminimale Inputbündel bei <strong>$L^* = ${laborStar.toFixed(2)}$</strong>, <strong>$K^* = ${capitalStar.toFixed(2)}$</strong>.
+    <strong>Kostenminimum:</strong> Der markierte Punkt zeigt genau das Bündel, in dem die Isokostengerade die Isoquante tangiert.
     Im Optimum gilt <strong>$GRTS = \frac{w}{r} = ${(wage / rent).toFixed(2)}$</strong> — die Isoquante berührt die Isokostengerade tangential.
     Die minimalen Gesamtkosten betragen <strong>$C = ${totalCost.toFixed(2)}$</strong>. Jede andere Inputkombination auf derselben Isoquante wäre teurer.
     <strong>Klausurtipp:</strong> Das Kostenminimum ergibt sich aus $GRTS = \frac{w}{r}$ zusammen mit der Produktionsfunktion $F(K,L) = \bar{y}$ — zwei Gleichungen, zwei Unbekannte. Steigt $w$ relativ zu $r$, verschiebt sich das Optimum hin zu mehr Kapital.`
@@ -1195,6 +1219,7 @@ function drawMarkt(progress = 1) {
     ? String.raw`<span class="gi-label">Interpretation — Marktgleichgewicht</span>
       <div class="gi-eq">$D: p = ${a.toFixed(0)} - ${b.toFixed(2)} \cdot q \qquad S: p = ${c.toFixed(0)} + ${d.toFixed(2)} \cdot q$</div>
       Im Gleichgewicht schneiden sich Angebots- und Nachfragekurve bei <strong>$p^* = ${pEq.toFixed(2)}$</strong> und <strong>$q^* = ${qEq.toFixed(2)}$</strong>.
+      <strong>Gleichgewichtspunkt E*:</strong> Dort gilt gleichzeitig Marktpreis <strong>$p^* = ${pEq.toFixed(2)}$</strong> und Marktmenge <strong>$q^* = ${qEq.toFixed(2)}$</strong>.
       Die <strong>Konsumentenrente $\approx ${cs.toFixed(2)}$</strong> misst die Ersparnis der Käufer gegenüber ihrer maximalen Zahlungsbereitschaft (Dreieck über dem Gleichgewichtspreis).
       Die <strong>Produzentenrente $\approx ${ps.toFixed(2)}$</strong> misst den Gewinn der Verkäufer über ihre Mindestkosten hinaus (Dreieck unter dem Gleichgewichtspreis).
       Gemeinsam bilden sie die gesamte Wohlfahrt — im Wettbewerbsgleichgewicht ist diese maximal.

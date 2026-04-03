@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistik QA Harness</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #fff; }
+    #meta { padding: 10px 14px; background: #16181c; border-bottom: 1px solid #333; font-size: 13px; }
+    #summary { white-space: pre-wrap; font-family: ui-monospace, monospace; margin-top: 8px; color: #cfe3ff; }
+    iframe { width: 1600px; height: 2200px; border: none; display: block; margin: 0 auto; background: white; }
+  </style>
+</head>
+<body>
+  <div id="meta">
+    <div id="status">Booting…</div>
+    <div id="summary"></div>
+  </div>
+  <iframe id="frame" src="/statistik/index.html?qa=1"></iframe>
+  <script>
+    localStorage.setItem('statistik_consent_v1', '1');
+
+    const params = new URLSearchParams(location.search);
+    const targetConcept = params.get('concept');
+    const targetTab = params.get('tab');
+    const shouldRunR = params.get('runR') === '1';
+
+    const statusEl = document.getElementById('status');
+    const summaryEl = document.getElementById('summary');
+    const frame = document.getElementById('frame');
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    async function waitFor(predicate, timeout = 15000) {
+      const start = Date.now();
+      while (Date.now() - start < timeout) {
+        if (predicate()) return true;
+        await sleep(120);
+      }
+      throw new Error('Timeout waiting for runtime condition');
+    }
+
+    function collectSummary(win) {
+      const doc = win.document;
+      const visibleText = doc.body.textContent || '';
+      const rBlocks = [...doc.querySelectorAll('#content [data-r-practice-root]')];
+      return {
+        concept: targetConcept || 'home',
+        tab: targetTab || 'theorie',
+        pageTitle: (doc.querySelector('#content h1, #content h2')?.textContent || '').trim(),
+        sectionBlocks: doc.querySelectorAll('#content .section-block').length,
+        formulaCards: doc.querySelectorAll('#content .formula-card').length,
+        problemCards: doc.querySelectorAll('#content .problem-card').length,
+        rPracticeBlocks: rBlocks.length,
+        rRuntimeStatuses: rBlocks.map((block) => block.querySelector('[data-r-runtime-status]')?.textContent?.trim()).filter(Boolean),
+        rOutputPreview: (doc.querySelector('#content [data-r-output]')?.textContent || '').trim().slice(0, 280),
+        mathError: visibleText.includes('Math input error'),
+        rawDelimiters: visibleText.includes('$$'),
+        entityLeak: /&gt;|&lt;|&amp;/.test(visibleText),
+        markupLeak: /<span|<\/span|<div|<\/div|<mjx/.test(visibleText)
+      };
+    }
+
+    async function boot() {
+      const win = frame.contentWindow;
+      await waitFor(() => win && win.__jsLoaded && typeof win.__renderHome === 'function' && typeof win.__navigate === 'function');
+      await sleep(400);
+
+      if (targetConcept) {
+        win.__navigate(targetConcept);
+        await sleep(900);
+        if (targetTab) {
+          const btn = win.document.querySelector(`#tabRow [data-tab="${targetTab}"]`);
+          if (btn) {
+            btn.click();
+            await sleep(900);
+          }
+        }
+
+        if (shouldRunR) {
+          const runBtn = win.document.querySelector('#content [data-r-action="run"]:not([disabled])');
+          if (runBtn) {
+            const output = win.document.querySelector('#content [data-r-output]');
+            const before = output?.textContent || '';
+            runBtn.click();
+            await waitFor(() => {
+              const runtime = win.document.querySelector('#content [data-r-runtime-status]')?.textContent || '';
+              const nextOutput = output?.textContent || '';
+              return runtime.includes('WebR aktiv') || runtime.includes('Fallback') || nextOutput !== before;
+            }, 20000);
+            await sleep(600);
+          }
+        }
+      } else {
+        win.__renderHome();
+        await sleep(900);
+      }
+
+      const summary = collectSummary(win);
+      statusEl.textContent = `Ready: ${summary.concept}${targetTab ? ` / ${targetTab}` : ''}`;
+      summaryEl.textContent = JSON.stringify(summary, null, 2);
+      document.body.dataset.ready = '1';
+    }
+
+    frame.addEventListener('load', () => {
+      boot().catch((error) => {
+        statusEl.textContent = error.message;
+        summaryEl.textContent = String(error.stack || error);
+      });
+    });
+  </script>
+</body>
+</html>

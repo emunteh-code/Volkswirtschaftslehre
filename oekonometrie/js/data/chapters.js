@@ -1,4 +1,5 @@
 import { CURRICULUM } from './curriculum.js';
+import { renderRPracticeMarkup } from '../../../assets/js/portal-core/features/rPractice.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -41,33 +42,7 @@ ${entry.warnings.map((warning) => `<div class="warn-box"><strong>${escapeHtml(wa
 
 function renderRBlock(rBlock) {
   if (!rBlock) return '';
-  return `<div class="section-block r-application-block">
-<div class="r-application-head">
-<span class="r-application-kicker">R-Anwendung</span>
-<h3>Vom Modell zur Auswertung</h3>
-</div>
-<p>${escapeHtml(rBlock.purpose)}</p>
-<div class="r-script-ref">${escapeHtml(rBlock.script)}</div>
-<pre class="r-code-block"><code>${escapeHtml(rBlock.code)}</code></pre>
-<div class="r-application-grid">
-  <div class="r-application-card">
-    <h4>Output lesen</h4>
-    <p>${escapeHtml(rBlock.output)}</p>
-  </div>
-  <div class="r-application-card">
-    <h4>Mini-Task</h4>
-    <p>${escapeHtml(rBlock.miniTask)}</p>
-  </div>
-  <div class="r-application-card">
-    <h4>Lösung</h4>
-    <p>${escapeHtml(rBlock.solution)}</p>
-  </div>
-</div>
-${Array.isArray(rBlock.pitfalls) && rBlock.pitfalls.length ? `<div class="r-pitfalls">
-  <h4>Häufige R-Fehler</h4>
-  <ul>${rBlock.pitfalls.map((pitfall) => `<li>${escapeHtml(pitfall)}</li>`).join('')}</ul>
-</div>` : ''}
-</div>`;
+  return renderRPracticeMarkup(rBlock, { moduleSlug: 'oekonometrie' });
 }
 
 function renderTheoryHtml(entry) {
@@ -94,4 +69,3 @@ export const CONTENT = Object.fromEntries(
     aufgaben: entry.aufgaben || []
   }])
 );
-

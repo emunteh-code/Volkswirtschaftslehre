@@ -1,4 +1,5 @@
 @import url('../../mikro1/css/styles.css');
+@import url('./r-practice.css');
 
 .generated-home-addon {
   display: grid;

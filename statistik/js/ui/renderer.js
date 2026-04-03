@@ -11,18 +11,9 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
+import { mountRPracticeBlocks } from '../../../assets/js/portal-core/features/rPractice.js';
 
-export const {
-  renderContent,
-  renderHome,
-  toggleSolution,
-  copyFormula,
-  showDashboard,
-  setRendererState,
-  renderPracticePanel,
-  checkTaskStep,
-  revealTaskStep
-} = createRenderer({
+const baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
@@ -41,3 +32,22 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance
 });
+
+export function renderContent(conceptId, tab, initGraphFn) {
+  baseRenderer.renderContent(conceptId, tab, initGraphFn);
+  mountRPracticeBlocks(document.getElementById('content'));
+}
+
+export function renderHome() {
+  baseRenderer.renderHome();
+}
+
+export const {
+  toggleSolution,
+  copyFormula,
+  showDashboard,
+  setRendererState,
+  renderPracticePanel,
+  checkTaskStep,
+  revealTaskStep
+} = baseRenderer;

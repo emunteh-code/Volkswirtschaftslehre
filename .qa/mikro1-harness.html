@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mikro1 QA Harness</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #fff; }
+    #meta { padding: 10px 14px; background: #16181c; border-bottom: 1px solid #333; font-size: 13px; }
+    #summary { white-space: pre-wrap; font-family: ui-monospace, monospace; margin-top: 8px; color: #cfe3ff; }
+    iframe { width: 1600px; height: 2200px; border: none; display: block; margin: 0 auto; background: white; }
+  </style>
+</head>
+<body>
+  <div id="meta">
+    <div id="status">Booting…</div>
+    <div id="summary"></div>
+  </div>
+  <iframe id="frame" src="/mikro1/index.html?qa=1"></iframe>
+  <script>
+    localStorage.setItem('mikro_consent_v1', '1');
+
+    const params = new URLSearchParams(location.search);
+    const targetConcept = params.get('concept');
+    const targetTab = params.get('tab');
+    const targetMode = params.get('mode');
+    const targetExam = params.get('exam');
+
+    const statusEl = document.getElementById('status');
+    const summaryEl = document.getElementById('summary');
+    const frame = document.getElementById('frame');
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    async function waitFor(predicate, timeout = 15000) {
+      const start = Date.now();
+      while (Date.now() - start < timeout) {
+        if (predicate()) return true;
+        await sleep(120);
+      }
+      throw new Error('Timeout waiting for runtime condition');
+    }
+
+    async function boot() {
+      const win = frame.contentWindow;
+      await waitFor(() => win && win.__jsLoaded && typeof win.__renderHome === 'function' && typeof win.__navigate === 'function');
+      await sleep(400);
+
+      const isVisible = (el) => {
+        if (!el) return false;
+        const style = win.getComputedStyle(el);
+        return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+      };
+
+      const collectPlainMathLeaks = (doc) => {
+        const roots = [doc.getElementById('content'), doc.getElementById('rightPanel'), doc.getElementById('sidebar')].filter(Boolean);
+        const leaks = [];
+        const mathLeakPattern = /(GRS|GRTS|MU(?:_[0-9A-Za-z]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|MP(?:_[0-9A-Za-z]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|MC|MR|AC|AVC|CV|EV|DWL|SE|EE|MZB|∂|∑|ℒ|λ|π|ε|σ|ρ|ω|ū|ȳ|x[₀₁₂₃₄₅₆₇₈₉ᵢ]+|p[₀₁₂₃₄₅₆₇₈₉ᵢ]+|u[⁰¹²³⁴⁵⁶⁷⁸⁹]+|k\s*[<>=]\s*1|a\/b|w\/r|K\/L|L\/K|F\(|C\(|e\()/u;
+        const mathOperatorPattern = /[=<>≤≥\/()₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹]/u;
+
+        roots.forEach((root) => {
+          const walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+              const value = node.textContent?.replace(/\s+/g, ' ').trim();
+              const parent = node.parentElement;
+              if (!value || !parent) return NodeFilter.FILTER_REJECT;
+              if (!isVisible(parent)) return NodeFilter.FILTER_REJECT;
+              if (parent.closest('mjx-container, mjx-assistive-mml, .MJX_Assistive_MathML, math, annotation, .math-semantic, script, style, textarea, input, select, option, canvas, svg')) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              if (!mathLeakPattern.test(value)) return NodeFilter.FILTER_REJECT;
+              if (!(mathOperatorPattern.test(value) || /\b(?:GRS|GRTS|MC|MR|AC|AVC|CV|EV|DWL|MU|MP)\b/.test(value))) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          });
+
+          while (walker.nextNode()) {
+            const value = walker.currentNode.textContent.replace(/\s+/g, ' ').trim();
+            leaks.push(value);
+            if (leaks.length >= 20) break;
+          }
+        });
+
+        return leaks;
+      };
+
+      const collectSummary = () => {
+        const doc = win.document;
+        const visibleText = doc.body.textContent || '';
+        const plainMathLeaks = collectPlainMathLeaks(doc);
+        const mathInkSamples = [...doc.querySelectorAll('#content mjx-container, #content .math-semantic, #rightPanel mjx-container, #rightPanel .math-semantic, #sidebar mjx-container, #sidebar .math-semantic')]
+          .filter((el) => isVisible(el))
+          .slice(0, 12)
+          .map((el) => ({
+            text: (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80),
+            color: win.getComputedStyle(el).color
+          }));
+        return {
+          concept: targetConcept || 'home',
+          tab: targetMode || targetTab || 'theorie',
+          pageTitle: (doc.querySelector('#content h1, #content h2')?.textContent || '').trim(),
+          homeCards: doc.querySelectorAll('.home-card').length,
+          actionCards: doc.querySelectorAll('#content .home-action-card').length,
+          hasFullExamEntry: visibleText.includes('Probeklausuren'),
+          sectionBlocks: doc.querySelectorAll('#content .section-block').length,
+          formulaCards: doc.querySelectorAll('#content .formula-card').length,
+          problemCards: doc.querySelectorAll('#content .problem-card').length,
+          fullExamQuestions: doc.querySelectorAll('#content .fe-question').length,
+          graphCanvas: !!doc.getElementById('graph_canvas'),
+          mathError: visibleText.includes('Math input error'),
+          rawDelimiters: visibleText.includes('$$'),
+          entityLeak: /&gt;|&lt;|&amp;/.test(visibleText),
+          markupLeak: /<span|<\/span|<div|<\/div|<mjx/.test(visibleText),
+          rightPanelSections: doc.querySelectorAll('#rightPanel .rp-section:not([hidden])').length,
+          expectedMathInk: win.getComputedStyle(doc.body).getPropertyValue('--math-ink').trim(),
+          plainMathLeakCount: plainMathLeaks.length,
+          plainMathLeaks,
+          mathInkSamples
+        };
+      };
+
+      if (targetMode === 'full-module') {
+        const { CHAPTERS } = await import('/mikro1/js/data/chapters.js');
+        const tabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
+        const failures = [];
+        const checked = [];
+
+        for (const chapter of CHAPTERS) {
+          win.__navigate(chapter.id);
+          await sleep(850);
+
+          for (const tab of tabs) {
+            if (tab !== 'theorie') {
+              const btn = win.document.querySelector(`#tabRow [data-tab="${tab}"]`);
+              if (btn) {
+                btn.click();
+                await sleep(750);
+              }
+            }
+
+            const summary = collectSummary();
+            summary.concept = chapter.id;
+            summary.tab = tab;
+            checked.push(summary);
+
+            if (
+              summary.mathError ||
+              summary.rawDelimiters ||
+              summary.entityLeak ||
+              summary.markupLeak ||
+              summary.plainMathLeakCount > 0 ||
+              (tab === 'theorie' && summary.sectionBlocks < 2) ||
+              (tab === 'formeln' && summary.formulaCards < 1) ||
+              (tab === 'aufgaben' && summary.problemCards < 1) ||
+              (tab === 'intuition' && summary.sectionBlocks < 1)
+            ) {
+              failures.push(summary);
+            }
+          }
+        }
+
+        const summary = {
+          mode: 'full-module',
+          checkedConcepts: CHAPTERS.length,
+          checkedSurfaces: checked.length,
+          failureCount: failures.length,
+          failures: failures.slice(0, 40)
+        };
+        statusEl.textContent = `Ready: ${summary.mode}`;
+        summaryEl.textContent = JSON.stringify(summary, null, 2);
+        document.body.dataset.ready = '1';
+        return;
+      }
+
+      if (targetMode === 'full-exams-all') {
+        const { FULL_EXAMS } = await import('/mikro1/js/data/fullExams.js');
+        const failures = [];
+        const checked = [];
+
+        for (const exam of Object.values(FULL_EXAMS)) {
+          win.__startFullExam(exam.id);
+          await sleep(950);
+          const summary = collectSummary();
+          summary.exam = exam.id;
+          checked.push(summary);
+
+          if (
+            summary.mathError ||
+            summary.rawDelimiters ||
+            summary.entityLeak ||
+            summary.markupLeak ||
+            summary.plainMathLeakCount > 0 ||
+            summary.fullExamQuestions < 2
+          ) {
+            failures.push(summary);
+          }
+        }
+
+        const summary = {
+          mode: 'full-exams-all',
+          checkedExams: checked.length,
+          failureCount: failures.length,
+          failures
+        };
+        statusEl.textContent = `Ready: ${summary.mode}`;
+        summaryEl.textContent = JSON.stringify(summary, null, 2);
+        document.body.dataset.ready = '1';
+        return;
+      }
+
+      if (targetMode === 'full-exams') {
+        win.__showFullExamSelect();
+        await sleep(900);
+      } else if (targetMode === 'full-exam' && targetExam) {
+        win.__startFullExam(targetExam);
+        await sleep(900);
+      } else if (targetConcept) {
+        win.__navigate(targetConcept);
+        await sleep(900);
+        if (targetTab) {
+          const btn = win.document.querySelector(`#tabRow [data-tab="${targetTab}"]`);
+          if (btn) {
+            btn.click();
+            await sleep(900);
+          }
+        }
+      } else {
+        win.__renderHome();
+        await sleep(900);
+      }
+
+      const summary = collectSummary();
+      statusEl.textContent = `Ready: ${summary.concept}${targetTab ? ` / ${targetTab}` : ''}`;
+      summaryEl.textContent = JSON.stringify(summary, null, 2);
+      document.body.dataset.ready = '1';
+    }
+
+    frame.addEventListener('load', () => {
+      boot().catch((error) => {
+        statusEl.textContent = error.message;
+        summaryEl.textContent = String(error.stack || error);
+      });
+    });
+  </script>
+</body>
+</html>

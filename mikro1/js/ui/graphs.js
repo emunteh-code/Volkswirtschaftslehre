@@ -817,10 +817,10 @@ function drawProduktionBase(progress = 1, showGrts = false) {
   const xMax = Math.max(12, laborPoint * 2.1, output * 2.2);
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Arbeit L', 'Kapital K');
 
-  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.indiffBase, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
+  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.isoquantBase, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
 
   if (!showGrts) {
-    drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output * 1.5, col.indiffAlt, `Isoquante ${(output * 1.5).toFixed(1)}`, Math.max(11, fsBase - 1), progress, [6, 4]);
+    drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output * 1.5, col.isoquantAlt, `Isoquante ${(output * 1.5).toFixed(1)}`, Math.max(11, fsBase - 1), progress, [6, 4]);
   }
 
   if (progress >= 0.85 && Number.isFinite(capitalPoint) && capitalPoint <= yMax) {
@@ -853,6 +853,12 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     ctx.textAlign = 'left';
     ctx.fillText(`Tangente: GRTS = ${grts.toFixed(2)}`, sx(Math.min(xMax * 0.58, laborPoint + 0.6)), sy(Math.min(yMax * 0.92, capitalPoint + 1.6)));
 
+    ge.drawLegend(ctx, w, [
+      { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
+      { color: col.tangent, dash: true, label: `Tangente / GRTS = ${grts.toFixed(2)}` },
+      { color: col.optimum, dot: true, label: 'Markierter Produktionspunkt' },
+    ], col.grid, 20);
+
     document.getElementById('graph_info').innerHTML =
       `<span class="gi-label">Interpretation — GRTS</span>
       <div class="gi-eq">GRTS = MP_L / MP_K = ((1−α)/α) · K/L = ${grts.toFixed(2)}</div>
@@ -872,6 +878,12 @@ function drawProduktionBase(progress = 1, showGrts = false) {
   }
 
   const secondOutput = output * 1.5;
+  ge.drawLegend(ctx, w, [
+    { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
+    { color: col.isoquantAlt, dash: true, label: `Isoquante ȳ=${secondOutput.toFixed(1)}` },
+    { color: col.competition, dot: true, label: 'Beobachteter Einsatzpunkt' },
+  ], col.grid, 20);
+
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation — Isoquanten</span>
     <div class="gi-eq">F(K, L) = K^${alpha.toFixed(2)} · L^${(1 - alpha).toFixed(2)}</div>
@@ -933,7 +945,7 @@ function drawKosten(progress = 1) {
   const yMax = Math.max(12, yIntercept * 1.15, capitalStar * 2.2);
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Arbeit L', 'Kapital K');
 
-  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.indiffBase, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
+  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.isoquantBase, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
 
   ctx.strokeStyle = col.budgetShift;
   ctx.lineWidth = 2.5;
@@ -959,6 +971,13 @@ function drawKosten(progress = 1) {
     ctx.beginPath(); ctx.moveTo(sx(laborStar), sy(capitalStar)); ctx.lineTo(sx(0), sy(capitalStar)); ctx.stroke();
     ctx.setLineDash([]);
   }
+
+  ge.drawLegend(ctx, w, [
+    { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
+    { color: col.budgetShift, label: 'Isokostengerade' },
+    { color: col.optimum, dot: true, label: 'Kostenminimum' },
+    { color: col.guide, dash: true, label: 'Hilfslinien zum Optimum' },
+  ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation — Kostenminimierung</span>
@@ -1055,18 +1074,29 @@ function drawMarkt(progress = 1) {
   }
 
   if (hasTrade && progress >= 0.88) {
-    drawDot(ctx, sx(qEq), sy(pEq), 6, col.optimum, col.bg);
+    drawDot(ctx, sx(qEq), sy(pEq), 6, col.competition, col.bg);
     ctx.fillStyle = col.text;
     ctx.font = `bold ${fsBase}px ${col.fontBody}`;
     ctx.fillText('Gleichgewicht', sx(qEq) + 10, sy(pEq) - 8);
 
-    ctx.strokeStyle = col.optimum + '88';
+    ctx.strokeStyle = col.competition + '88';
     ctx.lineWidth = 1.2;
     ctx.setLineDash([5, 4]);
     ctx.beginPath(); ctx.moveTo(sx(qEq), sy(pEq)); ctx.lineTo(sx(qEq), sy(0)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx(qEq), sy(pEq)); ctx.lineTo(sx(0), sy(pEq)); ctx.stroke();
     ctx.setLineDash([]);
   }
+
+  ge.drawLegend(ctx, w, hasTrade ? [
+    { color: col.demand, label: 'Nachfrage D' },
+    { color: col.supply, label: 'Angebot S' },
+    { color: col.competition, dot: true, label: 'Wettbewerbsgleichgewicht' },
+    { color: col.demand, fill: col.consumerFill, label: 'Konsumentenrente KR' },
+    { color: col.supply, fill: col.producerFill, label: 'Produzentenrente PR' },
+  ] : [
+    { color: col.demand, label: 'Nachfrage D' },
+    { color: col.supply, label: 'Angebot S' },
+  ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML = hasTrade
     ? `<span class="gi-label">Interpretation — Marktgleichgewicht</span>

@@ -31,7 +31,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="2" oninput="window.__drawBudget()"><div class="val" id="v_p1" aria-live="polite">2</div></div>
 <div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" oninput="window.__drawBudget()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Budgetgerade — interaktiv. Verwenden Sie die Regler um Einkommen und Preise anzupassen."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Budgetgerade — interaktiv. Verwenden Sie die Regler um Einkommen und Preise anzupassen."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -42,7 +42,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_u1">Nutzenniveau ū₁</label><input type="range" id="g_u1" min="1" max="50" value="12" oninput="window.__drawIndiff()"><div class="val" id="v_u1" aria-live="polite">12</div></div>
 <div class="ctrl-group"><label for="g_u2">Nutzenniveau ū₂</label><input type="range" id="g_u2" min="1" max="50" value="24" oninput="window.__drawIndiff()"><div class="val" id="v_u2" aria-live="polite">24</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Zwei Indifferenzkurven für u = x₁·x₂. Höherer Nutzen ist weiter vom Ursprung entfernt."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Zwei Indifferenzkurven für u = x₁·x₂. Höherer Nutzen ist weiter vom Ursprung entfernt."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -54,7 +54,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="4" oninput="window.__drawHausopt()"><div class="val" id="v_p1" aria-live="polite">4</div></div>
 <div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" oninput="window.__drawHausopt()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Haushaltsoptimum — Tangentialpunkt von Budgetgerade und Indifferenzkurve."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Haushaltsoptimum — Tangentialpunkt von Budgetgerade und Indifferenzkurve."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -66,7 +66,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
 <div class="ctrl-group"><label for="g_prod_l">Arbeit L</label><input type="range" id="g_prod_l" min="1" max="12" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_l" aria-live="polite">4.0</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Isoquanten einer Cobb-Douglas-Produktionsfunktion mit markiertem Punkt."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Isoquanten einer Cobb-Douglas-Produktionsfunktion mit markiertem Punkt."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -78,7 +78,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
 <div class="ctrl-group"><label for="g_prod_l">Arbeit L</label><input type="range" id="g_prod_l" min="1" max="12" step="0.5" value="5" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_l" aria-live="polite">5.0</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Isoquante mit Tangente zur Veranschaulichung der GRTS."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Isoquante mit Tangente zur Veranschaulichung der GRTS."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -91,7 +91,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_cost_w">Lohnsatz w</label><input type="range" id="g_cost_w" min="1" max="8" step="0.25" value="4" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_w" aria-live="polite">4.00</div></div>
 <div class="ctrl-group"><label for="g_cost_r">Kapitalpreis r</label><input type="range" id="g_cost_r" min="0.5" max="6" step="0.25" value="1" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_r" aria-live="polite">1.00</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Kostenminimum mit Isoquante, Isokostengerade und Tangentialpunkt."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Kostenminimum mit Isoquante, Isokostengerade und Tangentialpunkt."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -104,7 +104,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_s_int">Angebot-Intercept c</label><input type="range" id="g_s_int" min="0" max="60" step="5" value="20" oninput="window.initGraph('markt', false)"><div class="val" id="v_s_int" aria-live="polite">20</div></div>
 <div class="ctrl-group"><label for="g_s_slope">Angebot-Steigung d</label><input type="range" id="g_s_slope" min="0.1" max="1.0" step="0.05" value="0.4" oninput="window.initGraph('markt', false)"><div class="val" id="v_s_slope" aria-live="polite">0.40</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Marktgleichgewicht mit Nachfrage, Angebot sowie Konsumenten- und Produzentenrente."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Marktgleichgewicht mit Nachfrage, Angebot sowie Konsumenten- und Produzentenrente."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -115,7 +115,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_a">Nachfragepreis a</label><input type="range" id="g_a" min="2" max="20" value="10" oninput="window.__drawMonopol()"><div class="val" id="v_a" aria-live="polite">10</div></div>
 <div class="ctrl-group"><label for="g_c">Grenzkostenpar. c</label><input type="range" id="g_c" min="0.1" max="5" step="0.1" value="1" oninput="window.__drawMonopol()"><div class="val" id="v_c" aria-live="polite">1</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Monopoloptimum — Nachfrage, Grenzerlös, Grenzkosten und Wohlfahrtsverlust."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Monopoloptimum — Nachfrage, Grenzerlös, Grenzkosten und Wohlfahrtsverlust."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -128,7 +128,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_p1_1">Preis p₁ (neu)</label><input type="range" id="g_p1_1" min="1" max="20" value="8" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_1" aria-live="polite">8.0</div></div>
 <div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Slutsky-Zerlegung — Substitutions- und Einkommenseffekt einer Preisänderung."></canvas>
+<canvas id="graph_canvas" width="960" height="640" role="img" aria-label="Grafik: Slutsky-Zerlegung — Substitutions- und Einkommenseffekt einer Preisänderung."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
   };

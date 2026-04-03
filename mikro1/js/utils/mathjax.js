@@ -13,6 +13,9 @@ export function renderMath(el) {
   if (!target) return;
 
   const typeset = () => {
+    if (window.MathJax?.typesetClear) {
+      MathJax.typesetClear([target]);
+    }
     if (window.MathJax?.typesetPromise) {
       MathJax.typesetPromise([target]).catch(err => console.warn('MathJax:', err));
     }
@@ -23,7 +26,7 @@ export function renderMath(el) {
     typeset();
   } else if (window.MathJax?.startup?.promise) {
     // Script parsed but startup pending
-    MathJax.startup.promise.then(typeset);
+    MathJax.startup.promise.then(typeset).catch(err => console.warn('MathJax:', err));
   } else {
     // Script not yet parsed — poll until ready (max 10s)
     const poll = setInterval(() => {

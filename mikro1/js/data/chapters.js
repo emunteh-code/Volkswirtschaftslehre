@@ -591,13 +591,13 @@ export const CONTENT = {
  ],
  aufgaben: [
   {
-  text: String.raw`Gegeben: $u(x_1,x_2) = x_1^{0{,}4} \cdot x_2^{0{,}6}$, $m = 200\,€$, $p_1 = 5\,€$, $p_2 = 4\,€$. Berechne das optimale Konsumbündel und die Ausgaben für jedes Gut.`,
+  text: String.raw`Gegeben: $u(x_1,x_2) = x_1^{0{,}4} \cdot x_2^{0{,}6}$, $m = 200\,\text{€}$, $p_1 = 5\,\text{€}$, $p_2 = 4\,\text{€}$. Berechne das optimale Konsumbündel und die Ausgaben für jedes Gut.`,
   steps: [
   { text: String.raw`$\alpha = 0{,}4$. Nachfragefunktionen:`, eq: String.raw`$$x_1^* = \frac{\alpha m}{p_1} = \frac{0{,}4 \cdot 200}{5} = 16 \qquad x_2^* = \frac{(1-\alpha)m}{p_2} = \frac{0{,}6 \cdot 200}{4} = 30$$` },
   { text: `Ausgaben prüfen:`, eq: String.raw`$$p_1 x_1^* = 80 = 0{,}4 \cdot 200 \checkmark \qquad p_2 x_2^* = 120 = 0{,}6 \cdot 200 \checkmark$$` },
   { text: `Nutzenberechnung:`, eq: String.raw`$$u^* = 16^{0{,}4} \cdot 30^{0{,}6} \approx 25{,}3$$` },
   ],
-  result: String.raw`$x_1^* = 16$, $x_2^* = 30$, Ausgaben: 80\,€ und 120\,€`
+  result: String.raw`$x_1^* = 16$, $x_2^* = 30$, Ausgaben: $80\,\text{€}$ und $120\,\text{€}$`
   },
   {
   text: String.raw`Gegeben $u = x_1^{1/2} x_2^{1/2}$ (CD mit $\alpha = 1/2$). Berechne die GRS im Optimum und zeige, dass sie dem Preisverhältnis $p_1/p_2 = 3/2$ entspricht.`,

@@ -301,20 +301,20 @@ class GraphEngine {
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
       const isLight = document.body.classList.contains('light-mode');
       const accent = '#2f77c7';
-      const mathInk = cv('--math-ink') || '#1f7558';
+      const mathInk = cv('--math-ink') || '#a83f69';
       const warningRed = cv('--accent3') || '#e05252';
-      const reference = isLight ? '#1f2a36' : '#d8dee7';
+      const reference = isLight ? '#1c2530' : '#dde4ec';
       const optimum = reference;
-      const budgetShift = '#d1495b';
+      const budgetShift = '#cf4352';
       const budgetComp = reference;
-      const indiffBase = '#c94759';
-      const indiffAlt = '#ef7f8c';
+      const indiffBase = '#d84a5a';
+      const indiffAlt = '#e7902f';
       const isoquantBase = '#2f8f58';
-      const isoquantAlt = '#77bf8e';
-      const tangent = '#de8a2f';
+      const isoquantAlt = '#79bf87';
+      const tangent = '#d98223';
       const competition = reference;
       const supply = '#2f8f58';
-      const mc = '#de8a2f';
+      const mc = tangent;
       this._col = {
         bg:       cv('--bg')        || '#0f1114',
         grid:     cv('--border')    || '#2e3338',
@@ -343,7 +343,7 @@ class GraphEngine {
         tangent,
         demand: accent,
         supply,
-        mr: budgetShift,
+        mr: '#8f2436',
         mc,
         monopoly: budgetShift,
         competition,
@@ -422,13 +422,14 @@ class GraphEngine {
 
     // Draw indifference curve u = x·y = const (Cobb-Douglas α = 0.5)
     // progress (0-1): reveal fraction of curve for entry animation
-    drawIK(ctx, axMax, u, color, label, sx, sy, progress = 1) {
+    drawIK(ctx, axMax, u, color, label, sx, sy, progress = 1, dash = []) {
       if (u <= 0) return;
       const minX = axMax * 0.012;
       const xStop = axMax * progress;
 
       ctx.strokeStyle = color;
       ctx.lineWidth = 2.5;
+      ctx.setLineDash(dash);
       ctx.beginPath();
       let started = false;
       for (let x = minX; x <= xStop; x += axMax / 500) {
@@ -438,6 +439,7 @@ class GraphEngine {
         else ctx.lineTo(sx(x), sy(y));
       }
       ctx.stroke();
+      ctx.setLineDash([]);
 
       // Label — only draw when curve is mostly complete
       if (label && progress >= 0.85) {

@@ -17,12 +17,18 @@ import * as keyboard from './utils/keyboard.js';
 import * as toast from './utils/toast.js';
 import * as math from './utils/mathjax.js';
 
+const bootStorage = {
+  ...storage,
+  // Enter Mikro I on the internal overview first; resume remains available there.
+  loadLastId: () => null
+};
+
 createPortalApp({
   courseLabel: COURSE_CONFIG.courseLabel,
   consentKey: COURSE_CONFIG.consentKey,
   chapters: CHAPTERS,
   appState,
-  storage,
+  storage: bootStorage,
   navigation,
   renderer,
   rightPanel,

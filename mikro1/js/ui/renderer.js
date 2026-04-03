@@ -370,8 +370,11 @@ ${recognitionItems.map((item) => `<li>${escapeHtml(stripHtml(item))}</li>`).join
 </div>
 
 <div class="section-block intuition-bridge">
+<div class="intuition-bridge-head">
+<span class="intuition-bridge-kicker">Transferpfad</span>
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
-<p>${intuition.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
+<p class="intuition-bridge-copy">${intuition.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
+</div>
 ${signals.sections[1] || signals.warnings[0] ? `<div class="intuition-detail-list">
 ${signals.sections[1] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>
@@ -442,8 +445,12 @@ export function renderContent(conceptId, tab, initGraphFn) {
   enhanceRenderedSurface(conceptId);
 }
 
+export function renderHome() {
+  baseRenderer.renderHome();
+  enhanceRenderedSurface(null);
+}
+
 export const {
-  renderHome,
   toggleSolution,
   toggleExamDrill,
   copyFormula,

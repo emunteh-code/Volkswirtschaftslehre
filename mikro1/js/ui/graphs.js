@@ -240,11 +240,11 @@ function drawIndiff(progress = 1) {
   const clr1 = col.indiffBase;
   const clr2 = col.indiffAlt;
   const curves = [
-    { u: u1, c: clr1, label: 'I₁ (ū=' + u1 + ')' },
-    { u: u2, c: clr2, label: 'I₂ (ū=' + u2 + ')' },
+    { u: u1, c: clr1, label: 'I₁ (ū=' + u1 + ')', dash: [] },
+    { u: u2, c: clr2, label: 'I₂ (ū=' + u2 + ')', dash: [7, 4] },
   ];
   curves.sort((a, b) => a.u - b.u).forEach(cv =>
-    ge.drawIK(ctx, axMax, cv.u, cv.c, cv.label, sx, sy, progress));
+    ge.drawIK(ctx, axMax, cv.u, cv.c, cv.label, sx, sy, progress, cv.dash));
 
   // "higher utility" hint — placed in upper-right to avoid curve-label zone
   if (progress >= 0.9) {
@@ -256,7 +256,7 @@ function drawIndiff(progress = 1) {
 
   ge.drawLegend(ctx, w, [
     { color: clr1,      label: 'I₁ — Indiff.kurve (ū=' + u1 + ')' },
-    { color: clr2,      label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
+    { color: clr2, dash: true, label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
     { color: col.reference, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
   ], col.grid);
 
@@ -625,7 +625,7 @@ function drawSlutsky(progress = 1) {
   // IK curves — animated
   ge.drawIK(ctx, axMax, u0, col.indiffBase,  'I₀ (ū=' + u0.toFixed(1) + ')', sx, sy, progress);
   if (Math.abs(u1 - u0) > 0.01)
-    ge.drawIK(ctx, axMax, u1, col.indiffAlt, 'I₁ (ū=' + u1.toFixed(1) + ')', sx, sy, progress);
+    ge.drawIK(ctx, axMax, u1, col.indiffAlt, 'I₁ (ū=' + u1.toFixed(1) + ')', sx, sy, progress, [7, 4]);
 
   // Budget lines helper — yFrac controls label vertical position to avoid overlap
   function bLine(p1, color, label, dash, yFrac = 0.72) {

@@ -31,16 +31,18 @@
   </script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="../assets/css/generated-portal.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <!-- ── Privacy Consent Notice ──────────────────────────────── -->
 <div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-  <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
-  <div class="consent-actions">
-    <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
-    <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+  <div class="consent-notice-inner">
+    <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
+    <div class="consent-actions">
+      <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
+      <button class="consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+    </div>
   </div>
 </div>
 
@@ -50,15 +52,15 @@
   <!-- SIDEBAR -->
   <nav id="sidebar" aria-label="Konzept-Navigation">
 
-    <div class="sidebar-header"
-         onclick="window.__renderHome()"
-         role="button"
-         tabindex="0"
-         onkeydown="if(event.key==='Enter')window.__renderHome()"
-         title="Zur Startseite"
-         aria-label="Startseite">
-      <a class="portal-home-link" href="../index.html" onclick="event.stopPropagation()">Alle Module</a>
-      <h1>Makroökonomik II</h1>
+    <div class="sidebar-header">
+      <a class="portal-home-link" href="../index.html">← Alle Module</a>
+      <button class="sidebar-module-home" type="button" onclick="window.__renderHome()" aria-label="Zur Makroökonomik-II-Übersicht">
+        <span class="sidebar-module-icon" aria-hidden="true">⌂</span>
+        <span class="sidebar-module-copy">
+          <span class="sidebar-module-title">Makroökonomik II</span>
+          <span class="sidebar-module-subtitle">Zur Modulübersicht</span>
+        </span>
+      </button>
       <p>Georg-August-Universität Göttingen</p>
     </div>
 
@@ -66,7 +68,7 @@
     <div class="progress-bar-wrap">
       <div class="progress-label">
         <span>FORTSCHRITT</span>
-        <span id="progressText">0 / 34</span>
+        <span id="progressText">0 / 19</span>
       </div>
       <div class="progress-bar">
         <div class="progress-fill" id="progressFill" style="width:0%"></div>
@@ -90,7 +92,8 @@
     <div id="navList" role="list" aria-label="Konzepte"></div>
 
     <!-- Sidebar Footer -->
-    <div class="sidebar-footer-btns">
+    <div class="sidebar-footer-btns" role="group" aria-label="Lernwerkzeuge">
+      <div class="sidebar-footer-label">Werkzeuge</div>
       <button class="sidebar-footer-btn"
               onclick="window.__showDashboard()"
               aria-label="Dashboard öffnen">Dashboard</button>
@@ -112,7 +115,7 @@
       <!-- Row 1: breadcrumb + controls -->
       <div id="topbar-main">
         <div class="breadcrumb" id="breadcrumb" aria-live="polite" role="navigation" aria-label="Breadcrumb">
-          <button class="breadcrumb-link" onclick="window.__renderHome()">Makroökonomik II</button> / Startseite
+          <button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button>
         </div>
         <div id="topbar-actions">
           <!-- Streak Badge -->
@@ -193,7 +196,8 @@
 <div id="sidebarOverlay" aria-hidden="true"></div>
 
 <!-- App Entry Point -->
-<script type="module" src="../assets/js/generated-portal/main.js"></script>
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/portalHub.js"></script>
 
 <!-- Fallback: shown only if JS modules fail to load (e.g. opened via file://) -->
 <script>

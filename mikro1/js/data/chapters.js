@@ -639,9 +639,9 @@ export const CONTENT = {
 <div class="section-block">
 <h3>Spezialfälle</h3>
 <div class="info-grid">
-<div class="info-card"><div class="label">$\rho = 1$ ($\sigma \to \infty$)</div><div class="value">Perfekte Substitute</div><p>$u = \alpha x_1 + (1-\alpha) x_2$. Lineare IK, Randlösungen.</p></div>
-<div class="info-card"><div class="label">$\rho \to 0$ ($\sigma = 1$)</div><div class="value">Cobb-Douglas</div><p>$u = x_1^\alpha x_2^{1-\alpha}$. Konstante Ausgabenanteile.</p></div>
-<div class="info-card"><div class="label">$\rho \to -\infty$ ($\sigma \to 0$)</div><div class="value">Perfekte Komplemente</div><p>$u = \min\{\alpha x_1, (1-\alpha) x_2\}$. L-förmige IK.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Perfekte Substitute</div><div class="value">$\rho = 1$ ($\sigma \to \infty$)</div><p>$u = \alpha x_1 + (1-\alpha) x_2$. Lineare IK, Randlösungen.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Cobb-Douglas</div><div class="value">$\rho \to 0$ ($\sigma = 1$)</div><p>$u = x_1^\alpha x_2^{1-\alpha}$. Konstante Ausgabenanteile.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Perfekte Komplemente</div><div class="value">$\rho \to -\infty$ ($\sigma \to 0$)</div><p>$u = \min\{\alpha x_1, (1-\alpha) x_2\}$. L-förmige IK.</p></div>
 </div>
 <p>Die CES-Funktion vereint also die drei Grundtypen in einer parametrischen Familie. Durch Variation von $\rho$ (bzw. $\sigma$) kann der Grad der Substituierbarkeit stufenlos eingestellt werden.</p>
 </div>
@@ -929,9 +929,9 @@ export const CONTENT = {
 <div class="math-block">$$\varepsilon_{x_i, p_i} = \frac{\partial x_i}{\partial p_i} \cdot \frac{p_i}{x_i}$$</div>
 <p>Misst die Reaktion der Nachfrage auf den eigenen Preis. Typischerweise negativ (Gesetz der Nachfrage). Einteilung:</p>
 <div class="info-grid">
-<div class="info-card"><div class="label">$|\varepsilon| > 1$</div><div class="value">Elastisch</div><p>Nachfrage reagiert stark. Preiserhöhung senkt den Umsatz.</p></div>
-<div class="info-card"><div class="label">$|\varepsilon| = 1$</div><div class="value">Einheitselastisch</div><p>Umsatz bleibt konstant bei Preisänderung.</p></div>
-<div class="info-card"><div class="label">$|\varepsilon| < 1$</div><div class="value">Unelastisch</div><p>Nachfrage reagiert schwach. Preiserhöhung steigert den Umsatz.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Elastisch</div><div class="value">$|\varepsilon| > 1$</div><p>Nachfrage reagiert stark. Preiserhöhung senkt den Umsatz.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Einheitselastisch</div><div class="value">$|\varepsilon| = 1$</div><p>Umsatz bleibt konstant bei Preisänderung.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Unelastisch</div><div class="value">$|\varepsilon| < 1$</div><p>Nachfrage reagiert schwach. Preiserhöhung steigert den Umsatz.</p></div>
 </div>
 </div>
 <div class="section-block">
@@ -1829,9 +1829,9 @@ export const CONTENT = {
 <p><strong>Skalenerträge</strong> beschreiben, was mit dem Output passiert, wenn alle Inputs proportional um den Faktor $\lambda > 1$ erhöht werden. Der Homogenitätsgrad $k$ der Produktionsfunktion bestimmt die Art der Skalenerträge:</p>
 <div class="math-block">$$F(\lambda L, \lambda K) = \lambda^k \cdot F(L, K)$$</div>
 <div class="info-grid">
-<div class="info-card"><div class="label">$k > 1$</div><div class="value">Steigende Skalenerträge</div><p>Verdopplung der Inputs führt zu mehr als doppeltem Output.</p></div>
-<div class="info-card"><div class="label">$k = 1$</div><div class="value">Konstante Skalenerträge (CRS)</div><p>Verdopplung der Inputs führt zu genau doppeltem Output.</p></div>
-<div class="info-card"><div class="label">$k < 1$</div><div class="value">Sinkende Skalenerträge</div><p>Verdopplung der Inputs führt zu weniger als doppeltem Output.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Steigende Skalenerträge</div><div class="value">$k > 1$</div><p>Verdopplung der Inputs führt zu mehr als doppeltem Output.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Konstante Skalenerträge (CRS)</div><div class="value">$k = 1$</div><p>Verdopplung der Inputs führt zu genau doppeltem Output.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Sinkende Skalenerträge</div><div class="value">$k < 1$</div><p>Verdopplung der Inputs führt zu weniger als doppeltem Output.</p></div>
 </div>
 </div>
 <div class="section-block">

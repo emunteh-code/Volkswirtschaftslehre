@@ -306,12 +306,14 @@ class GraphEngine {
       const reference = isLight ? '#1c2530' : '#dde4ec';
       const optimum = reference;
       const budgetShift = '#cf4352';
-      const budgetComp = reference;
-      const indiffBase = '#d84a5a';
-      const indiffAlt = '#e7902f';
+      const budgetComp = '#228a5b';
+      const indiffBase = mathInk;
+      const indiffAlt = isLight ? '#465467' : '#d6dfe8';
       const isoquantBase = '#2f8f58';
       const isoquantAlt = '#79bf87';
       const tangent = '#d98223';
+      const effectSub = '#d98223';
+      const effectIncome = '#8b3ea8';
       const competition = reference;
       const supply = '#2f8f58';
       const mc = tangent;
@@ -347,6 +349,8 @@ class GraphEngine {
         mc,
         monopoly: budgetShift,
         competition,
+        effectSub,
+        effectIncome,
         welfare: warningRed,
         welfareFill: hexToRgba(warningRed, 0.22),
         profit: tangent,

@@ -1,17 +1,6 @@
-// ============================================================
-// MASTERY DATA — AUTO-GENERATED
-// Learning objective checklists
-// ============================================================
+import { CURRICULUM } from './curriculum.js';
 
-import { CHAPTERS } from './chapters.js';
+export const MASTERY = Object.fromEntries(
+  CURRICULUM.map((entry) => [entry.id, entry.mastery || []])
+);
 
-export const MASTERY = {};
-
-CHAPTERS.forEach((ch) => {
-  MASTERY[ch.id] = [
-    `Die zentrale Definition von "${ch.title}" erklären können`,
-    `Formeln und Zusammenhänge korrekt anwenden können`,
-    `Typische Klausuraufgaben zu "${ch.title}" lösen`,
-    `Den Zusammenhang mit anderen Konzepten verstehen`
-  ];
-});

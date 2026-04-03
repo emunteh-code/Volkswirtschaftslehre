@@ -1,5 +1,5 @@
 // ============================================================
-// MATHJAX HELPER — Mikroökonomik I
+// MATHJAX HELPER — Ökonometrie
 // Centralized MathJax typeset triggers
 // ============================================================
 
@@ -10,28 +10,38 @@
  */
 export function renderMath(el) {
   const target = el || document.getElementById('content');
-  if (!target) return;
+  if (!target) return Promise.resolve();
 
   const typeset = () => {
-    if (window.MathJax?.typesetPromise) {
-      MathJax.typesetPromise([target]).catch(err => console.warn('MathJax:', err));
+    if (window.MathJax?.typesetClear) {
+      MathJax.typesetClear([target]);
     }
+    if (window.MathJax?.typesetPromise) {
+      return MathJax.typesetPromise([target]).catch((err) => {
+        console.warn('MathJax:', err);
+      });
+    }
+    return Promise.resolve();
   };
 
   if (window.MathJax?.typesetPromise) {
-    // Already fully loaded
-    typeset();
+    return typeset();
   } else if (window.MathJax?.startup?.promise) {
-    // Script parsed but startup pending
-    MathJax.startup.promise.then(typeset);
-  } else {
-    // Script not yet parsed — poll until ready (max 10s)
+    return MathJax.startup.promise
+      .then(typeset)
+      .catch((err) => console.warn('MathJax:', err));
+  }
+
+  return new Promise((resolve) => {
     const poll = setInterval(() => {
       if (window.MathJax?.typesetPromise) {
         clearInterval(poll);
-        typeset();
+        Promise.resolve(typeset()).finally(resolve);
       }
     }, 100);
-    setTimeout(() => clearInterval(poll), 10000);
-  }
+    setTimeout(() => {
+      clearInterval(poll);
+      resolve();
+    }, 10000);
+  });
 }

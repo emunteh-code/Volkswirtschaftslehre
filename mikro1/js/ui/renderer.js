@@ -571,20 +571,31 @@ function renderExamDrillDeck(conceptId) {
   const signals = extractTheorySignals(entry);
   const drills = buildExamDrills(chapter, entry, intuition, signals);
 
+  function resolveExamDrillMetaLabel(tag, cardLabel) {
+    const normalizedTag = String(tag || '').trim();
+    if (!normalizedTag) return '';
+    if (normalizedTag === cardLabel) return '';
+    if (/^Prüfungsfrage\s+\d+$/u.test(normalizedTag)) return '';
+    if (/^Klausurmuster\s+\d+$/u.test(normalizedTag)) return 'Klausurmuster';
+    return normalizedTag;
+  }
+
   return `<div class="exam-drill-panel">
 <div class="practice-section-header">Prüfungstransfer</div>
 <div class="exam-drill-grid">
 ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, '_')}_${index}`;
+  const cardLabel = `Prüfungsfrage ${index + 1}`;
+  const metaLabel = resolveExamDrillMetaLabel(drill.tag, cardLabel);
   return renderQuestionCard({
-    label: `Prüfungsfrage ${index + 1}`,
+    label: cardLabel,
     question: drill.question,
     buttonId: `examDrillBtn_${drillId}`,
     answerId: `examDrill_${drillId}`,
     toggleCall: `window.__toggleExamDrill('${drillId}')`,
     cardClass: 'exam-drill-card',
     answerMarkup: `<h4>Musterlösung</h4>
-${drill.tag ? `<div class="exam-drill-meta">${drill.tag}</div>` : ''}
+${metaLabel ? `<div class="exam-drill-meta">${metaLabel}</div>` : ''}
 <div class="exam-drill-solution">${drill.answer}</div>`
   });
 }).join('')}

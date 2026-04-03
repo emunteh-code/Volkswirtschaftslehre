@@ -61,7 +61,7 @@ function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
 const MATH_TEX_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
 const MATH_SCRIPT_CHARS = '₀₁₂₃₄₅₆₇₈₉ₐₑₒₓₘₙₚᵢⱼᵣᵤᵥₖ*′';
 const MATH_SUPERSCRIPT_CHARS = '⁰¹²³⁴⁵⁶⁷⁸⁹';
-const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳ';
+const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳℒ∞';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
 const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
 const MATH_RANGE_PATTERNS = [
@@ -69,8 +69,10 @@ const MATH_RANGE_PATTERNS = [
   /\d+(?:[.,]\d+)?\s*€/gu,
   /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|KR|PR|SE|EE|MZB|IK|BEO)\b/gu,
   new RegExp(String.raw`\b(?:MU|MP)(?:[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?`, 'gu'),
-  new RegExp(String.raw`(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?\s*\/\s*(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?`, 'gu'),
+  /∑\s*[^\s,.;:!?]+(?:\s*[^\s,.;:!?]+)?\s*=\s*[-−]?\d+(?:[.,]\d+)?/gu,
+  new RegExp(String.raw`(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?\s*\/\s*(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?(?:\s*(?:=|<|>|≤|≥)\s*(?:[-−]?\d+(?:[.,]\d+)?|[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?))?`, 'gu'),
   new RegExp(String.raw`(?:[${MATH_GREEK_CHARS}A-Za-z]+)(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|\([^)]*\)|[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)+`, 'gu'),
+  /(?:p(?:_1|_2|₁|₂)\s*\/\s*p(?:_1|_2|₁|₂)|w\s*\/\s*r|K\s*\/\s*L|L\s*\/\s*K|x(?:_1|_2|₁|₂)\s*\/\s*[ab]|[ab]\s*\/\s*[abk]|k\s*(?:=|<|>)\s*1)/gu,
   new RegExp(String.raw`[${MATH_GREEK_CHARS}](?:[${MATH_SCRIPT_CHARS}${MATH_SUPERSCRIPT_CHARS}]+)?`, 'gu'),
   new RegExp(String.raw`\b(?:x|p|u|v|e|h|m|q|w|r|L|K|C|F|y)(?:[${MATH_SCRIPT_CHARS}]+|\([^)]*\))`, 'gu'),
   /(?<![\p{L}\p{N}_])(?:m|p|w|r|L|K|C|F|y|q|u|v|e|h|x)(?![\p{L}\p{N}_])/gu
@@ -755,6 +757,37 @@ function stripExamTransferIntro() {
   document.querySelectorAll('.exam-drill-panel > p').forEach((intro) => intro.remove());
 }
 
+function ensureMikroHomeExamCard() {
+  const content = document.getElementById('content');
+  const actions = content?.querySelector('.home-action-row');
+  if (!actions || actions.querySelector('[data-home-action="full-exams"]')) return;
+
+  const card = document.createElement('div');
+  card.className = 'home-action-card';
+  card.dataset.homeAction = 'full-exams';
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.innerHTML = `
+<div class="hac-title">Probeklausuren</div>
+<div class="hac-desc">Vollständige Mikro-I-Klausuren mit Musterlösungen</div>`;
+
+  const open = () => window.__showFullExamSelect?.();
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      open();
+    }
+  });
+
+  const quickExamCard = Array.from(actions.children).find((child) => child.textContent?.includes('Schnelltest'));
+  if (quickExamCard?.nextSibling) {
+    actions.insertBefore(card, quickExamCard.nextSibling);
+  } else {
+    actions.appendChild(card);
+  }
+}
+
 function enhanceRenderedSurface(conceptId) {
   const content = document.getElementById('content');
   if (!content) return;
@@ -787,6 +820,8 @@ function enhanceRenderedSurface(conceptId) {
     }
 
     decorateConceptLinks();
+  } else {
+    ensureMikroHomeExamCard();
   }
 
   markRenderSettled(false);

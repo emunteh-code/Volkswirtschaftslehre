@@ -33,13 +33,16 @@ const SUPERSCRIPT_MAP = {
   '⁹': '9'
 };
 
+const SUBSCRIPT_CHARS = '₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ';
 const SUPERSCRIPT_CHARS = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+const GREEK_CHARS = 'πλσωαβμρσθεūȳℒε';
+const DERIVATIVE_SYMBOL_SOURCE = String.raw`(?:ℒ|[${GREEK_CHARS}A-Za-z]+)(?:_[A-Za-z0-9]+|[${SUBSCRIPT_CHARS}${SUPERSCRIPT_CHARS}]+|\*)?`;
 
-const TOKEN_SOURCE = String.raw`(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|[${SUPERSCRIPT_CHARS}]+)?|MP(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|[${SUPERSCRIPT_CHARS}]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|[${SUPERSCRIPT_CHARS}]+|\([^)]*\)|\*)?|[πλσωαβμūȳ](?:[${SUPERSCRIPT_CHARS}]+)?)`;
+const TOKEN_SOURCE = String.raw`(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[${SUBSCRIPT_CHARS}]+|[${SUPERSCRIPT_CHARS}]+)?|MP(?:_[A-Za-z0-9]+|[${SUBSCRIPT_CHARS}]+|[${SUPERSCRIPT_CHARS}]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[${SUBSCRIPT_CHARS}]+|[${SUPERSCRIPT_CHARS}]+|\([^)]*\)|\*)?|[${GREEK_CHARS}](?:[${SUPERSCRIPT_CHARS}]+)?)`;
 const STANDALONE_TOKENS = [
   /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB)\b/gu,
-  new RegExp(String.raw`(?:MU|MP)(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|[${SUPERSCRIPT_CHARS}]+)?`, 'gu'),
-  new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(?:[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|[${SUPERSCRIPT_CHARS}]+|\([^)]*\)|\*)?|[πλσωαβμūȳ](?:[${SUPERSCRIPT_CHARS}]+)?)(?![\p{L}\p{N}])`, 'gu')
+  new RegExp(String.raw`(?:MU|MP)(?:_[A-Za-z0-9]+|[${SUBSCRIPT_CHARS}]+|[${SUPERSCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(?:[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[${SUBSCRIPT_CHARS}]+|[${SUPERSCRIPT_CHARS}]+|\([^)]*\)|\*)?|[${GREEK_CHARS}](?:[${SUPERSCRIPT_CHARS}]+)?)(?![\p{L}\p{N}])`, 'gu')
 ];
 
 function decodeHtmlEntities(value) {
@@ -58,14 +61,14 @@ function decodeHtmlEntities(value) {
 }
 
 function normalizeSubscripts(token) {
-  return token.replace(/([A-Za-zπλσωαβμūȳ]+)([₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+)/gu, (_, base, suffix) => {
+  return token.replace(new RegExp(String.raw`([A-Za-z${GREEK_CHARS}]+)([${SUBSCRIPT_CHARS}]+)`, 'gu'), (_, base, suffix) => {
     const normalized = Array.from(suffix).map((char) => SUBSCRIPT_MAP[char] || char).join('');
     return `${base}_${normalized.length > 1 ? `{${normalized}}` : normalized}`;
   });
 }
 
 function normalizeSuperscripts(token) {
-  return token.replace(/([A-Za-zπλσωαβμūȳ0-9])([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/gu, (_, base, suffix) => {
+  return token.replace(new RegExp(String.raw`([A-Za-z${GREEK_CHARS}0-9])([${SUPERSCRIPT_CHARS}]+)`, 'gu'), (_, base, suffix) => {
     const normalized = Array.from(suffix).map((char) => SUPERSCRIPT_MAP[char] || char).join('');
     return `${base}^{${normalized}}`;
   });
@@ -80,7 +83,7 @@ function normalizeDecorators(token) {
     .replace(/_0\b/gu, '_0')
     .replace(/_1\b/gu, '_1')
     .replace(/_2\b/gu, '_2')
-    .replace(/([A-Za-zπλσωαβμūȳ])\*/gu, '$1^*');
+    .replace(new RegExp(String.raw`([A-Za-z${GREEK_CHARS}])\*`, 'gu'), '$1^*');
 }
 
 function normalizeMathExpression(expression) {
@@ -93,6 +96,11 @@ function normalizeMathExpression(expression) {
           .replace(/≥/g, String.raw`\ge `)
           .replace(/→/g, String.raw`\to `)
           .replace(/·/g, String.raw`\cdot `)
+          .replace(/ℒ/g, String.raw`\mathcal{L}`)
+          .replace(/∑/g, String.raw`\sum `)
+          .replace(/∞/g, String.raw`\infty `)
+          .replace(/\bmin(?=\s*[\(\{])/g, String.raw`\min`)
+          .replace(/\bmax(?=\s*[\(\{])/g, String.raw`\max`)
           .replace(/\s+/g, ' ')
           .trim()
       )
@@ -106,6 +114,45 @@ function wrapMath(expression) {
 
 function applyExpressionReplacements(text) {
   const replacements = [
+    {
+      pattern: new RegExp(
+        String.raw`(?<![\p{L}\p{N}$\\])((?:${DERIVATIVE_SYMBOL_SOURCE}\s*=\s*)?(?:∂|d)\s*${DERIVATIVE_SYMBOL_SOURCE}\s*\/\s*(?:∂|d)\s*${DERIVATIVE_SYMBOL_SOURCE}(?:\s*(?:=|<|>|≤|≥)\s*(?:[-−]?\d+(?:[.,]\d+)?|${DERIVATIVE_SYMBOL_SOURCE}))?)(?![\p{L}\p{N}])`,
+        'gu'
+      ),
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])x(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+|\*)?\s*=\s*[−-]?\s*\((?:∂|d)[^,.;:!?]+\)\s*\/\s*\((?:∂|d)[^,.;:!?]+\)(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])∑\s*[^\s,.;:!?]+(?:\s*[^\s,.;:!?]+)?\s*=\s*[-−]?\d+(?:[.,]\d+)?(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])u\s*=\s*a\s*x(?:_1|₁)\s*\+\s*b\s*x(?:_2|₂)(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])u\s*=\s*min\s*\(\s*x(?:_1|₁)\s*\/\s*a\s*,\s*x(?:_2|₂)\s*\/\s*b\s*\)(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])x(?:_1|₁)\s*\/\s*a\s*=\s*x(?:_2|₂)\s*\/\s*b(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])(GRTS|GRS)\s*=\s*(w|r|a|b|p(?:_1|_2|₁|₂)|MP_L|MP_K|MU_1|MU_2)\s*\/\s*(w|r|a|b|p(?:_1|_2|₁|₂)|MP_L|MP_K|MU_1|MU_2)(?![\p{L}\p{N}])/gu,
+      replace: (_, lhs, num, den) => wrapMath(`${lhs} = \\frac{${num}}{${den}}`)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])(?:p(?:_1|₁)\s*\/\s*p(?:_2|₂)|w\s*\/\s*r|K\s*\/\s*L|L\s*\/\s*K)\s*(?:=|<|>|≤|≥)\s*(?:a\s*\/\s*b|[-−]?\d+(?:[.,]\d+)?)(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])k\s*(?:=|<|>)\s*1(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
     {
       pattern: new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(GRTS)\s*=\s*(MP_L|MPₗ)\s*\/\s*(MP_K|MPₖ)(?![\p{L}\p{N}])`, 'gu'),
       replace: (_, lhs, num, den) => wrapMath(`${lhs} = \\frac{${num}}{${den}}`)
@@ -131,7 +178,11 @@ function applyExpressionReplacements(text) {
       replace: (match) => wrapMath(match)
     },
     {
-      pattern: /(?<![\p{L}\p{N}$\\])F\s*=\s*K\^[A-Za-z0-9.,]+\s*L\^[A-Za-z0-9.,]+(?![\p{L}\p{N}])/gu,
+      pattern: /(?<![\p{L}\p{N}$\\])(?:F|f)\s*=\s*[LK]\^[A-Za-z0-9.,]+\s*(?:·\s*)?[LK]\^[A-Za-z0-9.,]+(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])(?:F|f)\s*\(\s*λ\s*[LK]\s*,\s*λ\s*[LK]\s*\)\s*=\s*λ\^[A-Za-z0-9.,]+\s*·\s*(?:F|f)\s*\(\s*[LK]\s*,\s*[LK]\s*\)(?![\p{L}\p{N}])/gu,
       replace: (match) => wrapMath(match)
     },
     {

@@ -80,6 +80,19 @@ export const MODULES = [
     type: "quantitative"
   },
   {
+    slug: "finanzwirtschaft",
+    title: "Finanzwirtschaft",
+    shortTitle: "Finanz",
+    summary: "Investition, Finanzierung, Bewertung und Risikoentscheidungen.",
+    accent: "#7c3aed",
+    difficulty: "Fortgeschritten",
+    time: "45h",
+    prereq: "Mathematik",
+    href: "./finanzwirtschaft/index.html",
+    status: "live",
+    type: "quantitative"
+  },
+  {
     slug: "mathematik",
     title: "Mathematik",
     shortTitle: "Mathe",

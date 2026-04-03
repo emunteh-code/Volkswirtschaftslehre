@@ -1,0 +1,393 @@
+const WEBR_MODULE_URL = 'https://webr.r-wasm.org/latest/webr.mjs';
+const STORAGE_PREFIX = 'portal_r_practice_v1';
+
+let webRPromise = null;
+const practiceRegistry = new Map();
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function normalizeCode(code) {
+  return String(code ?? '').replace(/\r\n/g, '\n').trim();
+}
+
+function escapeRString(value) {
+  return String(value ?? '')
+    .replaceAll('\\', '\\\\')
+    .replaceAll('"', '\\"')
+    .replaceAll('\n', '\\n');
+}
+
+function detectRuntimeMode(block) {
+  if (block.runtimeMode) return block.runtimeMode;
+  return /library\s*\(/.test(block.starterCode || block.code || '') ? 'guided' : 'live';
+}
+
+function buildEconometricsPrelude() {
+  return String.raw`set.seed(123)
+x  <- c(2, 3, 5, 7, 11, 13, 17, 19)
+x1 <- c(1.0, 1.4, 1.8, 2.1, 2.5, 2.9, 3.3, 3.7)
+x2 <- c(-3.40, -3.41, -3.42, -3.45, -3.46, -3.49, -3.52, -3.55)
+x3 <- c(0.2, 0.4, 0.7, 0.9, 1.1, 1.3, 1.6, 1.9)
+u  <- c(-0.3, 0.2, -0.1, 0.4, -0.2, 0.1, -0.15, 0.05)
+y  <- 1.5 + 0.8 * x1 - 0.6 * x2 + 0.4 * x3 + u
+wage <- c(11.8, 12.4, 13.1, 13.5, 14.2, 14.8, 15.4, 16.1)
+educ <- c(10, 11, 11, 12, 12, 13, 14, 15)
+exper <- c(1, 2, 3, 4, 5, 6, 7, 8)
+female <- c(0, 1, 0, 1, 0, 1, 0, 1)
+ability <- c(0.1, 0.3, 0.2, 0.5, 0.4, 0.7, 0.6, 0.8)
+classsize <- c(18, 20, 22, 24, 26, 28, 30, 32)
+testscore <- c(78, 77, 75, 73, 71, 70, 68, 66)
+df <- data.frame(y, x, x1, x2, x3, wage, educ, exper, female, ability, classsize, testscore)
+school_df <- data.frame(testscore, classsize)
+new_obs <- data.frame(x1 = 2.6, x2 = -3.48)
+ts <- arima.sim(model = list(ar = 0.5), n = 120)`;
+}
+
+function buildStatisticsPrelude() {
+  return String.raw`set.seed(7)
+x <- c(12, 15, 18, 19, 21, 23, 25, 28)
+y <- c(14, 16, 19, 22, 23, 25, 29, 31)
+group <- rep(c("A", "B"), each = 4)
+z <- c(110, 112, 109, 114, 118, 121, 123, 125)
+df <- data.frame(x, y, group, z)`;
+}
+
+function getRuntimePrelude(moduleSlug) {
+  if (moduleSlug === 'oekonometrie') return buildEconometricsPrelude();
+  if (moduleSlug === 'statistik') return buildStatisticsPrelude();
+  return '';
+}
+
+async function ensureWebR() {
+  if (!webRPromise) {
+    webRPromise = (async () => {
+      const { WebR } = await import(WEBR_MODULE_URL);
+      const webR = new WebR();
+      await webR.init();
+      return webR;
+    })().catch((error) => {
+      webRPromise = null;
+      throw error;
+    });
+  }
+
+  return webRPromise;
+}
+
+async function executeR(moduleSlug, code) {
+  const webR = await ensureWebR();
+  const prelude = getRuntimePrelude(moduleSlug);
+  const wrapped = `
+    ${prelude}
+    output <- capture.output({
+${code}
+    }, type = "output")
+    if (length(output) == 0) {
+      output <- c("[Kein konsolenpflichtiger Output erzeugt]")
+    }
+    output
+  `;
+
+  const result = await webR.evalR(wrapped);
+  if (typeof result.toArray === 'function') {
+    const arrayValue = await result.toArray();
+    if (Array.isArray(arrayValue)) {
+      return arrayValue.map((entry) => String(entry)).join('\n');
+    }
+  }
+  const jsValue = typeof result.toJs === 'function' ? await result.toJs() : String(result);
+
+  if (Array.isArray(jsValue)) {
+    return jsValue.join('\n');
+  }
+
+  if (jsValue && typeof jsValue === 'object') {
+    if (Array.isArray(jsValue.values)) {
+      return jsValue.values.map((entry) => String(entry)).join('\n');
+    }
+    const compact = Object.values(jsValue)
+      .filter((entry) => typeof entry === 'string' || typeof entry === 'number')
+      .map((entry) => String(entry));
+    if (compact.length) {
+      return compact.join('\n');
+    }
+    return JSON.stringify(jsValue, null, 2);
+  }
+
+  return String(jsValue);
+}
+
+function buildRuntimeExpectation(mode, runtimeNote) {
+  if (runtimeNote) return runtimeNote;
+  if (mode === 'guided') {
+    return 'Geführter Modus: Dieser Block nutzt Kurscode, der zusätzliche Pakete oder vorbereitete Übungsobjekte voraussetzt. Die Aufgabe bleibt editierbar, aber die Laufzeit wird bewusst durch Soll-Output und Interpretation gestützt.';
+  }
+  return 'Live-Modus: Der Code läuft direkt im Browser über WebR. Falls WebR in deinem Browser oder Netzwerk nicht startet, bleibt die Aufgabe im ehrlichen Fallback und verweist auf den Soll-Output.';
+}
+
+function buildConfig(block, options = {}) {
+  const moduleSlug = options.moduleSlug || block.moduleSlug || 'module';
+  const blockId = options.blockId || block.id || `rblock_${Math.random().toString(36).slice(2, 8)}`;
+  const runtimeMode = detectRuntimeMode(block);
+
+  return {
+    moduleSlug,
+    blockId,
+    runtimeMode,
+    title: block.title || 'Vom Modell zur Auswertung',
+    purpose: block.purpose || '',
+    script: block.script || '',
+    starterCode: normalizeCode(block.starterCode || block.code || ''),
+    interpretation: block.interpretation || block.output || '',
+    miniTask: block.miniTask || '',
+    solution: block.solution || '',
+    pitfalls: Array.isArray(block.pitfalls) ? block.pitfalls : [],
+    runtimeNote: buildRuntimeExpectation(runtimeMode, block.runtimeNote || ''),
+    outputPlaceholder: block.outputPlaceholder || (runtimeMode === 'guided'
+      ? '[Geführter Modus]\nNutze den Editor, die Interpretationskarte und die Musterlösung, um den Ablauf kursnah nachzuvollziehen.'
+      : '[Output erscheint hier nach "Code ausführen".]')
+  };
+}
+
+function renderPitfalls(pitfalls) {
+  if (!pitfalls.length) return '';
+  return `<div class="r-practice-pitfalls">
+<h4>Häufige Fehler</h4>
+<ul>${pitfalls.map((pitfall) => `<li>${escapeHtml(pitfall)}</li>`).join('')}</ul>
+</div>`;
+}
+
+export function renderRPracticeMarkup(block, options = {}) {
+  const config = buildConfig(block, options);
+  practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
+
+  return `<div class="section-block r-application-block r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
+<div class="r-practice-head">
+  <div class="r-practice-headline">
+    <span class="r-application-kicker">R-Anwendung</span>
+    <h3>${escapeHtml(config.title)}</h3>
+  </div>
+  <p class="r-practice-bridge">${escapeHtml(config.purpose)}</p>
+  <div class="r-practice-meta-row">
+    ${config.script ? `<div class="r-script-ref">${escapeHtml(config.script)}</div>` : ''}
+    <div class="r-runtime-note">${escapeHtml(config.runtimeNote)}</div>
+  </div>
+</div>
+<div class="r-practice-workspace">
+  <div class="r-practice-editor-card">
+    <div class="r-practice-toolbar">
+      <div>
+        <div class="r-practice-toolbar-kicker">Codebereich</div>
+        <div class="r-practice-toolbar-title">Ändern, ausführen, interpretieren</div>
+      </div>
+      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>
+    </div>
+    <textarea class="r-practice-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
+    <div class="r-practice-actions">
+      <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen'}</button>
+      <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
+      <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
+    </div>
+    <div class="r-practice-help">
+      <span class="r-practice-help-label">Arbeitslogik</span>
+      <span>${config.runtimeMode === 'guided'
+        ? 'Geführter Paketfall: Lies zuerst den Code, sichere dann Interpretation und Mini-Task.'
+        : 'Arbeite erst mit dem Startcode, ändere dann gezielt nur die Zeilen, die der Mini-Task wirklich braucht.'}</span>
+    </div>
+  </div>
+  <div class="r-practice-output-card">
+    <div class="r-practice-output-head">
+      <div>
+        <div class="r-practice-toolbar-kicker">Output</div>
+        <div class="r-practice-toolbar-title">Konsole und Rückmeldung</div>
+      </div>
+    </div>
+    <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
+  </div>
+</div>
+<div class="r-practice-grid">
+  <div class="r-practice-card">
+    <h4>Output lesen</h4>
+    <p>${escapeHtml(config.interpretation)}</p>
+  </div>
+  <div class="r-practice-card">
+    <h4>Mini-Task</h4>
+    <p>${escapeHtml(config.miniTask)}</p>
+    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
+    <div class="r-practice-solution" data-r-solution hidden>
+      <p>${escapeHtml(config.solution)}</p>
+    </div>
+  </div>
+</div>
+${renderPitfalls(config.pitfalls)}
+</div>`;
+}
+
+function loadState(moduleSlug, blockId) {
+  try {
+    return JSON.parse(localStorage.getItem(`${STORAGE_PREFIX}:${moduleSlug}:${blockId}`) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveState(moduleSlug, blockId, state) {
+  localStorage.setItem(`${STORAGE_PREFIX}:${moduleSlug}:${blockId}`, JSON.stringify(state));
+}
+
+function setRuntimeStatus(node, text, status = '') {
+  if (!node) return;
+  node.textContent = text;
+  node.dataset.status = status;
+}
+
+function readConfig(blockEl) {
+  const moduleSlug = blockEl.dataset.moduleSlug || '';
+  const blockId = blockEl.dataset.blockId || '';
+  return practiceRegistry.get(`${moduleSlug}:${blockId}`) || null;
+}
+
+function hydrateOutput(blockEl, config, state) {
+  const output = blockEl.querySelector('[data-r-output]');
+  if (!output) return;
+  output.textContent = state.lastOutput || config.outputPlaceholder;
+}
+
+function toggleSolution(blockEl) {
+  const solution = blockEl.querySelector('[data-r-solution]');
+  if (!solution) return;
+  solution.hidden = !solution.hidden;
+  blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
+    button.textContent = solution.hidden ? 'Musterlösung anzeigen' : 'Musterlösung ausblenden';
+  });
+  if (!solution.hidden && window.MathJax?.typesetPromise) {
+    window.MathJax.typesetPromise([solution]).catch(() => {});
+  }
+}
+
+async function handleRun(blockEl, config) {
+  const editor = blockEl.querySelector('[data-r-editor]');
+  const output = blockEl.querySelector('[data-r-output]');
+  const status = blockEl.querySelector('[data-r-runtime-status]');
+  if (!editor || !output) return;
+
+  const code = normalizeCode(editor.value);
+  output.textContent = 'Code wird ausgeführt...';
+  setRuntimeStatus(status, 'Runtime: lädt WebR...', 'loading');
+
+  try {
+    const result = await executeR(config.moduleSlug, code);
+    output.textContent = result;
+    setRuntimeStatus(status, 'Runtime: WebR aktiv', 'success');
+    saveState(config.moduleSlug, config.blockId, {
+      code,
+      lastOutput: result,
+      solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    output.textContent = `[Live-Runtime nicht verfügbar]\n${message}\n\nNutze den Interpretationsblock und die Musterlösung als didaktischen Fallback.`;
+    setRuntimeStatus(status, 'Runtime: Fallback', 'fallback');
+    saveState(config.moduleSlug, config.blockId, {
+      code,
+      lastOutput: output.textContent,
+      solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+    });
+  }
+}
+
+function mountBlock(blockEl) {
+  if (!blockEl || blockEl.dataset.rPracticeMounted === 'true') return;
+  blockEl.dataset.rPracticeMounted = 'true';
+
+  const config = readConfig(blockEl);
+  const state = loadState(config.moduleSlug, config.blockId);
+  const editor = blockEl.querySelector('[data-r-editor]');
+  const status = blockEl.querySelector('[data-r-runtime-status]');
+
+  if (editor && state.code) {
+    editor.value = state.code;
+  }
+
+  hydrateOutput(blockEl, config, state);
+
+  if (state.solutionOpen) {
+    const solution = blockEl.querySelector('[data-r-solution]');
+    if (solution) {
+      solution.hidden = false;
+      blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
+        button.textContent = 'Musterlösung ausblenden';
+      });
+    }
+  }
+
+  if (config.runtimeMode === 'guided') {
+    setRuntimeStatus(status, 'Modus: geführt', 'guided');
+  }
+
+  editor?.addEventListener('input', () => {
+    saveState(config.moduleSlug, config.blockId, {
+      ...loadState(config.moduleSlug, config.blockId),
+      code: editor.value,
+      solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+    });
+  });
+
+  blockEl.querySelector('[data-r-action="reset"]')?.addEventListener('click', () => {
+    if (editor) editor.value = config.starterCode;
+    hydrateOutput(blockEl, config, {});
+    if (config.runtimeMode === 'guided') {
+      setRuntimeStatus(status, 'Modus: geführt', 'guided');
+    } else {
+      setRuntimeStatus(status, 'Runtime: bereit', '');
+    }
+    saveState(config.moduleSlug, config.blockId, {
+      code: config.starterCode,
+      lastOutput: config.outputPlaceholder,
+      solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+    });
+  });
+
+  blockEl.querySelector('[data-r-action="run"]')?.addEventListener('click', () => {
+    if (config.runtimeMode !== 'guided') {
+      handleRun(blockEl, config);
+    }
+  });
+
+  blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
+    button.addEventListener('click', () => {
+      toggleSolution(blockEl);
+      saveState(config.moduleSlug, config.blockId, {
+        ...loadState(config.moduleSlug, config.blockId),
+        code: blockEl.querySelector('[data-r-editor]')?.value || config.starterCode,
+        lastOutput: blockEl.querySelector('[data-r-output]')?.textContent || config.outputPlaceholder,
+        solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+      });
+    });
+  });
+}
+
+export function mountRPracticeBlocks(root) {
+  if (!root) return;
+  root.querySelectorAll('[data-r-practice-root]').forEach((blockEl) => {
+    mountBlock(blockEl);
+  });
+}
+
+export function describeRRuntimeMode(root) {
+  if (!root) return { live: 0, guided: 0 };
+  const result = { live: 0, guided: 0 };
+  root.querySelectorAll('[data-r-practice-root]').forEach((blockEl) => {
+    const config = readConfig(blockEl);
+    if (config.runtimeMode === 'guided') result.guided += 1;
+    else result.live += 1;
+  });
+  return result;
+}

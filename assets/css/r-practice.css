@@ -1,0 +1,272 @@
+.r-practice-block {
+  display: grid;
+  gap: 18px;
+}
+
+.r-practice-head {
+  display: grid;
+  gap: 10px;
+}
+
+.r-practice-headline {
+  display: grid;
+  gap: 6px;
+}
+
+.r-practice-bridge {
+  font-size: 14px;
+  line-height: 1.68;
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+  max-width: none;
+}
+
+.r-practice-meta-row {
+  display: grid;
+  gap: 10px;
+}
+
+.r-runtime-note {
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text) 16%);
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  background: color-mix(in srgb, var(--surface2) 82%, var(--surface) 18%);
+}
+
+.r-practice-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.r-practice-editor-card,
+.r-practice-output-card,
+.r-practice-card,
+.r-practice-pitfalls {
+  background: color-mix(in srgb, var(--surface2) 88%, var(--surface) 12%);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.r-practice-toolbar,
+.r-practice-output-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.r-practice-toolbar-kicker {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 74%, var(--muted) 26%);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.r-practice-toolbar-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.r-runtime-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--surface3) 84%, var(--surface) 16%);
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+.r-runtime-pill[data-status="loading"] {
+  color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 32%, var(--border) 68%);
+}
+
+.r-runtime-pill[data-status="success"] {
+  color: color-mix(in srgb, var(--semantic-green) 78%, var(--text) 22%);
+  border-color: color-mix(in srgb, var(--semantic-green) 28%, var(--border) 72%);
+}
+
+.r-runtime-pill[data-status="fallback"],
+.r-runtime-pill[data-status="guided"] {
+  color: color-mix(in srgb, var(--math-ink) 82%, var(--text) 18%);
+  border-color: color-mix(in srgb, var(--math-ink) 28%, var(--border) 72%);
+}
+
+.r-practice-editor {
+  width: 100%;
+  min-height: 240px;
+  padding: 16px 18px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.r-practice-editor:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2) 46%, var(--border) 54%);
+}
+
+.r-practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.r-practice-actions .btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.r-practice-help {
+  display: grid;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+}
+
+.r-practice-help-label {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 68%, var(--muted) 32%);
+  font-weight: 700;
+}
+
+.r-practice-output {
+  margin: 0;
+  min-height: 240px;
+  padding: 16px 18px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.58;
+  white-space: pre-wrap;
+}
+
+.r-practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.r-practice-card {
+  display: grid;
+  gap: 8px;
+}
+
+.r-practice-card h4,
+.r-practice-pitfalls h4 {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 74%, var(--muted) 26%);
+  font-weight: 700;
+}
+
+.r-practice-card p,
+.r-practice-pitfalls li,
+.r-practice-solution p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
+  max-width: none;
+}
+
+.r-inline-toggle {
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  background: color-mix(in srgb, var(--surface) 78%, var(--surface2) 22%);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.r-practice-solution {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+.r-practice-pitfalls {
+  display: grid;
+  gap: 10px;
+}
+
+.r-practice-pitfalls ul {
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+@media (max-width: 980px) {
+  .r-practice-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .r-practice-output,
+  .r-practice-editor {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .r-practice-editor-card,
+  .r-practice-output-card,
+  .r-practice-card,
+  .r-practice-pitfalls {
+    padding: 14px 15px;
+  }
+
+  .r-practice-toolbar,
+  .r-practice-output-head {
+    flex-direction: column;
+  }
+
+  .r-practice-actions {
+    gap: 8px;
+  }
+
+  .r-practice-actions .btn,
+  .r-inline-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -24,6 +24,20 @@ export function createFullExamModule({
 }) {
   let feState = null;
 
+  function initEmbeddedExamCanvases() {
+    requestAnimationFrame(() => {
+      if (document.getElementById("canvas_hicks") && typeof window.__drawHicksGraph === "function") {
+        window.__drawHicksGraph();
+      }
+      if (document.getElementById("canvas_demand") && typeof window.__drawDemandGraph === "function") {
+        window.__drawDemandGraph();
+      }
+      if (document.getElementById("canvas_isoquant") && typeof window.__drawIsoquantGraph === "function") {
+        window.__drawIsoquantGraph();
+      }
+    });
+  }
+
   function evaluate(q, ua) {
     if (q.type === "wf") return ua === q.correct;
     if (!ua || ua.trim() === "") return false;
@@ -212,6 +226,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
 
     content.innerHTML = html;
     if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(() => {});
+    initEmbeddedExamCanvases();
     updateTimer();
   }
 
@@ -430,4 +445,3 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     showFullExamSelect
   };
 }
-

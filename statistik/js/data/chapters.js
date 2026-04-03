@@ -3,6 +3,93 @@
 // FINAL BENCHMARK STANDARD v14.0
 // ============================================================
 
+import { renderRPracticeMarkup } from '../../../assets/js/portal-core/features/rPractice.js';
+
+const STATISTIK_R_PRACTICE = [
+  renderRPracticeMarkup({
+    title: 'Daten zuerst lesen, dann rechnen',
+    purpose: 'Der erste R-Schritt in Statistik ist nie der Testbefehl, sondern die saubere Orientierung im Datensatz: Variablentypen, Größenordnungen und erste Auffälligkeiten müssen vor jeder Inferenz sichtbar werden.',
+    script: 'R-Workflow: Datenstruktur, summary() und erste Gruppensichtung',
+    code: String.raw`str(df)
+summary(df)
+table(df$group)`,
+    output: 'str(df) trennt numerische von kategorialen Variablen. summary(df) zeigt Lage, Streuung und Extremwerte; table(df$group) prüft sofort, ob Gruppenvergleiche sauber besetzt sind.',
+    miniTask: 'Erweitere die Exploration um mean(df$x) und mean(df$y). Formuliere danach in einem Satz, welche Variable im Datensatz im Mittel höher liegt.',
+    solution: 'Mit mean(df$x) und mean(df$y) siehst du direkt die Lage der beiden Variablen. Die richtige Kurzantwort nennt nicht nur die größere Zahl, sondern ordnet sie als durchschnittliches Niveau der jeweiligen Messgröße ein.',
+    pitfalls: [
+      'Mit dem Test starten, obwohl noch unklar ist, wie die Variablen im Datensatz codiert sind.',
+      'summary() abzulesen, ohne Extremwerte oder Gruppengrößen sprachlich zu deuten.'
+    ]
+  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_explore' }),
+  renderRPracticeMarkup({
+    title: 'Lage, Streuung und Visualisierung verbinden',
+    purpose: 'Deskriptive Statistik wird erst dann nützlich, wenn Kennzahlen und Visualisierung dieselbe Geschichte erzählen. Genau das trainiert dieser Block.',
+    script: 'R-Workflow: Mittelwert, Standardabweichung, Histogramm',
+    code: String.raw`mean(df$x)
+sd(df$x)
+hist(df$x, breaks = 4, main = "Verteilung von x", col = "lightblue")`,
+    output: 'Mittelwert und Standardabweichung quantifizieren Lage und Streuung; das Histogramm zeigt, ob diese Kennzahlen zu einer eher symmetrischen, schiefen oder klumpigen Verteilung passen.',
+    miniTask: 'Ersetze x durch z und vergleiche anschließend verbal, welche Variable stärker streut und warum das Histogramm diese Aussage stützt oder relativiert.',
+    solution: 'Die saubere Lösung kombiniert Zahl und Bild: erst Streuung über sd(...) nennen, dann anhand des Histogramms prüfen, ob Ausreißer oder Schiefe die Kennzahl treiben.',
+    pitfalls: [
+      'Nur das Diagramm zu beschreiben, ohne die Kennzahlen zu nennen.',
+      'Standardabweichung und Varianz sprachlich zu vermischen.'
+    ]
+  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_descriptives' }),
+  renderRPracticeMarkup({
+    title: 't-Test als Entscheidungslogik lesen',
+    purpose: 'Ein Test ist im Portal nur dann verstanden, wenn die Ausgabe in Hypothese, Teststatistik, p-Wert und Entscheidung übersetzt werden kann.',
+    script: 'R-Workflow: Einstichproben-t-Test',
+    code: String.raw`t.test(df$z, mu = 115)`,
+    output: 'Der Output liefert Teststatistik, Freiheitsgrade, p-Wert und Konfidenzintervall. Die ökonomische Kernfrage bleibt: Sprechen die Daten stark genug gegen $H_0: \mu = 115$?',
+    miniTask: 'Formuliere nach dem Run in zwei Sätzen die vollständige Testentscheidung: Nullhypothese, p-Wert-Vergleich und inhaltliche Deutung.',
+    solution: 'Die Musterlösung nennt immer zuerst $H_0$, vergleicht dann den p-Wert mit dem Signifikanzniveau und formuliert erst danach die ökonomische Aussage. "Signifikant" ersetzt nie die inhaltliche Interpretation.',
+    pitfalls: [
+      'Den p-Wert als Wahrscheinlichkeit der Nullhypothese zu lesen.',
+      'Die Testentscheidung zu nennen, ohne den Richtungsbezug der Fragestellung zu erklären.'
+    ]
+  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_ttest' }),
+  renderRPracticeMarkup({
+    title: 'Regression: Output in Sprache übersetzen',
+    purpose: 'Die Regressionsroutine ist nur der technische Teil. Studienrelevant wird sie erst, wenn Koeffizient, Signifikanz und Modellbild gemeinsam gedeutet werden.',
+    script: 'R-Workflow: lm(), summary() und Streudiagramm mit Regressionsgerade',
+    code: String.raw`model <- lm(y ~ x, data = df)
+summary(model)$coefficients
+plot(df$x, df$y, main = "y auf x", pch = 19, col = "steelblue")
+abline(model, col = "red", lwd = 2)`,
+    output: 'summary(model)$coefficients zeigt Interzept, Steigung, Standardfehler, t-Wert und p-Wert. Der Plot macht sichtbar, ob die geschätzte Gerade zur Datenwolke passt.',
+    miniTask: 'Ergänze den Workflow um confint(model) und formuliere dann die Steigung als inhaltliche Veränderung von y bei einer Einheit mehr x.',
+    solution: 'Die belastbare Antwort nennt die Steigung, erklärt sie ceteris paribus und ergänzt, ob das Konfidenzintervall die Null ausschließt. Plot und Output müssen dieselbe Geschichte erzählen.',
+    pitfalls: [
+      'Nur auf Sterne zu schauen und die Größe des Effekts zu ignorieren.',
+      'Die Regressionsgerade als Kausalbeweis statt als linearen Zusammenhang zu lesen.'
+    ]
+  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_regression' })
+];
+
+function renderStatistikRLabTheory() {
+  return String.raw`
+    <div class="section-block">
+      <h3>R als Statistik-Workflow</h3>
+      <p>Das Statistik-R-Lab ist kein Zusatztool, sondern der praktische Gegenpart zum Kurs: Daten lesen, passende Methode wählen, Output interpretieren und typische Fehlgriffe erkennen.</p>
+      <p>Die Reihenfolge bleibt immer gleich: Datensatz prüfen, geeignete Kennzahl oder Methode wählen, Output fachlich lesen und erst dann das Ergebnis in einen Prüfungssatz übersetzen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Woran du einen guten R-Zugriff erkennst</h3>
+      <ul>
+        <li>Der Befehl passt zur statistischen Frage, nicht nur zur Syntax.</li>
+        <li>Der Output wird in Sprache und Entscheidung übersetzt.</li>
+        <li>Plots und Kennzahlen erzählen dieselbe inhaltliche Geschichte.</li>
+      </ul>
+    </div>
+    ${STATISTIK_R_PRACTICE.join('\n')}
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>R ersetzt die Statistiklogik nicht:</strong> Erst Datentyp, Hypothese und Modellidee klären, dann den passenden Befehl verwenden. Wer direkt in die Konsole springt, produziert oft formal korrekte, aber fachlich falsche Antworten.</div>
+    </div>
+  `;
+}
+
 export const CHAPTERS = [
   { id: 'deskriptiv', title: 'Deskriptive Statistik', cat: 'Grundlagen', short: 'Desk.' },
   { id: 'bivariat', title: 'Bivariate Analyse', cat: 'Grundlagen', short: 'Biv.' },
@@ -307,64 +394,7 @@ export const CONTENT = {
   },
   rlab: {
     motivation: 'R ist die Standardsprache für statistische Analysen in der Wissenschaft. Hier verbinden wir die gelernten Konzepte mit der praktischen Umsetzung.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Datenimport und Exploration</h3>
-      <p>Der erste Schritt jeder Analyse: Daten einlesen und erkunden.</p>
-      <pre><code>data <- read.csv("datensatz.csv")
-str(data)       # Struktur anzeigen
-summary(data)   # Deskriptive Statistiken
-head(data)      # Erste Zeilen</code></pre>
-    </div>
-    <div class="section-block">
-      <h3>Deskriptive Statistik in R</h3>
-      <pre><code>mean(x)    # Mittelwert
-median(x)  # Median
-sd(x)      # Standardabweichung
-var(x)     # Varianz
-quantile(x, probs = c(0.25, 0.5, 0.75))</code></pre>
-    </div>
-    <div class="section-block">
-      <h3>Hypothesentests in R</h3>
-      <pre><code># Einstichproben-t-Test
-t.test(x, mu = 100)
-
-# Zweistichproben-t-Test
-t.test(x, y)
-
-# Korrelationstest
-cor.test(x, y)</code></pre>
-    </div>
-    <div class="section-block">
-      <h3>Regression in R</h3>
-      <pre><code># Einfache Regression
-model <- lm(y ~ x, data = df)
-summary(model)
-
-# Multiple Regression
-model2 <- lm(y ~ x1 + x2 + x3, data = df)
-
-# Konfidenzintervalle für Koeffizienten
-confint(model, level = 0.95)</code></pre>
-    </div>
-    <div class="section-block">
-      <h3>Grafiken</h3>
-      <pre><code># Histogramm
-hist(x, breaks = 20, main = "Verteilung")
-
-# Streudiagramm mit Regressionsgerade
-plot(x, y)
-abline(model, col = "red")
-
-# QQ-Plot (Normalverteilung prüfen)
-qqnorm(residuals(model))
-qqline(residuals(model))</code></pre>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>summary() lesen:</strong> Der p-Wert im summary-Output bezieht sich auf den Test $H_0: \beta_j = 0$. Sterne markieren Signifikanzniveaus (* = 5%, ** = 1%, *** = 0.1%).</div>
-    </div>
-    `,
+    theorie: renderStatistikRLabTheory(),
     formeln: [
       { label: 'R-Syntax Regression', eq: String.raw`\texttt{lm(y \sim x1 + x2, data)}`, desc: 'Lineare Regression in R' }
     ],

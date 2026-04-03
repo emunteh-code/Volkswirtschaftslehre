@@ -999,10 +999,10 @@ export const CONTENT = {
 <h3>Klassifikation nach Einkommensreaktion</h3>
 <p>Die Reaktion der Nachfrage auf Einkommensänderungen klassifiziert Güter in drei Kategorien. Der entscheidende Parameter ist das Vorzeichen von $\partial x_i^*/\partial m$ (Marshallsche Nachfrage nach Gut $i$, abgeleitet nach dem Einkommen $m$).</p>
 <div class="info-grid">
-<div class="info-card"><div class="label">Normales Gut</div><div class="value">∂xᵢ/∂m > 0</div><p>Mehr Einkommen führt zu mehr Konsum. Einkommenselastizität $\varepsilon_m > 0$.</p></div>
-<div class="info-card"><div class="label">Inferiores Gut</div><div class="value">∂xᵢ/∂m < 0</div><p>Mehr Einkommen führt zu weniger Konsum. Einkommenselastizität $\varepsilon_m < 0$.</p></div>
-<div class="info-card"><div class="label">Luxusgut</div><div class="value">εₘ > 1</div><p>Ausgabenanteil steigt mit dem Einkommen. Sonderfall eines normalen Gutes.</p></div>
-<div class="info-card"><div class="label">Notwendiges Gut</div><div class="value">0 < εₘ < 1</div><p>Ausgabenanteil sinkt mit dem Einkommen. Sonderfall eines normalen Gutes.</p></div>
+<div class="info-card"><div class="label">Normales Gut</div><div class="value">$\partial x_i/\partial m > 0$</div><p>Mehr Einkommen führt zu mehr Konsum. Einkommenselastizität $\varepsilon_m > 0$.</p></div>
+<div class="info-card"><div class="label">Inferiores Gut</div><div class="value">$\partial x_i/\partial m < 0$</div><p>Mehr Einkommen führt zu weniger Konsum. Einkommenselastizität $\varepsilon_m < 0$.</p></div>
+<div class="info-card"><div class="label">Luxusgut</div><div class="value">$\varepsilon_m > 1$</div><p>Ausgabenanteil steigt mit dem Einkommen. Sonderfall eines normalen Gutes.</p></div>
+<div class="info-card"><div class="label">Notwendiges Gut</div><div class="value">$0 < \varepsilon_m < 1$</div><p>Ausgabenanteil sinkt mit dem Einkommen. Sonderfall eines normalen Gutes.</p></div>
 </div>
 </div>
 <div class="section-block">

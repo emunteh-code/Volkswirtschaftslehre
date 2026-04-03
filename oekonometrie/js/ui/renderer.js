@@ -12,6 +12,7 @@ import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
+import { mountRPracticeBlocks } from '../../../assets/js/portal-core/features/rPractice.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
 let baseRenderer;
@@ -305,7 +306,8 @@ function semanticizeDataStrings(node, seen = new WeakSet()) {
   Object.keys(node).forEach((key) => {
     const value = node[key];
     if (typeof value === 'string') {
-      node[key] = formalizeMarkupString(value);
+      const preserveRenderedBlock = value.includes('data-r-practice-root') || value.includes('<textarea');
+      node[key] = preserveRenderedBlock ? value : formalizeMarkupString(value);
     } else if (value && typeof value === 'object') {
       semanticizeDataStrings(value, seen);
     }
@@ -825,6 +827,7 @@ function enhanceRenderedSurface(conceptId) {
     ensureEconometricsHomeExamCard();
   }
 
+  mountRPracticeBlocks(content);
   markRenderSettled(false);
   decorateSemanticMathSurfaces();
   Promise.resolve(renderMath(content)).finally(() => {

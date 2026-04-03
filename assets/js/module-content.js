@@ -56,19 +56,34 @@ export const MODULE_CONTENT = {
         sources: ["Vorlesungen/VL_2.pdf", "Zusammenfassungen/Makro I VL2.pdf"]
       },
       {
-        title: "Guetermarkt, Konsumfunktion, Multiplikator und Sparparadox",
-        body: "Dieser Abschnitt entwickelt den kurzfristigen Guetermarkt ausgehend von Konsum, Investitionen, Staatsausgaben und Steuern. Zentral sind Gleichgewichtsproduktion, lineare Konsumfunktion, Multiplikator und die alternative Sicht ueber Sparen und Investitionen.",
+        title: "Guetermarkt und lineare Konsumfunktion",
+        body: "Dieser Abschnitt entwickelt den kurzfristigen Guetermarkt ausgehend von Konsum, Investitionen, Staatsausgaben und Steuern. Zentral sind Gleichgewichtsproduktion, lineare Konsumfunktion, geplante Nachfrage und die Verbindung von Einkommen und Nachfrage.",
         sources: ["Vorlesungen/VL_3.pdf", "Zusammenfassungen/Makro I VL3.pdf", "Uebungen/Übung3.pdf"]
       },
       {
-        title: "Finanzmaerkte I: Geld, Anleihen, Geldnachfrage und Zentralbanksteuerung",
-        body: "Hier werden Geld, Anleihen, Geldnachfrage, Offenmarktgeschaefte, Zinssteuerung der Zentralbank, Mindestreserven und die Rolle von Geschaeftsbanken im Geldschoepfungsprozess erklaert.",
+        title: "Multiplikator, Sparparadox und Fiskalimpulse",
+        body: "Auf dem Guetermarkt folgt auf die Nachfragegleichung die eigentliche Konjunkturmechanik: Multiplikator, Sparparadox, Staatsausgaben- und Steuerschocks sowie die saubere Unterscheidung zwischen Erstimpuls und Gesamteffekt.",
+        sources: ["Vorlesungen/VL_3.pdf", "Zusammenfassungen/Makro I VL3.pdf", "Uebungen/Übung3.pdf", "Tutorium/Tutorienblatt-3.pdf"]
+      },
+      {
+        title: "Geld, Anleihen und Geldnachfrage",
+        body: "Hier werden Geld, Anleihen, Geldnachfrage, Offenmarktgeschaefte und Zinssteuerung der Zentralbank aufgebaut. Im Zentrum stehen Liquiditaetspraeferenz, Opportunitaetskosten der Geldhaltung und die Verbindung von Einkommen, Preisniveau und Zins.",
         sources: ["Vorlesungen/VL_4.pdf", "Zusammenfassungen/Makro I VL4.pdf"]
       },
       {
+        title: "Banken, Mindestreserven und Geldschoepfung",
+        body: "Der zweite Finanzmarktblock vertieft die Rolle von Geschaeftsbanken, Mindestreserven, Geldschoepfungsprozess und Zentralbankoperationen. Genau hier wird geklaert, wie aus Einlagen, Reserven und Wertpapiergeschaeften eine zins- und geldpolitische Steuerung entsteht.",
+        sources: ["Vorlesungen/VL_4.pdf", "Zusammenfassungen/Makro I VL4.pdf", "Tutorium/Tutorium4.pdf"]
+      },
+      {
         title: "IS-LM-Grundmodell bei Zinssteuerung",
-        body: "Hier werden Gueter- und Geldmarkt zum IS-LM-Modell verbunden. Klausurrelevant sind die Herleitung der fallenden IS-Kurve, die horizontale LM-Kurve bei Zinssteuerung und die Wirkungen von Fiskal- und Geldpolitik.",
+        body: "Hier werden Gueter- und Geldmarkt zum IS-LM-Modell verbunden. Klausurrelevant sind die Herleitung der fallenden IS-Kurve, die horizontale LM-Kurve bei Zinssteuerung und die Logik des gemeinsamen Gleichgewichts von Einkommen und Zins.",
         sources: ["Vorlesungen/VL_5.pdf", "Zusammenfassungen/Makro I VL5.pdf"]
+      },
+      {
+        title: "Fiskalpolitik, Geldpolitik und Crowding-Out im IS-LM",
+        body: "Aufbauend auf dem Grundmodell wird hier trainiert, wie Fiskal- und Geldpolitik die Kurven verschieben, wann Crowding-Out entsteht und wie ein Policy-Mix Produktions- und Zinsreaktionen veraendert.",
+        sources: ["Vorlesungen/VL_5.pdf", "Zusammenfassungen/Makro I VL5.pdf", "Uebungen/Uebung5.pdf"]
       },
       {
         title: "Realzins, Risikopraemie und erweitertes IS-LM",
@@ -107,6 +122,153 @@ export const MODULE_CONTENT = {
       "VL_6.pdf liegt im Quellordner nicht separat vor; der Stoff wird dort durch Kap6.pdf getragen und ist im Portal so ausgewiesen.",
       "Eine im Ordner liegende Februar-2024-Klausur ist als Makrooekonomik II beschriftet und wird deshalb nicht als Makro-I-Klausurquelle verwendet.",
       "Das Modul hat eine belastbare Aufgaben- und Klausurbasis fuer ein vollwertiges Makro-I-Live-Portal mit Diagramm- und Rechenfokus."
+    ]
+  },
+  makro2: {
+    stageLabel: "Kursportal",
+    sourceMethod: "Aufgebaut aus den Tutorien- und Uebungsblaettern zu Makrooekonomik II sowie den im Modulordner dokumentierten Aufgaben zu offener Volkswirtschaft, Wechselkursregimen, Geldpolitik, Staatsverschuldung und Wachstum.",
+    coverageStatus: "Die Materialien decken offene Makro, internationale Verflechtungen, Geld- und Wechselkurspolitik, Zeitinkonsistenz sowie Solow- und Schuldenlogik mit echter Rechen- und Grafikbasis ab.",
+    portalGoal: "Das Portal soll Makrooekonomik II als dichtes Lernsystem fuer offene Volkswirtschaft, makropolitische Regimefragen und Wachstum abbilden – inklusive echter Klausurkurzfragen, Modellgrafiken und Uebergangslogik.",
+    audit: [
+      { label: "Tutorien", value: "12 Dateien" },
+      { label: "Uebungen", value: "10 Blaetter" },
+      { label: "Modelle", value: "Offene VW + Wachstum" },
+      { label: "Klausurstil", value: "Kurzfragen + Diagramme + Rechnen" }
+    ],
+    sourceGroups: [
+      {
+        title: "Offene Volkswirtschaft und Wechselkurse",
+        body: "Die ersten Tutorien- und Uebungsblaetter bauen Wechselkursnotation, Kaufkraftparitaet, Zinsparitaet, Zahlungsbilanz und den offenen Guetermarkt systematisch auf.",
+        sources: [
+          "coursework_text/Tutorienblatt_1.txt bis Tutorienblatt_3.txt",
+          "coursework_text/Uebungsblatt_1.txt bis Uebungsblatt_4.txt"
+        ]
+      },
+      {
+        title: "Geldpolitik, Regime und Glaubwuerdigkeit",
+        body: "Der mittlere Kursblock verbindet feste und flexible Wechselkurse, Trilemma, Currency Boards, Barro-Gordon, Taylor-Regel und politische Konjunkturzyklen.",
+        sources: [
+          "coursework_text/Tutorienblatt_3.txt bis Tutorienblatt_5.txt",
+          "coursework_text/Uebungsblatt_3.txt bis Uebungsblatt_7.txt"
+        ]
+      },
+      {
+        title: "Wachstum und Staatsverschuldung",
+        body: "Die spaeteren Uebungsreihen vertiefen Cobb-Douglas, Skalenertraege, Solow-Grundmodell, technischen Fortschritt, Goldene Regel und Schuldenquotendynamik.",
+        sources: [
+          "coursework_text/Tutorienblatt_6.txt",
+          "coursework_text/Uebungsblatt_6.txt bis Uebungsblatt_10.txt"
+        ]
+      }
+    ],
+    roadmap: [
+      {
+        title: "Zahlungsbilanz und offene Volkswirtschaft als Buchhaltungssystem",
+        body: "Der Kurs startet mit der Frage, wie Exporte, Importe, Primar- und Sekundaereinkommen sowie Kapitalstroeme zusammenhaengen. Leistungsbilanz, Kapitalbilanz und Nettoauslandsvermoegen bilden die Buchhaltungslogik, auf der spaetere Wechselkurs- und Politikfragen aufsetzen.",
+        sources: ["coursework_text/Tutorienblatt_1.txt"]
+      },
+      {
+        title: "Nominaler und realer Wechselkurs in Mengen- und Preisnotierung",
+        body: "Hier wird die gesamte Wechselkursnotation sauber aufgebaut: Mengennotierung versus Preisnotierung, Auf- und Abwertung, reale Auf- und Abwertung sowie der Zusammenhang zwischen nominalem Kurs und relativen Preisen.",
+        sources: ["coursework_text/Uebungsblatt_1.txt", "coursework_text/Tutorienblatt_1.txt"]
+      },
+      {
+        title: "Absolute und relative Kaufkraftparitaet",
+        body: "Dieser Block entwickelt das Gesetz des einheitlichen Preises, absolute PPP, relative PPP und deren Grenzen. Der Big-Mac-Zugriff zeigt, wie implizite PPP-Kurse, Unter- und Ueberbewertungen sowie Inflationsdifferenzen klausurfaehig gerechnet und gedeutet werden.",
+        sources: ["coursework_text/Uebungsblatt_1.txt", "coursework_text/Tutorienblatt_1.txt"]
+      },
+      {
+        title: "Ungedeckte Zinsparitaet und Wechselkurserwartungen",
+        body: "Die UIP verknuepft Inlandszins, Auslandszins und erwartete Wechselkursveraenderung. Zentral sind hier Renditevergleich, Erwartungsbildung, Arbitrageintuition und die Frage, wie scheinbare Zinsvorteile durch erwartete Ab- oder Aufwertungen kompensiert werden.",
+        sources: ["coursework_text/Uebungsblatt_1.txt", "coursework_text/Tutorienblatt_1.txt"]
+      },
+      {
+        title: "Offener Guetermarkt, Nettoexporte und Multiplikatorleckagen",
+        body: "Der offene Guetermarkt fuehrt Exporte, Importe und auslaendisches Einkommen in die gesamtwirtschaftliche Nachfrage ein. Dadurch veraendern sich Gleichgewichtsproduktion, Staatsausgabenmultiplikator und die Verbindung von Ersparnis, Investition und Leistungsbilanz.",
+        sources: ["coursework_text/Uebungsblatt_2.txt", "coursework_text/Tutorienblatt_2.txt"]
+      },
+      {
+        title: "Marshall-Lerner-Bedingung und J-Kurve",
+        body: "Hier wird geklaert, wann eine reale Abwertung die Handelsbilanz verbessert und warum kurzfristig oft zunaechst der Preiseffekt dominiert. Die Summe von Export- und Importelastizitaeten, die J-Kurvenlogik und die saubere Vorzeichenanalyse sind klausurrelevant.",
+        sources: ["coursework_text/Uebungsblatt_2.txt", "coursework_text/Tutorienblatt_2.txt"]
+      },
+      {
+        title: "Mundell-Fleming bei flexiblem Wechselkurs",
+        body: "Das kleine offene VW-Modell verbindet Guetermarkt, Geldmarkt und Zinsparitaet. Behandelt werden Gleichgewichtsbestimmung, Fiskal- und Geldpolitik, Auslandsschocks und die Rolle erwarteter Wechselkurse unter Kapitalmobilitaet.",
+        sources: ["coursework_text/Uebungsblatt_3.txt"]
+      },
+      {
+        title: "Feste Wechselkurse, Trilemma und Verteidigung der Paritaet",
+        body: "Im Zentrum stehen glaubwuerdige und unglaubwuerdige Paritaeten, Zinsverteidigung, Erwartungen, Devisenreserven und das Trilemma. Der Kurs trainiert hier besonders die Verbindung aus UIP, IS-LM-ZP-Diagramm und Regimeinterpretation.",
+        sources: ["coursework_text/Tutorienblatt_3.txt", "coursework_text/Uebungsblatt_3.txt", "coursework_text/Uebungsblatt_4.txt"]
+      },
+      {
+        title: "Wechselkursregime, Currency Boards und Krisendynamik",
+        body: "Dieser Abschnitt nutzt Argentinien und andere Regimebeispiele, um zu zeigen, wie reale Aufwertung, Glaubwuerdigkeitsverluste, starre Paritaeten und Krisenmechanismen zusammenhaengen.",
+        sources: ["coursework_text/Uebungsblatt_4.txt"]
+      },
+      {
+        title: "Zeitinkonsistenz, Barro-Gordon und Inflationsbias",
+        body: "Die politische Makrologik des Kurses baut auf Verlustfunktion, Phillipskurve, Erwartungen und Commitment auf. Zentral ist die Unterscheidung zwischen First Best, diskretionaerer Politik, Inflationsbias und glaubwuerdiger Bindung.",
+        sources: ["coursework_text/Tutorienblatt_4.txt", "coursework_text/Uebungsblatt_5.txt"]
+      },
+      {
+        title: "Taylor-Regel, Taylor-Prinzip und politische Konjunkturzyklen",
+        body: "Dieser Block verbindet Inflationsziel, Arbeitslosenluecke, nominale und reale Zinsreaktion sowie die Bedingungen stabiler Geldpolitik. Gleichzeitig wird geprueft, wie Phillipskurve und Politikspielraum zusammenhaengen.",
+        sources: ["coursework_text/Tutorienblatt_5.txt", "coursework_text/Uebungsblatt_7.txt"]
+      },
+      {
+        title: "Produktionsfunktion, Grenzertraege und Skalenertraege",
+        body: "Bevor das Solow-Modell gerechnet wird, muessen Cobb-Douglas, Grenzertraege, Pro-Kopf-Groessen und Skalenertraege sicher sitzen. Genau hier werden Produktions- und Wachstumsaussagen formal verankert.",
+        sources: ["coursework_text/Tutorienblatt_5.txt", "coursework_text/Uebungsblatt_8.txt"]
+      },
+      {
+        title: "Solow-Grundmodell und Wachstumsgleichgewicht",
+        body: "Das Solow-Modell fuehrt von Sparquote, Abschreibungen und Kapitalintensitaet zum Steady State. Im Mittelpunkt stehen Konvergenzlogik, Sparquotenwirkung, Produktions- und Konsumpro-Kopf sowie die Goldene Regel.",
+        sources: ["coursework_text/Tutorienblatt_6.txt", "coursework_text/Uebungsblatt_9.txt"]
+      },
+      {
+        title: "Technischer Fortschritt, Bevoelkerungswachstum und Goldene Regel",
+        body: "Hier wird das Wachstum je Arbeitseffizienzeinheit, die Rolle von technischem Fortschritt, Bevoelkerungswachstum und die Bestimmung der Golden-Rule-Sparquote ausgebaut.",
+        sources: ["coursework_text/Uebungsblatt_10.txt", "coursework_text/Tutorienblatt_6.txt"]
+      },
+      {
+        title: "Staatsverschuldung, Schuldenquote und Monetarisierung",
+        body: "Zum Kursende wird die intertemporale Budgetrestriktion des Staates mit Tilgungsprofilen, Primarsaldo, Schuldenquotendynamik und der Gegenueberstellung von Kreditfinanzierung und Monetarisierung verbunden.",
+        sources: ["coursework_text/Uebungsblatt_6.txt"]
+      }
+    ],
+    practice: [
+      {
+        title: "PPP- und UIP-Kurzfragen als Einstieg in die offene Makro",
+        body: "Die fruehen Tutorien pruefen Wechselkursnotation, Big-Mac-Index, Leistungsbilanzlogik und Zinsparitaet in knappen, begruendungsstarken Formaten – genau so, wie spaeter viele Klausurteile beginnen.",
+        sources: ["coursework_text/Tutorienblatt_1.txt", "coursework_text/Uebungsblatt_1.txt"]
+      },
+      {
+        title: "Offener Guetermarkt und Marshall-Lerner als Rechen- und Grafiktraining",
+        body: "Die zweite Stoffphase trainiert DD-/AA-/ZZ-/NX-Darstellungen, offene Multiplikatorlogik, Abwertungseffekte und J-Kurven-Interpretation mit typischen Vorzeichenfallen.",
+        sources: ["coursework_text/Tutorienblatt_2.txt", "coursework_text/Uebungsblatt_2.txt"]
+      },
+      {
+        title: "Regimewechsel, Paritaetsverteidigung und Trilemma-Aufgaben",
+        body: "Gerade bei festen Wechselkursen werden Diagrammtechnik, UIP-Rechnen und Glaubwuerdigkeitslogik gemeinsam geprueft. Diese Blaetter liefern den exam-level Standard dafuer.",
+        sources: ["coursework_text/Tutorienblatt_3.txt", "coursework_text/Uebungsblatt_3.txt", "coursework_text/Uebungsblatt_4.txt"]
+      },
+      {
+        title: "Barro-Gordon, Taylor-Regel und geldpolitische Kurzbegruendung",
+        body: "Die Mittelphase trainiert Reaktionsfunktionen, Verlustfunktionen, Commitment-Argumente und die saubere Verbalisierung politischer Zielkonflikte unter Zeitdruck.",
+        sources: ["coursework_text/Tutorienblatt_4.txt", "coursework_text/Tutorienblatt_5.txt", "coursework_text/Uebungsblatt_5.txt", "coursework_text/Uebungsblatt_7.txt"]
+      },
+      {
+        title: "Solow-, Skalenertrags- und Schuldenquoten-Drills",
+        body: "Die spaeten Aufgabenblaetter verbinden Produktionsfunktion, Steady-State-Rechnung, Goldene Regel, technischen Fortschritt und staatliche Budgetrestriktionen zu vollwertigem Klausurtraining.",
+        sources: ["coursework_text/Tutorienblatt_5.txt", "coursework_text/Tutorienblatt_6.txt", "coursework_text/Uebungsblatt_6.txt", "coursework_text/Uebungsblatt_8.txt", "coursework_text/Uebungsblatt_9.txt", "coursework_text/Uebungsblatt_10.txt"]
+      }
+    ],
+    qualityNotes: [
+      "Die Stofflinie basiert hier auf Tutoriums- und Uebungsblaettern; eine separate Vorlesungsdeck-Reihe ist im Modulordner nicht als vollstaendige PDF-Serie abgelegt und wird deshalb nicht kuenstlich fingiert.",
+      "Mehrere Tutorienblaetter liegen in doppelten Varianten vor; das Portal nutzt sie zur Stoffverifikation, zaehlt sie aber nicht als eigene Themenblöcke hoch.",
+      "Die offene-Makro- und Wachstumsteile sind beide klausurtragend, deshalb wurde das Modul nicht auf Wechselkursfragen verengt."
     ]
   },
   statistik: {

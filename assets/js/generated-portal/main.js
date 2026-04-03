@@ -2,12 +2,13 @@ import { createPortalApp } from "../portal-core/app.js";
 import { createRenderer } from "../portal-core/ui/renderer.js";
 import { createQuickExamModule } from "../portal-core/features/exam.js";
 import { createFullExamModule } from "../portal-core/features/fullExam.js";
+import { renderRPracticeMarkup, mountRPracticeBlocks } from "../portal-core/features/rPractice.js";
 import { createStorageModule } from "../portal-core/state/storage.js";
 import { getModuleBySlug } from "../modules.js";
 import { getModuleContent } from "../module-content.js";
-import { mountRLabs } from "../r-lab.js";
 import { mountLivePortalBridge } from "../live-portal-bridge.js";
 import { buildGeneratedPortalData } from "./dataFactory.js";
+import { getGeneratedRPracticeBlocks } from "./rPracticeCatalog.js";
 
 function inferSlug() {
   const parts = window.location.pathname.split("/").filter(Boolean);
@@ -144,6 +145,40 @@ function buildHomeIntro(module, contentProfile) {
   return contentProfile.roadmap?.[0]?.body
     || contentProfile.practice?.[0]?.body
     || module.summary;
+}
+
+function augmentModuleForGeneratedPortal(module) {
+  const rPracticeBlocks = getGeneratedRPracticeBlocks(module.slug);
+  if (!rPracticeBlocks.length) return { ...module, rPracticeBlocks: [] };
+  return {
+    ...module,
+    rLab: module.rLab || { enabled: true },
+    rPracticeBlocks
+  };
+}
+
+function injectRPracticeIntoData(module, data) {
+  if (!module.rPracticeBlocks?.length) return data;
+  const codeChapter = data.chapters.find((chapter) => chapter.id.startsWith("code_"));
+  if (!codeChapter) return data;
+  const contentEntry = data.contentById[codeChapter.id];
+  if (!contentEntry) return data;
+
+  const practiceMarkup = module.rPracticeBlocks
+    .map((block, index) => renderRPracticeMarkup(block, {
+      moduleSlug: module.slug,
+      blockId: `${module.slug}_generated_${index + 1}`
+    }))
+    .join("\n");
+
+  contentEntry.theorie = `${contentEntry.theorie}
+<div class="section-block">
+  <h3>Interaktive R-Anwendung</h3>
+  <p>Diese R-Blöcke gehören direkt zur Methodenlogik des Moduls: zuerst fachlich lesen, dann den Code ausführen, Output deuten, Mini-Aufgabe lösen und die Musterlösung mit typischen Fehlern abgleichen.</p>
+</div>
+${practiceMarkup}`;
+
+  return data;
 }
 
 function createAppState() {
@@ -2686,6 +2721,7 @@ function appendHomeSupplement(module, contentProfile) {
   const roadmapNotes = (contentProfile.roadmap || []).slice(0, 3);
   const practiceNotes = (contentProfile.practice || []).slice(0, 3);
   const homeLead = buildHomeIntro(module, contentProfile);
+  const rPracticeTitles = module.rPracticeBlocks?.map((block) => block.title) || [];
   addon.innerHTML = `
     <div class="generated-home-grid">
       <section class="generated-home-panel">
@@ -2702,13 +2738,18 @@ function appendHomeSupplement(module, contentProfile) {
         </div>
       </section>
     </div>
-    ${module.rLab ? `<section class="generated-r-lab-wrap"><div id="generatedRLabMount" class="lab-shell"></div></section>` : ""}
+    ${rPracticeTitles.length ? `<section class="generated-r-lab-wrap">
+      <div class="section-block" style="margin:0">
+        <h3>R-Praxis im Modul</h3>
+        <p>Die R-Anwendungen sind in die passenden Methodenbegriffe eingebettet. Du arbeitest dort jeweils über Konzeptbrücke, editierbaren Code, Output, Interpretation, Mini-Task und Musterlösung.</p>
+        <div class="generated-note-list">
+          ${rPracticeTitles.map((title) => `<div class="generated-note"><strong>${escapeHtml(title)}</strong><span>Direkt im jeweiligen Konzept als ausführbare R-Anwendung verankert.</span></div>`).join("")}
+        </div>
+      </div>
+    </section>` : ""}
   `;
 
   content.appendChild(addon);
-  if (module.rLab) {
-    mountRLabs(document.getElementById("generatedRLabMount"), module);
-  }
 }
 
 function buildShell(module, chapterCount) {
@@ -2809,14 +2850,15 @@ function buildShell(module, chapterCount) {
 }
 
 const slug = inferSlug();
-const module = getModuleBySlug(slug);
+const baseModule = getModuleBySlug(slug);
 const contentProfile = getModuleContent(slug);
+const module = baseModule ? augmentModuleForGeneratedPortal(baseModule) : null;
 
 if (!module || !contentProfile) {
   throw new Error(`Kein generiertes Portal für ${slug} gefunden.`);
 }
 
-const data = buildGeneratedPortalData(module, contentProfile);
+const data = injectRPracticeIntoData(module, buildGeneratedPortalData(module, contentProfile));
 ensureMathJax();
 document.title = `${module.title} — Lernportal`;
 document.body.className = "";
@@ -2859,6 +2901,11 @@ const baseRenderer = createRenderer({
 
 const renderer = {
   ...baseRenderer,
+  renderContent(...args) {
+    baseRenderer.renderContent(...args);
+    mountRPracticeBlocks(document.getElementById("content"));
+    renderMath(document.getElementById("content"));
+  },
   renderHome() {
     baseRenderer.renderHome();
     appendHomeSupplement(module, contentProfile);

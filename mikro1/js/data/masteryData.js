@@ -50,7 +50,7 @@ function createMasteryItems(conceptId, title, category) {
   }
   if (conceptId === 'cobbd') {
     return [
-      'CD-Nachfrage x_i* = α_i·m/p_i herleiten',
+      String.raw`CD-Nachfrage $x_i^* = \alpha_i \cdot m/p_i$ herleiten`,
       'Konstante Budgetanteile nachweisen',
       'Preis- und Einkommenselastizitäten berechnen',
       'Indirekte Nutzenfunktion ableiten'
@@ -58,9 +58,9 @@ function createMasteryItems(conceptId, title, category) {
   }
   if (conceptId === 'hausopt') {
     return [
-      'Tangentialbedingung GRS=p₁/p₂ und Budget gemeinsam lösen',
+      String.raw`Tangentialbedingung $GRS=p_1/p_2$ und Budget gemeinsam lösen`,
       'Optimum grafisch und algebraisch bestimmen',
-      'MU_i/p_i = λ interpretieren',
+      String.raw`$MU_i/p_i = \lambda$ interpretieren`,
       'Randlösungen erkennen'
     ];
   }
@@ -68,8 +68,8 @@ function createMasteryItems(conceptId, title, category) {
     return [
       'Hicks- von Marshallscher Nachfrage unterscheiden',
       'h_i via Ausgabenminimierung herleiten',
-      '∂h_i/∂p_i ≤ 0 begründen',
-      'Identität h_i(p,ū) = x_i(p,m) im Optimum verstehen'
+      String.raw`$\partial h_i/\partial p_i \le 0$ begründen`,
+      String.raw`Identität $h_i(p,\bar{u}) = x_i(p,m)$ im Optimum verstehen`
     ];
   }
   if (conceptId === 'monopol') {
@@ -82,9 +82,9 @@ function createMasteryItems(conceptId, title, category) {
   }
   if (conceptId === 'kosten') {
     return [
-      'Kostenminimierungsbedingung GRTS=w/r aufstellen',
+      String.raw`Kostenminimierungsbedingung $GRTS=w/r$ aufstellen`,
       'Bedingte Faktornachfrage herleiten',
-      'Kostenfunktion C(w,r,y) bestimmen',
+      String.raw`Kostenfunktion $C(w,r,y)$ bestimmen`,
       'Shephards Lemma für Produktion anwenden'
     ];
   }
@@ -98,9 +98,9 @@ function createMasteryItems(conceptId, title, category) {
   }
   if (conceptId === 'cv_ev') {
     return [
-      'CV = e(p⁰,u⁰)−e(p¹,u⁰) berechnen',
-      'EV = e(p⁰,u¹)−e(p¹,u¹) berechnen',
-      'Rangordnung CV<ΔKR<EV bei normalem Gut erklären',
+      String.raw`$CV = e(p^0,u^0)-e(p^1,u^0)$ berechnen`,
+      String.raw`$EV = e(p^0,u^1)-e(p^1,u^1)$ berechnen`,
+      String.raw`Rangordnung $CV<\Delta KR<EV$ bei normalem Gut erklären`,
       'Unterschied CV/EV: altes vs. neues Nutzenniveau'
     ];
   }
@@ -132,118 +132,118 @@ function createMasteryItems(conceptId, title, category) {
   // For all other concepts, use specific items where available, else generic
   const specificItems = {
     ordinal: [
-      'Positiv-monotone Transformation formal definieren (f\' > 0)',
+      String.raw`Positiv-monotone Transformation formal definieren ($f' > 0$)`,
       'GRS-Invarianz unter monotoner Transformation per Kettenregel beweisen',
-      'Grenznutzen MUᵢ von GRS = MU₁/MU₂ trennen (nur GRS ist invariant)',
+      String.raw`Grenznutzen $MU_i$ von $GRS = MU_1/MU_2$ trennen (nur GRS ist invariant)`,
       'Ordinalität von Kardinalität präzise abgrenzen'
     ],
     psubst: [
-      'Nutzenfunktion u = ax₁ + bx₂ aufschreiben und GRS = a/b berechnen',
+      String.raw`Nutzenfunktion $u = a x_1 + b x_2$ aufschreiben und $GRS = a/b$ berechnen`,
       'Randlösung bei perfekten Substituten identifizieren (Eckoptimum)',
-      'Fall p₁/p₂ = a/b (Indifferenz auf ganzer Budgetgerade) erkennen',
+      String.raw`Fall $p_1/p_2 = a/b$ (Indifferenz auf ganzer Budgetgerade) erkennen`,
       'Preiselastizität der Nachfrage bei perfekten Substituten ableiten'
     ],
     pkomp: [
-      'Leontief-Nutzenfunktion u = min(x₁/a, x₂/b) interpretieren',
-      'Optimale Kombination x₁/a = x₂/b herleiten und einsetzen',
+      String.raw`Leontief-Nutzenfunktion $u = \min(x_1/a, x_2/b)$ interpretieren`,
+      String.raw`Optimale Kombination $x_1/a = x_2/b$ herleiten und einsetzen`,
       'Warum GRS an der Ecke nicht definiert ist, erklären',
-      'Komplementäre Nachfrage x₁* = a·m/(ap₁+bp₂) herleiten'
+      String.raw`Komplementäre Nachfrage $x_1^* = a \cdot m/(a p_1+b p_2)$ herleiten`
     ],
     homothet: [
-      'Definition homothetischer Präferenzen (GRS hängt nur von x₂/x₁ ab) erklären',
-      'Beweisen, dass Engel-Kurven Ursprungsgeraden sind (Einkommenselastizität = 1)',
+      String.raw`Definition homothetischer Präferenzen ($GRS$ hängt nur von $x_2/x_1$ ab) erklären`,
+      String.raw`Beweisen, dass Engel-Kurven Ursprungsgeraden sind ($\varepsilon_{x,m} = 1$)`,
       'Cobb-Douglas als Beispiel für Homothethie identifizieren',
       'Homothetie von allgemeiner Homogenität abgrenzen'
     ],
     marshall: [
-      'Marshallsche Nachfrage xᵢ*(p,m) als Lösung des Nutzenmaximierungsproblems definieren',
-      'Homogenität Grad 0 formal nachweisen: xᵢ(λp,λm) = xᵢ(p,m)',
+      String.raw`Marshallsche Nachfrage $x_i^*(p,m)$ als Lösung des Nutzenmaximierungsproblems definieren`,
+      String.raw`Homogenität Grad 0 formal nachweisen: $x_i(\lambda p,\lambda m) = x_i(p,m)$`,
       'Preis-Konsum-Kurve und Einkommens-Konsum-Kurve skizzieren und interpretieren',
       'Marshallsche von Hicksscher Nachfrage unterscheiden (m konstant vs. ū konstant)'
     ],
     elast: [
-      'Preiselastizität εₓ,ₚ = (∂x/∂p)·(p/x) berechnen und interpretieren',
-      'Einkommenselastizität εₓ,ₘ für normale, inferiore und Luxusgüter klassifizieren',
-      'Kreuzpreiselastizität εₓ₁,ₚ₂ berechnen und Substitut/Komplement bestimmen',
-      'Zusammenhang Elastizität und Budgetanteil bei CD ableiten (ε = −1)'
+      String.raw`Preiselastizität $\varepsilon_{x,p} = (\partial x/\partial p)\cdot (p/x)$ berechnen und interpretieren`,
+      String.raw`Einkommenselastizität $\varepsilon_{x,m}$ für normale, inferiore und Luxusgüter klassifizieren`,
+      String.raw`Kreuzpreiselastizität $\varepsilon_{x_1,p_2}$ berechnen und Substitut/Komplement bestimmen`,
+      String.raw`Zusammenhang Elastizität und Budgetanteil bei CD ableiten ($\varepsilon = -1$)`
     ],
     normal: [
-      'Normales Gut: ∂xᵢ/∂m > 0 definieren und grafisch zeigen',
-      'Inferiores Gut: ∂xᵢ/∂m < 0 identifizieren und Beispiel nennen',
+      String.raw`Normales Gut: $\partial x_i/\partial m > 0$ definieren und grafisch zeigen`,
+      String.raw`Inferiores Gut: $\partial x_i/\partial m < 0$ identifizieren und Beispiel nennen`,
       'Einkommens-Konsum-Kurve für normales vs. inferiores Gut skizzieren',
       'Giffen-Güter als extremen Spezialfall inferiorer Güter einordnen'
     ],
     shephard: [
-      'Shephards Lemma formal aufschreiben: ∂e/∂pᵢ = hᵢ(p,ū)',
+      String.raw`Shephards Lemma formal aufschreiben: $\partial e/\partial p_i = h_i(p,\bar{u})$`,
       'Herleitung via Umhüllendensatz (Envelope Theorem) skizzieren',
       'Anwendung: Hickssche Nachfrage aus gegebener Ausgabenfunktion ableiten',
       'Symmetrie der Slutsky-Matrix als Folge von Shephards Lemma erklären'
     ],
     indnutzen: [
-      'Indirekte Nutzenfunktion v(p,m) = max u(x) s.t. px=m definieren',
-      'Roys Identität: xᵢ* = −(∂v/∂pᵢ)/(∂v/∂m) aufschreiben und anwenden',
-      'v als fallend in pᵢ und steigend in m begründen',
-      'Zusammenhang zwischen v(p,m) und e(p,ū) via Dualität erklären'
+      String.raw`Indirekte Nutzenfunktion $v(p,m) = \max u(x)$ s.t. $px=m$ definieren`,
+      String.raw`Roys Identität: $x_i^* = -(\partial v/\partial p_i)/(\partial v/\partial m)$ aufschreiben und anwenden`,
+      String.raw`$v$ als fallend in $p_i$ und steigend in $m$ begründen`,
+      String.raw`Zusammenhang zwischen $v(p,m)$ und $e(p,\bar{u})$ via Dualität erklären`
     ],
     lambda: [
-      'Lagrange-Multiplikator λ = ∂v/∂m als Grenznutzen des Einkommens interpretieren',
-      'Aus BEO: MUᵢ = λpᵢ für alle i herleiten und als Gleichgewichtsbedingung lesen',
-      'λ unter positiv-monotoner Transformation: invariant? (Nein — λ ändert sich)',
-      'Beziehung λ = ∂e/∂ū (Grenzausgaben für Nutzeneinheit) erklären'
+      String.raw`Lagrange-Multiplikator $\lambda = \partial v/\partial m$ als Grenznutzen des Einkommens interpretieren`,
+      String.raw`Aus BEO: $MU_i = \lambda p_i$ für alle $i$ herleiten und als Gleichgewichtsbedingung lesen`,
+      String.raw`$\lambda$ unter positiv-monotoner Transformation: invariant? (Nein — $\lambda$ ändert sich)`,
+      String.raw`Beziehung $\lambda = \partial e/\partial \bar{u}$ (Grenzausgaben für Nutzeneinheit) erklären`
     ],
     anfang: [
-      'Anfangsausstattungsmodell: Haushalt besitzt Bündel ω = (ω₁,ω₂) statt Einkommen',
-      'Effektives Einkommen m = p₁ω₁ + p₂ω₂ bei gegebenen Preisen berechnen',
-      'Slutsky-Gleichung mit Anfangsausstattung: zusätzlicher Term (ωᵢ − xᵢ)·∂x/∂m',
+      String.raw`Anfangsausstattungsmodell: Haushalt besitzt Bündel $\omega = (\omega_1,\omega_2)$ statt Einkommen`,
+      String.raw`Effektives Einkommen $m = p_1\omega_1 + p_2\omega_2$ bei gegebenen Preisen berechnen`,
+      String.raw`Slutsky-Gleichung mit Anfangsausstattung: zusätzlicher Term $(\omega_i - x_i)\cdot \partial x/\partial m$`,
       'Bei Preiserhöhung des eigenen Gutes: Verkäufer profitieren, Käufer leiden'
     ],
     arbeit: [
-      'Freizeit als Gut modellieren: Nutzen u(C, l), Budget p·C = w·(T−l) + V',
+      String.raw`Freizeit als Gut modellieren: Nutzen $u(C, l)$, Budget $p\cdot C = w\cdot (T-l) + V$`,
       'Lohnerhöhung: SE (Freizeit teurer → mehr Arbeit) vs. EE (reicher → mehr Freizeit)',
       'Rückwärts gebogene Arbeitsangebotskurve erklären (EE dominiert SE bei hohem w)',
       'Reservationslohn aus Indifferenz zwischen Arbeit und Nichtarbeit bestimmen'
     ],
     grts: [
-      'GRTS = MP_L/MP_K als Steigung der Isoquante definieren',
+      String.raw`$GRTS = MP_L/MP_K$ als Steigung der Isoquante definieren`,
       'Abnehmende GRTS mit konvexen Isoquanten verknüpfen',
-      'GRTS für f = L^a·K^b berechnen: GRTS = (a/b)·(K/L)',
-      'GRTS im Optimum: GRTS = w/r (Kostenminimierungsbedingung)'
+      String.raw`$GRTS$ für $f = L^a \cdot K^b$ berechnen: $GRTS = (a/b)\cdot (K/L)$`,
+      String.raw`$GRTS$ im Optimum: $GRTS = w/r$ (Kostenminimierungsbedingung)`
     ],
     skalener: [
-      'Prüfung auf Skalenerträge: f(λL,λK) = λ^r·f(L,K) — r>1, r=1, r<1 klassifizieren',
-      'Bei CD f=L^a·K^b gilt r = a+b — Exponentensumme bestimmt Skalenverhalten',
+      String.raw`Prüfung auf Skalenerträge: $f(\lambda L,\lambda K) = \lambda^r \cdot f(L,K)$ — $r>1$, $r=1$, $r<1$ klassifizieren`,
+      String.raw`Bei CD $f=L^a \cdot K^b$ gilt $r = a+b$ — Exponentensumme bestimmt Skalenverhalten`,
       'Steigende Skalenerträge und Subadditivität der Kostenfunktion verknüpfen',
       'CES-Funktion als Beispiel für beliebige Skalenerträge verwenden'
     ],
     gk_dk: [
-      'Grenzkosten GK = dC/dy und Durchschnittskosten DK = C/y berechnen',
+      String.raw`Grenzkosten $GK = dC/dy$ und Durchschnittskosten $DK = C/y$ berechnen`,
       'GK-Kurve schneidet DK-Kurve im Minimum der DK — geometrisch begründen',
       'Kurzfristige vs. langfristige Kostenkurven unterscheiden (Fixkosten)',
-      'Aus Kostenfunktion C(y) = ay² + by + c: GK, DK, AVC, AFC bestimmen'
+      String.raw`Aus Kostenfunktion $C(y) = ay^2 + by + c$: $GK$, $DK$, $AVC$, $AFC$ bestimmen`
     ],
     ces_u: [
-      'CES-Nutzenfunktion u = (ax₁ᵖ + bx₂ᵖ)^(1/p) aufschreiben und Parameter benennen',
-      'Substitutionselastizität σ = 1/(1−ρ) herleiten und interpretieren',
-      'Grenzfälle: ρ→1 (perfekte Substitute), ρ→−∞ (Leontief), ρ→0 (Cobb-Douglas)',
-      'CES-Nachfrage x₁*/x₂* = (a/b)^σ·(p₂/p₁)^σ berechnen'
+      String.raw`CES-Nutzenfunktion $u = (a x_1^\rho + b x_2^\rho)^{1/\rho}$ aufschreiben und Parameter benennen`,
+      String.raw`Substitutionselastizität $\sigma = 1/(1-\rho)$ herleiten und interpretieren`,
+      String.raw`Grenzfälle: $\rho \to 1$ (perfekte Substitute), $\rho \to -\infty$ (Leontief), $\rho \to 0$ (Cobb-Douglas)`,
+      String.raw`CES-Nachfrage $x_1^*/x_2^* = (a/b)^\sigma \cdot (p_2/p_1)^\sigma$ berechnen`
     ],
     ausgaben: [
-      'Ausgabenfunktion e(p,ū) = min{px : u(x)≥ū} formal definieren',
-      'e als steigend in p und steigend in ū begründen',
-      'Shephards Lemma anwenden: ∂e/∂pᵢ = hᵢ(p,ū)',
-      'Dualität: e(p, v(p,m)) = m und v(p, e(p,ū)) = ū nachvollziehen'
+      String.raw`Ausgabenfunktion $e(p,\bar{u}) = \min\{px : u(x)\ge \bar{u}\}$ formal definieren`,
+      String.raw`$e$ als steigend in $p$ und steigend in $\bar{u}$ begründen`,
+      String.raw`Shephards Lemma anwenden: $\partial e/\partial p_i = h_i(p,\bar{u})$`,
+      String.raw`Dualität: $e(p, v(p,m)) = m$ und $v(p, e(p,\bar{u})) = \bar{u}$ nachvollziehen`
     ],
     produktion: [
-      'Produktionsfunktion f(L,K) definieren und Isoquante zeichnen',
-      'Grenzprodukt MPₗ = ∂f/∂L und MPₖ = ∂f/∂K berechnen',
+      String.raw`Produktionsfunktion $f(L,K)$ definieren und Isoquante zeichnen`,
+      String.raw`Grenzprodukt $MP_L = \partial f/\partial L$ und $MP_K = \partial f/\partial K$ berechnen`,
       'Abnehmende Grenzerträge von sinkenden Skalenerträgen unterscheiden',
-      'Kostenfunktion C(w,r,y) durch Kostenminimierung ableiten'
+      String.raw`Kostenfunktion $C(w,r,y)$ durch Kostenminimierung ableiten`
     ],
     gewinn: [
-      'Gewinnfunktion π(y) = p·y − C(y) aufstellen und maximieren',
-      'Optimalbedingung p = GK herleiten und begründen (Preisnehmer)',
-      'Gewinne und Verluste im Diagramm (Rechteck zwischen p und DK) ablesen',
-      'Nullgewinnbedingung p = DK_min im langfristigen Wettbewerbsgleichgewicht ableiten'
+      String.raw`Gewinnfunktion $\pi(y) = p\cdot y - C(y)$ aufstellen und maximieren`,
+      String.raw`Optimalbedingung $p = GK$ herleiten und begründen (Preisnehmer)`,
+      String.raw`Gewinne und Verluste im Diagramm (Rechteck zwischen $p$ und $DK$) ablesen`,
+      String.raw`Nullgewinnbedingung $p = DK_{\min}$ im langfristigen Wettbewerbsgleichgewicht ableiten`
     ]
   };
   if (specificItems[conceptId]) return specificItems[conceptId];

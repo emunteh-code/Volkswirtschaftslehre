@@ -103,6 +103,26 @@ function drawDot(ctx, cx, cy, radius, fillColor, bgColor) {
   ctx.stroke();
 }
 
+function drawRectIndifferenceCurve(ctx, sx, sy, xMax, yMax, utility, color, progress = 1) {
+  const minX = Math.max(0.2, xMax * 0.02);
+  const xStop = Math.max(minX, xMax * progress);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  let started = false;
+  for (let x = minX; x <= xStop; x += xMax / 420) {
+    const y = utility / x;
+    if (y < minX || y > yMax * 1.05) continue;
+    if (!started) {
+      ctx.moveTo(sx(x), sy(y));
+      started = true;
+    } else {
+      ctx.lineTo(sx(x), sy(y));
+    }
+  }
+  ctx.stroke();
+}
+
 // ── Draw functions ─────────────────────────────────────────
 
 function drawBudget(progress = 1) {
@@ -126,10 +146,9 @@ function drawBudget(progress = 1) {
 
   const x1max = m / p1, x2max = m / p2;
   const slope  = -(p1 / p2);
-  const axMax  = Math.max(x1max, x2max) * 1.35;
-  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
-  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
-  const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
+  const xMax = Math.max(10, x1max * 1.12);
+  const yMax = Math.max(10, x2max * 1.28);
+  const { sx, sy, fsBase, fsBold } = setupRectPlot(ge, w, h, ctx, xMax, yMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
   // Budget area fill (instant — appears immediately)
@@ -140,6 +159,13 @@ function drawBudget(progress = 1) {
   ctx.lineTo(sx(0), sy(x2max));
   ctx.closePath();
   ctx.fill();
+
+  if (progress >= 0.55) {
+    ctx.fillStyle = col.reference;
+    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
+    ctx.textAlign = 'left';
+    ctx.fillText('Budgetmenge B', sx(x1max * 0.2), sy(x2max * 0.36));
+  }
 
   // Budget line — animated reveal left → right
   const x1end = x1max * progress;
@@ -169,8 +195,9 @@ function drawBudget(progress = 1) {
 
   ge.drawLegend(ctx, w, [
     { color: col.budgetBase, label: 'Budgetgerade p₁x₁+p₂x₂=m' },
-    { color: col.label,  label: `Steigung: −p₁/p₂ = ${slope.toFixed(3)}` },
-    { color: col.label,  label: `x₂-Abschn.: ${x2max.toFixed(1)}, x₁-Abschn.: ${x1max.toFixed(1)}` },
+    { color: col.budgetBase, fill: col.budgetFill, label: 'Budgetmenge B (erreichbare Bündel)' },
+    { color: col.reference,  label: `Steigung: −p₁/p₂ = ${slope.toFixed(3)}` },
+    { color: col.reference,  label: `x₂-Abschnitt: ${x2max.toFixed(1)}, x₁-Abschnitt: ${x1max.toFixed(1)}` },
   ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML =
@@ -179,7 +206,7 @@ function drawBudget(progress = 1) {
     Bei einem Einkommen von <strong>m = ${m}</strong> und Preisen <strong>p₁ = ${p1}</strong>, <strong>p₂ = ${p2}</strong>
     kann der Haushalt maximal <strong>${x1max.toFixed(1)}</strong> Einheiten von Gut 1 oder <strong>${x2max.toFixed(1)}</strong> Einheiten von Gut 2 kaufen.
     Die Steigung <strong>${slope.toFixed(2)}</strong> zeigt das Tauschverhältnis: für jede zusätzliche Einheit x₁ muss der Haushalt auf <strong>${(p1/p2).toFixed(2)}</strong> Einheiten x₂ verzichten.
-    Alle Punkte unterhalb und auf der Geraden sind erreichbar — die Gerade selbst zeigt die Bündel, die das Budget genau ausschöpfen.
+    Die schattierte <strong>Budgetmenge B</strong> enthält alle erreichbaren Bündel; die Budgetgerade selbst zeigt die Kombinationen, die das Budget genau ausschöpfen.
     <strong>Klausurtipp:</strong> Steigt p₁, dreht sich die Gerade um den y-Achsenabschnitt nach innen. Steigt m, verschiebt sich die Gerade parallel nach außen. Beides verändert die erreichbare Menge — Grundlage der komparativen Statik.`;
 
   // Tooltip registration — after full draw
@@ -230,7 +257,7 @@ function drawIndiff(progress = 1) {
   ge.drawLegend(ctx, w, [
     { color: clr1,      label: 'I₁ — Indiff.kurve (ū=' + u1 + ')' },
     { color: clr2,      label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
-    { color: col.label, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
+    { color: col.reference, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
   ], col.grid);
 
   document.getElementById('graph_info').innerHTML =
@@ -266,10 +293,9 @@ function drawHausopt(progress = 1) {
 
   const x1s = m / (2 * p1), x2s = m / (2 * p2), ustar = x1s * x2s;
   const x1max = m / p1, x2max = m / p2;
-  const axMax = Math.max(x1max, x2max) * 1.35;
-  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
-  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
-  const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
+  const xMax = Math.max(10, x1max * 1.12);
+  const yMax = Math.max(10, x2max * 1.28);
+  const { sx, sy, fsBase, fsBold } = setupRectPlot(ge, w, h, ctx, xMax, yMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
   // Budget area fill
@@ -292,7 +318,7 @@ function drawHausopt(progress = 1) {
   ctx.stroke();
 
   // Indifference curve through optimum — animated (no direct label; legend covers it)
-  ge.drawIK(ctx, axMax, ustar, col.indiffBase, null, sx, sy, progress);
+  drawRectIndifferenceCurve(ctx, sx, sy, xMax, yMax, ustar, col.indiffBase, progress);
 
   // Drop-lines to axes (dashed) — appear after curves
   if (progress >= 0.85) {

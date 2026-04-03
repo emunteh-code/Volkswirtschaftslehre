@@ -7,11 +7,7 @@ import { recordAnswer } from '../state/storage.js';
 import { updateSRS } from './srs.js';
 import { renderMath } from '../utils/mathjax.js';
 
-export const {
-  startExam,
-  submitExamAnswer,
-  skipExamQ
-} = createQuickExamModule({
+const examModule = createQuickExamModule({
   courseLabel: COURSE_CONFIG.courseLabel,
   stepProblems: STEP_PROBLEMS,
   examQuestions: EXAM_QUESTIONS,
@@ -21,3 +17,36 @@ export const {
   updateSRS,
   renderMath
 });
+
+function cleanWrongExamFeedback() {
+  const feedbackEl = document.getElementById('examFeedback');
+  const wrong = feedbackEl?.querySelector('.fb-wrong');
+  if (!wrong) return;
+
+  Array.from(wrong.childNodes).forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent?.includes('Nicht ganz.')) {
+      node.textContent = node.textContent.replace('Nicht ganz.', '').trimStart();
+      if (!node.textContent.trim()) {
+        node.remove();
+      }
+    }
+  });
+
+  wrong.querySelectorAll('div').forEach((block) => {
+    if (block.textContent?.trim().startsWith('Achtung:')) {
+      block.remove();
+    }
+  });
+
+  renderMath(feedbackEl);
+}
+
+export const {
+  startExam,
+  skipExamQ
+} = examModule;
+
+export function submitExamAnswer() {
+  examModule.submitExamAnswer();
+  cleanWrongExamFeedback();
+}

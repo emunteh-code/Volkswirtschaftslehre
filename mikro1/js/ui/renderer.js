@@ -372,13 +372,15 @@ ${recognitionItems.map((item) => `<li>${escapeHtml(stripHtml(item))}</li>`).join
 <div class="section-block intuition-bridge">
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
 <p>${intuition.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
-${signals.sections[1] ? `<div class="exam-drill-line">
-<span class="exam-drill-key">Theoretische Vertiefung</span>
-<div class="exam-drill-copy"><strong>${escapeHtml(signals.sections[1].heading)}:</strong> ${escapeHtml(signals.sections[1].paragraph)}</div>
+${signals.sections[1] || signals.warnings[0] ? `<div class="intuition-detail-list">
+${signals.sections[1] ? `<div class="intuition-detail">
+<span class="intuition-detail-label">Theoretische Vertiefung</span>
+<div class="intuition-detail-copy"><strong>${escapeHtml(signals.sections[1].heading)}:</strong> ${escapeHtml(signals.sections[1].paragraph)}</div>
 </div>` : ''}
-${signals.warnings[0] ? `<div class="exam-drill-line">
-<span class="exam-drill-key">Typischer Fehlgriff</span>
-<div class="exam-drill-copy"><strong>${escapeHtml(signals.warnings[0].label)}:</strong> ${escapeHtml(signals.warnings[0].body)}</div>
+${signals.warnings[0] ? `<div class="intuition-detail">
+<span class="intuition-detail-label">Typischer Fehlgriff</span>
+<div class="intuition-detail-copy"><strong>${escapeHtml(signals.warnings[0].label)}:</strong> ${escapeHtml(signals.warnings[0].body)}</div>
+</div>` : ''}
 </div>` : ''}
 ${renderExamPatterns(intuition)}
 </div>

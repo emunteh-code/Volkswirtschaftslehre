@@ -299,19 +299,22 @@ class GraphEngine {
       const cv = n => s.getPropertyValue(n).trim();
       // Use the browser's resolved font so canvas always matches page typography
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
-      const accent = cv('--accent') || '#4a90d9';
-      const mathInk = cv('--math-ink') || '#c2b5ff';
+      const isLight = document.body.classList.contains('light-mode');
+      const accent = '#2f77c7';
+      const mathInk = cv('--math-ink') || '#1f7558';
       const warningRed = cv('--accent3') || '#e05252';
-      const optimum = cv('--sys-orange') || '#d49a4a';
-      const budgetShift = '#b97a2c';
-      const budgetComp = '#5f7f6c';
-      const indiffAlt = '#8a74d8';
-      const isoquantBase = '#2f9f90';
-      const isoquantAlt = '#6fc1b7';
-      const tangent = '#a86272';
-      const competition = '#6f8498';
-      const supply = '#4e9d6c';
-      const mc = '#c47c36';
+      const reference = isLight ? '#1f2a36' : '#d8dee7';
+      const optimum = reference;
+      const budgetShift = '#d1495b';
+      const budgetComp = reference;
+      const indiffBase = '#c94759';
+      const indiffAlt = '#ef7f8c';
+      const isoquantBase = '#2f8f58';
+      const isoquantAlt = '#77bf8e';
+      const tangent = '#de8a2f';
+      const competition = reference;
+      const supply = '#2f8f58';
+      const mc = '#de8a2f';
       this._col = {
         bg:       cv('--bg')        || '#0f1114',
         grid:     cv('--border')    || '#2e3338',
@@ -327,11 +330,12 @@ class GraphEngine {
         fontMono: cv('--font-mono') || resolvedFont,
         fontBody: resolvedFont,
         math: mathInk,
+        reference,
         budgetBase: accent,
         budgetShift,
         budgetComp,
-        budgetFill: hexToRgba(accent, 0.08),
-        indiffBase: mathInk,
+        budgetFill: hexToRgba(accent, 0.14),
+        indiffBase,
         indiffAlt,
         isoquantBase,
         isoquantAlt,
@@ -339,17 +343,17 @@ class GraphEngine {
         tangent,
         demand: accent,
         supply,
-        mr: indiffAlt,
+        mr: budgetShift,
         mc,
-        monopoly: optimum,
+        monopoly: budgetShift,
         competition,
         welfare: warningRed,
         welfareFill: hexToRgba(warningRed, 0.22),
-        profit: budgetShift,
-        profitFill: hexToRgba(budgetShift, 0.18),
-        consumerFill: hexToRgba(accent, 0.14),
-        producerFill: hexToRgba(supply, 0.16),
-        guide: competition
+        profit: tangent,
+        profitFill: hexToRgba(tangent, 0.18),
+        consumerFill: hexToRgba(accent, 0.16),
+        producerFill: hexToRgba(supply, 0.18),
+        guide: reference
       };
       return this._col;
     }

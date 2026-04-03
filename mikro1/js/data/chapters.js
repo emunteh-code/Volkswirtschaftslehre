@@ -1829,9 +1829,9 @@ export const CONTENT = {
 <p><strong>Skalenerträge</strong> beschreiben, was mit dem Output passiert, wenn alle Inputs proportional um den Faktor $\lambda > 1$ erhöht werden. Der Homogenitätsgrad $k$ der Produktionsfunktion bestimmt die Art der Skalenerträge:</p>
 <div class="math-block">$$F(\lambda L, \lambda K) = \lambda^k \cdot F(L, K)$$</div>
 <div class="info-grid">
-<div class="info-card"><div class="label">Steigende Skalenerträge</div><div class="value">$k > 1$</div><p>Verdopplung der Inputs führt zu mehr als doppeltem Output.</p></div>
-<div class="info-card"><div class="label">Konstante Skalenerträge (CRS)</div><div class="value">$k = 1$</div><p>Verdopplung der Inputs führt zu genau doppeltem Output.</p></div>
-<div class="info-card"><div class="label">Sinkende Skalenerträge</div><div class="value">$k < 1$</div><p>Verdopplung der Inputs führt zu weniger als doppeltem Output.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Steigende Skalenerträge</div><div class="value">$k > 1$</div><p>Verdopplung der Inputs führt zu mehr als doppeltem Output.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Konstante Skalenerträge (CRS)</div><div class="value">$k = 1$</div><p>Verdopplung der Inputs führt zu genau doppeltem Output.</p></div>
+<div class="info-card info-card-concept-title"><div class="label">Sinkende Skalenerträge</div><div class="value">$k < 1$</div><p>Verdopplung der Inputs führt zu weniger als doppeltem Output.</p></div>
 </div>
 </div>
 <div class="section-block">

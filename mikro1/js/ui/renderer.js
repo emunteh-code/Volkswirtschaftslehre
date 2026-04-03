@@ -48,6 +48,7 @@ function decodeHtmlEntities(value) {
 
 const MATH_TEX_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
 const MATH_SCRIPT_CHARS = '₀₁₂₃₄₅₆₇₈₉ₐₑₒₓₘₙₚᵢⱼᵣᵤᵥₖ*′';
+const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳ';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
 const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
 const MATH_RANGE_PATTERNS = [
@@ -55,7 +56,9 @@ const MATH_RANGE_PATTERNS = [
   /\d+(?:[.,]\d+)?\s*€/gu,
   /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|KR|PR|SE|EE|MZB|IK|BEO)\b/gu,
   new RegExp(String.raw`\b(?:MU|MP)(?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
-  new RegExp(String.raw`[λμωπΔεαβρσθū](?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}]+)?\s*\/\s*(?:∂|d)\s*[${MATH_GREEK_CHARS}A-Za-z]+(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`(?:[${MATH_GREEK_CHARS}A-Za-z]+)(?:_[A-Za-z0-9*]+|\^[A-Za-z0-9.,+\-]+|\([^)]*\)|[${MATH_SCRIPT_CHARS}]+)+`, 'gu'),
+  new RegExp(String.raw`[${MATH_GREEK_CHARS}](?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
   new RegExp(String.raw`\b(?:x|p|u|v|e|h|m|q|w|r|L|K|C|F|y)(?:[${MATH_SCRIPT_CHARS}]+|\([^)]*\))`, 'gu'),
   /(?<![\p{L}\p{N}_])(?:m|p|w|r|L|K|C|F|y|q|u|v|e|h|x)(?![\p{L}\p{N}_])/gu
 ];
@@ -294,6 +297,13 @@ function decorateSemanticMathSurfaces() {
     '#content .intuition-bridge-copy',
     '#content .intuition-detail-copy',
     '#content .intuition-pattern-then',
+    '#content .graph-info',
+    '#content .graph-info strong',
+    '#content .graph-info .gi-eq',
+    '#content .graph-info .gi-label',
+    '#content .mastery-check h3',
+    '#content .mastery-item',
+    '#content .mastery-bar-label',
     '#rightPanel .rp-conn',
     '#rightPanel .rp-mistake .fix',
     '#rightPanel .rp-f-name',
@@ -307,6 +317,11 @@ function decorateSemanticMathSurfaces() {
   decorateSemanticMath(document.getElementById('content'));
   decorateSemanticMath(document.getElementById('rightPanel'));
   decorateSemanticMath(document.getElementById('sidebar'));
+}
+
+if (typeof window !== 'undefined') {
+  window.__decorateSemanticMathSurfaces = decorateSemanticMathSurfaces;
+  window.__semanticizeElementContent = semanticizeElementContent;
 }
 
 prepareSemanticMathData();

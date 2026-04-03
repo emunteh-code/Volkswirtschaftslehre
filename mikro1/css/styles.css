@@ -858,6 +858,22 @@ body {
   color: var(--math-ink);
   font-weight: 600;
 }
+.info-card.info-card-concept-title {
+  gap: 8px;
+}
+.info-card.info-card-concept-title .label {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--text);
+}
+.info-card.info-card-concept-title .value {
+  font-size: 12px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--math-ink) 92%, var(--muted) 8%);
+}
 .info-card p {
   font-size: 12.5px;
   color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);

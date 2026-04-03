@@ -73,6 +73,104 @@ function setGraphInfo(html) {
   }
 }
 
+function buildGraphInfo({ label = 'Interpretation', equation = '', rows = [] }) {
+  const parts = [`<span class="gi-label">${label}</span>`];
+  if (equation) {
+    parts.push(`<div class="gi-eq">${equation}</div>`);
+  }
+  if (rows.length) {
+    parts.push('<div class="gi-list">');
+    rows.forEach((row) => {
+      if (!row || !row.body) return;
+      parts.push('<div class="gi-row">');
+      if (row.title) {
+        parts.push(`<div class="gi-row-head">${row.title}</div>`);
+      }
+      parts.push(`<div class="gi-row-body">${row.body}</div>`);
+      parts.push('</div>');
+    });
+    parts.push('</div>');
+  }
+  return parts.join('');
+}
+
+function drawRoundedRectPath(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function drawLabelTag(ctx, text, x, y, color, options = {}) {
+  const {
+    fontFamily = getComputedStyle(document.body).getPropertyValue('--font-body').trim() || getComputedStyle(document.body).fontFamily || 'system-ui, sans-serif',
+    fontSize = 11,
+    fontWeight = 700,
+    align = 'left',
+    valign = 'middle',
+    paddingX = 8,
+    paddingY = 6,
+    lineGap = 2,
+    radius = 8,
+    bgColor = '#ffffff',
+    borderColor = color,
+    textColor = color
+  } = options;
+
+  const lines = Array.isArray(text) ? text : [text];
+  ctx.save();
+  ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+  const widths = lines.map((line) => ctx.measureText(line).width);
+  const textWidth = Math.max(...widths, 0);
+  const lineHeight = Math.round(fontSize * 1.18);
+  const boxWidth = textWidth + paddingX * 2;
+  const boxHeight = lineHeight * lines.length + lineGap * (lines.length - 1) + paddingY * 2;
+
+  let bx = x;
+  if (align === 'center') bx -= boxWidth / 2;
+  if (align === 'right') bx -= boxWidth;
+
+  let by = y;
+  if (valign === 'middle') by -= boxHeight / 2;
+  if (valign === 'bottom') by -= boxHeight;
+
+  ctx.fillStyle = bgColor;
+  ctx.strokeStyle = borderColor;
+  ctx.lineWidth = 1.2;
+  drawRoundedRectPath(ctx, bx, by, boxWidth, boxHeight, radius);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = textColor;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  lines.forEach((line, index) => {
+    const lineY = by + paddingY + lineHeight / 2 + index * (lineHeight + lineGap);
+    ctx.fillText(line, bx + boxWidth / 2, lineY);
+  });
+  ctx.restore();
+}
+
+function getCurveLabelPoint(axMax, utility, factor = 1.45) {
+  let x = Math.sqrt(utility) * factor;
+  let y = utility / x;
+  const minV = axMax * 0.14;
+  const maxV = axMax * 0.84;
+  if (x < minV) x = minV;
+  if (x > maxV) x = maxV;
+  y = utility / x;
+  if (y < minV) y = minV;
+  if (y > maxV) y = maxV;
+  return { x, y };
+}
+
 function registerTooltipPoints(canvas, points) {
   _tooltipPts = points;
   if (canvas._graphTooltipBound) return;
@@ -195,6 +293,17 @@ function drawBudget(progress = 1) {
   ctx.lineTo(sx(x1end), sy(x2end));
   ctx.stroke();
 
+  if (progress >= 0.84) {
+    const labelX = x1max * 0.34;
+    const labelY = x2max - (x2max / x1max) * labelX;
+    drawLabelTag(ctx, 'Budgetgerade', sx(labelX) + 10, sy(labelY) - 18, col.budgetBase, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(11, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.budgetBase
+    });
+  }
+
   // Labels + dots — appear once line is nearly complete
   if (progress >= 0.9) {
     // y-intercept dot + label
@@ -218,15 +327,28 @@ function drawBudget(progress = 1) {
     { color: col.reference,  label: `x₂-Abschnitt: ${x2max.toFixed(1)}, x₁-Abschnitt: ${x1max.toFixed(1)}` },
   ], col.grid, 20);
 
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation</span>
-    <div class="gi-eq">$x_2 = ${x2max.toFixed(1)} - ${(p1 / p2).toFixed(2)} \cdot x_1$</div>
-    Bei einem Einkommen von <strong>$m = ${m}$</strong> und Preisen <strong>$p_1 = ${p1}$</strong>, <strong>$p_2 = ${p2}$</strong>
-    kann der Haushalt maximal <strong>${x1max.toFixed(1)}</strong> Einheiten von Gut 1 oder <strong>${x2max.toFixed(1)}</strong> Einheiten von Gut 2 kaufen.
-    Die Steigung <strong>${slope.toFixed(2)}</strong> zeigt das Tauschverhältnis: für jede zusätzliche Einheit $x_1$ muss der Haushalt auf <strong>${(p1/p2).toFixed(2)}</strong> Einheiten $x_2$ verzichten.
-    Die schattierte <strong>Budgetmenge $B$</strong> enthält alle erreichbaren Bündel; die Budgetgerade selbst zeigt die Kombinationen, die das Budget genau ausschöpfen.
-    <strong>Klausurtipp:</strong> Steigt $p_1$, dreht sich die Gerade um den y-Achsenabschnitt nach innen. Steigt $m$, verschiebt sich die Gerade parallel nach außen. Beides verändert die erreichbare Menge — Grundlage der komparativen Statik.`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation',
+    equation: `$x_2 = ${x2max.toFixed(1)} - ${(p1 / p2).toFixed(2)} \\cdot x_1$`,
+    rows: [
+      {
+        title: 'Budgetgerade',
+        body: `Bei einem Einkommen von <strong>$m = ${m}$</strong> und Preisen <strong>$p_1 = ${p1}$</strong>, <strong>$p_2 = ${p2}$</strong> kann der Haushalt maximal <strong>${x1max.toFixed(1)}</strong> Einheiten von Gut 1 oder <strong>${x2max.toFixed(1)}</strong> Einheiten von Gut 2 kaufen.`
+      },
+      {
+        title: 'Steigung',
+        body: `Die Steigung <strong>${slope.toFixed(2)}</strong> zeigt das Tauschverhältnis: Für jede zusätzliche Einheit $x_1$ muss der Haushalt auf <strong>${(p1 / p2).toFixed(2)}</strong> Einheiten $x_2$ verzichten.`
+      },
+      {
+        title: 'Budgetmenge B',
+        body: `Die schattierte <strong>Budgetmenge $B$</strong> enthält alle erreichbaren Bündel; die Budgetgerade selbst zeigt die Kombinationen, die das Budget genau ausschöpfen.`
+      },
+      {
+        title: 'Klausurtipp',
+        body: `Steigt $p_1$, dreht sich die Gerade um den y-Achsenabschnitt nach innen. Steigt $m$, verschiebt sich die Gerade parallel nach außen. Beides verändert die erreichbare Menge und ist die Grundlage der komparativen Statik.`
+      }
+    ]
+  }));
 
   // Tooltip registration — after full draw
   registerTooltipPoints(canvas, [
@@ -259,11 +381,24 @@ function drawIndiff(progress = 1) {
   const clr1 = col.indiffBase;
   const clr2 = col.indiffAlt;
   const curves = [
-    { u: u1, c: clr1, label: 'I₁ (ū=' + u1 + ')', dash: [] },
-    { u: u2, c: clr2, label: 'I₂ (ū=' + u2 + ')', dash: [7, 4] },
+    { u: u1, c: clr1, label: ['Indifferenzkurve', `ū = ${u1}`], dash: [], factor: 1.28 },
+    { u: u2, c: clr2, label: ['Indifferenzkurve', `ū = ${u2}`], dash: [7, 4], factor: 1.65 },
   ];
-  curves.sort((a, b) => a.u - b.u).forEach(cv =>
-    ge.drawIK(ctx, axMax, cv.u, cv.c, cv.label, sx, sy, progress, cv.dash));
+  const sortedCurves = [...curves].sort((a, b) => a.u - b.u);
+  sortedCurves.forEach(cv =>
+    ge.drawIK(ctx, axMax, cv.u, cv.c, '', sx, sy, progress, cv.dash));
+
+  if (progress >= 0.85) {
+    sortedCurves.forEach((cv) => {
+      const point = getCurveLabelPoint(axMax, cv.u, cv.factor);
+      drawLabelTag(ctx, cv.label, sx(point.x) + 8, sy(point.y) - 10, cv.c, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 1),
+        bgColor: col.card,
+        borderColor: cv.c
+      });
+    });
+  }
 
   // "higher utility" hint — placed in upper-right to avoid curve-label zone
   if (progress >= 0.9) {
@@ -274,20 +409,37 @@ function drawIndiff(progress = 1) {
   }
 
   ge.drawLegend(ctx, w, [
-    { color: clr1,      label: 'I₁ — Indiff.kurve (ū=' + u1 + ')' },
-    { color: clr2, dash: true, label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
+    { color: clr1,      label: 'Indifferenzkurve ū=' + u1 },
+    { color: clr2, dash: true, label: 'Indifferenzkurve ū=' + u2 },
     { color: col.reference, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
   ], col.grid);
 
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation</span>
-    <div class="gi-eq">$u(x_1, x_2) = x_1 \cdot x_2$</div>
-    Die Grafik zeigt zwei Indifferenzkurven mit den Nutzenniveaus <strong>ū₁ = ${u1}</strong> und <strong>ū₂ = ${u2}</strong>.
-    Jeder Punkt auf einer Kurve liefert dem Haushalt exakt dasselbe Nutzenniveau — er ist zwischen allen diesen Bündeln indifferent.
-    ${u2 > u1 ? `Die äußere Kurve (ū = ${u2}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.` : `Die innere Kurve (ū = ${u1}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.`}
-    Die konvexe Form zeigt, dass Konsumenten gemischte Bündel gegenüber Extremen bevorzugen (abnehmende Grenzrate der Substitution).
-    <strong>Klausurtipp:</strong> Indifferenzkurven schneiden sich nie — sonst wäre ein Bündel gleichzeitig besser und gleich gut, ein Widerspruch zur Transitivität.`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation',
+    equation: `$u(x_1, x_2) = x_1 \\cdot x_2$`,
+    rows: [
+      {
+        title: 'Indifferenzkurven',
+        body: `Die Grafik zeigt zwei Indifferenzkurven mit den Nutzenniveaus <strong>ū₁ = ${u1}</strong> und <strong>ū₂ = ${u2}</strong>.`
+      },
+      {
+        title: 'Bedeutung der Kurven',
+        body: 'Jeder Punkt auf einer Kurve liefert dem Haushalt exakt dasselbe Nutzenniveau; er ist zwischen allen diesen Bündeln indifferent.'
+      },
+      {
+        title: 'Höherer Nutzen',
+        body: `${u2 > u1 ? `Die äußere Kurve (ū = ${u2}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.` : `Die innere Kurve (ū = ${u1}) liegt weiter vom Ursprung und repräsentiert <strong>höheren Nutzen</strong>.`}`
+      },
+      {
+        title: 'Form der Kurven',
+        body: 'Die konvexe Form zeigt, dass Konsumenten gemischte Bündel gegenüber Extremen bevorzugen; die Grenzrate der Substitution nimmt entlang der Kurve ab.'
+      },
+      {
+        title: 'Klausurtipp',
+        body: 'Indifferenzkurven schneiden sich nie; sonst wäre ein Bündel gleichzeitig besser und gleich gut, was der Transitivität widerspricht.'
+      }
+    ]
+  }));
 
   registerTooltipPoints(canvas, []);
 }
@@ -337,6 +489,17 @@ function drawHausopt(progress = 1) {
   ctx.lineTo(sx(x1end), sy(x2end));
   ctx.stroke();
 
+  if (progress >= 0.84) {
+    const labelX = x1max * 0.28;
+    const labelY = x2max - (x2max / x1max) * labelX;
+    drawLabelTag(ctx, 'Budgetgerade', sx(labelX) + 10, sy(labelY) - 18, col.budgetBase, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(11, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.budgetBase
+    });
+  }
+
   // Indifference curve through optimum — animated (no direct label; legend covers it)
   drawRectIndifferenceCurve(ctx, sx, sy, xMax, yMax, ustar, col.indiffBase, progress);
 
@@ -380,15 +543,32 @@ function drawHausopt(progress = 1) {
     { color: col.guide, dash: true, label: 'Hilfslinien zum Optimum' },
   ], col.grid, 20);
 
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation</span>
-    Das Haushaltsoptimum liegt bei <strong>x₁* = ${x1s.toFixed(2)}</strong>, <strong>x₂* = ${x2s.toFixed(2)}</strong> mit einem maximalen Nutzen von <strong>u* = ${ustar.toFixed(2)}</strong>.
-    <div class="gi-eq">$x_1^* = ${x1s.toFixed(2)}, \; x_2^* = ${x2s.toFixed(2)}, \; GRS = \frac{p_1}{p_2} = ${(p1/p2).toFixed(3)}$</div>
-    <strong>Optimumspunkt E*:</strong> Im Tangentialpunkt $E^* = (${x1s.toFixed(2)}, ${x2s.toFixed(2)})$ trifft die Budgetgerade genau die höchstmögliche Indifferenzkurve.
-    In diesem Punkt berührt die höchstmögliche Indifferenzkurve gerade noch die Budgetgerade — die Grenzrate der Substitution entspricht exakt dem Preisverhältnis.
-    Das bedeutet: der Haushalt bewertet die letzte Einheit x₁ subjektiv genauso wie der Markt sie bepreist. Jede Umschichtung des Budgets würde den Nutzen senken.
-    <strong>Klausurtipp:</strong> Die Tangentialbedingung $GRS = \frac{p_1}{p_2}$ ist die zentrale Optimierungsbedingung — sie wird fast immer abgefragt. In der Klausur: Lagrange aufstellen oder direkt $GRS = \frac{MU_1}{MU_2} = \frac{p_1}{p_2}$ setzen.`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation',
+    equation: `$x_1^* = ${x1s.toFixed(2)}, \\; x_2^* = ${x2s.toFixed(2)}, \\; GRS = \\frac{p_1}{p_2} = ${(p1 / p2).toFixed(3)}$`,
+    rows: [
+      {
+        title: 'Haushaltsoptimum',
+        body: `Das Haushaltsoptimum liegt bei <strong>$x_1^* = ${x1s.toFixed(2)}$</strong>, <strong>$x_2^* = ${x2s.toFixed(2)}$</strong> mit einem maximalen Nutzen von <strong>$u^* = ${ustar.toFixed(2)}$</strong>.`
+      },
+      {
+        title: 'Optimumpunkt E*',
+        body: `Im Tangentialpunkt $E^* = (${x1s.toFixed(2)}, ${x2s.toFixed(2)})$ trifft die Budgetgerade genau die höchstmögliche Indifferenzkurve.`
+      },
+      {
+        title: 'Tangentialbedingung',
+        body: 'In diesem Punkt berührt die höchstmögliche Indifferenzkurve gerade noch die Budgetgerade; die Grenzrate der Substitution entspricht exakt dem Preisverhältnis.'
+      },
+      {
+        title: 'Ökonomische Bedeutung',
+        body: 'Der Haushalt bewertet die letzte Einheit $x_1$ subjektiv genauso wie der Markt sie bepreist. Jede Umschichtung des Budgets würde den Nutzen senken.'
+      },
+      {
+        title: 'Klausurtipp',
+        body: 'Die Tangentialbedingung $GRS = \\frac{p_1}{p_2}$ ist die zentrale Optimierungsbedingung. In der Klausur: Lagrange aufstellen oder direkt $GRS = \\frac{MU_1}{MU_2} = \\frac{p_1}{p_2}$ setzen.'
+      }
+    ]
+  }));
 
   registerTooltipPoints(canvas, [
     {
@@ -518,6 +698,15 @@ function drawMonopol(progress = 1) {
     ctx.lineTo(sx((a / 2) * mrProg), sy(a - 2 * (a / 2) * mrProg));
     ctx.stroke();
     ctx.setLineDash([]);
+
+    if (progress >= 0.84) {
+      drawLabelTag(ctx, 'Grenzerlöskurve', sx(a * 0.23), sy(a - 2 * a * 0.23) + 18, col.mr, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 1),
+        bgColor: col.card,
+        borderColor: col.mr
+      });
+    }
   }
 
   // MC curve — animated with further delay (labelled in legend)
@@ -529,6 +718,24 @@ function drawMonopol(progress = 1) {
     ctx.moveTo(sx(0), sy(0));
     ctx.lineTo(sx(xMax * mcProg), sy(2 * c * xMax * mcProg));
     ctx.stroke();
+
+    if (progress >= 0.84) {
+      drawLabelTag(ctx, 'Grenzkostenkurve', sx(xMax * 0.54), sy(2 * c * xMax * 0.54) + 18, col.mc, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 1),
+        bgColor: col.card,
+        borderColor: col.mc
+      });
+    }
+  }
+
+  if (progress >= 0.84) {
+    drawLabelTag(ctx, 'Nachfragekurve', sx(a * 0.56), sy(a - a * 0.56) - 22, col.demand, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.demand
+    });
   }
 
   // Guide lines — appear after curves
@@ -579,25 +786,41 @@ function drawMonopol(progress = 1) {
   }
 
   ge.drawLegend(ctx, w, [
-    { color: col.demand,          label: 'Nachfrage D (p = a−y)' },
-    { color: col.mr, dash: true,  label: 'Grenzerlös MR (a−2y)' },
-    { color: col.mc,              label: 'Grenzkosten MC (2cy)' },
+    { color: col.demand,          label: 'Nachfragekurve D (p = a−y)' },
+    { color: col.mr, dash: true,  label: 'Grenzerlöskurve MR (a−2y)' },
+    { color: col.mc,              label: 'Grenzkostenkurve MC (2cy)' },
     { color: col.monopoly, dot: true, label: 'Cournot: yₘ=' + ym.toFixed(2) + ', pₘ=' + pm.toFixed(2) },
     { color: col.welfare, fill: col.welfareFill, label: 'Wohlfahrtsverlust DWL' },
     { color: col.profit, fill: col.profitFill, label: 'Monopolgewinn π' },
   ], col.grid, 20);
 
   { const profitM = (pm - mcAtYm) * ym;
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation</span>
-    <div class="gi-eq">$MR = MC,\; y_m = ${ym.toFixed(2)},\; p_m = ${pm.toFixed(2)}$</div>
-    Der Monopolist wählt die Menge <strong>$y_m = ${ym.toFixed(2)}$</strong> und setzt den Preis <strong>$p_m = ${pm.toFixed(2)}$</strong> — dort, wo Grenzerlös gleich Grenzkosten ist.
-    <strong>Monopolpunkt M:</strong> Der markierte Cournot-Punkt verbindet die gewählte Menge $y_m$ direkt mit dem abgelesenen Preis $p_m$ auf der Nachfragekurve.
-    Im Vergleich zum Wettbewerbsgleichgewicht (<strong>$y = ${yvk.toFixed(2)}$</strong>, <strong>$p = ${pvk.toFixed(2)}$</strong>) produziert der Monopolist weniger und verlangt mehr.
-    Der Monopolgewinn beträgt <strong>$\pi \approx ${profitM.toFixed(2)}$</strong> (Rechteck zwischen $p_m$ und $MC$).
-    Das markierte DWL-Dreieck zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.
-    <strong>Klausurtipp:</strong> Optimierungsbedingung ist $MR = MC$, nicht $P = MC$. Das DWL-Dreieck lässt sich als $\tfrac{1}{2}(y_{vk} - y_m)(p_m - p_{vk})$ berechnen. Häufige Folgefrage: Wie verändert eine Steuer das Cournot-Gleichgewicht?`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation',
+    equation: `$MR = MC,\\; y_m = ${ym.toFixed(2)},\\; p_m = ${pm.toFixed(2)}$`,
+    rows: [
+      {
+        title: 'Monopolentscheidung',
+        body: `Der Monopolist wählt die Menge <strong>$y_m = ${ym.toFixed(2)}$</strong> und setzt den Preis <strong>$p_m = ${pm.toFixed(2)}$</strong> dort, wo Grenzerlös und Grenzkosten übereinstimmen.`
+      },
+      {
+        title: 'Cournot-Punkt',
+        body: `Der markierte Cournot-Punkt verbindet die gewählte Menge $y_m$ direkt mit dem abgelesenen Preis $p_m$ auf der Nachfragekurve.`
+      },
+      {
+        title: 'Vergleich zum Wettbewerb',
+        body: `Im Vergleich zum Wettbewerbsgleichgewicht mit <strong>$y = ${yvk.toFixed(2)}$</strong> und <strong>$p = ${pvk.toFixed(2)}$</strong> produziert der Monopolist weniger und verlangt einen höheren Preis.`
+      },
+      {
+        title: 'Gewinn und Wohlfahrt',
+        body: `Der Monopolgewinn beträgt <strong>$\\pi \\approx ${profitM.toFixed(2)}$</strong>. Das markierte DWL-Dreieck zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren.`
+      },
+      {
+        title: 'Klausurtipp',
+        body: 'Optimierungsbedingung ist $MR = MC$, nicht $P = MC$. Das DWL-Dreieck lässt sich als $\\tfrac{1}{2}(y_{vk} - y_m)(p_m - p_{vk})$ berechnen; eine typische Folgefrage ist die Wirkung einer Steuer auf das Cournot-Gleichgewicht.'
+      }
+    ]
+  }));
   }
 
   registerTooltipPoints(canvas, [
@@ -713,13 +936,13 @@ function drawSlutsky(progress = 1) {
   }
 
   // IK curves — animated
-  ge.drawIK(ctx, axMax, u0, col.indiffBase, 'u₀', sx, sy, progress);
+  ge.drawIK(ctx, axMax, u0, col.indiffBase, '', sx, sy, progress);
   if (Math.abs(u1 - u0) > 0.01) {
-    ge.drawIK(ctx, axMax, u1, col.indiffAlt, 'u₁', sx, sy, progress, [9, 6]);
+    ge.drawIK(ctx, axMax, u1, col.indiffAlt, '', sx, sy, progress, [9, 6]);
   }
 
   // Budget lines helper
-  function bLine(p1, color, dash = [], label = '') {
+  function bLine(p1, color, dash = [], labelLines = null, labelFactor = 0.2, tagOffsetY = -12) {
     const xi = m / p1, yi = m / p2;
     const xiEnd = xi * progress;
     ctx.strokeStyle = color;
@@ -731,17 +954,19 @@ function drawSlutsky(progress = 1) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    if (label && progress >= 0.84) {
-      const labelX = xi * 0.2;
+    if (labelLines && progress >= 0.84) {
+      const labelX = xi * labelFactor;
       const labelY = yi - (yi / xi) * labelX;
-      ctx.fillStyle = color;
-      ctx.font = `bold ${Math.max(11, fsBase - 1)}px ${col.fontBody}`;
-      ctx.textAlign = 'left';
-      ctx.fillText(label, sx(labelX) + 8, sy(labelY) - 10);
+      drawLabelTag(ctx, labelLines, sx(labelX) + 10, sy(labelY) + tagOffsetY, color, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 1),
+        bgColor: col.card,
+        borderColor: color
+      });
     }
   }
-  bLine(p1_0, col.budgetBase, [], 'B⁰');
-  bLine(p1_1, col.budgetShift, [], 'B¹');
+  bLine(p1_0, col.budgetBase, [], ['Initiale', 'Budgetgerade'], 0.14, -18);
+  bLine(p1_1, col.budgetShift, [], ['Finale', 'Budgetgerade'], 0.44, 10);
 
   // Compensated budget line
   if (progress >= 0.5) {
@@ -759,12 +984,34 @@ function drawSlutsky(progress = 1) {
     ctx.setLineDash([]);
 
     if (progress >= 0.84) {
-      const labelX = xi_c * 0.22;
+      const labelX = xi_c * 0.24;
       const labelY = yi_c - (yi_c / xi_c) * labelX;
-      ctx.fillStyle = col.budgetComp;
-      ctx.font = `bold ${Math.max(11, fsBase - 1)}px ${col.fontBody}`;
-      ctx.textAlign = 'left';
-      ctx.fillText('Bᶜ', sx(labelX) + 8, sy(labelY) - 10);
+      drawLabelTag(ctx, ['Kompensierte', 'Budgetgerade'], sx(labelX) + 10, sy(labelY) - 16, col.budgetComp, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 1),
+        bgColor: col.card,
+        borderColor: col.budgetComp
+      });
+    }
+  }
+
+  if (progress >= 0.85) {
+    const u0Point = getCurveLabelPoint(axMax, u0, 1.18);
+    drawLabelTag(ctx, 'Indifferenzkurve u₀', sx(u0Point.x) + 10, sy(u0Point.y) - 10, col.indiffBase, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.indiffBase
+    });
+
+    if (Math.abs(u1 - u0) > 0.01) {
+      const u1Point = getCurveLabelPoint(axMax, u1, 1.52);
+      drawLabelTag(ctx, 'Indifferenzkurve u₁', sx(u1Point.x) + 10, sy(u1Point.y) - 10, col.indiffAlt, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 1),
+        bgColor: col.card,
+        borderColor: col.indiffAlt
+      });
     }
   }
 
@@ -792,18 +1039,44 @@ function drawSlutsky(progress = 1) {
   { const direction = p1_1 > p1_0 ? 'gestiegen' : 'gesunken';
   const seDir = SE > 0 ? 'erhöht' : 'senkt';
   const eeDir = EE > 0 ? 'erhöht' : 'senkt';
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation</span>
-    <div class="gi-eq">$A = (${x1_0.toFixed(2)}, ${x2_0.toFixed(2)})$, $B = (${x1_c.toFixed(2)}, ${x2_c.toFixed(2)})$, $C = (${x1_1.toFixed(2)}, ${x2_1.toFixed(2)})$</div>
-    Der Preis von Gut 1 ist von <strong>$p_1 = ${p1_0.toFixed(2)}$</strong> auf <strong>$p_1' = ${p1_1.toFixed(2)}$</strong> ${direction}.
-    <strong>Initiales Optimum A:</strong> Auf der initialen Budgetgeraden $B^0$ wählt der Haushalt <strong>$x_1^0 = ${x1_0.toFixed(2)}$</strong> und <strong>$x_2^0 = ${x2_0.toFixed(2)}$</strong>.
-    <strong>Kompensiertes Optimum B:</strong> Auf der kompensierten Budgetgeraden $B^c$ bleibt das alte Nutzenniveau <strong>$u_0 = ${u0.toFixed(2)}$</strong> erreichbar; Punkt B isoliert deshalb den reinen Substitutionseffekt.
-    <strong>Finales Optimum C:</strong> Auf der finalen Budgetgeraden $B^1$ landet der Haushalt nach voller Anpassung bei <strong>$x_1^1 = ${x1_1.toFixed(2)}$</strong> und <strong>$x_2^1 = ${x2_1.toFixed(2)}$</strong>.
-    <strong>Substitutionseffekt (A → B):</strong> Bei konstantem Nutzenniveau $u_0 = ${u0.toFixed(2)}$ ${seDir} der Haushalt $x_1$ um <strong>${Math.abs(SE).toFixed(3)}</strong> Einheiten.
-    <strong>Einkommenseffekt (B → C):</strong> Die Kaufkraftveränderung ${eeDir} $x_1$ um weitere <strong>${Math.abs(EE).toFixed(3)}</strong> Einheiten.
-    <strong>Gesamteffekt:</strong> $x_1$ verändert sich insgesamt um <strong>${total.toFixed(3)}</strong> Einheiten. ${Math.abs(SE) > Math.abs(EE) ? 'Der Substitutionseffekt dominiert.' : Math.abs(EE) > Math.abs(SE) ? 'Der Einkommenseffekt dominiert.' : 'Beide Effekte sind etwa gleich groß.'}
-    <strong>Klausurtipp:</strong> ${total < 0 ? 'Die Nachfrage sinkt bei Preisanstieg — normales Gut. ' : total > 0 ? 'Die Nachfrage steigt bei Preisanstieg — Giffen-Gut (EE überwiegt SE). ' : ''}Für die Slutsky-Kompensation gilt $m' = p_1' x_1^0 + p_2 x_2^0$: erst das kompensierte Budget bestimmen, dann $A$, $B$ und $C$ vergleichen.`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation',
+    equation: `$A = (${x1_0.toFixed(2)}, ${x2_0.toFixed(2)})$, $B = (${x1_c.toFixed(2)}, ${x2_c.toFixed(2)})$, $C = (${x1_1.toFixed(2)}, ${x2_1.toFixed(2)})$`,
+    rows: [
+      {
+        title: 'Preisänderung',
+        body: `Der Preis von Gut 1 ist von <strong>$p_1 = ${p1_0.toFixed(2)}$</strong> auf <strong>$p_1' = ${p1_1.toFixed(2)}$</strong> ${direction}.`
+      },
+      {
+        title: 'Initiales Optimum A',
+        body: `Auf der <strong>initialen Budgetgeraden</strong> wählt der Haushalt <strong>$x_1^0 = ${x1_0.toFixed(2)}$</strong> und <strong>$x_2^0 = ${x2_0.toFixed(2)}$</strong>.`
+      },
+      {
+        title: 'Kompensiertes Optimum B',
+        body: `Auf der <strong>kompensierten Budgetgeraden</strong> bleibt das alte Nutzenniveau <strong>$u_0 = ${u0.toFixed(2)}$</strong> erreichbar; Punkt B isoliert deshalb den reinen Substitutionseffekt.`
+      },
+      {
+        title: 'Finales Optimum C',
+        body: `Auf der <strong>finalen Budgetgeraden</strong> landet der Haushalt nach voller Anpassung bei <strong>$x_1^1 = ${x1_1.toFixed(2)}$</strong> und <strong>$x_2^1 = ${x2_1.toFixed(2)}$</strong>.`
+      },
+      {
+        title: 'Substitutionseffekt A → B',
+        body: `Bei konstantem Nutzenniveau $u_0 = ${u0.toFixed(2)}$ ${seDir} der Haushalt $x_1$ um <strong>${Math.abs(SE).toFixed(3)}</strong> Einheiten.`
+      },
+      {
+        title: 'Einkommenseffekt B → C',
+        body: `Die Kaufkraftveränderung ${eeDir} $x_1$ um weitere <strong>${Math.abs(EE).toFixed(3)}</strong> Einheiten.`
+      },
+      {
+        title: 'Gesamteffekt',
+        body: `$x_1$ verändert sich insgesamt um <strong>${total.toFixed(3)}</strong> Einheiten. ${Math.abs(SE) > Math.abs(EE) ? 'Der Substitutionseffekt dominiert.' : Math.abs(EE) > Math.abs(SE) ? 'Der Einkommenseffekt dominiert.' : 'Beide Effekte sind etwa gleich groß.'}`
+      },
+      {
+        title: 'Klausurtipp',
+        body: `${total < 0 ? 'Die Nachfrage sinkt bei Preisanstieg — normales Gut. ' : total > 0 ? 'Die Nachfrage steigt bei Preisanstieg — Giffen-Gut (der Einkommenseffekt überwiegt den Substitutionseffekt). ' : ''}Für die Slutsky-Kompensation gilt $m' = p_1' x_1^0 + p_2 x_2^0$: erst das kompensierte Budget bestimmen, dann $A$, $B$ und $C$ vergleichen.`
+      }
+    ]
+  }));
   }
 
   registerTooltipPoints(canvas, [
@@ -894,7 +1167,7 @@ function drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, color, label,
   ctx.setLineDash([]);
 
   if (label && progress >= 0.82) {
-    const labelLabor = Math.min(xMax * 0.7, Math.max(1.2, output * 1.2));
+    const labelLabor = Math.min(xMax * 0.78, Math.max(1.4, output * 1.7));
     const labelCapital = isoCapital(alpha, output, labelLabor);
     if (Number.isFinite(labelCapital) && labelCapital <= yMax * 0.95) {
       ctx.fillStyle = color;
@@ -938,10 +1211,12 @@ function drawProduktionBase(progress = 1, showGrts = false) {
 
   if (progress >= 0.85 && Number.isFinite(capitalPoint) && capitalPoint <= yMax) {
     drawDot(ctx, sx(laborPoint), sy(capitalPoint), 6, showGrts ? col.optimum : col.competition, col.bg);
-    ctx.fillStyle = showGrts ? col.optimum : col.text;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(showGrts ? 'Punkt mit GRTS' : 'Beobachteter Einsatz', sx(laborPoint) + 10, sy(capitalPoint) - 8);
+    drawLabelTag(ctx, showGrts ? 'Punkt mit GRTS' : 'Beobachteter Einsatz', sx(laborPoint) + 12, sy(capitalPoint) - 18, showGrts ? col.optimum : col.competition, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: showGrts ? col.optimum : col.competition
+    });
   }
 
   if (showGrts && progress >= 0.88 && Number.isFinite(capitalPoint) && capitalPoint <= yMax) {
@@ -961,10 +1236,12 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    ctx.fillStyle = col.tangent;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(`Tangente: GRTS = ${grts.toFixed(2)}`, sx(Math.min(xMax * 0.58, laborPoint + 0.6)), sy(Math.min(yMax * 0.92, capitalPoint + 1.6)));
+    drawLabelTag(ctx, ['Tangente', `GRTS = ${grts.toFixed(2)}`], sx(Math.min(xMax * 0.72, laborPoint + 2.4)), sy(Math.min(yMax * 0.7, capitalPoint + 3.2)), col.tangent, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.tangent
+    });
 
     ge.drawLegend(ctx, w, [
       { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
@@ -972,14 +1249,28 @@ function drawProduktionBase(progress = 1, showGrts = false) {
       { color: col.optimum, dot: true, label: 'Markierter Produktionspunkt' },
     ], col.grid, 20);
 
-    setGraphInfo(String.raw`
-      <span class="gi-label">Interpretation — GRTS</span>
-      <div class="gi-eq">$GRTS = \frac{MP_L}{MP_K} = \frac{1-\alpha}{\alpha} \cdot \frac{K}{L} = ${grts.toFixed(2)}$</div>
-      Am markierten Punkt <strong>$L = ${laborPoint.toFixed(2)}$</strong>, <strong>$K = ${capitalPoint.toFixed(2)}$</strong> beträgt die Grenzrate der technischen Substitution <strong>$${grts.toFixed(2)}$</strong>.
-      Das bedeutet: eine zusätzliche Einheit Arbeit kann bei konstantem Output <strong>$${grts.toFixed(2)}$</strong> Einheiten Kapital ersetzen.
-      Die GRTS entspricht der Steigung der Isoquante — sie nimmt ab, je mehr Arbeit relativ zu Kapital eingesetzt wird (konvexe Isoquanten).
-      <strong>Klausurtipp:</strong> Im Kostenminimum gilt $GRTS = \frac{w}{r}$. Ist die aktuelle GRTS größer als $\frac{w}{r}$, lohnt sich mehr Arbeit und weniger Kapital — und umgekehrt.`
-    );
+    setGraphInfo(buildGraphInfo({
+      label: 'Interpretation — GRTS',
+      equation: `$GRTS = \\frac{MP_L}{MP_K} = \\frac{1-\\alpha}{\\alpha} \\cdot \\frac{K}{L} = ${grts.toFixed(2)}$`,
+      rows: [
+        {
+          title: 'Markierter Punkt',
+          body: `Am markierten Punkt <strong>$L = ${laborPoint.toFixed(2)}$</strong>, <strong>$K = ${capitalPoint.toFixed(2)}$</strong> beträgt die Grenzrate der technischen Substitution <strong>${grts.toFixed(2)}</strong>.`
+        },
+        {
+          title: 'Ökonomische Bedeutung',
+          body: `Eine zusätzliche Einheit Arbeit kann bei konstantem Output <strong>${grts.toFixed(2)}</strong> Einheiten Kapital ersetzen.`
+        },
+        {
+          title: 'Tangente an die Isoquante',
+          body: 'Die GRTS entspricht der Steigung der Isoquante; sie nimmt ab, je mehr Arbeit relativ zu Kapital eingesetzt wird.'
+        },
+        {
+          title: 'Klausurtipp',
+          body: 'Im Kostenminimum gilt $GRTS = \\frac{w}{r}$. Ist die aktuelle GRTS größer als $\\frac{w}{r}$, lohnt sich mehr Arbeit und weniger Kapital; andernfalls mehr Kapital und weniger Arbeit.'
+        }
+      ]
+    }));
 
     registerTooltipPoints(canvas, [
       {
@@ -998,15 +1289,32 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     { color: col.competition, dot: true, label: 'Beobachteter Einsatzpunkt' },
   ], col.grid, 20);
 
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation — Isoquanten</span>
-    <div class="gi-eq">$F(K, L) = K^{${alpha.toFixed(2)}} \cdot L^{${(1 - alpha).toFixed(2)}}$</div>
-    Die innere Isoquante zeigt alle Kombinationen von Arbeit und Kapital, die den Output <strong>$\bar{y} = ${output.toFixed(1)}$</strong> erzeugen.
-    Die äußere Kurve <strong>$\bar{y} = ${secondOutput.toFixed(1)}$</strong> erfordert durchweg mehr Inputs — sie liegt weiter vom Ursprung.
-    Am markierten Punkt benötigt das Unternehmen für <strong>$\bar{y} = ${output.toFixed(1)}$</strong> rund <strong>$L = ${laborPoint.toFixed(1)}$</strong> Arbeit und <strong>$K = ${capitalPoint.toFixed(2)}$</strong> Kapital.
-    Entlang jeder Isoquante kann Arbeit durch Kapital ersetzt werden (und umgekehrt) — die konvexe Form zeigt, dass diese Substitution zunehmend schwieriger wird.
-    <strong>Klausurtipp:</strong> ${alpha.toFixed(2) === '0.50' ? 'Bei $\alpha = 0.5$ sind die Skalenerträge konstant ($\alpha + (1-\alpha) = 1$) — eine Verdopplung aller Inputs verdoppelt den Output.' : parseFloat(alpha.toFixed(2)) + parseFloat((1 - alpha).toFixed(2)) > 1 ? 'Hier liegen steigende Skalenerträge vor ($\alpha + (1-\alpha) > 1$).' : parseFloat(alpha.toFixed(2)) + parseFloat((1 - alpha).toFixed(2)) < 1 ? 'Hier liegen sinkende Skalenerträge vor ($\alpha + (1-\alpha) < 1$).' : 'Bei $\alpha + (1-\alpha) = 1$ liegen konstante Skalenerträge vor.'}`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation — Isoquanten',
+    equation: `$F(K, L) = K^{${alpha.toFixed(2)}} \\cdot L^{${(1 - alpha).toFixed(2)}}$`,
+    rows: [
+      {
+        title: 'Innere Isoquante',
+        body: `Die innere Isoquante zeigt alle Kombinationen von Arbeit und Kapital, die den Output <strong>$\\bar{y} = ${output.toFixed(1)}$</strong> erzeugen.`
+      },
+      {
+        title: 'Äußere Isoquante',
+        body: `Die äußere Kurve <strong>$\\bar{y} = ${secondOutput.toFixed(1)}$</strong> erfordert durchweg mehr Inputs und liegt weiter vom Ursprung entfernt.`
+      },
+      {
+        title: 'Markierter Einsatzpunkt',
+        body: `Am markierten Punkt benötigt das Unternehmen für <strong>$\\bar{y} = ${output.toFixed(1)}$</strong> rund <strong>$L = ${laborPoint.toFixed(1)}$</strong> Arbeit und <strong>$K = ${capitalPoint.toFixed(2)}$</strong> Kapital.`
+      },
+      {
+        title: 'Substitutionslogik',
+        body: 'Entlang jeder Isoquante kann Arbeit durch Kapital ersetzt werden und umgekehrt; die konvexe Form zeigt, dass diese Substitution zunehmend schwieriger wird.'
+      },
+      {
+        title: 'Klausurtipp',
+        body: `${alpha.toFixed(2) === '0.50' ? 'Bei $\\alpha = 0.5$ sind die Skalenerträge konstant ($\\alpha + (1-\\alpha) = 1$); eine Verdopplung aller Inputs verdoppelt den Output.' : parseFloat(alpha.toFixed(2)) + parseFloat((1 - alpha).toFixed(2)) > 1 ? 'Hier liegen steigende Skalenerträge vor ($\\alpha + (1-\\alpha) > 1$).' : parseFloat(alpha.toFixed(2)) + parseFloat((1 - alpha).toFixed(2)) < 1 ? 'Hier liegen sinkende Skalenerträge vor ($\\alpha + (1-\\alpha) < 1$).' : 'Bei $\\alpha + (1-\\alpha) = 1$ liegen konstante Skalenerträge vor.'}`
+      }
+    ]
+  }));
 
 
   registerTooltipPoints(canvas, Number.isFinite(capitalPoint) ? [
@@ -1070,14 +1378,19 @@ function drawKosten(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.82) {
-    ctx.fillStyle = col.budgetShift;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Isokostengerade', sx(xIntercept * 0.45), sy(yIntercept * 0.45) - 10);
-
     drawDot(ctx, sx(laborStar), sy(capitalStar), 6, col.optimum, col.bg);
-    ctx.fillStyle = col.text;
-    ctx.fillText('Kostenminimum', sx(laborStar) + 10, sy(capitalStar) - 8);
+    drawLabelTag(ctx, 'Isokostengerade', sx(xIntercept * 0.45), sy(yIntercept * 0.45) - 18, col.budgetShift, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.budgetShift
+    });
+    drawLabelTag(ctx, 'Kostenminimum', sx(laborStar) + 12, sy(capitalStar) - 18, col.optimum, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.optimum
+    });
 
     ctx.strokeStyle = col.guide + '88';
     ctx.lineWidth = 1.2;
@@ -1094,16 +1407,32 @@ function drawKosten(progress = 1) {
     { color: col.guide, dash: true, label: 'Hilfslinien zum Optimum' },
   ], col.grid, 20);
 
-  setGraphInfo(String.raw`
-    <span class="gi-label">Interpretation — Kostenminimierung</span>
-    <div class="gi-eq">$\min C = w \cdot L + r \cdot K \;\text{s.t.}\; F(K,L) = \bar{y}$</div>
-    Bei Faktorpreisen <strong>$w = ${wage.toFixed(2)}$</strong> (Lohn) und <strong>$r = ${rent.toFixed(2)}$</strong> (Kapitalzins) und einem Zieloutput von <strong>$\bar{y} = ${output.toFixed(1)}$</strong>
-    liegt das kostenminimale Inputbündel bei <strong>$L^* = ${laborStar.toFixed(2)}$</strong>, <strong>$K^* = ${capitalStar.toFixed(2)}$</strong>.
-    <strong>Kostenminimum:</strong> Der markierte Punkt zeigt genau das Bündel, in dem die Isokostengerade die Isoquante tangiert.
-    Im Optimum gilt <strong>$GRTS = \frac{w}{r} = ${(wage / rent).toFixed(2)}$</strong> — die Isoquante berührt die Isokostengerade tangential.
-    Die minimalen Gesamtkosten betragen <strong>$C = ${totalCost.toFixed(2)}$</strong>. Jede andere Inputkombination auf derselben Isoquante wäre teurer.
-    <strong>Klausurtipp:</strong> Das Kostenminimum ergibt sich aus $GRTS = \frac{w}{r}$ zusammen mit der Produktionsfunktion $F(K,L) = \bar{y}$ — zwei Gleichungen, zwei Unbekannte. Steigt $w$ relativ zu $r$, verschiebt sich das Optimum hin zu mehr Kapital.`
-  );
+  setGraphInfo(buildGraphInfo({
+    label: 'Interpretation — Kostenminimierung',
+    equation: `$\\min C = w \\cdot L + r \\cdot K \\;\\text{s.t.}\\; F(K,L) = \\bar{y}$`,
+    rows: [
+      {
+        title: 'Kostenminimum',
+        body: `Bei Faktorpreisen <strong>$w = ${wage.toFixed(2)}$</strong> und <strong>$r = ${rent.toFixed(2)}$</strong> sowie einem Zieloutput von <strong>$\\bar{y} = ${output.toFixed(1)}$</strong> liegt das kostenminimale Inputbündel bei <strong>$L^* = ${laborStar.toFixed(2)}$</strong> und <strong>$K^* = ${capitalStar.toFixed(2)}$</strong>.`
+      },
+      {
+        title: 'Tangentialpunkt',
+        body: 'Der markierte Punkt zeigt genau das Bündel, in dem die Isokostengerade die Isoquante tangiert.'
+      },
+      {
+        title: 'Bedingung im Optimum',
+        body: `Im Optimum gilt <strong>$GRTS = \\frac{w}{r} = ${(wage / rent).toFixed(2)}$</strong>; die Isoquante berührt die Isokostengerade tangential.`
+      },
+      {
+        title: 'Gesamtkosten',
+        body: `Die minimalen Gesamtkosten betragen <strong>$C = ${totalCost.toFixed(2)}$</strong>. Jede andere Inputkombination auf derselben Isoquante wäre teurer.`
+      },
+      {
+        title: 'Klausurtipp',
+        body: 'Das Kostenminimum ergibt sich aus $GRTS = \\frac{w}{r}$ zusammen mit der Produktionsfunktion $F(K,L) = \\bar{y}$; steigt $w$ relativ zu $r$, verschiebt sich das Optimum hin zu mehr Kapital.'
+      }
+    ]
+  }));
 
   registerTooltipPoints(canvas, [
     {
@@ -1156,6 +1485,16 @@ function drawMarkt(progress = 1) {
     ctx.closePath();
     ctx.fill();
 
+    if (progress >= 0.34) {
+      drawLabelTag(ctx, 'Konsumentenrente', sx(qEq * 0.32), sy((a + 2 * pEq) / 3), col.demand, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 2),
+        bgColor: col.card,
+        borderColor: col.demand,
+        align: 'center'
+      });
+    }
+
     ctx.fillStyle = col.producerFill;
     ctx.beginPath();
     ctx.moveTo(sx(0), sy(c));
@@ -1163,6 +1502,16 @@ function drawMarkt(progress = 1) {
     ctx.lineTo(sx(0), sy(pEq));
     ctx.closePath();
     ctx.fill();
+
+    if (progress >= 0.34) {
+      drawLabelTag(ctx, 'Produzentenrente', sx(qEq * 0.36), sy((c + 2 * pEq) / 3), col.supply, {
+        fontFamily: col.fontBody,
+        fontSize: Math.max(10, fsBase - 2),
+        bgColor: col.card,
+        borderColor: col.supply,
+        align: 'center'
+      });
+    }
   }
 
   ctx.strokeStyle = col.demand;
@@ -1181,13 +1530,19 @@ function drawMarkt(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.84) {
-    ctx.fillStyle = col.demand;
-    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
-    ctx.textAlign = 'left';
-    ctx.fillText('Nachfrage', sx(xMax * 0.68), sy(a - b * xMax * 0.68) - 8);
+    drawLabelTag(ctx, 'Nachfragekurve', sx(xMax * 0.68), sy(a - b * xMax * 0.68) - 22, col.demand, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.demand
+    });
 
-    ctx.fillStyle = col.supply;
-    ctx.fillText('Angebot', sx(xMax * 0.62), sy(c + d * xMax * 0.62) + 18);
+    drawLabelTag(ctx, 'Angebotskurve', sx(xMax * 0.62), sy(c + d * xMax * 0.62) + 6, col.supply, {
+      fontFamily: col.fontBody,
+      fontSize: Math.max(10, fsBase - 1),
+      bgColor: col.card,
+      borderColor: col.supply
+    });
   }
 
   if (hasTrade && progress >= 0.88) {
@@ -1205,27 +1560,52 @@ function drawMarkt(progress = 1) {
   }
 
   ge.drawLegend(ctx, w, hasTrade ? [
-    { color: col.demand, label: 'Nachfrage D' },
-    { color: col.supply, label: 'Angebot S' },
-    { color: col.competition, dot: true, label: 'Wettbewerbsgleichgewicht' },
+    { color: col.demand, label: 'Nachfragekurve D' },
+    { color: col.supply, label: 'Angebotskurve S' },
+    { color: col.competition, dot: true, label: 'Gleichgewichtspunkt E*' },
     { color: col.demand, fill: col.consumerFill, label: 'Konsumentenrente KR' },
     { color: col.supply, fill: col.producerFill, label: 'Produzentenrente PR' },
   ] : [
-    { color: col.demand, label: 'Nachfrage D' },
-    { color: col.supply, label: 'Angebot S' },
+    { color: col.demand, label: 'Nachfragekurve D' },
+    { color: col.supply, label: 'Angebotskurve S' },
   ], col.grid, 20);
 
   setGraphInfo(hasTrade
-    ? String.raw`<span class="gi-label">Interpretation — Marktgleichgewicht</span>
-      <div class="gi-eq">$D: p = ${a.toFixed(0)} - ${b.toFixed(2)} \cdot q \qquad S: p = ${c.toFixed(0)} + ${d.toFixed(2)} \cdot q$</div>
-      Im Gleichgewicht schneiden sich Angebots- und Nachfragekurve bei <strong>$p^* = ${pEq.toFixed(2)}$</strong> und <strong>$q^* = ${qEq.toFixed(2)}$</strong>.
-      <strong>Gleichgewichtspunkt E*:</strong> Dort gilt gleichzeitig Marktpreis <strong>$p^* = ${pEq.toFixed(2)}$</strong> und Marktmenge <strong>$q^* = ${qEq.toFixed(2)}$</strong>.
-      Die <strong>Konsumentenrente $\approx ${cs.toFixed(2)}$</strong> misst die Ersparnis der Käufer gegenüber ihrer maximalen Zahlungsbereitschaft (Dreieck über dem Gleichgewichtspreis).
-      Die <strong>Produzentenrente $\approx ${ps.toFixed(2)}$</strong> misst den Gewinn der Verkäufer über ihre Mindestkosten hinaus (Dreieck unter dem Gleichgewichtspreis).
-      Gemeinsam bilden sie die gesamte Wohlfahrt — im Wettbewerbsgleichgewicht ist diese maximal.
-      <strong>Klausurtipp:</strong> Das Gleichgewicht ergibt sich aus $D = S$. Eine Steuer $t$ verschiebt die Angebotskurve nach oben und erzeugt einen DWL. Typische Frage: Berechne die neue Gleichgewichtsmenge und die Steuerinzidenz.`
-    : `<span class="gi-label">Interpretation</span>
-      <strong>Kein Handel möglich:</strong> Die Mindestkosten der Anbieter liegen oberhalb der maximalen Zahlungsbereitschaft der Nachfrager. In diesem Parameterbereich existiert kein positives Marktgleichgewicht — die Kurven schneiden sich nicht im positiven Bereich.`
+    ? buildGraphInfo({
+      label: 'Interpretation — Marktgleichgewicht',
+      equation: `$D: p = ${a.toFixed(0)} - ${b.toFixed(2)} \\cdot q \\qquad S: p = ${c.toFixed(0)} + ${d.toFixed(2)} \\cdot q$`,
+      rows: [
+        {
+          title: 'Gleichgewichtspunkt E*',
+          body: `Im Gleichgewicht schneiden sich Angebots- und Nachfragekurve bei <strong>$p^* = ${pEq.toFixed(2)}$</strong> und <strong>$q^* = ${qEq.toFixed(2)}$</strong>.`
+        },
+        {
+          title: 'Konsumentenrente',
+          body: `Die <strong>Konsumentenrente $\\approx ${cs.toFixed(2)}$</strong> misst die Ersparnis der Käufer gegenüber ihrer maximalen Zahlungsbereitschaft; im Graphen ist das das Dreieck über dem Gleichgewichtspreis.`
+        },
+        {
+          title: 'Produzentenrente',
+          body: `Die <strong>Produzentenrente $\\approx ${ps.toFixed(2)}$</strong> misst den Gewinn der Verkäufer über ihre Mindestkosten hinaus; im Graphen ist das das Dreieck unter dem Gleichgewichtspreis.`
+        },
+        {
+          title: 'Gesamtwohlfahrt',
+          body: 'Konsumentenrente und Produzentenrente bilden gemeinsam die gesamte Wohlfahrt; im Wettbewerbsgleichgewicht ist sie maximal.'
+        },
+        {
+          title: 'Klausurtipp',
+          body: 'Das Gleichgewicht ergibt sich aus $D = S$. Eine Steuer $t$ verschiebt die Angebotskurve nach oben und erzeugt einen DWL; typische Folgefragen betreffen die neue Gleichgewichtsmenge und die Steuerinzidenz.'
+        }
+      ]
+    })
+    : buildGraphInfo({
+      label: 'Interpretation',
+      rows: [
+        {
+          title: 'Kein Handel möglich',
+          body: 'Die Mindestkosten der Anbieter liegen oberhalb der maximalen Zahlungsbereitschaft der Nachfrager. In diesem Parameterbereich existiert kein positives Marktgleichgewicht; die Kurven schneiden sich nicht im positiven Bereich.'
+        }
+      ]
+    })
   );
 
   registerTooltipPoints(canvas, hasTrade ? [

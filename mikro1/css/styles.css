@@ -2884,7 +2884,34 @@ body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--math-ink);
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  padding: 9px 11px;
+  background: color-mix(in srgb, var(--surface2) 58%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  border-radius: calc(var(--r-md) - 4px);
+}
+.graph-info .gi-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+.graph-info .gi-row {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--surface2) 46%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 74%, transparent);
+  border-radius: calc(var(--r-md) - 3px);
+}
+.graph-info .gi-row-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text) 16%);
+}
+.graph-info .gi-row-body {
+  color: var(--text);
+  line-height: 1.62;
 }
 
 /* ── Tooltip ─────────────────────────────────────────────── */

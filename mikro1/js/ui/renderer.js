@@ -317,13 +317,16 @@ ${renderExamDrillDeck(conceptId)}
 function renderExamPatterns(intuition) {
   const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
   if (!patterns.length) return '';
-  return `<div class="exam-pattern"><h4>Klausurmuster</h4>
-${patterns.map((pattern) => `<div class="exam-trigger">
-<span class="trigger-if">Wenn:</span>
-<span class="trigger-then">${pattern.if}</span>
-<span class="trigger-arrow" aria-hidden="true">→</span>
-<span class="trigger-then">${pattern.then}</span>
+  return `<div class="intuition-detail intuition-patterns">
+<span class="intuition-detail-label">Klausurmuster</span>
+<div class="intuition-detail-copy">
+${patterns.map((pattern) => `<div class="intuition-pattern-row">
+<span class="intuition-pattern-if">Wenn</span>
+<span class="intuition-pattern-then">${pattern.if}</span>
+<span class="intuition-pattern-arrow" aria-hidden="true">→</span>
+<span class="intuition-pattern-then">${pattern.then}</span>
 </div>`).join('')}
+</div>
 </div>`;
 }
 
@@ -375,7 +378,7 @@ ${recognitionItems.map((item) => `<li>${escapeHtml(stripHtml(item))}</li>`).join
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
 <p class="intuition-bridge-copy">${intuition.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
 </div>
-${signals.sections[1] || signals.warnings[0] ? `<div class="intuition-detail-list">
+${signals.sections[1] || signals.warnings[0] || (Array.isArray(intuition.exam) && intuition.exam.length) ? `<div class="intuition-detail-list">
 ${signals.sections[1] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>
 <div class="intuition-detail-copy"><strong>${escapeHtml(signals.sections[1].heading)}:</strong> ${escapeHtml(signals.sections[1].paragraph)}</div>
@@ -384,8 +387,8 @@ ${signals.warnings[0] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Typischer Fehlgriff</span>
 <div class="intuition-detail-copy"><strong>${escapeHtml(signals.warnings[0].label)}:</strong> ${escapeHtml(signals.warnings[0].body)}</div>
 </div>` : ''}
-</div>` : ''}
 ${renderExamPatterns(intuition)}
+</div>` : ''}
 </div>
 </div>`;
 }

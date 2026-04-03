@@ -22,7 +22,7 @@
   --accent3:  #e05252;   /* muted red — errors, warnings */
   --accent-fg: #ffffff;  /* text on accent-coloured backgrounds */
   --semantic-green: #4caf7c; /* semantic only: correct, done, positive */
-  --math-ink: #ffb4d0;
+  --math-ink: #ff82c6;
   --nav-active-bg: rgba(126, 149, 176, 0.16);
   --nav-active-border: #8eabc8;
   --nav-active-text: #dce8f6;
@@ -30,9 +30,9 @@
   --link-prereq-bg: rgba(74, 144, 217, 0.12);
   --link-prereq-border: rgba(74, 144, 217, 0.28);
   --link-prereq-text: #8fc0ec;
-  --link-dependent-bg: rgba(226, 120, 160, 0.16);
-  --link-dependent-border: rgba(226, 120, 160, 0.34);
-  --link-dependent-text: #f3bad1;
+  --link-dependent-bg: rgba(235, 76, 151, 0.18);
+  --link-dependent-border: rgba(235, 76, 151, 0.34);
+  --link-dependent-text: #ffb8da;
   --content-shell-max: clamp(1120px, 88vw, 1540px);
   --content-body-max: clamp(980px, 82vw, 1240px);
   --graph-shell-max: clamp(1080px, 88vw, 1400px);
@@ -96,7 +96,7 @@ body.light-mode {
   --accent3:   #c0392b;
   --accent-fg: #ffffff;
   --semantic-green: #2d8659; /* semantic only: correct, done, positive */
-  --math-ink: #a83f69;
+  --math-ink: #d81f74;
   --nav-active-bg: rgba(108, 136, 171, 0.15);
   --nav-active-border: #7c9fc6;
   --nav-active-text: #244a72;
@@ -104,9 +104,9 @@ body.light-mode {
   --link-prereq-bg: rgba(44, 111, 186, 0.09);
   --link-prereq-border: rgba(44, 111, 186, 0.2);
   --link-prereq-text: #2e669b;
-  --link-dependent-bg: rgba(168, 63, 105, 0.1);
-  --link-dependent-border: rgba(168, 63, 105, 0.22);
-  --link-dependent-text: #93375e;
+  --link-dependent-bg: rgba(216, 31, 116, 0.11);
+  --link-dependent-border: rgba(216, 31, 116, 0.24);
+  --link-dependent-text: #b42567;
 
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05);
@@ -659,6 +659,8 @@ body {
   display: grid;
   gap: 14px;
   justify-items: start;
+  width: min(100%, 1080px);
+  margin-inline: auto;
   margin-bottom: 34px;
 }
 
@@ -690,7 +692,8 @@ body {
 .concept-motivation {
   display: grid;
   gap: 12px;
-  max-width: min(100%, 90ch);
+  width: 100%;
+  max-width: none;
   border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
   border-top: 3px solid color-mix(in srgb, var(--accent) 70%, transparent);
   padding: 18px 22px 20px;
@@ -705,6 +708,16 @@ body {
   );
   box-shadow: var(--shadow-sm);
   line-height: 1.74;
+}
+.concept-header + .panel.active,
+.concept-header + .mikro1-practice,
+.concept-header + .formula-grid,
+.concept-header + .concept-links {
+  width: min(100%, 1080px);
+  margin-inline: auto;
+}
+#content:not([data-tab="theorie"]) .concept-motivation {
+  display: none;
 }
 .concept-motivation::before {
   content: 'Konzeptfokus';
@@ -1368,7 +1381,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 }
 .intuition-bridge-head {
   display: grid;
-  gap: 10px;
+  gap: 12px;
   padding-bottom: 16px;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
 }
@@ -1401,7 +1414,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .intuition-detail-list {
   display: grid;
   gap: 16px;
-  margin-top: 14px;
+  margin-top: 16px;
 }
 .intuition-detail {
   display: grid;
@@ -1410,6 +1423,31 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .intuition-detail + .intuition-detail {
   padding-top: 14px;
   border-top: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+}
+.intuition-patterns {
+  gap: 12px;
+}
+.intuition-pattern-row {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 6px;
+  line-height: 1.6;
+}
+.intuition-pattern-if {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.intuition-pattern-arrow {
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+  font-weight: 700;
+}
+.intuition-pattern-then {
+  color: var(--text);
 }
 .intuition-detail-label {
   display: block;
@@ -2335,8 +2373,8 @@ canvas {
    RIGHT PANEL
    ============================================================ */
 #rightPanel {
-  width: 240px;
-  min-width: 240px;
+  width: clamp(272px, 18vw, 304px);
+  min-width: clamp(272px, 18vw, 304px);
   flex-shrink: 0;
   background: color-mix(in srgb, var(--bg) 86%, var(--surface));
   border-left: 1px solid var(--border);
@@ -2347,7 +2385,7 @@ canvas {
   overflow-x: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  padding: 22px 16px 18px;
+  padding: 22px 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -2358,7 +2396,7 @@ body.focus-mode #rightPanel { display: none; }
 .rp-section {
   display: grid;
   gap: 12px;
-  padding: 14px 14px 13px;
+  padding: 15px 15px 14px;
   border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
   border-radius: var(--r-lg);
   background: color-mix(in srgb, var(--surface) 90%, transparent);
@@ -2400,9 +2438,15 @@ body.focus-mode #rightPanel { display: none; }
   box-shadow: var(--shadow-sm);
 }
 .rp-formula .rp-f-eq {
-  overflow-x: auto; white-space: normal; word-break: break-word;
+  overflow-x: auto;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
-.rp-formula .rp-f-eq mjx-container { max-width: 100%; font-size: 0.88em; }
+.rp-formula .rp-f-eq mjx-container {
+  max-width: 100%;
+  font-size: 0.9em;
+}
 .rp-formula .rp-f-name {
   color: color-mix(in srgb, var(--muted) 84%, var(--text) 16%);
   font-size: 10px;
@@ -2434,8 +2478,9 @@ body.focus-mode #rightPanel { display: none; }
   border-radius: var(--r-md);
   border: 1px solid transparent;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 12.5px;
   color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+  line-height: 1.48;
   transition: background 0.15s, color 0.15s, transform 0.12s, border-color 0.15s;
 }
 .rp-conn:hover {
@@ -2467,8 +2512,9 @@ body.focus-mode #rightPanel { display: none; }
 }
 .rp-mistake .fix {
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
-  font-size: 12px;
-  line-height: 1.56;
+  font-size: 12.5px;
+  line-height: 1.58;
+  overflow-wrap: anywhere;
 }
 
 .rp-f-name, .rp-f-name * { font-family: inherit; text-transform: none; }

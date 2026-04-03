@@ -25,10 +25,10 @@ function escapeHtml(value) {
 }
 
 function stripHtml(value) {
-  return String(value ?? '')
+  return decodeHtmlEntities(String(value ?? '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
-    .trim();
+    .trim());
 }
 
 function decodeHtmlEntities(value) {
@@ -44,6 +44,22 @@ function decodeHtmlEntities(value) {
   const textarea = document.createElement('textarea');
   textarea.innerHTML = value;
   return textarea.value;
+}
+
+function renderDecodedText(value) {
+  return escapeHtml(decodeHtmlEntities(String(value ?? '')));
+}
+
+function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
+  const source = stripMarkup ? stripHtml(value) : decodeHtmlEntities(String(value ?? ''));
+  return source
+    .split(MATH_TEX_REGEX)
+    .map((segment) => {
+      if (!segment) return '';
+      if (segment.startsWith('$')) return segment;
+      return buildSemanticMathMarkup(segment);
+    })
+    .join('');
 }
 
 const MATH_TEX_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
@@ -164,16 +180,18 @@ function buildSemanticMathMarkup(text) {
 }
 
 function semanticizeTextNode(node) {
-  const value = node.textContent;
+  const rawValue = node.textContent;
+  const value = decodeHtmlEntities(rawValue);
   if (!value || !value.trim()) return false;
 
   const segments = value.split(MATH_TEX_REGEX);
-  if (!segments.some((segment) => segment && !segment.startsWith('$') && hasSemanticMathToken(segment))) {
+  const hasMath = segments.some((segment) => segment && !segment.startsWith('$') && hasSemanticMathToken(segment));
+  if (!hasMath && value === rawValue) {
     return false;
   }
 
   const fragment = document.createDocumentFragment();
-  let changed = false;
+  let changed = value !== rawValue;
   segments.forEach((segment) => {
     if (!segment) return;
     if (segment.startsWith('$')) {
@@ -488,7 +506,7 @@ ${renderNotationList(formula.variables)}
       question: `Wie erklärst du "${section.heading}" so, dass daraus direkt eine saubere Prüfungsantwort wird?`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Argumentationskern</span>
-<div class="exam-drill-copy">${escapeHtml(section.paragraph)}</div>
+<div class="exam-drill-copy">${renderSemanticPlainText(section.paragraph)}</div>
 </div>
 ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formale Rückbindung</span>
@@ -503,11 +521,11 @@ ${formula ? `<div class="exam-drill-line">
       question: `Wenn in der Prüfung ${pattern.if} auftaucht, welcher Zugriff ist dann der richtige?`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Erstes Signal</span>
-<div class="exam-drill-copy">${pattern.if}</div>
+<div class="exam-drill-copy">${renderSemanticPlainText(pattern.if)}</div>
 </div>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Saubere Reaktion</span>
-<div class="exam-drill-copy">${pattern.then}</div>
+<div class="exam-drill-copy">${renderSemanticPlainText(pattern.then)}</div>
 </div>
 ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formel, die du notieren kannst</span>
@@ -537,7 +555,7 @@ ${formula ? `<div class="exam-drill-line">
       question: `Welcher typische Fehler kostet bei "${chapter.title}" schnell Punkte und wie vermeidest du ihn?`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Fehlerbild</span>
-<div class="exam-drill-copy"><strong>${escapeHtml(warning.label)}:</strong> ${escapeHtml(warning.body)}</div>
+<div class="exam-drill-copy"><strong>${renderDecodedText(warning.label)}:</strong> ${renderSemanticPlainText(warning.body)}</div>
 </div>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Saubere Gegenregel</span>
@@ -552,7 +570,7 @@ ${formula ? `<div class="exam-drill-line">
       question: `Welchen zweiten Gedanken solltest du nach dem ersten Kernsatz bei "${chapter.title}" direkt anschließen?`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Anschlussgedanke</span>
-<div class="exam-drill-copy"><strong>${escapeHtml(secondSection.heading)}:</strong> ${escapeHtml(secondSection.paragraph)}</div>
+<div class="exam-drill-copy"><strong>${renderDecodedText(secondSection.heading)}:</strong> ${renderSemanticPlainText(secondSection.paragraph)}</div>
 </div>
 ${intuition?.analogy ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Denkbild</span>
@@ -632,9 +650,9 @@ function renderExamPatterns(intuition) {
 <div class="intuition-detail-copy">
 ${patterns.map((pattern) => `<div class="intuition-pattern-row">
 <span class="intuition-pattern-if">Wenn</span>
-<span class="intuition-pattern-then">${pattern.if}</span>
+<span class="intuition-pattern-then">${renderSemanticPlainText(pattern.if)}</span>
 <span class="intuition-pattern-arrow" aria-hidden="true">→</span>
-<span class="intuition-pattern-then">${pattern.then}</span>
+<span class="intuition-pattern-then">${renderSemanticPlainText(pattern.then)}</span>
 </div>`).join('')}
 </div>
 </div>`;
@@ -671,13 +689,13 @@ ${formula.desc ? `<p>${formula.desc}</p>` : ''}
 <div class="section-block intuition-card">
 <h3>Denkbild</h3>
 <p>${intuition.analogy || entry?.motivation || `${chapter.title} lässt sich am besten als geordnete Entscheidung unter gegebenen Bedingungen lesen.`}</p>
-${signals.sections[0] ? `<p class="intuition-support"><strong>${escapeHtml(signals.sections[0].heading)}:</strong> ${escapeHtml(signals.sections[0].paragraph)}</p>` : ''}
+${signals.sections[0] ? `<p class="intuition-support"><strong>${renderDecodedText(signals.sections[0].heading)}:</strong> ${renderSemanticPlainText(signals.sections[0].paragraph)}</p>` : ''}
 </div>
 
 <div class="section-block intuition-card">
 <h3>Woran du das Konzept erkennst</h3>
 <ul class="intuition-bullets">
-${recognitionItems.map((item) => `<li>${escapeHtml(stripHtml(item))}</li>`).join('')}
+${recognitionItems.map((item) => `<li>${renderSemanticPlainText(item, { stripMarkup: true })}</li>`).join('')}
 </ul>
 </div>
 </div>
@@ -691,11 +709,11 @@ ${recognitionItems.map((item) => `<li>${escapeHtml(stripHtml(item))}</li>`).join
 ${signals.sections[1] || signals.warnings[0] || (Array.isArray(intuition.exam) && intuition.exam.length) ? `<div class="intuition-detail-list">
 ${signals.sections[1] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>
-<div class="intuition-detail-copy"><strong>${escapeHtml(signals.sections[1].heading)}:</strong> ${escapeHtml(signals.sections[1].paragraph)}</div>
+<div class="intuition-detail-copy"><strong>${renderDecodedText(signals.sections[1].heading)}:</strong> ${renderSemanticPlainText(signals.sections[1].paragraph)}</div>
 </div>` : ''}
 ${signals.warnings[0] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Typischer Fehlgriff</span>
-<div class="intuition-detail-copy"><strong>${escapeHtml(signals.warnings[0].label)}:</strong> ${escapeHtml(signals.warnings[0].body)}</div>
+<div class="intuition-detail-copy"><strong>${renderDecodedText(signals.warnings[0].label)}:</strong> ${renderSemanticPlainText(signals.warnings[0].body)}</div>
 </div>` : ''}
 ${renderExamPatterns(intuition)}
 </div>` : ''}

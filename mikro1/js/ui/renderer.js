@@ -13,8 +13,288 @@ import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
+let baseRenderer;
 
-const baseRenderer = createRenderer({
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function stripHtml(value) {
+  return String(value ?? '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+const MATH_TEX_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
+const MATH_SCRIPT_CHARS = '₀₁₂₃₄₅₆₇₈₉ₐₑₒₓₘₙₚᵢⱼᵣᵤᵥₖ*′';
+const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
+const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
+const MATH_RANGE_PATTERNS = [
+  /€/gu,
+  /\d+(?:[.,]\d+)?\s*€/gu,
+  /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|KR|PR|SE|EE|MZB|IK|BEO)\b/gu,
+  new RegExp(String.raw`\b(?:MU|MP)(?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`[λμωπΔεαβρσθū](?:[${MATH_SCRIPT_CHARS}]+)?`, 'gu'),
+  new RegExp(String.raw`\b(?:x|p|u|v|e|h|m|q|w|r|L|K|C|F|y)(?:[${MATH_SCRIPT_CHARS}]+|\([^)]*\))`, 'gu'),
+  /(?<![\p{L}\p{N}_])(?:m|p|w|r|L|K|C|F|y|q|u|v|e|h|x)(?![\p{L}\p{N}_])/gu
+];
+
+function collectMathRanges(text) {
+  const ranges = [];
+
+  MATH_RANGE_PATTERNS.forEach((pattern) => {
+    pattern.lastIndex = 0;
+    for (const match of text.matchAll(pattern)) {
+      const start = match.index ?? 0;
+      const end = start + match[0].length;
+      ranges.push({ start, end });
+    }
+  });
+
+  if (!ranges.length) return [];
+
+  ranges.sort((a, b) => a.start - b.start || a.end - b.end);
+
+  const groups = [];
+  ranges.forEach((range) => {
+    const lastGroup = groups[groups.length - 1];
+    if (!lastGroup) {
+      groups.push({ ...range });
+      return;
+    }
+
+    const gap = text.slice(lastGroup.end, range.start);
+    if (range.start <= lastGroup.end || !gap || MATH_JOINER_REGEX.test(gap)) {
+      lastGroup.end = Math.max(lastGroup.end, range.end);
+      return;
+    }
+
+    groups.push({ ...range });
+  });
+
+  groups.forEach((group, index) => {
+    const nextGroup = groups[index + 1];
+    const trailing = nextGroup ? text.slice(group.end, nextGroup.start) : text.slice(group.end);
+    if (!nextGroup) {
+      const trailingNumber = trailing.match(MATH_TRAILING_NUMBER_REGEX);
+      if (trailingNumber) {
+        group.end += trailingNumber[0].length;
+      }
+    }
+  });
+
+  return groups;
+}
+
+function hasSemanticMathToken(value) {
+  return collectMathRanges(value).length > 0;
+}
+
+function buildSemanticMathFragment(text) {
+  const fragment = document.createDocumentFragment();
+  const groups = collectMathRanges(text);
+  if (!groups.length) {
+    fragment.appendChild(document.createTextNode(text));
+    return { fragment, changed: false };
+  }
+
+  let cursor = 0;
+  groups.forEach((group) => {
+    if (group.start > cursor) {
+      fragment.appendChild(document.createTextNode(text.slice(cursor, group.start)));
+    }
+    const span = document.createElement('span');
+    span.className = 'math-semantic';
+    span.textContent = text.slice(group.start, group.end);
+    fragment.appendChild(span);
+    cursor = group.end;
+  });
+
+  if (cursor < text.length) {
+    fragment.appendChild(document.createTextNode(text.slice(cursor)));
+  }
+
+  return { fragment, changed: true };
+}
+
+function buildSemanticMathMarkup(text) {
+  const groups = collectMathRanges(text);
+  if (!groups.length) {
+    return escapeHtml(text);
+  }
+
+  let cursor = 0;
+  let html = '';
+  groups.forEach((group) => {
+    if (group.start > cursor) {
+      html += escapeHtml(text.slice(cursor, group.start));
+    }
+    html += `<span class="math-semantic">${escapeHtml(text.slice(group.start, group.end))}</span>`;
+    cursor = group.end;
+  });
+  if (cursor < text.length) {
+    html += escapeHtml(text.slice(cursor));
+  }
+
+  return html;
+}
+
+function semanticizeTextNode(node) {
+  const value = node.textContent;
+  if (!value || !value.trim()) return false;
+
+  const segments = value.split(MATH_TEX_REGEX);
+  if (!segments.some((segment) => segment && !segment.startsWith('$') && hasSemanticMathToken(segment))) {
+    return false;
+  }
+
+  const fragment = document.createDocumentFragment();
+  let changed = false;
+  segments.forEach((segment) => {
+    if (!segment) return;
+    if (segment.startsWith('$')) {
+      fragment.appendChild(document.createTextNode(segment));
+      return;
+    }
+    const processed = buildSemanticMathFragment(segment);
+    fragment.appendChild(processed.fragment);
+    changed ||= processed.changed;
+  });
+
+  if (!changed) return false;
+  node.replaceWith(fragment);
+  return true;
+}
+
+function decorateSemanticMath(root) {
+  if (!root) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const value = node.textContent;
+      if (!value || !value.trim()) return NodeFilter.FILTER_REJECT;
+
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+
+      if (parent.closest('mjx-container, script, style, textarea, input, select, option, canvas, svg, .math-block, .math-inline, .math-semantic')) {
+        return NodeFilter.FILTER_REJECT;
+      }
+
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+  textNodes.forEach((node) => {
+    semanticizeTextNode(node);
+  });
+}
+
+function semanticizeElementContent(element) {
+  if (!element || !element.innerHTML?.trim()) return;
+  if (element.querySelector('.math-semantic')) return;
+  const processed = semanticizeMarkupString(element.innerHTML);
+  if (processed !== element.innerHTML) {
+    element.innerHTML = processed;
+  }
+}
+
+function semanticizeMarkupString(markup) {
+  if (markup.includes('class="math-semantic"')) {
+    return markup;
+  }
+  if (!markup || typeof markup !== 'string' || !hasSemanticMathToken(markup.replace(/<[^>]+>/g, ' ').replace(MATH_TEX_REGEX, ' '))) {
+    return markup;
+  }
+  return markup
+    .split(/(<[^>]+>|\$\$[\s\S]+?\$\$|\$[^$]+\$)/g)
+    .map((segment) => {
+      if (!segment) return '';
+      if (segment.startsWith('<') || segment.startsWith('$')) return segment;
+      return buildSemanticMathMarkup(segment);
+    })
+    .join('');
+}
+
+let semanticDataPrepared = false;
+function semanticizeDataStrings(node, seen = new WeakSet()) {
+  if (!node || typeof node !== 'object') return;
+  if (seen.has(node)) return;
+  seen.add(node);
+
+  if (Array.isArray(node)) {
+    node.forEach((item, index) => {
+      if (typeof item === 'string') {
+        node[index] = semanticizeMarkupString(item);
+      } else {
+        semanticizeDataStrings(item, seen);
+      }
+    });
+    return;
+  }
+
+  Object.keys(node).forEach((key) => {
+    const value = node[key];
+    if (typeof value === 'string') {
+      node[key] = semanticizeMarkupString(value);
+    } else if (value && typeof value === 'object') {
+      semanticizeDataStrings(value, seen);
+    }
+  });
+}
+
+function prepareSemanticMathData() {
+  if (semanticDataPrepared) return;
+  semanticDataPrepared = true;
+  semanticizeDataStrings(CONTENT);
+  semanticizeDataStrings(INTUITION);
+}
+
+function decorateSemanticMathSurfaces() {
+  [
+    '#content h1',
+    '#content .section-block p',
+    '#content .section-block li',
+    '#content .formula-card .f-desc',
+    '#content .formula-card .f-var-def',
+    '#content .prob-text',
+    '#content .step-text',
+    '#content .result-badge',
+    '#content .exam-drill-copy',
+    '#content .exam-drill-steps li',
+    '#content .intuition-lead',
+    '#content .intuition-support',
+    '#content .intuition-bullets li',
+    '#content .intuition-bridge-copy',
+    '#content .intuition-detail-copy',
+    '#content .intuition-pattern-then',
+    '#rightPanel .rp-conn',
+    '#rightPanel .rp-mistake .fix',
+    '#rightPanel .rp-f-name',
+    '#sidebar .nav-item > span:not(.num):not(.mastery)'
+  ].forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      semanticizeElementContent(element);
+    });
+  });
+
+  decorateSemanticMath(document.getElementById('content'));
+  decorateSemanticMath(document.getElementById('rightPanel'));
+  decorateSemanticMath(document.getElementById('sidebar'));
+}
+
+prepareSemanticMathData();
+baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
@@ -34,20 +314,10 @@ const baseRenderer = createRenderer({
   checkAnswer: checkAnswerWithTolerance
 });
 
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function stripHtml(value) {
-  return String(value ?? '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+function markRenderSettled(isSettled) {
+  if (typeof window !== 'undefined') {
+    window.__mikroRenderSettled = isSettled;
+  }
 }
 
 function extractTheorySignals(entry) {
@@ -421,26 +691,37 @@ function enhanceRenderedSurface(conceptId) {
 
   decorateConceptLinks();
   stripExamTransferIntro();
-
-  if (!conceptId) return;
-
-  if (activeTab === 'aufgaben' && CONTENT[conceptId]) {
-    const panel = content.querySelector('.panel.active');
-    if (panel) {
-      panel.outerHTML = buildMicroPracticePanel(conceptId);
+  if (conceptId) {
+    if (activeTab === 'aufgaben' && CONTENT[conceptId]) {
+      const panel = content.querySelector('.panel.active');
+      if (panel) {
+        panel.outerHTML = buildMicroPracticePanel(conceptId);
+      }
     }
+
+    if (activeTab === 'intuition' && CONTENT[conceptId]) {
+      const panel = content.querySelector('.panel.active');
+      const intuitionMarkup = buildMicroIntuitionPanel(conceptId);
+      if (panel && intuitionMarkup) {
+        panel.outerHTML = intuitionMarkup;
+      }
+    }
+
+    decorateConceptLinks();
   }
 
-  if (activeTab === 'intuition' && CONTENT[conceptId]) {
-    const panel = content.querySelector('.panel.active');
-    const intuitionMarkup = buildMicroIntuitionPanel(conceptId);
-    if (panel && intuitionMarkup) {
-      panel.outerHTML = intuitionMarkup;
-    }
-  }
-
-  decorateConceptLinks();
-  renderMath(content);
+  markRenderSettled(false);
+  decorateSemanticMathSurfaces();
+  Promise.resolve(renderMath(content)).finally(() => {
+    decorateSemanticMathSurfaces();
+    requestAnimationFrame(() => {
+      decorateSemanticMathSurfaces();
+      setTimeout(() => {
+        decorateSemanticMathSurfaces();
+        markRenderSettled(true);
+      }, 60);
+    });
+  });
 }
 
 export function renderContent(conceptId, tab, initGraphFn) {

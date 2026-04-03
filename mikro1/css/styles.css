@@ -781,7 +781,7 @@ body {
   margin-bottom: 0;
   font-size: 15px;
   line-height: 1.7;
-  max-width: var(--reading-measure);
+  max-width: none;
 }
 .section-block ul, .section-block ol {
   padding-left: 20px;
@@ -830,6 +830,16 @@ body {
   padding: 1px 3px;
   font-family: var(--font-mono);
   font-size: 0.88em;
+}
+
+.math-semantic {
+  color: var(--math-ink);
+  font-family: inherit;
+}
+
+.math-semantic sup,
+.math-semantic sub {
+  color: inherit;
 }
 
 /* ── Warn boxes ────────────────────────────────────────────── */
@@ -969,7 +979,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
   color: var(--text);
   margin-bottom: 18px;
   line-height: 1.7;
-  max-width: 75ch;
+  max-width: none;
 }
 
 .prob-data {
@@ -1330,7 +1340,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .intuition-lead {
   font-size: 16px;
   line-height: 1.76;
-  max-width: 78ch;
+  max-width: none;
 }
 .intuition-support {
   color: var(--muted);
@@ -1408,7 +1418,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .intuition-bridge-copy {
   color: color-mix(in srgb, var(--text) 92%, var(--muted));
   line-height: 1.72;
-  max-width: 82ch;
+  max-width: none;
   margin-bottom: 0;
 }
 .intuition-detail-list {
@@ -1466,7 +1476,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .intuition-detail-copy {
   color: var(--text);
   line-height: 1.7;
-  max-width: 80ch;
+  max-width: none;
 }
 .intuition-detail-copy strong {
   color: var(--text);
@@ -2720,7 +2730,7 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 }
 .solve-trigger:hover { background: rgba(74,144,217,0.10); }
 
-#content p { max-width: var(--reading-measure); }
+#content p { max-width: none; }
 .section { margin-bottom: 30px; }
 
 /* Input transitions */

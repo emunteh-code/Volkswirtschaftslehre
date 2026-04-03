@@ -739,6 +739,12 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
 <div class="hac-title">Wiederholung${due.length > 0 ? ` (${due.length})` : ""}</div>
 <div class="hac-desc">Spaced Repetition für heute</div>
 </div>
+${typeof window !== "undefined" && typeof window.__showFullExamSelect === "function" ? `
+<div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showFullExamSelect()">
+<div class="hac-title">Probeklausuren</div>
+<div class="hac-desc">Vollständige Klausursets mit Lösungen</div>
+</div>
+` : ""}
 </div>`;
 
     const lastId = loadLastId();

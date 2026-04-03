@@ -2298,6 +2298,40 @@ body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
   transition: opacity 0.2s ease-out;
 }
 
+.graph-equation {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent2);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.graph-insights {
+  display: grid;
+  gap: 8px;
+}
+
+.graph-insight-row {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+}
+
+.graph-insight-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 /* ── Tooltip ─────────────────────────────────────────────── */
 .graph-tooltip {
   display: none;

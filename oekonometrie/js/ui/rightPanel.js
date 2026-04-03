@@ -1,5 +1,5 @@
 // ============================================================
-// RIGHT PANEL RENDERER — Mikroökonomik I
+// RIGHT PANEL RENDERER — Ökonometrie
 // Formula quick-reference, concept connections, common mistakes
 // ============================================================
 
@@ -24,39 +24,36 @@ export function clearRightPanel() {
   if (mistakesSection) mistakesSection.hidden = true;
 }
 
-/**
- * Render the right sidebar panel for a concept.
- * @param {string} id - concept ID
- * @param {Function} onNavigate - navigate(id) callback
- */
-export function renderRightPanel(id, onNavigate) {
-  const d = CONTENT[id];
+export function renderRightPanel(id) {
+  const entry = CONTENT[id];
   const links = CONCEPT_LINKS[id];
-  const chMap = Object.fromEntries(CHAPTERS.map(c => [c.id, c]));
+  const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
   const formulasSection = document.getElementById('rpFormulas')?.closest('.rp-section');
   const connectionsSection = document.getElementById('rpConnections')?.closest('.rp-section');
   const mistakesSection = document.getElementById('rpMistakes')?.closest('.rp-section');
 
-  // ── Formulas ──
   const rpF = document.getElementById('rpFormulas');
   if (rpF) {
-    if (d && d.formeln && d.formeln.length) {
-      // Use data-formula-idx instead of inline onclick to avoid escaping issues
-      rpF.innerHTML = d.formeln.map((f, i) => `
-<div class="rp-formula" title="Klicken zum Kopieren" role="button" tabindex="0" data-formula-idx="${i}">
-  <div class="rp-f-name">${f.label}</div>
-  <div class="rp-f-eq">${f.eq}</div>
+    if (entry && entry.formeln && entry.formeln.length) {
+      rpF.innerHTML = entry.formeln.map((formula, index) => `
+<div class="rp-formula" title="Klicken zum Kopieren" role="button" tabindex="0" data-formula-idx="${index}">
+  <div class="rp-f-name">${formula.label}</div>
+  <div class="rp-f-eq">${formula.eq}</div>
 </div>`).join('');
-      // Bind copy handlers after innerHTML is set — formeln values are never user input
-      rpF.querySelectorAll('[data-formula-idx]').forEach(el => {
+
+      rpF.querySelectorAll('[data-formula-idx]').forEach((el) => {
         const idx = parseInt(el.dataset.formulaIdx, 10);
-        const eq  = d.formeln[idx].eq;
+        const eq = entry.formeln[idx].eq;
         const copy = () => navigator.clipboard.writeText(eq).catch(() => {});
         el.addEventListener('click', copy);
-        el.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(); }
+        el.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            copy();
+          }
         });
       });
+
       renderMath(rpF);
       if (formulasSection) formulasSection.hidden = false;
     } else {
@@ -65,19 +62,28 @@ export function renderRightPanel(id, onNavigate) {
     }
   }
 
-  // ── Connections ──
   const rpC = document.getElementById('rpConnections');
   if (rpC) {
     if (links) {
-      let html = '';
-      (links.uses || []).forEach(uid => {
-        const c = chMap[uid];
-        if (c) html += `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${uid}')" onkeydown="if(event.key==='Enter')window.__navigate('${uid}')"><span class="arrow" aria-hidden="true">←</span> ${c.title}</div>`;
-      });
-      (links.usedBy || []).forEach(uid => {
-        const c = chMap[uid];
-        if (c) html += `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${uid}')" onkeydown="if(event.key==='Enter')window.__navigate('${uid}')"><span class="arrow" aria-hidden="true">→</span> ${c.title}</div>`;
-      });
+      const groups = [];
+      const uses = (links.uses || []).map((uid) => chapterMap[uid]).filter(Boolean);
+      const usedBy = (links.usedBy || []).map((uid) => chapterMap[uid]).filter(Boolean);
+
+      if (uses.length) {
+        groups.push(`<div class="rp-link-group">
+<div class="rp-group-label">Setzt voraus</div>
+${uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">←</span> ${chapter.title}</div>`).join('')}
+</div>`);
+      }
+
+      if (usedBy.length) {
+        groups.push(`<div class="rp-link-group">
+<div class="rp-group-label">Wird gebraucht für</div>
+${usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">→</span> ${chapter.title}</div>`).join('')}
+</div>`);
+      }
+
+      const html = groups.join('');
       rpC.innerHTML = html;
       if (connectionsSection) connectionsSection.hidden = !html;
     } else {
@@ -86,20 +92,18 @@ export function renderRightPanel(id, onNavigate) {
     }
   }
 
-  // ── Common Mistakes ──
   const rpM = document.getElementById('rpMistakes');
-  if (rpM && d && d.theorie) {
+  if (rpM && entry && entry.theorie) {
     try {
       const parser = new DOMParser();
-      const doc = parser.parseFromString('<div>' + d.theorie + '</div>', 'text/html');
+      const doc = parser.parseFromString(`<div>${entry.theorie}</div>`, 'text/html');
       const warnBoxes = doc.querySelectorAll('.warn-box');
       if (warnBoxes.length) {
-        rpM.innerHTML = Array.from(warnBoxes).map(wb => {
-          const strong = wb.querySelector('strong');
+        rpM.innerHTML = Array.from(warnBoxes).map((warningBox) => {
+          const strong = warningBox.querySelector('strong');
           const title = strong ? strong.textContent.trim() : 'Fehler';
-          // Remove the strong element so we get only the body text/HTML
           if (strong) strong.remove();
-          const bodyHtml = wb.innerHTML.trim();
+          const bodyHtml = warningBox.innerHTML.trim();
           return `<div class="rp-mistake">
 <div class="err">${title}</div>
 <div class="fix">${bodyHtml}</div>
@@ -111,7 +115,7 @@ export function renderRightPanel(id, onNavigate) {
         rpM.innerHTML = '';
         if (mistakesSection) mistakesSection.hidden = true;
       }
-    } catch (e) {
+    } catch {
       rpM.innerHTML = '';
       if (mistakesSection) mistakesSection.hidden = true;
     }

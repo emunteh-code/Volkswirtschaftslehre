@@ -1,137 +1,103 @@
 // ============================================================
-// GRAPH PANEL RENDERER — Mikroökonomik I
-// Returns the HTML for the interactive graph controls + canvas
+// GRAPH PANEL RENDERER — Makroökonomik I
+// Subject-correct interactive macro visuals for benchmark concepts
 // ============================================================
 
-/** Set of concept IDs that have interactive graphs */
 export const GRAPH_CONCEPTS = new Set([
-  'budget',
-  'indiff',
-  'hausopt',
-  'slutsky',
-  'produktion',
-  'grts',
-  'kosten',
-  'markt',
-  'monopol'
+  'guetermarkt',
+  'multiplikator',
+  'geldnachfrage',
+  'islm',
+  'politikmix',
+  'arbeitsmarkt',
+  'phillips'
 ]);
 
-/**
- * Render the graph panel HTML for a given concept.
- * @param {string} id - concept ID
- * @returns {string} HTML string
- */
 export function renderGraphPanel(id) {
   const graphConfigs = {
-    budget: `
+    guetermarkt: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Interaktive Budgetgerade</h3>
+<h3 class="graph-panel-title">Keynes-Kreuz: Nachfrage und Gleichgewicht</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawBudget()"><div class="val" id="v_m" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="2" oninput="window.__drawBudget()"><div class="val" id="v_p1" aria-live="polite">2</div></div>
-<div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" oninput="window.__drawBudget()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
+<div class="ctrl-group"><label for="g_goods_a">Autonome Nachfrage A</label><input type="range" id="g_goods_a" min="80" max="260" step="10" value="150" oninput="window.initGraph('guetermarkt', false)"><div class="val" id="v_goods_a" aria-live="polite">150</div></div>
+<div class="ctrl-group"><label for="g_goods_c1">Konsumquote c₁</label><input type="range" id="g_goods_c1" min="0.3" max="0.9" step="0.05" value="0.70" oninput="window.initGraph('guetermarkt', false)"><div class="val" id="v_goods_c1" aria-live="polite">0.70</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Budgetgerade — interaktiv. Verwenden Sie die Regler um Einkommen und Preise anzupassen."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Keynes-Kreuz mit Nachfragegerade und 45-Grad-Linie."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    indiff: `
+    multiplikator: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Indifferenzkurven u(x₁,x₂) = x₁·x₂</h3>
+<h3 class="graph-panel-title">Multiplikator: Erstimpuls und Gesamteffekt</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_u1">Nutzenniveau ū₁</label><input type="range" id="g_u1" min="1" max="50" value="12" oninput="window.__drawIndiff()"><div class="val" id="v_u1" aria-live="polite">12</div></div>
-<div class="ctrl-group"><label for="g_u2">Nutzenniveau ū₂</label><input type="range" id="g_u2" min="1" max="50" value="24" oninput="window.__drawIndiff()"><div class="val" id="v_u2" aria-live="polite">24</div></div>
+<div class="ctrl-group"><label for="g_mult_a0">Ausgangsnachfrage A₀</label><input type="range" id="g_mult_a0" min="80" max="220" step="10" value="130" oninput="window.initGraph('multiplikator', false)"><div class="val" id="v_mult_a0" aria-live="polite">130</div></div>
+<div class="ctrl-group"><label for="g_mult_impulse">Impuls ΔG</label><input type="range" id="g_mult_impulse" min="10" max="80" step="5" value="40" oninput="window.initGraph('multiplikator', false)"><div class="val" id="v_mult_impulse" aria-live="polite">40</div></div>
+<div class="ctrl-group"><label for="g_mult_c1">Konsumquote c₁</label><input type="range" id="g_mult_c1" min="0.3" max="0.9" step="0.05" value="0.75" oninput="window.initGraph('multiplikator', false)"><div class="val" id="v_mult_c1" aria-live="polite">0.75</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Zwei Indifferenzkurven für u = x₁·x₂. Höherer Nutzen ist weiter vom Ursprung entfernt."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Keynes-Kreuz mit alter und neuer Nachfragekurve sowie Multiplikatoreffekt."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    hausopt: `
+    geldnachfrage: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Haushaltsoptimum — u = x₁·x₂</h3>
+<h3 class="graph-panel-title">Geldmarkt: Geldnachfrage und reales Geldangebot</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawHausopt()"><div class="val" id="v_m" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="4" oninput="window.__drawHausopt()"><div class="val" id="v_p1" aria-live="polite">4</div></div>
-<div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" oninput="window.__drawHausopt()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
+<div class="ctrl-group"><label for="g_money_mp">Reale Geldmenge M/P</label><input type="range" id="g_money_mp" min="20" max="80" step="5" value="45" oninput="window.initGraph('geldnachfrage', false)"><div class="val" id="v_money_mp" aria-live="polite">45</div></div>
+<div class="ctrl-group"><label for="g_money_y">Einkommen Y</label><input type="range" id="g_money_y" min="60" max="160" step="5" value="100" oninput="window.initGraph('geldnachfrage', false)"><div class="val" id="v_money_y" aria-live="polite">100</div></div>
+<div class="ctrl-group"><label for="g_money_h">Zinssensitivität h</label><input type="range" id="g_money_h" min="6" max="18" step="1" value="10" oninput="window.initGraph('geldnachfrage', false)"><div class="val" id="v_money_h" aria-live="polite">10</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Haushaltsoptimum — Tangentialpunkt von Budgetgerade und Indifferenzkurve."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Geldmarkt mit fallender Geldnachfrage und vertikalem realem Geldangebot."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    produktion: `
+    islm: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Isoquanten der Produktionsfunktion</h3>
+<h3 class="graph-panel-title">IS-LM bei Zinssteuerung</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_prod_alpha">Kapitalelastizität α</label><input type="range" id="g_prod_alpha" min="0.2" max="0.8" step="0.05" value="0.5" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_alpha" aria-live="polite">0.50</div></div>
-<div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_prod_l">Arbeit L</label><input type="range" id="g_prod_l" min="1" max="12" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_l" aria-live="polite">4.0</div></div>
+<div class="ctrl-group"><label for="g_islm_aut">Autonome Nachfrage</label><input type="range" id="g_islm_aut" min="60" max="180" step="5" value="110" oninput="window.initGraph('islm', false)"><div class="val" id="v_islm_aut" aria-live="polite">110</div></div>
+<div class="ctrl-group"><label for="g_islm_slope">IS-Sensitivität</label><input type="range" id="g_islm_slope" min="4" max="14" step="1" value="8" oninput="window.initGraph('islm', false)"><div class="val" id="v_islm_slope" aria-live="polite">8</div></div>
+<div class="ctrl-group"><label for="g_islm_i">Zielzins ī</label><input type="range" id="g_islm_i" min="1" max="8" step="0.25" value="4" oninput="window.initGraph('islm', false)"><div class="val" id="v_islm_i" aria-live="polite">4.00</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Isoquanten einer Cobb-Douglas-Produktionsfunktion mit markiertem Punkt."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: IS-Kurve und horizontale Zinsregel."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    grts: `
+    politikmix: `
 <div class="graph-container">
-<h3 class="graph-panel-title">GRTS entlang einer Isoquante</h3>
+<h3 class="graph-panel-title">Politikmix und Crowding-Out</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_prod_alpha">Kapitalelastizität α</label><input type="range" id="g_prod_alpha" min="0.2" max="0.8" step="0.05" value="0.35" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_alpha" aria-live="polite">0.35</div></div>
-<div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_prod_l">Arbeit L</label><input type="range" id="g_prod_l" min="1" max="12" step="0.5" value="5" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_l" aria-live="polite">5.0</div></div>
+<div class="ctrl-group"><label for="g_policy_shift">Fiskalimpuls</label><input type="range" id="g_policy_shift" min="10" max="70" step="5" value="35" oninput="window.initGraph('politikmix', false)"><div class="val" id="v_policy_shift" aria-live="polite">35</div></div>
+<div class="ctrl-group"><label for="g_policy_lm">LM-Steigung</label><input type="range" id="g_policy_lm" min="0.02" max="0.10" step="0.01" value="0.06" oninput="window.initGraph('politikmix', false)"><div class="val" id="v_policy_lm" aria-live="polite">0.06</div></div>
+<div class="ctrl-group"><label for="g_policy_i0">Ausgangszins</label><input type="range" id="g_policy_i0" min="1" max="7" step="0.25" value="3.5" oninput="window.initGraph('politikmix', false)"><div class="val" id="v_policy_i0" aria-live="polite">3.50</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Isoquante mit Tangente zur Veranschaulichung der GRTS."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Politikmix mit alter und neuer IS-Kurve sowie LM-Kurve."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    kosten: `
+    arbeitsmarkt: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Kostenminimum: Isoquante und Isokostengerade</h3>
+<h3 class="graph-panel-title">Arbeitsmarkt: WS-PS-Gleichgewicht</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_cost_alpha">Kapitalelastizität α</label><input type="range" id="g_cost_alpha" min="0.2" max="0.8" step="0.05" value="0.5" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_alpha" aria-live="polite">0.50</div></div>
-<div class="ctrl-group"><label for="g_cost_y">Output ȳ</label><input type="range" id="g_cost_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_y" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_cost_w">Lohnsatz w</label><input type="range" id="g_cost_w" min="1" max="8" step="0.25" value="4" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_w" aria-live="polite">4.00</div></div>
-<div class="ctrl-group"><label for="g_cost_r">Kapitalpreis r</label><input type="range" id="g_cost_r" min="0.5" max="6" step="0.25" value="1" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_r" aria-live="polite">1.00</div></div>
+<div class="ctrl-group"><label for="g_labour_z">Arbeitsmarktparameter z</label><input type="range" id="g_labour_z" min="0.70" max="1.20" step="0.05" value="1.00" oninput="window.initGraph('arbeitsmarkt', false)"><div class="val" id="v_labour_z" aria-live="polite">1.00</div></div>
+<div class="ctrl-group"><label for="g_labour_mu">Markup μ</label><input type="range" id="g_labour_mu" min="0.05" max="0.50" step="0.05" value="0.20" oninput="window.initGraph('arbeitsmarkt', false)"><div class="val" id="v_labour_mu" aria-live="polite">0.20</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Kostenminimum mit Isoquante, Isokostengerade und Tangentialpunkt."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: WS- und PS-Kurve mit markierter natürlicher Arbeitslosigkeit."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    markt: `
+    phillips: `
 <div class="graph-container">
-<h3 class="graph-panel-title">Marktgleichgewicht und Wohlfahrt</h3>
+<h3 class="graph-panel-title">Phillipskurve und Inflationserwartungen</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_d_int">Nachfrage-Intercept a</label><input type="range" id="g_d_int" min="40" max="120" step="5" value="100" oninput="window.initGraph('markt', false)"><div class="val" id="v_d_int" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_d_slope">Nachfrage-Steigung b</label><input type="range" id="g_d_slope" min="0.2" max="1.2" step="0.05" value="0.6" oninput="window.initGraph('markt', false)"><div class="val" id="v_d_slope" aria-live="polite">0.60</div></div>
-<div class="ctrl-group"><label for="g_s_int">Angebot-Intercept c</label><input type="range" id="g_s_int" min="0" max="60" step="5" value="20" oninput="window.initGraph('markt', false)"><div class="val" id="v_s_int" aria-live="polite">20</div></div>
-<div class="ctrl-group"><label for="g_s_slope">Angebot-Steigung d</label><input type="range" id="g_s_slope" min="0.1" max="1.0" step="0.05" value="0.4" oninput="window.initGraph('markt', false)"><div class="val" id="v_s_slope" aria-live="polite">0.40</div></div>
+<div class="ctrl-group"><label for="g_pc_pie">Erwartete Inflation πᵉ</label><input type="range" id="g_pc_pie" min="0" max="5" step="0.25" value="2.0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_pie" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_pc_un">Natürliche ALQ uₙ</label><input type="range" id="g_pc_un" min="3" max="8" step="0.25" value="5.0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_un" aria-live="polite">5.00</div></div>
+<div class="ctrl-group"><label for="g_pc_alpha">Sensitivität α</label><input type="range" id="g_pc_alpha" min="0.4" max="1.5" step="0.1" value="0.9" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_alpha" aria-live="polite">0.9</div></div>
+<div class="ctrl-group"><label for="g_pc_u">Aktuelle ALQ u</label><input type="range" id="g_pc_u" min="3" max="9" step="0.25" value="4.25" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_u" aria-live="polite">4.25</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Marktgleichgewicht mit Nachfrage, Angebot sowie Konsumenten- und Produzentenrente."></canvas>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Erwartungsaugmentierte Phillipskurve mit aktuellem Punkt und NAIRU."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    monopol: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Monopol: p = a − y, C = c·y²</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_a">Nachfragepreis a</label><input type="range" id="g_a" min="2" max="20" value="10" oninput="window.__drawMonopol()"><div class="val" id="v_a" aria-live="polite">10</div></div>
-<div class="ctrl-group"><label for="g_c">Grenzkostenpar. c</label><input type="range" id="g_c" min="0.1" max="5" step="0.1" value="1" oninput="window.__drawMonopol()"><div class="val" id="v_c" aria-live="polite">1</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Monopoloptimum — Nachfrage, Grenzerlös, Grenzkosten und Wohlfahrtsverlust."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    slutsky: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Slutsky-Zerlegung (u = x₁·x₂)</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" step="1" oninput="window.__drawSlutsky()"><div class="val" id="v_m" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_p1_0">Preis p₁ (initial)</label><input type="range" id="g_p1_0" min="1" max="20" value="4" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_0" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_p1_1">Preis p₁ (neu)</label><input type="range" id="g_p1_1" min="1" max="20" value="8" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_1" aria-live="polite">8.0</div></div>
-<div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Slutsky-Zerlegung — Substitutions- und Einkommenseffekt einer Preisänderung."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
+</div>`
   };
 
-  return `<div class="panel active">${graphConfigs[id] || ''}</div>`;
+  return `<div class="panel active">${graphConfigs[id] || '<div class="section-block"><h3>Grafik</h3><p>Dieses Thema wird in Makroökonomik I hier über Theorie-, Aufgaben- und Intuitionslogik aufgebaut; ein zusätzliches Diagramm ist für dieses Konzept nicht nötig.</p></div>'}</div>`;
 }

@@ -22,6 +22,7 @@
   --accent3:  #e05252;   /* muted red — errors, warnings */
   --accent-fg: #ffffff;  /* text on accent-coloured backgrounds */
   --semantic-green: #4caf7c; /* semantic only: correct, done, positive */
+  --math-ink: var(--semantic-green);
 
   /* Neutral dark palette */
   --bg:        #0f1114;
@@ -81,6 +82,7 @@ body.light-mode {
   --accent3:   #c0392b;
   --accent-fg: #ffffff;
   --semantic-green: #2d8659; /* semantic only: correct, done, positive */
+  --math-ink: var(--semantic-green);
 
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05);
@@ -199,7 +201,7 @@ body {
 .portal-switcher {
   padding: 12px 14px;
   border-bottom: 1px solid var(--border);
-  display: grid;
+  display: none !important;
   gap: 10px;
 }
 .portal-switcher-head {
@@ -657,22 +659,22 @@ body {
 .math-block {
   background: var(--surface2);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent2);
+  border-left: 3px solid var(--math-ink);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
   padding: 18px 28px;
   margin: 14px 0;
   overflow-x: auto;
   text-align: center;
-  color: var(--text);
+  color: var(--math-ink);
   font-family: var(--font-mono);
   font-size: 1.05em;
   line-height: 1.9;
 }
-.math-block mjx-container { color: var(--semantic-green) !important; }
-.math-block mjx-container * { color: var(--semantic-green) !important; }
+.math-block mjx-container { color: var(--math-ink) !important; }
+.math-block mjx-container * { color: var(--math-ink) !important; }
 
 .math-inline {
-  color: var(--text);
+  color: var(--math-ink);
   padding: 1px 3px;
   font-family: var(--font-mono);
   font-size: 0.88em;
@@ -720,7 +722,7 @@ body {
 .info-card .value {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--accent);
+  color: var(--math-ink);
   font-weight: 600;
 }
 .info-card p { font-size: 12px; color: var(--text); margin-top: 4px; margin-bottom: 0; max-width: none; }
@@ -869,13 +871,13 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 .result-badge {
   display: inline-block;
-  background: rgba(74,144,217,0.08);
-  border: 1px solid rgba(74,144,217,0.22);
+  background: color-mix(in srgb, var(--math-ink) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--math-ink) 24%, transparent);
   border-radius: var(--r-sm);
   padding: 4px 10px;
   font-size: 12px;
   font-family: var(--font-mono);
-  color: var(--accent);
+  color: var(--math-ink);
   font-weight: 600;
   margin-top: 6px;
 }
@@ -901,6 +903,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
   display: grid;
   gap: 16px;
 }
+.exam-drill-panel > p { display: none; }
 
 .exam-drill-grid {
   display: grid;
@@ -987,7 +990,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .formula-card .f-eq {
   font-family: var(--font-mono);
   font-size: 1em;
-  color: var(--semantic-green);
+  color: var(--math-ink);
   margin-bottom: 10px;
   min-height: 2em;
   display: flex;
@@ -1040,7 +1043,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 }
 .f-var-key {
   font-family: var(--font-mono);
-  color: var(--accent2);
+  color: var(--math-ink);
   font-size: 12px;
   white-space: nowrap;
   min-width: 3.5em;
@@ -2003,7 +2006,7 @@ body.focus-mode #rightPanel { display: none; }
   color: var(--muted); font-size: 10px; letter-spacing: 0.4px;
   margin-bottom: 3px; font-family: var(--font-body);
 }
-.rp-formula .rp-f-eq { color: var(--accent); font-family: var(--font-mono); font-size: 12px; word-break: break-word; }
+.rp-formula .rp-f-eq { color: var(--math-ink); font-family: var(--font-mono); font-size: 12px; word-break: break-word; }
 
 .rp-conn {
   display: flex; align-items: center; gap: 5px;
@@ -2156,39 +2159,60 @@ mjx-container[jax="CHTML"][display="true"] {
   margin: 0.8em auto;
   padding: 0.4em 0.7em;
   background: rgba(255,255,255,0.02);
-  border-left: 3px solid var(--accent2);
+  border-left: 3px solid var(--math-ink);
   border-radius: 0 5px 5px 0;
   overflow-x: auto;
 }
 mjx-container[jax="CHTML"][display="true"]:hover {
-  background: rgba(74,144,217,0.04);
+  background: color-mix(in srgb, var(--math-ink) 10%, transparent);
   transition: background 0.2s;
 }
 .math-block mjx-container[jax="CHTML"][display="true"] {
   margin: 0.3em auto; border: none; background: transparent; padding: 0;
 }
 
-/* MathJax color contexts — restrained: inherit text by default */
+/* MathJax color contexts — green semantic math ink across Mikro I */
 .section-block p mjx-container,
+.section-block li mjx-container,
 .concept-motivation mjx-container,
-.intuition-text mjx-container { color: inherit; }
+.intuition-text mjx-container,
+.warn-box mjx-container,
+.info-card p mjx-container,
+.info-card .value mjx-container,
+.f-eq mjx-container,
+.result-badge mjx-container,
+.prob-text mjx-container,
+.step-text mjx-container,
+.exam-drill-solution mjx-container,
+.rp-formula .rp-f-eq mjx-container,
+.rp-mistake .fix mjx-container {
+  color: var(--math-ink) !important;
+}
 
 .section-block p mjx-container *,
-.concept-motivation mjx-container * { color: inherit; }
+.section-block li mjx-container *,
+.concept-motivation mjx-container *,
+.intuition-text mjx-container *,
+.warn-box mjx-container *,
+.info-card p mjx-container *,
+.info-card .value mjx-container *,
+.f-eq mjx-container *,
+.result-badge mjx-container *,
+.prob-text mjx-container *,
+.step-text mjx-container *,
+.exam-drill-solution mjx-container *,
+.rp-formula .rp-f-eq mjx-container *,
+.rp-mistake .fix mjx-container *,
+.sStep-q mjx-container *,
+.exam-q-text mjx-container * {
+  color: var(--math-ink) !important;
+}
 
-/* Accent color for formula cards and result badges only — green for math semantics */
-.f-eq mjx-container,
-.f-eq mjx-container * { color: var(--semantic-green) !important; font-size: 1.0em; }
-.result-badge mjx-container,
-.result-badge mjx-container * { color: var(--semantic-green); }
-
-/* Task/exam contexts: green for mathematical notation */
-.prob-text mjx-container,
 .sStep-q mjx-container,
-.exam-q-text mjx-container { color: var(--semantic-green); }
+.exam-q-text mjx-container { color: var(--math-ink) !important; }
 .prob-text mjx-container *,
 .sStep-q mjx-container *,
-.exam-q-text mjx-container * { color: var(--semantic-green); }
+.exam-q-text mjx-container * { color: var(--math-ink) !important; }
 
 .exam-q-card mjx-container { font-size: 1.15rem !important; }
 
@@ -2335,7 +2359,7 @@ body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
 .graph-info .gi-eq {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--accent2);
+  color: var(--math-ink);
   margin-bottom: 6px;
 }
 

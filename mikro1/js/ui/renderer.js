@@ -12,17 +12,7 @@ import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 
-export const {
-  renderContent,
-  renderHome,
-  toggleSolution,
-  copyFormula,
-  showDashboard,
-  setRendererState,
-  renderPracticePanel,
-  checkTaskStep,
-  revealTaskStep
-} = createRenderer({
+const baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
@@ -41,3 +31,24 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance
 });
+
+function stripExamTransferIntro() {
+  document.querySelectorAll('.exam-drill-panel > p').forEach((intro) => intro.remove());
+}
+
+export function renderContent(conceptId, tab, initGraphFn) {
+  baseRenderer.renderContent(conceptId, tab, initGraphFn);
+  stripExamTransferIntro();
+}
+
+export const {
+  renderHome,
+  toggleSolution,
+  toggleExamDrill,
+  copyFormula,
+  showDashboard,
+  setRendererState,
+  renderPracticePanel,
+  checkTaskStep,
+  revealTaskStep
+} = baseRenderer;

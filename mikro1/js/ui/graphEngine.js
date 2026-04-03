@@ -299,6 +299,15 @@ class GraphEngine {
       const cv = n => s.getPropertyValue(n).trim();
       // Use the browser's resolved font so canvas always matches page typography
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
+      const accent = cv('--accent') || '#4a90d9';
+      const semanticGreen = cv('--semantic-green') || '#4caf7c';
+      const warningRed = cv('--accent3') || '#e05252';
+      const optimum = cv('--sys-orange') || '#d49a4a';
+      const budgetShift = '#b57928';
+      const budgetComp = '#6f7d3c';
+      const indiffAlt = '#8b5e7a';
+      const revenue = '#8b5e7a';
+      const competition = '#5f7284';
       this._col = {
         bg:       cv('--bg')        || '#0f1114',
         grid:     cv('--border')    || '#2e3338',
@@ -307,12 +316,34 @@ class GraphEngine {
         muted:    cv('--muted')     || '#8a8f98',
         label:    cv('--text')      || '#e8e8ed',
         text:     cv('--text')      || '#e8e8ed',
-        accent:   cv('--accent')    || '#4a90d9',
+        accent:   accent,
         accent2:  cv('--accent2')   || '#5a9fd4',
-        warn:     cv('--accent3')   || '#e05252',
+        warn:     warningRed,
         card:     cv('--card')      || '#1a1d21',
         fontMono: cv('--font-mono') || resolvedFont,
         fontBody: resolvedFont,
+        math: semanticGreen,
+        budgetBase: accent,
+        budgetShift,
+        budgetComp,
+        budgetFill: hexToRgba(accent, 0.08),
+        indiffBase: semanticGreen,
+        indiffAlt,
+        optimum,
+        tangent: revenue,
+        demand: accent,
+        supply: semanticGreen,
+        mr: revenue,
+        mc: budgetComp,
+        monopoly: optimum,
+        competition,
+        welfare: warningRed,
+        welfareFill: hexToRgba(warningRed, 0.22),
+        profit: budgetShift,
+        profitFill: hexToRgba(budgetShift, 0.18),
+        consumerFill: hexToRgba(accent, 0.14),
+        producerFill: hexToRgba(semanticGreen, 0.16),
+        guide: competition
       };
       return this._col;
     }

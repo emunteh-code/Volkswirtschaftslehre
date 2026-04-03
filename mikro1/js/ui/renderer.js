@@ -11,6 +11,7 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
+import { formalizeMarkupString } from '../utils/formalMath.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
 let baseRenderer;
@@ -47,11 +48,13 @@ function decodeHtmlEntities(value) {
 }
 
 function renderDecodedText(value) {
-  return escapeHtml(decodeHtmlEntities(String(value ?? '')));
+  return formalizeMarkupString(decodeHtmlEntities(String(value ?? '')));
 }
 
 function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
-  const source = stripMarkup ? stripHtml(value) : decodeHtmlEntities(String(value ?? ''));
+  const source = formalizeMarkupString(
+    stripMarkup ? stripHtml(value) : decodeHtmlEntities(String(value ?? ''))
+  );
   return source
     .split(MATH_TEX_REGEX)
     .map((segment) => {
@@ -283,7 +286,7 @@ function semanticizeDataStrings(node, seen = new WeakSet()) {
   Object.keys(node).forEach((key) => {
     const value = node[key];
     if (typeof value === 'string') {
-      node[key] = semanticizeMarkupString(value);
+      node[key] = semanticizeMarkupString(formalizeMarkupString(value));
     } else if (value && typeof value === 'object') {
       semanticizeDataStrings(value, seen);
     }

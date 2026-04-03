@@ -3,6 +3,8 @@
 // Returns the HTML for the interactive graph controls + canvas
 // ============================================================
 
+import { formalizeMarkupString } from '../utils/formalMath.js';
+
 /** Set of concept IDs that have interactive graphs */
 export const GRAPH_CONCEPTS = new Set([
   'budget',
@@ -35,9 +37,9 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    indiff: `
+    indiff: String.raw`
 <div class="graph-container">
-<h3 class="graph-panel-title">Indifferenzkurven u(x₁,x₂) = x₁·x₂</h3>
+<h3 class="graph-panel-title">Indifferenzkurven $u(x_1,x_2) = x_1 \cdot x_2$</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_u1">Nutzenniveau ū₁</label><input type="range" id="g_u1" min="1" max="50" value="12" oninput="window.__drawIndiff()"><div class="val" id="v_u1" aria-live="polite">12</div></div>
 <div class="ctrl-group"><label for="g_u2">Nutzenniveau ū₂</label><input type="range" id="g_u2" min="1" max="50" value="24" oninput="window.__drawIndiff()"><div class="val" id="v_u2" aria-live="polite">24</div></div>
@@ -46,9 +48,9 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    hausopt: `
+    hausopt: String.raw`
 <div class="graph-container">
-<h3 class="graph-panel-title">Haushaltsoptimum — u = x₁·x₂</h3>
+<h3 class="graph-panel-title">Haushaltsoptimum — $u(x_1,x_2) = x_1 \cdot x_2$</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawHausopt()"><div class="val" id="v_m" aria-live="polite">100</div></div>
 <div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="4" oninput="window.__drawHausopt()"><div class="val" id="v_p1" aria-live="polite">4</div></div>
@@ -108,9 +110,9 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    monopol: `
+    monopol: String.raw`
 <div class="graph-container">
-<h3 class="graph-panel-title">Monopol: p = a − y, C = c·y²</h3>
+<h3 class="graph-panel-title">Monopol: $p(y) = a - y$, $C(y) = c \cdot y^2$</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_a">Nachfragepreis a</label><input type="range" id="g_a" min="2" max="20" value="10" oninput="window.__drawMonopol()"><div class="val" id="v_a" aria-live="polite">10</div></div>
 <div class="ctrl-group"><label for="g_c">Grenzkostenpar. c</label><input type="range" id="g_c" min="0.1" max="5" step="0.1" value="1" oninput="window.__drawMonopol()"><div class="val" id="v_c" aria-live="polite">1</div></div>
@@ -119,9 +121,9 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    slutsky: `
+    slutsky: String.raw`
 <div class="graph-container">
-<h3 class="graph-panel-title">Slutsky-Zerlegung (u = x₁·x₂)</h3>
+<h3 class="graph-panel-title">Slutsky-Zerlegung ($u(x_1,x_2) = x_1 \cdot x_2$)</h3>
 <div class="graph-controls">
 <div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" step="1" oninput="window.__drawSlutsky()"><div class="val" id="v_m" aria-live="polite">100</div></div>
 <div class="ctrl-group"><label for="g_p1_0">Preis p₁ (initial)</label><input type="range" id="g_p1_0" min="1" max="20" value="4" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_0" aria-live="polite">4.0</div></div>
@@ -133,5 +135,5 @@ export function renderGraphPanel(id) {
 </div>`,
   };
 
-  return `<div class="panel active">${graphConfigs[id] || ''}</div>`;
+  return `<div class="panel active">${formalizeMarkupString(graphConfigs[id] || '')}</div>`;
 }

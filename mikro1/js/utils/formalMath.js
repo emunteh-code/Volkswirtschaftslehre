@@ -1,0 +1,164 @@
+const HTML_OR_TEX_SEGMENT_REGEX = /(<[^>]+>|\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
+const TEX_SEGMENT_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
+
+const SUBSCRIPT_MAP = {
+  '₀': '0',
+  '₁': '1',
+  '₂': '2',
+  '₃': '3',
+  '₄': '4',
+  '₅': '5',
+  '₆': '6',
+  '₇': '7',
+  '₈': '8',
+  '₉': '9',
+  'ᵢ': 'i',
+  'ₘ': 'm',
+  'ₖ': 'k',
+  'ₗ': 'l',
+  'ᵥ': 'v',
+  'ₚ': 'p'
+};
+
+const SUPERSCRIPT_MAP = {
+  '²': '2',
+  '³': '3'
+};
+
+const TOKEN_SOURCE = String.raw`(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|MP(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|\([^)]*\)|\*)?|[πλσωαβμūȳ])`;
+const STANDALONE_TOKENS = [
+  /\b(?:GRS|GRTS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB)\b/gu,
+  /(?:MU|MP)(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?/gu,
+  new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(?:[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|\([^)]*\)|\*)?|[πλσωαβμūȳ])(?![\p{L}\p{N}])`, 'gu')
+];
+
+function decodeHtmlEntities(value) {
+  if (typeof value !== 'string' || !value.includes('&')) return String(value ?? '');
+  if (typeof document === 'undefined') {
+    return value
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+  }
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = value;
+  return textarea.value;
+}
+
+function normalizeSubscripts(token) {
+  return token.replace(/([A-Za-zπλσωαβμūȳ]+)([₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+)/gu, (_, base, suffix) => {
+    const normalized = Array.from(suffix).map((char) => SUBSCRIPT_MAP[char] || char).join('');
+    return `${base}_${normalized.length > 1 ? `{${normalized}}` : normalized}`;
+  });
+}
+
+function normalizeSuperscripts(token) {
+  return token.replace(/([A-Za-zπλσωαβμūȳ0-9])([²³]+)/gu, (_, base, suffix) => {
+    const normalized = Array.from(suffix).map((char) => SUPERSCRIPT_MAP[char] || char).join('');
+    return `${base}^{${normalized}}`;
+  });
+}
+
+function normalizeDecorators(token) {
+  return token
+    .replace(/_min\b/gu, '_{\\min}')
+    .replace(/_vk\b/gu, '_{vk}')
+    .replace(/_m\b/gu, '_m')
+    .replace(/_c\b/gu, '_c')
+    .replace(/_0\b/gu, '_0')
+    .replace(/_1\b/gu, '_1')
+    .replace(/_2\b/gu, '_2')
+    .replace(/([A-Za-zπλσωαβμūȳ])\*/gu, '$1^*');
+}
+
+function normalizeMathExpression(expression) {
+  return normalizeDecorators(
+    normalizeSuperscripts(
+      normalizeSubscripts(
+        String(expression ?? '')
+          .replace(/[−–]/g, '-')
+          .replace(/≤/g, String.raw`\le `)
+          .replace(/≥/g, String.raw`\ge `)
+          .replace(/→/g, String.raw`\to `)
+          .replace(/·/g, String.raw`\cdot `)
+          .replace(/\s+/g, ' ')
+          .trim()
+      )
+    )
+  );
+}
+
+function wrapMath(expression) {
+  return `$${normalizeMathExpression(expression)}$`;
+}
+
+function applyExpressionReplacements(text) {
+  const replacements = [
+    {
+      pattern: new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(GRTS)\s*=\s*(MP_L|MPₗ)\s*\/\s*(MP_K|MPₖ)(?![\p{L}\p{N}])`, 'gu'),
+      replace: (_, lhs, num, den) => wrapMath(`${lhs} = \\frac{${num}}{${den}}`)
+    },
+    {
+      pattern: new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(GRS)\s*=\s*(p(?:_1|₁))\s*\/\s*(p(?:_2|₂))(?![\p{L}\p{N}])`, 'gu'),
+      replace: (_, lhs, num, den) => wrapMath(`${lhs} = \\frac{${num}}{${den}}`)
+    },
+    {
+      pattern: new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(GRTS|GRS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|MP(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|\([^)]*\)|\*)?|[πλσωαβμūȳ])\s*(=|<|>|\\le|\\ge|≤|≥)\s*(GRTS|GRS|MR|MC|AC|AVC|CV|EV|DWL|SE|EE|MZB|MU(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|MP(?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢ]+)?|[FupCMyxLKwrqmveh](?:_[A-Za-z0-9]+|[₀₁₂₃₄₅₆₇₈₉ᵢₘₖₗᵥₚ]+|\([^)]*\)|\*)?|[πλσωαβμūȳ]|\d+(?:[.,]\d+)?(?:\s*€)?)(?![\p{L}\p{N}])`, 'gu'),
+      replace: (_, lhs, rel, rhs) => wrapMath(`${lhs} ${rel} ${rhs}`)
+    },
+    {
+      pattern: new RegExp(String.raw`(?<![\p{L}\p{N}$\\])(${TOKEN_SOURCE})\s*\/\s*(${TOKEN_SOURCE})(?![\p{L}\p{N}])`, 'gu'),
+      replace: (_, numerator, denominator) => wrapMath(String.raw`\frac{${numerator}}{${denominator}}`)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])p\s*=\s*a\s*-\s*y(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])C\s*=\s*c\s*·\s*y²(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])F\s*=\s*K\^[A-Za-z0-9.,]+\s*L\^[A-Za-z0-9.,]+(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    },
+    {
+      pattern: /(?<![\p{L}\p{N}$\\])(?:F|u|p|C|MC|AC|MR|y)\([^)]*\)(?![\p{L}\p{N}])/gu,
+      replace: (match) => wrapMath(match)
+    }
+  ];
+
+  return replacements.reduce((result, { pattern, replace }) => result.replace(pattern, replace), text);
+}
+
+function applyStandaloneTokenWrapping(text) {
+  return STANDALONE_TOKENS.reduce((result, pattern) => (
+    result.replace(pattern, (token) => wrapMath(token))
+  ), text);
+}
+
+function formalizePlainSegment(text) {
+  const decoded = decodeHtmlEntities(String(text ?? ''));
+  const withExpressions = applyExpressionReplacements(decoded);
+  return withExpressions
+    .split(TEX_SEGMENT_REGEX)
+    .map((segment) => {
+      if (!segment) return '';
+      if (segment.startsWith('$')) return segment;
+      return applyStandaloneTokenWrapping(segment);
+    })
+    .join('');
+}
+
+export function formalizeMarkupString(markup) {
+  return String(markup ?? '')
+    .split(HTML_OR_TEX_SEGMENT_REGEX)
+    .map((segment) => {
+      if (!segment) return '';
+      if (segment.startsWith('<') || segment.startsWith('$')) return segment;
+      return formalizePlainSegment(segment);
+    })
+    .join('');
+}

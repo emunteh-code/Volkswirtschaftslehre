@@ -31,6 +31,21 @@ function stripHtml(value) {
     .trim();
 }
 
+function decodeHtmlEntities(value) {
+  if (typeof value !== 'string' || !value.includes('&')) return String(value ?? '');
+  if (typeof document === 'undefined') {
+    return value
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+  }
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = value;
+  return textarea.value;
+}
+
 const MATH_TEX_REGEX = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
 const MATH_SCRIPT_CHARS = '₀₁₂₃₄₅₆₇₈₉ₐₑₒₓₘₙₚᵢⱼᵣᵤᵥₖ*′';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
@@ -213,7 +228,8 @@ function semanticizeMarkupString(markup) {
   if (markup.includes('class="math-semantic"')) {
     return markup;
   }
-  if (!markup || typeof markup !== 'string' || !hasSemanticMathToken(markup.replace(/<[^>]+>/g, ' ').replace(MATH_TEX_REGEX, ' '))) {
+  const normalizedMarkup = decodeHtmlEntities(String(markup ?? ''));
+  if (!markup || typeof markup !== 'string' || !hasSemanticMathToken(normalizedMarkup.replace(/<[^>]+>/g, ' ').replace(MATH_TEX_REGEX, ' '))) {
     return markup;
   }
   return markup
@@ -221,7 +237,7 @@ function semanticizeMarkupString(markup) {
     .map((segment) => {
       if (!segment) return '';
       if (segment.startsWith('<') || segment.startsWith('$')) return segment;
-      return buildSemanticMathMarkup(segment);
+      return buildSemanticMathMarkup(decodeHtmlEntities(segment));
     })
     .join('');
 }
@@ -567,8 +583,6 @@ function buildMicroPracticePanel(conceptId) {
 
   return `<div class="panel active mikro1-practice">
 <div class="section-block">
-<h3>Arbeitsmodus</h3>
-<p>Arbeite zuerst den Rechenkern sauber aus: Definition, Bedingung, Umformung, Ergebnis. Danach prüfst du im Prüfungstransfer, ob du denselben Zugriff ohne Leitplanken wiedergeben kannst.</p>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Geführte Aufgaben</span>
 <div class="exam-drill-copy">Hier trainierst du den vollständigen Lösungsweg Schritt für Schritt. Ziel ist nicht nur das Ergebnis, sondern die saubere Reihenfolge der Argumentation.</div>
@@ -681,6 +695,8 @@ function stripExamTransferIntro() {
 function enhanceRenderedSurface(conceptId) {
   const content = document.getElementById('content');
   if (!content) return;
+
+  content.querySelectorAll('.concept-motivation').forEach((node) => node.remove());
 
   const activeTab = document.querySelector('#tabRow .tab-btn.active')?.dataset.tab || '';
   if (conceptId) {

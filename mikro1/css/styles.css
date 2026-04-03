@@ -690,24 +690,7 @@ body {
 }
 
 .concept-motivation {
-  display: grid;
-  gap: 12px;
-  width: 100%;
-  max-width: none;
-  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
-  border-top: 3px solid color-mix(in srgb, var(--accent) 70%, transparent);
-  padding: 18px 22px 20px;
-  border-radius: var(--r-lg);
-  font-size: clamp(15px, 0.92rem + 0.18vw, 17px);
-  font-weight: 500;
-  color: color-mix(in srgb, var(--text) 95%, var(--accent2));
-  margin-top: 12px;
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--accent) 8%, var(--card)),
-    color-mix(in srgb, var(--surface2) 94%, var(--card))
-  );
-  box-shadow: var(--shadow-sm);
-  line-height: 1.74;
+  display: none;
 }
 .concept-header + .panel.active,
 .concept-header + .mikro1-practice,
@@ -716,22 +699,8 @@ body {
   width: min(100%, 1080px);
   margin-inline: auto;
 }
-#content:not([data-tab="theorie"]) .concept-motivation {
-  display: none;
-}
 .concept-motivation::before {
-  content: 'Konzeptfokus';
-  display: block;
-  width: fit-content;
-  padding: 0;
-  border: none;
-  background: none;
-  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  content: none;
 }
 
 /* ── Panels ────────────────────────────────────────────────── */

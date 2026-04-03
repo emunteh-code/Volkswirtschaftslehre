@@ -103,6 +103,26 @@ function drawDot(ctx, cx, cy, radius, fillColor, bgColor) {
   ctx.stroke();
 }
 
+function drawRectIndifferenceCurve(ctx, sx, sy, xMax, yMax, utility, color, progress = 1) {
+  const minX = Math.max(0.2, xMax * 0.02);
+  const xStop = Math.max(minX, xMax * progress);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  let started = false;
+  for (let x = minX; x <= xStop; x += xMax / 420) {
+    const y = utility / x;
+    if (y < minX || y > yMax * 1.05) continue;
+    if (!started) {
+      ctx.moveTo(sx(x), sy(y));
+      started = true;
+    } else {
+      ctx.lineTo(sx(x), sy(y));
+    }
+  }
+  ctx.stroke();
+}
+
 // ── Draw functions ─────────────────────────────────────────
 
 function drawBudget(progress = 1) {
@@ -126,14 +146,13 @@ function drawBudget(progress = 1) {
 
   const x1max = m / p1, x2max = m / p2;
   const slope  = -(p1 / p2);
-  const axMax  = Math.max(x1max, x2max) * 1.35;
-  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
-  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
-  const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
+  const xMax = Math.max(10, x1max * 1.12);
+  const yMax = Math.max(10, x2max * 1.28);
+  const { sx, sy, fsBase, fsBold } = setupRectPlot(ge, w, h, ctx, xMax, yMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
   // Budget area fill (instant — appears immediately)
-  ctx.fillStyle = col.accent + '12';
+  ctx.fillStyle = col.budgetFill;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(0));
   ctx.lineTo(sx(x1max), sy(0));
@@ -141,10 +160,17 @@ function drawBudget(progress = 1) {
   ctx.closePath();
   ctx.fill();
 
+  if (progress >= 0.55) {
+    ctx.fillStyle = col.reference;
+    ctx.font = `bold ${fsBase}px ${col.fontBody}`;
+    ctx.textAlign = 'left';
+    ctx.fillText('Budgetmenge B', sx(x1max * 0.2), sy(x2max * 0.36));
+  }
+
   // Budget line — animated reveal left → right
   const x1end = x1max * progress;
   const x2end = x2max - (x2max / x1max) * x1end;
-  ctx.strokeStyle = col.accent;
+  ctx.strokeStyle = col.budgetBase;
   ctx.lineWidth   = 2.5;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(x2max));
@@ -154,24 +180,25 @@ function drawBudget(progress = 1) {
   // Labels + dots — appear once line is nearly complete
   if (progress >= 0.9) {
     // y-intercept dot + label
-    drawDot(ctx, sx(0), sy(x2max), 6, col.accent, col.bg);
+    drawDot(ctx, sx(0), sy(x2max), 6, col.budgetBase, col.bg);
     ctx.fillStyle   = col.text;
     ctx.font        = `bold ${fsBold}px ${col.fontBody}`;
     ctx.textAlign   = 'right';
     ctx.fillText('m/p₂=' + x2max.toFixed(1), sx(0) - 10, sy(x2max) + 4);
 
     // x-intercept dot + label
-    drawDot(ctx, sx(x1max), sy(0), 6, col.accent, col.bg);
+    drawDot(ctx, sx(x1max), sy(0), 6, col.budgetBase, col.bg);
     ctx.fillStyle   = col.text;
     ctx.textAlign   = 'center';
     ctx.fillText('m/p₁=' + x1max.toFixed(1), sx(x1max), sy(0) + 28);
   }
 
   ge.drawLegend(ctx, w, [
-    { color: col.accent, label: 'Budgetgerade p₁x₁+p₂x₂=m' },
-    { color: col.label,  label: `Steigung: −p₁/p₂ = ${slope.toFixed(3)}` },
-    { color: col.label,  label: `x₂-Abschn.: ${x2max.toFixed(1)}, x₁-Abschn.: ${x1max.toFixed(1)}` },
-  ], col.accent2 + '59', 20);
+    { color: col.budgetBase, label: 'Budgetgerade p₁x₁+p₂x₂=m' },
+    { color: col.budgetBase, fill: col.budgetFill, label: 'Budgetmenge B (erreichbare Bündel)' },
+    { color: col.reference,  label: `Steigung: −p₁/p₂ = ${slope.toFixed(3)}` },
+    { color: col.reference,  label: `x₂-Abschnitt: ${x2max.toFixed(1)}, x₁-Abschnitt: ${x1max.toFixed(1)}` },
+  ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation</span>
@@ -179,7 +206,7 @@ function drawBudget(progress = 1) {
     Bei einem Einkommen von <strong>m = ${m}</strong> und Preisen <strong>p₁ = ${p1}</strong>, <strong>p₂ = ${p2}</strong>
     kann der Haushalt maximal <strong>${x1max.toFixed(1)}</strong> Einheiten von Gut 1 oder <strong>${x2max.toFixed(1)}</strong> Einheiten von Gut 2 kaufen.
     Die Steigung <strong>${slope.toFixed(2)}</strong> zeigt das Tauschverhältnis: für jede zusätzliche Einheit x₁ muss der Haushalt auf <strong>${(p1/p2).toFixed(2)}</strong> Einheiten x₂ verzichten.
-    Alle Punkte unterhalb und auf der Geraden sind erreichbar — die Gerade selbst zeigt die Bündel, die das Budget genau ausschöpfen.
+    Die schattierte <strong>Budgetmenge B</strong> enthält alle erreichbaren Bündel; die Budgetgerade selbst zeigt die Kombinationen, die das Budget genau ausschöpfen.
     <strong>Klausurtipp:</strong> Steigt p₁, dreht sich die Gerade um den y-Achsenabschnitt nach innen. Steigt m, verschiebt sich die Gerade parallel nach außen. Beides verändert die erreichbare Menge — Grundlage der komparativen Statik.`;
 
   // Tooltip registration — after full draw
@@ -210,17 +237,18 @@ function drawIndiff(progress = 1) {
   const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
-  const clr1 = col.accent, clr2 = col.accent2;
+  const clr1 = col.indiffBase;
+  const clr2 = col.indiffAlt;
   const curves = [
-    { u: u1, c: clr1, label: 'I₁ (ū=' + u1 + ')' },
-    { u: u2, c: clr2, label: 'I₂ (ū=' + u2 + ')' },
+    { u: u1, c: clr1, label: 'I₁ (ū=' + u1 + ')', dash: [] },
+    { u: u2, c: clr2, label: 'I₂ (ū=' + u2 + ')', dash: [7, 4] },
   ];
   curves.sort((a, b) => a.u - b.u).forEach(cv =>
-    ge.drawIK(ctx, axMax, cv.u, cv.c, cv.label, sx, sy, progress));
+    ge.drawIK(ctx, axMax, cv.u, cv.c, cv.label, sx, sy, progress, cv.dash));
 
   // "higher utility" hint — placed in upper-right to avoid curve-label zone
   if (progress >= 0.9) {
-    ctx.fillStyle = col.accent2 + '99';
+    ctx.fillStyle = col.indiffAlt + '99';
     ctx.font      = `${fsBase + 2}px ${col.fontBody}`;
     ctx.textAlign = 'right';
     ctx.fillText('↗ höherer Nutzen', PAD + PW * 0.96, PAD + PH * 0.15);
@@ -228,9 +256,9 @@ function drawIndiff(progress = 1) {
 
   ge.drawLegend(ctx, w, [
     { color: clr1,      label: 'I₁ — Indiff.kurve (ū=' + u1 + ')' },
-    { color: clr2,      label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
-    { color: col.label, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
-  ], col.accent2 + '66');
+    { color: clr2, dash: true, label: 'I₂ — Indiff.kurve (ū=' + u2 + ')' },
+    { color: col.reference, label: 'u(x₁,x₂) = x₁ · x₂ = ū' },
+  ], col.grid);
 
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation</span>
@@ -265,14 +293,13 @@ function drawHausopt(progress = 1) {
 
   const x1s = m / (2 * p1), x2s = m / (2 * p2), ustar = x1s * x2s;
   const x1max = m / p1, x2max = m / p2;
-  const axMax = Math.max(x1max, x2max) * 1.35;
-  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.022));
-  const fsBold = Math.max(12, Math.round(Math.min(w, h) * 0.026));
-  const { PAD, PW, PH, sx, sy } = ge.drawScene(w, h, ctx, axMax,
+  const xMax = Math.max(10, x1max * 1.12);
+  const yMax = Math.max(10, x2max * 1.28);
+  const { sx, sy, fsBase, fsBold } = setupRectPlot(ge, w, h, ctx, xMax, yMax,
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
   // Budget area fill
-  ctx.fillStyle = col.accent + '0d';
+  ctx.fillStyle = col.budgetFill;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(0));
   ctx.lineTo(sx(x1max), sy(0));
@@ -283,7 +310,7 @@ function drawHausopt(progress = 1) {
   // Budget line — animated
   const x1end = x1max * progress;
   const x2end = x2max - (x2max / x1max) * x1end;
-  ctx.strokeStyle = col.accent;
+  ctx.strokeStyle = col.budgetBase;
   ctx.lineWidth   = 2.5;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(x2max));
@@ -291,11 +318,11 @@ function drawHausopt(progress = 1) {
   ctx.stroke();
 
   // Indifference curve through optimum — animated (no direct label; legend covers it)
-  ge.drawIK(ctx, axMax, ustar, col.accent2, null, sx, sy, progress);
+  drawRectIndifferenceCurve(ctx, sx, sy, xMax, yMax, ustar, col.indiffBase, progress);
 
   // Drop-lines to axes (dashed) — appear after curves
   if (progress >= 0.85) {
-    ctx.strokeStyle = col.warn + '80';
+    ctx.strokeStyle = col.guide + '99';
     ctx.lineWidth   = 1.2;
     ctx.setLineDash([5, 4]);
     ctx.beginPath(); ctx.moveTo(sx(x1s), sy(x2s)); ctx.lineTo(sx(x1s), sy(0)); ctx.stroke();
@@ -303,7 +330,7 @@ function drawHausopt(progress = 1) {
     ctx.setLineDash([]);
 
     // Axis value labels
-    ctx.fillStyle = col.warn;
+    ctx.fillStyle = col.guide;
     ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
     ctx.textAlign = 'center';
     ctx.fillText('x₁* = ' + x1s.toFixed(1), sx(x1s), sy(0) + 30);
@@ -313,25 +340,25 @@ function drawHausopt(progress = 1) {
 
   // Optimum dot + GRS label — appear last
   if (progress >= 0.92) {
-    drawDot(ctx, sx(x1s), sy(x2s), 6, col.warn, col.bg);
+    drawDot(ctx, sx(x1s), sy(x2s), 6, col.optimum, col.bg);
     ctx.fillStyle = col.text;
     ctx.font      = `bold ${fsBold + 1}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('E* (Optimum)', sx(x1s) + 10, sy(x2s) - 8);
 
     // GRS annotation — placed below optimum label, well clear of legend area
-    ctx.fillStyle = col.warn + 'b3';
+    ctx.fillStyle = col.tangent + 'cc';
     ctx.font      = `${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('GRS = p₁/p₂ = ' + (p1 / p2).toFixed(2), sx(x1s) + 10, sy(x2s) + 8);
   }
 
   ge.drawLegend(ctx, w, [
-    { color: col.accent,       label: 'Budgetgerade p₁x₁+p₂x₂=m' },
-    { color: col.accent2,      label: 'Indifferenzkurve u=x₁·x₂=' + ustar.toFixed(1) },
-    { color: col.warn, dot: true, label: 'Optimum E*: x₁*=' + x1s.toFixed(1) + ', x₂*=' + x2s.toFixed(1) },
-    { color: col.warn + '80', dash: true, label: 'Hilfslinien zum Optimum' },
-  ], col.accent2 + '59', 20);
+    { color: col.budgetBase,   label: 'Budgetgerade p₁x₁+p₂x₂=m' },
+    { color: col.indiffBase,   label: 'Indifferenzkurve u=x₁·x₂=' + ustar.toFixed(1) },
+    { color: col.optimum, dot: true, label: 'Optimum E*: x₁*=' + x1s.toFixed(1) + ', x₂*=' + x2s.toFixed(1) },
+    { color: col.guide, dash: true, label: 'Hilfslinien zum Optimum' },
+  ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation</span>
@@ -423,7 +450,7 @@ function drawMonopol(progress = 1) {
   ctx.restore();
 
   // DWL fill (triangle) — instant
-  ctx.fillStyle = col.warn + '30';
+  ctx.fillStyle = col.welfareFill;
   ctx.beginPath();
   ctx.moveTo(sx(ym), sy(pm));
   for (let y = ym; y <= yvk; y += (yvk - ym) / 60) ctx.lineTo(sx(y), sy(a - y));
@@ -432,25 +459,25 @@ function drawMonopol(progress = 1) {
   ctx.fill();
 
   // Profit rectangle — instant
-  ctx.fillStyle = col.accent2 + '14';
+  ctx.fillStyle = col.profitFill;
   ctx.fillRect(sx(0), sy(pm), sx(ym) - sx(0), sy(mcAtYm) - sy(pm));
 
   // Region labels — appear once fills are shown
   if (progress >= 0.3) {
     const dwlCX = (ym + ym + yvk) / 3;
     const dwlCY = (pm + mcAtYm + pvk) / 3;
-    ctx.fillStyle = col.warn + 'e6';
+    ctx.fillStyle = col.welfare;
     ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'center';
     ctx.fillText('DWL', sx(dwlCX), sy(dwlCY) - 2);
 
-    ctx.fillStyle = col.accent2 + 'cc';
+    ctx.fillStyle = col.profit;
     ctx.font      = `bold ${Math.max(11, fsBase - 2)}px ${col.fontBody}`;
     ctx.fillText('π (Monopolgewinn)', sx(ym / 2), sy((pm + mcAtYm) / 2));
   }
 
   // Demand curve — animated (labelled in legend)
-  ctx.strokeStyle = col.accent;
+  ctx.strokeStyle = col.demand;
   ctx.lineWidth   = 2.5;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(a));
@@ -460,7 +487,7 @@ function drawMonopol(progress = 1) {
   // MR curve (dashed) — animated with slight delay (labelled in legend)
   if (progress >= 0.2) {
     const mrProg = Math.min(1, (progress - 0.2) / 0.8);
-    ctx.strokeStyle = col.accent + 'b3';
+    ctx.strokeStyle = col.mr;
     ctx.lineWidth   = 2;
     ctx.setLineDash([6, 4]);
     ctx.beginPath();
@@ -473,7 +500,7 @@ function drawMonopol(progress = 1) {
   // MC curve — animated with further delay (labelled in legend)
   if (progress >= 0.4) {
     const mcProg = Math.min(1, (progress - 0.4) / 0.6);
-    ctx.strokeStyle = col.accent2;
+    ctx.strokeStyle = col.mc;
     ctx.lineWidth   = 2.5;
     ctx.beginPath();
     ctx.moveTo(sx(0), sy(0));
@@ -483,19 +510,19 @@ function drawMonopol(progress = 1) {
 
   // Guide lines — appear after curves
   if (progress >= 0.85) {
-    ctx.strokeStyle = col.warn + '99';
+    ctx.strokeStyle = col.monopoly + '99';
     ctx.lineWidth   = 1.2;
     ctx.setLineDash([5, 4]);
     ctx.beginPath(); ctx.moveTo(sx(0), sy(pm));  ctx.lineTo(sx(ym), sy(pm));  ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx(ym), sy(0));  ctx.lineTo(sx(ym), sy(pm));  ctx.stroke();
     // Competitive guide lines
-    ctx.strokeStyle = col.muted + '80';
+    ctx.strokeStyle = col.competition + '88';
     ctx.beginPath(); ctx.moveTo(sx(0), sy(pvk)); ctx.lineTo(sx(yvk), sy(pvk)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx(yvk), sy(0)); ctx.lineTo(sx(yvk), sy(pvk)); ctx.stroke();
     ctx.setLineDash([]);
 
     // Axis value labels (monopoly)
-    ctx.fillStyle = col.warn;
+    ctx.fillStyle = col.monopoly;
     ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'center';
     ctx.fillText('yₘ=' + ym.toFixed(2), sx(ym), sy(0) + 30);
@@ -503,7 +530,7 @@ function drawMonopol(progress = 1) {
     ctx.fillText('pₘ=' + pm.toFixed(2), sx(0) - 6, sy(pm) + 4);
 
     // Axis value labels (competitive) — use muted colour
-    ctx.fillStyle = col.muted;
+    ctx.fillStyle = col.competition;
     ctx.font      = `${Math.max(10, fsBase - 1)}px ${col.fontBody}`;
     ctx.textAlign = 'center';
     ctx.fillText('y_vk=' + yvk.toFixed(2), sx(yvk), sy(0) + 44);
@@ -514,28 +541,28 @@ function drawMonopol(progress = 1) {
   // Equilibrium dots + labels — appear last
   if (progress >= 0.92) {
     // Monopoly (Cournotscher) point
-    drawDot(ctx, sx(ym), sy(pm), 6, col.warn, col.bg);
+    drawDot(ctx, sx(ym), sy(pm), 6, col.monopoly, col.bg);
     ctx.fillStyle = col.text;
     ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('Cournotscher Punkt', sx(ym) + 10, sy(pm) - 8);
 
     // Competitive equilibrium point
-    drawDot(ctx, sx(yvk), sy(pvk), 6, col.muted, col.bg);
-    ctx.fillStyle = col.muted;
+    drawDot(ctx, sx(yvk), sy(pvk), 6, col.competition, col.bg);
+    ctx.fillStyle = col.competition;
     ctx.font      = `${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('Wettbewerb', sx(yvk) + 8, sy(pvk) + 4);
   }
 
   ge.drawLegend(ctx, w, [
-    { color: col.accent,                             label: 'Nachfrage D (p = a−y)' },
-    { color: col.accent + 'b3',   dash: true,        label: 'Grenzerlös MR (a−2y)' },
-    { color: col.accent2,                            label: 'Grenzkosten MC (2cy)' },
-    { color: col.warn,            dot: true,          label: 'Cournot: yₘ=' + ym.toFixed(2) + ', pₘ=' + pm.toFixed(2) },
-    { color: col.warn,            fill: col.warn+'30', label: 'Wohlfahrtsverlust DWL' },
-    { color: col.accent2,         fill: col.accent2+'14', label: 'Monopolgewinn π' },
-  ], col.accent2 + '59', 20);
+    { color: col.demand,          label: 'Nachfrage D (p = a−y)' },
+    { color: col.mr, dash: true,  label: 'Grenzerlös MR (a−2y)' },
+    { color: col.mc,              label: 'Grenzkosten MC (2cy)' },
+    { color: col.monopoly, dot: true, label: 'Cournot: yₘ=' + ym.toFixed(2) + ', pₘ=' + pm.toFixed(2) },
+    { color: col.welfare, fill: col.welfareFill, label: 'Wohlfahrtsverlust DWL' },
+    { color: col.profit, fill: col.profitFill, label: 'Monopolgewinn π' },
+  ], col.grid, 20);
 
   { const profitM = (pm - mcAtYm) * ym;
   document.getElementById('graph_info').innerHTML =
@@ -543,7 +570,7 @@ function drawMonopol(progress = 1) {
     Der Monopolist wählt die Menge <strong>yₘ = ${ym.toFixed(2)}</strong> und setzt den Preis <strong>pₘ = ${pm.toFixed(2)}</strong> — dort, wo Grenzerlös gleich Grenzkosten ist (MR = MC).
     Im Vergleich zum Wettbewerbsgleichgewicht (<strong>y = ${yvk.toFixed(2)}</strong>, <strong>p = ${pvk.toFixed(2)}</strong>) produziert der Monopolist weniger und verlangt mehr.
     Der Monopolgewinn beträgt <strong>π ≈ ${profitM.toFixed(2)}</strong> (Rechteck zwischen pₘ und MC).
-    Das orange Dreieck (DWL) zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.
+    Das markierte DWL-Dreieck zeigt den Wohlfahrtsverlust: Tauschgewinne, die weder Produzent noch Konsument realisieren. Je größer die Marktmacht, desto größer der Verlust.
     <strong>Klausurtipp:</strong> Optimierungsbedingung ist MR = MC, nicht P = MC. Das DWL-Dreieck lässt sich als ½ · (yᵥₖ − yₘ) · (pₘ − pᵥₖ) berechnen. Häufige Folgefrage: Wie verändert eine Steuer das Cournot-Gleichgewicht?`;
   }
 
@@ -596,9 +623,9 @@ function drawSlutsky(progress = 1) {
     'x₁ (Menge Gut 1)', 'x₂ (Menge Gut 2)');
 
   // IK curves — animated
-  ge.drawIK(ctx, axMax, u0, col.accent,  'I₀ (ū=' + u0.toFixed(1) + ')', sx, sy, progress);
+  ge.drawIK(ctx, axMax, u0, col.indiffBase,  'I₀ (ū=' + u0.toFixed(1) + ')', sx, sy, progress);
   if (Math.abs(u1 - u0) > 0.01)
-    ge.drawIK(ctx, axMax, u1, col.accent2, 'I₁ (ū=' + u1.toFixed(1) + ')', sx, sy, progress);
+    ge.drawIK(ctx, axMax, u1, col.indiffAlt, 'I₁ (ū=' + u1.toFixed(1) + ')', sx, sy, progress, [7, 4]);
 
   // Budget lines helper — yFrac controls label vertical position to avoid overlap
   function bLine(p1, color, label, dash, yFrac = 0.72) {
@@ -621,9 +648,9 @@ function drawSlutsky(progress = 1) {
       ctx.fillText(label, sx(xi * 0.75), sy(yi * yFrac));
     }
   }
-  bLine(p1_0, col.accent, 'Budget (initial)', false, 0.72);
+  bLine(p1_0, col.budgetBase, 'Budget (initial)', false, 0.72);
   // Offset the second label vertically to prevent overlap when prices are similar
-  bLine(p1_1, col.warn,   'Budget (neu)',     false, 0.54);
+  bLine(p1_1, col.budgetShift, 'Budget (neu)', false, 0.54);
 
   // Compensated budget line
   if (progress >= 0.5) {
@@ -631,7 +658,7 @@ function drawSlutsky(progress = 1) {
     const m_comp = p1_1 * x1_c + p2 * x2_c;
     const xi_c = m_comp / p1_1, yi_c = m_comp / p2;
     const xiEndC = xi_c * compProg;
-    ctx.strokeStyle = col.accent2 + 'cc';
+    ctx.strokeStyle = col.budgetComp;
     ctx.lineWidth   = 2;
     ctx.setLineDash([8, 6]);
     ctx.beginPath();
@@ -640,7 +667,7 @@ function drawSlutsky(progress = 1) {
     ctx.stroke();
     ctx.setLineDash([]);
     if (progress >= 0.85) {
-      ctx.fillStyle = col.accent2;
+      ctx.fillStyle = col.budgetComp;
       ctx.font      = `bold ${fsBold}px ${col.fontBody}`;
       ctx.textAlign = 'left';
       ctx.fillText('Kompensiertes Budget', sx(xi_c * 0.52), sy(yi_c * 0.48) - 8);
@@ -659,26 +686,26 @@ function drawSlutsky(progress = 1) {
       ctx.font      = `bold ${fsBase}px ${col.fontBody}`;
       ctx.fillText(`(${x.toFixed(2)}, ${y.toFixed(2)})`, sx(x) + 9, sy(y) + 5);
     }
-    dot(x1_0, x2_0, col.accent,  'A');
-    dot(x1_c, x2_c, col.accent2, 'B');
-    dot(x1_1, x2_1, col.warn,    'C');
+    dot(x1_0, x2_0, col.budgetBase, 'A');
+    dot(x1_c, x2_c, col.budgetComp, 'B');
+    dot(x1_1, x2_1, col.budgetShift, 'C');
 
     // Effect arrows
     ctx.lineWidth   = 2;
-    ctx.strokeStyle = col.accent2;
+    ctx.strokeStyle = col.budgetComp;
     ctx.beginPath(); ctx.moveTo(sx(x1_0), sy(x2_0)); ctx.lineTo(sx(x1_c), sy(x2_c)); ctx.stroke();
-    ctx.strokeStyle = col.warn;
+    ctx.strokeStyle = col.budgetShift;
     ctx.beginPath(); ctx.moveTo(sx(x1_c), sy(x2_c)); ctx.lineTo(sx(x1_1), sy(x2_1)); ctx.stroke();
   }
 
   ge.drawLegend(ctx, w, [
-    { color: col.accent,  dot: true, label: 'A – Initiales Optimum' },
-    { color: col.accent2, dot: true, label: 'B – Kompensiertes Optimum (SE)' },
-    { color: col.warn,    dot: true, label: 'C – Finales Optimum' },
-    { color: col.accent2, dash: true, label: 'Kompensierte Budgetgerade' },
-    { color: col.text,    label: 'A → B = Substitutionseffekt' },
-    { color: col.text,    label: 'B → C = Einkommenseffekt' },
-  ], col.accent2 + '59', 20);
+    { color: col.budgetBase, dot: true, label: 'A – Initiales Optimum' },
+    { color: col.budgetComp, dot: true, label: 'B – Kompensiertes Optimum (SE)' },
+    { color: col.budgetShift, dot: true, label: 'C – Finales Optimum' },
+    { color: col.budgetComp, dash: true, label: 'Kompensierte Budgetgerade' },
+    { color: col.budgetComp, label: 'A → B = Substitutionseffekt' },
+    { color: col.budgetShift, label: 'B → C = Einkommenseffekt' },
+  ], col.grid, 20);
 
   { const direction = p1_1 > p1_0 ? 'gestiegen' : 'gesunken';
   const seDir = SE > 0 ? 'erhöht' : 'gesenkt';
@@ -816,15 +843,15 @@ function drawProduktionBase(progress = 1, showGrts = false) {
   const xMax = Math.max(12, laborPoint * 2.1, output * 2.2);
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Arbeit L', 'Kapital K');
 
-  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.accent, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
+  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.isoquantBase, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
 
   if (!showGrts) {
-    drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output * 1.5, col.accent2, `Isoquante ${(output * 1.5).toFixed(1)}`, Math.max(11, fsBase - 1), progress, [6, 4]);
+    drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output * 1.5, col.isoquantAlt, `Isoquante ${(output * 1.5).toFixed(1)}`, Math.max(11, fsBase - 1), progress, [6, 4]);
   }
 
   if (progress >= 0.85 && Number.isFinite(capitalPoint) && capitalPoint <= yMax) {
-    drawDot(ctx, sx(laborPoint), sy(capitalPoint), 6, showGrts ? col.warn : col.accent2, col.bg);
-    ctx.fillStyle = showGrts ? col.warn : col.text;
+    drawDot(ctx, sx(laborPoint), sy(capitalPoint), 6, showGrts ? col.optimum : col.competition, col.bg);
+    ctx.fillStyle = showGrts ? col.optimum : col.text;
     ctx.font = `bold ${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText(showGrts ? 'Punkt mit GRTS' : 'Beobachteter Einsatz', sx(laborPoint) + 10, sy(capitalPoint) - 8);
@@ -838,7 +865,7 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     const leftK = capitalPoint + slope * (leftL - laborPoint);
     const rightK = capitalPoint + slope * (rightL - laborPoint);
 
-    ctx.strokeStyle = col.warn;
+    ctx.strokeStyle = col.tangent;
     ctx.lineWidth = 2;
     ctx.setLineDash([7, 5]);
     ctx.beginPath();
@@ -847,10 +874,16 @@ function drawProduktionBase(progress = 1, showGrts = false) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    ctx.fillStyle = col.warn;
+    ctx.fillStyle = col.tangent;
     ctx.font = `bold ${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText(`Tangente: GRTS = ${grts.toFixed(2)}`, sx(Math.min(xMax * 0.58, laborPoint + 0.6)), sy(Math.min(yMax * 0.92, capitalPoint + 1.6)));
+
+    ge.drawLegend(ctx, w, [
+      { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
+      { color: col.tangent, dash: true, label: `Tangente / GRTS = ${grts.toFixed(2)}` },
+      { color: col.optimum, dot: true, label: 'Markierter Produktionspunkt' },
+    ], col.grid, 20);
 
     document.getElementById('graph_info').innerHTML =
       `<span class="gi-label">Interpretation — GRTS</span>
@@ -871,6 +904,12 @@ function drawProduktionBase(progress = 1, showGrts = false) {
   }
 
   const secondOutput = output * 1.5;
+  ge.drawLegend(ctx, w, [
+    { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
+    { color: col.isoquantAlt, dash: true, label: `Isoquante ȳ=${secondOutput.toFixed(1)}` },
+    { color: col.competition, dot: true, label: 'Beobachteter Einsatzpunkt' },
+  ], col.grid, 20);
+
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation — Isoquanten</span>
     <div class="gi-eq">F(K, L) = K^${alpha.toFixed(2)} · L^${(1 - alpha).toFixed(2)}</div>
@@ -932,9 +971,9 @@ function drawKosten(progress = 1) {
   const yMax = Math.max(12, yIntercept * 1.15, capitalStar * 2.2);
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Arbeit L', 'Kapital K');
 
-  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.accent, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
+  drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, col.isoquantBase, `Isoquante ȳ=${output.toFixed(1)}`, fsBase, progress);
 
-  ctx.strokeStyle = col.accent2;
+  ctx.strokeStyle = col.budgetShift;
   ctx.lineWidth = 2.5;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(yIntercept));
@@ -942,22 +981,29 @@ function drawKosten(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.82) {
-    ctx.fillStyle = col.accent2;
+    ctx.fillStyle = col.budgetShift;
     ctx.font = `bold ${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('Isokostengerade', sx(xIntercept * 0.45), sy(yIntercept * 0.45) - 10);
 
-    drawDot(ctx, sx(laborStar), sy(capitalStar), 6, col.warn, col.bg);
+    drawDot(ctx, sx(laborStar), sy(capitalStar), 6, col.optimum, col.bg);
     ctx.fillStyle = col.text;
     ctx.fillText('Kostenminimum', sx(laborStar) + 10, sy(capitalStar) - 8);
 
-    ctx.strokeStyle = col.warn + '88';
+    ctx.strokeStyle = col.guide + '88';
     ctx.lineWidth = 1.2;
     ctx.setLineDash([5, 4]);
     ctx.beginPath(); ctx.moveTo(sx(laborStar), sy(capitalStar)); ctx.lineTo(sx(laborStar), sy(0)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx(laborStar), sy(capitalStar)); ctx.lineTo(sx(0), sy(capitalStar)); ctx.stroke();
     ctx.setLineDash([]);
   }
+
+  ge.drawLegend(ctx, w, [
+    { color: col.isoquantBase, label: `Isoquante ȳ=${output.toFixed(1)}` },
+    { color: col.budgetShift, label: 'Isokostengerade' },
+    { color: col.optimum, dot: true, label: 'Kostenminimum' },
+    { color: col.guide, dash: true, label: 'Hilfslinien zum Optimum' },
+  ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML =
     `<span class="gi-label">Interpretation — Kostenminimierung</span>
@@ -1011,7 +1057,7 @@ function drawMarkt(progress = 1) {
   const { col, sx, sy, fsBase } = setupRectPlot(ge, w, h, ctx, xMax, yMax, 'Menge q', 'Preis p');
 
   if (hasTrade) {
-    ctx.fillStyle = col.accent + '18';
+    ctx.fillStyle = col.consumerFill;
     ctx.beginPath();
     ctx.moveTo(sx(0), sy(a));
     ctx.lineTo(sx(qEq), sy(pEq));
@@ -1019,7 +1065,7 @@ function drawMarkt(progress = 1) {
     ctx.closePath();
     ctx.fill();
 
-    ctx.fillStyle = col.accent2 + '18';
+    ctx.fillStyle = col.producerFill;
     ctx.beginPath();
     ctx.moveTo(sx(0), sy(c));
     ctx.lineTo(sx(qEq), sy(pEq));
@@ -1028,7 +1074,7 @@ function drawMarkt(progress = 1) {
     ctx.fill();
   }
 
-  ctx.strokeStyle = col.accent;
+  ctx.strokeStyle = col.demand;
   ctx.lineWidth = 2.5;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(a));
@@ -1036,7 +1082,7 @@ function drawMarkt(progress = 1) {
   ctx.stroke();
 
   const supplyEnd = Math.min(xMax, (yMax - c) / d);
-  ctx.strokeStyle = col.accent2;
+  ctx.strokeStyle = col.supply;
   ctx.lineWidth = 2.5;
   ctx.beginPath();
   ctx.moveTo(sx(0), sy(c));
@@ -1044,28 +1090,39 @@ function drawMarkt(progress = 1) {
   ctx.stroke();
 
   if (progress >= 0.84) {
-    ctx.fillStyle = col.accent;
+    ctx.fillStyle = col.demand;
     ctx.font = `bold ${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
     ctx.fillText('Nachfrage', sx(xMax * 0.68), sy(a - b * xMax * 0.68) - 8);
 
-    ctx.fillStyle = col.accent2;
+    ctx.fillStyle = col.supply;
     ctx.fillText('Angebot', sx(xMax * 0.62), sy(c + d * xMax * 0.62) + 18);
   }
 
   if (hasTrade && progress >= 0.88) {
-    drawDot(ctx, sx(qEq), sy(pEq), 6, col.warn, col.bg);
+    drawDot(ctx, sx(qEq), sy(pEq), 6, col.competition, col.bg);
     ctx.fillStyle = col.text;
     ctx.font = `bold ${fsBase}px ${col.fontBody}`;
     ctx.fillText('Gleichgewicht', sx(qEq) + 10, sy(pEq) - 8);
 
-    ctx.strokeStyle = col.warn + '88';
+    ctx.strokeStyle = col.competition + '88';
     ctx.lineWidth = 1.2;
     ctx.setLineDash([5, 4]);
     ctx.beginPath(); ctx.moveTo(sx(qEq), sy(pEq)); ctx.lineTo(sx(qEq), sy(0)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx(qEq), sy(pEq)); ctx.lineTo(sx(0), sy(pEq)); ctx.stroke();
     ctx.setLineDash([]);
   }
+
+  ge.drawLegend(ctx, w, hasTrade ? [
+    { color: col.demand, label: 'Nachfrage D' },
+    { color: col.supply, label: 'Angebot S' },
+    { color: col.competition, dot: true, label: 'Wettbewerbsgleichgewicht' },
+    { color: col.demand, fill: col.consumerFill, label: 'Konsumentenrente KR' },
+    { color: col.supply, fill: col.producerFill, label: 'Produzentenrente PR' },
+  ] : [
+    { color: col.demand, label: 'Nachfrage D' },
+    { color: col.supply, label: 'Angebot S' },
+  ], col.grid, 20);
 
   document.getElementById('graph_info').innerHTML = hasTrade
     ? `<span class="gi-label">Interpretation — Marktgleichgewicht</span>

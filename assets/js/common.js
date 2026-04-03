@@ -114,71 +114,127 @@ function pickInitialLandingModule() {
     .map((module) => ({ module, visit: readVisitState(module) }))
     .filter(({ visit }) => typeof visit.visitedAt === "number");
   if (withVisits.length) return withVisits.sort((left, right) => right.visit.visitedAt - left.visit.visitedAt)[0].module;
-  return PUBLIC_MODULES[0] || null;
+  return null;
 }
 
-let focusedTileIndex = -1;
-let tileElements = [];
+let selectedLandingIndex = -1;
+let landingTileElements = [];
+let landingKeyboardBound = false;
 
-function setFocusedTile(index) {
-  if (index < 0 || index >= tileElements.length) return;
-  
-  // Remove previous focus
-  tileElements.forEach((tile, i) => {
-    tile.classList.remove("is-focused", "is-selected");
-    tile.setAttribute("aria-selected", "false");
+function buildLandingRows() {
+  const rows = [];
+  landingTileElements.forEach((tile, index) => {
+    const top = Math.round(tile.getBoundingClientRect().top);
+    const existing = rows.find((row) => Math.abs(row.top - top) <= 6);
+    if (existing) {
+      existing.indices.push(index);
+    } else {
+      rows.push({ top, indices: [index] });
+    }
   });
-  
-  // Set new focus
-  const newTile = tileElements[index];
-  newTile.classList.add("is-focused", "is-selected");
-  newTile.setAttribute("aria-selected", "true");
-  newTile.focus({ preventScroll: true });
-  
-  focusedTileIndex = index;
-  
-  // Update hero to show selected module
-  const slug = newTile.dataset.slug;
-  const module = PUBLIC_MODULES.find((m) => m.slug === slug);
-  if (module) updateHeroShelf(module);
+  return rows.sort((left, right) => left.top - right.top);
 }
 
-function handleKeyboardNavigation(event) {
-  if (tileElements.length === 0) return;
-  
-  const cols = getComputedStyle(document.getElementById("moduleGrid")).gridTemplateColumns.split(" ").length;
-  
+function getLandingPosition(index) {
+  const rows = buildLandingRows();
+  for (let rowIndex = 0; rowIndex < rows.length; rowIndex += 1) {
+    const colIndex = rows[rowIndex].indices.indexOf(index);
+    if (colIndex !== -1) {
+      return { rows, rowIndex, colIndex };
+    }
+  }
+  return { rows, rowIndex: 0, colIndex: 0 };
+}
+
+function setLandingSelection(index, { focus = false } = {}) {
+  if (index < 0 || index >= landingTileElements.length) return;
+
+  landingTileElements.forEach((tile, tileIndex) => {
+    const selected = tileIndex === index;
+    tile.classList.toggle("is-selected", selected);
+    tile.classList.toggle("is-focused", selected);
+    tile.setAttribute("aria-selected", selected ? "true" : "false");
+    tile.tabIndex = selected ? 0 : -1;
+  });
+
+  selectedLandingIndex = index;
+  const selectedTile = landingTileElements[index];
+  const module = PUBLIC_MODULES.find((item) => item.slug === selectedTile?.dataset.slug);
+  if (module) updateHeroShelf(module);
+  if (focus && selectedTile) {
+    selectedTile.focus({ preventScroll: true });
+  }
+}
+
+function moveLandingSelection(direction) {
+  if (!landingTileElements.length) return;
+  if (selectedLandingIndex < 0) {
+    setLandingSelection(0, { focus: true });
+    return;
+  }
+
+  const { rows, rowIndex, colIndex } = getLandingPosition(selectedLandingIndex);
+  let nextIndex = selectedLandingIndex;
+
+  if (direction === "left") {
+    nextIndex = Math.max(0, selectedLandingIndex - 1);
+  } else if (direction === "right") {
+    nextIndex = Math.min(landingTileElements.length - 1, selectedLandingIndex + 1);
+  } else if (direction === "down") {
+    const nextRow = rows[rowIndex + 1];
+    if (nextRow) nextIndex = nextRow.indices[Math.min(colIndex, nextRow.indices.length - 1)];
+  } else if (direction === "up") {
+    const previousRow = rows[rowIndex - 1];
+    if (previousRow) nextIndex = previousRow.indices[Math.min(colIndex, previousRow.indices.length - 1)];
+  } else if (direction === "home") {
+    nextIndex = 0;
+  } else if (direction === "end") {
+    nextIndex = landingTileElements.length - 1;
+  }
+
+  setLandingSelection(nextIndex, { focus: true });
+}
+
+function handleLandingKeydown(event) {
+  if (document.body.dataset.page !== "landing" || !landingTileElements.length) return;
+  if (event.altKey || event.ctrlKey || event.metaKey) return;
+  const active = document.activeElement;
+  if (active && active.closest("input, textarea, select")) return;
+  if (active && active.closest("a, button, [role='button']") && !active.closest("#moduleGrid")) return;
+
   switch (event.key) {
     case "ArrowRight":
       event.preventDefault();
-      setFocusedTile(Math.min(focusedTileIndex + 1, tileElements.length - 1));
+      moveLandingSelection("right");
       break;
     case "ArrowLeft":
       event.preventDefault();
-      setFocusedTile(Math.max(focusedTileIndex - 1, 0));
+      moveLandingSelection("left");
       break;
     case "ArrowDown":
       event.preventDefault();
-      setFocusedTile(Math.min(focusedTileIndex + cols, tileElements.length - 1));
+      moveLandingSelection("down");
       break;
     case "ArrowUp":
       event.preventDefault();
-      setFocusedTile(Math.max(focusedTileIndex - cols, 0));
-      break;
-    case "Enter":
-    case " ":
-      if (focusedTileIndex >= 0 && focusedTileIndex < tileElements.length) {
-        event.preventDefault();
-        tileElements[focusedTileIndex].click();
-      }
+      moveLandingSelection("up");
       break;
     case "Home":
       event.preventDefault();
-      setFocusedTile(0);
+      moveLandingSelection("home");
       break;
     case "End":
       event.preventDefault();
-      setFocusedTile(tileElements.length - 1);
+      moveLandingSelection("end");
+      break;
+    case "Enter":
+    case " ":
+      if (selectedLandingIndex >= 0 && landingTileElements[selectedLandingIndex]) {
+        event.preventDefault();
+        landingTileElements[selectedLandingIndex].click();
+      }
+      break;
+    default:
       break;
   }
 }
@@ -206,6 +262,9 @@ function showOnboarding(force = false) {
   document.getElementById("closeOnboarding").addEventListener("click", () => {
     overlay.remove();
     localStorage.setItem(ONBOARDING_KEY, "true");
+    if (document.body.dataset.page === "landing" && selectedLandingIndex >= 0) {
+      setLandingSelection(selectedLandingIndex, { focus: true });
+    }
   });
 }
 
@@ -261,13 +320,7 @@ function updateHeroShelf(module) {
       meta.innerHTML = items.join("");
     }
     if (btn) {
-      if (snapshot.started) {
-        btn.innerHTML = `<span class="btn-label">Lernstand fortsetzen</span><span class="btn-sublabel">→</span>`;
-        btn.classList.add("resume");
-      } else {
-        btn.innerHTML = `<span class="btn-label">${module.shortTitle || module.title} starten</span><span class="btn-sublabel">→</span>`;
-        btn.classList.remove("resume");
-      }
+      btn.textContent = snapshot.started ? "Fortsetzen →" : "Modul starten →";
       btn.href = module.href;
     }
   }
@@ -283,7 +336,8 @@ function renderLandingPage() {
 
   // 2. Hero: show last-visited module or default
   const lastModule = pickInitialLandingModule();
-  updateHeroShelf(lastModule);
+  const defaultModule = lastModule || PUBLIC_MODULES[0] || null;
+  updateHeroShelf(defaultModule);
 
   // 3. Module Grid
   if (PUBLIC_MODULES.length === 0) {
@@ -298,7 +352,7 @@ function renderLandingPage() {
         : "";
 
       return `
-        <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}" tabindex="-1">
+        <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}" id="lpTile_${module.slug}" aria-selected="false" tabindex="-1">
           <h3 class="lp-tile-title">${module.title}</h3>
           <p class="lp-tile-summary">${module.summary}</p>
           <div class="lp-tile-footer">
@@ -309,51 +363,34 @@ function renderLandingPage() {
       `;
     }).join("");
 
-    // Build tile elements array for keyboard navigation
-    tileElements = Array.from(gridNode.querySelectorAll(".lp-tile"));
-    
-    // Find the index of the module with progress (or first module)
-    let initialIndex = 0;
-    if (lastModule) {
-      initialIndex = tileElements.findIndex(tile => tile.dataset.slug === lastModule.slug);
-      if (initialIndex === -1) initialIndex = 0;
-    }
+    landingTileElements = Array.from(gridNode.querySelectorAll(".lp-tile"));
+    const initialIndex = Math.max(0, landingTileElements.findIndex((tile) => tile.dataset.slug === defaultModule?.slug));
+    setLandingSelection(initialIndex, { focus: true });
 
-    // Set initial focus on page load
-    setFocusedTile(initialIndex);
-
-    // Hover / focus → update hero
-    tileElements.forEach((tile, index) => {
+    landingTileElements.forEach((tile, index) => {
       const slug = tile.dataset.slug;
       const module = PUBLIC_MODULES.find((m) => m.slug === slug);
       if (!module) return;
 
-      tile.addEventListener("mouseenter", () => {
-        focusedTileIndex = index;
-        tileElements.forEach(t => t.classList.remove("is-focused", "is-selected"));
-        tile.classList.add("is-focused");
-        updateHeroShelf(module);
-      });
-      
-      tile.addEventListener("focus", () => {
-        focusedTileIndex = index;
-        tileElements.forEach(t => t.classList.remove("is-selected"));
-        tile.classList.add("is-focused");
-        updateHeroShelf(module);
-      });
+      tile.addEventListener("mouseenter", () => setLandingSelection(index));
+      tile.addEventListener("focus", () => setLandingSelection(index));
     });
-    
     gridNode.addEventListener("mouseleave", () => {
-      updateHeroShelf(lastModule);
-      // Restore selected state to the focused tile
-      if (focusedTileIndex >= 0 && focusedTileIndex < tileElements.length) {
-        tileElements[focusedTileIndex].classList.add("is-selected");
+      if (selectedLandingIndex >= 0) {
+        setLandingSelection(selectedLandingIndex);
       }
     });
   }
 
-  // Keyboard navigation for module grid
-  document.addEventListener("keydown", handleKeyboardNavigation);
+  if (!landingKeyboardBound) {
+    document.addEventListener("keydown", handleLandingKeydown);
+    window.addEventListener("resize", () => {
+      if (document.body.dataset.page === "landing" && selectedLandingIndex >= 0) {
+        setLandingSelection(selectedLandingIndex);
+      }
+    });
+    landingKeyboardBound = true;
+  }
 
   // Footer Actions
   const instructionsBtn = document.getElementById("showInstructions");

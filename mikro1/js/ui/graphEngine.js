@@ -299,6 +299,22 @@ class GraphEngine {
       const cv = n => s.getPropertyValue(n).trim();
       // Use the browser's resolved font so canvas always matches page typography
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
+      const isLight = document.body.classList.contains('light-mode');
+      const accent = '#2f77c7';
+      const mathInk = cv('--math-ink') || '#a83f69';
+      const warningRed = cv('--accent3') || '#e05252';
+      const reference = isLight ? '#1c2530' : '#dde4ec';
+      const optimum = reference;
+      const budgetShift = '#cf4352';
+      const budgetComp = reference;
+      const indiffBase = '#d84a5a';
+      const indiffAlt = '#e7902f';
+      const isoquantBase = '#2f8f58';
+      const isoquantAlt = '#79bf87';
+      const tangent = '#d98223';
+      const competition = reference;
+      const supply = '#2f8f58';
+      const mc = tangent;
       this._col = {
         bg:       cv('--bg')        || '#0f1114',
         grid:     cv('--border')    || '#2e3338',
@@ -307,12 +323,37 @@ class GraphEngine {
         muted:    cv('--muted')     || '#8a8f98',
         label:    cv('--text')      || '#e8e8ed',
         text:     cv('--text')      || '#e8e8ed',
-        accent:   cv('--accent')    || '#4a90d9',
+        accent:   accent,
         accent2:  cv('--accent2')   || '#5a9fd4',
-        warn:     cv('--accent3')   || '#e05252',
+        warn:     warningRed,
         card:     cv('--card')      || '#1a1d21',
         fontMono: cv('--font-mono') || resolvedFont,
         fontBody: resolvedFont,
+        math: mathInk,
+        reference,
+        budgetBase: accent,
+        budgetShift,
+        budgetComp,
+        budgetFill: hexToRgba(accent, 0.14),
+        indiffBase,
+        indiffAlt,
+        isoquantBase,
+        isoquantAlt,
+        optimum,
+        tangent,
+        demand: accent,
+        supply,
+        mr: '#8f2436',
+        mc,
+        monopoly: budgetShift,
+        competition,
+        welfare: warningRed,
+        welfareFill: hexToRgba(warningRed, 0.22),
+        profit: tangent,
+        profitFill: hexToRgba(tangent, 0.18),
+        consumerFill: hexToRgba(accent, 0.16),
+        producerFill: hexToRgba(supply, 0.18),
+        guide: reference
       };
       return this._col;
     }
@@ -381,13 +422,14 @@ class GraphEngine {
 
     // Draw indifference curve u = x·y = const (Cobb-Douglas α = 0.5)
     // progress (0-1): reveal fraction of curve for entry animation
-    drawIK(ctx, axMax, u, color, label, sx, sy, progress = 1) {
+    drawIK(ctx, axMax, u, color, label, sx, sy, progress = 1, dash = []) {
       if (u <= 0) return;
       const minX = axMax * 0.012;
       const xStop = axMax * progress;
 
       ctx.strokeStyle = color;
       ctx.lineWidth = 2.5;
+      ctx.setLineDash(dash);
       ctx.beginPath();
       let started = false;
       for (let x = minX; x <= xStop; x += axMax / 500) {
@@ -397,6 +439,7 @@ class GraphEngine {
         else ctx.lineTo(sx(x), sy(y));
       }
       ctx.stroke();
+      ctx.setLineDash([]);
 
       // Label — only draw when curve is mostly complete
       if (label && progress >= 0.85) {

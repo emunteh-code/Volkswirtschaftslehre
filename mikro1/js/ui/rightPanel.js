@@ -69,15 +69,25 @@ export function renderRightPanel(id, onNavigate) {
   const rpC = document.getElementById('rpConnections');
   if (rpC) {
     if (links) {
-      let html = '';
-      (links.uses || []).forEach(uid => {
-        const c = chMap[uid];
-        if (c) html += `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${uid}')" onkeydown="if(event.key==='Enter')window.__navigate('${uid}')"><span class="arrow" aria-hidden="true">←</span> ${c.title}</div>`;
-      });
-      (links.usedBy || []).forEach(uid => {
-        const c = chMap[uid];
-        if (c) html += `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${uid}')" onkeydown="if(event.key==='Enter')window.__navigate('${uid}')"><span class="arrow" aria-hidden="true">→</span> ${c.title}</div>`;
-      });
+      const groups = [];
+      const uses = (links.uses || []).map((uid) => chMap[uid]).filter(Boolean);
+      const usedBy = (links.usedBy || []).map((uid) => chMap[uid]).filter(Boolean);
+
+      if (uses.length) {
+        groups.push(`<div class="rp-link-group">
+<div class="rp-group-label">Setzt voraus</div>
+${uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">←</span> ${chapter.title}</div>`).join('')}
+</div>`);
+      }
+
+      if (usedBy.length) {
+        groups.push(`<div class="rp-link-group">
+<div class="rp-group-label">Wird gebraucht für</div>
+${usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">→</span> ${chapter.title}</div>`).join('')}
+</div>`);
+      }
+
+      const html = groups.join('');
       rpC.innerHTML = html;
       if (connectionsSection) connectionsSection.hidden = !html;
     } else {

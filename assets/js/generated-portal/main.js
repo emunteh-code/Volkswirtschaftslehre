@@ -691,6 +691,30 @@ function updateGraphInfo(html) {
   if (info) info.innerHTML = html;
 }
 
+function renderStructuredGraphInfo({ equation = "", insights = [] }) {
+  const equationHtml = equation
+    ? `<div class="graph-equation">${equation}</div>`
+    : "";
+  const insightHtml = insights
+    .filter((entry) => entry && entry.label && entry.text)
+    .map((entry) => `
+      <div class="graph-insight-row">
+        <div class="graph-insight-label">${entry.label}</div>
+        <div class="graph-insight-copy">${entry.text}</div>
+      </div>
+    `)
+    .join("");
+
+  return `
+    ${equationHtml}
+    <div class="graph-insights">${insightHtml}</div>
+  `;
+}
+
+function updateStructuredGraphInfo(config) {
+  updateGraphInfo(renderStructuredGraphInfo(config));
+}
+
 function setupGraphCanvas(xLabel, yLabel, ranges) {
   const canvas = document.getElementById("graph_canvas");
   if (!canvas) return null;
@@ -2180,8 +2204,24 @@ function drawStatsDistribution() {
   drawVerticalMarker(plot, mean, "Mittelwert", plot.col.warn);
   drawVerticalMarker(plot, median, "Median", plot.col.accent2);
 
-  const shapeText = skew > 0.2 ? "rechtsschief: Mittelwert liegt rechts vom Median" : skew < -0.2 ? "linksschief: Mittelwert liegt links vom Median" : "nahezu symmetrisch: Mittelwert und Median liegen dicht beieinander";
-  updateGraphInfo(`<strong>Interpretation:</strong> Mit μ = ${mu.toFixed(1)}, σ = ${sigma.toFixed(1)} und Schiefe = ${skew.toFixed(1)} wirkt die Verteilung <strong>${shapeText}</strong>. Genau diese Kombination aus Lage, Streuung und Form ist der Kern der deskriptiven Statistik.`);
+  const shapeText = skew > 0.2 ? "Die Verteilung ist rechtsschief; der Mittelwert liegt rechts vom Median." : skew < -0.2 ? "Die Verteilung ist linksschief; der Mittelwert liegt links vom Median." : "Die Verteilung wirkt nahezu symmetrisch; Mittelwert und Median liegen dicht beieinander.";
+  updateStructuredGraphInfo({
+    equation: `Verteilung mit \\(\\mu = ${mu.toFixed(1)}\\), \\(\\sigma = ${sigma.toFixed(1)}\\) und Schiefe \\(${skew.toFixed(1)}\\)`,
+    insights: [
+      {
+        label: "Lage",
+        text: `Die Markierung bei \\(\\mu = ${mu.toFixed(1)}\\) zeigt, wo das Zentrum der Verteilung liegt.`
+      },
+      {
+        label: "Streuung",
+        text: `Mit \\(\\sigma = ${sigma.toFixed(1)}\\) wird sichtbar, wie breit sich die Beobachtungen um das Zentrum auffächern.`
+      },
+      {
+        label: "Form",
+        text: shapeText
+      }
+    ]
+  });
 }
 
 function drawStatsCorrelation() {
@@ -2210,8 +2250,25 @@ function drawStatsCorrelation() {
   drawVerticalMarker(plot, 0, "x̄≈0", plot.col.muted);
   drawHorizontalMarker(plot, 0, "ȳ≈0", plot.col.muted);
 
-  const effect = outlier ? "Ein einzelner Ausreisser kann Richtung und Staerke des Zusammenhangs sichtbar verziehen." : "Ohne Ausreisser folgt die Punktwolke der eingestellten Grundrichtung deutlich sauberer.";
-  updateGraphInfo(`<strong>Interpretation:</strong> Bei r = ${corr.toFixed(2)} ist der lineare Zusammenhang ${Math.abs(corr) > 0.7 ? "stark" : Math.abs(corr) > 0.35 ? "mittelstark" : "eher schwach"}. ${effect}`);
+  const strength = Math.abs(corr) > 0.7 ? "stark" : Math.abs(corr) > 0.35 ? "mittelstark" : "eher schwach";
+  const effect = outlier ? "Ein einzelner Ausreißer kann Richtung und Stärke des Zusammenhangs sichtbar verziehen." : "Ohne Ausreißer folgt die Punktwolke der eingestellten Grundrichtung deutlich sauberer.";
+  updateStructuredGraphInfo({
+    equation: `Korrelation \\(r = ${corr.toFixed(2)}\\)`,
+    insights: [
+      {
+        label: "Richtung",
+        text: corr >= 0 ? "Die Punkte steigen im Mittel gemeinsam an; höhere x-Werte gehen tendenziell mit höheren y-Werten einher." : "Die Punkte bewegen sich gegeneinander; höhere x-Werte gehen tendenziell mit niedrigeren y-Werten einher."
+      },
+      {
+        label: "Stärke",
+        text: `Mit \\(r = ${corr.toFixed(2)}\\) wirkt der lineare Zusammenhang ${strength}.`
+      },
+      {
+        label: "Ausreißer",
+        text: effect
+      }
+    ]
+  });
 }
 
 function drawStatsBinomial() {
@@ -2240,7 +2297,23 @@ function drawStatsBinomial() {
   const expected = n * p;
   const variance = n * p * (1 - p);
   drawVerticalMarker(plot, expected, "E[X]", plot.col.accent2);
-  updateGraphInfo(`<strong>Interpretation:</strong> Bei n = ${n} und p = ${p.toFixed(2)} liegt der Erwartungswert bei <strong>${expected.toFixed(2)}</strong>, die Varianz bei <strong>${variance.toFixed(2)}</strong> und die markierte Wahrscheinlichkeit P(X = ${k}) bei <strong>${bars[k].y.toFixed(3)}</strong>.`);
+  updateStructuredGraphInfo({
+    equation: `Binomialmodell \\(X \\sim B(${n}, ${p.toFixed(2)})\\)`,
+    insights: [
+      {
+        label: "Erwartungswert",
+        text: `Der Schwerpunkt der Verteilung liegt bei \\(E[X] = ${expected.toFixed(2)}\\).`
+      },
+      {
+        label: "Streuung",
+        text: `Die Varianz beträgt \\(Var(X) = ${variance.toFixed(2)}\\) und bestimmt, wie breit die Balkenverteilung um den Schwerpunkt ausfächert.`
+      },
+      {
+        label: "Punktwahrscheinlichkeit",
+        text: `Der markierte Balken zeigt \\(P(X = ${k}) = ${bars[k].y.toFixed(3)}\\) für genau \\(${k}\\) Erfolge.`
+      }
+    ]
+  });
 }
 
 function drawStatsCi() {
@@ -2277,7 +2350,23 @@ function drawStatsCi() {
   drawVerticalMarker(plot, mu0, "μ₀", plot.col.warn);
 
   const contains = mu0 >= low && mu0 <= high;
-  updateGraphInfo(`<strong>Interpretation:</strong> Das ${conf}%-Intervall lautet <strong>[${low.toFixed(2)}, ${high.toFixed(2)}]</strong>. Der Vergleichswert μ₀ = ${mu0.toFixed(2)} liegt ${contains ? "<strong>innerhalb</strong>" : "<strong>außerhalb</strong>"} des Intervalls.`);
+  updateStructuredGraphInfo({
+    equation: `${conf}\\%-Konfidenzintervall \\([${low.toFixed(2)}, ${high.toFixed(2)}]\\)`,
+    insights: [
+      {
+        label: "Intervallgrenzen",
+        text: `Das Intervall wird vom Stichprobenmittel \\(\\bar{x} = ${xbar.toFixed(2)}\\) und dem Standardfehler \\(${se.toFixed(2)}\\) bestimmt.`
+      },
+      {
+        label: "Vergleichswert",
+        text: `Der Referenzwert \\(\\mu_0 = ${mu0.toFixed(2)}\\) liegt ${contains ? "innerhalb" : "außerhalb"} des Intervalls.`
+      },
+      {
+        label: "Lesart",
+        text: "Wenn der Vergleichswert außerhalb liegt, spricht das gegen die entsprechende Nullhypothese auf dem gewählten Niveau."
+      }
+    ]
+  });
 }
 
 function drawStatsTest() {
@@ -2315,7 +2404,23 @@ function drawStatsTest() {
   drawVerticalMarker(plot, mu0, "μ₀", plot.col.accent2);
 
   const reject = Math.abs(zStat) > zCrit;
-  updateGraphInfo(`<strong>Interpretation:</strong> Mit z = ${zStat.toFixed(2)} und kritischem Wert ±${zCrit.toFixed(2)} wird H₀ ${reject ? "<strong>verworfen</strong>" : "<strong>nicht verworfen</strong>"}. Die Grafik macht genau die Logik von Teststatistik, kritischem Bereich und Entscheidung sichtbar.`);
+  updateStructuredGraphInfo({
+    equation: `Teststatistik \\(z = ${zStat.toFixed(2)}\\), kritischer Wert \\(\\pm ${zCrit.toFixed(2)}\\)`,
+    insights: [
+      {
+        label: "Nullhypothese",
+        text: `Die Glocke zeigt die Verteilung unter \\(H_0: \\mu = ${mu0.toFixed(2)}\\).`
+      },
+      {
+        label: "Entscheidungsregel",
+        text: `Die kritischen Grenzen liegen bei \\(${leftCrit.toFixed(2)}\\) und \\(${rightCrit.toFixed(2)}\\); jenseits davon beginnt der Ablehnungsbereich.`
+      },
+      {
+        label: "Entscheidung",
+        text: reject ? "Der beobachtete Mittelwert liegt im kritischen Bereich; \\(H_0\\) wird verworfen." : "Der beobachtete Mittelwert bleibt im nichtkritischen Bereich; \\(H_0\\) wird nicht verworfen."
+      }
+    ]
+  });
 }
 
 function drawRegressionCore({ intercept, slope, noise, pointColor, lineColor, residualColor }) {
@@ -2359,7 +2464,23 @@ function drawStatsRegression() {
   if (!graph) return;
 
   const varianceSignal = (b1 * b1 * 6.4) / ((b1 * b1 * 6.4) + noise * noise + 0.01);
-  updateGraphInfo(`<strong>Interpretation:</strong> Die Punkte streuen um die Regressionsgerade <strong>y = ${b0.toFixed(1)} + ${b1.toFixed(1)}x</strong>. Bei Stoerung σ = ${noise.toFixed(1)} liegt die erklaerte Variation grob bei <strong>R² ≈ ${varianceSignal.toFixed(2)}</strong>.`);
+  updateStructuredGraphInfo({
+    equation: `Regressionsgerade \\(y = ${b0.toFixed(1)} + ${b1.toFixed(1)}x\\)`,
+    insights: [
+      {
+        label: "Achsenabschnitt",
+        text: `\\(\\beta_0 = ${b0.toFixed(1)}\\) markiert den erwarteten y-Wert bei \\(x = 0\\).`
+      },
+      {
+        label: "Steigung",
+        text: `\\(\\beta_1 = ${b1.toFixed(1)}\\) zeigt, um wie viele y-Einheiten sich die Gerade bei einer zusätzlichen x-Einheit verändert.`
+      },
+      {
+        label: "Streuung",
+        text: `Bei Störungsniveau \\(\\sigma = ${noise.toFixed(1)}\\) liegt die erklärte Variation grob bei \\(R^2 \\approx ${varianceSignal.toFixed(2)}\\).`
+      }
+    ]
+  });
 }
 
 function drawEconOls() {

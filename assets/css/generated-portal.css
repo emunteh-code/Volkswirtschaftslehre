@@ -113,6 +113,48 @@
   gap: 18px;
 }
 
+.generated-graph-panel .graph-info {
+  display: grid;
+  gap: 14px;
+}
+
+.generated-graph-panel .graph-equation {
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--accent2) 18%, var(--border));
+  background: color-mix(in srgb, var(--accent2) 10%, var(--surface2));
+  color: var(--text);
+}
+
+.generated-graph-panel .graph-insights {
+  display: grid;
+  gap: 10px;
+}
+
+.generated-graph-panel .graph-insight-row {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface2) 90%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+.generated-graph-panel .graph-insight-label {
+  color: var(--accent2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.generated-graph-panel .graph-insight-copy {
+  color: var(--text);
+  line-height: 1.6;
+}
+
 .generated-visual-grid {
   display: grid;
   gap: 14px;

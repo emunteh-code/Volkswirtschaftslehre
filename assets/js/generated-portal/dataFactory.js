@@ -17255,7 +17255,550 @@ function buildGraphPanel(module, chapter, item, allItems, index) {
   return buildInteractiveGraphPanel(graphKind, chapter);
 }
 
+function chapterIdByTitle(chapters, fragment) {
+  return chapters.find((chapter) => chapter.title.toLowerCase().includes(fragment.toLowerCase()))?.id || null;
+}
+
+function buildStatistikConceptLinks(chapters) {
+  const by = (fragment) => chapterIdByTitle(chapters, fragment);
+  const links = {};
+
+  const grundlagen = by("grundlagen i");
+  const deskriptiv1 = by("deskriptive statistik i");
+  const deskriptiv2 = by("deskriptive statistik ii");
+  const deskriptiv3 = by("deskriptive statistik iii");
+  const wahrscheinlichkeit = by("wahrscheinlichkeitsrechnung");
+  const diskret = by("diskrete zufallsvariablen");
+  const stetig = by("stetige zufallsvariablen");
+  const bivariat = by("bivariate verteilungen");
+  const schaetzen = by("schaetzverfahren");
+  const intervalle = by("konfidenzintervalle");
+  const tests = by("hypothesentests");
+  const gruppen = by("zwei-stichproben-verfahren");
+  const regression = by("statistische modellierung und regression");
+  const uebung12 = by("uebung 1 und 2");
+  const uebung34 = by("uebung 3 und 4");
+  const uebung5 = by("uebung 5 und grossuebung");
+  const tutorium = by("tutorium 1-13");
+  const klausur = by("klausurmodus und r-lab");
+
+  [
+    [grundlagen, { uses: [], usedBy: [deskriptiv1, uebung12] }],
+    [deskriptiv1, { uses: [grundlagen], usedBy: [deskriptiv2, uebung12] }],
+    [deskriptiv2, { uses: [deskriptiv1], usedBy: [deskriptiv3, uebung12] }],
+    [deskriptiv3, { uses: [deskriptiv2], usedBy: [bivariat, regression, uebung12] }],
+    [wahrscheinlichkeit, { uses: [grundlagen], usedBy: [diskret, stetig, uebung34] }],
+    [diskret, { uses: [wahrscheinlichkeit], usedBy: [stetig, tests, uebung34] }],
+    [stetig, { uses: [wahrscheinlichkeit, diskret], usedBy: [schaetzen, intervalle, tests, uebung34] }],
+    [bivariat, { uses: [deskriptiv3, stetig], usedBy: [regression, uebung34] }],
+    [schaetzen, { uses: [stetig], usedBy: [intervalle, tests, uebung34] }],
+    [intervalle, { uses: [schaetzen, stetig], usedBy: [tests, regression, uebung34] }],
+    [tests, { uses: [intervalle, wahrscheinlichkeit], usedBy: [gruppen, regression, uebung34] }],
+    [gruppen, { uses: [tests, stetig], usedBy: [uebung34, tutorium] }],
+    [regression, { uses: [bivariat, intervalle, tests], usedBy: [uebung5, klausur] }],
+    [uebung12, { uses: [deskriptiv1, deskriptiv2, deskriptiv3], usedBy: [tutorium] }],
+    [uebung34, { uses: [wahrscheinlichkeit, diskret, stetig, schaetzen, intervalle, tests, gruppen], usedBy: [tutorium, klausur] }],
+    [uebung5, { uses: [regression, tests, intervalle], usedBy: [klausur] }],
+    [tutorium, { uses: [uebung12, uebung34, uebung5], usedBy: [klausur] }],
+    [klausur, { uses: [tutorium, regression], usedBy: [] }]
+  ].forEach(([id, value]) => {
+    if (id) {
+      links[id] = {
+        uses: (value.uses || []).filter(Boolean),
+        usedBy: (value.usedBy || []).filter(Boolean)
+      };
+    }
+  });
+
+  return links;
+}
+
+function buildMathematikConceptLinks(chapters) {
+  const by = (fragment) => chapterIdByTitle(chapters, fragment);
+  const links = {};
+
+  const algebra = by("algebra und mengenlehre");
+  const funktionen = by("funktionen und gleichungen");
+  const summen = by("summen und logik");
+  const matrix1 = by("matrizen und matrix-algebra");
+  const matrix2 = by("masszahlen, inversen und eigenwerte");
+  const diff = by("univariate differenzialrechnung");
+  const opt1 = by("univariate optimierung");
+  const multi = by("funktionen mehrerer variablen");
+  const opt2 = by("multivariate optimierung und lagrange");
+  const integral = by("integralrechnung");
+  const e1 = by("kleinuebung e1");
+  const e2 = by("kleinuebung e2");
+  const e3 = by("kleinuebung e3");
+  const la1 = by("kleinuebung la1");
+  const la2 = by("kleinuebung la2");
+  const an1 = by("kleinuebung an1");
+  const op1 = by("kleinuebung op1");
+  const an2 = by("kleinuebung an2");
+  const op2 = by("kleinuebung op2");
+  const an3 = by("kleinuebung an3");
+
+  [
+    [algebra, { uses: [], usedBy: [funktionen, summen, e1] }],
+    [funktionen, { uses: [algebra], usedBy: [diff, e2] }],
+    [summen, { uses: [algebra], usedBy: [matrix1, integral, e3] }],
+    [matrix1, { uses: [summen], usedBy: [matrix2, la1] }],
+    [matrix2, { uses: [matrix1], usedBy: [la2] }],
+    [diff, { uses: [funktionen], usedBy: [opt1, multi, an1] }],
+    [opt1, { uses: [diff], usedBy: [op1, opt2] }],
+    [multi, { uses: [diff], usedBy: [opt2, an2] }],
+    [opt2, { uses: [multi, opt1], usedBy: [op2] }],
+    [integral, { uses: [funktionen, summen], usedBy: [an3] }],
+    [e1, { uses: [algebra], usedBy: [e2, e3] }],
+    [e2, { uses: [funktionen], usedBy: [an1] }],
+    [e3, { uses: [summen], usedBy: [la1, an3] }],
+    [la1, { uses: [matrix1], usedBy: [la2] }],
+    [la2, { uses: [matrix2], usedBy: [] }],
+    [an1, { uses: [diff], usedBy: [op1, an2] }],
+    [op1, { uses: [opt1], usedBy: [op2] }],
+    [an2, { uses: [multi], usedBy: [op2] }],
+    [op2, { uses: [opt2], usedBy: [] }],
+    [an3, { uses: [integral], usedBy: [] }]
+  ].forEach(([id, value]) => {
+    if (id) {
+      links[id] = {
+        uses: (value.uses || []).filter(Boolean),
+        usedBy: (value.usedBy || []).filter(Boolean)
+      };
+    }
+  });
+
+  return links;
+}
+
+function buildModuleSpecificConceptLinks(module, chapters) {
+  if (module.slug === "statistik") return buildStatistikConceptLinks(chapters);
+  if (module.slug === "mathematik") return buildMathematikConceptLinks(chapters);
+  return null;
+}
+
+function buildTextQuestion(id, points, text, correct, feedback) {
+  return { id, points, type: "text", text, correct, feedback };
+}
+
+function buildTextBlock(label, points, title, preamble, questions) {
+  return { label, points, type: "text-block", title, preamble, questions };
+}
+
+function buildWfBlock(label, points, preamble, context, questions) {
+  return {
+    label,
+    points,
+    type: "wf-block",
+    preamble,
+    groups: [{ context, questions }]
+  };
+}
+
+function feedbackParagraphs(...paragraphs) {
+  return paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
+}
+
+function buildStatistikFullExams(chapters) {
+  const id = (fragment) => chapterIdByTitle(chapters, fragment);
+  const deskriptiv2 = id("deskriptive statistik ii");
+  const wahrscheinlichkeit = id("wahrscheinlichkeitsrechnung");
+  const diskret = id("diskrete zufallsvariablen");
+  const schaetzen = id("schaetzverfahren");
+  const intervalle = id("konfidenzintervalle");
+  const tests = id("hypothesentests");
+  const gruppen = id("zwei-stichproben-verfahren");
+  const regression = id("statistische modellierung und regression");
+
+  return {
+    probeklausur_1: {
+      id: "probeklausur_1",
+      title: "Probeklausur I: Deskriptive Statistik, Wahrscheinlichkeiten und Verteilungen",
+      subtitle: "90-Minuten-Klausur zu Beschreibung, Binomiallogik und Verteilungsmodellwahl",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Grundlagen, Verteilungen und Modelllogik",
+          [
+            { id: "stat_pk1_1", text: "Bei stark rechtsschiefen Daten ist der Median oft robuster als der Mittelwert.", correct: "Wahr", feedback: "Der Median reagiert deutlich weniger auf extreme hohe Werte." },
+            { id: "stat_pk1_2", text: "Ein Histogramm ist die Standardgrafik für nominale Merkmale.", correct: "Falsch", feedback: "Für nominale Merkmale passen Balkendiagramme; Histogramme gehören zu metrischen Daten mit Klassen." },
+            { id: "stat_pk1_3", text: "Die Binomialverteilung setzt unabhängige Versuche mit konstanter Erfolgswahrscheinlichkeit voraus.", correct: "Wahr", feedback: "Genau diese drei Bausteine tragen das Modell." },
+            { id: "stat_pk1_4", text: "Bei stetigen Verteilungen ist P(X = x) typischerweise größer als null.", correct: "Falsch", feedback: "Wahrscheinlichkeiten tragen Intervalle, nicht Einzelpunkte." },
+            { id: "stat_pk1_5", text: "Korrelation beweist bereits einen kausalen Zusammenhang.", correct: "Falsch", feedback: "Korrelation ist deskriptiv und keine Kausaldiagnose." },
+            { id: "stat_pk1_6", text: "Die Varianz misst Streuung um den Erwartungswert oder Mittelwert herum.", correct: "Wahr", feedback: "Genau darum ist sie gemeinsam mit der Lage zu lesen." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Lage- und Streuungsmaße lesen",
+          "Eine Einkommensstichprobe zeigt mehrere mittlere Werte und einen sehr hohen Ausreißer.",
+          [
+            buildTextQuestion(
+              "stat_pk1_2a",
+              8,
+              "Welches Lagemaß ist hier als typische Lage besonders belastbar?",
+              ["median"],
+              feedbackParagraphs(
+                "Der Median ist gegenüber einzelnen extremen Werten robust und beschreibt deshalb die typische Lage besser als der Mittelwert."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_2b",
+              7,
+              "Welche Streuungskennzahl wäre als robuste Ergänzung besonders naheliegend?",
+              ["interquartilsabstand", "iqr"],
+              feedbackParagraphs(
+                "Der Interquartilsabstand konzentriert sich auf den mittleren 50-Prozent-Bereich und reagiert daher viel weniger auf Ausreißer."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_2c",
+              7,
+              "Wie würden Sie die Verteilung sprachlich kurz charakterisieren?",
+              ["rechtsschief", "positiv schief"],
+              feedbackParagraphs(
+                "Ein sehr hoher Ausreißer am oberen Rand spricht für eine rechtsschiefe oder positiv schiefe Verteilung."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Binomialmodell und Punktwahrscheinlichkeit",
+          "Eine faire Münze wird zehnmal geworfen. Gesucht ist die Wahrscheinlichkeit für genau vier Köpfe.",
+          [
+            buildTextQuestion(
+              "stat_pk1_3a",
+              6,
+              "Welches Wahrscheinlichkeitsmodell ist passend?",
+              ["binomialverteilung", "binomial"],
+              feedbackParagraphs(
+                "Es geht um die Zahl von Erfolgen in endlich vielen unabhängigen Versuchen mit konstanter Erfolgswahrscheinlichkeit."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_3b",
+              7,
+              "Wie lauten n und p in diesem Modell?",
+              ["n=10 p=0.5", "n=10,p=0.5", "10 und 0.5", "10 und 0,5"],
+              feedbackParagraphs(
+                "Zehn Würfe bedeuten \\(n = 10\\), eine faire Münze \\(p = 0{,}5\\)."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_3c",
+              7,
+              "Welche Formel wird für die gesuchte Punktwahrscheinlichkeit verwendet?",
+              ["binom", "p(x=k)=(", "p(x=4)", "binomialformel"],
+              feedbackParagraphs(
+                "Gesucht ist die Binomialformel \\(P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}\\) mit \\(k=4\\)."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Modellwahl bei Zufallsvariablen",
+          "In einer Servicestelle wird die Zahl der eingehenden Anrufe pro Minute modelliert.",
+          [
+            buildTextQuestion(
+              "stat_pk1_4a",
+              7,
+              "Welches Verteilungsmodell ist hier besonders naheliegend?",
+              ["poissonverteilung", "poisson"],
+              feedbackParagraphs(
+                "Es geht um eine Ereignisanzahl pro Zeitintervall; genau dafür ist die Poissonlogik der Standardzugriff."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_4b",
+              7,
+              "Welche Kursvoraussetzung muss für die Modellwahl inhaltlich mitgedacht werden?",
+              ["konstante rate", "konstante intensitaet", "unabhaengige anrufe"],
+              feedbackParagraphs(
+                "Naheliegend sind eine konstante durchschnittliche Intensität und eine hinreichend unabhängige Ereignislogik."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_4c",
+              6,
+              "Warum wäre die Normalverteilung hier nicht der erste Modellzugriff?",
+              ["weil ereignisse gezaehlt werden", "zaehldaten", "diskrete anzahl"],
+              feedbackParagraphs(
+                "Die Beobachtung ist eine diskrete Ereigniszahl und kein kontinuierlicher Messwert; deshalb beginnt die Modellwahl nicht bei der Normalverteilung."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_2: {
+      id: "probeklausur_2",
+      title: "Probeklausur II: Schätzung, Konfidenzintervalle und Testlogik",
+      subtitle: "90-Minuten-Klausur zu Inferenz, p-Wert-Logik und Gruppenvergleichen",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Inferenz und Testinterpretation",
+          [
+            { id: "stat_pk2_1", text: "Ein 95%-Konfidenzintervall bedeutet, dass der Parameter mit 95% Wahrscheinlichkeit im konkreten Intervall liegt.", correct: "Falsch", feedback: "Das 95%-Niveau ist eine Eigenschaft der Intervallmethode, nicht des fixen Parameters." },
+            { id: "stat_pk2_2", text: "Wenn der p-Wert kleiner als α ist, wird die Nullhypothese verworfen.", correct: "Wahr", feedback: "Das ist die Standardentscheidungsregel." },
+            { id: "stat_pk2_3", text: "Ein zweiseitiger Test prüft nur auf positive Abweichungen.", correct: "Falsch", feedback: "Er prüft Abweichungen in beide Richtungen." },
+            { id: "stat_pk2_4", text: "Die Standardabweichung des Schätzers sinkt typischerweise mit wachsender Stichprobe.", correct: "Wahr", feedback: "Genau deshalb werden Konfidenzintervalle bei größerem n meist enger." },
+            { id: "stat_pk2_5", text: "ANOVA vergleicht Zwischen-Gruppen- und Innerhalb-Gruppen-Streuung.", correct: "Wahr", feedback: "Daraus entsteht die F-Statistik." },
+            { id: "stat_pk2_6", text: "Signifikanz ersetzt die inhaltliche Interpretation eines Effekts.", correct: "Falsch", feedback: "Statistische Signifikanz und inhaltliche Relevanz sind getrennte Fragen." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Konfidenzintervall für den Mittelwert",
+          "Eine Stichprobe mit bekanntem Zielparameter soll über ein 95%-Intervall interpretiert werden.",
+          [
+            buildTextQuestion(
+              "stat_pk2_2a",
+              8,
+              "Welche drei Größen braucht man im Kern für ein klassisches Konfidenzintervall des Mittelwerts?",
+              ["stichprobenmittel standardfehler kritischer wert", "xbar standardfehler kritischer wert", "mittelwert standardfehler kritischer wert"],
+              feedbackParagraphs(
+                "Das Intervall wird aus Stichprobenmittel, Unsicherheitsmaß (Standardfehler) und kritischem Quantil aufgebaut."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_2b",
+              7,
+              "Wie verändert sich das Intervall, wenn das Konfidenzniveau steigt?",
+              ["breiter", "es wird breiter"],
+              feedbackParagraphs(
+                "Mehr Sicherheit erfordert größere Randabstände und damit ein breiteres Intervall."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_2c",
+              7,
+              "Welche inhaltliche Aussage ist korrekt, wenn der Nullwert außerhalb des 95%-Intervalls liegt?",
+              ["die nullhypothese wird auf 5 niveau verworfen", "gegen den nullwert spricht die stichprobe", "auf 5 prozent verworfen"],
+              feedbackParagraphs(
+                "Liegt der Nullwert außerhalb, spricht das gegen die entsprechende Nullhypothese auf dem korrespondierenden Testniveau."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Hypothesentest sauber lesen",
+          "Ein t-Test liefert Teststatistik, p-Wert und ein 95%-Konfidenzintervall für den Effekt.",
+          [
+            buildTextQuestion(
+              "stat_pk2_3a",
+              7,
+              "Welcher Outputteil entscheidet unmittelbar über die Verwerfungsregel bei gegebenem α?",
+              ["p-wert", "p wert"],
+              feedbackParagraphs(
+                "Der p-Wert wird mit dem Signifikanzniveau verglichen und trägt die unmittelbare Testentscheidung."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_3b",
+              7,
+              "Wie lautet die häufigste Fehlinterpretation des p-Werts?",
+              ["wahrscheinlichkeit dass h0 wahr ist", "wahrscheinlichkeit der nullhypothese"],
+              feedbackParagraphs(
+                "Der p-Wert ist nicht die Wahrscheinlichkeit, dass \\(H_0\\) wahr ist, sondern die Wahrscheinlichkeit des beobachteten oder extremeren Ergebnisses unter \\(H_0\\)."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_3c",
+              6,
+              "Warum sollte nach der Testentscheidung immer noch eine verbale Inhaltsdeutung folgen?",
+              ["weil signifikanz nicht die inhaltliche bedeutung ersetzt", "effektgroesse und frage muessen noch gedeutet werden", "statistische entscheidung reicht nicht"],
+              feedbackParagraphs(
+                "Eine gute Lösung trennt statistische Entscheidung und inhaltliche Bedeutung des Ergebnisses."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Zwei-Stichproben- und ANOVA-Logik",
+          "Mehrere Gruppenmittelwerte sollen verglichen werden.",
+          [
+            buildTextQuestion(
+              "stat_pk2_4a",
+              7,
+              "Warum reicht bei mehr als zwei Gruppen nicht einfach eine Kette einzelner t-Tests?",
+              ["weil sich das fehlerniveau aufblaeht", "alpha inflation", "gesamtniveau steigt"],
+              feedbackParagraphs(
+                "Viele Einzeltests blähen das Gesamtfehlerniveau auf; genau deshalb bündelt ANOVA den Vergleich."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_4b",
+              7,
+              "Was vergleicht die F-Statistik der Varianzanalyse im Kern?",
+              ["zwischen gruppen streuung und innerhalb gruppen streuung", "zwischen und innerhalb gruppen"],
+              feedbackParagraphs(
+                "ANOVA setzt systematische Zwischen-Gruppen-Streuung zur zufälligen Innerhalb-Gruppen-Streuung ins Verhältnis."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_4c",
+              6,
+              "Welcher Methodengedanke bleibt bei Zwei-Stichproben-Test und ANOVA gleich?",
+              ["gruppenunterschiede gegen zufallsstreuung abwaegen", "systematischen unterschied gegen reststreuung", "gruppenmittel vergleichen"],
+              feedbackParagraphs(
+                "In beiden Fällen wird geprüft, ob beobachtete Gruppenunterschiede relativ zur Reststreuung groß genug sind."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_3: {
+      id: "probeklausur_3",
+      title: "Probeklausur III: Regression, Modellgüte und R-Transfer",
+      subtitle: "90-Minuten-Klausur zu Koeffizienten, Residuen, Signifikanz und Outputdeutung",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Regression und Modellinterpretation",
+          [
+            { id: "stat_pk3_1", text: "Die Steigung einer linearen Regression beschreibt den erwarteten y-Unterschied bei einer Einheit mehr x.", correct: "Wahr", feedback: "Genau das ist die ceteris-paribus-Lesart des Koeffizienten in der einfachen linearen Regression." },
+            { id: "stat_pk3_2", text: "Ein hohes R² beweist automatisch Kausalität.", correct: "Falsch", feedback: "R² misst nur erklärte Variation in der Stichprobe." },
+            { id: "stat_pk3_3", text: "Residuen sind beobachtetes y minus geschätztes ŷ.", correct: "Wahr", feedback: "Sie messen die unerklärte Abweichung eines Datenpunkts von der Regressionsgeraden." },
+            { id: "stat_pk3_4", text: "Wenn ein Koeffizient signifikant ist, ist seine Effektgröße automatisch ökonomisch groß.", correct: "Falsch", feedback: "Signifikanz und Effektgröße sind verschiedene Aussagen." },
+            { id: "stat_pk3_5", text: "Ein Konfidenzintervall für β1, das den Nullwert ausschließt, spricht gegen H0: β1 = 0.", correct: "Wahr", feedback: "Das Intervall und der Test transportieren dieselbe Nullprüfung." },
+            { id: "stat_pk3_6", text: "Ein Scatterplot ist vor der Regressionsschätzung wertlos, weil die eigentliche Information erst im Output steht.", correct: "Falsch", feedback: "Der Plot liefert bereits Struktur, Ausreißer und grobe Form des Zusammenhangs." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Koeffizient, Residuum und Güte",
+          "Eine lineare Regression liefert einen positiven Steigungskoeffizienten, sichtbare Reststreuung und ein mittleres R².",
+          [
+            buildTextQuestion(
+              "stat_pk3_2a",
+              8,
+              "Wie lautet die Kernaussage eines positiven Steigungskoeffizienten?",
+              ["y steigt im mittel mit x", "positiver zusammenhang", "bei mehr x hoehere y werte"],
+              feedbackParagraphs(
+                "Ein positiver Koeffizient bedeutet, dass höhere x-Werte im Mittel mit höheren y-Werten einhergehen."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_2b",
+              7,
+              "Was zeigen große Residuen inhaltlich?",
+              ["dass einzelne beobachtungen weit von der regressionsgeraden abweichen", "schlecht erklaerte punkte", "restabweichung"],
+              feedbackParagraphs(
+                "Große Residuen markieren Beobachtungen, die vom linearen Modell nur schwach erfasst werden."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_2c",
+              7,
+              "Was sagt ein mittleres R² aus, ohne zu viel zu behaupten?",
+              ["ein teil der variation wird erklaert aber nicht alles", "erklaerte variation ist mittel", "modell erklaert nur einen teil"],
+              feedbackParagraphs(
+                "R² beschreibt, wie viel der Stichprobenvariation das lineare Modell einfängt, aber nicht mehr."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Signifikanz gegen Effektgröße",
+          "Ein Regressionsoutput zeigt einen kleinen positiven Koeffizienten mit sehr kleinem p-Wert.",
+          [
+            buildTextQuestion(
+              "stat_pk3_3a",
+              7,
+              "Welche Aussage zur Signifikanz ist korrekt?",
+              ["der zusammenhang ist statistisch von null unterscheidbar", "h0 beta gleich null wird verworfen", "statistisch signifikant"],
+              feedbackParagraphs(
+                "Der kleine p-Wert spricht gegen die Nullhypothese eines Koeffizienten von null."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_3b",
+              7,
+              "Warum ersetzt das nicht die Größeninterpretation des Koeffizienten?",
+              ["weil signifikanz nicht sagt wie gross der effekt ist", "effektgroesse bleibt getrennt", "oekonomische relevanz"],
+              feedbackParagraphs(
+                "Ein statistisch sauber nachweisbarer Effekt kann inhaltlich klein bleiben; beides muss getrennt gelesen werden."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_3c",
+              6,
+              "Welche zusätzliche Angabe macht die Effektgröße belastbarer lesbar?",
+              ["konfidenzintervall", "einheitenbezug", "ceteris paribus interpretation"],
+              feedbackParagraphs(
+                "Ein Konfidenzintervall oder ein klarer Einheitenbezug hilft, die Größenordnung fachlich einzuordnen."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "R-Output in Statistiksprache übersetzen",
+          "In R wurde ein lineares Modell geschätzt und summary(model) ausgegeben.",
+          [
+            buildTextQuestion(
+              "stat_pk3_4a",
+              7,
+              "Welche drei Elemente sollten in einer guten Outputdeutung fast immer vorkommen?",
+              ["koeffizient signifikanz inhaltliche interpretation", "effekt p wert interpretation", "koeffizient unsicherheit bedeutung"],
+              feedbackParagraphs(
+                "Eine belastbare Deutung nennt erst den Koeffizienten, dann die Unsicherheit und anschließend die inhaltliche Aussage."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_4b",
+              7,
+              "Warum genügt es nicht, nur Sterne oder den p-Wert zu zitieren?",
+              ["weil die groesse und bedeutung des effekts fehlen", "output muss inhaltlich uebersetzt werden", "sterne sind keine interpretation"],
+              feedbackParagraphs(
+                "Sterne allein sagen nichts über Richtung, Größenordnung oder fachliche Bedeutung des Zusammenhangs."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_4c",
+              6,
+              "Woran erkennen Sie, dass R hier pädagogisch sinnvoll und nicht ornamental eingesetzt wird?",
+              ["wenn code output und statistikfrage zusammenpassen", "wenn der output in statistische sprache uebersetzt wird", "wenn die methode zur frage passt"],
+              feedbackParagraphs(
+                "R ist dann sinnvoll integriert, wenn Befehl, Output und statistische Fragelogik sichtbar zusammengeführt werden."
+              )
+            )
+          ]
+        )
+      ]
+    }
+  };
+}
+
 function buildFullExam(module, chapters, contentById, items) {
+  if (module.slug === "statistik") {
+    return buildStatistikFullExams(chapters);
+  }
   const aufgaben = chapters.slice(0, Math.min(4, chapters.length)).map((chapter, index) => {
     const item = items[index];
     const feedbackBase = contentById[chapter.id];
@@ -17345,6 +17888,7 @@ export function buildGeneratedPortalData(module, content) {
   const graphPanelsById = {};
   const graphConcepts = new Set();
   const graphKindsById = {};
+  const customLinks = buildModuleSpecificConceptLinks(module, chapters);
 
   chapters.forEach((chapter, index) => {
     const item = conceptItems[index];
@@ -17361,7 +17905,7 @@ export function buildGeneratedPortalData(module, content) {
     };
     intuitionById[chapter.id] = buildIntuition(module, chapter, item, content, conceptItems, index);
     stepProblems[chapter.id] = buildStepProblems(module, chapter, item, content, mastery, conceptItems, index);
-    conceptLinks[chapter.id] = {
+    conceptLinks[chapter.id] = customLinks?.[chapter.id] || {
       uses: index > 0 ? [chapters[index - 1].id] : [],
       usedBy: index < chapters.length - 1 ? [chapters[index + 1].id] : []
     };

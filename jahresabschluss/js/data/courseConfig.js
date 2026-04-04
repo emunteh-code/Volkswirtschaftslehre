@@ -1,7 +1,9 @@
 export const COURSE_CONFIG = {
+  slug: 'jahresabschluss',
   courseLabel: 'Jahresabschluss',
   courseTitle: 'Jahresabschluss & Bilanzierung',
-  homeIntro: 'Die Grundlagen der externen Rechnungslegung: Bilanzierung, Bewertung und Gewinn- und Verlustrechnung nach HGB.',
+  homeIntro: 'Bilanzansatz, Buchungslogik, Bewertung, Rechnungsabgrenzung und Erfolgsrechnung in einem klausurnahen HGB-Portal.',
+  examCollectionTitle: 'Probeklausuren Jahresabschluss',
   consentKey: 'jahresabschluss_consent_v1',
   progressKey: 'jahresabschluss_progress_v1',
   lastIdKey: 'jahresabschluss_last_id_v1',

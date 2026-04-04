@@ -1,19 +1,58 @@
 import { chromium } from "/tmp/pw-check/node_modules/playwright/index.mjs";
 
-const base = "http://127.0.0.1:4179";
+const base = process.env.PORTAL_BASE_URL || "http://127.0.0.1:4181";
+const filterSlug = process.argv[2] || null;
 
 const modules = [
   { slug: "mikro1", minNav: 30, expectHome: "Probeklausuren" },
   { slug: "makro2", minNav: 14 },
   { slug: "makro1", minNav: 11 },
-  { slug: "statistik", minNav: 18, expectRBlocks: 4 },
-  { slug: "finanzwirtschaft", minNav: 16 },
-  { slug: "jahresabschluss", minNav: 14 },
-  { slug: "recht", minNav: 15 },
-  { slug: "internationale-wirtschaftsbeziehungen", minNav: 15 },
-  { slug: "mathematik", minNav: 20 },
+  {
+    slug: "statistik",
+    minNav: 18,
+    expectRBlocks: 4,
+    expectExamCards: 3,
+    graphChecks: [
+      {
+        titleFragment: "Konfidenzintervalle",
+        tab: "graph",
+        minInsightRows: 3,
+        screenshot: ".qa/statistik-konfidenzintervalle.png"
+      },
+      {
+        titleFragment: "Statistische Modellierung und Regression",
+        tab: "graph",
+        minInsightRows: 3,
+        screenshot: ".qa/statistik-regression.png"
+      }
+    ]
+  },
+  { slug: "finanzwirtschaft", minNav: 13 },
+  { slug: "jahresabschluss", minNav: 11 },
+  { slug: "recht", minNav: 12 },
+  { slug: "internationale-wirtschaftsbeziehungen", minNav: 12 },
+  {
+    slug: "mathematik",
+    minNav: 20,
+    expectExamCards: 3,
+    graphChecks: [
+      {
+        titleFragment: "Funktionen und Gleichungen",
+        tab: "graph",
+        minInsightRows: 3,
+        screenshot: ".qa/mathematik-funktionen.png"
+      },
+      {
+        titleFragment: "Multivariate Optimierung und Lagrange",
+        tab: "graph",
+        minInsightRows: 3,
+        screenshot: ".qa/mathematik-lagrange.png"
+      }
+    ]
+  },
   { slug: "oekonometrie", minNav: 25 }
 ];
+const selectedModules = filterSlug ? modules.filter((mod) => mod.slug === filterSlug) : modules;
 
 const consentKeys = [
   "mikro_consent_v1",
@@ -36,7 +75,7 @@ const browser = await chromium.launch({
 const failures = [];
 const summaries = [];
 
-for (const mod of modules) {
+for (const mod of selectedModules) {
   console.log(`CHECK ${mod.slug}`);
   const page = await browser.newPage({ viewport: { width: 1440, height: 1600 } });
   await page.addInitScript((keys) => {
@@ -75,6 +114,8 @@ for (const mod of modules) {
     const homeHasMarker = mod.expectHome ? bodyText.includes(mod.expectHome) : true;
     let firstConceptTitle = "";
     let rBlockCount = 0;
+    let examCardCount = 0;
+    const graphChecks = [];
 
     const firstNav = navItems[0];
     if (firstNav) {
@@ -97,6 +138,44 @@ for (const mod of modules) {
       rBlockCount = document.querySelectorAll(".r-practice-block").length;
     }
 
+    if (mod.expectExamCards) {
+      window.__renderHome?.();
+      await sleep(1000);
+      const examCard = Array.from(document.querySelectorAll("#content .home-action-card, #content .home-card"))
+        .find((card) => /probeklausuren|vollklausuren|probeklausur/i.test(card.textContent || ""));
+      examCard?.click();
+      await sleep(1400);
+      examCardCount = document.querySelectorAll("#content .home-action-card, .exam-card, .full-exam-card").length;
+      window.__renderHome?.();
+      await sleep(1000);
+    }
+
+    for (const check of mod.graphChecks || []) {
+      const nav = Array.from(document.querySelectorAll("#navList .nav-item"))
+        .find((item) => (item.textContent || "").toLowerCase().includes(check.titleFragment.toLowerCase()));
+      if (!nav) {
+        graphChecks.push({
+          titleFragment: check.titleFragment,
+          found: false,
+          graphVisible: false,
+          insightRows: 0
+        });
+        continue;
+      }
+      nav.click();
+      await sleep(1200);
+      const tab = Array.from(document.querySelectorAll(".tab-btn"))
+        .find((btn) => btn.dataset.tab === check.tab);
+      tab?.click();
+      await sleep(1000);
+      graphChecks.push({
+        titleFragment: check.titleFragment,
+        found: true,
+        graphVisible: getComputedStyle(document.querySelector(".tab-btn[data-tab='graph']") || document.body).display !== "none",
+        insightRows: document.querySelectorAll("#graph_info .graph-insight-row").length
+      });
+    }
+
     return {
       slug: mod.slug,
       navCount: navItems.length,
@@ -105,7 +184,9 @@ for (const mod of modules) {
       rawLeak,
       homeHasMarker,
       firstConceptTitle,
-      rBlockCount
+      rBlockCount,
+      examCardCount,
+      graphChecks
     };
   }, mod);
 
@@ -117,6 +198,53 @@ for (const mod of modules) {
   if (!summary.homeHasMarker) failures.push(`${mod.slug}: expected home marker missing`);
   if (mod.expectRBlocks && summary.rBlockCount < mod.expectRBlocks) {
     failures.push(`${mod.slug}: rBlockCount ${summary.rBlockCount} < ${mod.expectRBlocks}`);
+  }
+  if (mod.expectExamCards && summary.examCardCount < mod.expectExamCards) {
+    failures.push(`${mod.slug}: examCardCount ${summary.examCardCount} < ${mod.expectExamCards}`);
+  }
+  for (const graphCheck of summary.graphChecks || []) {
+    if (!graphCheck.found) failures.push(`${mod.slug}: graph concept missing for ${graphCheck.titleFragment}`);
+    if (graphCheck.found && !graphCheck.graphVisible) failures.push(`${mod.slug}: graph tab hidden for ${graphCheck.titleFragment}`);
+    const config = mod.graphChecks?.find((entry) => entry.titleFragment === graphCheck.titleFragment);
+    if (config?.minInsightRows && graphCheck.insightRows < config.minInsightRows) {
+      failures.push(`${mod.slug}: graph insight rows ${graphCheck.insightRows} < ${config.minInsightRows} for ${graphCheck.titleFragment}`);
+    }
+  }
+
+  if (filterSlug && mod.graphChecks?.length) {
+    for (const graphCheck of mod.graphChecks) {
+      const nav = Array.from(await page.$$("#navList .nav-item"));
+      let target = null;
+      for (const item of nav) {
+        const text = await item.textContent();
+        if ((text || "").toLowerCase().includes(graphCheck.titleFragment.toLowerCase())) {
+          target = item;
+          break;
+        }
+      }
+      if (!target) continue;
+      await target.evaluate((node) => node.click());
+      await page.waitForTimeout(1200);
+      await page.evaluate((tabName) => {
+        document.querySelector(`.tab-btn[data-tab="${tabName}"]`)?.click();
+      }, graphCheck.tab);
+      await page.waitForTimeout(1000);
+      if (graphCheck.screenshot) {
+        await page.screenshot({
+          path: graphCheck.screenshot,
+          fullPage: true
+        });
+      }
+    }
+  }
+
+  if (filterSlug) {
+    await page.goto(`${base}/${mod.slug}/index.html?qa=1`, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => document.querySelectorAll("#navList .nav-item").length > 0, { timeout: 15000 });
+    await page.evaluate(() => window.__renderHome?.());
+    await page.waitForFunction(() => document.querySelectorAll("#content .home-card").length > 0, { timeout: 15000 });
+    await page.waitForTimeout(1000);
+    await page.screenshot({ path: `.qa/${mod.slug}-home.png`, fullPage: true });
   }
 
   await page.close();

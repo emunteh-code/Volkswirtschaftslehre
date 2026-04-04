@@ -17255,7 +17255,949 @@ function buildGraphPanel(module, chapter, item, allItems, index) {
   return buildInteractiveGraphPanel(graphKind, chapter);
 }
 
+function chapterIdByTitle(chapters, fragment) {
+  return chapters.find((chapter) => chapter.title.toLowerCase().includes(fragment.toLowerCase()))?.id || null;
+}
+
+function buildStatistikConceptLinks(chapters) {
+  const by = (fragment) => chapterIdByTitle(chapters, fragment);
+  const links = {};
+
+  const grundlagen = by("grundlagen i");
+  const deskriptiv1 = by("deskriptive statistik i");
+  const deskriptiv2 = by("deskriptive statistik ii");
+  const deskriptiv3 = by("deskriptive statistik iii");
+  const wahrscheinlichkeit = by("wahrscheinlichkeitsrechnung");
+  const diskret = by("diskrete zufallsvariablen");
+  const stetig = by("stetige zufallsvariablen");
+  const bivariat = by("bivariate verteilungen");
+  const schaetzen = by("schaetzverfahren");
+  const intervalle = by("konfidenzintervalle");
+  const tests = by("hypothesentests");
+  const gruppen = by("zwei-stichproben-verfahren");
+  const regression = by("statistische modellierung und regression");
+  const uebung12 = by("uebung 1 und 2");
+  const uebung34 = by("uebung 3 und 4");
+  const uebung5 = by("uebung 5 und grossuebung");
+  const tutorium = by("tutorium 1-13");
+  const klausur = by("klausurmodus und r-lab");
+
+  [
+    [grundlagen, { uses: [], usedBy: [deskriptiv1, uebung12] }],
+    [deskriptiv1, { uses: [grundlagen], usedBy: [deskriptiv2, uebung12] }],
+    [deskriptiv2, { uses: [deskriptiv1], usedBy: [deskriptiv3, uebung12] }],
+    [deskriptiv3, { uses: [deskriptiv2], usedBy: [bivariat, regression, uebung12] }],
+    [wahrscheinlichkeit, { uses: [grundlagen], usedBy: [diskret, stetig, uebung34] }],
+    [diskret, { uses: [wahrscheinlichkeit], usedBy: [stetig, tests, uebung34] }],
+    [stetig, { uses: [wahrscheinlichkeit, diskret], usedBy: [schaetzen, intervalle, tests, uebung34] }],
+    [bivariat, { uses: [deskriptiv3, stetig], usedBy: [regression, uebung34] }],
+    [schaetzen, { uses: [stetig], usedBy: [intervalle, tests, uebung34] }],
+    [intervalle, { uses: [schaetzen, stetig], usedBy: [tests, regression, uebung34] }],
+    [tests, { uses: [intervalle, wahrscheinlichkeit], usedBy: [gruppen, regression, uebung34] }],
+    [gruppen, { uses: [tests, stetig], usedBy: [uebung34, tutorium] }],
+    [regression, { uses: [bivariat, intervalle, tests], usedBy: [uebung5, klausur] }],
+    [uebung12, { uses: [deskriptiv1, deskriptiv2, deskriptiv3], usedBy: [tutorium] }],
+    [uebung34, { uses: [wahrscheinlichkeit, diskret, stetig, schaetzen, intervalle, tests, gruppen], usedBy: [tutorium, klausur] }],
+    [uebung5, { uses: [regression, tests, intervalle], usedBy: [klausur] }],
+    [tutorium, { uses: [uebung12, uebung34, uebung5], usedBy: [klausur] }],
+    [klausur, { uses: [tutorium, regression], usedBy: [] }]
+  ].forEach(([id, value]) => {
+    if (id) {
+      links[id] = {
+        uses: (value.uses || []).filter(Boolean),
+        usedBy: (value.usedBy || []).filter(Boolean)
+      };
+    }
+  });
+
+  return links;
+}
+
+function buildMathematikConceptLinks(chapters) {
+  const by = (fragment) => chapterIdByTitle(chapters, fragment);
+  const links = {};
+
+  const algebra = by("algebra und mengenlehre");
+  const funktionen = by("funktionen und gleichungen");
+  const summen = by("summen und logik");
+  const matrix1 = by("matrizen und matrix-algebra");
+  const matrix2 = by("masszahlen, inversen und eigenwerte");
+  const diff = by("univariate differenzialrechnung");
+  const opt1 = by("univariate optimierung");
+  const multi = by("funktionen mehrerer variablen");
+  const opt2 = by("multivariate optimierung und lagrange");
+  const integral = by("integralrechnung");
+  const e1 = by("kleinuebung e1");
+  const e2 = by("kleinuebung e2");
+  const e3 = by("kleinuebung e3");
+  const la1 = by("kleinuebung la1");
+  const la2 = by("kleinuebung la2");
+  const an1 = by("kleinuebung an1");
+  const op1 = by("kleinuebung op1");
+  const an2 = by("kleinuebung an2");
+  const op2 = by("kleinuebung op2");
+  const an3 = by("kleinuebung an3");
+
+  [
+    [algebra, { uses: [], usedBy: [funktionen, summen, e1] }],
+    [funktionen, { uses: [algebra], usedBy: [diff, e2] }],
+    [summen, { uses: [algebra], usedBy: [matrix1, integral, e3] }],
+    [matrix1, { uses: [summen], usedBy: [matrix2, la1] }],
+    [matrix2, { uses: [matrix1], usedBy: [la2] }],
+    [diff, { uses: [funktionen], usedBy: [opt1, multi, an1] }],
+    [opt1, { uses: [diff], usedBy: [op1, opt2] }],
+    [multi, { uses: [diff], usedBy: [opt2, an2] }],
+    [opt2, { uses: [multi, opt1], usedBy: [op2] }],
+    [integral, { uses: [funktionen, summen], usedBy: [an3] }],
+    [e1, { uses: [algebra], usedBy: [e2, e3] }],
+    [e2, { uses: [funktionen], usedBy: [an1] }],
+    [e3, { uses: [summen], usedBy: [la1, an3] }],
+    [la1, { uses: [matrix1], usedBy: [la2] }],
+    [la2, { uses: [matrix2], usedBy: [] }],
+    [an1, { uses: [diff], usedBy: [op1, an2] }],
+    [op1, { uses: [opt1], usedBy: [op2] }],
+    [an2, { uses: [multi], usedBy: [op2] }],
+    [op2, { uses: [opt2], usedBy: [] }],
+    [an3, { uses: [integral], usedBy: [] }]
+  ].forEach(([id, value]) => {
+    if (id) {
+      links[id] = {
+        uses: (value.uses || []).filter(Boolean),
+        usedBy: (value.usedBy || []).filter(Boolean)
+      };
+    }
+  });
+
+  return links;
+}
+
+function buildModuleSpecificConceptLinks(module, chapters) {
+  if (module.slug === "statistik") return buildStatistikConceptLinks(chapters);
+  if (module.slug === "mathematik") return buildMathematikConceptLinks(chapters);
+  return null;
+}
+
+function buildTextQuestion(id, points, text, correct, feedback) {
+  return { id, points, type: "text", text, correct, feedback };
+}
+
+function buildTextBlock(label, points, title, preamble, questions) {
+  return { label, points, type: "text-block", title, preamble, questions };
+}
+
+function buildWfBlock(label, points, preamble, context, questions) {
+  return {
+    label,
+    points,
+    type: "wf-block",
+    preamble,
+    groups: [{ context, questions }]
+  };
+}
+
+function feedbackParagraphs(...paragraphs) {
+  return paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
+}
+
+function buildStatistikFullExams(chapters) {
+  const id = (fragment) => chapterIdByTitle(chapters, fragment);
+  const deskriptiv2 = id("deskriptive statistik ii");
+  const wahrscheinlichkeit = id("wahrscheinlichkeitsrechnung");
+  const diskret = id("diskrete zufallsvariablen");
+  const schaetzen = id("schaetzverfahren");
+  const intervalle = id("konfidenzintervalle");
+  const tests = id("hypothesentests");
+  const gruppen = id("zwei-stichproben-verfahren");
+  const regression = id("statistische modellierung und regression");
+
+  return {
+    probeklausur_1: {
+      id: "probeklausur_1",
+      title: "Probeklausur I: Deskriptive Statistik, Wahrscheinlichkeiten und Verteilungen",
+      subtitle: "90-Minuten-Klausur zu Beschreibung, Binomiallogik und Verteilungsmodellwahl",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Grundlagen, Verteilungen und Modelllogik",
+          [
+            { id: "stat_pk1_1", text: "Bei stark rechtsschiefen Daten ist der Median oft robuster als der Mittelwert.", correct: "Wahr", feedback: "Der Median reagiert deutlich weniger auf extreme hohe Werte." },
+            { id: "stat_pk1_2", text: "Ein Histogramm ist die Standardgrafik für nominale Merkmale.", correct: "Falsch", feedback: "Für nominale Merkmale passen Balkendiagramme; Histogramme gehören zu metrischen Daten mit Klassen." },
+            { id: "stat_pk1_3", text: "Die Binomialverteilung setzt unabhängige Versuche mit konstanter Erfolgswahrscheinlichkeit voraus.", correct: "Wahr", feedback: "Genau diese drei Bausteine tragen das Modell." },
+            { id: "stat_pk1_4", text: "Bei stetigen Verteilungen ist P(X = x) typischerweise größer als null.", correct: "Falsch", feedback: "Wahrscheinlichkeiten tragen Intervalle, nicht Einzelpunkte." },
+            { id: "stat_pk1_5", text: "Korrelation beweist bereits einen kausalen Zusammenhang.", correct: "Falsch", feedback: "Korrelation ist deskriptiv und keine Kausaldiagnose." },
+            { id: "stat_pk1_6", text: "Die Varianz misst Streuung um den Erwartungswert oder Mittelwert herum.", correct: "Wahr", feedback: "Genau darum ist sie gemeinsam mit der Lage zu lesen." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Lage- und Streuungsmaße lesen",
+          "Eine Einkommensstichprobe zeigt mehrere mittlere Werte und einen sehr hohen Ausreißer.",
+          [
+            buildTextQuestion(
+              "stat_pk1_2a",
+              8,
+              "Welches Lagemaß ist hier als typische Lage besonders belastbar?",
+              ["median"],
+              feedbackParagraphs(
+                "Der Median ist gegenüber einzelnen extremen Werten robust und beschreibt deshalb die typische Lage besser als der Mittelwert."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_2b",
+              7,
+              "Welche Streuungskennzahl wäre als robuste Ergänzung besonders naheliegend?",
+              ["interquartilsabstand", "iqr"],
+              feedbackParagraphs(
+                "Der Interquartilsabstand konzentriert sich auf den mittleren 50-Prozent-Bereich und reagiert daher viel weniger auf Ausreißer."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_2c",
+              7,
+              "Wie würden Sie die Verteilung sprachlich kurz charakterisieren?",
+              ["rechtsschief", "positiv schief"],
+              feedbackParagraphs(
+                "Ein sehr hoher Ausreißer am oberen Rand spricht für eine rechtsschiefe oder positiv schiefe Verteilung."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Binomialmodell und Punktwahrscheinlichkeit",
+          "Eine faire Münze wird zehnmal geworfen. Gesucht ist die Wahrscheinlichkeit für genau vier Köpfe.",
+          [
+            buildTextQuestion(
+              "stat_pk1_3a",
+              6,
+              "Welches Wahrscheinlichkeitsmodell ist passend?",
+              ["binomialverteilung", "binomial"],
+              feedbackParagraphs(
+                "Es geht um die Zahl von Erfolgen in endlich vielen unabhängigen Versuchen mit konstanter Erfolgswahrscheinlichkeit."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_3b",
+              7,
+              "Wie lauten n und p in diesem Modell?",
+              ["n=10 p=0.5", "n=10,p=0.5", "10 und 0.5", "10 und 0,5"],
+              feedbackParagraphs(
+                "Zehn Würfe bedeuten \\(n = 10\\), eine faire Münze \\(p = 0{,}5\\)."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_3c",
+              7,
+              "Welche Formel wird für die gesuchte Punktwahrscheinlichkeit verwendet?",
+              ["binom", "p(x=k)=(", "p(x=4)", "binomialformel"],
+              feedbackParagraphs(
+                "Gesucht ist die Binomialformel \\(P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}\\) mit \\(k=4\\)."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Modellwahl bei Zufallsvariablen",
+          "In einer Servicestelle wird die Zahl der eingehenden Anrufe pro Minute modelliert.",
+          [
+            buildTextQuestion(
+              "stat_pk1_4a",
+              7,
+              "Welches Verteilungsmodell ist hier besonders naheliegend?",
+              ["poissonverteilung", "poisson"],
+              feedbackParagraphs(
+                "Es geht um eine Ereignisanzahl pro Zeitintervall; genau dafür ist die Poissonlogik der Standardzugriff."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_4b",
+              7,
+              "Welche Kursvoraussetzung muss für die Modellwahl inhaltlich mitgedacht werden?",
+              ["konstante rate", "konstante intensitaet", "unabhaengige anrufe"],
+              feedbackParagraphs(
+                "Naheliegend sind eine konstante durchschnittliche Intensität und eine hinreichend unabhängige Ereignislogik."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk1_4c",
+              6,
+              "Warum wäre die Normalverteilung hier nicht der erste Modellzugriff?",
+              ["weil ereignisse gezaehlt werden", "zaehldaten", "diskrete anzahl"],
+              feedbackParagraphs(
+                "Die Beobachtung ist eine diskrete Ereigniszahl und kein kontinuierlicher Messwert; deshalb beginnt die Modellwahl nicht bei der Normalverteilung."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_2: {
+      id: "probeklausur_2",
+      title: "Probeklausur II: Schätzung, Konfidenzintervalle und Testlogik",
+      subtitle: "90-Minuten-Klausur zu Inferenz, p-Wert-Logik und Gruppenvergleichen",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Inferenz und Testinterpretation",
+          [
+            { id: "stat_pk2_1", text: "Ein 95%-Konfidenzintervall bedeutet, dass der Parameter mit 95% Wahrscheinlichkeit im konkreten Intervall liegt.", correct: "Falsch", feedback: "Das 95%-Niveau ist eine Eigenschaft der Intervallmethode, nicht des fixen Parameters." },
+            { id: "stat_pk2_2", text: "Wenn der p-Wert kleiner als α ist, wird die Nullhypothese verworfen.", correct: "Wahr", feedback: "Das ist die Standardentscheidungsregel." },
+            { id: "stat_pk2_3", text: "Ein zweiseitiger Test prüft nur auf positive Abweichungen.", correct: "Falsch", feedback: "Er prüft Abweichungen in beide Richtungen." },
+            { id: "stat_pk2_4", text: "Die Standardabweichung des Schätzers sinkt typischerweise mit wachsender Stichprobe.", correct: "Wahr", feedback: "Genau deshalb werden Konfidenzintervalle bei größerem n meist enger." },
+            { id: "stat_pk2_5", text: "ANOVA vergleicht Zwischen-Gruppen- und Innerhalb-Gruppen-Streuung.", correct: "Wahr", feedback: "Daraus entsteht die F-Statistik." },
+            { id: "stat_pk2_6", text: "Signifikanz ersetzt die inhaltliche Interpretation eines Effekts.", correct: "Falsch", feedback: "Statistische Signifikanz und inhaltliche Relevanz sind getrennte Fragen." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Konfidenzintervall für den Mittelwert",
+          "Eine Stichprobe mit bekanntem Zielparameter soll über ein 95%-Intervall interpretiert werden.",
+          [
+            buildTextQuestion(
+              "stat_pk2_2a",
+              8,
+              "Welche drei Größen braucht man im Kern für ein klassisches Konfidenzintervall des Mittelwerts?",
+              ["stichprobenmittel standardfehler kritischer wert", "xbar standardfehler kritischer wert", "mittelwert standardfehler kritischer wert"],
+              feedbackParagraphs(
+                "Das Intervall wird aus Stichprobenmittel, Unsicherheitsmaß (Standardfehler) und kritischem Quantil aufgebaut."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_2b",
+              7,
+              "Wie verändert sich das Intervall, wenn das Konfidenzniveau steigt?",
+              ["breiter", "es wird breiter"],
+              feedbackParagraphs(
+                "Mehr Sicherheit erfordert größere Randabstände und damit ein breiteres Intervall."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_2c",
+              7,
+              "Welche inhaltliche Aussage ist korrekt, wenn der Nullwert außerhalb des 95%-Intervalls liegt?",
+              ["die nullhypothese wird auf 5 niveau verworfen", "gegen den nullwert spricht die stichprobe", "auf 5 prozent verworfen"],
+              feedbackParagraphs(
+                "Liegt der Nullwert außerhalb, spricht das gegen die entsprechende Nullhypothese auf dem korrespondierenden Testniveau."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Hypothesentest sauber lesen",
+          "Ein t-Test liefert Teststatistik, p-Wert und ein 95%-Konfidenzintervall für den Effekt.",
+          [
+            buildTextQuestion(
+              "stat_pk2_3a",
+              7,
+              "Welcher Outputteil entscheidet unmittelbar über die Verwerfungsregel bei gegebenem α?",
+              ["p-wert", "p wert"],
+              feedbackParagraphs(
+                "Der p-Wert wird mit dem Signifikanzniveau verglichen und trägt die unmittelbare Testentscheidung."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_3b",
+              7,
+              "Wie lautet die häufigste Fehlinterpretation des p-Werts?",
+              ["wahrscheinlichkeit dass h0 wahr ist", "wahrscheinlichkeit der nullhypothese"],
+              feedbackParagraphs(
+                "Der p-Wert ist nicht die Wahrscheinlichkeit, dass \\(H_0\\) wahr ist, sondern die Wahrscheinlichkeit des beobachteten oder extremeren Ergebnisses unter \\(H_0\\)."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_3c",
+              6,
+              "Warum sollte nach der Testentscheidung immer noch eine verbale Inhaltsdeutung folgen?",
+              ["weil signifikanz nicht die inhaltliche bedeutung ersetzt", "effektgroesse und frage muessen noch gedeutet werden", "statistische entscheidung reicht nicht"],
+              feedbackParagraphs(
+                "Eine gute Lösung trennt statistische Entscheidung und inhaltliche Bedeutung des Ergebnisses."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Zwei-Stichproben- und ANOVA-Logik",
+          "Mehrere Gruppenmittelwerte sollen verglichen werden.",
+          [
+            buildTextQuestion(
+              "stat_pk2_4a",
+              7,
+              "Warum reicht bei mehr als zwei Gruppen nicht einfach eine Kette einzelner t-Tests?",
+              ["weil sich das fehlerniveau aufblaeht", "alpha inflation", "gesamtniveau steigt"],
+              feedbackParagraphs(
+                "Viele Einzeltests blähen das Gesamtfehlerniveau auf; genau deshalb bündelt ANOVA den Vergleich."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_4b",
+              7,
+              "Was vergleicht die F-Statistik der Varianzanalyse im Kern?",
+              ["zwischen gruppen streuung und innerhalb gruppen streuung", "zwischen und innerhalb gruppen"],
+              feedbackParagraphs(
+                "ANOVA setzt systematische Zwischen-Gruppen-Streuung zur zufälligen Innerhalb-Gruppen-Streuung ins Verhältnis."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk2_4c",
+              6,
+              "Welcher Methodengedanke bleibt bei Zwei-Stichproben-Test und ANOVA gleich?",
+              ["gruppenunterschiede gegen zufallsstreuung abwaegen", "systematischen unterschied gegen reststreuung", "gruppenmittel vergleichen"],
+              feedbackParagraphs(
+                "In beiden Fällen wird geprüft, ob beobachtete Gruppenunterschiede relativ zur Reststreuung groß genug sind."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_3: {
+      id: "probeklausur_3",
+      title: "Probeklausur III: Regression, Modellgüte und R-Transfer",
+      subtitle: "90-Minuten-Klausur zu Koeffizienten, Residuen, Signifikanz und Outputdeutung",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Regression und Modellinterpretation",
+          [
+            { id: "stat_pk3_1", text: "Die Steigung einer linearen Regression beschreibt den erwarteten y-Unterschied bei einer Einheit mehr x.", correct: "Wahr", feedback: "Genau das ist die ceteris-paribus-Lesart des Koeffizienten in der einfachen linearen Regression." },
+            { id: "stat_pk3_2", text: "Ein hohes R² beweist automatisch Kausalität.", correct: "Falsch", feedback: "R² misst nur erklärte Variation in der Stichprobe." },
+            { id: "stat_pk3_3", text: "Residuen sind beobachtetes y minus geschätztes ŷ.", correct: "Wahr", feedback: "Sie messen die unerklärte Abweichung eines Datenpunkts von der Regressionsgeraden." },
+            { id: "stat_pk3_4", text: "Wenn ein Koeffizient signifikant ist, ist seine Effektgröße automatisch ökonomisch groß.", correct: "Falsch", feedback: "Signifikanz und Effektgröße sind verschiedene Aussagen." },
+            { id: "stat_pk3_5", text: "Ein Konfidenzintervall für β1, das den Nullwert ausschließt, spricht gegen H0: β1 = 0.", correct: "Wahr", feedback: "Das Intervall und der Test transportieren dieselbe Nullprüfung." },
+            { id: "stat_pk3_6", text: "Ein Scatterplot ist vor der Regressionsschätzung wertlos, weil die eigentliche Information erst im Output steht.", correct: "Falsch", feedback: "Der Plot liefert bereits Struktur, Ausreißer und grobe Form des Zusammenhangs." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Koeffizient, Residuum und Güte",
+          "Eine lineare Regression liefert einen positiven Steigungskoeffizienten, sichtbare Reststreuung und ein mittleres R².",
+          [
+            buildTextQuestion(
+              "stat_pk3_2a",
+              8,
+              "Wie lautet die Kernaussage eines positiven Steigungskoeffizienten?",
+              ["y steigt im mittel mit x", "positiver zusammenhang", "bei mehr x hoehere y werte"],
+              feedbackParagraphs(
+                "Ein positiver Koeffizient bedeutet, dass höhere x-Werte im Mittel mit höheren y-Werten einhergehen."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_2b",
+              7,
+              "Was zeigen große Residuen inhaltlich?",
+              ["dass einzelne beobachtungen weit von der regressionsgeraden abweichen", "schlecht erklaerte punkte", "restabweichung"],
+              feedbackParagraphs(
+                "Große Residuen markieren Beobachtungen, die vom linearen Modell nur schwach erfasst werden."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_2c",
+              7,
+              "Was sagt ein mittleres R² aus, ohne zu viel zu behaupten?",
+              ["ein teil der variation wird erklaert aber nicht alles", "erklaerte variation ist mittel", "modell erklaert nur einen teil"],
+              feedbackParagraphs(
+                "R² beschreibt, wie viel der Stichprobenvariation das lineare Modell einfängt, aber nicht mehr."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Signifikanz gegen Effektgröße",
+          "Ein Regressionsoutput zeigt einen kleinen positiven Koeffizienten mit sehr kleinem p-Wert.",
+          [
+            buildTextQuestion(
+              "stat_pk3_3a",
+              7,
+              "Welche Aussage zur Signifikanz ist korrekt?",
+              ["der zusammenhang ist statistisch von null unterscheidbar", "h0 beta gleich null wird verworfen", "statistisch signifikant"],
+              feedbackParagraphs(
+                "Der kleine p-Wert spricht gegen die Nullhypothese eines Koeffizienten von null."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_3b",
+              7,
+              "Warum ersetzt das nicht die Größeninterpretation des Koeffizienten?",
+              ["weil signifikanz nicht sagt wie gross der effekt ist", "effektgroesse bleibt getrennt", "oekonomische relevanz"],
+              feedbackParagraphs(
+                "Ein statistisch sauber nachweisbarer Effekt kann inhaltlich klein bleiben; beides muss getrennt gelesen werden."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_3c",
+              6,
+              "Welche zusätzliche Angabe macht die Effektgröße belastbarer lesbar?",
+              ["konfidenzintervall", "einheitenbezug", "ceteris paribus interpretation"],
+              feedbackParagraphs(
+                "Ein Konfidenzintervall oder ein klarer Einheitenbezug hilft, die Größenordnung fachlich einzuordnen."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "R-Output in Statistiksprache übersetzen",
+          "In R wurde ein lineares Modell geschätzt und summary(model) ausgegeben.",
+          [
+            buildTextQuestion(
+              "stat_pk3_4a",
+              7,
+              "Welche drei Elemente sollten in einer guten Outputdeutung fast immer vorkommen?",
+              ["koeffizient signifikanz inhaltliche interpretation", "effekt p wert interpretation", "koeffizient unsicherheit bedeutung"],
+              feedbackParagraphs(
+                "Eine belastbare Deutung nennt erst den Koeffizienten, dann die Unsicherheit und anschließend die inhaltliche Aussage."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_4b",
+              7,
+              "Warum genügt es nicht, nur Sterne oder den p-Wert zu zitieren?",
+              ["weil die groesse und bedeutung des effekts fehlen", "output muss inhaltlich uebersetzt werden", "sterne sind keine interpretation"],
+              feedbackParagraphs(
+                "Sterne allein sagen nichts über Richtung, Größenordnung oder fachliche Bedeutung des Zusammenhangs."
+              )
+            ),
+            buildTextQuestion(
+              "stat_pk3_4c",
+              6,
+              "Woran erkennen Sie, dass R hier pädagogisch sinnvoll und nicht ornamental eingesetzt wird?",
+              ["wenn code output und statistikfrage zusammenpassen", "wenn der output in statistische sprache uebersetzt wird", "wenn die methode zur frage passt"],
+              feedbackParagraphs(
+                "R ist dann sinnvoll integriert, wenn Befehl, Output und statistische Fragelogik sichtbar zusammengeführt werden."
+              )
+            )
+          ]
+        )
+      ]
+    }
+  };
+}
+
+function buildMathematikFullExams(chapters) {
+  const algebra = chapterIdByTitle(chapters, "algebra und mengenlehre");
+  const funktionen = chapterIdByTitle(chapters, "funktionen und gleichungen");
+  const matrix1 = chapterIdByTitle(chapters, "matrizen und matrix-algebra");
+  const matrix2 = chapterIdByTitle(chapters, "masszahlen, inversen und eigenwerte");
+  const diff = chapterIdByTitle(chapters, "univariate differenzialrechnung");
+  const opt1 = chapterIdByTitle(chapters, "univariate optimierung");
+  const multi = chapterIdByTitle(chapters, "funktionen mehrerer variablen");
+  const opt2 = chapterIdByTitle(chapters, "multivariate optimierung und lagrange");
+  const integral = chapterIdByTitle(chapters, "integralrechnung");
+
+  return {
+    probeklausur_1: {
+      id: "probeklausur_1",
+      title: "Probeklausur I: Algebra, Funktionen und lineare Algebra",
+      subtitle: "90-Minuten-Klausur zu Mengenlogik, Funktionslesart und Matrixgrundlagen",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Grundlagen, Funktionen und lineare Algebra",
+          [
+            { id: "math_pk1_1", text: "Eine bijektive lineare Abbildung besitzt eine inverse Abbildung.", correct: "Wahr", feedback: "Bijektivität und Invertierbarkeit fallen bei linearen Abbildungen zusammen." },
+            { id: "math_pk1_2", text: "Eine streng monotone Funktion kann denselben Funktionswert an zwei verschiedenen Stellen annehmen.", correct: "Falsch", feedback: "Strenge Monotonie erzwingt Eindeutigkeit der Zuordnung." },
+            { id: "math_pk1_3", text: "Die Determinante einer 2x2-Matrix misst unter anderem die Flächenskalierung der zugehörigen linearen Abbildung.", correct: "Wahr", feedback: "Genau deshalb ist ihr Betrag geometrisch so wichtig." },
+            { id: "math_pk1_4", text: "Eine leere Menge ist stets Teilmenge jeder Menge.", correct: "Wahr", feedback: "Das gehört zur Grundlogik des Mengenbegriffs." },
+            { id: "math_pk1_5", text: "Eine Funktion ist schon dann injektiv, wenn sie mindestens einen Wendepunkt besitzt.", correct: "Falsch", feedback: "Injektivität hängt an der eindeutigen Zuordnung, nicht an einem einzelnen Kurvenmerkmal." },
+            { id: "math_pk1_6", text: "Wenn zwei Zeilen einer Matrix identisch sind, ist die Matrix nicht invertierbar.", correct: "Wahr", feedback: "Dann fehlt voller Rang und die Determinante wird null." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Funktion lesen und Nullstellenzugriff erklären",
+          "Gegeben ist eine quadratische Funktion mit zwei reellen Nullstellen und einem Scheitelpunkt unterhalb der x-Achse.",
+          [
+            buildTextQuestion(
+              "math_pk1_2a",
+              8,
+              "Welche Rolle spielt die Diskriminante für die Nullstellenzahl?",
+              ["sie entscheidet ueber die anzahl reeller nullstellen", "diskriminante entscheidet", "b quadrat minus 4ac"],
+              feedbackParagraphs(
+                "Die Diskriminante $b^2-4ac$ entscheidet, ob es keine, eine doppelte oder zwei reelle Nullstellen gibt."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_2b",
+              7,
+              "Warum hilft der Scheitelpunkt zusätzlich zur rein algebraischen Nullstellenformel?",
+              ["weil er lage und oeffnung der parabel sichtbar macht", "weil er maximum oder minimum markiert", "geometrische kontrolle"],
+              feedbackParagraphs(
+                "Der Scheitelpunkt zeigt Lage und Öffnung der Parabel und liefert eine starke geometrische Kontrolle der Algebra."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_2c",
+              7,
+              "Welche drei Leseschritte sind bei einer quadratischen Funktion klausursicher?",
+              ["oeffnung scheitel nullstellen", "vorzeichen a scheitel nullstellen", "funktion oeffnung scheitel"],
+              feedbackParagraphs(
+                "Sicher ist die Reihenfolge: Vorzeichen von $a$, Scheitelpunkt, dann Nullstellen bzw. Diskriminante."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Matrixlogik und Invertierbarkeit",
+          "Eine 2x2-Matrix transformiert das Einheitsquadrat in ein Parallelogramm.",
+          [
+            buildTextQuestion(
+              "math_pk1_3a",
+              7,
+              "Was verraten die Spalten der Matrix geometrisch?",
+              ["sie sind die bilder der basisvektoren", "transformierte basisvektoren", "ae1 ae2"],
+              feedbackParagraphs(
+                "Die Spalten von $A$ sind die Bilder der Standardbasisvektoren und bauen damit die Abbildung geometrisch auf."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_3b",
+              7,
+              "Wann ist die Matrix invertierbar?",
+              ["wenn die determinante ungleich null ist", "determinante ungleich null", "voller rang"],
+              feedbackParagraphs(
+                "Invertierbarkeit verlangt insbesondere eine von null verschiedene Determinante bzw. vollen Rang."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_3c",
+              6,
+              "Warum ist die Determinante auch inhaltlich mehr als eine Rechenzahl?",
+              ["weil sie flaechenskalierung und orientation beschreibt", "flaechenfaktor", "geometrische wirkung"],
+              feedbackParagraphs(
+                "Die Determinante misst Flächenskalierung und Orientierung der linearen Abbildung, nicht nur einen Rechenwert."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Begriffslogik aus den Grundlagen",
+          "Ordnen Sie Mengen-, Aussagen- und Funktionsbegriffe in einem kurzen mathematischen Argument sauber ein.",
+          [
+            buildTextQuestion(
+              "math_pk1_4a",
+              7,
+              "Warum muss bei einer Funktionsdefinition Definitions- und Wertebereich mitgedacht werden?",
+              ["weil die zuordnung ohne bereich unvollstaendig ist", "definitionsbereich und wertebereich bestimmen die funktion", "funktion braucht bereiche"],
+              feedbackParagraphs(
+                "Eine Funktion ist nicht nur eine Formel, sondern eine Zuordnung zwischen klar festgelegtem Definitions- und Wertebereich."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_4b",
+              7,
+              "Welche Rolle spielt logische Implikation in mathematischen Beweisen?",
+              ["sie verbindet voraussetzung und folgerung", "wenn dann struktur", "schlusslogik"],
+              feedbackParagraphs(
+                "Implikationen ordnen mathematische Aussagen in Voraussetzung und Schlussfolgerung und machen Argumente nachvollziehbar."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_4c",
+              6,
+              "Was macht eine gute Klausurantwort in diesem Grundlagenblock aus?",
+              ["begriff sauber definieren und dann anwenden", "definition plus anwendung", "nicht nur rechnen sondern begruenden"],
+              feedbackParagraphs(
+                "Starke Antworten definieren Begriffe sauber und wenden sie dann im konkreten Problem sichtbar an."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_2: {
+      id: "probeklausur_2",
+      title: "Probeklausur II: Differentialrechnung und univariate Optimierung",
+      subtitle: "90-Minuten-Klausur zu Ableitungen, Tangenten, Monotonie und Extremwertlogik",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Differentialrechnung und Optimierung",
+          [
+            { id: "math_pk2_1", text: "Wenn f'(x0)=0 gilt, liegt dort automatisch ein lokales Maximum vor.", correct: "Falsch", feedback: "Eine stationäre Stelle ist nur ein Kandidat; die Klassifikation braucht weitere Information." },
+            { id: "math_pk2_2", text: "Die Tangente liefert eine lokale lineare Approximation der Funktion.", correct: "Wahr", feedback: "Genau darin steckt die geometrische Bedeutung der Ableitung." },
+            { id: "math_pk2_3", text: "Monotonieintervalle liest man aus dem Vorzeichen von f'(x).", correct: "Wahr", feedback: "Positives Vorzeichen bedeutet Steigen, negatives Fallen." },
+            { id: "math_pk2_4", text: "Ein Wendepunkt liegt immer dort, wo f''(x)=0 und sonst nichts mehr geprüft werden muss.", correct: "Falsch", feedback: "Die Gleichung liefert Kandidaten; die Krümmung muss tatsächlich wechseln." },
+            { id: "math_pk2_5", text: "Randpunkte können bei Optimierungsaufgaben relevant sein.", correct: "Wahr", feedback: "Gerade auf beschränkten Intervallen gehören sie immer zur Kandidatenmenge." },
+            { id: "math_pk2_6", text: "Die zweite Ableitung misst die lokale Krümmung einer Funktion.", correct: "Wahr", feedback: "Darüber wird die Kandidatenklassifikation möglich." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Tangente und lokale Approximation",
+          "An einer markierten Stelle x0 sollen Steigung und Tangentengleichung interpretiert werden.",
+          [
+            buildTextQuestion(
+              "math_pk2_2a",
+              8,
+              "Welche Information liefert f'(x0) unmittelbar?",
+              ["die lokale steigung", "steigung an der stelle", "aenderungsrate"],
+              feedbackParagraphs(
+                "Die erste Ableitung gibt die momentane Änderungsrate bzw. Tangentensteigung an der Stelle $x_0$ an."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_2b",
+              7,
+              "Warum ist die Tangente besonders in der Nähe von x0 nützlich?",
+              ["weil sie die funktion lokal gut approximiert", "lineare approximation", "nahe an x0"],
+              feedbackParagraphs(
+                "Die Tangente approximiert die Funktion lokal am besten und macht das Verhalten in einer kleinen Umgebung lesbar."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_2c",
+              7,
+              "Wie lautet der sichere Klausurzugriff bei Tangentenaufgaben?",
+              ["punkt steigung tangentengleichung", "erst punkt dann ableitung dann gleichung", "beruehrpunkt und steigung"],
+              feedbackParagraphs(
+                "Zuerst Berührpunkt bestimmen, dann $f'(x_0)$ ausrechnen und daraus die Tangentengleichung aufbauen."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Stationäre Punkte klassifizieren",
+          "Eine Zielfunktion besitzt mehrere Kandidatenstellen mit f'(x)=0.",
+          [
+            buildTextQuestion(
+              "math_pk2_3a",
+              7,
+              "Warum reicht f'(x)=0 allein nicht als Endergebnis?",
+              ["weil es nur kandidaten liefert", "stationaere stellen muessen klassifiziert werden", "zweite ableitung oder randpruefung"],
+              feedbackParagraphs(
+                "Die Bedingung erster Ordnung liefert nur Kandidaten; erst danach folgen Klassifikation und ggf. Randprüfung."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_3b",
+              7,
+              "Welche Rolle spielt f''(x) bei der Kandidatenklassifikation?",
+              ["sie zeigt lokale kruemmung und damit minimum oder maximum", "zweite ableitung klassifiziert", "minimum maximum test"],
+              feedbackParagraphs(
+                "Das Vorzeichen der zweiten Ableitung entscheidet über lokale Krümmung und damit über Minimum oder Maximum."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_3c",
+              6,
+              "Was bleibt auf einem abgeschlossenen Intervall zusätzlich zu prüfen?",
+              ["randpunkte", "intervalgrenzen", "auch die raender"],
+              feedbackParagraphs(
+                "Auf beschränkten Intervallen müssen auch die Randpunkte mit den inneren Kandidaten verglichen werden."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Ökonomische Lesart der Ableitungen",
+          "Eine Kosten- oder Nutzenfunktion soll mit Hilfe ihrer Ableitungen interpretiert werden.",
+          [
+            buildTextQuestion(
+              "math_pk2_4a",
+              7,
+              "Wie liest man die erste Ableitung ökonomisch?",
+              ["als grenzgroesse", "marginale aenderung", "marginaler effekt"],
+              feedbackParagraphs(
+                "Ökonomisch steht die erste Ableitung meist für eine Grenzgröße oder marginale Änderung."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_4b",
+              7,
+              "Wie hilft die zweite Ableitung bei ökonomischen Entscheidungsproblemen?",
+              ["sie zeigt ob die grenzgroesse steigt oder faellt", "kruemmung und stabilitaet", "konvex oder konkav"],
+              feedbackParagraphs(
+                "Die zweite Ableitung beschreibt, ob Grenzgrößen zunehmen oder abnehmen und ob die Zielfunktion eher konvex oder konkav verläuft."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_4c",
+              6,
+              "Warum ist eine saubere sprachliche Interpretation in Mathe-Klausuren wichtig?",
+              ["weil ableitungen nicht nur gerechnet sondern auch gedeutet werden muessen", "rechenweg plus interpretation", "modelllogik sichtbar machen"],
+              feedbackParagraphs(
+                "Die Klausur prüft nicht nur Technik, sondern ob du Rechenobjekte als ökonomische oder funktionale Aussagen lesen kannst."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_3: {
+      id: "probeklausur_3",
+      title: "Probeklausur III: Mehrere Variablen, Lagrange und Integralrechnung",
+      subtitle: "90-Minuten-Klausur zu Gradienten, Nebenbedingungen und Flächenlogik",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Mehrdimensionale Analysis und Integralrechnung",
+          [
+            { id: "math_pk3_1", text: "Der Gradient steht orthogonal auf einer Levelkurve.", correct: "Wahr", feedback: "Genau das verbindet partielle Ableitungen und Geometrie." },
+            { id: "math_pk3_2", text: "Ein Lagrange-Multiplikator ist nur eine technische Hilfsgröße ohne ökonomische Bedeutung.", correct: "Falsch", feedback: "Er misst den lokalen Wert einer gelockerten Nebenbedingung." },
+            { id: "math_pk3_3", text: "Das bestimmte Integral kann als akkumulierte Fläche interpretiert werden.", correct: "Wahr", feedback: "Genau diese Flächen- und Akkumulationslogik trägt das Kapitel." },
+            { id: "math_pk3_4", text: "Partielle Ableitungen beschreiben immer gleichzeitig die Änderung in allen Richtungen.", correct: "Falsch", feedback: "Jede partielle Ableitung variiert nur eine Richtung bei Konstanthalten der anderen Variablen." },
+            { id: "math_pk3_5", text: "Bei einer bindenden Nebenbedingung liegt ein Optimum häufig im Tangentialpunkt von Niveaukurve und Restriktionsgerade.", correct: "Wahr", feedback: "Das ist die Kernintuition des Lagrange-Verfahrens." },
+            { id: "math_pk3_6", text: "Der Hauptsatz der Integralrechnung verbindet Stammfunktion und bestimmtes Integral.", correct: "Wahr", feedback: "Dadurch wird aus Flächenlogik eine konkrete Rechenregel." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Gradient und Levelkurve",
+          "An einem Punkt einer Funktion mehrerer Variablen sollen Levelkurve und Gradient gedeutet werden.",
+          [
+            buildTextQuestion(
+              "math_pk3_2a",
+              8,
+              "Welche Information bündelt der Gradient an einem Punkt?",
+              ["richtung des staerksten anstiegs", "staerkster anstieg", "gradientenrichtung"],
+              feedbackParagraphs(
+                "Der Gradient zeigt die Richtung des stärksten lokalen Anstiegs und seine Länge die lokale Steilheit."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_2b",
+              7,
+              "Warum ist die Orthogonalität zur Levelkurve didaktisch so wichtig?",
+              ["weil sie geometrie und partielle ableitungen verbindet", "orthogonalitaet erklaert gradient", "levelkurve"],
+              feedbackParagraphs(
+                "Sie macht sichtbar, wie Geometrie und Differentialrechnung zusammenhängen: Entlang der Levelkurve ändert sich der Funktionswert lokal nicht."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_2c",
+              7,
+              "Welche Standardfehlerquelle entsteht bei partiellen Ableitungen besonders häufig?",
+              ["andere variablen nicht konstant halten", "konstanthaltungsfehler", "richtungslogik verwechseln"],
+              feedbackParagraphs(
+                "Viele Fehler entstehen, weil beim Ableiten nach einer Variablen die anderen nicht wirklich als konstant behandelt werden."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Lagrange-Verfahren mit Nebenbedingung",
+          "Ein Optimum soll unter einer linearen Restriktion bestimmt und interpretiert werden.",
+          [
+            buildTextQuestion(
+              "math_pk3_3a",
+              7,
+              "Was ist die Kernidee des Lagrange-Verfahrens?",
+              ["zielfunktion und nebenbedingung ueber multiplikator koppeln", "lagrange koppelt zielfunktion und restriktion", "tangentialbedingung"],
+              feedbackParagraphs(
+                "Die Zielfunktion wird mit der Restriktion über den Multiplikator verbunden, sodass innere Optima als Tangentialpunkte gelesen werden können."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_3b",
+              7,
+              "Wie interpretiert man den Multiplikator inhaltlich?",
+              ["als schattenpreis", "wert einer marginal gelockerten nebenbedingung", "marginaler wert der restriktion"],
+              feedbackParagraphs(
+                "Der Multiplikator ist der lokale Wert einer kleinen Lockerung der bindenden Restriktion und wird deshalb oft als Schattenpreis gelesen."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_3c",
+              6,
+              "Welche drei Ebenen sollte eine gute Lagrange-Lösung sichtbar machen?",
+              ["funktion restriktion interpretation", "foc und inhaltliche deutung", "kandidaten und multiplikator"],
+              feedbackParagraphs(
+                "Stark ist die Lösung, wenn Zielfunktion, Restriktion und die inhaltliche Deutung des Multiplikators gemeinsam sichtbar werden."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Integral als Fläche und Akkumulation",
+          "Ein bestimmtes Integral soll sowohl grafisch als auch rechnerisch erklärt werden.",
+          [
+            buildTextQuestion(
+              "math_pk3_4a",
+              7,
+              "Welche Rolle spielt eine Stammfunktion beim bestimmten Integral?",
+              ["sie erlaubt f(b)-f(a)", "hauptsatz der integralrechnung", "stammfunktion liefert exakten wert"],
+              feedbackParagraphs(
+                "Über den Hauptsatz der Integralrechnung wird das bestimmte Integral mit Hilfe einer Stammfunktion als $F(b)-F(a)$ berechnet."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_4b",
+              7,
+              "Warum sind Rechtecknäherungen pädagogisch hilfreich, obwohl es oft eine exakte Lösung gibt?",
+              ["weil sie flaechenlogik und numerische approximation sichtbar machen", "naeherung zeigt akkumulierte flaeche", "numerische intuition"],
+              feedbackParagraphs(
+                "Sie machen die Fläche als Summe kleiner Beiträge sichtbar und verbinden Geometrie mit numerischem Rechnen."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_4c",
+              6,
+              "Was ist die zentrale Brücke zwischen Differential- und Integralrechnung?",
+              ["hauptsatz der integralrechnung", "ableitung und stammfunktion", "rueckwaertsrechnung"],
+              feedbackParagraphs(
+                "Der Hauptsatz verbindet Ableiten und Integrieren als komplementäre Perspektiven auf denselben Funktionszusammenhang."
+              )
+            )
+          ]
+        )
+      ]
+    }
+  };
+}
+
 function buildFullExam(module, chapters, contentById, items) {
+  if (module.slug === "statistik") {
+    return buildStatistikFullExams(chapters);
+  }
+  if (module.slug === "mathematik") {
+    return buildMathematikFullExams(chapters);
+  }
   const aufgaben = chapters.slice(0, Math.min(4, chapters.length)).map((chapter, index) => {
     const item = items[index];
     const feedbackBase = contentById[chapter.id];
@@ -17345,6 +18287,7 @@ export function buildGeneratedPortalData(module, content) {
   const graphPanelsById = {};
   const graphConcepts = new Set();
   const graphKindsById = {};
+  const customLinks = buildModuleSpecificConceptLinks(module, chapters);
 
   chapters.forEach((chapter, index) => {
     const item = conceptItems[index];
@@ -17361,7 +18304,7 @@ export function buildGeneratedPortalData(module, content) {
     };
     intuitionById[chapter.id] = buildIntuition(module, chapter, item, content, conceptItems, index);
     stepProblems[chapter.id] = buildStepProblems(module, chapter, item, content, mastery, conceptItems, index);
-    conceptLinks[chapter.id] = {
+    conceptLinks[chapter.id] = customLinks?.[chapter.id] || {
       uses: index > 0 ? [chapters[index - 1].id] : [],
       usedBy: index < chapters.length - 1 ? [chapters[index + 1].id] : []
     };

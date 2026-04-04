@@ -1,24 +1,11 @@
 import { chromium } from '/tmp/pw-check/node_modules/playwright/index.mjs';
-import { CHAPTERS } from '../makro2/js/data/chapters.js';
+import { CHAPTERS } from '../finanzwirtschaft/js/data/chapters.js';
+import { GRAPH_CONCEPTS } from '../finanzwirtschaft/js/ui/graphPanel.js';
 
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const baseUrl = 'http://127.0.0.1:4180';
-const consentKey = 'makro2_consent_v1';
-const tabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
-const graphConcepts = new Set([
-  'wechselkurs',
-  'kaufkraftparitaet',
-  'zinsparitaet',
-  'nettoexporte',
-  'marshall_lerner',
-  'geldmengen',
-  'mundell_fleming',
-  'wk_regime',
-  'taylor_regel',
-  'solow_basis',
-  'phillipskurve',
-  'schuldenquote'
-]);
+const baseUrl = 'http://127.0.0.1:4181';
+const consentKey = 'finanzwirtschaft_consent_v1';
+const baseTabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
 
 async function waitForApp(page) {
   await page.waitForFunction(() => window.__jsLoaded && typeof window.__renderHome === 'function' && typeof window.__navigate === 'function', { timeout: 20000 });
@@ -27,42 +14,41 @@ async function waitForApp(page) {
 async function openModulePage(browser) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 2200 } });
   await page.addInitScript((key) => localStorage.setItem(key, '1'), consentKey);
-  await page.goto(`${baseUrl}/makro2/index.html?qa=1`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`${baseUrl}/finanzwirtschaft/index.html?qa=1`, { waitUntil: 'domcontentloaded' });
   await waitForApp(page);
-  await page.waitForTimeout(800);
+  await page.waitForTimeout(1000);
   return page;
 }
 
 async function navigateConcept(page, conceptId, tab = 'theorie') {
   await page.evaluate((id) => window.__navigate(id), conceptId);
-  await page.waitForTimeout(700);
+  await page.waitForTimeout(800);
   if (tab !== 'theorie') {
     await page.locator(`#tabRow [data-tab="${tab}"]`).click();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(800);
   }
 }
 
 async function collectSummary(page, { concept = 'home', tab = 'theorie' } = {}) {
-  return page.evaluate(({ concept, tab, graphConcepts }) => {
+  return page.evaluate(({ concept, tab }) => {
     const text = document.body.innerText || '';
-    const navCount = document.querySelectorAll('#navList .nav-item').length;
     return {
       concept,
       tab,
-      navCount,
+      navCount: document.querySelectorAll('#navList .nav-item').length,
       pageTitle: (document.querySelector('#content h1, #content h2')?.textContent || '').trim(),
       sectionBlocks: document.querySelectorAll('#content .section-block').length,
       formulaCards: document.querySelectorAll('#content .formula-card').length,
       problemCards: document.querySelectorAll('#content .problem-card').length,
-      graphCanvas: !!document.getElementById('graph_canvas'),
+      graphCanvas: document.querySelectorAll('#content #graph_canvas').length,
+      graphRows: document.querySelectorAll('#content .graph-interpretation-row').length,
       homeCards: document.querySelectorAll('#content .home-card, #content .home-action-card').length,
       rawDelimiters: text.includes('$$'),
       entityLeak: /&gt;|&lt;|&amp;/.test(text),
       markupLeak: /<span|<\/span|spanclass|<div|<\/div/.test(text),
-      mathError: text.includes('Math input error'),
-      graphExpected: graphConcepts.includes(concept)
+      mathError: text.includes('Math input error')
     };
-  }, { concept, tab, graphConcepts: [...graphConcepts] });
+  }, { concept, tab });
 }
 
 const browser = await chromium.launch({
@@ -76,13 +62,14 @@ try {
   const surfaces = [];
 
   const homeSummary = await collectSummary(page);
-  await page.screenshot({ path: '.qa/makro2-home.png', fullPage: true });
+  await page.screenshot({ path: '.qa/finanzwirtschaft-home.png', fullPage: true });
 
   if (homeSummary.navCount !== CHAPTERS.length) {
     failures.push(`navCount ${homeSummary.navCount} != ${CHAPTERS.length}`);
   }
 
   for (const chapter of CHAPTERS) {
+    const tabs = GRAPH_CONCEPTS.has(chapter.id) ? [...baseTabs, 'graph'] : baseTabs;
     for (const tab of tabs) {
       await navigateConcept(page, chapter.id, tab);
       const summary = await collectSummary(page, { concept: chapter.id, tab });
@@ -93,7 +80,8 @@ try {
         sectionBlocks: summary.sectionBlocks,
         formulaCards: summary.formulaCards,
         problemCards: summary.problemCards,
-        graphCanvas: summary.graphCanvas
+        graphCanvas: summary.graphCanvas,
+        graphRows: summary.graphRows
       });
 
       if (summary.pageTitle !== chapter.title) {
@@ -102,7 +90,7 @@ try {
       if (summary.rawDelimiters || summary.entityLeak || summary.markupLeak || summary.mathError) {
         failures.push(`${chapter.id}/${tab}: visible render leak`);
       }
-      if (tab === 'theorie' && summary.sectionBlocks < 2) {
+      if (tab === 'theorie' && summary.sectionBlocks < 3) {
         failures.push(`${chapter.id}/${tab}: thin theory (${summary.sectionBlocks})`);
       }
       if (tab === 'formeln' && summary.formulaCards < 1) {
@@ -114,41 +102,23 @@ try {
       if (tab === 'intuition' && summary.sectionBlocks < 1) {
         failures.push(`${chapter.id}/${tab}: missing intuition`);
       }
-    }
-
-    if (graphConcepts.has(chapter.id)) {
-      await navigateConcept(page, chapter.id, 'graph');
-      const graphSummary = await collectSummary(page, { concept: chapter.id, tab: 'graph' });
-      surfaces.push({
-        concept: chapter.id,
-        tab: 'graph',
-        title: graphSummary.pageTitle,
-        sectionBlocks: graphSummary.sectionBlocks,
-        formulaCards: graphSummary.formulaCards,
-        problemCards: graphSummary.problemCards,
-        graphCanvas: graphSummary.graphCanvas
-      });
-      if (!graphSummary.graphCanvas) {
-        failures.push(`${chapter.id}/graph: expected graph missing`);
-      }
-      if (graphSummary.rawDelimiters || graphSummary.entityLeak || graphSummary.markupLeak || graphSummary.mathError) {
-        failures.push(`${chapter.id}/graph: visible render leak`);
+      if (tab === 'graph') {
+        if (summary.graphCanvas < 1) failures.push(`${chapter.id}/${tab}: missing graph canvas`);
+        if (summary.graphRows < 3) failures.push(`${chapter.id}/${tab}: weak graph interpretation`);
       }
     }
   }
 
-  await navigateConcept(page, 'mundell_fleming', 'graph');
-  await page.screenshot({ path: '.qa/makro2-mundell.png', fullPage: true });
-  await navigateConcept(page, 'marshall_lerner', 'graph');
-  await page.screenshot({ path: '.qa/makro2-marshall-lerner.png', fullPage: true });
-  await navigateConcept(page, 'wk_regime', 'graph');
-  await page.screenshot({ path: '.qa/makro2-wk-regime.png', fullPage: true });
-  await navigateConcept(page, 'taylor_regel', 'graph');
-  await page.screenshot({ path: '.qa/makro2-taylor.png', fullPage: true });
+  await navigateConcept(page, 'intertemporale_wahl', 'graph');
+  await page.screenshot({ path: '.qa/finanzwirtschaft-intertemporal.png', fullPage: true });
+  await navigateConcept(page, 'izf_kapitalwertfunktion', 'graph');
+  await page.screenshot({ path: '.qa/finanzwirtschaft-izf.png', fullPage: true });
+  await navigateConcept(page, 'kapitalstruktur', 'graph');
+  await page.screenshot({ path: '.qa/finanzwirtschaft-leverage.png', fullPage: true });
 
   await page.evaluate(() => window.__showFullExamSelect());
-  await page.waitForTimeout(800);
-  await page.screenshot({ path: '.qa/makro2-exams.png', fullPage: true });
+  await page.waitForTimeout(900);
+  await page.screenshot({ path: '.qa/finanzwirtschaft-exams.png', fullPage: true });
   const examOverview = await page.evaluate(() => ({
     title: (document.querySelector('#content h2')?.textContent || '').trim(),
     examCards: document.querySelectorAll('#content .home-action-card').length
@@ -160,7 +130,7 @@ try {
 
   await page.evaluate(() => window.__startFullExam('probeklausur_1'));
   await page.waitForTimeout(900);
-  await page.screenshot({ path: '.qa/makro2-full-exam-1.png', fullPage: true });
+  await page.screenshot({ path: '.qa/finanzwirtschaft-full-exam-1.png', fullPage: true });
   const examSummary = await page.evaluate(() => ({
     title: (document.querySelector('.full-exam h2')?.textContent || '').trim(),
     questionCount: document.querySelectorAll('.fe-question').length,
@@ -180,7 +150,7 @@ try {
     examSummary,
     checkedConcepts: CHAPTERS.length,
     checkedSurfaces: surfaces.length,
-    surfaces: surfaces.slice(0, 24),
+    surfaces: surfaces.slice(0, 32),
     failures
   }, null, 2));
 

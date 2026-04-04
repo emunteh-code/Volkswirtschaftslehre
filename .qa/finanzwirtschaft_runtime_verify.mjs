@@ -1,0 +1,160 @@
+import { chromium } from '/tmp/pw-check/node_modules/playwright/index.mjs';
+import { CHAPTERS } from '../finanzwirtschaft/js/data/chapters.js';
+import { GRAPH_CONCEPTS } from '../finanzwirtschaft/js/ui/graphPanel.js';
+
+const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const baseUrl = 'http://127.0.0.1:4181';
+const consentKey = 'finanzwirtschaft_consent_v1';
+const baseTabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
+
+async function waitForApp(page) {
+  await page.waitForFunction(() => window.__jsLoaded && typeof window.__renderHome === 'function' && typeof window.__navigate === 'function', { timeout: 20000 });
+}
+
+async function openModulePage(browser) {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 2200 } });
+  await page.addInitScript((key) => localStorage.setItem(key, '1'), consentKey);
+  await page.goto(`${baseUrl}/finanzwirtschaft/index.html?qa=1`, { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await page.waitForTimeout(1000);
+  return page;
+}
+
+async function navigateConcept(page, conceptId, tab = 'theorie') {
+  await page.evaluate((id) => window.__navigate(id), conceptId);
+  await page.waitForTimeout(800);
+  if (tab !== 'theorie') {
+    await page.locator(`#tabRow [data-tab="${tab}"]`).click();
+    await page.waitForTimeout(800);
+  }
+}
+
+async function collectSummary(page, { concept = 'home', tab = 'theorie' } = {}) {
+  return page.evaluate(({ concept, tab }) => {
+    const text = document.body.innerText || '';
+    return {
+      concept,
+      tab,
+      navCount: document.querySelectorAll('#navList .nav-item').length,
+      pageTitle: (document.querySelector('#content h1, #content h2')?.textContent || '').trim(),
+      sectionBlocks: document.querySelectorAll('#content .section-block').length,
+      formulaCards: document.querySelectorAll('#content .formula-card').length,
+      problemCards: document.querySelectorAll('#content .problem-card').length,
+      graphCanvas: document.querySelectorAll('#content #graph_canvas').length,
+      graphRows: document.querySelectorAll('#content .graph-interpretation-row').length,
+      homeCards: document.querySelectorAll('#content .home-card, #content .home-action-card').length,
+      rawDelimiters: text.includes('$$'),
+      entityLeak: /&gt;|&lt;|&amp;/.test(text),
+      markupLeak: /<span|<\/span|spanclass|<div|<\/div/.test(text),
+      mathError: text.includes('Math input error')
+    };
+  }, { concept, tab });
+}
+
+const browser = await chromium.launch({
+  executablePath: chromePath,
+  headless: true
+});
+
+try {
+  const page = await openModulePage(browser);
+  const failures = [];
+  const surfaces = [];
+
+  const homeSummary = await collectSummary(page);
+  await page.screenshot({ path: '.qa/finanzwirtschaft-home.png', fullPage: true });
+
+  if (homeSummary.navCount !== CHAPTERS.length) {
+    failures.push(`navCount ${homeSummary.navCount} != ${CHAPTERS.length}`);
+  }
+
+  for (const chapter of CHAPTERS) {
+    const tabs = GRAPH_CONCEPTS.has(chapter.id) ? [...baseTabs, 'graph'] : baseTabs;
+    for (const tab of tabs) {
+      await navigateConcept(page, chapter.id, tab);
+      const summary = await collectSummary(page, { concept: chapter.id, tab });
+      surfaces.push({
+        concept: chapter.id,
+        tab,
+        title: summary.pageTitle,
+        sectionBlocks: summary.sectionBlocks,
+        formulaCards: summary.formulaCards,
+        problemCards: summary.problemCards,
+        graphCanvas: summary.graphCanvas,
+        graphRows: summary.graphRows
+      });
+
+      if (summary.pageTitle !== chapter.title) {
+        failures.push(`${chapter.id}/${tab}: title mismatch (${summary.pageTitle})`);
+      }
+      if (summary.rawDelimiters || summary.entityLeak || summary.markupLeak || summary.mathError) {
+        failures.push(`${chapter.id}/${tab}: visible render leak`);
+      }
+      if (tab === 'theorie' && summary.sectionBlocks < 3) {
+        failures.push(`${chapter.id}/${tab}: thin theory (${summary.sectionBlocks})`);
+      }
+      if (tab === 'formeln' && summary.formulaCards < 1) {
+        failures.push(`${chapter.id}/${tab}: missing formulas`);
+      }
+      if (tab === 'aufgaben' && summary.problemCards < 2) {
+        failures.push(`${chapter.id}/${tab}: weak tasks (${summary.problemCards})`);
+      }
+      if (tab === 'intuition' && summary.sectionBlocks < 1) {
+        failures.push(`${chapter.id}/${tab}: missing intuition`);
+      }
+      if (tab === 'graph') {
+        if (summary.graphCanvas < 1) failures.push(`${chapter.id}/${tab}: missing graph canvas`);
+        if (summary.graphRows < 3) failures.push(`${chapter.id}/${tab}: weak graph interpretation`);
+      }
+    }
+  }
+
+  await navigateConcept(page, 'intertemporale_wahl', 'graph');
+  await page.screenshot({ path: '.qa/finanzwirtschaft-intertemporal.png', fullPage: true });
+  await navigateConcept(page, 'izf_kapitalwertfunktion', 'graph');
+  await page.screenshot({ path: '.qa/finanzwirtschaft-izf.png', fullPage: true });
+  await navigateConcept(page, 'kapitalstruktur', 'graph');
+  await page.screenshot({ path: '.qa/finanzwirtschaft-leverage.png', fullPage: true });
+
+  await page.evaluate(() => window.__showFullExamSelect());
+  await page.waitForTimeout(900);
+  await page.screenshot({ path: '.qa/finanzwirtschaft-exams.png', fullPage: true });
+  const examOverview = await page.evaluate(() => ({
+    title: (document.querySelector('#content h2')?.textContent || '').trim(),
+    examCards: document.querySelectorAll('#content .home-action-card').length
+  }));
+
+  if (examOverview.examCards < 3) {
+    failures.push(`full exam overview has only ${examOverview.examCards} cards`);
+  }
+
+  await page.evaluate(() => window.__startFullExam('probeklausur_1'));
+  await page.waitForTimeout(900);
+  await page.screenshot({ path: '.qa/finanzwirtschaft-full-exam-1.png', fullPage: true });
+  const examSummary = await page.evaluate(() => ({
+    title: (document.querySelector('.full-exam h2')?.textContent || '').trim(),
+    questionCount: document.querySelectorAll('.fe-question').length,
+    rawLeak: /\$\$|&gt;|&lt;|&amp;|<span|<\/span/.test(document.body.innerText || '')
+  }));
+
+  if (examSummary.questionCount < 9) {
+    failures.push(`full exam question count too low (${examSummary.questionCount})`);
+  }
+  if (examSummary.rawLeak) {
+    failures.push('full exam has visible raw leak');
+  }
+
+  console.log(JSON.stringify({
+    homeSummary,
+    examOverview,
+    examSummary,
+    checkedConcepts: CHAPTERS.length,
+    checkedSurfaces: surfaces.length,
+    surfaces: surfaces.slice(0, 32),
+    failures
+  }, null, 2));
+
+  await page.close();
+} finally {
+  await browser.close();
+}

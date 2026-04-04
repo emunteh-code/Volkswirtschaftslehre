@@ -27,10 +27,10 @@ const modules = [
       }
     ]
   },
-  { slug: "finanzwirtschaft", minNav: 16 },
-  { slug: "jahresabschluss", minNav: 14 },
-  { slug: "recht", minNav: 15 },
-  { slug: "internationale-wirtschaftsbeziehungen", minNav: 15 },
+  { slug: "finanzwirtschaft", minNav: 13 },
+  { slug: "jahresabschluss", minNav: 11 },
+  { slug: "recht", minNav: 12 },
+  { slug: "internationale-wirtschaftsbeziehungen", minNav: 12 },
   {
     slug: "mathematik",
     minNav: 20,

@@ -226,6 +226,20 @@ function updateInfo(html) {
   if (info) info.innerHTML = html;
 }
 
+function renderInfo(equation, rows) {
+  return `
+    ${equation ? `<div class="graph-equation">${equation}</div>` : ''}
+    <div class="graph-insights">
+      ${rows.map((row) => `
+        <div class="graph-insight-row">
+          <span class="graph-insight-label">${row.label}</span>
+          <span>${row.body}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 function drawWechselkurs() {
   const eNom = getNumber("g_e_nom", 1.13);
   const pDom = getNumber("g_p_dom", 100);
@@ -250,15 +264,15 @@ function drawWechselkurs() {
   drawHorizontal(plot, 1, plot.col.muted, "PPP: ε = 1");
   drawCurve(plot, epsilon, {
     color: plot.col.accent,
-    label: "ε(E)",
+    label: "Realer Wechselkurs",
     labelX: 1.22
   });
 
   if (ePpp >= plot.ranges.xMin && ePpp <= plot.ranges.xMax) {
-    drawVertical(plot, ePpp, plot.col.accent2, "E_PPP");
+    drawVertical(plot, ePpp, plot.col.accent2, "PPP-Kurs");
   }
 
-  drawPoint(plot, eNom, currentEpsilon, plot.col.warn, `ε = ${currentEpsilon.toFixed(2)}`);
+  drawPoint(plot, eNom, currentEpsilon, plot.col.warn, "Aktueller Punkt");
 
   const classification = currentEpsilon > 1.02
     ? "reale Aufwertung des Inlands"
@@ -266,12 +280,14 @@ function drawWechselkurs() {
       ? "reale Abwertung des Inlands"
       : "nahe an Kaufkraftparität";
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Die Grafik nutzt die Kursformel <strong>ε = E·P / P*</strong>.
-    Bei E = <strong>${eNom.toFixed(2)}</strong>, P = <strong>${pDom.toFixed(0)}</strong> und P* = <strong>${pFor.toFixed(0)}</strong>
-    ergibt sich <strong>ε = ${currentEpsilon.toFixed(2)}</strong>. Das entspricht aktuell einer <strong>${classification}</strong>.
-    Die PPP-Linie liegt bei ε = 1; der dazugehörige Paritätskurs wäre <strong>E = ${ePpp.toFixed(2)}</strong>.
-  `);
+  updateInfo(renderInfo(
+    'ε = E · P / P*',
+    [
+      { label: 'Aktueller Punkt', body: `Bei E = ${eNom.toFixed(2)}, P = ${pDom.toFixed(0)} und P* = ${pFor.toFixed(0)} ergibt sich ε = ${currentEpsilon.toFixed(2)}.` },
+      { label: 'Deutung', body: `Das entspricht aktuell einer ${classification}.` },
+      { label: 'Kaufkraftparität', body: `Die PPP-Linie liegt bei ε = 1; der dazugehörige Paritätskurs wäre E = ${ePpp.toFixed(2)}.` }
+    ]
+  ));
 }
 
 function drawZinsparitaet() {
@@ -299,11 +315,11 @@ function drawZinsparitaet() {
   drawHorizontal(plot, eFuture, plot.col.accent2, "E^e");
   drawCurve(plot, currentE, {
     color: plot.col.accent,
-    label: "UZP",
+    label: "Zinsparität",
     labelX: 5.8
   });
-  drawVertical(plot, iDom, plot.col.muted, "aktuelles i");
-  drawPoint(plot, iDom, eqCurrent, plot.col.warn, `E = ${eqCurrent.toFixed(2)}`);
+  drawVertical(plot, iDom, plot.col.muted, "Aktueller Inlandszins");
+  drawPoint(plot, iDom, eqCurrent, plot.col.warn, "Aktueller Kurs");
 
   const expectedRate = ((eFuture - eqCurrent) / eqCurrent) * 100;
   const expectationText = expectedRate < -0.05
@@ -312,12 +328,14 @@ function drawZinsparitaet() {
       ? `eine erwartete Aufwertung um ${expectedRate.toFixed(1)}%`
       : "nahezu keine erwartete Wechselkursänderung";
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Die Grafik nutzt die exakte UZP-Form <strong>E = ((1+i)/(1+i*))·E^e</strong>.
-    Bei i = <strong>${iDom.toFixed(2)}%</strong>, i* = <strong>${iFor.toFixed(2)}%</strong> und E^e = <strong>${eFuture.toFixed(2)}</strong>
-    ergibt sich aktuell <strong>E = ${eqCurrent.toFixed(3)}</strong>. Vom heutigen Kurs aus impliziert das <strong>${expectationText}</strong>,
-    damit der Zinsvorteil bzw. -nachteil im Gleichgewicht kompensiert wird.
-  `);
+  updateInfo(renderInfo(
+    'E = ((1 + i) / (1 + i*)) · Eᵉ',
+    [
+      { label: 'Aktueller Kurs', body: `Bei i = ${iDom.toFixed(2)}%, i* = ${iFor.toFixed(2)}% und Eᵉ = ${eFuture.toFixed(2)} ergibt sich E = ${eqCurrent.toFixed(3)}.` },
+      { label: 'Arbitrageintuition', body: `Vom heutigen Kurs aus impliziert das ${expectationText}, damit der Zinsvorteil bzw. -nachteil im Gleichgewicht kompensiert wird.` },
+      { label: 'Graphlogik', body: 'Die Kurve zeigt, welcher aktuelle Wechselkurs mit den gegebenen Zinssätzen und Wechselkurserwartungen vereinbar ist.' }
+    ]
+  ));
 }
 
 function drawNettoexporte() {
@@ -341,17 +359,68 @@ function drawNettoexporte() {
 
   drawCurve(plot, nx, {
     color: plot.col.accent,
-    label: "NX(ε)",
+    label: "Nettoexporte",
     labelX: 1.46
   });
-  drawVertical(plot, eps, plot.col.accent2, "aktuelles ε");
-  drawPoint(plot, eps, currentNx, plot.col.warn, `NX = ${currentNx.toFixed(0)}`);
+  drawVertical(plot, eps, plot.col.accent2, "Aktueller realer WK");
+  drawPoint(plot, eps, currentNx, plot.col.warn, "Beobachtete Lage");
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Bei höherem realem Wechselkurs fällt NX. 
-    Höhere Auslandsnachfrage (${foreign.toFixed(1)}) verschiebt die Kurve nach oben, höhere Inlandsnachfrage (${domestic.toFixed(1)}) nach unten.
-    Aktuell liegt NX bei <strong>${currentNx.toFixed(0)}</strong> und damit ${currentNx >= 0 ? "im Überschuss" : "im Defizit"}.
-  `);
+  updateInfo(renderInfo(
+    'NX = X(Y*, ε) − IM(Y, ε) / ε',
+    [
+      { label: 'Kurvenverlauf', body: 'Bei höherem realem Wechselkurs fällt die Nettoexportfunktion: Das Inland wird relativ teuer und verliert preisliche Wettbewerbsfähigkeit.' },
+      { label: 'Verschiebungen', body: `Höhere Auslandsnachfrage (${foreign.toFixed(1)}) verschiebt die Kurve nach oben, höhere Inlandsnachfrage (${domestic.toFixed(1)}) nach unten.` },
+      { label: 'Aktuelle Lage', body: `Bei ε = ${eps.toFixed(2)} liegt NX bei ${currentNx.toFixed(0)} und damit ${currentNx >= 0 ? 'im Überschuss' : 'im Defizit'}.` }
+    ]
+  ));
+}
+
+function drawMarshallLerner() {
+  const shortDrop = getNumber("g_ml_short", 14);
+  const longGain = getNumber("g_ml_gain", 16);
+  const speed = getNumber("g_ml_speed", 1.0);
+  setValueLabel("v_ml_short", shortDrop, 0);
+  setValueLabel("v_ml_gain", longGain, 0);
+  setValueLabel("v_ml_speed", speed, 1);
+
+  const jCurve = (t) => -shortDrop * Math.exp(-speed * t) + longGain * (1 - Math.exp(-0.58 * speed * t));
+  const sample = Array.from({ length: 161 }, (_, index) => jCurve((8 / 160) * index));
+  const minValue = Math.min(...sample, -shortDrop);
+  const maxValue = Math.max(...sample, longGain);
+
+  const plot = setupPlot("Zeit nach Abwertung", "Handelsbilanz", {
+    xMin: 0,
+    xMax: 8,
+    yMin: Math.floor((minValue - 4) / 5) * 5,
+    yMax: Math.ceil((maxValue + 4) / 5) * 5
+  });
+  if (!plot) return;
+
+  drawHorizontal(plot, 0, plot.col.muted, "Ausgangssaldo");
+  drawCurve(plot, jCurve, {
+    color: plot.col.accent,
+    label: "J-Kurve",
+    labelX: 5.2
+  });
+
+  let troughIndex = 0;
+  sample.forEach((value, index) => {
+    if (value < sample[troughIndex]) troughIndex = index;
+  });
+  const troughT = (8 / 160) * troughIndex;
+  const troughValue = sample[troughIndex];
+  drawPoint(plot, troughT, troughValue, plot.col.warn, "Kurzfristiger Tiefpunkt");
+  drawPoint(plot, 8, jCurve(8), plot.col.accent2, "Langfristige Wirkung", -132, -10);
+
+  const mlSatisfied = longGain > shortDrop;
+  updateInfo(renderInfo(
+    'Abwertung: kurzfristiger Preiseffekt, verzögerter Mengeneffekt',
+    [
+      { label: 'Kurzfristig', body: `Unmittelbar nach der Abwertung verschlechtert sich die Handelsbilanz um ${shortDrop.toFixed(0)} Einheiten, weil Importpreise steigen, während Mengen noch kaum reagieren.` },
+      { label: 'Marshall-Lerner', body: mlSatisfied ? 'Der langfristige Mengeneffekt ist stark genug: Die J-Kurve dreht nach oben und die Handelsbilanz verbessert sich im Zeitablauf.' : 'Der langfristige Mengeneffekt bleibt zu schwach: Die Handelsbilanz erholt sich zwar, bleibt aber unter dem Ausgangsniveau.' },
+      { label: 'Tiefpunkt', body: `Der deutlichste kurzfristige Belastungspunkt liegt ungefähr nach ${troughT.toFixed(1)} Perioden bei ${troughValue.toFixed(1)}.` }
+    ]
+  ));
 }
 
 function drawMundellFleming() {
@@ -381,22 +450,68 @@ function drawMundellFleming() {
     color: plot.col.muted,
     dash: [7, 5],
     lineWidth: 2,
-    label: "IS alt",
+    label: "IS vor Fiskalimpuls",
     labelX: 102
   });
   drawCurve(plot, isShifted, {
     color: plot.col.accent,
-    label: "IS neu",
+    label: "IS nach Fiskalimpuls",
     labelX: 90
   });
-  drawHorizontal(plot, zp, plot.col.accent2, "ZP");
-  drawPoint(plot, Math.max(plot.ranges.xMin, Math.min(plot.ranges.xMax, equilibriumY)), zp, plot.col.warn, "Gleichgewicht");
+  drawHorizontal(plot, zp, plot.col.accent2, "Zahlungsbilanzlinie");
+  drawPoint(plot, Math.max(plot.ranges.xMin, Math.min(plot.ranges.xMax, equilibriumY)), zp, plot.col.warn, "Neues Gleichgewicht");
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Der Fiskalimpuls (${fiscal.toFixed(1)}) verschiebt die IS-Kurve nach rechts. 
-    Die ZP-Linie liegt bei <strong>i = ${(zp).toFixed(1)}%</strong> (${iWorld.toFixed(1)}% Weltzins + ${risk.toFixed(1)} PP Risikoprämie).
-    Das resultierende Gleichgewicht liegt bei <strong>Y ≈ ${equilibriumY.toFixed(1)}</strong>. Ein höherer Weltzins oder eine höhere Risikoprämie drücken das MF-Gleichgewichtseinkommen nach links.
-  `);
+  updateInfo(renderInfo(
+    'Mundell-Fleming: IS-Kurve + horizontale Zahlungsbilanzlinie',
+    [
+      { label: 'Fiskalimpuls', body: `Der Impuls von ${fiscal.toFixed(1)} verschiebt die IS-Kurve nach rechts.` },
+      { label: 'Kapitalmarkt', body: `Die Zahlungsbilanzlinie liegt bei i = ${zp.toFixed(1)}% (${iWorld.toFixed(1)}% Weltzins + ${risk.toFixed(1)} PP Risikoprämie).` },
+      { label: 'Gleichgewicht', body: `Das resultierende Gleichgewicht liegt bei Y ≈ ${equilibriumY.toFixed(1)}. Ein höherer Weltzins oder eine höhere Risikoprämie drücken das Mundell-Fleming-Gleichgewicht nach links.` }
+    ]
+  ));
+}
+
+function drawWkRegime() {
+  const shock = getNumber("g_regime_shock", 1.4);
+  const flexSpeed = getNumber("g_regime_flex", 1.2);
+  const pegDefense = getNumber("g_regime_peg", 1.1);
+  setValueLabel("v_regime_shock", shock, 1);
+  setValueLabel("v_regime_flex", flexSpeed, 1);
+  setValueLabel("v_regime_peg", pegDefense, 1);
+
+  const flexGap = (t) => -shock * Math.exp(-flexSpeed * t);
+  const pegGap = (t) => -shock * (1 + 0.22 * pegDefense) * Math.exp(-(0.42 / Math.max(0.6, pegDefense)) * t);
+  const plot = setupPlot("Zeit nach externem Schock", "Outputlücke", {
+    xMin: 0,
+    xMax: 8,
+    yMin: -Math.ceil((shock * (1 + 0.25 * pegDefense) + 0.4) * 2) / 2,
+    yMax: 0.4
+  });
+  if (!plot) return;
+
+  drawHorizontal(plot, 0, plot.col.muted, "Kein Outputverlust");
+  drawCurve(plot, flexGap, {
+    color: plot.col.accent,
+    label: "Flexibler Wechselkurs",
+    labelX: 4.2
+  });
+  drawCurve(plot, pegGap, {
+    color: plot.col.warn,
+    label: "Fester Wechselkurs",
+    labelX: 4.5,
+    labelDy: 14
+  });
+  drawPoint(plot, 0, flexGap(0), plot.col.accent, "Schock A", 10, -12);
+  drawPoint(plot, 0, pegGap(0), plot.col.warn, "Schock B", 10, 16);
+
+  updateInfo(renderInfo(
+    'Regimevergleich: Wechselkursanpassung versus interne Anpassung',
+    [
+      { label: 'Flexibler Wechselkurs', body: 'Der Kurs wirkt als Stoßdämpfer. Die Outputlücke wird schneller abgebaut, weil der Wechselkurs relativ früh einen Teil der Anpassung übernimmt.' },
+      { label: 'Fester Wechselkurs', body: `Je härter die Parität verteidigt wird (${pegDefense.toFixed(1)}), desto größer bleibt der anfängliche Outputverlust und desto langsamer erfolgt die Rückkehr zum Ausgangsniveau.` },
+      { label: 'Trilemma', body: 'Der Vergleich macht sichtbar, warum feste Kurse bei freiem Kapitalverkehr geldpolitische Autonomie begrenzen: Stabilisierung läuft stärker über Zinsanpassung, Reserven und Binnenkontraktion.' }
+    ]
+  ));
 }
 
 function drawSchuldenquote() {
@@ -443,10 +558,14 @@ function drawSchuldenquote() {
 
   const stabilizingPs = (r - g) * (b0 / 100) * 100;
   const last = trajectory[trajectory.length - 1];
-  updateInfo(`
-    <strong>Interpretation:</strong> Bei r = ${(r * 100).toFixed(1)}%, g = ${(g * 100).toFixed(1)}% und Primärsaldo = ${(ps * 100).toFixed(1)}% entwickelt sich die Schuldenquote von <strong>${b0.toFixed(0)}%</strong> auf <strong>${last.toFixed(1)}%</strong> nach 10 Perioden.
-    Zur unmittelbaren Stabilisierung der Startquote wäre ein Primärüberschuss von rund <strong>${stabilizingPs.toFixed(1)}%</strong> des BIP erforderlich.
-  `);
+  updateInfo(renderInfo(
+    'Δb ≈ (r − g) · b − ps',
+    [
+      { label: 'Ausgangslage', body: `Bei r = ${(r * 100).toFixed(1)}%, g = ${(g * 100).toFixed(1)}% und einem Primärsaldo von ${(ps * 100).toFixed(1)}% startet die Quote bei ${b0.toFixed(0)}%.` },
+      { label: 'Verlauf', body: `Nach 10 Perioden liegt die Schuldenquote bei ${last.toFixed(1)}%.` },
+      { label: 'Stabilisierung', body: `Zur unmittelbaren Stabilisierung der Startquote wäre ein Primärüberschuss von rund ${stabilizingPs.toFixed(1)}% des BIP erforderlich.` }
+    ]
+  ));
 }
 
 function drawTaylorRegel() {
@@ -483,7 +602,7 @@ function drawTaylorRegel() {
     color: plot.col.muted,
     dash: [7, 5],
     lineWidth: 2,
-    label: "r* + π",
+    label: "Neutrale Zinslinie",
     labelX: 4.5
   });
   drawCurve(plot, taylorLine, {
@@ -491,15 +610,17 @@ function drawTaylorRegel() {
     label: "Taylor-Regel",
     labelX: 3.8
   });
-  drawVertical(plot, piStar, plot.col.accent2, "π*");
-  drawPoint(plot, piCurrent, currentI, plot.col.warn, `i = ${currentI.toFixed(1)}%`);
+  drawVertical(plot, piStar, plot.col.accent2, "Inflationsziel");
+  drawPoint(plot, piCurrent, currentI, plot.col.warn, "Regelzins");
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Die Grafik veranschaulicht die Regel
-    <strong>i = r* + π + a(π - π*) + b(y - yₙ)</strong>.
-    Bei r* = ${rStar.toFixed(1)}%, π* = ${piStar.toFixed(1)}%, a = ${a.toFixed(1)} und einer Outputlücke von <strong>${outputGap.toFixed(2)}</strong>
-    empfiehlt die Regel bei aktueller Inflation von <strong>${piCurrent.toFixed(1)}%</strong> einen Leitzins von <strong>${currentI.toFixed(1)}%</strong>.
-  `);
+  updateInfo(renderInfo(
+    'i = r* + π + a(π − π*) + b(y − yₙ)',
+    [
+      { label: 'Regelparameter', body: `r* = ${rStar.toFixed(1)}%, π* = ${piStar.toFixed(1)}%, a = ${a.toFixed(1)} und b = ${b.toFixed(1)}.` },
+      { label: 'Aktuelle Lage', body: `Bei aktueller Inflation von ${piCurrent.toFixed(1)}% und einer Outputlücke von ${outputGap.toFixed(2)} empfiehlt die Regel einen Leitzins von ${currentI.toFixed(1)}%.` },
+      { label: 'Taylor-Prinzip', body: a > 0 ? 'Die Reaktion auf Inflation ist stabilisierend: Mit steigender Inflation liegt die Taylor-Regel oberhalb der neutralen Zinslinie.' : 'Ohne ausreichende Inflationsreaktion würde der Realzins nicht stabilisierend ansteigen.' }
+    ]
+  ));
 }
 
 function drawSolowBasis() {
@@ -524,23 +645,26 @@ function drawSolowBasis() {
 
   drawCurve(plot, investment, {
     color: plot.col.accent,
-    label: "sf(k)",
+    label: "Investition sf(k)",
     labelX: 18
   });
   drawCurve(plot, breakLine, {
     color: plot.col.accent2,
-    label: "(δ+n)k",
+    label: "Break-even-Investition",
     labelX: 17
   });
   if (kStar >= plot.ranges.xMin && kStar <= plot.ranges.xMax) {
-    drawPoint(plot, kStar, investment(kStar), plot.col.warn, `k* = ${kStar.toFixed(1)}`);
+    drawPoint(plot, kStar, investment(kStar), plot.col.warn, "Steady State");
   }
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Die Investitionskurve <strong>sf(k)</strong> liegt bei höherer Sparquote oder Produktivität weiter oben.
-    Bei den aktuellen Werten ergibt sich ein Steady State von rund <strong>k* = ${kStar.toFixed(1)}</strong>. 
-    Links davon gilt sf(k) &gt; (δ+n)k, rechts davon schrumpft der Kapitalstock pro Kopf.
-  `);
+  updateInfo(renderInfo(
+    'Steady State: sf(k*) = (δ + n)k*',
+    [
+      { label: 'Kurvenlogik', body: 'Die Investitionskurve liegt bei höherer Sparquote oder Produktivität weiter oben; die Break-even-Investition steigt mit Abschreibung und Bevölkerungswachstum.' },
+      { label: 'Steady State', body: `Bei den aktuellen Werten ergibt sich ein langfristiges Gleichgewicht von k* = ${kStar.toFixed(1)}.` },
+      { label: 'Dynamik', body: 'Links vom Steady State gilt sf(k) > (δ+n)k, rechts davon schrumpft der Kapitalstock pro Kopf.' }
+    ]
+  ));
 }
 
 function drawPhillipskurve() {
@@ -565,18 +689,22 @@ function drawPhillipskurve() {
   const currentPi = phillips(uCurrent);
 
   drawHorizontal(plot, piExpected, plot.col.accent2, "πᵉ");
-  drawVertical(plot, uNatural, plot.col.muted, "uₙ");
+  drawVertical(plot, uNatural, plot.col.muted, "Natürliche Arbeitslosigkeit");
   drawCurve(plot, phillips, {
     color: plot.col.accent,
-    label: "PK",
+    label: "Phillipskurve",
     labelX: 7.2
   });
-  drawPoint(plot, uCurrent, currentPi, plot.col.warn, `π = ${currentPi.toFixed(1)}%`);
+  drawPoint(plot, uCurrent, currentPi, plot.col.warn, "Aktueller Punkt");
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Liegt die Arbeitslosigkeit unter uₙ = ${uNatural.toFixed(1)}%, steigt die Inflation über die erwartete Inflation von ${piExpected.toFixed(1)}%.
-    Beim aktuellen Punkt (${uCurrent.toFixed(1)}%, ${currentPi.toFixed(1)}%) ist die Inflation ${currentPi >= piExpected ? "höher" : "niedriger"} als erwartet.
-  `);
+  updateInfo(renderInfo(
+    'π = πᵉ − α(u − uₙ)',
+    [
+      { label: 'Orientierung', body: `Die erwartete Inflation liegt bei ${piExpected.toFixed(1)}%; die natürliche Arbeitslosigkeit bei ${uNatural.toFixed(1)}%.` },
+      { label: 'Aktueller Punkt', body: `Bei u = ${uCurrent.toFixed(1)}% ergibt sich π = ${currentPi.toFixed(1)}%. Damit liegt die Inflation ${currentPi >= piExpected ? 'über' : 'unter'} der erwarteten Inflation.` },
+      { label: 'Deutung', body: 'Links von uₙ ist der Arbeitsmarkt angespannt und die Inflation liegt über πᵉ; rechts von uₙ fällt sie darunter.' }
+    ]
+  ));
 }
 
 function drawGeldmengen() {
@@ -602,16 +730,19 @@ function drawGeldmengen() {
 
   drawCurve(plot, lm, {
     color: plot.col.accent,
-    label: "LM",
+    label: "LM-Kurve",
     labelX: 95
   });
-  drawPoint(plot, yCurrent, Math.max(plot.ranges.yMin, currentI), plot.col.warn, `i = ${currentI.toFixed(1)}%`);
+  drawPoint(plot, yCurrent, Math.max(plot.ranges.yMin, currentI), plot.col.warn, "Geldmarktgleichgewicht");
 
-  updateInfo(`
-    <strong>Interpretation:</strong> Mehr reales Geldangebot (${mpReal.toFixed(0)}) verschiebt die LM-Kurve nach rechts/unten.
-    Bei Y = <strong>${yCurrent.toFixed(0)}</strong> ergibt sich aktuell ein Gleichgewichtszins von rund <strong>${currentI.toFixed(1)}%</strong>.
-    Höheres k macht die LM steiler, höheres h flacher.
-  `);
+  updateInfo(renderInfo(
+    'M / P = kY − hi',
+    [
+      { label: 'Geldangebot', body: `Mehr reales Geldangebot (${mpReal.toFixed(0)}) verschiebt die LM-Kurve nach rechts bzw. unten.` },
+      { label: 'Aktueller Punkt', body: `Bei Y = ${yCurrent.toFixed(0)} ergibt sich aktuell ein Gleichgewichtszins von rund ${currentI.toFixed(1)}%.` },
+      { label: 'Steigung', body: 'Ein höheres k macht die LM steiler, ein höheres h flacher.' }
+    ]
+  ));
 }
 
 function initGraph(conceptId) {
@@ -626,8 +757,14 @@ function initGraph(conceptId) {
     case "nettoexporte":
       drawNettoexporte();
       break;
+    case "marshall_lerner":
+      drawMarshallLerner();
+      break;
     case "mundell_fleming":
       drawMundellFleming();
+      break;
+    case "wk_regime":
+      drawWkRegime();
       break;
     case "schuldenquote":
       drawSchuldenquote();

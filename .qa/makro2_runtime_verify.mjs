@@ -10,8 +10,10 @@ const graphConcepts = new Set([
   'kaufkraftparitaet',
   'zinsparitaet',
   'nettoexporte',
+  'marshall_lerner',
   'geldmengen',
   'mundell_fleming',
+  'wk_regime',
   'taylor_regel',
   'solow_basis',
   'phillipskurve',
@@ -137,6 +139,10 @@ try {
 
   await navigateConcept(page, 'mundell_fleming', 'graph');
   await page.screenshot({ path: '.qa/makro2-mundell.png', fullPage: true });
+  await navigateConcept(page, 'marshall_lerner', 'graph');
+  await page.screenshot({ path: '.qa/makro2-marshall-lerner.png', fullPage: true });
+  await navigateConcept(page, 'wk_regime', 'graph');
+  await page.screenshot({ path: '.qa/makro2-wk-regime.png', fullPage: true });
   await navigateConcept(page, 'taylor_regel', 'graph');
   await page.screenshot({ path: '.qa/makro2-taylor.png', fullPage: true });
 

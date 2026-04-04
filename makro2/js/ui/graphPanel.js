@@ -8,7 +8,9 @@ export const GRAPH_CONCEPTS = new Set([
   'kaufkraftparitaet',
   'zinsparitaet',
   'nettoexporte',
+  'marshall_lerner',
   'mundell_fleming',
+  'wk_regime',
   'schuldenquote',
   'taylor_regel',
   'solow_basis',
@@ -66,6 +68,18 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
+    marshall_lerner: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Marshall-Lerner-Bedingung und J-Kurve</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_ml_short">Kurzfristiger Preiseffekt</label><input type="range" id="g_ml_short" min="6" max="24" step="1" value="14" oninput="window.initGraph('marshall_lerner', false)"><div class="val" id="v_ml_short" aria-live="polite">14</div></div>
+<div class="ctrl-group"><label for="g_ml_gain">Langfristiger Mengeneffekt</label><input type="range" id="g_ml_gain" min="4" max="28" step="1" value="16" oninput="window.initGraph('marshall_lerner', false)"><div class="val" id="v_ml_gain" aria-live="polite">16</div></div>
+<div class="ctrl-group"><label for="g_ml_speed">Anpassungsgeschwindigkeit</label><input type="range" id="g_ml_speed" min="0.4" max="1.8" step="0.1" value="1.0" oninput="window.initGraph('marshall_lerner', false)"><div class="val" id="v_ml_speed" aria-live="polite">1.0</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: J-Kurve der Handelsbilanz nach einer realen Abwertung."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
     mundell_fleming: `
 <div class="graph-container">
 <h3 class="graph-panel-title">Mundell-Fleming: IS und ZP</h3>
@@ -75,6 +89,18 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_risk">Risikopraemie</label><input type="range" id="g_risk" min="0" max="3" step="0.1" value="0.4" oninput="window.initGraph('mundell_fleming', false)"><div class="val" id="v_risk" aria-live="polite">0.4</div></div>
 </div>
 <canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Mundell-Fleming-Modell mit IS-Kurve und horizontaler ZP-Linie."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    wk_regime: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Feste versus flexible Wechselkurse bei externem Schock</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_regime_shock">Negativer externer Schock</label><input type="range" id="g_regime_shock" min="0.6" max="2.6" step="0.1" value="1.4" oninput="window.initGraph('wk_regime', false)"><div class="val" id="v_regime_shock" aria-live="polite">1.4</div></div>
+<div class="ctrl-group"><label for="g_regime_flex">Anpassung bei flexiblem WK</label><input type="range" id="g_regime_flex" min="0.5" max="1.8" step="0.1" value="1.2" oninput="window.initGraph('wk_regime', false)"><div class="val" id="v_regime_flex" aria-live="polite">1.2</div></div>
+<div class="ctrl-group"><label for="g_regime_peg">Verteidigungsintensität im Peg</label><input type="range" id="g_regime_peg" min="0.4" max="1.8" step="0.1" value="1.1" oninput="window.initGraph('wk_regime', false)"><div class="val" id="v_regime_peg" aria-live="polite">1.1</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Anpassung der Outputlücke unter flexiblem und festem Wechselkursregime."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 

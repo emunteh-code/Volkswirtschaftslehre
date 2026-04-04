@@ -17795,9 +17795,408 @@ function buildStatistikFullExams(chapters) {
   };
 }
 
+function buildMathematikFullExams(chapters) {
+  const algebra = chapterIdByTitle(chapters, "algebra und mengenlehre");
+  const funktionen = chapterIdByTitle(chapters, "funktionen und gleichungen");
+  const matrix1 = chapterIdByTitle(chapters, "matrizen und matrix-algebra");
+  const matrix2 = chapterIdByTitle(chapters, "masszahlen, inversen und eigenwerte");
+  const diff = chapterIdByTitle(chapters, "univariate differenzialrechnung");
+  const opt1 = chapterIdByTitle(chapters, "univariate optimierung");
+  const multi = chapterIdByTitle(chapters, "funktionen mehrerer variablen");
+  const opt2 = chapterIdByTitle(chapters, "multivariate optimierung und lagrange");
+  const integral = chapterIdByTitle(chapters, "integralrechnung");
+
+  return {
+    probeklausur_1: {
+      id: "probeklausur_1",
+      title: "Probeklausur I: Algebra, Funktionen und lineare Algebra",
+      subtitle: "90-Minuten-Klausur zu Mengenlogik, Funktionslesart und Matrixgrundlagen",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Grundlagen, Funktionen und lineare Algebra",
+          [
+            { id: "math_pk1_1", text: "Eine bijektive lineare Abbildung besitzt eine inverse Abbildung.", correct: "Wahr", feedback: "Bijektivität und Invertierbarkeit fallen bei linearen Abbildungen zusammen." },
+            { id: "math_pk1_2", text: "Eine streng monotone Funktion kann denselben Funktionswert an zwei verschiedenen Stellen annehmen.", correct: "Falsch", feedback: "Strenge Monotonie erzwingt Eindeutigkeit der Zuordnung." },
+            { id: "math_pk1_3", text: "Die Determinante einer 2x2-Matrix misst unter anderem die Flächenskalierung der zugehörigen linearen Abbildung.", correct: "Wahr", feedback: "Genau deshalb ist ihr Betrag geometrisch so wichtig." },
+            { id: "math_pk1_4", text: "Eine leere Menge ist stets Teilmenge jeder Menge.", correct: "Wahr", feedback: "Das gehört zur Grundlogik des Mengenbegriffs." },
+            { id: "math_pk1_5", text: "Eine Funktion ist schon dann injektiv, wenn sie mindestens einen Wendepunkt besitzt.", correct: "Falsch", feedback: "Injektivität hängt an der eindeutigen Zuordnung, nicht an einem einzelnen Kurvenmerkmal." },
+            { id: "math_pk1_6", text: "Wenn zwei Zeilen einer Matrix identisch sind, ist die Matrix nicht invertierbar.", correct: "Wahr", feedback: "Dann fehlt voller Rang und die Determinante wird null." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Funktion lesen und Nullstellenzugriff erklären",
+          "Gegeben ist eine quadratische Funktion mit zwei reellen Nullstellen und einem Scheitelpunkt unterhalb der x-Achse.",
+          [
+            buildTextQuestion(
+              "math_pk1_2a",
+              8,
+              "Welche Rolle spielt die Diskriminante für die Nullstellenzahl?",
+              ["sie entscheidet ueber die anzahl reeller nullstellen", "diskriminante entscheidet", "b quadrat minus 4ac"],
+              feedbackParagraphs(
+                "Die Diskriminante $b^2-4ac$ entscheidet, ob es keine, eine doppelte oder zwei reelle Nullstellen gibt."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_2b",
+              7,
+              "Warum hilft der Scheitelpunkt zusätzlich zur rein algebraischen Nullstellenformel?",
+              ["weil er lage und oeffnung der parabel sichtbar macht", "weil er maximum oder minimum markiert", "geometrische kontrolle"],
+              feedbackParagraphs(
+                "Der Scheitelpunkt zeigt Lage und Öffnung der Parabel und liefert eine starke geometrische Kontrolle der Algebra."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_2c",
+              7,
+              "Welche drei Leseschritte sind bei einer quadratischen Funktion klausursicher?",
+              ["oeffnung scheitel nullstellen", "vorzeichen a scheitel nullstellen", "funktion oeffnung scheitel"],
+              feedbackParagraphs(
+                "Sicher ist die Reihenfolge: Vorzeichen von $a$, Scheitelpunkt, dann Nullstellen bzw. Diskriminante."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Matrixlogik und Invertierbarkeit",
+          "Eine 2x2-Matrix transformiert das Einheitsquadrat in ein Parallelogramm.",
+          [
+            buildTextQuestion(
+              "math_pk1_3a",
+              7,
+              "Was verraten die Spalten der Matrix geometrisch?",
+              ["sie sind die bilder der basisvektoren", "transformierte basisvektoren", "ae1 ae2"],
+              feedbackParagraphs(
+                "Die Spalten von $A$ sind die Bilder der Standardbasisvektoren und bauen damit die Abbildung geometrisch auf."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_3b",
+              7,
+              "Wann ist die Matrix invertierbar?",
+              ["wenn die determinante ungleich null ist", "determinante ungleich null", "voller rang"],
+              feedbackParagraphs(
+                "Invertierbarkeit verlangt insbesondere eine von null verschiedene Determinante bzw. vollen Rang."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_3c",
+              6,
+              "Warum ist die Determinante auch inhaltlich mehr als eine Rechenzahl?",
+              ["weil sie flaechenskalierung und orientation beschreibt", "flaechenfaktor", "geometrische wirkung"],
+              feedbackParagraphs(
+                "Die Determinante misst Flächenskalierung und Orientierung der linearen Abbildung, nicht nur einen Rechenwert."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Begriffslogik aus den Grundlagen",
+          "Ordnen Sie Mengen-, Aussagen- und Funktionsbegriffe in einem kurzen mathematischen Argument sauber ein.",
+          [
+            buildTextQuestion(
+              "math_pk1_4a",
+              7,
+              "Warum muss bei einer Funktionsdefinition Definitions- und Wertebereich mitgedacht werden?",
+              ["weil die zuordnung ohne bereich unvollstaendig ist", "definitionsbereich und wertebereich bestimmen die funktion", "funktion braucht bereiche"],
+              feedbackParagraphs(
+                "Eine Funktion ist nicht nur eine Formel, sondern eine Zuordnung zwischen klar festgelegtem Definitions- und Wertebereich."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_4b",
+              7,
+              "Welche Rolle spielt logische Implikation in mathematischen Beweisen?",
+              ["sie verbindet voraussetzung und folgerung", "wenn dann struktur", "schlusslogik"],
+              feedbackParagraphs(
+                "Implikationen ordnen mathematische Aussagen in Voraussetzung und Schlussfolgerung und machen Argumente nachvollziehbar."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk1_4c",
+              6,
+              "Was macht eine gute Klausurantwort in diesem Grundlagenblock aus?",
+              ["begriff sauber definieren und dann anwenden", "definition plus anwendung", "nicht nur rechnen sondern begruenden"],
+              feedbackParagraphs(
+                "Starke Antworten definieren Begriffe sauber und wenden sie dann im konkreten Problem sichtbar an."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_2: {
+      id: "probeklausur_2",
+      title: "Probeklausur II: Differentialrechnung und univariate Optimierung",
+      subtitle: "90-Minuten-Klausur zu Ableitungen, Tangenten, Monotonie und Extremwertlogik",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Differentialrechnung und Optimierung",
+          [
+            { id: "math_pk2_1", text: "Wenn f'(x0)=0 gilt, liegt dort automatisch ein lokales Maximum vor.", correct: "Falsch", feedback: "Eine stationäre Stelle ist nur ein Kandidat; die Klassifikation braucht weitere Information." },
+            { id: "math_pk2_2", text: "Die Tangente liefert eine lokale lineare Approximation der Funktion.", correct: "Wahr", feedback: "Genau darin steckt die geometrische Bedeutung der Ableitung." },
+            { id: "math_pk2_3", text: "Monotonieintervalle liest man aus dem Vorzeichen von f'(x).", correct: "Wahr", feedback: "Positives Vorzeichen bedeutet Steigen, negatives Fallen." },
+            { id: "math_pk2_4", text: "Ein Wendepunkt liegt immer dort, wo f''(x)=0 und sonst nichts mehr geprüft werden muss.", correct: "Falsch", feedback: "Die Gleichung liefert Kandidaten; die Krümmung muss tatsächlich wechseln." },
+            { id: "math_pk2_5", text: "Randpunkte können bei Optimierungsaufgaben relevant sein.", correct: "Wahr", feedback: "Gerade auf beschränkten Intervallen gehören sie immer zur Kandidatenmenge." },
+            { id: "math_pk2_6", text: "Die zweite Ableitung misst die lokale Krümmung einer Funktion.", correct: "Wahr", feedback: "Darüber wird die Kandidatenklassifikation möglich." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Tangente und lokale Approximation",
+          "An einer markierten Stelle x0 sollen Steigung und Tangentengleichung interpretiert werden.",
+          [
+            buildTextQuestion(
+              "math_pk2_2a",
+              8,
+              "Welche Information liefert f'(x0) unmittelbar?",
+              ["die lokale steigung", "steigung an der stelle", "aenderungsrate"],
+              feedbackParagraphs(
+                "Die erste Ableitung gibt die momentane Änderungsrate bzw. Tangentensteigung an der Stelle $x_0$ an."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_2b",
+              7,
+              "Warum ist die Tangente besonders in der Nähe von x0 nützlich?",
+              ["weil sie die funktion lokal gut approximiert", "lineare approximation", "nahe an x0"],
+              feedbackParagraphs(
+                "Die Tangente approximiert die Funktion lokal am besten und macht das Verhalten in einer kleinen Umgebung lesbar."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_2c",
+              7,
+              "Wie lautet der sichere Klausurzugriff bei Tangentenaufgaben?",
+              ["punkt steigung tangentengleichung", "erst punkt dann ableitung dann gleichung", "beruehrpunkt und steigung"],
+              feedbackParagraphs(
+                "Zuerst Berührpunkt bestimmen, dann $f'(x_0)$ ausrechnen und daraus die Tangentengleichung aufbauen."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Stationäre Punkte klassifizieren",
+          "Eine Zielfunktion besitzt mehrere Kandidatenstellen mit f'(x)=0.",
+          [
+            buildTextQuestion(
+              "math_pk2_3a",
+              7,
+              "Warum reicht f'(x)=0 allein nicht als Endergebnis?",
+              ["weil es nur kandidaten liefert", "stationaere stellen muessen klassifiziert werden", "zweite ableitung oder randpruefung"],
+              feedbackParagraphs(
+                "Die Bedingung erster Ordnung liefert nur Kandidaten; erst danach folgen Klassifikation und ggf. Randprüfung."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_3b",
+              7,
+              "Welche Rolle spielt f''(x) bei der Kandidatenklassifikation?",
+              ["sie zeigt lokale kruemmung und damit minimum oder maximum", "zweite ableitung klassifiziert", "minimum maximum test"],
+              feedbackParagraphs(
+                "Das Vorzeichen der zweiten Ableitung entscheidet über lokale Krümmung und damit über Minimum oder Maximum."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_3c",
+              6,
+              "Was bleibt auf einem abgeschlossenen Intervall zusätzlich zu prüfen?",
+              ["randpunkte", "intervalgrenzen", "auch die raender"],
+              feedbackParagraphs(
+                "Auf beschränkten Intervallen müssen auch die Randpunkte mit den inneren Kandidaten verglichen werden."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Ökonomische Lesart der Ableitungen",
+          "Eine Kosten- oder Nutzenfunktion soll mit Hilfe ihrer Ableitungen interpretiert werden.",
+          [
+            buildTextQuestion(
+              "math_pk2_4a",
+              7,
+              "Wie liest man die erste Ableitung ökonomisch?",
+              ["als grenzgroesse", "marginale aenderung", "marginaler effekt"],
+              feedbackParagraphs(
+                "Ökonomisch steht die erste Ableitung meist für eine Grenzgröße oder marginale Änderung."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_4b",
+              7,
+              "Wie hilft die zweite Ableitung bei ökonomischen Entscheidungsproblemen?",
+              ["sie zeigt ob die grenzgroesse steigt oder faellt", "kruemmung und stabilitaet", "konvex oder konkav"],
+              feedbackParagraphs(
+                "Die zweite Ableitung beschreibt, ob Grenzgrößen zunehmen oder abnehmen und ob die Zielfunktion eher konvex oder konkav verläuft."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk2_4c",
+              6,
+              "Warum ist eine saubere sprachliche Interpretation in Mathe-Klausuren wichtig?",
+              ["weil ableitungen nicht nur gerechnet sondern auch gedeutet werden muessen", "rechenweg plus interpretation", "modelllogik sichtbar machen"],
+              feedbackParagraphs(
+                "Die Klausur prüft nicht nur Technik, sondern ob du Rechenobjekte als ökonomische oder funktionale Aussagen lesen kannst."
+              )
+            )
+          ]
+        )
+      ]
+    },
+    probeklausur_3: {
+      id: "probeklausur_3",
+      title: "Probeklausur III: Mehrere Variablen, Lagrange und Integralrechnung",
+      subtitle: "90-Minuten-Klausur zu Gradienten, Nebenbedingungen und Flächenlogik",
+      duration: 90,
+      aufgaben: [
+        buildWfBlock(
+          "Aufgabe 1",
+          18,
+          "Beurteilen Sie die Aussagen als wahr oder falsch.",
+          "Mehrdimensionale Analysis und Integralrechnung",
+          [
+            { id: "math_pk3_1", text: "Der Gradient steht orthogonal auf einer Levelkurve.", correct: "Wahr", feedback: "Genau das verbindet partielle Ableitungen und Geometrie." },
+            { id: "math_pk3_2", text: "Ein Lagrange-Multiplikator ist nur eine technische Hilfsgröße ohne ökonomische Bedeutung.", correct: "Falsch", feedback: "Er misst den lokalen Wert einer gelockerten Nebenbedingung." },
+            { id: "math_pk3_3", text: "Das bestimmte Integral kann als akkumulierte Fläche interpretiert werden.", correct: "Wahr", feedback: "Genau diese Flächen- und Akkumulationslogik trägt das Kapitel." },
+            { id: "math_pk3_4", text: "Partielle Ableitungen beschreiben immer gleichzeitig die Änderung in allen Richtungen.", correct: "Falsch", feedback: "Jede partielle Ableitung variiert nur eine Richtung bei Konstanthalten der anderen Variablen." },
+            { id: "math_pk3_5", text: "Bei einer bindenden Nebenbedingung liegt ein Optimum häufig im Tangentialpunkt von Niveaukurve und Restriktionsgerade.", correct: "Wahr", feedback: "Das ist die Kernintuition des Lagrange-Verfahrens." },
+            { id: "math_pk3_6", text: "Der Hauptsatz der Integralrechnung verbindet Stammfunktion und bestimmtes Integral.", correct: "Wahr", feedback: "Dadurch wird aus Flächenlogik eine konkrete Rechenregel." }
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 2",
+          22,
+          "Gradient und Levelkurve",
+          "An einem Punkt einer Funktion mehrerer Variablen sollen Levelkurve und Gradient gedeutet werden.",
+          [
+            buildTextQuestion(
+              "math_pk3_2a",
+              8,
+              "Welche Information bündelt der Gradient an einem Punkt?",
+              ["richtung des staerksten anstiegs", "staerkster anstieg", "gradientenrichtung"],
+              feedbackParagraphs(
+                "Der Gradient zeigt die Richtung des stärksten lokalen Anstiegs und seine Länge die lokale Steilheit."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_2b",
+              7,
+              "Warum ist die Orthogonalität zur Levelkurve didaktisch so wichtig?",
+              ["weil sie geometrie und partielle ableitungen verbindet", "orthogonalitaet erklaert gradient", "levelkurve"],
+              feedbackParagraphs(
+                "Sie macht sichtbar, wie Geometrie und Differentialrechnung zusammenhängen: Entlang der Levelkurve ändert sich der Funktionswert lokal nicht."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_2c",
+              7,
+              "Welche Standardfehlerquelle entsteht bei partiellen Ableitungen besonders häufig?",
+              ["andere variablen nicht konstant halten", "konstanthaltungsfehler", "richtungslogik verwechseln"],
+              feedbackParagraphs(
+                "Viele Fehler entstehen, weil beim Ableiten nach einer Variablen die anderen nicht wirklich als konstant behandelt werden."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 3",
+          20,
+          "Lagrange-Verfahren mit Nebenbedingung",
+          "Ein Optimum soll unter einer linearen Restriktion bestimmt und interpretiert werden.",
+          [
+            buildTextQuestion(
+              "math_pk3_3a",
+              7,
+              "Was ist die Kernidee des Lagrange-Verfahrens?",
+              ["zielfunktion und nebenbedingung ueber multiplikator koppeln", "lagrange koppelt zielfunktion und restriktion", "tangentialbedingung"],
+              feedbackParagraphs(
+                "Die Zielfunktion wird mit der Restriktion über den Multiplikator verbunden, sodass innere Optima als Tangentialpunkte gelesen werden können."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_3b",
+              7,
+              "Wie interpretiert man den Multiplikator inhaltlich?",
+              ["als schattenpreis", "wert einer marginal gelockerten nebenbedingung", "marginaler wert der restriktion"],
+              feedbackParagraphs(
+                "Der Multiplikator ist der lokale Wert einer kleinen Lockerung der bindenden Restriktion und wird deshalb oft als Schattenpreis gelesen."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_3c",
+              6,
+              "Welche drei Ebenen sollte eine gute Lagrange-Lösung sichtbar machen?",
+              ["funktion restriktion interpretation", "foc und inhaltliche deutung", "kandidaten und multiplikator"],
+              feedbackParagraphs(
+                "Stark ist die Lösung, wenn Zielfunktion, Restriktion und die inhaltliche Deutung des Multiplikators gemeinsam sichtbar werden."
+              )
+            )
+          ]
+        ),
+        buildTextBlock(
+          "Aufgabe 4",
+          20,
+          "Integral als Fläche und Akkumulation",
+          "Ein bestimmtes Integral soll sowohl grafisch als auch rechnerisch erklärt werden.",
+          [
+            buildTextQuestion(
+              "math_pk3_4a",
+              7,
+              "Welche Rolle spielt eine Stammfunktion beim bestimmten Integral?",
+              ["sie erlaubt f(b)-f(a)", "hauptsatz der integralrechnung", "stammfunktion liefert exakten wert"],
+              feedbackParagraphs(
+                "Über den Hauptsatz der Integralrechnung wird das bestimmte Integral mit Hilfe einer Stammfunktion als $F(b)-F(a)$ berechnet."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_4b",
+              7,
+              "Warum sind Rechtecknäherungen pädagogisch hilfreich, obwohl es oft eine exakte Lösung gibt?",
+              ["weil sie flaechenlogik und numerische approximation sichtbar machen", "naeherung zeigt akkumulierte flaeche", "numerische intuition"],
+              feedbackParagraphs(
+                "Sie machen die Fläche als Summe kleiner Beiträge sichtbar und verbinden Geometrie mit numerischem Rechnen."
+              )
+            ),
+            buildTextQuestion(
+              "math_pk3_4c",
+              6,
+              "Was ist die zentrale Brücke zwischen Differential- und Integralrechnung?",
+              ["hauptsatz der integralrechnung", "ableitung und stammfunktion", "rueckwaertsrechnung"],
+              feedbackParagraphs(
+                "Der Hauptsatz verbindet Ableiten und Integrieren als komplementäre Perspektiven auf denselben Funktionszusammenhang."
+              )
+            )
+          ]
+        )
+      ]
+    }
+  };
+}
+
 function buildFullExam(module, chapters, contentById, items) {
   if (module.slug === "statistik") {
     return buildStatistikFullExams(chapters);
+  }
+  if (module.slug === "mathematik") {
+    return buildMathematikFullExams(chapters);
   }
   const aufgaben = chapters.slice(0, Math.min(4, chapters.length)).map((chapter, index) => {
     const item = items[index];

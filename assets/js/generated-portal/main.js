@@ -688,7 +688,10 @@ function graphPalette() {
 
 function updateGraphInfo(html) {
   const info = document.getElementById("graph_info");
-  if (info) info.innerHTML = html;
+  if (info) {
+    info.innerHTML = html;
+    renderMath(info);
+  }
 }
 
 function renderStructuredGraphInfo({ equation = "", insights = [] }) {
@@ -1064,7 +1067,23 @@ function drawMathFunctions() {
         ? "Die Parabel beruehrt die x-Achse in genau einer doppelten Nullstelle."
         : "Die Parabel schneidet die x-Achse in zwei reellen Nullstellen.";
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Die Funktion <strong>f(x) = ${a.toFixed(1)}x² ${b >= 0 ? "+" : "-"} ${Math.abs(b).toFixed(1)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c).toFixed(1)}</strong> liefert bei <strong>x0 = ${x0.toFixed(1)}</strong> den Wert <strong>${y0.toFixed(2)}</strong>. ${rootText}`);
+  updateStructuredGraphInfo({
+    equation: `Funktionsfamilie: $f(x)=${a.toFixed(1)}x^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b).toFixed(1)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c).toFixed(1)}$`,
+    insights: [
+      {
+        label: "Markierter Punkt",
+        text: `Bei $x_0=${x0.toFixed(1)}$ liest du am Punkt $P$ den Funktionswert $f(x_0)=${y0.toFixed(2)}$ direkt von der Kurve ab.`
+      },
+      {
+        label: "Nullstellen und Form",
+        text: rootText
+      },
+      {
+        label: "Klausurzugriff",
+        text: "Bei quadratischen Funktionen erst Vorzeichen von $a$, dann Diskriminante und anschließend Scheitel bzw. Nullstellen systematisch prüfen."
+      }
+    ]
+  });
 }
 
 function drawMathMatrix() {
@@ -1107,7 +1126,23 @@ function drawMathMatrix() {
   ]);
 
   const invertible = Math.abs(det) > 1e-8;
-  updateGraphInfo(`<strong>Interpretation:</strong> Die Matrix <strong>A = [[${a11.toFixed(2)}, ${a12.toFixed(2)}], [${a21.toFixed(2)}, ${a22.toFixed(2)}]]</strong> bildet das Einheitsquadrat auf die violette Figur ab. Die Determinante ist <strong>${det.toFixed(3)}</strong>; damit ist A ${invertible ? "<strong>invertierbar</strong>" : "<strong>nicht invertierbar</strong>"} und skaliert orientierte Flaechen um den Faktor <strong>${Math.abs(det).toFixed(3)}</strong>.`);
+  updateStructuredGraphInfo({
+    equation: String.raw`Matrixabbildung: $A=\begin{pmatrix}${a11.toFixed(2)} & ${a12.toFixed(2)}\\${a21.toFixed(2)} & ${a22.toFixed(2)}\end{pmatrix}$`,
+    insights: [
+      {
+        label: "Bild der Basis",
+        text: "Die Spalten von $A$ sind genau die transformierten Basisvektoren $Ae_1$ und $Ae_2$; aus ihnen entsteht das violette Bild des Einheitsquadrats."
+      },
+      {
+        label: "Determinante",
+        text: `Es gilt $\\det(A)=${det.toFixed(3)}$. Damit ist die Matrix ${invertible ? "invertierbar" : "nicht invertierbar"} und skaliert orientierte Flächen um den Faktor $${Math.abs(det).toFixed(3)}$.`
+      },
+      {
+        label: "Klausurzugriff",
+        text: "Bei linearen Abbildungen immer Spaltenbild, Determinante und Invertierbarkeit gemeinsam lesen statt nur einzelne Zahlen auswendig zu deuten."
+      }
+    ]
+  });
 }
 
 function drawMathDerivative() {
@@ -1148,7 +1183,23 @@ function drawMathDerivative() {
   ]);
 
   const slope = dfx(x0);
-  updateGraphInfo(`<strong>Interpretation:</strong> Im Punkt <strong>x0 = ${x0.toFixed(2)}</strong> hat die Funktion die Steigung <strong>f'(x0) = ${slope.toFixed(2)}</strong>. Die gestrichelte Tangente visualisiert genau diese lokale lineare Approximation.`);
+  updateStructuredGraphInfo({
+    equation: "Lokale Approximation: $f(x)\\approx f(x_0)+f'(x_0)(x-x_0)$",
+    insights: [
+      {
+        label: "Steigung",
+        text: `Im markierten Punkt gilt $x_0=${x0.toFixed(2)}$ und damit $f'(x_0)=${slope.toFixed(2)}$.`
+      },
+      {
+        label: "Tangente",
+        text: "Die gestrichelte Tangente zeigt die beste lineare Näherung der Funktion direkt um den Berührpunkt herum."
+      },
+      {
+        label: "Klausurzugriff",
+        text: "Ableitung zuerst als Steigung lesen und erst dann für Nullstellen-, Monotonie- oder Tangentenfragen weiterverwenden."
+      }
+    ]
+  });
 }
 
 function drawMathUnivarOpt() {
@@ -1188,7 +1239,23 @@ function drawMathUnivarOpt() {
     { label: "Maxima / Minima", color: plot.col.warn, point: true }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Stationaere Punkte entstehen dort, wo <strong>f'(x) = 0</strong>. Fuer die aktuelle Funktion wurden ${roots.length ? labels.join("; ") : "keine stationaeren Punkte im dargestellten Bereich"} gefunden. Genau danach folgt die Klassifikation ueber <strong>f''(x)</strong>.`);
+  updateStructuredGraphInfo({
+    equation: "Optimierungslogik: $f'(x)=0$ und Klassifikation über $f''(x)$",
+    insights: [
+      {
+        label: "Kandidaten",
+        text: roots.length ? `Im dargestellten Bereich wurden ${labels.join("; ")} gefunden.` : "Im dargestellten Bereich liegen keine stationären Punkte der Zielfunktion."
+      },
+      {
+        label: "Klassifikation",
+        text: "Erst nach der Kandidatensuche entscheidet die zweite Ableitung, ob ein lokales Minimum, Maximum oder nur ein stationärer Punkt vorliegt."
+      },
+      {
+        label: "Klausurzugriff",
+        text: "Bei univariater Optimierung immer erst Kandidaten sammeln, dann Randpunkte mitprüfen und anschließend die gefundenen Stellen sauber klassifizieren."
+      }
+    ]
+  });
 }
 
 function drawMathMultivar() {
@@ -1240,7 +1307,23 @@ function drawMathMultivar() {
     { label: "gewahlter Punkt", color: plot.col.warn, point: true }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Im Punkt <strong>P = (${x0.toFixed(2)}, ${y0.toFixed(2)})</strong> gilt <strong>f(P) = ${q(x0, y0).toFixed(2)}</strong> und der Gradient ist <strong>∇f(P) = (${gradX.toFixed(2)}, ${gradY.toFixed(2)})</strong>. Der Gradient steht senkrecht auf der Levelkurve und zeigt die Richtung des staerksten Anstiegs.`);
+  updateStructuredGraphInfo({
+    equation: "Gradientenidee: $\\nabla f(P)=\\left(\\frac{\\partial f}{\\partial x},\\frac{\\partial f}{\\partial y}\\right)$",
+    insights: [
+      {
+        label: "Gewählter Punkt",
+        text: `Für $P=(${x0.toFixed(2)},${y0.toFixed(2)})$ gilt $f(P)=${q(x0, y0).toFixed(2)}$.`
+      },
+      {
+        label: "Gradient",
+        text: `Der Pfeil markiert $\\nabla f(P)=(${gradX.toFixed(2)},${gradY.toFixed(2)})$ und damit die Richtung des stärksten lokalen Anstiegs.`
+      },
+      {
+        label: "Levelkurven-Lesart",
+        text: "Der Gradient steht senkrecht auf der Levelkurve; genau diese Orthogonalität verbindet Geometrie und partielle Ableitungen."
+      }
+    ]
+  });
 }
 
 function drawMathLagrange() {
@@ -1283,7 +1366,23 @@ function drawMathLagrange() {
   ]);
 
   const lambda = optimum.y;
-  updateGraphInfo(`<strong>Interpretation:</strong> Unter der Nebenbedingung <strong>x + ${a.toFixed(1)}y = ${m.toFixed(1)}</strong> liegt das Tangentialoptimum bei <strong>x* = ${optimum.x.toFixed(2)}</strong> und <strong>y* = ${optimum.y.toFixed(2)}</strong>. Der zugehoerige Lagrange-Multiplikator ist hier <strong>λ = ${lambda.toFixed(2)}</strong>.`);
+  updateStructuredGraphInfo({
+    equation: String.raw`Lagrange-Ansatz: $\mathcal{L}(x,y,\lambda)=xy+\lambda\,( ${m.toFixed(1)}-x-${a.toFixed(1)}y )$`,
+    insights: [
+      {
+        label: "Nebenbedingung",
+        text: `Die Budget- bzw. Restriktionsgerade lautet $x+${a.toFixed(1)}y=${m.toFixed(1)}$ und begrenzt die erreichbaren Bündel.`
+      },
+      {
+        label: "Tangentialoptimum",
+        text: `Am markierten Tangentialpunkt gilt $x^*=${optimum.x.toFixed(2)}$ und $y^*=${optimum.y.toFixed(2)}$.`
+      },
+      {
+        label: "Multiplikator",
+        text: `Der zugehörige Lagrange-Multiplikator beträgt hier $\\lambda=${lambda.toFixed(2)}$ und misst den lokalen Wert einer gelockerten Nebenbedingung.`
+      }
+    ]
+  });
 }
 
 function drawMathIntegral() {
@@ -1346,7 +1445,23 @@ function drawMathIntegral() {
     { label: "Mittelpunkt-Rechtecke", color: plot.col.accent2 }
   ]);
 
-  updateGraphInfo(`<strong>Interpretation:</strong> Das bestimmte Integral zwischen <strong>a = ${a.toFixed(2)}</strong> und <strong>b = ${b.toFixed(2)}</strong> betraegt hier exakt <strong>${exact.toFixed(3)}</strong>. Die Mittelpunktnaeherung mit <strong>n = ${n}</strong> Rechtecken liefert <strong>${approx.toFixed(3)}</strong>.`);
+  updateStructuredGraphInfo({
+    equation: "Flächenlogik: $\\int_a^b f(x)\\,dx$",
+    insights: [
+      {
+        label: "Exakter Flächenwert",
+        text: `Zwischen $a=${a.toFixed(2)}$ und $b=${b.toFixed(2)}$ ergibt das bestimmte Integral hier den exakten Wert $${exact.toFixed(3)}$.`
+      },
+      {
+        label: "Numerische Näherung",
+        text: `Die Mittelpunktregel mit $n=${n}$ Rechtecken liefert die Approximation $${approx.toFixed(3)}$.`
+      },
+      {
+        label: "Klausurzugriff",
+        text: "Graphisch steht das Integral für akkumulierte Fläche; rechnerisch vergleichst du exakte Stammfunktion und numerische Näherung bewusst miteinander."
+      }
+    ]
+  });
 }
 
 function drawIwbRicardo() {

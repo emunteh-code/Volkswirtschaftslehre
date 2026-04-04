@@ -31,7 +31,25 @@ const modules = [
   { slug: "jahresabschluss", minNav: 14 },
   { slug: "recht", minNav: 15 },
   { slug: "internationale-wirtschaftsbeziehungen", minNav: 15 },
-  { slug: "mathematik", minNav: 20 },
+  {
+    slug: "mathematik",
+    minNav: 20,
+    expectExamCards: 3,
+    graphChecks: [
+      {
+        titleFragment: "Funktionen und Gleichungen",
+        tab: "graph",
+        minInsightRows: 3,
+        screenshot: ".qa/mathematik-funktionen.png"
+      },
+      {
+        titleFragment: "Multivariate Optimierung und Lagrange",
+        tab: "graph",
+        minInsightRows: 3,
+        screenshot: ".qa/mathematik-lagrange.png"
+      }
+    ]
+  },
   { slug: "oekonometrie", minNav: 25 }
 ];
 const selectedModules = filterSlug ? modules.filter((mod) => mod.slug === filterSlug) : modules;

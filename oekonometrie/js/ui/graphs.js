@@ -78,6 +78,24 @@ function setGraphInfo(html) {
   renderMath(info);
 }
 
+function buildGraphInfo({ label = 'Graph-Interpretation', equation = '', rows = [] }) {
+  const rowMarkup = rows
+    .map(
+      ({ head, body }) => `
+        <div class="gi-row">
+          <div class="gi-row-head">${head}</div>
+          <div class="gi-row-body">${body}</div>
+        </div>`
+    )
+    .join('');
+
+  return `
+    <span class="gi-label">${label}</span>
+    ${equation ? `<div class="gi-eq">${equation}</div>` : ''}
+    ${rows.length ? `<div class="gi-list">${rowMarkup}</div>` : ''}
+  `;
+}
+
 function buildPlot(ctx, w, h, {
   xmin,
   xmax,
@@ -270,9 +288,19 @@ function drawOLS(progress = 1) {
     { color: col.neutral, label: 'Beobachtungen', dot: true }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Was du siehst:</strong> Die blaue Linie ist die geschätzte OLS-Gerade, die orange markierten vertikalen Strecken sind die Residuen. OLS minimiert die Summe der quadrierten Residuen, also $\sum_i \hat{u}_i^2$.
-<br><strong>Interpretation:</strong> Größere Fehlerstreuung $\sigma_u$ macht die Punktwolke breiter und die Anpassung weniger präzise; die Steigung $\beta_1$ kippt die Regressionslinie.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i,\quad \min \sum_i \hat{u}_i^2$`,
+    rows: [
+      {
+        head: 'Was du siehst',
+        body: String.raw`Die blaue Linie ist die geschätzte OLS-Gerade, die orange markierten vertikalen Strecken sind die Residuen. OLS minimiert genau die Summe der quadrierten Residuen $\sum_i \hat{u}_i^2$.`
+      },
+      {
+        head: 'Interpretation',
+        body: String.raw`Größere Fehlerstreuung $\sigma_u$ macht die Punktwolke breiter und die Anpassung weniger präzise; die Steigung $\beta_1$ kippt die Regressionslinie.`
+      }
+    ]
+  }));
 }
 
 function drawOVB(progress = 1) {
@@ -315,9 +343,19 @@ function drawOVB(progress = 1) {
     { color: col.magenta, label: 'verzerrte Pooled-Linie' }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Was du siehst:</strong> Die blauen und grünen Punkte folgen innerhalb ihrer Gruppe derselben strukturellen Beziehung, liegen aber auf unterschiedlichem Niveau. Wird die ausgelassene Variable $z$ nicht kontrolliert, kippt die magenta Pooled-Linie.
-<br><strong>Interpretation:</strong> Omitted variable bias entsteht, wenn die ausgelassene Variable y beeinflusst und zugleich mit dem beobachteten Regressor x zusammenhängt.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$y_i = \beta_0 + \beta_1 x_i + \beta_2 z_i + u_i$`,
+    rows: [
+      {
+        head: 'Was du siehst',
+        body: String.raw`Die blauen und grünen Punkte folgen innerhalb ihrer Gruppe derselben strukturellen Beziehung, liegen aber auf unterschiedlichem Niveau. Wird die ausgelassene Variable $z$ nicht kontrolliert, kippt die magenta Pooled-Linie.`
+      },
+      {
+        head: 'Interpretation',
+        body: String.raw`Omitted variable bias entsteht, wenn die ausgelassene Variable $z$ das Ergebnis $y$ beeinflusst und zugleich mit dem beobachteten Regressor $x$ zusammenhängt.`
+      }
+    ]
+  }));
 }
 
 function drawPrediction(progress = 1) {
@@ -398,9 +436,19 @@ function drawPrediction(progress = 1) {
     { color: col.magenta, label: 'Punkt x₀', dot: true }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Mittelwertsprognose:</strong> Der magenta Punkt markiert $\hat{y}_0 = x_0'\hat{\beta}$.
-<br><strong>Intervalllogik:</strong> Das grüne Band beschreibt die Unsicherheit über $E(y_0\mid x_0)$, das orange Band ist breiter, weil für eine konkrete neue Beobachtung zusätzlich der neue Fehlerterm $u_0$ hinzukommt.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$\hat{y}_0 = x_0' \hat{\beta}$`,
+    rows: [
+      {
+        head: 'Mittelwertsprognose',
+        body: String.raw`Der magenta Punkt markiert $\hat{y}_0 = x_0' \hat{\beta}$ als geschätzten bedingten Mittelwert bei $x_0$.`
+      },
+      {
+        head: 'Intervalllogik',
+        body: String.raw`Das grüne Band beschreibt die Unsicherheit über $E(y_0 \mid x_0)$, das orange Band ist breiter, weil für eine konkrete neue Beobachtung zusätzlich der neue Fehlerterm $u_0$ hinzukommt.`
+      }
+    ]
+  }));
 }
 
 function normalDensity(x, mean, sd) {
@@ -452,9 +500,19 @@ function drawAsymptotic(progress = 1) {
     { color: col.neutral, label: 'wahrer Parameter' }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Asymptotische Idee:</strong> Mit wachsendem $n$ wird die Stichprobenverteilung von $\hat{\beta}$ enger und glatter.
-<br><strong>Pädagogischer Punkt:</strong> Das magenta Dichteband konzentriert sich stärker um den wahren Parameter. Ein systematischer Bias verschwindet aber nicht einfach, wenn das Modell falsch identifiziert ist.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$\hat{\beta} \overset{d}{\longrightarrow} \mathcal{N}\!\left(\beta,\; \frac{V}{n}\right)$`,
+    rows: [
+      {
+        head: 'Asymptotische Idee',
+        body: String.raw`Mit wachsendem $n$ wird die Stichprobenverteilung von $\hat{\beta}$ enger und glatter.`
+      },
+      {
+        head: 'Pädagogischer Punkt',
+        body: String.raw`Das magenta Dichteband konzentriert sich stärker um den wahren Parameter. Ein systematischer Bias verschwindet aber nicht einfach, wenn das Modell falsch identifiziert ist.`
+      }
+    ]
+  }));
 }
 
 function drawVIF(progress = 1) {
@@ -483,9 +541,19 @@ function drawVIF(progress = 1) {
     { color: col.magenta, label: 'gemeinsamer Trend' }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Was du siehst:</strong> Wenn $x_1$ und $x_2$ fast dieselbe Bewegung tragen, bleibt für den partiellen Effekt nur wenig eigenständige Variation übrig.
-<br><strong>Diagnose:</strong> Bei der eingestellten Korrelation gilt ungefähr $VIF \approx ${vif.toFixed(2)}$. Hohe Werte blähen Standardfehler auf, ohne automatisch Bias zu erzeugen.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$VIF_j = \frac{1}{1-R_j^2} \approx ${vif.toFixed(2)}$`,
+    rows: [
+      {
+        head: 'Was du siehst',
+        body: String.raw`Wenn $x_1$ und $x_2$ fast dieselbe Bewegung tragen, bleibt für den partiellen Effekt nur wenig eigenständige Variation übrig.`
+      },
+      {
+        head: 'Diagnose',
+        body: String.raw`Bei der eingestellten Korrelation gilt ungefähr $VIF \approx ${vif.toFixed(2)}$. Hohe Werte blähen Standardfehler auf, ohne automatisch Bias zu erzeugen.`
+      }
+    ]
+  }));
 }
 
 function drawFWL(progress = 1) {
@@ -514,9 +582,19 @@ function drawFWL(progress = 1) {
     { color: col.magenta, label: 'partielle Steigung β₁' }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>FWL-Logik:</strong> Nach Herausrechnung der übrigen Regressoren bleibt nur der Zusammenhang zwischen $\tilde{x}_1$ und $\tilde{y}$ übrig.
-<br><strong>Interpretation:</strong> Die Steigung der magenta Linie entspricht genau dem Koeffizienten von $x_1$ im multiplen Ausgangsmodell.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$\tilde{y} = \beta_1 \tilde{x}_1 + \tilde{u}$`,
+    rows: [
+      {
+        head: 'FWL-Logik',
+        body: String.raw`Nach Herausrechnung der übrigen Regressoren bleibt nur der Zusammenhang zwischen $\tilde{x}_1$ und $\tilde{y}$ übrig.`
+      },
+      {
+        head: 'Interpretation',
+        body: String.raw`Die Steigung der magenta Linie entspricht genau dem Koeffizienten von $x_1$ im multiplen Ausgangsmodell.`
+      }
+    ]
+  }));
 }
 
 function drawHeterosk(progress = 1) {
@@ -547,9 +625,19 @@ function drawHeterosk(progress = 1) {
     { color: col.red, label: 'zunehmende Streuung', dash: [6, 5], lw: 2.2 }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Diagnosebild:</strong> Die blaue Wolke öffnet sich nach rechts. Genau diese Fan-Shape ist das klassische visuelle Signal für Heteroskedastizität.
-<br><strong>Folge:</strong> OLS-Koeffizienten können unter Exogenität weiter sinnvoll sein, aber klassische Standardfehler werden unzuverlässig.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$\operatorname{Var}(u_i \mid X_i) \neq \sigma^2$`,
+    rows: [
+      {
+        head: 'Diagnosebild',
+        body: String.raw`Die blaue Wolke öffnet sich nach rechts. Genau diese Fan-Shape ist das klassische visuelle Signal für Heteroskedastizität.`
+      },
+      {
+        head: 'Folge',
+        body: String.raw`OLS-Koeffizienten können unter Exogenität weiter sinnvoll sein, aber klassische Standardfehler werden unzuverlässig.`
+      }
+    ]
+  }));
 }
 
 function drawAutocorrelation(progress = 1) {
@@ -581,9 +669,19 @@ function drawAutocorrelation(progress = 1) {
     { color: withAlpha(col.neutral, 0.65), label: 'Null-Linie', dash: [5, 5], lw: 1.2 }
   ], w);
 
-  setGraphInfo(String.raw`
-<strong>Was du siehst:</strong> Die Residuen wechseln bei hoher positiver Autokorrelation seltener abrupt das Vorzeichen und laufen in Blöcken über oder unter null.
-<br><strong>Interpretation:</strong> Positive serielle Abhängigkeit bedeutet, dass ein Fehler heute Information über den Fehler morgen enthält. Genau deshalb werden klassische Standardfehler in Zeitreihen oft zu optimistisch.`);
+  setGraphInfo(buildGraphInfo({
+    equation: String.raw`$u_t = \rho u_{t-1} + \varepsilon_t$`,
+    rows: [
+      {
+        head: 'Was du siehst',
+        body: String.raw`Die Residuen wechseln bei hoher positiver Autokorrelation seltener abrupt das Vorzeichen und laufen in Blöcken über oder unter null.`
+      },
+      {
+        head: 'Interpretation',
+        body: String.raw`Positive serielle Abhängigkeit bedeutet, dass ein Fehler heute Information über den Fehler morgen enthält. Genau deshalb werden klassische Standardfehler in Zeitreihen oft zu optimistisch.`
+      }
+    ]
+  }));
 }
 
 function initGraph(type, animate = true) {
@@ -614,4 +712,3 @@ export {
   drawAutocorrelation,
   initGraph
 };
-

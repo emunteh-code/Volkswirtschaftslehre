@@ -2991,24 +2991,26 @@ function appendHomeSupplement(module, contentProfile) {
 function buildShell(module, chapterCount) {
   return `
 <div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-  <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
-  <div class="consent-actions">
-    <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
-    <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+  <div class="consent-notice-inner">
+    <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
+    <div class="consent-actions">
+      <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
+      <button class="consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+    </div>
   </div>
 </div>
 
 <div id="app">
   <nav id="sidebar" aria-label="Konzept-Navigation">
-    <div class="sidebar-header"
-         onclick="window.__renderHome()"
-         role="button"
-         tabindex="0"
-         onkeydown="if(event.key==='Enter')window.__renderHome()"
-         title="Zur Startseite"
-         aria-label="Startseite">
-      <a class="portal-home-link" href="../index.html" onclick="event.stopPropagation()">Alle Module</a>
-      <h1>${escapeHtml(module.title)}</h1>
+    <div class="sidebar-header">
+      <a class="portal-home-link" href="../index.html">← Alle Module</a>
+      <button class="sidebar-module-home" type="button" onclick="window.__renderHome()" aria-label="Zur ${escapeHtml(module.title)}-Übersicht">
+        <span class="sidebar-module-icon" aria-hidden="true">⌂</span>
+        <span class="sidebar-module-copy">
+          <span class="sidebar-module-title">${escapeHtml(module.title)}</span>
+          <span class="sidebar-module-subtitle">Zur Modulübersicht</span>
+        </span>
+      </button>
       <p>Georg-August-Universität Göttingen</p>
     </div>
 
@@ -3028,7 +3030,8 @@ function buildShell(module, chapterCount) {
 
     <div id="navList" role="list" aria-label="Konzepte"></div>
 
-    <div class="sidebar-footer-btns">
+    <div class="sidebar-footer-btns" role="group" aria-label="Lernwerkzeuge">
+      <div class="sidebar-footer-label">Werkzeuge</div>
       <button class="sidebar-footer-btn" onclick="window.__showDashboard()" aria-label="Dashboard öffnen">Dashboard</button>
       <button class="sidebar-footer-btn" onclick="window.__startExam()" aria-label="Schnelltest starten">Schnelltest</button>
       <button class="sidebar-footer-btn" onclick="window.__showSRSReview()" aria-label="Wiederholungsrunde starten">Wiederholen</button>
@@ -3039,7 +3042,7 @@ function buildShell(module, chapterCount) {
     <div id="topbar">
       <div id="topbar-main">
         <div class="breadcrumb" id="breadcrumb" aria-live="polite" role="navigation" aria-label="Breadcrumb">
-          <button class="breadcrumb-link" onclick="window.__renderHome()">${escapeHtml(module.title)}</button> / Startseite
+          <button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button>
         </div>
         <div id="topbar-actions">
           <span id="streakBadge" class="streak-badge" style="display:none" aria-label="Lern-Streak"><span id="streakCount">0</span></span>
@@ -3050,7 +3053,7 @@ function buildShell(module, chapterCount) {
       </div>
       <div class="tab-row" id="tabRow" role="tablist" aria-label="Inhalt">
         <button class="tab-btn active" data-tab="theorie" role="tab" aria-selected="true" tabindex="0">Theorie</button>
-        <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false" tabindex="0">Grafik</button>
+        <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false" tabindex="0" style="display:none">Grafik</button>
         <button class="tab-btn" data-tab="aufgaben" role="tab" aria-selected="false" tabindex="0">Aufgaben</button>
         <button class="tab-btn" data-tab="formeln" role="tab" aria-selected="false" tabindex="0">Formeln</button>
         <button class="tab-btn" data-tab="intuition" role="tab" aria-selected="false" tabindex="0">Intuition</button>

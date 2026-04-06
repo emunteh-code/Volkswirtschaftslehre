@@ -2,7 +2,7 @@ import { createPortalApp } from "../portal-core/app.js";
 import { createRenderer } from "../portal-core/ui/renderer.js";
 import { createQuickExamModule } from "../portal-core/features/exam.js";
 import { createFullExamModule } from "../portal-core/features/fullExam.js";
-import { renderRPracticeMarkup, mountRPracticeBlocks } from "../portal-core/features/rPractice.js";
+import { renderRPracticeMarkup, mountRPracticeBlocks, renderRAnwendungTab } from "../portal-core/features/rPractice.js";
 import { createStorageModule } from "../portal-core/state/storage.js";
 import { getModuleBySlug } from "../modules.js";
 import { getModuleContent } from "../module-content.js";
@@ -158,26 +158,8 @@ function augmentModuleForGeneratedPortal(module) {
 }
 
 function injectRPracticeIntoData(module, data) {
-  if (!module.rPracticeBlocks?.length) return data;
-  const codeChapter = data.chapters.find((chapter) => chapter.id.startsWith("code_"));
-  if (!codeChapter) return data;
-  const contentEntry = data.contentById[codeChapter.id];
-  if (!contentEntry) return data;
-
-  const practiceMarkup = module.rPracticeBlocks
-    .map((block, index) => renderRPracticeMarkup(block, {
-      moduleSlug: module.slug,
-      blockId: `${module.slug}_generated_${index + 1}`
-    }))
-    .join("\n");
-
-  contentEntry.theorie = `${contentEntry.theorie}
-<div class="section-block">
-  <h3>Interaktive R-Anwendung</h3>
-  <p>Diese R-Blöcke gehören direkt zur Methodenlogik des Moduls: zuerst fachlich lesen, dann den Code ausführen, Output deuten, Mini-Aufgabe lösen und die Musterlösung mit typischen Fehlern abgleichen.</p>
-</div>
-${practiceMarkup}`;
-
+  // R blocks now live exclusively in the dedicated R-Anwendung tab.
+  // Injection into theorie is intentionally skipped.
   return data;
 }
 
@@ -3120,6 +3102,11 @@ const theme = createTheme(data.keys.THEME_KEY);
 const keyboard = createKeyboard(data.chapters);
 const examGraphs = createExamGraphs();
 
+// R-Anwendung tab: only available for the code_* chapter when module has R blocks
+const rCodeChapterId = module.rPracticeBlocks?.length
+  ? data.chapters.find((ch) => ch.id.startsWith("code_"))?.id || null
+  : null;
+
 const baseRenderer = createRenderer({
   courseLabel: module.title,
   courseTitle: module.title,
@@ -3135,7 +3122,14 @@ const baseRenderer = createRenderer({
   loadProgress: storage.loadProgress,
   loadLastId: storage.loadLastId,
   getDueCards: srs.getDueCards,
-  renderDashboard: dashboard.renderDashboard
+  renderDashboard: dashboard.renderDashboard,
+  hasRBlock: (conceptId) => rCodeChapterId !== null && conceptId === rCodeChapterId,
+  renderRAnwendungPanel: rCodeChapterId
+    ? (conceptId) => {
+        if (conceptId !== rCodeChapterId) return '';
+        return renderRAnwendungTab(module.rPracticeBlocks, module.slug);
+      }
+    : null
 });
 
 const renderer = {

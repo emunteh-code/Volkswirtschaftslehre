@@ -129,7 +129,7 @@ function buildRuntimeExpectation(mode, runtimeNote) {
   if (mode === 'guided') {
     return 'Geführter Modus: Dieser Block nutzt Kurscode, der zusätzliche Pakete oder vorbereitete Übungsobjekte voraussetzt. Die Aufgabe bleibt editierbar, aber die Laufzeit wird bewusst durch Soll-Output und Interpretation gestützt.';
   }
-  return 'Live-Modus: Der Code läuft direkt im Browser über WebR. Falls WebR in deinem Browser oder Netzwerk nicht startet, bleibt die Aufgabe im ehrlichen Fallback und verweist auf den Soll-Output.';
+  return 'Live-Modus: Der Code läuft direkt im Browser über WebR (WebAssembly). Falls WebR in deinem Browser oder Netzwerk nicht startet, bleibt die Aufgabe im ehrlichen Fallback und verweist auf den Soll-Output.';
 }
 
 function buildConfig(block, options = {}) {
@@ -198,8 +198,8 @@ export function renderRPracticeMarkup(block, options = {}) {
     <div class="r-practice-help">
       <span class="r-practice-help-label">Arbeitslogik</span>
       <span>${config.runtimeMode === 'guided'
-        ? 'Geführter Paketfall: Lies zuerst den Code, sichere dann Interpretation und Mini-Task.'
-        : 'Arbeite erst mit dem Startcode, ändere dann gezielt nur die Zeilen, die der Mini-Task wirklich braucht.'}</span>
+    ? 'Geführter Paketfall: Lies zuerst den Code, sichere dann Interpretation und Mini-Task.'
+    : 'Arbeite erst mit dem Startcode, ändere dann gezielt nur die Zeilen, die der Mini-Task wirklich braucht.'}</span>
     </div>
   </div>
   <div class="r-practice-output-card">
@@ -229,6 +229,216 @@ export function renderRPracticeMarkup(block, options = {}) {
 ${renderPitfalls(config.pitfalls)}
 </div>`;
 }
+
+// ─── Syntax Highlighting ────────────────────────────────────────────────────
+
+const R_HIGHLIGHT_PATTERNS = [
+  { type: 'comment',  re: /^#[^\n]*/ },
+  { type: 'string',   re: /^"(?:[^"\\]|\\.)*"|^'(?:[^'\\]|\\.)*'/ },
+  { type: 'number',   re: /^\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/ },
+  {
+    type: 'keyword',
+    re: /^\b(?:if|else|for|while|repeat|break|next|return|function|TRUE|FALSE|NULL|NA|Inf|NaN)\b/
+  },
+  {
+    type: 'builtin',
+    re: /^\b(?:c|list|data\.frame|matrix|cbind|rbind|print|cat|paste|paste0|sprintf|str|summary|head|tail|dim|nrow|ncol|length|names|colnames|rownames|which|subset|merge|apply|sapply|lapply|tapply|do\.call|tryCatch|stop|warning|message|library|require|source|mean|sd|var|median|sum|min|max|range|cor|cov|lm|glm|t\.test|chisq\.test|anova|aov|predict|residuals|fitted|coef|confint|plot|hist|boxplot|barplot|abline|points|lines|legend|par|set\.seed|arima\.sim|capture\.output|as\.numeric|as\.character|as\.factor|factor|is\.na|complete\.cases|table|prop\.table|cumsum|diff|log|exp|sqrt|abs|round|floor|ceiling|sign|seq|seq_len|seq_along|rep|rev|sort|order|rank|unique|duplicated|nchar|substr|toupper|tolower|trimws|gsub|grepl|strsplit|format|setwd|getwd|read\.csv|write\.csv)\b/
+  },
+  { type: 'operator', re: /^(?:<-|->|<<-|->>|%%|%\*%|%in%|%o%|::|:=|[+\-*\/^&|!<>=]+)/ },
+  { type: 'ws',       re: /^\s+/ },
+  { type: 'id',       re: /^[A-Za-z_.][A-Za-z0-9_.]*/ },
+];
+
+function tokenizeR(code) {
+  const tokens = [];
+  let remaining = String(code ?? '');
+  while (remaining.length > 0) {
+    let hit = false;
+    for (const { type, re } of R_HIGHLIGHT_PATTERNS) {
+      const m = re.exec(remaining);
+      if (m) {
+        tokens.push({ type, value: m[0] });
+        remaining = remaining.slice(m[0].length);
+        hit = true;
+        break;
+      }
+    }
+    if (!hit) {
+      tokens.push({ type: 'other', value: remaining[0] });
+      remaining = remaining.slice(1);
+    }
+  }
+  return tokens;
+}
+
+function renderHighlightedR(code) {
+  return tokenizeR(code).map(({ type, value }) => {
+    const esc = escapeHtml(value);
+    if (type === 'ws' || type === 'other') return esc;
+    return `<span class="r-t-${type}">${esc}</span>`;
+  }).join('');
+}
+
+function mountHighlighter(blockEl) {
+  const editor = blockEl.querySelector('[data-r-editor]');
+  const display = blockEl.querySelector('[data-r-highlight]');
+  if (!editor || !display) return;
+
+  function update() {
+    // Append a trailing space so last-line height stays accurate
+    display.innerHTML = renderHighlightedR(editor.value) + '\u200b';
+    display.scrollTop = editor.scrollTop;
+    display.scrollLeft = editor.scrollLeft;
+  }
+
+  update();
+  editor.addEventListener('input', update);
+  editor.addEventListener('scroll', () => {
+    display.scrollTop = editor.scrollTop;
+    display.scrollLeft = editor.scrollLeft;
+  });
+}
+
+// ─── Dedicated R-Anwendung Tab Renderer ────────────────────────────────────
+
+function renderFlowSteps(mode) {
+  const steps = mode === 'guided'
+    ? ['Code lesen', 'Verstehen', 'Mini-Task', 'Musterlösung']
+    : ['Code lesen', 'Ausführen', 'Output lesen', 'Mini-Task'];
+  return `<div class="r-flow-steps" aria-hidden="true">
+${steps.map((label, i) => `<div class="r-flow-step"><span class="r-step-num">${i + 1}</span><span class="r-step-label">${label}</span></div>${i < steps.length - 1 ? '<div class="r-flow-sep">→</div>' : ''}`).join('')}
+</div>`;
+}
+
+function renderTabOrientationCard(config, index, total) {
+  const isMulti = total > 1;
+  const indexLabel = isMulti ? ` · Block ${index + 1} von ${total}` : '';
+  const firstAction = config.runtimeMode === 'guided'
+    ? 'Lies den Code sorgfältig durch. Nutze die Interpretation und den Mini-Task — ein Live-Run ist hier nicht erforderlich.'
+    : 'Lies den Code einmal durch, dann klicke „Code ausführen". Danach: Output lesen → Interpretation → Mini-Task.';
+
+  return `<div class="r-orient-card">
+  <div class="r-orient-top">
+    <div class="r-orient-head">
+      <div class="r-orient-kicker">R-Anwendung${indexLabel}</div>
+      <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
+    </div>
+    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>
+  </div>
+  <p class="r-orient-purpose">${escapeHtml(config.purpose)}</p>
+  <div class="r-orient-first-action">
+    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(firstAction)}
+  </div>
+  ${renderFlowSteps(config.runtimeMode)}
+  ${config.script ? `<div class="r-orient-script">${escapeHtml(config.script)}</div>` : ''}
+</div>`;
+}
+
+function renderHighlightEditor(config) {
+  const editHint = config.runtimeMode === 'guided'
+    ? 'Alle Zeilen lesbar. Kein Live-Run erforderlich.'
+    : 'Ändere gezielt die Zeilen, die der Mini-Task nennt. Alle anderen Zeilen bleiben wie sie sind.';
+
+  const actionLabel = config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen';
+  const runDisabled = config.runtimeMode === 'guided' ? ' disabled' : '';
+
+  return `<div class="r-practice-editor-card">
+  <div class="r-practice-toolbar">
+    <div>
+      <div class="r-practice-toolbar-kicker">Codebereich</div>
+      <div class="r-practice-toolbar-title">Bearbeite gezielt — nicht alles auf einmal</div>
+    </div>
+  </div>
+  <div class="r-highlight-wrap">
+    <div class="r-highlight-display" data-r-highlight aria-hidden="true"></div>
+    <textarea class="r-practice-editor r-hl-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
+  </div>
+  <div class="r-practice-actions">
+    <button type="button" class="btn" data-r-action="run"${runDisabled}>${escapeHtml(actionLabel)}</button>
+    <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
+    <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
+  </div>
+  <div class="r-practice-help">
+    <span class="r-practice-help-label">Bearbeitungshinweis</span>
+    <span>${escapeHtml(editHint)}</span>
+  </div>
+</div>`;
+}
+
+function renderTabOutputCard(config) {
+  const outputTitle = config.runtimeMode === 'guided'
+    ? 'Erwarteter Output · Geführt'
+    : 'Konsolenausgabe · Live WebR';
+
+  return `<div class="r-practice-output-card r-tab-output-card">
+  <div class="r-practice-output-head">
+    <div>
+      <div class="r-practice-toolbar-kicker">Output</div>
+      <div class="r-practice-toolbar-title">${outputTitle}</div>
+    </div>
+  </div>
+  <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
+  <div class="r-output-interp">
+    <div class="r-output-interp-kicker">So liest du den Output</div>
+    <p>${escapeHtml(config.interpretation)}</p>
+  </div>
+</div>`;
+}
+
+function renderTabBottomRow(config) {
+  const pitfallsHtml = config.pitfalls.length
+    ? `<div class="r-practice-pitfalls r-tab-pitfalls">
+<h4>Häufige Fehler</h4>
+<ul>${config.pitfalls.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
+</div>` : '';
+
+  return `<div class="r-tab-bottom">
+  <div class="r-practice-card r-tab-task-card">
+    <h4>Mini-Task</h4>
+    <p>${escapeHtml(config.miniTask)}</p>
+    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
+    <div class="r-practice-solution" data-r-solution hidden>
+      <div class="r-solution-body">
+        <div class="r-solution-label">Musterlösung</div>
+        <p>${escapeHtml(config.solution)}</p>
+      </div>
+    </div>
+  </div>
+  ${pitfallsHtml}
+</div>`;
+}
+
+function renderRLabSection(block, moduleSlug, index, total, options = {}) {
+  const blockId = options.blockId || `rtab_${moduleSlug}_${index}`;
+  const config = buildConfig(block, { moduleSlug, blockId });
+  practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
+
+  const runtimeNote = config.runtimeNote;
+
+  return `<div class="r-lab-section r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
+${renderTabOrientationCard(config, index, total)}
+<div class="r-runtime-note r-tab-runtime-note">${escapeHtml(runtimeNote)}</div>
+<div class="r-practice-workspace">
+  ${renderHighlightEditor(config)}
+  ${renderTabOutputCard(config)}
+</div>
+${renderTabBottomRow(config)}
+</div>`;
+}
+
+export function renderRAnwendungTab(blocks, moduleSlug) {
+  if (!blocks || !blocks.length) return '';
+  const total = blocks.length;
+
+  const sectionsHtml = blocks.map((block, index) => {
+    const blockId = `rtab_${moduleSlug}_${index + 1}`;
+    return renderRLabSection(block, moduleSlug, index, total, { blockId });
+  }).join('\n<div class="r-lab-divider" aria-hidden="true"></div>\n');
+
+  return `<div class="r-tab-panel">${sectionsHtml}</div>`;
+}
+
+// ─── State & Mount Logic ────────────────────────────────────────────────────
 
 function loadState(moduleSlug, blockId) {
   try {
@@ -279,8 +489,8 @@ async function handleRun(blockEl, config) {
   if (!editor || !output) return;
 
   const code = normalizeCode(editor.value);
-  output.textContent = 'Code wird ausgeführt...';
-  setRuntimeStatus(status, 'Runtime: lädt WebR...', 'loading');
+  output.textContent = 'Code wird ausgeführt…';
+  setRuntimeStatus(status, 'Runtime: lädt WebR…', 'loading');
 
   try {
     const result = await executeR(config.moduleSlug, code);
@@ -308,6 +518,7 @@ function mountBlock(blockEl) {
   blockEl.dataset.rPracticeMounted = 'true';
 
   const config = readConfig(blockEl);
+  if (!config) return;
   const state = loadState(config.moduleSlug, config.blockId);
   const editor = blockEl.querySelector('[data-r-editor]');
   const status = blockEl.querySelector('[data-r-runtime-status]');
@@ -332,6 +543,9 @@ function mountBlock(blockEl) {
     setRuntimeStatus(status, 'Modus: geführt', 'guided');
   }
 
+  // Mount syntax highlighting for tab-style editor (has overlay)
+  mountHighlighter(blockEl);
+
   editor?.addEventListener('input', () => {
     saveState(config.moduleSlug, config.blockId, {
       ...loadState(config.moduleSlug, config.blockId),
@@ -341,7 +555,11 @@ function mountBlock(blockEl) {
   });
 
   blockEl.querySelector('[data-r-action="reset"]')?.addEventListener('click', () => {
-    if (editor) editor.value = config.starterCode;
+    if (editor) {
+      editor.value = config.starterCode;
+      // Update the highlight display via synthetic input event
+      editor.dispatchEvent(new Event('input'));
+    }
     hydrateOutput(blockEl, config, {});
     if (config.runtimeMode === 'guided') {
       setRuntimeStatus(status, 'Modus: geführt', 'guided');
@@ -386,7 +604,7 @@ export function describeRRuntimeMode(root) {
   const result = { live: 0, guided: 0 };
   root.querySelectorAll('[data-r-practice-root]').forEach((blockEl) => {
     const config = readConfig(blockEl);
-    if (config.runtimeMode === 'guided') result.guided += 1;
+    if (config?.runtimeMode === 'guided') result.guided += 1;
     else result.live += 1;
   });
   return result;

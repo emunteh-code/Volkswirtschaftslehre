@@ -118,4 +118,23 @@
 
 ---
 
+## 9. Shared extraction (portal-core `data/`)
+
+After the pilot, **reusable** logic was moved to `assets/js/portal-core/data/` so other modules can adopt manifests without copying:
+
+| File | Role |
+|------|------|
+| `sourceStatus.js` | `SOURCE_STATUSES`, `isValidSourceStatus` |
+| `provenance.js` | `createSourceReference`, `createProvenance`, `validateProvenanceLoose` |
+| `schemaUtils.js` | `LERNPORTAL_CONTENT_MANIFEST_BASE`, `buildContentManifestSchemaId`, `assertNonEmptyString` |
+| `learningObjectNormalize.js` | `DEFAULT_LAYER_SOURCE_STATUS`, `buildProvenanceByConceptFromPrimaryRefs` |
+| `modeIndex.js` | `hasGraphConcept`, `buildConceptModeIndex` |
+| `contentManifestAdapters.js` | `buildContentManifestBridgePayload` |
+
+**makro1** keeps: `MAKRO1_CONCEPT_PRIMARY_REFS`, module-specific notes, `FULL_EXAM_PROVENANCE` entries, legacy bridge `schema: 'makro1.contentManifest'`, and thin wrappers (`makro1SourceRef`, `getMakro1PilotBridgePayload`).
+
+**Migration:** Other modules can import the same helpers; use `buildContentManifestSchemaId('<slug>')` for new payloads or keep a legacy `schema` string for compatibility.
+
+---
+
 *End of makro1 pilot migration notes.*

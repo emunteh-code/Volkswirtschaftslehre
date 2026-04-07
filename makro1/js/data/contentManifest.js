@@ -1,10 +1,14 @@
 // ============================================================
 // CONTENT MANIFEST — Makroökonomik I (pilot)
 // Provenance + mode index for canonical schema alignment.
-// Does not replace CHAPTERS/CONTENT; additive metadata only.
+// Shared builders: assets/js/portal-core/data/*
 // See docs/audits/makro1-pilot-migration.md
 // ============================================================
 
+import { createSourceReference, createProvenance } from '../../../assets/js/portal-core/data/provenance.js';
+import { buildProvenanceByConceptFromPrimaryRefs } from '../../../assets/js/portal-core/data/learningObjectNormalize.js';
+import { buildConceptModeIndex } from '../../../assets/js/portal-core/data/modeIndex.js';
+import { buildContentManifestBridgePayload } from '../../../assets/js/portal-core/data/contentManifestAdapters.js';
 import { CHAPTERS, CONTENT } from './chapters.js';
 import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
@@ -17,20 +21,14 @@ import {
 } from './srsConfig.js';
 import { COURSE_CONFIG } from './courseConfig.js';
 
-/** @typedef {'direct-source'|'source-distilled'|'platform-added-explanation'|'platform-added-drill'|'cross-link'} SourceStatus */
+const MODULE_SLUG = 'makro1';
 
 /**
- * @param {string} path - Path as in assets/js/module-content.js (makro1)
+ * @param {string} path
  * @param {string} [title]
  */
 export function makro1SourceRef(path, title = '') {
-  const safe = path.replace(/[^a-zA-Z0-9._-]/g, '_');
-  return {
-    ref_id: `makro1:${safe}`,
-    module_slug: 'makro1',
-    path,
-    ...(title ? { title } : {})
-  };
+  return createSourceReference(MODULE_SLUG, path, title);
 }
 
 /**
@@ -53,177 +51,100 @@ export const MAKRO1_CONCEPT_PRIMARY_REFS = {
   erwartungen: ['Vorlesungen/VL_8.pdf', 'Zusammenfassungen/Makro I VL8.pdf']
 };
 
-const NOTES_THEORY = 'Portal theory blocks follow the Makro I course line (Vorlesungs-/Übungslogik); wording is authored for the portal, not a verbatim PDF paste.';
-const NOTES_GRAPH = 'Interactive graph: parameter sliders for exam-style reasoning; not a reproduction of a single course figure.';
+const NOTES_THEORY =
+  'Portal theory blocks follow the Makro I course line (Vorlesungs-/Übungslogik); wording is authored for the portal, not a verbatim PDF paste.';
+const NOTES_GRAPH =
+  'Interactive graph: parameter sliders for exam-style reasoning; not a reproduction of a single course figure.';
 const NOTES_INTUITION = 'Compressed recall layer (Kernidee / Muster) for the closed learning loop.';
-const NOTES_STEP = 'Step-problem quick-exam items with stable options.problemId / stepId for future mistake routing.';
+const NOTES_STEP =
+  'Step-problem quick-exam items with stable options.problemId / stepId for future mistake routing.';
 const NOTES_TASKS = 'Authored Aufgaben for guided practice; may synthesize several Übungsstile.';
 
-/**
- * Per-concept provenance layers (canonical `provenance`-style fields).
- * @type {Record<string, {
- *   theory: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string },
- *   motivation: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string },
- *   formulas: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string },
- *   tasks: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string },
- *   intuition: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string },
- *   graph?: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string },
- *   stepProblems?: { source_status: SourceStatus, source_refs: ReturnType<typeof makro1SourceRef>[], notes?: string }
- * }>}
- */
-export const PROVENANCE_BY_CONCEPT = Object.fromEntries(
-  CHAPTERS.map(({ id }) => {
-    const paths = MAKRO1_CONCEPT_PRIMARY_REFS[id] || [];
-    const refs = paths.map((p) => makro1SourceRef(p));
-    const hasGraph = GRAPH_CONCEPTS.has(id);
-    const hasSteps = Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0;
-    const hasIntuition = Boolean(INTUITION[id]);
-    return [
-      id,
-      {
-        motivation: {
-          source_status: 'source-distilled',
-          source_refs: refs,
-          notes: NOTES_THEORY
-        },
-        theory: {
-          source_status: 'source-distilled',
-          source_refs: refs,
-          notes: NOTES_THEORY
-        },
-        formulas: {
-          source_status: 'source-distilled',
-          source_refs: refs,
-          notes: 'Notation aligned with VL/Zusammenfassungen; rearranged for Formeln tab.'
-        },
-        tasks: {
-          source_status: 'platform-added-drill',
-          source_refs: refs,
-          notes: NOTES_TASKS
-        },
-        ...(hasIntuition
-          ? {
-              intuition: {
-                source_status: 'platform-added-explanation',
-                source_refs: refs,
-                notes: NOTES_INTUITION
-              }
-            }
-          : {}),
-        ...(hasGraph
-          ? {
-              graph: {
-                source_status: 'platform-added-explanation',
-                source_refs: refs,
-                notes: NOTES_GRAPH
-              }
-            }
-          : {}),
-        ...(hasSteps
-          ? {
-              stepProblems: {
-                source_status: 'platform-added-drill',
-                source_refs: refs,
-                notes: NOTES_STEP
-              }
-            }
-          : {})
-      }
-    ];
-  })
-);
+export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
+  chapters: CHAPTERS,
+  primaryPathsByConceptId: MAKRO1_CONCEPT_PRIMARY_REFS,
+  moduleSlug: MODULE_SLUG,
+  hasGraph: (id) => GRAPH_CONCEPTS.has(id),
+  hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,
+  hasIntuition: (id) => Boolean(INTUITION[id]),
+  notesByLayer: {
+    motivation: NOTES_THEORY,
+    theory: NOTES_THEORY,
+    formulas: 'Notation aligned with VL/Zusammenfassungen; rearranged for Formeln tab.',
+    tasks: NOTES_TASKS,
+    intuition: NOTES_INTUITION,
+    graph: NOTES_GRAPH,
+    stepProblems: NOTES_STEP
+  }
+});
 
 /** Module-level assessment objects (full exams live in fullExams.js). */
 export const FULL_EXAM_PROVENANCE = {
-  probeklausur_1: {
+  probeklausur_1: createProvenance({
     source_status: 'platform-added-drill',
     source_refs: [
       makro1SourceRef('Klausur_2018_Haupttermin.pdf', 'Archiv-Stil'),
       makro1SourceRef('Klausur_2022_Haupttermin.pdf', 'Archiv-Stil')
     ],
-    notes: 'Probeklausur authored for portal practice; topic mix aligned with Makro I archive, not a single pasted paper.'
-  },
-  probeklausur_2: {
+    notes:
+      'Probeklausur authored for portal practice; topic mix aligned with Makro I archive, not a single pasted paper.'
+  }),
+  probeklausur_2: createProvenance({
     source_status: 'platform-added-drill',
     source_refs: [
       makro1SourceRef('Klausur_2018_Haupttermin.pdf', 'Archiv-Stil'),
       makro1SourceRef('Klausur_2022_Haupttermin.pdf', 'Archiv-Stil')
     ],
     notes: 'Second probeklausur block in portal; exam-style training, not a verbatim archive scan.'
-  },
-  probeklausur_3: {
+  }),
+  probeklausur_3: createProvenance({
     source_status: 'platform-added-drill',
     source_refs: [
       makro1SourceRef('Klausur_2018_Haupttermin.pdf', 'Archiv-Stil'),
       makro1SourceRef('Klausur_2022_Haupttermin.pdf', 'Archiv-Stil')
     ],
     notes: 'Third probeklausur block in portal; exam-style training, not a verbatim archive scan.'
-  }
+  })
 };
 
-/**
- * Hooks for future learn / practice / exam / mistake pipelines (no UI change).
- * Counts derived from live data objects to avoid drift.
- */
 export function buildMakro1ModeIndex() {
-  /** @type {Record<string, object>} */
-  const out = {};
-  for (const c of CHAPTERS) {
-    const entry = CONTENT[c.id];
-    const stepGroups = STEP_PROBLEMS[c.id];
-    const aufgaben = entry?.aufgaben;
-    out[c.id] = {
-      learn: {
-        enabled: Boolean(entry?.theorie),
-        encoding: 'html_fragment',
-        hasMotivation: Boolean(entry?.motivation)
-      },
-      practice: {
-        authoredAufgabenCount: Array.isArray(aufgaben) ? aufgaben.length : 0,
-        stepProblemGroupCount: Array.isArray(stepGroups) ? stepGroups.length : 0,
-        masteryChecklist: true,
-        supplementalTasksFromTheory: true
-      },
-      graph: {
-        enabled: GRAPH_CONCEPTS.has(c.id),
-        bindingKind: GRAPH_CONCEPTS.has(c.id) ? 'concept_canvas' : 'none'
-      },
-      exam: {
-        quickExam: true,
-        fullExamDocumentIds: Object.keys(FULL_EXAM_PROVENANCE),
-        embeddedExamCanvases: false
-      },
-      mistakeTracking: {
-        progressKey: PROGRESS_KEY,
-        srsKey: SRS_KEY,
-        questionStatsKey: QUESTION_STATS_KEY,
-        fullExamStateKey: FE_STATE_KEY,
-        aggregates: ['views', 'correct', 'wrong', 'solved', 'checks']
-      }
-    };
-  }
-  return out;
+  return buildConceptModeIndex({
+    chapters: CHAPTERS,
+    contentById: CONTENT,
+    stepProblemsById: STEP_PROBLEMS,
+    graphConcepts: GRAPH_CONCEPTS,
+    storageKeys: {
+      progressKey: PROGRESS_KEY,
+      srsKey: SRS_KEY,
+      questionStatsKey: QUESTION_STATS_KEY,
+      fullExamStateKey: FE_STATE_KEY
+    },
+    fullExamDocumentIds: Object.keys(FULL_EXAM_PROVENANCE),
+    theoryEncoding: 'html_fragment',
+    flags: {
+      quickExam: true,
+      embeddedExamCanvases: false,
+      masteryChecklist: true,
+      supplementalTasksFromTheory: true
+    }
+  });
 }
 
 export const MAKRO1_MODE_INDEX = buildMakro1ModeIndex();
 
 export const MAKRO1_CONTENT_MANIFEST_VERSION = '2026.1-pilot';
 
-/**
- * Payload exposed via createPortalApp `portalBridge` for QA / future loaders (devtools).
- */
 export function getMakro1PilotBridgePayload() {
-  return {
+  return buildContentManifestBridgePayload({
     schema: 'makro1.contentManifest',
     version: MAKRO1_CONTENT_MANIFEST_VERSION,
     courseConfigManifestVersion: COURSE_CONFIG.contentManifestVersion,
-    module_slug: 'makro1',
-    conceptCount: CHAPTERS.length,
-    conceptIds: CHAPTERS.map((c) => c.id),
+    module_slug: MODULE_SLUG,
+    chapters: CHAPTERS,
     modeIndex: MAKRO1_MODE_INDEX,
-    provenanceKeys: Object.keys(PROVENANCE_BY_CONCEPT),
-    fullExamProvenanceKeys: Object.keys(FULL_EXAM_PROVENANCE)
-  };
+    provenanceByConcept: PROVENANCE_BY_CONCEPT,
+    fullExamProvenance: FULL_EXAM_PROVENANCE
+  });
 }
 
 export function getConceptProvenance(conceptId) {

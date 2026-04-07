@@ -2,6 +2,8 @@ export const COURSE_CONFIG = {
   slug: 'makro1',
   courseLabel: 'Makroökonomik I',
   courseTitle: 'Makroökonomik I',
+  /** Pilot metadata layer; see makro1/js/data/contentManifest.js */
+  contentManifestVersion: '2026.1-pilot',
   homeIntro: 'Kurzfristige Nachfrage, Geld- und Gütermärkte, IS-LM, Arbeitsmarkt und Inflationsdynamik in einem klausurnahen Makro-I-Portal.',
   consentKey: 'makro1_consent_v1',
   progressKey: 'makro1_progress_v1',

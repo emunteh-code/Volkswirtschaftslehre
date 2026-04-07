@@ -14,7 +14,9 @@ export function createRenderer({
   loadLastId,
   getDueCards,
   renderDashboard,
-  getPracticeTasks = (conceptId, contentEntry) => contentEntry?.aufgaben || []
+  getPracticeTasks = (conceptId, contentEntry) => contentEntry?.aufgaben || [],
+  hasRBlock = () => false,
+  renderRAnwendungPanel = null
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -248,9 +250,10 @@ export function createRenderer({
   function updateTabButtons(activeTab, availability) {
     document.querySelectorAll("#tabRow button[data-tab]").forEach((button) => {
       const { tab } = button.dataset;
+      // r-anwendung is opt-in: must be explicitly true to show
       const visible = tab === "theorie"
         || tab === "aufgaben"
-        || availability[tab] !== false;
+        || (tab === "r-anwendung" ? availability[tab] === true : availability[tab] !== false);
       button.style.display = visible ? "" : "none";
       const isActive = visible && tab === activeTab;
       button.classList.toggle("active", isActive);
@@ -631,12 +634,14 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
     const tabAvailability = {
       graph: graphConcepts.has(conceptId),
       formeln: hasFormulas(entry),
-      intuition: hasMeaningfulIntuition(intuitionById[conceptId])
+      intuition: hasMeaningfulIntuition(intuitionById[conceptId]),
+      "r-anwendung": Boolean(renderRAnwendungPanel) && hasRBlock(conceptId)
     };
 
     const activeTab = (tab === "graph" && !tabAvailability.graph)
       || (tab === "formeln" && !tabAvailability.formeln)
       || (tab === "intuition" && !tabAvailability.intuition)
+      || (tab === "r-anwendung" && !tabAvailability["r-anwendung"])
       ? "theorie"
       : tab;
 
@@ -678,6 +683,8 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
         content.innerHTML = headerHTML + renderFormulaPanel(entry);
       } else if (activeTab === "intuition") {
         content.innerHTML = headerHTML + renderIntuitionPanel(conceptId);
+      } else if (activeTab === "r-anwendung" && renderRAnwendungPanel) {
+        content.innerHTML = headerHTML + renderRAnwendungPanel(conceptId);
       }
     } catch (err) {
       console.error("Render error:", err);

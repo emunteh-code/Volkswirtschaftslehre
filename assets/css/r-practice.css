@@ -1,3 +1,5 @@
+/* ─── Existing r-practice-block (embedded in theorie) ───────────────────── */
+
 .r-practice-block {
   display: grid;
   gap: 18px;
@@ -93,6 +95,7 @@
   background: color-mix(in srgb, var(--surface3) 84%, var(--surface) 16%);
   color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
   border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  white-space: nowrap;
 }
 
 .r-runtime-pill[data-status="loading"] {
@@ -174,6 +177,7 @@
   font-size: 12.5px;
   line-height: 1.58;
   white-space: pre-wrap;
+  overflow: auto;
 }
 
 .r-practice-grid {
@@ -236,6 +240,331 @@
   gap: 6px;
 }
 
+/* ─── Dedicated R-Anwendung Tab Panel ───────────────────────────────────── */
+
+.r-tab-panel {
+  display: grid;
+  gap: 28px;
+}
+
+/* Each lab section within the tab */
+.r-lab-section {
+  display: grid;
+  gap: 20px;
+}
+
+/* Divider between multiple blocks */
+.r-lab-divider {
+  height: 1px;
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+  margin: 4px 0;
+}
+
+/* ─── Orientation Card ───────────────────────────────────────────────────── */
+
+.r-orient-card {
+  background: color-mix(in srgb, var(--surface2) 72%, var(--accent2) 4%);
+  border: 1px solid color-mix(in srgb, var(--accent2) 18%, var(--border) 82%);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 14px;
+}
+
+.r-orient-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.r-orient-head {
+  display: grid;
+  gap: 5px;
+}
+
+.r-orient-kicker {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 80%, var(--muted) 20%);
+  font-weight: 700;
+}
+
+.r-orient-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.28;
+  color: var(--text);
+  margin: 0;
+}
+
+.r-orient-purpose {
+  font-size: 14px;
+  line-height: 1.68;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  margin: 0;
+  max-width: none;
+}
+
+.r-orient-first-action {
+  font-size: 13px;
+  line-height: 1.58;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface) 85%, var(--accent2) 4%);
+  border-radius: var(--r-sm);
+  border-left: 3px solid color-mix(in srgb, var(--accent2) 60%, transparent);
+}
+
+.r-orient-action-label {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.r-orient-script {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
+  font-family: var(--font-mono);
+}
+
+/* ─── Flow Steps Indicator ───────────────────────────────────────────────── */
+
+.r-flow-steps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.r-flow-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  border-radius: 999px;
+}
+
+.r-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent2) 18%, var(--surface) 82%);
+  color: color-mix(in srgb, var(--accent2) 90%, var(--text) 10%);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.r-step-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%);
+  letter-spacing: 0.02em;
+}
+
+.r-flow-sep {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--muted) 60%, var(--text) 40%);
+  font-weight: 400;
+}
+
+/* ─── Runtime note in tab context ────────────────────────────────────────── */
+
+.r-tab-runtime-note {
+  /* Slightly more compact in tab context */
+  font-size: 11.5px;
+}
+
+/* ─── Syntax-Highlighted Editor (Overlay Technique) ─────────────────────── */
+
+/*
+ * Approach: textarea is layered on top of a pre/div overlay.
+ * The textarea has transparent text so the overlay shows through.
+ * The textarea's caret remains visible via caret-color.
+ * This gives live, functional syntax highlighting as the student types.
+ */
+
+.r-highlight-wrap {
+  position: relative;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
+  overflow: hidden;
+}
+
+.r-highlight-wrap:focus-within {
+  border-color: color-mix(in srgb, var(--accent2) 46%, var(--border) 54%);
+}
+
+/* The overlay: shows highlighted code, sits below the textarea */
+.r-highlight-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 16px 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: hidden;
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+  /* Must match textarea exactly */
+  box-sizing: border-box;
+  tab-size: 2;
+}
+
+/* The actual editable textarea: transparent text so overlay shows through */
+.r-hl-editor {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  padding: 16px 18px;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
+  caret-color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+  z-index: 1;
+  outline: none;
+  box-sizing: border-box;
+  tab-size: 2;
+  overflow: auto;
+}
+
+.r-hl-editor::selection,
+.r-hl-editor::-moz-selection {
+  background: color-mix(in srgb, var(--accent2) 28%, transparent);
+  color: transparent;
+}
+
+/* ─── Syntax Token Colors ─────────────────────────────────────────────────
+ * Light-mode first, well-balanced against white/near-white backgrounds.
+ * Colors use the existing design token family where possible.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+.r-t-comment {
+  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
+  font-style: italic;
+}
+
+.r-t-string {
+  /* Warm amber-brown — clearly distinct from code */
+  color: color-mix(in srgb, #b45309 72%, var(--text) 28%);
+}
+
+.r-t-number {
+  /* Teal/cyan — numbers stand out from identifiers */
+  color: color-mix(in srgb, var(--semantic-green) 75%, var(--text) 25%);
+}
+
+.r-t-keyword {
+  /* Purple/violet — keywords are bold and stand out */
+  color: color-mix(in srgb, var(--math-ink) 85%, var(--text) 15%);
+  font-weight: 600;
+}
+
+.r-t-builtin {
+  /* Accent blue — R functions that students need to recognize */
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
+}
+
+.r-t-operator {
+  /* Slightly dimmed text for operators */
+  color: color-mix(in srgb, var(--text) 72%, var(--muted) 28%);
+}
+
+.r-t-id {
+  /* Default text for user-defined identifiers */
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+}
+
+/* ─── Output Interpretation Block ────────────────────────────────────────── */
+
+.r-tab-output-card {
+  display: grid;
+  gap: 0;
+}
+
+.r-output-interp {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  display: grid;
+  gap: 5px;
+}
+
+.r-output-interp-kicker {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 68%, var(--muted) 32%);
+  font-weight: 700;
+}
+
+.r-output-interp p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  margin: 0;
+  max-width: none;
+}
+
+/* ─── Tab Bottom Row: Mini-Task + Pitfalls ───────────────────────────────── */
+
+.r-tab-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(200px, 0.8fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.r-tab-task-card {
+  display: grid;
+  gap: 10px;
+}
+
+.r-solution-body {
+  display: grid;
+  gap: 6px;
+}
+
+.r-solution-label {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 68%, var(--muted) 32%);
+  font-weight: 700;
+}
+
+.r-tab-pitfalls {
+  /* Slightly more compact in tab context */
+}
+
+/* ─── Responsive Behavior ────────────────────────────────────────────────── */
+
+@media (max-width: 1080px) {
+  .r-tab-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 980px) {
   .r-practice-workspace {
     grid-template-columns: 1fr;
@@ -245,13 +574,37 @@
   .r-practice-editor {
     min-height: 220px;
   }
+
+  .r-hl-editor {
+    min-height: 220px;
+  }
+
+  .r-orient-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .r-orient-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .r-flow-steps {
+    gap: 4px;
+  }
+
+  .r-flow-sep {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
   .r-practice-editor-card,
   .r-practice-output-card,
   .r-practice-card,
-  .r-practice-pitfalls {
+  .r-practice-pitfalls,
+  .r-orient-card {
     padding: 14px 15px;
   }
 

@@ -1,6 +1,6 @@
 import { createRenderer } from '../../../assets/js/portal-core/ui/renderer.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
-import { CHAPTERS, CONTENT } from '../data/chapters.js';
+import { CHAPTERS, CONTENT, R_BLOCKS_BY_ID } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
 import { INTUITION } from '../data/intuition.js';
 import { CONCEPT_LINKS } from '../data/conceptLinks.js';
@@ -12,7 +12,7 @@ import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
-import { mountRPracticeBlocks } from '../../../assets/js/portal-core/features/rPractice.js';
+import { mountRPracticeBlocks, renderRAnwendungTab } from '../../../assets/js/portal-core/features/rPractice.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
 let baseRenderer;
@@ -384,7 +384,13 @@ baseRenderer = createRenderer({
   getDueCards,
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
-  checkAnswer: checkAnswerWithTolerance
+  checkAnswer: checkAnswerWithTolerance,
+  hasRBlock: (conceptId) => Boolean(R_BLOCKS_BY_ID[conceptId]),
+  renderRAnwendungPanel: (conceptId) => {
+    const block = R_BLOCKS_BY_ID[conceptId];
+    if (!block) return '';
+    return renderRAnwendungTab([block], 'oekonometrie');
+  }
 });
 
 function markRenderSettled(isSettled) {

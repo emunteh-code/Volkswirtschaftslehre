@@ -1,5 +1,4 @@
 import { CURRICULUM } from './curriculum.js';
-import { renderRPracticeMarkup } from '../../../assets/js/portal-core/features/rPractice.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -40,17 +39,12 @@ ${entry.warnings.map((warning) => `<div class="warn-box"><strong>${escapeHtml(wa
 </div>`;
 }
 
-function renderRBlock(rBlock) {
-  if (!rBlock) return '';
-  return renderRPracticeMarkup(rBlock, { moduleSlug: 'oekonometrie' });
-}
-
+// rBlock is now excluded from theorie — it lives exclusively in the R-Anwendung tab
 function renderTheoryHtml(entry) {
   return [
     renderCards(entry),
     renderSections(entry),
-    renderWarnings(entry),
-    renderRBlock(entry.rBlock)
+    renderWarnings(entry)
   ].filter(Boolean).join('');
 }
 
@@ -68,4 +62,11 @@ export const CONTENT = Object.fromEntries(
     formeln: entry.formeln || [],
     aufgaben: entry.aufgaben || []
   }])
+);
+
+// R blocks indexed by concept ID for the dedicated R-Anwendung tab
+export const R_BLOCKS_BY_ID = Object.fromEntries(
+  CURRICULUM
+    .filter((entry) => entry.rBlock)
+    .map((entry) => [entry.id, entry.rBlock])
 );

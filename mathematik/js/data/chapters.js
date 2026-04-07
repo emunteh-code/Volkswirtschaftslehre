@@ -63,6 +63,15 @@ export const CONTENT = {
           { text: `Validation: Vorzeichen links und rechts prüfen.`, eq: String.raw`f(4) = -2 < 0 \text{ (Überangebot)}, \; f(6) = 2 > 0 \text{ (Übernachfrage)}` }
         ],
         result: String.raw`Gleichgewicht bei $x = 5$. Links davon herrscht Überangebot, rechts Übernachfrage.`
+      },
+      {
+        text: String.raw`Eine Cobb-Douglas-Produktionsfunktion lautet $Y = 2K^{0{,}5}L^{0{,}5}$. Berechnen Sie die Produktion bei $K=4$, $L=9$ sowie die Grenzproduktivität der Arbeit. Interpretieren Sie das Ergebnis.`,
+        steps: [
+          { text: `Output berechnen:`, eq: String.raw`Y = 2 \cdot 4^{0{,}5} \cdot 9^{0{,}5} = 2 \cdot 2 \cdot 3 = 12` },
+          { text: `Grenzproduktivität der Arbeit: Partiell nach $L$ ableiten.`, eq: String.raw`MP_L = \frac{\partial Y}{\partial L} = 2 \cdot 0{,}5 \cdot K^{0{,}5} \cdot L^{-0{,}5} = \frac{K^{0{,}5}}{L^{0{,}5}}` },
+          { text: `Einsetzen ($K=4$, $L=9$):`, eq: String.raw`MP_L = \frac{2}{3} \approx 0{,}67` }
+        ],
+        result: String.raw`$Y=12$, $MP_L = \tfrac{2}{3}$. Jede zusätzliche Arbeitsstunde erhöht die Produktion um $\tfrac{2}{3}$ Einheiten. Da $MP_L > 0$ und mit $L$ sinkend ($MP_L$ fällt bei wachsendem $L$), zeigt die Funktion abnehmende Grenzerträge der Arbeit.`
       }
     ]
   },
@@ -116,6 +125,15 @@ export const CONTENT = {
           { text: `Interpretation: $MC < AC$ bei $Q=3$.`, eq: String.raw`\text{Durchschnittskosten fallen noch (MC zieht AC nach unten).}` }
         ],
         result: String.raw`$MC(3) = 6$, $AC(3) \approx 9{,}33$. Da $MC < AC$, sinken die Durchschnittskosten bei steigender Menge.`
+      },
+      {
+        text: String.raw`Die Nutzenfunktion sei $U(x) = \ln(x)$ mit $x > 0$. Bestimmen Sie den Grenznutzen bei $x=5$, prüfen Sie die zweite Ableitung und erklären Sie, warum daraus Risikoaversion folgt.`,
+        steps: [
+          { text: `Grenznutzen: Erste Ableitung.`, eq: String.raw`MU(x) = U'(x) = \frac{1}{x} \implies MU(5) = 0{,}2` },
+          { text: `Zweite Ableitung prüfen.`, eq: String.raw`U''(x) = -\frac{1}{x^2} < 0 \text{ für alle } x > 0` },
+          { text: `Schlussfolgerung: $U'' < 0$ bedeutet konkave Nutzenfunktion.`, eq: String.raw`E[U(x)] < U(E[x]) \implies \text{Risikoaversion (Jensen's Inequality).}` }
+        ],
+        result: String.raw`$MU(5) = 0{,}2$, $U'' < 0$: konkave Nutzenfunktion. Der Grenznutzen ist positiv, aber abnehmend — jeder zusätzliche Euro stiftet weniger Zusatznutzen. Daraus folgt Risikoaversion: Der sichere Erwartungswert wird einem unsicheren Losgewinn gleichen Erwartungswerts vorgezogen.`
       }
     ]
   },
@@ -168,6 +186,15 @@ export const CONTENT = {
           { text: `Gewinn berechnen:`, eq: String.raw`\pi = R(Q^*) - C(Q^*) \approx 533{,}33` }
         ],
         result: String.raw`$Q^* \approx 13{,}3$, $\pi \approx 533{,}33$. Der Monopolist produziert dort, wo $MR = MC$.`
+      },
+      {
+        text: String.raw`Ein Unternehmen mit Kostenfunktion $C(Q) = 0{,}5Q^2 + 2Q + 10$ erhält einen fixen Marktpreis $P = 8$ (Wettbewerb). Bestimmen Sie die gewinnmaximale Menge $Q^*$, den Gewinn und prüfen Sie die BZO.`,
+        steps: [
+          { text: `Gewinnfunktion aufstellen:`, eq: String.raw`\pi(Q) = 8Q - (0{,}5Q^2 + 2Q + 10) = 6Q - 0{,}5Q^2 - 10` },
+          { text: `BEO: $\pi'(Q) = 0$.`, eq: String.raw`\pi'(Q) = 6 - Q = 0 \implies Q^* = 6` },
+          { text: `BZO und Gewinn:`, eq: String.raw`\pi''(Q) = -1 < 0 \; \checkmark \qquad \pi(6) = 36 - 18 - 10 = 8` }
+        ],
+        result: String.raw`$Q^* = 6$, $\pi = 8$. Die BZO ($\pi'' < 0$) bestätigt das Maximum. Ökonomisch: Im Wettbewerb ist $P = MC$ die optimale Bedingung — hier $8 = Q + 2 \implies Q=6$ identisch.`
       }
     ]
   },
@@ -215,6 +242,15 @@ export const CONTENT = {
           { text: `$\lambda$ bestimmen: Aus BEO 1.`, eq: String.raw`\lambda = \frac{0{,}5 \cdot 12{,}5^{0{,}5}}{25^{0{,}5} \cdot 2} = \frac{0{,}5 \cdot 3{,}54}{5 \cdot 2} \approx 0{,}177` }
         ],
         result: String.raw`$x^* = 25$, $y^* = 12{,}5$. $\lambda \approx 0{,}18$: Ein zusätzlicher Euro Budget erhöht den Nutzen um ca. $0{,}18$ Einheiten.`
+      },
+      {
+        text: String.raw`Ein Unternehmen minimiert Kosten $C = 4K + L$ unter der Produktionsnebenbedingung $K^{0{,}5}L^{0{,}5} = 4$. Bestimmen Sie $K^*$, $L^*$ und die minimalen Kosten.`,
+        steps: [
+          { text: `Kostenminimierungsbedingung: $\frac{MP_K}{MP_L} = \frac{w_K}{w_L}$.`, eq: String.raw`\frac{0{,}5 K^{-0{,}5}L^{0{,}5}}{0{,}5 K^{0{,}5}L^{-0{,}5}} = \frac{L}{K} = \frac{4}{1} \implies L = 4K` },
+          { text: `In Nebenbedingung einsetzen:`, eq: String.raw`K^{0{,}5}(4K)^{0{,}5} = 4 \implies K \cdot \sqrt{4} = 4 \implies 2K = 4 \implies K^* = 2,\; L^* = 8` },
+          { text: `Minimale Kosten berechnen:`, eq: String.raw`C^* = 4 \cdot 2 + 8 = 16` }
+        ],
+        result: String.raw`$K^* = 2$, $L^* = 8$, $C_{\min} = 16$. Das Unternehmen substituiert das teurere Kapital (Preis 4) durch den günstigeren Faktor Arbeit (Preis 1) bis zum optimalen Verhältnis $L/K = 4$.`
       }
     ]
   },
@@ -262,6 +298,15 @@ export const CONTENT = {
           { text: `Adjunkte bilden und durch det teilen:`, eq: String.raw`A^{-1} = \frac{1}{10}\begin{pmatrix} 4 & -1 \\ -2 & 3 \end{pmatrix}` }
         ],
         result: String.raw`$A^{-1} = \begin{pmatrix} 0{,}4 & -0{,}1 \\ -0{,}2 & 0{,}3 \end{pmatrix}$.`
+      },
+      {
+        text: String.raw`Lösen Sie das Gleichungssystem $Ax = b$ mit $A = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$, $b = \begin{pmatrix} 8 \\ 18 \end{pmatrix}$.`,
+        steps: [
+          { text: `Determinante berechnen:`, eq: String.raw`\det(A) = 2 \cdot 3 - 1 \cdot 4 = 2 \neq 0 \implies \text{Inverse existiert.}` },
+          { text: `Inverse aufstellen:`, eq: String.raw`A^{-1} = \frac{1}{2}\begin{pmatrix} 3 & -1 \\ -4 & 2 \end{pmatrix}` },
+          { text: `Lösung: $x = A^{-1}b$.`, eq: String.raw`x = \frac{1}{2}\begin{pmatrix}3\cdot8 - 1\cdot18 \\ -4\cdot8 + 2\cdot18\end{pmatrix} = \frac{1}{2}\begin{pmatrix}6\\4\end{pmatrix} = \begin{pmatrix}3\\2\end{pmatrix}` }
+        ],
+        result: String.raw`$x_1 = 3$, $x_2 = 2$. In der Ökonomie entspricht dieses Vorgehen dem Lösen von Marktgleichgewichtssystemen (z.B. Angebot und Nachfrage auf zwei Märkten) oder dem OLS-Schätzer $\hat\beta = (X'X)^{-1}X'y$ in der Ökonometrie.`
       }
     ]
   },
@@ -312,6 +357,15 @@ export const CONTENT = {
           { text: `Rechteckfläche abziehen:`, eq: String.raw`KR = 2100 - 40 \cdot 30 = 2100 - 1200 = 900` }
         ],
         result: String.raw`$KR = 900$ Geldeinheiten.`
+      },
+      {
+        text: String.raw`Die Angebotsfunktion sei $S(Q) = 2Q + 10$. Der Gleichgewichtspreis ist $P^* = 30$, die Gleichgewichtsmenge $Q^* = 10$. Berechnen Sie die Produzentenrente.`,
+        steps: [
+          { text: `Produzentenrente = Erlös minus variable Kosten (Fläche über Angebotskurve).`, eq: String.raw`PR = P^* \cdot Q^* - \int_0^{Q^*} S(Q)\,dQ` },
+          { text: `Integral berechnen:`, eq: String.raw`\int_0^{10}(2Q+10)\,dQ = \bigl[Q^2 + 10Q\bigr]_0^{10} = 100 + 100 = 200` },
+          { text: `Produzentenrente:`, eq: String.raw`PR = 30 \cdot 10 - 200 = 300 - 200 = 100` }
+        ],
+        result: String.raw`$PR = 100$ Geldeinheiten. Zusammen mit $KR = 900$ ergibt sich eine Gesamtrente von $1000$. Grafisch ist die Produzentenrente das Dreieck zwischen Preisgerade und Angebotskurve links von $Q^*$.`
       }
     ]
   }

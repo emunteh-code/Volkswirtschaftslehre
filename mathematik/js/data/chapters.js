@@ -50,15 +50,15 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'Gerade', eq: String.raw`$$y = mx + n$$`, desc: 'Lineare Form' },
-      { label: 'Cobb-Douglas', eq: String.raw`$$Y = A K^\alpha L^{1-\alpha}$$`, desc: 'Potenzfunktion in der Produktion' },
-      { label: 'Log-Wachstum', eq: String.raw`$$g \approx \ln Y_t - \ln Y_{t-1}$$`, desc: 'Approximation der Wachstumsrate' }
+      { label: 'Gerade', eq: String.raw`$$y = mx + n$$`, desc: 'Lineare Form', variables: { m: 'Steigung', n: 'y-Achsenabschnitt' } },
+      { label: 'Cobb-Douglas', eq: String.raw`$$Y = A K^\alpha L^{1-\alpha}$$`, desc: 'Potenzfunktion in der Produktion', variables: { A: 'Totale Faktorproduktivität', K: 'Kapital', L: 'Arbeit', alpha: 'Kapitalanteil' } },
+      { label: 'Log-Wachstum', eq: String.raw`$$g \approx \ln Y_t - \ln Y_{t-1}$$`, desc: 'Approximation der Wachstumsrate', variables: { g: 'Wachstumsrate', Y_t: 'Output in Periode t' } }
     ],
     aufgaben: [
       {
         text: String.raw`Bestimmen Sie die Nullstelle der Funktion $f(x) = 2x - 10$ und interpretieren Sie sie als Marktgleichgewicht, wenn $f(x)$ die Überschussnachfrage ist.`,
         steps: [
-          { text: `Interpretation: Was bedeutet die Nullstelle ökonomisch?`, eq: String.raw`\text{Überschussnachfrage = 0 → Markt geräumt.}` },
+          { text: `Interpretation: Was bedeutet die Nullstelle ökonomisch?`, eq: String.raw`\text{Überschussnachfrage} = 0 \implies \text{Markt geräumt.}` },
           { text: `Execution: $f(x) = 0$ lösen.`, eq: String.raw`2x = 10 \implies x = 5` },
           { text: `Validation: Vorzeichen links und rechts prüfen.`, eq: String.raw`f(4) = -2 < 0 \text{ (Überangebot)}, \; f(6) = 2 > 0 \text{ (Übernachfrage)}` }
         ],
@@ -71,7 +71,27 @@ export const CONTENT = {
           { text: `Grenzproduktivität der Arbeit: Partiell nach $L$ ableiten.`, eq: String.raw`MP_L = \frac{\partial Y}{\partial L} = 2 \cdot 0{,}5 \cdot K^{0{,}5} \cdot L^{-0{,}5} = \frac{K^{0{,}5}}{L^{0{,}5}}` },
           { text: `Einsetzen ($K=4$, $L=9$):`, eq: String.raw`MP_L = \frac{2}{3} \approx 0{,}67` }
         ],
-        result: String.raw`$Y=12$, $MP_L = \tfrac{2}{3}$. Jede zusätzliche Arbeitsstunde erhöht die Produktion um $\tfrac{2}{3}$ Einheiten. Da $MP_L > 0$ und mit $L$ sinkend ($MP_L$ fällt bei wachsendem $L$), zeigt die Funktion abnehmende Grenzerträge der Arbeit.`
+        result: String.raw`$Y=12$, $MP_L = \tfrac{2}{3}$. Jede zusätzliche Arbeitsstunde erhöht die Produktion um $\tfrac{2}{3}$ Einheiten.`
+      },
+      {
+        text: String.raw`Bestimmen Sie alle reellen Nullstellen von $f(x) = x^2 - 5x + 6$ und interpretieren Sie sie ökonomisch als Break-Even-Punkte.`,
+        steps: [
+          { text: `Quadratische Formel anwenden:`, eq: String.raw`x_{1,2} = \frac{5 \pm \sqrt{25 - 24}}{2} = \frac{5 \pm 1}{2}` },
+          { text: `Nullstellen berechnen:`, eq: String.raw`x_1 = \frac{5-1}{2} = 2, \quad x_2 = \frac{5+1}{2} = 3` },
+          { text: `Verifikation durch Einsetzen:`, eq: String.raw`f(2) = 4 - 10 + 6 = 0\; \checkmark \qquad f(3) = 9 - 15 + 6 = 0\; \checkmark` },
+          { text: `Faktorisierte Form bestätigen:`, eq: String.raw`f(x) = (x-2)(x-3)` }
+        ],
+        result: String.raw`Nullstellen bei $x_1 = 2$ und $x_2 = 3$. Ökonomisch: Wenn $f(x)$ den Gewinn darstellt (Erlös minus Kosten), sind dies die beiden Break-Even-Punkte, bei denen das Unternehmen kostendeckend arbeitet.`
+      },
+      {
+        text: String.raw`Gegeben sei $Y = A \cdot K^\alpha \cdot L^{1-\alpha}$ mit $0 < \alpha < 1$. Berechnen Sie die Grenzproduktivitäten $MP_K$ und $MP_L$ und zeigen Sie, dass $MP_K \cdot K + MP_L \cdot L = Y$ gilt (Euler-Theorem für konstante Skalenerträge).`,
+        steps: [
+          { text: `Grenzproduktivität des Kapitals:`, eq: String.raw`MP_K = \frac{\partial Y}{\partial K} = \alpha A K^{\alpha-1} L^{1-\alpha} = \alpha \frac{Y}{K}` },
+          { text: `Grenzproduktivität der Arbeit:`, eq: String.raw`MP_L = \frac{\partial Y}{\partial L} = (1-\alpha) A K^\alpha L^{-\alpha} = (1-\alpha)\frac{Y}{L}` },
+          { text: `Euler-Theorem prüfen: Faktoren mit GPs multiplizieren.`, eq: String.raw`MP_K \cdot K + MP_L \cdot L = \alpha \frac{Y}{K} \cdot K + (1-\alpha)\frac{Y}{L} \cdot L` },
+          { text: `Vereinfachen:`, eq: String.raw`= \alpha Y + (1-\alpha)Y = Y \; \checkmark` }
+        ],
+        result: String.raw`$MP_K \cdot K + MP_L \cdot L = Y$. Das Euler-Theorem besagt: Bei konstanten Skalenerträgen ($\alpha + (1-\alpha) = 1$) erschöpfen die Faktorentlohnungen zu Grenzproduktivitäten genau den gesamten Output — keine Übergewinne möglich (Nullgewinn-Theorem).`
       }
     ]
   },
@@ -113,8 +133,8 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'Kettenregel', eq: String.raw`$$(f \circ g)' = f'(g(x)) \cdot g'(x)$$`, desc: 'Äußere mal innere Ableitung' },
-      { label: 'Grenzkosten', eq: String.raw`$$MC(Q) = C'(Q)$$`, desc: 'Ökonomische Interpretation' }
+      { label: 'Kettenregel', eq: String.raw`$$(f \circ g)' = f'(g(x)) \cdot g'(x)$$`, desc: 'Äußere mal innere Ableitung', variables: { f: 'äußere Funktion', g: 'innere Funktion' } },
+      { label: 'Grenzkosten', eq: String.raw`$$MC(Q) = C'(Q)$$`, desc: 'Ökonomische Interpretation', variables: { C: 'Kostenfunktion', Q: 'Menge' } }
     ],
     aufgaben: [
       {
@@ -133,7 +153,27 @@ export const CONTENT = {
           { text: `Zweite Ableitung prüfen.`, eq: String.raw`U''(x) = -\frac{1}{x^2} < 0 \text{ für alle } x > 0` },
           { text: `Schlussfolgerung: $U'' < 0$ bedeutet konkave Nutzenfunktion.`, eq: String.raw`E[U(x)] < U(E[x]) \implies \text{Risikoaversion (Jensen's Inequality).}` }
         ],
-        result: String.raw`$MU(5) = 0{,}2$, $U'' < 0$: konkave Nutzenfunktion. Der Grenznutzen ist positiv, aber abnehmend — jeder zusätzliche Euro stiftet weniger Zusatznutzen. Daraus folgt Risikoaversion: Der sichere Erwartungswert wird einem unsicheren Losgewinn gleichen Erwartungswerts vorgezogen.`
+        result: String.raw`$MU(5) = 0{,}2$, $U'' < 0$: konkave Nutzenfunktion. Der Grenznutzen ist positiv, aber abnehmend — jeder zusätzliche Euro stiftet weniger Zusatznutzen. Daraus folgt Risikoaversion.`
+      },
+      {
+        text: String.raw`Gewinnmaximierung: Gegeben $G(Q) = -Q^2 + 8Q - 10$. Finden Sie die gewinnmaximale Menge $Q^*$ und prüfen Sie mittels zweiter Ableitung, ob es sich um ein Maximum handelt.`,
+        steps: [
+          { text: `BEO: Erste Ableitung gleich Null setzen.`, eq: String.raw`G'(Q) = -2Q + 8 = 0 \implies Q^* = 4` },
+          { text: `BZO: Zweite Ableitung berechnen.`, eq: String.raw`G''(Q) = -2 < 0 \implies \text{lokales Maximum} \; \checkmark` },
+          { text: `Maximalen Gewinn berechnen:`, eq: String.raw`G(4) = -16 + 32 - 10 = 6` },
+          { text: `Ökonomische Interpretation: $MR = MC$ im Optimum.`, eq: String.raw`G'(Q) = MR - MC = 0 \iff MR = MC` }
+        ],
+        result: String.raw`$Q^* = 4$, $G_{\max} = 6$. Die zweite Ableitung $G'' = -2 < 0$ bestätigt das Maximum. Das Unternehmen wählt die Menge, bei der Grenzerlös gleich Grenzkosten ist.`
+      },
+      {
+        text: String.raw`Elastizität: Gegeben $Q = 100 - 2P$. Berechnen Sie die Preiselastizität der Nachfrage bei $P = 20$ und interpretieren Sie das Ergebnis.`,
+        steps: [
+          { text: `Ableitung $dQ/dP$ bestimmen:`, eq: String.raw`\frac{dQ}{dP} = -2` },
+          { text: `Menge bei $P=20$ berechnen:`, eq: String.raw`Q(20) = 100 - 40 = 60` },
+          { text: `Preiselastizität berechnen:`, eq: String.raw`\varepsilon = \frac{dQ}{dP} \cdot \frac{P}{Q} = -2 \cdot \frac{20}{60} = -\frac{2}{3} \approx -0{,}67` },
+          { text: `Interpretation: $|\varepsilon| < 1$ bedeutet unelastische Nachfrage.`, eq: String.raw`|\varepsilon| = 0{,}67 < 1 \implies \text{inelastisch: } 1\% \text{ Preisanstieg} \implies 0{,}67\% \text{ Mengenrückgang}` }
+        ],
+        result: String.raw`$\varepsilon \approx -0{,}67$. Die Nachfrage ist bei $P=20$ preisunelastisch: Ein Preisanstieg um $1\%$ reduziert die nachgefragte Menge nur um $0{,}67\%$. Der Gesamterlös steigt bei Preiserhöhung (da $|\varepsilon| < 1$).`
       }
     ]
   },
@@ -172,9 +212,9 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'BEO', eq: String.raw`$$f'(x^*) = 0$$`, desc: 'Notwendige Bedingung' },
-      { label: 'BZO', eq: String.raw`$$f''(x^*) < 0 \implies \text{Max}, \quad f''(x^*) > 0 \implies \text{Min}$$`, desc: 'Hinreichende Bedingung' },
-      { label: 'Gewinnmaximum', eq: String.raw`$$MR(Q^*) = MC(Q^*)$$`, desc: 'Ökonomische BEO' }
+      { label: 'BEO', eq: String.raw`$$f'(x^*) = 0$$`, desc: 'Notwendige Bedingung', variables: { x_star: 'Kandidat für Extremum' } },
+      { label: 'BZO', eq: String.raw`$$f''(x^*) < 0 \implies \text{Max}, \quad f''(x^*) > 0 \implies \text{Min}$$`, desc: 'Hinreichende Bedingung', variables: { f_pp: 'zweite Ableitung im Kandidatpunkt' } },
+      { label: 'Gewinnmaximum', eq: String.raw`$$MR(Q^*) = MC(Q^*)$$`, desc: 'Ökonomische BEO', variables: { MR: 'Grenzerlös', MC: 'Grenzkosten' } }
     ],
     aufgaben: [
       {
@@ -194,7 +234,27 @@ export const CONTENT = {
           { text: `BEO: $\pi'(Q) = 0$.`, eq: String.raw`\pi'(Q) = 6 - Q = 0 \implies Q^* = 6` },
           { text: `BZO und Gewinn:`, eq: String.raw`\pi''(Q) = -1 < 0 \; \checkmark \qquad \pi(6) = 36 - 18 - 10 = 8` }
         ],
-        result: String.raw`$Q^* = 6$, $\pi = 8$. Die BZO ($\pi'' < 0$) bestätigt das Maximum. Ökonomisch: Im Wettbewerb ist $P = MC$ die optimale Bedingung — hier $8 = Q + 2 \implies Q=6$ identisch.`
+        result: String.raw`$Q^* = 6$, $\pi = 8$. Die BZO ($\pi'' < 0$) bestätigt das Maximum.`
+      },
+      {
+        text: String.raw`Kostenfunktion $C(Q) = Q^3 - 6Q^2 + 15Q + 10$. Finden Sie das Minimum der Grenzkosten (d.h. die Menge, bei der $MC$ minimal ist).`,
+        steps: [
+          { text: `Grenzkosten berechnen:`, eq: String.raw`MC(Q) = C'(Q) = 3Q^2 - 12Q + 15` },
+          { text: `BEO für MC-Minimum: $MC'(Q) = 0$.`, eq: String.raw`MC'(Q) = 6Q - 12 = 0 \implies Q^* = 2` },
+          { text: `BZO prüfen: $MC''(Q) > 0$?`, eq: String.raw`MC''(Q) = 6 > 0 \implies \text{Minimum bei } Q^* = 2 \; \checkmark` },
+          { text: `Minimalwert der GK:`, eq: String.raw`MC(2) = 3 \cdot 4 - 12 \cdot 2 + 15 = 12 - 24 + 15 = 3` }
+        ],
+        result: String.raw`Das Minimum der Grenzkosten liegt bei $Q^* = 2$ mit $MC_{\min} = 3$. Ökonomisch ist dies der Wendepunkt der Kostenfunktion — links davon fallen die Grenzkosten, rechts davon steigen sie. Der Betriebspunkt minimaler Grenzkosten entspricht dem effizientesten Produktionsniveau.`
+      },
+      {
+        text: String.raw`Haushaltsproblem: $U = x_1 \cdot x_2$, Budget $2x_1 + 3x_2 = 60$. Lösen Sie ohne Lagrange-Methode durch direkte Substitution und bestimmen Sie das Nutzenmaximum.`,
+        steps: [
+          { text: `$x_1$ aus Budgetrestriktion isolieren:`, eq: String.raw`x_1 = \frac{60 - 3x_2}{2} = 30 - \frac{3}{2}x_2` },
+          { text: `In Nutzenfunktion einsetzen:`, eq: String.raw`U(x_2) = \left(30 - \frac{3}{2}x_2\right) \cdot x_2 = 30x_2 - \frac{3}{2}x_2^2` },
+          { text: `BEO: $dU/dx_2 = 0$.`, eq: String.raw`\frac{dU}{dx_2} = 30 - 3x_2 = 0 \implies x_2^* = 10` },
+          { text: `$x_1^*$ und maximalen Nutzen berechnen:`, eq: String.raw`x_1^* = 30 - \frac{3}{2} \cdot 10 = 15 \qquad U^* = 15 \cdot 10 = 150` }
+        ],
+        result: String.raw`$x_1^* = 15$, $x_2^* = 10$, $U^* = 150$. Budget-Check: $2 \cdot 15 + 3 \cdot 10 = 30 + 30 = 60$ ✓. Die Substitutionsmethode liefert dasselbe Ergebnis wie Lagrange, ist aber direkt anwendbar, wenn nur eine Nebenbedingung vorliegt.`
       }
     ]
   },
@@ -229,8 +289,8 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'Lagrange-Ansatz', eq: String.raw`$$\mathcal{L} = f(x,y) + \lambda\,[c - g(x,y)]$$`, desc: 'Schattenpreis-Optimierung' },
-      { label: 'Tangentialbedingung', eq: String.raw`$$\frac{f_x}{f_y} = \frac{g_x}{g_y}$$`, desc: 'GRS = Preisverhältnis' }
+      { label: 'Lagrange-Ansatz', eq: String.raw`$$\mathcal{L} = f(x,y) + \lambda\,[c - g(x,y)]$$`, desc: 'Schattenpreis-Optimierung', variables: { lambda: 'Schattenpreis (Grenznutzen der NB)', c: 'Nebenbedingungsniveau' } },
+      { label: 'Tangentialbedingung', eq: String.raw`$$\frac{f_x}{f_y} = \frac{g_x}{g_y}$$`, desc: 'GRS = Preisverhältnis', variables: { f_x: 'partielle Ableitung nach x', g_x: 'partielle Ableitung der NB nach x' } }
     ],
     aufgaben: [
       {
@@ -251,6 +311,27 @@ export const CONTENT = {
           { text: `Minimale Kosten berechnen:`, eq: String.raw`C^* = 4 \cdot 2 + 8 = 16` }
         ],
         result: String.raw`$K^* = 2$, $L^* = 8$, $C_{\min} = 16$. Das Unternehmen substituiert das teurere Kapital (Preis 4) durch den günstigeren Faktor Arbeit (Preis 1) bis zum optimalen Verhältnis $L/K = 4$.`
+      },
+      {
+        text: String.raw`Produktionsminimierung: Minimiere $C = 2K + 3L$ unter der Nebenbedingung $K^{0{,}5}L^{0{,}5} = 10$. Bestimmen Sie das optimale Faktoreinsatzverhältnis und die Mindestkosten.`,
+        steps: [
+          { text: `Lagrange-Funktion aufstellen:`, eq: String.raw`\mathcal{L} = 2K + 3L + \lambda(10 - K^{0{,}5}L^{0{,}5})` },
+          { text: `BEOs ableiten und gleichsetzen:`, eq: String.raw`\frac{\partial \mathcal{L}}{\partial K} = 2 - \lambda \cdot 0{,}5 K^{-0{,}5}L^{0{,}5} = 0 \quad \frac{\partial \mathcal{L}}{\partial L} = 3 - \lambda \cdot 0{,}5 K^{0{,}5}L^{-0{,}5} = 0` },
+          { text: `Tangentialbedingung: Teile erste BEO durch zweite.`, eq: String.raw`\frac{2}{3} = \frac{L}{K} \implies L = \frac{2K}{3}` },
+          { text: `In NB einsetzen und lösen:`, eq: String.raw`K^{0{,}5}\left(\frac{2K}{3}\right)^{0{,}5} = 10 \implies K\sqrt{\frac{2}{3}} = 10 \implies K^* = 10\sqrt{\frac{3}{2}} \approx 12{,}25` },
+          { text: `$L^*$ und Mindestkosten:`, eq: String.raw`L^* = \frac{2 \cdot 12{,}25}{3} \approx 8{,}16 \qquad C^* = 2(12{,}25) + 3(8{,}16) \approx 49{,}0` }
+        ],
+        result: String.raw`$K^* \approx 12{,}25$, $L^* \approx 8{,}16$, $C^*_{\min} \approx 49$. Das optimale Verhältnis $L/K = 2/3$ entspricht dem inversen Preisverhältnis gewichtet nach Produktionselastizitäten — hier gleiche Exponententen, also $L/K = w_K/w_L = 2/3$.`
+      },
+      {
+        text: String.raw`Allgemeine Cobb-Douglas-Nutzenmaximierung: $U = x_1^\alpha x_2^{1-\alpha}$, Budget $p_1 x_1 + p_2 x_2 = m$. Leiten Sie die allgemeinen Marshallschen Nachfragefunktionen her.`,
+        steps: [
+          { text: `Tangentialbedingung aufstellen: $MU_1/MU_2 = p_1/p_2$.`, eq: String.raw`\frac{\alpha x_2}{(1-\alpha)x_1} = \frac{p_1}{p_2} \implies p_2 \alpha x_2 = p_1(1-\alpha)x_1` },
+          { text: `$x_2$ durch $x_1$ ausdrücken:`, eq: String.raw`x_2 = \frac{p_1(1-\alpha)x_1}{p_2 \alpha}` },
+          { text: `In Budgetrestriktion einsetzen:`, eq: String.raw`p_1 x_1 + p_1(1-\alpha)x_1/\alpha = m \implies p_1 x_1 \cdot \frac{1}{\alpha} = m \implies x_1^* = \frac{\alpha m}{p_1}` },
+          { text: `$x_2^*$ analog ableiten:`, eq: String.raw`x_2^* = \frac{(1-\alpha)m}{p_2}` }
+        ],
+        result: String.raw`Marshallsche Nachfragefunktionen: $x_1^* = \frac{\alpha m}{p_1}$ und $x_2^* = \frac{(1-\alpha)m}{p_2}$. Der Haushalt gibt einen festen Anteil $\alpha$ seines Einkommens für Gut 1 und $(1-\alpha)$ für Gut 2 aus — unabhängig von den absoluten Preisen (Cobb-Douglas-Eigenschaft konstanter Ausgabenanteile).`
       }
     ]
   },
@@ -284,11 +365,12 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Fehleranalyse</h3>
       <div class="warn-box"><strong>Multiplikation nicht kommutativ:</strong> $AB \neq BA$ im Allgemeinen. Achten Sie auf die Reihenfolge, besonders bei Transponierung: $(AB)^T = B^T A^T$.</div>
+      <div class="warn-box"><strong>Singuläre Matrizen:</strong> Wenn $\det(A) = 0$, existiert keine Inverse. Das Gleichungssystem $Ax = b$ hat dann entweder keine oder unendlich viele Lösungen — multikollineare Regressoren führen in der Ökonometrie zu genau diesem Problem.</div>
     </div>
     `,
     formeln: [
-      { label: 'Determinante (2×2)', eq: String.raw`$$\det(A) = a_{11}a_{22} - a_{12}a_{21}$$`, desc: 'Existenz der Inversen' },
-      { label: 'OLS-Schätzer (Matrix)', eq: String.raw`$$\hat{\beta} = (X'X)^{-1}X'y$$`, desc: 'Ökonometrische Anwendung' }
+      { label: 'Determinante (2×2)', eq: String.raw`$$\det(A) = a_{11}a_{22} - a_{12}a_{21}$$`, desc: 'Existenz der Inversen', variables: { a_ij: 'Matrixelement in Zeile i, Spalte j' } },
+      { label: 'OLS-Schätzer (Matrix)', eq: String.raw`$$\hat{\beta} = (X'X)^{-1}X'y$$`, desc: 'Ökonometrische Anwendung', variables: { X: 'Regressorenmatrix', y: 'Abhängige Variable (Vektor)' } }
     ],
     aufgaben: [
       {
@@ -306,7 +388,27 @@ export const CONTENT = {
           { text: `Inverse aufstellen:`, eq: String.raw`A^{-1} = \frac{1}{2}\begin{pmatrix} 3 & -1 \\ -4 & 2 \end{pmatrix}` },
           { text: `Lösung: $x = A^{-1}b$.`, eq: String.raw`x = \frac{1}{2}\begin{pmatrix}3\cdot8 - 1\cdot18 \\ -4\cdot8 + 2\cdot18\end{pmatrix} = \frac{1}{2}\begin{pmatrix}6\\4\end{pmatrix} = \begin{pmatrix}3\\2\end{pmatrix}` }
         ],
-        result: String.raw`$x_1 = 3$, $x_2 = 2$. In der Ökonomie entspricht dieses Vorgehen dem Lösen von Marktgleichgewichtssystemen (z.B. Angebot und Nachfrage auf zwei Märkten) oder dem OLS-Schätzer $\hat\beta = (X'X)^{-1}X'y$ in der Ökonometrie.`
+        result: String.raw`$x_1 = 3$, $x_2 = 2$.`
+      },
+      {
+        text: String.raw`Lösen Sie das $2\times2$-Gleichungssystem $2x + y = 7$, $x + 3y = 6$ mit der Cramerschen Regel.`,
+        steps: [
+          { text: `Koeffizientenmatrix und Determinante:`, eq: String.raw`A = \begin{pmatrix}2 & 1\\1 & 3\end{pmatrix}, \quad \det(A) = 6 - 1 = 5` },
+          { text: `$x_1$ nach Cramer: Ersetze erste Spalte durch $b$.`, eq: String.raw`\det(A_1) = \begin{vmatrix}7 & 1\\6 & 3\end{vmatrix} = 21 - 6 = 15 \implies x = \frac{15}{5} = 3` },
+          { text: `$x_2$ nach Cramer: Ersetze zweite Spalte durch $b$.`, eq: String.raw`\det(A_2) = \begin{vmatrix}2 & 7\\1 & 6\end{vmatrix} = 12 - 7 = 5 \implies y = \frac{5}{5} = 1` },
+          { text: `Probe durch Einsetzen:`, eq: String.raw`2(3) + 1 = 7 \; \checkmark \qquad 3 + 3(1) = 6 \; \checkmark` }
+        ],
+        result: String.raw`$x = 3$, $y = 1$. Die Cramersche Regel eignet sich besonders für kleine Systeme und liefert eine geschlossene Formel. Für große Systeme ist der Gauß-Algorithmus effizienter.`
+      },
+      {
+        text: String.raw`Matrix $A = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$. Berechnen Sie $\det(A)$, $A^{-1}$ und prüfen Sie $A \cdot A^{-1} = I$.`,
+        steps: [
+          { text: `Determinante:`, eq: String.raw`\det(A) = 2 \cdot 3 - 1 \cdot 4 = 6 - 4 = 2` },
+          { text: `Inverse berechnen:`, eq: String.raw`A^{-1} = \frac{1}{2}\begin{pmatrix}3 & -1\\-4 & 2\end{pmatrix} = \begin{pmatrix}1{,}5 & -0{,}5\\-2 & 1\end{pmatrix}` },
+          { text: `Probe: $A \cdot A^{-1}$ berechnen (Zeile 1 mal Spalte 1):`, eq: String.raw`2 \cdot 1{,}5 + 1 \cdot (-2) = 3 - 2 = 1 \; \checkmark` },
+          { text: `Probe: $A \cdot A^{-1}$ (Zeile 1 mal Spalte 2) und (Zeile 2 mal Spalte 1):`, eq: String.raw`2(-0{,}5) + 1(1) = 0 \; \checkmark \qquad 4(1{,}5) + 3(-2) = 6 - 6 = 0 \; \checkmark` }
+        ],
+        result: String.raw`$\det(A) = 2$, $A^{-1} = \begin{pmatrix}1{,}5 & -0{,}5\\-2 & 1\end{pmatrix}$. Die Probe $A \cdot A^{-1} = I$ ist erfüllt. Die Inverse ist eindeutig bestimmt, weil $\det(A) \neq 0$.`
       }
     ]
   },
@@ -326,6 +428,7 @@ export const CONTENT = {
         <li>$\int x^n\,dx = \frac{x^{n+1}}{n+1} + C$ (für $n \neq -1$)</li>
         <li>$\int \frac{1}{x}\,dx = \ln|x| + C$</li>
         <li>$\int e^x\,dx = e^x + C$</li>
+        <li>$\int e^{ax}\,dx = \frac{1}{a}e^{ax} + C$</li>
       </ul>
     </div>
     <div class="section-block">
@@ -343,17 +446,18 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Fehleranalyse</h3>
       <div class="warn-box"><strong>Vorzeichen:</strong> Flächen unterhalb der x-Achse gehen negativ ein. Für den ökonomischen Flächeninhalt (z.B. Rente) muss ggf. der Betrag $|f(x)|$ integriert werden.</div>
+      <div class="warn-box"><strong>Integrationskonstante:</strong> Beim unbestimmten Integral immer $+C$ ergänzen. Beim bestimmten Integral kürzt sich $C$ heraus — vergessen Sie es trotzdem nicht bei Zwischenschritten.</div>
     </div>
     `,
     formeln: [
-      { label: 'Hauptsatz', eq: String.raw`$$\int_a^b f(x)\,dx = F(b) - F(a)$$`, desc: 'Bestimmtes Integral' },
-      { label: 'Konsumentenrente', eq: String.raw`$$KR = \int_0^{Q^*} P(Q)\,dQ - p^* Q^*$$`, desc: 'Fläche unter Nachfragekurve' }
+      { label: 'Hauptsatz', eq: String.raw`$$\int_a^b f(x)\,dx = F(b) - F(a)$$`, desc: 'Bestimmtes Integral', variables: { F: 'Stammfunktion von f', a: 'untere Grenze', b: 'obere Grenze' } },
+      { label: 'Konsumentenrente', eq: String.raw`$$KR = \int_0^{Q^*} P(Q)\,dQ - p^* Q^*$$`, desc: 'Fläche unter Nachfragekurve', variables: { P_Q: 'inverse Nachfragefunktion', Q_star: 'Gleichgewichtsmenge', p_star: 'Gleichgewichtspreis' } }
     ],
     aufgaben: [
       {
         text: String.raw`Die inverse Nachfrage sei $P(Q) = 100 - 2Q$. Der Gleichgewichtspreis ist $p^* = 40$, die Menge $Q^* = 30$. Berechnen Sie die Konsumentenrente.`,
         steps: [
-          { text: `Integral berechnen:`, eq: String.raw`\int_0^{30}(100-2Q)\,dQ = [100Q - Q^2]_0^{30} = 3000 - 900 = 2100` },
+          { text: `Integral berechnen:`, eq: String.raw`\int_0^{30}(100-2Q)\,dQ = \bigl[100Q - Q^2\bigr]_0^{30} = 3000 - 900 = 2100` },
           { text: `Rechteckfläche abziehen:`, eq: String.raw`KR = 2100 - 40 \cdot 30 = 2100 - 1200 = 900` }
         ],
         result: String.raw`$KR = 900$ Geldeinheiten.`
@@ -365,7 +469,27 @@ export const CONTENT = {
           { text: `Integral berechnen:`, eq: String.raw`\int_0^{10}(2Q+10)\,dQ = \bigl[Q^2 + 10Q\bigr]_0^{10} = 100 + 100 = 200` },
           { text: `Produzentenrente:`, eq: String.raw`PR = 30 \cdot 10 - 200 = 300 - 200 = 100` }
         ],
-        result: String.raw`$PR = 100$ Geldeinheiten. Zusammen mit $KR = 900$ ergibt sich eine Gesamtrente von $1000$. Grafisch ist die Produzentenrente das Dreieck zwischen Preisgerade und Angebotskurve links von $Q^*$.`
+        result: String.raw`$PR = 100$ Geldeinheiten.`
+      },
+      {
+        text: String.raw`Konsumentenrente bei Mindestpreis: Nachfragekurve $P = 10 - Q$, Marktgleichgewichtspreis $P^* = 4$, Menge $Q^* = 6$. Berechnen Sie die Konsumentenrente grafisch und analytisch.`,
+        steps: [
+          { text: `Gleichgewichtsmenge bestimmen: $P = 10 - Q = 4$.`, eq: String.raw`Q^* = 10 - 4 = 6` },
+          { text: `KR = Fläche unter Nachfragekurve minus Rechteck:`, eq: String.raw`KR = \int_0^6 (10-Q)\,dQ - 4 \cdot 6` },
+          { text: `Integral ausrechnen:`, eq: String.raw`\int_0^6(10-Q)\,dQ = \bigl[10Q - \tfrac{Q^2}{2}\bigr]_0^6 = 60 - 18 = 42` },
+          { text: `KR berechnen:`, eq: String.raw`KR = 42 - 24 = 18` }
+        ],
+        result: String.raw`$KR = 18$ Geldeinheiten. Grafisch ist dies das Dreieck zwischen der Nachfragekurve und der Preisgeraden $P^* = 4$: Basis = $Q^* = 6$, Höhe = $10 - 4 = 6$, Fläche = $\frac{1}{2} \cdot 6 \cdot 6 = 18$ ✓.`
+      },
+      {
+        text: String.raw`Wachstumspfad: Die Wachstumsrate des BIP sei $Y'(t) = 2e^{0{,}1t}$. Berechnen Sie $Y(t)$ mit der Anfangsbedingung $Y(0) = 20$ und bestimmen Sie $Y(10)$.`,
+        steps: [
+          { text: `Unbestimmtes Integral berechnen:`, eq: String.raw`Y(t) = \int 2e^{0{,}1t}\,dt = \frac{2}{0{,}1}e^{0{,}1t} + C = 20e^{0{,}1t} + C` },
+          { text: `Anfangsbedingung anwenden: $Y(0) = 20$.`, eq: String.raw`20e^{0} + C = 20 \implies 20 + C = 20 \implies C = 0` },
+          { text: `Vollständige Lösung:`, eq: String.raw`Y(t) = 20e^{0{,}1t}` },
+          { text: `$Y(10)$ berechnen:`, eq: String.raw`Y(10) = 20e^{0{,}1 \cdot 10} = 20e^1 = 20 \cdot 2{,}718 \approx 54{,}37` }
+        ],
+        result: String.raw`$Y(t) = 20e^{0{,}1t}$, $Y(10) \approx 54{,}4$. Das BIP wächst exponentiell mit einer kontinuierlichen Rate von $10\%$ pro Periode — ein typisches Wachstumsmodell. Nach 10 Perioden ist das Ausgangsniveau um den Faktor $e \approx 2{,}72$ gestiegen.`
       }
     ]
   }

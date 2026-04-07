@@ -48,6 +48,15 @@ export const CONTENT = {
           { text: `Execution: Gibt es eine dominante Strategie?`, eq: String.raw`\text{Ja, D ist für beide Spieler dominant.}` }
         ],
         result: String.raw`Nash-Gleichgewicht ist (D,D).`
+      },
+      {
+        text: String.raw`Betrachten Sie ein Koordinationsspiel: A und B wählen gleichzeitig Links (L) oder Rechts (R). Auszahlungen: $(L,L)=(2,2)$, $(R,R)=(3,3)$, $(L,R)=(0,0)$, $(R,L)=(0,0)$. Bestimmen Sie alle Nash-Gleichgewichte in reinen Strategien.`,
+        steps: [
+          { text: `Beste Antwort von A: Wenn B L spielt?`, eq: String.raw`u_A(L,L)=2 > u_A(R,L)=0 \implies \text{A wählt L.}` },
+          { text: `Beste Antwort von A: Wenn B R spielt?`, eq: String.raw`u_A(R,R)=3 > u_A(L,R)=0 \implies \text{A wählt R.}` },
+          { text: `Symmetrie: B spiegelt dieselbe Logik. Wo treffen sich beide beste Antworten?`, eq: String.raw`(L,L) \text{ und } (R,R) \text{ sind beide gegenseitige beste Antworten.}` }
+        ],
+        result: String.raw`Zwei Nash-Gleichgewichte in reinen Strategien: $(L,L)$ und $(R,R)$. Im Unterschied zum Gefangenendilemma gibt es hier kein Problem kollektiver Rationalität — das Problem ist Koordination auf das gemeinsam vorzuziehende Gleichgewicht.`
       }
     ]
   },
@@ -84,6 +93,15 @@ export const CONTENT = {
           { text: `Symmetrie nutzen ($q_i = q_j = q^*$):`, eq: String.raw`$$q^* = \frac{90-q^*}{2} \implies 2q^* = 90 - q^* \implies 3q^* = 90$$` }
         ],
         result: String.raw`$q_1^* = q_2^* = 30$.`
+      },
+      {
+        text: String.raw`Verwenden Sie dasselbe Marktumfeld ($P(Q)=100-Q$, $c=10$), aber Firma 1 ist jetzt Stackelberg-Führer und wählt ihre Menge zuerst, bevor Firma 2 antwortet. Berechnen Sie $q_1^*$, $q_2^*$ und vergleichen Sie Gesamtmenge und Preis mit dem Cournot-Ergebnis.`,
+        steps: [
+          { text: `Reaktionsfunktion des Folgers (aus Cournot bekannt):`, eq: String.raw`q_2(q_1) = \frac{90 - q_1}{2}` },
+          { text: `Führer antizipiert Folger — setzt $q_2$ ein und maximiert:`, eq: String.raw`\pi_1 = \left(90 - q_1 - \frac{90-q_1}{2}\right)q_1 = \frac{90-q_1}{2}\cdot q_1 \implies q_1^* = 45` },
+          { text: `Folger-Reaktion und Vergleich:`, eq: String.raw`q_2^* = \frac{90-45}{2} = 22{,}5;\quad Q_{Stack}=67{,}5 > Q_{Cournot}=60` }
+        ],
+        result: String.raw`Stackelberg: $q_1^*=45$, $q_2^*=22{,}5$, $P=32{,}5$. Cournot: je $30$, $P=40$. Der Führer produziert mehr und erzielt höheren Gewinn (First-Mover-Advantage); der Gesamtmarkt ist effizienter (mehr Menge, niedrigerer Preis).`
       }
     ]
   },
@@ -116,6 +134,15 @@ export const CONTENT = {
           { text: `Entscheidung: Gilt $GRS^A = GRS^B$?`, eq: String.raw`\text{Ja, } 1 = 1.` }
         ],
         result: String.raw`Die Allokation ist Pareto-effizient.`
+      },
+      {
+        text: String.raw`In einer Edgeworth-Box gelten bei einer gegebenen Allokation $GRS^A = 4$ und $GRS^B = 1$. Kann diese Allokation Pareto-effizient sein? Wenn nicht: In welche Richtung sollte getauscht werden?`,
+        steps: [
+          { text: `Effizienzbedingung prüfen:`, eq: String.raw`GRS^A = GRS^B \text{ notwendig für Pareto-Effizienz.}\quad 4 \neq 1 \implies \text{nicht effizient.}` },
+          { text: `Interpretation der Ungleichheit:`, eq: String.raw`GRS^A=4 \text{: A gibt bis zu 4 Einheiten Gut 2 für 1 Einheit Gut 1 auf. B gibt nur 1.}` },
+          { text: `Handelsrichtung: A bewertet Gut 1 viel höher als B.`, eq: String.raw`\text{A gibt B Gut 2, B gibt A Gut 1} \implies \text{Pareto-Verbesserung bis } GRS^A = GRS^B.` }
+        ],
+        result: String.raw`Nein, die Allokation ist nicht Pareto-effizient. Gut 1 sollte von B zu A fließen (und Gut 2 umgekehrt), solange $GRS^A > GRS^B$. Erst bei $GRS^A = GRS^B$ liegt ein Punkt auf der Kontraktkurve vor.`
       }
     ]
   },
@@ -147,6 +174,15 @@ export const CONTENT = {
           { text: `Vergleichen:`, eq: String.raw`10 > 5` }
         ],
         result: String.raw`Allokation I wird bevorzugt.`
+      },
+      {
+        text: String.raw`Eine politische Partei schlägt vor, über Pauschalsteuern eine Umverteilung zu erreichen und danach den Markt spielen zu lassen. Auf welchen Hauptsatz der Wohlfahrtstheorie stützt sie sich, und welche zentrale Praxisschranke besteht?`,
+        steps: [
+          { text: `Identifizieren des relevanten Hauptsatzes:`, eq: String.raw`\text{2. Hauptsatz: Jede Pareto-effiziente Allokation lässt sich als Wettbewerbsgleichgewicht realisieren — nach geeigneter Umverteilung.}` },
+          { text: `Das Instrument: Pauschalsteuern/-transfers sind verzerrungsfrei.`, eq: String.raw`\text{Anders als Einkommens- oder Mengensteuern ändern Pauschalsteuern keine Grenzpreise.}` },
+          { text: `Die Praxisschranke:`, eq: String.raw`\text{Pauschalsteuern erfordern beobachtbare individuelle Ausstattungen. Das ist in der Realität kaum möglich (Informationsasymmetrie).}` }
+        ],
+        result: String.raw`Zweiter Hauptsatz der Wohlfahrtsökonomik. Er trennt Effizienz von Verteilung: Erst umverteilen (Pauschalsteuern), dann den Wettbewerb Effizienz erzeugen lassen. Die kritische Praxisschranke ist Informationsasymmetrie: Der Staat kann individuelle Fähigkeiten und Ausstattungen nicht kostlos beobachten.`
       }
     ]
   },
@@ -179,6 +215,15 @@ export const CONTENT = {
           { text: `Gleichgewicht ($P=MSC$):`, eq: String.raw`$$100 - Q = 20 + Q \implies 2Q = 80$$` }
         ],
         result: String.raw`$Q_{soc}^* = 40$.`
+      },
+      {
+        text: String.raw`Firma A hat das Eigentumsrecht zu produzieren und erzielt dabei Gewinne von $50$. Produktion verursacht bei Firma B einen Schaden von $30$. Transaktionskosten sind null. Was sagt das Coase-Theorem über das Ergebnis — und ändert es sich, wenn stattdessen Firma B das Recht hat, Produktion zu verbieten?`,
+        steps: [
+          { text: `Fall 1: A hat Produktionsrecht. Ist eine private Einigung möglich?`, eq: String.raw`\text{B zahlt A bis zu 30, um Produktion zu stoppen. Aber A's Gewinn = 50 > 30.} \implies \text{A produziert.}` },
+          { text: `Fall 2: B hat Verbotsrecht. Ist Produktion dennoch effizient?`, eq: String.raw`\text{A zahlt B mindestens 30 (Schadensersatz). Restgewinn für A: } 50-30=20>0. \implies \text{A produziert trotzdem.}` },
+          { text: `Vergleich der Ergebnisse:`, eq: String.raw`\text{In beiden Fällen: Produktion findet statt. Effizienzresultat ist identisch.}` }
+        ],
+        result: String.raw`Coase-Theorem: Bei Transaktionskosten = 0 und klar definierten Rechten führen private Verhandlungen unabhängig von der Rechtszuweisung zur effizienten Lösung. Hier: Produktion findet statt (Nettogewinn $50-30=20>0$), unabhängig davon, wer das Recht hält. Die Verteilung des Überschusses (wer zahlt wen) hängt von der Rechtszuweisung ab — nicht aber die Effizienz.`
       }
     ]
   },
@@ -207,6 +252,15 @@ export const CONTENT = {
           { text: `Bedingung ($P_{agg} = MC$):`, eq: String.raw`$$30 - 2Q = 10 \implies 2Q = 20$$` }
         ],
         result: String.raw`$Q^* = 10$.`
+      },
+      {
+        text: String.raw`Zwei Individuen können jeweils $0$ oder $10$ in ein öffentliches Gut einzahlen. Jeder eingezahlte Euro erzeugt für jeden (da nicht-rival) einen Nutzen von $0{,}8$. Die Einzahlung kostet $10$, liefert also Eigennutzen $8 - 10 = -2$ wenn man allein zahlt, aber kostenlos $8$ wenn der andere zahlt. Analysieren Sie das Nash-Gleichgewicht.`,
+        steps: [
+          { text: `Beste Antwort von 1, wenn 2 einzahlt:`, eq: String.raw`\text{Nicht zahlen: Nutzen = 8 (kostenlos). Zahlen: Nutzen = 8+8-10=6.} \implies \text{Trittbrettfahren dominiert.}` },
+          { text: `Beste Antwort von 1, wenn 2 nicht einzahlt:`, eq: String.raw`\text{Zahlen: Nutzen = 8-10=-2. Nicht zahlen: 0.} \implies \text{Nicht zahlen.}` },
+          { text: `Nash-Gleichgewicht:`, eq: String.raw`\text{Nicht zahlen ist dominante Strategie für beide.} \implies (0,0).` }
+        ],
+        result: String.raw`Nash-Gleichgewicht: Keiner zahlt ein — trotz gesellschaftlichem Optimum bei (10, 10) (jeder gewänne netto $8 \cdot 2 - 10 = 6$). Free-Riding zerstört die private Bereitstellung öffentlicher Güter: Individuell rational, kollektiv ineffizient.`
       }
     ]
   },
@@ -238,6 +292,15 @@ export const CONTENT = {
           { text: `Folge: Welche Autos bleiben am Markt?`, eq: String.raw`\text{Nur die schlechten (Adverse Selection).}` }
         ],
         result: String.raw`Marktzusammenbruch für Qualität.`
+      },
+      {
+        text: String.raw`Ein Arbeitnehmer kann hohen Effort ($e=H$, Kosten 5) oder niedrigen Effort ($e=L$, Kosten 0) wählen. Bei $e=H$ beträgt die Erfolgswahrscheinlichkeit 0{,}8, bei $e=L$ 0{,}4. Erfolg bringt 100, Misserfolg 0. Der Arbeitgeber kann Effort nicht beobachten und zahlt einen fixen Lohn von 40. Welchen Effort wählt der Arbeitnehmer, und warum liegt Moral Hazard vor?`,
+        steps: [
+          { text: `Nutzen bei $e=H$: Lohn minus Anstrengungskosten.`, eq: String.raw`U(H) = 40 - 5 = 35` },
+          { text: `Nutzen bei $e=L$: Lohn, keine Kosten.`, eq: String.raw`U(L) = 40 - 0 = 40 > 35 \implies \text{Arbeitnehmer wählt } e=L.` },
+          { text: `Warum Moral Hazard? Effort ist nach Vertragsschluss nicht beobachtbar (Hidden Action).`, eq: String.raw`\text{Lösung: Erfolgsabhängige Vergütung } w(Erfolg) > w(Misserfolg) \text{ setzt Anreize.}` }
+        ],
+        result: String.raw`Moral Hazard (ex-post): Der Arbeitnehmer wählt $e=L$, da bei fixem Lohn kein Anreiz zu Anstrengung besteht. Das Problem entsteht durch Hidden Action nach Vertragsschluss — anders als Adverse Selection, die vor Vertragsschluss auftritt. Lösung: Anreizkompatible Verträge mit ergebnisabhängiger Bezahlung.`
       }
     ]
   }

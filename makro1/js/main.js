@@ -1,4 +1,5 @@
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
+import { getMakro1PilotBridgePayload } from './data/contentManifest.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';
 import * as appState from './state/appState.js';
 import * as storage from './state/storage.js';
@@ -35,5 +36,9 @@ createPortalApp({
   theme,
   keyboard,
   toast,
-  math
+  math,
+  portalBridge: () => {
+    if (typeof window === 'undefined') return;
+    window.__makro1PilotManifest = getMakro1PilotBridgePayload();
+  }
 });

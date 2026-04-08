@@ -194,7 +194,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 ### Phase 1 — Metadata parity (low risk)
 
 - **`mikro1` / `mikro2`** in `module-content.js`: done for source narrative; **`mikro2`** explicitly non-corpus (`module-content-parity-cleanup-pass-1.md`).
-- **`internationale-wirtschaftsbeziehungen`:** quoted **`module-content.js`** key is intentional; optional later: **`contentManifest.js`** (`iwb-status-parity-audit-pass-1.md`).
+- **`internationale-wirtschaftsbeziehungen`:** quoted **`module-content.js`** key; **`contentManifest.js`** + provenance: **`docs/audits/iwb-provenance-curation-pass-1.md`**.
 - Remove **`sourceRoot`** from shared `modules.js` (or replace with empty string + comment).
 
 ### Phase 2 — Provenance on **new** edits

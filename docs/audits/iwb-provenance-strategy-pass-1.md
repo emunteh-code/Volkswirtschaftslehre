@@ -4,6 +4,8 @@
 
 **Date:** 2026-04-08
 
+**Follow-up:** **`docs/audits/iwb-provenance-curation-pass-1.md`** implements **`contentManifest.js`**, primary refs, and **`portalBridge`**; this strategy doc remains the **pre-implementation** analysis.
+
 ---
 
 ## 1. Exact files inspected
@@ -12,7 +14,7 @@
 |------|---------|
 | `internationale-wirtschaftsbeziehungen/js/data/chapters.js` | **`CHAPTERS`** (12 concept ids), **`CONTENT`** shape |
 | `internationale-wirtschaftsbeziehungen/js/data/courseConfig.js` | Slug, labels, storage keys |
-| `internationale-wirtschaftsbeziehungen/js/main.js` | **`createPortalApp`** — **no** manifest import |
+| `internationale-wirtschaftsbeziehungen/js/main.js` | **`createPortalApp`** + **`portalBridge`** (post-**`iwb-provenance-curation-pass-1`**) |
 | `internationale-wirtschaftsbeziehungen/js/data/fullExams.js` | **`FULL_EXAMS`** (probe-style sets; no embedded provenance) |
 | `internationale-wirtschaftsbeziehungen/js/data/stepProblems.js` | Drill payloads (no source refs) |
 | `internationale-wirtschaftsbeziehungen/js/data/intuition.js` | Intuition layer (no source refs) |

@@ -1195,7 +1195,7 @@ export const MODULE_CONTENT = {
       "Aufgaben und Exam-Drills muessen zwischen Modelllogik, Politikfolgen und Wechselkursintuition unterscheiden, statt den Stoff pauschal zusammenzufassen.",
       "JS-Schluessel ist als String `\"internationale-wirtschaftsbeziehungen\"` gesetzt, weil der Slug Bindestriche enthaelt (Zugriff nur ueber `getModuleContent(slug)` mit gleichem String).",
       "Pfade in `sourceGroups`/`roadmap` sind relativ zum Kursordner `source-materials/Grundlagen der internationalen Wirtschaftsbeziehungen/Grundlagen der internationalen Wirtschaftsbeziehungen/` (doppelte Ordnerebene wie bei anderen ZIP-Entpackungen).",
-      "Es gibt kein `internationale-wirtschaftsbeziehungen/js/data/contentManifest.js`; diese Datei ist Landing-/Quellen-Narrativ, kein Ersatz fuer laufzeitseitige Primaerrefs pro Lernobjekt."
+      "Runtime-Provenienz: `internationale-wirtschaftsbeziehungen/js/data/contentManifest.js` (Kuratierung: `docs/audits/iwb-provenance-curation-pass-1.md`); Landing-Text hier bleibt zusaetzliches Narrativ."
     ]
   },
   jahresabschluss: {

@@ -33,9 +33,9 @@ These use the **portal-core shell** with a full local `js/data/*` story (chapter
 | recht | Yes | Yes |
 | mikro2 | **No** | **No** |
 | mathematik | **No** | **No** |
-| internationale-wirtschaftsbeziehungen | **No** | **No** (verified: no `contentManifest` under `internationale-wirtschaftsbeziehungen/js`) |
+| internationale-wirtschaftsbeziehungen | **Yes** | **Yes** (`iwb-provenance-curation-pass-1.md`; `window.__iwbContentManifest`) |
 
-**Interpretation:** Eight modules are **backbone-aligned** with a canonical manifest bridge; three live modules **lag** that specific artifact (not necessarily broken — but **not** at manifest parity).
+**Interpretation:** Nine modules are **backbone-aligned** with a canonical manifest bridge; two live modules **lag** (**`mikro2`**, **`mathematik`**) — see table.
 
 ### 2.2 Strong or improving **provenance** (file-level primary refs in manifest, documented in audits)
 
@@ -73,7 +73,7 @@ No other module is flagged **quarantined** in metadata; **mathematik** is **weak
 
 ## 3. Remaining high-value gaps (honest)
 
-1. **Manifest parity:** **`mikro2`** (blocked until corpus), **`mathematik`**, **`internationale-wirtschaftsbeziehungen`** — no `contentManifest.js` / bridge.
+1. **Manifest parity:** **`mikro2`** (blocked until corpus), **`mathematik`** — no `contentManifest.js` / bridge. **`internationale-wirtschaftsbeziehungen`** manifest added (`iwb-provenance-curation-pass-1.md`).
 2. **Source truth:** **`mikro2`** — ingest Mikro II materials or keep labeling **`source-distilled` / platform-added** only.
 3. **Landing / pipeline:** Alignment of **`r`** vs **`MODULES`**; optional follow-up audits for narrative vs runtime provenance (`iwb-status-parity-audit-pass-1.md` for IWB).
 4. **Stale docs:** **`docs/audits/repo-audit.md`** §3 still lists **`mikro2` as 7 concepts** — **wrong** (currently **13** `CHAPTERS` rows). Use **this** audit or re-count from `chapters.js`.

@@ -12,8 +12,8 @@
 |----------|--------|
 | `assets/js/modules.js` | **`status: "live"`**, slug **`internationale-wirtschaftsbeziehungen`**, `href: "./internationale-wirtschaftsbeziehungen/index.html"`. No `sourceCorpusInRepo` flag (unlike quarantined **`mikro2`**). |
 | `internationale-wirtschaftsbeziehungen/js/data/courseConfig.js` | **`slug: 'internationale-wirtschaftsbeziehungen'`** aligned with registry. |
-| `internationale-wirtschaftsbeziehungen/js/main.js` | **`createPortalApp({...})`** from **`portal-core`** — same shell family as **`mikro1`**, but **without** `contentManifest.js` import / `portalBridge` payload. |
-| `internationale-wirtschaftsbeziehungen/js/data/contentManifest.js` | **Absent** (not a “manifest-backbone” module in the sense of `platform-status-cleanup-audit-pass-1.md`). |
+| `internationale-wirtschaftsbeziehungen/js/main.js` | **`createPortalApp`** + **`portalBridge`** → `window.__iwbContentManifest`. |
+| `internationale-wirtschaftsbeziehungen/js/data/contentManifest.js` | **Present** since `iwb-provenance-curation-pass-1.md` (provenance + bridge). |
 | `internationale-wirtschaftsbeziehungen/js/portalHub.js` | Calls **`mountLivePortalBridge('internationale-wirtschaftsbeziehungen')`** — snapshot uses **`getModuleContent`** + **`estimateGeneratedChapterCount`** from narrative `roadmap`/`practice` lengths. |
 
 ---

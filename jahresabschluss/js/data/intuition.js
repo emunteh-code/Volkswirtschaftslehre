@@ -10,13 +10,22 @@ export const INTUITION = {
       { if: 'Die Erfolgsentstehung erklärt werden soll', then: 'GuV und Eigenkapitalveränderung verbinden.' }
     ]
   ),
-  gob_inventur: mk(
-    'GoB, Inventur und Bilanzansatz entscheiden zuerst über die Zulässigkeit eines Abschlusses, erst danach über Zahlen.',
-    'Wie bei einer Inventarliste im Lager muss zuerst klar sein, ob ein Gegenstand überhaupt aufgenommen wird, bevor man über seinen Wert spricht.',
-    'Genau deshalb beginnt eine saubere Bilanzierungsprüfung immer mit Ansatz und Ordnung, nicht direkt mit der Bewertung.',
+  gob_rechtsgrundlagen: mk(
+    'GoB und Rechtsgrundlagen setzen den normativen Rahmen dafür, welche Abschlussaussagen zulässig und vorsichtig sind.',
+    'Wie bei Spielregeln in einem Turnier zählen nicht nur Punkte, sondern auch die verbindlichen Regeln, nach denen gewertet wird.',
+    'Deshalb beginnt eine saubere Lösung mit dem Prinzipbezug (z.B. Realisation/Imparität), bevor Einzelfragen gerechnet werden.',
     [
-      { if: 'Ein Bilanzposten fraglich ist', then: 'Ansatzfrage vor der Bewertungsfrage prüfen.' },
+      { if: 'Ein Bilanzierungsproblem begründet werden soll', then: 'GoB und Rechtsgrundlage explizit als Maßstab nennen.' },
       { if: 'Vorsichtsprinzip genannt wird', then: 'Realisations- und Imparitätslogik ausdrücklich ansprechen.' }
+    ]
+  ),
+  inventur_inventar_bilanzansatz: mk(
+    'Inventur, Inventar und Bilanzansatz bilden die methodische Eingangsschleuse zur Bilanz.',
+    'Wie bei einer Lagerprüfung werden erst die Bestände erhoben, dann geordnet und erst danach in die Abschlussstruktur überführt.',
+    'Darum gilt in Klausuren: erst Ansatz klären, dann bewerten.',
+    [
+      { if: 'Ein Posten mit Zahl genannt wird', then: 'Zuerst Bilanzierungsfähigkeit prüfen, nicht direkt rechnen.' },
+      { if: 'Inventur und Bilanz verwechselt werden', then: 'Inventur als Erhebung und Bilanz als Verdichtung trennen.' }
     ]
   ),
   buchen_konten: mk(
@@ -46,13 +55,22 @@ export const INTUITION = {
       { if: 'Dauerhafte Wertminderung auftritt', then: 'Außerplanmäßige Abschreibung gesondert würdigen.' }
     ]
   ),
-  umlauf_werkstoffe: mk(
+  umlauf_bewertung_verfahren: mk(
     'Beim Umlaufvermögen entscheidet die Bewertungsmethode direkt über Aufwand, Endbestand und damit den Gewinn.',
     'Wenn du im Lager zuerst alte oder neue Chargen „gedanklich verbrauchst“, ändert sich sofort, was am Ende noch mit welchem Wert im Regal liegt.',
     'FIFO, Durchschnittsmethode und Niederstwertprinzip sind deshalb keine isolierten Regeln, sondern greifen gemeinsam in den Abschluss ein.',
     [
       { if: 'Ein Verbrauchsfolgeverfahren genannt wird', then: 'Immer auch den Effekt auf Endbestand und Aufwand benennen.' },
       { if: 'Der Stichtagswert unter den AK liegt', then: 'Strenges Niederstwertprinzip anwenden.' }
+    ]
+  ),
+  werkstoffe_erzeugnisse_buchungen: mk(
+    'Werkstoff- und Erzeugnisbuchungen übersetzen Materialfluss in Bestands- und Erfolgswirkung.',
+    'Wie bei einer Produktionslinie muss jeder Entnahmeschritt entweder laufend erfasst oder am Ende über den Bestandvergleich sauber rekonstruiert werden.',
+    'Deshalb werden Verbrauchsermittlung, Bestandsveränderung und GuV-Abschluss als zusammenhängende Kette geprüft.',
+    [
+      { if: 'Fortschreibungs- und Inventurmethode verglichen werden', then: 'Buchungsweg und Ergebniswirkung getrennt erklären.' },
+      { if: 'Unfertige/fertige Erzeugnisse auftauchen', then: 'Bestandsveränderung als Erfolgsbrücke zur GuV hervorheben.' }
     ]
   ),
   umlauf_waren_ust: mk(
@@ -64,22 +82,40 @@ export const INTUITION = {
       { if: 'Umsatzsteuer auftaucht', then: 'Steuer nie mit eigenem Ertrag verwechseln.' }
     ]
   ),
-  eigenkapital: mk(
-    'Eigenkapital ist kein einheitlicher Block, sondern folgt je nach Rechtsform einer anderen Abschlusslogik.',
-    'Bei der OHG ist das Eigenkapital eher ein bewegliches Kapitalkonto-System, bei der AG stärker formalisiert und rechtlich gebunden.',
-    'Darum musst du in Aufgaben immer zuerst die Gesellschaftsform klären, bevor du Buchungen oder Gewinnverwendung einordnest.',
+  eigenkapital_kapitalgesellschaften: mk(
+    'Eigenkapital in Kapitalgesellschaften ist formal gegliedert und eng mit Rücklagen- und Gewinnverwendungslogik verknüpft.',
+    'Wie bei einer festen Schubladenordnung hat jeder Eigenkapitalbestandteil einen klaren Platz und eine spezifische Funktion.',
+    'Darum steht in Aufgaben zur AG/GmbH die Ausweis- und Verwendungslogik im Vordergrund.',
     [
-      { if: 'Kapitalkonten gefragt sind', then: 'Zwischen Personen- und Kapitalgesellschaft unterscheiden.' },
-      { if: 'Gewinnverwendung auftaucht', then: 'Rechtsformbedingte Eigenkapitalstruktur mitdenken.' }
+      { if: 'Gewinnverwendung auftaucht', then: 'Jahresüberschuss, Rücklagen und Ausweisfolge sauber trennen.' },
+      { if: 'Eigenkapitalgliederung gefragt ist', then: 'Gezeichnetes Kapital, Rücklagen und Ergebnispositionen systematisch aufbauen.' }
     ]
   ),
-  fremdkapital: mk(
-    'Fremdkapital ist die Außenseite der Finanzierung und verlangt saubere Trennung zwischen sicheren Schulden und ungewissen Verpflichtungen.',
-    'Eine Verbindlichkeit ist wie eine feste Rechnung mit bekanntem Adressaten und Betrag; eine Rückstellung eher wie eine erwartete, aber noch unscharfe Verpflichtung.',
-    'Diese Unsicherheit ist der Kern fast jeder Klausur zu Rückstellungen.',
+  eigenkapital_personengesellschaften: mk(
+    'Eigenkapital in Personengesellschaften ist gesellschafterbezogen und kontenorientiert geführt.',
+    'Wie getrennte Kontenhefte für jeden Gesellschafter werden Einlagen, Entnahmen und Gewinnanteile individuell nachverfolgt.',
+    'Darum sind Kapitalkonten und Privatkonten der methodische Startpunkt bei Personengesellschaftsfällen.',
+    [
+      { if: 'Entnahmen oder Einlagen genannt werden', then: 'Zuerst Privatkonto-Logik anwenden, dann Abschluss auf Kapitalkonto.' },
+      { if: 'Gewinnverteilung gefragt ist', then: 'Zuweisung auf Gesellschafterkonten ausdrücklich darstellen.' }
+    ]
+  ),
+  verbindlichkeiten: mk(
+    'Verbindlichkeiten sind sichere Schulden mit klarer Verpflichtungsstruktur.',
+    'Wie eine feststehende Rechnung sind Betrag und Verpflichtungslage ausreichend bestimmt.',
+    'Deshalb ist in Klausuren zuerst die sichere Schuldqualität zu prüfen, bevor bewertet wird.',
     [
       { if: 'Höhe und Fälligkeit sicher feststehen', then: 'Verbindlichkeit liegt nahe.' },
-      { if: 'Nur Ursache und Wahrscheinlichkeit feststehen', then: 'An Rückstellung denken.' }
+      { if: 'Unsicherheitsargumente dominieren', then: 'Abgrenzung zur Rückstellung explizit aufmachen.' }
+    ]
+  ),
+  rueckstellungen: mk(
+    'Rückstellungen erfassen ungewisse, aber wirtschaftlich bereits verursachte Verpflichtungen.',
+    'Wie ein erwarteter, aber noch nicht exakt bezifferbarer Aufwand brauchen sie eine begründete kaufmännische Schätzung.',
+    'Deshalb stehen bei Rückstellungen Unsicherheitsgrad, Schätzung und Folgebehandlung im Zentrum.',
+    [
+      { if: 'Verpflichtung wahrscheinlich, aber Betrag offen', then: 'Rückstellung statt Verbindlichkeit prüfen.' },
+      { if: 'Folgejahr weicht von Schätzung ab', then: 'Inanspruchnahme, Auflösung oder Nachbelastung sauber buchen.' }
     ]
   ),
   rechnungsabgrenzung: mk(

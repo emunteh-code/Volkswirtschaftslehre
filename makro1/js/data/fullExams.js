@@ -34,7 +34,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 27,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch und begründen Sie kurz.',
         groups: [
@@ -48,6 +48,14 @@ export const FULL_EXAMS = {
               { id: 'm1_pk1_5', text: 'Wenn Einkommen steigt, sinkt bei unveränderter Geldmenge der Gleichgewichtszins im Geldmarkt.', correct: 'Falsch', feedback: 'Höheres Einkommen erhöht die Geldnachfrage; bei unverändertem Angebot muss der Zins steigen.' },
               { id: 'm1_pk1_6', text: 'Steigt der Anleihenpreis, steigt in derselben Richtung auch der Zins.', correct: 'Falsch', feedback: 'Anleihenpreis und Zins bewegen sich gegensinnig.' }
             ]
+          },
+          {
+            context: 'Geldmarkt, Zins und Erwartungen (Transferfallen)',
+            questions: [
+              { id: 'm1_pk1_7', text: 'Bei horizontaler Zinsregel verschiebt expansive Geldpolitik die IS-Kurve nach rechts.', correct: 'Falsch', feedback: 'Geldpolitik wirkt über die Zinsbedingung (LM bzw. Zinsregel), nicht über eine Verschiebung der IS-Kurve.' },
+              { id: 'm1_pk1_8', text: 'Bleibt der Nominalzins konstant und steigen die Inflationserwartungen, steigt ceteris paribus der Realzins.', correct: 'Falsch', feedback: 'Mit $r \\approx i - \\pi^e$ senkt höheres $\\pi^e$ bei gegebenem $i$ den Realzins.' },
+              { id: 'm1_pk1_9', text: 'Eine höhere marginale Konsumneigung aus verfügbarem Einkommen erhöht im Keynes-Kreuz den Betrag des Staatsausgabenmultiplikators.', correct: 'Wahr', feedback: 'Der Multiplikator hängt von $c_1$ ab; größeres $c_1$ vergrößert $1/(1-c_1)$.' }
+            ]
           }
         ]
       },
@@ -59,7 +67,7 @@ export const FULL_EXAMS = {
         [
           textQuestion(
             'm1_pk1_2a',
-            8,
+            6,
             'Stelle die Güternachfrage auf und berechne die Gleichgewichtsproduktion.',
             ['1700', '1700.0'],
             solutionBlock(
@@ -76,7 +84,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk1_2b',
-            7,
+            6,
             'Wie groß ist der Staatsausgabenmultiplikator? Welche Produktionsänderung ergibt sich bei ΔG = 40?',
             ['4', '160', '4 und 160', '4, 160'],
             solutionBlock(
@@ -93,7 +101,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk1_2c',
-            7,
+            5,
             'Erkläre in einem Satz, warum eine gleich hohe Steuersenkung schwächer wirkt als der Anstieg von G.',
             ['weil nur ein teil konsumiert wird', 'weil der zusätzliche einkommenseffekt nur mit c1 in den konsum eingeht', 'teuermultiplikator kleiner'],
             solutionBlock(
@@ -101,6 +109,22 @@ export const FULL_EXAMS = {
               [
                 'Staatsausgaben gehen unmittelbar eins zu eins in die Nachfrage ein.',
                 'Eine Steuersenkung erhöht zunächst nur das verfügbare Einkommen; konsumiert wird davon nur der Anteil c1.'
+              ]
+            )
+          ),
+          textQuestion(
+            'm1_pk1_2d',
+            5,
+            String.raw`Ausgangspunkt bleibt das Gleichgewicht aus (a). Wie ändert sich $Y$, wenn die Steuern um $\Delta T = -20$ gesenkt werden und $G$ sowie $I$ unverändert bleiben?`,
+            ['60', '60.0', '+60'],
+            solutionBlock(
+              'Steuermultiplikator als Transfervariante',
+              [
+                'Die Steuer wirkt mit Verzögerung über das verfügbare Einkommen; der Steuermultiplikator ist $-c_1/(1-c_1)$.',
+                'Eine Steuersenkung ($\\Delta T<0$) wirkt expansiv.'
+              ],
+              [
+                String.raw`$$\Delta Y = -\frac{c_1}{1-c_1}\,\Delta T = -\frac{0{,}75}{0{,}25}\cdot(-20) = 3\cdot 20 = 60.$$`
               ]
             )
           )

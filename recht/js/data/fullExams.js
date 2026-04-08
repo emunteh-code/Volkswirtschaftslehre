@@ -33,7 +33,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 24,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch.',
         groups: [
@@ -45,7 +45,9 @@ export const FULL_EXAMS = {
               { id: 're_pk1_3', text: 'Schweigen ist im allgemeinen Privatrecht grundsätzlich eine Annahme.', correct: 'Falsch', feedback: 'Schweigen gilt grundsätzlich nicht als Willenserklärung.' },
               { id: 're_pk1_4', text: 'Dissens und Anfechtung sind identisch, weil in beiden Fällen kein wirksamer Vertrag bleibt.', correct: 'Falsch', feedback: 'Dissens betrifft fehlende Einigung, Anfechtung beseitigt ein zunächst wirksames Geschäft.' },
               { id: 're_pk1_5', text: 'Ein Erklärungsirrtum kann ein Anfechtungsgrund sein.', correct: 'Wahr', feedback: '§ 119 Abs. 1 Alt. 2 BGB ist gerade darauf zugeschnitten.' },
-              { id: 're_pk1_6', text: 'Das bloße innere Einverständnis genügt für eine Annahme.', correct: 'Falsch', feedback: 'Es fehlt die nach außen gerichtete Kundgabe.' }
+              { id: 're_pk1_6', text: 'Das bloße innere Einverständnis genügt für eine Annahme.', correct: 'Falsch', feedback: 'Es fehlt die nach außen gerichtete Kundgabe.' },
+              { id: 're_pk1_7', text: 'Die Obersätze im Gutachten dürfen vage bleiben, wenn die Definitionen präzise sind.', correct: 'Falsch', feedback: 'Obersätze müssen die angekündigte Prüfungsstruktur klar widerspiegeln; Präzision gehört in alle Schichten.' },
+              { id: 're_pk1_8', text: 'Wer im Gutachten das Ergebnis vor der Prüfung der letzten Tatbestandsmerkmale nennt, macht sich methodisch angreifbar.', correct: 'Wahr', feedback: 'Das Ergebnis soll aus der Subsumtion folgen, nicht ihr vorgreifen.' }
             ]
           }
         ]
@@ -136,7 +138,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 24,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch.',
         groups: [
@@ -148,7 +150,9 @@ export const FULL_EXAMS = {
               { id: 're_pk2_3', text: 'Bei der Stellvertretung werden die Rechtsfolgen grundsätzlich dem Vertreter zugerechnet.', correct: 'Falsch', feedback: 'Sie treffen bei wirksamer Vertretung den Vertretenen.' },
               { id: 're_pk2_4', text: 'Ohne Vertretungsmacht ist ein Geschäft regelmäßig schwebend unwirksam.', correct: 'Wahr', feedback: 'Es hängt dann von der Genehmigung ab.' },
               { id: 're_pk2_5', text: 'AGB werden unabhängig von ihrer Einbeziehung inhaltlich kontrolliert.', correct: 'Falsch', feedback: 'Die Einbeziehung ist die vorgelagerte Prüfungsstufe.' },
-              { id: 're_pk2_6', text: 'Überraschende Klauseln können schon vor der eigentlichen Inhaltskontrolle ausscheiden.', correct: 'Wahr', feedback: '§ 305c BGB greift auf dieser Stufe ein.' }
+              { id: 're_pk2_6', text: 'Überraschende Klauseln können schon vor der eigentlichen Inhaltskontrolle ausscheiden.', correct: 'Wahr', feedback: '§ 305c BGB greift auf dieser Stufe ein.' },
+              { id: 're_pk2_7', text: 'Ein Geschäft ohne Vertretungsmacht ist von vornherein unwirksam und kann nicht mehr wirksam werden.', correct: 'Falsch', feedback: 'Regelmäßig liegt Schwebende Unwirksamkeit vor; Genehmigung kann wirksam machen.' },
+              { id: 're_pk2_8', text: 'Wer im Namen eines anderen handelt, muss dem Vertragspartner erkennbar machen, für wen er rechtlich handelt.', correct: 'Wahr', feedback: 'Offenkundigkeit des Vertretungsverhältnisses ist prüfungsstandardsmäßig zentral.' }
             ]
           }
         ]
@@ -237,7 +241,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 24,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch.',
         groups: [
@@ -249,7 +253,9 @@ export const FULL_EXAMS = {
               { id: 're_pk3_3', text: 'Nebenpflichtverletzungen können ebenfalls Schadensersatz auslösen.', correct: 'Wahr', feedback: 'Nicht nur Hauptleistungspflichten sind relevant.' },
               { id: 're_pk3_4', text: 'Rücktritt und Widerruf beruhen auf demselben Normzweck.', correct: 'Falsch', feedback: 'Rücktritt reagiert auf Leistungsstörung, Widerruf auf Verbraucherschutz.' },
               { id: 're_pk3_5', text: 'Ein Verbraucherwiderruf braucht keine Pflichtverletzung des Unternehmers.', correct: 'Wahr', feedback: 'Er ist ein eigenständiges Gestaltungsrecht.' },
-              { id: 're_pk3_6', text: 'Rücktritt ist typischerweise ein Lösungsrecht wegen Vertragsstörung.', correct: 'Wahr', feedback: 'Genau das ist sein Kern.' }
+              { id: 're_pk3_6', text: 'Rücktritt ist typischerweise ein Lösungsrecht wegen Vertragsstörung.', correct: 'Wahr', feedback: 'Genau das ist sein Kern.' },
+              { id: 're_pk3_7', text: 'Der Verbraucher kann den Widerruf nur ausüben, wenn der Unternehmer mangelhaft geleistet hat.', correct: 'Falsch', feedback: 'Widerruf ist ein eigenständiges Fernabsatz-/Verbraucherschutzinstrument und knüpft nicht zwingend an Mängel.' },
+              { id: 're_pk3_8', text: 'Neben Rücktritt wegen Pflichtverletzung kann unter weiteren Voraussetzungen auch Schadensersatz in Betracht kommen.', correct: 'Wahr', feedback: 'Je nach Fallkette sind mehrere Ansprüche parallel oder nacheinander zu prüfen.' }
             ]
           }
         ]

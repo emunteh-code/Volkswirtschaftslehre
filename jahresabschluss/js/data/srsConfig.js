@@ -10,6 +10,9 @@ export const STREAK_KEY     = 'ja_streak_v1';
 export const THEME_KEY      = 'ja_theme_v1';
 export const QUESTION_STATS_KEY = 'ja_question_stats_v1';
 export const FE_STATE_KEY   = 'ja_fe_state_v1';
+export const ATTEMPTS_KEY   = 'ja_attempts_v1';
+export const MISTAKES_KEY   = 'ja_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'ja_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

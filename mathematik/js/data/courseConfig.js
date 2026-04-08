@@ -1,6 +1,7 @@
 export const COURSE_CONFIG = {
   courseLabel: 'Mathematik',
   courseTitle: 'Mathematik für Wirtschaftswissenschaftler',
+  examCollectionTitle: 'Übungsklausuren (Simulationen)',
   homeIntro: 'Die mathematischen Grundlagen der Ökonomie: Analysis, Lineare Algebra und Optimierung.',
   consentKey: 'mathematik_consent_v1',
   progressKey: 'mathematik_progress_v1',

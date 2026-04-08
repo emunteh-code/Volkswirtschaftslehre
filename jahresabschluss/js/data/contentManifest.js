@@ -23,10 +23,35 @@ import { FULL_EXAMS } from './fullExams.js';
 const MODULE_SLUG = 'jahresabschluss';
 
 /**
- * Source anchors are intentionally empty until stable course references are curated.
- * Do not fabricate accounting source paths.
+ * Primary chapter VL PDFs — paths relative to:
+ *   source-materials/Jahresabschluss/Jahresabschluss/
+ * Curated in docs/audits/jahresabschluss-provenance-curation-pass-1.md.
+ * No folio/slide anchors; Probeklausur not used as per-concept primary.
  */
-export const JAHRESABSCHLUSS_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+const JAHRESABSCHLUSS_PRIMARY_REFS_CURATED = {
+  rechnungswesen_intro: ['Orga+Kapitel1.pdf'],
+  gob_rechtsgrundlagen: ['Kapitel2.pdf', 'Tutorium/Tutorium_Kapitel2.pdf'],
+  inventur_inventar_bilanzansatz: ['Kapitel2.pdf'],
+  buchen_konten: ['Kapitel3.pdf'],
+  buchfuehrung_orga: ['Kapitel4.pdf'],
+  anlagevermoegen: ['Kapitel5.pdf'],
+  umlauf_bewertung_verfahren: ['Kapitel6.1-6.5.pdf'],
+  werkstoffe_erzeugnisse_buchungen: ['Kapitel6.1-6.5.pdf'],
+  umlauf_waren_ust: ['Kapitel6.6-6.7.pdf'],
+  eigenkapital_kapitalgesellschaften: ['Kapitel7.pdf'],
+  eigenkapital_personengesellschaften: ['Kapitel7.pdf'],
+  verbindlichkeiten: ['Kapitel8.pdf'],
+  rueckstellungen: ['Kapitel8.pdf'],
+  rechnungsabgrenzung: ['Kapitel9.pdf'],
+  erfolgsrechnung: ['Kapitel10.pdf']
+};
+
+export const JAHRESABSCHLUSS_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [
+    id,
+    JAHRESABSCHLUSS_PRIMARY_REFS_CURATED[id] ? [...JAHRESABSCHLUSS_PRIMARY_REFS_CURATED[id]] : []
+  ])
+);
 
 const NOTES_THEORY =
   'Accounting content is source-distilled and authored around Bilanz/GuV logic, booking flows, and periodization.';

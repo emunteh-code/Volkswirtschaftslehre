@@ -137,12 +137,22 @@ function buildConfig(block, options = {}) {
   const blockId = options.blockId || block.id || `rblock_${Math.random().toString(36).slice(2, 8)}`;
   const runtimeMode = detectRuntimeMode(block);
 
+  let purpose = block.purpose || '';
+  if (moduleSlug === 'statistik') {
+    const oekHint = 'Gleiche Arbeitsreihenfolge wie im Ökonometrie-Modul: Output lesen → Mini-Task → Code zuordnen.';
+    if (purpose && !/\bÖkonometrie\b/i.test(purpose)) {
+      purpose = `${oekHint} ${purpose}`;
+    } else if (!purpose) {
+      purpose = oekHint;
+    }
+  }
+
   return {
     moduleSlug,
     blockId,
     runtimeMode,
     title: block.title || 'Vom Modell zur Auswertung',
-    purpose: block.purpose || '',
+    purpose,
     script: block.script || '',
     starterCode: normalizeCode(block.starterCode || block.code || ''),
     interpretation: block.interpretation || block.output || '',
@@ -171,7 +181,7 @@ export function renderRPracticeMarkup(block, options = {}) {
   return `<div class="section-block r-application-block r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
 <div class="r-practice-head">
   <div class="r-practice-headline">
-    <span class="r-application-kicker">R-Anwendung</span>
+    <span class="r-application-kicker">R-Übung</span>
     <h3>${escapeHtml(config.title)}</h3>
   </div>
   <p class="r-practice-bridge">${escapeHtml(config.purpose)}</p>
@@ -328,7 +338,7 @@ function renderTabOrientationCard(config, index, total) {
   return `<div class="r-orient-card">
   <div class="r-orient-top">
     <div class="r-orient-head">
-      <div class="r-orient-kicker">R-Anwendung${indexLabel}</div>
+      <div class="r-orient-kicker">R-Übung${indexLabel}</div>
       <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
     </div>
     <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>

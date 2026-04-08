@@ -105,7 +105,9 @@ function getModuleSnapshot(module) {
   const total = state.chapterCount || 0;
   const seen = Object.keys(progress).length;
   const due = Object.values(srs).filter((entry) => entry && typeof entry.due === "number" && entry.due <= Date.now()).length;
-  const percent = total ? Math.round((seen / total) * 100) : 0;
+  // Cap so stale/extra progress keys cannot show >100% or overflow the bar (tiles + hero).
+  const seenForRatio = total > 0 ? Math.min(seen, total) : seen;
+  const percent = total ? Math.min(100, Math.round((seenForRatio / total) * 100)) : 0;
   return { seen, total, due, percent, started: seen > 0 };
 }
 

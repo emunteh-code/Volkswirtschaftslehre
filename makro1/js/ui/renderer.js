@@ -16,6 +16,7 @@ export const {
   renderContent,
   renderHome,
   toggleSolution,
+  toggleExamDrill,
   copyFormula,
   showDashboard,
   setRendererState,

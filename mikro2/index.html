@@ -25,7 +25,8 @@
       startup: { typeset: false }
     };
   </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+  <script id="MathJax-script" async crossorigin="anonymous"
+    src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -66,45 +67,57 @@
     </div>
 
     <div class="search-wrap">
-      <input class="search-input" id="navSearch" type="search" placeholder="Konzept suchen…" autocomplete="off">
+      <input
+        class="search-input"
+        id="navSearch"
+        type="search"
+        placeholder="Konzept suchen…"
+        aria-label="Konzepte durchsuchen"
+        autocomplete="off"
+        spellcheck="false"
+      >
     </div>
 
-    <div id="navList" role="list"></div>
+    <div id="navList" role="list" aria-label="Konzepte"></div>
 
-    <div class="sidebar-footer-btns">
-      <button class="sidebar-footer-btn" onclick="window.__showDashboard()">Dashboard</button>
-      <button class="sidebar-footer-btn" onclick="window.__startExam()">Schnelltest</button>
-      <button class="sidebar-footer-btn" onclick="window.__showSRSReview()">Wiederholen</button>
+    <div class="sidebar-footer-btns" role="group" aria-label="Lernwerkzeuge">
+      <div class="sidebar-footer-label">Werkzeuge</div>
+      <button class="sidebar-footer-btn" onclick="window.__showDashboard()" aria-label="Dashboard öffnen">Dashboard</button>
+      <button class="sidebar-footer-btn" onclick="window.__startExam()" aria-label="Schnelltest starten">Schnelltest</button>
+      <button class="sidebar-footer-btn" onclick="window.__showSRSReview()" aria-label="Wiederholungsrunde starten">Wiederholen</button>
     </div>
   </nav>
 
   <div id="main">
     <div id="topbar">
       <div id="topbar-main">
-        <div class="breadcrumb" id="breadcrumb">
-          <button class="breadcrumb-link" onclick="window.__renderHome()">Mikroökonomik II</button> / Startseite
+        <div class="breadcrumb" id="breadcrumb" aria-live="polite" role="navigation" aria-label="Breadcrumb">
+          <button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button>
         </div>
         <div id="topbar-actions">
-          <button class="focus-btn" onclick="window.__toggleFocus()">Fokus</button>
-          <button class="theme-btn" id="themeToggle" onclick="window.__toggleTheme()">Dunkel</button>
-          <button id="mobileMenuBtn" onclick="window.__toggleSidebar()">&#9776;</button>
+          <span id="streakBadge" class="streak-badge" style="display:none" aria-label="Lern-Streak">
+            <span id="streakCount">0</span>
+          </span>
+          <button class="focus-btn" onclick="window.__toggleFocus()" title="Fokus-Modus (F)" aria-label="Fokus-Modus umschalten">Fokus</button>
+          <button class="theme-btn" id="themeToggle" onclick="window.__toggleTheme()" title="Hell/Dunkel umschalten (T)" aria-label="Farbschema wechseln">Dunkel</button>
+          <button id="mobileMenuBtn" onclick="window.__toggleSidebar()" title="Navigation" aria-label="Seitenleiste öffnen" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
         </div>
       </div>
-      <div class="tab-row" id="tabRow" role="tablist">
-        <button class="tab-btn active" data-tab="theorie" role="tab">Theorie</button>
-        <button class="tab-btn" data-tab="graph" role="tab" style="display:none">Grafik</button>
-        <button class="tab-btn" data-tab="aufgaben" role="tab">Aufgaben</button>
-        <button class="tab-btn" data-tab="formeln" role="tab">Formeln</button>
-        <button class="tab-btn" data-tab="intuition" role="tab">Intuition</button>
+      <div class="tab-row" id="tabRow" role="tablist" aria-label="Inhalt">
+        <button class="tab-btn active" data-tab="theorie" role="tab" aria-selected="true" tabindex="0">Theorie</button>
+        <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false" tabindex="0" style="display:none">Grafik</button>
+        <button class="tab-btn" data-tab="aufgaben" role="tab" aria-selected="false" tabindex="0">Aufgaben</button>
+        <button class="tab-btn" data-tab="formeln" role="tab" aria-selected="false" tabindex="0">Formeln</button>
+        <button class="tab-btn" data-tab="intuition" role="tab" aria-selected="false" tabindex="0">Intuition</button>
       </div>
     </div>
-    <div id="content" role="main" tabindex="-1"></div>
+    <div id="content" role="main" aria-live="polite" aria-label="Konzept-Inhalt" tabindex="-1"></div>
   </div>
 
-  <aside id="rightPanel">
+  <aside id="rightPanel" aria-label="Formeln und Verbindungen">
     <div class="rp-section">
       <h4>Formeln</h4>
-      <div id="rpFormulas"></div>
+      <div id="rpFormulas"><p style="font-size:12px;color:var(--muted)">Konzept auswählen…</p></div>
     </div>
     <div class="rp-section">
       <h4>Verbindungen</h4>
@@ -117,11 +130,41 @@
   </aside>
 </div>
 
-<div id="toastContainer"></div>
-<div id="sidebarOverlay"></div>
+<div id="shortcutHint" aria-hidden="true">
+  <span class="sc-item"><kbd class="sc-key">&#8592;</kbd><kbd class="sc-key">&#8594;</kbd> Navigation</span>
+  <span class="sc-item"><kbd class="sc-key">F</kbd> Fokus</span>
+  <span class="sc-item"><kbd class="sc-key">Enter</kbd> Lösung</span>
+</div>
+
+<div id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+<div id="sidebarOverlay" aria-hidden="true"></div>
 
 <script type="module" src="js/main.js"></script>
 <script type="module" src="js/portalHub.js"></script>
+
+<script>
+  window.__jsLoaded = false;
+  window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      if (!window.__jsLoaded) {
+        var el = document.getElementById('jsError');
+        if (el) el.style.display = 'flex';
+      }
+    }, 2500);
+  });
+</script>
+<div id="jsError" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#16181c;border:1px solid #ff6b6b;border-radius:12px;padding:32px;max-width:500px;text-align:center;font-family:monospace;">
+    <p style="color:#ff6b6b;font-size:18px;margin-bottom:12px;">&#9888; JavaScript-Module konnten nicht geladen werden</p>
+    <p style="color:#7a7f8e;font-size:13px;margin-bottom:20px;">Diese Seite braucht eine lokale Vorschau oder einen kleinen Entwicklungsserver, damit die Module korrekt geladen werden.</p>
+    <p style="color:#e8eaf0;font-size:13px;margin-bottom:8px;"><strong>So starten:</strong></p>
+    <ol style="color:#7a7f8e;font-size:13px;text-align:left;margin-bottom:20px;line-height:1.8;">
+      <li>Projektordner in einer lokalen Vorschau oder Entwicklungsumgebung starten</li>
+      <li>Alternativ im Projektordner ausfuehren: <code style="color:#4a90d9">python3 -m http.server 8080</code></li>
+      <li>Dann im Browser oeffnen: <code style="color:#4a90d9">http://localhost:8080</code></li>
+    </ol>
+  </div>
+</div>
 
 </body>
 </html>

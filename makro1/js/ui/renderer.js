@@ -43,5 +43,7 @@ export const {
   extraHomeActionCardsHtml: `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startConceptSchnelltest()">
 <div class="hac-title">Konzept-Check</div>
 <div class="hac-desc">5 Minuten, typische Denkfallen</div>
-</div>`
+</div>`,
+  homeLernDashboardPilotNote:
+    "Pilot: Kennzahlen aus Protokoll im Dashboard (Kasten „Kennzahlen aus dem Lernprotokoll“)."
 });

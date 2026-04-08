@@ -6,9 +6,11 @@ Shared **selector/derivation** layer over learner backbone attempts, mistake log
 
 | Path | Role |
 |------|------|
-| `assets/js/portal-core/data/dashboardDerivedMetrics.js` | Pure selectors + `buildDashboardDerivedMetricsSnapshot`, `formatDashboardDerivedMetricsLines` |
-| `makro1/js/features/dashboard.js` | Minimal text block (pilot UI) |
-| `makro1/css/styles.css` | `.dash-derived-*` spacing/typography only |
+| `assets/js/portal-core/data/dashboardDerivedMetrics.js` | Pure selectors + `buildDashboardDerivedMetricsSnapshot`, `buildHonestDashboardPilotHtml`, `formatDashboardDerivedMetricsLines` (legacy list) |
+| `makro1/js/features/dashboard.js` | Inserts `buildHonestDashboardPilotHtml` (structured pilot panel) |
+| `makro1/css/styles.css` | `.dash-honest-pilot` / `.dhp-*`, `.hac-pilot-note` |
+| `assets/js/portal-core/ui/renderer.js` | Optional `homeLernDashboardPilotNote` under Lern-Dashboard card |
+| `makro1/js/ui/renderer.js` | Sets `homeLernDashboardPilotNote` (makro1-only home hint) |
 
 ## Derived metrics (exact)
 

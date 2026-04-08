@@ -18,7 +18,9 @@ export function createRenderer({
   hasRBlock = () => false,
   renderRAnwendungPanel = null,
   /** Raw HTML inserted inside the home action row (optional; e.g. Konzept-Check card) */
-  extraHomeActionCardsHtml = ''
+  extraHomeActionCardsHtml = '',
+  /** Optional one-line note under the Lern-Dashboard home card (pilot modules only) */
+  homeLernDashboardPilotNote = ''
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -735,10 +737,18 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
 </div>
 </div>`;
 
+    const pilotDashNote = homeLernDashboardPilotNote
+      ? String(homeLernDashboardPilotNote)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+      : "";
+
     html += `<div class="home-action-row">
 <div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showDashboard()">
 <div class="hac-title">Lern-Dashboard</div>
 <div class="hac-desc">Fortschritt, schwache Bereiche, Wiederholungen</div>
+${pilotDashNote ? `<p class="hac-pilot-note">${pilotDashNote}</p>` : ""}
 </div>
 <div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startExam()">
 <div class="hac-title">Schnelltest</div>

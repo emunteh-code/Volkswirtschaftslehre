@@ -8,7 +8,8 @@ import {
   FE_STATE_KEY,
   LAST_KEY,
   ATTEMPTS_KEY,
-  MISTAKES_KEY
+  MISTAKES_KEY,
+  MISTAKE_REVIEW_KEY
 } from '../data/srsConfig.js';
 
 export const {
@@ -44,6 +45,7 @@ export const {
     FE_STATE_KEY,
     LAST_KEY,
     ATTEMPTS_KEY,
-    MISTAKES_KEY
+    MISTAKES_KEY,
+    extraKeys: [MISTAKE_REVIEW_KEY]
   }
 });

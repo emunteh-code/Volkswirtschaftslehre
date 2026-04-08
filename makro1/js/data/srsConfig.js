@@ -13,6 +13,8 @@ export const FE_STATE_KEY   = 'makro1_fe_state_v1';
 /** Learner backbone (attempt log + mistake log); optional until exam/drill hooks write here */
 export const ATTEMPTS_KEY   = 'makro1_attempts_v1';
 export const MISTAKES_KEY   = 'makro1_mistakes_v1';
+/** Local „erledigt“ marks for mistake review (not scoring) */
+export const MISTAKE_REVIEW_KEY = 'makro1_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

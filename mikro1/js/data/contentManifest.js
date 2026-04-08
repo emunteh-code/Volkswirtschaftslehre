@@ -25,6 +25,8 @@ const MODULE_SLUG = 'mikro1';
 /**
  * Keep references empty until curated course anchors are attached.
  * Do not invent source paths in benchmark module metadata.
+ * Source-curation pass 2 confirmed: no stable in-repo concept->course-source
+ * path map currently exists for mikro1 (no module-content mapping entry).
  */
 export const MIKRO1_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
 

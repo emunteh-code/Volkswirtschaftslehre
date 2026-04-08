@@ -8,7 +8,7 @@ import { INTUITION } from './intuition.js';
 import { ensureMinimumStepProblems } from '../../../assets/js/portal-core/data/examStepFactory.js';
 
 const BASE_STEP_PROBLEMS = {
-  spieltheorie: [
+  spieltheorie_statisch: [
     {
       title: 'Nash-Gleichgewicht in reinen Strategien',
       context: 'Zwei Firmen A und B entscheiden über hohe (H) oder niedrige (N) Preise.',
@@ -37,7 +37,29 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  oligopol: [
+  spieltheorie_dynamisch: [
+    {
+      title: 'Gemischte Strategien: Indifferenzprinzip',
+      context: '2x2-Spiel ohne reines Nash-Gleichgewicht.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welches Prinzip bestimmt die Mischwahrscheinlichkeit im 2x2-Fall?',
+          answer: ['Indifferenz', 'indifferenzbedingung', 'gegner indifferent machen'],
+          options: { problemId: 'm2_mix_1', stepId: 'mix_principle', isDecision: true },
+          hint: 'Die Gegenseite darf keine strikt bessere reine Strategie haben.',
+          explain: 'Im gemischten NG wird so gemischt, dass der Gegner zwischen seinen reinen Strategien indifferent ist.'
+        },
+        {
+          q: '[2. Decision] Wenn der kurzfristige Abweichungsgewinn hoch ist und der Diskontfaktor sehr niedrig: stabile Kooperation in Wiederholung eher ja/nein?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'm2_mix_1', stepId: 'delta_logic', dependsOn: 'mix_principle' },
+          hint: 'Niedriger Zukunftswert schwaecht Sanktionsdrohung.',
+          explain: 'Bei niedrigem Diskontfaktor ueberwiegt oft der kurzfristige Defektionsanreiz.'
+        }
+      ]
+    }
+  ],
+  oligopol_cournot_bertrand: [
     {
       title: 'Cournot-Duopol: Reaktionsfunktion',
       context: 'Marktnachfrage P = 100 - Q. Grenzkosten c = 10.',
@@ -108,7 +130,29 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  information: [
+  oligopol_stackelberg: [
+    {
+      title: 'Stackelberg per Rueckwaertsinduktion',
+      context: 'Lineare Nachfrage, Firma 1 als Fuehrer, Firma 2 als Folger.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher Schritt kommt zuerst in der Loesung?',
+          answer: ['Reaktionsfunktion des Folgers', 'folgerreaktion', 'follower reaction'],
+          options: { problemId: 'm2_stack_1', stepId: 'first_step', isDecision: true },
+          hint: 'Rueckwaertsinduktion startet am Ende des Spiels.',
+          explain: 'Zuerst wird das Optimum des Folgers als Reaktionsfunktion bestimmt.'
+        },
+        {
+          q: '[2. Decision] Wird die Fuehrermenge typischerweise relativ zu Cournot hoeher oder niedriger?',
+          answer: ['hoeher', 'higher', 'mehr'],
+          options: { problemId: 'm2_stack_1', stepId: 'leader_quantity', dependsOn: 'first_step' },
+          hint: 'First-Mover internalisiert die Reaktion des Followers.',
+          explain: 'Im Standardmodell waehlt der Fuehrer eine hoehere Menge als im simultanen Cournot-Fall.'
+        }
+      ]
+    }
+  ],
+  information_adverse: [
     {
       title: 'Adverse Selection: Lemons Market',
       context: 'Gute Autos (v=5000), schlechte (v=2000). Anteil jeweils 50%.',
@@ -160,6 +204,28 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_info_2', role: 'VALIDATION' },
           hint: 'Typtrennung statt Verhaltenssteuerung.',
           explain: 'Adverse Selection wird über Typtrennung (Signaling/Screening) adressiert, Selbstbehalte zielen eher auf Moral Hazard.'
+        }
+      ]
+    }
+  ],
+  information_moralhazard: [
+    {
+      title: 'Moral Hazard und Instrumentenwahl',
+      context: 'Verhaltensproblem nach Vertragsschluss.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ex-post versteckte Handlung: Adverse Selection oder Moral Hazard?',
+          answer: ['Moral Hazard', 'moral', 'verhaltensrisiko'],
+          options: { problemId: 'm2_mh_1', stepId: 'problem_type', isDecision: true },
+          hint: 'Zeitpunkt nach Vertragsabschluss.',
+          explain: 'Verborgene Handlungen nach Vertragsabschluss sind Moral Hazard.'
+        },
+        {
+          q: '[2. Decision] Welches Instrument passt primaer: Selbstbehalt oder reines Zertifikat?',
+          answer: ['Selbstbehalt', 'bonus-malus', 'anreizvertrag'],
+          options: { problemId: 'm2_mh_1', stepId: 'instrument_pick', dependsOn: 'problem_type' },
+          hint: 'Das Instrument muss Verhalten beeinflussen.',
+          explain: 'Selbstbehalte, Bonus-Malus und leistungsabhaengige Vertraege steuern ex-post Verhalten.'
         }
       ]
     }

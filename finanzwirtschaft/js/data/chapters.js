@@ -235,6 +235,15 @@ export const CONTENT = {
           step('Konsequenz erläutern.', String.raw`\text{Nur dann kann Konsumwahl unabhängig von der Investitionswahl über den Markt nachgesteuert werden.}`)
         ],
         'Ohne vollkommene Kapitalmärkte beeinflussen Finanzierungskonditionen die Investitionsentscheidung selbst, und die Trennung zerfällt.'
+      ),
+      task(
+        'Zwei ausschließende Projekte: A hat höheren IZF, B höheren Kapitalwert bei gegebenem Kalkulationszins. Welches Projekt passt zur Vermögensmaximierung?',
+        [
+          step('Zielgröße zuerst festlegen.', String.raw`\text{Bei Ausschlussalternativen ist Vermögensmaximierung die Leitnorm.}`),
+          step('Konfliktregel anwenden.', String.raw`\text{Bei IZF-Kapitalwert-Konflikt entscheidet der höhere } K_0 \text{ am relevanten Vergleichszins.}`),
+          step('Ökonomisch einordnen.', String.raw`\text{Ein höherer Prozentwert kann trotzdem weniger absoluten Vermögenszuwachs erzeugen.}`)
+        ],
+        'Für Vermögensmaximierung wird das Projekt mit höherem Kapitalwert gewählt, auch wenn dessen IZF niedriger ist.'
       )
     ]
   },
@@ -278,6 +287,15 @@ export const CONTENT = {
           step('Äquivalenz festhalten.', String.raw`\text{Bei konsistenter Anwendung bleibt das Vorteilhaftigkeitsurteil identisch.}`)
         ],
         'Auf- und Abzinsung sind nur zwei Transformationsrichtungen derselben Zeitwertlogik.'
+      ),
+      task(
+        'Wie gehst du mit variablen Zinssätzen über mehrere Perioden klausursicher um?',
+        [
+          step('Periodenschnitt explizit machen.', String.raw`\text{Jede Teilperiode erhält ihren eigenen Auf-/Abzinsungsfaktor.}`),
+          step('Produkt statt Einheitsfaktor nutzen.', String.raw`\text{Bei wechselnden Sätzen wird mit } \prod_t (1+i_t) \text{ transformiert, nicht mit einem pauschalen } (1+i)^n.`),
+          step('Signlogik prüfen.', String.raw`\text{Vor dem Rechnen klären: Wird auf den Zielzeitpunkt hin aufgezinst oder von ihm weg abgezinst?}`)
+        ],
+        'Variable Zinssätze erfordern periodenscharfe Faktorlogik; pauschale Exponenten führen hier systematisch zu Fehlurteilen.'
       )
     ]
   },
@@ -364,6 +382,15 @@ export const CONTENT = {
           step('Strukturinformation ergänzen.', String.raw`\text{Sie macht mögliche Mehrdeutigkeiten oder flache Wertprofile sichtbar.}`)
         ],
         'Die Kapitalwertfunktion zeigt den ganzen Zusammenhang zwischen Zinssatz und Projektwert, nicht nur den Nullpunkt.'
+      ),
+      task(
+        'Warum ist „IZF > Kalkulationszins“ ein Einstiegstest und noch keine vollständige Projektentscheidung?',
+        [
+          step('Einstiegstest einordnen.', String.raw`\text{Die Regel liefert ein Ja/Nein zur Vorteilhaftigkeit eines einzelnen Projekts.}`),
+          step('Vergleichsproblem ergänzen.', String.raw`\text{Bei mehreren Projekten mit unterschiedlicher Größe/Laufzeit braucht man zusätzlich die Kapitalwert- und Profilinformation.}`),
+          step('Trade-off benennen.', String.raw`\text{Methodenselektion ist ein Strukturproblem: Prozenturteil vs. absoluter Vermögensbeitrag.}`)
+        ],
+        'Die IZF-Regel ist notwendig, aber bei Projektvergleichen ohne Kapitalwertprofil nicht hinreichend.'
       )
     ]
   },
@@ -448,6 +475,15 @@ export const CONTENT = {
           step('Risikoprofil ergänzen.', String.raw`\text{Sehr hohe Verlustrisiken oder starke Streuung können das Urteil verändern.}`)
         ],
         'Unter Unsicherheit muss der Erwartungswert gegen Verlustwahrscheinlichkeit und Risikoprofil gespiegelt werden.'
+      ),
+      task(
+        'Zwei Alternativen haben denselben Erwartungswert, aber unterschiedliche Verlustseite. Welche Zusatzprüfung ist klausurentscheidend?',
+        [
+          step('Mean-only-Falle benennen.', String.raw`\text{Gleicher } E(X) \text{ bedeutet nicht gleiches Risikoprofil.}`),
+          step('Downside prüfen.', String.raw`\text{Verlustwahrscheinlichkeit und Verlusthöhe in den schlechten Zuständen explizit vergleichen.}`),
+          step('Regel konsistent machen.', String.raw`\text{Entscheidung erst nach Abgleich von Erwartungswert und Risikotoleranz treffen.}`)
+        ],
+        'Bei gleichem Erwartungswert entscheidet oft die Verlustseite; deshalb muss downside risk explizit mitbewertet werden.'
       )
     ]
   },
@@ -534,6 +570,15 @@ export const CONTENT = {
           step('Effektivzins erklären.', String.raw`\text{Der Preis dieses Kredits kann auf das Jahr hochgerechnet sehr hoch sein.}`)
         ],
         'Skontoverzicht ist oft ein impliziter Kredit mit überraschend hohen effektiven Fremdkapitalkosten.'
+      ),
+      task(
+        'Warum ist bei Kapitalkosten immer die Verknüpfung „Formel -> Ergebnis -> Bedeutung“ zu prüfen?',
+        [
+          step('Formel korrekt anwenden.', String.raw`\text{Parameter wie } D_1, P_0, g \text{ oder Skontofristen müssen konsistent eingesetzt werden.}`),
+          step('Ergebnis wirtschaftlich lesen.', String.raw`\text{Die Zahl ist eine Mindestanforderung der Kapitalgeber, keine bloße Rechengröße.}`),
+          step('Entscheidungsbezug herstellen.', String.raw`\text{Erst im Vergleich mit Projekt- oder Finanzierungsertrag wird klar, ob Wert geschaffen wird.}`)
+        ],
+        'Kapitalkosten sind nur dann klausurrelevant verstanden, wenn Rechenergebnis und ökonomische Entscheidungslogik zusammengeführt werden.'
       )
     ]
   },

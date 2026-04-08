@@ -4,11 +4,14 @@
 // ============================================================
 
 export const CONCEPT_LINKS = {
-  spieltheorie:   { uses: [], usedBy: ['oligopol'] },
-  oligopol:       { uses: ['spieltheorie'], usedBy: [] },
+  spieltheorie_statisch:   { uses: [], usedBy: ['spieltheorie_dynamisch', 'oligopol_cournot_bertrand'] },
+  spieltheorie_dynamisch:  { uses: ['spieltheorie_statisch'], usedBy: [] },
+  oligopol_cournot_bertrand: { uses: ['spieltheorie_statisch'], usedBy: ['oligopol_stackelberg'] },
+  oligopol_stackelberg:    { uses: ['oligopol_cournot_bertrand'], usedBy: [] },
   gleichgewicht:  { uses: [], usedBy: ['wohlfahrt'] },
   wohlfahrt:      { uses: ['gleichgewicht'], usedBy: [] },
   externa:        { uses: [], usedBy: [] },
   public_goods:   { uses: [], usedBy: [] },
-  information:    { uses: [], usedBy: [] }
+  information_adverse: { uses: [], usedBy: ['information_moralhazard'] },
+  information_moralhazard: { uses: ['information_adverse'], usedBy: [] }
 };

@@ -111,6 +111,33 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Nein. Bei asymmetrischen Finanzierungskonditionen zerfällt die saubere Trennung von Investition und Konsum.'
         }
       ]
+    },
+    {
+      title: 'Methodenwahl bei Projektkonflikt',
+      context: 'Projekt A: höherer IZF, Projekt B: höherer Kapitalwert beim relevanten Kalkulationszins.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welches Kriterium steuert bei Ausschlussalternativen mit Ziel Vermögensmaximierung?',
+          answer: ['kapitalwert', 'npv', 'k0'],
+          options: { problemId: 'fw_kf_2', stepId: 'criterion', isDecision: true },
+          hint: 'Gesucht ist die absolute Wertregel.',
+          explain: 'Bei Ausschlussalternativen dominiert das Kapitalwertkriterium, wenn Vermögensmaximierung das Ziel ist.'
+        },
+        {
+          q: '[2. Decision] Reicht „höherer IZF“ in diesem Konfliktfall als Entscheidungsbegründung?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_kf_2', stepId: 'no', dependsOn: 'criterion' },
+          hint: 'Prozentvergleich kann Skaleneffekte verdecken.',
+          explain: 'Nein. Ein höherer IZF kann mit einem niedrigeren absoluten Vermögensbeitrag einhergehen.'
+        },
+        {
+          q: '[3. Validation] Was muss zusätzlich zum Kriterium im Lösungssatz genannt werden?',
+          answer: ['kalkulationszins', 'vergleichszins', 'relevanter zinssatz'],
+          options: { problemId: 'fw_kf_2', role: 'VALIDATION' },
+          hint: 'Kapitalwert ist immer zinsabhängig.',
+          explain: 'Das Urteil muss auf den relevanten Kalkulationszins bezogen werden.'
+        }
+      ]
     }
   ],
   auf_abzinsen: [
@@ -131,6 +158,33 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'fw_aa_1', stepId: 'no', dependsOn: 'yes' },
           hint: 'Sie liegt bereits im Bewertungszeitpunkt.',
           explain: 'Nein. Zahlungen in t=0 gehen direkt in den Kapitalwert ein.'
+        }
+      ]
+    },
+    {
+      title: 'Sign- und Transformationslogik',
+      context: 'Zahlungen liegen vor und nach dem Bewertungszeitpunkt; Zinssätze ändern sich periodisch.',
+      steps: [
+        {
+          q: '[1. Interpretation] Wird bei variablen Zinssätzen mit einem einheitlichen Faktor (1+i)^n gearbeitet?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_aa_2', stepId: 'no', isDecision: true },
+          hint: 'Jede Periode hat ihren eigenen Preis des Zeittauschs.',
+          explain: 'Nein. Es wird periodenscharf mit dem Produkt der periodischen Faktoren gerechnet.'
+        },
+        {
+          q: '[2. Decision] Woran erkennst du vor der Rechnung die Richtung (auf- oder abzinsen)?',
+          answer: ['zielzeitpunkt', 'bewertungszeitpunkt', 'zeitachse'],
+          options: { problemId: 'fw_aa_2', stepId: 'direction', dependsOn: 'no' },
+          hint: 'Erst den Referenzpunkt fixieren, dann transformieren.',
+          explain: 'Die Richtung ergibt sich aus der Lage der Zahlung relativ zum Ziel-/Bewertungszeitpunkt auf der Zeitachse.'
+        },
+        {
+          q: '[3. Validation] Welcher typische Klausurfehler entsteht hier am häufigsten?',
+          answer: ['falsche richtung', 'doppelt abgezinst', 'doppelt aufgezinst'],
+          options: { problemId: 'fw_aa_2', role: 'VALIDATION' },
+          hint: 'Vorzeichen- bzw. Richtungsfehler.',
+          explain: 'Häufig werden Zahlungen in die falsche Richtung oder sogar doppelt transformiert.'
         }
       ]
     }
@@ -177,6 +231,33 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Nein. Dafür ist das Kapitalwertprofil zuständig.'
         }
       ]
+    },
+    {
+      title: 'IZF-Regel richtig einordnen',
+      context: 'Mehrere Projekte mit unterschiedlichen Laufzeiten und Zahlungsprofilen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ist „IZF > i“ ein vollständiger Vergleichsmaßstab zwischen mehreren Projekten?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_izf_2', stepId: 'no', isDecision: true },
+          hint: 'Das ist primär ein Vorteilhaftigkeitstest eines Einzelprojekts.',
+          explain: 'Nein. Für Projektvergleiche braucht man zusätzlich die Kapitalwertperspektive und das Profil.'
+        },
+        {
+          q: '[2. Decision] Welches Werkzeug zeigt die Zinssensitivität des Projektwerts über einen Bereich?',
+          answer: ['kapitalwertfunktion', 'kapitalwertprofil', 'npv-profil'],
+          options: { problemId: 'fw_izf_2', stepId: 'profile', dependsOn: 'no' },
+          hint: 'Gesucht ist mehr als ein einzelner Schwellenzins.',
+          explain: 'Die Kapitalwertfunktion zeigt den Verlauf des Werts in Abhängigkeit vom Zinssatz.'
+        },
+        {
+          q: '[3. Validation] Welche Falle adressiert dieses Vorgehen?',
+          answer: ['methodenselektion', 'prozentfalle', 'izf-falle'],
+          options: { problemId: 'fw_izf_2', role: 'VALIDATION' },
+          hint: 'Prozenturteil ohne Werturteil.',
+          explain: 'Es verhindert die Prozentfalle, bei der hohe IZF-Werte fälschlich mit höherem Vermögensbeitrag gleichgesetzt werden.'
+        }
+      ]
     }
   ],
   izf_grenzen: [
@@ -221,6 +302,33 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Danach werden Erwartungswert, Verlustwahrscheinlichkeit und Risikokorrekturen relevant.'
         }
       ]
+    },
+    {
+      title: 'Gleicher Erwartungswert, unterschiedliche Verlustseite',
+      context: 'Alternative A und B haben identischen Erwartungswert, aber verschiedenes Downside-Risiko.',
+      steps: [
+        {
+          q: '[1. Interpretation] Reicht bei gleichem E(X) der Erwartungswert allein für eine robuste Entscheidung?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_un_2', stepId: 'no', isDecision: true },
+          hint: 'Mittelwertgleichheit blendet Streuung aus.',
+          explain: 'Nein. Bei gleichem Erwartungswert müssen Verlustwahrscheinlichkeit und Verlusthöhe zusätzlich geprüft werden.'
+        },
+        {
+          q: '[2. Decision] Welche Zusatzdimension ist hier klausurkritisch?',
+          answer: ['verlustwahrscheinlichkeit', 'downside', 'streuung'],
+          options: { problemId: 'fw_un_2', stepId: 'risk', dependsOn: 'no' },
+          hint: 'Nicht nur upside betrachten.',
+          explain: 'Die Downside-Risikodimension entscheidet oft über die tatsächliche Präferenzordnung.'
+        },
+        {
+          q: '[3. Validation] Welcher typische Denkfehler wird damit vermieden?',
+          answer: ['mittelwertfalle', 'erwartungswertfalle', 'nur erwartungswert'],
+          options: { problemId: 'fw_un_2', role: 'VALIDATION' },
+          hint: 'Einzahl als Vollersatz der Risikostruktur.',
+          explain: 'Es vermeidet die Erwartungswertfalle, bei der unterschiedliche Risikoprofile ignoriert werden.'
+        }
+      ]
     }
   ],
   bezugsrecht: [
@@ -263,6 +371,33 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'fw_kk_1', stepId: 'no', dependsOn: 'yes' },
           hint: 'Denk an den impliziten Lieferantenkredit.',
           explain: 'Nein. Der Verzicht auf Skonto erzeugt oft hohe effektive Fremdkapitalkosten.'
+        }
+      ]
+    },
+    {
+      title: 'Formel -> Ergebnis -> Bedeutung',
+      context: 'Dividendenbarwert- und Skontokostenformel liefern konkrete Prozentwerte.',
+      steps: [
+        {
+          q: '[1. Interpretation] Sind Kapitalkosten bloße Rechenergebnisse ohne Entscheidungsbedeutung?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_kk_2', stepId: 'no', isDecision: true },
+          hint: 'Kapitalkosten sind Mindestverzinsungsanforderungen.',
+          explain: 'Nein. Sie sind ökonomische Hürdensätze und damit Entscheidungsgrößen.'
+        },
+        {
+          q: '[2. Decision] Welcher Prüfschritt folgt nach der Formelrechnung zwingend?',
+          answer: ['interpretation', 'vergleich mit projektrendite', 'bedeutung'],
+          options: { problemId: 'fw_kk_2', stepId: 'meaning', dependsOn: 'no' },
+          hint: 'Von der Zahl zur Entscheidung.',
+          explain: 'Nach der Berechnung muss geprüft werden, ob Projekt-/Finanzierungserträge die Kapitalkosten decken oder übertreffen.'
+        },
+        {
+          q: '[3. Validation] Welche Falle wird dadurch vermieden?',
+          answer: ['formelfalle', 'rechenfalle', 'zahl ohne bedeutung'],
+          options: { problemId: 'fw_kk_2', role: 'VALIDATION' },
+          hint: 'Eine richtige Zahl kann trotzdem falsch genutzt werden.',
+          explain: 'Es vermeidet die Formelfalle: korrekt rechnen, aber ökonomisch falsch entscheiden.'
         }
       ]
     }

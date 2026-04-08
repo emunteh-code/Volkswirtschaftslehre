@@ -169,6 +169,15 @@ export const CONTENT = {
           { text: `Standardabweichung:`, eq: String.raw`s = \sqrt{64{,}2} \approx 8{,}01` }
         ],
         result: String.raw`$\bar{x} = 18$, $s \approx 8{,}0$. Bei gruppierten Daten sind Mittelwert und Streuung Näherungswerte, da innerhalb einer Klasse nur die Klassenmitte bekannt ist.`
+      },
+      {
+        text: String.raw`Zwei Datensätze haben denselben Mittelwert $\bar{x}=50$: Datensatz A hat $s=5$, Datensatz B hat $s=20$. Ein dritter Datensatz C hat $\bar{x}=50$, aber einen starken Ausreißer. Welche Kombination aus Kennzahlen und kurzer Interpretation ist prüfungssicher?`,
+        steps: [
+          { text: `Gleiches Mittel heißt nicht gleiche Streuung oder gleiche Verteilungsform.`, eq: null },
+          { text: `A und B unterscheiden sich klar über die Standardabweichung; B ist deutlich heterogener.`, eq: null },
+          { text: `Bei Ausreißern muss der Median ergänzend berichtet werden, da er robuster als das Mittel ist.`, eq: null }
+        ],
+        result: String.raw`Prüfungssicher ist: Lage über Mittelwert/Median, Streuung über $s$ (oder IQR), plus kurzer Hinweis auf Ausreißerempfindlichkeit. "Gleicher Mittelwert" allein ist inhaltlich zu schwach.`
       }
     ]
   },
@@ -298,6 +307,15 @@ export const CONTENT = {
           { text: `Entscheidung: $p < \alpha = 0{,}05$.`, eq: String.raw`p < 0{,}05 \implies H_0 \text{ ablehnen (gerade noch signifikant)}` }
         ],
         result: String.raw`$p_{zweiseitig} < 0{,}05$: $H_0$ wird auf dem $5\%$-Niveau abgelehnt. Der p-Wert misst die Wahrscheinlichkeit, unter $H_0$ ein so extremes oder extremeres Ergebnis zu erhalten — er ist kein Maß für die Wahr­scheinlichkeit der Nullhypothese selbst.`
+      },
+      {
+        text: String.raw`Eine Studie fragt explizit: "Ist der neue Lernansatz besser?" Formulieren Sie die passende Alternativhypothese, nennen Sie den Testtyp (ein- oder zweiseitig) und erklären Sie die Hauptrisiken einer falschen Richtungsauswahl.`,
+        steps: [
+          { text: `Bei gerichteter Forschungsfrage "besser" ist die natürliche Alternative rechtsseitig:`, eq: String.raw`H_1:\mu_{\text{neu}} > \mu_{\text{alt}}` },
+          { text: `Ein zweiseitiger Test wäre konservativer, verteilt aber $\alpha$ auf beide Flanken.`, eq: null },
+          { text: `Wird die Richtung ex post angepasst, steigt das Fehlentscheidungsrisiko (p-Hacking/Alpha-Inflation).`, eq: null }
+        ],
+        result: String.raw`Die Testseite muss vor Datensichtung aus der Fragestellung folgen. Richtung nachträglich wählen ist methodisch unzulässig und verzerrt die Evidenz.`
       }
     ]
   },
@@ -704,6 +722,15 @@ export const CONTENT = {
           { text: `p-Wert: $P(|Z| > 0{,}894) \approx 2(1-0{,}814) = 0{,}372$.`, eq: String.raw`p \approx 0{,}37 \gg 0{,}05 \implies \text{kein signifikanter Trend}` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Die beobachtete durchschnittliche Tagesrendite von $0{,}3\%$ ist statistisch nicht von null verschieden — sie könnte rein zufällig entstanden sein. Bei $n = 20$ Tagen ist die Teststärke für kleine Effekte begrenzt.`
+      },
+      {
+        text: String.raw`Testauswahl-Fall: $\sigma$ ist unbekannt, $n=18$, die Daten wirken annähernd normal. Warum ist hier der t-Test die saubere Standardwahl und wann wird z als Approximation vertretbar?`,
+        steps: [
+          { text: `Bei unbekannter Populationsstreuung wird $\sigma$ durch $s$ ersetzt; die Teststatistik folgt dann t- statt z-Logik.`, eq: null },
+          { text: `Bei kleinem/mittlerem $n$ ist dieser Unterschied substanziell, da die t-Verteilung dickere Ränder hat.`, eq: null },
+          { text: `z-Approximation wird mit wachsendem $n$ vertretbar, weil sich t gegen z annähert.`, eq: String.raw`t_{\nu}\to z \text{ für } \nu\to\infty` }
+        ],
+        result: String.raw`Prüfungsregel: unbekanntes $\sigma$ $\Rightarrow$ t-Test als Default. z nur mit klarer Begründung (bekanntes $\sigma$ oder sehr großes $n$).`
       }
     ]
   },
@@ -771,6 +798,15 @@ export const CONTENT = {
           { text: `Entscheidung: $|t| = 1{,}209 < 2{,}048$.`, eq: String.raw`H_0: \mu_A = \mu_B \text{ nicht ablehnen bei } \alpha = 0{,}05` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Trotz der Differenz von $4$ Punkten ist der Unterschied statistisch nicht signifikant — die Streuung innerhalb der Kurse ist zu groß. Für einen machtstarken Test wäre ein größerer Stichprobenumfang nötig.`
+      },
+      {
+        text: String.raw`Testauswahl-Entscheidung: Vorher/Nachher-Messung bei denselben Personen, deutliche individuelle Baseline-Unterschiede. Welcher Test ist korrekt und warum ist ein unverbundener Test hier ein typischer Trap?`,
+        steps: [
+          { text: `Bei denselben Personen liegt eine Paarstruktur vor; analysiert werden Differenzen pro Person.`, eq: String.raw`d_i = x_{\text{vor},i} - x_{\text{nach},i}` },
+          { text: `Korrekt ist daher der verbundene t-Test auf $\bar d$.`, eq: String.raw`t = \frac{\bar d}{s_d/\sqrt{n}}` },
+          { text: `Ein unverbundener Test ignoriert die Paarinformation und bläht die Fehlervarianz.`, eq: null }
+        ],
+        result: String.raw`Der verbundene Test ist methodisch richtig und meist stärker. "Gleiche Personen, aber unverbundener Test" ist eine klassische Klausurfalle.`
       }
     ]
   },

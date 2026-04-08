@@ -262,6 +262,11 @@ export function createRenderer({
       const isActive = visible && tab === activeTab;
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-selected", isActive ? "true" : "false");
+      if (tab === "r-anwendung" && visible) {
+        button.textContent = "R-Übung";
+        button.title =
+          "R-Code aus der Vorlesung: zuerst Output lesen, dann Mini-Task — wie im Ökonometrie-Portal; hier ausführen, falls WebR aktiv ist.";
+      }
     });
   }
 
@@ -483,11 +488,11 @@ ${answerMarkup}
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active"><div class="section-block"><h3>Aufgaben</h3><p>Für dieses Konzept stehen Prüfungsfragen bereit. Sie verdichten Definition, Rechenweg, typische Fehler und Transferfragen in einer kompakten Übungsform.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Für dieses Konzept stehen Prüfungsfragen bereit. Sie verdichten Definition, Rechenweg, typische Fehler und Transferfragen in einer kompakten Übungsform.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
-      return '<div class="panel active"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
+      return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
-    let html = `<div class="panel active">
+    let html = `<div class="panel active mikro1-practice">
 <div class="section-block" style="margin-bottom:24px">
 <h3>Arbeitsmodus</h3>
 <p>Bearbeite zuerst die <strong>Geführten Aufgaben</strong> — sie führen Schritt für Schritt durch den Rechenweg und sichern das Grundverständnis. Danach prüfen die <strong>Prüfungstransfer-Fragen</strong>, ob du Theorie, Formeln und typische Fehler unter Klausurbedingungen abrufen kannst.</p>
@@ -559,8 +564,8 @@ ${step.eq ? `<div class="math-block">${step.eq}</div>` : ""}
       const varsHint =
         varsHtml ||
         (formula.desc
-          ? `<p class="f-var-hint" style="${varsHintMuted}">Variablen und Einheiten: siehe Beschreibung unter der Gleichung und den Theorie-Tab.</p>`
-          : `<p class="f-var-hint" style="${varsHintMuted}">Tipp: Ordne jedem Symbol im Term eine ökonomische oder statistische Bedeutung zu (Theorie-Tab).</p>`);
+          ? `<p class="f-var-hint" style="${varsHintMuted}">Variablen und Einheiten: in der Beschreibung unter der Gleichung; fehlt eine Größe explizit, ergänze sie aus dem Theorie-Tab oder der Vorlesungsnotation.</p>`
+          : `<p class="f-var-hint" style="${varsHintMuted}">Keine Variablenliste hinterlegt: benenne jedes Symbol im Term (Buchstabe, Index, Operator) und ordne es dem Theorie-Tab zu — in Klausuren zählt die saubere Legende.</p>`);
       html += `<div class="formula-card">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
@@ -595,6 +600,8 @@ ${varsHint}
     if (!hasMeaningfulIntuition(data) && !hasPortalIntuitionSurface(id)) {
       return '<div class="panel active"></div>';
     }
+
+    const chapter = chapters.find((entry) => entry.id === id);
 
     let html = '<div class="panel active">';
     if (hasMeaningfulText(data.core) || hasMeaningfulText(data.analogy)) {
@@ -632,15 +639,23 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
 </div>`;
     }
 
-    if (hasMeaningfulText(data.bridge) || deepSection) {
+    const showTransferpfad =
+      hasMeaningfulText(data.bridge) ||
+      Boolean(deepSection) ||
+      (data.exam && data.exam.length > 0);
+
+    if (showTransferpfad) {
+      const bridgeCopy = hasMeaningfulText(data.bridge)
+        ? data.bridge
+        : (chapter
+          ? `Verknüpfe „${chapter.title}“ mit Definition und Formalismus aus dem Theorie-Tab; die Klausurmuster oben helfen beim schnellen Erkennen typischer Trigger.`
+          : "Verknüpfe dieses Konzept mit Definition und Formalismus aus dem Theorie-Tab; die Klausurmuster oben helfen beim schnellen Erkennen typischer Trigger.");
       html += `<div class="section-block intuition-bridge">`;
-      if (hasMeaningfulText(data.bridge)) {
-        html += `<div class="intuition-bridge-head">
+      html += `<div class="intuition-bridge-head">
 <span class="intuition-bridge-kicker">Transferpfad</span>
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
-<p class="intuition-bridge-copy">${data.bridge}</p>
+<p class="intuition-bridge-copy">${bridgeCopy}</p>
 </div>`;
-      }
       if (deepSection) {
         html += `<div class="intuition-detail-list"><div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>

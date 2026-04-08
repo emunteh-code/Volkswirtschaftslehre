@@ -16,22 +16,22 @@
   --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Courier New',
                'Inconsolata', monospace;
 
-  /* Characteristic academic accent colours — kept prominently */
-  --accent:   #d4ff5c;   /* neon-lime — maths, active nav, key values */
-  --accent2:  #5cf0ff;   /* cyan      — links, interactive */
-  --accent3:  #ff6b6b;   /* coral-red — errors, warnings */
-  --accent-fg: #000000;  /* text on accent-coloured backgrounds */
+  /* Structural accent — aligned with Mikro I / portal shell (readability first) */
+  --accent:   #4a90d9;
+  --accent2:  #5a9fd4;
+  --accent3:  #e05252;
+  --accent-fg: #ffffff;
 
-  /* Apple system palette — dark mode */
-  --bg:        #000000;
-  --surface:   #1c1c1e;
-  --surface2:  #2c2c2e;
-  --surface3:  #3a3a3c;
-  --card:      #1c1c1e;
-  --border:    #38383a;
-  --text:      #f5f5f7;
-  --muted:     #8e8e93;
-  --sys-blue:  #0a84ff;
+  /* Neutral dark palette — aligned with Mikro I */
+  --bg:        #0f1114;
+  --surface:   #1a1d21;
+  --surface2:  #22262b;
+  --surface3:  #2e3338;
+  --card:      #1a1d21;
+  --border:    #2e3338;
+  --text:      #e8e8ed;
+  --muted:     #8a8f98;
+  --sys-blue:  #4a90d9;
   --sys-green: #32d74b;
   --sys-red:   #ff453a;
   --sys-orange:#ff9f0a;
@@ -75,10 +75,10 @@ body.light-mode {
   --sys-red:   #ff3b30;
   --sys-orange:#ff9500;
 
-  --accent:    #3a6b00;   /* deep olive-green: AA contrast on white */
-  --accent2:   #0066a0;   /* deep cyan-blue: AA contrast on white */
+  --accent:    #2c6fba;
+  --accent2:   #3a7ab8;
   --accent3:   #c0392b;
-  --accent-fg: #ffffff;   /* white text on dark-green button */
+  --accent-fg: #ffffff;
 
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05);
@@ -2292,7 +2292,7 @@ input:focus, .sStep-input:focus, .exam-input:focus, .search-input:focus {
 }
 
 /* Light mode nav active */
-body.light-mode .nav-item.active { background: rgba(58,107,0,0.10); }
+body.light-mode .nav-item.active { background: rgba(44, 111, 186, 0.10); }
 body.light-mode .section-block  { box-shadow: var(--shadow-sm); }
 body.light-mode .home-card:hover { box-shadow: var(--shadow-md); }
 body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }

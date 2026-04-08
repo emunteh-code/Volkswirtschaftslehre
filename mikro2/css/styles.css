@@ -29,16 +29,16 @@
   --content-shell-max: clamp(1120px, 88vw, 1540px);
   --content-body-max: clamp(980px, 82vw, 1240px);
 
-  /* Apple system palette — dark mode */
-  --bg:        #000000;
-  --surface:   #1c1c1e;
-  --surface2:  #2c2c2e;
-  --surface3:  #3a3a3c;
-  --card:      #1c1c1e;
-  --border:    #38383a;
-  --text:      #f5f5f7;
-  --muted:     #8e8e93;
-  --sys-blue:  #0a84ff;
+  /* Neutral dark palette — aligned with Mikro I shell */
+  --bg:        #0f1114;
+  --surface:   #1a1d21;
+  --surface2:  #22262b;
+  --surface3:  #2e3338;
+  --card:      #1a1d21;
+  --border:    #2e3338;
+  --text:      #e8e8ed;
+  --muted:     #8a8f98;
+  --sys-blue:  #4a90d9;
   --sys-green: #32d74b;
   --sys-red:   #ff453a;
   --sys-orange:#ff9f0a;
@@ -450,6 +450,15 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+.sidebar-footer-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 4px 12px 2px;
 }
 .sidebar-footer-btn {
   background: transparent;
@@ -1218,6 +1227,19 @@ button:active:not(:disabled) { transform: scale(0.98); }
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: var(--shadow-sm);
+}
+.graph-reading-hint {
+  margin-top: 14px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface3) 55%, transparent);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r-md) - 2px);
+}
+.graph-reading-hint strong {
+  color: var(--accent2);
 }
 .graph-controls {
   display: flex;

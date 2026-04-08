@@ -134,6 +134,15 @@ const BASE_STEP_PROBLEMS = {
         { q: '[2. Execution] In welchem Fall fällt der Outputzuwachs größer aus?', answer: ['horizontale zinsregel', 'zinsregel horizontal', 'flache lm'], options: { problemId: 'mk1_graph_policy', stepId: 'y_gain', dependsOn: 'i_jump' }, hint: 'Weniger Zinsanstieg = weniger Verdrängung.', explain: 'Unter horizontaler Zinsregel ist Crowding-Out schwächer, ΔY daher größer.' },
         { q: '[3. Validation] Ist "gleicher IS-Shift => gleiche Endwirkung" korrekt?', answer: ['nein', 'falsch'], options: { problemId: 'mk1_graph_policy', role: 'VALIDATION' }, hint: 'Vergleiche beide Endpunkte.', explain: 'Nein, die Endwirkung hängt von der monetären Kurvenform und damit von Δi ab.' }
       ]
+    },
+    {
+      title: 'ELB Policy-Feasibility',
+      context: 'Risikoprämie steigt stark; Zentralbank stößt bei i=0 an die effektive Zinsuntergrenze.',
+      steps: [
+        { q: '[1. Decision] Welche Größe begrenzt in diesem Szenario die zusätzliche geldpolitische Lockerung direkt?', answer: ['zinsuntergrenze', 'effective lower bound', 'elb', 'i=0'], options: { problemId: 'mk1_policy_elb_1', stepId: 'constraint', isDecision: true }, hint: 'Der Nominalzins kann nicht beliebig weiter sinken.', explain: 'An der ELB ist der Nominalzins als Instrument nach unten gebunden.' },
+        { q: '[2. Execution] Wenn π^e nahe 0 liegt und i bereits 0 ist: Kann der Realzins noch stark weiter gesenkt werden?', answer: ['nein', 'kaum', 'nur sehr begrenzt'], options: { problemId: 'mk1_policy_elb_1', dependsOn: 'constraint' }, hint: 'r ≈ i − π^e.', explain: 'Bei i=0 und niedriger erwarteter Inflation ist zusätzlicher Realzins-Spielraum klein.' },
+        { q: '[3. Validation] Welche Politikseite gewinnt in dieser Lage typischerweise an Bedeutung zur Stabilisierung?', answer: ['fiskalpolitik', 'fiskalischer impuls', 'staatliche nachfrage'], options: { problemId: 'mk1_policy_elb_1', role: 'VALIDATION' }, hint: 'Denke an Nachfragestützung, wenn Zinsinstrument limitiert ist.', explain: 'Wenn der geldpolitische Spielraum ausgereizt ist, wird fiskalische Stabilisierung relativ wichtiger.' }
+      ]
     }
   ],
   realzins: [
@@ -154,6 +163,15 @@ const BASE_STEP_PROBLEMS = {
         { q: '[1. Interpretation] Wie wirkt fallende erwartete Inflation auf den Realzins?', answer: ['realzins steigt', 'steigt'], options: { problemId: 'mk1_real_2', stepId: 'fisher', isDecision: true }, hint: 'r ≈ i − π^e.', explain: 'Sinkt π^e bei gegebenem i, steigt r.' },
         { q: '[2. Execution] Wie wirkt eine steigende Risikoprämie auf den Kreditzins?', answer: ['kreditzins steigt', 'steigt'], options: { problemId: 'mk1_real_2', dependsOn: 'fisher' }, hint: 'i_L = i + x.', explain: 'Ein höheres x erhöht direkt den Kreditzins.' },
         { q: '[3. Validation] Welche IS-Wirkung folgt aus beiden Effekten zusammen?', answer: ['is nach links', 'nach links', 'investitionen sinken'], options: { problemId: 'mk1_real_2', role: 'VALIDATION' }, hint: 'Höhere reale Finanzierungskosten bremsen Nachfrage.', explain: 'Beide Effekte dämpfen Investitionen und verschieben die IS-Kurve nach links.' }
+      ]
+    },
+    {
+      title: 'Krisentransmission über Spread',
+      context: 'Ein TED-ähnlicher Spread steigt sprunghaft bei unverändertem Leitzins.',
+      steps: [
+        { q: '[1. Decision] Was signalisiert der höhere Spread im erweiterten IS-LM zuerst?', answer: ['höhere risikoprämie', 'kreditaufschlag steigt', 'x steigt'], options: { problemId: 'mk1_real_3', stepId: 'spread_signal', isDecision: true }, hint: 'Denke an den Keil zwischen Leitzins und Kreditzins.', explain: 'Der Spreadanstieg wird als höherer Risiko-/Liquiditätsaufschlag im Kreditkanal gelesen.' },
+        { q: '[2. Execution] Wie reagiert bei gegebenem i der relevante Kreditzins i_L = i + x?', answer: ['er steigt', 'steigt'], options: { problemId: 'mk1_real_3', dependsOn: 'spread_signal' }, hint: 'x ist additiv auf dem Leitzins.', explain: 'Steigendes x erhöht den Kreditzins direkt.' },
+        { q: '[3. Validation] Welche Makro-Kette ist korrekt?', answer: ['kreditzins hoch investitionen runter is nach links', 'investitionen sinken is nach links', 'rezessionsdruck'], options: { problemId: 'mk1_real_3', role: 'VALIDATION' }, hint: 'Verbinde Finanzierungskosten mit Nachfrage.', explain: 'Höhere Kreditkosten senken Investitionen; die IS-Kurve verschiebt sich nach links und der Output gerät unter Druck.' }
       ]
     }
   ],
@@ -186,6 +204,15 @@ const BASE_STEP_PROBLEMS = {
         { q: '[1. Decision] Welche Lücke ist für die Inflationsdynamik entscheidend?', answer: ['u-u_n', 'arbeitslosenlücke', 'arbeitslosigkeitslücke'], options: { problemId: 'mk1_pc_2', stepId: 'gap_def', isDecision: true }, hint: 'Nicht u allein, sondern die Abweichung vom natürlichen Niveau.', explain: 'Die Phillips-Logik arbeitet mit der Lücke u-u_n.' },
         { q: '[2. Execution] Wenn u > u_n, was gilt für π_t − π_{t-1} (adaptive Erwartungen)?', answer: ['negativ', 'minus', 'inflation sinkt'], options: { problemId: 'mk1_pc_2', dependsOn: 'gap_def' }, hint: 'Minus α mal positive Lücke.', explain: 'Bei u>u_n fällt die Inflation relativ zur Vorperiode.' },
         { q: '[3. Validation] Warum ist die Aussage "u=6% bedeutet fallende Inflation" ohne u_n unvollständig?', answer: ['weil u_n fehlt', 'weil die lücke nicht bekannt ist', 'nairu fehlt'], options: { problemId: 'mk1_pc_2', role: 'VALIDATION' }, hint: '6% kann über oder unter u_n liegen.', explain: 'Ohne Referenz u_n ist die Richtung der Inflationsänderung nicht eindeutig.' }
+      ]
+    },
+    {
+      title: 'Erwartungsregime-Differenz',
+      context: 'Vergleich: fest verankerte vs. adaptive Inflationserwartungen.',
+      steps: [
+        { q: '[1. Decision] In welchem Regime passt "u < u_n -> Inflation beschleunigt sich (π_t−π_{t-1} steigt)" besser?', answer: ['adaptive erwartungen', 'theta=1', 'nicht verankert'], options: { problemId: 'mk1_pc_3', stepId: 'regime', isDecision: true }, hint: 'Beschleunigungsform der Phillipskurve.', explain: 'Die Beschleunigungslogik passt zum adaptiven/persistenten Erwartungsregime.' },
+        { q: '[2. Execution] In welchem Regime ist die Niveaubeziehung zur Ankerinflation zentraler?', answer: ['verankerte erwartungen', 'theta=0', 'anker'], options: { problemId: 'mk1_pc_3', dependsOn: 'regime' }, hint: 'Dann wird Inflation eher als Niveau um den Anker interpretiert.', explain: 'Bei verankerten Erwartungen ist die Level-Interpretation zentraler als die Beschleunigungsdiagnose.' },
+        { q: '[3. Validation] Warum ist das Verwechseln der Regime ein Klausurfehler?', answer: ['weil man niveau und änderung verwechselt', 'falsche zielgröße', 'falsche interpretation der inflation'], options: { problemId: 'mk1_pc_3', role: 'VALIDATION' }, hint: 'Frage: spricht die Aufgabe über π oder über Δπ?', explain: 'Wer Regime verwechselt, diagnostiziert oft die falsche Zielgröße (Inflationsniveau statt Inflationsänderung oder umgekehrt).' }
       ]
     }
   ],

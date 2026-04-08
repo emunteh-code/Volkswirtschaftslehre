@@ -323,6 +323,35 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  geldmengen: [
+    {
+      title: 'Inflationsziel vs. Geldmengen-Signal',
+      context: 'Inflation nahe Ziel, M3-Wachstum kurzfristig hoch, Geldnachfrage zugleich erhöht.',
+      steps: [
+        {
+          q: '[1. Decision] Welcher Anker ist im Inflation-Targeting-Regime primär für den Zinsentscheid?',
+          answer: ['inflationsziel', 'inflationsabweichung', 'pi-pi*'],
+          options: { problemId: 'm2_money_target_1', stepId: 'anchor', isDecision: true },
+          hint: 'Frage nach Zielgröße der Reaktionsfunktion.',
+          explain: 'Primär zählt die Abweichung der Inflation vom Ziel.'
+        },
+        {
+          q: '[2. Execution] Reicht isoliertes Geldmengenwachstum als sicherer Inflationsbeweis, wenn Geldnachfrage stark schwankt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_money_target_1', stepId: 'signal', dependsOn: 'anchor' },
+          hint: 'Denke an Umlaufgeschwindigkeit und Kassenhaltung.',
+          explain: 'Nein. Bei instabiler Geldnachfrage ist das Signal allein nicht hinreichend.'
+        },
+        {
+          q: '[3. Validation] Welche Rolle behalten Monetäraggregate trotzdem?',
+          answer: ['zusatzindikator', 'ergänzende information', 'risikosignal'],
+          options: { problemId: 'm2_money_target_1', role: 'VALIDATION' },
+          hint: 'Nicht wegwerfen, aber nicht mechanisch steuern.',
+          explain: 'Sie dienen als ergänzende Indikatoren für Liquiditäts-, Kredit- und Risikodynamik.'
+        }
+      ]
+    }
+  ],
   taylor_regel: [
     {
       title: 'Taylor-Regel anwenden',
@@ -348,6 +377,33 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_taylor_strict', role: 'VALIDATION' },
           hint: 'Reaktion auf Inflation ist 1 + a.',
           explain: 'Ja, 1 + a = 1.8 und damit mehr als eins zu eins.'
+        }
+      ]
+    },
+    {
+      title: 'ELB Realzins-Spielraum',
+      context: 'Zwei Länder: A mit π=4%, B mit π=0%; beide können bei Schock nur auf i=0 senken.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Formel verbindet Nominalzins und Realzins im Mini-Case?',
+          answer: ['r=i-pi', 'fisher', 'realzinsgleichung'],
+          options: { problemId: 'm2_taylor_elb_1', stepId: 'fisher', isDecision: true },
+          hint: 'Nutze die Näherung für den Realzins.',
+          explain: 'Relevant ist r ≈ i − π.'
+        },
+        {
+          q: '[2. Execution] Welches Land kann an der ELB den Realzins stärker ins Negative drücken?',
+          answer: ['land a', 'a', 'das mit höherer inflation'],
+          options: { problemId: 'm2_taylor_elb_1', stepId: 'space', dependsOn: 'fisher' },
+          hint: 'Vergleiche i=0 bei unterschiedlichen π.',
+          explain: 'Land A mit höherer Inflation hat mehr Realzins-Spielraum.'
+        },
+        {
+          q: '[3. Validation] Ist "0%-Inflation erhöht den ELB-Stabilisierungsspielraum" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_taylor_elb_1', role: 'VALIDATION' },
+          hint: 'Bei i=0 bestimmt π die Untergrenze von r.',
+          explain: 'Nein. Niedrigere Inflation verringert den möglichen negativen Realzinsraum.'
         }
       ]
     }
@@ -471,6 +527,60 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Nein. Ohne BIP-Entwicklung ist die Quotenaussage unvollständig.'
         }
       ]
+    },
+    {
+      title: 'Tilgungszeitpunkt und Zinseszins',
+      context: 'Gleicher Anfangsschock, aber Tilgung einmal früh und einmal deutlich später.',
+      steps: [
+        {
+          q: '[1. Decision] Welcher Mechanismus macht spätere Einmaltilgung teurer?',
+          answer: ['zinseszins', 'schuld wächst mit 1+r', 'aufzinsung'],
+          options: { problemId: 'm2_debt_timing_1', stepId: 'compounding', isDecision: true },
+          hint: 'Betrachte B_t bei ausgeglichenem Primärsaldo.',
+          explain: 'Die Restschuld wächst periodisch mit dem Zinsfaktor.'
+        },
+        {
+          q: '[2. Execution] Steigt der notwendige Tilgungsbetrag bei späterem Termin relativ zum frühen Termin?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'm2_debt_timing_1', stepId: 'amount', dependsOn: 'compounding' },
+          hint: 'Mehr Perioden mit (1+r).',
+          explain: 'Ja. Mehr Aufzinsungsperioden erhöhen den Endbetrag.'
+        },
+        {
+          q: '[3. Validation] Ist "Tilgung verschieben ist neutral, wenn der Primärsaldo dazwischen null ist" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_debt_timing_1', role: 'VALIDATION' },
+          hint: 'Null-Primärsaldo stoppt nicht die Zinsdynamik.',
+          explain: 'Falsch. Ohne Primärüberschuss wächst die Schuld mit dem Zins weiter.'
+        }
+      ]
+    },
+    {
+      title: 'Monetarisierung vs. Kreditfinanzierung',
+      context: 'Zusätzliche Staatsausgaben werden alternativ über Kredit oder Geldschöpfung finanziert.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Variante bringt zusätzlich zur Fiskalwirkung einen unmittelbaren Geldmengenimpuls?',
+          answer: ['monetarisierung', 'geldschöpfung', 'variante b'],
+          options: { problemId: 'm2_debt_monetize_1', stepId: 'mode', isDecision: true },
+          hint: 'Denke an IS-LM-PC-Logik.',
+          explain: 'Monetarisierung erzeugt zusätzlich einen monetären Impuls.'
+        },
+        {
+          q: '[2. Execution] Welche mittelfristige Zusatzgefahr steigt dadurch typischerweise?',
+          answer: ['inflationsdruck', 'höhere inflation', 'preisniveaudruck'],
+          options: { problemId: 'm2_debt_monetize_1', stepId: 'risk', dependsOn: 'mode' },
+          hint: 'Zusatznachfrage und Preisniveau.',
+          explain: 'Die Inflationsrisiken steigen gegenüber reiner Kreditfinanzierung.'
+        },
+        {
+          q: '[3. Validation] Ist Monetarisierung ein kostenloser Weg aus der Budgetrestriktion?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_debt_monetize_1', role: 'VALIDATION' },
+          hint: 'Trade-off statt Gratislösung.',
+          explain: 'Nein. Der Finanzierungsvorteil wird mit potenziellen Preisstabilitätskosten erkauft.'
+        }
+      ]
     }
   ]
   ,
@@ -499,6 +609,33 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_graph_regime_path', role: 'VALIDATION' },
           hint: 'Regimewahl ist modellentscheidend.',
           explain: 'Nein, das Regime bestimmt den Anpassungskanal und damit den Pfad.'
+        }
+      ]
+    },
+    {
+      title: 'Paritätsverteidigung unter Abwertungserwartung',
+      context: 'Fixkursregime; Märkte erwarten mit hoher Wahrscheinlichkeit eine Abwertung.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Größe steigt bei höherer Abwertungserwartung unter UIP unmittelbar an?',
+          answer: ['erforderlicher zinsaufschlag', 'i-i*', 'zinsdifferenz'],
+          options: { problemId: 'm2_fx_defense_1', stepId: 'spread', isDecision: true },
+          hint: 'i-i* ≈ erwartete ΔE/E.',
+          explain: 'Der notwendige inländische Zinsaufschlag gegenüber dem Ausland steigt.'
+        },
+        {
+          q: '[2. Execution] Welche Sofortmaßnahme muss die Zentralbank typischerweise ergreifen, wenn Reserven begrenzt sind?',
+          answer: ['zins anheben', 'zins hoch', 'straffen'],
+          options: { problemId: 'm2_fx_defense_1', stepId: 'policy', dependsOn: 'spread' },
+          hint: 'Parität über Renditedifferenz verteidigen.',
+          explain: 'Sie muss den Inlandszins anheben, um den Abwertungsdruck zu kompensieren.'
+        },
+        {
+          q: '[3. Validation] Welche binnenwirtschaftliche Kostenrichtung ist dann typisch?',
+          answer: ['nachfrage sinkt', 'output fällt', 'rezessiver druck'],
+          options: { problemId: 'm2_fx_defense_1', role: 'VALIDATION' },
+          hint: 'Höhere Zinsen bremsen den Gütermarkt.',
+          explain: 'Die inländische Nachfrage wird gedämpft; Output- und Beschäftigungsrisiken steigen.'
         }
       ]
     }

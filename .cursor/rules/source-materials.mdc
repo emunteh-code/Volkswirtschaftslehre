@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+---
+
+# Source materials rule
+
+## Source of truth
+The folder `source-materials/` contains the actual course materials and is the academic source of truth for this repository.
+
+## Required behavior
+- Before improving content for any module, inspect the relevant files in `source-materials/` first.
+- Do not invent academic content that is not supported by `source-materials/`.
+- If source support is unclear, say so and document the gap instead of guessing.
+- Prefer source-faithful expansion: clearer explanations, worked examples, drills, and restructuring are allowed only when grounded in the materials.
+
+## Workflow
+For any content task:
+1. inspect relevant `source-materials/<module>/...`
+2. identify the exact concepts, notation, and task styles present there
+3. only then modify the module files
+4. document which source files were used

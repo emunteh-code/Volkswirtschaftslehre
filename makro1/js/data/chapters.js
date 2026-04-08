@@ -423,6 +423,15 @@ export const CONTENT = {
           step('Die korrekte Vergleichsaussage benennt immer beide Endpunkte (Δi und ΔY), nicht nur die gemeinsame IS-Verschiebung.')
         ],
         'Policy-Graphkompetenz heißt: gleicher Schock, unterschiedliche Kurvengeometrie, unterschiedliche Endgleichgewichte.'
+      ),
+      task(
+        String.raw`Policy-Feasibility unter ELB: Ein negativer Finanzschock erhöht die Risikoprämie um 4 Prozentpunkte. Die Zentralbank möchte den Realzins stark senken, stößt aber bei $i=0$ an die effektive Zinsuntergrenze. Erwartete Inflation fällt gleichzeitig auf $0\%$. Welche Stabilisierungsgrenze folgt daraus?`,
+        [
+          step(String.raw`An der ELB gilt nominal $i \ge 0$, also maximal expansiv ist näherungsweise $r \approx -\pi^e$.`),
+          step('Wenn erwartete Inflation nahe null liegt, ist der minimal erreichbare Realzins kaum negativ und der geldpolitische Spielraum klein.'),
+          step('Bei gleichzeitig steigender Risikoprämie bleibt der relevante Kreditzins hoch; eine reine Zinssteuerung stabilisiert die Nachfrage dann nur unvollständig.')
+        ],
+        'ELB + niedrige Inflationserwartungen begrenzen die geldpolitische Gegenreaktion; zur Stabilisierung werden typischerweise zusätzliche fiskalische Impulse benötigt.'
       )
     ]
   },
@@ -477,6 +486,16 @@ export const CONTENT = {
           step('Ziehe erwartete Inflation ab.', String.raw`r_L^0 \approx 4\%-2\%=2\%,\; r_L^1 \approx 5\%-1\%=4\%`)
         ],
         'Der real relevante Kreditzins steigt stark (von 2% auf 4%): Doppelbremse aus höherer Prämie und niedrigeren Inflationserwartungen.'
+      ),
+      task(
+        String.raw`Mini-Case Finanzkrisentransmission: Ein TED-ähnlicher Spread steigt sprunghaft, obwohl der Leitzins unverändert bleibt. Erkläre die Kette von der Finanzmarktstörung bis zur Realwirtschaft im erweiterten IS-LM-Rahmen.`,
+        [
+          step('Der höhere Spread signalisiert steigende Risiko- bzw. Liquiditätsprämien im Kreditkanal.'),
+          step(String.raw`Damit steigt der relevante Kreditzins $i_L=i+x$ bzw. real $r_L \approx i + x - \pi^e$.`),
+          step('Höhere Finanzierungskosten senken Investitionen; die IS-Kurve verschiebt sich nach links und Output/Beschäftigung geraten unter Druck.'),
+          step('Wenn ELB oder fallende Inflationserwartungen die Realzinssenkung begrenzen, bleibt der Schock ohne zusätzliche Stabilisierungsinstrumente besonders hartnäckig.')
+        ],
+        'Krisentransmission läuft über den Kreditaufschlag: Spread hoch -> realer Kreditzins hoch -> I runter -> IS nach links -> Rezessionsdruck.'
       )
     ]
   },
@@ -588,6 +607,15 @@ export const CONTENT = {
           step('Damit trennt man Erwartungsschocks (Kurvenlage) von Konjunkturbewegungen (Punkt auf Kurve).')
         ],
         'Diagrammregel: Erwartungsänderung -> Shift; Arbeitslosenänderung bei gegebenen Erwartungen -> Movement.'
+      ),
+      task(
+        String.raw`Erwartungsregime-Check: Vergleiche zwei Situationen — (A) fest verankerte Erwartungen ($\theta \approx 0$), (B) adaptive Erwartungen ($\theta \approx 1$). Welche Zielgröße wird bei sinkender Arbeitslosigkeit jeweils primär bewegt: Inflationsniveau oder Inflationsänderung?`,
+        [
+          step(String.raw`Bei $\theta \approx 0$ gilt näherungsweise die Level-Logik: $u \downarrow$ erhöht vor allem das Inflationsniveau relativ zum Anker.`),
+          step(String.raw`Bei $\theta \approx 1$ gilt die Beschleunigungslogik: $u \downarrow$ erhöht vor allem $\pi_t-\pi_{t-1}$ (Inflationsänderung).`),
+          step('Prüfe deshalb in Klausuren immer zuerst, welches Erwartungsregime die Aufgabe vorgibt, bevor du die Richtung der Inflationsantwort formulierst.')
+        ],
+        'Anker-Regime -> Niveauaussage; adaptives Regime -> Änderungsaussage (Beschleunigung/Verlangsamung).'
       )
     ]
   },

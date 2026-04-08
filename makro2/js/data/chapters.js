@@ -327,7 +327,17 @@ export const CONTENT = {
       { label: 'Geldmarktgleichgewicht', eq: String.raw`$$\frac{M}{P} = Y \cdot L(i)$$`, desc: 'Reale Geldmenge = reale Geldnachfrage', variables: { 'M/P': 'Reale Geldmenge', 'L(i)': 'Liquiditätspräferenz' } },
       { label: 'Lineare LM', eq: String.raw`$$i = \frac{k}{h}Y - \frac{1}{h}\frac{M}{P}$$`, desc: 'Zins als Funktion von Einkommen und realer Geldmenge', variables: { 'k': 'Einkommenssensitivität', 'h': 'Zinssensitivität' } }
     ],
-    aufgaben: practice('geldmengen')
+    aufgaben: practice('geldmengen', [
+      {
+        text: String.raw`Inflation-Targeting vs. Geldmengensteuerung: Die Geldmenge wächst kurzfristig stark, gleichzeitig steigt die Geldnachfrage wegen Finanzmarktunsicherheit. Warum ist ein reines Geldmengen-Signal für die aktuelle Inflationsdiagnose dann nur begrenzt aussagekräftig?`,
+        steps: [
+          { text: 'Die beobachtete Geldmenge ist nur zusammen mit Geldnachfrage und Umlaufgeschwindigkeit interpretierbar.', eq: null },
+          { text: 'Steigt die Liquiditätsnachfrage, kann hohe Geldmengenexpansion in Teilen Kassenhaltung statt zusätzliche Güternachfrage spiegeln.', eq: null },
+          { text: 'Inflation-Targeting fokussiert deshalb auf das Inflationsziel und die Abweichung von diesem Ziel, nicht auf ein einzelnes Monetäraggregat.', eq: null }
+        ],
+        result: 'Starkes Geldmengenwachstum allein ist kein sicherer Inflationsbeweis; bei instabiler Geldnachfrage ist zielorientierte Inflationssteuerung robuster.'
+      }
+    ])
   },
 
   mundell_fleming: {
@@ -419,6 +429,15 @@ export const CONTENT = {
           { text: 'Gleicher Schock heißt daher nicht gleicher Anpassungspfad.', eq: null }
         ],
         result: 'Exam-Logik: nicht nur Schockrichtung, sondern die je Regime unterschiedliche Anpassungsvariable benennen.'
+      },
+      {
+        text: String.raw`Paritätsverteidigung unter Stress: Märkte erwarten mit hoher Wahrscheinlichkeit eine Abwertung. Erkläre die Kette von erwarteter Abwertung über den nötigen Zinsaufschlag bis zu den binnenwirtschaftlichen Kosten.`,
+        steps: [
+          { text: 'Steigende erwartete Abwertung erhöht unter Zinsparität den erforderlichen Inlandszins relativ zum Ausland.', eq: String.raw`$$i-i^* \approx \mathbb{E}\!\left[\frac{\Delta E}{E}\right]$$` },
+          { text: 'Zur Kursverteidigung muss die Zentralbank deshalb Zinsen erhöhen und/oder Reserven einsetzen.', eq: null },
+          { text: 'Höhere Zinsen dämpfen Investitionen und Nachfrage; die Paritätsverteidigung verschiebt Anpassungslasten auf Output und Beschäftigung.', eq: null }
+        ],
+        result: 'Je höher die Abwertungserwartung, desto teurer wird die Verteidigung des Fixkurses in Form höherer inländischer Zinsen und realwirtschaftlicher Dämpfung.'
       }
     ])
   },
@@ -550,7 +569,26 @@ export const CONTENT = {
     formeln: [
       { label: 'Taylor-Regel', eq: String.raw`$$i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$$`, desc: 'Reaktionsfunktion der Geldpolitik', variables: { 'r^*': 'Natürlicher Realzins', '\\pi^*': 'Inflationsziel' } }
     ],
-    aufgaben: practice('taylor_regel')
+    aufgaben: practice('taylor_regel', [
+      {
+        text: String.raw`Regimeentscheidung der Geldpolitik: Inflation liegt nahe dem Ziel, aber Geldmengenaggregate schwanken stark. Welche Größe ist in einem Inflation-Targeting-Rahmen der primäre Steueranker und wofür dienen Geldmengeninformationen dann noch?`,
+        steps: [
+          { text: 'Im Inflation-Targeting ist die Zielabweichung der Inflation der primäre Anker für Zinsentscheidungen.', eq: String.raw`$$\pi_t-\pi^*$$` },
+          { text: 'Geldmengenentwicklungen liefern ergänzende Informationssignale über Liquidität, Kreditdynamik und Risiken, aber ersetzen das Zielkriterium nicht.', eq: null },
+          { text: 'So wird verhindert, dass instabile Geldnachfrage zu mechanischen Fehlreaktionen führt.', eq: null }
+        ],
+        result: 'Primärer Anker bleibt die Inflationszielabweichung; Geldmengenaggregate sind nützliche Zusatzindikatoren, aber kein alleiniger Steuerkompass.'
+      },
+      {
+        text: String.raw`ELB/optimal-inflation Mini-Case: Zwei Volkswirtschaften haben denselben Realzins im Normalzustand. A hat langfristig $\pi=4\%$, B hat $\pi=0\%$. Bei einem starken Schock können beide den Nominalzins nur bis $i=0$ senken. Welche Volkswirtschaft gewinnt mehr geldpolitischen Spielraum über den Realzinskanal?`,
+        steps: [
+          { text: 'Nutze den Realzinskanal:', eq: String.raw`$$r \approx i-\pi$$` },
+          { text: 'Bei gleicher ELB für den Nominalzins erlaubt höhere Inflation ein stärker negatives erreichbares $r$.', eq: null },
+          { text: 'Damit hat Volkswirtschaft A mehr Stabilisierungsraum; B stößt früher an die reale Untergrenze des Politikimpulses.', eq: null }
+        ],
+        result: 'Die Volkswirtschaft mit höherem Inflationsniveau vor dem Schock hat an der ELB mehr geldpolitischen Realzins-Spielraum.'
+      }
+    ])
   },
 
   aggregierte_pf: {
@@ -659,6 +697,24 @@ export const CONTENT = {
           { text: 'Interpretiere den Wert als Anteil am BIP.', eq: null }
         ],
         result: 'Ein Primärüberschuss von rund 2,4% des BIP stabilisiert die Schuldenquote.'
+      },
+      {
+        text: String.raw`Tilgungszeitpunkt-Drill: Nach einer einmaligen schuldenfinanzierten Entlastung bleibt der Primärsaldo in den Folgejahren ausgeglichen. Warum ist die notwendige Einmaltilgung bei späterem Rückzahlungstermin deutlich größer?`,
+        steps: [
+          { text: 'Bei ausgeglichenem Primärsaldo wächst der bestehende Schuldenstock mit dem Zinsfaktor weiter.', eq: String.raw`$$B_t=(1+r)B_{t-1}$$` },
+          { text: 'Jede zusätzliche Periode multipliziert die Restschuld mit $(1+r)$ (Zinseszinseffekt).', eq: null },
+          { text: 'Spätere Tilgung bedeutet daher höhere absolute Rückzahlung, obwohl der Anfangsschock identisch war.', eq: null }
+        ],
+        result: 'Die spätere Rückzahlung ist teurer, weil sich Zinsen kumulieren; der gleiche Anfangsschock produziert einen größeren Endbetrag.'
+      },
+      {
+        text: String.raw`Finanzierungsmodus-Vergleich: Zusätzliche Staatsausgaben werden alternativ (A) über Kreditaufnahme oder (B) über Monetarisierung finanziert. Welche makroökonomische Zusatzwirkung ist bei (B) gegenüber (A) besonders zu beachten?`,
+        steps: [
+          { text: 'Kreditfinanzierung erhöht primär die Schulden- und Zinslastdynamik des Staates.', eq: null },
+          { text: 'Monetarisierung verschiebt zusätzlich die nominale Nachfrage und kann Inflationsdruck erzeugen.', eq: null },
+          { text: 'Damit ist (B) kein kostenloses Entkommen aus der Budgetrestriktion, sondern ein Trade-off zwischen Schuldenpfad und Preisstabilität.', eq: null }
+        ],
+        result: 'Monetarisierung reduziert kurzfristig Refinanzierungsdruck, erhöht aber das Risiko inflationsgetriebener Anpassungskosten.'
       }
     ])
   }

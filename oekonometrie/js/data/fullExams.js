@@ -7,13 +7,14 @@ const textQuestion = (id, points, text, correct, feedback) => ({
   feedback
 });
 
-const textBlock = (label, points, title, preamble, questions) => ({
+const textBlock = (label, points, title, preamble, questions, conceptId = null) => ({
   label,
   points,
   type: 'text-block',
   title,
   preamble,
-  questions
+  questions,
+  ...(conceptId ? { conceptId } : {})
 });
 
 function solutionBlock(title, paragraphs, math = []) {
@@ -209,7 +210,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'autocorrelation'
       )
     ]
   },
@@ -393,7 +395,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'heteroskedasticity'
       )
     ]
   },

@@ -26,7 +26,7 @@ export const MODULES = [
     type: "quantitative",
     sourceCorpusInRepo: false,
     sourceStatusNote:
-      "No Mikro II folder in source-materials; not direct-source anchored. See docs/audits/mikro2-quarantine-roadmap-pass-1.md."
+      "No Mikro II folder in source-materials; not direct-source anchored. See docs/audits/mikro2-quarantine-roadmap-pass-1.md and docs/audits/mikro2-status-guard-pass-2.md (repo reference inventory)."
   },
   {
     slug: "makro1",

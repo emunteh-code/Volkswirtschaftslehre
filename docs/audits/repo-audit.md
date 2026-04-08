@@ -4,7 +4,7 @@
 **Date:** 2026-04-08  
 **Author:** Cursor agent (codebase inspection)
 
-**Status note:** For an updated **live-module / manifest / quarantine snapshot**, see **`docs/audits/platform-status-cleanup-audit-pass-1.md`**. Section 3 concept counts below (e.g. `mikro2`) may be **out of date** relative to current `chapters.js`.
+**Status note:** For an updated **live-module / manifest / quarantine snapshot**, see **`docs/audits/platform-status-cleanup-audit-pass-1.md`**. For **`mikro2`** quarantine, registry flags, and **all repo references**, see **`docs/audits/mikro2-status-guard-pass-2.md`**. Section 3 **approximate concept counts** were **reconciled to `chapters.js` row counts** in **`docs/audits/docs-sync-pass-1.md`** (2026-04-08); treat counts as **approximate** if `chapters.js` changes.
 
 ---
 
@@ -36,7 +36,7 @@ Most quantitative modules **bootstrap the same way**: `main.js` imports `createP
 ### 1.3 Cross-cutting assets
 
 - **`assets/js/modules.js`:** module registry for the landing page (titles, hrefs, filters). Includes a **`sourceRoot`** constant pointing at a **developer-local absolute path**, which is fragile for portability and unrelated to deploy-time asset roots.
-- **`assets/js/module-content.js`:** rich **narrative metadata** (source groups, roadmaps, audit bullets) for **landing / generated portal** consumption — but **not all live modules have an entry** (see section 5).
+- **`assets/js/module-content.js`:** rich **narrative metadata** (source groups, roadmaps, audit bullets) for **landing / generated portal** consumption — **not all live modules need** the same depth of entry, but **benchmark slugs including `mikro1` and `mikro2` are present** (see section 5.2).
 - **`assets/js/portal-core/features/rPractice.js`:** WebR-based R practice; module-specific **preludes** (`buildStatisticsPrelude`, `buildEconometricsPrelude`) embed synthetic vectors / `data.frame`s for in-browser runs.
 - **`assets/js/generated-portal/`:** large generated bundle (`main.js`, `dataFactory.js`) used by **`r/index.html`** and pieces of the landing pipeline — a **second delivery path** alongside per-module portals.
 - **`assets/js/common.js`:** landing theme, module cards, onboarding hooks; imports `generated-portal/dataFactory` for chapter-count hints and `r-lab.js`.
@@ -67,13 +67,13 @@ Together, this satisfies the constitution’s loop: **teach → practice → gra
 |--------|-------------------|----------|------------|-------------------|
 | **mikro1** | 33 | `createRenderer` + heavy `enhanceRenderedSurface` | Rich canvas suite | Benchmark. |
 | **makro1** | 13 | Thin `createRenderer` wrapper | Depends on `graphPanel` / `graphs` for that module | Strong **authored** macro line; fewer concepts; less custom renderer layering than `mikro1`. |
-| **makro2** | ~19 chapter rows in `chapters.js` | Similar to `makro1` | Module graphs engine present | **Broader** than `mikro2` in breadth; `makro2` also has `package.json` + tests. |
-| **mikro2** | **7** | Thin wrapper | Has `graphEngine` / graphs | **Much thinner** curriculum than `mikro1`; label “FINAL BENCHMARK STANDARD” in data file is **aspirational**, not depth-matched. |
-| **statistik** | 12 + embedded R lab in `chapters.js` | Wrapper + `mountRPracticeBlocks` on render | R via **embedded markup** + WebR; graph panel for stats | Strong **R integration pattern**; theory still single-file HTML strings; different authoring style than `mikro1`. |
+| **makro2** | **20** chapter rows in `chapters.js` | Similar to `makro1` | Module graphs engine present | **Broader** than `mikro2` in breadth; `makro2` also has `package.json` + tests. |
+| **mikro2** | **13** | Thin wrapper | Has `graphEngine` / graphs | **Much thinner** curriculum than `mikro1`; label “FINAL BENCHMARK STANDARD” in data file is **aspirational**, not depth-matched. |
+| **statistik** | **14** + embedded R lab in `chapters.js` | Wrapper + `mountRPracticeBlocks` on render | R via **embedded markup** + WebR; graph panel for stats | Strong **R integration pattern**; theory still single-file HTML strings; different authoring style than `mikro1`. |
 | **oekonometrie** | **~30** entries from `curriculum.js` | **`createRenderer` + large overlay** similar to `mikro1` (formal math, R tab via `renderRAnwendungTab`) | R blocks per concept | **Second module** with “mikro1-class” renderer investment; content built from **structured curriculum** (`sections`, `cards`) → HTML, not raw `String.raw` only. |
-| **recht** | 12 | Thin `createRenderer` wrapper | **`graphs.js` is a no-op stub** (`initGraph` only) | Text/doctrinal focus; full exams exist and are substantive in sample. |
-| **jahresabschluss** | 11 | Thin wrapper | Same tab shell as others | Authored accounting line; similar patterns to `finanzwirtschaft` / `recht`. |
-| **finanzwirtschaft** | 13 | Thin wrapper | Module-specific graphs possible | Coherent chapter line; no `mikro1`-level renderer extras observed. |
+| **recht** | **14** | Thin `createRenderer` wrapper | **`graphs.js` is a no-op stub** (`initGraph` only) | Text/doctrinal focus; full exams exist and are substantive in sample. |
+| **jahresabschluss** | **15** | Thin wrapper | Same tab shell as others | Authored accounting line; similar patterns to `finanzwirtschaft` / `recht`. |
+| **finanzwirtschaft** | **16** | Thin wrapper | Module-specific graphs possible | Coherent chapter line; no `mikro1`-level renderer extras observed. |
 | **mathematik** | **6** | Thin wrapper + `portalHub.js` calling **`mountLivePortalBridge('mathematik')`** | Standard module graphs stack | **Very coarse** chapterization vs math curriculum reality; `fullExams.js` explicitly **“Simulation v14.0”** — signals **synthetic / template** exam rather than archive-backed. |
 | **internationale-wirtschaftsbeziehungen** | 12 (from file scan) | Same family | Quant graphs as in other VWL modules | Listed in `module-content.js` under quoted slug key. |
 | **r** | N/A (standalone) | **`generated-portal/main.js`** | R lab section in `r/index.html` | **Not** in `MODULES` inside `assets/js/modules.js`; **is** in `module-content.js` as `r`. Split-brain between “module” lists and R landing. |
@@ -103,7 +103,7 @@ Together, this satisfies the constitution’s loop: **teach → practice → gra
 
 ### 4.4 Weak or risky modules (relative to benchmark)
 
-- **`mikro2`:** Only **7** topics — high risk of **under-coverage** vs a real Mikro II course.
+- **`mikro2`:** **13** topics — still high risk of **under-coverage** vs a real Mikro II course (quarantine / corpus documented elsewhere).
 - **`mathematik`:** **6** mega-chapters and **simulation-labeled** exams — weak **granularity** and questionable **source alignment** unless explicitly scoped as primer-only.
 - **Any module** with missing `CONTENT` entries relies on the **generic placeholder** path in portal-core renderer — **pedagogically weak** and **not source-faithful**.
 
@@ -115,14 +115,14 @@ Together, this satisfies the constitution’s loop: **teach → practice → gra
 
 ## 5. Source fidelity — impossible, fragile, or missing today
 
-### 5.1 No per-block source status in learning objects
+### 5.1 Source status: partial runtime wiring
 
-`docs/architecture/content-pipeline.md` requires **source status** labels (`direct-source`, `source-distilled`, etc.). **No such field** appears on chapter content objects in the inspected JS data (grep over the repo found **no** `sourceStatus` / `direct-source` style markers in implementation). **Compliance is documentation-only** until the data model and renderer carry it.
+`docs/architecture/content-pipeline.md` requires **source status** labels on **meaningful content blocks**. **Raw `CONTENT` chapter blobs** in many modules still lack an inline `sourceStatus` per block. **However**, shared code now includes **`assets/js/portal-core/data/sourceStatus.js`**, **`provenance.js`**, and **`learningObjectNormalize.js`** (`buildProvenanceByConceptFromPrimaryRefs`), and several modules ship **`contentManifest.js`** with module-level provenance strings and primary path maps (see e.g. `provenance-coverage-audit-pass-1.md`). **Uniform UI surfacing** of every provenance layer is **not** guaranteed across modules — treat **compliance as partial**, not “documentation-only.”
 
 ### 5.2 Course materials are not first-class artifacts in the runtime model
 
 - Learning content is **embedded JavaScript** (`chapters.js`, `curriculum.js`, etc.), not loaded from **versioned source files** (PDFs, decks) with stable IDs. **Traceability** from UI block → file → page is **manual** (maintainer knowledge + `module-content.js` prose for some modules).
-- **`module-content.js` omits `mikro1` and `mikro2`.** The **strongest** modules therefore lack the **same landing-page source narrative** structure as `makro1`, `statistik`, `recht`, etc. — a **product inconsistency** and a **source-story gap** for the benchmark courses.
+- **`module-content.js` includes `mikro1` and `mikro2`** (alongside other slugs). **Depth** of landing narrative still **varies by module**; **`mikro2`** copy correctly reflects **quarantine / missing corpus** (see `mikro2-status-guard-pass-2.md`).
 - **`assets/js/modules.js` `sourceRoot`:** Hard-coded **local filesystem path**; not usable as a shared truth for collaborators or CI, and **not** wired into content loading.
 
 ### 5.3 Fragile automation helpers
@@ -172,7 +172,7 @@ Separate concerns into **five layers**, with clear contracts between them:
 
 ## 7. Risks and recommended follow-ups (non-code for now)
 
-- Add **`mikro1` / `mikro2` entries** to `module-content.js` **or** explicitly document why they are excluded.
+- **Optional:** deepen **`mikro1` / `mikro2`** blocks in `module-content.js` to match the richest module entries (entries **exist**; parity is **content depth**, not presence).
 - Remove or relocate **`sourceRoot`** from shared `modules.js` into private dev config.
 - Unify **`r` module** listing: either add to `MODULES` or document as **experimental** and link from landing consistently.
 - Schedule **schema documentation** for `FULL_EXAMS` task types per module (especially `mathematik` options).

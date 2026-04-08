@@ -174,7 +174,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 | Issue | Action |
 |-------|--------|
 | **`sourceRoot` in `modules.js`** | Remove from shared code or move to gitignored local config; never required for deploy |
-| **`module-content.js` parity for micro modules** | **`mikro1`** and **`mikro2`** entries exist (`docs/audits/module-content-parity-cleanup-pass-1.md`). **`mikro2`** remains **quarantine-honest**. **`internationale-wirtschaftsbeziehungen`** has a narrative block (quoted key); see `docs/audits/iwb-status-parity-audit-pass-1.md`. |
+| **`module-content.js` parity for micro modules** | **`mikro1`** and **`mikro2`** entries exist (`docs/audits/module-content-parity-cleanup-pass-1.md`). **`mikro2`** remains **quarantine-honest** — **no** `contentManifest.js`, **no** `portalBridge` in `mikro2/js/main.js`, **no** `mistakeReview` wiring; full reference list: `docs/audits/mikro2-status-guard-pass-2.md`. **`internationale-wirtschaftsbeziehungen`** has a narrative block (quoted key); see `docs/audits/iwb-status-parity-audit-pass-1.md`. |
 | **`r` in `module-content.js` but not in `MODULES`** | Align lists: add to `MODULES` **or** mark `r` as special route in docs + landing |
 | **`mountLivePortalBridge` no-op** (`live-portal-bridge.js`) | Remove call from `mathematik/js/portalHub.js` **or** re-implement bridge; document until then |
 | **Placeholder `CONTENT`** | Fill gaps or mark `generated_placeholder` with explicit `platform-added-explanation` in manifest |

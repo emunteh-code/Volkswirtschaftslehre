@@ -73,6 +73,7 @@ const STATISTIK_PRIMARY_REFS_CURATED = {
     'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
     'Tutorien/Tutorium_11/Tutorium11.pdf'
   ],
+  // Primary refs intentionally []: no VL/Tutorium PDF in repo corpus names or substantively covers this portal chapter (decision doc).
   nichtparametrisch: []
 };
 

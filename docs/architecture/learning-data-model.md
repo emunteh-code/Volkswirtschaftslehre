@@ -240,6 +240,8 @@ Maps to `conceptLinks.js` per concept.
 | `portal_profile` | `object` | no | **Non-breaking** flags mirroring repo reality: `renderer: 'portal-core' \| 'portal-core+mikro1-overlay' \| 'portal-core+oekonometrie-overlay'`, `delivery: 'module-folder' \| 'generated-portal'`. |
 | `landing_content_ref` | `string` | no | Key into `module-content.js` narrative (`makro1`, `"internationale-wirtschaftsbeziehungen"`, `r`). **Absent** for `mikro1` / `mikro2` today — schema allows `null` to record the gap. |
 
+**`mikro2` guard:** This module has **no** `contentManifest.js` and **no** in-repo Mikro II corpus; do not assume the rows above are populated for `mikro2` the same way as for curated modules — see `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ### 4.2 `chapter`
 
 A **curriculum grouping** (sidebar category), **not** necessarily a separate file.

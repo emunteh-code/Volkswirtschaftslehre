@@ -6,6 +6,8 @@
 
 **Evidence:** `main.js` wiring, `renderer.js` patterns, `graphPanel.js` (`GRAPH_CONCEPTS` size), `stepProblems.js` / `intuition.js` key coverage vs `CHAPTERS`, `fullExams.js` size & shape (incl. **`canvas`** in exam items), plus **`mikro2`** quarantine metadata (`assets/js/modules.js`, `mikro2-quarantine-roadmap-pass-1.md`).
 
+**Docs sync (pass 1, 2026-04-08):** §2.2 **makro2**, §2.3 **statistik**, §2.8 **IWB**, §3–§5 were **updated** to match the repo **after** second-wave work (**`statistik-second-wave-excellence-pass-1.md`**, **`iwb-second-wave-excellence-pass-1.md`**, **`makro2-second-wave-excellence-pass-1.md`**) and **`mikro2-status-guard-pass-2.md`**. §2.9 **mikro2** structural gaps were **re-checked** (still accurate). Full change log: **`docs/audits/docs-sync-pass-1.md`**.
+
 ---
 
 ## 1. What **mikro1** encodes as benchmark (for this audit)
@@ -44,11 +46,12 @@
 | vs benchmark | Note |
 |----------------|------|
 | **Stronger** | **13** graph concepts (more than **mikro1**); **20/20** step coverage; **large** `fullExams.js` (**~466** lines). |
-| **Weaker** | **`INTUITION`** contains **35** keys but only **20** `CHAPTERS` — **15** keys are **not** in `CHAPTERS` (legacy / dead entries; maintenance noise). |
-| **Weaker** | **`main.js`** does **not** wire **`mistakeReview`** (unlike **mikro1**, **makro1**, **statistik**, …). |
+| **Aligned (post second-wave)** | **`INTUITION`** keys match **`CHAPTERS`** (**20/20**); orphan keys and duplicate **`COURSEWORK_TASKS`** ids removed (**`makro2-second-wave-excellence-pass-1.md`**). |
+| **Aligned** | **`mistakeReview`** + learner backbone wired in **`main.js`** / storage (same pattern as **makro1**). |
+| **Weaker** | **Baseline `createRenderer`** (no **`enhanceRenderedSurface`** stack like **mikro1** / **ökonometrie**). |
 | **Aligned** | **`contentManifest`** + curated primaries (`provenance-coverage-audit-pass-1.md`). |
 
-**Verdict:** **Close** on graphs + drills + exam bulk; **second-wave** cleanup (intuition keys, **`mistakeReview`**) would tighten UX parity.
+**Verdict:** **Close** on graphs + drills + exams + mistake loop + intuition coherence; **partial** only on renderer depth vs **mikro1**.
 
 ---
 
@@ -56,12 +59,13 @@
 
 | vs benchmark | Note |
 |----------------|------|
-| **Weaker** | **`fullExams.js`** ~**36** lines — essentially **one** short exam object with **two** small step-style problems → **low exam pressure / format variety** vs **mikro1**. |
-| **Weaker** | **4** `CHAPTERS` ids **without** `INTUITION`: `z_test`, `zwei_stichproben`, `varianzanalyse`, `nichtparametrisch`. |
-| **Weaker** | **`nichtparametrisch`** also has **empty** manifest primaries (`provenance-coverage-audit-pass-1.md`). |
+| **Aligned (post second-wave)** | **`fullExams.js`**: two exams — expanded multi-step **`klausur_2024`** + **`klausur_transfer_wf`** (**W/F** **`wf-block`**); **`FULL_EXAM_PROVENANCE`** covers **all** exam ids (**`statistik-second-wave-excellence-pass-1.md`**). |
+| **Aligned (post second-wave)** | **`INTUITION`** filled for **`z_test`**, **`zwei_stichproben`**, **`varianzanalyse`**, **`nichtparametrisch`**. |
+| **Weaker** | **`nichtparametrisch`** manifest **primary refs** still **`[]`** until curated or permanently documented empty (`provenance-coverage-audit-pass-1.md`). |
+| **Weaker** | No **embedded `<canvas>`** in full exams (unlike **mikro1**). |
 | **Aligned** | **9** graphs, **14/14** step concepts, **`mistakeReview`**, **R**-layer via portal patterns (course type). |
 
-**Verdict:** **Farthest** from benchmark on **exam realism** + **intuition completeness**; **second-wave excellence** pass clearly high-value.
+**Verdict:** **Much closer** to benchmark on **exam pressure** + **intuition completeness**; **residual** gaps are **provenance** on **`nichtparametrisch`** and **exam canvas** / renderer richness vs **mikro1**.
 
 ---
 
@@ -114,11 +118,11 @@
 
 | vs benchmark | Note |
 |----------------|------|
-| **Weaker** | **`main.js`** omits **`mistakeReview`** — **closed-loop mistake routing** below **mikro1** standard. |
+| **Aligned (post second-wave)** | **`mistakeReview`** + learner backbone keys + quick/full exam mistake logging (**`iwb-second-wave-excellence-pass-1.md`**). |
 | **Weaker** | **Baseline `createRenderer`** only (no **`enhanceRenderedSurface`**). |
 | **Aligned** | **12/12** steps + intuition; **6** graphs; **large** `fullExams.js` (**~400** lines); manifest + provenance (`iwb-provenance-curation-pass-1.md`). |
 
-**Verdict:** **Close** on content + exams + graphs; **clear UX gap** on **`mistakeReview`**.
+**Verdict:** **Close** on content + exams + graphs + mistake loop; **partial** only on renderer depth vs **mikro1**.
 
 ---
 
@@ -133,40 +137,49 @@
 
 **Verdict:** **Blocked** for **source-backed excellence**; **weak** on **exam depth** + **learning-loop wiring** regardless of quarantine.
 
+**Guard pass 2:** repo-wide reference inventory and contributor-facing guardrails — `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ---
 
 ## 3. Classification: real weakness vs acceptable difference vs blocked
 
-| Tag | Applies to |
+| Tag | Applies to (updated after second-wave + guard work) |
 |-----|------------|
-| **Real weakness** | **statistik** (exams + intuition holes + provenance hole); **IWB** (no **`mistakeReview`**); **makro2** (dead intuition keys, no **`mistakeReview`**); **mikro2** (thin exams, missing manifest/mistake bridge); **finanzwirtschaft** (graph count). |
-| **Acceptable module-specific difference** | **recht** / **jahresabschluss** (no graphs); **ökonometrie** emphasis on **R** over **canvas** exams; **makro1** smaller syllabus. |
+| **Real weakness** | **statistik** — **`nichtparametrisch`** empty primaries + no exam **`<canvas>`** vs **mikro1**; **mikro2** (quarantined: thin exams, no manifest/mistake bridge); **finanzwirtschaft** (graph count vs **mikro1**). |
+| **Acceptable module-specific difference** | **recht** / **jahresabschluss** (no graphs); **ökonometrie** emphasis on **R** over **canvas** exams; **makro1** smaller syllabus; **IWB** / **makro2** baseline renderer without **mikro1** semantic overlay. |
 | **Blocked by missing corpus** | **mikro2** **only** (Mikro II materials not in `source-materials`). |
+
+*Historical note:* Items **statistik** (thin exams, missing intuition), **IWB** (no **`mistakeReview`**), **makro2** (orphan intuition, no **`mistakeReview`**) were **correct at original pass-1**; they are **superseded** as listed weaknesses — see **`docs/audits/docs-sync-pass-1.md`**.
 
 ---
 
 ## 4. Proximity to benchmark (summary)
 
-| Near **mikro1** “full stack” | **oekonometrie** (renderer + density + R), **makro1** / **makro2** (exams + graphs; **makro2** needs loop cleanup), **recht** / **jahresabschluss** / **finanzwirtschaft** (strong loop + exams for their type), **IWB** (minus **`mistakeReview`**). |
-| Needs **second-wave excellence** | **statistik** (highest ROI), **IWB** (**`mistakeReview`**), **makro2** (intuition cleanup + **`mistakeReview`**), **finanzwirtschaft** (optional graph depth). |
-| **Blocked / quarantined** | **mikro2** (source + thin exams + no manifest). |
+| Near **mikro1** “full stack” | **oekonometrie** (renderer + density + R), **makro1** / **makro2** (exams + graphs + mistake loop + coherent intuition keys), **statistik** (exams + intuition much improved; residual provenance/canvas), **recht** / **jahresabschluss** / **finanzwirtschaft** (strong loop + exams for their type), **IWB** (loop + exams + graphs; baseline renderer). |
+| Optional **depth** passes | **finanzwirtschaft** (graphs); **statistik** (**`nichtparametrisch`** curation / documented empty); **exam `<canvas>`** in chosen modules if source-justified. |
+| **Blocked / quarantined** | **mikro2** (source + thin exams + no manifest until corpus). |
 
 ---
 
-## 5. Highest-value next passes (recommended order)
+## 5. Next passes
 
-1. **statistik — excellence pass:** expand **`fullExams.js`** to multi-part Klausur structure; add **`INTUITION`** for the four missing concepts; resolve **`nichtparametrisch`** provenance or document permanently empty.  
-2. **IWB — wiring pass:** add **`mistakeReview`** to **`main.js`** (pattern copy from **makro1**).  
-3. **makro2 — hygiene + loop:** prune or migrate **orphan `INTUITION`** keys; add **`mistakeReview`** to **`main.js`**.  
-4. **mikro2 — conditional:** **only after** corpus policy allows — **`contentManifest`**, provenance, **full exam** expansion; until then, label as **platform-heavy** / quarantine in UX copy (already partly done in **`module-content.js`**).  
-5. **Optional cross-module:** **exam `<canvas>` pattern** from **mikro1** → other quantitative modules (high effort; pick **makro2** / **IWB** only where figures are exam-authentic).
+### 5.1 Original pass-1 list (historical — largely superseded)
+
+The numbered list in the **first** edition of this file targeted **statistik** exams/intuition, **IWB** **`mistakeReview`**, and **makro2** intuition / **`mistakeReview`**. Those items are **done** (see second-wave audits). **Do not** re-schedule them as open gaps.
+
+### 5.2 Current high-value follow-ups (2026-04-08)
+
+1. **`mikro2` — conditional:** **only after** corpus policy allows — **`contentManifest`**, provenance, **full exam** expansion, optional **`mistakeReview`** / **`portalBridge`**; until then quarantine copy remains (**`mikro2-status-guard-pass-2.md`**).  
+2. **`statistik` · `nichtparametrisch`:** curate primaries **or** explicit permanent-empty documentation.  
+3. **Optional cross-module:** **exam `<canvas>`** from **mikro1** → **statistik** / **makro2** / **IWB** only where exam-authentic.  
+4. **Release planning:** consolidated priorities — **`docs/audits/release-priority-audit-pass-1.md`**.
 
 ---
 
-## 6. Files changed (this pass)
+## 6. Files changed (original pass + docs sync)
 
 | File | Change |
 |------|--------|
-| `docs/audits/benchmark-gap-audit-pass-1.md` | **New** (this document). |
+| `docs/audits/benchmark-gap-audit-pass-1.md` | **New** (original pass); **updated** **`docs-sync-pass-1`** (§2.2, §2.3, §2.8, §3–§5, §6). |
 
 **No application code modified.**

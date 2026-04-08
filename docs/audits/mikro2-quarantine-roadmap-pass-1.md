@@ -4,6 +4,8 @@
 
 Make **`mikro2` academic status** explicit in project docs and lightweight metadata so **future passes do not assume** `source-materials/`-backed, **direct-source** parity with modules like `mikro1`, `makro2`, or `recht`.
 
+**See also (pass 2):** `docs/audits/mikro2-status-guard-pass-2.md` — audited **all current repo references** to `mikro2` and reinforced guardrails where contributors/agents look (`AGENTS.md`, `main.js`, landing metadata, architecture docs).
+
 **Out of scope for this pass:** rewriting `mikro2` theory/tasks, adding `contentManifest.js`, or shell refactors.
 
 ## Authoritative diagnosis (summary)

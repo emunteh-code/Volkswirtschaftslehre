@@ -39,7 +39,7 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 ## Was bereits live ist
 
 - `mikro1/`: bestaetigtes Vollportal aus dem bestehenden Mikro-I-Projekt
-- `mikro2/`: Live-Portal mit Mikro-II-Themenlinie (Spieltheorie, Oligopol, Marktversagen usw.); **es liegt kein passender Mikro-II-Kursordner unter `source-materials/`** — siehe `docs/audits/mikro2-quarantine-roadmap-pass-1.md` fuer Status und Editor-Regeln
+- `mikro2/`: Live-Portal mit Mikro-II-Themenlinie (Spieltheorie, Oligopol, Marktversagen usw.); **es liegt kein passender Mikro-II-Kursordner unter `source-materials/`** — Quarantaene-Status und Repo-Referenzen: `docs/audits/mikro2-quarantine-roadmap-pass-1.md`, `docs/audits/mikro2-status-guard-pass-2.md`
 - `makro2/`: bestaetigtes Vollportal mit coursework-basierten Makro-II-Inhalten
 - `index.html`: Landing Page mit Moduluebersicht und Filterung
 - Landing Page: progress-aware Resume-Bereich fuer alle Live-Portale

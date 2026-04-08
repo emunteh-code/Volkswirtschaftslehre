@@ -77,7 +77,7 @@
 |--------|---------|---------|
 | **Strong** | **makro1**, **makro2**, **recht**, **jahresabschluss**, **finanzwirtschaft**, **oekonometrie**, **internationale-wirtschaftsbeziehungen** | Manifest + **all** chapter ids have non-empty primary refs + honest full-exam stance in manifest. |
 | **Partial** | **mikro1**, **statistik** | Manifest + **one** concept id with **intentionally empty** primaries (`psubst` / `nichtparametrisch`); otherwise aligned. |
-| **Blocked / quarantined** | **mikro2** | **No** `contentManifest.js`; **`sourceCorpusInRepo: false`**; concept-level **file** provenance **not implemented** in runtime data — policy: `mikro2-quarantine-roadmap-pass-1.md`. |
+| **Blocked / quarantined** | **mikro2** | **No** `contentManifest.js`; **`sourceCorpusInRepo: false`**; concept-level **file** provenance **not implemented** in runtime data — policy: `mikro2-quarantine-roadmap-pass-1.md`. Reference inventory: `mikro2-status-guard-pass-2.md`. |
 
 ---
 
@@ -94,7 +94,7 @@
 | **jahresabschluss** | Same file-level ceiling. |
 | **finanzwirtschaft** | Same. |
 | **internationale-wirtschaftsbeziehungen** | Zusatz-PDFs mostly **unmapped**; exams **no** course PDF (`iwb-provenance-curation-pass-1.md` §4). |
-| **mikro2** | **Entire** manifest layer missing; quarantine until Mikro II corpus in `source-materials`. |
+| **mikro2** | **Entire** manifest layer missing; quarantine until Mikro II corpus in `source-materials` (`mikro2-status-guard-pass-2.md`). |
 
 ---
 

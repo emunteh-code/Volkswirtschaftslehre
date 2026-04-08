@@ -245,12 +245,37 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       if (aufgabe.type === "wf-block") {
         aufgabe.groups.forEach((group) => {
           group.questions.forEach((q) => {
-            questions.push({ ...q, points: 2, type: "wf", aufgabe: aufgabe.label, context: group.context });
+            questions.push({
+              ...q,
+              points: 2,
+              type: "wf",
+              aufgabe: aufgabe.label,
+              context: group.context,
+              concept_id:
+                (typeof q.concept_id === "string" && q.concept_id) ||
+                (typeof q.conceptId === "string" && q.conceptId) ||
+                (typeof group.concept_id === "string" && group.concept_id) ||
+                (typeof group.conceptId === "string" && group.conceptId) ||
+                (typeof aufgabe.concept_id === "string" && aufgabe.concept_id) ||
+                (typeof aufgabe.conceptId === "string" && aufgabe.conceptId) ||
+                undefined
+            });
           });
         });
       } else if (aufgabe.type === "text-block") {
         aufgabe.questions.forEach((q) => {
-          questions.push({ ...q, aufgabe: aufgabe.label, aufgabeTitle: aufgabe.title, preamble: aufgabe.preamble });
+          questions.push({
+            ...q,
+            aufgabe: aufgabe.label,
+            aufgabeTitle: aufgabe.title,
+            preamble: aufgabe.preamble,
+            concept_id:
+              (typeof q.concept_id === "string" && q.concept_id) ||
+              (typeof q.conceptId === "string" && q.conceptId) ||
+              (typeof aufgabe.concept_id === "string" && aufgabe.concept_id) ||
+              (typeof aufgabe.conceptId === "string" && aufgabe.conceptId) ||
+              undefined
+          });
         });
       }
     });

@@ -18,6 +18,7 @@ export const FULL_EXAMS = {
         groups: [
           {
             context: String.raw`Ein Haushalt verfügt über das Einkommen $m > 0$ und kann die Güter 1 und 2 kaufen. Der Preis des Gutes 1 ist $p_1 = 5$ und der Preis des Gutes 2 ist $p_2 > 0$.`,
+            conceptId: 'budget',
             questions: [
               { id: '1_1', text: String.raw`Für $m = 10$ kann sich der Haushalt maximal zwei Einheiten von Gut 1 kaufen.`, correct: 'Wahr', feedback: String.raw`$x_1^{\max} = m/p_1 = 10/5 = 2$. Der Haushalt kann genau zwei Einheiten von Gut 1 kaufen.` },
               { id: '1_2', text: String.raw`Sinkt der Preis des ersten Gutes auf $p_1 = 4$, vergrößert sich die Budgetmenge des Haushalts.`, correct: 'Wahr', feedback: String.raw`Bei sinkendem $p_1$ wird Gut 1 relativ billiger. Die Budgetgerade dreht sich nach außen, die Budgetmenge wird größer.` },
@@ -26,6 +27,7 @@ export const FULL_EXAMS = {
           },
           {
             context: String.raw`Gegeben ist eine vollständige, reflexive, transitive, streng konvexe und streng monotone Präferenzrelation $\succeq$. Ferner seien $x=(3,8)$, $y=(4,6)$ und $z=(12,2)$ mit $x \sim y$ und $x \sim z$ gegeben.`,
+            conceptId: 'praeferenz',
             questions: [
               { id: '1_4', text: String.raw`Es gilt $z \sim (3,6)$.`, correct: 'Falsch', feedback: String.raw`$(3,6)$ hat von beiden Gütern weniger als $x=(3,8)$. Wegen strenger Monotonie gilt $x \succ (3,6)$. Mit $x \sim z$ folgt also $z \succ (3,6)$.` },
               { id: '1_5', text: String.raw`Es gilt $x \sim (6,5)$.`, correct: 'Falsch', feedback: String.raw`Aus $x \sim y$ und strenger Konvexität folgt, dass innere Konvexkombinationen von $x$ und $y$ strikt bevorzugt werden. $(6,5)$ ist kein automatisch indifferentes Bündel.` },
@@ -34,6 +36,7 @@ export const FULL_EXAMS = {
           },
           {
             context: String.raw`Ein Haushalt hat die Nutzenfunktion $u(x_1, x_2) = 2x_1 + x_2$.`,
+            conceptId: 'psubst',
             questions: [
               { id: '1_7', text: 'Für den Haushalt stellen die beiden Güter perfekte Substitute dar.', correct: 'Wahr', feedback: String.raw`Die Nutzenfunktion ist linear. Die Indifferenzkurven sind Geraden; das ist der Standardfall perfekter Substitute.` },
               { id: '1_8', text: 'Im Optimum muss die Grenzrate der Substitution immer gleich dem Preisverhältnis sein.', correct: 'Falsch', feedback: String.raw`Bei perfekten Substituten liegen typischerweise Ecklösungen vor. Die Tangentialbedingung ist nur im Sonderfall identischer relativer Bewertungen relevant.` }
@@ -60,6 +63,7 @@ export const FULL_EXAMS = {
       },
       {
         label: 'Aufgabe 2',
+        conceptId: 'hicks',
         points: 10,
         type: 'text-block',
         title: 'Haushaltstheorie',
@@ -92,6 +96,7 @@ export const FULL_EXAMS = {
       },
       {
         label: 'Aufgabe 3',
+        conceptId: 'kosten',
         points: 10,
         type: 'text-block',
         title: 'Unternehmenstheorie',
@@ -125,6 +130,7 @@ export const FULL_EXAMS = {
       },
       {
         label: 'Aufgabe 4',
+        conceptId: 'markt',
         points: 10,
         type: 'text-block',
         title: 'Marktgleichgewicht',
@@ -174,6 +180,7 @@ export const FULL_EXAMS = {
       },
       {
         label: 'Aufgabe 5',
+        conceptId: 'cobbd',
         points: 10,
         type: 'text-block',
         title: 'Haushaltstheorie',
@@ -207,6 +214,7 @@ export const FULL_EXAMS = {
       },
       {
         label: 'Aufgabe 6',
+        conceptId: 'produktion',
         points: 10,
         type: 'text-block',
         title: 'Unternehmenstheorie',
@@ -261,6 +269,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Block A',
+        conceptId: 'slutsky',
         points: 30,
         type: 'text-block',
         title: 'Slutsky-Zerlegung',
@@ -294,6 +303,7 @@ export const FULL_EXAMS = {
       },
       {
         label: 'Block B',
+        conceptId: 'hausopt',
         points: 30,
         type: 'text-block',
         title: 'Eckoptimum & Randbedingungen',

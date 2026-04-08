@@ -1,4 +1,5 @@
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
+import { getMakro2PilotBridgePayload } from './data/contentManifest.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';
 import * as appState from './state/appState.js';
 import * as storage from './state/storage.js';
@@ -16,6 +17,7 @@ import * as theme from './utils/theme.js';
 import * as keyboard from './utils/keyboard.js';
 import * as toast from './utils/toast.js';
 import * as math from './utils/mathjax.js';
+import { mistakeReview } from './features/mistakeReview.js';
 
 createPortalApp({
   courseLabel: COURSE_CONFIG.courseLabel,
@@ -35,5 +37,10 @@ createPortalApp({
   theme,
   keyboard,
   toast,
-  math
+  math,
+  mistakeReview,
+  portalBridge: () => {
+    if (typeof window === 'undefined') return;
+    window.__makro2PilotManifest = getMakro2PilotBridgePayload();
+  }
 });

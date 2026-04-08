@@ -6,11 +6,19 @@ Shared **selector/derivation** layer over learner backbone attempts, mistake log
 
 | Path | Role |
 |------|------|
+<<<<<<< HEAD
 | `assets/js/portal-core/data/dashboardDerivedMetrics.js` | `buildDashboardDerivedMetricsSnapshot`, `buildHonestDashboardPilotHtml` (structured UI), `formatDashboardDerivedMetricsLines` (optional list) |
 | `makro1/js/features/dashboard.js` | Inserts honest pilot panel before existing stat tiles |
 | `makro1/css/styles.css` | `.dash-honest-pilot`, `.dhp-*`, `.hac-pilot-note` |
 | `assets/js/portal-core/ui/renderer.js` | Optional `homeLernDashboardPilotNote` under Lern-Dashboard card |
 | `makro1/js/ui/renderer.js` | Sets pilot note (makro1-only) |
+=======
+| `assets/js/portal-core/data/dashboardDerivedMetrics.js` | Pure selectors + `buildDashboardDerivedMetricsSnapshot`, `buildHonestDashboardPilotHtml`, `formatDashboardDerivedMetricsLines` (legacy list) |
+| `makro1/js/features/dashboard.js` | Inserts `buildHonestDashboardPilotHtml` (structured pilot panel) |
+| `makro1/css/styles.css` | `.dash-honest-pilot` / `.dhp-*`, `.hac-pilot-note` |
+| `assets/js/portal-core/ui/renderer.js` | Optional `homeLernDashboardPilotNote` under Lern-Dashboard card |
+| `makro1/js/ui/renderer.js` | Sets `homeLernDashboardPilotNote` (makro1-only home hint) |
+>>>>>>> dashboard-ui-pilot
 
 ## Derived metrics (exact)
 

@@ -39,5 +39,7 @@ export const {
   getDueCards,
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
-  checkAnswer: checkAnswerWithTolerance
+  checkAnswer: checkAnswerWithTolerance,
+  homeLernDashboardPilotNote:
+    "Pilot: Kennzahlen aus Protokoll im Dashboard (Kasten „Kennzahlen aus dem Lernprotokoll“)."
 });

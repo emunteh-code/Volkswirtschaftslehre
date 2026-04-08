@@ -1,3 +1,6 @@
+import { EXAM_FINISH_REASON } from "../exam/examSessionBackbone.js";
+import { ATTEMPT_CONTEXT, MISTAKE_SOURCE, generateAttemptId } from "../state/learnerBackbone.js";
+
 export function createQuickExamModule({
   courseLabel,
   stepProblems,
@@ -6,7 +9,12 @@ export function createQuickExamModule({
   checkAnswerWithTolerance,
   recordAnswer,
   updateSRS,
-  renderMath
+  renderMath,
+  /** When set with appendLearnerAttempt, Schnelltest sessions are logged to the learner backbone. */
+  moduleSlug = null,
+  appendLearnerAttempt = null,
+  /** Optional: one mistake row per wrong committed answer (concept_id from step problem). */
+  appendMistakeLogEntry = null
 }) {
   let examState = null;
 
@@ -39,15 +47,34 @@ export function createQuickExamModule({
     feedbackEl.appendChild(span);
   }
 
-  function finishExam() {
+  function finishExam(finishReason = EXAM_FINISH_REASON.COMPLETE) {
     if (!examState) return;
     if (examState.timerInterval) clearInterval(examState.timerInterval);
     const content = document.getElementById("content");
     if (!content) return;
 
-    const total = examState.questions.length;
-    const correct = examState.correct;
-    const pct = Math.round((correct / total) * 100);
+    const snap = examState;
+    if (typeof appendLearnerAttempt === "function" && moduleSlug) {
+      appendLearnerAttempt({
+        attempt_id: snap.attemptId,
+        module_slug: moduleSlug,
+        context: ATTEMPT_CONTEXT.QUICK_EXAM,
+        target_id: "quick_exam_session",
+        started_at: snap.startTime,
+        submitted_at: Date.now(),
+        score: { earned: snap.correct, max: snap.questions.length },
+        responses: snap.responses && typeof snap.responses === "object" ? snap.responses : {},
+        meta: {
+          course_label: courseLabel,
+          duration_ms_config: snap.duration,
+          finish_reason: finishReason
+        }
+      });
+    }
+
+    const total = snap.questions.length;
+    const correct = snap.correct;
+    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     const color = pct >= 70 ? "var(--accent)" : pct >= 50 ? "var(--accent2)" : "var(--accent3)";
     const msg = pct >= 70 ? "Sehr gut - weiter so!" : pct >= 50 ? "Gut - weiter ueben!" : "Noch ueben - schwache Konzepte wiederholen.";
 
@@ -72,7 +99,7 @@ export function createQuickExamModule({
     if (!content) return;
 
     if (examState.current >= examState.questions.length) {
-      finishExam();
+      finishExam(EXAM_FINISH_REASON.COMPLETE);
       return;
     }
 
@@ -122,7 +149,7 @@ export function createQuickExamModule({
       const remainingMs = Math.max(0, examState.duration - (Date.now() - examState.startTime));
       if (remainingMs === 0) {
         clearInterval(examState.timerInterval);
-        finishExam();
+        finishExam(EXAM_FINISH_REASON.TIMEOUT);
         return;
       }
       const m = Math.floor(remainingMs / 60000);
@@ -148,13 +175,16 @@ export function createQuickExamModule({
 
     if (examState?.timerInterval) clearInterval(examState.timerInterval);
 
+    const useBackbone = typeof appendLearnerAttempt === "function" && moduleSlug;
     examState = {
       questions: allProblems.slice(0, Math.min(examQuestions, allProblems.length)),
       current: 0,
       correct: 0,
       startTime: Date.now(),
       duration: examDurationMs,
-      timerInterval: null
+      timerInterval: null,
+      attemptId: useBackbone ? generateAttemptId(moduleSlug) : null,
+      responses: useBackbone ? {} : null
     };
     renderExamQuestion();
   }
@@ -170,6 +200,15 @@ export function createQuickExamModule({
     const correct = result.correct;
     const feedbackEl = document.getElementById("examFeedback");
 
+    const refKey = `idx_${examState.current}`;
+    if (examState.responses && typeof examState.responses === "object") {
+      examState.responses[refKey] = {
+        concept_id: q.conceptId,
+        correct,
+        committed_at: Date.now()
+      };
+    }
+
     if (correct) {
       examState.correct += 1;
       setFeedbackContent(feedbackEl, "fb-correct", "Richtig - ", q.step.explain);
@@ -177,6 +216,17 @@ export function createQuickExamModule({
       updateSRS(q.conceptId, true);
       window.__updateStreakUI?.();
     } else {
+      if (typeof appendMistakeLogEntry === "function" && moduleSlug && q.conceptId) {
+        appendMistakeLogEntry({
+          module_slug: moduleSlug,
+          concept_id: q.conceptId,
+          source: MISTAKE_SOURCE.QUICK_EXAM,
+          ref_id: `quick_exam:${examState.attemptId || "na"}:${examState.current}`,
+          wrong_answer: val,
+          timestamp: Date.now(),
+          meta: { title: q.title, context: q.context, step_idx: q.stepIdx }
+        });
+      }
       if (feedbackEl) {
         const trapMsg = result.trap ? `<div style="margin-bottom:6px">Achtung: ${escapeHtml(result.trap)}</div>` : "";
         const correctAnswers = Array.isArray(q.step.answer) ? q.step.answer : [q.step.answer];
@@ -211,6 +261,14 @@ export function createQuickExamModule({
 
   function skipExamQ() {
     if (!examState) return;
+    const refKey = `idx_${examState.current}`;
+    if (examState.responses && typeof examState.responses === "object") {
+      examState.responses[refKey] = {
+        concept_id: examState.questions[examState.current]?.conceptId,
+        skipped: true,
+        committed_at: Date.now()
+      };
+    }
     examState.current += 1;
     renderExamQuestion();
   }

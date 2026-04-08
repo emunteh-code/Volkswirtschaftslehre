@@ -6,19 +6,15 @@ Shared **selector/derivation** layer over learner backbone attempts, mistake log
 
 | Path | Role |
 |------|------|
-<<<<<<< HEAD
-| `assets/js/portal-core/data/dashboardDerivedMetrics.js` | `buildDashboardDerivedMetricsSnapshot`, `buildHonestDashboardPilotHtml` (structured UI), `formatDashboardDerivedMetricsLines` (optional list) |
-| `makro1/js/features/dashboard.js` | Inserts honest pilot panel before existing stat tiles |
-| `makro1/css/styles.css` | `.dash-honest-pilot`, `.dhp-*`, `.hac-pilot-note` |
-| `assets/js/portal-core/ui/renderer.js` | Optional `homeLernDashboardPilotNote` under Lern-Dashboard card |
-| `makro1/js/ui/renderer.js` | Sets pilot note (makro1-only) |
-=======
 | `assets/js/portal-core/data/dashboardDerivedMetrics.js` | Pure selectors + `buildDashboardDerivedMetricsSnapshot`, `buildHonestDashboardPilotHtml`, `formatDashboardDerivedMetricsLines` (legacy list) |
-| `makro1/js/features/dashboard.js` | Inserts `buildHonestDashboardPilotHtml` (structured pilot panel) |
+| `makro1/js/features/dashboard.js` | Inserts `buildHonestDashboardPilotHtml` before existing stat tiles |
+| `statistik/js/features/dashboard.js` | Same pilot panel + Fehlerprotokoll CTA (Statistik backbone) |
 | `makro1/css/styles.css` | `.dash-honest-pilot` / `.dhp-*`, `.hac-pilot-note` |
+| `statistik/css/styles.css` | Same pilot panel + `.hac-pilot-note` styles for Statistik |
 | `assets/js/portal-core/ui/renderer.js` | Optional `homeLernDashboardPilotNote` under Lern-Dashboard card |
 | `makro1/js/ui/renderer.js` | Sets `homeLernDashboardPilotNote` (makro1-only home hint) |
->>>>>>> dashboard-ui-pilot
+| `statistik/js/ui/renderer.js` | Sets `homeLernDashboardPilotNote` (statistik home hint) |
+| `assets/js/portal-core/features/exam.js` | Optional Schnelltest hooks: `moduleSlug` + `appendLearnerAttempt` / `appendMistakeLogEntry` (`QUICK_EXAM`) |
 
 ## Derived metrics (exact)
 
@@ -27,7 +23,7 @@ Shared **selector/derivation** layer over learner backbone attempts, mistake log
 | `attempts.total` | **supported** when module logs attempts | `listLearnerAttempts({ module_slug, limit })` → `{module}_attempts_v1` |
 | `attempts.by_context` | **supported** | Same; uses `context` on each attempt |
 | `attempts.recent_concept_schnelltest` | **supported** if any such attempts exist | `CONCEPT_SCHNELLTEST` + `score`, `meta.finish_reason` |
-| `attempts.recent_quick_exam` | **not_available** until wired | `QUICK_EXAM` — makro1 does not append step-Schnelltest attempts yet |
+| `attempts.recent_quick_exam` | **supported** in Statistik (Schnelltest hooks); **not_available** in makro1/mikro1 until they pass the same hooks | `QUICK_EXAM` in `portal-core/features/exam.js` when module opts in |
 | `attempts.recent_full_exam` | **supported** after full-exam submit (makro1 pilot) | `FULL_EXAM` + `score`, `meta` |
 | `attempts.first_recorded_per_item_concept_schnelltest` | **partial** | Earliest logged response per `item_id` across sessions; ignores later retakes; not the same as “first human try before any log” |
 | `mistakes.total` | **supported** when mistakes logged | `listMistakeLogEntries` → `{module}_mistakes_v1` |

@@ -30,7 +30,9 @@ const baseRenderer = createRenderer({
   getDueCards,
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
-  checkAnswer: checkAnswerWithTolerance
+  checkAnswer: checkAnswerWithTolerance,
+  homeLernDashboardPilotNote:
+    'Pilot: Kennzahlen aus Lernprotokoll im Dashboard (Kasten „Kennzahlen aus dem Lernprotokoll“).'
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

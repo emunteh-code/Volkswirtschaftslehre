@@ -10,6 +10,10 @@ export const STREAK_KEY     = 'stat_streak_v1';
 export const THEME_KEY      = 'stat_theme_v1';
 export const QUESTION_STATS_KEY = 'stat_question_stats_v1';
 export const FE_STATE_KEY   = 'stat_fe_state_v1';
+/** Learner backbone (attempt log + mistake log) */
+export const ATTEMPTS_KEY   = 'statistik_attempts_v1';
+export const MISTAKES_KEY   = 'statistik_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'statistik_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

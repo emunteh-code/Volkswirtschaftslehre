@@ -190,11 +190,7 @@
   margin-top: 24px;
 }
 
-<<<<<<< HEAD
-/* Home: pilot line under Lern-Dashboard */
-=======
 /* Home: optional pilot line under Lern-Dashboard card */
->>>>>>> dashboard-ui-pilot
 .hac-pilot-note {
   margin: 8px 0 0;
   font-size: 11px;
@@ -202,11 +198,7 @@
   color: var(--muted);
 }
 
-<<<<<<< HEAD
-/* Dashboard: honest protocol pilot (text-only, prioritized sections) */
-=======
 /* Dashboard: honest protocol pilot panel (text-only) */
->>>>>>> dashboard-ui-pilot
 .dash-honest-pilot {
   margin: 0 0 20px;
   padding: 14px 16px;

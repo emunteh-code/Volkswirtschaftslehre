@@ -127,8 +127,9 @@ export const CONTENT = {
         `<p>Entscheider bewerten Gegenwart und Zukunft nicht neutral. Zeitpräferenzen entscheiden darüber, ob heutiger Konsum, Ersparnis oder spätere Rückflüsse attraktiver wirken. Marktpreis und Präferenz treffen sich später in der intertemporalen Wahl.</p>`
       ),
       section(
-        'Rolle der Präferenzen',
-        `<p>Entscheider bewerten Gegenwart und Zukunft nicht neutral. Zeitpräferenzen entscheiden darüber, ob heutiger Konsum, Ersparnis oder spätere Rückflüsse attraktiver wirken. Marktpreis und Präferenz treffen sich später in der intertemporalen Wahl.</p>`
+        'Kapitalmarktorientierung: Bewertung und Benchmark',
+        `<p>In der kapitalmarktorientierten Ausprägung stehen Preisbildung auf vollkommenen Märkten und die Ableitung von Bewertungs- und Entscheidungskriterien im Vordergrund. Der vollkommene Kapitalmarkt ist dabei ein analytischer Referenzpunkt: Er liefert klare Tausch- und Bewertungslogik, ersetzt aber nicht die Beschreibung realer Friktionen.</p>
+         ${warn('Verwechslungsfehler:', 'Kapitalmarktorientierung meint nicht „die Realität ist reibungslos“, sondern: Zins und Marktpreis strukturieren Vergleiche über die Zeit und liefern unter klaren Annahmen eindeutige Investitionsregeln.')}`
       )
     ].join(''),
     formeln: [
@@ -144,12 +145,12 @@ export const CONTENT = {
         'Die moderne Betrachtungsweise erweitert die Liquiditätsfrage um Marktpreise, Präferenzen und Bewertung, ersetzt sie aber nicht.'
       ),
       task(
-        'Warum ergänzt die moderne Betrachtungsweise die traditionelle Liquiditätslogik, statt sie zu ersetzen?',
+        'Warum ist der vollkommene Kapitalmarkt in der kapitalmarktorientierten Sicht kein Realitätsersatz?',
         [
-          step('Traditionelle Logik festhalten.', String.raw`\text{Liquidität sichert Zahlungsfähigkeit und Fristenkongruenz.}`),
-          step('Moderne Ergänzung nennen.', String.raw`\text{Kapitalmärkte und Präferenzen bewerten zusätzlich Wert und Alternativkosten.}`)
+          step('Rolle des Modells benennen.', String.raw`\text{Er strukturiert Bewertung und Tauschlogik unter idealisierten Annahmen.}`),
+          step('Grenze einordnen.', String.raw`\text{Reale Märkte weichen durch Information, Transaktionskosten und weitere Friktionen ab.}`)
         ],
-        'Die moderne Betrachtungsweise erweitert die Liquiditätsfrage um Marktpreise, Präferenzen und Bewertung, ersetzt sie aber nicht.'
+        'Der vollkommene Kapitalmarkt ist ein Bewertungs- und Argumentationsrahmen, keine Behauptung, dass alle Märkte reibungslos sind.'
       )
     ]
   },
@@ -342,11 +343,17 @@ export const CONTENT = {
         'Vollständiger Finanzplan',
         `<p>Der vollständige Finanzplan zeigt periodisch, wann Investition, Rückflüsse und eventuelle Anschlussfinanzierung oder Wiederanlage anfallen. Dadurch wird sichtbar, dass die Investitionsrechnung immer zugleich eine Finanzierungsrechnung ist.</p>
          ${warn('Methodenfehler:', 'Kapitalwert- und Endwertmethode sind keine konkurrierenden Entscheidungsregeln, sondern zwei Perspektiven auf dieselbe Zahlungsreihe.')}`
+      ),
+      section(
+        'Annuitätenmethode',
+        `<p>Die Annuitätenmethode drückt den Kapitalwert einer Investition als äquivalente konstante Periodenzahlung aus: dieselbe Zahlungsreihe wird in eine Rente mit gleichem Barwert übersetzt. Damit lässt sich der Vermögenszuwachs der Investition als gleichmäßiger Periodenbeitrag interpretieren und mit Finanzierungsraten vergleichen.</p>
+         ${mathBlock(String.raw`$$\text{Annuität } a = \frac{K_0}{RBWF(n,i)} \quad\text{bzw.}\quad K_0 = a \cdot RBWF(n,i)$$`)}`
       )
     ].join(''),
     formeln: [
       { label: 'Rentenbarwertfaktor', eq: String.raw`$$RBWF = \frac{1-(1+i)^{-n}}{i}$$`, desc: 'Periodische Zahlungen werden auf den Gegenwartszeitpunkt gebracht.' },
-      { label: 'Äquivalenz', eq: String.raw`$$EW_n = K_0 (1+i)^n$$`, desc: 'Endwert und Kapitalwert führen bei gleichem Zinssatz zum selben Urteil.' }
+      { label: 'Äquivalenz', eq: String.raw`$$EW_n = K_0 (1+i)^n$$`, desc: 'Endwert und Kapitalwert führen bei gleichem Zinssatz zum selben Urteil.' },
+      { label: 'Annuität aus Kapitalwert', eq: String.raw`$$a = \frac{K_0}{RBWF(n,i)}$$`, desc: 'Äquivalente Rente zum Kapitalwert (Kurslogik).' }
     ],
     aufgaben: [
       task(
@@ -379,7 +386,7 @@ export const CONTENT = {
       ),
       section(
         'Kapitalwertfunktion lesen',
-        `<p>Die Kapitalwertfunktion zeigt, wie empfindlich der Projektwert auf Änderungen des Kalkulationszinssatzes reagiert. Bei einer Normalinvestition fällt sie typischerweise mit steigendem Zinssatz.</p>`
+        `<p>Die Kapitalwertfunktion zeigt, wie empfindlich der Projektwert auf Änderungen des Kalkulationszinssatzes reagiert. Bei einer typischen Investition (Auszahlung zuerst, spätere Einzahlungen) fällt sie mit steigendem Zinssatz; bei einer Finanzierungskonstellation kann das Profil spiegelbildlich ansteigen. Für die Einordnung von IZF-Regeln ist diese Unterscheidung klausurrelevant.</p>`
       ),
       section(
         'Entscheidungsregel',
@@ -566,6 +573,10 @@ export const CONTENT = {
       `
       ),
       section(
+        'Kurs, erwartete Rendite und Kalkulationszins',
+        `<p>Im Marktgleichgewicht entspricht der aus Kurs und erwarteten künftigen Zahlungen implizite Diskontierungssatz der erwarteten Eigenkapitalrendite. Diese Größe ist zugleich der Kalkulationszins für die Bewertung unsicherer Projekte bei reiner Eigenfinanzierung in der entsprechenden Modelllogik.</p>`
+      ),
+      section(
         'Interpretation',
         `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
          ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
@@ -586,7 +597,7 @@ export const CONTENT = {
       task(
         'Warum ist bei Kapitalkosten immer die Verknüpfung „Formel -> Ergebnis -> Bedeutung“ zu prüfen?',
         [
-          step('Formel korrekt anwenden.', String.raw`\text{Parameter wie } D_1, P_0, g \text{ oder Skontofristen müssen konsistent eingesetzt werden.}`),
+          step('Formel korrekt anwenden.', String.raw`\text{Parameter wie } D_1, P_0 \text{ und } g \text{ müssen konsistent eingesetzt werden.}`),
           step('Ergebnis wirtschaftlich lesen.', String.raw`\text{Die Zahl ist eine Mindestanforderung der Kapitalgeber, keine bloße Rechengröße.}`),
           step('Entscheidungsbezug herstellen.', String.raw`\text{Erst im Vergleich mit Projekt- oder Finanzierungsertrag wird klar, ob Wert geschaffen wird.}`)
         ],
@@ -669,6 +680,14 @@ export const CONTENT = {
         'Modigliani-Miller als Benchmark',
         `<p>Die Irrelevanzthese zeigt, dass Kapitalstruktur unter sehr strengen Annahmen keinen Einfluss auf den Unternehmenswert hätte. Gerade deshalb ist sie didaktisch wertvoll: Sie macht sichtbar, welche realen Friktionen den Unterschied erzeugen.</p>
          ${warn('Benchmarkfehler:', 'Modigliani-Miller ist ein Referenzmodell unter starken Annahmen, keine 1:1-Beschreibung realer Kapitalmärkte.')}`
+      ),
+      section(
+        'Annahmenraum und Irrelevanz',
+        `<p>Unter vollkommenem und vollständigem Kapitalmarkt gleichen sich Ertrags- und Risikoeffekte einer höheren Verschuldung in der Benchmark-Logik aus: Weder die erwartete Gesamtkapitalrendite noch der Unternehmenswert hängen dann vom Verhältnis von Fremd- zu Eigenkapital ab. Leverage kann die Eigenkapitalrendite und das Eigenkapitalrisiko verändern, ohne den Gesamtwert zu verschieben.</p>`
+      ),
+      section(
+        'Von der Theorie zu realen Kapitalmärkten',
+        `<p>Sobald Märkte unvollkommen oder unvollständig sind, gewinnen Steuern, Insolvenz- und Transaktionskosten, Informationsasymmetrien und unterschiedliche Finanzierungsbedingungen an Bedeutung. Genau diese Faktoren erklären, warum in der Praxis Kapitalstruktur doch wert- und entscheidungsrelevant werden kann.</p>`
       )
     ].join(''),
     formeln: [

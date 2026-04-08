@@ -67,26 +67,46 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Informations- und Transaktionsprobleme machen Intermediäre ökonomisch sinnvoll.'
         }
       ]
+    },
+    {
+      title: 'Zins als Preis des Zeittauschs',
+      context: 'Kapitalmarktorientierte Bewertung vergleicht Zahlungen über verschiedene Zeitpunkte.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ist der Zinssatz in dieser Sicht vor allem ein „Nebenparameter“ oder der Preis des Zeittauschs?',
+          answer: ['preis des zeittauschs', 'tauschpreis', 'bewertungsmaßstab'],
+          options: { problemId: 'fw_km_2', stepId: 'price', isDecision: true },
+          hint: 'Er verbindet heute und morgen in einer Zahl.',
+          explain: 'Der Zins ist der Marktpreis, mit dem zukünftige und heutige Zahlungen vergleichbar werden.'
+        },
+        {
+          q: '[2. Decision] Was ist die erste Konsequenz für fast jede dynamische Investitionsaufgabe?',
+          answer: ['diskontieren oder aufzinsen', 'zeitwert', 'bewertungszeitpunkt'],
+          options: { problemId: 'fw_km_2', stepId: 'transform', dependsOn: 'price' },
+          hint: 'Ohne Transformation keine Vergleichbarkeit.',
+          explain: 'Zahlungen müssen auf einen gemeinsamen Bewertungszeitpunkt gebracht werden.'
+        }
+      ]
     }
   ],
   institutionen_marktunvollkommenheit: [
     {
-      title: 'Benchmark und Realität',
-      context: 'Eine Aufgabe kontrastiert vollkommenen Kapitalmarkt und reale Bankenfunktion.',
+      title: 'Institutionen und Informationsasymmetrie',
+      context: 'Auf unvollkommenen Märkten entstehen Normen und Intermediäre.',
       steps: [
         {
-          q: '[1. Interpretation] Würden Banken auf vollkommenen Märkten theoretisch weniger wichtig wirken?',
-          answer: ['ja', 'yes'],
-          options: { problemId: 'fw_ki_1', stepId: 'yes', isDecision: true },
-          hint: 'Dort lassen sich viele Tauschvorgänge direkt über den Markt organisieren.',
-          explain: 'Ja. Gerade deshalb erklärt die Theorie Banken über reale Friktionen.'
+          q: '[1. Interpretation] Sind Banken in dieser Sicht primär „Dekoration“ oder Antwort auf Marktfriktionen?',
+          answer: ['antwort auf friktionen', 'marktfriktionen', 'institution'],
+          options: { problemId: 'fw_inst_1', stepId: 'role', isDecision: true },
+          hint: 'Sie mildern Informations- und Transaktionsprobleme.',
+          explain: 'Institutionen wie Banken werden ökonomisch sinnvoll, weil sie Friktionen adressieren.'
         },
         {
-          q: '[2. Decision] Welche Friktion rechtfertigt Banken besonders?',
-          answer: ['informationsprobleme', 'suchkosten', 'transaktionskosten'],
-          options: { problemId: 'fw_ki_1', stepId: 'friction', dependsOn: 'yes' },
-          hint: 'Mehr als eine Antwort wäre inhaltlich plausibel.',
-          explain: 'Informations- und Transaktionsprobleme machen Intermediäre ökonomisch sinnvoll.'
+          q: '[2. Decision] Welches Problem rechtfertigt typischerweise Finanzintermediation besonders?',
+          answer: ['informationsasymmetrie', 'informationsproblem', 'überwachung'],
+          options: { problemId: 'fw_inst_1', stepId: 'info', dependsOn: 'role' },
+          hint: 'Kreditgeber können Qualität und Verhalten schwer beobachten.',
+          explain: 'Informationsasymmetrien und damit verbundene Überwachungs- und Suchkosten stützen die Intermediärsfunktion.'
         }
       ]
     }
@@ -231,6 +251,66 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Nein. Sie sind äquivalente Bewertungszugriffe auf dieselbe Zahlungsreihe.'
         }
       ]
+    },
+    {
+      title: 'Kapitalwert und Endwert (Äquivalenz)',
+      context: 'Gegeben: Kapitalwert K₀ = 15 bei i = 10 %, Laufzeit n = 2 Jahre (Kursbeispiellogik).',
+      steps: [
+        {
+          q: '[1. Execution] Wie hoch ist der Endwert EW₂ in Euro (auf zwei Nachkommastellen)?',
+          answer: ['18.15', '18,15'],
+          options: { problemId: 'fw_re_2', stepId: 'ew', role: 'CON_SE' },
+          hint: 'EWₙ = K₀ · (1+i)ⁿ.',
+          explain: 'EW₂ = 15 · 1,1² = 18,15.'
+        },
+        {
+          q: '[2. Validation] Bleibt das Vorteilhaftigkeitsurteil gegenüber nur K₀ gleich?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_re_2', role: 'VALIDATION', dependsOn: 'ew' },
+          hint: 'Nur der Bezugszeitpunkt wechselt.',
+          explain: 'Ja. Endwert- und Kapitalwertmethode sind bei gleichem Zins äquivalente Perspektiven.'
+        }
+      ]
+    },
+    {
+      title: 'Annuität und Rentenbarwertfaktor',
+      context: 'Der Kapitalwert einer Investition beträgt K₀ = 15; es soll die äquivalente konstante Jahreszahlung a über n = 2 bei i = 10 % bestimmt werden (RBF(2,10 %) ≈ 1,7355).',
+      steps: [
+        {
+          q: '[1. Decision] Welche Grundbeziehung verknüpft Annuität und Kapitalwert?',
+          answer: ['k0 gleich a mal rbf', 'k0 = a * rbf', 'annuitaet mal rentenbarwertfaktor'],
+          options: { problemId: 'fw_re_3', stepId: 'rel', isDecision: true },
+          hint: 'Barwert der Rente gleich Kapitalwert.',
+          explain: 'Es gilt K₀ = a · RBWF(n,i), also a = K₀ / RBWF(n,i).'
+        },
+        {
+          q: '[2. Execution] a liegt etwa bei (auf zwei Dezimalstellen gerundet)?',
+          answer: ['8.64', '8,64'],
+          options: { problemId: 'fw_re_3', stepId: 'a', dependsOn: 'rel', role: 'CON_SE' },
+          hint: '15 / 1,7355.',
+          explain: 'a ≈ 15 / 1,7355 ≈ 8,64.'
+        }
+      ]
+    },
+    {
+      title: 'Vollständiger Finanzplan — Zielgröße',
+      context: 'Ein Finanzplan listet pro Periode Zahlungsreihe, Finanzierung (Kredit), Zins, Tilgung und eine Zeile „Wert-/Vermögenszuwachs“.',
+      steps: [
+        {
+          q: '[1. Interpretation] Was soll die Zeile „Wert-/Vermögenszuwachs“ in der Kurslogik ausdrücken?',
+          answer: ['verursachter vermoegenszuwachs', 'wertzuwachs der investition', 'periodischer nettoeffekt'],
+          options: { problemId: 'fw_re_4', stepId: 'meaning', isDecision: true },
+          hint: 'Nicht nur Buchung, sondern ökonomische Wirkung.',
+          explain: 'Sie fasst den durch das Projekt und die Finanzierung verursachten Vermögenszuwachs der Periode zusammen.'
+        },
+        {
+          q: '[2. Decision] Warum ist der Plan mehr als eine bloße Kapitalwertzahl?',
+          answer: ['zeitliche struktur', 'liquiditaet und finanzierung', 'periodenweise sichtbar'],
+          options: { problemId: 'fw_re_4', stepId: 'why', dependsOn: 'meaning' },
+          hint: 'Zwischenzeitpunkte und Finanzierung.',
+          explain: 'Er zeigt, wann Mittel fließen und wie Finanzierung und Projekt zusammenspielen.'
+        }
+      ]
     }
   ],
   izf_kapitalwertfunktion: [
@@ -280,6 +360,34 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Es verhindert die Prozentfalle, bei der hohe IZF-Werte fälschlich mit höherem Vermögensbeitrag gleichgesetzt werden.'
         }
       ]
+    },
+    {
+      title: 'IZF vs. Kapitalwert — Wahlproblem (Kurszahlen)',
+      context:
+        'Bei i = 10 %: Projekt A hat Kapitalwert 26,79 und internen Zinsfuß 22 %. Projekt B hat Kapitalwert 20 und IZF 12 %. Projekt C hat Kapitalwert 13,64 und IZF 25 % (Vergleichsbeispiel aus der VL-Logik).',
+      steps: [
+        {
+          q: '[1. Decision] Welches Projekt maximiert bei Ausschluss das Vermögen (Ziel: höchster K₀)?',
+          answer: ['projekt a', 'a'],
+          options: { problemId: 'fw_izf_3', stepId: 'pick', isDecision: true },
+          hint: 'Sortiere nach Kapitalwert, nicht nach Prozent.',
+          explain: 'Projekt A hat mit 26,79 den höchsten Kapitalwert.'
+        },
+        {
+          q: '[2. Interpretation] Hat das Projekt mit dem höchsten IZF automatisch den höchsten Kapitalwert?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_izf_3', stepId: 'no', dependsOn: 'pick' },
+          hint: 'Projekt C hat höheren IZF als A, aber niedrigeren K₀.',
+          explain: 'Nein. Höherer IZF bedeutet nicht zwingend höheren absoluten Vermögensbeitrag.'
+        },
+        {
+          q: '[3. Validation] Welche Entscheidungsregel ist bei Wahl und Vermögensmaximierung maßgeblich?',
+          answer: ['hoechster positiver kapitalwert', 'max k0', 'kapitalwert maximieren'],
+          options: { problemId: 'fw_izf_3', role: 'VALIDATION' },
+          hint: 'Absolute Wertregel.',
+          explain: 'Man wählt das Projekt mit dem höchsten positiven Kapitalwert am relevanten Kalkulationszins.'
+        }
+      ]
     }
   ],
   izf_grenzen: [
@@ -300,6 +408,27 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'fw_izfg_1', stepId: 'npv', dependsOn: 'no' },
           hint: 'Gesucht ist die absolute Vermögensregel.',
           explain: 'Bei solchen Konflikten bleibt der Kapitalwert die robustere Entscheidungsgröße.'
+        }
+      ]
+    },
+    {
+      title: 'Skalierung: gleicher IZF, anderer Kapitalwert',
+      context:
+        'Zwei einperiodige Projekte: Projekt 1 zahlt −1 in t=0 und 1,21 in t=1; Projekt 2 zahlt −10.000 in t=0 und 12.100 in t=1. Beide haben denselben internen Zinsfuß.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ist der IZF für beide Projekte derselbe?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_izfg_2', stepId: 'same', isDecision: true },
+          hint: 'Die Zahlungsreihe ist proportional skaliert.',
+          explain: 'Ja. Proportionale Skalierung ändert den IZF nicht.'
+        },
+        {
+          q: '[2. Decision] Bei i = 10 %: Welches Projekt hat den höheren Kapitalwert?',
+          answer: ['projekt 2', '2', 'groesseres projekt'],
+          options: { problemId: 'fw_izfg_2', stepId: 'bigger', dependsOn: 'same' },
+          hint: 'K₀ skaliert mit dem Volumen.',
+          explain: 'Projekt 2 hat den höheren absoluten Kapitalwert, obwohl der IZF gleich ist.'
         }
       ]
     }
@@ -373,51 +502,79 @@ const BASE_STEP_PROBLEMS = {
           explain: 'Das Bezugsrecht gleicht den Verwässerungseffekt aus.'
         }
       ]
+    },
+    {
+      title: 'Ex-Kurs und Bezugsrecht (Zahlenweg)',
+      context:
+        'n_alt = 8 Mio., n_neu = 2 Mio., alter Kurs aBK = 10 €, Emissionskurs EmK = 9 € (VL-Beispielstruktur).',
+      steps: [
+        {
+          q: '[1. Execution] Wie hoch ist der neue Börsenkurs nBK in € (zwei Nachkommastellen)?',
+          answer: ['9.80', '9,80'],
+          options: { problemId: 'fw_bz_2', stepId: 'nbk', role: 'CON_SE' },
+          hint: '(n_alt·aBK + n_neu·EmK) / (n_alt + n_neu).',
+          explain: 'Marktwert EK = 80 + 18 = 98 Mio.; nBK = 98/10 = 9,80 €.'
+        },
+        {
+          q: '[2. Execution] Wie hoch ist der Bezugsrechtswert BR = aBK − nBK in €?',
+          answer: ['0.20', '0,20'],
+          options: { problemId: 'fw_bz_2', stepId: 'br', dependsOn: 'nbk', role: 'CON_SE' },
+          hint: 'Differenz Alt-Kurs minus Mischkurs.',
+          explain: 'BR = 10 − 9,80 = 0,20 €.'
+        },
+        {
+          q: '[3. Validation] Gleicht das Bezugsrecht die Verwässerung des Kurses aus?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_bz_2', role: 'VALIDATION' },
+          hint: 'Kursplus Recht ≈ alter Kurs.',
+          explain: 'Ja. Ökonomisch kompensiert das Recht den Kursrückgang für Altaktionäre.'
+        }
+      ]
     }
   ],
   eigenkapitalkosten: [
     {
-      title: 'Preis des Kapitals',
-      context: 'Eine Aufgabe nennt Aktienpreis, erwartete Dividende und Wachstumsrate.',
+      title: 'Eigenkapitalkosten aus Dividendenmodell',
+      context: 'P₀ = 40 €, erwartete Dividende D₁ = 2 €, konstantes Wachstum g = 3 %.',
       steps: [
         {
-          q: '[1. Interpretation] Lässt sich daraus die geforderte Eigenkapitalrendite ableiten?',
-          answer: ['ja', 'yes'],
-          options: { problemId: 'fw_kk_1', stepId: 'yes', isDecision: true },
-          hint: 'Genau dafür dient das Dividendenbarwertmodell.',
-          explain: 'Ja. Das Modell verknüpft Preis, Dividende und Wachstum zu Eigenkapitalkosten.'
+          q: '[1. Execution] Wie hoch ist k_E = D₁/P₀ + g in % (ohne %-Zeichen, eine Nachkommastelle)?',
+          answer: ['8.0', '8', '8,0'],
+          options: { problemId: 'fw_ek_1', stepId: 'ke', role: 'CON_SE' },
+          hint: '2/40 + 0,03.',
+          explain: 'k_E = 0,05 + 0,03 = 0,08, also 8 %.'
         },
         {
-          q: '[2. Decision] Ist Skontoverzicht wirtschaftlich neutral?',
-          answer: ['nein', 'no'],
-          options: { problemId: 'fw_kk_1', stepId: 'no', dependsOn: 'yes' },
-          hint: 'Denk an den impliziten Lieferantenkredit.',
-          explain: 'Nein. Der Verzicht auf Skonto erzeugt oft hohe effektive Fremdkapitalkosten.'
+          q: '[2. Interpretation] Was misst k_E ökonomisch?',
+          answer: ['geforderte rendite', 'erwartete aktienrendite', 'kalkulationszins ek'],
+          options: { problemId: 'fw_ek_1', stepId: 'mean', dependsOn: 'ke' },
+          hint: 'Opportunität der Eigenkapitalgeber.',
+          explain: 'k_E ist die vom Markt/preisbasiert implizierte geforderte Eigenkapitalrendite.'
         }
       ]
     },
     {
       title: 'Formel -> Ergebnis -> Bedeutung',
-      context: 'Dividendenbarwert- und Skontokostenformel liefern konkrete Prozentwerte.',
+      context: 'Nach der Berechnung von k_E folgt die ökonomische Einordnung.',
       steps: [
         {
           q: '[1. Interpretation] Sind Kapitalkosten bloße Rechenergebnisse ohne Entscheidungsbedeutung?',
           answer: ['nein', 'no'],
-          options: { problemId: 'fw_kk_2', stepId: 'no', isDecision: true },
+          options: { problemId: 'fw_ek_2', stepId: 'no', isDecision: true },
           hint: 'Kapitalkosten sind Mindestverzinsungsanforderungen.',
           explain: 'Nein. Sie sind ökonomische Hürdensätze und damit Entscheidungsgrößen.'
         },
         {
           q: '[2. Decision] Welcher Prüfschritt folgt nach der Formelrechnung zwingend?',
           answer: ['interpretation', 'vergleich mit projektrendite', 'bedeutung'],
-          options: { problemId: 'fw_kk_2', stepId: 'meaning', dependsOn: 'no' },
+          options: { problemId: 'fw_ek_2', stepId: 'meaning', dependsOn: 'no' },
           hint: 'Von der Zahl zur Entscheidung.',
           explain: 'Nach der Berechnung muss geprüft werden, ob Projekt-/Finanzierungserträge die Kapitalkosten decken oder übertreffen.'
         },
         {
           q: '[3. Validation] Welche Falle wird dadurch vermieden?',
           answer: ['formelfalle', 'rechenfalle', 'zahl ohne bedeutung'],
-          options: { problemId: 'fw_kk_2', role: 'VALIDATION' },
+          options: { problemId: 'fw_ek_2', role: 'VALIDATION' },
           hint: 'Eine richtige Zahl kann trotzdem falsch genutzt werden.',
           explain: 'Es vermeidet die Formelfalle: korrekt rechnen, aber ökonomisch falsch entscheiden.'
         }
@@ -426,49 +583,43 @@ const BASE_STEP_PROBLEMS = {
   ],
   fremdkapitalkosten: [
     {
-      title: 'Preis des Kapitals',
-      context: 'Eine Aufgabe nennt Aktienpreis, erwartete Dividende und Wachstumsrate.',
+      title: 'Skonto und Periodenzins (VL-Logik)',
+      context:
+        'Skonto 2 % bei Zahlung von 98 % des Betrags in 10 Tagen; sonst 100 % in 30 Tagen. Für die Finanzierungskosten der Zahlungsaufschub-Periode: Barwertgleichheit 98 = 100/(1+r_FK) (Rechnungsbetrag 100).',
       steps: [
         {
-          q: '[1. Interpretation] Lässt sich daraus die geforderte Eigenkapitalrendite ableiten?',
+          q: '[1. Decision] Ist der Verzicht auf Skonto ein faktischer Lieferantenkredit?',
           answer: ['ja', 'yes'],
-          options: { problemId: 'fw_kk_1', stepId: 'yes', isDecision: true },
-          hint: 'Genau dafür dient das Dividendenbarwertmodell.',
-          explain: 'Ja. Das Modell verknüpft Preis, Dividende und Wachstum zu Eigenkapitalkosten.'
+          options: { problemId: 'fw_fk_1', stepId: 'credit', isDecision: true },
+          hint: 'Längere Zahlungsfrist gegen Preisnachlass.',
+          explain: 'Ja. Wer später zahlt, nutzt einen kurzfristigen Kredit zum Preis des Skontoverzichts.'
         },
         {
-          q: '[2. Decision] Ist Skontoverzicht wirtschaftlich neutral?',
-          answer: ['nein', 'no'],
-          options: { problemId: 'fw_kk_1', stepId: 'no', dependsOn: 'yes' },
-          hint: 'Denk an den impliziten Lieferantenkredit.',
-          explain: 'Nein. Der Verzicht auf Skonto erzeugt oft hohe effektive Fremdkapitalkosten.'
+          q: '[2. Execution] r_FK für die kurze Frist aus 98 = 100/(1+r_FK) — r_FK in % gerundet auf zwei Stellen (ohne %-Zeichen)?',
+          answer: ['2.04', '2,04'],
+          options: { problemId: 'fw_fk_1', stepId: 'r', dependsOn: 'credit', role: 'CON_SE' },
+          hint: 'r_FK = 100/98 − 1.',
+          explain: '100/98 − 1 ≈ 0,0204, also etwa 2,04 % für die Skontoperiode.'
         }
       ]
     },
     {
-      title: 'Formel -> Ergebnis -> Bedeutung',
-      context: 'Dividendenbarwert- und Skontokostenformel liefern konkrete Prozentwerte.',
+      title: 'Fremdkapitalkosten als IZF der Finanzierungsreihe',
+      context: 'Nullkupon: heute +100, in t=2 Zahlung −110 (sichere Zahlungen, VL-Einführungsbeispiel).',
       steps: [
         {
-          q: '[1. Interpretation] Sind Kapitalkosten bloße Rechenergebnisse ohne Entscheidungsbedeutung?',
-          answer: ['nein', 'no'],
-          options: { problemId: 'fw_kk_2', stepId: 'no', isDecision: true },
-          hint: 'Kapitalkosten sind Mindestverzinsungsanforderungen.',
-          explain: 'Nein. Sie sind ökonomische Hürdensätze und damit Entscheidungsgrößen.'
+          q: '[1. Decision] Wird der Finanzierungskostensatz hier sinnvoll als IZF der Finanzierungs-Zahlungsreihe interpretiert?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_fk_2', stepId: 'izf', isDecision: true },
+          hint: 'Interner Zinsfuß der durch die Finanzierung ausgelösten Zahlungen.',
+          explain: 'Ja. Bei sicheren Zahlungen entspricht der effektive Satz dem IZF der Finanzierungsreihe.'
         },
         {
-          q: '[2. Decision] Welcher Prüfschritt folgt nach der Formelrechnung zwingend?',
-          answer: ['interpretation', 'vergleich mit projektrendite', 'bedeutung'],
-          options: { problemId: 'fw_kk_2', stepId: 'meaning', dependsOn: 'no' },
-          hint: 'Von der Zahl zur Entscheidung.',
-          explain: 'Nach der Berechnung muss geprüft werden, ob Projekt-/Finanzierungserträge die Kapitalkosten decken oder übertreffen.'
-        },
-        {
-          q: '[3. Validation] Welche Falle wird dadurch vermieden?',
-          answer: ['formelfalle', 'rechenfalle', 'zahl ohne bedeutung'],
-          options: { problemId: 'fw_kk_2', role: 'VALIDATION' },
-          hint: 'Eine richtige Zahl kann trotzdem falsch genutzt werden.',
-          explain: 'Es vermeidet die Formelfalle: korrekt rechnen, aber ökonomisch falsch entscheiden.'
+          q: '[2. Interpretation] Steigt der effektive FK-Satz, wenn die Rückzahlung bei gleichem Zufluss höher ausfällt?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_fk_2', stepId: 'higher', dependsOn: 'izf' },
+          hint: 'Mehr Rückzahlung bei gleichem Kapitalzufluss.',
+          explain: 'Ja. Höhere Rückzahlung bedeutet teurere Finanzierung bei gleichem Betrag heute.'
         }
       ]
     }
@@ -497,22 +648,42 @@ const BASE_STEP_PROBLEMS = {
   ],
   modigliani_miller: [
     {
-      title: 'Renditehebel und Risikohebel',
-      context: 'Ein Unternehmen erhöht seinen Fremdkapitalanteil deutlich.',
+      title: 'MM: Irrelevanz unter Benchmark',
+      context: 'Vollkommener und vollständiger Kapitalmarkt; Frage nach dem Unternehmenswert und der Kapitalstruktur.',
       steps: [
         {
-          q: '[1. Interpretation] Kann dadurch die Eigenkapitalrendite steigen?',
-          answer: ['ja', 'yes'],
-          options: { problemId: 'fw_ks_1', stepId: 'yes', isDecision: true },
-          hint: 'Unter positiver Renditespanne wirkt Leverage nach oben.',
-          explain: 'Ja. Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen.'
+          q: '[1. Decision] Ist in dieser Benchmark-Logik das Verhältnis FK zu EK für den Unternehmenswert irrelevant?',
+          answer: ['ja', 'yes', 'irrelevant'],
+          options: { problemId: 'fw_mm_1', stepId: 'irr', isDecision: true },
+          hint: 'Irrelevanzthese.',
+          explain: 'Ja. Unter den strengen Annahmen ist die Kapitalstruktur wertneutral.'
         },
         {
-          q: '[2. Decision] Steigt damit automatisch auch das Risiko des Eigenkapitals?',
+          q: '[2. Interpretation] Können sich trotzdem EK-Rendite und EK-Risiko durch Verschuldung ändern?',
           answer: ['ja', 'yes'],
-          options: { problemId: 'fw_ks_1', stepId: 'risk', dependsOn: 'yes' },
-          hint: 'Der Puffer des Eigenkapitals wird kleiner.',
-          explain: 'Ja. Leverage verstärkt nicht nur Chancen, sondern auch Schwankungen und Verluste.'
+          options: { problemId: 'fw_mm_1', stepId: 'lever', dependsOn: 'irr' },
+          hint: 'Hebel wirkt auf EK, nicht zwingend auf Gesamtwert.',
+          explain: 'Ja. Leverage kann Eigenkapitalrendite und -risiko verschieben, ohne den Gesamtwert zu ändern.'
+        }
+      ]
+    },
+    {
+      title: 'MM vs. reale Märkte',
+      context: 'Übergang von der Theorie zur Praxis.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Faktoren können Wertrelevanz der Kapitalstruktur begründen?',
+          answer: ['steuern', 'insolvenzkosten', 'informationsasymmetrie', 'transaktionskosten'],
+          options: { problemId: 'fw_mm_2', stepId: 'fric', isDecision: true },
+          hint: 'Typische Friktionen aus der VL.',
+          explain: 'Steuern, Insolvenz- und Transaktionskosten sowie Informationsasymmetrien sind zentrale Kandidaten.'
+        },
+        {
+          q: '[2. Validation] Ist MM eine getreue Abbildung realer Märkte?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_mm_2', role: 'VALIDATION' },
+          hint: 'Benchmark, keine Empirie.',
+          explain: 'Nein. MM ist ein Referenzmodell; reale Märkte weichen systematisch ab.'
         }
       ]
     }

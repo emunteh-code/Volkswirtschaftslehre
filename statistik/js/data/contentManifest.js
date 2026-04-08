@@ -23,13 +23,67 @@ import { COURSE_CONFIG } from './courseConfig.js';
 const MODULE_SLUG = 'statistik';
 
 /**
- * Primary PDF anchors per concept: empty until course maps attach stable archive paths.
- * Layer notes in PROVENANCE_BY_CONCEPT still disclose source-distilled vs platform drill.
+ * Primary VL / course PDF anchors — paths relative to:
+ *   source-materials/Statistik/Statistik/
+ * Curated in docs/audits/statistik-provenance-curation-pass-1.md.
  */
-export const STATISTIK_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+const STATISTIK_PRIMARY_REFS_CURATED = {
+  deskriptiv: [
+    'Vorlesungen/VL_02_-_Deskriptive_Stat_1.1-1.2.pdf',
+    'Vorlesungen/VL_03_-_Deskriptive_Stat_1.3-1.6.pdf'
+  ],
+  bivariat: ['Vorlesungen/VL_04_-_Deskriptive_Stat_2.pdf'],
+  wahrscheinlichkeit: ['Vorlesungen/VL_05_-_Grundlagen_2.pdf'],
+  verteilungen: [
+    'Vorlesungen/VL_06_-_Grundlagen_3.1-3.pdf.pdf',
+    'Vorlesungen/VL_07_-_Grundlagen_3.3.0-3.3.4.pdf',
+    'Vorlesungen/VL_07_VL_08_Einschub.pdf',
+    'Vorlesungen/VL_08_-_Grundlagen_3.3.5-3.3.6.pdf'
+  ],
+  schaetzen_verfahren: ['Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf'],
+  schaetzen_eigenschaften_intervalle: [
+    'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+    'Vorlesungen/VL_10_-_Induktive_Statistik_2.pdf'
+  ],
+  testen: [
+    'Vorlesungen/VL_10_-_Induktive_Statistik_3.0-3.1.pdf',
+    'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf'
+  ],
+  regression_schaetzung_inferenz: [
+    'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+    'Vorlesungen/VL_13_-_Stat_Modellierung_1.5-1.8.pdf',
+    'Vorlesungen/VL_14_-_Stat_Modellierung_2.pdf'
+  ],
+  regression_diagnostik_prognose: [
+    'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+    'Vorlesungen/VL_13_-_Stat_Modellierung_1.5-1.8.pdf',
+    'Vorlesungen/VL_14_-_Stat_Modellierung_2.pdf'
+  ],
+  rlab: ['R-Vorkurs.pdf'],
+  z_test: [
+    'Vorlesungen/VL_10_-_Induktive_Statistik_3.0-3.1.pdf',
+    'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf'
+  ],
+  zwei_stichproben: [
+    'Vorlesungen/VL_11_-_Zwei-SP_t-Test.pdf',
+    'Tutorien/Tutorium_11/Tutorium11.pdf'
+  ],
+  varianzanalyse: [
+    'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+    'Tutorien/Tutorium_11/Tutorium11.pdf'
+  ],
+  nichtparametrisch: []
+};
+
+export const STATISTIK_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [
+    id,
+    STATISTIK_PRIMARY_REFS_CURATED[id] ? [...STATISTIK_PRIMARY_REFS_CURATED[id]] : []
+  ])
+);
 
 const NOTES_THEORY =
-  'Portal theory follows the Statistik course line; wording is authored for the portal, not a verbatim lecture paste. Canonical VL/PDF paths are not yet attached per concept in this manifest — see migration audit.';
+  'Portal theory follows the Statistik course line; wording is authored for the portal, not a verbatim lecture paste. Primary VL paths per concept: docs/audits/statistik-provenance-curation-pass-1.md (file-level only).';
 const NOTES_GRAPH =
   'Graph panel: legacy Mikro-style stubs remain in graphPanel.js for this module; interactive binding for Statistik concepts is not asserted here.';
 const NOTES_INTUITION = 'Compressed recall layer (Kernidee / Muster) for the closed learning loop.';

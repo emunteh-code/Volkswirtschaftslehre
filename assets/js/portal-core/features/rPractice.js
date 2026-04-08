@@ -196,10 +196,18 @@ export function renderRPracticeMarkup(block, options = {}) {
       <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
     </div>
     <div class="r-practice-help">
-      <span class="r-practice-help-label">Arbeitslogik</span>
-      <span>${config.runtimeMode === 'guided'
-    ? 'Geführter Paketfall: Lies zuerst den Code, sichere dann Interpretation und Mini-Task.'
-    : 'Arbeite erst mit dem Startcode, ändere dann gezielt nur die Zeilen, die der Mini-Task wirklich braucht.'}</span>
+      <span class="r-practice-help-label">So arbeitest du (Reihenfolge)</span>
+      <ol class="r-practice-help-steps">
+        <li><strong>Zuerst:</strong> Lies „${escapeHtml(config.title)}“ und den Block <em>Mini-Task</em> — das ist das Lernziel.</li>
+        <li><strong>Dann:</strong> Vergleiche den Code mit <em>Output lesen</em> (was soll rauskommen?).</li>
+        <li><strong>Bearbeiten:</strong> Ändere nur Zeilen, die der Mini-Task ausdrücklich verlangt; der Rest ist Startcode (inkl. Daten/Vorsätze).</li>
+        <li><strong>Nicht ändern:</strong> Keine Paket- oder Systemzeilen hinzufügen, wenn die Aufgabe das nicht verlangt; <code>set.seed</code> und Datenaufbau nur anfassen, wenn die Frage es braucht.</li>
+        <li><strong>Ausführen:</strong> ${config.runtimeMode === 'guided' ? 'Live-Run ist absichtlich aus — nutze Musterlösung und Interpretation wie in der Vorlesungsübung.' : '„Code ausführen“ — vergleiche die Konsole mit „Output lesen“.'}</li>
+        <li><strong>Interpretation:</strong> Formuliere in eigenen Worten, was das Ergebnis für die Modulfrage bedeutet.</li>
+      </ol>
+      <p class="r-practice-help-foot">${config.runtimeMode === 'guided'
+    ? 'Geführter Modus: Fokus auf Lesen und Zuordnen; WebR-Live ist hier nicht der Hauptweg.'
+    : 'Live-Modus: WebR läuft im Browser; bei Fehlern zuerst Tippfehler prüfen, dann Musterlösung.'}</p>
     </div>
   </div>
   <div class="r-practice-output-card">

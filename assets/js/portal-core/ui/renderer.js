@@ -300,6 +300,13 @@ export function createRenderer({
     }
   }
 
+  /** Intuition tab can show theory-derived Fehleranalyse / Vertiefung even when INTUITION data is thin. */
+  function hasPortalIntuitionSurface(conceptId) {
+    const entry = contentById[conceptId];
+    const { sections, warnings } = extractTheorySignals(entry);
+    return (warnings && warnings.length > 0) || (sections && sections.length > 1);
+  }
+
   function buildExamDrills(chapter, entry, intuition) {
     const drills = [];
     const { sections, warnings } = extractTheorySignals(entry);
@@ -418,8 +425,8 @@ ${drill.tag ? `<div class="exam-drill-meta">${drill.tag}</div>` : ""}
     label,
     question,
     buttonId,
-    buttonText,
-    openButtonText,
+    buttonText = "Lösung anzeigen",
+    openButtonText = "Lösung verbergen",
     toggleCall,
     answerId,
     cardClass = "",
@@ -547,12 +554,19 @@ ${step.eq ? `<div class="math-block">${step.eq}</div>` : ""}
             `<li><span class="f-var-key">$${key}$</span><span class="f-var-sep">-</span><span class="f-var-def">${value}</span></li>`
           ).join("")}</ul>`
         : "";
+      const varsHintMuted =
+        'font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:52rem';
+      const varsHint =
+        varsHtml ||
+        (formula.desc
+          ? `<p class="f-var-hint" style="${varsHintMuted}">Variablen und Einheiten: siehe Beschreibung unter der Gleichung und den Theorie-Tab.</p>`
+          : `<p class="f-var-hint" style="${varsHintMuted}">Tipp: Ordne jedem Symbol im Term eine ökonomische oder statistische Bedeutung zu (Theorie-Tab).</p>`);
       html += `<div class="formula-card">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
 <div class="f-eq">${formula.eq}</div>
 ${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
-${varsHtml}
+${varsHint}
 </div>`;
     });
     html += "</div></div>";
@@ -578,7 +592,7 @@ ${varsHtml}
 
   function renderIntuitionPanel(id) {
     const data = normalizeIntuitionData(intuitionById[id]);
-    if (!hasMeaningfulIntuition(data)) {
+    if (!hasMeaningfulIntuition(data) && !hasPortalIntuitionSurface(id)) {
       return '<div class="panel active"></div>';
     }
 
@@ -589,12 +603,12 @@ ${varsHtml}
 <h3>Kernidee</h3>
 ${hasMeaningfulText(data.core) ? `<div class="intuition-row"><div class="intuition-text">${data.core}</div></div>` : ""}
 ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)">
-<div class="intuition-text" style="color:var(--muted)">${data.analogy}</div>
+<div class="intuition-text" style="color:var(--muted)"><strong>Denkbild:</strong> ${data.analogy}</div>
 </div>` : ""}
 </div>`;
     }
     if (data.exam && data.exam.length) {
-      html += "<div class=\"exam-pattern\"><h4>Klausurmuster - Wenn du siehst, dann denk:</h4>";
+      html += "<div class=\"exam-pattern\"><h4>Klausurmuster – Wenn du siehst, dann denk:</h4>";
       data.exam.forEach((entry) => {
         html += `<div class="exam-trigger">
 <span class="trigger-if">Wenn:</span>
@@ -605,11 +619,35 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
       });
       html += "</div>";
     }
-    if (hasMeaningfulText(data.bridge)) {
-      html += `<div class="section-block intuition-bridge">
-<h3 class="intuition-bridge-title">Verstaendnis</h3>
-<p>${data.bridge}</p>
+
+    const entry = contentById[id];
+    const { sections: theorySections, warnings: theoryWarnings } = extractTheorySignals(entry);
+    const primaryWarning = theoryWarnings[0];
+    const deepSection = theorySections[1];
+
+    if (primaryWarning) {
+      html += `<div class="section-block intuition-fehler-block">
+<h3>Fehleranalyse</h3>
+<div class="warn-box"><strong>${primaryWarning.label}:</strong> ${primaryWarning.body}</div>
 </div>`;
+    }
+
+    if (hasMeaningfulText(data.bridge) || deepSection) {
+      html += `<div class="section-block intuition-bridge">`;
+      if (hasMeaningfulText(data.bridge)) {
+        html += `<div class="intuition-bridge-head">
+<span class="intuition-bridge-kicker">Transferpfad</span>
+<h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
+<p class="intuition-bridge-copy">${data.bridge}</p>
+</div>`;
+      }
+      if (deepSection) {
+        html += `<div class="intuition-detail-list"><div class="intuition-detail">
+<span class="intuition-detail-label">Theoretische Vertiefung</span>
+<div class="intuition-detail-copy"><strong>${deepSection.heading}:</strong> ${deepSection.paragraph}</div>
+</div></div>`;
+      }
+      html += `</div>`;
     }
     return `${html}</div>`;
   }
@@ -638,7 +676,8 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
     const tabAvailability = {
       graph: graphConcepts.has(conceptId),
       formeln: hasFormulas(entry),
-      intuition: hasMeaningfulIntuition(intuitionById[conceptId]),
+      intuition:
+        hasMeaningfulIntuition(intuitionById[conceptId]) || hasPortalIntuitionSurface(conceptId),
       "r-anwendung": Boolean(renderRAnwendungPanel) && hasRBlock(conceptId)
     };
 

@@ -44,7 +44,7 @@ export function createPortalApp({
     renderContent,
     renderHome,
     toggleSolution,
-    toggleExamDrill,
+    toggleExamDrill: rendererToggleExamDrill,
     copyFormula,
     showDashboard,
     setRendererState
@@ -61,6 +61,24 @@ export function createPortalApp({
   const { initKeyboard } = keyboard;
   const { showToast } = toast;
   const { renderMath } = math;
+
+  /** Prüfungstransfer cards call `window.__toggleExamDrill`; many modules forgot to re-export it from `createRenderer`. */
+  const toggleExamDrill =
+    typeof rendererToggleExamDrill === "function"
+      ? rendererToggleExamDrill
+      : function toggleExamDrillFallback(drillId) {
+          const solution = document.getElementById(`examDrill_${drillId}`);
+          const button = document.getElementById(`examDrillBtn_${drillId}`);
+          if (!solution) return;
+          const isVisible = solution.classList.toggle("show");
+          solution.setAttribute("aria-expanded", isVisible ? "true" : "false");
+          if (button) {
+            const openLabel = button.dataset.openLabel || "Lösung verbergen";
+            const closedLabel = button.dataset.closedLabel || "Lösung anzeigen";
+            button.textContent = isVisible ? openLabel : closedLabel;
+          }
+          if (isVisible) renderMath(solution);
+        };
 
   function debounce(fn, ms) {
     let timer;

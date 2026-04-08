@@ -167,6 +167,16 @@ export const CONTENT = {
           step('Result: Zwischenergebnis klar formulieren und erst dann zur nächsten Anspruchsstufe übergehen.')
         ],
         'Struktur vor Detail: Eine saubere IRSR-Kette (Issue/Rule/Subsumption/Result) verhindert methodische Sprünge und macht die Lösung klausurfest.'
+      ),
+      task(
+        'Chain-Mini-Case (Anspruchsaufbau): K will von V primär Lieferung, hilfsweise Rücktritt und zusätzlich Schadensersatz. Wie vermeidest du im Gutachtenstil das Vermischen von Tatbestand, Rechtsfolge und Konkurrenz der Anspruchsziele?',
+        [
+          step('Issue: Primäres Anspruchsziel und Hilfsziele getrennt formulieren.'),
+          step('Rule: Für jedes Ziel eigene Anspruchsgrundlage und Tatbestandsmerkmale aufbauen.'),
+          step('Subsumption: Merkmale je Schiene vollständig prüfen; keine Rechtsfolge vorziehen.'),
+          step('Result: Zwischenergebnisse pro Anspruchsebene notieren und erst am Ende Konkurrenz/Alternativen ordnen.')
+        ],
+        'Klausurdisziplin heißt Kettenführung: Jeder Anspruch wird vollständig geprüft, bevor zur nächsten Rechtsfolgeebene gewechselt wird.'
       )
     ]
   },
@@ -265,6 +275,16 @@ export const CONTENT = {
           step('Rechtsfolge inklusive möglicher § 122 BGB-Folge sauber anschließen.')
         ],
         'Klausurregel: Dissens prüft Einigungslage, Anfechtung korrigiert den zunächst wirksamen Konsens.'
+      ),
+      task(
+        'Subsumtions-Mini-Case: E verkauft ein Buch für 700 EUR, irrt sich über dessen Eigenschaft als Erstauflage und ficht später an. Welche mehrstufige Prüfung trennt Anspruch aus Vertrag und § 122 BGB sauber?',
+        [
+          step('Zuerst vertraglichen Primäranspruch aufbauen (Vertragsschluss als Tatbestand).'),
+          step('Dann prüfen, ob der Anspruch wegen wirksamer Anfechtung untergeht (Tatbestand der Anfechtung vollständig).'),
+          step('Erst danach § 122 BGB als eigene Anspruchsschiene eröffnen und Vertrauensschaden subsumieren.'),
+          step('Begrenzung auf positives Interesse in der Rechtsfolge von § 122 BGB separat prüfen.')
+        ],
+        'Tatbestandsklarheit: Vertragsebene, Anfechtungsebene und § 122-Rechtsfolge dürfen nicht in einem Mischschritt aufgehen.'
       )
     ]
   },
@@ -405,6 +425,16 @@ export const CONTENT = {
           step('Result: Zurechnung läuft über den Geschäftsherrn als Erklärenden; Vertretungsmachtsprüfung tritt zurück.')
         ],
         'Die Vertreter-Boten-Abgrenzung ist ein Kerntrap: Erst Erklärungstyp klären, dann erst Vertretungsmachtfragen.'
+      ),
+      task(
+        'Mehrschrittfall Stellvertretung: A unterschreibt im Laden nur mit seinem Namen, erwähnt die GmbH nicht und hatte intern keine wirksame Vollmacht. Wie gehst du in der Klausurkette vor?',
+        [
+          step('Issue: Zuerst Offenkundigkeit nach objektivem Empfängerhorizont prüfen.'),
+          step('Rule: Fehlt erkennbares Handeln in fremdem Namen, bindet der Vertrag regelmäßig den Handelnden selbst.'),
+          step('Subsumption: Nur wenn Offenkundigkeit bejaht wird, Vertretungsmacht prüfen; bei Fehlen Genehmigung/§ 179 BGB als Folgeebene öffnen.'),
+          step('Result: Vertragspartner und ggf. Haftungsadressat getrennt ausweisen (Tatbestandsebene vs. Rechtsfolgeebene).')
+        ],
+        'Stellvertretungsfälle werden robust, wenn Offenkundigkeit, Vertretungsmacht und § 179-Folge strikt nacheinander geprüft werden.'
       )
     ]
   },
@@ -581,6 +611,16 @@ export const CONTENT = {
           step('Ergebnisse am Ende zusammenführen und Konkurrenz/Alternativen sauber benennen.')
         ],
         'Struktur-first verhindert Standardfehler: Rücktritt und Widerruf sind keine austauschbaren „Rückgängigmacher“, sondern unterschiedliche Institute mit eigenem Tatbestand.'
+      ),
+      task(
+        'Tatbestand-vs-Rechtsfolge Drillcase: K erklärt nach Online-Kauf fristgerecht den Widerruf; parallel ist die Ware mangelhaft. Wie prüfst du, ohne Rückgewährfolgen vorzeitig als Tatbestandsmerkmal zu behandeln?',
+        [
+          step('Issue: Widerrufs- und Rücktrittspfad getrennt eröffnen, bevor Rechtsfolgen diskutiert werden.'),
+          step('Rule: Tatbestand Widerruf (Vertragstyp, Verbraucher/Unternehmer, Erklärung, Frist) und Tatbestand Rücktritt (Störung/Fristsetzung) eigenständig prüfen.'),
+          step('Subsumption: Nur erfüllte Tatbestände tragen das jeweilige Gestaltungsrecht.'),
+          step('Result: Rückgewähr- und ggf. Wertersatzfolgen erst danach als Rechtsfolgeebene anschließen.')
+        ],
+        'Exam trap: Rückgewähr ist nicht Tatbestand, sondern Folge eines wirksam ausgeübten Gestaltungsrechts.'
       )
     ]
   }

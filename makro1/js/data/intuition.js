@@ -56,11 +56,17 @@ export const INTUITION = {
     'Fiskalpolitik ist bei horizontaler Zinsregel stark, bei steiler LM deutlich schwächer.',
     [{ if: 'Fiskalexpansion + konstanter Zins', then: 'Kaum Crowding-Out; der Outputeffekt ist groß.' }]
   ),
-  realzins: mk(
-    'Für Investitionen zählt nicht der reine Nominalzins, sondern wie teuer Finanzierung nach Inflation und Risiko wirklich ist.',
-    'Ein nominell günstiger Kredit kann real teuer sein, wenn Preise nicht mehr steigen oder Risikoprämien anspringen.',
-    'Fisher-Gleichung und Kreditzins mit Risikoaufschlag erklären, warum Finanzkrisen auch ohne Leitzinserhöhung rezessiv wirken.',
+  realzins_fisher_erwartungen: mk(
+    'Der Fisher-Kanal trennt Nominalzins und Realzins: Für reale Entscheidungen zählt der um erwartete Inflation bereinigte Finanzierungssatz.',
+    'Ein unveränderter Nominalzins kann sich real verteuern, wenn Inflationserwartungen sinken.',
+    'Die Übersetzung von i zu r ist die erste Diagnose vor jeder Politik- oder Investitionsbewertung.',
     [{ if: 'Inflationserwartungen fallen', then: 'Der Realzins steigt bei gegebenem Nominalzins.' }]
+  ),
+  realzins_risikopraemie_krisenkanal: mk(
+    'Im Krisenkanal entscheidet oft der Kreditzins, nicht der Leitzins allein: höhere Risikoprämien drücken Investitionen und Nachfrage.',
+    'Wie ein zusätzlicher Aufschlag auf den Kreditpreis: Selbst bei konstantem Leitzins wird Finanzierung teurer.',
+    'Risikoprämie, Spread und ELB-Restriktionen erklären, warum die Stabilisierung in Finanzstressphasen begrenzt sein kann.',
+    [{ if: 'Spread/Risikoprämie steigt', then: 'Kreditzins steigt, IS verschiebt sich nach links, Rezessionsdruck nimmt zu.' }]
   ),
   arbeitsmarkt: mk(
     'Mittelfristig wird nicht mehr nur Nachfrage betrachtet, sondern was Beschäftigte fordern und Firmen zahlen können. Daraus entsteht die natürliche Arbeitslosenquote.',

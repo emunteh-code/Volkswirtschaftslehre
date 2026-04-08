@@ -145,7 +145,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  realzins: [
+  realzins_fisher_erwartungen: [
     {
       title: 'Realzins und Inflationserwartungen',
       context: 'Der Nominalzins bleibt bei 5%, die erwartete Inflation fällt von 2% auf 0%.',
@@ -239,6 +239,8 @@ const BASE_STEP_PROBLEMS = {
     }
   ]
 };
+
+BASE_STEP_PROBLEMS.realzins_risikopraemie_krisenkanal = BASE_STEP_PROBLEMS.realzins_fisher_erwartungen;
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,

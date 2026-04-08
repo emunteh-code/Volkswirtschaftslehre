@@ -19,7 +19,8 @@ export const CHAPTERS = [
   { id: 'banken', title: 'Banken, Mindestreserven und Geldschöpfung', cat: 'Kurze Frist II', short: 'Banken' },
   { id: 'islm', title: 'IS-LM-Grundmodell bei Zinssteuerung', cat: 'Kurze Frist III', short: 'IS-LM' },
   { id: 'politikmix', title: 'Fiskalpolitik, Geldpolitik und Crowding-Out', cat: 'Kurze Frist III', short: 'Policy' },
-  { id: 'realzins', title: 'Realzins, erwartete Inflation und Risikoprämie', cat: 'Finanzfriktionen', short: 'Realzins' },
+  { id: 'realzins_fisher_erwartungen', title: 'Realzins und Inflationserwartungen (Fisher-Kanal)', cat: 'Finanzfriktionen', short: 'Real-FI' },
+  { id: 'realzins_risikopraemie_krisenkanal', title: 'Risikoprämie, Kreditzins und Krisenkanal', cat: 'Finanzfriktionen', short: 'Real-RP' },
   { id: 'arbeitsmarkt', title: 'Arbeitsmarkt, Lohnsetzung und Preissetzung', cat: 'Mittlere Frist', short: 'WS-PS' },
   { id: 'phillips', title: 'Phillipskurve, NAIRU und Inflationsdynamik', cat: 'Mittlere Frist', short: 'Phillips' },
   { id: 'islmpc', title: 'IS-LM-PC: Rückkehr zur mittleren Frist', cat: 'Mittlere Frist', short: 'IS-LM-PC' },
@@ -710,3 +711,7 @@ export const CONTENT = {
     ]
   }
 };
+
+CONTENT.realzins_fisher_erwartungen = CONTENT.realzins;
+CONTENT.realzins_risikopraemie_krisenkanal = CONTENT.realzins;
+delete CONTENT.realzins;

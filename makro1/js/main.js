@@ -9,6 +9,7 @@ import * as renderer from './ui/renderer.js';
 import * as rightPanel from './ui/rightPanel.js';
 import * as graphs from './ui/graphs.js';
 import * as quickExam from './features/exam.js';
+import * as conceptSchnelltest from './features/conceptSchnelltest.js';
 import * as fullExam from './features/fullExam.js';
 import * as mastery from './features/mastery.js';
 import * as srs from './features/srs.js';
@@ -29,6 +30,7 @@ createPortalApp({
   rightPanel,
   graphs,
   quickExam,
+  conceptSchnelltest,
   fullExam,
   mastery,
   srs,

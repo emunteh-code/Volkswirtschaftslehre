@@ -71,12 +71,12 @@ function writeStoredJson(key, value) {
 function getPortalState(module) {
   if (module.portalState) return module.portalState;
   const content = getModuleContent(module.slug);
-  if (!content) return null;
+  const chapterCount = content ? estimateGeneratedChapterCount(module, content) : 0;
   return {
     progressKey: `${module.slug}_progress_v1`,
     srsKey: `${module.slug}_srs_v1`,
     lastKey: `${module.slug}_last_v1`,
-    chapterCount: estimateGeneratedChapterCount(module, content)
+    chapterCount
   };
 }
 

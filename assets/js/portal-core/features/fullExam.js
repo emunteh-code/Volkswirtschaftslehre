@@ -149,7 +149,10 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     const content = document.getElementById("content");
     if (!content) return;
     const tabRow = document.getElementById("tabRow");
-    if (tabRow) tabRow.style.display = "none";
+    if (tabRow) {
+      tabRow.style.removeProperty("display");
+      tabRow.classList.remove("visible");
+    }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausur`;
 
@@ -427,7 +430,10 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     const content = document.getElementById("content");
     if (!content) return;
     const tabRow = document.getElementById("tabRow");
-    if (tabRow) tabRow.style.display = "none";
+    if (tabRow) {
+      tabRow.style.removeProperty("display");
+      tabRow.classList.remove("visible");
+    }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausuren`;
     let html = `<div style="max-width:600px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>`;

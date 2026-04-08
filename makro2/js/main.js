@@ -41,6 +41,8 @@ createPortalApp({
   mistakeReview,
   portalBridge: () => {
     if (typeof window === 'undefined') return;
-    window.__makro2PilotManifest = getMakro2PilotBridgePayload();
+    const payload = getMakro2PilotBridgePayload();
+    window.__makro2PilotManifest = payload;
+    window.__makro2ContentManifest = payload;
   }
 });

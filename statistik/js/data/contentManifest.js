@@ -19,6 +19,7 @@ import {
   FE_STATE_KEY
 } from './srsConfig.js';
 import { COURSE_CONFIG } from './courseConfig.js';
+import { FULL_EXAMS } from './fullExams.js';
 
 const MODULE_SLUG = 'statistik';
 
@@ -109,14 +110,17 @@ export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   }
 });
 
-export const FULL_EXAM_PROVENANCE = {
-  klausur_2024: createProvenance({
-    source_status: 'platform-added-drill',
-    source_refs: [],
-    notes:
-      'Probeklausur authored for portal practice (deskriptive Kennzahlen, Hypothesentest); not a verbatim archive paper. Attach course PDF refs when stable.'
-  })
-};
+export const FULL_EXAM_PROVENANCE = Object.fromEntries(
+  Object.keys(FULL_EXAMS).map((examId) => [
+    examId,
+    createProvenance({
+      source_status: 'platform-added-drill',
+      source_refs: [],
+      notes:
+        'Portal-authored probeklausur / transfer drill aligned to Statistik module topics; not a verbatim archived exam. See docs/audits/statistik-second-wave-excellence-pass-1.md.'
+    })
+  ])
+);
 
 export function buildStatistikModeIndex() {
   return buildConceptModeIndex({

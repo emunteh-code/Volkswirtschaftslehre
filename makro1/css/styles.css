@@ -34,3 +34,57 @@
   letter-spacing: 0.02em;
   color: color-mix(in srgb, var(--accent) 84%, var(--text) 16%);
 }
+
+/* Konzept-Check (trap MCQ) — minimal layout on top of shared exam-* styles */
+.cc-schnelltest-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 14px;
+  line-height: 1.45;
+}
+.cc-schnelltest-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.cc-schnelltest-stem {
+  padding: 0;
+  margin: 0 0 14px;
+}
+.cc-choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cc-choice-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+  line-height: 1.4;
+}
+.cc-choice-input {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.cc-trap-note {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent3);
+  background: color-mix(in srgb, var(--surface2) 55%, transparent);
+  font-size: 13px;
+}
+.cc-correct-line {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.cc-explain-after {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.cc-schnelltest-result .er-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}

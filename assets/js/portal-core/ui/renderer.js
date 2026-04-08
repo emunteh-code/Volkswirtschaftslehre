@@ -16,7 +16,9 @@ export function createRenderer({
   renderDashboard,
   getPracticeTasks = (conceptId, contentEntry) => contentEntry?.aufgaben || [],
   hasRBlock = () => false,
-  renderRAnwendungPanel = null
+  renderRAnwendungPanel = null,
+  /** Raw HTML inserted inside the home action row (optional; e.g. Konzept-Check card) */
+  extraHomeActionCardsHtml = ''
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -742,6 +744,7 @@ ${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-to
 <div class="hac-title">Schnelltest</div>
 <div class="hac-desc">20 Minuten, zufällige Aufgaben</div>
 </div>
+${extraHomeActionCardsHtml}
 <div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showSRSReview()">
 <div class="hac-title">Wiederholung${due.length > 0 ? ` (${due.length})` : ""}</div>
 <div class="hac-desc">Spaced Repetition für heute</div>

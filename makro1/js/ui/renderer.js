@@ -39,5 +39,9 @@ export const {
   getDueCards,
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
-  checkAnswer: checkAnswerWithTolerance
+  checkAnswer: checkAnswerWithTolerance,
+  extraHomeActionCardsHtml: `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startConceptSchnelltest()">
+<div class="hac-title">Konzept-Check</div>
+<div class="hac-desc">5 Minuten, typische Denkfallen</div>
+</div>`
 });

@@ -17,7 +17,9 @@ export function createPortalApp({
   keyboard,
   toast,
   math,
-  portalBridge
+  portalBridge,
+  /** Optional trap-MCQ concept check (5-min); see createConceptSchnelltestModule */
+  conceptSchnelltest
 }) {
   const {
     loadProgress,
@@ -256,6 +258,13 @@ export function createPortalApp({
     startExam();
   }
 
+  function openConceptSchnelltest() {
+    if (!conceptSchnelltest) return;
+    clearRightPanel();
+    syncRightPanelVisibility();
+    conceptSchnelltest.startConceptSchnelltest();
+  }
+
   function openFullExamOverview() {
     clearRightPanel();
     syncRightPanelVisibility();
@@ -274,6 +283,10 @@ export function createPortalApp({
   window.__startExam = openQuickExam;
   window.__submitExamAnswer = submitExamAnswer;
   window.__skipExamQ = skipExamQ;
+  if (conceptSchnelltest) {
+    window.__startConceptSchnelltest = openConceptSchnelltest;
+    window.__conceptSchnelltestPrimary = conceptSchnelltest.handleConceptSchnelltestPrimary;
+  }
   window.__showFullExamSelect = openFullExamOverview;
   window.__startFullExam = openFullExam;
   window.__showSRSReview = showSRSReview;

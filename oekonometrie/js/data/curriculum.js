@@ -924,6 +924,16 @@ lm(y ~ x2 + x3)`,
           step('Die Bedingung E(u|X)=0 ist deshalb nicht plausibel.')
         ],
         'Exogenität scheitert genau dann, wenn ein relevanter, unbeobachteter Einfluss mit dem Regressor systematisch zusammenhängt.'
+      ),
+      task(
+        'Ein Regressionsoutput zeigt einen hochsignifikanten Koeffizienten für Klassengröße. Warum darfst du daraus ohne zusätzliche Modellargumente keine kausale Entwarnung für E(u|X)=0 ableiten?',
+        [
+          step('Signifikanz zeigt nur, dass der geschätzte Koeffizient statistisch von null unterscheidbar ist.'),
+          step('Sie sagt nichts darüber, ob unbeobachtete Faktoren mit dem Regressor korrelieren.'),
+          step('Wenn ausgelassene Faktoren gleichzeitig Klassengröße und Testerfolg beeinflussen, bleibt Exogenität verletzt.'),
+          step('Die kausale Lesart braucht daher institutionelle Begründung oder ein glaubwürdiges Identifikationsdesign, nicht nur kleine p-Werte.')
+        ],
+        'Interpretation-first-Regel: t-Wert beantwortet Präzision, Exogenität beantwortet Glaubwürdigkeit.'
       )
     ],
     intuition: intuition({
@@ -1010,6 +1020,16 @@ abline(h = 0, col = "red")`,
           step('Der Bildungseffekt wird daher überschätzt.')
         ],
         'Für die Richtung des OVB reicht oft saubere Vorzeichenlogik.'
+      ),
+      task(
+        'Eine ausgelassene Variable z hat einen starken Effekt auf y, ist aber in den Daten praktisch unkorreliert mit x. Entsteht dann OVB im Koeffizienten von x? Begründe über die Bias-Formel.',
+        [
+          step('Für OVB braucht es gleichzeitig Wirkung von z auf y und Korrelation zwischen x und z.'),
+          step('Hier gilt trotz starker Wirkung: Cov(x,z)≈0.'),
+          step('Damit wird der Biasterm im Koeffizienten von x näherungsweise null.', String.raw`$$\operatorname{Bias}(\hat{\gamma}_1)=\beta_2\frac{\operatorname{Cov}(x,z)}{\operatorname{Var}(x)} \approx 0$$`),
+          step('Ergebnis: fehlende Variable kann Prognosekraft kosten, aber ohne x-z-Korrelation nicht systematisch den x-Koeffizienten verzerren.')
+        ],
+        'Trap-Check: "relevant ausgelassen" allein reicht nicht; ohne Korrelation mit x entsteht kein klassischer OVB auf γ̂₁.'
       )
     ],
     intuition: intuition({
@@ -1830,6 +1850,16 @@ R2`,
           step('Signifikanz sagt aber noch nichts über Kausalität oder ökonomische Größe.')
         ],
         'Der t-Test verbindet Schätzwert und Unsicherheit zu einer regelgeleiteten Inferenzentscheidung.'
+      ),
+      task(
+        'Zwei Koeffizienten sind signifikant: A mit β̂=0,02 (se=0,005), B mit β̂=1,2 (se=0,6). Welche Interpretation ist ökonometrisch sauberer als "A ist wichtiger, weil p kleiner"?',
+        [
+          step('Signifikanz vergleicht Schätzwert mit Unsicherheit, nicht automatisch ökonomische Bedeutung.'),
+          step('Koeffizient A ist präzise geschätzt, kann aber ökonomisch klein sein.'),
+          step('Koeffizient B kann trotz geringerer Präzision einen größeren ökonomischen Effekt tragen.'),
+          step('Sauber ist: erst statistische Evidenz nennen, dann Effektgröße in Einheiten/Prozenten und Kontexteinordnung.')
+        ],
+        'Klausurregel: "signifikant" und "relevant" getrennt berichten, danach zusammenführen.'
       )
     ],
     intuition: intuition({
@@ -2430,6 +2460,16 @@ coef(lm(y ~ x1 + x2 + x3, data = df))[2]`,
           step('Eine robuste Inferenzkorrektur ist deshalb nötig.')
         ],
         'Heteroskedastizität trifft zuerst die Unsicherheitsrechnung, nicht automatisch die Punktschätzung.'
+      ),
+      task(
+        'Du beobachtest eine klare Fächerform im Residuenplot. Eine Lösung fordert sofort "neues Modell, OLS verwerfen". Welche diagnostische Entscheidung ist als erster Schritt methodisch besser?',
+        [
+          step('Fächerform spricht zunächst für heteroskedastische Fehlerstruktur, nicht automatisch für falsche Mittelwertspezifikation.'),
+          step('Unter plausibler Exogenität können OLS-Koeffizienten als Punktschätzer weiterhin nutzbar sein.'),
+          step('Erster robuster Schritt ist die Inferenzkorrektur über heteroskedastizitätsrobuste Standardfehler.'),
+          step('Erst danach wird geprüft, ob eine modellierte Varianzstruktur (z.B. WLS/GLS) zusätzliche Effizienzgewinne liefert.')
+        ],
+        'Interpretation-first: zuerst Problemtyp (Varianz vs. Mittelwert/Bias) trennen, dann passende Korrektur wählen.'
       )
     ],
     intuition: intuition({
@@ -2620,6 +2660,16 @@ coeftest(model, vcov = vcovHC(model, type = "HC1"))`,
           step('Tests werden zu optimistisch und Konfidenzintervalle zu eng.')
         ],
         'Serielle Fehlerabhängigkeit reduziert effektive Information, auch wenn n formal unverändert bleibt.'
+      ),
+      task(
+        'Ein Zeitreihenmodell hat DW = 1,1 und einen sichtbaren Trend in y. Warum reicht der Trend allein nicht als Diagnose, und welche kombinierte Interpretation ist sauber?',
+        [
+          step('Ein Trend in y kann aus Regressoren oder Struktur stammen; entscheidend für Autokorrelation ist die Fehlerdynamik.'),
+          step('DW deutlich unter 2 liefert ein spezifisches Signal für positive serielle Fehlerkorrelation.'),
+          step('Die korrekte Diagnose verbindet daher Residuen-/DW-Information mit der Modellgeschichte, nicht nur den Verlauf von y.'),
+          step('Für Inferenz folgt: klassische Standardfehler sind fraglich; robuste serielle Korrekturen (z.B. HAC) werden relevant.')
+        ],
+        'Trap-Check: Trend in y ist kein Beweis für Fehlerautokorrelation; die Diagnose muss auf u_t abzielen.'
       )
     ],
     intuition: intuition({

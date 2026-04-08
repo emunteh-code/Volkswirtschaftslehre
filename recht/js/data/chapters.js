@@ -157,6 +157,16 @@ export const CONTENT = {
           step('Seine Funktion erklären.', String.raw`\text{Nur die Subsumtion verbindet Tatbestandsmerkmal und konkrete Tatsachen.}`)
         ],
         'Ohne Subsumtion bleibt unklar, ob und warum der Sachverhalt die Norm wirklich erfüllt.'
+      ),
+      task(
+        'Mini-Case (Gutachtenstil): K verlangt von V Rückzahlung des Kaufpreises, weil die gelieferte Sache mangelhaft ist. Wie baust du eine strukturfeste Erstprüfung auf, bevor du Details diskutierst?',
+        [
+          step('Issue: Anspruchsfrage präzisieren.', String.raw`\text{Wer will was von wem woraus?}`),
+          step('Rule: Naheliegende Anspruchsgrundlage benennen und Tatbestandsmerkmale gliedern.'),
+          step('Subsumption: Jeden relevanten Sachverhaltsbaustein einem Merkmal zuordnen.'),
+          step('Result: Zwischenergebnis klar formulieren und erst dann zur nächsten Anspruchsstufe übergehen.')
+        ],
+        'Struktur vor Detail: Eine saubere IRSR-Kette (Issue/Rule/Subsumption/Result) verhindert methodische Sprünge und macht die Lösung klausurfest.'
       )
     ]
   },
@@ -245,6 +255,16 @@ export const CONTENT = {
           step('Rechtsfolgen vollständig darstellen.', String.raw`\text{Nichtigkeit ex tunc plus möglicher Vertrauensschaden nach § 122 BGB.}`)
         ],
         'Eine erfolgreiche Anfechtung verlangt mehr als nur einen Irrtum. Erklärung, Frist und Rechtsfolgen gehören zwingend zur vollständigen Lösung.'
+      ),
+      task(
+        'Trap-Mini-Case: A bietet „50 Kisten“ an, meint aber innerlich „15 Kisten“. B nimmt „50 Kisten“ an. Welche methodische Reihenfolge ist richtig, um Dissens- und Anfechtungsfehler zu vermeiden?',
+        [
+          step('Zuerst objektive Erklärungslage prüfen (Auslegung, Konsensfrage).'),
+          step('Wenn objektiv Konsens vorliegt, nicht beim Dissens stehen bleiben, sondern Anfechtungsebene öffnen.'),
+          step('Anfechtungsgrund, Erklärung und Frist vollständig prüfen.'),
+          step('Rechtsfolge inklusive möglicher § 122 BGB-Folge sauber anschließen.')
+        ],
+        'Klausurregel: Dissens prüft Einigungslage, Anfechtung korrigiert den zunächst wirksamen Konsens.'
       )
     ]
   },
@@ -375,6 +395,16 @@ export const CONTENT = {
           step('Rechtsfolge erläutern.', String.raw`\text{Fehlt Offenkundigkeit, wird regelmäßig der Handelnde selbst verpflichtet.}`)
         ],
         'Offenkundigkeit schützt vor verdeckter Risikoverschiebung. Der Dritte soll erkennen können, wem die Erklärung zugerechnet werden soll.'
+      ),
+      task(
+        'Doctrinal Distinction Case: S übermittelt nur wörtlich die Nachricht des Chefs („Verkauf für 10.000 €“), ohne eigene Entscheidungsmacht. Warum ist das regelmäßig Boten- und nicht Vertreterkonstellation, und was folgt für die Prüfung?',
+        [
+          step('Issue: Eigene Willenserklärung oder reine Übermittlung?'),
+          step('Rule: Vertreter gibt eigene Erklärung ab; Bote überbringt fremde Erklärung.'),
+          step('Subsumption: Ohne Entscheidungsspielraum liegt typischerweise Botenstellung vor.'),
+          step('Result: Zurechnung läuft über den Geschäftsherrn als Erklärenden; Vertretungsmachtsprüfung tritt zurück.')
+        ],
+        'Die Vertreter-Boten-Abgrenzung ist ein Kerntrap: Erst Erklärungstyp klären, dann erst Vertretungsmachtfragen.'
       )
     ]
   },
@@ -541,6 +571,16 @@ export const CONTENT = {
           step('Verbraucherschutzlage erkennen.', String.raw`\text{Beim Fernabsatz kommt vielmehr der Widerruf in Betracht.}`)
         ],
         'Ohne Leistungsstörung spricht der Fall eher für einen Verbraucherwiderruf als für einen Rücktritt.'
+      ),
+      task(
+        'Issue-Spotting Mini-Case: V liefert verspätet und zudem mangelhaft; K ist Verbraucher im Fernabsatz. Welche Reihenfolge hilft, Rücktritt, Widerruf und Schadensersatz nicht zu vermischen?',
+        [
+          step('Zuerst Anspruchsziele trennen: Lösung vom Vertrag vs. Ersatz von Schäden.'),
+          step('Dann Anknüpfungspunkte trennen: Leistungsstörung (Rücktritt/SE) vs. Verbraucherschutzlage (Widerruf).'),
+          step('Für jede Schiene Tatbestandsvoraussetzungen separat prüfen (inkl. Frist-/Formfragen).'),
+          step('Ergebnisse am Ende zusammenführen und Konkurrenz/Alternativen sauber benennen.')
+        ],
+        'Struktur-first verhindert Standardfehler: Rücktritt und Widerruf sind keine austauschbaren „Rückgängigmacher“, sondern unterschiedliche Institute mit eigenem Tatbestand.'
       )
     ]
   }

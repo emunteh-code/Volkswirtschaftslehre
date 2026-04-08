@@ -68,6 +68,34 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+    ,
+    {
+      title: 'IRSR-Strukturdisziplin',
+      context: 'Fallantwort springt direkt zum Ergebnis ohne klaren Aufbau.',
+      steps: [
+        {
+          q: '[1. Decision] Welcher Schritt muss am Anfang explizit stehen?',
+          answer: ['issue', 'rechtsfrage', 'wer will was von wem woraus'],
+          options: { problemId: 're_me_2', stepId: 'issue', isDecision: true },
+          hint: 'Ohne klare Ausgangsfrage fehlt die Prüfungsrichtung.',
+          explain: 'Zuerst muss die präzise Anspruchsfrage formuliert werden.'
+        },
+        {
+          q: '[2. Execution] Welcher Mittelteil verbindet Norm und Sachverhalt?',
+          answer: ['subsumtion'],
+          options: { problemId: 're_me_2', stepId: 'subs', dependsOn: 'issue' },
+          hint: 'Definitionen allein reichen nicht.',
+          explain: 'Die Subsumtion ist der Kern der Fallanwendung.'
+        },
+        {
+          q: '[3. Validation] Ist eine Lösung ohne getrennte Zwischenergebnisse klausurstabil?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_me_2', role: 'VALIDATION' },
+          hint: 'Zwischenergebnisse steuern den nächsten Prüfungsabschnitt.',
+          explain: 'Nein. Ohne Zwischenergebnisse wird die Anspruchskette methodisch unscharf.'
+        }
+      ]
+    }
   ],
   willenserklaerung: [
     {
@@ -109,6 +137,34 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 're_da_1', stepId: 'decl', dependsOn: 'contest' },
           hint: 'Nicht nur der Irrtum zählt.',
           explain: 'Es braucht insbesondere eine Anfechtungserklärung und die Wahrung der Frist.'
+        }
+      ]
+    }
+    ,
+    {
+      title: 'Dissens-vs-Anfechtung Trap',
+      context: 'Objektiv deckungsgleiche Erklärungen, aber innerer Erklärungsirrtum.',
+      steps: [
+        {
+          q: '[1. Decision] Startest du mit Dissensprüfung oder mit Anfechtungslogik?',
+          answer: ['anfechtung', 'anfechtungslogik'],
+          options: { problemId: 're_da_2', stepId: 'start', isDecision: true },
+          hint: 'Objektive Erklärungslage zuerst lesen.',
+          explain: 'Bei objektivem Konsens ist die Anfechtung der methodisch richtige Korrekturweg.'
+        },
+        {
+          q: '[2. Execution] Welche zwei Zusatzbausteine werden neben dem Irrtum oft vergessen?',
+          answer: ['anfechtungserklärung', 'frist'],
+          options: { problemId: 're_da_2', stepId: 'extra', dependsOn: 'start' },
+          hint: 'Der Irrtum allein trägt die Anfechtung nicht vollständig.',
+          explain: 'Anfechtungserklärung und Frist sind regelmäßig mitzuprüfen.'
+        },
+        {
+          q: '[3. Validation] Ist die Aussage "Irrtum erkannt = Vertrag automatisch nichtig" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_da_2', role: 'VALIDATION' },
+          hint: 'Zwischen Entstehung und nachträglicher Vernichtung unterscheiden.',
+          explain: 'Nein. Erst die wirksame Anfechtung führt zur ex-tunc-Nichtigkeit.'
         }
       ]
     }
@@ -175,6 +231,34 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 're_st_1', stepId: 'power', dependsOn: 'foreign' },
           hint: 'Denk an § 177 BGB.',
           explain: 'Ja. Ohne Vertretungsmacht ist das Geschäft grundsätzlich schwebend unwirksam.'
+        }
+      ]
+    }
+    ,
+    {
+      title: 'Vertreter-oder-Bote Entscheidung',
+      context: 'Person übermittelt nur eine fremde Erklärung ohne eigenen Entscheidungsspielraum.',
+      steps: [
+        {
+          q: '[1. Decision] Liegt regelmäßig Vertreter- oder Botenhandeln vor?',
+          answer: ['bote', 'botenhandeln'],
+          options: { problemId: 're_st_2', stepId: 'role', isDecision: true },
+          hint: 'Entscheidend ist die eigene Willensbildung.',
+          explain: 'Ohne eigene Entscheidungsbefugnis liegt typischerweise Botenhandeln vor.'
+        },
+        {
+          q: '[2. Execution] Wessen Erklärung wird dann grundsätzlich zugerechnet?',
+          answer: ['des geschäftsherrn', 'des auftraggebers', 'des vertretenden'],
+          options: { problemId: 're_st_2', stepId: 'attrib', dependsOn: 'role' },
+          hint: 'Der Bote erklärt nicht selbst, sondern übermittelt.',
+          explain: 'Zugerechnet wird die fremde (übermittelte) Erklärung des Geschäftsherrn.'
+        },
+        {
+          q: '[3. Validation] Ist in einem reinen Botenfall eine Vertretungsmachtsprüfung im selben Sinne zwingend Kernpunkt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_st_2', role: 'VALIDATION' },
+          hint: 'Erst den Erklärungstyp, dann die Folgefragen.',
+          explain: 'Nein. Die zentrale Weiche ist zunächst die Abgrenzung Vertreter/Bote.'
         }
       ]
     }
@@ -263,6 +347,34 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 're_rw_1', stepId: 'no', dependsOn: 'wid' },
           hint: 'Verbraucherschutzrecht, nicht Leistungsstörungsrecht.',
           explain: 'Nein. Der Widerruf ist ein eigenständiges Schutzrecht.'
+        }
+      ]
+    }
+    ,
+    {
+      title: 'Rücktritt-Widerruf Abgrenzung',
+      context: 'Verbraucherfall mit Fernabsatzbezug; Leistungsstörung unklar.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Leitfrage trennt die Institute zuerst?',
+          answer: ['leistungsstörung oder verbraucherschutzlage', 'leistungsstörung', 'verbraucherschutzlage'],
+          options: { problemId: 're_rw_2', stepId: 'axis', isDecision: true },
+          hint: 'Normzweck vor Detailprüfung.',
+          explain: 'Zuerst wird der Anknüpfungspunkt geklärt: Störung vs. Schutzlage.'
+        },
+        {
+          q: '[2. Execution] Wenn keine Leistungsstörung vorliegt, welcher Pfad ist typischerweise naheliegender?',
+          answer: ['widerruf'],
+          options: { problemId: 're_rw_2', stepId: 'path', dependsOn: 'axis' },
+          hint: 'Fernabsatz + Umentscheidung.',
+          explain: 'Ohne Störung liegt regelmäßig der Widerrufspfad näher.'
+        },
+        {
+          q: '[3. Validation] Ist "beides ist nur Rückgängigmachung, also egal" methodisch korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_rw_2', role: 'VALIDATION' },
+          hint: 'Unterschiedliche Tatbestände, unterschiedliche Prüfung.',
+          explain: 'Nein. Rücktritt und Widerruf haben unterschiedliche Voraussetzungen und Zwecke.'
         }
       ]
     }

@@ -123,7 +123,7 @@ export const FULL_EXAMS = {
             ])
           )
         ],
-        'dissens_anfechtung'
+        'anfechtung'
       )
     ]
   },
@@ -326,7 +326,7 @@ export const FULL_EXAMS = {
             ])
           )
         ],
-        'ruecktritt_widerruf'
+        'verbraucherwiderruf'
       )
     ]
   }

@@ -146,7 +146,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  dissens_anfechtung: [
+  anfechtung: [
     {
       title: 'Irrtum oder Dissens',
       context: 'A verschreibt sich im Angebot, B nimmt den Wortlaut an.',
@@ -410,7 +410,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  ruecktritt_widerruf: [
+  verbraucherwiderruf: [
     {
       title: 'Rücktritt oder Widerruf',
       context: 'Ein Verbraucher möchte einen Online-Kauf rückgängig machen, obwohl kein Leistungsfehler vorliegt.',
@@ -488,6 +488,9 @@ const BASE_STEP_PROBLEMS = {
     }
   ]
 };
+
+BASE_STEP_PROBLEMS.dissens = BASE_STEP_PROBLEMS.anfechtung;
+BASE_STEP_PROBLEMS.ruecktritt = BASE_STEP_PROBLEMS.verbraucherwiderruf;
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,

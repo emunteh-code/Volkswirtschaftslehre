@@ -23,14 +23,16 @@ export const CHAPTERS = [
   { id: 'privatrecht', title: 'Privatrecht und BGB-Struktur', cat: 'Grundlagen', short: 'BGB' },
   { id: 'methodik', title: 'Juristische Methodik und Gutachtenstil', cat: 'Grundlagen', short: 'Methodik' },
   { id: 'willenserklaerung', title: 'Willenserklärung und Vertragsschluss', cat: 'Vertrag', short: 'Vertrag' },
-  { id: 'dissens_anfechtung', title: 'Dissens und Anfechtung', cat: 'Vertrag', short: 'Anfechtung' },
+  { id: 'dissens', title: 'Dissens', cat: 'Vertrag', short: 'Dissens' },
+  { id: 'anfechtung', title: 'Anfechtung', cat: 'Vertrag', short: 'Anfechtung' },
   { id: 'trennung_abstraktion', title: 'Trennungs- und Abstraktionsprinzip', cat: 'Vertrag', short: 'Abstraktion' },
   { id: 'geschaeftsfaehigkeit', title: 'Rechts- und Geschäftsfähigkeit', cat: 'Personen & Zurechnung', short: 'Fähigkeit' },
   { id: 'stellvertretung', title: 'Stellvertretung', cat: 'Personen & Zurechnung', short: 'Vertretung' },
   { id: 'agb', title: 'AGB-Recht', cat: 'Personen & Zurechnung', short: 'AGB' },
   { id: 'schuldrecht_intro', title: 'Schuldrecht AT: Grundlagen', cat: 'Schuldrecht AT', short: 'Schuldrecht' },
   { id: 'schadensersatz', title: 'Schuldrecht AT: Schadensersatz', cat: 'Schuldrecht AT', short: 'SE' },
-  { id: 'ruecktritt_widerruf', title: 'Rücktritt und Verbraucherwiderruf', cat: 'Schuldrecht AT', short: 'Rücktritt' }
+  { id: 'ruecktritt', title: 'Rücktritt', cat: 'Schuldrecht AT', short: 'Rücktritt' },
+  { id: 'verbraucherwiderruf', title: 'Verbraucherwiderruf', cat: 'Schuldrecht AT', short: 'Widerruf' }
 ];
 
 export const CONTENT = {
@@ -625,4 +627,14 @@ export const CONTENT = {
     ]
   }
 };
+
+// Granularity pass 1 (recht): keep existing legal learning objects intact while
+// exposing conservative split nodes for navigation/analytics.
+CONTENT.dissens = CONTENT.dissens_anfechtung;
+CONTENT.anfechtung = CONTENT.dissens_anfechtung;
+delete CONTENT.dissens_anfechtung;
+
+CONTENT.ruecktritt = CONTENT.ruecktritt_widerruf;
+CONTENT.verbraucherwiderruf = CONTENT.ruecktritt_widerruf;
+delete CONTENT.ruecktritt_widerruf;
 

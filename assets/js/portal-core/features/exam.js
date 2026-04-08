@@ -67,7 +67,9 @@ export function createQuickExamModule({
         meta: {
           course_label: courseLabel,
           duration_ms_config: snap.duration,
-          finish_reason: finishReason
+          finish_reason: finishReason,
+          question_count: snap.questions.length,
+          item_order: snap.questions.map((q, idx) => `idx_${idx}:${q.conceptId || "na"}`)
         }
       });
     }

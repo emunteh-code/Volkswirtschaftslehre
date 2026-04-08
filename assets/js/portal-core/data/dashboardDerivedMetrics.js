@@ -62,6 +62,36 @@ export function summarizeFullExamMistakesByConcept(mistakes) {
   };
 }
 
+const NORMALIZED_MISTAKE_FLOW_SOURCES = [
+  "quick_exam",
+  "schnelltest_concept",
+  "practice",
+  "step",
+  "graph_drill",
+  "formula_drill",
+  "mixed_review"
+];
+
+export function summarizeNormalizedMistakeFlows(mistakes) {
+  const list = Array.isArray(mistakes) ? mistakes : [];
+  const bySource = {};
+  for (const src of NORMALIZED_MISTAKE_FLOW_SOURCES) {
+    bySource[src] = { total: 0, tagged: 0, untagged: 0, by_concept: {} };
+  }
+  for (const m of list) {
+    if (!m || !m.source || !bySource[m.source]) continue;
+    const bucket = bySource[m.source];
+    bucket.total += 1;
+    if (m.concept_id) {
+      bucket.tagged += 1;
+      bucket.by_concept[m.concept_id] = (bucket.by_concept[m.concept_id] || 0) + 1;
+    } else {
+      bucket.untagged += 1;
+    }
+  }
+  return bySource;
+}
+
 /**
  * @param {object[]} attempts
  * @param {{ context?: string, limit?: number }} [opts]
@@ -179,6 +209,7 @@ export function buildDashboardDerivedMetricsSnapshot({
   const byContext = countAttemptsByContext(attempts);
   const mistakesBySource = countMistakesBySource(mistakes);
   const fullExamConcept = summarizeFullExamMistakesByConcept(mistakes);
+  const normalizedMistakeFlows = summarizeNormalizedMistakeFlows(mistakes);
 
   const recentConcept = pickRecentAttempts(attempts, {
     context: ATTEMPT_CONTEXT.CONCEPT_SCHNELLTEST,
@@ -229,19 +260,19 @@ export function buildDashboardDerivedMetricsSnapshot({
       metric_id: "recent_concept_schnelltest_sessions",
       tier: attempts.some((a) => a.context === ATTEMPT_CONTEXT.CONCEPT_SCHNELLTEST) ? "supported" : "not_available",
       depends_on: ["concept_schnelltest_flow"],
-      note: "makro1_pilot_logs;_quick_step_schnelltest_not_in_attempt_log_yet"
+      note: "only_modules_with_concept_schnelltest_flow_can_populate_this"
     },
     {
       metric_id: "recent_quick_exam_sessions",
       tier: attempts.some((a) => a.context === ATTEMPT_CONTEXT.QUICK_EXAM) ? "supported" : "not_available",
       depends_on: ["quick_exam_append_attempt_hook"],
-      note: "not_wired_in_makro1_yet"
+      note: "available_when_module_logs_quick_exam_attempts"
     },
     {
       metric_id: "recent_full_exam_sessions",
       tier: attempts.some((a) => a.context === ATTEMPT_CONTEXT.FULL_EXAM) ? "supported" : "not_available",
       depends_on: ["full_exam_onExamSubmitted"],
-      note: "makro1_pilot_logs"
+      note: "available_when_module_logs_full_exam_submissions"
     },
     {
       metric_id: "first_recorded_per_item_concept_schnelltest",
@@ -260,6 +291,33 @@ export function buildDashboardDerivedMetricsSnapshot({
       tier: reviewable_open != null ? "supported" : "not_available",
       depends_on: ["MISTAKE_REVIEW_KEY", "mistake_review_pilot"],
       note: "null_when_review_key_not_passed"
+    },
+    {
+      metric_id: "quick_exam_mistakes_by_concept",
+      tier: (normalizedMistakeFlows.quick_exam?.tagged || 0) > 0 ? "supported" : "not_available",
+      depends_on: ["MISTAKES_KEY", "source=quick_exam", "concept_id"],
+      note: (normalizedMistakeFlows.quick_exam?.total || 0) > 0 ? "available_when_quick_exam_mistakes_exist" : "no_quick_exam_mistake_rows_logged_yet"
+    },
+    {
+      metric_id: "concept_check_mistakes_by_concept",
+      tier: (normalizedMistakeFlows.schnelltest_concept?.tagged || 0) > 0 ? "supported" : "not_available",
+      depends_on: ["MISTAKES_KEY", "source=schnelltest_concept", "concept_id"],
+      note:
+        (normalizedMistakeFlows.schnelltest_concept?.total || 0) > 0
+          ? "available_when_concept_check_mistakes_exist"
+          : "only_modules_with_concept_check_flow_can_produce_this"
+    },
+    {
+      metric_id: "drill_practice_mistakes_by_concept",
+      tier:
+        (normalizedMistakeFlows.practice?.tagged || 0) > 0 ||
+        (normalizedMistakeFlows.graph_drill?.tagged || 0) > 0 ||
+        (normalizedMistakeFlows.formula_drill?.tagged || 0) > 0 ||
+        (normalizedMistakeFlows.mixed_review?.tagged || 0) > 0
+          ? "supported"
+          : "not_available",
+      depends_on: ["MISTAKES_KEY", "source in {practice,graph_drill,formula_drill,mixed_review}", "concept_id"],
+      note: "no_drill_practice_mistake_rows_logged_in_current_migrated_backbone_yet"
     }
   ];
 
@@ -278,6 +336,7 @@ export function buildDashboardDerivedMetricsSnapshot({
       total: mistakes.length,
       by_source: mistakesBySource,
       full_exam_concepts: fullExamConcept,
+      normalized_flows: normalizedMistakeFlows,
       reviewable_open,
       reviewable_done
     },
@@ -379,6 +438,22 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
     }
   }
 
+  const nf = snap.mistakes.normalized_flows || {};
+  const quick = nf.quick_exam || { total: 0, tagged: 0, untagged: 0 };
+  const concept = nf.schnelltest_concept || { total: 0, tagged: 0, untagged: 0 };
+  const drillSources = ["practice", "graph_drill", "formula_drill", "mixed_review"];
+  const drillTotal = drillSources.reduce((sum, src) => sum + ((nf[src] && nf[src].total) || 0), 0);
+  const drillTagged = drillSources.reduce((sum, src) => sum + ((nf[src] && nf[src].tagged) || 0), 0);
+  const block3a = `<div class="dhp-section">
+<h4 class="dhp-h">Schnelltest/Drill-Analytik (normalisiert)</h4>
+<ul class="dhp-list">
+<li>Schnelltest (Schritte): <strong>${quick.total}</strong> Fehler · Konzept-getaggt: ${quick.tagged}${quick.untagged ? ` · ungetaggt: ${quick.untagged}` : ""}</li>
+<li>Konzept-Check: <strong>${concept.total}</strong> Fehler · Konzept-getaggt: ${concept.tagged}${concept.untagged ? ` · ungetaggt: ${concept.untagged}` : ""}</li>
+<li>Drill/Practice (practice/graph/formula/mixed): <strong>${drillTotal}</strong> Fehler · Konzept-getaggt: ${drillTagged}</li>
+</ul>
+${drillTotal === 0 ? `<p class="dhp-muted">Derzeit keine Drill/Practice-Fehlerquellen im Backbone protokolliert.</p>` : ""}
+</div>`;
+
   let block3b = "";
   const fec = snap.mistakes.full_exam_concepts;
   if (fec && fec.total > 0) {
@@ -433,6 +508,7 @@ ${block2}
 <h4 class="dhp-h">Fehler nach Quelle (Top)</h4>
 ${block3}
 </div>
+${block3a}
 ${block3b}
 <div class="dhp-section">
 <h4 class="dhp-h">SRS-Wiederholungen</h4>
@@ -460,6 +536,22 @@ export function formatDashboardDerivedMetricsLines(snap) {
     `Fehler nach Quelle: ${
       Object.keys(ms).length ? Object.entries(ms).map(([k, v]) => `${k}=${v}`).join(", ") : "—"
     }`
+  );
+  const nf = snap.mistakes.normalized_flows || {};
+  const quick = nf.quick_exam || { total: 0, tagged: 0 };
+  const concept = nf.schnelltest_concept || { total: 0, tagged: 0 };
+  const drillTotal =
+    (nf.practice?.total || 0) +
+    (nf.graph_drill?.total || 0) +
+    (nf.formula_drill?.total || 0) +
+    (nf.mixed_review?.total || 0);
+  const drillTagged =
+    (nf.practice?.tagged || 0) +
+    (nf.graph_drill?.tagged || 0) +
+    (nf.formula_drill?.tagged || 0) +
+    (nf.mixed_review?.tagged || 0);
+  lines.push(
+    `Normalisiert (Fehler): quick_exam ${quick.total}/${quick.tagged} konzeptgetaggt · concept_schnelltest ${concept.total}/${concept.tagged} konzeptgetaggt · drill/practice ${drillTotal}/${drillTagged} konzeptgetaggt`
   );
   if (snap.mistakes.reviewable_open != null) {
     lines.push(

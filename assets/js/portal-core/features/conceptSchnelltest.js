@@ -298,6 +298,7 @@ export function createConceptSchnelltestModule({
 
       state.responses[q.id] = {
         choice_id: choiceId,
+        concept_id: q.concept_id,
         correct,
         committed_at: Date.now()
       };
@@ -310,7 +311,7 @@ export function createConceptSchnelltestModule({
           module_slug: moduleSlug,
           concept_id: q.concept_id,
           source: MISTAKE_SOURCE.SCHNELLTEST_CONCEPT,
-          ref_id: q.id,
+          ref_id: `concept_schnelltest:${state.attemptId}:${q.id}`,
           wrong_answer: chosen.label,
           timestamp: Date.now(),
           meta: { attempt_id: state.attemptId, choice_id: choiceId }

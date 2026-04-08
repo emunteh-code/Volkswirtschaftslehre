@@ -196,7 +196,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 27,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch.',
         groups: [
@@ -210,18 +210,26 @@ export const FULL_EXAMS = {
               { id: 'm1_pk2_5', text: 'Sinkende Inflationserwartungen senken bei gegebenem Nominalzins den Realzins.', correct: 'Falsch', feedback: 'r ≈ i − π^e. Sinkt π^e, steigt der Realzins.' },
               { id: 'm1_pk2_6', text: 'IS-LM ist ein Modell der mittleren Frist mit flexiblen Preisen.', correct: 'Falsch', feedback: 'IS-LM ist ein Kurzfristmodell mit gegebenem Preisniveau.' }
             ]
+          },
+          {
+            context: 'Zinsuntergrenze, Erwartungen und Politikmix (Fallen)',
+            questions: [
+              { id: 'm1_pk2_7', text: 'Am liquiditätsfall („Zinsboden“) kann zusätzliche nominale Geldmenge den kurzfristigen Gleichgewichtszins oft nicht weiter senken und wirkt dann schwach auf den Gütermarkt.', correct: 'Wahr', feedback: 'Wenn die Geldnachfrage sehr zinselastisch ist, bleibt i am Boden; der klassische Zinskanal der Geldpolitik blockiert.' },
+              { id: 'm1_pk2_8', text: 'Für private Investitionsentscheidungen ist der erwartete Realzins relevant, nicht der Nominalzins allein.', correct: 'Wahr', feedback: 'Entscheidungen hängen von erwarteter realer Finanzierungslast ab; Nominalzins und Inflationserwartungen müssen zusammen gedacht werden.' },
+              { id: 'm1_pk2_9', text: 'Wenn Fiskal- und Geldpolitik gleichzeitig expansiv sind, muss sich im IS-LM-Rahmen notwendigerweise nur eine der beiden Kurven (IS oder LM) verschieben.', correct: 'Falsch', feedback: 'Beide Instrumente können gleichzeitig wirken: Fiskal verschiebt typischerweise die IS, Geldpolitik die monetäre Bedingung (LM/Zinsregel).' }
+            ]
           }
         ]
       },
       textBlock(
         'Aufgabe 2',
-        22,
+        24,
         'IS-LM-Grundmodell',
         String.raw`Betrachte eine Volkswirtschaft, in der die Zentralbank den Zins direkt setzt. Eine Fiskalexpansion erhöht die Güternachfrage.`,
         [
           textQuestion(
             'm1_pk2_2a',
-            8,
+            6,
             'Beschreibe die Wirkung einer Fiskalexpansion auf IS-Kurve, Output und Zins, wenn die Zentralbank den Zins konstant hält.',
             ['is nach rechts', 'output steigt', 'zins bleibt konstant', 'kein crowding out'],
             solutionBlock(
@@ -234,7 +242,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk2_2b',
-            7,
+            6,
             'Warum ist derselbe Fiskalimpuls bei steiler LM-Kurve schwächer?',
             ['zins steigt', 'investitionen sinken', 'crowding out'],
             solutionBlock(
@@ -247,7 +255,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk2_2c',
-            7,
+            6,
             'Formuliere in einem Satz, warum Geldpolitik im IS-LM-Modell über Investitionen auf Y wirkt.',
             ['weil der zins die investitionsnachfrage bestimmt', 'zinskanal', 'niedrigerer zins erhöht investitionen'],
             solutionBlock(
@@ -256,19 +264,32 @@ export const FULL_EXAMS = {
                 'Eine Zinssenkung reduziert Finanzierungskosten, steigert Investitionen und hebt damit die Güternachfrage sowie das Gleichgewichtseinkommen.'
               ]
             )
+          ),
+          textQuestion(
+            'm1_pk2_2d',
+            6,
+            String.raw`Transferfall: Die Fiskalpolitik bleibt unverändert, die Zentralbank senkt dagegen den gesetzten Leitzins. Was passiert kurzfristig qualitativ mit Investitionsnachfrage und Gütermarkt-Output $Y$?`,
+            ['investitionen steigen', 'y steigt', 'zinskanal expansiv'],
+            solutionBlock(
+              'Reine Geldpolitik bei Zinsregel',
+              [
+                'Ein niedrigerer Leitzins senkt Finanzierungskosten und erhöht ceteris paribus die Investitionsnachfrage.',
+                'Über den Zinskanal verschiebt sich das Gütermarktgleichgewicht zu höherem $Y$.'
+              ]
+            )
           )
         ],
         'islm'
       ),
       textBlock(
         'Aufgabe 3',
-        20,
+        24,
         'Realzins und Risikoprämie',
         String.raw`Gegeben sei ein Leitzins von $4\%$, erwartete Inflation von $1\%$ und eine Risikoprämie von $2\%$.`,
         [
           textQuestion(
             'm1_pk2_3a',
-            6,
+            5,
             'Bestimme den Realzins und den Kreditzins.',
             ['3 und 6', '3%, 6%', '3% und 6%', '3 6'],
             solutionBlock(
@@ -284,7 +305,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk2_3b',
-            7,
+            6,
             'Erkläre die Wirkung eines Anstiegs der Risikoprämie auf Investitionen und IS-Kurve.',
             ['investitionen sinken', 'is nach links', 'kreditzins steigt'],
             solutionBlock(
@@ -297,7 +318,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk2_3c',
-            7,
+            5,
             'Warum kann eine Deflationsgefahr trotz niedriger Leitzinsen die Konjunktur bremsen?',
             ['weil der realzins steigt', 'fallende inflationserwartungen erhöhen den realzins'],
             solutionBlock(
@@ -305,6 +326,22 @@ export const FULL_EXAMS = {
               [
                 'Wenn Inflationserwartungen fallen, steigt bei gegebenem Nominalzins der Realzins.',
                 'Damit verteuern sich reale Finanzierungskosten und die Nachfrage wird gebremst.'
+              ]
+            )
+          ),
+          textQuestion(
+            'm1_pk2_3d',
+            8,
+            String.raw`Die Risikoprämie bleibe $2\%$. Der Leitzins bleibe $4\%$, die erwartete Inflation falle jedoch von $1\%$ auf $-0{,}5\%$. Wie hoch ist der neue erwartete Realzins (Fisher-Näherung)? Welche Richtungswirkung auf Investitionsanreize ist damit verbunden?`,
+            ['4.5', '4,5', '4.5%', 'steigt', 'investitionen sinken'],
+            solutionBlock(
+              'Transfer: Erwartungsdeflation verschärft reale Konditionen',
+              [
+                'Bei unverändertem Nominalzins verschärft sinkende Inflationserwartungen die reale Finanzierungslast.',
+                'Investitionsanreize werden ceteris paribus gedämpft.'
+              ],
+              [
+                String.raw`$$r \approx 4\% - (-0{,}5\%) = 4{,}5\%.$$`
               ]
             )
           )
@@ -322,7 +359,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 27,
         type: 'wf-block',
         preamble: 'Entscheiden Sie wahr oder falsch.',
         groups: [
@@ -336,18 +373,26 @@ export const FULL_EXAMS = {
               { id: 'm1_pk3_5', text: 'Im IS-LM-PC-Modell führt ein positiver Nachfrageschock mittelfristig über höhere Inflation zu einer geldpolitischen Gegenreaktion.', correct: 'Wahr', feedback: 'Genau das ist die Rückkehrlogik zur mittleren Frist.' },
               { id: 'm1_pk3_6', text: 'Eine glaubwürdige dauerhafte Politikmaßnahme verändert Erwartungen stärker als eine temporäre.', correct: 'Wahr', feedback: 'Erwartetes Lebenseinkommen und erwartete Zinsbahn reagieren stärker auf permanente, glaubwürdige Maßnahmen.' }
             ]
+          },
+          {
+            context: 'Phillipskurve, Schocks und Erwartungen (Transferfallen)',
+            questions: [
+              { id: 'm1_pk3_7', text: 'Ein Anstieg der Inflationserwartungen verschiebt die kurzfristige Phillipskurve nach oben.', correct: 'Wahr', feedback: 'Bei gegebener Arbeitslosigkeit führt höheres π^e zu höherer tatsächlicher Inflation.' },
+              { id: 'm1_pk3_8', text: 'Ein negativer Angebotsschock kann die Inflation erhöhen, während das Output unter seinem natürlichen Niveau liegt.', correct: 'Wahr', feedback: 'Angebotsseitige Verschiebungen können Stagflationstypische Kombinationen erzeugen.' },
+              { id: 'm1_pk3_9', text: 'Ein rein positiver aggregierter Nachfrageschock senkt kurzfristig stets die Inflation, solange die Zentralbank nicht reagiert.', correct: 'Falsch', feedback: 'Über höheres Output und geringere Arbeitslosigkeit wirkt ein Nachfrageschock typischerweise inflationär entlang der kurzfristigen PC.' }
+            ]
           }
         ]
       },
       textBlock(
         'Aufgabe 2',
-        22,
+        24,
         'WS-PS und natürliche Arbeitslosigkeit',
         String.raw`Es gelte $W/P = 1{,}2 - 2u$ für die WS-Kurve und $W/P = 1/(1+\mu)$ mit $\mu = 0{,}2$ für die PS-Kurve.`,
         [
           textQuestion(
             'm1_pk3_2a',
-            8,
+            7,
             'Bestimme den Reallohn auf der PS-Kurve.',
             ['0.833', '0,833', '5/6', '0.83'],
             solutionBlock(
@@ -362,7 +407,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk3_2b',
-            8,
+            7,
             'Berechne die natürliche Arbeitslosenquote u_n.',
             ['0.183', '18.3%', '0,183', '18,3%'],
             solutionBlock(
@@ -377,7 +422,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk3_2c',
-            6,
+            5,
             'Welche qualitative Wirkung hätte ein Anstieg von z auf u_n?',
             ['u_n steigt', 'steigt'],
             solutionBlock(
@@ -387,19 +432,35 @@ export const FULL_EXAMS = {
                 'Die WS-Kurve verschiebt sich nach oben; der Schnittpunkt mit PS liegt bei höherem u_n.'
               ]
             )
+          ),
+          textQuestion(
+            'm1_pk3_2d',
+            5,
+            String.raw`Transfer: Der Markup steigt auf $\mu = 0{,}25$, die WS-Kurve bleibe unverändert. Wie hoch ist der neue Reallohn auf der PS-Kurve? (Kein erneutes Gleichsetzen mit der WS nötig.)`,
+            ['0.8', '0,8', '4/5'],
+            solutionBlock(
+              'Markup-Schock: nur PS verschieben',
+              [
+                'Auf der Preissetzungsseite gilt weiter $W/P = 1/(1+\mu)$.',
+                'Höheres Markup drückt den von Firmen gezahlten Reallohn.'
+              ],
+              [
+                String.raw`$$\frac{W}{P} = \frac{1}{1+0{,}25} = 0{,}8.$$`
+              ]
+            )
           )
         ],
         'arbeitsmarkt'
       ),
       textBlock(
         'Aufgabe 3',
-        20,
+        24,
         'Phillipskurve, Erwartungen und mittelfristige Dynamik',
         String.raw`Die Arbeitslosenquote sinkt nach einer expansiven Fiskalpolitik kurzfristig unter die natürliche Rate. Die Zentralbank verfolgt ein Inflationsziel und reagiert mit einer Zinsregel.`,
         [
           textQuestion(
             'm1_pk3_3a',
-            7,
+            6,
             'Erkläre die Wirkung des Schocks auf Inflation und Arbeitslosigkeit in der ersten Runde.',
             ['u unter u_n', 'inflation steigt', 'arbeitslosigkeit sinkt'],
             solutionBlock(
@@ -412,7 +473,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk3_3b',
-            7,
+            6,
             'Warum kehrt der Output mittelfristig wieder zu Y_n zurück?',
             ['weil die zentralbank den realzins erhöht', 'höhere inflation führt zu geldpolitischer straffung', 'nachfrage wird zurückgedrückt'],
             solutionBlock(
@@ -425,7 +486,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'm1_pk3_3c',
-            6,
+            5,
             'Warum wirken permanente und glaubwürdige Politikankündigungen stärker auf heutiges Verhalten als bloß temporäre?',
             ['weil erwartungen stärker reagieren', 'lebenseinkommen', 'langfristige zinsen', 'glaubwürdigkeit'],
             solutionBlock(
@@ -433,6 +494,19 @@ export const FULL_EXAMS = {
               [
                 'Permanente und glaubwürdige Politik verändert erwartetes Lebenseinkommen und erwartete zukünftige Zinsen stärker.',
                 'Dadurch reagieren Konsum, Investitionen und Preissetzung bereits heute kräftiger.'
+              ]
+            )
+          ),
+          textQuestion(
+            'm1_pk3_3d',
+            7,
+            String.raw`Fallvariante: Ein negativer Angebotsschock verschiebt die kurzfristige Phillipskurve nach oben, während die Güternachfrage zunächst unverändert bleibt. Was passiert kurzfristig typischerweise mit Inflation und Arbeitslosigkeit relativ zur Ausgangssituation?`,
+            ['stagflation', 'inflation steigt', 'output sinkt', 'u steigt', 'arbeitslosigkeit steigt'],
+            solutionBlock(
+              'Angebotsschock entlang der Nachfragelage',
+              [
+                'Die nach oben verschobene PC liefert bei gleicher kurzfristiger Aktivität höhere Inflation.',
+                'Gleichzeitig wird das Output oft gedrückt; über Okun steigt die Arbeitslosigkeit — Stagflationstypische Spannung.'
               ]
             )
           )

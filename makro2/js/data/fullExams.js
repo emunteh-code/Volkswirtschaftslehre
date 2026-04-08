@@ -250,13 +250,13 @@ export const FULL_EXAMS = {
       ),
       textBlock(
         'Aufgabe 3',
-        20,
+        24,
         'Taylor-Regel und geldpolitische Reaktion',
         String.raw`Eine Zentralbank folgt der Regel $i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$ mit $r^*=1$, $\pi^*=2$, $a=0{,}8$ und $b=0{,}5$.`,
         [
           textQuestion(
             'pk2_3a',
-            8,
+            6,
             'Berechne den Leitzins bei aktueller Inflation von 3% und einer positiven Outputlücke von 1 Prozentpunkt.',
             ['4.3', '4,3'],
             solutionBlock(
@@ -284,7 +284,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'pk2_3c',
-            6,
+            5,
             'Warum ist diese Regel glaubwürdiger als rein diskretionäre Geldpolitik?',
             ['transparenz', 'erwartungen', 'bindung', 'vorhersehbar'],
             solutionBlock(
@@ -292,6 +292,22 @@ export const FULL_EXAMS = {
               [
                 'Eine bekannte Reaktionsregel macht künftige Politik berechenbarer und diszipliniert den diskretionären Anreiz.',
                 'Dadurch lassen sich Inflationserwartungen besser verankern und Zeitinkonsistenzkosten reduzieren.'
+              ]
+            )
+          ),
+          textQuestion(
+            'pk2_3d',
+            7,
+            String.raw`Transfer: Aktuelle Inflation betrage $1\%$, die Outputlücke $(y-y_n)$ sei $-1$ Prozentpunkt (Konjunkturschwäche). Berechne den Leitzins nach derselben Regel.`,
+            ['0.7', '0,7'],
+            solutionBlock(
+              'Konjunktur- und Deflationsnähe in einer Rechnung',
+              [
+                'Unter dem Ziel liegt die Inflation; die negative Outputlücke zieht zusätzlich nach unten.',
+                'Beide Terme wirken in dieselbe Richtung: expansiver Zinsdruck.'
+              ],
+              [
+                String.raw`$$i = 1 + 1 + 0{,}8(1-2) + 0{,}5(-1) = 2 - 0{,}8 - 0{,}5 = 0{,}7.$$`
               ]
             )
           )
@@ -382,13 +398,13 @@ export const FULL_EXAMS = {
       ),
       textBlock(
         'Aufgabe 3',
-        20,
+        24,
         'Schuldenquote, Primärsaldo und Monetarisierung',
         String.raw`Die Schuldenquote eines Landes beträgt zu Beginn 90% des BIP. Der reale Zinssatz liegt bei 4%, die Wachstumsrate bei 1%.`,
         [
           textQuestion(
             'pk3_3a',
-            8,
+            6,
             'Welcher Primärsaldo stabilisiert die Schuldenquote ungefähr?',
             ['2.7', '2,7', '2.7%', '2,7%'],
             solutionBlock(
@@ -416,7 +432,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'pk3_3c',
-            6,
+            5,
             'Vergleiche Kreditfinanzierung und Monetarisierung zusätzlicher Staatsausgaben in einem Satz mit Blick auf Inflation und Zinslast.',
             ['monetarisierung', 'inflation', 'kredit', 'zinslast'],
             solutionBlock(
@@ -424,6 +440,21 @@ export const FULL_EXAMS = {
               [
                 'Kreditfinanzierung erhöht die zukünftige Zinslast und hält den Anpassungsdruck über den Kapitalmarkt aufrecht.',
                 'Monetarisierung senkt kurzfristig den Refinanzierungsdruck, kann aber über die Geldmenge schneller Inflationsdruck erzeugen.'
+              ]
+            )
+          ),
+          textQuestion(
+            'pk3_3d',
+            7,
+            String.raw`Transfer: Gleiche Schuldenquote $b=0{,}90$, aber $r=4\%$ und $g=2\%$. Welcher Primärsaldo (als Anteil des BIP) hält $b$ näherungsweise konstant?`,
+            ['1.8', '1,8', '1.8%', '1,8%'],
+            solutionBlock(
+              'Andere $(r-g)$-Konstellation',
+              [
+                'Die Stabilisierungsformel bleibt dieselbe; nur die Differenz zwischen Zins und Wachstum ändert sich.'
+              ],
+              [
+                String.raw`$$ps^* = (0{,}04-0{,}02)\cdot 0{,}90 = 0{,}018.$$`
               ]
             )
           )

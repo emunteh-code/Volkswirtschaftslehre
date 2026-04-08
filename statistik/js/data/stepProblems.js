@@ -200,6 +200,122 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+  ],
+  wahrscheinlichkeit: [
+    {
+      title: 'Bayes und Basisratenfalle',
+      context: 'Prävalenz 1%, Sensitivität 99%, Falsch-Positiv-Rate 5%.',
+      steps: [
+        {
+          q: '[1. Decision] Ist P(krank|+) bei diesen Werten automatisch sehr hoch?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_prob_1', stepId: 'base', isDecision: true },
+          hint: 'Denke an die Basisrate.',
+          explain: 'Nein. Eine seltene Krankheit kann trotz gutem Test viele falsch positive Fälle erzeugen.'
+        },
+        {
+          q: '[2. Execution] Welche Formel ist der saubere Zugriff auf P(krank|+)?',
+          answer: ['bayes', 'satz von bayes', 'bayes-formel'],
+          options: { problemId: 'stat_prob_1', stepId: 'formula', dependsOn: 'base' },
+          hint: 'Bedingte Wahrscheinlichkeit umdrehen.',
+          explain: 'Verwende den Satz von Bayes mit totaler Wahrscheinlichkeit im Nenner.'
+        },
+        {
+          q: '[3. Validation] Ist p-Wert-Logik dasselbe wie Bayes-Posterior-Logik?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_prob_1', role: 'VALIDATION' },
+          hint: 'Unterschied zwischen Testinferenz und bedingter Wahrscheinlichkeit.',
+          explain: 'Nein. Das sind unterschiedliche Konzepte mit unterschiedlichen Bedingungen.'
+        }
+      ]
+    }
+  ],
+  verteilungen: [
+    {
+      title: 'Standardisierung und Intervallinterpretation',
+      context: 'X ~ N(50, 100), gesucht ist die korrekte Standardisierung für P(40 < X < 60).',
+      steps: [
+        {
+          q: '[1. Decision] Welche Transformation ist korrekt?',
+          answer: ['z=(x-mu)/sigma', '(x-mu)/sigma', 'standardisierung'],
+          options: { problemId: 'stat_dist_1', stepId: 'z', isDecision: true },
+          hint: 'Mittelwert abziehen, durch Standardabweichung teilen.',
+          explain: 'Standardisierung erfolgt über Z = (X - μ)/σ.'
+        },
+        {
+          q: '[2. Execution] Ist P(40 < X < 60) bei μ=50, σ=10 identisch zu P(-1 < Z < 1)?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_dist_1', stepId: 'map', dependsOn: 'z' },
+          hint: 'Rechne beide Grenzen um.',
+          explain: 'Ja. 40 und 60 entsprechen z=-1 bzw. z=1.'
+        },
+        {
+          q: '[3. Validation] Bedeutet ein hoher z-Wert automatisch Kausalität?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_dist_1', role: 'VALIDATION' },
+          hint: 'Verteilungsrechnung ist keine Kausalitätsaussage.',
+          explain: 'Nein. Ein z-Wert beschreibt Lage in einer Verteilung, nicht Ursache-Wirkung.'
+        }
+      ]
+    }
+  ],
+  schaetzen: [
+    {
+      title: 'MoM, ML und MSE-Logik',
+      context: 'Bernoulli-Stichprobe mit 76 Erfolgen bei n=200; zusätzlicher Schätzervergleich über Bias und Varianz.',
+      steps: [
+        {
+          q: '[1. Decision] Liefern MoM und ML für Bernoulli-π denselben Anteilsschätzer?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_est_1', stepId: 'momml', isDecision: true },
+          hint: 'Beide nutzen hier den Stichprobenanteil.',
+          explain: 'Ja, beide führen in diesem Standardfall auf π-Hut = x/n.'
+        },
+        {
+          q: '[2. Execution] Welche Formel verknüpft Varianz und Bias zur Gesamtgüte?',
+          answer: ['mse=var+bias^2', 'mse', 'var+bias^2'],
+          options: { problemId: 'stat_est_1', stepId: 'mse', dependsOn: 'momml' },
+          hint: 'Gesamtfehler statt nur Streuung.',
+          explain: 'MSE = Var(θ-hat) + Bias(θ-hat)^2.'
+        },
+        {
+          q: '[3. Validation] Reicht bei verzerrten Schätzern ein reiner Varianzvergleich?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_est_1', role: 'VALIDATION' },
+          hint: 'Bias kann dominieren.',
+          explain: 'Nein. Ohne Bias-Komponente ist der Qualitätsvergleich unvollständig.'
+        }
+      ]
+    }
+  ],
+  varianzanalyse: [
+    {
+      title: 'ANOVA statt Test-Sammlung',
+      context: 'Drei Gruppenmittelwerte sollen verglichen werden.',
+      steps: [
+        {
+          q: '[1. Decision] Ist ANOVA die saubere Primärwahl statt mehrerer ungekorrierter t-Tests?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_anova_1', stepId: 'anova', isDecision: true },
+          hint: 'Denke an multiplen Fehler 1. Art.',
+          explain: 'Ja. ANOVA kontrolliert den globalen Mittelwertvergleich in einem konsistenten Test.'
+        },
+        {
+          q: '[2. Execution] Was zeigt ein signifikanter globaler F-Test allein?',
+          answer: ['mindestens eine gruppe unterscheidet sich', 'nicht alle mittelwerte gleich'],
+          options: { problemId: 'stat_anova_1', stepId: 'global', dependsOn: 'anova' },
+          hint: 'Globaltest vs. Paarvergleich trennen.',
+          explain: 'Er zeigt nur, dass nicht alle Mittelwerte gleich sind, aber nicht welche Paare differieren.'
+        },
+        {
+          q: '[3. Validation] Darf man nach signifikantem F ohne Korrektur beliebig viele Paarvergleiche interpretieren?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_anova_1', role: 'VALIDATION' },
+          hint: 'Familienweiser Fehler.',
+          explain: 'Nein. Post-hoc-Tests/Korrekturen sind nötig (z.B. Tukey oder Bonferroni).'
+        }
+      ]
+    }
   ]
 };
 

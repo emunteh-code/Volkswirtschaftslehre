@@ -316,6 +316,16 @@ export const CONTENT = {
           { text: `Wird die Richtung ex post angepasst, steigt das Fehlentscheidungsrisiko (p-Hacking/Alpha-Inflation).`, eq: null }
         ],
         result: String.raw`Die Testseite muss vor Datensichtung aus der Fragestellung folgen. Richtung nachträglich wählen ist methodisch unzulässig und verzerrt die Evidenz.`
+      },
+      {
+        text: String.raw`Testauswahl unter Zeitdruck: Ordnen Sie jeder Situation den passenden Testtyp zu und begründen Sie kurz. (1) Anteil defekter Teile gegen Sollwert $\pi_0$. (2) Mittelwertvergleich von drei unabhängigen Gruppen. (3) Vorher/Nachher-Messung derselben Personen.`,
+        steps: [
+          { text: `(1) Anteil gegen Referenzwert:`, eq: String.raw`\text{Binomial-/Anteilstest für } H_0:\pi=\pi_0` },
+          { text: `(2) Drei Gruppenmittelwerte gleichzeitig:`, eq: String.raw`\text{ANOVA-}F\text{-Test statt multipler Einzeltests}` },
+          { text: `(3) Paarstruktur vorhanden:`, eq: String.raw`\text{Verbundener t-Test auf Differenzen } D_i` },
+          { text: `Trap-Hinweis:`, eq: String.raw`Falsche Testfamilie erzeugt fehlerhafte p-Werte und schwache Entscheidungen.` }
+        ],
+        result: String.raw`Saubere Testwahl folgt aus Datentyp, Gruppenstruktur und Fragestellung. Diese Zuordnung ist klausurrelevant, bevor überhaupt gerechnet wird.`
       }
     ]
   },
@@ -538,6 +548,26 @@ export const CONTENT = {
           { text: `Vergleich mit $95\%$-KI ($z = 1{,}96$):`, eq: String.raw`95\%\text{-KI}: 80 \pm 1{,}96 \cdot 4 = [72{,}2;\; 87{,}8] \quad \text{(schmaler)}` }
         ],
         result: String.raw`$99\%$-KI: $[69{,}7;\; 90{,}3]$. Das $99\%$-Intervall ist breiter als das $95\%$-Intervall: Mehr Sicherheit kostet Präzision. Für höhere Konfidenzniveaus muss man bereit sein, ein ungenaueres (breiteres) Intervall zu akzeptieren.`
+      },
+      {
+        text: String.raw`Methodenvergleich (MoM vs. ML): Für eine Bernoulli-Variable mit $n=200$ Beobachtungen und $76$ Erfolgen soll $\pi$ geschätzt werden. Bestimmen Sie den Momentenschätzer und den Maximum-Likelihood-Schätzer und interpretieren Sie das Ergebnis.`,
+        steps: [
+          { text: `Stichprobenanteil als 1. Moment der Bernoulli-Verteilung:`, eq: String.raw`\bar{X} = \frac{76}{200} = 0{,}38` },
+          { text: `Methode der Momente: Setze $E[X]=\pi$ gleich $\bar X$.`, eq: String.raw`\hat{\pi}_{MM} = \bar{X} = 0{,}38` },
+          { text: `MLE bei Bernoulli/Binomial führt auf denselben Anteilsschätzer.`, eq: String.raw`\hat{\pi}_{ML} = \frac{76}{200} = 0{,}38` },
+          { text: `Interpretation: Schätzerwert als plausibler Erfolgsanteil in der Population.`, eq: null }
+        ],
+        result: String.raw`In diesem Standardfall liefern Methode der Momente und Maximum-Likelihood denselben Schätzwert ($0{,}38$). Prüfungsrelevant ist, die gemeinsame Logik (Stichprobeninformation) und die unterschiedliche Begründung zu trennen.`
+      },
+      {
+        text: String.raw`Bias/MSE-Drill: Für einen Schätzer $\hat\theta$ gilt $Var(\hat\theta)=4$ und $Bias(\hat\theta)=1{,}5$. Berechnen Sie den MSE und erklären Sie, warum die Varianz allein hier kein sauberer Qualitätsvergleich ist.`,
+        steps: [
+          { text: `MSE-Zerlegung verwenden:`, eq: String.raw`MSE(\hat\theta)=Var(\hat\theta)+Bias(\hat\theta)^2` },
+          { text: `Einsetzen:`, eq: String.raw`MSE = 4 + (1{,}5)^2 = 4 + 2{,}25 = 6{,}25` },
+          { text: `Interpretation:`, eq: String.raw`Ein verzerrter Schätzer kann trotz kleiner Varianz einen großen Gesamtfehler haben.` },
+          { text: `Konsequenz für Vergleiche:`, eq: String.raw`Nur bei erwartungstreuen Schätzern reicht ein Varianzvergleich aus.` }
+        ],
+        result: String.raw`$MSE=6{,}25$. Der MSE kombiniert Streuung und systematischen Fehler und ist daher die belastbare Vergleichsgröße, wenn Bias ungleich null ist.`
       }
     ]
   },
@@ -608,6 +638,26 @@ export const CONTENT = {
           { text: `GM4: Voller Rang der Regressorenmatrix (keine Multikollinearität).`, eq: String.raw`\text{rank}(X) = k \implies (X'X)^{-1} \text{ existiert}` }
         ],
         result: String.raw`Unter GM1–GM4 gilt nach dem Gauss-Markov-Theorem: $\hat{\beta}_{OLS} = (X'X)^{-1}X'y$ ist unter allen linearen erwartungstreuen Schätzern derjenige mit minimaler Varianz. Verletzungen (Heteroskedastizität $\to$ GM3, Endogenität $\to$ GM2) zerstören Effizienz bzw. Erwartungstreue und erfordern alternative Schätzer (WLS, IV/2SLS).`
+      },
+      {
+        text: String.raw`Diagnostik-Entscheidung: Ein Residuenplot zeigt einen klaren Trichter (Streuung steigt mit $x$), der QQ-Plot ist ansonsten relativ unauffällig. Was ist die naheliegende Modellwarnung und welche inferenzseitige Konsequenz ist prüfungssicher?`,
+        steps: [
+          { text: `Mustererkennung im Residuenplot:`, eq: String.raw`\text{Trichterform} \Rightarrow \text{Hinweis auf Heteroskedastizität}` },
+          { text: `Kernkonsequenz:`, eq: String.raw`OLS\text{-Koeffizienten bleiben oft unverzerrt, Standardfehler/Teste können aber verzerrt sein.}` },
+          { text: `Prüfungssichere Reaktion:`, eq: String.raw`\text{Heteroskedastizitätsrobuste Standardfehler oder angepasstes Modell berichten.}` },
+          { text: `Trap:`, eq: String.raw`Hohes }R^2\text{ behebt Diagnostikprobleme nicht.` }
+        ],
+        result: String.raw`Die Hauptaussage ist nicht "Modell verwerfen", sondern "Inferenz absichern": bei heteroskedastischen Residuen sind robuste Standardfehler bzw. eine angepasste Spezifikation zentral.`
+      },
+      {
+        text: String.raw`Konfidenz- vs. Prognoseintervall: Für dasselbe $x_0$ liefert ein Modell ein 95%-Konfidenzintervall für den Erwartungswert und ein 95%-Prognoseintervall für eine Einzelbeobachtung. Welches Intervall ist breiter und warum?`,
+        steps: [
+          { text: `Unterscheidung Zielgröße:`, eq: String.raw`CI \text{ zielt auf } E[Y|x_0],\quad PI \text{ auf eine neue Einzelrealisierung }Y_{neu}.` },
+          { text: `Zusätzliche Unsicherheitskomponente beim PI:`, eq: String.raw`PI \text{ enthält neben Schätzunsicherheit auch idiosynkratische Störung.}` },
+          { text: `Folgerung:`, eq: String.raw`PI \text{ ist bei gleichem Niveau stets breiter als } CI.` },
+          { text: `Interpretationspflicht:`, eq: null }
+        ],
+        result: String.raw`Das Prognoseintervall ist breiter, weil eine neue Beobachtung zusätzlichen Zufall enthält. Diese Unterscheidung ist zentral für saubere Ergebnisdeutung in Modellierungsaufgaben.`
       }
     ]
   },

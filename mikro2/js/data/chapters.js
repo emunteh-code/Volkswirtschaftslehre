@@ -8,9 +8,12 @@ export const CHAPTERS = [
   { id: 'spieltheorie_dynamisch', title: 'Spieltheorie: Gemischte Strategien & Wiederholung', cat: 'Interaktion', short: 'Spiel II' },
   { id: 'oligopol_cournot_bertrand', title: 'Oligopol: Cournot- und Bertrand-Wettbewerb', cat: 'Interaktion', short: 'Oligopol I' },
   { id: 'oligopol_stackelberg', title: 'Oligopol: Stackelberg und Führerschaft', cat: 'Interaktion', short: 'Oligopol II' },
-  { id: 'gleichgewicht', title: 'Allgemeines Gleichgewicht', cat: 'Wohlfahrt', short: 'Gleichgew.' },
-  { id: 'wohlfahrt', title: 'Wohlfahrtstheoreme', cat: 'Wohlfahrt', short: 'Wohlfahrt' },
-  { id: 'externa', title: 'Externe Effekte', cat: 'Marktversagen', short: 'Extern' },
+  { id: 'gleichgewicht_tausch', title: 'Allgemeines Gleichgewicht: Tausch, Edgeworth, Kontraktkurve', cat: 'Wohlfahrt', short: 'GG Tausch' },
+  { id: 'gleichgewicht_walras', title: 'Allgemeines Gleichgewicht: Walras & Markt-Räumung', cat: 'Wohlfahrt', short: 'GG Walras' },
+  { id: 'wohlfahrt_theoreme', title: 'Wohlfahrt: 1./2. Hauptsatz', cat: 'Wohlfahrt', short: 'Wohlf. Satz' },
+  { id: 'wohlfahrt_messung', title: 'Wohlfahrt: Messung (KR, PR, DWL, SWF)', cat: 'Wohlfahrt', short: 'Wohlf. Mess.' },
+  { id: 'externa_pigou', title: 'Externe Effekte: Pigou-Internalisierung', cat: 'Marktversagen', short: 'Extern Pigou' },
+  { id: 'externa_institutionen', title: 'Externe Effekte: Coase & Emissionshandel', cat: 'Marktversagen', short: 'Extern Inst.' },
   { id: 'public_goods', title: 'Öffentliche Güter', cat: 'Marktversagen', short: 'Öff. Güter' },
   { id: 'information_adverse', title: 'Asymmetrische Information: Adverse Selection', cat: 'Marktversagen', short: 'Info I' },
   { id: 'information_moralhazard', title: 'Asymmetrische Information: Moral Hazard, Signaling & Screening', cat: 'Marktversagen', short: 'Info II' },
@@ -248,7 +251,7 @@ export const CONTENT = {
       }
     ]
   },
-  gleichgewicht: {
+  gleichgewicht_tausch: {
     motivation: 'Bisher haben wir Märkte isoliert betrachtet (Partialanalyse). Das allgemeine Gleichgewicht betrachtet alle Märkte gleichzeitig und analysiert Tausch- und Produktionseffizienz.',
     theorie: String.raw`
     <div class="section-block">
@@ -321,7 +324,39 @@ export const CONTENT = {
       }
     ]
   },
-  wohlfahrt: {
+  gleichgewicht_walras: {
+    motivation: 'Walrasianische Gleichgewichte fokussieren auf Preisvektoren und gleichzeitige Markt-Räumung statt auf reine Tauschgeometrie.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Walrasianisches Gleichgewicht</h3>
+      <p>Ein Preisvektor $p^*$ räumt alle Märkte gleichzeitig. Haushalte und Unternehmen optimieren bei diesen Preisen, sodass aggregierte Überschussnachfrage verschwindet.</p>
+      <div class="math-block">$$\sum_i z_i(p^*) = 0$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Walrasches Gesetz</h3>
+      <p>Wenn bei $n$ Märkten bereits $n-1$ Märkte geräumt sind, ist auch der letzte Markt geräumt. Das reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Walrasches Gesetz', eq: String.raw`$$\sum_i z_i(p) = 0$$`, desc: 'Aggregierte Überschussnachfrage über alle Märkte.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Zwei Güter, zwei Konsumenten. $u^A = x_1^{0{,}5} (x_2^A)^{0{,}5}$, $u^B = x_1^B x_2^B$. Endowments: $e^A = (4,0)$, $e^B = (0,4)$. Bestimmen Sie das Walrasianische Gleichgewicht (Preise und Allokation).`,
+        steps: [
+          { text: `Marshallsche Nachfragen A:`, eq: String.raw`x_1^A = \frac{0{,}5 I^A}{p_1}=2,\quad x_2^A = \frac{0{,}5 I^A}{p_2}= \frac{2p_1}{p_2}` },
+          { text: `Marshallsche Nachfragen B:`, eq: String.raw`x_1^B = \frac{2p_2}{p_1}, \quad x_2^B = 2` },
+          { text: `Markträumung Gut 1:`, eq: String.raw`2 + \frac{2p_2}{p_1} = 4 \Rightarrow p_1 = p_2` }
+        ],
+        result: String.raw`Walras-GG: relatives Preisverhältnis $p_1/p_2=1$, Allokation $(2,2)$ für beide Konsumenten.`
+      }
+    ]
+  },
+  wohlfahrt_theoreme: {
     motivation: 'Die Wohlfahrtstheoreme schlagen die Brücke zwischen Marktgleichgewicht und gesellschaftlicher Wünschenswertigkeit.',
     theorie: String.raw`
     <div class="section-block">
@@ -394,7 +429,43 @@ export const CONTENT = {
       }
     ]
   },
-  externa: {
+  wohlfahrt_messung: {
+    motivation: 'Wohlfahrtsmessung trennt normative Bewertungskriterien und messbare Surplus-/DWL-Rechnung als eigenen Klausurblock.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Wohlfahrtsfunktionen</h3>
+      <p>Allokationen können utilitaristisch ($\sum u_i$) oder Rawlsianisch ($\min u_i$) bewertet werden.</p>
+      <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Surplus und Deadweight Loss</h3>
+      <p>Im partiellen Gleichgewicht misst Gesamtwohlfahrt $W = KR + PR$. Eingriffe oder Marktmacht erzeugen typischerweise einen DWL relativ zum Wettbewerbsoptimum.</p>
+      <div class="math-block">$$DWL = W_{Wettbewerb} - (KR + PR)$$</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Utilitaristisch', eq: String.raw`$$W = u_1 + u_2 + \dots + u_n$$`, desc: 'Summe der Nutzen.' },
+      { label: 'Rawlsianisch', eq: String.raw`$$W = \min(u_1, \dots, u_n)$$`, desc: 'Fokus auf den Schwächsten.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Zwei Allokationen: I $(u_1=10, u_2=10)$ und II $(u_1=5, u_2=20)$. Welche wird nach Rawls bevorzugt?`,
+        steps: [
+          { text: `Minima vergleichen:`, eq: String.raw`\min(10,10)=10,\quad \min(5,20)=5` }
+        ],
+        result: String.raw`Rawls bevorzugt Allokation I.`
+      },
+      {
+        text: String.raw`Nachfrage $P_D = 20 - Q$, Angebot $P_S = Q + 4$. Berechnen Sie KR, PR und Gesamtwohlfahrt im Gleichgewicht.`,
+        steps: [
+          { text: `Gleichgewicht:`, eq: String.raw`20-Q = Q+4 \Rightarrow Q^*=8,\;P^*=12` },
+          { text: `Renten:`, eq: String.raw`KR=\frac12(20-12)\cdot 8=32,\quad PR=\frac12(12-4)\cdot 8=32` }
+        ],
+        result: String.raw`Gesamtwohlfahrt $W=64$ im Gleichgewicht.`
+      }
+    ]
+  },
+  externa_pigou: {
     motivation: 'Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.',
     theorie: String.raw`
     <div class="section-block">
@@ -466,6 +537,37 @@ export const CONTENT = {
           { text: `Fall 2: G hat Recht auf sauberes Wasser. Produziert F trotzdem?`, eq: String.raw`F \text{ müsste G mind. } 60 \text{ zahlen, verdient aber nur } 80. \; 80-60=20 \text{ Restgewinn.} \implies \text{F vermeidet Abwasser.}` }
         ],
         result: String.raw`In beiden Fällen: kein Abwasser — effizientes Ergebnis. Coase-Theorem bestätigt: Bei null Transaktionskosten und klar definierten Rechten ist das Effizienzresultat invariant bezüglich der Rechtszuweisung. Verteilung: Im Fall 1 zahlt G zwischen 50 und 60 an F; im Fall 2 muss F G entschädigen (oder gar nicht produzieren und die Einigung zustande kommt zu anderen Bedingungen).`
+      }
+    ]
+  },
+  externa_institutionen: {
+    motivation: 'Neben Steuer-Internalisierung braucht die Klausur trennscharfe Beherrschung institutioneller Ansätze: Coase-Verhandlung und Cap-and-Trade.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Coase-Theorem</h3>
+      <p>Bei klaren Eigentumsrechten und sehr niedrigen Transaktionskosten führen private Verhandlungen zu einer effizienten Allokation, unabhängig von der initialen Rechtszuweisung.</p>
+    </div>
+    <div class="section-block">
+      <h3>Emissionshandel (Cap-and-Trade)</h3>
+      <p>Der Staat setzt eine Emissionsmenge (Cap), Lizenzen werden handelbar. Bei funktionierendem Markt ergibt sich kosteneffiziente Vermeidung über den Lizenzpreis.</p>
+      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene und hohe Verhandlungskosten unterminieren private Effizienzverhandlungen.</div>
+      <div class="warn-box"><strong>Instrumentenfehler:</strong> Cap-and-Trade und Pigou-Steuer sind in der Zielsetzung verwandt, aber unterschiedlich in Preis- vs. Mengensteuerung unter Unsicherheit.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Preis-Mengen-Äquivalenz', eq: String.raw`$$t_{Pigou} = MEC(Q^*) \Leftrightarrow \text{Cap auf }Q^*$$`, desc: 'Äquivalenzidee bei idealen Bedingungen.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Firma A hat Produktionsrecht und erzielt Gewinn 50, bei Firma B entsteht Schaden 30, Transaktionskosten = 0. Was sagt Coase über das effiziente Ergebnis?`,
+        steps: [
+          { text: `Nettoeffekt prüfen:`, eq: String.raw`50-30=20>0 \Rightarrow Produktion ist effizient.` }
+        ],
+        result: String.raw`Effizientes Ergebnis: Produktion findet statt; Rechtszuweisung beeinflusst Verteilung, nicht Effizienz (unter Coase-Annahmen).`
       }
     ]
   },

@@ -8,8 +8,10 @@ export const GRAPH_CONCEPTS = new Set([
   'spieltheorie_dynamisch',
   'oligopol_cournot_bertrand',
   'oligopol_stackelberg',
-  'gleichgewicht',
-  'externa'
+  'gleichgewicht_tausch',
+  'gleichgewicht_walras',
+  'externa_pigou',
+  'externa_institutionen'
 ]);
 
 export function renderGraphPanel(id) {
@@ -38,16 +40,28 @@ export function renderGraphPanel(id) {
 <p style="font-size:12px;color:var(--muted)">Sequenzielle Mengenwahl mit Rueckwaertsinduktion.</p>
 <canvas id="graph_canvas" width="800" height="500" role="img"></canvas>
 </div>`,
-    gleichgewicht: `
+    gleichgewicht_tausch: `
 <div class="graph-container">
 <h3 class="graph-panel-title">Edgeworth-Box</h3>
 <p style="font-size:12px;color:var(--muted)">Tauschkurve und Kontraktkurve.</p>
 <canvas id="graph_canvas" width="800" height="500" role="img"></canvas>
 </div>`,
-    externa: `
+    gleichgewicht_walras: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Walrasianische Markt-Raeumung</h3>
+<p style="font-size:12px;color:var(--muted)">Preisvektor und Ueberschussnachfrage im Gesamtgleichgewicht.</p>
+<canvas id="graph_canvas" width="800" height="500" role="img"></canvas>
+</div>`,
+    externa_pigou: `
 <div class="graph-container">
 <h3 class="graph-panel-title">Internalisierung externer Effekte</h3>
 <p style="font-size:12px;color:var(--muted)">Vergleich zwischen Marktgleichgewicht und sozialem Optimum.</p>
+<canvas id="graph_canvas" width="800" height="500" role="img"></canvas>
+</div>`,
+    externa_institutionen: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Institutionelle Loesungen externer Effekte</h3>
+<p style="font-size:12px;color:var(--muted)">Coase-Verhandlung und Cap-and-Trade im Vergleich.</p>
 <canvas id="graph_canvas" width="800" height="500" role="img"></canvas>
 </div>`
   };

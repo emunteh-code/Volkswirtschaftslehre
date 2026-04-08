@@ -108,7 +108,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  gleichgewicht: [
+  gleichgewicht_tausch: [
     {
       title: 'Edgeworth-Box: Pareto-Effizienz',
       context: 'Zwei Konsumenten A, B. uA = x1*x2, uB = x1*x2. Ausstattung (10, 10). Aktueller Punkt: A=(2,2), B=(8,8).',
@@ -126,6 +126,28 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_ge_1', stepId: 'eff_choice', dependsOn: 'grs_a' },
           hint: 'Effizienzbedingung GRS_A = GRS_B.', 
           explain: 'Ja, da die Grenzraten der Substitution gleich sind, können sich beide nicht mehr durch Tausch verbessern, ohne den anderen schlechter zu stellen.' 
+        }
+      ]
+    }
+  ],
+  gleichgewicht_walras: [
+    {
+      title: 'Walras: Markt-Raeumung mit relativen Preisen',
+      context: 'Allgemeines Gleichgewicht mit zwei Guetern.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welche Bedingung charakterisiert Walras-Gleichgewicht zentral?',
+          answer: ['Marktraeumung', 'ueberschussnachfrage gleich null', 'z(p)=0'],
+          options: { problemId: 'm2_walras_1', stepId: 'market_clear', isDecision: true },
+          hint: 'Alle Maerkte muessen gleichzeitig geraeumt sein.',
+          explain: 'Walras-GG verlangt, dass aggregierte Ueberschussnachfrage verschwindet.'
+        },
+        {
+          q: '[2. Decision] Wenn in einer 2-Guter-Oekonomie ein Markt geraeumt ist, was folgt unter Walras-Gesetz fuer den anderen?',
+          answer: ['Er ist auch geraeumt', 'auch im gleichgewicht'],
+          options: { problemId: 'm2_walras_1', stepId: 'walras_law', dependsOn: 'market_clear' },
+          hint: 'Walrasches Gesetz reduziert die Zahl unabhaengiger Gleichungen.',
+          explain: 'In der 2-Guter-Variante reicht eine unabhaengige Marktraeumungsbedingung.'
         }
       ]
     }
@@ -230,7 +252,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  wohlfahrt: [
+  wohlfahrt_theoreme: [
     {
       title: 'Wohlfahrtstheoreme: Effizienz vs. Verteilung',
       context: 'Prüfungsschema zu 1. und 2. Hauptsatz.',
@@ -259,7 +281,29 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  externa: [
+  wohlfahrt_messung: [
+    {
+      title: 'Wohlfahrtsmessung: Rawls vs. DWL',
+      context: 'Normative Regel und Effizienzmessung trennen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Rawls bewertet welche Groesse?',
+          answer: ['Minimum', 'schwaechsten', 'min nutzen'],
+          options: { problemId: 'm2_welfare_2', stepId: 'rawls_rule', isDecision: true },
+          hint: 'Maximiere den Nutzen des am schlechtesten Gestellten.',
+          explain: 'Rawls orientiert sich am Minimum der individuellen Nutzen.'
+        },
+        {
+          q: '[2. Decision] DWL misst was relativ zum Wettbewerbsoptimum?',
+          answer: ['Wohlfahrtsverlust', 'effizienzverlust', 'verlust an gesamtwohlfahrt'],
+          options: { problemId: 'm2_welfare_2', stepId: 'dwl_meaning', dependsOn: 'rawls_rule' },
+          hint: 'Vergleich aus realisiertem KR+PR und Benchmark.',
+          explain: 'DWL ist der verlorene Gesamtueberschuss gegenueber dem effizienten Referenzpunkt.'
+        }
+      ]
+    }
+  ],
+  externa_pigou: [
     {
       title: 'Pigou-Steuer: Marktmenge vs. Sozialoptimum',
       context: 'Negative Externalität mit linearem Grenzschaden.',
@@ -284,6 +328,28 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_external_1', role: 'VALIDATION' },
           hint: 'Steuerhöhe entspricht marginalem externen Schaden bei Q*.',
           explain: 'Die effiziente Steuer setzt t gleich MEC im sozialen Optimum.'
+        }
+      ]
+    }
+  ],
+  externa_institutionen: [
+    {
+      title: 'Coase vs. Cap-and-Trade einordnen',
+      context: 'Institutionelle Loesungen externer Effekte.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welche Zusatzannahme braucht Coase fuer effiziente Verhandlung besonders?',
+          answer: ['niedrige transaktionskosten', 'transaktionskosten nahe null', 'klare eigentumsrechte'],
+          options: { problemId: 'm2_external_2', stepId: 'coase_assumption', isDecision: true },
+          hint: 'Ohne diese Bedingung scheitert private Aushandlung oft.',
+          explain: 'Coase braucht insbesondere geringe Transaktionskosten und klare Rechte.'
+        },
+        {
+          q: '[2. Decision] Beim Emissionshandel steuert der Staat primaer was: Preis oder Menge?',
+          answer: ['Menge', 'cap', 'emissionsmenge'],
+          options: { problemId: 'm2_external_2', stepId: 'cap_logic', dependsOn: 'coase_assumption' },
+          hint: 'Das Cap wird politisch festgelegt.',
+          explain: 'Cap-and-Trade fixiert die Gesamtmenge; der Zertifikatspreis bildet sich am Markt.'
         }
       ]
     }

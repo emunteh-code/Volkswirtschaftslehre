@@ -40,7 +40,7 @@ export const INTUITION = {
     ],
     bridge: 'Timing ist hier ein Modellparameter mit realen Wohlfahrts- und Gewinnfolgen.'
   },
-  gleichgewicht: {
+  gleichgewicht_tausch: {
     core: 'Alles hängt mit allem zusammen. Effizienz auf einem Markt erfordert Effizienz auf allen Märkten.',
     analogy: 'Die Edgeworth-Box ist wie ein Kuchen, den zwei Personen unter sich aufteilen. Pareto-Effizienz bedeutet, dass kein Krümel verschwendet wird.',
     exam: [
@@ -49,7 +49,34 @@ export const INTUITION = {
     ],
     bridge: 'Die Kontraktkurve verbindet alle effizienten Tauschmöglichkeiten.'
   },
-  externa: {
+  gleichgewicht_walras: {
+    core: 'Walras-Gleichgewicht entsteht, wenn Preise alle Maerkte gleichzeitig raeumen.',
+    analogy: 'Wie ein Regler, der mehrere Wasserhaehne so einstellt, dass nirgends Ueberlauf oder Leerlauf bleibt.',
+    exam: [
+      { if: 'Walras-Aufgabe', then: 'Individuelle Nachfragen aus Budget ableiten und Marktraeumung setzen.' },
+      { if: 'n Maerkte', then: 'Walrasches Gesetz nutzen: n-1 Bedingungen reichen.' }
+    ],
+    bridge: 'Preisvektoren koordinieren dezentrale Entscheidungen zu einem konsistenten Gesamtgleichgewicht.'
+  },
+  wohlfahrt_theoreme: {
+    core: 'Die Wohlfahrtstheoreme verknuepfen Wettbewerb, Effizienz und Umverteilung unter starken Voraussetzungen.',
+    analogy: 'Erst Regeln fuer effizientes Spiel, dann Frage nach fairer Startaufstellung.',
+    exam: [
+      { if: '1. Hauptsatz', then: 'Wettbewerbsgleichgewicht -> Pareto-Effizienz nur ohne Marktversagen.' },
+      { if: '2. Hauptsatz', then: 'Effizienz und Verteilung via Umverteilung + Markt trennen.' }
+    ],
+    bridge: 'Die Theoreme sind Referenzpunkte; Realismus prueft man ueber Voraussetzungen.'
+  },
+  wohlfahrt_messung: {
+    core: 'Wohlfahrtsmessung operationalisiert Bewertung ueber KR, PR, DWL und soziale Wohlfahrtsfunktionen.',
+    analogy: 'Wie zwei Messinstrumente: eines fuer Verteilungsregel, eines fuer Effizienzverlust.',
+    exam: [
+      { if: 'DWL gefragt', then: 'Wettbewerbsbenchmark bilden und Verlustflaeche sauber bestimmen.' },
+      { if: 'Rawls vs Utilitarismus', then: 'Min-Regel gegen Summenregel explizit vergleichen.' }
+    ],
+    bridge: 'Messung und normative Regel muessen getrennt, dann konsistent kombiniert werden.'
+  },
+  externa_pigou: {
     core: 'Kosten oder Nutzen, die nicht im Marktpreis enthalten sind, führen zu falschen Mengen.',
     analogy: 'Passivrauchen: Der Raucher zahlt für die Zigarette, aber der Nachbar "zahlt" mit seiner Gesundheit, ohne entschädigt zu werden.',
     exam: [
@@ -57,6 +84,15 @@ export const INTUITION = {
       { if: 'Internalisierung', then: 'Pigou-Steuer in Höhe des Grenzh Schadens.' }
     ],
     bridge: 'Internalisierung macht den Verursacher zum Kostenträger.'
+  },
+  externa_institutionen: {
+    core: 'Coase und Emissionshandel loesen Externalitaeten ueber Rechte, Verhandlungen und handelbare Mengensteuerung.',
+    analogy: 'Nicht nur Strafsteuer, sondern auch Spielregeln des Marktes selbst entscheiden ueber Effizienz.',
+    exam: [
+      { if: 'Coase-Fall', then: 'Transaktionskosten, Rechteklarheit und Beteiligtenzahl zuerst pruefen.' },
+      { if: 'Cap-and-Trade', then: 'Cap fixiert Menge; Preis passt sich ueber Zertifikatsmarkt an.' }
+    ],
+    bridge: 'Institutionelles Design bestimmt, ob private oder marktbasierte Koordination funktioniert.'
   },
   information_adverse: {
     core: 'Bei verborgenen Typen vor Vertragsabschluss sinkt der Preis auf den Erwartungswert und gute Typen koennen verschwinden.',

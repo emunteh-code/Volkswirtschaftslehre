@@ -2,7 +2,7 @@ import { toLearnerAttemptPayloadFromExamSummary } from '../../../assets/js/porta
 import { createFullExamModule } from '../../../assets/js/portal-core/features/fullExam.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { FULL_EXAMS } from '../data/fullExams.js';
-import { appendLearnerAttempt } from '../state/storage.js';
+import { appendLearnerAttempt, appendMistakeLogEntry } from '../state/storage.js';
 import { renderMath } from '../utils/mathjax.js';
 import { showToast } from '../utils/toast.js';
 
@@ -21,6 +21,7 @@ export const {
   renderMath,
   showToast,
   moduleSlug: COURSE_CONFIG.slug,
+  appendMistakeLogEntry,
   onExamSubmitted(summary) {
     appendLearnerAttempt(toLearnerAttemptPayloadFromExamSummary(summary));
   }

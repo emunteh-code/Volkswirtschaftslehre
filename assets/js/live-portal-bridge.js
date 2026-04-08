@@ -32,8 +32,15 @@ function getModuleSnapshot(module) {
 }
 
 export function mountLivePortalBridge(currentSlug) {
-  void currentSlug;
-  // Frozen mikro1 keeps the student-facing sidebar focused on the active module
-  // only. The cross-module portal switcher drifted away from that benchmark, so
-  // the bridge stays intentionally inactive inside module pages.
+  const module = PUBLIC_MODULES.find((entry) => entry.slug === currentSlug) || null;
+  const snapshot = module ? getModuleSnapshot(module) : null;
+  if (typeof window !== "undefined") {
+    // Devtools-facing bridge payload for diagnostics; no student-facing UI side effects.
+    window.__portalBridgeSnapshot = {
+      module_slug: currentSlug || null,
+      found: Boolean(module),
+      snapshot
+    };
+  }
+  return snapshot;
 }

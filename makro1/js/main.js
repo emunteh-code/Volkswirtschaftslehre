@@ -43,6 +43,8 @@ createPortalApp({
   math,
   portalBridge: () => {
     if (typeof window === 'undefined') return;
-    window.__makro1PilotManifest = getMakro1PilotBridgePayload();
+    const payload = getMakro1PilotBridgePayload();
+    window.__makro1PilotManifest = payload;
+    window.__makro1ContentManifest = payload;
   }
 });

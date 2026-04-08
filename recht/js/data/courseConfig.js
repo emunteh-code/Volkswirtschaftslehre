@@ -2,6 +2,8 @@ export const COURSE_CONFIG = {
   slug: 'recht',
   courseLabel: 'Recht',
   courseTitle: 'Privatrecht für Wirtschaftswissenschaftler',
+  /** Metadata layer; see recht/js/data/contentManifest.js */
+  contentManifestVersion: '2026.1',
   homeIntro: 'Zivilrecht von Rechtsbegriff und Methodik über Vertragsschluss, Anfechtung und Stellvertretung bis zu Schadensersatz, Rücktritt und Verbraucherwiderruf.',
   examCollectionTitle: 'Probeklausuren Recht für Wirtschaftswissenschaftler',
   consentKey: 'recht_consent_v1',

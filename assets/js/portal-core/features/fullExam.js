@@ -4,7 +4,8 @@ import {
   defaultExamEvaluate,
   durationMinutesToLimitMs,
   EXAM_FINISH_REASON,
-  generateExamSessionId
+  generateExamSessionId,
+  mistakePartialsFromExamSummary
 } from '../exam/examSessionBackbone.js';
 
 function hexToRgba(hex, alpha) {
@@ -33,7 +34,9 @@ export function createFullExamModule({
   /** When set, generates session_id and timed metadata for the exam backbone */
   moduleSlug = null,
   /** Called once after final submission (button or timer). Receives {@link buildExamSubmittedSummary} output. */
-  onExamSubmitted = null
+  onExamSubmitted = null,
+  /** Optional learner-backbone mistake sink; only used when question objects carry concept_id/conceptId. */
+  appendMistakeLogEntry = null
 }) {
   let feState = null;
 
@@ -149,7 +152,10 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     const content = document.getElementById("content");
     if (!content) return;
     const tabRow = document.getElementById("tabRow");
-    if (tabRow) tabRow.style.display = "none";
+    if (tabRow) {
+      tabRow.style.removeProperty("display");
+      tabRow.classList.remove("visible");
+    }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausur`;
 
@@ -239,12 +245,37 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       if (aufgabe.type === "wf-block") {
         aufgabe.groups.forEach((group) => {
           group.questions.forEach((q) => {
-            questions.push({ ...q, points: 2, type: "wf", aufgabe: aufgabe.label, context: group.context });
+            questions.push({
+              ...q,
+              points: 2,
+              type: "wf",
+              aufgabe: aufgabe.label,
+              context: group.context,
+              concept_id:
+                (typeof q.concept_id === "string" && q.concept_id) ||
+                (typeof q.conceptId === "string" && q.conceptId) ||
+                (typeof group.concept_id === "string" && group.concept_id) ||
+                (typeof group.conceptId === "string" && group.conceptId) ||
+                (typeof aufgabe.concept_id === "string" && aufgabe.concept_id) ||
+                (typeof aufgabe.conceptId === "string" && aufgabe.conceptId) ||
+                undefined
+            });
           });
         });
       } else if (aufgabe.type === "text-block") {
         aufgabe.questions.forEach((q) => {
-          questions.push({ ...q, aufgabe: aufgabe.label, aufgabeTitle: aufgabe.title, preamble: aufgabe.preamble });
+          questions.push({
+            ...q,
+            aufgabe: aufgabe.label,
+            aufgabeTitle: aufgabe.title,
+            preamble: aufgabe.preamble,
+            concept_id:
+              (typeof q.concept_id === "string" && q.concept_id) ||
+              (typeof q.conceptId === "string" && q.conceptId) ||
+              (typeof aufgabe.concept_id === "string" && aufgabe.concept_id) ||
+              (typeof aufgabe.conceptId === "string" && aufgabe.conceptId) ||
+              undefined
+          });
         });
       }
     });
@@ -395,6 +426,21 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     updateDots();
     const { earned, maxPts } = calcScore();
     const summary = buildExamSubmittedSummary(feState, { moduleSlug });
+    if (summary && typeof appendMistakeLogEntry === "function" && moduleSlug) {
+      const questionById = Object.fromEntries(
+        feState.questions.map((q) => [
+          q.id,
+          {
+            concept_id:
+              (typeof q.concept_id === "string" && q.concept_id) ||
+              (typeof q.conceptId === "string" && q.conceptId) ||
+              undefined
+          }
+        ])
+      );
+      const mistakeRows = mistakePartialsFromExamSummary(summary, { moduleSlug, questionById });
+      mistakeRows.forEach((row) => appendMistakeLogEntry(row));
+    }
     if (typeof onExamSubmitted === "function" && summary) {
       try {
         onExamSubmitted(summary);
@@ -427,7 +473,10 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     const content = document.getElementById("content");
     if (!content) return;
     const tabRow = document.getElementById("tabRow");
-    if (tabRow) tabRow.style.display = "none";
+    if (tabRow) {
+      tabRow.style.removeProperty("display");
+      tabRow.classList.remove("visible");
+    }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausuren`;
     let html = `<div style="max-width:600px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>`;

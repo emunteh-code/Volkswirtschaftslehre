@@ -7,13 +7,14 @@ const textQuestion = (id, points, text, correct, feedback) => ({
   feedback
 });
 
-const textBlock = (label, points, title, preamble, questions) => ({
+const textBlock = (label, points, title, preamble, questions, conceptId = null) => ({
   label,
   points,
   type: 'text-block',
   title,
   preamble,
-  questions
+  questions,
+  ...(conceptId ? { conceptId } : {})
 });
 
 function solutionBlock(title, paragraphs, math = []) {
@@ -103,14 +104,17 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'multiplikator'
       ),
-      textBlock(
-        'Aufgabe 3',
-        20,
-        'Geldmarkt und Offenmarktpolitik',
-        String.raw`Die reale Geldnachfrage sei gegeben durch $M^d/P = 0{,}5Y - 10i$. Das Einkommen liegt bei $Y = 100$. Die reale Geldmenge beträgt zunächst $M/P = 40$.`,
-        [
+      {
+        label: 'Aufgabe 3',
+        conceptId: 'geldnachfrage',
+        points: 20,
+        type: 'text-block',
+        title: 'Geldmarkt und Offenmarktpolitik',
+        preamble: String.raw`Die reale Geldnachfrage sei gegeben durch $M^d/P = 0{,}5Y - 10i$. Das Einkommen liegt bei $Y = 100$. Die reale Geldmenge beträgt zunächst $M/P = 40$.`,
+        questions: [
           textQuestion(
             'm1_pk1_3a',
             8,
@@ -156,7 +160,7 @@ export const FULL_EXAMS = {
             )
           )
         ]
-      )
+      }
     ]
   },
 
@@ -229,7 +233,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'islm'
       ),
       textBlock(
         'Aufgabe 3',
@@ -279,7 +284,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'realzins'
       )
     ]
   },
@@ -358,7 +364,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'arbeitsmarkt'
       ),
       textBlock(
         'Aufgabe 3',
@@ -405,7 +412,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'phillips'
       )
     ]
   }

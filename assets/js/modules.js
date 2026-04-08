@@ -1,5 +1,3 @@
-const sourceRoot = "/Users/enowmunteh/Documents/Uni Göttingen VWL/Module";
-
 export const MODULES = [
   {
     slug: "mikro1",

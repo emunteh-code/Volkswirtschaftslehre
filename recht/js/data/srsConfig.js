@@ -10,6 +10,9 @@ export const STREAK_KEY     = 'recht_streak_v1';
 export const THEME_KEY      = 'recht_theme_v1';
 export const QUESTION_STATS_KEY = 'recht_question_stats_v1';
 export const FE_STATE_KEY   = 'recht_fe_state_v1';
+export const ATTEMPTS_KEY   = 'recht_attempts_v1';
+export const MISTAKES_KEY   = 'recht_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'recht_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

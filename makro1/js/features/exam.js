@@ -3,7 +3,7 @@ import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
 import { EXAM_QUESTIONS, EXAM_DURATION_MS } from '../data/srsConfig.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
-import { recordAnswer } from '../state/storage.js';
+import { recordAnswer, appendLearnerAttempt, appendMistakeLogEntry } from '../state/storage.js';
 import { updateSRS } from './srs.js';
 import { renderMath } from '../utils/mathjax.js';
 
@@ -19,5 +19,8 @@ export const {
   checkAnswerWithTolerance,
   recordAnswer,
   updateSRS,
-  renderMath
+  renderMath,
+  moduleSlug: COURSE_CONFIG.slug,
+  appendLearnerAttempt,
+  appendMistakeLogEntry
 });

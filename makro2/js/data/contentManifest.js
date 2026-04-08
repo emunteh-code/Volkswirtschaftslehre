@@ -18,13 +18,33 @@ import { COURSE_CONFIG } from './courseConfig.js';
 const MODULE_SLUG = 'makro2';
 
 /**
- * Primary PDF anchors per concept: intentionally empty until course maps stable file paths.
- * Provenance layers still carry honest notes (source-distilled / platform-added).
+ * Primary anchors per concept mapped from assets/js/module-content.js (makro2 roadmap).
+ * Keep only paths that are explicitly present in the curated source map.
  */
-export const MAKRO2_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+export const MAKRO2_CONCEPT_PRIMARY_REFS = {
+  zahlungsbilanz: ['coursework_text/Tutorienblatt_1.txt'],
+  wechselkurs: ['coursework_text/Uebungsblatt_1.txt', 'coursework_text/Tutorienblatt_1.txt'],
+  kaufkraftparitaet: ['coursework_text/Uebungsblatt_1.txt', 'coursework_text/Tutorienblatt_1.txt'],
+  zinsparitaet: ['coursework_text/Uebungsblatt_1.txt', 'coursework_text/Tutorienblatt_1.txt'],
+  offene_is: ['coursework_text/Uebungsblatt_2.txt', 'coursework_text/Tutorienblatt_2.txt'],
+  nettoexporte: ['coursework_text/Uebungsblatt_2.txt', 'coursework_text/Tutorienblatt_2.txt'],
+  marshall_lerner: ['coursework_text/Uebungsblatt_2.txt', 'coursework_text/Tutorienblatt_2.txt'],
+  geldmengen: [],
+  mundell_fleming: ['coursework_text/Uebungsblatt_3.txt'],
+  wk_regime: ['coursework_text/Tutorienblatt_3.txt', 'coursework_text/Uebungsblatt_3.txt', 'coursework_text/Uebungsblatt_4.txt'],
+  wk_krisen: ['coursework_text/Uebungsblatt_4.txt'],
+  phillipskurve: ['coursework_text/Tutorienblatt_4.txt', 'coursework_text/Uebungsblatt_5.txt'],
+  zeitinkonsistenz: ['coursework_text/Tutorienblatt_4.txt', 'coursework_text/Uebungsblatt_5.txt'],
+  barro_gordon: ['coursework_text/Tutorienblatt_4.txt', 'coursework_text/Uebungsblatt_5.txt'],
+  taylor_regel: ['coursework_text/Tutorienblatt_5.txt', 'coursework_text/Uebungsblatt_7.txt'],
+  aggregierte_pf: ['coursework_text/Tutorienblatt_5.txt', 'coursework_text/Uebungsblatt_8.txt'],
+  solow_basis: ['coursework_text/Tutorienblatt_6.txt', 'coursework_text/Uebungsblatt_9.txt'],
+  tech_fortschritt: ['coursework_text/Uebungsblatt_10.txt', 'coursework_text/Tutorienblatt_6.txt'],
+  schuldenquote: ['coursework_text/Uebungsblatt_6.txt']
+};
 
 const NOTES_THEORY =
-  'Portal theory follows the Makro II line (syllabus, Übungen, Tutorien). Canonical VL/PDF paths are not yet attached per concept in this manifest — see migration audit.';
+  'Portal theory follows the Makro II line (syllabus, Übungen, Tutorien). Per-concept anchors are mapped from the curated module-content roadmap where explicit sources exist.';
 const NOTES_GRAPH =
   'Interactive graphs for exam-style intuition; not a single fixed course figure.';
 const NOTES_INTUITION = 'Compressed recall layer for the closed learning loop.';

@@ -1,0 +1,8 @@
+{
+  "name": "vwl-portal-clickthrough",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "playwright": "1.49.1"
+  }
+}

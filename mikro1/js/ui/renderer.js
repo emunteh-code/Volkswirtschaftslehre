@@ -761,6 +761,8 @@ function ensureMikroHomeExamCard() {
   const content = document.getElementById('content');
   const actions = content?.querySelector('.home-action-row');
   if (!actions || actions.querySelector('[data-home-action="full-exams"]')) return;
+  // `createRenderer` already adds a Probeklausuren card when `__showFullExamSelect` exists.
+  if (actions.querySelector('.home-action-card[onclick*="__showFullExamSelect"]')) return;
 
   const card = document.createElement('div');
   card.className = 'home-action-card';

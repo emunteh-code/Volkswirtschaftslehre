@@ -770,6 +770,7 @@ function ensureEconometricsHomeExamCard() {
   const content = document.getElementById('content');
   const actions = content?.querySelector('.home-action-row');
   if (!actions || actions.querySelector('[data-home-action="full-exams"]')) return;
+  if (actions.querySelector('.home-action-card[onclick*="__showFullExamSelect"]')) return;
 
   const card = document.createElement('div');
   card.className = 'home-action-card';

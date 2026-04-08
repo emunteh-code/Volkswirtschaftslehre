@@ -8,6 +8,7 @@
 export const COURSE_CONFIG = {
   courseLabel: 'Mikro II',
   courseTitle: 'Mikroökonomik II',
+  examCollectionTitle: 'Probeklausuren Mikroökonomik II',
   homeIntro: 'Aufbauende Mikroökonomik: Spieltheorie, Allgemeines Gleichgewicht, Marktversagen und asymmetrische Information.',
   consentKey: 'mikro2_consent_v1',
   progressKey: 'mikro2_progress_v1',

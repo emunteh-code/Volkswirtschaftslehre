@@ -3,10 +3,15 @@
 // Renders the learning progress dashboard
 // ============================================================
 
+import {
+  buildDashboardDerivedMetricsSnapshot,
+  buildHonestDashboardPilotHtml
+} from '../../../assets/js/portal-core/data/dashboardDerivedMetrics.js';
 import { CHAPTERS } from '../data/chapters.js';
-import { loadProgress } from '../state/storage.js';
+import { COURSE_CONFIG } from '../data/courseConfig.js';
+import { MISTAKE_REVIEW_KEY } from '../data/srsConfig.js';
+import { loadProgress, loadSRS, listLearnerAttempts, listMistakeLogEntries } from '../state/storage.js';
 import { getDueCards, getPerformance } from './srs.js';
-import { loadSRS } from '../state/storage.js';
 
 /**
  * Build and return the dashboard HTML.
@@ -44,12 +49,26 @@ export function renderDashboard(onNavigate) {
 <h2>Lern-Dashboard</h2>
 <p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
 </div>
+<div class="dash-section" style="margin-bottom:16px">
+<button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll anzeigen</button>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Lokal gespeicherte Fehler aus Lernflüssen (sofern protokolliert).</p>
+</div>
 <div class="dash-stats">
 <div class="dash-stat"><div class="ds-val">${totalSeen}</div><div class="ds-lab">Konzepte gesehen</div></div>
 <div class="dash-stat"><div class="ds-val">${CHAPTERS.length}</div><div class="ds-lab">Gesamt</div></div>
 <div class="dash-stat"><div class="ds-val">${stats.filter(s => s.accuracy !== null).length > 0 ? Math.round(avgAccuracy * 100) + '%' : '—'}</div><div class="ds-lab">Ø Genauigkeit</div></div>
 <div class="dash-stat"><div class="ds-val">${due.length}</div><div class="ds-lab">Wiederholung fällig</div></div>
 </div>`;
+
+  const derivedSnap = buildDashboardDerivedMetricsSnapshot({
+    moduleSlug: COURSE_CONFIG.slug,
+    listLearnerAttempts,
+    listMistakeLogEntries,
+    loadSRS,
+    mistakeReviewKey: MISTAKE_REVIEW_KEY
+  });
+  const conceptTitleById = Object.fromEntries(CHAPTERS.map((c) => [c.id, c.title]));
+  html += buildHonestDashboardPilotHtml(derivedSnap, { conceptTitleById });
 
   if (weakest) {
     html += `<div class="dash-focus-rec">

@@ -57,6 +57,33 @@ const BASE_STEP_PROBLEMS = {
           explain: '90 - 2q1 - q2 = 0 ⟹ 2q1 = 90 - q2 ⟹ q1 = (90 - q2)/2.' 
         }
       ]
+    },
+    {
+      title: 'Cournot vs. Bertrand: Modellwahl unter Prüfungsdruck',
+      context: 'Zwei Anbieter, homogenes Gut, keine Kapazitätsgrenzen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Wenn Firmen Preise statt Mengen wählen: Welches Modell ist der Standardzugriff?',
+          answer: ['Bertrand', 'bertrand'],
+          options: { problemId: 'm2_cournot_2', stepId: 'model_pick', isDecision: true },
+          hint: 'Entscheidungsvariable identifizieren.',
+          explain: 'Preisentscheidung bei homogenem Gut ohne Kapazitätsgrenzen führt zum Bertrand-Rahmen.'
+        },
+        {
+          q: '[2. Decision] Welches Preisresultat folgt im Bertrand-Basismodell?',
+          answer: ['P=MC', 'p=mc', 'preis gleich grenzkosten'],
+          options: { problemId: 'm2_cournot_2', stepId: 'bertrand_result', dependsOn: 'model_pick' },
+          hint: 'Unterbietungslogik bis kein profitables Unterbieten mehr möglich ist.',
+          explain: 'Im Bertrand-Paradoxon fällt der Preis bis auf Grenzkosten.'
+        },
+        {
+          q: '[3. Validation] Nenne einen strukturellen Grund, warum in der Realität oft P > MC beobachtet wird.',
+          answer: ['Produktdifferenzierung', 'Kapazitätsbeschränkung', 'wiederholte interaktion'],
+          options: { problemId: 'm2_cournot_2', role: 'VALIDATION' },
+          hint: 'Suche eine Annahme, die das Bertrand-Paradoxon entschärft.',
+          explain: 'Produktdifferenzierung, Kapazitätsgrenzen oder wiederholte Interaktion halten Preise über MC.'
+        }
+      ]
     }
   ],
   gleichgewicht: [
@@ -106,6 +133,120 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_info_1', role: 'VALIDATION' },
           hint: 'Nur schlechte Autos bleiben übrig.', 
           explain: 'Die Durchschnittsqualität sinkt auf 2000 (Adverse Selection).' 
+        }
+      ]
+    },
+    {
+      title: 'Adverse Selection vs. Moral Hazard',
+      context: 'Versicherungsmarkt mit Risiko- und Verhaltensproblemen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Versteckter Risikotyp vor Vertragsabschluss: Adverse Selection oder Moral Hazard?',
+          answer: ['Adverse Selection', 'adverse', 'negativauslese'],
+          options: { problemId: 'm2_info_2', stepId: 'type_before', isDecision: true },
+          hint: 'Zeitpunkt ist entscheidend: vor oder nach Vertrag?',
+          explain: 'Verborgene Typen vor Vertragsschluss sind adverse Selektion.'
+        },
+        {
+          q: '[2. Decision] Geringere Vorsicht nach Abschluss einer Vollkaskoversicherung ist welches Problem?',
+          answer: ['Moral Hazard', 'moral', 'verhaltensrisiko'],
+          options: { problemId: 'm2_info_2', stepId: 'type_after', dependsOn: 'type_before' },
+          hint: 'Denke an hidden action nach Vertragsbeginn.',
+          explain: 'Verhaltensanpassung nach Vertragsschluss ist Moral Hazard.'
+        },
+        {
+          q: '[3. Validation] Welches Instrument passt primär zu Adverse Selection: Signaling oder Selbstbehalt?',
+          answer: ['Signaling', 'screening', 'signaling/screening'],
+          options: { problemId: 'm2_info_2', role: 'VALIDATION' },
+          hint: 'Typtrennung statt Verhaltenssteuerung.',
+          explain: 'Adverse Selection wird über Typtrennung (Signaling/Screening) adressiert, Selbstbehalte zielen eher auf Moral Hazard.'
+        }
+      ]
+    }
+  ],
+  wohlfahrt: [
+    {
+      title: 'Wohlfahrtstheoreme: Effizienz vs. Verteilung',
+      context: 'Prüfungsschema zu 1. und 2. Hauptsatz.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher Hauptsatz begründet: Wettbewerbsgleichgewicht ist Pareto-effizient?',
+          answer: ['1', 'erster', '1. hauptsatz'],
+          options: { problemId: 'm2_welfare_1', stepId: 'first_thm', isDecision: true },
+          hint: 'Markt -> Effizienz.',
+          explain: 'Der 1. Hauptsatz verknüpft Wettbewerbsgleichgewicht und Pareto-Effizienz.'
+        },
+        {
+          q: '[2. Decision] Welcher Hauptsatz trennt Verteilung und Effizienz über Umverteilung + Markt?',
+          answer: ['2', 'zweiter', '2. hauptsatz'],
+          options: { problemId: 'm2_welfare_1', stepId: 'second_thm', dependsOn: 'first_thm' },
+          hint: 'Geeignete Anfangsausstattung + Wettbewerb.',
+          explain: 'Der 2. Hauptsatz erlaubt, jede Pareto-effiziente Allokation als Wettbewerbsgleichgewicht zu dezentralisieren.'
+        },
+        {
+          q: '[3. Validation] Warum ist Pauschalumverteilung praktisch oft begrenzt? (ein Kernbegriff genügt)',
+          answer: ['Informationsasymmetrie', 'beobachtbarkeit', 'information'],
+          options: { problemId: 'm2_welfare_1', role: 'VALIDATION' },
+          hint: 'Der Staat kennt Ausstattungen/Fähigkeiten nicht perfekt.',
+          explain: 'Die Umverteilung via Pauschalsteuern scheitert oft an Informationsproblemen über individuelle Merkmale.'
+        }
+      ]
+    }
+  ],
+  externa: [
+    {
+      title: 'Pigou-Steuer: Marktmenge vs. Sozialoptimum',
+      context: 'Negative Externalität mit linearem Grenzschaden.',
+      steps: [
+        {
+          q: '[1. Interpretation] Wie lautet die Grundbeziehung zwischen sozialen und privaten Grenzkosten?',
+          answer: ['MSC=MPC+MEC', 'msc = mpc + mec', 'msc=mpc+mec'],
+          options: { problemId: 'm2_external_1', stepId: 'msc_identity', isDecision: true },
+          hint: 'Externer Grenzschaden addiert sich auf private Grenzkosten.',
+          explain: 'Soziale Grenzkosten entsprechen privaten Grenzkosten plus externem Grenzschaden.'
+        },
+        {
+          q: '[2. Decision] Welche Menge ist typischerweise größer bei negativen Externalitäten: Q_mkt oder Q_soc?',
+          answer: ['Q_mkt', 'qmkt', 'marktmenge'],
+          options: { problemId: 'm2_external_1', stepId: 'quantity_compare', dependsOn: 'msc_identity' },
+          hint: 'Wenn externe Kosten nicht im Preis stecken, wird zu viel produziert.',
+          explain: 'Ohne Internalisierung liegt Überproduktion vor: Q_mkt > Q_soc.'
+        },
+        {
+          q: '[3. Validation] Wie wird die optimale Pigou-Steuer im Optimum definiert?',
+          answer: ['t=MEC(Q*)', 't = mec(q*)', 'grenzschaden im optimum'],
+          options: { problemId: 'm2_external_1', role: 'VALIDATION' },
+          hint: 'Steuerhöhe entspricht marginalem externen Schaden bei Q*.',
+          explain: 'Die effiziente Steuer setzt t gleich MEC im sozialen Optimum.'
+        }
+      ]
+    }
+  ],
+  public_goods: [
+    {
+      title: 'Samuelson-Bedingung sicher anwenden',
+      context: 'Öffentliche-Güter-Optimum und Aggregationsfalle.',
+      steps: [
+        {
+          q: '[1. Interpretation] Werden bei öffentlichen Gütern individuelle Zahlungsbereitschaften horizontal oder vertikal aggregiert?',
+          answer: ['vertikal', 'vertical'],
+          options: { problemId: 'm2_public_1', stepId: 'agg_rule', isDecision: true },
+          hint: 'Gleiche Menge, unterschiedliche Zahlungsbereitschaften.',
+          explain: 'Bei öffentlichen Gütern addiert man Zahlungsbereitschaften vertikal.'
+        },
+        {
+          q: '[2. Decision] Welche Effizienzbedingung gilt im Optimum?',
+          answer: ['sum mrs = mc', 'ΣMRS=MC', 'samuelson'],
+          options: { problemId: 'm2_public_1', stepId: 'samuelson', dependsOn: 'agg_rule' },
+          hint: 'Summe individueller Grenzbewertungen gegen Grenzkosten.',
+          explain: 'Die Samuelson-Bedingung lautet: Sum_i MRS_i = MC.'
+        },
+        {
+          q: '[3. Validation] Warum unterversorgt der Markt öffentliche Güter typischerweise?',
+          answer: ['free-riding', 'trittbrett', 'nicht-ausschließbarkeit'],
+          options: { problemId: 'm2_public_1', role: 'VALIDATION' },
+          hint: 'Individuelle Zahlungsanreize weichen vom kollektiven Nutzen ab.',
+          explain: 'Nicht-Ausschließbarkeit erzeugt Trittbrettfahren, daher wird privat zu wenig bereitgestellt.'
         }
       ]
     }

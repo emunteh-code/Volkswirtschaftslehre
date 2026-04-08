@@ -87,6 +87,16 @@ export const CONTENT = {
           { text: `Umformen — Folk-Theorem-Bedingung:`, eq: String.raw`3 \geq 5(1-\delta) + \delta \implies 3 \geq 5 - 4\delta \implies \delta \geq \frac{2}{4} = \frac{1}{2}` }
         ],
         result: String.raw`Kooperation ist im Grim-Trigger-Gleichgewicht möglich, wenn $\delta \geq \frac{1}{2}$. Der Diskontfaktor muss ausreichend hoch sein — Spieler müssen die Zukunft genug wertschätzen, damit die langfristigen Kooperationsgewinne den kurzfristigen Anreiz zur Defektion überwiegen. Dies ist der Kerninhalt des Folk-Theorems.`
+      },
+      {
+        text: String.raw`Nullsummenspiel (Matching Pennies): A erhält bei gleicher Wahl +1, bei unterschiedlicher Wahl -1. Zeigen Sie, dass kein reines Nash-Gleichgewicht existiert, und bestimmen Sie das gemischte Gleichgewicht.`,
+        steps: [
+          { text: `Reine Profile prüfen: In jedem Profil kann genau ein Spieler profitabel abweichen.`, eq: String.raw`\text{Kein Profil ist gegenseitige beste Antwort.}` },
+          { text: `Gemischte Strategien: Sei $p$ die Wahrscheinlichkeit, dass A Kopf spielt. B muss indifferent zwischen Kopf und Zahl sein.`, eq: String.raw`E[u_B(K)] = -p + (1-p) = 1-2p,\quad E[u_B(Z)] = p-(1-p)=2p-1` },
+          { text: `Indifferenzbedingung für B:`, eq: String.raw`1-2p = 2p-1 \implies p = \frac{1}{2}` },
+          { text: `Symmetrisch für A folgt $q=\frac{1}{2}$ für B.`, eq: String.raw`(p^*,q^*)=\left(\frac12,\frac12\right)` }
+        ],
+        result: String.raw`Es gibt kein reines NG, aber ein gemischtes NG mit zufälliger Wahl beider Spieler: $p=q=\frac12$. Genau diese Randomisierung verhindert ausnutzbare Muster.`
       }
     ]
   },
@@ -161,6 +171,16 @@ export const CONTENT = {
           { text: `DWL Cournot vs. Wettbewerb: Dreieck zwischen $Q^C=80$ und $Q^W=120$.`, eq: String.raw`DWL^C = \frac{1}{2}(P^C - c)(Q^W - Q^C) = \frac{1}{2} \cdot 40 \cdot 40 = 800` }
         ],
         result: String.raw`Cournot-GW: $KR = 3200$, $\pi_{ges} = 3200$, $DWL = 800$. Monopol: $KR = 1800$, $\pi = 3600$, $DWL = 1800$. Cournot ist wohlfahrtseffizienter als Monopol (kleinerer DWL), aber weniger effizient als vollkommener Wettbewerb (kein DWL).`
+      },
+      {
+        text: String.raw`Graph/Formel-Link: Gegeben sind Reaktionsfunktionen $q_1 = 40 - 0{,}5q_2$ und $q_2 = 40 - 0{,}5q_1$. Bestimmen Sie den Schnittpunkt und erklären Sie, warum dieser Punkt das Cournot-Gleichgewicht ist.`,
+        steps: [
+          { text: `Eine Reaktionsfunktion in die andere einsetzen:`, eq: String.raw`q_1 = 40 - 0{,}5(40 - 0{,}5q_1) = 20 + 0{,}25q_1` },
+          { text: `Nach $q_1$ auflösen:`, eq: String.raw`0{,}75q_1 = 20 \implies q_1^* = \frac{80}{3}` },
+          { text: `Symmetrisch folgt:`, eq: String.raw`q_2^* = \frac{80}{3}` },
+          { text: `Interpretation im Diagramm:`, eq: String.raw`\text{Im Schnittpunkt sind beide Firmen gleichzeitig auf ihrer besten Antwortkurve.}` }
+        ],
+        result: String.raw`Der Schnittpunkt $(q_1^*, q_2^*) = \left(\frac{80}{3}, \frac{80}{3}\right)$ ist genau das Cournot-Nash-Gleichgewicht: Keine Firma kann bei gegebener Konkurrenzmenge ihre Menge einseitig verbessern.`
       }
     ]
   },
@@ -454,6 +474,16 @@ export const CONTENT = {
           { text: `Gemischtes Nash-GG und soziales Optimum:`, eq: String.raw`W_{KK} = 3+3=6 < W_{KK\text{(ges.)}} = 10+10=20 \implies \text{Soz. Opt. bei (K,K), GG bei gem. Strat.}` }
         ],
         result: String.raw`Kein reines Nash-GG (keine dominante Strategie). Das soziale Optimum (K,K) mit Gesamtwohlfahrt 20 wird durch private Anreize untergraben. Internationale Klimaabkommen versuchen, durch Verträge und Monitoring das Koordinationsversagen zu überwinden.`
+      },
+      {
+        text: String.raw`Lindahl-Logik als Mini-Fall: Für ein öffentliches Gut gilt $MB_A = 12 - Q$, $MB_B = 8 - Q$, Grenzkosten $MC = 6$. Bestimmen Sie (i) die effiziente Menge und (ii) die individuellen Lindahl-Preise bei dieser Menge.`,
+        steps: [
+          { text: `Samuelson-Bedingung anwenden:`, eq: String.raw`MB_A + MB_B = MC \implies (12-Q)+(8-Q)=6` },
+          { text: `Effiziente Menge berechnen:`, eq: String.raw`20-2Q=6 \implies Q^*=7` },
+          { text: `Lindahl-Preis von A bei $Q^*$:`, eq: String.raw`P_A^{L} = MB_A(7)=12-7=5` },
+          { text: `Lindahl-Preis von B bei $Q^*$ und Kostendeckung prüfen:`, eq: String.raw`P_B^{L}=MB_B(7)=8-7=1,\quad P_A^L+P_B^L=6=MC` }
+        ],
+        result: String.raw`Die effiziente Menge ist $Q^*=7$. Individuelle Preise: $P_A^L=5$, $P_B^L=1$. Zusammen decken sie die Grenzkosten, genau wie es der Lindahl-Mechanismus fordert.`
       }
     ]
   },
@@ -527,6 +557,16 @@ export const CONTENT = {
           { text: `Interpretation: Bildung als Signal, nicht direkt produktiv.`, eq: String.raw`\text{Typ H wählt } e^* \in [30,60]; \text{ Typ L wählt } e=0. \text{ Bildung trennt Typen.}` }
         ],
         result: String.raw`Separierendes Gleichgewicht für $e^* \in [30, 60]$. Schlüsseleinblick: Bildung muss für Niedrigfähige (L) relativ kostspieliger sein ($c_L > c_H$), damit sie das Signal nicht imitieren. Bildung hat hier keinen direkten Produktivitätseffekt — sie ist reines Kostensignal. Das single-crossing property ($c_H < c_L$) ist die entscheidende strukturelle Voraussetzung.`
+      },
+      {
+        text: String.raw`Versicherungsmarkt-Fallunterscheidung: Ordnen Sie die Problemlage korrekt zu und wählen Sie je ein passendes Instrument. (i) Vor Vertragsabschluss kennt nur der Kunde sein Risikoprofil. (ii) Nach Vertragsabschluss sinkt seine Vorsicht.`,
+        steps: [
+          { text: `Fall (i): Zeitpunkt und Informationsart identifizieren.`, eq: String.raw`\text{Vor Vertrag + verborgener Typ } \Rightarrow \text{Adverse Selection}` },
+          { text: `Passendes Instrument für (i):`, eq: String.raw`\text{Screening/Signaling (z.B. Tarifmenü, Selbstselektion, Zertifikate)}` },
+          { text: `Fall (ii): Zeitpunkt und Informationsart identifizieren.`, eq: String.raw`\text{Nach Vertrag + verborgene Handlung } \Rightarrow \text{Moral Hazard}` },
+          { text: `Passendes Instrument für (ii):`, eq: String.raw`\text{Anreizvertrag (Selbstbehalt, Bonus-Malus, Monitoring)}` }
+        ],
+        result: String.raw`Ex-ante verborgene Typen erfordern Trennmechanismen (Adverse Selection), ex-post verborgene Handlungen erfordern Verhaltensanreize (Moral Hazard). Diese saubere Zuordnung ist klausurkritisch.`
       }
     ]
   }

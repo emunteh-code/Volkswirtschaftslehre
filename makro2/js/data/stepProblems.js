@@ -179,6 +179,34 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+    ,
+    {
+      title: 'Mundell-Fleming Schockpfad',
+      context: 'Expansive Fiskalpolitik bei flexiblem WK und hoher Kapitalmobilität.',
+      steps: [
+        {
+          q: '[1. Decision] Was ist der erste Diagrammschritt?',
+          answer: ['is nach rechts', 'is verschiebt sich nach rechts'],
+          options: { problemId: 'm2_graph_mf_path', stepId: 'first', isDecision: true },
+          hint: 'Beginne im Gütermarkt.',
+          explain: 'Der Fiskalimpuls setzt als IS-Rechtsverschiebung an.'
+        },
+        {
+          q: '[2. Execution] Welcher Gegenkanal folgt im flexiblen Regime typischerweise?',
+          answer: ['aufwertung', 'wechselkurs steigt', 'nx sinken'],
+          options: { problemId: 'm2_graph_mf_path', stepId: 'counter', dependsOn: 'first' },
+          hint: 'Finanzmarkt -> Kurs -> Außenbeitrag.',
+          explain: 'Aufwertungsdruck dämpft Nettoexporte.'
+        },
+        {
+          q: '[3. Validation] Ist "nur IS-Shift reicht als Erklärung" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_graph_mf_path', role: 'VALIDATION' },
+          hint: 'M-F verlangt Schock plus Gegenkanal.',
+          explain: 'Nein, ohne Wechselkurskanal fehlt der zentrale M-F-Mechanismus.'
+        }
+      ]
+    }
   ],
   zinsparitaet: [
     {
@@ -234,6 +262,34 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_ml_jcurve', role: 'VALIDATION' },
           hint: 'Zeitstruktur der Anpassung.',
           explain: 'Nein, kurzfristig kann NX erst fallen.'
+        }
+      ]
+    }
+    ,
+    {
+      title: 'J-Kurve als Zeitpfad',
+      context: 'Abwertung heute; Mengen reagieren träge, dann zunehmend elastisch.',
+      steps: [
+        {
+          q: '[1. Decision] Kurzfristig: dominiert Preis- oder Mengeneffekt?',
+          answer: ['preiseffekt', 'preis'],
+          options: { problemId: 'm2_graph_jcurve_path', stepId: 'short', isDecision: true },
+          hint: 'Verträge und Mengen sind kurzfristig träge.',
+          explain: 'Kurzfristig dominiert der Preiseffekt.'
+        },
+        {
+          q: '[2. Execution] Langfristig: welche Bedingung entscheidet über NX-Verbesserung?',
+          answer: ['marshall lerner', '|eta_x| + |eta_m| > 1', 'elastizitäten > 1'],
+          options: { problemId: 'm2_graph_jcurve_path', stepId: 'long', dependsOn: 'short' },
+          hint: 'Elastizitätssumme prüfen.',
+          explain: 'Langfristig ist die Marshall-Lerner-Bedingung entscheidend.'
+        },
+        {
+          q: '[3. Validation] Muss die Handelsbilanz sofort steigen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_graph_jcurve_path', role: 'VALIDATION' },
+          hint: 'Denke an J-Form.',
+          explain: 'Nein, sie kann zunächst fallen und erst später steigen.'
         }
       ]
     }
@@ -413,6 +469,36 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_debt_ratio_trap', role: 'VALIDATION' },
           hint: 'Quote ist ein Verhältnis.',
           explain: 'Nein. Ohne BIP-Entwicklung ist die Quotenaussage unvollständig.'
+        }
+      ]
+    }
+  ]
+  ,
+  wk_regime: [
+    {
+      title: 'Regime-Pfadvergleich',
+      context: 'Gleicher negativer externer Schock unter flexiblem vs. fixem Wechselkurs.',
+      steps: [
+        {
+          q: '[1. Decision] Welches Regime nutzt den Wechselkurs als primären Stoßdämpfer?',
+          answer: ['flexibler wechselkurs', 'flexibel'],
+          options: { problemId: 'm2_graph_regime_path', stepId: 'absorber', isDecision: true },
+          hint: 'Darf E reagieren?',
+          explain: 'Im flexiblen Regime übernimmt der Kurs einen größeren Teil der Anpassung.'
+        },
+        {
+          q: '[2. Execution] Bei fixem Kurs: welche Anpassungsdimension trägt mehr Last?',
+          answer: ['binnenwirtschaft', 'zins und output', 'inlandsnachfrage'],
+          options: { problemId: 'm2_graph_regime_path', stepId: 'burden', dependsOn: 'absorber' },
+          hint: 'Wenn E gebunden bleibt, muss etwas anderes reagieren.',
+          explain: 'Die Last liegt stärker auf Binnenvariablen wie Zins, Nachfrage und Output.'
+        },
+        {
+          q: '[3. Validation] Ist "gleicher Schock = gleicher Anpassungspfad" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_graph_regime_path', role: 'VALIDATION' },
+          hint: 'Regimewahl ist modellentscheidend.',
+          explain: 'Nein, das Regime bestimmt den Anpassungskanal und damit den Pfad.'
         }
       ]
     }

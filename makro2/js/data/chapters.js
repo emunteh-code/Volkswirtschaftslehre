@@ -293,6 +293,15 @@ export const CONTENT = {
           { text: 'Mit Zeitverzug greifen Mengenanpassungen; bei erfüllter Marshall-Lerner-Bedingung verbessert sich die Handelsbilanz.', eq: null }
         ],
         result: 'Das ist die J-Kurve: kurzfristig Verschlechterung, langfristig Verbesserung unter ausreichender Elastizitätsreaktion.'
+      },
+      {
+        text: String.raw`Graph-/Formel-Link: Wie verbindest du die J-Kurve im Zeitdiagramm mit der Elastizitätsbedingung $|\eta_X|+|\eta_M|>1$ in einer schlüssigen Klausurkette?`,
+        steps: [
+          { text: 'Kurzfristig dominieren Preis- und Vertragsbindungen; der Zeitpfad kann zunächst nach unten gehen.', eq: null },
+          { text: 'Mit Verzögerung reagieren Export- und Importmengen stärker auf relative Preise.', eq: null },
+          { text: 'Wenn die Elastizitätssumme hinreichend groß ist, überwiegt langfristig der Mengeneffekt.', eq: String.raw`$$|\eta_X|+|\eta_M|>1$$` }
+        ],
+        result: 'Prüfungsstark ist die Verbindung von Zeitpfad (Graph) und Kriterium (Formel), statt beide isoliert aufzuzählen.'
       }
     ])
   },
@@ -351,6 +360,15 @@ export const CONTENT = {
           { text: 'Damit ist der Outputeffekt unter fixem Kurs typischerweise größer.', eq: null }
         ],
         result: 'Bei fixem Wechselkurs wirkt Fiskalpolitik stärker; bei flexiblem Wechselkurs wird sie über Aufwertung und NX-Dämpfung teilweise neutralisiert.'
+      },
+      {
+        text: String.raw`Before/After-Graphwalk: Expansive Fiskalpolitik unter flexiblem Wechselkurs. Welche dreiteilige Schockkette muss die Diagrammlösung enthalten?`,
+        steps: [
+          { text: 'Schritt 1: Gütermarktimpuls (IS nach rechts).', eq: null },
+          { text: 'Schritt 2: Finanz-/Wechselkursreaktion (Aufwertungsdruck).', eq: null },
+          { text: 'Schritt 3: Außenkanal (NX-Dämpfung, partieller Rücklauf des Erstimpulses).', eq: null }
+        ],
+        result: 'Die M-F-Antwort ist nur vollständig, wenn Erstimpuls und Gegenkanal explizit im Vorher/Nachher-Pfad stehen.'
       }
     ])
   },
@@ -392,6 +410,15 @@ export const CONTENT = {
           { text: 'Höhere Zinsen belasten typischerweise Binnennachfrage und Konjunktur.', eq: null }
         ],
         result: 'Paritätsverteidigung läuft über Reserven und/oder Zinsanhebung; der häufige Preis ist eine konjunkturelle Abschwächung.'
+      },
+      {
+        text: String.raw`Regimevergleich als Grafikfalle: Gleicher externer Schock unter flexiblem und festem Wechselkurs. Welche zentrale Visualisierungsdifferenz muss genannt werden?`,
+        steps: [
+          { text: 'Flexibles Regime: Teil der Anpassung läuft über den Wechselkurs (Stoßdämpfer).', eq: null },
+          { text: 'Fixes Regime: Kurs bleibt gebunden, Anpassungslast verlagert sich stärker auf Binnenvariablen.', eq: null },
+          { text: 'Gleicher Schock heißt daher nicht gleicher Anpassungspfad.', eq: null }
+        ],
+        result: 'Exam-Logik: nicht nur Schockrichtung, sondern die je Regime unterschiedliche Anpassungsvariable benennen.'
       }
     ])
   },

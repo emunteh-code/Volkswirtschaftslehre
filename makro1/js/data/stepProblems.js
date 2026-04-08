@@ -94,6 +94,16 @@ const BASE_STEP_PROBLEMS = {
         { q: '[3. Validation] Warum bleibt das ein Kurzfristmodell?', answer: ['weil preisniveau gegeben ist', 'preise sind träge', 'preisniveau fix'], options: { problemId: 'mk1_islm_1', role: 'VALIDATION' }, hint: 'Arbeitsmarkt und Inflation kommen erst später dazu.', explain: 'IS-LM erklärt Nachfrage und Zins bei gegebenem Preisniveau.' }
       ]
     }
+    ,
+    {
+      title: 'IS-LM Graphdisziplin',
+      context: 'Zentralbank senkt den Zielzins im (Y,i)-Diagramm.',
+      steps: [
+        { q: '[1. Decision] Welche Kurve verschiebt sich unmittelbar?', answer: ['lm', 'zinsregel', 'monetäre kurve'], options: { problemId: 'mk1_graph_islm', stepId: 'shift', isDecision: true }, hint: 'Zentralbankimpuls ist monetär.', explain: 'Die monetäre Kurve/Zinsregel verschiebt sich nach unten.' },
+        { q: '[2. Execution] Was passiert mit dem Gleichgewichtspunkt (Y,i)?', answer: ['y steigt i sinkt', 'höheres y niedrigeres i', 'output steigt zins sinkt'], options: { problemId: 'mk1_graph_islm', stepId: 'endpoint', dependsOn: 'shift' }, hint: 'Neuer Schnittpunkt mit IS.', explain: 'Der neue Gleichgewichtspunkt liegt bei höherem Y und niedrigerem i.' },
+        { q: '[3. Validation] Ist "IS verschiebt sich wegen Zinssenkung" korrekt?', answer: ['nein', 'falsch'], options: { problemId: 'mk1_graph_islm', role: 'VALIDATION' }, hint: 'IS verschiebt sich bei autonomen Nachfrageänderungen.', explain: 'Nein, bei reinem Zinsschock bewegt man sich entlang der IS zum neuen Punkt.' }
+      ]
+    }
   ],
   politikmix: [
     {
@@ -113,6 +123,16 @@ const BASE_STEP_PROBLEMS = {
         { q: '[1. Decision] In welchem Fall ist Crowding-Out typischerweise stärker?', answer: ['bei steiler lm', 'steile lm', 'lm steil'], options: { problemId: 'mk1_policy_2', stepId: 'steep_lm', isDecision: true }, hint: 'Dann reagiert der Zins stärker auf Y.', explain: 'Je steiler die LM, desto stärker steigt i bei gleichem IS-Impuls.' },
         { q: '[2. Execution] Welche Größe vermittelt den Dämpfungseffekt direkt?', answer: ['zins', 'i', 'nominalzins'], options: { problemId: 'mk1_policy_2', dependsOn: 'steep_lm' }, hint: 'Investitionen reagieren auf Finanzierungskosten.', explain: 'Der Zinsanstieg ist der unmittelbare Crowding-Out-Kanal.' },
         { q: '[3. Validation] Welche typische Kurzantwort ist falsch: "Fiskalpolitik wirkt immer gleich, weil IS gleich verschoben wird"?', answer: ['falsch', 'ist falsch', 'falsch weil lm wichtig ist'], options: { problemId: 'mk1_policy_2', role: 'VALIDATION' }, hint: 'Monetäre Reaktion gehört immer dazu.', explain: 'Die Endwirkung hängt von der monetären Bedingung ab, nicht nur von der IS-Verschiebung.' }
+      ]
+    }
+    ,
+    {
+      title: 'Crowding-Out Regimevergleich',
+      context: 'Gleicher Fiskalimpuls unter steiler LM vs. horizontaler Zinsregel.',
+      steps: [
+        { q: '[1. Decision] In welchem Fall ist der Zinsanstieg typischerweise stärker?', answer: ['steile lm', 'bei steiler lm'], options: { problemId: 'mk1_graph_policy', stepId: 'i_jump', isDecision: true }, hint: 'Geometrie der monetären Kurve.', explain: 'Bei steiler LM reagiert der Zins stärker auf denselben IS-Impuls.' },
+        { q: '[2. Execution] In welchem Fall fällt der Outputzuwachs größer aus?', answer: ['horizontale zinsregel', 'zinsregel horizontal', 'flache lm'], options: { problemId: 'mk1_graph_policy', stepId: 'y_gain', dependsOn: 'i_jump' }, hint: 'Weniger Zinsanstieg = weniger Verdrängung.', explain: 'Unter horizontaler Zinsregel ist Crowding-Out schwächer, ΔY daher größer.' },
+        { q: '[3. Validation] Ist "gleicher IS-Shift => gleiche Endwirkung" korrekt?', answer: ['nein', 'falsch'], options: { problemId: 'mk1_graph_policy', role: 'VALIDATION' }, hint: 'Vergleiche beide Endpunkte.', explain: 'Nein, die Endwirkung hängt von der monetären Kurvenform und damit von Δi ab.' }
       ]
     }
   ],

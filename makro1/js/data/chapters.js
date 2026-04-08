@@ -351,6 +351,16 @@ export const CONTENT = {
           step('Damit der Gütermarkt wieder im Gleichgewicht ist, muss die Produktion niedriger sein.')
         ],
         'Die IS-Kurve ist fallend, weil höhere Zinsen die Nachfrage und damit das Gleichgewichtseinkommen reduzieren.'
+      ),
+      task(
+        String.raw`Graph-Check (Achsen- und Bewegungsdisziplin): Im $(Y,i)$-Diagramm sinkt der Zielzins der Zentralbank. Was verschiebt sich, und was ist eine Bewegung entlang einer Kurve?`,
+        [
+          step('Die monetäre Bedingung (LM/Zinsregel) verschiebt sich nach unten.'),
+          step('Der neue Schnittpunkt mit der IS liegt bei niedrigerem i und höherem Y.'),
+          step('Eine Bewegung entlang der IS beschreibt den Übergang zwischen den Gleichgewichtspunkten nach der Zinsänderung.'),
+          step('Die IS selbst verschiebt sich erst bei Nachfragekomponenten wie G, T oder Investitionsvertrauen.')
+        ],
+        'Saubere Diagrammsprache: Zinsimpuls -> monetäre Kurve verschiebt sich; Anpassung zum neuen Gleichgewicht -> Bewegung entlang der IS.'
       )
     ]
   },
@@ -403,6 +413,16 @@ export const CONTENT = {
           step('Damit bestimmt die Zinsreaktion, ob Investitionen stabil bleiben oder teilweise verdrängt werden.')
         ],
         'Der Fehler ist das Ignorieren der Geldpolitik/LM-Form: dieselbe IS-Verschiebung kann sehr unterschiedliche Endeffekte erzeugen.'
+      ),
+      task(
+        String.raw`Before/After-Graphwalk: Zeichne gedanklich zwei Fälle derselben Fiskalexpansion — (A) steile LM, (B) horizontale Zinsregel. Welche Unterschiede müssen in den Endpunkten sichtbar sein?`,
+        [
+          step('In beiden Fällen verschiebt sich die IS nach rechts (gleicher Erstimpuls).'),
+          step('Fall A: steile LM -> starker Zinsanstieg, kleinerer Y-Anstieg (stärkeres Crowding-Out).'),
+          step('Fall B: horizontale Zinsregel -> kaum/kein Zinsanstieg, größerer Y-Anstieg (schwächeres Crowding-Out).'),
+          step('Die korrekte Vergleichsaussage benennt immer beide Endpunkte (Δi und ΔY), nicht nur die gemeinsame IS-Verschiebung.')
+        ],
+        'Policy-Graphkompetenz heißt: gleicher Schock, unterschiedliche Kurvengeometrie, unterschiedliche Endgleichgewichte.'
       )
     ]
   },
@@ -558,6 +578,16 @@ export const CONTENT = {
           step('Ohne Angabe von $u_n$ (oder äquivalenter Information) ist keine eindeutige Richtungsdiagnose möglich.')
         ],
         String.raw`Aussagen über Inflationsrichtung brauchen die Arbeitslosenlücke $u-u_n$, nicht nur den absoluten Wert von $u$.`
+      ),
+      task(
+        String.raw`Graph-Shift-vs-Movement: In der Phillips-Grafik steigen Inflationserwartungen bei unverändertem $u$. Was ist eine Kurvenverschiebung und was wäre eine Bewegung entlang derselben Kurve?`,
+        [
+          step('Höhere erwartete Inflation verschiebt die kurzfristige Phillipskurve nach oben.'),
+          step('Bei gleichem u liegt der neue Punkt auf einer höheren Kurve (keine Bewegung auf der alten Kurve).'),
+          step('Eine Bewegung entlang derselben Phillipskurve entsteht dagegen durch Veränderung von u bei konstanten Erwartungen.'),
+          step('Damit trennt man Erwartungsschocks (Kurvenlage) von Konjunkturbewegungen (Punkt auf Kurve).')
+        ],
+        'Diagrammregel: Erwartungsänderung -> Shift; Arbeitslosenänderung bei gegebenen Erwartungen -> Movement.'
       )
     ]
   },

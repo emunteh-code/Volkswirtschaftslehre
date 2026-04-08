@@ -12,14 +12,18 @@ const task = (text, steps, result, hint = null) => ({ text, steps, result, ...(h
 
 export const CHAPTERS = [
   { id: 'rechnungswesen_intro', title: 'Einführung in Rechnungswesen und Erfolgsermittlung', cat: 'Grundlagen', short: 'Einführung' },
-  { id: 'gob_inventur', title: 'GoB, Inventur, Inventar und Bilanzansatz', cat: 'Grundlagen', short: 'GoB' },
+  { id: 'gob_rechtsgrundlagen', title: 'GoB und Rechtsgrundlagen der Rechnungslegung', cat: 'Grundlagen', short: 'GoB' },
+  { id: 'inventur_inventar_bilanzansatz', title: 'Inventur, Inventar und Bilanzansatz', cat: 'Grundlagen', short: 'Inventur' },
   { id: 'buchen_konten', title: 'Buchen auf Bestands- und Erfolgskonten', cat: 'Buchführung', short: 'Buchen' },
   { id: 'buchfuehrung_orga', title: 'Organisation der Buchführung und Handelsbücher', cat: 'Buchführung', short: 'Organisation' },
   { id: 'anlagevermoegen', title: 'Anlagevermögen und Abschreibungen', cat: 'Bilanzposten', short: 'Anlage' },
-  { id: 'umlauf_werkstoffe', title: 'Umlaufvermögen I: Werkstoffe und Erzeugnisse', cat: 'Bilanzposten', short: 'UV I' },
-  { id: 'umlauf_waren_ust', title: 'Umlaufvermögen II: Waren und Umsatzsteuer', cat: 'Bilanzposten', short: 'UV II' },
-  { id: 'eigenkapital', title: 'Eigenkapital in Kapital- und Personengesellschaften', cat: 'Bilanzposten', short: 'Eigenkapital' },
-  { id: 'fremdkapital', title: 'Fremdkapital: Verbindlichkeiten und Rückstellungen', cat: 'Bilanzposten', short: 'Fremdkapital' },
+  { id: 'umlauf_bewertung_verfahren', title: 'Umlaufvermögen I: Bewertung und Verfahren', cat: 'Bilanzposten', short: 'UV I' },
+  { id: 'werkstoffe_erzeugnisse_buchungen', title: 'Umlaufvermögen II: Werkstoffe und Erzeugnisbuchungen', cat: 'Bilanzposten', short: 'UV II' },
+  { id: 'umlauf_waren_ust', title: 'Umlaufvermögen III: Waren und Umsatzsteuer', cat: 'Bilanzposten', short: 'UV III' },
+  { id: 'eigenkapital_kapitalgesellschaften', title: 'Eigenkapital in Kapitalgesellschaften', cat: 'Bilanzposten', short: 'EK KGes' },
+  { id: 'eigenkapital_personengesellschaften', title: 'Eigenkapital in Personengesellschaften', cat: 'Bilanzposten', short: 'EK PGes' },
+  { id: 'verbindlichkeiten', title: 'Fremdkapital I: Verbindlichkeiten', cat: 'Bilanzposten', short: 'Verb.' },
+  { id: 'rueckstellungen', title: 'Fremdkapital II: Rückstellungen', cat: 'Bilanzposten', short: 'Rückst.' },
   { id: 'rechnungsabgrenzung', title: 'Rechnungsabgrenzung', cat: 'Abschluss', short: 'RAP' },
   { id: 'erfolgsrechnung', title: 'Erfolgsrechnung mit GKV und UKV', cat: 'Abschluss', short: 'GKV / UKV' }
 ];
@@ -68,26 +72,95 @@ export const CONTENT = {
     ]
   },
 
-  gob_inventur: {
-    motivation: 'GoB, Inventur und Bilanzansatz legen fest, was überhaupt wie in den Abschluss hinein darf. Ohne diese Grundlage ist jede spätere Bewertung und Buchung unsauber.',
+  gob_rechtsgrundlagen: {
+    motivation: 'GoB und Rechtsgrundlagen bestimmen den normativen Rahmen der Rechnungslegung. Ohne diesen Rahmen bleibt unklar, welche Informations- und Vorsichtslogik der Abschluss erfüllen muss.',
     theorie: [
       section(
-        'Grundsätze ordnungsmäßiger Buchführung',
+        'GoB und Rechtsrahmen',
         `<p>Die GoB sichern Klarheit, Vollständigkeit, Nachprüfbarkeit und Vorsicht. Für Klausuren besonders wichtig sind Realisationsprinzip, Imparitätsprinzip und Stetigkeit, weil sie entscheiden, wann Erfolg ausgewiesen werden darf und wann Risiken bereits zu erfassen sind.</p>`
       ),
       section(
-        'Inventur, Inventar und Bilanz',
-        `<p>Die Inventur ist die tatsächliche Bestandsaufnahme. Ihr Ergebnis ist das Inventar, also das geordnete Bestandsverzeichnis. Die Bilanz verdichtet diese Einzelinformationen zu einer gegliederten Gegenüberstellung von Vermögen und Kapital.</p>`
+        'Rechnungslegungsrecht als Strukturvorgabe',
+        `<p>Die Rechnungslegung folgt nicht bloß Rechenregeln, sondern gesetzlichen Rahmenbedingungen (u.a. HGB). Für die Klausur heißt das: Rechtsgrundlage, GoB-Logik und Informationszweck sind zusammen zu denken.</p>`
       ),
       section(
-        'Bilanzansatz',
-        `<p>Bilanzansatz fragt, ob ein Vermögensgegenstand oder eine Schuld überhaupt bilanziert werden darf oder muss. In der Prüfung musst du deshalb sauber zwischen Ansatz- und Bewertungsfrage unterscheiden.</p>
-         ${warn('Prüfungsfehler:', 'Viele Lösungen springen sofort auf den Wert, obwohl zunächst ungeklärt ist, ob der Posten überhaupt angesetzt werden darf.')}`
+        'Vorsicht als Leitplanke',
+        `<p>Realisations- und Imparitätsprinzip wirken als vorsichtsorientierte Leitplanken der Gewinnermittlung. In Prüfungen zeigt sich das an der asymmetrischen Behandlung von Chancen und Risiken.</p>
+         ${warn('Prüfungsfehler:', 'GoB werden oft nur genannt, aber nicht auf den Fall angewendet. Klausurstark ist erst die konkrete Ableitung der Bilanzierungsentscheidung aus dem Prinzip.')}`
+      ),
+      section(
+        '§ 252 HGB: Realisation und Vorsicht klausurnah verbinden',
+        `<p>In der Klausur werden Realisations- und Vorsichtsprinzip regelmäßig ausdrücklich mit § 252 HGB verknüpft. Methodisch wichtig ist: Gewinne werden erst bei Realisation erfasst; vorhersehbare Risiken und Verluste sind dagegen vorsichtig zu berücksichtigen.</p>
+         ${mathBlock(String.raw`\text{§ 252 HGB: Vorsicht + Realisation} \Rightarrow \text{asymmetrischer Erfolgsausweis}`)}
+      `
+      ),
+      section(
+        'Maßgeblichkeitsprinzip und latente Steuern',
+        `<p>Übungs- und Probeklausurmaterial fordert explizit den Maßgeblichkeitsgrundsatz samt Ausnahmen sowie die Funktion latenter Steuern. Latente Steuern zeigen zukünftige steuerliche Mehr- oder Minderbelastungen aus unterschiedlichen handels- und steuerrechtlichen Wertansätzen.</p>
+         ${warn('Exam-Trap:', 'Maßgeblichkeit und latente Steuern werden oft getrennt gelernt. Klausurstark ist die Brücke: Abweichende Wertansätze heute -> steuerliche Wirkungen in Folgeperioden.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Realisationsprinzip', eq: String.raw`\text{Gewinne erst bei Realisation}`, desc: 'Noch nicht realisierte Gewinne dürfen grundsätzlich nicht vorgezogen werden.' },
-      { label: 'Imparitätsprinzip', eq: String.raw`\text{Verluste früh, Gewinne spät}`, desc: 'Asymmetrische Vorsicht im HGB.' }
+      { label: 'Imparitätsprinzip', eq: String.raw`\text{Verluste früh, Gewinne spät}`, desc: 'Asymmetrische Vorsicht im HGB.' },
+      { label: 'Latente Steuern (Richtung)', eq: String.raw`\Delta_{HGB-Steuer} > 0 \Rightarrow \text{passive latent};\; \Delta_{HGB-Steuer} < 0 \Rightarrow \text{aktive latent}`, desc: 'Prüfungsnaher Merksatz zur Richtung zukünftiger Steuermehr-/-minderbelastung.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum sind GoB in der Klausur mehr als reine Definitionssätze?',
+        [
+          step('Normative Funktion benennen.', String.raw`\text{GoB steuern, wie Informationszweck und Vorsicht in Bilanzentscheidungen umgesetzt werden.}`),
+          step('Anwendungsbezug herstellen.', String.raw`\text{Erst die Fallanwendung zeigt, ob ein Prinzip wirklich verstanden wurde.}`)
+        ],
+        'GoB sind Entscheidungsmaßstäbe. Klausurrelevant werden sie erst durch saubere Anwendung auf konkrete Bilanzierungsfragen.'
+      ),
+      task(
+        'Warum verlangt das Imparitätsprinzip eine frühere Erfassung drohender Verluste als erwarteter Gewinne?',
+        [
+          step('Gläubigerschutz ansprechen.', String.raw`\text{Das HGB will eine zu optimistische Darstellung vermeiden.}`),
+          step('Asymmetrie bewusst benennen.', String.raw`\text{Risiken sollen früh, Chancen erst bei Realisation erfasst werden.}`)
+        ],
+        'Die Asymmetrie ist gewollt: Sie schützt Gläubiger vor überhöht dargestellter Vermögens- und Ertragslage.'
+      ),
+      task(
+        'Wie hängt das Realisationsprinzip mit § 252 HGB zusammen, wenn ein erwarteter, aber noch nicht realisierter Gewinn vorliegt?',
+        [
+          step('Rechtsanker benennen.', String.raw`\text{§ 252 HGB verankert die vorsichtige Erfolgsermittlung.}`),
+          step('Konsequenz für den Fall ableiten.', String.raw`\text{Ohne Realisation darf der Gewinn noch nicht erfolgswirksam vorgezogen werden.}`)
+        ],
+        'Die erwartete Chance bleibt bis zur Realisation erfolgsneutral; genau darin zeigt sich die vorsichtsorientierte Systematik des § 252 HGB.'
+      ),
+      task(
+        'Warum tauchen Maßgeblichkeitsprinzip und latente Steuern in Klausuren oft gemeinsam auf?',
+        [
+          step('Zusammenhang erklären.', String.raw`\text{Abweichungen zwischen Handels- und Steuerbilanz erzeugen zukünftige steuerliche Effekte.}`),
+          step('Latente Steuerwirkung zuordnen.', String.raw`\text{Künftige Mehrbelastung -> passive latente Steuer; künftige Entlastung -> aktive latente Steuer.}`)
+        ],
+        'Maßgeblichkeit beschreibt die Beziehung der Wertansätze; latente Steuern bilden deren intertemporale Steuerfolgen im Abschluss ab.'
+      )
+    ]
+  },
+
+  inventur_inventar_bilanzansatz: {
+    motivation: 'Inventur, Inventar und Bilanzansatz bilden die technische Eingangsschleuse in den Abschluss. Hier entscheidet sich, welche Posten überhaupt bilanziell erscheinen.',
+    theorie: [
+      section(
+        'Inventur und Inventar',
+        `<p>Die Inventur ist die tatsächliche Bestandsaufnahme. Ihr Ergebnis ist das Inventar als geordnetes Bestandsverzeichnis. Erst aus dieser Grundlage wird die Bilanz systematisch verdichtet.</p>`
+      ),
+      section(
+        'Bilanzansatz als Ob-Frage',
+        `<p>Bilanzansatz fragt, ob ein Vermögensgegenstand oder eine Schuld überhaupt bilanziert werden darf oder muss. Das ist logisch von der späteren Wertfrage getrennt.</p>`
+      ),
+      section(
+        'Ansatz vor Bewertung',
+        `<p>In der Prüfung gilt: Erst Ansatzfähigkeit und Bilanzierungsfähigkeit klären, dann erst bewerten. Diese Reihenfolge ist methodisch zwingend und fehleranfällig.</p>
+         ${warn('Reihenfolgefehler:', 'Viele Lösungen springen direkt zur Zahl. Ohne geklärten Ansatz ist jede Bewertung methodisch verfrüht.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Inventurfolge', eq: String.raw`\text{Inventur} \rightarrow \text{Inventar} \rightarrow \text{Bilanz}`, desc: 'Vom Einzelbestand zur Abschlussverdichtung.' },
+      { label: 'Prüfungsfolge', eq: String.raw`\text{Ansatz} \rightarrow \text{Bewertung}`, desc: 'Existenzfrage vor Wertfrage.' }
     ],
     aufgaben: [
       task(
@@ -99,12 +172,12 @@ export const CONTENT = {
         'Bilanzansatz entscheidet über die Existenz des Postens in der Bilanz; Bewertung entscheidet erst danach über seine Höhe.'
       ),
       task(
-        'Warum verlangt das Imparitätsprinzip eine frühere Erfassung drohender Verluste als erwarteter Gewinne?',
+        'Worin liegt der methodische Unterschied zwischen Inventur und Bilanz?',
         [
-          step('Gläubigerschutz ansprechen.', String.raw`\text{Das HGB will eine zu optimistische Darstellung vermeiden.}`),
-          step('Asymmetrie bewusst benennen.', String.raw`\text{Risiken sollen früh, Chancen erst bei Realisation erfasst werden.}`)
+          step('Inventur als Erhebungsebene benennen.', String.raw`\text{Inventur erfasst Bestände konkret und einzeln.}`),
+          step('Bilanz als Verdichtungsebene ergänzen.', String.raw`\text{Die Bilanz ordnet und verdichtet diese Informationen abschlusssystematisch.}`)
         ],
-        'Die Asymmetrie ist gewollt: Sie schützt Gläubiger vor überhöht dargestellter Vermögens- und Ertragslage.'
+        'Inventur liefert Rohdaten der Bestände, die Bilanz erzeugt daraus die strukturierte Abschlussdarstellung.'
       )
     ]
   },
@@ -235,16 +308,16 @@ export const CONTENT = {
     ]
   },
 
-  umlauf_werkstoffe: {
-    motivation: 'Umlaufvermögen ist bilanzpolitisch sensibel, weil Bewertung, Verbrauchsfolgen und Bestandsänderungen direkt auf den Erfolg wirken.',
+  umlauf_bewertung_verfahren: {
+    motivation: 'Bewertung des Umlaufvermögens ist klausurentscheidend, weil Verfahren und Niederstwertlogik direkt den ausgewiesenen Periodenerfolg beeinflussen.',
     theorie: [
       section(
-        'Werkstoffe und Erzeugnisse',
-        `<p>Zum Umlaufvermögen zählen Roh-, Hilfs- und Betriebsstoffe, unfertige und fertige Erzeugnisse sowie Waren. Für den Kurs ist wichtig, wie sich Zugänge, Verbräuche und Bestände periodengerecht im Abschluss niederschlagen.</p>`
+        'Grundlagen der UV-Bewertung',
+        `<p>Zum Umlaufvermögen zählen u.a. Vorräte und kurzfristige Vermögensposten. Für die Klausur ist die Bewertungslogik zentral: Zugangsbewertung über Anschaffungs-/Herstellungskosten und stichtagsbezogene Folgebewertung.</p>`
       ),
       section(
         'Bewertungsvereinfachungsverfahren',
-        `<p>Verbrauchsfolgeverfahren wie FIFO, LIFO oder Durchschnittsmethode ordnen Zugangswerte dem Verbrauch bzw. Endbestand zu. In der Klausur musst du weniger historisch erzählen als vielmehr sauber rechnen und den Bestandswert logisch begründen.</p>`
+        `<p>Verbrauchsfolgeverfahren wie FIFO, LIFO oder Durchschnittsmethode ordnen Zugangswerte dem Verbrauch bzw. Endbestand zu. In der Klausur musst du sauber rechnen und den Bestandswert methodisch begründen.</p>`
       ),
       section(
         'Strenges Niederstwertprinzip',
@@ -272,6 +345,47 @@ export const CONTENT = {
           step('Erfolgswirkung erklären.', String.raw`\text{Materialaufwand } \uparrow/\downarrow \Rightarrow Jahresergebnis \downarrow/\uparrow`)
         ],
         'Weil die Zuordnung von Anschaffungskosten zu Verbrauch und Endbestand den Periodenaufwand und damit den Gewinn verändert.'
+      )
+    ]
+  },
+
+  werkstoffe_erzeugnisse_buchungen: {
+    motivation: 'Werkstoff- und Erzeugnisbuchungen verbinden Lagerbewegung, Aufwandserfassung und GuV-Abschluss. Gerade hier entstehen typische mehrstufige Buchungsfehler.',
+    theorie: [
+      section(
+        'Werkstoffbuchungen',
+        `<p>Roh-, Hilfs- und Betriebsstoffe werden über Bestandskonten und Aufwandskonten erfasst. Die Fortschreibungs- und Inventurmethode führen zum gleichen Verbrauch, aber über unterschiedliche Buchungswege.</p>`
+      ),
+      section(
+        'Unfertige und fertige Erzeugnisse',
+        `<p>Bestandsveränderungen unfertiger und fertiger Erzeugnisse wirken direkt in die Erfolgsrechnung hinein. Deshalb müssen Bestandskonto und GuV-Logik sauber verknüpft werden.</p>`
+      ),
+      section(
+        'Korrekturbuchungen im Materialfluss',
+        `<p>Rücksendungen, Gutschriften und Preisnachlässe sind keine Randnotiz, sondern verändern Bestände und Erfolgsgrößen unmittelbar. Korrekturbuchungen müssen daher kontensystematisch sauber erfolgen.</p>
+         ${warn('Buchungsfalle:', 'Wer nur den Zielbuchungssatz lernt, verpasst häufig die Bestandsveränderung und die korrekte GuV-Wirkung.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Inventurmethode', eq: String.raw`\text{Verbrauch} = AB + Zugänge - SB`, desc: 'Verbrauchsermittlung über Bestandvergleich.' },
+      { label: 'Bestandsveränderung', eq: String.raw`\Delta Bestand = SB - AB`, desc: 'Steuert die Erfolgswirkung bei Erzeugnissen.' }
+    ],
+    aufgaben: [
+      task(
+        'Worin unterscheiden sich Fortschreibungs- und Inventurmethode bei Werkstoffen, obwohl beide zum gleichen Verbrauch führen können?',
+        [
+          step('Den Erfassungszeitpunkt trennen.', String.raw`\text{Fortschreibung bucht laufend; Inventurmethode ermittelt den Verbrauch periodenendbezogen.}`),
+          step('Das gemeinsame Ergebnis einordnen.', String.raw`\text{Beide Verfahren können rechnerisch denselben Verbrauch liefern, aber mit anderer Buchungsroute.}`)
+        ],
+        'Der Unterschied liegt im Buchungsweg, nicht zwingend im Endergebnis: laufende Entnahmebuchung versus Verbrauchsermittlung aus Bestandsvergleich.'
+      ),
+      task(
+        'Warum gehören Bestandsveränderungen bei unfertigen/fertigen Erzeugnissen in die Erfolgslogik?',
+        [
+          step('Produktions- und Absatzmenge auseinanderhalten.', String.raw`\text{Nicht jede hergestellte Einheit ist bereits umsatzwirksam verkauft.}`),
+          step('GuV-Effekt erläutern.', String.raw`\text{Bestandsmehrung/-minderung korrigiert den periodengerechten Erfolgsausweis.}`)
+        ],
+        'Bestandsveränderungen überführen Produktions- und Lagerbewegung in einen periodengerechten Erfolgsbeitrag.'
       )
     ]
   },
@@ -318,16 +432,16 @@ export const CONTENT = {
     ]
   },
 
-  eigenkapital: {
-    motivation: 'Eigenkapital ist kein einheitlicher Block. Seine Gliederung und Ergebnisverwendung unterscheiden sich je nach Rechtsform und sind für Bilanzanalyse und Klausuraufbau zentral.',
+  eigenkapital_kapitalgesellschaften: {
+    motivation: 'Eigenkapital in Kapitalgesellschaften folgt einer formal gegliederten Struktur mit Rücklagen- und Gewinnverwendungslogik. Diese Struktur ist eigenständig klausurrelevant.',
     theorie: [
       section(
-        'Eigenkapital in Kapitalgesellschaften',
+        'Gliederung des Eigenkapitals',
         `<p>Bei Kapitalgesellschaften ist das Eigenkapital gegliedert, etwa in gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Gewinnvortrag und Jahresüberschuss. Diese Differenzierung spiegelt Haftungsstruktur und Ausschüttungslogik wider.</p>`
       ),
       section(
-        'Eigenkapital in Personengesellschaften',
-        `<p>Bei Personengesellschaften steht stärker die Gesellschafterbezogenheit im Vordergrund. Privatentnahmen und Privateinlagen prägen die Veränderung des Kapitals anders als bei Kapitalgesellschaften.</p>`
+        'Rücklagen und Ausweisfragen',
+        `<p>Gesetzliche und andere Gewinnrücklagen sowie die Ausweisvarianten des Ergebnisses prägen die Kapitalgesellschaftslogik. In Aufgaben ist die Reihenfolge von Jahresergebnis, Rücklageneinstellung und Gewinnverwendung zentral.</p>`
       ),
       section(
         'Ergebnisverwendung',
@@ -341,10 +455,10 @@ export const CONTENT = {
     ],
     aufgaben: [
       task(
-        'Warum ist die Ergebnisverwendung mehr als ein bloßer „Nachklapp“ zur GuV?',
+        'Warum ist die Ergebnisverwendung in Kapitalgesellschaften mehr als ein bloßer „Nachklapp“ zur GuV?',
         [
           step('Bilanzbezug benennen.', String.raw`\text{Sie entscheidet, wie der Erfolg im Eigenkapital weitergeführt wird.}`),
-          step('Rechtsformbezug ergänzen.', String.raw`\text{Ausschüttung und Rücklagenbildung unterscheiden sich je nach Gesellschaftsform.}`)
+          step('Kapitalgesellschaftsbezug ergänzen.', String.raw`\text{Rücklagenbildung und Ausweislogik folgen spezifischen gesellschaftsrechtlichen Regeln.}`)
         ],
         'Die Ergebnisverwendung strukturiert den Übergang vom Periodenerfolg zur Eigenkapitaldarstellung und ist deshalb bilanziell zentral.'
       ),
@@ -359,43 +473,125 @@ export const CONTENT = {
     ]
   },
 
-  fremdkapital: {
-    motivation: 'Verbindlichkeiten und Rückstellungen sehen ähnlich aus, sind aber bilanzrechtlich gerade wegen ihrer unterschiedlichen Sicherheit sauber zu trennen.',
+  eigenkapital_personengesellschaften: {
+    motivation: 'In Personengesellschaften ist Eigenkapital gesellschafterbezogen geführt. Kapitalkonten, Privatkonten und Gewinnanteile bilden eine eigene Abschlusslogik.',
     theorie: [
       section(
-        'Verbindlichkeiten',
-        `<p>Verbindlichkeiten sind dem Grunde und der Höhe nach feststehende Schulden. Typische Fälle sind Lieferantenverbindlichkeiten, Darlehen oder Steuerverbindlichkeiten. Ihr Ansatz und ihre Bewertung folgen der vergleichsweise sicheren Verpflichtungslage.</p>`
+        'Gesellschafterbezogene Kapitalkonten',
+        `<p>Das Eigenkapital wird den Gesellschaftern über eigene Kapitalkonten zugeordnet. Dadurch unterscheidet sich die Darstellung deutlich von der formalisierten Kapitalgesellschaftsstruktur.</p>`
       ),
       section(
-        'Rückstellungen',
-        `<p>Rückstellungen erfassen ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Die Verpflichtung besteht dem Grunde nach, Höhe oder Fälligkeit sind aber noch unsicher. Genau das macht sie zum klausurtypischen Abgrenzungsproblem.</p>`
+        'Privatkonto-Logik',
+        `<p>Einlagen und Entnahmen werden über Privatkonten geführt und anschließend in die Kapitalkonten überführt. Diese Technik ist prüfungsrelevant, weil sie Bewegungen zwischen Unternehmen und Gesellschaftern sichtbar macht.</p>`
       ),
       section(
-        'Typische Bewertungsfragen',
-        `<p>Gerade Rückstellungen verlangen eine vernünftige kaufmännische Beurteilung. Bei Fremdwährungsverbindlichkeiten kommen zusätzlich Kursfragen ins Spiel. In der Klausur musst du immer zuerst sauber klassifizieren und erst dann bewerten.</p>
-         ${warn('Abgrenzungsfalle:', 'Nicht jede unsichere Zahlung ist automatisch eine Rückstellung. Zuerst ist zu klären, ob bereits eine Verpflichtung dem Grunde nach besteht.')}`
+        'Gewinnanteile und Abschluss',
+        `<p>Gewinnanteile werden den Kapitalkonten zugerechnet und verändern die Gesellschafterpositionen. Für die Klausur ist die saubere Abschlusskette Privatkonto -> Kapitalkonto entscheidend.</p>
+         ${warn('Kontenfalle:', 'Einlagen/Entnahmen und Gewinnanteile werden oft auf derselben Ebene vermischt. Klausurstabil ist die getrennte Kontenführung mit anschließendem Abschluss.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Privatkonto-Abschluss', eq: String.raw`\text{Privatkonto} \rightarrow \text{Kapitalkonto}`, desc: 'Einlagen/Entnahmen werden periodisch überführt.' },
+      { label: 'Gewinnzuweisung', eq: String.raw`\text{GuV-Ergebnis} \rightarrow \text{Kapitalkonten der Gesellschafter}`, desc: 'Erfolgszuordnung nach Beteiligungslogik.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum sind Privatkonten bei Personengesellschaften kein Nebenthema, sondern zentral für die Eigenkapitalabbildung?',
+        [
+          step('Funktion benennen.', String.raw`\text{Privatkonten erfassen Einlagen/Entnahmen getrennt von der laufenden GuV-Logik.}`),
+          step('Abschlusswirkung erklären.', String.raw`\text{Erst über den Abschluss auf Kapitalkonten entsteht die korrekte Gesellschafterdarstellung.}`)
+        ],
+        'Privatkonten sichern die saubere Trennung zwischen Gesellschafterbewegungen und periodischem Unternehmenserfolg.'
+      ),
+      task(
+        'Warum ist die Gewinnzuweisung auf Gesellschafterkonten methodisch etwas anderes als die Rücklagenlogik einer AG?',
+        [
+          step('Strukturunterschied benennen.', String.raw`\text{Personengesellschaften arbeiten gesellschafterbezogen über Kapitalkonten statt über AG-typische Rücklagenstufen.}`),
+          step('Folge für Buchungstechnik erläutern.', String.raw`\text{Gewinnanteile werden direkt kontenbezogen zugeordnet.}`)
+        ],
+        'Die Personengesellschaftslogik ist kontenbezogen-gesellschafterindividuell, nicht formal-rücklagenzentriert wie bei Kapitalgesellschaften.'
+      )
+    ]
+  },
+
+  verbindlichkeiten: {
+    motivation: 'Verbindlichkeiten sind die sichere Fremdkapitalschiene. Für Klausuren ist die klare Abgrenzung zu Rückstellungen und die Bewertungslogik zentral.',
+    theorie: [
+      section(
+        'Wesen der Verbindlichkeit',
+        `<p>Verbindlichkeiten sind dem Grunde und der Höhe nach feststehende Schulden. Typische Fälle sind Lieferantenverbindlichkeiten, Darlehen oder Steuerverbindlichkeiten.</p>`
+      ),
+      section(
+        'Bewertung',
+        `<p>Verbindlichkeiten werden mit dem Erfüllungsbetrag angesetzt. Bei Änderungen der Belastung sind die Bewertungsgrundsätze konsistent anzuwenden.</p>`
+      ),
+      section(
+        'Typische Klausurfälle',
+        `<p>Fremdwährungsverbindlichkeiten und Umgliederungen innerhalb der Verbindlichkeiten gehören zu den klassischen Prüfungsfällen. Zuerst wird klassifiziert, dann bewertet.</p>
+         ${warn('Abgrenzungsfalle:', 'Nicht jede unklare künftige Zahlung ist eine Verbindlichkeit. Verbindlichkeiten setzen eine ausreichend sichere Verpflichtung voraus.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Verbindlichkeit', eq: String.raw`\text{sicher dem Grunde und der Höhe nach}`, desc: 'Feste Schuldposition.' },
-      { label: 'Rückstellung', eq: String.raw`\text{ungewisse Verbindlichkeit}`, desc: 'Verpflichtung steht fest, Höhe oder Fälligkeit aber nicht vollständig.' }
+      { label: 'Bewertung', eq: String.raw`\text{Ansatz zum Erfüllungsbetrag}`, desc: 'Maßgeblicher Bewertungsmaßstab nach HGB-Logik.' }
     ],
     aufgaben: [
       task(
-        'Warum ist die Unterscheidung zwischen Verbindlichkeit und Rückstellung in Prüfungen so wichtig?',
+        'Warum zählt die sichere Bestimmbarkeit von Höhe und Fälligkeit als Kernmerkmal der Verbindlichkeit?',
         [
-          step('Sicherheitsgrad der Schuld benennen.', String.raw`\text{Verbindlichkeiten sind sicherer bestimmt als Rückstellungen.}`),
-          step('Folgen für Bewertung und Ausweis erklären.', String.raw`\text{Die Bilanzierung hängt an der richtigen Klassifikation.}`)
+          step('Sicherheitsgrad erklären.', String.raw`\text{Verbindlichkeiten sind konkret verpflichtende Schulden, nicht bloße Erwartungswerte.}`),
+          step('Abgrenzung zur Rückstellung ergänzen.', String.raw`\text{Fehlt die sichere Bestimmbarkeit, ist eher die Rückstellungsschiene zu prüfen.}`)
         ],
-        'Die richtige Einordnung steuert Ansatz, Bewertung und Ausweis und ist deshalb ein Kernpunkt jeder Abschlussklausur.'
+        'Die Verbindlichkeit lebt von der sicheren Verpflichtungslage; genau dadurch ist ihre Bilanzierung von Rückstellungen abgrenzbar.'
       ),
       task(
-        'Ein Prozessrisiko ist wahrscheinlich, die genaue Zahlungshöhe aber offen. Welche Denkrichtung ist naheliegend?',
+        'Warum sollten Verbindlichkeiten in Klausuren zuerst klassifiziert und erst danach bewertet werden?',
         [
-          step('Auf die Unsicherheit achten.', String.raw`\text{Dem Grunde nach besteht eine Verpflichtung, die Höhe ist offen.}`),
-          step('Bilanzkategorie zuordnen.', String.raw`\text{Das spricht für eine Rückstellung.}`)
+          step('Klassifikation als Ausgangspunkt nennen.', String.raw`\text{Die Art der Schuld bestimmt den richtigen Bewertungsmaßstab.}`),
+          step('Bewertungsfolge ableiten.', String.raw`\text{Erst nach klarer Zuordnung ist der Erfüllungsbetrag sauber zu ermitteln.}`)
         ],
-        'Bei bestehender, aber noch ungewisser Verpflichtung ist regelmäßig an eine Rückstellung zu denken.'
+        'Die richtige Schuldenkategorie steuert die zulässige Bewertung und verhindert methodische Kurzschlüsse.'
+      )
+    ]
+  },
+
+  rueckstellungen: {
+    motivation: 'Rückstellungen sind die ungewisse Fremdkapitalschiene und ein zentraler Prüfungsbereich. Entscheidend ist die Trennung von sicherer Schuld und wahrscheinlicher, aber unscharfer Verpflichtung.',
+    theorie: [
+      section(
+        'Wesen der Rückstellung',
+        `<p>Rückstellungen erfassen ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Die Verpflichtung besteht dem Grunde nach, Höhe oder Fälligkeit sind aber noch unsicher.</p>`
+      ),
+      section(
+        'Bewertung der ungewissen Verpflichtung',
+        `<p>Rückstellungen folgen einer vernünftigen kaufmännischen Beurteilung des notwendigen Erfüllungsbetrags. Das verlangt risikosensitives Schätzen statt schematischer Einzelwerte.</p>`
+      ),
+      section(
+        'Folgebuchungen und Auflösung',
+        `<p>Bei späterer Inanspruchnahme, Wegfall oder Mehrbelastung wirken sich Rückstellungen erfolgsseitig unterschiedlich aus. Diese Folgepfade sind klausurtypisch.</p>
+         ${warn('Bewertungsfalle:', 'Rückstellungen dürfen nicht pauschal als Restgröße angesetzt werden. Maßgeblich ist die nachvollziehbare Schätzung auf Basis der wirtschaftlichen Verhältnisse.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Rückstellung', eq: String.raw`\text{ungewisse Verbindlichkeit}`, desc: 'Verpflichtung steht dem Grunde nach, Höhe/Fälligkeit sind unsicher.' },
+      { label: 'Bewertung', eq: String.raw`\text{notwendiger Erfüllungsbetrag nach kaufmännischer Beurteilung}`, desc: 'Schätzbasierter Ansatz.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum ist ein wahrscheinliches Prozessrisiko mit unsicherer Höhe ein Rückstellungsthema?',
+        [
+          step('Unsicherheitsstruktur benennen.', String.raw`\text{Die Verpflichtung ist wahrscheinlich, aber nicht betragsgenau feststehend.}`),
+          step('Bilanzfolge ableiten.', String.raw`\text{Damit ist eine Rückstellung statt einer festen Verbindlichkeit zu prüfen.}`)
+        ],
+        'Rückstellungen erfassen genau solche unsicheren, aber wirtschaftlich verursachten Belastungen.'
+      ),
+      task(
+        'Warum ist die spätere Auflösung einer Rückstellung klausurrelevant?',
+        [
+          step('Folgepfade unterscheiden.', String.raw`\text{Inanspruchnahme, Wegfall oder Mehrbelastung führen zu unterschiedlichen Buchungs- und Erfolgswirkungen.}`),
+          step('Periodenbezug ergänzen.', String.raw`\text{Die ursprüngliche Schätzung wird über die Folgeperiode bilanziell und erfolgsseitig konkretisiert.}`)
+        ],
+        'Die Rückstellungslogik endet nicht beim Ansatz: erst die Folgebehandlung zeigt die vollständige Abschlusswirkung.'
       )
     ]
   },

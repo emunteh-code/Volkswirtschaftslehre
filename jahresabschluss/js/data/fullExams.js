@@ -7,13 +7,14 @@ const textQuestion = (id, points, text, correct, feedback) => ({
   feedback
 });
 
-const textBlock = (label, points, title, preamble, questions) => ({
+const textBlock = (label, points, title, preamble, questions, conceptId = null) => ({
   label,
   points,
   type: 'text-block',
   title,
   preamble,
-  questions
+  questions,
+  ...(conceptId ? { conceptId } : {})
 });
 
 function solutionBlock(title, paragraphs, math = []) {
@@ -141,7 +142,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'buchfuehrung_orga'
       )
     ]
   },
@@ -216,7 +218,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'anlagevermoegen'
       ),
       textBlock(
         'Aufgabe 3',
@@ -262,7 +265,8 @@ export const FULL_EXAMS = {
               ]
             )
           )
-        ]
+        ],
+        'umlauf_waren_ust'
       )
     ]
   },

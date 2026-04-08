@@ -81,7 +81,8 @@ function drawNash(progress = 1) {
 
 function initGraph(type, animate = true) {
   const fns = {
-    spieltheorie: p => drawNash(p),
+    spieltheorie_statisch: p => drawNash(p),
+    spieltheorie_dynamisch: p => drawNash(p),
   };
   if (!fns[type]) return;
   if (animate) animateGraph(fns[type]);

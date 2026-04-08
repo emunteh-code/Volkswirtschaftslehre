@@ -36,7 +36,8 @@ export const CHAPTERS = [
   { id: 'aggregierte_pf',   title: 'Produktionsfunktion, Grenzerträge & Skalenerträge', cat: 'Wachstum & Fiskalstaat', short: 'PF' },
   { id: 'solow_basis',      title: 'Solow-Grundmodell & Steady State',                  cat: 'Wachstum & Fiskalstaat', short: 'Solow' },
   { id: 'tech_fortschritt', title: 'Technischer Fortschritt & Goldene Regel',           cat: 'Wachstum & Fiskalstaat', short: 'TF' },
-  { id: 'schuldenquote',    title: 'Schuldenquote, Budgetrestriktion & Monetarisierung', cat: 'Wachstum & Fiskalstaat', short: 'Schuld' }
+  { id: 'schuldenquote_dynamik', title: 'Schuldenquote, Budgetrestriktion & Stabilisierung', cat: 'Wachstum & Fiskalstaat', short: 'Schuld-D' },
+  { id: 'schuldenfinanzierung_monetarisierung', title: 'Schuldenfinanzierung & Monetarisierung', cat: 'Wachstum & Fiskalstaat', short: 'Schuld-M' }
 ];
 
 export const CONTENT = {
@@ -110,6 +111,15 @@ export const CONTENT = {
           { text: 'Der reale Wechselkurs steigt; das Inland wertet real auf.', eq: null }
         ],
         result: 'Der reale Wechselkurs steigt um etwa 5%; die preisliche Wettbewerbsfähigkeit verschlechtert sich.'
+      },
+      {
+        text: String.raw`Trap-Check: Eine Lösung schreibt "E steigt in Mengennotierung, also wertet das Inland ab". Was ist daran falsch und welche reale Folge ist stattdessen plausibel?`,
+        steps: [
+          { text: 'In Mengennotierung bedeutet $E \\uparrow$: eine Einheit Inlandswährung kauft mehr Fremdwährung.', eq: null },
+          { text: 'Damit liegt nominale Aufwertung vor, nicht Abwertung.', eq: null },
+          { text: 'Ceteris paribus erhöht das den realen Aufwertungsdruck und belastet Nettoexporte.', eq: null }
+        ],
+        result: 'Der Vorzeichenfehler liegt in der Notation: $E\\uparrow$ ist Aufwertung des Inlands; dadurch werden Inlandsprodukte relativ teurer.'
       }
     ])
   },
@@ -182,6 +192,15 @@ export const CONTENT = {
           { text: 'Also muss eine erwartete Abwertung des Inlands von rund 3% kompensieren.', eq: null }
         ],
         result: 'Der Markt erwartet ungefähr eine 3%ige Abwertung der Inlandswährung.'
+      },
+      {
+        text: String.raw`Der Inlandszins liegt 2 Prozentpunkte unter dem Auslandszins. Welche Erwartung über den künftigen Wechselkurs folgt aus UIP in Mengennotierung?`,
+        steps: [
+          { text: 'Nutze die approximative UIP in Vorzeichenlogik.', eq: String.raw`$$i-i^* \approx -\frac{E^e-E}{E}$$` },
+          { text: 'Bei $i-i^*<0$ muss die rechte Seite negativ sein, also $(E^e-E)/E>0$.', eq: null },
+          { text: 'Das bedeutet: erwartetes $E$ liegt über dem aktuellen $E$.', eq: null }
+        ],
+        result: 'Es wird eine nominale Aufwertung des Inlands erwartet (in Mengennotierung: $E^e>E$).'
       }
     ])
   },
@@ -266,7 +285,26 @@ export const CONTENT = {
       { label: 'Marshall-Lerner-Bedingung', eq: String.raw`$$|\eta_X| + |\eta_M| > 1$$`, desc: 'Langfristige Verbesserung der Handelsbilanz nach Abwertung', variables: { '\\eta_X': 'Preiselastizität der Exporte', '\\eta_M': 'Preiselastizität der Importe' } },
       { label: 'Richtungseffekt', eq: String.raw`$$\frac{\partial NX}{\partial \varepsilon} < 0$$`, desc: 'Bei Mengennotierung verbessert fallendes $\\varepsilon$ die Handelsbilanz', variables: {} }
     ],
-    aufgaben: practice('marshall_lerner')
+    aufgaben: practice('marshall_lerner', [
+      {
+        text: String.raw`Eine Abwertung wurde gerade beschlossen. Die Handelsbilanz verschlechtert sich zunächst, verbessert sich aber später. Wie lautet die saubere Diagnose?`,
+        steps: [
+          { text: 'Kurzfristig sind Mengen oft träge, Preiseffekte dominieren.', eq: null },
+          { text: 'Dadurch kann die Importrechnung zunächst steigen und NX vorübergehend sinken.', eq: null },
+          { text: 'Mit Zeitverzug greifen Mengenanpassungen; bei erfüllter Marshall-Lerner-Bedingung verbessert sich die Handelsbilanz.', eq: null }
+        ],
+        result: 'Das ist die J-Kurve: kurzfristig Verschlechterung, langfristig Verbesserung unter ausreichender Elastizitätsreaktion.'
+      },
+      {
+        text: String.raw`Graph-/Formel-Link: Wie verbindest du die J-Kurve im Zeitdiagramm mit der Elastizitätsbedingung $|\eta_X|+|\eta_M|>1$ in einer schlüssigen Klausurkette?`,
+        steps: [
+          { text: 'Kurzfristig dominieren Preis- und Vertragsbindungen; der Zeitpfad kann zunächst nach unten gehen.', eq: null },
+          { text: 'Mit Verzögerung reagieren Export- und Importmengen stärker auf relative Preise.', eq: null },
+          { text: 'Wenn die Elastizitätssumme hinreichend groß ist, überwiegt langfristig der Mengeneffekt.', eq: String.raw`$$|\eta_X|+|\eta_M|>1$$` }
+        ],
+        result: 'Prüfungsstark ist die Verbindung von Zeitpfad (Graph) und Kriterium (Formel), statt beide isoliert aufzuzählen.'
+      }
+    ])
   },
 
   geldmengen: {
@@ -290,7 +328,17 @@ export const CONTENT = {
       { label: 'Geldmarktgleichgewicht', eq: String.raw`$$\frac{M}{P} = Y \cdot L(i)$$`, desc: 'Reale Geldmenge = reale Geldnachfrage', variables: { 'M/P': 'Reale Geldmenge', 'L(i)': 'Liquiditätspräferenz' } },
       { label: 'Lineare LM', eq: String.raw`$$i = \frac{k}{h}Y - \frac{1}{h}\frac{M}{P}$$`, desc: 'Zins als Funktion von Einkommen und realer Geldmenge', variables: { 'k': 'Einkommenssensitivität', 'h': 'Zinssensitivität' } }
     ],
-    aufgaben: practice('geldmengen')
+    aufgaben: practice('geldmengen', [
+      {
+        text: String.raw`Inflation-Targeting vs. Geldmengensteuerung: Die Geldmenge wächst kurzfristig stark, gleichzeitig steigt die Geldnachfrage wegen Finanzmarktunsicherheit. Warum ist ein reines Geldmengen-Signal für die aktuelle Inflationsdiagnose dann nur begrenzt aussagekräftig?`,
+        steps: [
+          { text: 'Die beobachtete Geldmenge ist nur zusammen mit Geldnachfrage und Umlaufgeschwindigkeit interpretierbar.', eq: null },
+          { text: 'Steigt die Liquiditätsnachfrage, kann hohe Geldmengenexpansion in Teilen Kassenhaltung statt zusätzliche Güternachfrage spiegeln.', eq: null },
+          { text: 'Inflation-Targeting fokussiert deshalb auf das Inflationsziel und die Abweichung von diesem Ziel, nicht auf ein einzelnes Monetäraggregat.', eq: null }
+        ],
+        result: 'Starkes Geldmengenwachstum allein ist kein sicherer Inflationsbeweis; bei instabiler Geldnachfrage ist zielorientierte Inflationssteuerung robuster.'
+      }
+    ])
   },
 
   mundell_fleming: {
@@ -314,7 +362,26 @@ export const CONTENT = {
       { label: 'IS in offener VW', eq: String.raw`$$Y = C + I + G + NX(\varepsilon, Y, Y^*)$$`, desc: 'Gütermarkt mit Außenbeziehung', variables: {} },
       { label: 'UIP-Kanal', eq: String.raw`$$1+i = (1+i^*)\frac{E}{E^e}$$`, desc: 'Finanzmarktscharnier des Modells', variables: {} }
     ],
-    aufgaben: practice('mundell_fleming')
+    aufgaben: practice('mundell_fleming', [
+      {
+        text: String.raw`Vergleiche dieselbe Fiskalexpansion unter flexiblem und festem Wechselkurs bei hoher Kapitalmobilität. Wo ist der Outputeffekt typischerweise größer und warum?`,
+        steps: [
+          { text: 'Flexibler Kurs: Fiskalimpuls erzeugt Aufwertungsdruck, NX werden teilweise verdrängt.', eq: null },
+          { text: 'Fester Kurs: Zentralbank akkommodiert zur Paritätsstabilisierung, Aufwertungskanal entfällt.', eq: null },
+          { text: 'Damit ist der Outputeffekt unter fixem Kurs typischerweise größer.', eq: null }
+        ],
+        result: 'Bei fixem Wechselkurs wirkt Fiskalpolitik stärker; bei flexiblem Wechselkurs wird sie über Aufwertung und NX-Dämpfung teilweise neutralisiert.'
+      },
+      {
+        text: String.raw`Before/After-Graphwalk: Expansive Fiskalpolitik unter flexiblem Wechselkurs. Welche dreiteilige Schockkette muss die Diagrammlösung enthalten?`,
+        steps: [
+          { text: 'Schritt 1: Gütermarktimpuls (IS nach rechts).', eq: null },
+          { text: 'Schritt 2: Finanz-/Wechselkursreaktion (Aufwertungsdruck).', eq: null },
+          { text: 'Schritt 3: Außenkanal (NX-Dämpfung, partieller Rücklauf des Erstimpulses).', eq: null }
+        ],
+        result: 'Die M-F-Antwort ist nur vollständig, wenn Erstimpuls und Gegenkanal explizit im Vorher/Nachher-Pfad stehen.'
+      }
+    ])
   },
 
   wk_regime: {
@@ -345,6 +412,33 @@ export const CONTENT = {
           { text: 'Also kann das Land nicht alle drei Ziele gleichzeitig erreichen.', eq: null }
         ],
         result: 'Das Trilemma verbietet diese Kombination: Bei fixem Kurs und freiem Kapitalverkehr ist keine autonome Geldpolitik möglich.'
+      },
+      {
+        text: String.raw`Ein Land verteidigt einen fixen Kurs trotz anhaltender Abwertungserwartungen. Welche zwei unmittelbaren Verteidigungskanäle hat die Zentralbank und welcher Binneneffekt folgt häufig?`,
+        steps: [
+          { text: 'Kanal 1: Devisenreserven einsetzen, um den Kurs direkt zu stützen.', eq: null },
+          { text: 'Kanal 2: Zinsen anheben, um Kapitalabfluss zu dämpfen und Inlandsanlage attraktiver zu machen.', eq: null },
+          { text: 'Höhere Zinsen belasten typischerweise Binnennachfrage und Konjunktur.', eq: null }
+        ],
+        result: 'Paritätsverteidigung läuft über Reserven und/oder Zinsanhebung; der häufige Preis ist eine konjunkturelle Abschwächung.'
+      },
+      {
+        text: String.raw`Regimevergleich als Grafikfalle: Gleicher externer Schock unter flexiblem und festem Wechselkurs. Welche zentrale Visualisierungsdifferenz muss genannt werden?`,
+        steps: [
+          { text: 'Flexibles Regime: Teil der Anpassung läuft über den Wechselkurs (Stoßdämpfer).', eq: null },
+          { text: 'Fixes Regime: Kurs bleibt gebunden, Anpassungslast verlagert sich stärker auf Binnenvariablen.', eq: null },
+          { text: 'Gleicher Schock heißt daher nicht gleicher Anpassungspfad.', eq: null }
+        ],
+        result: 'Exam-Logik: nicht nur Schockrichtung, sondern die je Regime unterschiedliche Anpassungsvariable benennen.'
+      },
+      {
+        text: String.raw`Paritätsverteidigung unter Stress: Märkte erwarten mit hoher Wahrscheinlichkeit eine Abwertung. Erkläre die Kette von erwarteter Abwertung über den nötigen Zinsaufschlag bis zu den binnenwirtschaftlichen Kosten.`,
+        steps: [
+          { text: 'Steigende erwartete Abwertung erhöht unter Zinsparität den erforderlichen Inlandszins relativ zum Ausland.', eq: String.raw`$$i-i^* \approx \mathbb{E}\!\left[\frac{\Delta E}{E}\right]$$` },
+          { text: 'Zur Kursverteidigung muss die Zentralbank deshalb Zinsen erhöhen und/oder Reserven einsetzen.', eq: null },
+          { text: 'Höhere Zinsen dämpfen Investitionen und Nachfrage; die Paritätsverteidigung verschiebt Anpassungslasten auf Output und Beschäftigung.', eq: null }
+        ],
+        result: 'Je höher die Abwertungserwartung, desto teurer wird die Verteidigung des Fixkurses in Form höherer inländischer Zinsen und realwirtschaftlicher Dämpfung.'
       }
     ])
   },
@@ -476,7 +570,26 @@ export const CONTENT = {
     formeln: [
       { label: 'Taylor-Regel', eq: String.raw`$$i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$$`, desc: 'Reaktionsfunktion der Geldpolitik', variables: { 'r^*': 'Natürlicher Realzins', '\\pi^*': 'Inflationsziel' } }
     ],
-    aufgaben: practice('taylor_regel')
+    aufgaben: practice('taylor_regel', [
+      {
+        text: String.raw`Regimeentscheidung der Geldpolitik: Inflation liegt nahe dem Ziel, aber Geldmengenaggregate schwanken stark. Welche Größe ist in einem Inflation-Targeting-Rahmen der primäre Steueranker und wofür dienen Geldmengeninformationen dann noch?`,
+        steps: [
+          { text: 'Im Inflation-Targeting ist die Zielabweichung der Inflation der primäre Anker für Zinsentscheidungen.', eq: String.raw`$$\pi_t-\pi^*$$` },
+          { text: 'Geldmengenentwicklungen liefern ergänzende Informationssignale über Liquidität, Kreditdynamik und Risiken, aber ersetzen das Zielkriterium nicht.', eq: null },
+          { text: 'So wird verhindert, dass instabile Geldnachfrage zu mechanischen Fehlreaktionen führt.', eq: null }
+        ],
+        result: 'Primärer Anker bleibt die Inflationszielabweichung; Geldmengenaggregate sind nützliche Zusatzindikatoren, aber kein alleiniger Steuerkompass.'
+      },
+      {
+        text: String.raw`ELB/optimal-inflation Mini-Case: Zwei Volkswirtschaften haben denselben Realzins im Normalzustand. A hat langfristig $\pi=4\%$, B hat $\pi=0\%$. Bei einem starken Schock können beide den Nominalzins nur bis $i=0$ senken. Welche Volkswirtschaft gewinnt mehr geldpolitischen Spielraum über den Realzinskanal?`,
+        steps: [
+          { text: 'Nutze den Realzinskanal:', eq: String.raw`$$r \approx i-\pi$$` },
+          { text: 'Bei gleicher ELB für den Nominalzins erlaubt höhere Inflation ein stärker negatives erreichbares $r$.', eq: null },
+          { text: 'Damit hat Volkswirtschaft A mehr Stabilisierungsraum; B stößt früher an die reale Untergrenze des Politikimpulses.', eq: null }
+        ],
+        result: 'Die Volkswirtschaft mit höherem Inflationsniveau vor dem Schock hat an der ELB mehr geldpolitischen Realzins-Spielraum.'
+      }
+    ])
   },
 
   aggregierte_pf: {
@@ -585,7 +698,29 @@ export const CONTENT = {
           { text: 'Interpretiere den Wert als Anteil am BIP.', eq: null }
         ],
         result: 'Ein Primärüberschuss von rund 2,4% des BIP stabilisiert die Schuldenquote.'
+      },
+      {
+        text: String.raw`Tilgungszeitpunkt-Drill: Nach einer einmaligen schuldenfinanzierten Entlastung bleibt der Primärsaldo in den Folgejahren ausgeglichen. Warum ist die notwendige Einmaltilgung bei späterem Rückzahlungstermin deutlich größer?`,
+        steps: [
+          { text: 'Bei ausgeglichenem Primärsaldo wächst der bestehende Schuldenstock mit dem Zinsfaktor weiter.', eq: String.raw`$$B_t=(1+r)B_{t-1}$$` },
+          { text: 'Jede zusätzliche Periode multipliziert die Restschuld mit $(1+r)$ (Zinseszinseffekt).', eq: null },
+          { text: 'Spätere Tilgung bedeutet daher höhere absolute Rückzahlung, obwohl der Anfangsschock identisch war.', eq: null }
+        ],
+        result: 'Die spätere Rückzahlung ist teurer, weil sich Zinsen kumulieren; der gleiche Anfangsschock produziert einen größeren Endbetrag.'
+      },
+      {
+        text: String.raw`Finanzierungsmodus-Vergleich: Zusätzliche Staatsausgaben werden alternativ (A) über Kreditaufnahme oder (B) über Monetarisierung finanziert. Welche makroökonomische Zusatzwirkung ist bei (B) gegenüber (A) besonders zu beachten?`,
+        steps: [
+          { text: 'Kreditfinanzierung erhöht primär die Schulden- und Zinslastdynamik des Staates.', eq: null },
+          { text: 'Monetarisierung verschiebt zusätzlich die nominale Nachfrage und kann Inflationsdruck erzeugen.', eq: null },
+          { text: 'Damit ist (B) kein kostenloses Entkommen aus der Budgetrestriktion, sondern ein Trade-off zwischen Schuldenpfad und Preisstabilität.', eq: null }
+        ],
+        result: 'Monetarisierung reduziert kurzfristig Refinanzierungsdruck, erhöht aber das Risiko inflationsgetriebener Anpassungskosten.'
       }
     ])
   }
 };
+
+CONTENT.schuldenquote_dynamik = CONTENT.schuldenquote;
+CONTENT.schuldenfinanzierung_monetarisierung = CONTENT.schuldenquote;
+delete CONTENT.schuldenquote;

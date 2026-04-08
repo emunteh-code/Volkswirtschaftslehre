@@ -7,13 +7,14 @@ const textQuestion = (id, points, text, correct, feedback) => ({
   feedback
 });
 
-const textBlock = (label, points, title, preamble, questions) => ({
+const textBlock = (label, points, title, preamble, questions, conceptId = null) => ({
   label,
   points,
   type: 'text-block',
   title,
   preamble,
-  questions
+  questions,
+  ...(conceptId ? { conceptId } : {})
 });
 
 function solutionBlock(title, paragraphs) {
@@ -84,7 +85,8 @@ export const FULL_EXAMS = {
               'Das bloße innere Einverständnis genügt nicht.'
             ])
           )
-        ]
+        ],
+        'willenserklaerung'
       ),
       textBlock(
         'Aufgabe 3',
@@ -120,7 +122,8 @@ export const FULL_EXAMS = {
               'Das angefochtene Rechtsgeschäft ist grundsätzlich ex tunc nichtig.'
             ])
           )
-        ]
+        ],
+        'anfechtung'
       )
     ]
   },
@@ -220,7 +223,8 @@ export const FULL_EXAMS = {
               'Das Recht schützt den Vertragspartner vor unangemessener einseitiger Belastung durch vorformulierte Bedingungen.'
             ])
           )
-        ]
+        ],
+        'agb'
       )
     ]
   },
@@ -283,7 +287,8 @@ export const FULL_EXAMS = {
               'Schadensersatz knüpft an eine rechtlich relevante Pflichtverletzung an, nicht an bloße Enttäuschung.'
             ])
           )
-        ]
+        ],
+        'schadensersatz'
       ),
       textBlock(
         'Aufgabe 3',
@@ -320,7 +325,8 @@ export const FULL_EXAMS = {
               'Widerruf = Schutzrecht für Verbraucher in besonders sensiblen Vertragssituationen.'
             ])
           )
-        ]
+        ],
+        'verbraucherwiderruf'
       )
     ]
   }

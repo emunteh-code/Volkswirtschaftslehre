@@ -4,17 +4,23 @@
 // ============================================================
 
 export const CHAPTERS = [
-  { id: 'spieltheorie', title: 'Spieltheorie & Nash-Gleichgewicht', cat: 'Interaktion', short: 'Spiel' },
-  { id: 'oligopol', title: 'Oligopoltheorie', cat: 'Interaktion', short: 'Oligopol' },
-  { id: 'gleichgewicht', title: 'Allgemeines Gleichgewicht', cat: 'Wohlfahrt', short: 'Gleichgew.' },
-  { id: 'wohlfahrt', title: 'Wohlfahrtstheoreme', cat: 'Wohlfahrt', short: 'Wohlfahrt' },
-  { id: 'externa', title: 'Externe Effekte', cat: 'Marktversagen', short: 'Extern' },
+  { id: 'spieltheorie_statisch', title: 'Spieltheorie: Normalform & Nash-Gleichgewicht', cat: 'Interaktion', short: 'Spiel I' },
+  { id: 'spieltheorie_dynamisch', title: 'Spieltheorie: Gemischte Strategien & Wiederholung', cat: 'Interaktion', short: 'Spiel II' },
+  { id: 'oligopol_cournot_bertrand', title: 'Oligopol: Cournot- und Bertrand-Wettbewerb', cat: 'Interaktion', short: 'Oligopol I' },
+  { id: 'oligopol_stackelberg', title: 'Oligopol: Stackelberg und Führerschaft', cat: 'Interaktion', short: 'Oligopol II' },
+  { id: 'gleichgewicht_tausch', title: 'Allgemeines Gleichgewicht: Tausch, Edgeworth, Kontraktkurve', cat: 'Wohlfahrt', short: 'GG Tausch' },
+  { id: 'gleichgewicht_walras', title: 'Allgemeines Gleichgewicht: Walras & Markt-Räumung', cat: 'Wohlfahrt', short: 'GG Walras' },
+  { id: 'wohlfahrt_theoreme', title: 'Wohlfahrt: 1./2. Hauptsatz', cat: 'Wohlfahrt', short: 'Wohlf. Satz' },
+  { id: 'wohlfahrt_messung', title: 'Wohlfahrt: Messung (KR, PR, DWL, SWF)', cat: 'Wohlfahrt', short: 'Wohlf. Mess.' },
+  { id: 'externa_pigou', title: 'Externe Effekte: Pigou-Internalisierung', cat: 'Marktversagen', short: 'Extern Pigou' },
+  { id: 'externa_institutionen', title: 'Externe Effekte: Coase & Emissionshandel', cat: 'Marktversagen', short: 'Extern Inst.' },
   { id: 'public_goods', title: 'Öffentliche Güter', cat: 'Marktversagen', short: 'Öff. Güter' },
-  { id: 'information', title: 'Asymmetrische Information', cat: 'Marktversagen', short: 'Info' },
+  { id: 'information_adverse', title: 'Asymmetrische Information: Adverse Selection', cat: 'Marktversagen', short: 'Info I' },
+  { id: 'information_moralhazard', title: 'Asymmetrische Information: Moral Hazard, Signaling & Screening', cat: 'Marktversagen', short: 'Info II' },
 ];
 
 export const CONTENT = {
-  spieltheorie: {
+  spieltheorie_statisch: {
     motivation: 'In strategischen Situationen hängt das eigene Ergebnis nicht nur vom eigenen Handeln ab, sondern auch von den Entscheidungen anderer. Die Spieltheorie liefert das formale Instrumentarium hierfür.',
     theorie: String.raw`
     <div class="section-block">
@@ -45,8 +51,7 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'Nash-Bedingung', eq: String.raw`$$s_i^* \in \arg\max_{s_i} u_i(s_i, s_{-i}^*)$$`, desc: 'Beste Antwort auf Gleichgewichtsstrategien', variables: { s_i: 'Strategie von Spieler i', s_minus_i: 'Strategien aller anderen Spieler' } },
-      { label: 'Folk-Theorem', eq: String.raw`$$\delta \geq \frac{\pi_D - \pi_C}{\pi_D - \pi_P}$$`, desc: 'Kooperationsbedingung in wiederholten Spielen', variables: { delta: 'Diskontfaktor', pi_D: 'Defektionsgewinn', pi_C: 'Kooperationsgewinn', pi_P: 'Bestrafe-Gewinn' } }
+      { label: 'Nash-Bedingung', eq: String.raw`$$s_i^* \in \arg\max_{s_i} u_i(s_i, s_{-i}^*)$$`, desc: 'Beste Antwort auf Gleichgewichtsstrategien', variables: { s_i: 'Strategie von Spieler i', s_minus_i: 'Strategien aller anderen Spieler' } }
     ],
     aufgaben: [
       {
@@ -78,19 +83,60 @@ export const CONTENT = {
         ],
         result: String.raw`Einziges Nash-Gleichgewicht: (U, R) mit Auszahlungen (1,1). Obwohl (O,L)=(3,3) Pareto-superior wäre, kein Spieler hat einen einseitigen Anreiz von (U,R) abzuweichen — das ist das klassische Gefangenendilemma-Muster in Matrixform.`
       },
+      
+    ]
+  },
+  spieltheorie_dynamisch: {
+    motivation: 'Sobald reine Strategien nicht ausreichen, werden gemischte Strategien und wiederholte Interaktion prüfungsrelevant: Stabilität entsteht dann über Indifferenzbedingungen und Sanktionslogik.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Gemischte Strategien</h3>
+      <p>Existiert kein Nash-Gleichgewicht in reinen Strategien, randomisieren Spieler zwischen reinen Strategien. Ein gemischtes Gleichgewicht liegt vor, wenn jede gemischte Strategie eine beste Antwort auf die Mischung der Gegenseite ist.</p>
+      <div class="math-block">$$E[u_i(\sigma_i^*, \sigma_{-i}^*)] \geq E[u_i(\sigma_i, \sigma_{-i}^*)] \quad \forall \sigma_i$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Indifferenz als Rechenprinzip</h3>
+      <p>In 2x2-Spielen wird das Mischgleichgewicht über Indifferenz der Gegenseite bestimmt: Die Wahrscheinlichkeit wird so gewählt, dass der Gegner zwischen seinen reinen Strategien gerade indifferent ist.</p>
+    </div>
+    <div class="section-block">
+      <h3>Wiederholte Spiele und Kooperation</h3>
+      <p>Bei wiederholter Interaktion können Sanktionsstrategien Kooperation stützen. Entscheidend ist, ob zukünftige Kooperationsgewinne den kurzfristigen Abweichungsgewinn überwiegen.</p>
+      <div class="math-block">$$\delta \geq \frac{\pi_D - \pi_C}{\pi_D - \pi_P}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Mischungsfehler:</strong> Im gemischten Gleichgewicht werden nicht „beste Auszahlungen“ gemischt, sondern Wahrscheinlichkeiten so gewählt, dass der Gegner indifferent wird.</div>
+      <div class="warn-box"><strong>Wiederholungsfehler:</strong> Wiederholung erzeugt nicht automatisch Kooperation. Ohne ausreichend hohen Diskontfaktor bleibt Defektion attraktiv.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Gemischtes NG', eq: String.raw`$$\sigma_i^* \in \arg\max_{\sigma_i} E[u_i(\sigma_i,\sigma_{-i}^*)]$$`, desc: 'Beste Antwort in gemischten Strategien.' },
+      { label: 'Kooperationsbedingung', eq: String.raw`$$\delta \geq \frac{\pi_D - \pi_C}{\pi_D - \pi_P}$$`, desc: 'Folk-Theorem-Logik für Trigger-Strategien.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Nullsummenspiel (Matching Pennies): A erhält bei gleicher Wahl +1, bei unterschiedlicher Wahl -1. Zeigen Sie, dass kein reines Nash-Gleichgewicht existiert, und bestimmen Sie das gemischte Gleichgewicht.`,
+        steps: [
+          { text: `Reine Profile prüfen: In jedem Profil kann genau ein Spieler profitabel abweichen.`, eq: String.raw`\text{Kein Profil ist gegenseitige beste Antwort.}` },
+          { text: `Gemischte Strategien: Sei $p$ die Wahrscheinlichkeit, dass A Kopf spielt. B muss indifferent zwischen Kopf und Zahl sein.`, eq: String.raw`E[u_B(K)] = -p + (1-p) = 1-2p,\quad E[u_B(Z)] = p-(1-p)=2p-1` },
+          { text: `Indifferenzbedingung für B:`, eq: String.raw`1-2p = 2p-1 \implies p = \frac{1}{2}` },
+          { text: `Symmetrisch für A folgt $q=\frac{1}{2}$ für B.`, eq: String.raw`(p^*,q^*)=\left(\frac12,\frac12\right)` }
+        ],
+        result: String.raw`Es gibt kein reines NG, aber ein gemischtes NG mit zufälliger Wahl beider Spieler: $p=q=\frac12$.`
+      },
       {
         text: String.raw`Im infinit wiederholten Gefangenendilemma mit Diskontfaktor $\delta \in (0,1)$: Kooperation liefert $\pi_C = 3$ pro Periode, Defektion (einmalig) $\pi_D = 5$, danach ewige Bestrafung $\pi_P = 1$. Unter welcher Bedingung kann Kooperation im Gleichgewicht (Grim-Trigger) aufrechterhalten werden?`,
         steps: [
           { text: `Wert der Kooperation (ab heute, ewig): Geometrische Reihe.`, eq: String.raw`V_C = \frac{\pi_C}{1-\delta} = \frac{3}{1-\delta}` },
           { text: `Wert des Abweichens: Einmaliger Gewinn $\pi_D$, dann ewige Bestrafung.`, eq: String.raw`V_D = \pi_D + \frac{\delta \pi_P}{1-\delta} = 5 + \frac{\delta}{1-\delta}` },
           { text: `Kooperation im GG, wenn $V_C \geq V_D$:`, eq: String.raw`\frac{3}{1-\delta} \geq 5 + \frac{\delta}{1-\delta}` },
-          { text: `Umformen — Folk-Theorem-Bedingung:`, eq: String.raw`3 \geq 5(1-\delta) + \delta \implies 3 \geq 5 - 4\delta \implies \delta \geq \frac{2}{4} = \frac{1}{2}` }
+          { text: `Umformen — Folk-Theorem-Bedingung:`, eq: String.raw`3 \geq 5(1-\delta) + \delta \implies 3 \geq 5 - 4\delta \implies \delta \geq \frac{1}{2}` }
         ],
-        result: String.raw`Kooperation ist im Grim-Trigger-Gleichgewicht möglich, wenn $\delta \geq \frac{1}{2}$. Der Diskontfaktor muss ausreichend hoch sein — Spieler müssen die Zukunft genug wertschätzen, damit die langfristigen Kooperationsgewinne den kurzfristigen Anreiz zur Defektion überwiegen. Dies ist der Kerninhalt des Folk-Theorems.`
+        result: String.raw`Kooperation ist im Grim-Trigger-Gleichgewicht möglich, wenn $\delta \geq \frac{1}{2}$.`
       }
     ]
   },
-  oligopol: {
+  oligopol_cournot_bertrand: {
     motivation: 'Oligopole beschreiben Märkte mit wenigen Anbietern, die strategisch interagieren. Wir unterscheiden Mengenwettbewerb (Cournot) und Preiswettbewerb (Bertrand).',
     theorie: String.raw`
     <div class="section-block">
@@ -110,13 +156,7 @@ export const CONTENT = {
       <p>Auflösungen des Paradoxons: Kapazitätsbeschränkungen, Produktdifferenzierung oder wiederholte Interaktion können zu Preisen oberhalb der GK führen.</p>
     </div>
     <div class="section-block">
-      <h3>Stackelberg-Führerschaft</h3>
-      <p>Sequenzieller Mengenwettbewerb: Der Führer antizipiert die Reaktionsfunktion des Folgers und wählt seine Menge unter Berücksichtigung dieser. Das Ergebnis: Führer produziert mehr, Folger weniger als im Cournot-GG.</p>
-      <div class="math-block">$$q_1^{Stack} = \frac{a-c}{2b} > q^{Cournot} = \frac{a-c}{3b}$$</div>
-    </div>
-    <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Stackelberg-Vorteil:</strong> Im Stackelberg-Modell (sequenzieller Mengenwettbewerb) hat der Führer einen First-Mover-Advantage, da er die Reaktion des Folgers antizipiert.</div>
       <div class="warn-box"><strong>Cournot vs. Bertrand:</strong> Bei identischen Gütern und ohne Kapazitätsbeschränkungen führt Bertrand-Wettbewerb zu Wettbewerbspreisen — Cournot hingegen zu einem Ergebnis zwischen Monopol und Wettbewerb. Die Modellwahl hängt davon ab, ob Firmen über Preise oder Mengen entscheiden.</div>
     </div>
     `,
@@ -132,15 +172,6 @@ export const CONTENT = {
           { text: `Symmetrie nutzen ($q_i = q_j = q^*$):`, eq: String.raw`q^* = \frac{90-q^*}{2} \implies 2q^* = 90 - q^* \implies 3q^* = 90` }
         ],
         result: String.raw`$q_1^* = q_2^* = 30$.`
-      },
-      {
-        text: String.raw`Verwenden Sie dasselbe Marktumfeld ($P(Q)=100-Q$, $c=10$), aber Firma 1 ist jetzt Stackelberg-Führer. Berechnen Sie $q_1^*$, $q_2^*$ und vergleichen Sie Gesamtmenge und Preis mit dem Cournot-Ergebnis.`,
-        steps: [
-          { text: `Reaktionsfunktion des Folgers (aus Cournot bekannt):`, eq: String.raw`q_2(q_1) = \frac{90 - q_1}{2}` },
-          { text: `Führer antizipiert Folger — setzt $q_2$ ein und maximiert:`, eq: String.raw`\pi_1 = \left(90 - q_1 - \frac{90-q_1}{2}\right)q_1 = \frac{90-q_1}{2}\cdot q_1 \implies q_1^* = 45` },
-          { text: `Folger-Reaktion und Vergleich:`, eq: String.raw`q_2^* = \frac{90-45}{2} = 22{,}5;\quad Q_{Stack}=67{,}5 > Q_{Cournot}=60` }
-        ],
-        result: String.raw`Stackelberg: $q_1^*=45$, $q_2^*=22{,}5$, $P=32{,}5$. Cournot: je $30$, $P=40$. Der Führer produziert mehr und erzielt höheren Gewinn (First-Mover-Advantage).`
       },
       {
         text: String.raw`Cournot-Duopol mit $P = 120 - Q_1 - Q_2$ und $c_1 = c_2 = 0$. Leiten Sie die Reaktionsfunktionen ab, berechnen Sie die Gleichgewichtsmengen und vergleichen Sie mit Monopol und vollkommenem Wettbewerb.`,
@@ -161,10 +192,66 @@ export const CONTENT = {
           { text: `DWL Cournot vs. Wettbewerb: Dreieck zwischen $Q^C=80$ und $Q^W=120$.`, eq: String.raw`DWL^C = \frac{1}{2}(P^C - c)(Q^W - Q^C) = \frac{1}{2} \cdot 40 \cdot 40 = 800` }
         ],
         result: String.raw`Cournot-GW: $KR = 3200$, $\pi_{ges} = 3200$, $DWL = 800$. Monopol: $KR = 1800$, $\pi = 3600$, $DWL = 1800$. Cournot ist wohlfahrtseffizienter als Monopol (kleinerer DWL), aber weniger effizient als vollkommener Wettbewerb (kein DWL).`
+      },
+      {
+        text: String.raw`Graph/Formel-Link: Gegeben sind Reaktionsfunktionen $q_1 = 40 - 0{,}5q_2$ und $q_2 = 40 - 0{,}5q_1$. Bestimmen Sie den Schnittpunkt und erklären Sie, warum dieser Punkt das Cournot-Gleichgewicht ist.`,
+        steps: [
+          { text: `Eine Reaktionsfunktion in die andere einsetzen:`, eq: String.raw`q_1 = 40 - 0{,}5(40 - 0{,}5q_1) = 20 + 0{,}25q_1` },
+          { text: `Nach $q_1$ auflösen:`, eq: String.raw`0{,}75q_1 = 20 \implies q_1^* = \frac{80}{3}` },
+          { text: `Symmetrisch folgt:`, eq: String.raw`q_2^* = \frac{80}{3}` },
+          { text: `Interpretation im Diagramm:`, eq: String.raw`\text{Im Schnittpunkt sind beide Firmen gleichzeitig auf ihrer besten Antwortkurve.}` }
+        ],
+        result: String.raw`Der Schnittpunkt $(q_1^*, q_2^*) = \left(\frac{80}{3}, \frac{80}{3}\right)$ ist genau das Cournot-Nash-Gleichgewicht: Keine Firma kann bei gegebener Konkurrenzmenge ihre Menge einseitig verbessern.`
       }
     ]
   },
-  gleichgewicht: {
+  oligopol_stackelberg: {
+    motivation: 'Wenn Mengenentscheidungen sequenziell getroffen werden, entsteht eine Führungslogik: Der First-Mover antizipiert die Reaktion des Folgers und verschiebt damit das Gleichgewicht.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Stackelberg-Grundidee</h3>
+      <p>Im Stackelberg-Modell wählt der Führer seine Menge zuerst. Der Folger reagiert anschließend optimal auf diese Führungsmenge. Das Ergebnis ist kein simultanes Nash wie bei Cournot, sondern ein sequenzielles Gleichgewicht.</p>
+    </div>
+    <div class="section-block">
+      <h3>Rückwärtsinduktion</h3>
+      <p>Die Lösung erfolgt in zwei Schritten: Zuerst wird die Reaktionsfunktion des Folgers bestimmt, dann setzt der Führer diese in seine Gewinnfunktion ein und maximiert.</p>
+      <div class="math-block">$$q_1^{Stack} = \frac{a-c}{2b} > q^{Cournot} = \frac{a-c}{3b}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Ökonomische Interpretation</h3>
+      <p>Der Führer produziert typischerweise mehr als im Cournot-Fall, der Folger weniger. Dadurch verschiebt sich Gesamtmenge und Marktpreis relativ zum simultanen Mengenwettbewerb.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Timing-Fehler:</strong> Stackelberg darf nicht wie Cournot behandelt werden. Wer simultan statt sequentiell rechnet, verliert den Führervorteil rechnerisch.</div>
+      <div class="warn-box"><strong>Mechanik-Fehler:</strong> Der Führer maximiert nicht „gegen den Markt“, sondern gegen die antizipierte Folgerreaktion.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Führermenge', eq: String.raw`$$q_1^{Stack} = \frac{a-c}{2b}$$`, desc: 'Optimale Menge des First Movers bei linearer Nachfrage.' },
+      { label: 'Folgerreaktion', eq: String.raw`$$q_2(q_1)=\frac{a-c-bq_1}{2b}$$`, desc: 'Beste Antwort des Followers auf die Führermenge.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Verwenden Sie das Marktumfeld $P(Q)=100-Q$, $c=10$, aber Firma 1 ist Stackelberg-Führer. Berechnen Sie $q_1^*$, $q_2^*$ und vergleichen Sie mit Cournot.`,
+        steps: [
+          { text: `Reaktionsfunktion des Folgers (aus Cournot):`, eq: String.raw`q_2(q_1)=\frac{90-q_1}{2}` },
+          { text: `Führerproblem mit antizipierter Reaktion:`, eq: String.raw`\pi_1=\left(90-q_1-\frac{90-q_1}{2}\right)q_1=\frac{90-q_1}{2}\,q_1 \Rightarrow q_1^*=45` },
+          { text: `Folger und Marktresultat:`, eq: String.raw`q_2^*=\frac{90-45}{2}=22{,}5,\quad Q_{Stack}=67{,}5,\quad P_{Stack}=32{,}5` }
+        ],
+        result: String.raw`Der Führer produziert mehr als im Cournot-GG (45 statt 30), der Folger weniger (22,5 statt 30): klassischer First-Mover-Vorteil.`
+      },
+      {
+        text: String.raw`Warum ist der Führervorteil kein „Naturgesetz“, sondern ein Modellresultat?`,
+        steps: [
+          { text: `Voraussetzungen explizit machen.`, eq: String.raw`\text{Sequentielles Timing und glaubwürdige Bindung der Führermenge sind erforderlich.}` },
+          { text: `Vergleich zum simultanen Fall.`, eq: String.raw`\text{Bei simultaner Entscheidung (Cournot) verschwindet der spezifische Führervorteil.}` }
+        ],
+        result: String.raw`Der Stackelberg-Vorteil entsteht aus Timing und Bindung; ohne diese Struktur ist das Ergebnis nicht stabil übertragbar.`
+      }
+    ]
+  },
+  gleichgewicht_tausch: {
     motivation: 'Bisher haben wir Märkte isoliert betrachtet (Partialanalyse). Das allgemeine Gleichgewicht betrachtet alle Märkte gleichzeitig und analysiert Tausch- und Produktionseffizienz.',
     theorie: String.raw`
     <div class="section-block">
@@ -237,7 +324,39 @@ export const CONTENT = {
       }
     ]
   },
-  wohlfahrt: {
+  gleichgewicht_walras: {
+    motivation: 'Walrasianische Gleichgewichte fokussieren auf Preisvektoren und gleichzeitige Markt-Räumung statt auf reine Tauschgeometrie.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Walrasianisches Gleichgewicht</h3>
+      <p>Ein Preisvektor $p^*$ räumt alle Märkte gleichzeitig. Haushalte und Unternehmen optimieren bei diesen Preisen, sodass aggregierte Überschussnachfrage verschwindet.</p>
+      <div class="math-block">$$\sum_i z_i(p^*) = 0$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Walrasches Gesetz</h3>
+      <p>Wenn bei $n$ Märkten bereits $n-1$ Märkte geräumt sind, ist auch der letzte Markt geräumt. Das reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Walrasches Gesetz', eq: String.raw`$$\sum_i z_i(p) = 0$$`, desc: 'Aggregierte Überschussnachfrage über alle Märkte.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Zwei Güter, zwei Konsumenten. $u^A = x_1^{0{,}5} (x_2^A)^{0{,}5}$, $u^B = x_1^B x_2^B$. Endowments: $e^A = (4,0)$, $e^B = (0,4)$. Bestimmen Sie das Walrasianische Gleichgewicht (Preise und Allokation).`,
+        steps: [
+          { text: `Marshallsche Nachfragen A:`, eq: String.raw`x_1^A = \frac{0{,}5 I^A}{p_1}=2,\quad x_2^A = \frac{0{,}5 I^A}{p_2}= \frac{2p_1}{p_2}` },
+          { text: `Marshallsche Nachfragen B:`, eq: String.raw`x_1^B = \frac{2p_2}{p_1}, \quad x_2^B = 2` },
+          { text: `Markträumung Gut 1:`, eq: String.raw`2 + \frac{2p_2}{p_1} = 4 \Rightarrow p_1 = p_2` }
+        ],
+        result: String.raw`Walras-GG: relatives Preisverhältnis $p_1/p_2=1$, Allokation $(2,2)$ für beide Konsumenten.`
+      }
+    ]
+  },
+  wohlfahrt_theoreme: {
     motivation: 'Die Wohlfahrtstheoreme schlagen die Brücke zwischen Marktgleichgewicht und gesellschaftlicher Wünschenswertigkeit.',
     theorie: String.raw`
     <div class="section-block">
@@ -310,7 +429,43 @@ export const CONTENT = {
       }
     ]
   },
-  externa: {
+  wohlfahrt_messung: {
+    motivation: 'Wohlfahrtsmessung trennt normative Bewertungskriterien und messbare Surplus-/DWL-Rechnung als eigenen Klausurblock.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Wohlfahrtsfunktionen</h3>
+      <p>Allokationen können utilitaristisch ($\sum u_i$) oder Rawlsianisch ($\min u_i$) bewertet werden.</p>
+      <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Surplus und Deadweight Loss</h3>
+      <p>Im partiellen Gleichgewicht misst Gesamtwohlfahrt $W = KR + PR$. Eingriffe oder Marktmacht erzeugen typischerweise einen DWL relativ zum Wettbewerbsoptimum.</p>
+      <div class="math-block">$$DWL = W_{Wettbewerb} - (KR + PR)$$</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Utilitaristisch', eq: String.raw`$$W = u_1 + u_2 + \dots + u_n$$`, desc: 'Summe der Nutzen.' },
+      { label: 'Rawlsianisch', eq: String.raw`$$W = \min(u_1, \dots, u_n)$$`, desc: 'Fokus auf den Schwächsten.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Zwei Allokationen: I $(u_1=10, u_2=10)$ und II $(u_1=5, u_2=20)$. Welche wird nach Rawls bevorzugt?`,
+        steps: [
+          { text: `Minima vergleichen:`, eq: String.raw`\min(10,10)=10,\quad \min(5,20)=5` }
+        ],
+        result: String.raw`Rawls bevorzugt Allokation I.`
+      },
+      {
+        text: String.raw`Nachfrage $P_D = 20 - Q$, Angebot $P_S = Q + 4$. Berechnen Sie KR, PR und Gesamtwohlfahrt im Gleichgewicht.`,
+        steps: [
+          { text: `Gleichgewicht:`, eq: String.raw`20-Q = Q+4 \Rightarrow Q^*=8,\;P^*=12` },
+          { text: `Renten:`, eq: String.raw`KR=\frac12(20-12)\cdot 8=32,\quad PR=\frac12(12-4)\cdot 8=32` }
+        ],
+        result: String.raw`Gesamtwohlfahrt $W=64$ im Gleichgewicht.`
+      }
+    ]
+  },
+  externa_pigou: {
     motivation: 'Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.',
     theorie: String.raw`
     <div class="section-block">
@@ -385,6 +540,37 @@ export const CONTENT = {
       }
     ]
   },
+  externa_institutionen: {
+    motivation: 'Neben Steuer-Internalisierung braucht die Klausur trennscharfe Beherrschung institutioneller Ansätze: Coase-Verhandlung und Cap-and-Trade.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Coase-Theorem</h3>
+      <p>Bei klaren Eigentumsrechten und sehr niedrigen Transaktionskosten führen private Verhandlungen zu einer effizienten Allokation, unabhängig von der initialen Rechtszuweisung.</p>
+    </div>
+    <div class="section-block">
+      <h3>Emissionshandel (Cap-and-Trade)</h3>
+      <p>Der Staat setzt eine Emissionsmenge (Cap), Lizenzen werden handelbar. Bei funktionierendem Markt ergibt sich kosteneffiziente Vermeidung über den Lizenzpreis.</p>
+      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene und hohe Verhandlungskosten unterminieren private Effizienzverhandlungen.</div>
+      <div class="warn-box"><strong>Instrumentenfehler:</strong> Cap-and-Trade und Pigou-Steuer sind in der Zielsetzung verwandt, aber unterschiedlich in Preis- vs. Mengensteuerung unter Unsicherheit.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Preis-Mengen-Äquivalenz', eq: String.raw`$$t_{Pigou} = MEC(Q^*) \Leftrightarrow \text{Cap auf }Q^*$$`, desc: 'Äquivalenzidee bei idealen Bedingungen.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Firma A hat Produktionsrecht und erzielt Gewinn 50, bei Firma B entsteht Schaden 30, Transaktionskosten = 0. Was sagt Coase über das effiziente Ergebnis?`,
+        steps: [
+          { text: `Nettoeffekt prüfen:`, eq: String.raw`50-30=20>0 \Rightarrow Produktion ist effizient.` }
+        ],
+        result: String.raw`Effizientes Ergebnis: Produktion findet statt; Rechtszuweisung beeinflusst Verteilung, nicht Effizienz (unter Coase-Annahmen).`
+      }
+    ]
+  },
   public_goods: {
     motivation: 'Öffentliche Güter sind durch Nicht-Rivalität und Nicht-Ausschließbarkeit gekennzeichnet. Dies führt zum Trittbrettfahrer-Problem.',
     theorie: String.raw`
@@ -454,11 +640,21 @@ export const CONTENT = {
           { text: `Gemischtes Nash-GG und soziales Optimum:`, eq: String.raw`W_{KK} = 3+3=6 < W_{KK\text{(ges.)}} = 10+10=20 \implies \text{Soz. Opt. bei (K,K), GG bei gem. Strat.}` }
         ],
         result: String.raw`Kein reines Nash-GG (keine dominante Strategie). Das soziale Optimum (K,K) mit Gesamtwohlfahrt 20 wird durch private Anreize untergraben. Internationale Klimaabkommen versuchen, durch Verträge und Monitoring das Koordinationsversagen zu überwinden.`
+      },
+      {
+        text: String.raw`Lindahl-Logik als Mini-Fall: Für ein öffentliches Gut gilt $MB_A = 12 - Q$, $MB_B = 8 - Q$, Grenzkosten $MC = 6$. Bestimmen Sie (i) die effiziente Menge und (ii) die individuellen Lindahl-Preise bei dieser Menge.`,
+        steps: [
+          { text: `Samuelson-Bedingung anwenden:`, eq: String.raw`MB_A + MB_B = MC \implies (12-Q)+(8-Q)=6` },
+          { text: `Effiziente Menge berechnen:`, eq: String.raw`20-2Q=6 \implies Q^*=7` },
+          { text: `Lindahl-Preis von A bei $Q^*$:`, eq: String.raw`P_A^{L} = MB_A(7)=12-7=5` },
+          { text: `Lindahl-Preis von B bei $Q^*$ und Kostendeckung prüfen:`, eq: String.raw`P_B^{L}=MB_B(7)=8-7=1,\quad P_A^L+P_B^L=6=MC` }
+        ],
+        result: String.raw`Die effiziente Menge ist $Q^*=7$. Individuelle Preise: $P_A^L=5$, $P_B^L=1$. Zusammen decken sie die Grenzkosten, genau wie es der Lindahl-Mechanismus fordert.`
       }
     ]
   },
-  information: {
-    motivation: 'Unterschiedliche Informationsstände zwischen Käufer und Verkäufer (asymmetrische Information) können Märkte destabilisieren oder zum Zusammenbruch führen.',
+  information_adverse: {
+    motivation: 'Adverse Selection behandelt ex-ante Informationsasymmetrien: verborgene Typen vor Vertragsabschluss können gute Qualität aus dem Markt drängen.',
     theorie: String.raw`
     <div class="section-block">
       <h3>Adverse Selection (Negativauslese)</h3>
@@ -466,24 +662,13 @@ export const CONTENT = {
       <p>Resultat: Nur schlechte Qualitäten bleiben am Markt ("race to the bottom"). Im Extremfall vollständiger Marktversagen.</p>
     </div>
     <div class="section-block">
-      <h3>Moral Hazard (Verhaltensrisiko)</h3>
-      <p>Tritt <strong>nach</strong> Vertragsschluss auf. Eine Versicherung führt dazu, dass der Versicherte weniger vorsichtig ist (Hidden Action). Arbeitgeber kann nicht beobachten, ob Arbeitnehmer angemessen arbeitet.</p>
-      <p>Lösung: Anreizkompatible Verträge mit erfolgsabhängiger Vergütung. Tradeoff: Risikoübertragung auf risikoaversen Agenten.</p>
-    </div>
-    <div class="section-block">
-      <h3>Signaling & Screening</h3>
-      <p>Lösungen: Die informierte Seite sendet Signale (z.B. Diplome), die uninformierte Seite bietet Menüs an, um Typen zu trennen (Self-Selection).</p>
-      <p>Spence-Signaling: Bildung als Signal für Fähigkeit, nicht unbedingt als direkte Produktivitätssteigerung. Separierendes GG: Hochfähige wählen hohes Bildungsniveau, Niedrigfähige nicht.</p>
-    </div>
-    <div class="section-block">
-      <h3>Prinzipal-Agenten-Problem</h3>
-      <p>Prinzipal (z.B. Arbeitgeber) delegiert Aufgabe an Agenten (z.B. Arbeitnehmer), dessen Handlungen nicht vollständig beobachtbar sind. Optimaler Vertrag maximiert Prinzipal-Nutzen unter Berücksichtigung der Partizipations- und Anreizkompatibilitätsbedingungen.</p>
-      <div class="math-block">$$E[\pi_P] = E[y] - w \quad \text{s.t.} \quad IC: e=H, \quad PC: E[U_A] \geq \bar{U}$$</div>
+      <h3>Marktfolge und Selektionsspirale</h3>
+      <p>Sinkt wegen Informationsproblemen die Durchschnittsqualität, sinkt auch die Zahlungsbereitschaft der Käufer. Dadurch verlassen weitere Hochqualitätsanbieter den Markt — eine Endogenisierung der Qualitätsverschlechterung.</p>
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Adverse Selection vs. Moral Hazard:</strong> Adverse Selection ist ein ex-ante-Problem (vor Vertragsschluss, über verborgene Typen). Moral Hazard ist ein ex-post-Problem (nach Vertragsschluss, über verborgene Aktionen). Verwechslung führt zur falschen Politikempfehlung.</div>
-      <div class="warn-box"><strong>Separierendes vs. poolendes Gleichgewicht:</strong> Im separierenden GG werden Typen getrennt (teures Signal wirksam). Im poolenden GG handeln alle Typen gleich (Signal zu billig). Das Signal muss die Incentive-Compatibility-Bedingung erfüllen: für Niedrigfähige muss Signaling zu kostspielig sein.</div>
+      <div class="warn-box"><strong>Mittelwert-Fehler:</strong> Der erwartete Käuferwert ist kein neutraler „Durchschnitt“, sondern kann den Markt selbst verändern, weil Hochqualitätsanbieter bei zu niedrigen Preisen aussteigen.</div>
+      <div class="warn-box"><strong>Policy-Fehler:</strong> Bei Adverse Selection braucht es Typtransparenz (Screening, Zertifikate, Garantien) statt bloßer Verhaltenskontrolle.</div>
     </div>
     `,
     formeln: [
@@ -500,15 +685,6 @@ export const CONTENT = {
         result: String.raw`Marktzusammenbruch für Qualität. Adverse Selection führt zu Lemons-Problem.`
       },
       {
-        text: String.raw`Ein Arbeitnehmer kann hohen Effort ($e=H$, Kosten 5) oder niedrigen Effort ($e=L$, Kosten 0) wählen. Bei $e=H$ beträgt die Erfolgswahrscheinlichkeit 0{,}8, bei $e=L$ 0{,}4. Erfolg bringt 100, Misserfolg 0. Der Arbeitgeber zahlt einen fixen Lohn von 40. Welchen Effort wählt der Arbeitnehmer, und warum liegt Moral Hazard vor?`,
-        steps: [
-          { text: `Nutzen bei $e=H$: Lohn minus Anstrengungskosten.`, eq: String.raw`U(H) = 40 - 5 = 35` },
-          { text: `Nutzen bei $e=L$: Lohn, keine Kosten.`, eq: String.raw`U(L) = 40 - 0 = 40 > 35 \implies \text{Arbeitnehmer wählt } e=L.` },
-          { text: `Warum Moral Hazard? Effort ist nach Vertragsschluss nicht beobachtbar (Hidden Action).`, eq: String.raw`\text{Lösung: Erfolgsabhängige Vergütung } w(Erfolg) > w(Misserfolg) \text{ setzt Anreize.}` }
-        ],
-        result: String.raw`Moral Hazard (ex-post): Der Arbeitnehmer wählt $e=L$, da bei fixem Lohn kein Anreiz zu Anstrengung besteht.`
-      },
-      {
         text: String.raw`Akerlof-Markt für Lemons: Es gibt gute Gebrauchtwagen mit Wert $v_G = 8000$ und schlechte mit $v_S = 2000$. Käufer kennen die Qualität nicht. Verkäufer guter Autos reservieren ihren Wagen für mindestens $v_G = 8000$, schlechter für mindestens $v_S = 2000$. Anfangsanteil gut: $q = 0{,}5$. Zeigen Sie, wie adversarische Selektion zum vollständigen Marktversagen führt.`,
         steps: [
           { text: `Runde 1: Käufer zahlen $E[v] = 0{,}5 \cdot 8000 + 0{,}5 \cdot 2000 = 5000$.`, eq: String.raw`E_1[v] = 5000 < 8000 \implies \text{Verkäufer guter Autos verlassen Markt.}` },
@@ -518,15 +694,57 @@ export const CONTENT = {
         ],
         result: String.raw`Vollständiges Marktversagen im Gleichgewicht: Nur schlechte Autos werden gehandelt. Der Markt für gute Autos bricht zusammen, obwohl Tausch für beide Seiten vorteilhaft wäre. Lösung erfordert Mechanismen zur Informationsübertragung (Signaling, Screening, staatliche Zertifizierung).`
       },
+      
+    ]
+  },
+  information_moralhazard: {
+    motivation: 'Moral Hazard und Signaling/Screening behandeln ex-post Handlungsprobleme bzw. Trennmechanismen bei asymmetrischer Information.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Moral Hazard (Hidden Action)</h3>
+      <p>Nach Vertragsabschluss kann der Prinzipal die Handlung des Agenten nur unvollständig beobachten. Ohne passende Anreize sinkt die gewünschte Anstrengung.</p>
+    </div>
+    <div class="section-block">
+      <h3>Signaling und Screening</h3>
+      <p>Bei verborgenen Typen kann die informierte Seite Signale senden (Signaling), die uninformierte Seite kann Vertragsmenüs zur Selbstselektion anbieten (Screening).</p>
+      <p>Separierende Gleichgewichte sind nur stabil, wenn Nachahmung für den ungeeigneten Typ hinreichend teuer ist.</p>
+    </div>
+    <div class="section-block">
+      <h3>Prinzipal-Agenten-Logik</h3>
+      <div class="math-block">$$E[\pi_P] = E[y] - w \quad \text{s.t.} \quad IC,\;PC$$</div>
+      <p>Verträge müssen gleichzeitig Teilnahmeanreiz (PC) und Anreizkompatibilität (IC) erfüllen.</p>
+    </div>
+    `,
+    formeln: [
+      { label: 'Prinzipalziel', eq: String.raw`$$\max_w E[\pi_P]=E[y]-w \;\;\text{s.t.}\;\; IC,PC$$`, desc: 'Vertragswahl unter versteckter Handlung.' }
+    ],
+    aufgaben: [
       {
-        text: String.raw`Spence-Signaling: Es gibt zwei Arbeitertypen — hohe Fähigkeit (H) mit Produktivität $y_H = 100$ und niedrige Fähigkeit (L) mit $y_L = 40$. Bildungskosten: $c_H(e) = e$ (niedrig für H), $c_L(e) = 2e$ (hoch für L). Arbeitgeber zahlt $w = y_i$, wenn Typ erkannt. Leiten Sie die Bedingung für ein separierendes Gleichgewicht mit Bildungssignal $e^*$ ab.`,
+        text: String.raw`Ein Arbeitnehmer kann hohen Effort ($e=H$, Kosten 5) oder niedrigen Effort ($e=L$, Kosten 0) wählen. Bei $e=H$ beträgt die Erfolgswahrscheinlichkeit 0{,}8, bei $e=L$ 0{,}4. Erfolg bringt 100, Misserfolg 0. Der Arbeitgeber zahlt einen fixen Lohn von 40. Welchen Effort wählt der Arbeitnehmer?`,
         steps: [
-          { text: `Anreizkompatibilität für Typ H: H bevorzugt hohes $e^*$ gegenüber $e=0$.`, eq: String.raw`100 - e^* \geq 40 \implies e^* \leq 60` },
-          { text: `Anreizkompatibilität für Typ L: L bevorzugt $e=0$ (Lohn $w_L = 40$) gegenüber $e^*$ (Lohn $w_H = 100$).`, eq: String.raw`40 \geq 100 - 2e^* \implies 2e^* \geq 60 \implies e^* \geq 30` },
-          { text: `Separierendes GG existiert, wenn beide IC gleichzeitig erfüllt sind:`, eq: String.raw`30 \leq e^* \leq 60` },
-          { text: `Interpretation: Bildung als Signal, nicht direkt produktiv.`, eq: String.raw`\text{Typ H wählt } e^* \in [30,60]; \text{ Typ L wählt } e=0. \text{ Bildung trennt Typen.}` }
+          { text: `Nutzen bei $e=H$:`, eq: String.raw`U(H)=40-5=35` },
+          { text: `Nutzen bei $e=L$:`, eq: String.raw`U(L)=40-0=40>35 \Rightarrow e=L` },
+          { text: `Interpretation:`, eq: String.raw`\text{Fixlohn ohne Leistungsbezug erzeugt Moral Hazard.}` }
         ],
-        result: String.raw`Separierendes Gleichgewicht für $e^* \in [30, 60]$. Schlüsseleinblick: Bildung muss für Niedrigfähige (L) relativ kostspieliger sein ($c_L > c_H$), damit sie das Signal nicht imitieren. Bildung hat hier keinen direkten Produktivitätseffekt — sie ist reines Kostensignal. Das single-crossing property ($c_H < c_L$) ist die entscheidende strukturelle Voraussetzung.`
+        result: String.raw`Der Arbeitnehmer wählt niedrigen Effort. Anreizkompatible Vergütung muss den Mehrertrag von hohem Effort teilweise an den Agenten koppeln.`
+      },
+      {
+        text: String.raw`Spence-Signaling: Typen H und L mit Produktivität $y_H=100$, $y_L=40$, Bildungskosten $c_H(e)=e$, $c_L(e)=2e$. Leiten Sie den Bereich für ein separierendes Signalniveau $e^*$ her.`,
+        steps: [
+          { text: `IC für H:`, eq: String.raw`100-e^* \ge 40 \Rightarrow e^* \le 60` },
+          { text: `IC für L:`, eq: String.raw`40 \ge 100-2e^* \Rightarrow e^* \ge 30` },
+          { text: `Gemeinsamer Bereich:`, eq: String.raw`30 \le e^* \le 60` }
+        ],
+        result: String.raw`Separierendes Gleichgewicht ist für $e^* \in [30,60]$ möglich, weil Signaling für den Niedrigtyp relativ teuer ist.`
+      },
+      {
+        text: String.raw`Versicherungsmarkt-Fallunterscheidung: (i) Vor Vertragsabschluss kennt nur der Kunde sein Risikoprofil. (ii) Nach Vertragsabschluss sinkt seine Vorsicht. Ordnen Sie zu und nennen Sie je ein passendes Instrument.`,
+        steps: [
+          { text: `(i) Problemtyp:`, eq: String.raw`\text{Adverse Selection (versteckter Typ vor Vertrag).}` },
+          { text: `(ii) Problemtyp:`, eq: String.raw`\text{Moral Hazard (versteckte Handlung nach Vertrag).}` },
+          { text: `Instrumente:`, eq: String.raw`\text{(i) Screening/Signaling; (ii) Selbstbehalt, Bonus-Malus, Monitoring.}` }
+        ],
+        result: String.raw`Ex-ante Typproblem und ex-post Verhaltensproblem erfordern unterschiedliche Instrumente; diese Zuordnung ist klausurkritisch.`
       }
     ]
   }

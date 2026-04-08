@@ -57,11 +57,17 @@ function createMasteryItems(conceptId, title) {
       'Policy-Mix mit Blick auf Zinsreaktion und Output deuten',
       'Liquiditätsfalle und straffe Geldpolitik als Sonderfälle erkennen'
     ],
-    realzins: [
+    realzins_fisher_erwartungen: [
       'Fisher-Gleichung und Realzins logisch anwenden',
-      'Nominalzins, Realzins und Kreditzins auseinanderhalten',
-      'Risikoprämien als eigenständigen Nachfrageschock erklären',
-      'Deflations- oder Finanzkrisenszenarien über den Realzinskanal deuten'
+      'Nominalzins und Realzins sauber auseinanderhalten',
+      'Änderungen der Inflationserwartungen in Realzinsänderungen übersetzen',
+      'Deflationsszenarien über den Fisher-Kanal klausursicher deuten'
+    ],
+    realzins_risikopraemie_krisenkanal: [
+      'Kreditzins als Leitzins plus Risikoprämie korrekt aufstellen',
+      'Risikoprämienanstiege als eigenständigen Nachfrageschock erklären',
+      'Spread-/Kreditkanalschocks auf IS, Investitionen und Output übertragen',
+      'ELB-nahe Stabilisierungsgrenzen in Krisenszenarien begründet einordnen'
     ],
     arbeitsmarkt: [
       'WS- und PS-Kurve korrekt definieren und zeichnen',

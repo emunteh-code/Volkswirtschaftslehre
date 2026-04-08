@@ -8,13 +8,14 @@ export const CONCEPT_LINKS = {
   vgr: { uses: ['makro_rahmen'], usedBy: ['guetermarkt', 'geldnachfrage', 'arbeitsmarkt'] },
   guetermarkt: { uses: ['makro_rahmen', 'vgr'], usedBy: ['multiplikator', 'islm', 'politikmix'] },
   multiplikator: { uses: ['guetermarkt'], usedBy: ['islm', 'politikmix'] },
-  geldnachfrage: { uses: ['makro_rahmen', 'vgr'], usedBy: ['banken', 'islm', 'realzins'] },
-  banken: { uses: ['geldnachfrage'], usedBy: ['realzins', 'politikmix'] },
-  islm: { uses: ['guetermarkt', 'geldnachfrage'], usedBy: ['politikmix', 'realzins', 'islmpc'] },
+  geldnachfrage: { uses: ['makro_rahmen', 'vgr'], usedBy: ['banken', 'islm', 'realzins_fisher_erwartungen', 'realzins_risikopraemie_krisenkanal'] },
+  banken: { uses: ['geldnachfrage'], usedBy: ['realzins_risikopraemie_krisenkanal', 'politikmix'] },
+  islm: { uses: ['guetermarkt', 'geldnachfrage'], usedBy: ['politikmix', 'realzins_fisher_erwartungen', 'realzins_risikopraemie_krisenkanal', 'islmpc'] },
   politikmix: { uses: ['islm', 'multiplikator'], usedBy: ['islmpc'] },
-  realzins: { uses: ['geldnachfrage', 'banken', 'islm'], usedBy: ['islmpc', 'erwartungen'] },
+  realzins_fisher_erwartungen: { uses: ['geldnachfrage', 'islm'], usedBy: ['realzins_risikopraemie_krisenkanal', 'islmpc', 'erwartungen'] },
+  realzins_risikopraemie_krisenkanal: { uses: ['geldnachfrage', 'banken', 'islm', 'realzins_fisher_erwartungen'], usedBy: ['islmpc', 'erwartungen'] },
   arbeitsmarkt: { uses: ['makro_rahmen', 'vgr'], usedBy: ['phillips', 'islmpc'] },
   phillips: { uses: ['arbeitsmarkt'], usedBy: ['islmpc', 'erwartungen'] },
-  islmpc: { uses: ['islm', 'politikmix', 'phillips', 'realzins'], usedBy: ['erwartungen'] },
-  erwartungen: { uses: ['realzins', 'phillips', 'islmpc'], usedBy: [] }
+  islmpc: { uses: ['islm', 'politikmix', 'phillips', 'realzins_fisher_erwartungen', 'realzins_risikopraemie_krisenkanal'], usedBy: ['erwartungen'] },
+  erwartungen: { uses: ['realzins_fisher_erwartungen', 'realzins_risikopraemie_krisenkanal', 'phillips', 'islmpc'], usedBy: [] }
 };

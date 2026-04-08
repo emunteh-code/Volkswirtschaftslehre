@@ -11,7 +11,8 @@ export const GRAPH_CONCEPTS = new Set([
   'marshall_lerner',
   'mundell_fleming',
   'wk_regime',
-  'schuldenquote',
+  'schuldenquote_dynamik',
+  'schuldenfinanzierung_monetarisierung',
   'taylor_regel',
   'solow_basis',
   'phillipskurve',
@@ -104,14 +105,27 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    schuldenquote: `
+    schuldenquote_dynamik: `
 <div class="graph-container">
 <h3 class="graph-panel-title">Schuldenquote im Zeitverlauf</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_b0">Startquote b₀</label><input type="range" id="g_b0" min="20" max="140" step="5" value="70" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_b0" aria-live="polite">70</div></div>
-<div class="ctrl-group"><label for="g_r">Zins r (%)</label><input type="range" id="g_r" min="0" max="8" step="0.5" value="4" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_r" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_g">Wachstum g (%)</label><input type="range" id="g_g" min="0" max="6" step="0.5" value="2" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_g" aria-live="polite">2.0</div></div>
-<div class="ctrl-group"><label for="g_ps">Primaersaldo (%)</label><input type="range" id="g_ps" min="-4" max="4" step="0.5" value="1" oninput="window.initGraph('schuldenquote', false)"><div class="val" id="v_ps" aria-live="polite">1.0</div></div>
+<div class="ctrl-group"><label for="g_b0">Startquote b₀</label><input type="range" id="g_b0" min="20" max="140" step="5" value="70" oninput="window.initGraph('schuldenquote_dynamik', false)"><div class="val" id="v_b0" aria-live="polite">70</div></div>
+<div class="ctrl-group"><label for="g_r">Zins r (%)</label><input type="range" id="g_r" min="0" max="8" step="0.5" value="4" oninput="window.initGraph('schuldenquote_dynamik', false)"><div class="val" id="v_r" aria-live="polite">4.0</div></div>
+<div class="ctrl-group"><label for="g_g">Wachstum g (%)</label><input type="range" id="g_g" min="0" max="6" step="0.5" value="2" oninput="window.initGraph('schuldenquote_dynamik', false)"><div class="val" id="v_g" aria-live="polite">2.0</div></div>
+<div class="ctrl-group"><label for="g_ps">Primaersaldo (%)</label><input type="range" id="g_ps" min="-4" max="4" step="0.5" value="1" oninput="window.initGraph('schuldenquote_dynamik', false)"><div class="val" id="v_ps" aria-live="polite">1.0</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Schuldenquote unter unterschiedlichen Zins-Wachstums-Differenzen und Primaersalden."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    schuldenfinanzierung_monetarisierung: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Schuldenquote im Zeitverlauf</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_b0">Startquote b₀</label><input type="range" id="g_b0" min="20" max="140" step="5" value="70" oninput="window.initGraph('schuldenfinanzierung_monetarisierung', false)"><div class="val" id="v_b0" aria-live="polite">70</div></div>
+<div class="ctrl-group"><label for="g_r">Zins r (%)</label><input type="range" id="g_r" min="0" max="8" step="0.5" value="4" oninput="window.initGraph('schuldenfinanzierung_monetarisierung', false)"><div class="val" id="v_r" aria-live="polite">4.0</div></div>
+<div class="ctrl-group"><label for="g_g">Wachstum g (%)</label><input type="range" id="g_g" min="0" max="6" step="0.5" value="2" oninput="window.initGraph('schuldenfinanzierung_monetarisierung', false)"><div class="val" id="v_g" aria-live="polite">2.0</div></div>
+<div class="ctrl-group"><label for="g_ps">Primaersaldo (%)</label><input type="range" id="g_ps" min="-4" max="4" step="0.5" value="1" oninput="window.initGraph('schuldenfinanzierung_monetarisierung', false)"><div class="val" id="v_ps" aria-live="polite">1.0</div></div>
 </div>
 <canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Schuldenquote unter unterschiedlichen Zins-Wachstums-Differenzen und Primaersalden."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>

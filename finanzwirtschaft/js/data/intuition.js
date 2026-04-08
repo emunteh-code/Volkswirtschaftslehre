@@ -19,13 +19,22 @@ export const INTUITION = {
       { if: 'Langfristige Bindung kurzfristig finanziert wird', then: 'Denke an Refinanzierungsrisiko.' }
     ]
   ),
-  kapitalmarkt_institutionen: mk(
-    'Kapitalmärkte machen Zeit tauschbar, Institutionen machen diesen Tausch in unvollkommenen Märkten erst praktikabel.',
-    'Wie auf einem großen Marktplatz braucht es Preise für Zeit und zugleich Vermittler, wenn Informationen ungleich verteilt sind.',
-    'Präferenzen, Marktpreise und Friktionen bilden zusammen die moderne Finanzierungssicht.',
+  kapitalmarkt_bewertung: mk(
+    'Kapitalmärkte machen Zeit über Preise und Renditen vergleichbar.',
+    'Wie auf einem Marktplatz liefert der Preis die gemeinsame Sprache, um heutige und künftige Ansprüche zu tauschen.',
+    'Kapitalmarktorientierung übersetzt Zahlungsströme in vergleichbare Bewertungsurteile.',
     [
       { if: 'Vollkommener Markt unterstellt wird', then: 'Prüfe, welche Vereinfachungen dadurch entstehen.' },
-      { if: 'Banken genannt werden', then: 'Erkläre ihre Rolle über Marktfriktionen und Information.' }
+      { if: 'Zins oder Rendite genannt werden', then: 'Lies sie als Preis des Zeittauschs und als Bewertungsmaßstab.' }
+    ]
+  ),
+  institutionen_marktunvollkommenheit: mk(
+    'Institutionen werden relevant, weil reale Märkte unvollkommen sind.',
+    'Wie bei einem Marktplatz mit Informationslücken braucht es Vermittler und Regeln, damit Tausch überhaupt zuverlässig funktioniert.',
+    'Institutionenorientierung ergänzt die Preislogik um Friktionen, Überwachung und Transaktionskosten.',
+    [
+      { if: 'Banken genannt werden', then: 'Erkläre ihre Rolle über Marktfriktionen und Information.' },
+      { if: 'Vollkommener Markt als Vergleich auftaucht', then: 'Nutze ihn als Benchmark, nicht als Realitätsbeschreibung.' }
     ]
   ),
   intertemporale_wahl: mk(
@@ -100,22 +109,39 @@ export const INTUITION = {
       { if: 'Altaktionäre verglichen werden', then: 'Sprich über Verwässerungsschutz, nicht nur über neue Mittelzufuhr.' }
     ]
   ),
-  kapitalkosten: mk(
-    'Kapitalkosten sind Opportunitätskosten der Mittelüberlassung, nicht bloß Bankzinsen oder Börsendaten.',
-    'Wie bei Mietkosten für Kapital zählt, welchen Preis Eigen- und Fremdkapitalgeber für ihre Mittel verlangen.',
-    'Darum verbindet das Kapitel Aktienbewertung, Kreditzins und Skonto in einer gemeinsamen Kostenlogik.',
+  eigenkapitalkosten: mk(
+    'Eigenkapitalkosten sind die von Eigentümern geforderte Rendite auf bereitgestelltes Kapital.',
+    'Wie ein Anspruch auf Mindestverzinsung spiegeln sie wider, welchen Ertrag Investoren für Risikoübernahme erwarten.',
+    'Aus Aktienpreis und erwarteten Ausschüttungen wird die geforderte Eigenkapitalrendite abgeleitet.',
     [
-      { if: 'Skonto vorkommt', then: 'Denke an implizite Fremdkapitalkosten statt an bloßen Preisnachlass.' },
       { if: 'Aktienpreis und Dividenden genannt werden', then: 'Lies daraus die Eigenkapitalkosten ab.' }
     ]
   ),
-  kapitalstruktur: mk(
-    'Kapitalstruktur ist die Kunst, billigeres Kapital nicht mit kostenlosem Risiko zu verwechseln.',
+  fremdkapitalkosten: mk(
+    'Fremdkapitalkosten erfassen den effektiven Preis der Kreditnutzung, nicht nur den Nominalzins.',
+    'Wie ein scheinbar kleiner Aufschlag können Zahlungsziele, Skonto und Gebühren im Effekt sehr teuer werden.',
+    'Die ökonomisch relevante Größe ist der effektive Finanzierungssatz aus der konkreten Zahlungsstruktur.',
+    [
+      { if: 'Skonto vorkommt', then: 'Denke an implizite Fremdkapitalkosten statt an bloßen Preisnachlass.' },
+      { if: 'Nominalzins genannt wird', then: 'Prüfe, ob effektive Kosten durch Fristen und Zusatzkosten höher liegen.' }
+    ]
+  ),
+  wacc_leverage: mk(
+    'WACC und Leverage zeigen gemeinsam, wie Finanzierungsmix Ertrag und Risiko verändert.',
     'Wie ein längerer Hebel macht mehr Verschuldung Bewegungen größer – nach oben und nach unten.',
-    'WACC, Leverage und Modigliani-Miller sind deshalb nur gemeinsam wirklich verständlich.',
+    'Die Kernaussage ist die Doppelwirkung: potenziell höhere EK-Rendite bei höherem EK-Risiko.',
     [
       { if: 'Fremdkapitalanteil steigt', then: 'Prüfe Ertragseffekt und Risikoeffekt zugleich.' },
       { if: 'WACC fällt', then: 'Frage trotzdem, ob die Eigenkapitalkosten oder Insolvenzsorgen mitsteigen.' }
+    ]
+  ),
+  modigliani_miller: mk(
+    'Modigliani-Miller ist ein Benchmark für die Frage, wann Kapitalstruktur wertneutral wäre.',
+    'Wie ein Nullmodell zeigt es, was ohne Friktionen gelten würde und macht dadurch reale Abweichungen sichtbar.',
+    'Gerade weil die Annahmen streng sind, hilft MM beim systematischen Identifizieren realer Werttreiber.',
+    [
+      { if: 'MM erwähnt wird', then: 'Ordne es als Benchmark unter starken Annahmen ein.' },
+      { if: 'Reale Märkte diskutiert werden', then: 'Nenne Friktionen wie Steuern, Insolvenzkosten und Informationsasymmetrien.' }
     ]
   )
 };

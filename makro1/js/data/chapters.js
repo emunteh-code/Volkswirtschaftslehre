@@ -19,7 +19,8 @@ export const CHAPTERS = [
   { id: 'banken', title: 'Banken, Mindestreserven und Geldschöpfung', cat: 'Kurze Frist II', short: 'Banken' },
   { id: 'islm', title: 'IS-LM-Grundmodell bei Zinssteuerung', cat: 'Kurze Frist III', short: 'IS-LM' },
   { id: 'politikmix', title: 'Fiskalpolitik, Geldpolitik und Crowding-Out', cat: 'Kurze Frist III', short: 'Policy' },
-  { id: 'realzins', title: 'Realzins, erwartete Inflation und Risikoprämie', cat: 'Finanzfriktionen', short: 'Realzins' },
+  { id: 'realzins_fisher_erwartungen', title: 'Realzins und Inflationserwartungen (Fisher-Kanal)', cat: 'Finanzfriktionen', short: 'Real-FI' },
+  { id: 'realzins_risikopraemie_krisenkanal', title: 'Risikoprämie, Kreditzins und Krisenkanal', cat: 'Finanzfriktionen', short: 'Real-RP' },
   { id: 'arbeitsmarkt', title: 'Arbeitsmarkt, Lohnsetzung und Preissetzung', cat: 'Mittlere Frist', short: 'WS-PS' },
   { id: 'phillips', title: 'Phillipskurve, NAIRU und Inflationsdynamik', cat: 'Mittlere Frist', short: 'Phillips' },
   { id: 'islmpc', title: 'IS-LM-PC: Rückkehr zur mittleren Frist', cat: 'Mittlere Frist', short: 'IS-LM-PC' },
@@ -207,6 +208,15 @@ export const CONTENT = {
           step('Weil das Einkommen sinkt, ist der tatsächliche Anstieg der aggregierten Ersparnis viel kleiner als beabsichtigt.')
         ],
         'Mehr gewünschtes Sparen drückt die Nachfrage; das niedrigere Einkommen neutralisiert einen Teil des Sparversuchs.'
+      ),
+      task(
+        String.raw`Gegeben seien $c_1 = 0{,}75$, $\Delta G = +30$ und $\Delta T = +30$. Wie groß ist der Nettoeffekt auf $Y$?`,
+        [
+          step('Berechne die Teilwirkungen separat: Ausgaben- und Steuermultiplikator.', String.raw`\frac{\partial Y}{\partial G}=\frac{1}{1-c_1}=4,\; \frac{\partial Y}{\partial T}=-\frac{c_1}{1-c_1}=-3`),
+          step('Wende beide Impulse an.', String.raw`\Delta Y_G = 4\cdot 30 = 120,\; \Delta Y_T = -3\cdot 30 = -90`),
+          step('Addiere die Effekte und deute die Logik.', String.raw`\Delta Y = 120 - 90 = 30`)
+        ],
+        String.raw`Der Nettoeffekt beträgt $+30$: gleich hohe Steuer- und Ausgabenänderungen wirken nicht symmetrisch, weil Steuern nur über Konsumquote in die Nachfrage laufen.`
       )
     ]
   },
@@ -342,6 +352,16 @@ export const CONTENT = {
           step('Damit der Gütermarkt wieder im Gleichgewicht ist, muss die Produktion niedriger sein.')
         ],
         'Die IS-Kurve ist fallend, weil höhere Zinsen die Nachfrage und damit das Gleichgewichtseinkommen reduzieren.'
+      ),
+      task(
+        String.raw`Graph-Check (Achsen- und Bewegungsdisziplin): Im $(Y,i)$-Diagramm sinkt der Zielzins der Zentralbank. Was verschiebt sich, und was ist eine Bewegung entlang einer Kurve?`,
+        [
+          step('Die monetäre Bedingung (LM/Zinsregel) verschiebt sich nach unten.'),
+          step('Der neue Schnittpunkt mit der IS liegt bei niedrigerem i und höherem Y.'),
+          step('Eine Bewegung entlang der IS beschreibt den Übergang zwischen den Gleichgewichtspunkten nach der Zinsänderung.'),
+          step('Die IS selbst verschiebt sich erst bei Nachfragekomponenten wie G, T oder Investitionsvertrauen.')
+        ],
+        'Saubere Diagrammsprache: Zinsimpuls -> monetäre Kurve verschiebt sich; Anpassung zum neuen Gleichgewicht -> Bewegung entlang der IS.'
       )
     ]
   },
@@ -385,6 +405,34 @@ export const CONTENT = {
           step('Ökonomie: Der höhere Zins dämpft Investitionen, sodass der Produktionsanstieg kleiner ausfällt als ohne Zinsreaktion.')
         ],
         'Crowding-Out ist die teilweise Verdrängung privater Nachfrage durch den zinsbedingten Rückgang der Investitionen.'
+      ),
+      task(
+        'Eine Lösung behauptet: "Fiskalpolitik wirkt immer gleich stark, weil nur die IS-Kurve zählt." Wo liegt der Denkfehler?',
+        [
+          step('Die IS-Verschiebung ist nur der erste Teil der Analyse.'),
+          step('Die Endwirkung hängt davon ab, wie die monetäre Bedingung verläuft (horizontale Zinsregel vs. steigende LM).'),
+          step('Damit bestimmt die Zinsreaktion, ob Investitionen stabil bleiben oder teilweise verdrängt werden.')
+        ],
+        'Der Fehler ist das Ignorieren der Geldpolitik/LM-Form: dieselbe IS-Verschiebung kann sehr unterschiedliche Endeffekte erzeugen.'
+      ),
+      task(
+        String.raw`Before/After-Graphwalk: Zeichne gedanklich zwei Fälle derselben Fiskalexpansion — (A) steile LM, (B) horizontale Zinsregel. Welche Unterschiede müssen in den Endpunkten sichtbar sein?`,
+        [
+          step('In beiden Fällen verschiebt sich die IS nach rechts (gleicher Erstimpuls).'),
+          step('Fall A: steile LM -> starker Zinsanstieg, kleinerer Y-Anstieg (stärkeres Crowding-Out).'),
+          step('Fall B: horizontale Zinsregel -> kaum/kein Zinsanstieg, größerer Y-Anstieg (schwächeres Crowding-Out).'),
+          step('Die korrekte Vergleichsaussage benennt immer beide Endpunkte (Δi und ΔY), nicht nur die gemeinsame IS-Verschiebung.')
+        ],
+        'Policy-Graphkompetenz heißt: gleicher Schock, unterschiedliche Kurvengeometrie, unterschiedliche Endgleichgewichte.'
+      ),
+      task(
+        String.raw`Policy-Feasibility unter ELB: Ein negativer Finanzschock erhöht die Risikoprämie um 4 Prozentpunkte. Die Zentralbank möchte den Realzins stark senken, stößt aber bei $i=0$ an die effektive Zinsuntergrenze. Erwartete Inflation fällt gleichzeitig auf $0\%$. Welche Stabilisierungsgrenze folgt daraus?`,
+        [
+          step(String.raw`An der ELB gilt nominal $i \ge 0$, also maximal expansiv ist näherungsweise $r \approx -\pi^e$.`),
+          step('Wenn erwartete Inflation nahe null liegt, ist der minimal erreichbare Realzins kaum negativ und der geldpolitische Spielraum klein.'),
+          step('Bei gleichzeitig steigender Risikoprämie bleibt der relevante Kreditzins hoch; eine reine Zinssteuerung stabilisiert die Nachfrage dann nur unvollständig.')
+        ],
+        'ELB + niedrige Inflationserwartungen begrenzen die geldpolitische Gegenreaktion; zur Stabilisierung werden typischerweise zusätzliche fiskalische Impulse benötigt.'
       )
     ]
   },
@@ -430,6 +478,25 @@ export const CONTENT = {
           step('Höhere Finanzierungskosten senken Investitionen und verschieben die IS-Kurve nach links.')
         ],
         'Nicht der Leitzins allein, sondern der Kreditzins entscheidet über die Investitionsnachfrage.'
+      ),
+      task(
+        String.raw`Gegeben: Leitzins bleibt bei $3\%$, erwartete Inflation sinkt von $2\%$ auf $1\%$, Risikoprämie steigt von $1\%$ auf $2\%$. Wie verändert sich der Kreditzins in realer Rechnung?`,
+        [
+          step('Berechne den anfänglichen nominalen Kreditzins.', String.raw`i_L^0 = 3\% + 1\% = 4\%`),
+          step('Berechne den neuen nominalen Kreditzins.', String.raw`i_L^1 = 3\% + 2\% = 5\%`),
+          step('Ziehe erwartete Inflation ab.', String.raw`r_L^0 \approx 4\%-2\%=2\%,\; r_L^1 \approx 5\%-1\%=4\%`)
+        ],
+        'Der real relevante Kreditzins steigt stark (von 2% auf 4%): Doppelbremse aus höherer Prämie und niedrigeren Inflationserwartungen.'
+      ),
+      task(
+        String.raw`Mini-Case Finanzkrisentransmission: Ein TED-ähnlicher Spread steigt sprunghaft, obwohl der Leitzins unverändert bleibt. Erkläre die Kette von der Finanzmarktstörung bis zur Realwirtschaft im erweiterten IS-LM-Rahmen.`,
+        [
+          step('Der höhere Spread signalisiert steigende Risiko- bzw. Liquiditätsprämien im Kreditkanal.'),
+          step(String.raw`Damit steigt der relevante Kreditzins $i_L=i+x$ bzw. real $r_L \approx i + x - \pi^e$.`),
+          step('Höhere Finanzierungskosten senken Investitionen; die IS-Kurve verschiebt sich nach links und Output/Beschäftigung geraten unter Druck.'),
+          step('Wenn ELB oder fallende Inflationserwartungen die Realzinssenkung begrenzen, bleibt der Schock ohne zusätzliche Stabilisierungsinstrumente besonders hartnäckig.')
+        ],
+        'Krisentransmission läuft über den Kreditaufschlag: Spread hoch -> realer Kreditzins hoch -> I runter -> IS nach links -> Rezessionsdruck.'
       )
     ]
   },
@@ -522,6 +589,34 @@ export const CONTENT = {
           step('Die gesamte kurzfristige Phillipskurve liegt deshalb höher.')
         ],
         'Höhere Inflationserwartungen erhöhen die Inflationsrate bei jeder gegebenen Arbeitslosenquote.'
+      ),
+      task(
+        String.raw`Trap-Check: "Wenn die Arbeitslosigkeit bei 6% liegt, muss die Inflation fallen." Warum ist diese Aussage ohne Zusatzinfo unvollständig?`,
+        [
+          step('Für die Richtung zählt nicht das Niveau von $u$ allein, sondern die Lücke zu $u_n$.'),
+          step('Nur wenn $u > u_n$, ist der Inflationsdruck negativ.'),
+          step('Ohne Angabe von $u_n$ (oder äquivalenter Information) ist keine eindeutige Richtungsdiagnose möglich.')
+        ],
+        String.raw`Aussagen über Inflationsrichtung brauchen die Arbeitslosenlücke $u-u_n$, nicht nur den absoluten Wert von $u$.`
+      ),
+      task(
+        String.raw`Graph-Shift-vs-Movement: In der Phillips-Grafik steigen Inflationserwartungen bei unverändertem $u$. Was ist eine Kurvenverschiebung und was wäre eine Bewegung entlang derselben Kurve?`,
+        [
+          step('Höhere erwartete Inflation verschiebt die kurzfristige Phillipskurve nach oben.'),
+          step('Bei gleichem u liegt der neue Punkt auf einer höheren Kurve (keine Bewegung auf der alten Kurve).'),
+          step('Eine Bewegung entlang derselben Phillipskurve entsteht dagegen durch Veränderung von u bei konstanten Erwartungen.'),
+          step('Damit trennt man Erwartungsschocks (Kurvenlage) von Konjunkturbewegungen (Punkt auf Kurve).')
+        ],
+        'Diagrammregel: Erwartungsänderung -> Shift; Arbeitslosenänderung bei gegebenen Erwartungen -> Movement.'
+      ),
+      task(
+        String.raw`Erwartungsregime-Check: Vergleiche zwei Situationen — (A) fest verankerte Erwartungen ($\theta \approx 0$), (B) adaptive Erwartungen ($\theta \approx 1$). Welche Zielgröße wird bei sinkender Arbeitslosigkeit jeweils primär bewegt: Inflationsniveau oder Inflationsänderung?`,
+        [
+          step(String.raw`Bei $\theta \approx 0$ gilt näherungsweise die Level-Logik: $u \downarrow$ erhöht vor allem das Inflationsniveau relativ zum Anker.`),
+          step(String.raw`Bei $\theta \approx 1$ gilt die Beschleunigungslogik: $u \downarrow$ erhöht vor allem $\pi_t-\pi_{t-1}$ (Inflationsänderung).`),
+          step('Prüfe deshalb in Klausuren immer zuerst, welches Erwartungsregime die Aufgabe vorgibt, bevor du die Richtung der Inflationsantwort formulierst.')
+        ],
+        'Anker-Regime -> Niveauaussage; adaptives Regime -> Änderungsaussage (Beschleunigung/Verlangsamung).'
       )
     ]
   },
@@ -616,3 +711,7 @@ export const CONTENT = {
     ]
   }
 };
+
+CONTENT.realzins_fisher_erwartungen = CONTENT.realzins;
+CONTENT.realzins_risikopraemie_krisenkanal = CONTENT.realzins;
+delete CONTENT.realzins;

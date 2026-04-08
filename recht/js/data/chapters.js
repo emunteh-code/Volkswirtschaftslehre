@@ -23,14 +23,16 @@ export const CHAPTERS = [
   { id: 'privatrecht', title: 'Privatrecht und BGB-Struktur', cat: 'Grundlagen', short: 'BGB' },
   { id: 'methodik', title: 'Juristische Methodik und Gutachtenstil', cat: 'Grundlagen', short: 'Methodik' },
   { id: 'willenserklaerung', title: 'Willenserklärung und Vertragsschluss', cat: 'Vertrag', short: 'Vertrag' },
-  { id: 'dissens_anfechtung', title: 'Dissens und Anfechtung', cat: 'Vertrag', short: 'Anfechtung' },
+  { id: 'dissens', title: 'Dissens', cat: 'Vertrag', short: 'Dissens' },
+  { id: 'anfechtung', title: 'Anfechtung', cat: 'Vertrag', short: 'Anfechtung' },
   { id: 'trennung_abstraktion', title: 'Trennungs- und Abstraktionsprinzip', cat: 'Vertrag', short: 'Abstraktion' },
   { id: 'geschaeftsfaehigkeit', title: 'Rechts- und Geschäftsfähigkeit', cat: 'Personen & Zurechnung', short: 'Fähigkeit' },
   { id: 'stellvertretung', title: 'Stellvertretung', cat: 'Personen & Zurechnung', short: 'Vertretung' },
   { id: 'agb', title: 'AGB-Recht', cat: 'Personen & Zurechnung', short: 'AGB' },
   { id: 'schuldrecht_intro', title: 'Schuldrecht AT: Grundlagen', cat: 'Schuldrecht AT', short: 'Schuldrecht' },
   { id: 'schadensersatz', title: 'Schuldrecht AT: Schadensersatz', cat: 'Schuldrecht AT', short: 'SE' },
-  { id: 'ruecktritt_widerruf', title: 'Rücktritt und Verbraucherwiderruf', cat: 'Schuldrecht AT', short: 'Rücktritt' }
+  { id: 'ruecktritt', title: 'Rücktritt', cat: 'Schuldrecht AT', short: 'Rücktritt' },
+  { id: 'verbraucherwiderruf', title: 'Verbraucherwiderruf', cat: 'Schuldrecht AT', short: 'Widerruf' }
 ];
 
 export const CONTENT = {
@@ -157,6 +159,26 @@ export const CONTENT = {
           step('Seine Funktion erklären.', String.raw`\text{Nur die Subsumtion verbindet Tatbestandsmerkmal und konkrete Tatsachen.}`)
         ],
         'Ohne Subsumtion bleibt unklar, ob und warum der Sachverhalt die Norm wirklich erfüllt.'
+      ),
+      task(
+        'Mini-Case (Gutachtenstil): K verlangt von V Rückzahlung des Kaufpreises, weil die gelieferte Sache mangelhaft ist. Wie baust du eine strukturfeste Erstprüfung auf, bevor du Details diskutierst?',
+        [
+          step('Issue: Anspruchsfrage präzisieren.', String.raw`\text{Wer will was von wem woraus?}`),
+          step('Rule: Naheliegende Anspruchsgrundlage benennen und Tatbestandsmerkmale gliedern.'),
+          step('Subsumption: Jeden relevanten Sachverhaltsbaustein einem Merkmal zuordnen.'),
+          step('Result: Zwischenergebnis klar formulieren und erst dann zur nächsten Anspruchsstufe übergehen.')
+        ],
+        'Struktur vor Detail: Eine saubere IRSR-Kette (Issue/Rule/Subsumption/Result) verhindert methodische Sprünge und macht die Lösung klausurfest.'
+      ),
+      task(
+        'Chain-Mini-Case (Anspruchsaufbau): K will von V primär Lieferung, hilfsweise Rücktritt und zusätzlich Schadensersatz. Wie vermeidest du im Gutachtenstil das Vermischen von Tatbestand, Rechtsfolge und Konkurrenz der Anspruchsziele?',
+        [
+          step('Issue: Primäres Anspruchsziel und Hilfsziele getrennt formulieren.'),
+          step('Rule: Für jedes Ziel eigene Anspruchsgrundlage und Tatbestandsmerkmale aufbauen.'),
+          step('Subsumption: Merkmale je Schiene vollständig prüfen; keine Rechtsfolge vorziehen.'),
+          step('Result: Zwischenergebnisse pro Anspruchsebene notieren und erst am Ende Konkurrenz/Alternativen ordnen.')
+        ],
+        'Klausurdisziplin heißt Kettenführung: Jeder Anspruch wird vollständig geprüft, bevor zur nächsten Rechtsfolgeebene gewechselt wird.'
       )
     ]
   },
@@ -245,6 +267,26 @@ export const CONTENT = {
           step('Rechtsfolgen vollständig darstellen.', String.raw`\text{Nichtigkeit ex tunc plus möglicher Vertrauensschaden nach § 122 BGB.}`)
         ],
         'Eine erfolgreiche Anfechtung verlangt mehr als nur einen Irrtum. Erklärung, Frist und Rechtsfolgen gehören zwingend zur vollständigen Lösung.'
+      ),
+      task(
+        'Trap-Mini-Case: A bietet „50 Kisten“ an, meint aber innerlich „15 Kisten“. B nimmt „50 Kisten“ an. Welche methodische Reihenfolge ist richtig, um Dissens- und Anfechtungsfehler zu vermeiden?',
+        [
+          step('Zuerst objektive Erklärungslage prüfen (Auslegung, Konsensfrage).'),
+          step('Wenn objektiv Konsens vorliegt, nicht beim Dissens stehen bleiben, sondern Anfechtungsebene öffnen.'),
+          step('Anfechtungsgrund, Erklärung und Frist vollständig prüfen.'),
+          step('Rechtsfolge inklusive möglicher § 122 BGB-Folge sauber anschließen.')
+        ],
+        'Klausurregel: Dissens prüft Einigungslage, Anfechtung korrigiert den zunächst wirksamen Konsens.'
+      ),
+      task(
+        'Subsumtions-Mini-Case: E verkauft ein Buch für 700 EUR, irrt sich über dessen Eigenschaft als Erstauflage und ficht später an. Welche mehrstufige Prüfung trennt Anspruch aus Vertrag und § 122 BGB sauber?',
+        [
+          step('Zuerst vertraglichen Primäranspruch aufbauen (Vertragsschluss als Tatbestand).'),
+          step('Dann prüfen, ob der Anspruch wegen wirksamer Anfechtung untergeht (Tatbestand der Anfechtung vollständig).'),
+          step('Erst danach § 122 BGB als eigene Anspruchsschiene eröffnen und Vertrauensschaden subsumieren.'),
+          step('Begrenzung auf positives Interesse in der Rechtsfolge von § 122 BGB separat prüfen.')
+        ],
+        'Tatbestandsklarheit: Vertragsebene, Anfechtungsebene und § 122-Rechtsfolge dürfen nicht in einem Mischschritt aufgehen.'
       )
     ]
   },
@@ -375,6 +417,26 @@ export const CONTENT = {
           step('Rechtsfolge erläutern.', String.raw`\text{Fehlt Offenkundigkeit, wird regelmäßig der Handelnde selbst verpflichtet.}`)
         ],
         'Offenkundigkeit schützt vor verdeckter Risikoverschiebung. Der Dritte soll erkennen können, wem die Erklärung zugerechnet werden soll.'
+      ),
+      task(
+        'Doctrinal Distinction Case: S übermittelt nur wörtlich die Nachricht des Chefs („Verkauf für 10.000 €“), ohne eigene Entscheidungsmacht. Warum ist das regelmäßig Boten- und nicht Vertreterkonstellation, und was folgt für die Prüfung?',
+        [
+          step('Issue: Eigene Willenserklärung oder reine Übermittlung?'),
+          step('Rule: Vertreter gibt eigene Erklärung ab; Bote überbringt fremde Erklärung.'),
+          step('Subsumption: Ohne Entscheidungsspielraum liegt typischerweise Botenstellung vor.'),
+          step('Result: Zurechnung läuft über den Geschäftsherrn als Erklärenden; Vertretungsmachtsprüfung tritt zurück.')
+        ],
+        'Die Vertreter-Boten-Abgrenzung ist ein Kerntrap: Erst Erklärungstyp klären, dann erst Vertretungsmachtfragen.'
+      ),
+      task(
+        'Mehrschrittfall Stellvertretung: A unterschreibt im Laden nur mit seinem Namen, erwähnt die GmbH nicht und hatte intern keine wirksame Vollmacht. Wie gehst du in der Klausurkette vor?',
+        [
+          step('Issue: Zuerst Offenkundigkeit nach objektivem Empfängerhorizont prüfen.'),
+          step('Rule: Fehlt erkennbares Handeln in fremdem Namen, bindet der Vertrag regelmäßig den Handelnden selbst.'),
+          step('Subsumption: Nur wenn Offenkundigkeit bejaht wird, Vertretungsmacht prüfen; bei Fehlen Genehmigung/§ 179 BGB als Folgeebene öffnen.'),
+          step('Result: Vertragspartner und ggf. Haftungsadressat getrennt ausweisen (Tatbestandsebene vs. Rechtsfolgeebene).')
+        ],
+        'Stellvertretungsfälle werden robust, wenn Offenkundigkeit, Vertretungsmacht und § 179-Folge strikt nacheinander geprüft werden.'
       )
     ]
   },
@@ -541,8 +603,38 @@ export const CONTENT = {
           step('Verbraucherschutzlage erkennen.', String.raw`\text{Beim Fernabsatz kommt vielmehr der Widerruf in Betracht.}`)
         ],
         'Ohne Leistungsstörung spricht der Fall eher für einen Verbraucherwiderruf als für einen Rücktritt.'
+      ),
+      task(
+        'Issue-Spotting Mini-Case: V liefert verspätet und zudem mangelhaft; K ist Verbraucher im Fernabsatz. Welche Reihenfolge hilft, Rücktritt, Widerruf und Schadensersatz nicht zu vermischen?',
+        [
+          step('Zuerst Anspruchsziele trennen: Lösung vom Vertrag vs. Ersatz von Schäden.'),
+          step('Dann Anknüpfungspunkte trennen: Leistungsstörung (Rücktritt/SE) vs. Verbraucherschutzlage (Widerruf).'),
+          step('Für jede Schiene Tatbestandsvoraussetzungen separat prüfen (inkl. Frist-/Formfragen).'),
+          step('Ergebnisse am Ende zusammenführen und Konkurrenz/Alternativen sauber benennen.')
+        ],
+        'Struktur-first verhindert Standardfehler: Rücktritt und Widerruf sind keine austauschbaren „Rückgängigmacher“, sondern unterschiedliche Institute mit eigenem Tatbestand.'
+      ),
+      task(
+        'Tatbestand-vs-Rechtsfolge Drillcase: K erklärt nach Online-Kauf fristgerecht den Widerruf; parallel ist die Ware mangelhaft. Wie prüfst du, ohne Rückgewährfolgen vorzeitig als Tatbestandsmerkmal zu behandeln?',
+        [
+          step('Issue: Widerrufs- und Rücktrittspfad getrennt eröffnen, bevor Rechtsfolgen diskutiert werden.'),
+          step('Rule: Tatbestand Widerruf (Vertragstyp, Verbraucher/Unternehmer, Erklärung, Frist) und Tatbestand Rücktritt (Störung/Fristsetzung) eigenständig prüfen.'),
+          step('Subsumption: Nur erfüllte Tatbestände tragen das jeweilige Gestaltungsrecht.'),
+          step('Result: Rückgewähr- und ggf. Wertersatzfolgen erst danach als Rechtsfolgeebene anschließen.')
+        ],
+        'Exam trap: Rückgewähr ist nicht Tatbestand, sondern Folge eines wirksam ausgeübten Gestaltungsrechts.'
       )
     ]
   }
 };
+
+// Granularity pass 1 (recht): keep existing legal learning objects intact while
+// exposing conservative split nodes for navigation/analytics.
+CONTENT.dissens = CONTENT.dissens_anfechtung;
+CONTENT.anfechtung = CONTENT.dissens_anfechtung;
+delete CONTENT.dissens_anfechtung;
+
+CONTENT.ruecktritt = CONTENT.ruecktritt_widerruf;
+CONTENT.verbraucherwiderruf = CONTENT.ruecktritt_widerruf;
+delete CONTENT.ruecktritt_widerruf;
 

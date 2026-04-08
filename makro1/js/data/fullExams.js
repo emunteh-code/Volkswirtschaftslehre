@@ -285,7 +285,7 @@ export const FULL_EXAMS = {
             )
           )
         ],
-        'realzins'
+        'realzins_risikopraemie_krisenkanal'
       )
     ]
   },

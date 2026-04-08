@@ -40,7 +40,8 @@ export const MAKRO2_CONCEPT_PRIMARY_REFS = {
   aggregierte_pf: ['coursework_text/Tutorienblatt_5.txt', 'coursework_text/Uebungsblatt_8.txt'],
   solow_basis: ['coursework_text/Tutorienblatt_6.txt', 'coursework_text/Uebungsblatt_9.txt'],
   tech_fortschritt: ['coursework_text/Uebungsblatt_10.txt', 'coursework_text/Tutorienblatt_6.txt'],
-  schuldenquote: ['coursework_text/Uebungsblatt_6.txt']
+  schuldenquote_dynamik: ['coursework_text/Uebungsblatt_6.txt'],
+  schuldenfinanzierung_monetarisierung: ['coursework_text/Uebungsblatt_6.txt']
 };
 
 const NOTES_THEORY =

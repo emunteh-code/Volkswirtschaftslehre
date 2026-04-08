@@ -124,6 +124,127 @@ export const MODULE_CONTENT = {
       "Das Modul hat eine belastbare Aufgaben- und Klausurbasis fuer ein vollwertiges Makro-I-Live-Portal mit Diagramm- und Rechenfokus."
     ]
   },
+  mikro1: {
+    stageLabel: "Kursportal",
+    sourceMethod:
+      "Die Portal-Konzeptanker fuer Mikro I beziehen sich auf die im Ordner Mikrooekonomik I bereitgestellten Vorlesungsfolien Mikro_1_VL_1.pdf bis Mikro_1_VL_18.pdf (plus Mikro_1_VL_5_EmpirischeElastizitaeten.pdf), die Vorlesungsplanung SS 2025 und ausgewaehlte PDFs unter Weitere_Unterlagen.",
+    coverageStatus:
+      "Der Quellordner enthaelt eine vollstaendige VL-Reihe mit klar titelierten Programmfolien (Haushalt, Dualitaet, Slutsky, Wohlfahrtseffekte, Unternehmen, Wettbewerb, Monopol). Zusaetzliche Einzel-PDFs (z. B. Slutsky, Cobb-Douglas/CES-Produktion) ergaenzen spezielle Punkte; sie sind im Portal nicht flaechendeckend als Primaeranker verdrahtet.",
+    portalGoal:
+      "Das benchmark-Modul Mikro I bleibt erklaerungs- und drillstark; Primaerpfade verbinden Konzepte dort, wo die VL-Folien den Stoff eindeutig tragen.",
+    audit: [
+      { label: "Vorlesungsfolien", value: "Mikro_1_VL_1.pdf bis Mikro_1_VL_18.pdf" },
+      { label: "Zusatzfolie", value: "Mikro_1_VL_5_EmpirischeElastizitaeten.pdf" },
+      { label: "Planung", value: "Vorlesungsplanung_Mikrooekonomik_I.pdf (Terminplan SS 2025)" },
+      { label: "Ergänzungen", value: "Weitere_Unterlagen (u. a. Slutsky-, Nutzenänderungs-, CD/CES-Produktions-PDFs)" }
+    ],
+    sourceGroups: [
+      {
+        title: "Vorlesungsfolien (Mikro I)",
+        body: "Hauptquelle fuer kursnahe Definitionen und Standardherleitungen: nummerierte VL-PDFs unter Vorlesungsfolien/. Die ersten Seiten jedes Dokuments nennen das Tagesprogramm und Literaturhinweise (Varian, teils Breyer).",
+        sources: [
+          "Vorlesungsfolien/Mikro_1_VL_1.pdf bis Vorlesungsfolien/Mikro_1_VL_18.pdf",
+          "Vorlesungsfolien/Mikro_1_VL_5_EmpirischeElastizitaeten.pdf"
+        ]
+      },
+      {
+        title: "Vorlesungsplanung",
+        body: "Vorlesungsplanung_Mikrooekonomik_I.pdf listet fuer das Sommersemester 2025 die Zuordnung von Kalenderwochen zu VL-Nummern (1–18, optional 19 als Fragestunde). Sie ersetzt keine inhaltliche Themenmatrix.",
+        sources: ["Weitere_Unterlagen/Vorlesungsplanung_Mikrooekonomik_I.pdf"]
+      },
+      {
+        title: "Weitere Unterlagen und Probeklausur",
+        body: "Ergänzende PDFs zu Einzelthemen (Slutsky, Nutzenänderungen, AEE, Klausurtext ohne echten Text) sowie die Unterlage Probeklausur/ mit Bilddateien; nicht automatisch als Primaeranker pro Portal-Konzept gesetzt.",
+        sources: [
+          "Weitere_Unterlagen/Breyer_Slutsky.pdf",
+          "Weitere_Unterlagen/Demmler_Slutsky.pdf",
+          "Weitere_Unterlagen/Preis\u00e4nderungNutzen\u00e4nderung_25.pdf",
+          "Weitere_Unterlagen/CobbDouglas_CES.pdf",
+          "Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf",
+          "Probeklausur/*.JPG"
+        ]
+      }
+    ],
+    roadmap: [
+      {
+        title: "VL 1 — Einführung, Haushaltstheorie, Budgetbeschränkung",
+        body: "Programmfolie nennt Haushaltstheorie und Budgetbeschränkung (Varian Kap. 2); im Fliesstext der Folien: Konsummöglichkeitenmenge und Budgetmenge.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_1.pdf"]
+      },
+      {
+        title: "VL 2 — Präferenzen, Nutzen, Indifferenzkurven, GRS, Exkurs Lagrange",
+        body: "Formale Präferenzrelation, Nutzenfunktionen, IK, Grenzrate der Substitution; Exkurs Maximierung unter Nebenbedingung.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_2.pdf"]
+      },
+      {
+        title: "VL 3 — Substitutionselastizität, homothetische Nutzenfunktionen, graphisches Optimum",
+        body: "Substitutionselastizität σ, Homothetie, graphische Bestimmung des optimalen Konsumbündels.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_3.pdf"]
+      },
+      {
+        title: "VL 4 — Marshallsche Nachfrage, Cobb-Douglas- und CES-Beispiele",
+        body: "Allgemeine Herleitung der Marshallschen Nachfrage; Nutzenmaximierung mit Cobb-Douglas und CES.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_4.pdf"]
+      },
+      {
+        title: "VL 5 — Einkommens- und Preisänderungen, Marshall-Kurven; VL 5b empirische Elastizitäten",
+        body: "Einkommens-Konsum-Kurven, Engelkurven, Preis-Konsum-Kurven und Marshallsche Nachfragekurven; separate Folie mit empirischen Elastizitätsbeispielen.",
+        sources: [
+          "Vorlesungsfolien/Mikro_1_VL_5.pdf",
+          "Vorlesungsfolien/Mikro_1_VL_5_EmpirischeElastizitaeten.pdf"
+        ]
+      },
+      {
+        title: "VL 6 — Ausgabenminimierung, Hicks, Ausgaben- und indirekte Nutzenfunktion",
+        body: "Dualität: Ausgabenminimierung, Hickssche Nachfrage, Ausgabenfunktion und Shephards Lemma, indirekte Nutzenfunktion und Roys Identität (Breyer 4.3.1/4.3.2).",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_6.pdf"]
+      },
+      {
+        title: "VL 7–8 — Slutsky, Sonderfälle, Anfangsausstattung, Brücke zum Arbeitsangebot",
+        body: "VL 7: Einkommens- und Substitutionseffekt, Slutsky-Gleichung. VL 8: Leontief und quasilineare Nutzenfunktion, Slutsky bei Güterausstattung, Ausblick Arbeitsangebot.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_7.pdf", "Vorlesungsfolien/Mikro_1_VL_8.pdf"]
+      },
+      {
+        title: "VL 9 — Arbeitsangebot",
+        body: "Freizeitnachfrage, Substitutionseffekt und Einkommenseffekt, Lohnänderung und Arbeitsangebot.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_9.pdf"]
+      },
+      {
+        title: "VL 10 — CV, EV, Konsumentenrente",
+        body: "Kompensierende und äquivalente Variation, Änderung der Konsumentenrente, Vergleich der Nutzenmaße.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_10.pdf"]
+      },
+      {
+        title: "VL 11–12 — Produktionstechnologie, Skalenerträge, Kostenminimierung",
+        body: "VL 11: Produktionsfunktion, homogene Funktionen, proportionale Inputvariation. VL 12: Kostenminimierung, bedingte Faktornachfragen, Kostenfunktionen, GRTS.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_11.pdf", "Vorlesungsfolien/Mikro_1_VL_12.pdf"]
+      },
+      {
+        title: "VL 13–15 — Gewinnmaximierung, Angebot, kurzfristige Kostenkurven",
+        body: "VL 13: Gewinnmax, Güterangebot, unbedingte Faktornachfrage, Hotelling. VL 14: grafische Darstellung, CRS/Euler, kurzfristige Gewinnmax. VL 15: kurzfristige Kostenminimierung, kurz- und langfristige Kostenkurven.",
+        sources: [
+          "Vorlesungsfolien/Mikro_1_VL_13.pdf",
+          "Vorlesungsfolien/Mikro_1_VL_14.pdf",
+          "Vorlesungsfolien/Mikro_1_VL_15.pdf"
+        ]
+      },
+      {
+        title: "VL 16 — Wettbewerbsmarkt",
+        body: "Einzelangebot, Marktangebot, Marktnachfrage, Wettbewerbsgleichgewicht.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_16.pdf"]
+      },
+      {
+        title: "VL 17–18 — Monopol",
+        body: "VL 17: Gewinnmax im Monopol, Wohlfahrtswirkungen. VL 18: Rechenbeispiel, monopolistische Preisdiskriminierung.",
+        sources: ["Vorlesungsfolien/Mikro_1_VL_17.pdf", "Vorlesungsfolien/Mikro_1_VL_18.pdf"]
+      }
+    ],
+    qualityNotes: [
+      "Die Vorlesungsplanung dokumentiert nur Terminzuordnungen, keine detaillierte Konzept-zu-VL-Matrix.",
+      "Perfekte Substitute (lineare Nutzenfunktion) werden in den extrahierten Vorlesungsfolientexten nicht unter eindeutigem Stichwort gefunden; Primaeranker dafuer bleiben im Portal leer.",
+      "Unterlagen wie Demmler_Slutsky.pdf oder Breyer_Slutsky.pdf sind fachlich relevant, aber nicht als flaechendeckende Primaerquelle fuer alle Slutsky-Portalinhalte ohne zusaetzliche Sichtung zugewiesen."
+    ]
+  },
   makro2: {
     stageLabel: "Kursportal",
     sourceMethod: "Aufgebaut aus den Tutorien- und Uebungsblaettern zu Makrooekonomik II sowie den im Modulordner dokumentierten Aufgaben zu offener Volkswirtschaft, Wechselkursregimen, Geldpolitik, Staatsverschuldung und Wachstum.",

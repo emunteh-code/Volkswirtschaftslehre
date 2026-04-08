@@ -23,10 +23,52 @@ import { FULL_EXAMS } from './fullExams.js';
 const MODULE_SLUG = 'mikro1';
 
 /**
- * Keep references empty until curated course anchors are attached.
- * Do not invent source paths in benchmark module metadata.
+ * Primary refs are repo-relative paths under:
+ *   source-materials/Mikroökonomik I/Mikroökonomik I/
+ * Curated in provenance curation pass 1 from Vorlesungsfolien + Vorlesungsplanung (SS 2025).
+ * Concepts without a non-ambiguous match in those materials stay empty (see audit doc).
  */
-export const MIKRO1_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+const MIKRO1_PRIMARY_REFS_CURATED = {
+  kmm: ['Vorlesungsfolien/Mikro_1_VL_1.pdf'],
+  budget: ['Vorlesungsfolien/Mikro_1_VL_1.pdf'],
+  praeferenz: ['Vorlesungsfolien/Mikro_1_VL_2.pdf'],
+  indiff: ['Vorlesungsfolien/Mikro_1_VL_2.pdf'],
+  ordinal: ['Vorlesungsfolien/Mikro_1_VL_2.pdf'],
+  grs: ['Vorlesungsfolien/Mikro_1_VL_2.pdf'],
+  lagrange: ['Vorlesungsfolien/Mikro_1_VL_2.pdf', 'Vorlesungsfolien/Mikro_1_VL_4.pdf'],
+  cobbd: ['Vorlesungsfolien/Mikro_1_VL_4.pdf'],
+  ces_u: ['Vorlesungsfolien/Mikro_1_VL_3.pdf', 'Vorlesungsfolien/Mikro_1_VL_4.pdf'],
+  homothet: ['Vorlesungsfolien/Mikro_1_VL_3.pdf'],
+  hausopt: ['Vorlesungsfolien/Mikro_1_VL_3.pdf', 'Vorlesungsfolien/Mikro_1_VL_4.pdf'],
+  marshall: ['Vorlesungsfolien/Mikro_1_VL_4.pdf'],
+  elast: [
+    'Vorlesungsfolien/Mikro_1_VL_5.pdf',
+    'Vorlesungsfolien/Mikro_1_VL_5_EmpirischeElastizitaeten.pdf'
+  ],
+  normal: ['Vorlesungsfolien/Mikro_1_VL_5.pdf'],
+  hicks: ['Vorlesungsfolien/Mikro_1_VL_6.pdf'],
+  ausgaben: ['Vorlesungsfolien/Mikro_1_VL_6.pdf'],
+  shephard: ['Vorlesungsfolien/Mikro_1_VL_6.pdf'],
+  indnutzen: ['Vorlesungsfolien/Mikro_1_VL_6.pdf'],
+  lambda: ['Vorlesungsfolien/Mikro_1_VL_2.pdf', 'Vorlesungsfolien/Mikro_1_VL_4.pdf'],
+  slutsky: ['Vorlesungsfolien/Mikro_1_VL_7.pdf', 'Vorlesungsfolien/Mikro_1_VL_8.pdf'],
+  anfang: ['Vorlesungsfolien/Mikro_1_VL_8.pdf'],
+  pkomp: ['Vorlesungsfolien/Mikro_1_VL_8.pdf'],
+  arbeit: ['Vorlesungsfolien/Mikro_1_VL_9.pdf'],
+  cv_ev: ['Vorlesungsfolien/Mikro_1_VL_10.pdf'],
+  produktion: ['Vorlesungsfolien/Mikro_1_VL_11.pdf'],
+  skalener: ['Vorlesungsfolien/Mikro_1_VL_11.pdf'],
+  grts: ['Vorlesungsfolien/Mikro_1_VL_12.pdf'],
+  kosten: ['Vorlesungsfolien/Mikro_1_VL_12.pdf'],
+  gewinn: ['Vorlesungsfolien/Mikro_1_VL_13.pdf', 'Vorlesungsfolien/Mikro_1_VL_14.pdf'],
+  gk_dk: ['Vorlesungsfolien/Mikro_1_VL_15.pdf'],
+  markt: ['Vorlesungsfolien/Mikro_1_VL_16.pdf'],
+  monopol: ['Vorlesungsfolien/Mikro_1_VL_17.pdf', 'Vorlesungsfolien/Mikro_1_VL_18.pdf']
+};
+
+export const MIKRO1_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [id, MIKRO1_PRIMARY_REFS_CURATED[id] ? [...MIKRO1_PRIMARY_REFS_CURATED[id]] : []])
+);
 
 const NOTES_THEORY =
   'Mikro I theory is source-distilled and rendered through a custom semantic surface with exam-transfer enrichment.';

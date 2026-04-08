@@ -37,7 +37,16 @@ export const INTUITION = {
       { if: 'Jemand nur innerlich zustimmt', then: 'Es fehlt die Kundgabe und damit die Annahmeerklärung.' }
     ]
   ),
-  dissens_anfechtung: mk(
+  dissens: mk(
+    'Dissens heißt: Es fehlt an echter Einigung zwischen den Erklärungen.',
+    'Wenn zwei Menschen aneinander vorbeireden, entsteht kein tragfähiger Konsens.',
+    'Der Dissens-Pfad prüft, ob überhaupt ein Vertrag zustande gekommen ist.',
+    [
+      { if: 'Die Erklärungen decken sich objektiv nicht', then: 'Zuerst Dissens prüfen.' },
+      { if: 'Essentialia betroffen sind', then: 'Vertragsschluss regelmäßig verneinen.' }
+    ]
+  ),
+  anfechtung: mk(
     'Dissens heißt: Es fehlt an echter Einigung. Anfechtung heißt: Die Einigung wirkt zunächst, kann aber wieder beseitigt werden.',
     'Wenn zwei Menschen aneinander vorbeireden, gab es nie echten Konsens. Wenn einer sich verspricht, gibt es zunächst Konsens, aber mit Korrekturmöglichkeit.',
     'Der Kurs trennt diese beiden Fehlerquellen bewusst, weil sie unterschiedliche Rechtsfolgen haben.',
@@ -100,7 +109,16 @@ export const INTUITION = {
       { if: 'Nur eine Schlechtleistung vorliegt', then: 'Nicht automatisch Schadensersatz bejahen.' }
     ]
   ),
-  ruecktritt_widerruf: mk(
+  ruecktritt: mk(
+    'Rücktritt ist ein Lösungsrecht wegen Leistungsstörung im Schuldverhältnis.',
+    'Rücktritt ist wie ein Notausstieg, wenn die geschuldete Leistung ausfällt oder mangelhaft bleibt.',
+    'Der Rücktrittspfad wird durch Störung, Fristlogik und Rückgewähr bestimmt.',
+    [
+      { if: 'Leistungsstörung vorliegt', then: 'Rücktrittsvoraussetzungen zuerst prüfen.' },
+      { if: 'Fristsetzung im Fall auftaucht', then: 'Rücktritts- und Schadensersatzpfad sauber trennen.' }
+    ]
+  ),
+  verbraucherwiderruf: mk(
     'Rücktritt und Widerruf führen beide zur Lösung vom Vertrag, aber aus völlig unterschiedlichen Gründen.',
     'Rücktritt ist wie ein Notausstieg wegen Vertragsstörung; Widerruf ist eher eine gesetzliche Bedenkzeit in Schutzsituationen.',
     'Diese Zweckdifferenz steuert die ganze Fallprüfung.',

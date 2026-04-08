@@ -19,7 +19,12 @@ export const MASTERY = {
     'Schweigen, inneres Wollen und Kundgabe auseinanderhalten können',
     'Vertragsschlussfälle sicher aufbauen können'
   ],
-  dissens_anfechtung: [
+  dissens: [
+    'Offenen und versteckten Dissens sauber unterscheiden können',
+    'Die Konsensfrage methodisch vor Rechtsfolgen prüfen können',
+    'Dissensfälle von Anfechtungsfällen abgrenzen können'
+  ],
+  anfechtung: [
     'Dissens und Anfechtung klar unterscheiden können',
     'Anfechtungsgrund, Erklärung und Frist vollständig prüfen können',
     'Die Rechtsfolgen ex tunc und § 122 BGB einordnen können'
@@ -54,9 +59,14 @@ export const MASTERY = {
     'Schadensersatz neben und statt der Leistung abgrenzen können',
     'Die Rolle der Fristsetzung sicher prüfen'
   ],
-  ruecktritt_widerruf: [
-    'Rücktritt und Verbraucherwiderruf normzweckbezogen unterscheiden können',
+  ruecktritt: [
     'Rücktritt als Leistungsstörungsrecht prüfen können',
+    'Rücktrittsvoraussetzungen und Rückgewährfolge trennen können',
+    'Rücktritt und Schadensersatz systematisch abgrenzen'
+  ],
+  verbraucherwiderruf: [
+    'Rücktritt und Verbraucherwiderruf normzweckbezogen unterscheiden können',
+    'Verbraucherwiderruf als Schutzrecht mit Fristsystem prüfen können',
     'Widerruf als Verbraucherschutzinstrument sauber einordnen'
   ]
 };

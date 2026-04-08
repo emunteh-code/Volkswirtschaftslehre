@@ -766,7 +766,10 @@ function initGraph(conceptId) {
     case "wk_regime":
       drawWkRegime();
       break;
-    case "schuldenquote":
+    case "schuldenquote_dynamik":
+      drawSchuldenquote();
+      break;
+    case "schuldenfinanzierung_monetarisierung":
       drawSchuldenquote();
       break;
     case "taylor_regel":

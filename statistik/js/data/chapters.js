@@ -95,9 +95,11 @@ export const CHAPTERS = [
   { id: 'bivariat', title: 'Bivariate Analyse', cat: 'Grundlagen', short: 'Biv.' },
   { id: 'wahrscheinlichkeit', title: 'Wahrscheinlichkeitsrechnung', cat: 'Theorie', short: 'Wkt.' },
   { id: 'verteilungen', title: 'Zufallsvariablen & Verteilungen', cat: 'Theorie', short: 'Vert.' },
-  { id: 'schaetzen', title: 'Punktschätzung & Intervalle', cat: 'Induktion', short: 'Schätz.' },
+  { id: 'schaetzen_verfahren', title: 'Schätzverfahren (MoM, KQ, ML)', cat: 'Induktion', short: 'Schätz-V' },
+  { id: 'schaetzen_eigenschaften_intervalle', title: 'Schätzereigenschaften & Konfidenzintervalle', cat: 'Induktion', short: 'Schätz-EI' },
   { id: 'testen', title: 'Hypothesentests', cat: 'Induktion', short: 'Test' },
-  { id: 'regression', title: 'Lineare Regression', cat: 'Modelle', short: 'Regr.' },
+  { id: 'regression_schaetzung_inferenz', title: 'Regression: Schätzung & Inferenz', cat: 'Modelle', short: 'Regr-SI' },
+  { id: 'regression_diagnostik_prognose', title: 'Regression: Diagnostik & Prognose', cat: 'Modelle', short: 'Regr-DP' },
   { id: 'rlab', title: 'R-Statistik Praxis', cat: 'Anwendung', short: 'R' },
   { id: 'z_test', title: 'z-Test & Normalverteilungstest', cat: 'Induktion', short: 'z-Test' },
   { id: 'zwei_stichproben', title: 'Zwei-Stichproben-Tests', cat: 'Induktion', short: '2-Stpr.' },
@@ -169,6 +171,15 @@ export const CONTENT = {
           { text: `Standardabweichung:`, eq: String.raw`s = \sqrt{64{,}2} \approx 8{,}01` }
         ],
         result: String.raw`$\bar{x} = 18$, $s \approx 8{,}0$. Bei gruppierten Daten sind Mittelwert und Streuung Näherungswerte, da innerhalb einer Klasse nur die Klassenmitte bekannt ist.`
+      },
+      {
+        text: String.raw`Zwei Datensätze haben denselben Mittelwert $\bar{x}=50$: Datensatz A hat $s=5$, Datensatz B hat $s=20$. Ein dritter Datensatz C hat $\bar{x}=50$, aber einen starken Ausreißer. Welche Kombination aus Kennzahlen und kurzer Interpretation ist prüfungssicher?`,
+        steps: [
+          { text: `Gleiches Mittel heißt nicht gleiche Streuung oder gleiche Verteilungsform.`, eq: null },
+          { text: `A und B unterscheiden sich klar über die Standardabweichung; B ist deutlich heterogener.`, eq: null },
+          { text: `Bei Ausreißern muss der Median ergänzend berichtet werden, da er robuster als das Mittel ist.`, eq: null }
+        ],
+        result: String.raw`Prüfungssicher ist: Lage über Mittelwert/Median, Streuung über $s$ (oder IQR), plus kurzer Hinweis auf Ausreißerempfindlichkeit. "Gleicher Mittelwert" allein ist inhaltlich zu schwach.`
       }
     ]
   },
@@ -298,6 +309,25 @@ export const CONTENT = {
           { text: `Entscheidung: $p < \alpha = 0{,}05$.`, eq: String.raw`p < 0{,}05 \implies H_0 \text{ ablehnen (gerade noch signifikant)}` }
         ],
         result: String.raw`$p_{zweiseitig} < 0{,}05$: $H_0$ wird auf dem $5\%$-Niveau abgelehnt. Der p-Wert misst die Wahrscheinlichkeit, unter $H_0$ ein so extremes oder extremeres Ergebnis zu erhalten — er ist kein Maß für die Wahr­scheinlichkeit der Nullhypothese selbst.`
+      },
+      {
+        text: String.raw`Eine Studie fragt explizit: "Ist der neue Lernansatz besser?" Formulieren Sie die passende Alternativhypothese, nennen Sie den Testtyp (ein- oder zweiseitig) und erklären Sie die Hauptrisiken einer falschen Richtungsauswahl.`,
+        steps: [
+          { text: `Bei gerichteter Forschungsfrage "besser" ist die natürliche Alternative rechtsseitig:`, eq: String.raw`H_1:\mu_{\text{neu}} > \mu_{\text{alt}}` },
+          { text: `Ein zweiseitiger Test wäre konservativer, verteilt aber $\alpha$ auf beide Flanken.`, eq: null },
+          { text: `Wird die Richtung ex post angepasst, steigt das Fehlentscheidungsrisiko (p-Hacking/Alpha-Inflation).`, eq: null }
+        ],
+        result: String.raw`Die Testseite muss vor Datensichtung aus der Fragestellung folgen. Richtung nachträglich wählen ist methodisch unzulässig und verzerrt die Evidenz.`
+      },
+      {
+        text: String.raw`Testauswahl unter Zeitdruck: Ordnen Sie jeder Situation den passenden Testtyp zu und begründen Sie kurz. (1) Anteil defekter Teile gegen Sollwert $\pi_0$. (2) Mittelwertvergleich von drei unabhängigen Gruppen. (3) Vorher/Nachher-Messung derselben Personen.`,
+        steps: [
+          { text: `(1) Anteil gegen Referenzwert:`, eq: String.raw`\text{Binomial-/Anteilstest für } H_0:\pi=\pi_0` },
+          { text: `(2) Drei Gruppenmittelwerte gleichzeitig:`, eq: String.raw`\text{ANOVA-}F\text{-Test statt multipler Einzeltests}` },
+          { text: `(3) Paarstruktur vorhanden:`, eq: String.raw`\text{Verbundener t-Test auf Differenzen } D_i` },
+          { text: `Trap-Hinweis:`, eq: String.raw`Falsche Testfamilie erzeugt fehlerhafte p-Werte und schwache Entscheidungen.` }
+        ],
+        result: String.raw`Saubere Testwahl folgt aus Datentyp, Gruppenstruktur und Fragestellung. Diese Zuordnung ist klausurrelevant, bevor überhaupt gerechnet wird.`
       }
     ]
   },
@@ -520,6 +550,26 @@ export const CONTENT = {
           { text: `Vergleich mit $95\%$-KI ($z = 1{,}96$):`, eq: String.raw`95\%\text{-KI}: 80 \pm 1{,}96 \cdot 4 = [72{,}2;\; 87{,}8] \quad \text{(schmaler)}` }
         ],
         result: String.raw`$99\%$-KI: $[69{,}7;\; 90{,}3]$. Das $99\%$-Intervall ist breiter als das $95\%$-Intervall: Mehr Sicherheit kostet Präzision. Für höhere Konfidenzniveaus muss man bereit sein, ein ungenaueres (breiteres) Intervall zu akzeptieren.`
+      },
+      {
+        text: String.raw`Methodenvergleich (MoM vs. ML): Für eine Bernoulli-Variable mit $n=200$ Beobachtungen und $76$ Erfolgen soll $\pi$ geschätzt werden. Bestimmen Sie den Momentenschätzer und den Maximum-Likelihood-Schätzer und interpretieren Sie das Ergebnis.`,
+        steps: [
+          { text: `Stichprobenanteil als 1. Moment der Bernoulli-Verteilung:`, eq: String.raw`\bar{X} = \frac{76}{200} = 0{,}38` },
+          { text: `Methode der Momente: Setze $E[X]=\pi$ gleich $\bar X$.`, eq: String.raw`\hat{\pi}_{MM} = \bar{X} = 0{,}38` },
+          { text: `MLE bei Bernoulli/Binomial führt auf denselben Anteilsschätzer.`, eq: String.raw`\hat{\pi}_{ML} = \frac{76}{200} = 0{,}38` },
+          { text: `Interpretation: Schätzerwert als plausibler Erfolgsanteil in der Population.`, eq: null }
+        ],
+        result: String.raw`In diesem Standardfall liefern Methode der Momente und Maximum-Likelihood denselben Schätzwert ($0{,}38$). Prüfungsrelevant ist, die gemeinsame Logik (Stichprobeninformation) und die unterschiedliche Begründung zu trennen.`
+      },
+      {
+        text: String.raw`Bias/MSE-Drill: Für einen Schätzer $\hat\theta$ gilt $Var(\hat\theta)=4$ und $Bias(\hat\theta)=1{,}5$. Berechnen Sie den MSE und erklären Sie, warum die Varianz allein hier kein sauberer Qualitätsvergleich ist.`,
+        steps: [
+          { text: `MSE-Zerlegung verwenden:`, eq: String.raw`MSE(\hat\theta)=Var(\hat\theta)+Bias(\hat\theta)^2` },
+          { text: `Einsetzen:`, eq: String.raw`MSE = 4 + (1{,}5)^2 = 4 + 2{,}25 = 6{,}25` },
+          { text: `Interpretation:`, eq: String.raw`Ein verzerrter Schätzer kann trotz kleiner Varianz einen großen Gesamtfehler haben.` },
+          { text: `Konsequenz für Vergleiche:`, eq: String.raw`Nur bei erwartungstreuen Schätzern reicht ein Varianzvergleich aus.` }
+        ],
+        result: String.raw`$MSE=6{,}25$. Der MSE kombiniert Streuung und systematischen Fehler und ist daher die belastbare Vergleichsgröße, wenn Bias ungleich null ist.`
       }
     ]
   },
@@ -590,6 +640,26 @@ export const CONTENT = {
           { text: `GM4: Voller Rang der Regressorenmatrix (keine Multikollinearität).`, eq: String.raw`\text{rank}(X) = k \implies (X'X)^{-1} \text{ existiert}` }
         ],
         result: String.raw`Unter GM1–GM4 gilt nach dem Gauss-Markov-Theorem: $\hat{\beta}_{OLS} = (X'X)^{-1}X'y$ ist unter allen linearen erwartungstreuen Schätzern derjenige mit minimaler Varianz. Verletzungen (Heteroskedastizität $\to$ GM3, Endogenität $\to$ GM2) zerstören Effizienz bzw. Erwartungstreue und erfordern alternative Schätzer (WLS, IV/2SLS).`
+      },
+      {
+        text: String.raw`Diagnostik-Entscheidung: Ein Residuenplot zeigt einen klaren Trichter (Streuung steigt mit $x$), der QQ-Plot ist ansonsten relativ unauffällig. Was ist die naheliegende Modellwarnung und welche inferenzseitige Konsequenz ist prüfungssicher?`,
+        steps: [
+          { text: `Mustererkennung im Residuenplot:`, eq: String.raw`\text{Trichterform} \Rightarrow \text{Hinweis auf Heteroskedastizität}` },
+          { text: `Kernkonsequenz:`, eq: String.raw`OLS\text{-Koeffizienten bleiben oft unverzerrt, Standardfehler/Teste können aber verzerrt sein.}` },
+          { text: `Prüfungssichere Reaktion:`, eq: String.raw`\text{Heteroskedastizitätsrobuste Standardfehler oder angepasstes Modell berichten.}` },
+          { text: `Trap:`, eq: String.raw`Hohes }R^2\text{ behebt Diagnostikprobleme nicht.` }
+        ],
+        result: String.raw`Die Hauptaussage ist nicht "Modell verwerfen", sondern "Inferenz absichern": bei heteroskedastischen Residuen sind robuste Standardfehler bzw. eine angepasste Spezifikation zentral.`
+      },
+      {
+        text: String.raw`Konfidenz- vs. Prognoseintervall: Für dasselbe $x_0$ liefert ein Modell ein 95%-Konfidenzintervall für den Erwartungswert und ein 95%-Prognoseintervall für eine Einzelbeobachtung. Welches Intervall ist breiter und warum?`,
+        steps: [
+          { text: `Unterscheidung Zielgröße:`, eq: String.raw`CI \text{ zielt auf } E[Y|x_0],\quad PI \text{ auf eine neue Einzelrealisierung }Y_{neu}.` },
+          { text: `Zusätzliche Unsicherheitskomponente beim PI:`, eq: String.raw`PI \text{ enthält neben Schätzunsicherheit auch idiosynkratische Störung.}` },
+          { text: `Folgerung:`, eq: String.raw`PI \text{ ist bei gleichem Niveau stets breiter als } CI.` },
+          { text: `Interpretationspflicht:`, eq: null }
+        ],
+        result: String.raw`Das Prognoseintervall ist breiter, weil eine neue Beobachtung zusätzlichen Zufall enthält. Diese Unterscheidung ist zentral für saubere Ergebnisdeutung in Modellierungsaufgaben.`
       }
     ]
   },
@@ -704,6 +774,15 @@ export const CONTENT = {
           { text: `p-Wert: $P(|Z| > 0{,}894) \approx 2(1-0{,}814) = 0{,}372$.`, eq: String.raw`p \approx 0{,}37 \gg 0{,}05 \implies \text{kein signifikanter Trend}` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Die beobachtete durchschnittliche Tagesrendite von $0{,}3\%$ ist statistisch nicht von null verschieden — sie könnte rein zufällig entstanden sein. Bei $n = 20$ Tagen ist die Teststärke für kleine Effekte begrenzt.`
+      },
+      {
+        text: String.raw`Testauswahl-Fall: $\sigma$ ist unbekannt, $n=18$, die Daten wirken annähernd normal. Warum ist hier der t-Test die saubere Standardwahl und wann wird z als Approximation vertretbar?`,
+        steps: [
+          { text: `Bei unbekannter Populationsstreuung wird $\sigma$ durch $s$ ersetzt; die Teststatistik folgt dann t- statt z-Logik.`, eq: null },
+          { text: `Bei kleinem/mittlerem $n$ ist dieser Unterschied substanziell, da die t-Verteilung dickere Ränder hat.`, eq: null },
+          { text: `z-Approximation wird mit wachsendem $n$ vertretbar, weil sich t gegen z annähert.`, eq: String.raw`t_{\nu}\to z \text{ für } \nu\to\infty` }
+        ],
+        result: String.raw`Prüfungsregel: unbekanntes $\sigma$ $\Rightarrow$ t-Test als Default. z nur mit klarer Begründung (bekanntes $\sigma$ oder sehr großes $n$).`
       }
     ]
   },
@@ -771,6 +850,15 @@ export const CONTENT = {
           { text: `Entscheidung: $|t| = 1{,}209 < 2{,}048$.`, eq: String.raw`H_0: \mu_A = \mu_B \text{ nicht ablehnen bei } \alpha = 0{,}05` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Trotz der Differenz von $4$ Punkten ist der Unterschied statistisch nicht signifikant — die Streuung innerhalb der Kurse ist zu groß. Für einen machtstarken Test wäre ein größerer Stichprobenumfang nötig.`
+      },
+      {
+        text: String.raw`Testauswahl-Entscheidung: Vorher/Nachher-Messung bei denselben Personen, deutliche individuelle Baseline-Unterschiede. Welcher Test ist korrekt und warum ist ein unverbundener Test hier ein typischer Trap?`,
+        steps: [
+          { text: `Bei denselben Personen liegt eine Paarstruktur vor; analysiert werden Differenzen pro Person.`, eq: String.raw`d_i = x_{\text{vor},i} - x_{\text{nach},i}` },
+          { text: `Korrekt ist daher der verbundene t-Test auf $\bar d$.`, eq: String.raw`t = \frac{\bar d}{s_d/\sqrt{n}}` },
+          { text: `Ein unverbundener Test ignoriert die Paarinformation und bläht die Fehlervarianz.`, eq: null }
+        ],
+        result: String.raw`Der verbundene Test ist methodisch richtig und meist stärker. "Gleiche Personen, aber unverbundener Test" ist eine klassische Klausurfalle.`
       }
     ]
   },
@@ -911,3 +999,13 @@ export const CONTENT = {
     ]
   }
 };
+
+// Granularity split pass 1: preserve existing learning objects while exposing
+// finer concept-map nodes for navigation and analytics.
+CONTENT.schaetzen_verfahren = CONTENT.schaetzen;
+CONTENT.schaetzen_eigenschaften_intervalle = CONTENT.schaetzen;
+delete CONTENT.schaetzen;
+
+CONTENT.regression_schaetzung_inferenz = CONTENT.regression;
+CONTENT.regression_diagnostik_prognose = CONTENT.regression;
+delete CONTENT.regression;

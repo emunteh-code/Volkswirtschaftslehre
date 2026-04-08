@@ -8,7 +8,7 @@ import { INTUITION } from './intuition.js';
 import { ensureMinimumStepProblems } from '../../../assets/js/portal-core/data/examStepFactory.js';
 
 const BASE_STEP_PROBLEMS = {
-  spieltheorie: [
+  spieltheorie_statisch: [
     {
       title: 'Nash-Gleichgewicht in reinen Strategien',
       context: 'Zwei Firmen A und B entscheiden über hohe (H) oder niedrige (N) Preise.',
@@ -37,7 +37,29 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  oligopol: [
+  spieltheorie_dynamisch: [
+    {
+      title: 'Gemischte Strategien: Indifferenzprinzip',
+      context: '2x2-Spiel ohne reines Nash-Gleichgewicht.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welches Prinzip bestimmt die Mischwahrscheinlichkeit im 2x2-Fall?',
+          answer: ['Indifferenz', 'indifferenzbedingung', 'gegner indifferent machen'],
+          options: { problemId: 'm2_mix_1', stepId: 'mix_principle', isDecision: true },
+          hint: 'Die Gegenseite darf keine strikt bessere reine Strategie haben.',
+          explain: 'Im gemischten NG wird so gemischt, dass der Gegner zwischen seinen reinen Strategien indifferent ist.'
+        },
+        {
+          q: '[2. Decision] Wenn der kurzfristige Abweichungsgewinn hoch ist und der Diskontfaktor sehr niedrig: stabile Kooperation in Wiederholung eher ja/nein?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'm2_mix_1', stepId: 'delta_logic', dependsOn: 'mix_principle' },
+          hint: 'Niedriger Zukunftswert schwaecht Sanktionsdrohung.',
+          explain: 'Bei niedrigem Diskontfaktor ueberwiegt oft der kurzfristige Defektionsanreiz.'
+        }
+      ]
+    }
+  ],
+  oligopol_cournot_bertrand: [
     {
       title: 'Cournot-Duopol: Reaktionsfunktion',
       context: 'Marktnachfrage P = 100 - Q. Grenzkosten c = 10.',
@@ -57,9 +79,36 @@ const BASE_STEP_PROBLEMS = {
           explain: '90 - 2q1 - q2 = 0 ⟹ 2q1 = 90 - q2 ⟹ q1 = (90 - q2)/2.' 
         }
       ]
+    },
+    {
+      title: 'Cournot vs. Bertrand: Modellwahl unter Prüfungsdruck',
+      context: 'Zwei Anbieter, homogenes Gut, keine Kapazitätsgrenzen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Wenn Firmen Preise statt Mengen wählen: Welches Modell ist der Standardzugriff?',
+          answer: ['Bertrand', 'bertrand'],
+          options: { problemId: 'm2_cournot_2', stepId: 'model_pick', isDecision: true },
+          hint: 'Entscheidungsvariable identifizieren.',
+          explain: 'Preisentscheidung bei homogenem Gut ohne Kapazitätsgrenzen führt zum Bertrand-Rahmen.'
+        },
+        {
+          q: '[2. Decision] Welches Preisresultat folgt im Bertrand-Basismodell?',
+          answer: ['P=MC', 'p=mc', 'preis gleich grenzkosten'],
+          options: { problemId: 'm2_cournot_2', stepId: 'bertrand_result', dependsOn: 'model_pick' },
+          hint: 'Unterbietungslogik bis kein profitables Unterbieten mehr möglich ist.',
+          explain: 'Im Bertrand-Paradoxon fällt der Preis bis auf Grenzkosten.'
+        },
+        {
+          q: '[3. Validation] Nenne einen strukturellen Grund, warum in der Realität oft P > MC beobachtet wird.',
+          answer: ['Produktdifferenzierung', 'Kapazitätsbeschränkung', 'wiederholte interaktion'],
+          options: { problemId: 'm2_cournot_2', role: 'VALIDATION' },
+          hint: 'Suche eine Annahme, die das Bertrand-Paradoxon entschärft.',
+          explain: 'Produktdifferenzierung, Kapazitätsgrenzen oder wiederholte Interaktion halten Preise über MC.'
+        }
+      ]
     }
   ],
-  gleichgewicht: [
+  gleichgewicht_tausch: [
     {
       title: 'Edgeworth-Box: Pareto-Effizienz',
       context: 'Zwei Konsumenten A, B. uA = x1*x2, uB = x1*x2. Ausstattung (10, 10). Aktueller Punkt: A=(2,2), B=(8,8).',
@@ -81,7 +130,51 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  information: [
+  gleichgewicht_walras: [
+    {
+      title: 'Walras: Markt-Raeumung mit relativen Preisen',
+      context: 'Allgemeines Gleichgewicht mit zwei Guetern.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welche Bedingung charakterisiert Walras-Gleichgewicht zentral?',
+          answer: ['Marktraeumung', 'ueberschussnachfrage gleich null', 'z(p)=0'],
+          options: { problemId: 'm2_walras_1', stepId: 'market_clear', isDecision: true },
+          hint: 'Alle Maerkte muessen gleichzeitig geraeumt sein.',
+          explain: 'Walras-GG verlangt, dass aggregierte Ueberschussnachfrage verschwindet.'
+        },
+        {
+          q: '[2. Decision] Wenn in einer 2-Guter-Oekonomie ein Markt geraeumt ist, was folgt unter Walras-Gesetz fuer den anderen?',
+          answer: ['Er ist auch geraeumt', 'auch im gleichgewicht'],
+          options: { problemId: 'm2_walras_1', stepId: 'walras_law', dependsOn: 'market_clear' },
+          hint: 'Walrasches Gesetz reduziert die Zahl unabhaengiger Gleichungen.',
+          explain: 'In der 2-Guter-Variante reicht eine unabhaengige Marktraeumungsbedingung.'
+        }
+      ]
+    }
+  ],
+  oligopol_stackelberg: [
+    {
+      title: 'Stackelberg per Rueckwaertsinduktion',
+      context: 'Lineare Nachfrage, Firma 1 als Fuehrer, Firma 2 als Folger.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher Schritt kommt zuerst in der Loesung?',
+          answer: ['Reaktionsfunktion des Folgers', 'folgerreaktion', 'follower reaction'],
+          options: { problemId: 'm2_stack_1', stepId: 'first_step', isDecision: true },
+          hint: 'Rueckwaertsinduktion startet am Ende des Spiels.',
+          explain: 'Zuerst wird das Optimum des Folgers als Reaktionsfunktion bestimmt.'
+        },
+        {
+          q: '[2. Decision] Wird die Fuehrermenge typischerweise relativ zu Cournot hoeher oder niedriger?',
+          answer: ['hoeher', 'higher', 'mehr'],
+          options: { problemId: 'm2_stack_1', stepId: 'leader_quantity', dependsOn: 'first_step' },
+          hint: 'First-Mover internalisiert die Reaktion des Followers.',
+          explain: 'Im Standardmodell waehlt der Fuehrer eine hoehere Menge als im simultanen Cournot-Fall.'
+        }
+      ]
+    }
+  ],
+  information_adverse: [
     {
       title: 'Adverse Selection: Lemons Market',
       context: 'Gute Autos (v=5000), schlechte (v=2000). Anteil jeweils 50%.',
@@ -106,6 +199,186 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_info_1', role: 'VALIDATION' },
           hint: 'Nur schlechte Autos bleiben übrig.', 
           explain: 'Die Durchschnittsqualität sinkt auf 2000 (Adverse Selection).' 
+        }
+      ]
+    },
+    {
+      title: 'Adverse Selection vs. Moral Hazard',
+      context: 'Versicherungsmarkt mit Risiko- und Verhaltensproblemen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Versteckter Risikotyp vor Vertragsabschluss: Adverse Selection oder Moral Hazard?',
+          answer: ['Adverse Selection', 'adverse', 'negativauslese'],
+          options: { problemId: 'm2_info_2', stepId: 'type_before', isDecision: true },
+          hint: 'Zeitpunkt ist entscheidend: vor oder nach Vertrag?',
+          explain: 'Verborgene Typen vor Vertragsschluss sind adverse Selektion.'
+        },
+        {
+          q: '[2. Decision] Geringere Vorsicht nach Abschluss einer Vollkaskoversicherung ist welches Problem?',
+          answer: ['Moral Hazard', 'moral', 'verhaltensrisiko'],
+          options: { problemId: 'm2_info_2', stepId: 'type_after', dependsOn: 'type_before' },
+          hint: 'Denke an hidden action nach Vertragsbeginn.',
+          explain: 'Verhaltensanpassung nach Vertragsschluss ist Moral Hazard.'
+        },
+        {
+          q: '[3. Validation] Welches Instrument passt primär zu Adverse Selection: Signaling oder Selbstbehalt?',
+          answer: ['Signaling', 'screening', 'signaling/screening'],
+          options: { problemId: 'm2_info_2', role: 'VALIDATION' },
+          hint: 'Typtrennung statt Verhaltenssteuerung.',
+          explain: 'Adverse Selection wird über Typtrennung (Signaling/Screening) adressiert, Selbstbehalte zielen eher auf Moral Hazard.'
+        }
+      ]
+    }
+  ],
+  information_moralhazard: [
+    {
+      title: 'Moral Hazard und Instrumentenwahl',
+      context: 'Verhaltensproblem nach Vertragsschluss.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ex-post versteckte Handlung: Adverse Selection oder Moral Hazard?',
+          answer: ['Moral Hazard', 'moral', 'verhaltensrisiko'],
+          options: { problemId: 'm2_mh_1', stepId: 'problem_type', isDecision: true },
+          hint: 'Zeitpunkt nach Vertragsabschluss.',
+          explain: 'Verborgene Handlungen nach Vertragsabschluss sind Moral Hazard.'
+        },
+        {
+          q: '[2. Decision] Welches Instrument passt primaer: Selbstbehalt oder reines Zertifikat?',
+          answer: ['Selbstbehalt', 'bonus-malus', 'anreizvertrag'],
+          options: { problemId: 'm2_mh_1', stepId: 'instrument_pick', dependsOn: 'problem_type' },
+          hint: 'Das Instrument muss Verhalten beeinflussen.',
+          explain: 'Selbstbehalte, Bonus-Malus und leistungsabhaengige Vertraege steuern ex-post Verhalten.'
+        }
+      ]
+    }
+  ],
+  wohlfahrt_theoreme: [
+    {
+      title: 'Wohlfahrtstheoreme: Effizienz vs. Verteilung',
+      context: 'Prüfungsschema zu 1. und 2. Hauptsatz.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher Hauptsatz begründet: Wettbewerbsgleichgewicht ist Pareto-effizient?',
+          answer: ['1', 'erster', '1. hauptsatz'],
+          options: { problemId: 'm2_welfare_1', stepId: 'first_thm', isDecision: true },
+          hint: 'Markt -> Effizienz.',
+          explain: 'Der 1. Hauptsatz verknüpft Wettbewerbsgleichgewicht und Pareto-Effizienz.'
+        },
+        {
+          q: '[2. Decision] Welcher Hauptsatz trennt Verteilung und Effizienz über Umverteilung + Markt?',
+          answer: ['2', 'zweiter', '2. hauptsatz'],
+          options: { problemId: 'm2_welfare_1', stepId: 'second_thm', dependsOn: 'first_thm' },
+          hint: 'Geeignete Anfangsausstattung + Wettbewerb.',
+          explain: 'Der 2. Hauptsatz erlaubt, jede Pareto-effiziente Allokation als Wettbewerbsgleichgewicht zu dezentralisieren.'
+        },
+        {
+          q: '[3. Validation] Warum ist Pauschalumverteilung praktisch oft begrenzt? (ein Kernbegriff genügt)',
+          answer: ['Informationsasymmetrie', 'beobachtbarkeit', 'information'],
+          options: { problemId: 'm2_welfare_1', role: 'VALIDATION' },
+          hint: 'Der Staat kennt Ausstattungen/Fähigkeiten nicht perfekt.',
+          explain: 'Die Umverteilung via Pauschalsteuern scheitert oft an Informationsproblemen über individuelle Merkmale.'
+        }
+      ]
+    }
+  ],
+  wohlfahrt_messung: [
+    {
+      title: 'Wohlfahrtsmessung: Rawls vs. DWL',
+      context: 'Normative Regel und Effizienzmessung trennen.',
+      steps: [
+        {
+          q: '[1. Interpretation] Rawls bewertet welche Groesse?',
+          answer: ['Minimum', 'schwaechsten', 'min nutzen'],
+          options: { problemId: 'm2_welfare_2', stepId: 'rawls_rule', isDecision: true },
+          hint: 'Maximiere den Nutzen des am schlechtesten Gestellten.',
+          explain: 'Rawls orientiert sich am Minimum der individuellen Nutzen.'
+        },
+        {
+          q: '[2. Decision] DWL misst was relativ zum Wettbewerbsoptimum?',
+          answer: ['Wohlfahrtsverlust', 'effizienzverlust', 'verlust an gesamtwohlfahrt'],
+          options: { problemId: 'm2_welfare_2', stepId: 'dwl_meaning', dependsOn: 'rawls_rule' },
+          hint: 'Vergleich aus realisiertem KR+PR und Benchmark.',
+          explain: 'DWL ist der verlorene Gesamtueberschuss gegenueber dem effizienten Referenzpunkt.'
+        }
+      ]
+    }
+  ],
+  externa_pigou: [
+    {
+      title: 'Pigou-Steuer: Marktmenge vs. Sozialoptimum',
+      context: 'Negative Externalität mit linearem Grenzschaden.',
+      steps: [
+        {
+          q: '[1. Interpretation] Wie lautet die Grundbeziehung zwischen sozialen und privaten Grenzkosten?',
+          answer: ['MSC=MPC+MEC', 'msc = mpc + mec', 'msc=mpc+mec'],
+          options: { problemId: 'm2_external_1', stepId: 'msc_identity', isDecision: true },
+          hint: 'Externer Grenzschaden addiert sich auf private Grenzkosten.',
+          explain: 'Soziale Grenzkosten entsprechen privaten Grenzkosten plus externem Grenzschaden.'
+        },
+        {
+          q: '[2. Decision] Welche Menge ist typischerweise größer bei negativen Externalitäten: Q_mkt oder Q_soc?',
+          answer: ['Q_mkt', 'qmkt', 'marktmenge'],
+          options: { problemId: 'm2_external_1', stepId: 'quantity_compare', dependsOn: 'msc_identity' },
+          hint: 'Wenn externe Kosten nicht im Preis stecken, wird zu viel produziert.',
+          explain: 'Ohne Internalisierung liegt Überproduktion vor: Q_mkt > Q_soc.'
+        },
+        {
+          q: '[3. Validation] Wie wird die optimale Pigou-Steuer im Optimum definiert?',
+          answer: ['t=MEC(Q*)', 't = mec(q*)', 'grenzschaden im optimum'],
+          options: { problemId: 'm2_external_1', role: 'VALIDATION' },
+          hint: 'Steuerhöhe entspricht marginalem externen Schaden bei Q*.',
+          explain: 'Die effiziente Steuer setzt t gleich MEC im sozialen Optimum.'
+        }
+      ]
+    }
+  ],
+  externa_institutionen: [
+    {
+      title: 'Coase vs. Cap-and-Trade einordnen',
+      context: 'Institutionelle Loesungen externer Effekte.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welche Zusatzannahme braucht Coase fuer effiziente Verhandlung besonders?',
+          answer: ['niedrige transaktionskosten', 'transaktionskosten nahe null', 'klare eigentumsrechte'],
+          options: { problemId: 'm2_external_2', stepId: 'coase_assumption', isDecision: true },
+          hint: 'Ohne diese Bedingung scheitert private Aushandlung oft.',
+          explain: 'Coase braucht insbesondere geringe Transaktionskosten und klare Rechte.'
+        },
+        {
+          q: '[2. Decision] Beim Emissionshandel steuert der Staat primaer was: Preis oder Menge?',
+          answer: ['Menge', 'cap', 'emissionsmenge'],
+          options: { problemId: 'm2_external_2', stepId: 'cap_logic', dependsOn: 'coase_assumption' },
+          hint: 'Das Cap wird politisch festgelegt.',
+          explain: 'Cap-and-Trade fixiert die Gesamtmenge; der Zertifikatspreis bildet sich am Markt.'
+        }
+      ]
+    }
+  ],
+  public_goods: [
+    {
+      title: 'Samuelson-Bedingung sicher anwenden',
+      context: 'Öffentliche-Güter-Optimum und Aggregationsfalle.',
+      steps: [
+        {
+          q: '[1. Interpretation] Werden bei öffentlichen Gütern individuelle Zahlungsbereitschaften horizontal oder vertikal aggregiert?',
+          answer: ['vertikal', 'vertical'],
+          options: { problemId: 'm2_public_1', stepId: 'agg_rule', isDecision: true },
+          hint: 'Gleiche Menge, unterschiedliche Zahlungsbereitschaften.',
+          explain: 'Bei öffentlichen Gütern addiert man Zahlungsbereitschaften vertikal.'
+        },
+        {
+          q: '[2. Decision] Welche Effizienzbedingung gilt im Optimum?',
+          answer: ['sum mrs = mc', 'ΣMRS=MC', 'samuelson'],
+          options: { problemId: 'm2_public_1', stepId: 'samuelson', dependsOn: 'agg_rule' },
+          hint: 'Summe individueller Grenzbewertungen gegen Grenzkosten.',
+          explain: 'Die Samuelson-Bedingung lautet: Sum_i MRS_i = MC.'
+        },
+        {
+          q: '[3. Validation] Warum unterversorgt der Markt öffentliche Güter typischerweise?',
+          answer: ['free-riding', 'trittbrett', 'nicht-ausschließbarkeit'],
+          options: { problemId: 'm2_public_1', role: 'VALIDATION' },
+          hint: 'Individuelle Zahlungsanreize weichen vom kollektiven Nutzen ab.',
+          explain: 'Nicht-Ausschließbarkeit erzeugt Trittbrettfahren, daher wird privat zu wenig bereitgestellt.'
         }
       ]
     }

@@ -3,12 +3,14 @@
 // ============================================================
 
 export const CONCEPT_LINKS = {
-  deskriptiv:         ['bivariat', 'regression'],
-  bivariat:           ['deskriptiv', 'regression'],
+  deskriptiv:         ['bivariat', 'regression_schaetzung_inferenz'],
+  bivariat:           ['deskriptiv', 'regression_schaetzung_inferenz'],
   wahrscheinlichkeit: ['verteilungen', 'testen'],
-  verteilungen:       ['wahrscheinlichkeit', 'schaetzen'],
-  schaetzen:          ['verteilungen', 'testen'],
-  testen:             ['schaetzen', 'regression'],
-  regression:         ['bivariat', 'testen'],
-  rlab:               ['deskriptiv', 'regression']
+  verteilungen:       ['wahrscheinlichkeit', 'schaetzen_verfahren', 'schaetzen_eigenschaften_intervalle'],
+  schaetzen_verfahren: ['verteilungen', 'schaetzen_eigenschaften_intervalle', 'testen'],
+  schaetzen_eigenschaften_intervalle: ['schaetzen_verfahren', 'testen'],
+  testen:             ['schaetzen_verfahren', 'schaetzen_eigenschaften_intervalle', 'regression_schaetzung_inferenz'],
+  regression_schaetzung_inferenz: ['bivariat', 'testen', 'regression_diagnostik_prognose'],
+  regression_diagnostik_prognose: ['regression_schaetzung_inferenz'],
+  rlab:               ['deskriptiv', 'regression_schaetzung_inferenz', 'regression_diagnostik_prognose']
 };

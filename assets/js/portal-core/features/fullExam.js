@@ -4,7 +4,8 @@ import {
   defaultExamEvaluate,
   durationMinutesToLimitMs,
   EXAM_FINISH_REASON,
-  generateExamSessionId
+  generateExamSessionId,
+  mistakePartialsFromExamSummary
 } from '../exam/examSessionBackbone.js';
 
 function hexToRgba(hex, alpha) {
@@ -33,7 +34,9 @@ export function createFullExamModule({
   /** When set, generates session_id and timed metadata for the exam backbone */
   moduleSlug = null,
   /** Called once after final submission (button or timer). Receives {@link buildExamSubmittedSummary} output. */
-  onExamSubmitted = null
+  onExamSubmitted = null,
+  /** Optional learner-backbone mistake sink; only used when question objects carry concept_id/conceptId. */
+  appendMistakeLogEntry = null
 }) {
   let feState = null;
 
@@ -398,6 +401,21 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     updateDots();
     const { earned, maxPts } = calcScore();
     const summary = buildExamSubmittedSummary(feState, { moduleSlug });
+    if (summary && typeof appendMistakeLogEntry === "function" && moduleSlug) {
+      const questionById = Object.fromEntries(
+        feState.questions.map((q) => [
+          q.id,
+          {
+            concept_id:
+              (typeof q.concept_id === "string" && q.concept_id) ||
+              (typeof q.conceptId === "string" && q.conceptId) ||
+              undefined
+          }
+        ])
+      );
+      const mistakeRows = mistakePartialsFromExamSummary(summary, { moduleSlug, questionById });
+      mistakeRows.forEach((row) => appendMistakeLogEntry(row));
+    }
     if (typeof onExamSubmitted === "function" && summary) {
       try {
         onExamSubmitted(summary);

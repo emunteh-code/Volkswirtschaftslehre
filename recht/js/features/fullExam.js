@@ -4,7 +4,7 @@ import { FULL_EXAMS } from '../data/fullExams.js';
 import { toLearnerAttemptPayloadFromExamSummary } from '../../../assets/js/portal-core/exam/examSessionBackbone.js';
 import { renderMath } from '../utils/mathjax.js';
 import { showToast } from '../utils/toast.js';
-import { appendLearnerAttempt } from '../state/storage.js';
+import { appendLearnerAttempt, appendMistakeLogEntry } from '../state/storage.js';
 
 export const {
   startFullExam,
@@ -21,6 +21,7 @@ export const {
   renderMath,
   showToast,
   moduleSlug: COURSE_CONFIG.slug,
+  appendMistakeLogEntry,
   onExamSubmitted: (summary) => {
     if (!summary) return;
     appendLearnerAttempt(toLearnerAttemptPayloadFromExamSummary(summary));

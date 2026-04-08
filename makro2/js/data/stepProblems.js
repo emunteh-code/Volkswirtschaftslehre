@@ -472,7 +472,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  schuldenquote: [
+  schuldenquote_dynamik: [
     {
       title: 'Schuldenquote stabilisieren',
       context: 'b = 90%, r = 4%, g = 1%.',
@@ -641,6 +641,8 @@ const BASE_STEP_PROBLEMS = {
     }
   ]
 };
+
+BASE_STEP_PROBLEMS.schuldenfinanzierung_monetarisierung = BASE_STEP_PROBLEMS.schuldenquote_dynamik;
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,

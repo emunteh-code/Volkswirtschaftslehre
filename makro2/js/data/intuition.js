@@ -110,11 +110,17 @@ export const INTUITION = {
     'Jede heutige Steuersenkung taucht später als höhere Steuern, geringere Ausgaben oder höhere Schulden wieder auf.',
     [{ if: 'einmalige Steuersenkung', then: 'Direkt an spätere Tilgung und Zinseszins denken.' }]
   ),
-  schuldenquote: mk(
-    'Entscheidend ist nicht nur die Schuldenhöhe, sondern Schulden relativ zur Wirtschaftsleistung.',
-    'Ein 1.000-Euro-Kredit ist für einen Studierenden etwas anderes als für einen Großkonzern.',
-    'Wachstum kann die Schuldenquote entlasten; hohe Zinsen können sie hochziehen.',
-    [{ if: 'r > g', then: 'Dann arbeitet der Schneeballeffekt gegen den Staat.' }]
+  schuldenquote_dynamik: mk(
+    'Für Tragfähigkeit zählt die Schuldenquote: Zins-Wachstums-Differenz und Primärsaldo bestimmen den Pfad.',
+    'Wie ein Rollband: Wenn der Boden (g) langsamer läuft als die Gegenkraft (r), muss aktiv gegengesteuert werden.',
+    'Die Kernfrage ist Stabilisierung der Quote, nicht der absolute Schuldenstand allein.',
+    [{ if: 'r > g', then: 'Dann arbeitet der Schneeballeffekt gegen den Staat und ein Primärüberschuss wird wichtiger.' }]
+  ),
+  schuldenfinanzierung_monetarisierung: mk(
+    'Finanzierungsmodus ist eine eigene Makroentscheidung: Kreditaufnahme und Monetarisierung verteilen Lasten unterschiedlich über Zins- und Inflationskanal.',
+    'Wie zwei Wege derselben Rechnung: entweder später höhere Schuldlast oder schnellerer Preisdruck.',
+    'Monetarisierung ist kein kostenloses Entkommen aus der Budgetrestriktion, sondern ein Trade-off.',
+    [{ if: 'Monetarisierung gewählt', then: 'Zusätzlichen Inflationskanal und mittelfristige Stabilitätskosten mitprüfen.' }]
   ),
   ricardianisch: mk(
     'Ricardianische Äquivalenz sagt: Eine Steuersenkung ist kein Vermögensgeschenk, wenn Haushalte spätere Steuern voll antizipieren.',

@@ -14,16 +14,17 @@ export const CONCEPT_LINKS = {
   marshall_lerner:  { uses: ['kaufkraftparitaet', 'nettoexporte'],     usedBy: ['mundell_fleming', 'wk_regime'] },
   geldmengen:       { uses: [],                                        usedBy: ['mundell_fleming', 'taylor_regel'] },
   mundell_fleming:  { uses: ['offene_is', 'zinsparitaet', 'geldmengen', 'marshall_lerner'], usedBy: ['wk_regime', 'wk_krisen'] },
-  wk_regime:        { uses: ['mundell_fleming', 'zinsparitaet'],       usedBy: ['wk_krisen', 'schuldenquote'] },
-  wk_krisen:        { uses: ['wk_regime', 'zinsparitaet'],             usedBy: ['schuldenquote'] },
+  wk_regime:        { uses: ['mundell_fleming', 'zinsparitaet'],       usedBy: ['wk_krisen', 'schuldenquote_dynamik', 'schuldenfinanzierung_monetarisierung'] },
+  wk_krisen:        { uses: ['wk_regime', 'zinsparitaet'],             usedBy: ['schuldenquote_dynamik', 'schuldenfinanzierung_monetarisierung'] },
 
   phillipskurve:    { uses: [],                                        usedBy: ['zeitinkonsistenz', 'barro_gordon', 'taylor_regel'] },
   zeitinkonsistenz: { uses: ['phillipskurve'],                         usedBy: ['barro_gordon', 'taylor_regel'] },
   barro_gordon:     { uses: ['zeitinkonsistenz', 'phillipskurve'],     usedBy: ['taylor_regel'] },
-  taylor_regel:     { uses: ['phillipskurve', 'zeitinkonsistenz', 'barro_gordon', 'geldmengen'], usedBy: ['schuldenquote'] },
+  taylor_regel:     { uses: ['phillipskurve', 'zeitinkonsistenz', 'barro_gordon', 'geldmengen'], usedBy: ['schuldenquote_dynamik', 'schuldenfinanzierung_monetarisierung'] },
 
   aggregierte_pf:   { uses: [],                                        usedBy: ['solow_basis', 'tech_fortschritt'] },
-  solow_basis:      { uses: ['aggregierte_pf'],                        usedBy: ['tech_fortschritt', 'schuldenquote'] },
-  tech_fortschritt: { uses: ['solow_basis', 'aggregierte_pf'],         usedBy: ['schuldenquote'] },
-  schuldenquote:    { uses: ['tech_fortschritt', 'taylor_regel', 'wk_regime'], usedBy: [] }
+  solow_basis:      { uses: ['aggregierte_pf'],                        usedBy: ['tech_fortschritt', 'schuldenquote_dynamik'] },
+  tech_fortschritt: { uses: ['solow_basis', 'aggregierte_pf'],         usedBy: ['schuldenquote_dynamik'] },
+  schuldenquote_dynamik: { uses: ['tech_fortschritt', 'taylor_regel', 'wk_regime', 'wk_krisen'], usedBy: ['schuldenfinanzierung_monetarisierung'] },
+  schuldenfinanzierung_monetarisierung: { uses: ['schuldenquote_dynamik', 'taylor_regel', 'wk_regime', 'wk_krisen'], usedBy: [] }
 };

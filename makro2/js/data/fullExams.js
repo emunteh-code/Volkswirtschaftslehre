@@ -422,7 +422,7 @@ export const FULL_EXAMS = {
             )
           )
         ],
-        'schuldenquote'
+        'schuldenfinanzierung_monetarisierung'
       )
     ]
   }

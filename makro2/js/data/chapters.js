@@ -36,7 +36,8 @@ export const CHAPTERS = [
   { id: 'aggregierte_pf',   title: 'Produktionsfunktion, Grenzerträge & Skalenerträge', cat: 'Wachstum & Fiskalstaat', short: 'PF' },
   { id: 'solow_basis',      title: 'Solow-Grundmodell & Steady State',                  cat: 'Wachstum & Fiskalstaat', short: 'Solow' },
   { id: 'tech_fortschritt', title: 'Technischer Fortschritt & Goldene Regel',           cat: 'Wachstum & Fiskalstaat', short: 'TF' },
-  { id: 'schuldenquote',    title: 'Schuldenquote, Budgetrestriktion & Monetarisierung', cat: 'Wachstum & Fiskalstaat', short: 'Schuld' }
+  { id: 'schuldenquote_dynamik', title: 'Schuldenquote, Budgetrestriktion & Stabilisierung', cat: 'Wachstum & Fiskalstaat', short: 'Schuld-D' },
+  { id: 'schuldenfinanzierung_monetarisierung', title: 'Schuldenfinanzierung & Monetarisierung', cat: 'Wachstum & Fiskalstaat', short: 'Schuld-M' }
 ];
 
 export const CONTENT = {
@@ -719,3 +720,7 @@ export const CONTENT = {
     ])
   }
 };
+
+CONTENT.schuldenquote_dynamik = CONTENT.schuldenquote;
+CONTENT.schuldenfinanzierung_monetarisierung = CONTENT.schuldenquote;
+delete CONTENT.schuldenquote;

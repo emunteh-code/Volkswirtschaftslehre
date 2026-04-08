@@ -118,11 +118,17 @@ function createMasteryItems(conceptId, title) {
       'Intertemporale BR: B_0 = Barwert zukünftiger Überschüsse',
       'Tragfähigkeitsbedingung prüfen'
     ],
-    schuldenquote: [
+    schuldenquote_dynamik: [
       'Dynamik der Schuldenquote Δb ≈ (r−g)b − ps ableiten',
       'Stabilitätsbedingung ps* = (r−g)b berechnen',
       'Schneeball-Effekt bei r > g erklären',
       '"Herauswachsen" bei r < g beschreiben'
+    ],
+    schuldenfinanzierung_monetarisierung: [
+      'Kreditfinanzierung und Monetarisierung makroökonomisch unterscheiden',
+      'Monetarisierung im IS-LM-PC-Zusammenhang als eigenen Übertragungskanal erklären',
+      'Finanzierungsmodi als Trade-off zwischen Schulden- und Inflationspfad bewerten',
+      'Uebungsblatt-6-typische Vergleichsfragen argumentativ sauber lösen'
     ],
     ricardianisch: [
       'Ricardianisches Äquivalenztheorem im 2-Perioden-Modell herleiten',

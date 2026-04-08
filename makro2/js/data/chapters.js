@@ -110,6 +110,15 @@ export const CONTENT = {
           { text: 'Der reale Wechselkurs steigt; das Inland wertet real auf.', eq: null }
         ],
         result: 'Der reale Wechselkurs steigt um etwa 5%; die preisliche Wettbewerbsfähigkeit verschlechtert sich.'
+      },
+      {
+        text: String.raw`Trap-Check: Eine Lösung schreibt "E steigt in Mengennotierung, also wertet das Inland ab". Was ist daran falsch und welche reale Folge ist stattdessen plausibel?`,
+        steps: [
+          { text: 'In Mengennotierung bedeutet $E \\uparrow$: eine Einheit Inlandswährung kauft mehr Fremdwährung.', eq: null },
+          { text: 'Damit liegt nominale Aufwertung vor, nicht Abwertung.', eq: null },
+          { text: 'Ceteris paribus erhöht das den realen Aufwertungsdruck und belastet Nettoexporte.', eq: null }
+        ],
+        result: 'Der Vorzeichenfehler liegt in der Notation: $E\\uparrow$ ist Aufwertung des Inlands; dadurch werden Inlandsprodukte relativ teurer.'
       }
     ])
   },
@@ -182,6 +191,15 @@ export const CONTENT = {
           { text: 'Also muss eine erwartete Abwertung des Inlands von rund 3% kompensieren.', eq: null }
         ],
         result: 'Der Markt erwartet ungefähr eine 3%ige Abwertung der Inlandswährung.'
+      },
+      {
+        text: String.raw`Der Inlandszins liegt 2 Prozentpunkte unter dem Auslandszins. Welche Erwartung über den künftigen Wechselkurs folgt aus UIP in Mengennotierung?`,
+        steps: [
+          { text: 'Nutze die approximative UIP in Vorzeichenlogik.', eq: String.raw`$$i-i^* \approx -\frac{E^e-E}{E}$$` },
+          { text: 'Bei $i-i^*<0$ muss die rechte Seite negativ sein, also $(E^e-E)/E>0$.', eq: null },
+          { text: 'Das bedeutet: erwartetes $E$ liegt über dem aktuellen $E$.', eq: null }
+        ],
+        result: 'Es wird eine nominale Aufwertung des Inlands erwartet (in Mengennotierung: $E^e>E$).'
       }
     ])
   },
@@ -266,7 +284,17 @@ export const CONTENT = {
       { label: 'Marshall-Lerner-Bedingung', eq: String.raw`$$|\eta_X| + |\eta_M| > 1$$`, desc: 'Langfristige Verbesserung der Handelsbilanz nach Abwertung', variables: { '\\eta_X': 'Preiselastizität der Exporte', '\\eta_M': 'Preiselastizität der Importe' } },
       { label: 'Richtungseffekt', eq: String.raw`$$\frac{\partial NX}{\partial \varepsilon} < 0$$`, desc: 'Bei Mengennotierung verbessert fallendes $\\varepsilon$ die Handelsbilanz', variables: {} }
     ],
-    aufgaben: practice('marshall_lerner')
+    aufgaben: practice('marshall_lerner', [
+      {
+        text: String.raw`Eine Abwertung wurde gerade beschlossen. Die Handelsbilanz verschlechtert sich zunächst, verbessert sich aber später. Wie lautet die saubere Diagnose?`,
+        steps: [
+          { text: 'Kurzfristig sind Mengen oft träge, Preiseffekte dominieren.', eq: null },
+          { text: 'Dadurch kann die Importrechnung zunächst steigen und NX vorübergehend sinken.', eq: null },
+          { text: 'Mit Zeitverzug greifen Mengenanpassungen; bei erfüllter Marshall-Lerner-Bedingung verbessert sich die Handelsbilanz.', eq: null }
+        ],
+        result: 'Das ist die J-Kurve: kurzfristig Verschlechterung, langfristig Verbesserung unter ausreichender Elastizitätsreaktion.'
+      }
+    ])
   },
 
   geldmengen: {
@@ -314,7 +342,17 @@ export const CONTENT = {
       { label: 'IS in offener VW', eq: String.raw`$$Y = C + I + G + NX(\varepsilon, Y, Y^*)$$`, desc: 'Gütermarkt mit Außenbeziehung', variables: {} },
       { label: 'UIP-Kanal', eq: String.raw`$$1+i = (1+i^*)\frac{E}{E^e}$$`, desc: 'Finanzmarktscharnier des Modells', variables: {} }
     ],
-    aufgaben: practice('mundell_fleming')
+    aufgaben: practice('mundell_fleming', [
+      {
+        text: String.raw`Vergleiche dieselbe Fiskalexpansion unter flexiblem und festem Wechselkurs bei hoher Kapitalmobilität. Wo ist der Outputeffekt typischerweise größer und warum?`,
+        steps: [
+          { text: 'Flexibler Kurs: Fiskalimpuls erzeugt Aufwertungsdruck, NX werden teilweise verdrängt.', eq: null },
+          { text: 'Fester Kurs: Zentralbank akkommodiert zur Paritätsstabilisierung, Aufwertungskanal entfällt.', eq: null },
+          { text: 'Damit ist der Outputeffekt unter fixem Kurs typischerweise größer.', eq: null }
+        ],
+        result: 'Bei fixem Wechselkurs wirkt Fiskalpolitik stärker; bei flexiblem Wechselkurs wird sie über Aufwertung und NX-Dämpfung teilweise neutralisiert.'
+      }
+    ])
   },
 
   wk_regime: {
@@ -345,6 +383,15 @@ export const CONTENT = {
           { text: 'Also kann das Land nicht alle drei Ziele gleichzeitig erreichen.', eq: null }
         ],
         result: 'Das Trilemma verbietet diese Kombination: Bei fixem Kurs und freiem Kapitalverkehr ist keine autonome Geldpolitik möglich.'
+      },
+      {
+        text: String.raw`Ein Land verteidigt einen fixen Kurs trotz anhaltender Abwertungserwartungen. Welche zwei unmittelbaren Verteidigungskanäle hat die Zentralbank und welcher Binneneffekt folgt häufig?`,
+        steps: [
+          { text: 'Kanal 1: Devisenreserven einsetzen, um den Kurs direkt zu stützen.', eq: null },
+          { text: 'Kanal 2: Zinsen anheben, um Kapitalabfluss zu dämpfen und Inlandsanlage attraktiver zu machen.', eq: null },
+          { text: 'Höhere Zinsen belasten typischerweise Binnennachfrage und Konjunktur.', eq: null }
+        ],
+        result: 'Paritätsverteidigung läuft über Reserven und/oder Zinsanhebung; der häufige Preis ist eine konjunkturelle Abschwächung.'
       }
     ])
   },

@@ -36,6 +36,34 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+    ,
+    {
+      title: 'Mengennotierung-Vorzeichenfalle',
+      context: 'E steigt, Preisniveaus bleiben kurzfristig konstant.',
+      steps: [
+        {
+          q: '[1. Decision] Bedeutet E↑ in Mengennotierung Auf- oder Abwertung?',
+          answer: ['aufwertung', 'wertet auf'],
+          options: { problemId: 'm2_wk_sign_trap', stepId: 'dir', isDecision: true },
+          hint: 'E gibt Fremdwährung pro Inlandswährung an.',
+          explain: 'E↑ heißt nominale Aufwertung des Inlands.'
+        },
+        {
+          q: '[2. Execution] Bei konstantem P und P*: steigt oder fällt epsilon?',
+          answer: ['steigt', 'höher', 'plus'],
+          options: { problemId: 'm2_wk_sign_trap', stepId: 'eps_dir', dependsOn: 'dir' },
+          hint: 'epsilon = E*P/P*.',
+          explain: 'Wenn nur E steigt, steigt epsilon ebenfalls.'
+        },
+        {
+          q: '[3. Validation] Verbessert sich dadurch die preisliche Wettbewerbsfähigkeit?',
+          answer: ['nein', 'verschlechtert', 'sinkt'],
+          options: { problemId: 'm2_wk_sign_trap', role: 'VALIDATION' },
+          hint: 'Reale Aufwertung macht Inland relativ teurer.',
+          explain: 'Nein, die Wettbewerbsfähigkeit verschlechtert sich.'
+        }
+      ]
+    }
   ],
   kaufkraftparitaet: [
     {
@@ -120,6 +148,92 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_mf_flex', role: 'VALIDATION' },
           hint: 'Aufwertung verteuert das Inland relativ.',
           explain: 'NX sinken; ein Teil des Fiskalimpulses wird neutralisiert.'
+        }
+      ]
+    }
+    ,
+    {
+      title: 'Regimevergleich Fiskalimpuls',
+      context: 'Gleiches Delta G unter flexiblem vs. festem Wechselkurs, hohe Kapitalmobilität.',
+      steps: [
+        {
+          q: '[1. Decision] Unter welchem Regime wirkt Fiskalpolitik typischerweise stärker auf Y?',
+          answer: ['fester wechselkurs', 'fixer wechselkurs', 'fixkurs'],
+          options: { problemId: 'm2_mf_regime', stepId: 'regime', isDecision: true },
+          hint: 'Frage nach Aufwertungsneutralisierung.',
+          explain: 'Unter fixem Kurs fällt die aufwertungsbedingte Gegenwirkung geringer aus.'
+        },
+        {
+          q: '[2. Execution] Welcher Kanal dämpft Fiskalpolitik bei flexiblem Kurs?',
+          answer: ['aufwertung', 'nx sinken', 'wechselkurskanal'],
+          options: { problemId: 'm2_mf_regime', stepId: 'channel', dependsOn: 'regime' },
+          hint: 'IS-Shift erzeugt Kapitalzuflussdruck.',
+          explain: 'Aufwertung reduziert NX und neutralisiert Teile des Impulses.'
+        },
+        {
+          q: '[3. Validation] Ist "Fiskalpolitik wirkt im Modell immer gleich stark" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_mf_regime', role: 'VALIDATION' },
+          hint: 'Regime ist die Hauptweiche.',
+          explain: 'Nein, die Wirkung hängt im Mundell-Fleming-Modell stark vom Regime ab.'
+        }
+      ]
+    }
+  ],
+  zinsparitaet: [
+    {
+      title: 'UIP-Vorzeichenfalle',
+      context: 'Inlandszins liegt 2 Prozentpunkte unter Auslandszins.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Differenz muss zuerst bestimmt werden?',
+          answer: ['zinsdifferenz', 'i-i*', 'i minus i*'],
+          options: { problemId: 'm2_uip_sign', stepId: 'diff', isDecision: true },
+          hint: 'Starte bei i-i*.',
+          explain: 'Die Zinsdifferenz steuert die UIP-Richtung.'
+        },
+        {
+          q: '[2. Execution] Bei i-i* < 0: Ist (E^e-E)/E positiv oder negativ?',
+          answer: ['positiv', 'plus', '>0'],
+          options: { problemId: 'm2_uip_sign', stepId: 'exp', dependsOn: 'diff' },
+          hint: 'UIP hat ein Minus vor der Erwartungsänderung.',
+          explain: 'Negativer Zinsabstand impliziert positive erwartete Kursänderung.'
+        },
+        {
+          q: '[3. Validation] Bedeutet E^e > E in Mengennotierung erwartete Auf- oder Abwertung?',
+          answer: ['aufwertung', 'wertet auf'],
+          options: { problemId: 'm2_uip_sign', role: 'VALIDATION' },
+          hint: 'Mehr Fremdwährung pro Inlandswährung.',
+          explain: 'Es entspricht einer erwarteten Aufwertung des Inlands.'
+        }
+      ]
+    }
+  ],
+  marshall_lerner: [
+    {
+      title: 'J-Kurve gegen Kurzschluss',
+      context: 'Nach Abwertung verschlechtert sich NX zunächst, verbessert sich später.',
+      steps: [
+        {
+          q: '[1. Decision] Ist die anfängliche Verschlechterung eher kurz- oder langfristig?',
+          answer: ['kurzfristig', 'kurzfrist'],
+          options: { problemId: 'm2_ml_jcurve', stepId: 'horizon', isDecision: true },
+          hint: 'Mengen sind anfangs träge.',
+          explain: 'Die anfängliche Verschlechterung ist ein kurzfristiger J-Kurveneffekt.'
+        },
+        {
+          q: '[2. Execution] Welche Bedingung muss langfristig erfüllt sein?',
+          answer: ['marshall lerner', '|eta_x| + |eta_m| > 1', 'elastizitäten > 1'],
+          options: { problemId: 'm2_ml_jcurve', stepId: 'cond', dependsOn: 'horizon' },
+          hint: 'Summe absoluter Elastizitäten.',
+          explain: 'Langfristige Verbesserung braucht die Marshall-Lerner-Bedingung.'
+        },
+        {
+          q: '[3. Validation] Ist "Abwertung verbessert NX sofort" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_ml_jcurve', role: 'VALIDATION' },
+          hint: 'Zeitstruktur der Anpassung.',
+          explain: 'Nein, kurzfristig kann NX erst fallen.'
         }
       ]
     }
@@ -271,6 +385,34 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_debt_strict', role: 'VALIDATION' },
           hint: 'Das Vorzeichen der Stabilisierung zählt.',
           explain: 'Es braucht einen Primärüberschuss von etwa 2.7% des BIP.'
+        }
+      ]
+    }
+    ,
+    {
+      title: 'Schuldenquote-Nennerfalle',
+      context: 'Nominaler Schuldenstand steigt, BIP wächst ebenfalls stark.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Kennzahl ist für Tragfähigkeit zentral?',
+          answer: ['schuldenquote', 'debt-to-gdp', 'b'],
+          options: { problemId: 'm2_debt_ratio_trap', stepId: 'anchor', isDecision: true },
+          hint: 'Relativgröße statt Niveau.',
+          explain: 'Tragfähigkeit wird über die Schuldenquote bewertet.'
+        },
+        {
+          q: '[2. Execution] Kann die Schuldenquote trotz höherem Schuldenstand fallen?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'm2_debt_ratio_trap', stepId: 'ratio', dependsOn: 'anchor' },
+          hint: 'Nenne den Nenner.',
+          explain: 'Ja, wenn das BIP schneller wächst als der Schuldenstand.'
+        },
+        {
+          q: '[3. Validation] Ist "mehr Schuldenstand = immer höhere Quote" korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_debt_ratio_trap', role: 'VALIDATION' },
+          hint: 'Quote ist ein Verhältnis.',
+          explain: 'Nein. Ohne BIP-Entwicklung ist die Quotenaussage unvollständig.'
         }
       ]
     }

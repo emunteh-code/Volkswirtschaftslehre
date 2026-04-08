@@ -69,7 +69,7 @@
 
 | Item | Note |
 |------|------|
-| **`internationale-wirtschaftsbeziehungen`** | Still no `MODULE_CONTENT` key; out of scope for this pass. |
+| **`internationale-wirtschaftsbeziehungen`** | **Has** a `MODULE_CONTENT` entry under the **quoted** slug key (was incorrectly listed as missing here); see `docs/audits/iwb-status-parity-audit-pass-1.md`. |
 | **`mikro1` path spelling** | Optional Unicode normalization for `Vorlesungsplanung_*` in prose (`mikro1-provenance-validation-pass-2.md`). |
 | **Ingest Mikro II corpus** | Unblocks **`mikro2` `contentManifest.js`** and a **non-quarantine** `module-content` story — separate work. |
 

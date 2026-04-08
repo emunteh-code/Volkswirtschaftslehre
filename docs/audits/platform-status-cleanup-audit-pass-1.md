@@ -55,7 +55,7 @@ Other manifests (**makro1**, **statistik**, **oekonometrie**, **jahresabschluss*
 | **makro1 / makro2** | Exam expansion passes 1–2 (`exam-content-expansion-pass-*.md`) | Further W/F or text blocks only where syllabus-backed; no fake sources. |
 | **recht** | Same exam passes | Deeper `module-content.js` roadmap alignment optional. |
 | **Granularity** | Several `*-concept-granularity-*` audits | Modules not recently granularized (e.g. **mathematik**, **IWB**) if course materials justify splits. |
-| **Landing narrative** | — | **`module-content.js`** still missing **`mikro1` / `mikro2`** (and honest **`mikro2`** wording); documented in `content-pipeline.md`. |
+| **Landing narrative** | — | **`mikro1` / `mikro2`** / **`internationale-wirtschaftsbeziehungen`** are in **`module-content.js`** (see `module-content-parity-cleanup-pass-1.md`, `iwb-status-parity-audit-pass-1.md`); remaining gaps e.g. **`r`** vs **`MODULES`**. |
 
 ### 2.4 Quarantined / problem classification
 
@@ -75,7 +75,7 @@ No other module is flagged **quarantined** in metadata; **mathematik** is **weak
 
 1. **Manifest parity:** **`mikro2`** (blocked until corpus), **`mathematik`**, **`internationale-wirtschaftsbeziehungen`** — no `contentManifest.js` / bridge.
 2. **Source truth:** **`mikro2`** — ingest Mikro II materials or keep labeling **`source-distilled` / platform-added** only.
-3. **Landing / pipeline:** **`module-content.js`** entries for **`mikro1`**, **`mikro2`** (with quarantine honesty), and alignment of **`r`** vs **`MODULES`**.
+3. **Landing / pipeline:** Alignment of **`r`** vs **`MODULES`**; optional follow-up audits for narrative vs runtime provenance (`iwb-status-parity-audit-pass-1.md` for IWB).
 4. **Stale docs:** **`docs/audits/repo-audit.md`** §3 still lists **`mikro2` as 7 concepts** — **wrong** (currently **13** `CHAPTERS` rows). Use **this** audit or re-count from `chapters.js`.
 5. **README:** Structure tree omitted **`makro1/`**; **Erweiterung** linked to an **absolute path** on another machine — **fixed in cleanup below**.
 

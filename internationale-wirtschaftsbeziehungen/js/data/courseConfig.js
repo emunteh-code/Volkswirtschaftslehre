@@ -1,3 +1,5 @@
+// Slug matches `assets/js/modules.js`. Full portal shell via `createPortalApp` (no contentManifest bridge yet).
+// Source inventory: `docs/audits/iwb-status-parity-audit-pass-1.md`.
 export const COURSE_CONFIG = {
   slug: 'internationale-wirtschaftsbeziehungen',
   courseLabel: 'Int. Wirtschaftsbeziehungen',

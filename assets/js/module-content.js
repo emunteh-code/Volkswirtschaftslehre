@@ -1192,7 +1192,10 @@ export const MODULE_CONTENT = {
     ],
     qualityNotes: [
       "Die Portalstruktur folgt jetzt der echten Zwolf-Vorlesungs-Sequenz statt vier Sammelkapiteln und trennt Handel, Politik und internationale Makrooekonomik sauber.",
-      "Aufgaben und Exam-Drills muessen zwischen Modelllogik, Politikfolgen und Wechselkursintuition unterscheiden, statt den Stoff pauschal zusammenzufassen."
+      "Aufgaben und Exam-Drills muessen zwischen Modelllogik, Politikfolgen und Wechselkursintuition unterscheiden, statt den Stoff pauschal zusammenzufassen.",
+      "JS-Schluessel ist als String `\"internationale-wirtschaftsbeziehungen\"` gesetzt, weil der Slug Bindestriche enthaelt (Zugriff nur ueber `getModuleContent(slug)` mit gleichem String).",
+      "Pfade in `sourceGroups`/`roadmap` sind relativ zum Kursordner `source-materials/Grundlagen der internationalen Wirtschaftsbeziehungen/Grundlagen der internationalen Wirtschaftsbeziehungen/` (doppelte Ordnerebene wie bei anderen ZIP-Entpackungen).",
+      "Es gibt kein `internationale-wirtschaftsbeziehungen/js/data/contentManifest.js`; diese Datei ist Landing-/Quellen-Narrativ, kein Ersatz fuer laufzeitseitige Primaerrefs pro Lernobjekt."
     ]
   },
   jahresabschluss: {

@@ -2,6 +2,7 @@ export const COURSE_CONFIG = {
   slug: 'finanzwirtschaft',
   courseLabel: 'Finanzwirtschaft',
   courseTitle: 'Finanzwirtschaft des Unternehmens',
+  contentManifestVersion: '2026.1',
   homeIntro: 'Liquiditätsplanung, Investitionsrechnung, Unsicherheit, Kapitalerhöhung, Kapitalkosten und Kapitalstruktur in einem klausurnahen Finanzwirtschaftsportal.',
   examCollectionTitle: 'Probeklausuren Finanzwirtschaft',
   consentKey: 'finanzwirtschaft_consent_v1',

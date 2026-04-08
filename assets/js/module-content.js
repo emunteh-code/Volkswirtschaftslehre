@@ -265,7 +265,8 @@ export const MODULE_CONTENT = {
     qualityNotes: [
       "Diagnose: `docs/audits/mikro2-source-identity-resolution-pass-1.md`.",
       "Policy: `docs/audits/mikro2-quarantine-roadmap-pass-1.md` — Quarantaene betrifft **Quellenwahrheit**, nicht Deployability.",
-      "Neue Inhalte: als source-distilled / platform-added-* kennzeichnen, bis ein Korpus existiert; kein erfundenes PDF-Mapping."
+      "Neue Inhalte: als source-distilled / platform-added-* kennzeichnen, bis ein Korpus existiert; kein erfundenes PDF-Mapping.",
+      "Referenz-Inventar (alle Repo-Stellen + Backbone-Luecken): `docs/audits/mikro2-status-guard-pass-2.md`."
     ]
   },
   makro2: {

@@ -4,7 +4,7 @@
 **Date:** 2026-04-08  
 **Author:** Cursor agent (codebase inspection)
 
-**Status note:** For an updated **live-module / manifest / quarantine snapshot**, see **`docs/audits/platform-status-cleanup-audit-pass-1.md`**. Section 3 concept counts below (e.g. `mikro2`) may be **out of date** relative to current `chapters.js`.
+**Status note:** For an updated **live-module / manifest / quarantine snapshot**, see **`docs/audits/platform-status-cleanup-audit-pass-1.md`**. For **`mikro2`** quarantine, registry flags, and **all repo references**, see **`docs/audits/mikro2-status-guard-pass-2.md`**. Section 3 concept counts below (e.g. `mikro2`) may be **out of date** relative to current `chapters.js`.
 
 ---
 

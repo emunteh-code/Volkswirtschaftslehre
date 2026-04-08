@@ -1,3 +1,10 @@
+/**
+ * mikro2 app shell — live module under source quarantine (no Mikro II tree in `source-materials/`).
+ * Intentionally omits `portalBridge` / content-manifest payload and `mistakeReview` vs e.g. mikro1/makro2.
+ * Do not treat as file-grounded or backbone-parity without reading:
+ *   docs/audits/mikro2-quarantine-roadmap-pass-1.md
+ *   docs/audits/mikro2-status-guard-pass-2.md
+ */
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';
 import * as appState from './state/appState.js';

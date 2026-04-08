@@ -15,6 +15,12 @@ A module **meets platform standard** only when the items below pass. This turns 
 | 0.3 | `module-content.js` has a key for this slug **or** documented exception in `content-pipeline.md` | Grep `module-content.js` | §5.2 (mikro1/2 gap) |
 | 0.4 | Slug access is consistent (`internationale-wirtschaftsbeziehungen` quoted key) | `getModuleContent(slug)` callers | §4.3 |
 
+### 0.5 Documented exceptions (do not assume full parity)
+
+| Module | What differs | Where documented |
+|--------|----------------|------------------|
+| **mikro2** | No **`source-materials/`** Mikro II corpus → not **`direct-source`–anchorable**; **no** `contentManifest.js` / provenance bridge; **`mikro2/js/main.js`** omits **`portalBridge`** and **`mistakeReview`**; landing registry: **`sourceCorpusInRepo: false`** | `docs/audits/mikro2-status-guard-pass-2.md`, `docs/audits/mikro2-quarantine-roadmap-pass-1.md`, `AGENTS.md` |
+
 ---
 
 ## 1. Source fidelity

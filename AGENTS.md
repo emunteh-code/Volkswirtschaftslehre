@@ -26,6 +26,7 @@ Transform this repository into a source-faithful, interactive, exam-focused univ
 - There is **no `Mikroökonomik II` folder in `source-materials/`** in this repository (only **Mikro I** materials exist on disk). Therefore **`mikro2` cannot be treated as `direct-source`–anchored** to course PDFs until a Mikro II corpus is added.
 - **Do not** run provenance curation or “source-grounded” content expansion **against `source-materials/`** for `mikro2` until that corpus exists; use **`source-distilled`** / **`platform-added-explanation`** / **`platform-added-drill`** as appropriate and document gaps.
 - Policy and file pointers: `docs/audits/mikro2-quarantine-roadmap-pass-1.md` and `docs/audits/mikro2-source-identity-resolution-pass-1.md`.
+- **Repo-wide inventory (references + backbone vs benchmark):** `docs/audits/mikro2-status-guard-pass-2.md` — read before assuming manifest, mistake-review, or `direct-source` parity for **`mikro2`**.
 
 ## implementation rules
 1. Audit first, then plan, then implement.

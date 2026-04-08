@@ -61,7 +61,7 @@ Other manifests (**makro1**, **statistik**, **oekonometrie**, **jahresabschluss*
 
 | Module | Classification | Reason |
 |--------|----------------|--------|
-| **mikro2** | **Source quarantine** (not product removal) | No **`Mikroökonomik II`** tree in `source-materials/`; **`sourceCorpusInRepo: false`**; policy in **`mikro2-quarantine-roadmap-pass-1.md`** / **`AGENTS.md`**. Content is **Mikro-II-topic** but **not** `direct-source`-anchorable to in-repo PDFs. |
+| **mikro2** | **Source quarantine** (not product removal) | No **`Mikroökonomik II`** tree in `source-materials/`; **`sourceCorpusInRepo: false`**; policy in **`mikro2-quarantine-roadmap-pass-1.md`** / **`AGENTS.md`**. Full reference inventory: **`mikro2-status-guard-pass-2.md`**. Content is **Mikro-II-topic** but **not** `direct-source`-anchorable to in-repo PDFs. |
 
 No other module is flagged **quarantined** in metadata; **mathematik** is **weak / coarse** relative to a full curriculum (see `repo-audit.md`) but not “quarantined” by rule.
 

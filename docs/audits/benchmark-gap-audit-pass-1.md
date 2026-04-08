@@ -133,6 +133,8 @@
 
 **Verdict:** **Blocked** for **source-backed excellence**; **weak** on **exam depth** + **learning-loop wiring** regardless of quarantine.
 
+**Guard pass 2:** repo-wide reference inventory and contributor-facing guardrails — `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ---
 
 ## 3. Classification: real weakness vs acceptable difference vs blocked

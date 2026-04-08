@@ -2,6 +2,8 @@
 
 **Scope:** Align `assets/js/module-content.js` with **current** repo reality for **`mikro1`** and **`mikro2`** only. Cleanup and metadata; **no** portal runtime refactors, **no** `chapters.js` / exam rewrites, **no** invented source claims.
 
+**See also:** `docs/audits/mikro2-status-guard-pass-2.md` for all **`mikro2`** references and quarantine/backbone status (pass 2).
+
 **Date:** 2026-04-08
 
 ---

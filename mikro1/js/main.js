@@ -1,4 +1,5 @@
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
+import { getMikro1ContentManifestBridgePayload } from './data/contentManifest.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';
 import * as appState from './state/appState.js';
 import * as storage from './state/storage.js';
@@ -8,6 +9,7 @@ import * as renderer from './ui/renderer.js';
 import * as rightPanel from './ui/rightPanel.js';
 import * as graphs from './ui/graphs.js';
 import * as quickExam from './features/exam.js';
+import { mistakeReview } from './features/mistakeReview.js';
 import * as fullExam from './features/fullExam.js';
 import * as mastery from './features/mastery.js';
 import * as srs from './features/srs.js';
@@ -34,6 +36,7 @@ createPortalApp({
   rightPanel,
   graphs,
   quickExam,
+  mistakeReview,
   fullExam,
   mastery,
   srs,
@@ -41,5 +44,9 @@ createPortalApp({
   theme,
   keyboard,
   toast,
-  math
+  math,
+  portalBridge: () => {
+    if (typeof window === 'undefined') return;
+    window.__mikro1ContentManifest = getMikro1ContentManifestBridgePayload();
+  }
 });

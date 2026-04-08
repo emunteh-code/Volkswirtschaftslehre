@@ -10,6 +10,9 @@ export const STREAK_KEY     = 'mikro_streak_v2';
 export const THEME_KEY      = 'mikro_theme';
 export const QUESTION_STATS_KEY = 'micro_question_stats_v1';
 export const FE_STATE_KEY   = 'mikro_fe_state_v1';
+export const ATTEMPTS_KEY   = 'mikro_attempts_v1';
+export const MISTAKES_KEY   = 'mikro_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'mikro_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

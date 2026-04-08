@@ -1,5 +1,7 @@
 # Mikro2 source-identity resolution — pass 1
 
+**See also:** repo policy and doc/metadata flags — `docs/audits/mikro2-quarantine-roadmap-pass-1.md`.
+
 ## Scope and constraints
 
 - **Audit/diagnosis only.** No portal code or content was modified in this pass.

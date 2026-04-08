@@ -1,3 +1,10 @@
+/**
+ * Mikro II (topic line) — live module without an in-repo `source-materials/Mikroökonomik II/` tree.
+ * Do not imply direct PDF provenance until course materials are added; see:
+ * - docs/audits/mikro2-source-identity-resolution-pass-1.md
+ * - docs/audits/mikro2-quarantine-roadmap-pass-1.md
+ * No contentManifest bridge here yet (by design until sources exist).
+ */
 export const COURSE_CONFIG = {
   courseLabel: 'Mikro II',
   courseTitle: 'Mikroökonomik II',

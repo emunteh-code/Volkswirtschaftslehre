@@ -174,7 +174,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 | Issue | Action |
 |-------|--------|
 | **`sourceRoot` in `modules.js`** | Remove from shared code or move to gitignored local config; never required for deploy |
-| **`module-content.js` missing `mikro1` / `mikro2`** | Add entries **or** document exclusion; avoid “benchmark modules invisible on landing narrative” |
+| **`module-content.js` missing `mikro1` / `mikro2`** | Add entries **or** document exclusion; avoid “benchmark modules invisible on landing narrative”. **`mikro2`:** there is still **no** `Mikro II` tree under `source-materials/` — any `module-content.js` story must **not** claim direct PDF grounding until that corpus exists (`docs/audits/mikro2-quarantine-roadmap-pass-1.md`). |
 | **`r` in `module-content.js` but not in `MODULES`** | Align lists: add to `MODULES` **or** mark `r` as special route in docs + landing |
 | **`mountLivePortalBridge` no-op** (`live-portal-bridge.js`) | Remove call from `mathematik/js/portalHub.js` **or** re-implement bridge; document until then |
 | **Placeholder `CONTENT`** | Fill gaps or mark `generated_placeholder` with explicit `platform-added-explanation` in manifest |

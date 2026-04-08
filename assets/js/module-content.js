@@ -803,7 +803,7 @@ export const MODULE_CONTENT = {
       {
         label: "Portal-Konzeptkarten",
         value:
-          "6 (gebündelt vs. 10 VL + 10 Kleinuebung); grobe Zuordnung in docs/audits/project-wide-benchmark-parity-bug-sweep-pass-1.md §8"
+          "8 (konservative Teilung der früheren Funktions- und LA-Bündel vs. 10 VL + 10 Kleinuebung); Pass-1-Dokument docs/audits/mathematik-concept-granularity-pass-1.md"
       }
     ],
     sourceGroups: [

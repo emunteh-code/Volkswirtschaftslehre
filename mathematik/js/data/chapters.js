@@ -4,16 +4,18 @@
 // ============================================================
 
 export const CHAPTERS = [
-  { id: 'funktionen', title: 'Funktionen & Algebra', cat: 'Grundlagen', short: 'Fkt.' },
+  { id: 'funktionen_grundlagen', title: 'Funktionen: linear & Potenz/Exp', cat: 'Grundlagen', short: 'Fkt. I' },
+  { id: 'logarithmus_umkehr', title: 'Logarithmus & Umkehrfunktion', cat: 'Grundlagen', short: 'Fkt. II' },
   { id: 'ableitung', title: 'Differentialrechnung', cat: 'Analysis', short: 'Ableit.' },
   { id: 'optimierung', title: 'Optimierung', cat: 'Analysis', short: 'Opt.' },
   { id: 'lagrange', title: 'Lagrange-Methode', cat: 'Analysis', short: 'Lagrange' },
-  { id: 'linalg', title: 'Lineare Algebra', cat: 'Algebra', short: 'Matrix' },
+  { id: 'linalg_matrizen', title: 'Lineare Algebra I: Matrizen', cat: 'Algebra', short: 'LA I' },
+  { id: 'linalg_det_inverse_lgs', title: 'Lineare Algebra II: Det, Inverse, LGS', cat: 'Algebra', short: 'LA II' },
   { id: 'integral', title: 'Integralrechnung', cat: 'Analysis', short: 'Integ.' },
 ];
 
 export const CONTENT = {
-  funktionen: {
+  funktionen_grundlagen: {
     motivation: 'Funktionen beschreiben die quantitativen Beziehungen zwischen ökonomischen Größen. Ohne sie lassen sich Nachfrage, Kosten und Nutzen nicht formal darstellen.',
     theorie: String.raw`
     <div class="section-block">
@@ -30,29 +32,10 @@ export const CONTENT = {
         <li>$e^{a+b} = e^a \cdot e^b$</li>
       </ul>
     </div>
-    <div class="section-block">
-      <h3>Logarithmus</h3>
-      <p>Der natürliche Logarithmus $\ln x$ ist die Umkehrfunktion von $e^x$. In der Ökonomie dient er zur Linearisierung (log-log-Modelle: Koeffizienten sind Elastizitäten) und Wachstumsanalyse ($\ln Y_t - \ln Y_{t-1} \approx$ Wachstumsrate).</p>
-      <ul>
-        <li>$\ln(ab) = \ln a + \ln b$</li>
-        <li>$\ln(a^n) = n \ln a$</li>
-        <li>$\ln(e^x) = x$</li>
-      </ul>
-    </div>
-    <div class="section-block">
-      <h3>Inverse und Umkehrfunktion</h3>
-      <p>Die Nachfragefunktion $Q(P)$ und ihre Inverse $P(Q)$ beschreiben denselben Zusammenhang — aber die Achsenzuordnung wechselt. In der Graphik steht $P$ typischerweise auf der Vertikalen (inverse Form). Bedingung: Die Funktion muss streng monoton sein, damit die Inverse existiert.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Umkehrfunktionen:</strong> Achten Sie darauf, ob Sie $P(Q)$ oder $Q(P)$ betrachten. In der Mikroökonomik steht meist die inverse Nachfrage $P(Q)$ auf der y-Achse. Verwechslung führt zu falschen Achsenbeschriftungen und Steigungsvorzeichen.</div>
-      <div class="warn-box"><strong>Logarithmus von Null oder Negativem:</strong> $\ln 0$ und $\ln(-x)$ sind nicht definiert. In ökonomischen Modellen muss die Variable strikt positiv sein.</div>
-    </div>
     `,
     formeln: [
       { label: 'Gerade', eq: String.raw`$$y = mx + n$$`, desc: 'Lineare Form', variables: { m: 'Steigung', n: 'y-Achsenabschnitt' } },
       { label: 'Cobb-Douglas', eq: String.raw`$$Y = A K^\alpha L^{1-\alpha}$$`, desc: 'Potenzfunktion in der Produktion', variables: { A: 'Totale Faktorproduktivität', K: 'Kapital', L: 'Arbeit', alpha: 'Kapitalanteil' } },
-      { label: 'Log-Wachstum', eq: String.raw`$$g \approx \ln Y_t - \ln Y_{t-1}$$`, desc: 'Approximation der Wachstumsrate', variables: { g: 'Wachstumsrate', Y_t: 'Output in Periode t' } }
     ],
     aufgaben: [
       {
@@ -94,6 +77,42 @@ export const CONTENT = {
         result: String.raw`$MP_K \cdot K + MP_L \cdot L = Y$. Das Euler-Theorem besagt: Bei konstanten Skalenerträgen ($\alpha + (1-\alpha) = 1$) erschöpfen die Faktorentlohnungen zu Grenzproduktivitäten genau den gesamten Output — keine Übergewinne möglich (Nullgewinn-Theorem).`
       }
     ]
+  },
+  logarithmus_umkehr: {
+    motivation: 'Logarithmen und Umkehrfunktionen ordnen multiplikative Zusammenhänge und alternative Darstellungen derselben ökonomischen Relation (z.B. $Q(P)$ vs. $P(Q)$) einander zu — Grundlage für Elastizitäten und Wachstumsraten.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Logarithmus</h3>
+      <p>Der natürliche Logarithmus $\ln x$ ist die Umkehrfunktion von $e^x$. In der Ökonomie dient er zur Linearisierung (log-log-Modelle: Koeffizienten sind Elastizitäten) und Wachstumsanalyse ($\ln Y_t - \ln Y_{t-1} \approx$ Wachstumsrate).</p>
+      <ul>
+        <li>$\ln(ab) = \ln a + \ln b$</li>
+        <li>$\ln(a^n) = n \ln a$</li>
+        <li>$\ln(e^x) = x$</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Inverse und Umkehrfunktion</h3>
+      <p>Die Nachfragefunktion $Q(P)$ und ihre Inverse $P(Q)$ beschreiben denselben Zusammenhang — aber die Achsenzuordnung wechselt. In der Graphik steht $P$ typischerweise auf der Vertikalen (inverse Form). Bedingung: Die Funktion muss streng monoton sein, damit die Inverse existiert.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Umkehrfunktionen:</strong> Achten Sie darauf, ob Sie $P(Q)$ oder $Q(P)$ betrachten. In der Mikroökonomik steht meist die inverse Nachfrage $P(Q)$ auf der y-Achse. Verwechslung führt zu falschen Achsenbeschriftungen und Steigungsvorzeichen.</div>
+      <div class="warn-box"><strong>Logarithmus von Null oder Negativem:</strong> $\ln 0$ und $\ln(-x)$ sind nicht definiert. In ökonomischen Modellen muss die Variable strikt positiv sein.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Log-Wachstum', eq: String.raw`$$g \approx \ln Y_t - \ln Y_{t-1}$$`, desc: 'Approximation der Wachstumsrate', variables: { g: 'Wachstumsrate', Y_t: 'Output in Periode t' } },
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Drücken Sie $\ln\left(\dfrac{x^3 \sqrt{y}}{z}\right)$ für $x,y,z > 0$ mit den Logarithmengesetzen durch $\ln x$, $\ln y$ und $\ln z$ aus.`,
+        steps: [
+          { text: `Quotient und Produkt zerlegen.`, eq: String.raw`\ln(x^3\sqrt{y}) - \ln z` },
+          { text: `Potenzen aus dem Logarithmus ziehen.`, eq: String.raw`3\ln x + \tfrac{1}{2}\ln y - \ln z` },
+        ],
+        result: String.raw`$\ln\left(\dfrac{x^3 \sqrt{y}}{z}\right) = 3\ln x + \tfrac{1}{2}\ln y - \ln z$.`
+      },
+    ],
   },
   ableitung: {
     motivation: 'Ableitungen messen die marginale Veränderung. In der Ökonomie sind das Grenzkosten, Grenznutzen, Grenzproduktivität — jede „Grenz-" Größe ist eine Ableitung.',
@@ -335,8 +354,8 @@ export const CONTENT = {
       }
     ]
   },
-  linalg: {
-    motivation: 'Lineare Algebra ist das Fundament für multivariate Analyse, Input-Output-Modelle und Ökonometrie. Matrizen komprimieren lineare Gleichungssysteme in handliche Notation.',
+  linalg_matrizen: {
+    motivation: 'Matrizen und Vektoren fassen lineare Strukturen kompakt; Matrixalgebra ist die Sprache von Gleichungssystemen, Input-Output-Modellen und der Regressionsrechnung.',
     theorie: String.raw`
     <div class="section-block">
       <h3>Matrizen und Vektoren</h3>
@@ -352,6 +371,19 @@ export const CONTENT = {
       </ul>
     </div>
     <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Multiplikation nicht kommutativ:</strong> $AB \neq BA$ im Allgemeinen. Achten Sie auf die Reihenfolge, besonders bei Transponierung: $(AB)^T = B^T A^T$.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Matrixmultiplikation', eq: String.raw`$$(AB)_{ij} = \sum_k a_{ik} b_{kj}$$`, desc: 'Zeile mal Spalte', variables: { A: 'Matrix', B: 'Matrix' } },
+    ],
+    aufgaben: [],
+  },
+  linalg_det_inverse_lgs: {
+    motivation: 'Determinanten und inverse Matrizen entscheiden über Lösbarkeit von $Ax=b$; dieselbe Matrixlogik steckt hinter dem OLS-Operator in der Ökonometrie.',
+    theorie: String.raw`
+    <div class="section-block">
       <h3>Determinante und Inverse</h3>
       <p>Für eine $2 \times 2$-Matrix:</p>
       <div class="math-block">$$\det(A) = a_{11}a_{22} - a_{12}a_{21}$$</div>
@@ -364,7 +396,6 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Multiplikation nicht kommutativ:</strong> $AB \neq BA$ im Allgemeinen. Achten Sie auf die Reihenfolge, besonders bei Transponierung: $(AB)^T = B^T A^T$.</div>
       <div class="warn-box"><strong>Singuläre Matrizen:</strong> Wenn $\det(A) = 0$, existiert keine Inverse. Das Gleichungssystem $Ax = b$ hat dann entweder keine oder unendlich viele Lösungen — multikollineare Regressoren führen in der Ökonometrie zu genau diesem Problem.</div>
     </div>
     `,

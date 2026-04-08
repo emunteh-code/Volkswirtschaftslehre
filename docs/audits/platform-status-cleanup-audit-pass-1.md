@@ -76,7 +76,7 @@ No other module is flagged **quarantined** in metadata; **mathematik** is **weak
 1. **Manifest parity:** **`mikro2`** (blocked until corpus), **`mathematik`** — no `contentManifest.js` / bridge. **`internationale-wirtschaftsbeziehungen`** manifest added (`iwb-provenance-curation-pass-1.md`).
 2. **Source truth:** **`mikro2`** — ingest Mikro II materials or keep labeling **`source-distilled` / platform-added** only.
 3. **Landing / pipeline:** Alignment of **`r`** vs **`MODULES`**; optional follow-up audits for narrative vs runtime provenance (`iwb-status-parity-audit-pass-1.md` for IWB).
-4. **Stale docs:** **`docs/audits/repo-audit.md`** §3 still lists **`mikro2` as 7 concepts** — **wrong** (currently **13** `CHAPTERS` rows). Use **this** audit or re-count from `chapters.js`.
+4. **Stale docs (partially cleared):** **`docs/audits/docs-sync-pass-1.md`** refreshed **`repo-audit.md`** §3 counts (incl. **`mikro2` → 13**) and related claims; **`benchmark-gap-audit-pass-1.md`** was aligned to second-wave + guard work. Re-check this file’s tables if modules change again.
 5. **README:** Structure tree omitted **`makro1/`**; **Erweiterung** linked to an **absolute path** on another machine — **fixed in cleanup below**.
 
 ---
@@ -97,10 +97,10 @@ No other module is flagged **quarantined** in metadata; **mathematik** is **weak
 
 | Item | Effort | Note |
 |------|--------|------|
-| Refresh **`repo-audit.md`** table (concept counts, mikro2, optional package.json list) | Medium | Or trim table and link here permanently. |
-| Add **`module-content.js`** blocks for **mikro1** / **mikro2** | Low–medium | **mikro2** text must match **quarantine** policy. |
+| Refresh **`repo-audit.md`** table (concept counts, mikro2, optional package.json list) | Done (2026-04-08) | **`docs/audits/docs-sync-pass-1.md`**. |
+| Add **`module-content.js`** blocks for **mikro1** / **mikro2** | Done | See **`module-content-parity-cleanup-pass-1.md`**; **mikro2** copy matches quarantine. |
 | **`mathematik`** manifest scaffold + provenance when sources mapped | Medium | Depends on `source-materials/Mathematik/...` curation. |
-| **`internationale-wirtschaftsbeziehungen`** manifest | Medium | Align with GIWB source tree. |
+| **`internationale-wirtschaftsbeziehungen`** manifest | Done | **`iwb-provenance-curation-pass-1.md`** (see §3). |
 | Resolve **`r`** vs **`MODULES`** / landing | Low | Architectural decision already flagged. |
 | Remove or replace **`sourceRoot`** in shared code if still present | Low | Mentioned in `repo-audit.md` / `content-pipeline.md` |
 

@@ -31,18 +31,26 @@
 <body>
 
 <div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-  <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
-  <div class="consent-actions">
-    <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
-    <button class="btn consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+  <div class="consent-notice-inner">
+    <p id="consentTitle"><strong>Datenspeicherung:</strong> Lernfortschritte werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Keine Daten werden übertragen.</p>
+    <div class="consent-actions">
+      <button class="consent-btn-secondary" onclick="window.__acceptConsent()">Ignorieren</button>
+      <button class="consent-btn-primary" onclick="window.__acceptConsent()">Verstanden &amp; Weiter</button>
+    </div>
   </div>
 </div>
 
 <div id="app">
   <nav id="sidebar" aria-label="Konzept-Navigation">
-    <div class="sidebar-header" onclick="window.__renderHome()" role="button" tabindex="0">
-      <a class="portal-home-link" href="../index.html" onclick="event.stopPropagation()">Alle Module</a>
-      <h1>Mikroökonomik II</h1>
+    <div class="sidebar-header">
+      <a class="portal-home-link" href="../index.html">← Alle Module</a>
+      <button class="sidebar-module-home" type="button" onclick="window.__renderHome()" aria-label="Zur Mikroökonomik-II-Übersicht">
+        <span class="sidebar-module-icon" aria-hidden="true">⌂</span>
+        <span class="sidebar-module-copy">
+          <span class="sidebar-module-title">Mikroökonomik II</span>
+          <span class="sidebar-module-subtitle">Zur Modulübersicht</span>
+        </span>
+      </button>
       <p>Georg-August-Universität Göttingen</p>
     </div>
 

@@ -172,7 +172,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  regression: [
+  regression_schaetzung_inferenz: [
     {
       title: 'Signifikant vs. relevant',
       context: 'Regressionsoutput: beta1 = 0.02, p < 0.01, große Stichprobe.',
@@ -259,7 +259,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  schaetzen: [
+  schaetzen_verfahren: [
     {
       title: 'MoM, ML und MSE-Logik',
       context: 'Bernoulli-Stichprobe mit 76 Erfolgen bei n=200; zusätzlicher Schätzervergleich über Bias und Varianz.',
@@ -318,6 +318,9 @@ const BASE_STEP_PROBLEMS = {
     }
   ]
 };
+
+BASE_STEP_PROBLEMS.schaetzen_eigenschaften_intervalle = BASE_STEP_PROBLEMS.schaetzen_verfahren;
+BASE_STEP_PROBLEMS.regression_diagnostik_prognose = BASE_STEP_PROBLEMS.regression_schaetzung_inferenz;
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,

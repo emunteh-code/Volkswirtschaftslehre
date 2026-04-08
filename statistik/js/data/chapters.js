@@ -95,9 +95,11 @@ export const CHAPTERS = [
   { id: 'bivariat', title: 'Bivariate Analyse', cat: 'Grundlagen', short: 'Biv.' },
   { id: 'wahrscheinlichkeit', title: 'Wahrscheinlichkeitsrechnung', cat: 'Theorie', short: 'Wkt.' },
   { id: 'verteilungen', title: 'Zufallsvariablen & Verteilungen', cat: 'Theorie', short: 'Vert.' },
-  { id: 'schaetzen', title: 'Punktschätzung & Intervalle', cat: 'Induktion', short: 'Schätz.' },
+  { id: 'schaetzen_verfahren', title: 'Schätzverfahren (MoM, KQ, ML)', cat: 'Induktion', short: 'Schätz-V' },
+  { id: 'schaetzen_eigenschaften_intervalle', title: 'Schätzereigenschaften & Konfidenzintervalle', cat: 'Induktion', short: 'Schätz-EI' },
   { id: 'testen', title: 'Hypothesentests', cat: 'Induktion', short: 'Test' },
-  { id: 'regression', title: 'Lineare Regression', cat: 'Modelle', short: 'Regr.' },
+  { id: 'regression_schaetzung_inferenz', title: 'Regression: Schätzung & Inferenz', cat: 'Modelle', short: 'Regr-SI' },
+  { id: 'regression_diagnostik_prognose', title: 'Regression: Diagnostik & Prognose', cat: 'Modelle', short: 'Regr-DP' },
   { id: 'rlab', title: 'R-Statistik Praxis', cat: 'Anwendung', short: 'R' },
   { id: 'z_test', title: 'z-Test & Normalverteilungstest', cat: 'Induktion', short: 'z-Test' },
   { id: 'zwei_stichproben', title: 'Zwei-Stichproben-Tests', cat: 'Induktion', short: '2-Stpr.' },
@@ -997,3 +999,13 @@ export const CONTENT = {
     ]
   }
 };
+
+// Granularity split pass 1: preserve existing learning objects while exposing
+// finer concept-map nodes for navigation and analytics.
+CONTENT.schaetzen_verfahren = CONTENT.schaetzen;
+CONTENT.schaetzen_eigenschaften_intervalle = CONTENT.schaetzen;
+delete CONTENT.schaetzen;
+
+CONTENT.regression_schaetzung_inferenz = CONTENT.regression;
+CONTENT.regression_diagnostik_prognose = CONTENT.regression;
+delete CONTENT.regression;

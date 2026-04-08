@@ -39,6 +39,26 @@ function fmtTime(ts) {
   }
 }
 
+function summarizeFullExamConceptSignals(entries) {
+  const fullExam = Array.isArray(entries) ? entries.filter((e) => e && e.source === "full_exam") : [];
+  const tagged = fullExam.filter((e) => e && e.concept_id);
+  const untaggedCount = fullExam.length - tagged.length;
+  const byConcept = {};
+  for (const e of tagged) {
+    const id = e.concept_id;
+    byConcept[id] = (byConcept[id] || 0) + 1;
+  }
+  const ranked = Object.entries(byConcept).sort((a, b) => b[1] - a[1]);
+  const repeated = ranked.filter(([, n]) => n >= 2);
+  return {
+    totalFullExamMistakes: fullExam.length,
+    taggedCount: tagged.length,
+    untaggedCount,
+    rankedByConcept: ranked,
+    repeatedConceptMisses: repeated
+  };
+}
+
 const DEFAULT_SOURCE_LABELS = {
   quick_exam: "Schnelltest (Schritte)",
   schnelltest_concept: "Konzept-Check",
@@ -125,6 +145,7 @@ ${wrong}
 
   function buildPageHtml() {
     const entries = allEntries();
+    const fullExamSignals = summarizeFullExamConceptSignals(entries);
     const reviewed = reviewedMap();
     const filtered = filterEntries(entries, { source: filterSource, concept_id: filterConcept });
     const { open, done } = partitionByReviewed(filtered, reviewed);
@@ -144,6 +165,32 @@ ${wrong}
         .map((id) => `<option value="${escapeHtml(id)}" ${id === filterConcept ? "selected" : ""}>${escapeHtml(chapterMap[id] || id)}</option>`)
         .join("");
 
+    let fullExamBlock = "";
+    if (fullExamSignals.totalFullExamMistakes > 0) {
+      const topConcepts = fullExamSignals.rankedByConcept
+        .slice(0, 8)
+        .map(([id, n]) => `<li>${escapeHtml(chapterMap[id] || id)}: <strong>${n}</strong></li>`)
+        .join("");
+      const repeated = fullExamSignals.repeatedConceptMisses.length
+        ? `<p class="mr-hint"><strong>Wiederholte Probeklausur-Fehler (>=2):</strong> ${escapeHtml(
+            fullExamSignals.repeatedConceptMisses
+              .map(([id, n]) => `${chapterMap[id] || id} (${n})`)
+              .join(", ")
+          )}</p>`
+        : `<p class="mr-hint">Noch keine wiederholten Probeklausur-Fehler (>=2) im lokalen Log.</p>`;
+      const untaggedNote =
+        fullExamSignals.untaggedCount > 0
+          ? `<p class="mr-hint">Nicht zuordenbar (ohne Konzept-Tag): <strong>${fullExamSignals.untaggedCount}</strong> von ${fullExamSignals.totalFullExamMistakes} Probeklausur-Fehlern.</p>`
+          : `<p class="mr-hint">Alle protokollierten Probeklausur-Fehler in diesem Browser sind einem Konzept zugeordnet.</p>`;
+      fullExamBlock = `<div class="mr-section">
+<h3 class="mr-h3">Probeklausur-Konzeptsignale</h3>
+<p class="mr-hint">Nur lokal protokollierte Einträge mit Quelle „Probeklausur“. Keine Schätzung für ungetaggte Aufgabeninhalte.</p>
+${topConcepts ? `<ul class="mr-list">${topConcepts}</ul>` : `<div class="mr-empty">Noch keine konzeptgetaggten Probeklausur-Fehler.</div>`}
+${repeated}
+${untaggedNote}
+</div>`;
+    }
+
     return `<div class="mistake-review">
 <div class="mr-header">
 <h2>Fehlerprotokoll</h2>
@@ -154,6 +201,7 @@ ${wrong}
 <label class="mr-filter-label">Quelle <select id="mr-filter-src" class="mr-select">${srcOptions}</select></label>
 <label class="mr-filter-label">Konzept <select id="mr-filter-con" class="mr-select">${conOptions}</select></label>
 </div>
+${fullExamBlock}
 ${renderList("Noch offen / wiederholen", open, true)}
 ${renderList("Als erledigt markiert", done, false)}
 <div class="mr-footer"><button type="button" class="btn secondary" onclick="window.__showDashboard()">Zum Dashboard</button></div>

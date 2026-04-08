@@ -39,6 +39,29 @@ export function countMistakesBySource(mistakes) {
   return h;
 }
 
+export function summarizeFullExamMistakesByConcept(mistakes) {
+  const fullExam = Array.isArray(mistakes) ? mistakes.filter((m) => m && m.source === "full_exam") : [];
+  const byConcept = {};
+  let untagged = 0;
+  for (const m of fullExam) {
+    const id = m && m.concept_id;
+    if (!id) {
+      untagged += 1;
+      continue;
+    }
+    byConcept[id] = (byConcept[id] || 0) + 1;
+  }
+  const ranked = Object.entries(byConcept).sort((a, b) => b[1] - a[1]);
+  return {
+    total: fullExam.length,
+    tagged: fullExam.length - untagged,
+    untagged,
+    by_concept: byConcept,
+    ranked_concepts: ranked,
+    repeated_miss_concepts: ranked.filter(([, n]) => n >= 2)
+  };
+}
+
 /**
  * @param {object[]} attempts
  * @param {{ context?: string, limit?: number }} [opts]
@@ -155,6 +178,7 @@ export function buildDashboardDerivedMetricsSnapshot({
 
   const byContext = countAttemptsByContext(attempts);
   const mistakesBySource = countMistakesBySource(mistakes);
+  const fullExamConcept = summarizeFullExamMistakesByConcept(mistakes);
 
   const recentConcept = pickRecentAttempts(attempts, {
     context: ATTEMPT_CONTEXT.CONCEPT_SCHNELLTEST,
@@ -253,6 +277,7 @@ export function buildDashboardDerivedMetricsSnapshot({
     mistakes: {
       total: mistakes.length,
       by_source: mistakesBySource,
+      full_exam_concepts: fullExamConcept,
       reviewable_open,
       reviewable_done
     },
@@ -354,133 +379,31 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
     }
   }
 
-  let block4;
-  if (snap.srs.due_count === 0) {
-    block4 = `<p class="dhp-muted">Keine SRS-Karten mit fälliger Wiederholung (oder noch keine Karten).</p>`;
-  } else {
-    const next = snap.srs.due_next;
-    const title = next ? titles[next.concept_id] || next.concept_id : "";
-    block4 = `<p><strong>${snap.srs.due_count}</strong> Konzept(e) mit fälliger Wiederholung.</p>`;
-    if (next) {
-      block4 += `<p>Nächste in der sortierten Liste: <strong>${escHtml(title)}</strong> · fällig ${escHtml(fmtDueAt(next.due_at))}</p>`;
-    }
-  }
-
-  return `<div class="dash-honest-pilot" aria-label="Pilot: ehrliche Kennzahlen aus Protokoll">
-<h3 class="dash-honest-pilot-title">Kennzahlen aus dem Lernprotokoll (Pilot)</h3>
-<p class="dhp-intro">Nur Daten, die in diesem Browser gespeichert sind. Keine geschätzte Gesamtmastery.</p>
-<div class="dhp-section">
-<h4 class="dhp-h">Konzept-Check (letzte Läufe)</h4>
-${block1}
-</div>
-<div class="dhp-section">
-<h4 class="dhp-h">Probeklausur (letzte Sessions)</h4>
-${block2}
-</div>
-<div class="dhp-section">
-<h4 class="dhp-h">Fehler nach Quelle (Top)</h4>
-${block3}
-</div>
-<div class="dhp-section">
-<h4 class="dhp-h">SRS-Wiederholungen</h4>
-${block4}
-</div>
-<p class="dhp-foot">Step-Schnelltest (20-Min.) erscheint hier erst, wenn das Modul diese Versuche ins Attempt-Log schreibt (derzeit oft nicht angebunden).</p>
+  let block3b = "";
+  const fec = snap.mistakes.full_exam_concepts;
+  if (fec && fec.total > 0) {
+    const top = fec.ranked_concepts.slice(0, 6);
+    const topHtml = top.length
+      ? `<ul class="dhp-list">${top
+          .map(([id, n]) => `<li>${escHtml(titles[id] || id)}: <strong>${n}</strong></li>`)
+          .join("")}</ul>`
+      : `<p class="dhp-muted">Noch keine konzeptgetaggten Probeklausur-Fehler im lokalen Log.</p>`;
+    const repeated =
+      fec.repeated_miss_concepts && fec.repeated_miss_concepts.length
+        ? `<p class="dhp-muted">Wiederholte Probeklausur-Konzeptfehler (>=2): ${escHtml(
+            fec.repeated_miss_concepts.map(([id, n]) => `${titles[id] || id} (${n})`).join(", ")
+          )}</p>`
+        : `<p class="dhp-muted">Noch keine wiederholten Probeklausur-Konzeptfehler (>=2).</p>`;
+    const untaggedNote =
+      fec.untagged > 0
+        ? `<p class="dhp-partial"><strong>Teilweise:</strong> ${fec.untagged} von ${fec.total} Probeklausur-Fehlern ohne Konzept-Tag (nicht gruppierbar).</p>`
+        : `<p class="dhp-muted">Alle Probeklausur-Fehler im lokalen Log sind einem Konzept zugeordnet.</p>`;
+    block3b = `<div class="dhp-section">
+<h4 class="dhp-h">Probeklausur-Fehler nach Konzept</h4>
+${topHtml}
+${repeated}
+${untaggedNote}
 </div>`;
-}
-
-/**
- * Plain lines for a minimal strip (non-UI); prefer {@link buildHonestDashboardPilotHtml} for dashboards.
- * @param {ReturnType<typeof buildDashboardDerivedMetricsSnapshot>} snap
- */
-const SOURCE_LABELS_FOR_DISPLAY = {
-  quick_exam: "Schnelltest (Schritte)",
-  schnelltest_concept: "Konzept-Check",
-  full_exam: "Probeklausur",
-  practice: "Übung",
-  step: "Schritt",
-  srs: "SRS",
-  graph_drill: "Graph-Übung",
-  formula_drill: "Formel-Übung",
-  mixed_review: "Gemischte Wiederholung"
-};
-
-function escHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function fmtDueAt(ms) {
-  if (ms == null) return "—";
-  try {
-    return new Date(ms).toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" });
-  } catch {
-    return "—";
-  }
-}
-
-/**
- * Text-first honest dashboard panel: only metrics present in `snap` (no charts).
- * @param {ReturnType<typeof buildDashboardDerivedMetricsSnapshot>} snap
- * @param {object} [opts]
- * @param {Record<string, string>} [opts.conceptTitleById]
- */
-export function buildHonestDashboardPilotHtml(snap, opts = {}) {
-  if (!snap) return "";
-  const titles = opts.conceptTitleById && typeof opts.conceptTitleById === "object" ? opts.conceptTitleById : {};
-
-  const rc = snap.attempts.recent_concept_schnelltest;
-  let block1;
-  if (!rc.length) {
-    block1 = `<p class="dhp-status dhp-na">Noch nicht verfügbar: keine Konzept-Check-Läufe im Attempt-Log.</p>
-<p class="dhp-muted">Nach einem abgeschlossenen Konzept-Check erscheinen hier die letzten Läufe (Punkte, Abschlussgrund).</p>`;
-  } else {
-    const lines = rc
-      .map(
-        (r) =>
-          `<li>${escHtml(r.score_earned ?? "?")}/${escHtml(r.score_max ?? "?")} richtig · ${escHtml(String(r.finish_reason || "—"))} · ${fmtDueAt(r.submitted_at || r.started_at)}</li>`
-      )
-      .join("");
-    const fr = snap.attempts.first_recorded_per_item_concept_schnelltest;
-    let partial = "";
-    if (fr.tier === "partial" && fr.rate != null) {
-      partial = `<p class="dhp-partial"><strong>Teilweise:</strong> erste <em>protokollierte</em> Antwort pro Aufgabe über alle Läufe: ${fr.correct_count}/${fr.item_count} richtig (${Math.round(fr.rate * 100)}%). Spätere Wiederholungen derselben Aufgabe nach dem ersten Log werden nicht erneut gezählt.</p>`;
-    } else if (fr.tier === "not_available") {
-      partial = `<p class="dhp-muted">Keine auswertbaren Einzelantworten im Log (teilweise Kennzahl entfällt).</p>`;
-    }
-    block1 = `<ul class="dhp-list">${lines}</ul>${partial}`;
-  }
-
-  const rf = snap.attempts.recent_full_exam;
-  let block2;
-  if (!rf.length) {
-    block2 = `<p class="dhp-status dhp-na">Noch nicht verfügbar: keine Probeklausur-Sessions im Attempt-Log.</p>
-<p class="dhp-muted">Erscheint nach „Klausur abgeben“ bei einer Probeklausur (sofern das Modul Versuche protokolliert).</p>`;
-  } else {
-    block2 = `<ul class="dhp-list">${rf
-      .map(
-        (r) =>
-          `<li>${escHtml(r.score_earned ?? "?")}/${escHtml(r.score_max ?? "?")} Punkte · ${escHtml(String(r.finish_reason || "—"))} · ${fmtDueAt(r.submitted_at || r.started_at)}${r.exam_title ? ` · ${escHtml(r.exam_title)}` : ""}</li>`
-      )
-      .join("")}</ul>`;
-  }
-
-  let block3;
-  if (!snap.mistakes.total) {
-    block3 = `<p class="dhp-status dhp-na">Keine Fehler-Einträge im Protokoll (oder noch nichts protokolliert).</p>`;
-  } else {
-    const top = Object.entries(snap.mistakes.by_source)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 6);
-    block3 = `<ul class="dhp-list">${top
-      .map(([src, n]) => `<li>${escHtml(SOURCE_LABELS_FOR_DISPLAY[src] || src)}: <strong>${n}</strong></li>`)
-      .join("")}</ul>`;
-    if (snap.mistakes.reviewable_open != null) {
-      block3 += `<p class="dhp-muted">Fehlerprotokoll (lokal markiert): ${snap.mistakes.reviewable_open} offen · ${snap.mistakes.reviewable_done ?? 0} als erledigt.</p>`;
-    }
   }
 
   let block4;
@@ -510,6 +433,7 @@ ${block2}
 <h4 class="dhp-h">Fehler nach Quelle (Top)</h4>
 ${block3}
 </div>
+${block3b}
 <div class="dhp-section">
 <h4 class="dhp-h">SRS-Wiederholungen</h4>
 ${block4}

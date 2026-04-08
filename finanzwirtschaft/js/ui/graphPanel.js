@@ -2,7 +2,7 @@ export const GRAPH_CONCEPTS = new Set([
   'liquiditaetsplanung',
   'intertemporale_wahl',
   'izf_kapitalwertfunktion',
-  'kapitalstruktur'
+  'wacc_leverage'
 ]);
 
 export function renderGraphPanel(id) {
@@ -46,14 +46,14 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
-    kapitalstruktur: `
+    wacc_leverage: `
 <div class="graph-container">
 <h3 class="graph-panel-title">Leverage: Eigenkapitalrendite in guten und schwachen Szenarien</h3>
 <div class="graph-controls">
-<div class="ctrl-group"><label for="g_lev_good">ROA gut</label><input type="range" id="g_lev_good" min="8" max="20" step="1" value="12" oninput="window.initGraph('kapitalstruktur', false)"><div class="val" id="v_lev_good" aria-live="polite">12</div></div>
-<div class="ctrl-group"><label for="g_lev_bad">ROA schwach</label><input type="range" id="g_lev_bad" min="0" max="10" step="1" value="4" oninput="window.initGraph('kapitalstruktur', false)"><div class="val" id="v_lev_bad" aria-live="polite">4</div></div>
-<div class="ctrl-group"><label for="g_lev_rd">Fremdkapitalzins</label><input type="range" id="g_lev_rd" min="1" max="10" step="0.5" value="6" oninput="window.initGraph('kapitalstruktur', false)"><div class="val" id="v_lev_rd" aria-live="polite">6.0</div></div>
-<div class="ctrl-group"><label for="g_lev_de">Aktuelles D/E</label><input type="range" id="g_lev_de" min="0" max="2.5" step="0.1" value="1.0" oninput="window.initGraph('kapitalstruktur', false)"><div class="val" id="v_lev_de" aria-live="polite">1.0</div></div>
+<div class="ctrl-group"><label for="g_lev_good">ROA gut</label><input type="range" id="g_lev_good" min="8" max="20" step="1" value="12" oninput="window.initGraph('wacc_leverage', false)"><div class="val" id="v_lev_good" aria-live="polite">12</div></div>
+<div class="ctrl-group"><label for="g_lev_bad">ROA schwach</label><input type="range" id="g_lev_bad" min="0" max="10" step="1" value="4" oninput="window.initGraph('wacc_leverage', false)"><div class="val" id="v_lev_bad" aria-live="polite">4</div></div>
+<div class="ctrl-group"><label for="g_lev_rd">Fremdkapitalzins</label><input type="range" id="g_lev_rd" min="1" max="10" step="0.5" value="6" oninput="window.initGraph('wacc_leverage', false)"><div class="val" id="v_lev_rd" aria-live="polite">6.0</div></div>
+<div class="ctrl-group"><label for="g_lev_de">Aktuelles D/E</label><input type="range" id="g_lev_de" min="0" max="2.5" step="0.1" value="1.0" oninput="window.initGraph('wacc_leverage', false)"><div class="val" id="v_lev_de" aria-live="polite">1.0</div></div>
 </div>
 <canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Hebelwirkung auf die Eigenkapitalrendite bei unterschiedlicher Gesamtkapitalrendite."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>

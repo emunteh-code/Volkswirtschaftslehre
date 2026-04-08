@@ -9,10 +9,15 @@ export const MASTERY = {
     'Fristenkongruenz und goldene Bilanzregel wirtschaftlich interpretieren können',
     'Rentabilität und kurzfristige Liquidität sauber unterscheiden können'
   ],
-  kapitalmarkt_institutionen: [
+  kapitalmarkt_bewertung: [
     'Kapitalmarktpreise als Zeittauschpreise deuten können',
     'Zeitpräferenzen fachlich in Finanzentscheidungen einordnen können',
-    'Die Rolle von Banken und Institutionen über Marktfriktionen erklären können'
+    'Kapitalmarktorientierte Bewertungslogik von der institutionellen Perspektive trennen können'
+  ],
+  institutionen_marktunvollkommenheit: [
+    'Die Rolle von Banken und Institutionen über Marktfriktionen erklären können',
+    'Vollkommenen Kapitalmarkt als Benchmark statt als Realitätsbeschreibung einordnen können',
+    'Informations- und Transaktionskosten als Begründung institutioneller Arrangements nutzen können'
   ],
   intertemporale_wahl: [
     'Budgetgerade, Ausstattungspunkt und Steigung korrekt interpretieren können',
@@ -54,14 +59,24 @@ export const MASTERY = {
     'Verwässerungsschutz der Altaktionäre korrekt erklären können',
     'Kapitalerhöhung nicht nur als Mittelzufluss, sondern als Wertproblem lesen können'
   ],
-  kapitalkosten: [
+  eigenkapitalkosten: [
     'Eigenkapitalkosten aus Aktienpreisen und Dividenden ableiten können',
+    'Die Kostenlogik des Eigenkapitals als Renditeforderung der Anteilseigner erklären können',
+    'Formel, Ergebnis und Entscheidungsbedeutung bei Eigenkapitalkosten verknüpfen können'
+  ],
+  fremdkapitalkosten: [
     'Fremdkapitalkosten und Skontokosten wirtschaftlich interpretieren können',
+    'Nominalzins und effektive Finanzierungskosten sauber unterscheiden können',
     'Kapitalkosten als Opportunitätskosten der Finanzierung lesen können'
   ],
-  kapitalstruktur: [
+  wacc_leverage: [
     'WACC korrekt aufbauen und interpretieren können',
     'Leverage immer als Rendite-Risiko-Doppelwirkung lesen können',
-    'Modigliani-Miller als Benchmark und nicht als Realitätsbeschreibung einordnen können'
+    'Finanzierungsmix und Risikowirkung gemeinsam in einer Antwort darstellen können'
+  ],
+  modigliani_miller: [
+    'Modigliani-Miller als Benchmark und nicht als Realitätsbeschreibung einordnen können',
+    'Die strengen Annahmen der Irrelevanzthese benennen können',
+    'Reale Abweichungen über Marktfriktionen begründen können'
   ]
 };

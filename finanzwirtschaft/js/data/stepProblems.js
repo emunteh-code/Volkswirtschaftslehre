@@ -47,7 +47,29 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  kapitalmarkt_institutionen: [
+  kapitalmarkt_bewertung: [
+    {
+      title: 'Benchmark und Realität',
+      context: 'Eine Aufgabe kontrastiert vollkommenen Kapitalmarkt und reale Bankenfunktion.',
+      steps: [
+        {
+          q: '[1. Interpretation] Würden Banken auf vollkommenen Märkten theoretisch weniger wichtig wirken?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_ki_1', stepId: 'yes', isDecision: true },
+          hint: 'Dort lassen sich viele Tauschvorgänge direkt über den Markt organisieren.',
+          explain: 'Ja. Gerade deshalb erklärt die Theorie Banken über reale Friktionen.'
+        },
+        {
+          q: '[2. Decision] Welche Friktion rechtfertigt Banken besonders?',
+          answer: ['informationsprobleme', 'suchkosten', 'transaktionskosten'],
+          options: { problemId: 'fw_ki_1', stepId: 'friction', dependsOn: 'yes' },
+          hint: 'Mehr als eine Antwort wäre inhaltlich plausibel.',
+          explain: 'Informations- und Transaktionsprobleme machen Intermediäre ökonomisch sinnvoll.'
+        }
+      ]
+    }
+  ],
+  institutionen_marktunvollkommenheit: [
     {
       title: 'Benchmark und Realität',
       context: 'Eine Aufgabe kontrastiert vollkommenen Kapitalmarkt und reale Bankenfunktion.',
@@ -353,7 +375,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  kapitalkosten: [
+  eigenkapitalkosten: [
     {
       title: 'Preis des Kapitals',
       context: 'Eine Aufgabe nennt Aktienpreis, erwartete Dividende und Wachstumsrate.',
@@ -402,7 +424,78 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  kapitalstruktur: [
+  fremdkapitalkosten: [
+    {
+      title: 'Preis des Kapitals',
+      context: 'Eine Aufgabe nennt Aktienpreis, erwartete Dividende und Wachstumsrate.',
+      steps: [
+        {
+          q: '[1. Interpretation] Lässt sich daraus die geforderte Eigenkapitalrendite ableiten?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_kk_1', stepId: 'yes', isDecision: true },
+          hint: 'Genau dafür dient das Dividendenbarwertmodell.',
+          explain: 'Ja. Das Modell verknüpft Preis, Dividende und Wachstum zu Eigenkapitalkosten.'
+        },
+        {
+          q: '[2. Decision] Ist Skontoverzicht wirtschaftlich neutral?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_kk_1', stepId: 'no', dependsOn: 'yes' },
+          hint: 'Denk an den impliziten Lieferantenkredit.',
+          explain: 'Nein. Der Verzicht auf Skonto erzeugt oft hohe effektive Fremdkapitalkosten.'
+        }
+      ]
+    },
+    {
+      title: 'Formel -> Ergebnis -> Bedeutung',
+      context: 'Dividendenbarwert- und Skontokostenformel liefern konkrete Prozentwerte.',
+      steps: [
+        {
+          q: '[1. Interpretation] Sind Kapitalkosten bloße Rechenergebnisse ohne Entscheidungsbedeutung?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_kk_2', stepId: 'no', isDecision: true },
+          hint: 'Kapitalkosten sind Mindestverzinsungsanforderungen.',
+          explain: 'Nein. Sie sind ökonomische Hürdensätze und damit Entscheidungsgrößen.'
+        },
+        {
+          q: '[2. Decision] Welcher Prüfschritt folgt nach der Formelrechnung zwingend?',
+          answer: ['interpretation', 'vergleich mit projektrendite', 'bedeutung'],
+          options: { problemId: 'fw_kk_2', stepId: 'meaning', dependsOn: 'no' },
+          hint: 'Von der Zahl zur Entscheidung.',
+          explain: 'Nach der Berechnung muss geprüft werden, ob Projekt-/Finanzierungserträge die Kapitalkosten decken oder übertreffen.'
+        },
+        {
+          q: '[3. Validation] Welche Falle wird dadurch vermieden?',
+          answer: ['formelfalle', 'rechenfalle', 'zahl ohne bedeutung'],
+          options: { problemId: 'fw_kk_2', role: 'VALIDATION' },
+          hint: 'Eine richtige Zahl kann trotzdem falsch genutzt werden.',
+          explain: 'Es vermeidet die Formelfalle: korrekt rechnen, aber ökonomisch falsch entscheiden.'
+        }
+      ]
+    }
+  ],
+  wacc_leverage: [
+    {
+      title: 'Renditehebel und Risikohebel',
+      context: 'Ein Unternehmen erhöht seinen Fremdkapitalanteil deutlich.',
+      steps: [
+        {
+          q: '[1. Interpretation] Kann dadurch die Eigenkapitalrendite steigen?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_ks_1', stepId: 'yes', isDecision: true },
+          hint: 'Unter positiver Renditespanne wirkt Leverage nach oben.',
+          explain: 'Ja. Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen.'
+        },
+        {
+          q: '[2. Decision] Steigt damit automatisch auch das Risiko des Eigenkapitals?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 'fw_ks_1', stepId: 'risk', dependsOn: 'yes' },
+          hint: 'Der Puffer des Eigenkapitals wird kleiner.',
+          explain: 'Ja. Leverage verstärkt nicht nur Chancen, sondern auch Schwankungen und Verluste.'
+        }
+      ]
+    }
+  ],
+  modigliani_miller: [
     {
       title: 'Renditehebel und Risikohebel',
       context: 'Ein Unternehmen erhöht seinen Fremdkapitalanteil deutlich.',

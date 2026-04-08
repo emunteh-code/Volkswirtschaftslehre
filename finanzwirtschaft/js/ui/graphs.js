@@ -455,7 +455,7 @@ function initGraph(conceptId) {
     case 'izf_kapitalwertfunktion':
       drawIZFKapitalwertfunktion();
       break;
-    case 'kapitalstruktur':
+    case 'wacc_leverage':
       drawKapitalstruktur();
       break;
     default:

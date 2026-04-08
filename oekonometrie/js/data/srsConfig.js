@@ -10,6 +10,9 @@ export const STREAK_KEY     = 'oeko_streak_v1';
 export const THEME_KEY      = 'oeko_theme_v1';
 export const QUESTION_STATS_KEY = 'oeko_question_stats_v1';
 export const FE_STATE_KEY   = 'oeko_fe_state_v1';
+export const ATTEMPTS_KEY   = 'oeko_attempts_v1';
+export const MISTAKES_KEY   = 'oeko_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'oeko_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

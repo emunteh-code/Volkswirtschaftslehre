@@ -352,6 +352,7 @@ const PRACTICE_SETS = {
   ],
 };
 
+/** Keys align with `chapters.js` `practice('…')` ids only (no duplicate alias ids). */
 export const COURSEWORK_TASKS = {
   wechselkurs: cloneTasks(PRACTICE_SETS.wechselkurs),
   kaufkraftparitaet: cloneTasks(PRACTICE_SETS.kaufkraftparitaet),
@@ -361,30 +362,14 @@ export const COURSEWORK_TASKS = {
   nettoexporte: cloneTasks(PRACTICE_SETS.offeneVolkswirtschaft),
   marshall_lerner: cloneTasks(PRACTICE_SETS.marshallLerner),
   mundell_fleming: cloneTasks(PRACTICE_SETS.mundellFleming),
-  zp_kurve: cloneTasks(PRACTICE_SETS.mundellFleming),
-  wirtschaftspolitik_offen: cloneTasks(PRACTICE_SETS.mundellFleming),
   wk_regime: cloneTasks(PRACTICE_SETS.wechselkursregime),
   wk_krisen: cloneTasks(PRACTICE_SETS.wechselkursregime),
-  opt_waehrungsraum: cloneTasks(PRACTICE_SETS.mundellFleming),
-  eurozone: cloneTasks(PRACTICE_SETS.wechselkursregime),
-  zeitinkonsistenz: cloneTasks(PRACTICE_SETS.zeitinkonsistenz),
   barro_gordon: cloneTasks(PRACTICE_SETS.zeitinkonsistenz),
-  schuldenregeln: cloneTasks(PRACTICE_SETS.zeitinkonsistenz),
-  budgetrestriktion: cloneTasks(PRACTICE_SETS.staatsverschuldung),
-  schuldenquote: cloneTasks(PRACTICE_SETS.staatsverschuldung),
-  ricardianisch: cloneTasks(PRACTICE_SETS.staatsverschuldung),
   taylor_regel: cloneTasks(PRACTICE_SETS.geldpolitik),
-  inflation_targeting: cloneTasks(PRACTICE_SETS.geldpolitik),
-  inflation_kosten: cloneTasks(PRACTICE_SETS.geldpolitik),
-  unkonv_geldpolitik: cloneTasks(PRACTICE_SETS.geldmenge),
   geldmengen: cloneTasks(PRACTICE_SETS.geldmenge),
-  wachstum_fakten: cloneTasks(PRACTICE_SETS.produktion),
   aggregierte_pf: cloneTasks(PRACTICE_SETS.produktion),
   solow_basis: cloneTasks(PRACTICE_SETS.solowBasis),
-  steady_state: cloneTasks(PRACTICE_SETS.solowBasis),
-  goldene_sparquote: cloneTasks(PRACTICE_SETS.solowBasis),
   tech_fortschritt: cloneTasks(PRACTICE_SETS.solowTechnik),
-  solow_residuum: cloneTasks(PRACTICE_SETS.solowTechnik),
-  institutionen: cloneTasks(PRACTICE_SETS.solowTechnik),
   phillipskurve: cloneTasks(PRACTICE_SETS.zeitinkonsistenz),
+  schuldenquote: cloneTasks(PRACTICE_SETS.staatsverschuldung)
 };

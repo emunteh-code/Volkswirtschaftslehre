@@ -97,7 +97,7 @@ Notes:
 
 ## Recommended concept count after conservative split pass
 - Current: **11**
-- Recommended after pass: **19** (with the 4 split sets above)
+- Recommended after pass: **15** (with the 4 split sets above)
 
 This is a substantial but still conservative jump: only source-structurally real and exam-useful separations, no cosmetic inflation.
 

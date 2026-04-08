@@ -1,5 +1,7 @@
 # Mikro2 Source-Grounded Audit Pass 1
 
+> **Warning (roadmap hygiene):** This pass compared the **`mikro2`** portal to **`Makroökonomik II`** materials — a **different discipline** than Micro II. The write-up is useful as **evidence of domain mismatch**, not as a valid baseline for grounding `mikro2` content. For current policy and quarantine rules, use **`docs/audits/mikro2-source-identity-resolution-pass-1.md`** and **`docs/audits/mikro2-quarantine-roadmap-pass-1.md`**.
+
 ## Scope and source rule handling
 - Requested source path: `source-materials/makro2-src`
 - Result: path not found in repository.

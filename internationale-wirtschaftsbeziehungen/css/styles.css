@@ -2090,6 +2090,113 @@ canvas {
 }
 .dash-bar-pct { font-size: 11px; font-weight: 700; min-width: 34px; text-align: right; }
 
+/* Fehlerprotokoll (portal-core mistake review) */
+.mistake-review {
+  max-width: 720px;
+}
+.mr-header .mr-sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 6px 0 0;
+}
+.mr-hint {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 10px 0 0;
+}
+.mr-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  margin: 20px 0 18px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--surface2) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--r-md, 10px);
+}
+.mr-filter-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.mr-select {
+  min-width: 200px;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+.mr-section {
+  margin-bottom: 28px;
+}
+.mr-h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.mr-row {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: calc(var(--r-md, 10px) - 2px);
+  background: var(--surface);
+}
+.mr-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.mr-src {
+  font-weight: 600;
+  font-size: 13px;
+}
+.mr-time {
+  font-size: 12px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.mr-wrong {
+  font-size: 13px;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.mr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.mr-meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+.mr-meta code {
+  font-size: 11px;
+}
+.mr-empty {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 12px 0;
+}
+.mr-footer {
+  margin-top: 24px;
+}
+.mr-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 /* ============================================================
    EXAM (Schnelltest)
    ============================================================ */

@@ -23,7 +23,10 @@ export const MODULES = [
     prereq: "Mikro I",
     href: "./mikro2/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    sourceCorpusInRepo: false,
+    sourceStatusNote:
+      "No Mikro II folder in source-materials; not direct-source anchored. See docs/audits/mikro2-quarantine-roadmap-pass-1.md."
   },
   {
     slug: "makro1",

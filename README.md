@@ -22,8 +22,9 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 │       │   └── ui/
 │       └── r-lab.js
 ├── mikro1/
-├── makro2/
+├── mikro2/
 ├── makro1/
+├── makro2/
 ├── statistik/
 ├── oekonometrie/
 ├── mathematik/
@@ -38,6 +39,7 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 ## Was bereits live ist
 
 - `mikro1/`: bestaetigtes Vollportal aus dem bestehenden Mikro-I-Projekt
+- `mikro2/`: Live-Portal mit Mikro-II-Themenlinie (Spieltheorie, Oligopol, Marktversagen usw.); **es liegt kein passender Mikro-II-Kursordner unter `source-materials/`** — siehe `docs/audits/mikro2-quarantine-roadmap-pass-1.md` fuer Status und Editor-Regeln
 - `makro2/`: bestaetigtes Vollportal mit coursework-basierten Makro-II-Inhalten
 - `index.html`: Landing Page mit Moduluebersicht und Filterung
 - Landing Page: progress-aware Resume-Bereich fuer alle Live-Portale
@@ -47,7 +49,7 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 
 ## Erweiterung
 
-1. In [`assets/js/modules.js`](/Users/enowmunteh/Documents/New project/assets/js/modules.js) ein neues Modul anlegen.
+1. In [`assets/js/modules.js`](assets/js/modules.js) ein neues Modul anlegen.
 2. Fuer neue Module ein Verzeichnis mit `index.html` nach dem bestehenden Modul-Shell-Muster anlegen.
 3. Fuer R-Kurse `rLab.lessons` im Modul-Objekt definieren.
 4. Fuer voll ausgebaute Spezialportale lokale `courseConfig.js` und Daten beibehalten, aber die geteilte Logik aus `assets/js/portal-core/` verwenden.

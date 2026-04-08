@@ -34,7 +34,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 20,
+        points: 24,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch und begründen Sie Ihre Entscheidung knapp anhand der Makro-II-Logik.',
         groups: [
@@ -55,7 +55,9 @@ export const FULL_EXAMS = {
               { id: 'pk1_7', text: 'Gilt die Marshall-Lerner-Bedingung, muss eine reale Abwertung die Handelsbilanz bereits unmittelbar verbessern.', correct: 'Falsch', feedback: 'Marshall-Lerner ist eine Langfristaussage. Kurzfristig kann die J-Kurve zunächst eine Verschlechterung zeigen.' },
               { id: 'pk1_8', text: 'Bei flexiblem Wechselkurs und perfekter Kapitalmobilität ist Geldpolitik im Mundell-Fleming-Modell typischerweise wirksamer als Fiskalpolitik.', correct: 'Wahr', feedback: 'Geldpolitik wirkt zusätzlich über den Wechselkurskanal; Fiskalpolitik wird durch Aufwertung stärker ausgekontert.' },
               { id: 'pk1_9', text: 'Ein Land kann festen Wechselkurs, freie Kapitalmobilität und autonome Geldpolitik dauerhaft gleichzeitig haben, wenn es genügend Reserven besitzt.', correct: 'Falsch', feedback: 'Das Trilemma ist eine strukturelle Restriktion, kein reines Reserveproblem.' },
-              { id: 'pk1_10', text: 'Ein Currency Board ist glaubwürdiger als ein gewöhnlicher Peg, weil die Geldbasis härter an Reserven gebunden ist.', correct: 'Wahr', feedback: 'Genau diese harte Bindung erhöht die Glaubwürdigkeit, macht aber auch die Anpassung rigider.' }
+              { id: 'pk1_10', text: 'Ein Currency Board ist glaubwürdiger als ein gewöhnlicher Peg, weil die Geldbasis härter an Reserven gebunden ist.', correct: 'Wahr', feedback: 'Genau diese harte Bindung erhöht die Glaubwürdigkeit, macht aber auch die Anpassung rigider.' },
+              { id: 'pk1_11', text: 'Die Zahlungsbilanzidentität schließt aus, dass ein Land dauerhaft einen Leistungsbilanzüberschuss ohne entsprechende Kapitalbilanzposition oder Reserveveränderung hat.', correct: 'Wahr', feedback: 'Aus LB + KB + ΔR = 0 folgt: Ein LB-Saldo muss sich in KB und/oder Reserven spiegeln.' },
+              { id: 'pk1_12', text: 'Bei flexiblen Wechselkursen und perfekter Kapitalmobilität verschiebt eine expansive Geldpolitik im üblichen MF-Zweikurvenbild primär die IS-Kurve nach rechts.', correct: 'Falsch', feedback: 'Geldpolitik wirkt typischerweise über die LM- bzw. ZP-Seite; eine IS-Verschiebung nach rechts wäre vor allem fiskalischer Natur.' }
             ]
           }
         ]
@@ -177,7 +179,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 24,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch.',
         groups: [
@@ -189,7 +191,9 @@ export const FULL_EXAMS = {
               { id: 'pk2_3', text: 'Im diskretionären Barro-Gordon-Gleichgewicht ist die Arbeitslosigkeit dauerhaft unter ihrer natürlichen Rate.', correct: 'Falsch', feedback: 'Mit rationalen Erwartungen bleibt die Arbeitslosigkeit langfristig bei ihrer natürlichen Rate; nur die Inflation ist höher.' },
               { id: 'pk2_4', text: 'Eine unabhängige und regelgebundene Zentralbank ist ein möglicher institutioneller Fix gegen Inflationsbias.', correct: 'Wahr', feedback: 'Commitment, Unabhängigkeit und Reputation sind klassische Antworten auf Zeitinkonsistenz.' },
               { id: 'pk2_5', text: 'Taylor-Prinzip heißt: Der Nominalzins soll bei höherer Inflation weniger als eins zu eins steigen.', correct: 'Falsch', feedback: 'Das Taylor-Prinzip verlangt mehr als eine Eins-zu-eins-Reaktion, damit auch der Realzins steigt.' },
-              { id: 'pk2_6', text: 'Liegt Inflation genau am Ziel, kann die Taylor-Regel trotzdem eine Zinssenkung nahelegen, wenn die Output- oder Arbeitslosigkeitslücke negativ ist.', correct: 'Wahr', feedback: 'Sobald ein Aktivitätsterm in der Regel steht, kann die Reaktion auch bei zielgenauer Inflation von der Konjunktur abhängen.' }
+              { id: 'pk2_6', text: 'Liegt Inflation genau am Ziel, kann die Taylor-Regel trotzdem eine Zinssenkung nahelegen, wenn die Output- oder Arbeitslosigkeitslücke negativ ist.', correct: 'Wahr', feedback: 'Sobald ein Aktivitätsterm in der Regel steht, kann die Reaktion auch bei zielgenauer Inflation von der Konjunktur abhängen.' },
+              { id: 'pk2_7', text: 'Wenn die Phillipskurve die Inflation nur von der Arbeitslosigkeit abhängig macht und Erwartungen ignoriert werden, ist das Modell für mittelfristige Inflationsdynamik ausreichend.', correct: 'Falsch', feedback: 'Erwartungsbildung verschiebt die Kurve; ohne Erwartungsterm fehlt zentrale mittelfristige Logik.' },
+              { id: 'pk2_8', text: 'Ein glaubwürdiges Inflationsziel kann helfen, Inflationserwartungen zu verankern und damit die kurzfristige Phillipskurve nach unten zu verschieben.', correct: 'Wahr', feedback: 'Niedrigere verankerte Erwartungen reduzieren bei gegebener Arbeitslosigkeit die beobachtete Inflation.' }
             ]
           }
         ]
@@ -246,13 +250,13 @@ export const FULL_EXAMS = {
       ),
       textBlock(
         'Aufgabe 3',
-        20,
+        24,
         'Taylor-Regel und geldpolitische Reaktion',
         String.raw`Eine Zentralbank folgt der Regel $i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$ mit $r^*=1$, $\pi^*=2$, $a=0{,}8$ und $b=0{,}5$.`,
         [
           textQuestion(
             'pk2_3a',
-            8,
+            6,
             'Berechne den Leitzins bei aktueller Inflation von 3% und einer positiven Outputlücke von 1 Prozentpunkt.',
             ['4.3', '4,3'],
             solutionBlock(
@@ -280,7 +284,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'pk2_3c',
-            6,
+            5,
             'Warum ist diese Regel glaubwürdiger als rein diskretionäre Geldpolitik?',
             ['transparenz', 'erwartungen', 'bindung', 'vorhersehbar'],
             solutionBlock(
@@ -288,6 +292,22 @@ export const FULL_EXAMS = {
               [
                 'Eine bekannte Reaktionsregel macht künftige Politik berechenbarer und diszipliniert den diskretionären Anreiz.',
                 'Dadurch lassen sich Inflationserwartungen besser verankern und Zeitinkonsistenzkosten reduzieren.'
+              ]
+            )
+          ),
+          textQuestion(
+            'pk2_3d',
+            7,
+            String.raw`Transfer: Aktuelle Inflation betrage $1\%$, die Outputlücke $(y-y_n)$ sei $-1$ Prozentpunkt (Konjunkturschwäche). Berechne den Leitzins nach derselben Regel.`,
+            ['0.7', '0,7'],
+            solutionBlock(
+              'Konjunktur- und Deflationsnähe in einer Rechnung',
+              [
+                'Unter dem Ziel liegt die Inflation; die negative Outputlücke zieht zusätzlich nach unten.',
+                'Beide Terme wirken in dieselbe Richtung: expansiver Zinsdruck.'
+              ],
+              [
+                String.raw`$$i = 1 + 1 + 0{,}8(1-2) + 0{,}5(-1) = 2 - 0{,}8 - 0{,}5 = 0{,}7.$$`
               ]
             )
           )
@@ -305,7 +325,7 @@ export const FULL_EXAMS = {
     aufgaben: [
       {
         label: 'Aufgabe 1',
-        points: 18,
+        points: 24,
         type: 'wf-block',
         preamble: 'Beurteilen Sie die Aussagen als wahr oder falsch.',
         groups: [
@@ -317,7 +337,9 @@ export const FULL_EXAMS = {
               { id: 'pk3_3', text: 'Die Goldene Regel maximiert den Output pro Kopf im Steady State.', correct: 'Falsch', feedback: 'Sie maximiert den Konsum pro Kopf, nicht den Output.' },
               { id: 'pk3_4', text: 'Mit arbeitsvermehrendem technischem Fortschritt wächst der Output pro Kopf im Steady State mit $g_A$.', correct: 'Wahr', feedback: 'Im Solow-Modell mit Harrod-neutralem Fortschritt ist $g_A$ die dauerhafte Pro-Kopf-Wachstumsrate.' },
               { id: 'pk3_5', text: 'Ein positiver Primärsaldo senkt immer die Schuldenquote, selbst wenn der Zins deutlich über der Wachstumsrate liegt.', correct: 'Falsch', feedback: 'Entscheidend ist, ob der Primärsaldo groß genug ist, um $(r-g)b$ zu kompensieren.' },
-              { id: 'pk3_6', text: 'Monetarisierung staatlicher Defizite kann kurzfristig die Refinanzierungsnot lindern, erhöht aber potenziell den Inflationsdruck.', correct: 'Wahr', feedback: 'Genau deshalb wird im Kurs Kreditfinanzierung der Geldfinanzierung gegenübergestellt.' }
+              { id: 'pk3_6', text: 'Monetarisierung staatlicher Defizite kann kurzfristig die Refinanzierungsnot lindern, erhöht aber potenziell den Inflationsdruck.', correct: 'Wahr', feedback: 'Genau deshalb wird im Kurs Kreditfinanzierung der Geldfinanzierung gegenübergestellt.' },
+              { id: 'pk3_7', text: 'Im Solow-Modell ohne technischen Fortschritt und ohne Bevölkerungswachstum ist der Steady-State-Kapitalstock positiv, auch wenn die Sparquote null ist.', correct: 'Falsch', feedback: 'Ohne Sparen fließt kein Investitionsvolumen zur Aufrechterhaltung; ohne Tech./Bevölkerung kollabiert $k$ auf null.' },
+              { id: 'pk3_8', text: 'Liegt die reale Wachstumsrate $g$ über dem realen Zins $r$, kann die Schuldenquote $b$ sinken, selbst wenn der Primärsaldo null ist.', correct: 'Wahr', feedback: 'Die Dynamik enthält typischerweise $(r-g)b$; ist $g>r$, wirkt der Nennerterm schuldenmindernd.' }
             ]
           }
         ]
@@ -376,13 +398,13 @@ export const FULL_EXAMS = {
       ),
       textBlock(
         'Aufgabe 3',
-        20,
+        24,
         'Schuldenquote, Primärsaldo und Monetarisierung',
         String.raw`Die Schuldenquote eines Landes beträgt zu Beginn 90% des BIP. Der reale Zinssatz liegt bei 4%, die Wachstumsrate bei 1%.`,
         [
           textQuestion(
             'pk3_3a',
-            8,
+            6,
             'Welcher Primärsaldo stabilisiert die Schuldenquote ungefähr?',
             ['2.7', '2,7', '2.7%', '2,7%'],
             solutionBlock(
@@ -410,7 +432,7 @@ export const FULL_EXAMS = {
           ),
           textQuestion(
             'pk3_3c',
-            6,
+            5,
             'Vergleiche Kreditfinanzierung und Monetarisierung zusätzlicher Staatsausgaben in einem Satz mit Blick auf Inflation und Zinslast.',
             ['monetarisierung', 'inflation', 'kredit', 'zinslast'],
             solutionBlock(
@@ -418,6 +440,21 @@ export const FULL_EXAMS = {
               [
                 'Kreditfinanzierung erhöht die zukünftige Zinslast und hält den Anpassungsdruck über den Kapitalmarkt aufrecht.',
                 'Monetarisierung senkt kurzfristig den Refinanzierungsdruck, kann aber über die Geldmenge schneller Inflationsdruck erzeugen.'
+              ]
+            )
+          ),
+          textQuestion(
+            'pk3_3d',
+            7,
+            String.raw`Transfer: Gleiche Schuldenquote $b=0{,}90$, aber $r=4\%$ und $g=2\%$. Welcher Primärsaldo (als Anteil des BIP) hält $b$ näherungsweise konstant?`,
+            ['1.8', '1,8', '1.8%', '1,8%'],
+            solutionBlock(
+              'Andere $(r-g)$-Konstellation',
+              [
+                'Die Stabilisierungsformel bleibt dieselbe; nur die Differenz zwischen Zins und Wachstum ändert sich.'
+              ],
+              [
+                String.raw`$$ps^* = (0{,}04-0{,}02)\cdot 0{,}90 = 0{,}018.$$`
               ]
             )
           )

@@ -4,10 +4,15 @@ export const MASTERY = {
     'Aktivtausch, Bilanzverlängerung und Erfolgswirkung unterscheiden können',
     'Den Zweck des Jahresabschlusses klausurnah erklären können'
   ],
-  gob_inventur: [
-    'Ansatzfrage und Bewertungsfrage sauber trennen können',
+  gob_rechtsgrundlagen: [
     'Realisations- und Imparitätsprinzip klausursicher anwenden',
-    'Inventur, Inventar und Bilanz logisch aufeinander beziehen können'
+    'GoB als normative Entscheidungsmaßstäbe in Fällen begründen können',
+    'Rechtsgrundlage und Vorsichtslogik in Bilanzierungsentscheidungen verbinden können'
+  ],
+  inventur_inventar_bilanzansatz: [
+    'Ansatzfrage und Bewertungsfrage sauber trennen können',
+    'Inventur, Inventar und Bilanz logisch aufeinander beziehen können',
+    'Bilanzierungsfähigkeit methodisch vor der Bewertungsfrage prüfen können'
   ],
   buchen_konten: [
     'Soll/Haben systematisch aus Kontenart und Bewegungsrichtung ableiten können',
@@ -24,25 +29,40 @@ export const MASTERY = {
     'Buchwerte rechnerisch sicher ermitteln können',
     'Zuschreibungsgrenzen nach fortgeführten Anschaffungskosten erklären können'
   ],
-  umlauf_werkstoffe: [
+  umlauf_bewertung_verfahren: [
     'FIFO, Durchschnittsmethode und Niederstwertprinzip sicher anwenden können',
     'Die Wirkung von Bewertungsverfahren auf Endbestand und Aufwand erklären können',
-    'Werkstoffe und Erzeugnisse periodengerecht in den Abschluss einordnen können'
+    'Bewertungsentscheidungen mit Erfolgswirkung begründen können'
+  ],
+  werkstoffe_erzeugnisse_buchungen: [
+    'Werkstoffverbrauch über Fortschreibungs- und Inventurmethode sicher herleiten können',
+    'Bestandsveränderungen unfertiger/fertiger Erzeugnisse erfolgswirksam einordnen können',
+    'Korrekturbuchungen im Materialfluss kontensicher darstellen können'
   ],
   umlauf_waren_ust: [
     'Warenbuchungen mit Umsatzsteuer vollständig auflösen können',
     'Erlöslogik, Lagerwirkung und Steuerwirkung nicht vermischen',
     'Netto- und Bruttobetrachtung klausursicher unterscheiden können'
   ],
-  eigenkapital: [
-    'Eigenkapitalstrukturen nach Rechtsformen unterscheiden können',
-    'Gewinnverwendung und Kapitalkonten logisch zuordnen können',
-    'Bilanzielle Besonderheiten von Personen- und Kapitalgesellschaften erklären können'
+  eigenkapital_kapitalgesellschaften: [
+    'Eigenkapitalgliederung von Kapitalgesellschaften sicher darstellen können',
+    'Rücklagen- und Gewinnverwendungslogik klausursicher anwenden können',
+    'Ergebnisausweis vor und nach Gewinnverwendung unterscheiden können'
   ],
-  fremdkapital: [
-    'Verbindlichkeiten und Rückstellungen sauber voneinander abgrenzen können',
-    'Ungewisse Verpflichtungen systematisch würdigen können',
-    'Fremdkapitalposten bilanziell und erfolgsseitig richtig einordnen können'
+  eigenkapital_personengesellschaften: [
+    'Kapitalkonten und Privatkonten in Personengesellschaften sauber führen können',
+    'Einlagen, Entnahmen und Gewinnanteile korrekt zuordnen können',
+    'Gesellschafterbezogene Eigenkapitallogik sicher erklären können'
+  ],
+  verbindlichkeiten: [
+    'Sichere Fremdkapitalverpflichtungen korrekt klassifizieren können',
+    'Verbindlichkeiten zum Erfüllungsbetrag bewerten können',
+    'Verbindlichkeiten von Rückstellungen systematisch abgrenzen können'
+  ],
+  rueckstellungen: [
+    'Rückstellungen als ungewisse Verpflichtungen sicher identifizieren können',
+    'Rückstellungen mit kaufmännisch begründetem Erfüllungsbetrag ansetzen können',
+    'Folgebuchungen bei Inanspruchnahme, Auflösung und Nachbelastung beherrschen können'
   ],
   rechnungsabgrenzung: [
     'Aktive und passive RAP periodengerecht anwenden können',

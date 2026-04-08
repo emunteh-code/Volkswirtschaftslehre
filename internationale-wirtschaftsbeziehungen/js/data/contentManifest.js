@@ -1,6 +1,6 @@
 // ============================================================
-// CONTENT MANIFEST — Jahresabschluss (platform backbone)
-// Provenance + mode index with accounting-specific notes.
+// CONTENT MANIFEST — Internationale Wirtschaftsbeziehungen (IWB)
+// Provenance + mode index; parity with curated portal modules.
 // ============================================================
 
 import { createProvenance } from '../../../assets/js/portal-core/data/provenance.js';
@@ -20,52 +20,56 @@ import {
 import { COURSE_CONFIG } from './courseConfig.js';
 import { FULL_EXAMS } from './fullExams.js';
 
-const MODULE_SLUG = 'jahresabschluss';
+const MODULE_SLUG = 'internationale-wirtschaftsbeziehungen';
 
 /**
- * Primary chapter VL PDFs — paths relative to:
- *   source-materials/Jahresabschluss/Jahresabschluss/
- * Curated in docs/audits/jahresabschluss-provenance-curation-pass-1.md.
- * No folio/slide anchors; Probeklausur not used as per-concept primary.
+ * Primary refs: paths relative to
+ *   source-materials/Grundlagen der internationalen Wirtschaftsbeziehungen/Grundlagen der internationalen Wirtschaftsbeziehungen/
+ * Curation: docs/audits/iwb-provenance-curation-pass-1.md (pdftotext verification of Vorlesung n ↔ IntWBn.pdf).
+ * File-level only; no slide anchors.
  */
-const JAHRESABSCHLUSS_PRIMARY_REFS_CURATED = {
-  rechnungswesen_intro: ['Orga+Kapitel1.pdf'],
-  gob_rechtsgrundlagen: ['Kapitel2.pdf', 'Tutorium/Tutorium_Kapitel2.pdf'],
-  inventur_inventar_bilanzansatz: ['Kapitel2.pdf'],
-  buchen_konten: ['Kapitel3.pdf'],
-  buchfuehrung_orga: ['Kapitel4.pdf'],
-  anlagevermoegen: ['Kapitel5.pdf'],
-  umlauf_bewertung_verfahren: ['Kapitel6.1-6.5.pdf'],
-  werkstoffe_erzeugnisse_buchungen: ['Kapitel6.1-6.5.pdf'],
-  umlauf_waren_ust: ['Kapitel6.6-6.7.pdf'],
-  eigenkapital_kapitalgesellschaften: ['Kapitel7.pdf'],
-  eigenkapital_personengesellschaften: ['Kapitel7.pdf'],
-  verbindlichkeiten: ['Kapitel8.pdf'],
-  rueckstellungen: ['Kapitel8.pdf'],
-  rechnungsabgrenzung: ['Kapitel9.pdf'],
-  erfolgsrechnung: ['Kapitel10.pdf']
+const IWB_PRIMARY_REFS_CURATED = {
+  handelsfakten: [
+    'Vorlesungsfolien/IntWB1.pdf',
+    'Zusätzliche_Literatur/World_Trade_Statistical_Review_2023.pdf'
+  ],
+  ricardo: ['Vorlesungsfolien/IntWB2.pdf'],
+  heckscher_ohlin: ['Vorlesungsfolien/IntWB3.pdf'],
+  krugman: [
+    'Vorlesungsfolien/IntWB4.pdf',
+    'Zusätzliche_Literatur/Brülhart_WE2009.pdf'
+  ],
+  tarifmodell: ['Vorlesungsfolien/IntWB5.pdf'],
+  quoten_sanktionen: ['Vorlesungsfolien/IntWB6.pdf'],
+  wto_integration: ['Vorlesungsfolien/IntWB7.pdf'],
+  wechselkurssysteme: ['Vorlesungsfolien/IntWB8.pdf'],
+  paritaeten: ['Vorlesungsfolien/IntWB9.pdf'],
+  monetaerer_ansatz: ['Vorlesungsfolien/IntWB10.pdf'],
+  overshooting: ['Vorlesungsfolien/IntWB11.pdf'],
+  trilemma: ['Vorlesungsfolien/IntWB12.pdf']
 };
 
-export const JAHRESABSCHLUSS_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+export const IWB_CONCEPT_PRIMARY_REFS = Object.fromEntries(
   CHAPTERS.map(({ id }) => [
     id,
-    JAHRESABSCHLUSS_PRIMARY_REFS_CURATED[id] ? [...JAHRESABSCHLUSS_PRIMARY_REFS_CURATED[id]] : []
+    IWB_PRIMARY_REFS_CURATED[id] ? [...IWB_PRIMARY_REFS_CURATED[id]] : []
   ])
 );
 
 const NOTES_THEORY =
-  'Accounting content is source-distilled and authored around Bilanz/GuV logic, booking flows, and periodization.';
+  'Portal theory is source-distilled HTML; primary refs point to course VL PDFs under source-materials (file-level).';
 const NOTES_GRAPH =
-  'This module currently has no concept-specific graph layer; graph panel intentionally states the non-graph design.';
-const NOTES_INTUITION = 'Compressed recall layer for account logic, sign conventions, and exam booking patterns.';
+  'Interactive graphs are platform illustration; not reproductions of a specific slide figure.';
+const NOTES_INTUITION =
+  'Intuition cards synthesize exam-style patterns; not verbatim from VL PDFs.';
 const NOTES_STEP =
-  'Step problems preserve accounting notation, sign/booking conventions (Soll/Haben), and workflow structure.';
+  'Step drills are platform-authored practice; VL refs indicate topic context only.';
 const NOTES_TASKS =
-  'Tasks follow accounting-specific workflow (Kontierung, valuation, periodization) and are not flattened into generic drills.';
+  'Embedded tasks follow portal authoring; see theory refs for course alignment.';
 
 export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
-  primaryPathsByConceptId: JAHRESABSCHLUSS_CONCEPT_PRIMARY_REFS,
+  primaryPathsByConceptId: IWB_CONCEPT_PRIMARY_REFS,
   moduleSlug: MODULE_SLUG,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,
@@ -73,7 +77,7 @@ export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   notesByLayer: {
     motivation: NOTES_THEORY,
     theory: NOTES_THEORY,
-    formulas: 'Notation follows accounting conventions and renders booking logic aids.',
+    formulas: NOTES_THEORY,
     tasks: NOTES_TASKS,
     intuition: NOTES_INTUITION,
     graph: NOTES_GRAPH,
@@ -88,12 +92,12 @@ export const FULL_EXAM_PROVENANCE = Object.fromEntries(
       source_status: 'platform-added-drill',
       source_refs: [],
       notes:
-        'Probeklausur is authored accounting drill content aligned to course booking/valuation style; not a verbatim archived exam.'
+        'Authored Probeklausur-style sets for IWB; no archived course exam PDF found under GIWB source-materials (see iwb-provenance-curation-pass-1.md).'
     })
   ])
 );
 
-export function buildJahresabschlussModeIndex() {
+export function buildIwbModeIndex() {
   return buildConceptModeIndex({
     chapters: CHAPTERS,
     contentById: CONTENT,
@@ -116,17 +120,17 @@ export function buildJahresabschlussModeIndex() {
   });
 }
 
-export const JAHRESABSCHLUSS_MODE_INDEX = buildJahresabschlussModeIndex();
-export const JAHRESABSCHLUSS_CONTENT_MANIFEST_VERSION = '2026.1';
+export const IWB_MODE_INDEX = buildIwbModeIndex();
+export const IWB_CONTENT_MANIFEST_VERSION = '2026.1';
 
-export function getJahresabschlussContentManifestBridgePayload() {
+export function getIwbContentManifestBridgePayload() {
   return buildContentManifestBridgePayload({
-    schema: 'jahresabschluss.contentManifest',
-    version: JAHRESABSCHLUSS_CONTENT_MANIFEST_VERSION,
+    schema: 'iwb.contentManifest',
+    version: IWB_CONTENT_MANIFEST_VERSION,
     courseConfigManifestVersion: COURSE_CONFIG.contentManifestVersion,
     module_slug: MODULE_SLUG,
     chapters: CHAPTERS,
-    modeIndex: JAHRESABSCHLUSS_MODE_INDEX,
+    modeIndex: IWB_MODE_INDEX,
     provenanceByConcept: PROVENANCE_BY_CONCEPT,
     fullExamProvenance: FULL_EXAM_PROVENANCE
   });
@@ -137,5 +141,5 @@ export function getConceptProvenance(conceptId) {
 }
 
 export function getConceptModeIndex(conceptId) {
-  return JAHRESABSCHLUSS_MODE_INDEX[conceptId] || null;
+  return IWB_MODE_INDEX[conceptId] || null;
 }

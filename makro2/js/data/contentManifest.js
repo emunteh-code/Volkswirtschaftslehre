@@ -18,34 +18,53 @@ import { COURSE_CONFIG } from './courseConfig.js';
 const MODULE_SLUG = 'makro2';
 
 /**
- * Primary anchors per concept mapped from assets/js/module-content.js (makro2 roadmap).
- * Keep only paths that are explicitly present in the curated source map.
+ * Primary anchors — paths relative to:
+ *   source-materials/Makroökonomik II/Makroökonomik II/
+ * Mapped from Folien (Kapitel markers), Übungen, Tutorien, and Handout PDFs;
+ * see docs/audits/makro2-provenance-curation-pass-1.md.
  */
-export const MAKRO2_CONCEPT_PRIMARY_REFS = {
-  zahlungsbilanz: ['coursework_text/Tutorienblatt_1.txt'],
-  wechselkurs: ['coursework_text/Uebungsblatt_1.txt', 'coursework_text/Tutorienblatt_1.txt'],
-  kaufkraftparitaet: ['coursework_text/Uebungsblatt_1.txt', 'coursework_text/Tutorienblatt_1.txt'],
-  zinsparitaet: ['coursework_text/Uebungsblatt_1.txt', 'coursework_text/Tutorienblatt_1.txt'],
-  offene_is: ['coursework_text/Uebungsblatt_2.txt', 'coursework_text/Tutorienblatt_2.txt'],
-  nettoexporte: ['coursework_text/Uebungsblatt_2.txt', 'coursework_text/Tutorienblatt_2.txt'],
-  marshall_lerner: ['coursework_text/Uebungsblatt_2.txt', 'coursework_text/Tutorienblatt_2.txt'],
-  geldmengen: [],
-  mundell_fleming: ['coursework_text/Uebungsblatt_3.txt'],
-  wk_regime: ['coursework_text/Tutorienblatt_3.txt', 'coursework_text/Uebungsblatt_3.txt', 'coursework_text/Uebungsblatt_4.txt'],
-  wk_krisen: ['coursework_text/Uebungsblatt_4.txt'],
-  phillipskurve: ['coursework_text/Tutorienblatt_4.txt', 'coursework_text/Uebungsblatt_5.txt'],
-  zeitinkonsistenz: ['coursework_text/Tutorienblatt_4.txt', 'coursework_text/Uebungsblatt_5.txt'],
-  barro_gordon: ['coursework_text/Tutorienblatt_4.txt', 'coursework_text/Uebungsblatt_5.txt'],
-  taylor_regel: ['coursework_text/Tutorienblatt_5.txt', 'coursework_text/Uebungsblatt_7.txt'],
-  aggregierte_pf: ['coursework_text/Tutorienblatt_5.txt', 'coursework_text/Uebungsblatt_8.txt'],
-  solow_basis: ['coursework_text/Tutorienblatt_6.txt', 'coursework_text/Uebungsblatt_9.txt'],
-  tech_fortschritt: ['coursework_text/Uebungsblatt_10.txt', 'coursework_text/Tutorienblatt_6.txt'],
-  schuldenquote_dynamik: ['coursework_text/Uebungsblatt_6.txt'],
-  schuldenfinanzierung_monetarisierung: ['coursework_text/Uebungsblatt_6.txt']
+const MAKRO2_PRIMARY_REFS_CURATED = {
+  zahlungsbilanz: ['Folien/slides_01.pdf', 'Tutorien/Tutorienblatt_1.pdf'],
+  wechselkurs: ['Folien/slides_01.pdf', 'Übungen/Uebungsblatt_1.pdf', 'Tutorien/Tutorienblatt_1.pdf'],
+  kaufkraftparitaet: ['Folien/slides_01.pdf', 'Übungen/Uebungsblatt_1.pdf', 'Tutorien/Tutorienblatt_1.pdf'],
+  zinsparitaet: ['Folien/slides_01.pdf', 'Übungen/Uebungsblatt_1.pdf', 'Tutorien/Tutorienblatt_1.pdf'],
+  offene_is: ['Folien/slides_02.pdf', 'Übungen/Uebungsblatt_2.pdf', 'Tutorien/Tutorienblatt_2.pdf'],
+  nettoexporte: ['Folien/slides_02.pdf', 'Übungen/Uebungsblatt_2.pdf', 'Tutorien/Tutorienblatt_2.pdf'],
+  marshall_lerner: ['Folien/slides_02.pdf', 'Übungen/Uebungsblatt_2.pdf', 'Tutorien/Tutorienblatt_2.pdf'],
+  geldmengen: ['Folien/slides_03.pdf', 'Übungen/Uebungsblatt_3.pdf'],
+  mundell_fleming: ['Folien/slides_03.pdf', 'Übungen/Uebungsblatt_3.pdf'],
+  wk_regime: [
+    'Folien/slides_04.pdf',
+    'Übungen/Uebungsblatt_3.pdf',
+    'Übungen/Uebungsblatt_4.pdf',
+    'Tutorien/Tutorienblatt_3.pdf'
+  ],
+  wk_krisen: ['Folien/slides_04.pdf', 'Übungen/Uebungsblatt_4.pdf'],
+  phillipskurve: ['Folien/slides_05.pdf', 'Übungen/Uebungsblatt_5.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
+  zeitinkonsistenz: ['Folien/slides_05.pdf', 'Übungen/Uebungsblatt_5.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
+  barro_gordon: ['Folien/slides_05.pdf', 'Übungen/Uebungsblatt_5.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
+  taylor_regel: [
+    'Folien/slides_07.pdf',
+    'Handout/Formeln.pdf',
+    'Übungen/Uebungsblatt_7.pdf',
+    'Tutorien/Tutorienblatt_5.pdf'
+  ],
+  aggregierte_pf: ['Übungen/Uebungsblatt_8.pdf', 'Tutorien/Tutorienblatt_5.pdf'],
+  solow_basis: ['Übungen/Uebungsblatt_9.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
+  tech_fortschritt: ['Übungen/Uebungsblatt_10.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
+  schuldenquote_dynamik: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf'],
+  schuldenfinanzierung_monetarisierung: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf']
 };
 
+export const MAKRO2_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [
+    id,
+    MAKRO2_PRIMARY_REFS_CURATED[id] ? [...MAKRO2_PRIMARY_REFS_CURATED[id]] : []
+  ])
+);
+
 const NOTES_THEORY =
-  'Portal theory follows the Makro II line (syllabus, Übungen, Tutorien). Per-concept anchors are mapped from the curated module-content roadmap where explicit sources exist.';
+  'Portal theory follows the Makro II line (Folien, Übungen, Tutorien, Handout). File-level primary anchors: docs/audits/makro2-provenance-curation-pass-1.md.';
 const NOTES_GRAPH =
   'Interactive graphs for exam-style intuition; not a single fixed course figure.';
 const NOTES_INTUITION = 'Compressed recall layer for the closed learning loop.';

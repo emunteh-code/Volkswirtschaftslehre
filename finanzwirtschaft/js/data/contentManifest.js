@@ -18,10 +18,36 @@ import { FULL_EXAMS } from './fullExams.js';
 const MODULE_SLUG = 'finanzwirtschaft';
 
 /**
- * Pass 1 rollout keeps source refs empty unless defensible anchors exist.
- * Do not invent source file mappings.
+ * Primary VL PDF anchors — paths relative to:
+ *   source-materials/Finanzwirtschaft des Unternehmens/Finanzwirtschaft des Unternehmens/
+ * Curated in docs/audits/finanzwirtschaft-provenance-curation-pass-1.md.
+ * No slide/page anchors; file-level only.
  */
-export const FINANZWIRTSCHAFT_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+const FINANZWIRTSCHAFT_PRIMARY_REFS_CURATED = {
+  finanz_denkweise: ['V1_StudIP.pdf'],
+  liquiditaetsplanung: ['V2_StudIP.pdf'],
+  kapitalmarkt_bewertung: ['V2_StudIP.pdf', 'V3_StudIP.pdf'],
+  institutionen_marktunvollkommenheit: ['V2_StudIP.pdf', 'V3_StudIP.pdf'],
+  intertemporale_wahl: ['V3_StudIP.pdf', 'V4_StudIP.pdf'],
+  kapitalwert_fisher: ['V5_StudIP.pdf'],
+  auf_abzinsen: ['V6_StudIP.pdf'],
+  renten_endwert: ['V6_StudIP.pdf', 'V7_StudIP.pdf'],
+  izf_kapitalwertfunktion: ['V8_StudIP.pdf', 'V9_StudIP.pdf'],
+  izf_grenzen: ['V8_StudIP.pdf', 'V9_StudIP.pdf'],
+  unsicherheit: ['V9_StudIP.pdf'],
+  bezugsrecht: ['V10_StudIP.pdf'],
+  eigenkapitalkosten: ['V10_StudIP.pdf', 'V11_StudIP.pdf'],
+  fremdkapitalkosten: ['V11_StudIP.pdf'],
+  wacc_leverage: ['V11_StudIP.pdf', 'V12_StudIP.pdf'],
+  modigliani_miller: ['V12_StudIP.pdf']
+};
+
+export const FINANZWIRTSCHAFT_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [
+    id,
+    FINANZWIRTSCHAFT_PRIMARY_REFS_CURATED[id] ? [...FINANZWIRTSCHAFT_PRIMARY_REFS_CURATED[id]] : []
+  ])
+);
 
 const NOTES_THEORY =
   'Finanzwirtschaft content is source-distilled and decision-oriented (Zeitwert, Kapitalwert, Risiko, Finanzierung).';

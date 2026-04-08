@@ -32,20 +32,26 @@ export function makro1SourceRef(path, title = '') {
 }
 
 /**
- * Primary lecture / summary anchors per concept (course-map pilot).
- * Maps to roadmap ordering in module-content.js for makro1.
+ * Primary lecture / summary / Übung / Tutorium anchors per concept.
+ * Paths match on-disk names under source-materials/Makroökonomik I/Makroökonomik I/
+ * (see docs/audits/makro1-provenance-curation-pass-1.md).
  */
 export const MAKRO1_CONCEPT_PRIMARY_REFS = {
   makro_rahmen: ['Vorlesungen/VL_1.pdf', 'Zusammenfassungen/Makro I VL1.pdf'],
   vgr: ['Vorlesungen/VL_2.pdf', 'Zusammenfassungen/Makro I VL2.pdf'],
-  guetermarkt: ['Vorlesungen/VL_3.pdf', 'Zusammenfassungen/Makro I VL3.pdf', 'Uebungen/Übung3.pdf'],
-  multiplikator: ['Vorlesungen/VL_3.pdf', 'Zusammenfassungen/Makro I VL3.pdf', 'Uebungen/Übung3.pdf', 'Tutorium/Tutorienblatt-3.pdf'],
+  guetermarkt: ['Vorlesungen/VL_3.pdf', 'Zusammenfassungen/Makro I VL3.pdf', 'Übungen/Übung3.pdf'],
+  multiplikator: [
+    'Vorlesungen/VL_3.pdf',
+    'Zusammenfassungen/Makro I VL3.pdf',
+    'Übungen/Übung3.pdf',
+    'Tutorium/Tutorienblatt_3.pdf'
+  ],
   geldnachfrage: ['Vorlesungen/VL_4.pdf', 'Zusammenfassungen/Makro I VL4.pdf'],
   banken: ['Vorlesungen/VL_4.pdf', 'Zusammenfassungen/Makro I VL4.pdf', 'Tutorium/Tutorium4.pdf'],
   islm: ['Vorlesungen/VL_5.pdf', 'Zusammenfassungen/Makro I VL5.pdf'],
-  politikmix: ['Vorlesungen/VL_5.pdf', 'Zusammenfassungen/Makro I VL5.pdf', 'Uebungen/Uebung5.pdf'],
+  politikmix: ['Vorlesungen/VL_5.pdf', 'Zusammenfassungen/Makro I VL5.pdf', 'Übungen/Übung5.pdf'],
   realzins_fisher_erwartungen: ['Vorlesungen/Kap6.pdf', 'Zusammenfassungen/Makro I VL6.pdf'],
-  realzins_risikopraemie_krisenkanal: ['Vorlesungen/Kap6.pdf', 'Zusammenfassungen/Makro I VL6.pdf', 'Uebungen/Uebung5.pdf'],
+  realzins_risikopraemie_krisenkanal: ['Vorlesungen/Kap6.pdf', 'Zusammenfassungen/Makro I VL6.pdf', 'Übungen/Übung5.pdf'],
   arbeitsmarkt: ['Vorlesungen/VL_7.pdf', 'Zusammenfassungen/Makro I VL7.pdf'],
   phillips: ['Vorlesungen/VL_8.pdf', 'Zusammenfassungen/Makro I VL8.pdf', 'Tutorium/Tutorienblatt_6_Makro_1.pdf'],
   islmpc: ['Vorlesungen/VL_8.pdf', 'Zusammenfassungen/Makro I VL8.pdf'],
@@ -84,8 +90,8 @@ export const FULL_EXAM_PROVENANCE = {
   probeklausur_1: createProvenance({
     source_status: 'platform-added-drill',
     source_refs: [
-      makro1SourceRef('Klausur_2018_Haupttermin.pdf', 'Archiv-Stil'),
-      makro1SourceRef('Klausur_2022_Haupttermin.pdf', 'Archiv-Stil')
+      makro1SourceRef('Klausur_2018_Haupttermin (1).pdf', 'Archiv-Stil'),
+      makro1SourceRef('Klausur_2022_Haupttermin (1).pdf', 'Archiv-Stil')
     ],
     notes:
       'Probeklausur authored for portal practice; topic mix aligned with Makro I archive, not a single pasted paper.'
@@ -93,16 +99,16 @@ export const FULL_EXAM_PROVENANCE = {
   probeklausur_2: createProvenance({
     source_status: 'platform-added-drill',
     source_refs: [
-      makro1SourceRef('Klausur_2018_Haupttermin.pdf', 'Archiv-Stil'),
-      makro1SourceRef('Klausur_2022_Haupttermin.pdf', 'Archiv-Stil')
+      makro1SourceRef('Klausur_2018_Haupttermin (1).pdf', 'Archiv-Stil'),
+      makro1SourceRef('Klausur_2022_Haupttermin (1).pdf', 'Archiv-Stil')
     ],
     notes: 'Second probeklausur block in portal; exam-style training, not a verbatim archive scan.'
   }),
   probeklausur_3: createProvenance({
     source_status: 'platform-added-drill',
     source_refs: [
-      makro1SourceRef('Klausur_2018_Haupttermin.pdf', 'Archiv-Stil'),
-      makro1SourceRef('Klausur_2022_Haupttermin.pdf', 'Archiv-Stil')
+      makro1SourceRef('Klausur_2018_Haupttermin (1).pdf', 'Archiv-Stil'),
+      makro1SourceRef('Klausur_2022_Haupttermin (1).pdf', 'Archiv-Stil')
     ],
     notes: 'Third probeklausur block in portal; exam-style training, not a verbatim archive scan.'
   })

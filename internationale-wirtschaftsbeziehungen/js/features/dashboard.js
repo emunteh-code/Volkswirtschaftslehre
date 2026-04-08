@@ -1,5 +1,5 @@
 // ============================================================
-// DASHBOARD — Mikroökonomik I
+// DASHBOARD — Internationale Wirtschaftsbeziehungen
 // Renders the learning progress dashboard
 // ============================================================
 
@@ -43,6 +43,10 @@ export function renderDashboard(onNavigate) {
 <div class="dash-header">
 <h2>Lern-Dashboard</h2>
 <p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
+</div>
+<div class="dash-section" style="margin-bottom:16px">
+<button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll anzeigen</button>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Lokal gespeicherte Fehler aus Schnelltest und Probeklausur (sofern protokolliert).</p>
 </div>
 <div class="dash-stats">
 <div class="dash-stat"><div class="ds-val">${totalSeen}</div><div class="ds-lab">Konzepte gesehen</div></div>

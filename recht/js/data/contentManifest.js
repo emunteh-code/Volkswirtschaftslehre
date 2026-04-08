@@ -23,13 +23,51 @@ import { FULL_EXAMS } from './fullExams.js';
 const MODULE_SLUG = 'recht';
 
 /**
- * No canonical source file anchors are attached yet.
- * Keep refs empty rather than inventing legal source references.
+ * Primary anchors — paths relative to:
+ *   source-materials/Recht/Recht/
+ * Curated from `assets/js/module-content.js` (recht roadmap) + on-disk PDF names;
+ * see docs/audits/recht-provenance-curation-pass-1.md.
  */
-export const RECHT_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+const RECHT_PRIMARY_REFS_CURATED = {
+  was_ist_recht: ['Vorlesungen/§_1_Was_ist_Recht-K.pdf'],
+  privatrecht: ['Vorlesungen/§_2_Privatrecht-K.pdf'],
+  methodik: [
+    'Vorlesungen/§_3_Juristische_Methodik-K.pdf',
+    'Übungen/Juristische_Gliederungsebenen_im_Gutachten.pdf'
+  ],
+  willenserklaerung: [
+    'Vorlesungen/§_4_Willenserklärung,_Vertragsschluss-K.pdf',
+    'Übungen/SoSe_5.5.2025_2._Einheit.pdf',
+    'Übungen/Übersicht_Definitionen.pdf'
+  ],
+  dissens: ['Vorlesungen/§_5_Dissens_und_Anfechtung-K.pdf', 'Übungen/SoSe_2025_Einheit_3.pdf'],
+  anfechtung: ['Vorlesungen/§_5_Dissens_und_Anfechtung-K.pdf', 'Übungen/SoSe_2025_Einheit_3.pdf'],
+  trennung_abstraktion: [
+    'Vorlesungen/§_6_Verpflichtungs-_und_Verfügungsgeschäfte-K.pdf',
+    'Übungen/SoSe_2025_Einheit_3.pdf'
+  ],
+  geschaeftsfaehigkeit: [
+    'Vorlesungen/§_7_Rechts-_und_Geschäftsfähigkeit-K.pdf',
+    'Übungen/SoSe_2025_Einheit_3.pdf',
+    'Übungen/_Einheit_3_Übersicht_beschr._Geschäftsfähigkeit.pdf'
+  ],
+  stellvertretung: ['Vorlesungen/§_8_Stellvertretung-K.pdf'],
+  agb: ['Vorlesungen/§_9_AGB-Recht-K.pdf'],
+  schuldrecht_intro: ['Vorlesungen/§_10_Schuldrecht_AT_-_Einführung-K.pdf'],
+  schadensersatz: ['Vorlesungen/§_11_Schuldrecht_AT_-_Schadenersatz-K.pdf'],
+  ruecktritt: ['Vorlesungen/§_12_Schuldrecht_AT_-_Rücktritt_und_Verbraucher-Widerruf-K.pdf'],
+  verbraucherwiderruf: ['Vorlesungen/§_12_Schuldrecht_AT_-_Rücktritt_und_Verbraucher-Widerruf-K.pdf']
+};
+
+export const RECHT_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [
+    id,
+    RECHT_PRIMARY_REFS_CURATED[id] ? [...RECHT_PRIMARY_REFS_CURATED[id]] : []
+  ])
+);
 
 const NOTES_THEORY =
-  'Law content is source-distilled and authored in module-specific legal workflow (definitions, Anspruchsaufbau, Gutachtenstil, Subsumtion).';
+  'Law content follows the curated Vorlesungsreihe (units 1–12) and linked Übungs-PDFs where the portal roadmap names them; file-level anchors: docs/audits/recht-provenance-curation-pass-1.md.';
 const NOTES_GRAPH =
   'This module currently has no concept-specific graph layer; graph panel intentionally shows an explicit no-graph placeholder.';
 const NOTES_INTUITION = 'Compressed recall support for legal doctrine and exam-style case reasoning.';

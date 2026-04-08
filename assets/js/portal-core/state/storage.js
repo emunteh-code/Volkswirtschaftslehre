@@ -1,3 +1,5 @@
+import { createLearnerBackboneStore } from './learnerBackbone.js';
+
 export function createStorageModule({ keys }) {
   const {
     PROGRESS_KEY,
@@ -7,8 +9,15 @@ export function createStorageModule({ keys }) {
     QUESTION_STATS_KEY,
     FE_STATE_KEY,
     LAST_KEY,
+    ATTEMPTS_KEY,
+    MISTAKES_KEY,
     extraKeys = []
   } = keys;
+
+  const learnerBackbone =
+    ATTEMPTS_KEY || MISTAKES_KEY
+      ? createLearnerBackboneStore({ attemptsKey: ATTEMPTS_KEY, mistakesKey: MISTAKES_KEY })
+      : null;
 
   function safeParse(key, fallback) {
     try {
@@ -106,10 +115,36 @@ export function createStorageModule({ keys }) {
       QUESTION_STATS_KEY,
       FE_STATE_KEY,
       LAST_KEY,
+      ATTEMPTS_KEY,
+      MISTAKES_KEY,
       ...extraKeys
     ]
       .filter(Boolean)
       .forEach((key) => localStorage.removeItem(key));
+  }
+
+  function appendLearnerAttempt(partial) {
+    return learnerBackbone ? learnerBackbone.appendAttempt(partial) : null;
+  }
+
+  function listLearnerAttempts(filter) {
+    return learnerBackbone ? learnerBackbone.listAttempts(filter) : [];
+  }
+
+  function appendMistakeLogEntry(partial) {
+    return learnerBackbone ? learnerBackbone.appendMistake(partial) : null;
+  }
+
+  function listMistakeLogEntries(filter) {
+    return learnerBackbone ? learnerBackbone.listMistakes(filter) : [];
+  }
+
+  function clearLearnerAttempts() {
+    if (learnerBackbone) learnerBackbone.clearAttempts();
+  }
+
+  function clearMistakeLogEntries() {
+    if (learnerBackbone) learnerBackbone.clearMistakes();
   }
 
   return {
@@ -128,7 +163,13 @@ export function createStorageModule({ keys }) {
     saveQuestionStats,
     updateQuestionStats,
     saveMasteryChecks,
-    clearAllData
+    clearAllData,
+    appendLearnerAttempt,
+    listLearnerAttempts,
+    appendMistakeLogEntry,
+    listMistakeLogEntries,
+    clearLearnerAttempts,
+    clearMistakeLogEntries
   };
 }
 

@@ -1,3 +1,12 @@
+import {
+  buildExamSubmittedSummary,
+  computeExamScore,
+  defaultExamEvaluate,
+  durationMinutesToLimitMs,
+  EXAM_FINISH_REASON,
+  generateExamSessionId
+} from '../exam/examSessionBackbone.js';
+
 function hexToRgba(hex, alpha) {
   const normalized = hex.replace("#", "");
   const full = normalized.length === 3
@@ -20,7 +29,11 @@ export function createFullExamModule({
   courseExamCollectionTitle,
   fullExams,
   renderMath,
-  showToast
+  showToast,
+  /** When set, generates session_id and timed metadata for the exam backbone */
+  moduleSlug = null,
+  /** Called once after final submission (button or timer). Receives {@link buildExamSubmittedSummary} output. */
+  onExamSubmitted = null
 }) {
   let feState = null;
 
@@ -38,29 +51,13 @@ export function createFullExamModule({
     });
   }
 
-  function evaluate(q, ua) {
-    if (q.type === "wf") return ua === q.correct;
-    if (!ua || ua.trim() === "") return false;
-    if (Array.isArray(q.correct)) {
-      const lower = ua.toLowerCase();
-      return q.correct.some((answer) => lower.includes(answer.toLowerCase()));
-    }
-    return false;
-  }
-
   function calcScore() {
-    const { questions, answers, revealed } = feState;
-    let earned = 0;
-    let maxPts = 0;
-    questions.forEach((q) => {
-      const pts = q.points || 2;
-      maxPts += pts;
-      if (revealed[q.id]) {
-        const ok = evaluate(q, (answers[q.id] || "").trim());
-        if (ok) earned += pts;
-      }
+    return computeExamScore({
+      questions: feState.questions,
+      answers: feState.answers,
+      revealed: feState.revealed,
+      evaluate: defaultExamEvaluate
     });
-    return { earned, maxPts };
   }
 
   function updateScoreBadge() {
@@ -78,7 +75,7 @@ export function createFullExamModule({
       if (!dot) return;
       dot.className = "fe-dot";
       if (revealed[q.id]) {
-        const ok = evaluate(q, (answers[q.id] || "").trim());
+        const ok = defaultExamEvaluate(q, (answers[q.id] || "").trim());
         dot.classList.add(ok ? "correct" : "wrong");
       } else if (answers[q.id]) {
         dot.classList.add("answered");
@@ -142,6 +139,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     }
     if (remaining <= 0 && !feState.submitted) {
       clearInterval(feState.timerInterval);
+      feState.finishReason = EXAM_FINISH_REASON.TIMEOUT;
       submitFE();
     }
   }
@@ -251,6 +249,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       }
     });
 
+    const { duration_limit_ms } = durationMinutesToLimitMs(exam.duration);
     feState = {
       exam,
       questions,
@@ -258,7 +257,10 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       revealed: {},
       startTime: Date.now(),
       submitted: false,
-      timerInterval: null
+      timerInterval: null,
+      sessionId: moduleSlug ? generateExamSessionId(moduleSlug, examId) : null,
+      durationLimitMs: duration_limit_ms,
+      finishReason: null
     };
     renderFullExamView();
     if (exam.duration) feState.timerInterval = setInterval(updateTimer, 1000);
@@ -276,7 +278,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     labelEl.classList.add("selected");
     feState.revealed[qid] = true;
 
-    const ok = evaluate(q, val);
+    const ok = defaultExamEvaluate(q, val);
     const pts = q.points || 2;
     labelEl.parentElement.querySelectorAll(".fe-mc-label").forEach((label) => { label.style.pointerEvents = "none"; });
 
@@ -308,7 +310,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     }
 
     feState.revealed[qid] = true;
-    const ok = evaluate(q, ua);
+    const ok = defaultExamEvaluate(q, ua);
     const pts = q.points || 2;
     const textarea = document.getElementById(`fein_${qid}`);
     if (textarea) {
@@ -359,6 +361,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
 
   function submitFE() {
     if (!feState || feState.submitted) return;
+    if (!feState.finishReason) feState.finishReason = EXAM_FINISH_REASON.COMPLETE;
     feState.submitted = true;
     if (feState.timerInterval) clearInterval(feState.timerInterval);
 
@@ -368,7 +371,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       if (!feState.revealed[q.id]) {
         feState.revealed[q.id] = true;
         const ua = (feState.answers[q.id] || "").trim();
-        const ok = evaluate(q, ua);
+        const ok = defaultExamEvaluate(q, ua);
         if (q.type === "wf") {
           const correctLbl = document.getElementById(`felbl_${q.id}_${q.correct}`);
           if (!ok && correctLbl) {
@@ -391,6 +394,14 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
 
     updateDots();
     const { earned, maxPts } = calcScore();
+    const summary = buildExamSubmittedSummary(feState, { moduleSlug });
+    if (typeof onExamSubmitted === "function" && summary) {
+      try {
+        onExamSubmitted(summary);
+      } catch (e) {
+        console.warn("onExamSubmitted", e);
+      }
+    }
     const pct = Math.round((earned / maxPts) * 100);
     const color = pct >= 60 ? "var(--accent)" : pct >= 40 ? "var(--accent2)" : "var(--accent3)";
     const msg = pct >= 60 ? "Bestanden" : "Knapp nicht bestanden - schwache Bereiche wiederholen.";

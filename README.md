@@ -23,6 +23,7 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 │       └── r-lab.js
 ├── mikro1/
 ├── mikro2/
+├── makro1/
 ├── makro2/
 ├── statistik/
 ├── oekonometrie/
@@ -48,7 +49,7 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 
 ## Erweiterung
 
-1. In [`assets/js/modules.js`](/Users/enowmunteh/Documents/New project/assets/js/modules.js) ein neues Modul anlegen.
+1. In [`assets/js/modules.js`](assets/js/modules.js) ein neues Modul anlegen.
 2. Fuer neue Module ein Verzeichnis mit `index.html` nach dem bestehenden Modul-Shell-Muster anlegen.
 3. Fuer R-Kurse `rLab.lessons` im Modul-Objekt definieren.
 4. Fuer voll ausgebaute Spezialportale lokale `courseConfig.js` und Daten beibehalten, aber die geteilte Logik aus `assets/js/portal-core/` verwenden.

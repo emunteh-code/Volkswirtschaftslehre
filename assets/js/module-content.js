@@ -796,10 +796,15 @@ export const MODULE_CONTENT = {
     coverageStatus: "Theorie, Rechendrill und R-Praxis decken Algebra, Funktionen, lineare Algebra, Analysis, Optimierung und Integralrechnung vollstaendig ab.",
     portalGoal: "Das Portal soll vom ersten Umgang mit Zahlen und Mengen bis zu Lagrange und Integralen als echtes klausurfaehiges Mathematik-Werkzeug funktionieren.",
     audit: [
-      { label: "Vorlesungen", value: "10 Einheiten" },
-      { label: "Kleinuebungen", value: "10 Blaetter" },
+      { label: "Vorlesungen", value: "10 Einheiten (01–10 PDFs)" },
+      { label: "Kleinuebungen", value: "10 Bloecke (E1–E3, LA I–II, AN I–III, OP I–II)" },
       { label: "R-Uebungen", value: "10 Blaetter" },
-      { label: "R-Skripte", value: "10 Skripte" }
+      { label: "R-Skripte", value: "10 Skripte" },
+      {
+        label: "Portal-Konzeptkarten",
+        value:
+          "6 (gebündelt vs. 10 VL + 10 Kleinuebung); grobe Zuordnung in docs/audits/project-wide-benchmark-parity-bug-sweep-pass-1.md §8"
+      }
     ],
     sourceGroups: [
       {
@@ -957,7 +962,8 @@ export const MODULE_CONTENT = {
     ],
     qualityNotes: [
       "Das Mathematik-Portal folgt jetzt der echten Kurssequenz von E1 bis AN3 und bildet jede Theoriespur mit einem passenden Uebungsblatt ab.",
-      "Regulaere Kleinuebungen, Loesungen, R-Blaetter und Vorlesungsskripte ergaenzen sich so, dass sowohl Papierklausur als auch R-Teil gezielt trainierbar bleiben."
+      "Regulaere Kleinuebungen, Loesungen, R-Blaetter und Vorlesungsskripte ergaenzen sich so, dass sowohl Papierklausur als auch R-Teil gezielt trainierbar bleiben.",
+      "Granularitaet: Die Quelle trennt zehn Kleinuebungsbloecke und zehn VL-PDFs; das Live-Portal komprimiert das in sechs `CHAPTERS`-IDs, um die Lernoberflaeche nicht kuenstlich zu zerpfluecken. Eine echte Feinsegmentierung (nähe mikro1) waere nur mit vollstaendiger Datenmigration sinnvoll, nicht als kosmetische Kapitelzahl."
     ]
   },
   finanzwirtschaft: {

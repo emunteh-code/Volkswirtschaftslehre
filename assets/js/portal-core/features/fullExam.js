@@ -40,6 +40,53 @@ export function createFullExamModule({
 }) {
   let feState = null;
 
+  function normalizeExamToAufgabenShape(exam, fallbackExamId = null) {
+    if (!exam || typeof exam !== "object") return null;
+    if (Array.isArray(exam.aufgaben)) {
+      return { ...exam, id: exam.id || fallbackExamId };
+    }
+    if (!Array.isArray(exam.problems)) {
+      return { ...exam, id: exam.id || fallbackExamId, aufgaben: [] };
+    }
+
+    const aufgaben = exam.problems.map((problem, pIdx) => {
+      const problemId = problem?.id || `problem_${pIdx + 1}`;
+      const steps = Array.isArray(problem?.steps) ? problem.steps : [];
+      const questions = steps.map((step, sIdx) => ({
+        id: `${problemId}__s${sIdx + 1}`,
+        points: 2,
+        type: "text",
+        text: step?.q || "",
+        correct: step?.answer,
+        feedback: step?.hint || "",
+        concept_id:
+          (typeof step?.concept_id === "string" && step.concept_id) ||
+          (typeof step?.conceptId === "string" && step.conceptId) ||
+          (typeof problem?.concept_id === "string" && problem.concept_id) ||
+          (typeof problem?.conceptId === "string" && problem.conceptId) ||
+          undefined
+      }));
+      return {
+        label: problem?.title || `Aufgabe ${pIdx + 1}`,
+        points: questions.reduce((sum, q) => sum + (q.points || 2), 0),
+        type: "text-block",
+        title: problem?.title || `Aufgabe ${pIdx + 1}`,
+        preamble: problem?.text || "",
+        concept_id:
+          (typeof problem?.concept_id === "string" && problem.concept_id) ||
+          (typeof problem?.conceptId === "string" && problem.conceptId) ||
+          undefined,
+        questions
+      };
+    });
+
+    return {
+      ...exam,
+      id: exam.id || fallbackExamId,
+      aufgaben
+    };
+  }
+
   function initEmbeddedExamCanvases() {
     requestAnimationFrame(() => {
       if (document.getElementById("canvas_hicks") && typeof window.__drawHicksGraph === "function") {
@@ -235,7 +282,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
   }
 
   function startFullExam(examId) {
-    const exam = fullExams[examId];
+    const examRaw = fullExams[examId];
+    const exam = normalizeExamToAufgabenShape(examRaw, examId);
     if (!exam) return;
     if (!document.body.classList.contains("focus-mode")) {
       document.body.classList.add("focus-mode");
@@ -480,13 +528,15 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausuren`;
     let html = `<div style="max-width:600px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>`;
-    Object.values(fullExams).forEach((exam) => {
+    Object.entries(fullExams).forEach(([examKey, examRaw]) => {
+      const exam = normalizeExamToAufgabenShape(examRaw, examKey);
+      if (!exam) return;
       const totalPoints = exam.aufgaben.reduce((sum, aufgabe) => sum + aufgabe.points, 0);
       const totalQuestions = exam.aufgaben.reduce((sum, aufgabe) => {
         if (aufgabe.type === "wf-block") return sum + aufgabe.groups.reduce((groupSum, group) => groupSum + group.questions.length, 0);
         return sum + (aufgabe.questions ? aufgabe.questions.length : 0);
       }, 0);
-      html += `<div class="home-action-card" onclick="window.__startFullExam('${exam.id}')" style="margin-bottom:12px">
+      html += `<div class="home-action-card" onclick="window.__startFullExam('${exam.id || examKey}')" style="margin-bottom:12px">
 <div class="hac-title">${exam.title}</div>
 <div class="hac-desc">${exam.duration} Min. | ${totalQuestions} Fragen | ${totalPoints} Punkte</div>
 </div>`;

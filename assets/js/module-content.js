@@ -131,7 +131,7 @@ export const MODULE_CONTENT = {
     coverageStatus:
       "Der Quellordner enthaelt eine vollstaendige VL-Reihe mit klar titelierten Programmfolien (Haushalt, Dualitaet, Slutsky, Wohlfahrtseffekte, Unternehmen, Wettbewerb, Monopol). Zusaetzliche Einzel-PDFs (z. B. Slutsky, Cobb-Douglas/CES-Produktion) ergaenzen spezielle Punkte; sie sind im Portal nicht flaechendeckend als Primaeranker verdrahtet.",
     portalGoal:
-      "Das benchmark-Modul Mikro I bleibt erklaerungs- und drillstark; Primaerpfade verbinden Konzepte dort, wo die VL-Folien den Stoff eindeutig tragen.",
+      "Das benchmark-Modul Mikro I bleibt erklaerungs- und drillstark; Primaerpfade verbinden Konzepte dort, wo die VL-Folien den Stoff eindeutig tragen. Zusaetzlich existiert ein `contentManifest.js`-Bridge mit dateirelativen Primaerrefs unter `source-materials/Mikrooekonomik I/Mikrooekonomik I/` (Kuratierung/Validierung siehe Audits).",
     audit: [
       { label: "Vorlesungsfolien", value: "Mikro_1_VL_1.pdf bis Mikro_1_VL_18.pdf" },
       { label: "Zusatzfolie", value: "Mikro_1_VL_5_EmpirischeElastizitaeten.pdf" },
@@ -242,7 +242,30 @@ export const MODULE_CONTENT = {
     qualityNotes: [
       "Die Vorlesungsplanung dokumentiert nur Terminzuordnungen, keine detaillierte Konzept-zu-VL-Matrix.",
       "Perfekte Substitute (lineare Nutzenfunktion) werden in den extrahierten Vorlesungsfolientexten nicht unter eindeutigem Stichwort gefunden; Primaeranker dafuer bleiben im Portal leer.",
-      "Unterlagen wie Demmler_Slutsky.pdf oder Breyer_Slutsky.pdf sind fachlich relevant, aber nicht als flaechendeckende Primaerquelle fuer alle Slutsky-Portalinhalte ohne zusaetzliche Sichtung zugewiesen."
+      "Unterlagen wie Demmler_Slutsky.pdf oder Breyer_Slutsky.pdf sind fachlich relevant, aber nicht als flaechendeckende Primaerquelle fuer alle Slutsky-Portalinhalte ohne zusaetzliche Sichtung zugewiesen.",
+      "Technische Verdrahtung: `mikro1/js/data/contentManifest.js` spiegelt die Kuratierung als `MIKRO1_CONCEPT_PRIMARY_REFS` (Konzepte ohne belastbaren VL-Beleg bleiben `[]`, z. B. `psubst` laut `docs/audits/mikro1-provenance-validation-pass-2.md`).",
+      "Provenance-Audits: `docs/audits/mikro1-provenance-curation-pass-1.md`, `docs/audits/mikro1-provenance-validation-pass-2.md`."
+    ]
+  },
+  mikro2: {
+    stageLabel: "Kursportal (Quarantaene: Quellenlage)",
+    sourceMethod:
+      "Es gibt **keinen** Ordner **Mikro II** unter `source-materials/`; das Live-Portal deckt Mikro-II-Themen (Spieltheorie, Oligopol, AGG, Marktversagen, Information) **ohne** dateibasierte Primaeranker aus dem Repo. Inhaltliche Erweiterungen sind nicht als `direct-source` gegen VL-PDFs im Materialordner ausweisbar, bis ein offizieller Korpus eingepflegt ist (siehe `docs/audits/mikro2-quarantine-roadmap-pass-1.md`, `AGENTS.md`, `assets/js/modules.js` mit `sourceCorpusInRepo: false`).",
+    coverageStatus:
+      "Modul ist **live** und thematisch konsistent mit fortgeschrittener Mikrooekonomik; **nicht** mit in-repo PDF-Korpus abgesichert. Kein `contentManifest.js`, keine `MIKRO*-PRIMARY_REFS` gegen `source-materials/`.",
+    portalGoal:
+      "Bis Mikro-II-Materialien im Repo liegen: Lernpfad nutzbar halten, aber **keine** vorgebliche Quellenparitaet zu Modulen wie `mikro1` oder `makro2` suggerieren.",
+    audit: [
+      { label: "source-materials", value: "Kein Mikro-II-Baum (nur Mikro I vorhanden)" },
+      { label: "Manifest / Bridge", value: "Nicht vorhanden (bewusst; leeres Manifest waere irrefuehrend)" },
+      { label: "Registry", value: "`modules.js`: sourceCorpusInRepo false + sourceStatusNote" }
+    ],
+    sourceGroups: [],
+    roadmap: [],
+    qualityNotes: [
+      "Diagnose: `docs/audits/mikro2-source-identity-resolution-pass-1.md`.",
+      "Policy: `docs/audits/mikro2-quarantine-roadmap-pass-1.md` — Quarantaene betrifft **Quellenwahrheit**, nicht Deployability.",
+      "Neue Inhalte: als source-distilled / platform-added-* kennzeichnen, bis ein Korpus existiert; kein erfundenes PDF-Mapping."
     ]
   },
   makro2: {

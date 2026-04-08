@@ -144,7 +144,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 - **`features/fullExam.js` wrappers:** identical `createFullExamModule` imports → thin **one-liner pattern** or shared `fullExamAdapter.js` template.
 - **Theory signal extraction:** `extractTheorySignals` (portal-core) vs **duplicate logic** in `mikro1/js/ui/renderer.js` → converge on **one parser** with **hooks** for mikro1-specific drill formatting (not two divergent DOM parsers).
 - **Tab markup:** redundant `style="display:none"` on **Grafik** in many `index.html` files — rely on `updateTabButtons` only (cleanup when touching HTML).
-- **`module-content.js`:** ensure **every live `MODULES` slug** has a key (including **`mikro1`**, **`mikro2`**, consistent **`internationale-wirtschaftsbeziehungen`** quoting) — generalize access via `getModuleContent(slug)` only.
+- **`module-content.js`:** **`mikro1` / `mikro2`** are present (`module-content-parity-cleanup-pass-1.md`); extend or document exclusions for other live slugs (e.g. **`internationale-wirtschaftsbeziehungen`**) — access via `getModuleContent(slug)` only.
 
 ### 5.3 Must stay **module-specific** (non-negotiable per AGENTS.md)
 
@@ -174,7 +174,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 | Issue | Action |
 |-------|--------|
 | **`sourceRoot` in `modules.js`** | Remove from shared code or move to gitignored local config; never required for deploy |
-| **`module-content.js` missing `mikro1` / `mikro2`** | Add entries **or** document exclusion; avoid “benchmark modules invisible on landing narrative”. **`mikro2`:** there is still **no** `Mikro II` tree under `source-materials/` — any `module-content.js` story must **not** claim direct PDF grounding until that corpus exists (`docs/audits/mikro2-quarantine-roadmap-pass-1.md`). |
+| **`module-content.js` parity for micro modules** | **`mikro1`** and **`mikro2`** entries exist (`docs/audits/module-content-parity-cleanup-pass-1.md`). **`mikro2`** remains **quarantine-honest** (no in-repo Mikro II corpus; no fake PDF grounding). Other live slugs (e.g. **`internationale-wirtschaftsbeziehungen`**) may still lack entries. |
 | **`r` in `module-content.js` but not in `MODULES`** | Align lists: add to `MODULES` **or** mark `r` as special route in docs + landing |
 | **`mountLivePortalBridge` no-op** (`live-portal-bridge.js`) | Remove call from `mathematik/js/portalHub.js` **or** re-implement bridge; document until then |
 | **Placeholder `CONTENT`** | Fill gaps or mark `generated_placeholder` with explicit `platform-added-explanation` in manifest |
@@ -193,7 +193,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 
 ### Phase 1 — Metadata parity (low risk)
 
-- Add **`mikro1` / `mikro2`** blocks to `module-content.js` (source story only).
+- **`mikro1` / `mikro2`** in `module-content.js`: done for source narrative; **`mikro2`** explicitly non-corpus (`module-content-parity-cleanup-pass-1.md`).
 - Normalize **`getModuleContent`** usage for **`internationale-wirtschaftsbeziehungen`** key shape.
 - Remove **`sourceRoot`** from shared `modules.js` (or replace with empty string + comment).
 

@@ -1670,6 +1670,16 @@ predict(model, newdata = new_obs)`,
           step('Das Mittelwertsintervall beantwortet also eine andere, engere Frage.')
         ],
         'Die Differenz zwischen Mittelwerts- und Einzelprognose ist eine Unsicherheitsdifferenz.'
+      ),
+      task(
+        'Welche drei Faktoren treiben die Prognosefehlervarianz in der einfachen Regression (K=2), und wie wirken sie auf die Intervallbreite?',
+        [
+          step('Grundrauschen: Eine größere Fehlervarianz \\(\\sigma^2\\) verbreitert jedes Intervall.'),
+          step('Stichprobengröße: Größeres n reduziert die Schätzunsicherheit und verengt Intervalle ceteris paribus.'),
+          step('Distanz des Prognosepunkts zum Mittelwert: Je weiter \\(x_0\\) von \\(\\bar{x}\\) entfernt liegt, desto größer die Unsicherheit (Extrapolationseffekt).'),
+          step('Für Einzelprognosen kommt zusätzlich die neue idiosynkratische Störung hinzu; daher ist PI stets breiter als CI.')
+        ],
+        'Forecast-Risiko wird durch Rauschen, Informationsmenge und Extrapolationsdistanz bestimmt.'
       )
     ],
     intuition: intuition({
@@ -1690,7 +1700,19 @@ predict(model, newdata = new_obs)`,
       'Ich kann erklären, warum das Prognoseintervall breiter ist.',
       'Ich kann Aufgabenformulierungen korrekt in Intervalltypen übersetzen.',
       'Ich kann die Zusatzrolle von σ̂² in der Einzelprognose benennen.'
-    ]
+    ],
+    rBlock: rBlock({
+      script: 'R-Skriptpfad: 05_Vorhersage.R + Tutorium 4 (Bestimmtheitsmaß und Prognosen)',
+      purpose: 'Die Kursmaterialien verbinden Punktprognose, Intervalltyp und Prognosefehlervarianz in einer gemeinsamen Aufgabenkette.',
+      code: String.raw`model <- lm(y ~ x, data = df)
+new_obs <- data.frame(x = x0)
+predict(model, newdata = new_obs, interval = "confidence")
+predict(model, newdata = new_obs, interval = "prediction")`,
+      output: 'Das Prognoseintervall ist sichtbar breiter als das Konfidenzintervall am selben x0.',
+      miniTask: 'Beschreibe, wie sich die Intervallbreite verändert, wenn x0 weit vom Stichprobenmittel entfernt liegt.',
+      solution: 'Beide Intervalle werden breiter; der Effekt ist bei Prognoseintervallen besonders stark, weil zusätzlich die neue Störung einfließt.',
+      pitfalls: ['Den Unterschied zwischen interval="confidence" und interval="prediction" als reine Softwareoption statt inhaltliche Modellfrage lesen.']
+    })
   },
   {
     id: 'r_squared',
@@ -2056,6 +2078,176 @@ anova(model_r, model_ur)`,
       'Ich kann Breite, Richtung und Nullbezug eines Intervalls interpretieren.',
       'Ich kann typische Fehlinterpretationen korrigieren.'
     ]
+  },
+  {
+    id: 'normal_linear_model_mle',
+    title: 'Normal lineares Modell & MLE',
+    cat: 'Inferenz',
+    short: 'MLE',
+    uses: ['gauss_markov', 'error_variance', 'confidence_intervals'],
+    motivation: 'Die Vorlesungsunterlagen und die Formelsammlung behandeln das normale lineare Modell explizit. Für Klausuren ist zentral, warum MLE im Normalfall mit OLS bei β zusammenfällt, aber über die Likelihood argumentiert wird.',
+    sections: [
+      {
+        title: 'Normalitätsannahme und Likelihood',
+        body: [
+          'Im normalen linearen Modell wird der Fehlervektor als normalverteilt mit konstanter Varianz modelliert. Daraus folgt eine geschlossene Log-Likelihood in β und σ².',
+          'Diese Darstellung ist nicht nur formal: Sie verbindet Schätzung, Verteilungsannahme und Inferenz in einem gemeinsamen Rahmen.'
+        ],
+        math: [String.raw`$$\ell(\beta,\sigma^2\mid y,X)=-\frac{T}{2}\ln(2\pi)-\frac{T}{2}\ln(\sigma^2)-\frac{(y-X\beta)'(y-X\beta)}{2\sigma^2}$$`]
+      },
+      {
+        title: 'Beziehung zwischen OLS und MLE',
+        body: [
+          'Unter Normalität maximiert dieselbe β-Lösung wie bei OLS die Likelihood. Das erklärt, warum OLS- und MLE-Koeffizienten hier übereinstimmen.',
+          'Der Unterschied liegt in der Begründungslogik: OLS als Quadratsummenminimum, MLE als Wahrscheinlichkeitsmaximum.'
+        ],
+        math: [String.raw`$$\hat{\beta}_{MLE}=(X'X)^{-1}X'y=\hat{\beta}_{OLS}$$`]
+      }
+    ],
+    warnings: [
+      {
+        title: 'MLE liefert immer andere Koeffizienten als OLS',
+        body: 'Im normalen linearen Modell fallen die Koeffizientenlösungen zusammen; Unterschiede betreffen eher die Herleitung und bestimmte Varianzschätzerkonventionen.'
+      }
+    ],
+    formeln: [
+      formula(
+        'Log-Likelihood (NLM)',
+        String.raw`$$\ell(\beta,\sigma^2\mid y,X)=-\frac{T}{2}\ln(2\pi)-\frac{T}{2}\ln(\sigma^2)-\frac{(y-X\beta)'(y-X\beta)}{2\sigma^2}$$`,
+        'Likelihood des normalen linearen Modells.',
+        {}
+      ),
+      formula(
+        'MLE/OLS-Identität für β',
+        String.raw`$$\hat{\beta}_{MLE}=\hat{\beta}_{OLS}=(X'X)^{-1}X'y$$`,
+        'Gilt unter den Standardannahmen des normalen linearen Modells.',
+        {}
+      )
+    ],
+    aufgaben: [
+      task(
+        'Warum ist es im normalen linearen Modell korrekt zu sagen, dass OLS und MLE für β dieselbe Lösung liefern, obwohl sie aus unterschiedlichen Prinzipien kommen?',
+        [
+          step('OLS minimiert die Residuenquadratsumme, MLE maximiert die (log-)Likelihood unter Normalitätsannahme.'),
+          step('In der Likelihood hängt β nur über die quadratische Form (y-Xβ)\'(y-Xβ) ein.'),
+          step('Das Maximieren der Likelihood in β ist damit äquivalent zum Minimieren der Quadratsumme.'),
+          step('Daher fallen die Koeffizientenschätzer zusammen.')
+        ],
+        'Im normalen linearen Modell sind OLS und MLE für β algebraisch identisch, auch wenn die Begründung verschieden ist.'
+      )
+    ],
+    intuition: intuition({
+      core: 'MLE liest das lineare Modell als Wahrscheinlichkeitsmodell; OLS liest es als Quadratsummenproblem. Unter Normalität landen beide für β am selben Punkt.',
+      analogy: 'Wie zwei Wege auf denselben Berggipfel: einer über Geometrie, der andere über Wahrscheinlichkeitskarten.',
+      bridge: 'Wenn in einer Aufgabe Normalitätsannahme und Likelihood auftauchen, verbinde sie aktiv mit der OLS-Lösung.',
+      exam: [
+        { if: 'log-likelihood gegeben ist', then: 'suche die Quadratform in den Residuen und stelle den OLS-Bezug her.' },
+        { if: 'MLE vs OLS gefragt ist', then: 'trenne Herleitung und Ergebnis.' }
+      ],
+      mistakes: [
+        'Normalität für die Punktschätzung von β überbewerten, ohne die OLS-Identität zu sehen.',
+        'Likelihood nur als Symbolik ohne Entscheidungslogik behandeln.'
+      ]
+    }),
+    mastery: [
+      'Ich kann die Log-Likelihood des normalen linearen Modells inhaltlich lesen.',
+      'Ich kann die OLS/MLE-Identität für β erklären.',
+      'Ich kann Herleitungsweg und Schätzerergebnis unterscheiden.',
+      'Ich kann MLE-Begriffe klausurfähig mit OLS verknüpfen.'
+    ],
+    rBlock: rBlock({
+      script: 'R-Skriptpfad: Vorlesung NLM/MLE-Abschnitt + Formelsammlung',
+      purpose: 'Die Kursmaterialien zeigen die Likelihooddarstellung und ihre Verbindung zur OLS-Lösung.',
+      code: String.raw`model <- lm(y ~ x1 + x2, data = df)
+coef(model)
+sum(resid(model)^2)`,
+      output: 'Das OLS-Ergebnis liefert die β-Schätzung, die im normalen linearen Modell zugleich die MLE-Lösung für β ist.',
+      miniTask: 'Erkläre in einem Satz, welche Rolle die Residuenquadratsumme in der Log-Likelihood spielt.',
+      solution: 'Sie ist der einzige β-abhängige Kernterm der Likelihood und bestimmt daher die gleiche β-Lösung wie OLS.',
+      pitfalls: ['MLE und OLS als unverbundene Themenblöcke auswendig lernen, statt die gemeinsame β-Logik zu erkennen.']
+    })
+  },
+  {
+    id: 'linear_restrictions_ur',
+    title: 'Lineare Restriktionen: Restricted vs Unrestricted',
+    cat: 'Inferenz',
+    short: 'R/UR',
+    uses: ['f_test', 'matrix_notation', 't_test'],
+    motivation: 'Probeklausuren und Vorlesung behandeln Modellvergleiche über Restriktionen systematisch. Für Prüfungen ist zentral, Restriktionen als Modellobjekt zu formulieren und den R/UR-Vergleich sauber zu entscheiden.',
+    sections: [
+      {
+        title: 'Restriktionen als Matrixaussage',
+        body: [
+          'Lineare Restriktionen werden kompakt als Rβ = r formuliert. Das schafft einen einheitlichen Rahmen für Einzel-, Block- und Gleichheitsrestriktionen.',
+          'Die Restricted-Spezifikation setzt diese Bedingungen durch; das Unrestricted-Modell lässt sie frei.'
+        ],
+        math: [String.raw`$$H_0: R\beta = r \qquad \text{gegen} \qquad H_1: R\beta \neq r$$`]
+      },
+      {
+        title: 'R/UR-Entscheidungslogik',
+        body: [
+          'Die zentrale Frage lautet: Reicht das eingeschränkte Modell aus, oder verbessert das freie Modell den Fit pro zusätzlichem Freiheitsgrad ausreichend?',
+          'Diese Logik wird über den F-Test operationalisiert und passt genau zu Klausuraufgaben mit Modellvergleich.'
+        ],
+        math: [String.raw`$$F = \frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$`]
+      }
+    ],
+    warnings: [
+      {
+        title: 'Restriktionen nur verbal, nicht formal formulieren',
+        body: 'Ohne explizite H0-Formulierung (Rβ = r) wird unklar, welches Modell tatsächlich restricted ist.'
+      }
+    ],
+    formeln: [
+      formula(
+        'Lineare Restriktion',
+        String.raw`$$H_0: R\beta = r$$`,
+        'Allgemeine Form für gemeinsame Hypothesen über Koeffizienten.',
+        {}
+      )
+    ],
+    aufgaben: [
+      task(
+        'Ein unrestricted Modell enthält x1, x2, x3. Das restricted Modell enthält nur x1. Formuliere H0 und erkläre, warum ein F-Test hier der passende Zugriff ist.',
+        [
+          step('Das restricted Modell setzt die zusätzlichen Koeffizienten auf null.', String.raw`$$H_0:\beta_2=\beta_3=0$$`),
+          step('Alternativ in Matrixform: H0: Rβ = r mit zwei linearen Restriktionen.'),
+          step('Da mehrere Restriktionen gleichzeitig geprüft werden, ist ein gemeinsamer F-Test statt separater t-Tests erforderlich.'),
+          step('Die Entscheidung basiert auf zusätzlichem Fit relativ zu den zusätzlichen Freiheitsgraden.')
+        ],
+        'R/UR-Denken heißt: Restriktionen explizit machen und den gemeinsamen Informationsgewinn testen.'
+      )
+    ],
+    intuition: intuition({
+      core: 'Restricted vs unrestricted ist ein Wettbewerb zwischen Modellökonomie und zusätzlichem Fit.',
+      analogy: 'Wie zwei Karten einer Route: die einfache Karte mit wenigen Regeln gegen die detaillierte Karte mit mehr Freiheitsgraden.',
+      bridge: 'Wenn mehrere Koeffizienten gemeinsam auf null oder auf Gleichheit geprüft werden, denke sofort in R/UR-Modellen.',
+      exam: [
+        { if: 'Modellvergleich auftaucht', then: 'benenne zuerst H0 als Restriktion und erst dann die Teststatistik.' },
+        { if: 'mehrere Koeffizienten gemeinsam geprüft werden', then: 'verwende F- statt Einzel-t-Logik.' }
+      ],
+      mistakes: [
+        'Restricted und unrestricted inhaltlich vertauschen.',
+        'Mehrfachrestriktionen mit separaten t-Tests beantworten.'
+      ]
+    }),
+    mastery: [
+      'Ich kann lineare Restriktionen in H0: Rβ=r schreiben.',
+      'Ich kann restricted und unrestricted Modell sauber unterscheiden.',
+      'Ich kann die F-Test-Logik für gemeinsame Restriktionen erklären.',
+      'Ich kann Modellvergleich klausurfähig verbal begründen.'
+    ],
+    rBlock: rBlock({
+      script: 'R-Skriptpfad: 09_Intervallschätzung_Hypothesentests.R + Probeklausur-Modellvergleich',
+      purpose: 'Die Kursmaterialien trainieren den Restriktionsvergleich als expliziten Modellvergleich.',
+      code: String.raw`model_ur <- lm(y ~ x1 + x2 + x3, data = df)
+model_r  <- lm(y ~ x1, data = df)
+anova(model_r, model_ur)`,
+      output: 'Die Ausgabe liefert den gemeinsamen Restriktionstest für die zusätzlich freigegebenen Koeffizienten.',
+      miniTask: 'Nenne die genaue Nullhypothese, die in diesem Vergleich getestet wird.',
+      solution: 'Getestet wird, ob die im restricted Modell ausgeschlossenen Koeffizienten im unrestricted Modell gemeinsam null sind.',
+      pitfalls: ['ANOVA-Zeile zu lesen, ohne das zugehörige Restriktionsset explizit zu nennen.']
+    })
   },
   {
     id: 'asymptotic_normality',
@@ -2470,6 +2662,16 @@ coef(lm(y ~ x1 + x2 + x3, data = df))[2]`,
           step('Erst danach wird geprüft, ob eine modellierte Varianzstruktur (z.B. WLS/GLS) zusätzliche Effizienzgewinne liefert.')
         ],
         'Interpretation-first: zuerst Problemtyp (Varianz vs. Mittelwert/Bias) trennen, dann passende Korrektur wählen.'
+      ),
+      task(
+        'Du teilst eine Stichprobe in zwei Gruppen und erhältst deutlich unterschiedliche Residuenvarianzen. Welche test-to-decision Kette ist im Sinne des Kurses sauber?',
+        [
+          step('Formuliere zuerst die Null als Homoskedastizität und die Alternative als gruppenspezifisch unterschiedliche Varianz.'),
+          step('Wird Homoskedastizität verworfen, behandle die klassische OLS-Inferenz als fragil statt die Punktschätzung pauschal zu verwerfen.'),
+          step('Entscheide dann zwischen robuster Inferenz (konservativer Standardzugriff) und GLS/WLS (falls Varianzstruktur gut modellierbar ist).'),
+          step('Begründe die Entscheidung explizit mit dem Ziel: korrektes Testniveau vs. zusätzlicher Effizienzgewinn.')
+        ],
+        'Diagnostik ist eine Abfolge: testen, Problemtyp benennen, dann die passende Inferenz-/Schätzentscheidung treffen.'
       )
     ],
     intuition: intuition({
@@ -2670,6 +2872,16 @@ coeftest(model, vcov = vcovHC(model, type = "HC1"))`,
           step('Für Inferenz folgt: klassische Standardfehler sind fraglich; robuste serielle Korrekturen (z.B. HAC) werden relevant.')
         ],
         'Trap-Check: Trend in y ist kein Beweis für Fehlerautokorrelation; die Diagnose muss auf u_t abzielen.'
+      ),
+      task(
+        'Ein Modell liefert DW = 0,9 und inhaltlich plausible Exogenität. Welche estimator/test-Entscheidung folgt als nächster Schritt?',
+        [
+          step('DW deutlich unter 2 stützt den Verdacht auf positive AR(1)-Fehlerkorrelation.'),
+          step('Da Exogenität plausibel bleibt, ist das primäre Risiko die Inferenzverzerrung, nicht automatisch ein Bias der Punktschätzer.'),
+          step('Für Inferenz ist eine serielle robuste Korrektur (z.B. HAC/Newey-West) ein erster belastbarer Zugriff.'),
+          step('Wenn eine konkrete AR-Struktur tragfähig spezifiziert werden kann, ist EGLS/GLS als Effizienzschritt zusätzlich begründbar.')
+        ],
+        'Bei Autokorrelation folgt auf Diagnose eine klare Inferenzentscheidung (HAC) und optional eine modellierte Effizienzentscheidung (EGLS/GLS).'
       )
     ],
     intuition: intuition({

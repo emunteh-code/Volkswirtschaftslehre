@@ -207,6 +207,15 @@ export const CONTENT = {
           step('Weil das Einkommen sinkt, ist der tatsächliche Anstieg der aggregierten Ersparnis viel kleiner als beabsichtigt.')
         ],
         'Mehr gewünschtes Sparen drückt die Nachfrage; das niedrigere Einkommen neutralisiert einen Teil des Sparversuchs.'
+      ),
+      task(
+        String.raw`Gegeben seien $c_1 = 0{,}75$, $\Delta G = +30$ und $\Delta T = +30$. Wie groß ist der Nettoeffekt auf $Y$?`,
+        [
+          step('Berechne die Teilwirkungen separat: Ausgaben- und Steuermultiplikator.', String.raw`\frac{\partial Y}{\partial G}=\frac{1}{1-c_1}=4,\; \frac{\partial Y}{\partial T}=-\frac{c_1}{1-c_1}=-3`),
+          step('Wende beide Impulse an.', String.raw`\Delta Y_G = 4\cdot 30 = 120,\; \Delta Y_T = -3\cdot 30 = -90`),
+          step('Addiere die Effekte und deute die Logik.', String.raw`\Delta Y = 120 - 90 = 30`)
+        ],
+        String.raw`Der Nettoeffekt beträgt $+30$: gleich hohe Steuer- und Ausgabenänderungen wirken nicht symmetrisch, weil Steuern nur über Konsumquote in die Nachfrage laufen.`
       )
     ]
   },
@@ -385,6 +394,15 @@ export const CONTENT = {
           step('Ökonomie: Der höhere Zins dämpft Investitionen, sodass der Produktionsanstieg kleiner ausfällt als ohne Zinsreaktion.')
         ],
         'Crowding-Out ist die teilweise Verdrängung privater Nachfrage durch den zinsbedingten Rückgang der Investitionen.'
+      ),
+      task(
+        'Eine Lösung behauptet: "Fiskalpolitik wirkt immer gleich stark, weil nur die IS-Kurve zählt." Wo liegt der Denkfehler?',
+        [
+          step('Die IS-Verschiebung ist nur der erste Teil der Analyse.'),
+          step('Die Endwirkung hängt davon ab, wie die monetäre Bedingung verläuft (horizontale Zinsregel vs. steigende LM).'),
+          step('Damit bestimmt die Zinsreaktion, ob Investitionen stabil bleiben oder teilweise verdrängt werden.')
+        ],
+        'Der Fehler ist das Ignorieren der Geldpolitik/LM-Form: dieselbe IS-Verschiebung kann sehr unterschiedliche Endeffekte erzeugen.'
       )
     ]
   },
@@ -430,6 +448,15 @@ export const CONTENT = {
           step('Höhere Finanzierungskosten senken Investitionen und verschieben die IS-Kurve nach links.')
         ],
         'Nicht der Leitzins allein, sondern der Kreditzins entscheidet über die Investitionsnachfrage.'
+      ),
+      task(
+        String.raw`Gegeben: Leitzins bleibt bei $3\%$, erwartete Inflation sinkt von $2\%$ auf $1\%$, Risikoprämie steigt von $1\%$ auf $2\%$. Wie verändert sich der Kreditzins in realer Rechnung?`,
+        [
+          step('Berechne den anfänglichen nominalen Kreditzins.', String.raw`i_L^0 = 3\% + 1\% = 4\%`),
+          step('Berechne den neuen nominalen Kreditzins.', String.raw`i_L^1 = 3\% + 2\% = 5\%`),
+          step('Ziehe erwartete Inflation ab.', String.raw`r_L^0 \approx 4\%-2\%=2\%,\; r_L^1 \approx 5\%-1\%=4\%`)
+        ],
+        'Der real relevante Kreditzins steigt stark (von 2% auf 4%): Doppelbremse aus höherer Prämie und niedrigeren Inflationserwartungen.'
       )
     ]
   },
@@ -522,6 +549,15 @@ export const CONTENT = {
           step('Die gesamte kurzfristige Phillipskurve liegt deshalb höher.')
         ],
         'Höhere Inflationserwartungen erhöhen die Inflationsrate bei jeder gegebenen Arbeitslosenquote.'
+      ),
+      task(
+        String.raw`Trap-Check: "Wenn die Arbeitslosigkeit bei 6% liegt, muss die Inflation fallen." Warum ist diese Aussage ohne Zusatzinfo unvollständig?`,
+        [
+          step('Für die Richtung zählt nicht das Niveau von $u$ allein, sondern die Lücke zu $u_n$.'),
+          step('Nur wenn $u > u_n$, ist der Inflationsdruck negativ.'),
+          step('Ohne Angabe von $u_n$ (oder äquivalenter Information) ist keine eindeutige Richtungsdiagnose möglich.')
+        ],
+        String.raw`Aussagen über Inflationsrichtung brauchen die Arbeitslosenlücke $u-u_n$, nicht nur den absoluten Wert von $u$.`
       )
     ]
   },

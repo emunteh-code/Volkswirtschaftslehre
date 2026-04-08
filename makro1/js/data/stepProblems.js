@@ -51,6 +51,16 @@ const BASE_STEP_PROBLEMS = {
         { q: '[3. Validation] Warum ist der Effekt größer als 40?', answer: ['weil folgerunden entstehen', 'weil zusätzliche einkommen wieder konsumiert werden', 'multiplikator'], options: { problemId: 'mk1_mult_1', role: 'VALIDATION' }, hint: 'Denke an weitere Konsumrunden.', explain: 'Die erste Ausgabenrunde erzeugt Einkommen, das wiederum teilweise konsumiert wird.' }
       ]
     }
+    ,
+    {
+      title: 'Balanciertes Budget',
+      context: 'Der Staat erhöht G und T jeweils um denselben Betrag bei c1 = 0,75.',
+      steps: [
+        { q: '[1. Decision] Warum sind Steuer- und Ausgabenimpuls nicht symmetrisch?', answer: ['weil steuern nur über konsum wirken', 'steuerimpuls läuft über c1', 'nur ein teil wird konsumiert'], options: { problemId: 'mk1_mult_2', stepId: 'asymmetry', isDecision: true }, hint: 'G wirkt direkt, T indirekt über Konsum.', explain: 'Ausgabenimpulse gehen 1:1 in die Nachfrage; Steuerimpulse nur über die marginale Konsumquote.' },
+        { q: '[2. Execution] Wie groß ist der Steuermultiplikator bei c1 = 0,75?', answer: ['-3', '-3.0'], options: { problemId: 'mk1_mult_2', dependsOn: 'asymmetry' }, hint: '-c1/(1-c1).', explain: 'Bei c1=0,75 gilt -0,75/0,25 = -3.' },
+        { q: '[3. Validation] Wenn ΔG = ΔT > 0, welches Vorzeichen hat ΔY?', answer: ['positiv', 'plus', 'y steigt'], options: { problemId: 'mk1_mult_2', role: 'VALIDATION' }, hint: 'Ausgabenwirkung übertrifft Steuerwirkung.', explain: 'Der Nettoeffekt bleibt positiv (balanciertes Budget mit positivem Multiplikatoreffekt).' }
+      ]
+    }
   ],
   geldnachfrage: [
     {
@@ -95,6 +105,16 @@ const BASE_STEP_PROBLEMS = {
         { q: '[3. Validation] Warum ist der Outputeffekt kleiner als im reinen Gütermarktmodell?', answer: ['weil investitionen verdrängt werden', 'crowding out', 'weil der höhere zins investitionen senkt'], options: { problemId: 'mk1_policy_1', role: 'VALIDATION' }, hint: 'Der Zins reagiert.', explain: 'Der höhere Zins verdrängt private Investitionen teilweise.' }
       ]
     }
+    ,
+    {
+      title: 'Policy-Mix-Falle',
+      context: 'Fiskalexpansion bei steiler LM und alternativ bei horizontaler Zinsregel.',
+      steps: [
+        { q: '[1. Decision] In welchem Fall ist Crowding-Out typischerweise stärker?', answer: ['bei steiler lm', 'steile lm', 'lm steil'], options: { problemId: 'mk1_policy_2', stepId: 'steep_lm', isDecision: true }, hint: 'Dann reagiert der Zins stärker auf Y.', explain: 'Je steiler die LM, desto stärker steigt i bei gleichem IS-Impuls.' },
+        { q: '[2. Execution] Welche Größe vermittelt den Dämpfungseffekt direkt?', answer: ['zins', 'i', 'nominalzins'], options: { problemId: 'mk1_policy_2', dependsOn: 'steep_lm' }, hint: 'Investitionen reagieren auf Finanzierungskosten.', explain: 'Der Zinsanstieg ist der unmittelbare Crowding-Out-Kanal.' },
+        { q: '[3. Validation] Welche typische Kurzantwort ist falsch: "Fiskalpolitik wirkt immer gleich, weil IS gleich verschoben wird"?', answer: ['falsch', 'ist falsch', 'falsch weil lm wichtig ist'], options: { problemId: 'mk1_policy_2', role: 'VALIDATION' }, hint: 'Monetäre Reaktion gehört immer dazu.', explain: 'Die Endwirkung hängt von der monetären Bedingung ab, nicht nur von der IS-Verschiebung.' }
+      ]
+    }
   ],
   realzins: [
     {
@@ -104,6 +124,16 @@ const BASE_STEP_PROBLEMS = {
         { q: '[1. Decision] Welchen Realzins hatten Sie zunächst?', answer: ['3%', '3', '0.03', '0,03'], options: { problemId: 'mk1_real_1', stepId: 'r0', isDecision: true }, hint: 'r ≈ i − π^e.', explain: 'Anfangs gilt r ≈ 5% − 2% = 3%.' },
         { q: '[2. Execution] Wie hoch ist der neue Realzins?', answer: ['5%', '5', '0.05', '0,05'], options: { problemId: 'mk1_real_1', dependsOn: 'r0' }, hint: 'Nun ist π^e = 0.', explain: 'Der neue Realzins beträgt 5%.' },
         { q: '[3. Validation] Welche Wirkung hat das auf Investitionen?', answer: ['sie sinken', 'investitionen sinken'], options: { problemId: 'mk1_real_1', role: 'VALIDATION' }, hint: 'Höhere reale Finanzierungskosten bremsen Nachfrage.', explain: 'Steigende Realzinsen dämpfen Investitionen und Nachfrage.' }
+      ]
+    }
+    ,
+    {
+      title: 'Doppelter Finanzierungsschock',
+      context: 'Leitzins unverändert, Inflationserwartung sinkt, Risikoprämie steigt.',
+      steps: [
+        { q: '[1. Interpretation] Wie wirkt fallende erwartete Inflation auf den Realzins?', answer: ['realzins steigt', 'steigt'], options: { problemId: 'mk1_real_2', stepId: 'fisher', isDecision: true }, hint: 'r ≈ i − π^e.', explain: 'Sinkt π^e bei gegebenem i, steigt r.' },
+        { q: '[2. Execution] Wie wirkt eine steigende Risikoprämie auf den Kreditzins?', answer: ['kreditzins steigt', 'steigt'], options: { problemId: 'mk1_real_2', dependsOn: 'fisher' }, hint: 'i_L = i + x.', explain: 'Ein höheres x erhöht direkt den Kreditzins.' },
+        { q: '[3. Validation] Welche IS-Wirkung folgt aus beiden Effekten zusammen?', answer: ['is nach links', 'nach links', 'investitionen sinken'], options: { problemId: 'mk1_real_2', role: 'VALIDATION' }, hint: 'Höhere reale Finanzierungskosten bremsen Nachfrage.', explain: 'Beide Effekte dämpfen Investitionen und verschieben die IS-Kurve nach links.' }
       ]
     }
   ],
@@ -126,6 +156,16 @@ const BASE_STEP_PROBLEMS = {
         { q: '[1. Interpretation] Wie ist das Vorzeichen von (u − u_n)?', answer: ['negativ', '-'], options: { problemId: 'mk1_pc_1', stepId: 'gap', isDecision: true }, hint: '4% liegt unter 5%.', explain: 'Die Arbeitslosenlücke ist negativ.' },
         { q: '[2. Execution] Was bedeutet das für π_t − π_{t-1}?', answer: ['positiv', '+', 'inflation steigt'], options: { problemId: 'mk1_pc_1', dependsOn: 'gap' }, hint: 'Minus mal negativ ergibt positiv.', explain: 'Die Inflationsänderung ist positiv; Inflation steigt.' },
         { q: '[3. Validation] Welche Rolle spielt u_n in dieser Logik?', answer: ['es ist die quote stabiler inflation', 'nairu', 'bei u_n bleibt inflation konstant'], options: { problemId: 'mk1_pc_1', role: 'VALIDATION' }, hint: 'Dort beschleunigt sich Inflation nicht.', explain: 'Bei u = u_n bleibt Inflation unter adaptiven Erwartungen konstant.' }
+      ]
+    }
+    ,
+    {
+      title: 'NAIRU-Trap',
+      context: 'Eine Antwort nutzt nur das Niveau von u, nicht die Lücke zu u_n.',
+      steps: [
+        { q: '[1. Decision] Welche Lücke ist für die Inflationsdynamik entscheidend?', answer: ['u-u_n', 'arbeitslosenlücke', 'arbeitslosigkeitslücke'], options: { problemId: 'mk1_pc_2', stepId: 'gap_def', isDecision: true }, hint: 'Nicht u allein, sondern die Abweichung vom natürlichen Niveau.', explain: 'Die Phillips-Logik arbeitet mit der Lücke u-u_n.' },
+        { q: '[2. Execution] Wenn u > u_n, was gilt für π_t − π_{t-1} (adaptive Erwartungen)?', answer: ['negativ', 'minus', 'inflation sinkt'], options: { problemId: 'mk1_pc_2', dependsOn: 'gap_def' }, hint: 'Minus α mal positive Lücke.', explain: 'Bei u>u_n fällt die Inflation relativ zur Vorperiode.' },
+        { q: '[3. Validation] Warum ist die Aussage "u=6% bedeutet fallende Inflation" ohne u_n unvollständig?', answer: ['weil u_n fehlt', 'weil die lücke nicht bekannt ist', 'nairu fehlt'], options: { problemId: 'mk1_pc_2', role: 'VALIDATION' }, hint: '6% kann über oder unter u_n liegen.', explain: 'Ohne Referenz u_n ist die Richtung der Inflationsänderung nicht eindeutig.' }
       ]
     }
   ],

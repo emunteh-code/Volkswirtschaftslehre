@@ -12,7 +12,7 @@ export const INTUITION = {
   testen: 'Ein Hypothesentest prüft, ob die Daten mit einer Nullhypothese vereinbar sind. Der p-Wert misst die Evidenz gegen H₀.',
   regression_schaetzung_inferenz: 'Regression-Schätzung und Inferenz klären Parameter, Signifikanz und Interpretation des linearen Zusammenhangs.',
   regression_diagnostik_prognose: 'Regression-Diagnostik und Prognose prüfen Modellannahmen und trennen Erwartungswert- von Einzelprognoseaussagen.',
-  rlab: 'R ermöglicht die praktische Umsetzung statistischer Methoden — von deskriptiver Analyse bis zur Regressionsdiagnostik.',
+  rlab: 'R sitzt in Statistik jetzt direkt auf den Methoden-Konzepten: Daten lesen, Zusammenhang prüfen, Intervalle deuten, Tests entscheiden und Modelle interpretieren.',
   z_test:
     'Der z-Test ist der Referenzfall mit bekannter Populationsstreuung σ (oder großem n mit Normalapproximation). Sobald σ unbekannt ist, führt der t-Test die Inferenz; z und t konvergieren für große Freiheitsgrade.',
   zwei_stichproben:

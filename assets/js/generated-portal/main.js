@@ -3127,7 +3127,7 @@ const baseRenderer = createRenderer({
   renderRAnwendungPanel: rCodeChapterId
     ? (conceptId) => {
         if (conceptId !== rCodeChapterId) return '';
-        return renderRAnwendungTab(module.rPracticeBlocks, module.slug);
+        return renderRAnwendungTab(module.rPracticeBlocks, module.slug, { conceptId });
       }
     : null
 });

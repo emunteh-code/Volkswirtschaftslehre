@@ -389,7 +389,7 @@ baseRenderer = createRenderer({
   renderRAnwendungPanel: (conceptId) => {
     const block = R_BLOCKS_BY_ID[conceptId];
     if (!block) return '';
-    return renderRAnwendungTab([block], 'oekonometrie');
+    return renderRAnwendungTab([block], 'oekonometrie', { conceptId });
   }
 });
 

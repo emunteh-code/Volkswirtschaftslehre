@@ -8,14 +8,34 @@ const intuition = ({ core, analogy, bridge, exam = [], mistakes = [] }) => ({
   exam,
   mistakes
 });
-const rBlock = ({ script, purpose, code, output, miniTask, solution, pitfalls = [] }) => ({
+const rBlock = ({
   script,
   purpose,
   code,
   output,
   miniTask,
   solution,
-  pitfalls
+  pitfalls = [],
+  taskMode,
+  changeFocus,
+  keepHint,
+  solutionChanges = [],
+  solutionCode = '',
+  firstStep
+}) => ({
+  script,
+  purpose,
+  code,
+  output,
+  miniTask,
+  solution,
+  pitfalls,
+  taskMode,
+  changeFocus,
+  keepHint,
+  solutionChanges,
+  solutionCode,
+  firstStep
 });
 
 export const CURRICULUM = [
@@ -125,6 +145,18 @@ t(X) %*% X`,
       output: 'Du siehst direkt, dass X zwei Spalten hat: Interzept und x2. Das Kreuzprodukt X\'X ist 2 × 2 und damit genau das Objekt, das später invertiert wird.',
       miniTask: 'Erweitere X um einen dritten Regressor x3 und bestimme erneut die Dimensionen von X und X\'X.',
       solution: 'Mit drei Spalten in X wird X\'X zu einer 3 × 3-Matrix. Die Logik ändert sich nicht: Anzahl der Spalten von X = Anzahl der Parameter = Dimension von X\'X.',
+      solutionChanges: [
+        'Lege zuerst einen neuen Regressor `x3` als Vektor mit fünf Beobachtungen an.',
+        'Erweitere danach `cbind(1, x2)` zu `cbind(1, x2, x3)` und lasse die beiden Dimensionsbefehle unverändert.',
+        'Lies anschließend `dim(X)` und `t(X) %*% X` erneut als 5 × 3 bzw. 3 × 3.'
+      ],
+      solutionCode: String.raw`x2 <- c(-3.40, -3.41, -3.42, -3.45, -3.46)
+y  <- c(-4.02, -4.03, -4.04, -4.06, -4.08)
+x3 <- c(1, 2, 3, 4, 5)
+X  <- cbind(1, x2, x3)
+
+dim(X)
+t(X) %*% X`,
       pitfalls: [
         'dim(X) lesen, ohne die ökonomische Rolle der Spalten zu benennen.',
         'X\'X als Datenmatrix missverstehen, obwohl es bereits ein verdichtetes Informationsobjekt ist.'
@@ -226,6 +258,17 @@ cor(x, y)`,
       output: 'mean(), var(), cov() und cor() liefern die Kennzahlen, die du auch in Regressionslogik wiederfindest. Die Korrelation standardisiert nur, was die Kovarianz in Rohgrößen misst.',
       miniTask: 'Berechne cov(x, y) und ändere danach y so, dass die Reihenfolge gleich bleibt, die Streuung aber zunimmt. Beobachte, wie sich cor(x, y) und cov(x, y) unterscheiden.',
       solution: 'Die Kovarianz steigt mit der Skalierung von y, die Korrelation bleibt bei gleicher linearer Struktur deutlich stabiler.',
+      solutionChanges: [
+        'Lass `x` unverändert und skaliere `y` auf größere Abstände, ohne die Reihenfolge der Werte zu drehen.',
+        'Führe danach erneut `cov(x, y)` und `cor(x, y)` aus, damit du Rohstreuung und standardisierte Beziehung direkt vergleichen kannst.'
+      ],
+      solutionCode: String.raw`x <- c(2, 3, 5, 7, 11)
+y <- c(8, 10, 16, 20, 30)
+
+mean(x)
+var(x)
+cov(x, y)
+cor(x, y)`,
       pitfalls: ['Korrelation als Ersatz für Varianz lesen.', 'cov() ohne Einheiten oder Vorzeichen zu interpretieren.']
     })
   },
@@ -320,6 +363,13 @@ qf(0.95, df1 = 2, df2 = 75)`,
       output: 'qt() liefert das zweiseitige t-Quantil, qf() die Grenze für Joint-Tests. Genau diese Werte werden mit der beobachteten Teststatistik verglichen.',
       miniTask: 'Bestimme das 5%-kritische Quantil für einen t-Test mit df = 12 und vergleiche es mit dem Normalquantil 1.96.',
       solution: 'Das t-Quantil mit df = 12 liegt über 1.96. In kleinen Stichproben braucht man also stärkere Evidenz für dieselbe Signifikanzstufe.',
+      solutionChanges: [
+        'Ergänze eine zweite `qt(...)`-Zeile mit `df = 12`.',
+        'Vergleiche den neuen t-kritischen Wert direkt mit 1.96, statt die alte 75-Freiheitsgrade-Zeile zu überschreiben.'
+      ],
+      solutionCode: String.raw`qt(0.975, df = 75)
+qt(0.975, df = 12)
+qf(0.95, df1 = 2, df2 = 75)`,
       pitfalls: ['Normalquantile reflexhaft statt t-Quantile verwenden.', 'df1 und df2 im F-Test vertauschen.']
     })
   },

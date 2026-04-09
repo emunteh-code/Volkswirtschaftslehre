@@ -3,89 +3,223 @@
 // FINAL BENCHMARK STANDARD v14.0
 // ============================================================
 
-import { renderRPracticeMarkup } from '../../../assets/js/portal-core/features/rPractice.js';
-
-const STATISTIK_R_PRACTICE = [
-  renderRPracticeMarkup({
-    title: 'Daten zuerst lesen, dann rechnen',
-    purpose: 'Der erste R-Schritt in Statistik ist nie der Testbefehl, sondern die saubere Orientierung im Datensatz: Variablentypen, Größenordnungen und erste Auffälligkeiten müssen vor jeder Inferenz sichtbar werden.',
-    script: 'R-Workflow: Datenstruktur, summary() und erste Gruppensichtung',
-    code: String.raw`str(df)
+export const R_BLOCKS_BY_ID = {
+  deskriptiv: [
+    {
+      title: 'Daten zuerst lesen, dann rechnen',
+      purpose: 'Der erste R-Schritt in Statistik ist nie der Testbefehl, sondern die saubere Orientierung im Datensatz. Genau diese Reihenfolge wird im R-Tutorium 1 trainiert.',
+      script: 'Quelle: TUT_01 · Datenstruktur, summary() und erste Gruppensichtung',
+      code: String.raw`str(df)
 summary(df)
 table(df$group)`,
-    output: 'str(df) trennt numerische von kategorialen Variablen. summary(df) zeigt Lage, Streuung und Extremwerte; table(df$group) prüft sofort, ob Gruppenvergleiche sauber besetzt sind.',
-    miniTask: 'Erweitere die Exploration um mean(df$x) und mean(df$y). Formuliere danach in einem Satz, welche Variable im Datensatz im Mittel höher liegt.',
-    solution: 'Mit mean(df$x) und mean(df$y) siehst du direkt die Lage der beiden Variablen. Die richtige Kurzantwort nennt nicht nur die größere Zahl, sondern ordnet sie als durchschnittliches Niveau der jeweiligen Messgröße ein.',
-    pitfalls: [
-      'Mit dem Test starten, obwohl noch unklar ist, wie die Variablen im Datensatz codiert sind.',
-      'summary() abzulesen, ohne Extremwerte oder Gruppengrößen sprachlich zu deuten.'
-    ]
-  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_explore' }),
-  renderRPracticeMarkup({
-    title: 'Lage, Streuung und Visualisierung verbinden',
-    purpose: 'Deskriptive Statistik wird erst dann nützlich, wenn Kennzahlen und Visualisierung dieselbe Geschichte erzählen. Genau das trainiert dieser Block.',
-    script: 'R-Workflow: Mittelwert, Standardabweichung, Histogramm',
-    code: String.raw`mean(df$x)
+      output: 'str(df) trennt numerische und kategoriale Variablen. summary(df) zeigt Lage, Streuung und Extremwerte; table(df$group) prüft, ob Gruppenvergleiche überhaupt sauber besetzt sind.',
+      taskPrompt: 'Ergänze die Exploration um Mittelwerte für x und y und entscheide danach in einem Satz, welche Variable im Mittel höher liegt.',
+      miniTask: 'Ergänze `mean(df$x)` und `mean(df$y)` unter den bisherigen Block und formuliere danach den Vergleichssatz.',
+      solution: 'Die saubere Lösung nennt nicht nur die größere Zahl, sondern ordnet sie als durchschnittliches Niveau der jeweiligen Variable ein. Erst Datensatz lesen, dann Kennzahl deuten.',
+      solutionChanges: [
+        'Ergänze unter den vorhandenen Explorationsbefehlen genau zwei Zeilen: `mean(df$x)` und `mean(df$y)`.',
+        'Lass `str(df)`, `summary(df)` und `table(df$group)` stehen, damit die Datensatzorientierung vollständig bleibt.'
+      ],
+      solutionCode: String.raw`str(df)
+summary(df)
+table(df$group)
+mean(df$x)
+mean(df$y)`,
+      pitfalls: [
+        'Mit dem Test starten, obwohl noch unklar ist, wie die Variablen codiert sind.',
+        'summary() abzulesen, ohne Extremwerte oder Gruppengrößen sprachlich zu deuten.'
+      ]
+    },
+    {
+      title: 'Histogramm und Kennzahlen zusammen lesen',
+      purpose: 'Im R-Tutorium 2 werden Histogramme nicht isoliert gezeichnet, sondern mit Lage- und Streuungsmaßen verbunden. Genau diese Kopplung macht deskriptive Statistik klausurfest.',
+      script: 'Quelle: TUT_02 · Histogramm, Mittelwert und Standardabweichung',
+      code: String.raw`mean(df$x)
 sd(df$x)
 hist(df$x, breaks = 4, main = "Verteilung von x", col = "lightblue")`,
-    output: 'Mittelwert und Standardabweichung quantifizieren Lage und Streuung; das Histogramm zeigt, ob diese Kennzahlen zu einer eher symmetrischen, schiefen oder klumpigen Verteilung passen.',
-    miniTask: 'Ersetze x durch z und vergleiche anschließend verbal, welche Variable stärker streut und warum das Histogramm diese Aussage stützt oder relativiert.',
-    solution: 'Die saubere Lösung kombiniert Zahl und Bild: erst Streuung über sd(...) nennen, dann anhand des Histogramms prüfen, ob Ausreißer oder Schiefe die Kennzahl treiben.',
-    pitfalls: [
-      'Nur das Diagramm zu beschreiben, ohne die Kennzahlen zu nennen.',
-      'Standardabweichung und Varianz sprachlich zu vermischen.'
-    ]
-  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_descriptives' }),
-  renderRPracticeMarkup({
-    title: 't-Test als Entscheidungslogik lesen',
-    purpose: 'Ein Test ist im Portal nur dann verstanden, wenn die Ausgabe in Hypothese, Teststatistik, p-Wert und Entscheidung übersetzt werden kann.',
-    script: 'R-Workflow: Einstichproben-t-Test',
-    code: String.raw`t.test(df$z, mu = 115)`,
-    output: 'Der Output liefert Teststatistik, Freiheitsgrade, p-Wert und Konfidenzintervall. Die ökonomische Kernfrage bleibt: Sprechen die Daten stark genug gegen $H_0: \mu = 115$?',
-    miniTask: 'Formuliere nach dem Run in zwei Sätzen die vollständige Testentscheidung: Nullhypothese, p-Wert-Vergleich und inhaltliche Deutung.',
-    solution: 'Die Musterlösung nennt immer zuerst $H_0$, vergleicht dann den p-Wert mit dem Signifikanzniveau und formuliert erst danach die ökonomische Aussage. "Signifikant" ersetzt nie die inhaltliche Interpretation.',
-    pitfalls: [
-      'Den p-Wert als Wahrscheinlichkeit der Nullhypothese zu lesen.',
-      'Die Testentscheidung zu nennen, ohne den Richtungsbezug der Fragestellung zu erklären.'
-    ]
-  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_ttest' }),
-  renderRPracticeMarkup({
-    title: 'Regression: Output in Sprache übersetzen',
-    purpose: 'Die Regressionsroutine ist nur der technische Teil. Studienrelevant wird sie erst, wenn Koeffizient, Signifikanz und Modellbild gemeinsam gedeutet werden.',
-    script: 'R-Workflow: lm(), summary() und Streudiagramm mit Regressionsgerade',
-    code: String.raw`model <- lm(y ~ x, data = df)
+      output: 'Mittelwert und Standardabweichung quantifizieren Lage und Streuung. Das Histogramm zeigt, ob diese Kennzahlen zu einer eher symmetrischen, schiefen oder klumpigen Verteilung passen.',
+      taskPrompt: 'Ersetze die Variable x durch z und prüfe dann, welche Variable stärker streut und wie die Histogrammform dazu passt.',
+      miniTask: 'Ersetze in allen drei Zeilen `x` durch `z`. Formuliere danach knapp, ob `z` stärker streut und ob die Grafik diese Aussage stützt oder relativiert.',
+      solution: 'Die richtige Lösung verbindet Zahl und Bild: erst `sd(...)` nennen, dann prüfen, ob Schiefe oder Ausreißer die Kennzahl treiben. Genau diese Kopplung ist klausurrelevant.',
+      solutionChanges: [
+        'Ersetze in allen drei Befehlen `x` durch `z`, damit Kennzahlen und Grafik dieselbe Variable beschreiben.',
+        'Lass die Plotstruktur mit `hist(...)` stehen und ändere nur die referenzierte Variable.'
+      ],
+      solutionCode: String.raw`mean(df$z)
+sd(df$z)
+hist(df$z, breaks = 4, main = "Verteilung von z", col = "lightblue")`,
+      pitfalls: [
+        'Nur das Diagramm zu beschreiben, ohne Kennzahlen zu nennen.',
+        'Standardabweichung und Varianz sprachlich zu vermischen.'
+      ]
+    }
+  ],
+  bivariat: [
+    {
+      title: 'Pearson und Spearman bewusst unterscheiden',
+      purpose: 'Das R-Tutorium 4 kombiniert Streudiagramm-Idee und Korrelationsmaß. Im Portal trainierst du dieselbe Frage ohne Syntaxrauschen: Welches Maß beschreibt hier den Zusammenhang sinnvoll?',
+      script: 'Quelle: TUT_04 · Korrelationen und Zusammenhangslesen',
+      code: String.raw`cor(df$x, df$y, method = "pearson")
+cor(df$x, df$y, method = "spearman")
+head(data.frame(x = df$x, y = df$y))`,
+      output: 'Der Pearson-Koeffizient misst lineare Stärke, Spearman reagiert auf monotone Rangzusammenhänge. Der kleine Datenausschnitt hilft dir, Zahl und Datenbild zusammenzudenken.',
+      taskPrompt: 'Ergänze einen vierten Befehl, der die Kovarianz von x und y ausgibt, und ordne danach Pearson, Spearman und Kovarianz sauber ein.',
+      miniTask: 'Füge `cov(df$x, df$y)` hinzu und formuliere danach in einem Satz, wofür Kovarianz nützlich ist und warum sie ohne Normierung schwerer vergleichbar ist.',
+      solution: 'Klausursicher ist die Dreiteilung: Kovarianz zeigt Richtung und gemeinsame Streuung, Pearson normiert auf lineare Stärke, Spearman auf Rang-/Monotonielogik.',
+      solutionChanges: [
+        'Ergänze unter den beiden `cor(...)`-Befehlen genau eine zusätzliche Zeile: `cov(df$x, df$y)`.',
+        'Lass die beiden Korrelationsbefehle stehen, damit die drei Zusammenhangsmaße direkt vergleichbar bleiben.'
+      ],
+      solutionCode: String.raw`cor(df$x, df$y, method = "pearson")
+cor(df$x, df$y, method = "spearman")
+cov(df$x, df$y)
+head(data.frame(x = df$x, y = df$y))`,
+      pitfalls: [
+        'Spearman als “schlechteren Pearson” zu lesen statt als anderes Zusammenhangsmaß.',
+        'Aus einem hohen Koeffizienten direkt auf Kausalität zu schließen.'
+      ]
+    }
+  ],
+  schaetzen_eigenschaften_intervalle: [
+    {
+      title: 'Konfidenzintervall aus dem t-Test lesen',
+      purpose: 'Schätzereigenschaften werden praktisch greifbar, wenn das Konfidenzintervall nicht als Zusatzspalte, sondern als Präzisionsaussage gelesen wird.',
+      script: 'Quelle: Induktive Statistik · t-basierte Intervallschätzung',
+      code: String.raw`t.test(df$z, conf.level = 0.95)`,
+      output: 'Der Output bündelt Mittelwert, Freiheitsgrade und 95%-Konfidenzintervall. Die zentrale Frage lautet: Welche plausiblen Populationsmittelwerte bleiben mit dieser Stichprobe vereinbar?',
+      taskPrompt: 'Ändere das Konfidenzniveau auf 99% und erkläre danach knapp, warum sich das Intervall verbreitert.',
+      miniTask: 'Ersetze `conf.level = 0.95` durch `conf.level = 0.99` und vergleiche das neue Intervall mit dem alten.',
+      solution: 'Mit höherem Sicherheitsniveau wird das Intervall breiter, weil mehr Populationswerte abgedeckt werden sollen. In der Klausur musst du das als Präzisionsverlust bei höherer Sicherheit formulieren können.',
+      solutionChanges: [
+        'Ändere im vorhandenen Befehl nur den Parameter `conf.level` von `0.95` auf `0.99`.',
+        'Lass den übrigen `t.test(...)`-Aufruf unverändert, damit du wirklich nur den Niveaueffekt beobachtest.'
+      ],
+      solutionCode: String.raw`t.test(df$z, conf.level = 0.99)`,
+      pitfalls: [
+        'Das Konfidenzintervall als Wahrscheinlichkeit für den wahren Mittelwert zu lesen.',
+        'Breiteres Intervall mit “präziserer Schätzung” zu verwechseln.'
+      ]
+    }
+  ],
+  testen: [
+    {
+      title: 't-Test als Entscheidungslogik lesen',
+      purpose: 'Ein Test ist erst verstanden, wenn du den R-Output in Hypothese, Teststatistik, p-Wert und Entscheidung übersetzen kannst.',
+      script: 'Quelle: Induktive Statistik · Einstichproben-t-Test',
+      code: String.raw`t.test(df$z, mu = 115)`,
+      output: 'Der Output liefert Teststatistik, Freiheitsgrade, p-Wert und Konfidenzintervall. Die Kernfrage bleibt: Sprechen die Daten stark genug gegen $H_0: \mu = 115$?',
+      taskPrompt: 'Lies die vorhandene Ausgabe und formuliere danach die vollständige Testentscheidung in zwei sauberen Prüfungssätzen.',
+      miniTask: 'Nenne Nullhypothese, p-Wert-Vergleich und inhaltliche Deutung — ohne am Code etwas zu ändern.',
+      solution: 'Die Musterlösung nennt immer zuerst $H_0$, vergleicht danach den p-Wert mit dem Signifikanzniveau und formuliert erst dann die inhaltliche Aussage. “Signifikant” ersetzt nie die Deutung.',
+      taskMode: 'interpret',
+      solutionChanges: [
+        'Keine Codeänderung nötig: Diese Übung trainiert das Lesen des vorhandenen t-Test-Outputs.',
+        'Nutze die bestehende Ausgabe als Beleg für Nullhypothese, p-Wert-Vergleich und inhaltliche Deutung.'
+      ],
+      pitfalls: [
+        'Den p-Wert als Wahrscheinlichkeit der Nullhypothese zu lesen.',
+        'Die Testentscheidung zu nennen, ohne die Frage inhaltlich zurückzuübersetzen.'
+      ]
+    }
+  ],
+  regression_schaetzung_inferenz: [
+    {
+      title: 'Regression: Koeffizienten und Intervall gemeinsam lesen',
+      purpose: 'Die Regressionsroutine ist nur der technische Teil. Studienrelevant wird sie erst, wenn Koeffizient, Signifikanz und Intervall gemeinsam gedeutet werden.',
+      script: 'Quelle: Statistische Modellierung I · lm(), Koeffizienten, Konfidenzintervall',
+      code: String.raw`model <- lm(y ~ x, data = df)
 summary(model)$coefficients
-plot(df$x, df$y, main = "y auf x", pch = 19, col = "steelblue")
-abline(model, col = "red", lwd = 2)`,
-    output: 'summary(model)$coefficients zeigt Interzept, Steigung, Standardfehler, t-Wert und p-Wert. Der Plot macht sichtbar, ob die geschätzte Gerade zur Datenwolke passt.',
-    miniTask: 'Ergänze den Workflow um confint(model) und formuliere dann die Steigung als inhaltliche Veränderung von y bei einer Einheit mehr x.',
-    solution: 'Die belastbare Antwort nennt die Steigung, erklärt sie ceteris paribus und ergänzt, ob das Konfidenzintervall die Null ausschließt. Plot und Output müssen dieselbe Geschichte erzählen.',
-    pitfalls: [
-      'Nur auf Sterne zu schauen und die Größe des Effekts zu ignorieren.',
-      'Die Regressionsgerade als Kausalbeweis statt als linearen Zusammenhang zu lesen.'
-    ]
-  }, { moduleSlug: 'statistik', blockId: 'statistik_rlab_regression' })
-];
+confint(model)`,
+      output: 'Die Koeffiziententabelle liefert Achsenabschnitt, Steigung, Standardfehler, t-Werte und p-Werte. Das Konfidenzintervall ergänzt, welche plausiblen Parameterwerte zur Stichprobe passen.',
+      taskPrompt: 'Ergänze den Workflow um `coef(model)` und formuliere dann die Steigung als inhaltliche Veränderung von y bei einer Einheit mehr x.',
+      miniTask: 'Füge unter der Koeffiziententabelle `coef(model)` ein und schreibe danach einen ceteris-paribus-Satz zur Steigung.',
+      solution: 'Belastbar ist die Antwort erst, wenn Zahlen und Sprache zusammenpassen: Steigung nennen, ceteris paribus deuten und dann mit dem Intervall absichern, ob die Null plausibel bleibt.',
+      solutionChanges: [
+        'Füge nach `summary(model)$coefficients` eine zusätzliche Zeile `coef(model)` ein.',
+        'Lass `confint(model)` stehen, damit Schätzwert und Intervall im selben Blickfeld bleiben.'
+      ],
+      solutionCode: String.raw`model <- lm(y ~ x, data = df)
+summary(model)$coefficients
+coef(model)
+confint(model)`,
+      pitfalls: [
+        'Nur auf Signifikanzsterne zu schauen und die Größe des Effekts zu ignorieren.',
+        'Die Steigung zu nennen, ohne die Einheit von x und y sprachlich zu verankern.'
+      ]
+    }
+  ],
+  regression_diagnostik_prognose: [
+    {
+      title: 'Prognoseintervall statt Punktschätzung lesen',
+      purpose: 'Diagnostik und Prognose werden in Klausuren oft verwechselt. Dieser Block trennt geschätzten Mittelwert, Einzelprognose und Restunsicherheit sauber auseinander.',
+      script: 'Quelle: Statistische Modellierung II · Vorhersage mit linearem Modell',
+      code: String.raw`model <- lm(y ~ x, data = df)
+predict(model, newdata = pred_df, interval = "prediction")`,
+      output: 'predict(..., interval = "prediction") liefert für neue x-Werte nicht nur eine Punktschätzung, sondern ein Prognoseintervall. Genau hier zeigt sich der Unterschied zwischen Schätzung und neuer Einzelbeobachtung.',
+      taskPrompt: 'Ändere das Intervall von `prediction` auf `confidence` und erkläre dann, welches Intervall breiter ist und warum.',
+      miniTask: 'Ersetze im `predict(...)`-Aufruf `interval = "prediction"` durch `interval = "confidence"` und vergleiche die beiden Intervalltypen.',
+      solution: 'Das Prognoseintervall ist breiter, weil es neben der Schätzunsicherheit auch die idiosynkratische Reststreuung einer neuen Beobachtung enthält. Diese Unterscheidung ist diagnostisch zentral.',
+      solutionChanges: [
+        'Ändere im `predict(...)`-Aufruf nur den Parameter `interval` von `"prediction"` auf `"confidence"`.',
+        'Lass `pred_df` und das Modell unverändert, damit nur der Unterschied der Intervalllogik sichtbar wird.'
+      ],
+      solutionCode: String.raw`model <- lm(y ~ x, data = df)
+predict(model, newdata = pred_df, interval = "confidence")`,
+      pitfalls: [
+        'Konfidenzintervall und Prognoseintervall als dasselbe zu behandeln.',
+        'Den Punktwert zu lesen, ohne die Breite des Intervalls einzuordnen.'
+      ]
+    }
+  ],
+  varianzanalyse: [
+    {
+      title: 'ANOVA: Gruppenmittel und F-Test zusammen lesen',
+      purpose: 'Im R-Tutorium 11 wird die Varianzanalyse nicht nur als `summary(aov(...))` gerechnet, sondern mit Gruppenmitteln zusammengedacht. Genau diese Verbindung trainiert dieser Block.',
+      script: 'Quelle: TUT_11 · aov(), summary() und Gruppenmittel',
+      code: String.raw`anova_model <- aov(score ~ group, data = anova_df)
+summary(anova_model)
+aggregate(score ~ group, data = anova_df, mean)`,
+      output: 'Der F-Test sagt dir, ob nicht alle Gruppenmittel gleich sind. Die gruppierten Mittelwerte zeigen anschließend, wo die Unterschiede inhaltlich liegen könnten.',
+      taskPrompt: 'Ergänze den Workflow um die Gesamtmittelwert-Zeile `mean(anova_df$score)` und formuliere danach, welche Gruppe über bzw. unter dem Gesamtniveau liegt.',
+      miniTask: 'Füge `mean(anova_df$score)` hinzu und deute die Gruppenmittelwerte relativ zum Gesamtmittelwert.',
+      solution: 'ANOVA ist erst klausursicher gelesen, wenn du den globalen F-Test mit den Gruppenmitteln zusammenbringst: Signifikanz bedeutet nicht “jedes Paar ist verschieden”, sondern nur “nicht alle Mittel sind gleich”.',
+      solutionChanges: [
+        'Ergänze unter den vorhandenen Befehlen genau eine zusätzliche Zeile: `mean(anova_df$score)`.',
+        'Lass `summary(anova_model)` und `aggregate(...)` stehen, damit globaler Test und Gruppenmittel gemeinsam lesbar bleiben.'
+      ],
+      solutionCode: String.raw`anova_model <- aov(score ~ group, data = anova_df)
+summary(anova_model)
+aggregate(score ~ group, data = anova_df, mean)
+mean(anova_df$score)`,
+      pitfalls: [
+        'Aus einem signifikanten F-Test sofort auf alle Paarunterschiede zu schließen.',
+        'Nur den p-Wert zu nennen, ohne die Gruppenmittel inhaltlich zu lesen.'
+      ]
+    }
+  ]
+};
 
 function renderStatistikRLabTheory() {
   return String.raw`
     <div class="section-block">
-      <h3>R als Statistik-Workflow</h3>
-      <p>Das Statistik-R-Lab ist kein Zusatztool, sondern der praktische Gegenpart zum Kurs: Daten lesen, passende Methode wählen, Output interpretieren und typische Fehlgriffe erkennen.</p>
-      <p>Die Reihenfolge bleibt immer gleich: Datensatz prüfen, geeignete Kennzahl oder Methode wählen, Output fachlich lesen und erst dann das Ergebnis in einen Prüfungssatz übersetzen.</p>
+      <h3>R gehört jetzt in die Methoden-Konzepte</h3>
+      <p>Die Live-R-Blöcke sitzen in Statistik nicht mehr gesammelt auf einer einzigen Praxis-Seite, sondern direkt dort, wo die Methode fachlich gelernt wird: bei Deskriptivstatistik, Bivariat, Intervallschätzung, Tests, Regression und ANOVA.</p>
+      <p>Das macht den Zugriff klausurnäher: erst Konzept verstehen, dann denselben Zugriff in R lesen, ändern und deuten.</p>
     </div>
     <div class="section-block">
-      <h3>Woran du einen guten R-Zugriff erkennst</h3>
+      <h3>Wo du die R-Tabs jetzt findest</h3>
       <ul>
-        <li>Der Befehl passt zur statistischen Frage, nicht nur zur Syntax.</li>
-        <li>Der Output wird in Sprache und Entscheidung übersetzt.</li>
-        <li>Plots und Kennzahlen erzählen dieselbe inhaltliche Geschichte.</li>
+        <li><strong>Deskriptive Statistik:</strong> Datensatz lesen, summary(), Histogramm und Streuung zusammen deuten.</li>
+        <li><strong>Bivariate Analyse:</strong> Pearson, Spearman und Kovarianz unterscheiden.</li>
+        <li><strong>Schätzereigenschaften & Konfidenzintervalle:</strong> Intervallbreite und Sicherheitsniveau lesen.</li>
+        <li><strong>Hypothesentests:</strong> t-Test-Output in Entscheidungssprache übersetzen.</li>
+        <li><strong>Regression:</strong> Koeffizienten, Intervalle und Prognosen sauber deuten.</li>
+        <li><strong>Varianzanalyse:</strong> F-Test und Gruppenmittel zusammen lesen.</li>
       </ul>
     </div>
-    ${STATISTIK_R_PRACTICE.join('\n')}
     <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>R ersetzt die Statistiklogik nicht:</strong> Erst Datentyp, Hypothese und Modellidee klären, dann den passenden Befehl verwenden. Wer direkt in die Konsole springt, produziert oft formal korrekte, aber fachlich falsche Antworten.</div>
+      <h3>Arbeitslogik für alle Statistik-R-Tabs</h3>
+      <div class="warn-box"><strong>R ersetzt die Statistiklogik nicht:</strong> Erst Datentyp, Fragestellung und passende Methode klären, dann den Befehl lesen. Wer direkt in die Konsole springt, produziert leicht formal korrekte, aber fachlich falsche Aussagen.</div>
     </div>
   `;
 }

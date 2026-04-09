@@ -17,6 +17,91 @@ function normalizeCode(code) {
   return String(code ?? '').replace(/\r\n/g, '\n').trim();
 }
 
+function extractCodeSnippets(value) {
+  return Array.from(String(value ?? '').matchAll(/`([^`]+)`/g))
+    .map((match) => match[1].trim())
+    .filter(Boolean);
+}
+
+function joinNatural(parts) {
+  const filtered = parts.filter(Boolean);
+  if (!filtered.length) return '';
+  if (filtered.length === 1) return filtered[0];
+  if (filtered.length === 2) return `${filtered[0]} und ${filtered[1]}`;
+  return `${filtered.slice(0, -1).join(', ')} und ${filtered.at(-1)}`;
+}
+
+function inferTaskMode(block) {
+  if (block.taskMode) return block.taskMode;
+  const prompt = String(block.taskPrompt || block.question || block.miniTask || '').trim();
+  if (!prompt) return 'edit';
+  if (/^(erkläre|formuliere|nenne|beschreibe|prüfe,?\s*welches|lies|deute|begründe)/i.test(prompt)) {
+    return 'interpret';
+  }
+  return 'edit';
+}
+
+function inferFirstStep(block, taskMode) {
+  if (block.firstStep) return block.firstStep;
+  const snippets = extractCodeSnippets(block.taskPrompt || block.question || block.miniTask || '');
+  if (taskMode === 'interpret') {
+    return 'Lies zuerst den vorhandenen Output und markiere die Stelle, auf die sich die Frage fachlich bezieht.';
+  }
+  if (snippets.length) {
+    return `Suche im Startcode zuerst ${joinNatural(snippets.map((snippet) => `\`${snippet}\``))} und ändere nur diese Stelle.`;
+  }
+  return 'Suche zuerst die eine Zeile oder den einen Parameter, den der Mini-Task verändert, und passe nur diese Stelle an.';
+}
+
+function inferChangeFocus(block, taskMode) {
+  if (block.changeFocus) return block.changeFocus;
+  const prompt = String(block.taskPrompt || block.question || block.miniTask || '').trim();
+  const snippets = extractCodeSnippets(prompt);
+
+  if (taskMode === 'interpret') {
+    return 'Keine feste Codeänderung: Hier trainierst du das Lesen, Zuordnen und Deuten des vorhandenen Outputs.';
+  }
+  if (snippets.length) {
+    return `Arbeite nur an ${joinNatural(snippets.map((snippet) => `\`${snippet}\``))}; der restliche Startcode bleibt unverändert.`;
+  }
+  if (/^ersetze/i.test(prompt)) {
+    return 'Ersetze genau den genannten Ausdruck oder das genannte Objekt und prüfe danach den neuen Output.';
+  }
+  if (/^ergänze/i.test(prompt)) {
+    return 'Ergänze nur die eine geforderte Befehlszeile oder Ausgabezeile; den vorhandenen Workflow lässt du stehen.';
+  }
+  if (/^ändere/i.test(prompt)) {
+    return 'Ändere gezielt den genannten Parameter oder die benannte Zeile und lies danach neu, wie sich der Output verschiebt.';
+  }
+  return 'Passe nur die Stelle an, die direkt zur Frage gehört, und vergleiche danach den Output mit deiner Erwartung.';
+}
+
+function inferKeepHint(block, taskMode) {
+  if (block.keepHint) return block.keepHint;
+  if (taskMode === 'interpret') {
+    return 'Lass den gesamten Startcode unverändert; die Lernleistung liegt hier im Output-Lesen und in der fachlichen Deutung.';
+  }
+
+  const code = String(block.starterCode || block.code || '');
+  const anchors = [];
+  if (/set\.seed/.test(code)) anchors.push('set.seed(...)');
+  if (/<-/.test(code)) anchors.push('den Daten- und Objektaufbau');
+  if (/\b(plot|curve|hist|abline|points|lines|legend)\s*\(/.test(code)) anchors.push('den Plot-Aufbau');
+  if (/\b(matrix|data\.frame|cbind|lm|t\.test|optimize|optim|integrate)\s*\(/.test(code)) anchors.push('die restliche Methodenstruktur');
+
+  if (!anchors.length) {
+    return 'Lass alle übrigen Zeilen stehen, solange der Mini-Task sie nicht ausdrücklich verändert.';
+  }
+  return `Lass ${joinNatural(anchors)} stehen, solange der Mini-Task sie nicht ausdrücklich verändert.`;
+}
+
+function buildDefaultSolutionChanges(taskMode, changeFocus) {
+  if (taskMode === 'interpret') {
+    return ['Keine Codeänderung nötig: Nutze den vorhandenen Output als Beleg und übersetze ihn sauber in Sprache.'];
+  }
+  return changeFocus ? [changeFocus] : [];
+}
+
 function escapeRString(value) {
   return String(value ?? '')
     .replaceAll('\\', '\\\\')
@@ -56,7 +141,11 @@ x <- c(12, 15, 18, 19, 21, 23, 25, 28)
 y <- c(14, 16, 19, 22, 23, 25, 29, 31)
 group <- rep(c("A", "B"), each = 4)
 z <- c(110, 112, 109, 114, 118, 121, 123, 125)
-df <- data.frame(x, y, group, z)`;
+df <- data.frame(x, y, group, z)
+pred_df <- data.frame(x = c(20, 24))
+anova_group <- factor(rep(c("Nord", "Mitte", "Sued"), each = 4))
+score <- c(72, 75, 74, 76, 68, 70, 69, 71, 81, 83, 82, 84)
+anova_df <- data.frame(group = anova_group, score)`;
 }
 
 function getRuntimePrelude(moduleSlug) {
@@ -136,6 +225,10 @@ function buildConfig(block, options = {}) {
   const moduleSlug = options.moduleSlug || block.moduleSlug || 'module';
   const blockId = options.blockId || block.id || `rblock_${Math.random().toString(36).slice(2, 8)}`;
   const runtimeMode = detectRuntimeMode(block);
+  const taskPrompt = block.taskPrompt || block.question || block.miniTask || '';
+  const taskMode = inferTaskMode(block);
+  const changeFocus = inferChangeFocus(block, taskMode);
+  const keepHint = inferKeepHint(block, taskMode);
 
   let purpose = block.purpose || '';
   if (moduleSlug === 'statistik') {
@@ -154,10 +247,20 @@ function buildConfig(block, options = {}) {
     title: block.title || 'Vom Modell zur Auswertung',
     purpose,
     script: block.script || '',
+    conceptId: options.conceptId || block.conceptId || '',
     starterCode: normalizeCode(block.starterCode || block.code || ''),
     interpretation: block.interpretation || block.output || '',
     miniTask: block.miniTask || '',
+    taskPrompt,
+    taskMode,
+    firstStep: inferFirstStep(block, taskMode),
+    changeFocus,
+    keepHint,
     solution: block.solution || '',
+    solutionCode: normalizeCode(block.solutionCode || ''),
+    solutionChanges: Array.isArray(block.solutionChanges)
+      ? block.solutionChanges
+      : buildDefaultSolutionChanges(taskMode, changeFocus),
     pitfalls: Array.isArray(block.pitfalls) ? block.pitfalls : [],
     runtimeNote: buildRuntimeExpectation(runtimeMode, block.runtimeNote || ''),
     outputPlaceholder: block.outputPlaceholder || (runtimeMode === 'guided'
@@ -171,6 +274,52 @@ function renderPitfalls(pitfalls) {
   return `<div class="r-practice-pitfalls">
 <h4>Häufige Fehler</h4>
 <ul>${pitfalls.map((pitfall) => `<li>${escapeHtml(pitfall)}</li>`).join('')}</ul>
+</div>`;
+}
+
+function renderTaskBriefs(config) {
+  return `<div class="r-orient-grid">
+  <div class="r-orient-panel">
+    <div class="r-orient-panel-kicker">Arbeitsauftrag</div>
+    <p>${escapeHtml(config.taskPrompt || config.miniTask || 'Lies den Code, prüfe den Output und arbeite den Mini-Task ab.')}</p>
+  </div>
+  <div class="r-orient-panel">
+    <div class="r-orient-panel-kicker">${config.taskMode === 'interpret' ? 'Codefokus' : 'Was du änderst'}</div>
+    <p>${escapeHtml(config.changeFocus)}</p>
+  </div>
+  <div class="r-orient-panel">
+    <div class="r-orient-panel-kicker">Was stehen bleibt</div>
+    <p>${escapeHtml(config.keepHint)}</p>
+  </div>
+</div>`;
+}
+
+function renderSolutionDetails(config) {
+  const changeList = config.solutionChanges.length
+    ? `<div class="r-solution-section">
+  <div class="r-solution-subhead">So ändert sich dein Zugriff</div>
+  <ul class="r-solution-list">
+    ${config.solutionChanges.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+  </ul>
+</div>`
+    : '';
+
+  const codeBlock = config.solutionCode
+    ? `<div class="r-solution-section">
+  <div class="r-solution-subhead">Zielcode</div>
+  <pre class="r-solution-code"><code>${renderHighlightedR(config.solutionCode)}</code></pre>
+</div>`
+    : `<div class="r-solution-note">${escapeHtml(
+      config.taskMode === 'interpret'
+        ? 'Keine Codeänderung nötig: Diese R-Übung prüft vor allem Output-Lesen und fachliche Deutung.'
+        : 'Die Musterlösung erklärt den Lösungsweg. Wenn du den Code änderst, halte dich an den beschriebenen Zielschritt.'
+    )}</div>`;
+
+  return `<div class="r-solution-body">
+  <div class="r-solution-label">Musterlösung</div>
+  <p>${escapeHtml(config.solution)}</p>
+  ${changeList}
+  ${codeBlock}
 </div>`;
 }
 
@@ -188,6 +337,10 @@ export function renderRPracticeMarkup(block, options = {}) {
   <div class="r-practice-meta-row">
     ${config.script ? `<div class="r-script-ref">${escapeHtml(config.script)}</div>` : ''}
     <div class="r-runtime-note">${escapeHtml(config.runtimeNote)}</div>
+  </div>
+  ${renderTaskBriefs(config)}
+  <div class="r-orient-first-action">
+    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(config.firstStep)}
   </div>
 </div>
 <div class="r-practice-workspace">
@@ -208,10 +361,10 @@ export function renderRPracticeMarkup(block, options = {}) {
     <div class="r-practice-help">
       <span class="r-practice-help-label">So arbeitest du (Reihenfolge)</span>
       <ol class="r-practice-help-steps">
-        <li><strong>Zuerst:</strong> Lies „${escapeHtml(config.title)}“ und den Block <em>Mini-Task</em> — das ist das Lernziel.</li>
+        <li><strong>Zuerst:</strong> Lies den Block <em>Arbeitsauftrag</em> — dort steht die konkrete Frage.</li>
         <li><strong>Dann:</strong> Vergleiche den Code mit <em>Output lesen</em> (was soll rauskommen?).</li>
-        <li><strong>Bearbeiten:</strong> Ändere nur Zeilen, die der Mini-Task ausdrücklich verlangt; der Rest ist Startcode (inkl. Daten/Vorsätze).</li>
-        <li><strong>Nicht ändern:</strong> Keine Paket- oder Systemzeilen hinzufügen, wenn die Aufgabe das nicht verlangt; <code>set.seed</code> und Datenaufbau nur anfassen, wenn die Frage es braucht.</li>
+        <li><strong>Bearbeiten:</strong> ${escapeHtml(config.changeFocus)}</li>
+        <li><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</li>
         <li><strong>Ausführen:</strong> ${config.runtimeMode === 'guided' ? 'Live-Run ist absichtlich aus — nutze Musterlösung und Interpretation wie in der Vorlesungsübung.' : '„Code ausführen“ — vergleiche die Konsole mit „Output lesen“.'}</li>
         <li><strong>Interpretation:</strong> Formuliere in eigenen Worten, was das Ergebnis für die Modulfrage bedeutet.</li>
       </ol>
@@ -240,7 +393,7 @@ export function renderRPracticeMarkup(block, options = {}) {
     <p>${escapeHtml(config.miniTask)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
-      <p>${escapeHtml(config.solution)}</p>
+      ${renderSolutionDetails(config)}
     </div>
   </div>
 </div>
@@ -319,10 +472,12 @@ function mountHighlighter(blockEl) {
 
 // ─── Dedicated R-Anwendung Tab Renderer ────────────────────────────────────
 
-function renderFlowSteps(mode) {
-  const steps = mode === 'guided'
-    ? ['Code lesen', 'Verstehen', 'Mini-Task', 'Musterlösung']
-    : ['Code lesen', 'Ausführen', 'Output lesen', 'Mini-Task'];
+function renderFlowSteps(config) {
+  const steps = config.taskMode === 'interpret'
+    ? ['Aufgabe lesen', config.runtimeMode === 'guided' ? 'Output lesen' : 'Code ausführen', 'Output deuten', 'Musterlösung']
+    : config.runtimeMode === 'guided'
+      ? ['Aufgabe lesen', 'Code lesen', 'Mini-Task', 'Musterlösung']
+      : ['Aufgabe lesen', 'Code ändern', 'Ausführen', 'Output deuten'];
   return `<div class="r-flow-steps" aria-hidden="true">
 ${steps.map((label, i) => `<div class="r-flow-step"><span class="r-step-num">${i + 1}</span><span class="r-step-label">${label}</span></div>${i < steps.length - 1 ? '<div class="r-flow-sep">→</div>' : ''}`).join('')}
 </div>`;
@@ -344,10 +499,11 @@ function renderTabOrientationCard(config, index, total) {
     <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>
   </div>
   <p class="r-orient-purpose">${escapeHtml(config.purpose)}</p>
+  ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(firstAction)}
+    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
   </div>
-  ${renderFlowSteps(config.runtimeMode)}
+  ${renderFlowSteps(config)}
   ${config.script ? `<div class="r-orient-script">${escapeHtml(config.script)}</div>` : ''}
 </div>`;
 }
@@ -379,6 +535,7 @@ function renderHighlightEditor(config) {
   <div class="r-practice-help">
     <span class="r-practice-help-label">Bearbeitungshinweis</span>
     <span>${escapeHtml(editHint)}</span>
+    <span class="r-practice-help-subtle">${escapeHtml(config.keepHint)}</span>
   </div>
 </div>`;
 }
@@ -416,10 +573,7 @@ function renderTabBottomRow(config) {
     <p>${escapeHtml(config.miniTask)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
-      <div class="r-solution-body">
-        <div class="r-solution-label">Musterlösung</div>
-        <p>${escapeHtml(config.solution)}</p>
-      </div>
+      ${renderSolutionDetails(config)}
     </div>
   </div>
   ${pitfallsHtml}
@@ -427,7 +581,10 @@ function renderTabBottomRow(config) {
 }
 
 function renderRLabSection(block, moduleSlug, index, total, options = {}) {
-  const blockId = options.blockId || `rtab_${moduleSlug}_${index}`;
+  const conceptKey = options.conceptId || options.conceptKey || '';
+  const blockId = options.blockId || (conceptKey
+    ? `rtab_${moduleSlug}_${conceptKey}_${index}`
+    : `rtab_${moduleSlug}_${index}`);
   const config = buildConfig(block, { moduleSlug, blockId });
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
@@ -444,13 +601,15 @@ ${renderTabBottomRow(config)}
 </div>`;
 }
 
-export function renderRAnwendungTab(blocks, moduleSlug) {
+export function renderRAnwendungTab(blocks, moduleSlug, options = {}) {
   if (!blocks || !blocks.length) return '';
   const total = blocks.length;
 
   const sectionsHtml = blocks.map((block, index) => {
-    const blockId = `rtab_${moduleSlug}_${index + 1}`;
-    return renderRLabSection(block, moduleSlug, index, total, { blockId });
+    const blockId = options.conceptId
+      ? `rtab_${moduleSlug}_${options.conceptId}_${index + 1}`
+      : `rtab_${moduleSlug}_${index + 1}`;
+    return renderRLabSection(block, moduleSlug, index, total, { blockId, conceptId: options.conceptId });
   }).join('\n<div class="r-lab-divider" aria-hidden="true"></div>\n');
 
   return `<div class="r-tab-panel">${sectionsHtml}</div>`;

@@ -23,6 +23,69 @@ function extractCodeSnippets(value) {
     .filter(Boolean);
 }
 
+function sanitizeCodeLine(value) {
+  return String(value ?? '').replace(/^Kernzeile heute:\s*/i, '').replace(/`/g, '').trim();
+}
+
+function extractCodeSnippetsFromList(values = []) {
+  return values.flatMap((value) => extractCodeSnippets(value));
+}
+
+function getCodeLines(code) {
+  return String(code || '')
+    .split('\n')
+    .map((line, index) => ({ line: line.trim(), lineNo: index + 1 }))
+    .filter(({ line }) => Boolean(line));
+}
+
+function buildCodeChangeAnalysis(block) {
+  const prompt = String(block.taskPrompt || block.question || block.miniTask || '');
+  const starterCode = String(block.starterCode || block.code || '');
+  const solutionCode = String(block.solutionCode || '');
+  const codeLines = getCodeLines(starterCode);
+  const solutionLines = getCodeLines(solutionCode);
+  const changedLines = [];
+  const maxLen = Math.max(codeLines.length, solutionLines.length);
+
+  for (let index = 0; index < maxLen; index += 1) {
+    const before = codeLines[index]?.line || '';
+    const after = solutionLines[index]?.line || '';
+    if (after && before !== after) {
+      changedLines.push({ lineNo: solutionLines[index]?.lineNo || index + 1, before, after });
+    }
+  }
+
+  return {
+    prompt,
+    starterCode,
+    solutionCode,
+    codeLines,
+    solutionLines,
+    changedLines,
+    promptSnippets: extractCodeSnippets(prompt),
+    solutionSnippets: extractCodeSnippetsFromList(block.solutionChanges || [])
+  };
+}
+
+function lineMatchesSnippet(line, snippets = []) {
+  const normalizedLine = sanitizeCodeLine(line);
+  return snippets.some((snippet) => {
+    const normalizedSnippet = sanitizeCodeLine(snippet);
+    return normalizedSnippet && (normalizedLine.includes(normalizedSnippet) || normalizedSnippet.includes(normalizedLine));
+  });
+}
+
+function findLine(codeLines, matcher) {
+  return codeLines.find(({ line }) => matcher(line));
+}
+
+function selectChangedLine(analysis, predicate = null) {
+  const candidates = predicate
+    ? analysis.changedLines.filter((entry) => predicate(entry.after || entry.before || ''))
+    : analysis.changedLines;
+  return candidates[0] || null;
+}
+
 function joinNatural(parts) {
   const filtered = parts.filter(Boolean);
   if (!filtered.length) return '';
@@ -41,11 +104,14 @@ function inferTaskMode(block) {
   return 'edit';
 }
 
-function inferFirstStep(block, taskMode) {
+function inferFirstStep(block, taskMode, coreTarget = null) {
   if (block.firstStep) return block.firstStep;
   const snippets = extractCodeSnippets(block.taskPrompt || block.question || block.miniTask || '');
   if (taskMode === 'interpret') {
     return 'Lies zuerst den vorhandenen Output und markiere die Stelle, auf die sich die Frage fachlich bezieht.';
+  }
+  if (coreTarget?.lineNo && coreTarget?.cue) {
+    return `Gehe direkt zu Zeile ${coreTarget.lineNo}: ${coreTarget.cue}`;
   }
   if (snippets.length) {
     return `Suche im Startcode zuerst ${joinNatural(snippets.map((snippet) => `\`${snippet}\``))} und ändere nur diese Stelle.`;
@@ -53,13 +119,16 @@ function inferFirstStep(block, taskMode) {
   return 'Suche zuerst die eine Zeile oder den einen Parameter, den der Mini-Task verändert, und passe nur diese Stelle an.';
 }
 
-function inferChangeFocus(block, taskMode) {
+function inferChangeFocus(block, taskMode, coreTarget = null) {
   if (block.changeFocus) return block.changeFocus;
   const prompt = String(block.taskPrompt || block.question || block.miniTask || '').trim();
   const snippets = extractCodeSnippets(prompt);
 
   if (taskMode === 'interpret') {
     return 'Keine feste Codeänderung: Hier trainierst du das Lesen, Zuordnen und Deuten des vorhandenen Outputs.';
+  }
+  if (coreTarget?.cue) {
+    return coreTarget.cue;
   }
   if (snippets.length) {
     return `Arbeite nur an ${joinNatural(snippets.map((snippet) => `\`${snippet}\``))}; der restliche Startcode bleibt unverändert.`;
@@ -95,18 +164,296 @@ function inferKeepHint(block, taskMode) {
   return `Lass ${joinNatural(anchors)} stehen, solange der Mini-Task sie nicht ausdrücklich verändert.`;
 }
 
+function inferCoreTarget(block) {
+  const analysis = buildCodeChangeAnalysis(block);
+  const text = `${analysis.prompt}\n${analysis.starterCode}\n${analysis.solutionCode}\n${(block.solutionChanges || []).join('\n')}`;
+
+  if (block.coreLine) {
+    const explicit = findLine(analysis.codeLines, (line) => line === block.coreLine || line.includes(block.coreLine));
+    return {
+      lineNo: explicit?.lineNo ?? null,
+      expression: explicit?.line || block.coreLine,
+      cue: block.coreCue || 'Arbeite nur an dieser einen Stelle.',
+      analysis
+    };
+  }
+
+  if (/leitkoeffizient|oeffnung|öffnung|vorzeichenbereich/i.test(text) && /curve\(/.test(text)) {
+    const line = selectChangedLine(analysis, (entry) => /<- function/.test(entry))
+      || findLine(analysis.solutionLines, (entry) => /<- function/.test(entry.line))
+      || findLine(analysis.codeLines, (entry) => /<- function/.test(entry.line));
+    return {
+      lineNo: line?.lineNo ?? null,
+      expression: line?.after || line?.line || '',
+      cue: 'Ändere hier nur den Leitkoeffizienten vor dem Produkt.',
+      analysis
+    };
+  }
+
+  if (/\bx3\b/i.test(text) && /cbind\(/.test(text)) {
+    const line = selectChangedLine(analysis, (entry) => /cbind\(/.test(entry))
+      || findLine(analysis.solutionLines, (entry) => /cbind\(/.test(entry.line))
+      || findLine(analysis.codeLines, (entry) => /cbind\(/.test(entry.line));
+    return {
+      lineNo: line?.lineNo ?? null,
+      expression: line?.after || line?.line || '',
+      cue: 'Ergänze hier die zusätzliche Regressorspalte in X.',
+      analysis
+    };
+  }
+
+  if (/predict\(/.test(text) && /prediction|confidence/i.test(text)) {
+    const line = selectChangedLine(analysis, (entry) => /predict\(/.test(entry))
+      || findLine(analysis.solutionLines, (entry) => /predict\(/.test(entry.line))
+      || findLine(analysis.codeLines, (entry) => /predict\(/.test(entry.line));
+    return {
+      lineNo: line?.lineNo ?? null,
+      expression: line?.after || line?.line || '',
+      cue: 'Ändere hier nur den Parameter `interval = ...`.',
+      analysis
+    };
+  }
+
+  if (/coef\(model\)/.test(text) && /lm\(/.test(text)) {
+    const line = selectChangedLine(analysis, (entry) => /coef\(model\)/.test(entry))
+      || findLine(analysis.solutionLines, (entry) => /coef\(model\)/.test(entry.line))
+      || findLine(analysis.codeLines, (entry) => /summary\(model\)\$coefficients/.test(entry.line));
+    return {
+      lineNo: line?.lineNo ?? null,
+      expression: line?.after || line?.line || '',
+      cue: 'Ergänze hier nur die zusätzliche Koeffizienten-Ausgabe.',
+      analysis
+    };
+  }
+
+  if (/t\.test/.test(text) && /conf\.level/i.test(text)) {
+    const line = selectChangedLine(analysis, (entry) => /t\.test/.test(entry))
+      || findLine(analysis.solutionLines, (entry) => /t\.test/.test(entry.line))
+      || findLine(analysis.codeLines, (entry) => /t\.test/.test(entry.line));
+    return {
+      lineNo: line?.lineNo ?? null,
+      expression: line?.after || line?.line || '',
+      cue: 'Ändere hier nur das Konfidenzniveau im Testaufruf.',
+      analysis
+    };
+  }
+
+  if (/t\.test/.test(text) && /\bmu\s*=|Nullhypothese|H_0/i.test(text)) {
+    const line = selectChangedLine(analysis, (entry) => /t\.test/.test(entry))
+      || findLine(analysis.solutionLines, (entry) => /t\.test/.test(entry.line))
+      || findLine(analysis.codeLines, (entry) => /t\.test/.test(entry.line));
+    return {
+      lineNo: line?.lineNo ?? null,
+      expression: line?.after || line?.line || '',
+      cue: 'Arbeite hier nur am Hypothesenwert `mu = ...`.',
+      analysis
+    };
+  }
+
+  const snippetLine = analysis.solutionLines.find(({ line }) => lineMatchesSnippet(line, [...analysis.promptSnippets, ...analysis.solutionSnippets]))
+    || analysis.codeLines.find(({ line }) => lineMatchesSnippet(line, [...analysis.promptSnippets, ...analysis.solutionSnippets]));
+  if (snippetLine) {
+    return {
+      lineNo: snippetLine.lineNo,
+      expression: snippetLine.line,
+      cue: `Arbeite hier nur an ${joinNatural([...analysis.promptSnippets, ...analysis.solutionSnippets].slice(0, 2).map((snippet) => `\`${sanitizeCodeLine(snippet)}\``))}.`,
+      analysis
+    };
+  }
+
+  const changedLine = selectChangedLine(analysis);
+  if (changedLine) {
+    return {
+      lineNo: changedLine.lineNo,
+      expression: changedLine.after,
+      cue: 'Arbeite nur an dieser geänderten Zeile.',
+      analysis
+    };
+  }
+
+  const fallbackLine = findLine(analysis.codeLines, (line) => /(?:lm|t\.test|predict|cor|cov|mean|sd|var|hist|plot|anova|aov|cbind|optimize|optim|integrate|curve)\s*\(/.test(line));
+  if (fallbackLine) {
+    return {
+      lineNo: fallbackLine.lineNo,
+      expression: fallbackLine.line,
+      cue: 'Diese Zeile ist der fachliche Hebel des Blocks.',
+      analysis
+    };
+  }
+
+  return {
+    lineNo: null,
+    expression: '',
+    cue: 'Arbeite nur an der einen Stelle, die den Mini-Task verändert.',
+    analysis
+  };
+}
+
 function inferCoreLine(block) {
   if (block.coreLine) return block.coreLine;
   const taskText = String(block.taskPrompt || block.question || block.miniTask || '');
   const snippet = extractCodeSnippets(taskText)[0];
-  if (snippet) return `Kernzeile heute: \`${snippet}\``;
+  if (snippet) return sanitizeCodeLine(snippet);
   const lines = String(block.starterCode || block.code || '')
     .split('\n')
     .map((line) => line.trim())
     .filter(Boolean);
   const candidate = lines.find((line) => /(?:lm|t\.test|cor|cov|predict|mean|sd|var|hist|plot|anova)\s*\(/.test(line));
-  if (candidate) return `Kernzeile heute: \`${candidate}\``;
-  return 'Kernzeile heute: Die eine Zeile, die den Mini-Task fachlich verändert.';
+  if (candidate) return sanitizeCodeLine(candidate);
+  return 'Die eine Zeile, die den Mini-Task fachlich verändert.';
+}
+
+function inferCoreLineAnchor(block, coreLine) {
+  const codeLines = String(block.starterCode || block.code || '')
+    .split('\n')
+    .map((line, index) => ({ line: line.trim(), lineNo: index + 1 }))
+    .filter(({ line }) => Boolean(line));
+  const normalizedCore = sanitizeCodeLine(coreLine);
+  if (!normalizedCore) return { lineNo: null, expression: '' };
+
+  const direct = codeLines.find(({ line }) => line === normalizedCore);
+  if (direct) return { lineNo: direct.lineNo, expression: direct.line };
+
+  const partial = codeLines.find(({ line }) => line.includes(normalizedCore) || normalizedCore.includes(line));
+  if (partial) return { lineNo: partial.lineNo, expression: partial.line };
+
+  return { lineNo: null, expression: normalizedCore };
+}
+
+function inferMathFromSnippet(snippet) {
+  const s = String(snippet || '').trim();
+  const mu = /\bmu\s*=/.test(s);
+  const conf = /conf\.level\s*=/.test(s);
+  const alpha = /\balpha\b/i.test(s);
+  const beta = /\bbeta\b/i.test(s);
+  const rho = /\bcor\(|\bcov\(/.test(s);
+  const mean = /\bmean\(/.test(s);
+  const sd = /\bsd\(/.test(s);
+  const variance = /\bvar\(/.test(s);
+  if (mu) return '$\\mu_0$ (Hypothesenwert)';
+  if (conf || alpha) return '$1-\\alpha$ (Konfidenzniveau)';
+  if (rho) return '$\\rho$ / $\\mathrm{Cov}(X,Y)$';
+  if (beta || /\blm\(/.test(s)) return '$\\beta$-Parameter im Regressionsmodell';
+  if (mean || sd || variance) return '$\\bar{x}$, $s$, $\\mathrm{Var}(X)$';
+  const lhs = s.split(/<-|=/)[0]?.trim();
+  if (/^[A-Za-z][A-Za-z0-9_.]*$/.test(lhs || '')) return `$${lhs}$ (Modellobjekt)`;
+  return 'Mathematische Zielgroesse';
+}
+
+function inferSpecificMathCodeMap(block, coreTarget) {
+  const text = `${block.taskPrompt || block.miniTask || ''}\n${block.code || block.starterCode || ''}\n${block.solutionCode || ''}\n${(block.solutionChanges || []).join('\n')}`;
+
+  if (/leitkoeffizient|oeffnung|öffnung|vorzeichenbereich/i.test(text) && /curve\(/.test(text)) {
+    return [
+      {
+        math: '$a$ (Leitkoeffizient der Parabel)',
+        code: coreTarget.expression || 'f <- function(x) a * (...)',
+        meaning: 'Das Vorzeichen von $a$ steuert die Öffnung; die Nullstellenfaktoren bleiben gleich.'
+      },
+      {
+        math: 'Nullstellen als feste Kontrollpunkte',
+        code: 'points(c(-1, 3), c(0, 0), ...)',
+        meaning: 'Diese Markierungen bleiben stehen und helfen dir zu prüfen, dass sich nur Öffnung und Vorzeichen kippen.'
+      }
+    ];
+  }
+
+  if (/\bx3\b/i.test(text) && /cbind\(/.test(text)) {
+    return [
+      {
+        math: '$X \\in \\mathbb{R}^{n\\times k}$ mit zusätzlicher Spalte $x_3$',
+        code: coreTarget.expression || 'X <- cbind(1, x2, x3)',
+        meaning: 'Jede zusätzliche Regressorspalte erhöht die Parameterzahl $k$ um eins.'
+      },
+      {
+        math: '$X\'X \\in \\mathbb{R}^{k\\times k}$',
+        code: 't(X) %*% X',
+        meaning: 'Mit drei Spalten in $X$ wird das Kreuzprodukt 3 × 3.'
+      }
+    ];
+  }
+
+  if (/predict\(/.test(text) && /prediction|confidence/i.test(text)) {
+    return [
+      {
+        math: '$\\hat y(x)=E[Y\\mid X=x]$ für die neuen Werte in pred_df',
+        code: 'predict(model, newdata = pred_df, ...)',
+        meaning: 'Diese Zeile berechnet die Vorhersage für genau die neuen x-Werte, die du prüfen willst.'
+      },
+      {
+        math: 'Erwartungswert- vs. Einzelprognoseintervall',
+        code: 'interval = "confidence" / "prediction"',
+        meaning: '`confidence` betrifft den mittleren Erwartungswert, `prediction` zusätzlich die Reststreuung einer neuen Beobachtung.'
+      }
+    ];
+  }
+
+  if (/coef\(model\)/.test(text) && /lm\(/.test(text)) {
+    return [
+      {
+        math: '$\\hat\\beta_0, \\hat\\beta_1$',
+        code: 'coef(model)',
+        meaning: 'Diese Ausgabe liefert direkt Achsenabschnitt und Steigung des geschätzten Modells.'
+      },
+      {
+        math: '$y = \\hat\\beta_0 + \\hat\\beta_1 x$',
+        code: 'lm(y ~ x, data = df)',
+        meaning: 'Das Regressionsmodell bestimmt, welche ceteris-paribus-Steigung du später sprachlich deutest.'
+      }
+    ];
+  }
+
+  if (/t\.test/.test(text) && /conf\.level/i.test(text)) {
+    return [
+      {
+        math: '$1-\\alpha$ (Konfidenzniveau)',
+        code: 'conf.level = 0.95 / 0.99',
+        meaning: 'Höheres Niveau bedeutet mehr Sicherheit und deshalb ein breiteres Intervall.'
+      },
+      {
+        math: 'plausible Populationsmittelwerte',
+        code: 't.test(df$z, ...)',
+        meaning: 'Der Testoutput zeigt, welche Mittelwerte mit der Stichprobe noch vereinbar bleiben.'
+      }
+    ];
+  }
+
+  if (/t\.test/.test(text) && /\bmu\s*=|Nullhypothese|H_0/i.test(text)) {
+    return [
+      {
+        math: '$H_0: \\mu = \\mu_0$',
+        code: 'mu = ...',
+        meaning: 'Dieser Parameter setzt den Prüfwert der Nullhypothese.'
+      },
+      {
+        math: 'Testentscheidung aus p-Wert und Intervall',
+        code: 't.test(df$z, ...)',
+        meaning: 'Der Befehl liefert die Evidenz, ob die Daten gegen $H_0$ sprechen.'
+      }
+    ];
+  }
+
+  if (/cor\(|cov\(/.test(text)) {
+    return [
+      {
+        math: '$\\rho_{XY}$ bzw. $\\operatorname{Cov}(X,Y)$',
+        code: 'cor(x, y, ...), cov(x, y)',
+        meaning: 'Hier liest du Richtung und Stärke des Zusammenhangs ab, aber keine Kausalität.'
+      }
+    ];
+  }
+
+  if (/mean\(|sd\(|var\(/.test(text)) {
+    return [
+      {
+        math: '$\\bar{x}$, $s$, $\\operatorname{Var}(X)$',
+        code: 'mean(...), sd(...), var(...)',
+        meaning: 'Diese Kennzahlen beschreiben Lage und Streuung derselben Variable im Datensatz.'
+      }
+    ];
+  }
+
+  return null;
 }
 
 function inferLearningGoal(block) {
@@ -128,15 +475,55 @@ function inferSuccessSignal(block, taskMode) {
 
 function inferMathCodeMap(block) {
   if (Array.isArray(block.mathCodeMap) && block.mathCodeMap.length) return block.mathCodeMap;
-  const map = [];
+  const coreTarget = inferCoreTarget(block);
+  const explicitMap = inferSpecificMathCodeMap(block, coreTarget);
+  if (explicitMap?.length) return explicitMap;
+  const code = String(block.starterCode || block.code || '');
   const prompt = String(block.taskPrompt || block.miniTask || '');
-  extractCodeSnippets(prompt).slice(0, 2).forEach((snippet) => {
+  const analysis = buildCodeChangeAnalysis(block);
+  const map = [];
+  [...analysis.promptSnippets, ...analysis.solutionSnippets].slice(0, 2).forEach((snippet) => {
     map.push({
-      math: 'Symbol / Parameter aus der Fragestellung',
-      code: snippet,
-      meaning: 'Diese Stelle steuert die fachliche Aussage der Aufgabe.'
+      math: inferMathFromSnippet(snippet),
+      code: sanitizeCodeLine(snippet),
+      meaning: 'Direkte Uebersetzung: diese Expression bestimmt die fachliche Aussage.'
     });
   });
+  if (/conf\.level|Konfidenz|Intervall/i.test(`${prompt}\n${code}`)) {
+    map.unshift({
+      math: '$1-\\alpha$ (Konfidenzniveau)',
+      code: 'conf.level = ...',
+      meaning: 'Steuert die Intervallbreite: höheres Niveau -> breiteres Intervall.'
+    });
+  }
+  if (/\bmu\b|H_0|Nullhypothese/i.test(`${prompt}\n${code}`)) {
+    map.unshift({
+      math: '$\\mu_0$ (Hypothesenwert)',
+      code: 'mu = ...',
+      meaning: 'Legt die zu prüfende Nullhypothese fest.'
+    });
+  }
+  if (/cor\(|cov\(/.test(code)) {
+    map.unshift({
+      math: '$\\rho_{XY}$ bzw. $\\mathrm{Cov}(X,Y)$',
+      code: 'cor(x, y, ...), cov(x, y)',
+      meaning: 'Misst Richtung/Stärke des Zusammenhangs; nicht automatisch Kausalität.'
+    });
+  }
+  if (/mean\(|sd\(|var\(/.test(code)) {
+    map.unshift({
+      math: '$\\bar{x}$, $s$, $\\mathrm{Var}(X)$',
+      code: 'mean(...), sd(...), var(...)',
+      meaning: 'Beschreibt Lage und Streuung der Variable im Datensatz.'
+    });
+  }
+  if (/lm\(/.test(code)) {
+    map.unshift({
+      math: '$y = \\beta_0 + \\beta_1 x + u$',
+      code: 'lm(y ~ x, data = ...)',
+      meaning: 'Schätzt Regressionsparameter aus dem spezifizierten Modell.'
+    });
+  }
   if (!map.length && /\bmu\b|\bH_0\b|Konfidenz|Intervall|p-?Wert/i.test(prompt)) {
     map.push({
       math: 'Hypothesen- oder Intervallparameter',
@@ -145,18 +532,87 @@ function inferMathCodeMap(block) {
     });
   }
   if (!map.length) {
+    const lines = code.split('\n').map((line) => line.trim()).filter(Boolean);
+    const candidate = lines.find((line) => /(lm|t\.test|cor|cov|mean|sd|var|conf\.level|mu\s*=)\s*\(|\bmu\s*=|conf\.level\s*=/.test(line));
+    if (candidate) {
+      map.push({
+        math: inferMathFromSnippet(candidate),
+        code: sanitizeCodeLine(candidate),
+        meaning: 'Diese Zeile ist die naechste sichere Mathe->R-Zuordnung im Startcode.'
+      });
+    }
+  }
+  if (!map.length) {
     map.push({
-      math: 'Fachbegriff aus Mini-Task',
-      code: 'die im Task genannte R-Zeile',
-      meaning: 'Übersetze den Begriff zuerst in diese Code-Stelle, dann in Output-Deutung.'
+      math: '$\\theta$ (Zielparameter)',
+      code: 'parameter = ...',
+      meaning: 'Setze den Zielparameter explizit in der Kernzeile und pruefe die Output-Folge.'
     });
   }
   return map.slice(0, 3);
 }
 
+function inferCoreLineEffects(block, taskMode) {
+  if (block.coreEffect && block.invariantHint) {
+    return { effect: block.coreEffect, invariant: block.invariantHint };
+  }
+  const prompt = String(block.taskPrompt || block.miniTask || '');
+  const code = String(block.starterCode || block.code || '');
+  if (taskMode === 'interpret') {
+    return {
+      effect: 'Du änderst den Code nicht; die Lernleistung ist das fachliche Lesen des vorhandenen Outputs.',
+      invariant: 'Code, Datengrundlage und Modellstruktur bleiben vollständig unverändert.'
+    };
+  }
+  if (/leitkoeffizient|oeffnung|öffnung|vorzeichenbereich/i.test(prompt) && /curve\(/.test(code)) {
+    return {
+      effect: 'Das Vorzeichen des Leitkoeffizienten kippt Öffnung und Vorzeichenbereiche der Parabel.',
+      invariant: 'Nullstellenmarkierung, Plotbereich und übriger Graph-Aufbau bleiben gleich.'
+    };
+  }
+  if (/\bx3\b/i.test(prompt) && /cbind\(/.test(code)) {
+    return {
+      effect: 'X bekommt eine zusätzliche Spalte; damit steigen Parameterzahl und Dimension von X\'X.',
+      invariant: 'Die Dimensionsbefehle und die Grundlogik des Kreuzprodukts bleiben gleich.'
+    };
+  }
+  if (/predict\(/.test(code) && /prediction|confidence/i.test(prompt)) {
+    return {
+      effect: 'Du wechselst den Intervalltyp: Erwartungswertintervall statt Einzelprognoseintervall.',
+      invariant: 'Datensatz, Regressionsmodell und die neuen x-Werte in `pred_df` bleiben gleich.'
+    };
+  }
+  if (/conf\.level|Konfidenz|Intervall/i.test(prompt)) {
+    return {
+      effect: 'Das Sicherheitsniveau ändert sich; dadurch verschiebt sich die Intervallbreite.',
+      invariant: 'Datensatz, Schätzmethode und Grundmodell bleiben gleich.'
+    };
+  }
+  if (/mu\s*=|Nullhypothese|H_0/i.test(prompt)) {
+    return {
+      effect: 'Der Prüfwert der Nullhypothese ändert sich; p-Wert/Entscheidung können kippen.',
+      invariant: 'Testverfahren und Daten bleiben gleich.'
+    };
+  }
+  if (/x\b.*\bz\b|\bz\b.*\bx\b|ersetze.*x.*z/i.test(prompt)) {
+    return {
+      effect: 'Du wechselst die betrachtete Variable; Lage/Streuung/Zusammenhang werden neu bewertet.',
+      invariant: 'Auswertelogik und Befehlsstruktur bleiben gleich.'
+    };
+  }
+  return {
+    effect: 'Die Kernzeile verändert die fachliche Aussage des Ergebnisses.',
+    invariant: 'Die übrige Pipeline bleibt unverändert und dient als Kontrollgerüst.'
+  };
+}
+
 function inferTransferPrompt(block) {
   if (block.transferPrompt) return block.transferPrompt;
   const prompt = String(block.taskPrompt || block.miniTask || '').trim();
+  const code = String(block.starterCode || block.code || '');
+  if (/predict\(/.test(code) && /prediction|confidence/i.test(prompt)) {
+    return 'Mini-Transfer: Woran erkennst du im Output sofort, ob du ein Erwartungswert- oder ein Einzelprognoseintervall liest?';
+  }
   if (/konfidenz|intervall/i.test(prompt)) {
     return 'Mini-Transfer: Wenn das Intervall breiter wird, was ändert sich fachlich an Sicherheit und Präzision?';
   }
@@ -171,7 +627,40 @@ function inferTransferPrompt(block) {
 
 function inferOutputEvidenceHint(block) {
   if (block.outputEvidenceHint) return block.outputEvidenceHint;
-  return 'Output als Beweis: Suche zuerst die entscheidende Zeile im Output, erst dann deute sie fachlich. Der Output erklärt sich nicht selbst.';
+  const prompt = String(block.taskPrompt || block.miniTask || '');
+  const code = String(block.starterCode || block.code || '');
+  if (/predict\(/.test(code) && /prediction|confidence/i.test(prompt)) {
+    return 'Beweis im Output: Vergleiche dieselben Vorhersagezeilen vor und nach der Änderung. `prediction` ist breiter, weil es die Reststreuung einer neuen Einzelbeobachtung enthält; `confidence` betrifft nur den mittleren Erwartungswert.';
+  }
+  if (/p-?wert|test|hypothese/i.test(prompt)) {
+    return 'Beweis im Output: Identifiziere Teststatistik + p-Wert + Konfidenzintervall. Erst dann die Entscheidung formulieren. Der Output liefert keine inhaltliche Kausalbegründung.';
+  }
+  if (/konfidenz|intervall/i.test(prompt)) {
+    return 'Beweis im Output: Vergleiche die Intervallgrenzen vor/nach der Änderung. Der Output zeigt die Schätzunsicherheit, aber nicht automatisch ökonomische Relevanz.';
+  }
+  if (/cor|cov|zusammenhang/i.test(prompt)) {
+    return 'Beweis im Output: Lies Vorzeichen und Größenordnung des Zusammenhangs. Der Output zeigt Assoziation, aber keine kausale Richtung.';
+  }
+  return 'Beweis im Output: Nutze genau die Zeile, die deine Hypothese bestätigt oder falsifiziert. Der Output ersetzt nicht die fachliche Interpretation.';
+}
+
+function inferTransferRule(block) {
+  if (block.transferRule) return block.transferRule;
+  const prompt = String(block.taskPrompt || block.miniTask || '');
+  const code = String(block.starterCode || block.code || '');
+  if (/predict\(/.test(code) && /prediction|confidence/i.test(prompt)) {
+    return 'Prüfungsregel: `confidence` beschreibt den geschätzten Mittelwert, `prediction` die neue Einzelbeobachtung inklusive Reststreuung.';
+  }
+  if (/p-?wert|hypothese|test/i.test(prompt)) {
+    return 'Prüfungsregel: Immer erst $H_0$, dann p-Wert-Vergleich, dann inhaltliche Aussage.';
+  }
+  if (/konfidenz|intervall/i.test(prompt)) {
+    return 'Prüfungsregel: Höhere Sicherheit kostet Präzision (breiteres Intervall).';
+  }
+  if (/cor|cov|zusammenhang/i.test(prompt)) {
+    return 'Prüfungsregel: Zusammenhang ≠ Kausalität; Vorzeichen und Maßstab getrennt deuten.';
+  }
+  return 'Prüfungsregel: Benenne zuerst den mathematischen Mechanismus, dann den R-Schritt, dann den Output-Beleg.';
 }
 
 function buildDefaultSolutionChanges(taskMode, changeFocus) {
@@ -306,7 +795,8 @@ function buildConfig(block, options = {}) {
   const runtimeMode = detectRuntimeMode(block);
   const taskPrompt = block.taskPrompt || block.question || block.miniTask || '';
   const taskMode = inferTaskMode(block);
-  const changeFocus = inferChangeFocus(block, taskMode);
+  const coreTarget = inferCoreTarget(block);
+  const changeFocus = inferChangeFocus(block, taskMode, coreTarget);
   const keepHint = inferKeepHint(block, taskMode);
 
   let purpose = block.purpose || '';
@@ -318,6 +808,11 @@ function buildConfig(block, options = {}) {
       purpose = oekHint;
     }
   }
+
+  const coreLine = coreTarget.expression || inferCoreLine(block);
+  const coreAnchor = coreTarget.expression
+    ? { lineNo: coreTarget.lineNo ?? null, expression: coreTarget.expression }
+    : inferCoreLineAnchor(block, coreLine);
 
   return {
     moduleSlug,
@@ -334,11 +829,15 @@ function buildConfig(block, options = {}) {
     taskMode,
     learningGoal: inferLearningGoal(block),
     successSignal: inferSuccessSignal(block, taskMode),
-    coreLine: inferCoreLine(block),
+    coreLine,
+    coreCue: coreTarget.cue,
+    coreLineAnchor: coreAnchor,
+    coreLineEffects: inferCoreLineEffects(block, taskMode),
     mathCodeMap: inferMathCodeMap(block),
     transferPrompt: inferTransferPrompt(block),
+    transferRule: inferTransferRule(block),
     outputEvidenceHint: inferOutputEvidenceHint(block),
-    firstStep: inferFirstStep(block, taskMode),
+    firstStep: inferFirstStep(block, taskMode, coreTarget),
     changeFocus,
     keepHint,
     solution: block.solution || '',
@@ -365,40 +864,50 @@ function renderPitfalls(pitfalls) {
 function renderTaskBriefs(config) {
   const mathMap = (config.mathCodeMap || []).map((entry) => `
   <div class="r-map-row">
-    <div class="r-map-math">${escapeHtml(entry.math || '')}</div>
-    <div class="r-map-code"><code>${escapeHtml(entry.code || '')}</code></div>
+    <div class="r-map-math"><span class="r-map-cell-label">Matheobjekt</span>${escapeHtml(entry.math || '')}</div>
+    <div class="r-map-code"><span class="r-map-cell-label">Code-Stelle</span><code>${escapeHtml(entry.code || '')}</code></div>
     <div class="r-map-meaning">${escapeHtml(entry.meaning || '')}</div>
   </div>`).join('');
 
-  return `<div class="r-learning-sequence">
-  <div class="r-orient-panel r-goal-panel">
+  const taskFlow = [
+    config.firstStep,
+    config.taskMode === 'interpret'
+      ? `Lies danach genau diese Output-Evidenz: ${config.outputEvidenceHint}`
+      : `Führe danach aus und prüfe genau diese Output-Evidenz: ${config.outputEvidenceHint}`,
+    `Behalte als Transferregel: ${config.transferRule}`
+  ];
+
+  return `<div class="r-lesson-flow">
+  <div class="r-lesson-intro">
     <div class="r-orient-panel-kicker">Lernziel</div>
     <p>${escapeHtml(config.learningGoal)}</p>
-    <p class="r-goal-success">${escapeHtml(config.successSignal)}</p>
+    <p class="r-goal-success"><strong>Erfolgssignal:</strong> ${escapeHtml(config.successSignal)}</p>
   </div>
-  <div class="r-orient-panel r-map-panel">
-    <div class="r-orient-panel-kicker">Mathe ↔ R-Übersetzung</div>
-    <div class="r-map-grid">${mathMap}</div>
+  <div class="r-translation-block">
+    <div class="r-orient-panel-kicker">Mathe ↔ R-Übersetzung (explizit)</div>
+    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Ergänze die Zuordnung: mathematischer Parameter -> exakter R-Ausdruck -> fachliche Bedeutung.</div>'}</div>
   </div>
-</div>
-<div class="r-core-line">
-  <span class="r-core-line-kicker">Heute wichtig</span>
-  <p>${escapeHtml(config.coreLine)}</p>
-</div>
-<div class="r-orient-grid">
-  <div class="r-orient-panel">
+  <div class="r-core-line">
+    <span class="r-core-line-kicker">Kernzeile (hier entscheidet sich die Aussage)</span>
+    <div class="r-core-line-meta">
+      ${config.coreLineAnchor?.lineNo ? `<span class="r-core-line-line">Zeile ${config.coreLineAnchor.lineNo}</span>` : '<span class="r-core-line-line">Zielzeile</span>'}
+      <span class="r-core-line-fragment">${escapeHtml(config.coreCue || 'Arbeite nur an dieser einen Expression.')}</span>
+    </div>
+    <pre class="r-core-line-code"><code>${escapeHtml(config.coreLineAnchor?.expression || config.coreLine)}</code></pre>
+    <div class="r-core-line-effects">
+      <p><strong>Wenn du änderst:</strong> ${escapeHtml(config.coreLineEffects.effect)}</p>
+      <p><strong>Bleibt invariant:</strong> ${escapeHtml(config.coreLineEffects.invariant)}</p>
+    </div>
+  </div>
+  <div class="r-task-flow">
     <div class="r-orient-panel-kicker">Arbeitsauftrag</div>
-    <p>${escapeHtml(config.taskPrompt || config.miniTask || 'Lies den Code, prüfe den Output und arbeite den Mini-Task ab.')}</p>
+    <p class="r-task-prompt">${escapeHtml(config.taskPrompt || config.miniTask || 'Lies den Code, prüfe den Output und arbeite den Mini-Task ab.')}</p>
+    <ol class="r-task-steps">
+      ${taskFlow.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}
+    </ol>
+    <p class="r-task-guard"><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
   </div>
-  <div class="r-orient-panel">
-    <div class="r-orient-panel-kicker">${config.taskMode === 'interpret' ? 'Codefokus' : 'Was du änderst'}</div>
-    <p>${escapeHtml(config.changeFocus)}</p>
-  </div>
-  <div class="r-orient-panel">
-    <div class="r-orient-panel-kicker">Was stehen bleibt</div>
-    <p>${escapeHtml(config.keepHint)}</p>
-  </div>
-</div>`;
+  </div>`;
 }
 
 function renderSolutionDetails(config) {
@@ -428,6 +937,7 @@ function renderSolutionDetails(config) {
   <div class="r-solution-loop">
     <strong>Schließt den Loop:</strong> Begründe die Änderung zuerst fachlich (Mathe/Statistik), dann im Code, dann mit der entscheidenden Output-Zeile.
   </div>
+  <div class="r-solution-transfer"><strong>Transferregel:</strong> ${escapeHtml(config.transferRule)}</div>
   ${changeList}
   ${codeBlock}
 </div>`;
@@ -468,19 +978,10 @@ export function renderRPracticeMarkup(block, options = {}) {
       <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
       <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
     </div>
-    <div class="r-practice-help">
-      <span class="r-practice-help-label">So arbeitest du (Reihenfolge)</span>
-      <ol class="r-practice-help-steps">
-        <li><strong>Zuerst:</strong> Lies Lernziel + Mathe↔R-Übersetzung — erst dann den Editor.</li>
-        <li><strong>Dann:</strong> Markiere die Kernzeile und formuliere vorab, was sich im Output ändern soll.</li>
-        <li><strong>Bearbeiten:</strong> ${escapeHtml(config.changeFocus)}</li>
-        <li><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</li>
-        <li><strong>Ausführen:</strong> ${config.runtimeMode === 'guided' ? 'Live-Run ist absichtlich aus — nutze Musterlösung und Interpretation wie in der Vorlesungsübung.' : '„Code ausführen“ — vergleiche die Konsole mit „Output lesen“.'}</li>
-        <li><strong>Interpretation:</strong> Begründe mit einer konkreten Output-Zeile, was fachlich gezeigt ist und was nicht.</li>
-      </ol>
-      <p class="r-practice-help-foot">${config.runtimeMode === 'guided'
-    ? 'Geführter Modus: Fokus auf Lesen und Zuordnen; WebR-Live ist hier nicht der Hauptweg.'
-    : 'Live-Modus: WebR läuft im Browser; bei Fehlern zuerst Tippfehler prüfen, dann Musterlösung.'}</p>
+<div class="r-practice-help">
+      <span class="r-practice-help-label">Bearbeitungshinweis</span>
+      <p><strong>Ändern:</strong> ${escapeHtml(config.changeFocus)}</p>
+      <p><strong>Stehen lassen:</strong> ${escapeHtml(config.keepHint)}</p>
     </div>
   </div>
   <div class="r-practice-output-card">
@@ -622,8 +1123,8 @@ function renderTabOrientationCard(config, index, total) {
 
 function renderHighlightEditor(config) {
   const editHint = config.runtimeMode === 'guided'
-    ? 'Alle Zeilen lesbar. Kein Live-Run erforderlich.'
-    : 'Ändere gezielt die Zeilen, die der Mini-Task nennt. Alle anderen Zeilen bleiben wie sie sind.';
+    ? 'Kein Live-Run nötig: Lies Code und Output als gemeinsames Belegpaket.'
+    : `Ändern: ${config.changeFocus}`;
 
   const actionLabel = config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen';
   const runDisabled = config.runtimeMode === 'guided' ? ' disabled' : '';
@@ -646,8 +1147,8 @@ function renderHighlightEditor(config) {
   </div>
   <div class="r-practice-help">
     <span class="r-practice-help-label">Bearbeitungshinweis</span>
-    <span>${escapeHtml(editHint)}</span>
-    <span class="r-practice-help-subtle">${escapeHtml(config.keepHint)}</span>
+    <p>${escapeHtml(editHint)}</p>
+    <p class="r-practice-help-subtle"><strong>Stehen lassen:</strong> ${escapeHtml(config.keepHint)}</p>
   </div>
 </div>`;
 }
@@ -666,9 +1167,13 @@ function renderTabOutputCard(config) {
   </div>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
   <div class="r-output-interp">
-    <div class="r-output-interp-kicker">So liest du den Output</div>
+    <div class="r-output-interp-kicker">Output als Beweis</div>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
+    <ul class="r-output-checklist">
+      <li><strong>Bestätigt/Falsifiziert:</strong> Welche konkrete Zeile trägt deine Entscheidung?</li>
+      <li><strong>Grenze:</strong> Was bleibt trotz Output offen?</li>
+    </ul>
   </div>
 </div>`;
 }
@@ -685,6 +1190,7 @@ function renderTabBottomRow(config) {
     <h4>Mini-Task</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
+    <p class="r-transfer-rule"><strong>Merksatz für Klausuren:</strong> ${escapeHtml(config.transferRule)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}

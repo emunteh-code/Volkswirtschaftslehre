@@ -165,6 +165,13 @@
   font-weight: 700;
 }
 
+.r-practice-help p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+}
+
 .r-practice-help-steps {
   margin: 6px 0 0;
   padding-left: 1.15rem;
@@ -339,14 +346,17 @@
   gap: 12px;
 }
 
-.r-learning-sequence {
+.r-learning-sequence,
+.r-lesson-flow {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
-.r-goal-panel {
-  border-color: color-mix(in srgb, var(--accent2) 22%, var(--border) 78%);
-  background: color-mix(in srgb, var(--surface) 84%, var(--accent2) 4%);
+.r-lesson-intro {
+  display: grid;
+  gap: 6px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
 }
 
 .r-goal-success {
@@ -356,8 +366,10 @@
   font-weight: 600;
 }
 
-.r-map-panel {
-  border-color: color-mix(in srgb, var(--math-ink) 20%, var(--border) 80%);
+.r-translation-block {
+  display: grid;
+  gap: 8px;
+  padding: 2px 0;
 }
 
 .r-map-grid {
@@ -367,24 +379,32 @@
 
 .r-map-row {
   display: grid;
-  gap: 5px;
+  gap: 8px;
   padding: 10px 12px;
   border-radius: var(--r-sm);
   border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
-  background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
+  background: color-mix(in srgb, var(--surface) 93%, var(--surface2) 7%);
+}
+
+.r-map-cell-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
+  margin-bottom: 2px;
 }
 
 .r-map-math {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
-  font-weight: 700;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--math-ink) 84%, var(--text) 16%);
 }
 
 .r-map-code code {
   font-family: var(--font-mono);
-  color: var(--math-ink);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text) 14%);
   font-size: 12px;
 }
 
@@ -395,12 +415,12 @@
 }
 
 .r-core-line {
-  border-left: 3px solid color-mix(in srgb, var(--accent2) 65%, transparent);
-  padding: 11px 14px;
+  border-left: 4px solid color-mix(in srgb, var(--accent2) 72%, transparent);
+  padding: 12px 14px;
   border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--surface) 82%, var(--accent2) 4%);
+  background: color-mix(in srgb, var(--surface) 78%, var(--accent2) 6%);
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .r-core-line-kicker {
@@ -411,11 +431,59 @@
   font-weight: 700;
 }
 
-.r-core-line p {
+.r-core-line-code {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.58;
-  color: var(--text);
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, var(--border) 58%);
+  background: color-mix(in srgb, var(--surface) 95%, var(--accent2) 5%);
+  overflow-x: auto;
+}
+
+.r-core-line-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.r-core-line-line {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
+  background: color-mix(in srgb, var(--accent2) 16%, var(--surface) 84%);
+  border: 1px solid color-mix(in srgb, var(--accent2) 32%, var(--border) 68%);
+}
+
+.r-core-line-fragment {
+  font-size: 11px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 78%, var(--muted) 22%);
+  font-weight: 600;
+}
+
+.r-core-line-code code {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
+}
+
+.r-core-line-effects {
+  display: grid;
+  gap: 4px;
+}
+
+.r-core-line-effects p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
 }
 
 .r-orient-panel {
@@ -442,6 +510,44 @@
   line-height: 1.58;
   color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
   max-width: none;
+}
+
+.r-task-flow {
+  display: grid;
+  gap: 7px;
+  padding-top: 2px;
+}
+
+.r-task-prompt {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.58;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+}
+
+.r-task-steps {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 6px;
+}
+
+.r-task-steps li {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.r-task-guard {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+}
+
+.r-map-fallback {
+  font-size: 12.5px;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
 }
 
 .r-orient-first-action {
@@ -672,6 +778,19 @@
   color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%) !important;
 }
 
+.r-output-checklist {
+  margin: 2px 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 4px;
+}
+
+.r-output-checklist li {
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 85%, var(--muted) 15%);
+}
+
 /* ─── Tab Bottom Row: Mini-Task + Pitfalls ───────────────────────────────── */
 
 .r-tab-bottom {
@@ -764,6 +883,16 @@
   color: var(--accent2);
 }
 
+.r-solution-transfer {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--surface) 90%, var(--accent2) 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  font-size: 12px;
+  line-height: 1.52;
+}
+
 .r-transfer-prompt {
   margin-top: 2px !important;
   padding: 9px 11px;
@@ -773,6 +902,13 @@
   font-size: 12.5px !important;
   line-height: 1.58 !important;
   color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
+}
+
+.r-transfer-rule {
+  margin-top: 2px !important;
+  font-size: 12.5px !important;
+  line-height: 1.55 !important;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%) !important;
 }
 
 .r-tab-pitfalls {

@@ -95,6 +95,85 @@ function inferKeepHint(block, taskMode) {
   return `Lass ${joinNatural(anchors)} stehen, solange der Mini-Task sie nicht ausdrücklich verändert.`;
 }
 
+function inferCoreLine(block) {
+  if (block.coreLine) return block.coreLine;
+  const taskText = String(block.taskPrompt || block.question || block.miniTask || '');
+  const snippet = extractCodeSnippets(taskText)[0];
+  if (snippet) return `Kernzeile heute: \`${snippet}\``;
+  const lines = String(block.starterCode || block.code || '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const candidate = lines.find((line) => /(?:lm|t\.test|cor|cov|predict|mean|sd|var|hist|plot|anova)\s*\(/.test(line));
+  if (candidate) return `Kernzeile heute: \`${candidate}\``;
+  return 'Kernzeile heute: Die eine Zeile, die den Mini-Task fachlich verändert.';
+}
+
+function inferLearningGoal(block) {
+  if (block.learningGoal) return block.learningGoal;
+  const purpose = String(block.purpose || '').trim();
+  if (purpose) return purpose;
+  const miniTask = String(block.miniTask || '').trim();
+  if (miniTask) return `Lernziel: ${miniTask}`;
+  return 'Lernziel: Übersetze die Fachidee sauber in einen belastbaren R-Arbeitsschritt.';
+}
+
+function inferSuccessSignal(block, taskMode) {
+  if (block.successSignal) return block.successSignal;
+  if (taskMode === 'interpret') {
+    return 'Erfolg: Du nennst Output-Stelle, Testlogik und inhaltliche Aussage in sauberer Reihenfolge.';
+  }
+  return 'Erfolg: Deine gezielte Änderung erzeugt einen Output, den du fachlich begründen kannst.';
+}
+
+function inferMathCodeMap(block) {
+  if (Array.isArray(block.mathCodeMap) && block.mathCodeMap.length) return block.mathCodeMap;
+  const map = [];
+  const prompt = String(block.taskPrompt || block.miniTask || '');
+  extractCodeSnippets(prompt).slice(0, 2).forEach((snippet) => {
+    map.push({
+      math: 'Symbol / Parameter aus der Fragestellung',
+      code: snippet,
+      meaning: 'Diese Stelle steuert die fachliche Aussage der Aufgabe.'
+    });
+  });
+  if (!map.length && /\bmu\b|\bH_0\b|Konfidenz|Intervall|p-?Wert/i.test(prompt)) {
+    map.push({
+      math: 'Hypothesen- oder Intervallparameter',
+      code: 'mu = ... / conf.level = ...',
+      meaning: 'Diese Parameter setzen das mathematische Prüfziel im R-Aufruf.'
+    });
+  }
+  if (!map.length) {
+    map.push({
+      math: 'Fachbegriff aus Mini-Task',
+      code: 'die im Task genannte R-Zeile',
+      meaning: 'Übersetze den Begriff zuerst in diese Code-Stelle, dann in Output-Deutung.'
+    });
+  }
+  return map.slice(0, 3);
+}
+
+function inferTransferPrompt(block) {
+  if (block.transferPrompt) return block.transferPrompt;
+  const prompt = String(block.taskPrompt || block.miniTask || '').trim();
+  if (/konfidenz|intervall/i.test(prompt)) {
+    return 'Mini-Transfer: Wenn das Intervall breiter wird, was ändert sich fachlich an Sicherheit und Präzision?';
+  }
+  if (/p-?wert|hypothese|test/i.test(prompt)) {
+    return 'Mini-Transfer: Formuliere dieselbe Testentscheidung in zwei Sätzen: formal und inhaltlich.';
+  }
+  if (/korrelation|cov|zusammenhang/i.test(prompt)) {
+    return 'Mini-Transfer: Woran erkennst du, dass ein Zusammenhang stark ist, auch wenn das Vorzeichen wechselt?';
+  }
+  return 'Mini-Transfer: Welche eine Prüfungsregel nimmst du aus dieser R-Übung in die Klausur mit?';
+}
+
+function inferOutputEvidenceHint(block) {
+  if (block.outputEvidenceHint) return block.outputEvidenceHint;
+  return 'Output als Beweis: Suche zuerst die entscheidende Zeile im Output, erst dann deute sie fachlich. Der Output erklärt sich nicht selbst.';
+}
+
 function buildDefaultSolutionChanges(taskMode, changeFocus) {
   if (taskMode === 'interpret') {
     return ['Keine Codeänderung nötig: Nutze den vorhandenen Output als Beleg und übersetze ihn sauber in Sprache.'];
@@ -253,6 +332,12 @@ function buildConfig(block, options = {}) {
     miniTask: block.miniTask || '',
     taskPrompt,
     taskMode,
+    learningGoal: inferLearningGoal(block),
+    successSignal: inferSuccessSignal(block, taskMode),
+    coreLine: inferCoreLine(block),
+    mathCodeMap: inferMathCodeMap(block),
+    transferPrompt: inferTransferPrompt(block),
+    outputEvidenceHint: inferOutputEvidenceHint(block),
     firstStep: inferFirstStep(block, taskMode),
     changeFocus,
     keepHint,
@@ -278,7 +363,29 @@ function renderPitfalls(pitfalls) {
 }
 
 function renderTaskBriefs(config) {
-  return `<div class="r-orient-grid">
+  const mathMap = (config.mathCodeMap || []).map((entry) => `
+  <div class="r-map-row">
+    <div class="r-map-math">${escapeHtml(entry.math || '')}</div>
+    <div class="r-map-code"><code>${escapeHtml(entry.code || '')}</code></div>
+    <div class="r-map-meaning">${escapeHtml(entry.meaning || '')}</div>
+  </div>`).join('');
+
+  return `<div class="r-learning-sequence">
+  <div class="r-orient-panel r-goal-panel">
+    <div class="r-orient-panel-kicker">Lernziel</div>
+    <p>${escapeHtml(config.learningGoal)}</p>
+    <p class="r-goal-success">${escapeHtml(config.successSignal)}</p>
+  </div>
+  <div class="r-orient-panel r-map-panel">
+    <div class="r-orient-panel-kicker">Mathe ↔ R-Übersetzung</div>
+    <div class="r-map-grid">${mathMap}</div>
+  </div>
+</div>
+<div class="r-core-line">
+  <span class="r-core-line-kicker">Heute wichtig</span>
+  <p>${escapeHtml(config.coreLine)}</p>
+</div>
+<div class="r-orient-grid">
   <div class="r-orient-panel">
     <div class="r-orient-panel-kicker">Arbeitsauftrag</div>
     <p>${escapeHtml(config.taskPrompt || config.miniTask || 'Lies den Code, prüfe den Output und arbeite den Mini-Task ab.')}</p>
@@ -318,6 +425,9 @@ function renderSolutionDetails(config) {
   return `<div class="r-solution-body">
   <div class="r-solution-label">Musterlösung</div>
   <p>${escapeHtml(config.solution)}</p>
+  <div class="r-solution-loop">
+    <strong>Schließt den Loop:</strong> Begründe die Änderung zuerst fachlich (Mathe/Statistik), dann im Code, dann mit der entscheidenden Output-Zeile.
+  </div>
   ${changeList}
   ${codeBlock}
 </div>`;
@@ -348,7 +458,7 @@ export function renderRPracticeMarkup(block, options = {}) {
     <div class="r-practice-toolbar">
       <div>
         <div class="r-practice-toolbar-kicker">Codebereich</div>
-        <div class="r-practice-toolbar-title">Ändern, ausführen, interpretieren</div>
+        <div class="r-practice-toolbar-title">Code als Modell der Fachidee</div>
       </div>
       <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>
     </div>
@@ -361,12 +471,12 @@ export function renderRPracticeMarkup(block, options = {}) {
     <div class="r-practice-help">
       <span class="r-practice-help-label">So arbeitest du (Reihenfolge)</span>
       <ol class="r-practice-help-steps">
-        <li><strong>Zuerst:</strong> Lies den Block <em>Arbeitsauftrag</em> — dort steht die konkrete Frage.</li>
-        <li><strong>Dann:</strong> Vergleiche den Code mit <em>Output lesen</em> (was soll rauskommen?).</li>
+        <li><strong>Zuerst:</strong> Lies Lernziel + Mathe↔R-Übersetzung — erst dann den Editor.</li>
+        <li><strong>Dann:</strong> Markiere die Kernzeile und formuliere vorab, was sich im Output ändern soll.</li>
         <li><strong>Bearbeiten:</strong> ${escapeHtml(config.changeFocus)}</li>
         <li><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</li>
         <li><strong>Ausführen:</strong> ${config.runtimeMode === 'guided' ? 'Live-Run ist absichtlich aus — nutze Musterlösung und Interpretation wie in der Vorlesungsübung.' : '„Code ausführen“ — vergleiche die Konsole mit „Output lesen“.'}</li>
-        <li><strong>Interpretation:</strong> Formuliere in eigenen Worten, was das Ergebnis für die Modulfrage bedeutet.</li>
+        <li><strong>Interpretation:</strong> Begründe mit einer konkreten Output-Zeile, was fachlich gezeigt ist und was nicht.</li>
       </ol>
       <p class="r-practice-help-foot">${config.runtimeMode === 'guided'
     ? 'Geführter Modus: Fokus auf Lesen und Zuordnen; WebR-Live ist hier nicht der Hauptweg.'
@@ -387,10 +497,12 @@ export function renderRPracticeMarkup(block, options = {}) {
   <div class="r-practice-card">
     <h4>Output lesen</h4>
     <p>${escapeHtml(config.interpretation)}</p>
+    <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
   </div>
   <div class="r-practice-card">
     <h4>Mini-Task</h4>
     <p>${escapeHtml(config.miniTask)}</p>
+    <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
@@ -520,7 +632,7 @@ function renderHighlightEditor(config) {
   <div class="r-practice-toolbar">
     <div>
       <div class="r-practice-toolbar-kicker">Codebereich</div>
-      <div class="r-practice-toolbar-title">Bearbeite gezielt — nicht alles auf einmal</div>
+      <div class="r-practice-toolbar-title">Bearbeite die Kernzeile — nicht den ganzen Block</div>
     </div>
   </div>
   <div class="r-highlight-wrap">
@@ -556,6 +668,7 @@ function renderTabOutputCard(config) {
   <div class="r-output-interp">
     <div class="r-output-interp-kicker">So liest du den Output</div>
     <p>${escapeHtml(config.interpretation)}</p>
+    <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
   </div>
 </div>`;
 }
@@ -571,6 +684,7 @@ function renderTabBottomRow(config) {
   <div class="r-practice-card r-tab-task-card">
     <h4>Mini-Task</h4>
     <p>${escapeHtml(config.miniTask)}</p>
+    <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}

@@ -339,6 +339,85 @@
   gap: 12px;
 }
 
+.r-learning-sequence {
+  display: grid;
+  gap: 12px;
+}
+
+.r-goal-panel {
+  border-color: color-mix(in srgb, var(--accent2) 22%, var(--border) 78%);
+  background: color-mix(in srgb, var(--surface) 84%, var(--accent2) 4%);
+}
+
+.r-goal-success {
+  margin-top: 4px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent2) 68%, var(--text) 32%);
+  font-weight: 600;
+}
+
+.r-map-panel {
+  border-color: color-mix(in srgb, var(--math-ink) 20%, var(--border) 80%);
+}
+
+.r-map-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.r-map-row {
+  display: grid;
+  gap: 5px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
+}
+
+.r-map-math {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+  font-weight: 700;
+}
+
+.r-map-code code {
+  font-family: var(--font-mono);
+  color: var(--math-ink);
+  font-size: 12px;
+}
+
+.r-map-meaning {
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+.r-core-line {
+  border-left: 3px solid color-mix(in srgb, var(--accent2) 65%, transparent);
+  padding: 11px 14px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--surface) 82%, var(--accent2) 4%);
+  display: grid;
+  gap: 6px;
+}
+
+.r-core-line-kicker {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: color-mix(in srgb, var(--accent2) 76%, var(--muted) 24%);
+  font-weight: 700;
+}
+
+.r-core-line p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.58;
+  color: var(--text);
+}
+
 .r-orient-panel {
   display: grid;
   gap: 6px;
@@ -582,6 +661,17 @@
   max-width: none;
 }
 
+.r-output-proof {
+  margin-top: 8px !important;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 85%, var(--surface2) 15%);
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%) !important;
+}
+
 /* ─── Tab Bottom Row: Mini-Task + Pitfalls ───────────────────────────────── */
 
 .r-tab-bottom {
@@ -657,6 +747,32 @@
   border-radius: var(--r-sm);
   border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
   background: color-mix(in srgb, var(--surface) 84%, var(--surface2) 16%);
+}
+
+.r-solution-loop {
+  margin-top: 2px;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--accent2) 25%, var(--border) 75%);
+  background: color-mix(in srgb, var(--surface) 82%, var(--accent2) 4%);
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+.r-solution-loop strong {
+  color: var(--accent2);
+}
+
+.r-transfer-prompt {
+  margin-top: 2px !important;
+  padding: 9px 11px;
+  border-left: 3px solid color-mix(in srgb, var(--math-ink) 58%, transparent);
+  background: color-mix(in srgb, var(--surface) 86%, var(--math-ink) 4%);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: 12.5px !important;
+  line-height: 1.58 !important;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
 }
 
 .r-tab-pitfalls {

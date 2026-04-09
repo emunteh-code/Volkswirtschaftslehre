@@ -1,34 +1,319 @@
 // ============================================================
 // FULL EXAMS DATA — Statistik
+// Platform-authored drills (not verbatim archive papers); see contentManifest.
+// Shapes: `problems`+`step` (normalized to text-block) or native `aufgaben` (W/F, text-block).
 // ============================================================
 
 export const FULL_EXAMS = {
   klausur_2024: {
-    title: 'Probeklausur Statistik',
+    id: 'klausur_2024',
+    title: 'Probeklausur Statistik — Rechnen und Interpretieren',
+    subtitle: '90 Min. · Deskriptiv, Inferenz, Regression, mehre Konzepte',
     duration: 90,
     problems: [
       {
         id: 'fe_desk_1',
         title: 'Deskriptive Kennzahlen',
         conceptId: 'deskriptiv',
-        text: 'Gegeben sind die Werte: 3, 5, 7, 7, 8, 10, 12. Berechnen Sie Mittelwert, Median und Varianz.',
+        text: 'Gegeben sind die Werte: 3, 5, 7, 7, 8, 10, 12. Berechnen Sie Mittelwert, Median und empirische Varianz (Teiler n−1).',
         type: 'step',
         steps: [
-          { q: '[Interpretation] Was ist der Mittelwert?', answer: ['52/7', '7.43', '7,43'], hint: 'Summe durch Anzahl.' },
-          { q: '[Berechnung] Was ist der Median?', answer: ['7'], hint: 'Mittlerer Wert der sortierten Reihe.' },
-          { q: '[Berechnung] Was ist die empirische Varianz (mit n-1)?', answer: ['8.29', '8,29', '58/7'], hint: 'Summe der quadrierten Abweichungen geteilt durch n-1.' }
+          {
+            q: '[Berechnung] Wie groß ist der Mittelwert x̄ (als Bruch oder auf zwei Dezimalstellen)?',
+            answer: ['52/7', '7.43', '7,43'],
+            hint: 'Summe aller Werte geteilt durch n = 7.'
+          },
+          {
+            q: '[Berechnung] Wie lautet der Median der sortierten Reihe?',
+            answer: ['7'],
+            hint: 'Bei ungeradem n ist der Median der mittlere Wert.'
+          },
+          {
+            q: '[Berechnung] Wie groß ist s² mit Teiler (n−1)?',
+            answer: ['58/7', '8.29', '8,29'],
+            hint: 's² = (1/(n−1)) Σ (xᵢ − x̄)².'
+          }
         ]
       },
       {
-        id: 'fe_test_1',
-        title: 'Hypothesentest',
+        id: 'fe_test_t_1',
+        title: 'Einstichproben-t-Test',
         conceptId: 'testen',
-        text: 'Ein Unternehmen behauptet, die mittlere Füllmenge beträgt μ₀ = 500ml. Stichprobe: n=25, x̄=495, s=15. Testen Sie zum 5%-Niveau.',
+        text: 'Ein Unternehmen behauptet μ₀ = 500 ml Füllmenge. Stichprobe: n = 25, x̄ = 495 ml, s = 15 ml. Zweiseitiger Test zum Niveau α = 5 %.',
         type: 'step',
         steps: [
-          { q: '[Interpretation] Wie lautet H₀ und H₁?', answer: ['H0: mu = 500', 'H0: μ = 500', 'mu=500'], hint: 'Zweiseitiger Test gegen μ₀.' },
-          { q: '[Berechnung] Berechnen Sie die Teststatistik t.', answer: ['-1.67', '-1,67'], hint: 't = (x̄ − μ₀) / (s/√n)' },
-          { q: '[Validierung] Wird H₀ abgelehnt?', answer: ['nein', 'Nein', 'nicht abgelehnt'], hint: '|t| = 1.67 < t₀.₀₂₅,₂₄ ≈ 2.064.' }
+          {
+            q: '[Modell] Formulieren Sie H₀ und H₁ (zweiseitig) in einem Satz.',
+            answer: ['h0', 'h₁', '500', 'mu', 'μ'],
+            hint: 'H₀: μ = 500; H₁: μ ≠ 500.'
+          },
+          {
+            q: '[Berechnung] Berechnen Sie die t-Statistik (zwei Dezimalstellen reichen).',
+            answer: ['-1.67', '-1,67', '-5/3'],
+            hint: 't = (x̄ − μ₀) / (s/√n).'
+          },
+          {
+            q: '[Entscheidung] Wird H₀ bei |t| < t₀.₀₂₅,₂₄ abgelehnt?',
+            answer: ['nein', 'Nein', 'nicht abgelehnt', 'beibehalten'],
+            hint: '|t| ≈ 1,67 < 2,064 → keine Ablehnung.'
+          }
+        ]
+      },
+      {
+        id: 'fe_z_1',
+        title: 'z-Test bei bekannter Streuung',
+        conceptId: 'z_test',
+        text: 'Die Füllmenge sei normalverteilt mit bekannter Standardabweichung σ = 12 ml. Stichprobe n = 64, x̄ = 498 ml. Testen Sie H₀: μ = 500 ml zweiseitig auf α = 5 % (kritischer Wert z₀.₀₂₅ ≈ 1,96).',
+        type: 'step',
+        steps: [
+          {
+            q: '[Begründung] Warum ist hier der z-Test (und nicht der t-Test) der passende Rahmen?',
+            answer: ['sigma', 'σ', 'bekannt', 'bekannte'],
+            hint: 'σ ist gegeben; t-Test ist Standard bei unbekannter σ und kleiner/mittlerer n.'
+          },
+          {
+            q: '[Berechnung] Berechnen Sie z = (x̄ − μ₀) / (σ/√n) (zwei Dezimalstellen).',
+            answer: ['-1.33', '-1,33', '-4/3'],
+            hint: 'Standardfehler = σ/√n = 12/8 = 1,5.'
+          },
+          {
+            q: '[Entscheidung] Ablehnung von H₀?',
+            answer: ['nein', 'Nein', 'nicht abgelehnt'],
+            hint: '|z| ≈ 1,33 < 1,96 → H₀ beibehalten.'
+          }
+        ]
+      },
+      {
+        id: 'fe_zwei_1',
+        title: 'Zwei unabhängige Stichproben',
+        conceptId: 'zwei_stichproben',
+        text: 'Zwei unabhängige Gruppen: n₁ = 10, x̄₁ = 102, s₁ = 5; n₂ = 12, x̄₂ = 96, s₂ = 6. Sie testen H₀: μ₁ = μ₂ zweiseitig grob auf α = 5 % mit Welch-t (df ≈ 19, kritischer Wert |t| ≈ 2,09).',
+        type: 'step',
+        steps: [
+          {
+            q: '[Wahl] Nennen Sie einen Grund, wann Welch-t dem gepoolten t vorzuziehen ist.',
+            answer: ['varianz', 'ungleich', 'heterogen', 'levene'],
+            hint: 'Ungleiche Populationsvarianzen → Welch robuster.'
+          },
+          {
+            q: '[Berechnung] Geben Sie den Welch-t-Nenner SE = √(s₁²/n₁ + s₂²/n₂) numerisch auf zwei Dezimalstellen.',
+            answer: ['2.29', '2,29'],
+            hint: 'SE² = 25/10 + 36/12 = 2,5 + 3 = 5,5; SE ≈ √5,5.'
+          },
+          {
+            q: '[Berechnung und Entscheidung] t = (x̄₁ − x̄₂)/SE und Ablehnung von H₀?',
+            answer: ['2.62', '2,62', 'ja', 'Ja', 'abgelehnt'],
+            hint: 't ≈ 6/2,29 ≈ 2,62 > 2,09 → H₀ ablehnen.'
+          }
+        ]
+      },
+      {
+        id: 'fe_anova_1',
+        title: 'Varianzanalyse — Logik',
+        conceptId: 'varianzanalyse',
+        text: 'Drei Gruppenmittelwerte werden mit einfaktorieller ANOVA verglichen (α = 5 %).',
+        type: 'step',
+        steps: [
+          {
+            q: '[Konzept] Warum sind drei paarweise t-Tests mit jeweils α = 5 % problematischer als eine ANOVA?',
+            answer: ['alpha', 'fehler', 'multiple', 'familien', 'kumul'],
+            hint: 'Ohne Korrektur steigt das Risiko mindestens eines fälschlichen Treffers (multiple Tests).'
+          },
+          {
+            q: '[Interpretation] Die ANOVA liefert p < α. Was dürfen Sie über die Gruppenmittel schließen?',
+            answer: ['mindestens', 'ungleich', 'nicht alle', 'unterschied'],
+            hint: 'Global: nicht alle μᵢ gleich; paarweise Unterschiede ggf. Post-hoc.'
+          },
+          {
+            q: '[Voraussetzung] Nennen Sie zwei typische Modellannahmen der einfaktoriellen ANOVA.',
+            answer: ['normal', 'unabhäng', 'varianz', 'homogen'],
+            hint: 'Z. B. unabhängige Beobachtungen, Normalität innerhalb der Gruppen, Varianzhomogenität.'
+          }
+        ]
+      },
+      {
+        id: 'fe_np_1',
+        title: 'Nichtparametrische Alternative',
+        conceptId: 'nichtparametrisch',
+        text: 'Sie vergleichen zwei unabhängige Gruppen; die Zielvariable ist ordinal bewertet und die Verteilung ist stark schief mit Ausreißern.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Wahl] Welcher Test ist hier typischerweise dem Zweistichproben-t vorzuziehen?',
+            answer: ['mann', 'whitney', 'u-test', 'mann-whitney'],
+            hint: 'Rangbasierter Test für zwei unabhängige Stichproben: Mann-Whitney-U.'
+          },
+          {
+            q: '[Konzept] Was bedeutet „robuster“ in diesem Kontext kurz?',
+            answer: ['ausreißer', 'verteilung', 'annahme', 'schief'],
+            hint: 'Weniger empfindlich gegenüber Extremwerten und Verletzung der Normalität.'
+          },
+          {
+            q: '[Abgrenzung] Wann ist dennoch der t-Test effizienter?',
+            answer: ['normal', 'annahme', 'erfüllt', 'metrisch'],
+            hint: 'Wenn metrisch + approximativ normalverteilt und keine schweren Ausreißer — parametrische Tests sind dann oft mächtiger.'
+          }
+        ]
+      },
+      {
+        id: 'fe_reg_1',
+        title: 'Regression — Koeffizient lesen',
+        conceptId: 'regression_schaetzung_inferenz',
+        text: 'Geschätztes Modell ŷ = 2,5 + 0,8 x. Standardfehler der Steigung 0,25, t-Wert für Steigung = 3,2, zweiseitiger p-Wert = 0,004.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Interpretation] Wie ändert sich ŷ bei einer Erhöhung von x um eine Einheit ceteris paribus?',
+            answer: ['0.8', '0,8', 'um 0.8', 'steigt um 0.8'],
+            hint: 'Die Steigung ist der Koeffizient vor x.'
+          },
+          {
+            q: '[Inferenz] Ist die Steigung auf α = 5 % signifikant?',
+            answer: ['ja', 'Ja', 'signifikant'],
+            hint: 'p = 0,004 < 0,05.'
+          },
+          {
+            q: '[Vorsicht] Was misst diese Aussage nicht automatisch?',
+            answer: ['kausal', 'ursache', 'einflussfaktor'],
+            hint: 'Regression zeigt Zusammenhang, nicht ohne weiteres Kausalität.'
+          }
+        ]
+      },
+      {
+        id: 'fe_ki_1',
+        title: 'Konfidenzintervall und Test',
+        conceptId: 'schaetzen_eigenschaften_intervalle',
+        text: 'Für μ liegt das 95 %-Konfidenzintervall bei [49,2 ; 50,8] (Stichprobenmittel x̄ = 50). Sie testen H₀: μ = 51 zweiseitig auf α = 5 %.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Logik] Liegt μ₀ = 51 im 95 %-KI?',
+            answer: ['nein', 'Nein', 'außerhalb', 'aussen'],
+            hint: 'Obergrenze 50,8 < 51.'
+          },
+          {
+            q: '[Folgerung] Würde der zugehörige zweiseitige Test auf α = 5 % typischerweise H₀ ablehnen?',
+            answer: ['ja', 'Ja'],
+            hint: 'μ₀ außerhalb des 95 %-KI ↔ zweiseitiger Test lehnt bei α = 5 % ab.'
+          },
+          {
+            q: '[Konzept] Was quantifiziert das KI zusätzlich zum bloßen p-Wert?',
+            answer: ['präzision', 'band', 'unsicherheit', 'bereich', 'spanne'],
+            hint: 'Plausible Werte für den Parameter als Intervall, nicht nur binäre Entscheidung.'
+          }
+        ]
+      },
+      {
+        id: 'fe_biv_1',
+        title: 'Korrelation und Transfer',
+        conceptId: 'bivariat',
+        text: 'Zwei Merkmale haben empirischen Pearson-Korrelationskoeffizienten r = 0,85 in einer Querschnittsstichprobe von Unternehmen.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Lesen] Beschreiben Sie die Stärke und Richtung des linearen Zusammenhangs in einem Satz.',
+            answer: ['stark', 'positiv', 'linear'],
+            hint: 'r nahe +1 → starker positiver linearer Zusammenhang.'
+          },
+          {
+            q: '[Transfer] Darf man daraus schließen, dass das eine Merkmal das andere verursacht?',
+            answer: ['nein', 'Nein', 'nicht', 'kausal'],
+            hint: 'Korrelation ≠ Kausalität; Drittvariablen möglich.'
+          },
+          {
+            q: '[Reflexion] Nennen Sie eine statistische Maßnahme vor starker Kausalinterpretation.',
+            answer: ['experiment', 'kontrolle', 'variablen', 'modell', 'confounding'],
+            hint: 'Z. B. Kontrolle weiterer Kovariaten, Design/Experiment, fachliche Plausibilität.'
+          }
+        ]
+      }
+    ]
+  },
+
+  klausur_transfer_wf: {
+    id: 'klausur_transfer_wf',
+    title: 'Transfercheck Statistik — Wahr / Falsch',
+    subtitle: '45 Min. · Typische Begriffs- und Interpretationsfallen',
+    duration: 45,
+    aufgaben: [
+      {
+        label: 'Aufgabe 1',
+        points: 20,
+        type: 'wf-block',
+        preamble:
+          'Beurteilen Sie jede Aussage als **Wahr** oder **Falsch** und nutzen Sie die Musterlösung, um Lücken zu schließen.',
+        groups: [
+          {
+            context: 'p-Werte, Signifikanz und KI',
+            questions: [
+              {
+                id: 'st_wf_p1',
+                text: 'Der p-Wert ist die Wahrscheinlichkeit, dass die Nullhypothese wahr ist.',
+                correct: 'Falsch',
+                feedback:
+                  'Der p-Wert misst unter H₀ die Wahrscheinlichkeit für Daten mindestens so extrem wie beobachtet — nicht P(H₀ wahr).'
+              },
+              {
+                id: 'st_wf_p2',
+                text: 'Wenn das 95 %-Konfidenzintervall für μ den Wert μ₀ nicht enthält, verwirft der zugehörige zweiseitige Test H₀: μ = μ₀ typischerweise auf dem 5 %-Niveau.',
+                correct: 'Wahr',
+                feedback: 'Äquivalenz zwischen zweiseitigem α-Niveau-Test und (1−α)-KI ist Standardlogik.'
+              },
+              {
+                id: 'st_wf_p3',
+                text: '„Statistisch signifikant“ bedeutet automatisch, dass der Effekt wirtschaftlich groß ist.',
+                correct: 'Falsch',
+                feedback: 'Signifikanz hängt von n und Streuung ab; kleine Effekte können bei großem n signifikant sein.'
+              },
+              {
+                id: 'st_wf_p4',
+                text: 'Ein höheres Signifikanzniveau α macht den Test konservativer gegenüber H₁.',
+                correct: 'Falsch',
+                feedback: 'Größeres α erleichtert die Ablehnung von H₀ (mehr Fehler 1. Art, weniger konservativ).'
+              },
+              {
+                id: 'st_wf_p5',
+                text: 'Die Stichprobenvarianz s² verwendet im Nenner typischerweise (n−1), damit s² erwartungstreu für σ² ist.',
+                correct: 'Wahr',
+                feedback: 'Teiler (n−1) korrigiert den Bias des rohen Mittels der quadrierten Abweichungen.'
+              }
+            ]
+          },
+          {
+            context: 'Tests, Annahmen und nichtparametrische Alternativen',
+            questions: [
+              {
+                id: 'st_wf_p6',
+                text: 'Der t-Test für zwei unabhängige Mittelwerte setzt immer identische Stichprobenumfänge voraus.',
+                correct: 'Falsch',
+                feedback: 'n₁ und n₂ dürfen unterschiedlich sein; wichtig sind Modellannahmen (z. B. Unabhängigkeit, Verteilungsannahmen).'
+              },
+              {
+                id: 'st_wf_p7',
+                text: 'Wenn die Normalitätsannahme stark verletzt ist und die Daten ordinal sind, ist ein Rangtest oft die sicherere Wahl als ein blind eingesetzter t-Test.',
+                correct: 'Wahr',
+                feedback: 'Nichtparametrische Tests vermeiden starke Verteilungsannahmen; passend bei Ordinaldaten.'
+              },
+              {
+                id: 'st_wf_p8',
+                text: 'ANOVA prüft, ob die Varianz innerhalb der Gruppen gleich der Varianz zwischen den Gruppen ist.',
+                correct: 'Falsch',
+                feedback: 'ANOVA vergleicht systematische Mittelwertsunterschiede über F = Zwischen / Innerhalb — nicht „Varianz = Varianz“ im Alltagssinn.'
+              },
+              {
+                id: 'st_wf_p9',
+                text: 'Ein hoher |r| beweist einen kausalen Einfluss von X auf Y.',
+                correct: 'Falsch',
+                feedback: 'Korrelation allein belegt keinen kausalen Mechanismus; Confounding möglich.'
+              },
+              {
+                id: 'st_wf_p10',
+                text: 'Bei bekanntem σ und großem n ist der z-Test für den Mittelwert ein legitimer Referenzrahmen; in der Praxis ist σ jedoch oft unbekannt.',
+                correct: 'Wahr',
+                feedback: 'Passt zu Kurslogik: z wenn σ bekannt; sonst t. Große n nähern t und z an.'
+              }
+            ]
+          }
         ]
       }
     ]

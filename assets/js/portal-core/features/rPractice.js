@@ -465,6 +465,46 @@ function inferLearningGoal(block) {
   return 'Lernziel: Übersetze die Fachidee sauber in einen belastbaren R-Arbeitsschritt.';
 }
 
+function inferGoalBullets(block) {
+  if (Array.isArray(block.goalBullets) && block.goalBullets.length) return block.goalBullets;
+
+  const text = `${block.taskPrompt || block.miniTask || ''}\n${block.starterCode || block.code || ''}\n${block.solutionCode || ''}`;
+
+  if (/sum\(\(1:4\)\^2\)|sum\(\(1:4\)\^3\)|prod\(1:4\)/.test(text)) {
+    return [
+      'Lies `sum((1:4)^2)` als mathematische Summe über die Folge 1, 2, 3, 4.',
+      'Erkenne: `^2` bzw. `^3` verändert jeden Summanden, nicht nur das Endergebnis.',
+      'Nutze den Output als Zahlenbeleg und benenne die Formel selbst in Worten oder Symbolen.'
+    ];
+  }
+
+  if (/leitkoeffizient|oeffnung|öffnung|vorzeichenbereich/i.test(text) && /curve\(/.test(text)) {
+    return [
+      'Markiere zuerst die Funktionszeile, die den Leitkoeffizienten trägt.',
+      'Halte Nullstellen und Plotaufbau fest und beobachte nur die qualitative Änderung.',
+      'Lies den Plot als Beleg für deine algebraische Lesart, nicht als Ersatz dafür.'
+    ];
+  }
+
+  if (/\bx3\b/i.test(text) && /cbind\(/.test(text)) {
+    return [
+      'Trenne erst das mathematische Objekt X von seiner R-Schreibweise.',
+      'Ändere nur die Spaltenstruktur von X und prüfe danach die neue Dimension.',
+      'Lies `X\'X` als Folge der Designmatrix und nicht als isolierten Codebefehl.'
+    ];
+  }
+
+  if (/predict\(/.test(text) && /prediction|confidence/i.test(text)) {
+    return [
+      'Lies zuerst, ob du den Erwartungswert oder eine neue Einzelbeobachtung vorhersagst.',
+      'Ändere nur den Intervalltyp im `predict(...)`-Aufruf.',
+      'Vergleiche die Breite der Intervalle und begründe den Unterschied fachlich.'
+    ];
+  }
+
+  return [];
+}
+
 function inferSuccessSignal(block, taskMode) {
   if (block.successSignal) return block.successSignal;
   if (taskMode === 'interpret') {
@@ -623,6 +663,67 @@ function inferTransferPrompt(block) {
     return 'Mini-Transfer: Woran erkennst du, dass ein Zusammenhang stark ist, auch wenn das Vorzeichen wechselt?';
   }
   return 'Mini-Transfer: Welche eine Prüfungsregel nimmst du aus dieser R-Übung in die Klausur mit?';
+}
+
+function inferTaskSteps(block, config) {
+  if (Array.isArray(block.taskSteps) && block.taskSteps.length) return block.taskSteps;
+
+  if (config.taskMode === 'interpret') {
+    return [
+      config.firstStep,
+      `Nimm genau diese Output-Evidenz: ${config.outputEvidenceHint}`,
+      `Halte als Transferregel fest: ${config.transferRule}`
+    ];
+  }
+
+  return [
+    config.firstStep,
+    `Führe danach aus und prüfe genau diese Output-Evidenz: ${config.outputEvidenceHint}`,
+    `Behalte als Transferregel: ${config.transferRule}`
+  ];
+}
+
+function inferOutputChecklist(block, config) {
+  if (Array.isArray(block.outputChecklist) && block.outputChecklist.length) return block.outputChecklist;
+
+  const text = `${block.taskPrompt || block.miniTask || ''}\n${block.starterCode || block.code || ''}`;
+
+  if (/sum\(\(1:4\)\^2\)|sum\(\(1:4\)\^3\)|prod\(1:4\)/.test(text)) {
+    return [
+      'Im Output erscheint nur der Zahlenwert der geänderten Summe, nicht die Formel selbst.',
+      'Übersetze diesen Zahlenwert zurück als `sum((1:4)^3)` bzw. als Σ-Schreibweise.',
+      '`prod(1:4)` ist hier nur Vergleichsfolie und nicht die Zielzeile der Änderung.'
+    ];
+  }
+
+  if (/leitkoeffizient|oeffnung|öffnung|vorzeichenbereich/i.test(text) && /curve\(/.test(text)) {
+    return [
+      'Im Konsolenfeld erscheint hier kein tiefer Plotbeweis; die fachliche Evidenz steckt im geänderten Graphen.',
+      'Prüfe deshalb Öffnung, Vorzeichenbereiche und feste Nullstellen gemeinsam.',
+      'Der Output ersetzt nicht die algebraische Lesart der Funktion.'
+    ];
+  }
+
+  if (/\bx3\b/i.test(text) && /cbind\(/.test(text)) {
+    return [
+      'Prüfe zuerst die neue Dimension von X und dann die von X\'X.',
+      'Die entscheidende Evidenz ist die zusätzliche Spalte in X, nicht bloß irgendein neuer Zahlenwert.',
+      'Formuliere die Dimensionsänderung immer auch mathematisch.'
+    ];
+  }
+
+  if (/predict\(/.test(text) && /prediction|confidence/i.test(text)) {
+    return [
+      'Vergleiche dieselben Vorhersagezeilen vor und nach der Änderung.',
+      '`prediction` ist breiter, weil die Reststreuung einer neuen Beobachtung mitgeht.',
+      '`confidence` beschreibt nur den geschätzten Mittelwert.'
+    ];
+  }
+
+  return [
+    'Nutze genau die Zeile, die deine Hypothese bestätigt oder falsifiziert.',
+    'Halte fest, was der Output zeigt und was du zusätzlich fachlich selbst deuten musst.'
+  ];
 }
 
 function inferOutputEvidenceHint(block) {
@@ -789,6 +890,30 @@ function buildRuntimeExpectation(mode, runtimeNote) {
   return 'Live-Modus: Der Code läuft direkt im Browser über WebR (WebAssembly). Falls WebR in deinem Browser oder Netzwerk nicht startet, bleibt die Aufgabe im ehrlichen Fallback und verweist auf den Soll-Output.';
 }
 
+function inferOutputPlaceholder(block, runtimeMode) {
+  if (block.outputPlaceholder) return block.outputPlaceholder;
+
+  if (runtimeMode === 'guided') {
+    return '[Geführter Modus]\nNutze den Editor, die Interpretationskarte und die Musterlösung, um den Ablauf kursnah nachzuvollziehen.';
+  }
+
+  const text = `${block.taskPrompt || block.miniTask || ''}\n${block.starterCode || block.code || ''}`;
+
+  if (/sum\(\(1:4\)\^2\)|sum\(\(1:4\)\^3\)|prod\(1:4\)/.test(text)) {
+    return '[Nach "Code ausführen" erscheint hier nur der Zahlenwert der geänderten Summe.\nÜbersetze ihn selbst zurück in R- und Sigma-Schreibweise.]';
+  }
+
+  if (/\b(curve|plot|hist|boxplot|barplot)\s*\(/.test(text)) {
+    return '[Dieser Block erzeugt vor allem einen Plot.\nWenn hier keine aussagekräftige Konsolenausgabe erscheint, lies Plot-Code, Plotbild und Interpretation gemeinsam.]';
+  }
+
+  if (/predict\(/.test(text) && /prediction|confidence/i.test(text)) {
+    return '[Hier erscheinen Vorhersagewert und Intervallgrenzen.\nVergleiche dieselben x-Werte vor und nach der Änderung.]';
+  }
+
+  return '[Output erscheint hier nach "Code ausführen".]';
+}
+
 function buildConfig(block, options = {}) {
   const moduleSlug = options.moduleSlug || block.moduleSlug || 'module';
   const blockId = options.blockId || block.id || `rblock_${Math.random().toString(36).slice(2, 8)}`;
@@ -828,6 +953,7 @@ function buildConfig(block, options = {}) {
     taskPrompt,
     taskMode,
     learningGoal: inferLearningGoal(block),
+    goalBullets: inferGoalBullets(block),
     successSignal: inferSuccessSignal(block, taskMode),
     coreLine,
     coreCue: coreTarget.cue,
@@ -837,9 +963,21 @@ function buildConfig(block, options = {}) {
     transferPrompt: inferTransferPrompt(block),
     transferRule: inferTransferRule(block),
     outputEvidenceHint: inferOutputEvidenceHint(block),
+    outputChecklist: inferOutputChecklist(block, {
+      taskMode,
+      outputEvidenceHint: inferOutputEvidenceHint(block),
+      transferRule: inferTransferRule(block),
+      firstStep: inferFirstStep(block, taskMode, coreTarget)
+    }),
     firstStep: inferFirstStep(block, taskMode, coreTarget),
     changeFocus,
     keepHint,
+    taskSteps: inferTaskSteps(block, {
+      taskMode,
+      outputEvidenceHint: inferOutputEvidenceHint(block),
+      transferRule: inferTransferRule(block),
+      firstStep: inferFirstStep(block, taskMode, coreTarget)
+    }),
     solution: block.solution || '',
     solutionCode: normalizeCode(block.solutionCode || ''),
     solutionChanges: Array.isArray(block.solutionChanges)
@@ -847,9 +985,7 @@ function buildConfig(block, options = {}) {
       : buildDefaultSolutionChanges(taskMode, changeFocus),
     pitfalls: Array.isArray(block.pitfalls) ? block.pitfalls : [],
     runtimeNote: buildRuntimeExpectation(runtimeMode, block.runtimeNote || ''),
-    outputPlaceholder: block.outputPlaceholder || (runtimeMode === 'guided'
-      ? '[Geführter Modus]\nNutze den Editor, die Interpretationskarte und die Musterlösung, um den Ablauf kursnah nachzuvollziehen.'
-      : '[Output erscheint hier nach "Code ausführen".]')
+    outputPlaceholder: inferOutputPlaceholder(block, runtimeMode)
   };
 }
 
@@ -869,18 +1005,21 @@ function renderTaskBriefs(config) {
     <div class="r-map-meaning">${escapeHtml(entry.meaning || '')}</div>
   </div>`).join('');
 
-  const taskFlow = [
-    config.firstStep,
-    config.taskMode === 'interpret'
-      ? `Lies danach genau diese Output-Evidenz: ${config.outputEvidenceHint}`
-      : `Führe danach aus und prüfe genau diese Output-Evidenz: ${config.outputEvidenceHint}`,
-    `Behalte als Transferregel: ${config.transferRule}`
-  ];
+  const taskFlow = Array.isArray(config.taskSteps) && config.taskSteps.length
+    ? config.taskSteps
+    : [
+      config.firstStep,
+      config.taskMode === 'interpret'
+        ? `Lies danach genau diese Output-Evidenz: ${config.outputEvidenceHint}`
+        : `Führe danach aus und prüfe genau diese Output-Evidenz: ${config.outputEvidenceHint}`,
+      `Behalte als Transferregel: ${config.transferRule}`
+    ];
 
   return `<div class="r-lesson-flow">
   <div class="r-lesson-intro">
     <div class="r-orient-panel-kicker">Lernziel</div>
     <p>${escapeHtml(config.learningGoal)}</p>
+    ${config.goalBullets?.length ? `<ul class="r-goal-list">${config.goalBullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
     <p class="r-goal-success"><strong>Erfolgssignal:</strong> ${escapeHtml(config.successSignal)}</p>
   </div>
   <div class="r-translation-block">
@@ -1131,10 +1270,10 @@ function renderHighlightEditor(config) {
 
   return `<div class="r-practice-editor-card">
   <div class="r-practice-toolbar">
-    <div>
-      <div class="r-practice-toolbar-kicker">Codebereich</div>
-      <div class="r-practice-toolbar-title">Bearbeite die Kernzeile — nicht den ganzen Block</div>
-    </div>
+      <div>
+        <div class="r-practice-toolbar-kicker">Codebereich</div>
+        <div class="r-practice-toolbar-title">Bearbeite heute nur die Kernzeile — nicht den ganzen Block</div>
+      </div>
   </div>
   <div class="r-highlight-wrap">
     <div class="r-highlight-display" data-r-highlight aria-hidden="true"></div>
@@ -1155,8 +1294,8 @@ function renderHighlightEditor(config) {
 
 function renderTabOutputCard(config) {
   const outputTitle = config.runtimeMode === 'guided'
-    ? 'Erwarteter Output · Geführt'
-    : 'Konsolenausgabe · Live WebR';
+    ? 'Outputbeleg · Geführt'
+    : 'Outputbeleg · Live WebR';
 
   return `<div class="r-practice-output-card r-tab-output-card">
   <div class="r-practice-output-head">
@@ -1164,6 +1303,12 @@ function renderTabOutputCard(config) {
       <div class="r-practice-toolbar-kicker">Output</div>
       <div class="r-practice-toolbar-title">${outputTitle}</div>
     </div>
+  </div>
+  <div class="r-output-focus">
+    <div class="r-output-interp-kicker">Worauf du im Output achtest</div>
+    <ul class="r-output-focus-list">
+      ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+    </ul>
   </div>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
   <div class="r-output-interp">

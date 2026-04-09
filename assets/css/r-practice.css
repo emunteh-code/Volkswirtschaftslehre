@@ -55,6 +55,15 @@
   box-shadow: var(--shadow-sm);
 }
 
+.r-practice-editor-card {
+  border-color: color-mix(in srgb, var(--accent2) 16%, var(--border) 84%);
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent2) 3%);
+}
+
+.r-practice-output-card {
+  background: color-mix(in srgb, var(--surface2) 82%, var(--surface) 18%);
+}
+
 .r-practice-toolbar,
 .r-practice-output-head {
   display: flex;
@@ -85,15 +94,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 30px;
-  padding: 6px 10px;
+  min-height: 26px;
+  padding: 4px 9px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.2;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: color-mix(in srgb, var(--surface3) 84%, var(--surface) 16%);
-  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+  background: color-mix(in srgb, var(--surface3) 74%, var(--surface) 26%);
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
   border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
   white-space: nowrap;
 }
@@ -357,6 +366,19 @@
   gap: 6px;
   padding: 0 0 10px;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+}
+
+.r-goal-list {
+  margin: 2px 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 5px;
+}
+
+.r-goal-list li {
+  font-size: 12.5px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
 }
 
 .r-goal-success {
@@ -748,6 +770,29 @@
   border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
   display: grid;
   gap: 5px;
+}
+
+.r-output-focus {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, var(--accent2) 3%);
+}
+
+.r-output-focus-list {
+  margin: 0;
+  padding-left: 1.05rem;
+  display: grid;
+  gap: 5px;
+}
+
+.r-output-focus-list li {
+  font-size: 12px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
 }
 
 .r-output-interp-kicker {

@@ -1,5 +1,7 @@
 # Mikro2 Content Enrichment Pass 1
 
+**Source status:** Past content edits do **not** lift mikro2 quarantine. See `docs/audits/mikro2-quarantine-roadmap-pass-1.md` and `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ## Scope
 - Module: `mikro2` only.
 - Goal: increase exam-useful content depth with additive, source-grounded improvements.

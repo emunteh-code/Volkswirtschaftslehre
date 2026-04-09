@@ -1,5 +1,7 @@
 # Mikro2 Concept Granularity Pass 2
 
+**Source status:** Granularity work does **not** imply in-repo PDF grounding. See `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ## Scope
 - Module: `mikro2` only.
 - Scope of change: exactly three conservative, academically real splits from pass-2 review.

@@ -143,8 +143,6 @@ const GUIDED_PROMPT_BANK = {
   ]
 };
 
-const TRANSFER_PROMPT_BANK = GUIDED_PROMPT_BANK;
-
 function stripHtml(html) {
   return String(html || '')
     .replace(/<[^>]+>/g, ' ')
@@ -1492,9 +1490,37 @@ function buildGuidedTasks(entry) {
 }
 
 function buildTransferDrills(entry) {
-  return buildSolvedTaskDeck(entry)
-    .slice(0, 10)
-    .map((task, index) => buildTaskDrill(task, index));
+  const intuitionExam = Array.isArray(entry.intuition?.exam) ? entry.intuition.exam : [];
+  const warnings = Array.isArray(entry.warnings) ? entry.warnings : [];
+  const formulas = Array.isArray(entry.formeln) ? entry.formeln : [];
+  const cards = Array.isArray(entry.cards) ? entry.cards : [];
+  const solvedTasks = buildSolvedTaskDeck(entry);
+
+  const drills = [
+    ...intuitionExam.map((pattern, index) => buildPatternDrill(entry, pattern, index)),
+    ...warnings.map((warning, index) => buildWarningDrill(entry, warning, index)),
+    ...formulas.slice(0, 3).map((formula) => buildFormulaDrill(entry, formula)),
+    ...cards.slice(0, 3).map((card, index) => buildCardDrill(entry, card, index)),
+    ...solvedTasks.slice(0, 4).map((task, index) => ({
+      tag: '',
+      question: stripHtml(task.text),
+      answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Klausurzugriff</span>
+<div class="exam-drill-copy">Nenne zuerst das Aufgabensignal, dann den formalen Erstschritt und erst danach das Ergebnis.</div>
+</div>
+<div class="exam-drill-line">
+<span class="exam-drill-key">Erster Schritt</span>
+<div class="exam-drill-copy">${escapeHtml(task.steps?.[0]?.text || 'Starte mit dem tragenden formalen Zugriff der Aufgabe.')}</div>
+${task.steps?.[0]?.eq ? renderMathBlock(task.steps[0].eq) : ''}
+</div>
+<div class="exam-drill-line">
+<span class="exam-drill-key">Prüfungsresultat</span>
+<div class="result-badge">${escapeHtml(task.result || `Arbeite ${index + 1} sauber zu Ende aus.`)}</div>
+</div>`
+    }))
+  ];
+
+  return uniqueBy(drills, (drill) => stripHtml(drill.question).toLowerCase()).slice(0, 10);
 }
 
 export const MATHEMATIK_GUIDED_TASKS_BY_ID = Object.fromEntries(

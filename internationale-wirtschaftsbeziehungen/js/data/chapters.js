@@ -21,16 +21,20 @@ const task = (text, steps, result, hint = null) => ({
 export const CHAPTERS = [
   { id: 'handelsfakten', title: 'Handelsfakten und Grundfragen', cat: 'Handel I', short: 'Fakten' },
   { id: 'ricardo', title: 'Ricardo-Modell und komparativer Vorteil', cat: 'Handel I', short: 'Ricardo' },
-  { id: 'heckscher_ohlin', title: 'Heckscher-Ohlin und Verteilungseffekte', cat: 'Handel I', short: 'H-O' },
-  { id: 'krugman', title: 'Intraindustrieller Handel, Krugman und Gravitation', cat: 'Handel II', short: 'Krugman' },
+  { id: 'heckscher_ohlin', title: 'Heckscher-Ohlin und Faktorausstattung', cat: 'Handel I', short: 'H-O' },
+  { id: 'verteilung_handel', title: 'Stolper-Samuelson und Verteilungseffekte des Handels', cat: 'Handel I', short: 'Verteilung' },
+  { id: 'krugman', title: 'Intraindustrieller Handel und Krugman-Modell', cat: 'Handel II', short: 'Krugman' },
+  { id: 'gravitation', title: 'Gravitationsgleichung und empirische Handelsmuster', cat: 'Handel II', short: 'Grav.' },
   { id: 'tarifmodell', title: 'Importzoll, Wohlfahrt und Optimalzoll', cat: 'Handel II', short: 'Zoll' },
   { id: 'quoten_sanktionen', title: 'Quoten, Sanktionen und diskriminierende Handelspolitik', cat: 'Handel II', short: 'Quoten' },
   { id: 'wto_integration', title: 'WTO, Freihandelszonen, Zollunionen und Brexit', cat: 'Politik & Institutionen', short: 'WTO' },
-  { id: 'wechselkurssysteme', title: 'Wechselkurssysteme, reale Kurse und Währungskrisen', cat: 'Offene Makro I', short: 'Regime' },
-  { id: 'paritaeten', title: 'UIP, Kaufkraftparität und Gesetz des einheitlichen Preises', cat: 'Offene Makro I', short: 'Paritäten' },
+  { id: 'wechselkurssysteme', title: 'Wechselkurse, reale Kurse und Wechselkursregime', cat: 'Offene Makro I', short: 'Regime' },
+  { id: 'zinsparitaet', title: 'Gedeckte und ungedeckte Zinsparität', cat: 'Offene Makro I', short: 'Zinsparität' },
+  { id: 'kaufkraftparitaet', title: 'Gesetz des einheitlichen Preises und Kaufkraftparität', cat: 'Offene Makro I', short: 'KKP' },
   { id: 'monetaerer_ansatz', title: 'Monetärer Ansatz, Fisher-Effekt und reale Zinsparität', cat: 'Offene Makro II', short: 'Monetär' },
   { id: 'overshooting', title: 'Finanzmarktansatz und Overshooting', cat: 'Offene Makro II', short: 'Overshoot' },
-  { id: 'trilemma', title: 'Trilemma der Währungspolitik und Balassa-Samuelson', cat: 'Offene Makro II', short: 'Trilemma' }
+  { id: 'trilemma', title: 'Trilemma der Währungspolitik und fixe Wechselkurse', cat: 'Offene Makro II', short: 'Trilemma' },
+  { id: 'balassa_samuelson', title: 'Balassa-Samuelson und systematische KKP-Abweichungen', cat: 'Offene Makro II', short: 'B-S' }
 ];
 
 export const CONTENT = {
@@ -51,11 +55,15 @@ export const CONTENT = {
         'Wie du Handelsmodelle erkennst',
         `<p>Wenn in der Aufgabe Arbeitskoeffizienten, Spezialisierung und Opportunitätskosten vorkommen, bist du bei Ricardo. Wenn von Kapital, Arbeit, Faktorausstattung oder Verteilungswirkungen die Rede ist, signalisiert das Heckscher-Ohlin. Bei Varietät, Produktdifferenzierung, Skalenerträgen oder ähnlichen Ländern liegt die Neue Handelstheorie nahe.</p>
          ${warn('Erkennungsfehler:', 'Viele Antworten bleiben auf der Ebene „Handel ist gut“. Das reicht nicht. Du musst benennen, <em>welcher</em> Mechanismus den beobachteten Handel erzeugt und welche Annahmen dahinterstehen.')}`
+      ),
+      section(
+        'Was die Zusatzliteratur hier leisten soll',
+        `<p>Die Literatur in VL1 dient nicht als dekorativer Lesestapel, sondern als empirischer Kompass. WTO- und Outlook-Berichte liefern die Handelsfakten, Bown/Yale aktualisieren die politische Lage. Für die Klausur heißt das: erst Modellmechanismus sauber benennen, dann erst reale Politik- oder Datenbeispiele anheften.</p>`
       )
     ].join(''),
     formeln: [
-      { label: 'Handelsquote', eq: String.raw`$$\text{Handelsquote} = \frac{X + M}{BIP}$$`, desc: 'Misst die Offenheit einer Volkswirtschaft.' },
-      { label: 'Terms of Trade', eq: String.raw`$$ToT = \frac{P_X}{P_M}$$`, desc: 'Preis der Exporte relativ zu den Importen.' }
+      { label: 'Handelsquote', eq: String.raw`$$\text{Handelsquote} = \frac{X + M}{BIP}$$`, desc: 'Misst die Offenheit einer Volkswirtschaft.', variables: { 'X': 'Exporte', 'M': 'Importe', 'BIP': 'Bruttoinlandsprodukt' } },
+      { label: 'Terms of Trade', eq: String.raw`$$ToT = \frac{P_X}{P_M}$$`, desc: 'Preis der Exporte relativ zu den Importen.', variables: { 'P_X': 'Exportpreisindex', 'P_M': 'Importpreisindex' } }
     ],
     aufgaben: [
       task(
@@ -73,6 +81,14 @@ export const CONTENT = {
           step('Politikurteil nur mit zusätzlicher Analyse ableiten.', String.raw`\text{Für ein Urteil braucht man Wohlfahrts-, Verteilungs- oder Strategieargumente.}`)
         ],
         'Eine Handelsquote ist ein Ausgangsindikator, aber noch kein Politikurteil. Erst Modelle zu Wohlfahrt, Verteilung oder strategischem Verhalten erlauben eine Bewertung.'
+      ),
+      task(
+        'In einer Transferfrage sollst du einen aktuellen Zollkonflikt einordnen. Was ist der erste methodische Zugriff?',
+        [
+          step('Zuerst die Ebene bestimmen.', String.raw`\text{Geht es um Handelsmuster, Wohlfahrt, Verteilung oder Institutionen?}`),
+          step('Dann den passenden Modellblock wählen.', String.raw`\text{Erst danach folgen Ricardo/H-O/Krugman oder Handelspolitik/WTO.}`)
+        ],
+        'Aktuelle Fälle werden klausursicher, wenn du sie zuerst auf die richtige analytische Ebene und dann auf den passenden Modellmechanismus abbildest.'
       )
     ]
   },
@@ -92,13 +108,17 @@ export const CONTENT = {
          <p>Prüfungsfragen verlangen oft genau diese Kette: Arbeitskoeffizienten → Opportunitätskosten → Handelsrichtung → Wohlfahrtsgewinn.</p>`
       ),
       section(
+        'Löhne und absolute Vorteile',
+        `<p>VL2 betont ausdrücklich, dass absolute Vorteile und Lohnunterschiede zwischen Ländern nicht dieselbe Frage beantworten wie komparative Vorteile. Selbst wenn ein Land absolut effizienter ist, können sich die Lohnstrukturen so anpassen, dass beide Länder sinnvoll handeln. Genau deshalb endet die Ricardo-Logik nicht bei „wer ist schneller?“, sondern bei relativen Kosten und Preisanpassung.</p>`
+      ),
+      section(
         'Was das Modell kann und was nicht',
         `<p>Ricardo erklärt Spezialisierung aus Technologieunterschieden. Das Modell erklärt nicht gut, warum ähnliche Länder ähnliche Güter handeln, und es sagt nichts über innerstaatliche Verteilungskonflikte zwischen Faktoren.</p>
          ${warn('Typischer Klausurfehler:', '„Land A ist in allem besser, also exportiert es alles.“ Falsch. Bei zwei Gütern exportiert jedes Land das Gut seines komparativen Vorteils; das andere Land exportiert das andere Gut.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Opportunitätskosten von X', eq: String.raw`$$OK_X = \frac{a_{LX}}{a_{LY}}$$`, desc: 'Arbeitsstunden für X relativ zu Y.' },
+      { label: 'Opportunitätskosten von X', eq: String.raw`$$OK_X = \frac{a_{LX}}{a_{LY}}$$`, desc: 'Arbeitsstunden für X relativ zu Y.', variables: { 'a_{LX}': 'Arbeitskoeffizient für Gut X', 'a_{LY}': 'Arbeitskoeffizient für Gut Y' } },
       { label: 'Spezialisierungsbedingung', eq: String.raw`$$OK_X^{H} < OK_X^{F} \Rightarrow H \text{ exportiert } X$$`, desc: 'Exportgut hat die geringeren relativen Kosten.' }
     ],
     aufgaben: [
@@ -118,6 +138,14 @@ export const CONTENT = {
           step('Auf die gegenseitige Ergänzung der Opportunitätskosten verweisen.', String.raw`\text{Ein Land hat immer nur bei einem Gut den kleineren relativen Verzicht.}`)
         ],
         'Auch das absolut stärkere Land spezialisiert sich auf das Gut mit dem stärkeren relativen Vorteil. Das andere Land exportiert das zweite Gut und beide gewinnen an Konsummöglichkeiten.'
+      ),
+      task(
+        'Warum ist „Home ist produktiver, also müssen dort auch die Löhne höher sein“ keine Widerlegung des Ricardo-Modells?',
+        [
+          step('Produktivität und Handelsrichtung trennen.', String.raw`\text{Ricardo erklärt zuerst relative Produktionskosten und Spezialisierung.}`),
+          step('Lohnfrage nachordnen.', String.raw`\text{Löhne sind mit Preisanpassung und absoluter Produktivität vereinbar, ohne die Handelslogik zu kippen.}`)
+        ],
+        'Höhere Produktivität kann mit höheren Löhnen einhergehen, ohne dass der komparative Vorteil verschwindet; die Handelsrichtung bleibt eine Frage relativer Kosten.'
       )
     ]
   },
@@ -132,18 +160,21 @@ export const CONTENT = {
          <p>Diese beiden Begriffe dürfen in der Klausur nicht vermischt werden: Faktorreichlichkeit beschreibt Länder, Faktorintensität beschreibt Güter.</p>`
       ),
       section(
-        'Heckscher-Ohlin und Stolper-Samuelson',
-        `<p>Das Heckscher-Ohlin-Theorem besagt: Ein Land exportiert das Gut, das den reichlich vorhandenen Faktor intensiv nutzt. Daraus folgt die Verteilungsaussage des Stolper-Samuelson-Theorems: Handel begünstigt den reichlich vorhandenen Faktor und belastet den knappen Faktor real.</p>
-         <p>Deshalb erklärt das Modell nicht nur Handelsmuster, sondern auch, warum Handelsliberalisierung innenpolitisch umstritten ist.</p>`
+        'Handelsrichtung im H-O-Modell',
+        `<p>Das Heckscher-Ohlin-Theorem besagt: Ein Land exportiert das Gut, das den reichlich vorhandenen Faktor intensiv nutzt. Das Modell erklärt damit Handel auch ohne Technologieunterschiede zwischen den Ländern. Die Kernaussage ist deshalb eine andere als bei Ricardo: Nicht Produktivität, sondern relative Faktorausstattung treibt das Muster.</p>`
+      ),
+      section(
+        'Welche Annahmen dafür mitlaufen',
+        `<p>Die saubere Faktorausstattungslogik verlangt identische Technologien, gleiche Präferenzen, keine Transportkosten und keine Faktorintensitätsumkehr. Genau diese Annahmen machen das Modell scharf, aber auch klausuranfällig: Sobald die Aufgabe Friktionen oder Technologiesprünge betont, reicht H-O oft nicht mehr allein.</p>`
       ),
       section(
         'Grenzen des Modells',
         `<p>Das Modell benötigt starke Annahmen: identische Technologien, keine Transportkosten, gleiche Präferenzen und keine Faktorumkehr. Wenn diese Annahmen nicht gelten, kann die reine Faktorausstattungserklärung schwächer werden.</p>
-         ${warn('Verteilungsfalle:', 'Viele Antworten nennen nur „mehr Handel = alle gewinnen“. H-O ist gerade deshalb wichtig, weil es erklärt, warum einzelne Gruppen im Inland verlieren können.')}`
+         ${warn('Zuordnungsfehler:', 'Wenn du bei Kapital/Land oder Arbeit/Land sofort mit Ricardo-Logik argumentierst, verlierst du den Modellkern. H-O lebt von Ländern als Faktorträgern und Gütern als Faktorverbrauchern.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Faktorreichlichkeit', eq: String.raw`$$\frac{K}{L}\Big|_{H} > \frac{K}{L}\Big|_{F}$$`, desc: 'Home ist relativ kapitalreich.' },
+      { label: 'Faktorreichlichkeit', eq: String.raw`$$\frac{K}{L}\Big|_{H} > \frac{K}{L}\Big|_{F}$$`, desc: 'Home ist relativ kapitalreich.', variables: { 'K/L': 'Kapital-Arbeits-Verhältnis des Landes' } },
       { label: 'Handelsrichtung', eq: String.raw`$$H \text{ exportiert das } K\text{-intensive Gut}$$`, desc: 'Direkte Anwendung des H-O-Theorems.' }
     ],
     aufgaben: [
@@ -157,12 +188,65 @@ export const CONTENT = {
         'Home exportiert Maschinen und importiert Textilien; Foreign tut das Gegenteil.'
       ),
       task(
-        'Warum ist Stolper-Samuelson in politischen Debatten über Globalisierung so wichtig?',
+        'Warum ist H-O mehr als nur „Ricardo mit Kapital und Arbeit“?',
         [
-          step('Nicht nur aggregierte Gewinne betrachten.', String.raw`\text{Gesamtwohlfahrt und Verteilung sind unterschiedliche Ebenen.}`),
-          step('Relative Faktorpreise in den Mittelpunkt stellen.', String.raw`\text{Der reichliche Faktor gewinnt real, der knappe Faktor verliert real.}`)
+          step('Unterschiedliche Triebkraft benennen.', String.raw`\text{Ricardo: Technologieunterschiede. H-O: Faktorausstattung.}`),
+          step('Erkenntnisgewinn ergänzen.', String.raw`\text{H-O öffnet zusätzlich den Weg zu Verteilungsfragen im Inland.}`)
         ],
-        'Das Theorem erklärt, warum es trotz gesamtwirtschaftlicher Handelsgewinne klare innenpolitische Gewinner und Verlierer gibt.'
+        'H-O ersetzt nicht einfach Arbeit durch Kapital, sondern verschiebt den ganzen Erklärungsansatz von Technologie auf Faktorausstattung und Verteilung.'
+      ),
+      task(
+        'Welche Vorprüfung solltest du in einer Klausur machen, bevor du das Handelsmuster im H-O-Modell nennst?',
+        [
+          step('Länder und Güter sauber klassifizieren.', String.raw`\text{Welches Land ist faktorreich? Welches Gut ist faktorintensiv?}`),
+          step('Erst danach die Zuordnung ziehen.', String.raw`\text{Reichlicher Faktor } \Rightarrow \text{ Export des faktorintensiven Gutes.}`)
+        ],
+        'Ohne saubere Trennung von Faktorreichlichkeit und Faktorintensität ist jedes H-O-Handelsmuster begrifflich unsauber.'
+      )
+    ]
+  },
+
+  verteilung_handel: {
+    motivation: 'Die große Zusatzleistung von VL3 ist nicht nur die Handelsrichtung, sondern die Verteilungsfrage: Wer gewinnt und wer verliert innerhalb eines Landes durch Handel?',
+    theorie: [
+      section(
+        'Warum Verteilung hier zentral wird',
+        `<p>Das Heckscher-Ohlin-Modell ist klausurrelevant, weil es erstmals nicht nur Ländergewinne, sondern auch Konflikte innerhalb eines Landes strukturiert. Genau deshalb ist das Stolper-Samuelson-Theorem kein Nebensatz, sondern die politische Pointe des Modells.</p>`
+      ),
+      section(
+        'Stolper-Samuelson sauber lesen',
+        `<p>Steigt durch Handel der relative Preis des kapitalintensiven Gutes, steigt die reale Entlohnung des Faktors Kapital und die reale Entlohnung des Faktors Arbeit sinkt. Umgekehrt profitiert im arbeitsreichen Land der Faktor Arbeit. Wichtig ist: Die Aussage ist eine <em>reale</em> Verteilungsaussage, nicht bloß eine nominale Lohnbeobachtung.</p>`
+      ),
+      section(
+        'Vom Modell zur politischen Kontroverse',
+        `<p>Damit erklärt das Modell, warum Handelsliberalisierung trotz gesamtwirtschaftlicher Gewinne politisch umkämpft ist. Die Summe kann gewinnen, einzelne Gruppen können aber reale Einbußen tragen. Genau diese Spannung macht Handelspolitik innenpolitisch konfliktträchtig.</p>
+         ${warn('Aggregationsfehler:', '„Handel erhöht die Wohlfahrt, also gewinnen alle.“ Genau diese Abkürzung widerspricht der Verteilungslogik aus Stolper-Samuelson.')}`
+      ),
+      section(
+        'Wann du diese Logik in der Klausur ziehen musst',
+        `<p>Sobald die Aufgabe nach Gewinnern/Verlierern, Faktorpreisen, Globalisierungskritik oder innenpolitischem Widerstand fragt, reicht die reine H-O-Handelsrichtung nicht mehr. Dann musst du die Verteilungsebene explizit nachziehen.</p>`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Stolper-Samuelson', eq: String.raw`$$P_{K\text{-intensiv}} \uparrow \Rightarrow r \uparrow,\ w \downarrow$$`, desc: 'Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.', variables: { 'r': 'reale Kapitalentlohnung', 'w': 'reale Arbeitsentlohnung' } },
+      { label: 'Verteilungslogik', eq: String.raw`\text{reichlicher Faktor} \Rightarrow \text{gewinnt relativ durch Handel}`, desc: 'Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum kann ein kapitalreiches Land Freihandel befürworten und gleichzeitig starke innenpolitische Verlierer produzieren?',
+        [
+          step('Landesebene von Faktorgruppen trennen.', String.raw`\text{Das Land kann insgesamt gewinnen, auch wenn der knappe Faktor verliert.}`),
+          step('Stolper-Samuelson anwenden.', String.raw`\text{Im kapitalreichen Land profitiert Kapital; Arbeit kann real verlieren.}`)
+        ],
+        'Die gesamtwirtschaftliche Handelsöffnung kann mit klaren inländischen Verlierern einhergehen, weil Verteilung und Gesamtwohlfahrt nicht dieselbe Aussageebene sind.'
+      ),
+      task(
+        'Welche Antwort ist in einer Klausur zu grob: „Heckscher-Ohlin erklärt, wer exportiert was“ oder „Heckscher-Ohlin erklärt zusätzlich, wer im Inland profitiert“?',
+        [
+          step('Beide Ebenen benennen.', String.raw`\text{Handelsrichtung ist der erste Schritt, Verteilung die zweite Kernleistung.}`),
+          step('Bewertungsgrund nennen.', String.raw`\text{Gerade die Verteilungsdimension macht das Modell politisch relevant.}`)
+        ],
+        'Nur die Handelsrichtung zu nennen bleibt zu grob; erst die ergänzte Verteilungslogik zeigt die volle Prüfungsrelevanz des H-O-Blocks.'
       )
     ]
   },
@@ -181,15 +265,18 @@ export const CONTENT = {
          <p>Öffnung zum Handel vergrößert den Markt. Firmen können längere Serien produzieren, die Stückkosten sinken und Konsumenten erhalten mehr Varietäten. Das zentrale Argument lautet also: Handel schafft nicht nur Mengen-, sondern auch Vielfaltseffekte.</p>`
       ),
       section(
-        'Gravitation und empirische Lesart',
-        `<p>Die Gravitationsgleichung erklärt empirisch gut, warum große Länder viel miteinander handeln und Distanz Handelsströme dämpft. Sie ist keine Konkurrenz zu Krugman, sondern eine empirische Verdichtung ähnlicher Kräfte: Marktgröße fördert Handel, Distanz verteuert ihn.</p>
+        'Was Krugman erklärt, was Ricardo und H-O nicht erklären',
+        `<p>Das Modell erklärt zwei Dinge gleichzeitig: warum ähnliche Länder intensiv miteinander handeln und warum sie ähnliche Güter in beide Richtungen handeln. Genau hier liegt sein Mehrwert gegenüber den klassischen Theorien.</p>
          ${warn('Modellverwechslung:', 'Wenn die Aufgabe nach Produktvielfalt, ähnlichen Ländern oder Firmengröße fragt, reicht Heckscher-Ohlin nicht. Dann brauchst du explizit steigende Skalenerträge oder monopolistischen Wettbewerb.')}`
+      ),
+      section(
+        'Wie du den Mechanismus exam-tauglich formulierst',
+        `<p>Die saubere Kurzform lautet: Handel vergrößert den Markt, senkt Durchschnittskosten und erhöht die Zahl tragfähiger Varianten. Eine gute Antwort nennt deshalb nicht nur „Skalenerträge“, sondern verbindet Marktgröße, Stückkosten und Vielfalt in einer Kette.</p>`
       )
     ].join(''),
     formeln: [
-      { label: 'Durchschnittskosten', eq: String.raw`$$AC(q) = \frac{F}{q} + c$$`, desc: 'Fixkosten werden mit größerem Output verdünnt.' },
-      { label: 'Grubel-Lloyd-Index', eq: String.raw`$$GL_i = 1 - \frac{|X_i - M_i|}{X_i + M_i}$$`, desc: 'Misst intraindustriellen Handel in Branche i.' },
-      { label: 'Gravitation', eq: String.raw`$$Trade_{ij} \propto \frac{GDP_i \cdot GDP_j}{Dist_{ij}}$$`, desc: 'Große Länder handeln viel, Distanz bremst.' }
+      { label: 'Durchschnittskosten', eq: String.raw`$$AC(q) = \frac{F}{q} + c$$`, desc: 'Fixkosten werden mit größerem Output verdünnt.', variables: { 'F': 'Fixkosten', 'q': 'Outputmenge', 'c': 'konstante Grenzkosten' } },
+      { label: 'Grubel-Lloyd-Index', eq: String.raw`$$GL_i = 1 - \frac{|X_i - M_i|}{X_i + M_i}$$`, desc: 'Misst intraindustriellen Handel in Branche i.' }
     ],
     aufgaben: [
       task(
@@ -207,6 +294,61 @@ export const CONTENT = {
           step('Marktgröße und Anzahl der Varianten verknüpfen.', String.raw`\text{Größerer Markt } \Rightarrow \text{ mehr tragfähige Varianten.}`)
         ],
         'Stückkosten sinken und die Produktvielfalt steigt. Genau diese Doppelwirkung macht den Wohlfahrtsgewinn im Krugman-Modell aus.'
+      ),
+      task(
+        'Warum ist „Länder sind ähnlich“ im Krugman-Block ein Hinweis auf Relevanz und nicht auf Irrelevanz?',
+        [
+          step('Klassische Erwartung erinnern.', String.raw`\text{Ricardo/H-O erwarten eher Handel bei Unterschieden.}`),
+          step('Krugman-Mehrwert benennen.', String.raw`\text{Gerade ähnliche Länder können wegen Skalenerträgen und Variantenvielfalt stark handeln.}`)
+        ],
+        'Ähnlichkeit der Länder ist hier kein Problem, sondern der typische Anwendungsfall der Neuen Handelstheorie.'
+      )
+    ]
+  },
+
+  gravitation: {
+    motivation: 'Die Gravitationsgleichung ist die empirische Verdichtung des Handelsmusters: Große Länder handeln viel, Distanz bremst, und genau das passt überraschend gut zu den Daten.',
+    theorie: [
+      section(
+        'Wofür die Gravitationsgleichung steht',
+        `<p>Die Gravitationsgleichung beschreibt Handelsströme als steigende Funktion von Marktgröße und fallende Funktion von Distanz. Sie ist damit kein eigenständiges Wohlfahrtsmodell, sondern ein empirisch starkes Organisationsschema für Handelsdaten.</p>`
+      ),
+      section(
+        'Warum sie gut zu Krugman passt',
+        `<p>Die empirische Handelsstruktur aus der Gravitationsgleichung passt zur Idee großer Märkte und sinkender Durchschnittskosten. Sie ersetzt Krugman nicht, sondern liefert die datennahe Kurzform: große Länder handeln viel miteinander, Distanz verteuert Handel.</p>
+         ${mathBlock(String.raw`$$Trade_{ij} \propto \frac{GDP_i \cdot GDP_j}{Dist_{ij}}$$`)}
+      `
+      ),
+      section(
+        'Was Distanz ökonomisch bedeutet',
+        `<p>Distanz ist nicht nur Kilometerzahl. Sie steht auch für Transportkosten, Informationskosten, institutionelle Hürden und politische Reibung. Genau deshalb bleibt die Gravitationsgleichung auch im Zeitalter digitaler Märkte erstaunlich robust.</p>`
+      ),
+      section(
+        'Klausurzugriff',
+        `<p>Wenn eine Aufgabe auf große vs. kleine Märkte, Grenznähe, Entfernung oder Kanada/USA-artige Handelsdichte zielt, ist die Gravitationslogik oft der schnellste strukturierende Zugriff.</p>
+         ${warn('Fehlgriff:', 'Die Gravitationsgleichung erklärt Muster in den Daten. Sie ist kein Ersatz für Handelswohltfahrt oder die Mechanik von Zöllen und Quoten.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Gravitation', eq: String.raw`$$Trade_{ij} \propto \frac{GDP_i \cdot GDP_j}{Dist_{ij}}$$`, desc: 'Große Länder handeln viel, Distanz bremst.', variables: { 'GDP_i, GDP_j': 'wirtschaftliche Größe der Länder i und j', 'Dist_{ij}': 'geographische oder ökonomische Distanz' } },
+      { label: 'Interpretation', eq: String.raw`\text{Größe} \uparrow \Rightarrow Trade \uparrow,\quad \text{Distanz} \uparrow \Rightarrow Trade \downarrow`, desc: 'Richtung der Haupteffekte.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum handeln die USA und Kanada typischerweise intensiver miteinander als zwei gleich große, weit entfernte Länder?',
+        [
+          step('Marktgröße und Distanz zusammen lesen.', String.raw`\text{Große Nachfrageseiten plus geringe Distanz verstärken den Handelsstrom.}`),
+          step('Distanz weit auslegen.', String.raw`\text{Gemeint sind auch institutionelle und logistische Friktionen, nicht nur Kilometer.}`)
+        ],
+        'Die Gravitationslogik sagt starke Handelsströme voraus, wenn beide Länder groß sind und Distanzkosten niedrig bleiben.'
+      ),
+      task(
+        'Was ist in einer empirischen GIWB-Aufgabe oft der schnellste Startpunkt, wenn nur Handelspartner, Größe und Entfernung beschrieben werden?',
+        [
+          step('Nicht sofort ein Wohlfahrtsmodell wählen.', String.raw`\text{Zuerst das beobachtete Muster als Gravitationsfall lesen.}`),
+          step('Dann ökonomisch deuten.', String.raw`\text{Große Märkte ziehen Handel an, Distanz wirkt bremsend.}`)
+        ],
+        'Bei Größe-und-Distanz-Aufgaben ist die Gravitationsgleichung oft der richtige Einstieg, bevor feinere Modellmechanismen ergänzt werden.'
       )
     ]
   },
@@ -229,6 +371,10 @@ export const CONTENT = {
         'Großes Land und Optimalzoll',
         `<p>Ein großes Land kann über seine Importnachfrage den Weltmarktpreis drücken und damit seine Terms of Trade verbessern. Dadurch entsteht das Optimalzoll-Argument. Es bleibt aber fragil, weil Retaliation, Gegenmaßnahmen und internationale Abkommen den Vorteil schnell zerstören.</p>
          ${warn('Standardfehler:', 'Im kleinen-Land-Fall gibt es keinen Terms-of-Trade-Gewinn. Wer dort einen Optimalzoll behauptet, vermischt zwei unterschiedliche Modelle.')}`
+      ),
+      section(
+        'Was in Klausuren explizit verglichen werden soll',
+        `<p>Gute Antworten trennen drei Ebenen: Preis- und Mengenwirkung, Verteilung im Inland, und internationale Rückwirkung über die Terms of Trade. Genau dieser Dreischritt macht den Unterschied zwischen kleinem und großem Land sichtbar.</p>`
       )
     ].join(''),
     formeln: [
@@ -251,6 +397,14 @@ export const CONTENT = {
           step('Dann die Ineffizienzen benennen.', String.raw`\text{Produktions- und Konsumverzerrung } \Rightarrow \text{ Deadweight Loss}`)
         ],
         'Die Gewinne von Produzenten und Staat gleichen die Verzerrungsverluste nicht vollständig aus; deshalb sinkt die nationale Wohlfahrt netto.'
+      ),
+      task(
+        'Wann kippt die Begründung vom „einfachen Zollschaden“ zur Optimalzoll-Logik?',
+        [
+          step('Ländermodell identifizieren.', String.raw`\text{Nur das große Land kann den Weltmarktpreis beeinflussen.}`),
+          step('Terms of Trade ergänzen.', String.raw`\text{Dann kann ein Zoll die Importpreise drücken und einen partiellen Gegengewinn erzeugen.}`)
+        ],
+        'Sobald das Land groß genug ist, muss zusätzlich zur Binnenverzerrung die Terms-of-Trade-Wirkung geprüft werden.'
       )
     ]
   },
@@ -314,6 +468,10 @@ export const CONTENT = {
         'Brexit als Transferfall',
         `<p>Brexit ist didaktisch wertvoll, weil er institutionelle und reale Kosten verbindet: Grenzformalitäten, Ursprungsregeln, Unsicherheit und Dienstleistungshemmnisse. Wer diesen Fall erklären kann, versteht den Unterschied zwischen Marktintegration und bloß niedrigen Zöllen.</p>
          ${warn('Institutionsfalle:', 'Freihandel ist nicht nur „kein Zoll“. Gerade Standards, Ursprungskontrollen und Rechtsdurchsetzung prägen den tatsächlichen Integrationsgrad.')}`
+      ),
+      section(
+        'Warum Institutionen ökonomisch disziplinieren',
+        `<p>VL7 nutzt das Gefangenendilemma ausdrücklich als Deutungsrahmen: Ohne Regelbindung haben große Länder Anreize zu wechselseitiger Terms-of-Trade-Politik. WTO und Integrationsverträge sind daher nicht nur juristische Hüllen, sondern Koordinationsinstrumente gegen eskalierende Vergeltung.</p>`
       )
     ].join(''),
     formeln: [
@@ -336,6 +494,14 @@ export const CONTENT = {
           step('Institutionelle Tiefe betonen.', String.raw`\text{Binnenmarktintegration umfasst mehr als Zollsätze.}`)
         ],
         'Brexit betrifft institutionelle Marktintegration. Deshalb entstehen Handelskosten auch ohne spektakulär hohe Zölle.'
+      ),
+      task(
+        'Warum ist WTO-Koordination ökonomisch plausibel, obwohl einzelne große Länder kurzfristig von Zöllen profitieren könnten?',
+        [
+          step('Einzelanreiz benennen.', String.raw`\text{Große Länder können Terms-of-Trade-Gewinne anstreben.}`),
+          step('Kollektivproblem ergänzen.', String.raw`\text{Wenn alle das tun, droht Vergeltung und die gemeinsame Wohlfahrt sinkt.}`)
+        ],
+        'WTO-Regeln sind ökonomisch plausibel, weil sie ein Gefangenendilemma der Handelspolitik institutionell entschärfen.'
       )
     ]
   },
@@ -344,23 +510,27 @@ export const CONTENT = {
     motivation: 'Mit dem Makroteil verschiebt sich der Fokus von Gütern auf Preise, Zinsen und Erwartungen. Der erste Schritt ist die saubere Unterscheidung von nominalem Wechselkurs, realem Wechselkurs und Regimewahl.',
     theorie: [
       section(
-        'Nominaler und realer Wechselkurs',
-        `<p>Der nominale Wechselkurs gibt an, wie viel Inlandswährung je Einheit Auslandswährung gezahlt wird. Der reale Wechselkurs korrigiert zusätzlich um Preisniveaus:</p>
+        'Nominaler Kurs, Notation und Leserichtung',
+        `<p>Bevor Paritäten oder Overshooting Sinn ergeben, muss klar sein, welche Kursnotation verwendet wird und wie Auf- und Abwertung gelesen werden. Der nominale Wechselkurs ist deshalb nicht bloß Symbolik, sondern die Sprache, in der alle späteren Makroaussagen formuliert werden.</p>`
+      ),
+      section(
+        'Realer Wechselkurs und Wettbewerbsfähigkeit',
+        `<p>Der reale Wechselkurs korrigiert den nominalen Kurs um Preisniveaus:</p>
          ${mathBlock(String.raw`$$q = E \cdot \frac{P^*}{P}$$`)}
-         <p>Damit misst $q$, wie teuer ausländische Güter relativ zu inländischen Gütern sind. Eine reale Abwertung verbessert die preisliche Wettbewerbsfähigkeit des Inlandes.</p>`
+         <p>Er zeigt, wie teuer ausländische Güter relativ zu inländischen Gütern sind. Genau deshalb ist für Wettbewerbsfähigkeit nicht nur der nominale, sondern der reale Kurs entscheidend.</p>`
       ),
       section(
-        'Fixe vs. flexible Wechselkurse',
-        `<p>Unter flexiblen Kursen absorbiert der Wechselkurs Schocks. Unter fixen Kursen muss die Geldpolitik den Kurs verteidigen; Anpassungslasten verlagern sich auf Zins, Reserven und Binnenwirtschaft. Deshalb ist die Regimefrage nie rein technisch, sondern immer auch eine Frage politischer Prioritäten.</p>`
+        'Fixe vs. flexible Regime',
+        `<p>Unter flexiblen Kursen absorbiert der Wechselkurs einen Teil externer Schocks. Unter fixen Kursen wird diese Anpassung auf Zins, Reserven und Binnenwirtschaft verlagert. Deshalb ist die Regimefrage nie rein technisch, sondern immer eine Frage der politischen Prioritäten und der gewünschten Anpassungslast.</p>`
       ),
       section(
-        'Währungskrisen als Glaubwürdigkeitsproblem',
-        `<p>Eine Währungskrise entsteht häufig dann, wenn ein fixiertes Regime nicht mehr glaubwürdig erscheint. Kapitalflucht, Reservenverlust und spekulative Attacken erzwingen dann häufig die Aufgabe des Kurses.</p>
+        'Glaubwürdigkeit und Krisenrisiko',
+        `<p>Eine Währungskrise entsteht häufig dann, wenn ein fixiertes Regime nicht mehr glaubwürdig erscheint. Kapitalflucht, Reservenverlust und spekulative Attacken erzwingen dann oft die Aufgabe des Kurses oder eine drastische Zinserhöhung zur Verteidigung.</p>
          ${warn('Standardverwechslung:', 'Nominale Abwertung und reale Abwertung sind nicht dasselbe. Steigen die Inlandspreise mit, kann die reale Wirkung schnell verpuffen.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Realer Wechselkurs', eq: String.raw`$$q = E \cdot \frac{P^*}{P}$$`, desc: 'Ausländische Güter relativ zu inländischen Gütern.' },
+      { label: 'Realer Wechselkurs', eq: String.raw`$$q = E \cdot \frac{P^*}{P}$$`, desc: 'Ausländische Güter relativ zu inländischen Gütern.', variables: { 'E': 'nominaler Wechselkurs', 'P^*': 'ausländisches Preisniveau', 'P': 'inländisches Preisniveau' } },
       { label: 'Reale Abwertung', eq: String.raw`$$q \uparrow \Rightarrow \text{Wettbewerbsfähigkeit des Inlandes steigt}$$`, desc: 'Exportgüter werden relativ günstiger.' }
     ],
     aufgaben: [
@@ -379,50 +549,112 @@ export const CONTENT = {
           step('Glaubwürdigkeitsproblem benennen.', String.raw`\text{Die Erwartung macht die Verteidigung erst recht teuer.}`)
         ],
         'Bei fixen Kursen kann ein Vertrauensverlust selbstverstärkend werden: Die erwartete Abwertung setzt die Zentralbank unter Druck und erhöht die Wahrscheinlichkeit einer tatsächlichen Aufgabe des Kurses.'
+      ),
+      task(
+        'Warum ist in offenen Makroaufgaben die richtige Kursnotation oft schon der erste Prüfungsstein?',
+        [
+          step('Leserichtung benennen.', String.raw`\text{Auf- und Abwertung hängen an der Definition von } E.`),
+          step('Folge für die Interpretation ziehen.', String.raw`\text{Ohne klare Notation kippen Vorzeichen bei PPP, UIP und Overshooting schnell.}`)
+        ],
+        'Viele Fehler beginnen nicht im Modell, sondern bei der falschen Leserichtung des Wechselkurses; deshalb muss die Notation zu Beginn explizit fixiert werden.'
       )
     ]
   },
 
-  paritaeten: {
-    motivation: 'UIP und Kaufkraftparität sind die zentralen Referenzbeziehungen der offenen Makroökonomik: die eine verbindet Zinsen und Erwartungen, die andere Preise und Wechselkurse.',
+  zinsparitaet: {
+    motivation: 'VL9 beginnt mit der Ertragslogik offener Finanzmärkte: Wechselkurse hängen kurzfristig nicht nur an Güterpreisen, sondern an Zinsen, Erwartungen und Arbitrage.',
     theorie: [
       section(
-        'Ungedeckte Zinsparität',
-        `<p>UIP vergleicht die erwarteten Erträge aus inländischen und ausländischen Anlagen. Im Gleichgewicht müssen beide, gemessen in derselben Währung und unter Erwartungsbildung, gleich sein.</p>
+        'Gedeckte und ungedeckte Zinsparität',
+        `<p>Die gedeckte Zinsparität arbeitet mit Terminwechselkursen und beobachtbaren Zinssätzen. Die ungedeckte Zinsparität (UIP) ersetzt den Terminwechselkurs durch den erwarteten zukünftigen Kassakurs. Genau das macht UIP für Wechselkurserwartungen zentral und für empirische Prüfungen heikel.</p>`
+      ),
+      section(
+        'UIP als Renditegleichgewicht',
+        `<p>UIP vergleicht die erwarteten Erträge aus inländischen und ausländischen Anlagen. Im Gleichgewicht müssen beide, gemessen in derselben Währung, gleich sein.</p>
          ${mathBlock(String.raw`$$i = i^* + \frac{E^e - E}{E}$$`)}
-         <p>Ist der heutige Wechselkurs bereits hoch, ist die erwartete zukünftige Aufwertung des Auslands geringer; damit sinkt der erwartete Auslandsertrag.</p>`
+         <p>Damit ist UIP eine Beziehung über Zinsen und erwartete Wechselkursänderungen, nicht über Preisniveaus.</p>`
       ),
       section(
-        'Gesetz des einheitlichen Preises und Kaufkraftparität',
-        `<p>Das Gesetz des einheitlichen Preises gilt für identische handelbare Güter ohne Transport- und Handelskosten. Kaufkraftparität verallgemeinert diese Idee auf Preisniveaus. Die absolute PPP lautet $E = P/P^*$, die relative PPP erklärt Wechselkursänderungen durch Inflationsdifferenzen.</p>`
+        'Was die Vorzeichen bedeuten',
+        `<p>Ist der Inlandszins höher, muss die Auslandsanlage durch erwartete Wechselkursbewegung aufholen. Genau hier passieren in Prüfungen die meisten Sign-Fehler: Du musst sauber lesen, ob eine erwartete Auf- oder Abwertung des Inlandes gemeint ist und welche Wechselkursnotation verwendet wird.</p>`
       ),
       section(
-        'Warum die Paritäten nicht immer exakt gelten',
-        `<p>Transportkosten, Marktmacht, nicht-handelbare Güter und unterschiedliche Konsumkörbe verhindern einen permanent exakten Gleichlauf. In Prüfungen musst du deshalb unterscheiden: UIP und PPP sind Referenzbeziehungen, keine Naturgesetze ohne Friktionen.</p>
-         ${warn('Prüfungsfalle:', 'UIP arbeitet mit Zinsen und erwarteter Wechselkursänderung; PPP arbeitet mit Preisniveaus oder Inflation. Wer beides vermischt, landet schnell beim falschen Vorzeichen.')}`
+        'Evidenz und Approximation',
+        `<p>VL9 betont ausdrücklich, dass UIP empirisch nicht als exaktes Naturgesetz funktioniert. Sie bleibt aber eine nützliche Approximation und vor allem die zentrale Strukturbeziehung für kurzfristige offene Makro-Modelle wie den Finanzmarktansatz und Overshooting.</p>
+         ${warn('Paritätsverwechslung:', 'Zinsparität ist eine Renditebedingung. Sobald Preisniveaus, Inflation oder reale Kurse im Zentrum stehen, bist du nicht mehr im UIP-Kern.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'UIP', eq: String.raw`$$i = i^* + \frac{E^e - E}{E}$$`, desc: 'Inlandszins entspricht Auslandsertrag in Inlandswährung.' },
-      { label: 'Absolute PPP', eq: String.raw`$$E = \frac{P}{P^*}$$`, desc: 'Preisniveauverhältnis bestimmt den nominalen Kurs.' },
-      { label: 'Relative PPP', eq: String.raw`$$\frac{\Delta E}{E} \approx \pi - \pi^*$$`, desc: 'Inflationsdifferenz entspricht Abwertungsrate.' }
+      { label: 'Gedeckte Zinsparität', eq: String.raw`$$1+i = (1+i^*)\frac{F}{E}$$`, desc: 'Bezieht Termin- und Kassakurs auf beobachtbare Arbitrage.', variables: { 'i': 'Inlandszins', 'i^*': 'Auslandszins', 'F': 'Terminwechselkurs', 'E': 'heutiger Kassakurs' } },
+      { label: 'UIP', eq: String.raw`$$i = i^* + \frac{E^e - E}{E}$$`, desc: 'Erwarteter Auslandsertrag muss dem Inlandszins entsprechen.', variables: { 'E^e': 'erwarteter zukünftiger Kassakurs' } },
+      { label: 'Approximation', eq: String.raw`$$i - i^* \approx \frac{E^e - E}{E}$$`, desc: 'Prüfungsnahe Kurzform der UIP-Logik.' }
     ],
     aufgaben: [
       task(
         'Gegeben sind i = 4 %, i* = 2 % und ein erwarteter Kurs Eᵉ = 1,20. Was sagt UIP qualitativ über den heutigen Gleichgewichtskurs E?',
         [
-          step('Höheren Inlandszins interpretieren.', String.raw`\text{Damit Home attraktiv bleibt, muss der Auslandsertrag entsprechend höher erwartet werden.}`),
-          step('Daraus den heutigen Kurs ableiten.', String.raw`\text{Ein höherer heutiger E senkt } \frac{E^e - E}{E} \text{ und kann UIP erfüllen.}`)
+          step('Höheren Inlandszins interpretieren.', String.raw`\text{Damit Home attraktiv bleibt, muss die Auslandsanlage eine entsprechende erwartete Wechselkurskomponente liefern.}`),
+          step('Kurs so lesen, dass der Auslandsertrag nicht zu groß wird.', String.raw`\text{Ein höheres heutiges } E \text{ senkt } \frac{E^e-E}{E}.`)
         ],
-        'Bei höherem Inlandszins muss der heutige Kurs so liegen, dass die erwartete Abwertung des Auslands bzw. Aufwertung des Inlandes den Zinsvorteil ausgleicht.'
+        'Bei höherem Inlandszins muss der heutige Kurs so liegen, dass die erwartete Wechselkursänderung den Zinsvorteil des Inlandes ausgleicht.'
       ),
+      task(
+        'Woran erkennst du in einer Klausur sofort, dass Zinsparität und nicht Kaufkraftparität gefragt ist?',
+        [
+          step('Variablen lesen.', String.raw`\text{Zinsen, erwarteter Kurs und Renditevergleich } \Rightarrow \text{ Zinsparität.}`),
+          step('Preisbegriffe ausschließen.', String.raw`\text{Solange Preisniveau und Inflation nicht zentral sind, ist PPP nicht der Primärzugriff.}`)
+        ],
+        'Zinsparität erkennst du an Zinsdifferenzen plus erwarteter Wechselkursänderung, nicht an Preisniveaus.'
+      )
+    ]
+  },
+
+  kaufkraftparitaet: {
+    motivation: 'Kaufkraftparität verankert den Wechselkurs auf der Gütermarktseite: Preise, Inflation und reale Wechselkurse liefern die langfristige Preislogik hinter offenen Volkswirtschaften.',
+    theorie: [
+      section(
+        'Gesetz des einheitlichen Preises',
+        `<p>Das Gesetz des einheitlichen Preises gilt für identische handelbare Güter ohne Transport- und Handelskosten. In diesem Grenzfall gilt: Ein Gut kann nicht dauerhaft in zwei Ländern unterschiedliche Preise haben, wenn Arbitrage möglich ist.</p>`
+      ),
+      section(
+        'Absolute und relative Kaufkraftparität',
+        `<p>Kaufkraftparität verallgemeinert diese Logik auf Preisniveaus. Die absolute PPP lautet:</p>
+         ${mathBlock(String.raw`$$E = \frac{P}{P^*}$$`)}
+         <p>Die relative PPP erklärt Wechselkursänderungen durch Inflationsdifferenzen:</p>
+         ${mathBlock(String.raw`$$\frac{\Delta E}{E} \approx \pi - \pi^*$$`)}
+      `
+      ),
+      section(
+        'Realer Wechselkurs als Prüfgröße',
+        `<p>Der reale Wechselkurs $q = E \cdot P^*/P$ zeigt, ob ausländische Güter relativ teuer oder billig sind. Genau deshalb ist er die richtige Größe, wenn die Aufgabe nach Wettbewerbsfähigkeit, Fehlbewertung oder PPP-Abweichungen fragt.</p>`
+      ),
+      section(
+        'Warum PPP kein Naturgesetz ist',
+        `<p>Transportkosten, nicht-handelbare Güter, unterschiedliche Warenkörbe und Marktsegmentierung verhindern einen permanent exakten Gleichlauf. Trotzdem bleibt PPP ein wichtiger Langfristanker.</p>
+         ${warn('Horizontfehler:', 'PPP ist keine Kurzfristformel für jeden Tageskurs. Wenn Erwartungen und Finanzmärkte dominieren, brauchst du andere Modelle.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Gesetz des einheitlichen Preises', eq: String.raw`$$P = E \cdot P^*$$`, desc: 'Preisgleichheit identischer handelbarer Güter im Grenzfall.' },
+      { label: 'Absolute PPP', eq: String.raw`$$E = \frac{P}{P^*}$$`, desc: 'Preisniveauverhältnis bestimmt den nominalen Kurs.', variables: { 'P': 'inländisches Preisniveau', 'P^*': 'ausländisches Preisniveau' } },
+      { label: 'Relative PPP', eq: String.raw`$$\frac{\Delta E}{E} \approx \pi - \pi^*$$`, desc: 'Inflationsdifferenz als Abwertungsrate.', variables: { '\\pi': 'inländische Inflationsrate', '\\pi^*': 'ausländische Inflationsrate' } }
+    ],
+    aufgaben: [
       task(
         'Warum kann Kaufkraftparität langfristig nützlich, kurzfristig aber oft schlecht passend sein?',
         [
           step('Langfristigen Preisanker nennen.', String.raw`\text{Preisniveaus und Inflation wirken über längere Horizonte auf } E.`),
           step('Kurzfristige Friktionen ergänzen.', String.raw`\text{Finanzmärkte, Erwartungen, starre Preise und nicht-handelbare Güter verzerren kurzfristig.}`)
         ],
-        'PPP ist ein langfristiger Referenzanker, aber kurzfristig dominieren oft Finanzmarktkräfte und Preisanpassungen laufen nicht sofort mit.'
+        'PPP ist ein langfristiger Referenzanker, aber kurzfristig dominieren oft Finanzmarktkräfte und träge Preisreaktionen.'
+      ),
+      task(
+        'Woran erkennst du in einer Klausur, dass der reale Wechselkurs die richtige Zielgröße ist?',
+        [
+          step('Frage nach Wettbewerbsfähigkeit oder relativen Preisen lesen.', String.raw`\text{Dann reicht der nominale Kurs nicht.}`),
+          step('Preisniveaus mitziehen.', String.raw`q = E\cdot \frac{P^*}{P}`)
+        ],
+        'Sobald relative Güterpreise und Wettbewerbsfähigkeit im Zentrum stehen, ist der reale Wechselkurs die passende Prüfgröße.'
       )
     ]
   },
@@ -439,6 +671,10 @@ export const CONTENT = {
         `<p>Der Fisher-Effekt verbindet Nominalzins und erwartete Inflation:</p>
          ${mathBlock(String.raw`$$i \approx r + \pi^e$$`)}
          <p>Wenn Kapital international mobil ist und langfristig reale Renditen angeglichen werden, entsteht reale Zinsparität als weitere Langfristbeziehung.</p>`
+      ),
+      section(
+        'Wie Geldmenge, Inflation und Kurs zusammenhängen',
+        `<p>Die Langfristkette lautet: Geldmengenwachstum beeinflusst das Preisniveau, Inflationsdifferenzen verschieben langfristig den nominalen Wechselkurs, und der Fisher-Effekt verknüpft Nominalzinsen mit Inflationserwartungen. Diese Kette muss in Klausuren vollständig und nicht nur als Einzelgleichung dargestellt werden.</p>`
       ),
       section(
         'Welche Aussagen wirklich langfristig sind',
@@ -467,6 +703,14 @@ export const CONTENT = {
           step('Realzins und Inflation getrennt interpretieren.', String.raw`\text{Wenn } r \text{ ähnlich bleibt und } \pi^e \uparrow,\text{ dann } i \uparrow`)
         ],
         'Weil Nominalzinsen die erwartete Inflation kompensieren müssen. Ein höheres Inflationsumfeld hebt deshalb den beobachteten Nominalzins.'
+      ),
+      task(
+        'Welche typische Fehlverkürzung musst du beim monetären Ansatz vermeiden?',
+        [
+          step('Kurzfrist- und Langfristhorizont trennen.', String.raw`\text{Nicht jede sofortige Wechselkursreaktion folgt direkt aus PPP.}`),
+          step('Trendlogik klar benennen.', String.raw`\text{Monetärer Ansatz erklärt vor allem langfristige Kurs- und Preisbewegungen.}`)
+        ],
+        'Der monetäre Ansatz ist keine Universalformel für jede Schwankung, sondern ein Langfristmodell für Preisniveau-, Inflations- und Trendbewegungen.'
       )
     ]
   },
@@ -482,6 +726,10 @@ export const CONTENT = {
         'Logik des Dornbusch-Modells',
         `<p>Eine expansive Geldpolitik senkt kurzfristig den Zins. Damit Kapital im Inland bleibt, muss eine künftige Aufwertung des Inlandes erwartet werden. Diese erwartete Gegenbewegung setzt voraus, dass der Wechselkurs heute zunächst <em>zu stark</em> abwertet.</p>
          <p>Genau diese anfängliche Überreaktion ist Overshooting.</p>`
+      ),
+      section(
+        'Kurze und lange Frist explizit verbinden',
+        `<p>VL11 lebt genau von dieser Brücke: Kurzfristig dominiert UIP, langfristig setzt sich die Gütermarkt- und Preislogik wieder durch. Eine starke Antwort zeigt daher immer beides: den Sprung heute und den Rücklauf später.</p>`
       ),
       section(
         'Was du in Aufgaben wirklich sagen musst',
@@ -510,6 +758,14 @@ export const CONTENT = {
           step('Langfristigen Anker ergänzen.', String.raw`\text{Mit der Zeit passen Preise an und der Kurs nähert sich dem PPP-kompatiblen Langfristniveau.}`)
         ],
         'Overshooting erklärt den Übergangspfad. PPP bleibt der langfristige Bezugspunkt, nur eben nicht der kurzfristige.'
+      ),
+      task(
+        'Welche Antwort ist in einer Prüfung zu kurz: „expansive Geldpolitik führt zur Abwertung“ oder „expansive Geldpolitik senkt kurzfristig den Zins und erzwingt darum einen Overshoot“?',
+        [
+          step('Abwertungsaussage relativieren.', String.raw`\text{Sie nennt nur Richtung, nicht die Modellmechanik.}`),
+          step('UIP- und Rücklauf-Logik ergänzen.', String.raw`\text{Der Overshoot ist nötig, damit späterer Rücklauf und niedriger Zins zusammenpassen.}`)
+        ],
+        'Die zweite Antwort ist klausurtauglich, weil sie den Mechanismus statt nur das Endergebnis liefert.'
       )
     ]
   },
@@ -523,18 +779,18 @@ export const CONTENT = {
          <p>Ökonomisch folgt dies daraus, dass freie Kapitalbewegungen und ein fixer Kurs die Zinssetzung eng an das Ausland binden.</p>`
       ),
       section(
-        'Regimekombinationen lesen',
-        `<p>Fixkurs + Kapitalmobilität erzwingt Zinsanpassung an das Ausland. Fixkurs + autonome Geldpolitik geht nur mit Kapitalverkehrskontrollen. Kapitalmobilität + autonome Geldpolitik erfordert flexible Wechselkurse. Diese Matrix musst du in der Klausur schnell abrufen können.</p>`
+        'Fixe Wechselkurse als Politikfall',
+        `<p>VL12 zeigt den Fixkursfall ausdrücklich: Bei fixer Wechselkursbindung und Kapitalmobilität erzwingt UIP die Anpassung an den Auslandszins. Damit verliert das Inland monetäre Autonomie. Dieser Fixkursfall ist kein Beispiel neben dem Trilemma, sondern dessen wichtigste konkrete Ausprägung.</p>`
       ),
       section(
-        'Balassa-Samuelson als KKP-Korrektur',
-        `<p>Balassa-Samuelson erklärt, warum reiche, produktive Länder dauerhaft höhere Preisniveaus und damit systematische Abweichungen von einfacher Kaufkraftparität haben können: Produktivitätsgewinne im handelbaren Sektor treiben Löhne und damit Preise im nicht-handelbaren Sektor.</p>
+        'Regimekombinationen lesen',
+        `<p>Fixkurs + Kapitalmobilität erzwingt Zinsanpassung an das Ausland. Fixkurs + autonome Geldpolitik geht nur mit Kapitalverkehrskontrollen. Kapitalmobilität + autonome Geldpolitik erfordert flexible Wechselkurse. Diese Matrix musst du in der Klausur schnell abrufen können.</p>
          ${warn('Merksatzfehler:', 'Das Trilemma ist kein politisches Motto, sondern eine harte Restriktion aus Kapitalmobilität, Zinsarbitrage und Wechselkursbindung.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Trilemma', eq: String.raw`$$\{\text{Fixkurs},\ \text{Kapitalmobilität},\ \text{Geldpolitik}\} \Rightarrow \text{nur zwei zugleich}$$`, desc: 'Makropolitischer Zielkonflikt.' },
-      { label: 'Balassa-Samuelson', eq: String.raw`$$A_T \uparrow \Rightarrow w \uparrow \Rightarrow P_N \uparrow \Rightarrow q \neq 1$$`, desc: 'Produktivität im handelbaren Sektor hebt relative Preise nicht-handelbarer Güter.' }
+      { label: 'Fixkurs-Folge', eq: String.raw`$$\text{Fixkurs} + \text{Kapitalmobilität} \Rightarrow i = i^*$$`, desc: 'Monetäre Autonomie geht verloren.' }
     ],
     aufgaben: [
       task(
@@ -546,14 +802,60 @@ export const CONTENT = {
         'Bei freier Kapitalmobilität kann ein Fixkurs nur stabil bleiben, wenn die Zinspolitik im Wesentlichen dem Ausland folgt. Sonst entstehen sofort Spannungen am Devisenmarkt.'
       ),
       task(
-        'Warum kann Balassa-Samuelson erklären, dass reiche Länder dauerhaft „zu teuer“ wirken, ohne dass die PPP deswegen nutzlos wäre?',
+        'Warum ist der Fixkursfall in VL12 kein Zusatzbeispiel, sondern die Kernillustration des Trilemmas?',
         [
-          step('Handelbare und nicht-handelbare Sektoren trennen.', String.raw`\text{Produktivitätsschub im handelbaren Sektor hebt gesamtwirtschaftliche Löhne.}`),
-          step('Preiswirkung im nicht-handelbaren Sektor ableiten.', String.raw`P_N \uparrow \Rightarrow \text{ höheres Gesamtpreisniveau } \Rightarrow \text{ systematische PPP-Abweichung}`)
+          step('Zinsbindung herausarbeiten.', String.raw`\text{Bei Kapitalmobilität erzwingt der Fixkurs die Orientierung am Auslandszins.}`),
+          step('Verlust der Autonomie benennen.', String.raw`\text{Gerade daran wird sichtbar, welches Ziel im Dreieck geopfert wird.}`)
         ],
-        'PPP bleibt ein nützlicher Referenzanker, aber Balassa-Samuelson erklärt, warum strukturell produktivere Länder dauerhaft höhere Preisniveaus aufweisen können.'
+        'Der Fixkursfall zeigt am klarsten, wie Kapitalmobilität und Kursbindung gemeinsam die Geldpolitik disziplinieren und damit das Trilemma greifbar machen.'
+      )
+    ]
+  },
+
+  balassa_samuelson: {
+    motivation: 'Balassa-Samuelson erklärt systematische reale Aufwertungen und PPP-Abweichungen aus Produktivitätsunterschieden zwischen handelbaren und nicht-handelbaren Sektoren.',
+    theorie: [
+      section(
+        'Die Ausgangsfrage',
+        `<p>Warum wirken reiche Länder dauerhaft „teurer“, ohne dass dies einfach ein Zeichen von Fehlbewertung sein muss? Balassa-Samuelson beantwortet genau diese Frage und liefert damit eine strukturelle Korrektur zu einer zu naiven PPP-Lesart.</p>`
+      ),
+      section(
+        'Produktivitätsschub im handelbaren Sektor',
+        `<p>Steigt die Produktivität im handelbaren Sektor, steigen dort Löhne. Wegen Arbeitsmobilität innerhalb des Landes müssen Löhne auch in den nicht-handelbaren Sektoren mithalten. Da dort die Produktivität nicht im selben Maß steigt, erhöhen sich vor allem die Preise der nicht-handelbaren Güter.</p>
+         ${mathBlock(String.raw`$$A_T \uparrow \Rightarrow w \uparrow \Rightarrow P_N \uparrow$$`)}
+      `
+      ),
+      section(
+        'Warum das zu systematischen PPP-Abweichungen führt',
+        `<p>Das Gesamtpreisniveau steigt damit in produktiven Ländern relativ stärker an, obwohl bei handelbaren Gütern keine willkürliche Fehlbepreisung vorliegt. Genau deshalb kann ein Land real aufwerten, ohne dass daraus sofort eine Korrektur zurück auf „q = 1“ folgen muss.</p>`
+      ),
+      section(
+        'Was das Modell erklärt und was nicht',
+        `<p>Balassa-Samuelson erklärt systematische Niveauunterschiede und ihren Wandel über die Zeit. Es erklärt nicht jede kurzfristige Wechselkursbewegung. Für Tages- und Krisendynamik brauchst du weiter UIP, Finanzmarktansatz oder Overshooting.</p>
+         ${warn('PPP-Überdehnung:', 'Nicht jede Abweichung von PPP ist ein Marktfehler. Ein Teil kann strukturell durch Balassa-Samuelson erklärt werden.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Balassa-Samuelson-Kette', eq: String.raw`$$A_T \uparrow \Rightarrow w \uparrow \Rightarrow P_N \uparrow \Rightarrow q \text{ verändert sich systematisch}$$`, desc: 'Produktivität im handelbaren Sektor treibt relative Preise.' },
+      { label: 'Interpretation', eq: String.raw`\text{PPP-Abweichung} \neq \text{automatisch Fehlbewertung}`, desc: 'Ein Teil der Abweichung kann strukturell sein.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum kann ein produktives Aufholland dauerhaft höhere Preisniveaus haben, ohne dass dies sofort eine „Überbewertung“ im simplen Sinn bedeutet?',
+        [
+          step('Handelbare und nicht-handelbare Sektoren unterscheiden.', String.raw`\text{Produktivität steigt zuerst im handelbaren Sektor.}`),
+          step('Lohn- und Preisübertragung ergänzen.', String.raw`\text{Höhere Löhne verteuern nicht-handelbare Güter und heben das Gesamtpreisniveau.}`)
+        ],
+        'Höhere Preisniveaus können strukturell entstehen, wenn Produktivitätsgewinne im handelbaren Sektor die Löhne und damit die Preise nicht-handelbarer Güter anheben.'
+      ),
+      task(
+        'Woran erkennst du in einer Klausur, dass Balassa-Samuelson und nicht Overshooting oder UIP gefragt ist?',
+        [
+          step('Horizont lesen.', String.raw`\text{Es geht um systematische Niveauunterschiede oder langfristige reale Aufwertung.}`),
+          step('Mechanismus lesen.', String.raw`\text{Produktivität, Löhne und nicht-handelbare Güter stehen im Vordergrund.}`)
+        ],
+        'Balassa-Samuelson ist der richtige Zugriff, wenn strukturelle Produktivitätsunterschiede und relative Preisniveaus erklärt werden sollen.'
       )
     ]
   }
 };
-

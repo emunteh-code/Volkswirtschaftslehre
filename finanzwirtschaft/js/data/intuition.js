@@ -65,12 +65,21 @@ export const INTUITION = {
     ]
   ),
   renten_endwert: mk(
-    'Kapitalwert- und Endwertmethode sind zwei Blickrichtungen auf dieselbe Zahlungsreihe.',
-    'Wie zwei Karten desselben Geländes zeigen sie denselben Weg, aber mit anderem Startpunkt.',
-    'Der vollständige Finanzplan macht sichtbar, dass Investitionsrechnung immer auch Finanzierung über die Zeit bedeutet.',
+    'Rentenfaktoren, Barwert und Endwert sind verschiedene Übersetzungen derselben periodischen Zahlungsstruktur.',
+    'Wie zwei Ansichten auf denselben Geldstrom zeigen Barwert und Endwert denselben Vermögenseffekt nur an unterschiedlichen Zeitpunkten.',
+    'Die erste Klausurfrage lautet hier nicht „welche Formel kenne ich?“, sondern: Welche Zahlungsstruktur liegt vor und auf welchen Zeitpunkt soll ich bewerten?',
     [
-      { if: 'Kapitalwert und Endwert gegeneinander ausgespielt werden', then: 'Betone ihre methodische Äquivalenz.' },
-      { if: 'Regelmäßige Zahlungen auftreten', then: 'Denke an Rentenfaktoren statt jede Periode neu auszurechnen.' }
+      { if: 'Regelmäßige Zahlungen auftreten', then: 'Prüfe zuerst, ob Barwert oder Endwert gesucht ist und nutze dann den passenden Rentenfaktor.' },
+      { if: 'Barwert und Endwert verglichen werden', then: 'Betone ihre Äquivalenz bei gleichem Zinssatz.' }
+    ]
+  ),
+  annuitaeten_finanzplan: mk(
+    'Die Annuität macht einen Gesamtwert als konstante Periodengröße lesbar; der vollständige Finanzplan zeigt dazu die periodische Finanzierungslogik.',
+    'Wie eine große Einmalwirkung in gleich hohe Jahresraten übersetzt wird, macht die Annuität den Vermögenseffekt „in Raten“ sichtbar.',
+    'Annuitäten helfen besonders dann, wenn Projekte oder Finanzierungsformen über Perioden vergleichbar gemacht werden sollen.',
+    [
+      { if: 'Gleiche periodische Vergleichsgröße gesucht ist', then: 'Denke an die Annuität als Übersetzung des Kapitalwerts.' },
+      { if: 'Zwischenperioden und Restkredite sichtbar werden sollen', then: 'Nutze die Logik des vollständigen Finanzplans.' }
     ]
   ),
   izf_kapitalwertfunktion: mk(
@@ -92,12 +101,21 @@ export const INTUITION = {
     ]
   ),
   unsicherheit: mk(
-    'Unter Unsicherheit zählt nicht nur der Mittelwert, sondern auch die Verteilung der möglichen Ergebnisse.',
-    'Wie bei zwei Wegen mit gleichem Durchschnittsnutzen, aber unterschiedlicher Absturzgefahr muss die Risikoform mitgelesen werden.',
-    'Dominanz, Erwartungswert und Risikokorrektur bilden deshalb eine feste Prüfungsreihenfolge.',
+    'Unter Unsicherheit zählt nicht nur der Mittelwert, sondern zuerst die Zustandsstruktur und die Frage, ob eine Alternative bereits dominiert wird.',
+    'Wie bei zwei Wegen mit gleichem Durchschnitt, aber anderer Absturzgefahr muss nicht nur der Mittelwert, sondern die Verlustseite gelesen werden.',
+    'Dominanz, Erwartungswert und Risikomaße bilden hier die feste Vorauswahllogik.',
     [
       { if: 'Eine Alternative in jedem Zustand schlechter ist', then: 'Dominanz prüfen und früh ausscheiden.' },
-      { if: 'Nur der Erwartungswert genannt wird', then: 'Verlustwahrscheinlichkeit und Risikoform mitprüfen.' }
+      { if: 'Nur der Erwartungswert genannt wird', then: 'Verlustwahrscheinlichkeit, Varianz und Downside mitprüfen.' }
+    ]
+  ),
+  risikoadjustierter_kapitalwert: mk(
+    'Risiko muss wieder in eine Vermögensregel übersetzt werden: entweder über den Diskontsatz oder über Abschläge auf die erwarteten Cashflows.',
+    'Wie ein Sicherheitsabstand beim Planen wird derselbe erwartete Rückfluss vorsichtiger bewertet, wenn sein Eintreten unsicher ist.',
+    'Die zentrale Klausurfrage lautet: Wo genau modellierst du das Risiko – im Zins oder in den Cashflows?',
+    [
+      { if: 'Ein Risikozuschlag im Zins verwendet wird', then: 'Erkläre, dass riskantere Zahlungen stärker abgezinst werden.' },
+      { if: 'Cashflow-Abschläge verwendet werden', then: 'Mache klar, dass Risiko direkt auf der Zahlungsseite abgebildet wird.' }
     ]
   ),
   bezugsrecht: mk(
@@ -120,10 +138,19 @@ export const INTUITION = {
   fremdkapitalkosten: mk(
     'Fremdkapitalkosten erfassen den effektiven Preis der Kreditnutzung, nicht nur den Nominalzins.',
     'Wie ein scheinbar kleiner Aufschlag können Zahlungsziele, Skonto und Gebühren im Effekt sehr teuer werden.',
-    'Die ökonomisch relevante Größe ist der effektive Finanzierungssatz aus der konkreten Zahlungsstruktur.',
+    'Die ökonomisch relevante Größe ist der Kostensatz der konkreten Finanzierungszahlungsreihe.',
     [
       { if: 'Skonto vorkommt', then: 'Denke an implizite Fremdkapitalkosten statt an bloßen Preisnachlass.' },
       { if: 'Nominalzins genannt wird', then: 'Prüfe, ob effektive Kosten durch Fristen und Zusatzkosten höher liegen.' }
+    ]
+  ),
+  wacc: mk(
+    'Der WACC ist der aggregierte Preis der Finanzierungsmischung und nur dann sinnvoll, wenn Risiko und Kapitalstruktur zur Aufgabe passen.',
+    'Wie ein Mischpreis sagt der WACC nicht nur etwas über Gewichte, sondern auch über die Qualität der zugrunde liegenden Teilkosten.',
+    'In Klausuren ist der WACC kein Automatismus, sondern eine Begründungsgröße mit Voraussetzungen.',
+    [
+      { if: 'Ein WACC eingesetzt wird', then: 'Prüfe, ob Projekt- und Kapitalstrukturrisiko dazu passen.' },
+      { if: 'EK- und FK-Kosten vorher gegeben sind', then: 'Lies erst deren Bedeutung, dann den gewichteten Durchschnitt.' }
     ]
   ),
   wacc_leverage: mk(

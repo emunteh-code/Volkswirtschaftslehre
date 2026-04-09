@@ -208,6 +208,93 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  zp_kurve: [
+    {
+      title: 'ZP-Lage im (Y,i)-Raum',
+      context: 'Einkommen steigt, der Zins bleibt zunächst unverändert.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Teilbilanz gerät durch höheres Y zuerst unter Druck?',
+          answer: ['leistungsbilanz', 'lb', 'current account'],
+          options: { problemId: 'm2_zp_curve_1', stepId: 'lb', isDecision: true },
+          hint: 'Mehr Einkommen zieht Importe hoch.',
+          explain: 'Die Leistungsbilanz verschlechtert sich typischerweise zuerst.'
+        },
+        {
+          q: '[2. Execution] Welche Zinsrichtung ist nötig, um auf der ZP-Kurve zu bleiben?',
+          answer: ['zins steigt', 'höherer zins', 'i hoch'],
+          options: { problemId: 'm2_zp_curve_1', stepId: 'rate', dependsOn: 'lb' },
+          hint: 'Kapitalzuflüsse müssen den LB-Effekt ausgleichen.',
+          explain: 'Der Inlandszins muss steigen, um die Kapitalbilanz zu verbessern.'
+        },
+        {
+          q: '[3. Validation] Spricht das für positive oder negative ZP-Steigung?',
+          answer: ['positiv', 'positive steigung'],
+          options: { problemId: 'm2_zp_curve_1', role: 'VALIDATION' },
+          hint: 'Mehr Y braucht mehr i.',
+          explain: 'Die ZP-Kurve ist im Standardfall positiv geneigt.'
+        }
+      ]
+    }
+  ],
+  wirtschaftspolitik_offen: [
+    {
+      title: 'Regime zuerst',
+      context: 'Expansive Fiskalpolitik bei hoher Kapitalmobilität.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Information muss vor jeder Ergebnisbehauptung genannt werden?',
+          answer: ['wechselkursregime', 'regime', 'flexibel oder fix'],
+          options: { problemId: 'm2_open_policy_1', stepId: 'regime', isDecision: true },
+          hint: 'Ohne Regime bleibt die Antwort unvollständig.',
+          explain: 'Die erste Klausurweiche ist das Wechselkursregime.'
+        },
+        {
+          q: '[2. Execution] Welcher Gegenkanal dämpft Fiskalpolitik bei flexiblem Wechselkurs typischerweise?',
+          answer: ['aufwertung', 'wechselkurskanal', 'nx sinken'],
+          options: { problemId: 'm2_open_policy_1', stepId: 'counter', dependsOn: 'regime' },
+          hint: 'IS-Impuls ist nicht das Ende der Geschichte.',
+          explain: 'Aufwertung verschlechtert NX und nimmt dem Fiskalimpuls Kraft.'
+        },
+        {
+          q: '[3. Validation] Ist „IS nach rechts“ als alleinige Antwort ausreichend?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_open_policy_1', role: 'VALIDATION' },
+          hint: 'Offene Makro verlangt immer den Wechselkurs-/Außenkanal.',
+          explain: 'Nein. Erst der Gegenkanal macht die Politikantwort vollständig.'
+        }
+      ]
+    }
+  ],
+  opt_waehrungsraum: [
+    {
+      title: 'OWR-Kriterium lesen',
+      context: 'Eine Währungsunion diskutiert asymmetrische Schocks und geringe Arbeitsmobilität.',
+      steps: [
+        {
+          q: '[1. Decision] Welches klassische OWR-Problem liegt hier direkt nahe?',
+          answer: ['fehlende anpassung ohne wechselkurs', 'asymmetrische schocks', 'owr problem'],
+          options: { problemId: 'm2_owr_1', stepId: 'problem', isDecision: true },
+          hint: 'Eigenen WK gibt es in der Union nicht mehr.',
+          explain: 'Asymmetrische Schocks werden ohne eigenen Wechselkurs schwerer absorbierbar.'
+        },
+        {
+          q: '[2. Execution] Welche Ersatzmechanismen müssten nun stärker sein?',
+          answer: ['arbeitsmobilität', 'lohnflexibilität', 'fiskaltransfers'],
+          options: { problemId: 'm2_owr_1', stepId: 'mechanisms', dependsOn: 'problem' },
+          hint: 'Frage nach Kompensation des verlorenen WK.',
+          explain: 'Mobilität, Flexibilität oder Transfers müssen den Anpassungsjob übernehmen.'
+        },
+        {
+          q: '[3. Validation] Ist OWR damit ein reines Pro-/Contra-Urteil?',
+          answer: ['nein', 'abwägung', 'falsch'],
+          options: { problemId: 'm2_owr_1', role: 'VALIDATION' },
+          hint: 'Kosten und Nutzen gemeinsam bewerten.',
+          explain: 'Nein. OWR ist eine Abwägung zwischen Integrationsgewinn und Anpassungskosten.'
+        }
+      ]
+    }
+  ],
   zinsparitaet: [
     {
       title: 'UIP-Vorzeichenfalle',
@@ -408,6 +495,93 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  inflation_targeting: [
+    {
+      title: 'Zielanker statt Geldmengenautomat',
+      context: 'Inflation nahe Ziel; M3 wächst kräftig, Geldnachfrage schwankt stark.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Größe ist der primäre Steueranker?',
+          answer: ['inflationsziel', 'inflationsabweichung', 'pi-pi*'],
+          options: { problemId: 'm2_it_1', stepId: 'anchor', isDecision: true },
+          hint: 'Regimelogik statt Einzelsignal.',
+          explain: 'Primär zählt die Abweichung der Inflation vom Ziel.'
+        },
+        {
+          q: '[2. Execution] Sind Monetäraggregate in diesem Fall nutzlos oder ergänzend?',
+          answer: ['ergänzend', 'zusatzindikator', 'indikator'],
+          options: { problemId: 'm2_it_1', stepId: 'money', dependsOn: 'anchor' },
+          hint: 'Nicht wegwerfen, aber nicht mechanisch steuern.',
+          explain: 'Sie liefern Zusatzinformation, ersetzen den Zielanker aber nicht.'
+        },
+        {
+          q: '[3. Validation] Ist „hohes M3-Wachstum = automatisch Zins rauf“ korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_it_1', role: 'VALIDATION' },
+          hint: 'Signal erst kontextualisieren.',
+          explain: 'Nein. Geldmengenwachstum muss gegen Geldnachfrage und Finanzlage interpretiert werden.'
+        }
+      ]
+    }
+  ],
+  inflation_kosten: [
+    {
+      title: 'Disinflationskosten lesen',
+      context: 'Inflation soll rasch gesenkt werden; Phillips-Steigung ist gegeben.',
+      steps: [
+        {
+          q: '[1. Decision] Welche zweite Größe muss neben dem Inflationsziel sofort mitgedacht werden?',
+          answer: ['outputkosten', 'arbeitslosigkeit', 'opferquote'],
+          options: { problemId: 'm2_inf_cost_1', stepId: 'costs', isDecision: true },
+          hint: 'Disinflation ist kein kostenloser Zielwechsel.',
+          explain: 'Arbeitsmarkt- und Outputkosten gehören sofort zur Antwort.'
+        },
+        {
+          q: '[2. Execution] Senkt hohe Glaubwürdigkeit die Opferquote oder erhöht sie typischerweise?',
+          answer: ['senkt', 'geringer', 'reduziert'],
+          options: { problemId: 'm2_inf_cost_1', stepId: 'cred', dependsOn: 'costs' },
+          hint: 'Erwartungen reagieren schneller.',
+          explain: 'Hohe Glaubwürdigkeit reduziert typischerweise die reale Bezahlstrecke.'
+        },
+        {
+          q: '[3. Validation] Ist „niedrigere Inflation ist immer gratis besser“ korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_inf_cost_1', role: 'VALIDATION' },
+          hint: 'Übergangskosten benennen.',
+          explain: 'Nein. Der Zielwert allein sagt noch nichts über die realen Übergangskosten.'
+        }
+      ]
+    }
+  ],
+  wachstum_fakten: [
+    {
+      title: 'Konvergenz nicht automatisch',
+      context: 'Ein armes Land wächst langsamer als ein reiches Land.',
+      steps: [
+        {
+          q: '[1. Decision] Widerspricht das zwingend dem Solow-Modell?',
+          answer: ['nein', 'nicht zwingend'],
+          options: { problemId: 'm2_growthfacts_1', stepId: 'solow', isDecision: true },
+          hint: 'Bedingte statt unbedingte Konvergenz.',
+          explain: 'Nein. Solow sagt nur bedingte Konvergenz voraus.'
+        },
+        {
+          q: '[2. Execution] Welche Hintergrundgrößen könnten das erklären?',
+          answer: ['institutionen', 'sparquote', 'technologie', 'demografie'],
+          options: { problemId: 'm2_growthfacts_1', stepId: 'drivers', dependsOn: 'solow' },
+          hint: 'Strukturparameter vergleichen.',
+          explain: 'Unterschiedliche Sparquoten, Institutionen, Technologie oder Demografie können Konvergenz verhindern.'
+        },
+        {
+          q: '[3. Validation] Reicht „arm = wächst schneller“ als Klausuraussage?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_growthfacts_1', role: 'VALIDATION' },
+          hint: 'Konditionalitätsfalle.',
+          explain: 'Nein. Ohne ähnliche Fundamentaldaten ist diese Aussage zu grob.'
+        }
+      ]
+    }
+  ],
   solow_basis: [
     {
       title: 'Solow: Das Goldene-Regel-Limit',
@@ -468,6 +642,122 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'm2_tf_strict', role: 'VALIDATION' },
           hint: 'Nicht das höchste y zählt.',
           explain: 'Die Goldene Regel maximiert den langfristigen Konsum.'
+        }
+      ]
+    }
+  ],
+  steady_state: [
+    {
+      title: 'Steady-State-Lesart',
+      context: 's steigt, technischer Fortschritt bleibt unverändert.',
+      steps: [
+        {
+          q: '[1. Decision] Ändert sich zuerst das Niveau oder die dauerhafte Pro-Kopf-Wachstumsrate?',
+          answer: ['niveau', 'level'],
+          options: { problemId: 'm2_ss_1', stepId: 'level', isDecision: true },
+          hint: 'Ohne neues g_A kein neues Dauerwachstum.',
+          explain: 'Zuerst ändert sich das langfristige Niveau von k* und y*.'
+        },
+        {
+          q: '[2. Execution] Welche Kurve verschiebt sich im Solow-Diagramm nach oben?',
+          answer: ['sf(k)', 'investitionskurve', 's f(k)'],
+          options: { problemId: 'm2_ss_1', stepId: 'curve', dependsOn: 'level' },
+          hint: 'Mehr Sparen = mehr Investition bei jedem k.',
+          explain: 'Die Investitionskurve sf(k) verschiebt sich nach oben.'
+        },
+        {
+          q: '[3. Validation] Ist „mehr Sparen = dauerhaft schnelleres Pro-Kopf-Wachstum“ korrekt?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_ss_1', role: 'VALIDATION' },
+          hint: 'Niveau und Wachstumsrate trennen.',
+          explain: 'Nein. Ohne technischen Fortschritt entsteht nur ein Niveaueffekt.'
+        }
+      ]
+    }
+  ],
+  goldene_sparquote: [
+    {
+      title: 'Outputmaximum ist nicht Konsummaximum',
+      context: 'Die Wirtschaft spart sehr viel und liegt rechts vom goldenen Kapitalstock.',
+      steps: [
+        {
+          q: '[1. Decision] Liegt Über- oder Unterakkumulation vor?',
+          answer: ['überakkumulation', 'zu viel kapital'],
+          options: { problemId: 'm2_golden_1', stepId: 'state', isDecision: true },
+          hint: 'Rechts von k_gold.',
+          explain: 'Es liegt Überakkumulation vor.'
+        },
+        {
+          q: '[2. Execution] Erhöht weniger Sparen hier langfristig den Konsum oder senkt es ihn?',
+          answer: ['erhöht', 'steigert', 'konsum steigt'],
+          options: { problemId: 'm2_golden_1', stepId: 'cons', dependsOn: 'state' },
+          hint: 'Break-even-Belastung mitdenken.',
+          explain: 'Weniger Sparen erhöht in diesem Fall den langfristigen Konsum.'
+        },
+        {
+          q: '[3. Validation] Ist die Goldene Regel auf maximalen Output gerichtet?',
+          answer: ['nein', 'falsch', 'konsum'],
+          options: { problemId: 'm2_golden_1', role: 'VALIDATION' },
+          hint: 'Normatives Ziel benennen.',
+          explain: 'Nein. Die Goldene Regel maximiert den langfristigen Konsum.'
+        }
+      ]
+    }
+  ],
+  budgetrestriktion: [
+    {
+      title: 'Primärsaldo sauber lesen',
+      context: 'Gesamtdefizit ist hoch, aber ein Teil stammt aus Zinszahlungen auf Altschulden.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Größe trennt aktuelle Fiskalpolitik von Altlasten?',
+          answer: ['primärsaldo', 'primärdefizit'],
+          options: { problemId: 'm2_budget_1', stepId: 'primary', isDecision: true },
+          hint: 'Zinszahlungen herausrechnen.',
+          explain: 'Der Primärsaldo isoliert die laufende Fiskalpolitik.'
+        },
+        {
+          q: '[2. Execution] Gehören Zinszahlungen zum Primärsaldo?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_budget_1', stepId: 'interest', dependsOn: 'primary' },
+          hint: 'Primär = ohne Zinslasten.',
+          explain: 'Nein. Zinszahlungen sind gerade ausgeklammert.'
+        },
+        {
+          q: '[3. Validation] Reicht die periodische Budgetgleichung allein, um Tragfähigkeit zu beweisen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_budget_1', role: 'VALIDATION' },
+          hint: 'Intertemporale Lesart fehlt noch.',
+          explain: 'Nein. Tragfähigkeit verlangt den Blick auf den künftigen Primärpfad.'
+        }
+      ]
+    }
+  ],
+  ricardianisch: [
+    {
+      title: 'Defizit heißt nicht Vermögensgewinn',
+      context: 'Der Staat senkt heute Steuern und kündigt spätere Gegenfinanzierung an.',
+      steps: [
+        {
+          q: '[1. Decision] Was bleibt unter den Ricardo-Annahmen für das Lebenseinkommen des Haushalts unverändert?',
+          answer: ['barwert', 'lebenseinkommen', 'present value'],
+          options: { problemId: 'm2_ricardo_1', stepId: 'pv', isDecision: true },
+          hint: 'Steuerzeitpunkt verschiebt sich, nicht der Barwert.',
+          explain: 'Der Barwert des verfügbaren Einkommens bleibt unverändert.'
+        },
+        {
+          q: '[2. Execution] Reagiert der heutige Konsum unter voller Äquivalenz stark positiv oder eher kaum?',
+          answer: ['kaum', 'nicht', 'null'],
+          options: { problemId: 'm2_ricardo_1', stepId: 'cons', dependsOn: 'pv' },
+          hint: 'Heute sparen, um morgen zu zahlen.',
+          explain: 'Der heutige Konsum steigt nicht systematisch; die Steuersenkung wird gespart.'
+        },
+        {
+          q: '[3. Validation] Ist Ricardianische Äquivalenz ein realistischer Universalbefund?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 'm2_ricardo_1', role: 'VALIDATION' },
+          hint: 'Voraussetzungen prüfen.',
+          explain: 'Nein. Liquiditätsbeschränkungen und endliche Horizonte brechen die Äquivalenz oft auf.'
         }
       ]
     }

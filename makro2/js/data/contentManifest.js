@@ -33,6 +33,8 @@ const MAKRO2_PRIMARY_REFS_CURATED = {
   marshall_lerner: ['Folien/slides_02.pdf', 'Übungen/Uebungsblatt_2.pdf', 'Tutorien/Tutorienblatt_2.pdf'],
   geldmengen: ['Folien/slides_03.pdf', 'Übungen/Uebungsblatt_3.pdf'],
   mundell_fleming: ['Folien/slides_03.pdf', 'Übungen/Uebungsblatt_3.pdf'],
+  zp_kurve: ['Folien/slides_03.pdf', 'Übungen/Uebungsblatt_3.pdf', 'Tutorien/Tutorienblatt_3.pdf'],
+  wirtschaftspolitik_offen: ['Folien/slides_03.pdf', 'Übungen/Uebungsblatt_3.pdf', 'Tutorien/Tutorienblatt_3.pdf'],
   wk_regime: [
     'Folien/slides_04.pdf',
     'Übungen/Uebungsblatt_3.pdf',
@@ -40,6 +42,7 @@ const MAKRO2_PRIMARY_REFS_CURATED = {
     'Tutorien/Tutorienblatt_3.pdf'
   ],
   wk_krisen: ['Folien/slides_04.pdf', 'Übungen/Uebungsblatt_4.pdf'],
+  opt_waehrungsraum: ['Folien/slides_04.pdf', 'Übungen/Uebungsblatt_4.pdf', 'Tutorien/Tutorienblatt_3.pdf'],
   phillipskurve: ['Folien/slides_05.pdf', 'Übungen/Uebungsblatt_5.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
   zeitinkonsistenz: ['Folien/slides_05.pdf', 'Übungen/Uebungsblatt_5.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
   barro_gordon: ['Folien/slides_05.pdf', 'Übungen/Uebungsblatt_5.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
@@ -49,11 +52,18 @@ const MAKRO2_PRIMARY_REFS_CURATED = {
     'Übungen/Uebungsblatt_7.pdf',
     'Tutorien/Tutorienblatt_5.pdf'
   ],
-  aggregierte_pf: ['Übungen/Uebungsblatt_8.pdf', 'Tutorien/Tutorienblatt_5.pdf'],
-  solow_basis: ['Übungen/Uebungsblatt_9.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
-  tech_fortschritt: ['Übungen/Uebungsblatt_10.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
-  schuldenquote_dynamik: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf'],
-  schuldenfinanzierung_monetarisierung: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf']
+  inflation_targeting: ['Folien/slides_07.pdf', 'Handout/Formeln.pdf', 'Übungen/Uebungsblatt_7.pdf', 'Tutorien/Tutorienblatt_5.pdf'],
+  inflation_kosten: ['Folien/slides_07.pdf', 'Übungen/Uebungsblatt_7.pdf', 'Tutorien/Tutorienblatt_5.pdf'],
+  wachstum_fakten: ['Handout/Makro2_handout_V25.2.pdf', 'Übungen/Uebungsblatt_8.pdf'],
+  aggregierte_pf: ['Handout/Makro2_handout_V25.2.pdf', 'Übungen/Uebungsblatt_8.pdf', 'Tutorien/Tutorienblatt_5.pdf'],
+  solow_basis: ['Handout/Makro2_handout_V25.2.pdf', 'Übungen/Uebungsblatt_9.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
+  steady_state: ['Handout/Makro2_handout_V25.2.pdf', 'Übungen/Uebungsblatt_9.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
+  goldene_sparquote: ['Handout/Makro2_handout_V25.2.pdf', 'Übungen/Uebungsblatt_9.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
+  tech_fortschritt: ['Handout/Makro2_handout_V25.2.pdf', 'Übungen/Uebungsblatt_10.pdf', 'Tutorien/Tutorienblatt_6.pdf'],
+  budgetrestriktion: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
+  schuldenquote_dynamik: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
+  ricardianisch: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf', 'Tutorien/Tutorienblatt_4.pdf'],
+  schuldenfinanzierung_monetarisierung: ['Folien/slides_06.pdf', 'Übungen/Uebungsblatt_6.pdf', 'Tutorien/Tutorienblatt_4.pdf']
 };
 
 export const MAKRO2_CONCEPT_PRIMARY_REFS = Object.fromEntries(

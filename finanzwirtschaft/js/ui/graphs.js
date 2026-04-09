@@ -1,4 +1,5 @@
 import GraphEngine from './graphEngine.js';
+import { renderMath } from '../utils/mathjax.js';
 
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
@@ -241,14 +242,23 @@ function drawPoint(plot, x, y, color, label, dx = 10, dy = -8) {
 
 function updateInfo(html) {
   const info = document.getElementById('graph_info');
-  if (info) info.innerHTML = html;
+  if (!info) return;
+  info.innerHTML = html;
+  Promise.resolve(renderMath(info)).catch(() => {});
 }
 
 function renderInfo(equation, rows) {
+  const safeRows = rows.filter((row) => row?.body);
   return `
-    ${equation ? `<div class="graph-equation">${equation}</div>` : ''}
-    <div class="graph-interpretation">
-      ${rows.map((row) => `<div class="graph-interpretation-row"><span class="graph-interpretation-label">${row.label}</span><div class="graph-interpretation-body">${row.body}</div></div>`).join('')}
+    <span class="gi-label">Graph-Interpretation</span>
+    ${equation ? `<div class="gi-eq">\\(${equation}\\)</div>` : ''}
+    <div class="gi-list">
+      ${safeRows.map((row) => `
+        <div class="gi-row">
+          <div class="gi-row-head">${row.title || row.label || 'Lesart'}</div>
+          <div class="gi-row-body">${row.body}</div>
+        </div>
+      `).join('')}
     </div>
   `;
 }

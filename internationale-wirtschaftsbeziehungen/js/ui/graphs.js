@@ -1,4 +1,5 @@
 import GraphEngine from './graphEngine.js';
+import { renderMath } from '../utils/mathjax.js';
 
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
@@ -240,13 +241,15 @@ function drawLegend(plot, items) {
 }
 
 function renderInfo(equation, rows) {
+  const safeRows = rows.filter((row) => row?.body);
   return `
-    ${equation ? `<div class="graph-equation">${equation}</div>` : ''}
-    <div class="graph-insights">
-      ${rows.map((row) => `
-        <div class="graph-insight-row">
-          <span class="graph-insight-label">${row.label}</span>
-          <span>${row.body}</span>
+    <span class="gi-label">Graph-Interpretation</span>
+    ${equation ? `<div class="gi-eq">\\(${equation}\\)</div>` : ''}
+    <div class="gi-list">
+      ${safeRows.map((row) => `
+        <div class="gi-row">
+          <div class="gi-row-head">${row.title || row.label || 'Lesart'}</div>
+          <div class="gi-row-body">${row.body}</div>
         </div>
       `).join('')}
     </div>
@@ -255,7 +258,9 @@ function renderInfo(equation, rows) {
 
 function updateInfo(html) {
   const info = document.getElementById('graph_info');
-  if (info) info.innerHTML = html;
+  if (!info) return;
+  info.innerHTML = html;
+  Promise.resolve(renderMath(info)).catch(() => {});
 }
 
 function drawRicardo() {
@@ -657,4 +662,3 @@ export function initGraph(conceptId) {
       updateInfo('');
   }
 }
-

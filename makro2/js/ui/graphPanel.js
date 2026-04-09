@@ -10,11 +10,14 @@ export const GRAPH_CONCEPTS = new Set([
   'nettoexporte',
   'marshall_lerner',
   'mundell_fleming',
+  'zp_kurve',
   'wk_regime',
   'schuldenquote_dynamik',
   'schuldenfinanzierung_monetarisierung',
   'taylor_regel',
   'solow_basis',
+  'steady_state',
+  'goldene_sparquote',
   'phillipskurve',
   'geldmengen'
 ]);
@@ -93,6 +96,19 @@ export function renderGraphPanel(id) {
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
+    zp_kurve: `
+<div class="graph-container">
+<h3 class="graph-panel-title">ZP-Kurve im (Y,i)-Raum</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_zp_world">Weltzins i*</label><input type="range" id="g_zp_world" min="0.5" max="6" step="0.1" value="2.5" oninput="window.initGraph('zp_kurve', false)"><div class="val" id="v_zp_world" aria-live="polite">2.5</div></div>
+<div class="ctrl-group"><label for="g_zp_mobility">Kapitalmobilität</label><input type="range" id="g_zp_mobility" min="0.6" max="2.4" step="0.1" value="1.4" oninput="window.initGraph('zp_kurve', false)"><div class="val" id="v_zp_mobility" aria-live="polite">1.4</div></div>
+<div class="ctrl-group"><label for="g_zp_y">Aktuelles Einkommen Y</label><input type="range" id="g_zp_y" min="50" max="130" step="2" value="92" oninput="window.initGraph('zp_kurve', false)"><div class="val" id="v_zp_y" aria-live="polite">92</div></div>
+<div class="ctrl-group"><label for="g_zp_i">Aktueller Inlandszins i</label><input type="range" id="g_zp_i" min="0.5" max="7" step="0.1" value="3.4" oninput="window.initGraph('zp_kurve', false)"><div class="val" id="v_zp_i" aria-live="polite">3.4</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: ZP-Kurve im Einkommens-Zins-Diagramm mit aktueller Lage relativ zum Zahlungsbilanzgleichgewicht."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
     wk_regime: `
 <div class="graph-container">
 <h3 class="graph-panel-title">Feste versus flexible Wechselkurse bei externem Schock</h3>
@@ -155,6 +171,31 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_break">δ+n</label><input type="range" id="g_break" min="0.05" max="0.25" step="0.01" value="0.12" oninput="window.initGraph('solow_basis', false)"><div class="val" id="v_break" aria-live="polite">0.12</div></div>
 </div>
 <canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Solow-Diagramm mit Investitions- und Break-even-Kurve."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    steady_state: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Steady State und Anpassungsrichtung</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_ss_s">Sparquote s</label><input type="range" id="g_ss_s" min="0.1" max="0.6" step="0.02" value="0.28" oninput="window.initGraph('steady_state', false)"><div class="val" id="v_ss_s" aria-live="polite">0.28</div></div>
+<div class="ctrl-group"><label for="g_ss_loss">δ + n</label><input type="range" id="g_ss_loss" min="0.05" max="0.25" step="0.01" value="0.12" oninput="window.initGraph('steady_state', false)"><div class="val" id="v_ss_loss" aria-live="polite">0.12</div></div>
+<div class="ctrl-group"><label for="g_ss_a">Produktivität A</label><input type="range" id="g_ss_a" min="0.8" max="2" step="0.1" value="1.2" oninput="window.initGraph('steady_state', false)"><div class="val" id="v_ss_a" aria-live="polite">1.2</div></div>
+<div class="ctrl-group"><label for="g_ss_k">Aktuelles k</label><input type="range" id="g_ss_k" min="1" max="22" step="0.5" value="7.5" oninput="window.initGraph('steady_state', false)"><div class="val" id="v_ss_k" aria-live="polite">7.5</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Solow-Diagramm mit aktuellem Kapitalbestand relativ zum Steady State."></canvas>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    goldene_sparquote: `
+<div class="graph-container">
+<h3 class="graph-panel-title">Goldene Sparquote und Konsummaximum</h3>
+<div class="graph-controls">
+<div class="ctrl-group"><label for="g_golden_alpha">Kapitalanteil α</label><input type="range" id="g_golden_alpha" min="0.2" max="0.6" step="0.02" value="0.35" oninput="window.initGraph('goldene_sparquote', false)"><div class="val" id="v_golden_alpha" aria-live="polite">0.35</div></div>
+<div class="ctrl-group"><label for="g_golden_loss">δ + n</label><input type="range" id="g_golden_loss" min="0.04" max="0.22" step="0.01" value="0.10" oninput="window.initGraph('goldene_sparquote', false)"><div class="val" id="v_golden_loss" aria-live="polite">0.10</div></div>
+<div class="ctrl-group"><label for="g_golden_a">Produktivität A</label><input type="range" id="g_golden_a" min="0.8" max="2" step="0.1" value="1.1" oninput="window.initGraph('goldene_sparquote', false)"><div class="val" id="v_golden_a" aria-live="polite">1.1</div></div>
+</div>
+<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Steady-State-Konsum als Funktion des Kapitalstocks mit markiertem goldenen Kapitalstock."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 

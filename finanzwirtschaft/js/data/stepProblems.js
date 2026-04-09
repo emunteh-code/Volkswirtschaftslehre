@@ -313,6 +313,48 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  annuitaeten_finanzplan: [
+    {
+      title: 'Annuität aus Kapitalwert lesen',
+      context: 'Gegeben sind Kapitalwert, Laufzeit und Rentenbarwertfaktor einer Investition.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ist die Annuität hier eine neue Zahlungsreihe oder die periodische Übersetzung desselben Wertbeitrags?',
+          answer: ['periodische übersetzung', 'uebersetzung', 'äquivalente rente', 'aequivalente rente'],
+          options: { problemId: 'fw_af_1', stepId: 'translate', isDecision: true },
+          hint: 'Kapitalwert und Annuität widersprechen sich nicht.',
+          explain: 'Die Annuität ist die periodische Übersetzung desselben Vermögensbeitrags.'
+        },
+        {
+          q: '[2. Decision] Welche Grundformel verbindet Kapitalwert und Annuität?',
+          answer: ['a = k0 / rbwf', 'k0 = a * rbwf', 'annuität gleich kapitalwert durch rbwf'],
+          options: { problemId: 'fw_af_1', stepId: 'rel', dependsOn: 'translate' },
+          hint: 'Rentenbarwertlogik.',
+          explain: 'Es gilt a = K₀ / RBWF(n,i) bzw. K₀ = a · RBWF(n,i).'
+        }
+      ]
+    },
+    {
+      title: 'Vollständiger Finanzplan als Finanzierungslogik',
+      context: 'Ein Plan weist für jede Periode Kreditaufnahme, Zins, Tilgung und Wertzuwachs aus.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ist der vollständige Finanzplan nur ein Rechentableau oder zeigt er die periodische Kapitalbedarfslogik?',
+          answer: ['kapitalbedarfslogik', 'finanzierungslogik', 'periodische finanzierungslogik'],
+          options: { problemId: 'fw_af_2', stepId: 'logic', isDecision: true },
+          hint: 'Investition und Finanzierung werden gemeinsam periodisch sichtbar.',
+          explain: 'Der vollständige Finanzplan zeigt periodisch, wie Investition und Finanzierung zusammenwirken.'
+        },
+        {
+          q: '[2. Validation] Welcher typische Klausurfehler wird dadurch vermieden?',
+          answer: ['nur endwert ansehen', 'zwischenperioden ignorieren', 'liquiditaetsluecken übersehen'],
+          options: { problemId: 'fw_af_2', role: 'VALIDATION' },
+          hint: 'Nicht nur die letzte Zeile zählt.',
+          explain: 'Der Plan verhindert, dass Zwischenperioden, Restkredite oder Anschlussfinanzierung übersehen werden.'
+        }
+      ]
+    }
+  ],
   izf_kapitalwertfunktion: [
     {
       title: 'IZF und Marktzins',
@@ -482,6 +524,48 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  risikoadjustierter_kapitalwert: [
+    {
+      title: 'Zinszuschlag oder Cashflow-Abschlag?',
+      context: 'Ein Projekt ist unsicher; Risiko soll in die Kapitalwertrechnung integriert werden.',
+      steps: [
+        {
+          q: '[1. Interpretation] Soll Risiko hier außerhalb der Vermögensregel bleiben?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_rk_1', stepId: 'no', isDecision: true },
+          hint: 'Unsicherheit muss in die Bewertung übersetzt werden.',
+          explain: 'Nein. Risiko muss in die Kapitalwertlogik integriert werden.'
+        },
+        {
+          q: '[2. Decision] Welche zwei sauberen Modellierungswege nennt der Kurs?',
+          answer: ['risikozuschlag und sicherheitsabschlag', 'zuschlag im zins und abschlag in den cashflows', 'diskontsatz oder cashflow'],
+          options: { problemId: 'fw_rk_1', stepId: 'methods', dependsOn: 'no' },
+          hint: 'Zinsseite oder Zahlungsseite.',
+          explain: 'Entweder wird ein Risikozuschlag im Diskontsatz oder ein Sicherheitsabschlag in den Cashflows verwendet.'
+        }
+      ]
+    },
+    {
+      title: 'Doppelte Risikoberücksichtigung vermeiden',
+      context: 'Eine Lösung erhöht den Kalkulationszins und reduziert zugleich dieselben erwarteten Cashflows pauschal.',
+      steps: [
+        {
+          q: '[1. Decision] Ist das ohne zusätzliche Begründung methodisch sauber?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_rk_2', stepId: 'no', isDecision: true },
+          hint: 'Es droht dieselbe Risikokomponente doppelt gezählt zu werden.',
+          explain: 'Nein. Ohne Begründung kann das eine doppelte Risikobelastung derselben Unsicherheit sein.'
+        },
+        {
+          q: '[2. Validation] Welche Formulierung muss in einer guten Klausurlösung auftauchen?',
+          answer: ['wo das risiko modelliert wird', 'zins oder cashflows', 'konsistente risikologik'],
+          options: { problemId: 'fw_rk_2', role: 'VALIDATION' },
+          hint: 'Methodenreinheit.',
+          explain: 'Die Lösung muss klar benennen, ob das Risiko im Zins oder in den Cashflows modelliert wird.'
+        }
+      ]
+    }
+  ],
   bezugsrecht: [
     {
       title: 'Verwässerungsschutz',
@@ -624,6 +708,48 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  wacc: [
+    {
+      title: 'WACC als gewichteter Kapitalkostensatz',
+      context: 'EK- und FK-Kosten sind bekannt; gesucht ist die finanzwirtschaftliche Lesart des WACC.',
+      steps: [
+        {
+          q: '[1. Interpretation] Ist der WACC nur ein arithmetischer Durchschnitt ohne Entscheidungslogik?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_wacc_1', stepId: 'no', isDecision: true },
+          hint: 'Die Gewichte und Teilkosten tragen ökonomische Bedeutung.',
+          explain: 'Nein. Der WACC verdichtet die Preis- und Risikologik der Finanzierungsmischung.'
+        },
+        {
+          q: '[2. Decision] Welche Größen müssen vor dem Rechnen wirtschaftlich sauber verstanden sein?',
+          answer: ['ek-kosten und fk-kosten', 'ke und kd', 'teilkosten'],
+          options: { problemId: 'fw_wacc_1', stepId: 'parts', dependsOn: 'no' },
+          hint: 'Die Aggregation ist nur so gut wie ihre Bausteine.',
+          explain: 'Eigen- und Fremdkapitalkosten müssen zuerst inhaltlich sauber bestimmt und gedeutet werden.'
+        }
+      ]
+    },
+    {
+      title: 'Passung des WACC',
+      context: 'Ein WACC wird als Kalkulationszins für ein neues Projekt vorgeschlagen.',
+      steps: [
+        {
+          q: '[1. Decision] Darf jeder vorhandene WACC automatisch für jedes Projekt verwendet werden?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_wacc_2', stepId: 'no', isDecision: true },
+          hint: 'Projekt- und Kapitalstrukturrisiko müssen zusammenpassen.',
+          explain: 'Nein. Der WACC muss zur Risiko- und Finanzierungsstruktur des Projekts passen.'
+        },
+        {
+          q: '[2. Validation] Welcher typische Fehler wird sonst gemacht?',
+          answer: ['mechanischer einsatz', 'universalsatz', 'scheingenauigkeit'],
+          options: { problemId: 'fw_wacc_2', role: 'VALIDATION' },
+          hint: 'Eine vorhandene Zahl wird ohne Passungsprüfung übernommen.',
+          explain: 'Es entsteht ein mechanischer Einsatz des WACC als Universalsatz ohne Risikopassung.'
+        }
+      ]
+    }
+  ],
   wacc_leverage: [
     {
       title: 'Renditehebel und Risikohebel',
@@ -642,6 +768,26 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'fw_ks_1', stepId: 'risk', dependsOn: 'yes' },
           hint: 'Der Puffer des Eigenkapitals wird kleiner.',
           explain: 'Ja. Leverage verstärkt nicht nur Chancen, sondern auch Schwankungen und Verluste.'
+        }
+      ]
+    },
+    {
+      title: 'Positiver oder negativer Hebel',
+      context: 'Die Gesamtkapitalrendite liegt knapp unter den Fremdkapitalkosten.',
+      steps: [
+        {
+          q: '[1. Interpretation] Hebelt zusätzliche Verschuldung dann zugunsten der Eigenkapitalgeber?',
+          answer: ['nein', 'no'],
+          options: { problemId: 'fw_ks_2', stepId: 'no', isDecision: true },
+          hint: 'Für positiven Hebel muss r_U über r_D liegen.',
+          explain: 'Nein. Liegt die Gesamtkapitalrendite unter den Fremdkapitalkosten, wirkt der Hebel gegen das Eigenkapital.'
+        },
+        {
+          q: '[2. Validation] Welche Prüfungsregel sollte im Lösungssatz explizit auftauchen?',
+          answer: ['ru größer rd', 'gesamtkapitalrendite größer fremdkapitalkosten', 'positive renditespanne'],
+          options: { problemId: 'fw_ks_2', role: 'VALIDATION' },
+          hint: 'Ohne Renditespanne kein positiver Hebel.',
+          explain: 'Für positiven Leverage muss die Gesamtkapitalrendite über den Fremdkapitalkosten liegen.'
         }
       ]
     }

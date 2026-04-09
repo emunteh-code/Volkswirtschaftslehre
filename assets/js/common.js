@@ -1,6 +1,6 @@
 import { FILTERS, PUBLIC_MODULES, getModuleBySlug } from "./modules.js";
 import { getModuleContent } from "./module-content.js";
-import { estimateGeneratedChapterCount } from "./generated-portal/dataFactory.js";
+import { buildGeneratedPortalData, estimateGeneratedChapterCount } from "./generated-portal/dataFactory.js";
 import { mountRLabs } from "./r-lab.js";
 
 const THEME_KEY = "lernportal_theme_v1";
@@ -85,6 +85,32 @@ function readVisitState(module) {
   return state?.lastKey ? readStoredJson(state.lastKey) : {};
 }
 
+const validConceptIdCache = new Map();
+
+async function loadModuleConceptIds(module) {
+  const cacheHit = validConceptIdCache.get(module.slug);
+  if (cacheHit) return cacheHit;
+
+  const loader = (async () => {
+    try {
+      const url = new URL(`../../${module.slug}/js/data/chapters.js`, import.meta.url);
+      const chapterModule = await import(url.href);
+      if (Array.isArray(chapterModule.CHAPTERS) && chapterModule.CHAPTERS.length) {
+        return chapterModule.CHAPTERS.map((chapter) => chapter?.id).filter(Boolean);
+      }
+    } catch (err) {
+      console.warn(`Could not load chapters for ${module.slug}; falling back to generated snapshot ids.`, err);
+    }
+
+    const content = getModuleContent(module.slug);
+    if (!content) return [];
+    return buildGeneratedPortalData(module, content).chapters.map((chapter) => chapter.id);
+  })();
+
+  validConceptIdCache.set(module.slug, loader);
+  return loader;
+}
+
 function touchModuleVisit(module, patch = {}) {
   const state = getPortalState(module);
   if (!state?.lastKey) return;
@@ -97,15 +123,19 @@ function formatVisitDate(timestamp) {
   return new Intl.DateTimeFormat("de-DE", { dateStyle: "medium", timeStyle: "short" }).format(timestamp);
 }
 
-function getModuleSnapshot(module) {
+async function getModuleSnapshot(module) {
   const state = getPortalState(module);
   if (!state) return { seen: 0, total: 0, due: 0, percent: 0, started: false };
   const progress = readStoredJson(state.progressKey);
   const srs = readStoredJson(state.srsKey);
-  const total = state.chapterCount || 0;
-  const seen = Object.keys(progress).length;
-  const due = Object.values(srs).filter((entry) => entry && typeof entry.due === "number" && entry.due <= Date.now()).length;
-  // Cap so stale/extra progress keys cannot show >100% or overflow the bar (tiles + hero).
+  const conceptIds = await loadModuleConceptIds(module);
+  const conceptIdSet = conceptIds.length ? new Set(conceptIds) : null;
+  const total = conceptIds.length || state.chapterCount || 0;
+  const seen = Object.keys(progress).filter((id) => !conceptIdSet || conceptIdSet.has(id)).length;
+  const due = Object.entries(srs).filter(([id, entry]) => {
+    if (conceptIdSet && !conceptIdSet.has(id)) return false;
+    return entry && typeof entry.due === "number" && entry.due <= Date.now();
+  }).length;
   const seenForRatio = total > 0 ? Math.min(seen, total) : seen;
   const percent = total ? Math.min(100, Math.round((seenForRatio / total) * 100)) : 0;
   return { seen, total, due, percent, started: seen > 0 };
@@ -122,6 +152,7 @@ function pickInitialLandingModule() {
 let selectedLandingIndex = -1;
 let landingTileElements = [];
 let landingKeyboardBound = false;
+let heroRenderToken = 0;
 
 function buildLandingRows() {
   const rows = [];
@@ -162,7 +193,7 @@ function setLandingSelection(index, { focus = false } = {}) {
   selectedLandingIndex = index;
   const selectedTile = landingTileElements[index];
   const module = PUBLIC_MODULES.find((item) => item.slug === selectedTile?.dataset.slug);
-  if (module) updateHeroShelf(module);
+  if (module) void updateHeroShelf(module);
   if (focus && selectedTile) {
     selectedTile.focus({ preventScroll: true });
   }
@@ -270,7 +301,8 @@ function showOnboarding(force = false) {
   });
 }
 
-function updateHeroShelf(module) {
+async function updateHeroShelf(module) {
+  const renderToken = ++heroRenderToken;
   const kicker = document.getElementById("heroKicker");
   const title = document.getElementById("heroTitle");
   const desc = document.getElementById("heroDesc");
@@ -289,7 +321,8 @@ function updateHeroShelf(module) {
     return;
   }
 
-  const snapshot = getModuleSnapshot(module);
+  const snapshot = await getModuleSnapshot(module);
+  if (renderToken !== heroRenderToken) return;
 
   // Animate transition
   if (content) {
@@ -328,7 +361,7 @@ function updateHeroShelf(module) {
   }
 }
 
-function renderLandingPage() {
+async function renderLandingPage() {
   const gridNode = document.getElementById("moduleGrid");
   if (!gridNode) return;
 
@@ -339,14 +372,18 @@ function renderLandingPage() {
   // 2. Hero: show last-visited module or default
   const lastModule = pickInitialLandingModule();
   const defaultModule = lastModule || PUBLIC_MODULES[0] || null;
-  updateHeroShelf(defaultModule);
+  await updateHeroShelf(defaultModule);
 
   // 3. Module Grid
   if (PUBLIC_MODULES.length === 0) {
     gridNode.innerHTML = `<div class="empty-state">Keine Module verfügbar.</div>`;
   } else {
-    gridNode.innerHTML = PUBLIC_MODULES.map((module) => {
-      const snapshot = getModuleSnapshot(module);
+    const snapshots = await Promise.all(PUBLIC_MODULES.map(async (module) => ({
+      module,
+      snapshot: await getModuleSnapshot(module)
+    })));
+
+    gridNode.innerHTML = snapshots.map(({ module, snapshot }) => {
       const statusClass = snapshot.started ? " started" : "";
       const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
       const progressBar = snapshot.started
@@ -406,7 +443,7 @@ function renderLandingPage() {
   showOnboarding();
 }
 
-function renderModulePage() {
+async function renderModulePage() {
   const slug = inferModuleSlug();
   const module = getModuleBySlug(slug);
   if (!module) {
@@ -422,7 +459,7 @@ function renderModulePage() {
   const heroNode = document.getElementById("moduleHero");
   if (!heroNode) return;
 
-  const snapshot = getModuleSnapshot(module);
+  const snapshot = await getModuleSnapshot(module);
   const visitState = readVisitState(module);
   const visitLabel = formatVisitDate(visitState.visitedAt);
 
@@ -442,15 +479,15 @@ function renderModulePage() {
   `;
 }
 
-function boot() {
+async function boot() {
   initTheme();
   const yearNode = document.getElementById("footerYear");
   if (yearNode) yearNode.textContent = String(new Date().getFullYear());
 
   if (document.body.dataset.page === "landing") {
-    renderLandingPage();
+    await renderLandingPage();
   } else if (document.body.dataset.page === "module") {
-    renderModulePage();
+    await renderModulePage();
   }
 }
 
@@ -460,4 +497,6 @@ window.onerror = function(msg, url, line) {
   return false;
 };
 
-boot();
+boot().catch((err) => {
+  console.error("Portal boot failed:", err);
+});

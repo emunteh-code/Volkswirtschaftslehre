@@ -476,6 +476,56 @@ function drawMundellFleming() {
   ));
 }
 
+function drawZPKurve() {
+  const iWorld = getNumber("g_zp_world", 2.5);
+  const mobility = getNumber("g_zp_mobility", 1.4);
+  const yCurrent = getNumber("g_zp_y", 92);
+  const iCurrent = getNumber("g_zp_i", 3.4);
+  setValueLabel("v_zp_world", iWorld, 1);
+  setValueLabel("v_zp_mobility", mobility, 1);
+  setValueLabel("v_zp_y", yCurrent, 0);
+  setValueLabel("v_zp_i", iCurrent, 1);
+
+  const slope = 0.035 / Math.max(0.5, mobility);
+  const intercept = iWorld - slope * 78;
+  const zp = (y) => intercept + slope * y;
+  const iOnCurve = zp(yCurrent);
+
+  const plot = setupPlot("Output Y", "Zins i (%)", {
+    xMin: 50,
+    xMax: 130,
+    yMin: 0.5,
+    yMax: 6.8
+  });
+  if (!plot) return;
+
+  drawCurve(plot, zp, {
+    color: plot.col.accent,
+    label: "ZP-Kurve",
+    labelX: 110
+  });
+  drawHorizontal(plot, iWorld, plot.col.muted, "Weltzins i*");
+  drawVertical(plot, yCurrent, plot.col.accent2, "Aktuelles Y");
+  drawPoint(plot, yCurrent, iCurrent, plot.col.warn, "Beobachtete Lage");
+  drawPoint(plot, yCurrent, iOnCurve, plot.col.accent2, "ZP-Punkt");
+
+  const gap = iCurrent - iOnCurve;
+  const status = gap > 0.08
+    ? 'oberhalb der ZP-Kurve: Kapitalzuflüsse dominieren, die Zahlungsbilanz weist einen Überschuss auf'
+    : gap < -0.08
+      ? 'unterhalb der ZP-Kurve: Der Zins ist für das gegebene Einkommen zu niedrig, es entsteht ein Defizit'
+      : 'nahe am Zahlungsbilanzgleichgewicht';
+
+  updateInfo(renderInfo(
+    'LB(Y,Y*,ε) + KB(i-i*) = 0',
+    [
+      { label: 'Steigung', body: `Mit Kapitalmobilität ${mobility.toFixed(1)} verläuft die ZP-Kurve ${mobility > 1.6 ? 'relativ flach' : 'sichtbar positiv steigend'}: Höheres Y belastet die Leistungsbilanz und verlangt höheren i.` },
+      { label: 'Aktuelle Lage', body: `Bei Y = ${yCurrent.toFixed(0)} liegt der ausgleichende Zins bei ${iOnCurve.toFixed(2)}%. Beobachtet sind ${iCurrent.toFixed(2)}% — damit liegt der Punkt ${status}.` },
+      { label: 'Merkregel', body: 'Unterhalb der ZP-Kurve: Defizit. Oberhalb der ZP-Kurve: Überschuss. Die Kurve gehört zur Außenbilanz, nicht zum Gütermarkt.' }
+    ]
+  ));
+}
+
 function drawWkRegime() {
   const shock = getNumber("g_regime_shock", 1.4);
   const flexSpeed = getNumber("g_regime_flex", 1.2);
@@ -672,6 +722,102 @@ function drawSolowBasis() {
   ));
 }
 
+function drawSteadyState() {
+  const s = getNumber("g_ss_s", 0.28);
+  const loss = getNumber("g_ss_loss", 0.12);
+  const a = getNumber("g_ss_a", 1.2);
+  const kCurrent = getNumber("g_ss_k", 7.5);
+  setValueLabel("v_ss_s", s, 2);
+  setValueLabel("v_ss_loss", loss, 2);
+  setValueLabel("v_ss_a", a, 1);
+  setValueLabel("v_ss_k", kCurrent, 1);
+
+  const plot = setupPlot("Kapital pro Kopf k", "Investition / Break-even", {
+    xMin: 0,
+    xMax: 24,
+    yMin: 0,
+    yMax: 6.8
+  });
+  if (!plot) return;
+
+  const investment = (k) => s * a * Math.sqrt(Math.max(k, 0));
+  const breakLine = (k) => loss * k;
+  const kStar = Math.pow((s * a) / loss, 2);
+  const invCurrent = investment(kCurrent);
+  const breakCurrent = breakLine(kCurrent);
+
+  drawCurve(plot, investment, {
+    color: plot.col.accent,
+    label: "sf(k)",
+    labelX: 17
+  });
+  drawCurve(plot, breakLine, {
+    color: plot.col.accent2,
+    label: "(δ+n)k",
+    labelX: 16
+  });
+  drawVertical(plot, kCurrent, plot.col.muted, "Aktuelles k");
+  drawPoint(plot, kCurrent, invCurrent, plot.col.warn, "sf(k)");
+  drawPoint(plot, kCurrent, breakCurrent, plot.col.warn, "Break-even");
+  if (kStar <= plot.ranges.xMax) {
+    drawPoint(plot, kStar, investment(kStar), plot.col.accent2, "Steady State");
+  }
+
+  const direction = invCurrent > breakCurrent + 0.05
+    ? 'k steigt weiter'
+    : invCurrent < breakCurrent - 0.05
+      ? 'k sinkt in Richtung Steady State'
+      : 'k liegt bereits nahe am Steady State';
+
+  updateInfo(renderInfo(
+    'sf(k*) = (δ+n)k*',
+    [
+      { label: 'Steady State', body: `Bei s = ${s.toFixed(2)}, A = ${a.toFixed(1)} und δ+n = ${loss.toFixed(2)} ergibt sich k* = ${kStar.toFixed(1)}.` },
+      { label: 'Aktuelle Lage', body: `Beim aktuellen Kapitalstock k = ${kCurrent.toFixed(1)} gilt ${direction}.` },
+      { label: 'Komparative Statik', body: 'Höheres s oder höheres A schieben sf(k) nach oben; höheres δ+n macht die Break-even-Gerade steiler und drückt den Steady State nach links.' }
+    ]
+  ));
+}
+
+function drawGoldeneSparquote() {
+  const alpha = getNumber("g_golden_alpha", 0.35);
+  const loss = getNumber("g_golden_loss", 0.10);
+  const a = getNumber("g_golden_a", 1.1);
+  setValueLabel("v_golden_alpha", alpha, 2);
+  setValueLabel("v_golden_loss", loss, 2);
+  setValueLabel("v_golden_a", a, 1);
+
+  const kGold = Math.pow((alpha * a) / loss, 1 / (1 - alpha));
+  const c = (k) => a * Math.pow(Math.max(k, 0), alpha) - loss * k;
+  const sample = Array.from({ length: 200 }, (_, idx) => c((24 / 199) * idx));
+  const plot = setupPlot("Kapital pro Kopf k", "Steady-State-Konsum c*", {
+    xMin: 0.1,
+    xMax: 24,
+    yMin: 0,
+    yMax: Math.max(2.2, Math.ceil((Math.max(...sample) + 0.4) * 10) / 10)
+  });
+  if (!plot) return;
+
+  drawCurve(plot, c, {
+    color: plot.col.accent,
+    label: "Konsum im SS",
+    labelX: 16
+  });
+  if (kGold >= plot.ranges.xMin && kGold <= plot.ranges.xMax) {
+    drawVertical(plot, kGold, plot.col.accent2, "k_gold");
+    drawPoint(plot, kGold, c(kGold), plot.col.warn, "Konsummaximum");
+  }
+
+  updateInfo(renderInfo(
+    'f′(k_gold) = δ + n',
+    [
+      { label: 'Goldene Regel', body: `Bei α = ${alpha.toFixed(2)}, A = ${a.toFixed(1)} und δ+n = ${loss.toFixed(2)} liegt der goldene Kapitalstock bei k ≈ ${kGold.toFixed(1)}.` },
+      { label: 'Lesart', body: 'Links vom Maximum erhöht mehr Kapital den langfristigen Konsum; rechts davon ist die Wirtschaft überakkumuliert und spart zu viel für das Konsumziel.' },
+      { label: 'Merkregel', body: `Im Cobb-Douglas-Fall entspricht die goldene Sparquote dem Kapitalanteil: s_gold = α = ${alpha.toFixed(2)}.` }
+    ]
+  ));
+}
+
 function drawPhillipskurve() {
   const piExpected = getNumber("g_pie", 2);
   const uNatural = getNumber("g_un", 4.5);
@@ -768,6 +914,9 @@ function initGraph(conceptId) {
     case "mundell_fleming":
       drawMundellFleming();
       break;
+    case "zp_kurve":
+      drawZPKurve();
+      break;
     case "wk_regime":
       drawWkRegime();
       break;
@@ -782,6 +931,12 @@ function initGraph(conceptId) {
       break;
     case "solow_basis":
       drawSolowBasis();
+      break;
+    case "steady_state":
+      drawSteadyState();
+      break;
+    case "goldene_sparquote":
+      drawGoldeneSparquote();
       break;
     case "phillipskurve":
       drawPhillipskurve();

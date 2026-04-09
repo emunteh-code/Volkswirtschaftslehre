@@ -1,5 +1,7 @@
 # Mikro2 Normalization Audit Pass 1
 
+**Source / backbone:** Shell normalization does **not** add source corpus or `contentManifest.js`. See `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ## Scope
 - Module: `mikro2` only.
 - Focus: visual/platform consistency and structural shell alignment against current backbone and `mikro1` sibling baseline.

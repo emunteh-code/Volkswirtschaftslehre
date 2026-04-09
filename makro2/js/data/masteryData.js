@@ -60,6 +60,18 @@ function createMasteryItems(conceptId, title) {
       'ZP-Kurve: ZB-Gleichgewicht im (Y,i)-Raum, positive Steigung und Lage relativ zur ZP begründen',
       'Mundell-Fleming-Theorem und Trilemma der offenen VW knapp formulieren (Regime zuerst)'
     ],
+    zp_kurve: [
+      'ZP-Kurve als Zahlungsbilanzgleichgewicht im (Y,i)-Raum definieren',
+      'Positive Steigung der ZP-Kurve aus LB- und KB-Logik begründen',
+      'Perfekte Kapitalmobilität als horizontalen Grenzfall erklären',
+      'Punkte ober- und unterhalb der ZP-Kurve als Überschuss- bzw. Defizitlage interpretieren'
+    ],
+    wirtschaftspolitik_offen: [
+      'Regimevergleich im Mundell-Fleming-Modell systematisch aufbauen',
+      'Fiskal- und Geldpolitik unter flexiblem vs. festem WK kontrastieren',
+      'Wechselkurskanal und Nettoexport-Gegenwirkung explizit in Antworten einbauen',
+      'Politikresultate immer an Regime und Kapitalmobilität knüpfen'
+    ],
     wk_regime: [
       'Spektrum der WK-Regime von free float bis Currency Board benennen',
       'Vor- und Nachteile fixer und flexibler WK aufzählen',
@@ -72,6 +84,12 @@ function createMasteryItems(conceptId, title) {
       'Zweite Generation: selbsterfüllende Erwartungen und multiple Gleichgewichte erläutern',
       'EWS-Krise 1992 in Grundzügen beschreiben',
       'Unterschied zwischen den Krisentypen für Klausur formulieren'
+    ],
+    opt_waehrungsraum: [
+      'Klassische OWR-Kriterien benennen und ökonomisch deuten',
+      'Vorteile einer Währungsunion gegen Verlust des eigenen WK abwägen',
+      'Asymmetrische Schocks als zentrales OWR-Risiko erklären',
+      'Eurozonen-Fragen als Anpassungsmechanismus- und nicht als Ja/Nein-Urteil lesen'
     ],
     zeitinkonsistenz: [
       'Zeitinkonsistenzproblem im zweistufigen Spiel erklären',
@@ -107,6 +125,24 @@ function createMasteryItems(conceptId, title) {
       'Konsequenz von a ≤ 0 (Instabilität) erklären',
       'Inflation Targeting: Zinsreaktion an Zielinflation; unkonventionelle Kanäle an der ZLB grob zuordnen'
     ],
+    inflation_targeting: [
+      'Inflation Targeting als Regime mit Ziel, Unabhängigkeit und Kommunikation erklären',
+      'EZB-Strategie und Rolle monetärer Aggregate korrekt einordnen',
+      'Zielgröße, Instrument und Informationsindikatoren sauber trennen',
+      'ELB/Realzins-Spielraum als Grenze niedriger Trendinflation erläutern'
+    ],
+    inflation_kosten: [
+      'Wichtige Inflationskosten benennen und von Disinflationskosten unterscheiden',
+      'Opferquote / Sacrifice Ratio konzeptionell erklären',
+      'Disinflation über Phillipslogik und Glaubwürdigkeit einordnen',
+      'Schnelle vs. glaubwürdige Disinflation klausurstabil vergleichen'
+    ],
+    wachstum_fakten: [
+      'Stilisierte Wachstumsfakten / Kaldor-Fakten benennen',
+      'Bedingte Konvergenz von automatischer Konvergenz unterscheiden',
+      'Wachstumszerlegung auf Faktor- und Produktivitätsbeiträge anwenden',
+      'Solow-Residuum vorsichtig interpretieren'
+    ],
     aggregierte_pf: [
       'Aggregierte PF Y = A·F(K,N) mit Eigenschaften aufschreiben',
       'CRS, abnehmende Grenzerträge, Inada-Bedingungen nennen',
@@ -121,6 +157,18 @@ function createMasteryItems(conceptId, title) {
       'Warum ohne TF kein dauerhaftes Pro-Kopf-Wachstum: begründen',
       'Steady State: sf(k*) = δk*; Goldene Regel und Konsummaximum gegenüber Outputmaximum abgrenzen'
     ],
+    steady_state: [
+      'Steady-State-Bedingung mit und ohne Bevölkerungswachstum aufschreiben',
+      'Komparative Statik von s, δ und n auf k* und y* ableiten',
+      'Konvergenz links und rechts des Steady State graphisch erklären',
+      'Niveaueffekt und Wachstumsrate sauber trennen'
+    ],
+    goldene_sparquote: [
+      'Goldene Regel als Konsummaximum formulieren',
+      'Goldenen Kapitalstock über f\'(k)=δ+n identifizieren',
+      'Bei Cobb-Douglas s_gold = α nutzen und interpretieren',
+      'Über- vs. Unterakkumulation klausurstabil erkennen'
+    ],
     tech_fortschritt: [
       'Arbeitsvermehrenden TF Y = F(K, AN) definieren',
       'Variable k̃ = K/(AN) einführen und Akkumulationsgleichung aufschreiben',
@@ -128,6 +176,12 @@ function createMasteryItems(conceptId, title) {
       'Wachstumsraten im SS: g_{Y/N} = g_A ableiten',
       'Solow-Residuum / TFP: Restgröße der Zerlegung und Interpretationsgrenzen nennen',
       'Institutionen als langfristiger Wachstumskanal (Anreize, Eigentumsrechte) skizzieren'
+    ],
+    budgetrestriktion: [
+      'Periodische Budgetrestriktion des Staates aufschreiben',
+      'Primärsaldo und Gesamtsaldo trennen',
+      'Intertemporale Budgetrestriktion als Barwertbedingung erläutern',
+      'Seigniorage als separaten Finanzierungskanal einordnen'
     ],
     phillipskurve: [
       'Erwartungsaugmentierte Phillipskurve π_t = π^e − α(u − u_n) aufschreiben',
@@ -147,6 +201,12 @@ function createMasteryItems(conceptId, title) {
       'LM-Gleichung M/P = Y·L(i): positive Steigung begründen',
       'LM-Verschiebungen bei M↑ und P↑ analysieren',
       'Liquiditätsfalle: horizontale LM bei i = 0 und Implikation für GP'
+    ],
+    ricardianisch: [
+      'Ricardianische Äquivalenz in Worten und im Barwertgedanken erklären',
+      'Steuersenkung heute vs. Steuererhöhung morgen als intertemporalen Tausch lesen',
+      'Wichtige Voraussetzungen der Äquivalenz benennen',
+      'Gründe für empirisches Scheitern / Abschwächung nennen'
     ],
   };
 

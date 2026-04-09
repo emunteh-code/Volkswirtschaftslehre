@@ -15,8 +15,10 @@ export function createRenderer({
   getDueCards,
   renderDashboard,
   getPracticeTasks = (conceptId, contentEntry) => contentEntry?.aufgaben || [],
+  minimumPracticeTasks = 10,
   hasRBlock = () => false,
   renderRAnwendungPanel = null,
+  examDrillsById = null,
   /** Raw HTML inserted inside the home action row (optional; e.g. Konzept-Check card) */
   extraHomeActionCardsHtml = '',
   /** Optional one-line note under the Lern-Dashboard home card (pilot modules only) */
@@ -32,6 +34,41 @@ export function createRenderer({
       .replace(/&nbsp;/g, " ")
       .replace(/\s+/g, " ")
       .trim();
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function decodeHtmlEntities(value) {
+    if (typeof value !== "string" || !value.includes("&")) return String(value ?? "");
+    if (typeof document === "undefined") {
+      return value
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+    }
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = value;
+    return textarea.value;
+  }
+
+  function renderDecodedText(value) {
+    return escapeHtml(decodeHtmlEntities(String(value ?? "")));
+  }
+
+  function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
+    const source = stripMarkup
+      ? stripHtml(value)
+      : decodeHtmlEntities(String(value ?? ""));
+    return escapeHtml(source);
   }
 
   function shortenText(text, maxLength = 220) {
@@ -96,11 +133,122 @@ export function createRenderer({
     return Array.isArray(entry?.formeln) && entry.formeln.some((formula) => hasMeaningfulText(formula?.eq));
   }
 
+  function isDelimitedMath(value) {
+    const trimmed = String(value || "").trim();
+    if (!trimmed) return false;
+    return (
+      /^\$\$[\s\S]*\$\$$/.test(trimmed)
+      || /^\$[\s\S]*\$$/.test(trimmed)
+      || /^\\\[[\s\S]*\\\]$/.test(trimmed)
+      || /^\\\([\s\S]*\\\)$/.test(trimmed)
+    );
+  }
+
+  function renderTaskMathBlock(value) {
+    const trimmed = String(value || "").trim();
+    if (!trimmed) return "";
+    const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
+    return `<div class="math-block">${escapeHtml(math)}</div>`;
+  }
+
   function summarizeVariables(variables) {
     if (!variables || !Object.keys(variables).length) return "";
     return Object.entries(variables)
       .map(([key, value]) => `$${key}$: ${value}`)
       .join(" | ");
+  }
+
+  const AUTO_VARIABLE_MEANINGS = {
+    "\\hat{\\beta}_0": "geschätzter Achsenabschnitt",
+    "\\hat{\\beta}_1": "geschätzte Steigung / geschätzter Effekt von x auf y",
+    "\\beta_0": "Achsenabschnitt / Grundniveau",
+    "\\beta_1": "partieller Effekt / Steigungsparameter",
+    "\\beta_j": "Koeffizient des j-ten Regressors",
+    "R^2": "Bestimmtheitsmaß: erklärter Anteil der Gesamtstreuung",
+    "SSR": "Residuenquadratsumme / nicht erklärte Streuung",
+    "SST": "Totale Quadratsumme / Gesamtstreuung",
+    "SSE": "erklärte Quadratsumme",
+    "s_{xy}": "empirische Kovarianz bzw. Kreuzprodukt von x und y",
+    "s_x^2": "empirische Varianz von x",
+    "s_y^2": "empirische Varianz von y",
+    "c_0": "Konsum in der Gegenwart",
+    "c_1": "Konsum in der Zukunft",
+    "y_0": "Einkommen in der Gegenwart",
+    "y_1": "Einkommen in der Zukunft",
+    "1+i": "Bruttozinsfaktor",
+    "i": "Zinssatz",
+    "MRS_{0,1}": "Grenzrate der Substitution zwischen Gegenwart und Zukunft",
+    "AfA": "jährlicher Abschreibungsbetrag",
+    "AK": "Anschaffungs- oder Herstellungskosten",
+    "RW": "Restwert",
+    "n": "Nutzungsdauer / Anzahl der Perioden",
+    "BW_t": "Buchwert in Periode t",
+    "t": "Zeitindex / Anzahl abgeschriebener Jahre",
+    "E": "aktueller nominaler Wechselkurs",
+    "E^e": "erwarteter zukünftiger Wechselkurs",
+    "i^*": "Auslandszins",
+    "NX": "Nettoexporte",
+    "\\varepsilon": "realer Wechselkurs",
+    "\\eta_X": "Preiselastizität der Exporte",
+    "\\eta_M": "Preiselastizität der Importe",
+    "\\lambda": "Lagrange-Multiplikator / Schattenpreis",
+    "\\mathcal{L}": "Lagrange-Funktion"
+  };
+
+  const AUTO_VARIABLE_PATTERNS = [
+    /\\hat\{\\beta\}_0/g,
+    /\\hat\{\\beta\}_1/g,
+    /\\beta_0/g,
+    /\\beta_1/g,
+    /\\beta_j/g,
+    /R\^2/g,
+    /\bSSR\b/g,
+    /\bSST\b/g,
+    /\bSSE\b/g,
+    /s_\{xy\}/g,
+    /s_x\^2/g,
+    /s_y\^2/g,
+    /MRS_\{0,1\}/g,
+    /BW_t/g,
+    /\bAfA\b/g,
+    /\bAK\b/g,
+    /\bRW\b/g,
+    /\bc_0\b/g,
+    /\bc_1\b/g,
+    /\by_0\b/g,
+    /\by_1\b/g,
+    /1\+i/g,
+    /i\^\*/g,
+    /\bNX\b/g,
+    /\\varepsilon/g,
+    /\\eta_X/g,
+    /\\eta_M/g,
+    /\\mathcal\{L\}/g,
+    /\\lambda/g,
+    /\bi\b/g,
+    /\bn\b/g,
+    /\bt\b/g,
+    /\bE\^e\b/g,
+    /\bE\b/g
+  ];
+
+  function inferFormulaVariables(formula) {
+    const eq = String(formula?.eq || "");
+    if (!eq.trim()) return [];
+    if (eq.includes("\\text{") || eq.includes("\\mathrm{")) return [];
+
+    const matches = [];
+    AUTO_VARIABLE_PATTERNS.forEach((pattern) => {
+      pattern.lastIndex = 0;
+      const found = eq.match(pattern) || [];
+      found.forEach((token) => {
+        if (!matches.includes(token) && AUTO_VARIABLE_MEANINGS[token]) {
+          matches.push(token);
+        }
+      });
+    });
+
+    return matches.map((token) => [token, AUTO_VARIABLE_MEANINGS[token]]);
   }
 
   function createPracticeTask(text, steps, result) {
@@ -236,19 +384,19 @@ export function createRenderer({
       result: task?.result || "Arbeite den Lösungsweg sauber aus und sichere das Ergebnis formal."
     }));
 
-    if (baseTasks.length >= 10) return baseTasks;
+    if (minimumPracticeTasks <= 0 || baseTasks.length >= minimumPracticeTasks) return baseTasks;
 
     const supplementalTasks = buildSupplementalPracticeTasks(chapter, entry, intuition);
     const seen = new Set(baseTasks.map((task) => stripHtml(task.text).toLowerCase()));
 
     supplementalTasks.forEach((task) => {
       const key = stripHtml(task.text).toLowerCase();
-      if (!key || seen.has(key) || baseTasks.length >= 10) return;
+      if (!key || seen.has(key) || baseTasks.length >= minimumPracticeTasks) return;
       seen.add(key);
       baseTasks.push(task);
     });
 
-    return baseTasks.slice(0, 10);
+    return baseTasks.slice(0, minimumPracticeTasks);
   }
 
   function updateTabButtons(activeTab, availability) {
@@ -312,103 +460,187 @@ export function createRenderer({
     return (warnings && warnings.length > 0) || (sections && sections.length > 1);
   }
 
+  function renderNotationList(variables = {}) {
+    const entries = Object.entries(variables || {});
+    if (!entries.length) return "";
+    return `<ul class="exam-drill-list">${entries
+      .map(([key, value]) => `<li><strong>$${key}$</strong>: ${renderSemanticPlainText(value)}</li>`)
+      .join("")}</ul>`;
+  }
+
+  function renderGuidedTasks(tasks) {
+    if (!tasks.length) {
+      return `<div class="section-block">
+<h3>Geführte Aufgaben</h3>
+<p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p>
+</div>`;
+    }
+
+    return tasks.map((task, index) => renderQuestionCard({
+      label: `Aufgabe ${index + 1}`,
+      question: task.text,
+      buttonId: `solBtn_${index}`,
+      answerId: `sol_${index}`,
+      toggleCall: `window.__toggleSolution(${index})`,
+      answerMarkup: `<h4>Musterlösung</h4>
+${(task.steps || []).map((step, stepIndex) => `
+<div class="step">
+<div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
+<div class="step-body">
+<div class="step-text">${renderSemanticPlainText(step.text || "")}</div>
+${renderTaskMathBlock(step.eq)}
+</div>
+</div>`).join("")}
+<div class="result-badge">Ergebnis: ${renderSemanticPlainText(task.result || "Arbeite das Ergebnis formal zu Ende aus.")}</div>`
+    })).join("");
+  }
+
   function buildExamDrills(chapter, entry, intuition) {
     const drills = [];
     const { sections, warnings } = extractTheorySignals(entry);
+    const formula = entry?.formeln?.[0];
+    const section = sections[0];
+    const secondSection = sections[1];
+    const warning = warnings[0];
+    const tasks = Array.isArray(entry?.aufgaben) ? entry.aufgaben : [];
+    const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
 
     drills.push({
       tag: "Kernidee",
-      question: `Worum geht es beim Konzept "${chapter.title}" in einem klausurtauglichen Kernsatz?`,
-      answer: entry?.motivation || `${chapter.title} ist ein Grundbaustein aus ${chapter.cat}.`
+      question: `Was ist bei "${chapter.title}" der eine Kernsatz, den du in der Klausur sofort parat haben musst?`,
+      answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Kernsatz</span>
+<div class="exam-drill-copy">${intuition?.core || entry?.motivation || `${chapter.title} ist ein Kernbaustein aus ${chapter.cat}.`}</div>
+</div>
+${intuition?.bridge ? `<div class="exam-drill-line">
+<span class="exam-drill-key">Warum das ökonomisch zählt</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(intuition.bridge)}</div>
+</div>` : ""}`
     });
 
-    (entry?.formeln || []).forEach((formula) => {
+    if (formula) {
       drills.push({
         tag: formula.label,
-        question: `Welche Formel bzw. Beziehung musst du für "${formula.label}" bei "${chapter.title}" sicher beherrschen?`,
-        answer: `${formula.eq}${formula.desc ? `<div class="exam-drill-note">${formula.desc}</div>` : ""}`
+        question: `Welche formale Beziehung trägt "${chapter.title}" in der Prüfung, und wie liest du sie richtig?`,
+        answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Formaler Anker</span>
+<div class="math-block">${formula.eq}</div>
+</div>
+<div class="exam-drill-line">
+<span class="exam-drill-key">Bedeutung</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(formula.desc || `Diese Beziehung ist der formale Einstieg in ${chapter.title}.`)}</div>
+</div>
+${formula.variables && Object.keys(formula.variables).length ? `<div class="exam-drill-line">
+<span class="exam-drill-key">Notation</span>
+${renderNotationList(formula.variables)}
+</div>` : ""}`
       });
+    }
 
-      if (formula.variables && Object.keys(formula.variables).length) {
-        drills.push({
-          tag: "Notation",
-          question: `Wie interpretierst du die Variablen in "${formula.label}"?`,
-          answer: `<ul class="exam-drill-list">${Object.entries(formula.variables).map(([key, value]) => `<li><strong>$${key}$</strong>: ${value}</li>`).join("")}</ul>`
-        });
-      }
-    });
+    if (section) {
+      drills.push({
+        tag: "Theorieblock",
+        question: `Wie erklärst du "${section.heading}" so, dass daraus direkt eine saubere Prüfungsantwort wird?`,
+        answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Argumentationskern</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(section.paragraph)}</div>
+</div>
+${formula ? `<div class="exam-drill-line">
+<span class="exam-drill-key">Formale Rückbindung</span>
+<div class="math-block">${formula.eq}</div>
+</div>` : ""}`
+      });
+    }
 
-    (intuition?.exam || []).forEach((pattern, index) => {
+    patterns.slice(0, 2).forEach((pattern, index) => {
       drills.push({
         tag: `Klausurmuster ${index + 1}`,
-        question: `Wenn in der Klausur ${pattern.if} auftaucht, woran musst du denken?`,
-        answer: pattern.then
+        question: `Wenn in der Prüfung ${pattern.if} auftaucht, welcher Zugriff ist dann der richtige?`,
+        answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Erstes Signal</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(pattern.if)}</div>
+</div>
+<div class="exam-drill-line">
+<span class="exam-drill-key">Saubere Reaktion</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(pattern.then)}</div>
+</div>
+${formula ? `<div class="exam-drill-line">
+<span class="exam-drill-key">Formel, die du notieren kannst</span>
+<div class="math-block">${formula.eq}</div>
+</div>` : ""}`
       });
     });
 
-    (entry?.aufgaben || []).forEach((task, index) => {
+    tasks.slice(0, 3).forEach((task, index) => {
       drills.push({
-        tag: `Exam-Aufgabe ${index + 1}`,
-        question: `Wie würdest du die folgende examensnahe Aufgabe zu "${chapter.title}" lösen? ${shortenText(task.text, 180)}`,
-        answer: task.result || "Arbeite mit den im Portal gezeigten Rechenschritten und prüfe das Ergebnis formal."
+        tag: `Prüfungsfrage ${index + 1}`,
+        question: `Wie würdest du die klausurnahe Aufgabe zu "${chapter.title}" lösen? ${task.text}`,
+        answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Lösungslogik</span>
+<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li>${step.text || ""}${renderTaskMathBlock(step.eq)}</li>`).join("")}</ol>
+</div>
+<div class="exam-drill-line">
+<span class="exam-drill-key">Prüfungsresultat</span>
+<div class="result-badge">${task.result || "Arbeite das Ergebnis formal aus."}</div>
+</div>`
       });
     });
 
-    sections.slice(0, 4).forEach((section, index) => {
+    if (warning) {
       drills.push({
-        tag: `Theorie ${index + 1}`,
-        question: `Erkläre den Theorieblock "${section.heading}" in klausurgeeigneter Kurzform.`,
-        answer: section.paragraph
-      });
-    });
-
-    warnings.slice(0, 4).forEach((warning, index) => {
-      drills.push({
-        tag: `Fehler ${index + 1}`,
-        question: `Welcher typische Fehler lauert bei "${chapter.title}" unter dem Stichwort "${warning.label}"?`,
-        answer: warning.body
-      });
-    });
-
-    if (intuition?.bridge) {
-      drills.push({
-        tag: "Verständnis",
-        question: `Wie verknüpfst du die formale Seite von "${chapter.title}" mit ihrer ökonomischen Intuition?`,
-        answer: intuition.bridge
+        tag: "Fehlerkontrolle",
+        question: `Welcher typische Fehler kostet bei "${chapter.title}" schnell Punkte und wie vermeidest du ihn?`,
+        answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Fehlerbild</span>
+<div class="exam-drill-copy"><strong>${renderDecodedText(warning.label)}:</strong> ${renderSemanticPlainText(warning.body)}</div>
+</div>
+<div class="exam-drill-line">
+<span class="exam-drill-key">Saubere Gegenregel</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(intuition?.bridge || entry?.motivation || `${chapter.title} muss immer über die zentrale Definition und den passenden formalen Anker abgesichert werden.`)}</div>
+</div>`
       });
     }
 
-    const seenQuestions = new Set();
-    const uniqueDrills = drills.filter((drill) => {
-      const key = drill.question.trim();
-      if (seenQuestions.has(key)) return false;
-      seenQuestions.add(key);
-      return true;
-    });
-
-    while (uniqueDrills.length < 10) {
-      uniqueDrills.push({
-        tag: "Prüfungsanker",
-        question: `Welchen ersten formalen oder argumentativen Zugriff solltest du bei einer Prüfungsfrage zu "${chapter.title}" wählen?`,
-        answer: entry?.formeln?.[0]?.eq
-          ? `${entry.formeln[0].eq}${entry.formeln[0].desc ? `<div class="exam-drill-note">${entry.formeln[0].desc}</div>` : ""}`
-          : (entry?.motivation || `${chapter.title} gehört zu ${chapter.cat}. Starte mit der zentralen Definition und der ökonomischen Intuition.`)
+    if (secondSection) {
+      drills.push({
+        tag: "Transfer",
+        question: `Welchen zweiten Gedanken solltest du nach dem ersten Kernsatz bei "${chapter.title}" direkt anschließen?`,
+        answer: `<div class="exam-drill-line">
+<span class="exam-drill-key">Anschlussgedanke</span>
+<div class="exam-drill-copy"><strong>${renderDecodedText(secondSection.heading)}:</strong> ${renderSemanticPlainText(secondSection.paragraph)}</div>
+</div>
+${intuition?.analogy ? `<div class="exam-drill-line">
+<span class="exam-drill-key">Denkbild</span>
+<div class="exam-drill-copy">${renderSemanticPlainText(intuition.analogy)}</div>
+</div>` : ""}`
       });
     }
 
-    return uniqueDrills.slice(0, 10);
+    return drills.slice(0, 8);
   }
 
   function renderExamDrillDeck(chapter, entry, intuition) {
-    const drills = buildExamDrills(chapter, entry, intuition);
+    const drills = Array.isArray(examDrillsById?.[chapter.id]) && examDrillsById[chapter.id].length
+      ? examDrillsById[chapter.id]
+      : buildExamDrills(chapter, entry, intuition);
+    function resolveExamDrillMetaLabel(tag, cardLabel) {
+      const normalizedTag = String(tag || "").trim();
+      if (!normalizedTag) return "";
+      if (normalizedTag === cardLabel) return "";
+      if (/^Prüfungsfrage\s+\d+$/u.test(normalizedTag)) return "";
+      if (/^Klausurmuster\s+\d+$/u.test(normalizedTag)) return "Klausurmuster";
+      return normalizedTag;
+    }
+
     return `<div class="exam-drill-panel">
 <div class="practice-section-header">Prüfungstransfer</div>
-<p style="font-size:13px;color:var(--muted);margin-bottom:16px">Diese Kurzfragen verdichten Theorie, Formeln, typische Fehler und vorhandene Aufgaben zu einer kompakten klausurnahen Wiederholung.</p>
 <div class="exam-drill-grid">
 ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, "_")}_${index}`;
+  const cardLabel = `Prüfungsfrage ${index + 1}`;
+  const metaLabel = resolveExamDrillMetaLabel(drill.tag, cardLabel);
   return renderQuestionCard({
-    label: `Prüfungsfrage ${index + 1}`,
+    label: cardLabel,
     question: drill.question,
     buttonId: `examDrillBtn_${drillId}`,
     buttonText: "Lösung anzeigen",
@@ -416,9 +648,8 @@ ${drills.map((drill, index) => {
     toggleCall: `window.__toggleExamDrill('${drillId}')`,
     answerId: `examDrill_${drillId}`,
     cardClass: "exam-drill-card",
-    answerClass: "exam-drill-answer",
     answerMarkup: `<h4>Musterlösung</h4>
-${drill.tag ? `<div class="exam-drill-meta">${drill.tag}</div>` : ""}
+${metaLabel ? `<div class="exam-drill-meta">${metaLabel}</div>` : ""}
 <div class="exam-drill-solution">${drill.answer}</div>`
   });
 }).join("")}
@@ -430,24 +661,22 @@ ${drill.tag ? `<div class="exam-drill-meta">${drill.tag}</div>` : ""}
     label,
     question,
     buttonId,
+    answerId,
+    toggleCall,
+    answerMarkup,
     buttonText = "Lösung anzeigen",
     openButtonText = "Lösung verbergen",
-    toggleCall,
-    answerId,
-    cardClass = "",
-    answerClass = "",
-    answerMarkup = ""
+    cardClass = ""
   }) {
     const classes = ["problem-card", cardClass].filter(Boolean).join(" ");
-    const answerClasses = ["solution-block", answerClass].filter(Boolean).join(" ");
 
     return `<div class="${classes}">
 <div class="prob-num">${label}</div>
-<div class="prob-text">${question}</div>
+<div class="prob-text">${renderSemanticPlainText(question)}</div>
 <div class="prob-actions">
 <button class="btn" id="${buttonId}" data-closed-label="${buttonText}" data-open-label="${openButtonText}" onclick="${toggleCall}">${buttonText}</button>
 </div>
-<div class="${answerClasses}" id="${answerId}" aria-expanded="false">
+<div class="solution-block${cardClass ? ` ${cardClass.replace("card", "answer")}` : ""}" id="${answerId}" aria-expanded="false">
 ${answerMarkup}
 </div>
 </div>`;
@@ -488,37 +717,23 @@ ${answerMarkup}
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Für dieses Konzept stehen Prüfungsfragen bereit. Sie verdichten Definition, Rechenweg, typische Fehler und Transferfragen in einer kompakten Übungsform.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
       return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
     let html = `<div class="panel active mikro1-practice">
-<div class="section-block" style="margin-bottom:24px">
-<h3>Arbeitsmodus</h3>
-<p>Bearbeite zuerst die <strong>Geführten Aufgaben</strong> — sie führen Schritt für Schritt durch den Rechenweg und sichern das Grundverständnis. Danach prüfen die <strong>Prüfungstransfer-Fragen</strong>, ob du Theorie, Formeln und typische Fehler unter Klausurbedingungen abrufen kannst.</p>
+<div class="section-block">
+<div class="exam-drill-line">
+<span class="exam-drill-key">Geführte Aufgaben</span>
+<div class="exam-drill-copy">Hier trainierst du den vollständigen Lösungsweg Schritt für Schritt. Ziel ist nicht nur das Ergebnis, sondern die saubere Reihenfolge der Argumentation.</div>
 </div>
-<div class="practice-section-header">Geführte Aufgaben</div>`;
-    tasks.forEach((task, taskIndex) => {
-      html += renderQuestionCard({
-        label: `Aufgabe ${taskIndex + 1}`,
-        question: task.text,
-        buttonId: `solBtn_${taskIndex}`,
-        buttonText: "Lösung anzeigen",
-        openButtonText: "Lösung verbergen",
-        toggleCall: `window.__toggleSolution(${taskIndex})`,
-        answerId: `sol_${taskIndex}`,
-        answerMarkup: `<h4>Musterlösung</h4>
-${task.steps.map((step, stepIndex) => `
-<div class="step">
-<div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
-<div class="step-body">
-<div class="step-text">${step.text}</div>
-${step.eq ? `<div class="math-block">${step.eq}</div>` : ""}
+<div class="exam-drill-line">
+<span class="exam-drill-key">Prüfungstransfer</span>
+<div class="exam-drill-copy">Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</div>
 </div>
-</div>`).join("")}
-<div class="result-badge">Ergebnis: ${task.result}</div>`
-      });
-    });
+</div>
+<div class="practice-section-header">Geführte Aufgaben</div>
+${renderGuidedTasks(tasks)}`;
     if (chapter) {
       html += renderExamDrillDeck(chapter, entry, intuition);
     }
@@ -554,8 +769,11 @@ ${step.eq ? `<div class="math-block">${step.eq}</div>` : ""}
     }
     let html = '<div class="panel active"><div class="formula-grid">';
     entry.formeln.forEach((formula, formulaIndex) => {
-      const varsHtml = formula.variables
-        ? `<ul class="f-variables">${Object.entries(formula.variables).map(([key, value]) =>
+      const explicitVariables = Object.entries(formula.variables || {}).filter(([, value]) => hasMeaningfulText(value));
+      const inferredVariables = explicitVariables.length ? [] : inferFormulaVariables(formula);
+      const variableEntries = explicitVariables.length ? explicitVariables : inferredVariables;
+      const varsHtml = variableEntries.length
+        ? `<ul class="f-variables">${variableEntries.map(([key, value]) =>
             `<li><span class="f-var-key">$${key}$</span><span class="f-var-sep">-</span><span class="f-var-def">${value}</span></li>`
           ).join("")}</ul>`
         : "";
@@ -564,14 +782,18 @@ ${step.eq ? `<div class="math-block">${step.eq}</div>` : ""}
       const varsHint =
         varsHtml ||
         (formula.desc
-          ? `<p class="f-var-hint" style="${varsHintMuted}">Variablen und Einheiten: in der Beschreibung unter der Gleichung; fehlt eine Größe explizit, ergänze sie aus dem Theorie-Tab oder der Vorlesungsnotation.</p>`
+          ? `<p class="f-var-hint" style="${varsHintMuted}">Bedeutung zuerst, Formel danach: lies die Beschreibung direkt unter der Gleichung und ergänze die Symbollegende aus Theorie-Tab oder Vorlesungsnotation.</p>`
           : `<p class="f-var-hint" style="${varsHintMuted}">Keine Variablenliste hinterlegt: benenne jedes Symbol im Term (Buchstabe, Index, Operator) und ordne es dem Theorie-Tab zu — in Klausuren zählt die saubere Legende.</p>`);
+      const supportNote = inferredVariables.length
+        ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
+        : "";
       html += `<div class="formula-card">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
 <div class="f-eq">${formula.eq}</div>
 ${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
 ${varsHint}
+${supportNote}
 </div>`;
     });
     html += "</div></div>";
@@ -596,75 +818,84 @@ ${varsHint}
   }
 
   function renderIntuitionPanel(id) {
-    const data = normalizeIntuitionData(intuitionById[id]);
+    const data = normalizeIntuitionData(intuitionById[id]) || { core: "", analogy: "", bridge: "", exam: [] };
     if (!hasMeaningfulIntuition(data) && !hasPortalIntuitionSurface(id)) {
       return '<div class="panel active"></div>';
     }
 
     const chapter = chapters.find((entry) => entry.id === id);
-
-    let html = '<div class="panel active">';
-    if (hasMeaningfulText(data.core) || hasMeaningfulText(data.analogy)) {
-      html += `
-<div class="intuition-block">
-<h3>Kernidee</h3>
-${hasMeaningfulText(data.core) ? `<div class="intuition-row"><div class="intuition-text">${data.core}</div></div>` : ""}
-${hasMeaningfulText(data.analogy) ? `<div class="intuition-row" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)">
-<div class="intuition-text" style="color:var(--muted)"><strong>Denkbild:</strong> ${data.analogy}</div>
-</div>` : ""}
-</div>`;
-    }
-    if (data.exam && data.exam.length) {
-      html += "<div class=\"exam-pattern\"><h4>Klausurmuster – Wenn du siehst, dann denk:</h4>";
-      data.exam.forEach((entry) => {
-        html += `<div class="exam-trigger">
-<span class="trigger-if">Wenn:</span>
-<span class="trigger-then">&nbsp;${entry.if}&nbsp;</span>
-<span class="trigger-arrow" aria-hidden="true">→</span>
-<span class="trigger-then">&nbsp;${entry.then}</span>
-</div>`;
-      });
-      html += "</div>";
-    }
-
     const entry = contentById[id];
+    const formula = entry?.formeln?.[0];
     const { sections: theorySections, warnings: theoryWarnings } = extractTheorySignals(entry);
-    const primaryWarning = theoryWarnings[0];
-    const deepSection = theorySections[1];
+    const recognitionItems = [
+      ...(Array.isArray(data.exam) ? data.exam.slice(0, 2).map((pattern) => `Wenn ${pattern.if}, dann ${pattern.then}.`) : []),
+      ...(theorySections[0] ? [`Achte auf ${theorySections[0].heading.toLowerCase()}: ${theorySections[0].paragraph}`] : []),
+      ...(theoryWarnings[0] ? [`Vermeide ${theoryWarnings[0].label.toLowerCase()}: ${theoryWarnings[0].body}`] : [])
+    ].slice(0, 4);
 
-    if (primaryWarning) {
-      html += `<div class="section-block intuition-fehler-block">
-<h3>Fehleranalyse</h3>
-<div class="warn-box"><strong>${primaryWarning.label}:</strong> ${primaryWarning.body}</div>
+    function renderExamPatterns(intuition) {
+      const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
+      if (!patterns.length) return "";
+      return `<div class="intuition-detail intuition-patterns">
+<span class="intuition-detail-label">Klausurmuster</span>
+<div class="intuition-detail-copy">
+${patterns.map((pattern) => `<div class="intuition-pattern-row">
+<span class="intuition-pattern-if">Wenn</span>
+<span class="intuition-pattern-then">${renderSemanticPlainText(pattern.if)}</span>
+<span class="intuition-pattern-arrow" aria-hidden="true">→</span>
+<span class="intuition-pattern-then">${renderSemanticPlainText(pattern.then)}</span>
+</div>`).join("")}
+</div>
 </div>`;
     }
 
-    const showTransferpfad =
-      hasMeaningfulText(data.bridge) ||
-      Boolean(deepSection) ||
-      (data.exam && data.exam.length > 0);
+    return `<div class="panel active mikro1-intuition">
+<div class="section-block intuition-hero">
+<h3>Worum es wirklich geht</h3>
+<p class="intuition-lead">${data.core || entry?.motivation || `${chapter.title} ordnet einen zentralen Mechanismus aus ${chapter.cat}.`}</p>
+${formula ? `<div class="intuition-callout">
+<span class="intuition-callout-label">Formaler Anker</span>
+<div class="intuition-callout-body">
+<div class="math-block">${formula.eq}</div>
+${formula.desc ? `<p>${formula.desc}</p>` : ""}
+</div>
+</div>` : ""}
+</div>
 
-    if (showTransferpfad) {
-      const bridgeCopy = hasMeaningfulText(data.bridge)
-        ? data.bridge
-        : (chapter
-          ? `Verknüpfe „${chapter.title}“ mit Definition und Formalismus aus dem Theorie-Tab; die Klausurmuster oben helfen beim schnellen Erkennen typischer Trigger.`
-          : "Verknüpfe dieses Konzept mit Definition und Formalismus aus dem Theorie-Tab; die Klausurmuster oben helfen beim schnellen Erkennen typischer Trigger.");
-      html += `<div class="section-block intuition-bridge">`;
-      html += `<div class="intuition-bridge-head">
+<div class="intuition-grid">
+<div class="section-block intuition-card">
+<h3>Denkbild</h3>
+<p>${data.analogy || entry?.motivation || `${chapter.title} lässt sich am besten als geordnete Entscheidung unter gegebenen Bedingungen lesen.`}</p>
+${theorySections[0] ? `<p class="intuition-support"><strong>${renderDecodedText(theorySections[0].heading)}:</strong> ${renderSemanticPlainText(theorySections[0].paragraph)}</p>` : ""}
+</div>
+
+<div class="section-block intuition-card">
+<h3>Woran du das Konzept erkennst</h3>
+<ul class="intuition-bullets">
+${recognitionItems.map((item) => `<li>${renderSemanticPlainText(item, { stripMarkup: true })}</li>`).join("")}
+</ul>
+</div>
+</div>
+
+<div class="section-block intuition-bridge">
+<div class="intuition-bridge-head">
 <span class="intuition-bridge-kicker">Transferpfad</span>
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
-<p class="intuition-bridge-copy">${bridgeCopy}</p>
-</div>`;
-      if (deepSection) {
-        html += `<div class="intuition-detail-list"><div class="intuition-detail">
+<p class="intuition-bridge-copy">${data.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
+</div>
+${theorySections[1] || theoryWarnings[0] || (Array.isArray(data.exam) && data.exam.length) ? `<div class="intuition-detail-list">
+${theorySections[1] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>
-<div class="intuition-detail-copy"><strong>${deepSection.heading}:</strong> ${deepSection.paragraph}</div>
-</div></div>`;
-      }
-      html += `</div>`;
-    }
-    return `${html}</div>`;
+<div class="intuition-detail-copy"><strong>${renderDecodedText(theorySections[1].heading)}:</strong> ${renderSemanticPlainText(theorySections[1].paragraph)}</div>
+</div>` : ""}
+${theoryWarnings[0] ? `<div class="intuition-detail">
+<span class="intuition-detail-label">Typischer Fehlgriff</span>
+<div class="intuition-detail-copy"><strong>${renderDecodedText(theoryWarnings[0].label)}:</strong> ${renderSemanticPlainText(theoryWarnings[0].body)}</div>
+</div>` : ""}
+${renderExamPatterns(data)}
+</div>` : ""}
+</div>
+</div>`;
   }
 
   function renderContent(conceptId, tab, initGraphFn) {

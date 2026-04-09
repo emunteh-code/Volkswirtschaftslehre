@@ -67,7 +67,7 @@
 
 **“Manifest-complete”** here means: **`contentManifest.js`** exists, exports **`PROVENANCE_BY_CONCEPT`** driven by per-concept primary paths, **`portalBridge`** (or equivalent) exposes payload where the module uses it, and **full exams** carry an explicit **`platform-added-drill`** (or equivalent honest) stance.
 
-**“Concept-coverage gap”** means: at least one **`CHAPTERS`** id has **empty** primary path list **without** a separate audit doc justifying it (mikro1 **`psubst`** and statistik **`nichtparametrisch`** *do* have explicit in-code `[]` — still a **coverage gap** for strict 100% file anchoring).
+**“Concept-coverage gap”** means: at least one **`CHAPTERS`** id has **empty** primary path list **without** a separate audit doc justifying it (mikro1 **`psubst`** has explicit `[]`; statistik **`nichtparametrisch`** has explicit `[]` **plus** **`statistik-nichtparametrisch-provenance-decision-pass-1.md`** — still a **coverage gap** for strict 100% file anchoring, but **not** an undocumented hole).
 
 ---
 
@@ -88,7 +88,7 @@
 | **mikro1** | **`psubst`:** no VL anchor (`mikro1-provenance-validation-pass-2.md`). Slide-level refs still absent everywhere. |
 | **makro1** | Full exams: contextual Klausur refs but still **drill**, not archival **`direct-source`**. |
 | **makro2** | Same as makro1 for exams (`source_refs: []`). |
-| **statistik** | **`nichtparametrisch`:** explicit `[]` in curated map — needs curation pass if materials support a file anchor. |
+| **statistik** | **`nichtparametrisch`:** explicit `[]` **by decision** (no defensible VL PDF in corpus per text search) — **`docs/audits/statistik-nichtparametrisch-provenance-decision-pass-1.md`**. Re-open **only** if new or proven on-disk source appears. |
 | **oekonometrie** | Large concept set: ongoing risk of **drift** without periodic re-audit vs `source-materials`; not measured in this pass. |
 | **recht** | Text/CSV course: file-level refs exist; **per-paragraph** grounding not in schema. |
 | **jahresabschluss** | Same file-level ceiling. |

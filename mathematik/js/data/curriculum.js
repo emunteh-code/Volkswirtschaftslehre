@@ -256,12 +256,29 @@ export const CURRICULUM = [
         title: 'Funktionen plotten und Nullstellen grob lesen',
         purpose: 'Nutze R nicht zuerst zum Rechnen, sondern zum Sichtbarmachen: Welche Form hat die Funktion, wo liegen Nullstellen und wie verändert sich der Graph?',
         script: 'R.E2: Kurven lesen und vergleichen',
+        learningGoal: 'Du nutzt den Plot als Sichtbarmacher einer quadratischen Funktion und prüfst, wie der Leitkoeffizient Öffnung und Vorzeichenbereiche verändert.',
+        goalBullets: [
+          'Erkenne die Funktionszeile als mathematischen Kern des Blocks.',
+          'Halte Nullstellen und Plotaufbau fest und beobachte nur, was das Vorzeichen des Leitkoeffizienten ändert.',
+          'Nutze den Plot als Beleg für deine algebraische Lesart, nicht als Ersatz dafür.'
+        ],
         code: String.raw`f <- function(x) -1.5 * (x + 1) * (x - 3)
 curve(f, from = -4, to = 5, col = "steelblue", lwd = 2)
 abline(h = 0, lty = 2, col = "grey50")
 points(c(-1, 3), c(0, 0), pch = 19, col = "firebrick")`,
         interpretation: 'Der Plot bestätigt Form, Lage und Nullstellen. R ersetzt die algebraische Lösung nicht, macht aber sichtbar, ob deine qualitative Lesart zur Funktion passt.',
         miniTask: 'Ändere den Leitkoeffizienten auf +1.5 und beschreibe dann, was sich an Öffnung und Vorzeichenbereichen ändert.',
+        taskSteps: [
+          'Finde zuerst die Funktionszeile mit dem Leitkoeffizienten.',
+          'Ändere nur `-1.5` zu `1.5`.',
+          'Führe den Block aus und lies Öffnung, Nullstellenlage und Vorzeichenbereiche gemeinsam.',
+          'Formuliere danach in Worten, was gleich bleibt und was kippt.'
+        ],
+        outputChecklist: [
+          'Der eigentliche Beleg liegt hier im Plot, nicht in einer langen Konsolenausgabe.',
+          'Prüfe zuerst, ob die Nullstellen gleich bleiben.',
+          'Prüfe danach, ob die Parabel nach oben statt nach unten öffnet und wie sich daraus die Vorzeichenbereiche ändern.'
+        ],
         solution: 'Mit positivem Leitkoeffizienten öffnet die Parabel nach oben. Die Nullstellen bleiben gleich, aber zwischen ihnen ist die Funktion nun negativ statt positiv.',
         solutionChanges: [
           'Ersetze nur in der Funktionsdefinition `-1.5` durch `1.5`.',
@@ -496,16 +513,56 @@ points(c(-1, 3), c(0, 0), pch = 19, col = "firebrick")`,
     ],
     rBlocks: [
       {
-        title: 'Summen und Produkte in R sichtbar machen',
-        purpose: 'Die R-Blätter zu Summen und Logik sollen nicht „programmieren lehren“, sondern Notation operationalisieren: Was in Sigma-Schreibweise steht, wird als wiederholte Aggregation sichtbar.',
+        title: 'Sigma-Schreibweise in R lesen',
+        purpose: 'Hier lernst du nicht primär R-Syntax, sondern die Übersetzung zwischen Sigma-/Produktnotation und aggregierendem R-Code.',
         script: 'R.E3: sum() und prod() lesen',
+        learningGoal: 'Du liest eine mathematische Summe als R-Ausdruck und verstehst, was sich ändert, wenn aus $i^2$ ein $i^3$ wird.',
+        goalBullets: [
+          'Lies `sum((1:4)^2)` als `\\sum_{i=1}^4 i^2`.',
+          'Erkenne: `1:4` erzeugt die Folge 1, 2, 3, 4; `^2` oder `^3` verändert jeden Summanden.',
+          'Nutze den Output nur als Zahlenbeleg und benenne die neue Summe selbst in Worten oder Symbolen.'
+        ],
         code: String.raw`x <- 1:5
 sum(x)
 prod(1:4)
 sum((1:4)^2)`,
-        interpretation: 'R zeigt direkt, was das Summenzeichen oder Produktzeichen operational bedeutet: eine Folge wird über alle Indizes aggregiert.',
+        mathCodeMap: [
+          {
+            math: String.raw`$\sum_{i=1}^4 i^2$`,
+            code: 'sum((1:4)^2)',
+            meaning: '1:4 erzeugt die Folge 1,2,3,4; ^2 quadriert jedes Glied; sum(...) addiert alle vier Werte.'
+          },
+          {
+            math: String.raw`$\sum_{i=1}^4 i^3$`,
+            code: 'sum((1:4)^3)',
+            meaning: 'Nach deiner Änderung wird jedes Glied kubiert und erst danach aufsummiert.'
+          },
+          {
+            math: String.raw`$\prod_{i=1}^4 i$`,
+            code: 'prod(1:4)',
+            meaning: 'Diese Zeile zeigt dieselbe Aggregationslogik für Produkte und bleibt heute nur Vergleichsfolie.'
+          }
+        ],
+        coreLine: 'sum((1:4)^2)',
+        coreCue: 'Ändere hier nur den Exponenten der Summanden von 2 auf 3.',
+        coreEffect: 'Der Exponent verändert jeden Summanden der Folge und damit die gesamte Summe.',
+        invariantHint: 'Die Folge 1 bis 4, die Vergleichszeile `prod(1:4)` und der restliche Block bleiben unverändert.',
+        interpretation: 'Der Output zeigt dir nur den Zahlenwert der geänderten Summe. Die eigentliche Lernleistung ist die Rückübersetzung: Welche Sigma-Schreibweise steckt hinter genau dieser R-Zeile?',
         miniTask: 'Ersetze $(1:4)^2$ durch $(1:4)^3$ und formuliere, welche Summe du damit berechnet hast.',
-        solution: 'Mit `sum((1:4)^3)` berechnest du die Summe der Kuben von 1 bis 4. Die R-Schreibweise entspricht genau der Sigma-Notation mit laufendem Index.',
+        taskSteps: [
+          'Finde die Zeile, die eine Summe von Quadraten berechnet.',
+          'Ändere nur den Exponenten von `2` auf `3`.',
+          'Führe den Code aus.',
+          'Schreibe anschließend in Worten oder Symbolen auf, welche Summe jetzt berechnet wird.'
+        ],
+        outputEvidenceHint: 'Im Output erscheint nur der Zahlenwert der neuen Summe. Du musst selbst zurückübersetzen, dass `sum((1:4)^3)` genau `\\sum_{i=1}^4 i^3` bedeutet.',
+        outputChecklist: [
+          'Achte darauf, dass hier nur der Zahlenwert der geänderten Summe erscheint.',
+          'Der Output zeigt nicht die Formel selbst; die Formel musst du mathematisch benennen.',
+          '`prod(1:4)` und `sum(x)` sind hier Vergleichszeilen und nicht die Zielstelle deiner Änderung.'
+        ],
+        transferRule: 'Prüfungsregel: Lies bei `sum((1:n)^k)` immer zuerst Folge, dann Potenz auf jedem Glied, dann die abschließende Aggregation.',
+        solution: 'Mit `sum((1:4)^3)` berechnest du die Summe der Kuben von 1 bis 4, also $\\sum_{i=1}^4 i^3$. Die R-Schreibweise ersetzt das Summenzeichen nicht magisch, sondern schreibt dieselbe Struktur explizit aus.',
         solutionChanges: [
           'Ändere nur den Exponenten in der letzten Zeile von `2` auf `3`.',
           'Die ersten beiden Zeilen bleiben als Vergleich für Summen- und Produktnotation unverändert.'
@@ -514,7 +571,12 @@ sum((1:4)^2)`,
 sum(x)
 prod(1:4)
 sum((1:4)^3)`,
-        pitfalls: ['Nicht die ganze Aufgabe „programmatisch“ denken; zuerst die mathematische Notation verstehen.', 'Bei Sequenzen darauf achten, welche Start- und Endwerte tatsächlich gemeint sind.']
+        pitfalls: [
+          'Nicht denken: „Ich programmiere etwas Neues.“ Du übersetzt hier nur eine bekannte mathematische Struktur in R.',
+          'Verwechsele nicht `sum((1:4)^3)` mit dem Kubieren des Endergebnisses einer Summe. Kubiert werden die einzelnen Summanden.',
+          'Lies `1:4` immer als konkrete Folge 1, 2, 3, 4 und nicht als bloßes Dekorationselement.'
+        ],
+        outputPlaceholder: '[Nach „Code ausführen“ erscheint hier nur der Zahlenwert der geänderten Summe.\nÜbersetze ihn anschließend selbst zurück als `sum((1:4)^3)` bzw. als `Σ i^3`-Schreibweise.]'
       }
     ],
     sourceStatus: 'source-distilled'
@@ -581,7 +643,7 @@ sum((1:4)^3)`,
     ],
     aufgaben: [
       task(
-        String.raw`Prüfen Sie, ob das Produkt $(1\;2)\begin{pmatrix}3\\1\end{pmatrix}$ definiert ist, und berechnen Sie es.`,
+        String.raw`Prüfen Sie, ob das Produkt $\left(1\;2\right)\left(\begin{smallmatrix}3\\1\end{smallmatrix}\right)$ definiert ist, und berechnen Sie es.`,
         [
           step('Dimension prüfen.', String.raw`(1\times 2)\cdot(2\times 1)\Rightarrow (1\times 1)`),
           step('Zeile-mal-Spalte rechnen.', String.raw`1\cdot 3+2\cdot 1=5`),
@@ -716,7 +778,7 @@ B %*% A`,
     ],
     aufgaben: [
       task(
-        String.raw`Bestimmen Sie für $A=\\begin{pmatrix}2&1\\\\4&3\\end{pmatrix}$ die Determinante und entscheiden Sie, ob $A$ invertierbar ist.`,
+        String.raw`Bestimmen Sie für $A=\left(\begin{smallmatrix}2&1\\4&3\end{smallmatrix}\right)$ die Determinante und entscheiden Sie, ob $A$ invertierbar ist.`,
         [
           step('Determinante berechnen.', String.raw`\det(A)=2\cdot 3-1\cdot 4=2`),
           step('Regulär/Singular entscheiden.', String.raw`\det(A)\neq 0 \Rightarrow A \text{ ist regulär}`),
@@ -725,7 +787,7 @@ B %*% A`,
         String.raw`$A$ ist invertierbar; daher besitzt $Ax=b$ für jedes $b$ genau eine Lösung.`
       ),
       task(
-        String.raw`Berechnen Sie Eigenwerte der Matrix $A=\\begin{pmatrix}2&0\\\\0&5\\end{pmatrix}$ und erläutern Sie die Eigenvektoren sprachlich.`,
+        String.raw`Berechnen Sie Eigenwerte der Matrix $A=\left(\begin{smallmatrix}2&0\\0&5\end{smallmatrix}\right)$ und erläutern Sie die Eigenvektoren sprachlich.`,
         [
           step('Charakteristische Gleichung aufstellen.', String.raw`\det(A-\lambda I)=(2-\lambda)(5-\lambda)=0`),
           step('Eigenwerte bestimmen.', String.raw`\lambda_1=2,\qquad \lambda_2=5`),

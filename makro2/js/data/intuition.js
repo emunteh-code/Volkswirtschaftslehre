@@ -65,6 +65,18 @@ export const INTUITION = {
       { if: 'ZP-Kurve / Zahlungsbilanz-Gleichgewicht', then: 'Mehr Y belastet die LB; höheres i zieht Kapital und kann das ausgleichen (positive ZP-Steigung).' }
     ]
   ),
+  zp_kurve: mk(
+    'Die ZP-Kurve markiert alle Kombinationen aus Einkommen und Zins, bei denen die Zahlungsbilanz gerade ausgeglichen ist.',
+    'Wie eine Balance-Linie: Mehr Binnenkonjunktur zieht Importe hoch und muss durch attraktivere Inlandsrenditen für Kapitalzuflüsse kompensiert werden.',
+    'ZP steigt positiv; bei perfekter Kapitalmobilität wird sie fast horizontal um den Weltzins.',
+    [{ if: 'Punkt unterhalb der ZP-Kurve', then: 'Dann liegt ein Zahlungsbilanzdefizit vor; i ist relativ zu Y zu niedrig.' }]
+  ),
+  wirtschaftspolitik_offen: mk(
+    'Im offenen Modell entscheidet nicht nur die Maßnahme, sondern zuerst das Regime. Dieselbe Politik kann je nach Wechselkursordnung stark, schwach oder nahezu neutralisiert wirken.',
+    'Wie dieselbe Medizin in zwei unterschiedlichen Kreisläufen: Der Erstimpuls ist gleich, aber der Gegenkanal ändert sich.',
+    'Regime nennen, Erstimpuls benennen, Wechselkurs- oder ZB-Kanal anschließen, dann Endwirkung formulieren.',
+    [{ if: 'Politikfrage im MF-Modell', then: 'Immer zuerst Wechselkursregime und Kapitalmobilität nennen, dann erst das Ergebnis.' }]
+  ),
   wk_regime: mk(
     'Wechselkursregime verteilen Anpassungslasten unterschiedlich: Entweder bewegt sich der Kurs oder die Binnenwirtschaft muss sich stärker anpassen.',
     'Ein flexibler Kurs ist wie ein Stoßdämpfer; ein fixer Kurs ist wie ein starres Fahrwerk mit mehr Stabilität, aber härteren Schlägen.',
@@ -79,6 +91,12 @@ export const INTUITION = {
     'Wie ein Bank-Run: Wenn alle gleichzeitig an den Ausstieg glauben, wird der Ausstieg gerade dadurch wahrscheinlicher.',
     'Erwartungen können unter fixen Wechselkursen selbst zum Krisenauslöser werden.',
     [{ if: 'Erwartete Abwertung', then: 'Dann steigen die notwendigen Verteidigungszinsen sprunghaft.' }]
+  ),
+  opt_waehrungsraum: mk(
+    'Ein optimaler Währungsraum ist ein Raum, in dem der Verzicht auf den eigenen Wechselkurs gut durch andere Anpassungsmechanismen ersetzt werden kann.',
+    'Wie ein gemeinsamer Schuh: Er passt mehreren nur dann gut, wenn deren Bewegungsmuster ähnlich sind oder das Material stark genug nachgibt.',
+    'OWR-Fragen sind immer Abwägungsfragen zwischen Integrationsgewinnen und verlorener Wechselkursflexibilität.',
+    [{ if: 'Währungsunion bewerten', then: 'Asymmetrische Schocks, Arbeitsmobilität, Lohnflexibilität und Fiskaltransfers zusammen prüfen.' }]
   ),
   phillipskurve: mk(
     'Die Phillipskurve beschreibt den kurzfristigen Zusammenhang zwischen Inflation, Erwartungen und konjunktureller Auslastung.',
@@ -110,6 +128,24 @@ export const INTUITION = {
       { if: 'Zins nahe untergrenze', then: 'Unkonventionelle Kanäle (Bilanz, Forward Guidance) als Zusatz zu Leitzinslogik einordnen.' }
     ]
   ),
+  inflation_targeting: mk(
+    'Inflation Targeting heißt: Preisstabilität ist explizit das Ziel, und die Zentralbank wird an der Zielabweichung gemessen.',
+    'Wie ein Thermostat mit Transparenzpflicht: Nicht jede Abweichung ist sofort ein Fehler, aber jede Abweichung muss erklärt und bearbeitet werden.',
+    'Zielabweichung zuerst, Zusatzindikatoren wie Geldmengen- oder Finanzmarktgrößen danach einordnen.',
+    [{ if: 'Geldmengenwachstum ohne klare Inflationsabweichung', then: 'Nicht mechanisch reagieren; zuerst klären, ob Geldnachfrage oder Finanzmarktstress das Signal verzerren.' }]
+  ),
+  inflation_kosten: mk(
+    'Inflation kostet nicht nur Kaufkraft, sondern verzerrt Entscheidungen, Verträge und relative Preise. Umgekehrt kostet auch ihre Bekämpfung reale Aktivität.',
+    'Wie ein schlecht geeichter Kompass: Schon wenn alle Preise steigen, werden Vergleich und Orientierung schwieriger; beim Neujustieren entstehen wiederum Übergangskosten.',
+    'Bei Disinflation immer sowohl Zielinflation als auch Opferquote mitdenken.',
+    [{ if: 'Schnelle Disinflation', then: 'Arbeitslosigkeits- und Outputkosten explizit nennen; Glaubwürdigkeit kann diese Kosten senken.' }]
+  ),
+  wachstum_fakten: mk(
+    'Wachstumsmodelle sollen Datenmuster erklären: langfristiges Pro-Kopf-Wachstum, stabile Faktoranteile und unterschiedliche Entwicklungspfade zwischen Ländern.',
+    'Wie eine Landkarte vor dem Modellbau: Erst wenn klar ist, welche Landschaft erklärt werden soll, wird die Theorie sinnvoll.',
+    'Kaldor-Fakten und Konvergenz gehören vor Produktionsfunktion und Solow-Gleichungen.',
+    [{ if: 'Armes Land wächst schneller', then: 'Nur von bedingter Konvergenz sprechen, nicht von automatischem Aufholen.' }]
+  ),
   aggregierte_pf: mk(
     'Die aggregierte Produktionsfunktion fasst zusammen, wie Kapital, Arbeit und Produktivität gesamtwirtschaftlichen Output erzeugen.',
     'Wie ein großes Rezept: Nicht eine einzelne Maschine zählt, sondern das Zusammenspiel aller Produktionsfaktoren.',
@@ -126,6 +162,18 @@ export const INTUITION = {
       { if: 'Goldene Regel', then: 'Maximiert langfristigen Konsum c*, nicht automatisch Output Y*.' }
     ]
   ),
+  steady_state: mk(
+    'Der Steady State ist das Niveau, auf dem Investition und Break-even-Investition einander gerade ausgleichen.',
+    'Wie ein Förderband mit genau gleicher Gegenkraft: Es bewegt sich zwar, aber der Abstand zwischen den Markierungen bleibt konstant.',
+    'Mehr Sparen hebt k* und y*, aber ohne technischen Fortschritt nicht das dauerhafte Pro-Kopf-Wachstum.',
+    [{ if: 'Links vom Steady State', then: 'Dann übersteigt sf(k) die Break-even-Investition und k steigt weiter.' }]
+  ),
+  goldene_sparquote: mk(
+    'Die Goldene Sparquote ist nicht die Sparquote mit dem höchsten Output, sondern mit dem höchsten langfristigen Konsum.',
+    'Wie bei einer Maschine: Zu wenig Wartung schadet, aber zu viel Wartung frisst den laufenden Ertrag auf.',
+    'Goldene Regel = Konsummaximum; daher immer Konsum und nicht nur Produktion vergleichen.',
+    [{ if: 'Outputmaximum vs. Konsummaximum', then: 'Nicht verwechseln: die Goldene Regel bezieht sich auf c*, nicht auf y*.' }]
+  ),
   tech_fortschritt: mk(
     'Mit technischem Fortschritt kann Produktion pro Kopf dauerhaft wachsen, ohne dass Kapital allein immer weiter beschleunigen muss.',
     'Bessere Ideen wirken wie zusätzliche, unsichtbare Arbeitskraft pro Beschäftigtem.',
@@ -135,6 +183,12 @@ export const INTUITION = {
       { if: 'Wachstumszerlegung / TFP', then: 'Residuum = Rest nach Faktorbeiträgen; nicht mit perfekter Messung verwechseln.' },
       { if: 'Ländervergleich', then: 'Institutionen und Anreize gehören zur langfristigen Erklärung neben Kapitaltiefstand.' }
     ]
+  ),
+  budgetrestriktion: mk(
+    'Die staatliche Budgetrestriktion ist die Buchhaltung jeder Fiskalpolitik: Neue Schulden entstehen aus Altlast, Zins und Primärsaldo.',
+    'Wie ein Haushaltsheft mit Zinsautomat: Selbst wenn du nichts Neues kaufst, wächst ein alter Kredit weiter.',
+    'Erst Budgetgleichung, dann Primärsaldo, dann Tragfähigkeitsfrage.',
+    [{ if: 'Primärsaldo = 0', then: 'Das stoppt die Zinsdynamik nicht automatisch; Altschulden können weiter wachsen.' }]
   ),
   schuldenquote_dynamik: mk(
     'Für Tragfähigkeit zählt die Schuldenquote: Zins-Wachstums-Differenz und Primärsaldo bestimmen den Pfad.',
@@ -146,6 +200,12 @@ export const INTUITION = {
       { if: 'Ricardianische Äquivalenz', then: 'Steuersenkung ohne Vermögensgeschenk, wenn künftige Steuern antizipiert werden.' },
       { if: 'Schuldenregeln (z. B. 3%/60%)', then: 'Als Stabilisierungs- und Commitment-Logik lesen, nicht als Naturgesetz.' }
     ]
+  ),
+  ricardianisch: mk(
+    'Ricardianische Äquivalenz sagt: Defizitfinanzierung verschiebt unter strengen Annahmen nur Steuern über die Zeit, ohne das Lebenseinkommen zu verändern.',
+    'Wie eine Rechnung, die erst morgen kommt: Wer sie sicher erwartet, fühlt sich heute nicht wirklich reicher.',
+    'Immer zuerst prüfen, welche Voraussetzungen der Äquivalenz realistisch erfüllt sind.',
+    [{ if: 'Steuersenkung heute', then: 'Fragen, ob Haushalte spätere Steuererhöhungen antizipieren und ob sie liquide genug sind, darauf zu sparen.' }]
   ),
   schuldenfinanzierung_monetarisierung: mk(
     'Finanzierungsmodus ist eine eigene Makroentscheidung: Kreditaufnahme und Monetarisierung verteilen Lasten unterschiedlich über Zins- und Inflationskanal.',

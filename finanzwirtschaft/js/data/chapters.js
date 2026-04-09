@@ -18,15 +18,18 @@ export const CHAPTERS = [
   { id: 'intertemporale_wahl', title: 'Intertemporale Wahl, Zeitpräferenzen und Budgetgerade', cat: 'Investition', short: 'Intertemporal' },
   { id: 'kapitalwert_fisher', title: 'Kapitalwert, Fisher-Separation und unvollkommener Kapitalmarkt', cat: 'Investition', short: 'Kapitalwert' },
   { id: 'auf_abzinsen', title: 'Aufzinsen, Abzinsen und Gegenwartswerte', cat: 'Investition', short: 'Zeitwert' },
-  { id: 'renten_endwert', title: 'Rentenfaktoren, Endwert und vollständiger Finanzplan', cat: 'Investition', short: 'Renten' },
+  { id: 'renten_endwert', title: 'Rentenfaktoren, Barwert und Endwert', cat: 'Investition', short: 'Renten' },
+  { id: 'annuitaeten_finanzplan', title: 'Annuitätenmethode und vollständiger Finanzplan', cat: 'Investition', short: 'Annuität' },
   { id: 'izf_kapitalwertfunktion', title: 'Interner Zinsfuß und Kapitalwertfunktion', cat: 'Investition', short: 'IZF' },
   { id: 'izf_grenzen', title: 'IZF: Wiederanlageprämisse, Mehrdeutigkeit und Grenzen', cat: 'Investition', short: 'IZF-Grenzen' },
-  { id: 'unsicherheit', title: 'Entscheidungen unter Unsicherheit', cat: 'Unsicherheit & Finanzierung', short: 'Unsicherheit' },
+  { id: 'unsicherheit', title: 'Unsicherheit: Zustände, Dominanz und Erwartungswert', cat: 'Unsicherheit & Finanzierung', short: 'Unsicherheit' },
+  { id: 'risikoadjustierter_kapitalwert', title: 'Risikoadjustierter Kapitalwert und Sicherheitsabschläge', cat: 'Unsicherheit & Finanzierung', short: 'Risiko-KW' },
   { id: 'bezugsrecht', title: 'Kapitalerhöhung, Bezugsrecht und Verwässerungsschutz', cat: 'Unsicherheit & Finanzierung', short: 'Bezugsrecht' },
   { id: 'eigenkapitalkosten', title: 'Kosten des Eigenkapitals', cat: 'Unsicherheit & Finanzierung', short: 'EK-Kosten' },
   { id: 'fremdkapitalkosten', title: 'Kosten des Fremdkapitals', cat: 'Unsicherheit & Finanzierung', short: 'FK-Kosten' },
-  { id: 'wacc_leverage', title: 'WACC und Leverage', cat: 'Unsicherheit & Finanzierung', short: 'WACC/Lev' },
-  { id: 'modigliani_miller', title: 'Modigliani-Miller als Benchmark', cat: 'Unsicherheit & Finanzierung', short: 'MM' }
+  { id: 'wacc', title: 'Gesamtkapitalkosten (WACC)', cat: 'Kapitalstruktur', short: 'WACC' },
+  { id: 'wacc_leverage', title: 'Leverage-Effekt', cat: 'Kapitalstruktur', short: 'Lev.' },
+  { id: 'modigliani_miller', title: 'Modigliani-Miller als Benchmark', cat: 'Kapitalstruktur', short: 'MM' }
 ];
 
 export const CONTENT = {
@@ -119,21 +122,32 @@ export const CONTENT = {
     motivation: 'Sobald Finanzwirtschaft nicht mehr nur als Innenfinanzierung gelesen wird, tauchen Kapitalmarktpreise, Präferenzen und Institutionen auf. Genau hier beginnt die moderne Finanzierungstheorie.',
     theorie: [
       section(
-        'Marktpreise als Tauschpreise über die Zeit',
-        `<p>Kapitalmärkte übersetzen Zeit in Preise. Zinssätze und Renditen sind damit keine Dekoration, sondern die objektive Marktlogik, mit der Gegenwarts- und Zukunftszahlungen gegeneinander bewertet werden.</p>`
+        'Moderne Betrachtungsweise als Perspektivwechsel',
+        `<p>Die moderne Finanzwirtschaft fragt nicht mehr nur nach Liquidität und Mittelherkunft, sondern nach wertmaximierenden Entscheidungen aus Sicht der Kapitalgeber. Marktpreise und Präferenzen werden damit zu Kernbausteinen der Analyse.</p>`
       ),
       section(
-        'Rolle der Präferenzen',
+        'Marktpreise als Tauschpreise über die Zeit',
+        `<p>Kapitalmärkte übersetzen Zeit in Preise. Zinssätze und Renditen sind damit keine Dekoration, sondern die objektive Marktlogik, mit der Gegenwarts- und Zukunftszahlungen gegeneinander bewertet werden.</p>
+         ${mathBlock(String.raw`$$\text{heutige Zahlung} \xleftrightarrow[\text{Abzinsung}]{\text{Aufzinsung}} \text{künftige Zahlung}$$`)}
+      `
+      ),
+      section(
+        'Rolle von Präferenzen und Nutzen',
         `<p>Entscheider bewerten Gegenwart und Zukunft nicht neutral. Zeitpräferenzen entscheiden darüber, ob heutiger Konsum, Ersparnis oder spätere Rückflüsse attraktiver wirken. Marktpreis und Präferenz treffen sich später in der intertemporalen Wahl.</p>`
       ),
       section(
         'Kapitalmarktorientierung: Bewertung und Benchmark',
         `<p>In der kapitalmarktorientierten Ausprägung stehen Preisbildung auf vollkommenen Märkten und die Ableitung von Bewertungs- und Entscheidungskriterien im Vordergrund. Der vollkommene Kapitalmarkt ist dabei ein analytischer Referenzpunkt: Er liefert klare Tausch- und Bewertungslogik, ersetzt aber nicht die Beschreibung realer Friktionen.</p>
          ${warn('Verwechslungsfehler:', 'Kapitalmarktorientierung meint nicht „die Realität ist reibungslos“, sondern: Zins und Marktpreis strukturieren Vergleiche über die Zeit und liefern unter klaren Annahmen eindeutige Investitionsregeln.')}`
+      ),
+      section(
+        'Warum diese Seite klausurrelevant ist',
+        `<p>Viele Klausurfehler entstehen nicht in der Rechnung, sondern davor: Studierende sehen Zins, Preis und Präferenz nicht als gemeinsame Entscheidungslogik. Genau deshalb ist diese Seite kein Vorspann, sondern die methodische Brücke zum gesamten Investitionsblock.</p>`
       )
     ].join(''),
     formeln: [
-      { label: 'Marktpreis der Zeit', eq: String.raw`\text{Zins} = \text{Preis des Zeittausches}`, desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.' }
+      { label: 'Marktpreis der Zeit', eq: String.raw`\text{Zins} = \text{Preis des Zeittausches}`, desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.', variables: { 'Zins': 'Marktpreis, zu dem Konsum zwischen Zeitpunkten getauscht wird' } },
+      { label: 'Entscheidungslogik', eq: String.raw`\text{Zahlung} + \text{Zeitpunkt} + \text{Marktpreis} \Rightarrow \text{Bewertung}`, desc: 'Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.' }
     ],
     aufgaben: [
       task(
@@ -151,6 +165,15 @@ export const CONTENT = {
           step('Grenze einordnen.', String.raw`\text{Reale Märkte weichen durch Information, Transaktionskosten und weitere Friktionen ab.}`)
         ],
         'Der vollkommene Kapitalmarkt ist ein Bewertungs- und Argumentationsrahmen, keine Behauptung, dass alle Märkte reibungslos sind.'
+      ),
+      task(
+        'Eine Aufgabe nennt Marktzinssatz, Konsumzeitpunkte und Alternativen. Was ist der erste strukturierende Gedanke?',
+        [
+          step('Objekt klären.', String.raw`\text{Es geht nicht nur um Finanzierung, sondern um Bewertung zeitverschiedener Zahlungen.}`),
+          step('Preisfunktion benennen.', String.raw`\text{Der Marktzinssatz übersetzt diese Zahlungen auf einen gemeinsamen Vergleichsmaßstab.}`),
+          step('Konsequenz ziehen.', String.raw`\text{Erst danach folgt die Wahl des passenden Bewertungsverfahrens.}`)
+        ],
+        'Sobald Marktzinssatz und Zeitpunkte gemeinsam auftauchen, ist die Aufgabe als Bewertungsproblem über den Zeittausch zu lesen.'
       )
     ]
   },
@@ -162,10 +185,23 @@ export const CONTENT = {
         'Warum Institutionen wie Banken entstehen',
         `<p>In vollkommenen Märkten wären viele Finanzintermediäre theoretisch entbehrlich. In der Wirklichkeit senken Banken Suchkosten, bündeln Informationen, überwachen Kreditnehmer und transformieren Fristen. Sie sind damit Antworten auf Marktunvollkommenheit.</p>
          ${warn('Abstraktionsfehler:', 'Die Theorie vollkommener Märkte ist ein Benchmark, keine Beschreibung der Wirklichkeit.')}`
+      ),
+      section(
+        'Welche Friktionen gemeint sind',
+        `<p>Die Quelle für Institutionen sind nicht bloß „komplizierte Märkte“, sondern konkrete Friktionen: Informationsasymmetrien, Suchkosten, Transaktionskosten, Überwachungsprobleme und unvollständige Verträge. Erst diese Reibungen machen Intermediation ökonomisch wertvoll.</p>`
+      ),
+      section(
+        'Kapitalmarktorientierung versus Institutionenorientierung',
+        `<p>Die kapitalmarktorientierte Sicht fragt: Was würden Preise auf vollkommenen Märkten leisten? Die institutionenorientierte Sicht fragt: Welche Organisationen und Regeln braucht man gerade deshalb, weil reale Märkte das nicht vollständig leisten?</p>`
+      ),
+      section(
+        'Klausurlogik',
+        `<p>Wenn in einer Aufgabe Banken, Crowdfunding, Überwachung oder asymmetrische Information auftauchen, ist das fast immer ein Signal dafür, dass nicht mehr nur die reine Zinslogik, sondern institutionelle Problemlösung erklärt werden soll.</p>`
       )
     ].join(''),
     formeln: [
-      { label: 'Marktunvollkommenheit', eq: String.raw`\text{Informationskosten} + \text{Transaktionskosten} \Rightarrow \text{Institutionen}`, desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' }
+      { label: 'Marktunvollkommenheit', eq: String.raw`\text{Informationskosten} + \text{Transaktionskosten} \Rightarrow \text{Institutionen}`, desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' },
+      { label: 'Orientierungsfrage', eq: String.raw`\text{vollkommener Markt?} \;\text{nein} \Rightarrow \text{Institution / Vertrag / Kontrolle prüfen}`, desc: 'Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.' }
     ],
     aufgaben: [
       task(
@@ -175,6 +211,22 @@ export const CONTENT = {
           step('Friktionen als Begründung ergänzen.', String.raw`\text{In der Wirklichkeit rechtfertigen Informations-, Such- und Überwachungskosten die Bankfunktion.}`)
         ],
         'Banken werden gerade deshalb relevant, weil reale Märkte unvollkommen sind und Friktionen direkte Finanzierung verteuern.'
+      ),
+      task(
+        'Eine Aufgabe spricht von Informationsasymmetrien zwischen Kapitalgebern und Unternehmen. Welche Blickrichtung ist jetzt gefragt?',
+        [
+          step('Signal lesen.', String.raw`\text{Informationsasymmetrie ist kein Preisdetail, sondern ein Institutionssignal.}`),
+          step('Konsequenz nennen.', String.raw`\text{Gesucht sind Kontroll-, Vermittlungs- oder Vertragsmechanismen statt reiner Barwertarithmetik.}`)
+        ],
+        'Sobald Informationsasymmetrie im Vordergrund steht, ist institutionenorientierte Problemlösung gefragt.'
+      ),
+      task(
+        'Warum ist „vollkommener Kapitalmarkt“ für dieses Kapitel trotzdem wichtig, obwohl reale Märkte unvollkommen sind?',
+        [
+          step('Benchmarkfunktion benennen.', String.raw`\text{Er zeigt, welche Funktionen Preise unter idealen Bedingungen übernehmen könnten.}`),
+          step('Abweichung deuten.', String.raw`\text{Gerade die Differenz zur Realität erklärt den Bedarf an Institutionen.}`)
+        ],
+        'Der Benchmark ist didaktisch wertvoll, weil erst an ihm sichtbar wird, warum reale Institutionen überhaupt gebraucht werden.'
       )
     ]
   },
@@ -232,6 +284,10 @@ export const CONTENT = {
       `
       ),
       section(
+        'Welche Kosten in den Kapitalwert gehören',
+        `<p>Für die Kapitalwertrechnung zählen nur zahlungswirksame und entscheidungsrelevante Größen. Versunkene Kosten gehören nicht hinein; Opportunitätskosten dagegen schon. Genau diese Trennung ist im Kurs ausdrücklich klausurrelevant.</p>`
+      ),
+      section(
         'Fisher-Separation',
         `<p>Bei vollkommenem Kapitalmarkt kann die Investitionsentscheidung von der Konsumentscheidung getrennt werden. Zuerst wird das Projekt mit dem höchsten positiven Kapitalwert gewählt, anschließend wird entlang des Kapitalmarkts der individuell gewünschte Konsumpfad eingestellt.</p>`
       ),
@@ -239,9 +295,14 @@ export const CONTENT = {
         'Grenzen am unvollkommenen Kapitalmarkt',
         `<p>Unterscheiden sich Soll- und Habenzins oder sind Finanzierungsbedingungen asymmetrisch, zerfällt diese Trennung. Dann beeinflussen Marktunvollkommenheiten die Investitionsentscheidung direkt.</p>
          ${warn('Kapitalwertfehler:', 'Der Kapitalwert ist kein „Gewinn in Prozent“, sondern ein absoluter Vermögenseffekt relativ zur Kapitalmarktalternative.')}`
+      ),
+      section(
+        'Entscheidungsprobleme sauber unterscheiden',
+        `<p>Der Kurs trennt drei Fälle: Vorteilhaftigkeitsproblem, mehrere voneinander unabhängige Projekte und Wahlproblem bei Ausschlussalternativen. Die Regel ändert sich leicht je nach Struktur, aber der Kapitalwert bleibt die führende Vermögensgröße.</p>`
       )
     ].join(''),
     formeln: [
+      { label: 'Kapitalwert', eq: String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+i)^t}$$`, desc: 'Alle entscheidungsrelevanten Zahlungen werden auf t=0 bezogen.', variables: { 'A_0': 'Anfangsauszahlung / Anschaffungsauszahlung', 'CF_t': 'Nettozahlung der Periode t', 'i': 'relevanter Kalkulationszins', 'K_0': 'Vermögenszuwachs im Zeitpunkt 0' } },
       { label: 'Kapitalwertregel', eq: String.raw`$$K_0 > 0 \Rightarrow \text{vorteilhaft}$$`, desc: 'Positiver Kapitalwert bedeutet Vermögenszuwachs.' },
       { label: 'Wahlregel', eq: String.raw`\max K_0`, desc: 'Bei Ausschlussalternativen wählt man das Projekt mit dem höchsten positiven Kapitalwert.' }
     ],
@@ -270,6 +331,15 @@ export const CONTENT = {
           step('Ökonomisch einordnen.', String.raw`\text{Ein höherer Prozentwert kann trotzdem weniger absoluten Vermögenszuwachs erzeugen.}`)
         ],
         'Für Vermögensmaximierung wird das Projekt mit höherem Kapitalwert gewählt, auch wenn dessen IZF niedriger ist.'
+      ),
+      task(
+        'Warum müssen versunkene Kosten und Opportunitätskosten in einer Kapitalwertaufgabe unterschiedlich behandelt werden?',
+        [
+          step('Versunkene Kosten einordnen.', String.raw`\text{Sie ändern sich durch die aktuelle Entscheidung nicht mehr und gehören nicht in } K_0.`),
+          step('Opportunitätskosten einordnen.', String.raw`\text{Entgangene Alternativzahlungen sind entscheidungsrelevant und müssen mitgerechnet werden.}`),
+          step('Entscheidungslogik schließen.', String.raw`\text{Nur zahlungswirksame und entscheidungsrelevante Größen dürfen das Vermögensurteil beeinflussen.}`)
+        ],
+        'Kapitalwertlogik heißt nicht „alle Zahlen eintragen“, sondern nur die entscheidungsrelevanten Zahlungswirkungen sauber erfassen.'
       )
     ]
   },
@@ -327,7 +397,7 @@ export const CONTENT = {
   },
 
   renten_endwert: {
-    motivation: 'Mehrperiodige Investitionsaufgaben werden erst dann klausursicher, wenn Einmal- und Rentenzahlungen sauber in Kapitalwert, Endwert und vollständigen Finanzplan übersetzt werden können.',
+    motivation: 'Mehrperiodige Investitionsaufgaben werden erst dann klausursicher, wenn regelmäßige Zahlungen sauber über Rentenfaktoren, Barwert und Endwert gelesen werden können.',
     theorie: [
       section(
         'Rentenfaktoren',
@@ -336,24 +406,21 @@ export const CONTENT = {
       `
       ),
       section(
-        'Kapitalwertmethode und Endwertmethode',
-        `<p>Beide Methoden bewerten dieselbe Zahlungsreihe, nur auf unterschiedlichen Zeitpunkten. Kapitalwert bezieht sich auf den Startpunkt, Endwert auf den Endpunkt. Bei konsistenter Anwendung führen beide zur gleichen Entscheidung.</p>`
+        'Barwert- und Endwertsicht',
+        `<p>Barwert- und Endwertmethode bewerten dieselbe Zahlungsreihe, nur auf unterschiedlichen Zeitpunkten. Barwert bezieht sich auf den Startpunkt, Endwert auf den Endpunkt. Bei konsistenter Anwendung führen beide zur gleichen Entscheidung.</p>
+         ${mathBlock(String.raw`$$EW_n = K_0(1+i)^n$$`)}
+      `
       ),
       section(
-        'Vollständiger Finanzplan',
-        `<p>Der vollständige Finanzplan zeigt periodisch, wann Investition, Rückflüsse und eventuelle Anschlussfinanzierung oder Wiederanlage anfallen. Dadurch wird sichtbar, dass die Investitionsrechnung immer zugleich eine Finanzierungsrechnung ist.</p>
-         ${warn('Methodenfehler:', 'Kapitalwert- und Endwertmethode sind keine konkurrierenden Entscheidungsregeln, sondern zwei Perspektiven auf dieselbe Zahlungsreihe.')}`
-      ),
-      section(
-        'Annuitätenmethode',
-        `<p>Die Annuitätenmethode drückt den Kapitalwert einer Investition als äquivalente konstante Periodenzahlung aus: dieselbe Zahlungsreihe wird in eine Rente mit gleichem Barwert übersetzt. Damit lässt sich der Vermögenszuwachs der Investition als gleichmäßiger Periodenbeitrag interpretieren und mit Finanzierungsraten vergleichen.</p>
-         ${mathBlock(String.raw`$$\text{Annuität } a = \frac{K_0}{RBWF(n,i)} \quad\text{bzw.}\quad K_0 = a \cdot RBWF(n,i)$$`)}`
+        'Methodenauswahl in Aufgaben',
+        `<p>Wenn regelmäßige Zahlungen gegeben sind, ist nicht jede Aufgabe automatisch eine Annuitätenaufgabe. Erst die Zielgröße entscheidet: Wird ein Gegenwartswert, ein Zukunftswert oder eine periodische Äquivalentgröße gesucht? Genau diese Auswahl ist klausurentscheidend.</p>
+         ${warn('Methodenfehler:', 'Rentenfaktor, Barwert und Endwert sind keine konkurrierenden Regeln, sondern unterschiedliche Übersetzungen derselben Zahlungsstruktur.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Rentenbarwertfaktor', eq: String.raw`$$RBWF = \frac{1-(1+i)^{-n}}{i}$$`, desc: 'Periodische Zahlungen werden auf den Gegenwartszeitpunkt gebracht.' },
-      { label: 'Äquivalenz', eq: String.raw`$$EW_n = K_0 (1+i)^n$$`, desc: 'Endwert und Kapitalwert führen bei gleichem Zinssatz zum selben Urteil.' },
-      { label: 'Annuität aus Kapitalwert', eq: String.raw`$$a = \frac{K_0}{RBWF(n,i)}$$`, desc: 'Äquivalente Rente zum Kapitalwert (Kurslogik).' }
+      { label: 'Rentenbarwertfaktor', eq: String.raw`$$RBWF = \frac{1-(1+i)^{-n}}{i}$$`, desc: 'Periodische Zahlungen werden auf den Gegenwartszeitpunkt gebracht.', variables: { 'i': 'periodischer Zinssatz', 'n': 'Anzahl der Perioden' } },
+      { label: 'Rentenendwertfaktor', eq: String.raw`$$REWF = \frac{(1+i)^n-1}{i}$$`, desc: 'Periodische Zahlungen werden auf den Endzeitpunkt gebracht.', variables: { 'i': 'periodischer Zinssatz', 'n': 'Anzahl der Perioden' } },
+      { label: 'Äquivalenz', eq: String.raw`$$EW_n = K_0 (1+i)^n$$`, desc: 'Endwert und Kapitalwert führen bei gleichem Zinssatz zum selben Urteil.' }
     ],
     aufgaben: [
       task(
@@ -365,12 +432,76 @@ export const CONTENT = {
         'Die Methoden unterscheiden nur den Bewertungszeitpunkt; deshalb muss das Vorteilhaftigkeitsurteil gleich bleiben.'
       ),
       task(
+        'Wann ist in einer Aufgabe der Rentenbarwertfaktor der richtige Zugriff?',
+        [
+          step('Zahlungsstruktur lesen.', String.raw`\text{Gesucht ist eine Reihe gleicher periodischer Zahlungen.}`),
+          step('Bewertungszeitpunkt bestimmen.', String.raw`\text{Wenn der Wert heute bzw. am Startpunkt gesucht ist, führt der Rentenbarwertfaktor.}`),
+          step('Abgrenzung ergänzen.', String.raw`\text{Wird dagegen der Zukunftswert gesucht, ist der Rentenendwertfaktor naheliegender.}`)
+        ],
+        'Rentenfaktoren sind nur dann passend, wenn eine echte periodische Gleichzahlungsstruktur vorliegt und der Zielzeitpunkt sauber bestimmt ist.'
+      ),
+      task(
+        'Warum ist „regelmäßige Zahlung“ allein noch kein vollständiger Methodenhinweis?',
+        [
+          step('Struktur von Zielgröße trennen.', String.raw`\text{Regelmäßige Zahlungen sagen noch nicht, ob Barwert, Endwert oder äquivalente Rente gesucht ist.}`),
+          step('Methodenwahl schließen.', String.raw`\text{Erst Zielzeitpunkt und Entscheidungsfrage legen das passende Verfahren fest.}`)
+        ],
+        'Finanzwirtschaftliche Methodenwahl startet nicht bei der Formel, sondern bei Zahlungsstruktur plus Zielgröße.'
+      )
+    ]
+  },
+
+  annuitaeten_finanzplan: {
+    motivation: 'Annuität und vollständiger Finanzplan machen aus bloßer Zeitwertrechnung eine echte Entscheidungs- und Finanzierungslogik über mehrere Perioden.',
+    theorie: [
+      section(
+        'Annuität als äquivalente Periodengröße',
+        `<p>Die Annuitätenmethode drückt den Kapitalwert einer Investition als äquivalente konstante Periodenzahlung aus: dieselbe Zahlungsreihe wird in eine Rente mit gleichem Barwert übersetzt. Damit wird der Wertbeitrag einer Investition periodisch lesbar und mit anderen periodischen Größen vergleichbar.</p>
+         ${mathBlock(String.raw`$$a = \frac{K_0}{RBWF(n,i)} = K_0 \cdot WGF(n,i)$$`)}
+      `
+      ),
+      section(
+        'Vollständiger Finanzplan',
+        `<p>Der vollständige Finanzplan zeigt periodisch, wann Investition, Rückflüsse, Zinsen, Tilgung und möglicher Wertzuwachs anfallen. Dadurch wird sichtbar, dass Investitionsrechnung immer zugleich auch eine Finanzierungsrechnung ist.</p>`
+      ),
+      section(
+        'Wann die Annuität besonders nützlich ist',
+        `<p>Die Annuität ist besonders hilfreich, wenn Projekte mit unterschiedlichen Laufzeiten oder periodischen Finanzierungsraten verglichen werden sollen. Sie übersetzt den gesamten Vermögenseffekt in eine gleichmäßige periodische Entscheidungsgröße.</p>`
+      ),
+      section(
+        'Klausurfehler',
+        `<p>Typische Fehler sind: Kapitalwert und Annuität gegeneinander auszuspielen, Laufzeitäquivalenz zu ignorieren oder den vollständigen Finanzplan als bloßes Rechenschema statt als Kapitalbedarfslogik zu behandeln.</p>
+         ${warn('Äquivalenzfehler:', 'Annuitätenmethode und Kapitalwertmethode widersprechen sich nicht. Die Annuität ist nur eine andere Lesart desselben Vermögenseffekts.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Annuität aus Kapitalwert', eq: String.raw`$$a = \frac{K_0}{RBWF(n,i)}$$`, desc: 'Äquivalente konstante Periodenzahlung zum Kapitalwert.', variables: { 'a': 'äquivalente Periodenzahlung / Annuität', 'K_0': 'Kapitalwert im Zeitpunkt 0', 'RBWF(n,i)': 'Rentenbarwertfaktor bei Laufzeit n und Zinssatz i' } },
+      { label: 'Wiedergewinnungsfaktor', eq: String.raw`$$WGF(n,i) = \frac{(1+i)^n i}{(1+i)^n-1}$$`, desc: 'Kehrwert des Rentenbarwertfaktors.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum ist die Annuität bei Projektvergleich oft anschaulicher als der nackte Kapitalwert?',
+        [
+          step('Übersetzungsleistung nennen.', String.raw`\text{Sie macht den Vermögenseffekt als konstante periodische Größe lesbar.}`),
+          step('Vergleichsvorteil erklären.', String.raw`\text{Damit lassen sich Projekte oder Finanzierungsraten mit unterschiedlicher Laufzeit leichter vergleichen.}`)
+        ],
+        'Die Annuität verdichtet den Kapitalwert in eine periodische Entscheidungsgröße und erleichtert dadurch projektübergreifende Vergleiche.'
+      ),
+      task(
         'Wozu dient der vollständige Finanzplan über die bloße Endwertrechnung hinaus?',
         [
           step('Periodische Sicht nennen.', String.raw`\text{Er zeigt, wann Finanzierungslücken oder Zwischenrückflüsse auftreten.}`),
           step('Verbindung von Investition und Finanzierung erklären.', String.raw`\text{Er macht sichtbar, dass Investitionsrechnung immer auch eine Kapitalbedarfsfrage ist.}`)
         ],
         'Der vollständige Finanzplan verbindet Zeitwertrechnung mit echter Finanzierungslogik über alle Perioden.'
+      ),
+      task(
+        'Warum ist fehlende Laufzeitäquivalenz bei Annuitätenvergleichen eine echte Klausurfalle?',
+        [
+          step('Problem benennen.', String.raw`\text{Gleiche Methode heißt nicht automatisch gleiche Vergleichsbasis.}`),
+          step('Lösung nennen.', String.raw`\text{Die Projekte müssen auf eine gemeinsame periodische Vergleichslogik gebracht werden.}`)
+        ],
+        'Annuitäten sind nur dann fair vergleichbar, wenn die zugrunde liegende Laufzeitproblematik sauber adressiert wird.'
       )
     ]
   },
@@ -476,20 +607,24 @@ export const CONTENT = {
         `<p>Unsicherheit wird im Kurs über Zustände und zustandsabhängige Ergebnisse modelliert. Für jede Alternative wird gefragt, welche Auszahlung in welchem Zustand entsteht und wie plausibel diese Zustände sind.</p>`
       ),
       section(
-        'Dominanz, Erwartungswert und Verlustwahrscheinlichkeit',
+        'Dominanz als erste Vorauswahl',
+        `<p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Erst wenn keine Alternative dominiert wird, lohnt sich die feinere Analyse über Erwartungswert und Risiko.</p>`
+      ),
+      section(
+        'Erwartungswert, Varianz und Verlustseite',
         `<p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Danach kommen Erwartungswert, Verlustwahrscheinlichkeit und gegebenenfalls weitere Risikomaße ins Spiel.</p>
-         ${mathBlock(String.raw`$$E(X) = \sum_{s} p_s x_s$$`)}
+         ${mathBlock(String.raw`$$E(X) = \sum_{s} p_s x_s \qquad Var(X)= \sum_s p_s(x_s-E(X))^2$$`)}
       `
       ),
       section(
-        'Risikoadjustierter Kapitalwert',
-        `<p>Risiko lässt sich etwa über einen Risikozuschlag im Diskontsatz oder über Sicherheitsäquivalente in den Cashflows berücksichtigen. Wichtig ist, dass das Fach Risiko nicht ignoriert, sondern explizit in die Entscheidungsregel übersetzt.</p>
+        'Interpretation statt bloßer Kennzahl',
+        `<p>Ein hoher Erwartungswert reicht nicht automatisch. Gerade im Kurs ist wichtig, dass Verlustwahrscheinlichkeit, downside risk und Streuung mitgelesen werden. Die Entscheidung ist deshalb immer eine Abwägung von Rendite und Risiko statt einer simplen Mittelwertregel.</p>
          ${warn('Unsicherheitsfehler:', 'Ein hoher Erwartungswert genügt noch nicht, wenn die Verlustseite oder die Streuung des Projekts nicht mitgelesen wird.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Erwartungswert', eq: String.raw`$$E(X) = \sum_s p_s x_s$$`, desc: 'Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.' },
-      { label: 'Risikozuschlag', eq: String.raw`$$K_0^{risk} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)}{(1+i+z)^t}$$`, desc: 'Risiko kann über einen höheren Diskontsatz in die Kapitalwertregel eingehen.' }
+      { label: 'Erwartungswert', eq: String.raw`$$E(X) = \sum_s p_s x_s$$`, desc: 'Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.', variables: { 'p_s': 'Wahrscheinlichkeit des Zustands s', 'x_s': 'Ergebnis / Auszahlung im Zustand s' } },
+      { label: 'Varianz', eq: String.raw`$$Var(X)= \sum_s p_s(x_s-E(X))^2$$`, desc: 'Streuungsmaß der Ergebnisse um ihren Erwartungswert.' }
     ],
     aufgaben: [
       task(
@@ -516,6 +651,64 @@ export const CONTENT = {
           step('Regel konsistent machen.', String.raw`\text{Entscheidung erst nach Abgleich von Erwartungswert und Risikotoleranz treffen.}`)
         ],
         'Bei gleichem Erwartungswert entscheidet oft die Verlustseite; deshalb muss downside risk explizit mitbewertet werden.'
+      )
+    ]
+  },
+
+  risikoadjustierter_kapitalwert: {
+    motivation: 'Unsicherheit wird erst finanzwirtschaftlich entscheidungsrelevant, wenn sie wieder in eine Bewertungsregel übersetzt wird. Genau das leisten Risikozuschlag und Sicherheitsabschlag.',
+    theorie: [
+      section(
+        'Vom sicheren zum risikoadjustierten Kapitalwert',
+        `<p>Der sichere Kapitalwert vergleicht Zahlungen mit einem sicheren Kalkulationszins. Unter Unsicherheit muss zusätzlich geklärt werden, wie Risiko in die Bewertung eingeht: über einen Zuschlag im Diskontsatz oder über Abschläge direkt auf die erwarteten Zahlungen.</p>`
+      ),
+      section(
+        'Risikozuschlagsmethode',
+        `<p>Bei der Risikozuschlagsmethode wird der sichere Kalkulationszins um einen Zuschlag erhöht. Riskantere Projekte werden dadurch stärker abgezinst.</p>
+         ${mathBlock(String.raw`$$K_0^{risk} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)}{(1+i+d)^t}$$`)}
+      `
+      ),
+      section(
+        'Sicherheitsabschlag auf Cashflows',
+        `<p>Alternativ kann Risiko direkt auf der Zahlungsseite berücksichtigt werden: Statt die erwarteten Zahlungen unverändert zu verwenden, werden Risikoabschläge vorgenommen. So bleibt der Diskontsatz unverändert, während der Zahlungsstrom vorsichtiger angesetzt wird.</p>
+         ${mathBlock(String.raw`$$K_0^{safe} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)-D_t}{(1+i)^t}$$`)}
+      `
+      ),
+      section(
+        'Klausurfehler und Methodenwahl',
+        `<p>Beide Methoden wollen dasselbe: Risiko in eine Vermögensregel übersetzen. Typische Fehler sind, Risiko doppelt zu berücksichtigen oder die ökonomische Bedeutung des Zuschlags/Abschlags nicht zu erklären.</p>
+         ${warn('Doppelt-Risiko-Fehler:', 'Wer gleichzeitig den Diskontsatz erhöht und die Cashflows pauschal drückt, riskiert eine doppelte Risikobelastung ohne Begründung.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Risikozuschlag', eq: String.raw`$$K_0^{risk} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)}{(1+i+d)^t}$$`, desc: 'Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.', variables: { 'd': 'Risikozuschlag auf den sicheren Kalkulationszins', 'E(CF_t)': 'erwarteter Cashflow der Periode t' } },
+      { label: 'Sicherheitsabschlag', eq: String.raw`$$K_0^{safe} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)-D_t}{(1+i)^t}$$`, desc: 'Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.', variables: { 'D_t': 'Sicherheitsabschlag / Risikoabschlag in Periode t' } }
+    ],
+    aufgaben: [
+      task(
+        'Warum ist der risikoadjustierte Kapitalwert mehr als „normaler Kapitalwert mit größerem Zinssatz“?',
+        [
+          step('Ziel benennen.', String.raw`\text{Risiko soll systematisch in die Vermögensbewertung übersetzt werden.}`),
+          step('Methoden unterscheiden.', String.raw`\text{Das kann über den Diskontsatz oder über die Cashflows geschehen.}`),
+          step('Interpretation ergänzen.', String.raw`\text{Die Anpassung ist eine Risikobewertung, nicht bloß ein Rechentrick.}`)
+        ],
+        'Risikoadjustierter Kapitalwert macht aus Unsicherheit wieder eine finanzwirtschaftliche Entscheidungsregel.'
+      ),
+      task(
+        'Wann ist ein Risikoabschlag auf die Zahlungsseite didaktisch oft klarer als ein Zuschlag im Diskontsatz?',
+        [
+          step('Zahlungsunsicherheit direkt benennen.', String.raw`\text{Wenn die Unsicherheit vor allem in der Höhe der Rückflüsse liegt, ist ein Cashflow-Abschlag oft anschaulicher.}`),
+          step('Bewertungsgedanke schließen.', String.raw`\text{Der sichere Vergleichszins bleibt stehen, aber die erwarteten Zahlungen werden vorsichtiger angesetzt.}`)
+        ],
+        'Cashflow-Abschläge machen sichtbar, welche Teile der Zahlungsreihe risikobehaftet sind, statt nur pauschal den Diskontsatz anzuheben.'
+      ),
+      task(
+        'Welche typische Überkorrektur muss in einer Klausurlösung aktiv vermieden werden?',
+        [
+          step('Doppelung nennen.', String.raw`\text{Nicht gleichzeitig denselben Risikoaspekt im Zins und in den Cashflows ohne Begründung abbilden.}`),
+          step('Methodenreinheit fordern.', String.raw`\text{Die Lösung muss erklären, wo das Risiko modelliert wird und warum.}`)
+        ],
+        'Die saubere Lösung benennt genau eine konsistente Risikologik statt Risiko doppelt zu bestrafen.'
       )
     ]
   },
@@ -577,13 +770,18 @@ export const CONTENT = {
         `<p>Im Marktgleichgewicht entspricht der aus Kurs und erwarteten künftigen Zahlungen implizite Diskontierungssatz der erwarteten Eigenkapitalrendite. Diese Größe ist zugleich der Kalkulationszins für die Bewertung unsicherer Projekte bei reiner Eigenfinanzierung in der entsprechenden Modelllogik.</p>`
       ),
       section(
+        'Primär- und Sekundärmarkt sauber trennen',
+        `<p>Das Kursniveau am Sekundärmarkt ist nicht bloß „Hintergrund“. Es liefert den Preis, aus dem die geforderte Rendite rückwärts gelesen wird. Damit werden Eigenkapitalkosten marktbasiert bestimmt und nicht willkürlich gesetzt.</p>`
+      ),
+      section(
         'Interpretation',
         `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
          ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Eigenkapitalkosten', eq: String.raw`$$k_E = \frac{D_1}{P_0} + g$$`, desc: 'Gordon-Growth-Formel bei konstantem Dividendenwachstum.' }
+      { label: 'Eigenkapitalkosten', eq: String.raw`$$k_E = \frac{D_1}{P_0} + g$$`, desc: 'Gordon-Growth-Formel bei konstantem Dividendenwachstum.', variables: { 'D_1': 'erwartete Dividende der nächsten Periode', 'P_0': 'aktueller Aktienkurs', 'g': 'erwartete konstante Wachstumsrate der Dividenden' } },
+      { label: 'Marktgleichgewichtslogik', eq: String.raw`$$P_0 = \sum_{t=1}^{\infty}\frac{E(D_t)}{(1+k_E)^t}$$`, desc: 'Der heutige Kurs ist der Barwert der erwarteten Ausschüttungen.' }
     ],
     aufgaben: [
       task(
@@ -602,6 +800,14 @@ export const CONTENT = {
           step('Entscheidungsbezug herstellen.', String.raw`\text{Erst im Vergleich mit Projekt- oder Finanzierungsertrag wird klar, ob Wert geschaffen wird.}`)
         ],
         'Kapitalkosten sind nur dann klausurrelevant verstanden, wenn Rechenergebnis und ökonomische Entscheidungslogik zusammengeführt werden.'
+      ),
+      task(
+        'Warum ist der aktuelle Aktienkurs kein bloßer Datenpunkt, sondern Kern der Eigenkapitalkostenlogik?',
+        [
+          step('Preisfunktion benennen.', String.raw`\text{Der Kurs ist der Marktpreis, aus dem die geforderte Rendite rückwärts gelesen wird.}`),
+          step('Konsequenz nennen.', String.raw`\text{Eigenkapitalkosten sind deshalb marktbasiert und nicht frei wählbar.}`)
+        ],
+        'Der aktuelle Kurs ist die Brücke zwischen erwarteten Ausschüttungen und gefordertem Eigenkapitalkostensatz.'
       )
     ]
   },
@@ -610,17 +816,29 @@ export const CONTENT = {
     motivation: 'Fremdkapital ist mehr als Nominalzins: Entscheidend sind die tatsächlich verursachten Finanzierungskosten und ihre Interpretation als Opportunitätskosten.',
     theorie: [
       section(
-        'Fremdkapitalkosten',
+        'Nominalzins versus effektive Fremdkapitalkosten',
         `<p>Fremdkapital ist nicht nur der Nominalzins eines Kredits. Effektive Kosten können über interne Zinsfüße, Skonto, Gebühren oder Risikoprämien steigen. Gerade Lieferantenkredit und Skonto sind typische Klausurklassiker.</p>`
       ),
       section(
-        'Interpretation',
+        'Fremdkapitalkosten als interner Zinsfuß der Finanzierungsreihe',
+        `<p>Im Kurs werden Fremdkapitalkosten prinzipiell als interner Zinsfuß der durch die Finanzierung ausgelösten Zahlungsreihe gelesen. Damit ist sofort klar: Auch Finanzierung wird über Zahlungsreihen und Vergleichszinsen beurteilt, nicht nur Investition.</p>`
+      ),
+      section(
+        'Skonto und Lieferantenkredit',
+        `<p>Wer auf Skonto verzichtet, nutzt implizit einen kurzfristigen Lieferantenkredit. Genau deshalb kann ein kleiner Skontosatz auf Jahresbasis sehr hohe effektive Fremdkapitalkosten bedeuten.</p>
+         ${mathBlock(String.raw`$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$`)}
+      `
+      ),
+      section(
+        'Interpretation und Fallen',
         `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
          ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Skontokosten', eq: String.raw`$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$`, desc: 'Verzicht auf Skonto kann einen sehr hohen effektiven Kreditzins bedeuten.' }
+      { label: 'Skontokosten', eq: String.raw`$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$`, desc: 'Verzicht auf Skonto kann einen sehr hohen effektiven Kreditzins bedeuten.', variables: { 's': 'Skontosatz', 'T': 'Zahlungsziel', 'Z': 'Skontofrist' } },
+      { label: 'Finanzierungs-IZF', eq: String.raw`\text{FK-Kosten} = r^* \text{ der Finanzierungszahlungsreihe}`, desc: 'Fremdfinanzierung wird finanzwirtschaftlich wie eine eigene Zahlungsreihe gelesen.' },
+      { label: 'Interpretationsregel', eq: String.raw`\text{niedriger Nominalzins} \neq \text{niedrige effektive Kosten}`, desc: 'Zusatzkosten, Fristen und Risikoprämien können den Effektivsatz deutlich erhöhen.' }
     ],
     aufgaben: [
       task(
@@ -630,12 +848,28 @@ export const CONTENT = {
           step('Effektivzins erklären.', String.raw`\text{Der Preis dieses Kredits kann auf das Jahr hochgerechnet sehr hoch sein.}`)
         ],
         'Skontoverzicht ist oft ein impliziter Kredit mit überraschend hohen effektiven Fremdkapitalkosten.'
+      ),
+      task(
+        'Warum ist „Fremdkapital kostet 6 %“ häufig noch keine saubere finanzwirtschaftliche Aussage?',
+        [
+          step('Nominalzins relativieren.', String.raw`\text{Gebühren, Fristen, Skonto und Ausfallrisiko können die effektiven Kosten verändern.}`),
+          step('Zahlungsreihe ergänzen.', String.raw`\text{Gesucht ist der ökonomische Kostensatz der tatsächlichen Finanzierungsreihe.}`)
+        ],
+        'Erst die vollständige Finanzierungsreihe zeigt, wie teuer Fremdkapital ökonomisch wirklich ist.'
+      ),
+      task(
+        'Warum ist die Analogie „Investitions-IZF“ und „Finanzierungs-IZF“ didaktisch nützlich?',
+        [
+          step('Gemeinsame Sprache nennen.', String.raw`\text{Beide Fälle werden über Zahlungsreihen und interne Zinssätze strukturiert.}`),
+          step('Entscheidungspunkt ergänzen.', String.raw`\text{Damit wird Finanzierung nicht als Sonderfall, sondern als eigenständiges Bewertungsproblem lesbar.}`)
+        ],
+        'Die IZF-Analogie macht sichtbar, dass Finanzierungsentscheidungen denselben Bewertungsprinzipien folgen wie Investitionen.'
       )
     ]
   },
 
-  wacc_leverage: {
-    motivation: 'Kapitalstruktur bündelt das Modul: Nicht nur die Einzelkosten einer Finanzierungsquelle zählen, sondern ihre Mischung und die Frage, wie Rendite und Risiko gemeinsam auf das Eigenkapital durchschlagen.',
+  wacc: {
+    motivation: 'Bevor Leverage gelesen werden kann, muss klar sein, was die gemischte Finanzierung insgesamt kostet. Genau diese Aggregationslogik liefert der WACC.',
     theorie: [
       section(
         'Gewichtete Gesamtkapitalkosten',
@@ -644,14 +878,69 @@ export const CONTENT = {
       `
       ),
       section(
-        'Leverage',
-        `<p>Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen, solange die Rendite des Gesamtkapitals über den Fremdkapitalkosten liegt. Gleichzeitig steigt das Risiko des Eigenkapitals, weil Schwankungen stärker auf den kleineren Eigenkapitalpuffer durchschlagen.</p>`
+        'Warum der WACC kein bloßer Durchschnitt ist',
+        `<p>Die Gewichte spiegeln die reale Finanzierungsmischung. Verändert sich diese Struktur, ändern sich nicht nur die Gewichte, sondern oft auch die zugrunde liegenden Risiko- und Renditeforderungen der Kapitalgeber.</p>`
       ),
-      /* leverage block intentionally single; no duplicate section */
+      section(
+        'Methodenwahl und Missbrauch',
+        `<p>Der WACC ist nur dann ein sinnvoller Kalkulationszins, wenn die Projekt- und Finanzierungsrisiken zur zugrunde gelegten Kapitalstruktur passen. Genau hier entsteht in Klausuren oft ein stiller Missbrauch: Der WACC wird mechanisch eingesetzt, obwohl die Voraussetzungen gar nicht erklärt wurden.</p>
+         ${warn('WACC-Fehler:', 'Ein WACC ist keine frei verfügbare Universalzahl. Er passt nur zu einer bestimmten Risiko- und Kapitalstruktur.')}`
+      )
     ].join(''),
     formeln: [
-      { label: 'WACC', eq: String.raw`$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$`, desc: 'Gewichteter Preis der Finanzierungsmischung.' },
-      { label: 'Leverage-Beziehung', eq: String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`, desc: 'Mehr Verschuldung verstärkt die Eigenkapitalrendite, solange die Gesamtkapitalrendite über dem Fremdkapitalzins liegt.' }
+      { label: 'WACC', eq: String.raw`$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$`, desc: 'Gewichteter Preis der Finanzierungsmischung.', variables: { 'E': 'Marktwert des Eigenkapitals', 'D': 'Marktwert des Fremdkapitals', 'k_E': 'Eigenkapitalkosten', 'k_D': 'Fremdkapitalkosten' } },
+      { label: 'Einsatzbedingung', eq: String.raw`\text{passender WACC} \Rightarrow \text{Projekt- und Finanzierungsrisiko konsistent}`, desc: 'Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.' }
+    ],
+    aufgaben: [
+      task(
+        'Warum ist der WACC nicht nur ein mechanischer Durchschnitt?',
+        [
+          step('Gewichtungslogik nennen.', String.raw`\text{Die Gewichte spiegeln die tatsächliche Finanzierungsmischung.}`),
+          step('Ökonomische Aussage ergänzen.', String.raw`\text{Verändert sich die Mischung, verschieben sich nicht nur Kostenanteile, sondern oft auch Risikoprämien.}`)
+        ],
+        'Der WACC fasst nicht nur Zahlen zusammen, sondern verdichtet die Preis- und Risikologik der gesamten Kapitalstruktur.'
+      ),
+      task(
+        'Wann ist ein WACC als Kalkulationszins fachlich plausibel und wann gefährlich mechanisch?',
+        [
+          step('Plausibilitätsbedingung nennen.', String.raw`\text{Projekt- und Kapitalstrukturrisiko müssen zum zugrunde gelegten WACC passen.}`),
+          step('Missbrauch benennen.', String.raw`\text{Ohne diese Passung wird der WACC zur Scheingenauigkeit.}`)
+        ],
+        'Der WACC ist nur dann ein guter Kalkulationszins, wenn seine Risiko- und Kapitalstrukturannahmen zur Aufgabe passen.'
+      ),
+      task(
+        'Warum ist es klausurwichtig, EK- und FK-Kosten vor der WACC-Rechnung wirtschaftlich zu deuten?',
+        [
+          step('Vorarbeit benennen.', String.raw`\text{WACC aggregiert nur; seine Qualität hängt von der Qualität der Einzelkostensätze ab.}`),
+          step('Entscheidungslogik schließen.', String.raw`\text{Falsche EK-/FK-Interpretationen führen direkt zu einem falsch begründeten Gesamtkostensatz.}`)
+        ],
+        'Eine gute WACC-Antwort beginnt nicht beim Einsetzen, sondern bei der wirtschaftlichen Lesart der Teilkosten.'
+      )
+    ]
+  },
+
+  wacc_leverage: {
+    motivation: 'Der Leverage-Effekt ist keine isolierte Prozentrechnung, sondern die systematische Frage, wie Verschuldung Ertrag und Risiko des Eigenkapitals gemeinsam verändert.',
+    theorie: [
+      section(
+        'Leverage-Ertrag',
+        `<p>Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen, solange die Rendite des Gesamtkapitals über den Fremdkapitalkosten liegt. Dann arbeitet der Hebel zugunsten der Eigentümer.</p>
+         ${mathBlock(String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`)}
+      `
+      ),
+      section(
+        'Leverage-Risiko',
+        `<p>Dieselbe Verschuldung verstärkt aber auch die Schwankung der Eigenkapitalrendite. Je kleiner der Eigenkapitalpuffer, desto stärker schlagen gute und schlechte Gesamtkapitalszenarien auf die Eigentümer durch.</p>`
+      ),
+      section(
+        'Leverage nur zusammen lesen',
+        `<p>Der Kurs betont ausdrücklich: Leverage-Ertrag und Leverage-Risiko steigen gemeinsam. Wer nur den höheren Erwartungsertrag nennt, hat die Hälfte der ökonomischen Aussage übersehen.</p>
+         ${warn('Hebelfehler:', 'Mehr Verschuldung ist nicht „besser“, sondern nur ein stärkerer Hebel auf Chancen und Verluste.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Leverage-Beziehung', eq: String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`, desc: 'Mehr Verschuldung verstärkt die Eigenkapitalrendite, solange die Gesamtkapitalrendite über dem Fremdkapitalzins liegt.', variables: { 'r_E': 'Eigenkapitalrendite', 'r_U': 'Gesamtkapitalrendite / ungehebelte Rendite', 'r_D': 'Fremdkapitalrendite bzw. Fremdkapitalkostensatz', 'D/E': 'Verschuldungsgrad' } },
+      { label: 'Leverage-Regel', eq: String.raw`r_U > r_D \Rightarrow \text{positiver Hebeleffekt auf } r_E`, desc: 'Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.' }
     ],
     aufgaben: [
       task(
@@ -663,12 +952,20 @@ export const CONTENT = {
         'Leverage ist immer Doppelbewegung: höhere Renditechance bei gleichzeitig höherem Eigenkapitalrisiko.'
       ),
       task(
-        'Warum ist der WACC nicht nur ein mechanischer Durchschnitt?',
+        'Welche Bedingung muss erfüllt sein, damit Leverage die Eigenkapitalrendite positiv hebt?',
         [
-          step('Gewichtungslogik nennen.', String.raw`\text{Die Gewichte spiegeln die tatsächliche Finanzierungsmischung.}`),
-          step('Ökonomische Aussage ergänzen.', String.raw`\text{Verändert sich die Mischung, verschieben sich nicht nur Kostenanteile, sondern oft auch Risikoprämien.}`)
+          step('Schwellengleichung nennen.', String.raw`\text{Die Gesamtkapitalrendite muss über den Fremdkapitalkosten liegen.}`),
+          step('Interpretation ergänzen.', String.raw`\text{Liegt sie darunter, kehrt sich der Hebel gegen die Eigentümer.}`)
         ],
-        'Der WACC fasst nicht nur Zahlen zusammen, sondern verdichtet die Preis- und Risikologik der gesamten Kapitalstruktur.'
+        'Positiver Leverage setzt voraus, dass das Gesamtkapital mehr verdient als das Fremdkapital kostet.'
+      ),
+      task(
+        'Warum ist es fachlich unvollständig, Leverage nur über den Erwartungswert der EK-Rendite zu beschreiben?',
+        [
+          step('Ertragsseite nennen.', String.raw`\text{Mehr FK kann den erwarteten EK-Ertrag erhöhen.}`),
+          step('Risikoseite ergänzen.', String.raw`\text{Die Streuung und Verlustempfindlichkeit des Eigenkapitals steigen aber gleichzeitig.}`)
+        ],
+        'Leverage ist erst dann korrekt erklärt, wenn Ertrag und Risiko gemeinsam genannt werden.'
       )
     ]
   },
@@ -686,12 +983,17 @@ export const CONTENT = {
         `<p>Unter vollkommenem und vollständigem Kapitalmarkt gleichen sich Ertrags- und Risikoeffekte einer höheren Verschuldung in der Benchmark-Logik aus: Weder die erwartete Gesamtkapitalrendite noch der Unternehmenswert hängen dann vom Verhältnis von Fremd- zu Eigenkapital ab. Leverage kann die Eigenkapitalrendite und das Eigenkapitalrisiko verändern, ohne den Gesamtwert zu verschieben.</p>`
       ),
       section(
+        'Warum MM direkt an WACC und Leverage anschließt',
+        `<p>MM erklärt, warum Leverage auf Eigentümerebene relevant sein kann, ohne dass der Unternehmenswert im Benchmark-Modell steigt. Genau deshalb ist MM kein Fremdkörper, sondern die theoretische Klammer um WACC- und Leverage-Debatten.</p>`
+      ),
+      section(
         'Von der Theorie zu realen Kapitalmärkten',
         `<p>Sobald Märkte unvollkommen oder unvollständig sind, gewinnen Steuern, Insolvenz- und Transaktionskosten, Informationsasymmetrien und unterschiedliche Finanzierungsbedingungen an Bedeutung. Genau diese Faktoren erklären, warum in der Praxis Kapitalstruktur doch wert- und entscheidungsrelevant werden kann.</p>`
       )
     ].join(''),
     formeln: [
-      { label: 'Irrelevanz-Benchmark', eq: String.raw`\text{vollkommener Markt} \Rightarrow \text{Kapitalstruktur wertneutral}`, desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' }
+      { label: 'Irrelevanz-Benchmark', eq: String.raw`\text{vollkommener Markt} \Rightarrow \text{Kapitalstruktur wertneutral}`, desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
+      { label: 'Benchmark-Aussage', eq: String.raw`\text{Leverage verändert } r_E \text{ und Risiko, aber nicht } \text{Value}`, desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' }
     ],
     aufgaben: [
       task(
@@ -701,6 +1003,22 @@ export const CONTENT = {
           step('Realitätsbezug ergänzen.', String.raw`\text{Abweichungen in der Praxis verweisen auf Friktionen wie Steuern, Insolvenzkosten und Informationsasymmetrien.}`)
         ],
         'MM dient als Referenzrahmen, um reale Werttreiber der Kapitalstruktur systematisch zu identifizieren.'
+      ),
+      task(
+        'Warum widerspricht MM dem Leverage-Effekt nicht?',
+        [
+          step('Eigentümerebene nennen.', String.raw`\text{Leverage verändert die Rendite- und Risikoverteilung auf das Eigenkapital.}`),
+          step('Wertebene ergänzen.', String.raw`\text{MM sagt nur, dass sich der Gesamtunternehmenswert im Benchmark dadurch nicht ändert.}`)
+        ],
+        'Leverage und MM sprechen über unterschiedliche Ebenen: EK-Rendite/Risiko einerseits, Gesamtwert andererseits.'
+      ),
+      task(
+        'Welche realen Friktionen machen Kapitalstruktur in der Praxis doch relevant?',
+        [
+          step('Friktionscluster nennen.', String.raw`\text{Steuern, Insolvenzkosten, Transaktionskosten und Informationsasymmetrien.}`),
+          step('Konsequenz ziehen.', String.raw`\text{Diese Faktoren durchbrechen die wertneutrale Benchmarkwelt.}`)
+        ],
+        'Sobald reale Friktionen ins Spiel kommen, wird Kapitalstruktur von einer neutralen Benchmarkgröße zu einer echten Wert- und Entscheidungsfrage.'
       )
     ]
   }

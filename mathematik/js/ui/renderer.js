@@ -4,6 +4,7 @@ import { CHAPTERS, CONTENT, R_BLOCKS_BY_ID } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
 import { INTUITION } from '../data/intuition.js';
 import { CONCEPT_LINKS } from '../data/conceptLinks.js';
+import { MATHEMATIK_EXAM_DRILLS_BY_ID, MATHEMATIK_GUIDED_TASKS_BY_ID } from '../data/practiceConfig.js';
 import { renderGraphPanel, GRAPH_CONCEPTS } from './graphPanel.js';
 import { renderMastery } from '../features/mastery.js';
 import { renderMath } from '../utils/mathjax.js';
@@ -29,7 +30,10 @@ const baseRenderer = createRenderer({
   loadLastId,
   getDueCards,
   renderDashboard,
+  getPracticeTasks: (conceptId, contentEntry) => MATHEMATIK_GUIDED_TASKS_BY_ID[conceptId] || contentEntry?.aufgaben || [],
   stepProblems: STEP_PROBLEMS,
+  minimumPracticeTasks: 0,
+  examDrillsById: MATHEMATIK_EXAM_DRILLS_BY_ID,
   checkAnswer: checkAnswerWithTolerance,
   hasRBlock: (conceptId) => Array.isArray(R_BLOCKS_BY_ID[conceptId]) && R_BLOCKS_BY_ID[conceptId].length > 0,
   renderRAnwendungPanel: (conceptId) => {

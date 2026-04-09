@@ -1,5 +1,7 @@
 # Mikro2 Concept Granularity Pass 1
 
+**Source status:** Granularity work does **not** imply in-repo PDF grounding. See `docs/audits/mikro2-status-guard-pass-2.md`.
+
 ## Scope
 - Module: `mikro2` only.
 - Focus: concept-map granularity and pedagogically meaningful concept splitting.

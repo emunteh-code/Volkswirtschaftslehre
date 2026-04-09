@@ -35,9 +35,14 @@ export const MASTERY = {
     'Gegenwarts- und Endwertlogik sicher trennen und verbinden können'
   ],
   renten_endwert: [
-    'Rentenfaktoren korrekt einsetzen können',
-    'Kapitalwert- und Endwertmethode als äquivalente Verfahren erklären können',
-    'Den vollständigen Finanzplan als Zeit- und Finanzierungslogik lesen können'
+    'Rentenbarwert- und Rentenendwertfaktoren korrekt auswählen und einsetzen können',
+    'Barwert- und Endwertsicht als äquivalente Bewertungszugriffe erklären können',
+    'Zahlungsstruktur und Zielzeitpunkt vor der Formelwahl sauber trennen können'
+  ],
+  annuitaeten_finanzplan: [
+    'Die Annuität als periodische Übersetzung des Kapitalwerts erklären können',
+    'Den vollständigen Finanzplan als periodische Finanzierungslogik lesen können',
+    'Laufzeit- und Vergleichbarkeitsprobleme bei Annuitäten erkennen können'
   ],
   izf_kapitalwertfunktion: [
     'Den IZF als Nullstelle der Kapitalwertfunktion erklären können',
@@ -51,8 +56,13 @@ export const MASTERY = {
   ],
   unsicherheit: [
     'Dominanz, Erwartungswert und Risiko logisch richtig anordnen können',
-    'Verlustwahrscheinlichkeit und Erwartungswert zusammen lesen können',
-    'Risikoadjustierte Kapitalwertregeln erklären können'
+    'Verlustwahrscheinlichkeit, Varianz und Erwartungswert zusammen lesen können',
+    'Unsicherheitsdarstellung von Risikokorrektur sauber trennen können'
+  ],
+  risikoadjustierter_kapitalwert: [
+    'Risikozuschlag und Sicherheitsabschlag als zwei Korrekturwege erklären können',
+    'Risiko konsistent im Zins oder in den Cashflows modellieren können',
+    'Doppelte Risikoberücksichtigung aktiv vermeiden können'
   ],
   bezugsrecht: [
     'Ex-Kurs und Bezugsrechtswert sicher berechnen und deuten können',
@@ -69,10 +79,15 @@ export const MASTERY = {
     'Nominalzins und effektive Finanzierungskosten sauber unterscheiden können',
     'Kapitalkosten als Opportunitätskosten der Finanzierung lesen können'
   ],
+  wacc: [
+    'WACC korrekt aufbauen und als gemischten Kapitalkostensatz interpretieren können',
+    'Die Einsatzvoraussetzungen eines WACC benennen können',
+    'Teilkosten und Gewichtungslogik gemeinsam in einer Begründung darstellen können'
+  ],
   wacc_leverage: [
-    'WACC korrekt aufbauen und interpretieren können',
     'Leverage immer als Rendite-Risiko-Doppelwirkung lesen können',
-    'Finanzierungsmix und Risikowirkung gemeinsam in einer Antwort darstellen können'
+    'Die Bedingung für positiven Hebeleffekt fachlich korrekt benennen können',
+    'Eigenkapitalrendite und Eigenkapitalrisiko nicht getrennt voneinander erklären'
   ],
   modigliani_miller: [
     'Modigliani-Miller als Benchmark und nicht als Realitätsbeschreibung einordnen können',

@@ -87,7 +87,7 @@ export const STATISTIK_CONCEPT_PRIMARY_REFS = Object.fromEntries(
 const NOTES_THEORY =
   'Portal theory follows the Statistik course line; wording is authored for the portal, not a verbatim lecture paste. Primary VL paths per concept: docs/audits/statistik-provenance-curation-pass-1.md (file-level only).';
 const NOTES_GRAPH =
-  'Graph panel: legacy Mikro-style stubs remain in graphPanel.js for this module; interactive binding for Statistik concepts is not asserted here.';
+  'Graph panel: statistik-native graphs for correlation, confidence intervals, regression and diagnostics; presentation aligned to the mikro1 graph interpretation family.';
 const NOTES_INTUITION = 'Compressed recall layer (Kernidee / Muster) for the closed learning loop.';
 const NOTES_STEP =
   'Step-problem Schnelltest items with stable options for backbone logging when the module opts in.';

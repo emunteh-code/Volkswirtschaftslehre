@@ -1,136 +1,57 @@
-// ============================================================
-// GRAPH PANEL RENDERER — Mikroökonomik I
-// Returns the HTML for the interactive graph controls + canvas
-// ============================================================
+const panel = (title, controls, ariaLabel) => `
+<div class="graph-container">
+  <h3 class="graph-panel-title">${title}</h3>
+  <div class="graph-controls">
+    ${controls}
+  </div>
+  <canvas id="graph_canvas" width="920" height="560" role="img" aria-label="${ariaLabel}"></canvas>
+  <div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`;
 
-/** Set of concept IDs that have interactive graphs */
 export const GRAPH_CONCEPTS = new Set([
-  'budget',
-  'indiff',
-  'hausopt',
-  'slutsky',
-  'produktion',
-  'grts',
-  'kosten',
-  'markt',
-  'monopol'
+  'bivariat',
+  'schaetzen_eigenschaften_intervalle',
+  'regression_schaetzung_inferenz',
+  'regression_diagnostik_prognose'
 ]);
 
-/**
- * Render the graph panel HTML for a given concept.
- * @param {string} id - concept ID
- * @returns {string} HTML string
- */
 export function renderGraphPanel(id) {
   const graphConfigs = {
-    budget: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Interaktive Budgetgerade</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawBudget()"><div class="val" id="v_m" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="2" oninput="window.__drawBudget()"><div class="val" id="v_p1" aria-live="polite">2</div></div>
-<div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" oninput="window.__drawBudget()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Budgetgerade — interaktiv. Verwenden Sie die Regler um Einkommen und Preise anzupassen."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    indiff: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Indifferenzkurven u(x₁,x₂) = x₁·x₂</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_u1">Nutzenniveau ū₁</label><input type="range" id="g_u1" min="1" max="50" value="12" oninput="window.__drawIndiff()"><div class="val" id="v_u1" aria-live="polite">12</div></div>
-<div class="ctrl-group"><label for="g_u2">Nutzenniveau ū₂</label><input type="range" id="g_u2" min="1" max="50" value="24" oninput="window.__drawIndiff()"><div class="val" id="v_u2" aria-live="polite">24</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Zwei Indifferenzkurven für u = x₁·x₂. Höherer Nutzen ist weiter vom Ursprung entfernt."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    hausopt: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Haushaltsoptimum — u = x₁·x₂</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" oninput="window.__drawHausopt()"><div class="val" id="v_m" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_p1">Preis p₁</label><input type="range" id="g_p1" min="1" max="20" value="4" oninput="window.__drawHausopt()"><div class="val" id="v_p1" aria-live="polite">4</div></div>
-<div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" oninput="window.__drawHausopt()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Haushaltsoptimum — Tangentialpunkt von Budgetgerade und Indifferenzkurve."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    produktion: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Isoquanten der Produktionsfunktion</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_prod_alpha">Kapitalelastizität α</label><input type="range" id="g_prod_alpha" min="0.2" max="0.8" step="0.05" value="0.5" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_alpha" aria-live="polite">0.50</div></div>
-<div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_prod_l">Arbeit L</label><input type="range" id="g_prod_l" min="1" max="12" step="0.5" value="4" oninput="window.initGraph('produktion', false)"><div class="val" id="v_prod_l" aria-live="polite">4.0</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Isoquanten einer Cobb-Douglas-Produktionsfunktion mit markiertem Punkt."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    grts: `
-<div class="graph-container">
-<h3 class="graph-panel-title">GRTS entlang einer Isoquante</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_prod_alpha">Kapitalelastizität α</label><input type="range" id="g_prod_alpha" min="0.2" max="0.8" step="0.05" value="0.35" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_alpha" aria-live="polite">0.35</div></div>
-<div class="ctrl-group"><label for="g_prod_y">Outputniveau ȳ</label><input type="range" id="g_prod_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_y" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_prod_l">Arbeit L</label><input type="range" id="g_prod_l" min="1" max="12" step="0.5" value="5" oninput="window.initGraph('grts', false)"><div class="val" id="v_prod_l" aria-live="polite">5.0</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Isoquante mit Tangente zur Veranschaulichung der GRTS."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    kosten: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Kostenminimum: Isoquante und Isokostengerade</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_cost_alpha">Kapitalelastizität α</label><input type="range" id="g_cost_alpha" min="0.2" max="0.8" step="0.05" value="0.5" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_alpha" aria-live="polite">0.50</div></div>
-<div class="ctrl-group"><label for="g_cost_y">Output ȳ</label><input type="range" id="g_cost_y" min="2" max="8" step="0.5" value="4" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_y" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_cost_w">Lohnsatz w</label><input type="range" id="g_cost_w" min="1" max="8" step="0.25" value="4" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_w" aria-live="polite">4.00</div></div>
-<div class="ctrl-group"><label for="g_cost_r">Kapitalpreis r</label><input type="range" id="g_cost_r" min="0.5" max="6" step="0.25" value="1" oninput="window.initGraph('kosten', false)"><div class="val" id="v_cost_r" aria-live="polite">1.00</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Kostenminimum mit Isoquante, Isokostengerade und Tangentialpunkt."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    markt: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Marktgleichgewicht und Wohlfahrt</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_d_int">Nachfrage-Intercept a</label><input type="range" id="g_d_int" min="40" max="120" step="5" value="100" oninput="window.initGraph('markt', false)"><div class="val" id="v_d_int" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_d_slope">Nachfrage-Steigung b</label><input type="range" id="g_d_slope" min="0.2" max="1.2" step="0.05" value="0.6" oninput="window.initGraph('markt', false)"><div class="val" id="v_d_slope" aria-live="polite">0.60</div></div>
-<div class="ctrl-group"><label for="g_s_int">Angebot-Intercept c</label><input type="range" id="g_s_int" min="0" max="60" step="5" value="20" oninput="window.initGraph('markt', false)"><div class="val" id="v_s_int" aria-live="polite">20</div></div>
-<div class="ctrl-group"><label for="g_s_slope">Angebot-Steigung d</label><input type="range" id="g_s_slope" min="0.1" max="1.0" step="0.05" value="0.4" oninput="window.initGraph('markt', false)"><div class="val" id="v_s_slope" aria-live="polite">0.40</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Marktgleichgewicht mit Nachfrage, Angebot sowie Konsumenten- und Produzentenrente."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    monopol: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Monopol: p = a − y, C = c·y²</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_a">Nachfragepreis a</label><input type="range" id="g_a" min="2" max="20" value="10" oninput="window.__drawMonopol()"><div class="val" id="v_a" aria-live="polite">10</div></div>
-<div class="ctrl-group"><label for="g_c">Grenzkostenpar. c</label><input type="range" id="g_c" min="0.1" max="5" step="0.1" value="1" oninput="window.__drawMonopol()"><div class="val" id="v_c" aria-live="polite">1</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Monopoloptimum — Nachfrage, Grenzerlös, Grenzkosten und Wohlfahrtsverlust."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
-
-    slutsky: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Slutsky-Zerlegung (u = x₁·x₂)</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_m">Einkommen m</label><input type="range" id="g_m" min="20" max="200" value="100" step="1" oninput="window.__drawSlutsky()"><div class="val" id="v_m" aria-live="polite">100</div></div>
-<div class="ctrl-group"><label for="g_p1_0">Preis p₁ (initial)</label><input type="range" id="g_p1_0" min="1" max="20" value="4" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_0" aria-live="polite">4.0</div></div>
-<div class="ctrl-group"><label for="g_p1_1">Preis p₁ (neu)</label><input type="range" id="g_p1_1" min="1" max="20" value="8" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p1_1" aria-live="polite">8.0</div></div>
-<div class="ctrl-group"><label for="g_p2">Preis p₂</label><input type="range" id="g_p2" min="1" max="20" value="5" step="0.1" oninput="window.__drawSlutsky()"><div class="val" id="v_p2" aria-live="polite">5</div></div>
-</div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Slutsky-Zerlegung — Substitutions- und Einkommenseffekt einer Preisänderung."></canvas>
-<div id="graph_info" class="graph-info" aria-live="polite"></div>
-</div>`,
+    bivariat: panel(
+      'Streudiagramm und Korrelationsrichtung',
+      `
+      <div class="ctrl-group"><label for="g_biv_rho">Korrelation $r$</label><input type="range" id="g_biv_rho" min="-0.9" max="0.9" step="0.1" value="0.6" oninput="window.initGraph('bivariat', false)"><div class="val" id="v_biv_rho">0.60</div></div>
+      <div class="ctrl-group"><label for="g_biv_shift">Niveauverschiebung</label><input type="range" id="g_biv_shift" min="-1.5" max="1.5" step="0.1" value="0" oninput="window.initGraph('bivariat', false)"><div class="val" id="v_biv_shift">0.00</div></div>
+      `,
+      'Grafik: Streudiagramm mit anpassbarer Korrelationsrichtung und linearem Zusammenhang.'
+    ),
+    schaetzen_eigenschaften_intervalle: panel(
+      'Konfidenzintervall und Präzision',
+      `
+      <div class="ctrl-group"><label for="g_ci_xbar">Stichprobenmittel $\\bar{x}$</label><input type="range" id="g_ci_xbar" min="40" max="90" step="1" value="64" oninput="window.initGraph('schaetzen_eigenschaften_intervalle', false)"><div class="val" id="v_ci_xbar">64</div></div>
+      <div class="ctrl-group"><label for="g_ci_sigma">Standardabw. $s$</label><input type="range" id="g_ci_sigma" min="4" max="20" step="1" value="12" oninput="window.initGraph('schaetzen_eigenschaften_intervalle', false)"><div class="val" id="v_ci_sigma">12</div></div>
+      <div class="ctrl-group"><label for="g_ci_n">Stichprobe $n$</label><input type="range" id="g_ci_n" min="10" max="150" step="5" value="36" oninput="window.initGraph('schaetzen_eigenschaften_intervalle', false)"><div class="val" id="v_ci_n">36</div></div>
+      `,
+      'Grafik: Punktschätzer mit 95-Prozent-Konfidenzintervall und Vergleichsintervall bei größerer Stichprobe.'
+    ),
+    regression_schaetzung_inferenz: panel(
+      'Regression: Datenwolke und Schätzgerade',
+      `
+      <div class="ctrl-group"><label for="g_reg_b0">Achsenabschnitt $\\beta_0$</label><input type="range" id="g_reg_b0" min="0" max="8" step="0.5" value="2" oninput="window.initGraph('regression_schaetzung_inferenz', false)"><div class="val" id="v_reg_b0">2.0</div></div>
+      <div class="ctrl-group"><label for="g_reg_b1">Steigung $\\beta_1$</label><input type="range" id="g_reg_b1" min="-1.5" max="2.5" step="0.1" value="1.1" oninput="window.initGraph('regression_schaetzung_inferenz', false)"><div class="val" id="v_reg_b1">1.10</div></div>
+      <div class="ctrl-group"><label for="g_reg_noise">Streuung</label><input type="range" id="g_reg_noise" min="0.3" max="2.2" step="0.1" value="0.9" oninput="window.initGraph('regression_schaetzung_inferenz', false)"><div class="val" id="v_reg_noise">0.90</div></div>
+      `,
+      'Grafik: Streudiagramm mit geschätzter Regressionsgerade und Interpretation von Steigung und Streuung.'
+    ),
+    regression_diagnostik_prognose: panel(
+      'Prognoseintervall und Residuenlogik',
+      `
+      <div class="ctrl-group"><label for="g_diag_b1">Steigung $\\beta_1$</label><input type="range" id="g_diag_b1" min="0.4" max="2.0" step="0.1" value="1.1" oninput="window.initGraph('regression_diagnostik_prognose', false)"><div class="val" id="v_diag_b1">1.10</div></div>
+      <div class="ctrl-group"><label for="g_diag_hetero">Heterosked.</label><input type="range" id="g_diag_hetero" min="0" max="1" step="0.05" value="0.45" oninput="window.initGraph('regression_diagnostik_prognose', false)"><div class="val" id="v_diag_hetero">0.45</div></div>
+      <div class="ctrl-group"><label for="g_diag_x0">Prognosepunkt $x_0$</label><input type="range" id="g_diag_x0" min="1" max="10" step="0.5" value="8" oninput="window.initGraph('regression_diagnostik_prognose', false)"><div class="val" id="v_diag_x0">8.0</div></div>
+      `,
+      'Grafik: Regressionsgerade mit wachsender Reststreuung und hervorgehobenem Prognoseintervall.'
+    )
   };
 
   return `<div class="panel active">${graphConfigs[id] || ''}</div>`;

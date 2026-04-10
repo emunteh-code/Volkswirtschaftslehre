@@ -20,12 +20,13 @@ export const INTUITION = {
     ]
   ),
   methodik: mk(
-    'Methodik ist im Recht kein Zusatz, sondern die eigentliche Leistung.',
+    'Methodik ist im Recht kein Zusatz, sondern die eigentliche Leistung und die eigentliche Punktelogik der Klausur.',
     'Ein gut gebautes Skelett hält den ganzen Körper zusammen. Genauso trägt der Gutachtenstil die materielle Lösung.',
-    'Deshalb wird jede Norm erst durch Definition und Subsumtion zur belastbaren Antwort.',
+    'Deshalb wird jede Norm erst durch Anspruchsfrage, Definition, Subsumtion und saubere Zwischenergebnisse zur belastbaren Antwort.',
     [
       { if: 'Ein Ergebnis vorschnell feststeht', then: 'Trotzdem Obersatz, Definition und Subsumtion sichtbar machen.' },
-      { if: 'Definitionen bekannt sind', then: 'Die Punkte liegen in der Anwendung auf den Sachverhalt.' }
+      { if: 'Definitionen bekannt sind', then: 'Die Punkte liegen in der Anwendung auf den Sachverhalt.' },
+      { if: 'Mehrere Rechtsfolgen im Raum stehen', then: 'Anspruch entstanden, untergegangen und durchsetzbar sauber trennen.' }
     ]
   ),
   willenserklaerung: mk(
@@ -38,21 +39,23 @@ export const INTUITION = {
     ]
   ),
   dissens: mk(
-    'Dissens heißt: Es fehlt an echter Einigung zwischen den Erklärungen.',
-    'Wenn zwei Menschen aneinander vorbeireden, entsteht kein tragfähiger Konsens.',
-    'Der Dissens-Pfad prüft, ob überhaupt ein Vertrag zustande gekommen ist.',
+    'Dissens heißt: Die Einigung fehlt bereits auf der Vertragsschlussebene.',
+    'Wenn zwei Menschen aneinander vorbeireden, kann keine tragfähige gemeinsame Erklärung entstehen.',
+    'Der Dissens-Pfad prüft also zuerst die Konsensfrage und noch nicht die nachträgliche Fehlerkorrektur.',
     [
       { if: 'Die Erklärungen decken sich objektiv nicht', then: 'Zuerst Dissens prüfen.' },
-      { if: 'Essentialia betroffen sind', then: 'Vertragsschluss regelmäßig verneinen.' }
+      { if: 'Essentialia betroffen sind', then: 'Vertragsschluss regelmäßig verneinen.' },
+      { if: 'Objektiver Konsens doch feststeht', then: 'Aus dem Dissenspfad heraus und Anfechtung mitdenken.' }
     ]
   ),
   anfechtung: mk(
-    'Dissens heißt: Es fehlt an echter Einigung. Anfechtung heißt: Die Einigung wirkt zunächst, kann aber wieder beseitigt werden.',
-    'Wenn zwei Menschen aneinander vorbeireden, gab es nie echten Konsens. Wenn einer sich verspricht, gibt es zunächst Konsens, aber mit Korrekturmöglichkeit.',
-    'Der Kurs trennt diese beiden Fehlerquellen bewusst, weil sie unterschiedliche Rechtsfolgen haben.',
+    'Anfechtung heißt: Die Einigung wirkt zunächst, kann aber aus gesetzlich geregelten Gründen wieder beseitigt werden.',
+    'Wenn einer sich verspricht oder über den Inhalt irrt, bleibt die Erklärung zunächst wirksam, bis die Anfechtung greift.',
+    'Der Kurs trennt Dissens und Anfechtung bewusst, weil nur die Anfechtung Vertrag, Frist und § 122-Folge nach sich zieht.',
     [
       { if: 'Die Erklärungen decken sich objektiv nicht', then: 'Zuerst Dissens prüfen.' },
-      { if: 'Ein Irrtum nach Vertragsschluss auffällt', then: 'Anfechtung samt Erklärung und Frist denken.' }
+      { if: 'Ein Irrtum nach Vertragsschluss auffällt', then: 'Anfechtungsgrund, Erklärung und Frist vollständig prüfen.' },
+      { if: '§ 122 BGB auftaucht', then: 'Erst wirksame Anfechtung, dann separaten Folgeanspruch aufbauen.' }
     ]
   ),
   trennung_abstraktion: mk(
@@ -76,56 +79,61 @@ export const INTUITION = {
   stellvertretung: mk(
     'Stellvertretung verlagert das rechtliche Sprechen auf eine andere Person, nicht aber die Rechtsfolgen.',
     'Ein Assistent unterschreibt, aber die Firma wird verpflichtet.',
-    'Die Prüfung konzentriert sich deshalb auf eigene Erklärung, fremden Namen und Vertretungsmacht.',
+    'Die Prüfung konzentriert sich deshalb auf Erklärungstyp, Offenkundigkeit, Vertretungsmacht und erst danach auf Genehmigung oder § 179.',
     [
       { if: 'Jemand für einen anderen handelt', then: 'Immer Offenkundigkeit und Vertretungsmacht mitdenken.' },
-      { if: 'Nur eine Nachricht weitergegeben wird', then: 'Botenproblem statt Stellvertretung prüfen.' }
+      { if: 'Nur eine Nachricht weitergegeben wird', then: 'Botenproblem statt Stellvertretung prüfen.' },
+      { if: 'Vertretungsmacht fehlt', then: 'Nicht direkt § 179; zuerst Genehmigung und Vertragspartnerfrage klären.' }
     ]
   ),
   agb: mk(
     'AGB-Recht schützt vor einseitig vorformulierten Vertragsbedingungen im Massengeschäft.',
-    'Kleingedrucktes wirkt wie ein Regelpaket, das eine Seite in Serie verteilt. Das Recht prüft, ob diese Regeln fair und wirksam eingebunden sind.',
-    'Darum beginnt jeder AGB-Fall mit Einbeziehung und erst danach mit Inhaltskontrolle.',
+    'Kleingedrucktes wirkt wie ein Regelpaket, das eine Seite in Serie verteilt. Das Recht prüft, ob diese Regeln überhaupt Vertragsbestandteil werden und erst danach, ob sie fair sind.',
+    'Darum beginnt jeder AGB-Fall mit Vorliegen und Einbeziehung und erst danach mit Inhaltskontrolle.',
     [
       { if: 'AGB im Fall auftauchen', then: 'Nie direkt bei der Unwirksamkeit starten; zuerst Einbeziehung prüfen.' },
-      { if: 'Die Klausel überraschend wirkt', then: 'An § 305c BGB denken.' }
+      { if: 'Die Klausel überraschend wirkt', then: 'An § 305c BGB denken.' },
+      { if: 'Mündliche Abrede und Formular kollidieren', then: 'Zuerst § 305b BGB prüfen.' }
     ]
   ),
   schuldrecht_intro: mk(
-    'Das Schuldrecht beschreibt nicht nur, dass ein Vertrag existiert, sondern wie sich aus ihm Pflichten und Störungen ergeben.',
+    'Das Schuldrecht beschreibt nicht nur, dass ein Vertrag existiert, sondern wie sich aus ihm konkrete Pflichten, Ansprüche und Störungen ergeben.',
     'Ein Vertrag ist wie eine laufende Beziehung mit Haupt- und Rücksichtspflichten.',
-    'Von hier aus verzweigen sich später Schadensersatz, Rücktritt und Leistungsstörungen.',
+    'Von hier aus verzweigen sich später Schadensersatz, Rücktritt und weitere Leistungsstörungspfade.',
     [
       { if: 'Eine Pflichtverletzung erwähnt wird', then: 'Immer nach dem konkreten Schuldverhältnis fragen.' },
-      { if: 'Es geht nicht um die Hauptleistung', then: 'Nebenpflichten nicht vergessen.' }
+      { if: 'Es geht nicht um die Hauptleistung', then: 'Nebenpflichten nicht vergessen.' },
+      { if: 'Mehrere Rechtsfolgen im Raum stehen', then: 'Pflicht, Störung und Anspruchsschiene getrennt halten.' }
     ]
   ),
   schadensersatz: mk(
     'Schadensersatz ist die juristische Reaktion auf Pflichtverletzung, aber nur über ein genaues Anspruchsschema.',
     'Wie bei einer Checkliste im Cockpit darf kein Schritt übersprungen werden: Schuldverhältnis, Pflichtverletzung, Vertretenmüssen, Schaden.',
-    'Besonders die Fristsetzung entscheidet oft über Erfolg oder Misserfolg einer Klausurlösung.',
+    'Besonders die Wahl der richtigen Schadensersatzschiene und die Fristsetzung entscheiden über Erfolg oder Misserfolg einer Klausurlösung.',
     [
       { if: 'Ersatz statt der Leistung verlangt wird', then: 'Fristsetzung als Pflichtstation prüfen.' },
-      { if: 'Nur eine Schlechtleistung vorliegt', then: 'Nicht automatisch Schadensersatz bejahen.' }
+      { if: 'Nur eine Schlechtleistung vorliegt', then: 'Nicht automatisch Schadensersatz bejahen.' },
+      { if: 'Schadenssumme schon bekannt ist', then: 'Trotzdem zuerst Tatbestand sauber prüfen.' }
     ]
   ),
   ruecktritt: mk(
     'Rücktritt ist ein Lösungsrecht wegen Leistungsstörung im Schuldverhältnis.',
     'Rücktritt ist wie ein Notausstieg, wenn die geschuldete Leistung ausfällt oder mangelhaft bleibt.',
-    'Der Rücktrittspfad wird durch Störung, Fristlogik und Rückgewähr bestimmt.',
+    'Der Rücktrittspfad wird durch Störung, Fristlogik, Erklärung und Rückgewähr bestimmt.',
     [
       { if: 'Leistungsstörung vorliegt', then: 'Rücktrittsvoraussetzungen zuerst prüfen.' },
-      { if: 'Fristsetzung im Fall auftaucht', then: 'Rücktritts- und Schadensersatzpfad sauber trennen.' }
+      { if: 'Fristsetzung im Fall auftaucht', then: 'Rücktritts- und Schadensersatzpfad sauber trennen.' },
+      { if: 'Rückgewähr diskutiert wird', then: 'Vorher prüfen, ob der Rücktritt überhaupt wirksam erklärt wurde.' }
     ]
   ),
   verbraucherwiderruf: mk(
     'Rücktritt und Widerruf führen beide zur Lösung vom Vertrag, aber aus völlig unterschiedlichen Gründen.',
     'Rücktritt ist wie ein Notausstieg wegen Vertragsstörung; Widerruf ist eher eine gesetzliche Bedenkzeit in Schutzsituationen.',
-    'Diese Zweckdifferenz steuert die ganze Fallprüfung.',
+    'Diese Zweckdifferenz steuert die ganze Fallprüfung zusammen mit Vertragstyp, Parteienrolle, Erklärung und Frist.',
     [
       { if: 'Keine Pflichtverletzung vorliegt', then: 'Rücktritt ist nicht der natürliche Startpunkt.' },
-      { if: 'Fernabsatz oder Verbraucherschutzlage auftaucht', then: 'Widerruf prüfen.' }
+      { if: 'Fernabsatz oder Verbraucherschutzlage auftaucht', then: 'Widerruf prüfen.' },
+      { if: '§ 355 BGB genannt wird', then: 'Zusätzlich prüfen, ob überhaupt ein gesetzliches Widerrufsrecht eröffnet ist.' }
     ]
   )
 };
-

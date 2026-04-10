@@ -10,6 +10,9 @@ export const STREAK_KEY     = 'mathe_streak_v1';
 export const THEME_KEY      = 'mathe_theme_v1';
 export const QUESTION_STATS_KEY = 'mathe_question_stats_v1';
 export const FE_STATE_KEY   = 'mathe_fe_state_v1';
+export const ATTEMPTS_KEY   = 'mathe_attempts_v1';
+export const MISTAKES_KEY   = 'mathe_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'mathe_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

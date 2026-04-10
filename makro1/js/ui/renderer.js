@@ -45,6 +45,4 @@ export const {
 <div class="hac-title">Konzept-Check</div>
 <div class="hac-desc">5 Minuten, typische Denkfallen</div>
 </div>`,
-  homeLernDashboardPilotNote:
-    "Pilot: Kennzahlen aus Protokoll im Dashboard (Kasten „Kennzahlen aus dem Lernprotokoll“)."
 });

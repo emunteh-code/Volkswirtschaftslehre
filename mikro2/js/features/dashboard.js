@@ -1,12 +1,17 @@
 // ============================================================
-// DASHBOARD — Mikroökonomik I
-// Renders the learning progress dashboard
+// DASHBOARD — Mikroökonomik II
+// Renders learning progress and backbone-derived metrics
 // ============================================================
 
+import {
+  buildDashboardDerivedMetricsSnapshot,
+  buildHonestDashboardPilotHtml
+} from '../../../assets/js/portal-core/data/dashboardDerivedMetrics.js';
 import { CHAPTERS } from '../data/chapters.js';
-import { loadProgress } from '../state/storage.js';
+import { COURSE_CONFIG } from '../data/courseConfig.js';
+import { MISTAKE_REVIEW_KEY } from '../data/srsConfig.js';
+import { loadProgress, loadSRS, listLearnerAttempts, listMistakeLogEntries } from '../state/storage.js';
 import { getDueCards, getPerformance } from './srs.js';
-import { loadSRS } from '../state/storage.js';
 
 /**
  * Build and return the dashboard HTML.
@@ -39,12 +44,31 @@ export function renderDashboard(onNavigate) {
     .sort((a, b) => a.accuracy - b.accuracy);
   const weakest = weak.length ? weak[0] : null;
 
-  let html = `<div class="dashboard">
+let html = `<div class="dashboard">
 <div class="dash-header">
 <h2>Lern-Dashboard</h2>
 <p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
 </div>
-<div class="dash-stats">
+<div class="dash-section">
+<h3>Quellenstatus</h3>
+<p style="color:var(--text);font-size:13px;line-height:1.55;margin:0">Dieses Modul ist live und lernbar, aber im Repo fehlt noch der offizielle Mikro-II-Quellenkorpus. Inhalte sind hier deshalb transparent didaktisch aufbereitet, nicht als <code>direct-source</code> gegen <code>source-materials</code> ausweisbar.</p>
+</div>
+<div class="dash-section" style="margin-bottom:16px">
+<button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll öffnen</button>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Eigene Fehler aus Schnelltest und Probeklausur werden lokal gesammelt, damit du wiederkehrende Denkfehler gezielt schließen kannst.</p>
+</div>`;
+
+  const derivedSnap = buildDashboardDerivedMetricsSnapshot({
+    moduleSlug: COURSE_CONFIG.slug,
+    listLearnerAttempts,
+    listMistakeLogEntries,
+    loadSRS,
+    mistakeReviewKey: MISTAKE_REVIEW_KEY
+  });
+  const conceptTitleById = Object.fromEntries(CHAPTERS.map((c) => [c.id, c.title]));
+  html += buildHonestDashboardPilotHtml(derivedSnap, { conceptTitleById });
+
+  html += `<div class="dash-stats">
 <div class="dash-stat"><div class="ds-val">${totalSeen}</div><div class="ds-lab">Konzepte gesehen</div></div>
 <div class="dash-stat"><div class="ds-val">${CHAPTERS.length}</div><div class="ds-lab">Gesamt</div></div>
 <div class="dash-stat"><div class="ds-val">${stats.filter(s => s.accuracy !== null).length > 0 ? Math.round(avgAccuracy * 100) + '%' : '—'}</div><div class="ds-lab">Ø Genauigkeit</div></div>

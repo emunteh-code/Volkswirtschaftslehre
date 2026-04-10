@@ -6,10 +6,11 @@
  * No contentManifest bridge here yet (by design until sources exist).
  */
 export const COURSE_CONFIG = {
+  slug: 'mikro2',
   courseLabel: 'Mikro II',
   courseTitle: 'Mikroökonomik II',
   examCollectionTitle: 'Probeklausuren Mikroökonomik II',
-  homeIntro: 'Aufbauende Mikroökonomik: Spieltheorie, Allgemeines Gleichgewicht, Marktversagen und asymmetrische Information.',
+  homeIntro: 'Aufbauende Mikroökonomik: Spieltheorie, Allgemeines Gleichgewicht, Marktversagen und asymmetrische Information. Sonderstatus: Das Modul ist live und didaktisch nutzbar, aber der offizielle Mikro-II-Quellenkorpus fehlt noch im Repo.',
   consentKey: 'mikro2_consent_v1',
   progressKey: 'mikro2_progress_v1',
   lastIdKey: 'mikro2_last_id_v1',

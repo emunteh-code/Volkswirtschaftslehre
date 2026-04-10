@@ -2,112 +2,147 @@ const mk = (core, analogy, bridge, exam) => ({ core, analogy, bridge, exam });
 
 export const INTUITION = {
   handelsfakten: mk(
-    'Die Einstiegsfolie des Fachs lautet: Nicht ein Modell erklärt den Welthandel, sondern verschiedene Muster brauchen verschiedene Mechanismen.',
-    'Wenn du nur auf das Endergebnis schaust, sehen alle Kochrezepte gleich aus. Erst wenn du in die Küche gehst, siehst du, ob Geschmack von Gewürzen, Garmethode oder Zutaten kommt. Genau so unterscheiden sich Handelsmodelle.',
-    'Der Kurs beginnt deshalb mit Fakten und Modellzuordnung, nicht sofort mit Politikurteilen.',
+    'GIWB startet mit der Frage, welches beobachtbare Handelsmuster überhaupt erklärt werden soll. Erst danach lohnt sich die Wahl eines Modells.',
+    'Wenn du verschiedene Verkehrsstaus erklären willst, reicht nicht die Beobachtung „viele Autos“. Du musst wissen, ob der Engpass an der Ampel, an der Autobahn oder an der Baustelle liegt. Genau so funktionieren Handelsmodelle.',
+    'Darum ist Handelsfaktenwissen kein Vorspann, sondern die Sortiermaschine für Ricardo, H-O, Krugman, Handelspolitik und offene Makro.',
     [
-      { if: 'Ähnliche Länder handeln ähnliche Güter', then: 'Denke an Skalenerträge und Produktvielfalt, nicht sofort an Ricardo.' },
-      { if: 'Die Frage ist normativ', then: 'Trenne positive Erklärung von politischer Bewertung.' }
+      { if: 'Die Aufgabe beschreibt nur Datenmuster', then: 'Noch kein Politikurteil fällen. Zuerst das Muster einem Mechanismus zuordnen.' },
+      { if: 'Von ähnlichen Ländern und ähnlichen Gütern die Rede ist', then: 'Nicht reflexhaft Ricardo nennen, sondern an intraindustriellen Handel denken.' }
     ]
   ),
   ricardo: mk(
-    'Ricardo sagt: Nicht wer absolut besser ist, sondern wer relativ weniger aufgibt, bestimmt die Handelsrichtung.',
-    'Auch wenn eine Person im Team alles schneller kann, lohnt Spezialisierung, wenn ihr Zeitvorsprung bei einer Aufgabe besonders groß ist.',
-    'Komparativer Vorteil ist die erste saubere Brücke von Produktivität zu Spezialisierung.',
+    'Ricardo fragt nicht „Wer ist insgesamt besser?“, sondern „Wer gibt relativ weniger vom anderen Gut auf?“',
+    'Auch wenn eine Person im Team alles schneller kann, lohnt Arbeitsteilung, wenn ihr Vorsprung bei einer Aufgabe besonders groß ist. Handel ist dieselbe Logik in Länderform.',
+    'Die sichere Prüfungskette lautet: Arbeitskoeffizienten → Opportunitätskosten → Handelsrichtung → Spezialisierung.',
     [
-      { if: 'Arbeitskoeffizienten gegeben sind', then: 'Zuerst Opportunitätskosten ausrechnen, dann erst über Exportgüter sprechen.' },
-      { if: 'Ein Land ist in allem besser', then: 'Nicht abbrechen: Gerade dann musst du relative Kosten statt absolute Vorteile prüfen.' }
+      { if: 'Ein Land ist in beiden Gütern absolut produktiver', then: 'Nicht abbrechen. Gerade dann musst du relative Verzichtskosten statt absoluter Stärke prüfen.' },
+      { if: 'Die Aufgabe gibt nur Arbeitszeiten', then: 'Keine langen Worte: zuerst Opportunitätskosten ausrechnen.' }
     ]
   ),
   heckscher_ohlin: mk(
-    'Heckscher-Ohlin verschiebt die Frage von Technologie zu Ausstattung: Länder exportieren, was ihren reichlichen Faktor intensiv nutzt.',
-    'Ein Land mit viel Wald und wenig Arbeit exportiert leichter holzintensive Güter; ein arbeitsreiches Land eher arbeitsintensive Güter.',
-    'Das Modell erklärt Handelsmuster und zugleich Verteilungskonflikte innerhalb eines Landes.',
+    'Heckscher-Ohlin verschiebt den Erklärungsfokus von Technologie auf Faktorausstattung.',
+    'Wenn zwei Küchen dieselben Rezepte haben, aber eine viel mehr Ofenfläche und die andere viel mehr Arbeitskräfte, entstehen trotzdem unterschiedliche Spezialisierungen.',
+    'Das Modell erklärt, welches Gut ein Land exportiert, wenn du sauber zwischen Faktorreichlichkeit der Länder und Faktorintensität der Güter trennst.',
     [
-      { if: 'Von K/L und arbeits- oder kapitalintensiven Gütern die Rede ist', then: 'Du bist im H-O-Modell, nicht bei Ricardo.' },
-      { if: 'Die Aufgabe nach Gewinnern und Verlierern fragt', then: 'Stolper-Samuelson ergänzen.' }
+      { if: 'K/L oder arbeits- bzw. kapitalintensive Güter vorkommen', then: 'Du bist im H-O-Block, nicht bei Ricardo.' },
+      { if: 'Die Aufgabe nur die Handelsrichtung wissen will', then: 'Verteilungsfolgen noch zurückhalten und erst im nächsten Schritt ergänzen.' }
+    ]
+  ),
+  verteilung_handel: mk(
+    'Stolper-Samuelson macht aus Handelstheorie Innenpolitik: Der gleiche Freihandelsprozess erzeugt Gewinner und Verlierer innerhalb eines Landes.',
+    'Ein Konzert kann für die Arena als Ganzes profitabel sein und trotzdem die Menschen in den hinteren Reihen benachteiligen. Gesamtgewinn und Verteilung sind verschiedene Aussagen.',
+    'Sobald nach Faktorpreisen, Globalisierungsverlierern oder politischem Widerstand gefragt wird, reicht H-O allein nicht; dann kommt die Verteilungsebene dazu.',
+    [
+      { if: 'Die Aufgabe fragt nach Gewinnern und Verlierern', then: 'Nicht bei Exportgütern stehen bleiben. Den reichlichen und den knappen Faktor explizit nennen.' },
+      { if: 'Jemand sagt „Handel erhöht die Wohlfahrt, also gewinnen alle“', then: 'Genau dort Stolper-Samuelson als Gegenkorrektur einsetzen.' }
     ]
   ),
   krugman: mk(
-    'Krugman erklärt, warum ähnliche Länder ähnliche Güter handeln: größere Märkte erlauben mehr Varianten zu niedrigeren Stückkosten.',
-    'Ein größerer Stadtmarkt kann mehr Restaurants tragen. Niemand gewinnt dort nur wegen anderer Bodenschätze, sondern weil Größe Vielfalt und Skaleneffekte ermöglicht.',
-    'Diese Logik macht intraindustriellen Handel und die Gravitationsgleichung verständlich.',
+    'Krugman erklärt Handel durch Marktgröße, Skalenerträge und Produktvielfalt statt durch große Länderunterschiede.',
+    'Eine größere Innenstadt trägt mehr Cafés und Restaurants, obwohl die Menschen dort nicht grundsätzlich andere Grundbedürfnisse haben. Größe macht Vielfalt tragfähig.',
+    'Der Mehrwert des Modells liegt darin, ähnliche Länder und intraindustriellen Handel erklärbar zu machen.',
     [
-      { if: 'Produktvielfalt oder ähnliche Länder auftauchen', then: 'An monopolistischen Wettbewerb und interne Skalenerträge denken.' },
-      { if: 'Die Aufgabe fragt nach Datenmustern', then: 'Gravitation als empirische Kurzfassung ergänzen.' }
+      { if: 'Die Aufgabe betont ähnliche Länder oder ähnliche Güter', then: 'Nicht H-O erzwingen. Frage nach Skalenerträgen und Varietät.' },
+      { if: 'Von Fixkosten oder monopolistischem Wettbewerb die Rede ist', then: 'Die Krugman-Kette Marktgröße → AC sinkt → Vielfalt steigt aufrufen.' }
+    ]
+  ),
+  gravitation: mk(
+    'Die Gravitationsgleichung ist die datennahe Kurzfassung vieler Handelsmuster: große Volkswirtschaften handeln viel, Distanz bremst.',
+    'Zwei große Städte erzeugen mehr Pendelverkehr als zwei kleine Dörfer, und lange Wege dämpfen ihn. Handelsströme folgen oft derselben Logik.',
+    'Gravitation ersetzt kein Wohlfahrtsmodell, aber sie ist oft der schnellste Zugriff auf empirische Handelsfragen.',
+    [
+      { if: 'Nur Größe, Entfernung und Partnerstruktur beschrieben werden', then: 'Mit Gravitation starten, nicht sofort mit Zoll- oder Wohlfahrtsflächen.' },
+      { if: 'Distanz klein wirkt, aber Handel trotzdem schwach ist', then: 'Denke Distanz weit: Transport, Information, Regulierung, Politik.' }
     ]
   ),
   tarifmodell: mk(
-    'Der Zoll keilt einen Preisabstand zwischen Weltmarkt und Inland auf und verschiebt damit Produktion, Konsum und Wohlfahrt.',
-    'Ein künstlich verteuertes Importgut funktioniert wie eine Eintrittsbarriere: weniger Käufer gehen hinein, inländische Anbieter bekommen Luft, aber irgendwer zahlt die Rechnung.',
-    'Das Standarddiagramm trainiert die saubere Übersetzung von Preisänderung in Verteilungs- und Effizienzfolgen.',
+    'Der Zoll schafft einen Keil zwischen Weltmarkt und Inland und macht dadurch Preis-, Mengen- und Wohlfahrtswirkungen gleichzeitig sichtbar.',
+    'Ein künstlicher Aufpreis vor dem Eingang verändert, wer hineingeht, wie viel verkauft wird und wer das Geld bekommt. Genau so wirkt der Zoll.',
+    'Im Examen zählt die Dreifachlesart: Preis und Mengen, Verteilung im Inland, internationale Rückwirkung über die Terms of Trade.',
     [
-      { if: 'Kleines Land ausdrücklich genannt wird', then: 'Weltmarktpreis bleibt fix; kein Terms-of-Trade-Gewinn.' },
-      { if: 'Flächen a,b,c,d beschrieben werden', then: 'Nicht nur Gewinner nennen, sondern Deadweight Loss explizit benennen.' }
+      { if: 'Ein kleines Land ausdrücklich genannt ist', then: 'Den Weltmarktpreis als exogen festhalten; kein Terms-of-Trade-Gewinn.' },
+      { if: 'Nur Gewinner aufgezählt werden', then: 'Immer auch Deadweight Loss und Nettoeffekt benennen.' }
     ]
   ),
   quoten_sanktionen: mk(
-    'Quoten und Sanktionen können ähnlich wirken wie Zölle, aber sie verteilen Rente und politische Lasten anders.',
-    'Zwei Türsteher können denselben Club gleich voll machen: Einer verlangt Eintritt, der andere vergibt nur wenige Karten. Für die Besucher ist das ähnlich, für die Kasse aber nicht.',
-    'Darum ist die Quotenrente didaktisch der Schlüsseldifferenzpunkt zum Zoll.',
+    'Quoten und Sanktionen können ähnliche Preiswirkungen wie Zölle erzeugen, aber sie verteilen Renten und politische Kosten anders.',
+    'Zwei Sperren können denselben Stau erzeugen, aber wenn eine über Gebühren und die andere über begrenzte Zufahrtskarten arbeitet, landet das Geld an völlig verschiedenen Stellen.',
+    'Die Kernfrage ist daher nicht nur „wird Import gebremst?“, sondern „wer bekommt die Rente und wie reagiert das Umfeld?“',
     [
-      { if: 'Quote und Zoll verglichen werden', then: 'Immer fragen: Wer bekommt die Rente?' },
-      { if: 'Sanktionen thematisiert werden', then: 'Nicht nur Preiswirkung, sondern Umleitung, Ersatzkanäle und Gegenmaßnahmen prüfen.' }
+      { if: 'Quote und Zoll denselben Inlandspreis erzeugen', then: 'Nicht aufhören. Jetzt ist die Rentenverteilung der Prüfstein.' },
+      { if: 'Sanktionen diskutiert werden', then: 'Auch Umleitung, Ersatzkanäle und Gegenmaßnahmen explizit mitdenken.' }
     ]
   ),
   wto_integration: mk(
-    'Internationale Regeln sind ökonomisch wertvoll, weil sie Unsicherheit und Vergeltungsspiralen begrenzen.',
-    'Ein Sportturnier funktioniert nur, wenn alle dieselben Regeln akzeptieren. Sonst diskutiert jede Mannschaft nach jedem Tor neu, was erlaubt ist.',
-    'WTO, FTA und Zollunionen unterscheiden sich weniger durch Schlagworte als durch die Tiefe ihrer Marktintegration.',
+    'Institutionen sind in GIWB keine Randfolie, sondern das Gegenmittel gegen Vergeltung, Unsicherheit und Handelsumlenkung.',
+    'Ein Ligabetrieb funktioniert nur, wenn fouls, Tabellen und Einsprüche geregelt sind. Sonst verhandelt jede Mannschaft bei jedem Spiel die Regeln neu.',
+    'WTO, FTA, Zollunion und Brexit musst du deshalb als Ordnungsformen lesen, nicht nur als Schlagworte.',
     [
-      { if: 'Binnenmarkt und Zollunion verwechselt werden', then: 'Gemeinsamen Außenzoll und nichttarifäre Integration sauber trennen.' },
-      { if: 'Brexit vorkommt', then: 'Nicht nur auf Zölle schauen, sondern auf Grenzformalitäten und Regulierung.' }
+      { if: 'Binnenmarkt, FTA und Zollunion vermischt werden', then: 'Gemeinsamen Außenzoll und Tiefe der Integration explizit trennen.' },
+      { if: 'Brexit vorkommt', then: 'Nicht bei Zöllen stehen bleiben; Regulierung und Grenzfriktionen sind zentral.' }
     ]
   ),
   wechselkurssysteme: mk(
-    'Offene Makro beginnt mit dem Preis des Geldes über Ländergrenzen hinweg: Wechselkursregime bestimmen, wo Anpassungslasten landen.',
-    'Ein Stoßdämpfer im Auto kann den Schlag abfedern. Nimmst du ihn weg, landet der gleiche Schlag an anderer Stelle. Flexible Kurse sind so ein Stoßdämpfer.',
-    'Darum ist die Unterscheidung zwischen nominalem und realem Wechselkurs sowie zwischen fixen und flexiblen Regimen grundlegend.',
+    'Offene Makro beginnt mit der Leserichtung des Wechselkurses: Wer trägt den Schock, der Kurs oder die Binnenwirtschaft?',
+    'Ein Stoßdämpfer kann den Schlag abfedern. Wenn du ihn blockierst, landet dieselbe Erschütterung an anderer Stelle. Flexible Kurse sind genau dieser Stoßdämpfer.',
+    'Nominaler Kurs, realer Kurs und Regimewahl sind deshalb die Pflichtvokabeln vor PPP, UIP, Overshooting und Trilemma.',
     [
-      { if: 'Wettbewerbsfähigkeit gefragt ist', then: 'Realen, nicht nur nominalen Wechselkurs betrachten.' },
-      { if: 'Fixkurs verteidigt wird', then: 'Immer an Reserven, Glaubwürdigkeit und Zinsbindung denken.' }
+      { if: 'Wettbewerbsfähigkeit gefragt ist', then: 'Zum realen Wechselkurs wechseln; der nominale allein reicht nicht.' },
+      { if: 'Ein Fixkurs verteidigt wird', then: 'Sofort an Reserven, Zinsbindung und Glaubwürdigkeit denken.' }
     ]
   ),
-  paritaeten: mk(
-    'UIP verbindet Zinsen und Erwartungen, PPP verbindet Preise und Wechselkurse. Beide sind Referenzbeziehungen, aber für unterschiedliche Ebenen.',
-    'Zwei Geldanlagen in verschiedenen Ländern sind wie zwei Umwege zum selben Ziel. Im Gleichgewicht darf keiner systematisch besser sein, wenn du Wechselkursänderungen mitbedenkst.',
-    'Die Kunst besteht darin, Zinslogik und Preislogik nicht zu vermischen.',
+  zinsparitaet: mk(
+    'Zinsparität ist Renditelogik: Sie verbindet Zinssätze mit erwarteten Wechselkursänderungen, nicht mit Preisniveaus.',
+    'Zwei Geldanlagen mit verschiedenen Zinsschildern sind nur dann gleich attraktiv, wenn der Wechselkurs die Differenz ausgleicht. Sonst gäbe es Arbitrage.',
+    'UIP/CIP sind deshalb die Brücke von Finanzmarktgleichgewicht zu kurzfristiger Wechselkursdynamik.',
     [
-      { if: 'i, i* und E^e vorkommen', then: 'UIP anwenden.' },
-      { if: 'Preisniveaus oder Inflation auftauchen', then: 'An absolute oder relative PPP denken.' }
+      { if: 'i, i* und ein erwarteter oder Termin-Kurs auftauchen', then: 'Du bist in der Zinsparität, nicht in PPP.' },
+      { if: 'Vorzeichen unsicher werden', then: 'Die Wechselkursnotation zuerst sauber fixieren, erst dann interpretieren.' }
+    ]
+  ),
+  kaufkraftparitaet: mk(
+    'Kaufkraftparität ist Preislogik: Wechselkurse werden langfristig an Preisniveaus und Inflationsdifferenzen gebunden.',
+    'Wenn derselbe Warenkorb in zwei Läden dauerhaft unterschiedlich teuer wäre und man ihn problemlos hin- und herschieben könnte, entstünde sofort Arbitrage. PPP verallgemeinert genau diese Idee.',
+    'Die Modellkunst besteht darin, PPP als langfristigen Referenzanker zu lesen, ohne daraus eine Tageskursformel zu machen.',
+    [
+      { if: 'Preisniveaus, Inflation oder reale Kurse im Zentrum stehen', then: 'PPP/LOP sind der erste Zugriff.' },
+      { if: 'Nur Tages- oder Krisenschwankungen erklärt werden sollen', then: 'PPP nicht überdehnen; dann sind Finanzmarktmodelle meist näher.' }
     ]
   ),
   monetaerer_ansatz: mk(
-    'Der monetäre Ansatz sagt: Langfristig spiegeln Wechselkurse Unterschiede in Geldmengenwachstum, Inflation und Zinssätzen.',
-    'Wenn zwei Rolltreppen unterschiedlich schnell laufen, driftet ihr Abstand langfristig auseinander. Kurzfristig springen die Leute, langfristig ist die Rolltreppengeschwindigkeit entscheidend.',
-    'Damit erklärt der monetäre Ansatz Trendbewegungen, nicht jede kurzfristige Volatilität.',
+    'Der monetäre Ansatz verbindet Geldmarkt, Inflation, Nominalzins und Wechselkurs im langen Horizont.',
+    'Wenn zwei Rolltreppen dauerhaft unterschiedlich schnell laufen, driftet ihr Abstand mit der Zeit systematisch auseinander. Kurzfristige Sprünge sind etwas anderes.',
+    'Deshalb ist der monetäre Ansatz die Trendlogik hinter PPP, Fisher-Effekt und realer Zinsparität, nicht das Modell für jede Tagesbewegung.',
     [
-      { if: 'Geldmengenwachstum und Inflation gegeben sind', then: 'Langfristige Abwertungsrate über relative PPP ableiten.' },
-      { if: 'Nominalzins steigt mit Inflation', then: 'Fisher-Effekt explizit nennen.' }
+      { if: 'Geldmengenwachstum und Inflation gegeben sind', then: 'Langfristige Abwertungsrate über Inflationsdifferenzen aufziehen.' },
+      { if: 'Nominalzins steigt mit Inflation', then: 'Den Fisher-Effekt explizit nennen, nicht nur das Ergebnis hinschreiben.' }
     ]
   ),
   overshooting: mk(
-    'Overshooting bedeutet: Der Wechselkurs reagiert kurzfristig stärker als langfristig nötig, weil Finanzmärkte sofort und Güterpreise träge reagieren.',
-    'Ein Thermostat mit Verzögerung dreht zunächst zu weit, bevor sich die Raumtemperatur stabilisiert. Genau so schießt der Kurs über.',
-    'Die Modellintuition lebt von der Kombination aus Zinsparität, Erwartungen und Preisrigidität.',
+    'Overshooting ist die saubere Kurzfristbrücke: Finanzmärkte springen sofort, Güterpreise nur langsam.',
+    'Ein Thermostat mit Verzögerung dreht erst zu weit, bevor sich die Raumtemperatur einpendelt. Genau dieses Überziehen steckt im Wechselkurs.',
+    'Der Prüfungswert des Modells liegt darin, den Anfangssprung und den späteren Rücklauf gemeinsam zu erklären.',
     [
-      { if: 'Monetärer Schock und kurzfristiger Kurs gefragt sind', then: 'Erst Zinsreaktion, dann UIP, dann Overshoot-Kette formulieren.' },
-      { if: 'Nur von „Abwertung“ die Rede ist', then: 'Den Rücklauf zum langfristigen Niveau explizit ergänzen.' }
+      { if: 'Ein monetärer Schock und ein kurzfristiger Kurs gefragt sind', then: 'Zinsreaktion → UIP → Overshoot → späterer Rücklauf als Kette formulieren.' },
+      { if: 'Nur „Abwertung“ gesagt wird', then: 'Den Overshoot-Teil ergänzen: über das langfristige Niveau hinaus und danach zurück.' }
     ]
   ),
   trilemma: mk(
-    'Das Trilemma ist die harte Auswahlregel der offenen Makro: Drei attraktive Ziele, aber nur zwei lassen sich gleichzeitig voll halten.',
-    'Du kannst im Flugzeug nicht gleichzeitig Fensterplatz, Gangplatz und komplette Bewegungsfreiheit haben. Zwei Wünsche gehen, der dritte fällt weg.',
-    'Balassa-Samuelson ergänzt dann, warum selbst bei freiem Handel Preisniveaus systematisch auseinanderlaufen können.',
+    'Das Trilemma ist die harte Auswahlregel der offenen Makro: Drei politisch attraktive Ziele, aber nur zwei passen gleichzeitig zusammen.',
+    'Du kannst in einem Flugzeug nicht gleichzeitig Fensterplatz, Gangplatz und unendliche Bewegungsfreiheit haben. Zwei Wünsche gehen, der dritte fällt heraus.',
+    'Der Fixkursfall mit Kapitalmobilität ist die sichtbarste Illustration dieser Restriktion, weil dort die Zinsautonomie direkt verschwindet.',
     [
-      { if: 'Fixkurs und Kapitalmobilität gleichzeitig gewünscht werden', then: 'Geldpolitische Autonomie als Opfer nennen.' },
-      { if: 'PPP scheinbar verletzt ist', then: 'Prüfen, ob Balassa-Samuelson strukturelle Preisniveauunterschiede erklärt.' }
+      { if: 'Fixkurs und Kapitalmobilität gleichzeitig gesetzt sind', then: 'Geldpolitische Autonomie als Opfer nennen.' },
+      { if: 'Eine Regimefrage unscharf bleibt', then: 'Die Dreiermatrix explizit durchgehen: Welche zwei Ziele werden gehalten, welches fällt weg?' }
+    ]
+  ),
+  balassa_samuelson: mk(
+    'Balassa-Samuelson erklärt, warum produktive Länder systematisch teurer wirken können, ohne dass dies bloß Fehlbewertung sein muss.',
+    'Wenn in einer Stadt die exportstarken Tech-Firmen die Löhne nach oben ziehen, werden auch Haarschnitte und Mieten teurer, obwohl dort keine Tech-Revolution stattfindet.',
+    'Das Modell ergänzt PPP um eine strukturelle Preisniveau- und reale Aufwertungslogik.',
+    [
+      { if: 'Produktivität, Löhne und nicht-handelbare Güter im Zentrum stehen', then: 'Balassa-Samuelson statt Overshooting oder einfacher PPP wählen.' },
+      { if: 'PPP scheinbar „verletzt“ ist', then: 'Prüfen, ob die Abweichung strukturell durch Produktivität und relative Preise erklärt werden kann.' }
     ]
   )
 };
-

@@ -379,6 +379,13 @@ html { scroll-behavior: smooth; }
   letter-spacing: -0.02em;
 }
 
+.lp-shelf-note {
+  margin: -10px 0 20px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .lp-shelf-count {
   font-size: 0.8125rem;
   color: var(--muted);
@@ -457,6 +464,17 @@ html { scroll-behavior: smooth; }
   min-height: 4.8em;
   overflow-wrap: anywhere;
   hyphens: auto;
+}
+
+.lp-tile-note {
+  margin: 10px 0 0;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface2) 66%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  font-size: 0.71875rem;
+  line-height: 1.45;
+  color: var(--text);
 }
 
 .lp-tile-footer {

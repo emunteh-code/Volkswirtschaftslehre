@@ -69,6 +69,28 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  verteilung_handel: [
+    {
+      title: 'Gewinner und Verlierer des Handels',
+      context: 'Home ist kapitalreich und liberalisiert den Handel im kapitalintensiven Sektor.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher Faktor gewinnt relativ?',
+          answer: ['kapital', 'kapitalbesitzer', 'der faktor kapital'],
+          options: { problemId: 'iwb_dist_1', stepId: 'winner', isDecision: true },
+          hint: 'Stolper-Samuelson auf den reichlichen Faktor anwenden.',
+          explain: 'Im kapitalreichen Land profitiert Kapital real relativ stärker.'
+        },
+        {
+          q: '[2. Decision] Warum reicht die Aussage „das Land gewinnt“ nicht aus?',
+          answer: ['weil es inländische verlierer gibt', 'verlierer', 'verteilung', 'weil arbeit verlieren kann'],
+          options: { problemId: 'iwb_dist_1', stepId: 'distribution', dependsOn: 'winner' },
+          hint: 'Gesamtwohlfahrt und Faktorverteilung sind verschiedene Ebenen.',
+          explain: 'Gesamtgewinne schließen reale Verluste des knappen Faktors nicht aus.'
+        }
+      ]
+    }
+  ],
   krugman: [
     {
       title: 'Skalenerträge erkennen',
@@ -87,6 +109,28 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'iwb_kr_1', stepId: 'ac', dependsOn: 'iit' },
           hint: 'Fixkosten verteilen sich auf mehr Stücke.',
           explain: 'Mit höherem Output sinken die Durchschnittskosten.'
+        }
+      ]
+    }
+  ],
+  gravitation: [
+    {
+      title: 'Gravitationslogik erkennen',
+      context: 'Zwei große Nachbarländer handeln intensiv miteinander, obwohl ihre Faktorstrukturen ähnlich sind.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher erste empirische Zugriff passt hier?',
+          answer: ['gravitation', 'gravitationsgleichung', 'gravity'],
+          options: { problemId: 'iwb_grav_1', stepId: 'gravity', isDecision: true },
+          hint: 'Denk an Marktgröße und Distanz statt sofort an Wohlfahrtsdiagramme.',
+          explain: 'Das ist ein klassischer Gravitationsfall: große Länder handeln viel, Distanz bremst.'
+        },
+        {
+          q: '[2. Decision] Was bedeutet Distanz ökonomisch außer Kilometern?',
+          answer: ['transportkosten', 'informationskosten', 'institutionelle kosten', 'handelskosten'],
+          options: { problemId: 'iwb_grav_1', stepId: 'distance', dependsOn: 'gravity' },
+          hint: 'Distanz ist breiter als reine Geografie.',
+          explain: 'Distanz steht auch für Transport-, Informations- und institutionelle Handelskosten.'
         }
       ]
     }
@@ -179,7 +223,7 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
-  paritaeten: [
+  zinsparitaet: [
     {
       title: 'UIP erkennen',
       context: 'Gegeben sind i, i*, E und E^e.',
@@ -197,6 +241,28 @@ const BASE_STEP_PROBLEMS = {
           options: { problemId: 'iwb_par_1', stepId: 'returns', dependsOn: 'uip' },
           hint: 'Zinsparität vergleicht Anlageerträge.',
           explain: 'UIP ist eine Renditegleichgewichtsbedingung.'
+        }
+      ]
+    }
+  ],
+  kaufkraftparitaet: [
+    {
+      title: 'PPP als Preislogik erkennen',
+      context: 'Eine Aufgabe vergleicht Preisniveaus, Inflationsraten und reale Wettbewerbsfähigkeit.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welche Beziehung ist der erste Zugriff?',
+          answer: ['kaufkraftparität', 'ppp', 'purchasing power parity'],
+          options: { problemId: 'iwb_kkp_1', stepId: 'ppp', isDecision: true },
+          hint: 'Preisniveau und Inflation sprechen nicht für UIP.',
+          explain: 'Preisniveaus und Inflationsdifferenzen sind der klassische PPP-Fall.'
+        },
+        {
+          q: '[2. Decision] Welche Größe liest Wettbewerbsfähigkeit besser: nominaler oder realer Wechselkurs?',
+          answer: ['realer wechselkurs', 'realwechselkurs', 'q'],
+          options: { problemId: 'iwb_kkp_1', stepId: 'real', dependsOn: 'ppp' },
+          hint: 'Preise müssen mit in die Betrachtung.',
+          explain: 'Wettbewerbsfähigkeit liest du über den realen Wechselkurs, nicht nur über den nominalen.'
         }
       ]
     }
@@ -266,6 +332,28 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+  ],
+  balassa_samuelson: [
+    {
+      title: 'Strukturelle PPP-Abweichung',
+      context: 'Ein Land mit stark steigender Produktivität im handelbaren Sektor weist dauerhaft höhere Preisniveaus bei Dienstleistungen auf.',
+      steps: [
+        {
+          q: '[1. Interpretation] Welcher Mechanismus erklärt den Befund am besten?',
+          answer: ['balassa-samuelson', 'balassa samuelson', 'balassa'],
+          options: { problemId: 'iwb_bs_1', stepId: 'bs', isDecision: true },
+          hint: 'Produktivität, Löhne und nicht-handelbare Güter zusammendenken.',
+          explain: 'Das ist der Balassa-Samuelson-Mechanismus.'
+        },
+        {
+          q: '[2. Decision] Warum ist das nicht einfach eine „Fehlbewertung“ des Wechselkurses?',
+          answer: ['weil die preisniveauunterschiede strukturell sind', 'strukturell', 'weil nicht-handelbare güter teurer werden'],
+          options: { problemId: 'iwb_bs_1', stepId: 'structure', dependsOn: 'bs' },
+          hint: 'Nicht jede PPP-Abweichung ist ein Marktfehler.',
+          explain: 'Höhere Produktivität im handelbaren Sektor kann über Löhne die Preise nicht-handelbarer Güter dauerhaft anheben.'
+        }
+      ]
+    }
   ]
 };
 
@@ -275,4 +363,3 @@ export const STEP_PROBLEMS = ensureMinimumStepProblems({
   intuitionById: INTUITION,
   baseStepProblems: BASE_STEP_PROBLEMS
 });
-

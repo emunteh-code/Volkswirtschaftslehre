@@ -35,18 +35,22 @@ const IWB_PRIMARY_REFS_CURATED = {
   ],
   ricardo: ['Vorlesungsfolien/IntWB2.pdf'],
   heckscher_ohlin: ['Vorlesungsfolien/IntWB3.pdf'],
+  verteilung_handel: ['Vorlesungsfolien/IntWB3.pdf'],
   krugman: [
     'Vorlesungsfolien/IntWB4.pdf',
     'Zusätzliche_Literatur/Brülhart_WE2009.pdf'
   ],
+  gravitation: ['Vorlesungsfolien/IntWB4.pdf'],
   tarifmodell: ['Vorlesungsfolien/IntWB5.pdf'],
   quoten_sanktionen: ['Vorlesungsfolien/IntWB6.pdf'],
   wto_integration: ['Vorlesungsfolien/IntWB7.pdf'],
   wechselkurssysteme: ['Vorlesungsfolien/IntWB8.pdf'],
-  paritaeten: ['Vorlesungsfolien/IntWB9.pdf'],
+  zinsparitaet: ['Vorlesungsfolien/IntWB9.pdf'],
+  kaufkraftparitaet: ['Vorlesungsfolien/IntWB9.pdf'],
   monetaerer_ansatz: ['Vorlesungsfolien/IntWB10.pdf'],
   overshooting: ['Vorlesungsfolien/IntWB11.pdf'],
-  trilemma: ['Vorlesungsfolien/IntWB12.pdf']
+  trilemma: ['Vorlesungsfolien/IntWB12.pdf'],
+  balassa_samuelson: ['Vorlesungsfolien/IntWB12.pdf']
 };
 
 export const IWB_CONCEPT_PRIMARY_REFS = Object.fromEntries(

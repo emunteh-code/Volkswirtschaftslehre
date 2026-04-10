@@ -57,6 +57,35 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  bivariat: [
+    {
+      title: 'Pearson und Spearman bewusst unterscheiden',
+      context: 'Zusammenhang zweier Variablen mit möglicher Ausreißerproblematik.',
+      steps: [
+        {
+          q: '[1. Decision] Ist Pearson immer das beste Standardmaß, auch bei Rangdaten oder Ausreißern?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_biv_1', stepId: 'pearson', isDecision: true },
+          hint: 'Denke an monotone statt streng lineare Struktur.',
+          explain: 'Nein. Bei Rangdaten oder deutlichen Ausreißern ist Spearman oft der sauberere Zugriff.'
+        },
+        {
+          q: '[2. Execution] Welche Größe zeigt die Richtung gemeinsamer Streuung, ist aber nicht normiert?',
+          answer: ['kovarianz', 'covarianz', 'cov'],
+          options: { problemId: 'stat_biv_1', stepId: 'cov', dependsOn: 'pearson' },
+          hint: 'Vor der Korrelation steht die gemeinsame Streuung.',
+          explain: 'Die Kovarianz zeigt das Vorzeichen des linearen Zusammenhangs, ist aber einheitenabhängig.'
+        },
+        {
+          q: '[3. Validation] Beweist ein hoher Betrag von r automatisch einen kausalen Effekt?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_biv_1', role: 'VALIDATION' },
+          hint: 'Drittvariablen und Designfragen bleiben offen.',
+          explain: 'Nein. Korrelation misst Zusammenhang, nicht Kausalität.'
+        }
+      ]
+    }
+  ],
   testen: [
     {
       title: 'Einstichproben-t-Test',
@@ -288,6 +317,62 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  schaetzen_eigenschaften_intervalle: [
+    {
+      title: 'Konfidenzintervall richtig lesen',
+      context: '95%-KI für den Mittelwert bei gegebenem Stichprobenmittel und Standardfehler.',
+      steps: [
+        {
+          q: '[1. Decision] Bedeutet ein 95%-KI, dass μ mit 95% Wahrscheinlichkeit im konkreten Intervall liegt?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_ci_1', stepId: 'meaning', isDecision: true },
+          hint: 'Die Wahrscheinlichkeit gehört zur Methode, nicht zum fixen Parameter.',
+          explain: 'Nein. Der Parameter ist fix; die Intervallmethode trifft in 95% der Wiederholungsstichproben.'
+        },
+        {
+          q: '[2. Execution] Wird ein Intervall bei höherem Konfidenzniveau typischerweise breiter oder schmaler?',
+          answer: ['breiter', 'weiter'],
+          options: { problemId: 'stat_ci_1', stepId: 'width', dependsOn: 'meaning' },
+          hint: 'Mehr Sicherheit kostet Präzision.',
+          explain: 'Breiter. Der kritische Wert steigt mit dem Konfidenzniveau.'
+        },
+        {
+          q: '[3. Validation] Gilt bei zweiseitigen Tests: μ₀ außerhalb des 95%-KI => H0 auf 5%-Niveau ablehnen?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_ci_1', role: 'VALIDATION' },
+          hint: 'Denke an die KI-Test-Dualität.',
+          explain: 'Ja. Das ist die Standard-Dualität zwischen zweiseitigem Test und (1−α)-Intervall.'
+        }
+      ]
+    },
+    {
+      title: 'Standardfehler und Präzision',
+      context: 'Zwei Stichproben mit gleicher Streuung, aber unterschiedlichem n.',
+      steps: [
+        {
+          q: '[1. Decision] Wird das Intervall bei größerem n typischerweise schmaler?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_ci_2', stepId: 'n', isDecision: true },
+          hint: 'Standardfehler skaliert mit 1/sqrt(n).',
+          explain: 'Ja. Größeres n senkt den Standardfehler und damit die Intervallbreite.'
+        },
+        {
+          q: '[2. Execution] Welche Größe sinkt direkt mit größerem n?',
+          answer: ['standardfehler', 'se'],
+          options: { problemId: 'stat_ci_2', stepId: 'se', dependsOn: 'n' },
+          hint: 'Nicht der Mittelwert, sondern seine Unsicherheit.',
+          explain: 'Der Standardfehler sinkt mit wachsendem Stichprobenumfang.'
+        },
+        {
+          q: '[3. Validation] Reicht ein engeres Intervall allein als Hinweis auf einen größeren Effekt?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_ci_2', role: 'VALIDATION' },
+          hint: 'Präzision und Effektgröße unterscheiden.',
+          explain: 'Nein. Ein engeres Intervall zeigt mehr Präzision, nicht automatisch einen größeren Effekt.'
+        }
+      ]
+    }
+  ],
   varianzanalyse: [
     {
       title: 'ANOVA statt Test-Sammlung',
@@ -316,11 +401,121 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+    ,
+    {
+      title: 'Globaltest vs. Paarvergleich',
+      context: 'Signifikanter F-Test liegt vor, aber die Paare sind noch ungeklärt.',
+      steps: [
+        {
+          q: '[1. Decision] Bedeutet ein signifikanter ANOVA-F-Test automatisch, dass jede Gruppe sich von jeder anderen unterscheidet?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_anova_2', stepId: 'global', isDecision: true },
+          hint: 'Globaltest und Post-hoc trennen.',
+          explain: 'Nein. Der F-Test zeigt nur, dass nicht alle Mittelwerte gleich sind.'
+        },
+        {
+          q: '[2. Execution] Welcher nächste Schritt ist für Paarvergleiche sauber?',
+          answer: ['post-hoc', 'tukey', 'bonferroni', 'holm'],
+          options: { problemId: 'stat_anova_2', stepId: 'posthoc', dependsOn: 'global' },
+          hint: 'Familienweisen Fehler kontrollieren.',
+          explain: 'Post-hoc-Verfahren wie Tukey oder Bonferroni prüfen die Paare kontrolliert nach.'
+        },
+        {
+          q: '[3. Validation] Würde eine Serie unkorrektierter t-Tests das Fehlerniveau aufblasen?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_anova_2', role: 'VALIDATION' },
+          hint: 'Multiples Testen erhöht das Risiko mindestens eines Fehlers 1. Art.',
+          explain: 'Ja. Genau deshalb wird ANOVA vorangestellt und Post-hoc kontrolliert.'
+        }
+      ]
+    }
+  ],
+  regression_diagnostik_prognose: [
+    {
+      title: 'Diagnostik vor Vertrauen',
+      context: 'Residualplot mit Trichterform, ansonsten ordentliches Fit-Niveau.',
+      steps: [
+        {
+          q: '[1. Decision] Welches Hauptproblem signalisiert ein Trichter im Residuenplot?',
+          answer: ['heteroskedastizität', 'heteroskedastizitaet'],
+          options: { problemId: 'stat_regdp_1', stepId: 'diag', isDecision: true },
+          hint: 'Die Fehlerstreuung wächst nicht konstant.',
+          explain: 'Die Trichterform spricht für Heteroskedastizität.'
+        },
+        {
+          q: '[2. Execution] Bleiben die OLS-Koeffizienten automatisch unbrauchbar?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_regdp_1', stepId: 'coef', dependsOn: 'diag' },
+          hint: 'Trenne Koeffizienten und Inferenz.',
+          explain: 'Nicht zwingend. Häufig ist zuerst die Inferenz über Standardfehler/Teste betroffen.'
+        },
+        {
+          q: '[3. Validation] Ist “robuste Standardfehler berichten” eine saubere Klausurreaktion?',
+          answer: ['ja', 'Ja'],
+          options: { problemId: 'stat_regdp_1', role: 'VALIDATION' },
+          hint: 'Inferenz absichern statt nur Fit loben.',
+          explain: 'Ja. Das ist eine typische saubere Folgerung aus Heteroskedastizität.'
+        }
+      ]
+    },
+    {
+      title: 'Konfidenz- vs. Prognoseintervall',
+      context: 'Für denselben x0 liefert predict(...) einmal confidence und einmal prediction.',
+      steps: [
+        {
+          q: '[1. Decision] Welches Intervall ist typischerweise breiter?',
+          answer: ['prediction', 'prognoseintervall', 'pi'],
+          options: { problemId: 'stat_regdp_2', stepId: 'width', isDecision: true },
+          hint: 'Eine neue Einzelbeobachtung enthält zusätzliche Reststreuung.',
+          explain: 'Das Prognoseintervall ist breiter als das Konfidenzintervall.'
+        },
+        {
+          q: '[2. Execution] Auf welche Zielgröße zielt das Konfidenzintervall?',
+          answer: ['mittelwert', 'erwartungswert', 'e[y|x0]', 'erwarteten mittelwert'],
+          options: { problemId: 'stat_regdp_2', stepId: 'target', dependsOn: 'width' },
+          hint: 'Nicht neue Einzelbeobachtung, sondern die bedingte Mitte.',
+          explain: 'Es beschreibt die Unsicherheit über den erwarteten Mittelwert bei x0.'
+        },
+        {
+          q: '[3. Validation] Bedeutet ein präziser Mittelwert automatisch eine präzise Einzelprognose?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_regdp_2', role: 'VALIDATION' },
+          hint: 'Reststreuung bleibt bei neuen Beobachtungen erhalten.',
+          explain: 'Nein. Einzelprognosen tragen zusätzliche idiosynkratische Unsicherheit.'
+        }
+      ]
+    }
+  ],
+  nichtparametrisch: [
+    {
+      title: 'Rangtest statt Mittelwerttest',
+      context: 'Zwei unabhängige Gruppen, ordinale Daten, deutliche Schiefe und Ausreißer.',
+      steps: [
+        {
+          q: '[1. Decision] Welcher Test ist hier typischerweise näherliegend als ein t-Test?',
+          answer: ['mann-whitney', 'mann whitney', 'u-test', 'rangtest'],
+          options: { problemId: 'stat_np_1', stepId: 'select', isDecision: true },
+          hint: 'Rangbasiert statt mittelwertbasiert.',
+          explain: 'Der Mann-Whitney-U-Test ist hier die typische robuste Wahl.'
+        },
+        {
+          q: '[2. Execution] Welcher Vorteil ist hier zentral: höhere Power bei Normalität oder Robustheit gegen Annahmeverletzungen?',
+          answer: ['robustheit', 'annahmeverletzungen', 'ausreißer'],
+          options: { problemId: 'stat_np_1', stepId: 'why', dependsOn: 'select' },
+          hint: 'Die Datensituation ist gerade nicht ideal-parametrisch.',
+          explain: 'Zentral ist die Robustheit gegen Ausreißer, Schiefe und fehlende Metrik.'
+        },
+        {
+          q: '[3. Validation] Sind nichtparametrische Tests deshalb immer grundsätzlich besser?',
+          answer: ['nein', 'Nein'],
+          options: { problemId: 'stat_np_1', role: 'VALIDATION' },
+          hint: 'Bei gut erfüllten Annahmen bleiben parametrische Tests oft effizienter.',
+          explain: 'Nein. Sie sind robuster, aber bei idealen parametrischen Bedingungen nicht automatisch überlegen.'
+        }
+      ]
+    }
   ]
 };
-
-BASE_STEP_PROBLEMS.schaetzen_eigenschaften_intervalle = BASE_STEP_PROBLEMS.schaetzen_verfahren;
-BASE_STEP_PROBLEMS.regression_diagnostik_prognose = BASE_STEP_PROBLEMS.regression_schaetzung_inferenz;
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,

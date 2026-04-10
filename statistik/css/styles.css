@@ -2652,6 +2652,12 @@ body.light-mode .dash-focus-rec {
   font-size: 12px;
   line-height: 1.5;
 }
+.dhp-status {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text);
+}
 .dhp-muted {
   margin: 8px 0 0;
   font-size: 11px;

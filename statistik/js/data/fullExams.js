@@ -317,5 +317,158 @@ export const FULL_EXAMS = {
         ]
       }
     ]
+  },
+
+  klausur_methodenlogik_2025: {
+    id: 'klausur_methodenlogik_2025',
+    title: 'Probeklausur Statistik — Methodenwahl und Interpretation',
+    subtitle: '75 Min. · Entscheidungslogik, Intervalllesen, Regression und ANOVA',
+    duration: 75,
+    problems: [
+      {
+        id: 'fe2_desc_1',
+        title: 'Lagemaß unter Ausreißern',
+        conceptId: 'deskriptiv',
+        text: 'Ein Datensatz ist stark rechtsschief; der Mittelwert liegt deutlich über dem Median. Welche Kennzahlen berichten Sie zuerst und wie begründen Sie das knapp?',
+        type: 'step',
+        steps: [
+          {
+            q: '[Wahl] Welches Lagemaß ist hier robuster als der Mittelwert?',
+            answer: ['median'],
+            hint: 'Schiefe und Ausreißer sprechen gegen eine reine Mittelwertantwort.'
+          },
+          {
+            q: '[Transfer] Welches Streuungsmaß ist als robuste Ergänzung naheliegend?',
+            answer: ['iqr', 'interquartilsabstand'],
+            hint: 'Boxplot- und Quartilslogik statt nur Standardabweichung.'
+          },
+          {
+            q: '[Deutung] Reicht “Mittelwert ist höher” als vollständige Aussage?',
+            answer: ['nein', 'Nein'],
+            hint: 'Die Form der Verteilung muss in die Deutung hinein.'
+          }
+        ]
+      },
+      {
+        id: 'fe2_ci_1',
+        title: 'Konfidenzintervall und Test',
+        conceptId: 'schaetzen_eigenschaften_intervalle',
+        text: 'Ein 95%-Konfidenzintervall für μ ist [12,1 ; 14,4]. Es soll H₀: μ = 15 zweiseitig auf 5%-Niveau getestet werden.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Logik] Liegt der Nullwert im Intervall?',
+            answer: ['nein', 'Nein'],
+            hint: '15 liegt oberhalb der Intervallobergrenze.'
+          },
+          {
+            q: '[Entscheidung] Wird H₀ auf 5%-Niveau verworfen?',
+            answer: ['ja', 'Ja'],
+            hint: 'KI-Test-Dualität nutzen.'
+          },
+          {
+            q: '[Interpretation] Bedeutet das Intervall, dass μ mit 95% Wahrscheinlichkeit darin liegt?',
+            answer: ['nein', 'Nein'],
+            hint: 'Wahrscheinlichkeit gehört zur Methode, nicht zum festen Parameter.'
+          }
+        ]
+      },
+      {
+        id: 'fe2_test_1',
+        title: 'Testwahl unter Zeitdruck',
+        conceptId: 'zwei_stichproben',
+        text: 'Vorher-Nachher-Messung an denselben 18 Personen; Ziel ist die Frage, ob das Training den Mittelwert verändert.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Wahl] Welcher Test ist der passende Startpunkt?',
+            answer: ['verbunden', 'paired', 'gepaarter t-test'],
+            hint: 'Dieselben Personen -> Paarstruktur.'
+          },
+          {
+            q: '[Mechanik] Welche Größe wird dabei getestet?',
+            answer: ['differenzen', 'd_i', 'mittelwert der differenzen'],
+            hint: 'Nicht zwei unabhängige Gruppenmittel, sondern individuelle Differenzen.'
+          },
+          {
+            q: '[Trap] Ist ein unverbundener Test hier trotz gleicher n sauber?',
+            answer: ['nein', 'Nein'],
+            hint: 'Die Strukturfrage schlägt die bloße Stichprobengröße.'
+          }
+        ]
+      },
+      {
+        id: 'fe2_reg_1',
+        title: 'Regression — Signifikanz vs. Relevanz',
+        conceptId: 'regression_schaetzung_inferenz',
+        text: 'Regressionsoutput: β̂₁ = 0,03; p < 0,001; große Stichprobe. Kommentieren Sie das Ergebnis klausurfest.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Signifikanz] Ist der Koeffizient statistisch signifikant?',
+            answer: ['ja', 'Ja'],
+            hint: 'p < 0,001.'
+          },
+          {
+            q: '[Grenze] Darf daraus automatisch hohe praktische Relevanz gefolgert werden?',
+            answer: ['nein', 'Nein'],
+            hint: 'Effektgröße separat lesen.'
+          },
+          {
+            q: '[Grenze 2] Ist damit Kausalität bewiesen?',
+            answer: ['nein', 'Nein'],
+            hint: 'Regression ohne Designbegründung beweist keinen kausalen Effekt.'
+          }
+        ]
+      },
+      {
+        id: 'fe2_regdiag_1',
+        title: 'Diagnostik und Prognose',
+        conceptId: 'regression_diagnostik_prognose',
+        text: 'Ein Residuenplot zeigt eine Trichterform; für denselben x₀ liegen sowohl Konfidenz- als auch Prognoseintervall vor.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Diagnose] Wofür ist die Trichterform ein Hinweis?',
+            answer: ['heteroskedastizität', 'heteroskedastizitaet'],
+            hint: 'Die Fehlerstreuung wirkt nicht konstant.'
+          },
+          {
+            q: '[Konsequenz] Sind Standardfehler/Teste potenziell betroffen?',
+            answer: ['ja', 'Ja'],
+            hint: 'Genau dort schlägt Heteroskedastizität in der Klausur zuerst zu.'
+          },
+          {
+            q: '[Intervall] Welches Intervall ist für denselben x₀ breiter?',
+            answer: ['prognoseintervall', 'prediction', 'pi'],
+            hint: 'Einzelbeobachtung enthält zusätzliche Reststreuung.'
+          }
+        ]
+      },
+      {
+        id: 'fe2_anova_1',
+        title: 'ANOVA und Post-hoc',
+        conceptId: 'varianzanalyse',
+        text: 'Eine einfaktorielle ANOVA liefert p = 0,012.',
+        type: 'step',
+        steps: [
+          {
+            q: '[Lesart] Was ist die globale Schlussfolgerung?',
+            answer: ['nicht alle mittelwerte gleich', 'mindestens eine gruppe unterscheidet sich'],
+            hint: 'Globaltest, kein Paarvergleich.'
+          },
+          {
+            q: '[Grenze] Darf man ohne Weiteres behaupten, dass jedes Paar verschieden ist?',
+            answer: ['nein', 'Nein'],
+            hint: 'Post-hoc fehlt noch.'
+          },
+          {
+            q: '[Nächster Schritt] Welcher Prüfungsbegriff gehört jetzt dazu?',
+            answer: ['post-hoc', 'tukey', 'bonferroni', 'holm'],
+            hint: 'Paarweise Klärung unter Niveaukontrolle.'
+          }
+        ]
+      }
+    ]
   }
 };

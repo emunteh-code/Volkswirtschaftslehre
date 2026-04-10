@@ -390,8 +390,8 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
   const rc = snap.attempts.recent_concept_schnelltest;
   let block1;
   if (!rc.length) {
-    block1 = `<p class="dhp-status dhp-na">Noch nicht verfügbar: keine Konzept-Check-Läufe im Attempt-Log.</p>
-<p class="dhp-muted">Nach einem abgeschlossenen Konzept-Check erscheinen hier die letzten Läufe (Punkte, Abschlussgrund).</p>`;
+    block1 = `<p class="dhp-status dhp-na">Noch keine Konzept-Checks im Lernprotokoll.</p>
+<p class="dhp-muted">Sobald du einen Konzept-Check abschließt, erscheinen hier Punktestand, Abschlussgrund und Zeitstempel.</p>`;
   } else {
     const lines = rc
       .map(
@@ -412,8 +412,8 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
   const rf = snap.attempts.recent_full_exam;
   let block2;
   if (!rf.length) {
-    block2 = `<p class="dhp-status dhp-na">Noch nicht verfügbar: keine Probeklausur-Sessions im Attempt-Log.</p>
-<p class="dhp-muted">Erscheint nach „Klausur abgeben“ bei einer Probeklausur (sofern das Modul Versuche protokolliert).</p>`;
+    block2 = `<p class="dhp-status dhp-na">Noch keine abgegebene Probeklausur im Lernprotokoll.</p>
+<p class="dhp-muted">Nach „Klausur abgeben“ tauchen hier deine letzten Sessions auf, sofern das Modul die Versuche protokolliert.</p>`;
   } else {
     block2 = `<ul class="dhp-list">${rf
       .map(
@@ -425,7 +425,8 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
 
   let block3;
   if (!snap.mistakes.total) {
-    block3 = `<p class="dhp-status dhp-na">Keine Fehler-Einträge im Protokoll (oder noch nichts protokolliert).</p>`;
+    block3 = `<p class="dhp-status dhp-na">Noch keine Fehler-Einträge im Lernprotokoll.</p>
+<p class="dhp-muted">Sobald du in Schnelltest, Konzept-Check oder Probeklausur Fehler sammelst, werden die wichtigsten Quellen hier gebündelt.</p>`;
   } else {
     const top = Object.entries(snap.mistakes.by_source)
       .sort((a, b) => b[1] - a[1])
@@ -445,13 +446,13 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
   const drillTotal = drillSources.reduce((sum, src) => sum + ((nf[src] && nf[src].total) || 0), 0);
   const drillTagged = drillSources.reduce((sum, src) => sum + ((nf[src] && nf[src].tagged) || 0), 0);
   const block3a = `<div class="dhp-section">
-<h4 class="dhp-h">Schnelltest/Drill-Analytik (normalisiert)</h4>
+<h4 class="dhp-h">Schnelltest und Drills</h4>
 <ul class="dhp-list">
 <li>Schnelltest (Schritte): <strong>${quick.total}</strong> Fehler · Konzept-getaggt: ${quick.tagged}${quick.untagged ? ` · ungetaggt: ${quick.untagged}` : ""}</li>
 <li>Konzept-Check: <strong>${concept.total}</strong> Fehler · Konzept-getaggt: ${concept.tagged}${concept.untagged ? ` · ungetaggt: ${concept.untagged}` : ""}</li>
 <li>Drill/Practice (practice/graph/formula/mixed): <strong>${drillTotal}</strong> Fehler · Konzept-getaggt: ${drillTagged}</li>
 </ul>
-${drillTotal === 0 ? `<p class="dhp-muted">Derzeit keine Drill/Practice-Fehlerquellen im Backbone protokolliert.</p>` : ""}
+${drillTotal === 0 ? `<p class="dhp-muted">Derzeit sind noch keine Drill-Fehler im Lernprotokoll erfasst.</p>` : ""}
 </div>`;
 
   let block3b = "";
@@ -481,9 +482,22 @@ ${untaggedNote}
 </div>`;
   }
 
+  let nextStepHeadline = "Nächster sinnvoller Schritt";
+  let nextStepBody = "Starte mit einem Konzept und bearbeite danach Schnelltest oder Probeklausur, damit das Lernprotokoll aussagekräftig wird.";
+  if ((snap.mistakes.reviewable_open || 0) > 0) {
+    nextStepBody =
+      snap.mistakes.reviewable_open === 1
+        ? "Öffne zuerst das Fehlerprotokoll: 1 Eintrag wartet noch auf Klärung."
+        : `Öffne zuerst das Fehlerprotokoll: ${snap.mistakes.reviewable_open} Einträge warten noch auf Klärung.`;
+  } else if (snap.srs.due_count > 0) {
+    nextStepBody = `Arbeite als Nächstes deine fälligen Wiederholungen ab: ${snap.srs.due_count} Konzept${snap.srs.due_count === 1 ? "" : "e"} sind heute dran.`;
+  } else if (rc.length > 0) {
+    nextStepBody = "Nutze jetzt ein schwächeres Konzept oder eine Probeklausur, damit aus den vorhandenen Daten eine echte Priorisierung wird.";
+  }
+
   let block4;
   if (snap.srs.due_count === 0) {
-    block4 = `<p class="dhp-muted">Keine SRS-Karten mit fälliger Wiederholung (oder noch keine Karten).</p>`;
+    block4 = `<p class="dhp-muted">Heute sind keine SRS-Wiederholungen fällig oder es wurden noch keine Karten aufgebaut.</p>`;
   } else {
     const next = snap.srs.due_next;
     const title = next ? titles[next.concept_id] || next.concept_id : "";
@@ -493,28 +507,32 @@ ${untaggedNote}
     }
   }
 
-  return `<div class="dash-honest-pilot" aria-label="Pilot: ehrliche Kennzahlen aus Protokoll">
-<h3 class="dash-honest-pilot-title">Kennzahlen aus dem Lernprotokoll (Pilot)</h3>
-<p class="dhp-intro">Nur Daten, die in diesem Browser gespeichert sind. Keine geschätzte Gesamtmastery.</p>
+  return `<div class="dash-honest-pilot" aria-label="Lernprotokoll und nächste Schritte">
+<h3 class="dash-honest-pilot-title">Lernprotokoll und nächste Schritte</h3>
+<p class="dhp-intro">Diese Übersicht zeigt nur echte Lernspuren aus diesem Browser. Sie ersetzt keine geschätzte Gesamtmastery, hilft aber bei der nächsten sinnvollen Entscheidung.</p>
 <div class="dhp-section">
-<h4 class="dhp-h">Konzept-Check (letzte Läufe)</h4>
+<h4 class="dhp-h">${nextStepHeadline}</h4>
+<p class="dhp-status">${nextStepBody}</p>
+</div>
+<div class="dhp-section">
+<h4 class="dhp-h">Konzept-Check: letzte Läufe</h4>
 ${block1}
 </div>
 <div class="dhp-section">
-<h4 class="dhp-h">Probeklausur (letzte Sessions)</h4>
+<h4 class="dhp-h">Probeklausuren: letzte Sessions</h4>
 ${block2}
 </div>
 <div class="dhp-section">
-<h4 class="dhp-h">Fehler nach Quelle (Top)</h4>
+<h4 class="dhp-h">Wo Fehler zuletzt aufgetreten sind</h4>
 ${block3}
 </div>
 ${block3a}
 ${block3b}
 <div class="dhp-section">
-<h4 class="dhp-h">SRS-Wiederholungen</h4>
+<h4 class="dhp-h">Wiederholungen für heute</h4>
 ${block4}
 </div>
-<p class="dhp-foot">Step-Schnelltest (20-Min.) erscheint hier erst, wenn das Modul diese Versuche ins Attempt-Log schreibt (derzeit oft nicht angebunden).</p>
+<p class="dhp-foot">Einige Module protokollieren noch nicht jede Übungsform gleich tief. Wo Daten fehlen, zeigt die Übersicht das offen an, statt etwas zu schätzen.</p>
 </div>`;
 }
 

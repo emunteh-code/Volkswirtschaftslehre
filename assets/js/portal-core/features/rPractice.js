@@ -651,18 +651,18 @@ function inferTransferPrompt(block) {
   const prompt = String(block.taskPrompt || block.miniTask || '').trim();
   const code = String(block.starterCode || block.code || '');
   if (/predict\(/.test(code) && /prediction|confidence/i.test(prompt)) {
-    return 'Mini-Transfer: Woran erkennst du im Output sofort, ob du ein Erwartungswert- oder ein Einzelprognoseintervall liest?';
+    return 'Prüfungsregel: Woran erkennst du im Output sofort, ob du ein Erwartungswert- oder ein Einzelprognoseintervall liest?';
   }
   if (/konfidenz|intervall/i.test(prompt)) {
-    return 'Mini-Transfer: Wenn das Intervall breiter wird, was ändert sich fachlich an Sicherheit und Präzision?';
+    return 'Prüfungsregel: Wenn das Intervall breiter wird, was ändert sich fachlich an Sicherheit und Präzision?';
   }
   if (/p-?wert|hypothese|test/i.test(prompt)) {
-    return 'Mini-Transfer: Formuliere dieselbe Testentscheidung in zwei Sätzen: formal und inhaltlich.';
+    return 'Prüfungsregel: Formuliere dieselbe Testentscheidung in zwei Sätzen: formal und inhaltlich.';
   }
   if (/korrelation|cov|zusammenhang/i.test(prompt)) {
-    return 'Mini-Transfer: Woran erkennst du, dass ein Zusammenhang stark ist, auch wenn das Vorzeichen wechselt?';
+    return 'Prüfungsregel: Woran erkennst du, dass ein Zusammenhang stark ist, auch wenn das Vorzeichen wechselt?';
   }
-  return 'Mini-Transfer: Welche eine Prüfungsregel nimmst du aus dieser R-Übung in die Klausur mit?';
+  return 'Prüfungsregel: Welche eine Regel nimmst du aus dieser R-Übung direkt in die Klausur mit?';
 }
 
 function inferTaskSteps(block, config) {
@@ -885,16 +885,16 @@ ${code}
 function buildRuntimeExpectation(mode, runtimeNote) {
   if (runtimeNote) return runtimeNote;
   if (mode === 'guided') {
-    return 'Geführter Modus: Dieser Block nutzt Kurscode, der zusätzliche Pakete oder vorbereitete Übungsobjekte voraussetzt. Die Aufgabe bleibt editierbar, aber die Laufzeit wird bewusst durch Soll-Output und Interpretation gestützt.';
+    return 'Geführter Modus: Dieser Block stützt sich auf vorbereiteten Kurscode oder Zusatzpakete. Arbeite deshalb bewusst über Code-Lesen, Soll-Output und fachliche Deutung; wenn kein Live-Run vorgesehen ist, ist das hier Absicht und kein Defekt.';
   }
-  return 'Live-Modus: Der Code läuft direkt im Browser über WebR (WebAssembly). Falls WebR in deinem Browser oder Netzwerk nicht startet, bleibt die Aufgabe im ehrlichen Fallback und verweist auf den Soll-Output.';
+  return 'Du arbeitest direkt im Browser mit R. Wenn der Live-Run in deinem Browser oder Netzwerk nicht startet, bleibt der Block ehrlich beim Soll-Output und der fachlichen Interpretation, damit du die Lernlogik trotzdem sauber üben kannst.';
 }
 
 function inferOutputPlaceholder(block, runtimeMode) {
   if (block.outputPlaceholder) return block.outputPlaceholder;
 
   if (runtimeMode === 'guided') {
-    return '[Geführter Modus]\nNutze den Editor, die Interpretationskarte und die Musterlösung, um den Ablauf kursnah nachzuvollziehen.';
+    return '[Geführter Modus]\nNutze Code, Soll-Output und Musterlösung als gemeinsames Belegpaket. Entscheidend ist hier die fachliche Deutung, nicht der Live-Run.]';
   }
 
   const text = `${block.taskPrompt || block.miniTask || ''}\n${block.starterCode || block.code || ''}`;
@@ -904,14 +904,14 @@ function inferOutputPlaceholder(block, runtimeMode) {
   }
 
   if (/\b(curve|plot|hist|boxplot|barplot)\s*\(/.test(text)) {
-    return '[Dieser Block erzeugt vor allem einen Plot.\nWenn hier keine aussagekräftige Konsolenausgabe erscheint, lies Plot-Code, Plotbild und Interpretation gemeinsam.]';
+    return '[Dieser Block liefert den wichtigsten Beleg meist im Plot.\nWenn hier nur wenig Konsole erscheint, lies Plot-Code, Plotbild und Interpretation gemeinsam.]';
   }
 
   if (/predict\(/.test(text) && /prediction|confidence/i.test(text)) {
     return '[Hier erscheinen Vorhersagewert und Intervallgrenzen.\nVergleiche dieselben x-Werte vor und nach der Änderung.]';
   }
 
-  return '[Output erscheint hier nach "Code ausführen".]';
+  return '[Nach „Code ausführen“ erscheint hier der Output.\nSuche darin die eine Zeile oder Zahl, die deine fachliche Aussage wirklich belegt.]';
 }
 
 function buildConfig(block, options = {}) {
@@ -1066,17 +1066,17 @@ function renderSolutionDetails(config) {
 </div>`
     : `<div class="r-solution-note">${escapeHtml(
       config.taskMode === 'interpret'
-        ? 'Keine Codeänderung nötig: Diese R-Übung prüft vor allem Output-Lesen und fachliche Deutung.'
-        : 'Die Musterlösung erklärt den Lösungsweg. Wenn du den Code änderst, halte dich an den beschriebenen Zielschritt.'
+        ? 'Keine Codeänderung nötig: Diese R-Übung prüft vor allem Output-Lesen, Zuordnung und fachliche Deutung.'
+        : 'Die Musterlösung zeigt den Zielschritt klar. Wenn du den Code änderst, halte dich an die eine fachlich entscheidende Stelle.'
     )}</div>`;
 
   return `<div class="r-solution-body">
   <div class="r-solution-label">Musterlösung</div>
   <p>${escapeHtml(config.solution)}</p>
   <div class="r-solution-loop">
-    <strong>Schließt den Loop:</strong> Begründe die Änderung zuerst fachlich (Mathe/Statistik), dann im Code, dann mit der entscheidenden Output-Zeile.
+    <strong>So argumentierst du sauber:</strong> Begründe die Änderung zuerst fachlich, dann im Code, dann mit der entscheidenden Output-Zeile.
   </div>
-  <div class="r-solution-transfer"><strong>Transferregel:</strong> ${escapeHtml(config.transferRule)}</div>
+  <div class="r-solution-transfer"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</div>
   ${changeList}
   ${codeBlock}
 </div>`;
@@ -1109,7 +1109,7 @@ export function renderRPracticeMarkup(block, options = {}) {
         <div class="r-practice-toolbar-kicker">Codebereich</div>
         <div class="r-practice-toolbar-title">Code als Modell der Fachidee</div>
       </div>
-      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>
+      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv im Browser'}</span>
     </div>
     <textarea class="r-practice-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
     <div class="r-practice-actions">
@@ -1127,7 +1127,7 @@ export function renderRPracticeMarkup(block, options = {}) {
     <div class="r-practice-output-head">
       <div>
         <div class="r-practice-toolbar-kicker">Output</div>
-        <div class="r-practice-toolbar-title">Konsole und Rückmeldung</div>
+        <div class="r-practice-toolbar-title">Output lesen und belegen</div>
       </div>
     </div>
     <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
@@ -1248,7 +1248,7 @@ function renderTabOrientationCard(config, index, total) {
       <div class="r-orient-kicker">R-Übung${indexLabel}</div>
       <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
     </div>
-    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Modus: geführt' : 'Runtime: bereit'}</span>
+    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv im Browser'}</span>
   </div>
   <p class="r-orient-purpose">${escapeHtml(config.purpose)}</p>
   ${renderTaskBriefs(config)}
@@ -1294,8 +1294,8 @@ function renderHighlightEditor(config) {
 
 function renderTabOutputCard(config) {
   const outputTitle = config.runtimeMode === 'guided'
-    ? 'Outputbeleg · Geführt'
-    : 'Outputbeleg · Live WebR';
+    ? 'Output lesen und belegen'
+    : 'Output lesen und belegen';
 
   return `<div class="r-practice-output-card r-tab-output-card">
   <div class="r-practice-output-head">
@@ -1432,12 +1432,12 @@ async function handleRun(blockEl, config) {
 
   const code = normalizeCode(editor.value);
   output.textContent = 'Code wird ausgeführt…';
-  setRuntimeStatus(status, 'Runtime: lädt WebR…', 'loading');
+  setRuntimeStatus(status, 'R wird gestartet…', 'loading');
 
   try {
     const result = await executeR(config.moduleSlug, code);
     output.textContent = result;
-    setRuntimeStatus(status, 'Runtime: WebR aktiv', 'success');
+    setRuntimeStatus(status, 'Interaktiv aktiv', 'success');
     saveState(config.moduleSlug, config.blockId, {
       code,
       lastOutput: result,
@@ -1445,8 +1445,8 @@ async function handleRun(blockEl, config) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    output.textContent = `[Live-Runtime nicht verfügbar]\n${message}\n\nNutze den Interpretationsblock und die Musterlösung als didaktischen Fallback.`;
-    setRuntimeStatus(status, 'Runtime: Fallback', 'fallback');
+    output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, Interpretationsblock und Musterlösung als ehrlichen Lern-Fallback.`;
+    setRuntimeStatus(status, 'Didaktischer Fallback', 'fallback');
     saveState(config.moduleSlug, config.blockId, {
       code,
       lastOutput: output.textContent,
@@ -1482,7 +1482,7 @@ function mountBlock(blockEl) {
   }
 
   if (config.runtimeMode === 'guided') {
-    setRuntimeStatus(status, 'Modus: geführt', 'guided');
+    setRuntimeStatus(status, 'Geführt', 'guided');
   }
 
   // Mount syntax highlighting for tab-style editor (has overlay)
@@ -1504,9 +1504,9 @@ function mountBlock(blockEl) {
     }
     hydrateOutput(blockEl, config, {});
     if (config.runtimeMode === 'guided') {
-      setRuntimeStatus(status, 'Modus: geführt', 'guided');
+      setRuntimeStatus(status, 'Geführt', 'guided');
     } else {
-      setRuntimeStatus(status, 'Runtime: bereit', '');
+      setRuntimeStatus(status, 'Interaktiv im Browser', '');
     }
     saveState(config.moduleSlug, config.blockId, {
       code: config.starterCode,

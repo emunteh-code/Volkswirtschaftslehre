@@ -324,15 +324,26 @@ export const CONTENT = {
         ${math(String.raw`$$i = \bar{i}$$`)}
         <p>Das ändert die Politiklogik erheblich: Bei horizontaler Zinsregel entfällt das klassische Crowding-Out über steigende Zinsen.</p>
       `),
+      section('Verschiebung versus Bewegung im Diagramm', `
+        <p>Im IS-LM-Diagramm ist die erste Klausurfrage fast immer: <em>Was verschiebt die Kurve und was ist nur eine Bewegung entlang?</em> Ein Fiskalimpuls über $G$ oder $T$ verschiebt die IS-Kurve. Ein monetärer Zinsimpuls verschiebt die Zinsregel bzw. LM. Der neue Schnittpunkt erzeugt dann eine Bewegung entlang der jeweils anderen Kurve.</p>
+        <p>Genau diese Trennung verhindert den Standardfehler „IS verschiebt sich, weil der Zins fällt“. Sinkende Zinsen bewegen dich entlang der IS; die IS selbst verschiebt sich erst, wenn eine autonome Nachfragekomponente wechselt.</p>
+        ${warn('Verschiebung ist nicht Bewegung', 'Ein neuer Gleichgewichtspunkt nach Zinsänderung ist noch keine IS-Verschiebung. Für eine Verschiebung brauchst du einen eigenen Gütermarktschock wie G, T oder Investitionsvertrauen.')}
+      `),
       section('Gemeinsames Gleichgewicht', `
         <p>Das makroökonomische Gleichgewicht liegt dort, wo Gütermarkt und Finanzmarkt gleichzeitig im Gleichgewicht sind. Fiskalpolitik verschiebt die IS-Kurve; Geldpolitik verschiebt die Zinsregel bzw. im klassischen Modell die LM-Kurve.</p>
         ${warn('IS-LM ist Kurzfristlogik', 'Das Modell erklärt Nachfrage, Output und Zins bei gegebenem Preisniveau. Arbeitsmarkt und Inflationsdynamik gehören noch nicht in dieselbe Antwort.')}
         ${warn('LM nicht automatisch steigend zeichnen', 'Wenn der Kurs ausdrücklich Zinssteuerung verwendet, ist die relevante monetäre Beziehung horizontal.')}
+      `),
+      section('Politikvergleich und Anschluss an die mittlere Frist', `
+        <p>Das Modell ist klausurstark, weil es Politikvergleiche strukturiert: Fiskalpolitik verschiebt die Nachfrage direkt, Geldpolitik verändert die Finanzierungsbedingung. Die richtige Antwort nennt deshalb immer <em>Schock → betroffene Kurve → neues Gleichgewicht → ökonomische Deutung</em>.</p>
+        <p>Gleichzeitig muss die Grenze des Modells sichtbar bleiben: IS-LM sagt noch nicht, wie Inflation, Erwartungen oder Arbeitslosigkeit mittelfristig reagieren. Genau dieser Anschluss erfolgt erst im IS-LM-PC-Rahmen.</p>
+        ${warn('Kurzfristige Gleichgewichte nicht überdehnen', 'Ein höheres Y im IS-LM-Diagramm ist kein Beweis für dauerhaft höheres Produktionspotenzial. Dafür brauchst du die mittelfristige Angebots- und Inflationslogik.')}
       `)
     ].join(''),
     formeln: [
       { label: 'IS-Gleichung', eq: String.raw`$$Y = C(Y-T) + I(Y,i) + G$$`, desc: 'Gütermarkt im Zins-Output-Raum', variables: {} },
-      { label: 'Zinsregel', eq: String.raw`$$i = \bar{i}$$`, desc: 'Horizontale LM bei Zinssteuerung', variables: { '\\bar{i}': 'von der Zentralbank gesetzter Zins' } }
+      { label: 'Zinsregel', eq: String.raw`$$i = \bar{i}$$`, desc: 'Horizontale LM bei Zinssteuerung', variables: { '\\bar{i}': 'von der Zentralbank gesetzter Zins' } },
+      { label: 'Kurvenzuordnung von Politikschocks', eq: String.raw`$$\Delta G>0 \Rightarrow IS \text{ nach rechts},\qquad \Delta \bar i<0 \Rightarrow \text{Zinsregel/LM nach unten}$$`, desc: 'Die erste Prüfungsfrage lautet: Welche Bedingung wird direkt getroffen?', variables: { '\\Delta G': 'fiskalischer Nachfrageimpuls', '\\Delta \\bar i': 'geldpolitische Zinssenkung' } }
     ],
     aufgaben: [
       task(
@@ -362,6 +373,24 @@ export const CONTENT = {
           step('Die IS selbst verschiebt sich erst bei Nachfragekomponenten wie G, T oder Investitionsvertrauen.')
         ],
         'Saubere Diagrammsprache: Zinsimpuls -> monetäre Kurve verschiebt sich; Anpassung zum neuen Gleichgewicht -> Bewegung entlang der IS.'
+      ),
+      task(
+        String.raw`Die Regierung erhöht $G$, während die Zentralbank den Zielzins unverändert hält. Welche Kurve verschiebt sich, was bleibt fest, und warum ist das Ergebnis nicht dasselbe wie bei steiler LM?`,
+        [
+          step('Die Fiskalpolitik verschiebt die IS-Kurve nach rechts.'),
+          step('Bei fixer Zinsregel bleibt der Zins auf dem vorgegebenen Niveau; es gibt hier kein zusätzliches Crowding-Out über steigende Zinsen.'),
+          step('Deshalb fällt der Outputanstieg größer aus als im Fall einer steilen LM, in der der Zins auf den Nachfrageanstieg mit nach oben reagieren würde.')
+        ],
+        'Unter Zinssteuerung wirkt derselbe Fiskalimpuls stärker auf Y, weil der Zins nicht mit ansteigt.'
+      ),
+      task(
+        String.raw`Eine Lösung schreibt: „Nach höherem $G$ steigt Y im IS-LM-Modell dauerhaft über sein natürliches Niveau.“ Welche wichtige Ergänzung fehlt?`,
+        [
+          step('IS-LM beschreibt zunächst nur das kurzfristige Nachfragegleichgewicht bei gegebenem Preisniveau.'),
+          step('Für die mittelfristige Rückkehr oder Persistenz musst du Arbeitsmarkt, Phillipskurve und Zinsreaktion ergänzen.'),
+          step('Ohne diese Ergänzung darf aus dem neuen IS-LM-Punkt keine Aussage über dauerhaft höheres Produktionspotenzial gemacht werden.')
+        ],
+        'Es fehlt die mittelfristige Angebots- und Inflationslogik: IS-LM allein begründet keinen dauerhaften Abstand von Y zu Y_n.'
       )
     ]
   },
@@ -635,15 +664,25 @@ export const CONTENT = {
         ${math(String.raw`$$u_t - u_n = -\beta \frac{Y_t - Y_n}{Y_n}$$`)}
         <p>Damit wird klar, warum ein Nachfrageschock nicht nur das Einkommen verschiebt, sondern mit Verzögerung auch den Inflationsdruck verändert.</p>
       `),
+      section('Realkette: Produktionslücke -> Inflation -> Realzins', `
+        <p>Die mittelfristige Rückkehr entsteht nicht automatisch, sondern über eine klare Realkette. Liegt $Y_t$ über $Y_n$, fällt die Arbeitslosigkeit unter $u_n$, Inflation steigt, und die Zentralbank hebt den Realzins an. Genau dadurch wird die Nachfrage wieder gebremst.</p>
+        <p>Die didaktische Kernregel lautet deshalb: Nicht nur den ersten Boom nennen, sondern immer den Rückkanal über Inflation und Realzins mitsprechen.</p>
+      `),
       section('Anpassungsdynamik', `
         <p>Nach einer expansiven Fiskalpolitik steigt der Output zunächst über $Y_n$. Die Arbeitslosigkeit fällt unter $u_n$, Inflation zieht an, die Zentralbank erhöht den Realzins und drückt die Nachfrage wieder zurück. Mittelfristig kehrt die Wirtschaft zu $Y_n$ zurück.</p>
         ${warn('Kurzfristiger Boom ist nicht dauerhaftes Wachstum', 'Im IS-LM-PC-Modell kehrt der Output zur natürlichen Produktion zurück. Dauerhafte Nachfragepolitik verschiebt also nicht das Produktionspotenzial.')}
         ${warn('Zinsregel ersetzt die alte LM-Logik', 'Spätestens hier muss klar sein, ob die Zentralbank Geldmenge oder Zins setzt. Für die Dynamik zählt die Reaktion des Realzinses auf Inflation.')}
+      `),
+      section('Zeitachsen- und Graphlesart', `
+        <p>Im Diagramm werden häufig Kurzfrist- und Mittelfristpunkt verwechselt. Die saubere Antwort benennt daher explizit die Zeitachse: <em>zuerst</em> IS-Verschiebung und Produktionslücke, <em>dann</em> Arbeitslosen- und Inflationsreaktion, <em>danach</em> Zinsanpassung und Rückführung Richtung $Y_n$.</p>
+        <p>Wer alle Schritte in einen einzigen Vergleichspunkt presst, verpasst den Kern dieses Modells: Es ist ein Anpassungspfad, keine statische Ein-Gleichung-Antwort.</p>
+        ${warn('Nominal- und Realzins nicht mischen', 'Für die Stabilisierung zählt im Modell die Reaktion des Realzinses auf Inflation. Ein unveränderter Nominalzins kann bei fallender Inflation bereits restriktiver wirken.')}
       `)
     ].join(''),
     formeln: [
       { label: 'Zinsregel', eq: String.raw`$$r_t = \bar r + \lambda(\pi_t - \bar \pi)$$`, desc: 'Reaktion des Realzinses auf Inflationsabweichungen', variables: { '\\lambda': 'Reaktionskoeffizient', '\\bar \\pi': 'Inflationsziel' } },
-      { label: 'Okuns Gesetz', eq: String.raw`$$u_t - u_n = -\beta \frac{Y_t - Y_n}{Y_n}$$`, desc: 'Produktionslücke und Arbeitslosigkeitslücke', variables: { '\\beta': 'Sensitivität von u auf Y' } }
+      { label: 'Okuns Gesetz', eq: String.raw`$$u_t - u_n = -\beta \frac{Y_t - Y_n}{Y_n}$$`, desc: 'Produktionslücke und Arbeitslosigkeitslücke', variables: { '\\beta': 'Sensitivität von u auf Y' } },
+      { label: 'Anpassungskette', eq: String.raw`$$Y_t \gt Y_n \Rightarrow u_t \lt u_n \Rightarrow \pi_t \uparrow \Rightarrow r_t \uparrow \Rightarrow Y_{t+1} \downarrow$$`, desc: 'Der mittelfristige Rückkanal muss als Kette gelesen werden, nicht als isolierter Phillips-Satz.', variables: { 'Y_n': 'natürliches Produktionsniveau', 'u_n': 'natürliche Arbeitslosenquote' } }
     ],
     aufgaben: [
       task(
@@ -663,6 +702,24 @@ export const CONTENT = {
           step('Die Zentralbank reagiert mit höherem Realzins und neutralisiert damit die dauerhafte Nachfragestützung.')
         ],
         String.raw`Weil steigende Inflation eine geldpolitische Reaktion auslöst, die den Output wieder auf $Y_n$ zurückführt.`
+      ),
+      task(
+        String.raw`Negative Nachfrageschock-Lesart: Die IS verschiebt sich nach links, Output fällt unter $Y_n$. Welche Richtung haben Arbeitslosigkeit, Inflation und Realzins im weiteren Verlauf?`,
+        [
+          step('Unterauslastung bedeutet $Y_t<Y_n$ und damit über Okun: Arbeitslosigkeit steigt über $u_n$.'),
+          step('Die höhere Arbeitslosigkeit dämpft den Inflationsdruck; Inflation fällt bzw. steigt langsamer.'),
+          step('Die Zentralbank kann über die Zinsregel den Realzins senken und damit die Nachfrage teilweise stabilisieren.')
+        ],
+        'Negativer Nachfrageschock -> Arbeitslosigkeit hoch -> Inflation runter -> geldpolitischer Lockerungsdruck auf den Realzins.'
+      ),
+      task(
+        String.raw`Eine Klausurlösung schreibt: „Dauerhaft höhere Inflation ist der Preis für dauerhaft höheren Output.“ Warum ist das im IS-LM-PC-Modell zu grob oder falsch?`,
+        [
+          step('Das Modell trennt kurzfristige Nachfrageeffekte und mittelfristiges Produktionspotenzial.'),
+          step('Mittelfristig wird eine positive Produktionslücke über Inflation und Zinsreaktion wieder abgebaut.'),
+          step('Ohne zusätzliche Strukturänderung landet die Wirtschaft nicht bei dauerhaft höherem Output, sondern bei Rückkehr zu $Y_n$ und einem veränderten Inflations-/Zinsniveau.')
+        ],
+        'Dauerhafte Nachfragepolitik hebt im Modell nicht dauerhaft Y, sondern löst eine Anpassungsdynamik aus, die Y wieder zu Y_n zurückführt.'
       )
     ]
   },

@@ -352,6 +352,9 @@ async function updateHeroShelf(module) {
           </span>
         `);
       }
+      if (module.sourceCorpusInRepo === false) {
+        items.push(`<span class="lp-hero-meta-item lp-hero-meta-item-status">Quellenstatus: <strong>Sonderstatus</strong></span>`);
+      }
       meta.innerHTML = items.join("");
     }
     if (btn) {
@@ -389,11 +392,15 @@ async function renderLandingPage() {
       const progressBar = snapshot.started
         ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
         : "";
+      const specialStatus = module.sourceCorpusInRepo === false
+        ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
+        : "";
 
       return `
         <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}" id="lpTile_${module.slug}" aria-selected="false" tabindex="-1">
           <h3 class="lp-tile-title">${module.title}</h3>
           <p class="lp-tile-summary">${module.summary}</p>
+          ${specialStatus}
           <div class="lp-tile-footer">
             <span class="lp-tile-status${statusClass}">${statusLabel}</span>
             ${progressBar}

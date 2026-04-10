@@ -1,4 +1,5 @@
 export const COURSE_CONFIG = {
+  slug: 'mathematik',
   courseLabel: 'Mathematik',
   courseTitle: 'Mathematik für Wirtschaftswissenschaftler',
   examCollectionTitle: 'Übungsklausuren (Simulationen)',

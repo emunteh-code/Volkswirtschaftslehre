@@ -830,6 +830,11 @@ export const CONTENT = {
       `
       ),
       section(
+        'Zeiteinheit, Vorzeichen und Vergleichszins',
+        `<p>Viele Klausurfehler sind keine Rechenfehler, sondern Einheiten- und Interpretationsfehler: Skonto wird nicht annualisiert, Gebühren werden nicht in die Zahlungsreihe integriert oder Kreditaufnahme und Rückzahlung erhalten vertauschte Vorzeichen. Erst danach darf der gefundene Satz mit Alternativen wie Bankkredit oder Projektverzinsung verglichen werden.</p>
+         ${warn('Einheitenfehler:', 'Ein 30-Tage-Kredit mit 2 % Kosten ist nicht „nur 2 % pro Jahr“. Ohne Annualisierung unterschätzt du die Fremdkapitalkosten systematisch.')}`
+      ),
+      section(
         'Interpretation und Fallen',
         `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
          ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
@@ -864,6 +869,15 @@ export const CONTENT = {
           step('Entscheidungspunkt ergänzen.', String.raw`\text{Damit wird Finanzierung nicht als Sonderfall, sondern als eigenständiges Bewertungsproblem lesbar.}`)
         ],
         'Die IZF-Analogie macht sichtbar, dass Finanzierungsentscheidungen denselben Bewertungsprinzipien folgen wie Investitionen.'
+      ),
+      task(
+        'Warum muss in einer Fremdfinanzierungsaufgabe vor jeder Deutung geprüft werden, auf welche Periode sich der angegebene Satz überhaupt bezieht?',
+        [
+          step('Nominal- und Periodenbezug klären: Monats-, Quartals- und Jahressätze sind nicht direkt vergleichbar.'),
+          step('Kosten erst auf dieselbe Zeitbasis bringen und Gebühren/Skonto in die Zahlungsreihe integrieren.'),
+          step('Erst dann lässt sich beurteilen, ob die Finanzierung ökonomisch günstig oder teuer ist.')
+        ],
+        'Vor jeder Interpretation gilt: gleiche Zeiteinheit, vollständige Zahlungsreihe, dann erst Kostenvergleich.'
       )
     ]
   },
@@ -882,6 +896,16 @@ export const CONTENT = {
         `<p>Die Gewichte spiegeln die reale Finanzierungsmischung. Verändert sich diese Struktur, ändern sich nicht nur die Gewichte, sondern oft auch die zugrunde liegenden Risiko- und Renditeforderungen der Kapitalgeber.</p>`
       ),
       section(
+        'Wann der WACC als Kalkulationszins passt',
+        `<p>Der WACC ist nur dann als Diskontsatz brauchbar, wenn das Bewertungsobjekt dieselbe Risiko- und Kapitalstruktur aufweist wie die Größen, aus denen der WACC abgeleitet wurde. Genau deshalb ist er kein Universalwerkzeug für jedes Projekt, sondern ein konditional passender Satz.</p>
+         ${mathBlock(String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+WACC)^t}$$`)}
+      `
+      ),
+      section(
+        'Methodenselektion: WACC, EK-Satz oder projektbezogener Satz',
+        `<p>Eine klausurstabile Antwort prüft deshalb zuerst das Risikoobjekt: Geht es um das Gesamtunternehmen, ein Projekt mit ähnlichem Risiko oder um ein deutlich riskanteres Teilvorhaben? Erst danach wird entschieden, ob der WACC, ein reiner Eigenkapitalkostensatz oder eine andere Risikoadjustierung fachlich trägt.</p>`
+      ),
+      section(
         'Methodenwahl und Missbrauch',
         `<p>Der WACC ist nur dann ein sinnvoller Kalkulationszins, wenn die Projekt- und Finanzierungsrisiken zur zugrunde gelegten Kapitalstruktur passen. Genau hier entsteht in Klausuren oft ein stiller Missbrauch: Der WACC wird mechanisch eingesetzt, obwohl die Voraussetzungen gar nicht erklärt wurden.</p>
          ${warn('WACC-Fehler:', 'Ein WACC ist keine frei verfügbare Universalzahl. Er passt nur zu einer bestimmten Risiko- und Kapitalstruktur.')}`
@@ -889,7 +913,8 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'WACC', eq: String.raw`$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$`, desc: 'Gewichteter Preis der Finanzierungsmischung.', variables: { 'E': 'Marktwert des Eigenkapitals', 'D': 'Marktwert des Fremdkapitals', 'k_E': 'Eigenkapitalkosten', 'k_D': 'Fremdkapitalkosten' } },
-      { label: 'Einsatzbedingung', eq: String.raw`\text{passender WACC} \Rightarrow \text{Projekt- und Finanzierungsrisiko konsistent}`, desc: 'Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.' }
+      { label: 'Einsatzbedingung', eq: String.raw`\text{passender WACC} \Rightarrow \text{Projekt- und Finanzierungsrisiko konsistent}`, desc: 'Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.' },
+      { label: 'WACC in der Bewertung', eq: String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+WACC)^t}$$`, desc: 'Nur zulässig, wenn die WACC-Annahmen zur Aufgabe passen.', variables: { 'CF_t': 'erwarteter Cashflow in Periode t', 'A_0': 'Anfangsauszahlung' } }
     ],
     aufgaben: [
       task(
@@ -915,6 +940,24 @@ export const CONTENT = {
           step('Entscheidungslogik schließen.', String.raw`\text{Falsche EK-/FK-Interpretationen führen direkt zu einem falsch begründeten Gesamtkostensatz.}`)
         ],
         'Eine gute WACC-Antwort beginnt nicht beim Einsetzen, sondern bei der wirtschaftlichen Lesart der Teilkosten.'
+      ),
+      task(
+        'Ein neues Projekt ist deutlich riskanter als das bestehende Kerngeschäft. Warum ist „diskontiere einfach mit dem Unternehmens-WACC“ eine potenziell falsche Kurzantwort?',
+        [
+          step('Der Unternehmens-WACC spiegelt die bestehende Risiko- und Kapitalstruktur wider, nicht automatisch das Risiko des neuen Projekts.'),
+          step('Ist das Projekt riskanter, wäre derselbe Satz tendenziell zu niedrig und würde den Projektwert überschätzen.'),
+          step('Die Lösung muss daher die Risikopassung prüfen, bevor der WACC als Kalkulationszins akzeptiert wird.')
+        ],
+        'WACC-Einsatz ist eine Passungsfrage: anderes Risikoobjekt -> möglicher anderer geeigneter Diskontsatz.'
+      ),
+      task(
+        'Warum dürfen die Gewichte im WACC nicht bloß willkürlich aus Buchwerten übernommen werden, wenn die Aufgabe auf Marktlogik abstellt?',
+        [
+          step('Kapitalkosten spiegeln Renditeforderungen am Markt, nicht bloß historische Buchansätze.'),
+          step('Deshalb müssen auch die Gewichte die ökonomisch relevante Finanzierungsmischung abbilden.'),
+          step('Wer falsche Gewichte einsetzt, verändert den Gesamtkostensatz bereits vor jeder Interpretation.')
+        ],
+        'Die WACC-Gewichte sind Teil der ökonomischen Logik; sie bestimmen mit, welcher Finanzierungsmix überhaupt bepreist wird.'
       )
     ]
   },
@@ -933,6 +976,14 @@ export const CONTENT = {
         `<p>Dieselbe Verschuldung verstärkt aber auch die Schwankung der Eigenkapitalrendite. Je kleiner der Eigenkapitalpuffer, desto stärker schlagen gute und schlechte Gesamtkapitalszenarien auf die Eigentümer durch.</p>`
       ),
       section(
+        'Positiver versus negativer Hebel',
+        `<p>Die Leverage-Formel ist kein Automatismus zugunsten der Eigentümer. Nur wenn die Gesamtkapitalrendite oberhalb der Fremdkapitalkosten liegt, wirkt der Hebel positiv. Fällt sie darunter, dreht sich derselbe Mechanismus gegen das Eigenkapital und verstärkt die Verluste.</p>`
+      ),
+      section(
+        'Brücke zu WACC und Kapitalstruktur',
+        `<p>Leverage ist deshalb nie isoliert zu lesen: Er verändert die Rendite-Risiko-Struktur des Eigenkapitals und damit mittelbar die Kostenlogik der Gesamtfinanzierung. Genau hier schließt die Diskussion an WACC und Modigliani-Miller an.</p>`
+      ),
+      section(
         'Leverage nur zusammen lesen',
         `<p>Der Kurs betont ausdrücklich: Leverage-Ertrag und Leverage-Risiko steigen gemeinsam. Wer nur den höheren Erwartungsertrag nennt, hat die Hälfte der ökonomischen Aussage übersehen.</p>
          ${warn('Hebelfehler:', 'Mehr Verschuldung ist nicht „besser“, sondern nur ein stärkerer Hebel auf Chancen und Verluste.')}`
@@ -940,7 +991,8 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Leverage-Beziehung', eq: String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`, desc: 'Mehr Verschuldung verstärkt die Eigenkapitalrendite, solange die Gesamtkapitalrendite über dem Fremdkapitalzins liegt.', variables: { 'r_E': 'Eigenkapitalrendite', 'r_U': 'Gesamtkapitalrendite / ungehebelte Rendite', 'r_D': 'Fremdkapitalrendite bzw. Fremdkapitalkostensatz', 'D/E': 'Verschuldungsgrad' } },
-      { label: 'Leverage-Regel', eq: String.raw`r_U > r_D \Rightarrow \text{positiver Hebeleffekt auf } r_E`, desc: 'Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.' }
+      { label: 'Leverage-Regel', eq: String.raw`r_U > r_D \Rightarrow \text{positiver Hebeleffekt auf } r_E`, desc: 'Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.' },
+      { label: 'Spannendiagnose', eq: String.raw`$$r_U-r_D > 0 \Rightarrow \text{positiver Hebel}, \qquad r_U-r_D < 0 \Rightarrow \text{negativer Hebel}$$`, desc: 'Vor jeder Interpretation muss die Renditespanne zwischen Gesamtkapital und Fremdkapital gelesen werden.', variables: { 'r_U-r_D': 'entscheidende Renditespanne für die Richtung des Hebeleffekts' } }
     ],
     aufgaben: [
       task(
@@ -966,6 +1018,24 @@ export const CONTENT = {
           step('Risikoseite ergänzen.', String.raw`\text{Die Streuung und Verlustempfindlichkeit des Eigenkapitals steigen aber gleichzeitig.}`)
         ],
         'Leverage ist erst dann korrekt erklärt, wenn Ertrag und Risiko gemeinsam genannt werden.'
+      ),
+      task(
+        'Was passiert mit dem Hebel, wenn die Gesamtkapitalrendite unter die Fremdkapitalkosten fällt?',
+        [
+          step('Die Spanne $(r_U-r_D)$ wird negativ.'),
+          step('Dann zieht derselbe Verschuldungsgrad die Eigenkapitalrendite nach unten statt nach oben.'),
+          step('Die Lösung muss deshalb nicht nur „mehr Hebel“ sagen, sondern die Richtung der Renditespanne prüfen.')
+        ],
+        'Leverage kippt bei negativer Renditespanne: Verschuldung verstärkt dann nicht den Gewinn, sondern die Belastung des Eigenkapitals.'
+      ),
+      task(
+        'Warum ist „mehr Verschuldung hebt immer die EK-Rendite“ als Klausurantwort gefährlich verkürzt?',
+        [
+          step('Die Aussage ignoriert die Bedingung $r_U>r_D$ und die steigende Risikobelastung.'),
+          step('Sie blendet außerdem aus, dass höhere Verschuldung die Kapitalstruktur- und WACC-Diskussion verändert.'),
+          step('Eine vollständige Antwort nennt Hebelchance, Hebelrisiko und die zugrunde liegende Renditespanne.')
+        ],
+        'Ohne Spannen- und Risikoprüfung ist die Aussage zu grob: Leverage ist konditional, nicht automatisch vorteilhaft.'
       )
     ]
   },
@@ -983,6 +1053,10 @@ export const CONTENT = {
         `<p>Unter vollkommenem und vollständigem Kapitalmarkt gleichen sich Ertrags- und Risikoeffekte einer höheren Verschuldung in der Benchmark-Logik aus: Weder die erwartete Gesamtkapitalrendite noch der Unternehmenswert hängen dann vom Verhältnis von Fremd- zu Eigenkapital ab. Leverage kann die Eigenkapitalrendite und das Eigenkapitalrisiko verändern, ohne den Gesamtwert zu verschieben.</p>`
       ),
       section(
+        'Wertneutralität heißt nicht Renditeneutralität',
+        `<p>Gerade hier entstehen typische Prüfungsfehler. MM sagt nicht, dass alle Renditen gleich bleiben. Im Gegenteil: Eigenkapitalrendite und -risiko reagieren auf Verschuldung. Wertneutral ist nur der Gesamtunternehmenswert im Benchmark-Modell.</p>`
+      ),
+      section(
         'Warum MM direkt an WACC und Leverage anschließt',
         `<p>MM erklärt, warum Leverage auf Eigentümerebene relevant sein kann, ohne dass der Unternehmenswert im Benchmark-Modell steigt. Genau deshalb ist MM kein Fremdkörper, sondern die theoretische Klammer um WACC- und Leverage-Debatten.</p>`
       ),
@@ -993,7 +1067,8 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Irrelevanz-Benchmark', eq: String.raw`\text{vollkommener Markt} \Rightarrow \text{Kapitalstruktur wertneutral}`, desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
-      { label: 'Benchmark-Aussage', eq: String.raw`\text{Leverage verändert } r_E \text{ und Risiko, aber nicht } \text{Value}`, desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' }
+      { label: 'Benchmark-Aussage', eq: String.raw`\text{Leverage verändert } r_E \text{ und Risiko, aber nicht } \text{Value}`, desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' },
+      { label: 'Wertvergleich', eq: String.raw`$$V_L = V_U$$`, desc: 'Im MM-Benchmark haben verschuldetes und unverschuldetes Unternehmen denselben Gesamtwert.', variables: { 'V_L': 'Unternehmenswert mit Leverage', 'V_U': 'Unternehmenswert ohne Leverage' } }
     ],
     aufgaben: [
       task(
@@ -1019,6 +1094,24 @@ export const CONTENT = {
           step('Konsequenz ziehen.', String.raw`\text{Diese Faktoren durchbrechen die wertneutrale Benchmarkwelt.}`)
         ],
         'Sobald reale Friktionen ins Spiel kommen, wird Kapitalstruktur von einer neutralen Benchmarkgröße zu einer echten Wert- und Entscheidungsfrage.'
+      ),
+      task(
+        'Zwei Unternehmen haben identische operative Cashflows, aber unterschiedliche Verschuldung. Welche Kernaussage verlangt MM in der Benchmarkwelt?',
+        [
+          step('Operative Seite isolieren: Die zugrunde liegenden Unternehmenscashflows sind identisch.'),
+          step('Unter vollkommenen Märkten darf die Finanzierungsform allein keinen zusätzlichen Gesamtwert erzeugen.'),
+          step('Leverage verteilt Rendite und Risiko nur anders auf die Kapitalgeber, ohne den Gesamtwert zu verändern.')
+        ],
+        'In der MM-Benchmark bleibt der Unternehmenswert trotz unterschiedlicher Verschuldung gleich, solange keine realen Friktionen wirken.'
+      ),
+      task(
+        'Warum ist „MM widerlegt den WACC“ keine saubere Schlussfolgerung?',
+        [
+          step('MM liefert einen Benchmark unter starken Annahmen; WACC und Leverage sind daran anschließende Kosten- und Renditelogiken.'),
+          step('Gerade weil Leverage Rendite und Risiko des Eigenkapitals verändert, bleibt die Kostenstruktur erklärungsbedürftig.'),
+          step('MM sagt nur, dass unter Benchmark-Annahmen kein zusätzlicher Gesamtwert aus der Kapitalstruktur entsteht.')
+        ],
+        'MM ersetzt WACC nicht, sondern liefert den Referenzrahmen, in dem WACC- und Leverage-Aussagen eingeordnet werden.'
       )
     ]
   }

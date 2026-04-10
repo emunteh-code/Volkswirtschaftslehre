@@ -146,6 +146,62 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
   ],
+  dissens: [
+    {
+      title: 'Offener Dissens',
+      context: 'Die Parteien wissen, dass Ratenzahlung und Übergabezeitpunkt noch offen sind.',
+      steps: [
+        {
+          q: '[1. Interpretation] Spricht das zunächst für Vertragsschluss oder gegen Konsens?',
+          answer: ['gegen konsens', 'kein konsens', 'dissens'],
+          options: { problemId: 're_di_1', stepId: 'consent', isDecision: true },
+          hint: 'Bewusst offener Punkt.',
+          explain: 'Das spricht zunächst für offenen Dissens und gegen einen sicheren Vertragsschluss.'
+        },
+        {
+          q: '[2. Decision] Welche Norm ist die Standardweiche für den offenen Dissens?',
+          answer: ['154', '§ 154', '154 bgb'],
+          options: { problemId: 're_di_1', stepId: '154', dependsOn: 'consent' },
+          hint: 'Bewusst nicht geeinigt.',
+          explain: 'Der offene Dissens wird typischerweise über § 154 BGB gelesen.'
+        },
+        {
+          q: '[3. Validation] Ist es methodisch stark, in diesem Stadium schon Anfechtung zu prüfen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_di_1', role: 'VALIDATION' },
+          hint: 'Zuerst die Konsensfrage, dann erst etwaige Korrekturinstitute.',
+          explain: 'Nein. Solange nicht einmal sicher Konsens besteht, startet die Prüfung bei der Einigungslage.'
+        }
+      ]
+    },
+    {
+      title: 'Versteckter Dissens oder Irrtum?',
+      context: 'Beide sprechen von der Übergabe bei „C“, meinen aber unterschiedliche Personen.',
+      steps: [
+        {
+          q: '[1. Decision] Welche Leitfrage kommt vor jeder Anfechtungsdiskussion?',
+          answer: ['objektive auslegung', 'empfängerhorizont', 'objektiver empfängerhorizont'],
+          options: { problemId: 're_di_2', stepId: 'obj', isDecision: true },
+          hint: '§§ 133, 157 BGB.',
+          explain: 'Zuerst ist die objektive Auslegung der Erklärungen vorzunehmen.'
+        },
+        {
+          q: '[2. Execution] Wenn objektiv eine übereinstimmende Bedeutung feststellbar ist, bleibt dann der Dissenspfad offen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_di_2', stepId: 'stay', dependsOn: 'obj' },
+          hint: 'Dann liegt eher ein einseitiger Irrtum vor.',
+          explain: 'Nein. Bei objektiv feststellbarem Konsens verlagert sich das Problem regelmäßig zur Irrtums- bzw. Anfechtungsebene.'
+        },
+        {
+          q: '[3. Validation] Ist der versteckte Dissens nach der Vorlesung ein sehr häufiger Klausurfall?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_di_2', role: 'VALIDATION' },
+          hint: 'Die Vorlesung betont seine Seltenheit.',
+          explain: 'Nein. Gerade weil oft doch eine objektive Deutung möglich ist, ist echter versteckter Dissens seltener als gedacht.'
+        }
+      ]
+    }
+  ],
   anfechtung: [
     {
       title: 'Irrtum oder Dissens',
@@ -168,6 +224,33 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
     ,
+    {
+      title: 'Anfechtungsgründe sauber benennen',
+      context: 'A irrt über den Inhalt seiner Erklärung; B vertraut auf den Vertrag.',
+      steps: [
+        {
+          q: '[1. Decision] Reicht jeder beliebige innere Unwille als Anfechtungsgrund?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_da_1b', stepId: 'catalog', isDecision: true },
+          hint: 'Gesetzlicher Katalog.',
+          explain: 'Nein. Es braucht einen gesetzlich anerkannten Anfechtungsgrund.'
+        },
+        {
+          q: '[2. Execution] Welche beiden Standardirrtümer nennt die Vorlesung zuerst?',
+          answer: ['inhaltsirrtum und erklärungsirrtum', 'erklärungsirrtum', 'inhaltsirrtum'],
+          options: { problemId: 're_da_1b', stepId: 'types', dependsOn: 'catalog' },
+          hint: '§ 119 Abs. 1 BGB.',
+          explain: 'Typische Kernfälle sind Inhalts- und Erklärungsirrtum.'
+        },
+        {
+          q: '[3. Validation] Kann § 122 BGB den fehlenden Anfechtungsgrund ersetzen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_da_1b', role: 'VALIDATION' },
+          hint: '§ 122 folgt erst nach wirksamer Anfechtung.',
+          explain: 'Nein. § 122 BGB ist Folgeanspruch und kein Ersatz für einen fehlenden Tatbestand.'
+        }
+      ]
+    },
     {
       title: 'Dissens-vs-Anfechtung Trap',
       context: 'Objektiv deckungsgleiche Erklärungen, aber innerer Erklärungsirrtum.',
@@ -409,6 +492,90 @@ const BASE_STEP_PROBLEMS = {
         }
       ]
     }
+    ,
+    {
+      title: 'Richtige Schadensersatzschiene',
+      context: 'Der Schuldner liefert verspätet, später auch noch mangelhaft.',
+      steps: [
+        {
+          q: '[1. Decision] Muss zuerst die Art der Störung eingeordnet werden, bevor die Anspruchsgrundlage genannt wird?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 're_se_2', stepId: 'track', isDecision: true },
+          hint: 'Neben der Leistung, statt der Leistung, Verzug.',
+          explain: 'Ja. Die Störungsart entscheidet, welche Schadensersatznorm einschlägig ist.'
+        },
+        {
+          q: '[2. Execution] Ist § 280 I BGB allein stets genug, wenn Ersatz an die Stelle der Leistung treten soll?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_se_2', stepId: '281', dependsOn: 'track' },
+          hint: 'Bei Ersatz statt der Leistung kommen Zusatznormen hinzu.',
+          explain: 'Nein. Für Schadensersatz statt der Leistung braucht es regelmäßig die Zusatzlogik der §§ 280 I, III, 281 BGB.'
+        },
+        {
+          q: '[3. Validation] Ist eine richtige Schadenssumme ohne Fristsetzungsprüfung klausurstabil?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_se_2', role: 'VALIDATION' },
+          hint: 'Tatbestand trägt die Rechtsfolge.',
+          explain: 'Nein. Ohne tragfähigen Tatbestand bleibt auch eine numerisch richtige Schadenssumme methodisch schwach.'
+        }
+      ]
+    }
+  ],
+  ruecktritt: [
+    {
+      title: 'Rücktritt als Leistungsstörungsrecht',
+      context: 'Mangelhafte Lieferung, Käufer will sich vom Vertrag lösen.',
+      steps: [
+        {
+          q: '[1. Decision] Ist Rücktritt der natürliche Startpunkt nur dann, wenn eine Leistungsstörung vorliegt?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 're_ru_1', stepId: 'störung', isDecision: true },
+          hint: 'Rücktritt ist kein allgemeines Umentscheidungsrecht.',
+          explain: 'Ja. Rücktritt knüpft gerade an eine Leistungsstörung im Schuldverhältnis an.'
+        },
+        {
+          q: '[2. Execution] Welche zusätzliche Hürde ist beim Standardrücktritt oft mitzudenken?',
+          answer: ['fristsetzung', 'nachfrist', 'erfolglose fristsetzung'],
+          options: { problemId: 're_ru_1', stepId: 'frist', dependsOn: 'störung' },
+          hint: '§ 323 BGB.',
+          explain: 'Im Standardfall des § 323 BGB ist die erfolglose Fristsetzung regelmäßig zentral.'
+        },
+        {
+          q: '[3. Validation] Führt ein wirksamer Rücktritt zur ex-tunc-Nichtigkeit wie die Anfechtung?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_ru_1', role: 'VALIDATION' },
+          hint: 'Rückgewährschuldverhältnis statt rückwirkender Vernichtung.',
+          explain: 'Nein. Der Rücktritt wandelt das Schuldverhältnis in ein Rückgewährschuldverhältnis um.'
+        }
+      ]
+    },
+    {
+      title: 'Rücktrittserklärung und Folgeebene',
+      context: 'Tatbestandsvoraussetzungen liegen vor; der Bearbeiter diskutiert sofort Wertersatz.',
+      steps: [
+        {
+          q: '[1. Decision] Fehlt vor der Rückgewährdiskussion noch ein eigener Gestaltungsakt?',
+          answer: ['ja', 'yes'],
+          options: { problemId: 're_ru_2', stepId: 'decl', isDecision: true },
+          hint: '§ 349 BGB.',
+          explain: 'Ja. Der Rücktritt muss erklärt werden.'
+        },
+        {
+          q: '[2. Execution] Gehört Wertersatz in den Tatbestand oder in die Rechtsfolge?',
+          answer: ['rechtsfolge', 'rechtsfolgeebene'],
+          options: { problemId: 're_ru_2', stepId: 'folge', dependsOn: 'decl' },
+          hint: 'Nach wirksamer Ausübung des Rücktritts.',
+          explain: 'Wertersatz gehört erst auf die Rechtsfolgeebene nach wirksamem Rücktritt.'
+        },
+        {
+          q: '[3. Validation] Ist es klausurtechnisch sauber, Rücktritt und Schadensersatz in einem einzigen Prüfungspunkt zu verschmelzen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_ru_2', role: 'VALIDATION' },
+          hint: 'Zwei unterschiedliche Rechtsfolgeschienen.',
+          explain: 'Nein. Rücktritt und Schadensersatz müssen als eigenständige Anspruchs- bzw. Gestaltungsrechtspfade getrennt bleiben.'
+        }
+      ]
+    }
   ],
   verbraucherwiderruf: [
     {
@@ -432,6 +599,33 @@ const BASE_STEP_PROBLEMS = {
       ]
     }
     ,
+    {
+      title: 'Widerrufsrecht als eigener Tatbestand',
+      context: 'Verbraucher beruft sich pauschal auf § 355 BGB nach einem beliebigen Vertrag.',
+      steps: [
+        {
+          q: '[1. Decision] Reicht § 355 BGB allein schon als vollständige Anspruchsgrundlage für jedes Geschäft?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_rw_1b', stepId: 'basis', isDecision: true },
+          hint: 'Widerrufsfähiger Vertragstyp nötig.',
+          explain: 'Nein. Es muss zunächst ein Vertrag mit gesetzlichem Widerrufsrecht vorliegen.'
+        },
+        {
+          q: '[2. Execution] Welche persönliche Rollenverteilung wird danach regelmäßig geprüft?',
+          answer: ['verbraucher und unternehmer', 'verbraucher', 'unternehmer'],
+          options: { problemId: 're_rw_1b', stepId: 'roles', dependsOn: 'basis' },
+          hint: '§§ 13, 14 BGB.',
+          explain: 'Danach werden Verbraucher- und Unternehmereigenschaft geprüft.'
+        },
+        {
+          q: '[3. Validation] Muss der Verbraucher einen Mangel oder eine Pflichtverletzung beweisen, um zu widerrufen?',
+          answer: ['nein', 'falsch'],
+          options: { problemId: 're_rw_1b', role: 'VALIDATION' },
+          hint: 'Schutzrecht, nicht Leistungsstörungsrecht.',
+          explain: 'Nein. Der Widerruf knüpft an Schutzlage und Vertragstyp an, nicht an eine Pflichtverletzung.'
+        }
+      ]
+    },
     {
       title: 'Rücktritt-Widerruf Abgrenzung',
       context: 'Verbraucherfall mit Fernabsatzbezug; Leistungsstörung unklar.',
@@ -489,13 +683,9 @@ const BASE_STEP_PROBLEMS = {
   ]
 };
 
-BASE_STEP_PROBLEMS.dissens = BASE_STEP_PROBLEMS.anfechtung;
-BASE_STEP_PROBLEMS.ruecktritt = BASE_STEP_PROBLEMS.verbraucherwiderruf;
-
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,
   contentById: CONTENT,
   intuitionById: INTUITION,
   baseStepProblems: BASE_STEP_PROBLEMS
 });
-

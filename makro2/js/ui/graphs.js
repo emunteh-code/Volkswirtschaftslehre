@@ -110,7 +110,58 @@ function setupPlot(xLabel, yLabel, ranges) {
   ctx.fillText(yLabel, 0, 0);
   ctx.restore();
 
-  return { engine, ctx, col, w, h, pad, px, py, ranges, fsBase, fsBold };
+  return {
+    engine,
+    ctx,
+    col,
+    w,
+    h,
+    pad,
+    px,
+    py,
+    ranges,
+    fsBase,
+    fsBold,
+    legendEntries: [],
+    legendSeen: new Set()
+  };
+}
+
+function registerLegend(plot, entry) {
+  if (!entry?.label) return;
+  const dashKey = Array.isArray(entry.dash) ? entry.dash.join(',') : '';
+  const key = [entry.label, entry.color, dashKey, entry.dot ? 'dot' : 'line'].join('|');
+  if (plot.legendSeen.has(key)) return;
+  plot.legendSeen.add(key);
+  plot.legendEntries.push(entry);
+}
+
+function drawTag(plot, x, y, text, color, dx = 10, dy = -10, align = "left") {
+  const { ctx, px, py, col } = plot;
+  const tagX = px(x) + dx;
+  const tagY = py(y) + dy;
+  ctx.save();
+  ctx.font = `600 ${Math.max(12, plot.fsBase)}px ${col.fontBody}`;
+  const width = ctx.measureText(text).width + 18;
+  const height = 24;
+  const rectX = align === "right" ? tagX - width + 4 : tagX - 4;
+  ctx.fillStyle = `${col.bg}f2`;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(rectX, tagY - height + 5, width, height, 8);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, rectX + 9, tagY - 6);
+  ctx.restore();
+}
+
+function drawLegend(plot) {
+  if (!plot.legendEntries.length) return;
+  plot.engine.drawLegend(plot.ctx, plot.w, plot.legendEntries, plot.col.grid, 18);
 }
 
 function drawCurve(plot, fn, options = {}) {
@@ -122,7 +173,9 @@ function drawCurve(plot, fn, options = {}) {
     steps = 240,
     dash = [],
     label,
-    labelX
+    labelX,
+    labelDy = -8,
+    labelAlign = "left"
   } = options;
 
   const { ctx, px, py } = plot;
@@ -154,10 +207,8 @@ function drawCurve(plot, fn, options = {}) {
     const x = labelX ?? (xStart + xEnd) / 2;
     const y = fn(x);
     if (Number.isFinite(y) && y >= plot.ranges.yMin && y <= plot.ranges.yMax) {
-      ctx.fillStyle = color;
-      ctx.font = `600 ${plot.fsBase}px ${plot.col.fontMono}`;
-      ctx.textAlign = "left";
-      ctx.fillText(label, px(x) + 8, py(y) - 8);
+      drawTag(plot, x, y, label, color, 10, labelDy, labelAlign);
+      registerLegend(plot, { color, label, dash, lw: lineWidth });
     }
   }
 }
@@ -173,10 +224,8 @@ function drawHorizontal(plot, y, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-    ctx.textAlign = "left";
-    ctx.fillText(label, px(ranges.xMax) - 72, py(y) - 8);
+    drawTag(plot, ranges.xMax, y, label, color, -84, -8, "right");
+    registerLegend(plot, { color, label, dash: [8, 6], lw: 2.4 });
   }
 }
 
@@ -191,10 +240,8 @@ function drawVertical(plot, x, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-    ctx.textAlign = "left";
-    ctx.fillText(label, px(x) + 8, py(ranges.yMax) + 14);
+    drawTag(plot, x, ranges.yMax, label, color, 10, 14);
+    registerLegend(plot, { color, label, dash: [8, 6], lw: 2 });
   }
 }
 
@@ -215,14 +262,13 @@ function drawPoint(plot, x, y, color, label) {
   ctx.stroke();
 
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-    ctx.textAlign = "left";
-    ctx.fillText(label, cx + 10, cy - 8);
+    drawTag(plot, x, y, label, color, 10, -8);
+    registerLegend(plot, { color, label, dot: true });
   }
 }
 
-function updateInfo(html) {
+function updateInfo(plot, html) {
+  drawLegend(plot);
   const info = document.getElementById("graph_info");
   if (!info) return;
   info.innerHTML = html;
@@ -285,7 +331,7 @@ function drawWechselkurs() {
       ? "reale Abwertung des Inlands"
       : "nahe an Kaufkraftparität";
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'ε = E · P / P*',
     [
       { label: 'Aktueller Punkt', body: `Bei E = ${eNom.toFixed(2)}, P = ${pDom.toFixed(0)} und P* = ${pFor.toFixed(0)} ergibt sich ε = ${currentEpsilon.toFixed(2)}.` },
@@ -333,7 +379,7 @@ function drawZinsparitaet() {
       ? `eine erwartete Aufwertung um ${expectedRate.toFixed(1)}%`
       : "nahezu keine erwartete Wechselkursänderung";
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'E = ((1 + i) / (1 + i*)) · Eᵉ',
     [
       { label: 'Aktueller Kurs', body: `Bei i = ${iDom.toFixed(2)}%, i* = ${iFor.toFixed(2)}% und Eᵉ = ${eFuture.toFixed(2)} ergibt sich E = ${eqCurrent.toFixed(3)}.` },
@@ -370,7 +416,7 @@ function drawNettoexporte() {
   drawVertical(plot, eps, plot.col.accent2, "Aktueller realer WK");
   drawPoint(plot, eps, currentNx, plot.col.warn, "Beobachtete Lage");
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'NX = X(Y*, ε) − IM(Y, ε) / ε',
     [
       { label: 'Kurvenverlauf', body: 'Bei höherem realem Wechselkurs fällt die Nettoexportfunktion: Das Inland wird relativ teuer und verliert preisliche Wettbewerbsfähigkeit.' },
@@ -418,7 +464,7 @@ function drawMarshallLerner() {
   drawPoint(plot, 8, jCurve(8), plot.col.accent2, "Langfristige Wirkung", -132, -10);
 
   const mlSatisfied = longGain > shortDrop;
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'Abwertung: kurzfristiger Preiseffekt, verzögerter Mengeneffekt',
     [
       { label: 'Kurzfristig', body: `Unmittelbar nach der Abwertung verschlechtert sich die Handelsbilanz um ${shortDrop.toFixed(0)} Einheiten, weil Importpreise steigen, während Mengen noch kaum reagieren.` },
@@ -466,7 +512,7 @@ function drawMundellFleming() {
   drawHorizontal(plot, zp, plot.col.accent2, "Zahlungsbilanzlinie");
   drawPoint(plot, Math.max(plot.ranges.xMin, Math.min(plot.ranges.xMax, equilibriumY)), zp, plot.col.warn, "Neues Gleichgewicht");
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'Mundell-Fleming: IS-Kurve + horizontale Zahlungsbilanzlinie',
     [
       { label: 'Fiskalimpuls', body: `Der Impuls von ${fiscal.toFixed(1)} verschiebt die IS-Kurve nach rechts.` },
@@ -516,7 +562,7 @@ function drawZPKurve() {
       ? 'unterhalb der ZP-Kurve: Der Zins ist für das gegebene Einkommen zu niedrig, es entsteht ein Defizit'
       : 'nahe am Zahlungsbilanzgleichgewicht';
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'LB(Y,Y*,ε) + KB(i-i*) = 0',
     [
       { label: 'Steigung', body: `Mit Kapitalmobilität ${mobility.toFixed(1)} verläuft die ZP-Kurve ${mobility > 1.6 ? 'relativ flach' : 'sichtbar positiv steigend'}: Höheres Y belastet die Leistungsbilanz und verlangt höheren i.` },
@@ -559,7 +605,7 @@ function drawWkRegime() {
   drawPoint(plot, 0, flexGap(0), plot.col.accent, "Schock A", 10, -12);
   drawPoint(plot, 0, pegGap(0), plot.col.warn, "Schock B", 10, 16);
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'Regimevergleich: Wechselkursanpassung versus interne Anpassung',
     [
       { label: 'Flexibler Wechselkurs', body: 'Der Kurs wirkt als Stoßdämpfer. Die Outputlücke wird schneller abgebaut, weil der Wechselkurs relativ früh einen Teil der Anpassung übernimmt.' },
@@ -613,7 +659,7 @@ function drawSchuldenquote() {
 
   const stabilizingPs = (r - g) * (b0 / 100) * 100;
   const last = trajectory[trajectory.length - 1];
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'Δb ≈ (r − g) · b − ps',
     [
       { label: 'Ausgangslage', body: `Bei r = ${(r * 100).toFixed(1)}%, g = ${(g * 100).toFixed(1)}% und einem Primärsaldo von ${(ps * 100).toFixed(1)}% startet die Quote bei ${b0.toFixed(0)}%.` },
@@ -668,7 +714,7 @@ function drawTaylorRegel() {
   drawVertical(plot, piStar, plot.col.accent2, "Inflationsziel");
   drawPoint(plot, piCurrent, currentI, plot.col.warn, "Regelzins");
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'i = r* + π + a(π − π*) + b(y − yₙ)',
     [
       { label: 'Regelparameter', body: `r* = ${rStar.toFixed(1)}%, π* = ${piStar.toFixed(1)}%, a = ${a.toFixed(1)} und b = ${b.toFixed(1)}.` },
@@ -712,7 +758,7 @@ function drawSolowBasis() {
     drawPoint(plot, kStar, investment(kStar), plot.col.warn, "Steady State");
   }
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'Steady State: sf(k*) = (δ + n)k*',
     [
       { label: 'Kurvenlogik', body: 'Die Investitionskurve liegt bei höherer Sparquote oder Produktivität weiter oben; die Break-even-Investition steigt mit Abschreibung und Bevölkerungswachstum.' },
@@ -769,7 +815,7 @@ function drawSteadyState() {
       ? 'k sinkt in Richtung Steady State'
       : 'k liegt bereits nahe am Steady State';
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'sf(k*) = (δ+n)k*',
     [
       { label: 'Steady State', body: `Bei s = ${s.toFixed(2)}, A = ${a.toFixed(1)} und δ+n = ${loss.toFixed(2)} ergibt sich k* = ${kStar.toFixed(1)}.` },
@@ -808,7 +854,7 @@ function drawGoldeneSparquote() {
     drawPoint(plot, kGold, c(kGold), plot.col.warn, "Konsummaximum");
   }
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'f′(k_gold) = δ + n',
     [
       { label: 'Goldene Regel', body: `Bei α = ${alpha.toFixed(2)}, A = ${a.toFixed(1)} und δ+n = ${loss.toFixed(2)} liegt der goldene Kapitalstock bei k ≈ ${kGold.toFixed(1)}.` },
@@ -848,7 +894,7 @@ function drawPhillipskurve() {
   });
   drawPoint(plot, uCurrent, currentPi, plot.col.warn, "Aktueller Punkt");
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'π = πᵉ − α(u − uₙ)',
     [
       { label: 'Orientierung', body: `Die erwartete Inflation liegt bei ${piExpected.toFixed(1)}%; die natürliche Arbeitslosigkeit bei ${uNatural.toFixed(1)}%.` },
@@ -886,7 +932,7 @@ function drawGeldmengen() {
   });
   drawPoint(plot, yCurrent, Math.max(plot.ranges.yMin, currentI), plot.col.warn, "Geldmarktgleichgewicht");
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     'M / P = kY − hi',
     [
       { label: 'Geldangebot', body: `Mehr reales Geldangebot (${mpReal.toFixed(0)}) verschiebt die LM-Kurve nach rechts bzw. unten.` },

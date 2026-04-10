@@ -156,11 +156,22 @@ export const CONTENT = {
         'Ansatz vor Bewertung',
         `<p>In der Prüfung gilt: Erst Ansatzfähigkeit und Bilanzierungsfähigkeit klären, dann erst bewerten. Diese Reihenfolge ist methodisch zwingend und fehleranfällig.</p>
          ${warn('Reihenfolgefehler:', 'Viele Lösungen springen direkt zur Zahl. Ohne geklärten Ansatz ist jede Bewertung methodisch verfrüht.')}`
+      ),
+      section(
+        'Vom Einzelbestand zum Abschlussausweis',
+        `<p>Zwischen Inventur und Bilanz liegt mehr als bloß ein Abschreibprozess. Aus dem Einzelbestand muss ein bilanzfähiger Posten mit richtiger Kategorie, Ansatzentscheidung und späterem Ausweis werden. Gerade diese Kette macht aus Rohdaten Abschlusswissen.</p>
+         <p>Deshalb genügt in Klausuren weder „ist da“ noch „hat einen Wert“. Erst die saubere Übersetzung vom realen Bestand zum Bilanzposten beantwortet die eigentliche Abschlussfrage.</p>`
+      ),
+      section(
+        'Prüfungskette statt Definitionsinsel',
+        `<p>Eine belastbare Lösung arbeitet deshalb in fester Reihenfolge: Bestand identifizieren, dem Abschlusszweck zuordnen, Ansatzfähigkeit prüfen, Bilanzansatz bejahen oder verneinen und erst anschließend zur Bewertung bzw. zum Ausweis weitergehen.</p>
+         ${warn('Körperliche Existenz überschätzen:', 'Dass etwas physisch vorhanden ist, entscheidet noch nicht allein über den Bilanzansatz. Eigentum, wirtschaftliche Zuordnung und Bilanzierungslogik müssen mitgeprüft werden.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Inventurfolge', eq: String.raw`\text{Inventur} \rightarrow \text{Inventar} \rightarrow \text{Bilanz}`, desc: 'Vom Einzelbestand zur Abschlussverdichtung.' },
-      { label: 'Prüfungsfolge', eq: String.raw`\text{Ansatz} \rightarrow \text{Bewertung}`, desc: 'Existenzfrage vor Wertfrage.' }
+      { label: 'Prüfungsfolge', eq: String.raw`\text{Ansatz} \rightarrow \text{Bewertung}`, desc: 'Existenzfrage vor Wertfrage.' },
+      { label: 'Abschlusskette', eq: String.raw`\text{Inventur} \rightarrow \text{Inventar} \rightarrow \text{Ansatz} \rightarrow \text{Bewertung} \rightarrow \text{Ausweis}`, desc: 'Vom Rohbestand bis zur sichtbaren Abschlusswirkung.' }
     ],
     aufgaben: [
       task(
@@ -178,6 +189,24 @@ export const CONTENT = {
           step('Bilanz als Verdichtungsebene ergänzen.', String.raw`\text{Die Bilanz ordnet und verdichtet diese Informationen abschlusssystematisch.}`)
         ],
         'Inventur liefert Rohdaten der Bestände, die Bilanz erzeugt daraus die strukturierte Abschlussdarstellung.'
+      ),
+      task(
+        'Warum reicht die Aussage „Der Gegenstand ist vorhanden“ in einer Ansatzaufgabe fast nie aus?',
+        [
+          step('Körperliche Existenz ist nur der Startpunkt, nicht die Abschlusslösung.'),
+          step('Zusätzlich sind wirtschaftliche Zuordnung und Bilanzierungsfähigkeit zu prüfen.'),
+          step('Erst danach lässt sich entscheiden, ob ein Bilanzposten anzusetzen ist und wie er weiterbehandelt wird.')
+        ],
+        'Ansatzaufgaben prüfen die Bilanzlogik eines Bestands, nicht bloß seine physische Existenz.'
+      ),
+      task(
+        'Welche Prüfungsreihenfolge sollte in einer Mini-Falllösung zu Inventur und Bilanzansatz sichtbar sein?',
+        [
+          step('Zuerst den realen Bestand bzw. Sachverhalt eindeutig identifizieren.'),
+          step('Dann prüfen, ob daraus überhaupt ein bilanzierungsfähiger Posten wird.'),
+          step('Erst nach bejahtem Ansatz zur Bewertung und zum Ausweis übergehen.')
+        ],
+        'Die Abschlussroutine lautet: Bestand -> Ansatz -> Bewertung -> Ausweis.'
       )
     ]
   },
@@ -529,11 +558,21 @@ export const CONTENT = {
         'Typische Klausurfälle',
         `<p>Fremdwährungsverbindlichkeiten und Umgliederungen innerhalb der Verbindlichkeiten gehören zu den klassischen Prüfungsfällen. Zuerst wird klassifiziert, dann bewertet.</p>
          ${warn('Abgrenzungsfalle:', 'Nicht jede unklare künftige Zahlung ist eine Verbindlichkeit. Verbindlichkeiten setzen eine ausreichend sichere Verpflichtung voraus.')}`
+      ),
+      section(
+        'Abgrenzung zu Rückstellung und RAP',
+        `<p>Die Verbindlichkeit ist die sichere Schuldkategorie. Fehlen sichere Höhe oder Fälligkeit, wandert der Fall eher in die Rückstellungsschiene. Geht es stattdessen primär um die periodische Zuordnung bereits gezahlter oder empfangener Beträge, ist Rechnungsabgrenzung zu prüfen.</p>
+         ${warn('Sichere Schuld zu schnell als Rückstellung lesen', 'In unsauberen Lösungen wird jede künftige Zahlung als „irgendwie ungewiss“ beschrieben. Entscheidend ist aber, ob die Verpflichtung in Grund und Höhe schon belastbar feststeht.')}`
+      ),
+      section(
+        'Von der Schuld zur Abschlusswirkung',
+        `<p>Prüfungsrelevant ist nicht nur der Ansatz, sondern die Folgefrage: Wie wirkt die Verbindlichkeit auf Bilanzstruktur, spätere Zahlung und Erfolgsrechnung? Gerade Tilgung, Umgliederung und Währungsfälle verlangen deshalb eine Kette aus Klassifikation -> Bewertung -> Folgeausweis.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Verbindlichkeit', eq: String.raw`\text{sicher dem Grunde und der Höhe nach}`, desc: 'Feste Schuldposition.' },
-      { label: 'Bewertung', eq: String.raw`\text{Ansatz zum Erfüllungsbetrag}`, desc: 'Maßgeblicher Bewertungsmaßstab nach HGB-Logik.' }
+      { label: 'Bewertung', eq: String.raw`\text{Ansatz zum Erfüllungsbetrag}`, desc: 'Maßgeblicher Bewertungsmaßstab nach HGB-Logik.' },
+      { label: 'Prüfungskette', eq: String.raw`\text{sichere Schuld} \Rightarrow \text{Verbindlichkeit} \Rightarrow \text{Erfüllungsbetrag} \Rightarrow \text{Folgeausweis}`, desc: 'Von der Klassifikation zur Abschlusswirkung.' }
     ],
     aufgaben: [
       task(
@@ -551,6 +590,24 @@ export const CONTENT = {
           step('Bewertungsfolge ableiten.', String.raw`\text{Erst nach klarer Zuordnung ist der Erfüllungsbetrag sauber zu ermitteln.}`)
         ],
         'Die richtige Schuldenkategorie steuert die zulässige Bewertung und verhindert methodische Kurzschlüsse.'
+      ),
+      task(
+        'Ein Prozessrisiko ist wahrscheinlich, aber der Betrag nur grob schätzbar. Warum ist das keine klassische Verbindlichkeit?',
+        [
+          step('Für die Verbindlichkeit muss die Schuld dem Grunde und der Höhe nach hinreichend sicher feststehen.'),
+          step('Wenn gerade die Höhe oder Fälligkeit noch unscharf ist, fehlt die Kernstabilität der Verbindlichkeit.'),
+          step('Dann ist zuerst die Rückstellungsschiene zu prüfen.')
+        ],
+        'Die Verbindlichkeit lebt von Sicherheit; ungewisse Belastungen gehören methodisch zunächst in die Rückstellungskategorie.'
+      ),
+      task(
+        'Warum sollte eine gute Verbindlichkeitslösung nicht beim Ansatzsatz enden, sondern die Folgezahlung oder Umgliederung mitdenken?',
+        [
+          step('Die Verbindlichkeit verändert zunächst die Bilanzstruktur als sichere Schuld.'),
+          step('Spätere Zahlung, Tilgung oder Umgliederung zeigen, wie der Posten wieder aus der Bilanz herausläuft.'),
+          step('Erst diese Folgeperspektive macht den Abschlusszusammenhang klausurstabil.')
+        ],
+        'Gute Abschlusslösungen zeigen nicht nur die Schuld, sondern auch ihren späteren bilanziellen Abbau.'
       )
     ]
   },

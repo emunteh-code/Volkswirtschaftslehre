@@ -50,8 +50,8 @@ export function renderDashboard(onNavigate) {
 <p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
 </div>
 <div class="dash-section" style="margin-bottom:16px">
-<button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll anzeigen</button>
-<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Lokal gespeicherte Fehler aus Schnelltest und anderen Übungen (sofern protokolliert).</p>
+<button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll öffnen</button>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Wiederkehrende Fehlmuster aus diesem Browser gebündelt nacharbeiten.</p>
 </div>`;
 
   const derivedSnap = buildDashboardDerivedMetricsSnapshot({

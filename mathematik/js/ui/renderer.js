@@ -8,7 +8,7 @@ import { MATHEMATIK_EXAM_DRILLS_BY_ID, MATHEMATIK_GUIDED_TASKS_BY_ID } from '../
 import { renderGraphPanel, GRAPH_CONCEPTS } from './graphPanel.js';
 import { renderMastery } from '../features/mastery.js';
 import { renderMath } from '../utils/mathjax.js';
-import { loadProgress, loadLastId } from '../state/storage.js';
+import { loadProgress, loadLastId, listMistakeLogEntries } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
@@ -49,6 +49,23 @@ export function renderContent(conceptId, tab, initGraphFn) {
 
 export function renderHome() {
   baseRenderer.renderHome();
+  const row = document.querySelector('#content .home-action-row');
+  if (!row || row.querySelector('[data-home-action="mistake-review"]')) return;
+
+  const mistakeCount = listMistakeLogEntries().length;
+  const card = document.createElement('div');
+  card.className = 'home-action-card';
+  card.dataset.homeAction = 'mistake-review';
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.setAttribute('onkeydown', "if(event.key==='Enter')window.__showMistakeReview?.()");
+  card.onclick = () => window.__showMistakeReview?.();
+  card.innerHTML = `
+    <div class="hac-title">Fehlerprotokoll${mistakeCount > 0 ? ` (${mistakeCount})` : ''}</div>
+    <div class="hac-desc">Wiederkehrende Rechen- und Strukturfehler gezielt nacharbeiten</div>
+  `;
+
+  row.insertBefore(card, row.children[1] || null);
 }
 
 export const {

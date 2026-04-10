@@ -41,5 +41,5 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
   homeLernDashboardPilotNote:
-    "Nur lokal gespeicherte Lernspuren dieses Moduls."
+    "Basiert auf Lernspuren aus diesem Browser."
 });

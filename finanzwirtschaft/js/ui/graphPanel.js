@@ -16,7 +16,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_liq_r2">Rückfluss t₂</label><input type="range" id="g_liq_r2" min="40" max="220" step="10" value="110" oninput="window.initGraph('liquiditaetsplanung', false)"><div class="val" id="v_liq_r2" aria-live="polite">110</div></div>
 <div class="ctrl-group"><label for="g_liq_r3">Rückfluss t₃</label><input type="range" id="g_liq_r3" min="60" max="260" step="10" value="210" oninput="window.initGraph('liquiditaetsplanung', false)"><div class="val" id="v_liq_r3" aria-live="polite">210</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Kumulierte Zahlungsreihe mit markiertem maximalem Kapitalbedarf."></canvas>
+<canvas id="graph_canvas" width="920" height="560" role="img" aria-label="Grafik: Kumulierte Zahlungsreihe mit markiertem maximalem Kapitalbedarf."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -29,7 +29,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_it_i">Zins i</label><input type="range" id="g_it_i" min="0" max="20" step="1" value="10" oninput="window.initGraph('intertemporale_wahl', false)"><div class="val" id="v_it_i" aria-live="polite">10</div></div>
 <div class="ctrl-group"><label for="g_it_c0">Gewählter c₀</label><input type="range" id="g_it_c0" min="20" max="180" step="5" value="70" oninput="window.initGraph('intertemporale_wahl', false)"><div class="val" id="v_it_c0" aria-live="polite">70</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Intertemporale Budgetgerade mit Ausstattungspunkt und Wahlpunkt."></canvas>
+<canvas id="graph_canvas" width="920" height="560" role="img" aria-label="Grafik: Intertemporale Budgetgerade mit Ausstattungspunkt und Wahlpunkt."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -42,7 +42,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_npv_cf2">Rückfluss CF₂</label><input type="range" id="g_npv_cf2" min="60" max="260" step="10" value="120" oninput="window.initGraph('izf_kapitalwertfunktion', false)"><div class="val" id="v_npv_cf2" aria-live="polite">120</div></div>
 <div class="ctrl-group"><label for="g_npv_i">Kalkulationszins i</label><input type="range" id="g_npv_i" min="0" max="20" step="1" value="8" oninput="window.initGraph('izf_kapitalwertfunktion', false)"><div class="val" id="v_npv_i" aria-live="polite">8</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Kapitalwertprofil mit markiertem Kalkulationszins und internem Zinsfuß."></canvas>
+<canvas id="graph_canvas" width="920" height="560" role="img" aria-label="Grafik: Kapitalwertprofil mit markiertem Kalkulationszins und internem Zinsfuß."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`,
 
@@ -55,7 +55,7 @@ export function renderGraphPanel(id) {
 <div class="ctrl-group"><label for="g_lev_rd">Fremdkapitalzins</label><input type="range" id="g_lev_rd" min="1" max="10" step="0.5" value="6" oninput="window.initGraph('wacc_leverage', false)"><div class="val" id="v_lev_rd" aria-live="polite">6.0</div></div>
 <div class="ctrl-group"><label for="g_lev_de">Aktuelles D/E</label><input type="range" id="g_lev_de" min="0" max="2.5" step="0.1" value="1.0" oninput="window.initGraph('wacc_leverage', false)"><div class="val" id="v_lev_de" aria-live="polite">1.0</div></div>
 </div>
-<canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Hebelwirkung auf die Eigenkapitalrendite bei unterschiedlicher Gesamtkapitalrendite."></canvas>
+<canvas id="graph_canvas" width="920" height="560" role="img" aria-label="Grafik: Hebelwirkung auf die Eigenkapitalrendite bei unterschiedlicher Gesamtkapitalrendite."></canvas>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`
   };

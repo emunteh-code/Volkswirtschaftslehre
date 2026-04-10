@@ -390,8 +390,8 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
   const rc = snap.attempts.recent_concept_schnelltest;
   let block1;
   if (!rc.length) {
-    block1 = `<p class="dhp-status dhp-na">Noch keine Konzept-Checks im Lernprotokoll.</p>
-<p class="dhp-muted">Sobald du einen Konzept-Check abschließt, erscheinen hier Punktestand, Abschlussgrund und Zeitstempel.</p>`;
+    block1 = `<p class="dhp-status dhp-na">Noch kein Konzept-Check abgeschlossen.</p>
+<p class="dhp-muted">Sobald du einen Konzept-Check beendest, siehst du hier Ergebnis, Abschlussart und Zeitpunkt.</p>`;
   } else {
     const lines = rc
       .map(
@@ -412,8 +412,8 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
   const rf = snap.attempts.recent_full_exam;
   let block2;
   if (!rf.length) {
-    block2 = `<p class="dhp-status dhp-na">Noch keine abgegebene Probeklausur im Lernprotokoll.</p>
-<p class="dhp-muted">Nach „Klausur abgeben“ tauchen hier deine letzten Sessions auf, sofern das Modul die Versuche protokolliert.</p>`;
+    block2 = `<p class="dhp-status dhp-na">Noch keine Probeklausur abgegeben.</p>
+<p class="dhp-muted">Nach „Klausur abgeben und auswerten“ erscheinen hier deine letzten Klausurläufe, sofern das Modul sie protokolliert.</p>`;
   } else {
     block2 = `<ul class="dhp-list">${rf
       .map(
@@ -425,8 +425,8 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
 
   let block3;
   if (!snap.mistakes.total) {
-    block3 = `<p class="dhp-status dhp-na">Noch keine Fehler-Einträge im Lernprotokoll.</p>
-<p class="dhp-muted">Sobald du in Schnelltest, Konzept-Check oder Probeklausur Fehler sammelst, werden die wichtigsten Quellen hier gebündelt.</p>`;
+    block3 = `<p class="dhp-status dhp-na">Noch keine Fehlmuster aus Übungen oder Klausuren erfasst.</p>
+<p class="dhp-muted">Sobald Fehler aus Schnelltest, Konzept-Check oder Probeklausur auftauchen, bündelt die Übersicht hier die wichtigsten Quellen.</p>`;
   } else {
     const top = Object.entries(snap.mistakes.by_source)
       .sort((a, b) => b[1] - a[1])
@@ -435,7 +435,7 @@ export function buildHonestDashboardPilotHtml(snap, opts = {}) {
       .map(([src, n]) => `<li>${escHtml(SOURCE_LABELS_FOR_DISPLAY[src] || src)}: <strong>${n}</strong></li>`)
       .join("")}</ul>`;
     if (snap.mistakes.reviewable_open != null) {
-      block3 += `<p class="dhp-muted">Fehlerprotokoll (lokal markiert): ${snap.mistakes.reviewable_open} offen · ${snap.mistakes.reviewable_done ?? 0} als erledigt.</p>`;
+      block3 += `<p class="dhp-muted">Fehlerprotokoll in diesem Browser: ${snap.mistakes.reviewable_open} offen · ${snap.mistakes.reviewable_done ?? 0} geklärt.</p>`;
     }
   }
 
@@ -473,7 +473,7 @@ ${drillTotal === 0 ? `<p class="dhp-muted">Derzeit sind noch keine Drill-Fehler 
     const untaggedNote =
       fec.untagged > 0
         ? `<p class="dhp-partial"><strong>Teilweise:</strong> ${fec.untagged} von ${fec.total} Probeklausur-Fehlern ohne Konzept-Tag (nicht gruppierbar).</p>`
-        : `<p class="dhp-muted">Alle Probeklausur-Fehler im lokalen Log sind einem Konzept zugeordnet.</p>`;
+        : `<p class="dhp-muted">Alle Probeklausur-Fehler in diesem Browser sind einem Konzept zugeordnet.</p>`;
     block3b = `<div class="dhp-section">
 <h4 class="dhp-h">Probeklausur-Fehler nach Konzept</h4>
 ${topHtml}
@@ -509,7 +509,7 @@ ${untaggedNote}
 
   return `<div class="dash-honest-pilot" aria-label="Lernprotokoll und nächste Schritte">
 <h3 class="dash-honest-pilot-title">Lernprotokoll und nächste Schritte</h3>
-<p class="dhp-intro">Diese Übersicht zeigt nur echte Lernspuren aus diesem Browser. Sie ersetzt keine geschätzte Gesamtmastery, hilft aber bei der nächsten sinnvollen Entscheidung.</p>
+<p class="dhp-intro">Diese Übersicht bündelt echte Lernspuren aus diesem Browser. Sie hilft dir bei der nächsten sinnvollen Entscheidung, statt Fortschritt nur zu schätzen.</p>
 <div class="dhp-section">
 <h4 class="dhp-h">${nextStepHeadline}</h4>
 <p class="dhp-status">${nextStepBody}</p>
@@ -532,7 +532,7 @@ ${block3b}
 <h4 class="dhp-h">Wiederholungen für heute</h4>
 ${block4}
 </div>
-<p class="dhp-foot">Einige Module protokollieren noch nicht jede Übungsform gleich tief. Wo Daten fehlen, zeigt die Übersicht das offen an, statt etwas zu schätzen.</p>
+<p class="dhp-foot">Wo ein Modul weniger Lernspuren sammelt, zeigt die Übersicht bewusst nur das, was wirklich belegt ist.</p>
 </div>`;
 }
 

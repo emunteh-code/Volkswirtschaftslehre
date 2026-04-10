@@ -98,7 +98,58 @@ function setupPlot(xLabel, yLabel, ranges) {
   ctx.fillText(yLabel, 0, 0);
   ctx.restore();
 
-  return { engine, ctx, col, w, h, pad, px, py, ranges, fsBase, fsBold };
+  return {
+    engine,
+    ctx,
+    col,
+    w,
+    h,
+    pad,
+    px,
+    py,
+    ranges,
+    fsBase,
+    fsBold,
+    legendEntries: [],
+    legendSeen: new Set()
+  };
+}
+
+function registerLegend(plot, entry) {
+  if (!entry?.label) return;
+  const dashKey = Array.isArray(entry.dash) ? entry.dash.join(',') : '';
+  const key = [entry.label, entry.color, dashKey, entry.dot ? 'dot' : 'line'].join('|');
+  if (plot.legendSeen.has(key)) return;
+  plot.legendSeen.add(key);
+  plot.legendEntries.push(entry);
+}
+
+function drawTag(plot, x, y, text, color, dx = 10, dy = -10, align = 'left') {
+  const { ctx, px, py, col } = plot;
+  const tagX = px(x) + dx;
+  const tagY = py(y) + dy;
+  ctx.save();
+  ctx.font = `600 ${Math.max(12, plot.fsBase)}px ${col.fontBody}`;
+  const width = ctx.measureText(text).width + 18;
+  const height = 24;
+  const rectX = align === 'right' ? tagX - width + 4 : tagX - 4;
+  ctx.fillStyle = `${col.bg}f2`;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(rectX, tagY - height + 5, width, height, 8);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, rectX + 9, tagY - 6);
+  ctx.restore();
+}
+
+function drawLegend(plot) {
+  if (!plot.legendEntries.length) return;
+  plot.engine.drawLegend(plot.ctx, plot.w, plot.legendEntries, plot.col.grid, 18);
 }
 
 function drawCurve(plot, fn, options = {}) {
@@ -111,7 +162,8 @@ function drawCurve(plot, fn, options = {}) {
     dash = [],
     label,
     labelX,
-    labelDy = -8
+    labelDy = -8,
+    labelAlign = 'left'
   } = options;
 
   const { ctx, px, py } = plot;
@@ -143,10 +195,8 @@ function drawCurve(plot, fn, options = {}) {
     const x = labelX ?? (xStart + xEnd) / 2;
     const y = fn(x);
     if (Number.isFinite(y) && y >= plot.ranges.yMin && y <= plot.ranges.yMax) {
-      ctx.fillStyle = color;
-      ctx.font = `600 ${plot.fsBase}px ${plot.col.fontMono}`;
-      ctx.textAlign = 'left';
-      ctx.fillText(label, px(x) + 8, py(y) + labelDy);
+      drawTag(plot, x, y, label, color, 10, labelDy, labelAlign);
+      registerLegend(plot, { color, label, dash, lw: lineWidth });
     }
   }
 }
@@ -162,10 +212,8 @@ function drawHorizontal(plot, y, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(label, px(ranges.xMax) - 130, py(y) - 8);
+    drawTag(plot, ranges.xMax, y, label, color, -138, -8, 'right');
+    registerLegend(plot, { color, label, dash: [8, 6], lw: 2.4 });
   }
 }
 
@@ -180,10 +228,8 @@ function drawVertical(plot, x, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(label, px(x) + 8, py(ranges.yMax) + 14);
+    drawTag(plot, x, ranges.yMax, label, color, 10, 14);
+    registerLegend(plot, { color, label, dash: [8, 6], lw: 2 });
   }
 }
 
@@ -204,14 +250,13 @@ function drawPoint(plot, x, y, color, label, dx = 10, dy = -8) {
   ctx.stroke();
 
   if (label) {
-    ctx.fillStyle = color;
-    ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-    ctx.textAlign = 'left';
-    ctx.fillText(label, cx + dx, cy + dy);
+    drawTag(plot, x, y, label, color, dx, dy);
+    registerLegend(plot, { color, label, dot: true });
   }
 }
 
-function updateInfo(html) {
+function updateInfo(plot, html) {
+  drawLegend(plot);
   const info = document.getElementById('graph_info');
   if (!info) return;
   info.innerHTML = html;
@@ -259,7 +304,7 @@ function drawGuetermarkt() {
   drawCurve(plot, demand, { color: plot.col.accent, label: 'Geplante Nachfrage Z', labelX: xMax * 0.45 });
   drawPoint(plot, yStar, yStar, plot.col.warn, `Y* = ${yStar.toFixed(0)}`);
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `Z = ${A.toFixed(0)} + ${c1.toFixed(2)}Y`,
     [
       { label: 'Gleichgewicht', body: `Die 45°-Linie schneidet die Nachfrage bei Y* = ${yStar.toFixed(0)}.` },
@@ -301,7 +346,7 @@ function drawMultiplikator() {
   drawVertical(plot, y0, plot.col.accent + 'aa', 'Y₀*');
   drawVertical(plot, y1, plot.col.warn + 'aa', 'Y₁*');
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `Multiplikator = 1 / (1 - c₁) = ${multiplier.toFixed(2)}`,
     [
       { label: 'Erstimpuls', body: `Der fiskalische Erstimpuls beträgt ΔG = ${impulse.toFixed(0)} und hebt die Nachfragekurve parallel an.` },
@@ -335,7 +380,7 @@ function drawGeldnachfrage() {
   drawVertical(plot, mp, plot.col.warn, 'reales Geldangebot');
   drawPoint(plot, mp, iStar, plot.col.warn, `i* = ${iStar.toFixed(2)}`, 10, -12);
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `M/P = ${mp.toFixed(0)},  Geldnachfrage = ${k.toFixed(2)}Y - ${h.toFixed(0)}i`,
     [
       { label: 'Gleichgewicht', body: `Bei Y = ${y.toFixed(0)} ergibt sich aktuell ein Gleichgewichtszins von ${iStar.toFixed(2)}.` },
@@ -368,7 +413,7 @@ function drawISLM() {
   drawHorizontal(plot, iBar, plot.col.warn, 'Zinsregel der Zentralbank');
   drawPoint(plot, yStar, iBar, plot.col.warn, `E = (${yStar.toFixed(0)}, ${iBar.toFixed(2)})`);
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `IS: i = ${intercept.toFixed(1)} - (Y - ${base.toFixed(0)}) / ${slope.toFixed(0)}`,
     [
       { label: 'Gleichgewicht', body: `Die Güternachfrage ist bei Y = ${yStar.toFixed(0)} mit dem Zielzins ī = ${iBar.toFixed(2)} vereinbar.` },
@@ -412,7 +457,7 @@ function drawPolitikmix() {
   drawPoint(plot, yOld, iOld, plot.col.muted, 'E₀');
   drawPoint(plot, yNew, iNew, plot.col.warn, 'E₁');
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `IS-Verschiebung um ${shift.toFixed(0)} bei LM-Steigung ${lmSlope.toFixed(2)}`,
     [
       { label: 'Ausgangslage', body: `Vor dem Impuls liegt das Gleichgewicht bei Y = ${yOld.toFixed(0)} und i = ${iOld.toFixed(2)}.` },
@@ -446,7 +491,7 @@ function drawArbeitsmarkt() {
     drawPoint(plot, uStar, ps, plot.col.warn, `uₙ = ${uStar.toFixed(1)}%`);
   }
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `PS = 1 / (1 + μ) = ${ps.toFixed(2)}`,
     [
       { label: 'WS', body: 'Höheres z hebt die Lohnforderung an und verschiebt die WS-Kurve nach oben.' },
@@ -483,7 +528,7 @@ function drawPhillips() {
   drawVertical(plot, un, plot.col.muted, 'uₙ');
   drawPoint(plot, uCurrent, piCurrent, plot.col.warn, `Punkt A`, 10, -12);
 
-  updateInfo(renderInfo(
+  updateInfo(plot, renderInfo(
     `π = πᵉ − α (u − uₙ)`,
     [
       { label: 'Aktueller Punkt', body: `Bei u = ${uCurrent.toFixed(2)}% ergibt sich eine Inflation von ${piCurrent.toFixed(2)}%.` },

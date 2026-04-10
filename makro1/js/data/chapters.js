@@ -411,11 +411,22 @@ export const CONTENT = {
         <p>In der Liquiditätsfalle ist die Geldpolitik schwach, Fiskalpolitik aber stark. Bei sehr straffer Geldpolitik kann selbst ein großer fiskalischer Impuls fast vollständig über steigende Zinsen neutralisiert werden.</p>
         ${warn('Crowding-Out heißt nicht Wirkungslosigkeit', 'Auch bei Crowding-Out steigt der Output häufig noch an; nur der Effekt ist kleiner als im reinen Gütermarktmodell.')}
         ${warn('Immer die monetäre Reaktion nennen', 'Die gleiche Fiskalmaßnahme kann je nach LM- oder Zinsregel zu ganz unterschiedlichen Ergebnissen führen.')}
+      `),
+      section('Shift vs. Movement im Policy-Diagramm', `
+        <p>Die saubere Klausurantwort trennt immer zwei Ebenen: <strong>der Schock</strong> verschiebt eine Kurve, <strong>die Reaktion des Gleichgewichts</strong> erzeugt Bewegungen auf bereits verschobenen Kurven. Genau hier kippen viele Lösungen sprachlich und graphisch.</p>
+        <p>Mehr Staatsausgaben verschieben die IS-Kurve. Der anschließende Zinsanstieg ist keine zweite IS-Verschiebung, sondern Teil des neuen Schnittpunkts mit der monetären Bedingung. Umgekehrt verschiebt eine Zinssenkung die LM- bzw. Zinsregel; die resultierende Investitionsreaktion ist dann die Bewegung auf der IS-Kurve.</p>
+        ${warn('Schock doppelt zählen', 'Wer nach einer Fiskalexpansion zusätzlich noch von einer "Investitionsverschiebung wegen höherem Zins" spricht, vermischt Gleichgewichtsbewegung und eigenständigen Kurvenschock.')}
+      `),
+      section('Von der kurzen zur mittleren Frist weiterdenken', `
+        <p>Ein starker Nachfrageimpuls endet klausurtypisch nicht im ersten Diagramm. Wenn der Output über das Produktionspotenzial steigt, folgen in der mittleren Frist Lohn-, Preis- und Inflationsreaktionen. Die Kurzfristanalyse ist daher oft nur der erste Schritt einer längeren Wirkungsargumentation.</p>
+        <p>Gute Lösungen schließen den Policy-Mix deshalb mit einem Halbsatz zur Anschlusslogik: höherer Output kann Inflationsdruck auslösen, der die reale Geld- und Zinslage später wieder verändert.</p>
+        ${warn('Kurzfristgleichgewicht als Endpunkt verkaufen', 'Im IS-LM-Teil wird häufig korrekt gerechnet, aber die Anschlussfrage zur mittleren Frist ignoriert. Das kostet in Transferaufgaben unnötig Punkte.')}
       `)
     ].join(''),
     formeln: [
       { label: 'Staatsausgabenimpuls in IS-LM', eq: String.raw`$$IS: \quad Y = C(Y-T) + I(Y,i) + G$$`, desc: 'Mehr G verschiebt die IS-Kurve nach rechts', variables: {} },
-      { label: 'Fisher-Approximation für Politikmix mit Inflationserwartungen', eq: String.raw`$$r \approx i - \pi^e$$`, desc: 'Relevanter Finanzierungskanal bei gegebener Inflationserwartung', variables: {} }
+      { label: 'Fisher-Approximation für Politikmix mit Inflationserwartungen', eq: String.raw`$$r \approx i - \pi^e$$`, desc: 'Relevanter Finanzierungskanal bei gegebener Inflationserwartung', variables: {} },
+      { label: 'Crowding-Out-Kette', eq: String.raw`$$\Delta G > 0 \Rightarrow IS \text{ nach rechts} \Rightarrow i \uparrow \Rightarrow I \downarrow$$`, desc: 'Der Fiskalimpuls bleibt positiv, wird aber über den Zins teilweise gebremst.', variables: { 'I': 'zinsabhängige Investitionen', 'i': 'Zins', 'G': 'Staatsausgaben' } }
     ],
     aufgaben: [
       task(
@@ -462,6 +473,24 @@ export const CONTENT = {
           step('Bei gleichzeitig steigender Risikoprämie bleibt der relevante Kreditzins hoch; eine reine Zinssteuerung stabilisiert die Nachfrage dann nur unvollständig.')
         ],
         'ELB + niedrige Inflationserwartungen begrenzen die geldpolitische Gegenreaktion; zur Stabilisierung werden typischerweise zusätzliche fiskalische Impulse benötigt.'
+      ),
+      task(
+        String.raw`Graphlesefalle: Nach einer Fiskalexpansion steigt im neuen Gleichgewicht der Zins. Was ist im Diagramm die Verschiebung und was ist die Bewegung?`,
+        [
+          step('Die Verschiebung ist die Rechtsverlagerung der IS-Kurve infolge höherer Staatsausgaben.'),
+          step('Die Bewegung ist der Übergang entlang der monetären Bedingung bzw. entlang der verschobenen IS zum neuen Schnittpunkt.'),
+          step('Der höhere Zins ist deshalb Teil des neuen Gleichgewichts und kein zweiter eigenständiger Schock.')
+        ],
+        'Saubere Politikanalyse trennt immer Schock, Kurvenverschiebung und resultierende Gleichgewichtsbewegung.'
+      ),
+      task(
+        'Eine Lösung endet mit „Output steigt, also ist der Fall erledigt“. Welche zweite Ebene fehlt in einer guten Makro-I-Antwort häufig noch?',
+        [
+          step('Prüfe, ob der Output über das mittelfristige Produktionspotenzial hinausschießt.'),
+          step('Dann gehört ein Anschluss an Inflation, Lohnentwicklung oder spätere Realzinsreaktionen in die Antwort.'),
+          step('Die Kurzfristwirkung ist oft nur Stufe eins; der Transferpunkt ist die Rückbindung an die mittlere Frist.')
+        ],
+        'Eine vollständige Antwort verbindet das Kurzfristdiagramm mit der mittelfristigen Anpassung statt beim ersten Gleichgewicht stehenzubleiben.'
       )
     ]
   },
@@ -740,11 +769,21 @@ export const CONTENT = {
         <p>Politik wirkt nur, wenn private Akteure die Ankündigung ernst nehmen. Eine Zentralbank, die niedrige Inflation ankündigt, aber später doch Beschäftigung kurzfristig über Überraschungsinflation stützen möchte, leidet unter Zeitinkonsistenz. Regeln, Reputation und Unabhängigkeit sind institutionelle Antworten auf dieses Problem.</p>
         ${warn('Ankündigung ist nicht Wirkung', 'Ob eine Politikmaßnahme sofort wirkt, hängt davon ab, ob sie glaubwürdig ist und wie stark sie Erwartungen verändert.')}
         ${warn('Temporär und permanent trennen', 'Viele Klausurfehler entstehen, weil eine einmalige Maßnahme fälschlich wie eine dauerhafte bewertet wird.')}
+      `),
+      section('Ankündigung, Überraschung und Timing', `
+        <p>Viele Klausurfragen leben davon, ob eine Maßnahme <strong>angekündigt</strong>, <strong>glaubwürdig</strong> und <strong>überraschend</strong> ist. Eine angekündigte künftige Zinssenkung kann heutige Langfristzinsen bewegen. Eine nicht glaubwürdige Ankündigung verpufft. Eine Überraschungsmaßnahme wirkt oft anders als eine vollständig erwartete Politik.</p>
+        <p>Die Standardfrage lautet deshalb nicht nur „Was macht die Politik?“, sondern „<em>Wann</em> wird sie erwartet und über welchen Kanal wirkt sie sofort?“</p>
+        ${warn('Zeitpunkt der Erwartungsbildung ausblenden', 'Wer nur den späteren Politikschritt nennt, aber nicht erklärt, warum Märkte oder Haushalte schon heute reagieren, beantwortet den Erwartungskanal unvollständig.')}
+      `),
+      section('Prüfungsmuster: erst Erwartungskanal, dann aktuelle Größe', `
+        <p>Eine belastbare Antwort arbeitet in vier Schritten: Maßnahme klassifizieren, permanent vs. temporär trennen, Glaubwürdigkeit prüfen und erst dann die aktuelle Wirkung auf Konsum, Investition, Langfristzins oder Inflation ableiten.</p>
+        <p>So wird auch sichtbar, warum dieselbe nominelle Ankündigung ganz unterschiedlich wirken kann: Entweder über Glaubwürdigkeitsgewinn sofort stark oder ohne Vertrauen fast gar nicht.</p>
       `)
     ].join(''),
     formeln: [
       { label: 'Barwert erwarteter Gewinne', eq: String.raw`$$V_t = \sum_{k=0}^{\infty}\frac{\pi^e_{t+k}}{(1+r)^k}$$`, desc: 'Investitionsentscheidungen hängen von Erwartungen ab', variables: { '\\pi^e_{t+k}': 'erwartete Gewinne' } },
-      { label: 'Erwartungshypothese der Zinsstruktur', eq: String.raw`$$i_{lang} \approx \frac{1}{n}\sum_{k=0}^{n-1} i^e_{t+k}$$`, desc: 'Langfristiger Zins als Durchschnitt erwarteter Kurzfristzinsen', variables: {} }
+      { label: 'Erwartungshypothese der Zinsstruktur', eq: String.raw`$$i_{lang} \approx \frac{1}{n}\sum_{k=0}^{n-1} i^e_{t+k}$$`, desc: 'Langfristiger Zins als Durchschnitt erwarteter Kurzfristzinsen', variables: {} },
+      { label: 'Erwartungskanal des Realzinses', eq: String.raw`$$r \approx i - \pi^e$$`, desc: 'Fallende Inflationserwartungen können reale Finanzierungskosten selbst bei konstantem Nominalzins erhöhen.', variables: { 'r': 'Realzins', 'i': 'Nominalzins', '\\pi^e': 'erwartete Inflation' } }
     ],
     aufgaben: [
       task(
@@ -764,6 +803,33 @@ export const CONTENT = {
           step('Dadurch steigen Investitionen und Nachfrage schon vor der eigentlichen Zinssenkung.')
         ],
         'Der Erwartungskanal wirkt über sofort sinkende langfristige Zinsen und damit frühere Nachfrageimpulse.'
+      ),
+      task(
+        'Warum ist eine einmalige Steuersenkung kein guter Ersatz für eine glaubwürdig dauerhafte Entlastung, wenn der Konsumkanal geprüft wird?',
+        [
+          step('Der Konsum reagiert auf erwartetes Lebenseinkommen, nicht nur auf einen Einmalbetrag.'),
+          step('Eine dauerhafte Entlastung verändert viele künftige Einkommen und damit die Erwartung deutlich stärker.'),
+          step('Darum ist die heutige Konsumreaktion bei permanenter Politik typischerweise kräftiger.')
+        ],
+        'Temporär vs. permanent ist im Erwartungskanal keine Nebenfrage, sondern der Kern der Wirkungsstärke.'
+      ),
+      task(
+        'Eine Zentralbank kündigt niedrige Inflation an, hat aber eine Geschichte späterer Überraschungsinflation. Warum bleibt die Wirkung begrenzt?',
+        [
+          step('Private Akteure bilden Erwartungen nicht nur aus Worten, sondern auch aus Reputation und vergangenem Verhalten.'),
+          step('Fehlt Glaubwürdigkeit, ändern sich Preis-, Lohn- und Zinserwartungen kaum.'),
+          step('Dann ist die Ankündigung keine starke heutige Stabilisierungsmaßnahme, sondern bloß ein schwaches Signal.')
+        ],
+        'Glaubwürdigkeit ist die Bedingung dafür, dass Erwartungen überhaupt in die gewünschte Richtung umschlagen.'
+      ),
+      task(
+        'Welche Prüfungsreihenfolge hilft bei Erwartungsaufgaben mit Politikankündigungen fast immer?',
+        [
+          step('Zuerst die Maßnahme nach Zeitpunkt und Dauer klassifizieren.'),
+          step('Dann prüfen, ob sie glaubwürdig und für die Akteure informationswirksam ist.'),
+          step('Erst danach den Kanal benennen: Konsum, Investition, Langfristzins oder Inflationserwartung.')
+        ],
+        'Die Standardroutine lautet: Maßnahme -> Erwartung -> heutiger Kanal -> makroökonomische Wirkung.'
       )
     ]
   }

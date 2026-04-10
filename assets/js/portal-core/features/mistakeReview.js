@@ -138,7 +138,7 @@ ${wrong}
   }
 
   function renderList(title, list, isOpen) {
-    if (!list.length) return `<div class="mr-empty">${escapeHtml(title)}: keine Einträge.</div>`;
+    if (!list.length) return `<div class="mr-empty">${isOpen ? "Keine offenen Einträge — gut gemacht!" : "Noch keine erledigten Einträge."}</div>`;
     const sorted = sortEntriesByTimeDesc(list);
     return `<div class="mr-section"><h3 class="mr-h3">${escapeHtml(title)} (${list.length})</h3>${sorted.map((e) => renderRow(e, isOpen)).join("")}</div>`;
   }
@@ -177,15 +177,15 @@ ${wrong}
               .map(([id, n]) => `${chapterMap[id] || id} (${n})`)
               .join(", ")
           )}</p>`
-        : `<p class="mr-hint">Noch keine wiederholten Probeklausur-Fehler (>=2) im lokalen Log.</p>`;
+        : `<p class="mr-hint">Noch keine Konzeptfehler mit mehrfachen Vorkommen.</p>`;
       const untaggedNote =
         fullExamSignals.untaggedCount > 0
-          ? `<p class="mr-hint">Nicht zuordenbar (ohne Konzept-Tag): <strong>${fullExamSignals.untaggedCount}</strong> von ${fullExamSignals.totalFullExamMistakes} Probeklausur-Fehlern.</p>`
-          : `<p class="mr-hint">Alle protokollierten Probeklausur-Fehler in diesem Browser sind einem Konzept zugeordnet.</p>`;
-      fullExamBlock = `<div class="mr-section">
-<h3 class="mr-h3">Probeklausur-Konzeptsignale</h3>
-<p class="mr-hint">Nur lokal protokollierte Einträge mit Quelle „Probeklausur“. Keine Schätzung für ungetaggte Aufgabeninhalte.</p>
-${topConcepts ? `<ul class="mr-list">${topConcepts}</ul>` : `<div class="mr-empty">Noch keine konzeptgetaggten Probeklausur-Fehler.</div>`}
+          ? `<p class="mr-hint">Ohne Konzeptzuordnung: <strong>${fullExamSignals.untaggedCount}</strong> von ${fullExamSignals.totalFullExamMistakes} Einträgen.</p>`
+          : `<p class="mr-hint">Alle Einträge sind einem Konzept zugeordnet.</p>`;
+      fullExamBlock = `<div class=”mr-section”>
+<h3 class=”mr-h3”>Probeklausur-Konzeptsignale</h3>
+<p class=”mr-hint”>Basiert auf deinen gespeicherten Probeklausur-Einträgen.</p>
+${topConcepts ? `<ul class=”mr-list”>${topConcepts}</ul>` : `<div class=”mr-empty”>Noch keine Fehler nach Konzept zugeordnet.</div>`}
 ${repeated}
 ${untaggedNote}
 </div>`;
@@ -194,15 +194,15 @@ ${untaggedNote}
     return `<div class="mistake-review">
 <div class="mr-header">
 <h2>Fehlerprotokoll</h2>
-<p class="mr-sub">${escapeHtml(courseLabel)} · Modul <code>${escapeHtml(moduleSlug)}</code></p>
-<p class="mr-hint">Einträge aus dem lokalen Lernprotokoll. „Erledigt“ ist nur eine lokale Markierung zum Abhaken — keine Bewertung.</p>
+<p class=”mr-sub”>${escapeHtml(courseLabel)}</p>
+<p class=”mr-hint”>Dein Fehlerprotokoll aus diesem Browser.</p>
 </div>
 <div class="mr-filters">
 <label class="mr-filter-label">Quelle <select id="mr-filter-src" class="mr-select">${srcOptions}</select></label>
 <label class="mr-filter-label">Konzept <select id="mr-filter-con" class="mr-select">${conOptions}</select></label>
 </div>
 ${fullExamBlock}
-${renderList("Noch offen / wiederholen", open, true)}
+${renderList("Wiederholen", open, true)}
 ${renderList("Als erledigt markiert", done, false)}
 <div class="mr-footer"><button type="button" class="btn secondary" onclick="window.__showDashboard()">Zum Dashboard</button></div>
 </div>`;

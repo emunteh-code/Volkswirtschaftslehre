@@ -51,7 +51,7 @@ export function renderDashboard(onNavigate) {
 </div>
 <div class="dash-section" style="margin-bottom:16px">
 <button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll anzeigen</button>
-<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Lokal gespeicherte Fehler aus Lernflüssen (sofern protokolliert).</p>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Deine gespeicherten Fehler aus Lernflüssen.</p>
 </div>`;
 
   const derivedSnap = buildDashboardDerivedMetricsSnapshot({

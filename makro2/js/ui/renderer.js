@@ -41,5 +41,5 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
   homeLernDashboardPilotNote:
-    "Pilot: Kennzahlen aus Protokoll im Dashboard (Kasten „Kennzahlen aus dem Lernprotokoll“)."
+    "Nur lokal gespeicherte Lernspuren dieses Moduls."
 });

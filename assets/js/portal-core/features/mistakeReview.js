@@ -118,11 +118,11 @@ export function createMistakeReviewModule({
     const conceptLabel = e.concept_id ? escapeHtml(chapterMap[e.concept_id] || e.concept_id) : "";
 
     const nav = e.concept_id
-      ? `<button type="button" class="btn secondary mr-nav-concept" style="font-size:12px;padding:4px 10px" data-mr-concept="${escapeHtml(e.concept_id)}">Zum Konzept (${conceptLabel})</button>`
-      : `<span class="mr-meta">Kein Konzept verknüpft</span>`;
+      ? `<button type="button" class="btn secondary mr-nav-concept" style="font-size:12px;padding:4px 10px" data-mr-concept="${escapeHtml(e.concept_id)}">Zum Konzept${conceptLabel ? ` (${conceptLabel})` : ""}</button>`
+      : `<span class="mr-meta">Noch ohne Konzept-Verknüpfung</span>`;
 
     const markBtn = isOpen
-      ? `<button type="button" class="btn secondary mr-mark" style="font-size:12px;padding:4px 10px" data-mr-entry="${escapeHtml(e.entry_id)}">Als erledigt</button>`
+      ? `<button type="button" class="btn secondary mr-mark" style="font-size:12px;padding:4px 10px" data-mr-entry="${escapeHtml(e.entry_id)}">Als geklärt markieren</button>`
       : `<span class="mr-meta">Erledigt ${fmtTime(reviewedMap()[e.entry_id])}</span>`;
 
     return `<div class="mr-row" data-entry="${escapeHtml(e.entry_id)}">
@@ -138,7 +138,12 @@ ${wrong}
   }
 
   function renderList(title, list, isOpen) {
-    if (!list.length) return `<div class="mr-empty">${escapeHtml(title)}: keine Einträge.</div>`;
+    if (!list.length) {
+      const guidance = isOpen
+        ? "Aktuell gibt es hier nichts Offenes. Neue Einträge erscheinen nach Fehlern aus Schnelltest, Konzept-Check oder Probeklausur."
+        : "Sobald du Einträge als geklärt markierst, tauchen sie hier als persönlicher Verlauf auf.";
+      return `<div class="mr-empty"><strong>${escapeHtml(title)}</strong><br>${escapeHtml(guidance)}</div>`;
+    }
     const sorted = sortEntriesByTimeDesc(list);
     return `<div class="mr-section"><h3 class="mr-h3">${escapeHtml(title)} (${list.length})</h3>${sorted.map((e) => renderRow(e, isOpen)).join("")}</div>`;
   }
@@ -172,19 +177,19 @@ ${wrong}
         .map(([id, n]) => `<li>${escapeHtml(chapterMap[id] || id)}: <strong>${n}</strong></li>`)
         .join("");
       const repeated = fullExamSignals.repeatedConceptMisses.length
-        ? `<p class="mr-hint"><strong>Wiederholte Probeklausur-Fehler (>=2):</strong> ${escapeHtml(
+        ? `<p class="mr-hint"><strong>Wiederkehrende Probeklausur-Signale (>=2):</strong> ${escapeHtml(
             fullExamSignals.repeatedConceptMisses
               .map(([id, n]) => `${chapterMap[id] || id} (${n})`)
               .join(", ")
           )}</p>`
-        : `<p class="mr-hint">Noch keine wiederholten Probeklausur-Fehler (>=2) im lokalen Log.</p>`;
+        : `<p class="mr-hint">Noch keine wiederkehrenden Probeklausur-Fehler (>=2) im lokalen Protokoll.</p>`;
       const untaggedNote =
         fullExamSignals.untaggedCount > 0
-          ? `<p class="mr-hint">Nicht zuordenbar (ohne Konzept-Tag): <strong>${fullExamSignals.untaggedCount}</strong> von ${fullExamSignals.totalFullExamMistakes} Probeklausur-Fehlern.</p>`
+          ? `<p class="mr-hint">Noch ohne Konzept-Tag: <strong>${fullExamSignals.untaggedCount}</strong> von ${fullExamSignals.totalFullExamMistakes} Probeklausur-Fehlern.</p>`
           : `<p class="mr-hint">Alle protokollierten Probeklausur-Fehler in diesem Browser sind einem Konzept zugeordnet.</p>`;
       fullExamBlock = `<div class="mr-section">
-<h3 class="mr-h3">Probeklausur-Konzeptsignale</h3>
-<p class="mr-hint">Nur lokal protokollierte Einträge mit Quelle „Probeklausur“. Keine Schätzung für ungetaggte Aufgabeninhalte.</p>
+<h3 class="mr-h3">Probeklausuren: wiederkehrende Fehlmuster</h3>
+<p class="mr-hint">Hier siehst du nur lokal protokollierte Einträge aus Probeklausuren. Die Liste hilft beim Erkennen von Themen, die unter Klausurdruck wiederkehren.</p>
 ${topConcepts ? `<ul class="mr-list">${topConcepts}</ul>` : `<div class="mr-empty">Noch keine konzeptgetaggten Probeklausur-Fehler.</div>`}
 ${repeated}
 ${untaggedNote}
@@ -194,17 +199,17 @@ ${untaggedNote}
     return `<div class="mistake-review">
 <div class="mr-header">
 <h2>Fehlerprotokoll</h2>
-<p class="mr-sub">${escapeHtml(courseLabel)} · Modul <code>${escapeHtml(moduleSlug)}</code></p>
-<p class="mr-hint">Einträge aus dem lokalen Lernprotokoll. „Erledigt“ ist nur eine lokale Markierung zum Abhaken — keine Bewertung.</p>
+<p class="mr-sub">${escapeHtml(courseLabel)} · ${open.length} offen · ${done.length} geklärt</p>
+<p class="mr-hint">Hier sammelst du persönliche Fehlmuster aus diesem Modul. Markiere Einträge erst dann als geklärt, wenn du den Denkfehler wirklich verstanden und im Konzept nachgearbeitet hast.</p>
 </div>
 <div class="mr-filters">
 <label class="mr-filter-label">Quelle <select id="mr-filter-src" class="mr-select">${srcOptions}</select></label>
 <label class="mr-filter-label">Konzept <select id="mr-filter-con" class="mr-select">${conOptions}</select></label>
 </div>
 ${fullExamBlock}
-${renderList("Noch offen / wiederholen", open, true)}
-${renderList("Als erledigt markiert", done, false)}
-<div class="mr-footer"><button type="button" class="btn secondary" onclick="window.__showDashboard()">Zum Dashboard</button></div>
+${renderList("Als Nächstes klären", open, true)}
+${renderList("Bereits als geklärt markiert", done, false)}
+<div class="mr-footer"><button type="button" class="btn secondary" onclick="window.__showDashboard()">Zurück zum Lern-Dashboard</button></div>
 </div>`;
   }
 

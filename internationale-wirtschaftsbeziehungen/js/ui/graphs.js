@@ -646,7 +646,7 @@ export function initGraph(conceptId) {
     case 'tarifmodell':
       drawTariff();
       break;
-    case 'paritaeten':
+    case 'zinsparitaet':
       drawUIP();
       break;
     case 'monetaerer_ansatz':

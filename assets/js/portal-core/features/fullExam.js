@@ -115,7 +115,7 @@ export function createFullExamModule({
     if (!el) return;
     const { earned, maxPts } = calcScore();
     const totalRevealed = feState.questions.filter((q) => feState.revealed[q.id]).length;
-    el.textContent = `${earned} / ${maxPts} Pkt. · ${totalRevealed}/${feState.questions.length} beantwortet`;
+    el.textContent = `${earned} / ${maxPts} Pkt. · ${totalRevealed}/${feState.questions.length} geprüft`;
   }
 
   function updateDots() {
@@ -163,8 +163,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       inner += '<hr style="border:none;border-top:1px solid var(--border);margin:10px 0">';
     }
     inner += `<div class="fe-fb-solution">
-<div class="fe-fb-sol-title">${revealOnly ? "Musterloesung" : (ok ? "Musterloesung" : "Musterloesung - so waere es richtig")}</div>
-<div class="fe-fb-sol-body">${q.feedback || "Keine Musterloesung verfuegbar."}</div>
+<div class="fe-fb-sol-title">${revealOnly ? "Musterlösung" : (ok ? "Musterlösung" : "Musterlösung – so wäre es richtig")}</div>
+<div class="fe-fb-sol-body">${q.feedback || "Noch keine Musterlösung hinterlegt."}</div>
 </div>`;
 
     const borderColor = revealOnly ? accent2 : (ok ? accent : accent3);
@@ -214,10 +214,11 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
   <div class="full-exam-meta">
     <span>${exam.subtitle}</span>
     <span>${exam.duration} Min.</span>
-    <span id="fe-live-score" aria-live="polite">0 / ${maxPts} Pkt. · 0/${questions.length} beantwortet</span>
+    <span id="fe-live-score" aria-live="polite">0 / ${maxPts} Pkt. · 0/${questions.length} geprüft</span>
     ${exam.duration ? '<div class="full-exam-timer" id="feTimer" aria-live="polite"></div>' : ""}
   </div>
 </div>
+<div class="fe-context-block"><strong>Arbeitsweise:</strong> Antworte zuerst knapp und fachlich sauber. Nutze „Antwort prüfen“ oder „Musterlösung öffnen“ pro Teilfrage; nach „Klausur abgeben und auswerten“ erhältst du die Gesamtsicht über den ganzen Klausurblock.</div>
 <div class="fe-progress-strip" role="navigation" aria-label="Fragenuebersicht">
   <div class="fe-progress-dots" id="feDots">
     ${questions.map((q) => `<div class="fe-dot" id="fed_${q.id}" title="${q.id}" onclick="document.getElementById('feq_${q.id}').scrollIntoView({behavior:'smooth',block:'center'})"></div>`).join("")}
@@ -263,8 +264,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
   oninput="window.__feText('${q.id}',this.value)" rows="4"
   aria-label="Antwort für Frage ${index + 1}"></textarea>
 <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-  <button class="btn" id="febtn_${q.id}" onclick="window.__feCheckText('${q.id}')" style="padding:6px 18px;font-size:13px">Prüfen</button>
-  <button class="btn secondary" id="ferevbtn_${q.id}" onclick="window.__feRevealAnswer('${q.id}')" style="padding:6px 14px;font-size:13px">Lösung anzeigen</button>
+  <button class="btn" id="febtn_${q.id}" onclick="window.__feCheckText('${q.id}')" style="padding:6px 18px;font-size:13px">Antwort prüfen</button>
+  <button class="btn secondary" id="ferevbtn_${q.id}" onclick="window.__feRevealAnswer('${q.id}')" style="padding:6px 14px;font-size:13px">Musterlösung öffnen</button>
 </div>
 <div class="fe-inline-feedback" id="fefb_${q.id}" style="display:none" aria-live="polite"></div>
 </div>`;
@@ -272,7 +273,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     });
 
     html += `<div class="fe-submit-row">
-<button class="btn" onclick="window.__submitFE()" style="padding:12px 36px;font-size:16px">Klausur abgeben &amp; Auswertung</button>
+<button class="btn" onclick="window.__submitFE()" style="padding:12px 36px;font-size:16px">Klausur abgeben und auswerten</button>
 </div></div>`;
 
     content.innerHTML = html;
@@ -426,7 +427,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     if (revealBtn) revealBtn.style.display = "none";
     const ptsEl = document.getElementById(`fepts_${qid}`);
     if (ptsEl) {
-      ptsEl.textContent = "Musterloesung ↓";
+      ptsEl.textContent = "Musterlösung";
       ptsEl.style.color = "var(--accent2)";
     }
     showFeedback(qid, false, q, feState.answers[qid], true);
@@ -498,7 +499,11 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     }
     const pct = Math.round((earned / maxPts) * 100);
     const color = pct >= 60 ? "var(--accent)" : pct >= 40 ? "var(--accent2)" : "var(--accent3)";
-    const msg = pct >= 60 ? "Bestanden" : "Knapp nicht bestanden - schwache Bereiche wiederholen.";
+    const msg = pct >= 60
+      ? "Saubere Klausurgrundlage. Sichere jetzt gezielt die Fehlerquellen aus den schwächeren Teilbereichen."
+      : pct >= 40
+        ? "Teilweise tragfähig, aber noch nicht stabil genug unter Klausurbedingungen."
+        : "Noch zu viele Lücken unter Zeitdruck. Geh die Musterlösungen und die schwächsten Konzepte jetzt gezielt nach.";
     const content = document.getElementById("content");
     if (!content) return;
 
@@ -506,7 +511,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     banner.style.cssText = "position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:2px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;animation:fadeIn .3s ease";
     banner.innerHTML = `<div>
 <span style="font-family:Syne,sans-serif;font-size:24px;font-weight:800;color:${color}">${earned} / ${maxPts} Punkte</span>
-<span style="color:var(--muted);font-size:13px;margin-left:12px">${pct}% - ${msg}</span>
+<span style="color:var(--muted);font-size:13px;margin-left:12px">${pct}% · ${msg}</span>
 </div>
 <div style="display:flex;gap:8px;flex-wrap:wrap">
 <button class="btn secondary" onclick="window.__startFullExam('${feState.exam.id}')" style="font-size:13px;padding:7px 16px">Nochmal</button>
@@ -527,7 +532,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
     }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausuren`;
-    let html = `<div style="max-width:600px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>`;
+    let html = `<div style="max-width:680px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>
+<div class="fe-context-block"><strong>Wähle eine vollständige Probeklausur.</strong> Jede Simulation bündelt mehrere Konzepte in einem zusammenhängenden Klausurblock. Dauer, Teilfragen und Punkte helfen dir bei der Planung; die Musterlösungen dienen danach zur gezielten Nacharbeit.</div>`;
     Object.entries(fullExams).forEach(([examKey, examRaw]) => {
       const exam = normalizeExamToAufgabenShape(examRaw, examKey);
       if (!exam) return;
@@ -538,7 +544,8 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
       }, 0);
       html += `<div class="home-action-card" onclick="window.__startFullExam('${exam.id || examKey}')" style="margin-bottom:12px">
 <div class="hac-title">${exam.title}</div>
-<div class="hac-desc">${exam.duration} Min. | ${totalQuestions} Fragen | ${totalPoints} Punkte</div>
+${exam.subtitle ? `<div class="hac-desc">${exam.subtitle}</div>` : ""}
+<div class="hac-desc">${exam.duration} Min. · ${totalQuestions} Teilfragen · ${totalPoints} Punkte</div>
 </div>`;
     });
     html += "</div>";

@@ -8,7 +8,7 @@ const tabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
 const graphConcepts = new Set([
   'ricardo',
   'tarifmodell',
-  'paritaeten',
+  'zinsparitaet',
   'monetaerer_ansatz',
   'overshooting',
   'trilemma'
@@ -130,8 +130,8 @@ try {
     }
   }
 
-  await navigateConcept(page, 'paritaeten', 'graph');
-  await page.screenshot({ path: '.qa/iwb-paritaeten.png', fullPage: true });
+  await navigateConcept(page, 'zinsparitaet', 'graph');
+  await page.screenshot({ path: '.qa/iwb-zinsparitaet.png', fullPage: true });
   await navigateConcept(page, 'overshooting', 'graph');
   await page.screenshot({ path: '.qa/iwb-overshooting.png', fullPage: true });
 
@@ -177,4 +177,3 @@ try {
 } finally {
   await browser.close();
 }
-

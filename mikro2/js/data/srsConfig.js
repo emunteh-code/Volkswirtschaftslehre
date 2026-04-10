@@ -10,6 +10,9 @@ export const STREAK_KEY     = 'mikro2_streak_v1';
 export const THEME_KEY      = 'mikro2_theme_v1';
 export const QUESTION_STATS_KEY = 'mikro2_question_stats_v1';
 export const FE_STATE_KEY   = 'mikro2_fe_state_v1';
+export const ATTEMPTS_KEY   = 'mikro2_attempts_v1';
+export const MISTAKES_KEY   = 'mikro2_mistakes_v1';
+export const MISTAKE_REVIEW_KEY = 'mikro2_mistake_review_v1';
 
 /** Default ease factor for a new SRS card */
 export const SRS_EASE_DEFAULT = 2.5;

@@ -563,8 +563,17 @@ export const CONTENT = {
         `<p>Rückstellungen erfassen ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Die Verpflichtung besteht dem Grunde nach, Höhe oder Fälligkeit sind aber noch unsicher.</p>`
       ),
       section(
+        'Abgrenzung: Rückstellung, Verbindlichkeit oder RAP?',
+        `<p>Die erste Klausurfrage ist fast nie die Bewertung, sondern die richtige Schublade. Ist die Schuld dem Grunde und der Höhe nach sicher, spricht das für eine Verbindlichkeit. Geht es primär um Periodenzuordnung bereits gezahlter oder empfangener Beträge, ist eher Rechnungsabgrenzung zu prüfen. Rückstellungen bleiben für wirtschaftlich verursachte, aber noch ungewisse Belastungen.</p>
+         ${warn('Abgrenzungsfehler:', 'Wer jede unklare künftige Zahlung vorschnell als Rückstellung bucht, verliert die saubere Trennung zu Verbindlichkeit und Rechnungsabgrenzung.')}`
+      ),
+      section(
         'Bewertung der ungewissen Verpflichtung',
         `<p>Rückstellungen folgen einer vernünftigen kaufmännischen Beurteilung des notwendigen Erfüllungsbetrags. Das verlangt risikosensitives Schätzen statt schematischer Einzelwerte.</p>`
+      ),
+      section(
+        'Ansatz -> Folgejahr -> Erfolgswirkung',
+        `<p>Prüfungsstabil wird das Thema erst, wenn der gesamte Pfad steht: Im Ansatzjahr wird Aufwand antizipiert, im Folgejahr entscheidet die tatsächliche Inanspruchnahme darüber, ob die Rückstellung passgenau war, aufgelöst werden muss oder nachdotiert wird. Genau diese Dreiteilung trennt gute Lösungen von reinen Definitionsantworten.</p>`
       ),
       section(
         'Folgebuchungen und Auflösung',
@@ -574,7 +583,8 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Rückstellung', eq: String.raw`\text{ungewisse Verbindlichkeit}`, desc: 'Verpflichtung steht dem Grunde nach, Höhe/Fälligkeit sind unsicher.' },
-      { label: 'Bewertung', eq: String.raw`\text{notwendiger Erfüllungsbetrag nach kaufmännischer Beurteilung}`, desc: 'Schätzbasierter Ansatz.' }
+      { label: 'Bewertung', eq: String.raw`\text{notwendiger Erfüllungsbetrag nach kaufmännischer Beurteilung}`, desc: 'Schätzbasierter Ansatz.' },
+      { label: 'Ansatzlogik', eq: String.raw`\text{Aufwand} \rightarrow \text{Rückstellung} \rightarrow \text{spätere Inanspruchnahme / Auflösung}`, desc: 'Rückstellungen sind eine Periodisierungs- und Folgebuchungslogik, nicht nur ein Bilanzetikett.' }
     ],
     aufgaben: [
       task(
@@ -592,6 +602,24 @@ export const CONTENT = {
           step('Periodenbezug ergänzen.', String.raw`\text{Die ursprüngliche Schätzung wird über die Folgeperiode bilanziell und erfolgsseitig konkretisiert.}`)
         ],
         'Die Rückstellungslogik endet nicht beim Ansatz: erst die Folgebehandlung zeigt die vollständige Abschlusswirkung.'
+      ),
+      task(
+        'Ein Unternehmen rechnet am Jahresende mit Prozesskosten von 80.000 €. Im Folgejahr werden tatsächlich 75.000 € gezahlt. Welche Erfolgslogik muss in der Lösung sichtbar werden?',
+        [
+          step('Im Ansatzjahr wird die erwartete Belastung über Aufwand und Rückstellung periodengerecht vorweggenommen.'),
+          step('Im Folgejahr wird die Zahlung gegen die Rückstellung verrechnet.'),
+          step('Weil die tatsächliche Zahlung unter der Schätzung liegt, bleibt ein Rest der Rückstellung übrig, der erfolgswirksam aufgelöst wird.')
+        ],
+        'Die Klausurlogik lautet: Aufwand im Ansatzjahr, Inanspruchnahme im Folgejahr, Restauflösung als positiver Erfolgseffekt bei Übervorsicht.'
+      ),
+      task(
+        'Ein Betrag ist sicher geschuldet, aber erst nächstes Jahr zu zahlen. Warum ist das nicht automatisch eine Rückstellung?',
+        [
+          step('Sicherheitsgrad prüfen: Ist Grund und Höhe feststehend, liegt keine ungewisse Verpflichtung mehr vor.'),
+          step('Dann ist zunächst die Schiene „Verbindlichkeit“ zu prüfen.'),
+          step('Rückstellungen bleiben nur für wirtschaftlich verursachte, aber noch unsichere Belastungen reserviert.')
+        ],
+        'Die Rückstellung setzt Unsicherheit voraus; bei sicherer Schuld ist regelmäßig die Verbindlichkeit der richtige Ansatz.'
       )
     ]
   },
@@ -608,13 +636,23 @@ export const CONTENT = {
         `<p>Transitorische Posten betreffen Zahlungen vor oder nach dem Stichtag, die wirtschaftlich teilweise in andere Perioden gehören. Antizipative Posten erfassen Erträge oder Aufwendungen, die wirtschaftlich bereits entstanden sind, aber erst später zahlungswirksam werden.</p>`
       ),
       section(
+        'Vier-Felder-Logik für die Klausur',
+        `<p>Eine robuste Lösung prüft immer zwei Fragen zusammen: <em>Wann fließt Geld?</em> und <em>Zu welcher Periode gehört der Erfolg wirtschaftlich?</em> Daraus entsteht die Vier-Felder-Logik aus Zahlung vor/nach dem Stichtag und Aufwand/Ertrag vor/nach dem Stichtag. Genau diese Ordnung trennt aktiven/passiven RAP von sonstigen Forderungen oder Verbindlichkeiten.</p>`
+      ),
+      section(
         'Abgrenzung zu Forderungen und Verbindlichkeiten',
         `<p>Rechnungsabgrenzung darf nicht mit sonstigen Forderungen oder Verbindlichkeiten verwechselt werden. In der Klausur entscheidet häufig der Satz „ist die wirtschaftliche Ursache schon in dieser Periode gesetzt?“ über die richtige Einordnung.</p>
-         ${warn('Zeitfehler:', 'Wer nur auf den Zahlungszeitpunkt schaut, verfehlt das Periodenprinzip. Für die Abgrenzung zählt die wirtschaftliche Zugehörigkeit.')}`
-      )
+         ${warn('Zeitfehler:', 'Wer nur auf den Zahlungszeitpunkt schaut, verfehlt das Periodenprinzip. Für die Abgrenzung zählt die wirtschaftliche Zugehörigkeit.')}
+         ${warn('Nicht jede Jahresendposition ist RAP', 'Antizipative Fälle können auch als sonstige Forderung oder Verbindlichkeit zu lesen sein. Entscheidend ist, ob die Position primär Periodisierung oder Anspruch/Schuldcharakter abbildet.')}
+      `),
+      section(
+        'Von der Zahlung zum Abschlusseffekt',
+        `<p>Didaktisch wichtig ist die Kette Zahlung -> Bilanzposten -> Erfolgswirkung der richtigen Periode. Gute Klausurlösungen nennen nicht nur „aktiver/passiver RAP“, sondern schließen mit der Wirkung auf Aufwand, Ertrag und Bilanzgliederung ab.</p>`
+      ),
     ].join(''),
     formeln: [
       { label: 'Periodenzuordnung', eq: String.raw`\text{wirtschaftliche Zugehörigkeit} \neq \text{Zahlungszeitpunkt}`, desc: 'Kernlogik der Rechnungsabgrenzung.' },
+      { label: 'Aktiver / passiver RAP', eq: String.raw`\text{Ausgabe heute, Aufwand morgen} \Rightarrow aRAP \qquad \text{Einnahme heute, Ertrag morgen} \Rightarrow pRAP`, desc: 'Merkschema für die transitorische Abgrenzung.' },
       { label: 'RAP', eq: String.raw`\text{Zahlung heute, Erfolg teilweise morgen}`, desc: 'Transitorische Abgrenzung.' }
     ],
     aufgaben: [
@@ -633,6 +671,24 @@ export const CONTENT = {
           step('Nicht bloß Rechtsanspruch suchen.', String.raw`\text{Der Fokus liegt auf Periodengerechtigkeit, nicht primär auf der Durchsetzbarkeit einer Forderung.}`)
         ],
         'Rechnungsabgrenzung ist dann naheliegend, wenn der Zeitpunkt von Zahlung und wirtschaftlicher Zugehörigkeit auseinanderfällt.'
+      ),
+      task(
+        'Eine Jahresmiete für Januar bis März des Folgejahres wird im Dezember vollständig überwiesen. Welche Richtung der Abgrenzung muss die Lösung zeigen?',
+        [
+          step('Die Zahlung liegt bereits im alten Jahr, der Aufwand gehört wirtschaftlich überwiegend ins Folgejahr.'),
+          step('Damit ist die Ausgabe von der Erfolgszugehörigkeit zu trennen.'),
+          step('Die Lösung muss deshalb einen aktiven RAP als Bilanzbrücke zur Folgeperiode sichtbar machen.')
+        ],
+        'Prepaid-Aufwand ist der Standardfall des aktiven RAP: Zahlung alt, Aufwand neu.'
+      ),
+      task(
+        'Zinsen für Dezember werden erst im Januar des Folgejahres gutgeschrieben. Warum reicht die Antwort „Geld kommt später“ nicht aus?',
+        [
+          step('Wirtschaftliche Verursachung prüfen: Die Zinsleistung gehört bereits in die ablaufende Periode.'),
+          step('Deshalb muss der Ertrag periodengerecht im alten Jahr erfasst werden.'),
+          step('Die Lösung braucht also nicht nur den Zahlungszeitpunkt, sondern die bereits verdiente Ertragskomponente.')
+        ],
+        'Antizipative Abgrenzung lebt vom bereits entstandenen Erfolg, nicht vom künftigen Geldeingang allein.'
       )
     ]
   },
@@ -649,14 +705,24 @@ export const CONTENT = {
         `<p>Das UKV gliedert die Aufwendungen nach Funktionsbereichen, insbesondere Herstellung, Vertrieb und Verwaltung. Dadurch rückt stärker die Erfolgsbeziehung zu den umgesetzten Leistungen in den Vordergrund.</p>`
       ),
       section(
+        'Von der Buchung zum Statement-Effekt',
+        `<p>Gerade in Prüfungen zählt nicht nur der Name des Verfahrens, sondern der Weg vom Einzelvorgang zur Ergebniszeile. Bestandsveränderungen, aktivierte Eigenleistungen und Herstellkosten der abgesetzten Leistungen sind die Brücken, über die Buchungen in die Erfolgsrechnung übersetzt werden.</p>`
+      ),
+      section(
         'Warum beide zum selben Ergebnis führen',
         `<p>GKV und UKV unterscheiden sich nicht im Jahresergebnis, sondern in der Darstellungslogik. Gerade diese Aussage gehört in fast jede Vergleichsaufgabe.</p>
          ${warn('Vergleichsfehler:', 'Wer GKV und UKV wie alternative Gewinnermittlungen behandelt, verfehlt den Kern. Das Ergebnis ist gleich, nur die Struktur der Darstellung ändert sich.')}`
-      )
+      ),
+      section(
+        'Prüfungsschema für Vergleichsaufgaben',
+        `<p>Eine belastbare Antwort arbeitet deshalb in vier Schritten: Verfahren identifizieren, Ordnungskriterium nennen, Bestands-/Leistungsbrücke erklären und erst dann das Ergebnis vergleichen. Diese Reihenfolge macht aus einer Definitionsfrage eine echte Abschlussantwort.</p>
+         ${warn('Bestandsänderung nicht als Randnotiz behandeln', 'Gerade hier entscheidet sich oft, ob das Verfahren periodengerecht erklärt wird oder nur auswendig gelernt wirkt.')}
+      `)
     ].join(''),
     formeln: [
       { label: 'Jahresergebnis', eq: String.raw`$$JÜ = Erträge - Aufwendungen$$`, desc: 'Beide Verfahren führen dorthin.' },
-      { label: 'Kostenart vs. Funktion', eq: String.raw`\text{GKV: Was für Kosten? \quad UKV: Wofür Kosten?}`, desc: 'Merksatz zur Darstellungslogik.' }
+      { label: 'Kostenart vs. Funktion', eq: String.raw`\text{GKV: Was für Kosten? \quad UKV: Wofür Kosten?}`, desc: 'Merksatz zur Darstellungslogik.' },
+      { label: 'Brückenlogik', eq: String.raw`\text{Bestandsveränderung / HK der abgesetzten Leistung} \Rightarrow \text{periodengerechter Erfolg}`, desc: 'Die Brücke erklärt, warum GKV und UKV trotz anderer Zeilen zum gleichen Ergebnis führen.' }
     ],
     aufgaben: [
       task(
@@ -674,8 +740,25 @@ export const CONTENT = {
           step('Praktischen Rechenvorteil nennen.', String.raw`\text{Material, Personal, Abschreibungen und sonstige Aufwendungen lassen sich unmittelbar zuordnen.}`)
         ],
         'Das GKV ist oft näher an den üblichen Kontenbewegungen und daher in Einsteigerklausuren leichter nachvollziehbar.'
+      ),
+      task(
+        'Ein Unternehmen produziert mehr, als es verkauft. Warum muss eine gute GKV-Lösung dann Bestandsveränderungen ausdrücklich nennen?',
+        [
+          step('Produktion und Absatz trennen: Nicht jede hergestellte Leistung ist schon erfolgswirksam verkauft.'),
+          step('Die Mehrproduktion erhöht den Bestand und korrigiert im GKV den Rohaufwand zur periodengerechten Erfolgsgröße.'),
+          step('Ohne diesen Schritt würde der Aufwand der Periode zu hoch und das Ergebnis zu niedrig erscheinen.')
+        ],
+        'Bestandsveränderungen sind im GKV die zentrale Brücke zwischen Produktionsmenge und periodengerechtem Erfolg.'
+      ),
+      task(
+        'Wie erkennst du in einer Vergleichsfrage, dass nicht nach zwei verschiedenen Gewinnzahlen, sondern nach zwei Darstellungslogiken gefragt wird?',
+        [
+          step('Die Aufgabe spricht über GKV und UKV als alternative Gliederungsformen derselben Erfolgsrechnung.'),
+          step('Dann muss die Antwort das gemeinsame Jahresergebnis und die unterschiedliche Ordnung der Aufwendungen sauber trennen.'),
+          step('Erst die Gegenüberstellung „Kostenarten“ versus „Funktionsbereiche“ macht die Vergleichsfrage vollständig.')
+        ],
+        'Bei GKV/UKV ist die Leitfrage fast immer Darstellungslogik statt Ergebnisabweichung.'
       )
     ]
   }
 };
-

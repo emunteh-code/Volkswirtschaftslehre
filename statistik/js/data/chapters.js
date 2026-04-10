@@ -207,6 +207,11 @@ function renderStatistikRLabTheory() {
       <p>Das macht den Zugriff klausurnäher: erst Konzept verstehen, dann denselben Zugriff in R lesen, ändern und deuten.</p>
     </div>
     <div class="section-block">
+      <h3>Welche Arbeitsfrage jeder R-Tab beantworten soll</h3>
+      <p>Die R-Tabs sind keine Zusatzspielerei, sondern trainieren immer dieselbe Folge: <strong>Frage erkennen → passende Methode aufrufen → zentrale Zeile lesen → Output als Evidenz deuten.</strong></p>
+      <div class="warn-box"><strong>Tool-first ist ein Fehler</strong> Wer mit dem Befehl anfängt und die statistische Frage erst später sucht, produziert schnell formal korrekte, aber fachlich falsche Aussagen.</div>
+    </div>
+    <div class="section-block">
       <h3>Wo du die R-Tabs jetzt findest</h3>
       <ul>
         <li><strong>Deskriptive Statistik:</strong> Datensatz lesen, summary(), Histogramm und Streuung zusammen deuten.</li>
@@ -218,8 +223,12 @@ function renderStatistikRLabTheory() {
       </ul>
     </div>
     <div class="section-block">
-      <h3>Arbeitslogik für alle Statistik-R-Tabs</h3>
-      <div class="warn-box"><strong>R ersetzt die Statistiklogik nicht:</strong> Erst Datentyp, Fragestellung und passende Methode klären, dann den Befehl lesen. Wer direkt in die Konsole springt, produziert leicht formal korrekte, aber fachlich falsche Aussagen.</div>
+      <h3>Was im Output wirklich zählt</h3>
+      <p>Die prüfungsrelevante Information ist fast nie “da steht irgendeine Zahl”, sondern z.B. <strong>p-Wert gegen alpha</strong>, <strong>Intervallbreite</strong>, <strong>Koeffizient plus Einheit</strong> oder <strong>F-Test plus Gruppenmittel</strong>. Genau diese Verknüpfung musst du beim Lesen sofort herstellen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Transferregel für Klausuren</h3>
+      <p>Saubere Statistikantworten aus dem R-Output folgen immer diesem Schema: <strong>1. Methode nennen.</strong> <strong>2. entscheidende Ausgabezeile als Beleg nennen.</strong> <strong>3. fachlich zurückübersetzen.</strong> Wer nur den Code oder nur den p-Wert nennt, lässt den Kernpunkt liegen.</p>
     </div>
   `;
 }
@@ -243,29 +252,58 @@ export const CHAPTERS = [
 
 export const CONTENT = {
   deskriptiv: {
-    motivation: 'Daten ordnen und zusammenfassen. Lage- und Streuungsmaße geben uns einen ersten Überblick über die Verteilung.',
+    motivation: 'Deskriptive Statistik ist die erste Filterstufe jeder Analyse: erst Verteilung lesen, dann Kennzahl wählen. Mittelwert ohne Formdeutung und Streuung ohne Kontext sind nicht klausurfest.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Lagemaße</h3>
-      <ul>
-        <li><strong>Arithmetisches Mittel ($\bar{x}$):</strong> Schwerpunkt der Daten.</li>
-        <li><strong>Median ($\tilde{x}$):</strong> Teilt die geordneten Daten in zwei gleich große Hälften (robust gegen Ausreißer).</li>
-        <li><strong>Modus:</strong> Häufigster Wert.</li>
-      </ul>
+      <h3>Worum es in DS1 wirklich geht</h3>
+      <p>Deskriptive Statistik beantwortet zuerst drei Fragen: <strong>Wo liegt das Zentrum?</strong> <strong>Wie breit streuen die Daten?</strong> <strong>Gibt es Schiefe, Klumpung oder Ausreißer?</strong> Genau diese Reihenfolge spiegelt die Vorlesungs- und Tutoriumslogik: Kennzahlen und Grafiken müssen sich gegenseitig absichern.</p>
     </div>
     <div class="section-block">
-      <h3>Streuungsmaße</h3>
-      <p>Die <strong>Varianz</strong> ($s^2$) misst die durchschnittliche quadrierte Abweichung vom Mittelwert. Die <strong>Standardabweichung</strong> ($s$) ist deren Wurzel.</p>
+      <h3>Lagemaße gezielt auswählen</h3>
+      <p>Das <strong>arithmetische Mittel</strong> $\bar{x}$ ist der rechnerische Schwerpunkt. Der <strong>Median</strong> $\tilde{x}$ halbiert die geordnete Reihe und bleibt auch dann stabil, wenn einzelne Extremwerte die Verteilung nach rechts oder links ziehen. Der <strong>Modus</strong> zeigt den häufigsten Wert, ist aber nur bei diskreten Daten oder klaren Klassenstrukturen wirklich informativ.</p>
+      <div class="warn-box"><strong>Median vs. Mittelwert</strong> Wenn Ausreißer oder starke Schiefe sichtbar sind, reicht der Mittelwert allein nicht. Dann muss der Median als robuste Gegenlesart mitberichtet werden.</div>
+    </div>
+    <div class="section-block">
+      <h3>Streuung und Form gehören zusammen</h3>
+      <p>Die <strong>Varianz</strong> ($s^2$) misst die durchschnittliche quadrierte Abweichung vom Mittelwert. Die <strong>Standardabweichung</strong> ($s$) bringt dieselbe Information wieder in Originaleinheiten zurück. Der <strong>Interquartilsabstand</strong> (IQR) liest die mittleren 50% der Daten und ist robuster gegen Extremwerte als $s$.</p>
       <div class="math-block">$$s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$</div>
     </div>
     <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Variationskoeffizient:</strong> Nutzen Sie diesen ($v = s/\bar{x}$), um die Streuung verschiedener Datensätze (z.B. Lohn in € vs. ¥) vergleichbar zu machen.</div>
+      <h3>Boxplot-, Quantil- und Ausreißerlogik</h3>
+      <p>DS1 trainiert nicht nur Rechnen, sondern Lesen: Quartile, Boxplot und IQR helfen dir, Schiefe, Spannweite und Ausreißer systematisch zu beschreiben. Ein Boxplot ersetzt keine Kennzahlen, aber er zeigt sofort, ob eine Kennzahl kritisch gelesen werden muss.</p>
+      <p>Die klassische IQR-Regel lautet: Werte unter $Q_1 - 1{,}5\cdot IQR$ oder über $Q_3 + 1{,}5\cdot IQR$ sind potenzielle Ausreißer.</p>
+    </div>
+    <div class="section-block">
+      <h3>Klausurzugriff</h3>
+      <p>Prüfungssicher ist nie nur eine Zahl. Eine gute Antwort kombiniert <strong>Lage</strong>, <strong>Streuung</strong> und <strong>Formhinweis</strong>. Typischer Standardsatz: “Der Mittelwert liegt bei ..., der Median darunter/darüber, die Streuung beträgt ..., und die Verteilung wirkt wegen ... rechtsschief/linksschief/ausreißerbeeinflusst.”</p>
+      <div class="warn-box"><strong>Variationskoeffizient</strong> Verwende $v = s / \bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
     </div>
     `,
     formeln: [
-      { label: 'Mittelwert', eq: String.raw`$$\bar{x} = \frac{1}{n} \sum x_i$$`, desc: 'Arithmetisches Mittel' },
-      { label: 'Varianz (Stichprobe)', eq: String.raw`$$s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}$$`, desc: 'Korrigierte Stichprobenvarianz' }
+      {
+        label: 'Arithmetisches Mittel',
+        eq: String.raw`$$\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$$`,
+        desc: 'Rechnerischer Schwerpunkt der Stichprobe',
+        variables: { '\\bar{x}': 'Stichprobenmittel', 'n': 'Stichprobenumfang', 'x_i': 'i-ter Beobachtungswert' }
+      },
+      {
+        label: 'Stichprobenvarianz',
+        eq: String.raw`$$s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2$$`,
+        desc: 'Korrigierte mittlere quadratische Abweichung',
+        variables: { 's^2': 'Stichprobenvarianz', 'n-1': 'Bessel-Korrektur', '\\bar{x}': 'Stichprobenmittel' }
+      },
+      {
+        label: 'Standardabweichung',
+        eq: String.raw`$$s = \sqrt{s^2}$$`,
+        desc: 'Streuung in Originaleinheiten',
+        variables: { 's': 'Stichprobenstandardabweichung', 's^2': 'Stichprobenvarianz' }
+      },
+      {
+        label: 'Variationskoeffizient',
+        eq: String.raw`$$v = \frac{s}{\bar{x}}$$`,
+        desc: 'Relative Streuung bei vergleichbarer Skala',
+        variables: { 'v': 'Variationskoeffizient', 's': 'Standardabweichung', '\\bar{x}': 'Mittelwert' }
+      }
     ],
     aufgaben: [
       {
@@ -318,29 +356,55 @@ export const CONTENT = {
     ]
   },
   bivariat: {
-    motivation: 'Besteht ein Zusammenhang zwischen zwei Merkmalen? Wir untersuchen die gemeinsame Verteilung und Korrelation.',
+    motivation: 'Bivariate Statistik fragt nicht nur, ob zwei Merkmale zusammenlaufen, sondern welcher Typ von Zusammenhang vorliegt: Häufigkeitsstruktur, Richtung, lineare Stärke, Ranglogik oder Ausreißerfalle.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Kovarianz</h3>
-      <p>Misst die Richtung des linearen Zusammenhangs. Positiv: beide steigen gleichzeitig. Negativ: einer steigt, einer sinkt.</p>
+      <h3>Von der gemeinsamen Tabelle zum Streudiagramm</h3>
+      <p>DS2 beginnt nicht mit einer Formel, sondern mit der Frage, <strong>wie zwei Merkmale gemeinsam verteilt sind</strong>. Bei kategorialen Merkmalen helfen Kreuztabellen und bedingte Prozente; bei metrischen Merkmalen zeigt das Streudiagramm Richtung, Form und Ausreißer eines Zusammenhangs.</p>
+    </div>
+    <div class="section-block">
+      <h3>Kovarianz: Richtung, aber keine Normierung</h3>
+      <p>Die Kovarianz misst, ob hohe Werte von $x$ typischerweise mit hohen oder niedrigen Werten von $y$ zusammen auftreten. Ihr Vorzeichen ist informativ, ihre Größe hängt aber von den Einheiten beider Variablen ab.</p>
       <div class="math-block">$$s_{xy} = \frac{1}{n-1} \sum (x_i - \bar{x})(y_i - \bar{y})$$</div>
     </div>
     <div class="section-block">
-      <h3>Korrelationskoeffizient (Pearson)</h3>
-      <p>Normiert die Kovarianz auf das Intervall $[-1, 1]$.</p>
+      <h3>Pearson-Korrelation</h3>
+      <p>Der Pearson-Koeffizient normiert die Kovarianz auf $[-1,1]$ und misst die Stärke eines <strong>linearen</strong> Zusammenhangs. Er reagiert empfindlich auf Ausreißer und kann bei gekrümmten Mustern klein sein, obwohl ein klarer systematischer Zusammenhang vorliegt.</p>
       <div class="math-block">$$r_{xy} = \frac{s_{xy}}{s_x \cdot s_y}$$</div>
       <ul>
         <li>$r = 1$: Perfekter positiver linearer Zusammenhang.</li>
-        <li>$r = 0$: Kein linearer Zusammenhang.</li>
+        <li>$r = 0$: Kein <em>linearer</em> Zusammenhang — nicht automatisch “gar kein Zusammenhang”.</li>
       </ul>
     </div>
     <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Korrelation vs. Kausalität:</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang (Scheinkorrelation).</div>
+      <h3>Spearman und robuste Zusammenhangslogik</h3>
+      <p>Wenn nur Ränge verlässlich sind oder Ausreißer die metrische Skala verzerren, ist Spearman oft die bessere Wahl. Er fragt nach monotonichem statt streng linearem Zusammenhang.</p>
+    </div>
+    <div class="section-block">
+      <h3>Klausurfalle: Korrelation ist keine Kausalität</h3>
+      <div class="warn-box"><strong>Korrelation vs. Kausalität</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang. Drittvariablen, gemeinsame Trends oder Selektion können denselben Befund erzeugen.</div>
+      <p>Prüfungssicher ist deshalb: Richtung + Stärke nennen, dann sofort die Grenzen der Aussage markieren.</p>
     </div>
     `,
     formeln: [
-      { label: 'Pearson-Korr.', eq: String.raw`$$r = \frac{\text{Cov}(x,y)}{\sqrt{\text{Var}(x)\text{Var}(y)}}$$`, desc: 'Linearer Zusammenhang' }
+      {
+        label: 'Kovarianz',
+        eq: String.raw`$$s_{xy} = \frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$`,
+        desc: 'Richtung der gemeinsamen Streuung',
+        variables: { 's_{xy}': 'empirische Kovarianz', '\\bar{x},\\bar{y}': 'Mittelwerte der beiden Variablen', 'n-1': 'Bessel-Korrektur' }
+      },
+      {
+        label: 'Pearson-Korrelation',
+        eq: String.raw`$$r_{xy} = \frac{s_{xy}}{s_x s_y}$$`,
+        desc: 'Normierte lineare Zusammenhangsstärke',
+        variables: { 'r_{xy}': 'Korrelationskoeffizient', 's_{xy}': 'Kovarianz', 's_x,s_y': 'Standardabweichungen von x und y' }
+      },
+      {
+        label: 'OLS-Steigung (bivariate Brücke)',
+        eq: String.raw`$$\hat{\beta}_1 = \frac{s_{xy}}{s_x^2}$$`,
+        desc: 'Verbindet bivariate Streuung mit dem linearen Regressionsanstieg',
+        variables: { '\\hat{\\beta}_1': 'geschätzte Steigung', 's_{xy}': 'Kovarianz', 's_x^2': 'Varianz von x' }
+      }
     ],
     aufgaben: [
       {
@@ -379,32 +443,62 @@ export const CONTENT = {
           { text: `Auswerten:`, eq: String.raw`r_S = 1 - 0{,}214 = 0{,}786` }
         ],
         result: String.raw`$r_S \approx 0{,}786$. Es besteht ein deutlich positiver monotoner Zusammenhang zwischen den Leistungen in Mathematik und Statistik. Der Spearman-Koeffizient ist gegenüber Ausreißern robuster als Pearson, da er nur die Ränge verwendet.`
+      },
+      {
+        text: String.raw`In einer Kreuztabelle zeigt sich: Von 100 Studierenden mit Vorkurs bestehen 78 die Klausur, von 80 ohne Vorkurs bestehen 40. Beschreiben Sie den Zusammenhang zunächst über bedingte Erfolgsanteile und erst danach verbal. Warum reicht der Unterschied der absoluten Fallzahlen allein nicht?`,
+        steps: [
+          { text: `Bedingte Erfolgsquote mit Vorkurs:`, eq: String.raw`\hat p(\text{bestanden}\mid \text{Vorkurs}) = \frac{78}{100} = 0{,}78` },
+          { text: `Bedingte Erfolgsquote ohne Vorkurs:`, eq: String.raw`\hat p(\text{bestanden}\mid \text{kein Vorkurs}) = \frac{40}{80} = 0{,}50` },
+          { text: `Vergleich:`, eq: String.raw`0{,}78 - 0{,}50 = 0{,}28` },
+          { text: `Interpretation:`, eq: null }
+        ],
+        result: String.raw`Der Zusammenhang wird über bedingte Anteile sichtbar: Mit Vorkurs liegt die Erfolgsquote um 28 Prozentpunkte höher. Absolute Bestehenszahlen allein reichen nicht, weil die Gruppengrößen verschieden sind.`
       }
     ]
   },
   testen: {
-    motivation: 'Hypothesentests entscheiden, ob ein beobachteter Effekt in der Stichprobe auch für die Grundgesamtheit gilt oder reiner Zufall ist.',
+    motivation: 'Hypothesentests sind Entscheidungslogik unter Unsicherheit. Die Klausur fragt nicht nur nach einer Teststatistik, sondern nach sauberer Hypothesenformulierung, Testwahl, p-Wert-Deutung und Fehlerkontrolle.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Nullhypothese (H0)</h3>
-      <p>Der Zustand, den man meist widerlegen möchte (z.B. "Zusatzmedikament hat keine Wirkung"). Wir verwerfen H0 nur, wenn die Daten massiv dagegen sprechen.</p>
+      <h3>Hypothesenlogik vor jeder Rechnung</h3>
+      <p>Ein Test beginnt immer mit einem Entscheidungsproblem: Welcher Parameter wird geprüft? Was ist der Status quo ($H_0$)? Welche Abweichung interessiert als Alternative ($H_1$)? Erst danach darf gerechnet werden.</p>
     </div>
     <div class="section-block">
-      <h3>Testentscheidung</h3>
-      <p>Wir vergleichen eine Teststatistik (z.B. t-Wert) mit einem kritischen Wert oder nutzen den p-Wert.</p>
+      <h3>Teststatistik, kritischer Bereich und p-Wert</h3>
+      <p>Die Teststatistik misst, wie weit die Daten von der Nullhypothese entfernt liegen. Diese Entfernung wird entweder über den <strong>kritischen Bereich</strong> oder den <strong>p-Wert</strong> beurteilt.</p>
       <ul>
-        <li><strong>p-Wert:</strong> Wahrscheinlichkeit für das Ergebnis unter H0.</li>
-        <li><strong>Signifikanzniveau ($\alpha$):</strong> Fehlertoleranz (meist 5%).</li>
+        <li><strong>p-Wert:</strong> Wahrscheinlichkeit, unter $H_0$ ein mindestens so extremes Ergebnis zu beobachten.</li>
+        <li><strong>Signifikanzniveau ($\alpha$):</strong> vorab festgelegte Toleranz für Fehler 1. Art.</li>
       </ul>
-      <p>Entscheidungsregel: <strong>H0 ablehnen, wenn $p < \alpha$.</strong></p>
+      <p>Entscheidungsregel: <strong>$H_0$ ablehnen, wenn $p < \alpha$</strong> oder die Teststatistik im Ablehnbereich liegt.</p>
     </div>
     <div class="section-block">
-      <h3>Fehlerarten</h3>
-      <p><strong>Fehler 1. Art ($\alpha$):</strong> H0 ablehnen, obwohl sie wahr ist. <strong>Fehler 2. Art ($\beta$):</strong> H0 beibehalten, obwohl sie falsch ist.</p>
+      <h3>Fehler 1. Art, Fehler 2. Art und Teststärke</h3>
+      <p><strong>Fehler 1. Art ($\alpha$):</strong> $H_0$ ablehnen, obwohl sie wahr ist. <strong>Fehler 2. Art ($\beta$):</strong> $H_0$ nicht ablehnen, obwohl sie falsch ist. Die <strong>Power</strong> $1-\beta$ misst, wie gut ein Test einen echten Effekt entdeckt.</p>
+      <div class="warn-box"><strong>Alpha-Beta-Tradeoff</strong> Bei festem Stichprobenumfang macht ein kleineres $\alpha$ den Test konservativer, senkt aber meist die Teststärke. Beide Fehler gleichzeitig zu reduzieren gelingt vor allem über größeres $n$ oder klarere Effekte.</div>
+    </div>
+    <div class="section-block">
+      <h3>Einseitig oder zweiseitig?</h3>
+      <p>Die Richtung folgt aus der Fragestellung, nicht aus dem beobachteten Datensignal. “Besser”, “höher” oder “größer” kann einen einseitigen Test rechtfertigen. Fehlt eine Richtung oder ist nur “anders” gefragt, ist der Test zweiseitig.</p>
+    </div>
+    <div class="section-block">
+      <h3>Testwahl als Entscheidungsbaum</h3>
+      <p>Vor der Formel stehen Datentyp und Design: Mittelwert, Anteil oder Rang? Eine oder zwei Stichproben? Gepaart oder ungepaart? Bekannte oder unbekannte Streuung? Dieser Auswahlprozess ist selbst klausurrelevant.</p>
     </div>
     `,
     formeln: [
-      { label: 't-Statistik', eq: String.raw`$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$$`, desc: 'Einstichproben t-Test' }
+      {
+        label: 't-Statistik',
+        eq: String.raw`$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$$`,
+        desc: 'Standardtest für den Mittelwert bei unbekannter Populationsstreuung',
+        variables: { '\\bar{x}': 'Stichprobenmittel', '\\mu_0': 'unter H0 behaupteter Mittelwert', 's': 'Stichprobenstandardabweichung', 'n': 'Stichprobenumfang' }
+      },
+      {
+        label: 'Power',
+        eq: String.raw`$$\text{Power} = 1-\beta$$`,
+        desc: 'Wahrscheinlichkeit, einen echten Effekt zu entdecken',
+        variables: { '\\beta': 'Fehler 2. Art', '1-\\beta': 'Teststärke' }
+      }
     ],
     aufgaben: [
       {
@@ -924,6 +1018,10 @@ export const CONTENT = {
     motivation: 'Häufig interessiert uns nicht ein einzelner Mittelwert, sondern der Unterschied zwischen zwei Gruppen. Zwei-Stichproben-Tests vergleichen Mittelwerte, Varianzen oder Anteile.',
     theorie: String.raw`
     <div class="section-block">
+      <h3>Testwahl zuerst: gepaart oder ungepaart?</h3>
+      <p>Vor jeder Formel steht die Strukturfrage: dieselben Personen vor/nach einer Maßnahme oder zwei unabhängige Gruppen? Diese Entscheidung ist wichtiger als der spätere Taschenrechnerschritt.</p>
+    </div>
+    <div class="section-block">
       <h3>Zwei-Stichproben t-Test (unverbunden)</h3>
       <p>Vergleich zweier unabhängiger Gruppen. Pooled-t-Test bei Varianzhomogenität ($\sigma_1^2 = \sigma_2^2$):</p>
       <div class="math-block">$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\tfrac{1}{n_1}+\tfrac{1}{n_2}}}, \quad s_p^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$</div>
@@ -945,8 +1043,24 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'Pooled s²', eq: String.raw`$$s_p^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$`, desc: 'Gepoolte Varianz' },
-      { label: 'Verbundener t', eq: String.raw`$$t = \frac{\bar{d}}{s_d/\sqrt{n}}$$`, desc: 'Paarvergleich' }
+      {
+        label: 'Gepoolte Varianz',
+        eq: String.raw`$$s_p^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$`,
+        desc: 'Varianzschätzer bei Varianzhomogenität',
+        variables: { 's_p^2': 'gepoolte Varianz', 'n_1,n_2': 'Gruppengrößen', 's_1^2,s_2^2': 'empirische Gruppenvarianzen' }
+      },
+      {
+        label: 'Verbundener t-Test',
+        eq: String.raw`$$t = \frac{\bar{d}}{s_d/\sqrt{n}}$$`,
+        desc: 'Test auf den Mittelwert der Paar-Differenzen',
+        variables: { '\\bar d': 'mittlere Differenz', 's_d': 'Standardabweichung der Differenzen', 'n': 'Anzahl der Paare' }
+      },
+      {
+        label: 'F-Test auf Varianzgleichheit',
+        eq: String.raw`$$F = \frac{s_1^2}{s_2^2}$$`,
+        desc: 'Vorprüfung für pooled vs. Welch',
+        variables: { 'F': 'Verhältnis der Stichprobenvarianzen', 's_1^2,s_2^2': 'Gruppenvarianzen' }
+      }
     ],
     aufgaben: [
       {
@@ -1020,7 +1134,24 @@ export const CONTENT = {
     </div>
     `,
     formeln: [
-      { label: 'F-Statistik ANOVA', eq: String.raw`$$F = \frac{MSB}{MSW} = \frac{SSB/(k-1)}{SSW/(N-k)}$$`, desc: 'Varianzzerlegung' }
+      {
+        label: 'F-Statistik ANOVA',
+        eq: String.raw`$$F = \frac{MSB}{MSW} = \frac{SSB/(k-1)}{SSW/(N-k)}$$`,
+        desc: 'Varianzzerlegung in systematische und unsystematische Streuung',
+        variables: { 'MSB': 'mittlere Quadratsumme zwischen Gruppen', 'MSW': 'mittlere Quadratsumme innerhalb der Gruppen', 'SSB,SSW': 'Quadratsummen', 'k,N': 'Gruppenanzahl und Gesamtumfang' }
+      },
+      {
+        label: 'Varianzzerlegung',
+        eq: String.raw`$$SST = SSB + SSW$$`,
+        desc: 'Gesamtstreuung zerfällt in Zwischen- und Innergruppenanteil',
+        variables: { 'SST': 'totale Quadratsumme', 'SSB': 'between-groups-Streuung', 'SSW': 'within-groups-Streuung' }
+      },
+      {
+        label: 'Effektmaß',
+        eq: String.raw`$$\eta^2 = \frac{SSB}{SST}$$`,
+        desc: 'Anteil der Gesamtstreuung, der auf Gruppenunterschiede entfällt',
+        variables: { '\\eta^2': 'Effektstärke der ANOVA', 'SSB': 'erklärte Gruppenstreuung', 'SST': 'Gesamtstreuung' }
+      }
     ],
     aufgaben: [
       {
@@ -1134,12 +1265,396 @@ export const CONTENT = {
   }
 };
 
-// Granularity split pass 1: preserve existing learning objects while exposing
-// finer concept-map nodes for navigation and analytics.
-CONTENT.schaetzen_verfahren = CONTENT.schaetzen;
-CONTENT.schaetzen_eigenschaften_intervalle = CONTENT.schaetzen;
-delete CONTENT.schaetzen;
+// Benchmark reconstruction pass 1: the split concept pages must no longer
+// collapse onto shared placeholder content. Keep the legacy backbone above as
+// internal source material, but expose distinct benchmark-grade concept pages.
+CONTENT.schaetzen_verfahren = {
+  motivation: 'Schätzverfahren beantworten die Konstruktionsfrage: Wie wird aus einer Stichprobe ein plausibler Parameterwert? In diesem Kapitel stehen MoM, ML, KQ-Perspektive und MSE-Logik im Vordergrund.',
+  theorie: String.raw`
+    <div class="section-block">
+      <h3>Vom Parameter zum Schätzer</h3>
+      <p>Ein <strong>Punktschätzer</strong> $\hat{\theta}$ ist eine Zufallsvariable auf Stichprobenbasis. Die Kernfrage lautet nicht nur “Wie rechne ich?”, sondern “Warum ist genau diese Rechenvorschrift für den Parameter sinnvoll?”</p>
+    </div>
+    <div class="section-block">
+      <h3>Methode der Momente (MoM)</h3>
+      <p>MoM setzt theoretische Momente der Verteilung mit empirischen Momenten gleich. Bei Bernoulli-Daten ist das besonders anschaulich: $E[X]=\pi$ wird durch den Stichprobenanteil $\bar X$ ersetzt.</p>
+    </div>
+    <div class="section-block">
+      <h3>Maximum Likelihood (ML)</h3>
+      <p>ML wählt den Parameterwert, unter dem die beobachteten Daten am plausibelsten sind. Im Bernoulli-/Binomial-Standardfall führt ML ebenfalls auf den Stichprobenanteil, aber die Begründung ist eine andere als bei MoM.</p>
+    </div>
+    <div class="section-block">
+      <h3>Qualitätskriterien: Bias, Varianz, MSE</h3>
+      <p>Ein Schätzer kann erwartungstreu und trotzdem unpräzise sein. Deshalb müssen <strong>Bias</strong>, <strong>Varianz</strong> und <strong>MSE</strong> getrennt gelesen werden.</p>
+      <ul>
+        <li><strong>Bias:</strong> systematischer Abstand vom Zielparameter.</li>
+        <li><strong>Varianz:</strong> Streuung des Schätzers über Wiederholungsstichproben.</li>
+        <li><strong>MSE:</strong> Gesamtfehler aus Streuung und Verzerrung.</li>
+      </ul>
+    </div>
+    <div class="section-block">
+      <h3>Klausurzugriff</h3>
+      <div class="warn-box"><strong>Methodenwahl ist Prüfungsstoff</strong> Wenn die Aufgabe nach Konstruktion oder Güte fragt, reicht ein Intervall nicht. Dann musst du Schätzverfahren und Qualitätsmaß aktiv voneinander trennen.</div>
+      <p>Merksatz: <strong>Verfahren</strong> beantwortet “Wie entsteht $\hat\theta$?”, <strong>Eigenschaft</strong> beantwortet “Wie gut ist $\hat\theta$?”.</p>
+    </div>
+  `,
+  formeln: [
+    {
+      label: 'Momentenbedingung',
+      eq: String.raw`$$m(\theta) = \bar{m}$$`,
+      desc: 'Theoretisches Moment wird durch empirisches Moment ersetzt',
+      variables: { 'm(\\theta)': 'theoretisches Moment als Funktion des Parameters', '\\bar m': 'empirisches Stichprobenmoment' }
+    },
+    {
+      label: 'MSE-Zerlegung',
+      eq: String.raw`$$MSE(\hat{\theta}) = Var(\hat{\theta}) + Bias(\hat{\theta})^2$$`,
+      desc: 'Gesamtgüte eines Schätzers',
+      variables: { 'MSE(\\hat{\\theta})': 'mittlerer quadratischer Fehler', 'Var(\\hat{\\theta})': 'Streuung des Schätzers', 'Bias(\\hat{\\theta})': 'systematische Verzerrung' }
+    },
+    {
+      label: 'Bernoulli-Standardschätzer',
+      eq: String.raw`$$\hat{\pi}_{MM} = \hat{\pi}_{ML} = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$`,
+      desc: 'Standardfall, in dem MoM und ML zusammenfallen',
+      variables: { '\\hat{\\pi}': 'Schätzer des Erfolgsanteils', '\\bar X': 'Stichprobenanteil', 'X_i': 'Bernoulli-Beobachtung' }
+    }
+  ],
+  aufgaben: [
+    {
+      text: String.raw`Methodenvergleich (MoM vs. ML): Für eine Bernoulli-Variable mit $n=200$ Beobachtungen und $76$ Erfolgen soll $\pi$ geschätzt werden. Bestimmen Sie den Momentenschätzer und den Maximum-Likelihood-Schätzer und interpretieren Sie das Ergebnis.`,
+      steps: [
+        { text: `Stichprobenanteil:`, eq: String.raw`\bar X = \frac{76}{200} = 0{,}38` },
+        { text: `MoM:`, eq: String.raw`\hat{\pi}_{MM} = \bar X = 0{,}38` },
+        { text: `ML:`, eq: String.raw`\hat{\pi}_{ML} = 0{,}38` }
+      ],
+      result: String.raw`In diesem Standardfall liefern MoM und ML denselben Schätzwert. Prüfungsrelevant ist, die gleiche Zahl mit zwei verschiedenen Begründungen erklären zu können.`
+    },
+    {
+      text: String.raw`Vergleichen Sie die Schätzer $\hat{\mu}_1 = \bar X$ und $\hat{\mu}_2 = X_1$ für den Erwartungswert $\mu$. Prüfen Sie Erwartungstreue und Effizienz.`,
+      steps: [
+        { text: `Erwartungstreue:`, eq: String.raw`E[\bar X] = \mu,\qquad E[X_1] = \mu` },
+        { text: `Varianzvergleich:`, eq: String.raw`Var(\bar X) = \frac{\sigma^2}{n},\qquad Var(X_1)=\sigma^2` },
+        { text: `Schluss:`, eq: null }
+      ],
+      result: String.raw`Beide Schätzer sind erwartungstreu, aber $\bar X$ ist deutlich effizienter. Genau diese Trennung zwischen Erwartungstreue und Präzision muss sitzen.`
+    },
+    {
+      text: String.raw`Bias/MSE-Drill: Für einen Schätzer $\hat\theta$ gilt $Var(\hat\theta)=4$ und $Bias(\hat\theta)=1{,}5$. Berechnen Sie den MSE und erklären Sie, warum die Varianz allein hier kein sauberer Qualitätsvergleich ist.`,
+      steps: [
+        { text: `MSE-Zerlegung:`, eq: String.raw`MSE(\hat\theta)=Var(\hat\theta)+Bias(\hat\theta)^2` },
+        { text: `Einsetzen:`, eq: String.raw`MSE = 4 + 1{,}5^2 = 6{,}25` },
+        { text: `Interpretation:`, eq: null }
+      ],
+      result: String.raw`$MSE=6{,}25$. Sobald Bias im Spiel ist, reicht ein Varianzvergleich nicht mehr; Streuung und Verzerrung müssen gemeinsam gelesen werden.`
+    },
+    {
+      text: String.raw`Methodenwahl unter Klausurdruck: Ein Parameter soll aus einer Bernoulli-Stichprobe geschätzt werden. Die Aufgabe fragt explizit nach “dem plausibelsten Parameterwert unter den beobachteten Daten”. Welcher Zugriff liegt begrifflich näher: MoM oder ML?`,
+      steps: [
+        { text: `“Plausibelster Wert unter den beobachteten Daten” verweist auf Likelihood-Logik.`, eq: null },
+        { text: `MoM würde über Momentengleichung argumentieren, ML über Datenplausibilität.`, eq: null },
+        { text: `Gleicher Zahlenwert bedeutet nicht gleiche Methodenbegründung.`, eq: null }
+      ],
+      result: String.raw`Die richtige Begriffsantwort ist ML. In Standardfällen können MoM und ML numerisch übereinstimmen, methodisch aber verschieden motiviert sein.`
+    },
+    {
+      text: String.raw`KQ als Schätzlogik: Erläutern Sie, warum die Methode der kleinsten Quadrate zur Schätzlogik der linearen Regression gehört, obwohl sie etwas anderes löst als MoM oder ML.`,
+      steps: [
+        { text: `KQ minimiert die Summe quadrierter Residuen.`, eq: String.raw`\min_{\beta_0,\beta_1}\sum_{i=1}^n (y_i-\hat y_i)^2` },
+        { text: `Damit werden konkrete Parameterschätzer für das Regressionsmodell erzeugt.`, eq: null },
+        { text: `Die Logik ist Fehlerquadrate minimieren, nicht Momente oder Likelihood direkt angleichen.`, eq: null }
+      ],
+      result: String.raw`MoM, ML und KQ sind verschiedene Schätzverfahren. Das Prüfungsziel ist, die zugrunde liegende Konstruktionslogik sauber zu benennen.`
+    }
+  ]
+};
 
-CONTENT.regression_schaetzung_inferenz = CONTENT.regression;
-CONTENT.regression_diagnostik_prognose = CONTENT.regression;
+CONTENT.schaetzen_eigenschaften_intervalle = {
+  motivation: 'Dieses Kapitel fragt nicht nach der Konstruktion des Schätzers, sondern nach seiner Verlässlichkeit: Bias, Standardfehler, Intervallbreite und saubere Intervallinterpretation stehen im Zentrum.',
+  theorie: String.raw`
+    <div class="section-block">
+      <h3>Erwartungstreue, Effizienz, Konsistenz</h3>
+      <p>Ein guter Schätzer trifft den Parameter im Mittel (<strong>erwartungstreu</strong>), streut wenig (<strong>effizient</strong>) und nähert sich mit wachsendem $n$ dem wahren Wert an (<strong>konsistent</strong>).</p>
+    </div>
+    <div class="section-block">
+      <h3>Standardfehler und Intervallbreite</h3>
+      <p>Konfidenzintervalle basieren auf <strong>Punktschätzer ± kritischer Wert · Standardfehler</strong>. Je größer die Streuung und je kleiner $n$, desto breiter das Intervall.</p>
+    </div>
+    <div class="section-block">
+      <h3>z- und t-basierte Konfidenzintervalle</h3>
+      <p>Ist $\sigma$ bekannt, wird der z-Wert verwendet. In der Praxis ist $\sigma$ meist unbekannt; dann wird die t-Verteilung mit $n-1$ Freiheitsgraden genutzt.</p>
+      <div class="math-block">$$\bar{x} \pm z_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}} \qquad \bar{x} \pm t_{n-1,1-\alpha/2}\cdot \frac{s}{\sqrt{n}}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Interpretationsfalle Konfidenzintervall</h3>
+      <p>Ein 95%-Konfidenzintervall bedeutet: <strong>Die Methode</strong> erzeugt in 95% der Wiederholungsstichproben Intervalle, die den wahren Parameter enthalten. Es bedeutet nicht, dass der feste Parameter mit 95% Wahrscheinlichkeit im konkreten Intervall liegt.</p>
+      <div class="warn-box"><strong>Breites Intervall</strong> Ein breites KI ist nicht “schlechter gerechnet”, sondern Ausdruck hoher Unsicherheit oder kleiner Stichprobe.</div>
+    </div>
+    <div class="section-block">
+      <h3>Dualität von Intervall und Test</h3>
+      <p>Bei zweiseitigen Tests gilt: Liegt der Nullwert $\theta_0$ außerhalb des $(1-\alpha)$-Konfidenzintervalls, wird $H_0$ auf Niveau $\alpha$ abgelehnt. Diese Verknüpfung spart in der Klausur Zeit.</p>
+    </div>
+  `,
+  formeln: [
+    {
+      label: 'z-Konfidenzintervall',
+      eq: String.raw`$$\bar{x} \pm z_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$$`,
+      desc: 'Intervall bei bekannter Populationsstreuung',
+      variables: { '\\bar{x}': 'Stichprobenmittel', 'z_{1-\\alpha/2}': 'kritischer z-Wert', '\\sigma': 'Populationsstandardabweichung', 'n': 'Stichprobenumfang' }
+    },
+    {
+      label: 't-Konfidenzintervall',
+      eq: String.raw`$$\bar{x} \pm t_{n-1,1-\alpha/2}\cdot \frac{s}{\sqrt{n}}$$`,
+      desc: 'Standardintervall bei unbekannter Populationsstreuung',
+      variables: { 't_{n-1,1-\\alpha/2}': 'kritischer t-Wert', 's': 'Stichprobenstandardabweichung', 'n-1': 'Freiheitsgrade' }
+    },
+    {
+      label: 'Standardfehler',
+      eq: String.raw`$$SE(\bar X)=\frac{\sigma}{\sqrt n}\quad \text{bzw.}\quad \frac{s}{\sqrt n}$$`,
+      desc: 'Präzision des Mittelwertschätzers',
+      variables: { 'SE(\\bar X)': 'Standardfehler des Mittelwerts', '\\sigma,s': 'Population/Stichprobe der Streuung', 'n': 'Stichprobenumfang' }
+    }
+  ],
+  aufgaben: [
+    {
+      text: String.raw`Aus einer Stichprobe mit $n=36$ ergibt sich $\bar{x}=120$ und $s=18$. Berechnen Sie das $95\%$-Konfidenzintervall für $\mu$.`,
+      steps: [
+        { text: `Standardfehler:`, eq: String.raw`SE = 18/\sqrt{36} = 3` },
+        { text: `Kritischer Wert:`, eq: String.raw`t_{35,\,0{,}975} \approx 2{,}03` },
+        { text: `Intervall:`, eq: String.raw`120 \pm 2{,}03 \cdot 3 = [113{,}91;\;126{,}09]` }
+      ],
+      result: String.raw`Das $95\%$-KI lautet näherungsweise $[113{,}9;\;126{,}1]$. Prüfungsrelevant ist nicht nur die Zahl, sondern die Aussage: plausibler Parameterbereich statt Punktgewissheit.`
+    },
+    {
+      text: String.raw`Ein Meinungsforschungsinstitut möchte den Anteil $p$ der Wahlberechtigten, die Partei A unterstützen, auf $\pm 2$ Prozentpunkte genau schätzen ($\alpha = 0{,}05$). Wie groß muss $n$ mindestens sein? Nutzen Sie $p = 0{,}5$ als konservative Schätzung.`,
+      steps: [
+        { text: `Formel für Stichprobengröße beim Anteil:`, eq: String.raw`n \ge \left(\frac{z_{1-\alpha/2}}{d}\right)^2 p(1-p)` },
+        { text: `Einsetzen:`, eq: String.raw`n \ge \left(\frac{1{,}96}{0{,}02}\right)^2 \cdot 0{,}25 = 2401` },
+        { text: `Konservative Wahl:`, eq: null }
+      ],
+      result: String.raw`Mindestens $n=2401$. Die Wahl $p=0{,}5$ ist konservativ, weil sie die Varianz und damit die benötigte Stichprobengröße maximiert.`
+    },
+    {
+      text: String.raw`Ein $99\%$-KI für $\mu$ soll bei bekanntem $\sigma = 20$ berechnet werden. Stichprobengröße $n = 25$, $\bar{x} = 80$. Berechnen Sie das Intervall und erläutern Sie, wie es sich von einem $95\%$-KI unterscheidet.`,
+      steps: [
+        { text: `Kritischer z-Wert:`, eq: String.raw`z_{0{,}995}=2{,}576` },
+        { text: `Standardfehler:`, eq: String.raw`SE = 20/\sqrt{25} = 4` },
+        { text: `Intervall:`, eq: String.raw`80 \pm 2{,}576\cdot 4 = [69{,}7;\;90{,}3]` },
+        { text: `Vergleich:`, eq: null }
+      ],
+      result: String.raw`Das 99%-Intervall ist breiter als das 95%-Intervall. Höhere Sicherheit kostet Präzision — genau dieser Tradeoff gehört in die Deutung.`
+    },
+    {
+      text: String.raw`Dualität Intervall/Test: Für $\mu$ liegt das 95%-Konfidenzintervall bei $[49{,}2;\;50{,}8]$. Sie testen $H_0:\mu=51$ zweiseitig auf $\alpha=0{,}05$. Welche Entscheidung folgt sofort?`,
+      steps: [
+        { text: `Prüfe, ob der Nullwert im KI liegt.`, eq: String.raw`51 \notin [49{,}2;\;50{,}8]` },
+        { text: `Dualität nutzen:`, eq: String.raw`\mu_0 \notin KI_{95\%} \iff H_0 \text{ wird auf } 5\% \text{-Niveau verworfen}` },
+        { text: `Inhaltliche Deutung:`, eq: null }
+      ],
+      result: String.raw`$H_0$ wird abgelehnt. Die KI-Test-Dualität ist ein schneller und sauberer Klausurzugriff.`
+    },
+    {
+      text: String.raw`Interpretationsfalle: Eine Studentin sagt: “Mit 95% Wahrscheinlichkeit liegt $\mu$ zwischen den Intervallgrenzen.” Korrigieren Sie die Aussage in einem sauberen Satz.`,
+      steps: [
+        { text: `Parameter ist fix, Intervall zufällig.`, eq: null },
+        { text: `Korrekte Lesart:`, eq: String.raw`95\% \text{ der nach derselben Methode gebildeten Intervalle enthalten den wahren Parameter.}` },
+        { text: `Keine Parameterwahrscheinlichkeit formulieren.`, eq: null }
+      ],
+      result: String.raw`Die Wahrscheinlichkeitsaussage gehört zur Methode, nicht zum festen Parameter. Genau diese Formulierung trennt Statistiklogik von Alltagsintuition.`
+    }
+  ]
+};
+
+CONTENT.regression_schaetzung_inferenz = {
+  motivation: 'Regression erklärt nicht nur eine Gleichung, sondern einen Zusammenhang unter Unsicherheit. Dieses Kapitel fokussiert Modellaufbau, OLS-Schätzung, Koeffizientenlesen, Signifikanz und Relevanz.',
+  theorie: String.raw`
+    <div class="section-block">
+      <h3>Modellidee</h3>
+      <p>Die lineare Regression beschreibt den mittleren Zusammenhang zwischen einer Zielgröße $Y$ und einem oder mehreren Regressoren $X$. In der einfachen Form gilt:</p>
+      <div class="math-block">$$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$$</div>
+      <p>$\beta_0$ ist das Grundniveau, $\beta_1$ die durchschnittliche Änderung von $Y$ je zusätzlicher Einheit in $X$.</p>
+    </div>
+    <div class="section-block">
+      <h3>OLS-Schätzung</h3>
+      <p>Die Kleinste-Quadrate-Methode wählt die Gerade so, dass die quadrierten Residuen möglichst klein werden. In der einfachen Regression gilt:</p>
+      <div class="math-block">$$\hat{\beta}_1 = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2} = \frac{s_{xy}}{s_x^2}, \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Inferenz auf Koeffizienten</h3>
+      <p>Eine geschätzte Steigung ist erst dann statistisch abgesichert, wenn Standardfehler, Konfidenzintervall oder t-Test dazukommen. Die Nullhypothese lautet oft $H_0:\beta_1=0$.</p>
+      <div class="math-block">$$t = \frac{\hat{\beta}_1}{SE(\hat{\beta}_1)}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>R², Signifikanz und Relevanz</h3>
+      <p>$R^2$ misst den erklärten Varianzanteil in der Stichprobe. Es sagt nichts darüber, ob der Effekt groß, kausal oder ökonomisch bedeutsam ist. Eine winzige Steigung kann bei großem $n$ signifikant werden, aber praktisch irrelevant bleiben.</p>
+      <div class="warn-box"><strong>Kausalitätsfalle</strong> Weder ein signifikanter Koeffizient noch ein hohes $R^2$ beweisen einen kausalen Effekt. Design, Theorie und mögliche Drittvariablen bleiben entscheidend.</div>
+    </div>
+    <div class="section-block">
+      <h3>Klausurzugriff</h3>
+      <p>Die sichere Reihenfolge lautet: Modell benennen, Koeffizient sprachlich deuten, Signifikanz prüfen, Intervall/Unsicherheit ergänzen und erst danach eine inhaltliche Schlussfolgerung ziehen.</p>
+    </div>
+  `,
+  formeln: [
+    {
+      label: 'Regressionsmodell',
+      eq: String.raw`$$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$$`,
+      desc: 'Einfaches lineares Modell',
+      variables: { 'Y_i': 'abhängige Variable', 'X_i': 'Regressor', '\\beta_0': 'Achsenabschnitt', '\\beta_1': 'Steigungsparameter', '\\varepsilon_i': 'Störterm' }
+    },
+    {
+      label: 'OLS-Steigung',
+      eq: String.raw`$$\hat{\beta}_1 = \frac{s_{xy}}{s_x^2}$$`,
+      desc: 'Schätzer der durchschnittlichen marginalen Änderung',
+      variables: { '\\hat{\\beta}_1': 'geschätzte Steigung', 's_{xy}': 'Kovarianz von X und Y', 's_x^2': 'Varianz von X' }
+    },
+    {
+      label: 'Bestimmtheitsmaß',
+      eq: String.raw`$$R^2 = 1 - \frac{SSR}{SST}$$`,
+      desc: 'Anteil der erklärten Gesamtstreuung',
+      variables: { 'R^2': 'Bestimmtheitsmaß', 'SSR': 'Residuenquadratsumme', 'SST': 'totale Quadratsumme' }
+    }
+  ],
+  aufgaben: [
+    {
+      text: String.raw`Gegeben: $\bar{x}=5$, $\bar{y}=20$, $s_{xy}=15$, $s_x^2=5$. Bestimmen Sie die Regressionsgerade.`,
+      steps: [
+        { text: `Steigung:`, eq: String.raw`\hat{\beta}_1 = 15/5 = 3` },
+        { text: `Achsenabschnitt:`, eq: String.raw`\hat{\beta}_0 = 20 - 3\cdot 5 = 5` },
+        { text: `Gerade notieren:`, eq: String.raw`\hat y = 5 + 3x` }
+      ],
+      result: String.raw`$\hat y = 5 + 3x$. In Worten: Eine zusätzliche Einheit in $x$ erhöht den erwarteten Wert von $y$ um 3 Einheiten.`
+    },
+    {
+      text: String.raw`Datenpunkte: $(1,3)$, $(2,5)$, $(3,7)$, $(4,9)$. Schätzen Sie die Regressionsgerade und berechnen Sie $R^2$.`,
+      steps: [
+        { text: `Mittelwerte:`, eq: String.raw`\bar{x}=2{,}5,\quad \bar{y}=6` },
+        { text: `Steigung:`, eq: String.raw`\hat{\beta}_1 = 2` },
+        { text: `Achsenabschnitt:`, eq: String.raw`\hat{\beta}_0 = 1` },
+        { text: `Perfekter Fit in dieser Stichprobe:`, eq: String.raw`R^2 = 1` }
+      ],
+      result: String.raw`$\hat y = 1 + 2x$, $R^2 = 1$. Die Stichprobe ist perfekt linear; inhaltlich ersetzt das aber keine Kausalbegründung.`
+    },
+    {
+      text: String.raw`Ein Koeffizient $\hat{\beta}_1 = 0{,}02$ ist auf dem 1%-Niveau signifikant. Erläutern Sie, warum “signifikant” und “wirtschaftlich relevant” hier sauber getrennt werden müssen.`,
+      steps: [
+        { text: `Signifikanz beantwortet die Nullfrage $H_0:\beta_1=0$.`, eq: null },
+        { text: `Relevanz fragt nach der Größe des Effekts in Originaleinheiten.`, eq: null },
+        { text: `Bei großem $n$ können sehr kleine Effekte hochsignifikant werden.`, eq: null }
+      ],
+      result: String.raw`Prüfungssicher ist: “Der Effekt ist statistisch signifikant, aber mit 0,02 pro x-Einheit möglicherweise praktisch klein.”`
+    },
+    {
+      text: String.raw`Ein Regressionsoutput liefert $\hat{\beta}_1 = 1{,}8$, $SE(\hat{\beta}_1)=0{,}6$. Berechnen Sie die t-Statistik und deuten Sie das Ergebnis auf grobem 5%-Niveau.`,
+      steps: [
+        { text: `Teststatistik:`, eq: String.raw`t = \frac{1{,}8}{0{,}6} = 3` },
+        { text: `Faustregel:`, eq: String.raw`|t| \approx 3 \Rightarrow \text{klarer Hinweis gegen } H_0:\beta_1=0` },
+        { text: `Deutung:`, eq: null }
+      ],
+      result: String.raw`Die Steigung ist deutlich von null verschieden. Fachlich bleibt trotzdem zu klären, ob der Effekt groß genug und kausal interpretierbar ist.`
+    },
+    {
+      text: String.raw`Ein Modell hat $R^2 = 0{,}78$. Welche Aussage ist korrekt, und welche zwei Überdehnungen müssen Sie vermeiden?`,
+      steps: [
+        { text: `Korrekte Aussage:`, eq: String.raw`78\% \text{ der Varianz von } Y \text{ werden in dieser Stichprobe erklärt.}` },
+        { text: `Überdehnung 1:`, eq: String.raw`R^2 \neq \text{Kausalitätsbeweis}` },
+        { text: `Überdehnung 2: Hohes $R^2$ bedeutet nicht automatisch gutes Prognoseverhalten außerhalb der Stichprobe.`, eq: null }
+      ],
+      result: String.raw`$R^2$ ist ein Fit-Maß in der Stichprobe. Es muss immer mit Modelllogik, Diagnostik und inhaltlicher Plausibilität zusammengedacht werden.`
+    }
+  ]
+};
+
+CONTENT.regression_diagnostik_prognose = {
+  motivation: 'Nach der Schätzung beginnt die Modellkritik: Residuen, Heteroskedastizität, Ausreißer und der Unterschied zwischen Erwartungswert- und Einzelprognose entscheiden, wie belastbar die Regression wirklich ist.',
+  theorie: String.raw`
+    <div class="section-block">
+      <h3>Diagnostik fragt nach Modelltragfähigkeit</h3>
+      <p>Eine Regressionsgleichung ist keine Endstation. Residuenplots, QQ-Plot, Ausreißer- und Hebelpunktdiagnostik prüfen, ob die Inferenzbedingungen plausibel bleiben.</p>
+    </div>
+    <div class="section-block">
+      <h3>Residuen und Heteroskedastizität</h3>
+      <p>Die Residuen $e_i = y_i - \hat y_i$ sollten kein systematisches Muster zeigen. Ein Trichter im Residuenplot deutet auf <strong>Heteroskedastizität</strong> hin: die Streuung der Fehler hängt dann von $x$ oder $\hat y$ ab.</p>
+    </div>
+    <div class="section-block">
+      <h3>Normalität, Ausreißer und Hebelpunkte</h3>
+      <p>Starke Ausreißer oder einflussreiche Beobachtungen können Koeffizienten und Standardfehler verzerren. Der QQ-Plot prüft, ob die Residuen grob normal wirken; Hebelpunkte sind x-seitig auffällige Beobachtungen mit großem Einfluss auf die Gerade.</p>
+    </div>
+    <div class="section-block">
+      <h3>Konfidenz- vs. Prognoseintervall</h3>
+      <p>Ein <strong>Konfidenzintervall</strong> beschreibt Unsicherheit um den erwarteten Mittelwert $E[Y|x_0]$. Ein <strong>Prognoseintervall</strong> ist breiter, weil zusätzlich die Reststreuung einer neuen Einzelbeobachtung einfließt.</p>
+    </div>
+    <div class="section-block">
+      <h3>Prüfungsrelevante Konsequenz</h3>
+      <div class="warn-box"><strong>Diagnostikproblem heißt nicht sofort “alles falsch”</strong> Häufig bleibt die Schätzung nutzbar, aber Standardfehler, Testaussagen oder Prognosen müssen robuster abgesichert oder vorsichtiger interpretiert werden.</div>
+      <p>Die sichere Klausurantwort nennt immer: <strong>welches Muster sichtbar ist</strong>, <strong>welche Warnung daraus folgt</strong> und <strong>welche Inferenzgrenze sich daraus ergibt</strong>.</p>
+    </div>
+  `,
+  formeln: [
+    {
+      label: 'Residuum',
+      eq: String.raw`$$e_i = y_i - \hat y_i$$`,
+      desc: 'Abweichung zwischen Beobachtung und modelliertem Wert',
+      variables: { 'e_i': 'Residuum', 'y_i': 'beobachteter Wert', '\\hat y_i': 'geschätzter Wert' }
+    },
+    {
+      label: 'Konfidenzintervall im Modell',
+      eq: String.raw`$$\hat y(x_0) \pm t_{n-k-1,1-\alpha/2}\cdot SE\bigl(\hat y(x_0)\bigr)$$`,
+      desc: 'Intervall für den Erwartungswert bei gegebenem x_0',
+      variables: { '\\hat y(x_0)': 'geschätzter Mittelwert', 'SE(\\hat y(x_0))': 'Standardfehler des Mittelwerts bei x_0', 'n-k-1': 'Freiheitsgrade' }
+    },
+    {
+      label: 'Prognoseintervall',
+      eq: String.raw`$$\hat y(x_0) \pm t_{n-k-1,1-\alpha/2}\cdot \sqrt{SE\bigl(\hat y(x_0)\bigr)^2 + \hat\sigma^2}$$`,
+      desc: 'Intervall für eine neue Einzelbeobachtung',
+      variables: { '\\hat\sigma^2': 'geschätzte Restvarianz', '\\hat y(x_0)': 'Punktschätzung bei x_0' }
+    }
+  ],
+  aufgaben: [
+    {
+      text: String.raw`Ein Residuenplot zeigt einen klaren Trichter: Mit wachsendem $x$ steigt die Streuung der Residuen deutlich. Welche Diagnose liegt nahe und welche Konsequenz ist prüfungssicher?`,
+      steps: [
+        { text: `Muster benennen:`, eq: String.raw`\text{Trichterform} \Rightarrow \text{Heteroskedastizität}` },
+        { text: `Konsequenz für Inferenz:`, eq: String.raw`\text{Standardfehler und Tests können verzerrt sein.}` },
+        { text: `Prüfungssichere Reaktion:`, eq: String.raw`\text{robuste Standardfehler oder angepasste Spezifikation erwähnen}` }
+      ],
+      result: String.raw`Nicht die Gerade selbst, sondern die Inferenz ist das erste Problem. Genau diese Trennung ist klausurwichtig.`
+    },
+    {
+      text: String.raw`Konfidenz- vs. Prognoseintervall: Für dasselbe $x_0$ liefert ein Modell ein 95%-Konfidenzintervall für den Erwartungswert und ein 95%-Prognoseintervall für eine Einzelbeobachtung. Welches Intervall ist breiter und warum?`,
+      steps: [
+        { text: `CI zielt auf den Mittelwert $E[Y|x_0]$.`, eq: String.raw`CI \to E[Y|x_0]` },
+        { text: `PI enthält zusätzlich die zufällige Einzelstreuung neuer Beobachtungen.`, eq: String.raw`PI \to Y_{neu}` },
+        { text: `Folgerung:`, eq: String.raw`PI \text{ ist stets breiter als } CI` }
+      ],
+      result: String.raw`Das Prognoseintervall ist breiter, weil es neben Schätzunsicherheit auch die idiosynkratische Reststreuung neuer Beobachtungen enthält.`
+    },
+    {
+      text: String.raw`Ein QQ-Plot wirkt weitgehend linear, aber zwei extreme Punkte liegen an den Enden deutlich abseits der Linie. Was ist die angemessene Diagnoseaussage?`,
+      steps: [
+        { text: `Grundmuster: Residuen wirken nicht komplett chaotisch, aber die Ränder sind auffällig.`, eq: null },
+        { text: `Randabweichungen sprechen für mögliche Ausreißer- oder Schiefeffekte.`, eq: null },
+        { text: `Konsequenz: Inferenz vorsichtig formulieren und ergänzende Diagnostik erwähnen.`, eq: null }
+      ],
+      result: String.raw`Sauber ist: grobe Normalitätsnähe mit Randwarnung. Weder blind akzeptieren noch blind verwerfen.`
+    },
+    {
+      text: String.raw`Ein Modell prognostiziert für $x_0$ den Wert $\hat y = 120$ mit engem Konfidenzintervall, aber deutlich breiterem Prognoseintervall. Warum ist das kein Widerspruch?`,
+      steps: [
+        { text: `Konfidenzintervall: Unsicherheit des bedingten Mittelwerts.`, eq: null },
+        { text: `Prognoseintervall: Mittelwertunsicherheit plus Reststreuung einer neuen Einzelbeobachtung.`, eq: null },
+        { text: `Folgerung:`, eq: String.raw`\text{präziser Mittelwert} \not\Rightarrow \text{präzise Einzelrealisierung}` }
+      ],
+      result: String.raw`Kein Widerspruch: Das Modell kann den Mittelwert gut kennen, obwohl einzelne neue Beobachtungen stark streuen.`
+    },
+    {
+      text: String.raw`Ein hoher Hebelpunkt liegt weit rechts im x-Bereich und zieht die Regressionsgerade sichtbar. Welche zwei Aussagen gehören in eine sichere Klausurantwort?`,
+      steps: [
+        { text: `Hebelpunkt definieren: x-seitig extreme Beobachtung mit großem Einfluss.`, eq: null },
+        { text: `Ursache prüfen: Datenfehler, seltene aber legitime Beobachtung oder Spezifikationsproblem.`, eq: null },
+        { text: `Keine reflexhafte Löschung ohne Begründung.`, eq: null }
+      ],
+      result: String.raw`Prüfungssicher ist: Einfluss benennen, Ursache prüfen, aber nicht automatisch “Ausreißer raus” schreiben.`
+    }
+  ]
+};
+
+delete CONTENT.schaetzen;
 delete CONTENT.regression;

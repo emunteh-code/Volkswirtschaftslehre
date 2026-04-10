@@ -121,7 +121,7 @@ export const CONTENT = {
   },
 
   methodik: {
-    motivation: 'Juristische Methodik ist das eigentliche Werkzeugfach des Moduls: Ohne Anspruchsaufbau, Definition, Subsumtion und saubere Gliederung werden auch bekannte Normen in der Klausur wertlos.',
+    motivation: 'Juristische Methodik ist das eigentliche Werkzeugfach des Moduls: Ohne Anspruchsaufbau, Definition, Subsumtion, Zwischenergebnisse und saubere Gliederung werden auch bekannte Normen in der Klausur wertlos.',
     theorie: [
       section(
         'Anspruchsdenken',
@@ -134,14 +134,27 @@ export const CONTENT = {
       `
       ),
       section(
+        'Anspruch entstanden, untergegangen, durchsetzbar',
+        `<p>Die Übungen arbeiten zusätzlich mit einer zweiten Ordnungsebene: Zuerst prüfst du, ob ein Anspruch entstanden ist. Danach fragst du, ob er untergegangen ist. Erst am Ende prüfst du, ob er durchsetzbar bleibt. Diese Kette verhindert, dass Einwendungen, Gestaltungsrechte und Einreden ungeordnet vermischt werden.</p>
+         ${scheme(String.raw`\text{Anspruch entstanden} \rightarrow \text{untergegangen} \rightarrow \text{durchsetzbar}`)}
+      `
+      ),
+      section(
         'Subsumtion als Kernleistung',
         `<p>Die Subsumtion ist mehr als ein Wortersatz für „anwenden“: Du musst zeigen, <em>warum</em> konkrete Tatsachen ein Tatbestandsmerkmal erfüllen oder nicht erfüllen. Genau hier trennt sich reine Definitionenkenntnis von juristischem Arbeiten.</p>
          ${warn('Methodikfehler:', 'Definitionen ohne anschließende Subsumtion sind fast wertlos. Die Klausur bewertet nicht bloßes Wissen, sondern die Anwendung auf den Sachverhalt.')}`
+      ),
+      section(
+        'Gliederungsebenen und Ergebniskontrolle',
+        `<p>Die Fallskripte und Methodikblätter zeigen, dass gute Klausuren nicht nur materiell richtig, sondern auch formal steuerbar sein müssen: Obersätze gehören auf die richtige Ebene, Zwischenergebnisse leiten zum nächsten Prüfungsabschnitt über, und Rechtsfolgen dürfen nie vor den Tatbestandsvoraussetzungen stehen. Gerade Mehranspruchsfälle leben von dieser Disziplin.</p>
+         ${warn('Strukturverlust:', 'Viele Bearbeitungen springen direkt zu Rückgewähr, Schadenshöhe oder „am Ende wohl ja“. Ohne klare Gliederung geht die Anspruchslogik verloren.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Anspruchsfrage', eq: String.raw`\text{Wer will was von wem woraus?}`, desc: 'Erste und wichtigste Sortierfrage des Falles.' },
-      { label: 'Gutachtenstil', eq: String.raw`\text{O} - \text{D} - \text{S} - \text{E}`, desc: 'Obersatz, Definition, Subsumtion, Ergebnis.' }
+      { label: 'Gutachtenstil', eq: String.raw`\text{O} - \text{D} - \text{S} - \text{E}`, desc: 'Obersatz, Definition, Subsumtion, Ergebnis.' },
+      { label: 'Anspruchskette', eq: String.raw`\text{entstanden} \rightarrow \text{untergegangen} \rightarrow \text{durchsetzbar}`, desc: 'Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.' },
+      { label: 'Tatbestand vor Rechtsfolge', eq: String.raw`\text{erst Voraussetzungen, dann Folgen}`, desc: 'Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.' }
     ],
     aufgaben: [
       task(
@@ -179,6 +192,16 @@ export const CONTENT = {
           step('Result: Zwischenergebnisse pro Anspruchsebene notieren und erst am Ende Konkurrenz/Alternativen ordnen.')
         ],
         'Klausurdisziplin heißt Kettenführung: Jeder Anspruch wird vollständig geprüft, bevor zur nächsten Rechtsfolgeebene gewechselt wird.'
+      ),
+      task(
+        'Prüfungsreihenfolge-Fall: K verlangt nach einem mangelhaften Kauf Nacherfüllung, Rücktritt und Schadensersatz. Welche methodische Reihenfolge macht die Lösung belastbar?',
+        [
+          step('Zuerst die Anspruchsziele und ihre Anspruchsgrundlagen trennen.'),
+          step('Dann pro Anspruch die Tatbestandsmerkmale vollständig prüfen.'),
+          step('Rückgewähr, Schadenshöhe und Konkurrenzfragen erst nach den Zwischenergebnissen behandeln.'),
+          step('Die Kette ausdrücklich dokumentieren: entstanden, untergegangen, durchsetzbar.')
+        ],
+        'Die starke Klausurlösung steuert den Fall über getrennte Anspruchsschienen und nicht über spontane Ergebnisbehauptungen.'
       )
     ]
   },
@@ -227,36 +250,113 @@ export const CONTENT = {
     ]
   },
 
-  dissens_anfechtung: {
-    motivation: 'Dissens und Anfechtung sind die klassischen Korrekturinstrumente des Vertragsschlusses. Hier entscheidet sich oft, ob ein scheinbar geschlossener Vertrag tatsächlich wirksam bleibt.',
+  dissens: {
+    motivation: 'Dissens ist kein nachträglicher Fehlerheilungsmechanismus, sondern die Frage, ob es überhaupt zu einer wirksamen Einigung gekommen ist. Genau daran scheitern Vertragsklausuren oft schon auf der ersten Stufe.',
     theorie: [
       section(
-        'Offener und versteckter Dissens',
-        `<p>Dissens bedeutet fehlende Einigung. Beim offenen Dissens wissen die Parteien, dass noch kein Konsens besteht. Beim versteckten Dissens glauben sie an Einigkeit, obwohl sich ihre Erklärungen objektiv nicht decken. In beiden Fällen musst du sauber prüfen, ob überhaupt ein Vertrag entstanden ist.</p>`
+        'Konsens nach objektivem Empfängerhorizont',
+        `<p>Ob Angebot und Annahme korrespondieren, bestimmst du nicht nach geheimen Vorstellungen, sondern nach der objektiven Auslegung empfangsbedürftiger Willenserklärungen gem. §§ 133, 157 BGB. Stimmen die Erklärungen danach überein, liegt grundsätzlich Konsens vor, auch wenn eine Partei innerlich etwas anderes wollte.</p>`
       ),
       section(
-        'Anfechtungsgründe und Erklärung',
-        `<p>Die Anfechtung setzt einen anerkannten Anfechtungsgrund voraus, etwa Inhalts- oder Erklärungsirrtum. Hinzu kommen Anfechtungserklärung und Frist. Anders als beim Dissens entsteht der Vertrag hier zunächst, wird aber durch erfolgreiche Anfechtung ex tunc vernichtet.</p>
-         ${scheme(String.raw`\text{Anfechtungsgrund} + \text{Erklärung} + \text{Frist} \Rightarrow \text{Nichtigkeit ex tunc}`)}
+        'Totaldissens und offener Dissens',
+        `<p>Fehlt die Einigung schon bei den <em>essentialia negotii</em>, kommt von vornherein kein Vertrag zustande. Beim offenen Dissens (§ 154 BGB) wissen die Parteien, dass noch ein Punkt offen ist; dann gilt im Zweifel: kein Vertrag. Der typische Klausurzugriff ist deshalb: erst Konsensfrage, dann erst überhaupt an Rechtsfolgen denken.</p>
+         ${scheme(String.raw`\text{kein Konsens über essentialia} \Rightarrow \text{kein Vertrag}`)}
       `
       ),
       section(
-        'Rechtsfolge und Schadensersatz',
-        `<p>Die Anfechtung vernichtet das Geschäft rückwirkend. Gleichzeitig kann der Anfechtende nach § 122 BGB zum Vertrauensschaden verpflichtet sein. Gerade diese Doppelfolge wird in Kurzfällen häufig abgefragt.</p>
-         ${warn('Beliebter Fehler:', 'Dissens und Anfechtung sind nicht dasselbe. Beim Dissens fehlt die Einigung schon, bei der Anfechtung wird ein zunächst wirksames Geschäft wieder beseitigt.')}`
+        'Versteckter Dissens und seine Seltenheit',
+        `<p>Beim versteckten Dissens (§ 155 BGB) glauben die Parteien an Einigkeit, obwohl sie objektiv aneinander vorbeireden. In der Vorlesung wird aber ausdrücklich betont, dass dieser Fall in Klausuren seltener ist, als viele denken: Häufig lässt sich über die objektive Auslegung doch eine Bedeutung feststellen, und dann liegt eher ein einseitiger Irrtum als echter Dissens vor.</p>
+         ${warn('Prüfungsfalle:', 'Nicht jeder innere Unterschied ist Dissens. Wenn die Erklärungen objektiv deckungsgleich sind, musst du aus dem Dissenspfad heraus und in die Anfechtungsebene wechseln.')}`
+      ),
+      section(
+        'Falsa demonstratio non nocet',
+        `<p>Ein Sonderfall ist die falsa demonstratio: Beide Parteien wollen objektiv dasselbe, benutzen aber übereinstimmend die falsche Bezeichnung. Dann schadet die falsche Benennung nicht. Genau dieser Sonderfall zeigt, dass im Dissensrecht die gemeinsame Bedeutung und der Verkehrsschutz sauber gegeneinander abgewogen werden müssen.</p>`
       )
     ].join(''),
     formeln: [
-      { label: 'Anfechtung', eq: String.raw`\text{§§ 119 ff. BGB}`, desc: 'Irrtum oder ähnliche Anfechtungsgründe können ein Geschäft rückwirkend beseitigen.' },
-      { label: 'Rechtsfolge', eq: String.raw`\text{ex tunc nichtig}`, desc: 'Erfolgreiche Anfechtung vernichtet das Geschäft rückwirkend.' }
+      { label: 'Konsensfrage', eq: String.raw`\text{Angebot} \leftrightarrow \text{Annahme}`, desc: 'Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.' },
+      { label: 'Offener Dissens', eq: String.raw`\text{§ 154 BGB} \Rightarrow \text{im Zweifel kein Vertrag}`, desc: 'Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.' },
+      { label: 'Versteckter Dissens', eq: String.raw`\text{§ 155 BGB}`, desc: 'Nur bei wirklichem Nichtübereinstimmen und fortbestehendem Vertragswillen relevant.' },
+      { label: 'Falsa demonstratio', eq: String.raw`\text{falsa demonstratio non nocet}`, desc: 'Gemeinsam gewollter Inhalt bleibt trotz falscher Bezeichnung maßgeblich.' }
+    ],
+    aufgaben: [
+      task(
+        'A und B wollen ein Fahrrad für 500 EUR verkaufen bzw. kaufen, können sich aber über Ratenzahlung und Übergabezeitpunkt noch nicht einigen. Welcher Dissens-Typ liegt nahe und was folgt?',
+        [
+          step('Zuerst fragen, ob den Parteien die fehlende Einigung bewusst ist.'),
+          step('Hier liegt typischerweise offener Dissens vor.', String.raw`\text{§ 154 BGB}`),
+          step('Im Zweifel folgt daraus: noch kein Vertragsschluss.')
+        ],
+        'Wenn ein offener Einigungsmangel bewusst fortbesteht, steht die Konsensfrage im Vordergrund und der Vertrag kommt im Zweifel nicht zustande.'
+      ),
+      task(
+        'A und B einigen sich auf Übergabe bei „Kommilitonin C“, meinen aber unterschiedliche C-Personen. Warum ist das kein Standardfall für Anfechtung?',
+        [
+          step('Zuerst objektive Auslegung und Nebenpunktcharakter prüfen.'),
+          step('Wenn nur ein Nebenpunkt betroffen ist, kommt § 155 BGB in Betracht.'),
+          step('Erst wenn objektiv Konsens feststeht und nur ein innerer Irrtum vorliegt, wechselt die Prüfung zur Anfechtung.')
+        ],
+        'Der Fall ist zunächst eine Konsensfrage. Anfechtung setzt dagegen einen objektiv zunächst zustande gekommenen Vertrag voraus.'
+      ),
+      task(
+        'Haakjöringsköd-Fall in Kurzform: Beide Parteien benutzen dieselbe falsche Bezeichnung, meinen aber übereinstimmend Walfleisch. Warum schadet das falsche Wort nicht automatisch?',
+        [
+          step('Die objektive Verkehrsauffassung zwar notieren, aber den gemeinsam gewollten Inhalt mitprüfen.'),
+          step('Gerade bei übereinstimmendem Fehlgebrauch greift die falsa-demonstratio-Logik.'),
+          step('Ergebnis: Maßgeblich bleibt der von beiden subjektiv gewollte Vertragsinhalt.')
+        ],
+        'Die falsa demonstratio zeigt, dass eine falsche Benennung den Vertrag nicht sprengt, wenn beide Seiten denselben Inhalt wollten.'
+      ),
+      task(
+        'Methodik-Drill: A schreibt „5 EUR“, meint aber „15 EUR“. B nimmt „5 EUR“ an. Welche Reihenfolge schützt dich vor dem Standardfehler „Dissens vorschnell bejahen“?',
+        [
+          step('Erst Angebot und Annahme nach objektivem Empfängerhorizont auslegen.'),
+          step('Bei objektiver Deckungsgleichheit den Vertragsschluss bejahen.'),
+          step('Erst danach prüfen, ob ein Irrtum eine Anfechtung eröffnet.')
+        ],
+        'Dissens ist die Konsensfrage. Sobald objektiver Konsens steht, ist die richtige Korrekturebene die Anfechtung.'
+      )
+    ]
+  },
+
+  anfechtung: {
+    motivation: 'Die Anfechtung korrigiert keinen fehlenden Konsens, sondern einen zunächst wirksamen Vertrag oder eine zunächst wirksame Erklärung. Genau diese zeitliche und methodische Trennung macht sie klausurprägend.',
+    theorie: [
+      section(
+        'Warum es die Anfechtung braucht',
+        `<p>Wer eine Willenserklärung abgibt, ist daran grundsätzlich gebunden. Das Gesetz löst den Konflikt zwischen Privatautonomie und Verkehrsschutz über die Anfechtung: Nur bestimmte, gesetzlich geregelte Fehler berechtigen dazu, die Erklärung nachträglich zu beseitigen. Ohne Anfechtungsgrund bleibt der Erklärende gebunden.</p>`
+      ),
+      section(
+        'Anfechtungsgründe und Kausalität',
+        `<p>Die Vorlesung nennt als Kernfälle Inhaltsirrtum, Erklärungsirrtum, Eigenschaftsirrtum sowie Täuschung und Drohung. Der Anfechtungsgrund muss für die Erklärung kausal gewesen sein: Ohne den Fehler wäre die Erklärung nicht oder nicht mit diesem Inhalt abgegeben worden.</p>
+         ${scheme(String.raw`\text{Anfechtungsgrund} + \text{Kausalität}`)}
+      `
+      ),
+      section(
+        'Anfechtungserklärung und Frist',
+        `<p>Die Anfechtung ist ein Gestaltungsrecht. Deshalb braucht es eine Anfechtungserklärung gegenüber dem richtigen Gegner und die Einhaltung der gesetzlichen Frist. Bei Irrtumsanfechtung gilt § 121 BGB („unverzüglich“), bei Täuschung oder Drohung § 124 BGB. Wer nur den Irrtum sieht, aber Erklärung und Frist weglässt, bleibt klausurisch unvollständig.</p>
+         ${scheme(String.raw`\text{Anfechtungsgrund} + \text{Erklärung} + \text{Frist}`)}
+      `
+      ),
+      section(
+        'Rechtsfolgen und § 122 BGB',
+        `<p>Die erfolgreiche Anfechtung vernichtet das Geschäft ex tunc. Gleichzeitig kann in den Irrtumsfällen ein Anspruch auf Vertrauensschaden nach § 122 BGB entstehen. Klausurtechnisch wichtig ist die Trennung: Erst Anfechtungstatbestand, dann Rechtsfolge, dann erst der separate § 122-Pfad.</p>
+         ${warn('Anfechtungsfalle:', 'Nicht jeder Fehlkalkulations- oder Motivirrtum trägt eine Anfechtung. Und § 122 BGB wird nicht in den Tatbestand der Anfechtung hineingemischt, sondern danach eigenständig geprüft.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Anfechtungsgründe', eq: String.raw`\text{§ 119 BGB / § 123 BGB}`, desc: 'Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.' },
+      { label: 'Vollständige Prüfung', eq: String.raw`\text{Grund} + \text{Erklärung} + \text{Frist}`, desc: 'Der Irrtum allein reicht nie für eine vollständige Lösung.' },
+      { label: 'Rechtsfolge', eq: String.raw`\text{ex tunc nichtig}`, desc: 'Das Geschäft wird rückwirkend beseitigt.' },
+      { label: 'Vertrauensschaden', eq: String.raw`\text{§ 122 BGB}`, desc: 'Eigener Folgeanspruch nach wirksamer Irrtumsanfechtung.' }
     ],
     aufgaben: [
       task(
         'A will 100 Flaschen verkaufen, verschreibt sich aber und bietet 1000 an. B nimmt sofort an. Welcher Prüfungsweg ist naheliegend?',
         [
-          step('Zunächst Vertragsschluss annehmen.', String.raw`\text{Angebot und Annahme liegen zunächst vor.}`),
-          step('Dann Irrtum prüfen.', String.raw`\text{Erklärungsirrtum nach § 119 Abs. 1 Alt. 2 BGB naheliegend.}`),
-          step('Rechtsfolge der erfolgreichen Anfechtung nennen.', String.raw`\text{Vertrag ex tunc nichtig; ggf. § 122 BGB.}`)
+          step('Zunächst Vertragsschluss nach objektiver Erklärungslage bejahen.'),
+          step('Dann den Erklärungsirrtum als Anfechtungsgrund prüfen.', String.raw`\text{§ 119 Abs. 1 Alt. 2 BGB}`),
+          step('Anfechtungserklärung, Frist und Rechtsfolge sauber ergänzen.')
         ],
         'Hier liegt typischerweise kein Dissens, sondern ein zunächst geschlossener, später anfechtbarer Vertrag vor.'
       ),
@@ -269,24 +369,23 @@ export const CONTENT = {
         'Eine erfolgreiche Anfechtung verlangt mehr als nur einen Irrtum. Erklärung, Frist und Rechtsfolgen gehören zwingend zur vollständigen Lösung.'
       ),
       task(
-        'Trap-Mini-Case: A bietet „50 Kisten“ an, meint aber innerlich „15 Kisten“. B nimmt „50 Kisten“ an. Welche methodische Reihenfolge ist richtig, um Dissens- und Anfechtungsfehler zu vermeiden?',
+        'Warum ist der Satz „Ich habe mich verkalkuliert, also fechte ich an“ oft zu schnell?',
         [
-          step('Zuerst objektive Erklärungslage prüfen (Auslegung, Konsensfrage).'),
-          step('Wenn objektiv Konsens vorliegt, nicht beim Dissens stehen bleiben, sondern Anfechtungsebene öffnen.'),
-          step('Anfechtungsgrund, Erklärung und Frist vollständig prüfen.'),
-          step('Rechtsfolge inklusive möglicher § 122 BGB-Folge sauber anschließen.')
+          step('Zuerst den konkreten Irrtumstyp bestimmen.'),
+          step('Bloße Motiv- oder Kalkulationsirrtümer nicht vorschnell mit Erklärungs- oder Inhaltsirrtum verwechseln.'),
+          step('Nur gesetzlich anerkannte Anfechtungsgründe tragen die Rückabwicklung über §§ 119 ff. BGB.')
         ],
-        'Klausurregel: Dissens prüft Einigungslage, Anfechtung korrigiert den zunächst wirksamen Konsens.'
+        'Die Anfechtung ist kein allgemeines Korrekturrecht für unkluge Entscheidungen. Sie greift nur bei den gesetzlich geregelten Fehlerarten.'
       ),
       task(
         'Subsumtions-Mini-Case: E verkauft ein Buch für 700 EUR, irrt sich über dessen Eigenschaft als Erstauflage und ficht später an. Welche mehrstufige Prüfung trennt Anspruch aus Vertrag und § 122 BGB sauber?',
         [
-          step('Zuerst vertraglichen Primäranspruch aufbauen (Vertragsschluss als Tatbestand).'),
-          step('Dann prüfen, ob der Anspruch wegen wirksamer Anfechtung untergeht (Tatbestand der Anfechtung vollständig).'),
-          step('Erst danach § 122 BGB als eigene Anspruchsschiene eröffnen und Vertrauensschaden subsumieren.'),
-          step('Begrenzung auf positives Interesse in der Rechtsfolge von § 122 BGB separat prüfen.')
+          step('Zuerst den vertraglichen Primäranspruch aufbauen.'),
+          step('Dann prüfen, ob der Anspruch wegen wirksamer Anfechtung untergeht.'),
+          step('Erst danach § 122 BGB als eigene Anspruchsschiene eröffnen und den Vertrauensschaden subsumieren.'),
+          step('Die Begrenzung des Ersatzes sauber auf der Rechtsfolgenseite behandeln.')
         ],
-        'Tatbestandsklarheit: Vertragsebene, Anfechtungsebene und § 122-Rechtsfolge dürfen nicht in einem Mischschritt aufgehen.'
+        'Tatbestandsklarheit ist der Schlüssel: Vertragsebene, Anfechtungsebene und § 122-Folge dürfen nicht in einem Mischschritt aufgehen.'
       )
     ]
   },
@@ -389,17 +488,24 @@ export const CONTENT = {
       ),
       section(
         'Vertretungsmacht und ihre Quellen',
-        `<p>Vertretungsmacht kann rechtsgeschäftlich, gesetzlich oder organschaftlich begründet sein. Fehlt sie, ist das Geschäft grundsätzlich schwebend unwirksam und hängt von der Genehmigung des Vertretenen ab.</p>`
+        `<p>Vertretungsmacht kann rechtsgeschäftlich, gesetzlich oder organschaftlich begründet sein. Fehlt sie, ist das Geschäft grundsätzlich schwebend unwirksam und hängt von der Genehmigung des Vertretenen ab. Die Vorlesung macht zudem deutlich, dass interne Weisungen und Außenvollmacht nicht vorschnell gleichgesetzt werden dürfen: Interne Grenzen schlagen nicht automatisch ins Außenverhältnis durch.</p>`
       ),
       section(
         'Vertreter, Bote, Identitätstäuschung',
         `<p>Der Vertreter gibt eine eigene Willenserklärung ab, der Bote übermittelt nur eine fremde. Handeln unter fremdem Namen ist wiederum keine Stellvertretung, sondern ein Problem des Identitätsschutzes. Diese Unterscheidungen sind klausurtypisch.</p>
          ${warn('Vertreter-Boten-Falle:', 'Wer keine eigene Entscheidungsmacht hat, ist Bote und nicht Vertreter. Dann wird die fremde und nicht die eigene Erklärung zugerechnet.')}`
+      ),
+      section(
+        'Klausurfolge bei fehlender Vertretungsmacht',
+        `<p>Die saubere Reihenfolge lautet: erst Offenkundigkeit, dann Vertretungsmacht, dann Genehmigung und erst danach gegebenenfalls § 179 BGB. Gerade diese Reihenfolge verhindert, dass Eigenbindung, schwebende Unwirksamkeit und Vertreterhaftung durcheinandergeraten.</p>
+         ${warn('Folgenfehler:', '§ 179 BGB wird oft zu früh geprüft. Wenn schon keine Offenkundigkeit vorliegt, ist der Handelnde regelmäßig selbst Vertragspartner und nicht bloß falsus procurator.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Stellvertretung', eq: String.raw`\text{§ 164 Abs. 1 BGB}`, desc: 'Handeln in fremdem Namen mit Vertretungsmacht.' },
-      { label: 'Ohne Vertretungsmacht', eq: String.raw`\text{§ 177 BGB}`, desc: 'Geschäft schwebend unwirksam bis zur Genehmigung.' }
+      { label: 'Vertretungsmacht', eq: String.raw`\text{rechtsgeschäftlich / gesetzlich / organschaftlich}`, desc: 'Quellen der Zurechnungsmacht müssen sauber getrennt werden.' },
+      { label: 'Ohne Vertretungsmacht', eq: String.raw`\text{§ 177 BGB}`, desc: 'Geschäft schwebend unwirksam bis zur Genehmigung.' },
+      { label: 'Haftung des falsus procurator', eq: String.raw`\text{§ 179 BGB}`, desc: 'Folgeebene erst nach Offenkundigkeit und ausbleibender Genehmigung prüfen.' }
     ],
     aufgaben: [
       task(
@@ -437,6 +543,15 @@ export const CONTENT = {
           step('Result: Vertragspartner und ggf. Haftungsadressat getrennt ausweisen (Tatbestandsebene vs. Rechtsfolgeebene).')
         ],
         'Stellvertretungsfälle werden robust, wenn Offenkundigkeit, Vertretungsmacht und § 179-Folge strikt nacheinander geprüft werden.'
+      ),
+      task(
+        'Innen- und Außenverhältnis-Fall: M darf intern nur bis 5.000 EUR einkaufen, bestellt aber für 8.000 EUR. Warum darfst du interne Kompetenzgrenzen nicht vorschnell mit fehlender Vertretungsmacht gleichsetzen?',
+        [
+          step('Zuerst die äußere Vertretungsmacht aus Sicht des Dritten klären.'),
+          step('Interne Weisungen getrennt als Innenverhältnis problematisieren.'),
+          step('Nur bei erkennbarer Überschreitung oder fehlender äußerer Vollmacht den § 177/§ 179-Pfad sauber eröffnen.')
+        ],
+        'Die Klausurstärke liegt darin, Innen- und Außenverhältnis getrennt zu halten: Nicht jede interne Überschreitung zerstört automatisch die Außenwirkung.'
       )
     ]
   },
@@ -445,22 +560,35 @@ export const CONTENT = {
     motivation: 'AGB-Recht ist Massenvertragsrecht. Es verbindet Vertragstechnik mit Schutzgedanken und ist deshalb ein idealer Prüfungsstoff für saubere Einbeziehungs- und Kontrolllogik.',
     theorie: [
       section(
+        'Was überhaupt AGB sind',
+        `<p>AGB sind für eine Vielzahl von Verträgen vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt. Schon diese Ausgangsfrage musst du sauber von der späteren Einbeziehung und Kontrolle trennen. Nicht jede unangenehme Vertragsklausel ist automatisch AGB im technischen Sinn.</p>`
+      ),
+      section(
         'Einbeziehung',
         `<p>AGB gelten nicht automatisch. Sie müssen wirksam in den Vertrag einbezogen werden. Dazu gehören Hinweis, zumutbare Kenntnisnahmemöglichkeit und Einverständnis des Vertragspartners. Fehlt eines davon, scheitert bereits die Einbeziehung.</p>`
       ),
       section(
-        'Inhaltskontrolle',
-        `<p>Nach wirksamer Einbeziehung folgt die inhaltliche Kontrolle. Im Zentrum stehen unangemessene Benachteiligung, überraschende Klauseln und Transparenz. Viele Klausurprobleme hängen daran, ob eine Klausel den typischen Vertragspartner einseitig übermäßig belastet.</p>`
+        'Die Fünf-Stufen-Logik',
+        `<p>Die Vorlesung arbeitet mit einer festen Prüfungsreihenfolge: Anwendungsbereich, Vorliegen von AGB, Einbeziehung, überraschende Klauseln bzw. Vorrang individueller Abreden und erst dann die Inhaltskontrolle. Diese Reihenfolge ist der eigentliche Punkteträger, weil AGB-Fälle sonst vorschnell in die Wertung rutschen.</p>
+         ${scheme(String.raw`\text{Anwendungsbereich} \rightarrow \text{AGB} \rightarrow \text{Einbeziehung} \rightarrow \text{§ 305b / § 305c} \rightarrow \text{§§ 307-309}`)}
+      `
+      ),
+      section(
+        'Inhaltskontrolle und Abredenkonkurrenz',
+        `<p>Nach wirksamer Einbeziehung folgt die Kontrolle auf unangemessene Benachteiligung, Überraschung und Transparenz. Zugleich darfst du nie vergessen, dass individuelle Abreden gem. § 305b BGB Vorrang haben. Viele Fälle lösen sich gerade dadurch, dass das mündlich Vereinbarte und das Kleingedruckte nicht deckungsgleich sind.</p>`
       ),
       section(
         'AGB-Fälle lesen',
-        `<p>In AGB-Fällen darfst du nicht sofort „unwirksam“ rufen. Die Prüfungsreihenfolge lautet: AGB-Qualität, Einbeziehung, Vorrang individueller Abreden, überraschende Klausel, Inhaltskontrolle.</p>
+        `<p>In AGB-Fällen darfst du nicht sofort „unwirksam“ rufen. Erst die saubere Prüfungsreihenfolge zeigt, ob die Klausel überhaupt Vertragsbestandteil wurde und auf welcher Stufe sie scheitert.</p>
          ${warn('Prüfungsreihenfolge:', 'Wer sofort in die Inhaltskontrolle springt, ohne die Einbeziehung zu prüfen, verschenkt einen der wichtigsten Klausurpunkte.')}`
       )
     ].join(''),
     formeln: [
+      { label: 'AGB-Begriff', eq: String.raw`\text{vorformuliert} + \text{für Vielzahl} + \text{gestellt}`, desc: 'Vorliegen von AGB ist eine eigene erste Sachfrage.' },
       { label: 'Einbeziehung', eq: String.raw`\text{Hinweis} + \text{Kenntnisnahme} + \text{Einverständnis}`, desc: 'Erst dann werden AGB Vertragsbestandteil.' },
-      { label: 'Kontrolle', eq: String.raw`\text{§§ 305 ff. BGB}`, desc: 'Systematik von Einbeziehung bis Inhaltskontrolle.' }
+      { label: 'Vorrang Individualabrede', eq: String.raw`\text{§ 305b BGB}`, desc: 'Das konkret Vereinbarte verdrängt kollidierende AGB.' },
+      { label: 'Überraschende Klausel', eq: String.raw`\text{§ 305c BGB}`, desc: 'Kann schon vor der eigentlichen Inhaltskontrolle ausscheiden.' },
+      { label: 'Kontrolle', eq: String.raw`\text{§§ 307-309 BGB}`, desc: 'Inhaltskontrolle kommt erst nach Einbeziehung und Vorfragen.' }
     ],
     aufgaben: [
       task(
@@ -478,6 +606,24 @@ export const CONTENT = {
           step('Hinweis- und Kenntnisnahmemöglichkeit benennen.', String.raw`\text{Ohne klaren Hinweis und zumutbare Kenntnis scheitert die Einbeziehung.}`)
         ],
         'Der Fall beginnt auf der Einbeziehungsebene. Fehlt diese, erledigt sich die spätere Inhaltskontrolle häufig bereits.'
+      ),
+      task(
+        'Mündliche Abrede vs. Formulartext: Verkäufer und Kunde vereinbaren mündlich kostenlose Lieferung, das Formular sieht Versandkosten vor. Welche Weiche musst du vor jeder Inhaltskontrolle setzen?',
+        [
+          step('Zuerst die Konkurrenz von Individualabrede und AGB prüfen.', String.raw`\text{§ 305b BGB}`),
+          step('Das individuell Vereinbarte hat Vorrang vor dem Formulartext.'),
+          step('Erst wenn keine Individualabrede greift, wird die Klauselkontrolle relevant.')
+        ],
+        'AGB-Fälle werden oft schon auf der Ebene des Vorrangs individueller Abreden entschieden und nicht erst über § 307 BGB.'
+      ),
+      task(
+        'Überraschungsklausel-Fall: Auf der Rückseite eines Kassenbons steht plötzlich ein weitgehender Haftungsausschluss. Warum ist „ist unfair“ nicht der beste erste Satz?',
+        [
+          step('Zuerst fragen, ob die Klausel überhaupt wirksam einbezogen wurde.'),
+          step('Dann § 305c BGB als Überraschungsstufe prüfen.'),
+          step('Erst danach, falls nötig, zur Inhaltskontrolle übergehen.')
+        ],
+        'Die starke Lösung ordnet die Klausel sauber ein: Einbeziehung und Überraschung kommen vor der abstrakten Fairnesswertung.'
       )
     ]
   },
@@ -486,12 +632,18 @@ export const CONTENT = {
     motivation: 'Mit dem Schuldrecht AT verschiebt sich der Fokus von der Entstehung des Vertrags auf seine Durchführung: Wer schuldet was, wann und mit welchen Pflichten?',
     theorie: [
       section(
-        'Schuldverhältnis und Leistungspflichten',
-        `<p>Ein Schuldverhältnis ist die rechtliche Sonderbeziehung, aus der Leistungs- und Nebenpflichten folgen. Das Schuldrecht fragt damit nicht nur, ob ein Vertrag zustande kam, sondern wie er zu erfüllen ist und welche Folgen Pflichtverletzungen auslösen.</p>`
+        'Schuldverhältnis und Anspruch',
+        `<p>Ein Schuldverhältnis ist die rechtliche Sonderbeziehung, aus der Leistungs- und Nebenpflichten folgen. Ein Anspruch ist demgegenüber das konkrete Recht, von einem anderen ein Tun oder Unterlassen zu verlangen. Diese Unterscheidung ist klausurpraktisch wichtig, weil du aus einem Schuldverhältnis mehrere verschiedene Ansprüche entwickeln kannst.</p>`
       ),
       section(
         'Primär- und Nebenpflichten',
         `<p>Primärpflichten betreffen die eigentliche Leistung, Nebenpflichten schützen Integritäts- und Vermögensinteressen. Gerade moderne Schadensersatzfälle hängen oft an Nebenpflichtverletzungen und nicht an der Hauptleistung.</p>`
+      ),
+      section(
+        'Anspruchsprüfung im Schuldrecht AT',
+        `<p>Die Übungen übertragen die allgemeine Methodik in das Schuldrecht: Anspruch entstanden, Anspruch untergegangen, Anspruch durchsetzbar. Gerade im Leistungsstörungsrecht schützt diese Reihenfolge davor, Rücktritt, Schadensersatz und Rückgewährfolgen unkontrolliert zu vermischen.</p>
+         ${scheme(String.raw`\text{Schuldverhältnis} \rightarrow \text{Pflicht} \rightarrow \text{Störung} \rightarrow \text{Rechtsfolge}`)}
+      `
       ),
       section(
         'Warum dieser Einstieg wichtig ist',
@@ -501,7 +653,9 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Schuldverhältnis', eq: String.raw`\text{Leistungspflichten} + \text{Nebenpflichten}`, desc: 'Beide Ebenen können verletzt werden.' },
-      { label: 'Pflichtverletzung', eq: String.raw`\text{Abweichung von der geschuldeten Leistung oder Rücksichtnahme}`, desc: 'Ausgangspunkt vieler Ansprüche im Schuldrecht AT.' }
+      { label: 'Anspruch', eq: String.raw`\text{Recht, ein Tun oder Unterlassen zu verlangen}`, desc: 'Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.' },
+      { label: 'Pflichtverletzung', eq: String.raw`\text{Abweichung von Leistung oder Rücksichtnahme}`, desc: 'Ausgangspunkt vieler Ansprüche im Schuldrecht AT.' },
+      { label: 'Prüfungskette', eq: String.raw`\text{entstanden} \rightarrow \text{untergegangen} \rightarrow \text{durchsetzbar}`, desc: 'Auch im Schuldrecht bleibt die Methodik leitend.' }
     ],
     aufgaben: [
       task(
@@ -519,6 +673,24 @@ export const CONTENT = {
           step('Klausurfolge ableiten.', String.raw`\text{Auch ohne Leistungsstörung können daraus Schadensersatzansprüche entstehen.}`)
         ],
         'Nebenpflichten sichern das Schuldverhältnis ab. Gerade dadurch wird vertragliche Haftung weiter als bloße Nichterfüllung der Hauptleistung.'
+      ),
+      task(
+        'Warum ist „Zwischen K und V besteht ein Vertrag“ noch kein vollständiger schuldrechtlicher Einstieg, wenn später Schadensersatz oder Rücktritt geprüft werden sollen?',
+        [
+          step('Zwischen Schuldverhältnis und konkretem Anspruch unterscheiden.'),
+          step('Die verletzte Pflicht benennen, nicht nur den Vertrag als Ganzes.'),
+          step('Erst danach die passende Rechtsfolge im Leistungsstörungsrecht aufbauen.')
+        ],
+        'Der Vertrag ist nur die Ausgangsbasis. Klausurpunkte gibt es für die konkrete Zuordnung von Pflicht, Störung und Rechtsfolge.'
+      ),
+      task(
+        'Mehranspruchs-Fall: K verlangt Lieferung, hilfsweise Rücktritt und außerdem Schadensersatz. Warum hilft der schuldrechtliche Grundlagenblock schon auf der ersten Seite der Klausur?',
+        [
+          step('Er zeigt, dass mehrere Reaktionsformen an dasselbe Schuldverhältnis anknüpfen können.'),
+          step('Er zwingt zur Trennung von Primäranspruch, Gestaltungsrecht und Ersatzanspruch.'),
+          step('Er verhindert, dass Rechtsfolgen ohne Pflichtverletzung oder Anspruchsgrundlage diskutiert werden.')
+        ],
+        'Die Grundlagen machen sichtbar, dass Leistungsstörungen unterschiedliche Rechtsfolgen auslösen können, die methodisch getrennt geprüft werden müssen.'
       )
     ]
   },
@@ -526,6 +698,10 @@ export const CONTENT = {
   schadensersatz: {
     motivation: 'Schadensersatz ist die Kernreaktion auf Pflichtverletzungen. Die Kunst liegt darin, die Anspruchsgrundlage und ihre Voraussetzungen sauber in Reihenfolge zu prüfen.',
     theorie: [
+      section(
+        'Überblick über § 280 ff. BGB',
+        `<p>Die Vorlesung ordnet den Schadensersatz nicht als Einzelnorm, sondern als System: Schadensersatz neben der Leistung, statt der Leistung, wegen Verzugs, wegen Unmöglichkeit und wegen Schutzpflichtverletzung. Gerade diese Einordnung hilft in Fällen mit mehreren Störungen, weil sie die richtige Anspruchsgrundlage vorgibt.</p>`
+      ),
       section(
         'Grundschema',
         `<p>Das Grundschema des vertraglichen Schadensersatzes lautet: Schuldverhältnis, Pflichtverletzung, Vertretenmüssen, Schaden. Je nach Konstellation kommen zusätzliche Anforderungen wie Fristsetzung hinzu.</p>
@@ -540,11 +716,17 @@ export const CONTENT = {
         'Vertretenmüssen und Fristsetzung',
         `<p>Das Vertretenmüssen wird grundsätzlich vermutet. Die Fristsetzung ist einer der häufigsten Klausurpunkte: Sie darf nicht vergessen werden und ist nur ausnahmsweise entbehrlich. Genau hier entscheidet sich, ob eine Lösung belastbar wirkt.</p>
          ${warn('Klausurklassiker:', 'Bei Schadensersatz statt der Leistung wird die Fristsetzung besonders oft übersehen. Ohne sie bricht die Prüfung schnell weg.')}`
+      ),
+      section(
+        'Tatbestand und Rechtsfolge getrennt halten',
+        `<p>Der Schaden gehört als eigener Prüfungspunkt in den Tatbestand; Schadenshöhe und konkrete Berechnung gehören erst danach in die Rechtsfolge- bzw. Subsumtionsebene. Wer bereits bei der Fristsetzung mit der Schadenssumme argumentiert, verliert schnell die klare Struktur des Anspruchs.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Schadensersatz neben der Leistung', eq: String.raw`\text{§ 280 I BGB}`, desc: 'Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.' },
-      { label: 'Schadensersatz statt der Leistung', eq: String.raw`\text{§§ 280 I, III, 281 BGB}`, desc: 'Regelmäßig mit erfolgloser Fristsetzung.' }
+      { label: 'Schadensersatz statt der Leistung', eq: String.raw`\text{§§ 280 I, III, 281 BGB}`, desc: 'Regelmäßig mit erfolgloser Fristsetzung.' },
+      { label: 'Verzugsschaden', eq: String.raw`\text{§§ 280 I, II, 286 BGB}`, desc: 'Eigene Schiene bei Verzögerung der Leistung.' },
+      { label: 'Unmöglichkeit', eq: String.raw`\text{§§ 280 I, III, 283 BGB}`, desc: 'Schadensersatzpfad bei endgültiger Leistungshindernis.' }
     ],
     aufgaben: [
       task(
@@ -562,79 +744,167 @@ export const CONTENT = {
           step('Rechtsfolge erklären.', String.raw`\text{Ohne Fristsetzung scheitert der Anspruch meist, sofern keine Entbehrlichkeit vorliegt.}`)
         ],
         'Der Fall zeigt den Standardfehler im Schuldrecht AT: Die Pflichtverletzung wird erkannt, aber die Fristsetzungslogik fehlt.'
+      ),
+      task(
+        'Warum darfst du „Schadensersatz“ in einer Klausur nicht als einheitliches Allerweltsrecht behandeln?',
+        [
+          step('Zuerst die Störungsart einordnen: Neben der Leistung, statt der Leistung, Verzug oder Unmöglichkeit.'),
+          step('Erst dann die passende Anspruchsgrundlage aus § 280 ff. BGB benennen.'),
+          step('Zusatzvoraussetzungen wie Fristsetzung oder Mahnung erst auf der richtigen Schiene prüfen.')
+        ],
+        'Die Anspruchsgrundlage hängt von der Störungsart ab. Wer das nicht trennt, prüft schnell die falschen Voraussetzungen.'
+      ),
+      task(
+        'Tatbestand-vs-Rechtsfolge Fall: K nennt sofort seine Schadenssumme, prüft aber weder Vertretenmüssen noch Fristsetzung. Warum wirkt die Lösung trotz richtiger Zahl schwach?',
+        [
+          step('Weil die Tatbestandsvoraussetzungen den Anspruch tragen und nicht die Schadenssumme.'),
+          step('Vertretenmüssen und ggf. Fristsetzung sind eigenständige Prüfungspunkte.'),
+          step('Erst nach einem bejahten Anspruch wird die Schadenshöhe sinnvoll subsumiert.')
+        ],
+        'Im Schuldrecht gibt es keine Punkte für bloße Endzahlen ohne saubere Anspruchsprüfung. Die Rechtsfolge lebt vom tragfähigen Tatbestand.'
       )
     ]
   },
 
-  ruecktritt_widerruf: {
-    motivation: 'Rücktritt und Verbraucherwiderruf wirken beide auf einen Vertrag zurück, beruhen aber auf ganz unterschiedlichen Gründen und Prüfungsvoraussetzungen.',
+  ruecktritt: {
+    motivation: 'Der Rücktritt ist das klassische Lösungsrecht des Leistungsstörungsrechts. Er ist nicht bloß „Rückgängigmachung“, sondern ein streng aufgebautes Gestaltungsrecht mit eigener Frist- und Folgeebene.',
     theorie: [
       section(
-        'Rücktritt',
-        `<p>Der Rücktritt ist ein Lösungsrecht wegen Leistungsstörung. Er setzt regelmäßig einen wirksamen Vertrag, eine Pflichtverletzung und häufig eine erfolglose Fristsetzung voraus. Seine Rechtsfolge ist die Rückabwicklung über das Rückgewährschuldverhältnis.</p>`
+        'Rücktritt als Leistungsstörungsrecht',
+        `<p>Der Rücktritt gehört wie der Schadensersatz zum allgemeinen Leistungsstörungsrecht des Schuldrecht AT. Er setzt einen wirksamen gegenseitigen Vertrag voraus und reagiert auf Nicht-, Schlecht- oder Unmöglichkeitsfälle. Anders als beim Schadensersatz geht es nicht um Ersatz, sondern um Lösung vom Vertrag.</p>`
       ),
       section(
-        'Verbraucherwiderruf',
-        `<p>Der Verbraucherwiderruf ist kein Sanktionsinstrument wegen Pflichtverletzung, sondern ein gesetzlich gewährtes Schutzrecht in bestimmten Situationen, etwa Fernabsatz oder Haustürgeschäften. Er knüpft also an Schutzbedürftigkeit und nicht an Vertragsstörung an.</p>`
+        'Rücktrittsschemata',
+        `<p>Die Vorlesung arbeitet mit zwei Standardpfaden: Rücktritt wegen Nicht- oder Schlechtleistung über §§ 323, 346 BGB und Rücktritt wegen Unmöglichkeit über §§ 326 Abs. 5, 323, 346 BGB. Im ersten Pfad ist die Fristsetzung regelmäßig zentral, im zweiten tritt an ihre Stelle die Unmöglichkeit.</p>
+         ${scheme(String.raw`\text{gegenseitiger Vertrag} + \text{Störung} + \text{Frist / Unmöglichkeit} + \text{Erklärung}`)}
+      `
       ),
       section(
-        'Saubere Abgrenzung',
-        `<p>In Prüfungen musst du sauber trennen: Rücktritt = Reaktion auf Leistungsstörung. Widerruf = besondere Verbraucherschutzlage. Wer beides bloß als „Rückgängigmachung“ behandelt, verfehlt den Normzweck.</p>
-         ${warn('Abgrenzungsfehler:', 'Widerruf braucht keine Pflichtverletzung. Rücktritt braucht regelmäßig gerade eine Störung im Schuldverhältnis.')}`
+        'Rücktrittserklärung und Rückgewähr',
+        `<p>Der Rücktritt braucht eine Erklärung nach § 349 BGB. Rechtsfolge ist das Rückgewährschuldverhältnis: Die ursprünglichen Hauptleistungspflichten kehren sich um. Dadurch unterscheidet sich der Rücktritt sowohl vom Schadensersatz als auch von der Anfechtung.</p>
+         ${scheme(String.raw`\text{Rücktritt} \Rightarrow \text{Rückgewährschuldverhältnis}`)}
+      `
+      ),
+      section(
+        'Abgrenzung zu Anfechtung und Schadensersatz',
+        `<p>Im Unterschied zur Anfechtung wirkt der Rücktritt nicht ex tunc, sondern stellt das Vertragsverhältnis erst ab der Ausübung auf Rückabwicklung um. Im Unterschied zum Schadensersatz erhält der Gläubiger grundsätzlich nicht den Erfüllungswert, sondern nur das bereits Geleistete zurück.</p>
+         ${warn('Standardfehler:', 'Rücktritt verlangt regelmäßig eine Leistungsstörung und oft eine Fristsetzung. Wer ihn wie eine freie „Umentscheidung“ behandelt, landet methodisch im falschen Institut.')}`
       )
     ].join(''),
     formeln: [
-      { label: 'Rücktritt', eq: String.raw`\text{§§ 323 ff. BGB}`, desc: 'Lösungsrecht wegen Leistungsstörung.' },
-      { label: 'Widerruf', eq: String.raw`\text{Verbraucherschutzrecht mit Fristbindung}`, desc: 'Eigenständiges gesetzliches Gestaltungsrecht.' }
+      { label: 'Rücktritt wegen Schlechtleistung', eq: String.raw`\text{§§ 323, 346 BGB}`, desc: 'Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.' },
+      { label: 'Rücktritt wegen Unmöglichkeit', eq: String.raw`\text{§§ 326 V, 323, 346 BGB}`, desc: 'Wichtiger Sonderpfad ohne klassische Nachfristlogik.' },
+      { label: 'Rücktrittserklärung', eq: String.raw`\text{§ 349 BGB}`, desc: 'Gestaltungsrecht braucht eine klare Erklärung.' },
+      { label: 'Rechtsfolge', eq: String.raw`\text{§ 346 BGB}`, desc: 'Rückgewähr und ggf. Wertersatz gehören auf die Folgeebene.' }
     ],
     aufgaben: [
       task(
-        'Warum darfst du Verbraucherwiderruf und Rücktritt nicht einfach unter „Vertrag wird rückgängig gemacht“ zusammenfassen?',
+        'Warum genügt es für den Rücktritt nicht, dass K „unzufrieden“ mit der Leistung ist?',
         [
-          step('Normzwecke trennen.', String.raw`\text{Rücktritt reagiert auf Störung, Widerruf schützt den Verbraucher in bestimmten Situationen.}`),
-          step('Prüfungsfolgen nennen.', String.raw`\text{Die Voraussetzungen und damit auch die Aufbaufragen unterscheiden sich.}`)
+          step('Zuerst einen gegenseitigen Vertrag und eine echte Leistungsstörung verlangen.'),
+          step('Dann prüfen, ob Fristsetzung nötig und erfolgt ist oder ausnahmsweise entbehrlich war.'),
+          step('Erst danach die Rücktrittserklärung und Rechtsfolge anschließen.')
         ],
-        'Beide Institute führen zwar zur Rückabwicklung, beruhen aber auf völlig unterschiedlichen Anknüpfungspunkten. Genau diese Unterscheidung ist klausurwichtig.'
+        'Rücktritt ist ein strukturiertes Leistungsstörungsrecht und kein freies Lösungsrecht aus bloßer Unzufriedenheit.'
       ),
+      task(
+        'Warum ist die Rücktrittserklärung ein eigener Prüfungspunkt und nicht bloß Formalität?',
+        [
+          step('Weil der Rücktritt ein Gestaltungsrecht ist, das durch Erklärung ausgeübt werden muss.'),
+          step('Ohne wirksame Ausübung bleibt es trotz Tatbestandsnähe beim ursprünglichen Schuldverhältnis.'),
+          step('Die Rückgewährfolgen setzen also nicht automatisch ein.')
+        ],
+        'Die Erklärung ist der Umschaltpunkt vom Primärschuldverhältnis zum Rückgewährschuldverhältnis.'
+      ),
+      task(
+        'Welche Differenz zum Schadensersatz solltest du in einer Klausur ausdrücklich ansprechen, wenn beide Rechte parallel im Raum stehen?',
+        [
+          step('Rücktritt führt zur Lösung vom Vertrag und Rückgewähr, nicht zum Ersatz des Erfüllungsinteresses.'),
+          step('Schadensersatz verlangt regelmäßig zusätzliche Tatbestandsvoraussetzungen wie Vertretenmüssen.'),
+          step('Beide Schienen getrennt aufbauen und erst am Ende ihr Verhältnis klären.')
+        ],
+        'Klausurpunkte liegen oft gerade in der sauberen Trennung von Rücktritt und Ersatzanspruch.'
+      ),
+      task(
+        'Mehrschrittfall Rücktritt: V liefert mangelhaft, setzt aber später doch noch eine mangelfreie Sache ein. Wo liegt die methodische Weiche?',
+        [
+          step('Zuerst prüfen, ob eine wirksame Frist gesetzt und fruchtlos abgelaufen ist.'),
+          step('Dann fragen, ob vor Erklärung des Rücktritts noch ordnungsgemäß geleistet wurde.'),
+          step('Erst bei fortbestehender Störung den Rücktritt erklären und die Rückgewährfolge eröffnen.')
+        ],
+        'Der Rücktritt lebt von seiner zeitlichen Ordnung: Störung, Frist, Erklärung, erst dann Rückgewähr.'
+      )
+    ]
+  },
+
+  verbraucherwiderruf: {
+    motivation: 'Der Verbraucherwiderruf ist kein Sanktionsrecht wegen Schlechterfüllung, sondern ein europarechtlich geprägtes Schutzrecht. Gerade deshalb muss er scharf vom Rücktritt getrennt werden.',
+    theorie: [
+      section(
+        'Widerruf als gesetzliches Schutzrecht',
+        `<p>Der Verbraucherwiderruf basiert auf § 355 BGB, setzt aber immer voraus, dass das Gesetz für einen bestimmten Vertragstyp überhaupt ein Widerrufsrecht eröffnet. § 355 BGB allein verleiht also noch kein allgemeines Widerrufsrecht. Diese Vorfrage ist im Gutachten der natürliche Einstieg.</p>`
+      ),
+      section(
+        'Vertragstyp und persönliche Voraussetzungen',
+        `<p>Geprüft werden müssen der widerrufsfähige Vertragstyp sowie Verbraucher- und Unternehmereigenschaft. Die Vorlesung nennt besonders Fernabsatz, Haustürsituationen, Verbraucherdarlehen und Ratenlieferungsverträge. Der Widerruf knüpft also an Schutzlage und Vertragstyp an, nicht an eine Pflichtverletzung.</p>
+         ${scheme(String.raw`\text{Widerrufsrecht} + \text{Verbraucher} + \text{Unternehmer}`)}
+      `
+      ),
+      section(
+        'Erklärung und Frist',
+        `<p>Erforderlich ist eine gegenüber dem Unternehmer erklärte Widerrufsabsicht innerhalb der gesetzlichen Frist von grundsätzlich 14 Tagen. Eine Begründung ist nicht nötig. Klausurtypisch ist dabei die Klarstellung, dass für die Fristwahrung die rechtzeitige Absendung genügt.</p>
+         ${scheme(String.raw`\text{Widerrufserklärung} + \text{14 Tage}`)}
+      `
+      ),
+      section(
+        'Rechtsfolge und Abgrenzung',
+        `<p>Auch der Widerruf führt zu einem Rückgewährschuldverhältnis. Dennoch bleibt die dogmatische Trennung entscheidend: Rücktritt reagiert auf Leistungsstörung, Widerruf auf Verbraucherschutz. Bei digitaler Nutzung oder starker Ingebrauchnahme können zusätzliche Folgefragen wie Wertersatz oder Nutzungsgrenzen aufkommen, aber erst nachdem der Tatbestand steht.</p>
+         ${warn('Normzweckfehler:', 'Wenn keine Leistungsstörung vorliegt, ist der Rücktritt nicht der natürliche Startpunkt. Der Widerruf wird nicht über Mängel, sondern über Schutzlage, Erklärung und Frist erschlossen.')}`
+      )
+    ].join(''),
+    formeln: [
+      { label: 'Basisnorm', eq: String.raw`\text{§ 355 BGB}`, desc: 'Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.' },
+      { label: 'Persönliche Voraussetzungen', eq: String.raw`\text{Verbraucher} + \text{Unternehmer}`, desc: '§§ 13, 14 BGB sind Standardbausteine der Prüfung.' },
+      { label: 'Frist', eq: String.raw`\text{14 Tage}`, desc: 'Regelmäßig ab Vertragsschluss; rechtzeitige Absendung genügt.' },
+      { label: 'Rechtsfolge', eq: String.raw`\text{Rückgewährschuldverhältnis}`, desc: 'Ähnelt dem Rücktritt, beruht aber auf anderem Normzweck.' }
+    ],
+    aufgaben: [
       task(
         'Ein Online-Kauf funktioniert technisch einwandfrei, der Verbraucher möchte sich aber umentscheiden. Welcher Prüfungsweg liegt näher: Rücktritt oder Widerruf?',
         [
-          step('Nach einer Leistungsstörung fragen.', String.raw`\text{Liegt keine Störung vor, ist Rücktritt nicht der natürliche Startpunkt.}`),
-          step('Verbraucherschutzlage erkennen.', String.raw`\text{Beim Fernabsatz kommt vielmehr der Widerruf in Betracht.}`)
+          step('Zuerst nach einer Leistungsstörung fragen.', String.raw`\text{Liegt keine Störung vor, ist Rücktritt nicht der natürliche Startpunkt.}`),
+          step('Dann die Verbraucherschutzlage und den Vertragstyp prüfen.'),
+          step('Erklärung und Frist des Widerrufs vollständig anschließen.')
         ],
         'Ohne Leistungsstörung spricht der Fall eher für einen Verbraucherwiderruf als für einen Rücktritt.'
       ),
       task(
-        'Issue-Spotting Mini-Case: V liefert verspätet und zudem mangelhaft; K ist Verbraucher im Fernabsatz. Welche Reihenfolge hilft, Rücktritt, Widerruf und Schadensersatz nicht zu vermischen?',
+        'Warum reicht der Satz „§ 355 BGB gibt dem Verbraucher ein Widerrufsrecht“ allein noch nicht aus?',
         [
-          step('Zuerst Anspruchsziele trennen: Lösung vom Vertrag vs. Ersatz von Schäden.'),
-          step('Dann Anknüpfungspunkte trennen: Leistungsstörung (Rücktritt/SE) vs. Verbraucherschutzlage (Widerruf).'),
-          step('Für jede Schiene Tatbestandsvoraussetzungen separat prüfen (inkl. Frist-/Formfragen).'),
-          step('Ergebnisse am Ende zusammenführen und Konkurrenz/Alternativen sauber benennen.')
+          step('Weil zunächst ein Vertragstyp mit gesetzlichem Widerrufsrecht vorliegen muss.'),
+          step('Danach sind Verbraucher- und Unternehmereigenschaft gesondert zu prüfen.'),
+          step('Erst anschließend folgen Erklärung, Frist und Rechtsfolge.')
         ],
-        'Struktur-first verhindert Standardfehler: Rücktritt und Widerruf sind keine austauschbaren „Rückgängigmacher“, sondern unterschiedliche Institute mit eigenem Tatbestand.'
+        '§ 355 BGB ist Basisnorm, aber nicht Freifahrtschein. Der Tatbestand beginnt mit der widerrufsfähigen Vertragssituation.'
       ),
       task(
-        'Tatbestand-vs-Rechtsfolge Drillcase: K erklärt nach Online-Kauf fristgerecht den Widerruf; parallel ist die Ware mangelhaft. Wie prüfst du, ohne Rückgewährfolgen vorzeitig als Tatbestandsmerkmal zu behandeln?',
+        'Welche Prüfungsaussage zeigt in einer Klausur, dass du den Normzweck des Widerrufs verstanden hast?',
         [
-          step('Issue: Widerrufs- und Rücktrittspfad getrennt eröffnen, bevor Rechtsfolgen diskutiert werden.'),
-          step('Rule: Tatbestand Widerruf (Vertragstyp, Verbraucher/Unternehmer, Erklärung, Frist) und Tatbestand Rücktritt (Störung/Fristsetzung) eigenständig prüfen.'),
-          step('Subsumption: Nur erfüllte Tatbestände tragen das jeweilige Gestaltungsrecht.'),
-          step('Result: Rückgewähr- und ggf. Wertersatzfolgen erst danach als Rechtsfolgeebene anschließen.')
+          step('Benennen, dass der Widerruf gerade keine Pflichtverletzung des Unternehmers voraussetzt.'),
+          step('Die Schutzlage des Verbrauchers als Anknüpfungspunkt hervorheben.'),
+          step('Rücktritt und Widerruf ausdrücklich über ihren unterschiedlichen Zweck abgrenzen.')
         ],
-        'Exam trap: Rückgewähr ist nicht Tatbestand, sondern Folge eines wirksam ausgeübten Gestaltungsrechts.'
+        'Der Widerruf ist Schutzrecht, nicht Sanktion. Diese kurze Normzweckklarstellung macht eine Lösung sofort belastbarer.'
+      ),
+      task(
+        'Tatbestand-vs-Rechtsfolge Drillcase: K widerruft fristgerecht, hat die Sache aber bereits stark benutzt. Wie gehst du methodisch vor?',
+        [
+          step('Zuerst den Widerrufstatbestand vollständig prüfen: Vertragstyp, Parteien, Erklärung, Frist.'),
+          step('Den Widerruf nicht wegen der Benutzung vorschnell verneinen.'),
+          step('Wertersatz- oder Rückabwicklungsprobleme erst auf der Rechtsfolgeebene anschließen.')
+        ],
+        'Der Standardfehler ist, Folgeprobleme vor den Tatbestand zu ziehen. Zuerst steht die Wirksamkeit des Widerrufs, danach die Abwicklung.'
       )
     ]
   }
 };
-
-// Granularity pass 1 (recht): keep existing legal learning objects intact while
-// exposing conservative split nodes for navigation/analytics.
-CONTENT.dissens = CONTENT.dissens_anfechtung;
-CONTENT.anfechtung = CONTENT.dissens_anfechtung;
-delete CONTENT.dissens_anfechtung;
-
-CONTENT.ruecktritt = CONTENT.ruecktritt_widerruf;
-CONTENT.verbraucherwiderruf = CONTENT.ruecktritt_widerruf;
-delete CONTENT.ruecktritt_widerruf;
-

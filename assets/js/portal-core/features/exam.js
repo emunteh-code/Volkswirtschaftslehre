@@ -18,6 +18,10 @@ export function createQuickExamModule({
 }) {
   let examState = null;
 
+  function cleanExamSurfaceTitle(value) {
+    return String(value || "").replace(/^Exam-Drill\s+/i, "").trim();
+  }
+
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -78,7 +82,11 @@ export function createQuickExamModule({
     const correct = snap.correct;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     const color = pct >= 70 ? "var(--accent)" : pct >= 50 ? "var(--accent2)" : "var(--accent3)";
-    const msg = pct >= 70 ? "Sehr gut - weiter so!" : pct >= 50 ? "Gut - weiter ueben!" : "Noch ueben - schwache Konzepte wiederholen.";
+    const msg = pct >= 70
+      ? "Stark. Sichere jetzt die wenigen Fehler gezielt im Dashboard oder in der Wiederholung."
+      : pct >= 50
+        ? "Solide Basis. Wiederhole jetzt die Konzepte, in denen du noch unsicher warst."
+        : "Noch nicht stabil genug für Prüfungstempo. Geh jetzt direkt in Dashboard oder Wiederholung und arbeite die Fehlerquellen nach.";
 
     content.innerHTML = `<div class="exam-container">
 <div class="exam-result">
@@ -118,18 +126,18 @@ export function createQuickExamModule({
 
     content.innerHTML = `<div class="exam-container">
 <div class="exam-topbar">
-  <span class="exam-title">Prüfungssimulation</span>
+  <span class="exam-title">Schnelltest unter Zeitdruck</span>
   <span class="exam-progress">${examState.current + 1} / ${examState.questions.length}</span>
   <span class="exam-timer" id="examTimer" aria-live="polite">${mins}:${secs.toString().padStart(2, "0")}</span>
 </div>
 <div class="exam-q-card">
-  <div class="exam-q-ctx">${q.title} | ${q.context}</div>
+  <div class="exam-q-ctx">${cleanExamSurfaceTitle(q.title)}${q.context ? ` · ${q.context}` : ""}</div>
   <div class="exam-q-text">${q.step.q}</div>
-  <input class="exam-input" id="examInput" placeholder="Deine Antwort..."
+  <input class="exam-input" id="examInput" placeholder="Antwort knapp und fachlich sauber formulieren..."
          aria-label="Antwort eingeben"
          onkeydown="if(event.key==='Enter'){ event.preventDefault(); window.__submitExamAnswer(); }">
   <div class="exam-actions">
-    <button class="btn" onclick="window.__submitExamAnswer()">Antworten</button>
+    <button class="btn" onclick="window.__submitExamAnswer()">Antwort prüfen</button>
     <button class="btn secondary" onclick="window.__skipExamQ()">Überspringen</button>
   </div>
   <div class="exam-feedback hidden" id="examFeedback" role="status"></div>
@@ -281,4 +289,3 @@ export function createQuickExamModule({
     skipExamQ
   };
 }
-

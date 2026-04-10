@@ -340,18 +340,39 @@ points(c(-1, 3), c(0, 0), pch = 19, col = "firebrick")`,
         ],
         math: [String.raw`$$y=f(x)\;\Rightarrow\;x=f^{-1}(y)$$`],
         sourceStatus: 'source-distilled'
+      },
+      {
+        title: 'Domäne, Monotonie und Invertierbarkeit',
+        body: [
+          'Nicht jede Funktion darf global invertiert oder logarithmiert werden. Für den Logarithmus muss das Argument positiv sein; für eine globale Umkehrfunktion brauchst du eine eindeutige Zuordnung, meist abgesichert durch Monotonie auf dem relevanten Bereich.',
+          'Genau diese Zulässigkeitsprüfung gehört in Klausuren vor jedes Rechnen. Viele Fehler entstehen nicht bei der Umformung, sondern schon bei der stillschweigenden Annahme, die Funktion sei überall umkehrbar.'
+        ],
+        math: [
+          String.raw`$$x>0 \Rightarrow \ln(x)\ \text{zulässig},\qquad f'\gtrless 0 \Rightarrow f \text{ auf dem Bereich invertierbar}$$`
+        ],
+        sourceStatus: 'source-distilled'
+      },
+      {
+        title: 'Erkennungssignale in Gleichungen und Graphen',
+        body: [
+          'Eine gute Klausurlesart beginnt mit drei Signalen: Steht die Variable im Exponenten, im Logarithmus oder in einer Funktion, die erst invertiert werden muss? Das entscheidet sofort über den Zugriff.',
+          'Graphisch hilft dieselbe Ordnung: Exponentialfunktionen haben konstante prozentuale Wachstumslogik, Logarithmen wachsen flach und nur für positive Argumente, inverse lineare Funktionen vertauschen Achsenrollen und Steigungsdeutung.'
+        ],
+        sourceStatus: 'platform-added-explanation'
       }
     ],
     warnings: [
       warning('Logarithmus ohne Positivität', '$\\ln(x)$, $\\ln(2x-1)$ oder $\\ln(a/b)$ sind nur sinnvoll, wenn das gesamte Argument positiv ist.'),
       warning('Inverse Nachfrage vertauscht', 'Bei $Q(P)$ und $P(Q)$ ändern sich nicht nur Symbole, sondern auch Achsenrolle und Steigungsinterpretation.'),
-      warning('Potenz und Exponential verwechselt', '„+3 pro Schritt“ ist linear, „mal 1,03 pro Schritt“ ist exponentiell; $x^a$ ist wieder etwas anderes.')
+      warning('Potenz und Exponential verwechselt', '„+3 pro Schritt“ ist linear, „mal 1,03 pro Schritt“ ist exponentiell; $x^a$ ist wieder etwas anderes.'),
+      warning('Umkehrfunktion ohne Monotonie', 'Nicht jede Beziehung ist global invertierbar. Wenn die Zuordnung nicht eindeutig ist, musst du den Bereich einschränken oder die Inversenidee verwerfen.')
     ],
     formeln: [
       formula('Logarithmengesetze', String.raw`$$\ln(ab)=\ln a+\ln b,\qquad \ln\!\left(\frac{a}{b}\right)=\ln a-\ln b$$`, 'Produkte werden additiv, Quotienten subtraktiv.', { a: 'positiver erster Faktor', b: 'positiver zweiter Faktor' }),
       formula('Exponentielle Gleichung lösen', String.raw`$$e^{kt}=c \iff t=\frac{\ln c}{k}$$`, 'Standardmuster für Wachstum, Halbwerts- oder Verdopplungszeit.', { k: 'Wachstums- oder Zerfallsrate', t: 'Zeit', c: 'positiver Zielwert' }),
       formula('Inverse Funktion', String.raw`$$f^{-1}(y)=x \iff f(x)=y$$`, 'Rollenwechsel zwischen Input und Output.', { f: 'ursprüngliche Funktion', 'f^{-1}': 'Umkehrfunktion' }),
-      formula('Log-Differenz', String.raw`$$\ln Y_t-\ln Y_{t-1}\approx \frac{Y_t-Y_{t-1}}{Y_{t-1}}$$`, 'Näherung der Wachstumsrate bei kleinen Veränderungen.', { 'Y_t': 'aktueller Wert', 'Y_{t-1}': 'Vorperiodenwert' })
+      formula('Log-Differenz', String.raw`$$\ln Y_t-\ln Y_{t-1}\approx \frac{Y_t-Y_{t-1}}{Y_{t-1}}$$`, 'Näherung der Wachstumsrate bei kleinen Veränderungen.', { 'Y_t': 'aktueller Wert', 'Y_{t-1}': 'Vorperiodenwert' }),
+      formula('Basiswechsel beim Logarithmus', String.raw`$$\log_b(x)=\frac{\ln(x)}{\ln(b)}$$`, 'Hilft, wenn Aufgaben mit allgemeinen Logarithmen statt mit dem natürlichen Logarithmus formuliert sind.', { b: 'Logarithmenbasis mit b>0, b\\neq 1', x: 'positives Argument' })
     ],
     aufgaben: [
       task(
@@ -371,6 +392,24 @@ points(c(-1, 3), c(0, 0), pch = 19, col = "firebrick")`,
           step('Steigungsinterpretation sauber abschließen.', null)
         ],
         String.raw`Die inverse Nachfrage lautet $P(Q)=20-\tfrac{Q}{3}$. Im Graphen steht nun der Preis auf der vertikalen Achse und die Steigung gibt Preisänderung pro Mengeneinheit an.`
+      ),
+      task(
+        String.raw`Bestimmen Sie den Definitionsbereich von $f(x)=\ln(2x-1)$ und erklären Sie, warum diese Prüfung vor jeder Umformung stehen muss.`,
+        [
+          step('Das gesamte Logarithmusargument positiv setzen.', String.raw`2x-1>0`),
+          step('Nach $x$ auflösen.', String.raw`x>\frac12`),
+          step('Interpretieren: Ohne diese Bedingung wären spätere Rechenschritte außerhalb der reellen Zahlen nicht zulässig.', null)
+        ],
+        String.raw`Der Definitionsbereich ist $\left(\frac12,\infty\right)$. Die Domänenprüfung ist der erste, nicht der letzte Schritt.`
+      ),
+      task(
+        String.raw`Eine Größe wächst pro Periode um 5 %. Schreiben Sie eine passende Exponentialfunktion auf und erklären Sie, warum $x^ {1,05}$ dafür die falsche Standardlesart wäre.`,
+        [
+          step('Prozentuales Wachstum als Multiplikationsfaktor lesen.', String.raw`g(t)=g_0\cdot 1{,}05^t`),
+          step('Die Variable steht im Exponenten, nicht in der Basis.', null),
+          step('Erklären: $x^{1,05}$ ist eine Potenzfunktion und beschreibt keine konstante prozentuale Wachstumsrate über die Zeit.', null)
+        ],
+        'Konstantes prozentuales Wachstum wird durch eine Exponentialfunktion wie $g_0\\cdot 1{,}05^t$ modelliert, nicht durch eine Potenzfunktion.'
       )
     ],
     intuition: {
@@ -1117,17 +1156,38 @@ eigen(A)$values`,
           'Damit wird univariate Optimierung zur Schnittstelle zwischen Analysis und Fachanwendung.'
         ],
         sourceStatus: 'platform-added-explanation'
+      },
+      {
+        title: 'Kandidatenliste und Signalwörter',
+        body: [
+          'Für die Klausur ist entscheidend, die Signalwörter in der Aufgabenstellung richtig zu lesen: „global“ oder „auf [a,b]“ aktiviert Randpunkte; „lokal“ oder „innere Stelle“ fokussiert zunächst auf stationäre Kandidaten; „ökonomisch optimal“ verlangt zusätzlich eine saubere Zielfunktion.',
+          'Die Kandidatenliste ist daher kein Nebenschritt, sondern die eigentliche Sicherung gegen Auslassungsfehler.'
+        ],
+        sourceStatus: 'source-distilled'
+      },
+      {
+        title: 'Wenn die zweite Ableitung nicht reicht',
+        body: [
+          'In vielen Aufgaben liefert $f\'\'(x^*)$ sofort die Klassifikation. Es gibt aber genau den klausurtypischen Restfall $f\'\'(x^*)=0$. Dann brauchst du den Vorzeichenwechsel von $f\'$ oder einen direkten Funktionswertvergleich und darfst nicht einfach „kein Ergebnis“ stehen lassen.',
+          'Diese Reserve-Logik macht den Unterschied zwischen mechanischem Ableiten und echter Prüfungskompetenz.'
+        ],
+        math: [
+          String.raw`$$f'(x)\ \text{wechselt von }+\text{ nach }- \Rightarrow \text{Maximum},\qquad f'(x)\ \text{wechselt von }-\text{ nach }+ \Rightarrow \text{Minimum}$$`
+        ],
+        sourceStatus: 'platform-added-explanation'
       }
     ],
     warnings: [
       warning('BEO als Endergebnis', 'Eine stationäre Stelle ist nur Kandidat; Klassifikation oder Randvergleich fehlen sonst.'),
       warning('Rand vergessen', 'Bei kompakten Intervallen können globale Optima am Rand liegen.'),
-      warning('Ökonomische Zielfunktion nicht sauber gebildet', 'Vor der Ableitung muss klar sein, ob Gewinn, Kosten oder Nutzen optimiert wird.')
+      warning('Ökonomische Zielfunktion nicht sauber gebildet', 'Vor der Ableitung muss klar sein, ob Gewinn, Kosten oder Nutzen optimiert wird.'),
+      warning('Bei f\'\'(x*)=0 aufhören', 'Wenn die zweite Ableitung keinen eindeutigen Schluss zulässt, musst du mit Vorzeichenwechsel oder Funktionswertvergleich weiterarbeiten.')
     ],
     formeln: [
       formula('Bedingung erster Ordnung', String.raw`$$f'(x^\*)=0$$`, 'Innere Kandidatenstelle.', { "x^*": 'Kandidat für Optimum' }),
       formula('Bedingung zweiter Ordnung', String.raw`$$f''(x^\*)<0\;\Rightarrow\;\text{lokales Maximum},\qquad f''(x^\*)>0\;\Rightarrow\;\text{lokales Minimum}$$`, 'Klassifikation bei differenzierbarer Funktion.', { "f''(x^*)": 'Krümmung im Kandidatenpunkt' }),
-      formula('Randvergleich', String.raw`$$\{x^\*,a,b\}\ \text{prüfen auf}\ [a,b]$$`, 'Auf kompakten Intervallen gehören Randpunkte in die Kandidatenmenge.', { a: 'linker Rand', b: 'rechter Rand' })
+      formula('Randvergleich', String.raw`$$\{x^\*,a,b\}\ \text{prüfen auf}\ [a,b]$$`, 'Auf kompakten Intervallen gehören Randpunkte in die Kandidatenmenge.', { a: 'linker Rand', b: 'rechter Rand' }),
+      formula('Vorzeichenwechseltest', String.raw`$$f'(x)\!:\ +\to - \Rightarrow \text{Maximum},\qquad -\to + \Rightarrow \text{Minimum}$$`, 'Reservezugriff, wenn die BZO nicht greift oder als zusätzliche Kontrolle.', { "f'(x)": 'Steigung links und rechts des Kandidaten' })
     ],
     aufgaben: [
       task(
@@ -1147,6 +1207,25 @@ eigen(A)$values`,
           step('Ökonomische Lesart formulieren.', null)
         ],
         String.raw`Die gewinnmaximale Menge beträgt $y=4$. Dort ist die Zielgröße lokal und hier auch global maximal.`
+      ),
+      task(
+        String.raw`Untersuchen Sie $f(x)=x^3$ im Punkt $x=0$ auf ein lokales Extremum und erläutern Sie, warum die Bedingung $f'(0)=0$ hier nicht ausreicht.`,
+        [
+          step('Erste Ableitung bilden.', String.raw`f'(x)=3x^2,\qquad f'(0)=0`),
+          step('Zweite Ableitung prüfen.', String.raw`f''(x)=6x,\qquad f''(0)=0`),
+          step('Vorzeichen von $f\'$ links und rechts von 0 betrachten: es bleibt nichtnegativ und wechselt nicht von + nach - oder umgekehrt.'),
+          step('Schluss: kein lokales Maximum oder Minimum, sondern nur stationäre Stelle.', null)
+        ],
+        'Die BEO liefert hier nur einen Kandidaten. Ohne Vorzeichenwechsel von $f\'$ entsteht kein lokales Extremum.'
+      ),
+      task(
+        String.raw`Gegeben sei $f(x)=x^2-4x+5$ auf dem Intervall $[3,6]$. Warum reicht es nicht, nur den inneren Scheitelpunkt aus der Standardform zu nennen?`,
+        [
+          step('Die Aufgabe fordert ein globales Intervalloptimum; damit gehören Randpunkte in die Kandidatenmenge.'),
+          step('Der Scheitel liegt zwar bei $x=2$, ist aber außerhalb des zulässigen Bereichs.'),
+          step('Deshalb musst du die Randwerte $f(3)$ und $f(6)$ vergleichen und das zulässige Optimum daraus bestimmen.')
+        ],
+        'Intervalloptimierung heißt Zulässigkeit zuerst: Ein formaler Kandidat außerhalb von $[3,6]$ entscheidet die Aufgabe nicht.'
       )
     ],
     intuition: {
@@ -1248,18 +1327,39 @@ optimize(profit, interval = c(5, 10), maximum = TRUE)`,
           String.raw`$$L(x,y)=f(x_0,y_0)+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$$`
         ],
         sourceStatus: 'source-distilled'
+      },
+      {
+        title: 'Gradient und Niveau-Linien als Lesewerkzeug',
+        body: [
+          'Eine zentrale Prüfungskompetenz besteht darin, Richtungs- und Konturlogik nicht zu vermischen. Niveau-Linien zeigen Kombinationen mit gleichem Funktionswert; der Gradient zeigt die Richtung des stärksten Anstiegs und steht lokal senkrecht auf diesen Konturen.',
+          'Damit wird aus einer formalen Ableitungsrechnung ein graphisches Lesewerkzeug für spätere Isoquanten-, Indifferenz- und Lagrange-Aufgaben.'
+        ],
+        math: [
+          String.raw`$$\nabla f(x,y)=\begin{pmatrix}f_x(x,y)\\ f_y(x,y)\end{pmatrix}$$`
+        ],
+        sourceStatus: 'platform-added-explanation'
+      },
+      {
+        title: 'Welche Frage beantwortet welche Ableitung?',
+        body: [
+          'Gerade unter Zeitdruck musst du die Frageart sauber erkennen: Partielle Ableitung für „Was passiert, wenn nur x steigt?“, totales Differential für „Was passiert, wenn sich mehrere Größen gemeinsam ändern?“, Homogenität für „Was passiert bei proportionaler Skalierung aller Inputs?“.',
+          'Diese Zugriffswahl ist oft wertvoller als der einzelne Rechenschritt, weil sie den Lösungsweg überhaupt erst korrekt aufsetzt.'
+        ],
+        sourceStatus: 'platform-added-explanation'
       }
     ],
     warnings: [
       warning('Partiell und total verwechselt', 'Eine partielle Ableitung hält die übrigen Variablen fest; die totale Ableitung nicht.'),
       warning('Konturlinie als Funktionsgraph gelesen', 'Niveau- oder Konturlinien zeigen gleiche Funktionswerte, nicht direkt den Graphen in 3D.'),
-      warning('Homogenität ohne gemeinsame Skalierung', 'Homogenität bezieht sich auf proportionale Veränderung aller relevanten Inputs, nicht nur einer einzigen Variablen.')
+      warning('Homogenität ohne gemeinsame Skalierung', 'Homogenität bezieht sich auf proportionale Veränderung aller relevanten Inputs, nicht nur einer einzigen Variablen.'),
+      warning('Gradient als Zahl statt Richtung gelesen', 'Der Gradient ist ein Vektor. Seine Komponenten sind partielle Ableitungen; seine Rolle ist Richtungs- und Steigungsinformation, nicht bloß eine Einzelzahl.')
     ],
     formeln: [
       formula('Partielle Ableitung', String.raw`$$f_x(x,y)=\frac{\partial f}{\partial x}(x,y)$$`, 'Marginale Änderung in x-Richtung bei festem y.', { x: 'erste Variable', y: 'zweite Variable' }),
       formula('Totales Differential', String.raw`$$df=f_x\,dx+f_y\,dy$$`, 'Lokale Gesamtänderung aus allen kleinen Einzeländerungen.', { df: 'Gesamtänderung', dx: 'kleine Änderung in x', dy: 'kleine Änderung in y' }),
       formula('Kettenregel mehrerer Variablen', String.raw`$$\frac{dz}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}$$`, 'Wenn x und y selbst von t abhängen.', { z: 'Zielfunktion', t: 'gemeinsamer Treiber' }),
-      formula('Homogenität', String.raw`$$f(tx,ty)=t^k f(x,y)$$`, 'Skalierungstest einer Funktion vom Grad k.', { t: 'gemeinsamer Skalierungsfaktor', k: 'Homogenitätsgrad' })
+      formula('Homogenität', String.raw`$$f(tx,ty)=t^k f(x,y)$$`, 'Skalierungstest einer Funktion vom Grad k.', { t: 'gemeinsamer Skalierungsfaktor', k: 'Homogenitätsgrad' }),
+      formula('Gradient', String.raw`$$\nabla f(x,y)=\begin{pmatrix}f_x(x,y)\\ f_y(x,y)\end{pmatrix}$$`, 'Sammelt die partiellen Ableitungen als Richtungsinformation des stärksten Anstiegs.', { '\\nabla f': 'Gradientenvektor' })
     ],
     aufgaben: [
       task(
@@ -1279,6 +1379,24 @@ optimize(profit, interval = c(5, 10), maximum = TRUE)`,
           step('Lokale Lesart formulieren.', null)
         ],
         String.raw`Das totale Differential liefert die lineare Näherung der Funktionsänderung bei kleinen gleichzeitigen Änderungen von $x$ und $y$.`
+      ),
+      task(
+        String.raw`Eine Niveau-Linie von $f(x,y)$ ist gegeben durch $f(x,y)=10$. Was sagt diese Information, und was sagt sie ausdrücklich nicht?`,
+        [
+          step('Sie beschreibt alle Punktepaare $(x,y)$ mit demselben Funktionswert 10.'),
+          step('Damit ist noch nicht der 3D-Graph selbst gegeben, sondern eine Konturlinie gleicher Höhe.'),
+          step('Die Lösung muss deshalb Gleichwertigkeit entlang der Linie und fehlende direkte Höhenansicht sauber trennen.')
+        ],
+        'Niveau-Linien zeigen gleiche Funktionswerte, nicht den gesamten Flächengraphen. Sie sind Leselinien gleicher Höhe.'
+      ),
+      task(
+        String.raw`Prüfen Sie für $f(x,y)=x^2y$, ob die Funktion homogen ist, und nennen Sie den Grad.`,
+        [
+          step('Gemeinsame Skalierung einsetzen.', String.raw`f(tx,ty)=(tx)^2(ty)=t^3x^2y=t^3f(x,y)`),
+          step('Mit der Homogenitätsdefinition vergleichen.', null),
+          step('Schluss: Die Funktion ist homogen vom Grad 3.', null)
+        ],
+        String.raw`$f(x,y)=x^2y$ ist homogen vom Grad $3$, weil gemeinsame Skalierung mit $t$ den Funktionswert mit $t^3$ multipliziert.`
       )
     ],
     intuition: {

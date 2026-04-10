@@ -1,7 +1,7 @@
 export const GRAPH_CONCEPTS = new Set([
   'ricardo',
   'tarifmodell',
-  'paritaeten',
+  'zinsparitaet',
   'monetaerer_ansatz',
   'overshooting',
   'trilemma'
@@ -47,27 +47,27 @@ export function renderGraphPanel(id) {
         <div id="graph_info" class="graph-info" aria-live="polite"></div>
       </div>
     `,
-    paritaeten: `
+    zinsparitaet: `
       <div class="graph-container">
-        <h3 class="graph-panel-title">UIP: erwarteter Ertrag und Gleichgewichtskurs</h3>
+        <h3 class="graph-panel-title">Zinsparität: erwarteter Ertrag und Gleichgewichtskurs</h3>
         <div class="graph-controls">
           <div class="ctrl-group">
             <label for="g_iwb_i_home">Inlandszins i</label>
-            <input type="range" id="g_iwb_i_home" min="0" max="8" step="0.5" value="4" oninput="window.initGraph('paritaeten', false)">
+            <input type="range" id="g_iwb_i_home" min="0" max="8" step="0.5" value="4" oninput="window.initGraph('zinsparitaet', false)">
             <div class="val" id="v_iwb_i_home">4.0</div>
           </div>
           <div class="ctrl-group">
             <label for="g_iwb_i_foreign">Auslandszins i*</label>
-            <input type="range" id="g_iwb_i_foreign" min="0" max="8" step="0.5" value="2" oninput="window.initGraph('paritaeten', false)">
+            <input type="range" id="g_iwb_i_foreign" min="0" max="8" step="0.5" value="2" oninput="window.initGraph('zinsparitaet', false)">
             <div class="val" id="v_iwb_i_foreign">2.0</div>
           </div>
           <div class="ctrl-group">
             <label for="g_iwb_e_exp">Erwarteter Kurs Eᵉ</label>
-            <input type="range" id="g_iwb_e_exp" min="0.8" max="1.6" step="0.05" value="1.2" oninput="window.initGraph('paritaeten', false)">
+            <input type="range" id="g_iwb_e_exp" min="0.8" max="1.6" step="0.05" value="1.2" oninput="window.initGraph('zinsparitaet', false)">
             <div class="val" id="v_iwb_e_exp">1.20</div>
           </div>
         </div>
-        <canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: UIP mit Auslandsertragskurve und Inlandszins."></canvas>
+        <canvas id="graph_canvas" width="800" height="500" role="img" aria-label="Grafik: Zinsparität mit Auslandsertragskurve und Inlandszins."></canvas>
         <div id="graph_info" class="graph-info" aria-live="polite"></div>
       </div>
     `,
@@ -132,4 +132,3 @@ export function renderGraphPanel(id) {
 
   return `<div class="panel active">${graphConfigs[id] || '<div class="graph-empty-state">Für dieses Konzept steht keine eigene Grafik im Vordergrund.</div>'}</div>`;
 }
-

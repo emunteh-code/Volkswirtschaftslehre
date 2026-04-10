@@ -37,7 +37,7 @@ const baseRenderer = createRenderer({
     return renderRAnwendungTab(blocks, 'statistik', { conceptId });
   },
   homeLernDashboardPilotNote:
-    'Pilot: Kennzahlen aus Lernprotokoll im Dashboard (Kasten „Kennzahlen aus dem Lernprotokoll“).'
+    'Nur lokal gespeicherte Lernspuren dieses Moduls.'
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

@@ -1,376 +1,339 @@
-# Release-Candidate Audit and Freeze Pass 1
+# Release-Candidate Freeze Pass 1
 
 Date: 2026-04-10  
-Workspace note: this judgment reflects the **current local workspace state**, including the already-present reconstruction work in `statistik`, `recht`, `internationale-wirtschaftsbeziehungen`, `makro2`, `finanzwirtschaft`, and the uncommitted backbone trust/parity work.
+Repo: `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4`
 
-## What I re-read for this pass
+## Scope
 
-Actually available audit chain in the repo:
+This was a **release-discipline pass**, not another improvement round.
 
-- [full-learning-portal-forensic-audit-pass-1.md](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/docs/audits/full-learning-portal-forensic-audit-pass-1.md)
-- [portal-backbone-trust-parity-pass-1.md](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/docs/audits/portal-backbone-trust-parity-pass-1.md)
+The job here was to decide:
 
-Important honesty note:
+- what is now stable enough to freeze
+- what should be accepted as an intentional limitation
+- whether any tiny final fix was still worth making
+- whether the portal is honestly ready for release
 
-- the later requested docs for `flagship-density-equalization`, `shared-r-exam-surface-polish`, and `final-release-blocker-closure` do **not** exist as written artifacts in this repo state
-- therefore this freeze judgment is based on:
-  - the two real audit docs above
-  - the actual current code/runtime state
-  - one fresh release-candidate browser sweep
+## Audit chain reviewed
 
-## Exact files changed in this pass
+Actually re-read for this refreshed freeze judgment:
 
-No product code/content/CSS changes were justified in this pass.
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/docs/audits/full-learning-portal-forensic-audit-pass-1.md`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/docs/audits/portal-backbone-trust-parity-pass-1.md`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/docs/audits/audit-driven-unresolved-issues-closure-pass-1.md`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/docs/audits/final-release-blocker-closure-pass-1.md`
 
-Files added for release-candidate verification and documentation:
+Why these four:
 
-- [.qa/release_candidate_freeze_pass1.mjs](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release_candidate_freeze_pass1.mjs)
-- [docs/audits/release-candidate-freeze-pass-1.md](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/docs/audits/release-candidate-freeze-pass-1.md)
+- the forensic audit established the original blocker field
+- the backbone pass established whether the student-accountability surfaces became trustworthy enough
+- the unresolved-issues closure pass burned down the last explicitly open backlog slice
+- the final blocker-closure pass already reduced the remaining state to caveats rather than open blockers
 
 ## Current release-candidate state
 
-### What is strong now
+### What is strong and stable now
 
-- the portal shell feels coherent across the live module set
-- `mikro1` is still a strong flagship benchmark
-- `oekonometrie`, `statistik`, `recht`, `internationale-wirtschaftsbeziehungen`, `makro2`, and most of `finanzwirtschaft` feel serious enough to ship
-- the backbone trust issues are materially improved:
-  - dashboards read like learning surfaces
-  - mistake-review reads like a student tool
-  - landing/live-registry scope is clearer
-  - `mathematik` now participates in the learner backbone
-  - `mikro2` special status is explicit instead of hidden
-- shared R wording is notably less tool-first than before
+- the portal shell reads as one coherent product family
+- `mikro1` remains a strong flagship benchmark
+- the strongest rebuilt modules now feel serious enough to ship:
+  - `oekonometrie`
+  - `statistik`
+  - `recht`
+  - `internationale-wirtschaftsbeziehungen`
+  - `makro2`
+  - most of `finanzwirtschaft`
+- dashboard and mistake-review now read like student-facing study tools instead of internal pilot surfaces
+- `mathematik` now participates credibly in the learner backbone
+- `mikro2` now preserves trust through explicit special-status handling instead of implicit asymmetry
+- shared R and exam surfaces are polished enough that they no longer cause an obvious secondary-utility drop on representative paths
 
-### What is acceptable, even if not perfect
+### What is imperfect but acceptable
 
-- some modules are still slightly lighter than the very strongest `mikro1` pages
-- dashboards and mistake-review remain local-browser learning tools rather than full cross-device learner records
-- R surfaces are better in tone and hierarchy, but still not as flagship-rich as the best concept pages
-- exam surfaces are serious enough to ship, even though not every module has the same exam-bank depth
+- some modules remain slightly lighter than the strongest `mikro1` pages
+- dashboard and mistake-review remain browser-local tools, not cross-device learner history
+- some local R blocks are still more utilitarian than the best concept pages
+- `mikro2` remains academically special-case because the official in-repo Mikro II source corpus is still missing
 
-### What is still imperfect but now non-blocking
+### What would now create regression risk if touched again
 
-- `mikro2` is still academically special-case because the source corpus is missing
-- `mathematik` is stronger than before but still not as naturally “native” to the portal family as `mikro1`
-- some module clusters remain somewhat lighter than the best flagship pages:
-  - parts of `makro1`
-  - parts of `jahresabschluss`
-  - late capital-structure cluster in `finanzwirtschaft`
-  - some `mathematik` concept clusters
+- broad module reconstructions
+- broad wording churn on shared learner surfaces
+- another shared R redesign
+- another generic exam-surface redesign
+- another cross-portal polish sweep without a reproduced blocker
 
-These are real imperfections, but they no longer read as obvious release blockers in the sampled runtime.
+At this point, more broad touching is more likely to destabilize than to materially improve launch confidence.
+
+## Exact files changed in this pass
+
+### Tiny final polish fix
+
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/favicon.svg`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/mikro1/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/mikro2/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/makro1/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/makro2/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/mathematik/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/oekonometrie/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/statistik/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/finanzwirtschaft/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/jahresabschluss/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/recht/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/internationale-wirtschaftsbeziehungen/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/politisches-system-brd/index.html`
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/r/index.html`
+
+### Documentation
+
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/docs/audits/release-candidate-freeze-pass-1.md`
+
+## Tiny final fix made and why it was justified
+
+### Fix
+
+Added one shared favicon asset and linked it from the top-level portal entry pages.
+
+### Why this qualified as a valid last-minute fix
+
+It met the freeze-pass bar:
+
+- small
+- low-risk
+- immediately user-visible in product polish terms
+- removed the only reproduced page error from the representative release verification
+
+### Why it was worth doing
+
+Before the fix, the release-oriented live sweep still reproduced one nuisance issue:
+
+- landing-page favicon `404`
+
+That was not a blocker, but it was exactly the kind of tiny trust/polish seam worth closing before freeze because it removed the last reproduced page error without reopening broader work.
 
 ## Areas now frozen
 
-### Freeze now: broad module reconstruction
+### Freeze now: live module content architecture
 
 Do not reopen broad reconstruction on:
 
 - `mikro1`
+- `mikro2`
+- `makro1`
 - `makro2`
 - `oekonometrie`
 - `statistik`
+- `finanzwirtschaft`
+- `mathematik`
+- `jahresabschluss`
 - `recht`
 - `internationale-wirtschaftsbeziehungen`
-- `finanzwirtschaft`
-- `makro1`
-- `jahresabschluss`
-- `mathematik`
 
-Reason:
+Why:
 
-- the risk of regression is now higher than the expected value of one more broad pass
-- remaining weaknesses are narrower and mostly acceptable for release
+- the remaining gaps are narrower than the risk of another reconstruction round
+- the portal is already past the point where another broad density cycle helps launch confidence more than it hurts stability
 
-### Freeze now: stable shared product surfaces
+### Freeze now: shared student-facing backbone surfaces
 
-Do not reopen broad shared redesign on:
+Do not reopen broad changes to:
 
-- landing page shell and module registry presentation
-- sidebar/topbar/tab-row shell language
+- landing page / live registry presentation
 - shared dashboard framing
 - shared mistake-review framing
 - shared R-surface wording hierarchy
-- shared exam-shell framing
+- shared quick-exam / full-exam framing
+- shared graph visual system
 
-Reason:
+Why:
 
-- these surfaces are now coherent enough
-- another broad pass would mostly create regression risk and wording churn
+- these surfaces are now coherent enough across the sampled release paths
+- another broad pass would mostly create wording churn and regression risk
 
-### Freeze now: graph/focus on “one more polish pass”
+### Freeze now: visual-system polish sweeps
 
-Do not initiate another generic polish sweep across graphs, formulas, R, exams, or shell styling unless a new concrete blocker is reproduced.
+Do not initiate another generic pass on:
 
-Reason:
+- shell polish
+- graph polish
+- formula polish
+- R polish
+- exam polish
 
-- the platform is now at the point where unscoped polishing is more likely to destabilize than to meaningfully improve launch confidence
-
-## Areas not truly frozen in principle
-
-These should **not** be reopened before release, but they remain legitimate future workstreams after release:
-
-### `mikro2` source-provenance expansion
-
-Not frozen conceptually, but blocked now.
-
-Reason:
-
-- if a real Mikro II corpus is added later, `mikro2` should be revisited for true provenance and source-backed expansion
-- until then, the correct state is explicit special-status handling, not further fake grounding
-
-### `mathematik` granularity/depth expansion
-
-Not frozen conceptually, but not worth reopening before release.
-
-Reason:
-
-- future source-backed granularity refinement could still improve the module
-- but current state is already good enough to avoid blocking release
-
-### Learner analytics depth
-
-Not frozen conceptually, but out of scope for launch.
-
-Reason:
-
-- dashboard and mistake-review remain browser-local and only partially symmetric across all exercise types
-- fixing that properly is a post-release analytics/backbone project, not a last-minute ship task
+unless a new concrete post-freeze issue is reproduced.
 
 ## Intentional limitations accepted at release
 
-### 1. `mikro2` ships with explicit source-corpus caveat
+### 1. `mikro2` ships with explicit source-corpus special status
 
-Accepted limitation:
+What it is:
 
-- `mikro2` is live
-- `mikro2` is useful
-- but `mikro2` is **not** source-corpus-parity-complete because the official in-repo corpus is missing
+- `mikro2` remains live and useful
+- but it still does not have the official in-repo Mikro II source corpus
 
-Why acceptable now:
+Why acceptable:
 
 - the limitation is explicit on landing/module surfaces
-- this is a provenance limitation, not a broken UX or broken runtime problem
+- the module no longer pretends direct-source parity it does not have
 
-### 2. Dashboard and mistake-review are local-browser tools
+Why this should not trigger more work now:
 
-Accepted limitation:
+- this is blocked by missing source materials, not by a correctable release-surface defect
 
-- these surfaces only reflect local browser data
-- they do not represent cross-device or server-side learner history
+### 2. Dashboard and mistake-review remain browser-local learner tools
 
-Why acceptable now:
+What it is:
 
-- the product is honest about it
-- the surfaces remain genuinely useful for a single-browser study workflow
+- these surfaces reflect local browser state, not synced learner history
 
-### 3. Some modules remain slightly lighter than `mikro1`
+Why acceptable:
 
-Accepted limitation:
+- the product is honest about the scope
+- they remain genuinely useful for single-browser study accountability
 
-- `makro1`, `jahresabschluss`, parts of `finanzwirtschaft`, and parts of `mathematik` still do not match the absolute strongest `mikro1` pages page-for-page
+Why this should not trigger more work now:
 
-Why acceptable now:
+- fixing it properly is a post-release learner-data/backbone project, not a freeze-pass patch
 
-- the remaining gap is no longer a dramatic “second-tier product” drop on the sampled paths
-- this is now a quality delta, not an honest blocker
+### 3. Some modules remain slightly lighter than the strongest `mikro1` pages
 
-### 4. Exercise/exam logging depth is not perfectly symmetric
+What it is:
 
-Accepted limitation:
+- some clusters in `makro1`, `jahresabschluss`, `finanzwirtschaft`, and `mathematik` still do not match the absolute strongest `mikro1` pages page-for-page
 
-- some modules and surfaces still produce richer backbone traces than others
+Why acceptable:
 
-Why acceptable now:
+- the remaining gap is now a quality delta, not a visible second-tier product break on the sampled release paths
 
-- the product no longer pretends otherwise
-- this matters less than stability and release discipline right now
+Why this should not trigger more work now:
 
-### 5. R surfaces remain simpler than flagship theory pages
+- another density round before launch would increase regression risk more than release confidence
 
-Accepted limitation:
+### 4. Some local R blocks remain more utilitarian than the best concept pages
 
-- R pages are improved but still more utilitarian than the strongest concept pages
+What it is:
 
-Why acceptable now:
+- the shared R shell is strong enough now, but some module-local authoring remains simpler than the flagship concept pages
 
-- the worst tool-first tone has been removed
-- the remaining gap is polish depth, not student-breaking confusion
+Why acceptable:
 
-## Tiny last fixes made in this pass
+- the worst tool-first tone is already gone
+- the remaining gap is local content richness, not broken student guidance
 
-No product fix was justified.
+Why this should not trigger more work now:
 
-Why no final code/content/CSS change was made:
+- this is post-release enrichment territory, not a freeze blocker
 
-- the fresh release-candidate browser sweep reproduced **no current blocker**
-- additional edits would now carry more regression risk than launch value
-- the disciplined move is to freeze, not to invent one more tweak
+## What is not a blocker anymore
+
+These were explicitly re-evaluated as part of this freeze judgment:
+
+| Candidate issue | Current judgment | Why it does not block freeze |
+| --- | --- | --- |
+| `mikro2` source-corpus asymmetry | accepted limitation | explicit special-status handling preserves trust |
+| browser-local dashboard/mistake-review scope | accepted limitation | useful and honest; not a broken learner experience |
+| some local R blocks still simpler than flagship concept pages | accepted limitation | shared R surface is already release-worthy |
+| some modules still slightly lighter than strongest `mikro1` pages | accepted limitation | no longer a dramatic product-quality drop on representative paths |
 
 ## Exact browser verification performed
 
-Verification runner:
+Verification runner reused:
 
-- [.qa/release_candidate_freeze_pass1.mjs](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release_candidate_freeze_pass1.mjs)
+- `/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main 4/.qa/final_release_blocker_closure_pass1.mjs`
 
 Base URL:
 
 - `http://127.0.0.1:4182`
 
-Representative high-value paths checked:
+Representative release-candidate paths checked:
 
 ### 1. Landing
 
 Verified:
 
-- `11` live/public modules visible
-- shelf note clarifies live-registry boundary
+- `11` live module tiles
+- live/public shelf note visible
 - `mikro2` special-status note visible
-
-Artifact:
-
-- [landing.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/landing.png)
 
 ### 2. Flagship module
 
 Verified:
 
 - `mikro1` → `kmm`
-- theory page renders as a dense flagship surface
 - `sectionBlocks = 6`
 
-Artifact:
+### 3. Previously weak module
 
-- [mikro1-kmm.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/mikro1-kmm.png)
+Verified:
 
-### 3. Exam path
+- `finanzwirtschaft` → `bezugsrecht`
+- `sectionBlocks = 5`
+
+### 4. Dashboard path
+
+Verified:
+
+- `mathematik` dashboard
+- title `Lernprotokoll und nächste Schritte`
+- direct `Fehlerprotokoll` CTA present
+
+### 5. Mistake-review path
+
+Verified:
+
+- `mathematik` → `Fehlerprotokoll`
+- subtitle and action wording are student-facing
+
+### 6. Exam path
 
 Verified:
 
 - `mikro1` → `probeklausur_1`
-- full exam opens cleanly
 - `questionCount = 39`
-- exam surface shows serious exam metadata/framing
-
-Artifact:
-
-- [mikro1-full-exam.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/mikro1-full-exam.png)
-
-### 4. Previously weaker module
-
-Verified:
-
-- `mathematik` → `funktionen_gleichungen`
-- representative theory page renders with visible density
-- `sectionBlocks = 5`
-
-Artifact:
-
-- [mathematik-funktionen.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/mathematik-funktionen.png)
-
-### 5. Dashboard path
-
-Verified:
-
-- `mathematik` dashboard with seeded local learner state
-- derived panel title `Lernprotokoll und nächste Schritte`
-- next-step guidance visible
-- `Fehlerprotokoll öffnen` entry visible
-
-Artifact:
-
-- [mathematik-dashboard.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/mathematik-dashboard.png)
-
-### 6. Special-status module trust path
-
-Verified:
-
-- `mikro2` home
-- visible special-status wording remains present
-
-Artifact:
-
-- [mikro2-home.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/mikro2-home.png)
+- exam framing present and serious
 
 ### 7. R path
 
 Verified:
 
 - `oekonometrie` → `matrix_notation` → `R-Übung`
-- `Live-R` wording present
-- `Prüfungsregel:` present
-- no `Runtime:` prefix
-- no `Mini-Transfer:`
+- `Interaktiv im Browser` present
+- `Prüfungsregel` present
+- no regression to `Runtime:` or `Mini-Transfer:`
 
-Artifact:
+### 8. Special-status trust path
 
-- [oekonometrie-r.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/release-candidate-freeze-pass-1/oekonometrie-r.png)
+Verified:
 
-### Browser verification result
+- `mikro2` home
+- explicit `Sonderstatus` wording present
 
-Final structured result:
+### Result
 
-- failures: `[]`
-- reproduced page errors: none on the sampled release-candidate paths
+Final live verification result after the favicon fix:
 
-## What should be merged
+- `findings: []`
+- no reproduced page errors on the checked release-candidate paths
 
-If the goal is to ship this release candidate, the correct merge target is:
+## Explicit release-candidate verdict
 
-- the already-present reconstruction work in the stronger rebuilt modules
-- the backbone trust/parity work
-- the explicit `mikro2` trust/status handling
-- the shared R tone cleanup
+**Ready to ship with explicit caveats.**
 
-In other words:
+## Explicit recommendation
 
-- merge the **current audited product state**
-- do **not** hold release for another speculative polish cycle
-
-## What should explicitly not be worked on now
-
-Do **not** reopen before release:
-
-- broad flagship-density expansion
-- another shared R redesign
-- another exam-surface redesign
-- another shell polish sweep
-- new module splits unless a real broken blocker appears
-- provenance “fixes” for `mikro2` without a source corpus
-
-## Final release-candidate verdict
-
-### Verdict
-
-**Ready to ship with caveats.**
-
-### Why this is the honest verdict
-
-- the portal now feels like a coherent, serious learning product on the sampled high-value paths
-- no sampled path reproduced a release-blocking runtime, shell, dashboard, exam, or R-surface failure
-- the remaining gaps are real, but they are now mostly explicit and acceptable limitations rather than hidden blockers
-
-### Exact caveats
-
-- `mikro2` ships under explicit special-status/source-corpus caveat
-- dashboards/mistake-review remain local-browser tools
-- some modules remain somewhat lighter than the strongest `mikro1` pages
-- logging depth remains uneven across exercise types/modules
-
-## Final recommendation
-
-**Freeze now**, after intentionally merging the currently verified local product state.
+**Freeze now.**
 
 Not:
 
-- freeze after another broad product pass
-- freeze after another aesthetic polish loop
-- freeze after a speculative reconstruction of already-usable modules
+- freeze after another broad density pass
+- freeze after another shared polish sweep
+- freeze after speculative provenance work
 
 The disciplined release move is:
 
-1. merge the current audited local state
-2. document the caveats above
-3. stop making broad product changes
-4. defer future depth/provenance expansions to post-release work
+1. merge the current audited local product state
+2. keep the limitations above explicit
+3. stop making broad product edits
+4. defer future density/provenance/enrichment work to post-release planning
+

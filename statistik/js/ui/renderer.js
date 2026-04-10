@@ -37,7 +37,7 @@ const baseRenderer = createRenderer({
     return renderRAnwendungTab(blocks, 'statistik', { conceptId });
   },
   homeLernDashboardPilotNote:
-    'Nur lokal gespeicherte Lernspuren dieses Moduls.'
+    'Basiert auf Lernspuren aus diesem Browser.'
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

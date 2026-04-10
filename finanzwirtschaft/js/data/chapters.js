@@ -730,11 +730,22 @@ export const CONTENT = {
         'Ökonomische Interpretation',
         `<p>Das Bezugsrecht ist kein Zusatzgeschenk, sondern ein Kompensationsmechanismus. Unter vollkommenem Kapitalmarkt bleibt die Vermögensposition des Altaktionärs bei korrekter Berücksichtigung des Bezugsrechts unverändert.</p>
          ${warn('Verwässerungsfehler:', 'Ohne Bezug auf den Ex-Kurs bleibt oft unklar, warum Altaktionäre trotz niedrigen Emissionskurses wirtschaftlich nicht zwingend schlechter gestellt sind.')}`
+      ),
+      section(
+        'Bezugsverhältnis und Rechenroutine',
+        `<p>Klausursicher wird das Thema erst mit einer festen Rechenfolge: Zuerst das Bezugsverhältnis aus alten und neuen Aktien lesen, dann den theoretischen Ex-Kurs bestimmen, daraus den Bezugsrechtswert ableiten und erst anschließend die Vermögensposition des Altaktionärs interpretieren.</p>
+         <p>Diese Reihenfolge verhindert, dass Emissionskurs, Mischkurs und Bezugsrecht ungeordnet durcheinandergeraten.</p>`
+      ),
+      section(
+        'Cum-, Ex- und Vermögensposition sauber trennen',
+        `<p>Der alte Kurs <em>cum Bezugsrecht</em> und der neue Ex-Kurs beschreiben nicht dieselbe Vermögensposition. Erst wenn Kursdifferenz und Bezugsrecht gemeinsam gelesen werden, wird klar, dass das Bezugsrecht keine Gratiszugabe ist, sondern nur den Verwässerungseffekt neutralisiert.</p>
+         ${warn('Kursvergleichsfehler:', 'Wer nur P₀ mit P_N oder nur den Emissionskurs mit dem alten Börsenkurs vergleicht, verpasst die eigentliche Vermögenslogik der Kapitalerhöhung.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Theoretischer Ex-Kurs', eq: String.raw`$$P_{ex} = \frac{nP_0 + mP_N}{n+m}$$`, desc: 'Neuer Mischkurs nach Ausgabe alter und neuer Aktien.' },
-      { label: 'Bezugsrechtswert', eq: String.raw`$$BR = P_0 - P_{ex}$$`, desc: 'Das Bezugsrecht gleicht den Verwässerungseffekt aus.' }
+      { label: 'Bezugsrechtswert', eq: String.raw`$$BR = P_0 - P_{ex}$$`, desc: 'Das Bezugsrecht gleicht den Verwässerungseffekt aus.' },
+      { label: 'Vermögensgleichheit', eq: String.raw`$$P_0 = P_{ex} + BR$$`, desc: 'Alter Kurs, Ex-Kurs und Bezugsrechtswert gehören zu derselben Vermögensposition.' }
     ],
     aufgaben: [
       task(
@@ -752,6 +763,24 @@ export const CONTENT = {
           step('Bezugsrecht ergänzen.', String.raw`\text{Zusammen mit dem Bezugsrecht wird die Vermögensposition vollständig.}`)
         ],
         'Der Emissionskurs allein ist irreführend, weil erst Ex-Kurs und Bezugsrecht die ökonomische Gesamtwirkung auf alte Aktionäre zeigen.'
+      ),
+      task(
+        'Warum ist das Bezugsrecht kein „Geschenk“, obwohl es einen positiven Wert hat?',
+        [
+          step('Den Wertverlust der Altaktie durch den Ex-Kurs sichtbar machen.', String.raw`\text{Mit der Kapitalerhöhung fällt der Kurs von } P_0 \text{ auf } P_{ex}.`),
+          step('Dann den Ausgleich lesen.', String.raw`\text{Gerade diese Differenz wird über } BR = P_0 - P_{ex} \text{ kompensiert.}`),
+          step('Die Vermögenslogik schließen.', String.raw`\text{Das Bezugsrecht ersetzt also Verwässerungsverlust, es schafft keinen Gratismehrwert.}`)
+        ],
+        'Das Bezugsrecht schützt Vermögen, es erzeugt nicht aus dem Nichts zusätzliches Vermögen.'
+      ),
+      task(
+        'Welche sichere Klausurroutine sollte bei einer Bezugsrechtsaufgabe sichtbar sein?',
+        [
+          step('Zuerst Altaktien, neue Aktien und Emissionskurs strukturiert notieren.'),
+          step('Dann Ex-Kurs und Bezugsrechtswert in fester Reihenfolge berechnen.'),
+          step('Zum Schluss erst die Vermögensposition des Altaktionärs wirtschaftlich lesen.')
+        ],
+        'Die klausursichere Reihenfolge lautet: Verhältnis -> Ex-Kurs -> Bezugsrecht -> Vermögensurteil.'
       )
     ]
   },
@@ -777,11 +806,21 @@ export const CONTENT = {
         'Interpretation',
         `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
          ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
+      ),
+      section(
+        'Wann das Gordon-Modell passt und wann nicht',
+        `<p>Die Kurzformel <code>k_E = D₁ / P₀ + g</code> setzt mehr voraus, als viele Lösungen sichtbar machen: eine fortgeführte Dividendenpolitik, ein plausibel konstantes Wachstum und einen positiven Abstand zwischen geforderter Rendite und Wachstumsrate. Fehlt diese Stabilität, kippt das Modell schnell von einer Bewertungsstütze zu einer Scheingenauigkeit.</p>
+         ${warn('Modellblindheit:', 'Nicht jede Aktie mit Ausschüttung passt automatisch in das Gordon-Schema. Vor dem Rechnen ist zu prüfen, ob konstantes Wachstum und Dividendenkontinuität überhaupt plausibel sind.')}`
+      ),
+      section(
+        'D₁, D₀ und die Entscheidungslesart',
+        `<p>In Klausuren wird häufig die nächste erwartete Dividende <code>D₁</code> mit der zuletzt gezahlten Dividende <code>D₀</code> verwechselt. Das ist kein Detailfehler, sondern ändert unmittelbar den geforderten Renditesatz. Erst wenn klar ist, welche Ausschüttung der Markt heute bereits antizipiert, darf die Formel eingesetzt und das Ergebnis als Mindestverzinsung interpretiert werden.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Eigenkapitalkosten', eq: String.raw`$$k_E = \frac{D_1}{P_0} + g$$`, desc: 'Gordon-Growth-Formel bei konstantem Dividendenwachstum.', variables: { 'D_1': 'erwartete Dividende der nächsten Periode', 'P_0': 'aktueller Aktienkurs', 'g': 'erwartete konstante Wachstumsrate der Dividenden' } },
-      { label: 'Marktgleichgewichtslogik', eq: String.raw`$$P_0 = \sum_{t=1}^{\infty}\frac{E(D_t)}{(1+k_E)^t}$$`, desc: 'Der heutige Kurs ist der Barwert der erwarteten Ausschüttungen.' }
+      { label: 'Marktgleichgewichtslogik', eq: String.raw`$$P_0 = \sum_{t=1}^{\infty}\frac{E(D_t)}{(1+k_E)^t}$$`, desc: 'Der heutige Kurs ist der Barwert der erwarteten Ausschüttungen.' },
+      { label: 'Gordon-Bedingung', eq: String.raw`$$P_0 = \frac{D_1}{k_E-g}\qquad (k_E > g)$$`, desc: 'Nur bei dauerhaftem Wachstum unterhalb der geforderten Rendite ist die Gordon-Logik sinnvoll interpretierbar.' }
     ],
     aufgaben: [
       task(
@@ -808,6 +847,24 @@ export const CONTENT = {
           step('Konsequenz nennen.', String.raw`\text{Eigenkapitalkosten sind deshalb marktbasiert und nicht frei wählbar.}`)
         ],
         'Der aktuelle Kurs ist die Brücke zwischen erwarteten Ausschüttungen und gefordertem Eigenkapitalkostensatz.'
+      ),
+      task(
+        'Warum gehört in die Gordon-Formel die nächste erwartete Dividende D₁ und nicht mechanisch die zuletzt gezahlte Dividende D₀?',
+        [
+          step('Die Formel liest den heutigen Kurs als Barwert künftiger Ausschüttungen, nicht vergangener Zahlungen.'),
+          step('Darum muss die nächste erwartete Dividende eingesetzt werden; D₀ wäre nur nach einer sauberen Wachstumsfortschreibung zulässig.'),
+          step('Ein D₀/D₁-Fehler verzerrt damit direkt den abgeleiteten Eigenkapitalkostensatz.')
+        ],
+        'Eigenkapitalkosten hängen an erwarteten künftigen Ausschüttungen; D₀ darf nur als Ausgangspunkt für D₁ dienen, nicht als stillschweigende Ersatzgröße.'
+      ),
+      task(
+        'Welche Modellchecks solltest du vor der Interpretation eines Gordon-Ergebnisses sichtbar machen?',
+        [
+          step('Prüfen, ob eine stabile Dividendenpolitik und plausibles konstantes Wachstum vorliegen.'),
+          step('Sicherstellen, dass die Wachstumsrate kleiner als die geforderte Rendite bleibt.'),
+          step('Erst dann den gefundenen Satz als marktbasierten Mindestanspruch der Eigenkapitalgeber deuten.')
+        ],
+        'Vor der Zahleninterpretation braucht das Gordon-Modell einen Plausibilitätscheck; sonst wirkt eine formal saubere Rechnung wirtschaftlich leer.'
       )
     ]
   },

@@ -69,7 +69,16 @@ Close the last high-value backbone trust gaps without broad rewriting:
 ### QA / audit artifacts
 
 - [.qa/portal_backbone_trust_parity_pass1.mjs](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal_backbone_trust_parity_pass1.mjs)
+- [.qa/portal_backbone_trust_parity_pass1_refresh.mjs](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal_backbone_trust_parity_pass1_refresh.mjs)
 - [docs/audits/portal-backbone-trust-parity-pass-1.md](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/docs/audits/portal-backbone-trust-parity-pass-1.md)
+
+### Additional trust-copy refinement in the current workspace state
+
+- [assets/js/portal-core/data/dashboardDerivedMetrics.js](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/assets/js/portal-core/data/dashboardDerivedMetrics.js)
+- [assets/js/portal-core/features/mistakeReview.js](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/assets/js/portal-core/features/mistakeReview.js)
+- [makro2/js/ui/renderer.js](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/makro2/js/ui/renderer.js)
+- [statistik/js/ui/renderer.js](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/statistik/js/ui/renderer.js)
+- [statistik/js/features/dashboard.js](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/statistik/js/features/dashboard.js)
 
 ## Exact trust/parity weaknesses addressed
 
@@ -285,6 +294,37 @@ Final verification result:
 - failures: `[]`
 - page errors: none reproduced on the verified surfaces
 
+### Follow-up verification refresh
+
+After the later density / graph / release passes, I reran a focused backbone trust refresh on the still student-visible trust seams:
+
+- landing
+- `mathematik` home, dashboard, and mistake review
+- `mikro2` home and dashboard
+- `statistik` home and dashboard
+
+Refresh artifacts:
+
+- [landing.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/landing.png)
+- [mathematik-home.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/mathematik-home.png)
+- [mathematik-dashboard.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/mathematik-dashboard.png)
+- [mathematik-mistake-review.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/mathematik-mistake-review.png)
+- [mikro2-home.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/mikro2-home.png)
+- [mikro2-dashboard.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/mikro2-dashboard.png)
+- [statistik-home.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/statistik-home.png)
+- [statistik-dashboard.png](/Users/enowmunteh/Downloads/Volkswirtschaftslehre-main%204/.qa/portal-backbone-trust-parity-pass-1-refresh/statistik-dashboard.png)
+
+Refresh result:
+
+- findings: `[]`
+
+Additional trust/parity weaknesses addressed in this refresh:
+
+- dashboard empty-state wording now sounds less like a local log dump and more like study guidance
+- mistake-review intro / empty states now read more like a remediation tool and less like internal diagnostics
+- visible local-only home notes in `makro2` and `statistik` now use cleaner wording: `Basiert auf Lernspuren aus diesem Browser.`
+- `statistik` dashboard button/guide copy now matches the stronger backbone surfaces better
+
 ## Remaining limitations and why they remain
 
 ### 1. `mikro2` still remains a special-case module
@@ -322,19 +362,7 @@ Why it remains:
 
 - requires broader drill/exam instrumentation work beyond this pass
 
-### 4. `mathematik` home still does not foreground mistake-review as directly as the stronger backbone modules
-
-Observed in verification:
-
-- `mathematik` dashboard entry is visible
-- `Fehlerprotokoll` is not yet foregrounded directly on the home/overview surface itself
-
-Why it remains:
-
-- this pass productized the backbone surfaces and wiring first
-- a deeper home-surface parity pass would be the next step if this remains important
-
-### 5. Shared R surfaces are better in tone, but still not fully pedagogy-first everywhere
+### 4. Shared R surfaces are better in tone, but still not fully pedagogy-first everywhere
 
 Still true after this pass:
 
@@ -355,9 +383,12 @@ Most important outcomes:
 - dashboard surfaces now feel like student-facing learning tools rather than pilot analytics
 - mistake-review now feels like a real remediation surface
 - `mathematik` is no longer outside the main learner backbone family
+- `mathematik` now also foregrounds `Fehlerprotokoll` directly on the home surface
 - `mikro2` now preserves trust by stating its special source status explicitly
 - landing-scope clarity is visibly better
 - shared R tone is less tool-first
+
+Backbone trust/parity is now strong enough for release confidence.
 
 What this pass does **not** claim:
 

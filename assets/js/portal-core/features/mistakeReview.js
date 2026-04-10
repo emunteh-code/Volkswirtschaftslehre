@@ -140,8 +140,8 @@ ${wrong}
   function renderList(title, list, isOpen) {
     if (!list.length) {
       const guidance = isOpen
-        ? "Aktuell gibt es hier nichts Offenes. Neue Einträge erscheinen nach Fehlern aus Schnelltest, Konzept-Check oder Probeklausur."
-        : "Sobald du Einträge als geklärt markierst, tauchen sie hier als persönlicher Verlauf auf.";
+        ? "Aktuell ist hier nichts offen. Neue Einträge tauchen auf, sobald aus Schnelltest, Konzept-Check oder Probeklausur ein Fehler im Protokoll landet."
+        : "Sobald du Einträge als geklärt markierst, bleiben sie hier als persönlicher Verlauf sichtbar.";
       return `<div class="mr-empty"><strong>${escapeHtml(title)}</strong><br>${escapeHtml(guidance)}</div>`;
     }
     const sorted = sortEntriesByTimeDesc(list);
@@ -200,7 +200,7 @@ ${untaggedNote}
 <div class="mr-header">
 <h2>Fehlerprotokoll</h2>
 <p class="mr-sub">${escapeHtml(courseLabel)} · ${open.length} offen · ${done.length} geklärt</p>
-<p class="mr-hint">Hier sammelst du persönliche Fehlmuster aus diesem Modul. Markiere Einträge erst dann als geklärt, wenn du den Denkfehler wirklich verstanden und im Konzept nachgearbeitet hast.</p>
+<p class="mr-hint">Hier bündelst du wiederkehrende Fehlmuster aus diesem Modul. Markiere einen Eintrag erst dann als geklärt, wenn du den Denkfehler verstanden und am Konzept sauber nachgearbeitet hast.</p>
 </div>
 <div class="mr-filters">
 <label class="mr-filter-label">Quelle <select id="mr-filter-src" class="mr-select">${srcOptions}</select></label>

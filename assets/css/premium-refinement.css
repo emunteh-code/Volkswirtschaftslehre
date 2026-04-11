@@ -19,11 +19,23 @@
   border-radius: var(--r-sm);
 }
 
-/* ── Topbar — calmer glass ─────────────────────────────── */
+/* ── Shell surfaces — calm chalk, not blue-tinted ──────── */
 #topbar {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  background: color-mix(in srgb, var(--bg) 88%, var(--surface) 12%);
+}
+
+#sidebar {
+  background: var(--bg);
+}
+
+body.light-mode #sidebar {
+  background: var(--bg);
+}
+
+body.light-mode #topbar {
+  background: color-mix(in srgb, var(--bg) 90%, rgba(255,255,255,0.6));
 }
 
 /* ============================================================
@@ -58,16 +70,16 @@
   border-radius: 3px;
 }
 
-/* Formula card — math-tinted, secondary */
+/* Formula card — neutral surface, magenta text only */
 #content .math-block {
-  background: color-mix(in srgb, var(--surface2) 86%, var(--math-soft, transparent) 14%);
-  border-color: color-mix(in srgb, var(--border) 80%, var(--math-ink) 20%);
-  border-left-color: var(--math-ink);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--math-ink);
 }
 
 #content .formula-card {
-  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--math-ink) 12%);
-  background: color-mix(in srgb, var(--card) 90%, var(--math-soft, transparent) 10%);
+  border: 1px solid var(--border);
+  background: var(--card);
   box-shadow: var(--shadow-sm);
   transition:
     border-color var(--duration-hover) var(--ease-premium),
@@ -75,19 +87,32 @@
 }
 
 #content .formula-card:hover {
-  border-color: color-mix(in srgb, var(--math-ink) 30%, var(--border));
+  border-color: color-mix(in srgb, var(--math-ink) 24%, var(--border));
   box-shadow: var(--shadow-md);
 }
 
-/* Trap / warning card — red-tinted border, surface bg */
+/* Warning / Hinweis — real card presence */
 #content .warn-box {
-  background: color-mix(in srgb, var(--surface2) 88%, rgba(239, 68, 68, 0.08));
-  border-color: color-mix(in srgb, var(--border) 75%, var(--sys-red) 25%);
-  border-left-color: var(--sys-red);
+  background: color-mix(in srgb, var(--sys-red) 5%, var(--card) 95%);
+  border: 1px solid color-mix(in srgb, var(--sys-red) 22%, var(--border) 78%);
+  border-left: none;
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-sm);
 }
 
 #content .warn-box strong {
-  color: color-mix(in srgb, var(--sys-red) 92%, var(--text) 8%);
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sys-red);
+  margin-bottom: 8px;
+}
+
+body.light-mode #content .warn-box {
+  background: color-mix(in srgb, var(--sys-red) 3%, var(--card) 97%);
 }
 
 /* Exam + dashboard — secondary weight */
@@ -114,19 +139,12 @@
    PHASE 3 — GRAPH HERO SURFACE
    ============================================================ */
 
-/* Graph as dominant teaching card — same material as section-block */
+/* Graph — integrated teaching surface, not nested card */
 #content .graph-container {
   background: var(--card);
-  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
-  box-shadow: var(--shadow-sm);
-  transition:
-    border-color var(--duration-hover) var(--ease-premium),
-    box-shadow var(--duration-hover) var(--ease-premium);
-}
-
-#content .graph-container:hover {
-  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 18%);
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  box-shadow: none;
+  border-radius: var(--r-lg);
 }
 
 /* Full-width rhythm — no narrow centred island */
@@ -161,17 +179,13 @@
   flex-shrink: 0;
 }
 
-/* Controls = integrated toolbar band */
+/* Controls = integrated toolbar, not separate card */
 #content .graph-controls {
   padding: var(--space-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
-  border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--surface2) 68%, var(--card) 32%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
-}
-
-body.light-mode #content .graph-controls {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--surface) 40%, var(--card) 60%);
+  box-shadow: none;
 }
 
 #content .graph-container .ctrl-group {
@@ -201,17 +215,14 @@ body.light-mode #content .graph-container canvas {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
-/* Interpretation = footer of the teaching unit */
+/* Interpretation = continuation of the teaching unit */
 #content .graph-info {
-  background: color-mix(in srgb, var(--surface2) 38%, var(--card) 62%);
-  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
-  border-radius: var(--r-md);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  transition: opacity 0.2s var(--ease-premium);
-}
-
-body.light-mode #content .graph-info {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: transparent;
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  border-radius: 0;
+  box-shadow: none;
+  padding-top: 12px;
 }
 
 #content .graph-info strong {
@@ -292,8 +303,12 @@ body.light-mode #content .graph-info {
    ============================================================ */
 
 #rightPanel {
-  background: color-mix(in srgb, var(--bg) 55%, var(--surface) 45%);
+  background: var(--bg);
   border-left-color: var(--border);
+}
+
+body.light-mode #rightPanel {
+  background: var(--bg);
 }
 
 #rightPanel .rp-section {
@@ -348,17 +363,34 @@ body.light-mode #content .graph-info {
 }
 
 #tabRow .tab-btn.active {
-  background: color-mix(in srgb, var(--accent) 92%, #000 8%);
-  color: var(--accent-fg);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface) 90%);
+  color: var(--accent);
   font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent) 20%, var(--border) 80%);
+  box-shadow: none;
+}
+
+body.light-mode #tabRow .tab-btn.active {
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg) 92%);
+  color: var(--accent-strong, var(--accent));
+  box-shadow: none;
+}
+
+/* R-Übung keeps stronger emphasized active state */
+#tabRow .tab-btn.active[data-tab="r"],
+#tabRow .tab-btn.active[data-tab="r-practice"] {
+  background: var(--accent);
+  color: var(--accent-fg);
   border-color: color-mix(in srgb, var(--accent-strong, var(--accent)) 45%, transparent);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-body.light-mode #tabRow .tab-btn.active {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 96%, #fff) 0%, var(--accent) 100%);
+body.light-mode #tabRow .tab-btn.active[data-tab="r"],
+body.light-mode #tabRow .tab-btn.active[data-tab="r-practice"] {
+  background: var(--accent);
+  color: var(--accent-fg);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 2px 8px rgba(37, 99, 235, 0.18);
@@ -377,29 +409,25 @@ body.light-mode #tabRow .tab-btn.active {
   transition:
     background var(--duration-hover) var(--ease-premium),
     color var(--duration-hover) var(--ease-premium),
-    border-color var(--duration-hover) var(--ease-premium),
-    opacity var(--duration-hover) var(--ease-premium);
+    border-color var(--duration-hover) var(--ease-premium);
   border-left-width: 3px;
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  margin-right: 8px;
-  opacity: 0.94;
+  border-radius: 0;
+  margin-right: 0;
 }
 
 #sidebar .nav-item:hover {
-  opacity: 1;
-  background: color-mix(in srgb, var(--surface2) 88%, var(--accent) 6%);
+  background: color-mix(in srgb, var(--surface2) 60%, transparent);
   color: var(--text);
 }
 
 #sidebar .nav-item.active {
-  opacity: 1;
-  box-shadow: inset 3px 0 0 0 var(--nav-active-border);
-  border-left-color: transparent;
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface) 94%);
+  border-left-color: var(--nav-active-border);
   font-weight: 600;
 }
 
 body.light-mode #sidebar .nav-item.active {
-  box-shadow: inset 3px 0 0 0 var(--nav-active-border);
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg) 95%);
 }
 
 /* ============================================================
@@ -526,47 +554,37 @@ body.light-mode #sidebar .search-input:focus {
 }
 
 /* ============================================================
-   PASS 3 — TAB INTERACTION POLISH
+   TAB + SIDEBAR INTERACTION (consolidated)
    ============================================================ */
 
 #tabRow .tab-btn {
   position: relative;
   font-weight: 500;
-  padding: 7px 14px;
+  padding: 8px 16px;
   letter-spacing: 0.01em;
 }
 
-#tabRow .tab-btn:hover {
+#tabRow .tab-btn:hover:not(.active) {
   background: color-mix(in srgb, var(--surface2) 88%, var(--accent) 8%);
   border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 18%);
+  transform: translateY(-0.5px);
 }
 
 #tabRow .tab-btn.active {
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 #tabRow .tab-btn.active::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 25%;
-  right: 25%;
+  left: 15%;
+  right: 15%;
   height: 2px;
   border-radius: 2px;
-  background: currentColor;
-  opacity: 0.35;
-}
-
-/* ============================================================
-   PASS 3 — SIDEBAR INTERACTION POLISH
-   ============================================================ */
-
-#sidebar .nav-item:hover {
-  background: color-mix(in srgb, var(--surface2) 82%, var(--accent) 10%);
-}
-
-#sidebar .nav-item.active {
-  background: color-mix(in srgb, var(--accent) 8%, var(--surface2) 92%);
+  background: var(--accent);
+  opacity: 0.6;
 }
 
 #sidebar .search-input {
@@ -594,9 +612,9 @@ body.light-mode #sidebar .search-input:focus {
 
 #content .problem-card:hover,
 #content .exam-drill-card:hover {
-  border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 22%);
+  border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 28%);
   box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .home-continue-card:hover {
@@ -627,14 +645,14 @@ body.light-mode #sidebar .search-input:focus {
 }
 
 .practice-section-header {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--muted) 60%, var(--text) 40%);
-  padding-bottom: 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
-  margin-bottom: 4px;
+  color: var(--muted);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
 }
 
 #content .problem-card {
@@ -646,17 +664,13 @@ body.light-mode #sidebar .search-input:focus {
 }
 
 #content .problem-card .prob-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
-  color: var(--accent);
-  font-size: 12px;
+  display: inline-block;
+  font-size: 10px;
   font-weight: 700;
-  flex-shrink: 0;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
+  margin-bottom: 10px;
 }
 
 #content .problem-card .prob-text {
@@ -872,7 +886,7 @@ body.light-mode #tabRow .tab-btn.active::after {
 }
 
 body.light-mode #content .problem-card .prob-num {
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface) 90%);
+  color: color-mix(in srgb, var(--accent) 80%, var(--text) 20%);
 }
 
 body.light-mode #content .exam-drill-key {
@@ -963,17 +977,16 @@ body.light-mode .schema-term {
 }
 
 #content .problem-card .prob-num {
-  width: 28px;
-  height: 28px;
-  font-size: 12.5px;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
 }
 
 #content .solution-block {
   padding: 20px;
   border-radius: var(--r-md);
   margin-top: 14px;
-  border: 1px solid color-mix(in srgb, var(--border) 74%, var(--accent) 18%);
-  background: color-mix(in srgb, var(--surface2) 42%, var(--card) 58%);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 30%, var(--card) 70%);
 }
 
 #content .solution-block .step {
@@ -992,8 +1005,9 @@ body.light-mode .schema-term {
   border-radius: var(--r-md);
   font-size: 13.5px;
   margin-top: 10px;
-  background: color-mix(in srgb, var(--semantic-green) 12%, var(--surface2) 88%);
-  border: 1px solid color-mix(in srgb, var(--semantic-green) 30%, var(--border) 70%);
+  background: color-mix(in srgb, var(--math-ink) 6%, var(--card) 94%);
+  border: 1px solid color-mix(in srgb, var(--math-ink) 18%, var(--border) 82%);
+  color: var(--math-ink);
   font-weight: 700;
 }
 
@@ -1014,9 +1028,8 @@ body.light-mode .schema-term {
 #content .exam-drill-card {
   border-radius: var(--r-lg);
   padding: 22px 24px;
-  border-left-width: 3px;
-  border-left-style: solid;
-  border-left-color: color-mix(in srgb, var(--accent) 55%, var(--math-ink) 45%);
+  border: 1px solid var(--border);
+  background: var(--card);
 }
 
 #content .exam-drill-card .prob-text {
@@ -1101,38 +1114,7 @@ body.light-mode #content .f-eq {
    PASS 4.1 — TAB INTERACTION (stronger active, visible hover)
    ============================================================ */
 
-#tabRow .tab-btn {
-  padding: 8px 16px;
-}
-
-#tabRow .tab-btn.active {
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-#tabRow .tab-btn.active::after {
-  opacity: 0.5;
-  height: 2.5px;
-  left: 20%;
-  right: 20%;
-}
-
-#tabRow .tab-btn:hover:not(.active) {
-  transform: translateY(-0.5px);
-}
-
-/* ============================================================
-   PASS 4.1 — SIDEBAR INTERACTION (stronger hover/active)
-   ============================================================ */
-
-#sidebar .nav-item:hover {
-  background: color-mix(in srgb, var(--surface2) 78%, var(--accent) 12%);
-  border-left-color: color-mix(in srgb, var(--accent) 30%, transparent);
-}
-
-#sidebar .nav-item.active {
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface2) 90%);
-}
+/* Tab/sidebar rules consolidated above */
 
 /* ============================================================
    PASS 4.1 — R-TAB FLAGSHIP COMPOSITION
@@ -1143,19 +1125,42 @@ body.light-mode #content .f-eq {
 .r-orient-card .r-translation-block,
 .r-orient-card .r-orient-panel,
 .r-orient-card .r-task-flow {
-  background: color-mix(in srgb, var(--surface2) 28%, transparent);
-  border-color: color-mix(in srgb, var(--border) 45%, transparent);
-  border-radius: var(--r-md);
+  background: transparent;
+  border-color: color-mix(in srgb, var(--border) 30%, transparent);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
 }
 
-/* Editor card accent border */
+.r-orient-card .r-lesson-flow {
+  gap: 6px;
+}
+
+.r-orient-card .r-core-line {
+  border-width: 1px;
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border) 70%);
+  background: color-mix(in srgb, var(--accent) 3%, transparent);
+}
+
+.r-practice-workspace .r-practice-output-card {
+  background: color-mix(in srgb, var(--surface) 60%, var(--card) 40%);
+  box-shadow: none;
+  border-style: dashed;
+}
+
+.r-tab-bottom .r-practice-card,
+.r-tab-bottom .r-practice-pitfalls {
+  box-shadow: none;
+  border-style: dashed;
+  background: color-mix(in srgb, var(--surface) 50%, var(--card) 50%);
+}
+
+/* Editor/output — calmer borders */
 .r-practice-editor-card {
-  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 22%);
+  border-color: var(--border);
 }
 
-/* Output card — math-tinted */
 .r-practice-output-card {
-  border-color: color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  border-color: var(--border);
 }
 
 /* R button system */
@@ -1229,16 +1234,7 @@ body.light-mode .r-practice-workspace .btn-primary {
   border-radius: var(--r-md);
 }
 
-/* ============================================================
-   PASS 4.1 — CARD HOVER SYSTEM (contract: translateY -2px max)
-   ============================================================ */
-
-#content .problem-card:hover,
-#content .exam-drill-card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 28%);
-  box-shadow: var(--shadow-md);
-}
+/* Card hover system consolidated above */
 
 #content .formula-card:hover {
   transform: translateY(-1px);
@@ -1262,8 +1258,8 @@ body.light-mode #content .exam-drill-card {
 }
 
 body.light-mode #content .solution-block {
-  background: color-mix(in srgb, var(--surface) 40%, var(--card) 60%);
-  border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 20%);
+  background: color-mix(in srgb, var(--surface) 20%, var(--card) 80%);
+  border-color: var(--border);
 }
 
 body.light-mode #content .exam-drill-solution {
@@ -1271,8 +1267,7 @@ body.light-mode #content .exam-drill-solution {
 }
 
 body.light-mode .r-orient-card {
-  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--accent) 20%);
-  border-top: 3px solid color-mix(in srgb, var(--accent) 75%, var(--math-ink) 25%);
+  border: 1px solid var(--border);
 }
 
 body.light-mode .r-practice-editor-card {
@@ -1284,7 +1279,7 @@ body.light-mode .r-practice-output-card {
 }
 
 body.light-mode #sidebar .nav-item:hover {
-  background: color-mix(in srgb, var(--surface2) 74%, var(--accent) 14%);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
 }
 
 /* ============================================================
@@ -1295,23 +1290,16 @@ body.light-mode #sidebar .nav-item:hover {
 /* ── Strengthen magenta display ─────────────────────────── */
 
 #content .f-eq {
-  color: color-mix(in srgb, var(--math-ink) 58%, var(--text) 42%);
+  color: var(--math-ink);
 }
 
 #content .formula-card .f-label {
-  color: color-mix(in srgb, var(--math-ink) 68%, var(--text) 32%);
-}
-
-#content .formula-card {
-  border-left: 3px solid color-mix(in srgb, var(--math-ink) 65%, var(--border) 35%);
+  color: var(--muted);
+  font-weight: 700;
 }
 
 #content .math-block {
-  border-left-color: var(--math-ink);
-}
-
-#rightPanel .rp-formula {
-  border-left: 2px solid color-mix(in srgb, var(--math-ink) 55%, var(--border) 45%);
+  border-left: 2px solid var(--math-ink);
 }
 
 .schema-arrow {
@@ -1319,103 +1307,22 @@ body.light-mode #sidebar .nav-item:hover {
 }
 
 .legal-schema {
-  border-left: 3px solid var(--math-ink);
+  border-left: 2px solid var(--math-ink);
 }
 
 body.light-mode #content .f-eq {
-  color: color-mix(in srgb, var(--math-ink) 52%, var(--text) 48%);
+  color: var(--math-ink);
 }
 
 body.light-mode #content .formula-card .f-label {
-  color: color-mix(in srgb, var(--math-ink) 62%, var(--text) 38%);
-}
-
-body.light-mode #content .formula-card {
-  border-left-color: color-mix(in srgb, var(--math-ink) 70%, var(--border) 30%);
+  color: var(--muted);
 }
 
 /* ============================================================
-   GRAPH PREMIUM ATMOSPHERE — DARK MODE (default)
-   Near-black focal stage, stronger card presence, composed feel.
+   GRAPH — integrated teaching surface (cleaned)
    ============================================================ */
 
-/* Graph container — premium hero-card presence */
-#content .graph-container {
-  background: color-mix(in srgb, var(--card) 72%, var(--bg) 28%);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
-  box-shadow: var(--shadow-md);
-}
-
-#content .graph-container:hover {
-  border-color: color-mix(in srgb, var(--border) 68%, var(--accent) 24%);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Canvas — premium inset focal stage (darker than card) */
-#content .graph-container canvas {
-  background: color-mix(in srgb, var(--bg) 65%, #000 35%);
-  border: 1px solid color-mix(in srgb, var(--border) 55%, #000 45%);
-  border-radius: var(--r-md);
-  box-shadow:
-    inset 0 2px 8px rgba(0, 0, 0, 0.38),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-}
-
-/* Graph controls — integrated premium toolbar */
-#content .graph-controls {
-  background: color-mix(in srgb, var(--surface2) 48%, var(--card) 52%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-  border-radius: var(--r-md);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  padding: var(--space-sm) 14px;
-}
-
-/* Control groups — sharper interactive elements */
-#content .graph-container .ctrl-group {
-  background: color-mix(in srgb, var(--card) 82%, var(--surface2) 18%);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
-  border-radius: var(--r-sm);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  transition:
-    border-color var(--duration-hover) var(--ease-premium),
-    box-shadow var(--duration-hover) var(--ease-premium);
-}
-
-#content .graph-container .ctrl-group:hover {
-  border-color: color-mix(in srgb, var(--border) 56%, var(--accent) 32%);
-  box-shadow: var(--shadow-sm);
-}
-
-#content .graph-container .ctrl-group label {
-  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
-}
-
-/* Graph info — tighter integration, premium surface */
-#content .graph-info {
-  background: color-mix(in srgb, var(--surface2) 22%, var(--card) 78%);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
-  border-radius: var(--r-md);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-}
-
-/* Graph info rows — refined, premium interactive */
-#content .graph-info .gi-row {
-  background: color-mix(in srgb, var(--surface2) 32%, var(--card) 68%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-  border-radius: var(--r-sm);
-  transition:
-    border-color var(--duration-hover) var(--ease-premium),
-    box-shadow var(--duration-hover) var(--ease-premium),
-    background var(--duration-hover) var(--ease-premium);
-}
-
-#content .graph-info .gi-row:hover {
-  border-color: color-mix(in srgb, var(--border) 56%, var(--accent) 32%);
-  box-shadow: var(--shadow-sm);
-  background: color-mix(in srgb, var(--surface2) 24%, var(--card) 76%);
-}
-
-/* Formula in graph info — hot magenta identity */
+/* Formula in graph info */
 #content .graph-info .gi-eq {
   color: var(--math-ink);
   background: color-mix(in srgb, var(--card) 74%, var(--math-soft, transparent) 26%);
@@ -1455,55 +1362,20 @@ body.light-mode #content .formula-card {
   border-radius: var(--r-md);
 }
 
-/* ============================================================
-   GRAPH PREMIUM ATMOSPHERE — BRIGHT MODE
-   Premium card presence, inset chart stage, refined contrast.
-   ============================================================ */
-
+/* Graph — bright mode: neutral, calmer */
 body.light-mode #content .graph-container {
   background: var(--card);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
-  box-shadow: var(--shadow-md);
-}
-
-body.light-mode #content .graph-container:hover {
-  box-shadow: var(--shadow-lg);
-}
-
-body.light-mode #content .graph-container canvas {
-  background: color-mix(in srgb, var(--bg) 45%, #fff 55%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-  box-shadow:
-    inset 0 1px 4px rgba(0, 0, 0, 0.06),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 body.light-mode #content .graph-controls {
-  background: color-mix(in srgb, var(--surface) 50%, var(--card) 50%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-body.light-mode #content .graph-container .ctrl-group {
-  background: var(--card);
-  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--text) 20%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  background: color-mix(in srgb, var(--surface) 40%, var(--card) 60%);
+  border-color: color-mix(in srgb, var(--border) 80%, transparent);
 }
 
 body.light-mode #content .graph-info {
-  background: color-mix(in srgb, var(--surface) 20%, var(--card) 80%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-body.light-mode #content .graph-info .gi-row {
-  background: color-mix(in srgb, var(--surface) 14%, var(--card) 86%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-}
-
-body.light-mode #content .graph-info .gi-eq {
-  background: color-mix(in srgb, var(--card) 70%, var(--math-soft, transparent) 30%);
-  border-color: color-mix(in srgb, var(--border) 62%, var(--math-ink) 38%);
+  border-top-color: var(--border);
 }
 
 body.light-mode #content .graph-insight-row,

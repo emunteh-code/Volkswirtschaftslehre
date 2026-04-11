@@ -295,11 +295,12 @@ function drawLegendBox(plane, entries) {
 
 function drawLabelTag(ctx, text, x, y, color, options = {}) {
   const lines = Array.isArray(text) ? text : [text];
-  const fontFamily = options.fontFamily || getComputedStyle(document.body).getPropertyValue('--font-body').trim() || getComputedStyle(document.body).fontFamily || 'system-ui, sans-serif';
+  const _cs = getComputedStyle(document.body);
+  const fontFamily = options.fontFamily || _cs.getPropertyValue('--font-body').trim() || _cs.fontFamily || 'system-ui, sans-serif';
   const fontSize = options.fontSize || 11;
   const paddingX = options.paddingX || 8;
   const paddingY = options.paddingY || 6;
-  const bgColor = options.bgColor || '#ffffff';
+  const bgColor = options.bgColor || _cs.getPropertyValue('--card').trim() || '#1a1d21';
   const borderColor = options.borderColor || color;
   const textColor = options.textColor || color;
   ctx.save();

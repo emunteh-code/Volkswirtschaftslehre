@@ -13,7 +13,15 @@ const scheme = (text) => {
     .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
     .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
     .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
+    .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">\u21D4</span>')
+    .replace(/\\leftrightarrow/g, '<span class="schema-arrow">\u2194</span>')
+    .replace(/\\neq/g, '<span class="schema-op">\u2260</span>')
+    .replace(/\\times/g, '<span class="schema-op">\u00D7</span>')
+    .replace(/\\leq/g, '<span class="schema-op">\u2264</span>')
+    .replace(/\\geq/g, '<span class="schema-op">\u2265</span>')
+    .replace(/\\neg/g, '<span class="schema-op">\u00AC</span>')
     .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
+    .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
     .trim();
   return `<div class="legal-schema">${html}</div>`;
 };

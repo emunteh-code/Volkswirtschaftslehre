@@ -109,8 +109,9 @@ function drawRoundedRectPath(ctx, x, y, w, h, r) {
 }
 
 function drawLabelTag(ctx, text, x, y, color, options = {}) {
+  const _cs = getComputedStyle(document.body);
   const {
-    fontFamily = getComputedStyle(document.body).getPropertyValue('--font-body').trim() || getComputedStyle(document.body).fontFamily || 'system-ui, sans-serif',
+    fontFamily = _cs.getPropertyValue('--font-body').trim() || _cs.fontFamily || 'system-ui, sans-serif',
     fontSize = 11,
     fontWeight = 700,
     align = 'left',
@@ -119,7 +120,7 @@ function drawLabelTag(ctx, text, x, y, color, options = {}) {
     paddingY = 6,
     lineGap = 2,
     radius = 8,
-    bgColor = '#ffffff',
+    bgColor = _cs.getPropertyValue('--card').trim() || '#1a1d21',
     borderColor = color,
     textColor = color
   } = options;

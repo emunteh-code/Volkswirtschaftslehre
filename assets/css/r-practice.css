@@ -301,6 +301,30 @@
   gap: 14px;
 }
 
+@media (min-width: 1100px) {
+  .r-lab-section {
+    grid-template-columns: minmax(0, 1.5fr) minmax(380px, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .r-lab-section > .r-orient-card {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+  .r-lab-section > .r-practice-workspace {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .r-lab-section > .r-tab-bottom {
+    display: none;
+  }
+}
+
 /* Divider between multiple blocks */
 .r-lab-divider {
   height: 1px;
@@ -311,14 +335,13 @@
 /* ─── Orientation Card ───────────────────────────────────────────────────── */
 
 .r-orient-card {
-  background: var(--card, color-mix(in srgb, var(--surface) 98%, #fff 2%));
-  border: 1px solid color-mix(in srgb, var(--border) 85%, var(--accent) 15%);
-  border-top: 3px solid color-mix(in srgb, var(--accent) 70%, var(--math-ink) 30%);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--r-xl);
   padding: 24px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .r-orient-top {

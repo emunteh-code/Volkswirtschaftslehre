@@ -149,8 +149,8 @@ export function createRenderer({
     if (!s || !/\\text\{/.test(s)) return false;
     const cleaned = s
       .replace(/\\text\{[^}]*\}/g, "")
-      .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow)/g, "")
-      .replace(/[+\-=\s\\,]/g, "")
+      .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow|Leftrightarrow|neq|times|leq|geq|approx|equiv|subset|supset|cup|cap|wedge|vee|neg|forall|exists)/g, "")
+      .replace(/[+\-=\s\\,;:|()/]/g, "")
       .replace(/\\cdot/g, "");
     return cleaned.trim() === "";
   }
@@ -161,7 +161,15 @@ export function createRenderer({
       .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
       .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
       .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
+      .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">\u21D4</span>')
+      .replace(/\\leftrightarrow/g, '<span class="schema-arrow">\u2194</span>')
+      .replace(/\\neq/g, '<span class="schema-op">\u2260</span>')
+      .replace(/\\times/g, '<span class="schema-op">\u00D7</span>')
+      .replace(/\\leq/g, '<span class="schema-op">\u2264</span>')
+      .replace(/\\geq/g, '<span class="schema-op">\u2265</span>')
+      .replace(/\\neg/g, '<span class="schema-op">\u00AC</span>')
       .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
+      .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
       .trim();
   }
 
@@ -822,7 +830,7 @@ ${renderGuidedTasks(tasks)}`;
       html += `<div class="formula-card">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
-<div class="f-eq">${isLegalSchema(formula.eq) ? renderLegalSchema(formula.eq) : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>
+<div class="f-eq">${isLegalSchema(formula.eq) ? `<div class="legal-schema">${renderLegalSchema(formula.eq)}</div>` : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>
 ${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
 ${varsHint}
 ${supportNote}

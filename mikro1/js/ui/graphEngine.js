@@ -507,12 +507,9 @@ class GraphEngine {
       ctx.fill();
       ctx.globalAlpha = 1;
 
-      // Optional border
-      if (borderColor) {
-        ctx.strokeStyle = borderColor;
-        ctx.lineWidth   = 1;
-        ctx.stroke();
-      }
+      ctx.strokeStyle = borderColor || col.grid;
+      ctx.lineWidth   = 1;
+      ctx.stroke();
 
       entries.forEach((entry, i) => {
         const cy = y + i * lh;
@@ -545,7 +542,7 @@ class GraphEngine {
 
         ctx.shadowColor = 'transparent';
         ctx.shadowBlur  = 0;
-        ctx.fillStyle = entry.color;
+        ctx.fillStyle = col.text;
         ctx.font = `13px ${col.fontBody}`;
         ctx.textAlign = 'left';
         ctx.fillText(entry.label, x + textX, cy + 1);

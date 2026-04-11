@@ -7,7 +7,16 @@ const section = (title, body) => `
 
 const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> ${body}</div>`;
 
-const scheme = (text) => `<div class="math-block">${text}</div>`;
+const scheme = (text) => {
+  const html = text
+    .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
+    .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
+    .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
+    .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
+    .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
+    .trim();
+  return `<div class="legal-schema">${html}</div>`;
+};
 
 const step = (text, eq = null) => ({ text, eq });
 

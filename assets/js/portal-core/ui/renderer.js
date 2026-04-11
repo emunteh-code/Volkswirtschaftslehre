@@ -144,9 +144,41 @@ export function createRenderer({
     );
   }
 
+  function isLegalSchema(eq) {
+    const s = String(eq || "").trim();
+    if (!s || !/\\text\{/.test(s)) return false;
+    const cleaned = s
+      .replace(/\\text\{[^}]*\}/g, "")
+      .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow)/g, "")
+      .replace(/[+\-=\s\\,]/g, "")
+      .replace(/\\cdot/g, "");
+    return cleaned.trim() === "";
+  }
+
+  function renderLegalSchema(eq) {
+    return String(eq || "")
+      .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
+      .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
+      .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
+      .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
+      .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
+      .trim();
+  }
+
+  function renderFormulaEq(eq) {
+    const trimmed = String(eq || "").trim();
+    if (!trimmed) return "";
+    if (isLegalSchema(trimmed))
+      return `<div class="legal-schema">${renderLegalSchema(trimmed)}</div>`;
+    const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
+    return `<div class="math-block">${math}</div>`;
+  }
+
   function renderTaskMathBlock(value) {
     const trimmed = String(value || "").trim();
     if (!trimmed) return "";
+    if (isLegalSchema(trimmed))
+      return `<div class="legal-schema">${renderLegalSchema(trimmed)}</div>`;
     const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
     return `<div class="math-block">${escapeHtml(math)}</div>`;
   }
@@ -524,7 +556,7 @@ ${intuition?.bridge ? `<div class="exam-drill-line">
         question: `Welche formale Beziehung trägt "${chapter.title}" in der Prüfung, und wie liest du sie richtig?`,
         answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Formaler Anker</span>
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 </div>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Bedeutung</span>
@@ -547,7 +579,7 @@ ${renderNotationList(formula.variables)}
 </div>
 ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formale Rückbindung</span>
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 </div>` : ""}`
       });
     }
@@ -566,7 +598,7 @@ ${formula ? `<div class="exam-drill-line">
 </div>
 ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formel, die du notieren kannst</span>
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 </div>` : ""}`
       });
     });
@@ -790,7 +822,7 @@ ${renderGuidedTasks(tasks)}`;
       html += `<div class="formula-card">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
-<div class="f-eq">${formula.eq}</div>
+<div class="f-eq">${isLegalSchema(formula.eq) ? renderLegalSchema(formula.eq) : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>
 ${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
 ${varsHint}
 ${supportNote}
@@ -856,7 +888,7 @@ ${patterns.map((pattern) => `<div class="intuition-pattern-row">
 ${formula ? `<div class="intuition-callout">
 <span class="intuition-callout-label">Formaler Anker</span>
 <div class="intuition-callout-body">
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 ${formula.desc ? `<p>${formula.desc}</p>` : ""}
 </div>
 </div>` : ""}

@@ -31,7 +31,7 @@ function readColors() {
     accent: pick('--accent', '#2c6fba'),
     accent2: pick('--accent2', '#3a7ab8'),
     warn: pick('--accent3', '#c0392b'),
-    math: pick('--math-ink', '#d81f74'),
+    math: pick('--math-ink', '#E03AFB'),
     green: pick('--semantic-green', '#2d8659'),
     fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif'),
     fontMono: pick('--font-mono', 'SF Mono, Menlo, monospace')

@@ -925,14 +925,6 @@ function buildConfig(block, options = {}) {
   const keepHint = inferKeepHint(block, taskMode);
 
   let purpose = block.purpose || '';
-  if (moduleSlug === 'statistik') {
-    const oekHint = 'Gleiche Arbeitsreihenfolge wie im Ökonometrie-Modul: Output lesen → Mini-Task → Code zuordnen.';
-    if (purpose && !/\bÖkonometrie\b/i.test(purpose)) {
-      purpose = `${oekHint} ${purpose}`;
-    } else if (!purpose) {
-      purpose = oekHint;
-    }
-  }
 
   const coreLine = coreTarget.expression || inferCoreLine(block);
   const coreAnchor = coreTarget.expression
@@ -1017,30 +1009,30 @@ function renderTaskBriefs(config) {
 
   return `<div class="r-lesson-flow">
   <div class="r-lesson-intro">
-    <div class="r-orient-panel-kicker">Lernziel</div>
+    <div class="r-orient-panel-kicker">Idee</div>
     <p>${escapeHtml(config.learningGoal)}</p>
     ${config.goalBullets?.length ? `<ul class="r-goal-list">${config.goalBullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
-    <p class="r-goal-success"><strong>Erfolgssignal:</strong> ${escapeHtml(config.successSignal)}</p>
+    <p class="r-goal-success"><strong>Ziel:</strong> ${escapeHtml(config.successSignal)}</p>
   </div>
   <div class="r-translation-block">
-    <div class="r-orient-panel-kicker">Mathe ↔ R-Übersetzung (explizit)</div>
-    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Ergänze die Zuordnung: mathematischer Parameter -> exakter R-Ausdruck -> fachliche Bedeutung.</div>'}</div>
+    <div class="r-orient-panel-kicker">Mathe ↔ R</div>
+    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Parameter → R-Ausdruck → Bedeutung</div>'}</div>
   </div>
   <div class="r-core-line">
-    <span class="r-core-line-kicker">Kernzeile (hier entscheidet sich die Aussage)</span>
+    <span class="r-core-line-kicker">Kernzeile</span>
     <div class="r-core-line-meta">
       ${config.coreLineAnchor?.lineNo ? `<span class="r-core-line-line">Zeile ${config.coreLineAnchor.lineNo}</span>` : '<span class="r-core-line-line">Zielzeile</span>'}
-      <span class="r-core-line-fragment">${escapeHtml(config.coreCue || 'Arbeite nur an dieser einen Expression.')}</span>
+      <span class="r-core-line-fragment">${escapeHtml(config.coreCue || 'Nur diese Expression ändern.')}</span>
     </div>
     <pre class="r-core-line-code"><code>${escapeHtml(config.coreLineAnchor?.expression || config.coreLine)}</code></pre>
     <div class="r-core-line-effects">
-      <p><strong>Wenn du änderst:</strong> ${escapeHtml(config.coreLineEffects.effect)}</p>
-      <p><strong>Bleibt invariant:</strong> ${escapeHtml(config.coreLineEffects.invariant)}</p>
+      <p><strong>Änderung →</strong> ${escapeHtml(config.coreLineEffects.effect)}</p>
+      <p><strong>Invariant:</strong> ${escapeHtml(config.coreLineEffects.invariant)}</p>
     </div>
   </div>
   <div class="r-task-flow">
-    <div class="r-orient-panel-kicker">Arbeitsauftrag</div>
-    <p class="r-task-prompt">${escapeHtml(config.taskPrompt || config.miniTask || 'Lies den Code, prüfe den Output und arbeite den Mini-Task ab.')}</p>
+    <div class="r-orient-panel-kicker">Auftrag</div>
+    <p class="r-task-prompt">${escapeHtml(config.taskPrompt || config.miniTask || 'Code lesen, Output prüfen, Aufgabe lösen.')}</p>
     <ol class="r-task-steps">
       ${taskFlow.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}
     </ol>
@@ -1052,7 +1044,7 @@ function renderTaskBriefs(config) {
 function renderSolutionDetails(config) {
   const changeList = config.solutionChanges.length
     ? `<div class="r-solution-section">
-  <div class="r-solution-subhead">So ändert sich dein Zugriff</div>
+  <div class="r-solution-subhead">Was sich ändert</div>
   <ul class="r-solution-list">
     ${config.solutionChanges.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
   </ul>
@@ -1066,15 +1058,15 @@ function renderSolutionDetails(config) {
 </div>`
     : `<div class="r-solution-note">${escapeHtml(
       config.taskMode === 'interpret'
-        ? 'Keine Codeänderung nötig: Diese R-Übung prüft vor allem Output-Lesen, Zuordnung und fachliche Deutung.'
-        : 'Die Musterlösung zeigt den Zielschritt klar. Wenn du den Code änderst, halte dich an die eine fachlich entscheidende Stelle.'
+        ? 'Keine Codeänderung nötig — hier zählt Output-Lesen und fachliche Deutung.'
+        : 'Ändere nur die eine entscheidende Stelle.'
     )}</div>`;
 
   return `<div class="r-solution-body">
-  <div class="r-solution-label">Musterlösung</div>
+  <div class="r-solution-label">Lösung</div>
   <p>${escapeHtml(config.solution)}</p>
   <div class="r-solution-loop">
-    <strong>So argumentierst du sauber:</strong> Begründe die Änderung zuerst fachlich, dann im Code, dann mit der entscheidenden Output-Zeile.
+    <strong>Argumentationskette:</strong> Fachliche Begründung → Codeänderung → entscheidende Output-Zeile.
   </div>
   <div class="r-solution-transfer"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</div>
   ${changeList}
@@ -1093,41 +1085,34 @@ export function renderRPracticeMarkup(block, options = {}) {
     <h3>${escapeHtml(config.title)}</h3>
   </div>
   <p class="r-practice-bridge">${escapeHtml(config.purpose)}</p>
-  <div class="r-practice-meta-row">
-    ${config.script ? `<div class="r-script-ref">${escapeHtml(config.script)}</div>` : ''}
-    <div class="r-runtime-note">${escapeHtml(config.runtimeNote)}</div>
-  </div>
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(config.firstStep)}
+    <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep)}
   </div>
 </div>
 <div class="r-practice-workspace">
   <div class="r-practice-editor-card">
     <div class="r-practice-toolbar">
       <div>
-        <div class="r-practice-toolbar-kicker">Codebereich</div>
-        <div class="r-practice-toolbar-title">Code als Modell der Fachidee</div>
+        <div class="r-practice-toolbar-title">Nur die Kernzeile ändern</div>
       </div>
-      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv im Browser'}</span>
+      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
     </div>
     <textarea class="r-practice-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
     <div class="r-practice-actions">
-      <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen'}</button>
+      <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen'}</button>
       <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
-      <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
+      <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung</button>
     </div>
 <div class="r-practice-help">
-      <span class="r-practice-help-label">Bearbeitungshinweis</span>
       <p><strong>Ändern:</strong> ${escapeHtml(config.changeFocus)}</p>
-      <p><strong>Stehen lassen:</strong> ${escapeHtml(config.keepHint)}</p>
+      <p><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
     </div>
   </div>
   <div class="r-practice-output-card">
     <div class="r-practice-output-head">
       <div>
-        <div class="r-practice-toolbar-kicker">Output</div>
-        <div class="r-practice-toolbar-title">Output lesen und belegen</div>
+        <div class="r-practice-toolbar-title">Was zählt im Output</div>
       </div>
     </div>
     <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
@@ -1135,15 +1120,15 @@ export function renderRPracticeMarkup(block, options = {}) {
 </div>
 <div class="r-practice-grid">
   <div class="r-practice-card">
-    <h4>Output lesen</h4>
+    <h4>Output-Beweis</h4>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
   </div>
   <div class="r-practice-card">
-    <h4>Mini-Task</h4>
+    <h4>Aufgabe</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
-    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
+    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Lösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
     </div>
@@ -1237,10 +1222,10 @@ ${steps.map((label, i) => `<div class="r-flow-step"><span class="r-step-num">${i
 
 function renderTabOrientationCard(config, index, total) {
   const isMulti = total > 1;
-  const indexLabel = isMulti ? ` · Block ${index + 1} von ${total}` : '';
+  const indexLabel = isMulti ? ` · ${index + 1} / ${total}` : '';
   const firstAction = config.runtimeMode === 'guided'
-    ? 'Lies den Code sorgfältig durch. Nutze die Interpretation und den Mini-Task — ein Live-Run ist hier nicht erforderlich.'
-    : 'Lies den Code einmal durch, dann klicke „Code ausführen". Danach: Output lesen → Interpretation → Mini-Task.';
+    ? 'Lies den Code durch. Nutze Interpretation und Aufgabe — ein Live-Run ist hier nicht nötig.'
+    : 'Lies den Code einmal durch, dann „Code ausführen". Danach: Output → Interpretation → Aufgabe.';
 
   return `<div class="r-orient-card">
   <div class="r-orient-top">
@@ -1248,31 +1233,29 @@ function renderTabOrientationCard(config, index, total) {
       <div class="r-orient-kicker">R-Übung${indexLabel}</div>
       <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
     </div>
-    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv im Browser'}</span>
+    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
   </div>
   <p class="r-orient-purpose">${escapeHtml(config.purpose)}</p>
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
+    <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
   </div>
-  ${renderFlowSteps(config)}
   ${config.script ? `<div class="r-orient-script">${escapeHtml(config.script)}</div>` : ''}
 </div>`;
 }
 
 function renderHighlightEditor(config) {
   const editHint = config.runtimeMode === 'guided'
-    ? 'Kein Live-Run nötig: Lies Code und Output als gemeinsames Belegpaket.'
+    ? 'Lies Code und Output als gemeinsames Belegpaket.'
     : `Ändern: ${config.changeFocus}`;
 
-  const actionLabel = config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen';
+  const actionLabel = config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen';
   const runDisabled = config.runtimeMode === 'guided' ? ' disabled' : '';
 
   return `<div class="r-practice-editor-card">
   <div class="r-practice-toolbar">
       <div>
-        <div class="r-practice-toolbar-kicker">Codebereich</div>
-        <div class="r-practice-toolbar-title">Bearbeite heute nur die Kernzeile — nicht den ganzen Block</div>
+        <div class="r-practice-toolbar-title">Nur die Kernzeile ändern</div>
       </div>
   </div>
   <div class="r-highlight-wrap">
@@ -1282,43 +1265,33 @@ function renderHighlightEditor(config) {
   <div class="r-practice-actions">
     <button type="button" class="btn" data-r-action="run"${runDisabled}>${escapeHtml(actionLabel)}</button>
     <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
-    <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
+    <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung</button>
   </div>
   <div class="r-practice-help">
-    <span class="r-practice-help-label">Bearbeitungshinweis</span>
     <p>${escapeHtml(editHint)}</p>
-    <p class="r-practice-help-subtle"><strong>Stehen lassen:</strong> ${escapeHtml(config.keepHint)}</p>
+    <p class="r-practice-help-subtle"><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
   </div>
 </div>`;
 }
 
 function renderTabOutputCard(config) {
-  const outputTitle = config.runtimeMode === 'guided'
-    ? 'Output lesen und belegen'
-    : 'Output lesen und belegen';
-
   return `<div class="r-practice-output-card r-tab-output-card">
   <div class="r-practice-output-head">
     <div>
-      <div class="r-practice-toolbar-kicker">Output</div>
-      <div class="r-practice-toolbar-title">${outputTitle}</div>
+      <div class="r-practice-toolbar-title">Was zählt im Output</div>
     </div>
   </div>
   <div class="r-output-focus">
-    <div class="r-output-interp-kicker">Worauf du im Output achtest</div>
+    <div class="r-output-interp-kicker">Darauf achten</div>
     <ul class="r-output-focus-list">
       ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
     </ul>
   </div>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
   <div class="r-output-interp">
-    <div class="r-output-interp-kicker">Output als Beweis</div>
+    <div class="r-output-interp-kicker">Was der Output belegt</div>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
-    <ul class="r-output-checklist">
-      <li><strong>Bestätigt/Falsifiziert:</strong> Welche konkrete Zeile trägt deine Entscheidung?</li>
-      <li><strong>Grenze:</strong> Was bleibt trotz Output offen?</li>
-    </ul>
   </div>
 </div>`;
 }
@@ -1326,17 +1299,17 @@ function renderTabOutputCard(config) {
 function renderTabBottomRow(config) {
   const pitfallsHtml = config.pitfalls.length
     ? `<div class="r-practice-pitfalls r-tab-pitfalls">
-<h4>Häufige Fehler</h4>
+<h4>Typische Fehler</h4>
 <ul>${config.pitfalls.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
 </div>` : '';
 
   return `<div class="r-tab-bottom">
   <div class="r-practice-card r-tab-task-card">
-    <h4>Mini-Task</h4>
+    <h4>Aufgabe</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
-    <p class="r-transfer-rule"><strong>Merksatz für Klausuren:</strong> ${escapeHtml(config.transferRule)}</p>
-    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
+    <p class="r-transfer-rule"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</p>
+    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Lösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
     </div>
@@ -1353,11 +1326,8 @@ function renderRLabSection(block, moduleSlug, index, total, options = {}) {
   const config = buildConfig(block, { moduleSlug, blockId });
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
-  const runtimeNote = config.runtimeNote;
-
   return `<div class="r-lab-section r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
 ${renderTabOrientationCard(config, index, total)}
-<div class="r-runtime-note r-tab-runtime-note">${escapeHtml(runtimeNote)}</div>
 <div class="r-practice-workspace">
   ${renderHighlightEditor(config)}
   ${renderTabOutputCard(config)}
@@ -1417,7 +1387,7 @@ function toggleSolution(blockEl) {
   if (!solution) return;
   solution.hidden = !solution.hidden;
   blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
-    button.textContent = solution.hidden ? 'Musterlösung anzeigen' : 'Musterlösung ausblenden';
+    button.textContent = solution.hidden ? 'Lösung anzeigen' : 'Lösung ausblenden';
   });
   if (!solution.hidden && window.MathJax?.typesetPromise) {
     window.MathJax.typesetPromise([solution]).catch(() => {});

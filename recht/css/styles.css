@@ -16,51 +16,56 @@
   --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Courier New',
                'Inconsolata', monospace;
 
-  /* Structural accent — restrained blue; positive semantics stay green */
-  --accent:   #4a90d9;   /* restrained blue — primary structural accent */
-  --accent2:  #5a9fd4;   /* secondary blue — section headings, interactive */
-  --accent3:  #e05252;   /* muted red — errors, warnings */
-  --accent-fg: #ffffff;  /* text on accent-coloured backgrounds */
-  --semantic-green: #4caf7c; /* semantic only: correct, done, positive */
-  --math-ink: #ff82c6;
-  --nav-active-bg: rgba(126, 149, 176, 0.16);
-  --nav-active-border: #8eabc8;
-  --nav-active-text: #dce8f6;
-  --nav-active-num: #b9cce3;
-  --link-prereq-bg: rgba(74, 144, 217, 0.12);
-  --link-prereq-border: rgba(74, 144, 217, 0.28);
-  --link-prereq-text: #8fc0ec;
-  --link-dependent-bg: rgba(235, 76, 151, 0.18);
-  --link-dependent-border: rgba(235, 76, 151, 0.34);
-  --link-dependent-text: #ffb8da;
+  /* Structural accent — premium blue; magenta for math only */
+  --accent:   #3b82f6;
+  --accent2:  #60a5fa;
+  --accent3:  #f87171;
+  --accent-fg: #ffffff;
+  --accent-strong: #2563eb;
+  --accent-soft: rgba(59, 130, 246, 0.1);
+  --module-accent: var(--accent);
+  --semantic-green: #34d399;
+  --math-ink: #E03AFB;
+  --math-ink-deep: #C91FEA;
+  --math-soft: rgba(224, 58, 251, 0.12);
+  --nav-active-bg: rgba(59, 130, 246, 0.14);
+  --nav-active-border: #3b82f6;
+  --nav-active-text: #e5e7eb;
+  --nav-active-num: #94a3b8;
+  --link-prereq-bg: rgba(59, 130, 246, 0.1);
+  --link-prereq-border: rgba(59, 130, 246, 0.24);
+  --link-prereq-text: #93c5fd;
+  --link-dependent-bg: rgba(224, 58, 251, 0.14);
+  --link-dependent-border: rgba(224, 58, 251, 0.30);
+  --link-dependent-text: #f06aff;
   --content-shell-max: clamp(1120px, 88vw, 1540px);
   --content-body-max: clamp(980px, 82vw, 1240px);
   --graph-shell-max: clamp(1080px, 88vw, 1400px);
   --reading-measure: 78ch;
 
-  /* Neutral dark palette */
-  --bg:        #0f1114;
-  --surface:   #1a1d21;
-  --surface2:  #22262b;
-  --surface3:  #2e3338;
-  --card:      #1a1d21;
-  --border:    #2e3338;
-  --text:      #e8e8ed;
-  --muted:     #8a8f98;
-  --sys-blue:  #4a90d9;
-  --sys-green: #4caf7c;
-  --sys-red:   #e05252;
-  --sys-orange:#d49a4a;
+  /* Premium dark — deep navy-charcoal */
+  --bg:        #0d1118;
+  --surface:   #18202d;
+  --surface2:  #1e283a;
+  --surface3:  #283850;
+  --card:      #121823;
+  --border:    #283244;
+  --text:      #e5e7eb;
+  --muted:     #aab4c3;
+  --sys-blue:  #3b82f6;
+  --sys-green: #34d399;
+  --sys-red:   #f87171;
+  --sys-orange:#fbbf24;
 
-  /* Aliases used throughout */
+  /* Aliases */
   --border-color:    var(--border);
   --text-primary:    var(--text);
   --text-secondary:  var(--muted);
 
-  /* Card shadow */
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+  /* Card shadow — inset highlight for premium depth */
+  --shadow-sm: inset 0 1px 0 rgba(255,255,255,0.04), 0 1px 3px rgba(0,0,0,0.24), 0 4px 12px rgba(0,0,0,0.18);
+  --shadow-md: inset 0 1px 0 rgba(255,255,255,0.035), 0 4px 10px rgba(0,0,0,0.28), 0 12px 28px rgba(0,0,0,0.22);
+  --shadow-lg: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.35), 0 24px 52px rgba(0,0,0,0.28);
 
   /* Spacing */
   --space-xs: 6px;
@@ -70,47 +75,52 @@
   --space-xl: 48px;
 
   /* Radius */
-  --r-sm:  8px;
+  --r-sm: 10px;
   --r-md: 12px;
-  --r-lg: 16px;
+  --r-lg: 18px;
   --r-xl: 20px;
 }
 
 /* ── Light Mode (default) ─────────────────────────────────── */
 body.light-mode {
-  --bg:        #f2f2f7;
-  --surface:   #ffffff;
-  --surface2:  #f2f2f7;
-  --surface3:  #e5e5ea;
-  --card:      #ffffff;
-  --border:    #d1d1d6;
-  --text:      #1c1c1e;
-  --muted:     #6c6c70;
-  --sys-blue:  #007aff;
-  --sys-green: #34c759;
-  --sys-red:   #ff3b30;
-  --sys-orange:#ff9500;
+  --bg:        #f5f7fb;
+  --surface:   #eef2f8;
+  --surface2:  #e8edf5;
+  --surface3:  #dfe6f2;
+  --card:      #fcfdfe;
+  --border:    #d7dfec;
+  --text:      #111827;
+  --muted:     #4b5563;
+  --sys-blue:  #2563eb;
+  --sys-green: #10b981;
+  --sys-red:   #ef4444;
+  --sys-orange:#f59e0b;
 
-  --accent:    #2c6fba;   /* restrained blue: AA contrast on white */
-  --accent2:   #3a7ab8;   /* secondary blue: AA contrast on white */
-  --accent3:   #c0392b;
+  --accent:    #2563eb;
+  --accent2:   #3b82f6;
+  --accent3:   #dc2626;
   --accent-fg: #ffffff;
-  --semantic-green: #2d8659; /* semantic only: correct, done, positive */
-  --math-ink: #d81f74;
-  --nav-active-bg: rgba(108, 136, 171, 0.15);
-  --nav-active-border: #7c9fc6;
-  --nav-active-text: #244a72;
-  --nav-active-num: #54779d;
-  --link-prereq-bg: rgba(44, 111, 186, 0.09);
-  --link-prereq-border: rgba(44, 111, 186, 0.2);
-  --link-prereq-text: #2e669b;
-  --link-dependent-bg: rgba(216, 31, 116, 0.11);
-  --link-dependent-border: rgba(216, 31, 116, 0.24);
-  --link-dependent-text: #b42567;
+  --accent-strong: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --module-accent: var(--accent);
+  --semantic-green: #10b981;
+  --math-ink: #C91FEA;
+  --math-ink-deep: #B018D0;
+  --math-soft: rgba(224, 58, 251, 0.10);
+  --nav-active-bg: rgba(59, 130, 246, 0.1);
+  --nav-active-border: #3b82f6;
+  --nav-active-text: #111827;
+  --nav-active-num: #4b5563;
+  --link-prereq-bg: rgba(59, 130, 246, 0.08);
+  --link-prereq-border: rgba(59, 130, 246, 0.2);
+  --link-prereq-text: #1d4ed8;
+  --link-dependent-bg: rgba(224, 58, 251, 0.10);
+  --link-dependent-border: rgba(224, 58, 251, 0.24);
+  --link-dependent-text: #B018D0;
 
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05);
-  --shadow-lg: 0 8px 28px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.06);
+  --shadow-sm: inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 2px rgba(17,24,39,0.04), 0 3px 10px rgba(17,24,39,0.05);
+  --shadow-md: inset 0 1px 0 rgba(255,255,255,0.65), 0 4px 10px rgba(17,24,39,0.06), 0 10px 26px rgba(17,24,39,0.07);
+  --shadow-lg: inset 0 1px 0 rgba(255,255,255,0.55), 0 8px 20px rgba(17,24,39,0.08), 0 20px 44px rgba(17,24,39,0.06);
 }
 
 /* ── Reset ────────────────────────────────────────────────── */

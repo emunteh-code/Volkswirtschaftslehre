@@ -1,0 +1,1513 @@
+/* ============================================================
+   Premium refinement — component-level polish (pass 2)
+   Additive only. Tokens live in module styles.css.
+   Load AFTER module stylesheet.
+   ============================================================ */
+
+/* ── Motion primitives (new properties, no conflicts) ──── */
+:root {
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-hover: 140ms;
+  --duration-tab: 200ms;
+  --duration-enter: 250ms;
+}
+
+/* ── Focus — soft blue ring ────────────────────────────── */
+#app :is(button, a, input, textarea, select, .tab-btn, .nav-item):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.28);
+  border-radius: var(--r-sm);
+}
+
+/* ── Topbar — calmer glass ─────────────────────────────── */
+#topbar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+
+/* ============================================================
+   PHASE 2 — CARD HIERARCHY
+   ============================================================ */
+
+/* Primary teaching card — dominant surface */
+#content .section-block {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .section-block:hover {
+  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 18%);
+  box-shadow: var(--shadow-md);
+}
+
+/* Section heading — accent bar + premium colour */
+#content .section-block > h3 {
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+  line-height: 1.35;
+}
+
+#content .section-block > h3::before {
+  background: linear-gradient(180deg, var(--accent-strong, var(--accent)), var(--accent));
+  width: 3px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+/* Formula card — math-tinted, secondary */
+#content .math-block {
+  background: color-mix(in srgb, var(--surface2) 86%, var(--math-soft, transparent) 14%);
+  border-color: color-mix(in srgb, var(--border) 80%, var(--math-ink) 20%);
+  border-left-color: var(--math-ink);
+}
+
+#content .formula-card {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--math-ink) 12%);
+  background: color-mix(in srgb, var(--card) 90%, var(--math-soft, transparent) 10%);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .formula-card:hover {
+  border-color: color-mix(in srgb, var(--math-ink) 30%, var(--border));
+  box-shadow: var(--shadow-md);
+}
+
+/* Trap / warning card — red-tinted border, surface bg */
+#content .warn-box {
+  background: color-mix(in srgb, var(--surface2) 88%, rgba(239, 68, 68, 0.08));
+  border-color: color-mix(in srgb, var(--border) 75%, var(--sys-red) 25%);
+  border-left-color: var(--sys-red);
+}
+
+#content .warn-box strong {
+  color: color-mix(in srgb, var(--sys-red) 92%, var(--text) 8%);
+}
+
+/* Exam + dashboard — secondary weight */
+.exam-topbar,
+.dash-stat,
+.fe-score-card {
+  border-color: color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Concept header — tighter spacing to graph */
+#content .concept-title {
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+#content .concept-tag {
+  background: color-mix(in srgb, var(--accent-soft, rgba(59,130,246,0.1)) 100%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  color: var(--accent-strong, var(--accent));
+}
+
+/* ============================================================
+   PHASE 3 — GRAPH HERO SURFACE
+   ============================================================ */
+
+/* Graph as dominant teaching card — same material as section-block */
+#content .graph-container {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-container:hover {
+  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 18%);
+  box-shadow: var(--shadow-md);
+}
+
+/* Full-width rhythm — no narrow centred island */
+#content .graph-container .graph-panel-title,
+#content .graph-container .graph-controls,
+#content .graph-container .graph-info {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Graph title = same heading language as section-block h3 */
+#content .graph-panel-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+#content .graph-panel-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--accent-strong, var(--accent)), var(--accent));
+  flex-shrink: 0;
+}
+
+/* Controls = integrated toolbar band */
+#content .graph-controls {
+  padding: var(--space-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--surface2) 68%, var(--card) 32%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+body.light-mode #content .graph-controls {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+#content .graph-container .ctrl-group {
+  background: color-mix(in srgb, var(--card) 90%, var(--surface2) 10%);
+  border-color: color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  transition: border-color var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-container .ctrl-group:hover {
+  border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 22%);
+}
+
+#content .graph-container .ctrl-group label {
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+  letter-spacing: 0.1em;
+  font-size: 0.65rem;
+}
+
+/* Canvas = inset stage, not a nested card */
+#content .graph-container canvas {
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+body.light-mode #content .graph-container canvas {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* Interpretation = footer of the teaching unit */
+#content .graph-info {
+  background: color-mix(in srgb, var(--surface2) 38%, var(--card) 62%);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  border-radius: var(--r-md);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: opacity 0.2s var(--ease-premium);
+}
+
+body.light-mode #content .graph-info {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#content .graph-info strong {
+  color: var(--accent-strong, var(--accent));
+}
+
+#content .graph-info .gi-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 75%, var(--text) 25%);
+}
+
+#content .graph-info .gi-eq {
+  border-color: color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  background: color-mix(in srgb, var(--card) 82%, var(--math-soft, transparent) 18%);
+}
+
+#content .graph-info .gi-row {
+  border-color: color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  border-radius: var(--r-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-info .gi-row:hover {
+  border-color: color-mix(in srgb, var(--border) 70%, var(--accent) 22%);
+  box-shadow: var(--shadow-sm);
+}
+
+#content .graph-info .gi-row-head {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 72%, var(--accent) 28%);
+}
+
+/* Macro/Finanz graph insight + interpretation rows */
+#content .graph-insight-row,
+#content .graph-interpretation-row {
+  background: color-mix(in srgb, var(--surface2) 40%, var(--card) 60%);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-insight-row:hover,
+#content .graph-interpretation-row:hover {
+  border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 20%);
+}
+
+#content .graph-insight-label,
+#content .graph-interpretation-label {
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 72%, var(--accent) 28%);
+}
+
+/* Tooltip — premium popover */
+.graph-tooltip {
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+  max-width: 240px;
+}
+
+/* ============================================================
+   PHASE 5 — RIGHT RAIL
+   ============================================================ */
+
+#rightPanel {
+  background: color-mix(in srgb, var(--bg) 55%, var(--surface) 45%);
+  border-left-color: var(--border);
+}
+
+#rightPanel .rp-section {
+  background: color-mix(in srgb, var(--card) 92%, var(--surface2) 8%);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  box-shadow: var(--shadow-sm);
+}
+
+#rightPanel .rp-section h4 {
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--muted) 75%, var(--text) 25%);
+}
+
+#rightPanel .rp-formula {
+  background: color-mix(in srgb, var(--surface2) 88%, var(--math-soft, transparent) 12%);
+  border-color: color-mix(in srgb, var(--border) 85%, var(--math-ink) 15%);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#rightPanel .rp-formula:hover {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   PHASE 6 — TABS (premium pill)
+   ============================================================ */
+
+#tabRow.tab-row {
+  background: color-mix(in srgb, var(--surface) 88%, var(--bg));
+  border-top-color: var(--border);
+  gap: 4px;
+}
+
+#tabRow .tab-btn {
+  border-radius: var(--r-md);
+  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
+  transition:
+    background var(--duration-tab) var(--ease-premium),
+    color var(--duration-tab) var(--ease-premium),
+    box-shadow var(--duration-tab) var(--ease-premium),
+    border-color var(--duration-tab) var(--ease-premium);
+  border: 1px solid transparent;
+}
+
+#tabRow .tab-btn:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface2) 92%, var(--accent) 4%);
+  border-color: color-mix(in srgb, var(--border) 85%, var(--accent) 15%);
+}
+
+#tabRow .tab-btn.active {
+  background: color-mix(in srgb, var(--accent) 92%, #000 8%);
+  color: var(--accent-fg);
+  font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent-strong, var(--accent)) 45%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode #tabRow .tab-btn.active {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 96%, #fff) 0%, var(--accent) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 8px rgba(37, 99, 235, 0.18);
+}
+
+#tabRow .tab-btn:active {
+  transform: none;
+  opacity: 0.94;
+}
+
+/* ============================================================
+   PHASE 6 — SIDEBAR NAV
+   ============================================================ */
+
+#sidebar .nav-item {
+  transition:
+    background var(--duration-hover) var(--ease-premium),
+    color var(--duration-hover) var(--ease-premium),
+    border-color var(--duration-hover) var(--ease-premium),
+    opacity var(--duration-hover) var(--ease-premium);
+  border-left-width: 3px;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  margin-right: 8px;
+  opacity: 0.94;
+}
+
+#sidebar .nav-item:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--surface2) 88%, var(--accent) 6%);
+  color: var(--text);
+}
+
+#sidebar .nav-item.active {
+  opacity: 1;
+  box-shadow: inset 3px 0 0 0 var(--nav-active-border);
+  border-left-color: transparent;
+  font-weight: 600;
+}
+
+body.light-mode #sidebar .nav-item.active {
+  box-shadow: inset 3px 0 0 0 var(--nav-active-border);
+}
+
+/* ============================================================
+   PHASE 6 — HOME / MODULE TILES
+   ============================================================ */
+
+.home-action-card,
+.home-card,
+.home-mini-card,
+.home-continue-card {
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    transform var(--duration-hover) var(--ease-premium);
+}
+
+.home-action-card:hover,
+.home-card:hover,
+.home-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 35%);
+  box-shadow: var(--shadow-md);
+}
+
+.home-action-card:active,
+.home-card:active {
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   PHASE 6 — PROGRESS BARS (no bounce)
+   ============================================================ */
+
+.progress-fill,
+.dash-bar-fg,
+.exam-prog-fill,
+.m-bar-fill {
+  transition: width 0.48s var(--ease-premium);
+}
+
+/* ============================================================
+   PHASE 6 — FEEDBACK
+   ============================================================ */
+
+.fe-feedback.fb-correct {
+  background: color-mix(in srgb, var(--semantic-green) 8%, var(--surface2));
+  border-color: color-mix(in srgb, var(--semantic-green) 28%, var(--border));
+}
+
+.fe-feedback.fb-wrong {
+  background: color-mix(in srgb, var(--sys-red) 7%, var(--surface2));
+  border-color: color-mix(in srgb, var(--sys-red) 28%, var(--border));
+}
+
+/* ============================================================
+   PHASE 6 — LIGHT MODE ADJUSTMENTS
+   ============================================================ */
+
+body.light-mode #content .section-block {
+  box-shadow: var(--shadow-sm);
+}
+
+body.light-mode #sidebar .search-input:focus {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.28);
+}
+
+/* ============================================================
+   PHASE 7 — MOTION (restrained)
+   ============================================================ */
+
+@keyframes premiumFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#content .panel.active {
+  animation: premiumFadeUp var(--duration-enter) var(--ease-premium) both;
+}
+
+.fe-feedback.show {
+  animation: premiumFadeUp 0.22s var(--ease-premium) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #content .panel.active {
+    animation: none !important;
+  }
+  .fe-feedback.show {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   EMPTY / QUIET STATES
+   ============================================================ */
+
+.empty-state {
+  max-width: 36rem;
+  margin-inline: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state p {
+  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+.mr-empty {
+  border-radius: var(--r-md);
+  border: 1px dashed color-mix(in srgb, var(--border) 88%, var(--muted) 12%);
+  background: color-mix(in srgb, var(--surface2) 55%, transparent);
+  color: color-mix(in srgb, var(--muted) 92%, var(--text) 8%);
+}
+
+/* ============================================================
+   PASS 3 — TAB INTERACTION POLISH
+   ============================================================ */
+
+#tabRow .tab-btn {
+  position: relative;
+  font-weight: 500;
+  padding: 7px 14px;
+  letter-spacing: 0.01em;
+}
+
+#tabRow .tab-btn:hover {
+  background: color-mix(in srgb, var(--surface2) 88%, var(--accent) 8%);
+  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 18%);
+}
+
+#tabRow .tab-btn.active {
+  letter-spacing: 0.01em;
+}
+
+#tabRow .tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+/* ============================================================
+   PASS 3 — SIDEBAR INTERACTION POLISH
+   ============================================================ */
+
+#sidebar .nav-item:hover {
+  background: color-mix(in srgb, var(--surface2) 82%, var(--accent) 10%);
+}
+
+#sidebar .nav-item.active {
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface2) 92%);
+}
+
+#sidebar .search-input {
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#sidebar .search-input:focus {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border) 60%);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+/* ============================================================
+   PASS 3 — HOVER / FOCUS / HIGHLIGHT SYSTEM
+   ============================================================ */
+
+#content .problem-card,
+#content .exam-drill-card {
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    transform var(--duration-hover) var(--ease-premium);
+}
+
+#content .problem-card:hover,
+#content .exam-drill-card:hover {
+  border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 22%);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.home-continue-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 35%);
+  box-shadow: var(--shadow-md);
+}
+
+#content .btn {
+  transition:
+    background var(--duration-hover) var(--ease-premium),
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    transform 80ms ease;
+}
+
+#content .btn:active {
+  transform: translateY(1px);
+}
+
+/* ============================================================
+   PASS 3 — AUFGABEN PREMIUM SURFACE
+   ============================================================ */
+
+#content .mikro1-practice {
+  display: grid;
+  gap: 20px;
+}
+
+.practice-section-header {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 60%, var(--text) 40%);
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  margin-bottom: 4px;
+}
+
+#content .problem-card {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 20px;
+}
+
+#content .problem-card .prob-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+#content .problem-card .prob-text {
+  font-size: 14px;
+  line-height: 1.62;
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+}
+
+#content .solution-block {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--accent) 12%);
+  background: color-mix(in srgb, var(--surface2) 50%, var(--card) 50%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+body.light-mode #content .solution-block {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#content .solution-block .step {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+#content .solution-block .step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#content .solution-block .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface) 86%);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+#content .solution-block .step-body {
+  font-size: 13.5px;
+  line-height: 1.58;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+}
+
+#content .result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--semantic-green) 10%, var(--surface2) 90%);
+  border: 1px solid color-mix(in srgb, var(--semantic-green) 24%, var(--border) 76%);
+  color: var(--semantic-green);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* ============================================================
+   PASS 3 — PRÜFUNGSTRANSFER PREMIUM SURFACE
+   ============================================================ */
+
+#content .exam-drill-panel {
+  padding-top: 8px;
+}
+
+#content .exam-drill-grid {
+  display: grid;
+  gap: 14px;
+}
+
+#content .exam-drill-card {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--accent) 10%);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 50%, var(--border) 50%);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 18px;
+}
+
+#content .exam-drill-card .prob-text {
+  font-weight: 500;
+}
+
+#content .exam-drill-solution {
+  margin-top: 10px;
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--accent) 14%);
+  background: color-mix(in srgb, var(--surface2) 45%, var(--card) 55%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+body.light-mode #content .exam-drill-solution {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#content .exam-drill-line {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+#content .exam-drill-line:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#content .exam-drill-key {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 60%, var(--muted) 40%);
+}
+
+#content .exam-drill-copy {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+}
+
+#content .exam-drill-meta {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--accent) 4%, var(--surface2) 96%);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, var(--border) 88%);
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+}
+
+#content .exam-drill-steps {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: drill-step;
+}
+
+#content .exam-drill-steps > li {
+  counter-increment: drill-step;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+  font-size: 13.5px;
+  line-height: 1.58;
+}
+
+#content .exam-drill-steps > li:last-child {
+  border-bottom: none;
+}
+
+#content .exam-drill-steps > li::before {
+  content: counter(drill-step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface) 88%);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   PASS 3 — MATH-BLOCK MAGENTA EMPHASIS
+   ============================================================ */
+
+#content .math-block {
+  border-left-width: 3px;
+  border-left-style: solid;
+}
+
+#content .f-eq {
+  color: color-mix(in srgb, var(--math-ink) 30%, var(--text) 70%);
+}
+
+#content .formula-card .f-label {
+  color: color-mix(in srgb, var(--math-ink) 50%, var(--text) 50%);
+  font-weight: 600;
+}
+
+/* ============================================================
+   PASS 3 — LIGHT MODE REFINEMENTS
+   ============================================================ */
+
+body.light-mode #content .exam-drill-card {
+  border-left-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+}
+
+body.light-mode #tabRow .tab-btn:hover {
+  background: color-mix(in srgb, var(--surface2) 85%, var(--accent) 10%);
+}
+
+body.light-mode #tabRow .tab-btn.active::after {
+  opacity: 0.3;
+}
+
+body.light-mode #content .problem-card .prob-num {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface) 90%);
+}
+
+body.light-mode #content .exam-drill-key {
+  color: color-mix(in srgb, var(--accent) 65%, var(--muted) 35%);
+}
+
+/* ============================================================
+   PASS 4.1 — LEGAL SCHEMA RENDERING (recht formula fix)
+   ============================================================ */
+
+.legal-schema {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 14px 18px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  border-left: 3px solid var(--math-ink);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.schema-term {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 88%, var(--math-ink) 12%);
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--card) 82%, var(--math-soft, transparent) 18%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--math-ink) 22%);
+  white-space: nowrap;
+}
+
+.schema-arrow {
+  font-size: 18px;
+  color: var(--math-ink);
+  font-weight: 300;
+  opacity: 0.85;
+}
+
+.schema-op {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+body.light-mode .legal-schema {
+  background: color-mix(in srgb, var(--card) 78%, var(--math-soft, transparent) 22%);
+}
+
+body.light-mode .schema-term {
+  background: color-mix(in srgb, #fff 78%, var(--math-soft, transparent) 22%);
+  border-color: color-mix(in srgb, var(--border) 72%, var(--math-ink) 28%);
+}
+
+/* Formula-card f-eq legal schemas */
+.f-eq .legal-schema {
+  padding: 10px 14px;
+  border: none;
+  border-left: none;
+  background: transparent;
+}
+
+/* ============================================================
+   PASS 4.1 — CARD HIERARCHY RADIUS (major cards = 18px via --r-lg)
+   ============================================================ */
+
+#content .section-block {
+  border-radius: var(--r-lg);
+}
+
+#content .graph-container {
+  border-radius: var(--r-lg);
+}
+
+.empty-state {
+  border-radius: var(--r-lg);
+}
+
+/* ============================================================
+   PASS 4.1 — AUFGABEN PREMIUM SURFACE (contract: 24px padding)
+   ============================================================ */
+
+#content .problem-card {
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+
+#content .problem-card .prob-num {
+  width: 28px;
+  height: 28px;
+  font-size: 12.5px;
+}
+
+#content .solution-block {
+  padding: 20px;
+  border-radius: var(--r-md);
+  margin-top: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 74%, var(--accent) 18%);
+  background: color-mix(in srgb, var(--surface2) 42%, var(--card) 58%);
+}
+
+#content .solution-block .step {
+  padding: 12px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+#content .solution-block .step-num {
+  min-width: 24px;
+  height: 24px;
+  font-size: 11.5px;
+}
+
+#content .result-badge {
+  padding: 10px 16px;
+  border-radius: var(--r-md);
+  font-size: 13.5px;
+  margin-top: 10px;
+  background: color-mix(in srgb, var(--semantic-green) 12%, var(--surface2) 88%);
+  border: 1px solid color-mix(in srgb, var(--semantic-green) 30%, var(--border) 70%);
+  font-weight: 700;
+}
+
+/* Reveal button */
+#content .problem-card .btn,
+#content .exam-drill-card .btn {
+  min-height: 42px;
+  border-radius: var(--r-md);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 20px;
+}
+
+/* ============================================================
+   PASS 4.1 — PRÜFUNGSTRANSFER PREMIUM (sharper, austere)
+   ============================================================ */
+
+#content .exam-drill-card {
+  border-radius: var(--r-lg);
+  padding: 22px 24px;
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-left-color: color-mix(in srgb, var(--accent) 55%, var(--math-ink) 45%);
+}
+
+#content .exam-drill-card .prob-text {
+  font-size: 14.5px;
+  line-height: 1.58;
+  letter-spacing: -0.01em;
+}
+
+#content .exam-drill-solution {
+  padding: 18px 20px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 72%, var(--accent) 18%);
+  margin-top: 12px;
+}
+
+#content .exam-drill-line {
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 38%, transparent);
+}
+
+#content .exam-drill-key {
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+}
+
+#content .exam-drill-meta {
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface2) 95%);
+}
+
+#content .exam-drill-steps > li {
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 34%, transparent);
+}
+
+#content .exam-drill-steps > li::before {
+  min-width: 22px;
+  height: 22px;
+  font-size: 10.5px;
+}
+
+/* ============================================================
+   PASS 4.1 — MAGENTA EMPHASIS (strengthened)
+   ============================================================ */
+
+#content .f-eq {
+  color: color-mix(in srgb, var(--math-ink) 48%, var(--text) 52%);
+}
+
+#content .formula-card .f-label {
+  color: color-mix(in srgb, var(--math-ink) 60%, var(--text) 40%);
+}
+
+#content .formula-card {
+  border-left: 3px solid color-mix(in srgb, var(--math-ink) 55%, var(--border) 45%);
+}
+
+#content .math-block {
+  border-left-color: var(--math-ink-deep, var(--math-ink));
+  border-left-width: 3px;
+  border-left-style: solid;
+}
+
+#rightPanel .rp-formula {
+  border-left: 2px solid color-mix(in srgb, var(--math-ink) 45%, var(--border) 55%);
+}
+
+body.light-mode #content .formula-card {
+  border-left-color: color-mix(in srgb, var(--math-ink) 60%, var(--border) 40%);
+}
+
+body.light-mode #content .formula-card .f-label {
+  color: color-mix(in srgb, var(--math-ink-deep, var(--math-ink)) 55%, var(--text) 45%);
+}
+
+body.light-mode #content .f-eq {
+  color: color-mix(in srgb, var(--math-ink-deep, var(--math-ink)) 42%, var(--text) 58%);
+}
+
+/* ============================================================
+   PASS 4.1 — TAB INTERACTION (stronger active, visible hover)
+   ============================================================ */
+
+#tabRow .tab-btn {
+  padding: 8px 16px;
+}
+
+#tabRow .tab-btn.active {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+#tabRow .tab-btn.active::after {
+  opacity: 0.5;
+  height: 2.5px;
+  left: 20%;
+  right: 20%;
+}
+
+#tabRow .tab-btn:hover:not(.active) {
+  transform: translateY(-0.5px);
+}
+
+/* ============================================================
+   PASS 4.1 — SIDEBAR INTERACTION (stronger hover/active)
+   ============================================================ */
+
+#sidebar .nav-item:hover {
+  background: color-mix(in srgb, var(--surface2) 78%, var(--accent) 12%);
+  border-left-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+#sidebar .nav-item.active {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface2) 90%);
+}
+
+/* ============================================================
+   PASS 4.1 — R-TAB FLAGSHIP COMPOSITION
+   ============================================================ */
+
+/* Orient sub-sections — lighter than outer card */
+.r-orient-card .r-lesson-intro,
+.r-orient-card .r-translation-block,
+.r-orient-card .r-orient-panel,
+.r-orient-card .r-task-flow {
+  background: color-mix(in srgb, var(--surface2) 28%, transparent);
+  border-color: color-mix(in srgb, var(--border) 45%, transparent);
+  border-radius: var(--r-md);
+}
+
+/* Editor card accent border */
+.r-practice-editor-card {
+  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 22%);
+}
+
+/* Output card — math-tinted */
+.r-practice-output-card {
+  border-color: color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+}
+
+/* R button system */
+.r-practice-workspace .btn,
+.r-practice-workspace button[class] {
+  min-height: 42px;
+  border-radius: var(--r-md);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 20px;
+  transition:
+    background var(--duration-hover) var(--ease-premium),
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    transform 80ms ease;
+}
+
+.r-practice-workspace .btn:active,
+.r-practice-workspace button[class]:active {
+  transform: translateY(1px);
+}
+
+/* Primary R action button */
+.r-practice-workspace .r-run-btn,
+.r-practice-workspace .btn-primary {
+  background: var(--accent-strong, var(--accent));
+  color: var(--accent-fg);
+  border: 1px solid color-mix(in srgb, var(--accent-strong, var(--accent)) 80%, #000 20%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.r-practice-workspace .r-run-btn:hover,
+.r-practice-workspace .btn-primary:hover {
+  background: color-mix(in srgb, var(--accent-strong, var(--accent)) 88%, #000 12%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+body.light-mode .r-practice-workspace .r-run-btn,
+body.light-mode .r-practice-workspace .btn-primary {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 6px rgba(37, 99, 235, 0.18);
+}
+
+/* Output interpretation panel */
+.r-output-interp {
+  background: color-mix(in srgb, var(--surface2) 35%, var(--card) 65%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--math-ink) 12%);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  margin-top: 12px;
+  border-top: none;
+}
+
+/* R pitfalls card — warning tinted */
+.r-tab-pitfalls {
+  border-radius: var(--r-lg);
+}
+
+/* Transfer prompt/rule — premium feel */
+.r-transfer-prompt {
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+
+/* Highlight wrapper — cleaner frame */
+.r-highlight-wrap {
+  border-radius: var(--r-md);
+}
+
+/* ============================================================
+   PASS 4.1 — CARD HOVER SYSTEM (contract: translateY -2px max)
+   ============================================================ */
+
+#content .problem-card:hover,
+#content .exam-drill-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 28%);
+  box-shadow: var(--shadow-md);
+}
+
+#content .formula-card:hover {
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   PASS 4.1 — LIGHT MODE POLISH
+   ============================================================ */
+
+body.light-mode #content .section-block {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+}
+
+body.light-mode #content .problem-card {
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--text) 14%);
+}
+
+body.light-mode #content .exam-drill-card {
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--accent) 14%);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 50%, var(--math-ink) 50%);
+}
+
+body.light-mode #content .solution-block {
+  background: color-mix(in srgb, var(--surface) 40%, var(--card) 60%);
+  border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 20%);
+}
+
+body.light-mode #content .exam-drill-solution {
+  background: color-mix(in srgb, var(--surface) 35%, var(--card) 65%);
+}
+
+body.light-mode .r-orient-card {
+  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--accent) 20%);
+  border-top: 3px solid color-mix(in srgb, var(--accent) 75%, var(--math-ink) 25%);
+}
+
+body.light-mode .r-practice-editor-card {
+  border-color: color-mix(in srgb, var(--border) 74%, var(--accent) 26%);
+}
+
+body.light-mode .r-practice-output-card {
+  border-color: color-mix(in srgb, var(--border) 78%, var(--math-ink) 22%);
+}
+
+body.light-mode #sidebar .nav-item:hover {
+  background: color-mix(in srgb, var(--surface2) 74%, var(--accent) 14%);
+}
+
+/* ============================================================
+   MAGENTA + GRAPH PREMIUM CLOSURE
+   Hot pink-magenta #E03AFB system.
+   ============================================================ */
+
+/* ── Strengthen magenta display ─────────────────────────── */
+
+#content .f-eq {
+  color: color-mix(in srgb, var(--math-ink) 58%, var(--text) 42%);
+}
+
+#content .formula-card .f-label {
+  color: color-mix(in srgb, var(--math-ink) 68%, var(--text) 32%);
+}
+
+#content .formula-card {
+  border-left: 3px solid color-mix(in srgb, var(--math-ink) 65%, var(--border) 35%);
+}
+
+#content .math-block {
+  border-left-color: var(--math-ink);
+}
+
+#rightPanel .rp-formula {
+  border-left: 2px solid color-mix(in srgb, var(--math-ink) 55%, var(--border) 45%);
+}
+
+.schema-arrow {
+  color: var(--math-ink);
+}
+
+.legal-schema {
+  border-left: 3px solid var(--math-ink);
+}
+
+body.light-mode #content .f-eq {
+  color: color-mix(in srgb, var(--math-ink) 52%, var(--text) 48%);
+}
+
+body.light-mode #content .formula-card .f-label {
+  color: color-mix(in srgb, var(--math-ink) 62%, var(--text) 38%);
+}
+
+body.light-mode #content .formula-card {
+  border-left-color: color-mix(in srgb, var(--math-ink) 70%, var(--border) 30%);
+}
+
+/* ============================================================
+   GRAPH PREMIUM ATMOSPHERE — DARK MODE (default)
+   Near-black focal stage, stronger card presence, composed feel.
+   ============================================================ */
+
+/* Graph container — premium hero-card presence */
+#content .graph-container {
+  background: color-mix(in srgb, var(--card) 72%, var(--bg) 28%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
+  box-shadow: var(--shadow-md);
+}
+
+#content .graph-container:hover {
+  border-color: color-mix(in srgb, var(--border) 68%, var(--accent) 24%);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Canvas — premium inset focal stage (darker than card) */
+#content .graph-container canvas {
+  background: color-mix(in srgb, var(--bg) 65%, #000 35%);
+  border: 1px solid color-mix(in srgb, var(--border) 55%, #000 45%);
+  border-radius: var(--r-md);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* Graph controls — integrated premium toolbar */
+#content .graph-controls {
+  background: color-mix(in srgb, var(--surface2) 48%, var(--card) 52%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  border-radius: var(--r-md);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  padding: var(--space-sm) 14px;
+}
+
+/* Control groups — sharper interactive elements */
+#content .graph-container .ctrl-group {
+  background: color-mix(in srgb, var(--card) 82%, var(--surface2) 18%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
+  border-radius: var(--r-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-container .ctrl-group:hover {
+  border-color: color-mix(in srgb, var(--border) 56%, var(--accent) 32%);
+  box-shadow: var(--shadow-sm);
+}
+
+#content .graph-container .ctrl-group label {
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+}
+
+/* Graph info — tighter integration, premium surface */
+#content .graph-info {
+  background: color-mix(in srgb, var(--surface2) 22%, var(--card) 78%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
+  border-radius: var(--r-md);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Graph info rows — refined, premium interactive */
+#content .graph-info .gi-row {
+  background: color-mix(in srgb, var(--surface2) 32%, var(--card) 68%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  border-radius: var(--r-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    background var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-info .gi-row:hover {
+  border-color: color-mix(in srgb, var(--border) 56%, var(--accent) 32%);
+  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--surface2) 24%, var(--card) 76%);
+}
+
+/* Formula in graph info — hot magenta identity */
+#content .graph-info .gi-eq {
+  color: var(--math-ink);
+  background: color-mix(in srgb, var(--card) 74%, var(--math-soft, transparent) 26%);
+  border: 1px solid color-mix(in srgb, var(--border) 66%, var(--math-ink) 34%);
+  border-radius: var(--r-sm);
+}
+
+/* Insight/interpretation rows — premium surface */
+#content .graph-insight-row,
+#content .graph-interpretation-row {
+  background: color-mix(in srgb, var(--surface2) 28%, var(--card) 72%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .graph-insight-row:hover,
+#content .graph-interpretation-row:hover {
+  border-color: color-mix(in srgb, var(--border) 58%, var(--accent) 28%);
+  box-shadow: var(--shadow-md);
+}
+
+/* Insight/interpretation labels — accent-tinted */
+#content .graph-insight-label,
+#content .graph-interpretation-label {
+  color: color-mix(in srgb, var(--muted) 64%, var(--accent) 36%);
+}
+
+/* Tooltip — premium dark popover */
+.graph-tooltip {
+  background: color-mix(in srgb, var(--card) 88%, var(--surface2) 12%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--r-md);
+}
+
+/* ============================================================
+   GRAPH PREMIUM ATMOSPHERE — BRIGHT MODE
+   Premium card presence, inset chart stage, refined contrast.
+   ============================================================ */
+
+body.light-mode #content .graph-container {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
+  box-shadow: var(--shadow-md);
+}
+
+body.light-mode #content .graph-container:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+body.light-mode #content .graph-container canvas {
+  background: color-mix(in srgb, var(--bg) 45%, #fff 55%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  box-shadow:
+    inset 0 1px 4px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+body.light-mode #content .graph-controls {
+  background: color-mix(in srgb, var(--surface) 50%, var(--card) 50%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+body.light-mode #content .graph-container .ctrl-group {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--text) 20%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+body.light-mode #content .graph-info {
+  background: color-mix(in srgb, var(--surface) 20%, var(--card) 80%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode #content .graph-info .gi-row {
+  background: color-mix(in srgb, var(--surface) 14%, var(--card) 86%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+}
+
+body.light-mode #content .graph-info .gi-eq {
+  background: color-mix(in srgb, var(--card) 70%, var(--math-soft, transparent) 30%);
+  border-color: color-mix(in srgb, var(--border) 62%, var(--math-ink) 38%);
+}
+
+body.light-mode #content .graph-insight-row,
+body.light-mode #content .graph-interpretation-row {
+  background: color-mix(in srgb, var(--surface) 14%, var(--card) 86%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+}

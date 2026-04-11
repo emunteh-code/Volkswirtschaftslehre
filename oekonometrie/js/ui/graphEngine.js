@@ -301,7 +301,7 @@ class GraphEngine {
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
       const isLight = document.body.classList.contains('light-mode');
       const accent = '#2f77c7';
-      const mathInk = cv('--math-ink') || '#a83f69';
+      const mathInk = cv('--math-ink') || '#E03AFB';
       const warningRed = cv('--accent3') || '#e05252';
       const reference = isLight ? '#1c2530' : '#dde4ec';
       const optimum = reference;

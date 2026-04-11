@@ -31,7 +31,7 @@ function readColors() {
     accent: pick('--accent', '#4a90d9'),
     accent2: pick('--accent2', '#5a9fd4'),
     warn: pick('--accent3', '#e05252'),
-    math: pick('--math-ink', '#ff82c6'),
+    math: pick('--math-ink', '#E03AFB'),
     green: pick('--semantic-green', '#4caf7c'),
     fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif')
   };

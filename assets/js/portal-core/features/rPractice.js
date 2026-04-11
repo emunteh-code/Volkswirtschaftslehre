@@ -1101,8 +1101,8 @@ export function renderRPracticeMarkup(block, options = {}) {
     <textarea class="r-practice-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
     <div class="r-practice-actions">
       <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen'}</button>
-      <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
-      <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung</button>
+      <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
+      <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung einfügen</button>
     </div>
 <div class="r-practice-help">
       <p><strong>Ändern:</strong> ${escapeHtml(config.changeFocus)}</p>
@@ -1264,8 +1264,8 @@ function renderHighlightEditor(config) {
   </div>
   <div class="r-practice-actions">
     <button type="button" class="btn" data-r-action="run"${runDisabled}>${escapeHtml(actionLabel)}</button>
-    <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
-    <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung</button>
+    <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
+    <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung einfügen</button>
   </div>
   <div class="r-practice-help">
     <p>${escapeHtml(editHint)}</p>
@@ -1387,7 +1387,7 @@ function toggleSolution(blockEl) {
   if (!solution) return;
   solution.hidden = !solution.hidden;
   blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
-    button.textContent = solution.hidden ? 'Lösung anzeigen' : 'Lösung ausblenden';
+    button.textContent = solution.hidden ? 'Lösung einfügen' : 'Lösung ausblenden';
   });
   if (!solution.hidden && window.MathJax?.typesetPromise) {
     window.MathJax.typesetPromise([solution]).catch(() => {});

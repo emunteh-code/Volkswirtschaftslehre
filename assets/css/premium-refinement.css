@@ -23,7 +23,7 @@
 #topbar {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--bg) 88%, var(--surface) 12%);
+  background: color-mix(in srgb, var(--bg) 95%, var(--card) 5%);
 }
 
 #sidebar {
@@ -81,9 +81,20 @@ body.light-mode #topbar {
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+  align-self: start;
   transition:
     border-color var(--duration-hover) var(--ease-premium),
     box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .formula-card .f-eq {
+  min-height: 0;
+  padding: 12px 0;
+}
+
+#content .formula-grid {
+  align-items: start;
 }
 
 #content .formula-card:hover {
@@ -725,18 +736,7 @@ body.light-mode #content .solution-block {
   color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
 }
 
-#content .result-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--semantic-green) 10%, var(--surface2) 90%);
-  border: 1px solid color-mix(in srgb, var(--semantic-green) 24%, var(--border) 76%);
-  color: var(--semantic-green);
-  font-weight: 600;
-  font-size: 13px;
-}
+/* result-badge styled in pass 6 block below (magenta-family) */
 
 /* ============================================================
    PASS 3 — PRÜFUNGSTRANSFER PREMIUM SURFACE
@@ -1366,7 +1366,7 @@ body.light-mode #content .formula-card .f-label {
 body.light-mode #content .graph-container {
   background: var(--card);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 body.light-mode #content .graph-controls {
@@ -1382,4 +1382,127 @@ body.light-mode #content .graph-insight-row,
 body.light-mode #content .graph-interpretation-row {
   background: color-mix(in srgb, var(--surface) 14%, var(--card) 86%);
   border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+}
+
+/* ============================================================
+   PASS 7 — TYPOGRAPHY REFINEMENT
+   ============================================================ */
+
+#content .section-block p,
+#content .section-block li {
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+#content .prob-text {
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+#content .solution-block .step-body {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#content .exam-drill-solution {
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+#rightPanel .rp-formula .rp-f-eq {
+  font-size: 13px;
+}
+
+#rightPanel .rp-mistake .fix {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Graph interpretation labels — scannable */
+#content .graph-info .gi-row-head,
+#content .graph-insight-label,
+#content .graph-interpretation-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: color-mix(in srgb, var(--accent) 35%, var(--muted) 65%);
+}
+
+/* ============================================================
+   PASS 7 — TASK/EXAM PROPORTIONS
+   ============================================================ */
+
+#content .problem-card {
+  padding: 24px;
+  border-radius: var(--r-lg);
+}
+
+#content .problem-card .prob-actions {
+  margin-top: 14px;
+}
+
+#content .solution-block {
+  padding: 20px;
+  margin-top: 16px;
+  border-radius: var(--r-md);
+}
+
+#content .solution-block .step {
+  gap: 12px;
+}
+
+#content .exam-drill-card {
+  padding: 24px;
+  border-radius: var(--r-lg);
+}
+
+#content .exam-drill-solution {
+  padding: 20px;
+  margin-top: 16px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 20%, var(--card) 80%);
+}
+
+/* ============================================================
+   PASS 7 — R OUTPUT TERMINAL STYLING
+   ============================================================ */
+
+.r-practice-output-card .r-output-display,
+.r-practice-output-card pre,
+.r-practice-output-card .r-output-content {
+  background: #111827;
+  color: #F3F4F6;
+  font-family: var(--font-mono);
+  border-radius: var(--r-md);
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+body.light-mode .r-practice-output-card .r-output-display,
+body.light-mode .r-practice-output-card pre,
+body.light-mode .r-practice-output-card .r-output-content {
+  background: #111827;
+  color: #F3F4F6;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   PASS 7 — BOLD EMPHASIS REMOVAL (body text calming)
+   ============================================================ */
+
+#content .section-block p strong,
+#content .section-block li strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+#content .intuition-text strong {
+  font-weight: 600;
+}
+
+#content .exam-drill-solution strong {
+  font-weight: 600;
 }

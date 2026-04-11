@@ -157,19 +157,19 @@ export function createRenderer({
 
   function renderLegalSchema(eq) {
     return String(eq || "")
-      .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
-      .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
-      .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
-      .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
-      .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">\u21D4</span>')
-      .replace(/\\leftrightarrow/g, '<span class="schema-arrow">\u2194</span>')
-      .replace(/\\neq/g, '<span class="schema-op">\u2260</span>')
-      .replace(/\\times/g, '<span class="schema-op">\u00D7</span>')
-      .replace(/\\leq/g, '<span class="schema-op">\u2264</span>')
-      .replace(/\\geq/g, '<span class="schema-op">\u2265</span>')
-      .replace(/\\neg/g, '<span class="schema-op">\u00AC</span>')
-      .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
-      .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
+      .replace(/\\text\{([^}]*)\}/g, '<span class="legal-schema__term">$1</span>')
+      .replace(/\\rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2192</span>')
+      .replace(/\\Rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u21D2</span>')
+      .replace(/\\leftarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2190</span>')
+      .replace(/\\Leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u21D4</span>')
+      .replace(/\\leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2194</span>')
+      .replace(/\\neq/g, '<span class="legal-schema__op">\u2260</span>')
+      .replace(/\\times/g, '<span class="legal-schema__op">\u00D7</span>')
+      .replace(/\\leq/g, '<span class="legal-schema__op">\u2264</span>')
+      .replace(/\\geq/g, '<span class="legal-schema__op">\u2265</span>')
+      .replace(/\\neg/g, '<span class="legal-schema__op">\u00AC</span>')
+      .replace(/\s*\+\s*/g, ' <span class="legal-schema__op">+</span> ')
+      .replace(/\s*=\s*/g, ' <span class="legal-schema__op">=</span> ')
       .trim();
   }
 
@@ -177,7 +177,7 @@ export function createRenderer({
     const trimmed = String(eq || "").trim();
     if (!trimmed) return "";
     if (isLegalSchema(trimmed))
-      return `<div class="legal-schema">${renderLegalSchema(trimmed)}</div>`;
+      return `<div class="legal-schema" role="group">${renderLegalSchema(trimmed)}</div>`;
     const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
     return `<div class="math-block">${math}</div>`;
   }
@@ -186,9 +186,9 @@ export function createRenderer({
     const trimmed = String(value || "").trim();
     if (!trimmed) return "";
     if (isLegalSchema(trimmed))
-      return `<div class="legal-schema">${renderLegalSchema(trimmed)}</div>`;
+      return `<div class="legal-schema" role="group">${renderLegalSchema(trimmed)}</div>`;
     const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
-    return `<div class="math-block">${escapeHtml(math)}</div>`;
+    return `<div class="math-block">${math}</div>`;
   }
 
   function summarizeVariables(variables) {
@@ -845,7 +845,7 @@ ${renderGuidedTasks(tasks)}`;
       html += `<div class="formula-card ${layoutClass}">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
-<div class="f-eq">${isLegalSchema(formula.eq) ? `<div class="legal-schema">${renderLegalSchema(formula.eq)}</div>` : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>
+<div class="f-eq">${isLegalSchema(formula.eq) ? `<div class="legal-schema" role="group">${renderLegalSchema(formula.eq)}</div>` : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>
 ${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
 ${varsHint}
 ${supportNote}

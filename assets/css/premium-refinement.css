@@ -754,7 +754,6 @@ body.light-mode #content .solution-block {
 #content .exam-drill-card {
   background: var(--card);
   border: 1px solid color-mix(in srgb, var(--border) 86%, var(--accent) 10%);
-  border-left: 3px solid color-mix(in srgb, var(--accent) 50%, var(--border) 50%);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-sm);
   padding: 16px 18px;
@@ -906,12 +905,11 @@ body.light-mode #content .exam-drill-key {
   border-radius: var(--r-md);
   background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
   border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
-  border-left: 3px solid var(--math-ink);
   font-size: 14.5px;
   line-height: 1.5;
 }
 
-.schema-term {
+.legal-schema__term {
   font-weight: 600;
   color: color-mix(in srgb, var(--text) 88%, var(--math-ink) 12%);
   padding: 3px 10px;
@@ -921,14 +919,14 @@ body.light-mode #content .exam-drill-key {
   white-space: nowrap;
 }
 
-.schema-arrow {
+.legal-schema__arrow {
   font-size: 18px;
   color: var(--math-ink);
   font-weight: 300;
   opacity: 0.85;
 }
 
-.schema-op {
+.legal-schema__op {
   font-size: 16px;
   font-weight: 600;
   color: var(--muted);
@@ -938,7 +936,7 @@ body.light-mode .legal-schema {
   background: color-mix(in srgb, var(--card) 78%, var(--math-soft, transparent) 22%);
 }
 
-body.light-mode .schema-term {
+body.light-mode .legal-schema__term {
   background: color-mix(in srgb, #fff 78%, var(--math-soft, transparent) 22%);
   border-color: color-mix(in srgb, var(--border) 72%, var(--math-ink) 28%);
 }
@@ -1302,12 +1300,8 @@ body.light-mode #sidebar .nav-item:hover {
   border-left: 2px solid var(--math-ink);
 }
 
-.schema-arrow {
+#content .legal-schema__arrow {
   color: var(--math-ink);
-}
-
-.legal-schema {
-  border-left: 2px solid var(--math-ink);
 }
 
 body.light-mode #content .f-eq {
@@ -1649,8 +1643,13 @@ body.light-mode #tabRow .tab-btn.active {
   border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 18%);
   background: color-mix(in srgb, var(--surface) 18%, var(--card) 82%);
   box-shadow: none;
-  display: grid;
+  display: none;
   gap: 12px;
+}
+
+#content .solution-block.show,
+#content .exam-drill-answer.show {
+  display: grid;
 }
 
 body.light-mode #content .solution-block,

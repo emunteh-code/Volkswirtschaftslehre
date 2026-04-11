@@ -9,21 +9,21 @@ const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> $
 
 const scheme = (text) => {
   const html = text
-    .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
-    .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
-    .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
-    .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
-    .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">\u21D4</span>')
-    .replace(/\\leftrightarrow/g, '<span class="schema-arrow">\u2194</span>')
-    .replace(/\\neq/g, '<span class="schema-op">\u2260</span>')
-    .replace(/\\times/g, '<span class="schema-op">\u00D7</span>')
-    .replace(/\\leq/g, '<span class="schema-op">\u2264</span>')
-    .replace(/\\geq/g, '<span class="schema-op">\u2265</span>')
-    .replace(/\\neg/g, '<span class="schema-op">\u00AC</span>')
-    .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
-    .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
+    .replace(/\\text\{([^}]*)\}/g, '<span class="legal-schema__term">$1</span>')
+    .replace(/\\rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2192</span>')
+    .replace(/\\Rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u21D2</span>')
+    .replace(/\\leftarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2190</span>')
+    .replace(/\\Leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u21D4</span>')
+    .replace(/\\leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2194</span>')
+    .replace(/\\neq/g, '<span class="legal-schema__op">\u2260</span>')
+    .replace(/\\times/g, '<span class="legal-schema__op">\u00D7</span>')
+    .replace(/\\leq/g, '<span class="legal-schema__op">\u2264</span>')
+    .replace(/\\geq/g, '<span class="legal-schema__op">\u2265</span>')
+    .replace(/\\neg/g, '<span class="legal-schema__op">\u00AC</span>')
+    .replace(/\s*\+\s*/g, ' <span class="legal-schema__op">+</span> ')
+    .replace(/\s*=\s*/g, ' <span class="legal-schema__op">=</span> ')
     .trim();
-  return `<div class="legal-schema">${html}</div>`;
+  return `<div class="legal-schema" role="group">${html}</div>`;
 };
 
 const step = (text, eq = null) => ({ text, eq });

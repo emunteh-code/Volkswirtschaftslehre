@@ -18,23 +18,23 @@ const isSemanticSchema = (value) => {
   return cleaned.trim() === '';
 };
 const renderSemanticSchema = (value) => String(value || '')
-  .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
-  .replace(/\\rightarrow/g, '<span class="schema-arrow">→</span>')
-  .replace(/\\Rightarrow/g, '<span class="schema-arrow">⇒</span>')
-  .replace(/\\leftarrow/g, '<span class="schema-arrow">←</span>')
-  .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">⇔</span>')
-  .replace(/\\leftrightarrow/g, '<span class="schema-arrow">↔</span>')
-  .replace(/\\neq/g, '<span class="schema-op">≠</span>')
-  .replace(/\\times/g, '<span class="schema-op">×</span>')
-  .replace(/\\leq/g, '<span class="schema-op">≤</span>')
-  .replace(/\\geq/g, '<span class="schema-op">≥</span>')
-  .replace(/\\neg/g, '<span class="schema-op">¬</span>')
-  .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
-  .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
+  .replace(/\\text\{([^}]*)\}/g, '<span class="legal-schema__term">$1</span>')
+  .replace(/\\rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">→</span>')
+  .replace(/\\Rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">⇒</span>')
+  .replace(/\\leftarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">←</span>')
+  .replace(/\\Leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">⇔</span>')
+  .replace(/\\leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">↔</span>')
+  .replace(/\\neq/g, '<span class="legal-schema__op">≠</span>')
+  .replace(/\\times/g, '<span class="legal-schema__op">×</span>')
+  .replace(/\\leq/g, '<span class="legal-schema__op">≤</span>')
+  .replace(/\\geq/g, '<span class="legal-schema__op">≥</span>')
+  .replace(/\\neg/g, '<span class="legal-schema__op">¬</span>')
+  .replace(/\s*\+\s*/g, ' <span class="legal-schema__op">+</span> ')
+  .replace(/\s*=\s*/g, ' <span class="legal-schema__op">=</span> ')
   .trim();
 const mathBlock = (eq) => {
   if (isSemanticSchema(eq)) {
-    return `<div class="legal-schema">${renderSemanticSchema(eq)}</div>`;
+    return `<div class="legal-schema" role="group">${renderSemanticSchema(eq)}</div>`;
   }
   const math = isDelimitedMath(eq) ? eq : `$$${String(eq || '').trim()}$$`;
   return `<div class="math-block">${math}</div>`;

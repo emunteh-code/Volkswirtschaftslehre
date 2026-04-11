@@ -17,7 +17,9 @@
   <!-- MathJax 3.2.2 -->
   <script>
     window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
       tex: {
+        packages: { '[+]': ['ams'] },
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']]
       },

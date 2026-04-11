@@ -771,6 +771,15 @@ export const CONTENT = {
         <p>Die mittelfristige Rückkehr entsteht nicht automatisch, sondern über eine klare Realkette. Liegt $Y_t$ über $Y_n$, fällt die Arbeitslosigkeit unter $u_n$, Inflation steigt, und die Zentralbank hebt den Realzins an. Genau dadurch wird die Nachfrage wieder gebremst.</p>
         <p>Die didaktische Kernregel lautet deshalb: Nicht nur den ersten Boom nennen, sondern immer den Rückkanal über Inflation und Realzins mitsprechen.</p>
       `),
+      section('Zwei Diagramme: Oberes (Y, i) und unteres (u, π)', `
+        <p>Im Kurs wird die mittelfristige Logik nicht durch ein einziges zusammengepresstes Koordinatensystem ersetzt, sondern über die <strong>Verbindung</strong> von Gütermarkt und Phillipsseite gedacht. Im Graphen-Tab zu diesem Kapitel ist das sichtbar umgesetzt: oben IS-Kurve und Zinsregel im (Y, i)-Raum, unten die Phillipskurve im (u, π)-Raum.</p>
+        <p>Die Koppelung folgt derselben Reihenfolge wie in der Theorie: Okun übersetzt $Y$ relativ zu $Y_n$ in $u$ relativ zu $u_n$, die Phillipskurve übersetzt die Arbeitsmarktlage in $\pi$, und die Zinsregel macht aus der Inflation den Zins, der wieder über die IS die Produktion zurückführt. Wer nur das obere Feld betrachtet, sieht diese Kette nicht.</p>
+        <p>Im Diagramm sind die Kurven und Referenzlinien bewusst über die <strong>Legende</strong> benannt (statt vieler Textboxen auf den Kurven), damit die Darstellung einer Vorlesungsfigur näherkommt und Lesarten nicht visuell kollidieren.</p>
+      `),
+      section('Negative Angebotsschocks und die Phillipskurve', `
+        <p>Wie in der Einheit zur Phillipskurve: negative Angebotsschocks (in Vorlesungsbeispielen oft über Energie- oder Rohstoffpreise motiviert) verschieben die kurzfristige Phillipskurve nach oben. Im gekoppelten Bild heißt das: schon bei gegebener Arbeitslosigkeit steigt der Inflationsdruck; über die Zinsregel wird die Geldpolitik restriktiver und bremst die Nachfrage. Inflation und Arbeitslosigkeit können gleichzeitig steigen — das ist ein <strong>Kurvenshift</strong>, keine Bewegung entlang der alten PC.</p>
+        <p>Im interaktiven Graph kannst du den Regler „Angebotsschock“ erhöhen: die untere PC verschiebt sich nach oben, und du siehst, wie sich das Gleichgewicht über die Zinsregel zurück ins obere Feld fortsetzt.</p>
+      `),
       section('Anpassungsdynamik', `
         <p>Nach einer expansiven Fiskalpolitik steigt der Output zunächst über $Y_n$. Die Arbeitslosigkeit fällt unter $u_n$, Inflation zieht an, die Zentralbank erhöht den Realzins und drückt die Nachfrage wieder zurück. Mittelfristig kehrt die Wirtschaft zu $Y_n$ zurück.</p>
         ${warn('Kurzfristiger Boom ist nicht dauerhaftes Wachstum', 'Im IS-LM-PC-Modell kehrt der Output zur natürlichen Produktion zurück. Dauerhafte Nachfragepolitik verschiebt also nicht das Produktionspotenzial.')}

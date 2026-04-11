@@ -3,7 +3,7 @@ export const COURSE_CONFIG = {
   courseLabel: 'Statistik',
   courseTitle: 'Statistik für Wirtschaftswissenschaftler',
   /** Metadata layer; see statistik/js/data/contentManifest.js */
-  contentManifestVersion: '2026.1',
+  contentManifestVersion: '2026.2',
   homeIntro: 'Datenbeschreibung, Wahrscheinlichkeitsrechnung und induktive Statistik (Schätzen und Testen).',
   consentKey: 'statistik_consent_v1',
   progressKey: 'statistik_progress_v1',

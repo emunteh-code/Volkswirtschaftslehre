@@ -62,7 +62,7 @@ export const MASTERY = {
     'Zwischen- und Innergruppenstreuung in der ANOVA-Tabelle korrekt lesen',
     'Verstehen, dass ein signifikanter F-Test nur “nicht alle Mittel gleich” bedeutet',
     'Post-hoc-Logik und multiples Testen sauber begründen',
-    'ANOVA mit ihren Voraussetzungen und der Kruskal-Wallis-Alternative verbinden'
+    'ANOVA mit ihren Voraussetzungen, Grenzen und der nötigen Post-hoc-Logik verbinden'
   ],
   regression_schaetzung_inferenz: [
     'Achsenabschnitt, Steigung, Standardfehler und Konfidenzintervall sprachlich korrekt deuten',
@@ -77,10 +77,10 @@ export const MASTERY = {
     'Prognosen nicht mit kausalen Aussagen verwechseln'
   ],
   nichtparametrisch: [
-    'Rangtests als robuste Alternativen zu parametrischen Tests einordnen',
-    'Mann-Whitney, Wilcoxon und Kruskal-Wallis nach Datenstruktur auswählen',
-    'Robustheit gegen Ausreißer und Verteilungsverletzungen korrekt begründen',
-    'Nichtparametrische Tests nicht fälschlich als “immer besser” interpretieren'
+    'Histogramme als Dichteschätzer und nicht nur als Visualisierung lesen',
+    'Fließendes Histogramm und Kerndichteschätzung als lokale Schätzlogik erklären',
+    'Bandbreite als zentralen Glättungsparameter sicher deuten',
+    'Struktur, Rauschen und Überglättung in nichtparametrischen Dichteschätzungen unterscheiden'
   ],
   rlab: [
     'R-Output immer zuerst fachlich einordnen, bevor eine Entscheidung formuliert wird',

@@ -6,7 +6,39 @@ const section = (title, body) => `
 `;
 
 const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> ${body}</div>`;
-const mathBlock = (eq) => `<div class="math-block">${eq}</div>`;
+const isDelimitedMath = (value) => /^\s*(\$\$[\s\S]+\$\$|\\\[[\s\S]+\\\])\s*$/.test(String(value || ''));
+const isSemanticSchema = (value) => {
+  const s = String(value || '').trim();
+  if (!s || !/\\text\{/.test(s)) return false;
+  const cleaned = s
+    .replace(/\\text\{[^}]*\}/g, '')
+    .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow|Leftrightarrow|neq|times|leq|geq|approx|equiv|subset|supset|cup|cap|wedge|vee|neg|forall|exists)/g, '')
+    .replace(/[+\-=\s\\,;:|()/]/g, '')
+    .replace(/\\cdot/g, '');
+  return cleaned.trim() === '';
+};
+const renderSemanticSchema = (value) => String(value || '')
+  .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
+  .replace(/\\rightarrow/g, '<span class="schema-arrow">→</span>')
+  .replace(/\\Rightarrow/g, '<span class="schema-arrow">⇒</span>')
+  .replace(/\\leftarrow/g, '<span class="schema-arrow">←</span>')
+  .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">⇔</span>')
+  .replace(/\\leftrightarrow/g, '<span class="schema-arrow">↔</span>')
+  .replace(/\\neq/g, '<span class="schema-op">≠</span>')
+  .replace(/\\times/g, '<span class="schema-op">×</span>')
+  .replace(/\\leq/g, '<span class="schema-op">≤</span>')
+  .replace(/\\geq/g, '<span class="schema-op">≥</span>')
+  .replace(/\\neg/g, '<span class="schema-op">¬</span>')
+  .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
+  .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
+  .trim();
+const mathBlock = (eq) => {
+  if (isSemanticSchema(eq)) {
+    return `<div class="legal-schema">${renderSemanticSchema(eq)}</div>`;
+  }
+  const math = isDelimitedMath(eq) ? eq : `$$${String(eq || '').trim()}$$`;
+  return `<div class="math-block">${math}</div>`;
+};
 const step = (text, eq = null) => ({ text, eq });
 const task = (text, steps, result, hint = null) => ({ text, steps, result, ...(hint ? { hint } : {}) });
 

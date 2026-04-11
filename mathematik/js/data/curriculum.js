@@ -1799,7 +1799,16 @@ integrate(f, lower = 1, upper = 2)`,
     cat: 'Anwendung',
     short: 'R',
     sourceRefs: [
-      'R.E1_-_Aufgaben.pdf bis R.OP_II_-_Aufgaben.pdf'
+      'Kleinübung/E_1_-_Algebra_und_Mengenlehre/R.E1_-_Aufgaben.pdf',
+      'Kleinübung/E_2_-_Funktionen_und_Gleichungen/R.E2_-_Aufgaben.pdf',
+      'Kleinübung/E_3_-_Summen_und_Logik/R.E3_-_Aufgaben.pdf',
+      'Kleinübung/LA_1_-_Matrizen_und_Matrix-Algebra/R.LA_I_-_Aufgaben.pdf',
+      'Kleinübung/LA_2_-_Maßzahlen_von_Matrizen_und_inverse_Matrizen/R.LA_II_-_Aufgaben.pdf',
+      'Kleinübung/AN_1_-_Univariate_Differenzialrechnung/R.AN_I_-_Aufgaben.pdf',
+      'Kleinübung/OP_1_-_Univariate_Optimierung/R.OP_I_-_Aufgaben.pdf',
+      'Kleinübung/AN_2_-__Funktionen_mehrerer_Variablen_und_multivariate_Differenzialrechnung/R.AN_II_-_Aufgaben.pdf',
+      'Kleinübung/OP_2_-__Multivariate_Optimierung/R.OP_II_-_Aufgaben.pdf',
+      'Kleinübung/AN_3_-_Intergralrechnung/R.AN_III_-_Aufgaben.pdf'
     ],
     motivation: 'Die R-Begleitpraxis ist kein separates Coding-Spielzeug, sondern die rechnerische Begleitspur zu den Vorlesungs- und Kleinübungsinhalten der Mathematik.',
     cardsTitle: 'So nutzt du die R-Begleitpraxis',

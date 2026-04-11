@@ -239,6 +239,7 @@ export const CHAPTERS = [
   { id: 'wahrscheinlichkeit', title: 'Wahrscheinlichkeitsrechnung', cat: 'Theorie', short: 'Wkt.' },
   { id: 'verteilungen', title: 'Zufallsvariablen & Verteilungen', cat: 'Theorie', short: 'Vert.' },
   { id: 'schaetzen_verfahren', title: 'Schätzverfahren (MoM, KQ, ML)', cat: 'Induktion', short: 'Schätz-V' },
+  { id: 'nichtparametrisch', title: 'Nichtparametrische Dichteschätzung', cat: 'Induktion', short: 'NP-D' },
   { id: 'schaetzen_eigenschaften_intervalle', title: 'Schätzereigenschaften & Konfidenzintervalle', cat: 'Induktion', short: 'Schätz-EI' },
   { id: 'testen', title: 'Hypothesentests', cat: 'Induktion', short: 'Test' },
   { id: 'regression_schaetzung_inferenz', title: 'Regression: Schätzung & Inferenz', cat: 'Modelle', short: 'Regr-SI' },
@@ -247,7 +248,6 @@ export const CHAPTERS = [
   { id: 'z_test', title: 'z-Test & Normalverteilungstest', cat: 'Induktion', short: 'z-Test' },
   { id: 'zwei_stichproben', title: 'Zwei-Stichproben-Tests', cat: 'Induktion', short: '2-Stpr.' },
   { id: 'varianzanalyse', title: 'Varianzanalyse (ANOVA)', cat: 'Modelle', short: 'ANOVA' },
-  { id: 'nichtparametrisch', title: 'Nichtparametrische Tests', cat: 'Modelle', short: 'Nichtpar.' },
 ];
 
 export const CONTENT = {
@@ -1130,7 +1130,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei Verletzung: Kruskal-Wallis-Test als nichtparametrische Alternative.</div>
+      <div class="warn-box"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei klaren Verletzungen darf der F-Test nicht blind weitergelesen werden; zuerst müssen Annahmenproblem und geeignete Alternative sauber begründet werden.</div>
     </div>
     `,
     formeln: [
@@ -1196,70 +1196,64 @@ export const CONTENT = {
     ]
   },
   nichtparametrisch: {
-    motivation: 'Nichtparametrische Tests setzen keine spezifische Verteilungsform voraus. Sie sind robuster bei kleinen Stichproben, ordinalen Daten oder wenn Normalverteilung nicht gesichert ist.',
+    motivation: 'Wenn kein plausibles parametrisches Modell vorgegeben ist, schätzt die Vorlesung die Dichte direkt aus den Daten: erst über Histogramme, dann über fließende Histogramme und Kerndichteschätzung. Nichtparametrisch heißt hier also nicht “Rangtest”, sondern “Verteilungsform ohne feste Familienannahme sichtbar machen”.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Wilcoxon-Vorzeichen-Rang-Test</h3>
-      <p>Nichtparametrische Alternative zum verbundenen t-Test. Verwendet die Ränge der absoluten Differenzen mit Vorzeichen. Nullhypothese: Der Median der Differenzen ist null.</p>
+      <h3>Wann die Vorlesung nichtparametrisch schätzt</h3>
+      <p>VL 09 öffnet den Block genau mit dieser Frage: <strong>Was tun, wenn kein spezielles parametrisches Modell sinnvoll vorgegeben ist?</strong> Dann wird die unbekannte Dichte direkt aus der Stichprobe geschätzt, statt erst eine Normal-, Exponential- oder andere Familie zu unterstellen.</p>
+      <p>Der methodische Kern lautet deshalb: Nichtparametrische Schätzung ist eine Formfrage. Wie sieht die Verteilung aus, wo häufen sich Datenpunkte, und wie stark willst du glätten?</p>
     </div>
     <div class="section-block">
-      <h3>Mann-Whitney-U-Test</h3>
-      <p>Nichtparametrische Alternative zum unverbundenen t-Test. Testet, ob die Werte einer Gruppe tendenziell höher sind als die der anderen. Berechnung über Ränge in der kombinierten Stichprobe.</p>
-      <div class="math-block">$$U = n_1 n_2 + \frac{n_1(n_1+1)}{2} - R_1$$</div>
-      <p>wobei $R_1$ die Rangsumme der Gruppe 1 in der kombinierten Rangordnung ist.</p>
+      <h3>Histogramm als Dichteschätzer</h3>
+      <p>Das Histogramm ist im Kurs nicht nur Visualisierung, sondern ein erster Dichteschätzer: Die Balkenhöhe muss so skaliert werden, dass die Gesamtfläche interpretierbar bleibt. Genau deshalb hängt sie von Klassenhäufigkeit <em>und</em> Klassenbreite ab.</p>
+      <div class="math-block">$$\hat f(x)=\frac{H_j}{n\,b_j}, \qquad x \in I_j$$</div>
+      <p>$H_j$ zählt die Beobachtungen in Klasse $I_j$, $n$ ist der Stichprobenumfang und $b_j$ die Klassenbreite. Die Höhe misst also Dichte, nicht bloß rohe Häufigkeit.</p>
     </div>
     <div class="section-block">
-      <h3>Kruskal-Wallis-Test</h3>
-      <p>Nichtparametrische Alternative zur einfaktoriellen ANOVA. Nutzt Ränge aller Beobachtungen zur Berechnung der Teststatistik.</p>
-      <div class="math-block">$$H = \frac{12}{N(N+1)}\sum_{j=1}^k \frac{R_j^2}{n_j} - 3(N+1)$$</div>
+      <h3>Fließendes Histogramm und Kernidee</h3>
+      <p>Die Vorlesung schärft das Histogramm dann zu einem lokalen Fensterzugriff: Für jeden Punkt $x$ wird gezählt, wie viele Beobachtungen in ein Intervall um $x$ fallen. Daraus entsteht das <strong>fließende Histogramm</strong>.</p>
+      <div class="math-block">$$\hat f(x)=\frac{1}{2b}\cdot\frac{\#\{x_i\in(x-b,x+b]\}}{n}$$</div>
+      <p>Die Kerndichteschätzung verallgemeinert diese Idee: Beobachtungen im Umfeld von $x$ werden nicht alle gleich gewichtet, sondern über eine Kernfunktion gewichtet.</p>
+      <div class="math-block">$$\hat f(x)=\frac{1}{nb}\sum_{i=1}^{n}K\!\left(\frac{x-x_i}{b}\right)$$</div>
     </div>
     <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Effizienz vs. Robustheit:</strong> Nichtparametrische Tests sind robuster, aber weniger mächtig als ihre parametrischen Pendants, wenn die Verteilungsannahmen tatsächlich erfüllt sind. Bei normalverteilten Daten ist der t-Test dem Wilcoxon-Test vorzuziehen.</div>
+      <h3>Bandbreite schlägt Kernform</h3>
+      <p>Der kursrelevante Steuerparameter ist die Bandbreite $b$. Kleine Bandbreiten machen die Schätzung sehr zackig und ausreißerempfindlich; große Bandbreiten glätten stark und können echte Struktur verdecken.</p>
+      <div class="warn-box"><strong>Glättungsfalle:</strong> Zu kleines $b$ verkauft Stichprobenrauschen als “echte Struktur”. Zu großes $b$ bügelt lokale Unterschiede weg. Für die Klausur ist meist wichtiger, die Wirkung von $b$ zu lesen, als eine bestimmte Kernfunktion auswendig aufzuzählen.</div>
     </div>
     `,
     formeln: [
-      { label: 'Mann-Whitney U', eq: String.raw`$$U = n_1 n_2 + \frac{n_1(n_1+1)}{2} - R_1$$`, desc: 'Rangsummentest' },
-      { label: 'Kruskal-Wallis H', eq: String.raw`$$H = \frac{12}{N(N+1)}\sum_j \frac{R_j^2}{n_j} - 3(N+1)$$`, desc: 'k-Gruppenvergleich' }
+      { label: 'Histogramm als Dichteschätzer', eq: String.raw`$$\hat f(x)=\frac{H_j}{n\,b_j}, \qquad x \in I_j$$`, desc: 'Klassenhäufigkeit pro Stichprobenumfang und Klassenbreite.' },
+      { label: 'Fließendes Histogramm', eq: String.raw`$$\hat f(x)=\frac{1}{2b}\cdot\frac{\#\{x_i\in(x-b,x+b]\}}{n}$$`, desc: 'Lokales Fenster der Breite $2b$ um den Auswertungspunkt $x$.' },
+      { label: 'Kerndichteschätzung', eq: String.raw`$$\hat f(x)=\frac{1}{nb}\sum_{i=1}^{n}K\!\left(\frac{x-x_i}{b}\right)$$`, desc: 'Die Bandbreite $b$ steuert die Glättung; die Kernfunktion gewichtet Beobachtungen im Umfeld von $x$.' }
     ],
     aufgaben: [
       {
-        text: String.raw`Wilcoxon-Vorzeichen-Rang-Test: Paarweise Differenzen $d_i$: $+5, -2, +8, +1, -3, +6$ (n=6). Führen Sie den Test durch. Kritischer Wert $W_{krit} = 2$ (zweiseitig, $\alpha=0{,}05$).`,
+        text: String.raw`Ein Histogramm hat in einer Klasse die Breite $b_j=2$; in dieser Klasse liegen $H_j=18$ von insgesamt $n=100$ Beobachtungen. Berechnen Sie die zugehörige Dichtehöhe und erklären Sie kurz, warum man nicht einfach nur die rohe Häufigkeit 18 berichtet.`,
         steps: [
-          { text: `Absolutwerte und Ränge der $|d_i|$:`, eq: String.raw`|d|: 5, 2, 8, 1, 3, 6 \implies \text{Ränge: } 4, 2, 6, 1, 3, 5` },
-          { text: `Vorzeichen zuordnen: $W^+$ (positive Ränge), $W^-$ (negative Ränge).`, eq: String.raw`W^+ = 4+6+1+5 = 16 \quad W^- = 2+3 = 5` },
-          { text: `Teststatistik: $W = \min(W^+, W^-)$.`, eq: String.raw`W = \min(16, 5) = 5 > W_{krit} = 2` }
+          { text: `Die Kursformel einsetzen.`, eq: String.raw`\hat f(x)=\frac{H_j}{n\,b_j}=\frac{18}{100\cdot 2}` },
+          { text: `Dichtehöhe ausrechnen.`, eq: String.raw`\hat f(x)=0{,}09` },
+          { text: `Interpretation ergänzen.`, eq: String.raw`\text{Die Klassenbreite gehört hinein, damit die Balkenfläche interpretierbar bleibt.}` }
         ],
-        result: String.raw`$W = 5 > W_{krit} = 2$: $H_0$ (Median der Differenzen = 0) wird nicht abgelehnt. Beachte: Nulldifferenzen werden vor der Rangbildung ausgeschlossen, und Bindungen erhalten den mittleren Rang.`
+        result: String.raw`Die Dichtehöhe beträgt $0{,}09$. Ein Histogramm berichtet nicht bloß rohe Häufigkeit, sondern skaliert nach Klassenbreite und Stichprobenumfang, damit die Fläche als Wahrscheinlichkeit bzw. Dichte interpretiert werden kann.`
       },
       {
-        text: String.raw`Mann-Whitney-U-Test: Gruppe 1: $\{3, 5, 7\}$, Gruppe 2: $\{4, 6, 8, 9\}$. Berechnen Sie $U$ und $U'$ und bestimmen Sie den kleineren Wert.`,
+        text: String.raw`Zwei Kerndichteschätzungen beruhen auf denselben Daten. Schätzung A verwendet $b=0{,}15$, Schätzung B verwendet $b=0{,}60$. Welche Schätzung ist typischerweise glatter, und welcher inhaltliche Preis wird dafür gezahlt?`,
         steps: [
-          { text: `Kombinierte Rangordnung (alle 7 Werte):`, eq: String.raw`3(R=1),\; 4(R=2),\; 5(R=3),\; 6(R=4),\; 7(R=5),\; 8(R=6),\; 9(R=7)` },
-          { text: `Rangsumme Gruppe 1 ($R_1$):`, eq: String.raw`R_1 = 1 + 3 + 5 = 9` },
-          { text: `U-Statistik ($n_1=3$, $n_2=4$):`, eq: String.raw`U = n_1 n_2 + \frac{n_1(n_1+1)}{2} - R_1 = 12 + 6 - 9 = 9` },
-          { text: `$U' = n_1 n_2 - U$:`, eq: String.raw`U' = 12 - 9 = 3 \implies U_{min} = \min(9, 3) = 3` }
+          { text: `Bandbreite vergleichen.`, eq: String.raw`0{,}60 > 0{,}15 \Rightarrow \text{mehr Glättung}` },
+          { text: `Direkte Folgerung für die Kurve.`, eq: String.raw`\hat f_B(x) \text{ ist typischerweise glatter als } \hat f_A(x)` },
+          { text: `Preis der stärkeren Glättung benennen.`, eq: String.raw`\text{Lokale Struktur / Mehrgipfligkeit kann verdeckt werden}` }
         ],
-        result: String.raw`$U_{min} = 3$. Bei $n_1=3$, $n_2=4$ und $\alpha=0{,}05$ (zweiseitig) liegt der kritische Wert bei $U_{krit} = 0$ — $H_0$ wird nicht abgelehnt. Interpretation: Die Werte von Gruppe 1 und 2 zeigen keine signifikant unterschiedliche Tendenz.`
+        result: String.raw`Schätzung B mit $b=0{,}60$ ist glatter. Der Preis ist höhere Glättung bzw. möglicher Strukturverlust: kleine lokale Wellen können echtes Signal oder bloß Rauschen sein und werden durch großes $b$ leichter überdeckt.`
       },
       {
-        text: String.raw`Vergleichen Sie parametrische und nichtparametrische Tests anhand dreier Kriterien: Voraussetzungen, Teststärke und Anwendungsbereich. Nennen Sie je eine konkrete Situation, in der der nichtparametrische Test klar vorzuziehen ist.`,
+        text: String.raw`Warum ist in der Vorlesung die Bandbreite meist wichtiger als die konkrete Kernfunktion? Formulieren Sie den Punkt in zwei klausurtauglichen Sätzen.`,
         steps: [
-          { text: `Voraussetzungen: Parametrisch vs. nichtparametrisch.`, eq: String.raw`\text{Param.: Normalvert. + Homoskedastizität. Nichtparam.: nur Unabhängigkeit + ordinales Skalenniveau}` },
-          { text: `Teststärke: Relative Effizienz des Wilcoxon vs. t-Test.`, eq: String.raw`\text{Asymp. rel. Effizienz (ARE): Wilcoxon/t-Test} = 3/\pi \approx 0{,}955 \text{ (bei Normalvert.)}` },
-          { text: `Anwendungsfall für nichtparam. Tests:`, eq: String.raw`\text{Ordinale Daten (Schulnoten, Likert-Skala), kleine } n\text{, starke Ausreißer, unbekannte Verteilung}` }
+          { text: `Bandbreite als Hauptregler benennen.`, eq: String.raw`\text{Klein } b \Rightarrow \text{zackiger}, \qquad \text{groß } b \Rightarrow \text{glatter}` },
+          { text: `Kernfunktion relativieren.`, eq: String.raw`\text{Epanechnikov, Gauß, Bisquare ändern meist weniger als ein anderer } b\text{-Wert}` },
+          { text: `Prüfungssatz formulieren.`, eq: String.raw`\text{Entscheidend ist, ob die Schätzung zu rau oder zu stark geglättet ist.}` }
         ],
-        result: String.raw`Nichtparametrische Tests sind klar vorzuziehen bei: (1) ordinalen oder nicht-metrischen Daten, (2) kleinen Stichproben ohne Normalverteilungsgarantie, (3) starken Ausreißern. Der Effizienzunterschied zu parametrischen Tests ist bei Normalverteilung gering (ARE $\approx 0{,}955$), sodass nichtparametrische Tests in der Praxis eine sichere Wahl sind.`
-      },
-      {
-        text: String.raw`Kruskal-Wallis-Test: Drei Gruppen ($k=3$, $N=9$): A: $\{2, 4, 6\}$, B: $\{1, 5, 9\}$, C: $\{3, 7, 8\}$. Berechnen Sie die H-Statistik. Kritischer Wert $\chi^2_{2;\,0{,}05} = 5{,}991$.`,
-        steps: [
-          { text: `Ränge in der kombinierten Stichprobe ($N=9$):`, eq: String.raw`1(R=1),2(R=2),3(R=3),4(R=4),5(R=5),6(R=6),7(R=7),8(R=8),9(R=9)` },
-          { text: `Rangsummen: $R_A = 2+4+6=12$, $R_B=1+5+9=15$, $R_C=3+7+8=18$.`, eq: String.raw`R_A = 12, \quad R_B = 15, \quad R_C = 18` },
-          { text: `H-Statistik ($n_j=3$ für alle $j$):`, eq: String.raw`H = \frac{12}{9 \cdot 10}\left(\frac{12^2}{3}+\frac{15^2}{3}+\frac{18^2}{3}\right) - 3 \cdot 10 = \frac{12}{90}(48+75+108) - 30 = \frac{12 \cdot 231}{90} - 30 = 30{,}8 - 30 = 0{,}8` },
-          { text: `Entscheidung: $H = 0{,}8 < 5{,}991$.`, eq: String.raw`H_0 \text{ nicht ablehnen} \implies \text{keine signifikanten Gruppenunterschiede}` }
-        ],
-        result: String.raw`$H = 0{,}8 < 5{,}991$: $H_0$ (alle Gruppen haben dieselbe Verteilung) wird nicht abgelehnt. Die Unterschiede in den Rangsummen sind zu klein für eine statistisch gesicherte Schlussfolgerung. Der Kruskal-Wallis-Test folgt approximativ einer $\chi^2$-Verteilung mit $k-1$ Freiheitsgraden.`
+        result: String.raw`Die Vorlesung nutzt die Kernfunktion eher als Bauform und die Bandbreite als den eigentlichen Glättungshebel. Deshalb wird klausurtypisch gefragt, welche Wirkung ein anderes $b$ auf Rauigkeit, Struktur und Verzerrung hat.`
       }
     ]
   }

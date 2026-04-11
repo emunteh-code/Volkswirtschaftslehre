@@ -6,7 +6,7 @@
 export const CONCEPT_LINKS = {
   deskriptiv: {
     uses: [],
-    usedBy: ['bivariat', 'wahrscheinlichkeit', 'rlab']
+    usedBy: ['bivariat', 'wahrscheinlichkeit', 'nichtparametrisch', 'rlab']
   },
   bivariat: {
     uses: ['deskriptiv'],
@@ -18,11 +18,11 @@ export const CONCEPT_LINKS = {
   },
   verteilungen: {
     uses: ['wahrscheinlichkeit'],
-    usedBy: ['schaetzen_verfahren', 'schaetzen_eigenschaften_intervalle', 'z_test']
+    usedBy: ['schaetzen_verfahren', 'nichtparametrisch', 'schaetzen_eigenschaften_intervalle', 'z_test']
   },
   schaetzen_verfahren: {
     uses: ['verteilungen', 'deskriptiv'],
-    usedBy: ['schaetzen_eigenschaften_intervalle', 'testen', 'regression_schaetzung_inferenz']
+    usedBy: ['nichtparametrisch', 'schaetzen_eigenschaften_intervalle', 'testen', 'regression_schaetzung_inferenz']
   },
   schaetzen_eigenschaften_intervalle: {
     uses: ['schaetzen_verfahren', 'verteilungen'],
@@ -30,7 +30,7 @@ export const CONCEPT_LINKS = {
   },
   testen: {
     uses: ['schaetzen_eigenschaften_intervalle', 'wahrscheinlichkeit'],
-    usedBy: ['z_test', 'zwei_stichproben', 'varianzanalyse', 'nichtparametrisch', 'regression_schaetzung_inferenz']
+    usedBy: ['z_test', 'zwei_stichproben', 'varianzanalyse', 'regression_schaetzung_inferenz']
   },
   z_test: {
     uses: ['verteilungen', 'schaetzen_eigenschaften_intervalle', 'testen'],
@@ -38,7 +38,7 @@ export const CONCEPT_LINKS = {
   },
   zwei_stichproben: {
     uses: ['testen', 'schaetzen_eigenschaften_intervalle'],
-    usedBy: ['varianzanalyse', 'nichtparametrisch']
+    usedBy: ['varianzanalyse']
   },
   varianzanalyse: {
     uses: ['testen', 'zwei_stichproben'],
@@ -53,7 +53,7 @@ export const CONCEPT_LINKS = {
     usedBy: ['rlab']
   },
   nichtparametrisch: {
-    uses: ['zwei_stichproben', 'varianzanalyse'],
+    uses: ['deskriptiv', 'verteilungen', 'schaetzen_verfahren'],
     usedBy: []
   },
   rlab: {

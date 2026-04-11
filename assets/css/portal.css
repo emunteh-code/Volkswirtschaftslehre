@@ -17,11 +17,11 @@ body[data-page="landing"] {
   --accent3:   #f87171;
   --accent-fg: #ffffff;
 
-  --bg:        #0d1118;
-  --surface:   #18202d;
-  --surface2:  #1e283a;
-  --card:      #121823;
-  --border:    #283244;
+  --bg:        #0d1116;
+  --surface:   #171c23;
+  --surface2:  #1d232c;
+  --card:      #11161d;
+  --border:    #2b3440;
   --text:      #e5e7eb;
   --muted:     #aab4c3;
 
@@ -51,11 +51,11 @@ body[data-page="landing"] {
 
 /* ── Light Mode ────────────────────────────────────────────── */
 body[data-page="landing"].theme-light {
-  --bg:        #f5f7fb;
-  --surface:   #eef2f8;
-  --surface2:  #e8edf5;
-  --card:      #fcfdfe;
-  --border:    #d7dfec;
+  --bg:        #f6f6f4;
+  --surface:   #f0f1ee;
+  --surface2:  #eaebe7;
+  --card:      #fbfbf9;
+  --border:    #d8dcd4;
   --text:      #111827;
   --muted:     #4b5563;
 

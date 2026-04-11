@@ -533,7 +533,8 @@ function drawPhillips() {
     [
       { label: 'Aktueller Punkt', body: `Bei u = ${uCurrent.toFixed(2)}% ergibt sich eine Inflation von ${piCurrent.toFixed(2)}%.` },
       { label: 'NAIRU', body: `Bei uₙ = ${un.toFixed(2)}% bleibt Inflation bei gegebenen Erwartungen stabil.` },
-      { label: 'Erwartungen', body: 'Steigende Inflationserwartungen verschieben die gesamte kurzfristige Phillipskurve nach oben.' }
+      { label: 'Erwartungen', body: 'Steigende Inflationserwartungen verschieben die gesamte kurzfristige Phillipskurve nach oben.' },
+      { label: 'Schocks und Grenzen', body: 'Adverse Angebotsschocks oder Lohnindexierung können die Kurve ebenfalls nach oben verschieben; bei sehr niedriger Inflation begrenzen starre Nominallöhne oft die Deflationsdynamik.' }
     ]
   ));
 }

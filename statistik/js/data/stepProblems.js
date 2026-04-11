@@ -488,29 +488,29 @@ const BASE_STEP_PROBLEMS = {
   ],
   nichtparametrisch: [
     {
-      title: 'Rangtest statt Mittelwerttest',
-      context: 'Zwei unabhängige Gruppen, ordinale Daten, deutliche Schiefe und Ausreißer.',
+      title: 'Dichte ohne Modellfamilie schätzen',
+      context: 'Für eine metrische Variable ist keine plausible parametrische Verteilungsfamilie vorgegeben; die Form soll direkt aus den Daten geschätzt werden.',
       steps: [
         {
-          q: '[1. Decision] Welcher Test ist hier typischerweise näherliegend als ein t-Test?',
-          answer: ['mann-whitney', 'mann whitney', 'u-test', 'rangtest'],
+          q: '[1. Decision] Welcher Zugriff ist dann näherliegend: t-Test oder Kerndichteschätzung?',
+          answer: ['kerndichteschätzung', 'kernel', 'dichteschätzung', 'nichtparametrische dichte'],
           options: { problemId: 'stat_np_1', stepId: 'select', isDecision: true },
-          hint: 'Rangbasiert statt mittelwertbasiert.',
-          explain: 'Der Mann-Whitney-U-Test ist hier die typische robuste Wahl.'
+          hint: 'Es geht um Verteilungsform, nicht um einen Mittelwertvergleich.',
+          explain: 'Wenn keine parametrische Familie vorgegeben ist, wird die Dichte direkt nichtparametrisch geschätzt.'
         },
         {
-          q: '[2. Execution] Welcher Vorteil ist hier zentral: höhere Power bei Normalität oder Robustheit gegen Annahmeverletzungen?',
-          answer: ['robustheit', 'annahmeverletzungen', 'ausreißer'],
+          q: '[2. Execution] Welche Stellschraube bestimmt die Glättung der Kerndichteschätzung am stärksten?',
+          answer: ['bandbreite', 'b'],
           options: { problemId: 'stat_np_1', stepId: 'why', dependsOn: 'select' },
-          hint: 'Die Datensituation ist gerade nicht ideal-parametrisch.',
-          explain: 'Zentral ist die Robustheit gegen Ausreißer, Schiefe und fehlende Metrik.'
+          hint: 'Nicht die grobe Etikette des Kerns, sondern der Glättungsparameter.',
+          explain: 'Die Bandbreite $b$ entscheidet, wie rau oder glatt die Schätzung wird.'
         },
         {
-          q: '[3. Validation] Sind nichtparametrische Tests deshalb immer grundsätzlich besser?',
-          answer: ['nein', 'Nein'],
+          q: '[3. Validation] Macht ein größeres b die Schätzung typischerweise glatter?',
+          answer: ['ja', 'Ja'],
           options: { problemId: 'stat_np_1', role: 'VALIDATION' },
-          hint: 'Bei gut erfüllten Annahmen bleiben parametrische Tests oft effizienter.',
-          explain: 'Nein. Sie sind robuster, aber bei idealen parametrischen Bedingungen nicht automatisch überlegen.'
+          hint: 'Mehr Bandbreite bedeutet mehr lokale Mittelung.',
+          explain: 'Ja. Größeres $b$ glättet stärker, kann aber lokale Struktur verdecken.'
         }
       ]
     }

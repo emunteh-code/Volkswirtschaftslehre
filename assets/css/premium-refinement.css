@@ -1506,3 +1506,339 @@ body.light-mode .r-practice-output-card .r-output-content {
 #content .exam-drill-solution strong {
   font-weight: 600;
 }
+
+/* ============================================================
+   PASS 8 — FINAL VISUAL CLOSURE
+   Issues 18–27 only
+   ============================================================ */
+
+body:not([data-page="landing"]) {
+  --bg: #0d1116;
+  --surface: #171c23;
+  --surface2: #1d232c;
+  --surface3: #252d39;
+  --card: #11161d;
+  --border: #2b3440;
+}
+
+body.light-mode:not([data-page="landing"]) {
+  --bg: #f6f6f4;
+  --surface: #f0f1ee;
+  --surface2: #eaebe7;
+  --surface3: #e1e4de;
+  --card: #fbfbf9;
+  --border: #d8dcd4;
+}
+
+#tabRow.tab-row {
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+}
+
+#tabRow .tab-btn {
+  padding: 9px 16px;
+}
+
+#tabRow .tab-btn.active {
+  background: color-mix(in srgb, var(--accent) 16%, var(--card) 84%);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border) 72%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+body.light-mode #tabRow .tab-btn.active {
+  background: color-mix(in srgb, var(--accent) 10%, var(--card) 90%);
+  color: var(--accent-strong, var(--accent));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+#tabRow .tab-btn.active::after {
+  display: none;
+}
+
+#tabRow .tab-btn.active[data-tab="r"],
+#tabRow .tab-btn.active[data-tab="r-practice"] {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: color-mix(in srgb, var(--accent-strong, var(--accent)) 45%, transparent);
+}
+
+#content .section-block p strong,
+#content .section-block li strong,
+#content .intuition-text strong,
+#content .fe-context-block strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#content .section-block ul,
+#content .section-block ol {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+  padding-left: 1.2rem;
+}
+
+#content .section-block li::marker {
+  color: color-mix(in srgb, var(--accent) 64%, var(--muted) 36%);
+  font-weight: 700;
+}
+
+#content .mikro1-practice {
+  gap: 28px;
+}
+
+#content .practice-surface-intro {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 0 0 18px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+}
+
+#content .practice-surface-column {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+#content .practice-surface-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 62%, var(--muted) 38%);
+}
+
+#content .practice-surface-column p {
+  margin: 0;
+  max-width: none;
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
+}
+
+#content .problem-card,
+#content .exam-drill-card {
+  padding: 24px;
+  border-radius: var(--r-lg);
+}
+
+#content .problem-card .prob-text,
+#content .exam-drill-card .prob-text {
+  margin-bottom: 14px;
+  font-size: 15px;
+  line-height: 1.66;
+}
+
+#content .problem-card .prob-actions,
+#content .exam-drill-card .prob-actions {
+  margin-top: 14px;
+}
+
+#content .solution-block,
+#content .exam-drill-answer {
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 18%);
+  background: color-mix(in srgb, var(--surface) 18%, var(--card) 82%);
+  box-shadow: none;
+  display: grid;
+  gap: 12px;
+}
+
+body.light-mode #content .solution-block,
+body.light-mode #content .exam-drill-answer {
+  background: color-mix(in srgb, var(--surface) 42%, var(--card) 58%);
+}
+
+#content .solution-block h4,
+#content .exam-drill-answer-head {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 56%, var(--muted) 44%);
+}
+
+#content .solution-block .step {
+  gap: 12px;
+  padding: 10px 0;
+  margin: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 42%, transparent);
+}
+
+#content .solution-block .step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#content .solution-block .step-body {
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+#content .exam-drill-solution {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+#content .exam-drill-meta {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+}
+
+#content .exam-drill-line {
+  display: grid;
+  gap: 6px;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 42%, transparent);
+  background: transparent;
+}
+
+#content .exam-drill-line:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#content .exam-drill-key {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+}
+
+#content .exam-drill-copy,
+#content .exam-drill-note {
+  font-size: 14.5px;
+  line-height: 1.68;
+}
+
+#content .exam-drill-list {
+  gap: 8px;
+  padding-left: 1.2rem;
+}
+
+#content .exam-drill-steps {
+  gap: 12px;
+}
+
+#content .exam-drill-steps > li {
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 14px;
+  line-height: 1.64;
+}
+
+#content .result-badge {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+#content .math-inline {
+  font-size: 1em;
+}
+
+#content .math-block {
+  padding: 18px 24px;
+  font-size: 1.12em;
+  line-height: 1.85;
+}
+
+#content .formula-card {
+  gap: 14px;
+}
+
+#content .formula-card .f-label {
+  font-size: 12px;
+}
+
+#content .formula-card .f-eq {
+  font-size: 1.08em;
+  line-height: 1.75;
+  padding: 14px 16px;
+}
+
+#content .formula-card .f-desc {
+  font-size: 13.5px;
+  line-height: 1.62;
+}
+
+#content .f-variables li,
+#content .f-var-def {
+  font-size: 13.5px;
+  line-height: 1.58;
+}
+
+#content .f-var-key {
+  font-size: 13px;
+}
+
+#content .formula-card.layout-compact {
+  padding: 20px 22px;
+}
+
+#content .formula-card.layout-medium {
+  padding: 22px 24px;
+  gap: 14px;
+}
+
+#content .formula-card.layout-schema {
+  padding: 22px 24px;
+  gap: 14px;
+}
+
+#content .formula-card.layout-schema .f-eq {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+#content .formula-card.layout-schema .legal-schema {
+  width: 100%;
+}
+
+#rightPanel .rp-section {
+  background: color-mix(in srgb, var(--card) 95%, var(--surface2) 5%);
+}
+
+#rightPanel .rp-formula {
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+}
+
+#rightPanel .rp-formula .rp-f-name {
+  font-size: 11px;
+}
+
+#rightPanel .rp-formula .rp-f-eq {
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+#rightPanel .rp-formula .rp-f-eq .legal-schema {
+  width: 100%;
+  padding: 12px 14px;
+}
+
+@media (max-width: 880px) {
+  #content .practice-surface-intro {
+    grid-template-columns: 1fr;
+  }
+}

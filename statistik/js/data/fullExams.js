@@ -133,25 +133,25 @@ export const FULL_EXAMS = {
       },
       {
         id: 'fe_np_1',
-        title: 'Nichtparametrische Alternative',
+        title: 'Nichtparametrische Dichteschätzung',
         conceptId: 'nichtparametrisch',
-        text: 'Sie vergleichen zwei unabhängige Gruppen; die Zielvariable ist ordinal bewertet und die Verteilung ist stark schief mit Ausreißern.',
+        text: 'Für eine metrische Variable liegt keine plausible parametrische Verteilungsfamilie vor. Sie wollen die Verteilungsform trotzdem glatt schätzen; eine erste Kerndichteschätzung mit sehr kleinem b wirkt stark gezackt.',
         type: 'step',
         steps: [
           {
-            q: '[Wahl] Welcher Test ist hier typischerweise dem Zweistichproben-t vorzuziehen?',
-            answer: ['mann', 'whitney', 'u-test', 'mann-whitney'],
-            hint: 'Rangbasierter Test für zwei unabhängige Stichproben: Mann-Whitney-U.'
+            q: '[Wahl] Welcher Zugriff ist hier näherliegend als ein Mittelwerttest?',
+            answer: ['kerndichteschätzung', 'kernel', 'nichtparametrische dichte', 'dichteschätzung'],
+            hint: 'Es geht um Formschätzung ohne feste Modellfamilie.'
           },
           {
-            q: '[Konzept] Was bedeutet „robuster“ in diesem Kontext kurz?',
-            answer: ['ausreißer', 'verteilung', 'annahme', 'schief'],
-            hint: 'Weniger empfindlich gegenüber Extremwerten und Verletzung der Normalität.'
+            q: '[Konzept] Welche Stellschraube bestimmt die Glättung am stärksten?',
+            answer: ['bandbreite', 'b'],
+            hint: 'Nicht die bloße Kernbezeichnung, sondern der Glättungsparameter.'
           },
           {
-            q: '[Abgrenzung] Wann ist dennoch der t-Test effizienter?',
-            answer: ['normal', 'annahme', 'erfüllt', 'metrisch'],
-            hint: 'Wenn metrisch + approximativ normalverteilt und keine schweren Ausreißer — parametrische Tests sind dann oft mächtiger.'
+            q: '[Abgrenzung] Was passiert typischerweise, wenn Sie b deutlich vergrößern?',
+            answer: ['glatter', 'glättung', 'weniger zackig', 'strukturverlust'],
+            hint: 'Mehr Bandbreite mittelt lokaler und glättet stärker.'
           }
         ]
       },
@@ -280,7 +280,7 @@ export const FULL_EXAMS = {
             ]
           },
           {
-            context: 'Tests, Annahmen und nichtparametrische Alternativen',
+            context: 'Tests, Annahmen und nichtparametrische Schätzung',
             questions: [
               {
                 id: 'st_wf_p6',
@@ -290,9 +290,9 @@ export const FULL_EXAMS = {
               },
               {
                 id: 'st_wf_p7',
-                text: 'Wenn die Normalitätsannahme stark verletzt ist und die Daten ordinal sind, ist ein Rangtest oft die sicherere Wahl als ein blind eingesetzter t-Test.',
+                text: 'Eine größere Bandbreite in der Kerndichteschätzung führt typischerweise zu einer glatteren, aber stärker geglätteten Schätzung.',
                 correct: 'Wahr',
-                feedback: 'Nichtparametrische Tests vermeiden starke Verteilungsannahmen; passend bei Ordinaldaten.'
+                feedback: 'Größeres b mittelt lokaler stärker und kann dadurch echte lokale Struktur überdecken.'
               },
               {
                 id: 'st_wf_p8',

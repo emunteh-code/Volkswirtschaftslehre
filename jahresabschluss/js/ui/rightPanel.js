@@ -8,6 +8,35 @@ import { CONTENT } from '../data/chapters.js';
 import { CONCEPT_LINKS } from '../data/conceptLinks.js';
 import { renderMath } from '../utils/mathjax.js';
 
+function isSemanticSchema(eq) {
+  const s = String(eq || "").trim();
+  if (!s || !/\\text\{/.test(s)) return false;
+  const cleaned = s
+    .replace(/\\text\{[^}]*\}/g, "")
+    .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow|Leftrightarrow|neq|times|leq|geq|approx|equiv|subset|supset|cup|cap|wedge|vee|neg|forall|exists)/g, "")
+    .replace(/[+\-=\s\\,;:|()/]/g, "")
+    .replace(/\\cdot/g, "");
+  return cleaned.trim() === "";
+}
+
+function renderSemanticSchema(eq) {
+  return String(eq || "")
+    .replace(/\\text\{([^}]*)\}/g, '<span class="schema-term">$1</span>')
+    .replace(/\\rightarrow/g, '<span class="schema-arrow">\u2192</span>')
+    .replace(/\\Rightarrow/g, '<span class="schema-arrow">\u21D2</span>')
+    .replace(/\\leftarrow/g, '<span class="schema-arrow">\u2190</span>')
+    .replace(/\\Leftrightarrow/g, '<span class="schema-arrow">\u21D4</span>')
+    .replace(/\\leftrightarrow/g, '<span class="schema-arrow">\u2194</span>')
+    .replace(/\\neq/g, '<span class="schema-op">\u2260</span>')
+    .replace(/\\times/g, '<span class="schema-op">\u00D7</span>')
+    .replace(/\\leq/g, '<span class="schema-op">\u2264</span>')
+    .replace(/\\geq/g, '<span class="schema-op">\u2265</span>')
+    .replace(/\\neg/g, '<span class="schema-op">\u00AC</span>')
+    .replace(/\s*\+\s*/g, ' <span class="schema-op">+</span> ')
+    .replace(/\s*=\s*/g, ' <span class="schema-op">=</span> ')
+    .trim();
+}
+
 export function clearRightPanel() {
   const rpF = document.getElementById('rpFormulas');
   const rpC = document.getElementById('rpConnections');
@@ -42,11 +71,16 @@ export function renderRightPanel(id, onNavigate) {
   if (rpF) {
     if (d && d.formeln && d.formeln.length) {
       // Use data-formula-idx instead of inline onclick to avoid escaping issues
-      rpF.innerHTML = d.formeln.map((f, i) => `
+      rpF.innerHTML = d.formeln.map((f, i) => {
+        const eqHtml = isSemanticSchema(f.eq)
+          ? `<div class="legal-schema">${renderSemanticSchema(f.eq)}</div>`
+          : f.eq;
+        return `
 <div class="rp-formula" title="Klicken zum Kopieren" role="button" tabindex="0" data-formula-idx="${i}">
   <div class="rp-f-name">${f.label}</div>
-  <div class="rp-f-eq">${f.eq}</div>
-</div>`).join('');
+  <div class="rp-f-eq">${eqHtml}</div>
+</div>`;
+      }).join('');
       // Bind copy handlers after innerHTML is set — formeln values are never user input
       rpF.querySelectorAll('[data-formula-idx]').forEach(el => {
         const idx = parseInt(el.dataset.formulaIdx, 10);

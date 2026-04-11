@@ -28,7 +28,7 @@
 }
 
 .r-runtime-note {
-  font-size: 11px;
+  font-size: 12.5px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
   padding: 6px 10px;
@@ -51,7 +51,7 @@
   background: var(--card, color-mix(in srgb, var(--surface) 98%, #fff 2%));
   border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
   border-radius: var(--r-lg);
-  padding: 20px;
+  padding: 22px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -75,7 +75,7 @@
 }
 
 .r-practice-toolbar-kicker {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -85,7 +85,7 @@
 }
 
 .r-practice-toolbar-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
   color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
@@ -98,7 +98,7 @@
   min-height: 22px;
   padding: 3px 8px;
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 10.5px;
   line-height: 1.2;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -134,7 +134,7 @@
   background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   resize: vertical;
 }
@@ -162,13 +162,13 @@
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.52;
   color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
 }
 
 .r-practice-help-label {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -178,7 +178,7 @@
 
 .r-practice-help p {
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.52;
   color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
 }
@@ -196,13 +196,13 @@
 
 .r-practice-help-foot {
   margin: 8px 0 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
 }
 
 .r-practice-help-subtle {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--muted) 86%, var(--text) 14%);
 }
@@ -216,7 +216,7 @@
   background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.58;
   white-space: pre-wrap;
   overflow: auto;
@@ -235,7 +235,7 @@
 
 .r-practice-card h4,
 .r-practice-pitfalls h4 {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--muted) 56%, var(--text) 44%);
@@ -245,7 +245,7 @@
 .r-practice-card p,
 .r-practice-pitfalls li,
 .r-practice-solution p {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
   max-width: none;
@@ -258,7 +258,7 @@
   color: color-mix(in srgb, var(--accent) 76%, var(--text) 24%);
   border-radius: 999px;
   padding: 5px 10px;
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 700;

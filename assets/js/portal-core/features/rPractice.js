@@ -3,6 +3,7 @@ const STORAGE_PREFIX = 'portal_r_practice_v1';
 
 let webRPromise = null;
 const practiceRegistry = new Map();
+const blockRunRegistry = new WeakMap();
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -882,6 +883,34 @@ ${code}
   return String(jsValue);
 }
 
+function getBlockRunState(blockEl) {
+  const existing = blockRunRegistry.get(blockEl);
+  if (existing) return existing;
+  const created = { running: false, stopRequested: false, runToken: 0 };
+  blockRunRegistry.set(blockEl, created);
+  return created;
+}
+
+function setRunButtonState(blockEl, mode = 'idle') {
+  const runButton = blockEl.querySelector('[data-r-action="run"]');
+  blockEl.querySelectorAll('[data-r-action="reset"], [data-r-action="insert-solution"]').forEach((button) => {
+    button.disabled = mode === 'running' || mode === 'stopping';
+  });
+  if (!runButton) return;
+  if (mode === 'running') {
+    runButton.textContent = 'Stoppen';
+    runButton.dataset.mode = 'running';
+    return;
+  }
+  if (mode === 'stopping') {
+    runButton.textContent = 'Anhalten…';
+    runButton.dataset.mode = 'stopping';
+    return;
+  }
+  runButton.textContent = 'Ausführen';
+  runButton.dataset.mode = 'idle';
+}
+
 function buildRuntimeExpectation(mode, runtimeNote) {
   if (runtimeNote) return runtimeNote;
   if (mode === 'guided') {
@@ -1102,7 +1131,7 @@ export function renderRPracticeMarkup(block, options = {}) {
     <div class="r-practice-actions">
       <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen'}</button>
       <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
-      <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung einfügen</button>
+      <button type="button" class="btn secondary" data-r-action="insert-solution">Lösung einfügen</button>
     </div>
 <div class="r-practice-help">
       <p><strong>Ändern:</strong> ${escapeHtml(config.changeFocus)}</p>
@@ -1128,7 +1157,7 @@ export function renderRPracticeMarkup(block, options = {}) {
     <h4>Aufgabe</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
-    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Lösung anzeigen</button>
+    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
     </div>
@@ -1265,7 +1294,7 @@ function renderHighlightEditor(config) {
   <div class="r-practice-actions">
     <button type="button" class="btn" data-r-action="run"${runDisabled}>${escapeHtml(actionLabel)}</button>
     <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
-    <button type="button" class="btn secondary" data-r-action="toggle-solution">Lösung einfügen</button>
+    <button type="button" class="btn secondary" data-r-action="insert-solution">Lösung einfügen</button>
   </div>
   <div class="r-practice-help">
     <p>${escapeHtml(editHint)}</p>
@@ -1309,7 +1338,7 @@ function renderTabBottomRow(config) {
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
     <p class="r-transfer-rule"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</p>
-    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Lösung anzeigen</button>
+    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
     </div>
@@ -1387,10 +1416,49 @@ function toggleSolution(blockEl) {
   if (!solution) return;
   solution.hidden = !solution.hidden;
   blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
-    button.textContent = solution.hidden ? 'Lösung einfügen' : 'Lösung ausblenden';
+    button.textContent = solution.hidden ? 'Musterlösung anzeigen' : 'Musterlösung ausblenden';
   });
   if (!solution.hidden && window.MathJax?.typesetPromise) {
     window.MathJax.typesetPromise([solution]).catch(() => {});
+  }
+}
+
+function insertSolutionCode(blockEl, config) {
+  const editor = blockEl.querySelector('[data-r-editor]');
+  if (!editor) return;
+  const replacement = config.solutionCode || config.starterCode;
+  editor.value = replacement;
+  editor.dispatchEvent(new Event('input'));
+
+  const solution = blockEl.querySelector('[data-r-solution]');
+  if (solution?.hidden) {
+    toggleSolution(blockEl);
+  }
+}
+
+async function requestRunStop(blockEl) {
+  const state = getBlockRunState(blockEl);
+  if (!state.running || state.stopRequested) return;
+  state.stopRequested = true;
+  setRunButtonState(blockEl, 'stopping');
+
+  const status = blockEl.querySelector('[data-r-runtime-status]');
+  const output = blockEl.querySelector('[data-r-output]');
+  setRuntimeStatus(status, 'Ausführung wird angehalten…', 'loading');
+  if (output && !/\[Ausführung wird angehalten/u.test(output.textContent || '')) {
+    output.textContent = `${output.textContent || ''}\n\n[Ausführung wird angehalten…]`.trim();
+  }
+
+  try {
+    const webR = await ensureWebR();
+    if (typeof webR.interrupt === 'function') {
+      await webR.interrupt();
+    } else if (typeof webR.close === 'function') {
+      await webR.close();
+      webRPromise = null;
+    }
+  } catch {
+    // Best effort only: the run handler will still fall back cleanly.
   }
 }
 
@@ -1400,12 +1468,35 @@ async function handleRun(blockEl, config) {
   const status = blockEl.querySelector('[data-r-runtime-status]');
   if (!editor || !output) return;
 
+  const state = getBlockRunState(blockEl);
+  if (state.running) {
+    await requestRunStop(blockEl);
+    return;
+  }
+
   const code = normalizeCode(editor.value);
+  state.running = true;
+  state.stopRequested = false;
+  state.runToken += 1;
+  const runToken = state.runToken;
+  setRunButtonState(blockEl, 'running');
   output.textContent = 'Code wird ausgeführt…';
   setRuntimeStatus(status, 'R wird gestartet…', 'loading');
 
   try {
     const result = await executeR(config.moduleSlug, code);
+    if (state.runToken !== runToken) return;
+    if (state.stopRequested) {
+      const stoppedMessage = '[Ausführung angehalten]\nDu kannst den Code jetzt anpassen oder erneut ausführen.';
+      output.textContent = stoppedMessage;
+      setRuntimeStatus(status, 'Ausführung angehalten', '');
+      saveState(config.moduleSlug, config.blockId, {
+        code,
+        lastOutput: stoppedMessage,
+        solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+      });
+      return;
+    }
     output.textContent = result;
     setRuntimeStatus(status, 'Interaktiv aktiv', 'success');
     saveState(config.moduleSlug, config.blockId, {
@@ -1414,7 +1505,19 @@ async function handleRun(blockEl, config) {
       solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
     });
   } catch (error) {
+    if (state.runToken !== runToken) return;
     const message = error instanceof Error ? error.message : String(error);
+    if (state.stopRequested || /interrupt|interrupted|abort|aborted|cancel/i.test(message)) {
+      const stoppedMessage = '[Ausführung angehalten]\nDu kannst den Code jetzt anpassen oder erneut ausführen.';
+      output.textContent = stoppedMessage;
+      setRuntimeStatus(status, 'Ausführung angehalten', '');
+      saveState(config.moduleSlug, config.blockId, {
+        code,
+        lastOutput: stoppedMessage,
+        solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+      });
+      return;
+    }
     output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, Interpretationsblock und Musterlösung als ehrlichen Lern-Fallback.`;
     setRuntimeStatus(status, 'Didaktischer Fallback', 'fallback');
     saveState(config.moduleSlug, config.blockId, {
@@ -1422,6 +1525,12 @@ async function handleRun(blockEl, config) {
       lastOutput: output.textContent,
       solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
     });
+  } finally {
+    if (state.runToken === runToken) {
+      state.running = false;
+      state.stopRequested = false;
+      setRunButtonState(blockEl, 'idle');
+    }
   }
 }
 
@@ -1453,6 +1562,8 @@ function mountBlock(blockEl) {
 
   if (config.runtimeMode === 'guided') {
     setRuntimeStatus(status, 'Geführt', 'guided');
+  } else {
+    setRunButtonState(blockEl, 'idle');
   }
 
   // Mount syntax highlighting for tab-style editor (has overlay)
@@ -1487,8 +1598,18 @@ function mountBlock(blockEl) {
 
   blockEl.querySelector('[data-r-action="run"]')?.addEventListener('click', () => {
     if (config.runtimeMode !== 'guided') {
-      handleRun(blockEl, config);
+      void handleRun(blockEl, config);
     }
+  });
+
+  blockEl.querySelector('[data-r-action="insert-solution"]')?.addEventListener('click', () => {
+    insertSolutionCode(blockEl, config);
+    saveState(config.moduleSlug, config.blockId, {
+      ...loadState(config.moduleSlug, config.blockId),
+      code: blockEl.querySelector('[data-r-editor]')?.value || config.solutionCode || config.starterCode,
+      lastOutput: blockEl.querySelector('[data-r-output]')?.textContent || config.outputPlaceholder,
+      solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+    });
   });
 
   blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {

@@ -1,4 +1,5 @@
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
+import { getMathematikContentManifestBridgePayload } from './data/contentManifest.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';
 import * as appState from './state/appState.js';
 import * as storage from './state/storage.js';
@@ -42,5 +43,10 @@ createPortalApp({
   theme,
   keyboard,
   toast,
-  math
+  math,
+  portalBridge: () => {
+    if (typeof window === 'undefined') return;
+    const payload = getMathematikContentManifestBridgePayload();
+    window.__mathematikContentManifest = payload;
+  }
 });

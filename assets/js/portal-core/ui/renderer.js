@@ -535,6 +535,20 @@ ${renderTaskMathBlock(step.eq)}
     })).join("");
   }
 
+  function classifyFormulaCardLayout(formula) {
+    const eq = String(formula?.eq || "").trim();
+    const desc = String(formula?.desc || "").trim();
+    const variableCount = Object.keys(formula?.variables || {}).length;
+
+    if (isLegalSchema(eq) || /\\(?:Rightarrow|rightarrow|Leftrightarrow|leftrightarrow|qquad)/.test(eq)) {
+      return "layout-schema";
+    }
+    if (variableCount >= 3 || desc.length > 110 || eq.length > 72) {
+      return "layout-medium";
+    }
+    return "layout-compact";
+  }
+
   function buildExamDrills(chapter, entry, intuition) {
     const drills = [];
     const { sections, warnings } = extractTheorySignals(entry);
@@ -688,9 +702,9 @@ ${drills.map((drill, index) => {
     toggleCall: `window.__toggleExamDrill('${drillId}')`,
     answerId: `examDrill_${drillId}`,
     cardClass: "exam-drill-card",
-    answerMarkup: `<h4>Musterlösung</h4>
+    answerMarkup: `<div class="exam-drill-answer-head">Musterlösung</div>
 ${metaLabel ? `<div class="exam-drill-meta">${metaLabel}</div>` : ""}
-<div class="exam-drill-solution">${drill.answer}</div>`
+${drill.answer}`
   });
 }).join("")}
 </div>
@@ -762,14 +776,14 @@ ${answerMarkup}
       return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
     let html = `<div class="panel active mikro1-practice">
-<div class="section-block">
-<div class="exam-drill-line">
-<span class="exam-drill-key">Geführte Aufgaben</span>
-<div class="exam-drill-copy">Hier trainierst du den vollständigen Lösungsweg Schritt für Schritt. Ziel ist nicht nur das Ergebnis, sondern die saubere Reihenfolge der Argumentation.</div>
+<div class="practice-surface-intro">
+<div class="practice-surface-column">
+<span class="practice-surface-kicker">Geführte Aufgaben</span>
+<p>Hier trainierst du den vollständigen Lösungsweg Schritt für Schritt. Ziel ist nicht nur das Ergebnis, sondern die saubere Reihenfolge der Argumentation.</p>
 </div>
-<div class="exam-drill-line">
-<span class="exam-drill-key">Prüfungstransfer</span>
-<div class="exam-drill-copy">Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</div>
+<div class="practice-surface-column">
+<span class="practice-surface-kicker">Prüfungstransfer</span>
+<p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
 </div>
 </div>
 <div class="practice-section-header">Geführte Aufgaben</div>
@@ -809,6 +823,7 @@ ${renderGuidedTasks(tasks)}`;
     }
     let html = '<div class="panel active"><div class="formula-grid">';
     entry.formeln.forEach((formula, formulaIndex) => {
+      const layoutClass = classifyFormulaCardLayout(formula);
       const explicitVariables = Object.entries(formula.variables || {}).filter(([, value]) => hasMeaningfulText(value));
       const inferredVariables = explicitVariables.length ? [] : inferFormulaVariables(formula);
       const variableEntries = explicitVariables.length ? explicitVariables : inferredVariables;
@@ -827,7 +842,7 @@ ${renderGuidedTasks(tasks)}`;
       const supportNote = inferredVariables.length
         ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
         : "";
-      html += `<div class="formula-card">
+      html += `<div class="formula-card ${layoutClass}">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
 <div class="f-eq">${isLegalSchema(formula.eq) ? `<div class="legal-schema">${renderLegalSchema(formula.eq)}</div>` : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>

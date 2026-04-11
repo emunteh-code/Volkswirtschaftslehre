@@ -2784,3 +2784,39 @@ body.light-mode .dash-focus-rec {
   margin-top: 8px;
   line-height: 1.4;
 }
+
+/* ============================================================
+   PASS 8 — Statistik family-alignment cleanup
+   ============================================================ */
+
+#content .section-block p strong,
+#content .section-block li strong,
+.intuition-text strong,
+.fe-context-block strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#content .section-block ul,
+#content .section-block ol {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+  padding-left: 1.2rem;
+}
+
+#content .section-block li::marker {
+  color: color-mix(in srgb, var(--accent) 62%, var(--muted) 38%);
+  font-weight: 700;
+}
+
+.formula-card .f-label {
+  color: var(--muted);
+}
+
+.formula-card .f-eq {
+  background: color-mix(in srgb, var(--surface2) 90%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+}

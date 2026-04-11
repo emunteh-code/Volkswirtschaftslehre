@@ -495,28 +495,28 @@ export const CONTENT = {
     ]
   },
 
-  realzins: {
-    motivation: 'Makro I wird realistischer, sobald nicht mehr der Nominalzins, sondern der für Investitionsentscheidungen relevante Real- oder Kreditzins betrachtet wird. Erwartete Inflation und Risikoprämien werden dann zu eigenständigen makroökonomischen Schocks.',
+  realzins_fisher_erwartungen: {
+    motivation: 'Kapitel 6 trennt zuerst sauber zwischen Nominalzins, erwartetem Preisniveau und Realzins. Diese Fisher-Logik ist ein eigener Prüfungsbaustein, bevor Risikoaufschläge und Krisenkanäle dazukommen.',
     theorie: [
       section('Vom Nominalzins zum Realzins', `
         <p>Haushalte und Unternehmen interessieren sich nicht nur für den Nominalzins $i$, sondern für den Realzins $r$, also den um erwartete Inflation bereinigten Finanzierungssatz.</p>
         ${math(String.raw`$$r \approx i - \pi^e$$`)}
         <p>Sinken Inflationserwartungen bei konstantem Nominalzins, steigt der Realzins. Genau deshalb kann Deflationsangst selbst ohne Zinserhöhung konjunkturdämpfend wirken.</p>
       `),
-      section('Risikoprämie und Kreditzins', `
-        <p>Im erweiterten IS-LM-Modell ist für Unternehmen oft der Kreditzins entscheidend. Er setzt sich aus risikofreiem Zins und Risikoprämie zusammen:</p>
-        ${math(String.raw`$$i_L = i + x$$`)}
-        <p>Steigt die Risikoprämie $x$, wird Kredit teurer, Investitionen sinken und die IS-Kurve verschiebt sich nach links. Bankenkrisen und Vertrauensschocks laufen genau über diesen Kanal.</p>
+      section('Ex ante vs. ex post sauber trennen', `
+        <p>Im Kurs ist der <strong>ex ante</strong> Realzins zentral: Er basiert auf der erwarteten Inflation zum Zeitpunkt der Entscheidung. Erst nachträglich zeigt sich, ob der ex post realisierte Realzins davon abweicht.</p>
+        <p>Gerade Klausurfehler entstehen hier leicht: Eine ex post gemessene Inflationsrate erklärt nicht automatisch, warum Unternehmen und Haushalte zuvor investiert oder gespart haben. Für die Entscheidung zählt zunächst die Erwartung.</p>
       `),
-      section('Makroökonomische Lesart', `
-        <p>Eine Finanzkrise kann also auch dann rezessiv wirken, wenn die Zentralbank den Leitzins nicht anhebt. Relevanter ist oft, dass Kreditaufschläge steigen oder erwartete Inflation fällt und damit der Realzins nach oben gedrückt wird.</p>
-        ${warn('Nominalzinssenkung reicht nicht automatisch', 'Wenn gleichzeitig Inflationserwartungen fallen oder Risikoprämien steigen, kann der relevante Real- oder Kreditzins trotzdem hoch bleiben.')}
-        ${warn('Risikoprämie ist kein Schönheitsdetail', 'Im erweiterten Modell ist sie ein eigenständiger Schock, der Investitionen und Nachfrage verschiebt.')}
+      section('Deflationsangst und Zinsuntergrenze', `
+        <p>Kapitel 6 betont ausdrücklich: Ein negativer oder sehr niedriger Nominalzins allein reicht nicht, wenn erwartete Inflation gleichzeitig abstürzt. Dann bleibt der Realzins hoch oder wird sogar restriktiver.</p>
+        <p>Bei der effektiven Zinsuntergrenze wird diese Fisher-Logik besonders wichtig: Wenn $i$ kaum weiter sinken kann, entscheidet die Entwicklung von $\\pi^e$ darüber, wie expansiv oder restriktiv der reale Finanzierungssatz tatsächlich ist.</p>
+        ${warn('Nominal und real nicht vermischen', 'Ein unveränderter Nominalzins kann bei fallender erwarteter Inflation bereits eine reale Straffung bedeuten.')}
+        ${warn('Ex-ante-Logik prüfen', 'Für Investitions- und Konsumentscheidungen zählt im Kurs zuerst der erwartete, nicht der nachträglich realisierte Realzins.')}
       `)
     ].join(''),
     formeln: [
       { label: 'Fisher-Gleichung', eq: String.raw`$$r \approx i - \pi^e$$`, desc: 'Realzins bei gegebener erwarteter Inflation', variables: { 'r': 'Realzins', 'i': 'Nominalzins', '\\pi^e': 'erwartete Inflation' } },
-      { label: 'Kreditzins', eq: String.raw`$$i_L = i + x$$`, desc: 'Leitzins plus Risikoprämie', variables: { 'i_L': 'Kreditzins', 'x': 'Risikoprämie' } }
+      { label: 'Exakte Fisher-Schreibweise', eq: String.raw`$$1+r_t = \frac{1+i_t}{1+\pi_{t+1}^e}$$`, desc: 'Der ex ante Realzins folgt aus Nominalzins und erwartetem Preisniveau.', variables: { 'r_t': 'Realzins der Periode t', 'i_t': 'Nominalzins', '\\pi_{t+1}^e': 'erwartete Inflationsrate für t+1' } }
     ],
     aufgaben: [
       task(
@@ -529,6 +529,50 @@ export const CONTENT = {
         'Der Realzins steigt von 2% auf 4%; Investitionen werden gebremst.'
       ),
       task(
+        String.raw`Warum ist der ex ante Realzins für Investitionsentscheidungen meist wichtiger als der ex post realisierte Realzins?`,
+        [
+          step('Investitions- und Konsumentscheidungen werden vor der Realisation der künftigen Inflation getroffen.'),
+          step('Dafür steht nur die erwartete Inflationsrate zur Verfügung, nicht der spätere Ist-Wert.'),
+          step('Deshalb bildet der ex ante Realzins die relevante Entscheidungsgröße, während der ex post Realzins erst im Nachhinein beobachtet wird.')
+        ],
+        'Makroökonomisch zählt zuerst der ex ante Realzins, weil er die Entscheidungslage im Zeitpunkt der Planung beschreibt.'
+      ),
+      task(
+        String.raw`Die Zentralbank stößt bei $i=0$ an die effektive Zinsuntergrenze. Erwartete Inflation fällt gleichzeitig auf $0\%$. Warum wird die Fisher-Logik gerade in dieser Lage zu einem Stabilitätsproblem?`,
+        [
+          step(String.raw`An der Untergrenze kann der Nominalzins kaum weiter gesenkt werden: $i \ge 0$.`),
+          step(String.raw`Fällt gleichzeitig $\pi^e$, steigt bzw. bleibt der Realzins $r \approx i-\pi^e$ zu hoch.`),
+          step('Damit fehlt der Zentralbank trotz Nullzins ein ausreichend expansiver Realzinskanal.')
+        ],
+        'Bei Nullzins und fallender erwarteter Inflation bleibt der Realzins zu hoch; genau deshalb wird die Zinsuntergrenze makroökonomisch bindend.'
+      )
+    ]
+  },
+
+  realzins_risikopraemie_krisenkanal: {
+    motivation: 'Kapitel 6 erweitert die reine Fisher-Logik um Kreditaufschläge, Bankenbilanzen und Krisentransmission. Damit wird sichtbar, warum ein unveränderter Leitzins in einer Finanzkrise kein neutraler Zustand ist.',
+    theorie: [
+      section('Leitzins vs. Kreditzins', `
+        <p>Im erweiterten IS-LM-Modell ist für Unternehmen oft nicht der Leitzins, sondern der Kreditzins entscheidend. Er setzt sich aus Zentralbankzins und Risikoaufschlag zusammen.</p>
+        ${math(String.raw`$$i_L = i + x$$`)}
+        <p>Steigt die Risikoprämie $x$, wird Kredit teurer, Investitionen sinken und die IS-Kurve verschiebt sich nach links. Der Kurs behandelt diesen Kanal ausdrücklich als eigene Schockquelle.</p>
+      `),
+      section('Spread-Logik und Finanzkrise', `
+        <p>Kapitel 6 illustriert die Krisentransmission über Spreads wie den TED-Spread: Ein steigender Aufschlag signalisiert höheres Ausfall- und Liquiditätsrisiko und geht mit restriktiverer Kreditvergabe einher.</p>
+        <p>Didaktisch wichtig ist: Ein unveränderter Leitzins bedeutet nicht, dass sich die Finanzierungsbedingungen nicht verschlechtern. Der relevante Aufschlag kann gleichzeitig stark steigen.</p>
+      `),
+      section('ELB, Deflationsangst und unvollständige Gegensteuerung', `
+        <p>Der Krisenkanal wird besonders hartnäckig, wenn fallende Inflationserwartungen und höhere Risikoprämien gleichzeitig auftreten. Dann müsste die Zentralbank den Realzins stark senken, stößt aber womöglich an die effektive Zinsuntergrenze.</p>
+        ${warn('Kreditzins statt Leitzins lesen', 'Im Krisenfall entscheidet die Aufgabe oft über den Aufschlag x, nicht über eine direkte Leitzinsänderung.')}
+        ${warn('Spread nicht nur beschreiben', 'Ein höherer Spread ist in Makro I kein Finanzmarkt-Detail, sondern ein Schock mit Nachfrage- und Beschäftigungsfolgen.')}
+      `)
+    ].join(''),
+    formeln: [
+      { label: 'Kreditzins', eq: String.raw`$$i_L = i + x$$`, desc: 'Leitzins plus Risikoprämie', variables: { 'i_L': 'Kreditzins', 'i': 'Leitzins', 'x': 'Risikoprämie / Kreditaufschlag' } },
+      { label: 'Realer Kreditzins', eq: String.raw`$$r_L \approx i + x - \pi^e$$`, desc: 'Relevant für Investitionsentscheidungen im Krisenkanal.', variables: { 'r_L': 'realer Kreditzins', '\\pi^e': 'erwartete Inflation' } }
+    ],
+    aufgaben: [
+      task(
         String.raw`Warum kann eine Bankenkrise die IS-Kurve nach links verschieben, obwohl die Zentralbank ihren Leitzins nicht anhebt?`,
         [
           step('Eine Bankenkrise erhöht häufig die Risikoprämie auf Kredite.'),
@@ -538,13 +582,13 @@ export const CONTENT = {
         'Nicht der Leitzins allein, sondern der Kreditzins entscheidet über die Investitionsnachfrage.'
       ),
       task(
-        String.raw`Gegeben: Leitzins bleibt bei $3\%$, erwartete Inflation sinkt von $2\%$ auf $1\%$, Risikoprämie steigt von $1\%$ auf $2\%$. Wie verändert sich der Kreditzins in realer Rechnung?`,
+        String.raw`Gegeben: Leitzins bleibt bei $3\%$, erwartete Inflation sinkt von $2\%$ auf $1\%$, Risikoprämie steigt von $1\%$ auf $2\%$. Wie verändert sich der reale Kreditzins?`,
         [
           step('Berechne den anfänglichen nominalen Kreditzins.', String.raw`i_L^0 = 3\% + 1\% = 4\%`),
           step('Berechne den neuen nominalen Kreditzins.', String.raw`i_L^1 = 3\% + 2\% = 5\%`),
           step('Ziehe erwartete Inflation ab.', String.raw`r_L^0 \approx 4\%-2\%=2\%,\; r_L^1 \approx 5\%-1\%=4\%`)
         ],
-        'Der real relevante Kreditzins steigt stark (von 2% auf 4%): Doppelbremse aus höherer Prämie und niedrigeren Inflationserwartungen.'
+        'Der reale Kreditzins steigt stark: Doppelbremse aus höherer Risikoprämie und niedrigeren Inflationserwartungen.'
       ),
       task(
         String.raw`Mini-Case Finanzkrisentransmission: Ein TED-ähnlicher Spread steigt sprunghaft, obwohl der Leitzins unverändert bleibt. Erkläre die Kette von der Finanzmarktstörung bis zur Realwirtschaft im erweiterten IS-LM-Rahmen.`,
@@ -554,7 +598,7 @@ export const CONTENT = {
           step('Höhere Finanzierungskosten senken Investitionen; die IS-Kurve verschiebt sich nach links und Output/Beschäftigung geraten unter Druck.'),
           step('Wenn ELB oder fallende Inflationserwartungen die Realzinssenkung begrenzen, bleibt der Schock ohne zusätzliche Stabilisierungsinstrumente besonders hartnäckig.')
         ],
-        'Krisentransmission läuft über den Kreditaufschlag: Spread hoch -> realer Kreditzins hoch -> I runter -> IS nach links -> Rezessionsdruck.'
+        'Krisentransmission läuft über den Kreditaufschlag: Spread hoch -> realer Kreditzins hoch -> Investitionen runter -> IS nach links -> Rezessionsdruck.'
       )
     ]
   },
@@ -623,11 +667,23 @@ export const CONTENT = {
         <p>Steigen Inflationserwartungen, verschiebt sich die kurzfristige Phillipskurve nach oben. Langfristig verschwindet der Trade-off: Dann liegt die Wirtschaft wieder bei der natürlichen Arbeitslosenquote, nur womöglich bei höherer Inflationsrate.</p>
         ${warn('u_n ist kein Zielwert für Null-Inflation', 'u_n stabilisiert die Inflation; er bedeutet nicht automatisch, dass Inflation null ist.')}
         ${warn('Kurzfristig vs. langfristig', 'Ein kurzfristiger Trade-off zwischen Inflation und Arbeitslosigkeit heißt nicht, dass dauerhaft niedrigere Arbeitslosigkeit durch mehr Inflation gekauft werden kann.')}
+      `),
+      section('Angebotsschocks und Lohnindexierung', `
+        <p>Die Vorlesung zeigt ausdrücklich, dass nicht nur Erwartungen, sondern auch Angebotsschocks und institutionelle Lohnanpassung die Phillipskurve verändern. Ein negativer Angebotsschock kann Inflation und Arbeitslosigkeit gleichzeitig steigen lassen.</p>
+        ${math(String.raw`$$\pi_t - \pi_{t-1} = -\frac{\alpha}{1-\lambda}(u_t-u_n)$$`)}
+        <p>Wenn ein Teil $\\lambda$ der Lohnverträge indexiert ist, reagieren Löhne und Preise stärker auf aktuelle Inflation. Dann wird derselbe Arbeitslosigkeitsschock in stärkere Inflationsänderungen übersetzt.</p>
+      `),
+      section('Deflation und Grenzen der Standard-Phillipskurve', `
+        <p>Die Quelle behandelt auch den Grenzfall sehr niedriger Inflation: Bei hoher Arbeitslosigkeit würde die Standard-Phillipskurve eigentlich Deflation prognostizieren, tatsächlich wird diese Dynamik oft durch nach unten starre Nominallöhne oder fest verankerte Erwartungen abgefedert.</p>
+        <p>Deshalb ist Deflation in Klausuren kein bloßes Vorzeichenproblem. Gute Antworten nennen die Grenze der Modellmechanik: Niedrige Inflation, starre Löhne und verankerte Erwartungen können die Fallhöhe der Phillipskurve sichtbar begrenzen.</p>
+        ${warn('Angebotsschock nicht als Bewegung fehllesen', 'Steigt Inflation trotz höherer Arbeitslosigkeit, liegt typischerweise ein Shift durch Angebotsschock oder Erwartungsänderung vor, nicht eine Bewegung auf derselben Kurve.')}
+        ${warn('Deflation nicht mechanisch behaupten', 'Sehr hohe Arbeitslosigkeit impliziert im Kurs nicht automatisch eine beobachtete Deflationsspirale; Lohnrigiditäten und Ankererwartungen sind mitzudenken.')}
       `)
     ].join(''),
     formeln: [
       { label: 'Erwartungsaugmentierte Phillipskurve', eq: String.raw`$$\pi_t - \pi_t^e = -\alpha (u_t - u_n)$$`, desc: 'Arbeitslosigkeitslücke bestimmt Inflationsdruck', variables: { '\\alpha': 'Sensitivität', 'u_n': 'natürliche Arbeitslosenquote' } },
-      { label: 'Beschleunigungsform', eq: String.raw`$$\pi_t - \pi_{t-1} = -\alpha (u_t - u_n)$$`, desc: 'Bei adaptiven Erwartungen', variables: {} }
+      { label: 'Beschleunigungsform', eq: String.raw`$$\pi_t - \pi_{t-1} = -\alpha (u_t - u_n)$$`, desc: 'Bei adaptiven Erwartungen', variables: {} },
+      { label: 'Indexierte Verträge', eq: String.raw`$$\pi_t - \pi_{t-1} = -\frac{\alpha}{1-\lambda}(u_t-u_n)$$`, desc: 'Mit Lohnindexierung reagiert die Inflationsänderung stärker auf dieselbe Arbeitslosenlücke.', variables: { '\\lambda': 'Anteil indexierter Verträge' } }
     ],
     aufgaben: [
       task(
@@ -675,6 +731,24 @@ export const CONTENT = {
           step('Prüfe deshalb in Klausuren immer zuerst, welches Erwartungsregime die Aufgabe vorgibt, bevor du die Richtung der Inflationsantwort formulierst.')
         ],
         'Anker-Regime -> Niveauaussage; adaptives Regime -> Änderungsaussage (Beschleunigung/Verlangsamung).'
+      ),
+      task(
+        'Warum kann ein negativer Angebotsschock gleichzeitig höhere Inflation und höhere Arbeitslosigkeit erzeugen, ohne der Phillipskurve zu widersprechen?',
+        [
+          step('Ein negativer Angebotsschock verschiebt die Phillipskurve bzw. die zugrunde liegende Preis-/Lohnsetzung nach oben.'),
+          step('Damit ist bei gleicher oder sogar höherer Arbeitslosigkeit eine höhere Inflation möglich.'),
+          step('Die gleichzeitige Bewegung von Inflation und Arbeitslosigkeit ist dann ein Kurvenshift, nicht eine Bewegung entlang derselben alten Phillipskurve.')
+        ],
+        'Stagflation ist mit der Quelle vereinbar: Angebotsschocks verändern die Kurvenlage und erzeugen Inflation plus höhere Arbeitslosigkeit zugleich.'
+      ),
+      task(
+        'Warum ist die Aussage „hohe Arbeitslosigkeit muss Deflation erzeugen“ in sehr niedrigen Inflationsregimen zu grob?',
+        [
+          step('Die Standard-Phillipslogik prognostiziert zwar sinkenden Inflationsdruck bei hoher Arbeitslosigkeit.'),
+          step('Beobachtet wird Deflation oft nicht, weil Nominallöhne nach unten rigide sind oder Inflationserwartungen am Ziel verankert bleiben.'),
+          step('Eine klausurstarke Antwort nennt daher sowohl die Basistendenz als auch die Quelle ihrer Abschwächung.')
+        ],
+        'Hohe Arbeitslosigkeit drückt Inflation, aber Lohnrigiditäten und Ankererwartungen können die Deflationsspirale begrenzen oder ganz verhindern.'
       )
     ]
   },
@@ -834,7 +908,3 @@ export const CONTENT = {
     ]
   }
 };
-
-CONTENT.realzins_fisher_erwartungen = CONTENT.realzins;
-CONTENT.realzins_risikopraemie_krisenkanal = CONTENT.realzins;
-delete CONTENT.realzins;

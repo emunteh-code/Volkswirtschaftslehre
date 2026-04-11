@@ -113,12 +113,12 @@ export const INTUITION = {
     ]
   },
   nichtparametrisch: {
-    core: 'Nichtparametrische Verfahren sind die <strong>robuste Reservebank</strong>, wenn Ranglogik, Ausreißer oder Verteilungsverletzungen parametrische Tests fraglich machen.',
-    analogy: 'Statt auf exakte Abstände zu vertrauen, ordnen Rangtests nur noch die Plätze im Feld.',
-    bridge: 'Nichtparametrische Wahl immer über Datentyp und Annahmen begründen, nicht als pauschal “moderneren” Test darstellen.',
+    core: 'Nichtparametrisch bedeutet hier: <strong>die Verteilungsform direkt aus den Daten schätzen</strong>, ohne zuerst eine feste Modellfamilie wie Normal- oder Exponentialverteilung zu unterstellen.',
+    analogy: 'Wie beim Zeichnen einer Küstenlinie: Das Histogramm gibt grobe Kästchen vor, die Kerndichteschätzung legt eine glattere Linie darüber.',
+    bridge: 'Zuerst die Schätzaufgabe erkennen, dann den Glättungshebel lesen: Histogramm und Kernfunktion sind Werkzeuge; die Bandbreite entscheidet über Rauigkeit und Strukturverlust.',
     exam: [
-      { if: 'Ordinaldaten, Schiefe oder starke Ausreißer', then: 'Mann-Whitney / Wilcoxon / Kruskal-Wallis aktiv prüfen.' },
-      { if: 'Verteilungsannahmen wirken plausibel und Daten sind metrisch', then: 'Nichtparametrisch ist nicht automatisch besser; Effizienzfrage ansprechen.' }
+      { if: 'Keine plausible parametrische Familie ist vorgegeben', then: 'Nichtparametrische Dichteschätzung als Formzugriff benennen statt vorschnell eine Normalverteilung zu unterstellen.' },
+      { if: 'Die Bandbreite wird verändert', then: 'Immer die Richtung der Glättungswirkung nennen: kleines b = zackiger, großes b = glatter.' }
     ]
   },
   rlab: {

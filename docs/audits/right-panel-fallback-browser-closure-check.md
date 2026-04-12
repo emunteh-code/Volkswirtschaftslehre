@@ -68,9 +68,10 @@ For `#rightPanel`, `#content .content-fallback--connections`, `#content .content
 
 ### F. Tab parity
 
-- **Grafik** (Statistik `bivariat`, Mikro `budget` at narrow): connections mirror visible, rail hidden.
-- **Aufgaben / Formeln / Intuition:** connections mirror visible on narrow; mistakes mirror only on Theorie — **intentional**.
-- **R-Anwendung** (Ökonometrie `matrix_notation`, 1199px): connections mirror **visible**, rail hidden; no mistakes section in main (expected for that tab).
+**Superseded by Pass 69:** main-column **Verbindungen** mirror is **Theorie-only**; non-Theorie tabs no longer inject `.content-fallback--connections`. Instrumented checks were updated accordingly (`tools/clickthrough/verify-right-panel-fallback.mjs`).
+
+- **Grafik / Aufgaben / Formeln / Intuition / R-Anwendung (narrow):** no connections mirror in `#content`; rail still carries Verbindungen when the layout shows the rail (wide) or hides it (narrow — use Theorie tab for the mirror).
+- **Theorie (narrow):** connections mirror + mistakes mirror as before.
 
 ### Focus mode (desktop 1400px)
 

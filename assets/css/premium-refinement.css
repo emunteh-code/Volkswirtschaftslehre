@@ -822,11 +822,13 @@ body.focus-mode .content-fallback--rp-mirror {
   gap: 0.65rem;
 }
 
+/* Theorie main-flow mirror: same semantic family as inline warnings — not accent-tinted info cards */
 #content .warning-card.warning-card--theorie-fallback {
-  border-radius: var(--r-md, 10px);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--accent) 12%);
-  background: color-mix(in srgb, var(--card) 94%, var(--accent) 4%);
-  box-shadow: var(--shadow-sm, none);
+  border-radius: 18px;
+  border: 1px solid var(--warning-border);
+  border-left: 3px solid color-mix(in srgb, var(--warning-title) 62%, var(--warning-border) 38%);
+  background: var(--warning-surface);
+  box-shadow: var(--warning-shadow);
 }
 
 #content .content-fallback--connections {

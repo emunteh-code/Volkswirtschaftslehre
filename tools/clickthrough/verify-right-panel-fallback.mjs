@@ -165,6 +165,31 @@ try {
   });
   await pf.close();
 
+  const failures = [];
+  for (const row of results) {
+    if (row.tabs) {
+      for (const [key, snap] of Object.entries(row.tabs)) {
+        if (snap.skip || snap.dupConn) {
+          if (snap.dupConn) failures.push(`${row.label} ${key}: duplicate visible Verbindungen (rail + mirror)`);
+          continue;
+        }
+        const tab = key.split(':').slice(1).join(':'); /* e.g. r-anwendung */
+        if (snap.expectNarrow && tab !== 'theorie' && snap.mirrorConnVisible) {
+          failures.push(
+            `${row.label} ${key}: Verbindungen mirror must be Theorie-only at narrow (mirrorConnVisible=true)`
+          );
+        }
+      }
+    }
+    if (row.label === 'oekonometrie-r-tab' && row.rTab && !row.rTab.skip && row.rTab.mirrorConnVisible) {
+      failures.push('oekonometrie-r-tab: Verbindungen mirror must not appear on R-Anwendung tab');
+    }
+  }
+  if (failures.length) {
+    console.error('VERIFY FAILED:\n', failures.join('\n'));
+    process.exitCode = 1;
+  }
+
   console.log(JSON.stringify(results, null, 2));
 } finally {
   await browser.close();

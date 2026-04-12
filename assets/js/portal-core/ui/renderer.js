@@ -1015,7 +1015,13 @@ ${motivationStrip}
       groupConnections: true,
       variant: "main"
     });
-    if (entry && connMainInner.trim() && !String(window.__lastRenderError || "").length) {
+    /* Verbindungen main-column mirror: Theorie tab only (avoid repeating on Grafik / Aufgaben / Formeln / R). */
+    if (
+      activeTab === "theorie" &&
+      entry &&
+      connMainInner.trim() &&
+      !String(window.__lastRenderError || "").length
+    ) {
       content.insertAdjacentHTML(
         "beforeend",
         `<section class="content-fallback content-fallback--connections content-fallback--rp-mirror" aria-labelledby="content-fallback-conn-h">

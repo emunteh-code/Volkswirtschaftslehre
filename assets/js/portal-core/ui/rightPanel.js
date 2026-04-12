@@ -1,6 +1,55 @@
 import { getWarningSystemData, renderRightRailWarnings } from "./warningSystem.js";
 import { displayContentToPlainText, getDisplayMode, renderSemanticBlock } from "./semanticContent.js";
 
+/**
+ * HTML for Verbindungen (prerequisite / dependent concepts). Used by the right rail and by
+ * main-column fallbacks when the rail is hidden (tablet/mobile / focus mode).
+ *
+ * @param {object} opts
+ * @param {{ id: string }[]} opts.chapters
+ * @param {string} opts.conceptId
+ * @param {Record<string, { uses?: string[], usedBy?: string[] }>} opts.conceptLinks
+ * @param {boolean} [opts.groupConnections]
+ * @param {'rail'|'main'} [opts.variant] rail = `.rp-*` classes; main = `.cf-*` for #content
+ * @returns {string}
+ */
+export function buildConceptConnectionsHtml({
+  chapters,
+  conceptId,
+  conceptLinks,
+  groupConnections = true,
+  variant = "rail"
+}) {
+  const links = conceptLinks[conceptId];
+  const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter]));
+  const isMain = variant === "main";
+  const gLabel = (text) =>
+    isMain ? `<div class="cf-group-label">${text}</div>` : `<div class="rp-group-label">${text}</div>`;
+  const wrapOpen = isMain ? `<div class="cf-link-group">` : `<div class="rp-link-group">`;
+  const wrapClose = `</div>`;
+  const connClass = isMain ? "cf-conn" : "rp-conn";
+
+  if (!links) return "";
+
+  const uses = (links.uses || []).map((linkedId) => chapterMap[linkedId]).filter(Boolean);
+  const usedBy = (links.usedBy || []).map((linkedId) => chapterMap[linkedId]).filter(Boolean);
+
+  const row = (chapter, dir) =>
+    `<div class="${connClass}" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-${dir}" aria-hidden="true">${dir === "back" ? "←" : "→"}</span> ${chapter.title}</div>`;
+
+  if (groupConnections) {
+    return [
+      uses.length ? `${wrapOpen}${gLabel("Setzt voraus")}${uses.map((c) => row(c, "back")).join("")}${wrapClose}` : "",
+      usedBy.length ? `${wrapOpen}${gLabel("Wird gebraucht für")}${usedBy.map((c) => row(c, "forward")).join("")}${wrapClose}` : ""
+    ].join("");
+  }
+
+  return [
+    uses.map((c) => row(c, "back")).join(""),
+    usedBy.map((c) => row(c, "forward")).join("")
+  ].join("");
+}
+
 export function createRightPanelRenderer({
   chapters,
   contentById,
@@ -32,7 +81,6 @@ export function createRightPanelRenderer({
 
   function renderRightPanel(id, options = {}) {
     const entry = contentById[id];
-    const links = conceptLinks[id];
     const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter]));
     const isFormulaTab = options?.currentTab === "formeln";
     const formulasNode = document.getElementById("rpFormulas");
@@ -78,30 +126,15 @@ export function createRightPanelRenderer({
     }
 
     if (connectionsNode) {
-      if (links) {
-        const uses = (links.uses || []).map((linkedId) => chapterMap[linkedId]).filter(Boolean);
-        const usedBy = (links.usedBy || []).map((linkedId) => chapterMap[linkedId]).filter(Boolean);
-        const html = groupConnections
-          ? [
-              uses.length ? `<div class="rp-link-group">
-<div class="rp-group-label">Setzt voraus</div>
-${uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-back" aria-hidden="true">←</span> ${chapter.title}</div>`).join("")}
-</div>` : "",
-              usedBy.length ? `<div class="rp-link-group">
-<div class="rp-group-label">Wird gebraucht für</div>
-${usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-forward" aria-hidden="true">→</span> ${chapter.title}</div>`).join("")}
-</div>` : ""
-            ].join("")
-          : [
-              uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-back" aria-hidden="true">←</span> ${chapter.title}</div>`).join(""),
-              usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-forward" aria-hidden="true">→</span> ${chapter.title}</div>`).join("")
-            ].join("");
-        connectionsNode.innerHTML = html;
-        if (connectionsSection) connectionsSection.hidden = !html;
-      } else {
-        connectionsNode.innerHTML = "";
-        if (connectionsSection) connectionsSection.hidden = true;
-      }
+      const connHtml = buildConceptConnectionsHtml({
+        chapters,
+        conceptId: id,
+        conceptLinks,
+        groupConnections,
+        variant: "rail"
+      });
+      connectionsNode.innerHTML = connHtml;
+      if (connectionsSection) connectionsSection.hidden = !connHtml;
     }
 
     if (mistakesNode) {

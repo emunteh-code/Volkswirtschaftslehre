@@ -8,7 +8,8 @@ import {
   stripHtml
 } from "./semanticContent.js"
 import { renderTeachingProse } from "./teachingProse.js"
-import { getWarningSystemData, renderTaskWarningCard } from "./warningSystem.js";
+import { buildConceptConnectionsHtml } from "./rightPanel.js"
+import { getWarningSystemData, renderMainFlowMistakesSection, renderTaskWarningCard } from "./warningSystem.js";
 import {
   buildConceptProvenanceStripHtml,
   initConceptProvenanceInteractions
@@ -978,7 +979,10 @@ ${motivationStrip}
     try {
       if (activeTab === "theorie") {
         const theorySignals = extractTheorySignals(entry);
-        content.innerHTML = headerHTML + `<div class="panel active">${theorySignals.theoryHtml || entry.theorie}</div>`;
+        const warningData = getWarningSystemData(entry);
+        const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
+        content.innerHTML =
+          headerHTML + `<div class="panel active">${theorySignals.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         if (initGraphFn) initGraphFn(conceptId);
@@ -1002,6 +1006,23 @@ ${motivationStrip}
 <button class="btn" onclick="location.reload()">Neu laden</button>
 </div>
 </div>`;
+    }
+
+    const connMainInner = buildConceptConnectionsHtml({
+      chapters,
+      conceptId,
+      conceptLinks,
+      groupConnections: true,
+      variant: "main"
+    });
+    if (entry && connMainInner.trim() && !String(window.__lastRenderError || "").length) {
+      content.insertAdjacentHTML(
+        "beforeend",
+        `<section class="content-fallback content-fallback--connections content-fallback--rp-mirror" aria-labelledby="content-fallback-conn-h">
+<h3 class="content-fallback__title" id="content-fallback-conn-h">Verbindungen</h3>
+<div class="content-fallback__connections">${connMainInner}</div>
+</section>`
+      );
     }
 
     const provenanceStrip = buildConceptProvenanceStripHtml({

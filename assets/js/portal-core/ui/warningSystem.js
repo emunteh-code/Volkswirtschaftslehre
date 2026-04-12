@@ -114,6 +114,25 @@ export function renderRightRailWarnings(warnings = []) {
     .join("");
 }
 
+/**
+ * Main-column mirror of „Häufige Fehler“ when `#rightPanel` is hidden (narrow / focus mode).
+ * Uses the same `.warning-card` language as task hints, not the compact rail tiles.
+ */
+export function renderMainFlowMistakesSection(railWarnings = []) {
+  if (!railWarnings.length) return "";
+  const cards = railWarnings
+    .map(
+      (warning) => `<div class="warning-card warning-card--theorie-fallback" data-warning-placement="main-flow">
+${buildWarningCardInner(escapeHtmlText(warning.title), warning.bodyHtml)}
+</div>`
+    )
+    .join("");
+  return `<section class="content-fallback content-fallback--mistakes content-fallback--rp-mirror" aria-labelledby="content-fallback-mistakes-h">
+<h3 class="content-fallback__title" id="content-fallback-mistakes-h">Häufige Fehler</h3>
+<div class="content-fallback__stack">${cards}</div>
+</section>`;
+}
+
 export function renderTaskWarningCard(bodyHtml, title = "Klausurhinweis") {
   if (!String(bodyHtml || "").trim()) return "";
   return `<div class="warning-card warning-card--task" data-warning-placement="task">

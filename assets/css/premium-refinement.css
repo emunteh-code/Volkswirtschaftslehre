@@ -775,6 +775,131 @@ body.light-mode #rightPanel .rp-conn .arrow.arrow--dir-forward {
 }
 
 /* ============================================================
+   PASS — right-panel content mirrors in #content (tablet/mobile / focus)
+   Breakpoint 1200px aligns with module `#rightPanel { display: none }` rules.
+   Mirrors stay in DOM; hidden on wide desktop without focus-mode to avoid double-visible UI.
+   ============================================================ */
+
+.content-fallback--rp-mirror {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .content-fallback--rp-mirror {
+    display: block;
+  }
+}
+
+body.focus-mode .content-fallback--rp-mirror {
+  display: block !important;
+}
+
+@media (min-width: 1201px) {
+  body:not(.focus-mode) .content-fallback--rp-mirror {
+    display: none !important;
+  }
+}
+
+#content .content-fallback__title {
+  font-family: var(--font-heading, inherit);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+  margin: 0 0 0.65rem;
+}
+
+#content .content-fallback--mistakes {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+#content .content-fallback__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+#content .warning-card.warning-card--theorie-fallback {
+  border-radius: var(--r-md, 10px);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--accent) 12%);
+  background: color-mix(in srgb, var(--card) 94%, var(--accent) 4%);
+  box-shadow: var(--shadow-sm, none);
+}
+
+#content .content-fallback--connections {
+  margin-top: 1.75rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+#content .content-fallback__connections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#content .cf-link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+#content .cf-group-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+  margin-bottom: 0.15rem;
+}
+
+#content .cf-conn {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: var(--text);
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+#content .cf-conn:hover {
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+  background: color-mix(in srgb, var(--surface2) 40%, var(--card) 60%);
+}
+
+#content .cf-conn .arrow.arrow--dir-back {
+  color: color-mix(in srgb, #c75f5a 80%, var(--muted) 20%);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+#content .cf-conn .arrow.arrow--dir-forward {
+  color: color-mix(in srgb, var(--semantic-green, #34a36a) 78%, var(--muted) 22%);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+body.light-mode #content .cf-conn .arrow.arrow--dir-back {
+  color: color-mix(in srgb, #b42318 68%, var(--muted) 32%);
+}
+
+body.light-mode #content .cf-conn .arrow.arrow--dir-forward {
+  color: color-mix(in srgb, #15803d 65%, var(--muted) 35%);
+}
+
+/* ============================================================
    PHASE 6 — TABS (premium pill)
    ============================================================ */
 

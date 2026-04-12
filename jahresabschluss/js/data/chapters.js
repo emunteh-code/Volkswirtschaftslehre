@@ -1,3 +1,5 @@
+import { mathContent, renderSemanticBlock } from '../../../assets/js/portal-core/ui/semanticContent.js';
+
 const section = (title, body) => `
   <div class="section-block">
     <h3>${title}</h3>
@@ -6,39 +8,7 @@ const section = (title, body) => `
 `;
 
 const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}</strong> ${body}</div>`;
-const isDelimitedMath = (value) => /^\s*(\$\$[\s\S]+\$\$|\\\[[\s\S]+\\\])\s*$/.test(String(value || ''));
-const isSemanticSchema = (value) => {
-  const s = String(value || '').trim();
-  if (!s || !/\\text\{/.test(s)) return false;
-  const cleaned = s
-    .replace(/\\text\{[^}]*\}/g, '')
-    .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow|Leftrightarrow|neq|times|leq|geq|approx|equiv|subset|supset|cup|cap|wedge|vee|neg|forall|exists)/g, '')
-    .replace(/[+\-=\s\\,;:|()/]/g, '')
-    .replace(/\\cdot/g, '');
-  return cleaned.trim() === '';
-};
-const renderSemanticSchema = (value) => String(value || '')
-  .replace(/\\text\{([^}]*)\}/g, '<span class="legal-schema__term">$1</span>')
-  .replace(/\\rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">→</span>')
-  .replace(/\\Rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">⇒</span>')
-  .replace(/\\leftarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">←</span>')
-  .replace(/\\Leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">⇔</span>')
-  .replace(/\\leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">↔</span>')
-  .replace(/\\neq/g, '<span class="legal-schema__op">≠</span>')
-  .replace(/\\times/g, '<span class="legal-schema__op">×</span>')
-  .replace(/\\leq/g, '<span class="legal-schema__op">≤</span>')
-  .replace(/\\geq/g, '<span class="legal-schema__op">≥</span>')
-  .replace(/\\neg/g, '<span class="legal-schema__op">¬</span>')
-  .replace(/\s*\+\s*/g, ' <span class="legal-schema__op">+</span> ')
-  .replace(/\s*=\s*/g, ' <span class="legal-schema__op">=</span> ')
-  .trim();
-const mathBlock = (eq) => {
-  if (isSemanticSchema(eq)) {
-    return `<div class="legal-schema" role="group">${renderSemanticSchema(eq)}</div>`;
-  }
-  const math = isDelimitedMath(eq) ? eq : `$$${String(eq || '').trim()}$$`;
-  return `<div class="math-block">${math}</div>`;
-};
+const mathBlock = (content) => renderSemanticBlock(content, { variant: 'theory' });
 const step = (text, eq = null) => ({ text, eq });
 const task = (text, steps, result, hint = null) => ({ text, steps, result, ...(hint ? { hint } : {}) });
 
@@ -71,7 +41,7 @@ export const CONTENT = {
       section(
         'Bilanz und GuV als zwei Perspektiven',
         `<p>Die Bilanz ist stichtagsbezogen und zeigt Vermögen und Kapital am Abschlussstichtag. Die GuV ist periodenbezogen und erklärt, wie der Jahreserfolg entstanden ist. Beide zusammen liefern erst das vollständige Bild des Unternehmens.</p>
-         ${mathBlock(String.raw`$$\text{Aktiva} = \text{Passiva} = \text{Eigenkapital} + \text{Fremdkapital}$$`)}
+         ${mathBlock(mathContent(String.raw`$$\text{Aktiva} = \text{Passiva} = \text{Eigenkapital} + \text{Fremdkapital}$$`))}
       `
       ),
       section(

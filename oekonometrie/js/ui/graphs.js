@@ -1,6 +1,7 @@
 import GraphEngine from './graphEngine.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 import { renderMath } from '../utils/mathjax.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 
 let _rafId = null;
 
@@ -91,7 +92,7 @@ function buildGraphInfo({ label = 'Graph-Interpretation', equation = '', rows = 
 
   return `
     <span class="gi-label">${label}</span>
-    ${equation ? `<div class="gi-eq">${equation}</div>` : ''}
+    ${equation ? `<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>` : ''}
     ${rows.length ? `<div class="gi-list">${rowMarkup}</div>` : ''}
   `;
 }

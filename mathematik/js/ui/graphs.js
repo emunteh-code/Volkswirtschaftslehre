@@ -1,4 +1,5 @@
 import { renderMath } from '../utils/mathjax.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 
 let rafId = null;
 
@@ -52,7 +53,7 @@ function setGraphInfo(html) {
 
 function buildGraphInfo({ label = 'Interpretation', equation = '', rows = [] }) {
   const parts = [`<span class="gi-label">${label}</span>`];
-  if (equation) parts.push(`<div class="gi-eq">${equation}</div>`);
+  if (equation) parts.push(`<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>`);
   if (rows.length) {
     parts.push('<div class="gi-list">');
     rows.forEach((row) => {

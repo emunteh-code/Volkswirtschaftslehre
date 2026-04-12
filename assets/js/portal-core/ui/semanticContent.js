@@ -314,6 +314,20 @@ function parseMixedArrowChain(text) {
   return schemaSequence(parts)
 }
 
+/** Single-clause plain or de-LaTeX-normalized chains (e.g. "A + B ⇒ C") → schema, before reference-style A⇒B mapping. */
+function parsePlainConnectorSplitSchema(normalizedText) {
+  const text = String(normalizedText || "").trim()
+  if (!text) return null
+  const clauses = splitSemanticClauses(text)
+  if (clauses.length !== 1) return null
+  const parts = splitPlainSchemaParts(clauses[0])
+  if (parts.length < 3) return null
+  if (!parts.some((part) => isConnectorToken(String(part)))) return null
+  const termCount = parts.filter((part) => !isConnectorToken(String(part))).length
+  if (termCount < 2) return null
+  return schemaSequence(parts)
+}
+
 function isTextDominatedLatex(value) {
   const core = stripMathDelimiters(value)
   if (!/\\(?:text|mathrm|operatorname)\{/.test(core)) return false
@@ -404,6 +418,9 @@ function parseLegacyString(value) {
   const hasStructuredTextSyntax = /\\(?:text|mathrm|operatorname)\{/.test(decoded)
 
   if (!decoded.includes("\\") || hasSemanticArrowSyntax || hasStructuredTextSyntax) {
+    const connectorSplitSchema = parsePlainConnectorSplitSchema(normalizedText)
+    if (connectorSplitSchema) return connectorSplitSchema
+
     const mappedReference = parseArrowReferenceMappings(normalizedText)
     if (mappedReference) return mappedReference
 

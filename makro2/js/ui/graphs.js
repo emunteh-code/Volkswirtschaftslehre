@@ -5,6 +5,7 @@
 
 import GraphEngine from "./graphEngine.js";
 import { renderMath } from "../utils/mathjax.js";
+import { ensureMathJaxEquationHtml } from "../../../assets/js/portal-core/ui/mathDelimiters.js";
 
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
@@ -279,7 +280,7 @@ function renderInfo(equation, rows) {
   const safeRows = rows.filter((row) => row?.body);
   return `
     <span class="gi-label">Graph-Interpretation</span>
-    ${equation ? `<div class="gi-eq">\\(${equation}\\)</div>` : ''}
+    ${equation ? `<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>` : ''}
     <div class="gi-list">
       ${safeRows.map((row) => `
         <div class="gi-row">

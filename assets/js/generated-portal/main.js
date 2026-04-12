@@ -10,6 +10,7 @@ import { getModuleContent } from "../module-content.js";
 import { mountLivePortalBridge } from "../live-portal-bridge.js";
 import { buildGeneratedPortalData } from "./dataFactory.js";
 import { getGeneratedRPracticeBlocks } from "./rPracticeCatalog.js";
+import { ensureMathJaxEquationHtml } from "../portal-core/ui/mathDelimiters.js";
 
 function inferSlug() {
   const parts = window.location.pathname.split("/").filter(Boolean);
@@ -594,7 +595,7 @@ function updateGraphInfo(html) {
 
 function renderStructuredGraphInfo({ equation = "", insights = [] }) {
   const equationHtml = equation
-    ? `<div class="graph-equation">${equation}</div>`
+    ? `<div class="graph-equation">${ensureMathJaxEquationHtml(equation)}</div>`
     : "";
   const insightHtml = insights
     .filter((entry) => entry && entry.label && entry.text)

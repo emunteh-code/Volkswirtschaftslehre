@@ -2124,10 +2124,15 @@ body.focus-mode #rightPanel { display: none; }
 }
 
 #rpFormulas,
-#rpConnections,
-#rpMistakes {
+#rpConnections {
   display: grid;
   gap: 8px;
+}
+
+#rpMistakes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .rp-formula {
   background: color-mix(in srgb, var(--surface2) 92%, var(--surface));
@@ -2170,17 +2175,17 @@ body.focus-mode #rightPanel { display: none; }
 .rp-conn:hover { background: var(--surface2); color: var(--text); transform: translateX(4px); }
 .rp-conn .arrow { color: var(--accent3); }
 
-.rp-mistake:not(.warning-card) {
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) {
   background: rgba(255,69,58,0.06);
   border: 1px solid rgba(255,69,58,0.18);
   border-radius: var(--r-sm); padding: 7px 9px; margin-bottom: 5px; font-size: 12px;
   transition: background 0.15s;
 }
-.rp-mistake:not(.warning-card) .err {
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) .err {
   color: var(--sys-red); font-weight: 700; font-size: 10px;
   letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 3px;
 }
-.rp-mistake:not(.warning-card) .fix { color: var(--text); font-size: 12px; line-height: 1.5; }
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) .fix { color: var(--text); font-size: 12px; line-height: 1.5; }
 
 .rp-f-name, .rp-f-name * { font-family: inherit; text-transform: none; }
 

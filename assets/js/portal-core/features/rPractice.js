@@ -466,11 +466,14 @@ function inferLearningGoal(block) {
   return 'Lernziel: Übersetze die Fachidee sauber in einen belastbaren R-Arbeitsschritt.';
 }
 
-/** Normalize for comparing header copy vs Idee body (whitespace + case only). */
+/** Normalize for comparing header copy vs Idee body (quotes, dashes, spacing, case). */
 function normalizeRIntroDedupeKey(text) {
   return String(text || '')
+    .replace(/[\u201c\u201d\u201e\u2033\u00ab\u00bb\u201a\u2018\u2019]/g, '"')
+    .replace(/[\u2013\u2014]/g, '-')
     .trim()
     .replace(/\s+/g, ' ')
+    .replace(/\.$/u, '')
     .toLowerCase();
 }
 
@@ -483,8 +486,40 @@ function isDuplicateHeaderPurposeVsIdee(purpose, learningGoal) {
   const g = normalizeRIntroDedupeKey(learningGoal);
   if (!p || !g) return false;
   if (p === g) return true;
+  /* Idee repeats the opening of the header paragraph */
   if (p.length >= 24 && g.startsWith(p)) return true;
+  /* Header is the same idea with extra wording; Idee is the short form */
+  if (g.length >= 24 && p.startsWith(g)) return true;
   return false;
+}
+
+/** Drop leading bullets that only repeat the Idee lead (common authoring slip). */
+function dedupeGoalBulletsAgainstLead(lead, bullets) {
+  if (!Array.isArray(bullets) || !bullets.length) return bullets;
+  const k = normalizeRIntroDedupeKey(lead);
+  if (!k) return bullets;
+  const out = [...bullets];
+  while (out.length) {
+    const bk = normalizeRIntroDedupeKey(out[0]);
+    if (!bk) {
+      out.shift();
+      continue;
+    }
+    if (bk === k) {
+      out.shift();
+      continue;
+    }
+    if (k.length >= 20 && bk.startsWith(k)) {
+      out.shift();
+      continue;
+    }
+    if (bk.length >= 20 && k.startsWith(bk)) {
+      out.shift();
+      continue;
+    }
+    break;
+  }
+  return out;
 }
 
 function inferGoalBullets(block) {
@@ -975,8 +1010,28 @@ function buildConfig(block, options = {}) {
   const keepHint = inferKeepHint(block, taskMode);
 
   let purpose = block.purpose || '';
+  const displayTitle = block.title || 'Vom Modell zur Auswertung';
   const learningGoal = inferLearningGoal(block);
-  const headerPurpose = isDuplicateHeaderPurposeVsIdee(purpose, learningGoal) ? '' : purpose;
+  const goalBullets = dedupeGoalBulletsAgainstLead(learningGoal, inferGoalBullets(block));
+  const successSignal = inferSuccessSignal(block, taskMode);
+  const purposeDupVsIdee = isDuplicateHeaderPurposeVsIdee(purpose, learningGoal);
+  const purposeDupVsTitle = Boolean(String(purpose).trim())
+    && normalizeRIntroDedupeKey(purpose) === normalizeRIntroDedupeKey(displayTitle);
+  const headerPurpose = (purposeDupVsIdee || purposeDupVsTitle) ? '' : purpose;
+  const titleMatchesLead = normalizeRIntroDedupeKey(learningGoal) === normalizeRIntroDedupeKey(displayTitle);
+  /* Title already states the lead; do not repeat it under „Idee“. */
+  let ideeLeadParagraph = titleMatchesLead ? '' : learningGoal;
+  let showIdeeSuccess =
+    Boolean(String(successSignal).trim())
+    && normalizeRIntroDedupeKey(successSignal) !== normalizeRIntroDedupeKey(learningGoal)
+    && normalizeRIntroDedupeKey(successSignal) !== normalizeRIntroDedupeKey(displayTitle);
+  const ideeWouldBeEmpty = !ideeLeadParagraph && !goalBullets.length && !showIdeeSuccess;
+  if (ideeWouldBeEmpty) {
+    ideeLeadParagraph = learningGoal;
+    showIdeeSuccess =
+      Boolean(String(successSignal).trim())
+      && normalizeRIntroDedupeKey(successSignal) !== normalizeRIntroDedupeKey(learningGoal);
+  }
 
   const coreLine = coreTarget.expression || inferCoreLine(block);
   const coreAnchor = coreTarget.expression
@@ -987,7 +1042,7 @@ function buildConfig(block, options = {}) {
     moduleSlug,
     blockId,
     runtimeMode,
-    title: block.title || 'Vom Modell zur Auswertung',
+    title: displayTitle,
     purpose,
     headerPurpose,
     script: block.script || '',
@@ -998,8 +1053,10 @@ function buildConfig(block, options = {}) {
     taskPrompt,
     taskMode,
     learningGoal,
-    goalBullets: inferGoalBullets(block),
-    successSignal: inferSuccessSignal(block, taskMode),
+    goalBullets,
+    ideeLeadParagraph,
+    showIdeeSuccess,
+    successSignal,
     coreLine,
     coreCue: coreTarget.cue,
     coreLineAnchor: coreAnchor,
@@ -1063,9 +1120,9 @@ function renderTaskBriefs(config) {
   return `<div class="r-lesson-flow">
   <div class="r-lesson-intro">
     <div class="r-orient-panel-kicker">Idee</div>
-    <p>${escapeHtml(config.learningGoal)}</p>
+    ${config.ideeLeadParagraph ? `<p>${escapeHtml(config.ideeLeadParagraph)}</p>` : ''}
     ${config.goalBullets?.length ? `<ul class="r-goal-list">${config.goalBullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
-    <p class="r-goal-success"><strong>Ziel:</strong> ${escapeHtml(config.successSignal)}</p>
+    ${config.showIdeeSuccess ? `<p class="r-goal-success"><strong>Ziel:</strong> ${escapeHtml(config.successSignal)}</p>` : ''}
   </div>
   <div class="r-translation-block">
     <div class="r-orient-panel-kicker">Mathe ↔ R</div>
@@ -1144,6 +1201,8 @@ export function renderRPracticeMarkup(block, options = {}) {
   </div>
 </div>
 <div class="r-practice-workspace">
+  <div class="r-execution-shell">
+  <div class="r-execution-instrument">
   <div class="r-practice-editor-card">
     <div class="r-practice-toolbar">
       <div>
@@ -1162,22 +1221,32 @@ export function renderRPracticeMarkup(block, options = {}) {
       <p><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
     </div>
   </div>
-  <div class="r-practice-output-card">
-    <div class="r-practice-output-head">
-      <div>
-        <div class="r-practice-toolbar-title">Was zählt im Output</div>
-      </div>
+  <div class="r-practice-output-card r-tab-output-card">
+  <div class="r-tab-output-evidence-stack">
+  <div class="r-practice-output-head r-tab-output-guide-head">
+    <div>
+      <div class="r-practice-toolbar-title">Was zählt im Output</div>
     </div>
-    <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
+  </div>
+  ${(config.outputChecklist || []).length ? `<div class="r-output-focus">
+    <div class="r-output-interp-kicker">Darauf achten</div>
+    <ul class="r-output-focus-list">
+      ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+    </ul>
+  </div>` : ''}
+  <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
+  </div>
+  </div>
+  </div>
   </div>
 </div>
-<div class="r-practice-grid">
-  <div class="r-practice-card">
+<div class="r-practice-support-surface" aria-label="Output-Deutung, Aufgabe und Transfer">
+  <div class="r-practice-support-section r-practice-support--evidence">
     <h4>Output-Beweis</h4>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
   </div>
-  <div class="r-practice-card">
+  <div class="r-practice-support-section r-practice-support--task">
     <h4>Aufgabe</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
@@ -1329,7 +1398,8 @@ function renderHighlightEditor(config) {
 
 function renderTabOutputCard(config) {
   return `<div class="r-practice-output-card r-tab-output-card">
-  <div class="r-practice-output-head">
+  <div class="r-tab-output-evidence-stack">
+  <div class="r-practice-output-head r-tab-output-guide-head">
     <div>
       <div class="r-practice-toolbar-title">Was zählt im Output</div>
     </div>
@@ -1341,10 +1411,11 @@ function renderTabOutputCard(config) {
     </ul>
   </div>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
-  <div class="r-output-interp">
+  <div class="r-output-interp r-tab-output-readout">
     <div class="r-output-interp-kicker">Was der Output belegt</div>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
+  </div>
   </div>
 </div>`;
 }
@@ -1382,8 +1453,12 @@ function renderRLabSection(block, moduleSlug, index, total, options = {}) {
   return `<div class="r-lab-section r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
 ${renderTabOrientationCard(config, index, total)}
 <div class="r-practice-workspace">
+  <div class="r-execution-shell">
+  <div class="r-execution-instrument">
   ${renderHighlightEditor(config)}
   ${renderTabOutputCard(config)}
+  </div>
+  </div>
 </div>
 ${renderTabBottomRow(config)}
 </div>`;

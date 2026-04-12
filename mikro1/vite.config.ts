@@ -32,5 +32,9 @@ export default defineConfig({
     port: 3000,
     open: true,
     hmr: true,
+    // Shared `assets/js/portal-core/...` lives one level above `mikro1/`
+    fs: {
+      allow: ['..'],
+    },
   },
 });

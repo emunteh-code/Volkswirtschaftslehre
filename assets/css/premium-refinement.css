@@ -70,11 +70,12 @@ body.light-mode #topbar {
   border-radius: 3px;
 }
 
-/* Formula card — neutral surface, magenta text only */
+/* Math blocks in Theorie/Intuition/content — no accent frame (Pass 41) */
 #content .math-block {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-left: 2px solid var(--math-ink);
+  background: transparent;
+  border: none;
+  border-left: none;
+  box-shadow: none;
 }
 
 #content .formula-card {
@@ -246,12 +247,11 @@ body:not(.light-mode) .r-tab-pitfalls h4::before {
   background: color-mix(in srgb, var(--warning-surface) 92%, var(--card) 8%);
 }
 
-/* Pass 23 — right-rail „Häufige Fehler“: one premium warning-card family (all modules) */
+/* Pass 24 — right-rail „Häufige Fehler“: compact editorial notes (no banner / no icon) */
 #rightPanel .rp-section--mistakes {
-  gap: 12px;
+  gap: 10px;
 }
 
-/* Same section-label system as other `.rp-section` headers (no extra warning tint on the label) */
 #rightPanel .rp-section--mistakes > h4 {
   color: color-mix(in srgb, var(--muted) 86%, var(--text) 14%);
 }
@@ -259,56 +259,64 @@ body:not(.light-mode) .r-tab-pitfalls h4::before {
 #rightPanel #rpMistakes {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-#rightPanel #rpMistakes > .rp-mistake.warning-card {
-  margin: 0;
-  font-size: 14px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid var(--warning-border);
-  border-left-width: 1px;
-  border-left-style: solid;
-  border-left-color: var(--warning-border);
-  background: var(--warning-surface);
-  box-shadow: none;
-  gap: 12px;
-  color: var(--warning-body);
-}
-
-#rightPanel #rpMistakes > .rp-mistake.warning-card:hover {
-  background: color-mix(in srgb, var(--warning-surface) 93%, var(--card) 7%);
-}
-
-#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-head {
-  align-items: flex-start;
   gap: 10px;
 }
 
-#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-icon {
-  width: 15px;
-  height: 15px;
-  min-width: 15px;
-  margin-top: 2px;
+#rightPanel #rpMistakes .rp-mistake--rail {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, rgba(255, 69, 58, 0.22) 82%, var(--border) 18%);
+  background: rgba(255, 69, 58, 0.05);
+  box-shadow: none;
+  display: grid;
+  gap: 6px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 93%, var(--muted) 7%);
 }
 
-#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-icon svg {
-  width: 14px;
-  height: 14px;
+body.light-mode #rightPanel #rpMistakes .rp-mistake--rail {
+  background: rgba(255, 69, 58, 0.045);
+  border-color: color-mix(in srgb, #e8a090 42%, var(--border) 58%);
 }
 
-#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-title {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
+body:not(.light-mode) #rightPanel #rpMistakes .rp-mistake--rail {
+  background: rgba(255, 69, 58, 0.07);
+  border-color: color-mix(in srgb, rgba(255, 120, 100, 0.35) 55%, var(--border) 45%);
+}
+
+#rightPanel #rpMistakes .rp-mistake--rail:hover {
+  background: color-mix(in srgb, rgba(255, 69, 58, 0.08) 88%, var(--surface2) 12%);
+}
+
+body:not(.light-mode) #rightPanel #rpMistakes .rp-mistake--rail:hover {
+  background: rgba(255, 69, 58, 0.09);
+}
+
+#rightPanel #rpMistakes .rp-mistake--rail .rp-mistake-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0;
+  letter-spacing: 0.01em;
   color: var(--warning-title);
 }
 
-#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-body {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--warning-body);
+#rightPanel #rpMistakes .rp-mistake--rail .rp-mistake-body {
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 0;
+  color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
+}
+
+#rightPanel #rpMistakes .rp-mistake--rail .rp-mistake-body p,
+#rightPanel #rpMistakes .rp-mistake--rail .rp-mistake-body ul {
+  margin: 0;
+}
+
+#rightPanel #rpMistakes .rp-mistake--rail .rp-mistake-body ul {
+  padding-left: 1.05rem;
 }
 
 .r-practice-pitfalls,
@@ -535,7 +543,7 @@ body.light-mode #rightPanel {
 
 #rightPanel .rp-formula {
   background: color-mix(in srgb, var(--surface2) 88%, var(--math-soft, transparent) 12%);
-  border-color: color-mix(in srgb, var(--border) 85%, var(--math-ink) 15%);
+  border-color: color-mix(in srgb, var(--border) 90%, var(--text) 10%);
   transition:
     border-color var(--duration-hover) var(--ease-premium),
     box-shadow var(--duration-hover) var(--ease-premium);
@@ -544,6 +552,31 @@ body.light-mode #rightPanel {
 #rightPanel .rp-formula:hover {
   border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
   box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   PASS 33 — Verbindungen: directional arrow colors (right rail)
+   Prerequisite / “Setzt voraus” (←) = muted red; “Wird gebraucht für” (→) =
+   muted green. Only `.arrow` glyphs are tinted; link text stays neutral.
+   Markup: `arrow--dir-back` / `arrow--dir-forward` from portal-core rightPanel.
+   ============================================================ */
+
+#rightPanel .rp-conn .arrow.arrow--dir-back {
+  color: color-mix(in srgb, #c75f5a 80%, var(--muted) 20%);
+  font-weight: 700;
+}
+
+#rightPanel .rp-conn .arrow.arrow--dir-forward {
+  color: color-mix(in srgb, var(--semantic-green, #34a36a) 78%, var(--muted) 22%);
+  font-weight: 700;
+}
+
+body.light-mode #rightPanel .rp-conn .arrow.arrow--dir-back {
+  color: color-mix(in srgb, #b42318 68%, var(--muted) 32%);
+}
+
+body.light-mode #rightPanel .rp-conn .arrow.arrow--dir-forward {
+  color: color-mix(in srgb, #15803d 65%, var(--muted) 35%);
 }
 
 /* ============================================================
@@ -1051,12 +1084,11 @@ body.light-mode #content .exam-drill-solution {
 }
 
 /* ============================================================
-   PASS 3 — MATH-BLOCK MAGENTA EMPHASIS
+   PASS 3 — MATH-BLOCK (no rail; Pass 41)
    ============================================================ */
 
 #content .math-block {
-  border-left-width: 3px;
-  border-left-style: solid;
+  border-left: none;
 }
 
 #content .f-eq {
@@ -1196,6 +1228,82 @@ body.light-mode .semantic-reference__entry {
 }
 
 /* ============================================================
+   PASS 28 — Semantic anchor typography (shared)
+   Module `.formula-card .f-eq` often sets `--font-mono`; semantic schema /
+   reference blocks are editorial statements and must use the reading face.
+   ============================================================ */
+
+#content .semantic-display,
+#content .intuition-callout-body .semantic-display {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  letter-spacing: normal;
+}
+
+#content .f-eq .semantic-display,
+#content .formula-card .f-eq .legal-schema {
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+#content .formula-card .f-eq .legal-schema {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  letter-spacing: normal;
+}
+
+#content .formula-card .f-eq .legal-schema__term {
+  font-family: inherit;
+  letter-spacing: normal;
+}
+
+#content .formula-card .f-eq .semantic-display--pres-anchor.semantic-schema--phrase,
+#content .formula-card .f-eq .semantic-display--pres-anchor.semantic-reference--pill {
+  font-size: 18px;
+}
+
+#content .formula-card.layout-compact .f-eq .semantic-display--pres-anchor.semantic-schema--phrase,
+#content .formula-card.layout-compact .f-eq .semantic-display--pres-anchor.semantic-reference--pill {
+  font-size: 16px;
+}
+
+#content .formula-card .f-eq .semantic-display--pres-anchor.semantic-reference--stack {
+  font-size: 16px;
+}
+
+#content .formula-card .f-eq .semantic-display--pres-bridge,
+#content .formula-card .f-eq .semantic-display--pres-contrast {
+  font-size: 16px;
+}
+
+#content .formula-card .f-eq .semantic-schema__item,
+#content .formula-card .f-eq .semantic-reference__entry,
+#content .formula-card .f-eq .semantic-reference__term,
+#content .formula-card .f-eq .semantic-reference__note {
+  font-family: inherit;
+  letter-spacing: normal;
+}
+
+#content .formula-card .f-eq .semantic-display--pres-anchor .semantic-schema__item,
+#content .formula-card .f-eq .semantic-display--pres-anchor .semantic-reference__term {
+  font-weight: 600;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 94%, var(--math-ink) 6%);
+}
+
+#content .formula-card .f-eq .semantic-display--pres-bridge .semantic-schema__item,
+#content .formula-card .f-eq .semantic-display--pres-contrast .semantic-reference__term {
+  font-weight: 600;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 90%, var(--math-ink) 10%);
+}
+
+#content .formula-card .f-eq .semantic-display .semantic-reference__note {
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Right-rail semantic typography: Pass 31+32 (`.rp-formula--schema|reference`) */
+
+/* ============================================================
    PASS 4.1 — CARD HIERARCHY RADIUS (major cards = 18px via --r-lg)
    ============================================================ */
 
@@ -1327,24 +1435,6 @@ body.light-mode .semantic-reference__entry {
 
 #content .formula-card .f-label {
   color: color-mix(in srgb, var(--math-ink) 60%, var(--text) 40%);
-}
-
-#content .formula-card {
-  border-left: 3px solid color-mix(in srgb, var(--math-ink) 55%, var(--border) 45%);
-}
-
-#content .math-block {
-  border-left-color: var(--math-ink-deep, var(--math-ink));
-  border-left-width: 3px;
-  border-left-style: solid;
-}
-
-#rightPanel .rp-formula {
-  border-left: 2px solid color-mix(in srgb, var(--math-ink) 45%, var(--border) 55%);
-}
-
-body.light-mode #content .formula-card {
-  border-left-color: color-mix(in srgb, var(--math-ink) 60%, var(--border) 40%);
 }
 
 body.light-mode #content .formula-card .f-label {
@@ -1543,10 +1633,6 @@ body.light-mode #sidebar .nav-item:hover {
   font-weight: 700;
 }
 
-#content .math-block {
-  border-left: 2px solid var(--math-ink);
-}
-
 #content .legal-schema__arrow,
 #content .semantic-schema__connector {
   color: var(--math-ink);
@@ -1567,9 +1653,10 @@ body.light-mode #content .formula-card .f-label {
 /* Formula in graph info */
 #content .graph-info .gi-eq {
   color: var(--math-ink);
-  background: color-mix(in srgb, var(--card) 74%, var(--math-soft, transparent) 26%);
-  border: 1px solid color-mix(in srgb, var(--border) 66%, var(--math-ink) 34%);
+  background: color-mix(in srgb, var(--card) 88%, var(--surface2) 12%);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
   border-radius: var(--r-sm);
+  box-shadow: none;
 }
 
 /* Insight/interpretation rows — premium surface */
@@ -2018,8 +2105,7 @@ body.light-mode #content .exam-drill-answer {
   overflow: visible;
   padding: 20px;
   border-radius: 18px;
-  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
-  border-left: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--card) 98%, var(--math-soft, transparent) 2%), color-mix(in srgb, var(--card) 95%, var(--surface2) 5%));
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
@@ -2041,7 +2127,7 @@ body.light-mode #content .formula-card {
   font-size: 1.08em;
   line-height: 1.75;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 64%, var(--math-ink) 36%);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface2) 84%, var(--card) 16%), color-mix(in srgb, var(--surface2) 94%, var(--card) 6%));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
@@ -2120,6 +2206,41 @@ body.light-mode #content .formula-card {
   overflow: visible;
 }
 
+/* ============================================================
+   PASS 35 — Math formula inner surface removal (shared, project-wide)
+   The nested grey panel came from `#content .formula-card .f-eq` and
+   `#rightPanel .rp-formula .rp-f-eq` (surface2 gradient / border / inset
+   shadow). Math-only: strip that inner “second card” so math sits on the
+   outer shell. Schema/reference inner panels (Pass 30 / 31) unchanged.
+   Pass 41: no colored left rail on the math strip.
+   ============================================================ */
+
+#content .formula-card.formula-card--math .f-eq {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+#content .formula-card.formula-card--math .f-eq > .math-block--formula-card {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+#rightPanel .rp-formula.rp-formula--math .rp-f-eq {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+#rightPanel .rp-formula.rp-formula--math .rp-f-eq > .math-block--sidebar {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
 #content .formula-card .f-eq mjx-container[jax="CHTML"][display="true"] {
   display: block;
   margin: 0;
@@ -2185,8 +2306,7 @@ body.light-mode #content .formula-card {
   gap: 10px;
   min-width: 0;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
-  border-left: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--card) 96%, var(--math-soft, transparent) 4%), color-mix(in srgb, var(--card) 92%, var(--surface2) 8%));
 }
@@ -2202,7 +2322,7 @@ body.light-mode #content .formula-card {
   line-height: 1.58;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--border) 66%, var(--math-ink) 34%);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
   background: color-mix(in srgb, var(--surface2) 88%, var(--card) 12%);
   overflow: visible;
 }
@@ -2272,12 +2392,22 @@ body.light-mode #content .formula-card {
 }
 
 /* ============================================================
-   PASS 14 — Jahresabschluss semantic accounting cards
-   Calm editorial typography; no monospace; minimal chip chrome.
-   Requires body[data-portal-module="jahresabschluss"] (see jahresabschluss/index.html).
+   PASS 30 — Non-math semantic formula system (project-wide)
+   One family for `formula-card--schema` / `--reference`: outer card stays in
+   the formula grid; inner `.f-eq` is a **border-led** anchor (Pass 51 —
+   near-card fill, not heavy surface2 slab; Pass 49 structure retained).
+   Types A/B/C share typography + spacing; segmentation only for chains,
+   paired contrast, and multi-line reference stacks.
+   Math cards (`formula-card--math`) are intentionally untouched here.
    ============================================================ */
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .f-label {
+#content .formula-card.formula-card--schema,
+#content .formula-card.formula-card--reference {
+  border-color: color-mix(in srgb, var(--border) 92%, var(--text) 8%);
+}
+
+#content .formula-card.formula-card--schema .f-label,
+#content .formula-card.formula-card--reference .f-label {
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -2286,31 +2416,93 @@ body[data-portal-module="jahresabschluss"] #content .formula-card .f-label {
   color: color-mix(in srgb, var(--muted) 52%, var(--text) 48%);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .f-desc {
+#content .formula-card.formula-card--schema .f-desc,
+#content .formula-card.formula-card--reference .f-desc {
   font-size: 14px;
   line-height: 1.65;
   color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--schema,
-body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--reference {
-  border-color: color-mix(in srgb, var(--border) 88%, var(--math-ink) 12%);
-}
-
-body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--schema .f-eq,
-body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--reference .f-eq {
+#content .formula-card.formula-card--schema .f-eq,
+#content .formula-card.formula-card--reference .f-eq {
+  display: block;
+  text-align: start;
+  align-items: stretch;
+  justify-content: flex-start;
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
   color: var(--text);
-  border-color: color-mix(in srgb, var(--border) 90%, var(--math-ink) 10%);
+  min-width: 0;
+  font-size: 1.08em;
+  line-height: 1.75;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%);
+  box-shadow: none;
+  padding: 20px 22px;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--math .f-eq {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+body.light-mode #content .formula-card.formula-card--schema .f-eq,
+body.light-mode #content .formula-card.formula-card--reference .f-eq {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  background: color-mix(in srgb, var(--card) 99%, var(--surface2) 1%);
 }
 
-/* Layout A — single anchor line */
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-schema--phrase,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor.semantic-schema--phrase {
+#content .formula-card.formula-card--schema.layout-compact .f-eq,
+#content .formula-card.formula-card--reference.layout-compact .f-eq {
+  text-align: start;
+  padding: 18px 20px;
+}
+
+#content .formula-card.formula-card--schema.layout-extended .f-eq,
+#content .formula-card.formula-card--reference.layout-extended .f-eq {
+  padding: 22px 24px;
+}
+
+#content .formula-card.formula-card--schema .f-eq > .semantic-schema,
+#content .formula-card.formula-card--reference .f-eq > .semantic-reference,
+#content .formula-card.formula-card--schema .f-eq > .legal-schema,
+#content .formula-card.formula-card--reference .f-eq > .legal-schema {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+#content .formula-card.formula-card--schema .f-eq .legal-schema,
+#content .formula-card.formula-card--reference .f-eq .legal-schema {
+  flex-wrap: wrap;
+  gap: 0.2em 0.45em;
+}
+
+#content .formula-card.formula-card--schema .f-eq .legal-schema__term,
+#content .formula-card.formula-card--reference .f-eq .legal-schema__term {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  white-space: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+#content .formula-card.formula-card--schema .f-eq .legal-schema__arrow,
+#content .formula-card.formula-card--schema .f-eq .legal-schema__op,
+#content .formula-card.formula-card--reference .f-eq .legal-schema__arrow,
+#content .formula-card.formula-card--reference .f-eq .legal-schema__op {
+  font-size: 1rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--math-ink) 45%, var(--muted) 55%);
+}
+
+/* Type A — single anchor line */
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor.semantic-schema--phrase,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor.semantic-schema--phrase,
+#content .intuition-callout-body .semantic-display--pres-anchor.semantic-schema--phrase {
   display: block;
   padding: 0;
   margin: 0;
@@ -2318,12 +2510,13 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   background: none;
   font-size: 19px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item {
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item,
+#content .intuition-callout-body .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item {
   display: block;
   padding: 0;
   margin: 0;
@@ -2334,13 +2527,15 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   white-space: normal;
   font-weight: 500;
   font-size: 19px;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--stack,
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--pill,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor.semantic-reference--stack {
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor.semantic-reference--stack,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor.semantic-reference--stack,
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor.semantic-reference--pill,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor.semantic-reference--pill,
+#content .intuition-callout-body .semantic-display--pres-anchor.semantic-reference--stack {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -2350,9 +2545,11 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   background: none;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--stack .semantic-reference__entry,
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--pill .semantic-reference__entry,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__entry {
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor.semantic-reference--stack .semantic-reference__entry,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor.semantic-reference--stack .semantic-reference__entry,
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor.semantic-reference--pill .semantic-reference__entry,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor.semantic-reference--pill .semantic-reference__entry,
+#content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__entry {
   display: grid;
   gap: 6px;
   padding: 0;
@@ -2363,25 +2560,28 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   box-shadow: none;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor .semantic-reference__term,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__term {
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor .semantic-reference__term,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor .semantic-reference__term,
+#content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__term {
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor .semantic-reference__note,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__note {
+#content .formula-card.formula-card--schema .semantic-display--pres-anchor .semantic-reference__note,
+#content .formula-card.formula-card--reference .semantic-display--pres-anchor .semantic-reference__note,
+#content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__note {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.55;
   color: var(--muted);
 }
 
-/* Layout C — chain / bridge (also short two-step chains) */
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge.semantic-schema--chain,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-bridge.semantic-schema--chain {
+/* Type C — chain / bridge */
+#content .formula-card.formula-card--schema .semantic-display--pres-bridge.semantic-schema--chain,
+#content .formula-card.formula-card--reference .semantic-display--pres-bridge.semantic-schema--chain,
+#content .intuition-callout-body .semantic-display--pres-bridge.semantic-schema--chain {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -2393,8 +2593,9 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   font-family: var(--font-body, inherit);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item {
+#content .formula-card.formula-card--schema .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item,
+#content .formula-card.formula-card--reference .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item,
+#content .intuition-callout-body .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item {
   padding: 0;
   margin: 0;
   border: none;
@@ -2404,34 +2605,40 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   white-space: normal;
   font-size: 18px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge .semantic-schema__connector-wrap {
+#content .formula-card.formula-card--schema .semantic-display--pres-bridge .semantic-schema__connector-wrap,
+#content .formula-card.formula-card--reference .semantic-display--pres-bridge .semantic-schema__connector-wrap,
+#content .intuition-callout-body .semantic-display--pres-bridge .semantic-schema__connector-wrap {
   display: inline-flex;
   align-items: center;
   gap: 0;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge .semantic-schema__connector,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-bridge .semantic-schema__connector {
+#content .formula-card.formula-card--schema .semantic-display--pres-bridge .semantic-schema__connector,
+#content .formula-card.formula-card--reference .semantic-display--pres-bridge .semantic-schema__connector,
+#content .intuition-callout-body .semantic-display--pres-bridge .semantic-schema__connector {
   font-size: 1rem;
   font-weight: 600;
   color: color-mix(in srgb, var(--math-ink) 48%, var(--muted) 52%);
   opacity: 1;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge .semantic-schema__connector-note {
+#content .formula-card.formula-card--schema .semantic-display--pres-bridge .semantic-schema__connector-note,
+#content .formula-card.formula-card--reference .semantic-display--pres-bridge .semantic-schema__connector-note,
+#content .intuition-callout-body .semantic-display--pres-bridge .semantic-schema__connector-note {
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* Layout B — paired contrast rows */
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast.semantic-reference--stack,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast.semantic-reference--stack {
+/* Type B — paired contrast */
+#content .formula-card.formula-card--schema .semantic-display--pres-contrast.semantic-reference--stack,
+#content .formula-card.formula-card--reference .semantic-display--pres-contrast.semantic-reference--stack,
+#content .intuition-callout-body .semantic-display--pres-contrast.semantic-reference--stack {
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -2441,8 +2648,9 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   background: none;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__entry,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__entry {
+#content .formula-card.formula-card--schema .semantic-display--pres-contrast .semantic-reference__entry,
+#content .formula-card.formula-card--reference .semantic-display--pres-contrast .semantic-reference__entry,
+#content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__entry {
   display: grid;
   gap: 4px;
   padding: 14px 0;
@@ -2454,29 +2662,241 @@ body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .sem
   border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__entry:last-child,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__entry:last-child {
+#content .formula-card.formula-card--schema .semantic-display--pres-contrast .semantic-reference__entry:last-child,
+#content .formula-card.formula-card--reference .semantic-display--pres-contrast .semantic-reference__entry:last-child,
+#content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__entry:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__term,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__term {
+#content .formula-card.formula-card--schema .semantic-display--pres-contrast .semantic-reference__term,
+#content .formula-card.formula-card--reference .semantic-display--pres-contrast .semantic-reference__term,
+#content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__term {
   font-size: 15px;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text);
 }
 
-body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__note,
-body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__note {
+#content .formula-card.formula-card--schema .semantic-display--pres-contrast .semantic-reference__note,
+#content .formula-card.formula-card--reference .semantic-display--pres-contrast .semantic-reference__note,
+#content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__note {
   font-size: 13.5px;
   font-weight: 500;
   line-height: 1.55;
   color: var(--muted);
 }
 
-/* Theory blocks: legacy legal-schema from chapter HTML */
+/* De-chip semantic atoms inside semantic formula cards */
+#content .formula-card.formula-card--schema .semantic-schema__item,
+#content .formula-card.formula-card--reference .semantic-schema__item,
+#content .formula-card.formula-card--schema .semantic-reference__entry,
+#content .formula-card.formula-card--reference .semantic-reference__entry {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Right rail: same family, compact scale */
+#rightPanel .rp-formula--schema .rp-f-eq,
+#rightPanel .rp-formula--reference .rp-f-eq {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  color: var(--text);
+}
+
+#rightPanel .rp-formula--schema .rp-f-eq > .semantic-schema,
+#rightPanel .rp-formula--reference .rp-f-eq > .semantic-reference {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+/* ============================================================
+   PASS 31 + 32 — Right-rail semantic formulas: single family
+   Pass 31: no double math-ink frame on the row. Outer `.rp-formula` stays
+   shell-less for schema/reference; inner `.rp-f-eq` carries the grey inset
+   again (Pass 49). Same typography and de-chipped terms for phrase / chain
+   / reference / contrast. Math `.rp-formula--math`: Pass 35 inner strip.
+   ============================================================ */
+
+#rightPanel .rp-formula.rp-formula--schema,
+#rightPanel .rp-formula.rp-formula--reference {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 6px 0 14px;
+}
+
+#rightPanel .rp-formula.rp-formula--schema:hover,
+#rightPanel .rp-formula.rp-formula--reference:hover {
+  border: none;
+  box-shadow: none;
+}
+
+#rightPanel .rp-formula.rp-formula--schema .rp-f-name,
+#rightPanel .rp-formula.rp-formula--reference .rp-f-name {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 55%, var(--text) 45%);
+  margin: 0 0 6px;
+}
+
+#rightPanel .rp-formula.rp-formula--schema .rp-f-eq,
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq {
+  min-width: 0;
+  display: block;
+  font-size: 14px;
+  line-height: 1.58;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+  box-shadow: none;
+  overflow: visible;
+}
+
+body.light-mode #rightPanel .rp-formula.rp-formula--schema .rp-f-eq,
+body.light-mode #rightPanel .rp-formula.rp-formula--reference .rp-f-eq {
+  border-color: color-mix(in srgb, var(--border) 86%, var(--text) 14%);
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+  box-shadow: none;
+}
+
+/* Root semantic strip: no Pass 4.1 chip tray inside rail */
+#rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema,
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em 0.45em;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference--pill {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+/* Type A + C — terms and connectors */
+#rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__item,
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__term {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text);
+  white-space: normal;
+}
+
+#rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__connector-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+#rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__connector {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--math-ink) 38%, var(--muted) 62%);
+  opacity: 1;
+}
+
+#rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__connector-note {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Type B — reference rows */
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__note {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__entry {
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__term {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+#rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__note {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (max-width: 880px) {
+  #content .formula-card.formula-card--schema .f-eq,
+  #content .formula-card.formula-card--reference .f-eq {
+    padding: 14px 16px;
+  }
+}
+
+/* ============================================================
+   PASS 14 (residual) — Jahresabschluss-only
+   HGB-heavy math lines use body face in this module; theory legal strips.
+   ============================================================ */
+
+body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--math .f-eq {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+}
+
 body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema {
   font-family: var(--font-body, inherit);
   font-size: 16px;
@@ -2510,66 +2930,766 @@ body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema
   color: color-mix(in srgb, var(--math-ink) 45%, var(--muted) 55%);
 }
 
-/* Right rail semantic chips */
-body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula--schema .rp-f-eq,
-body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula--reference .rp-f-eq {
-  font-family: var(--font-body, inherit);
-  color: var(--text);
+body.light-mode[data-portal-module="jahresabschluss"] #content .section-block .legal-schema {
+  background: color-mix(in srgb, var(--card) 82%, var(--surface2) 18%);
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-bridge.semantic-schema--chain {
+/* ============================================================
+   PASS 37 — Recht: right-rail semantic sizing ENFORCEMENT (module-only)
+   Placed **last** in this stylesheet so it wins the cascade. Pass 34 sat
+   above Pass 31+32 extensions and shared `#rightPanel .rp-formula` still
+   applied `gap: 10px` / `.rp-f-eq` padding to semantic cards — visually
+   little changed. Here `body[data-portal-module="recht"]` + `!important` on
+   size metrics guarantees compact rail (see recht/index.html body hook).
+   ============================================================ */
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema,
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference {
+  padding: 2px 0 6px !important;
+  gap: 4px !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-name,
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-name {
+  margin: 0 0 3px !important;
+  font-size: 10px !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq,
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq {
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  line-height: 1.42 !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema,
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference {
+  font-size: 14px !important;
+  line-height: 1.42 !important;
+  gap: 0.25em 0.4em !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference {
+  gap: 6px !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__item,
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__term {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.42 !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__note,
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__note {
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__term {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.42 !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__connector {
+  font-size: 0.8rem !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__connector-note {
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.45 !important;
+}
+
+body[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__entry {
+  padding: 5px 0 !important;
+}
+
+body.light-mode[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq,
+body.light-mode[data-portal-module="recht"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq {
+  padding: 8px 10px !important;
+}
+
+/* ============================================================
+   PASS 38 — Jahresabschluss: right-rail semantic anchor downscale
+   Shared Pass 31+32 sets 16px / weight 600 on `.semantic-schema__item`
+   and `.semantic-reference__term` in `#rightPanel`, which made anchor
+   lines (e.g. Realisationsprinzip mnemonics) compete with `.rp-f-name`.
+   Scoped to `body[data-portal-module="jahresabschluss"]` only; section
+   headers and card titles unchanged.
+   ============================================================ */
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq,
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq {
+  font-size: 14.5px !important;
+  line-height: 1.42 !important;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema,
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference {
+  font-size: 14.5px !important;
+  line-height: 1.42 !important;
+  gap: 0.28em 0.42em !important;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference {
+  gap: 7px !important;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__item,
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__term {
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.42 !important;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-reference__note,
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__note {
+  font-size: 12.75px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--reference .rp-f-eq .semantic-display--pres-contrast .semantic-reference__term {
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.42 !important;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula.rp-formula--schema .rp-f-eq .semantic-schema__connector {
+  font-size: 0.9rem !important;
+}
+
+/* ============================================================
+   PASS 41 — Formula accent boundary full removal (project-wide)
+   Removes colored left rails / math-tinted frames from `.math-block` in
+   Theorie HTML, Intuition (`math-block--formula`), exam/task variants, and
+   neutralizes remaining math-ink border mixes on shared shells where the
+   inner “formula zone” should read integrated. Parent cards may keep a
+   single calm border via overrides above + `.intuition-callout` below.
+   MathJax nodes: no border-left (existing rules).
+   ============================================================ */
+
+#content .math-block {
+  border: none !important;
+  border-left: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+#content .intuition-callout {
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 8%);
+  border-top: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 8%);
+}
+
+/* ============================================================
+   PASS 42 — Verbindungen: rollback Pass 39 (list-style restore)
+   Pass 39 added a two-column grid, per-row borders/radius/background on
+   `.rp-conn`, and stripped the section shell — felt too “stacked UI”.
+   Removed entirely so shared `#rightPanel .rp-section` + module
+   `.rp-link-group` / `.rp-conn` (plain rows, hover-only surface) apply.
+   Pass 33 directional arrow colors unchanged. Markup unchanged.
+   ============================================================ */
+
+/* ============================================================
+   PASS 44 — Outer answer shell removal (Aufgaben + Prüfungstransfer)
+   Revealed `.solution-block` / `.exam-drill-answer` added a second framed
+   surface (accent-tinted border/background) around inner `.result-badge`,
+   `.math-block`, `.exam-drill-line`, or nested `.exam-drill-solution`.
+   Strips only that **outer** chrome; inner answer chips, step rows, and
+   numbering stay. Shared CSS; markup from portal-core `renderQuestionCard`
+   and module exam decks unchanged.
+   ============================================================ */
+
+#content .solution-block,
+#content .exam-drill-answer {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 10px 0 4px !important;
+}
+
+body.light-mode #content .solution-block,
+body.light-mode #content .exam-drill-answer {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+#content .solution-block h4,
+#content .exam-drill-answer-head {
+  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%) !important;
+}
+
+#content .solution-block .exam-drill-solution,
+#content .exam-drill-answer .exam-drill-solution {
+  display: grid !important;
+  gap: 12px !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-top: 4px !important;
+}
+
+body.light-mode #content .solution-block .exam-drill-solution,
+body.light-mode #content .exam-drill-answer .exam-drill-solution {
+  box-shadow: none !important;
+}
+
+#content .solution-block .exam-drill-meta,
+#content .exam-drill-answer .exam-drill-meta {
+  background: transparent !important;
+  border: none !important;
+  padding: 2px 0 8px !important;
+  border-radius: 0 !important;
+}
+
+/* ============================================================
+   PASS 49 — Semantic Formeln inner-card rollback (project-wide)
+   Pass 45 (removed in this pass) had forced `transparent !important` on
+   `.f-eq` / `.rp-f-eq` for `formula-card--schema|reference` and right-rail
+   semantic modes, flattening the intended grey inset. Pass 30 / Pass 31
+   rules above again supply border, gradient/inset background, and radius
+   on those shells only; `formula-card--math` and Pass 35 rail math remain
+   inner-surface-free by design.
+   ============================================================ */
+
+/* ============================================================
+   PASS 46 — Intuition tab: formal anchor display unification
+   Replaces the “large grey slab + floating formula” composition with a
+   compact anchor zone (`.intuition-callout-anchor`) and typed support line
+   (`.intuition-callout-desc`). Markup from `renderIntuitionPanel` /
+   `buildMicroIntuitionPanel` (portal-core, mikro1, oekonometrie).
+   ============================================================ */
+
+#content .intuition-callout {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: var(--r-md, 12px);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  background: color-mix(in srgb, var(--card) 97%, var(--surface2) 3%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+#content .intuition-callout-label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body, inherit);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+  line-height: 1.3;
+}
+
+#content .intuition-callout-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+#content .intuition-callout-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 20px;
+  min-height: 0;
+  border-radius: var(--r-sm, 10px);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+  background: color-mix(in srgb, var(--surface2) 32%, var(--card) 68%);
+}
+
+/* Undo global `#content .math-block { padding: 18px 24px }` only inside intuition anchor */
+#content .intuition-callout-anchor .math-block,
+#content .intuition-callout-anchor [class*="math-block"] {
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  min-height: 0 !important;
+  font-size: 1.05em !important;
+  line-height: 1.55 !important;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#content .intuition-callout-anchor .semantic-display {
+  width: 100%;
+  justify-content: center;
+}
+
+#content .intuition-callout-desc {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--muted) 30%, var(--text) 70%);
+  max-width: none;
+}
+
+body.light-mode #content .intuition-callout {
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+}
+
+body.light-mode #content .intuition-callout-anchor {
+  background: color-mix(in srgb, var(--surface2) 20%, var(--card) 80%);
+}
+
+/* ============================================================
+   PASS 47 — Verbindungen: right rail canonical navigation
+   Grouped “Setzt voraus” / “Wird gebraucht für” is the default in
+   `portal-core/ui/rightPanel.js` (`groupConnections: true`). Main-content
+   `.concept-links` chip strip removed from `renderContent` (theorie +
+   aufgaben). These rules align modules that lacked local `.rp-link-group`
+   styling (e.g. Statistik, Mikro II) with the Mikro I row + micro-label
+   pattern. Pass 33 arrow tints unchanged.
+   ============================================================ */
+
+#rightPanel #rpConnections .rp-link-group {
+  display: grid;
+  gap: 6px;
+}
+
+#rightPanel #rpConnections .rp-link-group + .rp-link-group {
+  margin-top: 14px;
+}
+
+#rightPanel #rpConnections .rp-group-label {
+  font-family: var(--font-body, inherit);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
+  line-height: 1.35;
+  margin: 0 0 2px;
+}
+
+#rightPanel #rpConnections .rp-conn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 8px;
+  border-radius: var(--r-md, 12px);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 12.5px;
+  line-height: 1.48;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.12s ease,
+    border-color 0.15s ease;
+}
+
+#rightPanel #rpConnections .rp-conn:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--border) 88%, transparent);
+  transform: translateX(2px);
+}
+
+/* ============================================================
+   PASS 50 — Nested answer-card flattening (Aufgaben + Prüfungstransfer)
+   After Pass 44, `.solution-block` / `.exam-drill-answer` are shell-less;
+   inner `.math-block` / `.result-badge` still read as a second framed card
+   inside step rows or `.exam-drill-line`. This pass strips that inner chrome
+   so each step/line is **one** answer surface (row + typography), not
+   “box in box”. Does **not** change Theorie `.math-block` or Formeln tab.
+   Markup: `renderGuidedTasks` / `buildExamDrills` / `renderQuestionCard`
+   (portal-core); Mikro I / Ökonometrie drill deck aligned with portal (no
+   extra `.exam-drill-solution` wrapper).
+   ============================================================ */
+
+#content .solution-block .step-body > .math-block,
+#content .solution-block .step-body > [class*="math-block"],
+#content .solution-block .step-body > .semantic-display {
+  margin: 6px 0 0 !important;
+  padding: 6px 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-align: start !important;
+}
+
+#content .exam-drill-answer .exam-drill-steps > li > .math-block,
+#content .exam-drill-answer .exam-drill-steps > li > [class*="math-block"],
+#content .exam-drill-answer .exam-drill-line > .math-block,
+#content .exam-drill-answer .exam-drill-line > [class*="math-block"],
+#content .exam-drill-answer .exam-drill-line > .semantic-display,
+#content .exam-drill-answer .exam-drill-copy > .math-block,
+#content .exam-drill-answer .exam-drill-copy > [class*="math-block"],
+#content .exam-drill-answer .exam-drill-copy > .semantic-display {
+  margin: 6px 0 0 !important;
+  padding: 6px 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-align: start !important;
+}
+
+#content .exam-drill-answer .exam-drill-line > .result-badge {
+  display: block;
+  width: 100%;
+  margin: 2px 0 0;
+  padding: 0;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: var(--font-body, inherit);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.62;
+  color: color-mix(in srgb, var(--text) 90%, var(--math-ink) 10%);
+}
+
+/* ============================================================
+   PASS 52 — Semantic chain nested-surface flattening (theorie / prose)
+   `renderSchemaContent` / `renderReferenceContent` emit a **single root** that
+   carries both `.semantic-display` and `.semantic-schema` / `.semantic-reference`
+   (Pass 4.1 global slab: padding, tinted fill, math-tinted border). In
+   **Formeln**, Pass 30 type rules flatten that root; in **theorie** the
+   `variant: "theory"` root (`.semantic-display--theory`) still picked up the
+   slab → “card in card”. Same for `.section-block .legal-schema` (Jahresabschluss
+   Pass 14 reinforced the look). This pass removes **only** that outer shell;
+   chips (`.semantic-schema__item`, `.legal-schema__term`) and arrows stay.
+   ============================================================ */
+
+#content .semantic-display--theory.semantic-schema--chain,
+#content .semantic-display--theory.semantic-schema--phrase,
+#content .semantic-display--theory.semantic-reference {
+  padding: 0 !important;
+  margin: 10px 0 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#content .semantic-display--theory.semantic-schema--chain,
+#content .semantic-display--theory.semantic-schema--phrase {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.15em 0.4em;
-  padding: 0;
-  border: none;
-  background: none;
+  gap: 0.2em 0.45em;
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item,
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item {
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  border-radius: 0;
-  font-size: 14px;
+#content .semantic-display--theory.semantic-reference.semantic-reference--stack {
+  display: grid;
+  gap: 8px;
+}
+
+#content .semantic-display--theory.semantic-reference.semantic-reference--pill {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25em 0.4em;
+}
+
+body.light-mode #content .semantic-display--theory.semantic-schema--chain,
+body.light-mode #content .semantic-display--theory.semantic-schema--phrase,
+body.light-mode #content .semantic-display--theory.semantic-reference {
+  background: transparent !important;
+  border: none !important;
+}
+
+#content .section-block .legal-schema {
+  padding: 0 !important;
+  margin: 10px 0 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.45em;
+}
+
+body.light-mode #content .section-block .legal-schema {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* ============================================================
+   PASS 54 — Semantic answer nested-shell removal (revealed steps)
+   Pass 44 strips the outer `.solution-block` / `.exam-drill-answer` tinted
+   frame; Pass 50 strips direct `.math-block` / root `.semantic-display`
+   padding in step rows. Pass 4.1 still paints `.semantic-schema__item` and
+   `.semantic-reference__term` as bordered chips on the **same** surface →
+   reads as “answer inside answer”. This pass removes **only** that inner chip
+   chrome inside revealed Aufgaben + Prüfungstransfer; Formeln / Theorie /
+   right-rail unchanged.
+   ============================================================ */
+
+#content .solution-block .step-body > .semantic-display.semantic-schema--chain,
+#content .solution-block .step-body > .semantic-display.semantic-schema--phrase,
+#content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-schema--chain,
+#content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-schema--phrase,
+#content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-schema--chain,
+#content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-schema--phrase,
+#content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-schema--chain,
+#content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-schema--phrase {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 0.2em 0.45em !important;
+}
+
+#content .solution-block .step-body > .semantic-display.semantic-reference--stack,
+#content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-reference--stack,
+#content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-reference--stack,
+#content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-reference--stack {
+  display: grid !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+}
+
+#content .solution-block .step-body > .semantic-display.semantic-reference--pill,
+#content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-reference--pill,
+#content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-reference--pill,
+#content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-reference--pill {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 0.25em 0.4em !important;
+}
+
+#content .solution-block .step-body .semantic-schema__item,
+#content .solution-block .step-body .semantic-reference__entry,
+#content .solution-block .step-body .semantic-reference__term,
+#content .exam-drill-answer .semantic-schema__item,
+#content .exam-drill-answer .semantic-reference__entry,
+#content .exam-drill-answer .semantic-reference__term {
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  white-space: normal !important;
+}
+
+#content .solution-block .step-body .semantic-reference__note,
+#content .exam-drill-answer .semantic-reference__note {
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: inherit;
   font-weight: 500;
-  line-height: 1.55;
-  color: var(--text);
-  white-space: normal;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-bridge .semantic-schema__connector {
-  font-size: 0.95rem;
-  color: color-mix(in srgb, var(--math-ink) 42%, var(--muted) 58%);
+body.light-mode #content .solution-block .step-body .semantic-schema__item,
+body.light-mode #content .solution-block .step-body .semantic-reference__entry,
+body.light-mode #content .solution-block .step-body .semantic-reference__term,
+body.light-mode #content .exam-drill-answer .semantic-schema__item,
+body.light-mode #content .exam-drill-answer .semantic-reference__entry,
+body.light-mode #content .exam-drill-answer .semantic-reference__term {
+  background: transparent !important;
+  border: none !important;
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__entry {
-  padding: 10px 0;
-  border: none;
-  border-radius: 0;
-  background: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+/* ============================================================
+   PASS 55 — Graph-tab premium composition (project-wide)
+   Unifies graph tabs into one teaching surface: title strip → light
+   control toolbar → dominant canvas stage → attached interpretation readout.
+   Overrides module `styles.css` graph blocks via `#content` + `!important` where
+   needed. Does not change graph JS logic or canvas drawing APIs.
+   ============================================================ */
+
+/* Collapse “panel card around graph card”: when the active panel is only the
+   graph shell, the outer panel carries no second chrome. */
+#content > .panel.active:has(> .graph-container) {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__entry:last-child {
-  border-bottom: none;
+#content .graph-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  padding: clamp(14px, 1.6vw, 22px) clamp(16px, 2vw, 26px) clamp(18px, 2vw, 28px) !important;
+  margin: 0 auto 12px !important;
+  max-width: min(100%, var(--graph-shell-max, 1400px)) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 5%) !important;
+  background: var(--card) !important;
+  box-shadow: none !important;
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__term {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--text);
+#content .graph-container .graph-panel-title {
+  margin: 0 !important;
+  padding: 0 0 10px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 62%, transparent) !important;
 }
 
-body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__note {
-  font-size: 12.5px;
-  color: var(--muted);
-  line-height: 1.5;
+/* Control strip = precision toolbar (lighter than per-control mini-cards) */
+#content .graph-controls,
+#content .graph-container .graph-controls {
+  margin: 0 !important;
+  padding: 9px 11px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--surface2) 18%, var(--card) 82%) !important;
+  box-shadow: none !important;
+  border-top: none !important;
+  gap: 8px 10px !important;
+  align-items: stretch !important;
 }
 
-body.light-mode[data-portal-module="jahresabschluss"] #content .section-block .legal-schema {
-  background: color-mix(in srgb, var(--card) 82%, var(--surface2) 18%);
+#content .graph-container .ctrl-group {
+  padding: 5px 7px 5px !important;
+  border-radius: 8px !important;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent) !important;
+  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%) !important;
+  box-shadow: none !important;
+}
+
+#content .graph-container .ctrl-group label {
+  font-size: 0.62rem !important;
+  letter-spacing: 0.09em !important;
+}
+
+#content .graph-container .ctrl-group .val {
+  font-size: 10.5px !important;
+  opacity: 0.88;
+}
+
+/* Graph stage = hero (default graphs; Makro macro-focus shells keep engine heights) */
+#content .graph-container:not(.graph-container--macro-focus) canvas,
+#content .graph-container:not(.graph-container--macro-focus) .graph-canvas {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: clamp(320px, 54vh, 580px) !important;
+  min-height: clamp(260px, 36vh, 440px) !important;
+  margin: 2px 0 0 !important;
+  aspect-ratio: 23 / 14 !important;
+}
+
+#content .graph-container.graph-container--macro-focus .graph-plot-shell--macro .graph-canvas,
+#content .graph-container.graph-container--macro-focus .graph-plot-shell--phillips .graph-canvas,
+#content .graph-container.graph-container--macro-focus .graph-plot-shell--two-panel .graph-canvas {
+  max-height: none !important;
+  min-height: 0 !important;
+}
+
+/* Macro plot shell: avoid double frame; canvas carries the stage edge */
+#content .graph-plot-shell--macro {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#content .graph-plot-shell--macro .graph-canvas {
+  border-radius: var(--r-md) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Interpretation readout: attached strip, not a second card stack */
+#content .graph-info {
+  margin-top: 4px !important;
+  padding: 14px 0 6px !important;
+  background: transparent !important;
+  border: none !important;
+  border-top: 1px solid color-mix(in srgb, var(--border) 52%, transparent) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+#content .graph-info .gi-label {
+  margin-bottom: 6px !important;
+}
+
+#content .graph-info .gi-eq {
+  margin: 0 0 10px !important;
+  padding: 8px 10px 8px 12px !important;
+  border: none !important;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 52%, var(--border) 48%) !important;
+  border-radius: 0 8px 8px 0 !important;
+  background: color-mix(in srgb, var(--surface2) 30%, transparent) !important;
+  box-shadow: none !important;
+}
+
+#content .graph-info .gi-list {
+  gap: 0 !important;
+  margin-top: 6px !important;
+}
+
+#content .graph-info .gi-row {
+  padding: 9px 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 42%, transparent) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#content .graph-info .gi-row:last-child {
+  border-bottom: none !important;
+  padding-bottom: 2px !important;
+}
+
+#content .graph-info .gi-row:hover {
+  border-color: color-mix(in srgb, var(--border) 42%, transparent) !important;
+  box-shadow: none !important;
+}
+
+/* Macro / finanz narrative rows outside .graph-info — same readout grammar */
+#content .graph-insight-row,
+#content .graph-interpretation-row {
+  padding: 10px 12px 10px 14px !important;
+  border: none !important;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 48%, var(--border) 52%) !important;
+  border-radius: 0 10px 10px 0 !important;
+  background: color-mix(in srgb, var(--surface2) 26%, var(--card) 74%) !important;
+  box-shadow: none !important;
+}
+
+#content .graph-insight-row:hover,
+#content .graph-interpretation-row:hover {
+  box-shadow: none !important;
+  border-left-color: color-mix(in srgb, var(--accent) 62%, var(--border) 38%) !important;
+}
+
+body.light-mode #content .graph-info .gi-eq,
+body.light-mode #content .graph-insight-row,
+body.light-mode #content .graph-interpretation-row {
+  background: color-mix(in srgb, var(--surface2) 18%, var(--card) 82%) !important;
+}
+
+/* Generated portal bundles: one graph-container inside panel — drop extra grid gap */
+#content > .panel.active.generated-graph-panel:has(> .graph-container) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
 }

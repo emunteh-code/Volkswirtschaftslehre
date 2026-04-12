@@ -6,7 +6,7 @@ export function createRightPanelRenderer({
   contentById,
   conceptLinks,
   renderMath,
-  groupConnections = false,
+  groupConnections = true,
   renderFormulaEqHtml = (formula) => renderSemanticBlock(formula?.eq, { variant: "sidebar" }),
   getFormulaCopyText = (formula) => displayContentToPlainText(formula?.eq),
   getFormulaDisplayMode = (formula) => getDisplayMode(formula?.eq) || "math"
@@ -35,7 +35,6 @@ export function createRightPanelRenderer({
     const links = conceptLinks[id];
     const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter]));
     const isFormulaTab = options?.currentTab === "formeln";
-
     const formulasNode = document.getElementById("rpFormulas");
     const formulasSection = formulasNode?.closest(".rp-section");
     const connectionsNode = document.getElementById("rpConnections");
@@ -86,16 +85,16 @@ export function createRightPanelRenderer({
           ? [
               uses.length ? `<div class="rp-link-group">
 <div class="rp-group-label">Setzt voraus</div>
-${uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">←</span> ${chapter.title}</div>`).join("")}
+${uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-back" aria-hidden="true">←</span> ${chapter.title}</div>`).join("")}
 </div>` : "",
               usedBy.length ? `<div class="rp-link-group">
 <div class="rp-group-label">Wird gebraucht für</div>
-${usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">→</span> ${chapter.title}</div>`).join("")}
+${usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-forward" aria-hidden="true">→</span> ${chapter.title}</div>`).join("")}
 </div>` : ""
             ].join("")
           : [
-              uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">←</span> ${chapter.title}</div>`).join(""),
-              usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow" aria-hidden="true">→</span> ${chapter.title}</div>`).join("")
+              uses.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-back" aria-hidden="true">←</span> ${chapter.title}</div>`).join(""),
+              usedBy.map((chapter) => `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${chapter.id}')" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')"><span class="arrow arrow--dir-forward" aria-hidden="true">→</span> ${chapter.title}</div>`).join("")
             ].join("");
         connectionsNode.innerHTML = html;
         if (connectionsSection) connectionsSection.hidden = !html;

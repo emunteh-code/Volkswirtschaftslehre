@@ -2425,10 +2425,16 @@ body.focus-mode #rightPanel { display: none; }
 }
 
 #rpFormulas,
-#rpConnections,
-#rpMistakes {
+#rpConnections {
   display: grid;
   gap: 8px;
+}
+
+/* Mistakes use shared warning-card stack (see premium-refinement.css); keep layout stable if premium loads late */
+#rpMistakes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .rp-formula {
   background: color-mix(in srgb, var(--surface2) 92%, var(--surface));
@@ -2502,7 +2508,7 @@ body.focus-mode #rightPanel { display: none; }
 .rp-conn .arrow { color: var(--accent3); }
 
 /* Legacy err/fix cards only — rail „Häufige Fehler“ uses `.warning-card` (Pass 23) */
-.rp-mistake:not(.warning-card) {
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) {
   background: rgba(255,69,58,0.06);
   border: 1px solid rgba(255,69,58,0.18);
   border-radius: var(--r-md);
@@ -2513,7 +2519,7 @@ body.focus-mode #rightPanel { display: none; }
   display: grid;
   gap: 6px;
 }
-.rp-mistake:not(.warning-card) .err {
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) .err {
   color: var(--sys-red);
   font-weight: 700;
   font-size: 10px;
@@ -2521,7 +2527,7 @@ body.focus-mode #rightPanel { display: none; }
   text-transform: uppercase;
   margin-bottom: 0;
 }
-.rp-mistake:not(.warning-card) .fix {
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) .fix {
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
   font-size: 12.5px;
   line-height: 1.58;
@@ -2702,8 +2708,8 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 .rp-conn mjx-container,
 .rp-f-name mjx-container,
 .rp-formula .rp-f-eq mjx-container,
-.rp-mistake.warning-card .warning-card-body mjx-container,
-.rp-mistake:not(.warning-card) .fix mjx-container {
+.rp-mistake--rail .rp-mistake-body mjx-container,
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) .fix mjx-container {
   color: var(--math-ink) !important;
 }
 
@@ -2738,8 +2744,8 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 .rp-conn mjx-container *,
 .rp-f-name mjx-container *,
 .rp-formula .rp-f-eq mjx-container *,
-.rp-mistake.warning-card .warning-card-body mjx-container *,
-.rp-mistake:not(.warning-card) .fix mjx-container *,
+.rp-mistake--rail .rp-mistake-body mjx-container *,
+.rp-mistake:not(.warning-card):not(.rp-mistake--rail) .fix mjx-container *,
 .sStep-q mjx-container *,
 .exam-q-text mjx-container * {
   color: var(--math-ink) !important;
@@ -3304,4 +3310,107 @@ body.light-mode .dash-focus-rec {
   .graph-container canvas {
     max-height: min(36vh, 300px);
   }
+}
+
+/* ============================================================
+   PASS 48 — Mikro I intuition: formal-anchor parity (module-local)
+   Legacy `.intuition-callout` here used a heavy `surface2` slab,
+   math-ink top bar, 12px section gap, and mono label — visually
+   behind portal Pass 46. `styles.css` loads before
+   `premium-refinement.css`, so these selectors use
+   `#content .mikro1-intuition …` to override both module defaults
+   and shared premium where Mikro I intuition needs the compact
+   anchor rhythm (16px/18px outer, 8px label rhythm, 10px anchor→desc,
+   tighter MathJax display margins inside `.intuition-callout-anchor`).
+   Markup: `mikro1/js/ui/renderer.js` `buildMicroIntuitionPanel`.
+   ============================================================ */
+
+#content .mikro1-intuition .intuition-callout {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: var(--r-md, 12px);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  background: color-mix(in srgb, var(--card) 97%, var(--surface2) 3%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+#content .mikro1-intuition .intuition-callout-label {
+  font-family: var(--font-body, inherit);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+  line-height: 1.3;
+}
+
+#content .mikro1-intuition .intuition-callout-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+#content .mikro1-intuition .intuition-callout-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  min-height: 0;
+  border-radius: var(--r-sm, 10px);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+  background: color-mix(in srgb, var(--surface2) 32%, var(--card) 68%);
+}
+
+#content .mikro1-intuition .intuition-callout-anchor .math-block,
+#content .mikro1-intuition .intuition-callout-anchor [class*="math-block"] {
+  margin: 0 !important;
+  padding: 6px 8px !important;
+  min-height: 0 !important;
+  font-size: 1.05em !important;
+  line-height: 1.5 !important;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#content .mikro1-intuition .intuition-callout-anchor .semantic-display {
+  width: 100%;
+  justify-content: center;
+}
+
+#content .mikro1-intuition .intuition-callout-anchor mjx-container[jax="CHTML"][display="true"] {
+  margin: 0.12em auto !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+#content .mikro1-intuition .intuition-callout-desc {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--muted) 30%, var(--text) 70%);
+  max-width: none;
+}
+
+body.light-mode #content .mikro1-intuition .intuition-callout {
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+}
+
+body.light-mode #content .mikro1-intuition .intuition-callout-anchor {
+  background: color-mix(in srgb, var(--surface2) 20%, var(--card) 80%);
 }

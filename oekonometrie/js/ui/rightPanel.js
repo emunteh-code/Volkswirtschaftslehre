@@ -7,8 +7,7 @@ const rightPanel = createRightPanelRenderer({
   chapters: CHAPTERS,
   contentById: CONTENT,
   conceptLinks: CONCEPT_LINKS,
-  renderMath,
-  groupConnections: true
+  renderMath
 });
 
 export const { clearRightPanel, renderRightPanel } = rightPanel;

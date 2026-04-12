@@ -718,30 +718,6 @@ ${answerMarkup}
     currentTab = nextTab;
   }
 
-  function renderConceptLinks(id) {
-    const links = conceptLinks[id];
-    if (!links) return "";
-    let html = '<div class="concept-links">';
-    if (links.uses && links.uses.length) {
-      html += '<div class="cl-section"><span class="cl-label">Setzt voraus</span>';
-      links.uses.forEach((usedId) => {
-        const chapter = chapterMap[usedId];
-        if (chapter) html += `<button class="cl-tag" onclick="window.__navigate('${usedId}')">${chapter.title}</button>`;
-      });
-      html += "</div>";
-    }
-    if (links.usedBy && links.usedBy.length) {
-      html += '<div class="cl-section"><span class="cl-label">Wird gebraucht für</span>';
-      links.usedBy.forEach((usedId) => {
-        const chapter = chapterMap[usedId];
-        if (chapter) html += `<button class="cl-tag secondary" onclick="window.__navigate('${usedId}')">${chapter.title}</button>`;
-      });
-      html += "</div>";
-    }
-    html += "</div>";
-    return html;
-  }
-
   function renderPracticePanel(entry, conceptId) {
     const chapter = chapters.find((item) => item.id === conceptId);
     const intuition = intuitionById[conceptId];
@@ -884,8 +860,8 @@ ${patterns.map((pattern) => `<div class="intuition-pattern-row">
 ${formula && (hasMeaningfulDisplayContent(formula.eq) || hasMeaningfulText(formula.desc)) ? `<div class="intuition-callout">
 <span class="intuition-callout-label">Formaler Anker</span>
 <div class="intuition-callout-body">
-${renderFormulaEq(formula.eq)}
-${hasMeaningfulText(formula.desc) ? `<p>${formula.desc}</p>` : ""}
+${hasMeaningfulDisplayContent(formula.eq) ? `<div class="intuition-callout-anchor">${renderFormulaEq(formula.eq)}</div>` : ""}
+${hasMeaningfulText(formula.desc) ? `<p class="intuition-callout-desc">${formula.desc}</p>` : ""}
 </div>
 </div>` : ""}
 </div>
@@ -988,14 +964,13 @@ ${motivationStrip}
     try {
       if (activeTab === "theorie") {
         const theorySignals = extractTheorySignals(entry);
-        content.innerHTML = headerHTML + `<div class="panel active">${theorySignals.theoryHtml || entry.theorie}</div>` + renderConceptLinks(conceptId);
+        content.innerHTML = headerHTML + `<div class="panel active">${theorySignals.theoryHtml || entry.theorie}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         if (initGraphFn) initGraphFn(conceptId);
       } else if (activeTab === "aufgaben") {
         const masteryHtml = renderMastery(conceptId);
-        const linksHtml = renderConceptLinks(conceptId);
-        content.innerHTML = headerHTML + renderPracticePanel(entry, conceptId) + masteryHtml + linksHtml;
+        content.innerHTML = headerHTML + renderPracticePanel(entry, conceptId) + masteryHtml;
       } else if (activeTab === "formeln") {
         content.innerHTML = headerHTML + renderFormulaPanel(entry);
       } else if (activeTab === "intuition") {

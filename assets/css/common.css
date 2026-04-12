@@ -136,14 +136,10 @@ pre,
   height: 34px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background-color: var(--text);
-  mask-image: url("../brand/portal-mark.svg");
-  mask-position: center;
-  mask-repeat: no-repeat;
-  mask-size: 62%;
-  -webkit-mask-image: url("../brand/portal-mark.svg");
-  -webkit-mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: 62%;
+  background-color: color-mix(in srgb, var(--surface) 92%, var(--card) 8%);
+  background-image: url("../brand/portal-logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 88%;
 }
 

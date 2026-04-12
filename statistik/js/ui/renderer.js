@@ -37,7 +37,8 @@ const baseRenderer = createRenderer({
     return renderRAnwendungTab(blocks, 'statistik', { conceptId });
   },
   homeLernDashboardPilotNote:
-    'Basiert auf Lernspuren aus diesem Browser.'
+    'Basiert auf Lernspuren aus diesem Browser.',
+  showConceptMotivationBanner: false
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

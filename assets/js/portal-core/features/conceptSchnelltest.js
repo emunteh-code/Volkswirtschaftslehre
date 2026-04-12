@@ -11,6 +11,7 @@
  */
 
 import { ATTEMPT_CONTEXT, MISTAKE_SOURCE, generateAttemptId } from '../state/learnerBackbone.js';
+import { scrubLegacyFeedbackPrefixes } from '../utils/feedbackCopy.js';
 
 function shuffle(arr) {
   const a = arr.slice();
@@ -274,7 +275,7 @@ export function createConceptSchnelltestModule({
     } else {
       const trap =
         chosen && chosen.trap_feedback
-          ? `<div class="cc-trap-note">${escapeHtml(chosen.trap_feedback)}</div>`
+          ? `<div class="cc-trap-note">${escapeHtml(scrubLegacyFeedbackPrefixes(chosen.trap_feedback))}</div>`
           : '';
       const rightLabel = correctChoice ? escapeHtml(correctChoice.label) : '';
       feedbackEl.innerHTML = `<span class="fb-wrong">Nicht passend.</span>${trap}<div class="cc-correct-line"><strong>Richtig wäre:</strong> ${rightLabel}</div><div class="cc-explain-after">${q.explain}</div>`;

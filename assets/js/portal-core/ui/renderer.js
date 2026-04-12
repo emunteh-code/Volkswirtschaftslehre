@@ -1,3 +1,14 @@
+import {
+  decodeHtmlEntities,
+  displayContentToPlainText,
+  escapeHtml,
+  getDisplayMode,
+  hasMeaningfulDisplayContent,
+  renderSemanticBlock,
+  stripHtml
+} from "./semanticContent.js"
+import { getWarningSystemData, renderTaskWarningCard } from "./warningSystem.js";
+
 export function createRenderer({
   courseLabel,
   courseTitle,
@@ -22,43 +33,13 @@ export function createRenderer({
   /** Raw HTML inserted inside the home action row (optional; e.g. Konzept-Check card) */
   extraHomeActionCardsHtml = '',
   /** Optional one-line note under the Lern-Dashboard home card (pilot modules only) */
-  homeLernDashboardPilotNote = ''
+  homeLernDashboardPilotNote = '',
+  /** When false, omit the `entry.motivation` strip under the concept H1 (module opt-out). */
+  showConceptMotivationBanner = true
 }) {
   let current = null;
   let currentTab = "theorie";
   const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter]));
-
-  function stripHtml(html) {
-    return String(html || "")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/&nbsp;/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function escapeHtml(value) {
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  function decodeHtmlEntities(value) {
-    if (typeof value !== "string" || !value.includes("&")) return String(value ?? "");
-    if (typeof document === "undefined") {
-      return value
-        .replace(/&amp;/g, "&")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'");
-    }
-    const textarea = document.createElement("textarea");
-    textarea.innerHTML = value;
-    return textarea.value;
-  }
 
   function renderDecodedText(value) {
     return escapeHtml(decodeHtmlEntities(String(value ?? "")));
@@ -130,65 +111,17 @@ export function createRenderer({
   }
 
   function hasFormulas(entry) {
-    return Array.isArray(entry?.formeln) && entry.formeln.some((formula) => hasMeaningfulText(formula?.eq));
-  }
-
-  function isDelimitedMath(value) {
-    const trimmed = String(value || "").trim();
-    if (!trimmed) return false;
-    return (
-      /^\$\$[\s\S]*\$\$$/.test(trimmed)
-      || /^\$[\s\S]*\$$/.test(trimmed)
-      || /^\\\[[\s\S]*\\\]$/.test(trimmed)
-      || /^\\\([\s\S]*\\\)$/.test(trimmed)
-    );
-  }
-
-  function isLegalSchema(eq) {
-    const s = String(eq || "").trim();
-    if (!s || !/\\text\{/.test(s)) return false;
-    const cleaned = s
-      .replace(/\\text\{[^}]*\}/g, "")
-      .replace(/\\(?:rightarrow|Rightarrow|leftarrow|Leftarrow|leftrightarrow|Leftrightarrow|neq|times|leq|geq|approx|equiv|subset|supset|cup|cap|wedge|vee|neg|forall|exists)/g, "")
-      .replace(/[+\-=\s\\,;:|()/]/g, "")
-      .replace(/\\cdot/g, "");
-    return cleaned.trim() === "";
-  }
-
-  function renderLegalSchema(eq) {
-    return String(eq || "")
-      .replace(/\\text\{([^}]*)\}/g, '<span class="legal-schema__term">$1</span>')
-      .replace(/\\rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2192</span>')
-      .replace(/\\Rightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u21D2</span>')
-      .replace(/\\leftarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2190</span>')
-      .replace(/\\Leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u21D4</span>')
-      .replace(/\\leftrightarrow/g, '<span class="legal-schema__arrow" aria-hidden="true">\u2194</span>')
-      .replace(/\\neq/g, '<span class="legal-schema__op">\u2260</span>')
-      .replace(/\\times/g, '<span class="legal-schema__op">\u00D7</span>')
-      .replace(/\\leq/g, '<span class="legal-schema__op">\u2264</span>')
-      .replace(/\\geq/g, '<span class="legal-schema__op">\u2265</span>')
-      .replace(/\\neg/g, '<span class="legal-schema__op">\u00AC</span>')
-      .replace(/\s*\+\s*/g, ' <span class="legal-schema__op">+</span> ')
-      .replace(/\s*=\s*/g, ' <span class="legal-schema__op">=</span> ')
-      .trim();
+    return Array.isArray(entry?.formeln) && entry.formeln.some((formula) => hasMeaningfulDisplayContent(formula?.eq));
   }
 
   function renderFormulaEq(eq) {
-    const trimmed = String(eq || "").trim();
-    if (!trimmed) return "";
-    if (isLegalSchema(trimmed))
-      return `<div class="legal-schema" role="group">${renderLegalSchema(trimmed)}</div>`;
-    const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
-    return `<div class="math-block">${math}</div>`;
+    if (!hasMeaningfulDisplayContent(eq)) return "";
+    return renderSemanticBlock(eq, { variant: "formula" });
   }
 
   function renderTaskMathBlock(value) {
-    const trimmed = String(value || "").trim();
-    if (!trimmed) return "";
-    if (isLegalSchema(trimmed))
-      return `<div class="legal-schema" role="group">${renderLegalSchema(trimmed)}</div>`;
-    const math = isDelimitedMath(trimmed) ? trimmed : `$$${trimmed}$$`;
-    return `<div class="math-block">${math}</div>`;
+    if (!hasMeaningfulDisplayContent(value)) return "";
+    return renderSemanticBlock(value, { variant: "task" });
   }
 
   function summarizeVariables(variables) {
@@ -273,7 +206,9 @@ export function createRenderer({
   ];
 
   function inferFormulaVariables(formula) {
-    const eq = String(formula?.eq || "");
+    if (getDisplayMode(formula?.eq) !== "math") return [];
+
+    const eq = displayContentToPlainText(formula?.eq);
     if (!eq.trim()) return [];
     if (eq.includes("\\text{") || eq.includes("\\mathrm{")) return [];
 
@@ -295,7 +230,7 @@ export function createRenderer({
     return {
       text,
       steps: steps
-        .filter((step) => hasMeaningfulText(step?.text) || hasMeaningfulText(step?.eq))
+        .filter((step) => hasMeaningfulText(step?.text) || hasMeaningfulDisplayContent(step?.eq))
         .map((step) => ({
           text: step.text || "",
           eq: step.eq || null
@@ -459,13 +394,29 @@ export function createRenderer({
   }
 
   function extractTheorySignals(entry) {
-    if (!entry?.theorie || typeof DOMParser === "undefined") {
-      return { sections: [], warnings: [] };
+    const warningData = getWarningSystemData(entry);
+    if (!warningData.theoryHtml || typeof DOMParser === "undefined") {
+      return {
+        sections: [],
+        warnings: warningData.allWarnings.map((warning) => ({
+          label: warning.title,
+          body: warning.bodyText
+        })),
+        inlineWarnings: warningData.inlineWarnings.map((warning) => ({
+          label: warning.title,
+          body: warning.bodyText
+        })),
+        railWarnings: warningData.railWarnings.map((warning) => ({
+          label: warning.title,
+          body: warning.bodyText
+        })),
+        theoryHtml: warningData.theoryHtml
+      };
     }
 
     try {
       const parser = new DOMParser();
-      const doc = parser.parseFromString(`<div>${entry.theorie}</div>`, "text/html");
+      const doc = parser.parseFromString(`<div>${warningData.theoryHtml}</div>`, "text/html");
 
       const sections = Array.from(doc.querySelectorAll(".section-block"))
         .map((section) => {
@@ -476,20 +427,37 @@ export function createRenderer({
         })
         .filter(Boolean);
 
-      const warnings = Array.from(doc.querySelectorAll(".warn-box"))
-        .map((warning) => {
-          const strong = warning.querySelector("strong");
-          const label = strong?.textContent?.trim() || "Typischer Fehler";
-          if (strong) strong.remove();
-          const body = warning.textContent?.trim();
-          if (!body) return null;
-          return { label, body };
-        })
-        .filter(Boolean);
+      const warnings = warningData.allWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      }));
+      const inlineWarnings = warningData.inlineWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      }));
+      const railWarnings = warningData.railWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      }));
 
-      return { sections, warnings };
+      return { sections, warnings, inlineWarnings, railWarnings, theoryHtml: warningData.theoryHtml };
     } catch {
-      return { sections: [], warnings: [] };
+      return {
+        sections: [],
+        warnings: warningData.allWarnings.map((warning) => ({
+          label: warning.title,
+          body: warning.bodyText
+        })),
+        inlineWarnings: warningData.inlineWarnings.map((warning) => ({
+          label: warning.title,
+          body: warning.bodyText
+        })),
+        railWarnings: warningData.railWarnings.map((warning) => ({
+          label: warning.title,
+          body: warning.bodyText
+        })),
+        theoryHtml: warningData.theoryHtml
+      };
     }
   }
 
@@ -531,19 +499,43 @@ ${(task.steps || []).map((step, stepIndex) => `
 ${renderTaskMathBlock(step.eq)}
 </div>
 </div>`).join("")}
+${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), "Klausurhinweis") : ""}
 <div class="result-badge">Ergebnis: ${renderSemanticPlainText(task.result || "Arbeite das Ergebnis formal zu Ende aus.")}</div>`
     })).join("");
   }
 
   function classifyFormulaCardLayout(formula) {
-    const eq = String(formula?.eq || "").trim();
+    const displayMode = getDisplayMode(formula?.eq) || "math";
+    const eq = displayContentToPlainText(formula?.eq).trim();
     const desc = String(formula?.desc || "").trim();
     const variableCount = Object.keys(formula?.variables || {}).length;
+    const rawEq = typeof formula?.eq === "string"
+      ? formula.eq
+      : JSON.stringify(formula?.eq || "");
+    const hasMultilineMath = /\\\\|\\begin\{(?:aligned|cases|array|matrix|pmatrix|bmatrix)\}/.test(rawEq);
+    const arrowCount = (eq.match(/[→⇒←⇐↔⇔]/gu) || []).length;
+    const hasTextHeavyMath = displayMode === "math" && (
+      /\\text\{|\\mathrm\{|\\operatorname\{/.test(rawEq)
+      || /\b(?:durch|weil|wenn|falls|bei|mit|ohne|möglich|nur|gleichzeitig|Voraussetzung|Bedingung|Interpretation)\b/ui.test(eq)
+    );
 
-    if (isLegalSchema(eq) || /\\(?:Rightarrow|rightarrow|Leftrightarrow|leftrightarrow|qquad)/.test(eq)) {
+    if (displayMode === "schema") {
       return "layout-schema";
     }
-    if (variableCount >= 3 || desc.length > 110 || eq.length > 72) {
+    if (displayMode === "reference") {
+      return "layout-reference";
+    }
+    if (
+      hasMultilineMath
+      || variableCount >= 4
+      || desc.length > 150
+      || eq.length > 92
+      || arrowCount >= 2
+      || (hasTextHeavyMath && eq.length > 52)
+    ) {
+      return "layout-extended";
+    }
+    if (variableCount >= 3 || desc.length > 110 || eq.length > 52 || hasTextHeavyMath) {
       return "layout-medium";
     }
     return "layout-compact";
@@ -551,11 +543,10 @@ ${renderTaskMathBlock(step.eq)}
 
   function buildExamDrills(chapter, entry, intuition) {
     const drills = [];
-    const { sections, warnings } = extractTheorySignals(entry);
+    const { sections } = extractTheorySignals(entry);
     const formula = entry?.formeln?.[0];
     const section = sections[0];
     const secondSection = sections[1];
-    const warning = warnings[0];
     const tasks = Array.isArray(entry?.aufgaben) ? entry.aufgaben : [];
     const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
 
@@ -572,7 +563,7 @@ ${intuition?.bridge ? `<div class="exam-drill-line">
 </div>` : ""}`
     });
 
-    if (formula) {
+    if (formula && hasMeaningfulDisplayContent(formula.eq)) {
       drills.push({
         tag: formula.label,
         question: `Welche formale Beziehung trägt "${chapter.title}" in der Prüfung, und wie liest du sie richtig?`,
@@ -599,7 +590,7 @@ ${renderNotationList(formula.variables)}
 <span class="exam-drill-key">Argumentationskern</span>
 <div class="exam-drill-copy">${renderSemanticPlainText(section.paragraph)}</div>
 </div>
-${formula ? `<div class="exam-drill-line">
+${formula && hasMeaningfulDisplayContent(formula.eq) ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formale Rückbindung</span>
 ${renderFormulaEq(formula.eq)}
 </div>` : ""}`
@@ -618,7 +609,7 @@ ${renderFormulaEq(formula.eq)}
 <span class="exam-drill-key">Saubere Reaktion</span>
 <div class="exam-drill-copy">${renderSemanticPlainText(pattern.then)}</div>
 </div>
-${formula ? `<div class="exam-drill-line">
+${formula && hasMeaningfulDisplayContent(formula.eq) ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formel, die du notieren kannst</span>
 ${renderFormulaEq(formula.eq)}
 </div>` : ""}`
@@ -633,27 +624,13 @@ ${renderFormulaEq(formula.eq)}
 <span class="exam-drill-key">Lösungslogik</span>
 <ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li>${step.text || ""}${renderTaskMathBlock(step.eq)}</li>`).join("")}</ol>
 </div>
+${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), "Klausurhinweis") : ""}
 <div class="exam-drill-line">
 <span class="exam-drill-key">Prüfungsresultat</span>
 <div class="result-badge">${task.result || "Arbeite das Ergebnis formal aus."}</div>
 </div>`
       });
     });
-
-    if (warning) {
-      drills.push({
-        tag: "Fehlerkontrolle",
-        question: `Welcher typische Fehler kostet bei "${chapter.title}" schnell Punkte und wie vermeidest du ihn?`,
-        answer: `<div class="exam-drill-line">
-<span class="exam-drill-key">Fehlerbild</span>
-<div class="exam-drill-copy"><strong>${renderDecodedText(warning.label)}:</strong> ${renderSemanticPlainText(warning.body)}</div>
-</div>
-<div class="exam-drill-line">
-<span class="exam-drill-key">Saubere Gegenregel</span>
-<div class="exam-drill-copy">${renderSemanticPlainText(intuition?.bridge || entry?.motivation || `${chapter.title} muss immer über die zentrale Definition und den passenden formalen Anker abgesichert werden.`)}</div>
-</div>`
-      });
-    }
 
     if (secondSection) {
       drills.push({
@@ -824,8 +801,9 @@ ${renderGuidedTasks(tasks)}`;
     let html = '<div class="panel active"><div class="formula-grid">';
     entry.formeln.forEach((formula, formulaIndex) => {
       const layoutClass = classifyFormulaCardLayout(formula);
+      const displayMode = getDisplayMode(formula.eq) || "math";
       const explicitVariables = Object.entries(formula.variables || {}).filter(([, value]) => hasMeaningfulText(value));
-      const inferredVariables = explicitVariables.length ? [] : inferFormulaVariables(formula);
+      const inferredVariables = displayMode === "math" && !explicitVariables.length ? inferFormulaVariables(formula) : [];
       const variableEntries = explicitVariables.length ? explicitVariables : inferredVariables;
       const varsHtml = variableEntries.length
         ? `<ul class="f-variables">${variableEntries.map(([key, value]) =>
@@ -834,18 +812,14 @@ ${renderGuidedTasks(tasks)}`;
         : "";
       const varsHintMuted =
         'font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:52rem';
-      const varsHint =
-        varsHtml ||
-        (formula.desc
-          ? `<p class="f-var-hint" style="${varsHintMuted}">Bedeutung zuerst, Formel danach: lies die Beschreibung direkt unter der Gleichung und ergänze die Symbollegende aus Theorie-Tab oder Vorlesungsnotation.</p>`
-          : `<p class="f-var-hint" style="${varsHintMuted}">Keine Variablenliste hinterlegt: benenne jedes Symbol im Term (Buchstabe, Index, Operator) und ordne es dem Theorie-Tab zu — in Klausuren zählt die saubere Legende.</p>`);
-      const supportNote = inferredVariables.length
+      const varsHint = displayMode === "math" ? varsHtml : "";
+      const supportNote = displayMode === "math" && inferredVariables.length
         ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
         : "";
-      html += `<div class="formula-card ${layoutClass}">
+      html += `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
-<div class="f-eq">${isLegalSchema(formula.eq) ? `<div class="legal-schema" role="group">${renderLegalSchema(formula.eq)}</div>` : (isDelimitedMath(formula.eq) ? formula.eq : `$$${formula.eq}$$`)}</div>
+${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
 ${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
 ${varsHint}
 ${supportNote}
@@ -881,11 +855,10 @@ ${supportNote}
     const chapter = chapters.find((entry) => entry.id === id);
     const entry = contentById[id];
     const formula = entry?.formeln?.[0];
-    const { sections: theorySections, warnings: theoryWarnings } = extractTheorySignals(entry);
+    const { sections: theorySections } = extractTheorySignals(entry);
     const recognitionItems = [
       ...(Array.isArray(data.exam) ? data.exam.slice(0, 2).map((pattern) => `Wenn ${pattern.if}, dann ${pattern.then}.`) : []),
-      ...(theorySections[0] ? [`Achte auf ${theorySections[0].heading.toLowerCase()}: ${theorySections[0].paragraph}`] : []),
-      ...(theoryWarnings[0] ? [`Vermeide ${theoryWarnings[0].label.toLowerCase()}: ${theoryWarnings[0].body}`] : [])
+      ...(theorySections[0] ? [`Achte auf ${theorySections[0].heading.toLowerCase()}: ${theorySections[0].paragraph}`] : [])
     ].slice(0, 4);
 
     function renderExamPatterns(intuition) {
@@ -908,11 +881,11 @@ ${patterns.map((pattern) => `<div class="intuition-pattern-row">
 <div class="section-block intuition-hero">
 <h3>Worum es wirklich geht</h3>
 <p class="intuition-lead">${data.core || entry?.motivation || `${chapter.title} ordnet einen zentralen Mechanismus aus ${chapter.cat}.`}</p>
-${formula ? `<div class="intuition-callout">
+${formula && (hasMeaningfulDisplayContent(formula.eq) || hasMeaningfulText(formula.desc)) ? `<div class="intuition-callout">
 <span class="intuition-callout-label">Formaler Anker</span>
 <div class="intuition-callout-body">
 ${renderFormulaEq(formula.eq)}
-${formula.desc ? `<p>${formula.desc}</p>` : ""}
+${hasMeaningfulText(formula.desc) ? `<p>${formula.desc}</p>` : ""}
 </div>
 </div>` : ""}
 </div>
@@ -938,14 +911,10 @@ ${recognitionItems.map((item) => `<li>${renderSemanticPlainText(item, { stripMar
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
 <p class="intuition-bridge-copy">${data.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
 </div>
-${theorySections[1] || theoryWarnings[0] || (Array.isArray(data.exam) && data.exam.length) ? `<div class="intuition-detail-list">
+${theorySections[1] || (Array.isArray(data.exam) && data.exam.length) ? `<div class="intuition-detail-list">
 ${theorySections[1] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>
 <div class="intuition-detail-copy"><strong>${renderDecodedText(theorySections[1].heading)}:</strong> ${renderSemanticPlainText(theorySections[1].paragraph)}</div>
-</div>` : ""}
-${theoryWarnings[0] ? `<div class="intuition-detail">
-<span class="intuition-detail-label">Typischer Fehlgriff</span>
-<div class="intuition-detail-copy"><strong>${renderDecodedText(theoryWarnings[0].label)}:</strong> ${renderSemanticPlainText(theoryWarnings[0].body)}</div>
 </div>` : ""}
 ${renderExamPatterns(data)}
 </div>` : ""}
@@ -1005,17 +974,21 @@ ${renderExamPatterns(data)}
       return;
     }
 
+    const motivationStrip = showConceptMotivationBanner && entry.motivation
+      ? `<div class="concept-motivation" role="note">${entry.motivation}</div>`
+      : "";
     const headerHTML = `<div class="concept-header">
 <div class="concept-tag">${chapter.cat} · Konzept ${idx}</div>
 <h1 class="concept-title">${chapter.title}</h1>
-<div class="concept-motivation" role="note">${entry.motivation}</div>
+${motivationStrip}
 </div>`;
 
     content.scrollTo({ top: 0, behavior: "smooth" });
 
     try {
       if (activeTab === "theorie") {
-        content.innerHTML = headerHTML + `<div class="panel active">${entry.theorie}</div>` + renderConceptLinks(conceptId);
+        const theorySignals = extractTheorySignals(entry);
+        content.innerHTML = headerHTML + `<div class="panel active">${theorySignals.theoryHtml || entry.theorie}</div>` + renderConceptLinks(conceptId);
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         if (initGraphFn) initGraphFn(conceptId);

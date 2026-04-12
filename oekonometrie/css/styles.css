@@ -2580,7 +2580,7 @@ body.focus-mode #rightPanel { display: none; }
 }
 .rp-conn .arrow { color: var(--accent3); }
 
-.rp-mistake {
+.rp-mistake:not(.warning-card) {
   background: rgba(255,69,58,0.06);
   border: 1px solid rgba(255,69,58,0.18);
   border-radius: var(--r-md);
@@ -2591,7 +2591,7 @@ body.focus-mode #rightPanel { display: none; }
   display: grid;
   gap: 6px;
 }
-.rp-mistake .err {
+.rp-mistake:not(.warning-card) .err {
   color: var(--sys-red);
   font-weight: 700;
   font-size: 10px;
@@ -2599,7 +2599,7 @@ body.focus-mode #rightPanel { display: none; }
   text-transform: uppercase;
   margin-bottom: 0;
 }
-.rp-mistake .fix {
+.rp-mistake:not(.warning-card) .fix {
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
   font-size: 12.5px;
   line-height: 1.58;
@@ -2780,7 +2780,8 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 .rp-conn mjx-container,
 .rp-f-name mjx-container,
 .rp-formula .rp-f-eq mjx-container,
-.rp-mistake .fix mjx-container {
+.rp-mistake.warning-card .warning-card-body mjx-container,
+.rp-mistake:not(.warning-card) .fix mjx-container {
   color: var(--math-ink) !important;
 }
 
@@ -2815,7 +2816,8 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 .rp-conn mjx-container *,
 .rp-f-name mjx-container *,
 .rp-formula .rp-f-eq mjx-container *,
-.rp-mistake .fix mjx-container *,
+.rp-mistake.warning-card .warning-card-body mjx-container *,
+.rp-mistake:not(.warning-card) .fix mjx-container *,
 .sStep-q mjx-container *,
 .exam-q-text mjx-container * {
   color: var(--math-ink) !important;

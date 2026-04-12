@@ -22,7 +22,7 @@ export const MODULES = [
     time: "40h",
     prereq: "Mikro I",
     href: "./mikro2/index.html",
-    status: "live",
+    status: "hidden",
     type: "quantitative",
     sourceCorpusInRepo: false,
     sourceStatusNote:
@@ -147,7 +147,11 @@ export const MODULES = [
   }
 ];
 
-export const PUBLIC_MODULES = MODULES.filter((m) => m.status === "live");
+export function isLiveModuleVisible(module) {
+  return module?.status === "live";
+}
+
+export const PUBLIC_MODULES = MODULES.filter(isLiveModuleVisible);
 
 export const FILTERS = [
   { id: "quantitative", label: "Analytisch" },

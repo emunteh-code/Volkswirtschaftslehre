@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+  <!-- White-on-transparent for CSS mask-image; parent sets background: var(--text) -->
+  <g fill="#ffffff" stroke="#ffffff">
+    <circle cx="13.25" cy="16" r="8" fill="none" stroke-width="1.9" stroke-linejoin="round"/>
+    <path fill="none" stroke-width="1.15" stroke-linecap="round" d="M5.5 12.5q7.75 3.75 15.5 0M5.5 19.5q7.75-3.75 15.5 0"/>
+    <path fill="none" stroke-width="1.15" stroke-linecap="round" d="M13.25 8.25v15.5"/>
+    <path fill="#ffffff" stroke="none" d="M18.85 10.05h1.55v1.75c.48-.06.92.1 1.18.45.22.3.22.72 0 1.08-.18.28-.52.45-1.02.5v.38c.62-.05 1.05.15 1.25.52.16.3.14.68-.06.98-.24.38-.75.58-1.38.6V20.2h-1.55v-1.65c-.72.02-1.25-.18-1.48-.62l1.22-.38c.1.22.3.34.58.34.26 0 .42-.12.42-.32 0-.24-.24-.38-.72-.4v-5.35c.62-.08 1.05-.35 1.25-.78.15-.32.12-.7-.08-1-.25-.45-.82-.7-1.58-.65v-1.72z"/>
+    <rect x="21.35" y="11.35" width="1.05" height="8.9" rx="0.35" fill="#ffffff"/>
+  </g>
+</svg>

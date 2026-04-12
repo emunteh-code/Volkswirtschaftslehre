@@ -209,7 +209,7 @@ function renderStatistikRLabTheory() {
     <div class="section-block">
       <h3>Welche Arbeitsfrage jeder R-Tab beantworten soll</h3>
       <p>Die R-Tabs sind keine Zusatzspielerei, sondern trainieren immer dieselbe Folge: <strong>Frage erkennen → passende Methode aufrufen → zentrale Zeile lesen → Output als Evidenz deuten.</strong></p>
-      <div class="warn-box"><strong>Tool-first ist ein Fehler</strong> Wer mit dem Befehl anfängt und die statistische Frage erst später sucht, produziert schnell formal korrekte, aber fachlich falsche Aussagen.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Tool-first ist ein Fehler</strong> Wer mit dem Befehl anfängt und die statistische Frage erst später sucht, produziert schnell formal korrekte, aber fachlich falsche Aussagen.</div>
     </div>
     <div class="section-block">
       <h3>Wo du die R-Tabs jetzt findest</h3>
@@ -261,7 +261,7 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Lagemaße gezielt auswählen</h3>
       <p>Das <strong>arithmetische Mittel</strong> $\bar{x}$ ist der rechnerische Schwerpunkt. Der <strong>Median</strong> $\tilde{x}$ halbiert die geordnete Reihe und bleibt auch dann stabil, wenn einzelne Extremwerte die Verteilung nach rechts oder links ziehen. Der <strong>Modus</strong> zeigt den häufigsten Wert, ist aber nur bei diskreten Daten oder klaren Klassenstrukturen wirklich informativ.</p>
-      <div class="warn-box"><strong>Median vs. Mittelwert</strong> Wenn Ausreißer oder starke Schiefe sichtbar sind, reicht der Mittelwert allein nicht. Dann muss der Median als robuste Gegenlesart mitberichtet werden.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Median vs. Mittelwert</strong> Wenn Ausreißer oder starke Schiefe sichtbar sind, reicht der Mittelwert allein nicht. Dann muss der Median als robuste Gegenlesart mitberichtet werden.</div>
     </div>
     <div class="section-block">
       <h3>Streuung und Form gehören zusammen</h3>
@@ -276,7 +276,7 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Klausurzugriff</h3>
       <p>Prüfungssicher ist nie nur eine Zahl. Eine gute Antwort kombiniert <strong>Lage</strong>, <strong>Streuung</strong> und <strong>Formhinweis</strong>. Typischer Standardsatz: “Der Mittelwert liegt bei ..., der Median darunter/darüber, die Streuung beträgt ..., und die Verteilung wirkt wegen ... rechtsschief/linksschief/ausreißerbeeinflusst.”</p>
-      <div class="warn-box"><strong>Variationskoeffizient</strong> Verwende $v = s / \bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Variationskoeffizient</strong> Verwende $v = s / \bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
     </div>
     `,
     formeln: [
@@ -382,7 +382,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Klausurfalle: Korrelation ist keine Kausalität</h3>
-      <div class="warn-box"><strong>Korrelation vs. Kausalität</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang. Drittvariablen, gemeinsame Trends oder Selektion können denselben Befund erzeugen.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Korrelation vs. Kausalität</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang. Drittvariablen, gemeinsame Trends oder Selektion können denselben Befund erzeugen.</div>
       <p>Prüfungssicher ist deshalb: Richtung + Stärke nennen, dann sofort die Grenzen der Aussage markieren.</p>
     </div>
     `,
@@ -475,7 +475,7 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Fehler 1. Art, Fehler 2. Art und Teststärke</h3>
       <p><strong>Fehler 1. Art ($\alpha$):</strong> $H_0$ ablehnen, obwohl sie wahr ist. <strong>Fehler 2. Art ($\beta$):</strong> $H_0$ nicht ablehnen, obwohl sie falsch ist. Die <strong>Power</strong> $1-\beta$ misst, wie gut ein Test einen echten Effekt entdeckt.</p>
-      <div class="warn-box"><strong>Alpha-Beta-Tradeoff</strong> Bei festem Stichprobenumfang macht ein kleineres $\alpha$ den Test konservativer, senkt aber meist die Teststärke. Beide Fehler gleichzeitig zu reduzieren gelingt vor allem über größeres $n$ oder klarere Effekte.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Alpha-Beta-Tradeoff</strong> Bei festem Stichprobenumfang macht ein kleineres $\alpha$ den Test konservativer, senkt aber meist die Teststärke. Beide Fehler gleichzeitig zu reduzieren gelingt vor allem über größeres $n$ oder klarere Effekte.</div>
     </div>
     <div class="section-block">
       <h3>Einseitig oder zweiseitig?</h3>
@@ -515,17 +515,17 @@ export const CONTENT = {
         steps: [
           { text: `Teststatistik berechnen:`, eq: String.raw`t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{2650-2800}{400/\sqrt{16}} = \frac{-150}{100} = -1{,}5` },
           { text: `Ablehnbereich für linksseitigen Test:`, eq: String.raw`K = \{t \mid t < -1{,}753\}` },
-          { text: `Vergleich: $t = -1{,}5 > -1{,}753$, also $t \notin K$.`, eq: String.raw`-1{,}5 > -1{,}753 \implies H_0 \text{ wird nicht abgelehnt.}` }
+          { text: String.raw`Vergleich: $t = -1{,}5 > -1{,}753$, also $t \notin K$.`, eq: String.raw`-1{,}5 > -1{,}753 \implies H_0 \text{ wird nicht abgelehnt.}` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Die Daten liefern auf dem $5\%$-Niveau keine ausreichende Evidenz dafür, dass der mittlere Lohn unter $2800$ Euro liegt.`
       },
       {
         text: String.raw`Erläutern Sie den Unterschied zwischen Fehler 1. Art und Fehler 2. Art. Wie hängen $\alpha$, $\beta$ und die Teststärke $1-\beta$ zusammen? Welche Konsequenz hat eine Verringerung von $\alpha$ bei festem $n$?`,
         steps: [
-          { text: `Fehler 1. Art: $H_0$ abgelehnt, obwohl sie wahr ist. Wahrscheinlichkeit = $\alpha$.`, eq: String.raw`\alpha = P(\text{ablehnen } H_0 \mid H_0 \text{ wahr})` },
-          { text: `Fehler 2. Art: $H_0$ beibehalten, obwohl $H_1$ wahr ist. Wahrscheinlichkeit = $\beta$.`, eq: String.raw`\beta = P(\text{beibehalten } H_0 \mid H_1 \text{ wahr})` },
+          { text: String.raw`Fehler 1. Art: $H_0$ abgelehnt, obwohl sie wahr ist. Wahrscheinlichkeit = $\alpha$.`, eq: String.raw`\alpha = P(\text{ablehnen } H_0 \mid H_0 \text{ wahr})` },
+          { text: String.raw`Fehler 2. Art: $H_0$ beibehalten, obwohl $H_1$ wahr ist. Wahrscheinlichkeit = $\beta$.`, eq: String.raw`\beta = P(\text{beibehalten } H_0 \mid H_1 \text{ wahr})` },
           { text: `Teststärke: Wahrscheinlichkeit, einen wahren Effekt zu entdecken.`, eq: String.raw`1-\beta = P(\text{ablehnen } H_0 \mid H_1 \text{ wahr})` },
-          { text: `Tradeoff: Bei festem $n$ sinkt $\alpha$ $\Rightarrow$ kritischer Bereich kleiner $\Rightarrow$ $\beta$ steigt.`, eq: String.raw`\alpha \downarrow \implies K \text{ kleiner} \implies \beta \uparrow \implies 1-\beta \downarrow` }
+          { text: String.raw`Tradeoff: Bei festem $n$ sinkt $\alpha$ $\Rightarrow$ kritischer Bereich kleiner $\Rightarrow$ $\beta$ steigt.`, eq: String.raw`\alpha \downarrow \implies K \text{ kleiner} \implies \beta \uparrow \implies 1-\beta \downarrow` }
         ],
         result: String.raw`Senkung von $\alpha$ (konservativerer Test) erhöht bei gleichem Stichprobenumfang $\beta$ (Verlust an Teststärke). Um beide Fehlerwahrscheinlichkeiten gleichzeitig zu senken, muss $n$ erhöht werden.`
       },
@@ -534,15 +534,15 @@ export const CONTENT = {
         steps: [
           { text: `Einseitiger p-Wert für $t = 2{,}1 > 2{,}086$:`, eq: String.raw`p_{einseitig} < 0{,}025` },
           { text: `Zweiseitiger p-Wert (da $|t|$ symmetrisch):`, eq: String.raw`p_{zweiseitig} = 2 \cdot p_{einseitig} < 2 \cdot 0{,}025 = 0{,}05` },
-          { text: `Entscheidung: $p < \alpha = 0{,}05$.`, eq: String.raw`p < 0{,}05 \implies H_0 \text{ ablehnen (gerade noch signifikant)}` }
+          { text: String.raw`Entscheidung: $p < \alpha = 0{,}05$.`, eq: String.raw`p < 0{,}05 \implies H_0 \text{ ablehnen (gerade noch signifikant)}` }
         ],
         result: String.raw`$p_{zweiseitig} < 0{,}05$: $H_0$ wird auf dem $5\%$-Niveau abgelehnt. Der p-Wert misst die Wahrscheinlichkeit, unter $H_0$ ein so extremes oder extremeres Ergebnis zu erhalten — er ist kein Maß für die Wahr­scheinlichkeit der Nullhypothese selbst.`
       },
       {
         text: String.raw`Eine Studie fragt explizit: "Ist der neue Lernansatz besser?" Formulieren Sie die passende Alternativhypothese, nennen Sie den Testtyp (ein- oder zweiseitig) und erklären Sie die Hauptrisiken einer falschen Richtungsauswahl.`,
         steps: [
-          { text: `Bei gerichteter Forschungsfrage "besser" ist die natürliche Alternative rechtsseitig:`, eq: String.raw`H_1:\mu_{\text{neu}} > \mu_{\text{alt}}` },
-          { text: `Ein zweiseitiger Test wäre konservativer, verteilt aber $\alpha$ auf beide Flanken.`, eq: null },
+          { text: String.raw`Bei gerichteter Forschungsfrage "besser" ist die natürliche Alternative rechtsseitig:`, eq: String.raw`H_1:\mu_{\text{neu}} > \mu_{\text{alt}}` },
+          { text: String.raw`Ein zweiseitiger Test wäre konservativer, verteilt aber $\alpha$ auf beide Flanken.`, eq: null },
           { text: `Wird die Richtung ex post angepasst, steigt das Fehlentscheidungsrisiko (p-Hacking/Alpha-Inflation).`, eq: null }
         ],
         result: String.raw`Die Testseite muss vor Datensichtung aus der Fragestellung folgen. Richtung nachträglich wählen ist methodisch unzulässig und verzerrt die Evidenz.`
@@ -587,7 +587,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Unabhängigkeit vs. Disjunktheit:</strong> Disjunkte Ereignisse ($A \cap B = \emptyset$) sind in der Regel nicht unabhängig — im Gegenteil: wenn $A$ eintritt, ist $B$ ausgeschlossen.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Unabhängigkeit vs. Disjunktheit:</strong> Disjunkte Ereignisse ($A \cap B = \emptyset$) sind in der Regel nicht unabhängig — im Gegenteil: wenn $A$ eintritt, ist $B$ ausgeschlossen.</div>
     </div>
     `,
     formeln: [
@@ -607,17 +607,17 @@ export const CONTENT = {
       {
         text: String.raw`Eine Urne enthält $3$ rote und $7$ blaue Kugeln. Zwei Kugeln werden ohne Zurücklegen gezogen. Berechnen Sie $P(\text{beide rot})$, $P(\text{erste rot, zweite blau})$ und $P(\text{mindestens eine rot})$.`,
         steps: [
-          { text: `$P(\text{beide rot})$: Bedingte Wahrscheinlichkeit.`, eq: String.raw`P(R_1 \cap R_2) = P(R_1) \cdot P(R_2 \mid R_1) = \frac{3}{10} \cdot \frac{2}{9} = \frac{6}{90} = \frac{1}{15}` },
-          { text: `$P(\text{erste rot, zweite blau})$:`, eq: String.raw`P(R_1 \cap B_2) = \frac{3}{10} \cdot \frac{7}{9} = \frac{21}{90} = \frac{7}{30}` },
-          { text: `$P(\text{mindestens eine rot})$ über Gegenwahrscheinlichkeit:`, eq: String.raw`P(\text{mind. eine rot}) = 1 - P(\text{keine rot}) = 1 - \frac{7}{10} \cdot \frac{6}{9} = 1 - \frac{42}{90} = 1 - \frac{7}{15} = \frac{8}{15}` }
+          { text: String.raw`$P(\text{beide rot})$: Bedingte Wahrscheinlichkeit.`, eq: String.raw`P(R_1 \cap R_2) = P(R_1) \cdot P(R_2 \mid R_1) = \frac{3}{10} \cdot \frac{2}{9} = \frac{6}{90} = \frac{1}{15}` },
+          { text: String.raw`$P(\text{erste rot, zweite blau})$:`, eq: String.raw`P(R_1 \cap B_2) = \frac{3}{10} \cdot \frac{7}{9} = \frac{21}{90} = \frac{7}{30}` },
+          { text: String.raw`$P(\text{mindestens eine rot})$ über Gegenwahrscheinlichkeit:`, eq: String.raw`P(\text{mind. eine rot}) = 1 - P(\text{keine rot}) = 1 - \frac{7}{10} \cdot \frac{6}{9} = 1 - \frac{42}{90} = 1 - \frac{7}{15} = \frac{8}{15}` }
         ],
         result: String.raw`$P(\text{beide rot}) = \tfrac{1}{15} \approx 0{,}067$; $P(R_1, B_2) = \tfrac{7}{30} \approx 0{,}233$; $P(\text{mind. eine rot}) = \tfrac{8}{15} \approx 0{,}533$.`
       },
       {
         text: String.raw`Zwei Ereignisse $A$ und $B$ erfüllen: $P(A) = 0{,}4$, $P(B) = 0{,}3$, $P(A \cup B) = 0{,}58$. Sind $A$ und $B$ unabhängig? Berechnen Sie $P(A \cap B)$ und $P(A \mid B)$.`,
         steps: [
-          { text: `$P(A \cap B)$ aus Additionsformel:`, eq: String.raw`P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0{,}4 + 0{,}3 - 0{,}58 = 0{,}12` },
-          { text: `Unabhängigkeitstest: Vergleiche $P(A) \cdot P(B)$ mit $P(A \cap B)$.`, eq: String.raw`P(A) \cdot P(B) = 0{,}4 \cdot 0{,}3 = 0{,}12 = P(A \cap B) \implies \text{unabhängig}` },
+          { text: String.raw`$P(A \cap B)$ aus Additionsformel:`, eq: String.raw`P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0{,}4 + 0{,}3 - 0{,}58 = 0{,}12` },
+          { text: String.raw`Unabhängigkeitstest: Vergleiche $P(A) \cdot P(B)$ mit $P(A \cap B)$.`, eq: String.raw`P(A) \cdot P(B) = 0{,}4 \cdot 0{,}3 = 0{,}12 = P(A \cap B) \implies \text{unabhängig}` },
           { text: `Bedingte Wahrscheinlichkeit:`, eq: String.raw`P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{0{,}12}{0{,}3} = 0{,}4 = P(A)` }
         ],
         result: String.raw`$P(A \cap B) = 0{,}12$. Da $P(A \cap B) = P(A) \cdot P(B)$, sind $A$ und $B$ stochastisch unabhängig. Daher gilt $P(A \mid B) = P(A) = 0{,}4$ — das Wissen um $B$ ändert die Wahrscheinlichkeit von $A$ nicht.`
@@ -661,7 +661,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Varianz vs. Standardabweichung:</strong> Die Varianz hat die Einheit zum Quadrat. Für die Interpretation in Originaleinheiten immer die Standardabweichung $\sigma = \sqrt{\text{Var}}$ verwenden.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Varianz vs. Standardabweichung:</strong> Die Varianz hat die Einheit zum Quadrat. Für die Interpretation in Originaleinheiten immer die Standardabweichung $\sigma = \sqrt{\text{Var}}$ verwenden.</div>
     </div>
     `,
     formeln: [
@@ -702,7 +702,7 @@ export const CONTENT = {
         text: String.raw`Erläutern Sie den Zentralen Grenzwertsatz (ZGS) und seine Bedeutung für die Statistik. Stichprobenumfang $n=36$ aus einer Verteilung mit $\mu=20$, $\sigma^2=144$. Wie ist $\bar{X}$ verteilt, und mit welcher Wahrscheinlichkeit liegt $\bar{X}$ zwischen $18$ und $22$?`,
         steps: [
           { text: `ZGS: Für großes $n$ gilt näherungsweise:`, eq: String.raw`\bar{X} \overset{\text{approx}}{\sim} N\!\left(\mu,\, \frac{\sigma^2}{n}\right) = N\!\left(20,\, \frac{144}{36}\right) = N(20,\, 4)` },
-          { text: `Standardfehler des Mittelwerts: $SE = \sigma/\sqrt{n}$.`, eq: String.raw`SE = \sqrt{4} = 2` },
+          { text: String.raw`Standardfehler des Mittelwerts: $SE = \sigma/\sqrt{n}$.`, eq: String.raw`SE = \sqrt{4} = 2` },
           { text: `Standardisierung: $z_1 = (18-20)/2 = -1$, $z_2 = (22-20)/2 = 1$.`, eq: String.raw`P(18 < \bar{X} < 22) = P(-1 < Z < 1) \approx 0{,}6827` }
         ],
         result: String.raw`$\bar{X} \approx N(20,\, 4)$. $P(18 < \bar{X} < 22) \approx 68{,}3\%$. Der ZGS ist die Basis nahezu aller inferenzstatistischen Methoden: Egal wie die Grundgesamtheit verteilt ist — für großes $n$ ist der Stichprobenmittelwert annähernd normalverteilt.`
@@ -734,7 +734,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Fehlinterpretation KI:</strong> Das Konfidenzintervall ist eine Eigenschaft der Methode, nicht des Parameters. Der Parameter ist fix — das Intervall ist zufällig.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Fehlinterpretation KI:</strong> Das Konfidenzintervall ist eine Eigenschaft der Methode, nicht des Parameters. Der Parameter ist fix — das Intervall ist zufällig.</div>
     </div>
     `,
     formeln: [
@@ -746,7 +746,7 @@ export const CONTENT = {
         text: String.raw`Aus einer Stichprobe mit $n=36$ ergibt sich $\bar{x}=120$ und $s=18$. Berechnen Sie das $95\%$-Konfidenzintervall für $\mu$.`,
         steps: [
           { text: `Standardfehler:`, eq: String.raw`SE = 18/\sqrt{36} = 3` },
-          { text: `Kritischer Wert: $t_{35,\,0{,}975} \approx 2{,}03$.`, eq: null },
+          { text: String.raw`Kritischer Wert: $t_{35,\,0{,}975} \approx 2{,}03$.`, eq: null },
           { text: `Intervall berechnen:`, eq: String.raw`120 \pm 2{,}03 \cdot 3 = [113{,}91;\; 126{,}09]` }
         ],
         result: String.raw`$95\%$-KI: $[113{,}9;\; 126{,}1]$.`
@@ -762,20 +762,20 @@ export const CONTENT = {
       {
         text: String.raw`Vergleichen Sie die Eigenschaften der Schätzer $\hat{\mu}_1 = \bar{X}$ (Stichprobenmittelwert) und $\hat{\mu}_2 = X_1$ (erster Beobachtungswert) für den Erwartungswert $\mu$ einer normalverteilten Population. Prüfen Sie Erwartungstreue und Effizienz.`,
         steps: [
-          { text: `Erwartungstreue von $\hat{\mu}_1$:`, eq: String.raw`E[\bar{X}] = \frac{1}{n}\sum E[X_i] = \mu \implies \text{erwartungstreu}` },
-          { text: `Erwartungstreue von $\hat{\mu}_2$:`, eq: String.raw`E[X_1] = \mu \implies \text{auch erwartungstreu}` },
+          { text: String.raw`Erwartungstreue von $\hat{\mu}_1$:`, eq: String.raw`E[\bar{X}] = \frac{1}{n}\sum E[X_i] = \mu \implies \text{erwartungstreu}` },
+          { text: String.raw`Erwartungstreue von $\hat{\mu}_2$:`, eq: String.raw`E[X_1] = \mu \implies \text{auch erwartungstreu}` },
           { text: `Varianzen vergleichen:`, eq: String.raw`\text{Var}(\bar{X}) = \frac{\sigma^2}{n} \quad \text{vs.} \quad \text{Var}(X_1) = \sigma^2` },
-          { text: `Effizienz: Cramér-Rao-Schranke für $\mu$:`, eq: String.raw`\text{Var}(\bar{X}) = \frac{\sigma^2}{n} \leq \sigma^2 = \text{Var}(X_1) \implies \bar{X} \text{ ist effizienter}` }
+          { text: String.raw`Effizienz: Cramér-Rao-Schranke für $\mu$:`, eq: String.raw`\text{Var}(\bar{X}) = \frac{\sigma^2}{n} \leq \sigma^2 = \text{Var}(X_1) \implies \bar{X} \text{ ist effizienter}` }
         ],
         result: String.raw`Beide Schätzer sind erwartungstreu. Aber $\bar{X}$ hat Varianz $\sigma^2/n$, während $X_1$ Varianz $\sigma^2$ hat. Mit wachsendem $n$ wird $\bar{X}$ beliebig präzise — $X_1$ bleibt konstant ungenau. $\bar{X}$ erreicht die Cramér-Rao-Schranke und ist der BLUE (Best Linear Unbiased Estimator).`
       },
       {
         text: String.raw`Ein $99\%$-KI für $\mu$ soll bei bekanntem $\sigma = 20$ berechnet werden. Stichprobengröße $n = 25$, $\bar{x} = 80$. Berechnen Sie das Intervall und erläutern Sie, wie es sich von einem $95\%$-KI unterscheidet.`,
         steps: [
-          { text: `Kritischer z-Wert für $99\%$: $z_{0{,}995} = 2{,}576$.`, eq: String.raw`z_{0{,}995} = 2{,}576` },
+          { text: String.raw`Kritischer z-Wert für $99\%$: $z_{0{,}995} = 2{,}576$.`, eq: String.raw`z_{0{,}995} = 2{,}576` },
           { text: `Standardfehler:`, eq: String.raw`SE = \frac{\sigma}{\sqrt{n}} = \frac{20}{\sqrt{25}} = 4` },
-          { text: `$99\%$-KI:`, eq: String.raw`80 \pm 2{,}576 \cdot 4 = 80 \pm 10{,}3 = [69{,}7;\; 90{,}3]` },
-          { text: `Vergleich mit $95\%$-KI ($z = 1{,}96$):`, eq: String.raw`95\%\text{-KI}: 80 \pm 1{,}96 \cdot 4 = [72{,}2;\; 87{,}8] \quad \text{(schmaler)}` }
+          { text: String.raw`$99\%$-KI:`, eq: String.raw`80 \pm 2{,}576 \cdot 4 = 80 \pm 10{,}3 = [69{,}7;\; 90{,}3]` },
+          { text: String.raw`Vergleich mit $95\%$-KI ($z = 1{,}96$):`, eq: String.raw`95\%\text{-KI}: 80 \pm 1{,}96 \cdot 4 = [72{,}2;\; 87{,}8] \quad \text{(schmaler)}` }
         ],
         result: String.raw`$99\%$-KI: $[69{,}7;\; 90{,}3]$. Das $99\%$-Intervall ist breiter als das $95\%$-Intervall: Mehr Sicherheit kostet Präzision. Für höhere Konfidenzniveaus muss man bereit sein, ein ungenaueres (breiteres) Intervall zu akzeptieren.`
       },
@@ -783,7 +783,7 @@ export const CONTENT = {
         text: String.raw`Methodenvergleich (MoM vs. ML): Für eine Bernoulli-Variable mit $n=200$ Beobachtungen und $76$ Erfolgen soll $\pi$ geschätzt werden. Bestimmen Sie den Momentenschätzer und den Maximum-Likelihood-Schätzer und interpretieren Sie das Ergebnis.`,
         steps: [
           { text: `Stichprobenanteil als 1. Moment der Bernoulli-Verteilung:`, eq: String.raw`\bar{X} = \frac{76}{200} = 0{,}38` },
-          { text: `Methode der Momente: Setze $E[X]=\pi$ gleich $\bar X$.`, eq: String.raw`\hat{\pi}_{MM} = \bar{X} = 0{,}38` },
+          { text: String.raw`Methode der Momente: Setze $E[X]=\pi$ gleich $\bar X$.`, eq: String.raw`\hat{\pi}_{MM} = \bar{X} = 0{,}38` },
           { text: `MLE bei Bernoulli/Binomial führt auf denselben Anteilsschätzer.`, eq: String.raw`\hat{\pi}_{ML} = \frac{76}{200} = 0{,}38` },
           { text: `Interpretation: Schätzerwert als plausibler Erfolgsanteil in der Population.`, eq: null }
         ],
@@ -823,7 +823,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>R² und Kausalität:</strong> Ein hohes $R^2$ beweist keinen kausalen Zusammenhang. Es misst nur den linearen Erklärungsanteil in der Stichprobe.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>R² und Kausalität:</strong> Ein hohes $R^2$ beweist keinen kausalen Zusammenhang. Es misst nur den linearen Erklärungsanteil in der Stichprobe.</div>
     </div>
     `,
     formeln: [
@@ -842,10 +842,10 @@ export const CONTENT = {
       {
         text: String.raw`Datenpunkte: $(1,3)$, $(2,5)$, $(3,7)$, $(4,9)$. Schätzen Sie die einfache Regressionsgerade $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$ per KQ-Methode und berechnen Sie $R^2$.`,
         steps: [
-          { text: `Mittelwerte: $\bar{x} = 2{,}5$, $\bar{y} = 6$.`, eq: String.raw`\bar{x} = \frac{1+2+3+4}{4} = 2{,}5 \quad \bar{y} = \frac{3+5+7+9}{4} = 6` },
-          { text: `Schätzer $\hat{\beta}_1$:`, eq: String.raw`\hat{\beta}_1 = \frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2} = \frac{(-1{,}5)(-3)+(-0{,}5)(-1)+(0{,}5)(1)+(1{,}5)(3)}{2{,}25+0{,}25+0{,}25+2{,}25} = \frac{4{,}5+0{,}5+0{,}5+4{,}5}{5} = \frac{10}{5} = 2` },
-          { text: `Schätzer $\hat{\beta}_0$:`, eq: String.raw`\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x} = 6 - 2 \cdot 2{,}5 = 1` },
-          { text: `$R^2$: Da alle Punkte exakt auf der Geraden liegen, gilt $SSR = 0$.`, eq: String.raw`R^2 = 1 - \frac{SSR}{SST} = 1 - 0 = 1` }
+          { text: String.raw`Mittelwerte: $\bar{x} = 2{,}5$, $\bar{y} = 6$.`, eq: String.raw`\bar{x} = \frac{1+2+3+4}{4} = 2{,}5 \quad \bar{y} = \frac{3+5+7+9}{4} = 6` },
+          { text: String.raw`Schätzer $\hat{\beta}_1$:`, eq: String.raw`\hat{\beta}_1 = \frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2} = \frac{(-1{,}5)(-3)+(-0{,}5)(-1)+(0{,}5)(1)+(1{,}5)(3)}{2{,}25+0{,}25+0{,}25+2{,}25} = \frac{4{,}5+0{,}5+0{,}5+4{,}5}{5} = \frac{10}{5} = 2` },
+          { text: String.raw`Schätzer $\hat{\beta}_0$:`, eq: String.raw`\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x} = 6 - 2 \cdot 2{,}5 = 1` },
+          { text: String.raw`$R^2$: Da alle Punkte exakt auf der Geraden liegen, gilt $SSR = 0$.`, eq: String.raw`R^2 = 1 - \frac{SSR}{SST} = 1 - 0 = 1` }
         ],
         result: String.raw`$\hat{y} = 1 + 2x$, $R^2 = 1{,}00$. Die Datenpunkte liegen exakt auf der Geraden — ein perfekter linearer Zusammenhang. In der Praxis ist $R^2 = 1$ verdächtig und kann auf Multikollinearität, Datenfehler oder zu wenige Beobachtungen hinweisen.`
       },
@@ -855,7 +855,7 @@ export const CONTENT = {
           { text: `Erklärte Streuung: $SSE = SST - SSR$.`, eq: String.raw`SSE = 500 - 100 = 400` },
           { text: `Bestimmtheitsmaß:`, eq: String.raw`R^2 = \frac{SSE}{SST} = \frac{400}{500} = 0{,}80` },
           { text: `$F$-Statistik (1 Regressor, $k=1$, $df_1=1$, $df_2=n-2=28$):`, eq: String.raw`F = \frac{SSE/k}{SSR/(n-k-1)} = \frac{400/1}{100/28} = \frac{400}{3{,}571} \approx 112` },
-          { text: `Entscheidung: $F_{krit}(1, 28; 0{,}05) \approx 4{,}20$. Da $F \gg F_{krit}$:`, eq: String.raw`F = 112 \gg 4{,}20 \implies H_0: \beta_1 = 0 \text{ wird abgelehnt}` }
+          { text: String.raw`Entscheidung: $F_{krit}(1, 28; 0{,}05) \approx 4{,}20$. Da $F \gg F_{krit}$:`, eq: String.raw`F = 112 \gg 4{,}20 \implies H_0: \beta_1 = 0 \text{ wird abgelehnt}` }
         ],
         result: String.raw`$R^2 = 0{,}80$: Das Modell erklärt $80\%$ der Varianz von $y$. Der globale $F$-Test ist hochsignifikant ($F \approx 112$), d.h. der Regressor $x$ trägt signifikant zur Erklärung von $y$ bei.`
       },
@@ -902,7 +902,7 @@ export const CONTENT = {
         text: String.raw`In R haben Sie ein Modell geschätzt: \texttt{model <- lm(Lohn ~ Bildung + Erfahrung, data=df)}. Der Output zeigt $\hat{\beta}_{\text{Bildung}} = 2{,}5$ mit $p = 0{,}003$. Interpretieren Sie.`,
         steps: [
           { text: `Koeffizient interpretieren:`, eq: String.raw`\text{Ein zusätzliches Bildungsjahr erhöht den Lohn um 2,5 Einheiten (ceteris paribus).}` },
-          { text: `Signifikanz prüfen: $p = 0{,}003 < 0{,}05$.`, eq: String.raw`\text{H0 (}\beta = 0\text{) wird auf dem 5%-Niveau abgelehnt.}` }
+          { text: String.raw`Signifikanz prüfen: $p = 0{,}003 < 0{,}05$.`, eq: String.raw`\text{H0 (}\beta = 0\text{) wird auf dem 5%-Niveau abgelehnt.}` }
         ],
         result: String.raw`Bildung hat einen signifikant positiven Effekt auf den Lohn ($p < 0{,}01$).`
       },
@@ -911,25 +911,25 @@ export const CONTENT = {
         steps: [
           { text: `Hypothesen identifizieren:`, eq: String.raw`H_0: \mu \leq 50 \quad H_1: \mu > 50 \quad (\text{rechtsseitiger Test})` },
           { text: `Entscheidungsregel:`, eq: String.raw`p = 0{,}039 < \alpha = 0{,}05 \implies H_0 \text{ ablehnen}` },
-          { text: `Konfidenzintervall \texttt{alternative="greater"}: einseitiges KI.`, eq: String.raw`[\bar{x} - t_{24;\,0{,}95} \cdot SE;\; +\infty) \implies \text{Untergrenze des einseitigen KI liegt über 50}` }
+          { text: String.raw`Konfidenzintervall \texttt{alternative="greater"}: einseitiges KI.`, eq: String.raw`[\bar{x} - t_{24;\,0{,}95} \cdot SE;\; +\infty) \implies \text{Untergrenze des einseitigen KI liegt über 50}` }
         ],
         result: String.raw`$H_0$ wird auf dem $5\%$-Niveau abgelehnt. Es gibt statistisch signifikante Evidenz dafür, dass $\mu > 50$. Das einseitige KI schließt $50$ nicht ein, was die Entscheidung bestätigt.`
       },
       {
         text: String.raw`In R wird \texttt{cor.test(df\$x, df\$y)} ausgeführt. Ergebnis: $r = 0{,}71$, $t = 3{,}84$, $df = 18$, $p = 0{,}0012$. Interpretieren Sie den Korrelationskoeffizienten, prüfen Sie die Signifikanz und nennen Sie die zugrundeliegende Nullhypothese.`,
         steps: [
-          { text: `Nullhypothese von \texttt{cor.test}:`, eq: String.raw`H_0: \rho = 0 \quad (\text{kein linearer Zusammenhang in der Population})` },
+          { text: String.raw`Nullhypothese von \texttt{cor.test}:`, eq: String.raw`H_0: \rho = 0 \quad (\text{kein linearer Zusammenhang in der Population})` },
           { text: `Teststatistik: t-Wert für Korrelationstest.`, eq: String.raw`t = r \sqrt{\frac{n-2}{1-r^2}} = 0{,}71 \cdot \sqrt{\frac{18}{1-0{,}504}} = 0{,}71 \cdot \sqrt{36{,}3} \approx 3{,}84` },
-          { text: `Entscheidung: $p = 0{,}0012 < 0{,}01$.`, eq: String.raw`H_0 \text{ ablehnen auf 1\%-Niveau: Die Korrelation ist hochsignifikant von null verschieden.}` }
+          { text: String.raw`Entscheidung: $p = 0{,}0012 < 0{,}01$.`, eq: String.raw`H_0 \text{ ablehnen auf 1\%-Niveau: Die Korrelation ist hochsignifikant von null verschieden.}` }
         ],
         result: String.raw`$r = 0{,}71$ zeigt einen starken positiven linearen Zusammenhang. Der Test ist hochsignifikant ($p < 0{,}01$). Aber: Auch $r = 0{,}71$ erklärt nur $r^2 = 0{,}504$, also ca. $50\%$ der Varianz. Signifikanz und Effektgröße müssen stets gemeinsam beurteilt werden.`
       },
       {
         text: String.raw`In R soll geprüft werden, ob zwei Gruppen denselben Mittelwert haben: \texttt{t.test(x \textasciitilde{} gruppe, data=df, var.equal=TRUE)}. Ergebnis: $t = -2{,}31$, $df = 38$, $p = 0{,}026$. Was bedeutet \texttt{var.equal=TRUE}? Wann ist der Welch-Test (\texttt{var.equal=FALSE}) vorzuziehen?`,
         steps: [
-          { text: `\texttt{var.equal=TRUE}: Pooled-t-Test, setzt $\sigma_1^2 = \sigma_2^2$ voraus.`, eq: String.raw`t_{pool} = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{1/n_1 + 1/n_2}}, \quad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}` },
-          { text: `Entscheidung: $p = 0{,}026 < 0{,}05$.`, eq: String.raw`H_0: \mu_1 = \mu_2 \text{ wird abgelehnt} \implies \text{Gruppenunterschiede signifikant}` },
-          { text: `Welch-Test (\texttt{var.equal=FALSE}): Robuster bei unterschiedlichen Varianzen.`, eq: String.raw`\sigma_1^2 \neq \sigma_2^2 \implies \text{Welch } df < n_1+n_2-2 \implies \text{konservativer Test}` }
+          { text: String.raw`\texttt{var.equal=TRUE}: Pooled-t-Test, setzt $\sigma_1^2 = \sigma_2^2$ voraus.`, eq: String.raw`t_{pool} = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{1/n_1 + 1/n_2}}, \quad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}` },
+          { text: String.raw`Entscheidung: $p = 0{,}026 < 0{,}05$.`, eq: String.raw`H_0: \mu_1 = \mu_2 \text{ wird abgelehnt} \implies \text{Gruppenunterschiede signifikant}` },
+          { text: String.raw`Welch-Test (\texttt{var.equal=FALSE}): Robuster bei unterschiedlichen Varianzen.`, eq: String.raw`\sigma_1^2 \neq \sigma_2^2 \implies \text{Welch } df < n_1+n_2-2 \implies \text{konservativer Test}` }
         ],
         result: String.raw`Der Pooled-t-Test ist effizienter, wenn die Varianzen wirklich gleich sind. Der Welch-Test ist sicherer, wenn die Varianzhomogenität unsicher ist — er verliert bei gleichen Varianzen kaum Power. In der Praxis wird \texttt{var.equal=FALSE} (Welch) standardmäßig empfohlen.`
       }
@@ -959,7 +959,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>z vs. t:</strong> Den z-Test nur verwenden, wenn $\sigma$ wirklich bekannt ist. In der Praxis ist $\sigma$ fast nie bekannt — dann ist der t-Test korrekt. Bei sehr großem $n$ nähern sich $z$ und $t$ an, da $t_\infty = z$.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Den z-Test nur verwenden, wenn $\sigma$ wirklich bekannt ist. In der Praxis ist $\sigma$ fast nie bekannt — dann ist der t-Test korrekt. Bei sehr großem $n$ nähern sich $z$ und $t$ an, da $t_\infty = z$.</div>
     </div>
     `,
     formeln: [
@@ -971,8 +971,8 @@ export const CONTENT = {
         text: String.raw`Eine Maschine soll Schrauben mit $\mu_0 = 50$ mm Länge herstellen. Die Populationsstandardabweichung ist bekannt: $\sigma = 2$ mm. Eine Stichprobe von $n = 25$ Schrauben ergibt $\bar{x} = 50{,}8$ mm. Testen Sie zweiseitig bei $\alpha = 0{,}05$.`,
         steps: [
           { text: `z-Statistik berechnen:`, eq: String.raw`z = \frac{50{,}8 - 50}{2/\sqrt{25}} = \frac{0{,}8}{0{,}4} = 2{,}0` },
-          { text: `Kritischer Wert: $z_{0{,}975} = 1{,}96$.`, eq: String.raw`|z| = 2{,}0 > 1{,}96 \implies z \in K` },
-          { text: `p-Wert berechnen: $P(|Z| > 2{,}0) = 2(1-\Phi(2{,}0))$.`, eq: String.raw`p = 2(1-0{,}9772) = 2 \cdot 0{,}0228 = 0{,}0456 < 0{,}05` }
+          { text: String.raw`Kritischer Wert: $z_{0{,}975} = 1{,}96$.`, eq: String.raw`|z| = 2{,}0 > 1{,}96 \implies z \in K` },
+          { text: String.raw`p-Wert berechnen: $P(|Z| > 2{,}0) = 2(1-\Phi(2{,}0))$.`, eq: String.raw`p = 2(1-0{,}9772) = 2 \cdot 0{,}0228 = 0{,}0456 < 0{,}05` }
         ],
         result: String.raw`$H_0: \mu = 50$ wird abgelehnt ($z = 2{,}0 > 1{,}96$, $p \approx 0{,}046$). Es gibt signifikante Evidenz dafür, dass die Maschine außerhalb der Toleranz produziert.`
       },
@@ -980,16 +980,16 @@ export const CONTENT = {
         text: String.raw`In einer Befragung von $n = 400$ Personen gaben $\hat{p} = 0{,}56$ an, Partei A zu wählen. Testen Sie $H_0: p = 0{,}50$ gegen $H_1: p > 0{,}50$ bei $\alpha = 0{,}01$.`,
         steps: [
           { text: `z-Statistik für Anteilstest:`, eq: String.raw`z = \frac{0{,}56 - 0{,}50}{\sqrt{0{,}50 \cdot 0{,}50 / 400}} = \frac{0{,}06}{\sqrt{0{,}000625}} = \frac{0{,}06}{0{,}025} = 2{,}4` },
-          { text: `Kritischer Wert (rechtsseitig, $\alpha = 0{,}01$): $z_{0{,}99} = 2{,}326$.`, eq: String.raw`z = 2{,}4 > 2{,}326 \implies H_0 \text{ ablehnen}` },
-          { text: `p-Wert: $P(Z > 2{,}4) = 1 - \Phi(2{,}4)$.`, eq: String.raw`p = 1 - 0{,}9918 = 0{,}0082 < 0{,}01` }
+          { text: String.raw`Kritischer Wert (rechtsseitig, $\alpha = 0{,}01$): $z_{0{,}99} = 2{,}326$.`, eq: String.raw`z = 2{,}4 > 2{,}326 \implies H_0 \text{ ablehnen}` },
+          { text: String.raw`p-Wert: $P(Z > 2{,}4) = 1 - \Phi(2{,}4)$.`, eq: String.raw`p = 1 - 0{,}9918 = 0{,}0082 < 0{,}01` }
         ],
         result: String.raw`$H_0$ wird auf dem $1\%$-Niveau abgelehnt. Es gibt hochsignifikante Evidenz, dass die Zustimmung zu Partei A über $50\%$ liegt.`
       },
       {
         text: String.raw`Erklären Sie die Beziehung zwischen dem z-Test und dem $95\%$-Konfidenzintervall. Wenn $\mu_0$ im $95\%$-KI liegt, was folgt für den zweiseitigen z-Test bei $\alpha = 0{,}05$?`,
         steps: [
-          { text: `$95\%$-KI bei bekanntem $\sigma$:`, eq: String.raw`\left[\bar{x} - 1{,}96\frac{\sigma}{\sqrt{n}};\; \bar{x} + 1{,}96\frac{\sigma}{\sqrt{n}}\right]` },
-          { text: `Äquivalenz: $\mu_0$ liegt im KI $\iff |z| \leq 1{,}96$.`, eq: String.raw`\left|\frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}\right| \leq 1{,}96 \iff \mu_0 \in \text{KI}` },
+          { text: String.raw`$95\%$-KI bei bekanntem $\sigma$:`, eq: String.raw`\left[\bar{x} - 1{,}96\frac{\sigma}{\sqrt{n}};\; \bar{x} + 1{,}96\frac{\sigma}{\sqrt{n}}\right]` },
+          { text: String.raw`Äquivalenz: $\mu_0$ liegt im KI $\iff |z| \leq 1{,}96$.`, eq: String.raw`\left|\frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}\right| \leq 1{,}96 \iff \mu_0 \in \text{KI}` },
           { text: `Schlussfolgerung:`, eq: String.raw`\mu_0 \in \text{KI}_{95\%} \implies |z| \leq 1{,}96 \implies H_0 \text{ nicht ablehnen bei } \alpha = 0{,}05` }
         ],
         result: String.raw`KI und zweiseitiger Test sind formal äquivalent: $H_0$ wird genau dann nicht abgelehnt, wenn $\mu_0$ im KI liegt. Diese Dualität gilt allgemein und erlaubt, aus einem KI direkt auf die Testentscheidung zu schließen.`
@@ -998,17 +998,17 @@ export const CONTENT = {
         text: String.raw`Eine historische Datenreihe zeigt, dass Tagesrenditen einer Aktie normalverteilt sind mit bekanntem $\sigma = 1{,}5\%$. Im letzten Monat ($n=20$ Handelstage) betrug $\bar{x} = 0{,}3\%$ täglich. Testen Sie $H_0: \mu = 0$ (kein Trend) gegen $H_1: \mu \neq 0$ bei $\alpha = 0{,}05$.`,
         steps: [
           { text: `z-Statistik:`, eq: String.raw`z = \frac{0{,}3 - 0}{1{,}5/\sqrt{20}} = \frac{0{,}3}{1{,}5/4{,}472} = \frac{0{,}3}{0{,}3354} \approx 0{,}894` },
-          { text: `Kritischer Wert: $z_{0{,}975} = 1{,}96$.`, eq: String.raw`|z| = 0{,}894 < 1{,}96 \implies H_0 \text{ nicht ablehnen}` },
-          { text: `p-Wert: $P(|Z| > 0{,}894) \approx 2(1-0{,}814) = 0{,}372$.`, eq: String.raw`p \approx 0{,}37 \gg 0{,}05 \implies \text{kein signifikanter Trend}` }
+          { text: String.raw`Kritischer Wert: $z_{0{,}975} = 1{,}96$.`, eq: String.raw`|z| = 0{,}894 < 1{,}96 \implies H_0 \text{ nicht ablehnen}` },
+          { text: String.raw`p-Wert: $P(|Z| > 0{,}894) \approx 2(1-0{,}814) = 0{,}372$.`, eq: String.raw`p \approx 0{,}37 \gg 0{,}05 \implies \text{kein signifikanter Trend}` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Die beobachtete durchschnittliche Tagesrendite von $0{,}3\%$ ist statistisch nicht von null verschieden — sie könnte rein zufällig entstanden sein. Bei $n = 20$ Tagen ist die Teststärke für kleine Effekte begrenzt.`
       },
       {
         text: String.raw`Testauswahl-Fall: $\sigma$ ist unbekannt, $n=18$, die Daten wirken annähernd normal. Warum ist hier der t-Test die saubere Standardwahl und wann wird z als Approximation vertretbar?`,
         steps: [
-          { text: `Bei unbekannter Populationsstreuung wird $\sigma$ durch $s$ ersetzt; die Teststatistik folgt dann t- statt z-Logik.`, eq: null },
-          { text: `Bei kleinem/mittlerem $n$ ist dieser Unterschied substanziell, da die t-Verteilung dickere Ränder hat.`, eq: null },
-          { text: `z-Approximation wird mit wachsendem $n$ vertretbar, weil sich t gegen z annähert.`, eq: String.raw`t_{\nu}\to z \text{ für } \nu\to\infty` }
+          { text: String.raw`Bei unbekannter Populationsstreuung wird $\sigma$ durch $s$ ersetzt; die Teststatistik folgt dann t- statt z-Logik.`, eq: null },
+          { text: String.raw`Bei kleinem/mittlerem $n$ ist dieser Unterschied substanziell, da die t-Verteilung dickere Ränder hat.`, eq: null },
+          { text: String.raw`z-Approximation wird mit wachsendem $n$ vertretbar, weil sich t gegen z annähert.`, eq: String.raw`t_{\nu}\to z \text{ für } \nu\to\infty` }
         ],
         result: String.raw`Prüfungsregel: unbekanntes $\sigma$ $\Rightarrow$ t-Test als Default. z nur mit klarer Begründung (bekanntes $\sigma$ oder sehr großes $n$).`
       }
@@ -1039,7 +1039,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Unverbunden vs. verbunden:</strong> Wird eine Paarstruktur ignoriert und stattdessen ein unverbundener Test durchgeführt, verliert man die Kontrolle über individuelle Unterschiede. Der verbundene Test hat bei echter Paarung mehr Teststärke.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Unverbunden vs. verbunden:</strong> Wird eine Paarstruktur ignoriert und stattdessen ein unverbundener Test durchgeführt, verliert man die Kontrolle über individuelle Unterschiede. Der verbundene Test hat bei echter Paarung mehr Teststärke.</div>
     </div>
     `,
     formeln: [
@@ -1068,7 +1068,7 @@ export const CONTENT = {
         steps: [
           { text: `Standardfehler der Differenz:`, eq: String.raw`SE = \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}} = \sqrt{\frac{9}{10}+\frac{16}{12}} = \sqrt{0{,}9+1{,}333} = \sqrt{2{,}233} \approx 1{,}494` },
           { text: `t-Statistik:`, eq: String.raw`t = \frac{25-22}{1{,}494} = \frac{3}{1{,}494} \approx 2{,}007` },
-          { text: `Entscheidung: $|t| = 2{,}007 < 2{,}09 = t_{krit}$.`, eq: String.raw`|t| < t_{krit} \implies H_0: \mu_1 = \mu_2 \text{ nicht ablehnen}` }
+          { text: String.raw`Entscheidung: $|t| = 2{,}007 < 2{,}09 = t_{krit}$.`, eq: String.raw`|t| < t_{krit} \implies H_0: \mu_1 = \mu_2 \text{ nicht ablehnen}` }
         ],
         result: String.raw`$H_0$ kann auf dem $5\%$-Niveau nicht abgelehnt werden. Die Differenz $\bar{x}_1 - \bar{x}_2 = 3$ ist nicht signifikant — allerdings liegt $t$ knapp unter dem kritischen Wert, sodass ein größerer Stichprobenumfang möglicherweise zur Ablehnung führen würde.`
       },
@@ -1078,7 +1078,7 @@ export const CONTENT = {
           { text: `Mittelwert der Differenzen:`, eq: String.raw`\bar{d} = \frac{5+3+8+2+6+4+7+1}{8} = \frac{36}{8} = 4{,}5` },
           { text: `Standardabweichung der Differenzen ($s_d$):`, eq: String.raw`s_d^2 = \frac{\sum(d_i-\bar{d})^2}{7} = \frac{(0{,}5)^2+(-1{,}5)^2+(3{,}5)^2+(-2{,}5)^2+(1{,}5)^2+(-0{,}5)^2+(2{,}5)^2+(-3{,}5)^2}{7} = \frac{42}{7} = 6 \implies s_d \approx 2{,}449` },
           { text: `t-Statistik:`, eq: String.raw`t = \frac{4{,}5}{2{,}449/\sqrt{8}} = \frac{4{,}5}{0{,}866} \approx 5{,}20` },
-          { text: `Entscheidung: $|t| = 5{,}20 > 2{,}365$.`, eq: String.raw`H_0: \mu_d = 0 \text{ ablehnen} \implies \text{Training senkt Blutdruck signifikant}` }
+          { text: String.raw`Entscheidung: $|t| = 5{,}20 > 2{,}365$.`, eq: String.raw`H_0: \mu_d = 0 \text{ ablehnen} \implies \text{Training senkt Blutdruck signifikant}` }
         ],
         result: String.raw`$H_0$ wird abgelehnt. Das Training hat eine statistisch signifikante blutdrucksenkende Wirkung ($t \approx 5{,}2$, $p < 0{,}01$). Der verbundene Test ist hier korrekt, da dieselben Patienten gemessen wurden.`
       },
@@ -1086,7 +1086,7 @@ export const CONTENT = {
         text: String.raw`F-Test auf Varianzhomogenität: Gruppe 1 ($n_1=11$, $s_1^2=24$), Gruppe 2 ($n_2=9$, $s_2^2=8$). Testen Sie $H_0: \sigma_1^2 = \sigma_2^2$ zweiseitig bei $\alpha=0{,}10$. Kritische Werte: $F_{10,8;\,0{,}95} = 3{,}35$ (obere Schranke).`,
         steps: [
           { text: `F-Statistik (größere durch kleinere Varianz):`, eq: String.raw`F = \frac{s_1^2}{s_2^2} = \frac{24}{8} = 3{,}0` },
-          { text: `Zweiseitiger Test: Obere Grenze $F_{0{,}95} = 3{,}35$.`, eq: String.raw`F = 3{,}0 < 3{,}35 \implies H_0 \text{ nicht ablehnen}` }
+          { text: String.raw`Zweiseitiger Test: Obere Grenze $F_{0{,}95} = 3{,}35$.`, eq: String.raw`F = 3{,}0 < 3{,}35 \implies H_0 \text{ nicht ablehnen}` }
         ],
         result: String.raw`Die Varianzen unterscheiden sich nicht signifikant auf dem $10\%$-Niveau ($F = 3{,}0 < 3{,}35$). Der Pooled-t-Test wäre daher gerechtfertigt. Beachte: Der F-Test ist selbst nicht robust gegenüber Normalverteilungsverletzungen — bei Zweifeln besser Levene-Test.`
       },
@@ -1095,7 +1095,7 @@ export const CONTENT = {
         steps: [
           { text: `Gepoolte Varianz:`, eq: String.raw`s_p^2 = \frac{14 \cdot 64 + 14 \cdot 100}{28} = \frac{896+1400}{28} = \frac{2296}{28} = 82 \implies s_p = \sqrt{82} \approx 9{,}055` },
           { text: `t-Statistik:`, eq: String.raw`t = \frac{72-68}{9{,}055\sqrt{1/15+1/15}} = \frac{4}{9{,}055 \cdot 0{,}3651} = \frac{4}{3{,}307} \approx 1{,}209` },
-          { text: `Entscheidung: $|t| = 1{,}209 < 2{,}048$.`, eq: String.raw`H_0: \mu_A = \mu_B \text{ nicht ablehnen bei } \alpha = 0{,}05` }
+          { text: String.raw`Entscheidung: $|t| = 1{,}209 < 2{,}048$.`, eq: String.raw`H_0: \mu_A = \mu_B \text{ nicht ablehnen bei } \alpha = 0{,}05` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Trotz der Differenz von $4$ Punkten ist der Unterschied statistisch nicht signifikant — die Streuung innerhalb der Kurse ist zu groß. Für einen machtstarken Test wäre ein größerer Stichprobenumfang nötig.`
       },
@@ -1103,7 +1103,7 @@ export const CONTENT = {
         text: String.raw`Testauswahl-Entscheidung: Vorher/Nachher-Messung bei denselben Personen, deutliche individuelle Baseline-Unterschiede. Welcher Test ist korrekt und warum ist ein unverbundener Test hier ein typischer Trap?`,
         steps: [
           { text: `Bei denselben Personen liegt eine Paarstruktur vor; analysiert werden Differenzen pro Person.`, eq: String.raw`d_i = x_{\text{vor},i} - x_{\text{nach},i}` },
-          { text: `Korrekt ist daher der verbundene t-Test auf $\bar d$.`, eq: String.raw`t = \frac{\bar d}{s_d/\sqrt{n}}` },
+          { text: String.raw`Korrekt ist daher der verbundene t-Test auf $\bar d$.`, eq: String.raw`t = \frac{\bar d}{s_d/\sqrt{n}}` },
           { text: `Ein unverbundener Test ignoriert die Paarinformation und bläht die Fehlervarianz.`, eq: null }
         ],
         result: String.raw`Der verbundene Test ist methodisch richtig und meist stärker. "Gleiche Personen, aber unverbundener Test" ist eine klassische Klausurfalle.`
@@ -1130,7 +1130,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei klaren Verletzungen darf der F-Test nicht blind weitergelesen werden; zuerst müssen Annahmenproblem und geeignete Alternative sauber begründet werden.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei klaren Verletzungen darf der F-Test nicht blind weitergelesen werden; zuerst müssen Annahmenproblem und geeignete Alternative sauber begründet werden.</div>
     </div>
     `,
     formeln: [
@@ -1157,17 +1157,17 @@ export const CONTENT = {
       {
         text: String.raw`Drei Gruppen: A ($n_A=4$, $\bar{x}_A=10$), B ($n_B=4$, $\bar{x}_B=14$), C ($n_C=4$, $\bar{x}_C=12$). Gesamtmittelwert $\bar{x}=12$. $SSW = 24$. Berechnen Sie $SSB$, $F$ und entscheiden Sie bei $\alpha=0{,}05$ ($F_{krit}(2,9)=4{,}26$).`,
         steps: [
-          { text: `$SSB$ berechnen:`, eq: String.raw`SSB = \sum_j n_j(\bar{x}_j - \bar{x})^2 = 4(10-12)^2 + 4(14-12)^2 + 4(12-12)^2 = 16+16+0 = 32` },
+          { text: String.raw`$SSB$ berechnen:`, eq: String.raw`SSB = \sum_j n_j(\bar{x}_j - \bar{x})^2 = 4(10-12)^2 + 4(14-12)^2 + 4(12-12)^2 = 16+16+0 = 32` },
           { text: `Mittlere Quadratsummen:`, eq: String.raw`MSB = \frac{32}{k-1} = \frac{32}{2} = 16 \quad MSW = \frac{24}{N-k} = \frac{24}{9} = 2{,}667` },
           { text: `F-Statistik:`, eq: String.raw`F = \frac{16}{2{,}667} \approx 6{,}0` },
-          { text: `Entscheidung: $F = 6{,}0 > 4{,}26$.`, eq: String.raw`H_0: \mu_A = \mu_B = \mu_C \text{ ablehnen} \implies \text{mind. eine Gruppe unterscheidet sich}` }
+          { text: String.raw`Entscheidung: $F = 6{,}0 > 4{,}26$.`, eq: String.raw`H_0: \mu_A = \mu_B = \mu_C \text{ ablehnen} \implies \text{mind. eine Gruppe unterscheidet sich}` }
         ],
         result: String.raw`$F \approx 6{,}0 > F_{krit} = 4{,}26$: $H_0$ wird abgelehnt. Es gibt signifikante Unterschiede zwischen den Gruppen. Ein Post-hoc-Test (z.B. Tukey) würde zeigen, dass B sich von A unterscheidet.`
       },
       {
         text: String.raw`Erläutern Sie das Problem der multiplen Vergleiche. Wenn man 3 Gruppen paarweise vergleicht (3 Tests), wie groß ist die familienweise Fehlerrate, wenn jeder einzelne Test $\alpha = 0{,}05$ hat? Welche Korrektur wäre angemessen?`,
         steps: [
-          { text: `Anzahl paarweiser Vergleiche bei $k=3$ Gruppen: $\binom{3}{2}$.`, eq: String.raw`\binom{3}{2} = 3 \text{ Tests}` },
+          { text: String.raw`Anzahl paarweiser Vergleiche bei $k=3$ Gruppen: $\binom{3}{2}$.`, eq: String.raw`\binom{3}{2} = 3 \text{ Tests}` },
           { text: `Familienweiser Fehler 1. Art (Bonferroni-Approximation):`, eq: String.raw`\alpha_{FW} = 1 - (1-\alpha)^m = 1 - (0{,}95)^3 = 1 - 0{,}857 = 0{,}143` },
           { text: `Bonferroni-Korrektur: Adjustiertes Niveau pro Test.`, eq: String.raw`\alpha_{adj} = \frac{\alpha}{m} = \frac{0{,}05}{3} \approx 0{,}017` }
         ],
@@ -1176,8 +1176,8 @@ export const CONTENT = {
       {
         text: String.raw`ANOVA-Tabelle ausfüllen: $k=4$ Gruppen, $N=20$ Beobachtungen insgesamt. $SSB = 60$, $SST = 140$. Berechnen Sie alle fehlenden Größen und den F-Wert ($F_{krit}(3,16) = 3{,}24$ bei $\alpha = 0{,}05$).`,
         steps: [
-          { text: `$SSW$ aus $SST = SSB + SSW$:`, eq: String.raw`SSW = SST - SSB = 140 - 60 = 80` },
-          { text: `Freiheitsgrade: $df_B = k-1$, $df_W = N-k$.`, eq: String.raw`df_B = 3, \quad df_W = 16` },
+          { text: String.raw`$SSW$ aus $SST = SSB + SSW$:`, eq: String.raw`SSW = SST - SSB = 140 - 60 = 80` },
+          { text: String.raw`Freiheitsgrade: $df_B = k-1$, $df_W = N-k$.`, eq: String.raw`df_B = 3, \quad df_W = 16` },
           { text: `Mittlere Quadratsummen:`, eq: String.raw`MSB = 60/3 = 20 \quad MSW = 80/16 = 5` },
           { text: `F-Wert und Entscheidung:`, eq: String.raw`F = 20/5 = 4{,}0 > 3{,}24 \implies H_0 \text{ ablehnen}` }
         ],
@@ -1189,7 +1189,7 @@ export const CONTENT = {
           { text: `Gruppenmsittelwerte:`, eq: String.raw`\bar{x}_A = 11, \quad \bar{x}_B = 15, \quad \bar{x}_C = 12 \quad \bar{x}_{ges} = \frac{55+75+60}{15} = \frac{190}{15} \approx 12{,}67` },
           { text: `$SSB$:`, eq: String.raw`SSB = 5(11-12{,}67)^2 + 5(15-12{,}67)^2 + 5(12-12{,}67)^2 = 5 \cdot 2{,}789 + 5 \cdot 5{,}429 + 5 \cdot 0{,}449 \approx 43{,}3` },
           { text: `$SSW$ (Abweichungen innerhalb jeder Gruppe):`, eq: String.raw`SSW_A = (10-11)^2+(12-11)^2+(11-11)^2+(13-11)^2+(9-11)^2 = 1+1+0+4+4 = 10` },
-          { text: `$SSW_B = (14-15)^2+\ldots+(13-15)^2 = 10$, $SSW_C = 10$. Gesamt:`, eq: String.raw`SSW = 10+10+10 = 30` }
+          { text: String.raw`$SSW_B = (14-15)^2+\ldots+(13-15)^2 = 10$, $SSW_C = 10$. Gesamt:`, eq: String.raw`SSW = 10+10+10 = 30` }
         ],
         result: String.raw`$SSB \approx 43{,}3$, $SSW = 30$. $F = (43{,}3/2)/(30/12) = 21{,}65/2{,}5 = 8{,}66 > F_{krit}(2,12) \approx 3{,}89$: Die drei Werbestrategien unterscheiden sich signifikant in ihrem Effekt auf den Umsatz.`
       }
@@ -1219,7 +1219,7 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Bandbreite schlägt Kernform</h3>
       <p>Der kursrelevante Steuerparameter ist die Bandbreite $b$. Kleine Bandbreiten machen die Schätzung sehr zackig und ausreißerempfindlich; große Bandbreiten glätten stark und können echte Struktur verdecken.</p>
-      <div class="warn-box"><strong>Glättungsfalle:</strong> Zu kleines $b$ verkauft Stichprobenrauschen als “echte Struktur”. Zu großes $b$ bügelt lokale Unterschiede weg. Für die Klausur ist meist wichtiger, die Wirkung von $b$ zu lesen, als eine bestimmte Kernfunktion auswendig aufzuzählen.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Glättungsfalle:</strong> Zu kleines $b$ verkauft Stichprobenrauschen als “echte Struktur”. Zu großes $b$ bügelt lokale Unterschiede weg. Für die Klausur ist meist wichtiger, die Wirkung von $b$ zu lesen, als eine bestimmte Kernfunktion auswendig aufzuzählen.</div>
     </div>
     `,
     formeln: [
@@ -1288,7 +1288,7 @@ CONTENT.schaetzen_verfahren = {
     </div>
     <div class="section-block">
       <h3>Klausurzugriff</h3>
-      <div class="warn-box"><strong>Methodenwahl ist Prüfungsstoff</strong> Wenn die Aufgabe nach Konstruktion oder Güte fragt, reicht ein Intervall nicht. Dann musst du Schätzverfahren und Qualitätsmaß aktiv voneinander trennen.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodenwahl ist Prüfungsstoff</strong> Wenn die Aufgabe nach Konstruktion oder Güte fragt, reicht ein Intervall nicht. Dann musst du Schätzverfahren und Qualitätsmaß aktiv voneinander trennen.</div>
       <p>Merksatz: <strong>Verfahren</strong> beantwortet “Wie entsteht $\hat\theta$?”, <strong>Eigenschaft</strong> beantwortet “Wie gut ist $\hat\theta$?”.</p>
     </div>
   `,
@@ -1380,7 +1380,7 @@ CONTENT.schaetzen_eigenschaften_intervalle = {
     <div class="section-block">
       <h3>Interpretationsfalle Konfidenzintervall</h3>
       <p>Ein 95%-Konfidenzintervall bedeutet: <strong>Die Methode</strong> erzeugt in 95% der Wiederholungsstichproben Intervalle, die den wahren Parameter enthalten. Es bedeutet nicht, dass der feste Parameter mit 95% Wahrscheinlichkeit im konkreten Intervall liegt.</p>
-      <div class="warn-box"><strong>Breites Intervall</strong> Ein breites KI ist nicht “schlechter gerechnet”, sondern Ausdruck hoher Unsicherheit oder kleiner Stichprobe.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Breites Intervall</strong> Ein breites KI ist nicht “schlechter gerechnet”, sondern Ausdruck hoher Unsicherheit oder kleiner Stichprobe.</div>
     </div>
     <div class="section-block">
       <h3>Dualität von Intervall und Test</h3>
@@ -1479,7 +1479,7 @@ CONTENT.regression_schaetzung_inferenz = {
     <div class="section-block">
       <h3>R², Signifikanz und Relevanz</h3>
       <p>$R^2$ misst den erklärten Varianzanteil in der Stichprobe. Es sagt nichts darüber, ob der Effekt groß, kausal oder ökonomisch bedeutsam ist. Eine winzige Steigung kann bei großem $n$ signifikant werden, aber praktisch irrelevant bleiben.</p>
-      <div class="warn-box"><strong>Kausalitätsfalle</strong> Weder ein signifikanter Koeffizient noch ein hohes $R^2$ beweisen einen kausalen Effekt. Design, Theorie und mögliche Drittvariablen bleiben entscheidend.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Kausalitätsfalle</strong> Weder ein signifikanter Koeffizient noch ein hohes $R^2$ beweisen einen kausalen Effekt. Design, Theorie und mögliche Drittvariablen bleiben entscheidend.</div>
     </div>
     <div class="section-block">
       <h3>Klausurzugriff</h3>
@@ -1529,9 +1529,9 @@ CONTENT.regression_schaetzung_inferenz = {
     {
       text: String.raw`Ein Koeffizient $\hat{\beta}_1 = 0{,}02$ ist auf dem 1%-Niveau signifikant. Erläutern Sie, warum “signifikant” und “wirtschaftlich relevant” hier sauber getrennt werden müssen.`,
       steps: [
-        { text: `Signifikanz beantwortet die Nullfrage $H_0:\beta_1=0$.`, eq: null },
+        { text: String.raw`Signifikanz beantwortet die Nullfrage $H_0:\beta_1=0$.`, eq: null },
         { text: `Relevanz fragt nach der Größe des Effekts in Originaleinheiten.`, eq: null },
-        { text: `Bei großem $n$ können sehr kleine Effekte hochsignifikant werden.`, eq: null }
+        { text: String.raw`Bei großem $n$ können sehr kleine Effekte hochsignifikant werden.`, eq: null }
       ],
       result: String.raw`Prüfungssicher ist: “Der Effekt ist statistisch signifikant, aber mit 0,02 pro x-Einheit möglicherweise praktisch klein.”`
     },
@@ -1577,7 +1577,7 @@ CONTENT.regression_diagnostik_prognose = {
     </div>
     <div class="section-block">
       <h3>Prüfungsrelevante Konsequenz</h3>
-      <div class="warn-box"><strong>Diagnostikproblem heißt nicht sofort “alles falsch”</strong> Häufig bleibt die Schätzung nutzbar, aber Standardfehler, Testaussagen oder Prognosen müssen robuster abgesichert oder vorsichtiger interpretiert werden.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Diagnostikproblem heißt nicht sofort “alles falsch”</strong> Häufig bleibt die Schätzung nutzbar, aber Standardfehler, Testaussagen oder Prognosen müssen robuster abgesichert oder vorsichtiger interpretiert werden.</div>
       <p>Die sichere Klausurantwort nennt immer: <strong>welches Muster sichtbar ist</strong>, <strong>welche Warnung daraus folgt</strong> und <strong>welche Inferenzgrenze sich daraus ergibt</strong>.</p>
     </div>
   `,
@@ -1614,7 +1614,7 @@ CONTENT.regression_diagnostik_prognose = {
     {
       text: String.raw`Konfidenz- vs. Prognoseintervall: Für dasselbe $x_0$ liefert ein Modell ein 95%-Konfidenzintervall für den Erwartungswert und ein 95%-Prognoseintervall für eine Einzelbeobachtung. Welches Intervall ist breiter und warum?`,
       steps: [
-        { text: `CI zielt auf den Mittelwert $E[Y|x_0]$.`, eq: String.raw`CI \to E[Y|x_0]` },
+        { text: String.raw`CI zielt auf den Mittelwert $E[Y|x_0]$.`, eq: String.raw`CI \to E[Y|x_0]` },
         { text: `PI enthält zusätzlich die zufällige Einzelstreuung neuer Beobachtungen.`, eq: String.raw`PI \to Y_{neu}` },
         { text: `Folgerung:`, eq: String.raw`PI \text{ ist stets breiter als } CI` }
       ],

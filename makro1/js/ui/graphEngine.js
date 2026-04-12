@@ -421,7 +421,10 @@ class GraphEngine {
       const lh = 20;
       const swatchW = 20;
       const textX = swatchW + 6;
-      const rightMargin = (typeof margin === 'number') ? margin : 14;
+      const legendConfig = typeof margin === 'number'
+        ? { rightMargin: margin }
+        : (margin || {});
+      const rightMargin = legendConfig.rightMargin ?? 14;
       const padX = 8, padY = 6;
 
       ctx.font = `13px ${col.fontBody}`;
@@ -433,7 +436,7 @@ class GraphEngine {
       const blockW = textX + maxW + 4;
       let x = w - blockW - rightMargin;
       if (x < 20) x = 20;
-      const y = 46;
+      const y = legendConfig.top ?? 46;
 
       ctx.save();
       ctx.textBaseline = 'middle';

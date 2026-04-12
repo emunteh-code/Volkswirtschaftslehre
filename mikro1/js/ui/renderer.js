@@ -1,4 +1,5 @@
 import { createRenderer } from '../../../assets/js/portal-core/ui/renderer.js';
+import { getWarningSystemData, renderTaskWarningCard } from '../../../assets/js/portal-core/ui/warningSystem.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { CHAPTERS, CONTENT } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
@@ -344,7 +345,7 @@ function decorateSemanticMathSurfaces() {
     '#content .mastery-item',
     '#content .mastery-bar-label',
     '#rightPanel .rp-conn',
-    '#rightPanel .rp-mistake .fix',
+    '#rightPanel .rp-mistake.warning-card .warning-card-body',
     '#rightPanel .rp-f-name',
     '#sidebar .nav-item > span:not(.num):not(.mastery)'
   ].forEach((selector) => {
@@ -391,12 +392,28 @@ function markRenderSettled(isSettled) {
 }
 
 function extractTheorySignals(entry) {
-  if (!entry?.theorie || typeof DOMParser === 'undefined') {
-    return { sections: [], warnings: [] };
+  const warningData = getWarningSystemData(entry);
+  if (!warningData.theoryHtml || typeof DOMParser === 'undefined') {
+    return {
+      sections: [],
+      warnings: warningData.allWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      })),
+      inlineWarnings: warningData.inlineWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      })),
+      railWarnings: warningData.railWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      })),
+      theoryHtml: warningData.theoryHtml
+    };
   }
 
   try {
-    const doc = new DOMParser().parseFromString(`<div>${entry.theorie}</div>`, 'text/html');
+    const doc = new DOMParser().parseFromString(`<div>${warningData.theoryHtml}</div>`, 'text/html');
     const sections = Array.from(doc.querySelectorAll('.section-block'))
       .map((section) => {
         const heading = section.querySelector('h3')?.textContent?.trim();
@@ -405,19 +422,36 @@ function extractTheorySignals(entry) {
         return { heading, paragraph };
       })
       .filter(Boolean);
-    const warnings = Array.from(doc.querySelectorAll('.warn-box'))
-      .map((warning) => {
-        const strong = warning.querySelector('strong');
-        const label = strong?.textContent?.trim() || 'Typischer Fehler';
-        if (strong) strong.remove();
-        const body = warning.textContent?.trim();
-        if (!body) return null;
-        return { label, body };
-      })
-      .filter(Boolean);
-    return { sections, warnings };
+    const warnings = warningData.allWarnings.map((warning) => ({
+      label: warning.title,
+      body: warning.bodyText
+    }));
+    const inlineWarnings = warningData.inlineWarnings.map((warning) => ({
+      label: warning.title,
+      body: warning.bodyText
+    }));
+    const railWarnings = warningData.railWarnings.map((warning) => ({
+      label: warning.title,
+      body: warning.bodyText
+    }));
+    return { sections, warnings, inlineWarnings, railWarnings, theoryHtml: warningData.theoryHtml };
   } catch {
-    return { sections: [], warnings: [] };
+    return {
+      sections: [],
+      warnings: warningData.allWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      })),
+      inlineWarnings: warningData.inlineWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      })),
+      railWarnings: warningData.railWarnings.map((warning) => ({
+        label: warning.title,
+        body: warning.bodyText
+      })),
+      theoryHtml: warningData.theoryHtml
+    };
   }
 }
 
@@ -476,6 +510,7 @@ ${(task.steps || []).map((step, stepIndex) => `
 ${step.eq ? `<div class="math-block">${step.eq}</div>` : ''}
 </div>
 </div>`).join('')}
+${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), 'Klausurhinweis') : ''}
 <div class="result-badge">Ergebnis: ${task.result || 'Arbeite das Ergebnis formal zu Ende aus.'}</div>`
   })).join('');
 }
@@ -485,7 +520,6 @@ function buildExamDrills(chapter, entry, intuition, signals) {
   const formula = entry?.formeln?.[0];
   const section = signals.sections[0];
   const secondSection = signals.sections[1];
-  const warning = signals.warnings[0];
   const tasks = Array.isArray(entry?.aufgaben) ? entry.aufgaben : [];
   const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
 
@@ -563,27 +597,13 @@ ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Lösungslogik</span>
 <ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li>${step.text || ''}${step.eq ? `<div class="math-block">${step.eq}</div>` : ''}</li>`).join('')}</ol>
 </div>
+${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), 'Klausurhinweis') : ''}
 <div class="exam-drill-line">
 <span class="exam-drill-key">Prüfungsresultat</span>
 <div class="result-badge">${task.result || 'Arbeite das Ergebnis formal aus.'}</div>
 </div>`
     });
   });
-
-  if (warning) {
-    drills.push({
-      tag: 'Fehlerkontrolle',
-      question: `Welcher typische Fehler kostet bei "${chapter.title}" schnell Punkte und wie vermeidest du ihn?`,
-      answer: `<div class="exam-drill-line">
-<span class="exam-drill-key">Fehlerbild</span>
-<div class="exam-drill-copy"><strong>${renderDecodedText(warning.label)}:</strong> ${renderSemanticPlainText(warning.body)}</div>
-</div>
-<div class="exam-drill-line">
-<span class="exam-drill-key">Saubere Gegenregel</span>
-<div class="exam-drill-copy">${intuition?.bridge || entry?.motivation || `${chapter.title} muss immer über die zentrale Definition und den passenden formalen Anker abgesichert werden.`}</div>
-</div>`
-    });
-  }
 
   if (secondSection) {
     drills.push({
@@ -689,8 +709,7 @@ function buildMicroIntuitionPanel(conceptId) {
   const formula = entry?.formeln?.[0];
   const recognitionItems = [
     ...(Array.isArray(intuition.exam) ? intuition.exam.slice(0, 2).map((pattern) => `Wenn ${pattern.if}, dann ${pattern.then}.`) : []),
-    ...(signals.sections[0] ? [`Achte auf ${signals.sections[0].heading.toLowerCase()}: ${signals.sections[0].paragraph}`] : []),
-    ...(signals.warnings[0] ? [`Vermeide ${signals.warnings[0].label.toLowerCase()}: ${signals.warnings[0].body}`] : [])
+    ...(signals.sections[0] ? [`Achte auf ${signals.sections[0].heading.toLowerCase()}: ${signals.sections[0].paragraph}`] : [])
   ].slice(0, 4);
 
   return `<div class="panel active mikro1-intuition">
@@ -727,14 +746,10 @@ ${recognitionItems.map((item) => `<li>${renderSemanticPlainText(item, { stripMar
 <h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
 <p class="intuition-bridge-copy">${intuition.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
 </div>
-${signals.sections[1] || signals.warnings[0] || (Array.isArray(intuition.exam) && intuition.exam.length) ? `<div class="intuition-detail-list">
+${signals.sections[1] || (Array.isArray(intuition.exam) && intuition.exam.length) ? `<div class="intuition-detail-list">
 ${signals.sections[1] ? `<div class="intuition-detail">
 <span class="intuition-detail-label">Theoretische Vertiefung</span>
 <div class="intuition-detail-copy"><strong>${renderDecodedText(signals.sections[1].heading)}:</strong> ${renderSemanticPlainText(signals.sections[1].paragraph)}</div>
-</div>` : ''}
-${signals.warnings[0] ? `<div class="intuition-detail">
-<span class="intuition-detail-label">Typischer Fehlgriff</span>
-<div class="intuition-detail-copy"><strong>${renderDecodedText(signals.warnings[0].label)}:</strong> ${renderSemanticPlainText(signals.warnings[0].body)}</div>
 </div>` : ''}
 ${renderExamPatterns(intuition)}
 </div>` : ''}

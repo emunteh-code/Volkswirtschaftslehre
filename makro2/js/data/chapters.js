@@ -7,7 +7,7 @@ import { COURSEWORK_TASKS } from './courseworkTasks.js';
 
 const section = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
 const math = (eq) => `<div class="math-block">${eq}</div>`;
-const warn = (title, body) => `<div class="warn-box"><strong>${title}:</strong> ${body}</div>`;
+const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}:</strong> ${body}</div>`;
 const cloneTask = (task) => ({
   ...task,
   steps: Array.isArray(task?.steps) ? task.steps.map((step) => ({ ...step })) : []

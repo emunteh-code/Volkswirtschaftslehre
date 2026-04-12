@@ -102,28 +102,228 @@ body.light-mode #topbar {
   box-shadow: var(--shadow-md);
 }
 
-/* Warning / Hinweis — real card presence */
-#content .warn-box {
-  background: color-mix(in srgb, var(--sys-red) 5%, var(--card) 95%);
-  border: 1px solid color-mix(in srgb, var(--sys-red) 22%, var(--border) 78%);
+body:not([data-page="landing"]) {
+  --warning-surface: #27161a;
+  --warning-surface-soft: #311b20;
+  --warning-border: rgba(245, 123, 102, 0.34);
+  --warning-title: #ffb4a6;
+  --warning-body: #f3f4f6;
+  --warning-icon-surface: rgba(255, 180, 166, 0.14);
+  --warning-shadow: 0 18px 34px rgba(3, 6, 10, 0.2);
+}
+
+body.light-mode:not([data-page="landing"]) {
+  --warning-surface: #fff6f1;
+  --warning-surface-soft: #fff0e8;
+  --warning-border: #efc1b4;
+  --warning-title: #c55638;
+  --warning-body: #111827;
+  --warning-icon-surface: rgba(197, 86, 56, 0.12);
+  --warning-shadow: 0 12px 28px rgba(125, 53, 33, 0.08);
+}
+
+/* Warning / Trap system — one premium family across inline, rail, and task reveal */
+#content .warn-box.warning-card,
+#content .warning-card {
+  background: var(--warning-surface);
+  border: 1px solid var(--warning-border);
   border-left: none;
-  border-radius: var(--r-md);
-  padding: 18px 22px;
-  box-shadow: var(--shadow-sm);
+  border-radius: 18px;
+  padding: 20px 22px;
+  box-shadow: var(--warning-shadow);
+  display: grid;
+  gap: 10px;
+  color: var(--warning-body);
 }
 
-#content .warn-box strong {
+#content .warn-box.warning-card {
+  margin: 16px 0;
+}
+
+#content .warning-card.warning-card--task {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--warning-surface) 82%, var(--card) 18%);
+  box-shadow: none;
+}
+
+#content .warning-card .warning-card-head,
+#rightPanel .warning-card .warning-card-head,
+.r-practice-pitfalls h4,
+.r-tab-pitfalls h4 {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#content .warning-card .warning-card-icon,
+#rightPanel .warning-card .warning-card-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin-top: 1px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--warning-title);
+  background: var(--warning-icon-surface);
+}
+
+#content .warning-card .warning-card-icon svg,
+#rightPanel .warning-card .warning-card-icon svg {
+  width: 16px;
+  height: 16px;
   display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--sys-red);
-  margin-bottom: 8px;
 }
 
-body.light-mode #content .warn-box {
-  background: color-mix(in srgb, var(--sys-red) 3%, var(--card) 97%);
+#content .warning-card .warning-card-title,
+#rightPanel .warning-card .warning-card-title,
+.r-practice-pitfalls h4,
+.r-tab-pitfalls h4 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--warning-title);
+  margin: 0;
+}
+
+.r-practice-pitfalls h4::before,
+.r-tab-pitfalls h4::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin-top: 1px;
+  border-radius: 999px;
+  background-color: var(--warning-icon-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8.73 2.24l5.21 9.29A1.12 1.12 0 0 1 12.97 13H3.03a1.12 1.12 0 0 1-.97-1.47l5.21-9.29a.82.82 0 0 1 1.46 0Z' fill='%23c55638' fill-opacity='0.18'/%3E%3Cpath d='M8 4.6c.39 0 .7.29.74.67l.01.11-.18 3.55a.57.57 0 0 1-1.14 0L7.25 5.38A.75.75 0 0 1 8 4.6Zm0 5.83a.84.84 0 1 1 0 1.68.84.84 0 0 1 0-1.68Z' fill='%23c55638'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  flex: none;
+}
+
+body:not(.light-mode) .r-practice-pitfalls h4::before,
+body:not(.light-mode) .r-tab-pitfalls h4::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8.73 2.24l5.21 9.29A1.12 1.12 0 0 1 12.97 13H3.03a1.12 1.12 0 0 1-.97-1.47l5.21-9.29a.82.82 0 0 1 1.46 0Z' fill='%23ffb4a6' fill-opacity='0.18'/%3E%3Cpath d='M8 4.6c.39 0 .7.29.74.67l.01.11-.18 3.55a.57.57 0 0 1-1.14 0L7.25 5.38A.75.75 0 0 1 8 4.6Zm0 5.83a.84.84 0 1 1 0 1.68.84.84 0 0 1 0-1.68Z' fill='%23ffb4a6'/%3E%3C/svg%3E");
+}
+
+#content .warning-card .warning-card-body,
+#rightPanel .warning-card .warning-card-body,
+.r-practice-pitfalls li,
+.r-tab-pitfalls li {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--warning-body);
+}
+
+#content .warning-card .warning-card-body strong,
+#rightPanel .warning-card .warning-card-body strong {
+  color: var(--warning-body);
+  font-weight: 600;
+}
+
+#content .warning-card p,
+#content .warning-card ul,
+#content .warning-card li,
+#rightPanel .warning-card p,
+#rightPanel .warning-card ul,
+#rightPanel .warning-card li {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#content .warning-card ul,
+#rightPanel .warning-card ul {
+  padding-left: 1.1rem;
+}
+
+#content .warning-card:hover {
+  background: color-mix(in srgb, var(--warning-surface) 92%, var(--card) 8%);
+}
+
+/* Pass 23 — right-rail „Häufige Fehler“: one premium warning-card family (all modules) */
+#rightPanel .rp-section--mistakes {
+  gap: 12px;
+}
+
+/* Same section-label system as other `.rp-section` headers (no extra warning tint on the label) */
+#rightPanel .rp-section--mistakes > h4 {
+  color: color-mix(in srgb, var(--muted) 86%, var(--text) 14%);
+}
+
+#rightPanel #rpMistakes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card {
+  margin: 0;
+  font-size: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--warning-border);
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-left-color: var(--warning-border);
+  background: var(--warning-surface);
+  box-shadow: none;
+  gap: 12px;
+  color: var(--warning-body);
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card:hover {
+  background: color-mix(in srgb, var(--warning-surface) 93%, var(--card) 7%);
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-head {
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-icon {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  margin-top: 2px;
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--warning-title);
+}
+
+#rightPanel #rpMistakes > .rp-mistake.warning-card .warning-card-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--warning-body);
+}
+
+.r-practice-pitfalls,
+.r-tab-pitfalls {
+  border-radius: 18px;
+  border: 1px solid var(--warning-border);
+  background: var(--warning-surface);
+  box-shadow: var(--warning-shadow);
+  padding: 20px 22px;
+}
+
+.r-practice-pitfalls ul,
+.r-tab-pitfalls ul {
+  margin: 0;
+  padding-left: 1.1rem;
 }
 
 /* Exam + dashboard — secondary weight */
@@ -873,7 +1073,7 @@ body.light-mode #content .exam-drill-solution {
    ============================================================ */
 
 body.light-mode #content .exam-drill-card {
-  border-left-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+  border-left: none;
 }
 
 body.light-mode #tabRow .tab-btn:hover {
@@ -893,10 +1093,11 @@ body.light-mode #content .exam-drill-key {
 }
 
 /* ============================================================
-   PASS 4.1 — LEGAL SCHEMA RENDERING (recht formula fix)
+   PASS 4.1 — SEMANTIC SCHEMA / REFERENCE RENDERING
    ============================================================ */
 
-.legal-schema {
+.legal-schema,
+.semantic-schema {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -909,7 +1110,24 @@ body.light-mode #content .exam-drill-key {
   line-height: 1.5;
 }
 
-.legal-schema__term {
+.semantic-reference {
+  display: grid;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+}
+
+.semantic-reference--pill {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.legal-schema__term,
+.semantic-schema__item,
+.semantic-reference__entry {
   font-weight: 600;
   color: color-mix(in srgb, var(--text) 88%, var(--math-ink) 12%);
   padding: 3px 10px;
@@ -919,30 +1137,58 @@ body.light-mode #content .exam-drill-key {
   white-space: nowrap;
 }
 
-.legal-schema__arrow {
-  font-size: 18px;
-  color: var(--math-ink);
-  font-weight: 300;
-  opacity: 0.85;
+.semantic-reference__entry {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 }
 
-.legal-schema__op {
-  font-size: 16px;
-  font-weight: 600;
+.semantic-reference__note {
+  font-size: 12.5px;
+  font-weight: 500;
   color: var(--muted);
 }
 
-body.light-mode .legal-schema {
+.semantic-schema__connector-wrap {
+  display: inline-grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.semantic-schema__connector-note {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 74%, var(--math-ink) 26%);
+}
+
+.legal-schema__arrow,
+.legal-schema__op,
+.semantic-schema__connector {
+  font-size: 18px;
+  color: var(--math-ink);
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+body.light-mode .legal-schema,
+body.light-mode .semantic-schema,
+body.light-mode .semantic-reference {
   background: color-mix(in srgb, var(--card) 78%, var(--math-soft, transparent) 22%);
 }
 
-body.light-mode .legal-schema__term {
+body.light-mode .legal-schema__term,
+body.light-mode .semantic-schema__item,
+body.light-mode .semantic-reference__entry {
   background: color-mix(in srgb, #fff 78%, var(--math-soft, transparent) 22%);
   border-color: color-mix(in srgb, var(--border) 72%, var(--math-ink) 28%);
 }
 
-/* Formula-card f-eq legal schemas */
-.f-eq .legal-schema {
+/* Formula-card semantic blocks */
+.f-eq .legal-schema,
+.f-eq .semantic-schema,
+.f-eq .semantic-reference {
   padding: 10px 14px;
   border: none;
   border-left: none;
@@ -1027,6 +1273,7 @@ body.light-mode .legal-schema__term {
   border-radius: var(--r-lg);
   padding: 22px 24px;
   border: 1px solid var(--border);
+  border-left: none;
   background: var(--card);
 }
 
@@ -1252,7 +1499,7 @@ body.light-mode #content .problem-card {
 
 body.light-mode #content .exam-drill-card {
   border: 1px solid color-mix(in srgb, var(--border) 82%, var(--accent) 14%);
-  border-left: 3px solid color-mix(in srgb, var(--accent) 50%, var(--math-ink) 50%);
+  border-left: none;
 }
 
 body.light-mode #content .solution-block {
@@ -1300,7 +1547,8 @@ body.light-mode #sidebar .nav-item:hover {
   border-left: 2px solid var(--math-ink);
 }
 
-#content .legal-schema__arrow {
+#content .legal-schema__arrow,
+#content .semantic-schema__connector {
   color: var(--math-ink);
 }
 
@@ -1405,11 +1653,6 @@ body.light-mode #content .graph-interpretation-row {
 
 #rightPanel .rp-formula .rp-f-eq {
   font-size: 13px;
-}
-
-#rightPanel .rp-mistake .fix {
-  font-size: 13px;
-  line-height: 1.55;
 }
 
 /* Graph interpretation labels — scannable */
@@ -1760,23 +2003,60 @@ body.light-mode #content .exam-drill-answer {
   line-height: 1.85;
 }
 
+#content .formula-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
 #content .formula-card {
+  position: relative;
+  display: grid;
+  align-content: start;
   gap: 14px;
+  min-width: 0;
+  overflow: visible;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  border-left: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 98%, var(--math-soft, transparent) 2%), color-mix(in srgb, var(--card) 95%, var(--surface2) 5%));
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+}
+
+body.light-mode #content .formula-card {
+  box-shadow: 0 14px 28px rgba(124, 58, 237, 0.07);
 }
 
 #content .formula-card .f-label {
   font-size: 12px;
+  letter-spacing: 0.08em;
 }
 
 #content .formula-card .f-eq {
+  min-width: 0;
+  display: block;
+  overflow: visible;
   font-size: 1.08em;
   line-height: 1.75;
-  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 64%, var(--math-ink) 36%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface2) 84%, var(--card) 16%), color-mix(in srgb, var(--surface2) 94%, var(--card) 6%));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 #content .formula-card .f-desc {
   font-size: 13.5px;
   line-height: 1.62;
+  min-width: 0;
+}
+
+#content .f-variables {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
 }
 
 #content .f-variables li,
@@ -1790,27 +2070,109 @@ body.light-mode #content .exam-drill-answer {
 }
 
 #content .formula-card.layout-compact {
+  padding: 20px;
+}
+
+#content .formula-card.layout-medium,
+#content .formula-card.layout-schema,
+#content .formula-card.layout-reference {
+  padding: 20px;
+}
+
+#content .formula-card.layout-extended {
+  grid-column: 1 / -1;
+  padding: 20px;
+}
+
+#content .formula-card.layout-compact .f-eq {
+  padding: 18px 20px;
+  text-align: center;
+}
+
+#content .formula-card.layout-medium .f-eq,
+#content .formula-card.layout-schema .f-eq,
+#content .formula-card.layout-reference .f-eq {
   padding: 20px 22px;
 }
 
-#content .formula-card.layout-medium {
+#content .formula-card.layout-extended .f-eq {
   padding: 22px 24px;
-  gap: 14px;
 }
 
-#content .formula-card.layout-schema {
-  padding: 22px 24px;
-  gap: 14px;
+#content .formula-card.layout-extended .f-desc,
+#content .formula-card.layout-extended .f-variables,
+#content .formula-card.layout-extended .f-var-hint {
+  max-width: 70ch;
 }
 
-#content .formula-card.layout-schema .f-eq {
+#content .formula-card .f-eq > .math-block--formula-card,
+#content .formula-card .f-eq > .semantic-schema,
+#content .formula-card .f-eq > .semantic-reference {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
   padding: 0;
   border: none;
   background: transparent;
 }
 
-#content .formula-card.layout-schema .legal-schema {
+#content .formula-card .f-eq > .math-block--formula-card {
+  overflow: visible;
+}
+
+#content .formula-card .f-eq mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-left: none;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+#content .formula-card .f-eq mjx-container[jax="CHTML"][display="false"] {
+  margin: 0 0.08em;
+}
+
+#content .formula-card.layout-compact .f-eq mjx-container[jax="CHTML"][display="true"] {
+  text-align: center;
+}
+
+#content .formula-card.layout-schema .semantic-schema,
+#content .formula-card.layout-reference .semantic-reference,
+#content .formula-card.layout-extended .semantic-reference,
+#content .formula-card.layout-extended .semantic-schema {
   width: 100%;
+}
+
+#content .formula-card .semantic-reference__entry,
+#content .formula-card .semantic-schema__item {
+  min-width: 0;
+}
+
+#content .formula-card .semantic-reference__entry,
+#rightPanel .rp-formula .semantic-reference__entry {
+  width: 100%;
+  white-space: normal;
+  display: grid;
+  align-items: start;
+  gap: 6px;
+}
+
+#content .formula-card .semantic-reference__term,
+#rightPanel .rp-formula .semantic-reference__term,
+#content .formula-card .semantic-schema__item,
+#rightPanel .rp-formula .semantic-schema__item {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#content .formula-card .semantic-reference__note,
+#rightPanel .rp-formula .semantic-reference__note {
+  line-height: 1.58;
+  overflow-wrap: anywhere;
 }
 
 #rightPanel .rp-section {
@@ -1819,7 +2181,14 @@ body.light-mode #content .exam-drill-answer {
 
 #rightPanel .rp-formula {
   padding: 14px 16px;
-  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  border-left: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 96%, var(--math-soft, transparent) 4%), color-mix(in srgb, var(--card) 92%, var(--surface2) 8%));
 }
 
 #rightPanel .rp-formula .rp-f-name {
@@ -1827,17 +2196,380 @@ body.light-mode #content .exam-drill-answer {
 }
 
 #rightPanel .rp-formula .rp-f-eq {
+  min-width: 0;
+  display: block;
   font-size: 14px;
   line-height: 1.58;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 66%, var(--math-ink) 34%);
+  background: color-mix(in srgb, var(--surface2) 88%, var(--card) 12%);
+  overflow: visible;
 }
 
-#rightPanel .rp-formula .rp-f-eq .legal-schema {
+#rightPanel .rp-formula .rp-f-eq > .math-block--sidebar,
+#rightPanel .rp-formula .rp-f-eq > .semantic-schema,
+#rightPanel .rp-formula .rp-f-eq > .semantic-reference {
   width: 100%;
-  padding: 12px 14px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+#rightPanel .rp-formula .rp-f-eq mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-left: none;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+#rightPanel .rp-formula .rp-f-eq .semantic-schema,
+#rightPanel .rp-formula .rp-f-eq .semantic-reference {
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  #content .formula-card.layout-extended {
+    grid-column: auto;
+  }
 }
 
 @media (max-width: 880px) {
   #content .practice-surface-intro {
     grid-template-columns: 1fr;
   }
+
+  #content .formula-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  #content .formula-card,
+  #content .formula-card.layout-medium,
+  #content .formula-card.layout-extended,
+  #content .formula-card.layout-schema,
+  #content .formula-card.layout-reference {
+    padding: 18px;
+  }
+
+  #content .formula-card.layout-compact .f-eq,
+  #content .formula-card.layout-medium .f-eq,
+  #content .formula-card.layout-schema .f-eq,
+  #content .formula-card.layout-reference .f-eq {
+    padding: 18px 20px;
+  }
+
+  #content .formula-card.layout-extended .f-eq {
+    padding: 20px 22px;
+  }
+}
+
+/* ============================================================
+   PASS 14 — Jahresabschluss semantic accounting cards
+   Calm editorial typography; no monospace; minimal chip chrome.
+   Requires body[data-portal-module="jahresabschluss"] (see jahresabschluss/index.html).
+   ============================================================ */
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .f-label {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--muted) 52%, var(--text) 48%);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .f-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--schema,
+body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--reference {
+  border-color: color-mix(in srgb, var(--border) 88%, var(--math-ink) 12%);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--schema .f-eq,
+body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--reference .f-eq {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--border) 90%, var(--math-ink) 10%);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card.formula-card--math .f-eq {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+}
+
+/* Layout A — single anchor line */
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-schema--phrase,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor.semantic-schema--phrase {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  white-space: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--stack,
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--pill,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor.semantic-reference--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--stack .semantic-reference__entry,
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor.semantic-reference--pill .semantic-reference__entry,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__entry {
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor .semantic-reference__term,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__term {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-anchor .semantic-reference__note,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-anchor .semantic-reference__note {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Layout C — chain / bridge (also short two-step chains) */
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge.semantic-schema--chain,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-bridge.semantic-schema--chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15em 0.45em;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-body, inherit);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  white-space: normal;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge .semantic-schema__connector-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge .semantic-schema__connector,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-bridge .semantic-schema__connector {
+  font-size: 1rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--math-ink) 48%, var(--muted) 52%);
+  opacity: 1;
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-bridge .semantic-schema__connector-note {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Layout B — paired contrast rows */
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast.semantic-reference--stack,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast.semantic-reference--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__entry,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__entry {
+  display: grid;
+  gap: 4px;
+  padding: 14px 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__entry:last-child,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__term,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__term {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #content .formula-card .semantic-display--pres-contrast .semantic-reference__note,
+body[data-portal-module="jahresabschluss"] #content .intuition-callout-body .semantic-display--pres-contrast .semantic-reference__note {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Theory blocks: legacy legal-schema from chapter HTML */
+body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema {
+  font-family: var(--font-body, inherit);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text);
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--math-ink) 12%);
+  background: color-mix(in srgb, var(--surface2) 50%, var(--card) 50%);
+  flex-wrap: wrap;
+  gap: 0.2em 0.45em;
+}
+
+body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema__term {
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--text);
+  white-space: normal;
+}
+
+body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema__arrow,
+body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema__op {
+  font-size: 1rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--math-ink) 45%, var(--muted) 55%);
+}
+
+/* Right rail semantic chips */
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula--schema .rp-f-eq,
+body[data-portal-module="jahresabschluss"] #rightPanel .rp-formula--reference .rp-f-eq {
+  font-family: var(--font-body, inherit);
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-bridge.semantic-schema--chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15em 0.4em;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-anchor.semantic-schema--phrase .semantic-schema__item,
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-bridge.semantic-schema--chain .semantic-schema__item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text);
+  white-space: normal;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-bridge .semantic-schema__connector {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--math-ink) 42%, var(--muted) 58%);
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__entry {
+  padding: 10px 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__entry:last-child {
+  border-bottom: none;
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__term {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+body[data-portal-module="jahresabschluss"] #rightPanel .semantic-display--pres-contrast .semantic-reference__note {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+body.light-mode[data-portal-module="jahresabschluss"] #content .section-block .legal-schema {
+  background: color-mix(in srgb, var(--card) 82%, var(--surface2) 18%);
 }

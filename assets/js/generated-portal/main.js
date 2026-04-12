@@ -1,5 +1,6 @@
 import { createPortalApp } from "../portal-core/app.js";
 import { createRenderer } from "../portal-core/ui/renderer.js";
+import { createRightPanelRenderer } from "../portal-core/ui/rightPanel.js";
 import { createQuickExamModule } from "../portal-core/features/exam.js";
 import { createFullExamModule } from "../portal-core/features/fullExam.js";
 import { renderRPracticeMarkup, mountRPracticeBlocks, renderRAnwendungTab } from "../portal-core/features/rPractice.js";
@@ -306,99 +307,12 @@ function createNavigation(chapters, loadProgress, loadSRS) {
 }
 
 function createRightPanel(chapters, contentById, conceptLinks) {
-  function clearRightPanel() {
-    const formulasNode = document.getElementById("rpFormulas");
-    const formulasSection = document.getElementById("rpFormulasSection");
-    const connectionsNode = document.getElementById("rpConnections");
-    const connectionsSection = connectionsNode?.closest(".rp-section");
-    const mistakesNode = document.getElementById("rpMistakes");
-    const mistakesSection = document.getElementById("rpMistakesSection");
-
-    if (formulasNode) formulasNode.innerHTML = "";
-    if (connectionsNode) connectionsNode.innerHTML = "";
-    if (mistakesNode) mistakesNode.innerHTML = "";
-    if (formulasSection) formulasSection.hidden = true;
-    if (connectionsSection) connectionsSection.hidden = true;
-    if (mistakesSection) mistakesSection.hidden = true;
-  }
-
-  function renderRightPanel(id) {
-    const data = contentById[id];
-    const links = conceptLinks[id];
-    const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter]));
-
-    const formulasNode = document.getElementById("rpFormulas");
-    const formulasSection = document.getElementById("rpFormulasSection");
-    const connectionsSection = document.getElementById("rpConnections")?.closest(".rp-section");
-    if (formulasNode) {
-      if (data?.formeln?.length) {
-        if (formulasSection) formulasSection.hidden = false;
-        formulasNode.innerHTML = data.formeln.map((formula) => `
-          <div class="rp-formula">
-            <div class="rp-f-name">${formula.label}</div>
-            <div class="rp-f-eq">${formula.eq}</div>
-          </div>
-        `).join("");
-        renderMath(formulasNode);
-      } else {
-        if (formulasSection) formulasSection.hidden = true;
-        formulasNode.innerHTML = "";
-      }
-    }
-
-    const connectionsNode = document.getElementById("rpConnections");
-    if (connectionsNode) {
-      if (links) {
-        let html = "";
-        (links.uses || []).forEach((linkedId) => {
-          const chapter = chapterMap[linkedId];
-          if (chapter) {
-            html += `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${linkedId}')" onkeydown="if(event.key==='Enter')window.__navigate('${linkedId}')"><span class="arrow" aria-hidden="true">←</span> ${chapter.title}</div>`;
-          }
-        });
-        (links.usedBy || []).forEach((linkedId) => {
-          const chapter = chapterMap[linkedId];
-          if (chapter) {
-            html += `<div class="rp-conn" role="button" tabindex="0" onclick="window.__navigate('${linkedId}')" onkeydown="if(event.key==='Enter')window.__navigate('${linkedId}')"><span class="arrow" aria-hidden="true">→</span> ${chapter.title}</div>`;
-          }
-        });
-        connectionsNode.innerHTML = html;
-        if (connectionsSection) connectionsSection.hidden = !html;
-      } else {
-        connectionsNode.innerHTML = "";
-        if (connectionsSection) connectionsSection.hidden = true;
-      }
-    }
-
-    const mistakesNode = document.getElementById("rpMistakes");
-    const mistakesSection = document.getElementById("rpMistakesSection");
-    if (mistakesNode && data?.theorie) {
-      try {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(`<div>${data.theorie}</div>`, "text/html");
-        const warnings = doc.querySelectorAll(".warn-box");
-        if (warnings.length) {
-          if (mistakesSection) mistakesSection.hidden = false;
-          mistakesNode.innerHTML = Array.from(warnings).map((warning) => {
-            const strong = warning.querySelector("strong");
-            const title = strong ? strong.textContent.trim() : "Fehler";
-            if (strong) strong.remove();
-            const body = warning.innerHTML.trim();
-            return `<div class="rp-mistake"><div class="err">${title}</div><div class="fix">${body}</div></div>`;
-          }).join("");
-          renderMath(mistakesNode);
-        } else {
-          if (mistakesSection) mistakesSection.hidden = true;
-          mistakesNode.innerHTML = "";
-        }
-      } catch {
-        if (mistakesSection) mistakesSection.hidden = true;
-        mistakesNode.innerHTML = "";
-      }
-    }
-  }
-
-  return { renderRightPanel, clearRightPanel };
+  return createRightPanelRenderer({
+    chapters,
+    contentById,
+    conceptLinks,
+    renderMath
+  });
 }
 
 function createMasteryModule(masteryById, loadProgress, saveMasteryChecks) {

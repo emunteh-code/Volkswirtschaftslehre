@@ -154,17 +154,21 @@ html { scroll-behavior: smooth; }
 }
 
 .lp-brand-mark {
-  display: grid;
-  place-items: center;
+  display: block;
+  flex-shrink: 0;
   width: 34px;
   height: 34px;
   border-radius: var(--r-sm);
-  background: var(--accent);
-  color: var(--accent-fg);
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  background-color: var(--text);
+  mask-image: url("../brand/portal-mark.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 62%;
+  -webkit-mask-image: url("../brand/portal-mark.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 62%;
 }
 
 .lp-brand-text {

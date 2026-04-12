@@ -1,5 +1,6 @@
 import { EXAM_FINISH_REASON } from "../exam/examSessionBackbone.js";
 import { ATTEMPT_CONTEXT, MISTAKE_SOURCE, generateAttemptId } from "../state/learnerBackbone.js";
+import { scrubLegacyFeedbackPrefixes } from "../utils/feedbackCopy.js";
 
 export function createQuickExamModule({
   courseLabel,
@@ -238,13 +239,16 @@ export function createQuickExamModule({
         });
       }
       if (feedbackEl) {
-        const trapMsg = result.trap ? `<div style="margin-bottom:6px">Achtung: ${escapeHtml(result.trap)}</div>` : "";
+        const trapClean = scrubLegacyFeedbackPrefixes(result.trap);
+        const trapMsg = trapClean
+          ? `<div style="margin-bottom:6px;color:var(--muted);font-size:0.95rem;line-height:1.5">${escapeHtml(trapClean)}</div>`
+          : "";
         const correctAnswers = Array.isArray(q.step.answer) ? q.step.answer : [q.step.answer];
         const correctDisplay = correctAnswers[0];
         feedbackEl.innerHTML = "";
         const span = document.createElement("span");
         span.className = "fb-wrong";
-        span.innerHTML = `Nicht ganz. ${trapMsg}<div style="margin-top:6px"><strong style="color:var(--accent)">Richtige Antwort:</strong> <strong>${escapeHtml(String(correctDisplay))}</strong></div>${q.step.explain ? `<div style="margin-top:6px;color:var(--muted)">${q.step.explain}</div>` : ""}`;
+        span.innerHTML = `${trapMsg}<div style="margin-top:6px"><strong style="color:var(--accent)">Richtige Antwort:</strong> <strong>${escapeHtml(String(correctDisplay))}</strong></div>${q.step.explain ? `<div style="margin-top:6px;color:var(--muted)">${q.step.explain}</div>` : ""}`;
         feedbackEl.appendChild(span);
       }
       recordAnswer(q.conceptId, false);

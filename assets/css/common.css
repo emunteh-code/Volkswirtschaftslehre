@@ -122,3 +122,28 @@ pre,
   }
 }
 
+/* ── Shared portal mark (globe + currency), matches landing .lp-brand-mark ── */
+.site-header .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-header .brand-mark {
+  display: block;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--text);
+  mask-image: url("../brand/portal-mark.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 62%;
+  -webkit-mask-image: url("../brand/portal-mark.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 62%;
+}
+

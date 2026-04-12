@@ -347,7 +347,7 @@ function decorateSemanticMathSurfaces() {
     '#content .mastery-item',
     '#content .mastery-bar-label',
     '#rightPanel .rp-conn',
-    '#rightPanel .rp-mistake .fix',
+    '#rightPanel .rp-mistake.warning-card .warning-card-body',
     '#rightPanel .rp-f-name',
     '#sidebar .nav-item > span:not(.num):not(.mastery)'
   ].forEach((selector) => {

@@ -5,7 +5,7 @@ const section = (title, body) => `
   </div>
 `;
 
-const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> ${body}</div>`;
+const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}</strong> ${body}</div>`;
 const isDelimitedMath = (value) => /^\s*(\$\$[\s\S]+\$\$|\\\[[\s\S]+\\\])\s*$/.test(String(value || ''));
 const isSemanticSchema = (value) => {
   const s = String(value || '').trim();

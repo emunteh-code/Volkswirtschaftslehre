@@ -6,6 +6,8 @@
 import GraphEngine from './graphEngine.js';
 import { renderMath } from '../utils/mathjax.js';
 
+const PHILLIPS_CURVE_CURVATURE = 0.075;
+
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
   if (!input) return fallback;
@@ -19,13 +21,26 @@ function setValueLabel(id, value, digits = 2) {
   label.textContent = Number(value).toFixed(digits);
 }
 
-function setupPlot(xLabel, yLabel, ranges) {
+function phillipsGapEffect(gap, alpha) {
+  return alpha * gap * (1 - PHILLIPS_CURVE_CURVATURE * gap);
+}
+
+function phillipsInflation(u, piExpected, uNatural, alpha, supply = 0) {
+  return piExpected + supply - phillipsGapEffect(u - uNatural, alpha);
+}
+
+function setupPlot(xLabel, yLabel, ranges, layout = {}) {
   const engine = new GraphEngine('graph_canvas');
   const { w, h, ctx } = engine.setup();
   const col = engine.refreshColors();
   if (!ctx || !w || !h) return null;
 
-  const pad = { left: 74, right: 28, top: 26, bottom: 58 };
+  const pad = {
+    left: layout.pad?.left ?? 74,
+    right: layout.pad?.right ?? 28,
+    top: layout.pad?.top ?? 26,
+    bottom: layout.pad?.bottom ?? 58
+  };
   const xMin = ranges.xMin;
   const xMax = ranges.xMax;
   const yMin = ranges.yMin;
@@ -110,6 +125,8 @@ function setupPlot(xLabel, yLabel, ranges) {
     ranges,
     fsBase,
     fsBold,
+    legendMargin: layout.legendMargin ?? 18,
+    legendTop: layout.legendTop ?? 46,
     legendEntries: [],
     legendSeen: new Set()
   };
@@ -149,7 +166,10 @@ function drawTag(plot, x, y, text, color, dx = 10, dy = -10, align = 'left') {
 
 function drawLegend(plot) {
   if (!plot.legendEntries.length) return;
-  plot.engine.drawLegend(plot.ctx, plot.w, plot.legendEntries, plot.col.grid, 18);
+  plot.engine.drawLegend(plot.ctx, plot.w, plot.legendEntries, plot.col.grid, {
+    rightMargin: plot.legendMargin ?? 18,
+    top: plot.legendTop ?? 46
+  });
 }
 
 function drawCurve(plot, fn, options = {}) {
@@ -511,8 +531,9 @@ function drawArbeitsmarkt() {
   ));
 }
 
-function solveIslmpcEquilibrium(base, isSlope, isIntercept, yn, pie, alpha, betaOkun, i0, lam, pit, supply) {
-  const piFromY = (Y) => pie + supply + (alpha * betaOkun * (Y - yn)) / yn;
+function solveIslmpcEquilibrium(base, isSlope, isIntercept, yn, un, pie, alpha, betaOkun, i0, lam, pit, supply) {
+  const unemploymentFromY = (Y) => un - betaOkun * ((Y - yn) / yn);
+  const piFromY = (Y) => phillipsInflation(unemploymentFromY(Y), pie, un, alpha, supply);
   const iMp = (Y) => i0 + lam * (piFromY(Y) - pit);
   const iIs = (Y) => isIntercept - (Y - base) / isSlope;
   const f = (Y) => iIs(Y) - iMp(Y);
@@ -657,71 +678,99 @@ function drawISLMPC() {
   setValueLabel('v_il_lam', lam, 2);
   setValueLabel('v_il_shock', supply, 2);
 
-  const yStar = solveIslmpcEquilibrium(base, isSlope, isIntercept, yn, pie, alpha, betaOkun, i0, lam, pit, supply);
-  const piStar = pie + supply + (alpha * betaOkun * (yStar - yn)) / yn;
-  const iStar = isIntercept - (yStar - base) / isSlope;
+  const yStar = solveIslmpcEquilibrium(base, isSlope, isIntercept, yn, un, pie, alpha, betaOkun, i0, lam, pit, supply);
   const uStar = un - betaOkun * ((yStar - yn) / yn);
+  const piStar = phillipsInflation(uStar, pie, un, alpha, supply);
+  const iStar = isIntercept - (yStar - base) / isSlope;
 
   ctx.fillStyle = col.bg;
   ctx.fillRect(0, 0, w, h);
 
-  const fsBase = Math.max(10, Math.round(Math.min(w, h) * 0.017));
-  const fsBold = Math.max(11, Math.round(Math.min(w, h) * 0.021));
-
-  const mid = Math.floor(h * 0.43);
-  const headerH = 24;
-  const lowerTop = mid + 22;
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.018));
+  const fsBold = Math.max(13, Math.round(Math.min(w, h) * 0.022));
+  const plotTop = 48;
+  const bridgeGap = 12;
+  const bridgeH = 40;
+  const lowerGap = 12;
+  const bottomPad = 20;
+  const upperH = Math.max(250, Math.round((h - plotTop - bottomPad - bridgeGap - bridgeH - lowerGap) / 2));
+  const bridgeTop = plotTop + upperH + bridgeGap;
+  const lowerTop = bridgeTop + bridgeH + lowerGap;
+  const lowerH = Math.max(250, h - lowerTop - bottomPad);
+  const leftGutter = Math.max(92, Math.round(w * 0.074));
+  const legendStrip = Math.max(208, Math.round(w * 0.2));
 
   ctx.fillStyle = col.label;
-  ctx.font = `600 ${fsBold}px ${col.fontBody}`;
+  ctx.font = `600 ${Math.max(15, fsBold + 1)}px ${col.fontBody}`;
   ctx.textAlign = 'center';
-  ctx.fillText('IS-LM-PC: Gütermarkt (Y, i) und Phillipskurve (u, π)', w / 2, 14);
+  ctx.fillText('IS-LM-PC: oben (Y, i), unten (u, π)', w / 2, 24);
+
+  ctx.strokeStyle = col.grid;
+  ctx.globalAlpha = 0.55;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(leftGutter - 12, bridgeTop);
+  ctx.lineTo(w - legendStrip + 24, bridgeTop);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(leftGutter - 12, bridgeTop + bridgeH);
+  ctx.lineTo(w - legendStrip + 24, bridgeTop + bridgeH);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
   ctx.fillStyle = col.muted;
   ctx.font = `${Math.max(10, fsBase)}px ${col.fontBody}`;
-  ctx.fillText('Verknüpfung: Okun · Phillipskurve · Zinsregel', w / 2, mid + 11);
+  ctx.fillText('Kette: Okun → Phillips → Zinsregel', w / 2, bridgeTop + (bridgeH / 2) + 4);
 
   const xMinY = Math.min(yn * 0.88, yStar - 28, base - 25, 45);
   const xMaxY = Math.max(yn * 1.14, yStar + 32, base + 40, 170);
   const rUp = { xMin: xMinY, xMax: xMaxY, yMin: 0, yMax: 10 };
-  const geomUp = { x0: 0, y0: headerH, w, h: mid - headerH - 4, padL: 58, padR: 14, padT: 6, padB: 34 };
+  const geomUp = { x0: 0, y0: plotTop, w, h: upperH, padL: leftGutter, padR: legendStrip, padT: 18, padB: 60 };
   const plotUp = buildSubplotPlot(ctx, col, geomUp, rUp, fsBase, fsBold, 'Y', 'i (%)');
 
   const isCurve = (Y) => isIntercept - (Y - base) / isSlope;
-  drawCurve(plotUp, isCurve, { color: col.accent, label: 'IS-Kurve', canvasLabel: false });
+  drawCurve(plotUp, isCurve, { color: col.accent, label: 'IS-Kurve', canvasLabel: false, steps: 320 });
   drawHorizontal(plotUp, iStar, col.warn, 'Zinsregel', false);
   drawVertical(plotUp, yn, col.muted, 'Yₙ', false);
-  drawPoint(plotUp, yStar, iStar, col.warn, 'Schnitt (Y, i)', 0, 0, false);
+  drawPoint(plotUp, yStar, iStar, col.warn, null, 0, 0, false);
 
   const uMin = Math.min(2.8, uStar - 1.2, un - 2.5);
   const uMax = Math.max(9.2, uStar + 1.2, un + 2.5);
-  const piMin = Math.min(-0.6, piStar - 1.2, pie - 1);
-  const piMax = Math.max(6.8, piStar + 1.5, pie + supply + 2.5, 4);
+  const pc = (u) => phillipsInflation(u, pie, un, alpha, supply);
+  const pcNoShock = (u) => phillipsInflation(u, pie, un, alpha, 0);
+  const sampleU = Array.from({ length: 32 }, (_, index) => uMin + ((uMax - uMin) / 31) * index);
+  const lowerValues = sampleU.flatMap((u) => {
+    const values = [pc(u)];
+    if (supply > 0.06) values.push(pcNoShock(u));
+    return values;
+  });
+  const piMin = Math.min(-0.8, ...lowerValues, piStar) - 0.2;
+  const piMax = Math.max(6.0, ...lowerValues, piStar) + 0.45;
   const rLo = { xMin: uMin, xMax: uMax, yMin: piMin, yMax: piMax };
-  const lowerH = h - lowerTop - 8;
-  const geomLo = { x0: 0, y0: lowerTop, w, h: lowerH, padL: 58, padR: 14, padT: 6, padB: 34 };
+  const geomLo = { x0: 0, y0: lowerTop, w, h: lowerH, padL: leftGutter, padR: legendStrip, padT: 18, padB: 60 };
   const plotLo = buildSubplotPlot(ctx, col, geomLo, rLo, fsBase, fsBold, 'u (%)', 'π (%)');
 
-  const pc = (u) => pie + supply - alpha * (u - un);
-  const pcNoShock = (u) => pie - alpha * (u - un);
   if (supply > 0.06) {
     drawCurve(plotLo, pcNoShock, {
       color: col.muted,
       lineWidth: 2,
       dash: [7, 7],
       label: 'Referenz: kurzfristige PC bei s = 0',
-      canvasLabel: false
+      canvasLabel: false,
+      steps: 360
     });
   }
   const pcLegend =
     supply > 0.06
       ? 'Kurzfristige Phillipskurve (πᵉ + s)'
       : 'Kurzfristige Phillipskurve bei πᵉ';
-  drawCurve(plotLo, pc, { color: col.accent, label: pcLegend, canvasLabel: false });
+  drawCurve(plotLo, pc, { color: col.accent, label: pcLegend, canvasLabel: false, steps: 360 });
   drawVertical(plotLo, un, col.muted, 'uₙ (natürliche ALQ)', false);
-  drawPoint(plotLo, uStar, piStar, col.warn, 'Schnitt (u, π)', 0, 0, false);
+  drawPoint(plotLo, uStar, piStar, col.warn, null, 0, 0, false);
 
   plotUp.engine = engine;
   plotUp.w = w;
+  plotUp.legendMargin = 28;
+  plotUp.legendTop = plotTop + 22;
   plotUp.legendEntries = [...plotUp.legendEntries, ...plotLo.legendEntries];
 
   const shockNote =
@@ -731,18 +780,22 @@ function drawISLMPC() {
 
   updateInfo(
     plotUp,
-    renderInfo(String.raw`i = i_0 + \lambda(\pi - \bar\pi),\quad \pi = \pi^e + s + \frac{\alpha\beta}{Y_n}(Y-Y_n)`, [
+    renderInfo(String.raw`i = i_0 + \lambda(\pi - \bar\pi),\quad u-u_n \approx -\frac{\beta}{Y_n}(Y-Y_n),\quad \pi \approx \pi^e + s - \alpha (u-u_n)`, [
       {
         title: 'Lesart',
         body: `Oben: IS-Kurve und Zinsregel bei Y ≈ ${yStar.toFixed(1)}, i ≈ ${iStar.toFixed(
           2
         )}. Unten: dieselbe Konstellation bei u ≈ ${uStar.toFixed(2)} %, π ≈ ${piStar.toFixed(
           2
-        )} %. Kurven sind in der Legende benannt.`
+        )} %. Die Legende sitzt rechts außerhalb des Kernfelds, damit beide Panels frei lesbar bleiben.`
       },
       {
         title: 'Kette',
         body: 'Okun: Y relativ zu Yₙ → u relativ zu uₙ. Phillipskurve: u → π. Zinsregel: π → i. IS: i → Y — wie in der Theorie zu diesem Kapitel.'
+      },
+      {
+        title: 'Gekrümmte Phillips-Seite',
+        body: 'Die untere kurzfristige Phillipskurve ist bewusst sanft gekrümmt gezeichnet: weiter fallend, um uₙ verankert und mit derselben Shift-Logik für πᵉ und s. Der markierte Punkt bleibt auf der gezeichneten Kurve.'
       },
       {
         title: 'Angebotsschock',
@@ -764,16 +817,32 @@ function drawPhillips() {
   setValueLabel('v_pc_u', uCurrent, 2);
   setValueLabel('v_pc_supply', supply, 2);
 
-  const curveBase = (u) => pie - alpha * (u - un);
-  const curve = (u) => pie + supply - alpha * (u - un);
-  const shifted = (u) => pie + 1 + supply - alpha * (u - un);
+  const curveBase = (u) => phillipsInflation(u, pie, un, alpha, 0);
+  const curve = (u) => phillipsInflation(u, pie, un, alpha, supply);
+  const shifted = (u) => phillipsInflation(u, pie + 1, un, alpha, supply);
   const piCurrent = curve(uCurrent);
+  const xMin = Math.max(1.8, Math.min(2.4, un - 2.7, uCurrent - 1.1));
+  const xMax = Math.max(9.2, un + 3.2, uCurrent + 1.25);
+  const sampleU = Array.from({ length: 32 }, (_, index) => xMin + ((xMax - xMin) / 31) * index);
+  const curveValues = sampleU.flatMap((u) => {
+    const values = [curve(u)];
+    if (supply > 0.06) {
+      values.push(curveBase(u));
+    } else {
+      values.push(shifted(u));
+    }
+    return values;
+  });
 
   const plot = setupPlot('u (%)', 'π (%)', {
-    xMin: 2,
-    xMax: 10,
-    yMin: -1,
-    yMax: 7
+    xMin,
+    xMax,
+    yMin: Math.min(-0.8, ...curveValues, piCurrent) - 0.2,
+    yMax: Math.max(6.2, ...curveValues, piCurrent) + 0.45
+  }, {
+    pad: { left: 94, right: 228, top: 38, bottom: 68 },
+    legendMargin: 28,
+    legendTop: 58
   });
   if (!plot) return;
 
@@ -783,34 +852,38 @@ function drawPhillips() {
       lineWidth: 2,
       dash: [7, 7],
       label: 'Referenz: kurzfristige PC bei s = 0',
-      canvasLabel: false
+      canvasLabel: false,
+      steps: 360
     });
     drawCurve(plot, curve, {
       color: plot.col.accent,
       lineWidth: 2.8,
       dash: [],
       label: 'Kurzfristige Phillipskurve (πᵉ + s)',
-      canvasLabel: false
+      canvasLabel: false,
+      steps: 360
     });
   } else {
     drawCurve(plot, curve, {
       color: plot.col.accent,
       lineWidth: 2.8,
       label: 'Kurzfristige Phillipskurve bei πᵉ',
-      canvasLabel: false
+      canvasLabel: false,
+      steps: 360
     });
     drawCurve(plot, shifted, {
       color: plot.col.warn,
       lineWidth: 2.2,
       dash: [9, 6],
       label: 'Kurzfristige Phillipskurve bei höherem πᵉ',
-      canvasLabel: false
+      canvasLabel: false,
+      steps: 360
     });
   }
 
   drawVertical(plot, un, plot.col.muted, 'uₙ (natürliche ALQ)', false);
 
-  drawPoint(plot, uCurrent, piCurrent, plot.col.warn, 'Punkt (u, π)', 0, 0, false);
+  drawPoint(plot, uCurrent, piCurrent, plot.col.warn, null, 0, 0, false);
 
   const supplyRow =
     supply > 0.05
@@ -825,8 +898,7 @@ function drawPhillips() {
           body: 'Mit dem Regler s > 0 erscheint eine Referenzkurve (s = 0) und die verschobene kurzfristige Phillipskurve — Verschiebung, nicht Bewegung entlang derselben Kurve.'
         };
 
-  const eqPhillips =
-    supply > 0.06 ? String.raw`\pi = \pi^e + s - \alpha (u - u_n)` : String.raw`\pi = \pi^e - \alpha (u - u_n)`;
+  const eqPhillips = String.raw`\pi \approx \pi^e + s - \alpha (u - u_n)`;
 
   const expectRow =
     supply > 0.06
@@ -841,7 +913,11 @@ function drawPhillips() {
       title: 'Lesart',
       body: `Markierter Punkt: u = ${uCurrent.toFixed(2)} %, π = ${piCurrent.toFixed(
         2
-      )} %. Die senkrechte Linie ist uₙ (NAIRU / natürliche Arbeitslosenquote). Alle Kurven sind in der Legende benannt.`
+      )} %. Die senkrechte Linie ist uₙ (NAIRU / natürliche Arbeitslosenquote), die Legende sitzt rechts außerhalb des Kernplots.`
+    },
+    {
+      title: 'Gekrümmte Kursfigur',
+      body: 'Die kurzfristige Phillipskurve ist hier nicht als starre Gerade, sondern als sanft gekrümmte Lehrfigur gezeichnet: weiter fallend, um uₙ verankert und mit derselben Shift-Logik für πᵉ und s.'
     },
     supplyRow,
     expectRow,

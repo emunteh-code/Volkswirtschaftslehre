@@ -21,29 +21,6 @@ const examModule = createQuickExamModule({
   appendMistakeLogEntry
 });
 
-function cleanWrongExamFeedback() {
-  const feedbackEl = document.getElementById('examFeedback');
-  const wrong = feedbackEl?.querySelector('.fb-wrong');
-  if (!wrong) return;
-
-  Array.from(wrong.childNodes).forEach((node) => {
-    if (node.nodeType === Node.TEXT_NODE && node.textContent?.includes('Nicht ganz.')) {
-      node.textContent = node.textContent.replace('Nicht ganz.', '').trimStart();
-      if (!node.textContent.trim()) {
-        node.remove();
-      }
-    }
-  });
-
-  wrong.querySelectorAll('div').forEach((block) => {
-    if (block.textContent?.trim().startsWith('Achtung:')) {
-      block.remove();
-    }
-  });
-
-  renderMath(feedbackEl);
-}
-
 export const {
   startExam,
   skipExamQ
@@ -51,5 +28,4 @@ export const {
 
 export function submitExamAnswer() {
   examModule.submitExamAnswer();
-  cleanWrongExamFeedback();
 }

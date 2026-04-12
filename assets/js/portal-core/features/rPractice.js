@@ -466,6 +466,27 @@ function inferLearningGoal(block) {
   return 'Lernziel: Übersetze die Fachidee sauber in einen belastbaren R-Arbeitsschritt.';
 }
 
+/** Normalize for comparing header copy vs Idee body (whitespace + case only). */
+function normalizeRIntroDedupeKey(text) {
+  return String(text || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase();
+}
+
+/**
+ * True when the paragraph under the R title would repeat the Idee opening:
+ * same text after normalization, or Idee begins with the full header text (authoring overlap).
+ */
+function isDuplicateHeaderPurposeVsIdee(purpose, learningGoal) {
+  const p = normalizeRIntroDedupeKey(purpose);
+  const g = normalizeRIntroDedupeKey(learningGoal);
+  if (!p || !g) return false;
+  if (p === g) return true;
+  if (p.length >= 24 && g.startsWith(p)) return true;
+  return false;
+}
+
 function inferGoalBullets(block) {
   if (Array.isArray(block.goalBullets) && block.goalBullets.length) return block.goalBullets;
 
@@ -954,6 +975,8 @@ function buildConfig(block, options = {}) {
   const keepHint = inferKeepHint(block, taskMode);
 
   let purpose = block.purpose || '';
+  const learningGoal = inferLearningGoal(block);
+  const headerPurpose = isDuplicateHeaderPurposeVsIdee(purpose, learningGoal) ? '' : purpose;
 
   const coreLine = coreTarget.expression || inferCoreLine(block);
   const coreAnchor = coreTarget.expression
@@ -966,6 +989,7 @@ function buildConfig(block, options = {}) {
     runtimeMode,
     title: block.title || 'Vom Modell zur Auswertung',
     purpose,
+    headerPurpose,
     script: block.script || '',
     conceptId: options.conceptId || block.conceptId || '',
     starterCode: normalizeCode(block.starterCode || block.code || ''),
@@ -973,7 +997,7 @@ function buildConfig(block, options = {}) {
     miniTask: block.miniTask || '',
     taskPrompt,
     taskMode,
-    learningGoal: inferLearningGoal(block),
+    learningGoal,
     goalBullets: inferGoalBullets(block),
     successSignal: inferSuccessSignal(block, taskMode),
     coreLine,
@@ -1113,7 +1137,7 @@ export function renderRPracticeMarkup(block, options = {}) {
     <span class="r-application-kicker">R-Übung</span>
     <h3>${escapeHtml(config.title)}</h3>
   </div>
-  <p class="r-practice-bridge">${escapeHtml(config.purpose)}</p>
+  ${config.headerPurpose ? `<p class="r-practice-bridge">${escapeHtml(config.headerPurpose)}</p>` : ''}
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
     <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep)}
@@ -1264,7 +1288,7 @@ function renderTabOrientationCard(config, index, total) {
     </div>
     <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
   </div>
-  <p class="r-orient-purpose">${escapeHtml(config.purpose)}</p>
+  ${config.headerPurpose ? `<p class="r-orient-purpose">${escapeHtml(config.headerPurpose)}</p>` : ''}
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
     <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}

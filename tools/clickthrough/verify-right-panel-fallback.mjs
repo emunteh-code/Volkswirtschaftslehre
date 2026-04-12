@@ -50,6 +50,14 @@ async function layoutSnapshot(page) {
       const r = el.getBoundingClientRect();
       return r.width > 1 && r.height > 1;
     };
+    const integratedMistakes =
+      mirM && v(mirM)
+        ? {
+            supportCount: document.querySelectorAll('#content .theorie-fallback-support').length,
+            legacyCardCount: document.querySelectorAll('#content .warning-card--theorie-fallback').length,
+            entryCount: document.querySelectorAll('#content .theorie-fallback-entry').length
+          }
+        : null;
     return {
       vw: window.innerWidth,
       rightPanelDisplay: rp ? getComputedStyle(rp).display : null,
@@ -59,7 +67,8 @@ async function layoutSnapshot(page) {
       mirrorConnDisplay: mirC ? getComputedStyle(mirC).display : null,
       mirrorConnVisible: v(mirC),
       mirrorMistDisplay: mirM ? getComputedStyle(mirM).display : null,
-      mirrorMistVisible: v(mirM)
+      mirrorMistVisible: v(mirM),
+      integratedMistakes
     };
   });
 }
@@ -183,6 +192,36 @@ try {
     }
     if (row.label === 'oekonometrie-r-tab' && row.rTab && !row.rTab.skip && row.rTab.mirrorConnVisible) {
       failures.push('oekonometrie-r-tab: Verbindungen mirror must not appear on R-Anwendung tab');
+    }
+    if (row.tabs) {
+      for (const [key, snap] of Object.entries(row.tabs)) {
+        if (snap.skip || !snap.mirrorMistVisible || !snap.integratedMistakes) continue;
+        const m = snap.integratedMistakes;
+        if (m.supportCount !== 1) {
+          failures.push(
+            `${row.label} ${key}: Pass 70 — expected exactly one .theorie-fallback-support, got ${m.supportCount}`
+          );
+        }
+        if (m.legacyCardCount > 0) {
+          failures.push(
+            `${row.label} ${key}: Pass 70 — legacy .warning-card--theorie-fallback must be 0, got ${m.legacyCardCount}`
+          );
+        }
+        if (m.entryCount < 1) {
+          failures.push(`${row.label} ${key}: Pass 70 — expected at least one .theorie-fallback-entry`);
+        }
+      }
+    }
+    if (row.focusSnapshot?.mirrorMistVisible && row.focusSnapshot.integratedMistakes) {
+      const m = row.focusSnapshot.integratedMistakes;
+      if (m.supportCount !== 1) {
+        failures.push(
+          `${row.label} focus: Pass 70 — expected one .theorie-fallback-support, got ${m.supportCount}`
+        );
+      }
+      if (m.legacyCardCount > 0) {
+        failures.push(`${row.label} focus: Pass 70 — legacy .warning-card--theorie-fallback count ${m.legacyCardCount}`);
+      }
     }
   }
   if (failures.length) {

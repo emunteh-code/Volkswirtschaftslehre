@@ -97,5 +97,5 @@ For `#rightPanel`, `#content .content-fallback--connections`, `#content .content
 
 ## Follow-up (only if human review fails)
 
-- Tune `.warning-card--theorie-fallback` density if designers find it loud.
+- Pass 70 replaced stacked `.warning-card--theorie-fallback` with one **`.theorie-fallback-support`**; see `docs/audits/inline-warning-fallback-integration-pass-70.md`.
 - Optionally suppress or shorten **Verbindungen** mirror on selected tabs if repetition is judged harmful (would be a **new** product decision, not a bug in the current spec).

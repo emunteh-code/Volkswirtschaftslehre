@@ -816,19 +816,87 @@ body.focus-mode .content-fallback--rp-mirror {
   border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
 }
 
-#content .content-fallback__stack {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
+/* Pass 70 — unified „Häufige Fehler“ main-flow mirror: one surface, multiple internal rows */
+#content .theorie-fallback-support {
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--warning-border) 22%);
+  border-left: 3px solid color-mix(in srgb, var(--warning-title) 55%, var(--warning-border) 45%);
+  background: color-mix(in srgb, var(--card) 72%, var(--warning-surface-soft) 28%);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
-/* Theorie main-flow mirror: same semantic family as inline warnings — not accent-tinted info cards */
-#content .warning-card.warning-card--theorie-fallback {
-  border-radius: 18px;
-  border: 1px solid var(--warning-border);
-  border-left: 3px solid color-mix(in srgb, var(--warning-title) 62%, var(--warning-border) 38%);
-  background: var(--warning-surface);
-  box-shadow: var(--warning-shadow);
+#content .theorie-fallback-entry {
+  padding: 14px 18px 16px;
+}
+
+#content .theorie-fallback-entry + .theorie-fallback-entry {
+  border-top: 1px solid color-mix(in srgb, var(--border) 65%, var(--warning-border) 35%);
+}
+
+#content .theorie-fallback-entry__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#content .theorie-fallback-entry__icon {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  margin-top: 1px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--warning-title);
+  background: var(--warning-icon-surface);
+}
+
+#content .theorie-fallback-entry__icon svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+#content .theorie-fallback-entry__title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: 0;
+  color: var(--warning-title);
+  margin: 0;
+}
+
+#content .theorie-fallback-entry__body {
+  margin-top: 8px;
+  padding-left: calc(17px + 10px);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--warning-body);
+}
+
+#content .theorie-fallback-entry__body strong {
+  color: var(--warning-body);
+  font-weight: 600;
+}
+
+#content .theorie-fallback-entry__body p,
+#content .theorie-fallback-entry__body ul,
+#content .theorie-fallback-entry__body ol,
+#content .theorie-fallback-entry__body li {
+  margin: 0;
+}
+
+#content .theorie-fallback-entry__body p + p,
+#content .theorie-fallback-entry__body ul,
+#content .theorie-fallback-entry__body ol {
+  margin-top: 0.45rem;
+}
+
+#content .theorie-fallback-entry__body ul,
+#content .theorie-fallback-entry__body ol {
+  padding-left: 1.1rem;
 }
 
 #content .content-fallback--connections {

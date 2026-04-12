@@ -8,7 +8,7 @@ Module CSS hides `#rightPanel` at **`max-width: 1200px`** (and **`body.focus-mod
 
 | Block | Source | Fallback behavior |
 |--------|--------|-------------------|
-| **Häufige Fehler** | `.warn-box` stripped into `getWarningSystemData().railWarnings`, rendered in `#rpMistakes` | Main column: **`renderMainFlowMistakesSection`** — `.warning-card.warning-card--theorie-fallback` stack under **Theorie** (end of `.panel.active`, after theory HTML). |
+| **Häufige Fehler** | `.warn-box` stripped into `getWarningSystemData().railWarnings`, rendered in `#rpMistakes` | Main column: **`renderMainFlowMistakesSection`** — **one** `.theorie-fallback-support` with **N** `.theorie-fallback-entry` rows (Pass 70), under **Theorie** (end of `.panel.active`, after theory HTML). |
 | **Verbindungen** | `buildConceptConnectionsHtml` / `#rpConnections` | Main column: same data, **`variant: "main"`** (`.cf-*` list), inserted **before** the provenance footer on **Theorie tab only** (Pass 69 — avoids repeating Verbindungen on Grafik / Aufgaben / Formeln / Intuition / R-Anwendung). |
 
 **Formeln** in the rail still only shows when not on the Formeln tab (unchanged).
@@ -31,9 +31,9 @@ The rail is still populated by **`renderRightPanel`**; mirrors stay in the DOM o
 | File | Change |
 |------|--------|
 | `assets/js/portal-core/ui/rightPanel.js` | **`buildConceptConnectionsHtml({ chapters, conceptId, conceptLinks, groupConnections, variant })`** — `variant: "rail"` → `.rp-*` (existing rail); `variant: "main"` → `.cf-*` for `#content`. `renderRightPanel` refactored to use the shared builder. |
-| `assets/js/portal-core/ui/warningSystem.js` | **`renderMainFlowMistakesSection(railWarnings)`** — section + `.warning-card--theorie-fallback` using existing card head/body pattern. |
+| `assets/js/portal-core/ui/warningSystem.js` | **`renderMainFlowMistakesSection(railWarnings)`** — section + unified **`.theorie-fallback-support`** / **`.theorie-fallback-entry`** (Pass 70). |
 | `assets/js/portal-core/ui/renderer.js` | **Theorie:** append mistakes mirror inside `.panel.active` after stripped theory HTML. **Theorie tab only (with `entry`):** `insertAdjacentHTML` Verbindungen section **before** provenance strip. |
-| `assets/css/premium-refinement.css` | **`.content-fallback--rp-mirror`** visibility rules; **`.cf-conn`**, **`.cf-link-group`**, **`.cf-group-label`**; **`.warning-card--theorie-fallback`**; arrow tints for `.cf-conn` (same semantics as rail). |
+| `assets/css/premium-refinement.css` | **`.content-fallback--rp-mirror`** visibility rules; **`.cf-conn`**, **`.cf-link-group`**, **`.cf-group-label`**; **`.theorie-fallback-support`** / **`.theorie-fallback-entry*`**; arrow tints for `.cf-conn` (same semantics as rail). |
 
 ### Module-local
 

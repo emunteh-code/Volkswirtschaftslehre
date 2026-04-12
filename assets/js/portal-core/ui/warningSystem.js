@@ -24,6 +24,17 @@ function buildWarningCardInner(title, bodyHtml) {
 <div class="warning-card-body">${bodyHtml}</div>`;
 }
 
+/** One row inside the unified main-flow „Häufige Fehler“ support surface (Pass 70). */
+function buildTheorieFallbackEntryHtml(warning) {
+  return `<div class="theorie-fallback-entry" data-warning-placement="main-flow">
+<div class="theorie-fallback-entry__head">
+<span class="theorie-fallback-entry__icon" aria-hidden="true">${ALERT_ICON}</span>
+<span class="theorie-fallback-entry__title">${escapeHtmlText(warning.title)}</span>
+</div>
+<div class="theorie-fallback-entry__body">${warning.bodyHtml}</div>
+</div>`;
+}
+
 function normalizeWarningNode(node) {
   const clone = node.cloneNode(true);
   const strong = clone.querySelector("strong");
@@ -116,20 +127,14 @@ export function renderRightRailWarnings(warnings = []) {
 
 /**
  * Main-column mirror of „Häufige Fehler“ when `#rightPanel` is hidden (narrow / focus mode).
- * Uses the same `.warning-card` language as task hints, not the compact rail tiles.
+ * Pass 70: one integrated theory-support surface + internal rows (not stacked `.warning-card` siblings).
  */
 export function renderMainFlowMistakesSection(railWarnings = []) {
   if (!railWarnings.length) return "";
-  const cards = railWarnings
-    .map(
-      (warning) => `<div class="warning-card warning-card--theorie-fallback" data-warning-placement="main-flow">
-${buildWarningCardInner(escapeHtmlText(warning.title), warning.bodyHtml)}
-</div>`
-    )
-    .join("");
+  const entries = railWarnings.map((w) => buildTheorieFallbackEntryHtml(w)).join("");
   return `<section class="content-fallback content-fallback--mistakes content-fallback--rp-mirror" aria-labelledby="content-fallback-mistakes-h">
 <h3 class="content-fallback__title" id="content-fallback-mistakes-h">Häufige Fehler</h3>
-<div class="content-fallback__stack">${cards}</div>
+<div class="theorie-fallback-support">${entries}</div>
 </section>`;
 }
 

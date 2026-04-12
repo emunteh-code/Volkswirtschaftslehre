@@ -6,6 +6,7 @@
 import GraphEngine from './graphEngine.js';
 import { renderMath } from '../utils/mathjax.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 
 // ── Animation state ────────────────────────────────────────
 let _rafId = null;
@@ -76,7 +77,7 @@ function setGraphInfo(html) {
 function buildGraphInfo({ label = 'Interpretation', equation = '', rows = [] }) {
   const parts = [`<span class="gi-label">${label}</span>`];
   if (equation) {
-    parts.push(`<div class="gi-eq">${equation}</div>`);
+    parts.push(`<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>`);
   }
   if (rows.length) {
     parts.push('<div class="gi-list">');
@@ -109,8 +110,9 @@ function drawRoundedRectPath(ctx, x, y, w, h, r) {
 }
 
 function drawLabelTag(ctx, text, x, y, color, options = {}) {
+  const _cs = getComputedStyle(document.body);
   const {
-    fontFamily = getComputedStyle(document.body).getPropertyValue('--font-body').trim() || getComputedStyle(document.body).fontFamily || 'system-ui, sans-serif',
+    fontFamily = _cs.getPropertyValue('--font-body').trim() || _cs.fontFamily || 'system-ui, sans-serif',
     fontSize = 11,
     fontWeight = 700,
     align = 'left',
@@ -119,7 +121,7 @@ function drawLabelTag(ctx, text, x, y, color, options = {}) {
     paddingY = 6,
     lineGap = 2,
     radius = 8,
-    bgColor = '#ffffff',
+    bgColor = _cs.getPropertyValue('--card').trim() || '#1a1d21',
     borderColor = color,
     textColor = color
   } = options;

@@ -1,3 +1,5 @@
+import { mathContent, renderSemanticBlock } from '../../../assets/js/portal-core/ui/semanticContent.js';
+
 const section = (title, body) => `
   <div class="section-block">
     <h3>${title}</h3>
@@ -5,8 +7,8 @@ const section = (title, body) => `
   </div>
 `;
 
-const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> ${body}</div>`;
-const mathBlock = (eq) => `<div class="math-block">${eq}</div>`;
+const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}</strong> ${body}</div>`;
+const mathBlock = (content) => renderSemanticBlock(content, { variant: 'theory' });
 const step = (text, eq = null) => ({ text, eq });
 const task = (text, steps, result, hint = null) => ({ text, steps, result, ...(hint ? { hint } : {}) });
 
@@ -39,7 +41,7 @@ export const CONTENT = {
       section(
         'Bilanz und GuV als zwei Perspektiven',
         `<p>Die Bilanz ist stichtagsbezogen und zeigt Vermögen und Kapital am Abschlussstichtag. Die GuV ist periodenbezogen und erklärt, wie der Jahreserfolg entstanden ist. Beide zusammen liefern erst das vollständige Bild des Unternehmens.</p>
-         ${mathBlock(String.raw`$$\text{Aktiva} = \text{Passiva} = \text{Eigenkapital} + \text{Fremdkapital}$$`)}
+         ${mathBlock(mathContent(String.raw`$$\text{Aktiva} = \text{Passiva} = \text{Eigenkapital} + \text{Fremdkapital}$$`))}
       `
       ),
       section(

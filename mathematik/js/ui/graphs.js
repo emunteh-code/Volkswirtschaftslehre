@@ -1,4 +1,5 @@
 import { renderMath } from '../utils/mathjax.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 
 let rafId = null;
 
@@ -31,7 +32,7 @@ function readColors() {
     accent: pick('--accent', '#4a90d9'),
     accent2: pick('--accent2', '#5a9fd4'),
     warn: pick('--accent3', '#e05252'),
-    math: pick('--math-ink', '#ff82c6'),
+    math: pick('--math-ink', '#E03AFB'),
     green: pick('--semantic-green', '#4caf7c'),
     fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif')
   };
@@ -52,7 +53,7 @@ function setGraphInfo(html) {
 
 function buildGraphInfo({ label = 'Interpretation', equation = '', rows = [] }) {
   const parts = [`<span class="gi-label">${label}</span>`];
-  if (equation) parts.push(`<div class="gi-eq">${equation}</div>`);
+  if (equation) parts.push(`<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>`);
   if (rows.length) {
     parts.push('<div class="gi-list">');
     rows.forEach((row) => {
@@ -295,11 +296,12 @@ function drawLegendBox(plane, entries) {
 
 function drawLabelTag(ctx, text, x, y, color, options = {}) {
   const lines = Array.isArray(text) ? text : [text];
-  const fontFamily = options.fontFamily || getComputedStyle(document.body).getPropertyValue('--font-body').trim() || getComputedStyle(document.body).fontFamily || 'system-ui, sans-serif';
+  const _cs = getComputedStyle(document.body);
+  const fontFamily = options.fontFamily || _cs.getPropertyValue('--font-body').trim() || _cs.fontFamily || 'system-ui, sans-serif';
   const fontSize = options.fontSize || 11;
   const paddingX = options.paddingX || 8;
   const paddingY = options.paddingY || 6;
-  const bgColor = options.bgColor || '#ffffff';
+  const bgColor = options.bgColor || _cs.getPropertyValue('--card').trim() || '#1a1d21';
   const borderColor = options.borderColor || color;
   const textColor = options.textColor || color;
   ctx.save();

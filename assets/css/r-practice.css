@@ -2,7 +2,7 @@
 
 .r-practice-block {
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
 .r-practice-head {
@@ -28,44 +28,77 @@
 }
 
 .r-runtime-note {
-  font-size: 11.5px;
-  line-height: 1.5;
-  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
-  padding: 8px 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+  padding: 6px 10px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   background: color-mix(in srgb, var(--surface) 96%, var(--surface2) 4%);
 }
 
 .r-practice-workspace {
+  display: block;
+  width: 100%;
+}
+
+/* Pass 56e: shell = neutral wrapper; instrument = one bordered execution surface */
+.r-execution-shell {
+  display: block;
+  width: 100%;
+}
+
+.r-execution-instrument {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
-  gap: 18px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1.42fr) minmax(288px, 1fr);
+  gap: 0;
+  align-items: stretch;
+  width: 100%;
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 42%, var(--accent) 16%);
+  background: color-mix(in srgb, var(--surface) 99%, var(--accent) 1%));
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 35%, transparent);
+  overflow: hidden;
+}
+
+.r-execution-shell .r-practice-editor-card,
+.r-execution-shell .r-practice-output-card {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 18px 20px 16px;
+}
+
+.r-execution-shell .r-practice-editor-card {
+  border-right: 1px solid color-mix(in srgb, var(--border) 28%, transparent);
+}
+
+.r-execution-shell .r-practice-output-card.r-tab-output-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .r-practice-editor-card,
 .r-practice-output-card,
 .r-practice-card,
 .r-practice-pitfalls {
-  background: color-mix(in srgb, var(--surface) 98%, #fff 2%);
-  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
-  border-radius: var(--r-md);
-  padding: 16px 18px;
-  box-shadow:
-    0 1px 0 color-mix(in srgb, #fff 60%, transparent),
-    0 10px 24px color-mix(in srgb, var(--border) 10%, transparent),
-    var(--shadow-sm);
+  background: var(--card, color-mix(in srgb, var(--surface) 98%, #fff 2%));
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
 }
 
 .r-practice-editor-card {
-  border-color: color-mix(in srgb, var(--accent2) 12%, var(--border) 88%);
-  background: color-mix(in srgb, var(--surface) 97%, #fff 3%);
+  border-color: color-mix(in srgb, var(--border) 92%, var(--accent) 8%);
+  background: var(--card, color-mix(in srgb, var(--surface) 97%, #fff 3%));
 }
 
 .r-practice-output-card {
-  border-color: color-mix(in srgb, var(--border) 74%, var(--muted) 26%);
-  background: color-mix(in srgb, var(--surface) 92%, var(--surface2) 8%);
+  border-color: color-mix(in srgb, var(--border) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 94%, var(--surface2) 6%);
 }
 
 .r-practice-toolbar,
@@ -73,58 +106,59 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .r-practice-toolbar-kicker {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 74%, var(--muted) 26%);
-  font-weight: 700;
-  margin-bottom: 5px;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+  font-weight: 600;
+  margin-bottom: 3px;
 }
 
 .r-practice-toolbar-title {
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.3;
-  color: var(--text);
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
 }
 
 .r-runtime-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 26px;
-  padding: 4px 9px;
+  min-height: 22px;
+  padding: 3px 8px;
   border-radius: 999px;
-  font-size: 9.5px;
+  font-size: 10.5px;
   line-height: 1.2;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   background: color-mix(in srgb, var(--surface) 92%, var(--surface2) 8%);
-  color: color-mix(in srgb, var(--muted) 84%, var(--text) 16%);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .r-runtime-pill[data-status="loading"] {
   color: var(--accent2);
-  border-color: color-mix(in srgb, var(--accent2) 32%, var(--border) 68%);
+  border-color: color-mix(in srgb, var(--accent2) 28%, var(--border) 72%);
 }
 
 .r-runtime-pill[data-status="success"] {
-  color: color-mix(in srgb, var(--semantic-green) 78%, var(--text) 22%);
-  border-color: color-mix(in srgb, var(--semantic-green) 28%, var(--border) 72%);
+  color: color-mix(in srgb, var(--semantic-green) 72%, var(--text) 28%);
+  border-color: color-mix(in srgb, var(--semantic-green) 22%, var(--border) 78%);
 }
 
 .r-runtime-pill[data-status="fallback"],
 .r-runtime-pill[data-status="guided"] {
-  color: color-mix(in srgb, var(--math-ink) 82%, var(--text) 18%);
-  border-color: color-mix(in srgb, var(--math-ink) 28%, var(--border) 72%);
+  color: color-mix(in srgb, var(--math-ink) 72%, var(--text) 28%);
+  border-color: color-mix(in srgb, var(--math-ink) 22%, var(--border) 78%);
 }
 
 .r-practice-editor {
@@ -136,7 +170,7 @@
   background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   resize: vertical;
 }
@@ -158,31 +192,43 @@
   filter: none;
 }
 
-.r-practice-help {
-  display: grid;
-  gap: 4px;
+.r-execution-shell .r-practice-actions {
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  font-size: 12px;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+  border-top: 1px solid color-mix(in srgb, var(--border) 48%, transparent);
+  gap: 8px;
+}
+
+.r-execution-shell .r-practice-actions .btn:first-of-type:not(.secondary) {
+  font-weight: 700;
+  min-width: 7.25rem;
+}
+
+.r-practice-help {
+  display: grid;
+  gap: 3px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  font-size: 13px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
 }
 
 .r-practice-help-label {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 68%, var(--muted) 32%);
+  color: color-mix(in srgb, var(--muted) 62%, var(--text) 38%);
   font-weight: 700;
 }
 
 .r-practice-help p {
   margin: 0;
-  font-size: 12px;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+  font-size: 13px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
 }
 
 .r-practice-help-steps {
@@ -198,13 +244,13 @@
 
 .r-practice-help-foot {
   margin: 8px 0 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
 }
 
 .r-practice-help-subtle {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--muted) 86%, var(--text) 14%);
 }
@@ -218,16 +264,36 @@
   background: color-mix(in srgb, var(--surface) 90%, var(--surface2) 10%);
   color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.58;
   white-space: pre-wrap;
   overflow: auto;
 }
 
-.r-practice-grid {
+/* Pass 56b — embedded R-Übung: one downstream support band (not twin peer cards) */
+.r-practice-support-surface {
+  margin-top: 14px;
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 68%, transparent);
+  background: color-mix(in srgb, var(--surface) 94%, var(--card) 6%);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.r-practice-support-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
+  gap: 6px;
+  padding: 12px 16px 14px;
+}
+
+.r-practice-support-section + .r-practice-support-section {
+  border-top: 1px solid color-mix(in srgb, var(--border) 42%, transparent);
+}
+
+.r-practice-support--task {
+  padding-top: 10px;
+  padding-bottom: 12px;
+  background: color-mix(in srgb, var(--surface) 90%, var(--accent) 4%);
 }
 
 .r-practice-card {
@@ -235,19 +301,22 @@
   gap: 8px;
 }
 
+.r-practice-support-section h4,
 .r-practice-card h4,
 .r-practice-pitfalls h4 {
+  margin: 0 0 4px;
   font-size: 12px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 74%, var(--muted) 26%);
+  color: color-mix(in srgb, var(--muted) 56%, var(--text) 44%);
   font-weight: 700;
 }
 
+.r-practice-support-section p,
 .r-practice-card p,
 .r-practice-pitfalls li,
 .r-practice-solution p {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
   max-width: none;
@@ -255,16 +324,22 @@
 
 .r-inline-toggle {
   width: fit-content;
-  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
-  background: color-mix(in srgb, var(--surface) 78%, var(--surface2) 22%);
-  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, var(--surface2) 30%);
+  color: color-mix(in srgb, var(--accent) 76%, var(--text) 24%);
   border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 11px;
+  padding: 5px 10px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.r-inline-toggle:hover {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border) 72%);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface) 94%);
 }
 
 .r-practice-solution {
@@ -288,74 +363,101 @@
 
 .r-tab-panel {
   display: grid;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* Each lab section within the tab */
 .r-lab-section {
   display: grid;
-  gap: 18px;
+  gap: 14px;
+}
+
+@media (min-width: 1100px) {
+  .r-lab-section {
+    /* Pass 56c: modestly more room for execution + evidence column */
+    grid-template-columns: minmax(0, 1.28fr) minmax(400px, 1.12fr);
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .r-lab-section > .r-orient-card {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+  .r-lab-section > .r-practice-workspace {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    display: block;
+    width: 100%;
+  }
+  .r-lab-section > .r-practice-workspace > .r-execution-shell .r-execution-instrument {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .r-lab-section > .r-practice-workspace > .r-execution-shell .r-execution-instrument .r-practice-editor-card {
+    border-right: none !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 24%, transparent);
+  }
+  .r-lab-section > .r-tab-bottom {
+    display: none;
+  }
 }
 
 /* Divider between multiple blocks */
 .r-lab-divider {
   height: 1px;
-  background: color-mix(in srgb, var(--border) 70%, transparent);
-  margin: 4px 0;
+  background: color-mix(in srgb, var(--border) 60%, transparent);
+  margin: 6px 0;
 }
 
 /* ─── Orientation Card ───────────────────────────────────────────────────── */
 
 .r-orient-card {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--surface) 98%, #fff 2%) 0%,
-    color-mix(in srgb, var(--surface) 94%, var(--surface2) 6%) 100%
-  );
-  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
-  border-radius: var(--r-md);
-  padding: 22px 24px;
-  box-shadow:
-    0 1px 0 color-mix(in srgb, #fff 70%, transparent),
-    0 14px 30px color-mix(in srgb, var(--border) 11%, transparent),
-    var(--shadow-sm);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .r-orient-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
 }
 
 .r-orient-head {
   display: grid;
-  gap: 5px;
+  gap: 4px;
 }
 
 .r-orient-kicker {
   font-size: 10px;
   line-height: 1.2;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 80%, var(--muted) 20%);
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted) 28%);
   font-weight: 700;
 }
 
 .r-orient-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  line-height: 1.28;
+  line-height: 1.3;
   color: var(--text);
   margin: 0;
 }
 
 .r-orient-purpose {
-  font-size: 14px;
-  line-height: 1.68;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
   margin: 0;
   max-width: none;
 }
@@ -363,121 +465,119 @@
 .r-orient-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .r-learning-sequence,
 .r-lesson-flow {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .r-lesson-intro {
   display: grid;
-  gap: 8px;
-  padding: 15px 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
   border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--surface) 99%, #fff 1%);
+  background: transparent;
 }
 
 .r-goal-list {
   margin: 2px 0 0;
   padding-left: 1.15rem;
   display: grid;
-  gap: 5px;
+  gap: 4px;
 }
 
 .r-goal-list li {
   font-size: 12.5px;
   line-height: 1.52;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
 }
 
 .r-goal-success {
-  margin-top: 4px;
+  margin-top: 2px;
   font-size: 12px;
-  color: color-mix(in srgb, var(--accent2) 68%, var(--text) 32%);
+  color: color-mix(in srgb, var(--accent) 62%, var(--text) 38%);
   font-weight: 600;
 }
 
 .r-translation-block {
   display: grid;
-  gap: 10px;
-  padding: 15px 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
   border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--surface) 95%, var(--surface2) 5%);
+  background: transparent;
 }
 
 .r-map-grid {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .r-map-row {
   display: grid;
-  gap: 8px;
-  padding: 12px 14px;
+  gap: 6px;
+  padding: 10px 12px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
-  background: color-mix(in srgb, var(--surface) 99%, #fff 1%);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--surface) 50%, transparent);
 }
 
 .r-map-cell-label {
   display: block;
-  font-size: 10px;
+  font-size: 9.5px;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  font-weight: 700;
-  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
-  margin-bottom: 2px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
+  margin-bottom: 1px;
 }
 
 .r-map-math {
   font-size: 12.5px;
   line-height: 1.5;
-  color: color-mix(in srgb, var(--math-ink) 84%, var(--text) 16%);
+  color: color-mix(in srgb, var(--math-ink) 80%, var(--text) 20%);
 }
 
 .r-map-code code {
   font-family: var(--font-mono);
-  color: color-mix(in srgb, var(--accent2) 86%, var(--text) 14%);
+  color: color-mix(in srgb, var(--accent) 78%, var(--text) 22%);
   font-size: 12px;
 }
 
 .r-map-meaning {
   font-size: 12px;
   line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
 }
 
 .r-core-line {
-  border: 1px solid color-mix(in srgb, var(--accent2) 20%, var(--border) 80%);
-  border-left: 4px solid color-mix(in srgb, var(--accent2) 72%, transparent);
-  padding: 14px 15px;
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--border) 86%);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 56%, transparent);
+  padding: 12px 14px;
   border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--surface) 96%, var(--accent2) 4%);
+  background: color-mix(in srgb, var(--accent) 3%, transparent);
   display: grid;
-  gap: 10px;
-  box-shadow: 0 1px 0 color-mix(in srgb, #fff 65%, transparent);
+  gap: 8px;
 }
 
 .r-core-line-kicker {
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: color-mix(in srgb, var(--accent2) 76%, var(--muted) 24%);
+  letter-spacing: 0.07em;
+  color: color-mix(in srgb, var(--accent) 68%, var(--muted) 32%);
   font-weight: 700;
 }
 
 .r-core-line-code {
   margin: 0;
-  padding: 11px 12px;
+  padding: 10px 12px;
   border-radius: var(--r-sm);
-  border: 1px dashed color-mix(in srgb, var(--accent2) 34%, var(--border) 66%);
-  background: color-mix(in srgb, var(--surface) 99%, #fff 1%);
+  border: 1px dashed color-mix(in srgb, var(--accent) 24%, var(--border) 76%);
+  background: color-mix(in srgb, var(--surface) 50%, transparent);
   overflow-x: auto;
 }
 
@@ -491,15 +591,15 @@
 .r-core-line-line {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
-  font-size: 10px;
+  font-size: 9.5px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 700;
-  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
-  background: color-mix(in srgb, var(--accent2) 16%, var(--surface) 84%);
-  border: 1px solid color-mix(in srgb, var(--accent2) 32%, var(--border) 68%);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text) 18%);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface) 88%);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border) 76%);
 }
 
 .r-core-line-fragment {
@@ -512,36 +612,36 @@
 .r-core-line-code code {
   font-family: var(--font-mono);
   font-size: 12.5px;
-  color: color-mix(in srgb, var(--accent2) 88%, var(--text) 12%);
+  color: color-mix(in srgb, var(--accent) 80%, var(--text) 20%);
 }
 
 .r-core-line-effects {
   display: grid;
-  gap: 4px;
+  gap: 3px;
 }
 
 .r-core-line-effects p {
   margin: 0;
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+  font-size: 12px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
 }
 
 .r-orient-panel {
   display: grid;
-  gap: 6px;
-  padding: 12px 14px;
+  gap: 5px;
+  padding: 10px 12px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  background: color-mix(in srgb, var(--surface) 88%, var(--surface2) 12%);
+  border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
+  background: transparent;
 }
 
 .r-orient-panel-kicker {
   font-size: 10px;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 74%, var(--muted) 26%);
+  color: color-mix(in srgb, var(--muted) 62%, var(--text) 38%);
   font-weight: 700;
 }
 
@@ -549,44 +649,44 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.58;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
   max-width: none;
 }
 
 .r-task-flow {
   display: grid;
-  gap: 8px;
-  padding: 15px 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
   border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--surface) 99%, #fff 1%);
+  background: transparent;
 }
 
 .r-task-prompt {
   margin: 0;
   font-size: 13px;
   line-height: 1.58;
-  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
 }
 
 .r-task-steps {
   margin: 0;
   padding-left: 1.15rem;
   display: grid;
-  gap: 6px;
+  gap: 5px;
 }
 
 .r-task-steps li {
   margin: 0;
   font-size: 12.5px;
-  line-height: 1.55;
+  line-height: 1.52;
 }
 
 .r-task-guard {
   margin: 0;
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+  font-size: 12px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%);
 }
 
 .r-map-fallback {
@@ -598,11 +698,11 @@
   font-size: 13px;
   line-height: 1.58;
   color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
-  padding: 12px 15px;
-  background: color-mix(in srgb, var(--surface) 97%, var(--surface2) 3%);
+  padding: 10px 13px;
+  background: transparent;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
-  border-left: 3px solid color-mix(in srgb, var(--accent2) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 48%, transparent);
 }
 
 .r-orient-action-label {
@@ -611,64 +711,36 @@
 }
 
 .r-orient-script {
-  font-size: 11px;
-  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--muted) 74%, var(--text) 26%);
   font-family: var(--font-mono);
 }
 
 /* ─── Flow Steps Indicator ───────────────────────────────────────────────── */
+/* Hidden: orientation card already communicates the workflow in prose.
+   Numbered step pills add lab-platform chrome without pedagogical value. */
 
 .r-flow-steps {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  display: none;
 }
 
-.r-flow-step {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 10px;
-  background: color-mix(in srgb, var(--surface) 98%, #fff 2%);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
-  border-radius: 999px;
-}
-
-.r-step-num {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent2) 18%, var(--surface) 82%);
-  color: color-mix(in srgb, var(--accent2) 90%, var(--text) 10%);
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.r-step-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%);
-  letter-spacing: 0.02em;
-}
-
+.r-flow-step,
+.r-step-num,
+.r-step-label,
 .r-flow-sep {
-  font-size: 12px;
-  color: color-mix(in srgb, var(--muted) 60%, var(--text) 40%);
-  font-weight: 400;
+  display: none;
 }
 
 /* ─── Runtime note in tab context ────────────────────────────────────────── */
+/* De-emphasized: the runtime pill in the orient card already shows status.
+   A separate block between orient and workspace fragments the teaching surface. */
 
 .r-tab-runtime-note {
-  /* Slightly more compact in tab context */
-  font-size: 11.5px;
-  background: color-mix(in srgb, var(--surface) 97%, var(--surface2) 3%);
-  border-color: color-mix(in srgb, var(--border) 82%, transparent);
+  font-size: 10.5px;
+  padding: 5px 10px;
+  background: transparent;
+  border-color: color-mix(in srgb, var(--border) 50%, transparent);
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
   box-shadow: none;
 }
 
@@ -683,14 +755,14 @@
 
 .r-highlight-wrap {
   position: relative;
-  border-radius: var(--r-md);
-  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
-  background: color-mix(in srgb, var(--surface) 99%, #fff 1%);
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, var(--surface2) 8%);
   overflow: hidden;
 }
 
 .r-highlight-wrap:focus-within {
-  border-color: color-mix(in srgb, var(--accent2) 46%, var(--border) 54%);
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border) 64%);
 }
 
 /* The overlay: shows highlighted code, sits below the textarea */
@@ -791,91 +863,91 @@
 }
 
 .r-output-interp {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   display: grid;
-  gap: 5px;
+  gap: 4px;
 }
 
 .r-output-focus {
   display: grid;
-  gap: 6px;
-  margin-bottom: 12px;
-  padding: 11px 12px;
+  gap: 5px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
-  border-left: 3px solid color-mix(in srgb, var(--accent2) 44%, transparent);
-  background: color-mix(in srgb, var(--surface) 96%, var(--surface2) 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 2%, transparent);
 }
 
 .r-output-focus-list {
   margin: 0;
   padding-left: 1.05rem;
   display: grid;
-  gap: 5px;
+  gap: 4px;
 }
 
 .r-output-focus-list li {
   font-size: 12px;
   line-height: 1.52;
-  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
 }
 
 .r-output-interp-kicker {
   font-size: 10px;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 68%, var(--muted) 32%);
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%);
   font-weight: 700;
 }
 
 .r-output-interp p {
-  font-size: 13px;
-  line-height: 1.6;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  font-size: 12.5px;
+  line-height: 1.58;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
   margin: 0;
   max-width: none;
 }
 
 .r-output-proof {
-  margin-top: 8px !important;
-  padding: 9px 11px;
+  margin-top: 6px !important;
+  padding: 8px 10px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
-  background: color-mix(in srgb, var(--surface) 98%, #fff 2%);
+  border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
+  background: color-mix(in srgb, var(--surface) 50%, transparent);
   font-size: 12px !important;
-  line-height: 1.55 !important;
-  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%) !important;
+  line-height: 1.52 !important;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%) !important;
 }
 
 .r-output-checklist {
   margin: 2px 0 0;
   padding-left: 1.1rem;
   display: grid;
-  gap: 4px;
+  gap: 3px;
 }
 
 .r-output-checklist li {
-  font-size: 12px;
-  line-height: 1.5;
-  color: color-mix(in srgb, var(--text) 85%, var(--muted) 15%);
+  font-size: 11.5px;
+  line-height: 1.48;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%);
 }
 
 /* ─── Tab Bottom Row: Mini-Task + Pitfalls ───────────────────────────────── */
 
 .r-tab-bottom {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(200px, 0.8fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(200px, 0.8fr);
   gap: 16px;
   align-items: start;
 }
 
 .r-tab-task-card {
   display: grid;
-  gap: 12px;
-  background: color-mix(in srgb, var(--surface) 99%, #fff 1%);
+  gap: 10px;
+  background: var(--card, color-mix(in srgb, var(--surface) 99%, #fff 1%));
 }
 
 .r-solution-body {
@@ -885,23 +957,23 @@
 
 .r-solution-label {
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 68%, var(--muted) 32%);
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%);
   font-weight: 700;
 }
 
 .r-solution-section {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .r-solution-subhead {
   font-size: 10px;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent2) 72%, var(--muted) 28%);
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%);
   font-weight: 700;
 }
 
@@ -920,9 +992,9 @@
 
 .r-solution-code {
   margin: 0;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
   background: color-mix(in srgb, var(--surface) 92%, var(--surface2) 8%);
   font-family: var(--font-mono);
   font-size: 12.5px;
@@ -933,27 +1005,27 @@
 
 .r-solution-note {
   font-size: 12px;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
-  padding: 10px 12px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+  padding: 8px 10px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
-  background: color-mix(in srgb, var(--surface) 97%, var(--surface2) 3%);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: transparent;
 }
 
 .r-solution-loop {
   margin-top: 2px;
-  padding: 9px 11px;
+  padding: 8px 10px;
   border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--accent2) 20%, var(--border) 80%);
-  background: color-mix(in srgb, var(--surface) 97%, var(--surface2) 3%);
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--border) 86%);
+  background: color-mix(in srgb, var(--accent) 2%, transparent);
   font-size: 12px;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
 }
 
 .r-solution-loop strong {
-  color: var(--accent2);
+  color: var(--accent, var(--accent2));
 }
 
 .r-solution-transfer {
@@ -967,26 +1039,31 @@
 }
 
 .r-transfer-prompt {
-  margin-top: 2px !important;
-  padding: 9px 11px;
-  border-left: 3px solid color-mix(in srgb, var(--math-ink) 58%, transparent);
-  background: color-mix(in srgb, var(--surface) 86%, var(--math-ink) 4%);
+  margin-top: 4px !important;
+  padding: 10px 12px;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 3%, transparent);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  font-size: 12.5px !important;
-  line-height: 1.58 !important;
-  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
-}
-
-.r-transfer-rule {
-  margin-top: 2px !important;
   font-size: 12.5px !important;
   line-height: 1.55 !important;
   color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%) !important;
 }
 
+.r-transfer-rule {
+  margin-top: 4px !important;
+  padding: 10px 12px !important;
+  border-radius: var(--r-sm) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border) 82%) !important;
+  background: color-mix(in srgb, var(--accent) 4%, transparent) !important;
+  font-size: 12.5px !important;
+  line-height: 1.55 !important;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
+  font-weight: 500 !important;
+}
+
 .r-tab-pitfalls {
-  background: color-mix(in srgb, var(--surface) 94%, #fff4f6 6%);
-  border-color: color-mix(in srgb, var(--border) 76%, var(--math-ink) 24%);
+  background: color-mix(in srgb, var(--sys-red, #f87171) 3%, var(--card, var(--surface)) 97%);
+  border-color: color-mix(in srgb, var(--sys-red, #f87171) 16%, var(--border) 84%);
 }
 
 /* ─── Responsive Behavior ────────────────────────────────────────────────── */
@@ -998,8 +1075,13 @@
 }
 
 @media (max-width: 980px) {
-  .r-practice-workspace {
+  .r-execution-shell .r-execution-instrument {
     grid-template-columns: 1fr;
+  }
+
+  .r-execution-shell .r-execution-instrument .r-practice-editor-card {
+    border-right: none !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 24%, transparent);
   }
 
   .r-practice-output,
@@ -1032,6 +1114,15 @@
 }
 
 @media (max-width: 640px) {
+  .r-execution-shell .r-practice-editor-card,
+  .r-execution-shell .r-practice-output-card {
+    padding: 14px 15px;
+  }
+
+  .r-practice-support-section {
+    padding: 10px 13px 12px;
+  }
+
   .r-practice-editor-card,
   .r-practice-output-card,
   .r-practice-card,
@@ -1053,5 +1144,520 @@
   .r-inline-toggle {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* ============================================================
+   PASS 56 — R-tab flagship composition (shared r-practice.css)
+   Concept lane: one pedagogical spine with internal rhythm (fewer competing
+   mini-cards). Kernzeile = hinge. Execution lane: single .r-execution-shell.
+   Evidence + transfer: attached readouts, flatter secondary surfaces.
+   ============================================================ */
+
+.r-orient-card {
+  padding: 20px 22px;
+  box-shadow: none;
+  border-color: color-mix(in srgb, var(--border) 88%, var(--text) 6%);
+}
+
+.r-lesson-flow .r-lesson-intro,
+.r-lesson-flow .r-translation-block,
+.r-lesson-flow .r-task-flow {
+  border: none;
+  border-radius: 0;
+  padding: 10px 0;
+  background: transparent;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 42%, transparent);
+}
+
+.r-lesson-flow .r-task-flow {
+  border-bottom: none;
+  padding-bottom: 2px;
+}
+
+.r-lesson-flow .r-map-row {
+  border: none;
+  border-radius: 0;
+  padding: 8px 0;
+  background: transparent;
+  border-bottom: 1px dashed color-mix(in srgb, var(--border) 46%, transparent);
+}
+
+.r-lesson-flow .r-map-row:last-child {
+  border-bottom: none;
+}
+
+/* Kernzeile = handoff hinge (concept → execution) */
+.r-lesson-flow .r-core-line {
+  margin: 10px 0 12px;
+  padding: 14px 16px;
+  border-width: 1px;
+  border-left-width: 4px;
+  border-left-color: color-mix(in srgb, var(--accent) 58%, var(--border) 42%);
+  background: color-mix(in srgb, var(--accent) 5%, var(--card) 95%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.r-orient-first-action {
+  border: none;
+  border-radius: 0;
+  padding: 10px 0 0;
+  margin-top: 4px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 44%, transparent);
+  border-left: none;
+  background: transparent;
+}
+
+/* Output evidence: attached readout, not nested admin cards */
+.r-tab-output-card .r-output-focus {
+  border: none;
+  border-radius: 0;
+  padding: 0 0 10px;
+  margin-bottom: 8px;
+  background: transparent;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 46%, transparent);
+  border-left: none;
+}
+
+.r-tab-output-card .r-output-focus-list li {
+  font-size: 12.5px;
+}
+
+.r-tab-output-card .r-output-interp {
+  margin-top: 0;
+  padding: 12px 0 0;
+  border: none;
+  border-radius: 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  background: transparent;
+}
+
+.r-tab-output-card .r-output-proof {
+  border: none;
+  border-radius: 0;
+  padding: 8px 0 0;
+  background: transparent;
+}
+
+.r-execution-shell .r-practice-output {
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 72%, var(--math-ink) 14%);
+  background: color-mix(in srgb, var(--surface) 88%, var(--surface2) 12%);
+}
+
+.r-execution-shell .r-practice-help {
+  border-top: none;
+  padding-top: 8px;
+  margin-top: 8px;
+  opacity: 0.96;
+}
+
+/* Mobile / narrow: task + pitfalls read as continuation, not twin mega-cards */
+.r-tab-bottom {
+  gap: 12px;
+}
+
+.r-tab-bottom .r-practice-card.r-tab-task-card,
+.r-tab-bottom .r-practice-pitfalls {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 12px 0;
+  background: transparent;
+  border-top: 1px solid color-mix(in srgb, var(--border) 44%, transparent);
+}
+
+.r-tab-bottom .r-practice-pitfalls {
+  border-color: color-mix(in srgb, var(--sys-red, #f87171) 22%, var(--border) 78%);
+  background: color-mix(in srgb, var(--sys-red, #f87171) 4%, transparent);
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
+  padding: 12px 14px;
+}
+
+/* ============================================================
+   PASS 56c — R-tab composition refinement (shared r-practice.css)
+   One left teaching spine, one right execution/evidence column.
+   Fewer framed rectangles; Kernzeile remains the hinge; terminal is hero.
+   ============================================================ */
+
+/* ── Left lane: one calmer teaching surface ─────────────────────────────── */
+.r-orient-card {
+  gap: 10px;
+  padding: 18px 20px 16px;
+  background: color-mix(in srgb, var(--card) 98%, var(--surface) 2%);
+}
+
+.r-orient-card > .r-lesson-flow {
+  display: grid;
+  gap: 0;
+  margin: 2px 0 0;
+  padding: 2px 0 0;
+}
+
+.r-lesson-flow .r-lesson-intro,
+.r-lesson-flow .r-translation-block,
+.r-lesson-flow .r-task-flow {
+  padding: 7px 0 9px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
+}
+
+.r-lesson-flow .r-orient-panel-kicker {
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  color: color-mix(in srgb, var(--muted) 68%, var(--text) 32%);
+}
+
+.r-lesson-flow .r-map-row {
+  padding: 5px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 26%, transparent);
+}
+
+/* Kernzeile: sole strong hinge inside the flow */
+.r-lesson-flow .r-core-line {
+  margin: 12px 0 14px;
+  padding: 15px 16px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border) 82%);
+  border-left-width: 4px;
+  background: color-mix(in srgb, var(--accent) 6.5%, var(--card) 93.5%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent) 9%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.r-lesson-flow .r-core-line-code {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 16%, var(--border) 84%);
+  border-width: 1px;
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+
+/* Auftrag + steps: lighter worksheet weight */
+.r-lesson-flow .r-task-steps li {
+  font-size: 12.35px;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+}
+
+.r-lesson-flow .r-task-guard {
+  font-size: 11.5px;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+}
+
+/* Erster Schritt / first action: final instruction band (tab + embedded head) */
+.r-orient-card > .r-orient-first-action,
+.r-practice-head .r-orient-first-action {
+  font-size: 12.35px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--muted) 74%, var(--text) 26%);
+  padding: 6px 0 8px;
+  margin-top: 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
+}
+
+.r-orient-card > .r-orient-first-action .r-orient-action-label,
+.r-practice-head .r-orient-first-action .r-orient-action-label {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 72%, var(--muted) 28%);
+}
+
+/* ── Right lane: one evidence stack, terminal as hero ──────────────────── */
+.r-tab-output-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.r-tab-output-evidence-stack {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
+  background: color-mix(in srgb, var(--surface) 35%, transparent);
+}
+
+.r-tab-output-guide-head.r-practice-output-head {
+  margin-bottom: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 36%, transparent);
+}
+
+.r-tab-output-guide-head .r-practice-toolbar-title {
+  font-size: 11.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 62%, var(--text) 38%);
+}
+
+.r-tab-output-evidence-stack .r-output-focus {
+  margin-bottom: 0;
+  padding: 8px 0 10px;
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 34%, transparent);
+  background: transparent;
+}
+
+.r-tab-output-evidence-stack .r-output-interp-kicker {
+  font-size: 9.5px;
+}
+
+.r-tab-output-evidence-stack .r-practice-output {
+  margin-top: 0;
+  min-height: 212px;
+  flex: 1 1 auto;
+  border-radius: var(--r-sm);
+  border-width: 1px;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 5%, transparent);
+}
+
+.r-tab-output-readout.r-output-interp {
+  padding: 10px 2px 2px;
+  margin-top: 0;
+  border-top: none;
+  background: transparent;
+}
+
+.r-tab-output-readout .r-output-interp-kicker {
+  margin-bottom: 2px;
+}
+
+.r-tab-output-readout .r-output-interp p {
+  font-size: 12.35px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+}
+
+.r-tab-output-readout .r-output-proof {
+  margin-top: 8px !important;
+  padding: 6px 0 0 !important;
+  border: none !important;
+  border-top: 1px dashed color-mix(in srgb, var(--border) 48%, transparent) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-size: 11.85px !important;
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%) !important;
+}
+
+/* ── Execution shell: tighter vertical instrument (chrome lives on .r-execution-instrument) ─ */
+.r-execution-shell .r-practice-editor-card,
+.r-execution-shell .r-practice-output-card {
+  padding: 15px 17px 13px;
+}
+
+.r-execution-shell .r-practice-actions {
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.r-execution-shell .r-practice-toolbar,
+.r-execution-shell .r-practice-output-head {
+  margin-bottom: 8px;
+}
+
+.r-execution-shell .r-hl-editor,
+.r-execution-shell .r-practice-editor {
+  min-height: 228px;
+}
+
+@media (max-width: 980px) {
+  .r-execution-shell .r-hl-editor,
+  .r-execution-shell .r-practice-editor {
+    min-height: 216px;
+  }
+}
+
+/* ============================================================
+   PASS 56e — Structural hierarchy (first-glance teaching vs execution)
+   One left teaching slab · one right execution instrument · only Kernzeile boxed
+   ============================================================ */
+
+/* ── Wide R tab: single lab canvas; columns are lanes, not two outer cards ─ */
+@media (min-width: 1100px) {
+  .r-lab-section.r-practice-block {
+    padding: 20px 22px 24px;
+    gap: 0;
+    column-gap: 22px;
+    row-gap: 0;
+    align-items: stretch;
+    background: color-mix(in srgb, var(--surface) 96%, var(--card) 4%);
+    border: 1px solid color-mix(in srgb, var(--border) 36%, transparent);
+    border-radius: var(--r-xl);
+    box-shadow: none;
+  }
+
+  .r-lab-section.r-practice-block > .r-orient-card {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 2px 14px 6px 2px !important;
+    border-right: 1px solid color-mix(in srgb, var(--border) 22%, transparent) !important;
+  }
+
+  .r-lab-section.r-practice-block > .r-practice-workspace {
+    padding: 2px 2px 6px 8px;
+  }
+
+  .r-lab-section.r-practice-block > .r-orient-card > .r-orient-top {
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 16%, transparent);
+  }
+}
+
+/* ── Left lane: bands + spacing only; Kernzeile = only framed hinge ─────── */
+[data-r-practice-root] .r-lesson-flow {
+  gap: 1.15rem;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-lesson-intro,
+[data-r-practice-root] .r-lesson-flow .r-translation-block,
+[data-r-practice-root] .r-lesson-flow .r-task-flow {
+  border: none !important;
+  border-radius: 0 !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-orient-panel-kicker {
+  margin-bottom: 0.35rem;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-map-row {
+  border: none !important;
+  border-radius: 0 !important;
+  border-bottom: none !important;
+  padding: 0.2rem 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-map-grid {
+  gap: 0.25rem;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line {
+  margin: 1.35rem 0 1.45rem !important;
+  padding: 1rem 1.05rem 0.95rem !important;
+  border-radius: var(--r-md) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border) 68%) !important;
+  border-left-width: 5px !important;
+  border-left-color: color-mix(in srgb, var(--accent) 62%, var(--border) 38%) !important;
+  background: color-mix(in srgb, var(--accent) 11%, var(--card) 89%) !important;
+  box-shadow:
+    0 2px 14px color-mix(in srgb, var(--accent) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent) !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-code {
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--border) 78%) !important;
+  background: color-mix(in srgb, var(--surface) 62%, transparent) !important;
+}
+
+/* Erster Schritt: instruction band, not a panel */
+[data-r-practice-root] .r-orient-first-action,
+.r-orient-card > .r-orient-first-action,
+.r-practice-head .r-orient-first-action {
+  border: none !important;
+  border-top: none !important;
+  border-radius: 0 !important;
+  padding: 0.55rem 0 0 !important;
+  margin-top: 0.85rem !important;
+  background: transparent !important;
+  font-size: 12.2px;
+  line-height: 1.52;
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
+}
+
+/* Embedded: teaching head is not a second card */
+.r-application-block .r-practice-head {
+  gap: 0.65rem;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 20%, transparent);
+}
+
+/* Lower support: continuation, not a framed deck */
+.r-practice-support-surface {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  margin-top: 1.05rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 22%, transparent) !important;
+}
+
+.r-practice-support-section {
+  padding: 10px 0 12px !important;
+}
+
+.r-practice-support--task {
+  background: transparent !important;
+}
+
+/* Right lane: one instrument interior; terminal = hero readout ───────────── */
+.r-execution-shell .r-tab-output-evidence-stack {
+  background: transparent !important;
+}
+
+.r-execution-shell .r-tab-output-guide-head.r-practice-output-head {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 14%, transparent) !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 2px !important;
+}
+
+.r-execution-shell .r-tab-output-guide-head .r-practice-toolbar-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+}
+
+.r-execution-shell .r-tab-output-evidence-stack .r-output-focus {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 12%, transparent) !important;
+}
+
+.r-execution-shell .r-practice-output {
+  border: 1px solid color-mix(in srgb, var(--border) 48%, var(--math-ink) 28%) !important;
+  background: color-mix(in srgb, var(--surface) 76%, var(--text) 24%) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.r-execution-shell .r-tab-output-readout.r-output-interp {
+  border-top: none !important;
+  padding-top: 8px !important;
+}
+
+/* Tab bottom transfer: prose rule, not a badge card */
+.r-tab-bottom .r-transfer-rule {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 6px 0 0 !important;
+  margin-top: 6px !important;
+  border-top: 1px dashed color-mix(in srgb, var(--border) 38%, transparent) !important;
+  font-weight: 500 !important;
+}
+
+/* Narrow R tab: teaching lane is a band above the instrument, not a second card */
+@media (max-width: 1099px) {
+  .r-lab-section > .r-orient-card {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 10px 0 14px !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 22%, transparent) !important;
+  }
+
+  .r-lab-section > .r-practice-workspace {
+    padding-top: 4px;
   }
 }

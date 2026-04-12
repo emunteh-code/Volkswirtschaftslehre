@@ -123,7 +123,7 @@ export function createPortalApp({
       updateProgressUI(loadProgress());
       updateNavBadges();
       renderContent(id, "theorie", initGraph);
-      renderRightPanel(id, navigate);
+      renderRightPanel(id, { navigate, currentTab: "theorie" });
       syncRightPanelVisibility();
       setActiveTab("theorie");
       // Focus the main heading for keyboard and screen-reader users
@@ -143,7 +143,7 @@ export function createPortalApp({
     setRendererState(appState.current, tab);
     setActiveTab(tab);
     renderContent(appState.current, tab, initGraph);
-    renderRightPanel(appState.current, navigate);
+    renderRightPanel(appState.current, { navigate, currentTab: tab });
     const content = document.getElementById("content");
     if (content) content.focus();
   }

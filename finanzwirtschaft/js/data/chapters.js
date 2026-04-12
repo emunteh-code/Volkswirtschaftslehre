@@ -1,3 +1,5 @@
+import { referenceList, renderSemanticBlock, schemaPhrase, schemaSequence } from '../../../assets/js/portal-core/ui/semanticContent.js';
+
 const section = (title, body) => `
   <div class="section-block">
     <h3>${title}</h3>
@@ -5,8 +7,11 @@ const section = (title, body) => `
   </div>
 `;
 
-const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> ${body}</div>`;
-const mathBlock = (eq) => `<div class="math-block">${eq}</div>`;
+const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}</strong> ${body}</div>`;
+const mathBlock = (content) => renderSemanticBlock(content, { variant: 'theory' });
+const schema = (parts, layout = 'chain') => schemaSequence(parts, { layout });
+const phrase = (text) => schemaPhrase(text);
+const ref = (...entries) => referenceList(entries);
 const step = (text, eq = null) => ({ text, eq });
 const task = (text, steps, result, hint = null) => ({ text, steps, result, ...(hint ? { hint } : {}) });
 
@@ -51,8 +56,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Leitobjekt', eq: String.raw`\text{Zahlungsreihe } \{z_0, z_1, \dots, z_n\}`, desc: 'Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.' },
-      { label: 'Leitfrage', eq: String.raw`\text{Zeitpunkt} + \text{Zahlung} + \text{Risiko} \Rightarrow \text{Entscheidung}`, desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' }
+      { label: 'Leitobjekt', eq: phrase('Zahlungsreihe { z_0, z_1, ..., z_n }'), desc: 'Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.' },
+      { label: 'Leitfrage', eq: schema(['Zeitpunkt', '+', 'Zahlung', '+', 'Risiko', '⇒', 'Entscheidung']), desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' }
     ],
     aufgaben: [
       task(
@@ -85,7 +90,7 @@ export const CONTENT = {
       section(
         'Goldene Bilanzregel und Fristenkongruenz',
         `<p>Die goldene Bilanzregel fordert, dass langfristig gebundenes Vermögen mit langfristig verfügbarem Kapital finanziert wird. Sie ist keine ästhetische Bilanzkennzahl, sondern eine Fristenregel gegen permanenten Refinanzierungsdruck.</p>
-         ${mathBlock(String.raw`$$\text{langfristiges Vermögen} \le \text{langfristiges Kapital}$$`)}
+         ${mathBlock(schema(['langfristiges Vermögen', '≤', 'langfristiges Kapital']))}
       `
       ),
       section(
@@ -96,7 +101,7 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Kumulierter Saldo', eq: String.raw`$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$`, desc: 'Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.' },
-      { label: 'Goldene Bilanzregel', eq: String.raw`\text{AV} \le \text{langfristiges Kapital}`, desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' }
+      { label: 'Goldene Bilanzregel', eq: schema(['AV', '≤', 'langfristiges Kapital']), desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' }
     ],
     aufgaben: [
       task(
@@ -128,7 +133,7 @@ export const CONTENT = {
       section(
         'Marktpreise als Tauschpreise über die Zeit',
         `<p>Kapitalmärkte übersetzen Zeit in Preise. Zinssätze und Renditen sind damit keine Dekoration, sondern die objektive Marktlogik, mit der Gegenwarts- und Zukunftszahlungen gegeneinander bewertet werden.</p>
-         ${mathBlock(String.raw`$$\text{heutige Zahlung} \xleftrightarrow[\text{Abzinsung}]{\text{Aufzinsung}} \text{künftige Zahlung}$$`)}
+         ${mathBlock(schema(['heutige Zahlung', { type: 'connector', text: '↔', note: 'Aufzinsung / Abzinsung' }, 'künftige Zahlung']))}
       `
       ),
       section(
@@ -146,8 +151,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Marktpreis der Zeit', eq: String.raw`\text{Zins} = \text{Preis des Zeittausches}`, desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.', variables: { 'Zins': 'Marktpreis, zu dem Konsum zwischen Zeitpunkten getauscht wird' } },
-      { label: 'Entscheidungslogik', eq: String.raw`\text{Zahlung} + \text{Zeitpunkt} + \text{Marktpreis} \Rightarrow \text{Bewertung}`, desc: 'Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.' }
+      { label: 'Marktpreis der Zeit', eq: schema(['Zins', '=', 'Preis des Zeittausches']), desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.', variables: { 'Zins': 'Marktpreis, zu dem Konsum zwischen Zeitpunkten getauscht wird' } },
+      { label: 'Entscheidungslogik', eq: schema(['Zahlung', '+', 'Zeitpunkt', '+', 'Marktpreis', '⇒', 'Bewertung']), desc: 'Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.' }
     ],
     aufgaben: [
       task(
@@ -200,8 +205,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Marktunvollkommenheit', eq: String.raw`\text{Informationskosten} + \text{Transaktionskosten} \Rightarrow \text{Institutionen}`, desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' },
-      { label: 'Orientierungsfrage', eq: String.raw`\text{vollkommener Markt?} \;\text{nein} \Rightarrow \text{Institution / Vertrag / Kontrolle prüfen}`, desc: 'Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.' }
+      { label: 'Marktunvollkommenheit', eq: schema(['Informationskosten', '+', 'Transaktionskosten', '⇒', 'Institutionen']), desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' },
+      { label: 'Orientierungsfrage', eq: schema(['vollkommener Markt? Nein', '⇒', 'Institution / Vertrag / Kontrolle prüfen']), desc: 'Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.' }
     ],
     aufgaben: [
       task(
@@ -576,7 +581,7 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Mehrdeutigkeit', eq: String.raw`\text{mehrere Vorzeichenwechsel} \Rightarrow \text{mehrere mögliche } r^*`, desc: 'Der IZF kann seine Eindeutigkeit verlieren.' },
+      { label: 'Mehrdeutigkeit', eq: schema(['mehrere Vorzeichenwechsel', '⇒', 'mehrere mögliche r*']), desc: 'Der IZF kann seine Eindeutigkeit verlieren.' },
       { label: 'Referenzregel', eq: String.raw`\max K_0`, desc: 'Bei Konflikten bleibt der Kapitalwert die Vermögensregel.' }
     ],
     aufgaben: [
@@ -899,8 +904,8 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Skontokosten', eq: String.raw`$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$`, desc: 'Verzicht auf Skonto kann einen sehr hohen effektiven Kreditzins bedeuten.', variables: { 's': 'Skontosatz', 'T': 'Zahlungsziel', 'Z': 'Skontofrist' } },
-      { label: 'Finanzierungs-IZF', eq: String.raw`\text{FK-Kosten} = r^* \text{ der Finanzierungszahlungsreihe}`, desc: 'Fremdfinanzierung wird finanzwirtschaftlich wie eine eigene Zahlungsreihe gelesen.' },
-      { label: 'Interpretationsregel', eq: String.raw`\text{niedriger Nominalzins} \neq \text{niedrige effektive Kosten}`, desc: 'Zusatzkosten, Fristen und Risikoprämien können den Effektivsatz deutlich erhöhen.' }
+      { label: 'Finanzierungs-IZF', eq: schema(['FK-Kosten', '=', 'r* der Finanzierungszahlungsreihe']), desc: 'Fremdfinanzierung wird finanzwirtschaftlich wie eine eigene Zahlungsreihe gelesen.' },
+      { label: 'Interpretationsregel', eq: schema(['niedriger Nominalzins', '≠', 'niedrige effektive Kosten']), desc: 'Zusatzkosten, Fristen und Risikoprämien können den Effektivsatz deutlich erhöhen.' }
     ],
     aufgaben: [
       task(
@@ -970,7 +975,7 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'WACC', eq: String.raw`$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$`, desc: 'Gewichteter Preis der Finanzierungsmischung.', variables: { 'E': 'Marktwert des Eigenkapitals', 'D': 'Marktwert des Fremdkapitals', 'k_E': 'Eigenkapitalkosten', 'k_D': 'Fremdkapitalkosten' } },
-      { label: 'Einsatzbedingung', eq: String.raw`\text{passender WACC} \Rightarrow \text{Projekt- und Finanzierungsrisiko konsistent}`, desc: 'Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.' },
+      { label: 'Einsatzbedingung', eq: schema(['passender WACC', '⇒', 'Projekt- und Finanzierungsrisiko konsistent']), desc: 'Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.' },
       { label: 'WACC in der Bewertung', eq: String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+WACC)^t}$$`, desc: 'Nur zulässig, wenn die WACC-Annahmen zur Aufgabe passen.', variables: { 'CF_t': 'erwarteter Cashflow in Periode t', 'A_0': 'Anfangsauszahlung' } }
     ],
     aufgaben: [
@@ -1048,7 +1053,7 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Leverage-Beziehung', eq: String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`, desc: 'Mehr Verschuldung verstärkt die Eigenkapitalrendite, solange die Gesamtkapitalrendite über dem Fremdkapitalzins liegt.', variables: { 'r_E': 'Eigenkapitalrendite', 'r_U': 'Gesamtkapitalrendite / ungehebelte Rendite', 'r_D': 'Fremdkapitalrendite bzw. Fremdkapitalkostensatz', 'D/E': 'Verschuldungsgrad' } },
-      { label: 'Leverage-Regel', eq: String.raw`r_U > r_D \Rightarrow \text{positiver Hebeleffekt auf } r_E`, desc: 'Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.' },
+      { label: 'Leverage-Regel', eq: schema(['r_U > r_D', '⇒', 'positiver Hebeleffekt auf r_E']), desc: 'Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.' },
       { label: 'Spannendiagnose', eq: String.raw`$$r_U-r_D > 0 \Rightarrow \text{positiver Hebel}, \qquad r_U-r_D < 0 \Rightarrow \text{negativer Hebel}$$`, desc: 'Vor jeder Interpretation muss die Renditespanne zwischen Gesamtkapital und Fremdkapital gelesen werden.', variables: { 'r_U-r_D': 'entscheidende Renditespanne für die Richtung des Hebeleffekts' } }
     ],
     aufgaben: [
@@ -1123,8 +1128,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Irrelevanz-Benchmark', eq: String.raw`\text{vollkommener Markt} \Rightarrow \text{Kapitalstruktur wertneutral}`, desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
-      { label: 'Benchmark-Aussage', eq: String.raw`\text{Leverage verändert } r_E \text{ und Risiko, aber nicht } \text{Value}`, desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' },
+      { label: 'Irrelevanz-Benchmark', eq: schema(['vollkommener Markt', '⇒', 'Kapitalstruktur wertneutral']), desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
+      { label: 'Benchmark-Aussage', eq: phrase('Leverage verändert r_E und Risiko, aber nicht Value.'), desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' },
       { label: 'Wertvergleich', eq: String.raw`$$V_L = V_U$$`, desc: 'Im MM-Benchmark haben verschuldetes und unverschuldetes Unternehmen denselben Gesamtwert.', variables: { 'V_L': 'Unternehmenswert mit Leverage', 'V_U': 'Unternehmenswert ohne Leverage' } }
     ],
     aufgaben: [

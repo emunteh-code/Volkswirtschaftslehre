@@ -10,7 +10,8 @@ export const GRAPH_CONCEPTS = new Set([
   'islm',
   'politikmix',
   'arbeitsmarkt',
-  'phillips'
+  'phillips',
+  'islmpc'
 ]);
 
 export function renderGraphPanel(id) {
@@ -86,15 +87,35 @@ export function renderGraphPanel(id) {
 </div>`,
 
     phillips: `
-<div class="graph-container">
-<h3 class="graph-panel-title">Phillipskurve und Inflationserwartungen</h3>
-<div class="graph-controls">
-<div class="ctrl-group"><label for="g_pc_pie">Erwartete Inflation πᵉ</label><input type="range" id="g_pc_pie" min="0" max="5" step="0.25" value="2.0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_pie" aria-live="polite">2.00</div></div>
-<div class="ctrl-group"><label for="g_pc_un">Natürliche ALQ uₙ</label><input type="range" id="g_pc_un" min="3" max="8" step="0.25" value="5.0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_un" aria-live="polite">5.00</div></div>
-<div class="ctrl-group"><label for="g_pc_alpha">Sensitivität α</label><input type="range" id="g_pc_alpha" min="0.4" max="1.5" step="0.1" value="0.9" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_alpha" aria-live="polite">0.9</div></div>
-<div class="ctrl-group"><label for="g_pc_u">Aktuelle ALQ u</label><input type="range" id="g_pc_u" min="3" max="9" step="0.25" value="4.25" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_u" aria-live="polite">4.25</div></div>
+<div class="graph-container graph-container--macro-focus graph-container--phillips">
+<h3 class="graph-panel-title">Phillipskurve im (u,π)-Diagramm</h3>
+<div class="graph-controls graph-controls--macro-focus">
+<div class="ctrl-group"><label for="g_pc_pie">πᵉ (erwartete Inflation)</label><input type="range" id="g_pc_pie" min="0" max="5" step="0.25" value="2.0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_pie" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_pc_un">uₙ (natürliche ALQ)</label><input type="range" id="g_pc_un" min="3" max="8" step="0.25" value="5.0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_un" aria-live="polite">5.00</div></div>
+<div class="ctrl-group"><label for="g_pc_alpha">α (Steigung der PC)</label><input type="range" id="g_pc_alpha" min="0.4" max="1.5" step="0.1" value="0.9" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_alpha" aria-live="polite">0.9</div></div>
+<div class="ctrl-group"><label for="g_pc_u">u (Arbeitslosenquote)</label><input type="range" id="g_pc_u" min="3" max="9" step="0.25" value="4.25" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_u" aria-live="polite">4.25</div></div>
+<div class="ctrl-group"><label for="g_pc_supply">s (Angebotsschock, PP)</label><input type="range" id="g_pc_supply" min="0" max="2.5" step="0.1" value="0" oninput="window.initGraph('phillips', false)"><div class="val" id="v_pc_supply" aria-live="polite">0.00</div></div>
 </div>
-<canvas id="graph_canvas" width="920" height="560" role="img" aria-label="Grafik: Erwartungsaugmentierte Phillipskurve mit aktuellem Punkt und NAIRU."></canvas>
+<div class="graph-plot-shell graph-plot-shell--macro graph-plot-shell--phillips">
+<canvas class="graph-canvas graph-canvas--macro graph-canvas--phillips" id="graph_canvas" width="1160" height="620" role="img" aria-label="Phillipskurve: gekrümmte kurzfristige Phillipskurve, natürliche Arbeitslosenquote uₙ und markierter Punkt (u, π)."></canvas>
+</div>
+<div id="graph_info" class="graph-info" aria-live="polite"></div>
+</div>`,
+
+    islmpc: `
+<div class="graph-container graph-container--macro-focus graph-container--two-panel">
+<h3 class="graph-panel-title">IS-LM-PC: (Y,i)- und (u,π)-Diagramm</h3>
+<div class="graph-controls graph-controls--macro-focus">
+<div class="ctrl-group"><label for="g_il_aut">Autonome Nachfrage (IS)</label><input type="range" id="g_il_aut" min="70" max="165" step="5" value="115" oninput="window.initGraph('islmpc', false)"><div class="val" id="v_il_aut" aria-live="polite">115</div></div>
+<div class="ctrl-group"><label for="g_il_yn">Yₙ (natürliches Produkt)</label><input type="range" id="g_il_yn" min="85" max="130" step="5" value="100" oninput="window.initGraph('islmpc', false)"><div class="val" id="v_il_yn" aria-live="polite">100</div></div>
+<div class="ctrl-group"><label for="g_il_pie">πᵉ</label><input type="range" id="g_il_pie" min="0" max="5" step="0.25" value="2" oninput="window.initGraph('islmpc', false)"><div class="val" id="v_il_pie" aria-live="polite">2.00</div></div>
+<div class="ctrl-group"><label for="g_il_alpha">α (Phillips)</label><input type="range" id="g_il_alpha" min="0.4" max="1.4" step="0.1" value="0.9" oninput="window.initGraph('islmpc', false)"><div class="val" id="v_il_alpha" aria-live="polite">0.9</div></div>
+<div class="ctrl-group"><label for="g_il_lam">λ (Zinsregel)</label><input type="range" id="g_il_lam" min="0" max="0.55" step="0.05" value="0.25" oninput="window.initGraph('islmpc', false)"><div class="val" id="v_il_lam" aria-live="polite">0.25</div></div>
+<div class="ctrl-group"><label for="g_il_shock">s (Angebotsschock, PP)</label><input type="range" id="g_il_shock" min="0" max="2.5" step="0.1" value="0" oninput="window.initGraph('islmpc', false)"><div class="val" id="v_il_shock" aria-live="polite">0.00</div></div>
+</div>
+<div class="graph-plot-shell graph-plot-shell--macro graph-plot-shell--two-panel">
+<canvas class="graph-canvas graph-canvas--macro graph-canvas--two-panel" id="graph_canvas" width="1240" height="780" role="img" aria-label="IS-LM-PC: oben IS-Kurve und Zinsregel im (Y, i)-Diagramm, unten gekrümmte Phillipskurve im (u, π)-Diagramm mit gemeinsamer Legende."></canvas>
+</div>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`
   };

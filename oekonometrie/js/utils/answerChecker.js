@@ -194,7 +194,6 @@ export class VWLBenchmarkEvaluator {
       }
       if (!numericMatch) { 
         res.calc_score = 0.2; 
-        res.msg += "RECHENFEHLER. "; 
       }
     }
 

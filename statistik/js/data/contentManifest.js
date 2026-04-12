@@ -73,8 +73,7 @@ const STATISTIK_PRIMARY_REFS_CURATED = {
     'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
     'Tutorien/Tutorium_11/Tutorium11.pdf'
   ],
-  // Primary refs intentionally []: no VL/Tutorium PDF in repo corpus names or substantively covers this portal chapter (decision doc).
-  nichtparametrisch: []
+  nichtparametrisch: ['Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf']
 };
 
 export const STATISTIK_CONCEPT_PRIMARY_REFS = Object.fromEntries(
@@ -148,7 +147,7 @@ export function buildStatistikModeIndex() {
 
 export const STATISTIK_MODE_INDEX = buildStatistikModeIndex();
 
-export const STATISTIK_CONTENT_MANIFEST_VERSION = '2026.1';
+export const STATISTIK_CONTENT_MANIFEST_VERSION = '2026.2';
 
 export function getStatistikContentManifestBridgePayload() {
   return buildContentManifestBridgePayload({

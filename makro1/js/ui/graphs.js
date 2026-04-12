@@ -5,6 +5,9 @@
 
 import GraphEngine from './graphEngine.js';
 import { renderMath } from '../utils/mathjax.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+
+const PHILLIPS_CURVE_CURVATURE = 0.075;
 
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
@@ -19,13 +22,26 @@ function setValueLabel(id, value, digits = 2) {
   label.textContent = Number(value).toFixed(digits);
 }
 
-function setupPlot(xLabel, yLabel, ranges) {
+function phillipsGapEffect(gap, alpha) {
+  return alpha * gap * (1 - PHILLIPS_CURVE_CURVATURE * gap);
+}
+
+function phillipsInflation(u, piExpected, uNatural, alpha, supply = 0) {
+  return piExpected + supply - phillipsGapEffect(u - uNatural, alpha);
+}
+
+function setupPlot(xLabel, yLabel, ranges, layout = {}) {
   const engine = new GraphEngine('graph_canvas');
   const { w, h, ctx } = engine.setup();
   const col = engine.refreshColors();
   if (!ctx || !w || !h) return null;
 
-  const pad = { left: 74, right: 28, top: 26, bottom: 58 };
+  const pad = {
+    left: layout.pad?.left ?? 74,
+    right: layout.pad?.right ?? 28,
+    top: layout.pad?.top ?? 26,
+    bottom: layout.pad?.bottom ?? 58
+  };
   const xMin = ranges.xMin;
   const xMax = ranges.xMax;
   const yMin = ranges.yMin;
@@ -110,6 +126,8 @@ function setupPlot(xLabel, yLabel, ranges) {
     ranges,
     fsBase,
     fsBold,
+    legendMargin: layout.legendMargin ?? 18,
+    legendTop: layout.legendTop ?? 46,
     legendEntries: [],
     legendSeen: new Set()
   };
@@ -149,7 +167,10 @@ function drawTag(plot, x, y, text, color, dx = 10, dy = -10, align = 'left') {
 
 function drawLegend(plot) {
   if (!plot.legendEntries.length) return;
-  plot.engine.drawLegend(plot.ctx, plot.w, plot.legendEntries, plot.col.grid, 18);
+  plot.engine.drawLegend(plot.ctx, plot.w, plot.legendEntries, plot.col.grid, {
+    rightMargin: plot.legendMargin ?? 18,
+    top: plot.legendTop ?? 46
+  });
 }
 
 function drawCurve(plot, fn, options = {}) {
@@ -163,7 +184,9 @@ function drawCurve(plot, fn, options = {}) {
     label,
     labelX,
     labelDy = -8,
-    labelAlign = 'left'
+    labelAlign = 'left',
+    /** If false, curve appears in legend only (no on-canvas tag). */
+    canvasLabel = true
   } = options;
 
   const { ctx, px, py } = plot;
@@ -192,16 +215,18 @@ function drawCurve(plot, fn, options = {}) {
   ctx.setLineDash([]);
 
   if (label) {
-    const x = labelX ?? (xStart + xEnd) / 2;
-    const y = fn(x);
-    if (Number.isFinite(y) && y >= plot.ranges.yMin && y <= plot.ranges.yMax) {
-      drawTag(plot, x, y, label, color, 10, labelDy, labelAlign);
-      registerLegend(plot, { color, label, dash, lw: lineWidth });
+    registerLegend(plot, { color, label, dash, lw: lineWidth });
+    if (canvasLabel) {
+      const x = labelX ?? (xStart + xEnd) / 2;
+      const y = fn(x);
+      if (Number.isFinite(y) && y >= plot.ranges.yMin && y <= plot.ranges.yMax) {
+        drawTag(plot, x, y, label, color, 10, labelDy, labelAlign);
+      }
     }
   }
 }
 
-function drawHorizontal(plot, y, color, label) {
+function drawHorizontal(plot, y, color, label, canvasLabel = true) {
   const { ctx, px, py, ranges, col, fsBase } = plot;
   ctx.strokeStyle = color;
   ctx.lineWidth = 2.4;
@@ -212,12 +237,14 @@ function drawHorizontal(plot, y, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    drawTag(plot, ranges.xMax, y, label, color, -138, -8, 'right');
     registerLegend(plot, { color, label, dash: [8, 6], lw: 2.4 });
+    if (canvasLabel) {
+      drawTag(plot, ranges.xMax, y, label, color, -138, -8, 'right');
+    }
   }
 }
 
-function drawVertical(plot, x, color, label) {
+function drawVertical(plot, x, color, label, canvasLabel = true) {
   const { ctx, px, py, ranges, col, fsBase } = plot;
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
@@ -228,12 +255,14 @@ function drawVertical(plot, x, color, label) {
   ctx.stroke();
   ctx.setLineDash([]);
   if (label) {
-    drawTag(plot, x, ranges.yMax, label, color, 10, 14);
     registerLegend(plot, { color, label, dash: [8, 6], lw: 2 });
+    if (canvasLabel) {
+      drawTag(plot, x, ranges.yMax, label, color, 10, 14);
+    }
   }
 }
 
-function drawPoint(plot, x, y, color, label, dx = 10, dy = -8) {
+function drawPoint(plot, x, y, color, label, dx = 10, dy = -8, canvasLabel = true) {
   const { ctx, px, py, col, fsBase } = plot;
   const cx = px(x);
   const cy = py(y);
@@ -250,8 +279,10 @@ function drawPoint(plot, x, y, color, label, dx = 10, dy = -8) {
   ctx.stroke();
 
   if (label) {
-    drawTag(plot, x, y, label, color, dx, dy);
     registerLegend(plot, { color, label, dot: true });
+    if (canvasLabel) {
+      drawTag(plot, x, y, label, color, dx, dy);
+    }
   }
 }
 
@@ -267,7 +298,7 @@ function renderInfo(equation, rows) {
   const safeRows = rows.filter((row) => row?.body);
   return `
     <span class="gi-label">Graph-Interpretation</span>
-    ${equation ? `<div class="gi-eq">\\(${equation}\\)</div>` : ''}
+    ${equation ? `<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>` : ''}
     <div class="gi-list">
       ${safeRows.map((row) => `
         <div class="gi-row">
@@ -501,41 +532,403 @@ function drawArbeitsmarkt() {
   ));
 }
 
+function solveIslmpcEquilibrium(base, isSlope, isIntercept, yn, un, pie, alpha, betaOkun, i0, lam, pit, supply) {
+  const unemploymentFromY = (Y) => un - betaOkun * ((Y - yn) / yn);
+  const piFromY = (Y) => phillipsInflation(unemploymentFromY(Y), pie, un, alpha, supply);
+  const iMp = (Y) => i0 + lam * (piFromY(Y) - pit);
+  const iIs = (Y) => isIntercept - (Y - base) / isSlope;
+  const f = (Y) => iIs(Y) - iMp(Y);
+
+  let best = yn;
+  let bestAbs = Infinity;
+  for (let g = yn * 0.72; g <= yn * 1.32; g += 0.4) {
+    const v = Math.abs(f(g));
+    if (v < bestAbs) {
+      bestAbs = v;
+      best = g;
+    }
+  }
+
+  let lo = yn * 0.78;
+  let hi = yn * 1.28;
+  let flo = f(lo);
+  let fhi = f(hi);
+  for (let e = 0; e < 22 && flo * fhi > 0; e += 1) {
+    hi += yn * 0.035;
+    lo -= yn * 0.035;
+    flo = f(lo);
+    fhi = f(hi);
+  }
+
+  if (flo * fhi <= 0) {
+    for (let k = 0; k < 100; k += 1) {
+      const mid = (lo + hi) / 2;
+      const fm = f(mid);
+      if (Math.abs(fm) < 0.004 || hi - lo < 0.012) return mid;
+      if (flo * fm <= 0) {
+        hi = mid;
+        fhi = fm;
+      } else {
+        lo = mid;
+        flo = fm;
+      }
+    }
+    return (lo + hi) / 2;
+  }
+  return best;
+}
+
+function buildSubplotPlot(ctx, col, geom, ranges, fsBase, fsBold, xLabel, yLabel) {
+  const { x0, y0, w, h, padL, padR, padT, padB } = geom;
+  const { xMin, xMax, yMin, yMax } = ranges;
+  const innerW = w - padL - padR;
+  const innerH = h - padT - padB;
+  const px = (x) => x0 + padL + ((x - xMin) / (xMax - xMin)) * innerW;
+  const py = (y) => y0 + padT + innerH - ((y - yMin) / (yMax - yMin)) * innerH;
+
+  const ticks = (min, max, steps) => Array.from({ length: steps + 1 }, (_, index) => min + ((max - min) / steps) * index);
+
+  ctx.strokeStyle = col.grid;
+  ctx.globalAlpha = 0.6;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 6]);
+  ticks(xMin, xMax, 5).forEach((tick) => {
+    const x = px(tick);
+    ctx.beginPath();
+    ctx.moveTo(x, y0 + padT);
+    ctx.lineTo(x, y0 + padT + innerH);
+    ctx.stroke();
+  });
+  ticks(yMin, yMax, 5).forEach((tick) => {
+    const y = py(tick);
+    ctx.beginPath();
+    ctx.moveTo(x0 + padL, y);
+    ctx.lineTo(x0 + padL + innerW, y);
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = col.axis;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(x0 + padL, y0 + padT);
+  ctx.lineTo(x0 + padL, y0 + padT + innerH);
+  ctx.lineTo(x0 + padL + innerW, y0 + padT + innerH);
+  ctx.stroke();
+
+  ctx.fillStyle = col.tick;
+  ctx.font = `${fsBase}px ${col.fontMono}`;
+  ctx.textAlign = 'center';
+  ticks(xMin, xMax, 5).forEach((tick) => {
+    ctx.fillText(tick.toFixed(xMax - xMin <= 12 ? 1 : 0), px(tick), y0 + h - 22);
+  });
+  ctx.textAlign = 'right';
+  ticks(yMin, yMax, 5).forEach((tick) => {
+    ctx.fillText(tick.toFixed(yMax - yMin <= 10 ? 1 : 0), x0 + padL - 5, py(tick) + 4);
+  });
+
+  ctx.fillStyle = col.label;
+  ctx.font = `600 ${fsBold}px ${col.fontMono}`;
+  ctx.textAlign = 'center';
+  if (xLabel) ctx.fillText(xLabel, x0 + padL + innerW / 2, y0 + h - 5);
+  if (yLabel) {
+    ctx.save();
+    ctx.translate(x0 + 14, y0 + padT + innerH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText(yLabel, 0, 0);
+    ctx.restore();
+  }
+
+  return {
+    ctx,
+    col,
+    px,
+    py,
+    ranges,
+    fsBase,
+    fsBold,
+    legendEntries: [],
+    legendSeen: new Set()
+  };
+}
+
+function drawISLMPC() {
+  const engine = new GraphEngine('graph_canvas');
+  const { w, h, ctx } = engine.setup();
+  const col = engine.refreshColors();
+  if (!ctx || !w || !h) return;
+
+  const base = getNumber('g_il_aut', 115);
+  const yn = getNumber('g_il_yn', 100);
+  const pie = getNumber('g_il_pie', 2);
+  const alpha = getNumber('g_il_alpha', 0.9);
+  const lam = getNumber('g_il_lam', 0.25);
+  const supply = getNumber('g_il_shock', 0);
+
+  const isSlope = 8;
+  const isIntercept = 10;
+  const un = 5;
+  const betaOkun = 0.45;
+  const i0 = 4;
+  const pit = 2;
+
+  setValueLabel('v_il_aut', base, 0);
+  setValueLabel('v_il_yn', yn, 0);
+  setValueLabel('v_il_pie', pie, 2);
+  setValueLabel('v_il_alpha', alpha, 1);
+  setValueLabel('v_il_lam', lam, 2);
+  setValueLabel('v_il_shock', supply, 2);
+
+  const yStar = solveIslmpcEquilibrium(base, isSlope, isIntercept, yn, un, pie, alpha, betaOkun, i0, lam, pit, supply);
+  const uStar = un - betaOkun * ((yStar - yn) / yn);
+  const piStar = phillipsInflation(uStar, pie, un, alpha, supply);
+  const iStar = isIntercept - (yStar - base) / isSlope;
+
+  ctx.fillStyle = col.bg;
+  ctx.fillRect(0, 0, w, h);
+
+  const fsBase = Math.max(11, Math.round(Math.min(w, h) * 0.018));
+  const fsBold = Math.max(13, Math.round(Math.min(w, h) * 0.022));
+  const plotTop = 48;
+  const bridgeGap = 12;
+  const bridgeH = 40;
+  const lowerGap = 12;
+  const bottomPad = 20;
+  const upperH = Math.max(250, Math.round((h - plotTop - bottomPad - bridgeGap - bridgeH - lowerGap) / 2));
+  const bridgeTop = plotTop + upperH + bridgeGap;
+  const lowerTop = bridgeTop + bridgeH + lowerGap;
+  const lowerH = Math.max(250, h - lowerTop - bottomPad);
+  const leftGutter = Math.max(92, Math.round(w * 0.074));
+  const legendStrip = Math.max(208, Math.round(w * 0.2));
+
+  ctx.fillStyle = col.label;
+  ctx.font = `600 ${Math.max(15, fsBold + 1)}px ${col.fontBody}`;
+  ctx.textAlign = 'center';
+  ctx.fillText('IS-LM-PC: oben (Y, i), unten (u, π)', w / 2, 24);
+
+  ctx.strokeStyle = col.grid;
+  ctx.globalAlpha = 0.55;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(leftGutter - 12, bridgeTop);
+  ctx.lineTo(w - legendStrip + 24, bridgeTop);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(leftGutter - 12, bridgeTop + bridgeH);
+  ctx.lineTo(w - legendStrip + 24, bridgeTop + bridgeH);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = col.muted;
+  ctx.font = `${Math.max(10, fsBase)}px ${col.fontBody}`;
+  ctx.fillText('Kette: Okun → Phillips → Zinsregel', w / 2, bridgeTop + (bridgeH / 2) + 4);
+
+  const xMinY = Math.min(yn * 0.88, yStar - 28, base - 25, 45);
+  const xMaxY = Math.max(yn * 1.14, yStar + 32, base + 40, 170);
+  const rUp = { xMin: xMinY, xMax: xMaxY, yMin: 0, yMax: 10 };
+  const geomUp = { x0: 0, y0: plotTop, w, h: upperH, padL: leftGutter, padR: legendStrip, padT: 18, padB: 60 };
+  const plotUp = buildSubplotPlot(ctx, col, geomUp, rUp, fsBase, fsBold, 'Y', 'i (%)');
+
+  const isCurve = (Y) => isIntercept - (Y - base) / isSlope;
+  drawCurve(plotUp, isCurve, { color: col.accent, label: 'IS-Kurve', canvasLabel: false, steps: 320 });
+  drawHorizontal(plotUp, iStar, col.warn, 'Zinsregel', false);
+  drawVertical(plotUp, yn, col.muted, 'Yₙ', false);
+  drawPoint(plotUp, yStar, iStar, col.warn, null, 0, 0, false);
+
+  const uMin = Math.min(2.8, uStar - 1.2, un - 2.5);
+  const uMax = Math.max(9.2, uStar + 1.2, un + 2.5);
+  const pc = (u) => phillipsInflation(u, pie, un, alpha, supply);
+  const pcNoShock = (u) => phillipsInflation(u, pie, un, alpha, 0);
+  const sampleU = Array.from({ length: 32 }, (_, index) => uMin + ((uMax - uMin) / 31) * index);
+  const lowerValues = sampleU.flatMap((u) => {
+    const values = [pc(u)];
+    if (supply > 0.06) values.push(pcNoShock(u));
+    return values;
+  });
+  const piMin = Math.min(-0.8, ...lowerValues, piStar) - 0.2;
+  const piMax = Math.max(6.0, ...lowerValues, piStar) + 0.45;
+  const rLo = { xMin: uMin, xMax: uMax, yMin: piMin, yMax: piMax };
+  const geomLo = { x0: 0, y0: lowerTop, w, h: lowerH, padL: leftGutter, padR: legendStrip, padT: 18, padB: 60 };
+  const plotLo = buildSubplotPlot(ctx, col, geomLo, rLo, fsBase, fsBold, 'u (%)', 'π (%)');
+
+  if (supply > 0.06) {
+    drawCurve(plotLo, pcNoShock, {
+      color: col.muted,
+      lineWidth: 2,
+      dash: [7, 7],
+      label: 'Referenz: kurzfristige PC bei s = 0',
+      canvasLabel: false,
+      steps: 360
+    });
+  }
+  const pcLegend =
+    supply > 0.06
+      ? 'Kurzfristige Phillipskurve (πᵉ + s)'
+      : 'Kurzfristige Phillipskurve bei πᵉ';
+  drawCurve(plotLo, pc, { color: col.accent, label: pcLegend, canvasLabel: false, steps: 360 });
+  drawVertical(plotLo, un, col.muted, 'uₙ (natürliche ALQ)', false);
+  drawPoint(plotLo, uStar, piStar, col.warn, null, 0, 0, false);
+
+  plotUp.engine = engine;
+  plotUp.w = w;
+  plotUp.legendMargin = 28;
+  plotUp.legendTop = plotTop + 22;
+  plotUp.legendEntries = [...plotUp.legendEntries, ...plotLo.legendEntries];
+
+  const shockNote =
+    supply > 0.05
+      ? ` Schock s = +${supply.toFixed(2)} PP verschiebt die kurzfristige Phillipskurve nach oben; über die Zinsregel steigt i.`
+      : '';
+
+  updateInfo(
+    plotUp,
+    renderInfo(String.raw`i = i_0 + \lambda(\pi - \bar\pi),\quad u-u_n \approx -\frac{\beta}{Y_n}(Y-Y_n),\quad \pi \approx \pi^e + s - \alpha (u-u_n)`, [
+      {
+        title: 'Lesart',
+        body: `Oben: IS-Kurve und Zinsregel bei Y ≈ ${yStar.toFixed(1)}, i ≈ ${iStar.toFixed(
+          2
+        )}. Unten: dieselbe Konstellation bei u ≈ ${uStar.toFixed(2)} %, π ≈ ${piStar.toFixed(
+          2
+        )} %. Die Legende sitzt rechts außerhalb des Kernfelds, damit beide Panels frei lesbar bleiben.`
+      },
+      {
+        title: 'Kette',
+        body: 'Okun: Y relativ zu Yₙ → u relativ zu uₙ. Phillipskurve: u → π. Zinsregel: π → i. IS: i → Y — wie in der Theorie zu diesem Kapitel.'
+      },
+      {
+        title: 'Gekrümmte Phillips-Seite',
+        body: 'Die untere kurzfristige Phillipskurve ist bewusst sanft gekrümmt gezeichnet: weiter fallend, um uₙ verankert und mit derselben Shift-Logik für πᵉ und s. Der markierte Punkt bleibt auf der gezeichneten Kurve.'
+      },
+      {
+        title: 'Angebotsschock',
+        body: `Regler „Angebotsschock“: untere Referenzkurve (s = 0) und verschobene kurzfristige PC.${shockNote}`
+      }
+    ])
+  );
+}
+
 function drawPhillips() {
   const pie = getNumber('g_pc_pie', 2.0);
   const un = getNumber('g_pc_un', 5.0);
   const alpha = getNumber('g_pc_alpha', 0.9);
   const uCurrent = getNumber('g_pc_u', 4.25);
+  const supply = getNumber('g_pc_supply', 0);
   setValueLabel('v_pc_pie', pie, 2);
   setValueLabel('v_pc_un', un, 2);
   setValueLabel('v_pc_alpha', alpha, 1);
   setValueLabel('v_pc_u', uCurrent, 2);
+  setValueLabel('v_pc_supply', supply, 2);
 
-  const curve = (u) => pie - alpha * (u - un);
-  const shifted = (u) => pie + 1 - alpha * (u - un);
+  const curveBase = (u) => phillipsInflation(u, pie, un, alpha, 0);
+  const curve = (u) => phillipsInflation(u, pie, un, alpha, supply);
+  const shifted = (u) => phillipsInflation(u, pie + 1, un, alpha, supply);
   const piCurrent = curve(uCurrent);
+  const xMin = Math.max(1.8, Math.min(2.4, un - 2.7, uCurrent - 1.1));
+  const xMax = Math.max(9.2, un + 3.2, uCurrent + 1.25);
+  const sampleU = Array.from({ length: 32 }, (_, index) => xMin + ((xMax - xMin) / 31) * index);
+  const curveValues = sampleU.flatMap((u) => {
+    const values = [curve(u)];
+    if (supply > 0.06) {
+      values.push(curveBase(u));
+    } else {
+      values.push(shifted(u));
+    }
+    return values;
+  });
 
-  const plot = setupPlot('Arbeitslosenquote u (in %)', 'Inflation π (in %)', {
-    xMin: 2,
-    xMax: 10,
-    yMin: -1,
-    yMax: 7
+  const plot = setupPlot('u (%)', 'π (%)', {
+    xMin,
+    xMax,
+    yMin: Math.min(-0.8, ...curveValues, piCurrent) - 0.2,
+    yMax: Math.max(6.2, ...curveValues, piCurrent) + 0.45
+  }, {
+    pad: { left: 94, right: 228, top: 38, bottom: 68 },
+    legendMargin: 28,
+    legendTop: 58
   });
   if (!plot) return;
 
-  drawCurve(plot, curve, { color: plot.col.accent, label: 'Kurzfristige Phillipskurve', labelX: 3.7 });
-  drawCurve(plot, shifted, { color: plot.col.warn, dash: [8, 6], label: 'bei höheren Erwartungen', labelX: 4.4, labelDy: 18 });
-  drawVertical(plot, un, plot.col.muted, 'uₙ');
-  drawPoint(plot, uCurrent, piCurrent, plot.col.warn, `Punkt A`, 10, -12);
+  if (supply > 0.06) {
+    drawCurve(plot, curveBase, {
+      color: plot.col.muted,
+      lineWidth: 2,
+      dash: [7, 7],
+      label: 'Referenz: kurzfristige PC bei s = 0',
+      canvasLabel: false,
+      steps: 360
+    });
+    drawCurve(plot, curve, {
+      color: plot.col.accent,
+      lineWidth: 2.8,
+      dash: [],
+      label: 'Kurzfristige Phillipskurve (πᵉ + s)',
+      canvasLabel: false,
+      steps: 360
+    });
+  } else {
+    drawCurve(plot, curve, {
+      color: plot.col.accent,
+      lineWidth: 2.8,
+      label: 'Kurzfristige Phillipskurve bei πᵉ',
+      canvasLabel: false,
+      steps: 360
+    });
+    drawCurve(plot, shifted, {
+      color: plot.col.warn,
+      lineWidth: 2.2,
+      dash: [9, 6],
+      label: 'Kurzfristige Phillipskurve bei höherem πᵉ',
+      canvasLabel: false,
+      steps: 360
+    });
+  }
 
-  updateInfo(plot, renderInfo(
-    `π = πᵉ − α (u − uₙ)`,
-    [
-      { label: 'Aktueller Punkt', body: `Bei u = ${uCurrent.toFixed(2)}% ergibt sich eine Inflation von ${piCurrent.toFixed(2)}%.` },
-      { label: 'NAIRU', body: `Bei uₙ = ${un.toFixed(2)}% bleibt Inflation bei gegebenen Erwartungen stabil.` },
-      { label: 'Erwartungen', body: 'Steigende Inflationserwartungen verschieben die gesamte kurzfristige Phillipskurve nach oben.' }
-    ]
-  ));
+  drawVertical(plot, un, plot.col.muted, 'uₙ (natürliche ALQ)', false);
+
+  drawPoint(plot, uCurrent, piCurrent, plot.col.warn, null, 0, 0, false);
+
+  const supplyRow =
+    supply > 0.05
+      ? {
+          title: 'Angebotsschock',
+          body: `s ≈ +${supply.toFixed(
+            2
+          )} PP: die durchgezogene Kurve ist die kurzfristige Phillipskurve bei πᵉ + s; die gestrichelte Kurve zeigt dieselbe πᵉ ohne Schock (Vergleich im Skript-Stil).`
+        }
+      : {
+          title: 'Angebotsschock',
+          body: 'Mit dem Regler s > 0 erscheint eine Referenzkurve (s = 0) und die verschobene kurzfristige Phillipskurve — Verschiebung, nicht Bewegung entlang derselben Kurve.'
+        };
+
+  const eqPhillips = String.raw`\pi \approx \pi^e + s - \alpha (u - u_n)`;
+
+  const expectRow =
+    supply > 0.06
+      ? null
+      : {
+          title: 'Erwartungen',
+          body: 'Die gestrichelte zweite Kurve: bei s = 0, aber um 1 Prozentpunkt höherem πᵉ — Verschiebung der kurzfristigen Phillipskurve nach oben (Vergleich zur durchgezogenen Kurve).'
+        };
+
+  const rows = [
+    {
+      title: 'Lesart',
+      body: `Markierter Punkt: u = ${uCurrent.toFixed(2)} %, π = ${piCurrent.toFixed(
+        2
+      )} %. Die senkrechte Linie ist uₙ (NAIRU / natürliche Arbeitslosenquote), die Legende sitzt rechts außerhalb des Kernplots.`
+    },
+    {
+      title: 'Gekrümmte Kursfigur',
+      body: 'Die kurzfristige Phillipskurve ist hier nicht als starre Gerade, sondern als sanft gekrümmte Lehrfigur gezeichnet: weiter fallend, um uₙ verankert und mit derselben Shift-Logik für πᵉ und s.'
+    },
+    supplyRow,
+    expectRow,
+    {
+      title: 'Hinweis',
+      body: 'Verschiebung (πᵉ, s) vs. Bewegung: ändert sich nur u bei gegebener Kurve, wandert der Punkt entlang derselben kurzfristigen Phillipskurve.'
+    }
+  ].filter(Boolean);
+
+  updateInfo(plot, renderInfo(eqPhillips, rows));
 }
 
 function initGraph(conceptId) {
@@ -560,6 +953,9 @@ function initGraph(conceptId) {
       break;
     case 'phillips':
       drawPhillips();
+      break;
+    case 'islmpc':
+      drawISLMPC();
       break;
     default:
       break;

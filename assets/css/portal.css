@@ -12,25 +12,26 @@ body[data-page="landing"] {
   --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Courier New',
                'Inconsolata', monospace;
 
-  --accent:    #4a90d9;
-  --accent2:   #5a9fd4;
-  --accent3:   #e05252;
+  --accent:    #3b82f6;
+  --accent2:   #60a5fa;
+  --accent3:   #f87171;
   --accent-fg: #ffffff;
 
-  --bg:        #0f1114;
-  --surface:   #1a1d21;
-  --surface2:  #22262b;
-  --border:    #2a2e33;
-  --text:      #e8e8ed;
-  --muted:     #8a8f98;
+  --bg:        #0d1116;
+  --surface:   #171c23;
+  --surface2:  #1d232c;
+  --card:      #11161d;
+  --border:    #2b3440;
+  --text:      #e5e7eb;
+  --muted:     #aab4c3;
 
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.35);
-  --shadow-md: 0 6px 24px rgba(0,0,0,0.45);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
+  --shadow-sm: inset 0 1px 0 rgba(255,255,255,0.04), 0 1px 3px rgba(0,0,0,0.24), 0 4px 12px rgba(0,0,0,0.18);
+  --shadow-md: inset 0 1px 0 rgba(255,255,255,0.035), 0 4px 10px rgba(0,0,0,0.28), 0 12px 28px rgba(0,0,0,0.22);
+  --shadow-lg: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.35), 0 24px 52px rgba(0,0,0,0.28);
 
-  --r-sm:  8px;
+  --r-sm: 10px;
   --r-md: 12px;
-  --r-lg: 16px;
+  --r-lg: 18px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -50,21 +51,23 @@ body[data-page="landing"] {
 
 /* ── Light Mode ────────────────────────────────────────────── */
 body[data-page="landing"].theme-light {
-  --bg:        #f2f2f7;
-  --surface:   #ffffff;
-  --surface2:  #eeeef2;
-  --border:    #d1d1d6;
-  --text:      #1c1c1e;
-  --muted:     #6c6c70;
+  --bg:        #f6f6f4;
+  --surface:   #f0f1ee;
+  --surface2:  #eaebe7;
+  --card:      #fbfbf9;
+  --border:    #d8dcd4;
+  --text:      #111827;
+  --muted:     #4b5563;
 
-  --accent:    #2c6fba;
-  --accent2:   #3a7ab8;
-  --accent3:   #c0392b;
+  --accent:    #2563eb;
+  --accent2:   #3b82f6;
+  --accent3:   #dc2626;
   --accent-fg: #ffffff;
+  --math-ink: #C91FEA;
 
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-sm: inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 2px rgba(17,24,39,0.04), 0 3px 10px rgba(17,24,39,0.05);
+  --shadow-md: inset 0 1px 0 rgba(255,255,255,0.65), 0 4px 10px rgba(17,24,39,0.06), 0 10px 26px rgba(17,24,39,0.07);
+  --shadow-lg: inset 0 1px 0 rgba(255,255,255,0.55), 0 8px 20px rgba(17,24,39,0.08), 0 20px 44px rgba(17,24,39,0.06);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -151,17 +154,21 @@ html { scroll-behavior: smooth; }
 }
 
 .lp-brand-mark {
-  display: grid;
-  place-items: center;
+  display: block;
+  flex-shrink: 0;
   width: 34px;
   height: 34px;
   border-radius: var(--r-sm);
-  background: var(--accent);
-  color: var(--accent-fg);
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  background-color: var(--text);
+  mask-image: url("../brand/portal-mark.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 62%;
+  -webkit-mask-image: url("../brand/portal-mark.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 62%;
 }
 
 .lp-brand-text {

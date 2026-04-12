@@ -611,7 +611,7 @@ export const CONTENT = {
   {
   text: String.raw`Allgemeine Form: $u = x_1^a x_2^b$ mit $a,b>0$. Zeige, dass die Budgetanteile konstant sind: $p_1 x_1^*/m = a/(a+b)$.`,
   steps: [
-  { text: `Normierte Form: $\alpha = a/(a+b)$. Marshallsche Nachfrage:`, eq: String.raw`$$x_1^* = \frac{a}{a+b}\cdot\frac{m}{p_1} \qquad x_2^* = \frac{b}{a+b}\cdot\frac{m}{p_2}$$` },
+  { text: String.raw`Normierte Form: $\alpha = a/(a+b)$. Marshallsche Nachfrage:`, eq: String.raw`$$x_1^* = \frac{a}{a+b}\cdot\frac{m}{p_1} \qquad x_2^* = \frac{b}{a+b}\cdot\frac{m}{p_2}$$` },
   { text: String.raw`Ausgabenanteil für Gut 1:`, eq: String.raw`$$\frac{p_1 x_1^*}{m} = \frac{p_1}{m}\cdot\frac{a\,m}{(a+b)p_1} = \frac{a}{a+b} = \text{const}$$` },
   { text: String.raw`Folgerung: CD-Präferenzen implizieren feste Budgetanteile, unabhängig von Preisen und Einkommen.`, eq: null },
   ],

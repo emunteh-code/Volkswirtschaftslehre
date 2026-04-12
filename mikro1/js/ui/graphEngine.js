@@ -301,7 +301,7 @@ class GraphEngine {
       const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
       const isLight = document.body.classList.contains('light-mode');
       const accent = '#2f77c7';
-      const mathInk = cv('--math-ink') || '#a83f69';
+      const mathInk = cv('--math-ink') || '#E03AFB';
       const warningRed = cv('--accent3') || '#e05252';
       const reference = isLight ? '#1c2530' : '#dde4ec';
       const optimum = reference;
@@ -507,12 +507,9 @@ class GraphEngine {
       ctx.fill();
       ctx.globalAlpha = 1;
 
-      // Optional border
-      if (borderColor) {
-        ctx.strokeStyle = borderColor;
-        ctx.lineWidth   = 1;
-        ctx.stroke();
-      }
+      ctx.strokeStyle = borderColor || col.grid;
+      ctx.lineWidth   = 1;
+      ctx.stroke();
 
       entries.forEach((entry, i) => {
         const cy = y + i * lh;
@@ -545,7 +542,7 @@ class GraphEngine {
 
         ctx.shadowColor = 'transparent';
         ctx.shadowBlur  = 0;
-        ctx.fillStyle = entry.color;
+        ctx.fillStyle = col.text;
         ctx.font = `13px ${col.fontBody}`;
         ctx.textAlign = 'left';
         ctx.fillText(entry.label, x + textX, cy + 1);

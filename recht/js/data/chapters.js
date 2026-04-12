@@ -1,3 +1,5 @@
+import { referenceList, renderSemanticBlock, schemaPhrase, schemaSequence } from '../../../assets/js/portal-core/ui/semanticContent.js';
+
 const section = (title, body) => `
   <div class="section-block">
     <h3>${title}</h3>
@@ -5,9 +7,11 @@ const section = (title, body) => `
   </div>
 `;
 
-const warn = (title, body) => `<div class="warn-box"><strong>${title}</strong> ${body}</div>`;
-
-const scheme = (text) => `<div class="math-block">${text}</div>`;
+const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}</strong> ${body}</div>`;
+const scheme = (content) => renderSemanticBlock(content, { variant: 'theory' });
+const schema = (parts, layout = 'chain') => schemaSequence(parts, { layout });
+const phrase = (text) => schemaPhrase(text);
+const ref = (...entries) => referenceList(entries);
 
 const step = (text, eq = null) => ({ text, eq });
 
@@ -54,8 +58,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Kernfrage', eq: String.raw`\text{Wer will was von wem woraus?}`, desc: 'Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.' },
-      { label: 'Normbezug', eq: String.raw`\text{Sachverhalt} \rightarrow \text{Tatbestandsmerkmal} \rightarrow \text{Rechtsfolge}`, desc: 'Das ist die elementare Struktur juristischer Arbeit.' }
+      { label: 'Kernfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.' },
+      { label: 'Normbezug', eq: schema(['Sachverhalt', '→', 'Tatbestandsmerkmal', '→', 'Rechtsfolge']), desc: 'Das ist die elementare Struktur juristischer Arbeit.' }
     ],
     aufgaben: [
       task(
@@ -87,7 +91,7 @@ export const CONTENT = {
       section(
         'Grundaufbau des BGB',
         `<p>Das BGB ist kein loses Normbündel, sondern systematisch aufgebaut: Allgemeiner Teil, Schuldrecht, Sachenrecht, Familienrecht und Erbrecht. Klausuren arbeiten oft aus dem Allgemeinen Teil heraus, bevor sie in speziellere Anspruchsgrundlagen übergehen.</p>
-         ${scheme(String.raw`\text{AT} \rightarrow \text{Schuldrecht} \rightarrow \text{Sachenrecht / Sondermaterien}`)}
+         ${scheme(schema(['AT', '→', 'Schuldrecht', '→', 'Sachenrecht / Sondermaterien']))}
       `
       ),
       section(
@@ -97,8 +101,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'BGB-System', eq: String.raw`\text{AT} + \text{Besonderer Teil}`, desc: 'Spezielle Normen bauen auf allgemeinen Regeln auf.' },
-      { label: 'Privatrecht', eq: String.raw`\text{Gleichordnung der Beteiligten}`, desc: 'Grundidee der privatrechtlichen Beziehung.' }
+      { label: 'BGB-System', eq: schema(['AT', '+', 'Besonderer Teil']), desc: 'Spezielle Normen bauen auf allgemeinen Regeln auf.' },
+      { label: 'Privatrecht', eq: phrase('Gleichordnung der Beteiligten'), desc: 'Grundidee der privatrechtlichen Beziehung.' }
     ],
     aufgaben: [
       task(
@@ -130,13 +134,13 @@ export const CONTENT = {
       section(
         'Gutachtenstil',
         `<p>Der klassische Gutachtenstil besteht aus Obersatz, Definition, Subsumtion und Ergebnis. In einfachen Fällen darf knapp formuliert werden, aber die Struktur bleibt dieselbe: Tatbestandsmerkmal für Tatbestandsmerkmal wird geprüft, ob der Sachverhalt die Normvoraussetzungen erfüllt.</p>
-         ${scheme(String.raw`\text{Obersatz} \rightarrow \text{Definition} \rightarrow \text{Subsumtion} \rightarrow \text{Ergebnis}`)}
+         ${scheme(schema(['Obersatz', '→', 'Definition', '→', 'Subsumtion', '→', 'Ergebnis']))}
       `
       ),
       section(
         'Anspruch entstanden, untergegangen, durchsetzbar',
         `<p>Die Übungen arbeiten zusätzlich mit einer zweiten Ordnungsebene: Zuerst prüfst du, ob ein Anspruch entstanden ist. Danach fragst du, ob er untergegangen ist. Erst am Ende prüfst du, ob er durchsetzbar bleibt. Diese Kette verhindert, dass Einwendungen, Gestaltungsrechte und Einreden ungeordnet vermischt werden.</p>
-         ${scheme(String.raw`\text{Anspruch entstanden} \rightarrow \text{untergegangen} \rightarrow \text{durchsetzbar}`)}
+         ${scheme(schema(['Anspruch entstanden', '→', 'untergegangen', '→', 'durchsetzbar']))}
       `
       ),
       section(
@@ -151,10 +155,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Anspruchsfrage', eq: String.raw`\text{Wer will was von wem woraus?}`, desc: 'Erste und wichtigste Sortierfrage des Falles.' },
-      { label: 'Gutachtenstil', eq: String.raw`\text{O} - \text{D} - \text{S} - \text{E}`, desc: 'Obersatz, Definition, Subsumtion, Ergebnis.' },
-      { label: 'Anspruchskette', eq: String.raw`\text{entstanden} \rightarrow \text{untergegangen} \rightarrow \text{durchsetzbar}`, desc: 'Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.' },
-      { label: 'Tatbestand vor Rechtsfolge', eq: String.raw`\text{erst Voraussetzungen, dann Folgen}`, desc: 'Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.' }
+      { label: 'Anspruchsfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Erste und wichtigste Sortierfrage des Falles.' },
+      { label: 'Gutachtenstil', eq: schema(['O', '–', 'D', '–', 'S', '–', 'E']), desc: 'Obersatz, Definition, Subsumtion, Ergebnis.' },
+      { label: 'Anspruchskette', eq: schema(['entstanden', '→', 'untergegangen', '→', 'durchsetzbar']), desc: 'Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.' },
+      { label: 'Tatbestand vor Rechtsfolge', eq: phrase('erst Voraussetzungen, dann Folgen'), desc: 'Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.' }
     ],
     aufgaben: [
       task(
@@ -216,7 +220,7 @@ export const CONTENT = {
       section(
         'Angebot, Annahme und Zugang',
         `<p>Ein Vertrag setzt zwei korrespondierende Willenserklärungen voraus: Angebot und Annahme. Das Angebot muss so bestimmt sein, dass ein einfaches „Ja“ zum Vertrag führt. Die Annahme muss inhaltlich übereinstimmen und dem Angebotenden zugehen, soweit sie empfangsbedürftig ist.</p>
-         ${scheme(String.raw`\text{Vertrag} = \text{Angebot} + \text{Annahme}`)}
+         ${scheme(schema(['Vertrag', '=', 'Angebot', '+', 'Annahme']))}
       `
       ),
       section(
@@ -226,8 +230,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Vertragsschluss', eq: String.raw`\text{Angebot} + \text{Annahme}`, desc: 'Zwei übereinstimmende Willenserklärungen.' },
-      { label: 'Angebot', eq: String.raw`\text{essentialia negotii} + \text{Rechtsbindungswille}`, desc: 'So bestimmt, dass ein einfaches Ja genügt.' }
+      { label: 'Vertragsschluss', eq: schema(['Angebot', '+', 'Annahme']), desc: 'Zwei übereinstimmende Willenserklärungen.' },
+      { label: 'Angebot', eq: schema(['essentialia negotii', '+', 'Rechtsbindungswille']), desc: 'So bestimmt, dass ein einfaches Ja genügt.' }
     ],
     aufgaben: [
       task(
@@ -260,7 +264,7 @@ export const CONTENT = {
       section(
         'Totaldissens und offener Dissens',
         `<p>Fehlt die Einigung schon bei den <em>essentialia negotii</em>, kommt von vornherein kein Vertrag zustande. Beim offenen Dissens (§ 154 BGB) wissen die Parteien, dass noch ein Punkt offen ist; dann gilt im Zweifel: kein Vertrag. Der typische Klausurzugriff ist deshalb: erst Konsensfrage, dann erst überhaupt an Rechtsfolgen denken.</p>
-         ${scheme(String.raw`\text{kein Konsens über essentialia} \Rightarrow \text{kein Vertrag}`)}
+         ${scheme(schema(['kein Konsens über essentialia', '⇒', 'kein Vertrag']))}
       `
       ),
       section(
@@ -274,10 +278,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Konsensfrage', eq: String.raw`\text{Angebot} \leftrightarrow \text{Annahme}`, desc: 'Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.' },
-      { label: 'Offener Dissens', eq: String.raw`\text{§ 154 BGB} \Rightarrow \text{im Zweifel kein Vertrag}`, desc: 'Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.' },
-      { label: 'Versteckter Dissens', eq: String.raw`\text{§ 155 BGB}`, desc: 'Nur bei wirklichem Nichtübereinstimmen und fortbestehendem Vertragswillen relevant.' },
-      { label: 'Falsa demonstratio', eq: String.raw`\text{falsa demonstratio non nocet}`, desc: 'Gemeinsam gewollter Inhalt bleibt trotz falscher Bezeichnung maßgeblich.' }
+      { label: 'Konsensfrage', eq: schema(['Angebot', '↔', 'Annahme']), desc: 'Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.' },
+      { label: 'Offener Dissens', eq: schema(['§ 154 BGB', '⇒', 'im Zweifel kein Vertrag']), desc: 'Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.' },
+      { label: 'Versteckter Dissens', eq: ref('§ 155 BGB'), desc: 'Nur bei wirklichem Nichtübereinstimmen und fortbestehendem Vertragswillen relevant.' },
+      { label: 'Falsa demonstratio', eq: phrase('falsa demonstratio non nocet'), desc: 'Gemeinsam gewollter Inhalt bleibt trotz falscher Bezeichnung maßgeblich.' }
     ],
     aufgaben: [
       task(
@@ -329,13 +333,13 @@ export const CONTENT = {
       section(
         'Anfechtungsgründe und Kausalität',
         `<p>Die Vorlesung nennt als Kernfälle Inhaltsirrtum, Erklärungsirrtum, Eigenschaftsirrtum sowie Täuschung und Drohung. Der Anfechtungsgrund muss für die Erklärung kausal gewesen sein: Ohne den Fehler wäre die Erklärung nicht oder nicht mit diesem Inhalt abgegeben worden.</p>
-         ${scheme(String.raw`\text{Anfechtungsgrund} + \text{Kausalität}`)}
+         ${scheme(schema(['Anfechtungsgrund', '+', 'Kausalität']))}
       `
       ),
       section(
         'Anfechtungserklärung und Frist',
         `<p>Die Anfechtung ist ein Gestaltungsrecht. Deshalb braucht es eine Anfechtungserklärung gegenüber dem richtigen Gegner und die Einhaltung der gesetzlichen Frist. Bei Irrtumsanfechtung gilt § 121 BGB („unverzüglich“), bei Täuschung oder Drohung § 124 BGB. Wer nur den Irrtum sieht, aber Erklärung und Frist weglässt, bleibt klausurisch unvollständig.</p>
-         ${scheme(String.raw`\text{Anfechtungsgrund} + \text{Erklärung} + \text{Frist}`)}
+         ${scheme(schema(['Anfechtungsgrund', '+', 'Erklärung', '+', 'Frist']))}
       `
       ),
       section(
@@ -345,10 +349,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Anfechtungsgründe', eq: String.raw`\text{§ 119 BGB / § 123 BGB}`, desc: 'Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.' },
-      { label: 'Vollständige Prüfung', eq: String.raw`\text{Grund} + \text{Erklärung} + \text{Frist}`, desc: 'Der Irrtum allein reicht nie für eine vollständige Lösung.' },
-      { label: 'Rechtsfolge', eq: String.raw`\text{ex tunc nichtig}`, desc: 'Das Geschäft wird rückwirkend beseitigt.' },
-      { label: 'Vertrauensschaden', eq: String.raw`\text{§ 122 BGB}`, desc: 'Eigener Folgeanspruch nach wirksamer Irrtumsanfechtung.' }
+      { label: 'Anfechtungsgründe', eq: ref('§ 119 BGB', '§ 123 BGB'), desc: 'Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.' },
+      { label: 'Vollständige Prüfung', eq: schema(['Grund', '+', 'Erklärung', '+', 'Frist']), desc: 'Der Irrtum allein reicht nie für eine vollständige Lösung.' },
+      { label: 'Rechtsfolge', eq: phrase('ex tunc nichtig'), desc: 'Das Geschäft wird rückwirkend beseitigt.' },
+      { label: 'Vertrauensschaden', eq: ref('§ 122 BGB'), desc: 'Eigener Folgeanspruch nach wirksamer Irrtumsanfechtung.' }
     ],
     aufgaben: [
       task(
@@ -400,7 +404,7 @@ export const CONTENT = {
       section(
         'Abstraktionsprinzip',
         `<p>Die Wirksamkeit des Verfügungsgeschäfts hängt grundsätzlich nicht von der Wirksamkeit des Verpflichtungsgeschäfts ab. Deshalb kann eine Eigentumsübertragung trotz unwirksamen Kaufvertrags wirksam sein. Rückabwicklung läuft dann oft über Bereicherungsrecht.</p>
-         ${scheme(String.raw`\text{Kaufvertrag} \neq \text{Übereignung}`)}
+         ${scheme(schema(['Kaufvertrag', '≠', 'Übereignung']))}
       `
       ),
       section(
@@ -410,8 +414,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Verpflichtung', eq: String.raw`\text{schuldrechtliches Geschäft}`, desc: 'Begründet Leistungspflichten.' },
-      { label: 'Verfügung', eq: String.raw`\text{dingliche Rechtsänderung}`, desc: 'Überträgt, belastet oder hebt ein Recht auf.' }
+      { label: 'Verpflichtung', eq: phrase('schuldrechtliches Geschäft'), desc: 'Begründet Leistungspflichten.' },
+      { label: 'Verfügung', eq: phrase('dingliche Rechtsänderung'), desc: 'Überträgt, belastet oder hebt ein Recht auf.' }
     ],
     aufgaben: [
       task(
@@ -443,7 +447,7 @@ export const CONTENT = {
       section(
         'Geschäftsunfähigkeit und beschränkte Geschäftsfähigkeit',
         `<p>Geschäftsunfähige können grundsätzlich keine wirksamen Willenserklärungen abgeben. Beschränkt Geschäftsfähige benötigen regelmäßig die Zustimmung der gesetzlichen Vertreter, soweit das Geschäft nicht lediglich rechtlich vorteilhaft ist oder vom Taschengeldparagraphen gedeckt wird.</p>
-         ${scheme(String.raw`\text{§ 106 BGB} \Rightarrow \text{Wirksamkeit häufig nur mit Zustimmung}`)}
+         ${scheme(schema(['§ 106 BGB', '⇒', 'Wirksamkeit häufig nur mit Zustimmung']))}
       `
       ),
       section(
@@ -453,8 +457,8 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Beschränkt geschäftsfähig', eq: String.raw`\text{§§ 106 ff. BGB}`, desc: 'Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.' },
-      { label: 'Lediglich rechtlich vorteilhaft', eq: String.raw`\text{kein rechtlicher Nachteil}`, desc: 'Dann ist keine Zustimmung nötig.' }
+      { label: 'Beschränkt geschäftsfähig', eq: ref('§§ 106 ff. BGB'), desc: 'Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.' },
+      { label: 'Lediglich rechtlich vorteilhaft', eq: phrase('kein rechtlicher Nachteil'), desc: 'Dann ist keine Zustimmung nötig.' }
     ],
     aufgaben: [
       task(
@@ -483,7 +487,7 @@ export const CONTENT = {
       section(
         'Die drei Voraussetzungen',
         `<p>Wirksame Stellvertretung verlangt eine eigene Willenserklärung des Vertreters, Handeln im fremden Namen und Vertretungsmacht. Diese drei Merkmale sind strikt nacheinander zu prüfen. Gerade die Offenkundigkeit wird in Fällen schnell übersehen.</p>
-         ${scheme(String.raw`\text{eigene WE} + \text{fremder Name} + \text{Vertretungsmacht}`)}
+         ${scheme(schema(['eigene WE', '+', 'fremder Name', '+', 'Vertretungsmacht']))}
       `
       ),
       section(
@@ -502,10 +506,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Stellvertretung', eq: String.raw`\text{§ 164 Abs. 1 BGB}`, desc: 'Handeln in fremdem Namen mit Vertretungsmacht.' },
-      { label: 'Vertretungsmacht', eq: String.raw`\text{rechtsgeschäftlich / gesetzlich / organschaftlich}`, desc: 'Quellen der Zurechnungsmacht müssen sauber getrennt werden.' },
-      { label: 'Ohne Vertretungsmacht', eq: String.raw`\text{§ 177 BGB}`, desc: 'Geschäft schwebend unwirksam bis zur Genehmigung.' },
-      { label: 'Haftung des falsus procurator', eq: String.raw`\text{§ 179 BGB}`, desc: 'Folgeebene erst nach Offenkundigkeit und ausbleibender Genehmigung prüfen.' }
+      { label: 'Stellvertretung', eq: ref('§ 164 Abs. 1 BGB'), desc: 'Handeln in fremdem Namen mit Vertretungsmacht.' },
+      { label: 'Vertretungsmacht', eq: schema(['rechtsgeschäftlich', '/', 'gesetzlich', '/', 'organschaftlich']), desc: 'Quellen der Zurechnungsmacht müssen sauber getrennt werden.' },
+      { label: 'Ohne Vertretungsmacht', eq: ref('§ 177 BGB'), desc: 'Geschäft schwebend unwirksam bis zur Genehmigung.' },
+      { label: 'Haftung des falsus procurator', eq: ref('§ 179 BGB'), desc: 'Folgeebene erst nach Offenkundigkeit und ausbleibender Genehmigung prüfen.' }
     ],
     aufgaben: [
       task(
@@ -570,7 +574,7 @@ export const CONTENT = {
       section(
         'Die Fünf-Stufen-Logik',
         `<p>Die Vorlesung arbeitet mit einer festen Prüfungsreihenfolge: Anwendungsbereich, Vorliegen von AGB, Einbeziehung, überraschende Klauseln bzw. Vorrang individueller Abreden und erst dann die Inhaltskontrolle. Diese Reihenfolge ist der eigentliche Punkteträger, weil AGB-Fälle sonst vorschnell in die Wertung rutschen.</p>
-         ${scheme(String.raw`\text{Anwendungsbereich} \rightarrow \text{AGB} \rightarrow \text{Einbeziehung} \rightarrow \text{§ 305b / § 305c} \rightarrow \text{§§ 307-309}`)}
+         ${scheme(schema(['Anwendungsbereich', '→', 'AGB', '→', 'Einbeziehung', '→', '§ 305b / § 305c', '→', '§§ 307-309']))}
       `
       ),
       section(
@@ -584,11 +588,11 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'AGB-Begriff', eq: String.raw`\text{vorformuliert} + \text{für Vielzahl} + \text{gestellt}`, desc: 'Vorliegen von AGB ist eine eigene erste Sachfrage.' },
-      { label: 'Einbeziehung', eq: String.raw`\text{Hinweis} + \text{Kenntnisnahme} + \text{Einverständnis}`, desc: 'Erst dann werden AGB Vertragsbestandteil.' },
-      { label: 'Vorrang Individualabrede', eq: String.raw`\text{§ 305b BGB}`, desc: 'Das konkret Vereinbarte verdrängt kollidierende AGB.' },
-      { label: 'Überraschende Klausel', eq: String.raw`\text{§ 305c BGB}`, desc: 'Kann schon vor der eigentlichen Inhaltskontrolle ausscheiden.' },
-      { label: 'Kontrolle', eq: String.raw`\text{§§ 307-309 BGB}`, desc: 'Inhaltskontrolle kommt erst nach Einbeziehung und Vorfragen.' }
+      { label: 'AGB-Begriff', eq: schema(['vorformuliert', '+', 'für Vielzahl', '+', 'gestellt']), desc: 'Vorliegen von AGB ist eine eigene erste Sachfrage.' },
+      { label: 'Einbeziehung', eq: schema(['Hinweis', '+', 'Kenntnisnahme', '+', 'Einverständnis']), desc: 'Erst dann werden AGB Vertragsbestandteil.' },
+      { label: 'Vorrang Individualabrede', eq: ref('§ 305b BGB'), desc: 'Das konkret Vereinbarte verdrängt kollidierende AGB.' },
+      { label: 'Überraschende Klausel', eq: ref('§ 305c BGB'), desc: 'Kann schon vor der eigentlichen Inhaltskontrolle ausscheiden.' },
+      { label: 'Kontrolle', eq: ref('§§ 307-309 BGB'), desc: 'Inhaltskontrolle kommt erst nach Einbeziehung und Vorfragen.' }
     ],
     aufgaben: [
       task(
@@ -642,7 +646,7 @@ export const CONTENT = {
       section(
         'Anspruchsprüfung im Schuldrecht AT',
         `<p>Die Übungen übertragen die allgemeine Methodik in das Schuldrecht: Anspruch entstanden, Anspruch untergegangen, Anspruch durchsetzbar. Gerade im Leistungsstörungsrecht schützt diese Reihenfolge davor, Rücktritt, Schadensersatz und Rückgewährfolgen unkontrolliert zu vermischen.</p>
-         ${scheme(String.raw`\text{Schuldverhältnis} \rightarrow \text{Pflicht} \rightarrow \text{Störung} \rightarrow \text{Rechtsfolge}`)}
+         ${scheme(schema(['Schuldverhältnis', '→', 'Pflicht', '→', 'Störung', '→', 'Rechtsfolge']))}
       `
       ),
       section(
@@ -652,10 +656,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Schuldverhältnis', eq: String.raw`\text{Leistungspflichten} + \text{Nebenpflichten}`, desc: 'Beide Ebenen können verletzt werden.' },
-      { label: 'Anspruch', eq: String.raw`\text{Recht, ein Tun oder Unterlassen zu verlangen}`, desc: 'Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.' },
-      { label: 'Pflichtverletzung', eq: String.raw`\text{Abweichung von Leistung oder Rücksichtnahme}`, desc: 'Ausgangspunkt vieler Ansprüche im Schuldrecht AT.' },
-      { label: 'Prüfungskette', eq: String.raw`\text{entstanden} \rightarrow \text{untergegangen} \rightarrow \text{durchsetzbar}`, desc: 'Auch im Schuldrecht bleibt die Methodik leitend.' }
+      { label: 'Schuldverhältnis', eq: schema(['Leistungspflichten', '+', 'Nebenpflichten']), desc: 'Beide Ebenen können verletzt werden.' },
+      { label: 'Anspruch', eq: phrase('Recht, ein Tun oder Unterlassen zu verlangen'), desc: 'Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.' },
+      { label: 'Pflichtverletzung', eq: phrase('Abweichung von Leistung oder Rücksichtnahme'), desc: 'Ausgangspunkt vieler Ansprüche im Schuldrecht AT.' },
+      { label: 'Prüfungskette', eq: schema(['entstanden', '→', 'untergegangen', '→', 'durchsetzbar']), desc: 'Auch im Schuldrecht bleibt die Methodik leitend.' }
     ],
     aufgaben: [
       task(
@@ -705,7 +709,7 @@ export const CONTENT = {
       section(
         'Grundschema',
         `<p>Das Grundschema des vertraglichen Schadensersatzes lautet: Schuldverhältnis, Pflichtverletzung, Vertretenmüssen, Schaden. Je nach Konstellation kommen zusätzliche Anforderungen wie Fristsetzung hinzu.</p>
-         ${scheme(String.raw`\text{Schuldverhältnis} + \text{Pflichtverletzung} + \text{Vertretenmüssen} + \text{Schaden}`)}
+         ${scheme(schema(['Schuldverhältnis', '+', 'Pflichtverletzung', '+', 'Vertretenmüssen', '+', 'Schaden']))}
       `
       ),
       section(
@@ -723,10 +727,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Schadensersatz neben der Leistung', eq: String.raw`\text{§ 280 I BGB}`, desc: 'Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.' },
-      { label: 'Schadensersatz statt der Leistung', eq: String.raw`\text{§§ 280 I, III, 281 BGB}`, desc: 'Regelmäßig mit erfolgloser Fristsetzung.' },
-      { label: 'Verzugsschaden', eq: String.raw`\text{§§ 280 I, II, 286 BGB}`, desc: 'Eigene Schiene bei Verzögerung der Leistung.' },
-      { label: 'Unmöglichkeit', eq: String.raw`\text{§§ 280 I, III, 283 BGB}`, desc: 'Schadensersatzpfad bei endgültiger Leistungshindernis.' }
+      { label: 'Schadensersatz neben der Leistung', eq: ref('§ 280 I BGB'), desc: 'Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.' },
+      { label: 'Schadensersatz statt der Leistung', eq: ref('§§ 280 I, III, 281 BGB'), desc: 'Regelmäßig mit erfolgloser Fristsetzung.' },
+      { label: 'Verzugsschaden', eq: ref('§§ 280 I, II, 286 BGB'), desc: 'Eigene Schiene bei Verzögerung der Leistung.' },
+      { label: 'Unmöglichkeit', eq: ref('§§ 280 I, III, 283 BGB'), desc: 'Schadensersatzpfad bei endgültiger Leistungshindernis.' }
     ],
     aufgaben: [
       task(
@@ -776,13 +780,13 @@ export const CONTENT = {
       section(
         'Rücktrittsschemata',
         `<p>Die Vorlesung arbeitet mit zwei Standardpfaden: Rücktritt wegen Nicht- oder Schlechtleistung über §§ 323, 346 BGB und Rücktritt wegen Unmöglichkeit über §§ 326 Abs. 5, 323, 346 BGB. Im ersten Pfad ist die Fristsetzung regelmäßig zentral, im zweiten tritt an ihre Stelle die Unmöglichkeit.</p>
-         ${scheme(String.raw`\text{gegenseitiger Vertrag} + \text{Störung} + \text{Frist / Unmöglichkeit} + \text{Erklärung}`)}
+         ${scheme(schema(['gegenseitiger Vertrag', '+', 'Störung', '+', 'Frist / Unmöglichkeit', '+', 'Erklärung']))}
       `
       ),
       section(
         'Rücktrittserklärung und Rückgewähr',
         `<p>Der Rücktritt braucht eine Erklärung nach § 349 BGB. Rechtsfolge ist das Rückgewährschuldverhältnis: Die ursprünglichen Hauptleistungspflichten kehren sich um. Dadurch unterscheidet sich der Rücktritt sowohl vom Schadensersatz als auch von der Anfechtung.</p>
-         ${scheme(String.raw`\text{Rücktritt} \Rightarrow \text{Rückgewährschuldverhältnis}`)}
+         ${scheme(schema(['Rücktritt', '⇒', 'Rückgewährschuldverhältnis']))}
       `
       ),
       section(
@@ -792,10 +796,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Rücktritt wegen Schlechtleistung', eq: String.raw`\text{§§ 323, 346 BGB}`, desc: 'Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.' },
-      { label: 'Rücktritt wegen Unmöglichkeit', eq: String.raw`\text{§§ 326 V, 323, 346 BGB}`, desc: 'Wichtiger Sonderpfad ohne klassische Nachfristlogik.' },
-      { label: 'Rücktrittserklärung', eq: String.raw`\text{§ 349 BGB}`, desc: 'Gestaltungsrecht braucht eine klare Erklärung.' },
-      { label: 'Rechtsfolge', eq: String.raw`\text{§ 346 BGB}`, desc: 'Rückgewähr und ggf. Wertersatz gehören auf die Folgeebene.' }
+      { label: 'Rücktritt wegen Schlechtleistung', eq: ref('§§ 323, 346 BGB'), desc: 'Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.' },
+      { label: 'Rücktritt wegen Unmöglichkeit', eq: ref('§§ 326 V, 323, 346 BGB'), desc: 'Wichtiger Sonderpfad ohne klassische Nachfristlogik.' },
+      { label: 'Rücktrittserklärung', eq: ref('§ 349 BGB'), desc: 'Gestaltungsrecht braucht eine klare Erklärung.' },
+      { label: 'Rechtsfolge', eq: ref('§ 346 BGB'), desc: 'Rückgewähr und ggf. Wertersatz gehören auf die Folgeebene.' }
     ],
     aufgaben: [
       task(
@@ -847,13 +851,13 @@ export const CONTENT = {
       section(
         'Vertragstyp und persönliche Voraussetzungen',
         `<p>Geprüft werden müssen der widerrufsfähige Vertragstyp sowie Verbraucher- und Unternehmereigenschaft. Die Vorlesung nennt besonders Fernabsatz, Haustürsituationen, Verbraucherdarlehen und Ratenlieferungsverträge. Der Widerruf knüpft also an Schutzlage und Vertragstyp an, nicht an eine Pflichtverletzung.</p>
-         ${scheme(String.raw`\text{Widerrufsrecht} + \text{Verbraucher} + \text{Unternehmer}`)}
+         ${scheme(schema(['Widerrufsrecht', '+', 'Verbraucher', '+', 'Unternehmer']))}
       `
       ),
       section(
         'Erklärung und Frist',
         `<p>Erforderlich ist eine gegenüber dem Unternehmer erklärte Widerrufsabsicht innerhalb der gesetzlichen Frist von grundsätzlich 14 Tagen. Eine Begründung ist nicht nötig. Klausurtypisch ist dabei die Klarstellung, dass für die Fristwahrung die rechtzeitige Absendung genügt.</p>
-         ${scheme(String.raw`\text{Widerrufserklärung} + \text{14 Tage}`)}
+         ${scheme(schema(['Widerrufserklärung', '+', '14 Tage']))}
       `
       ),
       section(
@@ -863,10 +867,10 @@ export const CONTENT = {
       )
     ].join(''),
     formeln: [
-      { label: 'Basisnorm', eq: String.raw`\text{§ 355 BGB}`, desc: 'Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.' },
-      { label: 'Persönliche Voraussetzungen', eq: String.raw`\text{Verbraucher} + \text{Unternehmer}`, desc: '§§ 13, 14 BGB sind Standardbausteine der Prüfung.' },
-      { label: 'Frist', eq: String.raw`\text{14 Tage}`, desc: 'Regelmäßig ab Vertragsschluss; rechtzeitige Absendung genügt.' },
-      { label: 'Rechtsfolge', eq: String.raw`\text{Rückgewährschuldverhältnis}`, desc: 'Ähnelt dem Rücktritt, beruht aber auf anderem Normzweck.' }
+      { label: 'Basisnorm', eq: ref('§ 355 BGB'), desc: 'Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.' },
+      { label: 'Persönliche Voraussetzungen', eq: schema(['Verbraucher', '+', 'Unternehmer']), desc: '§§ 13, 14 BGB sind Standardbausteine der Prüfung.' },
+      { label: 'Frist', eq: phrase('14 Tage'), desc: 'Regelmäßig ab Vertragsschluss; rechtzeitige Absendung genügt.' },
+      { label: 'Rechtsfolge', eq: phrase('Rückgewährschuldverhältnis'), desc: 'Ähnelt dem Rücktritt, beruht aber auf anderem Normzweck.' }
     ],
     aufgaben: [
       task(

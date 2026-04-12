@@ -154,8 +154,18 @@ const BASE_STEP_PROBLEMS = {
         { q: '[2. Execution] Wie hoch ist der neue Realzins?', answer: ['5%', '5', '0.05', '0,05'], options: { problemId: 'mk1_real_1', dependsOn: 'r0' }, hint: 'Nun ist π^e = 0.', explain: 'Der neue Realzins beträgt 5%.' },
         { q: '[3. Validation] Welche Wirkung hat das auf Investitionen?', answer: ['sie sinken', 'investitionen sinken'], options: { problemId: 'mk1_real_1', role: 'VALIDATION' }, hint: 'Höhere reale Finanzierungskosten bremsen Nachfrage.', explain: 'Steigende Realzinsen dämpfen Investitionen und Nachfrage.' }
       ]
+    },
+    {
+      title: 'ELB und Fisher-Kanal',
+      context: 'Der Nominalzins liegt bereits bei 0%, die erwartete Inflation sinkt weiter.',
+      steps: [
+        { q: '[1. Decision] Welche Beziehung entscheidet jetzt direkt über die reale Restriktion?', answer: ['r ≈ i − π^e', 'fisher', 'realzinsgleichung'], options: { problemId: 'mk1_real_fisher_elb', stepId: 'fisher_rule', isDecision: true }, hint: 'Nullzins allein reicht nicht für die Diagnose.', explain: 'An der Untergrenze entscheidet die Fisher-Beziehung darüber, wie expansiv der reale Zins wirklich ist.' },
+        { q: '[2. Execution] Wenn i = 0 bleibt und π^e fällt: Steigt oder sinkt der Realzins?', answer: ['steigt', 'realzins steigt'], options: { problemId: 'mk1_real_fisher_elb', dependsOn: 'fisher_rule' }, hint: 'Subtrahiere eine kleinere Inflationsrate.', explain: 'Bei fallender erwarteter Inflation steigt der Realzins bzw. wird weniger negativ.' },
+        { q: '[3. Validation] Warum ist das makroökonomisch problematisch?', answer: ['weil geldpolitik real restriktiver wird', 'weil der reale spielraum klein bleibt', 'investitionen werden gebremst'], options: { problemId: 'mk1_real_fisher_elb', role: 'VALIDATION' }, hint: 'Denke an Nachfrage trotz Nullzins.', explain: 'Die Zentralbank stößt real an Grenzen: Trotz i = 0 bleibt der Finanzierungssatz für Nachfrageentscheidungen zu hoch.' }
+      ]
     }
-    ,
+  ],
+  realzins_risikopraemie_krisenkanal: [
     {
       title: 'Doppelter Finanzierungsschock',
       context: 'Leitzins unverändert, Inflationserwartung sinkt, Risikoprämie steigt.',
@@ -239,8 +249,6 @@ const BASE_STEP_PROBLEMS = {
     }
   ]
 };
-
-BASE_STEP_PROBLEMS.realzins_risikopraemie_krisenkanal = BASE_STEP_PROBLEMS.realzins_fisher_erwartungen;
 
 export const STEP_PROBLEMS = ensureMinimumStepProblems({
   chapters: CHAPTERS,

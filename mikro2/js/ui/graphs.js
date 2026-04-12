@@ -1,4 +1,5 @@
 import { renderMath } from '../utils/mathjax.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 
 let rafId = null;
 
@@ -31,7 +32,7 @@ function readColors() {
     accent: pick('--accent', '#2c6fba'),
     accent2: pick('--accent2', '#3a7ab8'),
     warn: pick('--accent3', '#c0392b'),
-    math: pick('--math-ink', '#d81f74'),
+    math: pick('--math-ink', '#E03AFB'),
     green: pick('--semantic-green', '#2d8659'),
     fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif'),
     fontMono: pick('--font-mono', 'SF Mono, Menlo, monospace')
@@ -65,7 +66,7 @@ function setGraphInfo(html) {
 
 function buildGraphInfo({ label = 'Graph-Interpretation', equation = '', rows = [] }) {
   const parts = [`<span class="gi-label">${label}</span>`];
-  if (equation) parts.push(`<div class="gi-eq">${equation}</div>`);
+  if (equation) parts.push(`<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>`);
   if (rows.length) {
     parts.push('<div class="gi-list">');
     rows.forEach((row) => {

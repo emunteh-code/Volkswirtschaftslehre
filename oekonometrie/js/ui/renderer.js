@@ -347,7 +347,7 @@ function decorateSemanticMathSurfaces() {
     '#content .mastery-item',
     '#content .mastery-bar-label',
     '#rightPanel .rp-conn',
-    '#rightPanel .rp-mistake .fix',
+    '#rightPanel .rp-mistake--rail .rp-mistake-body',
     '#rightPanel .rp-f-name',
     '#sidebar .nav-item > span:not(.num):not(.mastery)'
   ].forEach((selector) => {
@@ -644,7 +644,7 @@ ${drills.map((drill, index) => {
     cardClass: 'exam-drill-card',
     answerMarkup: `<h4>Musterlösung</h4>
 ${metaLabel ? `<div class="exam-drill-meta">${metaLabel}</div>` : ''}
-<div class="exam-drill-solution">${drill.answer}</div>`
+${drill.answer}`
   });
 }).join('')}
 </div>
@@ -709,8 +709,8 @@ function buildMicroIntuitionPanel(conceptId) {
 ${formula ? `<div class="intuition-callout">
 <span class="intuition-callout-label">Formaler Anker</span>
 <div class="intuition-callout-body">
-<div class="math-block">${formula.eq}</div>
-${formula.desc ? `<p>${formula.desc}</p>` : ''}
+${formula.eq ? `<div class="intuition-callout-anchor"><div class="math-block">${formula.eq}</div></div>` : ''}
+${formula.desc ? `<p class="intuition-callout-desc">${formula.desc}</p>` : ''}
 </div>
 </div>` : ''}
 </div>

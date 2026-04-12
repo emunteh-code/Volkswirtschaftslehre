@@ -1,6 +1,7 @@
 import GraphEngine from './graphEngine.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 import { renderMath } from '../utils/mathjax.js';
+import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 
 let _rafId = null;
 
@@ -49,7 +50,7 @@ function palette() {
     text: pick('--text', '#1c1c1e'),
     blue: pick('--accent', '#2c6fba'),
     red: pick('--accent3', '#c0392b'),
-    magenta: pick('--math-ink', '#d81f74'),
+    magenta: pick('--math-ink', '#E03AFB'),
     green: pick('--semantic-green', '#2d8659'),
     orange: pick('--sys-orange', '#cf7b2a'),
     neutral: pick('--nav-active-text', '#244a72')
@@ -91,7 +92,7 @@ function buildGraphInfo({ label = 'Graph-Interpretation', equation = '', rows = 
 
   return `
     <span class="gi-label">${label}</span>
-    ${equation ? `<div class="gi-eq">${equation}</div>` : ''}
+    ${equation ? `<div class="gi-eq">${ensureMathJaxEquationHtml(equation)}</div>` : ''}
     ${rows.length ? `<div class="gi-list">${rowMarkup}</div>` : ''}
   `;
 }

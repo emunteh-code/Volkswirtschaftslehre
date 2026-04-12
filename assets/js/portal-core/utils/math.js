@@ -117,7 +117,9 @@ export function normalizeGermanCopy(root = document.body) {
 export function ensureMathJax() {
   if (document.getElementById("MathJax-script")) return;
   window.MathJax = {
+    loader: { load: ["[tex]/ams"] },
     tex: {
+      packages: { "[+]": ["ams"] },
       inlineMath: [["$", "$"], ["\\(", "\\)"]],
       displayMath: [["$$", "$$"], ["\\[", "\\]"]]
     },

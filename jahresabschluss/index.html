@@ -15,7 +15,9 @@
 
   <script>
     window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
       tex: {
+        packages: { '[+]': ['ams'] },
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']]
       },
@@ -28,8 +30,9 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../assets/css/premium-refinement.css">
 </head>
-<body>
+<body data-portal-module="jahresabschluss">
 
 <div id="consentNotice" class="consent-notice" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
   <div class="consent-notice-inner">

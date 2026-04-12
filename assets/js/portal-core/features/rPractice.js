@@ -3,6 +3,7 @@ const STORAGE_PREFIX = 'portal_r_practice_v1';
 
 let webRPromise = null;
 const practiceRegistry = new Map();
+const blockRunRegistry = new WeakMap();
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -465,6 +466,62 @@ function inferLearningGoal(block) {
   return 'Lernziel: Übersetze die Fachidee sauber in einen belastbaren R-Arbeitsschritt.';
 }
 
+/** Normalize for comparing header copy vs Idee body (quotes, dashes, spacing, case). */
+function normalizeRIntroDedupeKey(text) {
+  return String(text || '')
+    .replace(/[\u201c\u201d\u201e\u2033\u00ab\u00bb\u201a\u2018\u2019]/g, '"')
+    .replace(/[\u2013\u2014]/g, '-')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/\.$/u, '')
+    .toLowerCase();
+}
+
+/**
+ * True when the paragraph under the R title would repeat the Idee opening:
+ * same text after normalization, or Idee begins with the full header text (authoring overlap).
+ */
+function isDuplicateHeaderPurposeVsIdee(purpose, learningGoal) {
+  const p = normalizeRIntroDedupeKey(purpose);
+  const g = normalizeRIntroDedupeKey(learningGoal);
+  if (!p || !g) return false;
+  if (p === g) return true;
+  /* Idee repeats the opening of the header paragraph */
+  if (p.length >= 24 && g.startsWith(p)) return true;
+  /* Header is the same idea with extra wording; Idee is the short form */
+  if (g.length >= 24 && p.startsWith(g)) return true;
+  return false;
+}
+
+/** Drop leading bullets that only repeat the Idee lead (common authoring slip). */
+function dedupeGoalBulletsAgainstLead(lead, bullets) {
+  if (!Array.isArray(bullets) || !bullets.length) return bullets;
+  const k = normalizeRIntroDedupeKey(lead);
+  if (!k) return bullets;
+  const out = [...bullets];
+  while (out.length) {
+    const bk = normalizeRIntroDedupeKey(out[0]);
+    if (!bk) {
+      out.shift();
+      continue;
+    }
+    if (bk === k) {
+      out.shift();
+      continue;
+    }
+    if (k.length >= 20 && bk.startsWith(k)) {
+      out.shift();
+      continue;
+    }
+    if (bk.length >= 20 && k.startsWith(bk)) {
+      out.shift();
+      continue;
+    }
+    break;
+  }
+  return out;
+}
+
 function inferGoalBullets(block) {
   if (Array.isArray(block.goalBullets) && block.goalBullets.length) return block.goalBullets;
 
@@ -882,6 +939,34 @@ ${code}
   return String(jsValue);
 }
 
+function getBlockRunState(blockEl) {
+  const existing = blockRunRegistry.get(blockEl);
+  if (existing) return existing;
+  const created = { running: false, stopRequested: false, runToken: 0 };
+  blockRunRegistry.set(blockEl, created);
+  return created;
+}
+
+function setRunButtonState(blockEl, mode = 'idle') {
+  const runButton = blockEl.querySelector('[data-r-action="run"]');
+  blockEl.querySelectorAll('[data-r-action="reset"], [data-r-action="insert-solution"]').forEach((button) => {
+    button.disabled = mode === 'running' || mode === 'stopping';
+  });
+  if (!runButton) return;
+  if (mode === 'running') {
+    runButton.textContent = 'Stoppen';
+    runButton.dataset.mode = 'running';
+    return;
+  }
+  if (mode === 'stopping') {
+    runButton.textContent = 'Anhalten…';
+    runButton.dataset.mode = 'stopping';
+    return;
+  }
+  runButton.textContent = 'Ausführen';
+  runButton.dataset.mode = 'idle';
+}
+
 function buildRuntimeExpectation(mode, runtimeNote) {
   if (runtimeNote) return runtimeNote;
   if (mode === 'guided') {
@@ -925,13 +1010,27 @@ function buildConfig(block, options = {}) {
   const keepHint = inferKeepHint(block, taskMode);
 
   let purpose = block.purpose || '';
-  if (moduleSlug === 'statistik') {
-    const oekHint = 'Gleiche Arbeitsreihenfolge wie im Ökonometrie-Modul: Output lesen → Mini-Task → Code zuordnen.';
-    if (purpose && !/\bÖkonometrie\b/i.test(purpose)) {
-      purpose = `${oekHint} ${purpose}`;
-    } else if (!purpose) {
-      purpose = oekHint;
-    }
+  const displayTitle = block.title || 'Vom Modell zur Auswertung';
+  const learningGoal = inferLearningGoal(block);
+  const goalBullets = dedupeGoalBulletsAgainstLead(learningGoal, inferGoalBullets(block));
+  const successSignal = inferSuccessSignal(block, taskMode);
+  const purposeDupVsIdee = isDuplicateHeaderPurposeVsIdee(purpose, learningGoal);
+  const purposeDupVsTitle = Boolean(String(purpose).trim())
+    && normalizeRIntroDedupeKey(purpose) === normalizeRIntroDedupeKey(displayTitle);
+  const headerPurpose = (purposeDupVsIdee || purposeDupVsTitle) ? '' : purpose;
+  const titleMatchesLead = normalizeRIntroDedupeKey(learningGoal) === normalizeRIntroDedupeKey(displayTitle);
+  /* Title already states the lead; do not repeat it under „Idee“. */
+  let ideeLeadParagraph = titleMatchesLead ? '' : learningGoal;
+  let showIdeeSuccess =
+    Boolean(String(successSignal).trim())
+    && normalizeRIntroDedupeKey(successSignal) !== normalizeRIntroDedupeKey(learningGoal)
+    && normalizeRIntroDedupeKey(successSignal) !== normalizeRIntroDedupeKey(displayTitle);
+  const ideeWouldBeEmpty = !ideeLeadParagraph && !goalBullets.length && !showIdeeSuccess;
+  if (ideeWouldBeEmpty) {
+    ideeLeadParagraph = learningGoal;
+    showIdeeSuccess =
+      Boolean(String(successSignal).trim())
+      && normalizeRIntroDedupeKey(successSignal) !== normalizeRIntroDedupeKey(learningGoal);
   }
 
   const coreLine = coreTarget.expression || inferCoreLine(block);
@@ -943,8 +1042,9 @@ function buildConfig(block, options = {}) {
     moduleSlug,
     blockId,
     runtimeMode,
-    title: block.title || 'Vom Modell zur Auswertung',
+    title: displayTitle,
     purpose,
+    headerPurpose,
     script: block.script || '',
     conceptId: options.conceptId || block.conceptId || '',
     starterCode: normalizeCode(block.starterCode || block.code || ''),
@@ -952,9 +1052,11 @@ function buildConfig(block, options = {}) {
     miniTask: block.miniTask || '',
     taskPrompt,
     taskMode,
-    learningGoal: inferLearningGoal(block),
-    goalBullets: inferGoalBullets(block),
-    successSignal: inferSuccessSignal(block, taskMode),
+    learningGoal,
+    goalBullets,
+    ideeLeadParagraph,
+    showIdeeSuccess,
+    successSignal,
     coreLine,
     coreCue: coreTarget.cue,
     coreLineAnchor: coreAnchor,
@@ -1017,30 +1119,30 @@ function renderTaskBriefs(config) {
 
   return `<div class="r-lesson-flow">
   <div class="r-lesson-intro">
-    <div class="r-orient-panel-kicker">Lernziel</div>
-    <p>${escapeHtml(config.learningGoal)}</p>
+    <div class="r-orient-panel-kicker">Idee</div>
+    ${config.ideeLeadParagraph ? `<p>${escapeHtml(config.ideeLeadParagraph)}</p>` : ''}
     ${config.goalBullets?.length ? `<ul class="r-goal-list">${config.goalBullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
-    <p class="r-goal-success"><strong>Erfolgssignal:</strong> ${escapeHtml(config.successSignal)}</p>
+    ${config.showIdeeSuccess ? `<p class="r-goal-success"><strong>Ziel:</strong> ${escapeHtml(config.successSignal)}</p>` : ''}
   </div>
   <div class="r-translation-block">
-    <div class="r-orient-panel-kicker">Mathe ↔ R-Übersetzung (explizit)</div>
-    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Ergänze die Zuordnung: mathematischer Parameter -> exakter R-Ausdruck -> fachliche Bedeutung.</div>'}</div>
+    <div class="r-orient-panel-kicker">Mathe ↔ R</div>
+    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Parameter → R-Ausdruck → Bedeutung</div>'}</div>
   </div>
   <div class="r-core-line">
-    <span class="r-core-line-kicker">Kernzeile (hier entscheidet sich die Aussage)</span>
+    <span class="r-core-line-kicker">Kernzeile</span>
     <div class="r-core-line-meta">
       ${config.coreLineAnchor?.lineNo ? `<span class="r-core-line-line">Zeile ${config.coreLineAnchor.lineNo}</span>` : '<span class="r-core-line-line">Zielzeile</span>'}
-      <span class="r-core-line-fragment">${escapeHtml(config.coreCue || 'Arbeite nur an dieser einen Expression.')}</span>
+      <span class="r-core-line-fragment">${escapeHtml(config.coreCue || 'Nur diese Expression ändern.')}</span>
     </div>
     <pre class="r-core-line-code"><code>${escapeHtml(config.coreLineAnchor?.expression || config.coreLine)}</code></pre>
     <div class="r-core-line-effects">
-      <p><strong>Wenn du änderst:</strong> ${escapeHtml(config.coreLineEffects.effect)}</p>
-      <p><strong>Bleibt invariant:</strong> ${escapeHtml(config.coreLineEffects.invariant)}</p>
+      <p><strong>Änderung →</strong> ${escapeHtml(config.coreLineEffects.effect)}</p>
+      <p><strong>Invariant:</strong> ${escapeHtml(config.coreLineEffects.invariant)}</p>
     </div>
   </div>
   <div class="r-task-flow">
-    <div class="r-orient-panel-kicker">Arbeitsauftrag</div>
-    <p class="r-task-prompt">${escapeHtml(config.taskPrompt || config.miniTask || 'Lies den Code, prüfe den Output und arbeite den Mini-Task ab.')}</p>
+    <div class="r-orient-panel-kicker">Auftrag</div>
+    <p class="r-task-prompt">${escapeHtml(config.taskPrompt || config.miniTask || 'Code lesen, Output prüfen, Aufgabe lösen.')}</p>
     <ol class="r-task-steps">
       ${taskFlow.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}
     </ol>
@@ -1052,7 +1154,7 @@ function renderTaskBriefs(config) {
 function renderSolutionDetails(config) {
   const changeList = config.solutionChanges.length
     ? `<div class="r-solution-section">
-  <div class="r-solution-subhead">So ändert sich dein Zugriff</div>
+  <div class="r-solution-subhead">Was sich ändert</div>
   <ul class="r-solution-list">
     ${config.solutionChanges.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
   </ul>
@@ -1066,15 +1168,15 @@ function renderSolutionDetails(config) {
 </div>`
     : `<div class="r-solution-note">${escapeHtml(
       config.taskMode === 'interpret'
-        ? 'Keine Codeänderung nötig: Diese R-Übung prüft vor allem Output-Lesen, Zuordnung und fachliche Deutung.'
-        : 'Die Musterlösung zeigt den Zielschritt klar. Wenn du den Code änderst, halte dich an die eine fachlich entscheidende Stelle.'
+        ? 'Keine Codeänderung nötig — hier zählt Output-Lesen und fachliche Deutung.'
+        : 'Ändere nur die eine entscheidende Stelle.'
     )}</div>`;
 
   return `<div class="r-solution-body">
-  <div class="r-solution-label">Musterlösung</div>
+  <div class="r-solution-label">Lösung</div>
   <p>${escapeHtml(config.solution)}</p>
   <div class="r-solution-loop">
-    <strong>So argumentierst du sauber:</strong> Begründe die Änderung zuerst fachlich, dann im Code, dann mit der entscheidenden Output-Zeile.
+    <strong>Argumentationskette:</strong> Fachliche Begründung → Codeänderung → entscheidende Output-Zeile.
   </div>
   <div class="r-solution-transfer"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</div>
   ${changeList}
@@ -1092,55 +1194,60 @@ export function renderRPracticeMarkup(block, options = {}) {
     <span class="r-application-kicker">R-Übung</span>
     <h3>${escapeHtml(config.title)}</h3>
   </div>
-  <p class="r-practice-bridge">${escapeHtml(config.purpose)}</p>
-  <div class="r-practice-meta-row">
-    ${config.script ? `<div class="r-script-ref">${escapeHtml(config.script)}</div>` : ''}
-    <div class="r-runtime-note">${escapeHtml(config.runtimeNote)}</div>
-  </div>
+  ${config.headerPurpose ? `<p class="r-practice-bridge">${escapeHtml(config.headerPurpose)}</p>` : ''}
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(config.firstStep)}
+    <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep)}
   </div>
 </div>
 <div class="r-practice-workspace">
+  <div class="r-execution-shell">
+  <div class="r-execution-instrument">
   <div class="r-practice-editor-card">
     <div class="r-practice-toolbar">
       <div>
-        <div class="r-practice-toolbar-kicker">Codebereich</div>
-        <div class="r-practice-toolbar-title">Code als Modell der Fachidee</div>
+        <div class="r-practice-toolbar-title">Nur die Kernzeile ändern</div>
       </div>
-      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv im Browser'}</span>
+      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
     </div>
     <textarea class="r-practice-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
     <div class="r-practice-actions">
-      <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen'}</button>
-      <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
-      <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
+      <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen'}</button>
+      <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
+      <button type="button" class="btn secondary" data-r-action="insert-solution">Lösung einfügen</button>
     </div>
 <div class="r-practice-help">
-      <span class="r-practice-help-label">Bearbeitungshinweis</span>
       <p><strong>Ändern:</strong> ${escapeHtml(config.changeFocus)}</p>
-      <p><strong>Stehen lassen:</strong> ${escapeHtml(config.keepHint)}</p>
+      <p><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
     </div>
   </div>
-  <div class="r-practice-output-card">
-    <div class="r-practice-output-head">
-      <div>
-        <div class="r-practice-toolbar-kicker">Output</div>
-        <div class="r-practice-toolbar-title">Output lesen und belegen</div>
-      </div>
+  <div class="r-practice-output-card r-tab-output-card">
+  <div class="r-tab-output-evidence-stack">
+  <div class="r-practice-output-head r-tab-output-guide-head">
+    <div>
+      <div class="r-practice-toolbar-title">Was zählt im Output</div>
     </div>
-    <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
+  </div>
+  ${(config.outputChecklist || []).length ? `<div class="r-output-focus">
+    <div class="r-output-interp-kicker">Darauf achten</div>
+    <ul class="r-output-focus-list">
+      ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+    </ul>
+  </div>` : ''}
+  <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
+  </div>
+  </div>
+  </div>
   </div>
 </div>
-<div class="r-practice-grid">
-  <div class="r-practice-card">
-    <h4>Output lesen</h4>
+<div class="r-practice-support-surface" aria-label="Output-Deutung, Aufgabe und Transfer">
+  <div class="r-practice-support-section r-practice-support--evidence">
+    <h4>Output-Beweis</h4>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
   </div>
-  <div class="r-practice-card">
-    <h4>Mini-Task</h4>
+  <div class="r-practice-support-section r-practice-support--task">
+    <h4>Aufgabe</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
@@ -1237,10 +1344,10 @@ ${steps.map((label, i) => `<div class="r-flow-step"><span class="r-step-num">${i
 
 function renderTabOrientationCard(config, index, total) {
   const isMulti = total > 1;
-  const indexLabel = isMulti ? ` · Block ${index + 1} von ${total}` : '';
+  const indexLabel = isMulti ? ` · ${index + 1} / ${total}` : '';
   const firstAction = config.runtimeMode === 'guided'
-    ? 'Lies den Code sorgfältig durch. Nutze die Interpretation und den Mini-Task — ein Live-Run ist hier nicht erforderlich.'
-    : 'Lies den Code einmal durch, dann klicke „Code ausführen". Danach: Output lesen → Interpretation → Mini-Task.';
+    ? 'Lies den Code durch. Nutze Interpretation und Aufgabe — ein Live-Run ist hier nicht nötig.'
+    : 'Lies den Code einmal durch, dann „Code ausführen". Danach: Output → Interpretation → Aufgabe.';
 
   return `<div class="r-orient-card">
   <div class="r-orient-top">
@@ -1248,31 +1355,29 @@ function renderTabOrientationCard(config, index, total) {
       <div class="r-orient-kicker">R-Übung${indexLabel}</div>
       <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
     </div>
-    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv im Browser'}</span>
+    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
   </div>
-  <p class="r-orient-purpose">${escapeHtml(config.purpose)}</p>
+  ${config.headerPurpose ? `<p class="r-orient-purpose">${escapeHtml(config.headerPurpose)}</p>` : ''}
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Dein erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
+    <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
   </div>
-  ${renderFlowSteps(config)}
   ${config.script ? `<div class="r-orient-script">${escapeHtml(config.script)}</div>` : ''}
 </div>`;
 }
 
 function renderHighlightEditor(config) {
   const editHint = config.runtimeMode === 'guided'
-    ? 'Kein Live-Run nötig: Lies Code und Output als gemeinsames Belegpaket.'
+    ? 'Lies Code und Output als gemeinsames Belegpaket.'
     : `Ändern: ${config.changeFocus}`;
 
-  const actionLabel = config.runtimeMode === 'guided' ? 'Live-Run nicht nötig' : 'Code ausführen';
+  const actionLabel = config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen';
   const runDisabled = config.runtimeMode === 'guided' ? ' disabled' : '';
 
   return `<div class="r-practice-editor-card">
   <div class="r-practice-toolbar">
       <div>
-        <div class="r-practice-toolbar-kicker">Codebereich</div>
-        <div class="r-practice-toolbar-title">Bearbeite heute nur die Kernzeile — nicht den ganzen Block</div>
+        <div class="r-practice-toolbar-title">Nur die Kernzeile ändern</div>
       </div>
   </div>
   <div class="r-highlight-wrap">
@@ -1281,44 +1386,36 @@ function renderHighlightEditor(config) {
   </div>
   <div class="r-practice-actions">
     <button type="button" class="btn" data-r-action="run"${runDisabled}>${escapeHtml(actionLabel)}</button>
-    <button type="button" class="btn secondary" data-r-action="reset">Startcode</button>
-    <button type="button" class="btn secondary" data-r-action="toggle-solution">Musterlösung</button>
+    <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
+    <button type="button" class="btn secondary" data-r-action="insert-solution">Lösung einfügen</button>
   </div>
   <div class="r-practice-help">
-    <span class="r-practice-help-label">Bearbeitungshinweis</span>
     <p>${escapeHtml(editHint)}</p>
-    <p class="r-practice-help-subtle"><strong>Stehen lassen:</strong> ${escapeHtml(config.keepHint)}</p>
+    <p class="r-practice-help-subtle"><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
   </div>
 </div>`;
 }
 
 function renderTabOutputCard(config) {
-  const outputTitle = config.runtimeMode === 'guided'
-    ? 'Output lesen und belegen'
-    : 'Output lesen und belegen';
-
   return `<div class="r-practice-output-card r-tab-output-card">
-  <div class="r-practice-output-head">
+  <div class="r-tab-output-evidence-stack">
+  <div class="r-practice-output-head r-tab-output-guide-head">
     <div>
-      <div class="r-practice-toolbar-kicker">Output</div>
-      <div class="r-practice-toolbar-title">${outputTitle}</div>
+      <div class="r-practice-toolbar-title">Was zählt im Output</div>
     </div>
   </div>
   <div class="r-output-focus">
-    <div class="r-output-interp-kicker">Worauf du im Output achtest</div>
+    <div class="r-output-interp-kicker">Darauf achten</div>
     <ul class="r-output-focus-list">
       ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
     </ul>
   </div>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
-  <div class="r-output-interp">
-    <div class="r-output-interp-kicker">Output als Beweis</div>
+  <div class="r-output-interp r-tab-output-readout">
+    <div class="r-output-interp-kicker">Was der Output belegt</div>
     <p>${escapeHtml(config.interpretation)}</p>
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
-    <ul class="r-output-checklist">
-      <li><strong>Bestätigt/Falsifiziert:</strong> Welche konkrete Zeile trägt deine Entscheidung?</li>
-      <li><strong>Grenze:</strong> Was bleibt trotz Output offen?</li>
-    </ul>
+  </div>
   </div>
 </div>`;
 }
@@ -1326,16 +1423,16 @@ function renderTabOutputCard(config) {
 function renderTabBottomRow(config) {
   const pitfallsHtml = config.pitfalls.length
     ? `<div class="r-practice-pitfalls r-tab-pitfalls">
-<h4>Häufige Fehler</h4>
+<h4>Typische Fehler</h4>
 <ul>${config.pitfalls.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
 </div>` : '';
 
   return `<div class="r-tab-bottom">
   <div class="r-practice-card r-tab-task-card">
-    <h4>Mini-Task</h4>
+    <h4>Aufgabe</h4>
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
-    <p class="r-transfer-rule"><strong>Merksatz für Klausuren:</strong> ${escapeHtml(config.transferRule)}</p>
+    <p class="r-transfer-rule"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</p>
     <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
@@ -1353,14 +1450,15 @@ function renderRLabSection(block, moduleSlug, index, total, options = {}) {
   const config = buildConfig(block, { moduleSlug, blockId });
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
-  const runtimeNote = config.runtimeNote;
-
   return `<div class="r-lab-section r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
 ${renderTabOrientationCard(config, index, total)}
-<div class="r-runtime-note r-tab-runtime-note">${escapeHtml(runtimeNote)}</div>
 <div class="r-practice-workspace">
+  <div class="r-execution-shell">
+  <div class="r-execution-instrument">
   ${renderHighlightEditor(config)}
   ${renderTabOutputCard(config)}
+  </div>
+  </div>
 </div>
 ${renderTabBottomRow(config)}
 </div>`;
@@ -1424,18 +1522,80 @@ function toggleSolution(blockEl) {
   }
 }
 
+function insertSolutionCode(blockEl, config) {
+  const editor = blockEl.querySelector('[data-r-editor]');
+  if (!editor) return;
+  const replacement = config.solutionCode || config.starterCode;
+  editor.value = replacement;
+  editor.dispatchEvent(new Event('input'));
+
+  const solution = blockEl.querySelector('[data-r-solution]');
+  if (solution?.hidden) {
+    toggleSolution(blockEl);
+  }
+}
+
+async function requestRunStop(blockEl) {
+  const state = getBlockRunState(blockEl);
+  if (!state.running || state.stopRequested) return;
+  state.stopRequested = true;
+  setRunButtonState(blockEl, 'stopping');
+
+  const status = blockEl.querySelector('[data-r-runtime-status]');
+  const output = blockEl.querySelector('[data-r-output]');
+  setRuntimeStatus(status, 'Ausführung wird angehalten…', 'loading');
+  if (output && !/\[Ausführung wird angehalten/u.test(output.textContent || '')) {
+    output.textContent = `${output.textContent || ''}\n\n[Ausführung wird angehalten…]`.trim();
+  }
+
+  try {
+    const webR = await ensureWebR();
+    if (typeof webR.interrupt === 'function') {
+      await webR.interrupt();
+    } else if (typeof webR.close === 'function') {
+      await webR.close();
+      webRPromise = null;
+    }
+  } catch {
+    // Best effort only: the run handler will still fall back cleanly.
+  }
+}
+
 async function handleRun(blockEl, config) {
   const editor = blockEl.querySelector('[data-r-editor]');
   const output = blockEl.querySelector('[data-r-output]');
   const status = blockEl.querySelector('[data-r-runtime-status]');
   if (!editor || !output) return;
 
+  const state = getBlockRunState(blockEl);
+  if (state.running) {
+    await requestRunStop(blockEl);
+    return;
+  }
+
   const code = normalizeCode(editor.value);
+  state.running = true;
+  state.stopRequested = false;
+  state.runToken += 1;
+  const runToken = state.runToken;
+  setRunButtonState(blockEl, 'running');
   output.textContent = 'Code wird ausgeführt…';
   setRuntimeStatus(status, 'R wird gestartet…', 'loading');
 
   try {
     const result = await executeR(config.moduleSlug, code);
+    if (state.runToken !== runToken) return;
+    if (state.stopRequested) {
+      const stoppedMessage = '[Ausführung angehalten]\nDu kannst den Code jetzt anpassen oder erneut ausführen.';
+      output.textContent = stoppedMessage;
+      setRuntimeStatus(status, 'Ausführung angehalten', '');
+      saveState(config.moduleSlug, config.blockId, {
+        code,
+        lastOutput: stoppedMessage,
+        solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+      });
+      return;
+    }
     output.textContent = result;
     setRuntimeStatus(status, 'Interaktiv aktiv', 'success');
     saveState(config.moduleSlug, config.blockId, {
@@ -1444,7 +1604,19 @@ async function handleRun(blockEl, config) {
       solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
     });
   } catch (error) {
+    if (state.runToken !== runToken) return;
     const message = error instanceof Error ? error.message : String(error);
+    if (state.stopRequested || /interrupt|interrupted|abort|aborted|cancel/i.test(message)) {
+      const stoppedMessage = '[Ausführung angehalten]\nDu kannst den Code jetzt anpassen oder erneut ausführen.';
+      output.textContent = stoppedMessage;
+      setRuntimeStatus(status, 'Ausführung angehalten', '');
+      saveState(config.moduleSlug, config.blockId, {
+        code,
+        lastOutput: stoppedMessage,
+        solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+      });
+      return;
+    }
     output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, Interpretationsblock und Musterlösung als ehrlichen Lern-Fallback.`;
     setRuntimeStatus(status, 'Didaktischer Fallback', 'fallback');
     saveState(config.moduleSlug, config.blockId, {
@@ -1452,6 +1624,12 @@ async function handleRun(blockEl, config) {
       lastOutput: output.textContent,
       solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
     });
+  } finally {
+    if (state.runToken === runToken) {
+      state.running = false;
+      state.stopRequested = false;
+      setRunButtonState(blockEl, 'idle');
+    }
   }
 }
 
@@ -1483,6 +1661,8 @@ function mountBlock(blockEl) {
 
   if (config.runtimeMode === 'guided') {
     setRuntimeStatus(status, 'Geführt', 'guided');
+  } else {
+    setRunButtonState(blockEl, 'idle');
   }
 
   // Mount syntax highlighting for tab-style editor (has overlay)
@@ -1517,8 +1697,18 @@ function mountBlock(blockEl) {
 
   blockEl.querySelector('[data-r-action="run"]')?.addEventListener('click', () => {
     if (config.runtimeMode !== 'guided') {
-      handleRun(blockEl, config);
+      void handleRun(blockEl, config);
     }
+  });
+
+  blockEl.querySelector('[data-r-action="insert-solution"]')?.addEventListener('click', () => {
+    insertSolutionCode(blockEl, config);
+    saveState(config.moduleSlug, config.blockId, {
+      ...loadState(config.moduleSlug, config.blockId),
+      code: blockEl.querySelector('[data-r-editor]')?.value || config.solutionCode || config.starterCode,
+      lastOutput: blockEl.querySelector('[data-r-output]')?.textContent || config.outputPlaceholder,
+      solutionOpen: !blockEl.querySelector('[data-r-solution]')?.hidden
+    });
   });
 
   blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {

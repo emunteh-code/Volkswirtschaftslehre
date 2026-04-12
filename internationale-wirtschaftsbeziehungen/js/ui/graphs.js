@@ -1,6 +1,7 @@
 import GraphEngine from './graphEngine.js';
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
 
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
@@ -87,11 +88,11 @@ function setupPlot(xLabel, yLabel, ranges) {
   ctx.fillStyle = col.label;
   ctx.font = `600 ${fsBold}px ${col.fontMono}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, pad.left + innerW / 2, h - 18);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), pad.left + innerW / 2, h - 18);
   ctx.save();
   ctx.translate(18, pad.top + innerH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
 
   return { engine, ctx, col, w, h, pad, px, py, ranges, fsBase, fsBold };
@@ -187,10 +188,11 @@ function drawPoint(plot, x, y, color, label, dx = 10, dy = -10) {
 
 function drawTag(plot, x, y, text, color, dx = 8, dy = -8) {
   const { ctx, px, py, col, fsBase } = plot;
+  const label = sanitizeGraphCanvasLabel(text);
   const cx = px(x) + dx;
   const cy = py(y) + dy;
   ctx.font = `600 ${fsBase}px ${col.fontMono}`;
-  const width = ctx.measureText(text).width + 12;
+  const width = ctx.measureText(label).width + 12;
   const height = fsBase + 8;
   ctx.fillStyle = `${color}20`;
   ctx.strokeStyle = `${color}66`;
@@ -201,7 +203,7 @@ function drawTag(plot, x, y, text, color, dx = 8, dy = -8) {
   ctx.stroke();
   ctx.fillStyle = color;
   ctx.textAlign = 'left';
-  ctx.fillText(text, cx + 2, cy - 4);
+  ctx.fillText(label, cx + 2, cy - 4);
 }
 
 function drawLegend(plot, items) {
@@ -237,7 +239,7 @@ function drawLegend(plot, items) {
     ctx.fillStyle = col.text;
     ctx.font = `${fsBase}px ${col.fontBody}`;
     ctx.textAlign = 'left';
-    ctx.fillText(item.label, x + 50, rowY);
+    ctx.fillText(sanitizeGraphCanvasLabel(item.label), x + 50, rowY);
   });
 }
 

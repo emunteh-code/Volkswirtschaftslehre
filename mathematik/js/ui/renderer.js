@@ -13,6 +13,7 @@ import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { mountRPracticeBlocks, renderRAnwendungTab } from '../../../assets/js/portal-core/features/rPractice.js';
+import { getConceptProvenance } from '../data/contentManifest.js';
 
 const baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
@@ -39,7 +40,8 @@ const baseRenderer = createRenderer({
   renderRAnwendungPanel: (conceptId) => {
     const blocks = R_BLOCKS_BY_ID[conceptId] || [];
     return renderRAnwendungTab(blocks, 'mathematik', { conceptId });
-  }
+  },
+  getConceptProvenance
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

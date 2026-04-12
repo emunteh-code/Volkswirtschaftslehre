@@ -7,6 +7,7 @@ import GraphEngine from './graphEngine.js';
 import { renderMath } from '../utils/mathjax.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
 
 // ── Animation state ────────────────────────────────────────
 let _rafId = null;
@@ -127,13 +128,14 @@ function drawLabelTag(ctx, text, x, y, color, options = {}) {
   } = options;
 
   const lines = Array.isArray(text) ? text : [text];
+  const safeLines = lines.map((line) => sanitizeGraphCanvasLabel(line));
   ctx.save();
   ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-  const widths = lines.map((line) => ctx.measureText(line).width);
+  const widths = safeLines.map((line) => ctx.measureText(line).width);
   const textWidth = Math.max(...widths, 0);
   const lineHeight = Math.round(fontSize * 1.18);
   const boxWidth = textWidth + paddingX * 2;
-  const boxHeight = lineHeight * lines.length + lineGap * (lines.length - 1) + paddingY * 2;
+  const boxHeight = lineHeight * safeLines.length + lineGap * (safeLines.length - 1) + paddingY * 2;
 
   let bx = x;
   if (align === 'center') bx -= boxWidth / 2;
@@ -153,7 +155,7 @@ function drawLabelTag(ctx, text, x, y, color, options = {}) {
   ctx.fillStyle = textColor;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  lines.forEach((line, index) => {
+  safeLines.forEach((line, index) => {
     const lineY = by + paddingY + lineHeight / 2 + index * (lineHeight + lineGap);
     ctx.fillText(line, bx + boxWidth / 2, lineY);
   });
@@ -1133,11 +1135,11 @@ function setupRectPlot(ge, w, h, ctx, xMax, yMax, xLabel, yLabel) {
   ctx.fillStyle = col.label;
   ctx.font = `bold ${fsBold}px ${col.fontMono}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, PAD + PW / 2, h - PAD + 34);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), PAD + PW / 2, h - PAD + 34);
   ctx.save();
   ctx.translate(16, h - PAD - PH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
 
   return { col, PAD, PW, PH, sx, sy, fsBase, fsBold };
@@ -1175,7 +1177,7 @@ function drawIsoquantCurve(ctx, sx, sy, xMax, yMax, alpha, output, color, label,
       ctx.fillStyle = color;
       ctx.font = `bold ${font}px ${getComputedStyle(document.body).getPropertyValue('--font-mono').trim() || 'SF Mono, monospace'}`;
       ctx.textAlign = 'left';
-      ctx.fillText(label, sx(labelLabor) + 8, sy(labelCapital) - 8);
+      ctx.fillText(sanitizeGraphCanvasLabel(label), sx(labelLabor) + 8, sy(labelCapital) - 8);
     }
   }
 }

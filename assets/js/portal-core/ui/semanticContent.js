@@ -1,3 +1,5 @@
+import { formatChainedEqualitiesForDisplay } from "./mathDerivationFormat.js"
+
 const HTML_ENTITY_MAP = {
   "&amp;": "&",
   "&lt;": "<",
@@ -182,8 +184,8 @@ function normalizePlainSchemaText(value) {
     .replace(/\\gt/g, " > ")
     .replace(/\\lt/g, " < ")
     .replace(/\\neg/g, " ¬ ")
-    .replace(/\\\\/g, " || ")
-    .replace(/\\quad|\\qquad/g, " || ")
+    .replace(/\\\\/g, " \n ")
+    .replace(/\\quad|\\qquad/g, " ")
     .replace(/\\;|\\,|\\!/g, " ")
     .replace(/\\\s+/g, " ")
     .replace(/\\Delta/g, " Δ ")
@@ -214,10 +216,26 @@ function looksLikeReferenceText(value) {
 function shouldCoerceUndelimitedTexMathBlock(decoded) {
   const t = String(decoded || "").trim()
   if (!t || isDelimitedMath(t)) return false
-  if (/\\/.test(t)) return false
   if (!/\{,\}/.test(t)) return false
   if (/[=<>≠≤≥≈/±∓]/.test(t)) return true
   return false
+}
+
+/** True when a non-delimited string clearly contains real LaTeX math (not a semantic arrow schema). */
+function isUndelimitedStructuredTexMath(decoded) {
+  const t = String(decoded || "").trim()
+  if (!t || isDelimitedMath(t)) return false
+  if (!/\\/.test(t)) return false
+  if (/\\(?:frac|dfrac|tfrac|binom|sqrt|sum|int|prod|oint)\b/.test(t)) return true
+  if (/\\widehat\b/.test(t) || /\\hat(?:\s|\{)/.test(t)) return true
+  if (/\\bar(?:\s|\{)/.test(t) || /\\tilde(?:\s|\{)/.test(t)) return true
+  if (/\\mathbb\b/.test(t) || /\\mathcal\b/.test(t)) return true
+  if (/\\mid\b/.test(t) && /\\(?:frac|hat|text|mathrm)\b/.test(t)) return true
+  return false
+}
+
+function termContainsTexCommandFragment(text) {
+  return /\\[a-zA-Z]+/.test(String(text ?? ""))
 }
 
 function splitPlainSchemaParts(value) {
@@ -310,6 +328,9 @@ function parseMixedArrowChain(text) {
   const parts = splitPlainSchemaParts(normalized)
   const termCount = parts.filter((part) => !isConnectorToken(String(part))).length
   if (termCount < 3) return null
+  for (const part of parts) {
+    if (!isConnectorToken(String(part)) && termContainsTexCommandFragment(part)) return null
+  }
 
   return schemaSequence(parts)
 }
@@ -325,13 +346,26 @@ function parsePlainConnectorSplitSchema(normalizedText) {
   if (!parts.some((part) => isConnectorToken(String(part)))) return null
   const termCount = parts.filter((part) => !isConnectorToken(String(part))).length
   if (termCount < 2) return null
+  for (const part of parts) {
+    if (!isConnectorToken(String(part)) && termContainsTexCommandFragment(part)) return null
+  }
   return schemaSequence(parts)
 }
 
 function isTextDominatedLatex(value) {
   const core = stripMathDelimiters(value)
   if (!/\\(?:text|mathrm|operatorname)\{/.test(core)) return false
-  return !/\\(?:frac|sum|int|prod|partial|sqrt|hat|bar|mathbb|mathcal|begin)\b/.test(core)
+  if (/\\(?:frac|sum|int|prod|partial|sqrt|hat|bar|widehat|tilde|mathbb|mathcal|begin)\b/.test(core)) return false
+
+  const withoutTextMacros = core.replace(/\\(?:text|mathrm|operatorname)\{[^}]*\}/g, " ")
+  const scrubbed = withoutTextMacros
+    .replace(/\\[ ,;:!]/g, " ")
+    .replace(/\\(?:quad|qquad)/g, " ")
+  if (/\\/.test(scrubbed)) return false
+  // Subscripts/superscripts or starred optima (e.g. x_i^*) mean real inline math, not a prose schema.
+  if (/[_^*]/.test(scrubbed)) return false
+
+  return true
 }
 
 function parseTextDominatedLatex(value) {
@@ -371,6 +405,31 @@ function parseLabeledArrowSchema(value) {
   ])
 }
 
+/**
+ * Revealed-step lines like "(2-4)^2 + ... = 8" or "8 / (n-1) = 4" were parsed as connector-split
+ * semantic schema (plain styled text) because of spaced +/=/− tokens, while nearby lines with
+ * TeX (e.g. \\bar{x}) rendered as real math. Coerce clearly numeric / arithmetic work to math.
+ */
+function looksLikeStepArithmeticMath(decoded) {
+  const t = String(decoded ?? "").trim()
+  if (!t || t.length > 420) return false
+  if (/\\/.test(t)) return false
+  if (/[→⇒←⇐↔⇔]/.test(t)) return false
+
+  if (/\^/.test(t)) return true
+
+  if (/\d\s*\/\s*\(/.test(t) || /\d\s*\/\s*\d/.test(t)) return true
+
+  if (/^\s*\p{L}\s*=\s*[\d.,]+\s*$/u.test(t)) return true
+
+  if (!/=/.test(t)) return false
+
+  const withoutLeadingVar = t.replace(/^\s*\p{L}\s*=\s*/u, "")
+  const compact = withoutLeadingVar.replace(/\s/g, "")
+  if (!/^[\d()+\-−×·*/=:.,]+$/.test(compact)) return false
+  return /\d/.test(compact)
+}
+
 function isPureSemanticLatex(value) {
   const core = stripMathDelimiters(value)
   if (!/\\text\{/.test(core)) return false
@@ -398,6 +457,10 @@ function parseLegacyString(value) {
     return { mode: "math", latex: `$$${decoded}$$`, raw: decoded }
   }
 
+  if (isUndelimitedStructuredTexMath(decoded)) {
+    return { mode: "math", latex: `$$${stripMathDelimiters(decoded)}$$`, raw: decoded }
+  }
+
   if (isDelimitedMath(decoded)) {
     const inner = stripMathDelimiters(decoded).trim()
     if (inner && (isPureSemanticLatex(decoded) || isTextDominatedLatex(decoded))) {
@@ -412,6 +475,10 @@ function parseLegacyString(value) {
 
   const textDominatedLatex = parseTextDominatedLatex(decoded)
   if (textDominatedLatex) return textDominatedLatex
+
+  if (looksLikeStepArithmeticMath(decoded)) {
+    return { mode: "math", latex: `$$${stripMathDelimiters(decoded)}$$`, raw: decoded }
+  }
 
   const normalizedText = normalizePlainSchemaText(stripMathDelimiters(decoded))
   const hasSemanticArrowSyntax = /\\(?:xleftrightarrow|xrightarrow|xleftarrow|Rightarrow|Leftrightarrow|rightarrow|leftarrow|implies|iff)|[→⇒←⇐↔⇔]/u.test(decoded)
@@ -634,7 +701,9 @@ export function renderSemanticBlock(value, { variant = "default" } = {}) {
   if (normalized.mode === "math") {
     const inner = stripMathDelimiters(normalized.latex)
     if (!String(inner || "").trim()) return ""
-    return `<div class="math-block math-block--${variant}">${normalized.latex}</div>`
+    const formatted = formatChainedEqualitiesForDisplay(inner)
+    const latexOut = `$$${formatted}$$`
+    return `<div class="math-block math-block--${variant}">${latexOut}</div>`
   }
 
   if (normalized.mode === "reference") {

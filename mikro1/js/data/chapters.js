@@ -2451,7 +2451,7 @@ aufgaben: [
 </div>
 `,
  formeln: [
- { label:'Marshall-Nachfrage', eq: String.raw`$$x_i^*(p_1, p_2, m) \quad \text{— nutzenmaximierende Menge}$$`, desc:'Aus GRS=p₁/p₂ + Budget', variables: { 'x_i^*': 'Nutzenmaximierende Menge Gut i', 'p_1,p_2': 'Güterpreise', 'm': 'Einkommen' } },
+ { label:'Marshall-Nachfrage', eq: String.raw`$$x_i^*(p_1, p_2, m)$$`, desc:'Nutzenmaximierende Menge bei Preisen (p₁,p₂) und Einkommen m; aus GRS = p₁/p₂ und Budget.', variables: { 'x_i^*': 'Nutzenmaximierende Menge Gut i', 'p_1,p_2': 'Güterpreise', 'm': 'Einkommen' } },
  { label:'Homogenität', eq: String.raw`$$x_i(\lambda p, \lambda m) = x_i(p, m) \quad \forall\, \lambda > 0$$`, desc:'Keine Geldillusion (Grad 0)', variables: { 'x_i': 'Nachfrage Gut i', '\\lambda': 'Skalierungsfaktor (> 0)', 'p': 'Preisvektor', 'm': 'Einkommen' } },
  ],
 aufgaben: [

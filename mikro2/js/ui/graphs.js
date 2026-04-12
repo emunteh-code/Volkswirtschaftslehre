@@ -1,5 +1,6 @@
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
 
 let rafId = null;
 
@@ -153,11 +154,11 @@ function setupPlot(xMin, xMax, yMin, yMax, xLabel, yLabel) {
   ctx.fillStyle = colors.text;
   ctx.font = `600 13px ${colors.fontBody}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, pad.left + plotW / 2, height - 18);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), pad.left + plotW / 2, height - 18);
   ctx.save();
   ctx.translate(20, pad.top + plotH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
   ctx.restore();
 
@@ -222,11 +223,12 @@ function drawPoint(plot, x, y, color, label = '', options = {}) {
 
 function drawTag(plot, x, y, text, color, dx = 10, dy = -10) {
   const { ctx, sx, sy, colors } = plot;
+  const label = sanitizeGraphCanvasLabel(text);
   const px = sx(x) + dx;
   const py = sy(y) + dy;
   ctx.save();
   ctx.font = `600 12px ${colors.fontBody}`;
-  const width = ctx.measureText(text).width + 14;
+  const width = ctx.measureText(label).width + 14;
   const height = 24;
   ctx.fillStyle = withAlpha(colors.card, 0.95);
   ctx.strokeStyle = withAlpha(color, 0.7);
@@ -276,7 +278,7 @@ function drawLegend(plot, entries) {
     ctx.fillStyle = colors.text;
     ctx.font = `12px ${colors.fontBody}`;
     ctx.textAlign = 'left';
-    ctx.fillText(entry.label, x + 44, cy + 0.5);
+    ctx.fillText(sanitizeGraphCanvasLabel(entry.label), x + 44, cy + 0.5);
   });
   ctx.restore();
 }

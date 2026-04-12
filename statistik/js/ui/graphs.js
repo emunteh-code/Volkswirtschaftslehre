@@ -1,5 +1,6 @@
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
 
 let rafId = null;
 
@@ -163,11 +164,11 @@ function drawAxes(plane, xLabel, yLabel, xTicks = 6, yTicks = 5) {
   ctx.fillStyle = colors.text;
   ctx.font = `600 13px ${colors.fontBody}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, pad.left + plane.plotW / 2, height - 18);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), pad.left + plane.plotW / 2, height - 18);
   ctx.save();
   ctx.translate(20, pad.top + plane.plotH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
   ctx.restore();
 }
@@ -232,11 +233,12 @@ function drawPoint(plane, x, y, color, label = '', options = {}) {
 
 function drawTag(plane, x, y, text, color, dx = 10, dy = -10) {
   const { ctx, sx, sy, colors } = plane;
+  const label = sanitizeGraphCanvasLabel(text);
   const px = sx(x) + dx;
   const py = sy(y) + dy;
   ctx.save();
   ctx.font = `600 12px ${colors.fontBody}`;
-  const width = ctx.measureText(text).width + 14;
+  const width = ctx.measureText(label).width + 14;
   const height = 24;
   ctx.fillStyle = withAlpha(colors.card, 0.95);
   ctx.strokeStyle = withAlpha(color, 0.7);
@@ -248,7 +250,7 @@ function drawTag(plane, x, y, text, color, dx = 10, dy = -10) {
   ctx.fillStyle = color;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, px + 3, py - 6);
+  ctx.fillText(label, px + 3, py - 6);
   ctx.restore();
 }
 
@@ -286,7 +288,7 @@ function drawLegend(plane, entries) {
     ctx.fillStyle = colors.text;
     ctx.font = `12px ${colors.fontBody}`;
     ctx.textAlign = 'left';
-    ctx.fillText(entry.label, x + 44, cy + 0.5);
+    ctx.fillText(sanitizeGraphCanvasLabel(entry.label), x + 44, cy + 0.5);
   });
   ctx.restore();
 }
@@ -345,7 +347,7 @@ function drawKonfidenzintervall(progress = 1) {
 
   drawLineSegment(plane, xbar - half, 1.6, xbar + half, 1.6, plane.colors.accent, { lineWidth: 4 });
   drawLineSegment(plane, xbar - halfBetter, 0.9, xbar + halfBetter, 0.9, plane.colors.accent2, { lineWidth: 4 });
-  drawPoint(plane, xbar, 1.6, plane.colors.warn, '\\bar{x}', { dy: -16 });
+  drawPoint(plane, xbar, 1.6, plane.colors.warn, 'Mittelwert', { dy: -16 });
   drawPoint(plane, xbar, 0.9, plane.colors.accent2, '2n', { dy: 18, dx: 10 });
   drawTag(plane, xbar + half, 1.6, '95%-KI', plane.colors.accent, 12, -8);
   drawLegend(plane, [
@@ -384,7 +386,7 @@ function drawRegression(progress = 1) {
   const points = regressionPoints(beta0, beta1, noise);
   drawCurve(plane, (x) => beta0 + beta1 * x, plane.colors.accent, { progress });
   points.forEach((point) => drawPoint(plane, point.x, point.y, plane.colors.accent2, '', { radius: 4.1 }));
-  drawTag(plane, 7.2, beta0 + beta1 * 7.2, '\\hat{y}=\\hat{\\beta}_0+\\hat{\\beta}_1x', plane.colors.accent, 12, -12);
+  drawTag(plane, 7.2, beta0 + beta1 * 7.2, 'OLS-Gerade', plane.colors.accent, 12, -12);
   drawLegend(plane, [
     { label: 'Beobachtungen', color: plane.colors.accent2, dot: true },
     { label: 'geschätzte Gerade', color: plane.colors.accent }

@@ -1,4 +1,6 @@
 import { createRenderer } from '../../../assets/js/portal-core/ui/renderer.js';
+import { hasMeaningfulDisplayContent, renderSemanticBlock } from '../../../assets/js/portal-core/ui/semanticContent.js';
+import { renderTeachingProse } from '../../../assets/js/portal-core/ui/teachingProse.js';
 import { getWarningSystemData, renderTaskWarningCard } from '../../../assets/js/portal-core/ui/warningSystem.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { CHAPTERS, CONTENT } from '../data/chapters.js';
@@ -12,6 +14,7 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
+import { getConceptProvenance } from '../data/contentManifest.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
@@ -52,10 +55,12 @@ function renderDecodedText(value) {
   return formalizeMarkupString(decodeHtmlEntities(String(value ?? '')));
 }
 
-function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
-  const source = formalizeMarkupString(
-    stripMarkup ? stripHtml(value) : decodeHtmlEntities(String(value ?? ''))
-  );
+function renderSemanticPlainText(value, options = {}) {
+  const raw = options.stripMarkup ? stripHtml(value) : decodeHtmlEntities(String(value ?? ''));
+  if (/\\texttt\{/.test(raw)) {
+    return renderTeachingProse(value, options);
+  }
+  const source = formalizeMarkupString(raw);
   return semanticizeMarkupString(source);
 }
 
@@ -382,7 +387,8 @@ baseRenderer = createRenderer({
   getDueCards,
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
-  checkAnswer: checkAnswerWithTolerance
+  checkAnswer: checkAnswerWithTolerance,
+  getConceptProvenance
 });
 
 function markRenderSettled(isSettled) {
@@ -487,6 +493,16 @@ function renderNotationList(variables = {}) {
     .join('')}</ul>`;
 }
 
+function renderFormulaEq(eq) {
+  if (!hasMeaningfulDisplayContent(eq)) return '';
+  return renderSemanticBlock(eq, { variant: 'formula' });
+}
+
+function renderTaskMathBlock(value) {
+  if (!hasMeaningfulDisplayContent(value)) return '';
+  return renderSemanticBlock(value, { variant: 'task' });
+}
+
 function renderGuidedTasks(tasks) {
   if (!tasks.length) {
     return `<div class="section-block">
@@ -507,11 +523,11 @@ ${(task.steps || []).map((step, stepIndex) => `
 <div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
 <div class="step-body">
 <div class="step-text">${step.text || ''}</div>
-${step.eq ? `<div class="math-block">${step.eq}</div>` : ''}
+${step.eq ? renderTaskMathBlock(step.eq) : ''}
 </div>
 </div>`).join('')}
 ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), 'Klausurhinweis') : ''}
-<div class="result-badge">Ergebnis: ${task.result || 'Arbeite das Ergebnis formal zu Ende aus.'}</div>`
+<div class="result-badge">Ergebnis: ${renderSemanticPlainText(task.result || 'Arbeite das Ergebnis formal zu Ende aus.')}</div>`
   })).join('');
 }
 
@@ -542,11 +558,11 @@ ${intuition?.bridge ? `<div class="exam-drill-line">
       question: `Welche formale Beziehung trägt "${chapter.title}" in der Prüfung, und wie liest du sie richtig?`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Formaler Anker</span>
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 </div>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Bedeutung</span>
-<div class="exam-drill-copy">${formula.desc || `Diese Beziehung ist der formale Einstieg in ${chapter.title}.`}</div>
+<div class="exam-drill-copy">${renderSemanticPlainText(formula.desc || `Diese Beziehung ist der formale Einstieg in ${chapter.title}.`)}</div>
 </div>
 ${formula.variables && Object.keys(formula.variables).length ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Notation</span>
@@ -565,7 +581,7 @@ ${renderNotationList(formula.variables)}
 </div>
 ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formale Rückbindung</span>
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 </div>` : ''}`
     });
   }
@@ -584,7 +600,7 @@ ${formula ? `<div class="exam-drill-line">
 </div>
 ${formula ? `<div class="exam-drill-line">
 <span class="exam-drill-key">Formel, die du notieren kannst</span>
-<div class="math-block">${formula.eq}</div>
+${renderFormulaEq(formula.eq)}
 </div>` : ''}`
     });
   });
@@ -595,12 +611,12 @@ ${formula ? `<div class="exam-drill-line">
       question: `Wie würdest du die klausurnahe Aufgabe zu "${chapter.title}" lösen? ${task.text}`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Lösungslogik</span>
-<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li>${step.text || ''}${step.eq ? `<div class="math-block">${step.eq}</div>` : ''}</li>`).join('')}</ol>
+<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-text">${renderSemanticPlainText(step.text || '')}</div><div class="exam-drill-step-math">${renderTaskMathBlock(step.eq)}</div></li>`).join('')}</ol>
 </div>
 ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), 'Klausurhinweis') : ''}
 <div class="exam-drill-line">
 <span class="exam-drill-key">Prüfungsresultat</span>
-<div class="result-badge">${task.result || 'Arbeite das Ergebnis formal aus.'}</div>
+<div class="result-badge">${renderSemanticPlainText(task.result || 'Arbeite das Ergebnis formal aus.')}</div>
 </div>`
     });
   });
@@ -719,8 +735,8 @@ function buildMicroIntuitionPanel(conceptId) {
 ${formula ? `<div class="intuition-callout">
 <span class="intuition-callout-label">Formaler Anker</span>
 <div class="intuition-callout-body">
-${formula.eq ? `<div class="intuition-callout-anchor"><div class="math-block">${formula.eq}</div></div>` : ''}
-${formula.desc ? `<p class="intuition-callout-desc">${formula.desc}</p>` : ''}
+${formula.eq ? `<div class="intuition-callout-anchor">${renderFormulaEq(formula.eq)}</div>` : ''}
+${formula.desc ? `<p class="intuition-callout-desc">${renderSemanticPlainText(formula.desc)}</p>` : ''}
 </div>
 </div>` : ''}
 </div>

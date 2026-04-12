@@ -127,3 +127,7 @@ export function getFinanzwirtschaftContentManifestBridgePayload() {
     fullExamProvenance: FULL_EXAM_PROVENANCE
   });
 }
+
+export function getConceptProvenance(conceptId) {
+  return PROVENANCE_BY_CONCEPT[conceptId] || null;
+}

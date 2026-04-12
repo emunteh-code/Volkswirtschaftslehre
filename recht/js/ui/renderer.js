@@ -11,6 +11,7 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
+import { getConceptProvenance } from '../data/contentManifest.js';
 
 export const {
   renderContent,
@@ -39,5 +40,6 @@ export const {
   getDueCards,
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
-  checkAnswer: checkAnswerWithTolerance
+  checkAnswer: checkAnswerWithTolerance,
+  getConceptProvenance
 });

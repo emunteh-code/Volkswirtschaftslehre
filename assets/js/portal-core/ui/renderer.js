@@ -7,7 +7,12 @@ import {
   renderSemanticBlock,
   stripHtml
 } from "./semanticContent.js"
+import { renderTeachingProse } from "./teachingProse.js"
 import { getWarningSystemData, renderTaskWarningCard } from "./warningSystem.js";
+import {
+  buildConceptProvenanceStripHtml,
+  initConceptProvenanceInteractions
+} from "./sourceProvenanceUi.js";
 
 export function createRenderer({
   courseLabel,
@@ -35,7 +40,9 @@ export function createRenderer({
   /** Optional one-line note under the Lern-Dashboard home card (pilot modules only) */
   homeLernDashboardPilotNote = '',
   /** When false, omit the `entry.motivation` strip under the concept H1 (module opt-out). */
-  showConceptMotivationBanner = true
+  showConceptMotivationBanner = true,
+  /** Optional: per-concept provenance layers from contentManifest (metadata-driven UI strip). */
+  getConceptProvenance = () => null
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -45,11 +52,8 @@ export function createRenderer({
     return escapeHtml(decodeHtmlEntities(String(value ?? "")));
   }
 
-  function renderSemanticPlainText(value, { stripMarkup = false } = {}) {
-    const source = stripMarkup
-      ? stripHtml(value)
-      : decodeHtmlEntities(String(value ?? ""));
-    return escapeHtml(source);
+  function renderSemanticPlainText(value, options = {}) {
+    return renderTeachingProse(value, options);
   }
 
   function shortenText(text, maxLength = 220) {
@@ -496,7 +500,7 @@ ${(task.steps || []).map((step, stepIndex) => `
 <div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
 <div class="step-body">
 <div class="step-text">${renderSemanticPlainText(step.text || "")}</div>
-${renderTaskMathBlock(step.eq)}
+<div class="step-math-slot">${renderTaskMathBlock(step.eq)}</div>
 </div>
 </div>`).join("")}
 ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), "Klausurhinweis") : ""}
@@ -622,12 +626,12 @@ ${renderFormulaEq(formula.eq)}
         question: `Wie würdest du die klausurnahe Aufgabe zu "${chapter.title}" lösen? ${task.text}`,
         answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Lösungslogik</span>
-<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li>${step.text || ""}${renderTaskMathBlock(step.eq)}</li>`).join("")}</ol>
+<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-text">${renderSemanticPlainText(step.text || "")}</div><div class="exam-drill-step-math">${renderTaskMathBlock(step.eq)}</div></li>`).join("")}</ol>
 </div>
 ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), "Klausurhinweis") : ""}
 <div class="exam-drill-line">
 <span class="exam-drill-key">Prüfungsresultat</span>
-<div class="result-badge">${task.result || "Arbeite das Ergebnis formal aus."}</div>
+<div class="result-badge">${renderTeachingProse(task.result || "Arbeite das Ergebnis formal aus.")}</div>
 </div>`
       });
     });
@@ -796,7 +800,7 @@ ${renderGuidedTasks(tasks)}`;
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${formula.label}</div>
 ${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
-${formula.desc ? `<div class="f-desc">${formula.desc}</div>` : ""}
+${formula.desc ? `<div class="f-desc">${renderTeachingProse(formula.desc)}</div>` : ""}
 ${varsHint}
 ${supportNote}
 </div>`;
@@ -861,7 +865,7 @@ ${formula && (hasMeaningfulDisplayContent(formula.eq) || hasMeaningfulText(formu
 <span class="intuition-callout-label">Formaler Anker</span>
 <div class="intuition-callout-body">
 ${hasMeaningfulDisplayContent(formula.eq) ? `<div class="intuition-callout-anchor">${renderFormulaEq(formula.eq)}</div>` : ""}
-${hasMeaningfulText(formula.desc) ? `<p class="intuition-callout-desc">${formula.desc}</p>` : ""}
+${hasMeaningfulText(formula.desc) ? `<p class="intuition-callout-desc">${renderTeachingProse(formula.desc)}</p>` : ""}
 </div>
 </div>` : ""}
 </div>
@@ -947,6 +951,16 @@ ${renderExamPatterns(data)}
 <h1 class="concept-title">${chapter.title}</h1>
 </div>
 <div class="section-block"><h3>Inhalt</h3><p>Nutze für dieses Thema die Kapitelverbindungen, den Schnelltest und die Wiederholung, um die Kernlogik im Kurszusammenhang zu sichern.</p></div>`;
+      const emptyStrip = buildConceptProvenanceStripHtml({
+        conceptId,
+        activeTab,
+        layers: getConceptProvenance(conceptId)
+      });
+      if (emptyStrip) {
+        content.insertAdjacentHTML("beforeend", emptyStrip);
+        initConceptProvenanceInteractions(content);
+      }
+      renderMath(content);
       return;
     }
 
@@ -988,6 +1002,16 @@ ${motivationStrip}
 <button class="btn" onclick="location.reload()">Neu laden</button>
 </div>
 </div>`;
+    }
+
+    const provenanceStrip = buildConceptProvenanceStripHtml({
+      conceptId,
+      activeTab,
+      layers: getConceptProvenance(conceptId)
+    });
+    if (provenanceStrip && !String(window.__lastRenderError || "").length) {
+      content.insertAdjacentHTML("beforeend", provenanceStrip);
+      initConceptProvenanceInteractions(content);
     }
 
     renderMath(content);

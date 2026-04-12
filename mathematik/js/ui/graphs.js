@@ -1,5 +1,6 @@
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
 
 let rafId = null;
 
@@ -146,11 +147,11 @@ function drawAxes(plane, xLabel, yLabel, xTicks = 8, yTicks = 6) {
   ctx.fillStyle = colors.text;
   ctx.font = `600 13px ${colors.fontBody}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, pad.left + plane.plotW / 2, height - 18);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), pad.left + plane.plotW / 2, height - 18);
   ctx.save();
   ctx.translate(18, pad.top + plane.plotH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
   ctx.restore();
 }
@@ -289,13 +290,14 @@ function drawLegendBox(plane, entries) {
     }
     ctx.fillStyle = colors.text;
     ctx.textAlign = 'left';
-    ctx.fillText(entry.label, x + 28, cy + 4);
+    ctx.fillText(sanitizeGraphCanvasLabel(entry.label), x + 28, cy + 4);
   });
   ctx.restore();
 }
 
 function drawLabelTag(ctx, text, x, y, color, options = {}) {
-  const lines = Array.isArray(text) ? text : [text];
+  const rawLines = Array.isArray(text) ? text : [text];
+  const safeLines = rawLines.map((line) => sanitizeGraphCanvasLabel(line));
   const _cs = getComputedStyle(document.body);
   const fontFamily = options.fontFamily || _cs.getPropertyValue('--font-body').trim() || _cs.fontFamily || 'system-ui, sans-serif';
   const fontSize = options.fontSize || 11;
@@ -307,8 +309,8 @@ function drawLabelTag(ctx, text, x, y, color, options = {}) {
   ctx.save();
   ctx.font = `700 ${fontSize}px ${fontFamily}`;
   const lineHeight = Math.round(fontSize * 1.18);
-  const width = Math.max(...lines.map((line) => ctx.measureText(line).width), 0) + paddingX * 2;
-  const height = lines.length * lineHeight + paddingY * 2;
+  const width = Math.max(...safeLines.map((line) => ctx.measureText(line).width), 0) + paddingX * 2;
+  const height = safeLines.length * lineHeight + paddingY * 2;
   ctx.fillStyle = bgColor;
   ctx.strokeStyle = borderColor;
   ctx.lineWidth = 1.2;
@@ -318,7 +320,7 @@ function drawLabelTag(ctx, text, x, y, color, options = {}) {
   ctx.fillStyle = textColor;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  lines.forEach((line, index) => {
+  safeLines.forEach((line, index) => {
     ctx.fillText(line, x + width / 2, y + paddingY + lineHeight / 2 + index * lineHeight);
   });
   ctx.restore();

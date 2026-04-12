@@ -3,6 +3,8 @@
 // Base canvas drawing class for all interactive graphs
 // ============================================================
 
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
+
 // ── Colour helper ──────────────────────────────────────────
 /** Convert a 3- or 6-digit hex colour + alpha (0-1) to an rgba() string. */
 function hexToRgba(hex, alpha) {
@@ -155,7 +157,7 @@ class GraphEngine {
             ctx.fillStyle = color || col.budget;
             ctx.font = `bold 14px ${col.fontBody}`;
             ctx.textAlign = 'left';
-            ctx.fillText(label, end.x + 5, end.y - 5);
+            ctx.fillText(sanitizeGraphCanvasLabel(label), end.x + 5, end.y - 5);
         }
 
         return { xIntercept, yIntercept, slope: -p1/p2 };
@@ -191,7 +193,7 @@ class GraphEngine {
             ctx.fillStyle = color || col.indifference;
             ctx.font = `14px ${col.fontBody}`;
             ctx.textAlign = 'left';
-            ctx.fillText(label, labelPos.x, labelPos.y - 5);
+            ctx.fillText(sanitizeGraphCanvasLabel(label), labelPos.x, labelPos.y - 5);
         }
     }
 
@@ -230,7 +232,7 @@ class GraphEngine {
         ctx.fillStyle = col.text;
         ctx.font = `bold 14px ${col.fontBody}`;
         ctx.textAlign = 'left';
-        ctx.fillText(label, pos.x + 10, pos.y - 5);
+        ctx.fillText(sanitizeGraphCanvasLabel(label), pos.x + 10, pos.y - 5);
 
         ctx.font = `13px ${col.fontBody}`;
         ctx.fillStyle = col.text;
@@ -266,7 +268,7 @@ class GraphEngine {
         if (label) {
             ctx.font = `13px ${col.fontBody}`;
             ctx.textAlign = 'center';
-            ctx.fillText(label, (start.x + end.x) / 2, (start.y + end.y) / 2 - 10);
+            ctx.fillText(sanitizeGraphCanvasLabel(label), (start.x + end.x) / 2, (start.y + end.y) / 2 - 10);
         }
     }
 
@@ -412,11 +414,11 @@ class GraphEngine {
       ctx.fillStyle = col.label;
       ctx.font = `bold ${fsMd}px ${col.fontBody}`;
       ctx.textAlign = 'center';
-      ctx.fillText(xLabel || 'x₁ (Menge Gut 1)', PAD + PW / 2, h - PAD + 34);
+      ctx.fillText(sanitizeGraphCanvasLabel(xLabel || 'x₁ (Menge Gut 1)'), PAD + PW / 2, h - PAD + 34);
       ctx.save();
       ctx.translate(16, h - PAD - PH / 2);
       ctx.rotate(-Math.PI / 2);
-      ctx.fillText(yLabel || 'x₂ (Menge Gut 2)', 0, 0);
+      ctx.fillText(sanitizeGraphCanvasLabel(yLabel || 'x₂ (Menge Gut 2)'), 0, 0);
       ctx.restore();
 
       const sx = x => PAD + (x / axMax) * PW;
@@ -458,7 +460,7 @@ class GraphEngine {
         ctx.fillStyle = color;
         ctx.font = `bold 15px ${col.fontBody}`;
         ctx.textAlign = 'left';
-        ctx.fillText(label, sx(lx) + 5, sy(ly) - 6);
+        ctx.fillText(sanitizeGraphCanvasLabel(label), sx(lx) + 5, sy(ly) - 6);
       }
     }
 
@@ -474,7 +476,7 @@ class GraphEngine {
       ctx.font = `13px ${col.fontBody}`;
       let maxW = 0;
       entries.forEach(e => {
-        const tw = ctx.measureText(e.label).width;
+        const tw = ctx.measureText(sanitizeGraphCanvasLabel(e.label)).width;
         if (tw > maxW) maxW = tw;
       });
       const blockW = textX + maxW + 4;
@@ -545,7 +547,7 @@ class GraphEngine {
         ctx.fillStyle = col.text;
         ctx.font = `13px ${col.fontBody}`;
         ctx.textAlign = 'left';
-        ctx.fillText(entry.label, x + textX, cy + 1);
+        ctx.fillText(sanitizeGraphCanvasLabel(entry.label), x + textX, cy + 1);
       });
 
       ctx.restore();

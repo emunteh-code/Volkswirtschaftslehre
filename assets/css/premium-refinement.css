@@ -12,6 +12,202 @@
   --duration-enter: 250ms;
 }
 
+/* ============================================================
+   PASS — iPhone / mobile overflow & clipping closure (global)
+   Never wider than viewport; flex/grid children can shrink;
+   long math/code scroll locally. Loads after module styles.css.
+   ============================================================ */
+
+html {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+#app {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+#main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* clamp(1120px, 88vw, …) alone can exceed narrow viewports — cap to parent */
+#content {
+  max-width: min(100%, var(--content-shell-max, 100%));
+  min-width: 0;
+}
+
+#content[data-tab="graph"] {
+  max-width: min(100%, clamp(1120px, 90vw, 1480px));
+  min-width: 0;
+}
+
+#content > *,
+.panel.active,
+.panel.active > .section-block,
+.panel.active > .formula-grid,
+.graph-container,
+.r-execution-shell,
+.r-execution-instrument,
+.r-lab-section {
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+canvas,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+#content pre,
+#content .r-practice-output,
+textarea.r-practice-editor,
+.r-highlight-wrap {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#content pre,
+#content .r-practice-output,
+.rp-formula .rp-f-eq {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#content mjx-container[display="true"],
+#content mjx-container[jax="CHTML"][display="true"] {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+#content .math-block,
+#content .semantic-display,
+#content .formula-card .f-eq,
+#content .graph-info .gi-eq {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#topbar,
+#topbar-main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#topbar-main {
+  flex-wrap: wrap;
+}
+
+#topbar-actions {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+#tabRow.tab-row,
+.tab-row#tabRow {
+  max-width: 100%;
+  min-width: 0;
+}
+
+#rightPanel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  #content {
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
+  }
+
+  .tab-row {
+    padding-left: max(8px, env(safe-area-inset-left, 0px));
+    padding-right: max(8px, env(safe-area-inset-right, 0px));
+  }
+}
+
+#content .problem-card,
+#content .exam-drill-panel,
+#content .exam-q-card,
+#content .practice-section-header,
+#content .mikro1-practice {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ============================================================
+   PASS — mobile + tablet responsive parity (pass 1)
+   Width bands: ≤428 phone, 429–767 large phone, 768–1023 tablet,
+   1024–1279 wide tablet / small laptop, ≥1280 desktop (module shell).
+   Complements module `styles.css` breakpoints; loads after modules.
+   ============================================================ */
+
+/* Large phones / phablets: graph stage + section rhythm between 480 and tablet */
+@media (min-width: 429px) and (max-width: 767px) {
+  #content .graph-container:not(.graph-container--macro-focus) canvas,
+  #content .graph-container:not(.graph-container--macro-focus) .graph-canvas {
+    max-height: min(42vh, 380px) !important;
+    min-height: min(32vh, 300px) !important;
+  }
+
+  #content .section-block {
+    padding: clamp(16px, 3vw, 20px) clamp(14px, 3.5vw, 18px);
+  }
+}
+
+/* Portrait tablets: formula density + taller graph stage + calmer cards */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #content .formula-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 268px), 1fr));
+    gap: 14px 16px;
+  }
+
+  #content .graph-container:not(.graph-container--macro-focus) canvas,
+  #content .graph-container:not(.graph-container--macro-focus) .graph-canvas {
+    max-height: min(52vh, 540px) !important;
+    min-height: min(36vh, 380px) !important;
+  }
+
+  #content .section-block,
+  #content .problem-card {
+    padding: clamp(18px, 2.2vw, 24px) clamp(16px, 2.5vw, 22px);
+  }
+}
+
+/* Wide tablet / small laptop: graph uses vertical space; avoids “phone-sized” canvas */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #content .graph-container:not(.graph-container--macro-focus) canvas,
+  #content .graph-container:not(.graph-container--macro-focus) .graph-canvas {
+    max-height: min(56vh, 600px) !important;
+    min-height: min(38vh, 420px) !important;
+  }
+}
+
+/* Tablet-width: long answer / semantic rows stay in the content box */
+@media (max-width: 1023px) {
+  #content .exam-drill-answer,
+  #content .exam-drill-copy,
+  #content .exam-drill-line,
+  #content .semantic-display,
+  #content .semantic-schema {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
 /* ── Focus — soft blue ring ────────────────────────────── */
 #app :is(button, a, input, textarea, select, .tab-btn, .nav-item):focus-visible {
   outline: none;
@@ -99,8 +295,8 @@ body.light-mode #topbar {
 }
 
 #content .formula-card:hover {
-  border-color: color-mix(in srgb, var(--math-ink) 24%, var(--border));
-  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--math-ink) 22%, var(--border));
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 30%, transparent);
 }
 
 body:not([data-page="landing"]) {
@@ -457,8 +653,8 @@ body.light-mode #content .graph-container canvas {
 }
 
 #content .graph-info .gi-eq {
-  border-color: color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
-  background: color-mix(in srgb, var(--card) 82%, var(--math-soft, transparent) 18%);
+  border-color: color-mix(in srgb, var(--border) 85%, var(--math-ink) 15%);
+  background: color-mix(in srgb, var(--card) 97%, var(--math-soft, transparent) 3%);
 }
 
 #content .graph-info .gi-row {
@@ -485,18 +681,17 @@ body.light-mode #content .graph-container canvas {
 /* Macro/Finanz graph insight + interpretation rows */
 #content .graph-insight-row,
 #content .graph-interpretation-row {
-  background: color-mix(in srgb, var(--surface2) 40%, var(--card) 60%);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 84%, var(--text) 16%);
   border-radius: var(--r-sm);
-  box-shadow: var(--shadow-sm);
-  transition:
-    border-color var(--duration-hover) var(--ease-premium),
-    box-shadow var(--duration-hover) var(--ease-premium);
+  box-shadow: none;
+  transition: border-color var(--duration-hover) var(--ease-premium);
 }
 
 #content .graph-insight-row:hover,
 #content .graph-interpretation-row:hover {
   border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 20%);
+  box-shadow: none;
 }
 
 #content .graph-insight-label,
@@ -1136,8 +1331,10 @@ body.light-mode #content .exam-drill-key {
   gap: 8px 10px;
   padding: 14px 18px;
   border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  /* Pass 60: border-led grouping; no heavy grey slab */
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 6%);
+  box-shadow: none;
   font-size: 14.5px;
   line-height: 1.5;
 }
@@ -1147,8 +1344,9 @@ body.light-mode #content .exam-drill-key {
   gap: 8px;
   padding: 14px 18px;
   border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--math-ink) 18%);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 6%);
+  box-shadow: none;
 }
 
 .semantic-reference--pill {
@@ -1164,8 +1362,8 @@ body.light-mode #content .exam-drill-key {
   color: color-mix(in srgb, var(--text) 88%, var(--math-ink) 12%);
   padding: 3px 10px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--card) 82%, var(--math-soft, transparent) 18%);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--math-ink) 22%);
+  background: color-mix(in srgb, var(--card) 99%, var(--math-soft, transparent) 1%);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--math-ink) 10%);
   white-space: nowrap;
 }
 
@@ -1207,14 +1405,47 @@ body.light-mode #content .exam-drill-key {
 body.light-mode .legal-schema,
 body.light-mode .semantic-schema,
 body.light-mode .semantic-reference {
-  background: color-mix(in srgb, var(--card) 78%, var(--math-soft, transparent) 22%);
+  background: transparent;
+  border-color: color-mix(in srgb, var(--border) 92%, var(--text) 8%);
 }
 
 body.light-mode .legal-schema__term,
 body.light-mode .semantic-schema__item,
 body.light-mode .semantic-reference__entry {
-  background: color-mix(in srgb, #fff 78%, var(--math-soft, transparent) 22%);
-  border-color: color-mix(in srgb, var(--border) 72%, var(--math-ink) 28%);
+  background: color-mix(in srgb, var(--card) 99.5%, var(--border) 0.5%);
+  border-color: color-mix(in srgb, var(--border) 84%, var(--math-ink) 14%);
+}
+
+/* Pass 58 (cont.) — hierarchy via typography only; no added UI chrome */
+#content .legal-schema,
+#content .semantic-schema,
+#content .semantic-reference {
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%);
+}
+
+#content .legal-schema__term,
+#content .semantic-schema__item,
+#content .semantic-reference__entry {
+  font-weight: 600;
+  color: var(--text);
+}
+
+#content .semantic-reference__term {
+  font-weight: 600;
+  color: var(--text);
+}
+
+#content .semantic-reference__note {
+  font-weight: 400;
+  font-size: 12.25px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
+}
+
+#content .semantic-schema__connector-note {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
 }
 
 /* Formula-card semantic blocks */
@@ -1653,8 +1884,8 @@ body.light-mode #content .formula-card .f-label {
 /* Formula in graph info */
 #content .graph-info .gi-eq {
   color: var(--math-ink);
-  background: color-mix(in srgb, var(--card) 88%, var(--surface2) 12%);
-  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
   border-radius: var(--r-sm);
   box-shadow: none;
 }
@@ -1662,19 +1893,17 @@ body.light-mode #content .formula-card .f-label {
 /* Insight/interpretation rows — premium surface */
 #content .graph-insight-row,
 #content .graph-interpretation-row {
-  background: color-mix(in srgb, var(--surface2) 28%, var(--card) 72%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 18%);
   border-radius: var(--r-sm);
-  box-shadow: var(--shadow-sm);
-  transition:
-    border-color var(--duration-hover) var(--ease-premium),
-    box-shadow var(--duration-hover) var(--ease-premium);
+  box-shadow: none;
+  transition: border-color var(--duration-hover) var(--ease-premium);
 }
 
 #content .graph-insight-row:hover,
 #content .graph-interpretation-row:hover {
   border-color: color-mix(in srgb, var(--border) 58%, var(--accent) 28%);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 /* Insight/interpretation labels — accent-tinted */
@@ -1709,8 +1938,8 @@ body.light-mode #content .graph-info {
 
 body.light-mode #content .graph-insight-row,
 body.light-mode #content .graph-interpretation-row {
-  background: color-mix(in srgb, var(--surface) 14%, var(--card) 86%);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
+  background: color-mix(in srgb, var(--card) 99%, var(--border) 1%);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 18%);
 }
 
 /* ============================================================
@@ -2105,14 +2334,14 @@ body.light-mode #content .exam-drill-answer {
   overflow: visible;
   padding: 20px;
   border-radius: 18px;
-  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--card) 98%, var(--math-soft, transparent) 2%), color-mix(in srgb, var(--card) 95%, var(--surface2) 5%));
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  /* Pass 58: editorial card — page-like fill, hairline depth only */
+  background: var(--card);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 22%, transparent);
 }
 
 body.light-mode #content .formula-card {
-  box-shadow: 0 14px 28px rgba(124, 58, 237, 0.07);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 30%, transparent);
 }
 
 #content .formula-card .f-label {
@@ -2120,17 +2349,17 @@ body.light-mode #content .formula-card {
   letter-spacing: 0.08em;
 }
 
-#content .formula-card .f-eq {
+/* Non-math inner well: light border-led surface (math cards stripped in Pass 35) */
+#content .formula-card:not(.formula-card--math) .f-eq {
   min-width: 0;
   display: block;
   overflow: visible;
   font-size: 1.08em;
   line-height: 1.75;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface2) 84%, var(--card) 16%), color-mix(in srgb, var(--surface2) 94%, var(--card) 6%));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 1px solid color-mix(in srgb, var(--border) 84%, var(--text) 16%);
+  background: color-mix(in srgb, var(--card) 99%, var(--surface2) 1%);
+  box-shadow: none;
 }
 
 #content .formula-card .f-desc {
@@ -2306,9 +2535,9 @@ body.light-mode #content .formula-card {
   gap: 10px;
   min-width: 0;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--card) 96%, var(--math-soft, transparent) 4%), color-mix(in srgb, var(--card) 92%, var(--surface2) 8%));
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
+  background: var(--card);
+  box-shadow: none;
 }
 
 #rightPanel .rp-formula .rp-f-name {
@@ -2394,8 +2623,8 @@ body.light-mode #content .formula-card {
 /* ============================================================
    PASS 30 — Non-math semantic formula system (project-wide)
    One family for `formula-card--schema` / `--reference`: outer card stays in
-   the formula grid; inner `.f-eq` is a **border-led** anchor (Pass 51 —
-   near-card fill, not heavy surface2 slab; Pass 49 structure retained).
+   the formula grid; inner `.f-eq` is **border-led** (Pass 51 + Pass 58
+   surface-tone cleanup — near-page fill, not grey slab).
    Types A/B/C share typography + spacing; segmentation only for chains,
    paired contrast, and multi-line reference stacks.
    Math cards (`formula-card--math`) are intentionally untouched here.
@@ -2413,14 +2642,16 @@ body.light-mode #content .formula-card {
   letter-spacing: 0.08em;
   font-size: 12px;
   font-weight: 700;
-  color: color-mix(in srgb, var(--muted) 52%, var(--text) 48%);
+  /* Kicker: readable but clearly secondary to body + anchor text */
+  color: color-mix(in srgb, var(--muted) 44%, var(--text) 56%);
 }
 
 #content .formula-card.formula-card--schema .f-desc,
 #content .formula-card.formula-card--reference .f-desc {
   font-size: 14px;
   line-height: 1.65;
-  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text) 91%, var(--muted) 9%);
 }
 
 #content .formula-card.formula-card--schema .f-eq,
@@ -2431,12 +2662,13 @@ body.light-mode #content .formula-card {
   justify-content: flex-start;
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
   color: var(--text);
+  font-weight: 500;
   min-width: 0;
   font-size: 1.08em;
   line-height: 1.75;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 24%);
-  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--text) 20%);
+  background: color-mix(in srgb, var(--card) 99.5%, var(--surface2) 0.5%);
   box-shadow: none;
   padding: 20px 22px;
 }
@@ -2444,7 +2676,7 @@ body.light-mode #content .formula-card {
 body.light-mode #content .formula-card.formula-card--schema .f-eq,
 body.light-mode #content .formula-card.formula-card--reference .f-eq {
   border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
-  background: color-mix(in srgb, var(--card) 99%, var(--surface2) 1%);
+  background: var(--card);
 }
 
 #content .formula-card.formula-card--schema.layout-compact .f-eq,
@@ -2905,8 +3137,8 @@ body[data-portal-module="jahresabschluss"] #content .section-block .legal-schema
   color: var(--text);
   padding: 16px 18px;
   border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--math-ink) 12%);
-  background: color-mix(in srgb, var(--surface2) 50%, var(--card) 50%);
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--text) 12%);
+  background: color-mix(in srgb, var(--card) 97%, var(--surface2) 3%);
   flex-wrap: wrap;
   gap: 0.2em 0.45em;
 }
@@ -3322,7 +3554,10 @@ body.light-mode #content .intuition-callout-anchor {
 
 #content .solution-block .step-body > .math-block,
 #content .solution-block .step-body > [class*="math-block"],
-#content .solution-block .step-body > .semantic-display {
+#content .solution-block .step-body > .semantic-display,
+#content .solution-block .step-body .step-math-slot > .math-block,
+#content .solution-block .step-body .step-math-slot > [class*="math-block"],
+#content .solution-block .step-body .step-math-slot > .semantic-display {
   margin: 6px 0 0 !important;
   padding: 6px 0 !important;
   border: none !important;
@@ -3339,7 +3574,10 @@ body.light-mode #content .intuition-callout-anchor {
 #content .exam-drill-answer .exam-drill-line > .semantic-display,
 #content .exam-drill-answer .exam-drill-copy > .math-block,
 #content .exam-drill-answer .exam-drill-copy > [class*="math-block"],
-#content .exam-drill-answer .exam-drill-copy > .semantic-display {
+#content .exam-drill-answer .exam-drill-copy > .semantic-display,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .math-block,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > [class*="math-block"],
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display {
   margin: 6px 0 0 !important;
   padding: 6px 0 !important;
   border: none !important;
@@ -3362,6 +3600,94 @@ body.light-mode #content .intuition-callout-anchor {
   font-size: 14px;
   line-height: 1.62;
   color: color-mix(in srgb, var(--text) 90%, var(--math-ink) 10%);
+}
+
+/* ============================================================
+   PASS 62 — Formula + revealed-answer layout normalization
+   Deliberate column flow: step instruction → contained math. Task-variant math
+   scales slightly down; slots stay width-bound (scroll already on `.math-block`
+   / display `mjx-container` from global rules). Markup: `.step-math-slot`,
+   `.exam-drill-step` / `.exam-drill-step-text` / `.exam-drill-step-math`
+   (`assets/js/portal-core/ui/renderer.js`, mikro1 / ökonometrie renderers).
+   ============================================================ */
+
+#content .solution-block .step-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+}
+
+#content .solution-block .step-text {
+  width: 100%;
+  min-width: 0;
+}
+
+#content .solution-block .step-math-slot:empty,
+#content .exam-drill-answer .exam-drill-step-math:empty {
+  display: none;
+}
+
+#content .solution-block .step-math-slot,
+#content .exam-drill-answer .exam-drill-step-math {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#content .solution-block .step-math-slot > .math-block--task,
+#content .exam-drill-answer .exam-drill-step-math > .math-block--task {
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(0.86rem, 2.35vw, 0.98rem);
+  line-height: 1.45;
+}
+
+#content .solution-block .step-math-slot mjx-container,
+#content .exam-drill-answer .exam-drill-step-math mjx-container {
+  max-width: 100% !important;
+}
+
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+#content .exam-drill-answer .exam-drill-step-text {
+  width: 100%;
+  min-width: 0;
+}
+
+/* ============================================================
+   PASS 63 — Teaching prose: \texttt → inline code; $…$ math boundaries
+   Emitted by `renderTeachingProse` (`assets/js/portal-core/ui/teachingProse.js`).
+   ============================================================ */
+
+#content .teaching-inline-code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.9em;
+  font-weight: 500;
+  padding: 0.1em 0.38em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface2) 72%, var(--border) 28%);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  white-space: pre-wrap;
+  word-break: break-word;
+  vertical-align: baseline;
+  max-width: 100%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+body.light-mode #content .teaching-inline-code {
+  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
+  border-color: color-mix(in srgb, var(--border) 92%, var(--text) 8%);
 }
 
 /* ============================================================
@@ -3446,8 +3772,12 @@ body.light-mode #content .section-block .legal-schema {
 
 #content .solution-block .step-body > .semantic-display.semantic-schema--chain,
 #content .solution-block .step-body > .semantic-display.semantic-schema--phrase,
+#content .solution-block .step-body .step-math-slot > .semantic-display.semantic-schema--chain,
+#content .solution-block .step-body .step-math-slot > .semantic-display.semantic-schema--phrase,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-schema--chain,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-schema--phrase,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-schema--chain,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-schema--phrase,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-schema--chain,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-schema--phrase,
 #content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-schema--chain,
@@ -3459,7 +3789,9 @@ body.light-mode #content .section-block .legal-schema {
 }
 
 #content .solution-block .step-body > .semantic-display.semantic-reference--stack,
+#content .solution-block .step-body .step-math-slot > .semantic-display.semantic-reference--stack,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-reference--stack,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-reference--stack,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-reference--stack,
 #content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-reference--stack {
   display: grid !important;
@@ -3468,7 +3800,9 @@ body.light-mode #content .section-block .legal-schema {
 }
 
 #content .solution-block .step-body > .semantic-display.semantic-reference--pill,
+#content .solution-block .step-body .step-math-slot > .semantic-display.semantic-reference--pill,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-reference--pill,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-reference--pill,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-reference--pill,
 #content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-reference--pill {
   display: flex !important;
@@ -3536,7 +3870,7 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
   gap: 14px !important;
   padding: clamp(14px, 1.6vw, 22px) clamp(16px, 2vw, 26px) clamp(18px, 2vw, 28px) !important;
   margin: 0 auto 12px !important;
-  max-width: min(100%, var(--graph-shell-max, 1400px)) !important;
+  max-width: 100% !important;
   border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 5%) !important;
   background: var(--card) !important;
   box-shadow: none !important;
@@ -3635,7 +3969,7 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
   border: none !important;
   border-left: 3px solid color-mix(in srgb, var(--accent) 52%, var(--border) 48%) !important;
   border-radius: 0 8px 8px 0 !important;
-  background: color-mix(in srgb, var(--surface2) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%) !important;
   box-shadow: none !important;
 }
 
@@ -3671,7 +4005,7 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
   border: none !important;
   border-left: 3px solid color-mix(in srgb, var(--accent) 48%, var(--border) 52%) !important;
   border-radius: 0 10px 10px 0 !important;
-  background: color-mix(in srgb, var(--surface2) 26%, var(--card) 74%) !important;
+  background: color-mix(in srgb, var(--card) 95%, var(--surface2) 5%) !important;
   box-shadow: none !important;
 }
 
@@ -3684,7 +4018,7 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 body.light-mode #content .graph-info .gi-eq,
 body.light-mode #content .graph-insight-row,
 body.light-mode #content .graph-interpretation-row {
-  background: color-mix(in srgb, var(--surface2) 18%, var(--card) 82%) !important;
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%) !important;
 }
 
 /* Generated portal bundles: one graph-container inside panel — drop extra grid gap */
@@ -3692,4 +4026,143 @@ body.light-mode #content .graph-interpretation-row {
   display: flex !important;
   flex-direction: column !important;
   gap: 0 !important;
+}
+
+/* ============================================================
+   PASS 60 — Concept mini-cards (info-grid / Prüfungsschema family)
+   Light surface: border + spacing carry grouping, not surface2 slabs.
+   ============================================================ */
+#content .info-card {
+  background: color-mix(in srgb, var(--card) 99%, var(--surface2) 1%) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 5%) !important;
+  box-shadow: none !important;
+}
+
+#content .info-card:hover {
+  border-color: color-mix(in srgb, var(--border) 70%, var(--accent) 22%) !important;
+}
+
+body.light-mode #content .info-card {
+  background: color-mix(in srgb, var(--card) 99.6%, var(--border) 0.4%) !important;
+  border-color: color-mix(in srgb, var(--border) 90%, var(--text) 8%) !important;
+}
+
+/* ── Source provenance (concept pages): pass 1 — one quiet line + optional detail ─ */
+#content .source-provenance {
+  margin: 1.25rem 0 0.25rem;
+  padding: 0.55rem 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 12%, transparent);
+  max-width: min(52rem, 100%);
+}
+
+#content .source-provenance-inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+#content .source-provenance-mark {
+  flex-shrink: 0;
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+  opacity: 0.42;
+  transform: translateY(0.5px);
+  user-select: none;
+}
+
+body.light-mode #content .source-provenance-mark {
+  opacity: 0.38;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+}
+
+#content .source-provenance .source-provenance-line {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%);
+  font-size: 11px;
+  line-height: 1.42;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+#content .source-provenance-expand {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%);
+  opacity: 0.65;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+#content .source-provenance-expand:hover {
+  opacity: 0.95;
+  color: color-mix(in srgb, var(--muted) 42%, var(--text) 58%);
+  border-color: color-mix(in srgb, var(--border) 55%, var(--accent) 12%);
+  background: color-mix(in srgb, var(--surface2) 40%, transparent);
+}
+
+#content .source-provenance-expand:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+#content .source-provenance-detail {
+  margin: 0.45rem 0 0;
+  padding: 0.45rem 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 10%, transparent);
+}
+
+#content .source-provenance-detail-rows {
+  display: grid;
+  gap: 0.28rem 0.75rem;
+  font-size: 11px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%);
+}
+
+#content .source-provenance-detail-row {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 34%) 1fr;
+  gap: 0.5rem 0.65rem;
+  align-items: baseline;
+}
+
+@media (max-width: 480px) {
+  #content .source-provenance-detail-row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+#content .source-provenance-detail-k {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+}
+
+#content .source-provenance-detail-v {
+  font-weight: 400;
+  word-break: break-word;
 }

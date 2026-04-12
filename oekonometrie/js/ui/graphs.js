@@ -2,6 +2,7 @@ import GraphEngine from './graphEngine.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
+import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
 
 let _rafId = null;
 
@@ -157,11 +158,11 @@ function buildPlot(ctx, w, h, {
   ctx.fillStyle = col.text;
   ctx.font = `bold 14px ${col.fontBody || '-apple-system, sans-serif'}`;
   ctx.textAlign = 'center';
-  ctx.fillText(xLabel, pad.left + pw / 2, h - 22);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), pad.left + pw / 2, h - 22);
   ctx.save();
   ctx.translate(20, pad.top + ph / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
 
   return { sx, sy, pad };
@@ -204,7 +205,7 @@ function drawLegend(ctx, entries, w) {
     }
     ctx.fillStyle = col.text;
     ctx.textAlign = 'left';
-    ctx.fillText(entry.label, x + 42, cy + 0.5);
+    ctx.fillText(sanitizeGraphCanvasLabel(entry.label), x + 42, cy + 0.5);
   });
 }
 
@@ -223,8 +224,9 @@ function drawLine(ctx, points, { color, lw = 2.5, dash = [] }) {
 
 function drawLabel(ctx, x, y, text, color, align = 'left') {
   const col = palette();
+  const label = sanitizeGraphCanvasLabel(text);
   ctx.font = `bold 12px ${col.fontBody || '-apple-system, sans-serif'}`;
-  const width = ctx.measureText(text).width + 10;
+  const width = ctx.measureText(label).width + 10;
   const boxX = align === 'right' ? x - width : x;
   const boxY = y - 18;
   ctx.fillStyle = withAlpha(col.surface, 0.94);
@@ -237,7 +239,7 @@ function drawLabel(ctx, x, y, text, color, align = 'left') {
   ctx.fillStyle = color;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, boxX + 5, boxY + 9.5);
+  ctx.fillText(label, boxX + 5, boxY + 9.5);
 }
 
 function drawDot(ctx, x, y, color, r = 4.5) {

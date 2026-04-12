@@ -1120,7 +1120,7 @@ function renderTaskBriefs(config) {
   return `<div class="r-lesson-flow">
   <div class="r-lesson-intro">
     <div class="r-orient-panel-kicker">Idee</div>
-    ${config.ideeLeadParagraph ? `<p>${escapeHtml(config.ideeLeadParagraph)}</p>` : ''}
+    ${config.ideeLeadParagraph ? `<p class="r-lesson-lead">${escapeHtml(config.ideeLeadParagraph)}</p>` : ''}
     ${config.goalBullets?.length ? `<ul class="r-goal-list">${config.goalBullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
     ${config.showIdeeSuccess ? `<p class="r-goal-success"><strong>Ziel:</strong> ${escapeHtml(config.successSignal)}</p>` : ''}
   </div>

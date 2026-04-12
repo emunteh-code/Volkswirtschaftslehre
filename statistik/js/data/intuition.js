@@ -37,7 +37,7 @@ export const INTUITION = {
     bridge: 'Aufgaben zuerst nach Objekt sortieren: diskreter Zähler → Binomial/Poisson-Logik; stetige Messgröße → Dichte-/Normal-Logik; Mittelwert großer Stichproben → ZGS.',
     exam: [
       { if: 'Normalverteilung und Schwellenwert', then: 'Standardisieren und Ergebnis wieder in Originaleinheiten zurückübersetzen.' },
-      { if: 'Mittelwert einer großen Stichprobe', then: 'Nicht die Grundverteilung, sondern die Verteilung von \\bar X via ZGS fokussieren.' }
+      { if: 'Mittelwert einer großen Stichprobe', then: 'Nicht die Grundverteilung, sondern die Verteilung von $\\bar{X}$ via ZGS fokussieren.' }
     ]
   },
   schaetzen_verfahren: {

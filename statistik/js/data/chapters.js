@@ -818,7 +818,7 @@ export const CONTENT = {
     </div>
     <div class="section-block">
       <h3>Signifikanztest für β₁</h3>
-      <p>H0: $\beta_1 = 0$ (kein linearer Zusammenhang). Teststatistik:</p>
+      <p>Nullhypothese $H_0$: $\beta_1 = 0$ (kein linearer Zusammenhang). Teststatistik:</p>
       <div class="math-block">$$t = \frac{\hat{\beta}_1}{SE(\hat{\beta}_1)}$$</div>
     </div>
     <div class="section-block">
@@ -875,7 +875,7 @@ export const CONTENT = {
           { text: `Mustererkennung im Residuenplot:`, eq: String.raw`\text{Trichterform} \Rightarrow \text{Hinweis auf Heteroskedastizität}` },
           { text: `Kernkonsequenz:`, eq: String.raw`OLS\text{-Koeffizienten bleiben oft unverzerrt, Standardfehler/Teste können aber verzerrt sein.}` },
           { text: `Prüfungssichere Reaktion:`, eq: String.raw`\text{Heteroskedastizitätsrobuste Standardfehler oder angepasstes Modell berichten.}` },
-          { text: `Trap:`, eq: String.raw`Hohes }R^2\text{ behebt Diagnostikprobleme nicht.` }
+          { text: `Trap:`, eq: String.raw`\text{Hohes } R^2 \text{ behebt Diagnostikprobleme nicht.}` }
         ],
         result: String.raw`Die Hauptaussage ist nicht "Modell verwerfen", sondern "Inferenz absichern": bei heteroskedastischen Residuen sind robuste Standardfehler bzw. eine angepasste Spezifikation zentral.`
       },
@@ -902,7 +902,7 @@ export const CONTENT = {
         text: String.raw`In R haben Sie ein Modell geschätzt: \texttt{model <- lm(Lohn ~ Bildung + Erfahrung, data=df)}. Der Output zeigt $\hat{\beta}_{\text{Bildung}} = 2{,}5$ mit $p = 0{,}003$. Interpretieren Sie.`,
         steps: [
           { text: `Koeffizient interpretieren:`, eq: String.raw`\text{Ein zusätzliches Bildungsjahr erhöht den Lohn um 2,5 Einheiten (ceteris paribus).}` },
-          { text: String.raw`Signifikanz prüfen: $p = 0{,}003 < 0{,}05$.`, eq: String.raw`\text{H0 (}\beta = 0\text{) wird auf dem 5%-Niveau abgelehnt.}` }
+          { text: String.raw`Signifikanz prüfen: $p = 0{,}003 < 0{,}05$.`, eq: String.raw`$$H_0:\ \beta = 0 \text{ wird auf dem } 5\%\text{-Niveau abgelehnt.}$$` }
         ],
         result: String.raw`Bildung hat einen signifikant positiven Effekt auf den Lohn ($p < 0{,}01$).`
       },

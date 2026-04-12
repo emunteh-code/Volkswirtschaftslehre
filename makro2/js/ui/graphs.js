@@ -6,6 +6,7 @@
 import GraphEngine from "./graphEngine.js";
 import { renderMath } from "../utils/mathjax.js";
 import { ensureMathJaxEquationHtml } from "../../../assets/js/portal-core/ui/mathDelimiters.js";
+import { sanitizeGraphCanvasLabel } from "../../../assets/js/portal-core/utils/graphLabels.js";
 
 function getNumber(id, fallback = 0) {
   const input = document.getElementById(id);
@@ -104,11 +105,11 @@ function setupPlot(xLabel, yLabel, ranges) {
   ctx.fillStyle = col.label;
   ctx.font = `600 ${fsBold}px ${col.fontMono}`;
   ctx.textAlign = "center";
-  ctx.fillText(xLabel, pad.left + innerW / 2, h - 18);
+  ctx.fillText(sanitizeGraphCanvasLabel(xLabel), pad.left + innerW / 2, h - 18);
   ctx.save();
   ctx.translate(18, pad.top + innerH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(yLabel, 0, 0);
+  ctx.fillText(sanitizeGraphCanvasLabel(yLabel), 0, 0);
   ctx.restore();
 
   return {
@@ -139,11 +140,12 @@ function registerLegend(plot, entry) {
 
 function drawTag(plot, x, y, text, color, dx = 10, dy = -10, align = "left") {
   const { ctx, px, py, col } = plot;
+  const label = sanitizeGraphCanvasLabel(text);
   const tagX = px(x) + dx;
   const tagY = py(y) + dy;
   ctx.save();
   ctx.font = `600 ${Math.max(12, plot.fsBase)}px ${col.fontBody}`;
-  const width = ctx.measureText(text).width + 18;
+  const width = ctx.measureText(label).width + 18;
   const height = 24;
   const rectX = align === "right" ? tagX - width + 4 : tagX - 4;
   ctx.fillStyle = `${col.bg}f2`;
@@ -156,7 +158,7 @@ function drawTag(plot, x, y, text, color, dx = 10, dy = -10, align = "left") {
   ctx.fillStyle = color;
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  ctx.fillText(text, rectX + 9, tagY - 6);
+  ctx.fillText(label, rectX + 9, tagY - 6);
   ctx.restore();
 }
 

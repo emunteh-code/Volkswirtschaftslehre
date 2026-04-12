@@ -68,6 +68,8 @@
   box-shadow: none !important;
   background: transparent !important;
   padding: 18px 20px 16px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .r-execution-shell .r-practice-editor-card {
@@ -372,7 +374,7 @@
   gap: 14px;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .r-lab-section {
     /* Pass 56c: modestly more room for execution + evidence column */
     grid-template-columns: minmax(0, 1.28fr) minmax(400px, 1.12fr);
@@ -1068,13 +1070,11 @@
 
 /* ─── Responsive Behavior ────────────────────────────────────────────────── */
 
-@media (max-width: 1080px) {
+@media (max-width: 1199px) {
   .r-tab-bottom {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 980px) {
   .r-execution-shell .r-execution-instrument {
     grid-template-columns: 1fr;
   }
@@ -1083,7 +1083,9 @@
     border-right: none !important;
     border-bottom: 1px solid color-mix(in srgb, var(--border) 24%, transparent);
   }
+}
 
+@media (max-width: 980px) {
   .r-practice-output,
   .r-practice-editor {
     min-height: 220px;
@@ -1473,7 +1475,7 @@
    ============================================================ */
 
 /* ── Wide R tab: single lab canvas; columns are lanes, not two outer cards ─ */
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .r-lab-section.r-practice-block {
     padding: 20px 22px 24px;
     gap: 0;
@@ -1506,11 +1508,7 @@
   }
 }
 
-/* ── Left lane: bands + spacing only; Kernzeile = only framed hinge ─────── */
-[data-r-practice-root] .r-lesson-flow {
-  gap: 1.15rem;
-}
-
+/* ── Left lane: bands + spacing only; Kernzeile = hinge rail (see Pass 59) ─ */
 [data-r-practice-root] .r-lesson-flow .r-lesson-intro,
 [data-r-practice-root] .r-lesson-flow .r-translation-block,
 [data-r-practice-root] .r-lesson-flow .r-task-flow {
@@ -1540,39 +1538,30 @@
   gap: 0.25rem;
 }
 
-[data-r-practice-root] .r-lesson-flow .r-core-line {
-  margin: 1.35rem 0 1.45rem !important;
-  padding: 1rem 1.05rem 0.95rem !important;
-  border-radius: var(--r-md) !important;
-  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border) 68%) !important;
-  border-left-width: 5px !important;
-  border-left-color: color-mix(in srgb, var(--accent) 62%, var(--border) 38%) !important;
-  background: color-mix(in srgb, var(--accent) 11%, var(--card) 89%) !important;
-  box-shadow:
-    0 2px 14px color-mix(in srgb, var(--accent) 10%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent) !important;
-}
-
-[data-r-practice-root] .r-lesson-flow .r-core-line-code {
-  border-style: solid !important;
-  border-width: 1px !important;
-  border-color: color-mix(in srgb, var(--accent) 22%, var(--border) 78%) !important;
-  background: color-mix(in srgb, var(--surface) 62%, transparent) !important;
-}
-
 /* Erster Schritt: instruction band, not a panel */
 [data-r-practice-root] .r-orient-first-action,
 .r-orient-card > .r-orient-first-action,
 .r-practice-head .r-orient-first-action {
   border: none !important;
-  border-top: none !important;
+  border-top: 1px solid color-mix(in srgb, var(--border) 32%, transparent) !important;
   border-radius: 0 !important;
-  padding: 0.55rem 0 0 !important;
-  margin-top: 0.85rem !important;
+  padding: 0.65rem 0 0 !important;
+  margin-top: 1rem !important;
   background: transparent !important;
-  font-size: 12.2px;
-  line-height: 1.52;
-  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%);
+  font-size: 11.25px !important;
+  line-height: 1.48 !important;
+  font-weight: 400 !important;
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%) !important;
+}
+
+[data-r-practice-root] .r-orient-action-label,
+.r-practice-head .r-orient-first-action .r-orient-action-label {
+  font-size: 9.5px !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+  color: color-mix(in srgb, var(--text) 52%, var(--muted) 48%) !important;
+  margin-right: 0.25rem !important;
 }
 
 /* Embedded: teaching head is not a second card */
@@ -1647,7 +1636,7 @@
 }
 
 /* Narrow R tab: teaching lane is a band above the instrument, not a second card */
-@media (max-width: 1099px) {
+@media (max-width: 1199px) {
   .r-lab-section > .r-orient-card {
     border: none !important;
     box-shadow: none !important;
@@ -1669,7 +1658,7 @@
    ============================================================ */
 
 /* ── Wide lab: soften column split; one shared field, not two documents ─── */
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .r-lab-section.r-practice-block {
     column-gap: 26px;
     background: color-mix(in srgb, var(--surface) 97.5%, var(--accent) 2.5%);
@@ -1703,35 +1692,134 @@
 }
 
 [data-r-practice-root] .r-lesson-flow {
-  gap: 0.85rem;
+  gap: 1.05rem;
 }
 
-[data-r-practice-root] .r-lesson-intro p,
-[data-r-practice-root] .r-translation-block .r-map-meaning,
-[data-r-practice-root] .r-task-flow .r-task-prompt {
-  font-size: 12.55px !important;
-  line-height: 1.45 !important;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%) !important;
+/* Pass 59: left-lane hierarchy — do not flatten lead / support / task to one style */
+
+[data-r-practice-root] .r-practice-head h3 {
+  font-size: 1.14rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.22 !important;
+  color: var(--text) !important;
+}
+
+[data-r-practice-root] .r-application-kicker {
+  font-size: 10px !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 700 !important;
+  color: color-mix(in srgb, var(--accent) 62%, var(--muted) 38%) !important;
+}
+
+[data-r-practice-root] .r-practice-bridge {
+  font-size: 12.2px !important;
+  line-height: 1.52 !important;
+  font-weight: 400 !important;
+  color: color-mix(in srgb, var(--muted) 38%, var(--text) 62%) !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-orient-panel-kicker {
+  font-size: 10px !important;
+  letter-spacing: 0.11em !important;
+  font-weight: 800 !important;
+  color: color-mix(in srgb, var(--text) 58%, var(--muted) 42%) !important;
+  margin: 0 0 0.42rem !important;
+  padding-bottom: 0.2rem !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 40%, transparent) !important;
+}
+
+[data-r-practice-root] .r-lesson-lead,
+[data-r-practice-root] .r-lesson-intro > p:first-of-type:not(.r-goal-success) {
+  font-size: 13.2px !important;
+  line-height: 1.55 !important;
+  font-weight: 600 !important;
+  color: color-mix(in srgb, var(--text) 94%, var(--muted) 6%) !important;
+  margin: 0 0 0.45rem !important;
+}
+
+[data-r-practice-root] .r-goal-success {
+  font-size: 12.8px !important;
+  line-height: 1.52 !important;
+  font-weight: 700 !important;
+  color: color-mix(in srgb, var(--accent) 42%, var(--text) 58%) !important;
+  margin: 0.35rem 0 0 !important;
+}
+
+[data-r-practice-root] .r-goal-list {
+  gap: 0.28rem !important;
+  margin-top: 0.15rem !important;
 }
 
 [data-r-practice-root] .r-goal-list li {
-  font-size: 11.65px !important;
-  line-height: 1.42 !important;
+  font-size: 11.7px !important;
+  line-height: 1.48 !important;
+  font-weight: 400 !important;
+  color: color-mix(in srgb, var(--muted) 40%, var(--text) 60%) !important;
 }
 
-[data-r-practice-root] .r-map-math,
+[data-r-practice-root] .r-lesson-flow .r-map-grid {
+  gap: 0.62rem !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-map-row {
+  padding: 0.35rem 0 0.55rem !important;
+  gap: 0.28rem !important;
+  border-bottom: 1px dashed color-mix(in srgb, var(--border) 36%, transparent) !important;
+}
+
+[data-r-practice-root] .r-map-cell-label {
+  font-size: 8.75px !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 700 !important;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%) !important;
+}
+
+[data-r-practice-root] .r-map-math {
+  font-size: 12.75px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+}
+
 [data-r-practice-root] .r-map-code code {
-  font-size: 11.85px !important;
+  font-size: 11.95px !important;
+  font-weight: 500 !important;
+  line-height: 1.45 !important;
+}
+
+[data-r-practice-root] .r-translation-block .r-map-meaning {
+  font-size: 11.55px !important;
+  line-height: 1.48 !important;
+  font-weight: 400 !important;
+  color: color-mix(in srgb, var(--muted) 46%, var(--text) 54%) !important;
+  margin-top: 0.12rem !important;
+}
+
+[data-r-practice-root] .r-task-flow .r-task-prompt {
+  font-size: 13px !important;
+  line-height: 1.52 !important;
+  font-weight: 600 !important;
+  color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%) !important;
+  margin: 0 0 0.4rem !important;
+}
+
+[data-r-practice-root] .r-task-steps {
+  gap: 0.32rem !important;
 }
 
 [data-r-practice-root] .r-task-steps li {
-  font-size: 11.85px !important;
-  line-height: 1.42 !important;
+  font-size: 11.9px !important;
+  line-height: 1.48 !important;
+  font-weight: 400 !important;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%) !important;
 }
 
 [data-r-practice-root] .r-task-guard {
-  font-size: 11.1px !important;
-  margin-top: 0.25rem !important;
+  font-size: 10.85px !important;
+  line-height: 1.48 !important;
+  font-weight: 500 !important;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%) !important;
+  margin-top: 0.45rem !important;
 }
 
 /* Kernzeile: integrated hinge — accent rail, not a floating panel */
@@ -1746,8 +1834,21 @@
 }
 
 [data-r-practice-root] .r-lesson-flow .r-core-line-kicker {
+  font-size: 9.25px !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 800 !important;
+  color: color-mix(in srgb, var(--accent) 58%, var(--muted) 42%) !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-line {
   font-size: 9px !important;
-  letter-spacing: 0.08em !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-fragment {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
 }
 
 [data-r-practice-root] .r-lesson-flow .r-core-line-code {
@@ -1755,6 +1856,34 @@
   background: color-mix(in srgb, var(--surface) 55%, transparent) !important;
   padding: 0.5rem 0.55rem !important;
   border-radius: var(--r-sm) !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-effects {
+  gap: 0.35rem !important;
+  margin-top: 0.15rem !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-effects p {
+  margin: 0 !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-effects p:first-child {
+  font-size: 12.1px !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-effects p:last-child {
+  font-size: 11.2px !important;
+  line-height: 1.48 !important;
+  font-weight: 400 !important;
+  color: color-mix(in srgb, var(--muted) 42%, var(--text) 58%) !important;
+}
+
+[data-r-practice-root] .r-lesson-flow .r-core-line-effects strong {
+  font-weight: 700 !important;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%) !important;
 }
 
 /* ── Output = authoritative proof stage (terminal identity) ─────────────── */
@@ -1863,7 +1992,7 @@ body.light-mode .r-execution-instrument {
   margin-top: 4px !important;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .r-lab-section.r-practice-block > .r-orient-card > .r-orient-top {
     border-bottom-color: color-mix(in srgb, var(--border) 10%, transparent) !important;
     padding-bottom: 8px !important;

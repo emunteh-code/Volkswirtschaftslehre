@@ -71,7 +71,7 @@ export const MIKRO1_CONCEPT_PRIMARY_REFS = Object.fromEntries(
 );
 
 const NOTES_THEORY =
-  'Mikro I theory is source-distilled and rendered through a custom semantic surface with exam-transfer enrichment.';
+  'Mikro I theory is source-distilled and rendered through a custom semantic surface with exam-transfer enrichment. Primary VL anchors per concept (file-level): docs/audits/mikro1-provenance-curation-pass-1.md.';
 const NOTES_GRAPH =
   'Interactive graph layer is a benchmark strength of this module and remains module-specific beyond baseline graph support.';
 const NOTES_INTUITION =

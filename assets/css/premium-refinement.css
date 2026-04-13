@@ -1457,17 +1457,18 @@ body.light-mode #content .exam-drill-solution {
   border-bottom: none;
 }
 
+/* Step counter = same visual language as `.solution-block .step-num` (unification pass 1). */
 #content .exam-drill-steps > li::before {
   content: counter(drill-step);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 20px;
+  min-width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface) 88%);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface) 86%);
   color: var(--accent);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
   margin-top: 2px;
@@ -1773,9 +1774,9 @@ body.light-mode .semantic-reference__entry {
 }
 
 #content .solution-block .step-num {
-  min-width: 24px;
-  height: 24px;
-  font-size: 11.5px;
+  min-width: 22px;
+  height: 22px;
+  font-size: 11px;
 }
 
 #content .result-badge {
@@ -1848,7 +1849,7 @@ body.light-mode .semantic-reference__entry {
 #content .exam-drill-steps > li::before {
   min-width: 22px;
   height: 22px;
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 /* ============================================================
@@ -3770,9 +3771,9 @@ body.light-mode #content .intuition-callout-anchor {
 #content .exam-drill-answer .exam-drill-copy > .math-block,
 #content .exam-drill-answer .exam-drill-copy > [class*="math-block"],
 #content .exam-drill-answer .exam-drill-copy > .semantic-display,
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .math-block,
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > [class*="math-block"],
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display {
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > .math-block,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > [class*="math-block"],
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > .semantic-display {
   margin: 6px 0 0 !important;
   padding: 6px 0 !important;
   border: none !important;
@@ -3846,12 +3847,26 @@ body.light-mode #content .intuition-callout-anchor {
   max-width: 100% !important;
 }
 
+/* Row = same rhythm as Aufgaben `.step` (number | body). Body stacks text → math. */
 #content .exam-drill-answer .exam-drill-steps > li.exam-drill-step {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step::before {
+  flex-shrink: 0;
+}
+
+#content .exam-drill-answer .exam-drill-step-body {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 0.35rem;
-  min-width: 0;
 }
 
 #content .exam-drill-answer .exam-drill-step-text {
@@ -3971,8 +3986,8 @@ body.light-mode #content .section-block .legal-schema {
 #content .solution-block .step-body .step-math-slot > .semantic-display.semantic-schema--phrase,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-schema--chain,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-schema--phrase,
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-schema--chain,
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-schema--phrase,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > .semantic-display.semantic-schema--chain,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > .semantic-display.semantic-schema--phrase,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-schema--chain,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-schema--phrase,
 #content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-schema--chain,
@@ -3986,7 +4001,7 @@ body.light-mode #content .section-block .legal-schema {
 #content .solution-block .step-body > .semantic-display.semantic-reference--stack,
 #content .solution-block .step-body .step-math-slot > .semantic-display.semantic-reference--stack,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-reference--stack,
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-reference--stack,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > .semantic-display.semantic-reference--stack,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-reference--stack,
 #content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-reference--stack {
   display: grid !important;
@@ -3997,7 +4012,7 @@ body.light-mode #content .section-block .legal-schema {
 #content .solution-block .step-body > .semantic-display.semantic-reference--pill,
 #content .solution-block .step-body .step-math-slot > .semantic-display.semantic-reference--pill,
 #content .exam-drill-answer .exam-drill-steps > li > .semantic-display.semantic-reference--pill,
-#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step > .exam-drill-step-math > .semantic-display.semantic-reference--pill,
+#content .exam-drill-answer .exam-drill-steps > li.exam-drill-step .exam-drill-step-math > .semantic-display.semantic-reference--pill,
 #content .exam-drill-answer .exam-drill-line > .semantic-display.semantic-reference--pill,
 #content .exam-drill-answer .exam-drill-copy > .semantic-display.semantic-reference--pill {
   display: flex !important;
@@ -4243,6 +4258,15 @@ body.light-mode #content .info-card {
 }
 
 /* ── Source provenance (concept pages): pass 1 — one quiet line + optional detail ─ */
+/* Manifest-only: explicit traceability when no PDF/file anchors are mapped */
+#content .source-provenance[data-provenance-coverage="manifest-only"] {
+  border-color: color-mix(in srgb, var(--border) 55%, #c9a227 22%);
+}
+
+#content .source-provenance[data-source-confidence="platform-added-drill"] {
+  border-left: 3px solid color-mix(in srgb, var(--accent) 45%, var(--border) 55%);
+}
+
 #content .source-provenance {
   margin: 1.25rem 0 0.25rem;
   padding: 0.55rem 0 0;

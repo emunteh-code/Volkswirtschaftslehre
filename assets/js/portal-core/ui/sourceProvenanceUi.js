@@ -2,7 +2,15 @@
  * Two-level concept provenance for `#content` (shared across modules via `createRenderer`).
  * Level 1: one muted line, human labels only (e.g. "Basis: Vorlesung 3 · Übung 2").
  * Level 2: optional compact per-area mapping — no raw paths, no internal pipeline wording.
+ *
+ * When a concept manifest has layers but **no** resolvable primary-file labels, the strip still
+ * renders with an explicit manifest-only line (no silent omission).
  */
+
+import {
+  pickWeakestSourceStatus,
+  studentHintForSourceStatus
+} from '../data/sourceStatus.js';
 
 const BASIS_PREFIX = 'Basis: ';
 /** Long primary-ref lists (e.g. R-Begleitpraxis) stay honest in the expandable breakdown; summary stays one scannable line. */
@@ -288,13 +296,36 @@ function formatLayerLine(layer) {
   return fromRefs.join(' · ');
 }
 
-function buildSummary(layers) {
-  const labels = collectAllRefLabels(layers);
+/** Per-area line when refs are empty but the layer carries a trust class. */
+function formatLayerLineOrStatus(layer) {
+  const fromRefs = formatLayerLine(layer);
+  if (fromRefs) return fromRefs;
+  if (layer?.source_status) return studentHintForSourceStatus(layer.source_status);
+  return '';
+}
+
+function buildSummaryFromLabels(labels) {
   if (!labels.length) return '';
   if (labels.length > MAX_SUMMARY_LABELS) {
     return `${BASIS_PREFIX}${labels.slice(0, MAX_SUMMARY_LABELS).join(' · ')} · …`;
   }
   return `${BASIS_PREFIX}${labels.join(' · ')}`;
+}
+
+function buildManifestOnlySummary(layers) {
+  if (!layers || typeof layers !== 'object') return '';
+  const statuses = Object.values(layers).map((l) => l?.source_status).filter(Boolean);
+  if (!statuses.length) return '';
+  const theoryHint = layers.theory?.source_status
+    ? studentHintForSourceStatus(layers.theory.source_status)
+    : studentHintForSourceStatus(pickWeakestSourceStatus(statuses));
+  return `${BASIS_PREFIX}${theoryHint} — ohne dateiweise Primäranker im Manifest für dieses Konzept.`;
+}
+
+function buildSummary(layers) {
+  const labels = collectAllRefLabels(layers);
+  if (labels.length) return buildSummaryFromLabels(labels);
+  return buildManifestOnlySummary(layers);
 }
 
 function buildBreakdownRows(layers) {
@@ -303,7 +334,7 @@ function buildBreakdownRows(layers) {
   for (const [key, title] of LAYER_ORDER) {
     const layer = layers[key];
     if (!layer) continue;
-    const line = formatLayerLine(layer);
+    const line = formatLayerLineOrStatus(layer);
     if (!line) continue;
     rows.push({ key, title, line });
   }
@@ -327,6 +358,7 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
   const summary = buildSummary(layers);
   if (!summary) return '';
 
+  const hasRefAnchors = collectAllRefLabels(layers).length > 0;
   const rows = buildBreakdownRows(layers);
   const withLine = rows.filter((r) => r.line);
   const uniqueLines = new Set(withLine.map((r) => r.line));
@@ -335,13 +367,17 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
   const safeTab = String(activeTab || 'tab').replace(/[^a-z0-9-]/gi, '');
   const detailId = `spd-${escapeAttr(conceptId)}-${escapeAttr(safeTab)}`.replace(/\s+/g, '');
   const lineId = `spl-${escapeAttr(conceptId)}-${escapeAttr(safeTab)}`.replace(/\s+/g, '');
-  const confAttr = layers?.theory?.source_status || '';
+  const layerStatuses = Object.values(layers || {}).map((l) => l?.source_status);
+  const confAttr = hasRefAnchors
+    ? (layers?.theory?.source_status || '')
+    : pickWeakestSourceStatus(layerStatuses);
+  const coverageAttr = hasRefAnchors ? 'refs' : 'manifest-only';
 
   const markHtml = '<span class="source-provenance-mark" aria-hidden="true">ⓘ</span>';
   const lineHtml = `<p class="source-provenance-line" id="${escapeAttr(lineId)}">${escapeHtml(summary)}</p>`;
 
   if (!expandable) {
-    return `<footer class="source-provenance source-provenance--static" role="note" data-source-confidence="${escapeAttr(confAttr)}">
+    return `<footer class="source-provenance source-provenance--static" role="note" data-source-confidence="${escapeAttr(confAttr)}" data-provenance-coverage="${escapeAttr(coverageAttr)}">
 <div class="source-provenance-inner">${markHtml}${lineHtml}</div>
 </footer>`;
   }
@@ -353,7 +389,7 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
     )
     .join('');
 
-  return `<footer class="source-provenance source-provenance--expandable" role="note" data-source-confidence="${escapeAttr(confAttr)}">
+  return `<footer class="source-provenance source-provenance--expandable" role="note" data-source-confidence="${escapeAttr(confAttr)}" data-provenance-coverage="${escapeAttr(coverageAttr)}">
 <div class="source-provenance-inner">
 ${markHtml}
 ${lineHtml}

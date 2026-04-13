@@ -48,8 +48,24 @@ export const CONTENT = {
         `<p>Recht ist ein System verbindlicher Normen, das gesellschaftliches Verhalten ordnet und Konflikte kanalisiert. Es schafft Erwartungssicherheit: Wer Verträge schließt, Eigentum überträgt oder Ansprüche geltend macht, muss darauf vertrauen können, dass Regeln gelten und durchsetzbar sind.</p>`
       ),
       section(
-        'Rechtsquellen und Ebenen',
-        `<p>Für den Kurs besonders wichtig sind Gesetz, Rechtsprechung und juristische Methodik. In der Klausur wird das Recht nicht frei „erfunden“, sondern aus Normtext, Systematik und Fallanwendung entwickelt. Genau deshalb brauchst du früh eine saubere Trennung zwischen Rechtsquelle, Auslegung und Ergebnis.</p>`
+        'Propädeutikum: Gewaltenteilung',
+        `<p>Die erste Vorlesungseinheit ordnet das Recht in die staatliche Gewaltenteilung ein: Die <strong>Legislative</strong> erlässt Gesetze, die <strong>Exekutive</strong> führt sie aus, die <strong>Judikative</strong> legt sie aus und entscheidet im Streit. Dieses Bild hilft später, Gesetzgebung, Verwaltung und Gerichte nicht zu vermischen.</p>`
+      ),
+      section(
+        'Blickwinkel auf „Recht“',
+        `<p>Die Vorlesung skizziert Recht aus mehreren Perspektiven: <strong>soziologisch</strong> als kulturelles Faktum und Herrschaftsinstrument, in dem außerrechtliche Faktoren mitwirken; <strong>(rechts-)philosophisch</strong> etwa als Gerechtigkeitsprojekt (einschließlich Naturrechtsdiskussion); <strong>ökonomisch</strong> als institutionelle Rahmenbedingung des Marktes und als Kostenfaktor. Für die Klausur bleibt zentral: Du arbeitest im Rahmen der positiven Rechtsordnung, nicht mit bloßem Wunschrecht.</p>`
+      ),
+      section(
+        'Recht und Rechtswissenschaft',
+        `<p>Die Einheit führt Rechtsfindungsrichtungen vor, die in der Juristenausbildung historisch und methodisch eine Rolle spielen: <strong>Rechtspositivismus</strong> (Lösung aus positivem Recht), <strong>Begriffsjurisprudenz</strong>, die <strong>reine Rechtslehre</strong> (Kelsen) als streng systematisch-deduktive Ausprägung, die abgelehnte <strong>Freirechtslehre</strong> (Ehrlich) sowie die <strong>Interessenjurisprudenz</strong> (Jhering, Heck u.a.). Das Fazit der Folien: In der Rechtsanwendung geht es primär um den <strong>Norminhalt</strong> und den <strong>Wortlaut</strong> des Gesetzes; Spielräume können im Einzelfall interessengerechte Auslegung erlauben — aber nicht „beliebig“.</p>`
+      ),
+      section(
+        'Gesetzliches Unrecht und Grenzen positiven Rechts',
+        `<p>Die Vorlesung diskutiert „gesetzliches Unrecht“ (Beispiele NS- und DDR-Recht) und die <strong>Radbruchsche Formel</strong>: Extrem ungerechtes positives Gesetz kann so weit von Gerechtigkeit entfernt stehen, dass es seiner Rechtsnatur verlustig geht. Ergänzend werden die Mauerschützen-Urteile und im Grundgesetz der Schutz durch <strong>Art. 79 Abs. 3 GG</strong> in Verbindung mit den Staatsstrukturprinzipien und der Menschenwürde genannt. Das ist Staats- und Rechtsphilosophie im Überblick — für Zivilrechtsklausuren meist Hintergrund, aber prägend für das Verständnis, dass „Gesetz“ und „Gerechtigkeit“ auseinanderfallen können.</p>`
+      ),
+      section(
+        'Rechtsquellen der deutschen Rechtsordnung',
+        `<p>Im Anschluss listet die Vorlesung die wichtigsten <strong>Rechtsquellen</strong>: Grundgesetz, Unionsrecht (Verträge, Richtlinien, Verordnungen), deutsche Gesetze und Rechtsverordnungen sowie Satzungen, dazu (bedeutungsarm gewordenes) Gewohnheitsrecht und private Verträge. <strong>Rechtsprechung</strong> und Auslegung treten dabei als Form der Normanwendung hinzu — in der Klausur entwickelst du Lösungen aus Normtext, Systematik und subsumtiver Fallarbeit, nicht aus bloßer Meinung.</p>`
       ),
       section(
         'Warum der Kurs fallbezogen arbeitet',
@@ -86,7 +102,7 @@ export const CONTENT = {
     theorie: [
       section(
         'Privatrecht innerhalb der Rechtsordnung',
-        `<p>Das Privatrecht regelt Rechtsbeziehungen zwischen rechtlich Gleichgeordneten. Es unterscheidet sich damit vom öffentlichen Recht, in dem staatliche Über- und Unterordnungsverhältnisse dominieren. Für Wirtschaftswissenschaftler ist das Privatrecht zentral, weil Verträge, Sachenrecht und Haftung fast alle Marktbeziehungen strukturieren.</p>`
+        `<p>Das Privatrecht regelt Rechtsbeziehungen zwischen rechtlich Gleichgeordneten. Es unterscheidet sich damit vom öffentlichen Recht, in dem staatliche Über- und Unterordnungsverhältnisse dominieren. Die Vorlesungsgrafik führt daneben auch das <strong>Strafrecht</strong> als eigenes Rechtsgebiet; für diese Einführung bleibt das Zivilrecht jedoch das Arbeitspferd, weil Vertrags- und Haftungslogik den Kern der Fallbearbeitung bilden.</p>`
       ),
       section(
         'Grundaufbau des BGB',
@@ -125,7 +141,7 @@ export const CONTENT = {
   },
 
   methodik: {
-    motivation: 'Juristische Methodik ist das eigentliche Werkzeugfach des Moduls: Ohne Anspruchsaufbau, Definition, Subsumtion, Zwischenergebnisse und saubere Gliederung werden auch bekannte Normen in der Klausur wertlos.',
+    motivation: 'Juristische Methodik ist das eigentliche Werkzeugfach des Moduls: Ohne Anspruchsaufbau, einleitenden und merkmalsbezogenen Obersätzen, Definition, Subsumtion, Zwischenergebnissen und sauberer Gliederung werden auch bekannte Normen in der Klausur wertlos.',
     theorie: [
       section(
         'Anspruchsdenken',
@@ -133,8 +149,9 @@ export const CONTENT = {
       ),
       section(
         'Gutachtenstil',
-        `<p>Der klassische Gutachtenstil besteht aus Obersatz, Definition, Subsumtion und Ergebnis. In einfachen Fällen darf knapp formuliert werden, aber die Struktur bleibt dieselbe: Tatbestandsmerkmal für Tatbestandsmerkmal wird geprüft, ob der Sachverhalt die Normvoraussetzungen erfüllt.</p>
-         ${scheme(schema(['Obersatz', '→', 'Definition', '→', 'Subsumtion', '→', 'Ergebnis']))}
+        `<p>Im Gutachten wird die <strong>Subsumtionstechnik</strong> zur Beantwortung der Fallfrage eingesetzt: Du ordnest den <strong>Sachverhalt</strong> unter den <strong>Tatbestand</strong> einer Norm und leitest die <strong>Rechtsfolge</strong> her (wenn-dann-Struktur). Nach der Vorlesung gliedert sich die Prüfung einzelner Ansprüche üblicherweise in einen <strong>einleitenden Obersatz</strong>, sodann für <strong>jedes Tatbestandsmerkmal</strong> einen <strong>Obersatz zum Merkmal</strong>, jeweils gefolgt von <strong>Definition</strong> und <strong>Subsumtion</strong>, und schließlich das <strong>Ergebnis</strong> der Anspruchsprüfung. Eine lineare Kette „einmal O–D–S–E“ genügt damit methodisch nicht, wenn mehrere Merkmale zu prüfen sind — die Merkmalskette wiederholt sich.</p>
+         <p>Zur <strong>Sprache</strong> (Vorlesung): Obersätze stehen typischerweise im <strong>Konjunktiv II</strong> (Modalverben wie „könnte“, „müsste“), Definition und Subsumtion im <strong>Indikativ</strong>; die Schlussfolgerung innerhalb der Subsumtion kennzeichnest du mit Wörtern wie „folglich“, „daher“ oder „somit“.</p>
+         ${scheme(schema(['Einleitender Obersatz', '→', 'pro TBM: Obersatz', '→', 'Definition', '→', 'Subsumtion', '→', 'Ergebnis']))}
       `
       ),
       section(
@@ -156,7 +173,11 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Anspruchsfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Erste und wichtigste Sortierfrage des Falles.' },
-      { label: 'Gutachtenstil', eq: schema(['O', '–', 'D', '–', 'S', '–', 'E']), desc: 'Obersatz, Definition, Subsumtion, Ergebnis.' },
+      {
+        label: 'Gutachtenstil',
+        eq: schema(['O', '–', 'D', '–', 'S', '–', 'E']),
+        desc: 'Einleitender Obersatz, dann je Tatbestandsmerkmal: Obersatz zum Merkmal, Definition, Subsumtion; abschließend Ergebnis. Obersätze i.d.R. Konjunktiv II, Definition/Subsumtion Indikativ.'
+      },
       { label: 'Anspruchskette', eq: schema(['entstanden', '→', 'untergegangen', '→', 'durchsetzbar']), desc: 'Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.' },
       { label: 'Tatbestand vor Rechtsfolge', eq: phrase('erst Voraussetzungen, dann Folgen'), desc: 'Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.' }
     ],
@@ -165,7 +186,7 @@ export const CONTENT = {
         'Warum ist „A hat einen Anspruch aus § 433 BGB“ ohne weitere Prüfung noch keine gute Klausurlösung?',
         [
           step('Anspruchsgrundlage von Anspruchsentstehung trennen.', String.raw`\text{Die Norm allein sagt noch nicht, dass ihre Voraussetzungen erfüllt sind.}`),
-          step('Methodische Ergänzung nennen.', String.raw`\text{Es braucht Definition, Subsumtion und Ergebnis zu jedem relevanten Merkmal.}`)
+          step('Methodische Ergänzung nennen.', String.raw`\text{Es braucht zu jedem relevanten Merkmal einen Obersatz, Definition, Subsumtion und am Ende das Gesamtergebnis.}`)
         ],
         'Eine Anspruchsgrundlage muss vollständig hergeleitet werden. Erst die Prüfung ihrer Voraussetzungen macht aus der Norm eine tragfähige Lösung.'
       ),
@@ -180,12 +201,12 @@ export const CONTENT = {
       task(
         'Mini-Case (Gutachtenstil): K verlangt von V Rückzahlung des Kaufpreises, weil die gelieferte Sache mangelhaft ist. Wie baust du eine strukturfeste Erstprüfung auf, bevor du Details diskutierst?',
         [
-          step('Issue: Anspruchsfrage präzisieren.', String.raw`\text{Wer will was von wem woraus?}`),
-          step('Rule: Naheliegende Anspruchsgrundlage benennen und Tatbestandsmerkmale gliedern.'),
-          step('Subsumption: Jeden relevanten Sachverhaltsbaustein einem Merkmal zuordnen.'),
-          step('Result: Zwischenergebnis klar formulieren und erst dann zur nächsten Anspruchsstufe übergehen.')
+          step('Anspruchsfrage präzisieren.', String.raw`\text{Wer will was von wem woraus?}`),
+          step('Norm und Tatbestandsmerkmale gliedern.', String.raw`\text{Einleitender Obersatz, dann Merkmal für Merkmal Obersatz/Definition/Subsumtion vormerken.}`),
+          step('Subsumtion: jeden Sachverhaltsbaustein den Merkmalen zuordnen.', String.raw`\text{Indikativ, mit Schlüsselwörtern wie „folglich“/„daher“.}`),
+          step('Ergebnis und ggf. nächste Prüfungsebene.', String.raw`\text{Zwischenergebnis formulieren, bevor du zur nächsten Anspruchsgrundlage wechselst.}`)
         ],
-        'Struktur vor Detail: Eine saubere IRSR-Kette (Issue/Rule/Subsumption/Result) verhindert methodische Sprünge und macht die Lösung klausurfest.'
+        'Struktur vor Detail: dieselbe Logik wie im Vorlesungsschema (einleitender Obersatz, dann je Tatbestandsmerkmal Obersatz, Definition, Subsumtion, Ergebnis) verhindert methodische Sprünge und entspricht dem erwarteten Gutachtenstil.'
       ),
       task(
         'Chain-Mini-Case (Anspruchsaufbau): K will von V primär Lieferung, hilfsweise Rücktritt und zusätzlich Schadensersatz. Wie vermeidest du im Gutachtenstil das Vermischen von Tatbestand, Rechtsfolge und Konkurrenz der Anspruchsziele?',

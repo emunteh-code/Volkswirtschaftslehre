@@ -1380,7 +1380,7 @@ function buildTaskDrill(task, index) {
     question: task.text,
     answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Lösungslogik</span>
-<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li>${escapeHtml(step.text || '')}${renderMathBlock(step.eq)}</li>`).join('')}</ol>
+<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-body"><div class="exam-drill-step-text">${escapeHtml(step.text || '')}</div><div class="exam-drill-step-math">${renderMathBlock(step.eq)}</div></div></li>`).join('')}</ol>
 </div>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Prüfungsresultat</span>

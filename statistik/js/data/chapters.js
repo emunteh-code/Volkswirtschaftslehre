@@ -267,6 +267,7 @@ export const CONTENT = {
       <h3>Streuung und Form gehören zusammen</h3>
       <p>Die <strong>Varianz</strong> ($s^2$) misst die durchschnittliche quadrierte Abweichung vom Mittelwert. Die <strong>Standardabweichung</strong> ($s$) bringt dieselbe Information wieder in Originaleinheiten zurück. Der <strong>Interquartilsabstand</strong> (IQR) liest die mittleren 50% der Daten und ist robuster gegen Extremwerte als $s$.</p>
       <div class="math-block">$$s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$</div>
+      <p>In den Vorlesungsfolien (VL 3, Maßzahlen für die Streuung) werden die Stichprobenvarianz mit Nenner $n$ und die <strong>Bessel-korrigierte</strong> empirische Varianz mit Nenner $(n-1)$ nebeneinander eingeführt. Dieses Portal nutzt in Deskriptiv- und Aufgabenteilen durchgängig die korrigierte Form mit $(n-1)$ — sie entspricht der in R und in der induktiven Statistik üblichen Schätzlogik für $\sigma^2$.</p>
     </div>
     <div class="section-block">
       <h3>Boxplot-, Quantil- und Ausreißerlogik</h3>
@@ -408,7 +409,7 @@ export const CONTENT = {
     ],
     aufgaben: [
       {
-        text: String.raw`Zwei Variablen haben eine Kovarianz von $10$. Die Varianzen sind $s_x^2=16$ and $s_y^2=25$. Berechnen Sie den Korrelationskoeffizienten.`,
+        text: String.raw`Zwei Variablen haben eine Kovarianz von $10$. Die Varianzen sind $s_x^2=16$ und $s_y^2=25$. Berechnen Sie den Korrelationskoeffizienten.`,
         steps: [
           { text: `Standardabweichungen bestimmen:`, eq: String.raw`s_x = 4, s_y = 5` },
           { text: `Nenner berechnen:`, eq: String.raw`4 \cdot 5 = 20` },
@@ -467,10 +468,10 @@ export const CONTENT = {
       <h3>Teststatistik, kritischer Bereich und p-Wert</h3>
       <p>Die Teststatistik misst, wie weit die Daten von der Nullhypothese entfernt liegen. Diese Entfernung wird entweder über den <strong>kritischen Bereich</strong> oder den <strong>p-Wert</strong> beurteilt.</p>
       <ul>
-        <li><strong>p-Wert:</strong> Wahrscheinlichkeit, unter $H_0$ ein mindestens so extremes Ergebnis zu beobachten.</li>
-        <li><strong>Signifikanzniveau ($\alpha$):</strong> vorab festgelegte Toleranz für Fehler 1. Art.</li>
+        <li><strong>p-Wert:</strong> Unter der Annahme, dass $H_0$ wahr ist (und ggf. weitere Modellannahmen gelten), ist der p-Wert die Wahrscheinlichkeit, <strong>das beobachtete Ergebnis oder ein in Richtung der Alternativhypothese $H_1$ noch extremeres</strong> zu erhalten — wie in den Hypothesentest-Folien (IS 3) formuliert.</li>
+        <li><strong>Signifikanzniveau ($\alpha$):</strong> vorab festgelegte Obergrenze für die Wahrscheinlichkeit des Fehlers 1. Art (Schwellenwert zum Vergleich mit dem p-Wert).</li>
       </ul>
-      <p>Entscheidungsregel: <strong>$H_0$ ablehnen, wenn $p < \alpha$</strong> oder die Teststatistik im Ablehnbereich liegt.</p>
+      <p>Entscheidungsregel: <strong>$H_0$ ablehnen, wenn $p < \alpha$</strong> oder die Teststatistik im <strong>Ablehnungsbereich</strong> liegt.</p>
     </div>
     <div class="section-block">
       <h3>Fehler 1. Art, Fehler 2. Art und Teststärke</h3>
@@ -491,7 +492,7 @@ export const CONTENT = {
         label: 't-Statistik',
         eq: String.raw`$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$$`,
         desc: 'Standardtest für den Mittelwert bei unbekannter Populationsstreuung',
-        variables: { '\\bar{x}': 'Stichprobenmittel', '\\mu_0': 'unter H0 behaupteter Mittelwert', 's': 'Stichprobenstandardabweichung', 'n': 'Stichprobenumfang' }
+        variables: { '\\bar{x}': 'Stichprobenmittel', '\\mu_0': 'unter $H_0$ postulierter Mittelwert', 's': 'Stichprobenstandardabweichung', 'n': 'Stichprobenumfang' }
       },
       {
         label: 'Power',
@@ -502,19 +503,19 @@ export const CONTENT = {
     ],
     aufgaben: [
       {
-        text: String.raw`Wir testen $H_0: \mu = 100$. Die Stichprobe liefert $\bar{x} = 105$ mit $s=10$ and $n=25$. Berechnen Sie den t-Wert.`,
+        text: String.raw`Wir testen $H_0: \mu = 100$. Die Stichprobe liefert $\bar{x} = 105$ mit $s=10$ und $n=25$. Berechnen Sie den t-Wert.`,
         steps: [
           { text: `Standardfehler des Mittelwerts:`, eq: String.raw`10 / \sqrt{25} = 2` },
           { text: `Differenz zur Hypothese:`, eq: String.raw`105 - 100 = 5` },
           { text: `t-Wert berechnen:`, eq: String.raw`5 / 2 = 2{,}5` }
         ],
-        result: String.raw`$t = 2{,}5$. (Bei $\alpha=0{,}05$ und kritischem Wert $2{,}06$ würden wir H0 ablehnen).`
+        result: String.raw`$t = 2{,}5$. (Bei $\alpha=0{,}05$ und kritischem Wert $2{,}06$ würden wir $H_0$ ablehnen).`
       },
       {
         text: String.raw`Ein linksseitiger t-Test soll prüfen, ob der mittlere Lohn unter $\mu_0 = 2800$ Euro liegt ($H_1: \mu < 2800$). Stichprobe: $n=16$, $\bar{x}=2650$, $s=400$. Signifikanzniveau $\alpha=0{,}05$. Kritischer Wert: $t_{15;\,0{,}05} = -1{,}753$. Treffen Sie die Testentscheidung.`,
         steps: [
           { text: `Teststatistik berechnen:`, eq: String.raw`t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{2650-2800}{400/\sqrt{16}} = \frac{-150}{100} = -1{,}5` },
-          { text: `Ablehnbereich für linksseitigen Test:`, eq: String.raw`K = \{t \mid t < -1{,}753\}` },
+          { text: `Ablehnungsbereich für linksseitigen Test:`, eq: String.raw`K = \{t \mid t < -1{,}753\}` },
           { text: String.raw`Vergleich: $t = -1{,}5 > -1{,}753$, also $t \notin K$.`, eq: String.raw`-1{,}5 > -1{,}753 \implies H_0 \text{ wird nicht abgelehnt.}` }
         ],
         result: String.raw`$H_0$ kann nicht abgelehnt werden. Die Daten liefern auf dem $5\%$-Niveau keine ausreichende Evidenz dafür, dass der mittlere Lohn unter $2800$ Euro liegt.`
@@ -536,7 +537,7 @@ export const CONTENT = {
           { text: `Zweiseitiger p-Wert (da $|t|$ symmetrisch):`, eq: String.raw`p_{zweiseitig} = 2 \cdot p_{einseitig} < 2 \cdot 0{,}025 = 0{,}05` },
           { text: String.raw`Entscheidung: $p < \alpha = 0{,}05$.`, eq: String.raw`p < 0{,}05 \implies H_0 \text{ ablehnen (gerade noch signifikant)}` }
         ],
-        result: String.raw`$p_{zweiseitig} < 0{,}05$: $H_0$ wird auf dem $5\%$-Niveau abgelehnt. Der p-Wert misst die Wahrscheinlichkeit, unter $H_0$ ein so extremes oder extremeres Ergebnis zu erhalten — er ist kein Maß für die Wahr­scheinlichkeit der Nullhypothese selbst.`
+        result: String.raw`$p_{zweiseitig} < 0{,}05$: $H_0$ wird auf dem $5\%$-Niveau abgelehnt. Der p-Wert gibt unter $H_0$ die Wahrscheinlichkeit an, die beobachtete Teststatistik oder ein noch extremeres Ergebnis zu erhalten — zweiseitig in beiden Richtungen, die gegen $H_0$ und zugunsten von $H_1$ sprechen (vgl. VL IS 3). Er ist kein Maß für die Wahrscheinlichkeit der Nullhypothese selbst.`
       },
       {
         text: String.raw`Eine Studie fragt explizit: "Ist der neue Lernansatz besser?" Formulieren Sie die passende Alternativhypothese, nennen Sie den Testtyp (ein- oder zweiseitig) und erklären Sie die Hauptrisiken einer falschen Richtungsauswahl.`,

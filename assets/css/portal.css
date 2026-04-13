@@ -361,9 +361,60 @@ html { scroll-behavior: smooth; }
   background: var(--accent);
 }
 
+/* ── About / product boundary (landing) ───────────────────── */
+.lp-about {
+  padding: 40px 0 36px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.lp-about-inner {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.lp-about-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.4vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 1.15rem;
+  color: var(--text);
+}
+
+.lp-about-body {
+  font-size: clamp(0.9375rem, 1.1vw, 1rem);
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 94%, var(--muted));
+}
+
+.lp-about-body p {
+  margin: 0 0 1rem;
+}
+
+.lp-about-body p:last-child {
+  margin-bottom: 0;
+}
+
+.lp-about-closing {
+  margin-top: 1.15rem;
+  padding-top: 1.05rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* About block follows module discovery: calm closing rhythm, not a second hero */
+.lp-about.lp-about--after-modules {
+  padding: 36px 0 56px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
 /* ── Module Shelf ──────────────────────────────────────────── */
 .lp-shelf {
-  padding: 48px 0 64px;
+  padding: 40px 0 64px;
   flex: 1;
 }
 
@@ -387,6 +438,49 @@ html { scroll-behavior: smooth; }
   font-size: 0.8125rem;
   color: var(--muted);
   line-height: 1.5;
+}
+
+/* Trusted core shelf (landing): calm hierarchy, not marketing chrome */
+.lp-shelf--trusted-core {
+  padding-top: 36px;
+  padding-bottom: 36px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface2) 20%, var(--bg)) 0%,
+    var(--bg) 72%
+  );
+}
+
+.lp-shelf-note--trusted {
+  margin-top: 2px;
+  max-width: 52rem;
+  color: color-mix(in srgb, var(--muted) 94%, var(--text));
+}
+
+.lp-shelf-grid--trusted {
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+}
+
+@media (min-width: 1120px) {
+  .lp-shelf-grid--trusted {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.lp-tile--trusted-core {
+  border-color: color-mix(in srgb, var(--accent) 26%, var(--border));
+}
+
+.lp-shelf--further-modules {
+  padding-top: 28px;
+  padding-bottom: 52px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.lp-shelf--further-modules .lp-shelf-header h2 {
+  font-size: 1.12rem;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted));
 }
 
 .lp-shelf-count {
@@ -582,6 +676,14 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 768px) {
+  .lp-about {
+    padding: 32px 0 28px;
+  }
+
+  .lp-about.lp-about--after-modules {
+    padding: 28px 0 44px;
+  }
+
   .lp-hero {
     padding: 44px 0 48px;
     min-height: auto;
@@ -607,6 +709,19 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 480px) {
+  .lp-about {
+    padding: 26px 0 22px;
+  }
+
+  .lp-about.lp-about--after-modules {
+    padding: 24px 0 40px;
+  }
+
+  .lp-about-body {
+    font-size: 0.9375rem;
+    line-height: 1.62;
+  }
+
   .lp-container {
     padding: 0 16px;
   }

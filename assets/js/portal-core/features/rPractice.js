@@ -970,9 +970,16 @@ function setRunButtonState(blockEl, mode = 'idle') {
 function buildRuntimeExpectation(mode, runtimeNote) {
   if (runtimeNote) return runtimeNote;
   if (mode === 'guided') {
-    return 'Geführter Modus: Dieser Block stützt sich auf vorbereiteten Kurscode oder Zusatzpakete. Arbeite deshalb bewusst über Code-Lesen, Soll-Output und fachliche Deutung; wenn kein Live-Run vorgesehen ist, ist das hier Absicht und kein Defekt.';
+    return 'Geführter Modus: Dieser Block nutzt vorbereiteten Kurscode oder Zusatzpakete. Übe bewusst Code-Lesen, Soll-Output und fachliche Deutung — ohne Live-Run ist das hier Absicht, kein Defekt.';
   }
-  return 'Du arbeitest direkt im Browser mit R. Wenn der Live-Run in deinem Browser oder Netzwerk nicht startet, bleibt der Block ehrlich beim Soll-Output und der fachlichen Interpretation, damit du die Lernlogik trotzdem sauber üben kannst.';
+  return 'Live-Modus (WebR im Browser): didaktische Konzeptübung, kein Ersatz für lokales R oder die Prüfungsumgebung. Pakete und numerische Details können abweichen. Ohne erfolgreichen Start bleiben Soll-Output und Interpretation dein Belegpaket.';
+}
+
+/** Honest scope for all R practice surfaces (embedded + R-Anwendung tab). */
+function renderRTruthBanner() {
+  return `<div class="r-practice-truth-banner" role="note">
+<p><strong>Browser-R (WebR):</strong> Geführte Konzeptübung im Portal — kein Ersatz für eine lokale R-Installation oder die Prüfungsumgebung. Paketversionen und Zahlen können abweichen. Fällt der Live-Run aus, bleiben Soll-Output, „Was zählt im Output“ und die Musterlösung dein inhaltlicher Anker.</p>
+</div>`;
 }
 
 function inferOutputPlaceholder(block, runtimeMode) {
@@ -1189,6 +1196,7 @@ export function renderRPracticeMarkup(block, options = {}) {
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
   return `<div class="section-block r-application-block r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
+${renderRTruthBanner()}
 <div class="r-practice-head">
   <div class="r-practice-headline">
     <span class="r-application-kicker">R-Übung</span>
@@ -1199,6 +1207,7 @@ export function renderRPracticeMarkup(block, options = {}) {
   <div class="r-orient-first-action">
     <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep)}
   </div>
+  ${config.runtimeNote ? `<div class="r-runtime-note r-practice-runtime-note">${escapeHtml(config.runtimeNote)}</div>` : ''}
 </div>
 <div class="r-practice-workspace">
   <div class="r-execution-shell">
@@ -1362,6 +1371,7 @@ function renderTabOrientationCard(config, index, total) {
   <div class="r-orient-first-action">
     <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
   </div>
+  ${config.runtimeNote ? `<div class="r-runtime-note r-orient-runtime">${escapeHtml(config.runtimeNote)}</div>` : ''}
   ${config.script ? `<div class="r-orient-script">${escapeHtml(config.script)}</div>` : ''}
 </div>`;
 }
@@ -1475,7 +1485,7 @@ export function renderRAnwendungTab(blocks, moduleSlug, options = {}) {
     return renderRLabSection(block, moduleSlug, index, total, { blockId, conceptId: options.conceptId });
   }).join('\n<div class="r-lab-divider" aria-hidden="true"></div>\n');
 
-  return `<div class="r-tab-panel">${sectionsHtml}</div>`;
+  return `<div class="r-tab-panel">${renderRTruthBanner()}${sectionsHtml}</div>`;
 }
 
 // ─── State & Mount Logic ────────────────────────────────────────────────────
@@ -1617,7 +1627,7 @@ async function handleRun(blockEl, config) {
       });
       return;
     }
-    output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, Interpretationsblock und Musterlösung als ehrlichen Lern-Fallback.`;
+    output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, „Was zählt im Output“ und die Musterlösung als ehrlichen Lern-Fallback.\n\nOptional: denselben Code in R auf dem Rechner ausführen und nur die für die Aufgabe relevanten Zeilen vergleichen — nicht jede Abweichung ist ein Fehler in deiner Arbeit.`;
     setRuntimeStatus(status, 'Didaktischer Fallback', 'fallback');
     saveState(config.moduleSlug, config.blockId, {
       code,

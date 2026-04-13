@@ -52,7 +52,7 @@ async function main() {
     localStorage.setItem("mikro1_progress_v1", JSON.stringify(bloated));
   });
   await page.reload({ waitUntil: "load" });
-  await page.waitForSelector("#moduleGrid .lp-tile", { timeout: 30000 });
+  await page.waitForSelector("#trustedCoreGrid .lp-tile, #moduleGrid .lp-tile", { timeout: 30000 });
   const mikro1Tile = page.locator("a#lpTile_mikro1");
   const tileText = (await mikro1Tile.textContent()) || "";
   const pctMatch = tileText.match(/(\d+)%/);

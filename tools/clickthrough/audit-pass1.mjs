@@ -51,10 +51,10 @@ async function main() {
 
   // --- Landing ---
   await page.goto(`${BASE}/`, { waitUntil: "load", timeout: 60000 });
-  await page.waitForSelector("#moduleGrid .lp-tile", { timeout: 30000 });
+  await page.waitForSelector("#trustedCoreGrid .lp-tile, #moduleGrid .lp-tile", { timeout: 30000 });
   const landingTitle = await page.title();
   record(landingTitle.includes("VWL"), "landing:title", landingTitle);
-  const tileCount = await page.locator("#moduleGrid .lp-tile").count();
+  const tileCount = await page.locator("#trustedCoreGrid .lp-tile, #moduleGrid .lp-tile").count();
   record(tileCount >= 10, "landing:module-tiles", `count=${tileCount}`);
 
   // --- Mikro I: tile → module ---

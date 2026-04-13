@@ -4,10 +4,11 @@ export const INTUITION = {
   was_ist_recht: mk(
     'Recht ist die verbindliche Spielregel der Gesellschaft, nicht bloß ein moralischer Wunschzettel.',
     'Wie bei einem Turnier reicht es nicht, dass alle „fair“ sein wollen. Man braucht gemeinsame, durchsetzbare Regeln.',
-    'Darum arbeitet der Kurs von Anfang an normgebunden und fallorientiert.',
+    'Die Vorlesung ordnet dazu Gewaltenteilung, Rechtsquellen und Rechtsfindungslehren ein — die Klausur bleibt dennoch norm- und subsumtionsgetrieben.',
     [
       { if: 'Ein Fall nach Gerechtigkeit fragt', then: 'Zuerst die Norm suchen, nicht die spontane Wertung.' },
-      { if: 'Der Sachverhalt diffus wirkt', then: 'Zuerst die Rechtsfrage präzisieren.' }
+      { if: 'Der Sachverhalt diffus wirkt', then: 'Zuerst die Rechtsfrage präzisieren.' },
+      { if: 'Rechtsquellen vs. Rechtsprechung', then: 'Gesetz und Vertrag als Quellen systematisch nennen; Urteile als Auslegung/Harmonisierung, nicht als Ersatzgesetz.' }
     ]
   ),
   privatrecht: mk(
@@ -22,9 +23,9 @@ export const INTUITION = {
   methodik: mk(
     'Methodik ist im Recht kein Zusatz, sondern die eigentliche Leistung und die eigentliche Punktelogik der Klausur.',
     'Ein gut gebautes Skelett hält den ganzen Körper zusammen. Genauso trägt der Gutachtenstil die materielle Lösung.',
-    'Deshalb wird jede Norm erst durch Anspruchsfrage, Definition, Subsumtion und saubere Zwischenergebnisse zur belastbaren Antwort.',
+    'Vorlesung: einleitender Obersatz, dann je Tatbestandsmerkmal Obersatz, Definition, Subsumtion, zuletzt Ergebnis — plus Konjunktiv II bei Obersätzen.',
     [
-      { if: 'Ein Ergebnis vorschnell feststeht', then: 'Trotzdem Obersatz, Definition und Subsumtion sichtbar machen.' },
+      { if: 'Ein Ergebnis vorschnell feststeht', then: 'Trotzdem einleitenden Obersatz und pro Merkmal O–D–S sichtbar machen.' },
       { if: 'Definitionen bekannt sind', then: 'Die Punkte liegen in der Anwendung auf den Sachverhalt.' },
       { if: 'Mehrere Rechtsfolgen im Raum stehen', then: 'Anspruch entstanden, untergegangen und durchsetzbar sauber trennen.' }
     ]

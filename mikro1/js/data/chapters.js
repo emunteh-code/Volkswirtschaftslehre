@@ -48,9 +48,10 @@ export const CONTENT = {
 <p>Die <strong>Konsummöglichkeitenmenge (KMM)</strong> umfasst alle prinzipiell konsumierbaren Güterbündel. Ein Bündel wird als Vektor $(x_1, x_2, \dots, x_n)$ dargestellt, wobei $x_i$ die Menge von Gut $i$ bezeichnet.</p>
 <div class="math-block">$$\text{KMM} = \{\,(x_1, \dots, x_n) \in \mathbb{R}^n \mid x_i \geq 0 \;\forall i\,\}$$</div>
 <p>Die KMM beschreibt den logischen Handlungsraum, bevor ökonomische Beschränkungen (Preise, Einkommen) betrachtet werden.</p>
-<p><strong>Annahmen:</strong></p>
+<p><strong>Annahmen (wie in VL 1 zur KMM):</strong></p>
 <p><strong>Nichtnegativität:</strong> $x_i \geq 0$ für alle Güter $i$. Negative Mengen sind nicht konsumierbar (erst im Modell mit Anfangsausstattung werden "Verkäufe" modelliert).</p>
 <p><strong>Teilbarkeit:</strong> Beliebige Bruchteile sind konsumierbar (z.B. $2{,}5$ Einheiten).</p>
+<p><strong>Additivität:</strong> Sind zwei Bündel $\mathbf{a}, \mathbf{b} \in$ KMM, so liegt auch die Summe $\mathbf{a}+\mathbf{b}$ in der KMM (Summe konsumierbarer Mengenvektoren ist wieder konsumierbar). Das ist die in den Vorlesungsfolien explizit genannte Strukturbedingung neben Teilbarkeit und Konvexität.</p>
 <p><strong>Konvexität:</strong> Jede Mischung (Konvexkombination) zweier konsumierbarer Bündel ist ebenfalls konsumierbar.</p>
 </div>
 <div class="section-block">
@@ -132,6 +133,7 @@ export const CONTENT = {
 <h3>Formale Definition</h3>
 <p>Die <strong>Budgetmenge</strong> enthält alle Güterbündel $(x_1, x_2)$, die sich der Haushalt bei Preisen $p_1, p_2 > 0$ und Einkommen $m \geq 0$ leisten kann:</p>
 <div class="math-block">$$B = \{(x_1, x_2) \in \mathbb{R}^2_+ \mid p_1 x_1 + p_2 x_2 \leq m\}$$</div>
+<p>In der Vorlesung wird die Budgetmenge zunächst allgemein als $\sum_{i=1}^n p_i x_i \leq m$ eingeführt; für die Grafik und viele Aufgaben reicht der Fall $n=2$ wie oben.</p>
 <p>Die <strong>Budgetgerade</strong> ist der Rand der Budgetmenge (alle Bündel, die das Budget genau ausschöpfen). In expliziter Form:</p>
 <div class="math-block">$$x_2 = \frac{m}{p_2} - \frac{p_1}{p_2}\,x_1$$</div>
 <p>Diese Gleichung beschreibt eine Gerade mit Achsenabschnitt $m/p_2$ und Steigung $-p_1/p_2$.</p>
@@ -148,8 +150,8 @@ export const CONTENT = {
 <div class="section-block">
 <h3>Komparative Statik</h3>
 <p><strong>Einkommenserhöhung ($\Delta m > 0$):</strong> Die Budgetgerade verschiebt sich parallel nach außen. Steigung bleibt $-p_1/p_2$, beide Achsenabschnitte steigen proportional.</p>
-<p><strong>Preiserhöhung $p_1$ ($\Delta p_1 > 0$):</strong> Der $x_2$-Achsenabschnitt $m/p_2$ bleibt unverändert (Drehpunkt). Der $x_1$-Achsenabschnitt $m/p_1$ sinkt. Die Gerade rotiert nach innen; die Steigung wird betragsmäßig steiler.</p>
-<p><strong>Preiserhöhung $p_2$ ($\Delta p_2 > 0$):</strong> Der $x_1$-Achsenabschnitt bleibt fest (Drehpunkt $(m/p_1, 0)$). Der $x_2$-Achsenabschnitt sinkt. Steigung wird betragsmäßig flacher.</p>
+<p><strong>Preiserhöhung $p_1$ ($\Delta p_1 > 0$):</strong> Der $x_2$-Achsenabschnitt $m/p_2$ bleibt unverändert (Drehpunkt — VL 1: Rotation um den Achsenabschnitt des Gutes, dessen Preis sich nicht ändert). Der $x_1$-Achsenabschnitt $m/p_1$ sinkt. Die Gerade rotiert nach innen; die Steigung wird betragsmäßig steiler.</p>
+<p><strong>Preiserhöhung $p_2$ ($\Delta p_2 > 0$):</strong> Der $x_1$-Achsenabschnitt bleibt fest (Drehpunkt $(m/p_1, 0)$; dasselbe Rotationsprinzip). Der $x_2$-Achsenabschnitt sinkt. Steigung wird betragsmäßig flacher.</p>
 </div>
 <div class="section-block">
 <h3>Numerisches Beispiel</h3>
@@ -449,9 +451,9 @@ export const CONTENT = {
  { text: `Im Punkt $(5,5)$: $GRS = MU_1/MU_2 = x_2/x_1 = 5/5 = 1$.`, eq: null },
  { text: `Preisverhältnis am Markt: $p_1/p_2 = 2$.`, eq: null },
  { text: `Vergleich:`, eq: String.raw`$$GRS = 1 < \frac{p_1}{p_2} = 2$$` },
- { text: `Gut 1 kostet am Markt doppelt so viel wie das subjektive Tauschverhältnis erlaubt → Gut 1 ist "zu teuer". Der Konsument sollte weniger $x_1$ und mehr $x_2$ kaufen, bis $GRS = p_1/p_2 = 2$.`, eq: null },
+ { text: `Interpretation: $GRS$ ist die Grenzbereitschaft, $x_2$ für $x_1$ zu opfern; das Marktverhältnis $p_1/p_2$ gibt an, wie viel $x_2$ der Markt für eine Einheit $x_1$ verlangt. Weil $GRS < p_1/p_2$, ist Gut 1 am Markt relativ zu stark — der Haushalt sollte weniger $x_1$ und mehr $x_2$ kaufen, bis $GRS = p_1/p_2$.`, eq: null },
  ],
- result: `Weniger $x_1$ kaufen: $GRS = 1 < p_1/p_2 = 2$ — Gut 1 subjektiv unterbewertet.`
+ result: `Weniger $x_1$ kaufen: $GRS = 1 < p_1/p_2 = 2$ — Grenzbewertung liegt unter dem Markt-Tauschverhältnis.`
  },
  {
  text: String.raw`Leite die GRS der CES-Nutzenfunktion $u = (x_1^\rho + x_2^\rho)^{1/\rho}$ her.`,
@@ -586,7 +588,7 @@ export const CONTENT = {
 `,
  formeln: [
  { label:'CD-Nutzenfunktion', eq: String.raw`$$u(x_1, x_2) = x_1^\alpha \cdot x_2^{1-\alpha}, \quad 0 < \alpha < 1$$`, desc:'0 < α < 1', variables: { '\\alpha': 'Budgetanteil Gut 1 (0 < α < 1)', 'x_1': 'Menge Gut 1', 'x_2': 'Menge Gut 2' } },
- { label:'Nachfrage x₁*', eq: String.raw`$$x_1^* = \frac{\alpha m}{p_1}$$`, desc:'Konstanter Budgetanteil α', variables: { 'x_1^*': 'Optimale Menge Gut 1', 'b': 'Koeffizient Gut 2', 'm': 'Einkommen', 'p_1': 'Preis Gut 1', 'p_2': 'Preis Gut 2', 'a': 'Koeffizient Gut 1' } },
+ { label:'Nachfrage x₁*', eq: String.raw`$$x_1^* = \frac{\alpha m}{p_1}$$`, desc:'Konstanter Budgetanteil α', variables: { 'x_1^*': 'Optimale Menge Gut 1', 'm': 'Einkommen', 'p_1': 'Preis Gut 1', '\\alpha': 'Parameter der CD-Nutzenfunktion (Budgetanteil Gut 1)' } },
  { label:'Nachfrage x₂*', eq: String.raw`$$x_2^* = \frac{(1-\alpha) m}{p_2}$$`, desc:'Konstanter Budgetanteil (1−α)', variables: { 'x_2^*': 'Optimale Menge Gut 2', '\\alpha': 'Budgetanteil Gut 1', 'm': 'Einkommen', 'p_2': 'Preis Gut 2' } },
  ],
  aufgaben: [

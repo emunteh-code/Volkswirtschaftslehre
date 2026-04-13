@@ -586,7 +586,7 @@ ${renderFormulaEq(formula.eq)}
       question: `Wie würdest du die klausurnahe Aufgabe zu "${chapter.title}" lösen? ${task.text}`,
       answer: `<div class="exam-drill-line">
 <span class="exam-drill-key">Lösungslogik</span>
-<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-text">${renderSemanticPlainText(step.text || '')}</div><div class="exam-drill-step-math">${renderTaskMathBlock(step.eq)}</div></li>`).join('')}</ol>
+<ol class="exam-drill-steps">${(task.steps || []).map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-body"><div class="exam-drill-step-text">${renderSemanticPlainText(step.text || '')}</div><div class="exam-drill-step-math">${renderTaskMathBlock(step.eq)}</div></div></li>`).join('')}</ol>
 </div>
 <div class="exam-drill-line">
 <span class="exam-drill-key">Prüfungsresultat</span>

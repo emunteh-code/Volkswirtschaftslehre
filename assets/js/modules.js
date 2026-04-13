@@ -1,3 +1,10 @@
+/**
+ * Public-facing “trusted core”: strongest current live modules (source-backed depth,
+ * shared portal stack). Used for landing prioritization only — not a quality claim
+ * about other live modules, which remain useful with module-specific caveats.
+ */
+export const TRUSTED_CORE_SLUGS = Object.freeze(["mikro1", "statistik", "recht", "oekonometrie"]);
+
 export const MODULES = [
   {
     slug: "mikro1",
@@ -152,6 +159,25 @@ export function isLiveModuleVisible(module) {
 }
 
 export const PUBLIC_MODULES = MODULES.filter(isLiveModuleVisible);
+
+/** Live modules in `TRUSTED_CORE_SLUGS` order (subset of the full catalogue). */
+export function getTrustedCoreModules() {
+  return TRUSTED_CORE_SLUGS.map((slug) => MODULES.find((m) => m.slug === slug)).filter(
+    (m) => m && isLiveModuleVisible(m)
+  );
+}
+
+/** Other live modules, preserving catalogue order from `MODULES`. */
+export function getNonTrustedPublicModules() {
+  const trusted = new Set(TRUSTED_CORE_SLUGS);
+  return MODULES.filter((m) => isLiveModuleVisible(m) && !trusted.has(m.slug));
+}
+
+/**
+ * URL path prefixes (repo root) whose `index.html` boots `assets/js/generated-portal/main.js`.
+ * Not in `PUBLIC_MODULES`; different trust / provenance class than curated module `js/main.js` stacks.
+ */
+export const GENERATED_PORTAL_ROUTE_PREFIXES = ["r/", "politisches-system-brd/"];
 
 export const FILTERS = [
   { id: "quantitative", label: "Analytisch" },

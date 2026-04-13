@@ -1,4 +1,9 @@
-import { FILTERS, PUBLIC_MODULES, getModuleBySlug } from "./modules.js";
+import {
+  PUBLIC_MODULES,
+  getModuleBySlug,
+  getTrustedCoreModules,
+  getNonTrustedPublicModules
+} from "./modules.js";
 import { getModuleContent } from "./module-content.js";
 import { buildGeneratedPortalData, estimateGeneratedChapterCount } from "./generated-portal/dataFactory.js";
 import { mountRLabs } from "./r-lab.js";
@@ -233,7 +238,8 @@ function handleLandingKeydown(event) {
   if (event.altKey || event.ctrlKey || event.metaKey) return;
   const active = document.activeElement;
   if (active && active.closest("input, textarea, select")) return;
-  if (active && active.closest("a, button, [role='button']") && !active.closest("#moduleGrid")) return;
+  const inModulePickers = active.closest("#trustedCoreGrid") || active.closest("#moduleGrid");
+  if (active && active.closest("a, button, [role='button']") && !inModulePickers) return;
 
   switch (event.key) {
     case "ArrowRight":
@@ -317,7 +323,10 @@ async function updateHeroShelf(module) {
     title.textContent = "VWL Lernportal";
     if (desc) desc.textContent = "Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.";
     if (meta) meta.innerHTML = "";
-    if (btn) { btn.textContent = "Module erkunden"; btn.href = "#modules"; }
+    if (btn) {
+      btn.textContent = "Zum empfohlenen Einstieg";
+      btn.href = "#trusted-core";
+    }
     return;
   }
 
@@ -364,52 +373,86 @@ async function updateHeroShelf(module) {
   }
 }
 
+function buildLandingTileHtml(module, snapshot, { trustedCore = false } = {}) {
+  const statusClass = snapshot.started ? " started" : "";
+  const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
+  const progressBar = snapshot.started
+    ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
+    : "";
+  const specialStatus = module.sourceCorpusInRepo === false
+    ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
+    : "";
+  const coreClass = trustedCore ? " lp-tile--trusted-core" : "";
+
+  return `
+    <a href="${module.href}" class="lp-tile${coreClass}" role="option" data-slug="${module.slug}" id="lpTile_${module.slug}" aria-selected="false" tabindex="-1">
+      <h3 class="lp-tile-title">${module.title}</h3>
+      <p class="lp-tile-summary">${module.summary}</p>
+      ${specialStatus}
+      <div class="lp-tile-footer">
+        <span class="lp-tile-status${statusClass}">${statusLabel}</span>
+        ${progressBar}
+      </div>
+    </a>
+  `;
+}
+
 async function renderLandingPage() {
+  const trustedGrid = document.getElementById("trustedCoreGrid");
   const gridNode = document.getElementById("moduleGrid");
   if (!gridNode) return;
 
-  // 1. Module Count
-  const countLabel = document.getElementById("moduleCountLabel");
-  if (countLabel) countLabel.textContent = `${PUBLIC_MODULES.length} Module`;
+  const trustedModules = getTrustedCoreModules();
+  const furtherModules = getNonTrustedPublicModules();
 
-  // 2. Hero: show last-visited module or default
+  // 1. Count (weitere Module only — trusted shelf speaks for itself)
+  const countLabel = document.getElementById("moduleCountLabel");
+  if (countLabel) countLabel.textContent = `${furtherModules.length} Module`;
+
+  // 2. Hero: last visited, else first trusted-core module, else first public
   const lastModule = pickInitialLandingModule();
-  const defaultModule = lastModule || PUBLIC_MODULES[0] || null;
+  const defaultModule = lastModule || trustedModules[0] || PUBLIC_MODULES[0] || null;
   await updateHeroShelf(defaultModule);
 
-  // 3. Module Grid
+  // 3. Trusted core + further grids
   if (PUBLIC_MODULES.length === 0) {
+    if (trustedGrid) trustedGrid.innerHTML = "";
     gridNode.innerHTML = `<div class="empty-state">Keine Module verfügbar.</div>`;
+    landingTileElements = [];
   } else {
-    const snapshots = await Promise.all(PUBLIC_MODULES.map(async (module) => ({
-      module,
-      snapshot: await getModuleSnapshot(module)
-    })));
+    const trustedSnapshots =
+      trustedModules.length && trustedGrid
+        ? await Promise.all(
+            trustedModules.map(async (module) => ({
+              module,
+              snapshot: await getModuleSnapshot(module)
+            }))
+          )
+        : [];
 
-    gridNode.innerHTML = snapshots.map(({ module, snapshot }) => {
-      const statusClass = snapshot.started ? " started" : "";
-      const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
-      const progressBar = snapshot.started
-        ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
-        : "";
-      const specialStatus = module.sourceCorpusInRepo === false
-        ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
-        : "";
+    const furtherSnapshots = await Promise.all(
+      furtherModules.map(async (module) => ({
+        module,
+        snapshot: await getModuleSnapshot(module)
+      }))
+    );
 
-      return `
-        <a href="${module.href}" class="lp-tile" role="option" data-slug="${module.slug}" id="lpTile_${module.slug}" aria-selected="false" tabindex="-1">
-          <h3 class="lp-tile-title">${module.title}</h3>
-          <p class="lp-tile-summary">${module.summary}</p>
-          ${specialStatus}
-          <div class="lp-tile-footer">
-            <span class="lp-tile-status${statusClass}">${statusLabel}</span>
-            ${progressBar}
-          </div>
-        </a>
-      `;
-    }).join("");
+    if (trustedGrid) {
+      trustedGrid.innerHTML = trustedSnapshots.length
+        ? trustedSnapshots
+            .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot, { trustedCore: true }))
+            .join("")
+        : `<div class="empty-state">Empfohlener Einstieg nicht verfügbar.</div>`;
+    }
 
-    landingTileElements = Array.from(gridNode.querySelectorAll(".lp-tile"));
+    gridNode.innerHTML = furtherSnapshots.length
+      ? furtherSnapshots.map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot)).join("")
+      : `<div class="empty-state lp-shelf-empty--further">Keine weiteren Module in dieser Liste.</div>`;
+
+    const trustedTiles = trustedGrid ? Array.from(trustedGrid.querySelectorAll(".lp-tile")) : [];
+    const furtherTiles = Array.from(gridNode.querySelectorAll(".lp-tile"));
+    landingTileElements = [...trustedTiles, ...furtherTiles];
+
     const initialIndex = Math.max(0, landingTileElements.findIndex((tile) => tile.dataset.slug === defaultModule?.slug));
     setLandingSelection(initialIndex, { focus: true });
 
@@ -421,11 +464,12 @@ async function renderLandingPage() {
       tile.addEventListener("mouseenter", () => setLandingSelection(index));
       tile.addEventListener("focus", () => setLandingSelection(index));
     });
-    gridNode.addEventListener("mouseleave", () => {
-      if (selectedLandingIndex >= 0) {
-        setLandingSelection(selectedLandingIndex);
-      }
-    });
+
+    const reapplyHoverAnchor = () => {
+      if (selectedLandingIndex >= 0) setLandingSelection(selectedLandingIndex);
+    };
+    if (trustedGrid) trustedGrid.addEventListener("mouseleave", reapplyHoverAnchor);
+    gridNode.addEventListener("mouseleave", reapplyHoverAnchor);
   }
 
   if (!landingKeyboardBound) {

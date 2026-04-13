@@ -1250,9 +1250,9 @@ abline(v = 0.5, col = "red", lwd = 2)`,
     formeln: [
       formula(
         'Gauss-Markov-Aussage',
-        String.raw`$$\operatorname{Var}(a'y \mid X) \ge \operatorname{Var}(\hat{\beta}_j \mid X)$$`,
-        'OLS ist innerhalb der linearen unverzerrten Schätzer varianzminimal.',
-        {}
+        String.raw`$$\operatorname{Var}(c'\hat{\beta}\mid X) \le \operatorname{Var}(c'\tilde{\beta}\mid X)$$`,
+        'Für jede Linearkombination der Parameter (Gewichtsvektor c) hat der OLS-Schätzer unter den klassischen Annahmen die kleinstmögliche Varianz verglichen mit jedem anderen linearen unverzerrten Schätzer derselben Linearkombination — genau das meint BLUE.',
+        { c: 'beliebiger Gewichtsvektor', '\\hat{\\beta}': 'OLS-Schätzer', '\\tilde{\\beta}': 'linearer unverzerrter Vergleichsschätzer' }
       )
     ],
     aufgaben: [
@@ -1879,7 +1879,8 @@ R2`,
         title: 'Hypothesenlogik für einen Koeffizienten',
         body: [
           'Beim t-Test wird geprüft, ob ein einzelner Koeffizient mit einer hypothetischen Null oder einem anderen Referenzwert vereinbar ist. Meist lautet die Nullhypothese βⱼ = 0.',
-          'Der Test vergleicht die beobachtete Abweichung vom Hypothesenwert mit dem geschätzten Standardfehler.'
+          'Der Test vergleicht die beobachtete Abweichung vom Hypothesenwert mit dem geschätzten Standardfehler.',
+          'Unter den klassischen Annahmen des linearen Modells (strikte Exogenität, Homoskedastizität, keine perfekte Multikollinearität) und Normalität der Fehler ist die Teststatistik exakt t-verteilt mit n−k Freiheitsgraden; bei Verletzung der Normalität dient dieselbe Statistik oft als asymptotische Approximation bei großem n.'
         ],
         math: [String.raw`$$t = \frac{\hat{\beta}_j - \beta_{j,0}}{se(\hat{\beta}_j)}$$`]
       },
@@ -1918,7 +1919,7 @@ R2`,
         [
           step('Berechne die Teststatistik.', String.raw`$$t = \frac{1.8-0}{0.6} = 3$$`),
           step('Vergleiche den Betrag mit der kritischen Faustregel.', String.raw`$$|t| = 3 > 2$$`),
-          step('Verwirf H₀ auf dem üblichen 5%-Niveau und formuliere das Ergebnis verbal.'),
+          step('Verwerfe H₀ auf dem üblichen 5%-Niveau (formal: „nicht verwerfen“ ≠ H₀ beweisen) und formuliere das Ergebnis verbal.'),
           step('Signifikanz sagt aber noch nichts über Kausalität oder ökonomische Größe.')
         ],
         'Der t-Test verbindet Schätzwert und Unsicherheit zu einer regelgeleiteten Inferenzentscheidung.'
@@ -2048,7 +2049,7 @@ model_r  <- lm(y ~ x1, data = df)
 anova(model_r, model_ur)`,
       output: 'Die ANOVA-Ausgabe zeigt, ob die zusätzlichen Regressoren den Fit gemeinsam signifikant verbessern.',
       miniTask: 'Erkläre, welche Nullhypothese hier getestet wird.',
-      solution: 'Getestet wird, ob die zusätzlich aufgenommenen Koeffizienten im eingeschränkten Modell gemeinsam null sind.',
+      solution: 'Getestet wird, ob die Koeffizienten der im uneingeschränkten Modell zusätzlich enthaltenen Regressoren gemeinsam null sind — d.h. ob das eingeschränkte Modell gegenüber dem größeren Modell ausreicht (gemeinsame Blockrestriktion).',
       pitfalls: ['ANOVA-Ausgabe zu lesen, ohne das restricted model inhaltlich zu benennen.']
     })
   },

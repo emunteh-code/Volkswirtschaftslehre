@@ -26,7 +26,7 @@ const MODULE_SLUG = 'oekonometrie';
  * Primary anchors — paths relative to:
  *   source-materials/Einführung in die Ökonometrie/Einführung in die Ökonometrie/
  * Curated in docs/audits/oekonometrie-provenance-curation-pass-1.md.
- * Some R filenames use U+F704 as a legacy placeholder for an umlaut (on-disk in this repo).
+ * Some R filenames use U+EF84 (PUA) as a legacy placeholder for an umlaut (on-disk in this repo).
  */
 const OE_PUA = '\uEF84';
 

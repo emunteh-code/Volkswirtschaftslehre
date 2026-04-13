@@ -2,6 +2,10 @@
   "name": "vwl-portal-clickthrough",
   "private": true,
   "type": "module",
+  "scripts": {
+    "trust:pass1": "node trust-regression-pass-1.mjs",
+    "verify:right-panel-fallback": "node verify-right-panel-fallback.mjs"
+  },
   "dependencies": {
     "playwright": "1.49.1"
   }

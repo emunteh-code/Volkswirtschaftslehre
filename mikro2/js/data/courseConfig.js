@@ -3,7 +3,7 @@
  * Do not imply direct PDF provenance until course materials are added; see:
  * - docs/audits/mikro2-source-identity-resolution-pass-1.md
  * - docs/audits/mikro2-quarantine-roadmap-pass-1.md
- * No contentManifest bridge here yet (by design until sources exist).
+ * Minimal `contentManifest.js` supplies provenance only (no bridge export until sources exist).
  */
 export const COURSE_CONFIG = {
   slug: 'mikro2',

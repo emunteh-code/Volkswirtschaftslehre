@@ -46,20 +46,55 @@
         <h1 class="lp-hero-title" id="heroTitle">VWL Lernportal</h1>
         <p class="lp-hero-desc" id="heroDesc">Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.</p>
         <div class="lp-hero-meta" id="heroMeta"></div>
-        <a class="lp-hero-btn" id="heroBtn" href="#modules">Module erkunden</a>
+        <a class="lp-hero-btn" id="heroBtn" href="#trusted-core">Zum empfohlenen Einstieg</a>
       </div>
     </div>
   </section>
 
-  <!-- ── MODULE SHELF ─────────────────────────────────────────── -->
-  <section class="lp-shelf" id="modules">
+  <!-- ── TRUSTED CORE (recommended entry) ─────────────────────── -->
+  <section class="lp-shelf lp-shelf--trusted-core" id="trusted-core" aria-labelledby="lp-trusted-heading">
     <div class="lp-container">
       <div class="lp-shelf-header">
-        <h2>Module</h2>
+        <h2 id="lp-trusted-heading">Empfohlener Einstieg</h2>
+      </div>
+      <p class="lp-shelf-note lp-shelf-note--trusted">
+        Diese vier Module eignen sich am besten als Einstieg in das Portal.
+      </p>
+      <div class="lp-shelf-grid lp-shelf-grid--trusted" id="trustedCoreGrid" role="listbox" aria-label="Empfohlene Module"></div>
+    </div>
+  </section>
+
+  <!-- ── FURTHER MODULE SHELF ─────────────────────────────────── -->
+  <section class="lp-shelf lp-shelf--further-modules" id="modules">
+    <div class="lp-container">
+      <div class="lp-shelf-header">
+        <h2>Weitere Module</h2>
         <span class="lp-shelf-count" id="moduleCountLabel"></span>
       </div>
-      <p class="lp-shelf-note">Die Startseite zeigt nur öffentlich freigegebene Live-Module. Sonderstatus wird pro Modul sichtbar markiert.</p>
-      <div class="lp-shelf-grid" id="moduleGrid" role="listbox" aria-label="Module"></div>
+      <div class="lp-shelf-grid" id="moduleGrid" role="listbox" aria-label="Weitere Module"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT / PRODUCT BOUNDARY (after module discovery) ─────── -->
+  <section class="lp-about lp-about--after-modules" id="ueber-portal" aria-labelledby="lp-about-heading">
+    <div class="lp-container">
+      <div class="lp-about-inner">
+        <h2 class="lp-about-title" id="lp-about-heading">Über dieses Portal</h2>
+        <div class="lp-about-body">
+          <p>
+            Dieses Portal ist ein interaktiver Studienbegleiter für ausgewählte VWL-Module. Es soll die Klausurvorbereitung strukturierter machen, indem Theorie, Formeln, Graphen, geführte Aufgaben, Prüfungstransfer und ausgewählte interaktive Elemente an einem Ort zusammengeführt werden.
+          </p>
+          <p>
+            Ziel ist es, Orientierung, Verständnis, Wiederholung und Transfer zu verbessern, statt nur mit verstreuten PDFs und Notizen zu arbeiten. Das Portal ersetzt jedoch nicht die offiziellen Vorlesungs- und Übungsunterlagen. Für Definitionen, Graphen, Herleitungen und andere klausurrelevante technische Details sollten die offiziellen Materialien weiterhin die letzte Referenz bleiben.
+          </p>
+          <p>
+            Einige Module sind aktuell weiter ausgearbeitet und enger an den Quellen orientiert als andere. Vier Module bilden den empfohlenen Einstieg (Mikroökonomik I, Statistik, Recht für Wirtschaftswissenschaftler, Einführung in die Ökonometrie): sie sind auf der Übersichtsseite zuerst gebündelt und ersetzen dennoch nicht die offiziellen Kursunterlagen.
+          </p>
+          <p class="lp-about-closing">
+            Das Portal ist als strukturierter Lernbegleiter gedacht, nicht als vollständiger Ersatz für die offiziellen Kursmaterialien.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 

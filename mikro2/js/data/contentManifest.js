@@ -15,6 +15,15 @@ import { GRAPH_CONCEPTS } from '../ui/graphPanel.js';
 const MODULE_SLUG = 'mikro2';
 
 const MIKRO2_PRIMARY_REFS_CURATED = {
+  monopol_preissetzung: [
+    'Vorlesungsfolien/Mikro_2_1.pdf',
+    'Vorlesungsfolien/Mikro_2_2.pdf'
+  ],
+  preisdiskriminierung: [
+    'Vorlesungsfolien/Mikro_2_2.pdf',
+    'Vorlesungsfolien/Mikro_2_3.pdf',
+    'Vorlesungsfolien/Mikro_2_4.pdf'
+  ],
   spieltheorie_statisch: [
     'Vorlesungsfolien/Mikro2_9.pdf',
     'Vorlesungsfolien/Mikro2_10.pdf'
@@ -35,6 +44,15 @@ const MIKRO2_PRIMARY_REFS_CURATED = {
     'Vorlesungsfolien/Mikro2_5.pdf',
     'Vorlesungsfolien/Mikro2_6.pdf'
   ],
+  intertemporaler_konsum: [
+    'Vorlesungsfolien/Mikro2_12.pdf'
+  ],
+  unsicherheit_versicherung: [
+    'Vorlesungsfolien/Mikro2_13.pdf',
+    'Vorlesungsfolien/Mikro2_14.pdf',
+    'Vorlesungsfolien/Mikro2_14_lecture.pdf',
+    'Weitere_Unterlagen/Breyer_46.pdf'
+  ],
   gleichgewicht_tausch: [
     'Vorlesungsfolien/Mikro2_16.pdf'
   ],
@@ -45,6 +63,11 @@ const MIKRO2_PRIMARY_REFS_CURATED = {
   wohlfahrt_theoreme: [
     'Vorlesungsfolien/Mikro2_16.pdf',
     'Vorlesungsfolien/Mikro2_17.pdf'
+  ],
+  gleichgewicht_produktion: [
+    'Vorlesungsfolien/Mikro2_17.pdf',
+    'Weitere_Unterlagen/cdf-Files/Robinson_Crusoe_Ökonomie_Allgemeines_Gleichgewicht.cdf',
+    'Weitere_Unterlagen/cdf-Files/Robinson_Crusoe_Ökonomie_Gewinnmaximierung.cdf'
   ],
   wohlfahrt_messung: [
     'Vorlesungsfolien/Mikro_2_2.pdf',

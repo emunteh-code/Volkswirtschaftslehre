@@ -4,12 +4,17 @@
 // ============================================================
 
 export const CHAPTERS = [
+  { id: 'monopol_preissetzung', title: 'Monopol: Preissetzung, Elastizität und Wohlfahrt', cat: 'Monopol', short: 'Monopol' },
+  { id: 'preisdiskriminierung', title: 'Monopolistische Preisdiskriminierung', cat: 'Monopol', short: 'Preisdiskr.' },
   { id: 'spieltheorie_statisch', title: 'Spieltheorie: Normalform & Nash-Gleichgewicht', cat: 'Interaktion', short: 'Spiel I' },
   { id: 'spieltheorie_dynamisch', title: 'Spieltheorie: Gemischte Strategien & Wiederholung', cat: 'Interaktion', short: 'Spiel II' },
   { id: 'oligopol_cournot_bertrand', title: 'Oligopol: Cournot- und Bertrand-Wettbewerb', cat: 'Interaktion', short: 'Oligopol I' },
   { id: 'oligopol_stackelberg', title: 'Oligopol: Stackelberg und Führerschaft', cat: 'Interaktion', short: 'Oligopol II' },
+  { id: 'intertemporaler_konsum', title: 'Intertemporaler Konsum', cat: 'Haushalt', short: 'Intertemp.' },
+  { id: 'unsicherheit_versicherung', title: 'Unsicherheit, Erwartungsnutzen und Versicherung', cat: 'Haushalt', short: 'Risiko' },
   { id: 'gleichgewicht_tausch', title: 'Allgemeines Gleichgewicht: Tausch, Edgeworth, Kontraktkurve', cat: 'Wohlfahrt', short: 'GG Tausch' },
   { id: 'gleichgewicht_walras', title: 'Allgemeines Gleichgewicht: Walras & Markt-Räumung', cat: 'Wohlfahrt', short: 'GG Walras' },
+  { id: 'gleichgewicht_produktion', title: 'Allgemeines Gleichgewicht mit Produktion', cat: 'Wohlfahrt', short: 'GG Prod.' },
   { id: 'wohlfahrt_theoreme', title: 'Wohlfahrt: 1./2. Hauptsatz', cat: 'Wohlfahrt', short: 'Wohlf. Satz' },
   { id: 'wohlfahrt_messung', title: 'Wohlfahrt: Messung (KR, PR, DWL, SWF)', cat: 'Wohlfahrt', short: 'Wohlf. Mess.' },
   { id: 'externa_pigou', title: 'Externe Effekte: Pigou-Internalisierung', cat: 'Marktversagen', short: 'Extern Pigou' },
@@ -20,6 +25,67 @@ export const CHAPTERS = [
 ];
 
 export const CONTENT = {
+  monopol_preissetzung: {
+    motivation: 'Die ersten Mikro-II-Vorlesungen knüpfen an die Wettbewerbslogik an und fragen, wie ein Monopolist Preise setzt, warum Elastizitäten die Marktmacht begrenzen und wo Wohlfahrtsverluste entstehen.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Monopolpreis als Aufschlag auf Grenzkosten</h3>
+      <p>Der Monopolist wählt die Ausbringungsmenge so, dass Grenzerlös und Grenzkosten übereinstimmen. In der Kursnotation wird der Grenzerlös über Preis und Nachfrageelastizität geschrieben.</p>
+      <div class="math-block">$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$</div>
+      <p>Aus der Bedingung erster Ordnung $E'(y)=C'(y)$ folgt die Aufschlagsformel: Je unelastischer die Nachfrage, desto größer ist der Abstand zwischen Preis und Grenzkosten.</p>
+    </div>
+    <div class="section-block">
+      <h3>Wohlfahrtseffekt des Monopols</h3>
+      <p>Der Monopolpreis liegt über den Grenzkosten und die gehandelte Menge unter der effizienten Wettbewerbsmenge. Dadurch geht ein Teil der potentiellen Handelsgewinne als Deadweight Loss verloren.</p>
+      <div class="warn-box"><strong>Klausurfehler:</strong> Der Monopolaufschlag ist keine beliebige Marge. Er ist über die Nachfrageelastizität gebunden; bei vollkommener Konkurrenz bzw. sehr elastischer Nachfrage nähert sich $p(y)$ den Grenzkosten.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Grenzerlös im Monopol', eq: String.raw`$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$`, desc: 'Kursnotation für Grenzerlös bei fallender Nachfrage.', variables: { y: 'Outputmenge', p: 'inverse Nachfrage', epsilon: 'Preiselastizität der Nachfrage' } },
+      { label: 'Monopolaufschlag', eq: String.raw`$$p(y)=\left(1-\frac{1}{|\varepsilon_{xp}|}\right)^{-1}C'(y)$$`, desc: 'Preis als Aufschlag auf Grenzkosten.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Ein Monopolist hat konstante Grenzkosten $C'(y)=20$ und sieht sich einer Nachfrageelastizität von $|\varepsilon_{xp}|=2$ gegenüber. Bestimmen Sie den Monopolpreis über die Aufschlagsformel.`,
+        steps: [
+          { text: String.raw`Aufschlagsformel einsetzen.`, eq: String.raw`p=\left(1-\frac{1}{2}\right)^{-1}\cdot 20` },
+          { text: String.raw`Klammer auswerten.`, eq: String.raw`p=(0{,}5)^{-1}\cdot 20=40` }
+        ],
+        result: String.raw`Der Monopolpreis beträgt $p=40$.`
+      }
+    ]
+  },
+  preisdiskriminierung: {
+    motivation: 'Preisdiskriminierung ist der zweite offizielle Monopolblock: Die Portaloberfläche muss unterscheiden, ob der Monopolist Typen erkennt, Menüs anbietet oder Gruppen getrennt bepreist.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Dritter Grad: getrennte Kundengruppen</h3>
+      <p>Bei Preisdiskriminierung dritten Grades unterscheidet der Monopolist klar abgrenzbare Gruppen und setzt gruppenspezifische Preise. In der Zwei-Gruppen-Darstellung maximiert er die Summe der Erlöse abzüglich der Kosten der Gesamtproduktion.</p>
+      <div class="math-block">$$\max_{y_1,y_2}\ \pi(y_1,y_2)=E_1(y_1)+E_2(y_2)-C(y_1+y_2)$$</div>
+      <p>Die Bedingung erster Ordnung verlangt den Ausgleich der Grenzerlöse zwischen den Teilmärkten und den Grenzkosten der Gesamtproduktion.</p>
+    </div>
+    <div class="section-block">
+      <h3>Zweiter Grad: Selbstselektion</h3>
+      <p>Bei Preisdiskriminierung zweiten Grades kann der Monopolist Konsumenten nicht direkt unterscheiden. Er bietet Preis-Mengen- oder Preis-Qualitäts-Kombinationen an, aus denen die Konsumenten selbst wählen.</p>
+      <div class="warn-box"><strong>Trennlinie:</strong> Dritter Grad trennt beobachtbare Gruppen. Zweiter Grad baut ein Menü, damit unterschiedliche Zahlungsbereitschaften sich selbst sortieren.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Preisdiskriminierung dritten Grades', eq: String.raw`$$E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$$`, desc: 'Grenzerlöse werden zwischen Teilmärkten ausgeglichen.' },
+      { label: 'Gruppenerlös', eq: String.raw`$$E_i(y_i)=p_i(y_i)y_i,\quad i=1,2$$`, desc: 'Erlös je Kundengruppe.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Ein Monopolist bedient zwei getrennte Gruppen. Erklären Sie, warum im Optimum nicht zwingend derselbe Preis, aber derselbe Grenzerlös in beiden Gruppen gilt.`,
+        steps: [
+          { text: String.raw`Gewinnfunktion für getrennte Gruppen formulieren.`, eq: String.raw`\pi=E_1(y_1)+E_2(y_2)-C(y_1+y_2)` },
+          { text: String.raw`BEO für beide Mengen bilden.`, eq: String.raw`E_1'(y_1)=C'(y_1+y_2),\quad E_2'(y_2)=C'(y_1+y_2)` },
+          { text: String.raw`Schlussfolgerung.`, eq: String.raw`E_1'(y_1)=E_2'(y_2)` }
+        ],
+        result: String.raw`Preise können wegen unterschiedlicher Nachfrageelastizitäten verschieden sein; die Grenzerlöse müssen im Optimum übereinstimmen.`
+      }
+    ]
+  },
   spieltheorie_statisch: {
     motivation: 'In strategischen Situationen hängt das eigene Ergebnis nicht nur vom eigenen Handeln ab, sondern auch von den Entscheidungen anderer. Die Spieltheorie liefert das formale Instrumentarium hierfür.',
     theorie: String.raw`
@@ -251,6 +317,81 @@ export const CONTENT = {
       }
     ]
   },
+  intertemporaler_konsum: {
+    motivation: 'Vorlesung 12 überträgt die Mikro-I-Haushaltslogik auf zwei Perioden: Konsum heute und Konsum morgen werden als zwei Güter im intertemporalen Entscheidungsproblem behandelt.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Zwei Perioden, ein Konsumgut</h3>
+      <p>Der Haushalt lebt in Periode 1 und 2. Das Konsumgut hat in beiden Perioden den normierten Preis 1. Die Entscheidung lautet: heute konsumieren, sparen oder sich verschulden.</p>
+      <p>Die offizielle Notation verwendet $c_1$ für Gegenwartskonsum, $c_2$ für Zukunftskonsum, $m_1$ und $m_2$ für Einkommen sowie $r$ für den Zinssatz.</p>
+    </div>
+    <div class="section-block">
+      <h3>Intertemporale Budgetbeschränkung</h3>
+      <p>In Gegenwartswerten darf der Gegenwartswert des Konsums den Gegenwartswert des Einkommens nicht überschreiten.</p>
+      <div class="math-block">$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$</div>
+      <p>Äquivalent lässt sich die Budgetgerade in Zukunftswerten schreiben. Die Steigung hängt vom Zinssatz ab und zeigt die Opportunitätskosten von Konsum heute.</p>
+    </div>
+    <div class="section-block">
+      <h3>Zinsänderung und Konsumplan</h3>
+      <p>Eine Zinsänderung dreht die Budgetgerade um den Ausstattungspunkt. Ob Gegenwartskonsum steigt oder fällt, hängt von Substitutions- und Einkommenseffekt sowie davon ab, ob der Haushalt Netto-Sparer oder Netto-Schuldner ist.</p>
+      <div class="warn-box"><strong>Klausurfehler:</strong> Nicht jede Zinserhöhung senkt automatisch $c_1$. Bei Netto-Sparern und Netto-Schuldnern wirken Einkommenseffekte in unterschiedliche Richtungen.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Gegenwartswert-Budget', eq: String.raw`$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$`, desc: 'Intertemporale Budgetbeschränkung in Gegenwartswerten.' },
+      { label: 'Zukunftswert-Budget', eq: String.raw`$$(1+r)c_1+c_2=(1+r)m_1+m_2$$`, desc: 'Äquivalente Schreibweise in Zukunftswerten.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Ein Haushalt hat $m_1=100$, $m_2=110$ und $r=10\%$. Wie lautet die intertemporale Budgetbeschränkung in Gegenwartswerten?`,
+        steps: [
+          { text: String.raw`Gegenwartswert des Einkommens berechnen.`, eq: String.raw`m_1+\frac{m_2}{1+r}=100+\frac{110}{1{,}1}=200` },
+          { text: String.raw`Budgetgleichung notieren.`, eq: String.raw`c_1+\frac{c_2}{1{,}1}=200` }
+        ],
+        result: String.raw`Die Gegenwartswert-Budgetgerade lautet $c_1+\frac{c_2}{1{,}1}=200$.`
+      }
+    ]
+  },
+  unsicherheit_versicherung: {
+    motivation: 'Vorlesungen 13 und 14 modellieren Unsicherheit als bedingten Konsum in Naturzuständen und leiten Erwartungsnutzen, Risikoaversion und Versicherungsnachfrage ab.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Bedingter Konsum</h3>
+      <p>Unsichere Ereignisse werden als Naturzustände modelliert. Konsum im Zustand „Schaden“ und Konsum im Zustand „kein Schaden“ sind die beiden Güter der Entscheidung.</p>
+      <p>Die Kursnotation verwendet $c_1$ für Konsum im Schadenszustand, $c_2$ für Konsum ohne Schaden, $m_1=m-d$ und $m_2=m$ für die zustandsabhängigen Ausstattungen.</p>
+    </div>
+    <div class="section-block">
+      <h3>Erwartungsnutzen und Risikoeinstellung</h3>
+      <p>Beim Erwartungsnutzen werden zustandsabhängige Nutzenwerte mit Eintrittswahrscheinlichkeiten gewichtet. Risikoaversion zeigt sich in konkaver Nutzenfunktion, Risikoneutralität in linearer und Risikofreude in konvexer Nutzenfunktion.</p>
+      <div class="math-block">$$EU=\pi u(c_1)+(1-\pi)u(c_2)$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Versicherungsmarkt</h3>
+      <p>Eine Versicherung verschiebt Konsum vom Zustand ohne Schaden in den Schadenszustand. Bei fairer Prämie und Risikoaversion ist Vollversicherung nutzenmaximierend.</p>
+      <div class="math-block">$$\gamma=\pi \quad \Rightarrow \quad \text{faire Versicherung}$$</div>
+      <p>Das Ausmaß der Risikoaversion kann über Sicherheitsäquivalent und Risikoprämie beschrieben werden.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Zustandsfehler:</strong> $c_1$ und $c_2$ sind hier keine Zeitperioden, sondern Konsum in Naturzuständen. Nicht mit intertemporalem Konsum verwechseln.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Erwartungsnutzen', eq: String.raw`$$EU=\pi u(c_1)+(1-\pi)u(c_2)$$`, desc: 'Nutzen über zwei Naturzustände.' },
+      { label: 'Faire Prämie', eq: String.raw`$$\gamma=\pi$$`, desc: 'Nullgewinnbedingung im einfachen Versicherungsmodell.' },
+      { label: 'Risikoprämie', eq: String.raw`$$RP=E[x]-CE$$`, desc: 'Differenz zwischen Erwartungswert und Sicherheitsäquivalent.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Warum führt eine faire Versicherung bei Risikoaversion zur Vollversicherung?`,
+        steps: [
+          { text: String.raw`Faire Prämie bedeutet gleiche erwartete Auszahlung und Prämienlast.`, eq: String.raw`\gamma=\pi` },
+          { text: String.raw`Risikoaverse Haushalte bevorzugen Glättung des Konsums über Zustände.`, eq: String.raw`c_1=c_2 \quad \text{im Vollversicherungsfall}` }
+        ],
+        result: String.raw`Bei fairer Prämie kostet Risikoreduktion im Erwartungswert nichts; Risikoaversion macht vollständige Konsumglättung optimal.`
+      }
+    ]
+  },
   gleichgewicht_tausch: {
     motivation: 'Bisher haben wir Märkte isoliert betrachtet (Partialanalyse). Das allgemeine Gleichgewicht betrachtet alle Märkte gleichzeitig und analysiert Tausch- und Produktionseffizienz.',
     theorie: String.raw`
@@ -353,6 +494,44 @@ export const CONTENT = {
           { text: String.raw`Markträumung Gut 1:`, eq: String.raw`2 + \frac{2p_2}{p_1} = 4 \Rightarrow p_1 = p_2` }
         ],
         result: String.raw`Walras-GG: relatives Preisverhältnis $p_1/p_2=1$, Allokation $(2,2)$ für beide Konsumenten.`
+      }
+    ]
+  },
+  gleichgewicht_produktion: {
+    motivation: 'Vorlesung 17 erweitert das allgemeine Gleichgewicht um Produktion: Aus einer reinen Tauschkiste wird eine Ökonomie mit Konsumenten, Gütern und Produktionsfaktoren.',
+    theorie: String.raw`
+    <div class="section-block">
+      <h3>Modellrahmen mit Produktion</h3>
+      <p>Die offizielle Darstellung betrachtet zwei Individuen, zwei Güter und zwei Produktionsfaktoren. Konsum wird wie bisher mit $(x_1^A,x_2^A)$ und $(x_1^B,x_2^B)$ bezeichnet; Produktion erfolgt über sektorale Produktionsfunktionen.</p>
+      <div class="math-block">$$F^1(K_1,L_1),\qquad F^2(K_2,L_2)$$</div>
+      <p>Die Faktorausstattung ist vollständig auf beide Sektoren aufzuteilen.</p>
+      <div class="math-block">$$K_1+K_2=K,\qquad L_1+L_2=L$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Faktor-Box und Produktionseffizienz</h3>
+      <p>Die Faktor-Box zeigt, wie Kapital und Arbeit zwischen den beiden Gütersektoren verteilt werden. Produktionseffizienz liegt vor, wenn keine Reallokation der Faktoren mehr von einem Gut mehr produzieren kann, ohne die Produktion des anderen Gutes zu senken.</p>
+      <p>Grafisch liegen effiziente Produktionspunkte an Tangentialpunkten der Isoquanten; ihre Verbindung bildet die Effizienzkurve.</p>
+    </div>
+    <div class="section-block">
+      <h3>Gesamtwirtschaftliches Optimum</h3>
+      <p>Im Optimum müssen Produktion und Konsum zusammenpassen: Die Transformationsmöglichkeiten der Ökonomie und die Grenzraten der Substitution der Konsumenten dürfen nicht auseinanderlaufen.</p>
+      <div class="warn-box"><strong>Prüfungsfehler:</strong> Produktionseffizienz allein reicht nicht für ein gesamtwirtschaftliches Optimum. Zusätzlich muss die produzierte Güterkombination zur Konsumseite passen.</div>
+    </div>
+    `,
+    formeln: [
+      { label: 'Vollbeschäftigung Kapital', eq: String.raw`$$K_1+K_2=K$$`, desc: 'Gesamtbestand Kapital wird zwischen Sektoren aufgeteilt.' },
+      { label: 'Vollbeschäftigung Arbeit', eq: String.raw`$$L_1+L_2=L$$`, desc: 'Gesamtbestand Arbeit wird zwischen Sektoren aufgeteilt.' },
+      { label: 'Produktionseffizienz', eq: String.raw`$$GRTS^1_{KL}=GRTS^2_{KL}$$`, desc: 'Tangentialbedingung der Isoquanten in der Faktor-Box.' }
+    ],
+    aufgaben: [
+      {
+        text: String.raw`Erklären Sie, warum ein Punkt außerhalb der Effizienzkurve in der Faktor-Box nicht produktionseffizient ist.`,
+        steps: [
+          { text: String.raw`Definition anwenden.`, eq: String.raw`\text{Produktionseffizienz: kein Mehr von Gut 1 ohne Weniger von Gut 2 möglich.}` },
+          { text: String.raw`Isoquantenargument.`, eq: String.raw`\text{Schneiden sich Isoquanten, kann eine Faktorreallokation beide Sektoren nicht schlechter stellen.}` },
+          { text: String.raw`Tangentialbedingung nennen.`, eq: String.raw`GRTS^1_{KL}=GRTS^2_{KL}` }
+        ],
+        result: String.raw`Ein Punkt außerhalb der Effizienzkurve lässt produktive Reallokationsgewinne offen; erst an der Tangentialbedingung sind diese ausgeschöpft.`
       }
     ]
   },

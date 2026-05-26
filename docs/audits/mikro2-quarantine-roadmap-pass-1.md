@@ -1,5 +1,7 @@
 # Mikro2 quarantine / roadmap cleanup — pass 1
 
+> **Superseded status note (2026-05-26):** The original diagnosis below was correct when written, but the official Mikro II source corpus has since been supplied locally and unpacked under `source-materials/Mikroökonomik II/` (ignored by git). Current status is documented in `docs/audits/mikro2-official-source-ingest-pass-1.md`: source corpus present, live portal partially source-backed, full 20-lecture reconstruction still open.
+
 ## Purpose
 
 Make **`mikro2` academic status** explicit in project docs and lightweight metadata so **future passes do not assume** `source-materials/`-backed, **direct-source** parity with modules like `mikro1`, `makro2`, or `recht`.

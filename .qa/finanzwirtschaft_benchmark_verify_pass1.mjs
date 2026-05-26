@@ -4,7 +4,7 @@ import { CHAPTERS } from '../finanzwirtschaft/js/data/chapters.js';
 import { GRAPH_CONCEPTS } from '../finanzwirtschaft/js/ui/graphPanel.js';
 
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const baseUrl = 'http://127.0.0.1:4181';
+const baseUrl = process.env.PORTAL_BASE_URL || 'http://127.0.0.1:4181';
 const outDir = new URL('./finanzwirtschaft-benchmark-reconstruction-pass-1/', import.meta.url).pathname;
 const baseTabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
 

@@ -1,5 +1,7 @@
 # Mikro2 status guard — pass 2
 
+> **Superseded status note (2026-05-26):** This guard reflects the old no-corpus state. The official Mikro II source corpus has since been ingested locally under `source-materials/Mikroökonomik II/` (ignored by git); current guardrails and remaining gaps are in `docs/audits/mikro2-official-source-ingest-pass-1.md`.
+
 **Date:** 2026-04-08  
 **Type:** Documentation and maintainer-metadata only — **no** `mikro2/js/data/*` learning content changes, **no** portal-core refactors.
 

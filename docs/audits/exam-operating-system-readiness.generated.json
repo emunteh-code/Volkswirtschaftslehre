@@ -1,0 +1,393 @@
+{
+  "generatedAt": "2026-05-27",
+  "definitionOfDone": "A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.",
+  "modules": [
+    {
+      "module": "mikro1",
+      "sourceComplete": true,
+      "registryDocs": 54,
+      "pageIndexed": true,
+      "sourcePages": 381,
+      "weakSourcePages": 4,
+      "taskSignalPages": 18,
+      "formulaSignalPages": 233,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "mikro2",
+      "sourceComplete": true,
+      "registryDocs": 31,
+      "pageIndexed": true,
+      "sourcePages": 348,
+      "weakSourcePages": 13,
+      "taskSignalPages": 11,
+      "formulaSignalPages": 190,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "makro1",
+      "sourceComplete": true,
+      "registryDocs": 49,
+      "pageIndexed": true,
+      "sourcePages": 701,
+      "weakSourcePages": 6,
+      "taskSignalPages": 115,
+      "formulaSignalPages": 335,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "makro2",
+      "sourceComplete": true,
+      "registryDocs": 32,
+      "pageIndexed": true,
+      "sourcePages": 408,
+      "weakSourcePages": 1,
+      "taskSignalPages": 46,
+      "formulaSignalPages": 249,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "oekonometrie",
+      "sourceComplete": true,
+      "registryDocs": 70,
+      "pageIndexed": true,
+      "sourcePages": 1280,
+      "weakSourcePages": 180,
+      "taskSignalPages": 298,
+      "formulaSignalPages": 811,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "statistik",
+      "sourceComplete": true,
+      "registryDocs": 237,
+      "pageIndexed": true,
+      "sourcePages": 2040,
+      "weakSourcePages": 132,
+      "taskSignalPages": 619,
+      "formulaSignalPages": 1046,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "finanzwirtschaft",
+      "sourceComplete": true,
+      "registryDocs": 12,
+      "pageIndexed": true,
+      "sourcePages": 223,
+      "weakSourcePages": 0,
+      "taskSignalPages": 8,
+      "formulaSignalPages": 118,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "mathematik",
+      "sourceComplete": true,
+      "registryDocs": 52,
+      "pageIndexed": true,
+      "sourcePages": 1093,
+      "weakSourcePages": 0,
+      "taskSignalPages": 253,
+      "formulaSignalPages": 892,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "jahresabschluss",
+      "sourceComplete": true,
+      "registryDocs": 34,
+      "pageIndexed": true,
+      "sourcePages": 366,
+      "weakSourcePages": 0,
+      "taskSignalPages": 36,
+      "formulaSignalPages": 129,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "recht",
+      "sourceComplete": true,
+      "registryDocs": 30,
+      "pageIndexed": true,
+      "sourcePages": 477,
+      "weakSourcePages": 2,
+      "taskSignalPages": 52,
+      "formulaSignalPages": 94,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "sourceComplete": true,
+      "registryDocs": 20,
+      "pageIndexed": true,
+      "sourcePages": 562,
+      "weakSourcePages": 4,
+      "taskSignalPages": 4,
+      "formulaSignalPages": 116,
+      "anchorComplete": false,
+      "examBankComplete": false,
+      "provenanceComplete": false,
+      "adaptiveReady": false,
+      "mikro1DepthAchieved": false
+    }
+  ],
+  "blockers": [
+    {
+      "module": "mikro1",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "mikro1",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "mikro1",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "mikro1",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "mikro1",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "mikro2",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "mikro2",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "mikro2",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "mikro2",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "mikro2",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "makro1",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "makro1",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "makro1",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "makro1",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "makro1",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "makro2",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "makro2",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "makro2",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "makro2",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "makro2",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "statistik",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "statistik",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "statistik",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "statistik",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "statistik",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "mathematik",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "mathematik",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "mathematik",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "mathematik",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "mathematik",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "recht",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "recht",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "recht",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "recht",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "recht",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "page/slide/task anchors incomplete"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "official exam bank incomplete"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "item-level provenance incomplete"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "adaptive mastery not evidence-based"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "Mikro1-depth equality not certified"
+    }
+  ]
+}

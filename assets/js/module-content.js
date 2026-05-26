@@ -248,25 +248,57 @@ export const MODULE_CONTENT = {
     ]
   },
   mikro2: {
-    stageLabel: "Kursportal (Quarantaene: Quellenlage)",
+    stageLabel: "Kursportal (Quellenkorpus vorhanden, Rekonstruktion offen)",
     sourceMethod:
-      "Es gibt **keinen** Ordner **Mikro II** unter `source-materials/`; das Live-Portal deckt Mikro-II-Themen (Spieltheorie, Oligopol, AGG, Marktversagen, Information) **ohne** dateibasierte Primaeranker aus dem Repo. Inhaltliche Erweiterungen sind nicht als `direct-source` gegen VL-PDFs im Materialordner ausweisbar, bis ein offizieller Korpus eingepflegt ist (siehe `docs/audits/mikro2-quarantine-roadmap-pass-1.md`, `AGENTS.md`, `assets/js/modules.js` mit `sourceCorpusInRepo: false`).",
+      "Der offizielle Mikro-II-Korpus liegt jetzt unter `source-materials/Mikroökonomik II/` (20 Vorlesungsfolien plus weitere Unterlagen). Das aktuelle Live-Portal ist teilweise mit Primaerankern versehen, aber noch nicht vollstaendig entlang aller Vorlesungen rekonstruiert.",
     coverageStatus:
-      "Modul ist **live** und thematisch konsistent mit fortgeschrittener Mikrooekonomik; **nicht** mit in-repo PDF-Korpus abgesichert. Kein `contentManifest.js`, keine `MIKRO*-PRIMARY_REFS` gegen `source-materials/`.",
+      "Modul ist **live** und jetzt teilweise quellengestuetzt. Abgedeckt sind u. a. Oligopol, Spieltheorie, Allgemeines Gleichgewicht, Wohlfahrt und asymmetrische Information; noch unterrepräsentiert sind Monopol/Preisdiskriminierung, intertemporaler Konsum, Unsicherheit/Versicherung und produktionsseitiges Allgemeines Gleichgewicht.",
     portalGoal:
-      "Bis Mikro-II-Materialien im Repo liegen: Lernpfad nutzbar halten, aber **keine** vorgebliche Quellenparitaet zu Modulen wie `mikro1` oder `makro2` suggerieren.",
+      "Naechster Schritt ist eine echte Mikro2-Rekonstruktion aus den offiziellen 20 Vorlesungen, bevor das Modul als Mikro1-paritaetisch oder vollstaendig source-complete gelten darf.",
     audit: [
-      { label: "source-materials", value: "Kein Mikro-II-Baum (nur Mikro I vorhanden)" },
-      { label: "Manifest / Bridge", value: "Nicht vorhanden (bewusst; leeres Manifest waere irrefuehrend)" },
-      { label: "Registry", value: "`modules.js`: sourceCorpusInRepo false + sourceStatusNote" }
+      { label: "source-materials", value: "`source-materials/Mikroökonomik II/` vorhanden" },
+      { label: "Manifest", value: "`mikro2/js/data/contentManifest.js` mit teilweiser Konzept-zu-PDF-Zuordnung" },
+      { label: "Registry", value: "`modules.js`: sourceCorpusInRepo true + Rekonstruktionshinweis" }
     ],
-    sourceGroups: [],
-    roadmap: [],
+    sourceGroups: [
+      {
+        title: "VL 1-4 — Monopol und Preisdiskriminierung",
+        body: "Offizielle Folien zu Monopol-Wiederholung, Wohlfahrt und Preisdiscrimination ersten/zweiten/dritten Grades. Im aktuellen Portal noch nicht als eigener Block ausgebaut.",
+        sources: ["Vorlesungsfolien/Mikro_2_1.pdf", "Vorlesungsfolien/Mikro_2_2.pdf", "Vorlesungsfolien/Mikro_2_3.pdf", "Vorlesungsfolien/Mikro_2_4.pdf"]
+      },
+      {
+        title: "VL 5-11 — Oligopol und Spieltheorie",
+        body: "Stackelberg, Cournot, Bertrand, Kollusion, Matrixspiele, gemischte Strategien und sequentielle Spiele.",
+        sources: ["Vorlesungsfolien/Mikro2_5.pdf", "Vorlesungsfolien/Mikro2_6.pdf", "Vorlesungsfolien/Mikro2_7.pdf", "Vorlesungsfolien/Mikro2_8.pdf", "Vorlesungsfolien/Mikro2_9.pdf", "Vorlesungsfolien/Mikro2_10.pdf", "Vorlesungsfolien/Mikro2_11.pdf"]
+      },
+      {
+        title: "VL 12-14 — Zeit, Unsicherheit und Versicherung",
+        body: "Intertemporaler Konsum, Erwartungsnutzen, Risikoaversion, Versicherungsmarkt und Grenzen der Erwartungsnutzentheorie.",
+        sources: ["Vorlesungsfolien/Mikro2_12.pdf", "Vorlesungsfolien/Mikro2_13.pdf", "Vorlesungsfolien/Mikro2_14.pdf", "Vorlesungsfolien/Mikro2_14_lecture.pdf", "Weitere_Unterlagen/Breyer_46.pdf"]
+      },
+      {
+        title: "VL 15-17 — Allgemeines Gleichgewicht",
+        body: "Robinson-Crusoe-Oekonomie, Walras-Gesetz, Tauschoekonomie, Pareto-Effizienz, Wohlfahrtssaetze und Produktionseffizienz.",
+        sources: ["Vorlesungsfolien/Mikro2_15.pdf", "Vorlesungsfolien/Mikro2_16.pdf", "Vorlesungsfolien/Mikro2_17.pdf"]
+      },
+      {
+        title: "VL 18-20 — Asymmetrische Information",
+        body: "Moral Hazard, adverse Selektion, Signalling und Managerentlohnung.",
+        sources: ["Vorlesungsfolien/Mikro2_18.pdf", "Vorlesungsfolien/Mikro2_19.pdf", "Vorlesungsfolien/Mikro2_20.pdf", "Weitere_Unterlagen/Tirole_Lemon_Problem.pdf", "Weitere_Unterlagen/Ray_1998_PrincipalAgent.pdf"]
+      }
+    ],
+    roadmap: [
+      "Monopol- und Preisdiskriminierungsblock aus VL 1-4 ergaenzen.",
+      "Intertemporalen Konsum aus VL 12 ergaenzen.",
+      "Unsicherheit, Erwartungsnutzen und Versicherung aus VL 13-14 ergaenzen.",
+      "Produktionsseite des Allgemeinen Gleichgewichts aus VL 17 ausbauen.",
+      "Pigou/Coase/oeffentliche Gueter als ungemappte aktuelle Portalextras pruefen: source-backed ersetzen, explizit als Plattform-Zusatz behalten oder entfernen."
+    ],
     qualityNotes: [
-      "Diagnose: `docs/audits/mikro2-source-identity-resolution-pass-1.md`.",
-      "Policy: `docs/audits/mikro2-quarantine-roadmap-pass-1.md` — Quarantaene betrifft **Quellenwahrheit**, nicht Deployability.",
-      "Neue Inhalte: als source-distilled / platform-added-* kennzeichnen, bis ein Korpus existiert; kein erfundenes PDF-Mapping.",
-      "Referenz-Inventar (alle Repo-Stellen + Backbone-Luecken): `docs/audits/mikro2-status-guard-pass-2.md`."
+      "Aktueller Status: `docs/audits/mikro2-official-source-ingest-pass-1.md`.",
+      "Historische Quarantaene-Dokumente bleiben Kontext, aber die alte Annahme 'kein Mikro-II-Korpus' ist ueberholt.",
+      "Neue Inhalte muessen aus den offiziellen PDFs rekonstruiert und mit Konzeptrefs im Manifest verdrahtet werden.",
+      "Konzepte ohne direkten Treffer in den neuen Quellen bleiben `platform-added-*`, bis eine Quellenentscheidung getroffen ist."
     ]
   },
   makro2: {

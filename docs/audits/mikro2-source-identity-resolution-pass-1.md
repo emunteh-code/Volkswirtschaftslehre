@@ -1,5 +1,7 @@
 # Mikro2 source-identity resolution — pass 1
 
+> **Superseded status note (2026-05-26):** This audit captured the pre-ingest state. The official Mikro II materials are now available locally under `source-materials/Mikroökonomik II/` (ignored by git). Use `docs/audits/mikro2-official-source-ingest-pass-1.md` for current source identity, coverage, and reconstruction priorities.
+
 **See also:** repo policy and doc/metadata flags — `docs/audits/mikro2-quarantine-roadmap-pass-1.md`; reference inventory + backbone notes — `docs/audits/mikro2-status-guard-pass-2.md`.
 
 ## Scope and constraints

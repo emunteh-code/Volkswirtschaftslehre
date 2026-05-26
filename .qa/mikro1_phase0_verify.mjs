@@ -1,7 +1,7 @@
 import { chromium } from '/tmp/pw-check/node_modules/playwright/index.mjs';
 
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const baseUrl = 'http://127.0.0.1:4179';
+const baseUrl = process.env.PORTAL_BASE_URL || 'http://127.0.0.1:4179';
 
 async function waitForApp(page) {
   await page.waitForFunction(() => window.__jsLoaded && typeof window.__renderHome === 'function' && typeof window.__navigate === 'function', { timeout: 20000 });

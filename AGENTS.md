@@ -22,11 +22,11 @@ Transform this repository into a source-faithful, interactive, exam-focused univ
 
 ### Module note: mikro2 (source corpus)
 
-- **`mikro2` is a genuine Mikro II–topic module** (advanced micro: game theory, oligopoly, GE, market failure, information) and may remain **live**.
-- There is **no `Mikroökonomik II` folder in `source-materials/`** in this repository (only **Mikro I** materials exist on disk). Therefore **`mikro2` cannot be treated as `direct-source`–anchored** to course PDFs until a Mikro II corpus is added.
-- **Do not** run provenance curation or “source-grounded” content expansion **against `source-materials/`** for `mikro2` until that corpus exists; use **`source-distilled`** / **`platform-added-explanation`** / **`platform-added-drill`** as appropriate and document gaps.
-- Policy and file pointers: `docs/audits/mikro2-quarantine-roadmap-pass-1.md` and `docs/audits/mikro2-source-identity-resolution-pass-1.md`.
-- **Repo-wide inventory (references + backbone vs benchmark):** `docs/audits/mikro2-status-guard-pass-2.md` — read before assuming manifest, mistake-review, or `direct-source` parity for **`mikro2`**.
+- **`mikro2` is now backed by an official Mikro II source corpus** under `source-materials/Mikroökonomik II/`.
+- The corpus includes 20 lecture PDFs plus additional planning/literature/CDF files; see `docs/audits/mikro2-official-source-ingest-pass-1.md`.
+- The existing live module is **not yet full source-parity complete**: it covers several source-backed families (oligopoly, game theory, general equilibrium, welfare, information) but still misses or compresses official lecture blocks such as monopoly / price discrimination, intertemporal choice, uncertainty / insurance, and production-side general equilibrium.
+- Treat new Mikro2 content work as source-grounded reconstruction work: use the official PDFs as source of truth, attach concept-level refs, and keep `platform-added-*` labels for current concepts without direct anchors.
+- Historical quarantine docs remain useful for context, but the old “no Mikro II corpus exists” premise is superseded by `docs/audits/mikro2-official-source-ingest-pass-1.md`.
 
 ## implementation rules
 1. Audit first, then plan, then implement.

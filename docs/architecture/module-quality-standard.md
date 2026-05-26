@@ -19,7 +19,7 @@ A module **meets platform standard** only when the items below pass. This turns 
 
 | Module | What differs | Where documented |
 |--------|----------------|------------------|
-| **mikro2** | No **`source-materials/`** Mikro II corpus → not **`direct-source`–anchorable**; **no** `contentManifest.js` / provenance bridge; **`mikro2/js/main.js`** omits **`portalBridge`** and **`mistakeReview`**; landing registry: **`sourceCorpusInRepo: false`** | `docs/audits/mikro2-status-guard-pass-2.md`, `docs/audits/mikro2-quarantine-roadmap-pass-1.md`, `AGENTS.md` |
+| **mikro2** | Official corpus now exists under **`source-materials/Mikroökonomik II/`**, but the current module is only partially source-backed and still needs full 20-lecture reconstruction before claiming Mikro1-level source parity. Some current concepts remain `platform-added-*` because no direct primary anchor was found in the supplied corpus. | `docs/audits/mikro2-official-source-ingest-pass-1.md`, `AGENTS.md` |
 
 ---
 

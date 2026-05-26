@@ -1,9 +1,7 @@
 /**
- * mikro2 app shell — live module under source quarantine (no Mikro II tree in `source-materials/`).
- * Intentionally omits `portalBridge` / content-manifest payload vs source-backed modules.
- * Do not treat as file-grounded or backbone-parity without reading:
- *   docs/audits/mikro2-quarantine-roadmap-pass-1.md
- *   docs/audits/mikro2-status-guard-pass-2.md
+ * mikro2 app shell — official source corpus is present as of 2026-05-26.
+ * Current module remains pre-reconstruction: parts are source-backed, while full
+ * lecture-sequence parity is tracked in docs/audits/mikro2-official-source-ingest-pass-1.md.
  */
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';

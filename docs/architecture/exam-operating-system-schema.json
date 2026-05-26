@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.lernportal/exam-operating-system.schema.json",
+  "title": "Learning Portal Exam Operating System Metadata",
+  "type": "object",
+  "required": ["sourceDocuments", "sourceAnchors", "concepts", "formulaCards", "taskBank", "taskFamilies"],
+  "properties": {
+    "sourceDocuments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceDocument" }
+    },
+    "sourceAnchors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceAnchor" }
+    },
+    "concepts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/concept" }
+    },
+    "formulaCards": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/formulaCard" }
+    },
+    "taskBank": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/taskBankItem" }
+    },
+    "taskFamilies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/taskFamily" }
+    },
+    "styleGuides": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/styleGuide" }
+    },
+    "learnerEvidenceEvents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/learnerEvidenceEvent" }
+    }
+  },
+  "$defs": {
+    "moduleSlug": {
+      "type": "string",
+      "enum": [
+        "mikro1",
+        "mikro2",
+        "makro1",
+        "makro2",
+        "oekonometrie",
+        "statistik",
+        "finanzwirtschaft",
+        "mathematik",
+        "jahresabschluss",
+        "recht",
+        "internationale-wirtschaftsbeziehungen"
+      ]
+    },
+    "sourceStatus": {
+      "type": "string",
+      "enum": [
+        "direct-source",
+        "source-distilled",
+        "platform-added-drill",
+        "platform-added-explanation",
+        "missing-source",
+        "ambiguous-source"
+      ]
+    },
+    "sourceDocument": {
+      "type": "object",
+      "required": ["id", "module", "kind", "title", "path", "extractionStatus"],
+      "properties": {
+        "id": { "type": "string" },
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "kind": {
+          "type": "string",
+          "enum": ["lecture-slide", "exercise", "tutorial", "solution", "exam", "probeklausur", "script", "code", "dataset", "supplement"]
+        },
+        "title": { "type": "string" },
+        "officialTitle": { "type": "string" },
+        "path": { "type": "string" },
+        "fileHash": { "type": "string" },
+        "term": { "type": "string" },
+        "instructor": { "type": "string" },
+        "pages": { "type": "integer", "minimum": 0 },
+        "extractedAt": { "type": "string" },
+        "reviewedAt": { "type": ["string", "null"] },
+        "extractionStatus": {
+          "type": "string",
+          "enum": ["missing", "indexed", "reviewed", "rejected"]
+        }
+      }
+    },
+    "sourceAnchor": {
+      "type": "object",
+      "required": ["id", "sourceId", "locator", "confidence"],
+      "properties": {
+        "id": { "type": "string" },
+        "sourceId": { "type": "string" },
+        "locator": {
+          "type": "object",
+          "properties": {
+            "page": { "type": ["integer", "null"], "minimum": 1 },
+            "slide": { "type": ["integer", "null"], "minimum": 1 },
+            "section": { "type": ["string", "null"] },
+            "task": { "type": ["string", "null"] },
+            "line": { "type": ["integer", "null"], "minimum": 1 }
+          }
+        },
+        "quoteFingerprint": { "type": "string" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "reviewedBy": { "type": "string" },
+        "reviewedAt": { "type": ["string", "null"] }
+      }
+    },
+    "concept": {
+      "type": "object",
+      "required": ["id", "module", "title", "sourceCoverage"],
+      "properties": {
+        "id": { "type": "string" },
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "title": { "type": "string" },
+        "officialTerms": { "type": "array", "items": { "type": "string" } },
+        "category": { "type": "string" },
+        "prerequisiteConcepts": { "type": "array", "items": { "type": "string" } },
+        "examRelevance": { "type": "string", "enum": ["low", "medium", "high", "unknown"] },
+        "sourceCoverage": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": { "type": "string", "enum": ["complete", "partial", "platform-added", "missing"] },
+            "anchorIds": { "type": "array", "items": { "type": "string" } },
+            "uncoveredSourceItems": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "formulaCard": {
+      "type": "object",
+      "required": ["id", "module", "conceptId", "officialNotation", "displayFormula", "sourceStatus"],
+      "properties": {
+        "id": { "type": "string" },
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "conceptId": { "type": "string" },
+        "officialNotation": { "type": "string" },
+        "displayFormula": { "type": "string" },
+        "intuition": { "type": "string" },
+        "derivationSteps": { "type": "array", "items": { "$ref": "#/$defs/solutionStep" } },
+        "assumptions": { "type": "array", "items": { "type": "string" } },
+        "appliesWhen": { "type": "array", "items": { "type": "string" } },
+        "failsWhen": { "type": "array", "items": { "type": "string" } },
+        "substitutions": { "type": "array", "items": { "type": "string" } },
+        "examShortcut": { "type": "string" },
+        "graphicalInterpretation": { "type": "string" },
+        "relatedTaskFamilies": { "type": "array", "items": { "type": "string" } },
+        "commonMistakes": { "type": "array", "items": { "type": "string" } },
+        "anchorIds": { "type": "array", "items": { "type": "string" } },
+        "sourceStatus": { "$ref": "#/$defs/sourceStatus" }
+      }
+    },
+    "taskBankItem": {
+      "type": "object",
+      "required": ["id", "module", "topic", "conceptIds", "familyId", "difficulty", "expectedMinutes", "provenance"],
+      "properties": {
+        "id": { "type": "string" },
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "topic": { "type": "string" },
+        "conceptIds": { "type": "array", "items": { "type": "string" } },
+        "methodIds": { "type": "array", "items": { "type": "string" } },
+        "familyId": { "type": "string" },
+        "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "expectedMinutes": { "type": "integer", "minimum": 1 },
+        "examRelevance": { "type": "string", "enum": ["low", "medium", "high", "unknown"] },
+        "requiredFormulaIds": { "type": "array", "items": { "type": "string" } },
+        "prompt": { "type": "string" },
+        "solutionRoutes": { "type": "array", "items": { "$ref": "#/$defs/solutionRoute" } },
+        "commonWrongPaths": { "type": "array", "items": { "$ref": "#/$defs/wrongPath" } },
+        "rubric": { "$ref": "#/$defs/rubric" },
+        "provenance": { "$ref": "#/$defs/itemProvenance" }
+      }
+    },
+    "taskFamily": {
+      "type": "object",
+      "required": ["familyId", "module", "conceptIds", "coreSkill"],
+      "properties": {
+        "familyId": { "type": "string" },
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "conceptIds": { "type": "array", "items": { "type": "string" } },
+        "coreSkill": { "type": "string", "enum": ["recognition", "calculation", "derivation", "transfer"] },
+        "variants": { "type": "array", "items": { "type": "string" } },
+        "officialTaskIds": { "type": "array", "items": { "type": "string" } },
+        "generatedVariantIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "solutionRoute": {
+      "type": "object",
+      "required": ["id", "steps"],
+      "properties": {
+        "id": { "type": "string" },
+        "steps": { "type": "array", "items": { "$ref": "#/$defs/solutionStep" } }
+      }
+    },
+    "solutionStep": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "text": { "type": "string" },
+        "math": { "type": "string" },
+        "points": { "type": "number" },
+        "anchorIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "wrongPath": {
+      "type": "object",
+      "required": ["id", "description", "gradingConsequence"],
+      "properties": {
+        "id": { "type": "string" },
+        "description": { "type": "string" },
+        "gradingConsequence": { "type": "string" }
+      }
+    },
+    "rubric": {
+      "type": "object",
+      "properties": {
+        "totalPoints": { "type": "number" },
+        "pointItems": { "type": "array", "items": { "$ref": "#/$defs/solutionStep" } }
+      }
+    },
+    "itemProvenance": {
+      "type": "object",
+      "required": ["sourceStatus", "confidence"],
+      "properties": {
+        "sourceStatus": { "$ref": "#/$defs/sourceStatus" },
+        "anchorIds": { "type": "array", "items": { "type": "string" } },
+        "examProven": { "type": "boolean" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "lastReviewedAt": { "type": ["string", "null"] },
+        "missingSourceWarning": { "type": ["string", "null"] }
+      }
+    },
+    "styleGuide": {
+      "type": "object",
+      "required": ["module"],
+      "properties": {
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "officialTerminology": { "type": "array", "items": { "type": "string" } },
+        "graphConventions": { "type": "array", "items": { "type": "string" } },
+        "formulaNotation": { "type": "array", "items": { "type": "string" } },
+        "derivationStyle": { "type": "array", "items": { "type": "string" } },
+        "trapPhrasing": { "type": "array", "items": { "type": "string" } },
+        "gradingChecklist": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "learnerEvidenceEvent": {
+      "type": "object",
+      "required": ["id", "module", "conceptIds", "skillDimension", "result", "createdAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "module": { "$ref": "#/$defs/moduleSlug" },
+        "conceptIds": { "type": "array", "items": { "type": "string" } },
+        "taskFamilyId": { "type": "string" },
+        "skillDimension": { "type": "string", "enum": ["recognition", "calculation", "derivation", "transfer"] },
+        "result": { "type": "string", "enum": ["correct", "partial", "incorrect", "skipped"] },
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "createdAt": { "type": "string" }
+      }
+    }
+  }
+}

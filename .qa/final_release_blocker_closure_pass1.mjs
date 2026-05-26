@@ -119,12 +119,14 @@ try {
   results.landing = await landing.page.evaluate(() => ({
     moduleCount: document.querySelectorAll('.lp-tile').length,
     shelfNote: document.querySelector('.lp-shelf-note')?.textContent?.trim() || '',
-    mikro2Note: document.querySelector('.lp-tile[data-slug="mikro2"] .lp-tile-note')?.textContent?.trim() || ''
+    aboutBoundary: document.querySelector('#ueber-portal')?.textContent?.replace(/\s+/g, ' ').trim() || ''
   }));
   await screenshot(landing.page, 'landing.png');
   if (results.landing.moduleCount < 10) findings.push('landing module count unexpectedly low');
-  if (!results.landing.shelfNote.includes('öffentlich freigegebene Live-Module')) findings.push('landing shelf note missing or regressed');
-  if (!results.landing.mikro2Note.includes('Sonderstatus')) findings.push('mikro2 landing special-status note missing');
+  if (!results.landing.shelfNote.includes('Einstieg')) findings.push('landing trusted-core shelf note missing or regressed');
+  if (!results.landing.aboutBoundary.includes('offiziellen') || !results.landing.aboutBoundary.includes('Kurs')) {
+    findings.push('landing product-boundary disclaimer missing or regressed');
+  }
   if (landing.errors.length) findings.push(`landing page errors: ${landing.errors.join(' | ')}`);
   await landing.context.close();
 
@@ -220,13 +222,14 @@ try {
     const text = document.querySelector('#content')?.textContent?.replace(/\s+/g, ' ').trim() || '';
     return {
       hasInteraktiv: text.includes('Interaktiv im Browser'),
+      hasInteraktivPill: text.includes('Interaktiv'),
       hasPruefungsregel: text.includes('Prüfungsregel'),
       hasRuntime: text.includes('Runtime:'),
       hasMiniTransfer: text.includes('Mini-Transfer:')
     };
   });
   await screenshot(oek.page, 'oekonometrie-r.png');
-  if (!results.oekR.hasInteraktiv || !results.oekR.hasPruefungsregel || results.oekR.hasRuntime || results.oekR.hasMiniTransfer) {
+  if ((!results.oekR.hasInteraktiv && !results.oekR.hasInteraktivPill) || !results.oekR.hasPruefungsregel || results.oekR.hasRuntime || results.oekR.hasMiniTransfer) {
     findings.push('shared R surface still feels too tool-first');
   }
   if (oek.errors.length) findings.push(`oekonometrie page errors: ${oek.errors.join(' | ')}`);

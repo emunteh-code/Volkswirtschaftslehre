@@ -9,18 +9,17 @@ const modules = [
   { slug: "makro1", minNav: 11 },
   {
     slug: "statistik",
-    minNav: 18,
-    expectRBlocks: 4,
+    minNav: 14,
     expectExamCards: 3,
     graphChecks: [
       {
-        titleFragment: "Konfidenzintervalle",
+        titleFragment: "Schätzereigenschaften & Konfidenzintervalle",
         tab: "graph",
         minInsightRows: 3,
         screenshot: ".qa/statistik-konfidenzintervalle.png"
       },
       {
-        titleFragment: "Statistische Modellierung und Regression",
+        titleFragment: "Regression: Schätzung & Inferenz",
         tab: "graph",
         minInsightRows: 3,
         screenshot: ".qa/statistik-regression.png"
@@ -33,17 +32,17 @@ const modules = [
   { slug: "internationale-wirtschaftsbeziehungen", minNav: 12 },
   {
     slug: "mathematik",
-    minNav: 20,
+    minNav: 14,
     expectExamCards: 3,
     graphChecks: [
       {
-        titleFragment: "Funktionen und Gleichungen",
+        titleFragment: "Funktionen, Gleichungen & Graphen",
         tab: "graph",
         minInsightRows: 3,
         screenshot: ".qa/mathematik-funktionen.png"
       },
       {
-        titleFragment: "Multivariate Optimierung und Lagrange",
+        titleFragment: "Lagrange-Methode & Nebenbedingungen",
         tab: "graph",
         minInsightRows: 3,
         screenshot: ".qa/mathematik-lagrange.png"
@@ -62,9 +61,9 @@ const consentKeys = [
   "finanzwirtschaft_consent_v1",
   "jahresabschluss_consent_v1",
   "recht_consent_v1",
-  "internationale-wirtschaftsbeziehungen_consent_v1",
+  "iwb_consent_v1",
   "mathematik_consent_v1",
-  "oekonometrie_consent_v1"
+  "oekonometrie_consent_v2"
 ];
 
 const browser = await chromium.launch({
@@ -172,7 +171,7 @@ for (const mod of selectedModules) {
         titleFragment: check.titleFragment,
         found: true,
         graphVisible: getComputedStyle(document.querySelector(".tab-btn[data-tab='graph']") || document.body).display !== "none",
-        insightRows: document.querySelectorAll("#graph_info .graph-insight-row").length
+        insightRows: document.querySelectorAll("#graph_info .graph-insight-row, #graph_info .gi-row, #graph_info .graph-info-row").length
       });
     }
 

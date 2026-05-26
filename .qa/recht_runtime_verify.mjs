@@ -2,7 +2,7 @@ import { chromium } from '/tmp/pw-check/node_modules/playwright/index.mjs';
 import { CHAPTERS } from '../recht/js/data/chapters.js';
 
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const baseUrl = 'http://127.0.0.1:4181';
+const baseUrl = process.env.PORTAL_BASE_URL || 'http://127.0.0.1:4181';
 const consentKey = 'recht_consent_v1';
 const tabs = ['theorie', 'formeln', 'aufgaben', 'intuition'];
 

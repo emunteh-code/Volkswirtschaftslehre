@@ -1,7 +1,8 @@
 // ============================================================
 // CONTENT MANIFEST — Mikroökonomik II (provenance only)
-// Live module under source quarantine: no Mikro II tree in `source-materials/`.
-// See AGENTS.md, docs/audits/mikro2-quarantine-roadmap-pass-1.md
+// Source corpus added under `source-materials/Mikroökonomik II/` on 2026-05-26.
+// Current portal coverage is source-backed but not yet full lecture-sequence parity.
+// See docs/audits/mikro2-official-source-ingest-pass-1.md.
 // ============================================================
 
 import { createProvenance } from '../../../assets/js/portal-core/data/provenance.js';
@@ -13,38 +14,110 @@ import { GRAPH_CONCEPTS } from '../ui/graphPanel.js';
 
 const MODULE_SLUG = 'mikro2';
 
-/** Intentionally empty: no file-level anchors until a corpus ships in-repo. */
-export const MIKRO2_CONCEPT_PRIMARY_REFS = Object.fromEntries(CHAPTERS.map(({ id }) => [id, []]));
+const MIKRO2_PRIMARY_REFS_CURATED = {
+  spieltheorie_statisch: [
+    'Vorlesungsfolien/Mikro2_9.pdf',
+    'Vorlesungsfolien/Mikro2_10.pdf'
+  ],
+  spieltheorie_dynamisch: [
+    'Vorlesungsfolien/Mikro2_10.pdf',
+    'Vorlesungsfolien/Mikro2_11.pdf'
+  ],
+  oligopol_cournot_bertrand: [
+    'Vorlesungsfolien/Mikro2_5.pdf',
+    'Vorlesungsfolien/Mikro2_6.pdf',
+    'Vorlesungsfolien/Mikro2_7.pdf',
+    'Vorlesungsfolien/Mikro2_8.pdf',
+    'Weitere_Unterlagen/cdf-Files/Cournot.cdf',
+    'Weitere_Unterlagen/cdf-Files/Cournot_n.cdf'
+  ],
+  oligopol_stackelberg: [
+    'Vorlesungsfolien/Mikro2_5.pdf',
+    'Vorlesungsfolien/Mikro2_6.pdf'
+  ],
+  gleichgewicht_tausch: [
+    'Vorlesungsfolien/Mikro2_16.pdf'
+  ],
+  gleichgewicht_walras: [
+    'Vorlesungsfolien/Mikro2_15.pdf',
+    'Vorlesungsfolien/Mikro2_16.pdf'
+  ],
+  wohlfahrt_theoreme: [
+    'Vorlesungsfolien/Mikro2_16.pdf',
+    'Vorlesungsfolien/Mikro2_17.pdf'
+  ],
+  wohlfahrt_messung: [
+    'Vorlesungsfolien/Mikro_2_2.pdf',
+    'Vorlesungsfolien/Mikro2_16.pdf'
+  ],
+  information_adverse: [
+    'Vorlesungsfolien/Mikro2_18.pdf',
+    'Vorlesungsfolien/Mikro2_19.pdf',
+    'Weitere_Unterlagen/Tirole_Lemon_Problem.pdf'
+  ],
+  information_moralhazard: [
+    'Vorlesungsfolien/Mikro2_18.pdf',
+    'Vorlesungsfolien/Mikro2_20.pdf',
+    'Weitere_Unterlagen/Ray_1998_PrincipalAgent.pdf'
+  ]
+};
 
-const NOTES_QUARANTINE =
-  'Mikro II topic module without an in-repo Mikro II source-materials folder. Didactic portal content — not direct-source anchored to course PDFs here. See docs/audits/mikro2-quarantine-roadmap-pass-1.md.';
+export const MIKRO2_CONCEPT_PRIMARY_REFS = Object.fromEntries(
+  CHAPTERS.map(({ id }) => [
+    id,
+    MIKRO2_PRIMARY_REFS_CURATED[id] ? [...MIKRO2_PRIMARY_REFS_CURATED[id]] : []
+  ])
+);
 
-export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
+const NOTES_SOURCED =
+  'Mikro II source corpus is present under source-materials/Mikroökonomik II. Current portal content is source-distilled and still pending full lecture-sequence reconstruction; see docs/audits/mikro2-official-source-ingest-pass-1.md.';
+const NOTES_UNMAPPED =
+  'No direct primary anchor found in the newly ingested Mikro II lecture corpus for this current portal concept. Keep as platform-added/explanatory until a source-backed reconstruction decides whether to remove, relabel, or replace it.';
+
+const BASE_PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
   primaryPathsByConceptId: MIKRO2_CONCEPT_PRIMARY_REFS,
   moduleSlug: MODULE_SLUG,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,
   hasIntuition: (id) => Boolean(INTUITION[id]),
-  statusByLayer: {
-    motivation: 'platform-added-explanation',
-    theory: 'platform-added-explanation',
-    formulas: 'platform-added-explanation',
-    tasks: 'platform-added-drill',
-    intuition: 'platform-added-explanation',
-    graph: 'platform-added-explanation',
-    stepProblems: 'platform-added-drill'
-  },
   notesByLayer: {
-    motivation: NOTES_QUARANTINE,
-    theory: NOTES_QUARANTINE,
-    formulas: NOTES_QUARANTINE,
-    tasks: NOTES_QUARANTINE,
-    intuition: NOTES_QUARANTINE,
-    graph: NOTES_QUARANTINE,
-    stepProblems: NOTES_QUARANTINE
+    motivation: NOTES_SOURCED,
+    theory: NOTES_SOURCED,
+    formulas: NOTES_SOURCED,
+    tasks: 'Portal-authored practice aligned to source topics where refs exist; not a verbatim official exercise archive.',
+    intuition: 'Compressed recall layer for the closed learning loop.',
+    graph: 'Interactive graphs for exam-style intuition; not a single fixed course figure.',
+    stepProblems: 'Step-problem Schnelltest items; platform-added drills aligned to source topics where refs exist.'
   }
 });
+
+const UNMAPPED_CURRENT_CONCEPTS = new Set([
+  'externa_pigou',
+  'externa_institutionen',
+  'public_goods'
+]);
+
+export const PROVENANCE_BY_CONCEPT = Object.fromEntries(
+  Object.entries(BASE_PROVENANCE_BY_CONCEPT).map(([conceptId, layers]) => {
+    if (!UNMAPPED_CURRENT_CONCEPTS.has(conceptId)) return [conceptId, layers];
+    return [
+      conceptId,
+      Object.fromEntries(
+        Object.entries(layers).map(([layer, provenance]) => [
+          layer,
+          createProvenance({
+            source_status: layer === 'tasks' || layer === 'stepProblems'
+              ? 'platform-added-drill'
+              : 'platform-added-explanation',
+            source_refs: provenance.source_refs,
+            notes: NOTES_UNMAPPED
+          })
+        ])
+      )
+    ];
+  })
+);
 
 export function getConceptProvenance(conceptId) {
   return PROVENANCE_BY_CONCEPT[conceptId] || null;

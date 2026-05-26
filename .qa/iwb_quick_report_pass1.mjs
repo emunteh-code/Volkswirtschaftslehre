@@ -8,7 +8,8 @@ const browser = await chromium.launch({
 
 const page = await browser.newPage({ viewport: { width: 1440, height: 2200 } });
 await page.addInitScript(() => localStorage.setItem('iwb_consent_v1', '1'));
-await page.goto('http://127.0.0.1:4181/internationale-wirtschaftsbeziehungen/index.html?qa=1', { waitUntil: 'domcontentloaded' });
+const baseUrl = process.env.PORTAL_BASE_URL || 'http://127.0.0.1:4181';
+await page.goto(`${baseUrl}/internationale-wirtschaftsbeziehungen/index.html?qa=1`, { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(() => window.__jsLoaded && typeof window.__navigate === 'function', { timeout: 20000 });
 await page.waitForTimeout(900);
 

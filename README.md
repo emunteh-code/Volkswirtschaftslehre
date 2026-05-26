@@ -39,7 +39,7 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 ## Was bereits live ist
 
 - `mikro1/`: bestaetigtes Vollportal aus dem bestehenden Mikro-I-Projekt
-- `mikro2/`: Live-Portal mit Mikro-II-Themenlinie (Spieltheorie, Oligopol, Marktversagen usw.); **es liegt kein passender Mikro-II-Kursordner unter `source-materials/`** — Quarantaene-Status und Repo-Referenzen: `docs/audits/mikro2-quarantine-roadmap-pass-1.md`, `docs/audits/mikro2-status-guard-pass-2.md`
+- `mikro2/`: Live-Portal mit Mikro-II-Themenlinie; der offizielle Kurskorpus liegt jetzt unter `source-materials/Mikroökonomik II/`. Die Oberfläche ist teilweise quellengestützt, aber noch nicht vollständig entlang aller 20 Vorlesungen rekonstruiert; Status: `docs/audits/mikro2-official-source-ingest-pass-1.md`
 - `makro2/`: bestaetigtes Vollportal mit coursework-basierten Makro-II-Inhalten
 - `index.html`: Landing Page mit Moduluebersicht und Filterung
 - Landing Page: progress-aware Resume-Bereich fuer alle Live-Portale
@@ -62,3 +62,8 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 - `clearAllData()` leert jetzt nur noch modulbezogene Keys statt den kompletten Browser-Storage.
 - `mikro1/` und `makro2/` nutzen jetzt eine geteilte App-Core-Struktur plus Portal-Hub-Switcher.
 - `makro2/` wurde mit `npm test` und `npm run build` verifiziert.
+- Exam-OS-Zielbild und aktueller Gap-Stand: `docs/audits/exam-operating-system-current-state-2026-05-27.md` und `docs/architecture/exam-operating-system-spec.md`.
+- Wiederholbarer Exam-OS-Audit: `node tools/exam-os/audit-current-state.mjs --write`.
+- Wiederholbares Quellenregister: `node tools/exam-os/build-source-registry.mjs --write`.
+- Wiederholbarer Seitenanker-Index: `node tools/exam-os/build-source-page-index.mjs --write`.
+- Exam-OS-Readiness-Gate: `node tools/exam-os/check-readiness.mjs --write`.

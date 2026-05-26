@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import { chromium } from '/tmp/pw-check/node_modules/playwright/index.mjs';
 
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const baseUrl = 'http://127.0.0.1:4181';
+const baseUrl = process.env.PORTAL_BASE_URL || 'http://127.0.0.1:4181';
 const outDir = '.qa/project-wide-source-fidelity-gap-closure-pass-2';
 
 async function ensureDir(path) {

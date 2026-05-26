@@ -23,7 +23,7 @@ export const MODULES = [
     slug: "mikro2",
     title: "Mikroökonomik II",
     shortTitle: "Mikro II",
-    summary: "Spieltheorie, Oligopole und Marktversagen.",
+    summary: "Oligopol, Spieltheorie, Entscheidungen unter Unsicherheit und Allgemeines Gleichgewicht.",
     accent: "#7c3aed",
     difficulty: "Fortgeschritten",
     time: "40h",
@@ -31,9 +31,9 @@ export const MODULES = [
     href: "./mikro2/index.html",
     status: "hidden",
     type: "quantitative",
-    sourceCorpusInRepo: false,
+    sourceCorpusInRepo: true,
     sourceStatusNote:
-      "No Mikro II folder in source-materials; not direct-source anchored. See docs/audits/mikro2-quarantine-roadmap-pass-1.md and docs/audits/mikro2-status-guard-pass-2.md (repo reference inventory)."
+      "Official Mikro II corpus added under source-materials/Mikroökonomik II. Current live module is partially source-backed but still pending full 20-lecture reconstruction; see docs/audits/mikro2-official-source-ingest-pass-1.md."
   },
   {
     slug: "makro1",

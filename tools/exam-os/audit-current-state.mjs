@@ -169,12 +169,13 @@ function scoreAgainstBenchmark(moduleSummary, benchmark) {
 }
 
 async function summarizeModule(slug, localSourceFiles) {
-  const [chaptersMod, stepsMod, examsMod, masteryMod, manifestMod] = await Promise.all([
+  const [chaptersMod, stepsMod, examsMod, masteryMod, manifestMod, formulaCardsMod] = await Promise.all([
     importModule(slug, 'chapters.js'),
     importModule(slug, 'stepProblems.js').catch(() => ({})),
     importModule(slug, 'fullExams.js').catch(() => ({})),
     importModule(slug, 'masteryData.js').catch(() => ({})),
-    importModule(slug, 'contentManifest.js').catch((error) => ({ __error: error.message }))
+    importModule(slug, 'contentManifest.js').catch((error) => ({ __error: error.message })),
+    importModule(slug, 'formulaCards.js').catch(() => ({}))
   ]);
 
   const chapters = chaptersMod.CHAPTERS || [];
@@ -193,6 +194,7 @@ async function summarizeModule(slug, localSourceFiles) {
     0
   );
   const fullExams = Object.values(examsMod.FULL_EXAMS || {});
+  const officialFormulaCards = Array.isArray(formulaCardsMod.FORMULA_CARDS) ? formulaCardsMod.FORMULA_CARDS.length : 0;
   const masteryItems = Object.values(masteryMod.MASTERY || {}).reduce(
     (sum, value) => sum + (Array.isArray(value) ? value.length : 0),
     0
@@ -217,6 +219,7 @@ async function summarizeModule(slug, localSourceFiles) {
     trustedCore: TRUSTED_CORE.has(slug),
     concepts: chapters.length,
     formulaBlocks,
+    officialFormulaCards,
     portalTaskBlocks,
     stepDrills,
     fullExamCount: fullExams.length,
@@ -255,12 +258,12 @@ function toMarkdown(report) {
   lines.push('');
   lines.push('## Module Coverage');
   lines.push('');
-  lines.push('| Module | Concepts | Formulas | Tasks | Step drills | Exams | Mastery | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
+  lines.push('| Module | Concepts | Formulas | Formula cards | Tasks | Step drills | Exams | Mastery | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
   for (const mod of report.modules) {
     const score = report.scorecard[mod.slug];
     lines.push(
-      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
+      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.officialFormulaCards} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
     );
   }
   lines.push('');

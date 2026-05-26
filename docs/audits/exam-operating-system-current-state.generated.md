@@ -25,19 +25,19 @@ Local source files: **692**.
 
 ## Module Coverage
 
-| Module | Concepts | Formulas | Tasks | Step drills | Exams | Mastery | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| `mikro1` | 33 | 480 | 109 | 39 | 2 | 132 | 19 | 0 | 19/19 | 0 | benchmark cockpit; source refs local, anchor/task completeness pending |
-| `mikro2` | 18 | 112 | 42 | 33 | 1 | 72 | 28 | 47 | 28/28 | 0 | not achieved |
-| `makro1` | 14 | 158 | 49 | 36 | 3 | 56 | 21 | 0 | 21/21 | 0 | not achieved |
-| `makro2` | 30 | 234 | 78 | 64 | 3 | 132 | 25 | 0 | 25/25 | 0 | near after source/task review |
-| `oekonometrie` | 32 | 175 | 40 | 70 | 3 | 128 | 19 | 0 | 19/19 | 0 | not achieved |
-| `statistik` | 14 | 201 | 65 | 32 | 3 | 56 | 18 | 0 | 18/18 | 0 | not achieved |
-| `finanzwirtschaft` | 19 | 236 | 64 | 56 | 3 | 57 | 12 | 0 | 12/12 | 0 | not achieved |
-| `mathematik` | 14 | 332 | 33 | 28 | 3 | 56 | 30 | 0 | 30/30 | 0 | not achieved |
-| `jahresabschluss` | 15 | 108 | 42 | 35 | 3 | 45 | 12 | 0 | 12/12 | 0 | not achieved |
-| `recht` | 14 | 284 | 48 | 39 | 3 | 51 | 17 | 0 | 17/17 | 0 | not achieved |
-| `internationale-wirtschaftsbeziehungen` | 16 | 132 | 41 | 32 | 3 | 48 | 14 | 0 | 14/14 | 0 | not achieved |
+| Module | Concepts | Formulas | Formula cards | Tasks | Step drills | Exams | Mastery | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| `mikro1` | 33 | 480 | 0 | 109 | 39 | 2 | 132 | 19 | 0 | 19/19 | 0 | benchmark cockpit; source refs local, anchor/task completeness pending |
+| `mikro2` | 18 | 112 | 8 | 42 | 33 | 1 | 72 | 28 | 47 | 28/28 | 0 | not achieved |
+| `makro1` | 14 | 158 | 0 | 49 | 36 | 3 | 56 | 21 | 0 | 21/21 | 0 | not achieved |
+| `makro2` | 30 | 234 | 0 | 78 | 64 | 3 | 132 | 25 | 0 | 25/25 | 0 | near after source/task review |
+| `oekonometrie` | 32 | 175 | 0 | 40 | 70 | 3 | 128 | 19 | 0 | 19/19 | 0 | not achieved |
+| `statistik` | 14 | 201 | 0 | 65 | 32 | 3 | 56 | 18 | 0 | 18/18 | 0 | not achieved |
+| `finanzwirtschaft` | 19 | 236 | 0 | 64 | 56 | 3 | 57 | 12 | 0 | 12/12 | 0 | not achieved |
+| `mathematik` | 14 | 332 | 0 | 33 | 28 | 3 | 56 | 30 | 0 | 30/30 | 0 | not achieved |
+| `jahresabschluss` | 15 | 108 | 0 | 42 | 35 | 3 | 45 | 12 | 0 | 12/12 | 0 | not achieved |
+| `recht` | 14 | 284 | 0 | 48 | 39 | 3 | 51 | 17 | 0 | 17/17 | 0 | not achieved |
+| `internationale-wirtschaftsbeziehungen` | 16 | 132 | 0 | 41 | 32 | 3 | 48 | 14 | 0 | 14/14 | 0 | not achieved |
 
 ## Scorecard
 

@@ -4,6 +4,7 @@ import { CHAPTERS, CONTENT } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
 import { INTUITION } from '../data/intuition.js';
 import { CONCEPT_LINKS } from '../data/conceptLinks.js';
+import { FORMULA_CARDS_BY_CONCEPT } from '../data/formulaCards.js';
 import { renderGraphPanel, GRAPH_CONCEPTS } from './graphPanel.js';
 import { renderMastery } from '../features/mastery.js';
 import { renderMath } from '../utils/mathjax.js';
@@ -41,5 +42,6 @@ export const {
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
-  getConceptProvenance
+  getConceptProvenance,
+  formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT
 });

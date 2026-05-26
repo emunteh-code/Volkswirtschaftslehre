@@ -2616,6 +2616,49 @@ body.light-mode #content .formula-card {
   max-width: 70ch;
 }
 
+#content .formula-grid--proof-layer {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+
+#content .formula-card--proof {
+  gap: 16px;
+}
+
+#content .formula-card--proof .formula-proof-steps {
+  margin: 0;
+}
+
+#content .formula-proof-list {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.58;
+}
+
+#content .formula-proof-list > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content .formula-proof-list ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+#content .formula-proof-list li + li {
+  margin-top: 6px;
+}
+
+#content .formula-proof-meta {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
 #content .formula-card .f-eq > .math-block--formula-card,
 #content .formula-card .f-eq > .semantic-schema,
 #content .formula-card .f-eq > .semantic-reference {

@@ -43,7 +43,9 @@ export function createRenderer({
   /** When false, omit the `entry.motivation` strip under the concept H1 (module opt-out). */
   showConceptMotivationBanner = true,
   /** Optional: per-concept provenance layers from contentManifest (metadata-driven UI strip). */
-  getConceptProvenance = () => null
+  getConceptProvenance = () => null,
+  /** Optional: exam-OS formula cards keyed by concept id. */
+  formulaCardsByConcept = {}
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -779,6 +781,7 @@ ${renderGuidedTasks(tasks)}`;
     if (!hasFormulas(entry)) {
       return '<div class="panel active"></div>';
     }
+    const formulaCards = Array.isArray(formulaCardsByConcept[current]) ? formulaCardsByConcept[current] : [];
     let html = '<div class="panel active"><div class="formula-grid">';
     entry.formeln.forEach((formula, formulaIndex) => {
       const layoutClass = classifyFormulaCardLayout(formula);
@@ -806,8 +809,41 @@ ${varsHint}
 ${supportNote}
 </div>`;
     });
-    html += "</div></div>";
+    html += "</div>";
+    if (formulaCards.length) {
+      html += `<div class="section-block formula-proof-layer">
+<h3>Herleitung & Einsatzgrenzen</h3>
+<div class="formula-grid formula-grid--proof-layer">
+${formulaCards.map(renderFormulaCardProof).join("")}
+</div>
+</div>`;
+    }
+    html += "</div>";
     return html;
+  }
+
+  function renderFormulaCardProof(card) {
+    const steps = Array.isArray(card.derivationSteps) ? card.derivationSteps : [];
+    const list = (title, items) => Array.isArray(items) && items.length
+      ? `<div class="formula-proof-list"><span>${title}</span><ul>${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul></div>`
+      : "";
+    const anchorBadge = Array.isArray(card.anchorIds) && card.anchorIds.length
+      ? `<p class="f-var-hint formula-proof-meta">Quellanker: ${card.anchorIds.length} geprüfte Stelle${card.anchorIds.length === 1 ? "" : "n"}</p>`
+      : "";
+    return `<article class="formula-card formula-card--proof">
+<div class="f-label">${renderDecodedText(card.officialNotation || card.id)}</div>
+${hasMeaningfulDisplayContent(card.displayFormula) ? `<div class="f-eq">${renderSemanticBlock(card.displayFormula, { variant: "formula-card" })}</div>` : ""}
+${card.intuition ? `<div class="f-desc">${renderTeachingProse(card.intuition)}</div>` : ""}
+${steps.length ? `<ol class="exam-drill-steps formula-proof-steps">
+${steps.map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-body"><span class="exam-drill-step-text">${renderSemanticPlainText(step.text || step.label || "")}</span>${hasMeaningfulDisplayContent(step.math) ? `<div class="exam-drill-step-math">${renderSemanticBlock(step.math, { variant: "formula-card" })}</div>` : ""}</div></li>`).join("")}
+</ol>` : ""}
+${list("Annahmen", card.assumptions)}
+${list("Gilt, wenn", card.appliesWhen)}
+${list("Scheitert, wenn", card.failsWhen)}
+${list("Typische Fehler", card.commonMistakes)}
+${card.examShortcut ? `<p class="f-var-hint formula-proof-meta"><strong>Klausurshortcut:</strong> ${renderSemanticPlainText(card.examShortcut)}</p>` : ""}
+${anchorBadge}
+</article>`;
   }
 
   function copyFormula(formulaIndex, event) {

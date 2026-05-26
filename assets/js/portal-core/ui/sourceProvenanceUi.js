@@ -55,6 +55,9 @@ export function pathToHumanLabel(path) {
   m = p.match(/Mikro_1_VL_(\d+)/i) || base.match(/Mikro_1_VL_(\d+)/i);
   if (m) return `Vorlesung ${parseInt(m[1], 10)}`;
 
+  m = base.match(/^Mikro_?2?_?(\d+)(?:_lecture)?\.pdf$/i) || base.match(/^Mikro_2_(\d+)\.pdf$/i);
+  if (m) return `Vorlesung ${parseInt(m[1], 10)}`;
+
   m = p.match(/[/\\]VL_(\d+)/i) || base.match(/^VL_(\d+)/i);
   if (m) return `Vorlesung ${parseInt(m[1], 10)}`;
 
@@ -187,6 +190,8 @@ function firstVorlesungNumberFromPath(path) {
     p.match(/[/\\]VL_(\d+)/i) ||
     base.match(/^VL_(\d+)/i) ||
     base.match(/^V(\d+)_StudIP\.pdf$/i);
+  const mikro2 = base.match(/^Mikro_?2?_?(\d+)(?:_lecture)?\.pdf$/i) || base.match(/^Mikro_2_(\d+)\.pdf$/i);
+  if (mikro2) return parseInt(mikro2[1], 10);
   if (m) return parseInt(m[1], 10);
   return 1
 }
@@ -241,6 +246,45 @@ function labelsFromRefs(refs) {
   return out;
 }
 
+function compactPages(pages) {
+  const nums = [...new Set((pages || []).map((n) => parseInt(n, 10)).filter((n) => Number.isFinite(n)))].sort((a, b) => a - b);
+  if (!nums.length) return '';
+  const runs = [];
+  let start = nums[0];
+  let prev = nums[0];
+  for (let i = 1; i < nums.length; i += 1) {
+    if (nums[i] === prev + 1) {
+      prev = nums[i];
+      continue;
+    }
+    runs.push(start === prev ? `${start}` : `${start}-${prev}`);
+    start = prev = nums[i];
+  }
+  runs.push(start === prev ? `${start}` : `${start}-${prev}`);
+  return runs.join(', ');
+}
+
+function labelsFromAnchors(anchors) {
+  const grouped = new Map();
+  for (const anchor of anchors || []) {
+    const raw =
+      anchor?.publicLabel ||
+      anchor?.label ||
+      toPublicProvenanceLabel(pathToHumanLabel(anchor?.sourcePath || anchor?.path || ''), anchor?.sourcePath || anchor?.path || '') ||
+      anchor?.sourceId ||
+      '';
+    if (!raw) continue;
+    const page = anchor?.locator?.page || anchor?.page || null;
+    const entry = grouped.get(raw) || [];
+    if (page) entry.push(page);
+    grouped.set(raw, entry);
+  }
+  return [...grouped.entries()].map(([label, pages]) => {
+    const compact = compactPages(pages);
+    return compact ? `${label} S. ${compact}` : label;
+  });
+}
+
 function rankLabel(label) {
   if (label.startsWith('Vorlesung ')) {
     return [0, parseInt(/\d+/.exec(label)?.[0] || '0', 10)];
@@ -283,7 +327,7 @@ function collectAllRefLabels(layers) {
   if (!layers || typeof layers !== 'object') return [];
   const acc = [];
   for (const layer of Object.values(layers)) {
-    acc.push(...labelsFromRefs(layer?.source_refs));
+    acc.push(...(layer?.source_anchors?.length ? labelsFromAnchors(layer.source_anchors) : labelsFromRefs(layer?.source_refs)));
   }
   return sortLabelsUnique(acc);
 }
@@ -291,6 +335,8 @@ function collectAllRefLabels(layers) {
 /** Human line from refs only — never internal `source_status` wording. */
 function formatLayerLine(layer) {
   if (!layer) return '';
+  const fromAnchors = labelsFromAnchors(layer.source_anchors);
+  if (fromAnchors.length) return fromAnchors.join(' · ');
   const fromRefs = labelsFromRefs(layer.source_refs);
   if (!fromRefs.length) return '';
   return fromRefs.join(' · ');
@@ -358,6 +404,7 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
   const summary = buildSummary(layers);
   if (!summary) return '';
 
+  const hasPageAnchors = Object.values(layers || {}).some((l) => Array.isArray(l?.source_anchors) && l.source_anchors.length);
   const hasRefAnchors = collectAllRefLabels(layers).length > 0;
   const rows = buildBreakdownRows(layers);
   const withLine = rows.filter((r) => r.line);
@@ -371,7 +418,7 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
   const confAttr = hasRefAnchors
     ? (layers?.theory?.source_status || '')
     : pickWeakestSourceStatus(layerStatuses);
-  const coverageAttr = hasRefAnchors ? 'refs' : 'manifest-only';
+  const coverageAttr = hasPageAnchors ? 'page-anchors' : hasRefAnchors ? 'refs' : 'manifest-only';
 
   const markHtml = '<span class="source-provenance-mark" aria-hidden="true">ⓘ</span>';
   const lineHtml = `<p class="source-provenance-line" id="${escapeAttr(lineId)}">${escapeHtml(summary)}</p>`;

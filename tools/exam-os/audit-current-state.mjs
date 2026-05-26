@@ -77,9 +77,32 @@ function collectSourceRefs(value, refs = new Set()) {
   return refs;
 }
 
+function collectSourceAnchors(value, anchors = new Set()) {
+  if (!value) return anchors;
+  if (Array.isArray(value)) {
+    for (const item of value) collectSourceAnchors(item, anchors);
+    return anchors;
+  }
+  if (typeof value === 'object') {
+    if (Array.isArray(value.source_anchors)) {
+      for (const anchor of value.source_anchors) {
+        const id = anchor?.id || anchor?.sourceId || JSON.stringify(anchor);
+        if (id) anchors.add(id);
+      }
+    }
+    for (const item of Object.values(value)) collectSourceAnchors(item, anchors);
+  }
+  return anchors;
+}
+
 function conceptHasAnySourceRef(layers) {
   if (!layers || typeof layers !== 'object') return false;
   return Object.values(layers).some((layer) => Array.isArray(layer?.source_refs) && layer.source_refs.length > 0);
+}
+
+function conceptHasAnySourceAnchor(layers) {
+  if (!layers || typeof layers !== 'object') return false;
+  return Object.values(layers).some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length > 0);
 }
 
 function collectLayerStatuses(layers, statuses = new Map()) {
@@ -176,10 +199,12 @@ async function summarizeModule(slug, localSourceFiles) {
   );
   const provenance = manifestMod.PROVENANCE_BY_CONCEPT || {};
   const conceptsWithSourceRefs = Object.values(provenance).filter(conceptHasAnySourceRef).length;
+  const conceptsWithSourceAnchors = Object.values(provenance).filter(conceptHasAnySourceAnchor).length;
   const layerStatuses = new Map();
   for (const layers of Object.values(provenance)) collectLayerStatuses(layers, layerStatuses);
 
   const refs = [...collectSourceRefs(provenance)].sort();
+  const anchors = [...collectSourceAnchors(provenance)].sort();
   const uniqueSourceFiles = [...new Set(refs.map((ref) => path.basename(ref).normalize('NFC')))]
     .filter(Boolean)
     .sort();
@@ -199,8 +224,11 @@ async function summarizeModule(slug, localSourceFiles) {
     theoryCharacters,
     provenanceConcepts: Object.keys(provenance).length,
     conceptsWithSourceRefs,
+    conceptsWithSourceAnchors,
+    conceptsWithoutSourceAnchors: Math.max(0, chapters.length - conceptsWithSourceAnchors),
     conceptsWithoutSourceRefs: Math.max(0, chapters.length - conceptsWithSourceRefs),
     sourceRefs: refs.length,
+    sourceAnchors: anchors.length,
     uniqueSourceFiles: uniqueSourceFiles.length,
     presentSourceFiles: presentSourceFiles.length,
     missingSourceFiles: missingSourceFiles.length,
@@ -227,12 +255,12 @@ function toMarkdown(report) {
   lines.push('');
   lines.push('## Module Coverage');
   lines.push('');
-  lines.push('| Module | Concepts | Formulas | Tasks | Step drills | Exams | Mastery | Source refs | Source files local | Missing files | Mikro1 depth |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
+  lines.push('| Module | Concepts | Formulas | Tasks | Step drills | Exams | Mastery | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
   for (const mod of report.modules) {
     const score = report.scorecard[mod.slug];
     lines.push(
-      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.sourceRefs} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
+      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
     );
   }
   lines.push('');

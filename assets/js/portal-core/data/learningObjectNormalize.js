@@ -21,6 +21,7 @@ export const DEFAULT_LAYER_SOURCE_STATUS = Object.freeze({
  * @param {object} opts
  * @param {{ id: string }[]} opts.chapters
  * @param {Record<string, string[]>} opts.primaryPathsByConceptId
+ * @param {Record<string, object[]>} [opts.anchorsByConceptId]
  * @param {string} opts.moduleSlug
  * @param {(conceptId: string) => boolean} [opts.hasGraph]
  * @param {(conceptId: string) => boolean} [opts.hasStepProblems]
@@ -32,6 +33,7 @@ export const DEFAULT_LAYER_SOURCE_STATUS = Object.freeze({
 export function buildProvenanceByConceptFromPrimaryRefs({
   chapters,
   primaryPathsByConceptId,
+  anchorsByConceptId = {},
   moduleSlug,
   hasGraph = () => false,
   hasStepProblems = () => false,
@@ -45,26 +47,31 @@ export function buildProvenanceByConceptFromPrimaryRefs({
     chapters.map(({ id }) => {
       const paths = primaryPathsByConceptId[id] || [];
       const refs = paths.map((p) => createSourceReference(moduleSlug, p));
+      const sourceAnchors = Array.isArray(anchorsByConceptId[id]) ? anchorsByConceptId[id] : [];
 
       const layers = {
         motivation: createProvenance({
           source_status: st.motivation,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.motivation
         }),
         theory: createProvenance({
           source_status: st.theory,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.theory
         }),
         formulas: createProvenance({
           source_status: st.formulas,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.formulas
         }),
         tasks: createProvenance({
           source_status: st.tasks,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.tasks
         })
       };
@@ -73,6 +80,7 @@ export function buildProvenanceByConceptFromPrimaryRefs({
         layers.intuition = createProvenance({
           source_status: st.intuition,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.intuition
         });
       }
@@ -80,6 +88,7 @@ export function buildProvenanceByConceptFromPrimaryRefs({
         layers.graph = createProvenance({
           source_status: st.graph,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.graph
         });
       }
@@ -87,6 +96,7 @@ export function buildProvenanceByConceptFromPrimaryRefs({
         layers.stepProblems = createProvenance({
           source_status: st.stepProblems,
           source_refs: refs,
+          source_anchors: sourceAnchors,
           notes: notesByLayer.stepProblems
         });
       }

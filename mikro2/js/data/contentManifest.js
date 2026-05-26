@@ -10,6 +10,7 @@ import { buildProvenanceByConceptFromPrimaryRefs } from '../../../assets/js/port
 import { CHAPTERS } from './chapters.js';
 import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
+import { MIKRO2_SOURCE_ANCHORS } from './sourceAnchors.js';
 import { GRAPH_CONCEPTS } from '../ui/graphPanel.js';
 
 const MODULE_SLUG = 'mikro2';
@@ -100,6 +101,7 @@ const NOTES_UNMAPPED =
 const BASE_PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
   primaryPathsByConceptId: MIKRO2_CONCEPT_PRIMARY_REFS,
+  anchorsByConceptId: MIKRO2_SOURCE_ANCHORS,
   moduleSlug: MODULE_SLUG,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,

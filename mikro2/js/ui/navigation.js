@@ -6,6 +6,7 @@
 import { CHAPTERS } from '../data/chapters.js';
 import { loadProgress, loadSRS } from '../state/storage.js';
 import { renderMath } from '../utils/mathjax.js';
+import { getConceptSourceSummary } from '../data/contentManifest.js';
 
 /**
  * Build the sidebar navigation list from CHAPTERS.
@@ -32,7 +33,10 @@ export function buildNav(onNavigate) {
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
       el.setAttribute('aria-label', `Konzept ${item.idx}: ${item.title}`);
-      el.innerHTML = `<span class="num" aria-hidden="true">${item.idx}</span><span>${item.title}</span>`;
+      const source = getConceptSourceSummary(item.id);
+      el.dataset.sourceStatus = source.status;
+      el.title = source.title;
+      el.innerHTML = `<span class="num" aria-hidden="true">${item.idx}</span><span class="nav-title">${item.title}</span><span class="nav-source-badge nav-source-badge--${source.status}">${source.label}</span>`;
       el.onclick = () => onNavigate(item.id);
       el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onNavigate(item.id); } };
       sec.appendChild(el);

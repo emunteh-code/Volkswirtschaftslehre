@@ -44,6 +44,8 @@ export function createRenderer({
   showConceptMotivationBanner = true,
   /** Optional: per-concept provenance layers from contentManifest (metadata-driven UI strip). */
   getConceptProvenance = () => null,
+  /** Optional: compact per-concept source badge for overview surfaces. */
+  getConceptSourceSummary = () => null,
   /** Optional: exam-OS formula cards keyed by concept id. */
   formulaCardsByConcept = {},
   /** Optional: source-grounded task-family taxonomy keyed by concept id. */
@@ -55,6 +57,12 @@ export function createRenderer({
 
   function renderDecodedText(value) {
     return escapeHtml(decodeHtmlEntities(String(value ?? "")));
+  }
+
+  function renderHomeSourceBadge(conceptId) {
+    const summary = getConceptSourceSummary(conceptId);
+    if (!summary?.label || !summary?.status) return "";
+    return `<div class="hc-source-badge hc-source-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</div>`;
   }
 
   function renderSemanticPlainText(value, options = {}) {
@@ -1216,6 +1224,7 @@ ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigat
         html += `<div class="home-card" onclick="window.__navigate('${item.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${item.id}')">
 <div class="hc-num">Konzept ${item.idx}</div>
 <div class="hc-title">${item.title}</div>
+${renderHomeSourceBadge(item.id)}
 <div class="hc-cat">${item.cat}</div>
 </div>`;
       });

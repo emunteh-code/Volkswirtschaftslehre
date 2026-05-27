@@ -13,7 +13,7 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
-import { getConceptProvenance } from '../data/contentManifest.js';
+import { getConceptProvenance, getConceptSourceSummary } from '../data/contentManifest.js';
 
 export const {
   renderContent,
@@ -44,6 +44,7 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
   getConceptProvenance,
+  getConceptSourceSummary,
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
   taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
 });

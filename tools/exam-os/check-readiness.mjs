@@ -19,26 +19,82 @@ const pageIndex = fs.existsSync(path.join(repoRoot, 'docs/audits/source-page-ind
 const modules = current.modules.map((module) => {
   const sourceComplete = module.missingSourceFiles === 0 && module.uniqueSourceFiles > 0;
   const registryDocs = registry.byModule[module.slug]?.documents || 0;
+  const registryKinds = registry.byModule[module.slug]?.kinds || {};
   const pageSummary = pageIndex?.byModule?.[module.slug] || null;
   const pageIndexed = Boolean(pageSummary && pageSummary.pages > 0);
-  const anchorComplete = false;
-  const examBankComplete = false;
-  const provenanceComplete = false;
-  const adaptiveReady = false;
+  const concepts = module.concepts || 0;
+  const conceptsWithSourceRefs = module.conceptsWithSourceRefs || 0;
+  const conceptsWithSourceAnchors = module.conceptsWithSourceAnchors || 0;
+  const sourceRefCoveragePct = concepts ? Math.round((conceptsWithSourceRefs / concepts) * 100) : 0;
+  const sourceAnchorCoveragePct = concepts ? Math.round((conceptsWithSourceAnchors / concepts) * 100) : 0;
+  const officialTaskSourceDocs =
+    (registryKinds.exercise || 0) + (registryKinds.solution || 0) + (registryKinds.tutorial || 0) + (registryKinds.exam || 0);
+  const taskFamilies = module.taskFamilies || 0;
+  const officialTaskSourceFamilies = module.officialTaskSourceFamilies || 0;
+  const sourceGroundedTaskFamilies = module.sourceGroundedTaskFamilies || 0;
+  const masteryDimensions = module.masteryDimensions || 0;
+  const officialFormulaCards = module.officialFormulaCards || 0;
+  const anchorComplete = concepts > 0 && conceptsWithSourceAnchors === concepts;
+  const examBankComplete =
+    officialTaskSourceDocs > 0 &&
+    taskFamilies > 0 &&
+    officialTaskSourceFamilies >= taskFamilies;
+  const provenanceComplete =
+    concepts > 0 &&
+    conceptsWithSourceRefs === concepts &&
+    conceptsWithSourceAnchors === concepts;
+  const adaptiveReady =
+    masteryDimensions >= 4 &&
+    taskFamilies > 0 &&
+    officialTaskSourceFamilies >= taskFamilies;
   const mikro1DepthAchieved = false;
+  const anchorStatus = anchorComplete ? 'complete' : conceptsWithSourceAnchors > 0 ? 'partial' : 'missing';
+  const examBankStatus = examBankComplete
+    ? 'complete'
+    : officialTaskSourceDocs > 0
+      ? 'official sources present; bank not mapped'
+      : taskFamilies > 0
+        ? 'task families only; official tasks missing'
+        : 'missing';
+  const provenanceStatus = provenanceComplete
+    ? 'complete'
+    : conceptsWithSourceRefs > 0 || conceptsWithSourceAnchors > 0
+      ? 'partial'
+      : 'missing';
+  const adaptiveStatus = adaptiveReady
+    ? 'ready'
+    : masteryDimensions >= 4
+      ? 'dimension model present; official task evidence missing'
+      : 'missing dimension model';
   return {
     module: module.slug,
     sourceComplete,
     registryDocs,
+    officialTaskSourceDocs,
     pageIndexed,
     sourcePages: pageSummary?.pages || 0,
     weakSourcePages: pageSummary?.weakPages || 0,
     taskSignalPages: pageSummary?.taskSignalPages || 0,
     formulaSignalPages: pageSummary?.formulaSignalPages || 0,
+    concepts,
+    conceptsWithSourceRefs,
+    conceptsWithSourceAnchors,
+    sourceRefCoveragePct,
+    sourceAnchorCoveragePct,
+    sourceAnchors: module.sourceAnchors || 0,
+    taskFamilies,
+    sourceGroundedTaskFamilies,
+    officialTaskSourceFamilies,
+    officialFormulaCards,
+    masteryDimensions,
     anchorComplete,
+    anchorStatus,
     examBankComplete,
+    examBankStatus,
     provenanceComplete,
+    provenanceStatus,
     adaptiveReady,
+    adaptiveStatus,
     mikro1DepthAchieved
   };
 });
@@ -52,10 +108,10 @@ const report = {
     const blockers = [];
     if (!module.sourceComplete) blockers.push('source files missing');
     if (!module.pageIndexed) blockers.push('source pages not indexed');
-    if (!module.anchorComplete) blockers.push('page/slide/task anchors incomplete');
-    if (!module.examBankComplete) blockers.push('official exam bank incomplete');
-    if (!module.provenanceComplete) blockers.push('item-level provenance incomplete');
-    if (!module.adaptiveReady) blockers.push('adaptive mastery not evidence-based');
+    if (!module.anchorComplete) blockers.push(`page/slide/task anchors incomplete (${module.sourceAnchorCoveragePct}% concept coverage)`);
+    if (!module.examBankComplete) blockers.push(`official exam bank incomplete (${module.examBankStatus})`);
+    if (!module.provenanceComplete) blockers.push(`item-level provenance incomplete (${module.provenanceStatus})`);
+    if (!module.adaptiveReady) blockers.push(`adaptive mastery not evidence-based (${module.adaptiveStatus})`);
     if (!module.mikro1DepthAchieved) blockers.push('Mikro1-depth equality not certified');
     return blockers.map((reason) => ({ module: module.module, reason }));
   })
@@ -76,6 +132,26 @@ function toMarkdown(value) {
   for (const module of value.modules) {
     lines.push(
       `| \`${module.module}\` | ${module.sourceComplete ? 'yes' : 'no'} | ${module.pageIndexed ? 'yes' : 'no'} | ${module.anchorComplete ? 'yes' : 'no'} | ${module.examBankComplete ? 'yes' : 'no'} | ${module.provenanceComplete ? 'yes' : 'no'} | ${module.adaptiveReady ? 'yes' : 'no'} | ${module.mikro1DepthAchieved ? 'yes' : 'no'} | ${module.weakSourcePages} | ${module.taskSignalPages} | ${module.formulaSignalPages} |`
+    );
+  }
+  lines.push('');
+  lines.push('## Evidence Snapshot');
+  lines.push('');
+  lines.push('| Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Official task families | Formula cards | Mastery dimensions |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|');
+  for (const module of value.modules) {
+    lines.push(
+      `| \`${module.module}\` | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
+    );
+  }
+  lines.push('');
+  lines.push('## Gate Status Detail');
+  lines.push('');
+  lines.push('| Module | Anchor status | Exam-bank status | Provenance status | Adaptive status |');
+  lines.push('|---|---|---|---|---|');
+  for (const module of value.modules) {
+    lines.push(
+      `| \`${module.module}\` | ${module.anchorStatus} | ${module.examBankStatus} | ${module.provenanceStatus} | ${module.adaptiveStatus} |`
     );
   }
   lines.push('');

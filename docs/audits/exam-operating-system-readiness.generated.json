@@ -6,184 +6,360 @@
       "module": "mikro1",
       "sourceComplete": true,
       "registryDocs": 54,
+      "officialTaskSourceDocs": 18,
       "pageIndexed": true,
       "sourcePages": 381,
       "weakSourcePages": 4,
       "taskSignalPages": 18,
       "formulaSignalPages": 233,
+      "concepts": 33,
+      "conceptsWithSourceRefs": 32,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 97,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "mikro2",
       "sourceComplete": true,
       "registryDocs": 31,
+      "officialTaskSourceDocs": 0,
       "pageIndexed": true,
       "sourcePages": 348,
       "weakSourcePages": 13,
       "taskSignalPages": 11,
       "formulaSignalPages": 190,
+      "concepts": 18,
+      "conceptsWithSourceRefs": 15,
+      "conceptsWithSourceAnchors": 15,
+      "sourceRefCoveragePct": 83,
+      "sourceAnchorCoveragePct": 83,
+      "sourceAnchors": 47,
+      "taskFamilies": 12,
+      "sourceGroundedTaskFamilies": 12,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 8,
+      "masteryDimensions": 4,
       "anchorComplete": false,
+      "anchorStatus": "partial",
       "examBankComplete": false,
+      "examBankStatus": "task families only; official tasks missing",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "dimension model present; official task evidence missing",
       "mikro1DepthAchieved": false
     },
     {
       "module": "makro1",
       "sourceComplete": true,
       "registryDocs": 49,
+      "officialTaskSourceDocs": 29,
       "pageIndexed": true,
       "sourcePages": 701,
       "weakSourcePages": 6,
       "taskSignalPages": 115,
       "formulaSignalPages": 335,
+      "concepts": 14,
+      "conceptsWithSourceRefs": 14,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "makro2",
       "sourceComplete": true,
       "registryDocs": 32,
+      "officialTaskSourceDocs": 22,
       "pageIndexed": true,
       "sourcePages": 408,
       "weakSourcePages": 1,
       "taskSignalPages": 46,
       "formulaSignalPages": 249,
+      "concepts": 30,
+      "conceptsWithSourceRefs": 30,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "oekonometrie",
       "sourceComplete": true,
       "registryDocs": 70,
+      "officialTaskSourceDocs": 33,
       "pageIndexed": true,
       "sourcePages": 1280,
       "weakSourcePages": 180,
       "taskSignalPages": 298,
       "formulaSignalPages": 811,
+      "concepts": 32,
+      "conceptsWithSourceRefs": 32,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "statistik",
       "sourceComplete": true,
       "registryDocs": 237,
+      "officialTaskSourceDocs": 104,
       "pageIndexed": true,
       "sourcePages": 2040,
       "weakSourcePages": 132,
       "taskSignalPages": 619,
       "formulaSignalPages": 1046,
+      "concepts": 14,
+      "conceptsWithSourceRefs": 14,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "finanzwirtschaft",
       "sourceComplete": true,
       "registryDocs": 12,
+      "officialTaskSourceDocs": 0,
       "pageIndexed": true,
       "sourcePages": 223,
       "weakSourcePages": 0,
       "taskSignalPages": 8,
       "formulaSignalPages": 118,
+      "concepts": 19,
+      "conceptsWithSourceRefs": 19,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "missing",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "mathematik",
       "sourceComplete": true,
       "registryDocs": 52,
+      "officialTaskSourceDocs": 40,
       "pageIndexed": true,
       "sourcePages": 1093,
       "weakSourcePages": 0,
       "taskSignalPages": 253,
       "formulaSignalPages": 892,
+      "concepts": 14,
+      "conceptsWithSourceRefs": 14,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "jahresabschluss",
       "sourceComplete": true,
       "registryDocs": 34,
+      "officialTaskSourceDocs": 13,
       "pageIndexed": true,
       "sourcePages": 366,
       "weakSourcePages": 0,
       "taskSignalPages": 36,
       "formulaSignalPages": 129,
+      "concepts": 15,
+      "conceptsWithSourceRefs": 15,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "recht",
       "sourceComplete": true,
       "registryDocs": 30,
+      "officialTaskSourceDocs": 17,
       "pageIndexed": true,
       "sourcePages": 477,
       "weakSourcePages": 2,
       "taskSignalPages": 52,
       "formulaSignalPages": 94,
+      "concepts": 14,
+      "conceptsWithSourceRefs": 14,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",
       "sourceComplete": true,
       "registryDocs": 20,
+      "officialTaskSourceDocs": 0,
       "pageIndexed": true,
       "sourcePages": 562,
       "weakSourcePages": 4,
       "taskSignalPages": 4,
       "formulaSignalPages": 116,
+      "concepts": 16,
+      "conceptsWithSourceRefs": 16,
+      "conceptsWithSourceAnchors": 0,
+      "sourceRefCoveragePct": 100,
+      "sourceAnchorCoveragePct": 0,
+      "sourceAnchors": 0,
+      "taskFamilies": 0,
+      "sourceGroundedTaskFamilies": 0,
+      "officialTaskSourceFamilies": 0,
+      "officialFormulaCards": 0,
+      "masteryDimensions": 0,
       "anchorComplete": false,
+      "anchorStatus": "missing",
       "examBankComplete": false,
+      "examBankStatus": "missing",
       "provenanceComplete": false,
+      "provenanceStatus": "partial",
       "adaptiveReady": false,
+      "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
     }
   ],
   "blockers": [
     {
       "module": "mikro1",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "mikro1",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "mikro1",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "mikro1",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "mikro1",
@@ -191,19 +367,19 @@
     },
     {
       "module": "mikro2",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (83% concept coverage)"
     },
     {
       "module": "mikro2",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (task families only; official tasks missing)"
     },
     {
       "module": "mikro2",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "mikro2",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (dimension model present; official task evidence missing)"
     },
     {
       "module": "mikro2",
@@ -211,19 +387,19 @@
     },
     {
       "module": "makro1",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "makro1",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "makro1",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "makro1",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "makro1",
@@ -231,19 +407,19 @@
     },
     {
       "module": "makro2",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "makro2",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "makro2",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "makro2",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "makro2",
@@ -251,19 +427,19 @@
     },
     {
       "module": "oekonometrie",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "oekonometrie",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "oekonometrie",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "oekonometrie",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "oekonometrie",
@@ -271,19 +447,19 @@
     },
     {
       "module": "statistik",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "statistik",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "statistik",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "statistik",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "statistik",
@@ -291,19 +467,19 @@
     },
     {
       "module": "finanzwirtschaft",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "finanzwirtschaft",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (missing)"
     },
     {
       "module": "finanzwirtschaft",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "finanzwirtschaft",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "finanzwirtschaft",
@@ -311,19 +487,19 @@
     },
     {
       "module": "mathematik",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "mathematik",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "mathematik",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "mathematik",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "mathematik",
@@ -331,19 +507,19 @@
     },
     {
       "module": "jahresabschluss",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "jahresabschluss",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "jahresabschluss",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "jahresabschluss",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "jahresabschluss",
@@ -351,19 +527,19 @@
     },
     {
       "module": "recht",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "recht",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (official sources present; bank not mapped)"
     },
     {
       "module": "recht",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "recht",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "recht",
@@ -371,19 +547,19 @@
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",
-      "reason": "page/slide/task anchors incomplete"
+      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",
-      "reason": "official exam bank incomplete"
+      "reason": "official exam bank incomplete (missing)"
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",
-      "reason": "item-level provenance incomplete"
+      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",
-      "reason": "adaptive mastery not evidence-based"
+      "reason": "adaptive mastery not evidence-based (missing dimension model)"
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",

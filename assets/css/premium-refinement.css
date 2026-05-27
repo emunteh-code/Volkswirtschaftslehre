@@ -2729,6 +2729,97 @@ body.light-mode #content .formula-card {
   border-top: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
 }
 
+#content .mastery-evidence-panel {
+  display: grid;
+  gap: 14px;
+  margin: 0 0 16px;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--text) 14%);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+}
+
+#content .mastery-evidence-score {
+  display: grid;
+  gap: 4px;
+}
+
+#content .mastery-evidence-score span,
+#content .mastery-evidence-grid span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content .mastery-evidence-score strong {
+  color: var(--text);
+  font-size: 28px;
+  line-height: 1;
+}
+
+#content .mastery-evidence-score em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+#content .mastery-dimension-grid,
+#content .mastery-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+#content .mastery-dimension-pill,
+#content .mastery-evidence-grid > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  border-radius: 12px;
+}
+
+#content .mastery-dimension-pill span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#content .mastery-dimension-pill strong,
+#content .mastery-evidence-grid strong {
+  color: var(--text);
+  font-size: 15px;
+}
+
+#content .mastery-evidence-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+#content .mastery-item span {
+  display: grid;
+  gap: 3px;
+}
+
+#content .mastery-item span em {
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content .mastery-item span small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 #content .formula-card .f-eq > .math-block--formula-card,
 #content .formula-card .f-eq > .semantic-schema,
 #content .formula-card .f-eq > .semantic-reference {

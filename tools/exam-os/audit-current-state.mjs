@@ -203,6 +203,13 @@ async function summarizeModule(slug, localSourceFiles) {
     (sum, value) => sum + (Array.isArray(value) ? value.length : 0),
     0
   );
+  const masteryDimensions = new Set();
+  for (const items of Object.values(masteryMod.MASTERY || {})) {
+    if (!Array.isArray(items)) continue;
+    for (const item of items) {
+      if (item && typeof item === 'object' && typeof item.dimension === 'string') masteryDimensions.add(item.dimension);
+    }
+  }
   const provenance = manifestMod.PROVENANCE_BY_CONCEPT || {};
   const conceptsWithSourceRefs = Object.values(provenance).filter(conceptHasAnySourceRef).length;
   const conceptsWithSourceAnchors = Object.values(provenance).filter(conceptHasAnySourceAnchor).length;
@@ -231,6 +238,7 @@ async function summarizeModule(slug, localSourceFiles) {
     stepDrills,
     fullExamCount: fullExams.length,
     masteryItems,
+    masteryDimensions: masteryDimensions.size,
     theoryCharacters,
     provenanceConcepts: Object.keys(provenance).length,
     conceptsWithSourceRefs,
@@ -265,12 +273,12 @@ function toMarkdown(report) {
   lines.push('');
   lines.push('## Module Coverage');
   lines.push('');
-  lines.push('| Module | Concepts | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
+  lines.push('| Module | Concepts | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
   for (const mod of report.modules) {
     const score = report.scorecard[mod.slug];
     lines.push(
-      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.officialFormulaCards} | ${mod.taskFamilies} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
+      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.officialFormulaCards} | ${mod.taskFamilies} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.masteryDimensions} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
     );
   }
   lines.push('');

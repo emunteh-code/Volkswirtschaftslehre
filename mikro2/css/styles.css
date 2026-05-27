@@ -1791,6 +1791,34 @@ canvas {
   font-family: var(--font-heading);
   font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 10px;
 }
+
+.dash-source-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.dash-source-grid > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+}
+.dash-source-grid span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.dash-source-grid strong {
+  color: var(--text);
+  font-size: 17px;
+}
+
 .dash-due-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .dash-due-btn {
   background: var(--surface2);

@@ -5,6 +5,7 @@
 
 import { CHAPTERS } from '../data/chapters.js';
 import { PROVENANCE_BY_CONCEPT } from '../data/contentManifest.js';
+import { TASK_FAMILIES } from '../data/taskFamilies.js';
 
 const MODULE_SLUG = 'mikro2';
 const REGISTRY_URL = '../docs/audits/source-corpus-registry.generated.json';
@@ -167,6 +168,48 @@ ${concepts.map((concept) => `<button type="button" onclick="window.__navigate('$
 </section>`;
 }
 
+function renderOfficialTaskArchivePanel(docs) {
+  const taskDocs = docs.filter((doc) => ['exercise', 'solution', 'tutorial', 'exam'].includes(doc.kind));
+  const officialTaskFamilies = TASK_FAMILIES.filter((family) => family.officialTaskCoverage === 'official-task-source');
+  const missingKinds = [
+    { kind: 'exercise', label: 'Übungsblätter' },
+    { kind: 'solution', label: 'Lösungsschlüssel' },
+    { kind: 'tutorial', label: 'Tutorien' },
+    { kind: 'exam', label: 'Klausuren / Probeklausuren' }
+  ].filter(({ kind }) => !docs.some((doc) => doc.kind === kind));
+  const familiesWithoutOfficialTasks = TASK_FAMILIES.filter((family) => family.officialTaskCoverage !== 'official-task-source');
+
+  return `<section class="source-companion-task-gap" aria-label="Offizieller Aufgabenarchiv-Status">
+<div class="source-coverage-head">
+<div>
+<span>Official Task Bank</span>
+<h3>Aufgabenarchiv noch nicht source-complete</h3>
+</div>
+<p>${taskDocs.length} offizielle Aufgabenquellen · ${officialTaskFamilies.length}/${TASK_FAMILIES.length} Familien mit offizieller Aufgabenquelle</p>
+</div>
+<div class="source-task-gap-grid">
+<div>
+<span>Fehlende Quellenarten</span>
+<strong>${missingKinds.length ? missingKinds.map(({ label }) => escapeHtml(label)).join(', ') : 'keine'}</strong>
+<em>Diese Dokumenttypen sind im aktuellen Mikro-II-Korpus nicht registriert.</em>
+</div>
+<div>
+<span>Prüfungstransfer-Status</span>
+<strong>${familiesWithoutOfficialTasks.length} Familien nur source-grounded</strong>
+<em>Die Familien sind an Vorlesungsquellen ausgerichtet, aber nicht aus offiziellen Aufgaben rekonstruiert.</em>
+</div>
+</div>
+<div class="source-task-family-list">
+${familiesWithoutOfficialTasks.map((family) => `<button type="button" onclick="window.__navigate('${escapeHtml(family.conceptId)}')">
+<span>${escapeHtml(family.examRelevance || 'Relevanz offen')} · ${escapeHtml(family.difficulty || 'Niveau offen')}</span>
+<strong>${escapeHtml(family.title)}</strong>
+<em>${escapeHtml(family.officialTaskGap || 'Offizielle Aufgabenquelle fehlt.')}</em>
+</button>`).join('')}
+</div>
+<p class="source-companion-note">Bis Übungsblätter, Lösungen, Tutorien oder Altklausuren vorliegen, bleibt Mikro2 prüfungsnah, aber nicht als vollständige offizielle Aufgabenbank zertifiziert.</p>
+</section>`;
+}
+
 function renderKindStats(docs) {
   const counts = new Map();
   for (const doc of docs) counts.set(doc.kindLabel, (counts.get(doc.kindLabel) || 0) + 1);
@@ -266,6 +309,7 @@ export function createSourceCompanionModule({ renderMath } = {}) {
 <div class="source-companion-stats">${renderKindStats(state.docs)}</div>
 ${renderCoverageMatrix(state.docs, state.conceptCoverage)}
 ${renderUnanchoredConceptsPanel(state.conceptCoverage)}
+${renderOfficialTaskArchivePanel(state.docs)}
 <div class="source-companion-layout">
 <div class="source-companion-list" role="list">${renderDocumentList(state.docs, state.conceptCoverage)}</div>
 <div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage)}</div>

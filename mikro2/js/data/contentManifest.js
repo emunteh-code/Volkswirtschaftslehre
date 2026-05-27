@@ -96,7 +96,7 @@ export const MIKRO2_CONCEPT_PRIMARY_REFS = Object.fromEntries(
 const NOTES_SOURCED =
   'Mikro II source corpus is present under source-materials/Mikroökonomik II. Current portal content is source-distilled and still pending full lecture-sequence reconstruction; see docs/audits/mikro2-official-source-ingest-pass-1.md.';
 const NOTES_UNMAPPED =
-  'No direct primary anchor found in the newly ingested Mikro II lecture corpus for this current portal concept. Keep as platform-added/explanatory until a source-backed reconstruction decides whether to remove, relabel, or replace it.';
+  'No direct primary anchor found in the available official Mikro II corpus for this current portal concept. Treat this as supplemental platform-added support, not exam-proven Mikro II source content, until an official source is provided.';
 
 const BASE_PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,

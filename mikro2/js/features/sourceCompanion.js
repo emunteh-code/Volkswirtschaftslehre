@@ -28,6 +28,11 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
+function sourceMaterialUrl(doc) {
+  if (!doc?.path) return '';
+  return `../source-materials/Mikroökonomik II/${doc.path}`;
+}
+
 function normalizePath(value) {
   return String(value || '')
     .replace(/^source-materials\/Mikroökonomik II\//, '')
@@ -218,6 +223,10 @@ function renderKindStats(docs) {
     .join('');
 }
 
+function defaultSelectedDocId(docs) {
+  return docs.find((doc) => doc.kind === 'lecture-slide' && String(doc.extension || '').replace(/^\./, '') === 'pdf')?.id || docs[0]?.id || null;
+}
+
 function renderDocumentList(docs, conceptCoverage) {
   return docs.map((doc) => {
     const mapped = mappedConceptsForDoc(doc, conceptCoverage);
@@ -231,7 +240,7 @@ function renderDocumentList(docs, conceptCoverage) {
   }).join('');
 }
 
-function renderDocumentDetail(doc, conceptCoverage) {
+function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null) {
   if (!doc) {
     return `<div class="source-companion-empty">
 <h3>Quelle auswählen</h3>
@@ -239,12 +248,21 @@ function renderDocumentDetail(doc, conceptCoverage) {
 </div>`;
   }
   const mapped = mappedConceptsForDoc(doc, conceptCoverage);
+  const localUrl = sourceMaterialUrl(doc);
   return `<div class="source-companion-detail-card">
 <div class="source-companion-detail-head">
 <span>${escapeHtml(doc.kindLabel)}</span>
 <h3>${escapeHtml(doc.title)}</h3>
 <p>${escapeHtml(doc.path)}</p>
 </div>
+<div class="source-companion-source-actions">
+<button type="button" class="btn secondary" data-open-source-path="${escapeHtml(localUrl)}">Lokale Quelle öffnen</button>
+<div class="source-companion-local-warning">
+<strong>Lokale Datei</strong>
+<span>Dieser Button prüft zuerst, ob <code>source-materials/Mikroökonomik II/</code> in dieser Umgebung verfügbar ist. Die offiziellen PDFs sind git-ignoriert und können auf einem Deployment fehlen.</span>
+</div>
+</div>
+${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
 <div class="source-companion-meta-grid">
 <div><span>Gruppe</span><strong>${escapeHtml(doc.group || 'root')}</strong></div>
 <div><span>Umfang</span><strong>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')}</strong></div>
@@ -261,7 +279,7 @@ ${mapped.map((concept) => `<button type="button" onclick="window.__navigate('${e
 <h4>Noch nicht direkt abgedeckt</h4>
 <p>Dieses Dokument ist im offiziellen Mikro-II-Korpus registriert, aber aktuell verweist kein Portal-Konzept direkt darauf. Es muss in einem späteren Source-Parity-Pass geprüft, gemappt oder als Zusatzmaterial eingeordnet werden.</p>
 </div>`}
-<p class="source-companion-note">PDF-Öffnung ist hier bewusst nicht als Button umgesetzt: Die offiziellen Dateien liegen lokal unter <code>source-materials/Mikroökonomik II/</code> und werden nicht mitdeployt.</p>
+<p class="source-companion-note">Quellenöffnung bleibt bewusst lokal geprüft: Die Quelle wird nur geöffnet, wenn sie in der aktuellen Umgebung erreichbar ist.</p>
 </div>`;
 }
 
@@ -271,7 +289,8 @@ export function createSourceCompanionModule({ renderMath } = {}) {
     conceptCoverage: [],
     selectedId: null,
     loaded: false,
-    error: null
+    error: null,
+    sourceOpenStatus: null
   };
 
   function render() {
@@ -298,8 +317,12 @@ export function createSourceCompanionModule({ renderMath } = {}) {
       return;
     }
 
-    const selected = state.docs.find((doc) => doc.id === state.selectedId) || state.docs[0] || null;
+    const selected = state.docs.find((doc) => doc.id === state.selectedId)
+      || state.docs.find((doc) => doc.id === defaultSelectedDocId(state.docs))
+      || state.docs[0]
+      || null;
     if (selected && !state.selectedId) state.selectedId = selected.id;
+    const openStatus = state.sourceOpenStatus?.docId === selected?.id ? state.sourceOpenStatus : null;
     content.innerHTML = `<div class="source-companion">
 <div class="source-companion-header">
 <span>Official-Material Companion</span>
@@ -312,14 +335,44 @@ ${renderUnanchoredConceptsPanel(state.conceptCoverage)}
 ${renderOfficialTaskArchivePanel(state.docs)}
 <div class="source-companion-layout">
 <div class="source-companion-list" role="list">${renderDocumentList(state.docs, state.conceptCoverage)}</div>
-<div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage)}</div>
+<div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage, openStatus)}</div>
 </div>
 </div>`;
     content.querySelectorAll('[data-source-doc]').forEach((button) => {
       button.classList.toggle('active', button.dataset.sourceDoc === state.selectedId);
       button.addEventListener('click', () => {
         state.selectedId = button.dataset.sourceDoc;
+        state.sourceOpenStatus = null;
         render();
+      });
+    });
+    content.querySelectorAll('[data-open-source-path]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const sourcePath = button.dataset.openSourcePath || '';
+        if (!sourcePath || !selected) return;
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = 'Quelle wird geprüft...';
+        try {
+          const response = await fetch(sourcePath, { method: 'HEAD', cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          window.open(sourcePath, '_blank', 'noopener,noreferrer');
+          state.sourceOpenStatus = {
+            docId: selected.id,
+            type: 'success',
+            message: 'Quelle wurde in einem neuen Tab geöffnet.'
+          };
+        } catch (error) {
+          state.sourceOpenStatus = {
+            docId: selected.id,
+            type: 'missing',
+            message: 'Diese offizielle Datei ist in der aktuellen Umgebung nicht direkt erreichbar. Prüfe lokal den Ordner source-materials/Mikroökonomik II/.'
+          };
+        } finally {
+          button.disabled = false;
+          button.textContent = originalText || 'Lokale Quelle öffnen';
+          render();
+        }
       });
     });
     renderMath?.(content);
@@ -334,9 +387,10 @@ ${renderOfficialTaskArchivePanel(state.docs)}
         state = {
           docs,
           conceptCoverage: buildConceptCoverage(),
-          selectedId: docs[0]?.id || null,
+          selectedId: defaultSelectedDocId(docs),
           loaded: true,
-          error: null
+          error: null,
+          sourceOpenStatus: null
         };
       }
     } catch (error) {

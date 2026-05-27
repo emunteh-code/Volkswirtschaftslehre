@@ -5225,6 +5225,69 @@ body.light-mode #content .source-provenance-mark {
   overflow-wrap: anywhere;
 }
 
+#content .source-companion-source-actions {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface2) 18%, transparent);
+}
+
+#content .source-companion-source-actions .btn {
+  width: fit-content;
+  white-space: nowrap;
+}
+
+#content .source-companion-local-warning {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+#content .source-companion-local-warning strong {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+#content .source-companion-local-warning span,
+#content .source-companion-local-warning code {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+#content .source-companion-local-warning code {
+  padding: 1px 4px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--surface2) 35%, transparent);
+}
+
+#content .source-companion-open-status {
+  margin: -6px 0 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#content .source-companion-open-status--success {
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border) 64%);
+  color: color-mix(in srgb, var(--accent) 62%, var(--text) 38%);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+#content .source-companion-open-status--missing {
+  border-color: color-mix(in srgb, var(--sys-orange, #ff9500) 34%, var(--border) 66%);
+  color: color-mix(in srgb, var(--sys-orange, #ff9500) 70%, var(--text) 30%);
+  background: color-mix(in srgb, var(--sys-orange, #ff9500) 8%, transparent);
+}
+
 #content .source-companion-meta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -5294,6 +5357,10 @@ body.light-mode #content .source-provenance-mark {
 
   #content .source-companion-list {
     max-height: none;
+  }
+
+  #content .source-companion-source-actions {
+    grid-template-columns: 1fr;
   }
 
   #content .practice-source-notice {

@@ -60,9 +60,14 @@ function scoreAttemptEvidence(attempts) {
   return Math.min(1, Math.max(0, avg));
 }
 
-function readinessBand(score, attempts, mistakes) {
+function officialTaskSourceFamilies(taskFamilies) {
+  return taskFamilies.filter((family) => family?.officialTaskCoverage === 'official-task-source');
+}
+
+function readinessBand(score, attempts, mistakes, hasOfficialTaskEvidence) {
   if (!attempts.length) return 'Noch ohne Versuchsdaten';
   if (mistakes.length >= 3) return 'Fehlerloop aktiv';
+  if (!hasOfficialTaskEvidence && score >= 75) return 'prüfungsnah, aber ohne offizielle Aufgabenquelle';
   if (score >= 88) return 'A+-nah, aber offiziell noch nicht zertifiziert';
   if (score >= 75) return 'prüfungsnah';
   if (score >= 60) return 'stabilisierend';
@@ -74,12 +79,13 @@ function buildReadiness(conceptId, items, checks) {
   const mistakes = getConceptMistakes(conceptId);
   const formulaCards = FORMULA_CARDS_BY_CONCEPT[conceptId] || [];
   const taskFamilies = TASK_FAMILIES_BY_CONCEPT[conceptId] || [];
+  const officialTaskFamilies = officialTaskSourceFamilies(taskFamilies);
   const checked = items.filter((_, index) => checks[index]).length;
   const selfScore = items.length ? checked / items.length : 0;
   const attemptScore = scoreAttemptEvidence(attempts);
   const evidenceCompleteness = [
     formulaCards.length > 0,
-    taskFamilies.length > 0,
+    officialTaskFamilies.length > 0,
     attempts.length > 0,
     mistakes.length === 0
   ].filter(Boolean).length / 4;
@@ -91,9 +97,10 @@ function buildReadiness(conceptId, items, checks) {
     mistakes,
     formulaCards,
     taskFamilies,
+    officialTaskFamilies,
     checked,
     total: items.length,
-    band: readinessBand(score, attempts, mistakes)
+    band: readinessBand(score, attempts, mistakes, officialTaskFamilies.length > 0)
   };
 }
 
@@ -121,10 +128,11 @@ function renderMasteryEvidence(conceptId, items, checks) {
 <div class="mastery-evidence-grid">
 <div><span>Formelkarten</span><strong>${readiness.formulaCards.length}</strong></div>
 <div><span>Klausurfamilien</span><strong>${readiness.taskFamilies.length}</strong></div>
+<div><span>Offizielle Aufgaben</span><strong>${readiness.officialTaskFamilies.length}</strong></div>
 <div><span>Lokale Versuche</span><strong>${readiness.attempts.length}</strong></div>
 <div><span>Offene Fehlerdaten</span><strong>${readiness.mistakes.length}</strong></div>
 </div>
-<p class="mastery-evidence-note">Dieser Score kombiniert Selbstchecks, lokale Versuchsdaten und vorhandene Formel-/Klausurfamilien. Er bleibt vorläufig, bis offizielle Aufgaben- und Lösungsschlüssel vollständig ingested sind.</p>
+<p class="mastery-evidence-note">Dieser Score kombiniert Selbstchecks, lokale Versuchsdaten, Formelkarten und offizielle Aufgabenquellen. Source-grounded Klausurfamilien strukturieren das Training, ersetzen aber keine ingested Übungsblätter, Lösungsschlüssel oder Altklausuren.</p>
 </div>`;
 }
 

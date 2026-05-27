@@ -4682,6 +4682,102 @@ body.light-mode #content .source-provenance-mark {
   gap: 12px;
 }
 
+#content .source-coverage-matrix {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--text) 8%);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--card) 99%, var(--surface2) 1%);
+}
+
+#content .source-coverage-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+#content .source-coverage-head div {
+  display: grid;
+  gap: 5px;
+}
+
+#content .source-coverage-head span,
+#content .source-coverage-status {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#content .source-coverage-head h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+#content .source-coverage-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+#content .source-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 10px;
+}
+
+#content .source-coverage-row {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 12px 13px;
+  text-align: left;
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+}
+
+#content .source-coverage-row:hover,
+#content .source-coverage-row.active {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--border) 66%);
+  background: color-mix(in srgb, var(--surface2) 24%, transparent);
+}
+
+#content .source-coverage-row--covered {
+  border-left: 3px solid color-mix(in srgb, var(--accent) 58%, var(--border) 42%);
+}
+
+#content .source-coverage-row--partial {
+  border-left: 3px solid color-mix(in srgb, var(--accent2) 55%, var(--border) 45%);
+}
+
+#content .source-coverage-row--uncovered {
+  border-style: dashed;
+  border-left: 3px solid color-mix(in srgb, var(--muted) 55%, var(--border) 45%);
+}
+
+#content .source-coverage-row strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+#content .source-coverage-row span:last-child {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 #content .source-companion-stat,
 #content .source-companion-meta-grid > div {
   display: grid;
@@ -4856,6 +4952,14 @@ body.light-mode #content .source-provenance-mark {
 }
 
 @media (max-width: 900px) {
+  #content .source-coverage-head {
+    display: grid;
+  }
+
+  #content .source-coverage-head p {
+    text-align: left;
+  }
+
   #content .source-companion-layout {
     grid-template-columns: 1fr;
   }

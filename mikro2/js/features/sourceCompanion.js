@@ -84,6 +84,61 @@ function mappedConceptsForDoc(doc, conceptCoverage) {
   return conceptCoverage.filter((concept) => concept.paths.some((p) => p === doc.path || p.endsWith(doc.path) || doc.path.endsWith(p)));
 }
 
+function lectureSortKey(doc) {
+  const title = String(doc?.title || '');
+  const match = title.match(/Mikro_2_(\d+)/i) || title.match(/Mikro2_(\d+)/i);
+  if (match) return Number.parseInt(match[1], 10);
+  if (/Vorlesungsplanung/i.test(title)) return 0;
+  return 999;
+}
+
+function buildCoverageRows(docs, conceptCoverage) {
+  return docs
+    .filter((doc) => doc.kind === 'lecture-slide')
+    .slice()
+    .sort((a, b) => lectureSortKey(a) - lectureSortKey(b) || String(a.title).localeCompare(String(b.title), 'de', { numeric: true }))
+    .map((doc) => {
+      const mapped = mappedConceptsForDoc(doc, conceptCoverage);
+      const hasMapped = mapped.length > 0;
+      const status = !hasMapped
+        ? 'uncovered'
+        : mapped.some((concept) => concept.hasPageAnchors)
+          ? 'covered'
+          : 'partial';
+      return { doc, mapped, status };
+    });
+}
+
+function statusLabel(status) {
+  if (status === 'covered') return 'mit Seitenankern';
+  if (status === 'partial') return 'nur Quellenreferenz';
+  return 'noch unmapped';
+}
+
+function renderCoverageMatrix(docs, conceptCoverage) {
+  const rows = buildCoverageRows(docs, conceptCoverage);
+  const covered = rows.filter((row) => row.status === 'covered').length;
+  const partial = rows.filter((row) => row.status === 'partial').length;
+  const uncovered = rows.filter((row) => row.status === 'uncovered').length;
+  return `<section class="source-coverage-matrix" aria-label="Vorlesungsabdeckung">
+<div class="source-coverage-head">
+<div>
+<span>Lecture Coverage</span>
+<h3>Vorlesungsfolge gegen Portalabdeckung</h3>
+</div>
+<p>${covered} mit Seitenankern · ${partial} nur mit Quellenreferenz · ${uncovered} noch unmapped</p>
+</div>
+<div class="source-coverage-grid">
+${rows.map(({ doc, mapped, status }) => `<button type="button" class="source-coverage-row source-coverage-row--${status}" data-source-doc="${escapeHtml(doc.id)}">
+<span class="source-coverage-status">${escapeHtml(statusLabel(status))}</span>
+<strong>${escapeHtml(doc.title)}</strong>
+<span>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')} · ${mapped.length ? `${mapped.length} Konzept${mapped.length === 1 ? '' : 'e'}` : 'keine direkte Portalzuordnung'}</span>
+</button>`).join('')}
+</div>
+<p class="source-companion-note">Diese Matrix ist ein Mapping-Status, kein Vollständigkeitszertifikat. Eine Vorlesung kann Seitenanker haben und trotzdem noch nicht vollständig rekonstruiert sein.</p>
+</section>`;
+}
+
 function renderKindStats(docs) {
   const counts = new Map();
   for (const doc of docs) counts.set(doc.kindLabel, (counts.get(doc.kindLabel) || 0) + 1);
@@ -181,6 +236,7 @@ export function createSourceCompanionModule({ renderMath } = {}) {
 <p>Starte bei den offiziellen Dokumenten und prüfe, welche Portal-Konzepte bereits direkt darauf verweisen. Fehlende Abdeckung bleibt sichtbar.</p>
 </div>
 <div class="source-companion-stats">${renderKindStats(state.docs)}</div>
+${renderCoverageMatrix(state.docs, state.conceptCoverage)}
 <div class="source-companion-layout">
 <div class="source-companion-list" role="list">${renderDocumentList(state.docs, state.conceptCoverage)}</div>
 <div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage)}</div>

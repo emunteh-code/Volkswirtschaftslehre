@@ -5,6 +5,14 @@ const panel = (title, ariaLabel) => `
   <div id="graph_info" class="graph-info" aria-live="polite"></div>
 </div>`;
 
+const supplementalSourceNotice = `
+<div class="section-block source-boundary-notice">
+  <h3>Quellenstatus</h3>
+  <p>Diese Grafik ist ergänzende Plattform-Unterstützung ohne direkten Primäranker im verfügbaren offiziellen Mikro-II-Korpus. Sie ist nicht als offiziell prüfungsbewiesener Mikro-II-Stoff zertifiziert.</p>
+</div>`;
+
+const supplementalPanel = (title, ariaLabel) => `${supplementalSourceNotice}${panel(title, ariaLabel)}`;
+
 export const GRAPH_CONCEPTS = new Set([
   'spieltheorie_statisch',
   'spieltheorie_dynamisch',
@@ -42,11 +50,11 @@ export function renderGraphPanel(id) {
       'Walrasianische Markt-Räumung',
       'Grafik: Überschussnachfrage als Funktion des Preises mit Marktgleichgewicht.'
     ),
-    externa_pigou: panel(
+    externa_pigou: supplementalPanel(
       'Private und soziale Grenzkosten',
       'Grafik: Grenznutzen, private Grenzkosten und soziale Grenzkosten mit Wohlfahrtslücke.'
     ),
-    externa_institutionen: panel(
+    externa_institutionen: supplementalPanel(
       'Abatementkosten und Emissionspreis',
       'Grafik: Grenzvermeidungskosten und Emissionspreis bei institutioneller Internalisierung.'
     )

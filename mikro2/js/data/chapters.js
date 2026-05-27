@@ -24,6 +24,13 @@ export const CHAPTERS = [
   { id: 'information_moralhazard', title: 'Asymmetrische Information: Moral Hazard, Signaling & Screening', cat: 'Marktversagen', short: 'Info II' },
 ];
 
+const MARKET_FAILURE_SOURCE_BOUNDARY = String.raw`
+    <div class="section-block source-boundary-notice">
+      <h3>Quellenstatus</h3>
+      <p>Dieses Kapitel ist ergänzende Plattform-Unterstützung. Im verfügbaren offiziellen Mikro-II-Korpus wurde dafür bisher kein direkter Primäranker gefunden. Nutze es zur Einordnung, aber behandle es nicht als offiziell prüfungsbewiesenen Mikro-II-Stoff, bis ein offizieller Quellenanker vorliegt.</p>
+    </div>
+    `;
+
 export const CONTENT = {
   monopol_preissetzung: {
     motivation: 'Die ersten Mikro-II-Vorlesungen knüpfen an die Wettbewerbslogik an und fragen, wie ein Monopolist Preise setzt, warum Elastizitäten die Marktmacht begrenzen und wo Wohlfahrtsverluste entstehen.',
@@ -646,7 +653,7 @@ export const CONTENT = {
   },
   externa_pigou: {
     motivation: 'Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.',
-    theorie: String.raw`
+    theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
     <div class="section-block">
       <h3>Negative Externe Effekte</h3>
       <p>Die Produktion verursacht Kosten bei unbeteiligten Dritten (z.B. Verschmutzung). Die Grenzkosten des Unternehmens ($MPC$) sind niedriger als die gesellschaftlichen Grenzkosten ($MSC$).</p>
@@ -721,7 +728,7 @@ export const CONTENT = {
   },
   externa_institutionen: {
     motivation: 'Neben Steuer-Internalisierung braucht die Klausur trennscharfe Beherrschung institutioneller Ansätze: Coase-Verhandlung und Cap-and-Trade.',
-    theorie: String.raw`
+    theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
     <div class="section-block">
       <h3>Coase-Theorem</h3>
       <p>Bei klaren Eigentumsrechten und sehr niedrigen Transaktionskosten führen private Verhandlungen zu einer effizienten Allokation, unabhängig von der initialen Rechtszuweisung.</p>
@@ -752,7 +759,7 @@ export const CONTENT = {
   },
   public_goods: {
     motivation: 'Öffentliche Güter sind durch Nicht-Rivalität und Nicht-Ausschließbarkeit gekennzeichnet. Dies führt zum Trittbrettfahrer-Problem.',
-    theorie: String.raw`
+    theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
     <div class="section-block">
       <h3>Samuelson-Bedingung</h3>
       <p>Die effiziente Menge eines öffentlichen Gutes ist erreicht, wenn die Summe der individuellen Zahlungsbereitschaften (Grenzraten der Substitution) den Grenzkosten der Bereitstellung entspricht.</p>

@@ -784,6 +784,16 @@ body {
 .warn-box:hover { background: rgba(255,69,58,0.11); }
 .warn-box strong { color: var(--sys-red); display: block; margin-bottom: 4px; font-weight: 600; }
 
+.source-boundary-notice {
+  border-color: rgba(255, 149, 0, 0.28);
+  border-left: 3px solid var(--sys-orange);
+  background: rgba(255, 149, 0, 0.08);
+}
+
+.source-boundary-notice h3::before {
+  background: var(--sys-orange);
+}
+
 /* ── Info grid ─────────────────────────────────────────────── */
 .info-grid {
   display: grid;

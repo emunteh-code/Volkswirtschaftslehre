@@ -740,9 +740,10 @@ ${answerMarkup}
     const intuition = intuitionById[conceptId];
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     const taskFamiliesHtml = renderTaskFamilyPanel(conceptId);
+    const practiceSourceNotice = renderPracticeSourceNotice(conceptId);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${taskFamiliesHtml}${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${practiceSourceNotice}${taskFamiliesHtml}${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
       return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
@@ -757,6 +758,7 @@ ${answerMarkup}
 <p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
 </div>
 </div>
+${practiceSourceNotice}
 ${taskFamiliesHtml}
 <div class="practice-section-header">Geführte Aufgaben</div>
 ${renderGuidedTasks(tasks)}`;
@@ -765,6 +767,35 @@ ${renderGuidedTasks(tasks)}`;
     }
     html += "</div>";
     return html;
+  }
+
+  function renderPracticeSourceNotice(conceptId) {
+    const taskLayer = getConceptProvenance(conceptId)?.tasks;
+    if (!taskLayer) return "";
+    const refs = Array.isArray(taskLayer.source_refs) ? taskLayer.source_refs.length : 0;
+    const anchors = Array.isArray(taskLayer.source_anchors) ? taskLayer.source_anchors.length : 0;
+    const status = taskLayer.source_status || "unknown";
+    const label = status === "platform-added-drill"
+      ? "Platform-added drill"
+      : status === "direct-source"
+        ? "Direct source"
+        : status === "source-distilled"
+          ? "Source-distilled"
+          : status;
+    const evidence = anchors
+      ? `${anchors} Seitenanker`
+      : refs
+        ? `${refs} Quellenreferenz${refs === 1 ? "" : "en"}`
+        : "kein direkter Quellenanker";
+    const note = taskLayer.notes || "Diese Aufgaben sind nach Provenienzmetadaten klassifiziert.";
+    return `<aside class="practice-source-notice practice-source-notice--${escapeHtml(status)}" role="note">
+<div>
+<span>Aufgabenstatus</span>
+<strong>${escapeHtml(label)}</strong>
+</div>
+<p>${renderSemanticPlainText(note)}</p>
+<em>${escapeHtml(evidence)}</em>
+</aside>`;
   }
 
   function renderTaskFamilyPanel(conceptId) {

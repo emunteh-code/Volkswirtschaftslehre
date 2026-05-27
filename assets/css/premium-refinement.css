@@ -2681,6 +2681,63 @@ body.light-mode #content .formula-card {
   box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 18%, transparent);
 }
 
+#content .practice-source-notice {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(0, 2fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin: 14px 0 16px;
+  padding: 13px 15px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--accent2) 45%, var(--border) 55%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card) 97%, var(--surface2) 3%);
+}
+
+#content .practice-source-notice--platform-added-drill {
+  border-left-color: var(--sys-orange, #ff9500);
+  background: color-mix(in srgb, var(--card) 96%, var(--sys-orange, #ff9500) 4%);
+}
+
+#content .practice-source-notice > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+#content .practice-source-notice span,
+#content .practice-source-notice em {
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+#content .practice-source-notice strong {
+  min-width: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+#content .practice-source-notice p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#content .practice-source-notice em {
+  justify-self: end;
+  text-align: right;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
+  white-space: nowrap;
+}
+
 #content .task-family-card h4 {
   margin: 0;
   color: var(--text);
@@ -5123,5 +5180,15 @@ body.light-mode #content .source-provenance-mark {
 
   #content .source-companion-list {
     max-height: none;
+  }
+
+  #content .practice-source-notice {
+    grid-template-columns: 1fr;
+  }
+
+  #content .practice-source-notice em {
+    justify-self: start;
+    text-align: left;
+    white-space: normal;
   }
 }

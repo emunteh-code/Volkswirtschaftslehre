@@ -778,6 +778,21 @@ ${families.map(renderTaskFamilyCard).join("")}
 </div>`;
   }
 
+  function taskFamilySourceLabel(status) {
+    if (status === "direct-source") return "Vorlesungsquelle";
+    if (status === "source-distilled") return "Source-distilled";
+    if (status === "platform-added-drill") return "Platform drill";
+    if (status === "platform-added-explanation") return "Platform support";
+    return status || "unclassified";
+  }
+
+  function taskFamilyOfficialTaskLabel(status) {
+    if (status === "official-task-source") return "Offizielle Aufgabe";
+    if (status === "missing-official-task-source") return "Keine offizielle Aufgabenquelle";
+    if (!status) return "";
+    return status;
+  }
+
   function renderTaskFamilyCard(family) {
     const meta = [
       family.difficulty ? `Niveau: ${family.difficulty}` : "",
@@ -790,8 +805,12 @@ ${families.map(renderTaskFamilyCard).join("")}
     const list = (title, items) => Array.isArray(items) && items.length
       ? `<div class="task-family-list"><span>${title}</span><ul>${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul></div>`
       : "";
+    const officialTaskLabel = taskFamilyOfficialTaskLabel(family.officialTaskCoverage);
     return `<article class="task-family-card">
-<div class="task-family-card__status">${renderDecodedText(family.sourceStatus || "unclassified")}</div>
+<div class="task-family-card__badges">
+<span class="task-family-card__status task-family-card__status--${renderDecodedText(family.sourceStatus || "unclassified")}">${renderDecodedText(taskFamilySourceLabel(family.sourceStatus))}</span>
+${officialTaskLabel ? `<span class="task-family-card__status task-family-card__status--${renderDecodedText(family.officialTaskCoverage)}">${renderDecodedText(officialTaskLabel)}</span>` : ""}
+</div>
 <h4>${renderSemanticPlainText(family.title || family.id)}</h4>
 ${meta ? `<p class="task-family-card__meta">${renderSemanticPlainText(meta)}</p>` : ""}
 ${family.method ? `<p>${renderSemanticPlainText(family.method)}</p>` : ""}

@@ -45,7 +45,9 @@ export function createRenderer({
   /** Optional: per-concept provenance layers from contentManifest (metadata-driven UI strip). */
   getConceptProvenance = () => null,
   /** Optional: exam-OS formula cards keyed by concept id. */
-  formulaCardsByConcept = {}
+  formulaCardsByConcept = {},
+  /** Optional: source-grounded task-family taxonomy keyed by concept id. */
+  taskFamiliesByConcept = {}
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -729,9 +731,10 @@ ${answerMarkup}
     const chapter = chapters.find((item) => item.id === conceptId);
     const intuition = intuitionById[conceptId];
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
+    const taskFamiliesHtml = renderTaskFamilyPanel(conceptId);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${taskFamiliesHtml}${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
       return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
@@ -746,6 +749,7 @@ ${answerMarkup}
 <p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
 </div>
 </div>
+${taskFamiliesHtml}
 <div class="practice-section-header">Geführte Aufgaben</div>
 ${renderGuidedTasks(tasks)}`;
     if (chapter) {
@@ -753,6 +757,41 @@ ${renderGuidedTasks(tasks)}`;
     }
     html += "</div>";
     return html;
+  }
+
+  function renderTaskFamilyPanel(conceptId) {
+    const families = Array.isArray(taskFamiliesByConcept[conceptId]) ? taskFamiliesByConcept[conceptId] : [];
+    if (!families.length) return "";
+    return `<div class="section-block task-family-layer">
+<h3>Klausurfamilien</h3>
+<div class="task-family-grid">
+${families.map(renderTaskFamilyCard).join("")}
+</div>
+</div>`;
+  }
+
+  function renderTaskFamilyCard(family) {
+    const meta = [
+      family.difficulty ? `Niveau: ${family.difficulty}` : "",
+      Number.isFinite(family.expectedTimeMinutes) ? `${family.expectedTimeMinutes} Min.` : "",
+      family.examRelevance ? `Relevanz: ${family.examRelevance}` : ""
+    ].filter(Boolean).join(" · ");
+    const coverage = family.currentCoverage && typeof family.currentCoverage === "object"
+      ? Object.values(family.currentCoverage).filter(Boolean).join(" · ")
+      : "";
+    const list = (title, items) => Array.isArray(items) && items.length
+      ? `<div class="task-family-list"><span>${title}</span><ul>${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul></div>`
+      : "";
+    return `<article class="task-family-card">
+<div class="task-family-card__status">${renderDecodedText(family.sourceStatus || "unclassified")}</div>
+<h4>${renderSemanticPlainText(family.title || family.id)}</h4>
+${meta ? `<p class="task-family-card__meta">${renderSemanticPlainText(meta)}</p>` : ""}
+${family.method ? `<p>${renderSemanticPlainText(family.method)}</p>` : ""}
+${list("Typische Fallen", family.commonTraps)}
+${list("Punkte gibt es für", family.gradingRubric)}
+${coverage ? `<p class="task-family-card__meta"><strong>Portalabdeckung:</strong> ${renderSemanticPlainText(coverage)}</p>` : ""}
+${family.officialTaskGap ? `<p class="task-family-card__warning">${renderSemanticPlainText(family.officialTaskGap)}</p>` : ""}
+</article>`;
   }
 
   function toggleReveal(solutionId, buttonId) {

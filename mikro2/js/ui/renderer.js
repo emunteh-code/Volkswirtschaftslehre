@@ -5,6 +5,7 @@ import { STEP_PROBLEMS } from '../data/stepProblems.js';
 import { INTUITION } from '../data/intuition.js';
 import { CONCEPT_LINKS } from '../data/conceptLinks.js';
 import { FORMULA_CARDS_BY_CONCEPT } from '../data/formulaCards.js';
+import { TASK_FAMILIES_BY_CONCEPT } from '../data/taskFamilies.js';
 import { renderGraphPanel, GRAPH_CONCEPTS } from './graphPanel.js';
 import { renderMastery } from '../features/mastery.js';
 import { renderMath } from '../utils/mathjax.js';
@@ -43,5 +44,6 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
   getConceptProvenance,
-  formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT
+  formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
+  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
 });

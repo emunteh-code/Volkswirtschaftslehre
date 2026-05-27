@@ -9,6 +9,12 @@ export const FULL_EXAMS = {
     title: 'Mikro II - Master-Level Simulation v14.0 (60 Min)',
     subtitle: 'Strategische Interaktion, Zeit und Unsicherheit',
     duration: 60,
+    sourceStatus: 'platform-added-drill',
+    officialTaskCoverage: 'missing-official-task-source',
+    sourceLabel: 'Portal-Simulation',
+    officialTaskLabel: 'Keine offizielle Klausurquelle',
+    sourceNote: 'Diese Probeklausur ist eine portal-authored Simulation aus source-backed Themenfamilien. Sie ist nicht aus einer offiziellen Mikro-II-Probeklausur, Altklausur oder einem Lösungsschlüssel rekonstruiert.',
+    sourceEvidence: '0 offizielle Klausur-/Übungsquellen im aktuellen Mikro-II-Korpus',
     aufgaben: [
       {
         label: 'Block A',

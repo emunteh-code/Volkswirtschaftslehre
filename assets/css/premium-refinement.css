@@ -2738,6 +2738,66 @@ body.light-mode #content .formula-card {
   white-space: nowrap;
 }
 
+#content .full-exam-source-notice {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 13px 15px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--accent2) 45%, var(--border) 55%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card) 97%, var(--surface2) 3%);
+}
+
+#content .home-action-card .full-exam-source-notice {
+  margin: 10px 0 0;
+  padding: 11px 12px;
+}
+
+#content .full-exam-source-notice--platform-added-drill {
+  border-left-color: var(--sys-orange, #ff9500);
+  background: color-mix(in srgb, var(--card) 96%, var(--sys-orange, #ff9500) 4%);
+}
+
+#content .full-exam-source-notice__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+#content .full-exam-source-notice__badges span,
+#content .full-exam-source-notice em {
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 7px;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  border-radius: 999px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface2) 18%, transparent);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+#content .full-exam-source-notice__badges .full-exam-source-notice__warn,
+#content .full-exam-source-notice em {
+  color: var(--sys-orange, #ff9500);
+  border-color: color-mix(in srgb, var(--sys-orange, #ff9500) 30%, var(--border) 70%);
+  background: color-mix(in srgb, var(--sys-orange, #ff9500) 10%, transparent);
+}
+
+#content .full-exam-source-notice p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 #content .task-family-card h4 {
   margin: 0;
   color: var(--text);

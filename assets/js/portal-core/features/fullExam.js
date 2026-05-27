@@ -142,6 +142,22 @@ export function createFullExamModule({
       .replace(/'/g, "&#39;");
   }
 
+  function renderExamSourceNotice(exam) {
+    if (!exam?.sourceStatus && !exam?.officialTaskCoverage && !exam?.sourceNote) return "";
+    const sourceLabel = exam.sourceLabel || exam.sourceStatus || "Quellenstatus";
+    const officialLabel = exam.officialTaskLabel || exam.officialTaskCoverage || "";
+    const note = exam.sourceNote || "Diese Simulation ist nach Modulmetadaten klassifiziert.";
+    const evidence = exam.sourceEvidence || "";
+    return `<aside class="full-exam-source-notice full-exam-source-notice--${escapeHtml(exam.sourceStatus || "unknown")}" role="note">
+<div class="full-exam-source-notice__badges">
+<span>${escapeHtml(sourceLabel)}</span>
+${officialLabel ? `<span class="full-exam-source-notice__warn">${escapeHtml(officialLabel)}</span>` : ""}
+</div>
+<p>${escapeHtml(note)}</p>
+${evidence ? `<em>${escapeHtml(evidence)}</em>` : ""}
+</aside>`;
+  }
+
   function showFeedback(qid, ok, q, userAnswer, revealOnly = false) {
     const feedback = document.getElementById(`fefb_${qid}`);
     if (!feedback) return;
@@ -219,6 +235,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
   </div>
 </div>
 <div class="fe-context-block"><strong>Arbeitsweise:</strong> Antworte zuerst knapp und fachlich sauber. Nutze „Antwort prüfen“ oder „Musterlösung öffnen“ pro Teilfrage; nach „Klausur abgeben und auswerten“ erhältst du die Gesamtsicht über den ganzen Klausurblock.</div>
+${renderExamSourceNotice(exam)}
 <div class="fe-progress-strip" role="navigation" aria-label="Fragenuebersicht">
   <div class="fe-progress-dots" id="feDots">
     ${questions.map((q) => `<div class="fe-dot" id="fed_${q.id}" title="${q.id}" onclick="document.getElementById('feq_${q.id}').scrollIntoView({behavior:'smooth',block:'center'})"></div>`).join("")}
@@ -546,6 +563,7 @@ ${ok ? ' <span style="font-size:16px">✓</span>' : ' <span style="font-size:16p
 <div class="hac-title">${exam.title}</div>
 ${exam.subtitle ? `<div class="hac-desc">${exam.subtitle}</div>` : ""}
 <div class="hac-desc">${exam.duration} Min. · ${totalQuestions} Teilfragen · ${totalPoints} Punkte</div>
+${renderExamSourceNotice(exam)}
 </div>`;
     });
     html += "</div>";

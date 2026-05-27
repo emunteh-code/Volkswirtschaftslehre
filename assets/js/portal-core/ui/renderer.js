@@ -40,6 +40,8 @@ export function createRenderer({
   extraHomeActionCardsHtml = '',
   /** Optional one-line note under the Lern-Dashboard home card (pilot modules only) */
   homeLernDashboardPilotNote = '',
+  /** Optional home description for the Probeklausuren card. */
+  fullExamHomeDescription = 'Vollständige Klausursets mit Lösungen',
   /** When false, omit the `entry.motivation` strip under the concept H1 (module opt-out). */
   showConceptMotivationBanner = true,
   /** Optional: per-concept provenance layers from contentManifest (metadata-driven UI strip). */
@@ -1234,7 +1236,7 @@ ${extraHomeActionCardsHtml}
 ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "function" ? `
 <div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showFullExamSelect()">
 <div class="hac-title">Probeklausuren</div>
-<div class="hac-desc">Vollständige Klausursets mit Lösungen</div>
+<div class="hac-desc">${renderDecodedText(fullExamHomeDescription)}</div>
 </div>
 ` : ""}
 </div>`;

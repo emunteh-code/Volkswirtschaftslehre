@@ -29,6 +29,7 @@ export const {
   courseLabel: COURSE_CONFIG.courseLabel,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
+  fullExamHomeDescription: COURSE_CONFIG.fullExamHomeDescription,
   chapters: CHAPTERS,
   contentById: CONTENT,
   intuitionById: INTUITION,

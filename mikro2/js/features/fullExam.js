@@ -20,6 +20,7 @@ export const {
   fullExams: FULL_EXAMS,
   renderMath,
   showToast,
+  examSelectIntro: COURSE_CONFIG.fullExamSelectIntro,
   moduleSlug: COURSE_CONFIG.slug,
   appendMistakeLogEntry,
   onExamSubmitted(summary) {

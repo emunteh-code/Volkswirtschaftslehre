@@ -31,6 +31,7 @@ export function createFullExamModule({
   fullExams,
   renderMath,
   showToast,
+  examSelectIntro = null,
   /** When set, generates session_id and timed metadata for the exam backbone */
   moduleSlug = null,
   /** Called once after final submission (button or timer). Receives {@link buildExamSubmittedSummary} output. */
@@ -549,8 +550,9 @@ ${renderExamSourceNotice(exam)}
     }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausuren`;
+    const intro = examSelectIntro || "Wähle eine vollständige Probeklausur. Jede Simulation bündelt mehrere Konzepte in einem zusammenhängenden Klausurblock. Dauer, Teilfragen und Punkte helfen dir bei der Planung; die Musterlösungen dienen danach zur gezielten Nacharbeit.";
     let html = `<div style="max-width:680px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>
-<div class="fe-context-block"><strong>Wähle eine vollständige Probeklausur.</strong> Jede Simulation bündelt mehrere Konzepte in einem zusammenhängenden Klausurblock. Dauer, Teilfragen und Punkte helfen dir bei der Planung; die Musterlösungen dienen danach zur gezielten Nacharbeit.</div>`;
+<div class="fe-context-block">${escapeHtml(intro)}</div>`;
     Object.entries(fullExams).forEach(([examKey, examRaw]) => {
       const exam = normalizeExamToAufgabenShape(examRaw, examKey);
       if (!exam) return;

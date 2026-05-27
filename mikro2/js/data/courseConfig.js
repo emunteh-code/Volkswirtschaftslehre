@@ -8,6 +8,8 @@ export const COURSE_CONFIG = {
   courseLabel: 'Mikro II',
   courseTitle: 'Mikroökonomik II',
   examCollectionTitle: 'Probeklausuren Mikroökonomik II',
+  fullExamHomeDescription: 'Zeitmodus mit Portal-Simulationen und sichtbarem Quellenstatus',
+  fullExamSelectIntro: 'Wähle eine zeitgebundene Portal-Simulation. Diese Sets bündeln source-backed Themenfamilien, sind aber nicht aus offiziellen Mikro-II-Probeklausuren, Altklausuren oder Lösungsschlüsseln rekonstruiert.',
   homeIntro: 'Aufbauende Mikroökonomik: Oligopol, Spieltheorie, intertemporale Entscheidungen, Unsicherheit, Allgemeines Gleichgewicht und asymmetrische Information. Quellenstatus: Der offizielle Mikro-II-Korpus liegt im Repo; die aktuelle Oberfläche ist bereits teilweise quellengestützt, aber noch nicht vollständig entlang aller 20 Vorlesungen rekonstruiert.',
   consentKey: 'mikro2_consent_v1',
   progressKey: 'mikro2_progress_v1',

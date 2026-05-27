@@ -109,6 +109,12 @@ function buildCoverageRows(docs, conceptCoverage) {
     });
 }
 
+function unanchoredPortalConcepts(conceptCoverage) {
+  return conceptCoverage
+    .filter((concept) => !concept.hasPageAnchors && concept.paths.length === 0)
+    .sort((a, b) => String(a.title).localeCompare(String(b.title), 'de', { numeric: true }));
+}
+
 function statusLabel(status) {
   if (status === 'covered') return 'mit Seitenankern';
   if (status === 'partial') return 'nur Quellenreferenz';
@@ -136,6 +142,28 @@ ${rows.map(({ doc, mapped, status }) => `<button type="button" class="source-cov
 </button>`).join('')}
 </div>
 <p class="source-companion-note">Diese Matrix ist ein Mapping-Status, kein Vollständigkeitszertifikat. Eine Vorlesung kann Seitenanker haben und trotzdem noch nicht vollständig rekonstruiert sein.</p>
+</section>`;
+}
+
+function renderUnanchoredConceptsPanel(conceptCoverage) {
+  const concepts = unanchoredPortalConcepts(conceptCoverage);
+  if (!concepts.length) return '';
+  return `<section class="source-companion-unanchored" aria-label="Portalinhalt ohne direkten Quellenanker">
+<div class="source-coverage-head">
+<div>
+<span>Source Boundary</span>
+<h3>Portalinhalt ohne direkten Quellenanker</h3>
+</div>
+<p>${concepts.length} Konzept${concepts.length === 1 ? '' : 'e'} bleiben supplemental</p>
+</div>
+<div class="source-companion-unanchored-grid">
+${concepts.map((concept) => `<button type="button" onclick="window.__navigate('${escapeHtml(concept.conceptId)}')">
+<span>platform-added support</span>
+<strong>${escapeHtml(concept.title)}</strong>
+<em>Nicht als offiziell prüfungsbewiesener Mikro-II-Stoff zertifiziert.</em>
+</button>`).join('')}
+</div>
+<p class="source-companion-note">Diese Einträge bleiben sichtbar, zählen aber nicht als source-complete oder exam-proven, bis ein offizieller Mikro-II-Quellenanker vorliegt.</p>
 </section>`;
 }
 
@@ -237,6 +265,7 @@ export function createSourceCompanionModule({ renderMath } = {}) {
 </div>
 <div class="source-companion-stats">${renderKindStats(state.docs)}</div>
 ${renderCoverageMatrix(state.docs, state.conceptCoverage)}
+${renderUnanchoredConceptsPanel(state.conceptCoverage)}
 <div class="source-companion-layout">
 <div class="source-companion-list" role="list">${renderDocumentList(state.docs, state.conceptCoverage)}</div>
 <div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage)}</div>

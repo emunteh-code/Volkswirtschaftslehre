@@ -13,6 +13,8 @@ export function createQuickExamModule({
   renderMath,
   /** When set with appendLearnerAttempt, Schnelltest sessions are logged to the learner backbone. */
   moduleSlug = null,
+  /** Optional provenance lookup for per-question source-status disclosure. */
+  getConceptProvenance = null,
   appendLearnerAttempt = null,
   /** Optional: one mistake row per wrong committed answer (concept_id from step problem). */
   appendMistakeLogEntry = null
@@ -38,6 +40,44 @@ export function createQuickExamModule({
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
+  }
+
+  function humanizeSourceStatus(status) {
+    const labels = {
+      "direct-source": "Direct source",
+      "source-distilled": "Source-distilled",
+      "platform-added-explanation": "Platform-added explanation",
+      "platform-added-drill": "Platform-added drill",
+      "cross-link": "Cross-link"
+    };
+    return labels[status] || "Quellenstatus offen";
+  }
+
+  function renderQuickExamSourceNotice(question) {
+    if (typeof getConceptProvenance !== "function" || !question?.conceptId) return "";
+    const provenance = getConceptProvenance(question.conceptId);
+    const layer = provenance?.stepProblems || provenance?.tasks || null;
+    if (!layer) return "";
+
+    const sourceStatus = layer.source_status || "unknown";
+    const statusClass = String(sourceStatus).replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
+    const refs = Array.isArray(layer.source_refs) ? layer.source_refs.length : 0;
+    const anchors = Array.isArray(layer.source_anchors) ? layer.source_anchors.length : 0;
+    const evidenceLabel = anchors > 0
+      ? `${anchors} Seitenanker`
+      : refs > 0
+        ? `${refs} Quellenreferenzen`
+        : "kein direkter Quellenanker";
+    const note = layer.notes || "Quellenstatus fuer diesen Schnelltest-Drill ist noch nicht vollstaendig gemappt.";
+
+    return `<aside class="quick-exam-source-notice quick-exam-source-notice--${escapeHtml(statusClass)}" role="note" aria-label="Schnelltest Quellenstatus">
+  <div class="quick-exam-source-notice__badges">
+    <span>Schnellteststatus</span>
+    <span>${escapeHtml(humanizeSourceStatus(sourceStatus))}</span>
+    <em>${escapeHtml(evidenceLabel)}</em>
+  </div>
+  <p>${escapeHtml(note)}</p>
+</aside>`;
   }
 
   function setFeedbackContent(feedbackEl, className, prefixText, explainHtml) {
@@ -131,6 +171,7 @@ export function createQuickExamModule({
   <span class="exam-progress">${examState.current + 1} / ${examState.questions.length}</span>
   <span class="exam-timer" id="examTimer" aria-live="polite">${mins}:${secs.toString().padStart(2, "0")}</span>
 </div>
+${renderQuickExamSourceNotice(q)}
 <div class="exam-q-card">
   <div class="exam-q-ctx">${cleanExamSurfaceTitle(q.title)}${q.context ? ` · ${q.context}` : ""}</div>
   <div class="exam-q-text">${q.step.q}</div>

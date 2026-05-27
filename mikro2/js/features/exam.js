@@ -2,6 +2,7 @@ import { createQuickExamModule } from '../../../assets/js/portal-core/features/e
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
 import { EXAM_QUESTIONS, EXAM_DURATION_MS } from '../data/srsConfig.js';
+import { getConceptProvenance } from '../data/contentManifest.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { recordAnswer, appendLearnerAttempt, appendMistakeLogEntry } from '../state/storage.js';
 import { updateSRS } from './srs.js';
@@ -21,6 +22,7 @@ export const {
   updateSRS,
   renderMath,
   moduleSlug: COURSE_CONFIG.slug,
+  getConceptProvenance,
   appendLearnerAttempt,
   appendMistakeLogEntry
 });

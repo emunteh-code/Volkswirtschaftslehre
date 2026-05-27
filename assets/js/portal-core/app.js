@@ -21,7 +21,9 @@ export function createPortalApp({
   /** Optional trap-MCQ concept check (5-min); see createConceptSchnelltestModule */
   conceptSchnelltest,
   /** Optional mistake log review; see createMistakeReviewModule */
-  mistakeReview
+  mistakeReview,
+  /** Optional official-material companion browser. */
+  sourceCompanion
 }) {
   const {
     loadProgress,
@@ -304,6 +306,13 @@ export function createPortalApp({
     startFullExam(id);
   }
 
+  function openSourceCompanion() {
+    if (!sourceCompanion?.showSourceCompanion) return;
+    clearRightPanel();
+    syncRightPanelVisibility();
+    sourceCompanion.showSourceCompanion();
+  }
+
   window.__navigate = navigate;
   window.__renderHome = renderHome;
   window.__showDashboard = openDashboard;
@@ -321,6 +330,9 @@ export function createPortalApp({
   window.__showFullExamSelect = openFullExamOverview;
   window.__startFullExam = openFullExam;
   window.__showSRSReview = showSRSReview;
+  if (sourceCompanion?.showSourceCompanion) {
+    window.__showSourceCompanion = openSourceCompanion;
+  }
   window.__feSelectWF = feSelectWF;
   window.__feCheckText = feCheckText;
   window.__feRevealAnswer = feRevealAnswer;

@@ -14,6 +14,12 @@ const DIMENSION_LABELS = Object.freeze({
   transfer: 'Transfer'
 });
 
+const SUPPLEMENTAL_CONCEPT_IDS = new Set([
+  'externa_pigou',
+  'externa_institutionen',
+  'public_goods'
+]);
+
 function objective({
   dimension,
   label,
@@ -38,6 +44,13 @@ function firstAnchor(items) {
     .slice(0, 3);
 }
 
+function fallbackSourceStatus(conceptId, dimension) {
+  if (!SUPPLEMENTAL_CONCEPT_IDS.has(conceptId)) return 'source-distilled';
+  return dimension === 'calculation' || dimension === 'transfer'
+    ? 'platform-added-drill'
+    : 'platform-added-explanation';
+}
+
 export const MASTERY_DIMENSIONS = DIMENSION_LABELS;
 
 export const MASTERY = {};
@@ -47,7 +60,7 @@ CHAPTERS.forEach((ch) => {
   const taskFamilies = TASK_FAMILIES_BY_CONCEPT[ch.id] || [];
   const formulaAnchors = firstAnchor(formulaCards);
   const taskAnchors = firstAnchor(taskFamilies);
-  const sourceStatus = taskFamilies.length || formulaCards.length ? 'direct-source' : 'source-distilled';
+  const sourceStatus = taskFamilies.length || formulaCards.length ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
 
   const items = [
     objective({
@@ -78,14 +91,14 @@ CHAPTERS.forEach((ch) => {
     items.push(objective({
       dimension: 'calculation',
       label: `Formale Beziehungen und Modellbedingungen zu "${ch.title}" fehlerfrei anwenden können`,
-      sourceStatus,
+      sourceStatus: fallbackSourceStatus(ch.id, 'calculation'),
       sourceAnchorIds: taskAnchors,
       evidence: ['practice_attempt']
     }));
     items.push(objective({
       dimension: 'derivation',
       label: `Den Argumentationsweg zu "${ch.title}" in Prüfungssprache begründen können`,
-      sourceStatus,
+      sourceStatus: fallbackSourceStatus(ch.id, 'derivation'),
       sourceAnchorIds: taskAnchors,
       evidence: ['written_explanation']
     }));
@@ -103,7 +116,7 @@ CHAPTERS.forEach((ch) => {
     items.push(objective({
       dimension: 'transfer',
       label: `Typische Klausurfragen zu "${ch.title}" sicher von Nachbarthemen abgrenzen können`,
-      sourceStatus,
+      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
       sourceAnchorIds: formulaAnchors,
       evidence: ['mixed_attempt']
     }));

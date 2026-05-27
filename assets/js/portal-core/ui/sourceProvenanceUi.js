@@ -26,6 +26,14 @@ const LAYER_ORDER = [
   ['intuition', 'Intuition']
 ];
 
+const SOURCE_STATUS_LABELS = Object.freeze({
+  'direct-source': 'direct source',
+  'source-distilled': 'distilled from source',
+  'platform-added-explanation': 'platform-added explanation',
+  'platform-added-drill': 'platform-added drill',
+  'cross-link': 'cross-link'
+});
+
 function escapeAttr(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -392,6 +400,91 @@ function buildBreakdownRows(layers) {
   return rows;
 }
 
+function publicSourceStatus(status) {
+  return SOURCE_STATUS_LABELS[status] || String(status || 'unclassified');
+}
+
+function anchorLocatorLabel(anchor) {
+  const page = anchor?.locator?.page || anchor?.page || null;
+  const slide = anchor?.locator?.slide || null;
+  const task = anchor?.locator?.task || null;
+  const parts = [];
+  if (page) parts.push(`Seite ${page}`);
+  if (slide && slide !== page) parts.push(`Folie ${slide}`);
+  if (task) parts.push(`Aufgabe ${task}`);
+  return parts.join(' · ');
+}
+
+function confidenceLabel(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return '';
+  return `${Math.round(n * 100)}%`;
+}
+
+function buildSourceInspectionRows(layers) {
+  if (!layers || typeof layers !== 'object') return [];
+  const byAnchor = new Map();
+  for (const [key, title] of LAYER_ORDER) {
+    const layer = layers[key];
+    if (!layer || !Array.isArray(layer.source_anchors)) continue;
+    for (const anchor of layer.source_anchors) {
+      const id = anchor?.id || `${anchor?.sourcePath || anchor?.path || ''}:${anchor?.locator?.page || anchor?.page || ''}:${anchor?.section || anchor?.locator?.section || ''}`;
+      if (!id) continue;
+      const existing = byAnchor.get(id) || {
+        anchor,
+        areas: new Set(),
+        statuses: new Set()
+      };
+      existing.areas.add(title);
+      if (layer.source_status) existing.statuses.add(layer.source_status);
+      byAnchor.set(id, existing);
+    }
+  }
+
+  return [...byAnchor.values()].map(({ anchor, areas, statuses }) => {
+    const label =
+      anchor?.publicLabel ||
+      toPublicProvenanceLabel(pathToHumanLabel(anchor?.sourcePath || anchor?.path || ''), anchor?.sourcePath || anchor?.path || '') ||
+      'Quelle';
+    const locator = anchorLocatorLabel(anchor);
+    const title = `${label}${locator ? ` · ${locator}` : ''}`;
+    const section = anchor?.locator?.section || anchor?.section || '';
+    const confidence = confidenceLabel(anchor?.confidence);
+    return {
+      title,
+      sourcePath: anchor?.sourcePath || anchor?.path || '',
+      section,
+      areas: [...areas].join(', '),
+      statuses: [...statuses].map(publicSourceStatus).join(', '),
+      confidence,
+      reviewedAt: anchor?.reviewedAt || '',
+      sourceId: anchor?.sourceId || '',
+      anchorId: anchor?.id || ''
+    };
+  });
+}
+
+function buildSourceInspectionHtml(rows) {
+  if (!rows.length) return '';
+  return `<div class="source-provenance-inspector" aria-label="Quelleninspektor">
+<div class="source-provenance-inspector-title">Quelleninspektor</div>
+${rows.map((row) => {
+  const details = [
+    row.sourcePath ? `<span><strong>Datei:</strong> ${escapeHtml(row.sourcePath)}</span>` : '',
+    row.section ? `<span><strong>Abschnitt:</strong> ${escapeHtml(row.section)}</span>` : '',
+    row.areas ? `<span><strong>Bereich:</strong> ${escapeHtml(row.areas)}</span>` : '',
+    row.statuses ? `<span><strong>Status:</strong> ${escapeHtml(row.statuses)}</span>` : '',
+    row.confidence ? `<span><strong>Konfidenz:</strong> ${escapeHtml(row.confidence)}</span>` : '',
+    row.reviewedAt ? `<span><strong>Geprüft:</strong> ${escapeHtml(row.reviewedAt)}</span>` : ''
+  ].filter(Boolean).join('');
+  return `<article class="source-provenance-inspector-row">
+<div class="source-provenance-inspector-head">${escapeHtml(row.title)}</div>
+<div class="source-provenance-inspector-details">${details}</div>
+</article>`;
+}).join('')}
+</div>`;
+}
+
 /**
  * @param {object} opts
  * @param {string} opts.conceptId
@@ -409,7 +502,8 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
   const rows = buildBreakdownRows(layers);
   const withLine = rows.filter((r) => r.line);
   const uniqueLines = new Set(withLine.map((r) => r.line));
-  const expandable = uniqueLines.size > 1;
+  const inspectionRows = buildSourceInspectionRows(layers);
+  const expandable = uniqueLines.size > 1 || inspectionRows.length > 0;
 
   const safeTab = String(activeTab || 'tab').replace(/[^a-z0-9-]/gi, '');
   const detailId = `spd-${escapeAttr(conceptId)}-${escapeAttr(safeTab)}`.replace(/\s+/g, '');
@@ -435,6 +529,7 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
         `<div class="source-provenance-detail-row"><span class="source-provenance-detail-k">${escapeHtml(r.title)}</span><span class="source-provenance-detail-v">${escapeHtml(r.line)}</span></div>`
     )
     .join('');
+  const inspectorHtml = buildSourceInspectionHtml(inspectionRows);
 
   return `<footer class="source-provenance source-provenance--expandable" role="note" data-source-confidence="${escapeAttr(confAttr)}" data-provenance-coverage="${escapeAttr(coverageAttr)}">
 <div class="source-provenance-inner">
@@ -444,6 +539,7 @@ ${lineHtml}
 </div>
 <div class="source-provenance-detail" id="${escapeAttr(detailId)}" hidden>
 <div class="source-provenance-detail-rows">${detailRows}</div>
+${inspectorHtml}
 </div>
 </footer>`;
 }

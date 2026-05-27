@@ -4589,3 +4589,52 @@ body.light-mode #content .source-provenance-mark {
   font-weight: 400;
   word-break: break-word;
 }
+
+#content .source-provenance-inspector {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.6rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 12%, transparent);
+}
+
+#content .source-provenance-inspector-title {
+  color: color-mix(in srgb, var(--muted) 58%, var(--text) 42%);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+#content .source-provenance-inspector-row {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--border) 26%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+}
+
+#content .source-provenance-inspector-head {
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+#content .source-provenance-inspector-details {
+  display: grid;
+  gap: 0.18rem;
+  color: color-mix(in srgb, var(--muted) 70%, var(--text) 30%);
+  font-size: 10.5px;
+  line-height: 1.42;
+}
+
+#content .source-provenance-inspector-details span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#content .source-provenance-inspector-details strong {
+  color: color-mix(in srgb, var(--muted) 52%, var(--text) 48%);
+}

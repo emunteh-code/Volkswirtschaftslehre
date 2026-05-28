@@ -200,6 +200,27 @@ function documentAnchorsForDoc(doc) {
   });
 }
 
+function anchorDensityForDoc(doc) {
+  const anchors = documentAnchorsForDoc(doc);
+  const pages = Number.parseInt(doc?.pages, 10);
+  const pageCount = Number.isFinite(pages) && pages > 0 ? pages : 0;
+  const density = pageCount ? Math.min(1, anchors.length / pageCount) : 0;
+  const label = anchors.length
+    ? `${anchors.length} geprüfte Anker${pageCount ? ` / ${pageCount} Seiten` : ''}`
+    : '0 geprüfte Seitenanker';
+  const caveat = anchors.length
+    ? 'page-level Rekonstruktion offen'
+    : 'Mapping-Gap';
+  return {
+    anchors: anchors.length,
+    pages: pageCount,
+    density,
+    densityPct: Math.round(density * 100),
+    label,
+    caveat
+  };
+}
+
 function documentLayerRowsForDoc(doc) {
   const titles = conceptTitleById();
   const rows = [];
@@ -227,7 +248,7 @@ function documentLayerRowsForDoc(doc) {
 }
 
 function statusLabel(status) {
-  if (status === 'covered') return 'mit Seitenankern';
+  if (status === 'covered') return 'Seitenanker vorhanden';
   if (status === 'partial') return 'nur Quellenreferenz';
   return 'noch unmapped';
 }
@@ -237,20 +258,26 @@ function renderCoverageMatrix(docs, conceptCoverage) {
   const covered = rows.filter((row) => row.status === 'covered').length;
   const partial = rows.filter((row) => row.status === 'partial').length;
   const uncovered = rows.filter((row) => row.status === 'uncovered').length;
+  const reviewedAnchors = rows.reduce((sum, { doc }) => sum + anchorDensityForDoc(doc).anchors, 0);
   return `<section class="source-coverage-matrix" aria-label="Vorlesungsabdeckung">
 <div class="source-coverage-head">
 <div>
 <span>Lecture Coverage</span>
 <h3>Vorlesungsfolge gegen Portalabdeckung</h3>
 </div>
-<p>${covered} mit Seitenankern · ${partial} nur mit Quellenreferenz · ${uncovered} noch unmapped</p>
+<p>${covered} mit Seitenankern · ${partial} nur mit Quellenreferenz · ${uncovered} noch unmapped · ${reviewedAnchors} geprüfte Anker</p>
 </div>
 <div class="source-coverage-grid">
-${rows.map(({ doc, mapped, status }) => `<button type="button" class="source-coverage-row source-coverage-row--${status}" data-source-doc="${escapeHtml(doc.id)}">
+${rows.map(({ doc, mapped, status }) => {
+  const density = anchorDensityForDoc(doc);
+  return `<button type="button" class="source-coverage-row source-coverage-row--${status}" data-source-doc="${escapeHtml(doc.id)}">
 <span class="source-coverage-status">${escapeHtml(statusLabel(status))}</span>
 <strong>${escapeHtml(doc.title)}</strong>
 <span>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')} · ${mapped.length ? `${mapped.length} Konzept${mapped.length === 1 ? '' : 'e'}` : 'keine direkte Portalzuordnung'}</span>
-</button>`).join('')}
+<span class="source-coverage-anchor-density"><i style="--source-anchor-density:${density.densityPct}%"></i></span>
+<em>${escapeHtml(density.label)} · ${escapeHtml(density.caveat)}</em>
+</button>`;
+}).join('')}
 </div>
 <p class="source-companion-note">Diese Matrix ist ein Mapping-Status, kein Vollständigkeitszertifikat. Eine Vorlesung kann Seitenanker haben und trotzdem noch nicht vollständig rekonstruiert sein.</p>
 </section>`;

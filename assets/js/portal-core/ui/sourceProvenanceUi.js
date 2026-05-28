@@ -498,7 +498,7 @@ ${rows.map((row) => {
 <span>${escapeHtml(row.title)}</span>
 <div class="source-provenance-inspector-actions">
 ${row.sourceUrl ? `<button type="button" class="source-provenance-open" data-source-open-url="${escapeAttr(row.sourceUrl)}" aria-label="Quelle lokal öffnen">Öffnen</button>` : ''}
-${row.sourceId ? `<button type="button" class="source-provenance-companion" data-source-companion-id="${escapeAttr(row.sourceId)}" data-anchor-title="${escapeAttr(row.title)}" data-anchor-section="${escapeAttr(row.section)}" data-anchor-areas="${escapeAttr(row.areas)}" data-anchor-statuses="${escapeAttr(row.statuses)}" data-anchor-confidence="${escapeAttr(row.confidence)}" data-anchor-reviewed-at="${escapeAttr(row.reviewedAt)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
+${row.sourceId ? `<button type="button" class="source-provenance-companion" data-source-companion-id="${escapeAttr(row.sourceId)}" data-anchor-source-url="${escapeAttr(row.sourceUrl)}" data-anchor-title="${escapeAttr(row.title)}" data-anchor-section="${escapeAttr(row.section)}" data-anchor-areas="${escapeAttr(row.areas)}" data-anchor-statuses="${escapeAttr(row.statuses)}" data-anchor-confidence="${escapeAttr(row.confidence)}" data-anchor-reviewed-at="${escapeAttr(row.reviewedAt)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
 </div>
 </div>
 <div class="source-provenance-inspector-details">${details}</div>
@@ -620,7 +620,8 @@ export function initConceptProvenanceInteractions(root) {
           areas: btn.getAttribute('data-anchor-areas') || '',
           statuses: btn.getAttribute('data-anchor-statuses') || '',
           confidence: btn.getAttribute('data-anchor-confidence') || '',
-          reviewedAt: btn.getAttribute('data-anchor-reviewed-at') || ''
+          reviewedAt: btn.getAttribute('data-anchor-reviewed-at') || '',
+          sourceUrl: btn.getAttribute('data-anchor-source-url') || ''
         }
       });
     });

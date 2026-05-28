@@ -243,6 +243,7 @@ function renderDocumentList(docs, conceptCoverage) {
 function renderAnchorContext(anchorContext) {
   if (!anchorContext?.title) return '';
   const details = [
+    anchorContext.sourceUrl ? `<span><strong>Direktziel:</strong> ${escapeHtml(anchorContext.sourceUrl)}</span>` : '',
     anchorContext.section ? `<span><strong>Abschnitt:</strong> ${escapeHtml(anchorContext.section)}</span>` : '',
     anchorContext.areas ? `<span><strong>Portalbereich:</strong> ${escapeHtml(anchorContext.areas)}</span>` : '',
     anchorContext.statuses ? `<span><strong>Status:</strong> ${escapeHtml(anchorContext.statuses)}</span>` : '',
@@ -264,7 +265,8 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anc
 </div>`;
   }
   const mapped = mappedConceptsForDoc(doc, conceptCoverage);
-  const localUrl = sourceMaterialUrl(doc);
+  const localUrl = anchorContext?.sourceUrl || sourceMaterialUrl(doc);
+  const openLabel = anchorContext?.sourceUrl ? 'Lokale Ankerquelle öffnen' : 'Lokale Quelle öffnen';
   return `<div class="source-companion-detail-card">
 <div class="source-companion-detail-head">
 <span>${escapeHtml(doc.kindLabel)}</span>
@@ -272,10 +274,10 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anc
 <p>${escapeHtml(doc.path)}</p>
 </div>
 <div class="source-companion-source-actions">
-<button type="button" class="btn secondary" data-open-source-path="${escapeHtml(localUrl)}">Lokale Quelle öffnen</button>
+<button type="button" class="btn secondary" data-open-source-path="${escapeHtml(localUrl)}">${escapeHtml(openLabel)}</button>
 <div class="source-companion-local-warning">
 <strong>Lokale Datei</strong>
-<span>Dieser Button prüft zuerst, ob <code>source-materials/Mikroökonomik II/</code> in dieser Umgebung verfügbar ist. Die offiziellen PDFs sind git-ignoriert und können auf einem Deployment fehlen.</span>
+<span>Dieser Button prüft zuerst, ob <code>source-materials/Mikroökonomik II/</code> in dieser Umgebung verfügbar ist. Bei Konzeptankern wird die geprüfte Seitenposition mitgegeben, sofern der PDF-Viewer sie unterstützt.</span>
 </div>
 </div>
 ${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
@@ -370,11 +372,12 @@ ${renderOfficialTaskArchivePanel(state.docs)}
       button.addEventListener('click', async () => {
         const sourcePath = button.dataset.openSourcePath || '';
         if (!sourcePath || !selected) return;
+        const checkPath = sourcePath.split('#')[0];
         button.disabled = true;
         const originalText = button.textContent;
         button.textContent = 'Quelle wird geprüft...';
         try {
-          const response = await fetch(sourcePath, { method: 'HEAD', cache: 'no-store' });
+          const response = await fetch(checkPath, { method: 'HEAD', cache: 'no-store' });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           window.open(sourcePath, '_blank', 'noopener,noreferrer');
           state.sourceOpenStatus = {

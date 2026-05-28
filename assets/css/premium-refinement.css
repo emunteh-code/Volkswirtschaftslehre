@@ -5335,6 +5335,49 @@ body.light-mode #content .source-provenance-mark {
   background: color-mix(in srgb, var(--sys-orange, #ff9500) 8%, transparent);
 }
 
+#content .source-companion-anchor-context {
+  display: grid;
+  gap: 6px;
+  padding: 13px 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border) 70%);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 62%, var(--border) 38%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+#content .source-companion-anchor-context > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#content .source-companion-anchor-context > strong {
+  min-width: 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+#content .source-companion-anchor-context div {
+  display: grid;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+#content .source-companion-anchor-context div span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#content .source-companion-anchor-context div strong {
+  color: color-mix(in srgb, var(--muted) 52%, var(--text) 48%);
+}
+
 #content .source-companion-meta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

@@ -240,7 +240,23 @@ function renderDocumentList(docs, conceptCoverage) {
   }).join('');
 }
 
-function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null) {
+function renderAnchorContext(anchorContext) {
+  if (!anchorContext?.title) return '';
+  const details = [
+    anchorContext.section ? `<span><strong>Abschnitt:</strong> ${escapeHtml(anchorContext.section)}</span>` : '',
+    anchorContext.areas ? `<span><strong>Portalbereich:</strong> ${escapeHtml(anchorContext.areas)}</span>` : '',
+    anchorContext.statuses ? `<span><strong>Status:</strong> ${escapeHtml(anchorContext.statuses)}</span>` : '',
+    anchorContext.confidence ? `<span><strong>Konfidenz:</strong> ${escapeHtml(anchorContext.confidence)}</span>` : '',
+    anchorContext.reviewedAt ? `<span><strong>Geprüft:</strong> ${escapeHtml(anchorContext.reviewedAt)}</span>` : ''
+  ].filter(Boolean).join('');
+  return `<div class="source-companion-anchor-context" role="note">
+<span>Aus Konzeptanker geöffnet</span>
+<strong>${escapeHtml(anchorContext.title)}</strong>
+${details ? `<div>${details}</div>` : ''}
+</div>`;
+}
+
+function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anchorContext = null) {
   if (!doc) {
     return `<div class="source-companion-empty">
 <h3>Quelle auswählen</h3>
@@ -263,6 +279,7 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null) {
 </div>
 </div>
 ${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
+${renderAnchorContext(anchorContext)}
 <div class="source-companion-meta-grid">
 <div><span>Gruppe</span><strong>${escapeHtml(doc.group || 'root')}</strong></div>
 <div><span>Umfang</span><strong>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')}</strong></div>
@@ -290,7 +307,8 @@ export function createSourceCompanionModule({ renderMath } = {}) {
     selectedId: null,
     loaded: false,
     error: null,
-    sourceOpenStatus: null
+    sourceOpenStatus: null,
+    anchorContext: null
   };
 
   function render() {
@@ -323,6 +341,7 @@ export function createSourceCompanionModule({ renderMath } = {}) {
       || null;
     if (selected && !state.selectedId) state.selectedId = selected.id;
     const openStatus = state.sourceOpenStatus?.docId === selected?.id ? state.sourceOpenStatus : null;
+    const anchorContext = state.anchorContext?.sourceId === selected?.id ? state.anchorContext : null;
     content.innerHTML = `<div class="source-companion">
 <div class="source-companion-header">
 <span>Official-Material Companion</span>
@@ -335,7 +354,7 @@ ${renderUnanchoredConceptsPanel(state.conceptCoverage)}
 ${renderOfficialTaskArchivePanel(state.docs)}
 <div class="source-companion-layout">
 <div class="source-companion-list" role="list">${renderDocumentList(state.docs, state.conceptCoverage)}</div>
-<div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage, openStatus)}</div>
+<div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage, openStatus, anchorContext)}</div>
 </div>
 </div>`;
     content.querySelectorAll('[data-source-doc]').forEach((button) => {
@@ -343,6 +362,7 @@ ${renderOfficialTaskArchivePanel(state.docs)}
       button.addEventListener('click', () => {
         state.selectedId = button.dataset.sourceDoc;
         state.sourceOpenStatus = null;
+        state.anchorContext = null;
         render();
       });
     });
@@ -380,11 +400,15 @@ ${renderOfficialTaskArchivePanel(state.docs)}
 
   async function showSourceCompanion(options = {}) {
     const requestedSourceId = typeof options === 'string' ? options : options?.sourceId;
+    const requestedAnchorContext = requestedSourceId && options?.anchorContext
+      ? { ...options.anchorContext, sourceId: requestedSourceId }
+      : null;
     if (requestedSourceId) {
       state = {
         ...state,
         selectedId: requestedSourceId,
-        sourceOpenStatus: null
+        sourceOpenStatus: null,
+        anchorContext: requestedAnchorContext
       };
     }
     state = { ...state, error: null };
@@ -398,7 +422,8 @@ ${renderOfficialTaskArchivePanel(state.docs)}
           selectedId: requestedSourceId || defaultSelectedDocId(docs),
           loaded: true,
           error: null,
-          sourceOpenStatus: null
+          sourceOpenStatus: null,
+          anchorContext: requestedAnchorContext
         };
       }
     } catch (error) {

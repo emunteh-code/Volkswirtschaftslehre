@@ -26,7 +26,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `mikro2` | 83% | 83% | 47 | 12 | 0 | 0 | 8 | 4 |
 | `makro1` | 100% | 0% | 0 | 0 | 29 | 0 | 0 | 0 |
 | `makro2` | 100% | 0% | 0 | 0 | 22 | 0 | 0 | 0 |
-| `oekonometrie` | 100% | 0% | 0 | 0 | 33 | 0 | 0 | 0 |
+| `oekonometrie` | 100% | 0% | 0 | 1 | 33 | 0 | 0 | 0 |
 | `statistik` | 100% | 0% | 0 | 1 | 104 | 0 | 0 | 0 |
 | `finanzwirtschaft` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
 | `mathematik` | 100% | 0% | 0 | 1 | 40 | 0 | 0 | 0 |

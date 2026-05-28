@@ -1,11 +1,11 @@
 // ============================================================
 // SOURCE ANCHORS — Statistik
-// Reviewed page-level anchors for official VL reconstruction (pilot pass).
+// Reviewed page-level anchors for official VL reconstruction (pass 1–2).
 // No source text stored; quoteFingerprint hashes the reviewed section label.
 // ============================================================
 
 const REVIEWED_AT = '2026-05-28';
-const REVIEWED_BY = 'codex-source-pass-statistik-anchors-1';
+const REVIEWED_BY = 'codex-source-pass-statistik-anchors-2';
 
 function anchor({
   id,
@@ -99,6 +99,102 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'Scatterplot (Sepal Length and Width)',
       fingerprint: '6b3d9f0e2a1c8745',
       confidence: 0.9
+    })
+  ],
+  wahrscheinlichkeit: [
+    anchor({
+      id: 'statistik.wahrscheinlichkeit.vl05.p06.g21',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-05-grundlagen-2',
+      sourcePath: 'Vorlesungen/VL_05_-_Grundlagen_2.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 6,
+      section: 'G2.1 Perspektiven auf Wahrscheinlichkeit',
+      fingerprint: 'b4e7a1c9032d5f86',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.wahrscheinlichkeit.vl05.p11.experimente',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-05-grundlagen-2',
+      sourcePath: 'Vorlesungen/VL_05_-_Grundlagen_2.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 11,
+      section: 'Experimente, Ergebnisse und Ereignisse',
+      fingerprint: 'd19f82a40c6e1b73',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.wahrscheinlichkeit.vl05.p42.bedingte',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-05-grundlagen-2',
+      sourcePath: 'Vorlesungen/VL_05_-_Grundlagen_2.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 42,
+      section: 'Bedingte Wahrscheinlichkeit',
+      fingerprint: 'f3a0c58e71b294d6',
+      confidence: 0.91
+    })
+  ],
+  verteilungen: [
+    anchor({
+      id: 'statistik.verteilungen.vl06.p11.g31',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-06-grundlagen-3-1-3-pdf',
+      sourcePath: 'Vorlesungen/VL_06_-_Grundlagen_3.1-3.pdf.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 11,
+      section: 'Diskrete Zufallsvariablen',
+      fingerprint: 'a1d4e9b7028c3f15',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.verteilungen.vl06.p14.g32',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-06-grundlagen-3-1-3-pdf',
+      sourcePath: 'Vorlesungen/VL_06_-_Grundlagen_3.1-3.pdf.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 14,
+      section: 'Wahrscheinlichkeitsfunktion einer diskreten ZV',
+      fingerprint: 'c8e2f1a4059b7d62',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.verteilungen.vl08.p15.dichte',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-08-grundlagen-3-3-5-3-3-6',
+      sourcePath: 'Vorlesungen/VL_08_-_Grundlagen_3.3.5-3.3.6.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 15,
+      section: 'Dichtefunktion',
+      fingerprint: 'e7b3c9d0184a6f25',
+      confidence: 0.9
+    })
+  ],
+  schaetzen_verfahren: [
+    anchor({
+      id: 'statistik.schaetzen_verfahren.vl09.p08.is11',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 8,
+      section: 'IS1.1 Punktschätzung',
+      fingerprint: '9f2d4a8b61e0c357',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.schaetzen_verfahren.vl09.p12.is12',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 12,
+      section: 'IS1.2 Methode der Momente',
+      fingerprint: '2c8e5f0a94b1d768',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.schaetzen_verfahren.vl09.p25.is13',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 25,
+      section: 'IS1.3 Methode der kleinsten Quadrate',
+      fingerprint: '5a1b7d3e82f9c041',
+      confidence: 0.91
     })
   ]
 });

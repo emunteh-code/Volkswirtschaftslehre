@@ -130,7 +130,11 @@ async function runMathLeak(page) {
 
 /** --- Provenance footer (expects strip for listed concepts) --- */
 const PROVENANCE_EXPECT = [
-  { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget', expectCoverage: 'refs' },
+  { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget', expectCoverage: 'page-anchors' },
+  { route: '/mikro1/index.html', id: 'lagrange', label: 'mikro1/lagrange', expectCoverage: 'page-anchors' },
+  { route: '/mikro1/index.html', id: 'slutsky', label: 'mikro1/slutsky', expectCoverage: 'page-anchors' },
+  { route: '/mikro1/index.html', id: 'praeferenz', label: 'mikro1/praeferenz', expectCoverage: 'page-anchors' },
+  { route: '/mikro1/index.html', id: 'marshall', label: 'mikro1/marshall', expectCoverage: 'page-anchors' },
   { route: '/mikro1/index.html', id: 'psubst', label: 'mikro1/psubst', expectCoverage: 'manifest-only' },
   { route: '/statistik/index.html', id: 'deskriptiv', label: 'statistik/deskriptiv', expectCoverage: 'page-anchors' },
   { route: '/statistik/index.html', id: 'bivariat', label: 'statistik/bivariat', expectCoverage: 'page-anchors' },
@@ -383,19 +387,21 @@ async function runMikro1SourceCompanion(page) {
     await expandBtn.click();
     await page.waitForTimeout(300);
   }
+  const anchorBrowser = page.locator('.source-provenance-companion').first();
   const refBrowser = page.locator('.source-provenance-companion-path').first();
-  if ((await refBrowser.count()) === 0) {
+  const bridge = (await anchorBrowser.count()) > 0 ? anchorBrowser : refBrowser;
+  if ((await bridge.count()) === 0) {
     fail({
       system: 'source-companion',
       route: 'mikro1/budget/theorie',
       surface: 'provenance-inspector',
       viewport: '1280',
-      type: 'ref-companion-bridge-missing',
-      why: 'File-level source ref should expose Quellenbrowser bridge button'
+      type: 'companion-bridge-missing',
+      why: 'Page anchor or file-level ref should expose Quellenbrowser bridge button'
     });
     return;
   }
-  await refBrowser.click();
+  await bridge.click();
   await page.waitForSelector('.source-companion-header h2', { timeout: 20000 });
   const ctx = await page.locator('.source-companion-anchor-context').count();
   if (!ctx) {

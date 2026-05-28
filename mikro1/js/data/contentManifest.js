@@ -20,6 +20,7 @@ import {
 } from './srsConfig.js';
 import { COURSE_CONFIG } from './courseConfig.js';
 import { FULL_EXAMS } from './fullExams.js';
+import { MIKRO1_SOURCE_ANCHORS } from './sourceAnchors.js';
 
 const MODULE_SLUG = 'mikro1';
 
@@ -72,7 +73,7 @@ export const MIKRO1_CONCEPT_PRIMARY_REFS = Object.fromEntries(
 );
 
 const NOTES_THEORY =
-  'Mikro I theory is source-distilled and rendered through a custom semantic surface with exam-transfer enrichment. Primary VL anchors per concept (file-level): docs/audits/mikro1-provenance-curation-pass-1.md.';
+  'Mikro I theory is source-distilled and rendered through a custom semantic surface with exam-transfer enrichment. Primary VL refs per concept: docs/audits/mikro1-provenance-curation-pass-1.md. Reviewed page anchors (pilot) store locator metadata only — no source text.';
 const NOTES_GRAPH =
   'Interactive graph layer is a benchmark strength of this module and remains module-specific beyond baseline graph support.';
 const NOTES_INTUITION =
@@ -85,6 +86,7 @@ const NOTES_TASKS =
 export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
   primaryPathsByConceptId: MIKRO1_CONCEPT_PRIMARY_REFS,
+  anchorsByConceptId: MIKRO1_SOURCE_ANCHORS,
   moduleSlug: MODULE_SLUG,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,

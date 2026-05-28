@@ -8,10 +8,28 @@ import {
   buildHonestDashboardPilotHtml
 } from '../../../assets/js/portal-core/data/dashboardDerivedMetrics.js';
 import { CHAPTERS } from '../data/chapters.js';
+import { PROVENANCE_BY_CONCEPT } from '../data/contentManifest.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { MISTAKE_REVIEW_KEY } from '../data/srsConfig.js';
 import { loadProgress, loadSRS, listLearnerAttempts, listMistakeLogEntries } from '../state/storage.js';
 import { getDueCards, getPerformance } from './srs.js';
+
+function conceptHasAnchors(conceptId) {
+  return Object.values(PROVENANCE_BY_CONCEPT[conceptId] || {})
+    .some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length > 0);
+}
+
+function conceptHasRefs(conceptId) {
+  return Object.values(PROVENANCE_BY_CONCEPT[conceptId] || {})
+    .some((layer) => Array.isArray(layer?.source_refs) && layer.source_refs.length > 0);
+}
+
+function buildSourceStatusSummary() {
+  const anchored = CHAPTERS.filter((chapter) => conceptHasAnchors(chapter.id)).length;
+  const referenced = CHAPTERS.filter((chapter) => conceptHasRefs(chapter.id)).length;
+  const supplemental = CHAPTERS.filter((chapter) => !conceptHasAnchors(chapter.id) && !conceptHasRefs(chapter.id));
+  return { anchored, referenced, supplemental };
+}
 
 /**
  * Build and return the dashboard HTML.
@@ -43,11 +61,24 @@ export function renderDashboard(onNavigate) {
   const weak = stats.filter(s => s.accuracy !== null && s.accuracy < 0.6)
     .sort((a, b) => a.accuracy - b.accuracy);
   const weakest = weak.length ? weak[0] : null;
+  const sourceStatus = buildSourceStatusSummary();
 
   let html = `<div class="dashboard">
 <div class="dash-header">
 <h2>Lern-Dashboard</h2>
 <p style="color:var(--muted);font-size:13px">Dein Fortschritt auf einen Blick</p>
+</div>
+<div class="dash-section">
+<h3>Quellenstatus</h3>
+<p style="color:var(--text);font-size:13px;line-height:1.55;margin:0">Der offizielle Mikro-I-Korpus liegt im Repo. Dieses Modul ist der interaktive Benchmark, aber source-complete ist es erst nach page-level Rekonstruktion: ${sourceStatus.anchored}/${CHAPTERS.length} Konzepte haben geprüfte Seitenanker, ${sourceStatus.referenced}/${CHAPTERS.length} haben file-level Quellenreferenzen.</p>
+<div class="dash-source-grid" aria-label="Mikro I Quellenstatus">
+<div><span>Seitenanker</span><strong>${sourceStatus.anchored}/${CHAPTERS.length}</strong></div>
+<div><span>Quellenreferenzen</span><strong>${sourceStatus.referenced}/${CHAPTERS.length}</strong></div>
+<div><span>Ohne Referenz</span><strong>${sourceStatus.supplemental.length}</strong></div>
+<div><span>Offizielle Task-Familien</span><strong>0</strong></div>
+</div>
+<button type="button" class="btn secondary" onclick="window.__showSourceCompanion?.()" style="width:100%;max-width:420px;margin-top:12px">Quellenbrowser öffnen</button>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Der Quellenbrowser zeigt offizielle Dokumente, file-level Mappings und offene Seitenanker transparent an.</p>
 </div>
 <div class="dash-section" style="margin-bottom:16px">
 <button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll anzeigen</button>

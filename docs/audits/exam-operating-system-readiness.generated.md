@@ -11,7 +11,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `makro1` | yes | yes | no | no | no | no | no | 6 | 115 | 335 |
 | `makro2` | yes | yes | no | no | no | no | no | 1 | 46 | 249 |
 | `oekonometrie` | yes | yes | no | no | no | no | no | 180 | 298 | 811 |
-| `statistik` | yes | yes | no | no | no | no | no | 132 | 619 | 1046 |
+| `statistik` | yes | yes | yes | no | yes | no | no | 132 | 619 | 1046 |
 | `finanzwirtschaft` | yes | yes | no | no | no | no | no | 0 | 8 | 118 |
 | `mathematik` | yes | yes | no | no | no | no | no | 0 | 253 | 892 |
 | `jahresabschluss` | yes | yes | no | no | no | no | no | 0 | 36 | 129 |
@@ -27,7 +27,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `makro1` | 100% | 0% | 0 | 1 | 29 | 0 | 0 | 0 |
 | `makro2` | 100% | 0% | 0 | 1 | 22 | 0 | 0 | 0 |
 | `oekonometrie` | 100% | 0% | 0 | 1 | 33 | 0 | 0 | 0 |
-| `statistik` | 100% | 36% | 15 | 1 | 104 | 0 | 0 | 0 |
+| `statistik` | 100% | 100% | 42 | 1 | 104 | 0 | 0 | 0 |
 | `finanzwirtschaft` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
 | `mathematik` | 100% | 0% | 0 | 1 | 40 | 0 | 0 | 0 |
 | `jahresabschluss` | 100% | 0% | 0 | 0 | 13 | 0 | 0 | 0 |
@@ -43,7 +43,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `makro1` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `makro2` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `oekonometrie` | missing | official sources present; bank not mapped | partial | missing dimension model |
-| `statistik` | partial | official sources present; bank not mapped | partial | missing dimension model |
+| `statistik` | complete | official sources present; bank not mapped | complete | missing dimension model |
 | `finanzwirtschaft` | missing | missing | partial | missing dimension model |
 | `mathematik` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `jahresabschluss` | missing | official sources present; bank not mapped | partial | missing dimension model |
@@ -77,9 +77,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `oekonometrie`: item-level provenance incomplete (partial)
 - `oekonometrie`: adaptive mastery not evidence-based (missing dimension model)
 - `oekonometrie`: Mikro1-depth equality not certified
-- `statistik`: page/slide/task anchors incomplete (36% concept coverage)
 - `statistik`: official exam bank incomplete (official sources present; bank not mapped)
-- `statistik`: item-level provenance incomplete (partial)
 - `statistik`: adaptive mastery not evidence-based (missing dimension model)
 - `statistik`: Mikro1-depth equality not certified
 - `finanzwirtschaft`: page/slide/task anchors incomplete (0% concept coverage)

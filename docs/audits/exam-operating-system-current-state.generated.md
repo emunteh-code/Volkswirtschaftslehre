@@ -27,7 +27,7 @@ Local source files: **692**.
 
 | Module | Concepts | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| `mikro1` | 33 | 480 | 0 | 0 | 109 | 39 | 2 | 132 | 0 | 19 | 96 | 19/19 | 0 | benchmark cockpit; source refs local, anchor/task completeness pending |
+| `mikro1` | 33 | 480 | 0 | 10 | 109 | 39 | 2 | 132 | 0 | 19 | 96 | 19/19 | 0 | benchmark cockpit; source refs local, anchor/task completeness pending |
 | `mikro2` | 18 | 112 | 8 | 12 | 42 | 33 | 1 | 72 | 4 | 28 | 47 | 28/28 | 0 | not achieved |
 | `makro1` | 14 | 158 | 0 | 1 | 49 | 36 | 3 | 56 | 0 | 21 | 0 | 21/21 | 0 | not achieved |
 | `makro2` | 30 | 234 | 0 | 1 | 78 | 64 | 3 | 132 | 0 | 25 | 0 | 25/25 | 0 | near after source/task review |

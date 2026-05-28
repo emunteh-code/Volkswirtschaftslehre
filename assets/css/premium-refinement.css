@@ -5389,6 +5389,7 @@ body.light-mode #content .source-provenance-mark {
   gap: 10px;
 }
 
+#content .source-companion-layer-map,
 #content .source-companion-anchor-list {
   display: grid;
   gap: 10px;
@@ -5396,6 +5397,11 @@ body.light-mode #content .source-provenance-mark {
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border) 76%);
   border-radius: 12px;
   background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+#content .source-companion-layer-map {
+  border-color: color-mix(in srgb, var(--border) 82%, var(--text) 8%);
+  background: color-mix(in srgb, var(--surface2) 14%, transparent);
 }
 
 #content .source-companion-anchor-list-head {
@@ -5413,6 +5419,7 @@ body.light-mode #content .source-provenance-mark {
 }
 
 #content .source-companion-mapped h4,
+#content .source-companion-layer-map h4,
 #content .source-companion-anchor-list h4,
 #content .source-companion-gap h4 {
   margin: 0;
@@ -5420,6 +5427,7 @@ body.light-mode #content .source-provenance-mark {
   font-size: 15px;
 }
 
+#content .source-companion-layer-map button,
 #content .source-companion-anchor-list button,
 #content .source-companion-mapped button {
   display: grid;
@@ -5433,15 +5441,21 @@ body.light-mode #content .source-provenance-mark {
   cursor: pointer;
 }
 
+#content .source-companion-layer-map button {
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+}
+
 #content .source-companion-anchor-list button {
   background: color-mix(in srgb, var(--card) 78%, transparent);
 }
 
+#content .source-companion-layer-map button:hover,
 #content .source-companion-anchor-list button:hover,
 #content .source-companion-mapped button:hover {
   border-color: color-mix(in srgb, var(--accent) 34%, var(--border) 66%);
 }
 
+#content .source-companion-layer-map button span,
 #content .source-companion-anchor-list button span,
 #content .source-companion-mapped button span {
   color: var(--muted);
@@ -5449,6 +5463,7 @@ body.light-mode #content .source-provenance-mark {
   text-transform: uppercase;
 }
 
+#content .source-companion-layer-map button em,
 #content .source-companion-anchor-list button em {
   color: var(--muted);
   font-size: 12px;

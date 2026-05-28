@@ -30,6 +30,14 @@ const LAYER_LABELS = Object.freeze({
   stepProblems: 'Schnelltest'
 });
 
+const SOURCE_STATUS_LABELS = Object.freeze({
+  'direct-source': 'direct-source',
+  'source-distilled': 'source-distilled',
+  'platform-added-explanation': 'platform-added-explanation',
+  'platform-added-drill': 'platform-added-drill',
+  'cross-link': 'cross-link'
+});
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -142,6 +150,18 @@ function anchorMatchesDoc(anchor, doc) {
   return Boolean(sourcePath && (sourcePath === doc.path || sourcePath.endsWith(doc.path) || doc.path.endsWith(sourcePath)));
 }
 
+function refMatchesDoc(ref, doc) {
+  if (!ref || !doc) return false;
+  const refPath = normalizePath(ref?.path || ref);
+  return Boolean(refPath && (refPath === doc.path || refPath.endsWith(doc.path) || doc.path.endsWith(refPath)));
+}
+
+function layerMatchesDoc(layer, doc) {
+  const hasAnchors = (layer?.source_anchors || []).some((anchor) => anchorMatchesDoc(anchor, doc));
+  const hasRefs = (layer?.source_refs || []).some((ref) => refMatchesDoc(ref, doc));
+  return { hasAnchors, hasRefs, matches: hasAnchors || hasRefs };
+}
+
 function anchorSortPage(anchor) {
   const page = anchor?.locator?.page ?? anchor?.page;
   const parsed = Number.parseInt(page, 10);
@@ -177,6 +197,32 @@ function documentAnchorsForDoc(doc) {
     const pageDiff = anchorSortPage(a.anchor) - anchorSortPage(b.anchor);
     if (pageDiff) return pageDiff;
     return String(a.conceptTitle).localeCompare(String(b.conceptTitle), 'de', { numeric: true });
+  });
+}
+
+function documentLayerRowsForDoc(doc) {
+  const titles = conceptTitleById();
+  const rows = [];
+
+  for (const [conceptId, layers] of Object.entries(PROVENANCE_BY_CONCEPT)) {
+    for (const [layerKey, layer] of Object.entries(layers || {})) {
+      const match = layerMatchesDoc(layer, doc);
+      if (!match.matches) continue;
+      rows.push({
+        conceptId,
+        conceptTitle: titles[conceptId] || conceptId,
+        layerKey,
+        layerLabel: LAYER_LABELS[layerKey] || layerKey,
+        sourceStatus: SOURCE_STATUS_LABELS[layer?.source_status] || layer?.source_status || 'unbekannt',
+        precision: match.hasAnchors ? 'Seitenanker' : 'Quellenreferenz'
+      });
+    }
+  }
+
+  return rows.sort((a, b) => {
+    const conceptDiff = String(a.conceptTitle).localeCompare(String(b.conceptTitle), 'de', { numeric: true });
+    if (conceptDiff) return conceptDiff;
+    return String(a.layerLabel).localeCompare(String(b.layerLabel), 'de', { numeric: true });
   });
 }
 
@@ -344,6 +390,23 @@ ${rows.map(({ conceptId, conceptTitle, anchor, layerLabels }) => {
 </div>`;
 }
 
+function renderDocumentLayerMap(doc) {
+  const rows = documentLayerRowsForDoc(doc);
+  if (!rows.length) return '';
+  return `<div class="source-companion-layer-map">
+<div class="source-companion-anchor-list-head">
+<h4>Portal-Layer aus dieser Quelle</h4>
+<span>${rows.length} Portalbereiche</span>
+</div>
+${rows.map((row) => `<button type="button" onclick="window.__navigate('${escapeHtml(row.conceptId)}')">
+<span>${escapeHtml(row.precision)} · ${escapeHtml(row.sourceStatus)}</span>
+<strong>${escapeHtml(row.conceptTitle)}</strong>
+<em>${escapeHtml(row.layerLabel)}</em>
+</button>`).join('')}
+<p class="source-companion-note">Layer mit Seitenanker sind präzise auf geprüfte Seiten gemappt. Layer mit Quellenreferenz verweisen nur auf das Dokument und brauchen noch eine page-level Rekonstruktion.</p>
+</div>`;
+}
+
 function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anchorContext = null) {
   if (!doc) {
     return `<div class="source-companion-empty">
@@ -353,6 +416,7 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anc
   }
   const mapped = mappedConceptsForDoc(doc, conceptCoverage);
   const reviewedAnchors = documentAnchorsForDoc(doc);
+  const layerRows = documentLayerRowsForDoc(doc);
   const localUrl = anchorContext?.sourceUrl || sourceMaterialUrl(doc);
   const openLabel = anchorContext?.sourceUrl ? 'Lokale Ankerquelle öffnen' : 'Lokale Quelle öffnen';
   return `<div class="source-companion-detail-card">
@@ -376,8 +440,10 @@ ${renderAnchorContext(anchorContext)}
 <div><span>Indexstatus</span><strong>${escapeHtml(doc.extractionStatus || 'unbekannt')}</strong></div>
 <div><span>Portalabdeckung</span><strong>${mapped.length ? `${mapped.length} Konzepte` : 'offen'}</strong></div>
 <div><span>Seitenanker</span><strong>${reviewedAnchors.length ? `${reviewedAnchors.length} geprüft` : 'offen'}</strong></div>
+<div><span>Portalbereiche</span><strong>${layerRows.length ? `${layerRows.length} gemappt` : 'offen'}</strong></div>
 </div>
 ${renderDocumentAnchorInventory(doc)}
+${renderDocumentLayerMap(doc)}
 ${mapped.length ? `<div class="source-companion-mapped">
 <h4>Abgedeckte Portal-Konzepte</h4>
 ${mapped.map((concept) => `<button type="button" onclick="window.__navigate('${escapeHtml(concept.conceptId)}')">

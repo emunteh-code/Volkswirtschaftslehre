@@ -5516,6 +5516,28 @@ body.light-mode #content .source-provenance-mark {
   background: color-mix(in srgb, var(--card) 70%, transparent);
 }
 
+#content .source-companion-action-plan {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 8%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface2) 12%, transparent);
+}
+
+#content .source-companion-action-plan ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+#content .source-companion-action-plan li {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 #content .source-companion-meta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

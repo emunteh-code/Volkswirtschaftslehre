@@ -290,6 +290,41 @@ function documentCoverageVerdict(doc, conceptCoverage) {
   };
 }
 
+function sourceParityActionsForDoc(doc, conceptCoverage) {
+  const verdict = documentCoverageVerdict(doc, conceptCoverage);
+  const density = anchorDensityForDoc(doc);
+  const actions = [];
+
+  if (verdict.tone === 'gap') {
+    actions.push(
+      'Dokument sichten und als prüfungsrelevant, Zusatzmaterial oder nicht abdeckungsrelevant klassifizieren.',
+      'Falls relevant: passende Portal-Konzepte oder neue Konzeptlücken erfassen.',
+      'Mindestens erste geprüfte Seitenanker anlegen, bevor dieses Dokument als rekonstruiert gilt.'
+    );
+  } else if (verdict.tone === 'partial') {
+    actions.push(
+      'Bestehende Dokumentreferenzen in konkrete Seiten- oder Abschnittsanker überführen.',
+      'Portal-Layer gegen offizielle Terminologie, Notation und Graphkonvention prüfen.',
+      'Reference-only Layer erst nach Seitenprüfung als page-level abgedeckt behandeln.'
+    );
+  } else {
+    actions.push(
+      'Alle relevanten Folienseiten gegen Konzepte, Formeln und Aufgabenfamilien durchgehen.',
+      'Reference-only Portalbereiche in geprüfte Seitenanker umwandeln.',
+      'Nach Abschluss prüfen, ob Formeln, Herleitungen und Prüfungstransfer vollständig source-anchored sind.'
+    );
+  }
+
+  if (doc?.kind === 'lecture-slide' && density.pages && density.anchors < density.pages) {
+    actions.push(`${density.pages - density.anchors} Seiten haben noch keinen reviewed anchor; diese Zahl ist ein Priorisierungssignal, kein automatischer Fehler.`);
+  }
+
+  return {
+    label: verdict.label,
+    actions
+  };
+}
+
 function coverageFilterForDoc(doc, conceptCoverage) {
   return documentCoverageVerdict(doc, conceptCoverage).tone;
 }
@@ -514,6 +549,19 @@ ${verdict.facts.map((fact) => `<em>${escapeHtml(fact)}</em>`).join('')}
 </div>`;
 }
 
+function renderSourceParityActions(doc, conceptCoverage) {
+  const plan = sourceParityActionsForDoc(doc, conceptCoverage);
+  return `<div class="source-companion-action-plan">
+<div class="source-companion-anchor-list-head">
+<h4>Source-Parity Next Steps</h4>
+<span>${escapeHtml(plan.label)}</span>
+</div>
+<ol>
+${plan.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join('')}
+</ol>
+</div>`;
+}
+
 function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anchorContext = null) {
   if (!doc) {
     return `<div class="source-companion-empty">
@@ -542,6 +590,7 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anc
 ${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
 ${renderAnchorContext(anchorContext)}
 ${renderDocumentCoverageVerdict(doc, conceptCoverage)}
+${renderSourceParityActions(doc, conceptCoverage)}
 <div class="source-companion-meta-grid">
 <div><span>Gruppe</span><strong>${escapeHtml(doc.group || 'root')}</strong></div>
 <div><span>Umfang</span><strong>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')}</strong></div>

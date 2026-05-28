@@ -22,7 +22,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Official task families | Formula cards | Mastery dimensions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `mikro1` | 97% | 0% | 0 | 0 | 18 | 0 | 0 | 0 |
+| `mikro1` | 97% | 52% | 51 | 0 | 18 | 0 | 0 | 0 |
 | `mikro2` | 83% | 83% | 47 | 12 | 0 | 0 | 8 | 4 |
 | `makro1` | 100% | 0% | 0 | 1 | 29 | 0 | 0 | 0 |
 | `makro2` | 100% | 0% | 0 | 1 | 22 | 0 | 0 | 0 |
@@ -38,7 +38,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Anchor status | Exam-bank status | Provenance status | Adaptive status |
 |---|---|---|---|---|
-| `mikro1` | missing | official sources present; bank not mapped | partial | missing dimension model |
+| `mikro1` | partial | official sources present; bank not mapped | partial | missing dimension model |
 | `mikro2` | partial | task families only; official tasks missing | partial | dimension model present; official task evidence missing |
 | `makro1` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `makro2` | missing | official sources present; bank not mapped | partial | missing dimension model |
@@ -52,7 +52,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 ## Blockers
 
-- `mikro1`: page/slide/task anchors incomplete (0% concept coverage)
+- `mikro1`: page/slide/task anchors incomplete (52% concept coverage)
 - `mikro1`: official exam bank incomplete (official sources present; bank not mapped)
 - `mikro1`: item-level provenance incomplete (partial)
 - `mikro1`: adaptive mastery not evidence-based (missing dimension model)

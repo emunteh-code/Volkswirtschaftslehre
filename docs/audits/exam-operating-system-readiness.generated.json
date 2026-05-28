@@ -14,17 +14,17 @@
       "formulaSignalPages": 233,
       "concepts": 33,
       "conceptsWithSourceRefs": 32,
-      "conceptsWithSourceAnchors": 0,
+      "conceptsWithSourceAnchors": 17,
       "sourceRefCoveragePct": 97,
-      "sourceAnchorCoveragePct": 0,
-      "sourceAnchors": 0,
+      "sourceAnchorCoveragePct": 52,
+      "sourceAnchors": 51,
       "taskFamilies": 0,
       "sourceGroundedTaskFamilies": 0,
       "officialTaskSourceFamilies": 0,
       "officialFormulaCards": 0,
       "masteryDimensions": 0,
       "anchorComplete": false,
-      "anchorStatus": "missing",
+      "anchorStatus": "partial",
       "examBankComplete": false,
       "examBankStatus": "official sources present; bank not mapped",
       "provenanceComplete": false,
@@ -347,7 +347,7 @@
   "blockers": [
     {
       "module": "mikro1",
-      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
+      "reason": "page/slide/task anchors incomplete (52% concept coverage)"
     },
     {
       "module": "mikro1",

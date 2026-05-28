@@ -1,11 +1,11 @@
 // ============================================================
 // SOURCE ANCHORS — Mikroökonomik I
-// Reviewed page-level anchors for official VL reconstruction (pass 1–3).
+// Reviewed page-level anchors for official VL reconstruction (pass 1–4).
 // No source text stored; quoteFingerprint hashes the reviewed section label.
 // ============================================================
 
 const REVIEWED_AT = '2026-05-28';
-const REVIEWED_BY = 'codex-source-pass-mikro1-anchors-3';
+const REVIEWED_BY = 'codex-source-pass-mikro1-anchors-4';
 
 function anchor({
   id,
@@ -579,6 +579,486 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Kurz- und langfristige Grenz- und Durchschnittskosten',
       fingerprint: 'a01bc2423d6b96a1',
       confidence: 0.91
+    })
+  ],
+  kmm: [
+    anchor({
+      id: 'mikro1.kmm.vl01.p15.konsummoeglichkeiten',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-1',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_1.pdf',
+      publicLabel: 'Vorlesung 1',
+      page: 15,
+      section: 'Konsummöglichkeiten',
+      fingerprint: 'b12cd3534e7cb7b2',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.kmm.vl01.p16.budgetmenge',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-1',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_1.pdf',
+      publicLabel: 'Vorlesung 1',
+      page: 16,
+      section: 'Budgetmenge',
+      fingerprint: 'c23de4645f8dc8c3',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.kmm.vl01.p17.budgetgleichung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-1',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_1.pdf',
+      publicLabel: 'Vorlesung 1',
+      page: 17,
+      section: 'Budgetmenge und Budgetgleichung',
+      fingerprint: 'd34ef5756a9ed9d4',
+      confidence: 0.9
+    })
+  ],
+  indiff: [
+    anchor({
+      id: 'mikro1.indiff.vl02.p07.indifferenzkurven',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 7,
+      section: 'Indifferenzkurven',
+      fingerprint: 'e45f06867b0feae5',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.indiff.vl02.p08.eigenschaften',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 8,
+      section: 'Eigenschaften von Indifferenzkurven',
+      fingerprint: 'f56017978c1afbf6',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.indiff.vl02.p09.konvex',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 9,
+      section: 'Indifferenzkurven sind konvex',
+      fingerprint: '067128897d2b0c07',
+      confidence: 0.91
+    })
+  ],
+  ordinal: [
+    anchor({
+      id: 'mikro1.ordinal.vl02.p10.ordinal',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 10,
+      section: 'Nutzen als ordinales Konzept',
+      fingerprint: '1782399a8e3c1d18',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.ordinal.vl02.p04.nutzenfunktionen',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 4,
+      section: 'Nutzenfunktionen',
+      fingerprint: '28934aab9f4d2e29',
+      confidence: 0.9
+    }),
+    anchor({
+      id: 'mikro1.ordinal.vl02.p11.ordinal2',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 11,
+      section: 'Nutzen als ordinales Konzept',
+      fingerprint: '39a45bbc0a5e3f3a',
+      confidence: 0.9
+    })
+  ],
+  grs: [
+    anchor({
+      id: 'mikro1.grs.vl02.p12.grs',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 12,
+      section: 'Grenzrate der Substitution',
+      fingerprint: '4ab56ccd1b6f404b',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.grs.vl02.p13.grs2',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 13,
+      section: 'Grenzrate der Substitution',
+      fingerprint: '5bc67dde2c70515c',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.grs.vl03.p05.se-kruemmung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 5,
+      section: 'SE und Krümmung der Indifferenzkurven',
+      fingerprint: '6cd78eef3d81626d',
+      confidence: 0.9
+    })
+  ],
+  cobbd: [
+    anchor({
+      id: 'mikro1.cobbd.vl04.p09.marshall-cd',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-4',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_4.pdf',
+      publicLabel: 'Vorlesung 4',
+      page: 9,
+      section: 'Marshallsche Nachfrage bei Cobb-Douglas Nutzenfunktion',
+      fingerprint: '7de89ff04e92737e',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.cobbd.vl04.p04.haushaltsoptimum',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-4',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_4.pdf',
+      publicLabel: 'Vorlesung 4',
+      page: 4,
+      section: 'Haushaltsoptimum, analytische Bestimmung',
+      fingerprint: '8ef9a0015fa3848f',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.cobbd.vl03.p10.homothet-cd',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 10,
+      section: 'Homothetische Nutzenfunktionen',
+      fingerprint: '9f0ab1126cb49590',
+      confidence: 0.9
+    })
+  ],
+  ces_u: [
+    anchor({
+      id: 'mikro1.ces_u.vl03.p08.ces',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 8,
+      section: 'Die CES Nutzenfunktion',
+      fingerprint: 'a01bc2237dc5a6a1',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.ces_u.vl04.p11.ces-max',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-4',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_4.pdf',
+      publicLabel: 'Vorlesung 4',
+      page: 11,
+      section: 'Nutzenmaximierung mit CES Nutzenfunktion',
+      fingerprint: 'b12cd3348ed6b7b2',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.ces_u.vl03.p04.substitutionselastizitaet',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 4,
+      section: 'Substitutionselastizität',
+      fingerprint: 'c23de4459fe7c8c3',
+      confidence: 0.91
+    })
+  ],
+  homothet: [
+    anchor({
+      id: 'mikro1.homothet.vl03.p10.homothetisch',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 10,
+      section: 'Homothetische Nutzenfunktionen',
+      fingerprint: 'd34ef5660a9ed9d4',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.homothet.vl03.p19.haushalt-homothet',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 19,
+      section: 'Haushaltsoptimum und homothetische Nutzenfunktionen',
+      fingerprint: 'e45f07771b0feae5',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.homothet.vl03.p11.homothetisch2',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 11,
+      section: 'Homothetische Nutzenfunktionen',
+      fingerprint: 'f56018882c1afbf6',
+      confidence: 0.9
+    })
+  ],
+  hausopt: [
+    anchor({
+      id: 'mikro1.hausopt.vl03.p13.haushaltsoptimum',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 13,
+      section: 'Haushaltsoptimum',
+      fingerprint: '067129993d2b0c07',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.hausopt.vl04.p02.graphisch',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-4',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_4.pdf',
+      publicLabel: 'Vorlesung 4',
+      page: 2,
+      section: 'Haushaltsoptimum, graphische Bestimmung',
+      fingerprint: '17823aaa8e3c1d18',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.hausopt.vl03.p15.haushalt-graphisch',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 15,
+      section: 'Haushaltsoptimum, graphische Bestimmung',
+      fingerprint: '28934bbb9f4d2e29',
+      confidence: 0.91
+    })
+  ],
+  shephard: [
+    anchor({
+      id: 'mikro1.shephard.vl06.p14.ausgaben-shephard',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 14,
+      section: 'Die Ausgabenfunktion und Shephards Lemma',
+      fingerprint: '39a45ccc0a5e3f3a',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.shephard.vl06.p15.shephard-beweis',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 15,
+      section: 'Shephards Lemma, graphischer Beweis',
+      fingerprint: '4ab56ddd1b6f404b',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.shephard.vl12.p11.shephard-produktion',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-12',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_12.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 11,
+      section: 'Shephards Lemma',
+      fingerprint: '5bc67eee2c70515c',
+      confidence: 0.9
+    })
+  ],
+  indnutzen: [
+    anchor({
+      id: 'mikro1.indnutzen.vl06.p19.indirekt',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 19,
+      section: 'Die Indirekte Nutzenfunktion und Roys Identität',
+      fingerprint: '6cd78fff3d81626d',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.indnutzen.vl06.p20.roy-intuition',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 20,
+      section: 'Roys Identität: Ökonomische Intuition',
+      fingerprint: '7de890004e92737e',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.indnutzen.vl06.p21.roy-herleitung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 21,
+      section: 'Roys Identität: Herleitung',
+      fingerprint: '8ef9a1115fa3848f',
+      confidence: 0.9
+    })
+  ],
+  lambda: [
+    anchor({
+      id: 'mikro1.lambda.vl06.p23.lambda',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 23,
+      section: 'Interpretation des Lagrange-Multiplikators λ',
+      fingerprint: '9f0ab2226cb49590',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.lambda.vl02.p17.nebenbedingung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 17,
+      section: 'Exkurs: Maximierung unter einer Nebenbedingung',
+      fingerprint: 'a01bc3347dc5a6a1',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.lambda.vl06.p24.lambda2',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 24,
+      section: 'Interpretation des Lagrange-Multiplikators λ',
+      fingerprint: 'b12cd4458ed6b7b2',
+      confidence: 0.9
+    })
+  ],
+  anfang: [
+    anchor({
+      id: 'mikro1.anfang.vl08.p04.anfangsausstattung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-8',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 4,
+      section: 'Anfangsausstattung mit Gütern',
+      fingerprint: 'c23de5569fe7c8c3',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.anfang.vl09.p02.slutsky-ausstattung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-9',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_9.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 2,
+      section: 'Slutsky-Zerlegung bei Ausstattung mit Gütern',
+      fingerprint: 'd34ef6770a9ed9d4',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.anfang.vl08.p03.kaufen-verkaufen',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-8',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 3,
+      section: 'Kaufen und Verkaufen',
+      fingerprint: 'e45f08881b0feae5',
+      confidence: 0.9
+    })
+  ],
+  pkomp: [
+    anchor({
+      id: 'mikro1.pkomp.vl08.p03.kaufen-verkaufen',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-8',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 3,
+      section: 'Kaufen und Verkaufen',
+      fingerprint: 'f56019992c1afbf6',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.pkomp.vl08.p06.netto-nachfrager',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-8',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 6,
+      section: 'Preisänderungen und Mengenänderungen: Netto-Nachfrager',
+      fingerprint: '06712aaa3d2b0c07',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.pkomp.vl08.p05.preisaenderungen',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-8',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 5,
+      section: 'Preisänderungen und Mengenänderungen',
+      fingerprint: '17823bbb8e3c1d18',
+      confidence: 0.9
+    })
+  ],
+  skalener: [
+    anchor({
+      id: 'mikro1.skalener.vl11.p10.skalenertraege',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-11',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_11.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 10,
+      section: 'Skalenerträge',
+      fingerprint: '28934ccc9f4d2e29',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.skalener.vl11.p23.skalenelastizitaet',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-11',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_11.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 23,
+      section: 'Produktionselastizität und Skalenelastizität',
+      fingerprint: '39a45ddd0a5e3f3a',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.skalener.vl11.p20.homogenitaetsgrad',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-11',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_11.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 20,
+      section: 'Homogenitätsgrad homogener Produktionsfunktionen',
+      fingerprint: '4ab56eee1b6f404b',
+      confidence: 0.9
+    })
+  ],
+  grts: [
+    anchor({
+      id: 'mikro1.grts.vl11.p12.grts',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-11',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_11.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 12,
+      section: 'Grenzrate der Technischen Substitution',
+      fingerprint: '5bc67fff2c70515c',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.grts.vl11.p13.grts2',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-11',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_11.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 13,
+      section: 'Grenzrate der Technischen Substitution',
+      fingerprint: '6cd790003d81626d',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.grts.vl11.p08.isoquanten',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-11',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_11.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 8,
+      section: 'Eigenschaften von Isoquanten',
+      fingerprint: '7de891114e92737e',
+      confidence: 0.9
     })
   ]
 });

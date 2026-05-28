@@ -6,6 +6,17 @@
 import { CHAPTERS } from '../data/chapters.js';
 import { PROVENANCE_BY_CONCEPT } from '../data/contentManifest.js';
 import { TASK_FAMILIES } from '../data/taskFamilies.js';
+import {
+  DEFAULT_COVERAGE_FILTERS,
+  anchorDensityForDoc as coreAnchorDensityForDoc,
+  buildConceptCoverage as buildCoreConceptCoverage,
+  documentAnchorsForDoc as coreDocumentAnchorsForDoc,
+  documentCoverageVerdict as coreDocumentCoverageVerdict,
+  documentLayerRowsForDoc as coreDocumentLayerRowsForDoc,
+  filterDocsByCoverage as coreFilterDocsByCoverage,
+  mappedConceptsForDoc as coreMappedConceptsForDoc,
+  normalizeSourcePath
+} from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 
 const MODULE_SLUG = 'mikro2';
 const REGISTRY_URL = '../docs/audits/source-corpus-registry.generated.json';
@@ -38,12 +49,8 @@ const SOURCE_STATUS_LABELS = Object.freeze({
   'cross-link': 'cross-link'
 });
 
-const COVERAGE_FILTERS = Object.freeze([
-  { id: 'all', label: 'Alle Quellen' },
-  { id: 'anchored', label: 'Page-anchored partial' },
-  { id: 'partial', label: 'Reference-only' },
-  { id: 'gap', label: 'Corpus-only' }
-]);
+const COVERAGE_FILTERS = DEFAULT_COVERAGE_FILTERS;
+const PATH_OPTIONS = Object.freeze({ sourceRoot: 'source-materials/Mikroökonomik II' });
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -59,32 +66,15 @@ function sourceMaterialUrl(doc) {
 }
 
 function normalizePath(value) {
-  return String(value || '')
-    .replace(/^source-materials\/Mikroökonomik II\//, '')
-    .replace(/\\/g, '/');
-}
-
-function collectConceptSourcePaths(layers) {
-  const out = new Set();
-  for (const layer of Object.values(layers || {})) {
-    for (const ref of layer?.source_refs || []) {
-      out.add(normalizePath(ref?.path || ref));
-    }
-    for (const anchor of layer?.source_anchors || []) {
-      out.add(normalizePath(anchor?.sourcePath || anchor?.path || ''));
-    }
-  }
-  return [...out].filter(Boolean);
+  return normalizeSourcePath(value, PATH_OPTIONS);
 }
 
 function buildConceptCoverage() {
-  const titleById = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter.title]));
-  return Object.entries(PROVENANCE_BY_CONCEPT).map(([conceptId, layers]) => ({
-    conceptId,
-    title: titleById[conceptId] || conceptId,
-    paths: collectConceptSourcePaths(layers),
-    hasPageAnchors: Object.values(layers || {}).some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length)
-  }));
+  return buildCoreConceptCoverage({
+    provenanceByConcept: PROVENANCE_BY_CONCEPT,
+    titleById: conceptTitleById(),
+    pathOptions: PATH_OPTIONS
+  });
 }
 
 function conceptTitleById() {
@@ -116,7 +106,7 @@ async function loadMikro2Documents() {
 }
 
 function mappedConceptsForDoc(doc, conceptCoverage) {
-  return conceptCoverage.filter((concept) => concept.paths.some((p) => p === doc.path || p.endsWith(doc.path) || doc.path.endsWith(p)));
+  return coreMappedConceptsForDoc(doc, conceptCoverage);
 }
 
 function lectureSortKey(doc) {
@@ -150,143 +140,40 @@ function unanchoredPortalConcepts(conceptCoverage) {
     .sort((a, b) => String(a.title).localeCompare(String(b.title), 'de', { numeric: true }));
 }
 
-function anchorMatchesDoc(anchor, doc) {
-  if (!anchor || !doc) return false;
-  const sourcePath = normalizePath(anchor.sourcePath || anchor.path || '');
-  if (anchor.sourceId && anchor.sourceId === doc.id) return true;
-  return Boolean(sourcePath && (sourcePath === doc.path || sourcePath.endsWith(doc.path) || doc.path.endsWith(sourcePath)));
-}
-
-function refMatchesDoc(ref, doc) {
-  if (!ref || !doc) return false;
-  const refPath = normalizePath(ref?.path || ref);
-  return Boolean(refPath && (refPath === doc.path || refPath.endsWith(doc.path) || doc.path.endsWith(refPath)));
-}
-
-function layerMatchesDoc(layer, doc) {
-  const hasAnchors = (layer?.source_anchors || []).some((anchor) => anchorMatchesDoc(anchor, doc));
-  const hasRefs = (layer?.source_refs || []).some((ref) => refMatchesDoc(ref, doc));
-  return { hasAnchors, hasRefs, matches: hasAnchors || hasRefs };
-}
-
-function anchorSortPage(anchor) {
-  const page = anchor?.locator?.page ?? anchor?.page;
-  const parsed = Number.parseInt(page, 10);
-  return Number.isFinite(parsed) ? parsed : 9999;
-}
-
 function documentAnchorsForDoc(doc) {
-  const titles = conceptTitleById();
-  const rowsByAnchorId = new Map();
-
-  for (const [conceptId, layers] of Object.entries(PROVENANCE_BY_CONCEPT)) {
-    for (const [layerKey, layer] of Object.entries(layers || {})) {
-      for (const anchor of layer?.source_anchors || []) {
-        if (!anchorMatchesDoc(anchor, doc)) continue;
-        const page = anchor?.locator?.page ?? anchor?.page ?? '';
-        const section = anchor?.locator?.section || anchor?.section || '';
-        const fallbackId = `${conceptId}:${normalizePath(anchor.sourcePath || anchor.path)}:${page}:${section}`;
-        const id = anchor.id || fallbackId;
-        const row = rowsByAnchorId.get(id) || {
-          id,
-          conceptId,
-          conceptTitle: titles[conceptId] || conceptId,
-          anchor,
-          layerLabels: new Set()
-        };
-        row.layerLabels.add(LAYER_LABELS[layerKey] || layerKey);
-        rowsByAnchorId.set(id, row);
-      }
-    }
-  }
-
-  return [...rowsByAnchorId.values()].sort((a, b) => {
-    const pageDiff = anchorSortPage(a.anchor) - anchorSortPage(b.anchor);
-    if (pageDiff) return pageDiff;
-    return String(a.conceptTitle).localeCompare(String(b.conceptTitle), 'de', { numeric: true });
+  return coreDocumentAnchorsForDoc({
+    doc,
+    provenanceByConcept: PROVENANCE_BY_CONCEPT,
+    titleById: conceptTitleById(),
+    layerLabels: LAYER_LABELS,
+    pathOptions: PATH_OPTIONS
   });
 }
 
 function anchorDensityForDoc(doc) {
   const anchors = documentAnchorsForDoc(doc);
-  const pages = Number.parseInt(doc?.pages, 10);
-  const pageCount = Number.isFinite(pages) && pages > 0 ? pages : 0;
-  const density = pageCount ? Math.min(1, anchors.length / pageCount) : 0;
-  const label = anchors.length
-    ? `${anchors.length} geprüfte Anker${pageCount ? ` / ${pageCount} Seiten` : ''}`
-    : '0 geprüfte Seitenanker';
-  const caveat = anchors.length
-    ? 'page-level Rekonstruktion offen'
-    : 'Mapping-Gap';
-  return {
-    anchors: anchors.length,
-    pages: pageCount,
-    density,
-    densityPct: Math.round(density * 100),
-    label,
-    caveat
-  };
+  return coreAnchorDensityForDoc(doc, anchors);
 }
 
 function documentLayerRowsForDoc(doc) {
-  const titles = conceptTitleById();
-  const rows = [];
-
-  for (const [conceptId, layers] of Object.entries(PROVENANCE_BY_CONCEPT)) {
-    for (const [layerKey, layer] of Object.entries(layers || {})) {
-      const match = layerMatchesDoc(layer, doc);
-      if (!match.matches) continue;
-      rows.push({
-        conceptId,
-        conceptTitle: titles[conceptId] || conceptId,
-        layerKey,
-        layerLabel: LAYER_LABELS[layerKey] || layerKey,
-        sourceStatus: SOURCE_STATUS_LABELS[layer?.source_status] || layer?.source_status || 'unbekannt',
-        precision: match.hasAnchors ? 'Seitenanker' : 'Quellenreferenz'
-      });
-    }
-  }
-
-  return rows.sort((a, b) => {
-    const conceptDiff = String(a.conceptTitle).localeCompare(String(b.conceptTitle), 'de', { numeric: true });
-    if (conceptDiff) return conceptDiff;
-    return String(a.layerLabel).localeCompare(String(b.layerLabel), 'de', { numeric: true });
+  return coreDocumentLayerRowsForDoc({
+    doc,
+    provenanceByConcept: PROVENANCE_BY_CONCEPT,
+    titleById: conceptTitleById(),
+    layerLabels: LAYER_LABELS,
+    sourceStatusLabels: SOURCE_STATUS_LABELS,
+    pathOptions: PATH_OPTIONS
   });
 }
 
 function documentCoverageVerdict(doc, conceptCoverage) {
-  const mapped = mappedConceptsForDoc(doc, conceptCoverage);
   const anchors = documentAnchorsForDoc(doc);
   const layers = documentLayerRowsForDoc(doc);
-  const referencedOnly = layers.filter((row) => row.precision === 'Quellenreferenz').length;
-  const pageAnchored = layers.filter((row) => row.precision === 'Seitenanker').length;
-
-  if (!mapped.length && !layers.length && !anchors.length) {
-    return {
-      tone: 'gap',
-      label: 'Corpus-only',
-      title: 'Offizielle Quelle registriert, aber noch nicht rekonstruiert',
-      body: 'Dieses Dokument liegt im Mikro-II-Korpus, ist aber noch keinem Portal-Konzept, keinem Portal-Layer und keinem geprüften Seitenanker direkt zugeordnet.',
-      facts: ['Portalabdeckung offen', 'keine geprüften Seitenanker', 'Source-Parity-Pass erforderlich']
-    };
-  }
-
-  if (!anchors.length) {
-    return {
-      tone: 'partial',
-      label: 'Reference-only',
-      title: 'Dokumentreferenz vorhanden, page-level Rekonstruktion offen',
-      body: 'Portal-Inhalte verweisen auf diese Quelle, aber es gibt noch keine geprüften Seitenanker. Diese Abdeckung ist brauchbar zur Orientierung, aber nicht präzise genug für source-complete.',
-      facts: [`${mapped.length} Konzept${mapped.length === 1 ? '' : 'e'}`, `${referencedOnly} referenzierte Portalbereiche`, 'keine Seitenanker']
-    };
-  }
-
+  const verdict = coreDocumentCoverageVerdict({ doc, conceptCoverage, anchors, layers });
+  if (verdict.tone !== 'gap') return verdict;
   return {
-    tone: 'anchored',
-    label: 'Page-anchored partial',
-    title: 'Geprüfte Seitenanker vorhanden, aber keine Vollständigkeitszusage',
-    body: 'Dieses Dokument hat geprüfte Seitenanker und portalweite Layer-Zuordnungen. Es bleibt trotzdem partial, bis alle relevanten Seiten, Formeln und Aufgabenfamilien vollständig gegen die Quelle geprüft sind.',
-    facts: [`${anchors.length} geprüfte Seitenanker`, `${pageAnchored} page-level Portalbereiche`, `${referencedOnly} reference-only Portalbereiche`]
+    ...verdict,
+    body: 'Dieses Dokument liegt im Mikro-II-Korpus, ist aber noch keinem Portal-Konzept, keinem Portal-Layer und keinem geprüften Seitenanker direkt zugeordnet.'
   };
 }
 
@@ -330,8 +217,8 @@ function coverageFilterForDoc(doc, conceptCoverage) {
 }
 
 function filterDocsByCoverage(docs, conceptCoverage, activeFilter = 'all') {
-  if (activeFilter === 'all') return docs;
-  return docs.filter((doc) => coverageFilterForDoc(doc, conceptCoverage) === activeFilter);
+  const verdictByDocId = Object.fromEntries((docs || []).map((doc) => [doc.id, documentCoverageVerdict(doc, conceptCoverage)]));
+  return coreFilterDocsByCoverage(docs, verdictByDocId, activeFilter);
 }
 
 function renderCoverageFilters(docs, conceptCoverage, activeFilter = 'all') {

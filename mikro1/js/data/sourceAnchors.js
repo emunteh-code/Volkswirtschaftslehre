@@ -1,11 +1,11 @@
 // ============================================================
 // SOURCE ANCHORS — Mikroökonomik I
-// Reviewed page-level anchors for official VL reconstruction (pass 1–2).
+// Reviewed page-level anchors for official VL reconstruction (pass 1–3).
 // No source text stored; quoteFingerprint hashes the reviewed section label.
 // ============================================================
 
 const REVIEWED_AT = '2026-05-28';
-const REVIEWED_BY = 'codex-source-pass-mikro1-anchors-2';
+const REVIEWED_BY = 'codex-source-pass-mikro1-anchors-3';
 
 function anchor({
   id,
@@ -354,6 +354,230 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       page: 11,
       section: 'Wohlfahrtswirkung des Monopols',
       fingerprint: '5bc6f23d8e16415c',
+      confidence: 0.91
+    })
+  ],
+  elast: [
+    anchor({
+      id: 'mikro1.elast.vl05.p21.preiselastizitaet',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-5',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 21,
+      section: 'Preiselastizität der Nachfrage',
+      fingerprint: '6cd7a34e9f27526d',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.elast.vl05.p24.kreuzpreis',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-5',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 24,
+      section: 'Kreuzpreiselastizität der Nachfrage',
+      fingerprint: '7de8b45f0a38637e',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.elast.vl05e.p02.empirisch-preis',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-5-empirischeelastizitaeten',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_5_EmpirischeElastizitaeten.pdf',
+      publicLabel: 'Vorlesung 5 (Empirie)',
+      page: 2,
+      section: 'Empirische Preiselastizitäten 1',
+      fingerprint: '8ef9c5601b49748f',
+      confidence: 0.9
+    })
+  ],
+  normal: [
+    anchor({
+      id: 'mikro1.normal.vl05.p06.einkommenselastizitaet',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-5',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 6,
+      section: 'Die Einkommenselastizität der Nachfrage',
+      fingerprint: '9f0ad6712c5a8590',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.normal.vl05.p08.engel-luxus',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-5',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 8,
+      section: 'Engelkurve für Luxusgut',
+      fingerprint: 'a01be7823d6b96a1',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.normal.vl05.p09.engel-essenziell',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-5',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 9,
+      section: 'Engelkurve für essentielles Gut',
+      fingerprint: 'b12cf8934e7ca7b2',
+      confidence: 0.91
+    })
+  ],
+  hicks: [
+    anchor({
+      id: 'mikro1.hicks.vl06.p10.hicks-preis',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 10,
+      section: 'Preisänderungen und die Hickssche Nachfragekurve',
+      fingerprint: 'c23d0a044f8db8c3',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.hicks.vl06.p12.hicks-kurve',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 12,
+      section: 'Hickssche Nachfragekurve',
+      fingerprint: 'd34e1b15509ec9d4',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.hicks.vl06.p19.indirekte-nutzen',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 19,
+      section: 'Die Indirekte Nutzenfunktion und Roys Identität',
+      fingerprint: 'e45f2c2661afdae5',
+      confidence: 0.91
+    })
+  ],
+  ausgaben: [
+    anchor({
+      id: 'mikro1.ausgaben.vl06.p02.ausgabenmin',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 2,
+      section: 'Ausgabenminimierung',
+      fingerprint: 'f5603d3772b0ebf6',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.ausgaben.vl06.p07.nutzen-vs-ausgaben',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 7,
+      section: 'Nutzenmaximierung vs. Ausgabenminimierung',
+      fingerprint: '06714e4883c1fc07',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.ausgaben.vl06.p14.ausgabenfunktion',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-6',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 14,
+      section: 'Die Ausgabenfunktion und Shephards Lemma',
+      fingerprint: '17825f5994d20d18',
+      confidence: 0.91
+    })
+  ],
+  cv_ev: [
+    anchor({
+      id: 'mikro1.cv_ev.vl10.p03.cv',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-10',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_10.pdf',
+      publicLabel: 'Vorlesung 10',
+      page: 3,
+      section: 'Die Kompensierende Variation (CV)',
+      fingerprint: '28936a6aa5e31e29',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.cv_ev.vl10.p08.ev',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-10',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_10.pdf',
+      publicLabel: 'Vorlesung 10',
+      page: 8,
+      section: 'Die äquivalente Variation (EV)',
+      fingerprint: '39a47b7bb6f42f3a',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.cv_ev.vl10.p14.vergleich',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-10',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_10.pdf',
+      publicLabel: 'Vorlesung 10',
+      page: 14,
+      section: 'Vergleich von CV, EV und ∆KR',
+      fingerprint: '4ab58c8cc705304b',
+      confidence: 0.91
+    })
+  ],
+  arbeit: [
+    anchor({
+      id: 'mikro1.arbeit.vl09.p03.arbeitsangebot',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-9',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_9.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 3,
+      section: 'Arbeitsangebot',
+      fingerprint: '5bc69d9dd816415c',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.arbeit.vl09.p11.lohnaenderung',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-9',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_9.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 11,
+      section: 'Wirkung einer Lohnänderung',
+      fingerprint: '6cd7ae0ee927526d',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.arbeit.vl09.p13.diskussion-lohn',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-9',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_9.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 13,
+      section: 'Diskussion: Lohnänderung und Arbeitsangebot',
+      fingerprint: '7de8bf1ff038637e',
+      confidence: 0.91
+    })
+  ],
+  gk_dk: [
+    anchor({
+      id: 'mikro1.gk_dk.vl15.p06.gk-vs-dk',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-15',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_15.pdf',
+      publicLabel: 'Vorlesung 15',
+      page: 6,
+      section: 'Grenzkosten versus Durchschnittskosten',
+      fingerprint: '8ef9c0201b49748f',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.gk_dk.vl15.p09.kurz-lang-gk',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-15',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_15.pdf',
+      publicLabel: 'Vorlesung 15',
+      page: 9,
+      section: 'Kurz- vs. langfristige Gesamtkosten',
+      fingerprint: '9f0ad1312c5a8590',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.gk_dk.vl15.p17.gk-dk-kurz-lang',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-15',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_15.pdf',
+      publicLabel: 'Vorlesung 15',
+      page: 17,
+      section: 'Kurz- und langfristige Grenz- und Durchschnittskosten',
+      fingerprint: 'a01bc2423d6b96a1',
       confidence: 0.91
     })
   ]

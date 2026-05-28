@@ -185,3 +185,92 @@ export function filterDocsByCoverage(docs, verdictByDocId, activeFilter = 'all')
   if (activeFilter === 'all') return docs || [];
   return (docs || []).filter((doc) => coverageFilterForDoc(verdictByDocId?.[doc.id]) === activeFilter);
 }
+
+export function resolveDocIdBySourcePath(docs, sourcePath, pathOptions = {}) {
+  const normalized = normalizeSourcePath(sourcePath, pathOptions);
+  if (!normalized) return null;
+  const match = (docs || []).find((doc) => pathsMatch(doc?.path, normalized) || pathsMatch(doc?.path, sourcePath));
+  return match?.id || null;
+}
+
+export function buildConceptSourceSummaryFromProvenance(layers, options = {}) {
+  const {
+    anchoredTitle = 'Direkte Seitenanker vorhanden.',
+    referencedTitle = 'Offizielle Quellenreferenz vorhanden, aber noch ohne Seitenanker.',
+    supplementalTitle = 'Platform-added support ohne direkten offiziellen Quellenanker.',
+    platformTitle = 'Platform-added support; Quelle muss noch geprüft werden.',
+    unknownTitle = 'Für dieses Konzept liegt noch keine Provenienzmetadaten-Zuordnung vor.',
+    supplementalLabel = 'Supplemental',
+    anchoredLabel = 'Quelle',
+    referencedLabel = 'Referenz',
+    platformLabel = 'Plattform',
+    unknownLabel = 'Quellenstatus offen'
+  } = options;
+
+  if (!layers) {
+    return { status: 'unknown', label: unknownLabel, title: unknownTitle };
+  }
+
+  const values = Object.values(layers);
+  const hasAnchor = values.some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length > 0);
+  const hasRef = values.some((layer) => Array.isArray(layer?.source_refs) && layer.source_refs.length > 0);
+  const statuses = new Set(values.map((layer) => layer?.source_status).filter(Boolean));
+  const isSupplemental = statuses.has('platform-added-explanation') || statuses.has('platform-added-drill');
+
+  if (isSupplemental && !hasAnchor && !hasRef) {
+    return { status: 'supplemental', label: supplementalLabel, title: supplementalTitle };
+  }
+  if (hasAnchor) {
+    return { status: 'anchored', label: anchoredLabel, title: anchoredTitle };
+  }
+  if (hasRef) {
+    return { status: 'referenced', label: referencedLabel, title: referencedTitle };
+  }
+  return { status: 'platform', label: platformLabel, title: platformTitle };
+}
+
+export function buildSourceParityActionPlan({ doc, verdict, density, messages = {} }) {
+  const actionsByTone = {
+    gap: messages.gap || [
+      'Dokument sichten und als prüfungsrelevant, Zusatzmaterial oder nicht abdeckungsrelevant klassifizieren.',
+      'Falls relevant: passende Portal-Konzepte, Formelgruppen oder Aufgabenlücken erfassen.',
+      'Erste geprüfte Seitenanker anlegen, bevor dieses Dokument als rekonstruiert gilt.'
+    ],
+    partial: messages.partial || [
+      'File-level Quellenreferenzen in konkrete Seiten- oder Abschnittsanker überführen.',
+      'Notation, Graphkonventionen und Herleitungsstil gegen die offizielle Quelle prüfen.',
+      'Aufgaben- und Formelbezüge erst nach Seitenprüfung als source-complete behandeln.'
+    ],
+    anchored: messages.anchored || [
+      'Alle relevanten Seiten gegen Konzepte, Formeln und Aufgabenfamilien durchgehen.',
+      'Verbleibende reference-only Portalbereiche in geprüfte Seitenanker umwandeln.',
+      'Danach prüfen, ob offizielle Aufgaben und Probeklausuren vollständig task-family-mapped sind.'
+    ]
+  };
+  const tone = verdict?.tone || 'gap';
+  const actions = [...(actionsByTone[tone] || actionsByTone.gap)];
+  if (doc?.kind === 'lecture-slide' && density?.pages && density.anchors < density.pages) {
+    actions.push(
+      `${density.pages - density.anchors} Seiten haben noch keinen reviewed anchor; diese Zahl ist ein Priorisierungssignal, kein automatischer Fehler.`
+    );
+  }
+  return { label: verdict?.label || 'Source parity', actions };
+}
+
+export function renderAnchorContextPanel(anchorContext, escapeHtml) {
+  if (!anchorContext?.title) return '';
+  const esc = typeof escapeHtml === 'function' ? escapeHtml : (value) => String(value ?? '');
+  const details = [
+    anchorContext.sourceUrl ? `<span><strong>Direktziel:</strong> ${esc(anchorContext.sourceUrl)}</span>` : '',
+    anchorContext.section ? `<span><strong>Abschnitt:</strong> ${esc(anchorContext.section)}</span>` : '',
+    anchorContext.areas ? `<span><strong>Portalbereich:</strong> ${esc(anchorContext.areas)}</span>` : '',
+    anchorContext.statuses ? `<span><strong>Status:</strong> ${esc(anchorContext.statuses)}</span>` : '',
+    anchorContext.confidence ? `<span><strong>Konfidenz:</strong> ${esc(anchorContext.confidence)}</span>` : '',
+    anchorContext.reviewedAt ? `<span><strong>Geprüft:</strong> ${esc(anchorContext.reviewedAt)}</span>` : ''
+  ].filter(Boolean).join('');
+  return `<div class="source-companion-anchor-context" role="note">
+<span>Aus Konzeptanker geöffnet</span>
+<strong>${esc(anchorContext.title)}</strong>
+${details ? `<div>${details}</div>` : ''}
+</div>`;
+}

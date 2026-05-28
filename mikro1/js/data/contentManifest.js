@@ -7,6 +7,7 @@ import { createProvenance } from '../../../assets/js/portal-core/data/provenance
 import { buildProvenanceByConceptFromPrimaryRefs } from '../../../assets/js/portal-core/data/learningObjectNormalize.js';
 import { buildConceptModeIndex } from '../../../assets/js/portal-core/data/modeIndex.js';
 import { buildContentManifestBridgePayload } from '../../../assets/js/portal-core/data/contentManifestAdapters.js';
+import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 import { CHAPTERS, CONTENT } from './chapters.js';
 import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
@@ -152,6 +153,15 @@ export function getMikro1ContentManifestBridgePayload() {
 
 export function getConceptProvenance(conceptId) {
   return PROVENANCE_BY_CONCEPT[conceptId] || null;
+}
+
+export function getConceptSourceSummary(conceptId) {
+  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
+    anchoredTitle: 'Direkte Mikro-I-Seitenanker vorhanden.',
+    referencedTitle: 'Offizielle Mikro-I-VL-Referenz vorhanden, aber noch ohne geprüfte Seitenanker.',
+    supplementalTitle: 'Platform-added support ohne direkten offiziellen Mikro-I-Quellenanker.',
+    platformTitle: 'Platform-added support; VL-Referenz oder Seitenanker fehlt noch.'
+  });
 }
 
 export function getConceptModeIndex(conceptId) {

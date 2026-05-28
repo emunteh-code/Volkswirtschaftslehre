@@ -435,6 +435,43 @@ function confidenceLabel(value) {
   return `${Math.round(n * 100)}%`;
 }
 
+function buildSourceRefInspectionRows(layers, sourceMaterialBaseUrl = '') {
+  if (!layers || typeof layers !== 'object') return [];
+  const byPath = new Map();
+  for (const [key, title] of LAYER_ORDER) {
+    const layer = layers[key];
+    if (!layer || !Array.isArray(layer.source_refs)) continue;
+    for (const ref of layer.source_refs) {
+      const path = String((ref?.path ?? ref) || '').replace(/\\/g, '/');
+      if (!path) continue;
+      const existing = byPath.get(path) || { path, areas: new Set(), statuses: new Set() };
+      existing.areas.add(title);
+      if (layer.source_status) existing.statuses.add(layer.source_status);
+      byPath.set(path, existing);
+    }
+  }
+
+  return [...byPath.values()].map(({ path, areas, statuses }) => {
+    const label =
+      toPublicProvenanceLabel(pathToHumanLabel(path), path) ||
+      path.split('/').pop() ||
+      'Quelle';
+    const sourceUrl = sourceUrlWithPage(sourceMaterialBaseUrl, { sourcePath: path });
+    return {
+      title: label,
+      sourcePath: path,
+      sourceUrl,
+      section: '',
+      areas: [...areas].join(', '),
+      statuses: [...statuses].map(publicSourceStatus).join(', '),
+      confidence: '',
+      reviewedAt: '',
+      sourceId: '',
+      anchorId: ''
+    };
+  });
+}
+
 function buildSourceInspectionRows(layers, sourceMaterialBaseUrl = '') {
   if (!layers || typeof layers !== 'object') return [];
   const byAnchor = new Map();
@@ -499,6 +536,7 @@ ${rows.map((row) => {
 <div class="source-provenance-inspector-actions">
 ${row.sourceUrl ? `<button type="button" class="source-provenance-open" data-source-open-url="${escapeAttr(row.sourceUrl)}" aria-label="Quelle lokal öffnen">Öffnen</button>` : ''}
 ${row.sourceId ? `<button type="button" class="source-provenance-companion" data-source-companion-id="${escapeAttr(row.sourceId)}" data-anchor-source-url="${escapeAttr(row.sourceUrl)}" data-anchor-title="${escapeAttr(row.title)}" data-anchor-section="${escapeAttr(row.section)}" data-anchor-areas="${escapeAttr(row.areas)}" data-anchor-statuses="${escapeAttr(row.statuses)}" data-anchor-confidence="${escapeAttr(row.confidence)}" data-anchor-reviewed-at="${escapeAttr(row.reviewedAt)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
+${!row.sourceId && row.sourcePath ? `<button type="button" class="source-provenance-companion-path" data-source-companion-path="${escapeAttr(row.sourcePath)}" data-anchor-source-url="${escapeAttr(row.sourceUrl)}" data-anchor-title="${escapeAttr(row.title)}" data-anchor-areas="${escapeAttr(row.areas)}" data-anchor-statuses="${escapeAttr(row.statuses)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
 </div>
 </div>
 <div class="source-provenance-inspector-details">${details}</div>
@@ -525,7 +563,12 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers, 
   const rows = buildBreakdownRows(layers);
   const withLine = rows.filter((r) => r.line);
   const uniqueLines = new Set(withLine.map((r) => r.line));
-  const inspectionRows = buildSourceInspectionRows(layers, sourceMaterialBaseUrl);
+  const anchorInspectionRows = buildSourceInspectionRows(layers, sourceMaterialBaseUrl);
+  const anchoredPaths = new Set(anchorInspectionRows.map((row) => row.sourcePath).filter(Boolean));
+  const refInspectionRows = buildSourceRefInspectionRows(layers, sourceMaterialBaseUrl).filter(
+    (row) => !anchoredPaths.has(row.sourcePath)
+  );
+  const inspectionRows = [...anchorInspectionRows, ...refInspectionRows];
   const expandable = uniqueLines.size > 1 || inspectionRows.length > 0;
 
   const safeTab = String(activeTab || 'tab').replace(/[^a-z0-9-]/gi, '');
@@ -608,11 +651,15 @@ export function initConceptProvenanceInteractions(root) {
       }
     });
   });
+  const openCompanion = (payload) => {
+    if (typeof window.__showSourceCompanion !== 'function') return;
+    window.__showSourceCompanion(payload);
+  };
   root.querySelectorAll('.source-provenance-companion').forEach((btn) => {
     btn.addEventListener('click', () => {
       const sourceId = btn.getAttribute('data-source-companion-id') || '';
-      if (!sourceId || typeof window.__showSourceCompanion !== 'function') return;
-      window.__showSourceCompanion({
+      if (!sourceId) return;
+      openCompanion({
         sourceId,
         anchorContext: {
           title: btn.getAttribute('data-anchor-title') || '',
@@ -621,6 +668,22 @@ export function initConceptProvenanceInteractions(root) {
           statuses: btn.getAttribute('data-anchor-statuses') || '',
           confidence: btn.getAttribute('data-anchor-confidence') || '',
           reviewedAt: btn.getAttribute('data-anchor-reviewed-at') || '',
+          sourceUrl: btn.getAttribute('data-anchor-source-url') || ''
+        }
+      });
+    });
+  });
+  root.querySelectorAll('.source-provenance-companion-path').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const sourcePath = btn.getAttribute('data-source-companion-path') || '';
+      if (!sourcePath) return;
+      openCompanion({
+        sourcePath,
+        anchorContext: {
+          title: btn.getAttribute('data-anchor-title') || '',
+          section: btn.getAttribute('data-anchor-section') || '',
+          areas: btn.getAttribute('data-anchor-areas') || '',
+          statuses: btn.getAttribute('data-anchor-statuses') || '',
           sourceUrl: btn.getAttribute('data-anchor-source-url') || ''
         }
       });

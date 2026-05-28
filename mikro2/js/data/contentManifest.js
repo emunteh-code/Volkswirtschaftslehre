@@ -12,6 +12,7 @@ import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
 import { MIKRO2_SOURCE_ANCHORS } from './sourceAnchors.js';
 import { GRAPH_CONCEPTS } from '../ui/graphPanel.js';
+import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 
 const MODULE_SLUG = 'mikro2';
 
@@ -149,44 +150,10 @@ export function getConceptProvenance(conceptId) {
 }
 
 export function getConceptSourceSummary(conceptId) {
-  const layers = getConceptProvenance(conceptId);
-  if (!layers) {
-    return {
-      status: 'unknown',
-      label: 'Quellenstatus offen',
-      title: 'Für dieses Konzept liegt noch keine Provenienzmetadaten-Zuordnung vor.'
-    };
-  }
-  const values = Object.values(layers);
-  const hasAnchor = values.some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length > 0);
-  const hasRef = values.some((layer) => Array.isArray(layer?.source_refs) && layer.source_refs.length > 0);
-  const statuses = new Set(values.map((layer) => layer?.source_status).filter(Boolean));
-  const isSupplemental = statuses.has('platform-added-explanation') || statuses.has('platform-added-drill');
-
-  if (isSupplemental && !hasAnchor && !hasRef) {
-    return {
-      status: 'supplemental',
-      label: 'Supplemental',
-      title: 'Platform-added support ohne direkten offiziellen Mikro-II-Quellenanker.'
-    };
-  }
-  if (hasAnchor) {
-    return {
-      status: 'anchored',
-      label: 'Quelle',
-      title: 'Direkte Mikro-II-Seitenanker vorhanden.'
-    };
-  }
-  if (hasRef) {
-    return {
-      status: 'referenced',
-      label: 'Referenz',
-      title: 'Offizielle Mikro-II-Quellenreferenz vorhanden, aber noch ohne Seitenanker.'
-    };
-  }
-  return {
-    status: 'platform',
-    label: 'Plattform',
-    title: 'Platform-added support; Quelle muss noch geprüft werden.'
-  };
+  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
+    anchoredTitle: 'Direkte Mikro-II-Seitenanker vorhanden.',
+    referencedTitle: 'Offizielle Mikro-II-Quellenreferenz vorhanden, aber noch ohne Seitenanker.',
+    supplementalTitle: 'Platform-added support ohne direkten offiziellen Mikro-II-Quellenanker.',
+    platformTitle: 'Platform-added support; Quelle muss noch geprüft werden.'
+  });
 }

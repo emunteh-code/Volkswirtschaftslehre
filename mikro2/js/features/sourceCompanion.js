@@ -19,23 +19,6 @@ function lectureSortKey(doc) {
   return 999;
 }
 
-function renderAnchorContext(anchorContext) {
-  if (!anchorContext?.title) return '';
-  const details = [
-    anchorContext.sourceUrl ? `<span><strong>Direktziel:</strong> ${escapeHtml(anchorContext.sourceUrl)}</span>` : '',
-    anchorContext.section ? `<span><strong>Abschnitt:</strong> ${escapeHtml(anchorContext.section)}</span>` : '',
-    anchorContext.areas ? `<span><strong>Portalbereich:</strong> ${escapeHtml(anchorContext.areas)}</span>` : '',
-    anchorContext.statuses ? `<span><strong>Status:</strong> ${escapeHtml(anchorContext.statuses)}</span>` : '',
-    anchorContext.confidence ? `<span><strong>Konfidenz:</strong> ${escapeHtml(anchorContext.confidence)}</span>` : '',
-    anchorContext.reviewedAt ? `<span><strong>Geprüft:</strong> ${escapeHtml(anchorContext.reviewedAt)}</span>` : ''
-  ].filter(Boolean).join('');
-  return `<div class="source-companion-anchor-context" role="note">
-<span>Aus Konzeptanker geöffnet</span>
-<strong>${escapeHtml(anchorContext.title)}</strong>
-${details ? `<div>${details}</div>` : ''}
-</div>`;
-}
-
 function renderTaskArchivePanel(docs) {
   const taskDocs = docs.filter((doc) => ['exercise', 'solution', 'tutorial', 'exam'].includes(doc.kind));
   const officialTaskFamilies = TASK_FAMILIES.filter((family) => family.officialTaskCoverage === 'official-task-source');
@@ -77,6 +60,24 @@ ${familiesWithoutOfficialTasks.map((family) => `<button type="button" onclick="w
 </section>`;
 }
 
+const MIKRO2_SOURCE_PARITY_MESSAGES = {
+  gap: [
+    'Dokument sichten und als prüfungsrelevant, Zusatzmaterial oder nicht abdeckungsrelevant klassifizieren.',
+    'Falls relevant: passende Portal-Konzepte oder neue Konzeptlücken erfassen.',
+    'Mindestens erste geprüfte Seitenanker anlegen, bevor dieses Dokument als rekonstruiert gilt.'
+  ],
+  partial: [
+    'Bestehende Dokumentreferenzen in konkrete Seiten- oder Abschnittsanker überführen.',
+    'Portal-Layer gegen offizielle Terminologie, Notation und Graphkonvention prüfen.',
+    'Reference-only Layer erst nach Seitenprüfung als page-level abgedeckt behandeln.'
+  ],
+  anchored: [
+    'Alle relevanten Folienseiten gegen Konzepte, Formeln und Aufgabenfamilien durchgehen.',
+    'Reference-only Portalbereiche in geprüfte Seitenanker umwandeln.',
+    'Nach Abschluss prüfen, ob Formeln, Herleitungen und Prüfungstransfer vollständig source-anchored sind.'
+  ]
+};
+
 export function createSourceCompanionModule({ renderMath } = {}) {
   return createSharedSourceCompanionModule({
     moduleSlug: 'mikro2',
@@ -105,30 +106,7 @@ export function createSourceCompanionModule({ renderMath } = {}) {
     detailGapBody: 'Dieses Dokument ist im offiziellen Mikro-II-Korpus registriert, aber aktuell verweist kein Portal-Konzept direkt darauf. Es muss in einem späteren Source-Parity-Pass geprüft, gemappt oder als Zusatzmaterial eingeordnet werden.',
     coverageGapBody: 'Dieses Dokument liegt im Mikro-II-Korpus, ist aber noch keinem Portal-Konzept, keinem Portal-Layer und keinem geprüften Seitenanker direkt zugeordnet.',
     includeAnchorMetadata: true,
-    renderAnchorContext,
-    renderTaskArchivePanel: renderTaskArchivePanel,
-    buildSourceParityActions: ({ doc, verdict, density }) => {
-      const actions = verdict.tone === 'gap'
-        ? [
-            'Dokument sichten und als prüfungsrelevant, Zusatzmaterial oder nicht abdeckungsrelevant klassifizieren.',
-            'Falls relevant: passende Portal-Konzepte oder neue Konzeptlücken erfassen.',
-            'Mindestens erste geprüfte Seitenanker anlegen, bevor dieses Dokument als rekonstruiert gilt.'
-          ]
-        : verdict.tone === 'partial'
-          ? [
-              'Bestehende Dokumentreferenzen in konkrete Seiten- oder Abschnittsanker überführen.',
-              'Portal-Layer gegen offizielle Terminologie, Notation und Graphkonvention prüfen.',
-              'Reference-only Layer erst nach Seitenprüfung als page-level abgedeckt behandeln.'
-            ]
-          : [
-              'Alle relevanten Folienseiten gegen Konzepte, Formeln und Aufgabenfamilien durchgehen.',
-              'Reference-only Portalbereiche in geprüfte Seitenanker umwandeln.',
-              'Nach Abschluss prüfen, ob Formeln, Herleitungen und Prüfungstransfer vollständig source-anchored sind.'
-            ];
-      if (doc?.kind === 'lecture-slide' && density.pages && density.anchors < density.pages) {
-        actions.push(`${density.pages - density.anchors} Seiten haben noch keinen reviewed anchor; diese Zahl ist ein Priorisierungssignal, kein automatischer Fehler.`);
-      }
-      return { label: verdict.label, actions };
-    }
+    sourceParityMessages: MIKRO2_SOURCE_PARITY_MESSAGES,
+    renderTaskArchivePanel
   }, { renderMath });
 }

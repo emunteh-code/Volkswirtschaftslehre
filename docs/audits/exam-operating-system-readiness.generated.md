@@ -27,7 +27,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `makro1` | 100% | 0% | 0 | 1 | 29 | 0 | 0 | 0 |
 | `makro2` | 100% | 0% | 0 | 1 | 22 | 0 | 0 | 0 |
 | `oekonometrie` | 100% | 0% | 0 | 1 | 33 | 0 | 0 | 0 |
-| `statistik` | 100% | 14% | 6 | 1 | 104 | 0 | 0 | 0 |
+| `statistik` | 100% | 36% | 15 | 1 | 104 | 0 | 0 | 0 |
 | `finanzwirtschaft` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
 | `mathematik` | 100% | 0% | 0 | 1 | 40 | 0 | 0 | 0 |
 | `jahresabschluss` | 100% | 0% | 0 | 0 | 13 | 0 | 0 | 0 |
@@ -77,7 +77,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `oekonometrie`: item-level provenance incomplete (partial)
 - `oekonometrie`: adaptive mastery not evidence-based (missing dimension model)
 - `oekonometrie`: Mikro1-depth equality not certified
-- `statistik`: page/slide/task anchors incomplete (14% concept coverage)
+- `statistik`: page/slide/task anchors incomplete (36% concept coverage)
 - `statistik`: official exam bank incomplete (official sources present; bank not mapped)
 - `statistik`: item-level provenance incomplete (partial)
 - `statistik`: adaptive mastery not evidence-based (missing dimension model)

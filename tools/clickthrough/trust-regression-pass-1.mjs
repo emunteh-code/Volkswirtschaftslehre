@@ -323,6 +323,93 @@ async function runProvenanceFormelnSecondary(page) {
   }
 }
 
+/** --- Mikro1 source companion (Workstream 1 parity) --- */
+async function runMikro1SourceCompanion(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${base}/mikro1/index.html`, { waitUntil: 'networkidle' });
+  await dismissConsent(page);
+  await page.waitForFunction(() => typeof window.__showSourceCompanion === 'function');
+  await page.evaluate(() => window.__showSourceCompanion());
+  await page.waitForSelector('.source-companion-header h2', { timeout: 20000 });
+  const header = await page.locator('.source-companion-header h2').innerText();
+  if (!/Mikro I/i.test(header)) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/quellenbrowser',
+      surface: 'companion',
+      viewport: '1280',
+      type: 'header-missing',
+      why: `Expected Mikro I Quellenbrowser title, got "${header}"`
+    });
+  }
+  const filters = await page.locator('.source-companion-filters button').count();
+  if (filters < 4) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/quellenbrowser',
+      surface: 'companion',
+      viewport: '1280',
+      type: 'coverage-filters-missing',
+      why: `Expected coverage filters, found ${filters} buttons`
+    });
+  }
+  const matrix = await page.locator('.source-coverage-matrix').count();
+  if (!matrix) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/quellenbrowser',
+      surface: 'companion',
+      viewport: '1280',
+      type: 'coverage-matrix-missing',
+      why: 'Lecture coverage matrix not rendered'
+    });
+  }
+  const parityPlan = await page.locator('.source-companion-action-plan ol li').count();
+  if (parityPlan < 1) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/quellenbrowser',
+      surface: 'companion-detail',
+      viewport: '1280',
+      type: 'parity-checklist-missing',
+      why: 'Source-parity next-step checklist missing on selected document'
+    });
+  }
+
+  await gotoConcept(page, '/mikro1/index.html', 'budget');
+  await clickTab(page, 'theorie');
+  const expandBtn = page.locator('#content footer.source-provenance .source-provenance-expand').first();
+  if ((await expandBtn.count()) > 0) {
+    await expandBtn.click();
+    await page.waitForTimeout(300);
+  }
+  const refBrowser = page.locator('.source-provenance-companion-path').first();
+  if ((await refBrowser.count()) === 0) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/budget/theorie',
+      surface: 'provenance-inspector',
+      viewport: '1280',
+      type: 'ref-companion-bridge-missing',
+      why: 'File-level source ref should expose Quellenbrowser bridge button'
+    });
+    return;
+  }
+  await refBrowser.click();
+  await page.waitForSelector('.source-companion-header h2', { timeout: 20000 });
+  const ctx = await page.locator('.source-companion-anchor-context').count();
+  if (!ctx) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/budget/theorie',
+      surface: 'companion',
+      viewport: '1280',
+      type: 'anchor-context-missing',
+      why: 'Opening companion from file-level ref should show anchor context panel'
+    });
+  }
+}
+
 /** --- Graph shell integrity --- */
 const GRAPH_CASES = [
   { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/graph' },
@@ -760,6 +847,7 @@ try {
 
   await runMathLeak(page);
   await runProvenance(page);
+  await runMikro1SourceCompanion(page);
   await runProvenanceFormelnSecondary(page);
   await runGraphIntegrity(page, 1400, 900, 'desktop-1400');
   await runGraphIntegrity(page, 1199, 900, 'edge-1199');

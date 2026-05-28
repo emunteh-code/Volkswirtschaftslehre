@@ -169,10 +169,10 @@
       "formulaSignalPages": 1046,
       "concepts": 14,
       "conceptsWithSourceRefs": 14,
-      "conceptsWithSourceAnchors": 2,
+      "conceptsWithSourceAnchors": 5,
       "sourceRefCoveragePct": 100,
-      "sourceAnchorCoveragePct": 14,
-      "sourceAnchors": 6,
+      "sourceAnchorCoveragePct": 36,
+      "sourceAnchors": 15,
       "taskFamilies": 1,
       "sourceGroundedTaskFamilies": 0,
       "officialTaskSourceFamilies": 0,
@@ -447,7 +447,7 @@
     },
     {
       "module": "statistik",
-      "reason": "page/slide/task anchors incomplete (14% concept coverage)"
+      "reason": "page/slide/task anchors incomplete (36% concept coverage)"
     },
     {
       "module": "statistik",

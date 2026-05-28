@@ -14,7 +14,7 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
-import { getConceptProvenance } from '../data/contentManifest.js';
+import { getConceptProvenance, getConceptSourceSummary } from '../data/contentManifest.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
@@ -388,7 +388,9 @@ baseRenderer = createRenderer({
   renderDashboard,
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
-  getConceptProvenance
+  getConceptProvenance,
+  getConceptSourceSummary,
+  sourceMaterialBaseUrl: '../source-materials/Mikroökonomik I/'
 });
 
 function markRenderSettled(isSettled) {

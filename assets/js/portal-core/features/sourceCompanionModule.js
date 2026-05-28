@@ -7,7 +7,10 @@ import {
   documentLayerRowsForDoc as coreDocumentLayerRowsForDoc,
   filterDocsByCoverage as coreFilterDocsByCoverage,
   mappedConceptsForDoc as coreMappedConceptsForDoc,
-  normalizeSourcePath
+  normalizeSourcePath,
+  resolveDocIdBySourcePath,
+  buildSourceParityActionPlan,
+  renderAnchorContextPanel
 } from './sourceCompanionCore.js';
 
 const DEFAULT_LAYER_LABELS = Object.freeze({
@@ -98,9 +101,10 @@ function createSourceCompanionRuntime(config) {
     unanchoredStatus = 'Noch nicht als page-anchored source-complete zertifiziert.',
     localSourceHint = `Dieser Button prüft zuerst, ob <code>${escapeHtml(sourceRoot)}/</code> in dieser Umgebung verfügbar ist.`,
     coverageGapBody = `Dieses Dokument liegt im ${moduleTitle}-Korpus, ist aber noch keinem Portal-Konzept, keinem Portal-Layer und keinem geprüften Seitenanker direkt zugeordnet.`,
-    renderAnchorContext = () => '',
+    renderAnchorContext = null,
     includeAnchorMetadata = false,
-    buildSourceParityActions
+    buildSourceParityActions,
+    sourceParityMessages = null
   } = config;
 
   if (!moduleSlug || !moduleTitle || !sourceRoot || !chapters || !provenanceByConcept) {
@@ -159,38 +163,22 @@ function createSourceCompanionRuntime(config) {
     return { ...verdict, body: coverageGapBody };
   }
 
+  const renderAnchorContextFn = typeof renderAnchorContext === 'function'
+    ? renderAnchorContext
+    : (anchorContext) => renderAnchorContextPanel(anchorContext, escapeHtml);
+
   function sourceParityActionsForDoc(doc, conceptCoverage) {
-    if (typeof buildSourceParityActions === 'function') {
-      return buildSourceParityActions({
-        doc,
-        conceptCoverage,
-        verdict: documentCoverageVerdict(doc, conceptCoverage),
-        density: anchorDensityForDoc(doc)
-      });
-    }
     const verdict = documentCoverageVerdict(doc, conceptCoverage);
     const density = anchorDensityForDoc(doc);
-    const actions = verdict.tone === 'gap'
-      ? [
-          'Dokument sichten und als prüfungsrelevant, Zusatzmaterial oder nicht abdeckungsrelevant klassifizieren.',
-          'Falls relevant: passende Portal-Konzepte, Formelgruppen oder Aufgabenlücken erfassen.',
-          'Erste geprüfte Seitenanker anlegen, bevor dieses Dokument als rekonstruiert gilt.'
-        ]
-      : verdict.tone === 'partial'
-        ? [
-            'File-level Quellenreferenzen in konkrete Seiten- oder Abschnittsanker überführen.',
-            'Notation, Graphkonventionen und Herleitungsstil gegen die offizielle Quelle prüfen.',
-            'Aufgaben- und Formelbezüge erst nach Seitenprüfung als source-complete behandeln.'
-          ]
-        : [
-            'Alle relevanten Seiten gegen Konzepte, Formeln und Aufgabenfamilien durchgehen.',
-            'Verbleibende reference-only Portalbereiche in geprüfte Seitenanker umwandeln.',
-            'Danach prüfen, ob offizielle Aufgaben und Probeklausuren vollständig task-family-mapped sind.'
-          ];
-    if (doc?.kind === 'lecture-slide' && density.pages && density.anchors < density.pages) {
-      actions.push(`${density.pages - density.anchors} Seiten haben noch keinen reviewed anchor; diese Zahl ist ein Priorisierungssignal, kein automatischer Fehler.`);
+    if (typeof buildSourceParityActions === 'function') {
+      return buildSourceParityActions({ doc, conceptCoverage, verdict, density });
     }
-    return { label: verdict.label, actions };
+    return buildSourceParityActionPlan({
+      doc,
+      verdict,
+      density,
+      messages: sourceParityMessages || undefined
+    });
   }
 
   function buildConceptCoverage() {
@@ -433,7 +421,7 @@ ${rows.map((row) => `<button type="button" onclick="window.__navigate('${escapeH
 </div>
 </div>
 ${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
-${renderAnchorContext(anchorContext, escapeHtml)}
+${renderAnchorContextFn(anchorContext)}
 ${renderDocumentCoverageVerdict(doc, conceptCoverage)}
 ${renderSourceParityActions(doc, conceptCoverage)}
 <div class="source-companion-meta-grid">
@@ -578,10 +566,12 @@ ${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
   }
 
   async function showSourceCompanion(options = {}) {
-    const requestedSourceId = typeof options === 'string' ? options : options?.sourceId;
-    const requestedAnchorContext = requestedSourceId && options?.anchorContext
-      ? { ...options.anchorContext, sourceId: requestedSourceId }
-      : null;
+    const opts = typeof options === 'string' ? { sourceId: options } : (options || {});
+    let requestedSourceId = opts.sourceId || null;
+    const requestedSourcePath = opts.sourcePath || null;
+    const requestedAnchorContext = requestedSourceId && opts.anchorContext
+      ? { ...opts.anchorContext, sourceId: requestedSourceId }
+      : (opts.anchorContext || null);
     if (requestedSourceId) {
       state = {
         ...state,
@@ -596,16 +586,33 @@ ${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
     try {
       if (!state.loaded) {
         const docs = await loadModuleDocuments();
+        if (!requestedSourceId && requestedSourcePath) {
+          requestedSourceId = resolveDocIdBySourcePath(docs, requestedSourcePath, pathOptions);
+        }
         state = {
           docs,
           conceptCoverage: buildConceptCoverage(),
           selectedId: requestedSourceId || defaultSelectedDocId(docs),
-          coverageFilter: requestedSourceId ? 'all' : state.coverageFilter || 'all',
+          coverageFilter: requestedSourceId || requestedSourcePath ? 'all' : state.coverageFilter || 'all',
           loaded: true,
           error: null,
           sourceOpenStatus: null,
           anchorContext: requestedAnchorContext
+            ? { ...requestedAnchorContext, sourceId: requestedSourceId || requestedAnchorContext.sourceId }
+            : null
         };
+      } else if (!requestedSourceId && requestedSourcePath) {
+        requestedSourceId = resolveDocIdBySourcePath(state.docs, requestedSourcePath, pathOptions);
+        if (requestedSourceId) {
+          state = {
+            ...state,
+            selectedId: requestedSourceId,
+            coverageFilter: 'all',
+            anchorContext: requestedAnchorContext
+              ? { ...requestedAnchorContext, sourceId: requestedSourceId }
+              : state.anchorContext
+          };
+        }
       }
     } catch (error) {
       state = { ...state, error: error?.message || String(error) };

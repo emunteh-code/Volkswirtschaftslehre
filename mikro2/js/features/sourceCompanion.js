@@ -38,6 +38,13 @@ const SOURCE_STATUS_LABELS = Object.freeze({
   'cross-link': 'cross-link'
 });
 
+const COVERAGE_FILTERS = Object.freeze([
+  { id: 'all', label: 'Alle Quellen' },
+  { id: 'anchored', label: 'Page-anchored partial' },
+  { id: 'partial', label: 'Reference-only' },
+  { id: 'gap', label: 'Corpus-only' }
+]);
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -283,6 +290,30 @@ function documentCoverageVerdict(doc, conceptCoverage) {
   };
 }
 
+function coverageFilterForDoc(doc, conceptCoverage) {
+  return documentCoverageVerdict(doc, conceptCoverage).tone;
+}
+
+function filterDocsByCoverage(docs, conceptCoverage, activeFilter = 'all') {
+  if (activeFilter === 'all') return docs;
+  return docs.filter((doc) => coverageFilterForDoc(doc, conceptCoverage) === activeFilter);
+}
+
+function renderCoverageFilters(docs, conceptCoverage, activeFilter = 'all') {
+  const counts = Object.fromEntries(COVERAGE_FILTERS.map((filter) => [filter.id, 0]));
+  counts.all = docs.length;
+  for (const doc of docs) {
+    const key = coverageFilterForDoc(doc, conceptCoverage);
+    counts[key] = (counts[key] || 0) + 1;
+  }
+  return `<div class="source-companion-filters" role="group" aria-label="Quellen nach Abdeckungsstatus filtern">
+${COVERAGE_FILTERS.map((filter) => `<button type="button" class="${activeFilter === filter.id ? 'active' : ''}" data-source-filter="${escapeHtml(filter.id)}">
+<span>${escapeHtml(filter.label)}</span>
+<strong>${counts[filter.id] || 0}</strong>
+</button>`).join('')}
+</div>`;
+}
+
 function statusLabel(status) {
   if (status === 'covered') return 'Seitenanker vorhanden';
   if (status === 'partial') return 'nur Quellenreferenz';
@@ -398,9 +429,10 @@ function defaultSelectedDocId(docs) {
 function renderDocumentList(docs, conceptCoverage) {
   return docs.map((doc) => {
     const mapped = mappedConceptsForDoc(doc, conceptCoverage);
+    const verdict = documentCoverageVerdict(doc, conceptCoverage);
     const uncovered = mapped.length === 0;
     return `<button type="button" class="source-companion-doc ${uncovered ? 'is-uncovered' : ''}" data-source-doc="${escapeHtml(doc.id)}">
-<span class="source-companion-doc-kind">${escapeHtml(doc.kindLabel)}</span>
+<span class="source-companion-doc-kind">${escapeHtml(doc.kindLabel)} · ${escapeHtml(verdict.label)}</span>
 <strong>${escapeHtml(doc.title)}</strong>
 <span>${escapeHtml(doc.group || 'root')}${doc.pages ? ` · ${doc.pages} Seiten` : ''}</span>
 <em>${mapped.length ? `${mapped.length} Portal-Konzept${mapped.length === 1 ? '' : 'e'}` : 'noch nicht direkt abgedeckt'}</em>
@@ -539,6 +571,7 @@ export function createSourceCompanionModule({ renderMath } = {}) {
     docs: [],
     conceptCoverage: [],
     selectedId: null,
+    coverageFilter: 'all',
     loaded: false,
     error: null,
     sourceOpenStatus: null,
@@ -569,11 +602,13 @@ export function createSourceCompanionModule({ renderMath } = {}) {
       return;
     }
 
-    const selected = state.docs.find((doc) => doc.id === state.selectedId)
-      || state.docs.find((doc) => doc.id === defaultSelectedDocId(state.docs))
-      || state.docs[0]
+    const activeFilter = COVERAGE_FILTERS.some((filter) => filter.id === state.coverageFilter) ? state.coverageFilter : 'all';
+    const filteredDocs = filterDocsByCoverage(state.docs, state.conceptCoverage, activeFilter);
+    const selected = filteredDocs.find((doc) => doc.id === state.selectedId)
+      || filteredDocs.find((doc) => doc.id === defaultSelectedDocId(filteredDocs))
+      || filteredDocs[0]
       || null;
-    if (selected && !state.selectedId) state.selectedId = selected.id;
+    if (selected && state.selectedId !== selected.id) state.selectedId = selected.id;
     const openStatus = state.sourceOpenStatus?.docId === selected?.id ? state.sourceOpenStatus : null;
     const anchorContext = state.anchorContext?.sourceId === selected?.id ? state.anchorContext : null;
     content.innerHTML = `<div class="source-companion">
@@ -586,11 +621,22 @@ export function createSourceCompanionModule({ renderMath } = {}) {
 ${renderCoverageMatrix(state.docs, state.conceptCoverage)}
 ${renderUnanchoredConceptsPanel(state.conceptCoverage)}
 ${renderOfficialTaskArchivePanel(state.docs)}
+${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
 <div class="source-companion-layout">
-<div class="source-companion-list" role="list">${renderDocumentList(state.docs, state.conceptCoverage)}</div>
+<div class="source-companion-list" role="list">${filteredDocs.length ? renderDocumentList(filteredDocs, state.conceptCoverage) : `<div class="source-companion-empty"><h3>Keine Quellen in diesem Filter</h3><p>Für diesen Abdeckungsstatus sind aktuell keine Mikro-II-Dokumente registriert.</p></div>`}</div>
 <div class="source-companion-detail">${renderDocumentDetail(selected, state.conceptCoverage, openStatus, anchorContext)}</div>
 </div>
 </div>`;
+    content.querySelectorAll('[data-source-filter]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.coverageFilter = button.dataset.sourceFilter || 'all';
+        const nextDocs = filterDocsByCoverage(state.docs, state.conceptCoverage, state.coverageFilter);
+        state.selectedId = nextDocs[0]?.id || null;
+        state.sourceOpenStatus = null;
+        state.anchorContext = null;
+        render();
+      });
+    });
     content.querySelectorAll('[data-source-doc]').forEach((button) => {
       button.classList.toggle('active', button.dataset.sourceDoc === state.selectedId);
       button.addEventListener('click', () => {
@@ -642,6 +688,7 @@ ${renderOfficialTaskArchivePanel(state.docs)}
       state = {
         ...state,
         selectedId: requestedSourceId,
+        coverageFilter: 'all',
         sourceOpenStatus: null,
         anchorContext: requestedAnchorContext
       };
@@ -655,6 +702,7 @@ ${renderOfficialTaskArchivePanel(state.docs)}
           docs,
           conceptCoverage: buildConceptCoverage(),
           selectedId: requestedSourceId || defaultSelectedDocId(docs),
+          coverageFilter: requestedSourceId ? 'all' : state.coverageFilter || 'all',
           loaded: true,
           error: null,
           sourceOpenStatus: null,

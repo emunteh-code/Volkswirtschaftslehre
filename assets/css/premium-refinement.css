@@ -5177,6 +5177,53 @@ body.light-mode #content .source-provenance-mark {
   background: color-mix(in srgb, var(--surface2) 28%, transparent);
 }
 
+#content .source-companion-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface2) 13%, transparent);
+}
+
+#content .source-companion-filters button {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px 12px;
+  color: var(--text);
+  text-align: left;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  cursor: pointer;
+}
+
+#content .source-companion-filters button:hover,
+#content .source-companion-filters button.active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border) 62%);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+#content .source-companion-filters span {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+#content .source-companion-filters strong {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1;
+}
+
 #content .source-companion-stat,
 #content .source-companion-meta-grid > div {
   display: grid;

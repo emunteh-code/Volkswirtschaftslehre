@@ -13,6 +13,7 @@ import * as fullExam from './features/fullExam.js';
 import * as mastery from './features/mastery.js';
 import * as srs from './features/srs.js';
 import * as examGraphs from './features/examGraphs.js';
+import { createSourceCompanionModule } from './features/sourceCompanion.js';
 import * as theme from './utils/theme.js';
 import * as keyboard from './utils/keyboard.js';
 import * as toast from './utils/toast.js';
@@ -34,6 +35,7 @@ createPortalApp({
   mastery,
   srs,
   examGraphs,
+  sourceCompanion: createSourceCompanionModule({ renderMath: math.renderMath }),
   theme,
   keyboard,
   toast,

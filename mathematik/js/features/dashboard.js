@@ -52,6 +52,10 @@ let html = `<div class="dashboard">
 <div class="dash-section" style="margin-bottom:16px">
 <button type="button" class="btn secondary" onclick="window.__showMistakeReview?.()" style="width:100%;max-width:420px">Fehlerprotokoll öffnen</button>
 <p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Eigene Fehler aus Schnelltest und Probeklausur werden hier gebündelt, damit du wiederkehrende Rechen- und Strukturfehler gezielt nacharbeiten kannst.</p>
+</div>
+<div class="dash-section" style="margin-bottom:16px">
+<button type="button" class="btn secondary" onclick="window.__showSourceCompanion?.()" style="width:100%;max-width:420px">Quellenbrowser öffnen</button>
+<p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:0">Der Quellenbrowser zeigt offizielle Dokumente, file-level Mappings und offene Seitenanker transparent an.</p>
 </div>`;
 
   const derivedSnap = buildDashboardDerivedMetricsSnapshot({

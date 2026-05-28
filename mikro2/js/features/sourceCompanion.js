@@ -247,6 +247,42 @@ function documentLayerRowsForDoc(doc) {
   });
 }
 
+function documentCoverageVerdict(doc, conceptCoverage) {
+  const mapped = mappedConceptsForDoc(doc, conceptCoverage);
+  const anchors = documentAnchorsForDoc(doc);
+  const layers = documentLayerRowsForDoc(doc);
+  const referencedOnly = layers.filter((row) => row.precision === 'Quellenreferenz').length;
+  const pageAnchored = layers.filter((row) => row.precision === 'Seitenanker').length;
+
+  if (!mapped.length && !layers.length && !anchors.length) {
+    return {
+      tone: 'gap',
+      label: 'Corpus-only',
+      title: 'Offizielle Quelle registriert, aber noch nicht rekonstruiert',
+      body: 'Dieses Dokument liegt im Mikro-II-Korpus, ist aber noch keinem Portal-Konzept, keinem Portal-Layer und keinem geprüften Seitenanker direkt zugeordnet.',
+      facts: ['Portalabdeckung offen', 'keine geprüften Seitenanker', 'Source-Parity-Pass erforderlich']
+    };
+  }
+
+  if (!anchors.length) {
+    return {
+      tone: 'partial',
+      label: 'Reference-only',
+      title: 'Dokumentreferenz vorhanden, page-level Rekonstruktion offen',
+      body: 'Portal-Inhalte verweisen auf diese Quelle, aber es gibt noch keine geprüften Seitenanker. Diese Abdeckung ist brauchbar zur Orientierung, aber nicht präzise genug für source-complete.',
+      facts: [`${mapped.length} Konzept${mapped.length === 1 ? '' : 'e'}`, `${referencedOnly} referenzierte Portalbereiche`, 'keine Seitenanker']
+    };
+  }
+
+  return {
+    tone: 'anchored',
+    label: 'Page-anchored partial',
+    title: 'Geprüfte Seitenanker vorhanden, aber keine Vollständigkeitszusage',
+    body: 'Dieses Dokument hat geprüfte Seitenanker und portalweite Layer-Zuordnungen. Es bleibt trotzdem partial, bis alle relevanten Seiten, Formeln und Aufgabenfamilien vollständig gegen die Quelle geprüft sind.',
+    facts: [`${anchors.length} geprüfte Seitenanker`, `${pageAnchored} page-level Portalbereiche`, `${referencedOnly} reference-only Portalbereiche`]
+  };
+}
+
 function statusLabel(status) {
   if (status === 'covered') return 'Seitenanker vorhanden';
   if (status === 'partial') return 'nur Quellenreferenz';
@@ -434,6 +470,18 @@ ${rows.map((row) => `<button type="button" onclick="window.__navigate('${escapeH
 </div>`;
 }
 
+function renderDocumentCoverageVerdict(doc, conceptCoverage) {
+  const verdict = documentCoverageVerdict(doc, conceptCoverage);
+  return `<div class="source-companion-verdict source-companion-verdict--${escapeHtml(verdict.tone)}">
+<span>${escapeHtml(verdict.label)}</span>
+<strong>${escapeHtml(verdict.title)}</strong>
+<p>${escapeHtml(verdict.body)}</p>
+<div>
+${verdict.facts.map((fact) => `<em>${escapeHtml(fact)}</em>`).join('')}
+</div>
+</div>`;
+}
+
 function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anchorContext = null) {
   if (!doc) {
     return `<div class="source-companion-empty">
@@ -461,6 +509,7 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anc
 </div>
 ${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
 ${renderAnchorContext(anchorContext)}
+${renderDocumentCoverageVerdict(doc, conceptCoverage)}
 <div class="source-companion-meta-grid">
 <div><span>Gruppe</span><strong>${escapeHtml(doc.group || 'root')}</strong></div>
 <div><span>Umfang</span><strong>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')}</strong></div>

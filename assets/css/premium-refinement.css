@@ -5402,6 +5402,73 @@ body.light-mode #content .source-provenance-mark {
   color: color-mix(in srgb, var(--muted) 52%, var(--text) 48%);
 }
 
+#content .source-companion-verdict {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--muted) 55%, var(--border) 45%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface2) 15%, transparent);
+}
+
+#content .source-companion-verdict--anchored {
+  border-color: color-mix(in srgb, var(--accent) 26%, var(--border) 74%);
+  border-left-color: color-mix(in srgb, var(--accent) 62%, var(--border) 38%);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+#content .source-companion-verdict--partial {
+  border-color: color-mix(in srgb, var(--accent2) 26%, var(--border) 74%);
+  border-left-color: color-mix(in srgb, var(--accent2) 58%, var(--border) 42%);
+}
+
+#content .source-companion-verdict--gap {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--sys-orange, #ff9500) 28%, var(--border) 72%);
+  border-left-color: var(--sys-orange, #ff9500);
+  background: color-mix(in srgb, var(--sys-orange, #ff9500) 6%, transparent);
+}
+
+#content .source-companion-verdict > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#content .source-companion-verdict > strong {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+#content .source-companion-verdict p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+#content .source-companion-verdict div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+#content .source-companion-verdict em {
+  padding: 5px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.2;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+}
+
 #content .source-companion-meta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

@@ -20,6 +20,16 @@ const KIND_LABELS = Object.freeze({
   exam: 'Klausur'
 });
 
+const LAYER_LABELS = Object.freeze({
+  motivation: 'Motivation',
+  theory: 'Theorie',
+  formulas: 'Formeln',
+  tasks: 'Aufgaben',
+  intuition: 'Intuition',
+  graph: 'Grafik',
+  stepProblems: 'Schnelltest'
+});
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -60,6 +70,10 @@ function buildConceptCoverage() {
     paths: collectConceptSourcePaths(layers),
     hasPageAnchors: Object.values(layers || {}).some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length)
   }));
+}
+
+function conceptTitleById() {
+  return Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter.title]));
 }
 
 async function loadMikro2Documents() {
@@ -119,6 +133,51 @@ function unanchoredPortalConcepts(conceptCoverage) {
   return conceptCoverage
     .filter((concept) => !concept.hasPageAnchors && concept.paths.length === 0)
     .sort((a, b) => String(a.title).localeCompare(String(b.title), 'de', { numeric: true }));
+}
+
+function anchorMatchesDoc(anchor, doc) {
+  if (!anchor || !doc) return false;
+  const sourcePath = normalizePath(anchor.sourcePath || anchor.path || '');
+  if (anchor.sourceId && anchor.sourceId === doc.id) return true;
+  return Boolean(sourcePath && (sourcePath === doc.path || sourcePath.endsWith(doc.path) || doc.path.endsWith(sourcePath)));
+}
+
+function anchorSortPage(anchor) {
+  const page = anchor?.locator?.page ?? anchor?.page;
+  const parsed = Number.parseInt(page, 10);
+  return Number.isFinite(parsed) ? parsed : 9999;
+}
+
+function documentAnchorsForDoc(doc) {
+  const titles = conceptTitleById();
+  const rowsByAnchorId = new Map();
+
+  for (const [conceptId, layers] of Object.entries(PROVENANCE_BY_CONCEPT)) {
+    for (const [layerKey, layer] of Object.entries(layers || {})) {
+      for (const anchor of layer?.source_anchors || []) {
+        if (!anchorMatchesDoc(anchor, doc)) continue;
+        const page = anchor?.locator?.page ?? anchor?.page ?? '';
+        const section = anchor?.locator?.section || anchor?.section || '';
+        const fallbackId = `${conceptId}:${normalizePath(anchor.sourcePath || anchor.path)}:${page}:${section}`;
+        const id = anchor.id || fallbackId;
+        const row = rowsByAnchorId.get(id) || {
+          id,
+          conceptId,
+          conceptTitle: titles[conceptId] || conceptId,
+          anchor,
+          layerLabels: new Set()
+        };
+        row.layerLabels.add(LAYER_LABELS[layerKey] || layerKey);
+        rowsByAnchorId.set(id, row);
+      }
+    }
+  }
+
+  return [...rowsByAnchorId.values()].sort((a, b) => {
+    const pageDiff = anchorSortPage(a.anchor) - anchorSortPage(b.anchor);
+    if (pageDiff) return pageDiff;
+    return String(a.conceptTitle).localeCompare(String(b.conceptTitle), 'de', { numeric: true });
+  });
 }
 
 function statusLabel(status) {
@@ -257,6 +316,34 @@ ${details ? `<div>${details}</div>` : ''}
 </div>`;
 }
 
+function renderDocumentAnchorInventory(doc) {
+  const rows = documentAnchorsForDoc(doc);
+  if (!rows.length) {
+    return `<div class="source-companion-anchor-list source-companion-anchor-list--empty">
+<h4>Reviewed Source Anchors</h4>
+<p>Für dieses Dokument sind noch keine geprüften Seitenanker im Portal registriert. Das ist ein Mapping-Gap, kein Beleg dafür, dass die Quelle prüfungsirrelevant ist.</p>
+</div>`;
+  }
+  return `<div class="source-companion-anchor-list">
+<div class="source-companion-anchor-list-head">
+<h4>Reviewed Source Anchors</h4>
+<span>${rows.length} geprüfte Seitenanker</span>
+</div>
+${rows.map(({ conceptId, conceptTitle, anchor, layerLabels }) => {
+  const page = anchor?.locator?.page ?? anchor?.page;
+  const section = anchor?.locator?.section || anchor?.section || 'Abschnitt geprüft';
+  const confidence = typeof anchor?.confidence === 'number' ? `${Math.round(anchor.confidence * 100)}% Konfidenz` : 'Konfidenz offen';
+  const reviewedAt = anchor?.reviewedAt ? `geprüft ${anchor.reviewedAt}` : 'Reviewdatum offen';
+  const layers = [...layerLabels].sort((a, b) => String(a).localeCompare(String(b), 'de')).join(', ');
+  return `<button type="button" onclick="window.__navigate('${escapeHtml(conceptId)}')">
+<span>${escapeHtml(anchor?.publicLabel || 'Quelle')}${page ? ` · Seite ${escapeHtml(page)}` : ''}</span>
+<strong>${escapeHtml(section)}</strong>
+<em>${escapeHtml(conceptTitle)} · ${escapeHtml(layers || 'Portalanker')} · ${escapeHtml(confidence)} · ${escapeHtml(reviewedAt)}</em>
+</button>`;
+}).join('')}
+</div>`;
+}
+
 function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anchorContext = null) {
   if (!doc) {
     return `<div class="source-companion-empty">
@@ -265,6 +352,7 @@ function renderDocumentDetail(doc, conceptCoverage, sourceOpenStatus = null, anc
 </div>`;
   }
   const mapped = mappedConceptsForDoc(doc, conceptCoverage);
+  const reviewedAnchors = documentAnchorsForDoc(doc);
   const localUrl = anchorContext?.sourceUrl || sourceMaterialUrl(doc);
   const openLabel = anchorContext?.sourceUrl ? 'Lokale Ankerquelle öffnen' : 'Lokale Quelle öffnen';
   return `<div class="source-companion-detail-card">
@@ -287,7 +375,9 @@ ${renderAnchorContext(anchorContext)}
 <div><span>Umfang</span><strong>${doc.pages ? `${doc.pages} Seiten` : escapeHtml(doc.extension || 'Datei')}</strong></div>
 <div><span>Indexstatus</span><strong>${escapeHtml(doc.extractionStatus || 'unbekannt')}</strong></div>
 <div><span>Portalabdeckung</span><strong>${mapped.length ? `${mapped.length} Konzepte` : 'offen'}</strong></div>
+<div><span>Seitenanker</span><strong>${reviewedAnchors.length ? `${reviewedAnchors.length} geprüft` : 'offen'}</strong></div>
 </div>
+${renderDocumentAnchorInventory(doc)}
 ${mapped.length ? `<div class="source-companion-mapped">
 <h4>Abgedeckte Portal-Konzepte</h4>
 ${mapped.map((concept) => `<button type="button" onclick="window.__navigate('${escapeHtml(concept.conceptId)}')">

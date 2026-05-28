@@ -5389,13 +5389,38 @@ body.light-mode #content .source-provenance-mark {
   gap: 10px;
 }
 
+#content .source-companion-anchor-list {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border) 76%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+#content .source-companion-anchor-list-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+#content .source-companion-anchor-list-head span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
 #content .source-companion-mapped h4,
+#content .source-companion-anchor-list h4,
 #content .source-companion-gap h4 {
   margin: 0;
   color: var(--text);
   font-size: 15px;
 }
 
+#content .source-companion-anchor-list button,
 #content .source-companion-mapped button {
   display: grid;
   gap: 4px;
@@ -5408,14 +5433,39 @@ body.light-mode #content .source-provenance-mark {
   cursor: pointer;
 }
 
+#content .source-companion-anchor-list button {
+  background: color-mix(in srgb, var(--card) 78%, transparent);
+}
+
+#content .source-companion-anchor-list button:hover,
 #content .source-companion-mapped button:hover {
   border-color: color-mix(in srgb, var(--accent) 34%, var(--border) 66%);
 }
 
+#content .source-companion-anchor-list button span,
 #content .source-companion-mapped button span {
   color: var(--muted);
   font-size: 11px;
   text-transform: uppercase;
+}
+
+#content .source-companion-anchor-list button em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+#content .source-companion-anchor-list--empty {
+  border-style: dashed;
+  background: transparent;
+}
+
+#content .source-companion-anchor-list--empty p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 #content .source-companion-gap {

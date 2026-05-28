@@ -1,11 +1,11 @@
 // ============================================================
 // SOURCE ANCHORS — Statistik
-// Reviewed page-level anchors for official VL reconstruction (pass 1–2).
+// Reviewed page-level anchors for official VL reconstruction (pass 1–3).
 // No source text stored; quoteFingerprint hashes the reviewed section label.
 // ============================================================
 
 const REVIEWED_AT = '2026-05-28';
-const REVIEWED_BY = 'codex-source-pass-statistik-anchors-2';
+const REVIEWED_BY = 'codex-source-pass-statistik-anchors-3';
 
 function anchor({
   id,
@@ -194,6 +194,295 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       page: 25,
       section: 'IS1.3 Methode der kleinsten Quadrate',
       fingerprint: '5a1b7d3e82f9c041',
+      confidence: 0.91
+    })
+  ],
+  schaetzen_eigenschaften_intervalle: [
+    anchor({
+      id: 'statistik.schaetzen_eigenschaften_intervalle.vl09.p85.eigenschaften',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 85,
+      section: 'Schätzfunktionen und deren Eigenschaften',
+      fingerprint: '4e8c1a9f702b3d56',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.schaetzen_eigenschaften_intervalle.vl10.p03.motivation',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-10-induktive-statistik-2',
+      sourcePath: 'Vorlesungen/VL_10_-_Induktive_Statistik_2.pdf',
+      publicLabel: 'Vorlesung 10',
+      page: 3,
+      section: '7.1 Motivation und Hinführung',
+      fingerprint: 'b7f2d4e81a9c6035',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.schaetzen_eigenschaften_intervalle.vl10.p10.konstruktion',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-10-induktive-statistik-2',
+      sourcePath: 'Vorlesungen/VL_10_-_Induktive_Statistik_2.pdf',
+      publicLabel: 'Vorlesung 10',
+      page: 10,
+      section:
+        '7.2 Konstruktion von Konfidenzintervallen bei normalverteilter Grundgesamtheit',
+      fingerprint: 'd1a5e8c4072f9b18',
+      confidence: 0.92
+    })
+  ],
+  testen: [
+    anchor({
+      id: 'statistik.testen.vl10_3.p08.hypothesen',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-10-induktive-statistik-3-0-3-1',
+      sourcePath: 'Vorlesungen/VL_10_-_Induktive_Statistik_3.0-3.1.pdf',
+      publicLabel: 'Vorlesung 10 (Teil 3)',
+      page: 8,
+      section: 'Induktive Statistik und Hypothesen',
+      fingerprint: '8c3f1e5a90d7246b',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.testen.vl10_3.p12.klassisch',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-10-induktive-statistik-3-0-3-1',
+      sourcePath: 'Vorlesungen/VL_10_-_Induktive_Statistik_3.0-3.1.pdf',
+      publicLabel: 'Vorlesung 10 (Teil 3)',
+      page: 12,
+      section: 'Klassische statistische Hypothesen Tests',
+      fingerprint: 'f4b8d2c7160e9a53',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.testen.vl11.p65.prinzipien',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 65,
+      section: '8.4 Allgemeine Prinzipien des statistischen Testens',
+      fingerprint: '2a7e9c4d81f5036b',
+      confidence: 0.91
+    })
+  ],
+  z_test: [
+    anchor({
+      id: 'statistik.z_test.vl11.p18.motivation',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 18,
+      section: '8.1 Motivation und erstes Beispiel',
+      fingerprint: '6d1f8b2e94a0c537',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.z_test.vl11.p39.zweiseitig',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 39,
+      section: '8.2 Zweiseitige Tests',
+      fingerprint: 'e9035a7c1d8f4260',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.z_test.vl11.p47.normalverteilung',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 47,
+      section: '8.3 Tests für normalverteilte Grundgesamtheiten',
+      fingerprint: '1c8e4f7a20b9d635',
+      confidence: 0.92
+    })
+  ],
+  varianzanalyse: [
+    anchor({
+      id: 'statistik.varianzanalyse.vl11.p03.einfuehrung',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 3,
+      section: 'Varianzanalyse',
+      fingerprint: 'a5d2e8f1037c4b96',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.varianzanalyse.vl11.p12.tabelle',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 12,
+      section: 'Varianzanalysetabelle',
+      fingerprint: '7b4c1f9e82a056d3',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.varianzanalyse.vl11.p02.is32',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-induktive-statistik-3-3-5-pdf',
+      sourcePath: 'Vorlesungen/VL_11_-_Induktive_Statistik_3.pdf-3.5.pdf',
+      publicLabel: 'Vorlesung 11',
+      page: 2,
+      section: 'IS3.2 Hypothesentests mittels Varianzanalyse',
+      fingerprint: 'c9e6a3d5180f724b',
+      confidence: 0.9
+    })
+  ],
+  zwei_stichproben: [
+    anchor({
+      id: 'statistik.zwei_stichproben.vl11_zwei.p01.titel',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-zwei-sp-t-test',
+      sourcePath: 'Vorlesungen/VL_11_-_Zwei-SP_t-Test.pdf',
+      publicLabel: 'Vorlesung 11 (Einschub)',
+      page: 1,
+      section: 'Zweistichproben t-Test',
+      fingerprint: '3f8a2c5e91d704b6',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.zwei_stichproben.vl11_zwei.p08.paarweise',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-zwei-sp-t-test',
+      sourcePath: 'Vorlesungen/VL_11_-_Zwei-SP_t-Test.pdf',
+      publicLabel: 'Vorlesung 11 (Einschub)',
+      page: 8,
+      section: 'Test bei paarweiser Abhängigkeit',
+      fingerprint: '5e1d9a7c4082f6b3',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.zwei_stichproben.vl11_zwei.p09.unabhaengig',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-11-zwei-sp-t-test',
+      sourcePath: 'Vorlesungen/VL_11_-_Zwei-SP_t-Test.pdf',
+      publicLabel: 'Vorlesung 11 (Einschub)',
+      page: 9,
+      section: 'Test bei unabhängigen Stichproben – Varianzen identisch',
+      fingerprint: '8a4f2e6c1039d758',
+      confidence: 0.91
+    })
+  ],
+  nichtparametrisch: [
+    anchor({
+      id: 'statistik.nichtparametrisch.vl09.p58.histogramm',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 58,
+      section: '6.3 Histogramme als Schätzer für Dichten',
+      fingerprint: 'b2e7f4a8901c5d36',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.nichtparametrisch.vl09.p71.kerndichte',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 71,
+      section: '6.4 Kerndichteschätzung',
+      fingerprint: 'd6c1a8f5270e4b92',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.nichtparametrisch.vl09.p02.is15',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-09-induktive-statistik-1',
+      sourcePath: 'Vorlesungen/VL_09_-_Induktive_Statistik_1.pdf',
+      publicLabel: 'Vorlesung 9',
+      page: 2,
+      section: 'IS1.5 Kerndichte-Schätzung',
+      fingerprint: '4a9e2c7f8160d3b5',
+      confidence: 0.9
+    })
+  ],
+  regression_schaetzung_inferenz: [
+    anchor({
+      id: 'statistik.regression_schaetzung_inferenz.vl12.p01.titel',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-12-stat-modellierung-1-0-1-4',
+      sourcePath: 'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 1,
+      section: 'Statistische Modellierung I: Regression',
+      fingerprint: 'f1c8e4a2079b5d63',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.regression_schaetzung_inferenz.vl12.p22.homosk',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-12-stat-modellierung-1-0-1-4',
+      sourcePath: 'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 22,
+      section: 'Homosk. Var., Regression',
+      fingerprint: '9e3a7c1f5082d4b6',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.regression_schaetzung_inferenz.vl12.p26.galton',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-12-stat-modellierung-1-0-1-4',
+      sourcePath: 'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 26,
+      section: 'Galtonbsp., Regression',
+      fingerprint: '2d7f9e4a8160c3b5',
+      confidence: 0.92
+    })
+  ],
+  regression_diagnostik_prognose: [
+    anchor({
+      id: 'statistik.regression_diagnostik_prognose.vl12.p61.residuen',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-12-stat-modellierung-1-0-1-4',
+      sourcePath: 'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 61,
+      section: 'Residuen',
+      fingerprint: '6b4e1a9f7302c8d5',
+      confidence: 0.9
+    }),
+    anchor({
+      id: 'statistik.regression_diagnostik_prognose.vl12.p22.residuen_homosk',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-12-stat-modellierung-1-0-1-4',
+      sourcePath: 'Vorlesungen/VL_12_-_Stat_Modellierung_1.0-1.4.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 22,
+      section: 'Homosk. Var., Residuen',
+      fingerprint: 'a8f3c2e91b4d7015',
+      confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.regression_diagnostik_prognose.vl14.p01.ausblick',
+      sourceId: 'statistik-lecture-slide-statistik-vorlesungen-vl-14-stat-modellierung-2',
+      sourcePath: 'Vorlesungen/VL_14_-_Stat_Modellierung_2.pdf',
+      publicLabel: 'Vorlesung 14',
+      page: 1,
+      section: 'Statistische Modellierung II: Ausblick',
+      fingerprint: 'c41e0a6d8f2b9e37',
+      confidence: 0.9
+    })
+  ],
+  rlab: [
+    anchor({
+      id: 'statistik.rlab.rvorkurs.p06.grundlagen',
+      sourceId: 'statistik-supplement-statistik-r-vorkurs',
+      sourcePath: 'R-Vorkurs.pdf',
+      publicLabel: 'R-Vorkurs',
+      page: 6,
+      section: 'R Grundlagen',
+      fingerprint: '7d2b5f1a9c8e4036',
+      confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.rlab.rvorkurs.p22.vektoren',
+      sourceId: 'statistik-supplement-statistik-r-vorkurs',
+      sourcePath: 'R-Vorkurs.pdf',
+      publicLabel: 'R-Vorkurs',
+      page: 22,
+      section: 'Vektoren',
+      fingerprint: 'e9051c3a7b6d2840',
+      confidence: 0.93
+    }),
+    anchor({
+      id: 'statistik.rlab.rvorkurs.p41.einlesen',
+      sourceId: 'statistik-supplement-statistik-r-vorkurs',
+      sourcePath: 'R-Vorkurs.pdf',
+      publicLabel: 'R-Vorkurs',
+      page: 41,
+      section: 'Einlesen von Daten',
+      fingerprint: '6b3d9f0e2a1c8745',
       confidence: 0.91
     })
   ]

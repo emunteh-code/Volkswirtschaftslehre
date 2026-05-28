@@ -14,10 +14,10 @@
       "formulaSignalPages": 233,
       "concepts": 33,
       "conceptsWithSourceRefs": 32,
-      "conceptsWithSourceAnchors": 17,
+      "conceptsWithSourceAnchors": 32,
       "sourceRefCoveragePct": 97,
-      "sourceAnchorCoveragePct": 52,
-      "sourceAnchors": 51,
+      "sourceAnchorCoveragePct": 97,
+      "sourceAnchors": 96,
       "taskFamilies": 0,
       "sourceGroundedTaskFamilies": 0,
       "officialTaskSourceFamilies": 0,
@@ -347,7 +347,7 @@
   "blockers": [
     {
       "module": "mikro1",
-      "reason": "page/slide/task anchors incomplete (52% concept coverage)"
+      "reason": "page/slide/task anchors incomplete (97% concept coverage)"
     },
     {
       "module": "mikro1",

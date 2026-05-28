@@ -24,10 +24,10 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `mikro1` | 97% | 0% | 0 | 0 | 18 | 0 | 0 | 0 |
 | `mikro2` | 83% | 83% | 47 | 12 | 0 | 0 | 8 | 4 |
-| `makro1` | 100% | 0% | 0 | 0 | 29 | 0 | 0 | 0 |
-| `makro2` | 100% | 0% | 0 | 0 | 22 | 0 | 0 | 0 |
+| `makro1` | 100% | 0% | 0 | 1 | 29 | 0 | 0 | 0 |
+| `makro2` | 100% | 0% | 0 | 1 | 22 | 0 | 0 | 0 |
 | `oekonometrie` | 100% | 0% | 0 | 1 | 33 | 0 | 0 | 0 |
-| `statistik` | 100% | 0% | 0 | 1 | 104 | 0 | 0 | 0 |
+| `statistik` | 100% | 14% | 6 | 1 | 104 | 0 | 0 | 0 |
 | `finanzwirtschaft` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
 | `mathematik` | 100% | 0% | 0 | 1 | 40 | 0 | 0 | 0 |
 | `jahresabschluss` | 100% | 0% | 0 | 0 | 13 | 0 | 0 | 0 |
@@ -43,7 +43,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `makro1` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `makro2` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `oekonometrie` | missing | official sources present; bank not mapped | partial | missing dimension model |
-| `statistik` | missing | official sources present; bank not mapped | partial | missing dimension model |
+| `statistik` | partial | official sources present; bank not mapped | partial | missing dimension model |
 | `finanzwirtschaft` | missing | missing | partial | missing dimension model |
 | `mathematik` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `jahresabschluss` | missing | official sources present; bank not mapped | partial | missing dimension model |
@@ -77,7 +77,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `oekonometrie`: item-level provenance incomplete (partial)
 - `oekonometrie`: adaptive mastery not evidence-based (missing dimension model)
 - `oekonometrie`: Mikro1-depth equality not certified
-- `statistik`: page/slide/task anchors incomplete (0% concept coverage)
+- `statistik`: page/slide/task anchors incomplete (14% concept coverage)
 - `statistik`: official exam bank incomplete (official sources present; bank not mapped)
 - `statistik`: item-level provenance incomplete (partial)
 - `statistik`: adaptive mastery not evidence-based (missing dimension model)

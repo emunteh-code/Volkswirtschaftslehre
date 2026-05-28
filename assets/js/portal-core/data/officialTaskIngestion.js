@@ -57,6 +57,25 @@ export function summarizeOfficialTaskDocuments(docs) {
   };
 }
 
+/** Ingestion-only placeholders must not appear on student practice tabs. */
+export function isIngestionPlaceholderTaskFamily(family) {
+  if (!family || typeof family !== 'object') return false;
+  if (family.placeholderLabel === 'non-deceptive-placeholder') return true;
+  const id = toCleanString(family.id);
+  if (id.includes('.official-task.placeholder.')) return true;
+  const coverage = toCleanString(family.officialTaskCoverage);
+  const status = toCleanString(family.sourceStatus);
+  if (coverage === 'missing-official-task-source' && status === 'platform-added-explanation') {
+    return /placeholder/i.test(toCleanString(family.title));
+  }
+  return false;
+}
+
+/** Task families shown on concept practice surfaces (excludes ingestion placeholders). */
+export function filterStudentVisibleTaskFamilies(families) {
+  return (Array.isArray(families) ? families : []).filter((family) => !isIngestionPlaceholderTaskFamily(family));
+}
+
 export function buildOfficialTaskFamilyPlaceholders({ moduleSlug, chapterIds = [], documents = [] }) {
   const summary = summarizeOfficialTaskDocuments(documents);
   return chapterIds.map((conceptId) => ({

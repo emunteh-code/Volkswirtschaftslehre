@@ -14,6 +14,7 @@ import {
   buildConceptProvenanceStripHtml,
   initConceptProvenanceInteractions
 } from "./sourceProvenanceUi.js";
+import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
 
 export function createRenderer({
   courseLabel,
@@ -803,7 +804,7 @@ ${renderGuidedTasks(tasks)}`;
   }
 
   function renderTaskFamilyPanel(conceptId) {
-    const families = Array.isArray(taskFamiliesByConcept[conceptId]) ? taskFamiliesByConcept[conceptId] : [];
+    const families = filterStudentVisibleTaskFamilies(taskFamiliesByConcept[conceptId]);
     if (!families.length) return "";
     return `<div class="section-block task-family-layer">
 <h3>Klausurfamilien</h3>

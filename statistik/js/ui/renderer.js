@@ -13,7 +13,6 @@ import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { mountRPracticeBlocks, renderRAnwendungTab } from '../../../assets/js/portal-core/features/rPractice.js';
 import { getConceptProvenance } from '../data/contentManifest.js';
-import { TASK_FAMILIES_BY_CONCEPT } from '../data/taskFamilies.js';
 
 const baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
@@ -41,8 +40,7 @@ const baseRenderer = createRenderer({
   homeLernDashboardPilotNote:
     'Basiert auf Lernspuren aus diesem Browser.',
   showConceptMotivationBanner: false,
-  getConceptProvenance,
-  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
+  getConceptProvenance
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

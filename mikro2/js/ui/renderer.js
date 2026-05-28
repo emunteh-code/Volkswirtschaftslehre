@@ -46,6 +46,7 @@ export const {
   checkAnswer: checkAnswerWithTolerance,
   getConceptProvenance,
   getConceptSourceSummary,
+  sourceMaterialBaseUrl: '../source-materials/Mikroökonomik II/',
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
   taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
 });

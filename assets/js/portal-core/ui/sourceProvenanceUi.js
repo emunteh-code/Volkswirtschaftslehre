@@ -49,6 +49,20 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
+function joinUrlPath(base, path) {
+  const b = String(base || '').trim();
+  const p = String(path || '').trim();
+  if (!b || !p) return '';
+  return `${b.replace(/\/+$/, '')}/${p.replace(/^\/+/, '')}`;
+}
+
+function sourceUrlWithPage(baseUrl, anchor) {
+  const url = joinUrlPath(baseUrl, anchor?.sourcePath || anchor?.path || '');
+  if (!url) return '';
+  const page = parseInt(anchor?.locator?.page || anchor?.page || '', 10);
+  return Number.isFinite(page) && page > 0 ? `${url}#page=${page}` : url;
+}
+
 /**
  * @param {string} path
  * @returns {string|null}
@@ -421,7 +435,7 @@ function confidenceLabel(value) {
   return `${Math.round(n * 100)}%`;
 }
 
-function buildSourceInspectionRows(layers) {
+function buildSourceInspectionRows(layers, sourceMaterialBaseUrl = '') {
   if (!layers || typeof layers !== 'object') return [];
   const byAnchor = new Map();
   for (const [key, title] of LAYER_ORDER) {
@@ -450,9 +464,11 @@ function buildSourceInspectionRows(layers) {
     const title = `${label}${locator ? ` · ${locator}` : ''}`;
     const section = anchor?.locator?.section || anchor?.section || '';
     const confidence = confidenceLabel(anchor?.confidence);
+    const sourceUrl = sourceUrlWithPage(sourceMaterialBaseUrl, anchor);
     return {
       title,
       sourcePath: anchor?.sourcePath || anchor?.path || '',
+      sourceUrl,
       section,
       areas: [...areas].join(', '),
       statuses: [...statuses].map(publicSourceStatus).join(', '),
@@ -478,7 +494,10 @@ ${rows.map((row) => {
     row.reviewedAt ? `<span><strong>Geprüft:</strong> ${escapeHtml(row.reviewedAt)}</span>` : ''
   ].filter(Boolean).join('');
   return `<article class="source-provenance-inspector-row">
-<div class="source-provenance-inspector-head">${escapeHtml(row.title)}</div>
+<div class="source-provenance-inspector-head">
+<span>${escapeHtml(row.title)}</span>
+${row.sourceUrl ? `<button type="button" class="source-provenance-open" data-source-open-url="${escapeAttr(row.sourceUrl)}" aria-label="Quelle lokal öffnen">Öffnen</button>` : ''}
+</div>
 <div class="source-provenance-inspector-details">${details}</div>
 </article>`;
 }).join('')}
@@ -490,9 +509,10 @@ ${rows.map((row) => {
  * @param {string} opts.conceptId
  * @param {string} opts.activeTab
  * @param {Record<string, { source_status?: string, source_refs?: object[] }>|null|undefined} opts.layers
+ * @param {string} [opts.sourceMaterialBaseUrl]
  * @returns {string} HTML fragment (may be empty)
  */
-export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }) {
+export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers, sourceMaterialBaseUrl = '' }) {
   if (!conceptId) return '';
   const summary = buildSummary(layers);
   if (!summary) return '';
@@ -502,7 +522,7 @@ export function buildConceptProvenanceStripHtml({ conceptId, activeTab, layers }
   const rows = buildBreakdownRows(layers);
   const withLine = rows.filter((r) => r.line);
   const uniqueLines = new Set(withLine.map((r) => r.line));
-  const inspectionRows = buildSourceInspectionRows(layers);
+  const inspectionRows = buildSourceInspectionRows(layers, sourceMaterialBaseUrl);
   const expandable = uniqueLines.size > 1 || inspectionRows.length > 0;
 
   const safeTab = String(activeTab || 'tab').replace(/[^a-z0-9-]/gi, '');
@@ -557,6 +577,32 @@ export function initConceptProvenanceInteractions(root) {
       const open = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', open ? 'false' : 'true');
       panel.hidden = open;
+    });
+  });
+  root.querySelectorAll('.source-provenance-open').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const sourceUrl = btn.getAttribute('data-source-open-url') || '';
+      if (!sourceUrl) return;
+      const checkUrl = sourceUrl.split('#')[0];
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Prüfe...';
+      try {
+        const response = await fetch(checkUrl, { method: 'HEAD', cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        window.open(sourceUrl, '_blank', 'noopener,noreferrer');
+        btn.textContent = 'Geöffnet';
+        btn.classList.add('is-opened');
+      } catch (error) {
+        btn.textContent = 'Fehlt lokal';
+        btn.classList.add('is-missing');
+        btn.title = 'Diese offizielle Datei ist in der aktuellen Umgebung nicht erreichbar.';
+      } finally {
+        window.setTimeout(() => {
+          btn.disabled = false;
+          if (!btn.classList.contains('is-missing')) btn.textContent = original || 'Öffnen';
+        }, 1400);
+      }
     });
   });
 }

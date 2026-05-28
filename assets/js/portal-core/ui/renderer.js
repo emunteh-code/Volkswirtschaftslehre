@@ -48,6 +48,8 @@ export function createRenderer({
   getConceptProvenance = () => null,
   /** Optional: compact per-concept source badge for overview surfaces. */
   getConceptSourceSummary = () => null,
+  /** Optional: local/deployed base URL for official source files used by provenance anchors. */
+  sourceMaterialBaseUrl = '',
   /** Optional: exam-OS formula cards keyed by concept id. */
   formulaCardsByConcept = {},
   /** Optional: source-grounded task-family taxonomy keyed by concept id. */
@@ -1090,7 +1092,8 @@ ${renderExamPatterns(data)}
       const emptyStrip = buildConceptProvenanceStripHtml({
         conceptId,
         activeTab,
-        layers: getConceptProvenance(conceptId)
+        layers: getConceptProvenance(conceptId),
+        sourceMaterialBaseUrl
       });
       if (emptyStrip) {
         content.insertAdjacentHTML("beforeend", emptyStrip);
@@ -1169,7 +1172,8 @@ ${motivationStrip}
     const provenanceStrip = buildConceptProvenanceStripHtml({
       conceptId,
       activeTab,
-      layers: getConceptProvenance(conceptId)
+      layers: getConceptProvenance(conceptId),
+      sourceMaterialBaseUrl
     });
     if (provenanceStrip && !String(window.__lastRenderError || "").length) {
       content.insertAdjacentHTML("beforeend", provenanceStrip);

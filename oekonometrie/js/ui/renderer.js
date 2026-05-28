@@ -16,6 +16,7 @@ import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 import { mountRPracticeBlocks, renderRAnwendungTab } from '../../../assets/js/portal-core/features/rPractice.js';
 import { getConceptProvenance } from '../data/contentManifest.js';
+import { TASK_FAMILIES_BY_CONCEPT } from '../data/taskFamilies.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
 let baseRenderer;
@@ -396,7 +397,8 @@ baseRenderer = createRenderer({
     if (!block) return '';
     return renderRAnwendungTab([block], 'oekonometrie', { conceptId });
   },
-  getConceptProvenance
+  getConceptProvenance,
+  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
 });
 
 function markRenderSettled(isSettled) {

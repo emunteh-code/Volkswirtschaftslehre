@@ -29,7 +29,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `oekonometrie` | 100% | 0% | 0 | 0 | 33 | 0 | 0 | 0 |
 | `statistik` | 100% | 0% | 0 | 1 | 104 | 0 | 0 | 0 |
 | `finanzwirtschaft` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
-| `mathematik` | 100% | 0% | 0 | 0 | 40 | 0 | 0 | 0 |
+| `mathematik` | 100% | 0% | 0 | 1 | 40 | 0 | 0 | 0 |
 | `jahresabschluss` | 100% | 0% | 0 | 0 | 13 | 0 | 0 | 0 |
 | `recht` | 100% | 0% | 0 | 0 | 17 | 0 | 0 | 0 |
 | `internationale-wirtschaftsbeziehungen` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |

@@ -141,7 +141,7 @@ const PROVENANCE_EXPECT = [
   { route: '/internationale-wirtschaftsbeziehungen/index.html', id: 'ricardo', label: 'iwb/ricardo', expectCoverage: 'refs' },
   { route: '/mathematik/index.html', id: 'algebra_mengen', label: 'mathematik/algebra_mengen', expectCoverage: 'refs' },
   { route: '/oekonometrie/index.html', id: 'matrix_notation', label: 'oeko/matrix_notation', expectCoverage: 'refs' },
-  { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch', expectCoverage: 'manifest-only' }
+  { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch', expectCoverage: 'page-anchors' }
 ];
 
 /** Provenance strip must survive non-theorie tabs (same createRenderer path). */

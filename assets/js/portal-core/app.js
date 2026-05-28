@@ -306,11 +306,11 @@ export function createPortalApp({
     startFullExam(id);
   }
 
-  function openSourceCompanion() {
+  function openSourceCompanion(options = {}) {
     if (!sourceCompanion?.showSourceCompanion) return;
     clearRightPanel();
     syncRightPanelVisibility();
-    sourceCompanion.showSourceCompanion();
+    sourceCompanion.showSourceCompanion(options);
   }
 
   window.__navigate = navigate;

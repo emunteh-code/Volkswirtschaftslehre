@@ -496,7 +496,10 @@ ${rows.map((row) => {
   return `<article class="source-provenance-inspector-row">
 <div class="source-provenance-inspector-head">
 <span>${escapeHtml(row.title)}</span>
+<div class="source-provenance-inspector-actions">
 ${row.sourceUrl ? `<button type="button" class="source-provenance-open" data-source-open-url="${escapeAttr(row.sourceUrl)}" aria-label="Quelle lokal öffnen">Öffnen</button>` : ''}
+${row.sourceId ? `<button type="button" class="source-provenance-companion" data-source-companion-id="${escapeAttr(row.sourceId)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
+</div>
 </div>
 <div class="source-provenance-inspector-details">${details}</div>
 </article>`;
@@ -603,6 +606,13 @@ export function initConceptProvenanceInteractions(root) {
           if (!btn.classList.contains('is-missing')) btn.textContent = original || 'Öffnen';
         }, 1400);
       }
+    });
+  });
+  root.querySelectorAll('.source-provenance-companion').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const sourceId = btn.getAttribute('data-source-companion-id') || '';
+      if (!sourceId || typeof window.__showSourceCompanion !== 'function') return;
+      window.__showSourceCompanion({ sourceId });
     });
   });
 }

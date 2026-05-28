@@ -4833,7 +4833,16 @@ body.light-mode #content .source-provenance-mark {
   overflow-wrap: anywhere;
 }
 
-#content .source-provenance-open {
+#content .source-provenance-inspector-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#content .source-provenance-open,
+#content .source-provenance-companion {
   flex-shrink: 0;
   width: fit-content;
   max-width: 100%;
@@ -4849,7 +4858,8 @@ body.light-mode #content .source-provenance-mark {
 }
 
 #content .source-provenance-open:hover,
-#content .source-provenance-open.is-opened {
+#content .source-provenance-open.is-opened,
+#content .source-provenance-companion:hover {
   border-color: color-mix(in srgb, var(--accent) 34%, var(--border) 66%);
   color: color-mix(in srgb, var(--accent) 62%, var(--text) 38%);
   background: color-mix(in srgb, var(--accent) 8%, transparent);

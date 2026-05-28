@@ -378,7 +378,15 @@ ${renderOfficialTaskArchivePanel(state.docs)}
     renderMath?.(content);
   }
 
-  async function showSourceCompanion() {
+  async function showSourceCompanion(options = {}) {
+    const requestedSourceId = typeof options === 'string' ? options : options?.sourceId;
+    if (requestedSourceId) {
+      state = {
+        ...state,
+        selectedId: requestedSourceId,
+        sourceOpenStatus: null
+      };
+    }
     state = { ...state, error: null };
     render();
     try {
@@ -387,7 +395,7 @@ ${renderOfficialTaskArchivePanel(state.docs)}
         state = {
           docs,
           conceptCoverage: buildConceptCoverage(),
-          selectedId: defaultSelectedDocId(docs),
+          selectedId: requestedSourceId || defaultSelectedDocId(docs),
           loaded: true,
           error: null,
           sourceOpenStatus: null

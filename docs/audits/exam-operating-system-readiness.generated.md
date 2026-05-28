@@ -1,4 +1,4 @@
-# Exam Operating System Readiness Gate — 2026-05-27
+# Exam Operating System Readiness Gate — 2026-05-28
 
 A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.
 

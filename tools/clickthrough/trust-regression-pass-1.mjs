@@ -132,7 +132,8 @@ async function runMathLeak(page) {
 const PROVENANCE_EXPECT = [
   { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget', expectCoverage: 'refs' },
   { route: '/mikro1/index.html', id: 'psubst', label: 'mikro1/psubst', expectCoverage: 'manifest-only' },
-  { route: '/statistik/index.html', id: 'deskriptiv', label: 'statistik/deskriptiv', expectCoverage: 'refs' },
+  { route: '/statistik/index.html', id: 'deskriptiv', label: 'statistik/deskriptiv', expectCoverage: 'page-anchors' },
+  { route: '/statistik/index.html', id: 'bivariat', label: 'statistik/bivariat', expectCoverage: 'page-anchors' },
   { route: '/makro1/index.html', id: 'islm', label: 'makro1/islm', expectCoverage: 'refs' },
   { route: '/makro2/index.html', id: 'mundell_fleming', label: 'makro2/mundell_fleming', expectCoverage: 'refs' },
   { route: '/finanzwirtschaft/index.html', id: 'liquiditaetsplanung', label: 'finanz/liquiditaetsplanung', expectCoverage: 'refs' },

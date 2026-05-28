@@ -20,12 +20,13 @@ import {
 } from './srsConfig.js';
 import { COURSE_CONFIG } from './courseConfig.js';
 import { FULL_EXAMS } from './fullExams.js';
+import { STATISTIK_SOURCE_ANCHORS } from './sourceAnchors.js';
 
 const MODULE_SLUG = 'statistik';
 
 /**
  * Primary VL / course PDF anchors — paths relative to:
- *   source-materials/Statistik/Statistik/
+ *   source-materials/Statistik/
  * Curated in docs/audits/statistik-provenance-curation-pass-1.md.
  */
 const STATISTIK_PRIMARY_REFS_CURATED = {
@@ -84,7 +85,7 @@ export const STATISTIK_CONCEPT_PRIMARY_REFS = Object.fromEntries(
 );
 
 const NOTES_THEORY =
-  'Portal theory follows the Statistik course line; wording is authored for the portal, not a verbatim lecture paste. Primary VL paths per concept: docs/audits/statistik-provenance-curation-pass-1.md (file-level only).';
+  'Portal theory follows the Statistik course line; wording is authored for the portal, not a verbatim lecture paste. Primary VL paths per concept: docs/audits/statistik-provenance-curation-pass-1.md. Concepts with reviewed page anchors list locator metadata only (no source text).';
 const NOTES_GRAPH =
   'Graph panel: statistik-native graphs for correlation, confidence intervals, regression and diagnostics; presentation aligned to the mikro1 graph interpretation family.';
 const NOTES_INTUITION = 'Compressed recall layer (Kernidee / Muster) for the closed learning loop.';
@@ -95,6 +96,7 @@ const NOTES_TASKS = 'Authored Aufgaben for guided practice.';
 export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
   primaryPathsByConceptId: STATISTIK_CONCEPT_PRIMARY_REFS,
+  anchorsByConceptId: STATISTIK_SOURCE_ANCHORS,
   moduleSlug: MODULE_SLUG,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,

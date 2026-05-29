@@ -8,6 +8,12 @@ import { CHAPTERS } from './chapters.js';
 export const MIKRO1_TASK_PLACEHOLDER_POLICY =
   'Platzhalter sind explizit als non-deceptive markiert und enthalten keine erfundenen Mikro-I-Aufgabeninhalte.';
 
+/** Probeklausur JPGs are not OCR-reviewed; companion PDF is a layout template (Lorem ipsum), not exam substance. */
+export const MIKRO1_PROBEKLAUSUR_INGEST_BLOCKERS = Object.freeze([
+  'exam-artefacts-are-jpg-without-reviewed-ocr',
+  'klausur-pdf-is-template-not-item-bank'
+]);
+
 /** Registry baseline `source-corpus-registry.generated.json` (2026-05-28). */
 export const MIKRO1_OFFICIAL_TASK_DOC_BASELINE_2026_05_28 = Object.freeze({
   exercise: 0,

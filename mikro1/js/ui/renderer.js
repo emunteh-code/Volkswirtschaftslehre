@@ -16,6 +16,7 @@ import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
 import { getConceptProvenance, getConceptSourceSummary } from '../data/contentManifest.js';
 import { TASK_FAMILIES_BY_CONCEPT } from '../data/taskFamilies.js';
+import { FORMULA_CARDS_BY_CONCEPT } from '../data/formulaCards.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
 
 const chapterMap = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapter]));
@@ -392,6 +393,7 @@ baseRenderer = createRenderer({
   getConceptProvenance,
   getConceptSourceSummary,
   sourceMaterialBaseUrl: '../source-materials/Mikroökonomik I/',
+  formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
   taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
 });
 

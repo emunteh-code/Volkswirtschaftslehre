@@ -21,7 +21,7 @@
       "taskFamilies": 10,
       "sourceGroundedTaskFamilies": 9,
       "officialTaskSourceFamilies": 0,
-      "officialFormulaCards": 0,
+      "officialFormulaCards": 8,
       "masteryDimensions": 0,
       "anchorComplete": false,
       "anchorStatus": "partial",
@@ -231,21 +231,21 @@
       "formulaSignalPages": 892,
       "concepts": 14,
       "conceptsWithSourceRefs": 14,
-      "conceptsWithSourceAnchors": 0,
+      "conceptsWithSourceAnchors": 14,
       "sourceRefCoveragePct": 100,
-      "sourceAnchorCoveragePct": 0,
-      "sourceAnchors": 0,
+      "sourceAnchorCoveragePct": 100,
+      "sourceAnchors": 42,
       "taskFamilies": 1,
       "sourceGroundedTaskFamilies": 0,
       "officialTaskSourceFamilies": 0,
       "officialFormulaCards": 0,
       "masteryDimensions": 0,
-      "anchorComplete": false,
-      "anchorStatus": "missing",
+      "anchorComplete": true,
+      "anchorStatus": "complete",
       "examBankComplete": false,
       "examBankStatus": "official sources present; bank not mapped",
-      "provenanceComplete": false,
-      "provenanceStatus": "partial",
+      "provenanceComplete": true,
+      "provenanceStatus": "complete",
       "adaptiveReady": false,
       "adaptiveStatus": "missing dimension model",
       "mikro1DepthAchieved": false
@@ -479,15 +479,7 @@
     },
     {
       "module": "mathematik",
-      "reason": "page/slide/task anchors incomplete (0% concept coverage)"
-    },
-    {
-      "module": "mathematik",
       "reason": "official exam bank incomplete (official sources present; bank not mapped)"
-    },
-    {
-      "module": "mathematik",
-      "reason": "item-level provenance incomplete (partial)"
     },
     {
       "module": "mathematik",

@@ -13,7 +13,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `oekonometrie` | yes | yes | no | no | no | no | no | 180 | 298 | 811 |
 | `statistik` | yes | yes | yes | no | yes | no | no | 132 | 619 | 1046 |
 | `finanzwirtschaft` | yes | yes | no | no | no | no | no | 0 | 8 | 118 |
-| `mathematik` | yes | yes | no | no | no | no | no | 0 | 253 | 892 |
+| `mathematik` | yes | yes | yes | no | yes | no | no | 0 | 253 | 892 |
 | `jahresabschluss` | yes | yes | no | no | no | no | no | 0 | 36 | 129 |
 | `recht` | yes | yes | no | no | no | no | no | 2 | 52 | 94 |
 | `internationale-wirtschaftsbeziehungen` | yes | yes | no | no | no | no | no | 4 | 4 | 116 |
@@ -22,14 +22,14 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Official task families | Formula cards | Mastery dimensions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `mikro1` | 97% | 97% | 96 | 10 | 18 | 0 | 0 | 0 |
+| `mikro1` | 97% | 97% | 96 | 10 | 18 | 0 | 8 | 0 |
 | `mikro2` | 83% | 83% | 47 | 12 | 0 | 0 | 8 | 4 |
 | `makro1` | 100% | 0% | 0 | 1 | 29 | 0 | 0 | 0 |
 | `makro2` | 100% | 0% | 0 | 1 | 22 | 0 | 0 | 0 |
 | `oekonometrie` | 100% | 0% | 0 | 1 | 33 | 0 | 0 | 0 |
 | `statistik` | 100% | 100% | 42 | 1 | 104 | 0 | 0 | 0 |
 | `finanzwirtschaft` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
-| `mathematik` | 100% | 0% | 0 | 1 | 40 | 0 | 0 | 0 |
+| `mathematik` | 100% | 100% | 42 | 1 | 40 | 0 | 0 | 0 |
 | `jahresabschluss` | 100% | 0% | 0 | 0 | 13 | 0 | 0 | 0 |
 | `recht` | 100% | 0% | 0 | 0 | 17 | 0 | 0 | 0 |
 | `internationale-wirtschaftsbeziehungen` | 100% | 0% | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -45,7 +45,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `oekonometrie` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `statistik` | complete | official sources present; bank not mapped | complete | missing dimension model |
 | `finanzwirtschaft` | missing | missing | partial | missing dimension model |
-| `mathematik` | missing | official sources present; bank not mapped | partial | missing dimension model |
+| `mathematik` | complete | official sources present; bank not mapped | complete | missing dimension model |
 | `jahresabschluss` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `recht` | missing | official sources present; bank not mapped | partial | missing dimension model |
 | `internationale-wirtschaftsbeziehungen` | missing | missing | partial | missing dimension model |
@@ -85,9 +85,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `finanzwirtschaft`: item-level provenance incomplete (partial)
 - `finanzwirtschaft`: adaptive mastery not evidence-based (missing dimension model)
 - `finanzwirtschaft`: Mikro1-depth equality not certified
-- `mathematik`: page/slide/task anchors incomplete (0% concept coverage)
 - `mathematik`: official exam bank incomplete (official sources present; bank not mapped)
-- `mathematik`: item-level provenance incomplete (partial)
 - `mathematik`: adaptive mastery not evidence-based (missing dimension model)
 - `mathematik`: Mikro1-depth equality not certified
 - `jahresabschluss`: page/slide/task anchors incomplete (0% concept coverage)

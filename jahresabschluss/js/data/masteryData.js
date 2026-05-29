@@ -1,77 +1,118 @@
-export const MASTERY = {
-  rechnungswesen_intro: [
-    'Bilanz, GuV und Eigenkapitalveränderung sicher miteinander verknüpfen können',
-    'Aktivtausch, Bilanzverlängerung und Erfolgswirkung unterscheiden können',
-    'Den Zweck des Jahresabschlusses klausurnah erklären können'
-  ],
-  gob_rechtsgrundlagen: [
-    'Realisations- und Imparitätsprinzip klausursicher anwenden',
-    'GoB als normative Entscheidungsmaßstäbe in Fällen begründen können',
-    'Rechtsgrundlage und Vorsichtslogik in Bilanzierungsentscheidungen verbinden können'
-  ],
-  inventur_inventar_bilanzansatz: [
-    'Ansatzfrage und Bewertungsfrage sauber trennen können',
-    'Inventur, Inventar und Bilanz logisch aufeinander beziehen können',
-    'Bilanzierungsfähigkeit methodisch vor der Bewertungsfrage prüfen können'
-  ],
-  buchen_konten: [
-    'Soll/Haben systematisch aus Kontenart und Bewegungsrichtung ableiten können',
-    'Bestands- und Erfolgskonten sicher unterscheiden können',
-    'Buchungssätze mit Bilanz- und GuV-Wirkung begründen können'
-  ],
-  buchfuehrung_orga: [
-    'Grundbuch, Hauptbuch und Nebenbücher funktional unterscheiden können',
-    'Die Rolle von Belegen für ordnungsmäßige Buchführung erklären können',
-    'Kontenrahmen und Kontenplan in ihrer Ordnungsfunktion nutzen können'
-  ],
-  anlagevermoegen: [
-    'Planmäßige und außerplanmäßige Abschreibungen sauber trennen können',
-    'Buchwerte rechnerisch sicher ermitteln können',
-    'Zuschreibungsgrenzen nach fortgeführten Anschaffungskosten erklären können'
-  ],
-  umlauf_bewertung_verfahren: [
-    'FIFO, Durchschnittsmethode und Niederstwertprinzip sicher anwenden können',
-    'Die Wirkung von Bewertungsverfahren auf Endbestand und Aufwand erklären können',
-    'Bewertungsentscheidungen mit Erfolgswirkung begründen können'
-  ],
-  werkstoffe_erzeugnisse_buchungen: [
-    'Werkstoffverbrauch über Fortschreibungs- und Inventurmethode sicher herleiten können',
-    'Bestandsveränderungen unfertiger/fertiger Erzeugnisse erfolgswirksam einordnen können',
-    'Korrekturbuchungen im Materialfluss kontensicher darstellen können'
-  ],
-  umlauf_waren_ust: [
-    'Warenbuchungen mit Umsatzsteuer vollständig auflösen können',
-    'Erlöslogik, Lagerwirkung und Steuerwirkung nicht vermischen',
-    'Netto- und Bruttobetrachtung klausursicher unterscheiden können'
-  ],
-  eigenkapital_kapitalgesellschaften: [
-    'Eigenkapitalgliederung von Kapitalgesellschaften sicher darstellen können',
-    'Rücklagen- und Gewinnverwendungslogik klausursicher anwenden können',
-    'Ergebnisausweis vor und nach Gewinnverwendung unterscheiden können'
-  ],
-  eigenkapital_personengesellschaften: [
-    'Kapitalkonten und Privatkonten in Personengesellschaften sauber führen können',
-    'Einlagen, Entnahmen und Gewinnanteile korrekt zuordnen können',
-    'Gesellschafterbezogene Eigenkapitallogik sicher erklären können'
-  ],
-  verbindlichkeiten: [
-    'Sichere Fremdkapitalverpflichtungen korrekt klassifizieren können',
-    'Verbindlichkeiten zum Erfüllungsbetrag bewerten können',
-    'Verbindlichkeiten von Rückstellungen systematisch abgrenzen können'
-  ],
-  rueckstellungen: [
-    'Rückstellungen als ungewisse Verpflichtungen sicher identifizieren können',
-    'Rückstellungen mit kaufmännisch begründetem Erfüllungsbetrag ansetzen können',
-    'Folgebuchungen bei Inanspruchnahme, Auflösung und Nachbelastung beherrschen können'
-  ],
-  rechnungsabgrenzung: [
-    'Aktive und passive RAP periodengerecht anwenden können',
-    'Transitorische und antizipative Sachverhalte sicher unterscheiden können',
-    'Zahlungszeitpunkt und wirtschaftliche Ursache nicht verwechseln'
-  ],
-  erfolgsrechnung: [
-    'GKV und UKV in Aufbau und Logik sicher vergleichen können',
-    'Bestandsveränderungen und Funktionsgliederung richtig deuten können',
-    'Erklären können, warum beide Verfahren zum selben Jahresergebnis führen'
-  ]
-};
+// ============================================================
+// MASTERY DATA — Jahresabschluss
+// Generated exam-readiness objectives (4 dimensions).
+// ============================================================
+
+import { CHAPTERS } from './chapters.js';
+import { FORMULA_CARDS_BY_CONCEPT } from './formulaCards.js';
+import { TASK_FAMILIES_BY_CONCEPT } from './taskFamilies.js';
+
+const DIMENSION_LABELS = Object.freeze({
+  recognition: 'Erkennen',
+  calculation: 'Rechnen',
+  derivation: 'Herleiten',
+  transfer: 'Transfer'
+});
+
+const SUPPLEMENTAL_CONCEPT_IDS = new Set([]);
+
+function objective({ dimension, label, sourceStatus, sourceAnchorIds = [], evidence = [] }) {
+  return {
+    dimension,
+    dimensionLabel: DIMENSION_LABELS[dimension] || dimension,
+    label,
+    sourceStatus,
+    sourceAnchorIds,
+    evidence
+  };
+}
+
+function firstAnchor(items) {
+  return items
+    .flatMap((item) =>
+      Array.isArray(item.sourceAnchorIds)
+        ? item.sourceAnchorIds
+        : Array.isArray(item.anchorIds)
+          ? item.anchorIds
+          : []
+    )
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function fallbackSourceStatus(conceptId, dimension) {
+  if (!SUPPLEMENTAL_CONCEPT_IDS.has(conceptId)) return 'source-distilled';
+  return dimension === 'calculation' || dimension === 'transfer'
+    ? 'platform-added-drill'
+    : 'platform-added-explanation';
+}
+
+export const MASTERY_DIMENSIONS = DIMENSION_LABELS;
+
+export const MASTERY = {};
+
+CHAPTERS.forEach((ch) => {
+  const formulaCards = FORMULA_CARDS_BY_CONCEPT[ch.id] || [];
+  const taskFamilies = TASK_FAMILIES_BY_CONCEPT[ch.id] || [];
+  const formulaAnchors = firstAnchor(formulaCards);
+  const taskAnchors = firstAnchor(taskFamilies);
+  const hasDirect = formulaCards.length > 0 || taskFamilies.some((f) => f.sourceStatus === 'direct-source');
+  const baseStatus = hasDirect ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
+
+  const items = [
+    objective({
+      dimension: 'recognition',
+      label: `Die Kurslogik von "${ch.title}" strukturiert wiedergeben können`,
+      sourceStatus: baseStatus,
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['self_check', 'concept_review']
+    })
+  ];
+
+  if (formulaCards.length) {
+    items.push(
+      objective({
+        dimension: 'calculation',
+        label: `Zentrale Formelkarte(n) zu "${ch.title}" korrekt anwenden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: formulaAnchors,
+        evidence: ['formula_card', 'portal_tasks']
+      })
+    );
+  }
+
+  if (taskFamilies.some((f) => f.officialTaskCoverage === 'official-document-registry')) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `Offizielle Übungs-/Klausur-Dokumente zu "${ch.title}" im Korpus finden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: taskAnchors,
+        evidence: ['official_document_registry']
+      })
+    );
+  } else if (taskFamilies.length) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `VL-Methode zu "${ch.title}" auf eine neue Zahlenkonstellation übertragen`,
+        sourceStatus: baseStatus,
+        sourceAnchorIds: taskAnchors,
+        evidence: ['task_family', 'step_problems']
+      })
+    );
+  }
+
+  items.push(
+    objective({
+      dimension: 'transfer',
+      label: `Prüfungsähnliche Aufgabe zu "${ch.title}" ohne Stichwortliste einordnen`,
+      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['mock_exam', 'self_check']
+    })
+  );
+
+  MASTERY[ch.id] = items;
+});
+

@@ -1,6 +1,6 @@
 // ============================================================
 // MASTERY DATA — Mikroökonomik II
-// Source-aware exam readiness objectives by mastery dimension.
+// Generated exam-readiness objectives (4 dimensions).
 // ============================================================
 
 import { CHAPTERS } from './chapters.js';
@@ -14,19 +14,9 @@ const DIMENSION_LABELS = Object.freeze({
   transfer: 'Transfer'
 });
 
-const SUPPLEMENTAL_CONCEPT_IDS = new Set([
-  'externa_pigou',
-  'externa_institutionen',
-  'public_goods'
-]);
+const SUPPLEMENTAL_CONCEPT_IDS = new Set(["externa_pigou","externa_institutionen","public_goods"]);
 
-function objective({
-  dimension,
-  label,
-  sourceStatus,
-  sourceAnchorIds = [],
-  evidence = []
-}) {
+function objective({ dimension, label, sourceStatus, sourceAnchorIds = [], evidence = [] }) {
   return {
     dimension,
     dimensionLabel: DIMENSION_LABELS[dimension] || dimension,
@@ -39,7 +29,13 @@ function objective({
 
 function firstAnchor(items) {
   return items
-    .flatMap((item) => Array.isArray(item.sourceAnchorIds) ? item.sourceAnchorIds : Array.isArray(item.anchorIds) ? item.anchorIds : [])
+    .flatMap((item) =>
+      Array.isArray(item.sourceAnchorIds)
+        ? item.sourceAnchorIds
+        : Array.isArray(item.anchorIds)
+          ? item.anchorIds
+          : []
+    )
     .filter(Boolean)
     .slice(0, 3);
 }
@@ -60,67 +56,63 @@ CHAPTERS.forEach((ch) => {
   const taskFamilies = TASK_FAMILIES_BY_CONCEPT[ch.id] || [];
   const formulaAnchors = firstAnchor(formulaCards);
   const taskAnchors = firstAnchor(taskFamilies);
-  const sourceStatus = taskFamilies.length || formulaCards.length ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
+  const hasDirect = formulaCards.length > 0 || taskFamilies.some((f) => f.sourceStatus === 'direct-source');
+  const baseStatus = hasDirect ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
 
   const items = [
     objective({
       dimension: 'recognition',
-      label: `Die Kurslogik von "${ch.title}" ohne Stichwortliste erklären können`,
-      sourceStatus,
+      label: `Die Kurslogik von "${ch.title}" strukturiert wiedergeben können`,
+      sourceStatus: baseStatus,
       sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
       evidence: ['self_check', 'concept_review']
     })
   ];
 
   if (formulaCards.length) {
-    items.push(objective({
-      dimension: 'calculation',
-      label: `Die zentrale Formelkarte zu "${ch.title}" in einer Rechenaufgabe korrekt einsetzen können`,
-      sourceStatus: 'direct-source',
-      sourceAnchorIds: formulaAnchors,
-      evidence: ['formula_card', 'practice_attempt']
-    }));
-    items.push(objective({
-      dimension: 'derivation',
-      label: `Die Herleitung der Formelkarte zu "${ch.title}" mit Annahmen und Einsatzgrenzen reproduzieren können`,
-      sourceStatus: 'direct-source',
-      sourceAnchorIds: formulaAnchors,
-      evidence: ['formula_card', 'derivation_check']
-    }));
-  } else {
-    items.push(objective({
-      dimension: 'calculation',
-      label: `Formale Beziehungen und Modellbedingungen zu "${ch.title}" fehlerfrei anwenden können`,
-      sourceStatus: fallbackSourceStatus(ch.id, 'calculation'),
-      sourceAnchorIds: taskAnchors,
-      evidence: ['practice_attempt']
-    }));
-    items.push(objective({
-      dimension: 'derivation',
-      label: `Den Argumentationsweg zu "${ch.title}" in Prüfungssprache begründen können`,
-      sourceStatus: fallbackSourceStatus(ch.id, 'derivation'),
-      sourceAnchorIds: taskAnchors,
-      evidence: ['written_explanation']
-    }));
+    items.push(
+      objective({
+        dimension: 'calculation',
+        label: `Zentrale Formelkarte(n) zu "${ch.title}" korrekt anwenden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: formulaAnchors,
+        evidence: ['formula_card', 'portal_tasks']
+      })
+    );
   }
 
-  if (taskFamilies.length) {
-    items.push(objective({
-      dimension: 'transfer',
-      label: `${taskFamilies.length} Klausurfamilie${taskFamilies.length === 1 ? '' : 'n'} zu "${ch.title}" unter Zeitdruck auswählen und lösen können`,
-      sourceStatus: 'direct-source',
-      sourceAnchorIds: taskAnchors,
-      evidence: ['task_family', 'mixed_attempt']
-    }));
-  } else {
-    items.push(objective({
-      dimension: 'transfer',
-      label: `Typische Klausurfragen zu "${ch.title}" sicher von Nachbarthemen abgrenzen können`,
-      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
-      sourceAnchorIds: formulaAnchors,
-      evidence: ['mixed_attempt']
-    }));
+  if (taskFamilies.some((f) => f.officialTaskCoverage === 'official-document-registry')) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `Offizielle Übungs-/Klausur-Dokumente zu "${ch.title}" im Korpus finden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: taskAnchors,
+        evidence: ['official_document_registry']
+      })
+    );
+  } else if (taskFamilies.length) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `VL-Methode zu "${ch.title}" auf eine neue Zahlenkonstellation übertragen`,
+        sourceStatus: baseStatus,
+        sourceAnchorIds: taskAnchors,
+        evidence: ['task_family', 'step_problems']
+      })
+    );
   }
+
+  items.push(
+    objective({
+      dimension: 'transfer',
+      label: `Prüfungsähnliche Aufgabe zu "${ch.title}" ohne Stichwortliste einordnen`,
+      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['mock_exam', 'self_check']
+    })
+  );
 
   MASTERY[ch.id] = items;
 });
+

@@ -1,12 +1,12 @@
 // ============================================================
 // TASK FAMILY TAXONOMY — Mikroökonomik II
-// Source-grounded exam-pattern layer. These records describe
-// task families; they do not claim official exercise-bank parity.
+// VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
+import { buildMikro2OfficialTaskPlaceholders, MIKRO2_OFFICIAL_TASK_DOC_BASELINE } from './officialTaskIngestion.js';
+
 const MODULE = 'mikro2';
-const OFFICIAL_TASK_GAP =
-  'Keine vollständigen offiziellen Übungsblätter, Lösungsschlüssel oder Altklausuren für diese Familie im aktuellen Mikro-II-Korpus.';
+const OFFICIAL_TASK_GAP = "Keine offiziellen Klausur-Artefakte im Korpus; Übungs-Mapping offen.";
 
 function family({
   id,
@@ -19,7 +19,6 @@ function family({
   difficulty,
   expectedTimeMinutes,
   examRelevance,
-  requiredFormulaCards = [],
   commonTraps,
   gradingRubric,
   currentCoverage,
@@ -37,7 +36,6 @@ function family({
     difficulty,
     expectedTimeMinutes,
     examRelevance,
-    requiredFormulaCards,
     commonTraps,
     gradingRubric,
     currentCoverage,
@@ -46,231 +44,252 @@ function family({
   };
 }
 
-export const TASK_FAMILIES = Object.freeze([
+function familyFromPlaceholder(placeholder) {
+  return {
+    id: placeholder.id,
+    module: MODULE,
+    conceptId: placeholder.conceptId,
+    title: `Mikroökonomik II official-task mapping placeholder (${placeholder.conceptId})`,
+    topic: 'Official task ingestion',
+    method: 'Dokumente registriert; item-level Mapping steht aus.',
+    sourceStatus: placeholder.sourceStatus,
+    sourceAnchorIds: [],
+    difficulty: 'offen',
+    expectedTimeMinutes: null,
+    examRelevance: 'hoch',
+    commonTraps: ['Ingestion mit vollständigem Mapping verwechseln'],
+    gradingRubric: ['Placeholder bleibt non-deceptive'],
+    currentCoverage: {
+      ingestion: `exercise=${MIKRO2_OFFICIAL_TASK_DOC_BASELINE.exercise}, solution=${MIKRO2_OFFICIAL_TASK_DOC_BASELINE.solution}, tutorial=${MIKRO2_OFFICIAL_TASK_DOC_BASELINE.tutorial}, exam=${MIKRO2_OFFICIAL_TASK_DOC_BASELINE.exam}`,
+      mapping: 'concept-level Zuordnung offen'
+    },
+    officialTaskCoverage: placeholder.officialTaskCoverage,
+    officialTaskGap: placeholder.officialTaskGap,
+    placeholderLabel: placeholder.placeholderLabel
+  };
+}
+
+const VL_GROUNDED_FAMILIES = [
   family({
-    id: 'mikro2.taskfamily.monopoly-markup',
+    id: 'mikro2.taskfamily.monopol_preissetzung-vl-pattern',
     conceptId: 'monopol_preissetzung',
-    title: 'Monopolpreis über Elastizitätsregel bestimmen',
-    topic: 'Monopolistische Preissetzung',
-    method: 'Grenzerlös formulieren, BEO E\'(y)=C\'(y) einsetzen, Markup nach Preis auflösen.',
-    sourceAnchorIds: ['mikro2.monopol_preissetzung.vl02.p02.markup'],
+    title: "Mikroökonomik II: Preissetzung im Monopol und Wohlfahrtseffekte",
+    topic: "Preissetzung im Monopol und Wohlfahrtseffekte",
+    method: "An VL-Ankern (mikro2.monopol_preissetzung.vl02.p01.programm, mikro2.monopol_preissetzung.vl02.p02.markup) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.monopol_preissetzung.vl02.p01.programm","mikro2.monopol_preissetzung.vl02.p02.markup"],
     difficulty: 'mittel',
-    expectedTimeMinutes: 8,
+    expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.monopoly_markup_elasticity'],
-    commonTraps: ['Elastizität ohne Betrag verwenden', 'Preis mit Grenzkosten gleichsetzen', 'unelastischen Nachfragebereich übersehen'],
-    gradingRubric: ['Grenzerlös korrekt notiert', 'BEO korrekt angewandt', 'Preisformel sauber isoliert', 'Elastizitätsbedingung verbal geprüft'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and formula card',
-      stepProblems: 'not yet concept-specific',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.price-discrimination-third-degree',
+    id: 'mikro2.taskfamily.preisdiskriminierung-vl-pattern',
     conceptId: 'preisdiskriminierung',
-    title: 'Preisdiskriminierung dritten Grades lösen',
-    topic: 'Preisdiskriminierung',
-    method: 'Gewinn mit gruppenspezifischen Erlösen aufstellen und Grenzerlöse über gemeinsame Grenzkosten ausgleichen.',
-    sourceAnchorIds: ['mikro2.preisdiskriminierung.vl03.p03.mr-equalization'],
+    title: "Mikroökonomik II: Preisdiskriminierung dritten Grades",
+    topic: "Preisdiskriminierung dritten Grades",
+    method: "An VL-Ankern (mikro2.preisdiskriminierung.vl03.p02.third-degree, mikro2.preisdiskriminierung.vl03.p03.mr-equalization) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.preisdiskriminierung.vl03.p02.third-degree","mikro2.preisdiskriminierung.vl03.p03.mr-equalization"],
     difficulty: 'mittel',
     expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.third_degree_price_discrimination_mr'],
-    commonTraps: ['Preise statt Grenzerlöse ausgleichen', 'Gesamtkosten falsch nach Teilmengen trennen', 'No-arbitrage-Annahme vergessen'],
-    gradingRubric: ['Gruppen sauber getrennt', 'Gesamtkosten korrekt behandelt', 'BEO je Gruppe aufgestellt', 'ökonomische Interpretation der Preisunterschiede gegeben'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and formula card',
-      stepProblems: 'not yet concept-specific',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.cournot-reaction-functions',
-    conceptId: 'oligopol_cournot_bertrand',
-    title: 'Cournot-Reaktionsfunktionen und Gleichgewicht',
-    topic: 'Oligopoltheorie',
-    method: 'Gewinnfunktion je Firma, BEO nach eigener Menge, Reaktionsfunktionen schneiden oder Symmetrie nutzen.',
-    sourceAnchorIds: ['mikro2.oligopol_cournot_bertrand.vl06.p03.reaction'],
+    id: 'mikro2.taskfamily.spieltheorie_statisch-vl-pattern',
+    conceptId: 'spieltheorie_statisch',
+    title: "Mikroökonomik II: Spieltheorie I: Auszahlungsmatrix, dominante Strategien, Nash",
+    topic: "Spieltheorie I: Auszahlungsmatrix, dominante Strategien, Nash",
+    method: "An VL-Ankern (mikro2.spieltheorie_statisch.vl09.p01.programm, mikro2.spieltheorie_statisch.vl09.p05.nash) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.spieltheorie_statisch.vl09.p01.programm","mikro2.spieltheorie_statisch.vl09.p05.nash"],
     difficulty: 'mittel',
-    expectedTimeMinutes: 12,
+    expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.cournot_symmetric_duopoly_quantity'],
-    commonTraps: ['Rivalenmenge beim Ableiten als variabel behandeln', 'Cournot mit Bertrand verwechseln', 'Gesamtmenge Q falsch einsetzen'],
-    gradingRubric: ['Nachfrage korrekt in Gewinnfunktion eingesetzt', 'FOC korrekt gebildet', 'Reaktionsfunktion korrekt isoliert', 'Gleichgewicht konsistent berechnet'],
-    currentCoverage: {
-      portalTasks: 'concept tasks, step problem, formula card, mock exam block',
-      stepProblems: 'm2_cournot_1 and model-choice drill',
-      mockExam: 'hard_mock_mikro2_2026 Block A'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.bertrand-model-choice',
+    id: 'mikro2.taskfamily.spieltheorie_dynamisch-vl-pattern',
+    conceptId: 'spieltheorie_dynamisch',
+    title: "Mikroökonomik II: Gemischte Strategien und spezielle Spiele",
+    topic: "Gemischte Strategien und spezielle Spiele",
+    method: "An VL-Ankern (mikro2.spieltheorie_dynamisch.vl10.p01.mixed, mikro2.spieltheorie_dynamisch.vl11.p01.sequential) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.spieltheorie_dynamisch.vl10.p01.mixed","mikro2.spieltheorie_dynamisch.vl11.p01.sequential"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
+  }),
+  family({
+    id: 'mikro2.taskfamily.oligopol_cournot_bertrand-vl-pattern',
     conceptId: 'oligopol_cournot_bertrand',
-    title: 'Cournot-Bertrand-Modellwahl begründen',
-    topic: 'Oligopoltheorie',
-    method: 'Entscheidungsvariable identifizieren und das Preis- oder Mengenwettbewerbsresultat verbal ableiten.',
-    sourceAnchorIds: ['mikro2.oligopol_cournot_bertrand.vl08.p01.bertrand', 'mikro2.oligopol_cournot_bertrand.vl08.p03.bertrand-paradox'],
-    difficulty: 'leicht',
-    expectedTimeMinutes: 5,
-    examRelevance: 'mittel',
-    commonTraps: ['Entscheidungsvariable überlesen', 'Bertrand-Paradox ohne Annahmen nennen', 'Kapazitätsgrenzen ignorieren'],
-    gradingRubric: ['Preis- versus Mengenwahl korrekt erkannt', 'Basisergebnis genannt', 'mindestens eine Annahme oder Einschränkung sauber eingeordnet'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and step problem',
-      stepProblems: 'm2_cournot_2',
-      mockExam: 'not yet represented'
-    }
+    title: "Mikroökonomik II: Cournot-Duopol und Cournot-Wettbewerb mit vielen Anbietern",
+    topic: "Cournot-Duopol und Cournot-Wettbewerb mit vielen Anbietern",
+    method: "An VL-Ankern (mikro2.oligopol_cournot_bertrand.vl06.p01.programm, mikro2.oligopol_cournot_bertrand.vl06.p03.reaction) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p01.programm","mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.stackelberg-backward-induction',
+    id: 'mikro2.taskfamily.oligopol_stackelberg-vl-pattern',
     conceptId: 'oligopol_stackelberg',
-    title: 'Stackelberg per Rückwärtsinduktion lösen',
-    topic: 'Sequentieller Mengenwettbewerb',
-    method: 'Folgerreaktion bestimmen, in Führerproblem einsetzen, Führermenge und Folgermenge berechnen.',
-    sourceAnchorIds: ['mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model'],
+    title: "Mikroökonomik II: Oligopoltheorie I: Strategien und Stackelbergmodell",
+    topic: "Oligopoltheorie I: Strategien und Stackelbergmodell",
+    method: "An VL-Ankern (mikro2.oligopol_stackelberg.vl05.p01.programm, mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.oligopol_stackelberg.vl05.p01.programm","mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model"],
     difficulty: 'mittel',
-    expectedTimeMinutes: 12,
+    expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.stackelberg_leader_quantity'],
-    commonTraps: ['Cournot-Schnittpunkt statt Rückwärtsinduktion verwenden', 'Folgerreaktion nicht einsetzen', 'Timing nicht verbal erklären'],
-    gradingRubric: ['Folgerproblem korrekt gelöst', 'Führerproblem mit Reaktion formuliert', 'Mengenfolge konsistent berechnet', 'First-mover-Logik verbal eingeordnet'],
-    currentCoverage: {
-      portalTasks: 'concept tasks, step problem, formula card',
-      stepProblems: 'm2_stack_1',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.intertemporal-budget',
+    id: 'mikro2.taskfamily.intertemporaler_konsum-vl-pattern',
     conceptId: 'intertemporaler_konsum',
-    title: 'Intertemporale Budgetgerade herleiten',
-    topic: 'Intertemporaler Konsum',
-    method: 'Periodenbudgets mit Ersparnis verbinden, Ersparnis eliminieren und Gegenwartswertform schreiben.',
-    sourceAnchorIds: ['mikro2.intertemporaler_konsum.vl12.p05.budget'],
+    title: "Mikroökonomik II: Intertemporaler Konsum",
+    topic: "Intertemporaler Konsum",
+    method: "An VL-Ankern (mikro2.intertemporaler_konsum.vl12.p01.programm, mikro2.intertemporaler_konsum.vl12.p05.budget) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.intertemporaler_konsum.vl12.p01.programm","mikro2.intertemporaler_konsum.vl12.p05.budget"],
     difficulty: 'mittel',
-    expectedTimeMinutes: 8,
+    expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.intertemporal_budget_present_value'],
-    commonTraps: ['c1/c2 als Zustände statt Perioden lesen', 'Gegenwarts- und Zukunftswerte mischen', 'Ausstattungspunkt nicht markieren'],
-    gradingRubric: ['Periodenbudgets korrekt', 'Zinsfaktor korrekt verwendet', 'Budgetgerade in Gegenwartswerten geschrieben', 'ökonomische Steigung interpretiert'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and formula card',
-      stepProblems: 'not yet concept-specific',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.expected-utility-insurance',
+    id: 'mikro2.taskfamily.unsicherheit_versicherung-vl-pattern',
     conceptId: 'unsicherheit_versicherung',
-    title: 'Erwartungsnutzen und Versicherung einordnen',
-    topic: 'Unsicherheit und Versicherung',
-    method: 'Naturzustände definieren, Nutzenwerte gewichten und Versicherungsvertrag als Zustandskonsum abbilden.',
-    sourceAnchorIds: ['mikro2.unsicherheit_versicherung.vl13.p03.conditional-consumption'],
-    difficulty: 'mittel',
-    expectedTimeMinutes: 9,
-    examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.expected_utility_two_states'],
-    commonTraps: ['Zustände mit Zeitperioden verwechseln', 'Auszahlungen statt Nutzen gewichten', 'Vollversicherung ohne Risikoaversion begründen'],
-    gradingRubric: ['Zustände korrekt benannt', 'Wahrscheinlichkeiten korrekt genutzt', 'Erwartungsnutzen statt Erwartungswert allein berechnet', 'Versicherungslogik verbal erklärt'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and formula card',
-      stepProblems: 'not yet concept-specific',
-      mockExam: 'not yet represented'
-    }
-  }),
-  family({
-    id: 'mikro2.taskfamily.exchange-efficiency',
-    conceptId: 'gleichgewicht_tausch',
-    title: 'Tauscheffizienz in der Edgeworth-Box prüfen',
-    topic: 'Allgemeines Gleichgewicht',
-    method: 'Grenzraten der Substitution beider Haushalte berechnen und Tangentialbedingung prüfen.',
-    sourceAnchorIds: ['mikro2.gleichgewicht_tausch.vl16.p03.edgeworth', 'mikro2.gleichgewicht_tausch.vl16.p05.contract'],
+    title: "Mikroökonomik II: Entscheidungen unter Unsicherheit",
+    topic: "Entscheidungen unter Unsicherheit",
+    method: "An VL-Ankern (mikro2.unsicherheit_versicherung.vl13.p01.programm, mikro2.unsicherheit_versicherung.vl13.p03.conditional-consumption) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.unsicherheit_versicherung.vl13.p01.programm","mikro2.unsicherheit_versicherung.vl13.p03.conditional-consumption"],
     difficulty: 'mittel',
     expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    commonTraps: ['A- und B-Ursprung verwechseln', 'GRS falsch herum bilden', 'Effizienz mit Gerechtigkeit verwechseln'],
-    gradingRubric: ['Allokation korrekt in der Box gelesen', 'GRS je Haushalt berechnet', 'Gleichheitsbedingung geprüft', 'Pareto-Aussage sauber formuliert'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and step problem',
-      stepProblems: 'm2_ge_1',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.walras-market-clearing',
-    conceptId: 'gleichgewicht_walras',
-    title: 'Walras-Gleichgewicht über Markträumung prüfen',
-    topic: 'Walras-Gleichgewicht',
-    method: 'Überschussnachfrage bestimmen, relative Preise nutzen und Walras-Gesetz zur Gleichungsreduktion anwenden.',
-    sourceAnchorIds: ['mikro2.gleichgewicht_walras.vl15.p01.programm', 'mikro2.gleichgewicht_walras.vl16.p09.market-clearing'],
-    difficulty: 'mittel',
-    expectedTimeMinutes: 10,
-    examRelevance: 'mittel',
-    commonTraps: ['absolute statt relative Preise verwenden', 'Walras-Gesetz als zusätzliche Gleichung behandeln', 'Budgetausschöpfung vergessen'],
-    gradingRubric: ['Markträumung korrekt formuliert', 'Preisnormalisierung klar', 'Walras-Gesetz korrekt eingesetzt', 'Gleichgewicht verbal interpretiert'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and step problem',
-      stepProblems: 'm2_walras_1',
-      mockExam: 'not yet represented'
-    }
-  }),
-  family({
-    id: 'mikro2.taskfamily.production-efficiency',
+    id: 'mikro2.taskfamily.gleichgewicht_produktion-vl-pattern',
     conceptId: 'gleichgewicht_produktion',
-    title: 'Produktionseffizienz in der Faktorbox prüfen',
-    topic: 'Produktion im allgemeinen Gleichgewicht',
-    method: 'Faktorvollbeschäftigung notieren, Isoquanten-Tangentialbedingung prüfen und GRTS-Gleichheit interpretieren.',
-    sourceAnchorIds: ['mikro2.gleichgewicht_produktion.vl17.p03.factor-box'],
-    difficulty: 'schwer',
-    expectedTimeMinutes: 12,
-    examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.production_efficiency_grts'],
-    commonTraps: ['Produktions- und Konsumeffizienz gleichsetzen', 'Vollbeschäftigungsbedingungen vergessen', 'GRTS für nur einen Sektor auswerten'],
-    gradingRubric: ['Faktorbedingungen vollständig', 'GRTS-Bedingung korrekt', 'Faktorbox-Logik verbal eingeordnet', 'Abgrenzung zur Konsumseite gegeben'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and formula card',
-      stepProblems: 'not yet concept-specific',
-      mockExam: 'not yet represented'
-    }
-  }),
-  family({
-    id: 'mikro2.taskfamily.adverse-selection-lemons',
-    conceptId: 'information_adverse',
-    title: 'Adverse Selection im Lemons-Markt analysieren',
-    topic: 'Asymmetrische Information',
-    method: 'Erwartungswert uninformierter Käufer berechnen, Teilnahme guter Typen prüfen und Qualitätsdynamik erklären.',
-    sourceAnchorIds: ['mikro2.information_adverse.vl18.p03.adverse-selection', 'mikro2.information_adverse.vl19.p02.market-breakdown'],
+    title: "Mikroökonomik II: Allgemeines Gleichgewicht mit Produktion",
+    topic: "Allgemeines Gleichgewicht mit Produktion",
+    method: "An VL-Ankern (mikro2.gleichgewicht_produktion.vl17.p01.programm, mikro2.gleichgewicht_produktion.vl17.p02.model) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.gleichgewicht_produktion.vl17.p01.programm","mikro2.gleichgewicht_produktion.vl17.p02.model"],
     difficulty: 'mittel',
-    expectedTimeMinutes: 9,
+    expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    commonTraps: ['Adverse Selection mit Moral Hazard verwechseln', 'Durchschnittswert nach Marktaustritt nicht aktualisieren', 'Zeitpunkt vor Vertragsschluss übersehen'],
-    gradingRubric: ['Typen sauber getrennt', 'Erwartungswert korrekt', 'Teilnahmebedingung guter Qualität geprüft', 'Negativauslese verbal erklärt'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and step problems',
-      stepProblems: 'm2_info_1 and m2_info_2',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   }),
   family({
-    id: 'mikro2.taskfamily.moral-hazard-contracts',
-    conceptId: 'information_moralhazard',
-    title: 'Principal-Agent-Nebenbedingungen formulieren',
-    topic: 'Moral Hazard',
-    method: 'Teilnahmebedingung und Anreizbedingung getrennt notieren und in das Vertragsproblem einordnen.',
-    sourceAnchorIds: ['mikro2.information_moralhazard.vl20.p02.contract'],
-    difficulty: 'schwer',
-    expectedTimeMinutes: 12,
+    id: 'mikro2.taskfamily.gleichgewicht_tausch-vl-pattern',
+    conceptId: 'gleichgewicht_tausch',
+    title: "Mikroökonomik II: Tauschökonomie, Tauschoptimum und Pareto-Effizienz",
+    topic: "Tauschökonomie, Tauschoptimum und Pareto-Effizienz",
+    method: "An VL-Ankern (mikro2.gleichgewicht_tausch.vl16.p01.programm, mikro2.gleichgewicht_tausch.vl16.p03.edgeworth) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.gleichgewicht_tausch.vl16.p01.programm","mikro2.gleichgewicht_tausch.vl16.p03.edgeworth"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
     examRelevance: 'hoch',
-    requiredFormulaCards: ['mikro2.principal_agent_participation_incentive'],
-    commonTraps: ['IR oder IC vergessen', 'Hidden action mit hidden type verwechseln', 'Agenten- und Prinzipalziel vermischen'],
-    gradingRubric: ['IR korrekt formuliert', 'IC korrekt formuliert', 'Effort/Output-Informationsstruktur erklärt', 'Vertragsziel sauber eingeordnet'],
-    currentCoverage: {
-      portalTasks: 'concept tasks and formula card',
-      stepProblems: 'not yet concept-specific',
-      mockExam: 'not yet represented'
-    }
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
+  }),
+  family({
+    id: 'mikro2.taskfamily.gleichgewicht_walras-vl-pattern',
+    conceptId: 'gleichgewicht_walras',
+    title: "Mikroökonomik II: Allgemeines Gleichgewicht I und Walras-Gesetz",
+    topic: "Allgemeines Gleichgewicht I und Walras-Gesetz",
+    method: "An VL-Ankern (mikro2.gleichgewicht_walras.vl15.p01.programm, mikro2.gleichgewicht_walras.vl15.p02.robinson) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.gleichgewicht_walras.vl15.p01.programm","mikro2.gleichgewicht_walras.vl15.p02.robinson"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
+  }),
+  family({
+    id: 'mikro2.taskfamily.wohlfahrt_theoreme-vl-pattern',
+    conceptId: 'wohlfahrt_theoreme',
+    title: "Mikroökonomik II: Pareto-Effizienz",
+    topic: "Pareto-Effizienz",
+    method: "An VL-Ankern (mikro2.wohlfahrt_theoreme.vl16.p07.pareto, mikro2.wohlfahrt_theoreme.vl16.p17.fundamental-theorems) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.wohlfahrt_theoreme.vl16.p07.pareto","mikro2.wohlfahrt_theoreme.vl16.p17.fundamental-theorems"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
+  }),
+  family({
+    id: 'mikro2.taskfamily.wohlfahrt_messung-vl-pattern',
+    conceptId: 'wohlfahrt_messung',
+    title: "Mikroökonomik II: Wohlfahrtswirkung des Monopols",
+    topic: "Wohlfahrtswirkung des Monopols",
+    method: "An VL-Ankern (mikro2.wohlfahrt_messung.vl02.p05.monopoly-welfare, mikro2.wohlfahrt_messung.vl02.p09.surplus) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.wohlfahrt_messung.vl02.p05.monopoly-welfare","mikro2.wohlfahrt_messung.vl02.p09.surplus"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
+  }),
+  family({
+    id: 'mikro2.taskfamily.information_adverse-vl-pattern',
+    conceptId: 'information_adverse',
+    title: "Mikroökonomik II: Moralisches Risiko und Adverse Selektion",
+    topic: "Moralisches Risiko und Adverse Selektion",
+    method: "An VL-Ankern (mikro2.information_adverse.vl18.p01.programm, mikro2.information_adverse.vl18.p03.adverse-selection) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.information_adverse.vl18.p01.programm","mikro2.information_adverse.vl18.p03.adverse-selection"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
+  }),
+  family({
+    id: 'mikro2.taskfamily.information_moralhazard-vl-pattern',
+    conceptId: 'information_moralhazard',
+    title: "Mikroökonomik II: Moralisches Risiko und Prinzipal-Agenten-Theorie",
+    topic: "Moralisches Risiko und Prinzipal-Agenten-Theorie",
+    method: "An VL-Ankern (mikro2.information_moralhazard.vl18.p01.programm, mikro2.information_moralhazard.vl18.p04.principal-agent) orientieren und mit Kapitelaufgaben verknüpfen.",
+    sourceAnchorIds: ["mikro2.information_moralhazard.vl18.p01.programm","mikro2.information_moralhazard.vl18.p04.principal-agent"],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
+    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   })
+];
+
+const OFFICIAL_DOCUMENT_FAMILIES = [
+
+];
+
+export const TASK_FAMILIES = Object.freeze([
+  ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_DOCUMENT_FAMILIES,
+  ...buildMikro2OfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);
 
 export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
@@ -280,3 +299,4 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
+

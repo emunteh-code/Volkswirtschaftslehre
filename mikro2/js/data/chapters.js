@@ -59,6 +59,25 @@ export const CONTENT = {
           { text: String.raw`Klammer auswerten.`, eq: String.raw`p=(0{,}5)^{-1}\cdot 20=40` }
         ],
         result: String.raw`Der Monopolpreis beträgt $p=40$.`
+      },
+      {
+        text: String.raw`Linearer Monopol: inverse Nachfrage $p(y)=10-y$, konstante Grenzkosten $MC=2$. Bestimmen Sie $y_m$, $p_m$, den Lerner-Index $L=(p-MC)/p$ und den Deadweight Loss relativ zum Wettbewerb.`,
+        steps: [
+          { text: String.raw`Grenzerlös: $E'(y)=10-2y$. Optimum: $10-2y=2$.`, eq: String.raw`y_m=4` },
+          { text: String.raw`Preis und Gewinn:`, eq: String.raw`p_m=6,\quad \pi_m=(6-2)\cdot 4=16` },
+          { text: String.raw`Lerner-Index:`, eq: String.raw`L=\frac{6-2}{6}=\frac{2}{3}` },
+          { text: String.raw`Wettbewerb: $p=MC=2$, $y_W=8$. DWL-Dreieck:`, eq: String.raw`DWL=\frac12(6-2)(8-4)=8` }
+        ],
+        result: String.raw`$y_m=4$, $p_m=6$, $L=2/3$, $DWL=8$. Der Monopolist produziert weniger und verlangt einen deutlichen Aufschlag auf die Grenzkosten.`
+      },
+      {
+        text: String.raw`Zeigen Sie mit $E'(y)=p(y)(1-1/|\varepsilon|)$ und $E'(y)=C'(y)$, dass bei konstanten Grenzkosten $C'(y)=c$ der Monopolpreis $p=c/(1-1/|\varepsilon|)$ folgt.`,
+        steps: [
+          { text: String.raw`FOC im Monopol: $E'(y)=C'(y)$.`, eq: String.raw`p(y)\left(1-\frac{1}{|\varepsilon|}\right)=c` },
+          { text: String.raw`Nach $p$ auflösen:`, eq: String.raw`p=\frac{c}{1-1/|\varepsilon|}` },
+          { text: String.raw`Grenzfall elastische Nachfrage:`, eq: String.raw`|\varepsilon|\to\infty \Rightarrow p\to c` }
+        ],
+        result: String.raw`Der Aufschlag steigt mit Marktmacht (niedrigere $|\varepsilon|$) und verschwindet im Grenzfall vollkommenen Wettbewerbs.`
       }
     ]
   },
@@ -90,6 +109,15 @@ export const CONTENT = {
           { text: String.raw`Schlussfolgerung.`, eq: String.raw`E_1'(y_1)=E_2'(y_2)` }
         ],
         result: String.raw`Preise können wegen unterschiedlicher Nachfrageelastizitäten verschieden sein; die Grenzerlöse müssen im Optimum übereinstimmen.`
+      },
+      {
+        text: String.raw`Zweiter Grad: Der Monopolist bietet ein Menü $(q_L,p_L)$ und $(q_H,p_H)$ an. Typ L hat Nutzen $u_L=\sqrt{q}$, Typ H hat $u_H=2\sqrt{q}$. Skizzieren Sie die Selbstselektionslogik und nennen Sie die typische Klausurfrage.`,
+        steps: [
+          { text: String.raw`IC-Low: Typ L wählt eigenes Paket.`, eq: String.raw`\sqrt{q_L}-p_L \ge \sqrt{q_H}-p_H` },
+          { text: String.raw`IC-High: Typ H wählt eigenes Paket.`, eq: String.raw`2\sqrt{q_H}-p_H \ge 2\sqrt{q_L}-p_L` },
+          { text: String.raw`Interpretation:`, eq: String.raw`\text{Menüpreise sortieren Typen über verdeckte Information.}` }
+        ],
+        result: String.raw`Beim 2. Grad muss das Menü so konstruiert werden, dass jeder Typ sein „eigenes“ Bündel freiwillig wählt — ohne dass der Monopolist den Typ beobachten muss.`
       }
     ]
   },
@@ -343,10 +371,17 @@ export const CONTENT = {
       <p>Eine Zinsänderung dreht die Budgetgerade um den Ausstattungspunkt. Ob Gegenwartskonsum steigt oder fällt, hängt von Substitutions- und Einkommenseffekt sowie davon ab, ob der Haushalt Netto-Sparer oder Netto-Schuldner ist.</p>
       <div class="warn-box"><strong>Klausurfehler:</strong> Nicht jede Zinserhöhung senkt automatisch $c_1$. Bei Netto-Sparern und Netto-Schuldnern wirken Einkommenseffekte in unterschiedliche Richtungen.</div>
     </div>
+    <div class="section-block">
+      <h3>Optimierung mit Nutzen $u(c_1,c_2)$</h3>
+      <p>Bei additiver Nutzenfunktion $u(c_1,c_2)=u_1(c_1)+u_2(c_2)$ liefert die tangential optimale Konsumkombination die Euler-Gleichung: Der Grenznutzen heute muss mit dem diskontierten Grenznutzen morgen im Gleichgewicht übereinstimmen.</p>
+      <div class="math-block">$$u_1'(c_1^*)=\frac{1}{1+r}u_2'(c_2^*)$$</div>
+      <p>Bei logarithmischem Nutzen $u_i(c)=\ln c_i$ folgt unmittelbar $c_2^*=(1+r)c_1^*$: Konsum wächst mit dem Zinsfaktor.</p>
+    </div>
     `,
     formeln: [
       { label: 'Gegenwartswert-Budget', eq: String.raw`$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$`, desc: 'Intertemporale Budgetbeschränkung in Gegenwartswerten.' },
-      { label: 'Zukunftswert-Budget', eq: String.raw`$$(1+r)c_1+c_2=(1+r)m_1+m_2$$`, desc: 'Äquivalente Schreibweise in Zukunftswerten.' }
+      { label: 'Zukunftswert-Budget', eq: String.raw`$$(1+r)c_1+c_2=(1+r)m_1+m_2$$`, desc: 'Äquivalente Schreibweise in Zukunftswerten.' },
+      { label: 'Euler-Gleichung', eq: String.raw`$$u_1'(c_1^*)=\frac{1}{1+r}u_2'(c_2^*)$$`, desc: 'Gleichgewichtsbedingung bei additiver Nutzenfunktion.' }
     ],
     aufgaben: [
       {
@@ -356,6 +391,24 @@ export const CONTENT = {
           { text: String.raw`Budgetgleichung notieren.`, eq: String.raw`c_1+\frac{c_2}{1{,}1}=200` }
         ],
         result: String.raw`Die Gegenwartswert-Budgetgerade lautet $c_1+\frac{c_2}{1{,}1}=200$.`
+      },
+      {
+        text: String.raw`Logarithmischer Nutzen $u(c_1,c_2)=\ln c_1+\ln c_2$, $m_1=80$, $m_2=0$, $r=25\%$. Bestimmen Sie $c_1^*$ und $c_2^*$ mit Budget und Euler-Gleichung.`,
+        steps: [
+          { text: String.raw`Budget in GW:`, eq: String.raw`c_1+\frac{c_2}{1{,}25}=80` },
+          { text: String.raw`Euler: $1/c_1^*=1/(1{,}25)c_2^*$.`, eq: String.raw`c_2^*=1{,}25c_1^*` },
+          { text: String.raw`Einsetzen:`, eq: String.raw`c_1^*+\frac{1{,}25c_1^*}{1{,}25}=80 \Rightarrow 2c_1^*=80 \Rightarrow c_1^*=40,\; c_2^*=50` }
+        ],
+        result: String.raw`$c_1^*=40$, $c_2^*=50$. Der Haushalt spart in die Zukunft, weil Perioden-2-Einkommen fehlt und der Zins Konsumverschiebung belohnt.`
+      },
+      {
+        text: String.raw`Zins steigt von $r=5\%$ auf $r=15\%$. Ein Netto-Sparer hat Ausstattung $(m_1,m_2)=(100,50)$. Richtung von $c_1$? Begründen Sie mit Einkommens- und Substitutionseffekt.`,
+        steps: [
+          { text: String.raw`Substitutionseffekt: Höherer Zins macht Sparen attraktiver.`, eq: String.raw`\text{SE: } c_1 \downarrow` },
+          { text: String.raw`Einkommenseffekt für Netto-Sparer: höherer Zins erhöht Gesamtvermögen.`, eq: String.raw`\text{EE: } c_1 \uparrow` },
+          { text: String.raw`Nettoeffekt ist theoretisch offen; in Standardaufgaben dominiert oft EE für Sparer.`, eq: String.raw`\text{Klausur: beide Effekte benennen, nicht nur Richtung raten.}` }
+        ],
+        result: String.raw`Die qualitative Antwort hängt von Präferenzen und Ausstattung ab — klausurrelevant ist die saubere Zerlegung in Substitution und Einkommenseffekt.`
       }
     ]
   },
@@ -396,6 +449,24 @@ export const CONTENT = {
           { text: String.raw`Risikoaverse Haushalte bevorzugen Glättung des Konsums über Zustände.`, eq: String.raw`c_1=c_2 \quad \text{im Vollversicherungsfall}` }
         ],
         result: String.raw`Bei fairer Prämie kostet Risikoreduktion im Erwartungswert nichts; Risikoaversion macht vollständige Konsumglättung optimal.`
+      },
+      {
+        text: String.raw`Nutzen $u(c)=\ln c$, Vermögen $m=100$, Schaden $L=40$ mit Wahrscheinlichkeit $\pi=0{,}2$. Berechnen Sie den erwarteten Nutzen ohne Versicherung und mit fairer Vollversicherung.`,
+        steps: [
+          { text: String.raw`Zustände: $c_1=60$, $c_2=100$.`, eq: String.raw`EU_{\text{ohne}}=0{,}2\ln 60+0{,}8\ln 100` },
+          { text: String.raw`Mit fairer Vollversicherung: $c_1=c_2=80$.`, eq: String.raw`EU_{\text{mit}}=\ln 80` },
+          { text: String.raw`Vergleich:`, eq: String.raw`EU_{\text{mit}} > EU_{\text{ohne}}` }
+        ],
+        result: String.raw`Vollversicherung erhöht den erwarteten Nutzen trotz fairer Prämie — klassische Risikoaversion.`
+      },
+      {
+        text: String.raw`Erwartungsnutzen $EU=\pi u(c_1)+(1-\pi)u(c_2)$ mit $u(c)=\sqrt{c}$, $\pi=0{,}5$, $c_1=4$, $c_2=16$. Berechnen Sie $EU$ und ordnen Sie die Risikoeinstellung ein.`,
+        steps: [
+          { text: String.raw`Erwartungsnutzen:`, eq: String.raw`EU=0{,}5\cdot 2+0{,}5\cdot 4=3` },
+          { text: String.raw`Erwartungswert des Konsums:`, eq: String.raw`E[c]=0{,}5\cdot 4+0{,}5\cdot 16=10` },
+          { text: String.raw`Vergleich mit $u(E[c])$:`, eq: String.raw`u(10)=\sqrt{10}\approx 3{,}16>3 \Rightarrow \text{risikoavers}` }
+        ],
+        result: String.raw`$EU=3 < u(E[c])$ — der Agent ist risikoavers und würde Unsicherheit gegen eine faire Prämie abbauen.`
       }
     ]
   },
@@ -476,21 +547,30 @@ export const CONTENT = {
     motivation: 'Walrasianische Gleichgewichte fokussieren auf Preisvektoren und gleichzeitige Markt-Räumung statt auf reine Tauschgeometrie.',
     theorie: String.raw`
     <div class="section-block">
-      <h3>Walrasianisches Gleichgewicht</h3>
-      <p>Ein Preisvektor $p^*$ räumt alle Märkte gleichzeitig. Haushalte und Unternehmen optimieren bei diesen Preisen, sodass aggregierte Überschussnachfrage verschwindet.</p>
-      <div class="math-block">$$\sum_i z_i(p^*) = 0$$</div>
+      <h3>Überschussnachfrage und Preisvektor</h3>
+      <p>Ein Walrasianisches Gleichgewicht ist ein Preisvektor $p^*$, bei dem alle Märkte gleichzeitig geräumt sind. Haushalte maximieren Nutzen bei Budgetrestriktion, Unternehmen maximieren Gewinn; die aggregierte Überschussnachfrage verschwindet.</p>
+      <div class="math-block">$$z_i(p)=\sum_j x_{ij}(p)-\omega_i=0 \quad \forall i$$</div>
+      <p>Weil Preise nur bis auf einen positiven Skalar eindeutig sind, wird oft ein Numéraire-Gut mit Preis 1 gewählt.</p>
     </div>
     <div class="section-block">
       <h3>Walrasches Gesetz</h3>
-      <p>Wenn bei $n$ Märkten bereits $n-1$ Märkte geräumt sind, ist auch der letzte Markt geräumt. Das reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
+      <p>Wenn die Budgetrestriktionen der Haushalte erfüllt sind und $n-1$ Märkte geräumt sind, ist auch der $n$-te Markt geräumt. Das Walrasche Gesetz reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
+      <div class="math-block">$$\sum_i z_i(p) = 0 \quad \text{(Walrasches Gesetz)}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Von der Edgeworth-Box zum Preissystem</h3>
+      <p>Die Kontraktkurve beschreibt effiziente Allokationen im Tausch. Ein Walras-Preisvektor wählt aus diesen effizienten Allokationen diejenige, die mit gegebenen Anfangsausstattungen und optimierendem Verhalten kompatibel ist.</p>
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
       <div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
+      <div class="warn-box"><strong>Existenz vs. Eindeutigkeit:</strong> Das Walras-Theorem zur Existenz eines GG unter Standardannahmen ist kein Eindeutigkeitsresultat. Mehrere Gleichgewichte sind möglich.</div>
     </div>
     `,
     formeln: [
-      { label: 'Walrasches Gesetz', eq: String.raw`$$\sum_i z_i(p) = 0$$`, desc: 'Aggregierte Überschussnachfrage über alle Märkte.' }
+      { label: 'Markträumung', eq: String.raw`$$z_i(p^*)=0 \quad \forall i$$`, desc: 'Überschussnachfrage verschwindet im Gleichgewicht.' },
+      { label: 'Walrasches Gesetz', eq: String.raw`$$\sum_i z_i(p) = 0$$`, desc: 'Aggregierte Überschussnachfrage über alle Märkte.' },
+      { label: 'Budgetrestriktion', eq: String.raw`$$p\cdot x_i \le p\cdot \omega_i$$`, desc: 'Haushalt i kann Endowment nicht überschreiten.' }
     ],
     aufgaben: [
       {
@@ -501,6 +581,24 @@ export const CONTENT = {
           { text: String.raw`Markträumung Gut 1:`, eq: String.raw`2 + \frac{2p_2}{p_1} = 4 \Rightarrow p_1 = p_2` }
         ],
         result: String.raw`Walras-GG: relatives Preisverhältnis $p_1/p_2=1$, Allokation $(2,2)$ für beide Konsumenten.`
+      },
+      {
+        text: String.raw`Erklären Sie das Walrasche Gesetz in einem 3-Güter-Modell: Warum genügt es, $n-1$ Markträumungsbedingungen zu prüfen?`,
+        steps: [
+          { text: String.raw`Budgetidentität der Haushalte.`, eq: String.raw`\sum_i p_i x_i = \sum_i p_i \omega_i` },
+          { text: String.raw`Definition Überschussnachfrage:`, eq: String.raw`z_i = \text{Nachfrage}_i - \text{Ausstattung}_i` },
+          { text: String.raw`Summe der Überschussnachfragen:`, eq: String.raw`\sum_i z_i = 0` }
+        ],
+        result: String.raw`Wenn $n-1$ Märkte geräumt sind, folgt die $n$-te Räumung aus der Budgetidentität — nicht aus zusätzlicher Ökonomie.`
+      },
+      {
+        text: String.raw`Drei Haushalte, ein Gut als Numéraire ($p_1=1$). Gegeben $z_2(p)=10-p_2$ und $z_3(p)=p_2-6$. Für welches $p_2$ ist der Markt für Gut 1 geräumt?`,
+        steps: [
+          { text: String.raw`Walras: $z_1=-z_2-z_3$.`, eq: String.raw`z_1=-(10-p_2)-(p_2-6)=-4+2p_2` },
+          { text: String.raw`Räumung $z_1=0$:`, eq: String.raw`2p_2=4 \Rightarrow p_2=2` },
+          { text: String.raw`Kontrolle Gut 2 und 3:`, eq: String.raw`z_2=8,\; z_3=-4` }
+        ],
+        result: String.raw`Bei $p_2=2$ sind alle drei Märkte konsistent geräumt; Gut 1 folgt aus dem Walras-Gesetz.`
       }
     ]
   },
@@ -539,6 +637,24 @@ export const CONTENT = {
           { text: String.raw`Tangentialbedingung nennen.`, eq: String.raw`GRTS^1_{KL}=GRTS^2_{KL}` }
         ],
         result: String.raw`Ein Punkt außerhalb der Effizienzkurve lässt produktive Reallokationsgewinne offen; erst an der Tangentialbedingung sind diese ausgeschöpft.`
+      },
+      {
+        text: String.raw`Zwei Sektoren mit Isoquanten $Q^1=\sqrt{K_1L_1}$ und $Q^2=K_2+2L_2$. Gesamt $K=16$, $L=16$. Bestimmen Sie einen produktionseffizienten Punkt mit $GRTS^1=GRTS^2$.`,
+        steps: [
+          { text: String.raw`GRTS Sektor 1:`, eq: String.raw`GRTS^1=\frac{MU_K}{MU_L}=\frac{1/(2\sqrt{K_1L_1})}{1/(2\sqrt{K_1L_1})}=\frac{L_1}{K_1}` },
+          { text: String.raw`GRTS Sektor 2:`, eq: String.raw`GRTS^2=\frac{1}{2}` },
+          { text: String.raw`Tangentialbedingung:`, eq: String.raw`\frac{L_1}{K_1}=\frac12` }
+        ],
+        result: String.raw`Produktionseffizienz verlangt $L_1/K_1=1/2$ plus die Faktorvollnutzungsbedingungen — ein konkreter Kandidat folgt aus dem vollen System.`
+      },
+      {
+        text: String.raw`Warum reicht Produktionseffizienz allein nicht für ein gesamtwirtschaftliches Optimum? Nennen Sie die zusätzliche Bedingung zwischen Produktion und Konsum.`,
+        steps: [
+          { text: String.raw`Produktionseffizienz:`, eq: String.raw`GRTS^1_{KL}=GRTS^2_{KL}` },
+          { text: String.raw`Konsumseite:`, eq: String.raw`GRS^A=GRS^B` },
+          { text: String.raw`Kopplung:`, eq: String.raw`\text{Produzierte Gütermenge muss mit effizienter Konsumallokation vereinbar sein.}` }
+        ],
+        result: String.raw`Die Faktor-Box sichert nur Produktionseffizienz; zusätzlich braucht es Konsumenteneffizienz und Konsistenz zwischen produzierter und konsumierter Güterkombination.`
       }
     ]
   },
@@ -620,13 +736,21 @@ export const CONTENT = {
     theorie: String.raw`
     <div class="section-block">
       <h3>Wohlfahrtsfunktionen</h3>
-      <p>Allokationen können utilitaristisch ($\sum u_i$) oder Rawlsianisch ($\min u_i$) bewertet werden.</p>
+      <p>Allokationen können utilitaristisch ($\sum u_i$) oder Rawlsianisch ($\min u_i$) bewertet werden. Beide Kriterien ordnen Pareto-effiziente Punkte unterschiedlich — Effizienz und Verteilung bleiben getrennt.</p>
       <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
     </div>
     <div class="section-block">
-      <h3>Surplus und Deadweight Loss</h3>
-      <p>Im partiellen Gleichgewicht misst Gesamtwohlfahrt $W = KR + PR$. Eingriffe oder Marktmacht erzeugen typischerweise einen DWL relativ zum Wettbewerbsoptimum.</p>
+      <h3>Konsumenten- und Produzentenrente</h3>
+      <p>Im partiellen Markt gilt bei linearer Nachfrage: $KR$ ist das Dreieck unter der Nachfragekurve über dem Gleichgewichtspreis, $PR$ das Dreieck über der Angebotskurve. Gesamtwohlfahrt $W=KR+PR$ im Wettbewerb.</p>
+    </div>
+    <div class="section-block">
+      <h3>Deadweight Loss</h3>
+      <p>Monopol, Steuern, Mindestpreise oder Quoten erzeugen typischerweise einen DWL relativ zum Wettbewerbsoptimum — verlorene Handelsgewinne aus zu geringem Volumen.</p>
       <div class="math-block">$$DWL = W_{Wettbewerb} - (KR + PR)$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Surplus vs. Nutzen:</strong> KR/PR messen ökonomische Surplus in Geld, nicht Kardinalnutzen. Nutzenvergleiche über Personen sind mit Wohlfahrtsfunktionen zu begründen.</div>
     </div>
     `,
     formeln: [
@@ -648,6 +772,15 @@ export const CONTENT = {
           { text: String.raw`Renten:`, eq: String.raw`KR=\frac12(20-12)\cdot 8=32,\quad PR=\frac12(12-4)\cdot 8=32` }
         ],
         result: String.raw`Gesamtwohlfahrt $W=64$ im Gleichgewicht.`
+      },
+      {
+        text: String.raw`Monopol: $P=100-Q$, $MC=20$. Berechnen Sie Wettbewerbs-DWL des Monopols gegenüber vollkommenem Wettbewerb.`,
+        steps: [
+          { text: String.raw`Monopol: $MR=MC \Rightarrow 100-2Q=20$.`, eq: String.raw`Q_m=40,\; P_m=60` },
+          { text: String.raw`Wettbewerb: $P=MC$.`, eq: String.raw`Q_w=80,\; P_w=20` },
+          { text: String.raw`DWL-Dreieck:`, eq: String.raw`DWL=\frac12(60-20)(80-40)=800` }
+        ],
+        result: String.raw`Der Monopol-DWL beträgt $800$ — ein zentrales Wohlfahrtsmessungs-Resultat in Mikro II.`
       }
     ]
   },
@@ -888,21 +1021,31 @@ export const CONTENT = {
     theorie: String.raw`
     <div class="section-block">
       <h3>Moral Hazard (Hidden Action)</h3>
-      <p>Nach Vertragsabschluss kann der Prinzipal die Handlung des Agenten nur unvollständig beobachten. Ohne passende Anreize sinkt die gewünschte Anstrengung.</p>
+      <p>Nach Vertragsabschluss kann der Prinzipal die Handlung des Agenten nur unvollständig beobachten. Ohne passende Anreize sinkt die gewünschte Anstrengung — klassisch: Versicherung senkt Vorsicht, Managervertrag ohne Performance-Kopplung.</p>
     </div>
     <div class="section-block">
       <h3>Signaling und Screening</h3>
-      <p>Bei verborgenen Typen kann die informierte Seite Signale senden (Signaling), die uninformierte Seite kann Vertragsmenüs zur Selbstselektion anbieten (Screening).</p>
+      <p>Bei verborgenen Typen (Hidden Characteristics) kann die informierte Seite Signale senden (Signaling), die uninformierte Seite kann Vertragsmenüs zur Selbstselektion anbieten (Screening).</p>
       <p>Separierende Gleichgewichte sind nur stabil, wenn Nachahmung für den ungeeigneten Typ hinreichend teuer ist.</p>
     </div>
     <div class="section-block">
       <h3>Prinzipal-Agenten-Logik</h3>
       <div class="math-block">$$E[\pi_P] = E[y] - w \quad \text{s.t.} \quad IC,\;PC$$</div>
-      <p>Verträge müssen gleichzeitig Teilnahmeanreiz (PC) und Anreizkompatibilität (IC) erfüllen.</p>
+      <p>Verträge müssen gleichzeitig Teilnahmeanreiz (PC) und Anreizkompatibilität (IC) erfüllen. Performance-Löhne, Bonus-Malus und Selbstbehalte sind ökonomische Antworten auf Moral Hazard.</p>
+    </div>
+    <div class="section-block">
+      <h3>Managerverträge (VL 20)</h3>
+      <p>Ein Manager wählt Anstrengung $e$; der Erfolg ist stochastisch. Ein fixer Lohn erzeugt zu wenig Anstrengung, ein reiner Erfolgsbonus kann zu viel Risiko laden. Optimal ist oft eine Mischung aus Fixgehalt und variabler Komponente.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Adverse Selection vs. Moral Hazard:</strong> Ex-ante Typproblem (vor Vertrag) und ex-post Verhaltensproblem (nach Vertrag) erfordern unterschiedliche Instrumente.</div>
     </div>
     `,
     formeln: [
-      { label: 'Prinzipalziel', eq: String.raw`$$\max_w E[\pi_P]=E[y]-w \;\;\text{s.t.}\;\; IC,PC$$`, desc: 'Vertragswahl unter versteckter Handlung.' }
+      { label: 'Prinzipalziel', eq: String.raw`$$\max_w E[\pi_P]=E[y]-w \;\;\text{s.t.}\;\; IC,PC$$`, desc: 'Vertragswahl unter versteckter Handlung.' },
+      { label: 'IC-Bedingung', eq: String.raw`$$EU_A(w_A|e_H)\ge EU_A(w_A|e_L)$$`, desc: 'Agent wählt gewünschte Anstrengung.' },
+      { label: 'Separierendes Signal', eq: String.raw`$$30 \le e^* \le 60$$`, desc: 'Beispielbereich Spence-Signaling (qualitativ).' }
     ],
     aufgaben: [
       {

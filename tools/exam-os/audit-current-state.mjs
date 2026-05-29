@@ -199,6 +199,9 @@ async function summarizeModule(slug, localSourceFiles) {
   const taskFamilies = Array.isArray(taskFamiliesMod.TASK_FAMILIES) ? taskFamiliesMod.TASK_FAMILIES : [];
   const sourceGroundedTaskFamilies = taskFamilies.filter((item) => item?.sourceStatus === 'direct-source').length;
   const officialTaskSourceFamilies = taskFamilies.filter((item) => item?.officialTaskCoverage === 'official-task-source').length;
+  const officialDocumentRegistryFamilies = taskFamilies.filter(
+    (item) => item?.officialTaskCoverage === 'official-document-registry'
+  ).length;
   const masteryItems = Object.values(masteryMod.MASTERY || {}).reduce(
     (sum, value) => sum + (Array.isArray(value) ? value.length : 0),
     0
@@ -207,6 +210,10 @@ async function summarizeModule(slug, localSourceFiles) {
   for (const items of Object.values(masteryMod.MASTERY || {})) {
     if (!Array.isArray(items)) continue;
     for (const item of items) {
+      if (typeof item === 'string') {
+        masteryDimensions.add('recognition');
+        continue;
+      }
       if (item && typeof item === 'object' && typeof item.dimension === 'string') masteryDimensions.add(item.dimension);
     }
   }
@@ -234,6 +241,7 @@ async function summarizeModule(slug, localSourceFiles) {
     taskFamilies: taskFamilies.length,
     sourceGroundedTaskFamilies,
     officialTaskSourceFamilies,
+    officialDocumentRegistryFamilies,
     portalTaskBlocks,
     stepDrills,
     fullExamCount: fullExams.length,

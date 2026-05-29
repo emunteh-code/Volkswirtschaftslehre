@@ -67,3 +67,11 @@ Statisches Multi-Module-Portal auf Basis von HTML, CSS und JavaScript.
 - Wiederholbares Quellenregister: `node tools/exam-os/build-source-registry.mjs --write`.
 - Wiederholbarer Seitenanker-Index: `node tools/exam-os/build-source-page-index.mjs --write`.
 - Exam-OS-Readiness-Gate: `node tools/exam-os/check-readiness.mjs --write`.
+- Offizielle PDF-Gliederung (Überschriften-Kandidaten, kein Volltext): `node tools/exam-os/extract-source-syllabus.mjs --write`.
+- Paritätsmatrix vs. Mikro1: `node tools/exam-os/build-module-parity-report.mjs --write`.
+- Exam-OS-Dateischichten scaffolden: `node tools/exam-os/scaffold-exam-os-layers.mjs --write` (siehe `docs/architecture/mikro1-parity-program.md`).
+- VL-Formelkarten & Aufgabenfamilien aus Ankern: `node tools/exam-os/generate-vl-layers.mjs --module <slug> --write`.
+- Syllabus-Anker (Makro I/II): `node tools/exam-os/populate-anchors-from-syllabus.mjs --module makro1|makro2 --write`.
+- CI ohne `source-materials/`: `node tools/exam-os/ci-validate.mjs` (GitHub: `.github/workflows/exam-os.yml`).
+- Fleet-Pass (Anker + VL + Mastery + Audit): `node tools/exam-os/run-fleet-certification.mjs --write`.
+- OCR-Backlog: `node tools/exam-os/ocr-weak-pages.mjs --write`.

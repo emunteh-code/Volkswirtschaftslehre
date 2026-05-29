@@ -1,82 +1,118 @@
-export const MASTERY = {
-  handelsfakten: [
-    'Handelsfakten sauber einem Modelltyp zuordnen können',
-    'Positive Erklärung und normative Handelspolitik sicher trennen können',
-    'Ähnliche Länder / ähnliche Güter als Signal für Neue Handelstheorie erkennen'
-  ],
-  ricardo: [
-    'Opportunitätskosten sicher berechnen und lesen können',
-    'Absolute und komparative Vorteile nicht verwechseln',
-    'Arbeitskoeffizienten sauber in Handelsrichtung und Spezialisierung übersetzen können'
-  ],
-  heckscher_ohlin: [
-    'Faktorreichlichkeit von Faktorintensität begrifflich trennen können',
-    'Handelsmuster im H-O-Modell ohne Ricardo-Sprache erklären können',
-    'H-O-Annahmen und ihre Grenzen explizit mitführen können'
-  ],
-  verteilung_handel: [
-    'Stolper-Samuelson als Verteilungs- und nicht nur Handelslogik anwenden können',
-    'Gesamtwohlfahrt und inländische Gewinner/Verlierer getrennt diskutieren können',
-    'Handelsliberalisierung politökonomisch aus Faktorgruppenperspektive lesen können'
-  ],
-  krugman: [
-    'Intraindustriellen Handel als eigenen Modellfall erkennen können',
-    'Marktgröße, Skalenerträge und Produktvielfalt in einer Mechanismuskette verbinden können',
-    'Krugman sauber von Ricardo und H-O abgrenzen können'
-  ],
-  gravitation: [
-    'Größe und Distanz als empirische Handelsdeterminanten lesen können',
-    'Gravitation als Datenmuster statt Wohlfahrtsmodell einordnen können',
-    'Distanz ökonomisch weit als Transport-, Informations- und Institutionenkosten deuten können'
-  ],
-  tarifmodell: [
-    'Preis-, Mengen- und Wohlfahrtswirkung eines Zolls systematisch erklären können',
-    'Kleines und großes Land nicht vermischen',
-    'Deadweight Loss und Terms-of-Trade-Gewinn sauber auseinanderhalten können'
-  ],
-  quoten_sanktionen: [
-    'Quote, Zoll und Sanktion nach Preiswirkung und Rentenverteilung unterscheiden können',
-    'Quotenrente korrekt verorten können',
-    'Sanktionsfälle um Umleitung, Gegenmaßnahmen und politische Kosten ergänzen können'
-  ],
-  wto_integration: [
-    'MFN, FTA und Zollunion strukturell unterscheiden können',
-    'Trade creation und trade diversion sauber anwenden können',
-    'Brexit als Integrations- und nicht bloß als Zollfall erklären können'
-  ],
-  wechselkurssysteme: [
-    'Nominalen und realen Wechselkurs sicher unterscheiden können',
-    'Regimevergleich über Anpassungslasten statt Schlagworte formulieren können',
-    'Fixkursverteidigung als Reserven- und Glaubwürdigkeitsproblem lesen können'
-  ],
-  zinsparitaet: [
-    'CIP und UIP nach Variablen und ökonomischem Sinn unterscheiden können',
-    'Zinsdifferenzen in erwartete Wechselkursbewegungen übersetzen können',
-    'Vorzeichenfehler über saubere Notationskontrolle vermeiden können'
-  ],
-  kaufkraftparitaet: [
-    'Gesetz des einheitlichen Preises, absolute PPP und relative PPP unterscheiden können',
-    'Realen Wechselkurs als Prüfgröße für Wettbewerbsfähigkeit lesen können',
-    'PPP als Langfristanker statt als Kurzfristautomatik einordnen können'
-  ],
-  monetaerer_ansatz: [
-    'Fisher-Effekt, relative PPP und reale Zinsparität im Langfristhorizont verbinden können',
-    'Geldmengenwachstum, Inflation und nominale Abwertung systematisch verknüpfen können',
-    'Trendlogik von kurzfristiger Wechselkursvolatilität trennen können'
-  ],
-  overshooting: [
-    'Die Overshooting-Kette vom Geldschock bis zum Rücklauf formulieren können',
-    'UIP und Preisrigidität als gemeinsame Ursache der Überreaktion erklären können',
-    'Kurzfristigen Sprung und langfristigen Endwert klar trennen können'
-  ],
-  trilemma: [
-    'Die drei Ziele des Trilemmas sicher benennen können',
-    'Für jede Regimekombination das geopferte Ziel bestimmen können',
-    'Den Fixkursfall als Kernillustration des Trilemmas erklären können'
-  ],
-  balassa_samuelson: [
-    'Produktivitätsgewinne in handelbaren Gütern auf Löhne und Preise nicht-handelbarer Güter übertragen können',
-    'Strukturelle PPP-Abweichungen von kurzfristigen Marktbewegungen unterscheiden können',
-    'Reale Aufwertung ohne vorschnelle Fehlbewertungsdiagnose erklären können'
-  ]
-};
+// ============================================================
+// MASTERY DATA — Internationale Wirtschaftsbeziehungen
+// Generated exam-readiness objectives (4 dimensions).
+// ============================================================
+
+import { CHAPTERS } from './chapters.js';
+import { FORMULA_CARDS_BY_CONCEPT } from './formulaCards.js';
+import { TASK_FAMILIES_BY_CONCEPT } from './taskFamilies.js';
+
+const DIMENSION_LABELS = Object.freeze({
+  recognition: 'Erkennen',
+  calculation: 'Rechnen',
+  derivation: 'Herleiten',
+  transfer: 'Transfer'
+});
+
+const SUPPLEMENTAL_CONCEPT_IDS = new Set([]);
+
+function objective({ dimension, label, sourceStatus, sourceAnchorIds = [], evidence = [] }) {
+  return {
+    dimension,
+    dimensionLabel: DIMENSION_LABELS[dimension] || dimension,
+    label,
+    sourceStatus,
+    sourceAnchorIds,
+    evidence
+  };
+}
+
+function firstAnchor(items) {
+  return items
+    .flatMap((item) =>
+      Array.isArray(item.sourceAnchorIds)
+        ? item.sourceAnchorIds
+        : Array.isArray(item.anchorIds)
+          ? item.anchorIds
+          : []
+    )
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function fallbackSourceStatus(conceptId, dimension) {
+  if (!SUPPLEMENTAL_CONCEPT_IDS.has(conceptId)) return 'source-distilled';
+  return dimension === 'calculation' || dimension === 'transfer'
+    ? 'platform-added-drill'
+    : 'platform-added-explanation';
+}
+
+export const MASTERY_DIMENSIONS = DIMENSION_LABELS;
+
+export const MASTERY = {};
+
+CHAPTERS.forEach((ch) => {
+  const formulaCards = FORMULA_CARDS_BY_CONCEPT[ch.id] || [];
+  const taskFamilies = TASK_FAMILIES_BY_CONCEPT[ch.id] || [];
+  const formulaAnchors = firstAnchor(formulaCards);
+  const taskAnchors = firstAnchor(taskFamilies);
+  const hasDirect = formulaCards.length > 0 || taskFamilies.some((f) => f.sourceStatus === 'direct-source');
+  const baseStatus = hasDirect ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
+
+  const items = [
+    objective({
+      dimension: 'recognition',
+      label: `Die Kurslogik von "${ch.title}" strukturiert wiedergeben können`,
+      sourceStatus: baseStatus,
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['self_check', 'concept_review']
+    })
+  ];
+
+  if (formulaCards.length) {
+    items.push(
+      objective({
+        dimension: 'calculation',
+        label: `Zentrale Formelkarte(n) zu "${ch.title}" korrekt anwenden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: formulaAnchors,
+        evidence: ['formula_card', 'portal_tasks']
+      })
+    );
+  }
+
+  if (taskFamilies.some((f) => f.officialTaskCoverage === 'official-document-registry')) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `Offizielle Übungs-/Klausur-Dokumente zu "${ch.title}" im Korpus finden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: taskAnchors,
+        evidence: ['official_document_registry']
+      })
+    );
+  } else if (taskFamilies.length) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `VL-Methode zu "${ch.title}" auf eine neue Zahlenkonstellation übertragen`,
+        sourceStatus: baseStatus,
+        sourceAnchorIds: taskAnchors,
+        evidence: ['task_family', 'step_problems']
+      })
+    );
+  }
+
+  items.push(
+    objective({
+      dimension: 'transfer',
+      label: `Prüfungsähnliche Aufgabe zu "${ch.title}" ohne Stichwortliste einordnen`,
+      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['mock_exam', 'self_check']
+    })
+  );
+
+  MASTERY[ch.id] = items;
+});
+

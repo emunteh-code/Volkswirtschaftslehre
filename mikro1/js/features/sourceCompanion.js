@@ -2,7 +2,11 @@ import { createSourceCompanionModule as createSharedSourceCompanionModule } from
 import { CHAPTERS } from '../data/chapters.js';
 import { PROVENANCE_BY_CONCEPT } from '../data/contentManifest.js';
 import { TASK_FAMILIES } from '../data/taskFamilies.js';
-import { MIKRO1_OFFICIAL_TASK_DOC_BASELINE_2026_05_28 } from '../data/officialTaskIngestion.js';
+import {
+  MIKRO1_OFFICIAL_TASK_DOC_BASELINE_2026_05_28,
+  MIKRO1_PROBEKLAUSUR_INGEST_BLOCKERS,
+  MIKRO1_PROBEKLAUSUR_REVIEW_STATUS
+} from '../data/officialTaskIngestion.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -69,7 +73,12 @@ ${familiesWithoutOfficialTasks
   )
   .join('')}
 </div>
-<p class="source-companion-note">Mikro I bleibt der interaktive Benchmark. <code>exam-bank-complete</code> bleibt blockiert, bis Probeklausur-Aufgaben nach OCR/Review in Familien mit offizieller Provenienz zerlegt sind.</p>
+<ul class="source-companion-note" style="margin:0.75rem 0 0;padding-left:1.1rem">
+${MIKRO1_PROBEKLAUSUR_INGEST_BLOCKERS.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+<li>OCR reviewed: ${MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.ocrReviewed ? 'yes' : 'no'} · Item mapping reviewed: ${MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.humanItemMappingReviewed ? 'yes' : 'no'}</li>
+<li>${escapeHtml(MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.jpgPageCount)} JPG pages · Template PDF not an item bank</li>
+</ul>
+<p class="source-companion-note">Mikro I bleibt der interaktive Benchmark. <code>exam-bank-complete</code> bleibt blockiert, bis Probeklausur-Aufgaben nach OCR/Review in Familien mit <code>official-task-source</code> zerlegt sind.</p>
 </section>`;
 }
 

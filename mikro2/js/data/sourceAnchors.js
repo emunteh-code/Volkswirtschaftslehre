@@ -537,7 +537,11 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       fingerprint: '76e5c1d92e263b02',
       confidence: 0.93
     })
-  ]
+  ],
+  /** No VL hit in official Mikro II corpus (see docs/audits/mikro2-official-source-ingest-pass-1.md). */
+  externa_pigou: [],
+  externa_institutionen: [],
+  public_goods: []
 });
 
 export function getMikro2SourceAnchors(conceptId) {

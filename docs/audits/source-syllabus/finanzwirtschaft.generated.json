@@ -1,0 +1,3656 @@
+{
+  "module": "finanzwirtschaft",
+  "generatedAt": "2026-05-28",
+  "policy": "Heading candidates only; no page text stored. Requires human review before anchor publication.",
+  "documentCount": 12,
+  "pdfDocumentsExtracted": 12,
+  "totalPages": 223,
+  "weakPages": 0,
+  "documentsByKind": {
+    "lecture-slide": [
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v1-studip",
+        "path": "source-materials/Finanzwirtschaft/V1_StudIP.pdf",
+        "title": "V1_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 31,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:c9768e6fd8fde49b4f51fb2e6cae7ea231257c4fdb1dddff12fb6c37267ae811",
+            "characters": 261,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                   Georg-August-Universität Göttingen   2",
+              "Agenda",
+              "• Kursmaterial",
+              "• Veranstaltungen",
+              "• Ziele des Kurses"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:7038fde8da818d482059b3ed9941a574b2f40440a749850f08c8b1c17908125e",
+            "characters": 470,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                        Georg-August-Universität Göttingen                          3",
+              "• Tutor*innen:",
+              "o Justus Trost",
+              "o Handan Ergön",
+              "o Julian Lestin"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:3b295ab672e01efd787ec48862cc96cd089de24b3db228070ae487d98b02d644",
+            "characters": 232,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                   Georg-August-Universität Göttingen   4",
+              "• Sprechstunde nach Vereinbarung",
+              "▪ Zentrale Kommunikationsplattform",
+              "Beteiligte Personen und Kommunikation",
+              "▪ Ansprechperson: Lena Schäfer, M. Sc."
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:0b38e2df493eddab1fba87cb1c80404934d90f1d84e702909866f5847ef361c5",
+            "characters": 170,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen   5",
+              "Ziele des Kurses",
+              "▪ Entwicklung der finanzwirtschaftlichen Denkweise",
+              "▪ Eigenständige Lösung finanzwirtschaftlicher Probleme"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:37c16e352e784015fcc505b9d8b1f8f811b7d7605e437e758ce56a2d7b26889c",
+            "characters": 384,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                      Georg-August-Universität Göttingen   6",
+              "• Demo-Prüfung",
+              "Veranstaltungen",
+              "▪ Wöchentliche Tutorien:",
+              "• Technische Einführung in das e-Prüfungssystem"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:2e0de8235b93e776c1c41bd671066f1eaf087be24f1e8c75e38d47c0e6e04deb",
+            "characters": 693,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                         Georg-August-Universität Göttingen                   7",
+              "Veranstaltungen",
+              "▪ Anmeldung zu den Tutorien",
+              "o Freitag: 08:15-09:45 Uhr; 10:15-11:45 Uhr",
+              "o Dienstag: 08:15-09:45 Uhr; 16:15-17:45 Uhr"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:41b71e544d2decc74c5d001c8aae314c9249b187c77e9d5b54f1ce0ece5dd811",
+            "characters": 497,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen                                8",
+              "• Vorlesung",
+              "▪ Klausurtermine",
+              "▪ Relevante Inhalte:",
+              "• 2. Termin: 26. März 2025"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:e9ad606e62e223b84edf0c72d14570651045bcfc130f8137ea361e8e41e3469b",
+            "characters": 352,
+            "extractionHealth": "text-ok",
+            "taskSignals": 1,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen                      9",
+              "• Dauer: 60 Minuten",
+              "• Format: E-Prüfung",
+              "• Bewertung: 60 Punkte",
+              "▪ Prüfungsleistung: Klausur"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:353711a8d5c4de36b77e4b357c61045c77357b690995236661259ebf5566d9e4",
+            "characters": 875,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024   2,97%                                  Georg-August-Universität Göttingen                                  10",
+              "B)           1,35%",
+              "C)           2,08%",
+              "A)           -0,26%",
+              "Übergabe des Kapitals"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:e14a91f8923db1fb57b045c6c6135a6eda45c6d67a60c7b5c2473f9d688fb565",
+            "characters": 972,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                      Georg-August-Universität Göttingen                              11",
+              "verstanden wurde",
+              "und modernen Betrachtungsweise",
+              "Verwendung dieser Grundbegriffe",
+              "Prüfungsleistungen und -anforderungen"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:2019d9b23e2c905f472abb59289c933eabedbeba6f67fdc62a291e885cb57cce",
+            "characters": 359,
+            "extractionHealth": "text-ok",
+            "taskSignals": 1,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                        Georg-August-Universität Göttingen        12",
+              "Kursmaterial",
+              "▪ Vorlesungsunterlagen",
+              "• (i.d.R.) Wöchentliche Updates",
+              "• Übungsaufgaben zur Bearbeitung im Tutorium"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:b303e4b10d956d50faef4314f1ecd56594f8420a1419501346f4503bdb29d7ef",
+            "characters": 246,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                         Georg-August-Universität Göttingen   13",
+              "Kursmaterial",
+              "• Kein E-book!",
+              "▪ Literaturempfehlung",
+              "• Praxisrelevant, aber nicht praxisnah"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:9d411c7c71c1e79f772c98202530217cd2022bc7ad71fb7c101e60cbdd753c20",
+            "characters": 253,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                        Georg-August-Universität Göttingen   14",
+              "• E-Book!",
+              "Kursmaterial",
+              "6. Auflage, 2023",
+              "▪ Literaturempfehlung"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:b5e5f12fb5d17f66cfd94fdce994a0cf1f9d0fa1999c20d1dfa3774831ffce5f",
+            "characters": 245,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                        Georg-August-Universität Göttingen   15",
+              "• praxisnah",
+              "Kursmaterial",
+              "• Kein E-Book!",
+              "Kreditwesens, 58. Auflage, 2024"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:f5590a5c787236502267754aa4d12368f82367c469d2a2648570874ff04835f3",
+            "characters": 585,
+            "extractionHealth": "text-ok",
+            "taskSignals": 1,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                          Georg-August-Universität Göttingen                                16",
+              "Notwendiges",
+              "Formular beim",
+              "Prüfungsamt holen",
+              "Pflichtstudienberatung"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:ddced932cf34f957e2a4bf3a06c3af7c440f50898d4c591732a99792d01b4cdf",
+            "characters": 483,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                         Georg-August-Universität Göttingen   17",
+              "Inhaltliche Schwerpunkte",
+              "▪ Kapitel 2: Die moderne Betrachtungsweise",
+              "▪ Kapitel 4: Methoden der Investitionsrechnung",
+              "▪ Kapitel 3: Grundlagen der Investitionstheorie"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:c149a7ceda3e0fea5b6686f03d73b0f5485e10bca86d0f7d5f77cee95e109f12",
+            "characters": 63,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024       Georg-August-Universität Göttingen   18",
+              "Ende Kapitel 0"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:8ceb816cb38ba7a91b2446b70e6ade6991ba18a31809e0a170f73f8998d74326",
+            "characters": 273,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                               Georg-August-Universität Göttingen   19",
+              "Agenda",
+              "•      1.1 Lernziele",
+              "•      1.4 Die zentralen Inhalte",
+              "•      1.2 Grundidee und Grundbegriffe"
+            ]
+          },
+          {
+            "page": 20,
+            "anchorId": "p020",
+            "textHash": "sha256:1dee050a29fa5d48366809c1101bff63b9ebb94320b089e940f9cc760d3873d1",
+            "characters": 259,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen   20",
+              "Lernziele",
+              "• Implikationen",
+              "• Verfolgte Ziele",
+              "• Problemstellungen"
+            ]
+          },
+          {
+            "page": 21,
+            "anchorId": "p021",
+            "textHash": "sha256:744d98cc59fc912f8e6007e586e5455fc52488bc580faaa91591a47ca2b90ddd",
+            "characters": 211,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen                    21",
+              "Grundidee und Grundbegriffe",
+              "Einzahlungen          Auszahlungen",
+              "▪ Quelle: Schmidt/Terberger, S. 13",
+              "Beschaffung          Lagerung     Produktion                 Lagerung   Absatz"
+            ]
+          },
+          {
+            "page": 22,
+            "anchorId": "p022",
+            "textHash": "sha256:c14cf491ede0e994bcadde3e38c9d251af7f718c1d148c44a4bdb36c294d2064",
+            "characters": 389,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen                                22",
+              "Bestand",
+              "Gütermärkte",
+              "Arbeitsmärkte",
+              "Finanzbereich"
+            ]
+          },
+          {
+            "page": 23,
+            "anchorId": "p023",
+            "textHash": "sha256:1f388b4cd2fbfcb8eaa2e7a56b91e679e744020b664634a7e06ac65f71120346",
+            "characters": 299,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                   Georg-August-Universität Göttingen   23",
+              "• Hilfsfunktion",
+              "• Gütermarkt dominiert",
+              "Grundidee und Grundbegriffe",
+              "▪ Rolle der Finanzwirtschaft?"
+            ]
+          },
+          {
+            "page": 24,
+            "anchorId": "p024",
+            "textHash": "sha256:1e2db3d5a9fcba8404da74e1c8803cc961a350e1b65dba297fabb40704d00517",
+            "characters": 667,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "Mittel",
+              "Gütermärkte",
+              "Investition",
+              "Absatzmärkte",
+              "Arbeitsmärkte"
+            ]
+          },
+          {
+            "page": 25,
+            "anchorId": "p025",
+            "textHash": "sha256:320d879c42ad8440f1f99e9a85348d0a976a807f0ff8a9f53a4a85942aac6ca4",
+            "characters": 475,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                           Georg-August-Universität Göttingen   25",
+              "• Hohe Relevanz",
+              "• Geringe Relevanz",
+              "• Fundamentale Aufgaben",
+              "▪ Aufgaben des Finanzbereichs"
+            ]
+          },
+          {
+            "page": 26,
+            "anchorId": "p026",
+            "textHash": "sha256:34260c0014fbf8536e37bde6e6d48c3164a273f5af1af8a6931613e0fb8a7c78",
+            "characters": 207,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                        Georg-August-Universität Göttingen   26",
+              "• Deckung des Kapitalbedarfs",
+              "▪ Zentrale finanzwirtschaftliche Probleme",
+              "• Wahrung des finanziellen Gleichgewichts",
+              "Die zentralen finanzwirtschaftlichen Probleme"
+            ]
+          },
+          {
+            "page": 27,
+            "anchorId": "p027",
+            "textHash": "sha256:35c88daa257cd2288a156dec1a0cbf9e31244677d0e0086c28d16a9b37c3ccb5",
+            "characters": 487,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                               Georg-August-Universität Göttingen                                     27",
+              "Umsatzerlös",
+              "Eigentümern)",
+              "Zwischenformen",
+              "aus Abschreibungen"
+            ]
+          },
+          {
+            "page": 28,
+            "anchorId": "p028",
+            "textHash": "sha256:55ca7850f05221988525528974300d9f47d1ee7dcf926f0338b7bf526cc8a7c2",
+            "characters": 391,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                           Georg-August-Universität Göttingen                               28",
+              "werden]",
+              "Die zentralen Inhalte",
+              "• Umsatzerlöse führen zu Einzahlungen",
+              "[Liquide Mittel dadurch grundsätzlich vorhanden]"
+            ]
+          },
+          {
+            "page": 29,
+            "anchorId": "p029",
+            "textHash": "sha256:baf88a01b5b383eabfa4a1058a91b4dc2d0339369938a3418bbc0c37fff68b94",
+            "characters": 495,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "23.10.2024                                                Georg-August-Universität Göttingen                            29",
+              "Die zentralen Inhalte",
+              "Einzahlung /            Ertrag /",
+              "(Auszahlung)           (Aufwand)",
+              "Ausschüttung                       (100)"
+            ]
+          },
+          {
+            "page": 30,
+            "anchorId": "p030",
+            "textHash": "sha256:db5a3d1f6e0940ae8ea742e34b1e25287975181555e4069140831465c9e043f7",
+            "characters": 512,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                       Georg-August-Universität Göttingen                                 30",
+              "und Pflichten",
+              "Die zentralen Inhalte",
+              "(nachrangig, Residualanspruch)",
+              "▪ Eigen- versus Fremdkapital (vereinfacht)"
+            ]
+          },
+          {
+            "page": 31,
+            "anchorId": "p031",
+            "textHash": "sha256:cf10b25550e8ef9c8bb0fc874fcbd3939982055d3f17dae4a044d9a82affa60b",
+            "characters": 326,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "23.10.2024                                        Georg-August-Universität Göttingen                      31",
+              "Liquidität",
+              "Fristigkeit",
+              "langfristig",
+              "Eigenkapital"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v10-studip",
+        "path": "source-materials/Finanzwirtschaft/V10_StudIP.pdf",
+        "title": "V10_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 19,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:7e62a68d70072ba64d562463a50aab8e7b469bb029251940001781b3b995778e",
+            "characters": 601,
+            "extractionHealth": "text-ok",
+            "taskSignals": 2,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen   2",
+              "▪ Inhalt:",
+              "• 2. Kohorte ab 15:00 Uhr",
+              "▪ Schmierpapier wird bereitgestellt",
+              "• Demoprüfung mit originalen Klausurfragen"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:633bb78d152be378eef8f4f3d6a9f78dfe9deb6179f734404fd9ad38ae314e00",
+            "characters": 206,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "15.01.2025                                        Georg-August-Universität Göttingen   3",
+              "Agenda",
+              "• 6.1 Lernziele",
+              "• 6.2 Die Kosten des Eigenkapitals",
+              "• 6.3 Die Kosten der Fremdfinanzierung"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:3fcde917d5ef4f7f8ecb50cbe75ffabfcb6c77badf470798ca643d7d13db91fd",
+            "characters": 314,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen                                4",
+              "Lernziele",
+              "▪ Wie lassen sich die Finanzierungskosten (prinzipiell) bestimmen?",
+              "▪ Worin bestehen die Finanzierungskosten der einzelnen Finanzierungsarten?"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:4690ce137496e6b85d3f5e65560acb31af4b5b28ab9e4fbc386cd87e9780dca9",
+            "characters": 265,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen           5",
+              "Die Kosten des Eigenkapitals",
+              "▪ Probleme bei der Bestimmung:",
+              "• Eigenkapital hat keine festen und bekannten Zahlungsverpflichtungen",
+              "• Bestimmung eines Alterantivertragssatzes den Eigenkapitalgeber fordern bzw. benötigen"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:d04e11b371c6e8fbc3fe2243ad3889248be2235f2bcf1aa037502db684ccb03b",
+            "characters": 317,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "15.01.2025                                     Georg-August-Universität Göttingen   6",
+              "▪ Ausgabe von Aktien",
+              "- Genehmigtes Kapital",
+              "o Gesellschaftsmitteln",
+              "- Bedingte Kapitalerhöhung"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:76b0889619f4d54bf6975e4b9afaa10d35ee75dc1d8fa0542ce1e1fb9ecfacf5",
+            "characters": 245,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "15.01.2025                                             Georg-August-Universität Göttingen                         7",
+              "Aktie",
+              "Kapital",
+              "Emissionsbank",
+              "Verkauf am Primärmarkt"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:0c75dd1404eea791092a42856ad823a6a3bc9b018ab3b7c67d443b70fa98c5b5",
+            "characters": 352,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen                        8",
+              "Kapitalerhöhung",
+              "Die Kosten des Eigenkapitals",
+              "Alte Aktionäre                               Neue Aktionäre",
+              "[Eigenfinanzierung]                        [Beteiligungsfinanzierung]"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:f2c33a41479305cbbc3210aadb8c8cc15778c969c4e331017935b086520361eb",
+            "characters": 399,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "15.01.2025                                              Georg-August-Universität Göttingen   9",
+              "•      Emissionskurs: EmK",
+              "Die Kosten des Eigenkapitals",
+              "•      Wert des Bezugsrechts: BR",
+              "▪ Basisdaten einer Kapitalerhöhung"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:f6d6817a44c9f8ddc9158696b46d79e4761ddf6594b2a9e276c67d2f06fe27f0",
+            "characters": 560,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "15.01.2025                                        Georg-August-Universität Göttingen              10",
+              "▪ Kapitalerhöhung",
+              "▪ Vor der Kapitalerhöhung",
+              "▪ Beispiel: Kapitalerhöhung",
+              "Die Kosten des Eigenkapitals"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:58cba9ad0ab0a4b9b41a61120e93f8e581dcabc44a009ce94058cac8c2d057b0",
+            "characters": 405,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "15.01.2025                                              Georg-August-Universität Göttingen   11",
+              "Die Kosten des Eigenkapitals",
+              "▪ Implikationen der Kapitalerhöhung:",
+              "• Aufstockung der insgesamt verfügbaren Aktien auf 10 Mio. Stück",
+              "• [Relevanz im Accounting] Aufstockung des gezeichneten Kapitals um 10 Mio. Euro"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:ed84727f09466959617629d8696fb0e4e8cf12d6310fe4c08d44d534fc6127bf",
+            "characters": 368,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "15.01.2025                                        Georg-August-Universität Göttingen                       12",
+              "▪ Analyse des Beispiels",
+              "Die Kosten des Eigenkapitals",
+              "• Annahme: Eine Person halte 10% des bisherigen Eigenkapitals (800.000 Aktien)",
+              "• Fall 2 [Beteiligungsfinanzierung]: Aktionär nimmt nicht an der Kapitalerhöhung teil"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:570af4edef7684d81b22c450b0d342fb3407259117c300de9c6f24357a3974a6",
+            "characters": 431,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "15.01.2025                                          Georg-August-Universität Göttingen   13",
+              "• Nach der Kapitalerhöhung",
+              "o Gesamtvermögen: 12 Mio. €",
+              "Die Kosten des Eigenkapitals",
+              "• Vor der Kapitalerhöhung [Annahme]"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:6f8aab73ffc5361c63e01be1468c0b94dfcec52ca9fb2008f0706d33860549c9",
+            "characters": 513,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "98 𝑀𝑖𝑜. €                                             Aktienvermögen: (800.000 +",
+              "15.01.2025                                         Georg-August-Universität Göttingen                                   14",
+              "8 𝑀𝑖𝑜. +2 𝑀𝑖𝑜.                                          200.000) * 9,8 € = 9,8 Mio. €",
+              "▪ Annahmen",
+              "Implikation"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:537c931615b7f4279b60cdeb3f77fce0aacffd11d062500f6cd4f558aa5cd517",
+            "characters": 422,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen   15",
+              "• Nach der Kapitalerhöhung",
+              "o Gesamtvermögen: 12 Mio. €",
+              "Die Kosten des Eigenkapitals",
+              "• Vor der Kapitalerhöhung [Annahme]"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:f9cf787a925a827b664161f84a207c49d445145f65a1277e3b10e4183cc5e10a",
+            "characters": 404,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "15.01.2025                                     Georg-August-Universität Göttingen                  16",
+              "𝑛𝑎𝑙𝑡",
+              "𝑛𝑛𝑒𝑢",
+              "identisch",
+              "Kosten im Gleichgewicht"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:9345af36ee6203b8d1249e2c6038f8cfb15a5cd0066be139545f6b7fb842a010",
+            "characters": 362,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen   17",
+              "𝑛𝑛𝑒𝑢",
+              "𝑛𝑎𝑙𝑡",
+              "𝑛𝑎𝑙𝑡 + 𝑛𝑛𝑒𝑢",
+              "Die Kosten des Eigenkapitals"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:837f2699bfcc7950769bb22bd36d96fe9941da25af9904aab3f19f7048fd2710",
+            "characters": 509,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 9,
+            "headingCandidates": [
+              "15.01.2025                                         Georg-August-Universität Göttingen                                   18",
+              "𝑛𝑛𝑒𝑢",
+              "𝐵𝑉 + 1   4+1",
+              "𝒂𝑩𝑲 − 𝑬𝒎𝑲",
+              "Vermögensposition:"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:e0dd1a89261d9506dfc67ea18f7d67349df2c868ec3997235cc392a85f97d190",
+            "characters": 392,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "15.01.2025                                          Georg-August-Universität Göttingen                                   19",
+              "Die Kosten des Eigenkapitals",
+              "▪ Zusammenfassung und Schlussfolgerungen",
+              "Eigenkapital zu geben oder durch neue Aktionäre geben zu lassen",
+              "• Diese Indifferenz ist unabhängig vom gewählten Emissionskurs (Ausgleich durch das Bezugsrecht)"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v11-studip",
+        "path": "source-materials/Finanzwirtschaft/V11_StudIP.pdf",
+        "title": "V11_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 21,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:d115ede3f405eaff80d781117fdd6daf1030c2cfd043f7e357d62de824d2d597",
+            "characters": 655,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                         Georg-August-Universität Göttingen                                    2",
+              "Die Kosten des Eigenkapitals",
+              "•   Delegation der Geschäftsführung an Spezialist*innen",
+              "Vorteile                                                        Nachteile",
+              "Aktienfinanzierung aus Sicht von Unternehmen und Kapitalgebern"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:cc7b64189dad2bc863a43c8d5cc7c7ca51a59d66f2bf25ff0b20dc18d873fbe4",
+            "characters": 225,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                  Georg-August-Universität Göttingen                                     3",
+              "Aktienarten",
+              "Vinkulierte",
+              "Namensaktie",
+              "Die Kosten des Eigenkapitals"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:f4805b28b45b6af24fc139dbd2cd658f36c6634cd039d176354fb46e172592bf",
+            "characters": 235,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                     Georg-August-Universität Göttingen   4",
+              "Die Kosten des Eigenkapitals",
+              "▪ Besitzstruktur vor dem Porsche Börsengang",
+              "• Volkswagen AG alleiniger Eigentümer der Porsche AG",
+              "• Porsche: 911 Mio. Aktien (50% Stamm- und 50% Vorzugsaktien)"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:614a31a06098acbd5669b3186a3fd145dbdf9084f97427160f734024a3988797",
+            "characters": 580,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "22.01.2025                                       Georg-August-Universität Göttingen                                                5",
+              "Käufer",
+              "▪ Börsengang Porsche",
+              "Die Kosten des Eigenkapitals",
+              "durch die Familie Piech und Porsche)"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:e5d1f559cc86d7f915ce3994aabac83735c0aa15414344327a15233ffcfb6b13",
+            "characters": 206,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                    Georg-August-Universität Göttingen                          6",
+              "• 75% VW AG",
+              "• 25% Streubesitz",
+              "Die Kosten des Eigenkapitals",
+              "• 25% Porsche Automobil Holding"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:9da6f5272180f4c77e5a2936d5781ab44f4349245f5a2fd3202010dd6b57bd9d",
+            "characters": 324,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "22.01.2025                                        Georg-August-Universität Göttingen                 7",
+              "𝐷    ෪𝑛",
+              "𝐷              ෩2",
+              "𝐷                   ෩3",
+              "𝐷        …   ෩𝑛 + 𝐵𝐾"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:1a3e46ac874e114751987a6d9009e67bb44486a26c3278e22b9405f27a9ac091",
+            "characters": 403,
+            "extractionHealth": "text-ok",
+            "taskSignals": 2,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                           Georg-August-Universität Göttingen   8",
+              "෩ )𝑡 , 𝐸(𝐵𝐾",
+              "Die Kosten des Eigenkapitals",
+              "• Problem: Unsichere Zahlungen",
+              "• Idee: Verwendung des Kapitalwerts"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:c6d2af37d30f9ad499c92c7158cbbf39dd8cb304a4f7b0163fc41f55c25a3082",
+            "characters": 255,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "22.01.2025                                    Georg-August-Universität Göttingen   9",
+              "𝐸(𝐵𝐾",
+              "𝐸(𝐷෩ )𝑡     ෨ 𝑛)",
+              "(1 + 𝑟)𝑡 (1 + 𝑟)𝑛",
+              "Die Kosten des Eigenkapitals"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:547ecdf56a00d275980ca498e3163ed035a0e83d0d3a618fb08589c740434814",
+            "characters": 406,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "22.01.2025                                         Georg-August-Universität Göttingen                    10",
+              "෩1 )",
+              "𝐸(𝐷",
+              "𝑟−𝑔",
+              "𝐸 (𝐷)"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:81d02c793833ebee7fadbd65c3c8cfc270c9a37dddf1187b76b877a051ea6dc3",
+            "characters": 349,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "1 + 𝑟𝐸𝐾",
+              "22.01.2025                                       Georg-August-Universität Göttingen   11",
+              "𝐵𝐾0",
+              "𝐸 𝐷",
+              "𝐸 𝐷෩1"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:60ea36654a04d070c6264ffea94f61481350c549c95bdc7be9ae62590bd6d64d",
+            "characters": 480,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "22.01.2025                                               Georg-August-Universität Göttingen                      12",
+              "▪ Zusammenfassung:",
+              "• Interpretation: rEK",
+              "Eigenkapitalfinanzierung",
+              "Die Kosten des Eigenkapitals"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:d46592d65a1532b2dc8a5e9f8ae7d1c002f0e99c6bf96005d678c07a7a230aa9",
+            "characters": 612,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "Bankkredit",
+              "Langfristig",
+              "Fremdkapital",
+              "Konto-                Wechsel-",
+              "Anleihe             linked Bond"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:f48611f64820f7a95edad23522275b1d829fd784d93d211a6648e37ff0f46bf8",
+            "characters": 377,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "22.01.2025                                          Georg-August-Universität Göttingen                  14",
+              "Die Kosten der Fremdfinanzierung",
+              "▪ Bestimmung der Fremdkapitalkosten",
+              "• Finanzierungskostensatz ist Interner Zinsfuß der durch Finanzierung ausgelösten Zahlungsreihe"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:a760b9d3a28633bdf6eb75c51fd0eb139089e340e5570adac6e9abb4eb175a94",
+            "characters": 420,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "1 + 𝑟𝐹𝐾             98",
+              "22.01.2025                                         Georg-August-Universität Göttingen   15",
+              "98 −           = 0 ⇒ 𝑟𝐹𝐾 =     − 1 ≈ 2,04%",
+              "▪ Skonto",
+              "• Skonto in Höhe von 2%"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:ea6e85bd0e06ffe7ee7c625444982fdc1b18db55fc470bfd670175ae74fead73",
+            "characters": 608,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "100                0,08               108,00                   0,00                  108,00        0,08",
+              "100                0,0909             109,09                   0,01                  108,00        0,08",
+              "100                0,1020             110,20                   0,02                  108,00        0,08",
+              "100                0,1368             113,68                   0,05                  108,00        0,08",
+              "100                0,2                120,00                   0,10                  108,00        0,08"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:0121db949494386eaa4f5ffb96a691288494c7f415881c75f71718c0d4aa5fb5",
+            "characters": 63,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "22.01.2025       Georg-August-Universität Göttingen   17",
+              "Ende Kapitel 6"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:7364720dfa219d7fc9aebb29d1908c061be5e3a40507288c1705d32e4363c2d0",
+            "characters": 182,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "22.01.2025                                        Georg-August-Universität Göttingen   18",
+              "Agenda",
+              "• 7.1 Lernziele",
+              "• 7.2 Wirkung erhöhter Verschuldung",
+              "▪ Kapitel 7: Kapitalstruktur und Kapitalkosten bei gemischter Finanzierung"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:5fa34fd614e0375a3e446040b335291e4ad2c27313614bf2a10624a3e7c59009",
+            "characters": 397,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "22.01.2025                                          Georg-August-Universität Göttingen             19",
+              "Lernziele",
+              "▪ Wie ist der Zusammenhang zwischen Kapitalkosten und Unternehmenswert?",
+              "▪ Wie wirkt sich die Kapitalstruktur auf Ertrag und Risiko des Eigenkapitals?",
+              "▪ Was sind grundlegende Argumente bezüglich der Bestimmung einer optimalen Kapitalstruktur?"
+            ]
+          },
+          {
+            "page": 20,
+            "anchorId": "p020",
+            "textHash": "sha256:5ad4f52fb69b15152cc8ae5eaa4eea42f041ce44cb624a7948805409b5e7bd2b",
+            "characters": 512,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                       Georg-August-Universität Göttingen                                 20",
+              "Eigen-",
+              "Fremd-",
+              "vermögen",
+              "𝐸 𝑟𝐺𝐾"
+            ]
+          },
+          {
+            "page": 21,
+            "anchorId": "p021",
+            "textHash": "sha256:c077eb6efc699892f21944d5104ad69a603502815d949a293a533aacdc974b83",
+            "characters": 184,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "22.01.2025                                    Georg-August-Universität Göttingen   21",
+              "𝐹𝐾",
+              "𝐸𝐾",
+              "𝐸𝐾 + 𝐹𝐾",
+              "• Verschuldungsgrad:"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v12-studip",
+        "path": "source-materials/Finanzwirtschaft/V12_StudIP.pdf",
+        "title": "V12_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 8,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:165f890c83b581f295be128669c6fb92d38c9fb2e7d697e4627ac34db76fc0af",
+            "characters": 240,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "1 + 𝐸 𝑟𝐺𝐾",
+              "02.02.2025                                      Georg-August-Universität Göttingen   1",
+              "𝑍𝑎ℎ𝑙𝑢𝑛𝑔𝑡",
+              "Ziel: Minimerung 𝐸 𝑟𝐺𝐾",
+              "Wirkung erhöhter Verschuldung"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:009fcb968b61f27777fd38a8846678242b35c39c92417efddfb8cde45c5ca739",
+            "characters": 324,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "02.02.2025                                      Georg-August-Universität Göttingen   2",
+              "𝐸 𝑟𝐺𝐾",
+              "▪ Gesamtkapitalkosten",
+              "𝐸𝐾              𝐹𝐾",
+              "ǁ  ∗         + 𝑟𝐹𝐾 ∗"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:b57c46ffc674440e94c6f5ad5f11b6d86744801aa15aaf4d0f65846065a04aaa",
+            "characters": 284,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "02.02.2025                                         Georg-August-Universität Göttingen           3",
+              "• Beispiel",
+              "12% im Fall 𝑆3",
+              "Wirkung erhöhter Verschuldung",
+              "▪ Die Wirkung von Verschuldung"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:6e58e68e1585096f98b70c6135739141c1ef1e8c11373fd8a3df59dd36fc2696",
+            "characters": 377,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 9,
+            "headingCandidates": [
+              "02.02.2025                                        Georg-August-Universität Göttingen   4",
+              "𝐸𝐾",
+              "𝑭𝑲",
+              "𝑬𝑲",
+              "𝑟𝐺𝐾"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:cea2fe83145182ad158991a227bc4bf932a678d67a8ab13f5ee8893bc76b24ff",
+            "characters": 342,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "02.02.2025                                        Georg-August-Universität Göttingen                 5",
+              "S1              4%              3,33%                    2%          -2%",
+              "S2              8%              8,67%                    10%         14%",
+              "S3              12%             14%                      18%         30%",
+              "▪ Folgerung:"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:b5b9df830ab6eb26d54818491fcb7b94cb295bfad76e52c6b41d6595c673a7ee",
+            "characters": 313,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "02.02.2025                                       Georg-August-Universität Göttingen   6",
+              "▪ Konsequenz",
+              "beides steigt",
+              "• Leverage-Ertrag",
+              "• Leverage-Risiko"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:5289fe8a006f15af52faa06bfa0ad013eb5dbd54138fff42ba13b7c949683639",
+            "characters": 589,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "02.02.2025                                              Georg-August-Universität Göttingen                               7",
+              "Wirkung erhöhter Verschuldung",
+              "• Bei vollkommenem und vollständigem Kapitalmarkt",
+              "▪ Wie sollten Kapitalstruktur bzw. Verschuldungsgrad gewählt werden?",
+              "o Unternehmenswert kann durch Verschuldung weder gesenkt noch gesteigert werden"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:9d218de8238cc916ad831eee8ea87e512f3195485ec327569aaf168bfc98aeea",
+            "characters": 488,
+            "extractionHealth": "text-ok",
+            "taskSignals": 1,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "02.02.2025                                             Georg-August-Universität Göttingen                                8",
+              "Bedeutung",
+              "Wirkung erhöhter Verschuldung",
+              "• Bei unvollkommenem und unvollständigem Kapitalmarkt",
+              "▪ Wie sollten Kapitalstruktur bzw. Verschuldungsgrad gewählt werden?"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v2-studip",
+        "path": "source-materials/Finanzwirtschaft/V2_StudIP.pdf",
+        "title": "V2_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 21,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:32b2096fa518c7bbf2f1e6c68519df8148a1378ec350e5307611204d3bb63006",
+            "characters": 115,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                      Georg-August-Universität Göttingen   2",
+              "Beispiel: Hypo Real Estate & Finanzkrise 2007-2009",
+              "▪ Praxisbeispiel"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:a3153466072f082c0f5f5140a802a11f3e2fb4976c51b4c2a39bf374080348d6",
+            "characters": 513,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                      Georg-August-Universität Göttingen                                                  3",
+              "Beispiel: Hypo Real Estate & Finanzkrise 2007-2009",
+              "Jahr […]",
+              "Abwicklungsgesellschaft FMS",
+              "Wertmanagement zuletzt noch aus dem"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:d54f25b36be2df24ff3624b1b7d054e4f8c68e1ea6af2de29df8327f5c259eaf",
+            "characters": 645,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                         Georg-August-Universität Göttingen   4",
+              "Zinsen.",
+              "Nachfrage",
+              "▪ Probleme:",
+              "Dollar Ende 2021) ."
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:775f0a2069c8c0b8191b8f75d06cdc6c15162020a63082fa2330455e5804d7de",
+            "characters": 283,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                         Georg-August-Universität Göttingen                                5",
+              "Die zentralen Inhalte",
+              "Vermögen, kurzfristig finanziert werden kann.",
+              "▪ Implikationen der bilanziellen Liquiditätsplanung:",
+              "▪ „Goldene Bilanzregel“: Langfristig gebundenes Vermögen soll langfristig finanziert werden, während kurzfristiges"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:f2e0bb987741300561af22eb1c2f1fd86f537397ec028810fd23dfcdc415b031",
+            "characters": 249,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                           Georg-August-Universität Göttingen                               6",
+              "Q1                    Q2                  Q3   Q4",
+              "Planperiode",
+              "Einzahlungen",
+              "Anfangsbestand"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:38ab8e19569347e990c682515fd038e7ebabd19934a15f8822d899ffcba1570a",
+            "characters": 745,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                       Georg-August-Universität Göttingen                                           7",
+              "• Darlehen",
+              "• Wertpapiere, etc…",
+              "Die zentralen Inhalte",
+              "b) Kapitalentziehende Maßnahmen"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:b1265b34827a05785a5b8c0be8981c96a8a37994cd3762fc0e74c6ed3e1564e5",
+            "characters": 259,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                         Georg-August-Universität Göttingen   8",
+              "Anbahnung des Perspektivwechsels",
+              "• Beurteilung und optimale Gestaltung von Investitionen",
+              "• Beurteilung und optimale Gestaltung von Finanzierungen",
+              "▪ Überlegung: In der traditionellen Sicht wenig beachtete Aspekte"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:9279b4b6ec45cdf930028e3c0295a85da71cc132b02f47018f71681221b697dc",
+            "characters": 268,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                         Georg-August-Universität Göttingen                                      9",
+              "vs.",
+              "Markt (nicht) leisten?",
+              "Institutionenorientierung",
+              "Anbahnung des Perspektivwechsels"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:78469fbaa2b1e6d10c4c4013bd4128118a8f63bcf2f2cc7ee1df085507f55135",
+            "characters": 63,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024       Georg-August-Universität Göttingen   10",
+              "Ende Kapitel 1"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:765e8873d240ec80c242cb0df480e53289165c6e0a2b7f5c875c9591d45ef3cc",
+            "characters": 280,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                        Georg-August-Universität Göttingen              11",
+              "Agenda",
+              "• 2.1 Lernziele",
+              "▪ Kapitel 2: Die moderne Betrachtungsweise",
+              "• 2.3 Zwei Ausprägungen der modernen Investitions- und Finanzierungstheorie"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:7b3e911be53c01d78a90825cfa738f8be58875c6d7d17d6a0f10280adef8efe9",
+            "characters": 296,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                        Georg-August-Universität Göttingen                        12",
+              "Lernziele",
+              "• Wessen Ziele stehen im Vordergrund?",
+              "• Welche Ziele stehen im Vordergrund?",
+              "• Welche Ausprägungen dieser Betrachtungsweise gibt es?"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:9a117855eef19eb4c22aa0fbfe19cb423fbf40dfa019360b4b5e8f516638a00d",
+            "characters": 538,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                    Georg-August-Universität Göttingen                             13",
+              "Unser",
+              "Unternehmen]",
+              "Entscheidungen",
+              "Lieferbeziehungen]"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:6a9d5248712d352ec16d280f00f809efe7c49c0a94bbb631d8db60bb2560d3c6",
+            "characters": 167,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                           Georg-August-Universität Göttingen   14",
+              "Finanzierungstheorie",
+              "▪ Welche Interessen haben Vorrang?",
+              "Wesentliche gemeinsame Merkmale der modernen Investitions- und"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:e360e3eb7db84203eb5cfff746f6714bed21a8cd0f0b4c7dd52989581d09af93",
+            "characters": 437,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                           Georg-August-Universität Göttingen            15",
+              "Finanzierungstheorie",
+              "▪ Welche Interessen haben Vorrang?",
+              "geschäftspolitische Entscheidungen",
+              "• Heutige Lesart: Enlightend Shareholder Value-Ansatz"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:e4ae40f5c12cec484ae0929cf6db27467f23dfacb9ffb60918d1d4f150d34c22",
+            "characters": 399,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "06.11.2024                                         Georg-August-Universität Göttingen   16",
+              "Finanzierungstheorie",
+              "• Finanzielle Ziele:",
+              "• Nicht-finanzielle Ziele:",
+              "o Einkommen (z.B. Dividende)"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:c0d6fbfab222981272e696dcb5c7b757f820549b3061783e33fb01869bba94b1",
+            "characters": 402,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                    Georg-August-Universität Göttingen                   17",
+              "Finanzierungstheorie",
+              "• Höhe der Zahlungen",
+              "• Unsicherheit der Zahlungen",
+              "• Zeitliche Struktur der Zahlungen"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:28a0a3ca3e867b07f8b91d998a48f55c96fa241948bd66071d6dc1d23d0929c2",
+            "characters": 200,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                   Georg-August-Universität Göttingen   18",
+              "▪ Welchen Konsumstrom wählen Sie?",
+              "Konsumstrom                  Zeitpunkte",
+              "t1              t2                   t3",
+              "Zur Auswahl stehen drei (sichere) Konsumströme"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:81b5dea573616c3cb2f2a3b9641a948ab5c3f45c522d9592298eb165751995ad",
+            "characters": 426,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                              Georg-August-Universität Göttingen                 19",
+              "Finanzierungstheorie",
+              "Zahlungsströmen auslösen",
+              "▪ Die zentralen Begriffe: Investition und Finanzierung",
+              "o Investition: Zahlungsreihe, die mit Auszahlung beginnt"
+            ]
+          },
+          {
+            "page": 20,
+            "anchorId": "p020",
+            "textHash": "sha256:a155349730b74144437cee17c146d963c8eba8aea75587efb911ebd524de8866",
+            "characters": 375,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                         Georg-August-Universität Göttingen                                     20",
+              "Kapitalmarkt",
+              "Allgemein:                                                                Spezifisch:",
+              "gehandelt werden                                                           Fremdkapital",
+              "Zahlungsströme                                                           und langfristiges"
+            ]
+          },
+          {
+            "page": 21,
+            "anchorId": "p021",
+            "textHash": "sha256:d30ebb90e8a1925395574c81609a11506be750750155f0780d6cdac00c694e5d",
+            "characters": 682,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "06.11.2024                                           Georg-August-Universität Göttingen                                 21",
+              "▪ Wesentliche Eigenschaften",
+              "auftritt, gleich und gegeben ist.",
+              "Zwei Ausprägungen der modernen Investitions- und Finanzierungstheorie",
+              "gleich, welche Höhe, zeitliche Struktur und Unsicherheit er aufweist."
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v3-studip",
+        "path": "source-materials/Finanzwirtschaft/V3_StudIP.pdf",
+        "title": "V3_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 19,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:6eaa4a163ffa6df209d333d3bea2a26ba99f3d5558a69131accdd3259e315872",
+            "characters": 412,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                                        Georg-August-Universität Göttingen                                2",
+              "Beispiel 1: Die Bedeutung von Präferenzen auf Märkten",
+              "soweit nötig.",
+              "Eintrittskarte für ein Spiel von entweder Hannover 96 oder Bayern München."
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:9019e38bf755a65f1eaa04f8228e27a8fabf41bab080971be39498fead845ded",
+            "characters": 872,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                                              Georg-August-Universität Göttingen                               3",
+              "Beispiel 2: Die Bedeutung von Präferenzen auf Märkten",
+              "Projektes",
+              "Konsens möglich]",
+              "garantierte Zahlung"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:ff63e5338cc6c384b0e92aac2f10ac8b3be0d8a43d02bd7bfed8e732c260c164",
+            "characters": 221,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                          Georg-August-Universität Göttingen          4",
+              "wagen, …",
+              "Auto zu verkaufen!",
+              "Käufer- und Verkäuferperspektive in der Realität",
+              "Gebraucht-    später                              abgeholt"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:6eee0cebbb4ac2a2514cba187ce080fd0b2f5f85f1458e7001dc379634a9578e",
+            "characters": 405,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                                       Georg-August-Universität Göttingen                            5",
+              "o Banken",
+              "Institutionen",
+              "• Beispiele für Institutionen",
+              "o Crowdfunding/Crowdinvesting"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:ff212faca9ae2d855476ca04eb7f012c062027680b2342d8f1485e194ca918d0",
+            "characters": 578,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "13.11.2024                                Georg-August-Universität Göttingen                                 6",
+              "Zielgröße",
+              "Grundlagen",
+              "Institutionen auf dem",
+              "Moderne Betrachtungsweise"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:3a247abc303564c7c5250561c10cc2f167af57f84ad6005076387027651e3999",
+            "characters": 62,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024       Georg-August-Universität Göttingen   7",
+              "Ende Kapitel 2"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:4fb196fd193ad181cb70ffb7a4014dff65cbbdfe1f9e30784d4e213c38ca850e",
+            "characters": 291,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                                             Georg-August-Universität Göttingen   8",
+              "Agenda",
+              "•      3.1 Lernziele",
+              "▪ Kapitel 3: Grundlagen der Investitionstheorie",
+              "•      3.4 Die Rolle des Kalkulationszinssatzes"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:cee81715cd304b169e11b1f2fa35da9021005baf3d6609e7a568743b39e5ae8d",
+            "characters": 260,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                                        Georg-August-Universität Göttingen                            9",
+              "Lernziele",
+              "analysieren?",
+              "▪ Wie lassen sich Konsumströme und Investitionen in einem einfachen beurteilen?",
+              "▪ Wie lassen sich Investitionsentscheidungen in der kapitalmarktorientierten Betrachtungsweise darstellen und"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:12f59474091ab331b0d15d4d8d403b3415a8d519a6b392955829b00f496c74eb",
+            "characters": 498,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "13.11.2024                                             Georg-August-Universität Göttingen   10",
+              "▪ Bezeichnungen",
+              "▪ Konsumnutzen von Investor*innen",
+              "Einordnung und Voraussetzungen der Investitionsrechnung",
+              "gleichzeitig: Ende des Zeitraums zwischen t-1 und t (Periode)"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:96b55e74bdd2dea8350fd599aa61c033a2307a5c71adfd31005b436a3d239f55",
+            "characters": 369,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "13.11.2024                                       Georg-August-Universität Göttingen   11",
+              "▪ Betrachtung eines Konsumplans",
+              "▪ Nichtsättigung:       > 0,     >0",
+              "Einordnung und Voraussetzungen der Investitionsrechnung",
+              "𝜕𝑈       𝜕𝑈                        Positiver Grenznutzen für"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:180d852740057877595677168885925682f6360527ac4a82bd6a41364c5f1515",
+            "characters": 410,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "13.11.2024                                       Georg-August-Universität Göttingen   12",
+              "→ Zukunftspräferenz (negative Zeitpräferenz)",
+              "→ Gegenwartspräferenz (positive Zeitpräferenz)",
+              "Einordnung und Voraussetzungen der Investitionsrechnung",
+              "▪ Eigenschaften von Konsumnutzenfunktionen: (2) Zeitpräferenz"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:f217b3667082d6f4754f3eaf7bc84e171225ad6c10aef8bd777cb3114c222eca",
+            "characters": 538,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "13.11.2024                                       Georg-August-Universität Göttingen                                     13",
+              "𝜕𝑈",
+              "𝜕𝑐1",
+              "d𝑐0   𝜕𝑈",
+              "Einordnung und Voraussetzungen der Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:ff69a36c1c29c3ce8efd3ebf9633fb8d187edd73f632bde44068172e688fc404",
+            "characters": 470,
+            "extractionHealth": "text-ok",
+            "taskSignals": 1,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "13.11.2024                                         Georg-August-Universität Göttingen                                 14",
+              "𝜕𝑈",
+              "𝜕𝑐1",
+              "d𝑐1 𝜕𝑐0",
+              "d𝑐0   𝜕𝑈"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:b422b9d5bcea4c2e9eb8f687760404cb61b74052ce8d8a9981a348f572612f0d",
+            "characters": 515,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "13.11.2024                                          Georg-August-Universität Göttingen   15",
+              "▪ Anwendungsbeispiel",
+              "▪ Allgemeine Vorgehensweise zur Lösung",
+              "• [3] Bestimmung der Zeitpräferenzrate",
+              "Einordnung und Voraussetzungen der Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:ab41a289bc29993ff8bcbd9110584abd79ced48d5fe4082b51d8f8707690ab44",
+            "characters": 545,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 9,
+            "headingCandidates": [
+              "1      −1     1     −     𝟏    𝟏",
+              "13.11.2024                                                      Georg-August-Universität Göttingen                           16",
+              "𝜕𝑈",
+              "• Ableitung des übrigen Terms",
+              "▪ Partielle Ableitungen nach c0: 𝜕𝑐"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:56260ab6e3cdcc86e0fa29e3020614341ae6caac1527b6b74479291319432bd9",
+            "characters": 602,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 9,
+            "headingCandidates": [
+              "13.11.2024                                          Georg-August-Universität Göttingen                                         17",
+              "Konsums ab",
+              "𝜕𝑈   1 1",
+              "Ableitungen",
+              "𝜕𝑐0  2 𝑐0"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:de17eb3ebfee9e819ce06609aedefbc7efe8ed670a1e44cfbc3d9fdbb41b2910",
+            "characters": 278,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "13.11.2024                              Georg-August-Universität Göttingen                        18",
+              "Höhere",
+              "Einordnung und",
+              "höherer Nutzen",
+              "Voraussetzungen der"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:9cf54ebacb7cdf917360cadac2f81b11c5295cedcbbdd8e11fb518d4cd0b32b8",
+            "characters": 300,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "13.11.2024                                           Georg-August-Universität Göttingen                                      19",
+              "Soll- ≠",
+              "Habenzins",
+              "Geldaufnahme",
+              "Einheitszins"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v4-studip",
+        "path": "source-materials/Finanzwirtschaft/V4_StudIP.pdf",
+        "title": "V4_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 27,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:e76b9f14c3d26fdd573dc63a0cf34abf47002fb66cfd387c95c84e0f5e13a57a",
+            "characters": 217,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "28.11.2024                    Georg-August-Universität Göttingen                                   2",
+              "𝑐1",
+              "𝑐0",
+              "▪ Fall 1 (graphisch)                           120",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:4de93d91e0a84bf82d6a6d31d9446fc0e4fe74d20c9488ec5e445b6bef177658",
+            "characters": 430,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "120                                   Gegenwärtiger                           120                                         Konsum stiftet",
+              "0     20   40   60   80   100    120   𝑐0                                     0   20   40   60   80   100     120   𝑐0",
+              "mehr Nutzen                            100",
+              "Konsum stiftet                                                                       mehr Nutzen",
+              "𝑐1                                                                            𝑐1                                           Zukünftiger"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:62642b2c70a7a1c1d1d323530eaf7f439248cdf98e08ce855978cea1ae1a6b1d",
+            "characters": 299,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "28.11.2024                                           Georg-August-Universität Göttingen                                      4",
+              "Soll- ≠",
+              "Habenzins",
+              "Geldaufnahme",
+              "Einheitszins"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:b8f16f717687c7d598a98d35c7acb06a10e9ef901e649da4225514a41fde7e68",
+            "characters": 448,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "28.11.2024                                        Georg-August-Universität Göttingen                      5",
+              "𝑐0 ,𝑐1",
+              "▪ Optimierung unter Nebenbedingungen",
+              "Nichtsättigung                       das gesamte Budget ausnutzen",
+              "• Gesucht: Max 𝑈 𝑐0 , 𝑐1"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:dec7f73d68274b1823b8d58bfab972ab263f01b2e7627db06f4e6061d48495ba",
+            "characters": 596,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "28.11.2024                                            Georg-August-Universität Göttingen                                    6",
+              "𝜕𝐿   𝜕𝑈",
+              "𝜕𝑐1 𝜕𝑐1",
+              "unter Beachtung der Nebenbedingung",
+              "Notwendige Bedingungen:        𝜕𝐿   𝜕𝑈"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:e4d5ef3c4f604e4f2e7512165ce0a7046c168510c65026ebe0c5e8bbb8afb706",
+            "characters": 347,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 8,
+            "headingCandidates": [
+              "28.11.2024                          Georg-August-Universität Göttingen                                     7",
+              "𝜕𝐿   𝜕𝑈",
+              "𝜕𝑐1 𝜕𝑐1",
+              "▪ Fortsetzung der Lösung:",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:d97d3a1f7c5ed82832df96190eb76d0240007a782ed2f11e6c0e6af9f63c7704",
+            "characters": 494,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 15,
+            "headingCandidates": [
+              "28.11.2024                                     Georg-August-Universität Göttingen                               8",
+              "𝜕𝑐1  2 𝑐1",
+              "=           =          = GDS",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "𝜕𝑈   1 1                     𝜕𝑈 1        1          𝑐0"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:d38a9c3fd5be564f6fa78dfcbacd830d029dc1ec3ff21e4597cd94e5ca338069",
+            "characters": 482,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "2 𝑐0               𝑐1                      2 𝑐0",
+              "2 𝑐0             2 𝑐1                         𝑐0",
+              "28.11.2024                                        Georg-August-Universität Göttingen                                     9",
+              "2 𝑐0 + 𝑐1             1                1                       2 𝑐1           96               24",
+              "4 𝑐0 + 𝑐1             2                1                       4 𝑐1           ~112,94          ~7,06"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:00731e98a97e5eb8c1e831ff354c8edf524701d74820fb691e708f66b0e0e0a5",
+            "characters": 676,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 22,
+            "headingCandidates": [
+              "1                                                                                 𝑐1 2𝑐1                 Einsetzen in Budgetbedingung",
+              "1                                                                                 0  𝑐0                                 𝒄𝟏 = 𝟒𝟎",
+              "2 𝑐1                               𝒄𝟎 = 𝟏𝟏𝟗, 𝟕𝟓                                  2 𝑐1",
+              "Weitere Überlegungen zur Zeitpräferenz",
+              "𝜕𝑈                                                                                𝜕𝑈"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:e28b6ec2373c4c5bf57fec4832658a644056bbe2664dbb4b92d5fd3129f497ad",
+            "characters": 300,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "28.11.2024                                           Georg-August-Universität Göttingen                                      11",
+              "Soll- ≠",
+              "Habenzins",
+              "Geldaufnahme",
+              "Einheitszins"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:e785ae3a7f723713098bdfff06c62968aa0a39308396167232d0f1e5b8b5ecf2",
+            "characters": 721,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 10,
+            "headingCandidates": [
+              "28.11.2024                                        Georg-August-Universität Göttingen             12",
+              "▪ Intuition:",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "▪ Fall 3: Mit Geldanlage- und Geldaufnahmemöglichkeit zum Einheitszinssatz i, ohne Investition"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:67ab0a624038d4665f46d46c434c6168ab0c3fdcae31bf7fc065c271248b79ed",
+            "characters": 377,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "28.11.2024                                    Georg-August-Universität Göttingen           13",
+              "𝑐1",
+              "1+𝑖",
+              "𝒄𝟏",
+              "𝟏+𝒊"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:c4fadb240212185a2154ce757d7b025d9149695b2267223013275f734ad78583",
+            "characters": 296,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "28.11.2024                                        Georg-August-Universität Göttingen                                      14",
+              "𝑐1",
+              "von c0 und c1",
+              "Verschiebung der",
+              "optimalen Kombination            40"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:ccf54a7432df2860494af77af13d8eadb47ba8798e98e81a6004ea6d9fdfb9cd",
+            "characters": 707,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 15,
+            "headingCandidates": [
+              "28.11.2024                                         Georg-August-Universität Göttingen                                   15",
+              "𝒄𝟏",
+              "𝟏+𝒊",
+              "𝜕𝑐0",
+              "GDS = 1+i"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:8f2007741d1ad4ede148b0253869e547367733e7e0d3ea2d7f3a705cbbf319a1",
+            "characters": 429,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "28.11.2024                                       Georg-August-Universität Göttingen                                 16",
+              "0        20            40   60   80   100   120 𝑐0",
+              "𝑐1",
+              "▪ Fortsetzung des Beispiels",
+              "Kapitalmarkt erst bei 1+i indifferent]"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:f08f19432c385586890af4aeef6c7dd532304f41fc8573d1a132b93a6a2ca288",
+            "characters": 404,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 8,
+            "headingCandidates": [
+              "28.11.2024                                         Georg-August-Universität Göttingen                             17",
+              "𝑐1",
+              "𝑐0",
+              "1. Bedingung",
+              "𝑐1         𝑐1"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:83470557ca1cc1c83022f43596d3c03a0a30e39abb427930b67999623b7f2068",
+            "characters": 431,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 11,
+            "headingCandidates": [
+              "28.11.2024                                            Georg-August-Universität Göttingen                               18",
+              "1,1",
+              "𝒄𝟏",
+              "𝟏+𝒊",
+              "U = 15,87"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:9e17cbd2070ced91984849137511aa47dba273473b1bd1484401ffb15b00ccb5",
+            "characters": 300,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "28.11.2024                                           Georg-August-Universität Göttingen                                      19",
+              "Soll- ≠",
+              "Habenzins",
+              "Geldaufnahme",
+              "Einheitszins"
+            ]
+          },
+          {
+            "page": 20,
+            "anchorId": "p020",
+            "textHash": "sha256:87e6b70e63a944410465faccea81d789ff64fbaf2f416768876bc0c5726655d4",
+            "characters": 537,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "28.11.2024                                           Georg-August-Universität Göttingen                  20",
+              "1+𝑖",
+              "𝑐1 − 𝐸1",
+              "▪ Investition:",
+              "1) Direkter Konsum"
+            ]
+          },
+          {
+            "page": 21,
+            "anchorId": "p021",
+            "textHash": "sha256:4e232eb377d9e021a290a0ac083ad09eb945030cd5d8ddee6834ed20c81d6e86",
+            "characters": 446,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "28.11.2024                                        Georg-August-Universität Göttingen                              21",
+              "1+𝑖",
+              "𝑐1 − 𝐸1",
+              "1+𝑖     1+𝑖",
+              "heutiger Sicht."
+            ]
+          },
+          {
+            "page": 22,
+            "anchorId": "p022",
+            "textHash": "sha256:882f766aa3e0c369b3b123883323ccbba8cfa3f2477c36dcf4fc49a1240a3222",
+            "characters": 550,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 7,
+            "headingCandidates": [
+              "80                                                       höherer",
+              "𝑐1",
+              "▪ Beispiel:",
+              "Indifferenzkurve",
+              "𝑐1          𝐸1"
+            ]
+          },
+          {
+            "page": 23,
+            "anchorId": "p023",
+            "textHash": "sha256:e312565ad114d52c37399a9e23bd3558e550ec55c3c9d6081144418ac31c8e8d",
+            "characters": 396,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 13,
+            "headingCandidates": [
+              "28.11.2024                                        Georg-August-Universität Göttingen          23",
+              "𝑐1",
+              "𝑐0",
+              "1+𝑖",
+              "𝑐1         66"
+            ]
+          },
+          {
+            "page": 24,
+            "anchorId": "p024",
+            "textHash": "sha256:b74da8baf1b7057bda1aa714207e73c0f91c8d64cf4984ca77c4e77c299e9ea5",
+            "characters": 355,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 10,
+            "headingCandidates": [
+              "28.11.2024                                            Georg-August-Universität Göttingen          24",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "▪ Die Umsetzung des [optimalen] Konsum- und Investitionsplans:"
+            ]
+          },
+          {
+            "page": 25,
+            "anchorId": "p025",
+            "textHash": "sha256:d0c05c0c91f4b67b36701a1782b7089aec98a4ac10367c522b8b1b0ed7b522a9",
+            "characters": 458,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "28.11.2024                                             Georg-August-Universität Göttingen                                    25",
+              "0   20   40   60   80   100   120         140   𝑐0",
+              "𝑐1",
+              "realisieren?",
+              "bzw. Gegenwartspräferenzen]"
+            ]
+          },
+          {
+            "page": 26,
+            "anchorId": "p026",
+            "textHash": "sha256:d2e1bb11e8824f4cbe6b7b22ba15e20e380b4a94148231aaedbbedbb5b5cec3a",
+            "characters": 464,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 20,
+            "headingCandidates": [
+              "28.11.2024                                   Georg-August-Universität Göttingen   26",
+              "▪ Wie realisiert man P2?",
+              "▪ Wie realisiert man P3?",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen"
+            ]
+          },
+          {
+            "page": 27,
+            "anchorId": "p027",
+            "textHash": "sha256:5da64f7b5afd8b579f1fe5f1839861fc56074aef8b4c712ef492276b58bdfc8c",
+            "characters": 473,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "28.11.2024                                         Georg-August-Universität Göttingen                              27",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "▪ Betrachtung von Investor*innen mit unterschiedlichen Präferenzen:",
+              "Wertes immer die beste Strategie unabhängig von den individuellen Zeitpräferenzen"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v5-studip",
+        "path": "source-materials/Finanzwirtschaft/V5_StudIP.pdf",
+        "title": "V5_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 15,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:85a7e9a0ff3835e0e477100bceda426e5bfff65fa9e447317a8cb5470db36754",
+            "characters": 306,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "27.11.2024                                              Georg-August-Universität Göttingen                      2",
+              "E 1",
+              "[K0]",
+              "1+i",
+              "Kapitalwert"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:5499c27cf326efb7958027d77ccb02952354dc89ed279d7ad3f17bfa1b439e5f",
+            "characters": 693,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "27.11.2024                                            Georg-August-Universität Göttingen                                               3",
+              "1+i",
+              "zwei Perioden",
+              "Diskontfaktor",
+              "abzüglich der Anschaffungsauszahlung."
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:07ed2850f2323abfb4e4337812267312099be89da10f02c36d63be4864cd4ffd",
+            "characters": 378,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                           Georg-August-Universität Göttingen                    4",
+              "Investitionsentscheidungen separiert werden.",
+              "▪ Implikationen des Kapitalwertes aus der Modellanalyse",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "• (i) Einfache Regel: Entscheidung kann sich am Kapitalwert orientieren."
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:a9ba0108546264a1640e94212bf96c5f90a9c9aabb4105bff93d974677701c08",
+            "characters": 769,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                              Georg-August-Universität Göttingen      5",
+              "▪ Entscheidungsprobleme strukturieren",
+              "o Entscheidungsregel: Wenn K0 > 0, dann vorteilhaft",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "o Entscheidungsregel: Alle Projekte mit K0 > 0 sind vorteilhaft"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:762a0bb3e6f40c8d609f6d42b81827bdf05b792ed9459afecb122c2ca8fa63ac",
+            "characters": 299,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                           Georg-August-Universität Göttingen                                      6",
+              "Soll- ≠",
+              "Habenzins",
+              "Geldaufnahme",
+              "Einheitszins"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:bac5bdfab8fbbb226aa5765f223c170e9a73d86924fbb148f9603fb18ff92c79",
+            "characters": 522,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                            Georg-August-Universität Göttingen                                7",
+              "• (i) Kapitalwert nicht mehr einfach bestimmbar.",
+              "Das Grundmodell der Wahl zwischen verschiedenen Vorteilen",
+              "• (ii) Konsum- und Investitionsentscheidung nicht mehr separierbar.",
+              "(Sollzins ungleich [i.d.R. größer als] Habenzins; is ≠ ih), mit Investition"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:5fe021fe2e07f5d0767717dd430c83288dff8b0804eef09dcb735402db10d02d",
+            "characters": 548,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 9,
+            "headingCandidates": [
+              "27.11.2024                                      Georg-August-Universität Göttingen                                    8",
+              "W=     100",
+              "kostet 15%",
+              "Präferenz für [maximalen]",
+              "• Kapitalmarkt bringt: 5%"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:c295fd4088970aa9823459592e3ab3f0cdd0b1c4461fce27daaa35198202ee06",
+            "characters": 594,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "27.11.2024                                           Georg-August-Universität Göttingen                                                  9",
+              "Verschuldung",
+              "Unternehmen B",
+              "• Zu beachten ist:",
+              "ih                         is"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:3bc048d1295ba91757a9d9f39bb8a19af79c5648b12de377c36854a7c0399c84",
+            "characters": 251,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "27.11.2024                                      Georg-August-Universität Göttingen              10",
+              "𝐸1",
+              "1+𝑖",
+              "(i.d.R. is)",
+              "Ein einheitlicher Zins"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:b65df0d452ef49e0c3fd249e46d71452a1a48468866a28445d106249d9679942",
+            "characters": 63,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024       Georg-August-Universität Göttingen   11",
+              "Ende Kapitel 3"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:c61a0f3ea33c3cd506cc61ab0125a76ac51d36065f05f4dcdff367c824d2041e",
+            "characters": 227,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                        Georg-August-Universität Göttingen   12",
+              "Agenda",
+              "• 4.1 Lernziele und Einordnung",
+              "• 4.3 Zusammenhang zwischen den Verfahren",
+              "▪ Kapitel 4: Methoden der Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:111879ffcd4a0ee4d0c9cb24c2c344df51da02eed541aa0e0a3f09f02bc411a0",
+            "characters": 302,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                        Georg-August-Universität Göttingen   13",
+              "Lernziele und Einordnung",
+              "▪ Wie lassen sich die Verfahren anwenden?",
+              "▪ Welche Verfahren der Investitionsrechnung gibt es?",
+              "▪ Wie sind die Verfahren im Vergleich zueinander zu beurteilen?"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:00af5dd6acc8356057fdfb982261dd24f00c06020d7d6616c778f67ad38bee4b",
+            "characters": 409,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "27.11.2024                                  Georg-August-Universität Göttingen                    14",
+              "Verfahren der",
+              "bei Sicherheit",
+              "Investitionsrechnung",
+              "Übersicht der Verfahren der Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:a558e786b7b7c6d69e2c15ba19f71d8a02eb64b38682d91bb7e2e49e06b15340",
+            "characters": 525,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "27.11.2024                                          Georg-August-Universität Göttingen                                    15",
+              "▪ Beispiel:",
+              "vollständig zurückgeflossen ist)",
+              "• Anfangsinvestition: 1 Mio. Euro",
+              "• Kauf eines Hauses und Vermietung"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v6-studip",
+        "path": "source-materials/Finanzwirtschaft/V6_StudIP.pdf",
+        "title": "V6_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 13,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:6e9476b9faa613bb705ce96e5478419374e584f1dbe7786bedb67db215538b7c",
+            "characters": 326,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "04.12.2024                                         Georg-August-Universität Göttingen   2",
+              "▪ Fragen:",
+              "• Sichere Zinsen",
+              "• Sichere Zahlungen",
+              "Dynamische Verfahren der Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:4990b147a51129535ff1bdb7a79aa988c5fff63d71416ed8e590a4116ae071fc",
+            "characters": 472,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "04.12.2024                                                    Georg-August-Universität Göttingen                                       3",
+              "drei Perioden",
+              "Verzinsung mit i",
+              "Aufzinsen und Abzinsen",
+              "Aufzinsungsfaktor über"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:7f6a234edf1f63b2a61f155cc605cbd364d2050129e5427603a1569a5c0acbc2",
+            "characters": 484,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "100 ∗ (1 + 𝑖1 ) ∗ (1 + 𝑖2 ) ∗ (1 + 𝑖3 )",
+              "Verzinsung mit 𝒊𝟏",
+              "Aufzinsen und Abzinsen",
+              "Vermögen                 100",
+              "Anlage                   100"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:58ad6ba6caaa21d4f7b3509672a79f1a795941b77d9da97e9e91e11eb30fffab",
+            "characters": 430,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 7,
+            "headingCandidates": [
+              "100 ∗ (1 + 𝑖)3",
+              "04.12.2024                                         Georg-August-Universität Göttingen                                          5",
+              "100 ∗ 1 + 𝑖 3 ∗ 1 + 𝑖 −1",
+              "100 ∗ (1 + 𝑖)3 ∗ (𝟏 + 𝒊)−𝟏",
+              "∗ (𝟏 + 𝒊)−𝟏"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:7acb7a42da2cbe662403fff1873aa8cb77c695721d2f72149be3395c53e4bda8",
+            "characters": 241,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "04.12.2024                                              Georg-August-Universität Göttingen                                         6",
+              "Z1                                        Z3                         Z4",
+              "▪ Gegenwartswert",
+              "Gegenwartswert, Barwert und Endwert",
+              "Z0                                        Z2                                                                          Z6"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:425a1ac85b9fd9f1d3d2fefc8e30f05cea36b293660dd1f99cb033ea007b96e8",
+            "characters": 271,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "04.12.2024                                           Georg-August-Universität Göttingen   7",
+              "▪ Spezielle Gegenwartswerte",
+              "Gegenwartswert, Barwert und Endwert"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:bfc88cb7f803c55b11ce9be20bdb9ffeb8954500d753784d143eab595091cfb5",
+            "characters": 614,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 13,
+            "headingCandidates": [
+              "04.12.2024                                        Georg-August-Universität Göttingen                                    8",
+              "▪ Rente",
+              "Renten-",
+              "Rentenzahlung",
+              "• Bei nachschüssiger Rente"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:b2133b9637f9f89a26ec45b592464b19d62deb28b1bb561e0161e053f177d24c",
+            "characters": 531,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 10,
+            "headingCandidates": [
+              "1                                 𝐸∗                   −1       1",
+              "04.12.2024                                       Georg-August-Universität Göttingen                             9",
+              "Geometrische",
+              "• Bei nachschüssiger Rente",
+              "Barwerte und Endwerte spezieller Zahlungsreihen"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:b075610127e91d8a1f59bc5859aa22fb08e3a2c6681e139d66224c40eae55329",
+            "characters": 612,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 10,
+            "headingCandidates": [
+              "5            5            5               …",
+              "04.12.2024                                         Georg-August-Universität Göttingen                                  10",
+              "⇔ P = E/i",
+              "Rentenbar-",
+              "wertfaktor"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:59c2ab5f69321d62f8448f3e69a5162845fa5437d5e5bf9da6e548efafde61da",
+            "characters": 463,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "04.12.2024                                        Georg-August-Universität Göttingen                                         11",
+              "𝑖−𝑔",
+              "Wachstum",
+              "▪ Ewige Rente mit Wachstum",
+              "• Konstanter Marktzins i pro Periode"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:6bd54c3e5eb87620ce01b3e4c7a961fbf932ebbf0042dd94254f5b4e26cd461b",
+            "characters": 604,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 14,
+            "headingCandidates": [
+              "5           5         5            …               5               5+100",
+              "04.12.2024                                            Georg-August-Universität Göttingen                                             12",
+              "𝐸 𝐸",
+              "0,05 0,05",
+              "(1 + 0,05)20 ∗ 0,05"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:448cf0a452ab6da4188e0e08f97a1c9429456fd1c9689cae7bf15f94fd3faf8b",
+            "characters": 363,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "1        1+𝑖 𝑛⋅𝑖",
+              "04.12.2024                                       Georg-August-Universität Göttingen                              13",
+              "RBF(𝑛, 𝑖)   1+𝑖 𝑛−1",
+              "Bezogen auf Laufzeit (n)",
+              "▪ Annuitätenfaktor/Wiedergewinnungsfaktor"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v7-studip",
+        "path": "source-materials/Finanzwirtschaft/V7_StudIP.pdf",
+        "title": "V7_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 18,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:0c9c2c96b7cd9770ed69da0a3bc5d9d043b30a4c2479d0a720d906af0656bb7b",
+            "characters": 458,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "11.12.2024                                      Georg-August-Universität Göttingen                                2",
+              "*(1+i)-n",
+              "Annuitäten-",
+              "/Wiedergewinnungsfaktor",
+              "Barwerte und Endwerte spezieller Zahlungsreihen"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:6a5653275cbe367a5372a50a78479c7f4ad6cbf3455f0b14db07c8525182ac0d",
+            "characters": 482,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "11.12.2024                                          Georg-August-Universität Göttingen                        3",
+              "𝑍𝑡",
+              "(1 + 𝑖)𝑡",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "▪ Kapitalwertmethode und Endwertmethode (Net Present Value und Future Value Method)"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:ec177f8abb4ea7b44a805df9d60979aa063293515c623c113d8286422bf4f452",
+            "characters": 439,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "11.12.2024                                        Georg-August-Universität Göttingen                             4",
+              "*1,12",
+              "48,5 85,8",
+              "▪ Beispiel:",
+              "• Gegeben ist folgende Zahlungsreihe"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:42308595f84b340383fc51383f863a4ecd39b5efb11a9e2f253ef1fcfdcf8949",
+            "characters": 434,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "11.12.2024                                          Georg-August-Universität Göttingen                                    5",
+              "Aufteilung",
+              "Finanzierung",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "Zeitpunkt                       0                    1                                   2"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:777b62ed359ddfd913d5950b4e0ebf115cd6c0b1c83aa045ec5f518d85aef76f",
+            "characters": 384,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "11.12.2024                                                         Georg-August-Universität Göttingen          6",
+              "+Wertzuwachs",
+              "Finanzierung",
+              "/Vermögenszuwachs",
+              "Verfahren der dynamischen Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:e67009578ff8ef26915870c8ee835935e55dc7b1e24fa88832bd364216a2ec38",
+            "characters": 497,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "11.12.2024                                        Georg-August-Universität Göttingen                       7",
+              "Anlage am",
+              "(Eigenfinanzierung)",
+              "▪ Vermögensermittlung zum Zeitpunkt 2",
+              "Verfahren der dynamischen Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:23ac56704631f57a195e4b0282f232691146d782ceb98170cd2ad839a0170e82",
+            "characters": 685,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "11.12.2024                                         Georg-August-Universität Göttingen                              8",
+              "Alternative: Vermögen zwei",
+              "Jahre am Kapitalmarkt anlegen",
+              "• Unterscheidung: Endvermögen versus Endwert",
+              "Verfahren der dynamischen Investitionsrechnung"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:1aeb8e1c38b96b872f2121734ceef1431eaefdb84a7b11a89a3a3bade4ace2b5",
+            "characters": 485,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "11.12.2024                                            Georg-August-Universität Göttingen                                       9",
+              "1+𝑖 𝑡",
+              "RBF(n, i)",
+              "Barwert dem Kapitalwert entspricht.",
+              "▪ Annuitätenmethode (Annuity Method)"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:929edfdc2c7bd7bfdefd5a2f5bdd4fa7fabb2a7aea9b55256b2c18f92cf87cfe",
+            "characters": 599,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "11.12.2024                                       Georg-August-Universität Göttingen                                      10",
+              "1 + 0,1 2 ∗ 0,1            zuwachs",
+              "1 + 0,1 2 − 1              Restkredit                   100        70,14            0",
+              "▪ Ermittlung der Annuität",
+              "o Annuität: K0 / RBF(n, i)"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:3a4f5d6c9c0392fe836c5f2cd6f649c1e23cf9b77a90a5ff1559740c5a3d54e0",
+            "characters": 698,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "11.12.2024                                          Georg-August-Universität Göttingen                                                 11",
+              "𝑲𝟎",
+              "1+𝑖 𝑡",
+              "𝑅𝐵𝐹 (𝑛, 𝑖)",
+              "Annuität [nein]"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:6ccfeaf4a0dbb8f86775f117300730675dd0ca2fce6bd3965c734f3f35030678",
+            "characters": 545,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "11.12.2024                                          Georg-August-Universität Göttingen                                 12",
+              "Projekt 1   -100      110",
+              "▪ Projekte mit unterschiedlicher Laufzeit",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "Zeitpunkt 0           1             2            3       4"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:061227e59e13048faa62aa2f2d242a7267742e6666c07b210487a5945798e6a0",
+            "characters": 458,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "11.12.2024                                             Georg-August-Universität Göttingen                                     13",
+              "gerade (genau) Null ist.",
+              "liegenden Investition bzw. Finanzierung.",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "▪ Methode des Internen Zinsfußes (Internal Rate of Return Method)"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:0da9ca96cbdf3d0e9b3d1f6a70d31a79783c412b70fbf9d696e95ddcd07af6c1",
+            "characters": 387,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 6,
+            "headingCandidates": [
+              "1 + 𝑟∗",
+              "11.12.2024                                            Georg-August-Universität Göttingen          14",
+              "-A0                 E1",
+              "𝐸1",
+              "𝐴0"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:a6ec52031530bbd20ca5815e6a87c87f7285cd7cab3a2494c8b94d3df6c47cba",
+            "characters": 349,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 7,
+            "headingCandidates": [
+              "11.12.2024                                          Georg-August-Universität Göttingen         15",
+              "1 + 𝑟∗   1 + 𝑟∗ 2",
+              "-A0               E1       E2",
+              "𝑅 𝑅",
+              "𝐸1 𝐸1"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:0e634fd70b0257fd92abf4d948ee97755d34fe28010f97733c18b40bef699f18",
+            "characters": 320,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "11.12.2024                                             Georg-August-Universität Göttingen   16",
+              "E1     E2",
+              "A0     A0",
+              "E       E          𝐸1           𝐸1",
+              "A0      A0        2𝐴0          2𝐴0"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:ee6a411fb30a15ecaa41349109176dc73b3973b1ca75dc940bad0ddf00b48f6b",
+            "characters": 343,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 5,
+            "headingCandidates": [
+              "2                                                                          𝟐",
+              "11.12.2024                                               Georg-August-Universität Göttingen                                  17",
+              "𝐸1          𝐸1          E2",
+              "2𝐴0         2𝐴0          A0",
+              "𝐸1           𝐸1           E2"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:5c3ac2ad61179a02246199cfcd6ccc6b8af98fd12c3766cd287eca13232bd268",
+            "characters": 465,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 8,
+            "headingCandidates": [
+              "11.12.2024                                    Georg-August-Universität Göttingen                                              18",
+              "2 ∗ 100                2 ∗ 100           100",
+              "2 ∗ 100                 2 ∗ 100           100",
+              "▪ Beispiel",
+              "▪ Interner Zinsfuß im Beispiel"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v8-studip",
+        "path": "source-materials/Finanzwirtschaft/V8_StudIP.pdf",
+        "title": "V8_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 5,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:9f08d43079bb353a0165d3d3400d6581587f9370a7c6e1ab8a481f76322e9954",
+            "characters": 333,
+            "extractionHealth": "text-ok",
+            "taskSignals": 1,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "18.12.2024                                       Georg-August-Universität Göttingen   1",
+              "1 + 𝑟∗   1 + 𝑟∗ 2       1 + 𝑟∗ 𝑛",
+              "𝐸1       𝐸2             𝐸𝑛",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "▪ Formales Problem: Nullstellen der Kapitalwertfunktion"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:55f91aafe0ece4974158f4714574dc41088c82b57d22a609b2aef542f23e0173",
+            "characters": 702,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 1,
+            "headingCandidates": [
+              "18.12.2024                                          Georg-August-Universität Göttingen                                2",
+              "o [1] gleich Null,",
+              "o [1] gar keine Nullstellen,",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "▪ Cartesische Vorzeichenregel (nach René Descartes):"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:67aad3ee6dce58eb065b5f1aac2807c34d2adcdf440ecf378afde2f3a1a1fb90",
+            "characters": 267,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "18.12.2024                                Georg-August-Universität Göttingen                            3",
+              "▪ Beispiel: verschiedene Projekte",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "Projekt 1      -100         50                  40                     --",
+              "Projekt 4      -50          100                 -55                    --"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:259835163fe928d194a95e650e8330674ca3345b9e5e52e5f814143894c0670b",
+            "characters": 301,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "18.12.2024                                        Georg-August-Universität Göttingen                           4",
+              "• X-Achse: Zinssatz",
+              "für die Projekte und Einsetzung möglicher",
+              "Zinssätze                                          10",
+              "Verfahren der dynamischen Investitionsrechnung       40"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:110692c2b066831ca8e371825f8c1a15adef3662424262b9a339b42acc1f0e81",
+            "characters": 492,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "18.12.2024                                              Georg-August-Universität Göttingen       5",
+              "r* < i [Finanzierung vorteilhaft]",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "• Wahlproblem (bei sich ausschließenden Alternativen):",
+              "• Vorteilhaftigkeitsproblem (Ja/Nein – Entscheidungsregel)"
+            ]
+          }
+        ]
+      },
+      {
+        "sourceId": "finanzwirtschaft-lecture-slide-finanzwirtschaft-v9-studip",
+        "path": "source-materials/Finanzwirtschaft/V9_StudIP.pdf",
+        "title": "V9_StudIP.pdf",
+        "kind": "lecture-slide",
+        "pageCount": 26,
+        "extractionStatus": "indexed",
+        "pages": [
+          {
+            "page": 1,
+            "anchorId": "p001",
+            "textHash": "sha256:87cbd0e100a5fa57bc6edc30ba2f735ec6e559ccec455b584f8f4848b74d7928",
+            "characters": 106,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "EY-STIFTUNGSPROFESSUR FINANCIAL GOVERNANCE",
+              "Finanzwirtschaft",
+              "des Unternehmens",
+              "Professor Dr. Benedikt Downar"
+            ]
+          },
+          {
+            "page": 2,
+            "anchorId": "p002",
+            "textHash": "sha256:e7dc1f15d1adbfafe98e5016270f340b0a8c8ca13ce8c0632a113094081afb4a",
+            "characters": 556,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                      Georg-August-Universität Göttingen   2",
+              "▪ Ab 20.01.2025 Wechsel am…",
+              "• Montag 8-10 Uhr in Raum VG 3.103",
+              "• Montag 12-14 Uhr in Raum VG 4.102",
+              "• Montag16-18 Uhr in Raum Oec 1.162"
+            ]
+          },
+          {
+            "page": 3,
+            "anchorId": "p003",
+            "textHash": "sha256:6b7c879325817c46cf75fbf00929f787730b54217a8d5a33979556ed818a4431",
+            "characters": 520,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 7,
+            "headingCandidates": [
+              "08.01.2025                                           Georg-August-Universität Göttingen                                    3",
+              "▪ Beispiel",
+              "▪ Interpretation des Internen Zinsfußes",
+              "• Gegeben ist die folgende Zahlungsreihe",
+              "• (i) Rendite, Rentabilität (des Projektes)"
+            ]
+          },
+          {
+            "page": 4,
+            "anchorId": "p004",
+            "textHash": "sha256:c74980aa20f73e880388ce5426030e7e20abbe11718d9f34abd240a8126b28c5",
+            "characters": 496,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 8,
+            "headingCandidates": [
+              "08.01.2025                                             Georg-August-Universität Göttingen          4",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "Projekt 1               -100          48,5                         85,8        20%",
+              "Projekt 2               -100          0                            144         20%",
+              "• (i) Wiederanlage- und Refinanzierungsprämisse zu r*"
+            ]
+          },
+          {
+            "page": 5,
+            "anchorId": "p005",
+            "textHash": "sha256:160e28e7a20cc80e74f109f4bf57afe94a95e165edd79a516f7a3ddf95f648b7",
+            "characters": 398,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "08.01.2025                                              Georg-August-Universität Göttingen                5",
+              "• (ii) Beliebige Skalierbarkeit von Projekten",
+              "Verfahren der dynamischen Investitionsrechnung",
+              "Projekt 1       -1                  1,21                       21%              0,1",
+              "Projekt 3       -10.000             11.550                     15,5%            500"
+            ]
+          },
+          {
+            "page": 6,
+            "anchorId": "p006",
+            "textHash": "sha256:bee520c6e9e16931da07baf7bfbfe63d538c210e41e8e008c933b13bfb4ad0bf",
+            "characters": 415,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "08.01.2025                                       Georg-August-Universität Göttingen               6",
+              "𝑲𝟎",
+              "𝑅𝐵𝐹 (𝑛, 𝑖)",
+              "• Annuitätenmethode",
+              "• Kapitalwertmethode"
+            ]
+          },
+          {
+            "page": 7,
+            "anchorId": "p007",
+            "textHash": "sha256:d92dd2fb188c9a52fba76128eaa518b18c1b08ac741e10b40186349eb91258bc",
+            "characters": 610,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 9,
+            "headingCandidates": [
+              "08.01.2025                                         Georg-August-Universität Göttingen                                                7",
+              "𝐸𝑡",
+              "𝜕𝑖",
+              "𝑖→∞",
+              "gleichen Entscheidung im"
+            ]
+          },
+          {
+            "page": 8,
+            "anchorId": "p008",
+            "textHash": "sha256:b4bae1c2c69665e430e9b4900ef675132b4068bd0880603d34e26104e0e806cf",
+            "characters": 452,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 8,
+            "headingCandidates": [
+              "08.01.2025                                              Georg-August-Universität Göttingen                                               8",
+              "𝐴𝑡",
+              "𝜕𝑖",
+              "(1 + 𝑖)𝑡",
+              "𝜕𝐾0 (𝑖)"
+            ]
+          },
+          {
+            "page": 9,
+            "anchorId": "p009",
+            "textHash": "sha256:83419e4d4dc8e2617135307abb610914097f9cde26169f9b5ac364b377f2062c",
+            "characters": 475,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 13,
+            "headingCandidates": [
+              "08.01.2025                                             Georg-August-Universität Göttingen                            9",
+              "Projekt 3   -100        125",
+              "▪ Wahlproblem: Beispiel mit drei Projekten",
+              "Zusammenhang zwischen den finanzmathematischen Verfahren",
+              "Projekt 3                     13,64                                        25%"
+            ]
+          },
+          {
+            "page": 10,
+            "anchorId": "p010",
+            "textHash": "sha256:dfe9c55370fe6fc371f3f80cc1a1086ca14efb87d69cb1180552a9dd8bcfea6e",
+            "characters": 242,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "0                                                                            i",
+              "08.01.2025                             Georg-August-Universität Göttingen                                   10",
+              "0   0,05       0,1        0,15        0,2   0,25     0,3   0,35   0,4",
+              "IP1         IP2         IP3",
+              "der Ergebnisse"
+            ]
+          },
+          {
+            "page": 11,
+            "anchorId": "p011",
+            "textHash": "sha256:2458ab376b68b43b7f4b73f7bb084d7ade72c9d6cf2f50d5e8f68e354471fd09",
+            "characters": 538,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                            Georg-August-Universität Göttingen     11",
+              "• Argumente",
+              "Wahlentscheidungen führen.",
+              "▪ Frage: Welches Verfahren ist vorzuziehen?",
+              "Zusammenhang zwischen den finanzmathematischen Verfahren"
+            ]
+          },
+          {
+            "page": 12,
+            "anchorId": "p012",
+            "textHash": "sha256:5f443597b9a18af0c6a6cec29c13ac61f7a66cbdbcccc7cfc06ec76d749b47ff",
+            "characters": 562,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                            Georg-August-Universität Göttingen                      12",
+              "Investitionsentscheidungen",
+              "▪ Abschließende Bemerkungen",
+              "• Unvollkommene Kapitalmärkte",
+              "▪ Noch offene Problemstellungen:"
+            ]
+          },
+          {
+            "page": 13,
+            "anchorId": "p013",
+            "textHash": "sha256:09bae5685cbd2453e5e7f72629fa5d8e79ff07dfbb240081e21ba8ed3cb66f02",
+            "characters": 63,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025       Georg-August-Universität Göttingen   13",
+              "Ende Kapitel 4"
+            ]
+          },
+          {
+            "page": 14,
+            "anchorId": "p014",
+            "textHash": "sha256:e648837bc0b57b5b2ce5af83373ae3a08da915fb543d20d2a9addf768737ad4f",
+            "characters": 284,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                         Georg-August-Universität Göttingen   14",
+              "Agenda",
+              "• 5.1 Lernziele",
+              "• 5.3 Die Lösung von Entscheidungsproblemen bei Unsicherheit",
+              "• 5.2 Die Darstellung von Entscheidungsproblemen bei Unsicherheit"
+            ]
+          },
+          {
+            "page": 15,
+            "anchorId": "p015",
+            "textHash": "sha256:bd9c27111c200b407a2764d339c9dbbeafe335a2ea710dbb3015372771dcaa87",
+            "characters": 254,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                         Georg-August-Universität Göttingen         15",
+              "Lernziele",
+              "▪ Wie lässt sich Unsicherheit beschreibt?",
+              "▪ Wie lässt sich ein Entscheidungsproblem formal beschreiben?",
+              "▪ Wie lassen sich Investitions- und Finanzierungsentscheidungen unter Unsicherheit treffen?"
+            ]
+          },
+          {
+            "page": 16,
+            "anchorId": "p016",
+            "textHash": "sha256:ab159fbd52ca252e6f6299acca658ce1a19d387ca05ada0a801fa2061192c0e5",
+            "characters": 438,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                         Georg-August-Universität Göttingen         16",
+              "o Risiko",
+              "• Unsicherheit",
+              "o Ungewissheit",
+              "▪ Grundbegriffe"
+            ]
+          },
+          {
+            "page": 17,
+            "anchorId": "p017",
+            "textHash": "sha256:2b409c1224a357fe3d882e7dd3c168dab5e8476e410e3ee400b4b4c4cd9ebd86",
+            "characters": 434,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 4,
+            "headingCandidates": [
+              "08.01.2025                                     Georg-August-Universität Göttingen                             17",
+              "𝑝(S1 )         𝑝(S2 )            ⋯   𝑝(S𝑗 )   ⋯   𝑝(S𝐽 )",
+              "AL2        Z21             Z22             ⋯    Z2𝑗     ⋯    Z2𝐽",
+              "AL𝑖         Z𝑖1            Z𝑖2             ⋯    Z𝑖𝑗     ⋯    Z𝑖𝐽",
+              "AL𝐼         Z𝐼1            Z𝐼2             ⋯    Z𝐼𝑗     ⋯    Z𝐼𝐽"
+            ]
+          },
+          {
+            "page": 18,
+            "anchorId": "p018",
+            "textHash": "sha256:2872bf8a2bd87947c533ac35b060621aaad66ef733d3beff83cb4ad166f0eab7",
+            "characters": 397,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 3,
+            "headingCandidates": [
+              "08.01.2025                                           Georg-August-Universität Göttingen                    18",
+              "• Ziel: „Rendite“ (erwartete Höhe, Risiko)",
+              "S1: „schlecht“           S2: „mittel“           S3: „gut“",
+              "Die Darstellung von Entscheidungsproblemen bei Unsicherheit",
+              "AL3: Anlage 3         3%                       3%                     3%"
+            ]
+          },
+          {
+            "page": 19,
+            "anchorId": "p019",
+            "textHash": "sha256:dc0b240f4f1009459d8486bfe8bbad47bd9d716cb9786a0f7370cbdd94f1c2df",
+            "characters": 758,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                             Georg-August-Universität Göttingen                                  19",
+              "gilt:",
+              "Die Lösung von Entscheidungsproblemen bei Unsicherheit",
+              "Ergebnis von ALx ist strikt besser als ein Ergebnis von ALy.",
+              "▪ Dominanzkriterium zur Vorauswahl in Entscheidungsproblemen bei Unsicherheit"
+            ]
+          },
+          {
+            "page": 20,
+            "anchorId": "p020",
+            "textHash": "sha256:50b79a599cb910aff51db02465fa223b12054838f4cb5f839c8e54953dff1d7e",
+            "characters": 345,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                           Georg-August-Universität Göttingen               20",
+              "• Ziel: „Rendite“ (erwartete Höhe, Risiko)",
+              "S1: „schlecht“           S2: „mittel“           S3: „gut“",
+              "Die Darstellung von Entscheidungsproblemen bei Unsicherheit",
+              "AL3: Anlage 3         3%                       3%                     3%"
+            ]
+          },
+          {
+            "page": 21,
+            "anchorId": "p021",
+            "textHash": "sha256:16848a1aa6406ad4bd7ef28c4a503e6399c0fad0e2d1d3cf1bb3824ee356b962",
+            "characters": 653,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 12,
+            "headingCandidates": [
+              "2 ⋅ 𝑝(𝑧)",
+              "08.01.2025                                           Georg-August-Universität Göttingen                                    21",
+              "𝑍∗",
+              "Umweltzustände mit identischen Zahlungsansprüchen",
+              "𝑧∈Ƶ                                               𝑍"
+            ]
+          },
+          {
+            "page": 22,
+            "anchorId": "p022",
+            "textHash": "sha256:523c22486c6b1bcaebe4e4cfcf16461687594cf088aa81d8281714580038f5eb",
+            "characters": 503,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025                                           Georg-August-Universität Göttingen                                         22",
+              "AL 3           3%           3%               3%     3%               0",
+              "AL 1           -10%         10%              30%    10%              1/3",
+              "▪ Fortsetzung des Beispiels",
+              "Die Lösung von Entscheidungsproblemen bei Unsicherheit"
+            ]
+          },
+          {
+            "page": 23,
+            "anchorId": "p023",
+            "textHash": "sha256:e7afe6410367a2a083303aac5dbcc77a8628d5f7d350e505ba79281d76c5ca2c",
+            "characters": 343,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "08.01.2025                                        Georg-August-Universität Göttingen             23",
+              "Si                 S1                       S2                     S3",
+              "▪ Anwendung der Kapitalwertmethode bei Unsicherheit",
+              "Die Lösung von Entscheidungsproblemen bei Unsicherheit",
+              "𝐸        90                       110                    130"
+            ]
+          },
+          {
+            "page": 24,
+            "anchorId": "p024",
+            "textHash": "sha256:4cc3488d7eb4f1d2b9eb92dae846b33dceede27c6001f4694b47475703b67b11",
+            "characters": 326,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "08.01.2025                                          Georg-August-Universität Göttingen   24",
+              "𝐸(𝐸෨𝑡 )",
+              "(1 + 𝑖 + 𝑑)𝑡",
+              "• Risikozuschlagsmethode: d",
+              "Die Lösung von Entscheidungsproblemen bei Unsicherheit"
+            ]
+          },
+          {
+            "page": 25,
+            "anchorId": "p025",
+            "textHash": "sha256:897c2005bf3eafadb9b84e0d49b4dda65703f4ab67d5ea76c19583176008d7de",
+            "characters": 394,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 2,
+            "headingCandidates": [
+              "08.01.2025                                             Georg-August-Universität Göttingen   25",
+              "(1 + 𝑖)𝑡",
+              "𝐸(𝐸෨𝑡 ) − 𝐷",
+              "o Sicherheitsäquivalent:   𝐸(𝐸෨𝑡 ) − 𝐷",
+              "Die Lösung von Entscheidungsproblemen bei Unsicherheit"
+            ]
+          },
+          {
+            "page": 26,
+            "anchorId": "p026",
+            "textHash": "sha256:0d84316b52f231fbc06d68ff46036288df9158108ac15a2d20df31d2dc2cbceb",
+            "characters": 63,
+            "extractionHealth": "text-ok",
+            "taskSignals": 0,
+            "formulaSignals": 0,
+            "headingCandidates": [
+              "08.01.2025       Georg-August-Universität Göttingen   26",
+              "Ende Kapitel 5"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

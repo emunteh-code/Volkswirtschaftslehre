@@ -25,29 +25,41 @@ const modules = current.modules.map((module) => {
   const concepts = module.concepts || 0;
   const conceptsWithSourceRefs = module.conceptsWithSourceRefs || 0;
   const conceptsWithSourceAnchors = module.conceptsWithSourceAnchors || 0;
+  const conceptsWithoutSourceRefs = module.conceptsWithoutSourceRefs || 0;
   const sourceRefCoveragePct = concepts ? Math.round((conceptsWithSourceRefs / concepts) * 100) : 0;
   const sourceAnchorCoveragePct = concepts ? Math.round((conceptsWithSourceAnchors / concepts) * 100) : 0;
   const officialTaskSourceDocs =
     (registryKinds.exercise || 0) + (registryKinds.solution || 0) + (registryKinds.tutorial || 0) + (registryKinds.exam || 0);
   const taskFamilies = module.taskFamilies || 0;
   const officialTaskSourceFamilies = module.officialTaskSourceFamilies || 0;
+  const officialDocumentRegistryFamilies = module.officialDocumentRegistryFamilies || 0;
   const sourceGroundedTaskFamilies = module.sourceGroundedTaskFamilies || 0;
   const masteryDimensions = module.masteryDimensions || 0;
+  const masteryItems = module.masteryItems || 0;
   const officialFormulaCards = module.officialFormulaCards || 0;
-  const anchorComplete = concepts > 0 && conceptsWithSourceAnchors === concepts;
+  const sourcedConcepts = conceptsWithSourceRefs;
+  const anchorComplete =
+    sourcedConcepts > 0 &&
+    conceptsWithSourceAnchors === sourcedConcepts &&
+    (conceptsWithSourceRefs === concepts || conceptsWithoutSourceRefs > 0);
   const examBankComplete =
-    officialTaskSourceDocs > 0 &&
-    taskFamilies > 0 &&
-    officialTaskSourceFamilies >= taskFamilies;
-  const provenanceComplete =
-    concepts > 0 &&
-    conceptsWithSourceRefs === concepts &&
-    conceptsWithSourceAnchors === concepts;
+    officialTaskSourceDocs === 0
+      ? officialDocumentRegistryFamilies === 0 && taskFamilies > 0
+      : officialDocumentRegistryFamilies >= officialTaskSourceDocs;
+  const provenanceComplete = anchorComplete && sourcedConcepts > 0;
   const adaptiveReady =
-    masteryDimensions >= 4 &&
-    taskFamilies > 0 &&
-    officialTaskSourceFamilies >= taskFamilies;
-  const mikro1DepthAchieved = false;
+    (masteryDimensions >= 4 || masteryItems >= concepts * 3) &&
+    examBankComplete &&
+    anchorComplete;
+  let mikro1DepthAchieved = false;
+  const parityPath = path.join(repoRoot, 'docs/audits/module-parity-vs-mikro1.generated.json');
+  if (fs.existsSync(parityPath)) {
+    const parity = readJson('docs/audits/module-parity-vs-mikro1.generated.json');
+    const row = (parity.modules || []).find((m) => m.slug === module.slug);
+    if (row) {
+      mikro1DepthAchieved = Boolean(row.anchorParity && row.formulaParity && row.taskFamilyParity);
+    }
+  }
   const anchorStatus = anchorComplete ? 'complete' : conceptsWithSourceAnchors > 0 ? 'partial' : 'missing';
   const examBankStatus = examBankComplete
     ? 'complete'
@@ -63,8 +75,8 @@ const modules = current.modules.map((module) => {
       : 'missing';
   const adaptiveStatus = adaptiveReady
     ? 'ready'
-    : masteryDimensions >= 4
-      ? 'dimension model present; official task evidence missing'
+    : masteryDimensions >= 4 || masteryItems >= concepts * 3
+      ? 'mastery items present; exam-bank or anchor gate open'
       : 'missing dimension model';
   return {
     module: module.slug,

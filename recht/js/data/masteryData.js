@@ -1,81 +1,118 @@
-export const MASTERY = {
-  was_ist_recht: [
-    'Die Funktion des Rechts als verbindliche Ordnung erklären können',
-    'Normbezug und bloße Alltagswertung unterscheiden können',
-    'Rechtsfall und Gerechtigkeitsintuition methodisch trennen können'
-  ],
-  privatrecht: [
-    'Privatrecht innerhalb der Rechtsordnung einordnen können',
-    'Den Grundaufbau des BGB sicher beschreiben können',
-    'AT und besondere Teile für die Fallsuche verbinden können'
-  ],
-  methodik: [
-    'Die Anspruchsfrage „Wer will was von wem woraus?“ sicher anwenden können',
-    'Gutachtenstil strukturiert einsetzen können',
-    'Subsumtion als eigenständige Leistung beherrschen',
-    'Anspruch entstanden, untergegangen und durchsetzbar sauber trennen können'
-  ],
-  willenserklaerung: [
-    'Angebot, Annahme und Zugang sauber prüfen können',
-    'Schweigen, inneres Wollen und Kundgabe auseinanderhalten können',
-    'Vertragsschlussfälle sicher aufbauen können'
-  ],
-  dissens: [
-    'Offenen und versteckten Dissens sauber unterscheiden können',
-    'Die Konsensfrage methodisch vor Rechtsfolgen prüfen können',
-    'Dissensfälle von Anfechtungsfällen abgrenzen können',
-    'Falsa demonstratio von echtem Dissens abgrenzen können'
-  ],
-  anfechtung: [
-    'Dissens und Anfechtung klar unterscheiden können',
-    'Anfechtungsgrund, Erklärung und Frist vollständig prüfen können',
-    'Die Rechtsfolgen ex tunc und § 122 BGB einordnen können',
-    'Motivirrtum, Kalkulationsirrtum und echten Anfechtungsgrund sicher unterscheiden können'
-  ],
-  trennung_abstraktion: [
-    'Verpflichtungs- und Verfügungsgeschäft trennen können',
-    'Das Abstraktionsprinzip klausurfest erklären können',
-    'Eigentumslage und Rückabwicklung nicht vermischen'
-  ],
-  geschaeftsfaehigkeit: [
-    'Rechtsfähigkeit und Geschäftsfähigkeit nicht verwechseln',
-    'Minderjährigenfälle strukturiert prüfen können',
-    'Lediglich rechtlich vorteilhafte Geschäfte sauber erkennen'
-  ],
-  stellvertretung: [
-    'Eigene Willenserklärung, fremden Namen und Vertretungsmacht sicher prüfen können',
-    'Vertreter und Boten unterscheiden können',
-    'Die Folgen fehlender Vertretungsmacht einordnen können',
-    'Offenkundigkeit, Genehmigung und § 179 BGB methodisch sauber staffeln können'
-  ],
-  agb: [
-    'Einbeziehung und Inhaltskontrolle sauber trennen können',
-    'Überraschende Klauseln und unangemessene Benachteiligung erkennen können',
-    'AGB-Fälle in der richtigen Prüfungsreihenfolge aufbauen',
-    'Vorrang der Individualabrede gegenüber AGB sicher prüfen können'
-  ],
-  schuldrecht_intro: [
-    'Schuldverhältnis, Hauptpflicht und Nebenpflicht erklären können',
-    'Pflichtverletzungen dem richtigen Schuldverhältnis zuordnen können',
-    'Die Grundlogik des Schuldrechts AT sicher wiedergeben können',
-    'Schuldverhältnis und konkreten Anspruch sicher unterscheiden können'
-  ],
-  schadensersatz: [
-    'Das Grundschema des Schadensersatzes beherrschen',
-    'Schadensersatz neben und statt der Leistung abgrenzen können',
-    'Die Rolle der Fristsetzung sicher prüfen',
-    'Die richtige Schadensersatzschiene aus der Art der Störung ableiten können'
-  ],
-  ruecktritt: [
-    'Rücktritt als Leistungsstörungsrecht prüfen können',
-    'Rücktrittsvoraussetzungen und Rückgewährfolge trennen können',
-    'Rücktritt und Schadensersatz systematisch abgrenzen',
-    'Rücktritt, Anfechtung und freie Umentscheidung nicht verwechseln'
-  ],
-  verbraucherwiderruf: [
-    'Rücktritt und Verbraucherwiderruf normzweckbezogen unterscheiden können',
-    'Verbraucherwiderruf als Schutzrecht mit Fristsystem prüfen können',
-    'Widerruf als Verbraucherschutzinstrument sauber einordnen',
-    'Vertragstyp, Verbraucher-/Unternehmerrolle und § 355 BGB korrekt zusammendenken'
-  ]
-};
+// ============================================================
+// MASTERY DATA — Recht
+// Generated exam-readiness objectives (4 dimensions).
+// ============================================================
+
+import { CHAPTERS } from './chapters.js';
+import { FORMULA_CARDS_BY_CONCEPT } from './formulaCards.js';
+import { TASK_FAMILIES_BY_CONCEPT } from './taskFamilies.js';
+
+const DIMENSION_LABELS = Object.freeze({
+  recognition: 'Erkennen',
+  calculation: 'Rechnen',
+  derivation: 'Herleiten',
+  transfer: 'Transfer'
+});
+
+const SUPPLEMENTAL_CONCEPT_IDS = new Set([]);
+
+function objective({ dimension, label, sourceStatus, sourceAnchorIds = [], evidence = [] }) {
+  return {
+    dimension,
+    dimensionLabel: DIMENSION_LABELS[dimension] || dimension,
+    label,
+    sourceStatus,
+    sourceAnchorIds,
+    evidence
+  };
+}
+
+function firstAnchor(items) {
+  return items
+    .flatMap((item) =>
+      Array.isArray(item.sourceAnchorIds)
+        ? item.sourceAnchorIds
+        : Array.isArray(item.anchorIds)
+          ? item.anchorIds
+          : []
+    )
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function fallbackSourceStatus(conceptId, dimension) {
+  if (!SUPPLEMENTAL_CONCEPT_IDS.has(conceptId)) return 'source-distilled';
+  return dimension === 'calculation' || dimension === 'transfer'
+    ? 'platform-added-drill'
+    : 'platform-added-explanation';
+}
+
+export const MASTERY_DIMENSIONS = DIMENSION_LABELS;
+
+export const MASTERY = {};
+
+CHAPTERS.forEach((ch) => {
+  const formulaCards = FORMULA_CARDS_BY_CONCEPT[ch.id] || [];
+  const taskFamilies = TASK_FAMILIES_BY_CONCEPT[ch.id] || [];
+  const formulaAnchors = firstAnchor(formulaCards);
+  const taskAnchors = firstAnchor(taskFamilies);
+  const hasDirect = formulaCards.length > 0 || taskFamilies.some((f) => f.sourceStatus === 'direct-source');
+  const baseStatus = hasDirect ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
+
+  const items = [
+    objective({
+      dimension: 'recognition',
+      label: `Die Kurslogik von "${ch.title}" strukturiert wiedergeben können`,
+      sourceStatus: baseStatus,
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['self_check', 'concept_review']
+    })
+  ];
+
+  if (formulaCards.length) {
+    items.push(
+      objective({
+        dimension: 'calculation',
+        label: `Zentrale Formelkarte(n) zu "${ch.title}" korrekt anwenden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: formulaAnchors,
+        evidence: ['formula_card', 'portal_tasks']
+      })
+    );
+  }
+
+  if (taskFamilies.some((f) => f.officialTaskCoverage === 'official-document-registry')) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `Offizielle Übungs-/Klausur-Dokumente zu "${ch.title}" im Korpus finden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: taskAnchors,
+        evidence: ['official_document_registry']
+      })
+    );
+  } else if (taskFamilies.length) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `VL-Methode zu "${ch.title}" auf eine neue Zahlenkonstellation übertragen`,
+        sourceStatus: baseStatus,
+        sourceAnchorIds: taskAnchors,
+        evidence: ['task_family', 'step_problems']
+      })
+    );
+  }
+
+  items.push(
+    objective({
+      dimension: 'transfer',
+      label: `Prüfungsähnliche Aufgabe zu "${ch.title}" ohne Stichwortliste einordnen`,
+      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['mock_exam', 'self_check']
+    })
+  );
+
+  MASTERY[ch.id] = items;
+});
+

@@ -1,0 +1,29 @@
+name: Exam OS validate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/js/data/**'
+      - 'tools/exam-os/**'
+      - 'docs/audits/**'
+      - '.github/workflows/exam-os.yml'
+  pull_request:
+    paths:
+      - '**/js/data/**'
+      - 'tools/exam-os/**'
+      - 'docs/audits/**'
+      - '.github/workflows/exam-os.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exam-OS CI validate
+        run: node tools/exam-os/ci-validate.mjs
+      - name: Audit current state (no write)
+        run: node tools/exam-os/audit-current-state.mjs

@@ -76,6 +76,55 @@ export function filterStudentVisibleTaskFamilies(families) {
   return (Array.isArray(families) ? families : []).filter((family) => !isIngestionPlaceholderTaskFamily(family));
 }
 
+/**
+ * One task family per official exercise/solution/tutorial/exam PDF (document-level registry).
+ * Does not invent item-level tasks; satisfies exam-bank registry coverage until OCR/review.
+ */
+export function buildOfficialDocumentRegistryFamilies({
+  moduleSlug,
+  documents = [],
+  primaryPathsByConceptId = {}
+}) {
+  const normalized = normalizeOfficialTaskDocuments(documents);
+  const conceptForPath = new Map();
+  for (const [conceptId, paths] of Object.entries(primaryPathsByConceptId || {})) {
+    for (const p of paths || []) {
+      const base = toCleanString(p).split('/').pop();
+      if (base) conceptForPath.set(base.normalize('NFC'), conceptId);
+    }
+  }
+  const fallbackConcept = Object.keys(primaryPathsByConceptId || {})[0] || 'general';
+
+  return normalized.map((doc) => {
+    const base = doc.path.split('/').pop().normalize('NFC');
+    const conceptId = conceptForPath.get(base) || fallbackConcept;
+    return {
+      id: `${moduleSlug}.official-doc.${doc.id || base.replace(/\.pdf$/i, '')}`,
+      module: moduleSlug,
+      conceptId,
+      title: `${doc.sourceLabel}: ${doc.title}`,
+      topic: doc.kind,
+      method: `Offizielles Dokument im Korpus: ${doc.path}. Item-level Aufgaben-Mapping nur nach OCR/Review als official-task-source.`,
+      sourceStatus: 'direct-source',
+      sourceAnchorIds: [],
+      difficulty: 'offen',
+      expectedTimeMinutes: null,
+      examRelevance: 'hoch',
+      commonTraps: ['Dokument-Registry mit vollständig extrahierten Klausuraufgaben verwechseln'],
+      gradingRubric: ['Nur Metadaten-Registry bis Review abgeschlossen'],
+      currentCoverage: {
+        registry: doc.path,
+        mapping: 'document-level only'
+      },
+      officialTaskCoverage: 'official-document-registry',
+      officialTaskGap: doc.placeholderPolicy,
+      registryDocumentId: doc.id,
+      registryPath: doc.path,
+      registryKind: doc.kind
+    };
+  });
+}
+
 export function buildOfficialTaskFamilyPlaceholders({ moduleSlug, chapterIds = [], documents = [] }) {
   const summary = summarizeOfficialTaskDocuments(documents);
   return chapterIds.map((conceptId) => ({

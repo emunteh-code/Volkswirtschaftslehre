@@ -41,6 +41,7 @@ const MIKRO1_PRIMARY_REFS_CURATED = {
   cobbd: ['Vorlesungsfolien/Mikro_1_VL_4.pdf'],
   ces_u: ['Vorlesungsfolien/Mikro_1_VL_3.pdf', 'Vorlesungsfolien/Mikro_1_VL_4.pdf'],
   homothet: ['Vorlesungsfolien/Mikro_1_VL_3.pdf'],
+  psubst: ['Vorlesungsfolien/Mikro_1_VL_3.pdf'],
   hausopt: ['Vorlesungsfolien/Mikro_1_VL_3.pdf', 'Vorlesungsfolien/Mikro_1_VL_4.pdf'],
   marshall: ['Vorlesungsfolien/Mikro_1_VL_4.pdf'],
   elast: [

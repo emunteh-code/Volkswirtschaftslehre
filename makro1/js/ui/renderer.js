@@ -11,7 +11,9 @@ import { loadProgress, loadLastId } from '../state/storage.js';
 import { getDueCards } from '../features/srs.js';
 import { renderDashboard } from '../features/dashboard.js';
 import { checkAnswerWithTolerance } from '../utils/answerChecker.js';
-import { getConceptProvenance } from '../data/contentManifest.js';
+import { getConceptProvenance, getConceptSourceSummary } from '../data/contentManifest.js';
+import { FORMULA_CARDS_BY_CONCEPT } from '../data/formulaCards.js';
+import { TASK_FAMILIES_BY_CONCEPT } from '../data/taskFamilies.js';
 
 export const {
   renderContent,
@@ -43,6 +45,10 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
   getConceptProvenance,
+  getConceptSourceSummary,
+  sourceMaterialBaseUrl: '../source-materials/Makroökonomik I/',
+  formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
+  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT,
   extraHomeActionCardsHtml: `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startConceptSchnelltest()">
 <div class="hac-title">Konzept-Check</div>
 <div class="hac-desc">5 Minuten, typische Denkfallen</div>

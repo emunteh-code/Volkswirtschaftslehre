@@ -1,0 +1,616 @@
+{
+  "generatedAt": "2026-05-29",
+  "benchmark": {
+    "concepts": 33,
+    "sourceAnchors": 98,
+    "conceptsWithSourceAnchors": 33,
+    "taskFamilies": 52,
+    "sourceGroundedTaskFamilies": 51,
+    "officialFormulaCards": 78,
+    "portalTaskBlocks": 109,
+    "stepDrills": 39,
+    "theoryCharacters": 90727,
+    "masteryItems": 132
+  },
+  "modules": [
+    {
+      "slug": "mikro1",
+      "actual": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceRefs": 33,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 100,
+        "sourceAnchors": 100,
+        "conceptsWithSourceAnchors": 100,
+        "taskFamilies": 100,
+        "sourceGroundedTaskFamilies": 100,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 100,
+        "stepDrills": 100,
+        "theoryCharacters": 100,
+        "masteryItems": 100
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": []
+    },
+    {
+      "slug": "mikro2",
+      "actual": {
+        "concepts": 18,
+        "sourceAnchors": 47,
+        "conceptsWithSourceRefs": 15,
+        "conceptsWithSourceAnchors": 15,
+        "taskFamilies": 16,
+        "sourceGroundedTaskFamilies": 15,
+        "officialFormulaCards": 27,
+        "portalTaskBlocks": 42,
+        "stepDrills": 33,
+        "theoryCharacters": 29217,
+        "masteryItems": 66
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 55,
+        "sourceAnchors": 48,
+        "conceptsWithSourceAnchors": 45,
+        "taskFamilies": 31,
+        "sourceGroundedTaskFamilies": 29,
+        "officialFormulaCards": 35,
+        "portalTaskBlocks": 39,
+        "stepDrills": 85,
+        "theoryCharacters": 32,
+        "masteryItems": 50
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "makro1",
+      "actual": {
+        "concepts": 14,
+        "sourceAnchors": 28,
+        "conceptsWithSourceRefs": 14,
+        "conceptsWithSourceAnchors": 14,
+        "taskFamilies": 44,
+        "sourceGroundedTaskFamilies": 43,
+        "officialFormulaCards": 36,
+        "portalTaskBlocks": 49,
+        "stepDrills": 36,
+        "theoryCharacters": 37694,
+        "masteryItems": 56
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 42,
+        "sourceAnchors": 29,
+        "conceptsWithSourceAnchors": 42,
+        "taskFamilies": 85,
+        "sourceGroundedTaskFamilies": 84,
+        "officialFormulaCards": 46,
+        "portalTaskBlocks": 45,
+        "stepDrills": 92,
+        "theoryCharacters": 42,
+        "masteryItems": 42
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "makro2",
+      "actual": {
+        "concepts": 30,
+        "sourceAnchors": 60,
+        "conceptsWithSourceRefs": 30,
+        "conceptsWithSourceAnchors": 30,
+        "taskFamilies": 53,
+        "sourceGroundedTaskFamilies": 52,
+        "officialFormulaCards": 51,
+        "portalTaskBlocks": 78,
+        "stepDrills": 64,
+        "theoryCharacters": 41373,
+        "masteryItems": 120
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 91,
+        "sourceAnchors": 61,
+        "conceptsWithSourceAnchors": 91,
+        "taskFamilies": 102,
+        "sourceGroundedTaskFamilies": 102,
+        "officialFormulaCards": 65,
+        "portalTaskBlocks": 72,
+        "stepDrills": 164,
+        "theoryCharacters": 46,
+        "masteryItems": 91
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "oekonometrie",
+      "actual": {
+        "concepts": 32,
+        "sourceAnchors": 64,
+        "conceptsWithSourceRefs": 32,
+        "conceptsWithSourceAnchors": 32,
+        "taskFamilies": 66,
+        "sourceGroundedTaskFamilies": 65,
+        "officialFormulaCards": 45,
+        "portalTaskBlocks": 40,
+        "stepDrills": 70,
+        "theoryCharacters": 53699,
+        "masteryItems": 128
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 97,
+        "sourceAnchors": 65,
+        "conceptsWithSourceAnchors": 97,
+        "taskFamilies": 127,
+        "sourceGroundedTaskFamilies": 127,
+        "officialFormulaCards": 58,
+        "portalTaskBlocks": 37,
+        "stepDrills": 179,
+        "theoryCharacters": 59,
+        "masteryItems": 97
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": []
+    },
+    {
+      "slug": "statistik",
+      "actual": {
+        "concepts": 14,
+        "sourceAnchors": 42,
+        "conceptsWithSourceRefs": 14,
+        "conceptsWithSourceAnchors": 14,
+        "taskFamilies": 119,
+        "sourceGroundedTaskFamilies": 118,
+        "officialFormulaCards": 40,
+        "portalTaskBlocks": 65,
+        "stepDrills": 32,
+        "theoryCharacters": 29201,
+        "masteryItems": 56
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 42,
+        "sourceAnchors": 43,
+        "conceptsWithSourceAnchors": 42,
+        "taskFamilies": 229,
+        "sourceGroundedTaskFamilies": 231,
+        "officialFormulaCards": 51,
+        "portalTaskBlocks": 60,
+        "stepDrills": 82,
+        "theoryCharacters": 32,
+        "masteryItems": 42
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "mathematik",
+      "actual": {
+        "concepts": 14,
+        "sourceAnchors": 42,
+        "conceptsWithSourceRefs": 14,
+        "conceptsWithSourceAnchors": 14,
+        "taskFamilies": 55,
+        "sourceGroundedTaskFamilies": 54,
+        "officialFormulaCards": 55,
+        "portalTaskBlocks": 33,
+        "stepDrills": 28,
+        "theoryCharacters": 47737,
+        "masteryItems": 56
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 42,
+        "sourceAnchors": 43,
+        "conceptsWithSourceAnchors": 42,
+        "taskFamilies": 106,
+        "sourceGroundedTaskFamilies": 106,
+        "officialFormulaCards": 71,
+        "portalTaskBlocks": 30,
+        "stepDrills": 72,
+        "theoryCharacters": 53,
+        "masteryItems": 42
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": []
+    },
+    {
+      "slug": "finanzwirtschaft",
+      "actual": {
+        "concepts": 19,
+        "sourceAnchors": 38,
+        "conceptsWithSourceRefs": 19,
+        "conceptsWithSourceAnchors": 19,
+        "taskFamilies": 20,
+        "sourceGroundedTaskFamilies": 19,
+        "officialFormulaCards": 46,
+        "portalTaskBlocks": 64,
+        "stepDrills": 56,
+        "theoryCharacters": 34673,
+        "masteryItems": 76
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 58,
+        "sourceAnchors": 39,
+        "conceptsWithSourceAnchors": 58,
+        "taskFamilies": 38,
+        "sourceGroundedTaskFamilies": 37,
+        "officialFormulaCards": 59,
+        "portalTaskBlocks": 59,
+        "stepDrills": 144,
+        "theoryCharacters": 38,
+        "masteryItems": 58
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "jahresabschluss",
+      "actual": {
+        "concepts": 15,
+        "sourceAnchors": 30,
+        "conceptsWithSourceRefs": 15,
+        "conceptsWithSourceAnchors": 15,
+        "taskFamilies": 29,
+        "sourceGroundedTaskFamilies": 28,
+        "officialFormulaCards": 36,
+        "portalTaskBlocks": 42,
+        "stepDrills": 35,
+        "theoryCharacters": 24489,
+        "masteryItems": 60
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 45,
+        "sourceAnchors": 31,
+        "conceptsWithSourceAnchors": 45,
+        "taskFamilies": 56,
+        "sourceGroundedTaskFamilies": 55,
+        "officialFormulaCards": 46,
+        "portalTaskBlocks": 39,
+        "stepDrills": 90,
+        "theoryCharacters": 27,
+        "masteryItems": 45
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "recht",
+      "actual": {
+        "concepts": 14,
+        "sourceAnchors": 28,
+        "conceptsWithSourceRefs": 14,
+        "conceptsWithSourceAnchors": 14,
+        "taskFamilies": 32,
+        "sourceGroundedTaskFamilies": 31,
+        "officialFormulaCards": 47,
+        "portalTaskBlocks": 48,
+        "stepDrills": 39,
+        "theoryCharacters": 38320,
+        "masteryItems": 56
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 42,
+        "sourceAnchors": 29,
+        "conceptsWithSourceAnchors": 42,
+        "taskFamilies": 62,
+        "sourceGroundedTaskFamilies": 61,
+        "officialFormulaCards": 60,
+        "portalTaskBlocks": 44,
+        "stepDrills": 100,
+        "theoryCharacters": 42,
+        "masteryItems": 42
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    },
+    {
+      "slug": "internationale-wirtschaftsbeziehungen",
+      "actual": {
+        "concepts": 16,
+        "sourceAnchors": 32,
+        "conceptsWithSourceRefs": 16,
+        "conceptsWithSourceAnchors": 16,
+        "taskFamilies": 17,
+        "sourceGroundedTaskFamilies": 16,
+        "officialFormulaCards": 35,
+        "portalTaskBlocks": 41,
+        "stepDrills": 32,
+        "theoryCharacters": 29370,
+        "masteryItems": 64
+      },
+      "targets": {
+        "concepts": 33,
+        "sourceAnchors": 98,
+        "conceptsWithSourceAnchors": 33,
+        "taskFamilies": 52,
+        "sourceGroundedTaskFamilies": 51,
+        "officialFormulaCards": 78,
+        "portalTaskBlocks": 109,
+        "stepDrills": 39,
+        "theoryCharacters": 90727,
+        "masteryItems": 132
+      },
+      "pct": {
+        "concepts": 48,
+        "sourceAnchors": 33,
+        "conceptsWithSourceAnchors": 48,
+        "taskFamilies": 33,
+        "sourceGroundedTaskFamilies": 31,
+        "officialFormulaCards": 45,
+        "portalTaskBlocks": 38,
+        "stepDrills": 82,
+        "theoryCharacters": 32,
+        "masteryItems": 48
+      },
+      "layers": {
+        "sourceAnchorsJs": true,
+        "taskFamiliesJs": true,
+        "formulaCardsJs": true,
+        "officialTaskIngestionJs": true,
+        "contentManifestJs": true
+      },
+      "structuralComplete": true,
+      "anchorParity": true,
+      "formulaParity": true,
+      "taskFamilyParity": true,
+      "mikro1DepthScorecard": "not achieved",
+      "gaps": [
+        "theory volume <50% of mikro1"
+      ]
+    }
+  ]
+}

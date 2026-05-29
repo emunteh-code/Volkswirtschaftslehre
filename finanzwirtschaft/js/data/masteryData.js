@@ -1,97 +1,118 @@
-export const MASTERY = {
-  finanz_denkweise: [
-    'Zahlungsreihe, Bewertungszeitpunkt und Entscheidungskriterium sauber trennen können',
-    'Liquidität, Gewinn und Vermögenswirkung nicht verwechseln',
-    'Die finanzwirtschaftliche Denkweise als Entscheidungslogik erklären können'
-  ],
-  liquiditaetsplanung: [
-    'Kumulierte Zahlungsreihen auf Kapitalbedarf hin lesen können',
-    'Fristenkongruenz und goldene Bilanzregel wirtschaftlich interpretieren können',
-    'Rentabilität und kurzfristige Liquidität sauber unterscheiden können'
-  ],
-  kapitalmarkt_bewertung: [
-    'Kapitalmarktpreise als Zeittauschpreise deuten können',
-    'Zeitpräferenzen fachlich in Finanzentscheidungen einordnen können',
-    'Kapitalmarktorientierte Bewertungslogik von der institutionellen Perspektive trennen können'
-  ],
-  institutionen_marktunvollkommenheit: [
-    'Die Rolle von Banken und Institutionen über Marktfriktionen erklären können',
-    'Vollkommenen Kapitalmarkt als Benchmark statt als Realitätsbeschreibung einordnen können',
-    'Informations- und Transaktionskosten als Begründung institutioneller Arrangements nutzen können'
-  ],
-  intertemporale_wahl: [
-    'Budgetgerade, Ausstattungspunkt und Steigung korrekt interpretieren können',
-    'Sparen und Kreditaufnahme als zwei Richtungen desselben Zeittauschs lesen können',
-    'Die Tangentiallogik als Optimum von Marktpreis und Präferenz erklären können'
-  ],
-  kapitalwert_fisher: [
-    'Den Kapitalwert als Vermögensregel sicher anwenden können',
-    'Fisher-Separation präzise beschreiben können',
-    'Perfekten und unvollkommenen Kapitalmarkt nicht vermischen'
-  ],
-  auf_abzinsen: [
-    'Auf- und Abzinsung sicher auf einen Zielzeitpunkt beziehen können',
-    'Zeitachsenfehler aktiv vermeiden können',
-    'Gegenwarts- und Endwertlogik sicher trennen und verbinden können'
-  ],
-  renten_endwert: [
-    'Rentenbarwert- und Rentenendwertfaktoren korrekt auswählen und einsetzen können',
-    'Barwert- und Endwertsicht als äquivalente Bewertungszugriffe erklären können',
-    'Zahlungsstruktur und Zielzeitpunkt vor der Formelwahl sauber trennen können'
-  ],
-  annuitaeten_finanzplan: [
-    'Die Annuität als periodische Übersetzung des Kapitalwerts erklären können',
-    'Den vollständigen Finanzplan als periodische Finanzierungslogik lesen können',
-    'Laufzeit- und Vergleichbarkeitsprobleme bei Annuitäten erkennen können'
-  ],
-  izf_kapitalwertfunktion: [
-    'Den IZF als Nullstelle der Kapitalwertfunktion erklären können',
-    'Kapitalwertprofil und Vergleichszins gemeinsam interpretieren können',
-    'Rendite- und Werturteil nicht vermischen'
-  ],
-  izf_grenzen: [
-    'Mehrdeutige IZF-Fälle und Wiederanlageprobleme erkennen können',
-    'Skalierungsprobleme sauber gegen den Kapitalwert spiegeln können',
-    'Die Grenzen des IZF als Entscheidungsregel fachlich benennen können'
-  ],
-  unsicherheit: [
-    'Dominanz, Erwartungswert und Risiko logisch richtig anordnen können',
-    'Verlustwahrscheinlichkeit, Varianz und Erwartungswert zusammen lesen können',
-    'Unsicherheitsdarstellung von Risikokorrektur sauber trennen können'
-  ],
-  risikoadjustierter_kapitalwert: [
-    'Risikozuschlag und Sicherheitsabschlag als zwei Korrekturwege erklären können',
-    'Risiko konsistent im Zins oder in den Cashflows modellieren können',
-    'Doppelte Risikoberücksichtigung aktiv vermeiden können'
-  ],
-  bezugsrecht: [
-    'Ex-Kurs und Bezugsrechtswert sicher berechnen und deuten können',
-    'Verwässerungsschutz der Altaktionäre korrekt erklären können',
-    'Kapitalerhöhung nicht nur als Mittelzufluss, sondern als Wertproblem lesen können'
-  ],
-  eigenkapitalkosten: [
-    'Eigenkapitalkosten aus Aktienpreisen und Dividenden ableiten können',
-    'Die Kostenlogik des Eigenkapitals als Renditeforderung der Anteilseigner erklären können',
-    'Formel, Ergebnis und Entscheidungsbedeutung bei Eigenkapitalkosten verknüpfen können'
-  ],
-  fremdkapitalkosten: [
-    'Fremdkapitalkosten und Skontokosten wirtschaftlich interpretieren können',
-    'Nominalzins und effektive Finanzierungskosten sauber unterscheiden können',
-    'Kapitalkosten als Opportunitätskosten der Finanzierung lesen können'
-  ],
-  wacc: [
-    'WACC korrekt aufbauen und als gemischten Kapitalkostensatz interpretieren können',
-    'Die Einsatzvoraussetzungen eines WACC benennen können',
-    'Teilkosten und Gewichtungslogik gemeinsam in einer Begründung darstellen können'
-  ],
-  wacc_leverage: [
-    'Leverage immer als Rendite-Risiko-Doppelwirkung lesen können',
-    'Die Bedingung für positiven Hebeleffekt fachlich korrekt benennen können',
-    'Eigenkapitalrendite und Eigenkapitalrisiko nicht getrennt voneinander erklären'
-  ],
-  modigliani_miller: [
-    'Modigliani-Miller als Benchmark und nicht als Realitätsbeschreibung einordnen können',
-    'Die strengen Annahmen der Irrelevanzthese benennen können',
-    'Reale Abweichungen über Marktfriktionen begründen können'
-  ]
-};
+// ============================================================
+// MASTERY DATA — Finanzwirtschaft
+// Generated exam-readiness objectives (4 dimensions).
+// ============================================================
+
+import { CHAPTERS } from './chapters.js';
+import { FORMULA_CARDS_BY_CONCEPT } from './formulaCards.js';
+import { TASK_FAMILIES_BY_CONCEPT } from './taskFamilies.js';
+
+const DIMENSION_LABELS = Object.freeze({
+  recognition: 'Erkennen',
+  calculation: 'Rechnen',
+  derivation: 'Herleiten',
+  transfer: 'Transfer'
+});
+
+const SUPPLEMENTAL_CONCEPT_IDS = new Set([]);
+
+function objective({ dimension, label, sourceStatus, sourceAnchorIds = [], evidence = [] }) {
+  return {
+    dimension,
+    dimensionLabel: DIMENSION_LABELS[dimension] || dimension,
+    label,
+    sourceStatus,
+    sourceAnchorIds,
+    evidence
+  };
+}
+
+function firstAnchor(items) {
+  return items
+    .flatMap((item) =>
+      Array.isArray(item.sourceAnchorIds)
+        ? item.sourceAnchorIds
+        : Array.isArray(item.anchorIds)
+          ? item.anchorIds
+          : []
+    )
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function fallbackSourceStatus(conceptId, dimension) {
+  if (!SUPPLEMENTAL_CONCEPT_IDS.has(conceptId)) return 'source-distilled';
+  return dimension === 'calculation' || dimension === 'transfer'
+    ? 'platform-added-drill'
+    : 'platform-added-explanation';
+}
+
+export const MASTERY_DIMENSIONS = DIMENSION_LABELS;
+
+export const MASTERY = {};
+
+CHAPTERS.forEach((ch) => {
+  const formulaCards = FORMULA_CARDS_BY_CONCEPT[ch.id] || [];
+  const taskFamilies = TASK_FAMILIES_BY_CONCEPT[ch.id] || [];
+  const formulaAnchors = firstAnchor(formulaCards);
+  const taskAnchors = firstAnchor(taskFamilies);
+  const hasDirect = formulaCards.length > 0 || taskFamilies.some((f) => f.sourceStatus === 'direct-source');
+  const baseStatus = hasDirect ? 'direct-source' : fallbackSourceStatus(ch.id, 'recognition');
+
+  const items = [
+    objective({
+      dimension: 'recognition',
+      label: `Die Kurslogik von "${ch.title}" strukturiert wiedergeben können`,
+      sourceStatus: baseStatus,
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['self_check', 'concept_review']
+    })
+  ];
+
+  if (formulaCards.length) {
+    items.push(
+      objective({
+        dimension: 'calculation',
+        label: `Zentrale Formelkarte(n) zu "${ch.title}" korrekt anwenden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: formulaAnchors,
+        evidence: ['formula_card', 'portal_tasks']
+      })
+    );
+  }
+
+  if (taskFamilies.some((f) => f.officialTaskCoverage === 'official-document-registry')) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `Offizielle Übungs-/Klausur-Dokumente zu "${ch.title}" im Korpus finden`,
+        sourceStatus: 'direct-source',
+        sourceAnchorIds: taskAnchors,
+        evidence: ['official_document_registry']
+      })
+    );
+  } else if (taskFamilies.length) {
+    items.push(
+      objective({
+        dimension: 'derivation',
+        label: `VL-Methode zu "${ch.title}" auf eine neue Zahlenkonstellation übertragen`,
+        sourceStatus: baseStatus,
+        sourceAnchorIds: taskAnchors,
+        evidence: ['task_family', 'step_problems']
+      })
+    );
+  }
+
+  items.push(
+    objective({
+      dimension: 'transfer',
+      label: `Prüfungsähnliche Aufgabe zu "${ch.title}" ohne Stichwortliste einordnen`,
+      sourceStatus: fallbackSourceStatus(ch.id, 'transfer'),
+      sourceAnchorIds: [...new Set([...formulaAnchors, ...taskAnchors])],
+      evidence: ['mock_exam', 'self_check']
+    })
+  );
+
+  MASTERY[ch.id] = items;
+});
+

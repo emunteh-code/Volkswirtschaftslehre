@@ -3,10 +3,12 @@
 // Provenance + mode index with explicit curriculum/R adapter notes.
 // ============================================================
 
+import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 import { createProvenance } from '../../../assets/js/portal-core/data/provenance.js';
 import { buildProvenanceByConceptFromPrimaryRefs } from '../../../assets/js/portal-core/data/learningObjectNormalize.js';
 import { buildConceptModeIndex } from '../../../assets/js/portal-core/data/modeIndex.js';
 import { buildContentManifestBridgePayload } from '../../../assets/js/portal-core/data/contentManifestAdapters.js';
+import { OEKONOMETRIE_SOURCE_ANCHORS } from './sourceAnchors.js';
 import { CHAPTERS, CONTENT } from './chapters.js';
 import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
@@ -111,6 +113,7 @@ export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
   primaryPathsByConceptId: OEKONOMETRIE_CONCEPT_PRIMARY_REFS,
   moduleSlug: MODULE_SLUG,
+  anchorsByConceptId: OEKONOMETRIE_SOURCE_ANCHORS,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,
   hasIntuition: (id) => Boolean(INTUITION[id]),
@@ -182,4 +185,14 @@ export function getConceptProvenance(conceptId) {
 
 export function getConceptModeIndex(conceptId) {
   return OEKONOMETRIE_MODE_INDEX[conceptId] || null;
+}
+
+
+export function getConceptSourceSummary(conceptId) {
+  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
+    anchoredTitle: 'Direkte Seitenanker vorhanden.',
+    referencedTitle: 'Offizielle Referenz vorhanden, aber noch ohne geprüfte Seitenanker.',
+    supplementalTitle: 'Platform-added support ohne direkten offiziellen Quellenanker.',
+    platformTitle: 'Platform-added support; VL-Referenz oder Seitenanker fehlt noch.'
+  });
 }

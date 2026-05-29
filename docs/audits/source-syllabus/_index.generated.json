@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-05-28",
+  "modules": [
+    {
+      "module": "finanzwirtschaft",
+      "pdfs": 12,
+      "pages": 223,
+      "weakPages": 0,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/finanzwirtschaft.generated.json"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "pdfs": 20,
+      "pages": 562,
+      "weakPages": 4,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/internationale-wirtschaftsbeziehungen.generated.json"
+    },
+    {
+      "module": "jahresabschluss",
+      "pdfs": 34,
+      "pages": 366,
+      "weakPages": 0,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/jahresabschluss.generated.json"
+    },
+    {
+      "module": "makro1",
+      "pdfs": 47,
+      "pages": 701,
+      "weakPages": 6,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/makro1.generated.json"
+    },
+    {
+      "module": "makro2",
+      "pdfs": 32,
+      "pages": 408,
+      "weakPages": 1,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/makro2.generated.json"
+    },
+    {
+      "module": "mathematik",
+      "pdfs": 50,
+      "pages": 1093,
+      "weakPages": 0,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/mathematik.generated.json"
+    },
+    {
+      "module": "mikro1",
+      "pdfs": 27,
+      "pages": 381,
+      "weakPages": 4,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/mikro1.generated.json"
+    },
+    {
+      "module": "mikro2",
+      "pdfs": 25,
+      "pages": 348,
+      "weakPages": 13,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/mikro2.generated.json"
+    },
+    {
+      "module": "oekonometrie",
+      "pdfs": 42,
+      "pages": 1280,
+      "weakPages": 180,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/oekonometrie.generated.json"
+    },
+    {
+      "module": "recht",
+      "pdfs": 29,
+      "pages": 477,
+      "weakPages": 2,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/recht.generated.json"
+    },
+    {
+      "module": "statistik",
+      "pdfs": 163,
+      "pages": 2040,
+      "weakPages": 132,
+      "written": "/Users/enowmunteh/Desktop/Lernportal/docs/audits/source-syllabus/statistik.generated.json"
+    }
+  ]
+}

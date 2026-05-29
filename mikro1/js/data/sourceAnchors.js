@@ -1,11 +1,11 @@
 // ============================================================
 // SOURCE ANCHORS — Mikroökonomik I
-// Reviewed page-level anchors for official VL reconstruction (pass 1–4).
+// Reviewed page-level anchors for official VL reconstruction (pass 1–5).
 // No source text stored; quoteFingerprint hashes the reviewed section label.
 // ============================================================
 
 const REVIEWED_AT = '2026-05-28';
-const REVIEWED_BY = 'codex-source-pass-mikro1-anchors-4';
+const REVIEWED_BY = 'codex-source-pass-mikro1-anchors-5';
 
 function anchor({
   id,
@@ -1027,6 +1027,28 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Homogenitätsgrad homogener Produktionsfunktionen',
       fingerprint: '4ab56eee1b6f404b',
       confidence: 0.9
+    })
+  ],
+  psubst: [
+    anchor({
+      id: 'mikro1.psubst.vl03.p05.ik-kruemmung-sigma-inf',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 5,
+      section: 'SE und Krümmung der Indifferenzkurven — Grenzfall σ→∞',
+      fingerprint: '8de9a0026fb49591',
+      confidence: 0.86
+    }),
+    anchor({
+      id: 'mikro1.psubst.vl03.p08.ces-sigma-limit',
+      sourceId: 'mikro1-lecture-slide-mikrookonomik-i-vorlesungsfolien-mikro-1-vl-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_1_VL_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 8,
+      section: 'CES-Nutzenfunktion — σ = 1/(1−ρ)',
+      fingerprint: '9efab1137gc5a6a2',
+      confidence: 0.85
     })
   ],
   grts: [

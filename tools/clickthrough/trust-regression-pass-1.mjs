@@ -171,7 +171,11 @@ const PROVENANCE_EXPECT = [
   { route: '/jahresabschluss/index.html', id: 'buchen_konten', label: 'jahresabschluss/buchen_konten', expectCoverage: 'refs' },
   { route: '/recht/index.html', id: 'was_ist_recht', label: 'recht/was_ist_recht', expectCoverage: 'refs' },
   { route: '/internationale-wirtschaftsbeziehungen/index.html', id: 'ricardo', label: 'iwb/ricardo', expectCoverage: 'refs' },
-  { route: '/mathematik/index.html', id: 'algebra_mengen', label: 'mathematik/algebra_mengen', expectCoverage: 'refs' },
+  { route: '/mathematik/index.html', id: 'algebra_mengen', label: 'mathematik/algebra_mengen', expectCoverage: 'page-anchors' },
+  { route: '/mathematik/index.html', id: 'lagrange', label: 'mathematik/lagrange', expectCoverage: 'page-anchors' },
+  { route: '/mathematik/index.html', id: 'analysis_ableitung_grundlagen', label: 'mathematik/analysis_ableitung_grundlagen', expectCoverage: 'page-anchors' },
+  { route: '/mathematik/index.html', id: 'integralrechnung', label: 'mathematik/integralrechnung', expectCoverage: 'page-anchors' },
+  { route: '/mathematik/index.html', id: 'lineare_algebra_grundlagen', label: 'mathematik/lineare_algebra_grundlagen', expectCoverage: 'page-anchors' },
   { route: '/oekonometrie/index.html', id: 'matrix_notation', label: 'oeko/matrix_notation', expectCoverage: 'refs' },
   { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch', expectCoverage: 'page-anchors' }
 ];

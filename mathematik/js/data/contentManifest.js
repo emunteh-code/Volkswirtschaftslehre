@@ -20,6 +20,8 @@ import {
 } from './srsConfig.js';
 import { COURSE_CONFIG } from './courseConfig.js';
 import { FULL_EXAMS } from './fullExams.js';
+import { MATHEMATIK_SOURCE_ANCHORS } from './sourceAnchors.js';
+import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 
 const MODULE_SLUG = 'mathematik';
 
@@ -44,6 +46,7 @@ const NOTES_TASKS = 'Guided Aufgaben remain source-distilled from lecture and Kl
 export const PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
   chapters: CHAPTERS,
   primaryPathsByConceptId: MATHEMATIK_CONCEPT_PRIMARY_REFS,
+  anchorsByConceptId: MATHEMATIK_SOURCE_ANCHORS,
   moduleSlug: MODULE_SLUG,
   hasGraph: (id) => GRAPH_CONCEPTS.has(id),
   hasStepProblems: (id) => Array.isArray(STEP_PROBLEMS[id]) && STEP_PROBLEMS[id].length > 0,
@@ -113,6 +116,15 @@ export function getMathematikContentManifestBridgePayload() {
 
 export function getConceptProvenance(conceptId) {
   return PROVENANCE_BY_CONCEPT[conceptId] || null;
+}
+
+export function getConceptSourceSummary(conceptId) {
+  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
+    anchoredTitle: 'Direkte Mathematik-Seitenanker vorhanden.',
+    referencedTitle: 'Offizielle Mathematik-Referenz vorhanden, aber noch ohne geprüfte Seitenanker.',
+    supplementalTitle: 'Platform-added support ohne direkten offiziellen Quellenanker.',
+    platformTitle: 'Platform-added support; VL-Referenz oder Seitenanker fehlt noch.'
+  });
 }
 
 export function getConceptModeIndex(conceptId) {

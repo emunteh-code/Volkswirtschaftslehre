@@ -58,9 +58,20 @@ export function createSourceCompanionModule({ renderMath } = {}) {
     chapters: CHAPTERS,
     provenanceByConcept: PROVENANCE_BY_CONCEPT,
     getLectureSortKey: lectureSortKey,
+    shouldShowUnanchoredConcept: (concept) => !concept.hasPageAnchors,
+    includeAnchorMetadata: true,
     renderTaskArchivePanel,
-    headerDescription: 'Starte bei den offiziellen Mathematik-Dokumenten und prüfe transparent, welche Portal-Konzepte nur referenziert oder bereits page-level verankert sind.',
-    matrixNote: 'Mathematik hat document-level Quellenbezüge. Für source-parity fehlen noch systematische page-level Seitenanker.',
+    headerDescription:
+      'Starte bei den offiziellen Mathematik-Dokumenten und prüfe transparent, welche Portal-Konzepte file-level referenziert sind und wo page-level Anker noch fehlen.',
+    matrixNote:
+      'Diese Matrix zeigt den Mapping-Status. File-level Referenzen sind Orientierung — source-complete erst mit reviewed page anchors.',
+    unanchoredTitle: 'Portalinhalt ohne geprüften Seitenanker',
+    unanchoredDescription:
+      'Konzepte mit Dokument-Referenz, aber ohne reviewed page anchor, bleiben sichtbar bis der page-level Pass abgeschlossen ist.',
+    unanchoredTag: 'file-level reference',
+    unanchoredStatus: 'Noch nicht als page-anchored source-complete zertifiziert.',
+    localSourceHint:
+      'Dieser Button prüft zuerst, ob <code>source-materials/Mathematik/</code> verfügbar ist. Konzeptanker öffnen die passende Datei mit Seitenfragment, sofern vorhanden.',
     detailGapBody: 'Dieses Dokument ist im offiziellen Mathematik-Korpus registriert, aber aktuell verweist kein Portal-Konzept direkt darauf. Es muss in einem nächsten Source-Parity-Pass eingeordnet werden.',
     coverageGapBody: 'Dieses Dokument liegt im Mathematik-Korpus, ist aber noch keinem Portal-Konzept, keinem Portal-Layer und keinem geprüften Seitenanker direkt zugeordnet.'
   }, { renderMath });

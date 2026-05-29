@@ -22,7 +22,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Official task families | Formula cards | Mastery dimensions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `mikro1` | 97% | 97% | 96 | 0 | 18 | 0 | 0 | 0 |
+| `mikro1` | 97% | 97% | 96 | 10 | 18 | 0 | 0 | 0 |
 | `mikro2` | 83% | 83% | 47 | 12 | 0 | 0 | 8 | 4 |
 | `makro1` | 100% | 0% | 0 | 1 | 29 | 0 | 0 | 0 |
 | `makro2` | 100% | 0% | 0 | 1 | 22 | 0 | 0 | 0 |

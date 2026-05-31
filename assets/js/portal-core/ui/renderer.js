@@ -762,15 +762,17 @@ ${answerMarkup}
     currentTab = nextTab;
   }
 
+  function hasTaskFamilies(conceptId) {
+    return filterStudentVisibleTaskFamilies(taskFamiliesByConcept[conceptId]).length > 0;
+  }
+
   function renderPracticePanel(entry, conceptId) {
     const chapter = chapters.find((item) => item.id === conceptId);
     const intuition = intuitionById[conceptId];
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
-    const taskFamiliesHtml = renderTaskFamilyPanel(conceptId);
-    const practiceSourceNotice = renderPracticeSourceNotice(conceptId);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${practiceSourceNotice}${taskFamiliesHtml}${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
       return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
     }
@@ -785,8 +787,6 @@ ${answerMarkup}
 <p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
 </div>
 </div>
-${practiceSourceNotice}
-${taskFamiliesHtml}
 <div class="practice-section-header">Geführte Aufgaben</div>
 ${renderGuidedTasks(tasks)}`;
     if (chapter) {
@@ -796,40 +796,13 @@ ${renderGuidedTasks(tasks)}`;
     return html;
   }
 
-  function renderPracticeSourceNotice(conceptId) {
-    const taskLayer = getConceptProvenance(conceptId)?.tasks;
-    if (!taskLayer) return "";
-    const refs = Array.isArray(taskLayer.source_refs) ? taskLayer.source_refs.length : 0;
-    const anchors = Array.isArray(taskLayer.source_anchors) ? taskLayer.source_anchors.length : 0;
-    const status = taskLayer.source_status || "unknown";
-    const label = status === "platform-added-drill"
-      ? "Platform-added drill"
-      : status === "direct-source"
-        ? "Direct source"
-        : status === "source-distilled"
-          ? "Source-distilled"
-          : status;
-    const evidence = anchors
-      ? `${anchors} Seitenanker`
-      : refs
-        ? `${refs} Quellenreferenz${refs === 1 ? "" : "en"}`
-        : "kein direkter Quellenanker";
-    const note = taskLayer.notes || "Diese Aufgaben sind nach Provenienzmetadaten klassifiziert.";
-    return `<aside class="practice-source-notice practice-source-notice--${escapeHtml(status)}" role="note">
-<div>
-<span>Aufgabenstatus</span>
-<strong>${escapeHtml(label)}</strong>
-</div>
-<p>${renderSemanticPlainText(note)}</p>
-<em>${escapeHtml(evidence)}</em>
-</aside>`;
-  }
-
   function renderTaskFamilyPanel(conceptId) {
     const families = filterStudentVisibleTaskFamilies(taskFamiliesByConcept[conceptId]);
     if (!families.length) return "";
-    return `<div class="section-block task-family-layer">
-<h3>Klausurfamilien</h3>
+    return `<div class="section-block task-family-layer formula-klausurmethodik">
+<span class="quellen-panel-kicker">Prüfungsvorbereitung</span>
+<h3>Klausurmethodik</h3>
+<p class="formula-klausurmethodik-intro">Typische Klausuraufgabentypen zu diesem Konzept: Methode, typische Fallen und Bewertungslogik. Die geführten Übungsaufgaben findest du im Tab Aufgaben; Quellen und Seitenanker im Tab Quellen.</p>
 <div class="task-family-grid">
 ${families.map(renderTaskFamilyCard).join("")}
 </div>
@@ -899,11 +872,15 @@ ${family.officialTaskGap ? `<p class="task-family-card__warning">${renderSemanti
   }
 
   function renderFormulaPanel(entry) {
-    if (!hasFormulas(entry)) {
+    const taskFamiliesHtml = renderTaskFamilyPanel(current);
+    const formulaCards = Array.isArray(formulaCardsByConcept[current]) ? formulaCardsByConcept[current] : [];
+    const hasFormulaGrid = hasFormulas(entry);
+    if (!hasFormulaGrid && !taskFamiliesHtml) {
       return '<div class="panel active"></div>';
     }
-    const formulaCards = Array.isArray(formulaCardsByConcept[current]) ? formulaCardsByConcept[current] : [];
-    let html = '<div class="panel active"><div class="formula-grid">';
+    let html = '<div class="panel active">';
+    if (hasFormulaGrid) {
+      html += '<div class="formula-grid">';
     entry.formeln.forEach((formula, formulaIndex) => {
       const layoutClass = classifyFormulaCardLayout(formula);
       const displayMode = getDisplayMode(formula.eq) || "math";
@@ -938,6 +915,10 @@ ${supportNote}
 ${formulaCards.map(renderFormulaCardProof).join("")}
 </div>
 </div>`;
+    }
+    }
+    if (taskFamiliesHtml) {
+      html += taskFamiliesHtml;
     }
     html += "</div>";
     return html;
@@ -1083,7 +1064,7 @@ ${renderExamPatterns(data)}
 
     const tabAvailability = {
       graph: graphConcepts.has(conceptId),
-      formeln: hasFormulas(entry),
+      formeln: hasFormulas(entry) || hasTaskFamilies(conceptId),
       intuition:
         hasMeaningfulIntuition(intuitionById[conceptId]) || hasPortalIntuitionSurface(conceptId),
       quellen: hasConceptQuellenContent(getConceptProvenance(conceptId)),
@@ -1202,7 +1183,7 @@ ${motivationStrip}
       );
     }
 
-    if (activeTab !== "quellen") {
+    if (activeTab !== "quellen" && activeTab !== "aufgaben") {
       const provenanceStrip = buildConceptProvenanceStripHtml({
         conceptId,
         activeTab,

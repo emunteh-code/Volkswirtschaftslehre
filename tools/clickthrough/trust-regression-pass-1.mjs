@@ -180,11 +180,22 @@ const PROVENANCE_EXPECT = [
   { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch', expectCoverage: 'page-anchors' }
 ];
 
-/** Provenance strip must survive non-theorie tabs (same createRenderer path). */
+/** Provenance strip must survive non-theorie tabs (same createRenderer path). Aufgaben is practice-only — no strip. */
 const PROVENANCE_TAB_EXTRA = [
-  { route: '/mikro1/index.html', id: 'budget', tab: 'aufgaben', label: 'mikro1/budget/aufgaben' },
   { route: '/statistik/index.html', id: 'bivariat', tab: 'graph', label: 'statistik/bivariat/graph' },
   { route: '/oekonometrie/index.html', id: 'matrix_notation', tab: 'r-anwendung', label: 'oeko/matrix_notation/r-anwendung' }
+];
+
+/** Aufgaben tab must stay practice-only: no provenance strip, no task-family layer, no practice-source notice. */
+const AUFGABEN_PRACTICE_ONLY = [
+  { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/aufgaben' },
+  { route: '/statistik/index.html', id: 'deskriptiv', label: 'statistik/deskriptiv/aufgaben' }
+];
+
+/** Klausurmethodik (task families) live on Formeln tab when data exists. */
+const FORMELN_KLAUSURMETHODIK = [
+  { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/formeln' },
+  { route: '/statistik/index.html', id: 'deskriptiv', label: 'statistik/deskriptiv/formeln' }
 ];
 
 async function runProvenance(page) {
@@ -289,6 +300,108 @@ async function runProvenance(page) {
         viewport: '1280',
         type: 'footer-regression',
         why: `Provenance strip missing or weak on tab (foot=${snap.footCount}, mark=${snap.hasMark}, len=${snap.lineLen}).`
+      });
+    }
+  }
+}
+
+async function runAufgabenPracticeOnly(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const c of AUFGABEN_PRACTICE_ONLY) {
+    await gotoConcept(page, c.route, c.id);
+    const opened = await clickTab(page, 'aufgaben');
+    if (!opened) {
+      fail({
+        system: 'aufgaben-practice-only',
+        route: c.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'tab-missing',
+        why: 'Aufgaben tab missing for practice-only spot check.'
+      });
+      continue;
+    }
+    await page.waitForTimeout(400);
+    const snap = await page.evaluate(() => ({
+      provenanceFooters: document.querySelectorAll('#content footer.source-provenance').length,
+      taskFamilyLayers: document.querySelectorAll('#content .task-family-layer').length,
+      practiceSourceNotices: document.querySelectorAll('#content .practice-source-notice').length,
+      klausurfamilienHeadings: [...document.querySelectorAll('#content h3')].filter(
+        (node) => /Klausurfamilien/i.test(node.textContent || '')
+      ).length
+    }));
+    if (snap.provenanceFooters !== 0) {
+      fail({
+        system: 'aufgaben-practice-only',
+        route: c.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'provenance-on-aufgaben',
+        why: `Expected no source-provenance footer on Aufgaben tab, found ${snap.provenanceFooters}.`
+      });
+    }
+    if (snap.taskFamilyLayers !== 0 || snap.klausurfamilienHeadings !== 0) {
+      fail({
+        system: 'aufgaben-practice-only',
+        route: c.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'task-family-on-aufgaben',
+        why: `Task-family content must not appear on Aufgaben (layers=${snap.taskFamilyLayers}, headings=${snap.klausurfamilienHeadings}).`
+      });
+    }
+    if (snap.practiceSourceNotices !== 0) {
+      fail({
+        system: 'aufgaben-practice-only',
+        route: c.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'practice-source-notice',
+        why: `Expected no practice-source-notice on Aufgaben tab, found ${snap.practiceSourceNotices}.`
+      });
+    }
+  }
+}
+
+async function runFormelnKlausurmethodik(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const c of FORMELN_KLAUSURMETHODIK) {
+    await gotoConcept(page, c.route, c.id);
+    const opened = await clickTab(page, 'formeln');
+    if (!opened) {
+      fail({
+        system: 'formeln-klausurmethodik',
+        route: c.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'tab-missing',
+        why: 'Formeln tab missing for Klausurmethodik spot check.'
+      });
+      continue;
+    }
+    await page.waitForTimeout(400);
+    const snap = await page.evaluate(() => ({
+      methodikSections: document.querySelectorAll('#content .formula-klausurmethodik').length,
+      taskFamilyCards: document.querySelectorAll('#content .formula-klausurmethodik .task-family-card').length
+    }));
+    if (snap.methodikSections !== 1) {
+      fail({
+        system: 'formeln-klausurmethodik',
+        route: c.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'methodik-section-missing',
+        why: `Expected exactly one .formula-klausurmethodik section on Formeln tab, found ${snap.methodikSections}.`
+      });
+    }
+    if (snap.taskFamilyCards < 1) {
+      fail({
+        system: 'formeln-klausurmethodik',
+        route: c.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'task-family-cards-missing',
+        why: 'Expected at least one task-family-card under Klausurmethodik on Formeln tab.'
       });
     }
   }
@@ -881,6 +994,8 @@ try {
 
   await runMathLeak(page);
   await runProvenance(page);
+  await runAufgabenPracticeOnly(page);
+  await runFormelnKlausurmethodik(page);
   await runMikro1SourceCompanion(page);
   await runProvenanceFormelnSecondary(page);
   await runGraphIntegrity(page, 1400, 900, 'desktop-1400');

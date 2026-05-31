@@ -3,7 +3,7 @@
 Generated: 2026-05-31  
 Baseline (theory %): commit `c819408` per `docs/audits/2026-05-29-a-plus-readiness-pass.md`  
 **Content/tools commit:** `ff691fa` — theory depth expansions, VL regeneration inputs, `enrich-theory-depth.mjs`.  
-**Audit doc commit:** recorded below after this documentation push.
+**Audit doc commit:** `e2df64e` (pushed to `origin/main`).
 
 ## Goal
 
@@ -71,6 +71,9 @@ node tools/exam-os/ci-validate.mjs
 cd tools/clickthrough && npm run trust:pass1
 ```
 
-## Commit
+## Commits
 
-Recorded after git commit in this pass (see repository `HEAD`).
+| Hash | Scope |
+|------|--------|
+| `ff691fa` | Fleet theory depth, theoryDepthExpansions, task-family pass 3, mikro2 disclaimers |
+| `e2df64e` | This audit + refreshed `2026-05-29-a-plus-readiness-pass.md` |

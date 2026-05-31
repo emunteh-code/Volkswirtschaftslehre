@@ -1089,6 +1089,7 @@ async function runRShellFor(page, route, conceptId, routeLabel, w, h, vpLabel) {
 async function runRShellMatrix(page, w, h, vpLabel) {
   await runRShellFor(page, '/oekonometrie/index.html', 'matrix_notation', 'oekonometrie/matrix_notation', w, h, vpLabel);
   await runRShellFor(page, '/statistik/index.html', 'deskriptiv', 'statistik/deskriptiv', w, h, vpLabel);
+  await runRShellFor(page, '/mathematik/index.html', 'funktionen_gleichungen', 'mathematik/funktionen_gleichungen', w, h, vpLabel);
 }
 
 /** --- Horizontal overflow spot --- */
@@ -1121,6 +1122,179 @@ async function runSecondaryOverflow(page) {
 }
 
 /** --- Hash routing #concept/tab (shareable deep links) --- */
+async function runMasteryLabels(page) {
+  const targets = [
+    { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/aufgaben' },
+    { route: '/statistik/index.html', id: 'deskriptiv', label: 'statistik/deskriptiv/aufgaben' }
+  ];
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const t of targets) {
+    await gotoConcept(page, t.route, t.id);
+    const opened = await clickTab(page, 'aufgaben');
+    if (!opened) {
+      fail({
+        system: 'mastery-labels',
+        route: t.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'tab-missing',
+        why: 'Aufgaben tab missing for mastery label check.'
+      });
+      continue;
+    }
+    await page.waitForTimeout(450);
+    const bad = await page.evaluate(() => {
+      const mastery = document.querySelector('#content .mastery-check');
+      if (!mastery) return 'mastery-missing';
+      const text = mastery.innerText || '';
+      if (text.includes('[object Object]')) return text.slice(0, 240);
+      return null;
+    });
+    if (bad === 'mastery-missing') {
+      fail({
+        system: 'mastery-labels',
+        route: t.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'mastery-missing',
+        why: 'Expected Beherrschungsziele checklist on Aufgaben tab.'
+      });
+    } else if (bad) {
+      fail({
+        system: 'mastery-labels',
+        route: t.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'object-object-label',
+        why: `Mastery checklist contains [object Object]: ${bad}`
+      });
+    }
+  }
+}
+
+/** --- Klausurmethodik: no OCR jargon or raw anchor IDs --- */
+async function runKlausurmethodikStudentText(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await gotoConcept(page, '/mikro1/index.html', 'budget');
+  const opened = await clickTab(page, 'formeln');
+  if (!opened) {
+    fail({
+      system: 'klausurmethodik-student-text',
+      route: 'mikro1/budget/formeln',
+      surface: 'formeln',
+      viewport: '1280',
+      type: 'tab-missing',
+      why: 'Formeln tab missing for Klausurmethodik scrub check.'
+    });
+    return;
+  }
+  await page.waitForTimeout(500);
+  const bad = await page.evaluate(() => {
+    const root =
+      document.querySelector('#content .formula-klausurmethodik') ||
+      document.querySelector('#content .panel.active') ||
+      document.getElementById('content');
+    const text = root?.innerText || '';
+    if (/\bmikro1\.[a-z0-9_.-]+\b/i.test(text)) return 'raw-anchor-id';
+    if (/OCR\/Review|item-level mapping blockiert|official-task-source|Nur Metadaten bis OCR/i.test(text)) {
+      return 'dev-jargon';
+    }
+    return null;
+  });
+  if (bad) {
+    fail({
+      system: 'klausurmethodik-student-text',
+      route: 'mikro1/budget/formeln',
+      surface: 'formeln',
+      viewport: '1280',
+      type: bad,
+      why: 'Klausurmethodik panel still exposes dev/registry strings to students.'
+    });
+  }
+}
+
+/** --- Aufgaben panel Plattform-Übung header on concept view --- */
+async function runPracticePanelHeader(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await gotoConcept(page, '/mikro1/index.html', 'budget');
+  const opened = await clickTab(page, 'aufgaben');
+  if (!opened) {
+    fail({
+      system: 'practice-panel-header',
+      route: 'mikro1/budget/aufgaben',
+      surface: 'aufgaben',
+      viewport: '1280',
+      type: 'tab-missing',
+      why: 'Aufgaben tab missing for practice panel header check.'
+    });
+    return;
+  }
+  await page.waitForTimeout(400);
+  const hasHeader = await page.evaluate(() =>
+    Boolean(document.querySelector('#content .practice-panel-header .practice-platform-badge'))
+  );
+  if (!hasHeader) {
+    fail({
+      system: 'practice-panel-header',
+      route: 'mikro1/budget/aufgaben',
+      surface: 'aufgaben',
+      viewport: '1280',
+      type: 'header-missing',
+      why: 'Expected .practice-panel-header with Plattform-Übung badge on concept Aufgaben panel.'
+    });
+  }
+}
+
+/** --- jsError removed from DOM after successful load --- */
+async function runJsErrorRemoved(page) {
+  await page.goto(`${base}/mikro1/index.html`, { waitUntil: 'networkidle' });
+  await dismissConsent(page);
+  await page.waitForFunction(() => window.__jsLoaded === true, { timeout: 20000 }).catch(() => {});
+  const exists = await page.evaluate(() => Boolean(document.getElementById('jsError')));
+  if (exists) {
+    fail({
+      system: 'js-error-fallback',
+      route: 'mikro1/index.html',
+      surface: 'load',
+      viewport: '1280',
+      type: 'jsError-still-in-dom',
+      why: '#jsError should be removed after successful module load (a11y ghost).'
+    });
+  }
+}
+
+/** --- ILIAS link wired when officialMaterialsUrl is set --- */
+async function runOfficialMaterialsLink(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await gotoConcept(page, '/mikro1/index.html', 'budget');
+  const opened = await clickTab(page, 'quellen');
+  if (!opened) {
+    fail({
+      system: 'official-materials-link',
+      route: 'mikro1/budget/quellen',
+      surface: 'quellen',
+      viewport: '1280',
+      type: 'tab-missing',
+      why: 'Quellen tab missing for ILIAS link check.'
+    });
+    return;
+  }
+  await page.waitForTimeout(400);
+  const hasLink = await page.evaluate(() =>
+    Boolean(document.querySelector('#content a[href*="elearning.uni-goettingen.de"]'))
+  );
+  if (!hasLink) {
+    fail({
+      system: 'official-materials-link',
+      route: 'mikro1/budget/quellen',
+      surface: 'quellen',
+      viewport: '1280',
+      type: 'ilias-link-missing',
+      why: 'Expected ILIAS link from siteConfig.officialMaterialsUrl in Quellen panel.'
+    });
+  }
+}
+
 async function runHashRouting(page) {
   await page.goto(`${base}/mikro1/index.html#budget/aufgaben`, { waitUntil: 'networkidle' });
   await dismissConsent(page);
@@ -1252,6 +1426,11 @@ try {
   await runSecondaryOverflow(page);
   await runHashRouting(page);
   await runMobileShell375(page);
+  await runMasteryLabels(page);
+  await runKlausurmethodikStudentText(page);
+  await runPracticePanelHeader(page);
+  await runJsErrorRemoved(page);
+  await runOfficialMaterialsLink(page);
 
   await page.close();
 

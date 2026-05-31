@@ -1,5 +1,6 @@
 const WEBR_MODULE_URL = 'https://webr.r-wasm.org/latest/webr.mjs';
 const STORAGE_PREFIX = 'portal_r_practice_v1';
+const WEBR_FIRST_RUN_KEY = 'portal_r_webr_first_run_hint_v1';
 
 let webRPromise = null;
 const practiceRegistry = new Map();
@@ -982,6 +983,42 @@ function renderRTruthBanner() {
 </div>`;
 }
 
+function shouldShowWebRFirstRunHint() {
+  try {
+    return sessionStorage.getItem(WEBR_FIRST_RUN_KEY) !== 'dismissed';
+  } catch {
+    return true;
+  }
+}
+
+function dismissWebRFirstRunHint() {
+  try {
+    sessionStorage.setItem(WEBR_FIRST_RUN_KEY, 'dismissed');
+  } catch {
+    /* ignore */
+  }
+}
+
+/** One-time orientation when WebR is slow or unavailable (student audit T8-M1). */
+function renderWebRFirstRunHint() {
+  return `<div class="r-webr-first-run-hint" data-r-webr-first-run role="note">
+<p><strong>Erster Besuch im R-Tab?</strong> „Ausführen“ lädt WebR einmalig aus dem Netz — das kann dauern oder in manchen Browsern ausfallen. Dann nutze bewusst <em>Soll-Output</em>, <em>Was zählt im Output</em> und die <em>Musterlösung</em>; optional denselben Code in R auf dem Rechner.</p>
+<button type="button" class="r-webr-first-run-dismiss" data-r-action="dismiss-webr-hint">Verstanden</button>
+</div>`;
+}
+
+function maybeMountWebRFirstRunHint(blockEl) {
+  if (!blockEl || !shouldShowWebRFirstRunHint()) return;
+  if (blockEl.querySelector('[data-r-webr-first-run]')) return;
+  const truth = blockEl.querySelector('.r-practice-truth-banner');
+  if (!truth) return;
+  truth.insertAdjacentHTML('afterend', renderWebRFirstRunHint());
+  blockEl.querySelector('[data-r-action="dismiss-webr-hint"]')?.addEventListener('click', () => {
+    dismissWebRFirstRunHint();
+    blockEl.querySelectorAll('[data-r-webr-first-run]').forEach((node) => node.remove());
+  });
+}
+
 function inferOutputPlaceholder(block, runtimeMode) {
   if (block.outputPlaceholder) return block.outputPlaceholder;
 
@@ -1674,6 +1711,8 @@ function mountBlock(blockEl) {
   } else {
     setRunButtonState(blockEl, 'idle');
   }
+
+  maybeMountWebRFirstRunHint(blockEl);
 
   // Mount syntax highlighting for tab-style editor (has overlay)
   mountHighlighter(blockEl);

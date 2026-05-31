@@ -188,5 +188,12 @@ for (const ch of CHAPTERS) {
 export const R_BLOCKS_BY_ID = Object.fromEntries(
   CURRICULUM
     .filter((entry) => entry.rBlock)
-    .map((entry) => [entry.id, entry.rBlock])
+    .map((entry) => [
+      entry.id,
+      {
+        ...entry.rBlock,
+        title: entry.rBlock.title || entry.title,
+        taskPrompt: entry.rBlock.taskPrompt || entry.rBlock.miniTask || ''
+      }
+    ])
 );

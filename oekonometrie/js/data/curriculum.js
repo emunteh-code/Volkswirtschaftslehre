@@ -21,13 +21,16 @@ const rBlock = ({
   keepHint,
   solutionChanges = [],
   solutionCode = '',
-  firstStep
+  firstStep,
+  runtimeMode,
+  runtimeNote
 }) => ({
   script,
   purpose,
   code,
   output,
   miniTask,
+  taskPrompt: miniTask,
   solution,
   pitfalls,
   taskMode,
@@ -35,7 +38,9 @@ const rBlock = ({
   keepHint,
   solutionChanges,
   solutionCode,
-  firstStep
+  firstStep,
+  runtimeMode,
+  runtimeNote
 });
 
 export const CURRICULUM = [
@@ -2921,6 +2926,8 @@ coeftest(model, vcov = vcovHC(model, type = "HC1"))`,
       output: 'Die Koeffizienten bleiben gleich, aber Standardfehler, t-Werte und p-Werte können sich sichtbar ändern.',
       miniTask: 'Erkläre, woran du im Output erkennst, dass hier Inferenz und nicht die Punktschätzung verändert wurde.',
       solution: 'Die Estimates bleiben identisch zum OLS-Modell; nur die Unsicherheits- und Testspalten ändern sich.',
+      runtimeMode: 'guided',
+      runtimeNote: 'Geführter Modus: `sandwich`/`lmtest` sind in WebR nicht verfügbar. Lies den Startcode, vergleiche mit der VL-Ausgabe und nutze die Musterlösung — kein Live-Run nötig.',
       pitfalls: ['Robuste Outputtabellen zu zitieren, ohne zu sagen, dass die Koeffizienten selbst gleich geblieben sind.']
     })
   },
@@ -3136,6 +3143,8 @@ coeftest(model, vcov = NeweyWest(model, lag = 4, prewhite = FALSE))`,
       output: 'Die Estimates bleiben erhalten, aber die Standardfehler werden für serielle Abhängigkeit robust gemacht.',
       miniTask: 'Erkläre in einem Satz, warum der lag-Parameter in NeweyWest ökonomisch eine Gedächtnislänge repräsentiert.',
       solution: 'Der lag-Wert bestimmt, wie viele Nachbarschaftskovarianzen der Fehler in die robuste Langfristvarianz eingehen.',
+      runtimeMode: 'guided',
+      runtimeNote: 'Geführter Modus: Pakete `sandwich`/`lmtest` laufen im Browser-R nicht. Arbeite mit Code-Lesen, VL-Output und Musterlösung — der Live-Run ist hier bewusst aus.',
       pitfalls: ['HAC einzusetzen, ohne zu sagen, gegen welche Fehlerstruktur die Korrektur gedacht ist.']
     })
   }

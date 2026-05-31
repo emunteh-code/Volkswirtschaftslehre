@@ -1,4 +1,4 @@
-# Exam Operating System Readiness Gate — 2026-05-31
+# Exam Operating System Readiness Gate — 2026-06-01
 
 A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.
 
@@ -32,7 +32,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `mathematik` | 100% | 100% | 42 | 69 | 40 | 0 | 55 | 4 |
 | `jahresabschluss` | 100% | 100% | 30 | 44 | 13 | 0 | 45 | 4 |
 | `recht` | 100% | 100% | 28 | 46 | 17 | 0 | 52 | 4 |
-| `internationale-wirtschaftsbeziehungen` | 100% | 100% | 32 | 33 | 0 | 0 | 48 | 4 |
+| `internationale-wirtschaftsbeziehungen` | 100% | 100% | 32 | 33 | 0 | 0 | 49 | 4 |
 
 ## Gate Status Detail
 

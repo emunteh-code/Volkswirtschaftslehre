@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-31",
+  "generatedAt": "2026-06-01",
   "definitionOfDone": "A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.",
   "modules": [
     {
@@ -331,7 +331,7 @@
       "taskFamilies": 33,
       "sourceGroundedTaskFamilies": 32,
       "officialTaskSourceFamilies": 0,
-      "officialFormulaCards": 48,
+      "officialFormulaCards": 49,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",

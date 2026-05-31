@@ -1,0 +1,9 @@
+# Shared platform core
+/assets/js/portal-core/ @emunteh-code
+
+# Module curricula (data + features)
+/*/js/data/ @emunteh-code
+/mikro1/js/ @emunteh-code
+
+# Exam OS tooling
+/tools/exam-os/ @emunteh-code

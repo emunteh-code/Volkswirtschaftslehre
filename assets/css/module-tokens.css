@@ -1,0 +1,15 @@
+/**
+ * Shared typography scale tokens for module shells (import after mikro1 base).
+ */
+:root {
+  --type-xs: 0.75rem;
+  --type-sm: 0.8125rem;
+  --type-base: 0.9375rem;
+  --type-md: 1.0625rem;
+  --type-lg: 1.25rem;
+  --type-xl: 1.5rem;
+  --type-2xl: 1.875rem;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+}

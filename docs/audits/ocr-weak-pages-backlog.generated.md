@@ -1,6 +1,14 @@
 # OCR / weak-page backlog
 
-Generated from page index.
+## Executive summary
+
+- **Fleet `official-task-source` count:** 0 — no exam item promoted without OCR + human review.
+- **Automation:** `ocr-weak-pages.mjs` refreshes counts from `source-page-index.generated.json` only (no Tesseract in CI).
+- **Promotion workflow:** OCR text (off-repo) → reviewer maps item → `direct-source` + anchors → `audit-current-state.mjs` shows increment.
+- **Blocked:** Mikro1 Probeklausur JPGs until `MIKRO1_PROBEKLAUSUR_REVIEW_STATUS`.
+- **Priority modules (weak-page %):** see table below — oekonometrie, statistik, mikro2 lead.
+
+Generated from page index (2026-05-31).
 
 | Module | Weak pages | Total pages | % weak |
 |---|---:|---:|---:|

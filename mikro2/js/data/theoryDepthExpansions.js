@@ -14,6 +14,9 @@ export const THEORY_DEPTH_EXPANSIONS = {
       block('Prüfungsstandard', `
       <p>Immer Markt- vs. Sozialoptimum zeichnen; Steuerhöhe am Grenzschaden im Optimum, nicht am aktuellen Marktoutput.</p>
       ${warn('Instrument', 'Pigou-Steuer (Preis) vs. Cap-and-Trade (Menge) unter Unsicherheit unterschiedlich.')}
+    `) +
+      block('In der Klausur (Plattform-Ergänzung)', `
+      <p>Negativer Externer Effekt: $MSB < MPB$ → Überproduktion. Pigou: $t^* = MEC(Q^*)$. Positiver Externer Effekt: Subvention analog. Ohne Intervention DWL-Dreieck zwischen $Q_m$ und $Q^*$.</p>
     `)
   },
   externa_institutionen: {
@@ -23,6 +26,10 @@ export const THEORY_DEPTH_EXPANSIONS = {
     `) +
       block('Emissionshandel', `
       <p>Cap setzt Menge; Lizenzpreis internalisiert Grenzkosten. Effizienz: heterogene Kosten → günstigste Vermeider kaufen weniger Lizenzen.</p>
+    `) +
+      block('In der Klausur (Plattform-Ergänzung)', `
+      <p>Coase-Theorem: bei $TC=0$ und klaren Rechten effizientes Ergebnis unabhängig von initialer Rechteverteilung (nur Verteilung). Emissionshandel vs. Pigou-Steuer: Menge vs. Preis unter Unsicherheit.</p>
+      ${warn('Coase-Grenzen', 'Viele Betroffene, unklare Rechte oder hohe Verhandlungskosten → staatliche Instrumente nötig.')}
     `)
   },
   public_goods: {
@@ -32,6 +39,9 @@ export const THEORY_DEPTH_EXPANSIONS = {
     `) +
       block('Lindahl & Nash', `
       <p>Lindahl-Preise individualisiert; Nash-Lösung bei freiwilliger Beitragswahl typischerweise unter dem effizienten Niveau.</p>
+    `) +
+      block('In der Klausur (Plattform-Ergänzung)', `
+      <p>Reine öffentliche Güter: $Rivalität=0$, $Ausschluss=0$. Sammlisches Gut: rival, nicht ausschließbar. Unterprovision weil $p=MC=0$ nicht finanzierbar — staatliche Bereitstellung oder Lindahl-Mechanismus qualitativ.</p>
     `)
   },
   oligopol_stackelberg: {

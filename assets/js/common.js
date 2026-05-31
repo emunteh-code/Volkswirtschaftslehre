@@ -417,6 +417,13 @@ async function renderLandingPage() {
     `;
   }
 
+  const iliasCta = document.getElementById("officialMaterialsLandingCta");
+  const iliasUrl = SITE_CONFIG?.officialMaterialsUrl;
+  if (iliasCta && iliasUrl) {
+    iliasCta.hidden = false;
+    iliasCta.innerHTML = `<a class="lp-ilias-btn" href="${iliasUrl}" target="_blank" rel="noopener noreferrer">Kursmaterialien in ILIAS öffnen</a>`;
+  }
+
   const lastModule = pickInitialLandingModule();
   const defaultModule = lastModule || coreModules[0] || PUBLIC_MODULES[0] || null;
   await updateHeroShelf(defaultModule);

@@ -47,7 +47,7 @@ export function buildKonzeptCheckHomeCardHtml(enabled = false) {
 }
 
 export const KONCEPT_CHECK_SCOPE_NOTE =
-  "Konzept-Check: derzeit nur in Makro I — andere Module nutzen Schnelltest & Aufgaben.";
+  "Konzept-Check: in Makro I, Statistik und Makro II — andere Module nutzen Schnelltest & Aufgaben.";
 
 export function createRenderer({
   courseLabel,

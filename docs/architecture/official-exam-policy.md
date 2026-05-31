@@ -1,7 +1,22 @@
 # Official exam policy (fleet-wide)
 
-**Effective:** 2026-05-31  
-**Status:** Active — no exceptions without OCR evidence + human review log.
+**Effective:** 2026-05-31 (updated 2026-06-01)  
+**Status:** Active — no exceptions without OCR evidence + human review log.  
+**PDF companion:** `docs/architecture/pdf-companion-policy.md`
+
+## Student path
+
+1. **Learn & drill** on the web portal (Theorie → Aufgaben → Formeln & Klausurmethodik).
+2. **Verify notation and edge cases** in official PDFs via **ILIAS** (`siteConfig.officialMaterialsUrl`).
+3. Treat **Probeklausur / Schnelltest / Konzept-Check** as **Plattform-Simulation** or **Plattform-Übung** — not official exam papers.
+
+## Maintainer path (OCR → promotion)
+
+1. Run `node tools/exam-os/ocr-weak-pages.mjs --write` — refresh weak-page counts (report only).
+2. OCR weak/image pages **outside git** (Tesseract or manual transcript).
+3. Human reviewer maps item text → task family; log reviewer + date + `quoteFingerprint`.
+4. Set item `sourceStatus: direct-source` + anchor IDs; increment `officialTaskSourceFamilies` only after review.
+5. **Do not** promote Mikro1 Probeklausur JPGs without `MIKRO1_PROBEKLAUSUR_REVIEW_STATUS` clearance.
 
 ## Summary
 

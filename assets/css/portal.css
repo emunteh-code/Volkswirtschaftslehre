@@ -641,6 +641,35 @@ html { scroll-behavior: smooth; }
   border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
 }
 
+.lp-ilias-btn,
+.official-materials-ilias-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, var(--border));
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.lp-ilias-btn:hover,
+.lp-ilias-btn:focus-visible,
+.official-materials-ilias-btn:hover,
+.official-materials-ilias-btn:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.lp-shelf-note--ilias {
+  margin-top: 12px;
+}
+
 @media (max-width: 480px) {
   .lp-exam-cram-actions {
     flex-direction: column;

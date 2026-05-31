@@ -27,9 +27,10 @@ export const CHAPTERS = [
 ];
 
 const MARKET_FAILURE_SOURCE_BOUNDARY = String.raw`
-    <div class="section-block source-boundary-notice">
-      <h3>Quellenstatus</h3>
-      <p>Dieses Kapitel ist ergänzende Plattform-Unterstützung. Im verfügbaren offiziellen Mikro-II-Korpus wurde dafür bisher kein direkter Primäranker gefunden. Nutze es zur Einordnung, aber behandle es nicht als offiziell prüfungsbewiesenen Mikro-II-Stoff, bis ein offizieller Quellenanker vorliegt.</p>
+    <div class="section-block source-boundary-notice platform-added-banner" role="note">
+      <h3>Plattform-Ergänzung — kein VL-Primäranker</h3>
+      <p><strong>Exam-relevant, aber nicht VL-gemappt:</strong> Im offiziellen Mikro-II-Korpus (20 Vorlesungs-PDFs) wurden für Pigou/Coase/öffentliche Güter <em>keine</em> direkten Seitenanker gefunden. Nutze diesen Block zur Klausur-Einordnung von Marktversagen — Randnotation und Tiefe weiterhin in ILIAS-PDFs prüfen.</p>
+      <p><em>source_status: platform-added-explanation / platform-added-drill</em></p>
     </div>
     `;
 

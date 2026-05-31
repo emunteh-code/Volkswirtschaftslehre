@@ -479,7 +479,8 @@ function ensureEconometricsHomeExamCard() {
   card.setAttribute('role', 'button');
   card.innerHTML = `
 <div class="hac-title">Probeklausuren</div>
-<div class="hac-desc">3 kursnahe 90-Minuten-Klausuren mit Musterlösungen</div>`;
+<div class="hac-desc">3 kursnahe 90-Minuten-Klausuren mit Musterlösungen</div>
+<span class="home-action-sim-badge">Plattform-Simulation</span>`;
 
   const open = () => window.__showFullExamSelect?.();
   card.addEventListener('click', open);

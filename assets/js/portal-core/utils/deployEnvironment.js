@@ -85,7 +85,7 @@ export function renderOfficialMaterialsIliasLinkHtml() {
   const url = SITE_CONFIG?.officialMaterialsUrl;
   if (!url || typeof url !== "string") return "";
   const safe = escapeHtml(url);
-  return `<p class="official-materials-ilias-link"><a href="${safe}" target="_blank" rel="noopener noreferrer">Zum Kurs in ILIAS</a></p>`;
+  return `<p class="official-materials-ilias-link"><a class="official-materials-ilias-btn" href="${safe}" target="_blank" rel="noopener noreferrer">Kursmaterialien in ILIAS öffnen</a></p>`;
 }
 
 /**

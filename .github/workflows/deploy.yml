@@ -64,6 +64,14 @@ jobs:
       - name: Build Pages dist subset
         run: node tools/build-pages-dist.mjs
 
+      - name: Install clickthrough (deploy smoke)
+        working-directory: tools/clickthrough
+        run: npm ci
+
+      - name: Deploy smoke (portal-core assets in dist)
+        working-directory: tools/clickthrough
+        run: npm run smoke:deploy
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

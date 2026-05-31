@@ -548,6 +548,7 @@ function buildSourceInspectionRows(layers, sourceMaterialBaseUrl = '') {
   });
 }
 
+function buildSourceOpenButtonHtml(sourceUrl) {
   if (!sourceUrl) return '';
   if (sourcePdfOpenDisabledByDefault()) {
     return `<button type="button" class="source-provenance-open" disabled aria-disabled="true" title="${escapeAttr(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}" aria-label="${escapeAttr(SOURCE_PDF_OPEN_DISABLED_LABEL)}">${escapeHtml(SOURCE_PDF_OPEN_DISABLED_LABEL)}</button>`;

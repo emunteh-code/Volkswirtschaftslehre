@@ -1,137 +1,89 @@
-# Student top-8 fixes — implementation audit
+# Student top-8 fixes — verification audit
 
-**Date:** 2026-05-31  
+**Date:** 2026-06-01  
 **Source audit:** [2026-05-31-student-exam-stress-evaluation.md](./2026-05-31-student-exam-stress-evaluation.md)  
-**Validation:** `cd tools/clickthrough && npm run trust:pass1`
+**Prior pass:** `bbaf5fe` (sections A–G, overlapping items)  
+**Validation:** `cd tools/clickthrough && npm run trust:pass1` → **all checks passed**
 
-## Summary
+## Verification table
 
-All eight student-impact items from the exam-stress evaluation were implemented in this pass. No `source-materials/` corpus was added to the repo (remains gitignored; legal OK required before shipping PDFs).
+| # | Fix | Status | Evidence (current main) |
+|---|-----|--------|-------------------------|
+| 1 | **PDF / Quellen** — ILIAS messaging; disable PDF opens on GitHub Pages; no click-then-404 | ✅ | `deployEnvironment.js` (`primeSourceMaterialsAvailability`, `sourcePdfOpenDisabledByDefault`, `OFFICIAL_PDF_STUDENT_MESSAGE`); `quellenPanel.js` (`renderPdfStatusNotice`); `sourceProvenanceUi.js` (`buildSourceOpenButtonHtml` disabled upfront); `sourceCompanionModule.js` |
+| 2 | **Mobile 375px** — drawer sidebar, full-width content, sticky tab row | ✅ | `premium-refinement.css` MOBILE MODULE SHELL block (≤900px / 375px); trust `runMobileShell375` |
+| 3 | **Hash routing** — `#concept/tab` on load + hashchange; URL updates on tab switch | ✅ | `hashRouting.js`, `app.js` (`applyConceptHashRoute`, `replaceConceptHash`); trust `runHashRouting` |
+| 4 | **Formeln tab label** — **Formeln & Klausurmethodik** on all 11 module shells | ✅ | `mikro1`, `mikro2`, `makro1`, `makro2`, `statistik`, `mathematik`, `oekonometrie`, `recht`, `finanzwirtschaft`, `jahresabschluss`, `internationale-wirtschaftsbeziehungen` `index.html` |
+| 5 | **Concept labels** — **Stelle X von Y** only; no global Konzept N gaps on home | ✅ | `renderer.js` home cards + concept header; `chapterNavigation.js` sidebar |
+| 6 | **14-Tage-Plan CTA** — Mikro I → `#budget/aufgaben` | ✅ | `index.html` `#exam-cram-plan`; `common.js` wired buttons |
+| 7 | **Konzept-Check** — home card only where `conceptSchnelltestItems.js` exists (makro1) | ✅ | `buildKonzeptCheckHomeCardHtml(false)` default; only `makro1/js/ui/renderer.js` passes `true` |
+| 8 | **PDF messaging** — module home + Quellen banner before click | ✅ | `renderer.js` `renderHome` + `module-home-pdf-notice`; Quellen tab `renderPdfStatusNotice`; landing policy copy in `index.html` |
 
-| # | Fix | Status | Key files |
-|---|-----|--------|-----------|
-| 1 | PDF / Quellen upfront messaging + disabled open buttons | Shipped | `deployEnvironment.js`, `quellenPanel.js`, `sourceProvenanceUi.js`, `sourceCompanionModule.js` |
-| 2 | Mobile shell 375px (drawer, full-width content, sticky tabs) | Shipped | `premium-refinement.css`, `mikro1/css/styles.css` (existing drawer) |
-| 3 | Hash routing `#concept/tab` | Shipped | `hashRouting.js`, `app.js` |
-| 4 | Formeln tab → **Formeln & Klausurmethodik** | Shipped | All 11 module `index.html` shells |
-| 5 | Chapter-local **Stelle X von Y** labels | Shipped | `renderer.js`, `chapterNavigation.js` |
-| 6 | Landing 14-Tage-Plan CTA | Shipped | `index.html`, `common.js`, `portal.css` |
-| 7 | Konzept-Check fleet gate (makro1 only) | Shipped | `renderer.js`, `makro1/js/ui/renderer.js` |
-| 8 | Early deploy probe + module-home banner | Shipped | `deployEnvironment.js`, `app.js`, `renderer.js` |
-
----
-
-## 1 & 8 — PDF / deploy messaging
-
-**Problem:** Students clicked PDF buttons on GitHub Pages and got 404s; no upfront explanation.
-
-**Solution:**
-- `primeSourceMaterialsAvailability()` sets pessimistic `window.__sourceMaterialsAvailable = false` on public deploy before async probe.
-- Student message: *„Offizielle PDFs: ILIAS / Vorlesungsordner (nicht in dieser Web-Version). Die Zuordnung Konzept ↔ Quelle bleibt hier sichtbar.“*
-- Notice rendered on: Quellen tab, module home (`renderHome`), source companion drawer.
-- PDF open buttons render `disabled` + `aria-disabled="true"` when `sourcePdfOpenDisabledByDefault()` — no click-then-404.
-- Optional ILIAS link via `SITE_CONFIG.officialMaterialsUrl` (currently `null`; no placeholder URL).
-
-**Risk:** Local dev without `source-materials/` also disables opens until probe completes; probe refreshes Quellen status async.
+**Example URL:** `https://emunteh-code.github.io/Volkswirtschaftslehre/mikro1/index.html#budget/aufgaben`
 
 ---
 
-## 2 — Mobile shell 375px
+## Re-verification pass (2026-06-01)
 
-**Problem:** Content felt squished; sidebar consumed horizontal space on phones.
+Compared working tree to `bbaf5fe`. All eight items were present in that commit; two runtime bugs blocked deploy/trust validation and were fixed in this pass:
 
-**Solution:** `premium-refinement.css` mobile block (≤900px):
-- Fixed drawer `#sidebar` with overlay
-- `#main` / `#content` full width
-- Sticky `#tabRow` with horizontal scroll for tabs
-- Hide `#rightPanel`, `#shortcutHint`, `.focus-btn`
+### Bug A — `sourceProvenanceUi.js` syntax (Critical)
 
-Trust adds `runMobileShell375` — checks content width ≥88% viewport and no horizontal overflow at 375×667.
+`buildSourceOpenButtonHtml` body was orphaned outside any function (`Illegal return statement`), breaking **all** module JS loads (statistik, mikro1, fleet). Restored function wrapper.
 
----
+### Bug B — Hash tab not applied on cold load (Critical)
 
-## 3 — Hash routing
+`resolveAvailableTab` used `offsetParent` while `#tabRow` was still `display: none` (before `.visible`). Deep links like `#budget/aufgaben` opened the concept on **Theorie**. Fixed by:
 
-**Format:** `#conceptId/tab` — e.g. `#budget/aufgaben`, `#lagrange/grafik`, `#deskriptiv/r`
-
-**Aliases:** `grafik` → internal `graph`; `r` → `r-anwendung`
-
-**Behavior:**
-- On load: hash route beats `loadLastId()`
-- On tab switch: `history.replaceState` updates hash (shareable)
-- `hashchange` re-applies route
-
-**Example live URL:**  
-`https://emunteh-code.github.io/Volkswirtschaftslehre/mikro1/index.html#budget/aufgaben`
+- Showing `#tabRow` before tab resolution in `app.js` `navigate()`
+- Relaxing `isTabAvailable()` in `hashRouting.js` (no `offsetParent` gate)
 
 ---
 
-## 4 — Formeln tab rename
+## Item notes
 
-All 11 module shells: visible label and `aria-label` → **Formeln & Klausurmethodik** (or `Formeln &amp; Klausurmethodik` in HTML entities).
+### 1 & 8 — PDF / deploy messaging
 
-Modules: mikro1, mikro2, makro1, makro2, statistik, mathematik, oekonometrie, recht, finanzwirtschaft, jahresabschluss, internationale-wirtschaftsbeziehungen.
+- Pessimistic `window.__sourceMaterialsAvailable = false` on public deploy before async probe
+- Student copy: *„Offizielle PDFs: ILIAS / Vorlesungsordner (nicht in dieser Web-Version)…“*
+- PDF open buttons render `disabled` + `aria-disabled="true"` when unavailable — no click-then-404 loop
+- Optional ILIAS URL via `SITE_CONFIG.officialMaterialsUrl` (currently `null`)
 
----
+### 3 — Hash routing
 
-## 5 — Sequential concept labels
+**Format:** `#conceptId/tab` — e.g. `#budget/aufgaben`, `#lagrange/grafik`, `#deskriptiv/r`  
+**Aliases:** `grafik` → `graph`; `r` → `r-anwendung`  
+**Behavior:** hash beats `loadLastId()` on load; tab switch updates hash via `history.replaceState`; `hashchange` re-applies route
 
-Removed misleading global **Konzept N** in home grid when syllabus has gaps (e.g. mikro1 Konzept 7→13).
+### 5 — Sequential concept labels
 
-Home cards now show: `{Kapitel} · Stelle X von Y` (chapter-local order).
+Home cards: `{Kapitel} · Stelle X von Y` (chapter-local). Sidebar matches via `chapterNavigation.js`.
 
-Sidebar chapter navigation already used the same phrasing via `chapterNavigation.js`.
+### 7 — Konzept-Check fleet gate
 
----
-
-## 6 — Landing 14-Tage-Plan CTA
-
-New shelf `#exam-cram-plan` on landing page with buttons:
-- **Mikro I: Budget + Aufgaben starten →** `./mikro1/index.html#budget/aufgaben`
-- **Statistik: Deskriptiv + Aufgaben →** `./statistik/index.html#deskriptiv/aufgaben`
-
-Exam-policy copy updated: removed dev-only `source-materials/` path reference.
+`conceptSchnelltestItems.js` exists only under **makro1**. Other modules get empty `extraHomeActionCardsHtml` — no dead cards.
 
 ---
 
-## 7 — Konzept-Check fleet
+## Trust regression
 
-Grep confirmed `conceptSchnelltestItems.js` exists only under **makro1**.
+`tools/clickthrough/trust-regression-pass-1.mjs` includes:
 
-- `buildKonzeptCheckHomeCardHtml(enabled)` in shared renderer — returns empty string when `false`.
-- Only `makro1/js/ui/renderer.js` passes `true`.
-- Other modules: no dead Konzept-Check card (AGENTS.md compliance).
+- `runHashRouting` — `#budget/aufgaben` opens Aufgaben; tab switch updates hash
+- `runMobileShell375` — content width ≥88% viewport at 375×667
 
----
-
-## Trust regression extensions
-
-Added to `trust-regression-pass-1.mjs`:
-- `runHashRouting` — load `#budget/aufgaben`, verify tab active, tab switch updates hash
-- `runMobileShell375` — 375px layout sanity
+Run: `cd tools/clickthrough && npm run trust:pass1`
 
 ---
 
-## Files changed (this pass)
+## Files changed (re-verification pass)
 
-- `assets/js/portal-core/utils/deployEnvironment.js`
-- `assets/js/portal-core/utils/hashRouting.js` (new)
-- `assets/js/portal-core/app.js`
-- `assets/js/portal-core/ui/renderer.js`
-- `assets/js/portal-core/ui/quellenPanel.js`
-- `assets/js/portal-core/ui/sourceProvenanceUi.js`
-- `assets/js/portal-core/features/sourceCompanionModule.js`
-- `assets/js/siteConfig.js`
-- `assets/js/common.js`
-- `assets/css/premium-refinement.css`
-- `assets/css/portal.css`
-- `index.html`
-- `makro1/js/ui/renderer.js`
-- All 11 module `index.html` (Formeln label)
-- `tools/clickthrough/trust-regression-pass-1.mjs`
+- `assets/js/portal-core/ui/sourceProvenanceUi.js` — restore `buildSourceOpenButtonHtml`
+- `assets/js/portal-core/utils/hashRouting.js` — `isTabAvailable` without hidden-row false negative
+- `assets/js/portal-core/app.js` — show tab row before tab resolution
+- `docs/audits/2026-05-31-student-top8-fixes.md` — this verification table
 
-## Remaining gaps
+## Remaining gaps (unchanged)
 
-- `officialMaterialsUrl` not set — add real ILIAS URL in `siteConfig.js` when available.
-- Konzept-Check remains makro1-only until other modules ship `conceptSchnelltestItems.js`.
-- Full 320px manual spot-check documented via trust 375px test; extend to 320 if needed.
+- Ship PDFs on deploy (C1) — still needs hosting strategy; messaging + disabled buttons mitigate only
+- `officialMaterialsUrl` not set — add real ILIAS URL in `siteConfig.js` when available
+- Konzept-Check remains makro1-only until other modules ship `conceptSchnelltestItems.js`

@@ -123,6 +123,7 @@ export function createPortalApp({
 
   function navigate(id, { tab = "theorie", updateHash = true } = {}) {
     const tabRow = document.getElementById("tabRow");
+    if (id && tabRow) tabRow.classList.add("visible");
     const resolvedTab = id ? resolveAvailableTab(tabRow, tab) : "theorie";
 
     appState.setCurrent(id);
@@ -139,7 +140,6 @@ export function createPortalApp({
       window.__currentGraphId = id;
       updateProgressUI(loadProgress());
       updateNavBadges();
-      if (tabRow) tabRow.classList.add("visible");
       renderContent(id, resolvedTab, initGraph);
       renderRightPanel(id, { navigate, currentTab: resolvedTab });
       syncRightPanelVisibility();

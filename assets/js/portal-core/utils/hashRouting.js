@@ -80,8 +80,9 @@ export function isTabAvailable(tabRow, tab) {
   if (!tabRow || !tab) return false;
   const btn = tabRow.querySelector(`button[data-tab="${tab}"]`);
   if (!btn) return false;
-  const style = btn.style?.display;
-  return style !== "none" && btn.offsetParent !== null;
+  if (btn.hidden || btn.getAttribute("aria-hidden") === "true") return false;
+  if (btn.style?.display === "none") return false;
+  return true;
 }
 
 /**

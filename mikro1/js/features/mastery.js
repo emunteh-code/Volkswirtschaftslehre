@@ -6,6 +6,7 @@
 import { loadProgress, saveMasteryChecks } from '../state/storage.js';
 import { MASTERY } from '../data/masteryData.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
+import { getMasteryItemLabel } from '../../../assets/js/portal-core/utils/masteryLabel.js';
 
 /**
  * Render the mastery checklist HTML for a concept.
@@ -28,7 +29,7 @@ export function renderMastery(conceptId) {
 <input type="checkbox" ${done ? 'checked' : ''}
   data-concept="${conceptId}" data-idx="${i}"
   onchange="window.__toggleMastery('${conceptId}', ${i}, this)">
-<span>${formalizeMarkupString(item)}</span>
+<span>${formalizeMarkupString(getMasteryItemLabel(item))}</span>
 </label>`;
   });
   html += `<div class="mastery-progress" id="masteryProgress_${conceptId}">

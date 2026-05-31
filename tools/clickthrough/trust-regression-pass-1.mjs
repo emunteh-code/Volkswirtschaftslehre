@@ -43,6 +43,10 @@ async function dismissConsent(page) {
   await page.evaluate(() => {
     if (typeof window.__acceptConsent === 'function') window.__acceptConsent();
   });
+  const consentBtn = page.locator('.consent-btn-primary').first();
+  if ((await consentBtn.count()) && (await consentBtn.isVisible())) {
+    await consentBtn.click({ timeout: 2000 }).catch(() => {});
+  }
 }
 
 async function gotoConcept(page, urlPath, conceptId) {

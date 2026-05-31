@@ -68,7 +68,7 @@ export const MODULES = [
     releaseTier: "beta",
     sourceCorpusInRepo: true,
     sourceStatusNote:
-      "Beta: Oligopol, Spieltheorie & AGV nutzbar. Marktversagen-Kapitel ohne VL-Anker — im Modul gekennzeichnet."
+      "Beta: Oligopol & Spieltheorie nutzbar. Supplemental-Kapitel im Modul gekennzeichnet."
   },
   {
     slug: "makro1",

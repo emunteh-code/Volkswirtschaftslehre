@@ -71,9 +71,23 @@ export function isIngestionPlaceholderTaskFamily(family) {
   return false;
 }
 
+/** Registry/OCR metadata rows — not student Klausurmethodik content. */
+export function isRegistryMetadataTaskFamily(family) {
+  if (!family || typeof family !== "object") return false;
+  const id = toCleanString(family.id);
+  if (id.includes(".official-doc.") || id.includes(".official-task.placeholder.")) return true;
+  const method = toCleanString(family.method);
+  if (/Offizielles Dokument im Korpus:/i.test(method) && /OCR\/Review|official-task-source/i.test(method)) {
+    return true;
+  }
+  return false;
+}
+
 /** Task families shown on concept practice surfaces (excludes ingestion placeholders). */
 export function filterStudentVisibleTaskFamilies(families) {
-  return (Array.isArray(families) ? families : []).filter((family) => !isIngestionPlaceholderTaskFamily(family));
+  return (Array.isArray(families) ? families : [])
+    .filter((family) => !isIngestionPlaceholderTaskFamily(family))
+    .filter((family) => !isRegistryMetadataTaskFamily(family));
 }
 
 /**

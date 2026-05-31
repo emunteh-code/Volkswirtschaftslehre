@@ -6453,6 +6453,23 @@ body.light-mode #content .source-provenance-mark {
   border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
 }
 
+.practice-panel-header {
+  margin-bottom: 12px;
+}
+
+.practice-platform-badge--panel {
+  margin-top: 0;
+  background: color-mix(in srgb, var(--accent, #6366f1) 8%, transparent);
+  color: var(--text);
+}
+
+.home-konzept-check-note {
+  margin: 0 0 16px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .practice-klausur-link {
   margin: 0 0 16px;
   font-size: 0.8125rem;

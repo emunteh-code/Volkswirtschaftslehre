@@ -443,10 +443,7 @@ export function createPortalApp({
     window.__jsLoaded = true;
     const jsError = document.getElementById("jsError");
     if (jsError) {
-      jsError.style.display = "none";
-      jsError.setAttribute("aria-hidden", "true");
-      jsError.setAttribute("inert", "");
-      jsError.removeAttribute("role");
+      jsError.remove();
     }
     primeSourceMaterialsAvailability();
     if (sourceCompanion) {
@@ -515,6 +512,9 @@ export function createPortalApp({
           tab: hashRoute.tab || "theorie",
           updateHash: false
         });
+        if (hashRoute.tab && appState.currentTab !== hashRoute.tab) {
+          switchTab(hashRoute.tab, { updateHash: false });
+        }
       } finally {
         applyingHashRoute = false;
       }

@@ -6,6 +6,7 @@
 import { loadProgress, saveMasteryChecks } from '../state/storage.js';
 import { MASTERY } from '../data/masteryData.js';
 import { formalizeMarkupString } from '../utils/formalMath.js';
+import { getMasteryItemLabel } from '../../../assets/js/portal-core/utils/masteryLabel.js';
 
 export function renderMastery(conceptId) {
   const items = MASTERY[conceptId];
@@ -24,7 +25,7 @@ export function renderMastery(conceptId) {
 <input type="checkbox" ${done ? 'checked' : ''}
   data-concept="${conceptId}" data-idx="${index}"
   onchange="window.__toggleMastery('${conceptId}', ${index}, this)">
-<span>${formalizeMarkupString(item)}</span>
+<span>${formalizeMarkupString(getMasteryItemLabel(item))}</span>
 </label>`;
   });
 

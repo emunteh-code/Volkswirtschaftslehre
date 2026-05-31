@@ -20,6 +20,7 @@ import {
   initQuellenPanelInteractions
 } from "./quellenPanel.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
+import { studentizeMethodText, studentizeTaskGapNote } from "../utils/studentFacingText.js";
 import {
   FULL_EXAM_HOME_DESCRIPTION
 } from "../data/examDisclosure.js";
@@ -44,6 +45,9 @@ export const KONCEPT_CHECK_HOME_ACTION_CARD_HTML = `<div class="home-action-card
 export function buildKonzeptCheckHomeCardHtml(enabled = false) {
   return enabled ? KONCEPT_CHECK_HOME_ACTION_CARD_HTML : "";
 }
+
+export const KONCEPT_CHECK_SCOPE_NOTE =
+  "Konzept-Check: derzeit nur in Makro I — andere Module nutzen Schnelltest & Aufgaben.";
 
 export function createRenderer({
   courseLabel,
@@ -96,12 +100,9 @@ export function createRenderer({
   }
 
   function renderStudentTaskGapNote(gap) {
-    if (!hasMeaningfulText(gap)) return "";
-    const raw = String(gap);
-    if (/portalabdeckung|partial|not yet represented|missing-official/i.test(raw)) {
-      return `<p class="klausurmethodik-gap-note">Übungsformat (Plattform) — keine item-für-item Übernahme offizieller Klausuraufgaben.</p>`;
-    }
-    return `<p class="klausurmethodik-gap-note">${renderSemanticPlainText(gap)}</p>`;
+    const studentized = studentizeTaskGapNote(gap);
+    if (!hasMeaningfulText(studentized)) return "";
+    return `<p class="klausurmethodik-gap-note">${renderSemanticPlainText(studentized)}</p>`;
   }
 
   function getCategoryPosition(conceptId) {
@@ -815,11 +816,22 @@ ${answerMarkup}
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active mikro1-practice"><div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+        return `<div class="panel active mikro1-practice">
+<div class="practice-panel-header">
+<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+</div>
+<div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
       }
-      return '<div class="panel active mikro1-practice"><div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>';
+      return `<div class="panel active mikro1-practice">
+<div class="practice-panel-header">
+<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+</div>
+<div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>`;
     }
     let html = `<div class="panel active mikro1-practice">
+<div class="practice-panel-header">
+<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+</div>
 <div class="practice-surface-intro">
 <div class="practice-surface-column">
 <span class="practice-surface-kicker">Geführte Aufgaben</span>
@@ -841,8 +853,9 @@ ${renderGuidedTasks(tasks)}`;
   }
 
   function methodToVorgehenBullets(method) {
-    if (!hasMeaningfulText(method)) return [];
-    const raw = String(method).trim();
+    const sanitized = studentizeMethodText(method);
+    if (!hasMeaningfulText(sanitized)) return [];
+    const raw = String(sanitized).trim();
     const bySentence = raw
       .split(/(?:\.\s+|;\s+|\n+)/)
       .map((part) => part.trim())
@@ -912,7 +925,7 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
       ? `<ul class="klausurmethodik-list klausurmethodik-list--traps">${traps.map((trap) => `<li>${renderSemanticPlainText(trap)}</li>`).join("")}</ul>`
       : "";
     const sourceFootnote = hasAnchors
-      ? `<p class="klausurmethodik-footnote"><button type="button" class="klausurmethodik-source-link" onclick="window.__openQuellen?.()">Quellen anzeigen</button><span class="klausurmethodik-footnote-sep" aria-hidden="true">·</span><span>${family.sourceAnchorIds.length} Anker</span></p>`
+      ? `<p class="klausurmethodik-footnote"><button type="button" class="klausurmethodik-source-link" onclick="window.__openQuellen?.()">Quellen anzeigen</button><span class="klausurmethodik-footnote-sep" aria-hidden="true">·</span><span>${family.sourceAnchorIds.length} VL-Stelle${family.sourceAnchorIds.length === 1 ? "" : "n"}</span></p>`
       : "";
     return `<details class="task-family-card klausurmethodik-accordion"${openAttr} data-family-id="${familyKey}">
 <summary class="klausurmethodik-accordion-head">
@@ -1390,6 +1403,10 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
 </div>
 ` : ""}
 </div>`;
+
+    if (!extraHomeActionCardsHtml) {
+      html += `<p class="home-konzept-check-note" role="note">${KONCEPT_CHECK_SCOPE_NOTE}</p>`;
+    }
 
     if (weakChapter) {
       html += `<p class="home-weak-teaser">Schwacher Bereich: <button type="button" class="link-btn" onclick="window.__navigate('${weakChapter.id}')">${renderMathTitle(weakChapter.title)}</button> — <button type="button" class="link-btn" onclick="window.__showDashboard()">Dashboard →</button></p>`;

@@ -64,11 +64,21 @@ export const CONTENT = {
         'Die Leitfrage des ganzen Moduls',
         `<p>Fast jedes Kapitel des Moduls beantwortet dieselbe Kernfrage auf einer neuen Ebene: Welche Alternative ist unter Zeit, Knappheit und Risiko die bessere? Später heißen die Werkzeuge dafür Kapitalwert, Endwert, IZF, Erwartungswert, WACC oder Leverage.</p>
          ${warn('Einstiegsfehler:', 'Wer Finanzwirtschaft als bloße Sammlung von Kennzahlen lernt, erkennt später die gemeinsame Entscheidungslogik nicht wieder.')}`
+      ),
+      section(
+        'Zahlungsreihe als Grundobjekt',
+        `<p>Jede Investitions- oder Finanzierungsentscheidung lässt sich als Folge von Zahlungen $\\{z_0, z_1, \\ldots, z_n\\}$ darstellen. $z_0$ ist typischerweise die Anfangsinvestition (negativ), spätere $z_t$ sind Rückflüsse. Die Entscheidung vergleicht Alternativen über dieselbe Zahlungsstruktur — nicht über isolierte Kennzahlen.</p>
+         ${mathBlock(String.raw`$$z_t > 0 \\text{ (Einzahlung)},\\quad z_t < 0 \\text{ (Auszahlung)}$$`)}`
+      ),
+      section(
+        'In der Klausur: Finanzdenkweise',
+        `<p>Prüfungsstandard bei jeder Aufgabe: (1) Zahlungsreihe aufstellen — Vorzeichen und Zeitpunkte korrekt. (2) Entscheidungskriterium wählen (KW, IZF, EV). (3) Annahmen zu Zins/Risiko benennen. (4) Ergebnis als Empfehlung formulieren, nicht nur Zahl nennen. Liquidität ≠ Erfolg ≠ Vermögen — diese Trennung explizit machen.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Leitobjekt', eq: phrase('Zahlungsreihe { z_0, z_1, ..., z_n }'), desc: 'Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.' },
-      { label: 'Leitfrage', eq: schema(['Zeitpunkt', '+', 'Zahlung', '+', 'Risiko', '⇒', 'Entscheidung']), desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' }
+      { label: 'Leitfrage', eq: schema(['Zeitpunkt', '+', 'Zahlung', '+', 'Risiko', '⇒', 'Entscheidung']), desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' },
+      { label: 'Zeitwert', eq: String.raw`$$BW = \sum_{t=0}^{n} \frac{z_t}{(1+i)^t}$$`, desc: 'Grundidee der Abzinsung — Vorausschau auf Kapitalwert.' }
     ],
     aufgaben: [
       task(

@@ -107,6 +107,23 @@ export const CONTENT = {
       <p>Bei Preisdiskriminierung zweiten Grades kann der Monopolist Konsumenten nicht direkt unterscheiden. Er bietet Preis-Mengen- oder Preis-Qualitäts-Kombinationen an, aus denen die Konsumenten selbst wählen.</p>
       <div class="warn-box"><strong>Trennlinie:</strong> Dritter Grad trennt beobachtbare Gruppen. Zweiter Grad baut ein Menü, damit unterschiedliche Zahlungsbereitschaften sich selbst sortieren.</div>
     </div>
+    <div class="section-block">
+      <h3>Erster Grad: vollständige Preisdiskriminierung</h3>
+      <p>Bei perfekter Information über jeden Konsumenten setzt der Monopolist den individuellen Reservationspreis. Die Nachfragekurve wird zum Grenzerlös — es gibt keinen Deadweight Loss, aber die gesamte Konsumentenrente wird absorbiert. In der VL-Notation: $E'(y)=p(y)$ statt $E'(y)<p(y)$ bei fallender Nachfrage.</p>
+    </div>
+    <div class="section-block">
+      <h3>Mechanismus: Grenzerlöse ausgleichen</h3>
+      <p>Bei drittem Grad gilt $E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$. Preise $p_1\\neq p_2$ sind möglich, weil die Nachfrageelastizitäten der Gruppen differieren: $p_i = C'(Y)/(1-1/|\\varepsilon_i|)$. Die Gruppe mit unelastischerer Nachfrage zahlt den höheren Preis.</p>
+    </div>
+    <div class="section-block">
+      <h3>Fehleranalyse</h3>
+      <div class="warn-box"><strong>Grad verwechseln</strong> Erster Grad = individuelle Preise (Reservationspreis). Zweiter Grad = Menü/Self-Selection ohne Typbeobachtung. Dritter Grad = beobachtbare Gruppen. In der Klausur zuerst fragen: Kann der Monopolist Typen erkennen?</div>
+      <div class="warn-box"><strong>Gleicher Preis ≠ gleicher Grenzerlös</strong> Im Optimum des dritten Grades müssen Grenzerlöse übereinstimmen, nicht die Preise. Wer $p_1=p_2$ fordert, verwechselt Gleichgewichtsbedingung und Preisniveau.</div>
+    </div>
+    <div class="section-block">
+      <h3>In der Klausur: Preisdiskriminierung</h3>
+      <p>Antwortschema: (1) Grad identifizieren. (2) Gewinnfunktion aufschreiben. (3) FOC: Grenzerlöse = Grenzkosten (ggf. über Teilmärkte). (4) Wohlfahrt: Erster Grad → keine DWL, dritter Grad → teilweise Rentenextraktion. Bei Menüs (2. Grad): IC- und IR-Bindungen der Typen prüfen.</p>
+    </div>
     `,
     formeln: [
       { label: 'Preisdiskriminierung dritten Grades', eq: String.raw`$$E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$$`, desc: 'Grenzerlöse werden zwischen Teilmärkten ausgeglichen.' },

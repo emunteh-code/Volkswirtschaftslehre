@@ -331,6 +331,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p07.kapitalreich-relative-au","internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p21.relativem-faktorangebot-"]
   }),
   card({
+    id: 'internationale-wirtschaftsbeziehungen.verteilung_handel.faktorpreis_link',
+    conceptId: 'verteilung_handel',
+    officialNotation: "verteilung_handel",
+    displayFormula: "$$\\hat{P}_j \\uparrow \\Rightarrow \\text{Faktor des intensiv genutzten Gutes } j \\text{ gewinnt real}$$",
+    intuition: "Stolper-Samuelson-Kern.",
+    derivationSteps: [
+        {
+            "label": "Faktorpreis-Link",
+            "text": "kapitalreich (relative Aussage über beide Länder)",
+            "math": "$$\\hat{P}_j \\uparrow \\Rightarrow \\text{Faktor des intensiv genutzten Gutes } j \\text{ gewinnt real}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu verteilung_handel","Faktorpreis-Link"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Faktorpreis-Link — Stolper-Samuelson-Kern.",
+    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.verteilung_handel-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p07.kapitalreich-relative-au","internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p21.relativem-faktorangebot-"]
+  }),
+  card({
     id: 'internationale-wirtschaftsbeziehungen.verteilung_handel.stolper_samuelson_merksatz',
     conceptId: 'verteilung_handel',
     officialNotation: "r, w",

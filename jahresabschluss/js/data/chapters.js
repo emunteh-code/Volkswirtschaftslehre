@@ -374,11 +374,25 @@ export const CONTENT = {
         'Zuschreibung und Grenzen',
         `<p>Entfällt der Grund einer außerplanmäßigen Abschreibung, kann oder muss zugeschrieben werden, jedoch nur bis zu den fortgeführten Anschaffungskosten. Auch diese Obergrenze ist klausurwichtig.</p>
          ${warn('Abschreibungsfehler:', 'Lineare AfA ist nur die Standardtechnik. In der Prüfung musst du trotzdem immer zuerst fragen, welche Wertminderung vorliegt und ob planmäßig oder außerplanmäßig abzuschreiben ist.')}`
+      ),
+      section(
+        'GWG und Aktivierungsschwelle',
+        `<p>Geringwertige Wirtschaftsgüter (GWG) bis 800 € netto (bzw. 1.000 € ab 2024 in der Praxis) können sofort als Aufwand gebucht werden (§ 6 Abs. 2 EStG / Sammelposten-Option). Liegt der Wert darüber, ist zu aktivieren und planmäßig abzuschreiben. Die Schwelle entscheidet über Bilanzposten vs. Sofortaufwand.</p>`
+      ),
+      section(
+        'Buchungskette Anlagenzugang',
+        `<p>Typischer Ablauf: (1) Anschaffung — Anlage an Verbindlichkeiten/Kasse. (2) Planmäßige AfA zum Jahresende — AfA an Anlage. (3) Außerplanmäßige AfA bei Wertminderung — außerplanm. AfA an Anlage. GuV-Wirkung: AfA mindert den Periodenerfolg; Bilanz-Wirkung: Anlagenbuchwert sinkt.</p>
+         ${warn('AfA vs. Zahlung', 'Abschreibung ist keine Zahlung, sondern periodische Kostenverteilung. Wer „AfA an Kasse" bucht, verwechselt Erfolgswirkung mit Liquidität.')}`
+      ),
+      section(
+        'In der Klausur: Anlagevermögen',
+        `<p>Standardpfad: Aktivierung ja/nein (GWG-Schwelle) → AfA-Methode und Nutzungsdauer → planmäßig/außerplanmäßig unterscheiden → Buchwert und GuV-Wirkung nennen. Bei Wertminderung: außerplanmäßige AfA bis zum niedrigeren beizulegenden Wert; Zuschreibung nur bis zu fortgeführten AK.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Lineare AfA', eq: String.raw`$$AfA = \frac{AK - RW}{n}$$`, desc: 'Jährlicher planmäßiger Abschreibungsbetrag.' },
-      { label: 'Buchwert', eq: String.raw`$$BW_t = AK - t \cdot AfA$$`, desc: 'Fortgeführter Wert nach t Jahren.' }
+      { label: 'Buchwert', eq: String.raw`$$BW_t = AK - t \cdot AfA$$`, desc: 'Fortgeführter Wert nach t Jahren.' },
+      { label: 'Degressive AfA', eq: String.raw`$$AfA_t = BW_{t-1} \cdot p$$`, desc: 'Prozent vom Restbuchwert (wenn zulässig).' }
     ],
     aufgaben: [
       task(
@@ -544,11 +558,25 @@ export const CONTENT = {
         'Skonto, Rabatt und Rücksendung',
         `<p>Preisnachlässe verändern nicht nur den Zahlungsvorgang, sondern auch die Steuerbasis. In diesen Fällen musst du daher immer an den Brutto-/Netto-Zusammenhang und die USt-Korrektur denken.</p>
          ${warn('USt-Fehler:', 'Umsatzsteuer ist kein Aufwand und keine Betriebseinnahme im engeren Sinn. Wer sie in der Erfolgsermittlung wie normalen Aufwand behandelt, verfehlt die Systematik.')}`
+      ),
+      section(
+        'Durchgerechnetes Beispiel: Einkauf mit Vorsteuer',
+        `<p>Einkauf Waren netto 1.000 €, USt 19% = 190 €, Brutto 1.190 €. Buchung: Waren 1.000 an Verbindlichkeiten 1.190; Vorsteuer 190 an Verbindlichkeiten (oder Sammelbuchung: Waren 1.000, Vorsteuer 190 an Verbindlichkeiten 1.190). Bei Skonto 2% auf Netto: Warenkosten sinken um 20 €, Vorsteuer um 3,80 € — beides muss korrigiert werden, nicht nur der Lieferantenposten.</p>`
+      ),
+      section(
+        'Warenverbrauch und Bestandsveränderung',
+        `<p>Im gemischten Warenkonto wird der Wareneinkauf direkt als Aufwand gebucht; im getrennten System läuft der Einkauf über Wareneingang/Warenbestand und der Verbrauch über <em>Warenverbrauch = Anfangsbestand + Zugänge − Endbestand</em>. Die Wahl des Systems bestimmt, ob Inventur und Bestandsveränderung explizit sichtbar werden.</p>
+         ${warn('Bestand vergessen', 'Bei getrenntem Warenkonto muss zum Jahresende der Bestand ermittelt und abgegrenzt werden. Wer nur Einkäufe bucht, überschätzt den Aufwand.')}`
+      ),
+      section(
+        'In der Klausur: Waren und USt',
+        `<p>Prüfungsstandard: Brutto/Netto/USt sauber trennen → Buchungssatz mit korrekten Konten → Wirkung auf GuV (Warenverbrauch/Aufwand) und Bilanz (Vorsteuer, Verbindlichkeiten, Bestand). Bei Skonto/Rabatt: Steuerbasis mitkorrigieren. USt-Konten nie als Erfolgskonten behandeln.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Zahllast', eq: String.raw`$$Zahllast = USt - VSt$$`, desc: 'Abzuführende Umsatzsteuer nach Vorsteuerabzug.' },
-      { label: 'Netto aus Brutto', eq: String.raw`$$Netto = \frac{Brutto}{1 + Steuersatz}$$`, desc: 'Hilft bei Skonto- und Umsatzsteuerfällen.' }
+      { label: 'Netto aus Brutto', eq: String.raw`$$Netto = \frac{Brutto}{1 + Steuersatz}$$`, desc: 'Hilft bei Skonto- und Umsatzsteuerfällen.' },
+      { label: 'Warenverbrauch', eq: String.raw`$$WB = Anfangsbestand + Zugänge - Endbestand$$`, desc: 'Getrenntes Warenkontensystem.' }
     ],
     aufgaben: [
       task(
@@ -629,13 +657,34 @@ export const CONTENT = {
       ),
       section(
         'Gewinnanteile und Abschluss',
-        `<p>Gewinnanteile werden den Kapitalkonten zugerechnet und verändern die Gesellschafterpositionen. Für die Klausur ist die saubere Abschlusskette Privatkonto -> Kapitalkonto entscheidend.</p>
+        `<p>Gewinnanteile werden den Kapitalkonten zugerechnet und verändern die Gesellschafterpositionen. Für die Klausur ist die saubere Abschlusskette Privatkonto → Kapitalkonto entscheidend.</p>
          ${warn('Kontenfalle:', 'Einlagen/Entnahmen und Gewinnanteile werden oft auf derselben Ebene vermischt. Klausurstabil ist die getrennte Kontenführung mit anschließendem Abschluss.')}`
+      ),
+      section(
+        'Buchungstechnik nach VL 7.3',
+        `<p>Typische Buchungssätze aus dem Kurs (Kontenrahmen SKR03):</p>
+         <ul>
+           <li><strong>Entnahme:</strong> Privatkonto A an Kasse — Gesellschafter zieht Mittel ab.</li>
+           <li><strong>Einlage:</strong> Kasse an Privatkonto B — Gesellschafter bringt Kapital ein.</li>
+           <li><strong>Abschluss Privatkonto:</strong> Kapitalkonto A an Privatkonto A — Saldo wird ins langfristige EK überführt.</li>
+           <li><strong>Gewinnverteilung:</strong> GuV-Ergebnis an Kapitalkonto A (anteilig) — Periodenerfolg erhöht das EK des Gesellschafters.</li>
+         </ul>
+         <p>Das Privatkonto ist ein <em>durchlaufendes</em> Hilfskonto; das Kapitalkonto trägt die dauerhafte Gesellschafterposition in der Bilanz.</p>`
+      ),
+      section(
+        'Abgrenzung zu Kapitalgesellschaften',
+        `<p>Bei AG/GmbH gibt es Gezeichnetes Kapital, Kapitalrücklagen und Gewinnrücklagen — formalisiert und nicht gesellschafterindividuell. Bei OHG/KG/GbR hingegen ist jedes Kapitalkonto ein Bilanzposten des jeweiligen Gesellschafters. Entnahmen bei Kapitalgesellschaften laufen über Gewinnausschüttungen, nicht über Privatkonten.</p>
+         ${warn('AG-Logik übertragen', 'Rücklagenbildung und Ausschüttungsbeschränkungen (§ 30 GmbHG) gelten für Kapitalgesellschaften — nicht für Personengesellschaften. Wer „Gewinnrücklage“ bei einer OHG bucht, verwechselt Rechtsformen.')}`
+      ),
+      section(
+        'In der Klausur: Personengesellschafts-EK',
+        `<p>Standardpfad: (1) Geschäftsvorfall klassifizieren — Einlage, Entnahme oder Erfolgsanteil? (2) Privatkonto oder direkt Kapitalkonto? (3) Abschlusskette bis Bilanzposten durchdenken. Bei Gewinnverteilung nach Beteiligungsquoten: Ergebnis × Quote → Kapitalkonto des Gesellschafters. Punkte gibt es für korrekte Kontenbezeichnung und die Trennung laufende Bewegung (Privatkonto) vs. Bilanzposition (Kapitalkonto).</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Privatkonto-Abschluss', eq: String.raw`\text{Privatkonto} \rightarrow \text{Kapitalkonto}`, desc: 'Einlagen/Entnahmen werden periodisch überführt.' },
-      { label: 'Gewinnzuweisung', eq: String.raw`\text{GuV-Ergebnis} \rightarrow \text{Kapitalkonten der Gesellschafter}`, desc: 'Erfolgszuordnung nach Beteiligungslogik.' }
+      { label: 'Gewinnzuweisung', eq: String.raw`\text{GuV-Ergebnis} \rightarrow \text{Kapitalkonten der Gesellschafter}`, desc: 'Erfolgszuordnung nach Beteiligungslogik.' },
+      { label: 'Gewinnanteil', eq: String.raw`$$\text{Anteil}_i = \text{GuV-Ergebnis} \times \text{Beteiligungsquote}_i$$`, desc: 'Verteilung auf Gesellschafterkonten.' }
     ],
     aufgaben: [
       task(

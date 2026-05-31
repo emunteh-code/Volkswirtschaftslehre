@@ -505,12 +505,24 @@ resid(reg1)`,
           'Im Vektorraum wird y auf den Spaltenraum von X projiziert. Der vorhergesagte Anteil liegt im durch X erzeugten Raum, die Residuen stehen orthogonal dazu.',
           'Diese Geometrie erklärt, warum OLS, Normalgleichungen und Variationzerlegung so eng zusammenhängen.'
         ]
+      },
+      {
+        title: 'In der Klausur: OLS-Zielfunktion',
+        body: [
+          'Prüfungsstandard: (1) Zielfunktion SSR(β) = Σ(y_i − x_i\'β)² aufschreiben. (2) Begründen, warum quadriert (kein Wegheben, große Fehler stärker gewichtet). (3) Verbindung zu Normalgleichungen X\'(y − Xβ̂) = 0 herstellen. (4) Ausreißer-Effekt über Quadratisierung erklären.',
+          'Bei Interpretation: OLS minimiert nicht jeden Punkt, sondern die Gesamtabweichung — Residuen sind der unvermeidbare Modellrest, kein Rechenfehler.'
+        ],
+        math: [String.raw`$$\\frac{\\partial SSR}{\\partial \\beta} = -2X'(y-X\\beta) = 0 \\Rightarrow X'(y-X\\hat{\\beta})=0$$`]
       }
     ],
     warnings: [
       {
         title: 'OLS will jeden Punkt exakt treffen',
         body: 'Das Ziel ist die Minimierung der quadrierten Gesamtabweichung, nicht die punktgenaue Anpassung jeder einzelnen Beobachtung.'
+      },
+      {
+        title: 'SSR mit TSS verwechseln',
+        body: 'SSR misst die nicht erklärte Variation (Residuen). TSS misst die Gesamtvariation von y. R² = 1 − SSR/TSS — diese Zerlegung nicht vertauschen.'
       }
     ],
     formeln: [
@@ -2459,12 +2471,23 @@ hist(beta_hat, breaks = 35, probability = TRUE)`,
           'Auch eine überzeugende Monte-Carlo-Studie beweist nicht, dass reale Daten genau demselben Prozess folgen. Sie erklärt die Theorie, ersetzt aber keine inhaltliche Modellprüfung.',
           'Man muss also immer zwischen didaktischer Laborwelt und empirischer Anwendung unterscheiden.'
         ]
+      },
+      {
+        title: 'In der Klausur: Monte Carlo',
+        body: [
+          'Prüfungsstandard: (1) DGP festhalten — welches Modell, welche Parameter? (2) Viele Stichproben ziehen, Schätzer wiederholen. (3) Mittelwert der Schätzer ≈ wahrer Parameter → Unverzerrtheit illustriert. (4) Streuung über Wiederholungen → Varianz/Standardfehler. (5) n erhöhen → Verteilung des Schätzers näher normal (Asymptotik).',
+          'Simulation beweist Theorie unter Annahmen, nicht Realitätsgültigkeit. Immer zwischen Laborwelt und empirischer Anwendung trennen.'
+        ]
       }
     ],
     warnings: [
       {
         title: 'Monte Carlo als Realitätsbeweis lesen',
         body: 'Simulationen illustrieren Theorielogik unter selbst gesetzten Annahmen. Sie belegen nicht automatisch, dass die reale Welt genauso funktioniert.'
+      },
+      {
+        title: 'Zu wenige Simulationen',
+        body: 'Mit S = 100 Wiederholungen ist die Monte-Carlo-Verteilung noch sehr unruhig. Für stabile Schätzer der Simulationsvarianz braucht es deutlich mehr Wiederholungen — in Aufgaben reicht die qualitative Aussage.'
       }
     ],
     formeln: [

@@ -229,11 +229,21 @@ export const CONTENT = {
       section(
         'Wann du diese Logik in der Klausur ziehen musst',
         `<p>Sobald die Aufgabe nach Gewinnern/Verlierern, Faktorpreisen, Globalisierungskritik oder innenpolitischem Widerstand fragt, reicht die reine H-O-Handelsrichtung nicht mehr. Dann musst du die Verteilungsebene explizit nachziehen.</p>`
+      ),
+      section(
+        'Worked intuition: kapitalreiches vs. arbeitsreiches Land',
+        `<p>Home ist kapitalreich und exportiert das kapitalintensive Gut. Durch Handel steigt der Weltpreis dieses Gutes relativ. Home gewinnt real am Faktor Kapital ($r\\uparrow$), verliert am Faktor Arbeit ($w\\downarrow$ in realer Entlohnung). Foreign — arbeitsreich — erlebt das Spiegelbild. Die Summe der Handelsgewinne ist positiv, aber innerhalb jedes Landes gibt es distributive Verlierer.</p>
+         ${mathBlock(String.raw`$$\\hat{P}_{K\\text{-int}} \\uparrow \\Rightarrow \\hat{r} > 0,\\ \\hat{w} < 0 \\text{ (in Home)}$$`)}`
+      ),
+      section(
+        'In der Klausur: Stolper-Samuelson',
+        `<p>Prüfungsstandard: (1) Faktorreichlichkeit des Landes benennen. (2) Handelsrichtung aus H-O ableiten. (3) Relativen Güterpreis-Shift durch Handel identifizieren. (4) Reale Faktorpreise ableiten — nicht nur „Löhne steigen". Aggregationsfehler vermeiden: Gesamtwohlfahrt ≠ jeder gewinnt.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Stolper-Samuelson', eq: String.raw`$$P_{K\text{-intensiv}} \uparrow \Rightarrow r \uparrow,\ w \downarrow$$`, desc: 'Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.', variables: { 'r': 'reale Kapitalentlohnung', 'w': 'reale Arbeitsentlohnung' } },
-      { label: 'Verteilungslogik', eq: String.raw`\text{reichlicher Faktor} \Rightarrow \text{gewinnt relativ durch Handel}`, desc: 'Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.' }
+      { label: 'Verteilungslogik', eq: String.raw`\text{reichlicher Faktor} \Rightarrow \text{gewinnt relativ durch Handel}`, desc: 'Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.' },
+      { label: 'Faktorpreis-Link', eq: String.raw`$$\hat{P}_j \uparrow \Rightarrow \text{Faktor des intensiv genutzten Gutes } j \text{ gewinnt real}$$`, desc: 'Stolper-Samuelson-Kern.' }
     ],
     aufgaben: [
       task(

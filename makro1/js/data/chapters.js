@@ -265,6 +265,12 @@ export const CONTENT = {
         <p>Der Anleihenpreis und der Zins bewegen sich gegenläufig. Kauft die Zentralbank Anleihen, steigt ihr Preis und der Zins sinkt. In der Liquiditätsfalle wird die Geldnachfrage bei sehr niedrigem Zins nahezu unendlich elastisch; zusätzliche Geldmenge senkt den Zins dann kaum noch.</p>
         ${warn('Preis einer Anleihe und Zins laufen gegenläufig', 'Wer beide Größen in dieselbe Richtung laufen lässt, verpasst den Kern der Offenmarktpolitik.')}
         ${warn('Nominalzins ist nicht Realzins', 'Im Geldmarktmodell wird zunächst mit dem Nominalzins i gearbeitet. Der Realzins wird erst mit Inflationserwartungen gebildet.')}
+      `),
+      section('Komparative Statik und IS-LM-Verknüpfung', `
+        <p>$M\\uparrow$ → $i\\downarrow$ → $I\\uparrow$ → $Y\\uparrow$ (über Investitionskanal). $Y\\uparrow$ → höhere Geldnachfrage → $i\\uparrow$ (Teilcrowding-out bei Fiskalpolitik). In IS-LM: LM verschiebt sich bei Geldpolitik, IS bei Fiskalpolitik; Schnittpunkt bestimmt Gleichgewicht $(Y,i)$.</p>
+      `),
+      section('In der Klausur: Geldmarkt', `
+        <p>Standardpfad: (1) $M/P = L(i,Y)$ aufschreiben. (2) Vorzeichen $L_i<0$, $L_Y>0$ nennen. (3) Schock interpretieren — Geldmenge, Einkommen oder Zinsregel. (4) Wirkung auf $i$ und über Investitionskanal auf $Y$. Bei Liquiditätsfalle: horizontale LM, Geldpolitik wirkungslos, Fiskalpolitik wirksam.</p>
       `)
     ].join(''),
     formeln: [

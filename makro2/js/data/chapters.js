@@ -555,8 +555,18 @@ export const CONTENT = {
         <p>Verliert ein Regime Glaubwürdigkeit, steigen erwartete Abwertung und Verteidigungszins. Das verschlechtert Binnenkonjunktur und Bankenlage und kann die Krise selbst verstärken.</p>
         <p>Im Unterricht dient Argentinien als Leitfall: nominale Stabilität, reale Aufwertung, Rezession, Vertrauensverlust.</p>
       `),
+      section('First- und Second-Generation-Krisen', `
+        <p><strong>First generation (Krugman):</strong> Überbewerteter fixer Kurs + expansionäre Fiskalpolitik + schrumpfende Reserven → Spekulanten wetten auf Abwertung → selbsterfüllend. Die Fundamentaldaten (Budget, Reserven) sind schwach genug, dass Verteidigung nicht kostengünstig ist.</p>
+        <p><strong>Second generation:</strong> Fundamentale sind noch vertretbar, aber die Zentralbank zögert mit Verteidigung wegen hoher Zinskosten (Rezession, Bankennot). Erwartete Abwertung löst Kapitalflucht aus — die Krise entsteht durch Erwartungskoordination, nicht nur durch Reservearithmetik.</p>
+        ${math(String.raw`$$i = i^* + \\phi + \\mathbb{E}[\\Delta E/E]$$`)}
+        <p>Der Aufschlag $\\phi$ steigt mit wahrgenommener Unglaubwürdigkeit; je höher $i$ zur Verteidigung, desto stärker die Binnenrezession und desto attraktiver die Abwertungserwartung.</p>
+      `),
       section('Prüfungslogik', `
         ${warn('Nicht nur Reserven zählen', 'Währungskrisen hängen nicht nur von Devisenreserven ab. Erwartungsbildung, reale Überbewertung, Bankenschwäche und politische Kosten der Verteidigung sind ebenso wichtig.')}
+        ${warn('Currency Board ≠ Garantie', 'Ein Currency Board erhöht Glaubwürdigkeit, eliminiert aber Anpassungsdruck nicht. Bei fixer Parität und divergierender Produktivität entsteht reale Überbewertung — genau der first-generation-Kanal.')}
+      `),
+      section('In der Klausur: Währungskrisen', `
+        <p>Antwortschema: (1) Regime benennen (fix, CB, flex). (2) Fundamentaldaten vs. Erwartungskanal trennen. (3) Verteidigungskosten (Zins, Rezession) gegen Nutzen der Parität abwägen. (4) Selbsterfüllende Erwartungen als Verstärker einordnen. Rechnen: Zahlungsbilanzidentität + Reservenveränderung; qualitative Faktoren mindestens drei nennen.</p>
       `)
     ].join(''),
     formeln: [
@@ -618,8 +628,17 @@ export const CONTENT = {
         <p>Kurzfristig gibt es einen Trade-off. Langfristig ziehen Erwartungen nach; deshalb ist die langfristige Phillipskurve vertikal bei $u=u_n$.</p>
         <p>Diese Trennung ist zentral für Zeitinkonsistenz, Inflationsbias und Opferquoten bei Disinflation.</p>
       `),
+      section('NAIRU und Ankerfunktion', `
+        <p>Die <strong>natürliche Arbeitslosigkeit</strong> $u_n$ (NAIRU) ist die Quote, bei der die Inflation weder beschleunigt noch verlangsamt — vorausgesetzt $\\pi^e$ ist stabil. Sie hängt von Strukturmerkmalen des Arbeitsmarkts ab (Matching, Institutionen, Mindestlöhne), nicht von der aktuellen Konjunktur.</p>
+        ${math(String.raw`$$\\pi = \\pi^e \\text{ wenn } u = u_n$$`)}
+        <p>Geldpolitik kann kurzfristig $u$ von $u_n$ abweichen lassen (Überraschungsinflation), aber langfristig kehrt die Wirtschaft zu $u_n$ zurück — dann bestimmt $\\pi^e$ das Inflationsniveau.</p>
+      `),
       section('Fehleranalyse', `
         ${warn('Keine dauerhafte Tauschbeziehung', 'Die Phillipskurve ist kein Menü, mit dem Politik dauerhaft weniger Arbeitslosigkeit gegen etwas mehr Inflation kaufen könnte. Langfristig verschwimmt der Trade-off.')}
+        ${warn('$u_n$ nicht mit $u=0$ verwechseln', 'Vollbeschäftigung im makroökonomischen Sinn bedeutet $u=u_n$, nicht null Arbeitslosigkeit. Strukturelle und friktionelle Arbeitslosigkeit bleiben auch im Gleichgewicht.')}
+      `),
+      section('In der Klausur: Phillipskurve', `
+        <p>Bei Rechenaufgaben: Formel einsetzen, $\\pi^e$ und $u_n$ aus der Aufgabenstellung übernehmen. Bei Interpretation: kurzfristiger Trade-off vs. langfristige Vertikalität unterscheiden. Disinflation (Senkung $\\pi$): Opferquote = temporär höheres $u$ über $u_n$ — Erwartungen passen sich nur langsam an (adaptive vs. rationale Erwartungen).</p>
       `)
     ].join(''),
     formeln: [
@@ -901,6 +920,12 @@ export const CONTENT = {
       section('Konvergenzlogik', `
         <p>Liegt die Wirtschaft links vom Steady State, übersteigt Investition die Abschreibung; rechts davon schrumpft die Kapitalintensität.</p>
         ${warn('Mehr Sparen heißt nicht mehr Wachstum für immer', 'Im Solow-Grundmodell hebt mehr Sparen nur das Niveau. Dauerhaftes Pro-Kopf-Wachstum braucht technischen Fortschritt.')}
+      `),
+      section('Numerisches Beispiel', `
+        <p>Cobb-Douglas $f(k)=k^{0{,}5}$, $\\delta=0{,}05$, $s=0{,}2$. Steady State: $sk^{*\\alpha}=(\\delta+n)k^*$ → $k^*=(s/(\\delta+n))^{1/(1-\\alpha)}$. Ohne Bevölkerungswachstum ($n=0$): $k^*=(0{,}2/0{,}05)^2=16$, $y^*=4$. Liegt $k_0=4$, dann $\\dot k>0$ — die Wirtschaft konvergiert nach oben.</p>
+      `),
+      section('In der Klausur: Solow-Grundmodell', `
+        <p>Typische Aufgaben: (1) Steady State aus $sf(k^*)=\\delta k^*$ berechnen. (2) Richtungsaussage bei Parameteränderung ($s\\uparrow$ → $k^*\\uparrow$, Wachstumsrate unverändert). (3) Konvergenz: $k<k^*$ → Wachstum, $k>k^*$ → Schrumpfung. Immer Niveau vs. Rate trennen.</p>
       `)
     ].join(''),
     formeln: [

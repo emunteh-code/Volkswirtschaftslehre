@@ -115,28 +115,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p20.23-10-2024-georg-august-","finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p14.23-10-2024-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.finanz_denkweise.leitfrage_merksatz',
+    id: 'finanzwirtschaft.finanz_denkweise.zeitwert',
     conceptId: 'finanz_denkweise',
     officialNotation: "finanz_denkweise",
-    displayFormula: {"mode":"schema","layout":"chain","parts":["Zeitpunkt","+","Zahlung","+","Risiko","⇒","Entscheidung"]},
-    intuition: "Gute Finanzwirtschaft verbindet alle drei Ebenen.",
+    displayFormula: "$$BW = \\sum_{t=0}^{n} \\frac{z_t}{(1+i)^t}$$",
+    intuition: "Grundidee der Abzinsung — Vorausschau auf Kapitalwert.",
     derivationSteps: [
         {
-            "label": "Leitfrage (Merksatz)",
+            "label": "Zeitwert",
             "text": "23.10.2024                                       Georg-August-Universität Göttingen   20",
-            "math": {
-                "mode": "schema",
-                "layout": "chain",
-                "parts": [
-                    "Zeitpunkt",
-                    "+",
-                    "Zahlung",
-                    "+",
-                    "Risiko",
-                    "⇒",
-                    "Entscheidung"
-                ]
-            }
+            "math": "$$BW = \\sum_{t=0}^{n} \\frac{z_t}{(1+i)^t}$$"
         },
         {
             "label": "Anwendung",
@@ -145,9 +133,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu finanz_denkweise","Leitfrage (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu finanz_denkweise","Zeitwert"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Leitfrage (Merksatz) — Gute Finanzwirtschaft verbindet alle drei Ebenen.",
+    examShortcut: "Merke: Zeitwert — Grundidee der Abzinsung — Vorausschau auf Kapitalwert.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.finanz_denkweise-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p20.23-10-2024-georg-august-","finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p14.23-10-2024-georg-august-"]

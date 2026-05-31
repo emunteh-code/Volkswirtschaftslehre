@@ -487,16 +487,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.anlagevermoegen.kapitel5-pdf.p03.die-bilanz-bilanzpositio","jahresabschluss.anlagevermoegen.kapitel5-pdf.p13.t1-120-000-15-000-105-00"]
   }),
   card({
-    id: 'jahresabschluss.anlagevermoegen.buchwert_merksatz',
+    id: 'jahresabschluss.anlagevermoegen.degressive_afa',
     conceptId: 'anlagevermoegen',
     officialNotation: "anlagevermoegen",
-    displayFormula: "$$BW_t = AK - t \\cdot AfA$$",
-    intuition: "Fortgeführter Wert nach t Jahren.",
+    displayFormula: "$$AfA_t = BW_{t-1} \\cdot p$$",
+    intuition: "Prozent vom Restbuchwert (wenn zulässig).",
     derivationSteps: [
         {
-            "label": "Buchwert (Merksatz)",
+            "label": "Degressive AfA",
             "text": "DIE BILANZ – BILANZPOSITION",
-            "math": "$$BW_t = AK - t \\cdot AfA$$"
+            "math": "$$AfA_t = BW_{t-1} \\cdot p$$"
         },
         {
             "label": "Anwendung",
@@ -505,9 +505,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu anlagevermoegen","Buchwert (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu anlagevermoegen","Degressive AfA"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Buchwert (Merksatz) — Fortgeführter Wert nach t Jahren.",
+    examShortcut: "Merke: Degressive AfA — Prozent vom Restbuchwert (wenn zulässig).",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.anlagevermoegen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.anlagevermoegen.kapitel5-pdf.p03.die-bilanz-bilanzpositio","jahresabschluss.anlagevermoegen.kapitel5-pdf.p13.t1-120-000-15-000-105-00"]
@@ -721,16 +721,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p20.s-umsatzsteuer-abschluss","jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p18.2800-bank-833-an-5000-um"]
   }),
   card({
-    id: 'jahresabschluss.umlauf_waren_ust.netto_aus_brutto_merksatz',
+    id: 'jahresabschluss.umlauf_waren_ust.warenverbrauch',
     conceptId: 'umlauf_waren_ust',
     officialNotation: "umlauf_waren_ust",
-    displayFormula: "$$Netto = \\frac{Brutto}{1 + Steuersatz}$$",
-    intuition: "Hilft bei Skonto- und Umsatzsteuerfällen.",
+    displayFormula: "$$WB = Anfangsbestand + Zugänge - Endbestand$$",
+    intuition: "Getrenntes Warenkontensystem.",
     derivationSteps: [
         {
-            "label": "Netto aus Brutto (Merksatz)",
+            "label": "Warenverbrauch",
             "text": "S                Umsatzsteuer-Abschlusskonto                                        H",
-            "math": "$$Netto = \\frac{Brutto}{1 + Steuersatz}$$"
+            "math": "$$WB = Anfangsbestand + Zugänge - Endbestand$$"
         },
         {
             "label": "Anwendung",
@@ -739,9 +739,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu umlauf_waren_ust","Netto aus Brutto (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu umlauf_waren_ust","Warenverbrauch"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Netto aus Brutto (Merksatz) — Hilft bei Skonto- und Umsatzsteuerfällen.",
+    examShortcut: "Merke: Warenverbrauch — Getrenntes Warenkontensystem.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.umlauf_waren_ust-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p20.s-umsatzsteuer-abschluss","jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p18.2800-bank-833-an-5000-um"]
@@ -877,16 +877,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p05.7-1-grundlagen-kapitalge","jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p13.7-2-kapitalgesellschafte"]
   }),
   card({
-    id: 'jahresabschluss.eigenkapital_personengesellschaften.gewinnzuweisung_merksatz',
+    id: 'jahresabschluss.eigenkapital_personengesellschaften.gewinnanteil',
     conceptId: 'eigenkapital_personengesellschaften',
     officialNotation: "eigenkapital_personengesellschaften",
-    displayFormula: "\\text{GuV-Ergebnis} \\rightarrow \\text{Kapitalkonten der Gesellschafter}",
-    intuition: "Erfolgszuordnung nach Beteiligungslogik.",
+    displayFormula: "$$\\text{Anteil}_i = \\text{GuV-Ergebnis} \\times \\text{Beteiligungsquote}_i$$",
+    intuition: "Verteilung auf Gesellschafterkonten.",
     derivationSteps: [
         {
-            "label": "Gewinnzuweisung (Merksatz)",
+            "label": "Gewinnanteil",
             "text": "7.1 GRUNDLAGEN – KAPITALGESELLSCHAFTEN",
-            "math": "\\text{GuV-Ergebnis} \\rightarrow \\text{Kapitalkonten der Gesellschafter}"
+            "math": "$$\\text{Anteil}_i = \\text{GuV-Ergebnis} \\times \\text{Beteiligungsquote}_i$$"
         },
         {
             "label": "Anwendung",
@@ -895,9 +895,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu eigenkapital_personengesellschaften","Gewinnzuweisung (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu eigenkapital_personengesellschaften","Gewinnanteil"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Gewinnzuweisung (Merksatz) — Erfolgszuordnung nach Beteiligungslogik.",
+    examShortcut: "Merke: Gewinnanteil — Verteilung auf Gesellschafterkonten.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.eigenkapital_personengesellschaften-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p05.7-1-grundlagen-kapitalge","jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p13.7-2-kapitalgesellschafte"]

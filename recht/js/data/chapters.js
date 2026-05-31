@@ -945,6 +945,20 @@ export const CONTENT = {
   }
 };
 
+const RECHT_KLAUSUR_DEPTH = {
+  trennung_abstraktion: section('In der Klausur: Trennung und Abstraktion', `<p>Prüfungsstandard: Zwei Stränge parallel — (1) Verpflichtungsgeschäft (Wirksamkeit, Anfechtung, Rücktritt). (2) Verfügungsgeschäft (Eigentumsübertragung § 929 BGB) eigenständig prüfen. Unwirksamer Kauf ≠ automatisch kein Eigentumsübergang → Bereicherungsanspruch prüfen.</p>${warn('Subsumtionsreihenfolge', 'Erst Verpflichtung, dann Verfügung — nie aus Unwirksamkeit des einen auf den anderen schließen.')}${warn('Typischer Fall', 'Nichtiger Kauf, aber wirksame Übergabe: Eigentum bei Käufer, § 812 Abs. 1 S. 1 Alt. 1 Bereicherung.')}`),
+  dissens: section('In der Klausur: Dissens', `<p>Klausurpfad: Angebot und Annahme objektiv auslegen (§§ 133, 157 BGB) → deckungsgleich? → Konsens. Offener Dissens § 154: bewusst offener Punkt → kein Vertrag. Versteckter Dissens § 155: selten — oft objektive Auslegung oder Irrtum. Essentialia negotii fehlen → Totaldissens.</p>${warn('Nicht jeder Irrtum ist Dissens', 'Bei objektiver Deckungsgleichheit → Anfechtung (§§ 119 ff.), nicht Dissenspfad.')}${warn('Falsa demonstratio', 'Gleiche objektive Bedeutung, falsche Bezeichnung → Vertrag trotzdem wirksam.')}`),
+  schuldrecht_intro: section('In der Klausur: Schuldrecht AT', `<p>Anspruchsprüfung: Anspruch entstanden (Schuldverhältnis + Primärpflicht) → nicht untergegangen → durchsetzbar. Bei Störung: Verzug (§ 286), Unmöglichkeit (§ 275), Pflichtverletzung (§ 280) — Institute nicht vermischen. Nebenpflichtverletzung kann Schadensersatz auslösen ohne Hauptleistungsmangel.</p>${warn('Schadensersatz braucht Pflichtverletzung', 'Nicht jeder Vertragsbruch = sofort Rücktritt — Reihenfolge der Rechtsfolgen prüfen.')}${warn('Schuldverhältnis ≠ Anspruch', 'Aus einem Schuldverhältnis können mehrere Ansprüche folgen — jeden separat prüfen.')}`)
+};
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  const depth = RECHT_KLAUSUR_DEPTH[ch.id];
+  if (entry && depth) {
+    entry.theorie = (typeof entry.theorie === 'string' ? entry.theorie : '') + depth;
+  }
+}
+
 for (const id of Object.keys(CONTENT)) {
   const sup = A_PLUS_SUPPLEMENT[id];
   if (!sup) continue;

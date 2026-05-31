@@ -860,6 +860,11 @@ export const CONTENT = {
       <div class="warn-box"><strong>Pigou-Steuer bei Unsicherheit:</strong> Die optimale Pigou-Steuer erfordert Kenntnis des gesellschaftlichen Optimums. Bei Unsicherheit über $MEC$ kann die Steuer zu hoch oder zu niedrig sein — dann ist Cap-and-Trade der Steuer vorzuziehen (bei steilen Grenzkostenkurven).</div>
       <div class="warn-box"><strong>Coase-Theorem in der Praxis:</strong> Das Coase-Theorem gilt nur bei null Transaktionskosten und wenigen Beteiligten. Bei Umweltproblemen mit vielen Betroffenen (Klimawandel, Luftverschmutzung) ist staatliche Intervention unumgänglich.</div>
     </div>
+    <div class="section-block">
+      <h3>In der Klausur: Pigou-Internalisierung</h3>
+      <p><em>platform-added-explanation:</em> Standardfall: $MSC = MPC + MEC$, Markt liefert $Q_{mkt} > Q^*$. Pigou-Steuer $t = MEC(Q^*)$ → Markt liefert $Q^*$. DWL-Dreieck zeichnen zwischen $Q^*$ und $Q_{mkt}$. Coase nur bei wenigen Beteiligten und null Transaktionskosten.</p>
+      <div class="warn-box"><strong>Steuer vs. Subvention:</strong> Negative Externalität → Steuer; positive Externalität → Subvention auf $MEB$.</div>
+    </div>
     `,
     formeln: [
       { label: 'Pigou-Steuer', eq: String.raw`$$t = MEC(Q^*)$$`, desc: 'Steuer = Grenzschaden im Optimum', variables: { MEC: 'marginale externe Kosten', Q_star: 'gesellschaftlich optimale Menge' } }
@@ -931,6 +936,11 @@ export const CONTENT = {
       <div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene und hohe Verhandlungskosten unterminieren private Effizienzverhandlungen.</div>
       <div class="warn-box"><strong>Instrumentenfehler:</strong> Cap-and-Trade und Pigou-Steuer sind in der Zielsetzung verwandt, aber unterschiedlich in Preis- vs. Mengensteuerung unter Unsicherheit.</div>
     </div>
+    <div class="section-block">
+      <h3>In der Klausur: Institutionelle Internalisierung</h3>
+      <p><em>platform-added-explanation:</em> Prüfungsstandard: (1) Marktversagen identifizieren. (2) Instrument: Pigou (Preis), Cap-and-Trade (Menge), Coase (Verhandlung). (3) Weitzman: Unsicherheit über Schadenskosten → Preis- vs. Mengensteuerung. (4) DWL und Verteilung nennen.</p>
+      <div class="warn-box"><strong>Instrumentenwahl unter Unsicherheit:</strong> Steile $MEC$-Kurve → Pigou robuster; steile Vermeidungskosten → Cap robuster.</div>
+    </div>
     `,
     formeln: [
       { label: 'Preis-Mengen-Äquivalenz', eq: String.raw`$$t_{Pigou} = MEC(Q^*) \Leftrightarrow \text{Cap auf }Q^*$$`, desc: 'Äquivalenzidee bei idealen Bedingungen.' }
@@ -975,7 +985,12 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Fehleranalyse</h3>
       <div class="warn-box"><strong>Vertikale vs. horizontale Aggregation:</strong> Bei privaten Gütern addieren wir individuelle Nachfragen horizontal (gleicher Preis, verschiedene Mengen). Bei öffentlichen Gütern addieren wir Zahlungsbereitschaften vertikal (gleiche Menge, verschiedene Preise). Verwechslung führt zu falschen Optimalmengen.</div>
-      <div class="warn-box"><strong>Lindahl-Gleichgewicht und strategisches Verhalten:</strong> Der Lindahl-Mechanismus ist theoretisch effizient, aber praktisch problematisch: Individuen haben einen Anreiz, ihre Zahlungsbereitschaft zu untertreiben, um einen niedrigeren Lindahl-Preis zu zahlen (Preference Revelation Problem).</div>
+      <div class="warn-box"><strong>Lindahl-Gleichgewicht und strategisches Verhalten:</strong> Der Lindahl-Mechanismus ist theoretisch effizient, aber praktisch problematisch: Individuen haben einen Anreiz, ihre Zahlungsbereitschaft zu untertreiben (Preference Revelation Problem).</div>
+    </div>
+    <div class="section-block">
+      <h3>In der Klausur: Öffentliche Güter</h3>
+      <p><em>platform-added-explanation:</em> Samuelson: $\\sum MRS_i = MRT$ (vertikale Addition der Zahlungsbereitschaften). Free-Rider → Unterprovisionierung. Lindahl: personalisierte Preise — strategisches Untertreiben der Zahlungsbereitschaft. Klubgüter: teilweise Rivalität/Ausschließbarkeit.</p>
+      <div class="warn-box"><strong>Vertikal vs. horizontal:</strong> Private Güter: Nachfrage horizontal addieren; öffentliche: Zahlungsbereitschaften vertikal.</div>
     </div>
     `,
     formeln: [

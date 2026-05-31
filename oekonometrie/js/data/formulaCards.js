@@ -125,7 +125,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'oekonometrie.sample_moments.mittelwert_und_kovarianz',
     conceptId: 'sample_moments',
-    officialNotation: "$\\bar{x}$, $s_{xy}$",
+    officialNotation: "\\bar{x}, s_{xy}",
     displayFormula: "$$\\bar{x} = \\frac{1}{n}\\sum_{i=1}^n x_i,\\qquad s_{xy} = \\frac{1}{n}\\sum_{i=1}^n (x_i-\\bar{x})(y_i-\\bar{y})$$",
     intuition: "Die Standardmomente, aus denen viele Regressionsformeln gebaut werden.",
     derivationSteps: [
@@ -1555,7 +1555,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'oekonometrie.t_test.t_statistik',
     conceptId: 't_test',
-    officialNotation: "$\\beta_{j,0}$",
+    officialNotation: "\\beta_{j,0}",
     displayFormula: "$$t = \\frac{\\hat{\\beta}_j - \\beta_{j,0}}{se(\\hat{\\beta}_j)}$$",
     intuition: "Einzeltest auf eine lineare Restriktion für einen Koeffizienten.",
     derivationSteps: [
@@ -1607,7 +1607,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'oekonometrie.t_test.t_statistik_pr_fungsmerksatz',
     conceptId: 't_test',
-    officialNotation: "$\\beta_{j,0}$",
+    officialNotation: "\\beta_{j,0}",
     displayFormula: "$$t = \\frac{\\hat{\\beta}_j - \\beta_{j,0}}{se(\\hat{\\beta}_j)}$$",
     intuition: "Einzeltest auf eine lineare Restriktion für einen Koeffizienten.",
     derivationSteps: [
@@ -2569,7 +2569,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'oekonometrie.hac_newey_west.hac_idee',
     conceptId: 'hac_newey_west',
-    officialNotation: "$\\hat{S}_{NW}$",
+    officialNotation: "\\hat{S}_{NW}",
     displayFormula: "$$\\widehat{\\operatorname{Var}}_{HAC}(\\hat{\\beta}) = (X'X)^{-1}\\hat{S}_{NW}(X'X)^{-1}$$",
     intuition: "Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.",
     derivationSteps: [
@@ -2647,7 +2647,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'oekonometrie.hac_newey_west.hac_idee_pr_fungsmerksatz',
     conceptId: 'hac_newey_west',
-    officialNotation: "$\\hat{S}_{NW}$",
+    officialNotation: "\\hat{S}_{NW}",
     displayFormula: "$$\\widehat{\\operatorname{Var}}_{HAC}(\\hat{\\beta}) = (X'X)^{-1}\\hat{S}_{NW}(X'X)^{-1}$$",
     intuition: "Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.",
     derivationSteps: [

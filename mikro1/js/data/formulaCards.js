@@ -801,7 +801,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.monopol.dwl',
     conceptId: 'monopol',
-    officialNotation: "$y_m$, $y_{vk}$, $p(y)$, $MC(y)$",
+    officialNotation: "y_m, y_{vk}, p(y), MC(y)",
     displayFormula: "$$DWL = \\int_{y_m}^{y_{vk}} [p(y) - MC(y)]\\, dy$$",
     intuition: "Harberger-Dreieck",
     derivationSteps: [
@@ -827,7 +827,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.allg_elastizit_t',
     conceptId: 'elast',
-    officialNotation: "$\\varepsilon_{A,B}$, A, B",
+    officialNotation: "\\varepsilon_{A,B}, A, B",
     displayFormula: "$$\\varepsilon_{A,B} = \\frac{dA}{dB} \\cdot \\frac{B}{A}$$",
     intuition: "Relative Änderung A je 1% Änderung B",
     derivationSteps: [
@@ -853,7 +853,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.einkommenselastizit_t',
     conceptId: 'elast',
-    officialNotation: "$\\varepsilon_{x,m}$, x, m",
+    officialNotation: "\\varepsilon_{x,m}, x, m",
     displayFormula: "$$\\varepsilon_{x,m} = \\frac{\\partial x}{\\partial m} \\cdot \\frac{m}{x}$$",
     intuition: ">1 Luxus, <1 notwendig, <0 inferior",
     derivationSteps: [
@@ -879,7 +879,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.preiselastizit_t',
     conceptId: 'elast',
-    officialNotation: "$\\varepsilon_{x,p}$, x, p",
+    officialNotation: "\\varepsilon_{x,p}, x, p",
     displayFormula: "$$\\varepsilon_{x,p} = \\frac{\\partial x}{\\partial p} \\cdot \\frac{p}{x}$$",
     intuition: "Normalfall < 0",
     derivationSteps: [
@@ -905,7 +905,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.kreuzpreiselastizit_t',
     conceptId: 'elast',
-    officialNotation: "$\\varepsilon_{x_i,p_j}$, $x_i$, $p_j$",
+    officialNotation: "\\varepsilon_{x_i,p_j}, x_i, p_j",
     displayFormula: "$$\\varepsilon_{x_i,p_j} = \\frac{\\partial x_i}{\\partial p_j} \\cdot \\frac{p_j}{x_i}$$",
     intuition: ">0 Substitute, <0 Komplemente",
     derivationSteps: [
@@ -1111,14 +1111,14 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.ausgaben.vl06.p02.ausgabenmin","mikro1.ausgaben.vl06.p07.nutzen-vs-ausgaben"]
   }),
   card({
-    id: 'mikro1.ausgaben.beispiel_cd_u_x_x',
+    id: 'mikro1.ausgaben.beispiel_cd_u_x_1_x_2',
     conceptId: 'ausgaben',
     officialNotation: "e, \\bar{u}, p_1, p_2",
     displayFormula: "$$e = 2\\sqrt{\\bar{u}\\, p_1 p_2}$$",
     intuition: "Für symmetrische CD-Funktion",
     derivationSteps: [
         {
-            "label": "Beispiel CD (u=x₁x₂)",
+            "label": "Beispiel CD ($u=x_1 x_2$)",
             "text": "Ausgabenminimierung",
             "math": "$$e = 2\\sqrt{\\bar{u}\\, p_1 p_2}$$"
         },
@@ -1129,9 +1129,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu ausgaben","Beispiel CD (u=x₁x₂)"],
+    appliesWhen: ["Klausuraufgaben zu ausgaben","Beispiel CD ($u=x_1 x_2$)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Beispiel CD (u=x₁x₂) — Für symmetrische CD-Funktion",
+    examShortcut: "Merke: Beispiel CD ($u=x_1 x_2$) — Für symmetrische CD-Funktion",
     relatedTaskFamilies: ["mikro1.taskfamily.ausgaben-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.ausgaben.vl06.p02.ausgabenmin","mikro1.ausgaben.vl06.p07.nutzen-vs-ausgaben"]
@@ -1373,7 +1373,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.gk_dk.kostenelastizit_t',
     conceptId: 'gk_dk',
-    officialNotation: "$\\varepsilon_{C,y}$, k",
+    officialNotation: "\\varepsilon_{C,y}, k",
     displayFormula: "$$\\varepsilon_{C,y} = \\frac{MC}{AC} = \\frac{1}{k}$$",
     intuition: "Kehrwert der Skalenelastizität",
     derivationSteps: [
@@ -1581,7 +1581,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.ordinal.grs_invariant',
     conceptId: 'ordinal',
-    officialNotation: "$MU_{1,v}$, $MU_{2,v}$, $f'$",
+    officialNotation: "MU_{1,v}, MU_{2,v}, f'",
     displayFormula: "$$\\frac{MU_{1,v}}{MU_{2,v}} = \\frac{f' \\cdot MU_{1,u}}{f' \\cdot MU_{2,u}} = \\frac{MU_{1,u}}{MU_{2,u}}$$",
     intuition: "Kettenregel: f kürzt sich heraus",
     derivationSteps: [
@@ -1735,14 +1735,14 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.cobbd.vl04.p09.marshall-cd","mikro1.cobbd.vl04.p04.haushaltsoptimum"]
   }),
   card({
-    id: 'mikro1.cobbd.nachfrage_x',
+    id: 'mikro1.cobbd.nachfrage_x_1',
     conceptId: 'cobbd',
     officialNotation: "x_1^*, m, p_1, \\alpha",
     displayFormula: "$$x_1^* = \\frac{\\alpha m}{p_1}$$",
     intuition: "Konstanter Budgetanteil α",
     derivationSteps: [
         {
-            "label": "Nachfrage x₁*",
+            "label": "Nachfrage $x_1^*$",
             "text": "Marshallsche Nachfrage bei Cobb-Douglas Nutzenfunktion",
             "math": "$$x_1^* = \\frac{\\alpha m}{p_1}$$"
         },
@@ -1753,22 +1753,22 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu cobbd","Nachfrage x₁*"],
+    appliesWhen: ["Klausuraufgaben zu cobbd","Nachfrage $x_1^*$"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Nachfrage x₁* — Konstanter Budgetanteil α",
+    examShortcut: "Merke: Nachfrage $x_1^*$ — Konstanter Budgetanteil α",
     relatedTaskFamilies: ["mikro1.taskfamily.cobbd-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.cobbd.vl04.p09.marshall-cd","mikro1.cobbd.vl04.p04.haushaltsoptimum"]
   }),
   card({
-    id: 'mikro1.cobbd.nachfrage_x',
+    id: 'mikro1.cobbd.nachfrage_x_2',
     conceptId: 'cobbd',
     officialNotation: "x_2^*, \\alpha, m, p_2",
     displayFormula: "$$x_2^* = \\frac{(1-\\alpha) m}{p_2}$$",
     intuition: "Konstanter Budgetanteil (1−α)",
     derivationSteps: [
         {
-            "label": "Nachfrage x₂*",
+            "label": "Nachfrage $x_2^*$",
             "text": "Marshallsche Nachfrage bei Cobb-Douglas Nutzenfunktion",
             "math": "$$x_2^* = \\frac{(1-\\alpha) m}{p_2}$$"
         },
@@ -1779,9 +1779,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu cobbd","Nachfrage x₂*"],
+    appliesWhen: ["Klausuraufgaben zu cobbd","Nachfrage $x_2^*$"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Nachfrage x₂* — Konstanter Budgetanteil (1−α)",
+    examShortcut: "Merke: Nachfrage $x_2^*$ — Konstanter Budgetanteil (1−α)",
     relatedTaskFamilies: ["mikro1.taskfamily.cobbd-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.cobbd.vl04.p09.marshall-cd","mikro1.cobbd.vl04.p04.haushaltsoptimum"]
@@ -1893,7 +1893,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.homothet.einkommenselastizit_t',
     conceptId: 'homothet',
-    officialNotation: "$\\varepsilon_{x,m}$, x, m",
+    officialNotation: "\\varepsilon_{x,m}, x, m",
     displayFormula: "$$\\varepsilon_{x,m} = 1$$",
     intuition: "Für alle Güter bei homothetischen Präferenzen",
     derivationSteps: [
@@ -2385,14 +2385,14 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.pkomp.vl08.p03.kaufen-verkaufen","mikro1.pkomp.vl08.p06.netto-nachfrager"]
   }),
   card({
-    id: 'mikro1.pkomp.nachfrage_x',
+    id: 'mikro1.pkomp.nachfrage_x_1',
     conceptId: 'pkomp',
     officialNotation: "x_1^*, b, m, p_1, p_2, a",
     displayFormula: "$$x_1^* = \\frac{b m}{b p_1 + a p_2}$$",
     intuition: "Aus Knick + Budget",
     derivationSteps: [
         {
-            "label": "Nachfrage x₁*",
+            "label": "Nachfrage $x_1^*$",
             "text": "Kaufen und Verkaufen",
             "math": "$$x_1^* = \\frac{b m}{b p_1 + a p_2}$$"
         },
@@ -2403,9 +2403,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu pkomp","Nachfrage x₁*"],
+    appliesWhen: ["Klausuraufgaben zu pkomp","Nachfrage $x_1^*$"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Nachfrage x₁* — Aus Knick + Budget",
+    examShortcut: "Merke: Nachfrage $x_1^*$ — Aus Knick + Budget",
     relatedTaskFamilies: ["mikro1.taskfamily.pkomp-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.pkomp.vl08.p03.kaufen-verkaufen","mikro1.pkomp.vl08.p06.netto-nachfrager"]
@@ -2465,7 +2465,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.skalener.wicksell_johnson',
     conceptId: 'skalener',
-    officialNotation: "$\\varepsilon_{y,\\lambda}$, $\\varepsilon_{y,L}$, $\\varepsilon_{y,K}$",
+    officialNotation: "\\varepsilon_{y,\\lambda}, \\varepsilon_{y,L}, \\varepsilon_{y,K}",
     displayFormula: "$$\\varepsilon_{y,\\lambda} = \\varepsilon_{y,L} + \\varepsilon_{y,K} = k$$",
     intuition: "Skalenelastizität = Summe der Teile",
     derivationSteps: [

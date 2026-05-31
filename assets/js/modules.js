@@ -1,9 +1,42 @@
 /**
- * Public-facing “trusted core”: strongest current live modules (source-backed depth,
- * shared portal stack). Used for landing prioritization only — not a quality claim
- * about other live modules, which remain useful with module-specific caveats.
+ * Product tiers — exam readiness scope, not a quality ranking.
+ * See docs/audits/2026-05-31-final-release-blockers-pass.md
  */
-export const TRUSTED_CORE_SLUGS = Object.freeze(["mikro1", "statistik", "recht", "oekonometrie"]);
+export const RELEASE_TIERS = Object.freeze({
+  core: "core",
+  beta: "beta",
+  structural: "structural"
+});
+
+/** @deprecated Use EXAM_READY_CORE_SLUGS — kept for imports during migration */
+export const TRUSTED_CORE_SLUGS = Object.freeze([
+  "mikro1",
+  "statistik",
+  "oekonometrie",
+  "mathematik",
+  "makro2"
+]);
+
+/** Modules with strongest structural + source depth for recommended entry */
+export const EXAM_READY_CORE_SLUGS = Object.freeze([
+  "mikro1",
+  "makro2",
+  "statistik",
+  "oekonometrie",
+  "mathematik"
+]);
+
+export const RELEASE_TIER_LABELS = Object.freeze({
+  core: "Prüfungsbereit",
+  beta: "Beta",
+  structural: "Strukturell"
+});
+
+export const RELEASE_TIER_TOOLTIPS = Object.freeze({
+  core: "Strukturell vollständig (Theorie, Formeln, Aufgaben) und eng an VL-Quellen — empfohlener Einstieg.",
+  beta: "Nutzbare Plattform-Abdeckung; einzelne Konzepte oder Falltiefe können von offiziellen PDFs abweichen.",
+  structural: "Grundgerüst vorhanden; Inhaltstiefe wird noch ausgebaut — PDFs als Primärreferenz."
+});
 
 export const MODULES = [
   {
@@ -17,7 +50,8 @@ export const MODULES = [
     prereq: "Keine",
     href: "./mikro1/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "core"
   },
   {
     slug: "mikro2",
@@ -31,9 +65,10 @@ export const MODULES = [
     href: "./mikro2/index.html",
     status: "live",
     type: "quantitative",
+    releaseTier: "beta",
     sourceCorpusInRepo: true,
     sourceStatusNote:
-      "Official Mikro II corpus added under source-materials/Mikroökonomik II. Current live module is partially source-backed but still pending full 20-lecture reconstruction; see docs/audits/mikro2-official-source-ingest-pass-1.md."
+      "Offizieller Mikro-II-Korpus unter source-materials/. Marktversagen-Kapitel (Externa, öffentliche Güter) sind platform-added ohne VL-Seitenanker."
   },
   {
     slug: "makro1",
@@ -46,7 +81,8 @@ export const MODULES = [
     prereq: "Keine",
     href: "./makro1/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "beta"
   },
   {
     slug: "makro2",
@@ -59,7 +95,8 @@ export const MODULES = [
     prereq: "Makro I",
     href: "./makro2/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "core"
   },
   {
     slug: "oekonometrie",
@@ -72,7 +109,8 @@ export const MODULES = [
     prereq: "Statistik",
     href: "./oekonometrie/index.html",
     status: "live",
-    type: "quantitative_coding"
+    type: "quantitative_coding",
+    releaseTier: "core"
   },
   {
     slug: "statistik",
@@ -85,7 +123,8 @@ export const MODULES = [
     prereq: "Mathematik",
     href: "./statistik/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "core"
   },
   {
     slug: "finanzwirtschaft",
@@ -98,7 +137,8 @@ export const MODULES = [
     prereq: "Mathematik",
     href: "./finanzwirtschaft/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "beta"
   },
   {
     slug: "mathematik",
@@ -111,7 +151,8 @@ export const MODULES = [
     prereq: "Keine",
     href: "./mathematik/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "core"
   },
   {
     slug: "jahresabschluss",
@@ -124,7 +165,8 @@ export const MODULES = [
     prereq: "Keine",
     href: "./jahresabschluss/index.html",
     status: "live",
-    type: "mixed"
+    type: "mixed",
+    releaseTier: "beta"
   },
   {
     slug: "recht",
@@ -137,7 +179,8 @@ export const MODULES = [
     prereq: "Keine",
     href: "./recht/index.html",
     status: "live",
-    type: "text_doctrinal"
+    type: "text_doctrinal",
+    releaseTier: "beta"
   },
   {
     slug: "internationale-wirtschaftsbeziehungen",
@@ -150,7 +193,8 @@ export const MODULES = [
     prereq: "Mikro I, Makro I",
     href: "./internationale-wirtschaftsbeziehungen/index.html",
     status: "live",
-    type: "quantitative"
+    type: "quantitative",
+    releaseTier: "beta"
   }
 ];
 
@@ -160,22 +204,39 @@ export function isLiveModuleVisible(module) {
 
 export const PUBLIC_MODULES = MODULES.filter(isLiveModuleVisible);
 
-/** Live modules in `TRUSTED_CORE_SLUGS` order (subset of the full catalogue). */
-export function getTrustedCoreModules() {
-  return TRUSTED_CORE_SLUGS.map((slug) => MODULES.find((m) => m.slug === slug)).filter(
+export function getReleaseTierLabel(tier) {
+  return RELEASE_TIER_LABELS[tier] || tier || "";
+}
+
+export function getReleaseTierTooltip(tier) {
+  return RELEASE_TIER_TOOLTIPS[tier] || "";
+}
+
+/** Live modules in exam-ready core order */
+export function getExamReadyCoreModules() {
+  return EXAM_READY_CORE_SLUGS.map((slug) => MODULES.find((m) => m.slug === slug)).filter(
     (m) => m && isLiveModuleVisible(m)
   );
 }
 
-/** Other live modules, preserving catalogue order from `MODULES`. */
+/** @deprecated Alias for getExamReadyCoreModules */
+export function getTrustedCoreModules() {
+  return getExamReadyCoreModules();
+}
+
+/** Live modules not in exam-ready core shelf */
+export function getNonCorePublicModules() {
+  const core = new Set(EXAM_READY_CORE_SLUGS);
+  return MODULES.filter((m) => isLiveModuleVisible(m) && !core.has(m.slug));
+}
+
+/** @deprecated Alias for getNonCorePublicModules */
 export function getNonTrustedPublicModules() {
-  const trusted = new Set(TRUSTED_CORE_SLUGS);
-  return MODULES.filter((m) => isLiveModuleVisible(m) && !trusted.has(m.slug));
+  return getNonCorePublicModules();
 }
 
 /**
  * URL path prefixes (repo root) whose `index.html` boots `assets/js/generated-portal/main.js`.
- * Not in `PUBLIC_MODULES`; different trust / provenance class than curated module `js/main.js` stacks.
  */
 export const GENERATED_PORTAL_ROUTE_PREFIXES = ["r/", "politisches-system-brd/"];
 

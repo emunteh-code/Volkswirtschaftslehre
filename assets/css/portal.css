@@ -465,12 +465,75 @@ html { scroll-behavior: smooth; }
 
 @media (min-width: 1120px) {
   .lp-shelf-grid--trusted {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
-.lp-tile--trusted-core {
+@media (max-width: 1119px) {
+  .lp-shelf-grid--trusted {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+.lp-tile--trusted-core,
+.lp-tile--exam-ready {
   border-color: color-mix(in srgb, var(--accent) 26%, var(--border));
+}
+
+.lp-tile-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.lp-tile-head .lp-tile-title {
+  margin: 0;
+  flex: 1;
+}
+
+.lp-tier-badge {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.lp-tier--core {
+  color: color-mix(in srgb, var(--accent) 85%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.lp-tier--beta {
+  color: #fbbf24;
+  border-color: color-mix(in srgb, #fbbf24 40%, var(--border));
+}
+
+.lp-tier--structural {
+  color: var(--muted);
+}
+
+.lp-shelf-note--exam-policy {
+  font-size: 0.875rem;
+  margin-top: -4px;
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.lp-shelf-note--exam-policy code {
+  font-size: 0.8125rem;
+}
+
+.lp-shelf--exam-ready,
+.lp-shelf--trusted-core {
+  /* alias */
 }
 
 .lp-shelf--further-modules {

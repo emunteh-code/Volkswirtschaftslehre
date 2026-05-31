@@ -1,8 +1,11 @@
 import {
   PUBLIC_MODULES,
   getModuleBySlug,
-  getTrustedCoreModules,
-  getNonTrustedPublicModules
+  getExamReadyCoreModules,
+  getNonCorePublicModules,
+  getReleaseTierLabel,
+  getReleaseTierTooltip,
+  RELEASE_TIERS
 } from "./modules.js";
 import { SITE_CONFIG } from "./siteConfig.js";
 import { getModuleConceptCount } from "./module-progress-meta.js";
@@ -355,7 +358,7 @@ async function updateHeroShelf(module) {
   }
 }
 
-function buildLandingTileHtml(module, snapshot, { trustedCore = false } = {}) {
+function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) {
   const statusClass = snapshot.started ? " started" : "";
   const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
   const progressBar = snapshot.started
@@ -363,12 +366,24 @@ function buildLandingTileHtml(module, snapshot, { trustedCore = false } = {}) {
     : "";
   const specialStatus = module.sourceCorpusInRepo === false
     ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
-    : "";
-  const coreClass = trustedCore ? " lp-tile--trusted-core" : "";
+    : module.sourceStatusNote
+      ? `<p class="lp-tile-note">${module.sourceStatusNote}</p>`
+      : "";
+  const coreClass = examReadyCore ? " lp-tile--exam-ready" : "";
+  const tier = module.releaseTier || "beta";
+  const tierLabel = getReleaseTierLabel(tier);
+  const tierTooltip = getReleaseTierTooltip(tier);
+  const tierClass = tier === RELEASE_TIERS.core ? " lp-tier--core" : tier === RELEASE_TIERS.structural ? " lp-tier--structural" : " lp-tier--beta";
+  const tierBadge = tier !== RELEASE_TIERS.core
+    ? `<span class="lp-tier-badge${tierClass}" title="${tierTooltip.replace(/"/g, "&quot;")}">${tierLabel}</span>`
+    : `<span class="lp-tier-badge lp-tier--core" title="${tierTooltip.replace(/"/g, "&quot;")}">${tierLabel}</span>`;
 
   return `
     <a href="${module.href}" class="lp-tile${coreClass}" role="option" data-slug="${module.slug}" id="lpTile_${module.slug}" aria-selected="false" tabindex="-1">
-      <h3 class="lp-tile-title">${module.title}</h3>
+      <div class="lp-tile-head">
+        <h3 class="lp-tile-title">${module.title}</h3>
+        ${tierBadge}
+      </div>
       <p class="lp-tile-summary">${module.summary}</p>
       ${specialStatus}
       <div class="lp-tile-footer">
@@ -384,14 +399,14 @@ async function renderLandingPage() {
   const gridNode = document.getElementById("moduleGrid");
   if (!gridNode) return;
 
-  const trustedModules = getTrustedCoreModules();
-  const furtherModules = getNonTrustedPublicModules();
+  const coreModules = getExamReadyCoreModules();
+  const furtherModules = getNonCorePublicModules();
 
   const countLabel = document.getElementById("moduleCountLabel");
   if (countLabel) countLabel.textContent = `${furtherModules.length} Module`;
 
   const lastModule = pickInitialLandingModule();
-  const defaultModule = lastModule || trustedModules[0] || PUBLIC_MODULES[0] || null;
+  const defaultModule = lastModule || coreModules[0] || PUBLIC_MODULES[0] || null;
   await updateHeroShelf(defaultModule);
 
   const buildSnapshotsFromMeta = (modules) =>
@@ -411,15 +426,15 @@ async function renderLandingPage() {
     gridNode.innerHTML = `<div class="empty-state">Keine Module verfügbar.</div>`;
     landingTileElements = [];
   } else {
-    let trustedSnapshots = trustedModules.length && trustedGrid
-      ? buildSnapshotsFromMeta(trustedModules)
+    let trustedSnapshots = coreModules.length && trustedGrid
+      ? buildSnapshotsFromMeta(coreModules)
       : [];
     let furtherSnapshots = buildSnapshotsFromMeta(furtherModules);
 
     if (trustedGrid) {
       trustedGrid.innerHTML = trustedSnapshots.length
         ? trustedSnapshots
-            .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot, { trustedCore: true }))
+            .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot, { examReadyCore: true }))
             .join("")
         : `<div class="empty-state">Empfohlener Einstieg nicht verfügbar.</div>`;
     }
@@ -451,8 +466,8 @@ async function renderLandingPage() {
     gridNode.addEventListener("mouseleave", reapplyHoverAnchor);
 
     queueMicrotask(() => {
-      trustedSnapshots = trustedModules.length
-        ? trustedModules.map((module) => ({
+      trustedSnapshots = coreModules.length
+        ? coreModules.map((module) => ({
             module,
             snapshot: getModuleSnapshot(module)
           }))

@@ -28,15 +28,15 @@ Local source files: **693**.
 | Module | Concepts | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | `mikro1` | 33 | 634 | 100 | 85 | 110 | 39 | 2 | 132 | 4 | 19 | 98 | 19/19 | 0 | benchmark cockpit; source refs local, anchor/task completeness pending |
-| `mikro2` | 18 | 230 | 46 | 34 | 60 | 33 | 1 | 69 | 4 | 28 | 47 | 28/28 | 0 | not achieved |
-| `makro1` | 14 | 194 | 42 | 58 | 55 | 36 | 3 | 56 | 4 | 21 | 28 | 21/21 | 0 | not achieved |
-| `makro2` | 30 | 462 | 90 | 83 | 113 | 64 | 3 | 120 | 4 | 25 | 60 | 25/25 | 0 | near after source/task review |
+| `mikro2` | 18 | 213 | 46 | 34 | 60 | 33 | 1 | 69 | 4 | 28 | 47 | 28/28 | 0 | not achieved |
+| `makro1` | 14 | 190 | 44 | 58 | 55 | 36 | 3 | 56 | 4 | 21 | 28 | 21/21 | 0 | not achieved |
+| `makro2` | 30 | 496 | 110 | 83 | 117 | 64 | 3 | 120 | 4 | 25 | 60 | 25/25 | 0 | near after source/task review |
 | `oekonometrie` | 32 | 415 | 101 | 98 | 96 | 70 | 3 | 128 | 4 | 19 | 64 | 19/19 | 0 | near after source/task review |
-| `statistik` | 14 | 221 | 44 | 133 | 65 | 32 | 3 | 56 | 4 | 18 | 42 | 18/18 | 0 | not achieved |
-| `finanzwirtschaft` | 19 | 295 | 57 | 39 | 68 | 56 | 3 | 76 | 4 | 12 | 38 | 12/12 | 0 | not achieved |
+| `statistik` | 14 | 215 | 44 | 133 | 65 | 32 | 3 | 56 | 4 | 18 | 42 | 18/18 | 0 | not achieved |
+| `finanzwirtschaft` | 19 | 290 | 57 | 39 | 68 | 56 | 3 | 76 | 4 | 12 | 38 | 12/12 | 0 | not achieved |
 | `mathematik` | 14 | 332 | 55 | 69 | 45 | 28 | 3 | 56 | 4 | 30 | 42 | 30/30 | 0 | not achieved |
-| `jahresabschluss` | 15 | 138 | 45 | 44 | 53 | 35 | 3 | 60 | 4 | 12 | 30 | 12/12 | 0 | not achieved |
-| `recht` | 14 | 318 | 52 | 46 | 53 | 39 | 3 | 56 | 4 | 17 | 28 | 17/17 | 0 | not achieved |
+| `jahresabschluss` | 15 | 135 | 45 | 44 | 53 | 35 | 3 | 60 | 4 | 12 | 30 | 12/12 | 0 | not achieved |
+| `recht` | 14 | 305 | 52 | 46 | 53 | 39 | 3 | 56 | 4 | 17 | 28 | 17/17 | 0 | not achieved |
 | `internationale-wirtschaftsbeziehungen` | 16 | 198 | 48 | 33 | 49 | 32 | 3 | 64 | 4 | 14 | 32 | 14/14 | 0 | not achieved |
 
 ## Scorecard

@@ -15,6 +15,10 @@ import {
   initConceptProvenanceInteractions
 } from "./sourceProvenanceUi.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
+import {
+  FULL_EXAM_HOME_DESCRIPTION,
+  officialTaskCoverageLabel
+} from "../data/examDisclosure.js";
 
 const HOME_ACTION_ACTIVATE = (handler) =>
   `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
@@ -55,7 +59,7 @@ export function createRenderer({
   /** Show gemischter Schnelltest card (within-module interleaving; cross-module backlog). */
   showInterleavedExamCard = true,
   /** Optional home description for the Probeklausuren card. */
-  fullExamHomeDescription = 'Vollständige Klausursets mit Lösungen',
+  fullExamHomeDescription = FULL_EXAM_HOME_DESCRIPTION,
   /** When false, omit the `entry.motivation` strip under the concept H1 (module opt-out). */
   showConceptMotivationBanner = true,
   /** Optional: per-concept provenance layers from contentManifest (metadata-driven UI strip). */
@@ -836,10 +840,7 @@ ${families.map(renderTaskFamilyCard).join("")}
   }
 
   function taskFamilyOfficialTaskLabel(status) {
-    if (status === "official-task-source") return "Offizielle Aufgabe";
-    if (status === "missing-official-task-source") return "Keine offizielle Aufgabenquelle";
-    if (!status) return "";
-    return status;
+    return officialTaskCoverageLabel(status);
   }
 
   function renderTaskFamilyCard(family) {

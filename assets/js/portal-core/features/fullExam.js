@@ -7,6 +7,10 @@ import {
   generateExamSessionId,
   mistakePartialsFromExamSummary
 } from '../exam/examSessionBackbone.js';
+import {
+  FULL_EXAM_SELECT_INTRO,
+  withPlatformExamDisclosure
+} from '../data/examDisclosure.js';
 
 function hexToRgba(hex, alpha) {
   const normalized = hex.replace("#", "");
@@ -144,12 +148,13 @@ export function createFullExamModule({
   }
 
   function renderExamSourceNotice(exam) {
-    if (!exam?.sourceStatus && !exam?.officialTaskCoverage && !exam?.sourceNote) return "";
-    const sourceLabel = exam.sourceLabel || exam.sourceStatus || "Quellenstatus";
-    const officialLabel = exam.officialTaskLabel || exam.officialTaskCoverage || "";
-    const note = exam.sourceNote || "Diese Simulation ist nach Modulmetadaten klassifiziert.";
-    const evidence = exam.sourceEvidence || "";
-    return `<aside class="full-exam-source-notice full-exam-source-notice--${escapeHtml(exam.sourceStatus || "unknown")}" role="note">
+    const disclosed = withPlatformExamDisclosure(exam);
+    if (!disclosed?.sourceStatus && !disclosed?.officialTaskCoverage && !disclosed?.sourceNote) return "";
+    const sourceLabel = disclosed.sourceLabel || disclosed.sourceStatus || "Plattform-Übung";
+    const officialLabel = disclosed.officialTaskLabel || disclosed.officialTaskCoverage || "";
+    const note = disclosed.sourceNote || "Plattform-Simulation — keine offizielle Klausur.";
+    const evidence = disclosed.sourceEvidence || "";
+    return `<aside class="full-exam-source-notice full-exam-source-notice--${escapeHtml(disclosed.sourceStatus || "unknown")}" role="note">
 <div class="full-exam-source-notice__badges">
 <span>${escapeHtml(sourceLabel)}</span>
 ${officialLabel ? `<span class="full-exam-source-notice__warn">${escapeHtml(officialLabel)}</span>` : ""}
@@ -302,7 +307,7 @@ ${renderExamSourceNotice(exam)}
 
   function startFullExam(examId) {
     const examRaw = fullExams[examId];
-    const exam = normalizeExamToAufgabenShape(examRaw, examId);
+    const exam = withPlatformExamDisclosure(normalizeExamToAufgabenShape(examRaw, examId));
     if (!exam) return;
     if (!document.body.classList.contains("focus-mode")) {
       document.body.classList.add("focus-mode");
@@ -550,11 +555,11 @@ ${renderExamSourceNotice(exam)}
     }
     document.getElementById("breadcrumb").innerHTML =
       `<span style="cursor:pointer;text-decoration:underline" onclick="window.__renderHome()">${courseLabel}</span>/ Probeklausuren`;
-    const intro = examSelectIntro || "Wähle eine vollständige Probeklausur. Jede Simulation bündelt mehrere Konzepte in einem zusammenhängenden Klausurblock. Dauer, Teilfragen und Punkte helfen dir bei der Planung; die Musterlösungen dienen danach zur gezielten Nacharbeit.";
+    const intro = examSelectIntro || FULL_EXAM_SELECT_INTRO;
     let html = `<div style="max-width:680px"><h2 style="font-family:Syne;font-weight:800;margin-bottom:16px">${courseExamCollectionTitle}</h2>
 <div class="fe-context-block">${escapeHtml(intro)}</div>`;
     Object.entries(fullExams).forEach(([examKey, examRaw]) => {
-      const exam = normalizeExamToAufgabenShape(examRaw, examKey);
+      const exam = withPlatformExamDisclosure(normalizeExamToAufgabenShape(examRaw, examKey));
       if (!exam) return;
       const totalPoints = exam.aufgaben.reduce((sum, aufgabe) => sum + aufgabe.points, 0);
       const totalQuestions = exam.aufgaben.reduce((sum, aufgabe) => {

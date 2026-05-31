@@ -1,0 +1,11 @@
+/* Critical above-the-fold subset for landing — full rules in portal.css */
+body[data-page="landing"]{--font-body:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif;--font-heading:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;--bg:#0d1116;--text:#e5e7eb;--muted:#aab4c3;--surface:#171c23;--border:#2b3440;--accent:#3b82f6;margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100dvh;display:flex;flex-direction:column}
+.lp-header{position:sticky;top:0;z-index:50;background:rgba(13,17,22,.92);border-bottom:1px solid var(--border);min-height:56px}
+.lp-container{max-width:1120px;margin:0 auto;padding:0 20px}
+.lp-hero{padding:48px 0 32px;min-height:320px;contain:layout}
+.lp-hero-content{min-height:220px}
+.lp-hero-title{font-size:clamp(2rem,5vw,2.75rem);line-height:1.1;margin:0 0 12px;font-family:var(--font-heading)}
+.lp-shelf{padding:24px 0 40px}
+.lp-shelf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;min-height:240px}
+.lp-tile{display:flex;flex-direction:column;padding:18px 20px;border-radius:12px;border:1px solid var(--border);background:var(--surface);text-decoration:none;color:inherit;min-height:210px}
+.lp-tile-title{font-size:1.05rem;margin:0 0 8px;font-family:var(--font-heading)}

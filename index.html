@@ -12,12 +12,12 @@
   <link rel="icon" href="./assets/brand/favicon-mark.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./assets/brand/favicon-mark.svg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-
+  <style>@import url("./assets/css/portal-critical.css");</style>
   <link rel="stylesheet" href="./assets/css/portal.css">
-  <link rel="stylesheet" href="./assets/css/premium-refinement.css">
+  <link rel="stylesheet" href="./assets/css/premium-refinement.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./assets/css/premium-refinement.css"></noscript>
+  <link rel="preload" href="./assets/css/fonts-local.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./assets/css/fonts-local.css"></noscript>
 </head>
 <body data-page="landing">
 
@@ -46,21 +46,24 @@
         <h1 class="lp-hero-title" id="heroTitle">VWL Lernportal</h1>
         <p class="lp-hero-desc" id="heroDesc">Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.</p>
         <div class="lp-hero-meta" id="heroMeta"></div>
-        <a class="lp-hero-btn" id="heroBtn" href="#trusted-core">Zum empfohlenen Einstieg</a>
+        <a class="lp-hero-btn" id="heroBtn" href="#exam-ready-core">Zum empfohlenen Einstieg</a>
       </div>
     </div>
   </section>
 
-  <!-- ── TRUSTED CORE (recommended entry) ─────────────────────── -->
-  <section class="lp-shelf lp-shelf--trusted-core" id="trusted-core" aria-labelledby="lp-trusted-heading">
+  <!-- ── EXAM-READY CORE (recommended entry) ──────────────────── -->
+  <section class="lp-shelf lp-shelf--exam-ready" id="exam-ready-core" aria-labelledby="lp-core-heading">
     <div class="lp-container">
       <div class="lp-shelf-header">
-        <h2 id="lp-trusted-heading">Empfohlener Einstieg</h2>
+        <h2 id="lp-core-heading">Prüfungsbereit — empfohlener Einstieg</h2>
       </div>
       <p class="lp-shelf-note lp-shelf-note--trusted">
-        Diese vier Module eignen sich am besten als Einstieg in das Portal.
+        Diese Module sind strukturell vollständig (Theorie, Formeln, Aufgaben) und eng an VL-Quellen orientiert. Das ist kein Qualitätsranking — Beta-Module sind ebenfalls nutzbar.
       </p>
-      <div class="lp-shelf-grid lp-shelf-grid--trusted" id="trustedCoreGrid" role="listbox" aria-label="Empfohlene Module"></div>
+      <p class="lp-shelf-note lp-shelf-note--exam-policy">
+        Klausur-Übungen im Portal sind <strong>Plattform-Simulationen</strong> — keine offiziellen Probeklausur-PDFs. PDFs liegen nur lokal unter <code>source-materials/</code>.
+      </p>
+      <div class="lp-shelf-grid lp-shelf-grid--trusted" id="trustedCoreGrid" role="listbox" aria-label="Prüfungsbereite Module"></div>
     </div>
   </section>
 
@@ -88,7 +91,10 @@
             Ziel ist es, Orientierung, Verständnis, Wiederholung und Transfer zu verbessern, statt nur mit verstreuten PDFs und Notizen zu arbeiten. Das Portal ersetzt jedoch nicht die offiziellen Vorlesungs- und Übungsunterlagen. Für Definitionen, Graphen, Herleitungen und andere klausurrelevante technische Details sollten die offiziellen Materialien weiterhin die letzte Referenz bleiben.
           </p>
           <p>
-            Einige Module sind aktuell weiter ausgearbeitet und enger an den Quellen orientiert als andere. Vier Module bilden den empfohlenen Einstieg (Mikroökonomik I, Statistik, Recht für Wirtschaftswissenschaftler, Einführung in die Ökonometrie): sie sind auf der Übersichtsseite zuerst gebündelt und ersetzen dennoch nicht die offiziellen Kursunterlagen.
+            Einige Module sind aktuell weiter ausgearbeitet als andere. Fünf Module bilden den empfohlenen Einstieg mit dem Label <strong>Prüfungsbereit</strong> (Mikro I, Makro II, Statistik, Ökonometrie, Mathematik). Beta-Module sind nutzbar, können aber von offiziellen PDFs in der Falltiefe abweichen.
+          </p>
+          <p>
+            Probeklausuren und Schnelltests im Portal sind <strong>Plattform-Simulationen</strong> — keine item-für-item Übernahme offizieller Klausur-PDFs.
           </p>
           <p class="lp-about-closing">
             Das Portal ist als strukturierter Lernbegleiter gedacht, nicht als vollständiger Ersatz für die offiziellen Kursmaterialien.

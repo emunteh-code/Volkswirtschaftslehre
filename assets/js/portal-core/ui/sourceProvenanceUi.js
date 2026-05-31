@@ -11,6 +11,12 @@ import {
   pickWeakestSourceStatus,
   studentHintForSourceStatus
 } from '../data/sourceStatus.js';
+import {
+  SOURCE_PDF_OPEN_DISABLED_LABEL,
+  SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE,
+  getSourceMaterialsAvailability,
+  isPublicStaticDeploy
+} from '../utils/deployEnvironment.js';
 
 const BASIS_PREFIX = 'Basis: ';
 /** Long primary-ref lists (e.g. R-Begleitpraxis) stay honest in the expandable breakdown; summary stays one scannable line. */
@@ -517,6 +523,20 @@ function buildSourceInspectionRows(layers, sourceMaterialBaseUrl = '') {
   });
 }
 
+function sourcePdfOpenDisabledByDefault() {
+  if (typeof window === 'undefined') return false;
+  if (window.__sourceMaterialsAvailable === false) return true;
+  return window.__sourceMaterialsAvailable == null && isPublicStaticDeploy();
+}
+
+function buildSourceOpenButtonHtml(sourceUrl) {
+  if (!sourceUrl) return '';
+  if (sourcePdfOpenDisabledByDefault()) {
+    return `<button type="button" class="source-provenance-open" disabled aria-disabled="true" title="${escapeAttr(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}" aria-label="${escapeAttr(SOURCE_PDF_OPEN_DISABLED_LABEL)}">${escapeHtml(SOURCE_PDF_OPEN_DISABLED_LABEL)}</button>`;
+  }
+  return `<button type="button" class="source-provenance-open" data-source-open-url="${escapeAttr(sourceUrl)}" aria-label="Quelle lokal öffnen">Öffnen</button>`;
+}
+
 function buildSourceInspectionHtml(rows) {
   if (!rows.length) return '';
   return `<div class="source-provenance-inspector" aria-label="Quelleninspektor">
@@ -534,7 +554,7 @@ ${rows.map((row) => {
 <div class="source-provenance-inspector-head">
 <span>${escapeHtml(row.title)}</span>
 <div class="source-provenance-inspector-actions">
-${row.sourceUrl ? `<button type="button" class="source-provenance-open" data-source-open-url="${escapeAttr(row.sourceUrl)}" aria-label="Quelle lokal öffnen">Öffnen</button>` : ''}
+${buildSourceOpenButtonHtml(row.sourceUrl)}
 ${row.sourceId ? `<button type="button" class="source-provenance-companion" data-source-companion-id="${escapeAttr(row.sourceId)}" data-anchor-source-url="${escapeAttr(row.sourceUrl)}" data-anchor-title="${escapeAttr(row.title)}" data-anchor-section="${escapeAttr(row.section)}" data-anchor-areas="${escapeAttr(row.areas)}" data-anchor-statuses="${escapeAttr(row.statuses)}" data-anchor-confidence="${escapeAttr(row.confidence)}" data-anchor-reviewed-at="${escapeAttr(row.reviewedAt)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
 ${!row.sourceId && row.sourcePath ? `<button type="button" class="source-provenance-companion-path" data-source-companion-path="${escapeAttr(row.sourcePath)}" data-anchor-source-url="${escapeAttr(row.sourceUrl)}" data-anchor-title="${escapeAttr(row.title)}" data-anchor-areas="${escapeAttr(row.areas)}" data-anchor-statuses="${escapeAttr(row.statuses)}" aria-label="Quelle im Quellenbrowser anzeigen">Browser</button>` : ''}
 </div>
@@ -613,8 +633,9 @@ ${inspectorHtml}
 /**
  * @param {HTMLElement|null|undefined} root
  */
-export function initConceptProvenanceInteractions(root) {
+export async function initConceptProvenanceInteractions(root) {
   if (!root?.querySelectorAll) return;
+  const pdfAvailable = await getSourceMaterialsAvailability();
   root.querySelectorAll('.source-provenance-expand').forEach((btn) => {
     const wrap = btn.closest('.source-provenance');
     const panel = wrap?.querySelector('.source-provenance-detail');
@@ -626,6 +647,15 @@ export function initConceptProvenanceInteractions(root) {
     });
   });
   root.querySelectorAll('.source-provenance-open').forEach((btn) => {
+    if (!pdfAvailable) {
+      btn.disabled = true;
+      btn.setAttribute('aria-disabled', 'true');
+      btn.removeAttribute('data-source-open-url');
+      btn.textContent = SOURCE_PDF_OPEN_DISABLED_LABEL;
+      btn.title = SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE;
+      btn.setAttribute('aria-label', SOURCE_PDF_OPEN_DISABLED_LABEL);
+      return;
+    }
     btn.addEventListener('click', async () => {
       const sourceUrl = btn.getAttribute('data-source-open-url') || '';
       if (!sourceUrl) return;

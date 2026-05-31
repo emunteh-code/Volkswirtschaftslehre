@@ -10,8 +10,15 @@ import {
   normalizeSourcePath,
   resolveDocIdBySourcePath,
   buildSourceParityActionPlan,
+  checkSourceCorpusAvailability,
   renderAnchorContextPanel
 } from './sourceCompanionCore.js';
+import {
+  SOURCE_PDF_OPEN_DISABLED_LABEL,
+  SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE,
+  getSourceMaterialsAvailability,
+  isPublicStaticDeploy
+} from '../utils/deployEnvironment.js';
 
 const DEFAULT_LAYER_LABELS = Object.freeze({
   motivation: 'Motivation',
@@ -407,19 +414,28 @@ ${rows.map((row) => `<button type="button" onclick="window.__navigate('${escapeH
     const layerRows = documentLayerRowsForDoc(doc);
     const localUrl = anchorContext?.sourceUrl || sourceMaterialUrl(doc);
     const openLabel = anchorContext?.sourceUrl ? 'Lokale Ankerquelle öffnen' : 'Lokale Quelle öffnen';
+    const pdfActions = state.sourcePdfAvailable === false
+      ? `<div class="source-companion-source-actions source-companion-source-actions--disabled">
+<button type="button" class="btn secondary" disabled aria-disabled="true" title="${escapeHtml(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}">${escapeHtml(SOURCE_PDF_OPEN_DISABLED_LABEL)}</button>
+<div class="source-companion-local-warning">
+<strong>Web-Deployment ohne PDF-Korpus</strong>
+<span>${escapeHtml(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}</span>
+</div>
+</div>`
+      : `<div class="source-companion-source-actions">
+<button type="button" class="btn secondary" data-open-source-path="${escapeHtml(localUrl)}">${escapeHtml(openLabel)}</button>
+<div class="source-companion-local-warning">
+<strong>Lokale Datei</strong>
+<span>${localSourceHint}</span>
+</div>
+</div>`;
     return `<div class="source-companion-detail-card">
 <div class="source-companion-detail-head">
 <span>${escapeHtml(doc.kindLabel)}</span>
 <h3>${escapeHtml(doc.title)}</h3>
 <p>${escapeHtml(doc.path)}</p>
 </div>
-<div class="source-companion-source-actions">
-<button type="button" class="btn secondary" data-open-source-path="${escapeHtml(localUrl)}">${escapeHtml(openLabel)}</button>
-<div class="source-companion-local-warning">
-<strong>Lokale Datei</strong>
-<span>${localSourceHint}</span>
-</div>
-</div>
+${pdfActions}
 ${sourceOpenStatus ? `<p class="source-companion-open-status source-companion-open-status--${escapeHtml(sourceOpenStatus.type)}">${escapeHtml(sourceOpenStatus.message)}</p>` : ''}
 ${renderAnchorContextFn(anchorContext)}
 ${renderDocumentCoverageVerdict(doc, conceptCoverage)}
@@ -456,8 +472,17 @@ ${mapped.map((concept) => `<button type="button" onclick="window.__navigate('${e
     loaded: false,
     error: null,
     sourceOpenStatus: null,
-    anchorContext: null
+    anchorContext: null,
+    sourcePdfAvailable: null
   };
+
+  function renderDeployNotice() {
+    if (state.sourcePdfAvailable !== false) return '';
+    return `<aside class="source-companion-deploy-notice" role="note">
+<strong>Kurs-PDFs nicht in dieser Online-Version</strong>
+<p>${escapeHtml(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}</p>
+</aside>`;
+  }
 
   function render() {
     const content = document.getElementById('content');
@@ -498,6 +523,7 @@ ${mapped.map((concept) => `<button type="button" onclick="window.__navigate('${e
 <span>Official-Material Companion</span>
 <h2>${escapeHtml(moduleTitle)} Quellenbrowser</h2>
 <p>${escapeHtml(headerDescription)}</p>
+${renderDeployNotice()}
 </div>
 <div class="source-companion-stats">${renderKindStats(state.docs)}</div>
 ${renderCoverageMatrix(state.docs, state.conceptCoverage)}
@@ -533,6 +559,7 @@ ${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
 
     content.querySelectorAll('[data-open-source-path]').forEach((button) => {
       button.addEventListener('click', async () => {
+        if (state.sourcePdfAvailable === false) return;
         const sourcePath = button.dataset.openSourcePath || '';
         if (!sourcePath || !selected) return;
         const checkPath = sourcePath.split('#')[0];
@@ -565,6 +592,13 @@ ${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
     renderMath?.(content);
   }
 
+  async function probePdfCorpusAvailability(docs) {
+    const fromRegistry = await checkSourceCorpusAvailability(sourceRoot, docs);
+    if (fromRegistry.available) return true;
+    if (isPublicStaticDeploy()) return false;
+    return getSourceMaterialsAvailability(`../${sourceRoot}/`);
+  }
+
   async function showSourceCompanion(options = {}) {
     const opts = typeof options === 'string' ? { sourceId: options } : (options || {});
     let requestedSourceId = opts.sourceId || null;
@@ -589,7 +623,9 @@ ${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
         if (!requestedSourceId && requestedSourcePath) {
           requestedSourceId = resolveDocIdBySourcePath(docs, requestedSourcePath, pathOptions);
         }
+        const sourcePdfAvailable = await probePdfCorpusAvailability(docs);
         state = {
+          ...state,
           docs,
           conceptCoverage: buildConceptCoverage(),
           selectedId: requestedSourceId || defaultSelectedDocId(docs),
@@ -597,6 +633,7 @@ ${renderCoverageFilters(state.docs, state.conceptCoverage, activeFilter)}
           loaded: true,
           error: null,
           sourceOpenStatus: null,
+          sourcePdfAvailable,
           anchorContext: requestedAnchorContext
             ? { ...requestedAnchorContext, sourceId: requestedSourceId || requestedAnchorContext.sourceId }
             : null

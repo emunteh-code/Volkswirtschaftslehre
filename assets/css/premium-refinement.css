@@ -4925,6 +4925,33 @@ body.light-mode #content .source-provenance-mark {
   line-height: 1.6;
 }
 
+#content .source-companion-deploy-notice {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--r-sm, 10px);
+  border: 1px solid color-mix(in srgb, var(--accent3, #f87171) 35%, var(--border));
+  background: color-mix(in srgb, var(--accent3, #f87171) 8%, var(--surface2));
+}
+
+#content .source-companion-deploy-notice strong {
+  display: block;
+  color: var(--text);
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+#content .source-companion-deploy-notice p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+#content .source-companion-source-actions--disabled .btn[disabled] {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
 #content .source-companion-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));

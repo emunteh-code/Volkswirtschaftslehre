@@ -6,6 +6,22 @@ const MATH_SUPERSCRIPT_CHARS = '⁰¹²³⁴⁵⁶⁷⁸⁹';
 const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳℒ∞';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
 const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
+const SEMANTIC_MATH_SKIP_SELECTOR =
+  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"]';
+
+function isInsideSemanticSkipZone(node) {
+  const parent = node?.parentElement;
+  if (!parent) return true;
+  return Boolean(parent.closest(SEMANTIC_MATH_SKIP_SELECTOR));
+}
+
+function isSingleLetterInsideWord(text, start, end) {
+  const slice = text.slice(start, end);
+  if (slice.length !== 1 || !/^[A-Za-z]$/.test(slice)) return false;
+  const before = start > 0 ? text[start - 1] : '';
+  const after = end < text.length ? text[end] : '';
+  return /[\p{L}\p{N}_]/u.test(before) || /[\p{L}\p{N}_]/u.test(after);
+}
 
 export const MIKRO1_EXTRA_MATH_RANGE_PATTERNS = [
 
@@ -123,7 +139,7 @@ export function createSemanticMathSurfaces({
       }
     });
 
-    return groups;
+    return groups.filter((group) => !isSingleLetterInsideWord(text, group.start, group.end));
   }
 
   function hasSemanticMathToken(value) {
@@ -145,6 +161,7 @@ export function createSemanticMathSurfaces({
       }
       const span = document.createElement('span');
       span.className = 'math-semantic';
+      span.setAttribute('aria-hidden', 'true');
       span.textContent = text.slice(group.start, group.end);
       fragment.appendChild(span);
       cursor = group.end;
@@ -169,7 +186,7 @@ export function createSemanticMathSurfaces({
       if (group.start > cursor) {
         html += escapeHtml(text.slice(cursor, group.start));
       }
-      html += `<span class="math-semantic">${escapeHtml(text.slice(group.start, group.end))}</span>`;
+      html += `<span class="math-semantic" aria-hidden="true">${escapeHtml(text.slice(group.start, group.end))}</span>`;
       cursor = group.end;
     });
     if (cursor < text.length) {
@@ -251,6 +268,10 @@ export function createSemanticMathSurfaces({
           return NodeFilter.FILTER_REJECT;
         }
 
+        if (isInsideSemanticSkipZone(node)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+
         return NodeFilter.FILTER_ACCEPT;
       }
     });
@@ -266,8 +287,13 @@ export function createSemanticMathSurfaces({
 
   function semanticizeElementContent(element) {
     if (!element || !element.innerHTML?.trim()) return;
+    if (element.closest(SEMANTIC_MATH_SKIP_SELECTOR)) return;
+    const plainAccessible = stripHtml(element.textContent);
     decodeTextEntitiesInPlace(element);
     decorateSemanticMath(element);
+    if (element.querySelector('.math-semantic') && plainAccessible) {
+      element.setAttribute('aria-label', plainAccessible);
+    }
   }
 
   function semanticizeMarkupString(markup) {
@@ -321,7 +347,7 @@ export function createSemanticMathSurfaces({
 
   function decorateSemanticMathSurfaces() {
     [
-      '#content h1',
+      '#content .section-block h3',
       '#content .section-block p',
       '#content .section-block li',
       '#content .formula-card .f-desc',
@@ -346,8 +372,7 @@ export function createSemanticMathSurfaces({
       '#content .mastery-bar-label',
       '#rightPanel .rp-conn',
       '#rightPanel .rp-mistake--rail .rp-mistake-body',
-      '#rightPanel .rp-f-name',
-      '#sidebar .nav-item > span:not(.num):not(.mastery)'
+      '#rightPanel .rp-f-name'
     ].forEach((selector) => {
       document.querySelectorAll(selector).forEach((element) => {
         semanticizeElementContent(element);
@@ -356,7 +381,6 @@ export function createSemanticMathSurfaces({
 
     decorateSemanticMath(document.getElementById('content'));
     decorateSemanticMath(document.getElementById('rightPanel'));
-    decorateSemanticMath(document.getElementById('sidebar'));
   }
   return {
     prepareSemanticMathData,

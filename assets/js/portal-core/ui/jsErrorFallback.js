@@ -10,6 +10,8 @@
   if (!document.getElementById('jsError')) {
     const overlay = document.createElement('div');
     overlay.id = 'jsError';
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('inert', '');
     overlay.style.cssText =
       'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;padding:20px;';
     overlay.innerHTML = `<div style="background:#16181c;border:1px solid #ff6b6b;border-radius:12px;padding:32px;max-width:500px;text-align:center;font-family:monospace;">
@@ -30,7 +32,12 @@
     window.setTimeout(() => {
       if (!window.__jsLoaded) {
         const el = document.getElementById('jsError');
-        if (el) el.style.display = 'flex';
+        if (el) {
+          el.style.display = 'flex';
+          el.setAttribute('aria-hidden', 'false');
+          el.removeAttribute('inert');
+          el.setAttribute('role', 'alertdialog');
+        }
       }
     }, 2500);
   });

@@ -1,3 +1,5 @@
+import { getSourceMaterialsAvailability } from './utils/deployEnvironment.js';
+
 export function createPortalApp({
   courseLabel,
   consentKey,
@@ -371,7 +373,15 @@ export function createPortalApp({
   document.addEventListener("DOMContentLoaded", () => {
     window.__jsLoaded = true;
     const jsError = document.getElementById("jsError");
-    if (jsError) jsError.style.display = "none";
+    if (jsError) {
+      jsError.style.display = "none";
+      jsError.setAttribute("aria-hidden", "true");
+      jsError.setAttribute("inert", "");
+      jsError.removeAttribute("role");
+    }
+    if (sourceCompanion) {
+      getSourceMaterialsAvailability();
+    }
     initTheme();
     buildNav(navigate);
 

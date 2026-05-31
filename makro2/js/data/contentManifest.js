@@ -4,7 +4,7 @@
 // See docs/audits/makro2-migration.md
 // ============================================================
 
-import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
+import { getStandardConceptSourceSummary } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 import { createProvenance } from '../../../assets/js/portal-core/data/provenance.js';
 import { buildProvenanceByConceptFromPrimaryRefs } from '../../../assets/js/portal-core/data/learningObjectNormalize.js';
 import { buildConceptModeIndex } from '../../../assets/js/portal-core/data/modeIndex.js';
@@ -174,10 +174,5 @@ export function getConceptModeIndex(conceptId) {
 
 
 export function getConceptSourceSummary(conceptId) {
-  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
-    anchoredTitle: 'Direkte Seitenanker vorhanden.',
-    referencedTitle: 'Offizielle Referenz vorhanden, aber noch ohne geprüfte Seitenanker.',
-    supplementalTitle: 'Platform-added support ohne direkten offiziellen Quellenanker.',
-    platformTitle: 'Platform-added support; VL-Referenz oder Seitenanker fehlt noch.'
-  });
+  return getStandardConceptSourceSummary(getConceptProvenance(conceptId));
 }

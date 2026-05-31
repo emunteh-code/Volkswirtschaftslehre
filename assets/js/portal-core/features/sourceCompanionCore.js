@@ -229,6 +229,11 @@ export function buildConceptSourceSummaryFromProvenance(layers, options = {}) {
   return { status: 'platform', label: platformLabel, title: platformTitle };
 }
 
+/** Unified home-card provenance badge copy across all modules. */
+export function getStandardConceptSourceSummary(layers) {
+  return buildConceptSourceSummaryFromProvenance(layers);
+}
+
 export function buildSourceParityActionPlan({ doc, verdict, density, messages = {} }) {
   const actionsByTone = {
     gap: messages.gap || [

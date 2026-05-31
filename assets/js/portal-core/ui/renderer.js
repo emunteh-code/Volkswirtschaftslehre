@@ -16,6 +16,11 @@ import {
 } from "./sourceProvenanceUi.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
 
+export const KONCEPT_CHECK_HOME_ACTION_CARD_HTML = `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startConceptSchnelltest()">
+<div class="hac-title">Konzept-Check</div>
+<div class="hac-desc">5 Minuten, typische Denkfallen</div>
+</div>`;
+
 export function createRenderer({
   courseLabel,
   courseTitle,

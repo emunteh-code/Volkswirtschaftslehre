@@ -1,4 +1,4 @@
-import { createRenderer } from '../../../assets/js/portal-core/ui/renderer.js';
+import { createRenderer, KONCEPT_CHECK_HOME_ACTION_CARD_HTML } from '../../../assets/js/portal-core/ui/renderer.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { CHAPTERS, CONTENT } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
@@ -49,8 +49,5 @@ export const {
   sourceMaterialBaseUrl: '../source-materials/Makroökonomik I/',
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
   taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT,
-  extraHomeActionCardsHtml: `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startConceptSchnelltest()">
-<div class="hac-title">Konzept-Check</div>
-<div class="hac-desc">5 Minuten, typische Denkfallen</div>
-</div>`,
+  extraHomeActionCardsHtml: KONCEPT_CHECK_HOME_ACTION_CARD_HTML,
 });

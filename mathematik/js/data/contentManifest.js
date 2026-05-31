@@ -21,7 +21,7 @@ import {
 import { COURSE_CONFIG } from './courseConfig.js';
 import { FULL_EXAMS } from './fullExams.js';
 import { MATHEMATIK_SOURCE_ANCHORS } from './sourceAnchors.js';
-import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
+import { getStandardConceptSourceSummary } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 
 const MODULE_SLUG = 'mathematik';
 
@@ -119,12 +119,7 @@ export function getConceptProvenance(conceptId) {
 }
 
 export function getConceptSourceSummary(conceptId) {
-  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
-    anchoredTitle: 'Direkte Mathematik-Seitenanker vorhanden.',
-    referencedTitle: 'Offizielle Mathematik-Referenz vorhanden, aber noch ohne geprüfte Seitenanker.',
-    supplementalTitle: 'Platform-added support ohne direkten offiziellen Quellenanker.',
-    platformTitle: 'Platform-added support; VL-Referenz oder Seitenanker fehlt noch.'
-  });
+  return getStandardConceptSourceSummary(getConceptProvenance(conceptId));
 }
 
 export function getConceptModeIndex(conceptId) {

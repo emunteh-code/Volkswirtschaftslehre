@@ -12,7 +12,7 @@ import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
 import { MIKRO2_SOURCE_ANCHORS } from './sourceAnchors.js';
 import { GRAPH_CONCEPTS } from '../ui/graphPanel.js';
-import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
+import { getStandardConceptSourceSummary } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 
 const MODULE_SLUG = 'mikro2';
 
@@ -150,10 +150,5 @@ export function getConceptProvenance(conceptId) {
 }
 
 export function getConceptSourceSummary(conceptId) {
-  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
-    anchoredTitle: 'Direkte Mikro-II-Seitenanker vorhanden.',
-    referencedTitle: 'Offizielle Mikro-II-Quellenreferenz vorhanden, aber noch ohne Seitenanker.',
-    supplementalTitle: 'Platform-added support ohne direkten offiziellen Mikro-II-Quellenanker.',
-    platformTitle: 'Platform-added support; Quelle muss noch geprüft werden.'
-  });
+  return getStandardConceptSourceSummary(getConceptProvenance(conceptId));
 }

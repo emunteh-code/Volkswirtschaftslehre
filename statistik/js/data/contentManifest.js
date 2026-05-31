@@ -8,7 +8,7 @@ import { createProvenance } from '../../../assets/js/portal-core/data/provenance
 import { buildProvenanceByConceptFromPrimaryRefs } from '../../../assets/js/portal-core/data/learningObjectNormalize.js';
 import { buildConceptModeIndex } from '../../../assets/js/portal-core/data/modeIndex.js';
 import { buildContentManifestBridgePayload } from '../../../assets/js/portal-core/data/contentManifestAdapters.js';
-import { buildConceptSourceSummaryFromProvenance } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
+import { getStandardConceptSourceSummary } from '../../../assets/js/portal-core/features/sourceCompanionCore.js';
 import { CHAPTERS, CONTENT } from './chapters.js';
 import { STEP_PROBLEMS } from './stepProblems.js';
 import { INTUITION } from './intuition.js';
@@ -174,10 +174,5 @@ export function getConceptModeIndex(conceptId) {
 }
 
 export function getConceptSourceSummary(conceptId) {
-  return buildConceptSourceSummaryFromProvenance(getConceptProvenance(conceptId), {
-    anchoredTitle: 'Direkte Statistik-Seitenanker vorhanden.',
-    referencedTitle: 'Offizielle Statistik-Referenz vorhanden, aber noch ohne geprüfte Seitenanker.',
-    supplementalTitle: 'Platform-added support ohne direkten offiziellen Quellenanker.',
-    platformTitle: 'Platform-added support; VL-Referenz oder Seitenanker fehlt noch.'
-  });
+  return getStandardConceptSourceSummary(getConceptProvenance(conceptId));
 }

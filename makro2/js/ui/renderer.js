@@ -44,6 +44,4 @@ export const {
   stepProblems: STEP_PROBLEMS,
   checkAnswer: checkAnswerWithTolerance,
   getConceptProvenance,
-  homeLernDashboardPilotNote:
-    "Basiert auf Lernspuren aus diesem Browser."
 });

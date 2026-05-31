@@ -39,9 +39,7 @@ const baseRenderer = createRenderer({
     const blocks = R_BLOCKS_BY_ID[conceptId] || [];
     return renderRAnwendungTab(blocks, 'statistik', { conceptId });
   },
-  homeLernDashboardPilotNote:
-    'Basiert auf Lernspuren aus diesem Browser.',
-  showConceptMotivationBanner: false,
+  showConceptMotivationBanner: true,
   getConceptProvenance,
   getConceptSourceSummary,
   sourceMaterialBaseUrl: '../source-materials/Statistik/',

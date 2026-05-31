@@ -105,3 +105,5 @@ cd tools/clickthrough && npm run trust:pass1
 ```
 
 **Result:** `trust-regression-pass-1: all checks passed.` (exit 0, 2026-05-31)
+
+**Commit:** `5cb7205` (pushed to `main`)

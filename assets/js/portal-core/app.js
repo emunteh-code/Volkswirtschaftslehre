@@ -361,6 +361,19 @@ export function createPortalApp({
   window.__drawDemandGraph = drawDemandGraph;
   window.__drawIsoquantGraph = drawIsoquantGraph;
   window.initGraph = initGraph;
+  window.__startInterleavedExam = () => {
+    const content = document.getElementById("content");
+    if (content) {
+      const intro = document.createElement("div");
+      intro.className = "section-block interleaved-exam-intro";
+      intro.setAttribute("role", "note");
+      intro.innerHTML =
+        "<h3>Gemischter Schnelltest</h3><p>Aufgaben aus verschiedenen Konzepten werden gemischt (wie bei der Klausur). Modulübergreifende Mischung folgt in einer späteren Version.</p>";
+      content.prepend(intro);
+      window.setTimeout(() => intro.remove(), 3200);
+    }
+    startExam();
+  };
   window.__toggleTheme = toggleTheme;
   window.__toggleSidebar = toggleSidebar;
   window.__toggleFocus = toggleFocus;

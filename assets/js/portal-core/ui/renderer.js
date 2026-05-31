@@ -16,7 +16,13 @@ import {
 } from "./sourceProvenanceUi.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
 
-export const KONCEPT_CHECK_HOME_ACTION_CARD_HTML = `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startConceptSchnelltest()">
+const HOME_ACTION_ACTIVATE = (handler) =>
+  `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
+
+export const HOME_DASHBOARD_DISCLOSURE_NOTE =
+  "Basiert auf Lernspuren aus diesem Browser; keine serverseitige Bewertung.";
+
+export const KONCEPT_CHECK_HOME_ACTION_CARD_HTML = `<div class="home-action-card" onclick="window.__startConceptSchnelltest()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startConceptSchnelltest()")}>
 <div class="hac-title">Konzept-Check</div>
 <div class="hac-desc">5 Minuten, typische Denkfallen</div>
 </div>`;
@@ -44,8 +50,10 @@ export function createRenderer({
   examDrillsById = null,
   /** Raw HTML inserted inside the home action row (optional; e.g. Konzept-Check card) */
   extraHomeActionCardsHtml = '',
-  /** Optional one-line note under the Lern-Dashboard home card (pilot modules only) */
-  homeLernDashboardPilotNote = '',
+  /** One-line disclosure under the Lern-Dashboard home card (fleet-wide default). */
+  homeLernDashboardPilotNote = HOME_DASHBOARD_DISCLOSURE_NOTE,
+  /** Show gemischter Schnelltest card (within-module interleaving; cross-module backlog). */
+  showInterleavedExamCard = true,
   /** Optional home description for the Probeklausuren card. */
   fullExamHomeDescription = 'Vollständige Klausursets mit Lösungen',
   /** When false, omit the `entry.motivation` strip under the concept H1 (module opt-out). */
@@ -1086,7 +1094,7 @@ ${renderExamPatterns(data)}
     updateTabButtons(activeTab, tabAvailability);
 
     if (breadcrumb) {
-      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / ${chapter.cat} / ${chapter.title}`;
+      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / ${escapeHtml(chapter.cat)} / ${escapeHtml(chapter.title)}`;
     }
 
     if (!entry) {
@@ -1112,9 +1120,13 @@ ${renderExamPatterns(data)}
     const motivationStrip = showConceptMotivationBanner && entry.motivation
       ? `<div class="concept-motivation" role="note">${entry.motivation}</div>`
       : "";
+    const objectivesBlock = Array.isArray(entry.objectives) && entry.objectives.length
+      ? `<div class="concept-objectives" role="region" aria-label="Lernziele"><h3>Lernziele</h3><ul>${entry.objectives.map((o) => `<li>${escapeHtml(String(o))}</li>`).join("")}</ul><p class="concept-objectives-hint">Nach diesem Block kannst du die Lernziele selbst abhaken.</p></div>`
+      : "";
+    const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
     const headerHTML = `<div class="concept-header">
-<div class="concept-tag">${chapter.cat} · Konzept ${idx}</div>
-<h1 class="concept-title">${chapter.title}</h1>
+<div class="concept-tag">${escapeHtml(chapter.cat)} · Stelle ${syllabusIdx} von ${chapters.length}</div>
+<h1 class="concept-title">${escapeHtml(chapter.title)}</h1>
 ${motivationStrip}
 </div>`;
 
@@ -1126,7 +1138,7 @@ ${motivationStrip}
         const warningData = getWarningSystemData(entry);
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
         content.innerHTML =
-          headerHTML + `<div class="panel active">${theorySignals.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
+          headerHTML + `<div class="panel active">${objectivesBlock}${theorySignals.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         if (initGraphFn) initGraphFn(conceptId);
@@ -1229,22 +1241,27 @@ ${motivationStrip}
       : "";
 
     html += `<div class="home-action-row">
-<div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showDashboard()">
+<div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showDashboard()")}>
 <div class="hac-title">Lern-Dashboard</div>
 <div class="hac-desc">Fortschritt, schwache Bereiche, Wiederholungen</div>
 ${pilotDashNote ? `<p class="hac-pilot-note">${pilotDashNote}</p>` : ""}
 </div>
-<div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__startExam()">
+<div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startExam()")}>
 <div class="hac-title">Schnelltest</div>
-<div class="hac-desc">20 Minuten, zufällige Aufgaben</div>
+<div class="hac-desc">20 Minuten, gemischte Konzepte</div>
 </div>
+${showInterleavedExamCard && typeof window !== "undefined" && typeof window.__startInterleavedExam === "function" ? `
+<div class="home-action-card" onclick="window.__startInterleavedExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startInterleavedExam()")}>
+<div class="hac-title">Gemischter Schnelltest</div>
+<div class="hac-desc">Wie Schnelltest — Themenwechsel im Modul (Pilot)</div>
+</div>` : ""}
 ${extraHomeActionCardsHtml}
-<div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showSRSReview()">
+<div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showSRSReview()")}>
 <div class="hac-title">Wiederholung${due.length > 0 ? ` (${due.length})` : ""}</div>
 <div class="hac-desc">Spaced Repetition für heute</div>
 </div>
 ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "function" ? `
-<div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__showFullExamSelect()">
+<div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showFullExamSelect()")}>
 <div class="hac-title">Probeklausuren</div>
 <div class="hac-desc">${renderDecodedText(fullExamHomeDescription)}</div>
 </div>

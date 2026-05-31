@@ -1,0 +1,29 @@
+name: Trust regression
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  trust-pass1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install clickthrough dependencies
+        working-directory: tools/clickthrough
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        working-directory: tools/clickthrough
+        run: npx playwright install chromium
+
+      - name: Trust regression pass 1
+        working-directory: tools/clickthrough
+        run: npm run trust:pass1

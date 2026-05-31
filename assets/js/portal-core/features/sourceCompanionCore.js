@@ -262,6 +262,35 @@ export function buildSourceParityActionPlan({ doc, verdict, density, messages = 
   return { label: verdict?.label || 'Source parity', actions };
 }
 
+/**
+ * Probe whether local PDF files under sourceRoot are reachable (HEAD).
+ * Used to detect GitHub Pages deployments where source-materials/ is not shipped.
+ */
+export async function checkSourceCorpusAvailability(sourceRoot, docs = [], { basePrefix = '../' } = {}) {
+  const pdfDoc = (docs || []).find(
+    (doc) => doc?.path && String(doc.extension || doc.path).toLowerCase().includes('pdf')
+  );
+  if (!pdfDoc?.path) {
+    return { available: false, probeUrl: '', reason: 'no-pdf-in-registry' };
+  }
+  const probeUrl = `${basePrefix}${String(sourceRoot).replace(/\/$/, '')}/${pdfDoc.path}`.split('#')[0];
+  try {
+    const response = await fetch(probeUrl, { method: 'HEAD', cache: 'no-store' });
+    if (response.ok) {
+      return { available: true, probeUrl, reason: 'head-ok' };
+    }
+    return { available: false, probeUrl, reason: `http-${response.status}` };
+  } catch {
+    return { available: false, probeUrl, reason: 'network-error' };
+  }
+}
+
+export const ONLINE_CORPUS_UNAVAILABLE_MESSAGE = Object.freeze({
+  title: 'Kurs-PDFs nicht in dieser Online-Version',
+  body:
+    'Kurs-PDFs sind in dieser Online-Version nicht enthalten. Nutze deine offiziellen VL-Materialien oder einen lokalen Clone mit source-materials/. Die Zuordnung Konzept ↔ Quelle bleibt hier sichtbar.'
+});
+
 export function renderAnchorContextPanel(anchorContext, escapeHtml) {
   if (!anchorContext?.title) return '';
   const esc = typeof escapeHtml === 'function' ? escapeHtml : (value) => String(value ?? '');

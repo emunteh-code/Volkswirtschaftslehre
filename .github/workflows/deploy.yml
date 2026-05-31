@@ -15,7 +15,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Exam-OS CI validate
+        run: node tools/exam-os/ci-validate.mjs
+
+  trust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install clickthrough dependencies
+        working-directory: tools/clickthrough
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        working-directory: tools/clickthrough
+        run: npx playwright install chromium
+
+      - name: Trust regression pass 1
+        working-directory: tools/clickthrough
+        run: npm run trust:pass1
+
   deploy:
+    needs: [validate, trust]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -23,13 +57,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build Pages dist subset
+        run: node tools/build-pages-dist.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment

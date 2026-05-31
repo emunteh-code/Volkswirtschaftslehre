@@ -1,14 +1,11 @@
-// ============================================================
-// MATHJAX HELPER — Ökonometrie
-// Centralized MathJax typeset triggers
-// ============================================================
+import { ensureMathJax } from '../../../assets/js/portal-core/utils/math.js';
 
 /**
- * Trigger MathJax typesetting on a DOM element (or the whole content area).
- * Safe to call before MathJax has loaded — waits for startup if needed.
+ * Trigger MathJax typesetting on a DOM element (lazy-loads MathJax on first use).
  * @param {Element|null} el - Target element; defaults to #content
  */
 export function renderMath(el) {
+  ensureMathJax();
   const target = el || document.getElementById('content');
   if (!target) return Promise.resolve();
 
@@ -17,19 +14,16 @@ export function renderMath(el) {
       MathJax.typesetClear([target]);
     }
     if (window.MathJax?.typesetPromise) {
-      return MathJax.typesetPromise([target]).catch((err) => {
-        console.warn('MathJax:', err);
-      });
+      return MathJax.typesetPromise([target]).catch((err) => console.warn('MathJax:', err));
     }
     return Promise.resolve();
   };
 
   if (window.MathJax?.typesetPromise) {
     return typeset();
-  } else if (window.MathJax?.startup?.promise) {
-    return MathJax.startup.promise
-      .then(typeset)
-      .catch((err) => console.warn('MathJax:', err));
+  }
+  if (window.MathJax?.startup?.promise) {
+    return MathJax.startup.promise.then(typeset).catch((err) => console.warn('MathJax:', err));
   }
 
   return new Promise((resolve) => {

@@ -129,6 +129,11 @@ export const CONTENT = {
  ]
  },
  budget: {
+ objectives: [
+   'Du kannst die Budgetmenge und Budgetgerade formal aufschreiben und interpretieren.',
+   'Du kannst Achsenabschnitte und Steigung aus Preisen und Einkommen ableiten.',
+   'Du kannst Güterbündel als budgetkonform oder nicht einordnen.'
+ ],
  motivation: 'Die Budgetmenge beantwortet: Welche Güterbündel kann sich der Haushalt bei gegebenen Preisen und Einkommen tatsächlich leisten?',
  theorie: String.raw`
  <div class="section-block">

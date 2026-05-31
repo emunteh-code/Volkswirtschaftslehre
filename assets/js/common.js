@@ -4,8 +4,8 @@ import {
   getTrustedCoreModules,
   getNonTrustedPublicModules
 } from "./modules.js";
-import { getModuleContent } from "./module-content.js";
-import { buildGeneratedPortalData, estimateGeneratedChapterCount } from "./generated-portal/dataFactory.js";
+import { SITE_CONFIG } from "./siteConfig.js";
+import { getModuleConceptCount } from "./module-progress-meta.js";
 import { mountRLabs } from "./r-lab.js";
 
 const THEME_KEY = "lernportal_theme_v1";
@@ -34,7 +34,11 @@ function setTheme(theme) {
   document.body.classList.add(theme === "dark" ? "theme-dark" : "theme-light");
   localStorage.setItem(THEME_KEY, theme);
   const button = document.getElementById("themeToggle");
-  if (button) button.textContent = theme === "dark" ? "☀ Hell" : "☾ Dunkel";
+  if (button) {
+    const label = theme === "dark" ? "☀ Hell" : "☾ Dunkel";
+    button.textContent = label;
+    button.setAttribute("aria-label", `Farbschema wechseln: ${label}`);
+  }
 }
 
 function initTheme() {
@@ -53,14 +57,16 @@ function initTheme() {
 
 function readStoredJson(key) {
   if (!key) return {};
-  try { 
+  try {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : {}; 
-  } catch (err) { 
+    return item ? JSON.parse(item) : {};
+  } catch (err) {
     console.error(`Storage Error [${key}]:`, err);
-    // Safe fallback: reset corrupted key
     localStorage.removeItem(key);
-    return {}; 
+    if (typeof document !== "undefined" && document.body) {
+      showStorageRecoveryToast(key);
+    }
+    return {};
   }
 }
 
@@ -75,13 +81,11 @@ function writeStoredJson(key, value) {
 
 function getPortalState(module) {
   if (module.portalState) return module.portalState;
-  const content = getModuleContent(module.slug);
-  const chapterCount = content ? estimateGeneratedChapterCount(module, content) : 0;
   return {
     progressKey: `${module.slug}_progress_v1`,
     srsKey: `${module.slug}_srs_v1`,
     lastKey: `${module.slug}_last_v1`,
-    chapterCount
+    chapterCount: getModuleConceptCount(module.slug)
   };
 }
 
@@ -90,37 +94,18 @@ function readVisitState(module) {
   return state?.lastKey ? readStoredJson(state.lastKey) : {};
 }
 
-const validConceptIdCache = new Map();
-
-async function loadModuleConceptIds(module) {
-  const cacheHit = validConceptIdCache.get(module.slug);
-  if (cacheHit) return cacheHit;
-
-  const loader = (async () => {
-    try {
-      const url = new URL(`../../${module.slug}/js/data/chapters.js`, import.meta.url);
-      const chapterModule = await import(url.href);
-      if (Array.isArray(chapterModule.CHAPTERS) && chapterModule.CHAPTERS.length) {
-        return chapterModule.CHAPTERS.map((chapter) => chapter?.id).filter(Boolean);
-      }
-    } catch (err) {
-      console.warn(`Could not load chapters for ${module.slug}; falling back to generated snapshot ids.`, err);
-    }
-
-    const content = getModuleContent(module.slug);
-    if (!content) return [];
-    return buildGeneratedPortalData(module, content).chapters.map((chapter) => chapter.id);
-  })();
-
-  validConceptIdCache.set(module.slug, loader);
-  return loader;
-}
-
-function touchModuleVisit(module, patch = {}) {
-  const state = getPortalState(module);
-  if (!state?.lastKey) return;
-  const current = readStoredJson(state.lastKey);
-  writeStoredJson(state.lastKey, { ...current, ...patch, visitedAt: Date.now() });
+function showStorageRecoveryToast(key) {
+  const toast = document.createElement("div");
+  toast.className = "lp-storage-toast";
+  toast.setAttribute("role", "status");
+  toast.textContent = "Fortschritt zurückgesetzt (beschädigte Daten).";
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add("is-visible"));
+  window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    window.setTimeout(() => toast.remove(), 300);
+  }, 4200);
+  console.warn(`Storage reset [${key}]: corrupted JSON removed`);
 }
 
 function formatVisitDate(timestamp) {
@@ -128,19 +113,16 @@ function formatVisitDate(timestamp) {
   return new Intl.DateTimeFormat("de-DE", { dateStyle: "medium", timeStyle: "short" }).format(timestamp);
 }
 
-async function getModuleSnapshot(module) {
+function getModuleSnapshot(module) {
   const state = getPortalState(module);
   if (!state) return { seen: 0, total: 0, due: 0, percent: 0, started: false };
   const progress = readStoredJson(state.progressKey);
   const srs = readStoredJson(state.srsKey);
-  const conceptIds = await loadModuleConceptIds(module);
-  const conceptIdSet = conceptIds.length ? new Set(conceptIds) : null;
-  const total = conceptIds.length || state.chapterCount || 0;
-  const seen = Object.keys(progress).filter((id) => !conceptIdSet || conceptIdSet.has(id)).length;
-  const due = Object.entries(srs).filter(([id, entry]) => {
-    if (conceptIdSet && !conceptIdSet.has(id)) return false;
-    return entry && typeof entry.due === "number" && entry.due <= Date.now();
-  }).length;
+  const total = state.chapterCount || getModuleConceptCount(module.slug) || 0;
+  const seen = Math.min(Object.keys(progress).length, total || Object.keys(progress).length);
+  const due = Object.values(srs).filter(
+    (entry) => entry && typeof entry.due === "number" && entry.due <= Date.now()
+  ).length;
   const seenForRatio = total > 0 ? Math.min(seen, total) : seen;
   const percent = total ? Math.min(100, Math.round((seenForRatio / total) * 100)) : 0;
   return { seen, total, due, percent, started: seen > 0 };
@@ -330,7 +312,7 @@ async function updateHeroShelf(module) {
     return;
   }
 
-  const snapshot = await getModuleSnapshot(module);
+  const snapshot = getModuleSnapshot(module);
   if (renderToken !== heroRenderToken) return;
 
   // Animate transition
@@ -405,37 +387,34 @@ async function renderLandingPage() {
   const trustedModules = getTrustedCoreModules();
   const furtherModules = getNonTrustedPublicModules();
 
-  // 1. Count (weitere Module only — trusted shelf speaks for itself)
   const countLabel = document.getElementById("moduleCountLabel");
   if (countLabel) countLabel.textContent = `${furtherModules.length} Module`;
 
-  // 2. Hero: last visited, else first trusted-core module, else first public
   const lastModule = pickInitialLandingModule();
   const defaultModule = lastModule || trustedModules[0] || PUBLIC_MODULES[0] || null;
   await updateHeroShelf(defaultModule);
 
-  // 3. Trusted core + further grids
+  const buildSnapshotsFromMeta = (modules) =>
+    modules.map((module) => ({
+      module,
+      snapshot: {
+        seen: 0,
+        total: getModuleConceptCount(module.slug),
+        due: 0,
+        percent: 0,
+        started: false
+      }
+    }));
+
   if (PUBLIC_MODULES.length === 0) {
     if (trustedGrid) trustedGrid.innerHTML = "";
     gridNode.innerHTML = `<div class="empty-state">Keine Module verfügbar.</div>`;
     landingTileElements = [];
   } else {
-    const trustedSnapshots =
-      trustedModules.length && trustedGrid
-        ? await Promise.all(
-            trustedModules.map(async (module) => ({
-              module,
-              snapshot: await getModuleSnapshot(module)
-            }))
-          )
-        : [];
-
-    const furtherSnapshots = await Promise.all(
-      furtherModules.map(async (module) => ({
-        module,
-        snapshot: await getModuleSnapshot(module)
-      }))
-    );
+    let trustedSnapshots = trustedModules.length && trustedGrid
+      ? buildSnapshotsFromMeta(trustedModules)
+      : [];
+    let furtherSnapshots = buildSnapshotsFromMeta(furtherModules);
 
     if (trustedGrid) {
       trustedGrid.innerHTML = trustedSnapshots.length
@@ -470,6 +449,42 @@ async function renderLandingPage() {
     };
     if (trustedGrid) trustedGrid.addEventListener("mouseleave", reapplyHoverAnchor);
     gridNode.addEventListener("mouseleave", reapplyHoverAnchor);
+
+    queueMicrotask(() => {
+      trustedSnapshots = trustedModules.length
+        ? trustedModules.map((module) => ({
+            module,
+            snapshot: getModuleSnapshot(module)
+          }))
+        : [];
+      furtherSnapshots = furtherModules.map((module) => ({
+        module,
+        snapshot: getModuleSnapshot(module)
+      }));
+
+      if (trustedGrid && trustedSnapshots.length) {
+        trustedGrid.innerHTML = trustedSnapshots
+          .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot, { trustedCore: true }))
+          .join("");
+      }
+      if (furtherSnapshots.length) {
+        gridNode.innerHTML = furtherSnapshots
+          .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot))
+          .join("");
+      }
+
+      landingTileElements = [
+        ...(trustedGrid ? Array.from(trustedGrid.querySelectorAll(".lp-tile")) : []),
+        ...Array.from(gridNode.querySelectorAll(".lp-tile"))
+      ];
+      const idx = Math.max(0, landingTileElements.findIndex((tile) => tile.dataset.slug === defaultModule?.slug));
+      setLandingSelection(idx, { focus: false });
+      landingTileElements.forEach((tile, index) => {
+        tile.addEventListener("mouseenter", () => setLandingSelection(index));
+        tile.addEventListener("focus", () => setLandingSelection(index));
+      });
+      if (defaultModule) void updateHeroShelf(defaultModule);
+    });
   }
 
   if (!landingKeyboardBound) {
@@ -510,7 +525,7 @@ async function renderModulePage() {
   const heroNode = document.getElementById("moduleHero");
   if (!heroNode) return;
 
-  const snapshot = await getModuleSnapshot(module);
+  const snapshot = getModuleSnapshot(module);
   const visitState = readVisitState(module);
   const visitLabel = formatVisitDate(visitState.visitedAt);
 
@@ -530,8 +545,25 @@ async function renderModulePage() {
   `;
 }
 
+function applySiteBranding() {
+  document.querySelectorAll("[data-site-university]").forEach((el) => {
+    el.textContent = SITE_CONFIG.universityName;
+  });
+  document.querySelectorAll("[data-site-degree]").forEach((el) => {
+    el.textContent = SITE_CONFIG.degreeLabel;
+  });
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && document.body.dataset.page === "landing") {
+    metaDesc.setAttribute(
+      "content",
+      `${SITE_CONFIG.portalTitle}: Klausurvorbereitung für ${SITE_CONFIG.degreeLabel} an der ${SITE_CONFIG.universityName}.`
+    );
+  }
+}
+
 async function boot() {
   initTheme();
+  applySiteBranding();
   const yearNode = document.getElementById("footerYear");
   if (yearNode) yearNode.textContent = String(new Date().getFullYear());
 

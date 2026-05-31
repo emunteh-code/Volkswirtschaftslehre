@@ -1,0 +1,16 @@
+{
+  "name": "vwl-lernportal",
+  "private": true,
+  "type": "module",
+  "description": "Source-faithful VWL exam learning portal (static GitHub Pages)",
+  "scripts": {
+    "validate": "node tools/exam-os/ci-validate.mjs",
+    "trust:pass1": "npm run trust:pass1 --prefix tools/clickthrough",
+    "build:pages-dist": "node tools/build-pages-dist.mjs",
+    "build:module-meta": "node tools/exam-os/build-module-progress-meta.mjs --write",
+    "check": "npm run validate && npm run trust:pass1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

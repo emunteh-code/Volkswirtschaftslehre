@@ -1,3 +1,26 @@
+@import url("./module-tokens.css");
+
+.concept-objectives {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--r-md, 12px);
+  border: 1px solid var(--border, #2b3440);
+  background: var(--surface2, #1d232c);
+}
+.concept-objectives h3 {
+  margin: 0 0 0.5rem;
+  font-size: var(--type-md, 1.0625rem);
+}
+.concept-objectives ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.concept-objectives-hint {
+  margin: 0.65rem 0 0;
+  font-size: var(--type-sm, 0.8125rem);
+  color: var(--muted, #aab4c3);
+}
+
 /* ============================================================
    Premium refinement — component-level polish (pass 2)
    Additive only. Tokens live in module styles.css.

@@ -7,33 +7,15 @@
   <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <title>Mikroökonomik I — Lernportal</title>
-  <link rel="icon" href="/assets/brand/favicon-mark.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/brand/favicon-mark.svg">
+  <link rel="icon" href="../assets/brand/favicon-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/brand/favicon-mark.svg">
 
   <!-- Fonts: Inconsolata (body/mono) + Syne (headings) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <!-- MathJax 3.2.2 -->
-  <script>
-    window.MathJax = {
-      loader: { load: ['[tex]/ams'] },
-      tex: {
-        packages: { '[+]': ['ams'] },
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-      },
-      startup: { typeset: false }
-    };
-  </script>
-  <script id="MathJax-script" async crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js">
-  </script>
-  <!-- Note: add integrity="sha384-..." (SRI hash) once computed via:
+  <!-- MathJax: lazy-loaded via portal-core on first typeset -->
+<!-- Note: add integrity="sha384-..." (SRI hash) once computed via:
        openssl dgst -sha384 -binary tex-chtml.js | openssl base64 -A -->
 
   <!-- Stylesheet -->
@@ -139,7 +121,7 @@
           <button class="theme-btn" id="themeToggle"
                   onclick="window.__toggleTheme()"
                   title="Hell/Dunkel umschalten (T)"
-                  aria-label="Farbschema wechseln">Dunkel</button>
+                  aria-label="Farbschema wechseln: Dunkel">Dunkel</button>
           <!-- Mobile Menu Button -->
           <button id="mobileMenuBtn"
                   onclick="window.__toggleSidebar()"

@@ -1,4 +1,5 @@
 import { CURRICULUM } from './curriculum.js';
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -39,7 +40,6 @@ ${entry.warnings.map((warning) => `<div class="warn-box"><strong>${escapeHtml(wa
 </div>`;
 }
 
-// rBlock is now excluded from theorie — it lives exclusively in the R-Anwendung tab
 function renderTheoryHtml(entry) {
   return [
     renderCards(entry),
@@ -55,16 +55,20 @@ export const CHAPTERS = CURRICULUM.map(({ id, title, cat, short }) => ({
   short
 }));
 
-export const CONTENT = Object.fromEntries(
-  CURRICULUM.map((entry) => [entry.id, {
+function mergeContent(entry) {
+  const sup = A_PLUS_SUPPLEMENT[entry.id] || {};
+  return {
     motivation: entry.motivation,
     theorie: renderTheoryHtml(entry),
-    formeln: entry.formeln || [],
-    aufgaben: entry.aufgaben || []
-  }])
+    formeln: [...(entry.formeln || []), ...(sup.formeln || [])],
+    aufgaben: [...(entry.aufgaben || []), ...(sup.aufgaben || [])]
+  };
+}
+
+export const CONTENT = Object.fromEntries(
+  CURRICULUM.map((entry) => [entry.id, mergeContent(entry)])
 );
 
-// R blocks indexed by concept ID for the dedicated R-Anwendung tab
 export const R_BLOCKS_BY_ID = Object.fromEntries(
   CURRICULUM
     .filter((entry) => entry.rBlock)

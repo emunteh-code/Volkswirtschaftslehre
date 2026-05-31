@@ -97,6 +97,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.matrix_notation.einf-wise2024-pdf.p97.1-1-x-1x-x-1x-1","oekonometrie.matrix_notation.einf-wise2024-pdf.p109.p22-22-0"]
   }),
   card({
+    id: 'oekonometrie.matrix_notation.kernrelation_1',
+    conceptId: 'matrix_notation',
+    officialNotation: "",
+    displayFormula: "$$y = X\\beta + u$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "?              \u0002 1 \u00011 X 1X \u0002 X 1X \u00011",
+            "math": "$$y = X\\beta + u$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu matrix_notation","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.matrix_notation-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.matrix_notation.einf-wise2024-pdf.p97.1-1-x-1x-x-1x-1","oekonometrie.matrix_notation.einf-wise2024-pdf.p109.p22-22-0"]
+  }),
+  card({
     id: 'oekonometrie.sample_moments.mittelwert_und_kovarianz',
     conceptId: 'sample_moments',
     officialNotation: "\\bar{x}, s_{xy}",
@@ -144,6 +170,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu sample_moments","Steigung im einfachen Modell"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Steigung im einfachen Modell — Die OLS-Steigung als Verhältnis aus gemeinsamer und eigener Variation.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.sample_moments-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.sample_moments.einf-wise2024-pdf.p120.px-1-1x-q-1x-1-1y","oekonometrie.sample_moments.einf-wise2024-pdf.p128.t2-exppzt1-q"]
+  }),
+  card({
+    id: 'oekonometrie.sample_moments.kernrelation_1',
+    conceptId: 'sample_moments',
+    officialNotation: "",
+    displayFormula: "$$\\hat{\\beta}_1 = \\frac{\\operatorname{Cov}(x,y)}{\\operatorname{Var}(x)}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "β̂ \u0010 pX 1Ψ\u00011X q\u00011X 1Ψ\u00011y",
+            "math": "$$\\hat{\\beta}_1 = \\frac{\\operatorname{Cov}(x,y)}{\\operatorname{Var}(x)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu sample_moments","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
     relatedTaskFamilies: ["oekonometrie.taskfamily.sample_moments-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.sample_moments.einf-wise2024-pdf.p120.px-1-1x-q-1x-1-1y","oekonometrie.sample_moments.einf-wise2024-pdf.p128.t2-exppzt1-q"]
@@ -201,6 +253,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.distributions_df.einf-wise2024-pdf.p154.seite-154","oekonometrie.distributions_df.einf-wise2024-pdf.p63.2-2-t-2"]
   }),
   card({
+    id: 'oekonometrie.distributions_df.freiheitsgrade_der_ols_inferenz_',
+    conceptId: 'distributions_df',
+    officialNotation: "n, k",
+    displayFormula: "$$df = n-k$$",
+    intuition: "Anzahl der Beobachtungen minus Anzahl der geschätzten Parameter.",
+    derivationSteps: [
+        {
+            "label": "Freiheitsgrade der OLS-Inferenz (Prüfungsmerksatz)",
+            "text": "Seite 154",
+            "math": "$$df = n-k$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu distributions_df","Freiheitsgrade der OLS-Inferenz (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Freiheitsgrade der OLS-Inferenz (Prüfungsmerksatz) — Anzahl der Beobachtungen minus Anzahl der geschätzten Parameter.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.distributions_df-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.distributions_df.einf-wise2024-pdf.p154.seite-154","oekonometrie.distributions_df.einf-wise2024-pdf.p63.2-2-t-2"]
+  }),
+  card({
     id: 'oekonometrie.model_objects.populationsmodell',
     conceptId: 'model_objects',
     officialNotation: "y_i, x_i, u_i",
@@ -253,6 +331,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.model_objects.einf-wise2024-pdf.p46.x21-m1y-x21-m1x2b2-m1-i-","oekonometrie.model_objects.einf-wise2024-pdf.p174.3-4-3-nls-estimation-of-"]
   }),
   card({
+    id: 'oekonometrie.model_objects.kernrelation_1',
+    conceptId: 'model_objects',
+    officialNotation: "",
+    displayFormula: "$$y_i = \\beta_0 + \\beta_1 x_{i1} + \\dots + \\beta_k x_{ik} + u_i$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "ô        X21 M1y \u0010 X21 M1X2b2, M1 \u0010 I \u0001 X1pX11X1q\u00011X11",
+            "math": "$$y_i = \\beta_0 + \\beta_1 x_{i1} + \\dots + \\beta_k x_{ik} + u_i$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu model_objects","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.model_objects-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.model_objects.einf-wise2024-pdf.p46.x21-m1y-x21-m1x2b2-m1-i-","oekonometrie.model_objects.einf-wise2024-pdf.p174.3-4-3-nls-estimation-of-"]
+  }),
+  card({
     id: 'oekonometrie.ols_objective.ols_zielfunktion',
     conceptId: 'ols_objective',
     officialNotation: "SSR",
@@ -274,6 +378,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu ols_objective","OLS-Zielfunktion"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: OLS-Zielfunktion — Die zu minimierende Summe der quadrierten Residuen.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.ols_objective-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.ols_objective.einf-wise2024-pdf.p152.t-t-1-s-1","oekonometrie.ols_objective.einf-wise2024-pdf.p68.cramer-rao-inequality-cr"]
+  }),
+  card({
+    id: 'oekonometrie.ols_objective.kernrelation_1',
+    conceptId: 'ols_objective',
+    officialNotation: "",
+    displayFormula: "$$\\min_{\\beta}\\sum_{i=1}^n (y_i - x_i'\\beta)^2$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "T t\u00101 s\u00101",
+            "math": "$$\\min_{\\beta}\\sum_{i=1}^n (y_i - x_i'\\beta)^2$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu ols_objective","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.ols_objective-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.ols_objective.einf-wise2024-pdf.p152.t-t-1-s-1","oekonometrie.ols_objective.einf-wise2024-pdf.p68.cramer-rao-inequality-cr"]
+  }),
+  card({
+    id: 'oekonometrie.ols_objective.ols_zielfunktion_pr_fungsmerksat',
+    conceptId: 'ols_objective',
+    officialNotation: "SSR",
+    displayFormula: "$$SSR(\\beta) = \\sum_{i=1}^n (y_i - x_i'\\beta)^2$$",
+    intuition: "Die zu minimierende Summe der quadrierten Residuen.",
+    derivationSteps: [
+        {
+            "label": "OLS-Zielfunktion (Prüfungsmerksatz)",
+            "text": "T t\u00101 s\u00101",
+            "math": "$$SSR(\\beta) = \\sum_{i=1}^n (y_i - x_i'\\beta)^2$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu ols_objective","OLS-Zielfunktion (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: OLS-Zielfunktion (Prüfungsmerksatz) — Die zu minimierende Summe der quadrierten Residuen.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.ols_objective-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.ols_objective.einf-wise2024-pdf.p152.t-t-1-s-1","oekonometrie.ols_objective.einf-wise2024-pdf.p68.cramer-rao-inequality-cr"]
@@ -331,6 +487,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.normal_equations.einf-wise2024-pdf.p67.einfu-hrung-in-die-o-kon","oekonometrie.normal_equations.einf-wise2024-pdf.p70.r1-n-pr1-2r1px-1x-q-1r11"]
   }),
   card({
+    id: 'oekonometrie.normal_equations.kernrelation_1',
+    conceptId: 'normal_equations',
+    officialNotation: "",
+    displayFormula: "$$X'(y - X\\hat{\\beta}) = 0$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$X'(y - X\\hat{\\beta}) = 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu normal_equations","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.normal_equations-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.normal_equations.einf-wise2024-pdf.p67.einfu-hrung-in-die-o-kon","oekonometrie.normal_equations.einf-wise2024-pdf.p70.r1-n-pr1-2r1px-1x-q-1r11"]
+  }),
+  card({
     id: 'oekonometrie.partial_effects.partieller_effekt_im_linearen_mo',
     conceptId: 'partial_effects',
     officialNotation: "\\beta_j",
@@ -352,6 +534,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu partial_effects","Partieller Effekt im linearen Modell"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Partieller Effekt im linearen Modell — Ein linearer Koeffizient skaliert die erwartete Änderung in y.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.partial_effects-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.partial_effects.einf-wise2024-pdf.p71.rearranging-yields","oekonometrie.partial_effects.einf-wise2024-pdf.p78.slide"]
+  }),
+  card({
+    id: 'oekonometrie.partial_effects.kernrelation_1',
+    conceptId: 'partial_effects',
+    officialNotation: "",
+    displayFormula: "$$\\frac{\\partial E(y\\mid X)}{\\partial x_j} = \\beta_j$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "Rearranging yields:",
+            "math": "$$\\frac{\\partial E(y\\mid X)}{\\partial x_j} = \\beta_j$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu partial_effects","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.partial_effects-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.partial_effects.einf-wise2024-pdf.p71.rearranging-yields","oekonometrie.partial_effects.einf-wise2024-pdf.p78.slide"]
+  }),
+  card({
+    id: 'oekonometrie.partial_effects.partieller_effekt_im_linearen_mo',
+    conceptId: 'partial_effects',
+    officialNotation: "\\beta_j",
+    displayFormula: "$$\\Delta E(y \\mid X) = \\beta_j \\cdot \\Delta x_j$$",
+    intuition: "Ein linearer Koeffizient skaliert die erwartete Änderung in y.",
+    derivationSteps: [
+        {
+            "label": "Partieller Effekt im linearen Modell (Prüfungsmerksatz)",
+            "text": "Rearranging yields:",
+            "math": "$$\\Delta E(y \\mid X) = \\beta_j \\cdot \\Delta x_j$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu partial_effects","Partieller Effekt im linearen Modell (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Partieller Effekt im linearen Modell (Prüfungsmerksatz) — Ein linearer Koeffizient skaliert die erwartete Änderung in y.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.partial_effects-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.partial_effects.einf-wise2024-pdf.p71.rearranging-yields","oekonometrie.partial_effects.einf-wise2024-pdf.p78.slide"]
@@ -409,6 +643,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.functional_forms.einf-wise2024-pdf.p69.b-2b-1-2-4","oekonometrie.functional_forms.einf-wise2024-pdf.p39.1-2-8-estimating-the-var"]
   }),
   card({
+    id: 'oekonometrie.functional_forms.log_log_modell_pr_fungsmerksatz',
+    conceptId: 'functional_forms',
+    officialNotation: "\\beta_1",
+    displayFormula: "$$\\log(y_i) = \\beta_0 + \\beta_1 \\log(x_i) + u_i$$",
+    intuition: "β_1 ist hier direkt eine Elastizität.",
+    derivationSteps: [
+        {
+            "label": "Log-Log-Modell (Prüfungsmerksatz)",
+            "text": "Bσ2Bβ1             2       σ4",
+            "math": "$$\\log(y_i) = \\beta_0 + \\beta_1 \\log(x_i) + u_i$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu functional_forms","Log-Log-Modell (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Log-Log-Modell (Prüfungsmerksatz) — β_1 ist hier direkt eine Elastizität.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.functional_forms-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.functional_forms.einf-wise2024-pdf.p69.b-2b-1-2-4","oekonometrie.functional_forms.einf-wise2024-pdf.p39.1-2-8-estimating-the-var"]
+  }),
+  card({
     id: 'oekonometrie.no_perfect_multicollinearity.vollrangbedingung',
     conceptId: 'no_perfect_multicollinearity',
     officialNotation: "k",
@@ -430,6 +690,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu no_perfect_multicollinearity","Vollrangbedingung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Vollrangbedingung — Nur bei vollem Spaltenrang ist das OLS-Problem eindeutig lösbar.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.no_perfect_multicollinearity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.no_perfect_multicollinearity.einf-wise2024-pdf.p129.const-st-3-316940-0-4027","oekonometrie.no_perfect_multicollinearity.einf-wise2024-pdf.p50.1-3-4-multicollinearity-"]
+  }),
+  card({
+    id: 'oekonometrie.no_perfect_multicollinearity.kernrelation_1',
+    conceptId: 'no_perfect_multicollinearity',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{rank}(X) = k \\qquad \\Longleftrightarrow \\qquad (X'X)^{-1}\\ \\text{existiert}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "CONST_ST         -3.316940      0.402775     -8.235212        0.0000",
+            "math": "$$\\operatorname{rank}(X) = k \\qquad \\Longleftrightarrow \\qquad (X'X)^{-1}\\ \\text{existiert}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu no_perfect_multicollinearity","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.no_perfect_multicollinearity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.no_perfect_multicollinearity.einf-wise2024-pdf.p129.const-st-3-316940-0-4027","oekonometrie.no_perfect_multicollinearity.einf-wise2024-pdf.p50.1-3-4-multicollinearity-"]
+  }),
+  card({
+    id: 'oekonometrie.no_perfect_multicollinearity.vollrangbedingung_pr_fungsmerksa',
+    conceptId: 'no_perfect_multicollinearity',
+    officialNotation: "k",
+    displayFormula: "$$\\operatorname{rank}(X) = k$$",
+    intuition: "Nur bei vollem Spaltenrang ist das OLS-Problem eindeutig lösbar.",
+    derivationSteps: [
+        {
+            "label": "Vollrangbedingung (Prüfungsmerksatz)",
+            "text": "CONST_ST         -3.316940      0.402775     -8.235212        0.0000",
+            "math": "$$\\operatorname{rank}(X) = k$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu no_perfect_multicollinearity","Vollrangbedingung (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Vollrangbedingung (Prüfungsmerksatz) — Nur bei vollem Spaltenrang ist das OLS-Problem eindeutig lösbar.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.no_perfect_multicollinearity-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.no_perfect_multicollinearity.einf-wise2024-pdf.p129.const-st-3-316940-0-4027","oekonometrie.no_perfect_multicollinearity.einf-wise2024-pdf.p50.1-3-4-multicollinearity-"]
@@ -461,6 +773,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.exogeneity.einf-wise2024-pdf.p73.0-t1-2pt-k-q-x10px-1x-q-","oekonometrie.exogeneity.einf-wise2024-pdf.p148.einfu-hrung-in-die-o-kon"]
   }),
   card({
+    id: 'oekonometrie.exogeneity.kernrelation_1',
+    conceptId: 'exogeneity',
+    officialNotation: "",
+    displayFormula: "$$E(u \\mid X) = 0$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "0       t1\u0001α{2pT \u0001 K qσ̂     x10pX 1X q\u00011x0   1q \u0010 1 \u0001 α.",
+            "math": "$$E(u \\mid X) = 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu exogeneity","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.exogeneity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.exogeneity.einf-wise2024-pdf.p73.0-t1-2pt-k-q-x10px-1x-q-","oekonometrie.exogeneity.einf-wise2024-pdf.p148.einfu-hrung-in-die-o-kon"]
+  }),
+  card({
+    id: 'oekonometrie.exogeneity.exogenit_tsbedingung_pr_fungsmer',
+    conceptId: 'exogeneity',
+    officialNotation: "",
+    displayFormula: "$$E(u \\mid X) = 0$$",
+    intuition: "Die Kernannahme für Unverzerrtheit des OLS-Schätzers.",
+    derivationSteps: [
+        {
+            "label": "Exogenitätsbedingung (Prüfungsmerksatz)",
+            "text": "0       t1\u0001α{2pT \u0001 K qσ̂     x10pX 1X q\u00011x0   1q \u0010 1 \u0001 α.",
+            "math": "$$E(u \\mid X) = 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu exogeneity","Exogenitätsbedingung (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Exogenitätsbedingung (Prüfungsmerksatz) — Die Kernannahme für Unverzerrtheit des OLS-Schätzers.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.exogeneity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.exogeneity.einf-wise2024-pdf.p73.0-t1-2pt-k-q-x10px-1x-q-","oekonometrie.exogeneity.einf-wise2024-pdf.p148.einfu-hrung-in-die-o-kon"]
+  }),
+  card({
     id: 'oekonometrie.endogeneity_ovb.ovb_formel',
     conceptId: 'endogeneity_ovb',
     officialNotation: "z",
@@ -482,6 +846,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu endogeneity_ovb","OVB-Formel"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: OVB-Formel — Bias entsteht aus Effekt der ausgelassenen Variable mal ihrer Korrelation mit x.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.endogeneity_ovb-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.endogeneity_ovb.einf-wise2024-pdf.p106.slide","oekonometrie.endogeneity_ovb.einf-wise2024-pdf.p60.y-0-standard-errors-of-p"]
+  }),
+  card({
+    id: 'oekonometrie.endogeneity_ovb.kernrelation_1',
+    conceptId: 'endogeneity_ovb',
+    officialNotation: "",
+    displayFormula: "$$E[\\hat{\\gamma}_1] = \\beta_1 + \\beta_2 \\frac{\\operatorname{Cov}(x,z)}{\\operatorname{Var}(x)}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "\u0004            \u0004              \u0004",
+            "math": "$$E[\\hat{\\gamma}_1] = \\beta_1 + \\beta_2 \\frac{\\operatorname{Cov}(x,z)}{\\operatorname{Var}(x)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu endogeneity_ovb","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.endogeneity_ovb-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.endogeneity_ovb.einf-wise2024-pdf.p106.slide","oekonometrie.endogeneity_ovb.einf-wise2024-pdf.p60.y-0-standard-errors-of-p"]
+  }),
+  card({
+    id: 'oekonometrie.endogeneity_ovb.ovb_formel_pr_fungsmerksatz',
+    conceptId: 'endogeneity_ovb',
+    officialNotation: "z",
+    displayFormula: "$$\\operatorname{Bias}(\\hat{\\gamma}_1) = \\beta_2 \\cdot \\frac{\\operatorname{Cov}(x,z)}{\\operatorname{Var}(x)}$$",
+    intuition: "Bias entsteht aus Effekt der ausgelassenen Variable mal ihrer Korrelation mit x.",
+    derivationSteps: [
+        {
+            "label": "OVB-Formel (Prüfungsmerksatz)",
+            "text": "\u0004            \u0004              \u0004",
+            "math": "$$\\operatorname{Bias}(\\hat{\\gamma}_1) = \\beta_2 \\cdot \\frac{\\operatorname{Cov}(x,z)}{\\operatorname{Var}(x)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu endogeneity_ovb","OVB-Formel (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: OVB-Formel (Prüfungsmerksatz) — Bias entsteht aus Effekt der ausgelassenen Variable mal ihrer Korrelation mit x.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.endogeneity_ovb-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.endogeneity_ovb.einf-wise2024-pdf.p106.slide","oekonometrie.endogeneity_ovb.einf-wise2024-pdf.p60.y-0-standard-errors-of-p"]
@@ -513,6 +929,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.unbiasedness.einf-wise2024-pdf.p104.px-1p-1p-x-q-1x-1p-1p-y","oekonometrie.unbiasedness.einf-wise2024-pdf.p66.t-k-2pt-k-q"]
   }),
   card({
+    id: 'oekonometrie.unbiasedness.kernrelation_1',
+    conceptId: 'unbiasedness',
+    officialNotation: "",
+    displayFormula: "$$E(\\hat{\\beta}\\mid X) = \\beta$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "\u0010 pX 1P 1P X q\u00011X 1P 1P y",
+            "math": "$$E(\\hat{\\beta}\\mid X) = \\beta$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu unbiasedness","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.unbiasedness-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.unbiasedness.einf-wise2024-pdf.p104.px-1p-1p-x-q-1x-1p-1p-y","oekonometrie.unbiasedness.einf-wise2024-pdf.p66.t-k-2pt-k-q"]
+  }),
+  card({
+    id: 'oekonometrie.unbiasedness.unverzerrtheit_pr_fungsmerksatz',
+    conceptId: 'unbiasedness',
+    officialNotation: "",
+    displayFormula: "$$E(\\hat{\\beta}_j \\mid X) = \\beta_j$$",
+    intuition: "Im Durchschnitt über viele Stichproben trifft der Schätzer den wahren Parameter.",
+    derivationSteps: [
+        {
+            "label": "Unverzerrtheit (Prüfungsmerksatz)",
+            "text": "\u0010 pX 1P 1P X q\u00011X 1P 1P y",
+            "math": "$$E(\\hat{\\beta}_j \\mid X) = \\beta_j$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu unbiasedness","Unverzerrtheit (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Unverzerrtheit (Prüfungsmerksatz) — Im Durchschnitt über viele Stichproben trifft der Schätzer den wahren Parameter.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.unbiasedness-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.unbiasedness.einf-wise2024-pdf.p104.px-1p-1p-x-q-1x-1p-1p-y","oekonometrie.unbiasedness.einf-wise2024-pdf.p66.t-k-2pt-k-q"]
+  }),
+  card({
     id: 'oekonometrie.gauss_markov.gauss_markov_aussage',
     conceptId: 'gauss_markov',
     officialNotation: "c, \\hat{\\beta}, \\tilde{\\beta}",
@@ -539,6 +1007,84 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.gauss_markov.einf-wise2024-pdf.p153.3-1-appendix-1-some-resu","oekonometrie.gauss_markov.einf-wise2024-pdf.p82.h0-r-r"]
   }),
   card({
+    id: 'oekonometrie.gauss_markov.varianz_von_ols_homoskedastisch',
+    conceptId: 'gauss_markov',
+    officialNotation: "\\sigma^2, X",
+    displayFormula: "$$\\operatorname{Var}(\\hat{\\beta}\\mid X)=\\sigma^2(X'X)^{-1}$$",
+    intuition: "Präzisionsmaß des Schätzers unter klassischen Annahmen.",
+    derivationSteps: [
+        {
+            "label": "Varianz von OLS (homoskedastisch)",
+            "text": "3.1        Appendix 1: Some results for matrix algebra",
+            "math": "$$\\operatorname{Var}(\\hat{\\beta}\\mid X)=\\sigma^2(X'X)^{-1}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu gauss_markov","Varianz von OLS (homoskedastisch)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Varianz von OLS (homoskedastisch) — Präzisionsmaß des Schätzers unter klassischen Annahmen.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.gauss_markov-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.gauss_markov.einf-wise2024-pdf.p153.3-1-appendix-1-some-resu","oekonometrie.gauss_markov.einf-wise2024-pdf.p82.h0-r-r"]
+  }),
+  card({
+    id: 'oekonometrie.gauss_markov.blue_merksatz',
+    conceptId: 'gauss_markov',
+    officialNotation: "",
+    displayFormula: "$$\\text{OLS ist BLUE unter GM-Annahmen}$$",
+    intuition: "Best Linear Unbiased Estimator innerhalb der linearen unverzerrten Klasse.",
+    derivationSteps: [
+        {
+            "label": "BLUE-Merksatz",
+            "text": "3.1        Appendix 1: Some results for matrix algebra",
+            "math": "$$\\text{OLS ist BLUE unter GM-Annahmen}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu gauss_markov","BLUE-Merksatz"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: BLUE-Merksatz — Best Linear Unbiased Estimator innerhalb der linearen unverzerrten Klasse.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.gauss_markov-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.gauss_markov.einf-wise2024-pdf.p153.3-1-appendix-1-some-resu","oekonometrie.gauss_markov.einf-wise2024-pdf.p82.h0-r-r"]
+  }),
+  card({
+    id: 'oekonometrie.gauss_markov.gauss_markov_aussage_pr_fungsmer',
+    conceptId: 'gauss_markov',
+    officialNotation: "c, \\hat{\\beta}, \\tilde{\\beta}",
+    displayFormula: "$$\\operatorname{Var}(c'\\hat{\\beta}\\mid X) \\le \\operatorname{Var}(c'\\tilde{\\beta}\\mid X)$$",
+    intuition: "Für jede Linearkombination der Parameter (Gewichtsvektor c) hat der OLS-Schätzer unter den klassischen Annahmen die kleinstmögliche Varianz verglichen mit jedem anderen linearen unverzerrten Schätzer derselben Linearkombination — genau das meint BLUE.",
+    derivationSteps: [
+        {
+            "label": "Gauss-Markov-Aussage (Prüfungsmerksatz)",
+            "text": "3.1        Appendix 1: Some results for matrix algebra",
+            "math": "$$\\operatorname{Var}(c'\\hat{\\beta}\\mid X) \\le \\operatorname{Var}(c'\\tilde{\\beta}\\mid X)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu gauss_markov","Gauss-Markov-Aussage (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Gauss-Markov-Aussage (Prüfungsmerksatz) — Für jede Linearkombination der Parameter (Gewichtsvektor c) hat der OLS-Schätzer",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.gauss_markov-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.gauss_markov.einf-wise2024-pdf.p153.3-1-appendix-1-some-resu","oekonometrie.gauss_markov.einf-wise2024-pdf.p82.h0-r-r"]
+  }),
+  card({
     id: 'oekonometrie.consistency.konsistenz',
     conceptId: 'consistency',
     officialNotation: "",
@@ -560,6 +1106,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu consistency","Konsistenz"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Konsistenz — Der Schätzer nähert sich dem wahren Parameter im Grenzwert an.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.consistency-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.consistency.einf-wise2024-pdf.p85.1-5-asymptotic-propertie","oekonometrie.consistency.einf-wise2024-pdf.p14.x1-x-1"]
+  }),
+  card({
+    id: 'oekonometrie.consistency.kernrelation_1',
+    conceptId: 'consistency',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{plim}_{n \\to \\infty}\\hat{\\beta} = \\beta$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "1.5     Asymptotic properties of the OLS-estimator",
+            "math": "$$\\operatorname{plim}_{n \\to \\infty}\\hat{\\beta} = \\beta$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu consistency","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.consistency-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.consistency.einf-wise2024-pdf.p85.1-5-asymptotic-propertie","oekonometrie.consistency.einf-wise2024-pdf.p14.x1-x-1"]
+  }),
+  card({
+    id: 'oekonometrie.consistency.konsistenz_pr_fungsmerksatz',
+    conceptId: 'consistency',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{plim}\\hat{\\beta}_j = \\beta_j$$",
+    intuition: "Der Schätzer nähert sich dem wahren Parameter im Grenzwert an.",
+    derivationSteps: [
+        {
+            "label": "Konsistenz (Prüfungsmerksatz)",
+            "text": "1.5     Asymptotic properties of the OLS-estimator",
+            "math": "$$\\operatorname{plim}\\hat{\\beta}_j = \\beta_j$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu consistency","Konsistenz (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Konsistenz (Prüfungsmerksatz) — Der Schätzer nähert sich dem wahren Parameter im Grenzwert an.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.consistency-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.consistency.einf-wise2024-pdf.p85.1-5-asymptotic-propertie","oekonometrie.consistency.einf-wise2024-pdf.p14.x1-x-1"]
@@ -617,6 +1215,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.error_variance.einf-wise2024-pdf.p182.constant-t2-ln-s-p-q","oekonometrie.error_variance.einf-wise2024-pdf.p123.lim-t-8"]
   }),
   card({
+    id: 'oekonometrie.error_variance.kernrelation_1',
+    conceptId: 'error_variance',
+    officialNotation: "",
+    displayFormula: "$$SSR = \\hat{u}'\\hat{u} = \\sum_{i=1}^n \\hat{u}_i^2$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "\u0010 constant \u0001 T2 ln S pβq",
+            "math": "$$SSR = \\hat{u}'\\hat{u} = \\sum_{i=1}^n \\hat{u}_i^2$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu error_variance","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.error_variance-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.error_variance.einf-wise2024-pdf.p182.constant-t2-ln-s-p-q","oekonometrie.error_variance.einf-wise2024-pdf.p123.lim-t-8"]
+  }),
+  card({
     id: 'oekonometrie.covariance_matrix.kovarianzmatrix',
     conceptId: 'covariance_matrix',
     officialNotation: "\\hat{\\sigma}^2",
@@ -669,6 +1293,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.covariance_matrix.einf-wise2024-pdf.p100.k-2-k-2-k-2-k-2-k-2","oekonometrie.covariance_matrix.einf-wise2024-pdf.p55.coef-est-std-err-est-std"]
   }),
   card({
+    id: 'oekonometrie.covariance_matrix.kernrelation_1',
+    conceptId: 'covariance_matrix',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{Var}(\\hat{\\beta}\\mid X) = \\hat{\\sigma}^2 (X'X)^{-1}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "K=2       K=2           K=2            K=2      K=2",
+            "math": "$$\\operatorname{Var}(\\hat{\\beta}\\mid X) = \\hat{\\sigma}^2 (X'X)^{-1}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu covariance_matrix","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.covariance_matrix-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.covariance_matrix.einf-wise2024-pdf.p100.k-2-k-2-k-2-k-2-k-2","oekonometrie.covariance_matrix.einf-wise2024-pdf.p55.coef-est-std-err-est-std"]
+  }),
+  card({
     id: 'oekonometrie.prediction.punktprognose',
     conceptId: 'prediction',
     officialNotation: "x_0",
@@ -690,6 +1340,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu prediction","Punktprognose"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Punktprognose — Geschätzter bedingter Mittelwert für neue Kovariaten x₀.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.prediction-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.prediction.einf-wise2024-pdf.p78.slide","oekonometrie.prediction.einf-wise2024-pdf.p121.v-t-vt-1-27"]
+  }),
+  card({
+    id: 'oekonometrie.prediction.kernrelation_1',
+    conceptId: 'prediction',
+    officialNotation: "",
+    displayFormula: "$$\\hat{y}_0 = x_0'\\hat{\\beta}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "\u0014              \u001c       \u0004",
+            "math": "$$\\hat{y}_0 = x_0'\\hat{\\beta}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu prediction","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.prediction-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.prediction.einf-wise2024-pdf.p78.slide","oekonometrie.prediction.einf-wise2024-pdf.p121.v-t-vt-1-27"]
+  }),
+  card({
+    id: 'oekonometrie.prediction.punktprognose_pr_fungsmerksatz',
+    conceptId: 'prediction',
+    officialNotation: "x_0",
+    displayFormula: "$$\\hat{y}_0 = x_0'\\hat{\\beta}$$",
+    intuition: "Geschätzter bedingter Mittelwert für neue Kovariaten x₀.",
+    derivationSteps: [
+        {
+            "label": "Punktprognose (Prüfungsmerksatz)",
+            "text": "\u0014              \u001c       \u0004",
+            "math": "$$\\hat{y}_0 = x_0'\\hat{\\beta}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu prediction","Punktprognose (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Punktprognose (Prüfungsmerksatz) — Geschätzter bedingter Mittelwert für neue Kovariaten x₀.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.prediction-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.prediction.einf-wise2024-pdf.p78.slide","oekonometrie.prediction.einf-wise2024-pdf.p121.v-t-vt-1-27"]
@@ -747,6 +1449,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.prediction_intervals.einf-wise2024-pdf.p08.w","oekonometrie.prediction_intervals.einf-wise2024-pdf.p41.einfu-hrung-in-die-o-kon"]
   }),
   card({
+    id: 'oekonometrie.prediction_intervals.kernrelation_1',
+    conceptId: 'prediction_intervals',
+    officialNotation: "",
+    displayFormula: "$$\\hat{y}_0 \\pm t_{\\alpha/2,n-k}\\, se(\\hat{y}_0)$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "W                       \u0002",
+            "math": "$$\\hat{y}_0 \\pm t_{\\alpha/2,n-k}\\, se(\\hat{y}_0)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu prediction_intervals","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.prediction_intervals-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.prediction_intervals.einf-wise2024-pdf.p08.w","oekonometrie.prediction_intervals.einf-wise2024-pdf.p41.einfu-hrung-in-die-o-kon"]
+  }),
+  card({
     id: 'oekonometrie.r_squared.bestimmtheitsma',
     conceptId: 'r_squared',
     officialNotation: "",
@@ -799,6 +1527,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.r_squared.einf-wise2024-pdf.p167.3-4-appendix-4-nonlinear","oekonometrie.r_squared.einf-wise2024-pdf.p09.1-2-the-basic-model"]
   }),
   card({
+    id: 'oekonometrie.r_squared.kernrelation_1',
+    conceptId: 'r_squared',
+    officialNotation: "",
+    displayFormula: "$$R^2 = 1 - \\frac{SSR}{TSS}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "3.4        Appendix 4: Nonlinear LS and ML estimation",
+            "math": "$$R^2 = 1 - \\frac{SSR}{TSS}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu r_squared","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.r_squared-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.r_squared.einf-wise2024-pdf.p167.3-4-appendix-4-nonlinear","oekonometrie.r_squared.einf-wise2024-pdf.p09.1-2-the-basic-model"]
+  }),
+  card({
     id: 'oekonometrie.t_test.t_statistik',
     conceptId: 't_test',
     officialNotation: "\\beta_{j,0}",
@@ -820,6 +1574,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu t_test","t-Statistik"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: t-Statistik — Einzeltest auf eine lineare Restriktion für einen Koeffizienten.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.t_test-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.t_test.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.t_test.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]
+  }),
+  card({
+    id: 'oekonometrie.t_test.kernrelation_1',
+    conceptId: 't_test',
+    officialNotation: "",
+    displayFormula: "$$t = \\frac{\\hat{\\beta}_j - \\beta_{j,0}}{se(\\hat{\\beta}_j)}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "\u0016      B β1           B βK \u001e",
+            "math": "$$t = \\frac{\\hat{\\beta}_j - \\beta_{j,0}}{se(\\hat{\\beta}_j)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu t_test","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.t_test-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.t_test.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.t_test.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]
+  }),
+  card({
+    id: 'oekonometrie.t_test.t_statistik_pr_fungsmerksatz',
+    conceptId: 't_test',
+    officialNotation: "\\beta_{j,0}",
+    displayFormula: "$$t = \\frac{\\hat{\\beta}_j - \\beta_{j,0}}{se(\\hat{\\beta}_j)}$$",
+    intuition: "Einzeltest auf eine lineare Restriktion für einen Koeffizienten.",
+    derivationSteps: [
+        {
+            "label": "t-Statistik (Prüfungsmerksatz)",
+            "text": "\u0016      B β1           B βK \u001e",
+            "math": "$$t = \\frac{\\hat{\\beta}_j - \\beta_{j,0}}{se(\\hat{\\beta}_j)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu t_test","t-Statistik (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: t-Statistik (Prüfungsmerksatz) — Einzeltest auf eine lineare Restriktion für einen Koeffizienten.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.t_test-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.t_test.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.t_test.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]
@@ -851,6 +1657,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.f_test.einf-wise2024-pdf.p163.3-3-appendix-3-ols-estim","oekonometrie.f_test.einf-wise2024-pdf.p169.3-4-2-the-gauss-newton-a"]
   }),
   card({
+    id: 'oekonometrie.f_test.kernrelation_1',
+    conceptId: 'f_test',
+    officialNotation: "",
+    displayFormula: "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "3.3        Appendix 3: OLS-Estimation under linearrestrictions",
+            "math": "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu f_test","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.f_test-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.f_test.einf-wise2024-pdf.p163.3-3-appendix-3-ols-estim","oekonometrie.f_test.einf-wise2024-pdf.p169.3-4-2-the-gauss-newton-a"]
+  }),
+  card({
+    id: 'oekonometrie.f_test.f_statistik_ber_ssr_pr_fungsmerk',
+    conceptId: 'f_test',
+    officialNotation: "J",
+    displayFormula: "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$",
+    intuition: "Vergleicht zusätzlichen Fit pro Restriktion mit der Reststreuung des unrestricted model.",
+    derivationSteps: [
+        {
+            "label": "F-Statistik über SSR (Prüfungsmerksatz)",
+            "text": "3.3        Appendix 3: OLS-Estimation under linearrestrictions",
+            "math": "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu f_test","F-Statistik über SSR (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: F-Statistik über SSR (Prüfungsmerksatz) — Vergleicht zusätzlichen Fit pro Restriktion mit der Reststreuung des unrestricte",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.f_test-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.f_test.einf-wise2024-pdf.p163.3-3-appendix-3-ols-estim","oekonometrie.f_test.einf-wise2024-pdf.p169.3-4-2-the-gauss-newton-a"]
+  }),
+  card({
     id: 'oekonometrie.confidence_intervals.konfidenzintervall',
     conceptId: 'confidence_intervals',
     officialNotation: "",
@@ -872,6 +1730,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu confidence_intervals","Konfidenzintervall"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Konfidenzintervall — Intervallschätzung für einen einzelnen Koeffizienten.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.confidence_intervals-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.confidence_intervals.einf-wise2024-pdf.p159.11-11-11","oekonometrie.confidence_intervals.einf-wise2024-pdf.p28.0-817-0-114-0-059"]
+  }),
+  card({
+    id: 'oekonometrie.confidence_intervals.kernrelation_1',
+    conceptId: 'confidence_intervals',
+    officialNotation: "",
+    displayFormula: "$$\\hat{\\beta}_j \\pm t_{\\alpha/2,n-k}\\, se(\\hat{\\beta}_j)$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "11                  11     11        \u001d,",
+            "math": "$$\\hat{\\beta}_j \\pm t_{\\alpha/2,n-k}\\, se(\\hat{\\beta}_j)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu confidence_intervals","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.confidence_intervals-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.confidence_intervals.einf-wise2024-pdf.p159.11-11-11","oekonometrie.confidence_intervals.einf-wise2024-pdf.p28.0-817-0-114-0-059"]
+  }),
+  card({
+    id: 'oekonometrie.confidence_intervals.konfidenzintervall_pr_fungsmerks',
+    conceptId: 'confidence_intervals',
+    officialNotation: "",
+    displayFormula: "$$\\hat{\\beta}_j \\pm t_{\\alpha/2,n-k}\\, se(\\hat{\\beta}_j)$$",
+    intuition: "Intervallschätzung für einen einzelnen Koeffizienten.",
+    derivationSteps: [
+        {
+            "label": "Konfidenzintervall (Prüfungsmerksatz)",
+            "text": "11                  11     11        \u001d,",
+            "math": "$$\\hat{\\beta}_j \\pm t_{\\alpha/2,n-k}\\, se(\\hat{\\beta}_j)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu confidence_intervals","Konfidenzintervall (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Konfidenzintervall (Prüfungsmerksatz) — Intervallschätzung für einen einzelnen Koeffizienten.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.confidence_intervals-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.confidence_intervals.einf-wise2024-pdf.p159.11-11-11","oekonometrie.confidence_intervals.einf-wise2024-pdf.p28.0-817-0-114-0-059"]
@@ -929,6 +1839,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.normal_linear_model_mle.einf-wise2024-pdf.p03.einfu-hrung-in-die-o-kon","oekonometrie.normal_linear_model_mle.einf-wise2024-pdf.p75.1-4-4-continuing-the-mon"]
   }),
   card({
+    id: 'oekonometrie.normal_linear_model_mle.kernrelation_1',
+    conceptId: 'normal_linear_model_mle',
+    officialNotation: "",
+    displayFormula: "$$\\ell(\\beta,\\sigma^2\\mid y,X)=-\\frac{T}{2}\\ln(2\\pi)-\\frac{T}{2}\\ln(\\sigma^2)-\\frac{(y-X\\beta)'(y-X\\beta)}{2\\sigma^2}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$\\ell(\\beta,\\sigma^2\\mid y,X)=-\\frac{T}{2}\\ln(2\\pi)-\\frac{T}{2}\\ln(\\sigma^2)-\\frac{(y-X\\beta)'(y-X\\beta)}{2\\sigma^2}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu normal_linear_model_mle","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.normal_linear_model_mle-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.normal_linear_model_mle.einf-wise2024-pdf.p03.einfu-hrung-in-die-o-kon","oekonometrie.normal_linear_model_mle.einf-wise2024-pdf.p75.1-4-4-continuing-the-mon"]
+  }),
+  card({
     id: 'oekonometrie.linear_restrictions_ur.lineare_restriktion',
     conceptId: 'linear_restrictions_ur',
     officialNotation: "",
@@ -950,6 +1886,110 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu linear_restrictions_ur","Lineare Restriktion"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Lineare Restriktion — Allgemeine Form für gemeinsame Hypothesen über Koeffizienten.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.linear_restrictions_ur-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p126.2ptii-k-q"]
+  }),
+  card({
+    id: 'oekonometrie.linear_restrictions_ur.f_test_r_ur',
+    conceptId: 'linear_restrictions_ur',
+    officialNotation: "J, SSR_R",
+    displayFormula: "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$",
+    intuition: "Gemeinsamer Test mehrerer linearen Restriktionen.",
+    derivationSteps: [
+        {
+            "label": "F-Test R/UR",
+            "text": "2 trrΨpI \u0001 X pX X q X qs",
+            "math": "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu linear_restrictions_ur","F-Test R/UR"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: F-Test R/UR — Gemeinsamer Test mehrerer linearen Restriktionen.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.linear_restrictions_ur-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p126.2ptii-k-q"]
+  }),
+  card({
+    id: 'oekonometrie.linear_restrictions_ur.einzelrestriktion',
+    conceptId: 'linear_restrictions_ur',
+    officialNotation: "\\beta_j",
+    displayFormula: "$$H_0:\\beta_j = 0$$",
+    intuition: "Spezialfall einer linearen Restriktion.",
+    derivationSteps: [
+        {
+            "label": "Einzelrestriktion",
+            "text": "2 trrΨpI \u0001 X pX X q X qs",
+            "math": "$$H_0:\\beta_j = 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu linear_restrictions_ur","Einzelrestriktion"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Einzelrestriktion — Spezialfall einer linearen Restriktion.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.linear_restrictions_ur-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p126.2ptii-k-q"]
+  }),
+  card({
+    id: 'oekonometrie.linear_restrictions_ur.kernrelation_1',
+    conceptId: 'linear_restrictions_ur',
+    officialNotation: "",
+    displayFormula: "$$H_0: R\\beta = r \\qquad \\text{gegen} \\qquad H_1: R\\beta \\neq r$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "2 trrΨpI \u0001 X pX X q X qs",
+            "math": "$$H_0: R\\beta = r \\qquad \\text{gegen} \\qquad H_1: R\\beta \\neq r$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu linear_restrictions_ur","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.linear_restrictions_ur-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p126.2ptii-k-q"]
+  }),
+  card({
+    id: 'oekonometrie.linear_restrictions_ur.kernrelation_2',
+    conceptId: 'linear_restrictions_ur',
+    officialNotation: "",
+    displayFormula: "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 2",
+            "text": "2 trrΨpI \u0001 X pX X q X qs",
+            "math": "$$F = \\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu linear_restrictions_ur","Kernrelation 2"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 2 — Aus der Vorlesungslogik des Blocks (source-distilled).",
     relatedTaskFamilies: ["oekonometrie.taskfamily.linear_restrictions_ur-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.linear_restrictions_ur.einf-wise2024-pdf.p126.2ptii-k-q"]
@@ -981,6 +2021,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.asymptotic_normality.einf-wise2024-pdf.p35.einfu-hrung-in-die-o-kon","oekonometrie.asymptotic_normality.einf-wise2024-pdf.p149.slide"]
   }),
   card({
+    id: 'oekonometrie.asymptotic_normality.kernrelation_1',
+    conceptId: 'asymptotic_normality',
+    officialNotation: "",
+    displayFormula: "$$\\sqrt{n}(\\hat{\\beta}-\\beta)\\ \\xrightarrow{d}\\ \\mathcal{N}(0,\\Omega)$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$\\sqrt{n}(\\hat{\\beta}-\\beta)\\ \\xrightarrow{d}\\ \\mathcal{N}(0,\\Omega)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu asymptotic_normality","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.asymptotic_normality-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.asymptotic_normality.einf-wise2024-pdf.p35.einfu-hrung-in-die-o-kon","oekonometrie.asymptotic_normality.einf-wise2024-pdf.p149.slide"]
+  }),
+  card({
+    id: 'oekonometrie.asymptotic_normality.asymptotische_normalit_t_pr_fung',
+    conceptId: 'asymptotic_normality',
+    officialNotation: "\\Omega",
+    displayFormula: "$$\\sqrt{n}(\\hat{\\beta}-\\beta) \\xrightarrow{d} \\mathcal{N}(0,\\Omega)$$",
+    intuition: "Grenzverteilung des Schätzfehlers bei wachsender Stichprobengröße.",
+    derivationSteps: [
+        {
+            "label": "Asymptotische Normalität (Prüfungsmerksatz)",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$\\sqrt{n}(\\hat{\\beta}-\\beta) \\xrightarrow{d} \\mathcal{N}(0,\\Omega)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu asymptotic_normality","Asymptotische Normalität (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Asymptotische Normalität (Prüfungsmerksatz) — Grenzverteilung des Schätzfehlers bei wachsender Stichprobengröße.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.asymptotic_normality-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.asymptotic_normality.einf-wise2024-pdf.p35.einfu-hrung-in-die-o-kon","oekonometrie.asymptotic_normality.einf-wise2024-pdf.p149.slide"]
+  }),
+  card({
     id: 'oekonometrie.monte_carlo.simulationsmittelwert',
     conceptId: 'monte_carlo',
     officialNotation: "S",
@@ -1002,6 +2094,84 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu monte_carlo","Simulationsmittelwert"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Simulationsmittelwert — Der Durchschnitt vieler Wiederholungsschätzungen macht Unverzerrtheit sichtbar.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.monte_carlo-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.monte_carlo.einf-wise2024-pdf.p150.einfu-hrung-in-die-o-kon","oekonometrie.monte_carlo.einf-wise2024-pdf.p52.2-2-x-x"]
+  }),
+  card({
+    id: 'oekonometrie.monte_carlo.simulationsstreuung',
+    conceptId: 'monte_carlo',
+    officialNotation: "",
+    displayFormula: "$$\\widehat{\\operatorname{Var}}(\\hat{\\beta}) \\approx \\frac{1}{S-1}\\sum_{s=1}^S\\left(\\hat{\\beta}^{(s)}-\\overline{\\hat{\\beta}}\\right)^2$$",
+    intuition: "Empirische Streuung über Wiederholungen.",
+    derivationSteps: [
+        {
+            "label": "Simulationsstreuung",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$\\widehat{\\operatorname{Var}}(\\hat{\\beta}) \\approx \\frac{1}{S-1}\\sum_{s=1}^S\\left(\\hat{\\beta}^{(s)}-\\overline{\\hat{\\beta}}\\right)^2$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu monte_carlo","Simulationsstreuung"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Simulationsstreuung — Empirische Streuung über Wiederholungen.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.monte_carlo-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.monte_carlo.einf-wise2024-pdf.p150.einfu-hrung-in-die-o-kon","oekonometrie.monte_carlo.einf-wise2024-pdf.p52.2-2-x-x"]
+  }),
+  card({
+    id: 'oekonometrie.monte_carlo.fixiertes_dgp',
+    conceptId: 'monte_carlo',
+    officialNotation: "",
+    displayFormula: "$$y^{(s)} = X^{(s)}\\beta + u^{(s)}$$",
+    intuition: "Datengenerierungsprozess bleibt über Simulationen konstant.",
+    derivationSteps: [
+        {
+            "label": "Fixiertes DGP",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$y^{(s)} = X^{(s)}\\beta + u^{(s)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu monte_carlo","Fixiertes DGP"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Fixiertes DGP — Datengenerierungsprozess bleibt über Simulationen konstant.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.monte_carlo-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.monte_carlo.einf-wise2024-pdf.p150.einfu-hrung-in-die-o-kon","oekonometrie.monte_carlo.einf-wise2024-pdf.p52.2-2-x-x"]
+  }),
+  card({
+    id: 'oekonometrie.monte_carlo.simulationsmittelwert_pr_fungsme',
+    conceptId: 'monte_carlo',
+    officialNotation: "S",
+    displayFormula: "$$\\overline{\\hat{\\beta}} = \\frac{1}{S}\\sum_{s=1}^S \\hat{\\beta}^{(s)}$$",
+    intuition: "Der Durchschnitt vieler Wiederholungsschätzungen macht Unverzerrtheit sichtbar.",
+    derivationSteps: [
+        {
+            "label": "Simulationsmittelwert (Prüfungsmerksatz)",
+            "text": "Einführung in die Ökonometrie",
+            "math": "$$\\overline{\\hat{\\beta}} = \\frac{1}{S}\\sum_{s=1}^S \\hat{\\beta}^{(s)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu monte_carlo","Simulationsmittelwert (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Simulationsmittelwert (Prüfungsmerksatz) — Der Durchschnitt vieler Wiederholungsschätzungen macht Unverzerrtheit sichtbar.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.monte_carlo-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.monte_carlo.einf-wise2024-pdf.p150.einfu-hrung-in-die-o-kon","oekonometrie.monte_carlo.einf-wise2024-pdf.p52.2-2-x-x"]
@@ -1033,6 +2203,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.vif_collinearity.einf-wise2024-pdf.p78.slide","oekonometrie.vif_collinearity.einf-wise2024-pdf.p121.v-t-vt-1-27"]
   }),
   card({
+    id: 'oekonometrie.vif_collinearity.kernrelation_1',
+    conceptId: 'vif_collinearity',
+    officialNotation: "",
+    displayFormula: "$$VIF_j = \\frac{1}{1-R_j^2}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "\u0014              \u001c       \u0004",
+            "math": "$$VIF_j = \\frac{1}{1-R_j^2}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu vif_collinearity","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.vif_collinearity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.vif_collinearity.einf-wise2024-pdf.p78.slide","oekonometrie.vif_collinearity.einf-wise2024-pdf.p121.v-t-vt-1-27"]
+  }),
+  card({
+    id: 'oekonometrie.vif_collinearity.variance_inflation_factor_pr_fun',
+    conceptId: 'vif_collinearity',
+    officialNotation: "R_j^2",
+    displayFormula: "$$VIF_j = \\frac{1}{1-R_j^2}$$",
+    intuition: "Je größer Rⱼ² in der Hilfsregression, desto stärker die aufgeblähte Unsicherheit.",
+    derivationSteps: [
+        {
+            "label": "Variance Inflation Factor (Prüfungsmerksatz)",
+            "text": "\u0014              \u001c       \u0004",
+            "math": "$$VIF_j = \\frac{1}{1-R_j^2}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu vif_collinearity","Variance Inflation Factor (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Variance Inflation Factor (Prüfungsmerksatz) — Je größer Rⱼ² in der Hilfsregression, desto stärker die aufgeblähte Unsicherheit",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.vif_collinearity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.vif_collinearity.einf-wise2024-pdf.p78.slide","oekonometrie.vif_collinearity.einf-wise2024-pdf.p121.v-t-vt-1-27"]
+  }),
+  card({
     id: 'oekonometrie.fwl_partial_regression.fwl_steigung',
     conceptId: 'fwl_partial_regression',
     officialNotation: "\\tilde{x}_j, \\tilde{y}",
@@ -1059,6 +2281,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.fwl_partial_regression.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.fwl_partial_regression.einf-wise2024-pdf.p126.2ptii-k-q"]
   }),
   card({
+    id: 'oekonometrie.fwl_partial_regression.kernrelation_1',
+    conceptId: 'fwl_partial_regression',
+    officialNotation: "",
+    displayFormula: "$$\\hat{\\beta}_j = \\frac{\\tilde{x}_j'\\tilde{y}}{\\tilde{x}_j'\\tilde{x}_j}$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "2 trrΨpI \u0001 X pX X q X qs",
+            "math": "$$\\hat{\\beta}_j = \\frac{\\tilde{x}_j'\\tilde{y}}{\\tilde{x}_j'\\tilde{x}_j}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu fwl_partial_regression","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.fwl_partial_regression-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.fwl_partial_regression.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.fwl_partial_regression.einf-wise2024-pdf.p126.2ptii-k-q"]
+  }),
+  card({
+    id: 'oekonometrie.fwl_partial_regression.fwl_steigung_pr_fungsmerksatz',
+    conceptId: 'fwl_partial_regression',
+    officialNotation: "\\tilde{x}_j, \\tilde{y}",
+    displayFormula: "$$\\hat{\\beta}_j = \\frac{\\tilde{x}_j'\\tilde{y}}{\\tilde{x}_j'\\tilde{x}_j}$$",
+    intuition: "Regressiere Residuen von y auf Residuen von xⱼ nach Herausrechnung der anderen Regressoren.",
+    derivationSteps: [
+        {
+            "label": "FWL-Steigung (Prüfungsmerksatz)",
+            "text": "2 trrΨpI \u0001 X pX X q X qs",
+            "math": "$$\\hat{\\beta}_j = \\frac{\\tilde{x}_j'\\tilde{y}}{\\tilde{x}_j'\\tilde{x}_j}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu fwl_partial_regression","FWL-Steigung (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: FWL-Steigung (Prüfungsmerksatz) — Regressiere Residuen von y auf Residuen von xⱼ nach Herausrechnung der anderen R",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.fwl_partial_regression-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.fwl_partial_regression.einf-wise2024-pdf.p102.2-trr-pi-x-px-x-q-x-qs","oekonometrie.fwl_partial_regression.einf-wise2024-pdf.p126.2ptii-k-q"]
+  }),
+  card({
     id: 'oekonometrie.heteroskedasticity.heteroskedastische_fehlervarianz',
     conceptId: 'heteroskedasticity',
     officialNotation: "",
@@ -1080,6 +2354,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu heteroskedasticity","Heteroskedastische Fehlervarianz"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Heteroskedastische Fehlervarianz — Die Fehlerstreuung hängt von der Beobachtung i ab.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.heteroskedasticity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.heteroskedasticity.einf-wise2024-pdf.p52.2-2-x-x","oekonometrie.heteroskedasticity.einf-wise2024-pdf.p26.205-18-949-20-1010-2-0-0"]
+  }),
+  card({
+    id: 'oekonometrie.heteroskedasticity.kernrelation_1',
+    conceptId: 'heteroskedasticity',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{Var}(u_i\\mid X_i) = \\sigma_i^2 \\neq \\sigma^2$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "2 γ2 x       x",
+            "math": "$$\\operatorname{Var}(u_i\\mid X_i) = \\sigma_i^2 \\neq \\sigma^2$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu heteroskedasticity","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.heteroskedasticity-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.heteroskedasticity.einf-wise2024-pdf.p52.2-2-x-x","oekonometrie.heteroskedasticity.einf-wise2024-pdf.p26.205-18-949-20-1010-2-0-0"]
+  }),
+  card({
+    id: 'oekonometrie.heteroskedasticity.heteroskedastische_fehlervarianz',
+    conceptId: 'heteroskedasticity',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{Var}(u_i\\mid X_i) = \\sigma_i^2$$",
+    intuition: "Die Fehlerstreuung hängt von der Beobachtung i ab.",
+    derivationSteps: [
+        {
+            "label": "Heteroskedastische Fehlervarianz (Prüfungsmerksatz)",
+            "text": "2 γ2 x       x",
+            "math": "$$\\operatorname{Var}(u_i\\mid X_i) = \\sigma_i^2$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu heteroskedasticity","Heteroskedastische Fehlervarianz (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Heteroskedastische Fehlervarianz (Prüfungsmerksatz) — Die Fehlerstreuung hängt von der Beobachtung i ab.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.heteroskedasticity-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.heteroskedasticity.einf-wise2024-pdf.p52.2-2-x-x","oekonometrie.heteroskedasticity.einf-wise2024-pdf.p26.205-18-949-20-1010-2-0-0"]
@@ -1137,6 +2463,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.robust_gls.einf-wise2024-pdf.p109.p22-22-0","oekonometrie.robust_gls.einf-wise2024-pdf.p115.2-6-a-heteroskedastic-mo"]
   }),
   card({
+    id: 'oekonometrie.robust_gls.kernrelation_1',
+    conceptId: 'robust_gls',
+    officialNotation: "",
+    displayFormula: "$$\\hat{\\beta}_{GLS} = (X'\\Omega^{-1}X)^{-1}X'\\Omega^{-1}y$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "P22  22        0",
+            "math": "$$\\hat{\\beta}_{GLS} = (X'\\Omega^{-1}X)^{-1}X'\\Omega^{-1}y$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu robust_gls","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.robust_gls-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.robust_gls.einf-wise2024-pdf.p109.p22-22-0","oekonometrie.robust_gls.einf-wise2024-pdf.p115.2-6-a-heteroskedastic-mo"]
+  }),
+  card({
     id: 'oekonometrie.autocorrelation.ar_1_fehlerintuition',
     conceptId: 'autocorrelation',
     officialNotation: "\\rho",
@@ -1189,6 +2541,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["oekonometrie.autocorrelation.einf-wise2024-pdf.p172.pseudo-linear-model-seco","oekonometrie.autocorrelation.einf-wise2024-pdf.p143.residual-actual-fitted"]
   }),
   card({
+    id: 'oekonometrie.autocorrelation.kernrelation_1',
+    conceptId: 'autocorrelation',
+    officialNotation: "",
+    displayFormula: "$$\\operatorname{Cov}(u_t,u_{t-1}) \\neq 0$$",
+    intuition: "Aus der Vorlesungslogik des Blocks (source-distilled).",
+    derivationSteps: [
+        {
+            "label": "Kernrelation 1",
+            "text": "Pseudo linear model (second step):",
+            "math": "$$\\operatorname{Cov}(u_t,u_{t-1}) \\neq 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu autocorrelation","Kernrelation 1"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kernrelation 1 — Aus der Vorlesungslogik des Blocks (source-distilled).",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.autocorrelation-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.autocorrelation.einf-wise2024-pdf.p172.pseudo-linear-model-seco","oekonometrie.autocorrelation.einf-wise2024-pdf.p143.residual-actual-fitted"]
+  }),
+  card({
     id: 'oekonometrie.hac_newey_west.hac_idee',
     conceptId: 'hac_newey_west',
     officialNotation: "\\hat{S}_{NW}",
@@ -1210,6 +2588,84 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu hac_newey_west","HAC-Idee"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: HAC-Idee — Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.hac_newey_west-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.hac_newey_west.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.hac_newey_west.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]
+  }),
+  card({
+    id: 'oekonometrie.hac_newey_west.white_vs_hac',
+    conceptId: 'hac_newey_west',
+    officialNotation: "",
+    displayFormula: "$$\\text{White: nur Heteroskedastizität; HAC: Hetero + Autokorrelation}$$",
+    intuition: "Merksatz für die Wahl der robusten Kovarianz.",
+    derivationSteps: [
+        {
+            "label": "White vs HAC",
+            "text": "\u0016      B β1           B βK \u001e",
+            "math": "$$\\text{White: nur Heteroskedastizität; HAC: Hetero + Autokorrelation}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu hac_newey_west","White vs HAC"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: White vs HAC — Merksatz für die Wahl der robusten Kovarianz.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.hac_newey_west-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.hac_newey_west.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.hac_newey_west.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]
+  }),
+  card({
+    id: 'oekonometrie.hac_newey_west.t_statistik_mit_hac',
+    conceptId: 'hac_newey_west',
+    officialNotation: "",
+    displayFormula: "$$t_j = \\frac{\\hat{\\beta}_j}{\\widehat{se}_{HAC}(\\hat{\\beta}_j)}$$",
+    intuition: "Inferenz mit korrigierten Standardfehlern.",
+    derivationSteps: [
+        {
+            "label": "t-Statistik mit HAC",
+            "text": "\u0016      B β1           B βK \u001e",
+            "math": "$$t_j = \\frac{\\hat{\\beta}_j}{\\widehat{se}_{HAC}(\\hat{\\beta}_j)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu hac_newey_west","t-Statistik mit HAC"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: t-Statistik mit HAC — Inferenz mit korrigierten Standardfehlern.",
+    relatedTaskFamilies: ["oekonometrie.taskfamily.hac_newey_west-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["oekonometrie.hac_newey_west.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.hac_newey_west.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]
+  }),
+  card({
+    id: 'oekonometrie.hac_newey_west.hac_idee_pr_fungsmerksatz',
+    conceptId: 'hac_newey_west',
+    officialNotation: "\\hat{S}_{NW}",
+    displayFormula: "$$\\widehat{\\operatorname{Var}}_{HAC}(\\hat{\\beta}) = (X'X)^{-1}\\hat{S}_{NW}(X'X)^{-1}$$",
+    intuition: "Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.",
+    derivationSteps: [
+        {
+            "label": "HAC-Idee (Prüfungsmerksatz)",
+            "text": "\u0016      B β1           B βK \u001e",
+            "math": "$$\\widehat{\\operatorname{Var}}_{HAC}(\\hat{\\beta}) = (X'X)^{-1}\\hat{S}_{NW}(X'X)^{-1}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu hac_newey_west","HAC-Idee (Prüfungsmerksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: HAC-Idee (Prüfungsmerksatz) — Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.",
     relatedTaskFamilies: ["oekonometrie.taskfamily.hac_newey_west-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["oekonometrie.hac_newey_west.einf-wise2024-pdf.p175.b-1-b-k","oekonometrie.hac_newey_west.einf-wise2024-pdf.p56.e0e10-x0pb-qe10-e0pb-q1x"]

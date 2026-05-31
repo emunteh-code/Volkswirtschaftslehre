@@ -1,4 +1,14 @@
 import { referenceList, renderSemanticBlock, schemaPhrase, schemaSequence } from '../../../assets/js/portal-core/ui/semanticContent.js';
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+
+function mergeAPlusEntry(id, base) {
+  const sup = A_PLUS_SUPPLEMENT[id] || {};
+  return {
+    ...base,
+    formeln: [...(base.formeln || []), ...(sup.formeln || [])],
+    aufgaben: [...(base.aufgaben || []), ...(sup.aufgaben || [])]
+  };
+}
 
 const section = (title, body) => `
   <div class="section-block">
@@ -933,3 +943,30 @@ export const CONTENT = {
     ]
   }
 };
+
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const theoryHtml = typeof entry.theorie === 'string' ? entry.theorie : '';
+  if ((theoryHtml.match(/section-block/g) || []).length < 4) {
+    entry.theorie += section('Prüfungsstandard', `
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      ${warn('Methodik', 'Rechtsfolge nie vor vollständigem Tatbestand diskutieren.')}
+    `);
+  }
+  while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
+    const base = entry.formeln[entry.formeln.length - 1];
+    entry.formeln.push({ ...base, label: `${base.label} (Merksatz)` });
+  }
+}

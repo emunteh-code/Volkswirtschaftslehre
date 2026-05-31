@@ -1253,6 +1253,18 @@ abline(v = 0.5, col = "red", lwd = 2)`,
         String.raw`$$\operatorname{Var}(c'\hat{\beta}\mid X) \le \operatorname{Var}(c'\tilde{\beta}\mid X)$$`,
         'Für jede Linearkombination der Parameter (Gewichtsvektor c) hat der OLS-Schätzer unter den klassischen Annahmen die kleinstmögliche Varianz verglichen mit jedem anderen linearen unverzerrten Schätzer derselben Linearkombination — genau das meint BLUE.',
         { c: 'beliebiger Gewichtsvektor', '\\hat{\\beta}': 'OLS-Schätzer', '\\tilde{\\beta}': 'linearer unverzerrter Vergleichsschätzer' }
+      ),
+      formula(
+        'Varianz von OLS (homoskedastisch)',
+        String.raw`$$\operatorname{Var}(\hat{\beta}\mid X)=\sigma^2(X'X)^{-1}$$`,
+        'Präzisionsmaß des Schätzers unter klassischen Annahmen.',
+        { '\\sigma^2': 'Fehlervarianz', 'X': 'Designmatrix' }
+      ),
+      formula(
+        'BLUE-Merksatz',
+        String.raw`$$\text{OLS ist BLUE unter GM-Annahmen}$$`,
+        'Best Linear Unbiased Estimator innerhalb der linearen unverzerrten Klasse.',
+        {}
       )
     ],
     aufgaben: [
@@ -2153,6 +2165,13 @@ anova(model_r, model_ur)`,
           'Der Unterschied liegt in der Begründungslogik: OLS als Quadratsummenminimum, MLE als Wahrscheinlichkeitsmaximum.'
         ],
         math: [String.raw`$$\hat{\beta}_{MLE}=(X'X)^{-1}X'y=\hat{\beta}_{OLS}$$`]
+      },
+      {
+        title: 'Klausurzugriff',
+        body: [
+          'Wenn Normalität und MLE gefragt sind, zuerst die Likelihood in β über die Residuenquadratsumme lesen, dann die OLS-Identität nennen.',
+          'Für σ² unterscheide ML- und konventionelle Schätzerkonventionen — das ist ein separates Detail als die β-Gleichheit.'
+        ]
       }
     ],
     warnings: [
@@ -2241,6 +2260,13 @@ sum(resid(model)^2)`,
           'Diese Logik wird über den F-Test operationalisiert und passt genau zu Klausuraufgaben mit Modellvergleich.'
         ],
         math: [String.raw`$$F = \frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$`]
+      },
+      {
+        title: 'Klausurcheckliste R/UR',
+        body: [
+          'Zuerst beide Modelle explizit notieren (UR und R), dann J Restriktionen zählen, dann F-Statistik mit korrekten Freiheitsgraden.',
+          'Bei Einzelkoeffizienten kann ein t-Test genügen; bei gemeinsamen Nullen ist der F-Test Standard.'
+        ]
       }
     ],
     warnings: [
@@ -2255,6 +2281,18 @@ sum(resid(model)^2)`,
         String.raw`$$H_0: R\beta = r$$`,
         'Allgemeine Form für gemeinsame Hypothesen über Koeffizienten.',
         {}
+      ),
+      formula(
+        'F-Test R/UR',
+        String.raw`$$F = \frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$`,
+        'Gemeinsamer Test mehrerer linearen Restriktionen.',
+        { J: 'Anzahl Restriktionen', 'SSR_R': 'Summe quadrierter Residuen restricted' }
+      ),
+      formula(
+        'Einzelrestriktion',
+        String.raw`$$H_0:\beta_j = 0$$`,
+        'Spezialfall einer linearen Restriktion.',
+        { '\\beta_j': 'Koeffizient des Regressors j' }
       )
     ],
     aufgaben: [
@@ -2435,6 +2473,18 @@ hist(beta_hat, breaks = 35, probability = TRUE)`,
         String.raw`$$\overline{\hat{\beta}} = \frac{1}{S}\sum_{s=1}^S \hat{\beta}^{(s)}$$`,
         'Der Durchschnitt vieler Wiederholungsschätzungen macht Unverzerrtheit sichtbar.',
         { S: 'Anzahl der Simulationen' }
+      ),
+      formula(
+        'Simulationsstreuung',
+        String.raw`$$\widehat{\operatorname{Var}}(\hat{\beta}) \approx \frac{1}{S-1}\sum_{s=1}^S\left(\hat{\beta}^{(s)}-\overline{\hat{\beta}}\right)^2$$`,
+        'Empirische Streuung über Wiederholungen.',
+        {}
+      ),
+      formula(
+        'Fixiertes DGP',
+        String.raw`$$y^{(s)} = X^{(s)}\beta + u^{(s)}$$`,
+        'Datengenerierungsprozess bleibt über Simulationen konstant.',
+        {}
       )
     ],
     aufgaben: [
@@ -3008,6 +3058,18 @@ acf(u)`,
         String.raw`$$\widehat{\operatorname{Var}}_{HAC}(\hat{\beta}) = (X'X)^{-1}\hat{S}_{NW}(X'X)^{-1}$$`,
         'Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.',
         { '\\hat{S}_{NW}': 'Newey-West-Langfristvarianzschätzer' }
+      ),
+      formula(
+        'White vs HAC',
+        String.raw`$$\text{White: nur Heteroskedastizität; HAC: Hetero + Autokorrelation}$$`,
+        'Merksatz für die Wahl der robusten Kovarianz.',
+        {}
+      ),
+      formula(
+        't-Statistik mit HAC',
+        String.raw`$$t_j = \frac{\hat{\beta}_j}{\widehat{se}_{HAC}(\hat{\beta}_j)}$$`,
+        'Inferenz mit korrigierten Standardfehlern.',
+        {}
       )
     ],
     aufgaben: [

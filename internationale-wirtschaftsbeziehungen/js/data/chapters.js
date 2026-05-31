@@ -1,3 +1,5 @@
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+
 const section = (title, body) => `
   <div class="section-block">
     <h3>${title}</h3>
@@ -897,3 +899,14 @@ export const CONTENT = {
     ]
   }
 };
+
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}

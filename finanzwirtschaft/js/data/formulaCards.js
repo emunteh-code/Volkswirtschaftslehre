@@ -115,6 +115,38 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p20.23-10-2024-georg-august-","finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p14.23-10-2024-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.finanz_denkweise.leitobjekt_merksatz',
+    conceptId: 'finanz_denkweise',
+    officialNotation: "",
+    displayFormula: {"mode":"schema","layout":"phrase","parts":["Zahlungsreihe { z_0, z_1, ..., z_n }"]},
+    intuition: "Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.",
+    derivationSteps: [
+        {
+            "label": "Leitobjekt (Merksatz)",
+            "text": "23.10.2024                                       Georg-August-Universität Göttingen   20",
+            "math": {
+                "mode": "schema",
+                "layout": "phrase",
+                "parts": [
+                    "Zahlungsreihe { z_0, z_1, ..., z_n }"
+                ]
+            }
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu finanz_denkweise","Leitobjekt (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Leitobjekt (Merksatz) — Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.finanz_denkweise-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p20.23-10-2024-georg-august-","finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p14.23-10-2024-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.liquiditaetsplanung.kumulierter_saldo',
     conceptId: 'liquiditaetsplanung',
     officialNotation: "liquiditaetsplanung",
@@ -273,6 +305,40 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p16.06-11-2024-georg-august-","finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p07.06-11-2024-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.kapitalmarkt_bewertung.marktpreis_der_zeit_merksatz',
+    conceptId: 'kapitalmarkt_bewertung',
+    officialNotation: "Zins",
+    displayFormula: {"mode":"schema","layout":"chain","parts":["Zins","=","Preis des Zeittausches"]},
+    intuition: "Der Zins verbindet Gegenwarts- und Zukunftszahlungen.",
+    derivationSteps: [
+        {
+            "label": "Marktpreis der Zeit (Merksatz)",
+            "text": "06.11.2024                                         Georg-August-Universität Göttingen   16",
+            "math": {
+                "mode": "schema",
+                "layout": "chain",
+                "parts": [
+                    "Zins",
+                    "=",
+                    "Preis des Zeittausches"
+                ]
+            }
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu kapitalmarkt_bewertung","Marktpreis der Zeit (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Marktpreis der Zeit (Merksatz) — Der Zins verbindet Gegenwarts- und Zukunftszahlungen.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.kapitalmarkt_bewertung-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p16.06-11-2024-georg-august-","finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p07.06-11-2024-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.institutionen_marktunvollkommenheit.marktunvollkommenheit',
     conceptId: 'institutionen_marktunvollkommenheit',
     officialNotation: "institutionen_marktunvollkommenheit",
@@ -338,6 +404,42 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu institutionen_marktunvollkommenheit","Orientierungsfrage"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Orientierungsfrage — Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vorderg",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.institutionen_marktunvollkommenheit-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p13.06-11-2024-georg-august-","finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p03.06-11-2024-georg-august-"]
+  }),
+  card({
+    id: 'finanzwirtschaft.institutionen_marktunvollkommenheit.marktunvollkommenheit_merksatz',
+    conceptId: 'institutionen_marktunvollkommenheit',
+    officialNotation: "",
+    displayFormula: {"mode":"schema","layout":"chain","parts":["Informationskosten","+","Transaktionskosten","⇒","Institutionen"]},
+    intuition: "Institutionen werden durch Friktionen wirtschaftlich sinnvoll.",
+    derivationSteps: [
+        {
+            "label": "Marktunvollkommenheit (Merksatz)",
+            "text": "06.11.2024                                    Georg-August-Universität Göttingen                             13",
+            "math": {
+                "mode": "schema",
+                "layout": "chain",
+                "parts": [
+                    "Informationskosten",
+                    "+",
+                    "Transaktionskosten",
+                    "⇒",
+                    "Institutionen"
+                ]
+            }
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu institutionen_marktunvollkommenheit","Marktunvollkommenheit (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Marktunvollkommenheit (Merksatz) — Institutionen werden durch Friktionen wirtschaftlich sinnvoll.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.institutionen_marktunvollkommenheit-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p13.06-11-2024-georg-august-","finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p03.06-11-2024-georg-august-"]
@@ -707,6 +809,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p11.11-12-2024-georg-august-","finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p08.11-12-2024-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.annuitaeten_finanzplan.annuit_t_aus_kapitalwert_merksat',
+    conceptId: 'annuitaeten_finanzplan',
+    officialNotation: "a, K_0, RBWF(n,i)",
+    displayFormula: "$$a = \\frac{K_0}{RBWF(n,i)}$$",
+    intuition: "Äquivalente konstante Periodenzahlung zum Kapitalwert.",
+    derivationSteps: [
+        {
+            "label": "Annuität aus Kapitalwert (Merksatz)",
+            "text": "11.12.2024                                          Georg-August-Universität Göttingen                                                 11",
+            "math": "$$a = \\frac{K_0}{RBWF(n,i)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu annuitaeten_finanzplan","Annuität aus Kapitalwert (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Annuität aus Kapitalwert (Merksatz) — Äquivalente konstante Periodenzahlung zum Kapitalwert.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.annuitaeten_finanzplan-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p11.11-12-2024-georg-august-","finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p08.11-12-2024-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.izf_kapitalwertfunktion.izf_definition',
     conceptId: 'izf_kapitalwertfunktion',
     officialNotation: "izf_kapitalwertfunktion",
@@ -923,6 +1051,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.unsicherheit.v9-studip-pdf.p18.08-01-2025-georg-august-","finanzwirtschaft.unsicherheit.v9-studip-pdf.p25.08-01-2025-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.unsicherheit.erwartungswert_merksatz',
+    conceptId: 'unsicherheit',
+    officialNotation: "p_s, x_s",
+    displayFormula: "$$E(X) = \\sum_s p_s x_s$$",
+    intuition: "Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.",
+    derivationSteps: [
+        {
+            "label": "Erwartungswert (Merksatz)",
+            "text": "08.01.2025                                           Georg-August-Universität Göttingen                    18",
+            "math": "$$E(X) = \\sum_s p_s x_s$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu unsicherheit","Erwartungswert (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Erwartungswert (Merksatz) — Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.unsicherheit-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.unsicherheit.v9-studip-pdf.p18.08-01-2025-georg-august-","finanzwirtschaft.unsicherheit.v9-studip-pdf.p25.08-01-2025-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.risikoadjustierter_kapitalwert.risikozuschlag',
     conceptId: 'risikoadjustierter_kapitalwert',
     officialNotation: "d, E(CF_t)",
@@ -970,6 +1124,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu risikoadjustierter_kapitalwert","Sicherheitsabschlag"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Sicherheitsabschlag — Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.risikoadjustierter_kapitalwert-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p09.08-01-2025-georg-august-","finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p17.08-01-2025-georg-august-"]
+  }),
+  card({
+    id: 'finanzwirtschaft.risikoadjustierter_kapitalwert.risikozuschlag_merksatz',
+    conceptId: 'risikoadjustierter_kapitalwert',
+    officialNotation: "d, E(CF_t)",
+    displayFormula: "$$K_0^{risk} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)}{(1+i+d)^t}$$",
+    intuition: "Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.",
+    derivationSteps: [
+        {
+            "label": "Risikozuschlag (Merksatz)",
+            "text": "08.01.2025                                             Georg-August-Universität Göttingen                            9",
+            "math": "$$K_0^{risk} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)}{(1+i+d)^t}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu risikoadjustierter_kapitalwert","Risikozuschlag (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Risikozuschlag (Merksatz) — Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.risikoadjustierter_kapitalwert-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p09.08-01-2025-georg-august-","finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p17.08-01-2025-georg-august-"]

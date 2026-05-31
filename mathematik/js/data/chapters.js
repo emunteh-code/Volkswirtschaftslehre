@@ -1,4 +1,5 @@
 import { CURRICULUM } from './curriculum.js';
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -54,13 +55,18 @@ export const CHAPTERS = CURRICULUM.map(({ id, title, cat, short }) => ({
   short
 }));
 
-export const CONTENT = Object.fromEntries(
-  CURRICULUM.map((entry) => [entry.id, {
+function mergeContent(entry) {
+  const sup = A_PLUS_SUPPLEMENT[entry.id] || {};
+  return {
     motivation: entry.motivation,
     theorie: renderTheoryHtml(entry),
-    formeln: entry.formeln || [],
-    aufgaben: entry.aufgaben || []
-  }])
+    formeln: [...(entry.formeln || []), ...(sup.formeln || [])],
+    aufgaben: [...(entry.aufgaben || []), ...(sup.aufgaben || [])]
+  };
+}
+
+export const CONTENT = Object.fromEntries(
+  CURRICULUM.map((entry) => [entry.id, mergeContent(entry)])
 );
 
 export const R_BLOCKS_BY_ID = Object.fromEntries(

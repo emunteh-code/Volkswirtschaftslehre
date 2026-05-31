@@ -617,6 +617,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["statistik.testen.vl10_3.p08.hypothesen","statistik.testen.vl10_3.p12.klassisch"]
   }),
   card({
+    id: 'statistik.testen.t_statistik_merksatz',
+    conceptId: 'testen',
+    officialNotation: "\\bar{x}, \\mu_0, s, n",
+    displayFormula: "$$t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}$$",
+    intuition: "Standardtest für den Mittelwert bei unbekannter Populationsstreuung",
+    derivationSteps: [
+        {
+            "label": "t-Statistik (Merksatz)",
+            "text": "Induktive Statistik und Hypothesen",
+            "math": "$$t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu testen","t-Statistik (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: t-Statistik (Merksatz) — Standardtest für den Mittelwert bei unbekannter Populationsstreuung",
+    relatedTaskFamilies: ["statistik.taskfamily.testen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["statistik.testen.vl10_3.p08.hypothesen","statistik.testen.vl10_3.p12.klassisch"]
+  }),
+  card({
     id: 'statistik.z_test.z_statistik',
     conceptId: 'z_test',
     officialNotation: "z_test",
@@ -664,6 +690,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu z_test","z-Test Anteil"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: z-Test Anteil — Anteilstest",
+    relatedTaskFamilies: ["statistik.taskfamily.z_test-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["statistik.z_test.vl11.p18.motivation","statistik.z_test.vl11.p39.zweiseitig"]
+  }),
+  card({
+    id: 'statistik.z_test.z_statistik_merksatz',
+    conceptId: 'z_test',
+    officialNotation: "",
+    displayFormula: "$$z = \\frac{\\bar{x} - \\mu_0}{\\sigma/\\sqrt{n}}$$",
+    intuition: "Bekannte Populationsvarianz",
+    derivationSteps: [
+        {
+            "label": "z-Statistik (Merksatz)",
+            "text": "8.1 Motivation und erstes Beispiel",
+            "math": "$$z = \\frac{\\bar{x} - \\mu_0}{\\sigma/\\sqrt{n}}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu z_test","z-Statistik (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: z-Statistik (Merksatz) — Bekannte Populationsvarianz",
     relatedTaskFamilies: ["statistik.taskfamily.z_test-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["statistik.z_test.vl11.p18.motivation","statistik.z_test.vl11.p39.zweiseitig"]
@@ -1080,6 +1132,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu rlab","R-Syntax Regression"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: R-Syntax Regression — Lineare Regression in R",
+    relatedTaskFamilies: ["statistik.taskfamily.rlab-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["statistik.rlab.rvorkurs.p06.grundlagen","statistik.rlab.rvorkurs.p22.vektoren"]
+  }),
+  card({
+    id: 'statistik.rlab.r_syntax_regression_merksatz',
+    conceptId: 'rlab',
+    officialNotation: "",
+    displayFormula: "\\texttt{lm(y \\sim x1 + x2, data)}",
+    intuition: "Lineare Regression in R",
+    derivationSteps: [
+        {
+            "label": "R-Syntax Regression (Merksatz)",
+            "text": "R Grundlagen",
+            "math": "\\texttt{lm(y \\sim x1 + x2, data)}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu rlab","R-Syntax Regression (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: R-Syntax Regression (Merksatz) — Lineare Regression in R",
+    relatedTaskFamilies: ["statistik.taskfamily.rlab-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["statistik.rlab.rvorkurs.p06.grundlagen","statistik.rlab.rvorkurs.p22.vektoren"]
+  }),
+  card({
+    id: 'statistik.rlab.r_syntax_regression_merksatz_mer',
+    conceptId: 'rlab',
+    officialNotation: "",
+    displayFormula: "\\texttt{lm(y \\sim x1 + x2, data)}",
+    intuition: "Lineare Regression in R",
+    derivationSteps: [
+        {
+            "label": "R-Syntax Regression (Merksatz) (Merksatz)",
+            "text": "R Grundlagen",
+            "math": "\\texttt{lm(y \\sim x1 + x2, data)}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu rlab","R-Syntax Regression (Merksatz) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: R-Syntax Regression (Merksatz) (Merksatz) — Lineare Regression in R",
     relatedTaskFamilies: ["statistik.taskfamily.rlab-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["statistik.rlab.rvorkurs.p06.grundlagen","statistik.rlab.rvorkurs.p22.vektoren"]

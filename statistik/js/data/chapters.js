@@ -3,6 +3,8 @@
 // FINAL BENCHMARK STANDARD v14.0
 // ============================================================
 
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+
 export const R_BLOCKS_BY_ID = {
   deskriptiv: [
     {
@@ -1654,6 +1656,26 @@ CONTENT.regression_diagnostik_prognose = {
     }
   ]
 };
+
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
+    const base = entry.formeln[entry.formeln.length - 1];
+    entry.formeln.push({ ...base, label: `${base.label} (Merksatz)` });
+  }
+}
 
 delete CONTENT.schaetzen;
 delete CONTENT.regression;

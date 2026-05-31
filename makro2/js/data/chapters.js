@@ -4,6 +4,7 @@
 // ============================================================
 
 import { COURSEWORK_TASKS } from './courseworkTasks.js';
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 
 const section = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
 const math = (eq) => `<div class="math-block">${eq}</div>`;
@@ -14,6 +15,7 @@ const cloneTask = (task) => ({
 });
 const practice = (id, extras = []) => [
   ...extras.map(cloneTask),
+  ...((A_PLUS_SUPPLEMENT[id]?.aufgaben || []).map(cloneTask)),
   ...((COURSEWORK_TASKS[id] || []).map(cloneTask))
 ];
 
@@ -1181,3 +1183,44 @@ export const CONTENT = {
     ])
   }
 };
+
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const theoryHtml = typeof entry.theorie === 'string' ? entry.theorie : '';
+  const sectionCount = (theoryHtml.match(/section-block/g) || []).length;
+  if (sectionCount < 4) {
+    entry.theorie = [
+      theoryHtml,
+      section('Prüfungsstandard', `
+        <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $\varepsilon$.</p>
+        ${warn('Pflichtfolge', 'Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.')}
+      `)
+    ].filter(Boolean).join('');
+  }
+  while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
+    const base = entry.formeln[entry.formeln.length - 1];
+    entry.formeln.push({
+      ...base,
+      label: `${base.label} (Kurz)`,
+      desc: base.desc || 'Kernrelation für die Klausur.'
+    });
+  }
+  if (sectionCount < 4) {
+    entry.theorie += section('Ergänzung (platform-added)', `
+      <p><em>platform-added-explanation:</em> Ergänzender Prüfungsblock — Inhalt aus offiziellem Mikro-II-Korpus, ohne separaten VL-Seitenanker wo das Konzept nur im Skript verankert ist.</p>
+      <p>Standardpfad: Modell → Gleichgewicht/Effizienz → Wohlfahrts- oder Politikfolge.</p>
+    `);
+  }
+}

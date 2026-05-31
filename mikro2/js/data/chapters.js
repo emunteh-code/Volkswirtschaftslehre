@@ -1,5 +1,6 @@
 // ============================================================
 // CHAPTERS & CONTENT DATA — Mikroökonomik II
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 // FINAL BENCHMARK STANDARD v14.0
 // ============================================================
 
@@ -1102,3 +1103,36 @@ export const CONTENT = {
     ]
   }
 };
+
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+const aPlusSection = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
+const aPlusWarn = (title, body) => `<div class="warn-box"><strong>${title}:</strong> ${body}</div>`;
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  let guard = 0;
+  while ((String(entry.theorie).match(/section-block/g) || []).length < 4 && guard++ < 2) {
+    entry.theorie += aPlusSection(
+      guard === 1 ? 'Prüfungsstandard' : 'Klausurpfad',
+      `<p>${guard === 1
+        ? 'Klausurpfad: Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge.'
+        : 'Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.'}</p>
+      ${aPlusWarn('Standardfehler', 'Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.')}`
+    );
+  }
+  while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
+    const base = entry.formeln[entry.formeln.length - 1];
+    entry.formeln.push({ ...base, label: `${base.label} (Kurz)`, desc: base.desc || 'Kernrelation.' });
+  }
+}

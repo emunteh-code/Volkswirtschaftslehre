@@ -175,6 +175,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.praeferenz.vl02.p02.praeferenzen","mikro1.praeferenz.vl02.p07.indifferenz"]
   }),
   card({
+    id: 'mikro1.praeferenz.strikte_pr_ferenz_merksatz',
+    conceptId: 'praeferenz',
+    officialNotation: "a, b, \\succsim, \\lnot",
+    displayFormula: "$$a \\succ b \\iff a \\succsim b \\land \\lnot(b \\succsim a)$$",
+    intuition: "Definition über schwache Präferenz",
+    derivationSteps: [
+        {
+            "label": "Strikte Präferenz (Merksatz)",
+            "text": "Präferenzen",
+            "math": "$$a \\succ b \\iff a \\succsim b \\land \\lnot(b \\succsim a)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu praeferenz","Strikte Präferenz (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Strikte Präferenz (Merksatz) — Definition über schwache Präferenz",
+    relatedTaskFamilies: ["mikro1.taskfamily.praeferenz-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.praeferenz.vl02.p02.praeferenzen","mikro1.praeferenz.vl02.p07.indifferenz"]
+  }),
+  card({
     id: 'mikro1.lagrange.lagrange_funktion',
     conceptId: 'lagrange',
     officialNotation: "\\mathcal{L}, \\lambda, m, p_1,p_2",
@@ -305,6 +331,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.marshall.vl04.p04.haushaltsoptimum","mikro1.marshall.vl04.p09.marshall-cd"]
   }),
   card({
+    id: 'mikro1.marshall.marshall_nachfrage_merksatz',
+    conceptId: 'marshall',
+    officialNotation: "x_i^*, p_1,p_2, m",
+    displayFormula: "$$x_i^*(p_1, p_2, m)$$",
+    intuition: "Nutzenmaximierende Menge bei Preisen (p₁,p₂) und Einkommen m; aus GRS = p₁/p₂ und Budget.",
+    derivationSteps: [
+        {
+            "label": "Marshall-Nachfrage (Merksatz)",
+            "text": "Haushaltsoptimum, analytische Bestimmung",
+            "math": "$$x_i^*(p_1, p_2, m)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu marshall","Marshall-Nachfrage (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Marshall-Nachfrage (Merksatz) — Nutzenmaximierende Menge bei Preisen (p₁,p₂) und Einkommen m; aus GRS = p₁/p₂ un",
+    relatedTaskFamilies: ["mikro1.taskfamily.marshall-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.marshall.vl04.p04.haushaltsoptimum","mikro1.marshall.vl04.p09.marshall-cd"]
+  }),
+  card({
     id: 'mikro1.slutsky.slutsky_eigenpreis',
     conceptId: 'slutsky',
     officialNotation: "\\partial x_i/\\partial p_i, \\partial h_i/\\partial p_i, \\partial x_i/\\partial m, x_i",
@@ -357,6 +409,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.slutsky.vl07.p02.einkommen-substitution","mikro1.slutsky.vl07.p04.slutsky-gleichung"]
   }),
   card({
+    id: 'mikro1.slutsky.slutsky_eigenpreis_merksatz',
+    conceptId: 'slutsky',
+    officialNotation: "\\partial x_i/\\partial p_i, \\partial h_i/\\partial p_i, \\partial x_i/\\partial m, x_i",
+    displayFormula: "$$\\frac{\\partial x_i}{\\partial p_i} = \\underbrace{\\frac{\\partial h_i}{\\partial p_i}}_{\\text{SE}\\leq 0} - \\underbrace{\\frac{\\partial x_i}{\\partial m}\\, x_i}_{\\text{EE}}$$",
+    intuition: "GE = SE + EE",
+    derivationSteps: [
+        {
+            "label": "Slutsky (Eigenpreis) (Merksatz)",
+            "text": "Preisänderungen: Einkommens- und Substitutionseffekt",
+            "math": "$$\\frac{\\partial x_i}{\\partial p_i} = \\underbrace{\\frac{\\partial h_i}{\\partial p_i}}_{\\text{SE}\\leq 0} - \\underbrace{\\frac{\\partial x_i}{\\partial m}\\, x_i}_{\\text{EE}}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu slutsky","Slutsky (Eigenpreis) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Slutsky (Eigenpreis) (Merksatz) — GE = SE + EE",
+    relatedTaskFamilies: ["mikro1.taskfamily.slutsky-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.slutsky.vl07.p02.einkommen-substitution","mikro1.slutsky.vl07.p04.slutsky-gleichung"]
+  }),
+  card({
     id: 'mikro1.produktion.produktionsfunktion',
     conceptId: 'produktion',
     officialNotation: "y, F, K, L",
@@ -404,6 +482,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu produktion","Isoquante"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Isoquante — Niveaumenge für konstantes ȳ",
+    relatedTaskFamilies: ["mikro1.taskfamily.produktion-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.produktion.vl11.p04.produktionstechnologie","mikro1.produktion.vl11.p07.isoquanten"]
+  }),
+  card({
+    id: 'mikro1.produktion.produktionsfunktion_merksatz',
+    conceptId: 'produktion',
+    officialNotation: "y, F, K, L",
+    displayFormula: "$$y = F(K, L)$$",
+    intuition: "Maximaler Output bei gegebenem Input",
+    derivationSteps: [
+        {
+            "label": "Produktionsfunktion (Merksatz)",
+            "text": "Produktionstechnologie",
+            "math": "$$y = F(K, L)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu produktion","Produktionsfunktion (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Produktionsfunktion (Merksatz) — Maximaler Output bei gegebenem Input",
     relatedTaskFamilies: ["mikro1.taskfamily.produktion-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.produktion.vl11.p04.produktionstechnologie","mikro1.produktion.vl11.p07.isoquanten"]
@@ -955,6 +1059,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.hicks.vl06.p10.hicks-preis","mikro1.hicks.vl06.p12.hicks-kurve"]
   }),
   card({
+    id: 'mikro1.hicks.hicks_nachfrage_merksatz',
+    conceptId: 'hicks',
+    officialNotation: "h_i, p_1,p_2, \\bar{u}",
+    displayFormula: "$$h_i = h_i(p_1, p_2, \\bar{u})$$",
+    intuition: "Minimale Ausgaben bei gegebenem Nutzen",
+    derivationSteps: [
+        {
+            "label": "Hicks-Nachfrage (Merksatz)",
+            "text": "Preisänderungen und die Hickssche Nachfragekurve",
+            "math": "$$h_i = h_i(p_1, p_2, \\bar{u})$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu hicks","Hicks-Nachfrage (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Hicks-Nachfrage (Merksatz) — Minimale Ausgaben bei gegebenem Nutzen",
+    relatedTaskFamilies: ["mikro1.taskfamily.hicks-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.hicks.vl06.p10.hicks-preis","mikro1.hicks.vl06.p12.hicks-kurve"]
+  }),
+  card({
     id: 'mikro1.ausgaben.ausgabenfunktion',
     conceptId: 'ausgaben',
     officialNotation: "e(p,\\bar{u}), h_1,h_2",
@@ -1002,6 +1132,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu ausgaben","Beispiel CD (u=x₁x₂)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Beispiel CD (u=x₁x₂) — Für symmetrische CD-Funktion",
+    relatedTaskFamilies: ["mikro1.taskfamily.ausgaben-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.ausgaben.vl06.p02.ausgabenmin","mikro1.ausgaben.vl06.p07.nutzen-vs-ausgaben"]
+  }),
+  card({
+    id: 'mikro1.ausgaben.ausgabenfunktion_merksatz',
+    conceptId: 'ausgaben',
+    officialNotation: "e(p,\\bar{u}), h_1,h_2",
+    displayFormula: "$$e(p,\\bar{u}) = p_1 h_1(p,\\bar{u}) + p_2 h_2(p,\\bar{u})$$",
+    intuition: "Minimale Kosten für Nutzenniveau ū",
+    derivationSteps: [
+        {
+            "label": "Ausgabenfunktion (Merksatz)",
+            "text": "Ausgabenminimierung",
+            "math": "$$e(p,\\bar{u}) = p_1 h_1(p,\\bar{u}) + p_2 h_2(p,\\bar{u})$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu ausgaben","Ausgabenfunktion (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Ausgabenfunktion (Merksatz) — Minimale Kosten für Nutzenniveau ū",
     relatedTaskFamilies: ["mikro1.taskfamily.ausgaben-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.ausgaben.vl06.p02.ausgabenmin","mikro1.ausgaben.vl06.p07.nutzen-vs-ausgaben"]
@@ -1137,6 +1293,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.arbeit.vl09.p03.arbeitsangebot","mikro1.arbeit.vl09.p11.lohnaenderung"]
   }),
   card({
+    id: 'mikro1.arbeit.budgetgerade_arbeit_merksatz',
+    conceptId: 'arbeit',
+    officialNotation: "x, w, T, p, f",
+    displayFormula: "$$x = \\frac{wT}{p} - \\frac{w}{p}\\,f$$",
+    intuition: "Freizeit-Konsum-Tradeoff",
+    derivationSteps: [
+        {
+            "label": "Budgetgerade (Arbeit) (Merksatz)",
+            "text": "Arbeitsangebot",
+            "math": "$$x = \\frac{wT}{p} - \\frac{w}{p}\\,f$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu arbeit","Budgetgerade (Arbeit) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Budgetgerade (Arbeit) (Merksatz) — Freizeit-Konsum-Tradeoff",
+    relatedTaskFamilies: ["mikro1.taskfamily.arbeit-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.arbeit.vl09.p03.arbeitsangebot","mikro1.arbeit.vl09.p11.lohnaenderung"]
+  }),
+  card({
     id: 'mikro1.gk_dk.grenzkosten',
     conceptId: 'gk_dk',
     officialNotation: "MC, C(y), y",
@@ -1267,6 +1449,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.kmm.vl01.p15.konsummoeglichkeiten","mikro1.kmm.vl01.p16.budgetmenge"]
   }),
   card({
+    id: 'mikro1.kmm.kmm_merksatz',
+    conceptId: 'kmm',
+    officialNotation: "x_i, n, \\mathbb{R}^n",
+    displayFormula: "$$\\text{KMM} = \\{\\,x \\in \\mathbb{R}^n \\mid x_i \\geq 0 \\;\\forall i\\,\\}$$",
+    intuition: "Definitionsmenge aller konsumierbaren Bündel",
+    derivationSteps: [
+        {
+            "label": "KMM (Merksatz)",
+            "text": "Konsummöglichkeiten",
+            "math": "$$\\text{KMM} = \\{\\,x \\in \\mathbb{R}^n \\mid x_i \\geq 0 \\;\\forall i\\,\\}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu kmm","KMM (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: KMM (Merksatz) — Definitionsmenge aller konsumierbaren Bündel",
+    relatedTaskFamilies: ["mikro1.taskfamily.kmm-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.kmm.vl01.p15.konsummoeglichkeiten","mikro1.kmm.vl01.p16.budgetmenge"]
+  }),
+  card({
     id: 'mikro1.indiff.indifferenzkurve',
     conceptId: 'indiff',
     officialNotation: "u(x_1,x_2), \\bar{u}",
@@ -1314,6 +1522,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu indiff","Beispiel (CD)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Beispiel (CD) — Explizite Form bei u = x₁·x₂",
+    relatedTaskFamilies: ["mikro1.taskfamily.indiff-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.indiff.vl02.p07.indifferenzkurven","mikro1.indiff.vl02.p08.eigenschaften"]
+  }),
+  card({
+    id: 'mikro1.indiff.indifferenzkurve_merksatz',
+    conceptId: 'indiff',
+    officialNotation: "u(x_1,x_2), \\bar{u}",
+    displayFormula: "$$\\{\\,(x_1, x_2) \\in \\mathbb{R}^2_+ \\mid u(x_1, x_2) = \\bar{u}\\,\\}$$",
+    intuition: "Niveaumenge für konstantes ū",
+    derivationSteps: [
+        {
+            "label": "Indifferenzkurve (Merksatz)",
+            "text": "Indifferenzkurven",
+            "math": "$$\\{\\,(x_1, x_2) \\in \\mathbb{R}^2_+ \\mid u(x_1, x_2) = \\bar{u}\\,\\}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu indiff","Indifferenzkurve (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Indifferenzkurve (Merksatz) — Niveaumenge für konstantes ū",
     relatedTaskFamilies: ["mikro1.taskfamily.indiff-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.indiff.vl02.p07.indifferenzkurven","mikro1.indiff.vl02.p08.eigenschaften"]
@@ -1371,6 +1605,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.ordinal.vl02.p10.ordinal","mikro1.ordinal.vl02.p04.nutzenfunktionen"]
   }),
   card({
+    id: 'mikro1.ordinal.positiv_monotone_transformation_',
+    conceptId: 'ordinal',
+    officialNotation: "",
+    displayFormula: "$$v = f(u(\\mathbf{x})),\\quad f' > 0$$",
+    intuition: "Äquivalente Nutzendarstellung",
+    derivationSteps: [
+        {
+            "label": "Positiv-monotone Transformation (Merksatz)",
+            "text": "Nutzen als ordinales Konzept",
+            "math": "$$v = f(u(\\mathbf{x})),\\quad f' > 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu ordinal","Positiv-monotone Transformation (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Positiv-monotone Transformation (Merksatz) — Äquivalente Nutzendarstellung",
+    relatedTaskFamilies: ["mikro1.taskfamily.ordinal-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.ordinal.vl02.p10.ordinal","mikro1.ordinal.vl02.p04.nutzenfunktionen"]
+  }),
+  card({
     id: 'mikro1.grs.grs_definition',
     conceptId: 'grs',
     officialNotation: "\\left|\\tfrac{dx_2}{dx_1}\\right|, \\bar{u}",
@@ -1418,6 +1678,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu grs","GRS via Grenznutzen"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: GRS via Grenznutzen — Verhältnis der partiellen Ableitungen",
+    relatedTaskFamilies: ["mikro1.taskfamily.grs-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.grs.vl02.p12.grs","mikro1.grs.vl02.p13.grs2"]
+  }),
+  card({
+    id: 'mikro1.grs.grs_definition_merksatz',
+    conceptId: 'grs',
+    officialNotation: "\\left|\\tfrac{dx_2}{dx_1}\\right|, \\bar{u}",
+    displayFormula: "$$GRS = \\left|\\frac{dx_2}{dx_1}\\right|_{\\,u = \\bar{u}}$$",
+    intuition: "Betrag der Steigung der Indifferenzkurve",
+    derivationSteps: [
+        {
+            "label": "GRS Definition (Merksatz)",
+            "text": "Grenzrate der Substitution",
+            "math": "$$GRS = \\left|\\frac{dx_2}{dx_1}\\right|_{\\,u = \\bar{u}}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu grs","GRS Definition (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: GRS Definition (Merksatz) — Betrag der Steigung der Indifferenzkurve",
     relatedTaskFamilies: ["mikro1.taskfamily.grs-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.grs.vl02.p12.grs","mikro1.grs.vl02.p13.grs2"]
@@ -1631,6 +1917,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.homothet.vl03.p10.homothetisch","mikro1.homothet.vl03.p19.haushalt-homothet"]
   }),
   card({
+    id: 'mikro1.homothet.homothetie_bedingung_merksatz',
+    conceptId: 'homothet',
+    officialNotation: "GRS, x_2/x_1",
+    displayFormula: "$$GRS(x_1, x_2) = f\\!\\left(\\frac{x_2}{x_1}\\right)$$",
+    intuition: "GRS hängt nur von Ratio ab",
+    derivationSteps: [
+        {
+            "label": "Homothetie-Bedingung (Merksatz)",
+            "text": "Homothetische Nutzenfunktionen",
+            "math": "$$GRS(x_1, x_2) = f\\!\\left(\\frac{x_2}{x_1}\\right)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu homothet","Homothetie-Bedingung (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Homothetie-Bedingung (Merksatz) — GRS hängt nur von Ratio ab",
+    relatedTaskFamilies: ["mikro1.taskfamily.homothet-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.homothet.vl03.p10.homothetisch","mikro1.homothet.vl03.p19.haushalt-homothet"]
+  }),
+  card({
     id: 'mikro1.hausopt.tangentialbedingung',
     conceptId: 'hausopt',
     officialNotation: "MU_1, MU_2, p_1, p_2",
@@ -1678,6 +1990,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu hausopt","Budgetgleichung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Budgetgleichung — 2. Gleichung zur Bestimmung des Optimums",
+    relatedTaskFamilies: ["mikro1.taskfamily.hausopt-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.hausopt.vl03.p13.haushaltsoptimum","mikro1.hausopt.vl04.p02.graphisch"]
+  }),
+  card({
+    id: 'mikro1.hausopt.tangentialbedingung_merksatz',
+    conceptId: 'hausopt',
+    officialNotation: "MU_1, MU_2, p_1, p_2",
+    displayFormula: "$$\\frac{MU_1}{MU_2} = \\frac{p_1}{p_2}$$",
+    intuition: "GRS = relatives Preisverhältnis",
+    derivationSteps: [
+        {
+            "label": "Tangentialbedingung (Merksatz)",
+            "text": "Haushaltsoptimum",
+            "math": "$$\\frac{MU_1}{MU_2} = \\frac{p_1}{p_2}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu hausopt","Tangentialbedingung (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Tangentialbedingung (Merksatz) — GRS = relatives Preisverhältnis",
     relatedTaskFamilies: ["mikro1.taskfamily.hausopt-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.hausopt.vl03.p13.haushaltsoptimum","mikro1.hausopt.vl04.p02.graphisch"]
@@ -1735,6 +2073,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.shephard.vl06.p14.ausgaben-shephard","mikro1.shephard.vl06.p15.shephard-beweis"]
   }),
   card({
+    id: 'mikro1.shephard.shephards_lemma_merksatz',
+    conceptId: 'shephard',
+    officialNotation: "h_i, e, p_i",
+    displayFormula: "$$h_i = \\frac{\\partial e}{\\partial p_i}$$",
+    intuition: "Hickssche Nachfrage aus Ausgabenfunktion",
+    derivationSteps: [
+        {
+            "label": "Shephards Lemma (Merksatz)",
+            "text": "Die Ausgabenfunktion und Shephards Lemma",
+            "math": "$$h_i = \\frac{\\partial e}{\\partial p_i}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu shephard","Shephards Lemma (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Shephards Lemma (Merksatz) — Hickssche Nachfrage aus Ausgabenfunktion",
+    relatedTaskFamilies: ["mikro1.taskfamily.shephard-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.shephard.vl06.p14.ausgaben-shephard","mikro1.shephard.vl06.p15.shephard-beweis"]
+  }),
+  card({
     id: 'mikro1.indnutzen.indirekte_nutzenfunktion',
     conceptId: 'indnutzen',
     officialNotation: "v(p,m), x_1,x_2",
@@ -1787,6 +2151,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.indnutzen.vl06.p19.indirekt","mikro1.indnutzen.vl06.p20.roy-intuition"]
   }),
   card({
+    id: 'mikro1.indnutzen.indirekte_nutzenfunktion_merksat',
+    conceptId: 'indnutzen',
+    officialNotation: "v(p,m), x_1,x_2",
+    displayFormula: "$$v(p,m) = u\\bigl[x_1(p,m),\\; x_2(p,m)\\bigr]$$",
+    intuition: "Max. Nutzen als Funktion von Preisen/Einkommen",
+    derivationSteps: [
+        {
+            "label": "Indirekte Nutzenfunktion (Merksatz)",
+            "text": "Die Indirekte Nutzenfunktion und Roys Identität",
+            "math": "$$v(p,m) = u\\bigl[x_1(p,m),\\; x_2(p,m)\\bigr]$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu indnutzen","Indirekte Nutzenfunktion (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Indirekte Nutzenfunktion (Merksatz) — Max. Nutzen als Funktion von Preisen/Einkommen",
+    relatedTaskFamilies: ["mikro1.taskfamily.indnutzen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.indnutzen.vl06.p19.indirekt","mikro1.indnutzen.vl06.p20.roy-intuition"]
+  }),
+  card({
     id: 'mikro1.lambda.lagrange_multiplikator',
     conceptId: 'lambda',
     officialNotation: "\\lambda, v, MU_i, p_i",
@@ -1813,6 +2203,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.lambda.vl06.p23.lambda","mikro1.lambda.vl02.p17.nebenbedingung"]
   }),
   card({
+    id: 'mikro1.lambda.lagrange_multiplikator_merksatz',
+    conceptId: 'lambda',
+    officialNotation: "\\lambda, v, MU_i, p_i",
+    displayFormula: "$$\\lambda = \\frac{\\partial v}{\\partial m} = \\frac{MU_i}{p_i}$$",
+    intuition: "Grenznutzen des Einkommens",
+    derivationSteps: [
+        {
+            "label": "Lagrange-Multiplikator (Merksatz)",
+            "text": "Interpretation des Lagrange-Multiplikators λ",
+            "math": "$$\\lambda = \\frac{\\partial v}{\\partial m} = \\frac{MU_i}{p_i}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu lambda","Lagrange-Multiplikator (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Lagrange-Multiplikator (Merksatz) — Grenznutzen des Einkommens",
+    relatedTaskFamilies: ["mikro1.taskfamily.lambda-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.lambda.vl06.p23.lambda","mikro1.lambda.vl02.p17.nebenbedingung"]
+  }),
+  card({
+    id: 'mikro1.lambda.lagrange_multiplikator_merksatz_',
+    conceptId: 'lambda',
+    officialNotation: "\\lambda, v, MU_i, p_i",
+    displayFormula: "$$\\lambda = \\frac{\\partial v}{\\partial m} = \\frac{MU_i}{p_i}$$",
+    intuition: "Grenznutzen des Einkommens",
+    derivationSteps: [
+        {
+            "label": "Lagrange-Multiplikator (Merksatz) (Merksatz)",
+            "text": "Interpretation des Lagrange-Multiplikators λ",
+            "math": "$$\\lambda = \\frac{\\partial v}{\\partial m} = \\frac{MU_i}{p_i}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu lambda","Lagrange-Multiplikator (Merksatz) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Lagrange-Multiplikator (Merksatz) (Merksatz) — Grenznutzen des Einkommens",
+    relatedTaskFamilies: ["mikro1.taskfamily.lambda-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.lambda.vl06.p23.lambda","mikro1.lambda.vl02.p17.nebenbedingung"]
+  }),
+  card({
     id: 'mikro1.anfang.slutsky_bei_ausstattung',
     conceptId: 'anfang',
     officialNotation: "h_1, \\omega_1, x_1, m",
@@ -1834,6 +2276,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu anfang","Slutsky bei Ausstattung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Slutsky bei Ausstattung — SE + modifizierter EE",
+    relatedTaskFamilies: ["mikro1.taskfamily.anfang-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.anfang.vl08.p04.anfangsausstattung","mikro1.anfang.vl09.p02.slutsky-ausstattung"]
+  }),
+  card({
+    id: 'mikro1.anfang.slutsky_bei_ausstattung_merksatz',
+    conceptId: 'anfang',
+    officialNotation: "h_1, \\omega_1, x_1, m",
+    displayFormula: "$$\\frac{dx_1}{dp_1} = \\frac{\\partial h_1}{\\partial p_1} + \\frac{\\partial x_1}{\\partial m}(\\omega_1 - x_1)$$",
+    intuition: "SE + modifizierter EE",
+    derivationSteps: [
+        {
+            "label": "Slutsky bei Ausstattung (Merksatz)",
+            "text": "Anfangsausstattung mit Gütern",
+            "math": "$$\\frac{dx_1}{dp_1} = \\frac{\\partial h_1}{\\partial p_1} + \\frac{\\partial x_1}{\\partial m}(\\omega_1 - x_1)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu anfang","Slutsky bei Ausstattung (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Slutsky bei Ausstattung (Merksatz) — SE + modifizierter EE",
+    relatedTaskFamilies: ["mikro1.taskfamily.anfang-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.anfang.vl08.p04.anfangsausstattung","mikro1.anfang.vl09.p02.slutsky-ausstattung"]
+  }),
+  card({
+    id: 'mikro1.anfang.slutsky_bei_ausstattung_merksatz',
+    conceptId: 'anfang',
+    officialNotation: "h_1, \\omega_1, x_1, m",
+    displayFormula: "$$\\frac{dx_1}{dp_1} = \\frac{\\partial h_1}{\\partial p_1} + \\frac{\\partial x_1}{\\partial m}(\\omega_1 - x_1)$$",
+    intuition: "SE + modifizierter EE",
+    derivationSteps: [
+        {
+            "label": "Slutsky bei Ausstattung (Merksatz) (Merksatz)",
+            "text": "Anfangsausstattung mit Gütern",
+            "math": "$$\\frac{dx_1}{dp_1} = \\frac{\\partial h_1}{\\partial p_1} + \\frac{\\partial x_1}{\\partial m}(\\omega_1 - x_1)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu anfang","Slutsky bei Ausstattung (Merksatz) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Slutsky bei Ausstattung (Merksatz) (Merksatz) — SE + modifizierter EE",
     relatedTaskFamilies: ["mikro1.taskfamily.anfang-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.anfang.vl08.p04.anfangsausstattung","mikro1.anfang.vl09.p02.slutsky-ausstattung"]
@@ -2047,6 +2541,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro1.psubst.vl03.p05.ik-kruemmung-sigma-inf","mikro1.psubst.vl03.p08.ces-sigma-limit"]
   }),
   card({
+    id: 'mikro1.psubst.perfekte_substitute_merksatz',
+    conceptId: 'psubst',
+    officialNotation: "a, b, x_1,x_2",
+    displayFormula: "$$u(x_1, x_2) = a x_1 + b x_2, \\quad a, b > 0$$",
+    intuition: "Lineare Nutzenfunktion",
+    derivationSteps: [
+        {
+            "label": "Perfekte Substitute (Merksatz)",
+            "text": "SE und Krümmung der Indifferenzkurven — Grenzfall σ→∞",
+            "math": "$$u(x_1, x_2) = a x_1 + b x_2, \\quad a, b > 0$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu psubst","Perfekte Substitute (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Perfekte Substitute (Merksatz) — Lineare Nutzenfunktion",
+    relatedTaskFamilies: ["mikro1.taskfamily.psubst-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.psubst.vl03.p05.ik-kruemmung-sigma-inf","mikro1.psubst.vl03.p08.ces-sigma-limit"]
+  }),
+  card({
     id: 'mikro1.grts.grts',
     conceptId: 'grts',
     officialNotation: "MP_L, MP_K",
@@ -2068,6 +2588,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu grts","GRTS"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: GRTS — Betrag der Isoquantensteigung",
+    relatedTaskFamilies: ["mikro1.taskfamily.grts-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.grts.vl11.p12.grts","mikro1.grts.vl11.p13.grts2"]
+  }),
+  card({
+    id: 'mikro1.grts.grts_merksatz',
+    conceptId: 'grts',
+    officialNotation: "MP_L, MP_K",
+    displayFormula: "$$GRTS = \\frac{MP_L}{MP_K} = \\frac{F_L}{F_K}$$",
+    intuition: "Betrag der Isoquantensteigung",
+    derivationSteps: [
+        {
+            "label": "GRTS (Merksatz)",
+            "text": "Grenzrate der Technischen Substitution",
+            "math": "$$GRTS = \\frac{MP_L}{MP_K} = \\frac{F_L}{F_K}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu grts","GRTS (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: GRTS (Merksatz) — Betrag der Isoquantensteigung",
+    relatedTaskFamilies: ["mikro1.taskfamily.grts-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro1.grts.vl11.p12.grts","mikro1.grts.vl11.p13.grts2"]
+  }),
+  card({
+    id: 'mikro1.grts.grts_merksatz_merksatz',
+    conceptId: 'grts',
+    officialNotation: "MP_L, MP_K",
+    displayFormula: "$$GRTS = \\frac{MP_L}{MP_K} = \\frac{F_L}{F_K}$$",
+    intuition: "Betrag der Isoquantensteigung",
+    derivationSteps: [
+        {
+            "label": "GRTS (Merksatz) (Merksatz)",
+            "text": "Grenzrate der Technischen Substitution",
+            "math": "$$GRTS = \\frac{MP_L}{MP_K} = \\frac{F_L}{F_K}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu grts","GRTS (Merksatz) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: GRTS (Merksatz) (Merksatz) — Betrag der Isoquantensteigung",
     relatedTaskFamilies: ["mikro1.taskfamily.grts-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro1.grts.vl11.p12.grts","mikro1.grts.vl11.p13.grts2"]

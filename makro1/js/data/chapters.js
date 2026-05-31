@@ -3,6 +3,9 @@
 // Benchmark-grade authored concept line based on course logic
 // ============================================================
 
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+// ============================================================
+
 const section = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
 const math = (eq) => `<div class="math-block">${eq}</div>`;
 const warn = (title, body) => `<div class="warn-box" data-warning-placement="rail"><strong>${title}:</strong> ${body}</div>`;
@@ -940,3 +943,38 @@ export const CONTENT = {
     ]
   }
 };
+
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const theoryHtml = typeof entry.theorie === 'string' ? entry.theorie : '';
+  const sectionCount = (theoryHtml.match(/section-block/g) || []).length;
+  if (sectionCount < 4) {
+    entry.theorie = [
+      theoryHtml,
+      section('Prüfungsstandard', `
+        <p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $\pi$ oder $u$.</p>
+        ${warn('Fristfehler', 'Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.')}
+      `)
+    ].filter(Boolean).join('');
+  }
+  while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
+    const base = entry.formeln[entry.formeln.length - 1];
+    entry.formeln.push({
+      ...base,
+      label: `${base.label} (Merksatz)`,
+      desc: base.desc || 'Kernrelation des Blocks.'
+    });
+  }
+}

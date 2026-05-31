@@ -1,0 +1,169 @@
+#!/usr/bin/env node
+/**
+ * Generate platform-added-drill supplements for curriculum modules (aufgaben + formeln gaps).
+ * Writes <module>/js/data/aPlusSupplement.js and patches chapters.js merge if missing.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const slugs = process.argv.slice(2).length ? process.argv.slice(2) : ['oekonometrie', 'mathematik'];
+
+function supplementalTasks(entry) {
+  const existing = entry.aufgaben?.length || 0;
+  const need = Math.max(0, 3 - existing);
+  if (!need) return [];
+
+  const out = [];
+  const warns = entry.warnings || [];
+  const mastery = entry.mastery || [];
+
+  if (warns[0] && out.length < need) {
+    out.push({
+      text: `Klausurfalle — ${warns[0].title}: Erkläre in drei Schritten, warum dieser Fehler bei „${entry.title}“ zur falschen Antwort führt und wie du ihn vermeidest.`,
+      steps: [
+        { text: `Fehler benennen: ${warns[0].title}.`, eq: null },
+        { text: warns[0].body, eq: null },
+        { text: 'Nenne die korrekte Prüfreihenfolge für eine ähnliche Aufgabe.', eq: null }
+      ],
+      result: warns[0].body,
+      sourceStatus: 'platform-added-drill'
+    });
+  }
+
+  if (warns[1] && out.length < need) {
+    out.push({
+      text: `Interpretationsaufgabe: Was bedeutet „${warns[1].title}" praktisch im Kontext von ${entry.title}?`,
+      steps: [
+        { text: 'Starte mit der ökonomischen/statistischen Größe, die betroffen ist.', eq: null },
+        { text: warns[1].body, eq: null },
+        { text: 'Formuliere ein kurzes Klausur-Beispiel, in dem der Fehler sichtbar wird.', eq: null }
+      ],
+      result: warns[1].body,
+      sourceStatus: 'platform-added-drill'
+    });
+  }
+
+  if (mastery[0] && out.length < need) {
+    out.push({
+      text: `Selbstcheck: ${mastery[0]} — belege die Aussage mit einem konkreten Zahlen- oder Symbolbeispiel aus diesem Block.`,
+      steps: [
+        { text: 'Wähle ein minimales Beispiel (kleine Stichprobe / einfache Parameter).', eq: null },
+        { text: 'Rechne oder argumentiere die Aussage Schritt für Schritt nach.', eq: null },
+        { text: 'Benenne die eine Größe, die du in der Klausur zuerst notieren würdest.', eq: null }
+      ],
+      result: 'Die Mastery-Zeile ist erst bestanden, wenn Beispiel und Prüfreihenfolge zusammenpassen.',
+      sourceStatus: 'platform-added-drill'
+    });
+  }
+
+  const formel = entry.formeln?.[0];
+  if (formel && out.length < need) {
+    out.push({
+      text: `Formelarbeit: Erkläre „${formel.label}" — was misst jede Symbolgröße und wann ist die Relation in einer Klausur relevant?`,
+      steps: [
+        { text: `Formel: ${formel.desc || formel.label}`, eq: formel.eq },
+        { text: 'Ordne jede Variable einer ökonomischen/statistischen Rolle zu.', eq: null },
+        { text: 'Nenne eine typische Fehlinterpretation und die korrekte Lesart.', eq: null }
+      ],
+      result: formel.desc || 'Saubere Variablenzuordnung verhindert die häufigsten Rechenfehler.',
+      sourceStatus: 'platform-added-drill'
+    });
+  }
+
+  return out.slice(0, need);
+}
+
+function supplementalFormeln(entry) {
+  const need = Math.max(0, 3 - (entry.formeln?.length || 0));
+  if (!need) return [];
+  const math = entry.sections?.flatMap((s) => s.math || []).filter(Boolean);
+  const out = [];
+  for (let i = 0; i < math.length && out.length < need; i += 1) {
+    out.push({
+      label: `Kernrelation ${i + 1}`,
+      eq: math[i],
+      desc: 'Aus der Vorlesungslogik des Blocks (source-distilled).',
+      variables: {},
+      sourceStatus: 'source-distilled'
+    });
+  }
+  let idx = 0;
+  while (out.length < need && entry.formeln?.[idx]) {
+    const f = entry.formeln[idx];
+    out.push({
+      label: `${f.label} (Prüfungsmerksatz)`,
+      eq: f.eq,
+      desc: f.desc || 'Wiederholung der zentralen Identität.',
+      variables: f.variables || {},
+      sourceStatus: f.sourceStatus || 'source-distilled'
+    });
+    idx += 1;
+  }
+  return out;
+}
+
+for (const slug of slugs) {
+  const curriculumPath = path.join(repoRoot, slug, 'js/data/curriculum.js');
+  const chaptersPath = path.join(repoRoot, slug, 'js/data/chapters.js');
+  if (!fs.existsSync(curriculumPath)) {
+    console.log(`${slug}: no curriculum.js — skip`);
+    continue;
+  }
+
+  const { CURRICULUM } = await import(`file://${curriculumPath}`);
+  const supplement = {};
+
+  for (const entry of CURRICULUM) {
+    const extraTasks = supplementalTasks(entry);
+    const extraFormeln = supplementalFormeln(entry);
+    if (!extraTasks.length && !extraFormeln.length) continue;
+    supplement[entry.id] = {};
+    if (extraTasks.length) supplement[entry.id].aufgaben = extraTasks;
+    if (extraFormeln.length) supplement[entry.id].formeln = extraFormeln;
+  }
+
+  const outFile = path.join(repoRoot, slug, 'js/data/aPlusSupplement.js');
+  const body = `// Auto-generated by tools/exam-os/enrich-a-plus-supplements.mjs — platform-added drills\nexport const A_PLUS_SUPPLEMENT = ${JSON.stringify(supplement, null, 2)};\n`;
+  fs.writeFileSync(outFile, body);
+  console.log(`${slug}: wrote ${Object.keys(supplement).length} concept supplements → ${outFile}`);
+
+  let chaptersSrc = fs.readFileSync(chaptersPath, 'utf8');
+  if (!chaptersSrc.includes('aPlusSupplement')) {
+    chaptersSrc = chaptersSrc.replace(
+      /^(import .+\n)+/m,
+      (m) => `${m}import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';\n`
+    );
+    chaptersSrc = chaptersSrc.replace(
+      /export const CONTENT = Object\.fromEntries\(\s*CURRICULUM\.map\(\(entry\) => \[entry\.id, \{/,
+      `function mergeAPlus(entry) {
+  const sup = A_PLUS_SUPPLEMENT[entry.id] || {};
+  return {
+    aufgaben: [...(entry.aufgaben || []), ...(sup.aufgaben || [])],
+    formeln: [...(entry.formeln || []), ...(sup.formeln || [])]
+  };
+}
+
+export const CONTENT = Object.fromEntries(
+  CURRICULUM.map((entry) => [entry.id, {`
+    );
+    chaptersSrc = chaptersSrc.replace(
+      /formeln: entry\.formeln \|\| \[\],\s*aufgaben: entry\.aufgaben \|\| \[\]/,
+      `...(() => {
+    const merged = mergeAPlus(entry);
+    return {
+    formeln: merged.formeln,
+    aufgaben: merged.aufgaben`
+    );
+    chaptersSrc = chaptersSrc.replace(
+      /\}\]\)\);/,
+      `};
+  })()
+  }])
+);`
+    );
+    fs.writeFileSync(chaptersPath, chaptersSrc);
+    console.log(`${slug}: patched chapters.js merge`);
+  }
+}

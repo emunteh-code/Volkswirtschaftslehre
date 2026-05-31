@@ -6,8 +6,8 @@
     "conceptsWithSourceAnchors": 33,
     "taskFamilies": 85,
     "sourceGroundedTaskFamilies": 84,
-    "officialFormulaCards": 78,
-    "portalTaskBlocks": 109,
+    "officialFormulaCards": 100,
+    "portalTaskBlocks": 110,
     "stepDrills": 39,
     "theoryCharacters": 90727,
     "masteryItems": 132
@@ -22,8 +22,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -34,8 +34,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -75,10 +75,10 @@
         "conceptsWithSourceAnchors": 15,
         "taskFamilies": 34,
         "sourceGroundedTaskFamilies": 30,
-        "officialFormulaCards": 35,
-        "portalTaskBlocks": 54,
+        "officialFormulaCards": 46,
+        "portalTaskBlocks": 60,
         "stepDrills": 33,
-        "theoryCharacters": 33991,
+        "theoryCharacters": 35185,
         "masteryItems": 69
       },
       "targets": {
@@ -87,8 +87,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -99,10 +99,10 @@
         "conceptsWithSourceAnchors": 45,
         "taskFamilies": 40,
         "sourceGroundedTaskFamilies": 36,
-        "officialFormulaCards": 45,
-        "portalTaskBlocks": 50,
+        "officialFormulaCards": 46,
+        "portalTaskBlocks": 55,
         "stepDrills": 85,
-        "theoryCharacters": 37,
+        "theoryCharacters": 39,
         "masteryItems": 52
       },
       "layers": {
@@ -130,10 +130,10 @@
         "conceptsWithSourceAnchors": 14,
         "taskFamilies": 58,
         "sourceGroundedTaskFamilies": 57,
-        "officialFormulaCards": 37,
-        "portalTaskBlocks": 50,
+        "officialFormulaCards": 42,
+        "portalTaskBlocks": 55,
         "stepDrills": 36,
-        "theoryCharacters": 39291,
+        "theoryCharacters": 42644,
         "masteryItems": 56
       },
       "targets": {
@@ -142,8 +142,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -154,10 +154,10 @@
         "conceptsWithSourceAnchors": 42,
         "taskFamilies": 68,
         "sourceGroundedTaskFamilies": 68,
-        "officialFormulaCards": 47,
-        "portalTaskBlocks": 46,
+        "officialFormulaCards": 42,
+        "portalTaskBlocks": 50,
         "stepDrills": 92,
-        "theoryCharacters": 43,
+        "theoryCharacters": 47,
         "masteryItems": 42
       },
       "layers": {
@@ -185,10 +185,10 @@
         "conceptsWithSourceAnchors": 30,
         "taskFamilies": 83,
         "sourceGroundedTaskFamilies": 82,
-        "officialFormulaCards": 51,
-        "portalTaskBlocks": 78,
+        "officialFormulaCards": 90,
+        "portalTaskBlocks": 113,
         "stepDrills": 64,
-        "theoryCharacters": 41373,
+        "theoryCharacters": 64353,
         "masteryItems": 120
       },
       "targets": {
@@ -197,8 +197,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -209,10 +209,10 @@
         "conceptsWithSourceAnchors": 91,
         "taskFamilies": 98,
         "sourceGroundedTaskFamilies": 98,
-        "officialFormulaCards": 65,
-        "portalTaskBlocks": 72,
+        "officialFormulaCards": 90,
+        "portalTaskBlocks": 103,
         "stepDrills": 164,
-        "theoryCharacters": 46,
+        "theoryCharacters": 71,
         "masteryItems": 91
       },
       "layers": {
@@ -227,9 +227,7 @@
       "formulaParity": true,
       "taskFamilyParity": true,
       "mikro1DepthScorecard": "not achieved",
-      "gaps": [
-        "theory volume <50% of mikro1"
-      ]
+      "gaps": []
     },
     {
       "slug": "oekonometrie",
@@ -240,10 +238,10 @@
         "conceptsWithSourceAnchors": 32,
         "taskFamilies": 98,
         "sourceGroundedTaskFamilies": 97,
-        "officialFormulaCards": 45,
-        "portalTaskBlocks": 40,
+        "officialFormulaCards": 101,
+        "portalTaskBlocks": 96,
         "stepDrills": 70,
-        "theoryCharacters": 53699,
+        "theoryCharacters": 54326,
         "masteryItems": 128
       },
       "targets": {
@@ -252,8 +250,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -264,10 +262,10 @@
         "conceptsWithSourceAnchors": 97,
         "taskFamilies": 115,
         "sourceGroundedTaskFamilies": 115,
-        "officialFormulaCards": 58,
-        "portalTaskBlocks": 37,
+        "officialFormulaCards": 101,
+        "portalTaskBlocks": 87,
         "stepDrills": 179,
-        "theoryCharacters": 59,
+        "theoryCharacters": 60,
         "masteryItems": 97
       },
       "layers": {
@@ -293,7 +291,7 @@
         "conceptsWithSourceAnchors": 14,
         "taskFamilies": 133,
         "sourceGroundedTaskFamilies": 132,
-        "officialFormulaCards": 40,
+        "officialFormulaCards": 44,
         "portalTaskBlocks": 65,
         "stepDrills": 32,
         "theoryCharacters": 29554,
@@ -305,8 +303,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -317,8 +315,8 @@
         "conceptsWithSourceAnchors": 42,
         "taskFamilies": 156,
         "sourceGroundedTaskFamilies": 157,
-        "officialFormulaCards": 51,
-        "portalTaskBlocks": 60,
+        "officialFormulaCards": 44,
+        "portalTaskBlocks": 59,
         "stepDrills": 82,
         "theoryCharacters": 33,
         "masteryItems": 42
@@ -349,7 +347,7 @@
         "taskFamilies": 69,
         "sourceGroundedTaskFamilies": 68,
         "officialFormulaCards": 55,
-        "portalTaskBlocks": 33,
+        "portalTaskBlocks": 45,
         "stepDrills": 28,
         "theoryCharacters": 47737,
         "masteryItems": 56
@@ -360,8 +358,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -372,8 +370,8 @@
         "conceptsWithSourceAnchors": 42,
         "taskFamilies": 81,
         "sourceGroundedTaskFamilies": 81,
-        "officialFormulaCards": 71,
-        "portalTaskBlocks": 30,
+        "officialFormulaCards": 55,
+        "portalTaskBlocks": 41,
         "stepDrills": 72,
         "theoryCharacters": 53,
         "masteryItems": 42
@@ -401,10 +399,10 @@
         "conceptsWithSourceAnchors": 19,
         "taskFamilies": 39,
         "sourceGroundedTaskFamilies": 38,
-        "officialFormulaCards": 51,
-        "portalTaskBlocks": 66,
+        "officialFormulaCards": 57,
+        "portalTaskBlocks": 68,
         "stepDrills": 56,
-        "theoryCharacters": 39842,
+        "theoryCharacters": 40258,
         "masteryItems": 76
       },
       "targets": {
@@ -413,8 +411,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -425,8 +423,8 @@
         "conceptsWithSourceAnchors": 58,
         "taskFamilies": 46,
         "sourceGroundedTaskFamilies": 45,
-        "officialFormulaCards": 65,
-        "portalTaskBlocks": 61,
+        "officialFormulaCards": 57,
+        "portalTaskBlocks": 62,
         "stepDrills": 144,
         "theoryCharacters": 44,
         "masteryItems": 58
@@ -456,10 +454,10 @@
         "conceptsWithSourceAnchors": 15,
         "taskFamilies": 44,
         "sourceGroundedTaskFamilies": 43,
-        "officialFormulaCards": 42,
-        "portalTaskBlocks": 48,
+        "officialFormulaCards": 45,
+        "portalTaskBlocks": 53,
         "stepDrills": 35,
-        "theoryCharacters": 28825,
+        "theoryCharacters": 29398,
         "masteryItems": 60
       },
       "targets": {
@@ -468,8 +466,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -480,8 +478,8 @@
         "conceptsWithSourceAnchors": 45,
         "taskFamilies": 52,
         "sourceGroundedTaskFamilies": 51,
-        "officialFormulaCards": 54,
-        "portalTaskBlocks": 44,
+        "officialFormulaCards": 45,
+        "portalTaskBlocks": 48,
         "stepDrills": 90,
         "theoryCharacters": 32,
         "masteryItems": 45
@@ -511,10 +509,10 @@
         "conceptsWithSourceAnchors": 14,
         "taskFamilies": 46,
         "sourceGroundedTaskFamilies": 45,
-        "officialFormulaCards": 47,
-        "portalTaskBlocks": 48,
+        "officialFormulaCards": 52,
+        "portalTaskBlocks": 53,
         "stepDrills": 39,
-        "theoryCharacters": 38320,
+        "theoryCharacters": 39724,
         "masteryItems": 56
       },
       "targets": {
@@ -523,8 +521,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -535,10 +533,10 @@
         "conceptsWithSourceAnchors": 42,
         "taskFamilies": 54,
         "sourceGroundedTaskFamilies": 54,
-        "officialFormulaCards": 60,
-        "portalTaskBlocks": 44,
+        "officialFormulaCards": 52,
+        "portalTaskBlocks": 48,
         "stepDrills": 100,
-        "theoryCharacters": 42,
+        "theoryCharacters": 44,
         "masteryItems": 42
       },
       "layers": {
@@ -566,8 +564,8 @@
         "conceptsWithSourceAnchors": 16,
         "taskFamilies": 33,
         "sourceGroundedTaskFamilies": 32,
-        "officialFormulaCards": 37,
-        "portalTaskBlocks": 44,
+        "officialFormulaCards": 48,
+        "portalTaskBlocks": 49,
         "stepDrills": 32,
         "theoryCharacters": 30642,
         "masteryItems": 64
@@ -578,8 +576,8 @@
         "conceptsWithSourceAnchors": 33,
         "taskFamilies": 85,
         "sourceGroundedTaskFamilies": 84,
-        "officialFormulaCards": 78,
-        "portalTaskBlocks": 109,
+        "officialFormulaCards": 100,
+        "portalTaskBlocks": 110,
         "stepDrills": 39,
         "theoryCharacters": 90727,
         "masteryItems": 132
@@ -590,8 +588,8 @@
         "conceptsWithSourceAnchors": 48,
         "taskFamilies": 39,
         "sourceGroundedTaskFamilies": 38,
-        "officialFormulaCards": 47,
-        "portalTaskBlocks": 40,
+        "officialFormulaCards": 48,
+        "portalTaskBlocks": 45,
         "stepDrills": 82,
         "theoryCharacters": 34,
         "masteryItems": 48

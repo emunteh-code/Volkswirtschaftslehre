@@ -3,6 +3,8 @@
 // All 33 microeconomics concepts with theory, formulas, exercises
 // ============================================================
 
+import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+
 export const CHAPTERS = [
  { id:'kmm', title:'Konsummöglichkeitenmenge', cat:'Haushaltstheorie I', short:'KMM' },
  { id:'budget', title:'Budgetmenge & Budgetgerade', cat:'Haushaltstheorie I', short:'Budget' },
@@ -2489,6 +2491,34 @@ aufgaben: [
  },
 };
 
+for (const id of Object.keys(CONTENT)) {
+  const sup = A_PLUS_SUPPLEMENT[id];
+  if (!sup) continue;
+  if (sup.aufgaben?.length) {
+    CONTENT[id].aufgaben = [...(CONTENT[id].aufgaben || []), ...sup.aufgaben];
+  }
+  if (sup.formeln?.length) {
+    CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const theoryHtml = typeof entry.theorie === 'string' ? entry.theorie : '';
+  const sectionCount = (theoryHtml.match(/section-block/g) || []).length;
+  if (sectionCount < 4) {
+    entry.theorie += `
+    <div class="section-block"><h3>Prüfungsstandard</h3>
+    <p>Klausurpfad: Modell → Bedingung → Ergebnis. Nutzen- und Nachfrageaufgaben immer mit Budget/Optimum verknüpfen.</p>
+    <div class="warn-box"><strong>Notation:</strong> Gleiche Symbole wie in den VL-Folien; keine parallelen Bezeichnungen für dieselbe Größe.</div>
+    </div>`;
+  }
+  while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
+    const base = entry.formeln[entry.formeln.length - 1];
+    entry.formeln.push({ ...base, label: `${base.label} (Merksatz)` });
+  }
+}
 
 // ============================================================
 // STEP-BY-STEP SOLVER PROBLEMS

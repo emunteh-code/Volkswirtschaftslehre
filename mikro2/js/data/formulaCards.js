@@ -175,6 +175,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.preisdiskriminierung.vl03.p02.third-degree","mikro2.preisdiskriminierung.vl03.p03.mr-equalization"]
   }),
   card({
+    id: 'mikro2.preisdiskriminierung.preisdiskriminierung_dritten_gra',
+    conceptId: 'preisdiskriminierung',
+    officialNotation: "",
+    displayFormula: "$$E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$$",
+    intuition: "Grenzerlöse werden zwischen Teilmärkten ausgeglichen.",
+    derivationSteps: [
+        {
+            "label": "Preisdiskriminierung dritten Grades (Merksatz)",
+            "text": "Preisdiskriminierung dritten Grades",
+            "math": "$$E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu preisdiskriminierung","Preisdiskriminierung dritten Grades (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Preisdiskriminierung dritten Grades (Merksatz) — Grenzerlöse werden zwischen Teilmärkten ausgeglichen.",
+    relatedTaskFamilies: ["mikro2.taskfamily.preisdiskriminierung-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.preisdiskriminierung.vl03.p02.third-degree","mikro2.preisdiskriminierung.vl03.p03.mr-equalization"]
+  }),
+  card({
     id: 'mikro2.spieltheorie_statisch.nash_bedingung',
     conceptId: 'spieltheorie_statisch',
     officialNotation: "s_i, s_minus_i",
@@ -196,6 +222,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu spieltheorie_statisch","Nash-Bedingung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Nash-Bedingung — Beste Antwort auf Gleichgewichtsstrategien",
+    relatedTaskFamilies: ["mikro2.taskfamily.spieltheorie_statisch-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.spieltheorie_statisch.vl09.p01.programm","mikro2.spieltheorie_statisch.vl09.p05.nash"]
+  }),
+  card({
+    id: 'mikro2.spieltheorie_statisch.nash_bedingung_merksatz',
+    conceptId: 'spieltheorie_statisch',
+    officialNotation: "s_i, s_minus_i",
+    displayFormula: "$$s_i^* \\in \\arg\\max_{s_i} u_i(s_i, s_{-i}^*)$$",
+    intuition: "Beste Antwort auf Gleichgewichtsstrategien",
+    derivationSteps: [
+        {
+            "label": "Nash-Bedingung (Merksatz)",
+            "text": "Spieltheorie I: Auszahlungsmatrix, dominante Strategien, Nash",
+            "math": "$$s_i^* \\in \\arg\\max_{s_i} u_i(s_i, s_{-i}^*)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu spieltheorie_statisch","Nash-Bedingung (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Nash-Bedingung (Merksatz) — Beste Antwort auf Gleichgewichtsstrategien",
+    relatedTaskFamilies: ["mikro2.taskfamily.spieltheorie_statisch-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.spieltheorie_statisch.vl09.p01.programm","mikro2.spieltheorie_statisch.vl09.p05.nash"]
+  }),
+  card({
+    id: 'mikro2.spieltheorie_statisch.nash_bedingung_merksatz_kurz',
+    conceptId: 'spieltheorie_statisch',
+    officialNotation: "s_i, s_minus_i",
+    displayFormula: "$$s_i^* \\in \\arg\\max_{s_i} u_i(s_i, s_{-i}^*)$$",
+    intuition: "Beste Antwort auf Gleichgewichtsstrategien",
+    derivationSteps: [
+        {
+            "label": "Nash-Bedingung (Merksatz) (Kurz)",
+            "text": "Spieltheorie I: Auszahlungsmatrix, dominante Strategien, Nash",
+            "math": "$$s_i^* \\in \\arg\\max_{s_i} u_i(s_i, s_{-i}^*)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu spieltheorie_statisch","Nash-Bedingung (Merksatz) (Kurz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Nash-Bedingung (Merksatz) (Kurz) — Beste Antwort auf Gleichgewichtsstrategien",
     relatedTaskFamilies: ["mikro2.taskfamily.spieltheorie_statisch-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro2.spieltheorie_statisch.vl09.p01.programm","mikro2.spieltheorie_statisch.vl09.p05.nash"]
@@ -253,6 +331,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.spieltheorie_dynamisch.vl10.p01.mixed","mikro2.spieltheorie_dynamisch.vl11.p01.sequential"]
   }),
   card({
+    id: 'mikro2.spieltheorie_dynamisch.gemischtes_ng_merksatz',
+    conceptId: 'spieltheorie_dynamisch',
+    officialNotation: "",
+    displayFormula: "$$\\sigma_i^* \\in \\arg\\max_{\\sigma_i} E[u_i(\\sigma_i,\\sigma_{-i}^*)]$$",
+    intuition: "Beste Antwort in gemischten Strategien.",
+    derivationSteps: [
+        {
+            "label": "Gemischtes NG (Merksatz)",
+            "text": "Gemischte Strategien und spezielle Spiele",
+            "math": "$$\\sigma_i^* \\in \\arg\\max_{\\sigma_i} E[u_i(\\sigma_i,\\sigma_{-i}^*)]$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu spieltheorie_dynamisch","Gemischtes NG (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Gemischtes NG (Merksatz) — Beste Antwort in gemischten Strategien.",
+    relatedTaskFamilies: ["mikro2.taskfamily.spieltheorie_dynamisch-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.spieltheorie_dynamisch.vl10.p01.mixed","mikro2.spieltheorie_dynamisch.vl11.p01.sequential"]
+  }),
+  card({
     id: 'mikro2.oligopol_cournot_bertrand.gewinnfunktion_i',
     conceptId: 'oligopol_cournot_bertrand',
     officialNotation: "a, b, c",
@@ -305,6 +409,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p01.programm","mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"]
   }),
   card({
+    id: 'mikro2.oligopol_cournot_bertrand.gewinnfunktion_i_merksatz',
+    conceptId: 'oligopol_cournot_bertrand',
+    officialNotation: "a, b, c",
+    displayFormula: "$$\\pi_i = (a - b(q_i + q_j))q_i - c q_i$$",
+    intuition: "Lineare Nachfrage",
+    derivationSteps: [
+        {
+            "label": "Gewinnfunktion (i) (Merksatz)",
+            "text": "Cournot-Duopol und Cournot-Wettbewerb mit vielen Anbietern",
+            "math": "$$\\pi_i = (a - b(q_i + q_j))q_i - c q_i$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu oligopol_cournot_bertrand","Gewinnfunktion (i) (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Gewinnfunktion (i) (Merksatz) — Lineare Nachfrage",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p01.programm","mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"]
+  }),
+  card({
     id: 'mikro2.oligopol_stackelberg.f_hrermenge',
     conceptId: 'oligopol_stackelberg',
     officialNotation: "oligopol_stackelberg",
@@ -352,6 +482,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu oligopol_stackelberg","Folgerreaktion"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Folgerreaktion — Beste Antwort des Followers auf die Führermenge.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_stackelberg-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p01.programm","mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model"]
+  }),
+  card({
+    id: 'mikro2.oligopol_stackelberg.f_hrermenge_merksatz',
+    conceptId: 'oligopol_stackelberg',
+    officialNotation: "",
+    displayFormula: "$$q_1^{Stack} = \\frac{a-c}{2b}$$",
+    intuition: "Optimale Menge des First Movers bei linearer Nachfrage.",
+    derivationSteps: [
+        {
+            "label": "Führermenge (Merksatz)",
+            "text": "Oligopoltheorie I: Strategien und Stackelbergmodell",
+            "math": "$$q_1^{Stack} = \\frac{a-c}{2b}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu oligopol_stackelberg","Führermenge (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Führermenge (Merksatz) — Optimale Menge des First Movers bei linearer Nachfrage.",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_stackelberg-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro2.oligopol_stackelberg.vl05.p01.programm","mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model"]
@@ -617,6 +773,58 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.gleichgewicht_tausch.vl16.p01.programm","mikro2.gleichgewicht_tausch.vl16.p03.edgeworth"]
   }),
   card({
+    id: 'mikro2.gleichgewicht_tausch.effizienzbedingung_merksatz',
+    conceptId: 'gleichgewicht_tausch',
+    officialNotation: "MU_1, MU_2",
+    displayFormula: "$$\\frac{MU_1^A}{MU_2^A} = \\frac{MU_1^B}{MU_2^B}$$",
+    intuition: "Gleichheit der Grenzraten der Substitution",
+    derivationSteps: [
+        {
+            "label": "Effizienzbedingung (Merksatz)",
+            "text": "Tauschökonomie, Tauschoptimum und Pareto-Effizienz",
+            "math": "$$\\frac{MU_1^A}{MU_2^A} = \\frac{MU_1^B}{MU_2^B}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu gleichgewicht_tausch","Effizienzbedingung (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Effizienzbedingung (Merksatz) — Gleichheit der Grenzraten der Substitution",
+    relatedTaskFamilies: ["mikro2.taskfamily.gleichgewicht_tausch-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.gleichgewicht_tausch.vl16.p01.programm","mikro2.gleichgewicht_tausch.vl16.p03.edgeworth"]
+  }),
+  card({
+    id: 'mikro2.gleichgewicht_tausch.effizienzbedingung_merksatz_kurz',
+    conceptId: 'gleichgewicht_tausch',
+    officialNotation: "MU_1, MU_2",
+    displayFormula: "$$\\frac{MU_1^A}{MU_2^A} = \\frac{MU_1^B}{MU_2^B}$$",
+    intuition: "Gleichheit der Grenzraten der Substitution",
+    derivationSteps: [
+        {
+            "label": "Effizienzbedingung (Merksatz) (Kurz)",
+            "text": "Tauschökonomie, Tauschoptimum und Pareto-Effizienz",
+            "math": "$$\\frac{MU_1^A}{MU_2^A} = \\frac{MU_1^B}{MU_2^B}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu gleichgewicht_tausch","Effizienzbedingung (Merksatz) (Kurz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Effizienzbedingung (Merksatz) (Kurz) — Gleichheit der Grenzraten der Substitution",
+    relatedTaskFamilies: ["mikro2.taskfamily.gleichgewicht_tausch-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.gleichgewicht_tausch.vl16.p01.programm","mikro2.gleichgewicht_tausch.vl16.p03.edgeworth"]
+  }),
+  card({
     id: 'mikro2.gleichgewicht_walras.marktr_umung',
     conceptId: 'gleichgewicht_walras',
     officialNotation: "gleichgewicht_walras",
@@ -747,6 +955,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.wohlfahrt_theoreme.vl16.p07.pareto","mikro2.wohlfahrt_theoreme.vl16.p17.fundamental-theorems"]
   }),
   card({
+    id: 'mikro2.wohlfahrt_theoreme.utilitaristisch_merksatz',
+    conceptId: 'wohlfahrt_theoreme',
+    officialNotation: "u_i",
+    displayFormula: "$$W = u_1 + u_2 + \\dots + u_n$$",
+    intuition: "Summe der Nutzen",
+    derivationSteps: [
+        {
+            "label": "Utilitaristisch (Merksatz)",
+            "text": "Pareto-Effizienz",
+            "math": "$$W = u_1 + u_2 + \\dots + u_n$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu wohlfahrt_theoreme","Utilitaristisch (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Utilitaristisch (Merksatz) — Summe der Nutzen",
+    relatedTaskFamilies: ["mikro2.taskfamily.wohlfahrt_theoreme-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.wohlfahrt_theoreme.vl16.p07.pareto","mikro2.wohlfahrt_theoreme.vl16.p17.fundamental-theorems"]
+  }),
+  card({
     id: 'mikro2.wohlfahrt_messung.utilitaristisch',
     conceptId: 'wohlfahrt_messung',
     officialNotation: "wohlfahrt_messung",
@@ -872,6 +1106,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu information_adverse","Erwarteter Wert"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Erwarteter Wert — Preis bei Unwissenheit",
+    relatedTaskFamilies: ["mikro2.taskfamily.information_adverse-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.information_adverse.vl18.p01.programm","mikro2.information_adverse.vl18.p03.adverse-selection"]
+  }),
+  card({
+    id: 'mikro2.information_adverse.erwarteter_wert_merksatz',
+    conceptId: 'information_adverse',
+    officialNotation: "q, v_H, v_L",
+    displayFormula: "$$E[v] = q \\cdot v_H + (1-q) \\cdot v_L$$",
+    intuition: "Preis bei Unwissenheit",
+    derivationSteps: [
+        {
+            "label": "Erwarteter Wert (Merksatz)",
+            "text": "Moralisches Risiko und Adverse Selektion",
+            "math": "$$E[v] = q \\cdot v_H + (1-q) \\cdot v_L$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu information_adverse","Erwarteter Wert (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Erwarteter Wert (Merksatz) — Preis bei Unwissenheit",
+    relatedTaskFamilies: ["mikro2.taskfamily.information_adverse-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.information_adverse.vl18.p01.programm","mikro2.information_adverse.vl18.p03.adverse-selection"]
+  }),
+  card({
+    id: 'mikro2.information_adverse.erwarteter_wert_merksatz_kurz',
+    conceptId: 'information_adverse',
+    officialNotation: "q, v_H, v_L",
+    displayFormula: "$$E[v] = q \\cdot v_H + (1-q) \\cdot v_L$$",
+    intuition: "Preis bei Unwissenheit",
+    derivationSteps: [
+        {
+            "label": "Erwarteter Wert (Merksatz) (Kurz)",
+            "text": "Moralisches Risiko und Adverse Selektion",
+            "math": "$$E[v] = q \\cdot v_H + (1-q) \\cdot v_L$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu information_adverse","Erwarteter Wert (Merksatz) (Kurz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Erwarteter Wert (Merksatz) (Kurz) — Preis bei Unwissenheit",
     relatedTaskFamilies: ["mikro2.taskfamily.information_adverse-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro2.information_adverse.vl18.p01.programm","mikro2.information_adverse.vl18.p03.adverse-selection"]

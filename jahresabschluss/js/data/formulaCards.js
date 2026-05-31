@@ -487,6 +487,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.anlagevermoegen.kapitel5-pdf.p03.die-bilanz-bilanzpositio","jahresabschluss.anlagevermoegen.kapitel5-pdf.p13.t1-120-000-15-000-105-00"]
   }),
   card({
+    id: 'jahresabschluss.anlagevermoegen.lineare_afa_merksatz',
+    conceptId: 'anlagevermoegen',
+    officialNotation: "",
+    displayFormula: "$$AfA = \\frac{AK - RW}{n}$$",
+    intuition: "Jährlicher planmäßiger Abschreibungsbetrag.",
+    derivationSteps: [
+        {
+            "label": "Lineare AfA (Merksatz)",
+            "text": "DIE BILANZ – BILANZPOSITION",
+            "math": "$$AfA = \\frac{AK - RW}{n}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu anlagevermoegen","Lineare AfA (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Lineare AfA (Merksatz) — Jährlicher planmäßiger Abschreibungsbetrag.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.anlagevermoegen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.anlagevermoegen.kapitel5-pdf.p03.die-bilanz-bilanzpositio","jahresabschluss.anlagevermoegen.kapitel5-pdf.p13.t1-120-000-15-000-105-00"]
+  }),
+  card({
     id: 'jahresabschluss.umlauf_bewertung_verfahren.strenges_niederstwertprinzip',
     conceptId: 'umlauf_bewertung_verfahren',
     officialNotation: "umlauf_bewertung_verfahren",
@@ -695,6 +721,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p20.s-umsatzsteuer-abschluss","jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p18.2800-bank-833-an-5000-um"]
   }),
   card({
+    id: 'jahresabschluss.umlauf_waren_ust.zahllast_merksatz',
+    conceptId: 'umlauf_waren_ust',
+    officialNotation: "",
+    displayFormula: "$$Zahllast = USt - VSt$$",
+    intuition: "Abzuführende Umsatzsteuer nach Vorsteuerabzug.",
+    derivationSteps: [
+        {
+            "label": "Zahllast (Merksatz)",
+            "text": "S                Umsatzsteuer-Abschlusskonto                                        H",
+            "math": "$$Zahllast = USt - VSt$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu umlauf_waren_ust","Zahllast (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Zahllast (Merksatz) — Abzuführende Umsatzsteuer nach Vorsteuerabzug.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.umlauf_waren_ust-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p20.s-umsatzsteuer-abschluss","jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p18.2800-bank-833-an-5000-um"]
+  }),
+  card({
     id: 'jahresabschluss.eigenkapital_kapitalgesellschaften.eigenkapitalquote',
     conceptId: 'eigenkapital_kapitalgesellschaften',
     officialNotation: "eigenkapital_kapitalgesellschaften",
@@ -820,6 +872,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu eigenkapital_personengesellschaften","Gewinnzuweisung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Gewinnzuweisung — Erfolgszuordnung nach Beteiligungslogik.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.eigenkapital_personengesellschaften-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p05.7-1-grundlagen-kapitalge","jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p13.7-2-kapitalgesellschafte"]
+  }),
+  card({
+    id: 'jahresabschluss.eigenkapital_personengesellschaften.privatkonto_abschluss_merksatz',
+    conceptId: 'eigenkapital_personengesellschaften',
+    officialNotation: "",
+    displayFormula: "\\text{Privatkonto} \\rightarrow \\text{Kapitalkonto}",
+    intuition: "Einlagen/Entnahmen werden periodisch überführt.",
+    derivationSteps: [
+        {
+            "label": "Privatkonto-Abschluss (Merksatz)",
+            "text": "7.1 GRUNDLAGEN – KAPITALGESELLSCHAFTEN",
+            "math": "\\text{Privatkonto} \\rightarrow \\text{Kapitalkonto}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu eigenkapital_personengesellschaften","Privatkonto-Abschluss (Merksatz)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Privatkonto-Abschluss (Merksatz) — Einlagen/Entnahmen werden periodisch überführt.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.eigenkapital_personengesellschaften-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p05.7-1-grundlagen-kapitalge","jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p13.7-2-kapitalgesellschafte"]

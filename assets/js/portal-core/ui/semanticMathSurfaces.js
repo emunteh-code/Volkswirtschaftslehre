@@ -6,13 +6,21 @@ const MATH_SUPERSCRIPT_CHARS = '⁰¹²³⁴⁵⁶⁷⁸⁹';
 const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳℒ∞';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
 const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
+const SEMANTIC_MATH_HEADER_SKIP_SELECTOR =
+  'h1, h2, h3, h4, h5, h6, .concept-title, .concept-tag, .klausurmethodik-accordion-title, .klausurmethodik-card-title, .klausurmethodik-heading, .klausurmethodik-label, .f-label, .formula-card-label, .formula-card-title, .quellen-panel-layer-k, .quellen-panel-anchor-group-label, .graph-panel-title, summary, [role="tab"]';
+
 const SEMANTIC_MATH_SKIP_SELECTOR =
-  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"]';
+  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"]';
+
+export function shouldSkipSemanticMath(el) {
+  if (!el?.closest) return true;
+  return Boolean(el.closest(`${SEMANTIC_MATH_SKIP_SELECTOR}, ${SEMANTIC_MATH_HEADER_SKIP_SELECTOR}`));
+}
 
 function isInsideSemanticSkipZone(node) {
   const parent = node?.parentElement;
   if (!parent) return true;
-  return Boolean(parent.closest(SEMANTIC_MATH_SKIP_SELECTOR));
+  return shouldSkipSemanticMath(parent);
 }
 
 function isSingleLetterInsideWord(text, start, end) {
@@ -287,7 +295,7 @@ export function createSemanticMathSurfaces({
 
   function semanticizeElementContent(element) {
     if (!element || !element.innerHTML?.trim()) return;
-    if (element.closest(SEMANTIC_MATH_SKIP_SELECTOR)) return;
+    if (shouldSkipSemanticMath(element)) return;
     const plainAccessible = stripHtml(element.textContent);
     decodeTextEntitiesInPlace(element);
     decorateSemanticMath(element);

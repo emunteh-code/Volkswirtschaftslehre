@@ -26,7 +26,7 @@ export const CHAPTERS = [
  { id:'ausgaben', title:'Ausgabenfunktion', cat:'Dualität', short:'Ausgaben' },
  { id:'shephard', title:'Shephards Lemma', cat:'Dualität', short:'Shephard' },
  { id:'indnutzen', title:'Indirekte Nutzenfunktion & Roys Identität', cat:'Dualität', short:'V(p,m)' },
- { id:'lambda', title:'Lagrange-Multiplikator λ', cat:'Dualität', short:'λ' },
+ { id:'lambda', title:'Lagrange-Multiplikator $\\lambda$', cat:'Dualität', short:'$\\lambda$' },
  { id:'slutsky', title:'Slutsky-Zerlegung', cat:'Preiseffekte', short:'Slutsky' },
  { id:'anfang', title:'Slutsky bei Anfangsausstattung', cat:'Preiseffekte', short:'Ausstattung' },
  { id:'arbeit', title:'Arbeitsangebot', cat:'Preiseffekte', short:'Arbeit' },
@@ -595,8 +595,8 @@ export const CONTENT = {
 `,
  formeln: [
  { label:'CD-Nutzenfunktion', eq: String.raw`$$u(x_1, x_2) = x_1^\alpha \cdot x_2^{1-\alpha}, \quad 0 < \alpha < 1$$`, desc:'0 < α < 1', variables: { '\\alpha': 'Budgetanteil Gut 1 (0 < α < 1)', 'x_1': 'Menge Gut 1', 'x_2': 'Menge Gut 2' } },
- { label:'Nachfrage x₁*', eq: String.raw`$$x_1^* = \frac{\alpha m}{p_1}$$`, desc:'Konstanter Budgetanteil α', variables: { 'x_1^*': 'Optimale Menge Gut 1', 'm': 'Einkommen', 'p_1': 'Preis Gut 1', '\\alpha': 'Parameter der CD-Nutzenfunktion (Budgetanteil Gut 1)' } },
- { label:'Nachfrage x₂*', eq: String.raw`$$x_2^* = \frac{(1-\alpha) m}{p_2}$$`, desc:'Konstanter Budgetanteil (1−α)', variables: { 'x_2^*': 'Optimale Menge Gut 2', '\\alpha': 'Budgetanteil Gut 1', 'm': 'Einkommen', 'p_2': 'Preis Gut 2' } },
+ { label:'Nachfrage $x_1^*$', eq: String.raw`$$x_1^* = \frac{\alpha m}{p_1}$$`, desc:'Konstanter Budgetanteil α', variables: { 'x_1^*': 'Optimale Menge Gut 1', 'm': 'Einkommen', 'p_1': 'Preis Gut 1', '\\alpha': 'Parameter der CD-Nutzenfunktion (Budgetanteil Gut 1)' } },
+ { label:'Nachfrage $x_2^*$', eq: String.raw`$$x_2^* = \frac{(1-\alpha) m}{p_2}$$`, desc:'Konstanter Budgetanteil (1−α)', variables: { 'x_2^*': 'Optimale Menge Gut 2', '\\alpha': 'Budgetanteil Gut 1', 'm': 'Einkommen', 'p_2': 'Preis Gut 2' } },
  ],
  aufgaben: [
   {
@@ -889,7 +889,7 @@ export const CONTENT = {
  formeln: [
  { label:'Leontief-Nutzenfunktion', eq: String.raw`$$u(x_1, x_2) = \min\{a x_1,\; b x_2\}$$`, desc:'Perfekte Komplemente', variables: { 'a': 'Koeffizient Gut 1', 'b': 'Koeffizient Gut 2', 'x_1,x_2': 'Gütermengen' } },
  { label:'Optimalbedingung', eq: String.raw`$$a x_1 = b x_2$$`, desc:'Kein Gut wird verschwendet', variables: { 'ax_1': 'Gewichtete Menge Gut 1', 'bx_2': 'Gewichtete Menge Gut 2' } },
- { label:'Nachfrage x₁*', eq: String.raw`$$x_1^* = \frac{b m}{b p_1 + a p_2}$$`, desc:'Aus Knick + Budget', variables: { 'x_1^*': 'Optimale Menge Gut 1', 'b': 'Koeffizient Gut 2', 'm': 'Einkommen', 'p_1': 'Preis Gut 1', 'p_2': 'Preis Gut 2', 'a': 'Koeffizient Gut 1' } },
+ { label:'Nachfrage $x_1^*$', eq: String.raw`$$x_1^* = \frac{b m}{b p_1 + a p_2}$$`, desc:'Aus Knick + Budget', variables: { 'x_1^*': 'Optimale Menge Gut 1', 'b': 'Koeffizient Gut 2', 'm': 'Einkommen', 'p_1': 'Preis Gut 1', 'p_2': 'Preis Gut 2', 'a': 'Koeffizient Gut 1' } },
  ],
  aufgaben: [
   {
@@ -1169,7 +1169,7 @@ export const CONTENT = {
 `,
  formeln: [
  { label:'Ausgabenfunktion', eq: String.raw`$$e(p,\bar{u}) = p_1 h_1(p,\bar{u}) + p_2 h_2(p,\bar{u})$$`, desc:'Minimale Kosten für Nutzenniveau ū', variables: { 'e(p,\\bar{u})': 'Mindestausgaben für Nutzenniveau ū', 'h_1,h_2': 'Hickssche Nachfragen' } },
- { label:'Beispiel CD (u=x₁x₂)', eq: String.raw`$$e = 2\sqrt{\bar{u}\, p_1 p_2}$$`, desc:'Für symmetrische CD-Funktion', variables: { 'e': 'Ausgabenfunktion', '\\bar{u}': 'Nutzenniveau', 'p_1': 'Preis Gut 1', 'p_2': 'Preis Gut 2' } },
+ { label:'Beispiel CD ($u=x_1 x_2$)', eq: String.raw`$$e = 2\sqrt{\bar{u}\, p_1 p_2}$$`, desc:'Für symmetrische CD-Funktion', variables: { 'e': 'Ausgabenfunktion', '\\bar{u}': 'Nutzenniveau', 'p_1': 'Preis Gut 1', 'p_2': 'Preis Gut 2' } },
  ],
  aufgaben: [
  {
@@ -2495,6 +2495,25 @@ aufgaben: [
   ]
  },
 };
+
+const MIKRO1_KLAUSUR_DEPTH = {
+  shephard: `<div class="section-block"><h3>In der Klausur: Shephards Lemma</h3><p>$h_i = \\partial e/\\partial p_i$ — Hickssche Nachfrage direkt aus Ausgabenfunktion ableiten, ohne Lagrange neu zu lösen. Produktion: $x_i^c = \\partial C/\\partial w_i$. Symmetrie: Ausgaben- und Kostenminimierung dual zur Nutzen-/Outputmaximierung.</p><div class="warn-box"><strong>Vorzeichen:</strong> $h_i$ fallend in $p_i$ (kompensierte Nachfrage) — nie positiv ableiten.</div><div class="warn-box"><strong>Shephard anwenden:</strong> Erst $e(p,\\bar u)$ oder $C(w,y)$ vollständig aufstellen, dann ableiten.</div></div>`,
+  hicks: `<div class="section-block"><h3>In der Klausur: Hickssche Nachfrage</h3><p>$h_i(p,\\bar u)$ hält Nutzen konstant — isoliert Substitutionseffekt. Immer $\\partial h_i/\\partial p_i \\leq 0$. Slutsky: $\\partial x_i/\\partial p_j = \\partial h_i/\\partial p_j - x_j \\partial x_i/\\partial m$. Zeichnung: Kompensierte vs. Marshallsche Kurve.</p><div class="warn-box"><strong>Hicks vs. Marshall:</strong> Marshall enthält Einkommenseffekt; Hicks nicht — Vorzeichen Marshall kann positiv sein (Giffen).</div><div class="warn-box"><strong>Dualität:</strong> $h_i$ aus $e$ via Shephard — nicht aus primaler Nutzenmaximierung wenn $e$ bekannt.</div></div>`,
+  psubst: `<div class="section-block"><h3>In der Klausur: Perfekte Substitute</h3><p>$u = a x_1 + b x_2$ → lineare IK, $MRS = a/b$ konstant. Optimum: Ecke der Budgetgerade (nur ein Gut). Nachfrage: kaufe nur Gut mit niedrigerem $p/a$.</p><div class="warn-box"><strong>Ecke nicht Mitte:</strong> Bei Substituten nie Knick-Lösung wie bei Komplementen.</div><div class="warn-box"><strong>Preisänderung:</strong> Sprung in Nachfrage wenn relatives Preisverhältnis kippt.</div></div>`,
+  lambda: `<div class="section-block"><h3>In der Klausur: Lagrange-Multiplikator λ</h3><p>$\\lambda = \\partial u^*/\\partial m$ = Grenznutzen des Einkommens (indirekte Nutzenfunktion). Envelope-Theorem: $\\lambda$ misst Schattenpreis der Budgetrestriktion. In Optimum: $MRS = p_1/p_2$ und $\\lambda = MU_1/p_1 = MU_2/p_2$.</p><div class="warn-box"><strong>λ ≠ Preis:</strong> $\\lambda$ ist Einkommens-Multiplikator, nicht der Preis eines Gutes.</div><div class="warn-box"><strong>Homogenität:</strong> Bei homothetischen Präferenzen: $x_i$ linear in $m$ bei festen Preisen.</div></div>`,
+  ausgaben: `<div class="section-block"><h3>In der Klausur: Ausgabenfunktion</h3><p>$e(p,\\bar u) = \\min p\\cdot x$ s.t. $u(x) \\geq \\bar u$. Dual zu indirekter Nutzenfunktion. Shephard: $h_i = \\partial e/\\partial p_i$. $e$ homogen vom Grad 1 in $p$.</p><div class="warn-box"><strong>Dualität:</strong> $e(p, v(p,m)) = m$ und $v(p, e(p,\\bar u)) = \\bar u$ — verknüpft primal und dual.</div><div class="warn-box"><strong>Shephard-Vorzeichen:</strong> $\\partial e/\\partial p_i = h_i \\geq 0$ nicht — $h_i$ ist Nachfrage, $\\partial e/\\partial p_i > 0$ für normales Gut.</div></div>`,
+  homothet: `<div class="section-block"><h3>In der Klausur: Homothetische Präferenzen</h3><p>Präferenordnung invariant zu monotoner Transformation; IK radial (gleiche MRS entlang Strahlen). Expansionspfad linear durch Ursprung. Einkommens-Konsumkurve und Preis-Konsumkurve durch Ursprung.</p><div class="warn-box"><strong>Homothet ≠ homogen:</strong> Nutzenfunktion homogen → Präferenzen homothet; Umkehrung nicht immer.</div><div class="warn-box"><strong>Marshall homogen Grad 0:</strong> $x(\\lambda p, \\lambda m) = x(p,m)$ bei homothetischen Präferenzen.</div></div>`,
+  pkomp: `<div class="section-block"><h3>In der Klausur: Perfekte Komplemente</h3><p>$u = \\min\\{ax_1, bx_2\\}$ → Knick auf $ax_1 = bx_2$. Optimum: Budgetgerade durch Knick. Nachfrage: $x_1 = m/(p_1 + p_2 b/a)$ bei Standardform.</p><div class="warn-box"><strong>Kein Lagrange-Standard:</strong> Optimum am Knick, nicht wo $MRS = p_1/p_2$ im Innern.</div><div class="warn-box"><strong>Proportion fix:</strong> $x_2/x_1 = a/b$ im Optimum — immer auf Strahl.</div></div>`,
+  gewinn: `<div class="section-block"><h3>In der Klausur: Gewinnmaximierung</h3><p>Perfekter Wettbewerb: $p = MC(y^*)$. Monopol: $MR = MC$. Kurzfristig: $p = MC$ bei $p \\geq AVC$. Angebotsfunktion = MC oberhalb Shutdown-Punkt.</p><div class="warn-box"><strong>MR vs. Preis:</strong> Im Monopol $MR < p$ — nie $MR = p$ setzen.</div><div class="warn-box"><strong>Shutdown:</strong> Produzieren nur wenn $p \\geq AVC$ kurzfristig; langfristig $p \\geq AC$.</div></div>`,
+  marshall: `<div class="section-block"><h3>In der Klausur: Marshallsche Nachfrage</h3><p>$x_i(p,m)$ aus Nutzenmaximierung. Slutsky zerlegen: Substitution (Hicks) + Einkommen. Normal: $\\partial x_i/\\partial m > 0$; inferior: $< 0$. Cobb-Douglas: $x_i = \\alpha_i m/p_i$.</p><div class="warn-box"><strong>Walras vs. Marshall:</strong> Marshall hält $m$ fix; Hicks hält $\\bar u$ fix — unterschiedliche Experimente.</div><div class="warn-box"><strong>Homogenität Grad 0:</strong> $x(\\lambda p, \\lambda m) = x(p,m)$ — Geldneutralität der Nachfrage.</div></div>`,
+  anfang: `<div class="section-block"><h3>In der Klausur: Slutsky mit Anfangsausstattung</h3><p>Budget: $p_1 x_1 + p_2 x_2 = p_1 \\bar x_1 + p_2 \\bar x_2$ (Endowment). Slutsky mit Endowment: $\\Delta x_i = \\Delta h_i - \\bar x_i \\Delta p_i/p_i$ (approx.). Einkommenseffekt hängt von Anfangsbesitz ab.</p><div class="warn-box"><strong>Endowment-Effekt:</strong> Preiserhöhung des eigenen Guts wirkt wie Einkommensgewinn (Angebotskurve Arbeitsmarkt).</div><div class="warn-box"><strong>Budgetlinie dreht:</strong> Bei Endowment durch Endowment-Punkt, nicht durch Achsenabschnitt.</div></div>`
+};
+
+for (const id of Object.keys(MIKRO1_KLAUSUR_DEPTH)) {
+  if (CONTENT[id]) {
+    CONTENT[id].theorie = (typeof CONTENT[id].theorie === 'string' ? CONTENT[id].theorie : '') + MIKRO1_KLAUSUR_DEPTH[id];
+  }
+}
 
 for (const id of Object.keys(CONTENT)) {
   const sup = A_PLUS_SUPPLEMENT[id];

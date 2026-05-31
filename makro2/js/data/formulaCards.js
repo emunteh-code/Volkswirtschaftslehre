@@ -359,7 +359,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro2.zinsparitaet.exakte_uip',
     conceptId: 'zinsparitaet',
-    officialNotation: "i_t, i_t^*, E_t, E_{t+1}^e",
+    officialNotation: "$i_t$, $i_t^*$, $E_t$, $E_{t+1}^e$",
     displayFormula: "$$1 + i_t = (1 + i_t^*) \\frac{E_t}{E_{t+1}^e}$$",
     intuition: "Arbitragegleichgewicht",
     derivationSteps: [
@@ -411,7 +411,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro2.zinsparitaet.exakte_uip_merksatz',
     conceptId: 'zinsparitaet',
-    officialNotation: "i_t, i_t^*, E_t, E_{t+1}^e",
+    officialNotation: "$i_t$, $i_t^*$, $E_t$, $E_{t+1}^e$",
     displayFormula: "$$1 + i_t = (1 + i_t^*) \\frac{E_t}{E_{t+1}^e}$$",
     intuition: "Arbitragegleichgewicht",
     derivationSteps: [
@@ -2335,7 +2335,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro2.goldene_sparquote.goldene_regel',
     conceptId: 'goldene_sparquote',
-    officialNotation: "k_{gold}",
+    officialNotation: "$k_{gold}$",
     displayFormula: "$$f'(k_{gold}) = \\delta + n$$",
     intuition: "Grenzprodukt des Kapitals = Break-even-Belastung",
     derivationSteps: [
@@ -2387,7 +2387,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro2.goldene_sparquote.goldene_regel_merksatz',
     conceptId: 'goldene_sparquote',
-    officialNotation: "k_{gold}",
+    officialNotation: "$k_{gold}$",
     displayFormula: "$$f'(k_{gold}) = \\delta + n$$",
     intuition: "Grenzprodukt des Kapitals = Break-even-Belastung",
     derivationSteps: [

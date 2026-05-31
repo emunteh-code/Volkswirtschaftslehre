@@ -801,7 +801,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.monopol.dwl',
     conceptId: 'monopol',
-    officialNotation: "y_m, y_{vk}, p(y), MC(y)",
+    officialNotation: "$y_m$, $y_{vk}$, $p(y)$, $MC(y)$",
     displayFormula: "$$DWL = \\int_{y_m}^{y_{vk}} [p(y) - MC(y)]\\, dy$$",
     intuition: "Harberger-Dreieck",
     derivationSteps: [
@@ -827,7 +827,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.allg_elastizit_t',
     conceptId: 'elast',
-    officialNotation: "\\varepsilon_{A,B}, A, B",
+    officialNotation: "$\\varepsilon_{A,B}$, A, B",
     displayFormula: "$$\\varepsilon_{A,B} = \\frac{dA}{dB} \\cdot \\frac{B}{A}$$",
     intuition: "Relative Änderung A je 1% Änderung B",
     derivationSteps: [
@@ -853,7 +853,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.einkommenselastizit_t',
     conceptId: 'elast',
-    officialNotation: "\\varepsilon_{x,m}, x, m",
+    officialNotation: "$\\varepsilon_{x,m}$, x, m",
     displayFormula: "$$\\varepsilon_{x,m} = \\frac{\\partial x}{\\partial m} \\cdot \\frac{m}{x}$$",
     intuition: ">1 Luxus, <1 notwendig, <0 inferior",
     derivationSteps: [
@@ -879,7 +879,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.preiselastizit_t',
     conceptId: 'elast',
-    officialNotation: "\\varepsilon_{x,p}, x, p",
+    officialNotation: "$\\varepsilon_{x,p}$, x, p",
     displayFormula: "$$\\varepsilon_{x,p} = \\frac{\\partial x}{\\partial p} \\cdot \\frac{p}{x}$$",
     intuition: "Normalfall < 0",
     derivationSteps: [
@@ -905,7 +905,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.elast.kreuzpreiselastizit_t',
     conceptId: 'elast',
-    officialNotation: "\\varepsilon_{x_i,p_j}, x_i, p_j",
+    officialNotation: "$\\varepsilon_{x_i,p_j}$, $x_i$, $p_j$",
     displayFormula: "$$\\varepsilon_{x_i,p_j} = \\frac{\\partial x_i}{\\partial p_j} \\cdot \\frac{p_j}{x_i}$$",
     intuition: ">0 Substitute, <0 Komplemente",
     derivationSteps: [
@@ -1373,7 +1373,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.gk_dk.kostenelastizit_t',
     conceptId: 'gk_dk',
-    officialNotation: "\\varepsilon_{C,y}, k",
+    officialNotation: "$\\varepsilon_{C,y}$, k",
     displayFormula: "$$\\varepsilon_{C,y} = \\frac{MC}{AC} = \\frac{1}{k}$$",
     intuition: "Kehrwert der Skalenelastizität",
     derivationSteps: [
@@ -1581,7 +1581,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.ordinal.grs_invariant',
     conceptId: 'ordinal',
-    officialNotation: "MU_{1,v}, MU_{2,v}, f'",
+    officialNotation: "$MU_{1,v}$, $MU_{2,v}$, $f'$",
     displayFormula: "$$\\frac{MU_{1,v}}{MU_{2,v}} = \\frac{f' \\cdot MU_{1,u}}{f' \\cdot MU_{2,u}} = \\frac{MU_{1,u}}{MU_{2,u}}$$",
     intuition: "Kettenregel: f kürzt sich heraus",
     derivationSteps: [
@@ -1893,7 +1893,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.homothet.einkommenselastizit_t',
     conceptId: 'homothet',
-    officialNotation: "\\varepsilon_{x,m}, x, m",
+    officialNotation: "$\\varepsilon_{x,m}$, x, m",
     displayFormula: "$$\\varepsilon_{x,m} = 1$$",
     intuition: "Für alle Güter bei homothetischen Präferenzen",
     derivationSteps: [
@@ -2465,7 +2465,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro1.skalener.wicksell_johnson',
     conceptId: 'skalener',
-    officialNotation: "\\varepsilon_{y,\\lambda}, \\varepsilon_{y,L}, \\varepsilon_{y,K}",
+    officialNotation: "$\\varepsilon_{y,\\lambda}$, $\\varepsilon_{y,L}$, $\\varepsilon_{y,K}$",
     displayFormula: "$$\\varepsilon_{y,\\lambda} = \\varepsilon_{y,L} + \\varepsilon_{y,K} = k$$",
     intuition: "Skalenelastizität = Summe der Teile",
     derivationSteps: [

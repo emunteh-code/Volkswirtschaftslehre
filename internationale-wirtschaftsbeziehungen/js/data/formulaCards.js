@@ -125,7 +125,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'internationale-wirtschaftsbeziehungen.ricardo.opportunit_tskosten_von_x',
     conceptId: 'ricardo',
-    officialNotation: "a_{LX}, a_{LY}",
+    officialNotation: "$a_{LX}$, $a_{LY}$",
     displayFormula: "$$OK_X = \\frac{a_{LX}}{a_{LY}}$$",
     intuition: "Arbeitsstunden für X relativ zu Y.",
     derivationSteps: [
@@ -177,7 +177,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'internationale-wirtschaftsbeziehungen.ricardo.opportunit_tskosten_von_x_merksa',
     conceptId: 'ricardo',
-    officialNotation: "a_{LX}, a_{LY}",
+    officialNotation: "$a_{LX}$, $a_{LY}$",
     displayFormula: "$$OK_X = \\frac{a_{LX}}{a_{LY}}$$",
     intuition: "Arbeitsstunden für X relativ zu Y.",
     derivationSteps: [
@@ -463,7 +463,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'internationale-wirtschaftsbeziehungen.gravitation.gravitation',
     conceptId: 'gravitation',
-    officialNotation: "GDP_i, GDP_j, Dist_{ij}",
+    officialNotation: "$GDP_i$, $GDP_j$, $Dist_{ij}$",
     displayFormula: "$$Trade_{ij} \\propto \\frac{GDP_i \\cdot GDP_j}{Dist_{ij}}$$",
     intuition: "Große Länder handeln viel, Distanz bremst.",
     derivationSteps: [
@@ -515,7 +515,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'internationale-wirtschaftsbeziehungen.gravitation.gravitation_merksatz',
     conceptId: 'gravitation',
-    officialNotation: "GDP_i, GDP_j, Dist_{ij}",
+    officialNotation: "$GDP_i$, $GDP_j$, $Dist_{ij}$",
     displayFormula: "$$Trade_{ij} \\propto \\frac{GDP_i \\cdot GDP_j}{Dist_{ij}}$$",
     intuition: "Große Länder handeln viel, Distanz bremst.",
     derivationSteps: [

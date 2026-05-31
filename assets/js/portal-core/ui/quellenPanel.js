@@ -15,6 +15,7 @@ import {
   SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE,
   getSourceMaterialsAvailability
 } from '../utils/deployEnvironment.js';
+import { renderMathTitle } from './formatMathInTitle.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -78,7 +79,7 @@ function renderLayerBreakdown(rows) {
 <h3>Nach Portalbereich</h3>
 <div class="quellen-panel-layer-grid">
 ${rows.map((row) => `<div class="quellen-panel-layer-row">
-<span class="quellen-panel-layer-k">${escapeHtml(row.title)}</span>
+<span class="quellen-panel-layer-k">${renderMathTitle(row.title)}</span>
 <span class="quellen-panel-layer-v">${escapeHtml(row.line)}</span>
 </div>`).join('')}
 </div>

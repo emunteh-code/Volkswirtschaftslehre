@@ -333,7 +333,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mathematik.exp_log_inverse.log_differenz',
     conceptId: 'exp_log_inverse',
-    officialNotation: "Y_t, Y_{t-1}",
+    officialNotation: "$Y_t$, $Y_{t-1}$",
     displayFormula: "$$\\ln Y_t-\\ln Y_{t-1}\\approx \\frac{Y_t-Y_{t-1}}{Y_{t-1}}$$",
     intuition: "Näherung der Wachstumsrate bei kleinen Veränderungen.",
     derivationSteps: [
@@ -411,7 +411,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mathematik.summen_logik_beweise.doppelsumme',
     conceptId: 'summen_logik_beweise',
-    officialNotation: "i, j, a_{ij}",
+    officialNotation: "$i$, $j$, $a_{ij}$",
     displayFormula: "$$\\sum_{i=1}^n\\sum_{j=1}^m a_{ij}$$",
     intuition: "Zweifaches Summieren über zwei Indizes.",
     derivationSteps: [
@@ -1165,7 +1165,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mathematik.multivariate_optimierung.hesse_matrix',
     conceptId: 'multivariate_optimierung',
-    officialNotation: "f_{xx}, f_{xy}",
+    officialNotation: "$f_{xx}$, $f_{xy}$",
     displayFormula: "$$H=\\begin{pmatrix}f_{xx}&f_{xy}\\\\ f_{yx}&f_{yy}\\end{pmatrix}$$",
     intuition: "Sammelt die zweiten partiellen Ableitungen.",
     derivationSteps: [

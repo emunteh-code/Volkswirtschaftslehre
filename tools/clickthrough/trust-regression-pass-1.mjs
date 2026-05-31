@@ -128,6 +128,137 @@ async function runMathLeak(page) {
   }
 }
 
+/** --- Header math: no semantic fragmentation; unicode titles should typeset --- */
+const HEADER_MATH_CASES = [
+  { route: '/mikro1/index.html', id: 'lambda', tab: 'theorie', label: 'mikro1/lambda/theorie' },
+  { route: '/mikro1/index.html', id: 'cobbd', tab: 'formeln', label: 'mikro1/cobbd/formeln' },
+  { route: '/oekonometrie/index.html', id: 'matrix_notation', tab: 'theorie', label: 'oeko/matrix_notation/theorie' },
+  { route: '/internationale-wirtschaftsbeziehungen/index.html', id: 'gravitation', tab: 'formeln', label: 'iwb/gravitation/formeln' }
+];
+
+async function runHeaderMathIntegrity(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const t of HEADER_MATH_CASES) {
+    await gotoConcept(page, t.route, t.id);
+    if (t.tab !== 'theorie') {
+      const opened = await clickTab(page, t.tab);
+      if (!opened) {
+        fail({
+          system: 'header-math',
+          route: t.label,
+          surface: t.tab,
+          viewport: '1280',
+          type: 'tab-missing',
+          why: 'Cannot open tab for header math integrity scan.'
+        });
+        continue;
+      }
+    }
+    await page.waitForTimeout(1400);
+    const snap = await page.evaluate(() => {
+      const inspect = (selector) => {
+        const el = document.querySelector(selector);
+        if (!el) return { missing: true };
+        return {
+          fragmented: !!el.querySelector('.math-semantic'),
+          typeset: !!el.querySelector('mjx-container'),
+          text: (el.textContent || '').trim().slice(0, 100)
+        };
+      };
+      return {
+        conceptTitle: inspect('#content .concept-title'),
+        formulaLabels: [...document.querySelectorAll('#content .f-label')].slice(0, 6).map((el, index) => ({
+          index,
+          fragmented: !!el.querySelector('.math-semantic'),
+          typeset: !!el.querySelector('mjx-container'),
+          html: el.innerHTML.slice(0, 160),
+          text: (el.textContent || '').trim().slice(0, 80)
+        }))
+      };
+    });
+
+    if (snap.conceptTitle.missing) {
+      fail({
+        system: 'header-math',
+        route: t.label,
+        surface: t.tab,
+        viewport: '1280',
+        type: 'concept-title-missing',
+        why: 'Expected .concept-title in #content.'
+      });
+    } else if (snap.conceptTitle.fragmented) {
+      fail({
+        system: 'header-math',
+        route: t.label,
+        surface: t.tab,
+        viewport: '1280',
+        type: 'concept-title-fragmented',
+        why: `Concept title still has .math-semantic spans: "${snap.conceptTitle.text}"`
+      });
+    }
+
+    if (t.tab === 'formeln') {
+      const badLabel = snap.formulaLabels.find((row) => row.fragmented);
+      if (badLabel) {
+        fail({
+          system: 'header-math',
+          route: t.label,
+          surface: t.tab,
+          viewport: '1280',
+          type: 'formula-label-fragmented',
+          why: `Formula card label #${badLabel.index} has .math-semantic spans: "${badLabel.text}"`
+        });
+      }
+      const needsTypeset = snap.formulaLabels.find((row) => /\$|x_1|x_2|lambda|\\lambda|GDP|Dist_/i.test(row.text) && !row.typeset);
+      if (needsTypeset) {
+        fail({
+          system: 'header-math',
+          route: t.label,
+          surface: t.tab,
+          viewport: '1280',
+          type: 'formula-label-not-typeset',
+          why: `Formula card label #${needsTypeset.index} looks math-heavy but lacks mjx-container: "${needsTypeset.text}"`
+        });
+      }
+    }
+
+    if (t.id === 'lambda' && snap.conceptTitle.typeset !== true) {
+      fail({
+        system: 'header-math',
+        route: t.label,
+        surface: t.tab,
+        viewport: '1280',
+        type: 'concept-title-not-typeset',
+        why: `Expected MathJax typesetting in concept title for λ concept; got "${snap.conceptTitle.text}"`
+      });
+    }
+
+    if (t.id === 'gravitation' && t.tab === 'formeln') {
+      const gdpLabel = snap.formulaLabels.find((row) => /GDP|Dist_\{/i.test(row.text));
+      if (gdpLabel?.fragmented) {
+        fail({
+          system: 'header-math',
+          route: t.label,
+          surface: t.tab,
+          viewport: '1280',
+          type: 'iwb-gravitation-label-fragmented',
+          why: `IWB gravitation proof label has .math-semantic spans: "${gdpLabel.text}"`
+        });
+      }
+      if (gdpLabel && !gdpLabel.typeset) {
+        fail({
+          system: 'header-math',
+          route: t.label,
+          surface: t.tab,
+          viewport: '1280',
+          type: 'iwb-gravitation-label-not-typeset',
+          why: `Expected MathJax typesetting for GDP/Dist proof-card label; got "${gdpLabel.text}"`
+        });
+      }
+    }
+  }
+}
+
 /** --- Provenance footer (expects strip for listed concepts) --- */
 const PROVENANCE_EXPECT = [
   { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget', expectCoverage: 'page-anchors' },
@@ -993,6 +1124,7 @@ try {
   page.setDefaultTimeout(32000);
 
   await runMathLeak(page);
+  await runHeaderMathIntegrity(page);
   await runProvenance(page);
   await runAufgabenPracticeOnly(page);
   await runFormelnKlausurmethodik(page);

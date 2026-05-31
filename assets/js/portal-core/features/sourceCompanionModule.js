@@ -17,7 +17,9 @@ import {
   SOURCE_PDF_OPEN_DISABLED_LABEL,
   SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE,
   getSourceMaterialsAvailability,
-  isPublicStaticDeploy
+  isPublicStaticDeploy,
+  renderOfficialMaterialsNoticeHtml,
+  sourcePdfOpenDisabledByDefault
 } from '../utils/deployEnvironment.js';
 
 const DEFAULT_LAYER_LABELS = Object.freeze({
@@ -477,11 +479,11 @@ ${mapped.map((concept) => `<button type="button" onclick="window.__navigate('${e
   };
 
   function renderDeployNotice() {
-    if (state.sourcePdfAvailable !== false) return '';
-    return `<aside class="source-companion-deploy-notice" role="note">
-<strong>Kurs-PDFs nicht in dieser Online-Version</strong>
-<p>${escapeHtml(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}</p>
-</aside>`;
+    if (state.sourcePdfAvailable !== false && !sourcePdfOpenDisabledByDefault()) return '';
+    return renderOfficialMaterialsNoticeHtml().replace(
+      'class="official-materials-notice"',
+      'class="official-materials-notice source-companion-deploy-notice"'
+    );
   }
 
   function render() {

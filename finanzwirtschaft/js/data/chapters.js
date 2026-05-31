@@ -1311,7 +1311,6 @@ for (const ch of CHAPTERS) {
   if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
   entry.theorie = `${html}${section(
     'Klausurtransfer (source-distilled)',
-    `<p><strong>Prüfungsstandard:</strong> Zahlungsstrom/Zeitpunkt → Diskontierung (NPV/Barwert) → Entscheidungsregel; Kalkulationszins, Risiko und Steuern explizit.</p>
-<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Finanz-VL; Spezialfälle IRR/mehrfache Wurzeln in Primär-PDFs.</p>`
+    `<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>`
   )}`;
 }

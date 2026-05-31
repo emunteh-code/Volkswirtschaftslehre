@@ -1116,6 +1116,109 @@ async function runSecondaryOverflow(page) {
   }
 }
 
+/** --- Hash routing #concept/tab (shareable deep links) --- */
+async function runHashRouting(page) {
+  await page.goto(`${base}/mikro1/index.html#budget/aufgaben`, { waitUntil: 'networkidle' });
+  await dismissConsent(page);
+  await page.waitForFunction(() => typeof window.__navigate === 'function');
+  await page.waitForTimeout(500);
+
+  const loadState = await page.evaluate(() => {
+    const aufgabenBtn = document.querySelector('#tabRow button[data-tab="aufgaben"]');
+    const activeNav = document.querySelector('#sidebar .nav-item.active');
+    return {
+      hash: location.hash,
+      aufgabenActive: aufgabenBtn?.classList.contains('active') ?? false,
+      navBudget: activeNav?.dataset?.concept === 'budget' || activeNav?.textContent?.includes('Budget'),
+      practiceVisible: Boolean(
+        document.querySelector('#content .mikro1-practice, #content .practice-section-header, #content .problem-card')
+      )
+    };
+  });
+
+  if (!loadState.hash.includes('budget') || !loadState.hash.includes('aufgaben')) {
+    fail({
+      system: 'hash-routing',
+      route: 'mikro1/index.html#budget/aufgaben',
+      surface: 'load',
+      viewport: '1280',
+      type: 'hash-not-applied',
+      why: `Expected #budget/aufgaben on load, got ${loadState.hash}`
+    });
+  }
+  if (!loadState.aufgabenActive) {
+    fail({
+      system: 'hash-routing',
+      route: 'mikro1/budget/aufgaben',
+      surface: 'aufgaben-tab',
+      viewport: '1280',
+      type: 'tab-not-active',
+      why: 'Hash load did not activate Aufgaben tab.'
+    });
+  }
+
+  await page.locator('#tabRow button[data-tab="formeln"]').click();
+  await page.waitForTimeout(350);
+  const afterTab = await page.evaluate(() => location.hash);
+  if (!afterTab.includes('formeln')) {
+    fail({
+      system: 'hash-routing',
+      route: 'mikro1/budget/formeln',
+      surface: 'tab-switch',
+      viewport: '1280',
+      type: 'hash-not-updated',
+      why: `Tab switch should update hash to include formeln, got ${afterTab}`
+    });
+  }
+}
+
+/** --- Mobile shell spot check (375px content width) --- */
+async function runMobileShell375(page) {
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto(`${base}/mikro1/index.html#budget/theorie`, { waitUntil: 'networkidle' });
+  await dismissConsent(page);
+  await page.waitForFunction(() => typeof window.__navigate === 'function');
+  await page.waitForTimeout(400);
+
+  const shell = await page.evaluate(() => {
+    const content = document.getElementById('content');
+    const main = document.getElementById('main');
+    const tabRow = document.getElementById('tabRow');
+    const cs = content ? getComputedStyle(content) : null;
+    const tr = tabRow ? getComputedStyle(tabRow) : null;
+    return {
+      contentWidth: content?.getBoundingClientRect().width ?? 0,
+      viewport: window.innerWidth,
+      mainMarginLeft: main ? getComputedStyle(main).marginLeft : null,
+      tabSticky: tr?.position === 'sticky',
+      sidebarHidden: getComputedStyle(document.getElementById('sidebar')).transform.includes('-105') ||
+        getComputedStyle(document.getElementById('sidebar')).transform !== 'none',
+      overflow: document.documentElement.scrollWidth > window.innerWidth + 24
+    };
+  });
+
+  if (shell.overflow) {
+    fail({
+      system: 'mobile-shell',
+      route: 'mikro1/budget/theorie',
+      surface: '375px',
+      viewport: 'mobile-375',
+      type: 'horizontal-overflow',
+      why: 'Content overflows at 375px viewport.'
+    });
+  }
+  if (shell.contentWidth < shell.viewport * 0.88) {
+    fail({
+      system: 'mobile-shell',
+      route: 'mikro1/budget/theorie',
+      surface: '375px',
+      viewport: 'mobile-375',
+      type: 'content-squished',
+      why: `#content width ${shell.contentWidth}px vs viewport ${shell.viewport}px — squished layout risk.`
+    });
+  }
+}
+
 await waitForHttp(`${base}/statistik/index.html`);
 const browser = await chromium.launch();
 
@@ -1143,6 +1246,8 @@ try {
   await runOverflow(page, 390, 844, 'mobile-390');
   await runOverflow(page, 1200, 900, 'tablet-1200');
   await runSecondaryOverflow(page);
+  await runHashRouting(page);
+  await runMobileShell375(page);
 
   await page.close();
 

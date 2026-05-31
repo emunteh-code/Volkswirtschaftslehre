@@ -32,7 +32,7 @@
     const isFileProtocol = window.location.protocol === 'file:';
     const isHttpDeploy =
       window.location.protocol === 'https:' || window.location.protocol === 'http:';
-    const delayMs = isFileProtocol ? 2500 : isHttpDeploy ? 6000 : 4000;
+    const delayMs = isFileProtocol ? 2500 : isHttpDeploy ? 10000 : 4000;
     window.setTimeout(() => {
       if (!window.__jsLoaded) {
         const el = document.getElementById('jsError');

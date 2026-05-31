@@ -1,4 +1,4 @@
-import { createRenderer, KONCEPT_CHECK_HOME_ACTION_CARD_HTML } from '../../../assets/js/portal-core/ui/renderer.js';
+import { createRenderer, buildKonzeptCheckHomeCardHtml } from '../../../assets/js/portal-core/ui/renderer.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { CHAPTERS, CONTENT } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
@@ -49,5 +49,5 @@ export const {
   sourceMaterialBaseUrl: '../source-materials/Makroökonomik I/',
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
   taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT,
-  extraHomeActionCardsHtml: KONCEPT_CHECK_HOME_ACTION_CARD_HTML,
+  extraHomeActionCardsHtml: buildKonzeptCheckHomeCardHtml(true),
 });

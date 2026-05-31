@@ -1,4 +1,12 @@
-import { getSourceMaterialsAvailability } from './utils/deployEnvironment.js';
+import {
+  getSourceMaterialsAvailability,
+  primeSourceMaterialsAvailability
+} from './utils/deployEnvironment.js';
+import {
+  parseConceptHash,
+  replaceConceptHash,
+  resolveAvailableTab
+} from './utils/hashRouting.js';
 
 export function createPortalApp({
   courseLabel,
@@ -111,10 +119,15 @@ export function createPortalApp({
     panel.style.display = hasContent ? "" : "none";
   }
 
-  function navigate(id) {
+  let applyingHashRoute = false;
+
+  function navigate(id, { tab = "theorie", updateHash = true } = {}) {
+    const tabRow = document.getElementById("tabRow");
+    const resolvedTab = id ? resolveAvailableTab(tabRow, tab) : "theorie";
+
     appState.setCurrent(id);
-    appState.setCurrentTab("theorie");
-    setRendererState(id, "theorie");
+    appState.setCurrentTab(resolvedTab);
+    setRendererState(id, resolvedTab);
 
     // Scroll to top instantly when switching topics
     window.scrollTo(0, 0);
@@ -126,10 +139,12 @@ export function createPortalApp({
       window.__currentGraphId = id;
       updateProgressUI(loadProgress());
       updateNavBadges();
-      renderContent(id, "theorie", initGraph);
-      renderRightPanel(id, { navigate, currentTab: "theorie" });
+      if (tabRow) tabRow.classList.add("visible");
+      renderContent(id, resolvedTab, initGraph);
+      renderRightPanel(id, { navigate, currentTab: resolvedTab });
       syncRightPanelVisibility();
-      setActiveTab("theorie");
+      setActiveTab(resolvedTab);
+      if (updateHash && !applyingHashRoute) replaceConceptHash(id, resolvedTab);
       // Focus the main heading for keyboard and screen-reader users
       const heading = document.querySelector("#content h1");
       if (heading) heading.focus({ preventScroll: true });
@@ -138,18 +153,43 @@ export function createPortalApp({
       renderHome();
       clearRightPanel();
       syncRightPanelVisibility();
+      if (updateHash && !applyingHashRoute) replaceConceptHash("", "theorie");
     }
   }
 
-  function switchTab(tab) {
+  function switchTab(tab, { updateHash = true } = {}) {
     if (!appState.current) return;
-    appState.setCurrentTab(tab);
-    setRendererState(appState.current, tab);
-    setActiveTab(tab);
-    renderContent(appState.current, tab, initGraph);
-    renderRightPanel(appState.current, { navigate, currentTab: tab });
+    const tabRow = document.getElementById("tabRow");
+    const resolvedTab = resolveAvailableTab(tabRow, tab);
+    appState.setCurrentTab(resolvedTab);
+    setRendererState(appState.current, resolvedTab);
+    setActiveTab(resolvedTab);
+    renderContent(appState.current, resolvedTab, initGraph);
+    renderRightPanel(appState.current, { navigate, currentTab: resolvedTab });
+    if (updateHash && !applyingHashRoute) replaceConceptHash(appState.current, resolvedTab);
     const content = document.getElementById("content");
     if (content) content.focus();
+  }
+
+  function applyConceptHashRoute({ updateHash = false } = {}) {
+    const { conceptId, tab } = parseConceptHash();
+    if (!conceptId) {
+      if (appState.current) navigate(null, { updateHash });
+      else renderHome();
+      return;
+    }
+    const chapter = chapters.find((entry) => entry.id === conceptId);
+    if (!chapter) return;
+    applyingHashRoute = true;
+    try {
+      if (appState.current !== conceptId) {
+        navigate(conceptId, { tab: tab || "theorie", updateHash });
+      } else if (tab && tab !== appState.currentTab) {
+        switchTab(tab, { updateHash });
+      }
+    } finally {
+      applyingHashRoute = false;
+    }
   }
 
   function showSRSReview() {
@@ -330,6 +370,7 @@ export function createPortalApp({
   }
 
   window.__navigate = navigate;
+  window.__switchTab = switchTab;
   window.__renderHome = renderHome;
   window.__showDashboard = openDashboard;
   window.__startExam = openQuickExam;
@@ -407,8 +448,9 @@ export function createPortalApp({
       jsError.setAttribute("inert", "");
       jsError.removeAttribute("role");
     }
+    primeSourceMaterialsAvailability();
     if (sourceCompanion) {
-      getSourceMaterialsAvailability();
+      void getSourceMaterialsAvailability();
     }
     initTheme();
     buildNav(navigate);
@@ -425,6 +467,8 @@ export function createPortalApp({
         });
       });
     }
+
+    window.addEventListener("hashchange", () => applyConceptHashRoute({ updateHash: false }));
 
     const searchInput = document.getElementById("navSearch");
     if (searchInput) {
@@ -458,10 +502,25 @@ export function createPortalApp({
     initConsent();
     portalBridge?.();
 
+    const hashRoute = parseConceptHash();
+    const hashChapter =
+      hashRoute.conceptId && chapters.find((chapter) => chapter.id === hashRoute.conceptId);
     const lastId = loadLastId();
     const lastExists = lastId && chapters.find((chapter) => chapter.id === lastId);
-    if (lastExists) navigate(lastId);
-    else {
+
+    if (hashChapter) {
+      applyingHashRoute = true;
+      try {
+        navigate(hashChapter.id, {
+          tab: hashRoute.tab || "theorie",
+          updateHash: false
+        });
+      } finally {
+        applyingHashRoute = false;
+      }
+    } else if (lastExists) {
+      navigate(lastId);
+    } else {
       setActiveNav(null);
       renderHome();
       clearRightPanel();

@@ -15,7 +15,8 @@ import {
   SOURCE_PDF_OPEN_DISABLED_LABEL,
   SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE,
   getSourceMaterialsAvailability,
-  isPublicStaticDeploy
+  renderOfficialMaterialsNoticeHtml,
+  sourcePdfOpenDisabledByDefault
 } from '../utils/deployEnvironment.js';
 
 const BASIS_PREFIX = 'Basis: ';
@@ -547,13 +548,6 @@ function buildSourceInspectionRows(layers, sourceMaterialBaseUrl = '') {
   });
 }
 
-function sourcePdfOpenDisabledByDefault() {
-  if (typeof window === 'undefined') return false;
-  if (window.__sourceMaterialsAvailable === false) return true;
-  return window.__sourceMaterialsAvailable == null && isPublicStaticDeploy();
-}
-
-function buildSourceOpenButtonHtml(sourceUrl) {
   if (!sourceUrl) return '';
   if (sourcePdfOpenDisabledByDefault()) {
     return `<button type="button" class="source-provenance-open" disabled aria-disabled="true" title="${escapeAttr(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}" aria-label="${escapeAttr(SOURCE_PDF_OPEN_DISABLED_LABEL)}">${escapeHtml(SOURCE_PDF_OPEN_DISABLED_LABEL)}</button>`;

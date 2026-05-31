@@ -58,7 +58,9 @@ export function createRightPanelRenderer({
   groupConnections = true,
   renderFormulaEqHtml = (formula) => renderSemanticBlock(formula?.eq, { variant: "sidebar" }),
   getFormulaCopyText = (formula) => displayContentToPlainText(formula?.eq),
-  getFormulaDisplayMode = (formula) => getDisplayMode(formula?.eq) || "math"
+  getFormulaDisplayMode = (formula) => getDisplayMode(formula?.eq) || "math",
+  /** When set, hide sidebar formulas if the Formeln tab shows the same cards. */
+  formulaCardsByConcept = {}
 }) {
   function clearRightPanel() {
     const formulasNode = document.getElementById("rpFormulas");
@@ -93,32 +95,11 @@ export function createRightPanelRenderer({
     if (mistakesSection) mistakesSection.classList.add("rp-section--mistakes");
 
     if (formulasNode) {
-      if (isFormulaTab) {
+      const hasFormulaCards = Array.isArray(formulaCardsByConcept[id]) && formulaCardsByConcept[id].length > 0;
+      const hideRailFormulas = isFormulaTab || Boolean(entry?.formeln?.length) || hasFormulaCards;
+      if (hideRailFormulas) {
         formulasNode.innerHTML = "";
         if (formulasSection) formulasSection.hidden = true;
-      } else if (entry?.formeln?.length) {
-        formulasNode.innerHTML = entry.formeln.map((formula, index) => {
-          const mode = getFormulaDisplayMode(formula) || "math";
-          return `<div class="rp-formula rp-formula--${mode}" title="Klicken zum Kopieren" role="button" tabindex="0" data-formula-idx="${index}">
-  <div class="rp-f-name">${formula.label}</div>
-  <div class="rp-f-eq">${renderFormulaEqHtml(formula)}</div>
-</div>`;
-        }).join("");
-
-        formulasNode.querySelectorAll("[data-formula-idx]").forEach((element) => {
-          const formula = entry.formeln[Number.parseInt(element.dataset.formulaIdx || "0", 10)];
-          const copy = () => navigator.clipboard.writeText(getFormulaCopyText(formula)).catch(() => {});
-          element.addEventListener("click", copy);
-          element.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              copy();
-            }
-          });
-        });
-
-        if (typeof renderMath === "function") renderMath(formulasNode);
-        if (formulasSection) formulasSection.hidden = false;
       } else {
         formulasNode.innerHTML = "";
         if (formulasSection) formulasSection.hidden = true;

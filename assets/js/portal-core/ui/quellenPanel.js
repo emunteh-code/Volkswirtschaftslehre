@@ -11,9 +11,9 @@ import {
   pathToHumanLabel
 } from './sourceProvenanceUi.js';
 import {
-  SOURCE_PDF_OPEN_DISABLED_LABEL,
-  SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE,
-  getSourceMaterialsAvailability
+  getSourceMaterialsAvailability,
+  renderOfficialMaterialsNoticeHtml,
+  sourcePdfOpenDisabledByDefault
 } from '../utils/deployEnvironment.js';
 import { renderMathTitle } from './formatMathInTitle.js';
 
@@ -109,6 +109,12 @@ ${buildSourceInspectionHtml(rows)}
 }
 
 function renderPdfStatusNotice() {
+  if (sourcePdfOpenDisabledByDefault()) {
+    return renderOfficialMaterialsNoticeHtml().replace(
+      'class="official-materials-notice"',
+      'class="official-materials-notice quellen-panel-pdf-status quellen-panel-pdf-status--unavailable" data-quellen-pdf-status'
+    );
+  }
   return `<aside class="quellen-panel-pdf-status" data-quellen-pdf-status role="note">
 <strong>PDF-Verfügbarkeit wird geprüft…</strong>
 </aside>`;
@@ -178,11 +184,15 @@ export async function initQuellenPanelInteractions(root) {
   const pdfAvailable = await getSourceMaterialsAvailability();
   root.querySelectorAll('[data-quellen-pdf-status]').forEach((node) => {
     if (pdfAvailable) {
-      node.innerHTML = '<strong>Kurs-PDFs lokal erreichbar</strong><span>Du kannst offizielle Dateien direkt öffnen, wenn der Ordner <code>source-materials/</code> in dieser Umgebung vorhanden ist.</span>';
+      node.innerHTML =
+        '<strong>Kurs-PDFs lokal erreichbar</strong><span>Du kannst offizielle Dateien direkt öffnen, wenn der Ordner <code>source-materials/</code> in dieser Umgebung vorhanden ist.</span>';
       node.classList.add('quellen-panel-pdf-status--available');
-    } else {
-      node.innerHTML = `<strong>${escapeHtml(SOURCE_PDF_OPEN_DISABLED_LABEL)}</strong><span>${escapeHtml(SOURCE_PDF_WEB_UNAVAILABLE_MESSAGE)}</span>`;
-      node.classList.add('quellen-panel-pdf-status--unavailable');
+      node.classList.remove('quellen-panel-pdf-status--unavailable');
+    } else if (!node.classList.contains('quellen-panel-pdf-status--unavailable')) {
+      node.outerHTML = renderOfficialMaterialsNoticeHtml().replace(
+        'class="official-materials-notice"',
+        'class="official-materials-notice quellen-panel-pdf-status quellen-panel-pdf-status--unavailable" data-quellen-pdf-status'
+      );
     }
   });
 

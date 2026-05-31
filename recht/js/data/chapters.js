@@ -259,6 +259,14 @@ export const CONTENT = {
         'Grenzfälle in Klausuren',
         `<p>Schweigen ist im Privatrecht grundsätzlich keine Annahme. Bloßes inneres Einverständnis reicht nicht. Wer nur „denkt“, aber nicht erklärt, schließt keinen Vertrag. Auch invitatio ad offerendum und rechtliche Bindungswirkung musst du sauber auseinanderhalten.</p>
          ${warn('Klassiker:', 'Das bloße Lesen eines Angebots und inneres Zustimmen ersetzen keine Annahmeerklärung. Ohne Kundgabe kein Vertrag.')}`
+      ),
+      section(
+        'Mini-Gutachten (Normzitat)',
+        `<p><strong>Fall:</strong> A mailt B: „Ich verkaufe dir mein Fahrrad für 200 €.“ B liest die Mail, nickt innerlich — antwortet aber nicht. Ist ein Kaufvertrag zustande?</p>
+         <p><strong>Obersatz:</strong> Ein Kaufvertrag nach § 433 BGB setzt wirksamen Vertragsschluss voraus.</p>
+         <p><strong>Definition/Subsumtion:</strong> A’s E-Mail ist ein bindendes Angebot (§ 145 BGB). B gibt keine empfangsbedürftige Annahmeerklärung ab — inneres Einverständnis genügt nicht (§ 151 BGB).</p>
+         <p><strong>Ergebnis:</strong> Kein Vertrag, mangels Annahme.</p>
+         ${warn('Normzitat-Pflicht:', 'Jede Zwischenüberschrift braucht einen Anker (§ 433, § 145, § 130, § 151 BGB). Ohne Norm kein Gutachten-Punkt — auch wenn das Ergebnis stimmt.')}`
       )
     ].join(''),
     formeln: [

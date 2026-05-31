@@ -34,7 +34,7 @@ export const RELEASE_TIER_LABELS = Object.freeze({
 
 export const RELEASE_TIER_TOOLTIPS = Object.freeze({
   core: "Strukturell vollständig (Theorie, Formeln, Aufgaben) und eng an VL-Quellen — empfohlener Einstieg.",
-  beta: "Nutzbare Plattform-Abdeckung; einzelne Konzepte oder Falltiefe können von offiziellen PDFs abweichen.",
+  beta: "Vollständige Struktur, VL-PDFs lokal ergänzen.",
   structural: "Grundgerüst vorhanden; Inhaltstiefe wird noch ausgebaut — PDFs als Primärreferenz."
 });
 
@@ -68,7 +68,7 @@ export const MODULES = [
     releaseTier: "beta",
     sourceCorpusInRepo: true,
     sourceStatusNote:
-      "Offizieller Mikro-II-Korpus unter source-materials/. Marktversagen-Kapitel (Externa, öffentliche Güter) sind platform-added ohne VL-Seitenanker."
+      "Beta: Oligopol, Spieltheorie & AGV nutzbar. Marktversagen-Kapitel ohne VL-Anker — im Modul gekennzeichnet."
   },
   {
     slug: "makro1",

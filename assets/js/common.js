@@ -273,11 +273,11 @@ function showOnboarding(force = false) {
   overlay.innerHTML = `
     <div class="onboarding-card">
       <h2>Willkommen im VWL Lernportal</h2>
-      <p>Dieses System simuliert reale Klausurbedingungen mit <strong>strenger Logikbewertung</strong>.</p>
+      <p>Strukturierte Klausurvorbereitung: Theorie, Aufgaben und Wiederholung an einem Ort.</p>
       <ul class="onboarding-list">
-        <li><strong>Reasoning > Ergebnis:</strong> Ein richtiger Wert bei falscher Logik verfällt (Hard Zero).</li>
-        <li><strong>Pfad-Abhängigkeit:</strong> Folgefehler in der Logik kappen die Gesamtpunktzahl.</li>
-        <li><strong>Validierung:</strong> Nur begründete Aussagen führen zum Erfolg.</li>
+        <li><strong>Schritt für Schritt:</strong> Geführte Aufgaben mit Musterlösungen und Prüfungstransfer.</li>
+        <li><strong>Ehrliche Grenzen:</strong> Schnelltests und Probeklausuren sind Plattform-Simulationen — keine offiziellen PDFs.</li>
+        <li><strong>Fortschritt lokal:</strong> Dein Lernstand bleibt in diesem Browser gespeichert.</li>
       </ul>
       <button class="lp-hero-btn" id="closeOnboarding">Verstanden & Starten</button>
     </div>
@@ -367,7 +367,7 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
   const specialStatus = module.sourceCorpusInRepo === false
     ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
     : module.sourceStatusNote
-      ? `<p class="lp-tile-note">${module.sourceStatusNote}</p>`
+      ? `<p class="lp-tile-note">${module.sourceStatusNote} <a class="lp-tile-note-link" href="${module.href}">Modul öffnen →</a></p>`
       : "";
   const coreClass = examReadyCore ? " lp-tile--exam-ready" : "";
   const tier = module.releaseTier || "beta";
@@ -404,6 +404,18 @@ async function renderLandingPage() {
 
   const countLabel = document.getElementById("moduleCountLabel");
   if (countLabel) countLabel.textContent = `${furtherModules.length} Module`;
+
+  const examCramNode = document.getElementById("examCramActions");
+  if (examCramNode) {
+    examCramNode.innerHTML = `
+      <a class="lp-exam-cram-btn lp-exam-cram-btn--primary" href="./mikro1/index.html#budget/aufgaben">
+        Mikro I: Budget + Aufgaben starten →
+      </a>
+      <a class="lp-exam-cram-btn" href="./statistik/index.html#deskriptiv/aufgaben">
+        Statistik: Deskriptiv + Aufgaben →
+      </a>
+    `;
+  }
 
   const lastModule = pickInitialLandingModule();
   const defaultModule = lastModule || coreModules[0] || PUBLIC_MODULES[0] || null;

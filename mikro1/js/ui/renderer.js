@@ -474,6 +474,41 @@ function stripExamTransferIntro() {
   document.querySelectorAll('.exam-drill-panel > p').forEach((intro) => intro.remove());
 }
 
+function ensureRecommendedStartStrip() {
+  const content = document.getElementById('content');
+  if (!content || content.querySelector('.home-recommended-start')) return;
+
+  const progress = loadProgress();
+  const weak = Object.entries(progress)
+    .map(([id, entry]) => {
+      const total = (entry?.correct || 0) + (entry?.wrong || 0);
+      if (total < 2) return null;
+      return { id, accuracy: (entry.correct || 0) / total };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.accuracy - b.accuracy)[0];
+
+  const budget = CHAPTERS.find((ch) => ch.id === 'budget');
+  const weakChapter = weak ? CHAPTERS.find((ch) => ch.id === weak.id) : null;
+  if (!budget && !weakChapter) return;
+
+  const strip = document.createElement('div');
+  strip.className = 'home-recommended-start';
+  strip.setAttribute('role', 'note');
+  strip.innerHTML = `<span class="home-recommended-label">Empfohlener Start</span>
+<div class="home-recommended-links">
+${budget ? `<button type="button" class="link-btn" onclick="window.__navigate('budget')">Budget (Theorie)</button>` : ''}
+${weakChapter && weakChapter.id !== 'budget' ? `<button type="button" class="link-btn" onclick="window.__navigate('${weakChapter.id}', { tab: 'aufgaben' })">Schwach: ${weakChapter.title}</button>` : `<button type="button" class="link-btn" onclick="window.__navigate('budget', { tab: 'aufgaben' })">Budget (Aufgaben)</button>`}
+</div>`;
+
+  const grid = content.querySelector('.home-grid');
+  if (grid?.parentElement) {
+    grid.parentElement.insertBefore(strip, grid);
+  } else {
+    content.appendChild(strip);
+  }
+}
+
 function ensureMikroHomeExamCard() {
   const content = document.getElementById('content');
   const actions = content?.querySelector('.home-action-row');
@@ -541,6 +576,7 @@ function enhanceRenderedSurface(conceptId) {
     decorateConceptLinks();
   } else {
     ensureMikroHomeExamCard();
+    ensureRecommendedStartStrip();
   }
 
   markRenderSettled(false);

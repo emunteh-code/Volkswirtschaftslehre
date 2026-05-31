@@ -6173,3 +6173,320 @@ body.light-mode #content .source-provenance-mark {
     margin-left: 40px;
   }
 }
+
+/* ============================================================
+   MOBILE MODULE SHELL — ≤900px (375 / 320 student audit)
+   Drawer sidebar, full-width #content, sticky tab row,
+   hide desktop-only chrome. Loads after module styles.css.
+   ============================================================ */
+@media (max-width: 900px) {
+  #sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1200;
+    width: min(100vw, 320px);
+    max-width: 100%;
+    transform: translateX(-105%);
+    transition: transform 0.24s var(--ease-out, ease-out);
+    box-shadow: none;
+  }
+
+  #sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.35);
+  }
+
+  #sidebarOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1190;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  #sidebarOverlay.show {
+    display: block;
+  }
+
+  #main {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  #content {
+    max-width: 100% !important;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  #content[data-tab="graph"] {
+    max-width: 100% !important;
+  }
+
+  #rightPanel,
+  #shortcutHint,
+  .focus-btn,
+  #topbar-actions .shortcut-hint-inline {
+    display: none !important;
+  }
+
+  #mobileMenuBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  #tabRow.tab-row {
+    position: sticky;
+    top: 0;
+    z-index: 110;
+    background: color-mix(in srgb, var(--bg) 92%, var(--card) 8%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #tabRow.tab-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  #tabRow .tab-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-height: 44px;
+  }
+
+  body.focus-mode #sidebar {
+    transform: translateX(-105%);
+  }
+
+  body.focus-mode #main {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 428px) {
+  #content {
+    padding: clamp(14px, 4vw, 20px) clamp(12px, 3.5vw, 16px) clamp(48px, 12vw, 64px);
+  }
+
+  #topbar-main {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .breadcrumb {
+    font-size: 11px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #content .home-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #content .home-action-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 375px) {
+  #content .section-block,
+  #content .problem-card {
+    padding: 14px 12px;
+  }
+
+  #tabRow .tab-btn {
+    padding: 6px 10px;
+    font-size: 11.5px;
+  }
+}
+
+/* Official PDF notice (module home, Quellen, companion) */
+.official-materials-notice {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--accent) 10%);
+  border-radius: var(--r-md, 12px);
+  background: color-mix(in srgb, var(--surface, var(--card)) 94%, var(--accent) 6%);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.official-materials-notice strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.official-materials-notice--compact {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 0.8125rem;
+}
+
+.module-home-pdf-notice {
+  max-width: min(100%, var(--content-body-max, 56rem));
+  margin-inline: auto;
+}
+
+.official-materials-ilias-link {
+  margin: 8px 0 0;
+}
+
+.official-materials-ilias-link a {
+  font-weight: 600;
+}
+
+.source-provenance-open[disabled],
+.source-provenance-open[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Student eval fixes — module home & practice surfaces */
+.home-exam-flow-hint {
+  margin: 12px 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.home-srs-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: var(--r-md, 12px);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  cursor: pointer;
+}
+
+.home-srs-banner-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.home-srs-banner-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.home-weak-teaser {
+  margin: 0 0 20px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.home-action-card--primary {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.home-action-sim-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+}
+
+.home-recommended-start {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: var(--r-md, 12px);
+  border: 1px dashed color-mix(in srgb, var(--accent) 30%, var(--border));
+  background: color-mix(in srgb, var(--surface) 96%, var(--accent) 4%);
+}
+
+.home-recommended-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.home-recommended-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.practice-platform-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+}
+
+.practice-klausur-link {
+  margin: 0 0 16px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.formula-section-accordion {
+  margin-bottom: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: var(--r-md, 12px);
+  overflow: hidden;
+}
+
+.formula-section-accordion-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+.formula-section-accordion-head::-webkit-details-marker {
+  display: none;
+}
+
+.formula-section-accordion-hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.formula-section-accordion-body {
+  padding: 0 14px 14px;
+}

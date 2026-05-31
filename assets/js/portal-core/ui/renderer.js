@@ -24,6 +24,10 @@ import {
   FULL_EXAM_HOME_DESCRIPTION
 } from "../data/examDisclosure.js";
 import { renderMathTitle } from "./formatMathInTitle.js";
+import {
+  renderOfficialMaterialsNoticeHtml,
+  sourcePdfOpenDisabledByDefault
+} from "../utils/deployEnvironment.js";
 
 const HOME_ACTION_ACTIVATE = (handler) =>
   `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
@@ -35,6 +39,11 @@ export const KONCEPT_CHECK_HOME_ACTION_CARD_HTML = `<div class="home-action-card
 <div class="hac-title">Konzept-Check</div>
 <div class="hac-desc">5 Minuten, typische Denkfallen</div>
 </div>`;
+
+/** Only mount when module ships conceptSchnelltestItems (currently makro1). */
+export function buildKonzeptCheckHomeCardHtml(enabled = false) {
+  return enabled ? KONCEPT_CHECK_HOME_ACTION_CARD_HTML : "";
+}
 
 export function createRenderer({
   courseLabel,
@@ -84,6 +93,38 @@ export function createRenderer({
 
   function renderDecodedText(value) {
     return escapeHtml(decodeHtmlEntities(String(value ?? "")));
+  }
+
+  function renderStudentTaskGapNote(gap) {
+    if (!hasMeaningfulText(gap)) return "";
+    const raw = String(gap);
+    if (/portalabdeckung|partial|not yet represented|missing-official/i.test(raw)) {
+      return `<p class="klausurmethodik-gap-note">Übungsformat (Plattform) — keine item-für-item Übernahme offizieller Klausuraufgaben.</p>`;
+    }
+    return `<p class="klausurmethodik-gap-note">${renderSemanticPlainText(gap)}</p>`;
+  }
+
+  function getCategoryPosition(conceptId) {
+    const chapter = chapterMap[conceptId];
+    if (!chapter) return null;
+    const items = chapters.filter((item) => item.cat === chapter.cat);
+    const localIdx = items.findIndex((item) => item.id === conceptId);
+    if (localIdx < 0) return null;
+    return { category: chapter.cat, index: localIdx + 1, total: items.length };
+  }
+
+  function findWeakestConcept(progress) {
+    const candidates = chapters
+      .map((chapter) => {
+        const entry = progress[chapter.id];
+        if (!entry) return null;
+        const total = (entry.correct || 0) + (entry.wrong || 0);
+        if (total < 2) return null;
+        return { chapter, accuracy: (entry.correct || 0) / total };
+      })
+      .filter(Boolean)
+      .sort((a, b) => a.accuracy - b.accuracy);
+    return candidates[0]?.chapter || null;
   }
 
   function renderHomeSourceBadge(conceptId) {
@@ -755,6 +796,7 @@ ${drill.answer}`
 <div class="solution-block${cardClass ? ` ${cardClass.replace("card", "answer")}` : ""}" id="${answerId}" aria-expanded="false">
 ${answerMarkup}
 </div>
+<span class="practice-platform-badge" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
 </div>`;
   }
 
@@ -788,6 +830,7 @@ ${answerMarkup}
 <p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
 </div>
 </div>
+<p class="practice-klausur-link" role="note">Klausurmethode → <button type="button" class="link-btn practice-klausur-jump" onclick="window.__switchTab?.('formeln')">Formeln-Tab</button></p>
 <div class="practice-section-header">Geführte Aufgaben</div>
 ${renderGuidedTasks(tasks)}`;
     if (chapter) {
@@ -852,7 +895,7 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
 
   function renderTaskFamilyCard(family, index = 0) {
     const stepNum = index + 1;
-    const openAttr = index === 0 ? " open" : "";
+    const openAttr = index === 0 && !hasTaskFamilies(current) ? " open" : "";
     const familyKey = escapeHtml(String(family.id || `family-${index}`).replace(/[^\w.-]/g, "_"));
     const ziel = family.topic || family.title || "";
     const vorgehen = methodToVorgehenBullets(family.method);
@@ -885,7 +928,7 @@ ${renderKlausurmethodikField("Ziel", ziel ? `<p class="klausurmethodik-text">${r
 ${renderKlausurmethodikField("Vorgehen", vorgehenHtml, "vorgehen")}
 ${renderKlausurmethodikField("Typische Klausurfrage", typicalQuestion ? `<p class="klausurmethodik-text">${renderSemanticPlainText(typicalQuestion)}</p>` : "", "frage")}
 ${renderKlausurmethodikField("Häufiger Fehler", trapHtml, "fehler")}
-${family.officialTaskGap ? `<p class="klausurmethodik-gap-note">${renderSemanticPlainText(family.officialTaskGap)}</p>` : ""}
+${family.officialTaskGap ? renderStudentTaskGapNote(family.officialTaskGap) : ""}
 ${sourceFootnote}
 </div>
 </details>`;
@@ -917,13 +960,13 @@ ${sourceFootnote}
     const taskFamiliesHtml = renderTaskFamilyPanel(current);
     const formulaCards = Array.isArray(formulaCardsByConcept[current]) ? formulaCardsByConcept[current] : [];
     const hasFormulaGrid = hasFormulas(entry);
+    const hasKlausurmethodik = hasTaskFamilies(current);
     if (!hasFormulaGrid && !taskFamiliesHtml) {
       return '<div class="panel active"></div>';
     }
     let html = '<div class="panel active">';
     if (hasFormulaGrid) {
-      html += '<div class="formula-grid">';
-    entry.formeln.forEach((formula, formulaIndex) => {
+      const formulaBody = `<div class="formula-grid">${entry.formeln.map((formula, formulaIndex) => {
       const layoutClass = classifyFormulaCardLayout(formula);
       const displayMode = getDisplayMode(formula.eq) || "math";
       const explicitVariables = Object.entries(formula.variables || {}).filter(([, value]) => hasMeaningfulText(value));
@@ -940,7 +983,7 @@ ${sourceFootnote}
       const supportNote = displayMode === "math" && inferredVariables.length
         ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
         : "";
-      html += `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
+      return `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${renderMathTitle(formula.label)}</div>
 ${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
@@ -948,8 +991,15 @@ ${formula.desc ? `<div class="f-desc">${renderTeachingProse(formula.desc)}</div>
 ${varsHint}
 ${supportNote}
 </div>`;
-    });
-    html += "</div>";
+    }).join("")}</div>`;
+      if (hasKlausurmethodik) {
+        html += `<details class="formula-section-accordion">
+<summary class="formula-section-accordion-head"><span>Formeln & Merksätze</span><span class="formula-section-accordion-hint">aufklappen</span></summary>
+<div class="formula-section-accordion-body">${formulaBody}</div>
+</details>`;
+      } else {
+        html += formulaBody;
+      }
     if (formulaCards.length) {
       html += `<div class="section-block formula-proof-layer">
 <h3>Herleitung & Einsatzgrenzen</h3>
@@ -1155,8 +1205,9 @@ ${renderExamPatterns(data)}
       ? `<div class="concept-objectives" role="region" aria-label="Lernziele"><h3>Lernziele</h3><ul>${entry.objectives.map((o) => `<li>${escapeHtml(String(o))}</li>`).join("")}</ul><p class="concept-objectives-hint">Nach diesem Block kannst du die Lernziele selbst abhaken.</p></div>`
       : "";
     const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
+    const catPos = getCategoryPosition(conceptId);
     const headerHTML = `<div class="concept-header">
-<div class="concept-tag">${escapeHtml(chapter.cat)} · Stelle ${syllabusIdx} von ${chapters.length}</div>
+<div class="concept-tag">${catPos ? `${escapeHtml(catPos.category)} · Stelle ${catPos.index} von ${catPos.total}` : `${escapeHtml(chapter.cat)} · ${syllabusIdx}`}</div>
 <h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>
 ${motivationStrip}
 </div>`;
@@ -1254,19 +1305,23 @@ ${motivationStrip}
     }
 
     const categories = {};
-    chapters.forEach((chapter, index) => {
+    chapters.forEach((chapter) => {
       if (!categories[chapter.cat]) categories[chapter.cat] = [];
-      categories[chapter.cat].push({ ...chapter, idx: index + 1 });
+      categories[chapter.cat].push({ ...chapter });
     });
 
     const progress = loadProgress();
     const seenCount = Object.keys(progress).filter((id) => chapters.find((chapter) => chapter.id === id)).length;
     const totalTasks = chapters.reduce((sum, chapter) => sum + buildPracticeTasks(chapter, contentById[chapter.id], intuitionById[chapter.id]).length, 0);
     const due = getDueCards();
+    const lastId = loadLastId();
+    const lastChapter = lastId && chapters.find((chapter) => chapter.id === lastId);
+    const weakChapter = findWeakestConcept(progress);
 
     let html = `<div class="hero">
 <h1>${courseTitle}<br><span>Interaktives Lernportal</span></h1>
 <p>${homeIntro}</p>
+<p class="home-exam-flow-hint" role="note">Prüfungsflow: <strong>1 Theorie</strong> → <strong>2 Aufgaben</strong> → <strong>3 Formeln &amp; Klausurmethodik</strong></p>
 <div class="stat-row">
 <div class="stat-item"><div class="s-val">${chapters.length}</div><div class="s-lab">Konzepte</div></div>
 <div class="stat-item"><div class="s-val">${Object.keys(categories).length}</div><div class="s-lab">Themengebiete</div></div>
@@ -1275,6 +1330,20 @@ ${motivationStrip}
 </div>
 </div>`;
 
+    if (due.length > 0) {
+      html += `<div class="home-srs-banner" onclick="window.__showSRSReview()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showSRSReview()")}>
+<span class="home-srs-banner-label">Wiederholung fällig</span>
+<span class="home-srs-banner-text">${due.length} Konzept${due.length !== 1 ? "e" : ""} — jetzt wiederholen →</span>
+</div>`;
+    }
+
+    if (sourcePdfOpenDisabledByDefault()) {
+      html += renderOfficialMaterialsNoticeHtml().replace(
+        'class="official-materials-notice"',
+        'class="official-materials-notice module-home-pdf-notice"'
+      );
+    }
+
     const pilotDashNote = homeLernDashboardPilotNote
       ? String(homeLernDashboardPilotNote)
           .replace(/&/g, "&amp;")
@@ -1282,7 +1351,16 @@ ${motivationStrip}
           .replace(/>/g, "&gt;")
       : "";
 
+    const quickStartCard = lastChapter
+      ? `<div class="home-action-card home-action-card--primary" onclick="window.__navigate('${lastChapter.id}', { tab: 'aufgaben' })" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE(`window.__navigate('${lastChapter.id}', { tab: 'aufgaben' })`)}>
+<div class="hac-title">Aufgaben-Schnellstart</div>
+<div class="hac-desc">${renderMathTitle(lastChapter.title)} — direkt üben</div>
+<span class="home-action-sim-badge">Plattform-Übung</span>
+</div>`
+      : "";
+
     html += `<div class="home-action-row">
+${quickStartCard}
 <div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showDashboard()")}>
 <div class="hac-title">Lern-Dashboard</div>
 <div class="hac-desc">Fortschritt, schwache Bereiche, Wiederholungen</div>
@@ -1291,11 +1369,13 @@ ${pilotDashNote ? `<p class="hac-pilot-note">${pilotDashNote}</p>` : ""}
 <div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startExam()")}>
 <div class="hac-title">Schnelltest</div>
 <div class="hac-desc">20 Minuten, gemischte Konzepte</div>
+<span class="home-action-sim-badge">Plattform-Simulation</span>
 </div>
 ${showInterleavedExamCard && typeof window !== "undefined" && typeof window.__startInterleavedExam === "function" ? `
 <div class="home-action-card" onclick="window.__startInterleavedExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startInterleavedExam()")}>
 <div class="hac-title">Gemischter Schnelltest</div>
 <div class="hac-desc">Wie Schnelltest — Themenwechsel im Modul (Pilot)</div>
+<span class="home-action-sim-badge">Plattform-Simulation</span>
 </div>` : ""}
 ${extraHomeActionCardsHtml}
 <div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showSRSReview()")}>
@@ -1306,12 +1386,15 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
 <div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showFullExamSelect()")}>
 <div class="hac-title">Probeklausuren</div>
 <div class="hac-desc">${renderDecodedText(fullExamHomeDescription)}</div>
+<span class="home-action-sim-badge">Plattform-Simulation</span>
 </div>
 ` : ""}
 </div>`;
 
-    const lastId = loadLastId();
-    const lastChapter = lastId && chapters.find((chapter) => chapter.id === lastId);
+    if (weakChapter) {
+      html += `<p class="home-weak-teaser">Schwacher Bereich: <button type="button" class="link-btn" onclick="window.__navigate('${weakChapter.id}')">${renderMathTitle(weakChapter.title)}</button> — <button type="button" class="link-btn" onclick="window.__showDashboard()">Dashboard →</button></p>`;
+    }
+
     if (lastChapter) {
       html += `<div class="home-continue-card" onclick="window.__navigate('${lastChapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${lastChapter.id}')">
 <span class="hcc-label">Weitermachen</span>
@@ -1341,9 +1424,9 @@ ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigat
 
     Object.entries(categories).forEach(([category, items]) => {
       html += `<div class="section-sep">${category}</div><div class="home-grid">`;
-      items.forEach((item) => {
+      items.forEach((item, localIdx) => {
         html += `<div class="home-card" onclick="window.__navigate('${item.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${item.id}')">
-<div class="hc-num">Konzept ${item.idx}</div>
+<div class="hc-num">${escapeHtml(category)} · Stelle ${localIdx + 1} von ${items.length}</div>
 <div class="hc-title">${renderMathTitle(item.title)}</div>
 ${renderHomeSourceBadge(item.id)}
 <div class="hc-cat">${item.cat}</div>

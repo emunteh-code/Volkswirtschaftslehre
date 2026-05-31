@@ -1694,9 +1694,8 @@ for (const ch of CHAPTERS) {
   const html = String(entry.theorie || '');
   if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
   entry.theorie = `${html}<div class="section-block"><h3>Klausurtransfer (source-distilled)</h3>
-<p><strong>Prüfungsstandard:</strong> Hypothesen → Teststatistik → Verteilung/kritisches Quantil → Entscheidung und p-Wert-Interpretation. Annahmen (Normalität, Unabhängigkeit, Stichprobengröße) vor der Rechnung benennen.</p>
-<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
-<p><em>source-distilled / platform-added-explanation:</em> Ergänzender Block aus Kursverdichtung — Randfälle und exakte Tabellenwerte in offiziellen Statistik-PDFs prüfen.</p></div>`;
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p></div>`;
 }
 
 delete CONTENT.schaetzen;

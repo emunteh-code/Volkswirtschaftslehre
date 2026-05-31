@@ -18,11 +18,8 @@ export const THEORY_DEPTH_EXPANSIONS = {
   },
   gravitation: {
     html:
-      block('Gravitationsmodell', `
-      <p>Handelsströme steigen mit Wirtschaftsmasse ($GDP$) und sinken mit Distanz/Handelskosten. Schätzgleichung log-linear: $\\ln T_{ij} = \\beta_0 + \\beta_1 \\ln Y_i + \\beta_2 \\ln Y_j - \\gamma \\ln dist_{ij} + u$.</p>
-    `) +
-      block('Klausurtransfer', `
-      <p>Interpretation: Koeffizienten sind Elastizitäten in der Log-Spezifikation; Distanzerhöhung senkt erwartete Handelsintensität.</p>
+      block('Log-linear Schätzung', `
+      <p>Handelsströme steigen mit Wirtschaftsmasse ($GDP$) und sinken mit Distanz. Log-Spezifikation: $\\ln T_{ij} = \\beta_0 + \\beta_1 \\ln Y_i + \\beta_2 \\ln Y_j - \\gamma \\ln dist_{ij} + u$ — Koeffizienten sind Elastizitäten.</p>
     `)
   },
   overshooting: {

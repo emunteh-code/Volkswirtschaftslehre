@@ -334,6 +334,10 @@ export const CONTENT = {
       `
       ),
       section(
+        'Herleitungsskizze (log-linear)',
+        `<p>Ausgangspunkt VL: Handelsströme steigen mit Wirtschaftsmasse und sinken mit Distanz/Handelskosten. Logarithmieren liefert die Schätzgleichung $\\ln T_{ij} = \\beta_0 + \\beta_1 \\ln Y_i + \\beta_2 \\ln Y_j - \\gamma \\ln dist_{ij} + u$. Die Koeffizienten sind Elastizitäten: größeres $GDP$ → mehr Handel; größere Distanz → weniger Handel.</p>`
+      ),
+      section(
         'Was Distanz ökonomisch bedeutet',
         `<p>Distanz ist nicht nur Kilometerzahl. Sie steht auch für Transportkosten, Informationskosten, institutionelle Hürden und politische Reibung. Genau deshalb bleibt die Gravitationsgleichung auch im Zeitalter digitaler Märkte erstaunlich robust.</p>`
       ),
@@ -947,7 +951,6 @@ for (const ch of CHAPTERS) {
   if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
   entry.theorie = `${html}${section(
     'Klausurtransfer (source-distilled)',
-    `<p><strong>Prüfungsstandard:</strong> Modell wählen (HO, Krugman, PPP/UIP, Handelspolitik) → Mechanismus → Wohlfahrts- oder Politikfolge. Wechselkursregime und Zeithorizont immer explizit.</p>
-<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus IWB-VL-Verdichtung; exakte Klausurnotation in Primär-PDFs prüfen.</p>`
+    `<p><strong>Prüfungsstandard:</strong> (1) Aufgabenstellung lesen — Handel, Wechselkurs oder Politik? (2) Modell wählen: HO bei Faktorreichtum, Krugman bei IRS/Vielfalt, PPP/UIP bei Kurs, Tarif/Quote bei Politik. (3) Mechanismus in 2–3 Sätzen. (4) Wohlfahrts- oder Politikfolge. Regime und Zeithorizont immer benennen.</p>`
   )}`;
 }

@@ -402,6 +402,30 @@ function buildSummary(layers) {
   return buildManifestOnlySummary(layers);
 }
 
+/** Whether provenance layers yield a visible summary (Quellen tab / footer strip). */
+export function hasProvenanceLayers(layers) {
+  return Boolean(buildSummary(layers));
+}
+
+export function getProvenanceSummaryText(layers) {
+  return buildSummary(layers) || '';
+}
+
+export function getProvenanceBreakdownRows(layers) {
+  return buildBreakdownRows(layers);
+}
+
+export function getProvenanceInspectionRows(layers, sourceMaterialBaseUrl = '') {
+  const anchorInspectionRows = buildSourceInspectionRows(layers, sourceMaterialBaseUrl);
+  const anchoredPaths = new Set(anchorInspectionRows.map((row) => row.sourcePath).filter(Boolean));
+  const refInspectionRows = buildSourceRefInspectionRows(layers, sourceMaterialBaseUrl).filter(
+    (row) => !anchoredPaths.has(row.sourcePath)
+  );
+  return [...anchorInspectionRows, ...refInspectionRows];
+}
+
+export { buildSourceInspectionHtml };
+
 function buildBreakdownRows(layers) {
   const rows = [];
   if (!layers || typeof layers !== 'object') return rows;

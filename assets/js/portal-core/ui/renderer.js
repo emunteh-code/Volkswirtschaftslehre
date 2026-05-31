@@ -14,6 +14,11 @@ import {
   buildConceptProvenanceStripHtml,
   initConceptProvenanceInteractions
 } from "./sourceProvenanceUi.js";
+import {
+  buildQuellenPanelHtml,
+  hasConceptQuellenContent,
+  initQuellenPanelInteractions
+} from "./quellenPanel.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
 import {
   FULL_EXAM_HOME_DESCRIPTION,
@@ -1081,12 +1086,14 @@ ${renderExamPatterns(data)}
       formeln: hasFormulas(entry),
       intuition:
         hasMeaningfulIntuition(intuitionById[conceptId]) || hasPortalIntuitionSurface(conceptId),
+      quellen: hasConceptQuellenContent(getConceptProvenance(conceptId)),
       "r-anwendung": Boolean(renderRAnwendungPanel) && hasRBlock(conceptId)
     };
 
     const activeTab = (tab === "graph" && !tabAvailability.graph)
       || (tab === "formeln" && !tabAvailability.formeln)
       || (tab === "intuition" && !tabAvailability.intuition)
+      || (tab === "quellen" && !tabAvailability.quellen)
       || (tab === "r-anwendung" && !tabAvailability["r-anwendung"])
       ? "theorie"
       : tab;
@@ -1150,6 +1157,13 @@ ${motivationStrip}
         content.innerHTML = headerHTML + renderFormulaPanel(entry);
       } else if (activeTab === "intuition") {
         content.innerHTML = headerHTML + renderIntuitionPanel(conceptId);
+      } else if (activeTab === "quellen") {
+        content.innerHTML = headerHTML + buildQuellenPanelHtml({
+          conceptId,
+          layers: getConceptProvenance(conceptId),
+          sourceMaterialBaseUrl,
+          getConceptSourceSummary
+        });
       } else if (activeTab === "r-anwendung" && renderRAnwendungPanel) {
         content.innerHTML = headerHTML + renderRAnwendungPanel(conceptId);
       }
@@ -1188,15 +1202,19 @@ ${motivationStrip}
       );
     }
 
-    const provenanceStrip = buildConceptProvenanceStripHtml({
-      conceptId,
-      activeTab,
-      layers: getConceptProvenance(conceptId),
-      sourceMaterialBaseUrl
-    });
-    if (provenanceStrip && !String(window.__lastRenderError || "").length) {
-      content.insertAdjacentHTML("beforeend", provenanceStrip);
-      initConceptProvenanceInteractions(content);
+    if (activeTab !== "quellen") {
+      const provenanceStrip = buildConceptProvenanceStripHtml({
+        conceptId,
+        activeTab,
+        layers: getConceptProvenance(conceptId),
+        sourceMaterialBaseUrl
+      });
+      if (provenanceStrip && !String(window.__lastRenderError || "").length) {
+        content.insertAdjacentHTML("beforeend", provenanceStrip);
+        initConceptProvenanceInteractions(content);
+      }
+    } else if (!String(window.__lastRenderError || "").length) {
+      initQuellenPanelInteractions(content);
     }
 
     renderMath(content);

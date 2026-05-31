@@ -315,6 +315,20 @@ export function createPortalApp({
     sourceCompanion.showSourceCompanion(options);
   }
 
+  function openQuellen(options = {}) {
+    if (appState.current) {
+      const tabRow = document.getElementById("tabRow");
+      const quellenBtn = tabRow?.querySelector('button[data-tab="quellen"]');
+      const quellenVisible = quellenBtn && quellenBtn.style.display !== "none";
+      if (quellenVisible) {
+        if (tabRow) tabRow.classList.add("visible");
+        switchTab("quellen");
+        return;
+      }
+    }
+    openSourceCompanion(options);
+  }
+
   window.__navigate = navigate;
   window.__renderHome = renderHome;
   window.__showDashboard = openDashboard;
@@ -334,6 +348,7 @@ export function createPortalApp({
   window.__showSRSReview = showSRSReview;
   if (sourceCompanion?.showSourceCompanion) {
     window.__showSourceCompanion = openSourceCompanion;
+    window.__openQuellen = openQuellen;
   }
   window.__feSelectWF = feSelectWF;
   window.__feCheckText = feCheckText;

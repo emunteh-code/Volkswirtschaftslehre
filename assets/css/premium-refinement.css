@@ -5738,3 +5738,202 @@ body.light-mode #content .source-provenance-mark {
     white-space: normal;
   }
 }
+
+/* ── Quellen tab panel (per-concept source surface) ─────────── */
+#content .quellen-panel {
+  display: grid;
+  gap: 18px;
+  max-width: 56rem;
+}
+
+#content .quellen-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%);
+}
+
+#content .quellen-panel-kicker {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+#content .quellen-panel-header h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+#content .quellen-panel-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 42rem;
+}
+
+#content .quellen-panel-badge {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+#content .quellen-panel-badge--anchored {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  color: var(--accent);
+}
+
+#content .quellen-panel-pdf-status {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 4px;
+}
+
+#content .quellen-panel-pdf-status strong {
+  font-size: 13px;
+}
+
+#content .quellen-panel-pdf-status span,
+#content .quellen-panel-pdf-status code {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+#content .quellen-panel-pdf-status--available {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+#content .quellen-panel-pdf-status--unavailable {
+  border-color: color-mix(in srgb, var(--warning, #c98a00) 35%, var(--border));
+}
+
+#content .quellen-panel-section {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+#content .quellen-panel-section h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+#content .quellen-panel-summary-line {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#content .quellen-panel-layer-grid {
+  display: grid;
+  gap: 10px;
+}
+
+#content .quellen-panel-layer-row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 9rem) 1fr;
+  gap: 10px 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+#content .quellen-panel-layer-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+#content .quellen-panel-layer-k {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#content .quellen-panel-layer-v {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+#content .quellen-panel-anchor-groups {
+  display: grid;
+  gap: 14px;
+}
+
+#content .quellen-panel-anchor-group {
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#content .quellen-panel-anchor-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface) 88%, var(--muted) 12%);
+  border-bottom: 1px solid var(--border);
+}
+
+#content .quellen-panel-anchor-group-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#content .quellen-panel-anchor-group-head em {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: normal;
+}
+
+#content .quellen-panel-anchor-group .source-provenance-inspector {
+  border: 0;
+  border-radius: 0;
+  padding: 12px 14px 14px;
+}
+
+#content .quellen-panel-anchor-group .source-provenance-inspector-title {
+  display: none;
+}
+
+#content .quellen-panel-footer {
+  display: grid;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+#content .quellen-panel-footer-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  #content .quellen-panel-header {
+    flex-direction: column;
+  }
+
+  #content .quellen-panel-layer-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

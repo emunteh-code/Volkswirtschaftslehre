@@ -38,7 +38,64 @@ export const THEORY_DEPTH_EXPANSIONS = {
       <p>Aktiva: Soll = Zugang. Passiva/EK: Haben = Zugang. Erfolgskonten: Aufwand Soll, Ertrag Haben — Abschluss über GuV auf Eigenkapital.</p>
     `) +
       block('Klausurtransfer', `
-      <p>Immer beide Seiten der Buchung und die Bilanzwirkung nennen; „nur GuV“ reicht in Klausuren nicht.</p>
+      <p>Immer beide Seiten der Buchung und die Bilanzwirkung nennen; „nur GuV" reicht in Klausuren nicht.</p>
+    `)
+  },
+  rechnungswesen_intro: {
+    html:
+      block('In der Klausur: Rechnungswesen', `
+      <p>GoB: Vollständigkeit, Richtigkeit, Klarheit, Fortführung, Periodengerechtigkeit. Bilanz = Vermögen (Aktiva) vs. Kapital (Passiva). GuV = Aufwendungen vs. Erträge — periodenbezogen.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. Inventur/Inventar als Bestandsnachweis vor Abschluss.</p>
+      ${warn('GuV vs. Cashflow', 'Periodenerfolg ≠ Liquidität — Abschreibungen ohne Zahlungsabfluss.')}
+    `)
+  },
+  buchfuehrung_orga: {
+    html:
+      block('In der Klausur: Buchführung', `
+      <p>Doppelte Buchführung: jeder Vorgang Soll und Haben. Kontenrahmen SKR03/04 — Sachkonten vs. Personenkonten. Beleg → Buchung → Journal → Hauptbuch → SuSa → Bilanz/GuV.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Organisation: wer bucht, wer kontrolliert (Funktionstrennung). Periodengerechte Abgrenzung: aktive/passive Rechnungsabgrenzung.</p>
+    `)
+  },
+  umlauf_bewertung_verfahren: {
+    html:
+      block('In der Klausur: Bewertung Umlauf', `
+      <p>Niederstwertprinzip: Anschaffungskosten oder niedrigerer beizulegender Wert. FIFO/LIFO/Durchschnitt — Bestandsverbrauch und Endbestand. Stichtagsprinzip am Bilanzstichtag.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Bewertungsverfahren Auswirkung auf GuV (Materialaufwand) und Bilanz (Vorräte) erklären — nicht nur Methode nennen.</p>
+      ${warn('Permanenz', 'Bewertungsmethode über Jahre beibehalten — Wechsel nur begründet.')}
+    `)
+  },
+  werkstoffe_erzeugnisse_buchungen: {
+    html:
+      block('In der Klausur: Werkstoffe', `
+      <p>Einkauf auf Lager: Wareneingang an Verbindlichkeiten (+ Vorsteuer). Verbrauch: Materialaufwand an Lager. Fertigung: Fertigungsmaterial, Fertigungslöhne, Gemeinkosten → Erzeugnisse.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Bestandsveränderungen in GuV (Erhöhung mindert Aufwand). USt immer getrennt buchen.</p>
+    `)
+  },
+  eigenkapital_kapitalgesellschaften: {
+    html:
+      block('In der Klausur: EK Kapitalgesellschaft', `
+      <p>Gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Bilanzgewinn. Ausschüttung: Gewinnausschüttung an Bank (Vermögensminderung, nicht GuV-Aufwand). Jahresüberschuss aus GuV → Gewinnvortrag.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Kapitalerhöhung: Bareinlage vs. Sacheinlage — Aktivierung und EK-Erhöhung. Thesaurierung vs. Ausschüttung Wirkung auf Liquidität und EK.</p>
+      ${warn('Ausschüttung', 'Dividende mindert EK/Bank, erscheint nicht als Aufwand in GuV.')}
+    `)
+  },
+  verbindlichkeiten: {
+    html:
+      block('In der Klausur: Verbindlichkeiten', `
+      <p>LLF vs. kLF nach Restlaufzeit. Rückstellungen: ungewisse Verbindlichkeiten (Steuer, Pension, Gewährleistung) — Bildung GuV-Aufwand, Auflösung Ertrag. Abgrenzung zu Rücklagen (EK).</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Buchungssatz Verbindlichkeit vs. Rückstellung; Bewertung zum Erfüllungsbetrag. Passivierungswahl nur bei gesetzlichen Vorgaben.</p>
     `)
   }
 };

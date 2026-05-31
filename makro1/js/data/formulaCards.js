@@ -749,7 +749,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro1.realzins_fisher_erwartungen.exakte_fisher_schreibweise',
     conceptId: 'realzins_fisher_erwartungen',
-    officialNotation: "$r_t$, $i_t$, $\\pi_{t+1}^e$",
+    officialNotation: "r_t, i_t, \\pi_{t+1}^e",
     displayFormula: "$$1+r_t = \\frac{1+i_t}{1+\\pi_{t+1}^e}$$",
     intuition: "Der ex ante Realzins folgt aus Nominalzins und erwartetem Preisniveau.",
     derivationSteps: [
@@ -775,7 +775,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro1.realzins_fisher_erwartungen.exakte_fisher_schreibweise_merks',
     conceptId: 'realzins_fisher_erwartungen',
-    officialNotation: "$r_t$, $i_t$, $\\pi_{t+1}^e$",
+    officialNotation: "r_t, i_t, \\pi_{t+1}^e",
     displayFormula: "$$1+r_t = \\frac{1+i_t}{1+\\pi_{t+1}^e}$$",
     intuition: "Der ex ante Realzins folgt aus Nominalzins und erwartetem Preisniveau.",
     derivationSteps: [
@@ -1113,7 +1113,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'makro1.erwartungen.barwert_erwarteter_gewinne',
     conceptId: 'erwartungen',
-    officialNotation: "$\\pi^e_{t+k}$",
+    officialNotation: "\\pi^e_{t+k}",
     displayFormula: "$$V_t = \\sum_{k=0}^{\\infty}\\frac{\\pi^e_{t+k}}{(1+r)^k}$$",
     intuition: "Investitionsentscheidungen hängen von Erwartungen ab",
     derivationSteps: [

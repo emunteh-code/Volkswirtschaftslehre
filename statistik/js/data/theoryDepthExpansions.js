@@ -20,9 +20,35 @@ export const THEORY_DEPTH_EXPANSIONS = {
     html:
       block('Prüfungsstandard', `
       <p>Immer zuerst Ereignisraum und Zählregel klären (Laplace vs. bedingte Wahrscheinlichkeit). Bayes nur, wenn $P(A|B)$ und $P(B|A)$ sauber getrennt werden.</p>
+      ${math('$$P(A|B) = \\frac{P(A\\cap B)}{P(B)},\\quad P(A\\cup B) = P(A)+P(B)-P(A\\cap B)$$')}
+    `) +
+      block('In der Klausur: Wahrscheinlichkeit', `
+      <p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Bedingte Wahrscheinlichkeit: Ereignisraum einschränken. Unabhängigkeit: $P(A\\cap B)=P(A)P(B)$ nur nach Definition prüfen.</p>
     `) +
       block('Klausurtransfer', `
       <p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Randnotation der VL (Komplement, Schnitt) beibehalten.</p>
+      ${warn('Bayes-Richtung', 'Nicht $P(A|B)$ mit $P(B|A)$ vertauschen — Nenner ist immer $P(\\text{Bedingung})$.')}
+    `)
+  },
+  schaetzen_eigenschaften_intervalle: {
+    html:
+      block('In der Klausur: Schätzer & KI', `
+      <p>Erwartungstreue: $E[\\hat\\theta]=\\theta$. Konsistenz: $\\hat\\theta \\xrightarrow{p} \\theta$. Effizienz: kleinste Varianz unter erwartungstreuen Schätzern (BLUE unter GM). KI: $\\bar x \\pm z_{1-\\alpha/2}\\,\\sigma/\\sqrt{n}$ bei bekanntem $\\sigma$.</p>
+      ${math('$$\\bar x \\pm t_{n-1,1-\\alpha/2}\\,\\frac{s}{\\sqrt{n}}\\quad\\text{(}\\sigma\\text{ unbekannt)}$$')}
+    `) +
+      block('Prüfungsstandard', `
+      <p>Test–KI-Dualität: $H_0: \\mu=\\mu_0$ nicht abgelehnt $\\Leftrightarrow$ $\\mu_0$ im $(1-\\alpha)$-KI. Immer Verteilung der Pivot-Größe nennen.</p>
+      ${warn('Interpretation KI', 'KI ist Intervallschätzer für $\\mu$, kein Wahrscheinlichkeitsstatement über $\\mu$ nach Beobachtung — Formulierung „95\\% der Intervalle" korrekt.')}
+    `)
+  },
+  regression_diagnostik_prognose: {
+    html:
+      block('In der Klausur: Diagnostik', `
+      <p>Residualplot: Muster → Heteroskedastizität oder fehlende Nichtlinearität. $R^2$ allein reicht nicht — adjusted $R^2$ bei Modellvergleich. Prognose: Vorhersageintervall breiter als Konfidenzband für $\\hat y$ (unsicherer Einzelwert).</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>OLS-Reste sollten weißes Rauschen sein (GM4). Breusch-Pagan/White qualitativ: heteroskedastische SE oder robuste SE (HC). Outlier: Leverage/Cook's D erwähnen.</p>
+      ${warn('Prognose vs. KI', 'Prognoseintervall für $y_{n+1}$ enthält $\\hat\\sigma$ und $x_{n+1}$ — nicht mit KI für $E[y|x]$ verwechseln.')}
     `)
   },
   varianzanalyse: {

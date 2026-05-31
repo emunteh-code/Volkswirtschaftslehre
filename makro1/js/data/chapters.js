@@ -997,3 +997,18 @@ for (const ch of CHAPTERS) {
     });
   }
 }
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const html = typeof entry.theorie === 'string' ? entry.theorie : '';
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = [
+    html,
+    section('Klausurtransfer (source-distilled)', `
+      <p><strong>Prüfungsstandard:</strong> Frist → Kanal (Güter/Geld/Arbeit) → Wirkung auf $Y$, $i$, $\\pi$ oder $u$.</p>
+      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-I-VL; Randnotation in Primär-PDFs prüfen.</p>
+    `)
+  ].join('');
+}

@@ -151,7 +151,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.bivariat.kovarianz',
     conceptId: 'bivariat',
-    officialNotation: "$s_{xy}$, $\\bar{x}$,$\\bar{y}$, n-1",
+    officialNotation: "s_{xy}, \\bar{x},\\bar{y}, n-1",
     displayFormula: "$$s_{xy} = \\frac{1}{n-1}\\sum_{i=1}^n (x_i-\\bar{x})(y_i-\\bar{y})$$",
     intuition: "Richtung der gemeinsamen Streuung",
     derivationSteps: [
@@ -177,7 +177,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.bivariat.pearson_korrelation',
     conceptId: 'bivariat',
-    officialNotation: "$r_{xy}$, $s_{xy}$, $s_x$,$s_y$",
+    officialNotation: "r_{xy}, s_{xy}, s_x,s_y",
     displayFormula: "$$r_{xy} = \\frac{s_{xy}}{s_x s_y}$$",
     intuition: "Normierte lineare Zusammenhangsstärke",
     derivationSteps: [
@@ -203,7 +203,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.bivariat.ols_steigung_bivariate_br_cke',
     conceptId: 'bivariat',
-    officialNotation: "$\\hat{\\beta}_1$, $s_{xy}$, $s_x^2$",
+    officialNotation: "\\hat{\\beta}_1, s_{xy}, s_x^2",
     displayFormula: "$$\\hat{\\beta}_1 = \\frac{s_{xy}}{s_x^2}$$",
     intuition: "Verbindet bivariate Streuung mit dem linearen Regressionsanstieg",
     derivationSteps: [
@@ -489,7 +489,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.schaetzen_eigenschaften_intervalle.z_konfidenzintervall',
     conceptId: 'schaetzen_eigenschaften_intervalle',
-    officialNotation: "$\\bar{x}$, $z_{1-\\alpha/2}$, $\\sigma$, n",
+    officialNotation: "\\bar{x}, z_{1-\\alpha/2}, \\sigma, n",
     displayFormula: "$$\\bar{x} \\pm z_{1-\\alpha/2}\\cdot \\frac{\\sigma}{\\sqrt{n}}$$",
     intuition: "Intervall bei bekannter Populationsstreuung",
     derivationSteps: [
@@ -515,7 +515,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.schaetzen_eigenschaften_intervalle.t_konfidenzintervall',
     conceptId: 'schaetzen_eigenschaften_intervalle',
-    officialNotation: "$t_{n-1,1-\\alpha/2}$, s, n-1",
+    officialNotation: "t_{n-1,1-\\alpha/2}, s, n-1",
     displayFormula: "$$\\bar{x} \\pm t_{n-1,1-\\alpha/2}\\cdot \\frac{s}{\\sqrt{n}}$$",
     intuition: "Standardintervall bei unbekannter Populationsstreuung",
     derivationSteps: [
@@ -983,7 +983,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.regression_schaetzung_inferenz.ols_steigung',
     conceptId: 'regression_schaetzung_inferenz',
-    officialNotation: "$\\hat{\\beta}_1$, $s_{xy}$, $s_x^2$",
+    officialNotation: "\\hat{\\beta}_1, s_{xy}, s_x^2",
     displayFormula: "$$\\hat{\\beta}_1 = \\frac{s_{xy}}{s_x^2}$$",
     intuition: "Schätzer der durchschnittlichen marginalen Änderung",
     derivationSteps: [

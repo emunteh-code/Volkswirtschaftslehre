@@ -67,5 +67,51 @@ export const THEORY_DEPTH_EXPANSIONS = {
       block('Prüfungsstandard', `
       <p>HO vs. Krugman: HO = Faktorreichtum; Krugman = Skalenerträge/Produktvielfalt. Aufgabenstellung entscheidet das Modell.</p>
     `)
+  },
+  tarifmodell: {
+    html:
+      block('In der Klausur: Zolltarif', `
+      <p>Kleines Land: Zoll → Inlandspreis steigt um Zoll, Menge fällt auf Importangebot/Nachfrage-Schnitt. Wohlfahrt: Produzentenrente↑, Konsumentenrente↓, Zolleinnahmen — DWL-Dreiecke.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Diagramm mit/ohne Zoll; Gewinner/Verlierer benennen. Großes Land: Terms of Trade Effekt möglich — optimaler Zoll > 0 theoretisch.</p>
+    `)
+  },
+  quoten_sanktionen: {
+    html:
+      block('In der Klausur: Quoten', `
+      <p>Importquote: harte Mengenbeschränkung — Preis passt sich an. Lizenzinhaber erhalten Quotenrente. vs. Zoll: Staat erzielt Einnahmen statt Quotenrente bei Lizenzvergabe ohne Auktion.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Quota vs. Zoll bei gleicher Importmenge vergleichen — Wohlfahrtsranking. Sanktionen: Handelsumleitung über Drittländer qualitativ.</p>
+    `)
+  },
+  wto_integration: {
+    html:
+      block('In der Klausur: WTO/Integration', `
+      <p>MFN-Prinzip, Bindung von Zöllen, Streitbeilegung. Preferential Trade Agreements (PTA): Art. XXIV — Handelsumlenkung vs. Schaffung. Dynamische Effekte: Wettbewerb, Skaleneffekte.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Statische Gewinne (Handels schaffend) vs. dynamische (Produktivität). Brexit/Customs Union als Regime-Beispiel qualitativ.</p>
+    `)
+  },
+  wechselkurssysteme: {
+    html:
+      block('In der Klausur: WK-Systeme', `
+      <p>Fix: Zentralbank interveniert, Geldpolitik oft eingeschränkt (Trilemma). Flex: UIP/M-F Kanäle. Currency Board: $M$ an Reserven. Managed float: Intervention ohne festes Parität.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Regime → Policy-Autonomie → Schockübertragung. Immer Mundell-Fleming-Logik bei Makro-Schocks verknüpfen.</p>
+      ${warn('Fix ≠ stabil', 'Fixer Kurs kann real über- oder unterbewertet sein — Anpassungsdruck bleibt.')}
+    `)
+  },
+  balassa_samuelson: {
+    html:
+      block('In der Klausur: Balassa-Samuelson', `
+      <p>Produktivitätsfortschritt im tradable Sektor → Löhne steigen → auch non-tradables teurer → höheres Preisniveau bei gleichem Kurs → PPP-Abweichung strukturell.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Erklärt warum reiche Länder „teurer" sind ohne Fehlbewertung. Unterscheidet sich von kurzfristiger Überschießung (Dornbusch).</p>
+    `)
   }
 };

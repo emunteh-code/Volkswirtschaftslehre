@@ -1,4 +1,4 @@
-# Exam Operating System Readiness Gate — 2026-05-29
+# Exam Operating System Readiness Gate — 2026-05-31
 
 A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.
 
@@ -22,17 +22,17 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Official task families | Formula cards | Mastery dimensions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `mikro1` | 100% | 100% | 98 | 52 | 18 | 0 | 78 | 1 |
-| `mikro2` | 83% | 83% | 47 | 16 | 0 | 0 | 32 | 4 |
-| `makro1` | 100% | 100% | 28 | 44 | 29 | 0 | 36 | 4 |
-| `makro2` | 100% | 100% | 60 | 53 | 22 | 0 | 51 | 4 |
-| `oekonometrie` | 100% | 100% | 64 | 66 | 33 | 0 | 45 | 4 |
-| `statistik` | 100% | 100% | 42 | 119 | 104 | 0 | 40 | 4 |
-| `finanzwirtschaft` | 100% | 100% | 38 | 20 | 0 | 0 | 46 | 4 |
-| `mathematik` | 100% | 100% | 42 | 55 | 40 | 0 | 55 | 4 |
-| `jahresabschluss` | 100% | 100% | 30 | 29 | 13 | 0 | 36 | 4 |
-| `recht` | 100% | 100% | 28 | 32 | 17 | 0 | 47 | 4 |
-| `internationale-wirtschaftsbeziehungen` | 100% | 100% | 32 | 17 | 0 | 0 | 35 | 4 |
+| `mikro1` | 100% | 100% | 98 | 85 | 18 | 0 | 78 | 4 |
+| `mikro2` | 83% | 83% | 47 | 34 | 0 | 0 | 35 | 4 |
+| `makro1` | 100% | 100% | 28 | 58 | 29 | 0 | 37 | 4 |
+| `makro2` | 100% | 100% | 60 | 83 | 22 | 0 | 51 | 4 |
+| `oekonometrie` | 100% | 100% | 64 | 98 | 33 | 0 | 45 | 4 |
+| `statistik` | 100% | 100% | 42 | 133 | 104 | 0 | 40 | 4 |
+| `finanzwirtschaft` | 100% | 100% | 38 | 39 | 0 | 0 | 51 | 4 |
+| `mathematik` | 100% | 100% | 42 | 69 | 40 | 0 | 55 | 4 |
+| `jahresabschluss` | 100% | 100% | 30 | 44 | 13 | 0 | 42 | 4 |
+| `recht` | 100% | 100% | 28 | 46 | 17 | 0 | 47 | 4 |
+| `internationale-wirtschaftsbeziehungen` | 100% | 100% | 32 | 33 | 0 | 0 | 37 | 4 |
 
 ## Gate Status Detail
 

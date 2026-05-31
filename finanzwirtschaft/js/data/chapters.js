@@ -97,11 +97,22 @@ export const CONTENT = {
         'Kapitalbedarfsplanung',
         `<p>Im Kapitalbedarfsplan werden Ein- und Auszahlungen über die Zeit kumuliert. Der tiefste Punkt der kumulierten Kurve zeigt den maximalen Finanzierungsbedarf und damit den Mindestpuffer, der zur Aufrechterhaltung der Zahlungsfähigkeit gebraucht wird.</p>
          ${warn('Fristenfehler:', 'Ein positiver Gesamtsaldo am Ende beantwortet noch nicht die Frage, ob zwischendurch eine kritische Finanzierungslücke entsteht.')}`
+      ),
+      section(
+        'Zeitachse und Finanzierungslücke',
+        `<p>Die Vorlesung arbeitet mit periodischen Ein- und Auszahlungen. Klausurstabil ist: Zahlungen tabellieren, kumulieren, Minimum markieren — erst dann Kreditlinie oder Eigenkapitalbedarf ableiten.</p>
+         ${mathBlock(schema(['Zahlungsreihe', '→', 'Kumulierung', '→', 'Minimum', '→', 'Finanzierungsbedarf']))}
+      `
+      ),
+      section(
+        'Verbindung zur Investitionsrechnung',
+        `<p>Liquiditätsplanung und Kapitalwert sind komplementär: Ein positives $K_0$ beantwortet nicht automatisch die Zwischenfinanzierung. Deshalb gehört der Kapitalbedarfsplan zum vollständigen Finanzplan.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Kumulierter Saldo', eq: String.raw`$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$`, desc: 'Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.' },
-      { label: 'Goldene Bilanzregel', eq: schema(['AV', '≤', 'langfristiges Kapital']), desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' }
+      { label: 'Goldene Bilanzregel', eq: schema(['AV', '≤', 'langfristiges Kapital']), desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' },
+      { label: 'Maximaler Bedarf', eq: String.raw`$$KB_{max} = -\min_t K_t$$`, desc: 'Finanzierungsbedarf aus tiefstem kumulierten Saldo.' }
     ],
     aufgaben: [
       task(
@@ -253,11 +264,22 @@ export const CONTENT = {
         'Optimale Wahl',
         `<p>Das Optimum liegt dort, wo die individuelle Grenzrate der Substitution zwischen heutigem und zukünftigem Konsum dem Marktpreis des Zeittauschs entspricht. Genau diese Tangentiallogik wird später zur Basis der Fisher-Separation.</p>
          ${warn('Grafikfehler:', 'Die Budgetgerade ist keine bloße Skizze. Achsenabschnitte, Steigung und Ausstattungspunkt tragen jeweils eine finanzwirtschaftliche Aussage.')}`
+      ),
+      section(
+        'Investition als Verschiebung auf der Budgetgerade',
+        `<p>Eine Investition mit positivem Kapitalwert verschiebt den erreichbaren Konsumpfad nach außen: Der Haushalt kann später mehr konsumieren, ohne heute weniger zu haben als ohne Projekt. Deshalb ist intertemporale Wahl nicht nur Konsumpsychologie, sondern die Mikrobasis der Investitionsentscheidung.</p>`
+      ),
+      section(
+        'Fisher-Tangentialbedingung klausurnah',
+        `<p>In Grafikaufgaben zählt die Lesart: Steigung der Budgetgerade = 1+i; Tangentialpunkt = Optimum. Wer nur Koordinaten abliest, aber MRS und Marktpreis nicht verknüpft, verfehlt die ökonomische Aussage der Aufgabe.</p>
+         ${mathBlock(String.raw`$$MRS_{0,1} = 1+i$$`)}
+      `
       )
     ].join(''),
     formeln: [
       { label: 'Budgetgerade', eq: String.raw`$$c_1 = y_1 + (1+i)(y_0 - c_0)$$`, desc: 'Sie zeigt die marktbestimmten Tauschmöglichkeiten zwischen Gegenwart und Zukunft.' },
-      { label: 'Tangentialbedingung', eq: String.raw`$$MRS_{0,1} = 1+i$$`, desc: 'Marktpreis und Zeitpräferenz stimmen im Optimum überein.' }
+      { label: 'Tangentialbedingung', eq: String.raw`$$MRS_{0,1} = 1+i$$`, desc: 'Marktpreis und Zeitpräferenz stimmen im Optimum überein.' },
+      { label: 'Investitionsverschiebung', eq: String.raw`K_0 > 0 \Rightarrow \text{äußerer Konsumpfad}`, desc: 'Positiver Kapitalwert erweitert die Erreichbarkeit.' }
     ],
     aufgaben: [
       task(
@@ -275,6 +297,14 @@ export const CONTENT = {
           step('Zinsbezug ergänzen.', String.raw`\text{Ein höherer Zins erhöht den Preis heutiger Mittel relativ zur Zukunft.}`)
         ],
         'Die Steigung übersetzt den Zinssatz in eine reale Tauschrate zwischen heute und morgen.'
+      ),
+      task(
+        'Der Zinssatz steigt. Was passiert mit der Steigung der Budgetgerade und der relativen Teuerung von Gegenwartskonsum?',
+        [
+          step('Steigung interpretieren.', String.raw`1+i \uparrow`),
+          step('Tauschrate ableiten.', String.raw`\text{Heutiger Konsum wird relativ teurer; Sparen lohnt stärker.}`)
+        ],
+        'Ein höherer Zins macht die Budgetgerade steiler und erhöht den Preis heutigen Konsums relativ zur Zukunft.'
       )
     ]
   },
@@ -366,11 +396,23 @@ export const CONTENT = {
         'Variable Zinssätze',
         `<p>Wenn sich der Zinssatz zwischen den Perioden ändert, muss periodenscharf transformiert werden. Genau hier passieren in Klausuren viele Fehler, weil stillschweigend mit einem konstanten Satz gerechnet wird.</p>
          ${warn('Zeitachsenfehler:', 'Vor jeder Rechnung muss klar sein, auf welchen Zeitpunkt alle Zahlungen gebracht werden.')}`
+      ),
+      section(
+        'Zeitachse und Zielzeitpunkt',
+        `<p>Die Vorlesung „Aufzinsen und Abzinsen“ arbeitet mit expliziten Zeitpunkten t=0, t=1, …, t=n. Klausurstabil ist: Zahlungen eintragen, Zielzeitpunkt markieren, dann jeden Betrag mit dem passenden Faktor auf diesen Zeitpunkt bringen. Erst danach addieren oder vergleichen.</p>
+         ${mathBlock(schema(['Zahlungen', '→', 'Zeitachse', '→', 'Zielzeitpunkt', '→', 'Vergleich']))}
+      `
+      ),
+      section(
+        'Soll- und Habenzins als Marktunvollkommenheit',
+        `<p>Sobald Sollzins und Habenzins auseinanderlaufen, gibt es nicht mehr einen einzigen Marktpreis des Zeittauschs. Dann hängt die Bewertung davon ab, ob du sparst (Habenzins) oder finanzierst (Sollzins). Das ist die Brücke zum unvollkommenen Kapitalmarkt und zur späteren Fisher-Separation.</p>
+         ${warn('Ein-Zins-Fehler:', 'Bei is ≠ ih darf nicht pauschal ein Mittelwert verwendet werden, ohne die Rolle des Entscheiders zu klären.')}`
       )
     ].join(''),
     formeln: [
       { label: 'Endwert', eq: String.raw`$$EW_n = BW_0 (1+i)^n$$`, desc: 'Aus Gegenwartswert wird Zukunftswert.' },
-      { label: 'Barwert', eq: String.raw`$$BW_0 = \frac{EW_n}{(1+i)^n}$$`, desc: 'Aus Zukunftswert wird Gegenwartswert.' }
+      { label: 'Barwert', eq: String.raw`$$BW_0 = \frac{EW_n}{(1+i)^n}$$`, desc: 'Aus Zukunftswert wird Gegenwartswert.' },
+      { label: 'Variable Zinsen', eq: String.raw`$$BW_0 = \frac{EW_n}{\prod_{t=1}^{n}(1+i_t)}$$`, desc: 'Periodenscharfe Abzinsung bei wechselnden Sätzen.' }
     ],
     aufgaben: [
       task(
@@ -528,11 +570,18 @@ export const CONTENT = {
         'Entscheidungsregel',
         `<p>Liegt der relevante Marktzinssatz unter dem internen Zinsfuß, ist der Kapitalwert positiv; liegt er darüber, ist der Kapitalwert negativ. Der IZF ist also nur im Zusammenspiel mit dem Vergleichszins sinnvoll interpretierbar.</p>
          ${warn('Renditefehler:', 'Der IZF ist keine selbstständige Vermögensgröße. Er muss immer gegen Kapitalwert und Kalkulationszins gelesen werden.')}`
+      ),
+      section(
+        'Kapitalwertfunktion und IZF in der Rechnung',
+        `<p>Für $CF_0=-100$ und $CF_1=130$ gilt $K(r)=-100+130/(1+r)$. Der IZF löst $K(r^*)=0$, hier $r^*=30\%$. Am Marktzins $i=8\%$ ist $K(0{,}08)=20{,}37>0$ — Projekt vorteilhaft, obwohl beide Größen zusammen gelesen werden müssen.</p>
+         ${mathBlock(String.raw`$$K(r) = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}, \qquad r^*:\; K(r^*)=0$$`)}
+      `
       )
     ].join(''),
     formeln: [
       { label: 'IZF-Definition', eq: String.raw`$$K(r^*) = 0$$`, desc: 'Beim internen Zinsfuß schneidet die Kapitalwertfunktion die Nulllinie.' },
-      { label: 'Entscheidungsregel', eq: String.raw`$$r^* > i \Rightarrow K_0(i) > 0$$`, desc: 'Der Vergleichszins entscheidet über Vorteilhaftigkeit.' }
+      { label: 'Entscheidungsregel', eq: String.raw`$$r^* > i \Rightarrow K_0(i) > 0$$`, desc: 'Der Vergleichszins entscheidet über Vorteilhaftigkeit.' },
+      { label: 'Kapitalwertfunktion', eq: String.raw`$$K(r) = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}$$`, desc: 'Grundlage für IZF und Sensitivität.' }
     ],
     aufgaben: [
       task(
@@ -578,10 +627,19 @@ export const CONTENT = {
         'Skalierungsproblem',
         `<p>Ein kleines Projekt kann einen hohen IZF, aber einen geringen Kapitalwert haben. Bei Ausschlussalternativen bleibt deshalb der Kapitalwert das robustere Kriterium, wenn Vermögensmaximierung das Ziel ist.</p>
          ${warn('Prozentfehler:', 'Eine hohe Renditezahl ersetzt kein Werturteil. Bei Projektvergleichen zählt die Frage, welches Projekt mehr Vermögen schafft.')}`
+      ),
+      section(
+        'Refinanzierungsprämisse',
+        `<p>Neben der Wiederanlage der Zwischenrückflüsse zum IZF gibt es die Refinanzierungsprämisse: Auszahlungen werden gedanklich zum IZF finanziert. Beide Prämissen sind stärker als die Kapitalwertlogik, die nur den Marktzinssatz als Vergleichsmaßstab braucht. Die Vorlesung nennt beide explizit als Grenzen des IZF.</p>`
+      ),
+      section(
+        'Wann der Kapitalwert die robuste Regel bleibt',
+        `<p>Bei mehreren Vorzeichenwechseln, unterschiedlichen Projektlaufzeiten oder konkurrierenden Projekten liefert der Kapitalwert am gegebenen Kalkulationszins ein eindeutiges Vermögensurteil. Der IZF bleibt als Sensitivitätsgröße nützlich, verliert aber seine Alleinstellung als Entscheidungsregel.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Mehrdeutigkeit', eq: schema(['mehrere Vorzeichenwechsel', '⇒', 'mehrere mögliche r*']), desc: 'Der IZF kann seine Eindeutigkeit verlieren.' },
+      { label: 'Wiederanlageprämisse', eq: String.raw`\text{Zwischenüberschüsse werden zu } r^* \text{ reinvestiert}`, desc: 'Implizite und oft unrealistische Annahme des IZF.' },
       { label: 'Referenzregel', eq: String.raw`\max K_0`, desc: 'Bei Konflikten bleibt der Kapitalwert die Vermögensregel.' }
     ],
     aufgaben: [
@@ -600,6 +658,14 @@ export const CONTENT = {
           step('Zielgröße festhalten.', String.raw`\text{Wenn Vermögensmaximierung zählt, ist das größere absolute Werturteil entscheidend.}`)
         ],
         'Bei Ausschlussalternativen bleibt der Kapitalwert maßgeblich, weil er den absoluten Vermögenszuwachs misst.'
+      ),
+      task(
+        'Eine Zahlungsreihe wechselt dreimal das Vorzeichen. Warum reicht „IZF berechnen und vergleichen“ nicht?',
+        [
+          step('Kapitalwertprofil erwähnen.', String.raw`\text{Mehrere Nullstellen sind möglich.}`),
+          step('Entscheidungsregel festlegen.', String.raw`\text{Bei } i \text{ den Kapitalwert } K_0(i) \text{ verwenden, nicht nur } r^*.`)
+        ],
+        'Mehrdeutige Profile machen den IZF unzuverlässig; der Kapitalwert am relevanten Kalkulationszins bleibt die führende Größe.'
       )
     ]
   },

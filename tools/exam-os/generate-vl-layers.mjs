@@ -339,7 +339,7 @@ function renderDocFamilyBlock(f) {
   }`;
 }
 
-function renderTaskFamiliesFile(slug, meta, families, docFamilies = [], ingestionMod = {}) {
+function renderTaskFamiliesFile(slug, meta, families, docFamilies = [], ingestionMod = {}, platformFamilies = []) {
   const ing = INGESTION_IMPORT[slug] || {};
   const baselineKey = Object.keys(ingestionMod).find((k) => k.includes('OFFICIAL_TASK_DOC_BASELINE'));
   const baseline = ingestionMod[baselineKey] || { exercise: 0, solution: 0, tutorial: 0, exam: 0 };
@@ -347,23 +347,34 @@ function renderTaskFamiliesFile(slug, meta, families, docFamilies = [], ingestio
   const gap = ing.gap || 'Offizielle Aufgaben-Mappings nur nach Review; VL-Familien folgen Seitenankern.';
   const baselineImport = baselineKey ? `, ${baselineKey}` : '';
 
-  const familyBlocks = families
-    .map(
-      (f) => `  family({
+  const familyBlocks = [...families, ...platformFamilies]
+    .map((f) => {
+      const difficulty = f.difficulty || 'mittel';
+      const sourceStatus = f.sourceStatus || 'direct-source';
+      const expectedTimeMinutes = f.expectedTimeMinutes ?? 10;
+      const commonTraps =
+        f.commonTraps || [
+          'VL-Methode mit Übungsblatt-Muster verwechseln',
+          'Anker ohne Aufgabenbezug auswendig lernen'
+        ];
+      const gradingRubric =
+        f.gradingRubric || ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'];
+      return `  family({
     id: '${f.id}',
     conceptId: '${f.conceptId}',
     title: ${JSON.stringify(f.title)},
     topic: ${JSON.stringify(f.topic)},
     method: ${JSON.stringify(f.method)},
+    sourceStatus: ${JSON.stringify(sourceStatus)},
     sourceAnchorIds: ${JSON.stringify(f.sourceAnchorIds)},
-    difficulty: 'mittel',
-    expectedTimeMinutes: 10,
+    difficulty: ${JSON.stringify(difficulty)},
+    expectedTimeMinutes: ${expectedTimeMinutes},
     examRelevance: 'hoch',
-    commonTraps: ['VL-Methode mit Übungsblatt-Muster verwechseln', 'Anker ohne Aufgabenbezug auswendig lernen'],
-    gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar'],
+    commonTraps: ${JSON.stringify(commonTraps)},
+    gradingRubric: ${JSON.stringify(gradingRubric)},
     currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
-  })`
-    )
+  })`;
+    })
     .join(',\n');
 
   const placeholderFn = buildFn
@@ -468,6 +479,50 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
 `;
 }
 
+/** Platform-labeled drill families where VL anchors are absent (AGENTS.md). */
+const PLATFORM_DRILL_FAMILIES_BY_MODULE = {
+  mikro2: [
+    {
+      conceptId: 'externa_pigou',
+      topic: 'Externe Effekte — Pigou-Internalisierung',
+      method:
+        'Companion-Marktversagen-Block: MSC vs. MPC, optimale Pigou-Steuer und Coase-Grenzen; mit Schrittaufgaben zu Markt- vs. Sozialoptimum abgleichen.'
+    },
+    {
+      conceptId: 'externa_institutionen',
+      topic: 'Institutionelle Internalisierung',
+      method:
+        'Coase-Verhandlung vs. Cap-and-Trade: Transaktionskosten, Lizenzpreis und Instrumentenwahl bei Unsicherheit über MEC.'
+    },
+    {
+      conceptId: 'public_goods',
+      topic: 'Öffentliche Güter und Samuelson',
+      method:
+        'Samuelson-Bedingung vertikal aggregieren; Free-Rider und Lindahl-Logik mit Portal-Aufgaben zu optimaler Menge verknüpfen.'
+    }
+  ]
+};
+
+function buildPlatformDrillFamilies(slug, meta) {
+  const defs = PLATFORM_DRILL_FAMILIES_BY_MODULE[slug] || [];
+  return defs.map((d) => ({
+    id: `${slug}.taskfamily.${d.conceptId}-platform-drill`,
+    conceptId: d.conceptId,
+    title: `${meta.title}: ${d.topic}`,
+    topic: d.topic,
+    method: d.method,
+    sourceAnchorIds: [],
+    sourceStatus: 'platform-added-drill',
+    difficulty: 'mittel',
+    expectedTimeMinutes: 12,
+    commonTraps: [
+      'Companion-Logik mit VL-Ankern verwechseln, obwohl kein offizieller VL-Anker existiert',
+      'Instrument ohne Marktversagen-Diagnose wählen'
+    ],
+    gradingRubric: ['Mechanismus benennen', 'Rechnung/Notation stimmig', 'Grenzen (Coase, Unsicherheit) erwähnen']
+  }));
+}
+
 async function processModule(slug, write) {
   const meta = MODULE_META[slug];
   if (!meta) return;
@@ -483,8 +538,46 @@ async function processModule(slug, write) {
       conceptId,
       title: `${meta.title}: ${topic}`,
       topic,
-      method: `An VL-Ankern (${anchorIds.join(', ')}) orientieren und mit Kapitelaufgaben verknüpfen.`,
-      sourceAnchorIds: anchorIds
+      method: `VL-Abschnitt(e) lesen, Methode aus Ankern (${anchorIds.join(', ')}) ableiten und mit Kapitelaufgaben abgleichen.`,
+      sourceAnchorIds: anchorIds,
+      difficulty: 'mittel',
+      expectedTimeMinutes: 10,
+      commonTraps: [
+        'VL-Methode mit Übungsblatt-Muster verwechseln',
+        'Anker ohne Aufgabenbezug auswendig lernen'
+      ],
+      gradingRubric: ['Methode korrekt', 'Rechnung/Notation stimmig', 'VL-Bezug erkennbar']
+    });
+
+    const drillAnchors =
+      anchors.length >= 3
+        ? anchors.slice(1, 3)
+        : anchors.length >= 2
+          ? [anchors[0], anchors[anchors.length - 1]]
+          : anchors;
+    const drillAnchorIds = drillAnchors.map((a) => a.id);
+    const drillTopic =
+      anchors.length >= 3
+        ? drillAnchors[1].locator?.section || `${topic} — Anwendung`
+        : `${topic} — Klausurtyp`;
+    families.push({
+      id: `${slug}.taskfamily.${conceptId}-vl-apply`,
+      conceptId,
+      title: `${meta.title}: ${drillTopic}`,
+      topic: drillTopic,
+      method: `Klausurtyp aus VL (${drillAnchorIds.join(', ')}): Rechen- oder Interpretationsschritte mit Portal-Aufgaben verknüpfen und typische Fehlerquellen prüfen.`,
+      sourceAnchorIds: drillAnchorIds,
+      difficulty: 'schwer',
+      expectedTimeMinutes: 12,
+      commonTraps: [
+        'Zwischenschritte aus der VL überspringen',
+        'Ergebnis ohne ökonomische Interpretation abgeben'
+      ],
+      gradingRubric: [
+        'VL-Methode erkannt',
+        'Zwischenschritte vollständig',
+        'Ergebnis fachlich interpretiert'
+      ]
     });
   }
 
@@ -507,7 +600,11 @@ async function processModule(slug, write) {
   const formulaPath = path.join(repoRoot, slug, 'js/data/formulaCards.js');
   const taskPath = path.join(repoRoot, slug, 'js/data/taskFamilies.js');
   fs.writeFileSync(formulaPath, `${renderFormulaCardsFile(slug, meta, cards)}\n`);
-  fs.writeFileSync(taskPath, `${renderTaskFamiliesFile(slug, meta, families, docFamilies, ingestionMod)}\n`);
+  const platformFamilies = buildPlatformDrillFamilies(slug, meta);
+  fs.writeFileSync(
+    taskPath,
+    `${renderTaskFamiliesFile(slug, meta, families, docFamilies, ingestionMod, platformFamilies)}\n`
+  );
   console.log(`  wrote ${formulaPath}`);
   console.log(`  wrote ${taskPath}`);
 }

@@ -46,10 +46,20 @@ export const CONTENT = {
       <p>Der Monopolpreis liegt über den Grenzkosten und die gehandelte Menge unter der effizienten Wettbewerbsmenge. Dadurch geht ein Teil der potentiellen Handelsgewinne als Deadweight Loss verloren.</p>
       <div class="warn-box"><strong>Klausurfehler:</strong> Der Monopolaufschlag ist keine beliebige Marge. Er ist über die Nachfrageelastizität gebunden; bei vollkommener Konkurrenz bzw. sehr elastischer Nachfrage nähert sich $p(y)$ den Grenzkosten.</div>
     </div>
+    <div class="section-block">
+      <h3>VL-Mechanismus: MR = MC</h3>
+      <p>In Aufgaben mit linearer Nachfrage $p=a-by$ ist der Grenzerlös $MR=a-2by$. Setze $MR=MC$, bestimme $y^*$, dann $p^*$ — erst danach KR/PR/DWL zeichnen oder rechnen.</p>
+      <div class="math-block">$$MR(y)=a-2by,\quad MR=MC \Rightarrow y^*=\frac{a-MC}{2b}$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Markup und Marktmacht</h3>
+      <p>Der Lerner-Index $(p-MC)/p = 1/|\varepsilon|$ verbindet Preisaufschlag und Elastizität. Je elastischer die Nachfrage, desto näher rückt das Monopol an die Wettbewerbslösung.</p>
+    </div>
     `,
     formeln: [
       { label: 'Grenzerlös im Monopol', eq: String.raw`$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$`, desc: 'Kursnotation für Grenzerlös bei fallender Nachfrage.', variables: { y: 'Outputmenge', p: 'inverse Nachfrage', epsilon: 'Preiselastizität der Nachfrage' } },
-      { label: 'Monopolaufschlag', eq: String.raw`$$p(y)=\left(1-\frac{1}{|\varepsilon_{xp}|}\right)^{-1}C'(y)$$`, desc: 'Preis als Aufschlag auf Grenzkosten.' }
+      { label: 'Monopolaufschlag', eq: String.raw`$$p(y)=\left(1-\frac{1}{|\varepsilon_{xp}|}\right)^{-1}C'(y)$$`, desc: 'Preis als Aufschlag auf Grenzkosten.' },
+      { label: 'Lerner-Index', eq: String.raw`$$\frac{p-MC}{p}=\frac{1}{|\varepsilon|}$$`, desc: 'Markup steigt mit Marktmacht.' }
     ],
     aufgaben: [
       {
@@ -562,6 +572,11 @@ export const CONTENT = {
       <p>Die Kontraktkurve beschreibt effiziente Allokationen im Tausch. Ein Walras-Preisvektor wählt aus diesen effizienten Allokationen diejenige, die mit gegebenen Anfangsausstattungen und optimierendem Verhalten kompatibel ist.</p>
     </div>
     <div class="section-block">
+      <h3>Homogenität der Überschussnachfrage</h3>
+      <p>Die aggregierte Überschussnachfrage ist homogen vom Grad 0: Verdoppeln aller Preise ändert reale Budgetmengen nicht, wenn Einkommen und Ausstattung proportional skaliert werden. Deshalb genügt ein relatives Preisverhältnis; das Numéraire-Gut mit $p_1=1$ fixiert die Skala.</p>
+      <div class="math-block">$$z_i(\lambda p) = z_i(p) \quad \forall \lambda > 0$$</div>
+    </div>
+    <div class="section-block">
       <h3>Fehleranalyse</h3>
       <div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
       <div class="warn-box"><strong>Existenz vs. Eindeutigkeit:</strong> Das Walras-Theorem zur Existenz eines GG unter Standardannahmen ist kein Eindeutigkeitsresultat. Mehrere Gleichgewichte sind möglich.</div>
@@ -742,6 +757,13 @@ export const CONTENT = {
     <div class="section-block">
       <h3>Konsumenten- und Produzentenrente</h3>
       <p>Im partiellen Markt gilt bei linearer Nachfrage: $KR$ ist das Dreieck unter der Nachfragekurve über dem Gleichgewichtspreis, $PR$ das Dreieck über der Angebotskurve. Gesamtwohlfahrt $W=KR+PR$ im Wettbewerb.</p>
+      <div class="math-block">$$KR = \frac{1}{2}(P_{max}-P^*)Q^*, \qquad PR = \frac{1}{2}(P^*-P_{min})Q^*$$</div>
+      <p>Bei $P_D=a-bQ$ und $P_S=c+dQ$ folgt $Q^*=(a-c)/(b+d)$ und die Dreiecksformeln direkt aus der Klausur-Standardgrafik.</p>
+    </div>
+    <div class="section-block">
+      <h3>Steuern, Monopol und DWL-Geometrie</h3>
+      <p>Eine Einheitssteuer $t$ verschiebt die effektive Angebotskurve nach oben; das Handelsvolumen sinkt. Der DWL ist das „verlorene“ Dreieck zwischen Nachfrage und (besteuertem) Angebot über der tatsächlich gehandelten Menge — typischer Klausurblock neben Monopol und Mindestpreis.</p>
+      <div class="math-block">$$DWL_{Steuer} \approx \frac{1}{2}\, t\,(Q^* - Q_t)$$</div>
     </div>
     <div class="section-block">
       <h3>Deadweight Loss</h3>
@@ -755,7 +777,9 @@ export const CONTENT = {
     `,
     formeln: [
       { label: 'Utilitaristisch', eq: String.raw`$$W = u_1 + u_2 + \dots + u_n$$`, desc: 'Summe der Nutzen.' },
-      { label: 'Rawlsianisch', eq: String.raw`$$W = \min(u_1, \dots, u_n)$$`, desc: 'Fokus auf den Schwächsten.' }
+      { label: 'Rawlsianisch', eq: String.raw`$$W = \min(u_1, \dots, u_n)$$`, desc: 'Fokus auf den Schwächsten.' },
+      { label: 'Konsumentenrente (linear)', eq: String.raw`$$KR = \frac{1}{2}(P_{max}-P^*)Q^*$$`, desc: 'Dreieck unter der Nachfrage.' },
+      { label: 'DWL', eq: String.raw`$$DWL = W_{Wettbewerb} - (KR + PR)$$`, desc: 'Verlust gegenüber Wettbewerbsoptimum.' }
     ],
     aufgaben: [
       {

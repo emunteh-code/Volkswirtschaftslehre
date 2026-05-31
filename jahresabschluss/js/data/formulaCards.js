@@ -97,6 +97,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.rechnungswesen_intro.orga-kapitel1-pdf.p09.berarbeitete-auflage-sch","jahresabschluss.rechnungswesen_intro.orga-kapitel1-pdf.p07.ws-2024-25-jahresabschlu"]
   }),
   card({
+    id: 'jahresabschluss.rechnungswesen_intro.ek_ver_nderung',
+    conceptId: 'rechnungswesen_intro',
+    officialNotation: "rechnungswesen_intro",
+    displayFormula: "$$\\Delta EK = Jahresergebnis \\pm \\text{Ergebnisverwendung}$$",
+    intuition: "GuV und Bilanz sind über das Eigenkapital verbunden.",
+    derivationSteps: [
+        {
+            "label": "EK-Veränderung",
+            "text": "überarbeitete Auflage, Schäffer-Poeschel Verlag Stuttgart.",
+            "math": "$$\\Delta EK = Jahresergebnis \\pm \\text{Ergebnisverwendung}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu rechnungswesen_intro","EK-Veränderung"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: EK-Veränderung — GuV und Bilanz sind über das Eigenkapital verbunden.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.rechnungswesen_intro-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.rechnungswesen_intro.orga-kapitel1-pdf.p09.berarbeitete-auflage-sch","jahresabschluss.rechnungswesen_intro.orga-kapitel1-pdf.p07.ws-2024-25-jahresabschlu"]
+  }),
+  card({
     id: 'jahresabschluss.gob_rechtsgrundlagen.realisationsprinzip',
     conceptId: 'gob_rechtsgrundlagen',
     officialNotation: "gob_rechtsgrundlagen",
@@ -305,6 +331,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.buchen_konten.kapitel3-pdf.p23.3-3-bilanzielle-wertbewe","jahresabschluss.buchen_konten.kapitel3-pdf.p14.ab-ab"]
   }),
   card({
+    id: 'jahresabschluss.buchen_konten.buchungssatz',
+    conceptId: 'buchen_konten',
+    officialNotation: "buchen_konten",
+    displayFormula: "\\text{Soll an Haben}",
+    intuition: "Jeder Geschäftsvorfall berührt mindestens zwei Konten.",
+    derivationSteps: [
+        {
+            "label": "Buchungssatz",
+            "text": "3.3 BILANZIELLE WERTBEWEGUNGEN – DOPPELTE BUCHFÜHRUNG",
+            "math": "\\text{Soll an Haben}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu buchen_konten","Buchungssatz"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Buchungssatz — Jeder Geschäftsvorfall berührt mindestens zwei Konten.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.buchen_konten-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.buchen_konten.kapitel3-pdf.p23.3-3-bilanzielle-wertbewe","jahresabschluss.buchen_konten.kapitel3-pdf.p14.ab-ab"]
+  }),
+  card({
     id: 'jahresabschluss.buchfuehrung_orga.belegprinzip',
     conceptId: 'buchfuehrung_orga',
     officialNotation: "buchfuehrung_orga",
@@ -352,6 +404,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu buchfuehrung_orga","Systemlogik"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Systemlogik — Vom Grundbuch zum Hauptbuch.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.buchfuehrung_orga-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.buchfuehrung_orga.kapitel4-pdf.p12.4-3-belegorganisation-gr","jahresabschluss.buchfuehrung_orga.kapitel4-pdf.p10.kontenrahmens-in-konteng"]
+  }),
+  card({
+    id: 'jahresabschluss.buchfuehrung_orga.nebenb_cher',
+    conceptId: 'buchfuehrung_orga',
+    officialNotation: "buchfuehrung_orga",
+    displayFormula: "\\sum \\text{Nebenbuch} = \\text{Sammelkonto}",
+    intuition: "Detail- und Hauptbuch müssen konsistent sein.",
+    derivationSteps: [
+        {
+            "label": "Nebenbücher",
+            "text": "4.3 BELEGORGANISATION – GRUNDLAGEN",
+            "math": "\\sum \\text{Nebenbuch} = \\text{Sammelkonto}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu buchfuehrung_orga","Nebenbücher"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Nebenbücher — Detail- und Hauptbuch müssen konsistent sein.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.buchfuehrung_orga-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.buchfuehrung_orga.kapitel4-pdf.p12.4-3-belegorganisation-gr","jahresabschluss.buchfuehrung_orga.kapitel4-pdf.p10.kontenrahmens-in-konteng"]
@@ -461,6 +539,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.umlauf_bewertung_verfahren.kapitel6-1-6-5-pdf.p10.6-2-bewertungsvereinfach","jahresabschluss.umlauf_bewertung_verfahren.kapitel6-1-6-5-pdf.p18.aufwendungen-f-rohstoffe"]
   }),
   card({
+    id: 'jahresabschluss.umlauf_bewertung_verfahren.fifo_verbrauch',
+    conceptId: 'umlauf_bewertung_verfahren',
+    officialNotation: "umlauf_bewertung_verfahren",
+    displayFormula: "\\text{Verbrauch} = \\text{älteste Zugänge zuerst}",
+    intuition: "Endbestand enthält die jüngsten Einheiten.",
+    derivationSteps: [
+        {
+            "label": "FIFO-Verbrauch",
+            "text": "6.2 BEWERTUNGSVEREINFACHUNGSVERFAHREN – FIFO-METHODE (FIRST IN = FIRST OUT)",
+            "math": "\\text{Verbrauch} = \\text{älteste Zugänge zuerst}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu umlauf_bewertung_verfahren","FIFO-Verbrauch"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: FIFO-Verbrauch — Endbestand enthält die jüngsten Einheiten.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.umlauf_bewertung_verfahren-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.umlauf_bewertung_verfahren.kapitel6-1-6-5-pdf.p10.6-2-bewertungsvereinfach","jahresabschluss.umlauf_bewertung_verfahren.kapitel6-1-6-5-pdf.p18.aufwendungen-f-rohstoffe"]
+  }),
+  card({
     id: 'jahresabschluss.werkstoffe_erzeugnisse_buchungen.inventurmethode',
     conceptId: 'werkstoffe_erzeugnisse_buchungen',
     officialNotation: "werkstoffe_erzeugnisse_buchungen",
@@ -482,6 +586,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu werkstoffe_erzeugnisse_buchungen","Inventurmethode"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Inventurmethode — Verbrauchsermittlung über Bestandvergleich.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.werkstoffe_erzeugnisse_buchungen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.werkstoffe_erzeugnisse_buchungen.kapitel6-1-6-5-pdf.p07.6-2-bewertungsvereinfach","jahresabschluss.werkstoffe_erzeugnisse_buchungen.kapitel6-1-6-5-pdf.p12.2000-rohstoffe-an-4400-v"]
+  }),
+  card({
+    id: 'jahresabschluss.werkstoffe_erzeugnisse_buchungen.fortschreibung',
+    conceptId: 'werkstoffe_erzeugnisse_buchungen',
+    officialNotation: "werkstoffe_erzeugnisse_buchungen",
+    displayFormula: "\\text{laufend: Material an Rohstoffe}",
+    intuition: "Verbrauch wird bei jeder Entnahme direkt erfasst.",
+    derivationSteps: [
+        {
+            "label": "Fortschreibung",
+            "text": "6.2 BEWERTUNGSVEREINFACHUNGSVERFAHREN – ÜBERSICHT",
+            "math": "\\text{laufend: Material an Rohstoffe}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu werkstoffe_erzeugnisse_buchungen","Fortschreibung"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Fortschreibung — Verbrauch wird bei jeder Entnahme direkt erfasst.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.werkstoffe_erzeugnisse_buchungen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.werkstoffe_erzeugnisse_buchungen.kapitel6-1-6-5-pdf.p07.6-2-bewertungsvereinfach","jahresabschluss.werkstoffe_erzeugnisse_buchungen.kapitel6-1-6-5-pdf.p12.2000-rohstoffe-an-4400-v"]
@@ -612,6 +742,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu eigenkapital_kapitalgesellschaften","Jahresüberschuss"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Jahresüberschuss — Verbindet GuV und Bilanz.",
+    relatedTaskFamilies: ["jahresabschluss.taskfamily.eigenkapital_kapitalgesellschaften-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["jahresabschluss.eigenkapital_kapitalgesellschaften.kapitel7-pdf.p17.1-entnahme-5-1-einlage-1","jahresabschluss.eigenkapital_kapitalgesellschaften.kapitel7-pdf.p15.100-000-aktien-zum-nennw"]
+  }),
+  card({
+    id: 'jahresabschluss.eigenkapital_kapitalgesellschaften.gesetzliche_r_cklage',
+    conceptId: 'eigenkapital_kapitalgesellschaften',
+    officialNotation: "eigenkapital_kapitalgesellschaften",
+    displayFormula: "$$\\text{Einstellung} = 5\\% \\cdot Jahresüberschuss$$",
+    intuition: "Vereinfachte Klausurform (bis Obergrenze).",
+    derivationSteps: [
+        {
+            "label": "Gesetzliche Rücklage",
+            "text": "1. Entnahme      5,--                                                                 1. Einlage   10,--",
+            "math": "$$\\text{Einstellung} = 5\\% \\cdot Jahresüberschuss$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu eigenkapital_kapitalgesellschaften","Gesetzliche Rücklage"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Gesetzliche Rücklage — Vereinfachte Klausurform (bis Obergrenze).",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.eigenkapital_kapitalgesellschaften-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.eigenkapital_kapitalgesellschaften.kapitel7-pdf.p17.1-entnahme-5-1-einlage-1","jahresabschluss.eigenkapital_kapitalgesellschaften.kapitel7-pdf.p15.100-000-aktien-zum-nennw"]

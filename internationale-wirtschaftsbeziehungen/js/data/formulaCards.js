@@ -461,6 +461,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.quoten_sanktionen.intwb6-pdf.p03.eu-prus-eu","internationale-wirtschaftsbeziehungen.quoten_sanktionen.intwb6-pdf.p06.fla-che-e-in-der-folgend"]
   }),
   card({
+    id: 'internationale-wirtschaftsbeziehungen.quoten_sanktionen.zoll_vs_quote_renten',
+    conceptId: 'quoten_sanktionen',
+    officialNotation: "quoten_sanktionen",
+    displayFormula: "\\text{Zollrente} \\rightarrow \\text{Staat};\\quad \\text{Quotenrente} \\rightarrow \\text{Importrechte}",
+    intuition: "Gleicher Preis, unterschiedliche Verteilung.",
+    derivationSteps: [
+        {
+            "label": "Zoll vs. Quote (Renten)",
+            "text": "EU              pRUS                               EU",
+            "math": "\\text{Zollrente} \\rightarrow \\text{Staat};\\quad \\text{Quotenrente} \\rightarrow \\text{Importrechte}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu quoten_sanktionen","Zoll vs. Quote (Renten)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Zoll vs. Quote (Renten) — Gleicher Preis, unterschiedliche Verteilung.",
+    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.quoten_sanktionen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["internationale-wirtschaftsbeziehungen.quoten_sanktionen.intwb6-pdf.p03.eu-prus-eu","internationale-wirtschaftsbeziehungen.quoten_sanktionen.intwb6-pdf.p06.fla-che-e-in-der-folgend"]
+  }),
+  card({
     id: 'internationale-wirtschaftsbeziehungen.wto_integration.trade_creation',
     conceptId: 'wto_integration',
     officialNotation: "wto_integration",
@@ -898,6 +924,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu trilemma","Fixkurs-Folge"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Fixkurs-Folge — Monetäre Autonomie geht verloren.",
+    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.trilemma-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["internationale-wirtschaftsbeziehungen.trilemma.intwb12-pdf.p15.q-a-a","internationale-wirtschaftsbeziehungen.trilemma.intwb12-pdf.p22.beispiele-china-und-arge"]
+  }),
+  card({
+    id: 'internationale-wirtschaftsbeziehungen.trilemma.flex_kurs_folge',
+    conceptId: 'trilemma',
+    officialNotation: "trilemma",
+    displayFormula: "$$\\text{Kapitalmobilität} + \\text{Autonomie} \\Rightarrow \\text{flexibler } E$$",
+    intuition: "Wechselkurs übernimmt Anpassung.",
+    derivationSteps: [
+        {
+            "label": "Flex-Kurs-Folge",
+            "text": "q            A∗     A",
+            "math": "$$\\text{Kapitalmobilität} + \\text{Autonomie} \\Rightarrow \\text{flexibler } E$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu trilemma","Flex-Kurs-Folge"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Flex-Kurs-Folge — Wechselkurs übernimmt Anpassung.",
     relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.trilemma-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["internationale-wirtschaftsbeziehungen.trilemma.intwb12-pdf.p15.q-a-a","internationale-wirtschaftsbeziehungen.trilemma.intwb12-pdf.p22.beispiele-china-und-arge"]

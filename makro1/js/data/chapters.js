@@ -138,11 +138,20 @@ export const CONTENT = {
         <p>Höheres autonomes Konsumverhalten, höhere Investitionen, höhere Staatsausgaben oder niedrigere Steuern verschieben $Z$ nach oben. Bei gegebenem Preisniveau steigt deshalb die Gleichgewichtsproduktion.</p>
         ${warn('Y ist gleichzeitig Einkommen und Output', 'Gerade weil Einkommen die Nachfrage beeinflusst, entsteht der Rückkopplungsmechanismus. Wer $Y$ als rein exogen behandelt, verpasst die eigentliche Logik des Modells.')}
         ${warn('Z und Y nicht verwechseln', 'Im Diagramm ist $Z$ die geplante Nachfragekurve, $Y$ die 45°-Linie. Erst ihr Schnittpunkt liefert das Gleichgewicht.')}
+      `),
+      section('Klausurroutine: Gleichgewicht algebraisch lösen', `
+        <p>Typische Aufgaben kombinieren Konsumfunktion, Steuern und exogene Blöcke. Setze $Y=Z$, löse nach $Y$ auf und prüfe, ob $c_1<1$ erfüllt ist — sonst existiert kein stabiles Gütermarktgleichgewicht in dieser Form.</p>
+        ${math(String.raw`$$Y^* = \frac{c_0 + I + G - c_1 T}{1-c_1}$$`)}
+        <p>Interpretiere den Nenner: Je höher die marginale Konsumquote, desto stärker verstärkt sich jeder Nachfrageimpuls über Einkommensrückkopplungen.</p>
+      `),
+      section('Von der Grafik zur Politikfolgerung', `
+        <p>Ein Nachfrageschock wirkt nur dann expansiv, wenn das Modell kurzfristig gilt: Preise träge, Kapazität nicht bindend. Für Fiskalpolitik heißt das: Die Wirkung von $G$ hängt von $c_1$ ab, nicht von bloßer politischer Absicht.</p>
       `)
     ].join(''),
     formeln: [
       { label: 'Geplante Nachfrage', eq: String.raw`$$Z = c_0 + c_1(Y-T) + I + G$$`, desc: 'Gütermarktnachfrage bei linearer Konsumfunktion', variables: { 'c_0': 'autonomer Konsum', 'c_1': 'marginale Konsumquote' } },
-      { label: 'Gleichgewichtsbedingung', eq: String.raw`$$Y = Z$$`, desc: 'Produktion entspricht Nachfrage', variables: {} }
+      { label: 'Gleichgewichtsbedingung', eq: String.raw`$$Y = Z$$`, desc: 'Produktion entspricht Nachfrage', variables: {} },
+      { label: 'Gütermarktlösung', eq: String.raw`$$Y^* = \frac{c_0 + I + G - c_1 T}{1-c_1}$$`, desc: 'Kurzfristiges Gleichgewicht aus Nachfrageidentität.' }
     ],
     aufgaben: [
       task(
@@ -162,6 +171,15 @@ export const CONTENT = {
           step('Die Produktion steigt, weil Unternehmen auf die höhere geplante Nachfrage reagieren.')
         ],
         'Die Nachfrage verschiebt sich nach oben; das kurzfristige Gleichgewicht der Produktion steigt.'
+      ),
+      task(
+        String.raw`Mit $c_0=100$, $c_1=0{,}8$, $T=50$, $I=150$, $G=100$: Berechne $Y^*$ und erkläre die Rolle von $1/(1-c_1)$.`,
+        [
+          step('Gleichgewichtsformel anwenden.', String.raw`Y^*=\frac{100+150+100-0{,}8\cdot 50}{1-0{,}8}=\frac{310}{0{,}2}=1550`),
+          step('Multiplikator benennen.', String.raw`1/(1-c_1)=5`),
+          step('Deuten: Jeder autonome Nachfrage-Euro wird fünffach über Konsumrunden verstärkt.')
+        ],
+        String.raw`$Y^*=1550$; der Multiplikator beträgt $5$.`
       )
     ]
   },
@@ -183,6 +201,11 @@ export const CONTENT = {
         <p>Proportionale Steuern oder Transfers dämpfen den Multiplikator, weil mit steigendem Einkommen automatisch Kaufkraft abgeschöpft bzw. gestützt wird. Genau deshalb sind reale Fiskalsysteme weniger extrem schwankungsanfällig als das nackte Grundmodell.</p>
         ${warn('Erstimpuls und Gesamteffekt trennen', 'Ein Ausgabenimpuls von 100 erhöht die Produktion nicht nur um 100. Die Folgerunden sind gerade der Kern des Multiplikators.')}
         ${warn('Steuer- und Staatsausgabenmultiplikator nicht gleichsetzen', 'Staatsausgaben wirken eins zu eins in der ersten Runde; Steuersenkungen nur über zusätzlichen Konsum. Deshalb ist der Steuermultiplikator kleiner.')}
+      `),
+      section('Ausgaben- und Einkommensmultiplikator', `
+        <p>Der <strong>Ausgabenmultiplikator</strong> $1/(1-c_1)$ misst die Wirkung autonomer Nachfrage auf $Y$. Der <strong>Einkommensmultiplikator</strong> (Steuermultiplikator) $-c_1/(1-c_1)$ ist kleiner, weil Steuerentlastung nur den konsumierten Anteil $(1-s)$ des zusätzlichen Einkommens aktiviert.</p>
+        ${math(String.raw`$$\Delta Y = \frac{1}{1-c_1}\Delta A + \frac{-c_1}{1-c_1}\Delta T$$`)}
+        <p>Bei ausgeglichenem Haushalt ($\Delta G = \Delta T$) bleibt ein positiver Nettoeffekt — das ist der klassische balanced-budget-Multiplikator von 1 in der einfachen Form ohne proportionale Steuern.</p>
       `)
     ].join(''),
     formeln: [

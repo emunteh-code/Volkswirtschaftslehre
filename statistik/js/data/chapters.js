@@ -1130,6 +1130,10 @@ export const CONTENT = {
       <p>Ein signifikanter F-Test sagt nur, dass <em>irgendeine</em> Gruppe verschieden ist. Post-hoc-Tests (Tukey, Bonferroni) identifizieren, welche Gruppen sich unterscheiden, und kontrollieren den familienweisen Fehler 1. Art.</p>
     </div>
     <div class="section-block">
+      <h3>Effektstärke und Interpretation</h3>
+      <p>Ein signifikanter F-Test beantwortet nur, ob nicht alle Gruppenmittel gleich sind. $\\eta^2 = SSB/SST$ misst, welcher Anteil der Gesamtstreuung durch Gruppenunterschiede erklärt wird — für die Klausur immer zusammen mit den Gruppenmitteln berichten.</p>
+    </div>
+    <div class="section-block">
       <h3>Fehleranalyse</h3>
       <div class="warn-box" data-warning-placement="rail"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei klaren Verletzungen darf der F-Test nicht blind weitergelesen werden; zuerst müssen Annahmenproblem und geeignete Alternative sauber begründet werden.</div>
     </div>

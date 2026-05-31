@@ -426,11 +426,16 @@ export const CONTENT = {
         'Warum Institutionen wichtig werden',
         `<p>Gerade Quoten und Sanktionen zeigen, warum internationale Regeln wichtig sind. Ohne übergeordnete Ordnung drohen Vergeltungsspiralen und ineffiziente Politikzyklen.</p>
          ${warn('Rentenfehler:', 'Wer Quote und Zoll gleichsetzt, ohne die Quotenrente zu diskutieren, verliert den zentralen ökonomischen Unterschied aus dem Blick.')}`
+      ),
+      section(
+        'Dynamische Wirkung bei Nachfragesteigerung',
+        `<p>Beim Zoll passt sich bei höherer Nachfrage die Importmenge an, solange der Inlandspreis über dem Weltmarktpreis liegt. Bei der Quote bleibt die Menge fix; der Preisdruck im Inland steigt stärker. Genau diese dynamische Differenz ist in VL-Übungsmaterial zu Quoten und diskriminierender Politik klausurrelevant.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Quote als Mengenrestriktion', eq: String.raw`$$M \leq \bar M$$`, desc: 'Importmenge wird direkt begrenzt.' },
-      { label: 'Quotenrente', eq: String.raw`$$\text{Quotenrente} = (P_{in} - P_w)\cdot M$$`, desc: 'Erlös aus der künstlichen Verknappung.' }
+      { label: 'Quotenrente', eq: String.raw`$$\text{Quotenrente} = (P_{in} - P_w)\cdot M$$`, desc: 'Erlös aus der künstlichen Verknappung.' },
+      { label: 'Zoll vs. Quote (Renten)', eq: String.raw`\text{Zollrente} \rightarrow \text{Staat};\quad \text{Quotenrente} \rightarrow \text{Importrechte}`, desc: 'Gleicher Preis, unterschiedliche Verteilung.' }
     ],
     aufgaben: [
       task(
@@ -448,6 +453,14 @@ export const CONTENT = {
           step('Politisches Ziel und ökonomische Kosten trennen.', String.raw`\text{Normatives Ziel } \neq \text{ automatisch effiziente Maßnahme}`)
         ],
         'Auch bei moralischer Begründung musst du ökonomisch analysieren, wer belastet wird, welche Umwege entstehen und ob die Maßnahme ihr Ziel überhaupt mit vertretbaren Kosten erreicht.'
+      ),
+      task(
+        'Ein äquivalenter Zoll und eine äquivalente Quote erzeugen denselben Inlandspreis. Wer profitiert jeweils von der Handelsrente?',
+        [
+          step('Zollrente zuordnen.', String.raw`\text{Staat erhält } (P_{in}-P_w)\cdot M`),
+          step('Quotenrente zuordnen.', String.raw`\text{Inhaber der Importlizenzen erhalten die Rente.}`)
+        ],
+        'Bei gleichem Preis verteilt sich die Rente unterschiedlich: Zoll an den Staat, Quote an die Importrechte.'
       )
     ]
   },
@@ -786,11 +799,20 @@ export const CONTENT = {
         'Regimekombinationen lesen',
         `<p>Fixkurs + Kapitalmobilität erzwingt Zinsanpassung an das Ausland. Fixkurs + autonome Geldpolitik geht nur mit Kapitalverkehrskontrollen. Kapitalmobilität + autonome Geldpolitik erfordert flexible Wechselkurse. Diese Matrix musst du in der Klausur schnell abrufen können.</p>
          ${warn('Merksatzfehler:', 'Das Trilemma ist kein politisches Motto, sondern eine harte Restriktion aus Kapitalmobilität, Zinsarbitrage und Wechselkursbindung.')}`
+      ),
+      section(
+        'Evidenz und politische Lesart (VL12)',
+        `<p>Die Vorlesung zum monetären Trilemma verbindet die Theorie mit empirischer Evidenz: Länder mit fixen Kursen und offenen Kapitalmärkten zeigen engere Zinsbindung an das Ausland. Für Transferaufgaben heißt das: Nenne zuerst die aufgegebenen Ziele, dann welches Ziel im Dreieck geopfert werden muss, und erst danach die erwartete Zins- oder Kursreaktion.</p>`
+      ),
+      section(
+        'Flexible Kurse als dritte Ecke',
+        `<p>Wer Kapitalmobilität und geldpolitische Autonomie behalten will, muss den Wechselkurs flexibel lassen. Dann absorbiert der Kurs Schocks, statt dass die Zentralbank jeden Druck sofort mit Reserven abfängt. Genau diese Kombination ist die Standardlogik großer Industrieländer mit eigenständiger Geldpolitik.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Trilemma', eq: String.raw`$$\{\text{Fixkurs},\ \text{Kapitalmobilität},\ \text{Geldpolitik}\} \Rightarrow \text{nur zwei zugleich}$$`, desc: 'Makropolitischer Zielkonflikt.' },
-      { label: 'Fixkurs-Folge', eq: String.raw`$$\text{Fixkurs} + \text{Kapitalmobilität} \Rightarrow i = i^*$$`, desc: 'Monetäre Autonomie geht verloren.' }
+      { label: 'Fixkurs-Folge', eq: String.raw`$$\text{Fixkurs} + \text{Kapitalmobilität} \Rightarrow i = i^*$$`, desc: 'Monetäre Autonomie geht verloren.' },
+      { label: 'Flex-Kurs-Folge', eq: String.raw`$$\text{Kapitalmobilität} + \text{Autonomie} \Rightarrow \text{flexibler } E$$`, desc: 'Wechselkurs übernimmt Anpassung.' }
     ],
     aufgaben: [
       task(
@@ -808,6 +830,22 @@ export const CONTENT = {
           step('Verlust der Autonomie benennen.', String.raw`\text{Gerade daran wird sichtbar, welches Ziel im Dreieck geopfert wird.}`)
         ],
         'Der Fixkursfall zeigt am klarsten, wie Kapitalmobilität und Kursbindung gemeinsam die Geldpolitik disziplinieren und damit das Trilemma greifbar machen.'
+      ),
+      task(
+        'Ein Land führt Kapitalverkehrskontrollen ein, will aber Fixkurs und eigene Geldpolitik. Welche Ecke des Trilemmas wird damit „gelöst“?',
+        [
+          step('Mobilität einschränken.', String.raw`\text{Kapitalmobilität wird nicht mehr vollständig.}`),
+          step('Folge für die Matrix ziehen.', String.raw`\text{Fixkurs + Autonomie werden ohne vollständige Mobilität vereinbar.}`)
+        ],
+        'Mit Kontrollen bricht die vollständige Kapitalmobilität; damit können Fixkurs und nationale Geldpolitik zumindest temporär kombiniert werden.'
+      ),
+      task(
+        'Warum ist „flexibler Wechselkurs + offene Kapitalmärkte“ keine Schwäche, sondern die dritte Standardlösung des Trilemmas?',
+        [
+          step('Anpassungsfunktion des Kurses nennen.', String.raw`\text{Der Kurs absorbiert externe und geldpolitische Schocks.}`),
+          step('Autonomie bewahren.', String.raw`\text{Die Zentralbank kann den Inlandszins unabhängiger vom Ausland setzen.}`)
+        ],
+        'Flexible Kurse sind die Lösung, wenn ein Land offene Finanzmärkte und eigenständige Geldpolitik will — nicht ein „Notfallmodus“.'
       )
     ]
   },

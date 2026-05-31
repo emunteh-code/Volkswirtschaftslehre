@@ -175,6 +175,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.liquiditaetsplanung.v2-studip-pdf.p03.06-11-2024-georg-august-","finanzwirtschaft.liquiditaetsplanung.v2-studip-pdf.p15.06-11-2024-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.liquiditaetsplanung.maximaler_bedarf',
+    conceptId: 'liquiditaetsplanung',
+    officialNotation: "liquiditaetsplanung",
+    displayFormula: "$$KB_{max} = -\\min_t K_t$$",
+    intuition: "Finanzierungsbedarf aus tiefstem kumulierten Saldo.",
+    derivationSteps: [
+        {
+            "label": "Maximaler Bedarf",
+            "text": "06.11.2024                      Georg-August-Universität Göttingen                                                  3",
+            "math": "$$KB_{max} = -\\min_t K_t$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu liquiditaetsplanung","Maximaler Bedarf"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Maximaler Bedarf — Finanzierungsbedarf aus tiefstem kumulierten Saldo.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.liquiditaetsplanung-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.liquiditaetsplanung.v2-studip-pdf.p03.06-11-2024-georg-august-","finanzwirtschaft.liquiditaetsplanung.v2-studip-pdf.p15.06-11-2024-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.kapitalmarkt_bewertung.marktpreis_der_zeit',
     conceptId: 'kapitalmarkt_bewertung',
     officialNotation: "Zins",
@@ -369,6 +395,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.intertemporale_wahl.v3-studip-pdf.p13.13-11-2024-georg-august-","finanzwirtschaft.intertemporale_wahl.v3-studip-pdf.p15.13-11-2024-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.intertemporale_wahl.investitionsverschiebung',
+    conceptId: 'intertemporale_wahl',
+    officialNotation: "intertemporale_wahl",
+    displayFormula: "K_0 > 0 \\Rightarrow \\text{äußerer Konsumpfad}",
+    intuition: "Positiver Kapitalwert erweitert die Erreichbarkeit.",
+    derivationSteps: [
+        {
+            "label": "Investitionsverschiebung",
+            "text": "13.11.2024                                       Georg-August-Universität Göttingen                                     13",
+            "math": "K_0 > 0 \\Rightarrow \\text{äußerer Konsumpfad}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu intertemporale_wahl","Investitionsverschiebung"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Investitionsverschiebung — Positiver Kapitalwert erweitert die Erreichbarkeit.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.intertemporale_wahl-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.intertemporale_wahl.v3-studip-pdf.p13.13-11-2024-georg-august-","finanzwirtschaft.intertemporale_wahl.v3-studip-pdf.p15.13-11-2024-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.kapitalwert_fisher.kapitalwert',
     conceptId: 'kapitalwert_fisher',
     officialNotation: "A_0, CF_t, i, K_0",
@@ -494,6 +546,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu auf_abzinsen","Barwert"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Barwert — Aus Zukunftswert wird Gegenwartswert.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.auf_abzinsen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.auf_abzinsen.v6-studip-pdf.p08.04-12-2024-georg-august-","finanzwirtschaft.auf_abzinsen.v6-studip-pdf.p10.04-12-2024-georg-august-"]
+  }),
+  card({
+    id: 'finanzwirtschaft.auf_abzinsen.variable_zinsen',
+    conceptId: 'auf_abzinsen',
+    officialNotation: "auf_abzinsen",
+    displayFormula: "$$BW_0 = \\frac{EW_n}{\\prod_{t=1}^{n}(1+i_t)}$$",
+    intuition: "Periodenscharfe Abzinsung bei wechselnden Sätzen.",
+    derivationSteps: [
+        {
+            "label": "Variable Zinsen",
+            "text": "04.12.2024                                        Georg-August-Universität Göttingen                                    8",
+            "math": "$$BW_0 = \\frac{EW_n}{\\prod_{t=1}^{n}(1+i_t)}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu auf_abzinsen","Variable Zinsen"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Variable Zinsen — Periodenscharfe Abzinsung bei wechselnden Sätzen.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.auf_abzinsen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.auf_abzinsen.v6-studip-pdf.p08.04-12-2024-georg-august-","finanzwirtschaft.auf_abzinsen.v6-studip-pdf.p10.04-12-2024-georg-august-"]
@@ -681,6 +759,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.izf_kapitalwertfunktion.v8-studip-pdf.p03.18-12-2024-georg-august-","finanzwirtschaft.izf_kapitalwertfunktion.v8-studip-pdf.p05.18-12-2024-georg-august-"]
   }),
   card({
+    id: 'finanzwirtschaft.izf_kapitalwertfunktion.kapitalwertfunktion',
+    conceptId: 'izf_kapitalwertfunktion',
+    officialNotation: "izf_kapitalwertfunktion",
+    displayFormula: "$$K(r) = -A_0 + \\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}$$",
+    intuition: "Grundlage für IZF und Sensitivität.",
+    derivationSteps: [
+        {
+            "label": "Kapitalwertfunktion",
+            "text": "18.12.2024                                Georg-August-Universität Göttingen                            3",
+            "math": "$$K(r) = -A_0 + \\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu izf_kapitalwertfunktion","Kapitalwertfunktion"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Kapitalwertfunktion — Grundlage für IZF und Sensitivität.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.izf_kapitalwertfunktion-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.izf_kapitalwertfunktion.v8-studip-pdf.p03.18-12-2024-georg-august-","finanzwirtschaft.izf_kapitalwertfunktion.v8-studip-pdf.p05.18-12-2024-georg-august-"]
+  }),
+  card({
     id: 'finanzwirtschaft.izf_grenzen.mehrdeutigkeit',
     conceptId: 'izf_grenzen',
     officialNotation: "izf_grenzen",
@@ -710,6 +814,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu izf_grenzen","Mehrdeutigkeit"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Mehrdeutigkeit — Der IZF kann seine Eindeutigkeit verlieren.",
+    relatedTaskFamilies: ["finanzwirtschaft.taskfamily.izf_grenzen-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["finanzwirtschaft.izf_grenzen.v8-studip-pdf.p03.18-12-2024-georg-august-","finanzwirtschaft.izf_grenzen.v8-studip-pdf.p05.18-12-2024-georg-august-"]
+  }),
+  card({
+    id: 'finanzwirtschaft.izf_grenzen.wiederanlagepr_misse',
+    conceptId: 'izf_grenzen',
+    officialNotation: "izf_grenzen",
+    displayFormula: "\\text{Zwischenüberschüsse werden zu } r^* \\text{ reinvestiert}",
+    intuition: "Implizite und oft unrealistische Annahme des IZF.",
+    derivationSteps: [
+        {
+            "label": "Wiederanlageprämisse",
+            "text": "18.12.2024                                Georg-August-Universität Göttingen                            3",
+            "math": "\\text{Zwischenüberschüsse werden zu } r^* \\text{ reinvestiert}"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu izf_grenzen","Wiederanlageprämisse"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Wiederanlageprämisse — Implizite und oft unrealistische Annahme des IZF.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.izf_grenzen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.izf_grenzen.v8-studip-pdf.p03.18-12-2024-georg-august-","finanzwirtschaft.izf_grenzen.v8-studip-pdf.p05.18-12-2024-georg-august-"]

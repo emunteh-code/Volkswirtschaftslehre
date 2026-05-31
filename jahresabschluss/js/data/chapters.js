@@ -48,11 +48,16 @@ export const CONTENT = {
         'Doppelte Buchführung als Stabilitätsmechanismus',
         `<p>Jeder Geschäftsvorfall berührt mindestens zwei Konten. Dadurch bleibt die Bilanzgleichung erhalten und jede Veränderung wird nachvollziehbar dokumentiert. Genau diese Doppik ist die Grundlage der späteren Abschlusslogik.</p>
          ${warn('Einstiegsfehler:', 'Viele Antworten behandeln Bilanz und GuV wie zwei unverbundene Tabellen. Tatsächlich erklärt die GuV die periodische Veränderung des Eigenkapitals.')}`
+      ),
+      section(
+        'Adressaten und Informationszweck',
+        `<p>Der Companion unterscheidet externe Adressaten (Gläubiger, Investoren, Behörden) von interner Steuerung. Für Gläubiger zählen Vorsicht und Verlässlichkeit; für Eigentümer zusätzlich Erfolgsnachweis und Ausschüttungsgrundlage. In Klausuren musst du deshalb nicht nur Konten kennen, sondern erklären, <em>welche</em> Information ein Posten für welchen Adressaten liefert.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Bilanzgleichung', eq: String.raw`$$A = P = EK + FK$$`, desc: 'Mittelverwendung entspricht Mittelherkunft.' },
-      { label: 'Jahresergebnis', eq: String.raw`$$Jahresergebnis = Erträge - Aufwendungen$$`, desc: 'Die GuV erklärt die Erfolgsänderung der Periode.' }
+      { label: 'Jahresergebnis', eq: String.raw`$$Jahresergebnis = Erträge - Aufwendungen$$`, desc: 'Die GuV erklärt die Erfolgsänderung der Periode.' },
+      { label: 'EK-Veränderung', eq: String.raw`$$\Delta EK = Jahresergebnis \pm \text{Ergebnisverwendung}$$`, desc: 'GuV und Bilanz sind über das Eigenkapital verbunden.' }
     ],
     aufgaben: [
       task(
@@ -70,6 +75,14 @@ export const CONTENT = {
           step('Den Typ der Veränderung benennen.', String.raw`\text{Aktivtausch}`)
         ],
         'Es findet nur ein Aktivtausch statt: Eine Aktivposition steigt, eine andere sinkt im selben Betrag.'
+      ),
+      task(
+        'Warum interessiert einen Gläubiger die Bilanz anders als einen Eigentümer?',
+        [
+          step('Gläubigerschutz benennen.', String.raw`\text{Gläubiger fragen nach Zahlungsfähigkeit und vorsichtiger Bewertung.}`),
+          step('Eigentümerperspektive ergänzen.', String.raw`\text{Eigentümer brauchen zusätzlich den periodischen Erfolg und die Verwendungslogik.}`)
+        ],
+        'Gläubiger lesen vor allem Sicherheit und Verbindlichkeiten; Eigentümer lesen zusätzlich Ertrag und Eigenkapitalentwicklung über die GuV.'
       )
     ]
   },
@@ -228,11 +241,22 @@ export const CONTENT = {
         'Buchungssätze lesen und bilden',
         `<p>Der Buchungssatz folgt der Logik „Soll an Haben“. In Klausuren zählt nicht bloß das Ergebnis, sondern die Begründung über Kontenart und Bewegungsrichtung.</p>
          ${warn('Kontenfehler:', 'Wenn Soll und Haben auswendig statt systematisch gelernt werden, kippen besonders gemischte Geschäftsvorfälle schnell in falsche Buchungssätze.')}`
+      ),
+      section(
+        'Erfolgskonten und GuV-Abschluss',
+        `<p>Erfolgskonten sammeln periodische Aufwendungen und Erträge. Am Periodenende werden sie über ein GuV-Konto abgeschlossen; das Ergebnis fließt in das Eigenkapital. Die Companion-Logik „Buchen auf Bestands- und Erfolgskonten“ verlangt deshalb immer die Verknüpfung: Buchungssatz → Erfolgswirkung → EK-Veränderung.</p>
+         ${mathBlock(mathContent(String.raw`$$\text{GuV-Abschluss: Erfolgskonten} \rightarrow \text{GuV-Konto} \rightarrow \text{EK}$$`))}
+      `
+      ),
+      section(
+        'Prüfungsroutine für Buchungssätze',
+        `<p>Die Quelle arbeitet mit T-Konten und expliziten Soll-/Haben-Buchungen. Klausurstabil ist deshalb: (1) betroffene Konten benennen, (2) Kontenart bestimmen, (3) Zugang/Abgang zuordnen, (4) Buchungssatz formulieren, (5) Bilanz- oder Erfolgswirkung kurz erklären.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Aktivkonto', eq: String.raw`\text{AB im Soll,\ Zugänge Soll,\ Abgänge Haben}`, desc: 'Grundlogik eines Aktivkontos.' },
-      { label: 'Passivkonto', eq: String.raw`\text{AB im Haben,\ Zugänge Haben,\ Abgänge Soll}`, desc: 'Spiegelbildliche Logik des Passivkontos.' }
+      { label: 'Passivkonto', eq: String.raw`\text{AB im Haben,\ Zugänge Haben,\ Abgänge Soll}`, desc: 'Spiegelbildliche Logik des Passivkontos.' },
+      { label: 'Buchungssatz', eq: String.raw`\text{Soll an Haben}`, desc: 'Jeder Geschäftsvorfall berührt mindestens zwei Konten.' }
     ],
     aufgaben: [
       task(
@@ -250,6 +274,22 @@ export const CONTENT = {
           step('Abschlusslogik ergänzen.', String.raw`\text{Über die GuV werden Erfolgskonten in die Bilanzlogik zurückgeführt.}`)
         ],
         'Erfolgskonten sind keine losgelöste Parallelwelt: Sie erklären die periodische Veränderung des Eigenkapitals.'
+      ),
+      task(
+        'Ein Kunde zahlt eine offene Forderung per Banküberweisung. Welche Bilanzwirkung liegt vor?',
+        [
+          step('Konten bestimmen.', String.raw`\text{Bank } \uparrow,\; \text{Forderungen } \downarrow`),
+          step('Bewegungsart benennen.', String.raw`\text{Aktivtausch innerhalb der Aktiva}`)
+        ],
+        'Es handelt sich um einen Aktivtausch: Liquidität steigt, Forderungen sinken; die Bilanzsumme bleibt unverändert.'
+      ),
+      task(
+        'Nach dem GuV-Abschluss steht auf dem GuV-Konto ein Jahresüberschuss. Wohin wird er gebucht?',
+        [
+          step('Erfolgskonten schließen.', String.raw`\text{Aufwendungen und Erträge werden über das GuV-Konto saldiert.}`),
+          step('Ergebnis ins Eigenkapital überführen.', String.raw`\text{GuV-Konto an Eigenkapital}`)
+        ],
+        'Der Jahresüberschuss wird vom GuV-Konto ins Eigenkapital übertragen und erhöht damit die Passivseite.'
       )
     ]
   },
@@ -269,11 +309,22 @@ export const CONTENT = {
         'Belegprinzip',
         `<p>Keine Buchung ohne Beleg: Jeder Buchungssatz braucht eine nachvollziehbare Dokumentationsbasis. Dieses Prinzip ist organisatorisch und klausurmethodisch wichtig, weil es zeigt, dass Rechnungslegung prüfungs- und kontrollfähig bleiben muss.</p>
          ${warn('Organisationsblindheit:', 'Viele Lernende sehen nur den Kontenplan. Für ordnungsmäßige Buchführung gehören aber immer auch Belege und Buchungsnachweise dazu.')}`
+      ),
+      section(
+        'Nebenbücher und Kontrollfunktion',
+        `<p>Debitoren-, Kreditoren- und Anlagennebenbücher entlasten das Hauptbuch und sichern Detailnachweise. In Klausuren zeigt sich die Kontrollfunktion: Summen der Nebenbücher müssen mit den Sammelkonten im Hauptbuch übereinstimmen.</p>`
+      ),
+      section(
+        'Prüfungsroutine Buchführungsorganisation',
+        `<p>Companion-Logik: Erst Belegart (Rechnung, Bank, Lohn), dann Buchungsweg (Grundbuch → Hauptbuch), dann Auswertungskonto. Fehler entstehen, wenn die chronologische Spur unterbrochen ist.</p>
+         ${mathBlock(mathContent(String.raw`$$\text{Beleg} \rightarrow \text{Grundbuch} \rightarrow \text{Hauptbuch} \rightarrow \text{Bilanz/GuV}$$`))}
+      `
       )
     ].join(''),
     formeln: [
       { label: 'Belegprinzip', eq: String.raw`\text{Keine Buchung ohne Beleg}`, desc: 'Organisatorischer Kern ordnungsmäßiger Buchführung.' },
-      { label: 'Systemlogik', eq: String.raw`\text{chronologisch} \rightarrow \text{sachlich geordnet}`, desc: 'Vom Grundbuch zum Hauptbuch.' }
+      { label: 'Systemlogik', eq: String.raw`\text{chronologisch} \rightarrow \text{sachlich geordnet}`, desc: 'Vom Grundbuch zum Hauptbuch.' },
+      { label: 'Nebenbücher', eq: String.raw`\sum \text{Nebenbuch} = \text{Sammelkonto}`, desc: 'Detail- und Hauptbuch müssen konsistent sein.' }
     ],
     aufgaben: [
       task(
@@ -354,11 +405,18 @@ export const CONTENT = {
         'Strenges Niederstwertprinzip',
         `<p>Beim Umlaufvermögen gilt das strenge Niederstwertprinzip: Liegt der beizulegende Wert unter den Anschaffungskosten, ist auf den niedrigeren Wert abzuschreiben. Genau hier zeigt sich die besondere Vorsicht des HGB.</p>
          ${warn('Verbrauchsfehler:', 'FIFO oder Durchschnitt sind keine bloßen Rechentricks. Sie beeinflussen Endbestand, Aufwand und damit unmittelbar den Periodenerfolg.')}`
+      ),
+      section(
+        'FIFO-Beispiel (Companion-Logik)',
+        `<p>Zugänge: 100 Stück à 5 €, danach 50 Stück à 6 €. Verbrauch 120 Stück. FIFO ordnet zuerst die älteren, günstigeren Zugänge dem Verbrauch zu; der Endbestand enthält die jüngeren, teureren Einheiten.</p>
+         ${mathBlock(mathContent(String.raw`$$\text{Verbrauchswert}_{FIFO} = 100\cdot 5 + 20\cdot 6 = 620,\quad SB = 30\cdot 6 = 180$$`))}
+         <p>Der Materialaufwand steigt gegenüber einer Durchschnittsmethode, wenn die jüngeren Zugänge teurer sind — der Periodengewinn fällt entsprechend.</p>`
       )
     ].join(''),
     formeln: [
       { label: 'Strenges Niederstwertprinzip', eq: String.raw`\text{Bilanzwert} = \min(AK,\ beizulegender\ Wert)`, desc: 'Beim Umlaufvermögen zählt stets der niedrigere Wert.' },
-      { label: 'Durchschnittspreis', eq: String.raw`$$\bar p = \frac{\sum Anschaffungskosten}{\sum Menge}$$`, desc: 'Typische Bewertungsvereinfachung.' }
+      { label: 'Durchschnittspreis', eq: String.raw`$$\bar p = \frac{\sum Anschaffungskosten}{\sum Menge}$$`, desc: 'Typische Bewertungsvereinfachung.' },
+      { label: 'FIFO-Verbrauch', eq: String.raw`\text{Verbrauch} = \text{älteste Zugänge zuerst}`, desc: 'Endbestand enthält die jüngsten Einheiten.' }
     ],
     aufgaben: [
       task(
@@ -376,6 +434,14 @@ export const CONTENT = {
           step('Erfolgswirkung erklären.', String.raw`\text{Materialaufwand } \uparrow/\downarrow \Rightarrow Jahresergebnis \downarrow/\uparrow`)
         ],
         'Weil die Zuordnung von Anschaffungskosten zu Verbrauch und Endbestand den Periodenaufwand und damit den Gewinn verändert.'
+      ),
+      task(
+        'FIFO: Zugang 100×5 €, dann 50×6 €; Verbrauch 120 Stück. Berechnen Sie Verbrauchswert und Endbestand.',
+        [
+          step('FIFO: älteste Zugänge zuerst.', String.raw`100\cdot 5 + 20\cdot 6 = 620`),
+          step('Endbestand aus jüngsten Einheiten.', String.raw`30\cdot 6 = 180`)
+        ],
+        'Verbrauchswert 620 €, Endbestand 180 € — der Aufwand steigt gegenüber günstigeren älteren Lagerbeständen.'
       )
     ]
   },
@@ -386,6 +452,18 @@ export const CONTENT = {
       section(
         'Werkstoffbuchungen',
         `<p>Roh-, Hilfs- und Betriebsstoffe werden über Bestandskonten und Aufwandskonten erfasst. Die Fortschreibungs- und Inventurmethode führen zum gleichen Verbrauch, aber über unterschiedliche Buchungswege.</p>`
+      ),
+      section(
+        'Fortschreibungsmethode im Detail',
+        `<p>Die Companion-Materialien betonen: Bei der Fortschreibungsmethode wird der Verbrauch laufend direkt gebucht (z. B. Material an Rohstoffe). Das Bestandskonto zeigt damit fortlaufend den aktuellen Bestand. Klausurstark ist die Unterscheidung: laufende Entnahmebuchung statt periodenendbezogener Verbrauchsermittlung.</p>
+         ${mathBlock(mathContent(String.raw`$$\text{Entnahme: Material an Rohstoffe}$$`))}
+      `
+      ),
+      section(
+        'Inventurmethode und Periodenabschluss',
+        `<p>Bei der Inventurmethode bleibt der Verbrauch bis zur Inventur im Bestandskonto; erst am Periodenende wird der tatsächliche Verbrauch aus Anfangs- und Endbestand ermittelt und dann auf das Materialkonto umgebucht. Die Quelle fordert hier ausdrücklich Übungsrechnungen zu beiden Wegen.</p>
+         ${mathBlock(mathContent(String.raw`$$\text{Verbrauch} = AB + Zugänge - SB$$`))}
+      `
       ),
       section(
         'Unfertige und fertige Erzeugnisse',
@@ -399,6 +477,7 @@ export const CONTENT = {
     ].join(''),
     formeln: [
       { label: 'Inventurmethode', eq: String.raw`\text{Verbrauch} = AB + Zugänge - SB`, desc: 'Verbrauchsermittlung über Bestandvergleich.' },
+      { label: 'Fortschreibung', eq: String.raw`\text{laufend: Material an Rohstoffe}`, desc: 'Verbrauch wird bei jeder Entnahme direkt erfasst.' },
       { label: 'Bestandsveränderung', eq: String.raw`\Delta Bestand = SB - AB`, desc: 'Steuert die Erfolgswirkung bei Erzeugnissen.' }
     ],
     aufgaben: [
@@ -417,6 +496,22 @@ export const CONTENT = {
           step('GuV-Effekt erläutern.', String.raw`\text{Bestandsmehrung/-minderung korrigiert den periodengerechten Erfolgsausweis.}`)
         ],
         'Bestandsveränderungen überführen Produktions- und Lagerbewegung in einen periodengerechten Erfolgsbeitrag.'
+      ),
+      task(
+        'Anfangsbestand Rohstoffe 8.000 €, Zugänge 12.000 €, Endbestand 5.000 €. Wie hoch ist der Verbrauch nach Inventurmethode?',
+        [
+          step('Formel anwenden.', String.raw`8.000 + 12.000 - 5.000`),
+          step('Ergebnis benennen.', String.raw`15.000`)
+        ],
+        'Der Verbrauch beträgt 15.000 €; erst danach wird er erfolgswirksam auf das Materialkonto gebucht.'
+      ),
+      task(
+        'Warum kann dieselbe physische Entnahme in der Fortschreibungsmethode schon im laufenden Jahr erfolgswirksam sein, in der Inventurmethode aber erst am Periodenende?',
+        [
+          step('Buchungszeitpunkt bei Fortschreibung nennen.', String.raw`\text{Jede Entnahme bucht sofort Material an Rohstoffe.}`),
+          step('Buchungszeitpunkt bei Inventur ergänzen.', String.raw`\text{Erst die Inventur liefert den Verbrauch und löst die Umbuchung aus.}`)
+        ],
+        'Der Unterschied liegt im Zeitpunkt der Erfolgserfassung, nicht zwingend im physischen Verbrauch.'
       )
     ]
   },
@@ -478,11 +573,17 @@ export const CONTENT = {
         'Ergebnisverwendung',
         `<p>Jahresüberschüsse werden nicht automatisch ausgeschüttet. Sie können eingestellt, vorgetragen oder ausgeschüttet werden. Gerade diese Übergänge sind in Abschlussaufgaben regelmäßig zu erklären.</p>
          ${warn('Kapitalfehler:', 'Eigenkapital ist nicht einfach „Restgröße“. Seine Gliederung trägt konkrete Rechtsfolgen für Haftung, Ausschüttung und Bilanzanalyse.')}`
+      ),
+      section(
+        'Gesetzliche Gewinnrücklage',
+        `<p>Bei Kapitalgesellschaften ist ein Teil des Jahresüberschusses in die gesetzliche Gewinnrücklage einzustellen (typisch 5 % des Jahresüberschusses, bis eine Obergrenze erreicht ist). Die Einstellung erhöht die Rücklagen und reduziert den ausschüttungsfähigen Bilanzgewinn — ein klassischer Abschluss-Schritt nach der GuV.</p>
+         ${mathBlock(mathContent(String.raw`$$\text{Einstellung}_{ges.\ Rücklage} = 0{,}05 \cdot \max(0,\ Jahresüberschuss)$$`))}`
       )
     ].join(''),
     formeln: [
       { label: 'Eigenkapitalquote', eq: String.raw`$$EK\text{-Quote} = \frac{EK}{Bilanzsumme}$$`, desc: 'Zentrale Kennzahl zur Finanzierungsstruktur.' },
-      { label: 'Jahresüberschuss', eq: String.raw`\text{Teil des Eigenkapitals nach Erfolgsrechnung}`, desc: 'Verbindet GuV und Bilanz.' }
+      { label: 'Jahresüberschuss', eq: String.raw`\text{Teil des Eigenkapitals nach Erfolgsrechnung}`, desc: 'Verbindet GuV und Bilanz.' },
+      { label: 'Gesetzliche Rücklage', eq: String.raw`$$\text{Einstellung} = 5\% \cdot Jahresüberschuss$$`, desc: 'Vereinfachte Klausurform (bis Obergrenze).' }
     ],
     aufgaben: [
       task(

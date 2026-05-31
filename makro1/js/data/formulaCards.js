@@ -227,6 +227,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.guetermarkt.vl-3-pdf.p36.sollten-wir-mehr-sparen","makro1.guetermarkt.vl-3-pdf.p15.formale-analyse"]
   }),
   card({
+    id: 'makro1.guetermarkt.g_termarktl_sung',
+    conceptId: 'guetermarkt',
+    officialNotation: "guetermarkt",
+    displayFormula: "$$Y^* = \\frac{c_0 + I + G - c_1 T}{1-c_1}$$",
+    intuition: "Kurzfristiges Gleichgewicht aus Nachfrageidentität.",
+    derivationSteps: [
+        {
+            "label": "Gütermarktlösung",
+            "text": "Sollten wir mehr Sparen?",
+            "math": "$$Y^* = \\frac{c_0 + I + G - c_1 T}{1-c_1}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu guetermarkt","Gütermarktlösung"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Gütermarktlösung — Kurzfristiges Gleichgewicht aus Nachfrageidentität.",
+    relatedTaskFamilies: ["makro1.taskfamily.guetermarkt-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["makro1.guetermarkt.vl-3-pdf.p36.sollten-wir-mehr-sparen","makro1.guetermarkt.vl-3-pdf.p15.formale-analyse"]
+  }),
+  card({
     id: 'makro1.multiplikator.gleichgewichtsproduktion',
     conceptId: 'multiplikator',
     officialNotation: "",

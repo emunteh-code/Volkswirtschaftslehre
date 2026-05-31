@@ -97,6 +97,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.monopol_preissetzung.vl02.p01.programm","mikro2.monopol_preissetzung.vl02.p02.markup"]
   }),
   card({
+    id: 'mikro2.monopol_preissetzung.lerner_index',
+    conceptId: 'monopol_preissetzung',
+    officialNotation: "monopol_preissetzung",
+    displayFormula: "$$\\frac{p-MC}{p}=\\frac{1}{|\\varepsilon|}$$",
+    intuition: "Markup steigt mit Marktmacht.",
+    derivationSteps: [
+        {
+            "label": "Lerner-Index",
+            "text": "Preissetzung im Monopol und Wohlfahrtseffekte",
+            "math": "$$\\frac{p-MC}{p}=\\frac{1}{|\\varepsilon|}$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu monopol_preissetzung","Lerner-Index"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Lerner-Index — Markup steigt mit Marktmacht.",
+    relatedTaskFamilies: ["mikro2.taskfamily.monopol_preissetzung-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.monopol_preissetzung.vl02.p01.programm","mikro2.monopol_preissetzung.vl02.p02.markup"]
+  }),
+  card({
     id: 'mikro2.preisdiskriminierung.preisdiskriminierung_dritten_gra',
     conceptId: 'preisdiskriminierung',
     officialNotation: "preisdiskriminierung",
@@ -768,6 +794,58 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu wohlfahrt_messung","Rawlsianisch"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Rawlsianisch — Fokus auf den Schwächsten.",
+    relatedTaskFamilies: ["mikro2.taskfamily.wohlfahrt_messung-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.wohlfahrt_messung.vl02.p05.monopoly-welfare","mikro2.wohlfahrt_messung.vl02.p09.surplus"]
+  }),
+  card({
+    id: 'mikro2.wohlfahrt_messung.konsumentenrente_linear',
+    conceptId: 'wohlfahrt_messung',
+    officialNotation: "wohlfahrt_messung",
+    displayFormula: "$$KR = \\frac{1}{2}(P_{max}-P^*)Q^*$$",
+    intuition: "Dreieck unter der Nachfrage.",
+    derivationSteps: [
+        {
+            "label": "Konsumentenrente (linear)",
+            "text": "Wohlfahrtswirkung des Monopols",
+            "math": "$$KR = \\frac{1}{2}(P_{max}-P^*)Q^*$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu wohlfahrt_messung","Konsumentenrente (linear)"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Konsumentenrente (linear) — Dreieck unter der Nachfrage.",
+    relatedTaskFamilies: ["mikro2.taskfamily.wohlfahrt_messung-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["mikro2.wohlfahrt_messung.vl02.p05.monopoly-welfare","mikro2.wohlfahrt_messung.vl02.p09.surplus"]
+  }),
+  card({
+    id: 'mikro2.wohlfahrt_messung.dwl',
+    conceptId: 'wohlfahrt_messung',
+    officialNotation: "wohlfahrt_messung",
+    displayFormula: "$$DWL = W_{Wettbewerb} - (KR + PR)$$",
+    intuition: "Verlust gegenüber Wettbewerbsoptimum.",
+    derivationSteps: [
+        {
+            "label": "DWL",
+            "text": "Wohlfahrtswirkung des Monopols",
+            "math": "$$DWL = W_{Wettbewerb} - (KR + PR)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu wohlfahrt_messung","DWL"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: DWL — Verlust gegenüber Wettbewerbsoptimum.",
     relatedTaskFamilies: ["mikro2.taskfamily.wohlfahrt_messung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["mikro2.wohlfahrt_messung.vl02.p05.monopoly-welfare","mikro2.wohlfahrt_messung.vl02.p09.surplus"]

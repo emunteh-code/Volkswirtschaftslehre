@@ -12,6 +12,7 @@ import {
 } from './sourceProvenanceUi.js';
 import {
   getSourceMaterialsAvailability,
+  renderOfficialMaterialsIliasLinkHtml,
   renderOfficialMaterialsNoticeHtml,
   sourcePdfOpenDisabledByDefault
 } from '../utils/deployEnvironment.js';
@@ -166,6 +167,7 @@ ${renderLayerBreakdown(breakdownRows)}
 ${renderAnchorGroups(groupedRows)}
 <footer class="quellen-panel-footer">
 <button type="button" class="btn secondary quellen-panel-browser-btn" data-quellen-open-browser>Modul-Quellenbrowser</button>
+${renderOfficialMaterialsIliasLinkHtml()}
 <p class="quellen-panel-footer-note">Der Modul-Quellenbrowser zeigt alle offiziellen Dokumente, Abdeckungsmatrix und offene Mapping-Lücken im Gesamtkontext.</p>
 </footer>
 </div>`;

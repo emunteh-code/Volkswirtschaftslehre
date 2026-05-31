@@ -369,6 +369,9 @@ function buildMicroPracticePanel(conceptId) {
   const tasks = Array.isArray(entry?.aufgaben) ? entry.aufgaben : [];
 
   return `<div class="panel active mikro1-practice">
+<div class="practice-panel-header">
+<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+</div>
 <div class="section-block">
 <div class="exam-drill-line">
 <span class="exam-drill-key">Geführte Aufgaben</span>

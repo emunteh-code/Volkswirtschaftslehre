@@ -77,3 +77,22 @@ for (const name of fs.readdirSync(ROOT)) {
 }
 
 console.log(`Pages dist written to ${OUT}`);
+
+const REQUIRED_DEPLOY_ASSETS = [
+  "assets/js/portal-core/utils/studentFacingText.js",
+  "assets/js/portal-core/utils/masteryLabel.js",
+  "assets/js/portal-core/utils/hashRouting.js",
+  "assets/js/siteConfig.js",
+  "assets/js/portal-core/app.js",
+  "assets/js/portal-core/ui/renderer.js"
+];
+
+const missingAssets = REQUIRED_DEPLOY_ASSETS.filter(
+  (rel) => !fs.existsSync(path.join(OUT, rel))
+);
+if (missingAssets.length) {
+  console.error("Missing required portal-core assets in dist:");
+  for (const rel of missingAssets) console.error(`  - ${rel}`);
+  process.exit(1);
+}
+console.log(`Verified ${REQUIRED_DEPLOY_ASSETS.length} portal-core assets in dist.`);

@@ -21,9 +21,9 @@ import {
 } from "./quellenPanel.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
 import {
-  FULL_EXAM_HOME_DESCRIPTION,
-  officialTaskCoverageLabel
+  FULL_EXAM_HOME_DESCRIPTION
 } from "../data/examDisclosure.js";
+import { renderMathTitle } from "./formatMathInTitle.js";
 
 const HOME_ACTION_ACTIVATE = (handler) =>
   `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
@@ -707,7 +707,8 @@ ${intuition?.analogy ? `<div class="exam-drill-line">
       return normalizedTag;
     }
 
-    return `<div class="exam-drill-panel">
+    return `<div class="exam-drill-panel klausurmethodik-exam-transfer">
+<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
 <div class="practice-section-header">Prüfungstransfer</div>
 <div class="exam-drill-grid">
 ${drills.map((drill, index) => {
@@ -796,57 +797,98 @@ ${renderGuidedTasks(tasks)}`;
     return html;
   }
 
+  function methodToVorgehenBullets(method) {
+    if (!hasMeaningfulText(method)) return [];
+    const raw = String(method).trim();
+    const bySentence = raw
+      .split(/(?:\.\s+|;\s+|\n+)/)
+      .map((part) => part.trim())
+      .filter((part) => part.length > 3);
+    if (bySentence.length > 1) return bySentence.slice(0, 5);
+    if (raw.includes(",")) {
+      return raw.split(/,\s+/).map((part) => part.trim()).filter(Boolean).slice(0, 5);
+    }
+    return [raw];
+  }
+
+  function renderKlausurmethodikField(label, contentHtml, variant = "") {
+    if (!contentHtml) return "";
+    const variantClass = variant ? ` klausurmethodik-field--${variant}` : "";
+    return `<div class="klausurmethodik-field${variantClass}">
+<span class="klausurmethodik-label">${label}</span>
+${contentHtml}
+</div>`;
+  }
+
+  function renderKlausurmethodikDifficultyChip(difficulty) {
+    if (!difficulty || String(difficulty).toLowerCase() === "offen") return "";
+    const normalized = String(difficulty).toLowerCase();
+    const tone = normalized.includes("schwer")
+      ? "schwer"
+      : normalized.includes("mittel")
+        ? "mittel"
+        : "neutral";
+    return `<span class="klausurmethodik-difficulty klausurmethodik-difficulty--${tone}">${renderSemanticPlainText(difficulty)}</span>`;
+  }
+
   function renderTaskFamilyPanel(conceptId) {
     const families = filterStudentVisibleTaskFamilies(taskFamiliesByConcept[conceptId]);
-    if (!families.length) return "";
-    return `<div class="section-block task-family-layer formula-klausurmethodik">
-<span class="quellen-panel-kicker">Prüfungsvorbereitung</span>
-<h3>Klausurmethodik</h3>
-<p class="formula-klausurmethodik-intro">Typische Klausuraufgabentypen zu diesem Konzept: Methode, typische Fallen und Bewertungslogik. Die geführten Übungsaufgaben findest du im Tab Aufgaben; Quellen und Seitenanker im Tab Quellen.</p>
-<div class="task-family-grid">
-${families.map(renderTaskFamilyCard).join("")}
+    if (!families.length) {
+      return `<div class="section-block task-family-layer formula-klausurmethodik klausurmethodik-panel klausurmethodik-panel--empty">
+<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
+<h3 class="klausurmethodik-heading">Klausurmethodik</h3>
+<p class="klausurmethodik-empty">Für dieses Konzept sind noch keine Klausurfamilien hinterlegt.</p>
+</div>`;
+    }
+    return `<div class="section-block task-family-layer formula-klausurmethodik klausurmethodik-panel">
+<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
+<h3 class="klausurmethodik-heading">Klausurmethodik</h3>
+<p class="klausurmethodik-intro">Typische Klausuraufgabentypen — Methode, Fallen und Bewertungslogik auf einen Blick. Üben im Tab <strong>Aufgaben</strong>.</p>
+<div class="klausurmethodik-accordion-list task-family-grid">
+${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
 </div>
 </div>`;
   }
 
-  function taskFamilySourceLabel(status) {
-    if (status === "direct-source") return "Vorlesungsquelle";
-    if (status === "source-distilled") return "Source-distilled";
-    if (status === "platform-added-drill") return "Platform drill";
-    if (status === "platform-added-explanation") return "Platform support";
-    return status || "unclassified";
-  }
-
-  function taskFamilyOfficialTaskLabel(status) {
-    return officialTaskCoverageLabel(status);
-  }
-
-  function renderTaskFamilyCard(family) {
-    const meta = [
-      family.difficulty ? `Niveau: ${family.difficulty}` : "",
-      Number.isFinite(family.expectedTimeMinutes) ? `${family.expectedTimeMinutes} Min.` : "",
-      family.examRelevance ? `Relevanz: ${family.examRelevance}` : ""
-    ].filter(Boolean).join(" · ");
-    const coverage = family.currentCoverage && typeof family.currentCoverage === "object"
-      ? Object.values(family.currentCoverage).filter(Boolean).join(" · ")
+  function renderTaskFamilyCard(family, index = 0) {
+    const stepNum = index + 1;
+    const openAttr = index === 0 ? " open" : "";
+    const familyKey = escapeHtml(String(family.id || `family-${index}`).replace(/[^\w.-]/g, "_"));
+    const ziel = family.topic || family.title || "";
+    const vorgehen = methodToVorgehenBullets(family.method);
+    const typicalQuestion = family.title || family.topic || "";
+    const traps = Array.isArray(family.commonTraps) ? family.commonTraps : [];
+    const timeMeta = Number.isFinite(family.expectedTimeMinutes)
+      ? `${family.expectedTimeMinutes} Min.`
       : "";
-    const list = (title, items) => Array.isArray(items) && items.length
-      ? `<div class="task-family-list"><span>${title}</span><ul>${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul></div>`
+    const hasAnchors = Array.isArray(family.sourceAnchorIds) && family.sourceAnchorIds.length > 0;
+    const vorgehenHtml = vorgehen.length
+      ? `<ol class="klausurmethodik-steps">${vorgehen.map((step) => `<li>${renderSemanticPlainText(step)}</li>`).join("")}</ol>`
       : "";
-    const officialTaskLabel = taskFamilyOfficialTaskLabel(family.officialTaskCoverage);
-    return `<article class="task-family-card">
-<div class="task-family-card__badges">
-<span class="task-family-card__status task-family-card__status--${renderDecodedText(family.sourceStatus || "unclassified")}">${renderDecodedText(taskFamilySourceLabel(family.sourceStatus))}</span>
-${officialTaskLabel ? `<span class="task-family-card__status task-family-card__status--${renderDecodedText(family.officialTaskCoverage)}">${renderDecodedText(officialTaskLabel)}</span>` : ""}
+    const trapHtml = traps.length
+      ? `<ul class="klausurmethodik-list klausurmethodik-list--traps">${traps.map((trap) => `<li>${renderSemanticPlainText(trap)}</li>`).join("")}</ul>`
+      : "";
+    const sourceFootnote = hasAnchors
+      ? `<p class="klausurmethodik-footnote"><button type="button" class="klausurmethodik-source-link" onclick="window.__openQuellen?.()">Quellen anzeigen</button><span class="klausurmethodik-footnote-sep" aria-hidden="true">·</span><span>${family.sourceAnchorIds.length} Anker</span></p>`
+      : "";
+    return `<details class="task-family-card klausurmethodik-accordion"${openAttr} data-family-id="${familyKey}">
+<summary class="klausurmethodik-accordion-head">
+<span class="klausurmethodik-step-num" aria-hidden="true">${stepNum}</span>
+<span class="klausurmethodik-accordion-title-wrap">
+<span class="klausurmethodik-accordion-title">${renderMathTitle(family.title || family.id)}</span>
+${timeMeta ? `<span class="klausurmethodik-time">${renderSemanticPlainText(timeMeta)}</span>` : ""}
+</span>
+${renderKlausurmethodikDifficultyChip(family.difficulty)}
+</summary>
+<div class="klausurmethodik-card-body">
+${renderKlausurmethodikField("Ziel", ziel ? `<p class="klausurmethodik-text">${renderSemanticPlainText(ziel)}</p>` : "", "ziel")}
+${renderKlausurmethodikField("Vorgehen", vorgehenHtml, "vorgehen")}
+${renderKlausurmethodikField("Typische Klausurfrage", typicalQuestion ? `<p class="klausurmethodik-text">${renderSemanticPlainText(typicalQuestion)}</p>` : "", "frage")}
+${renderKlausurmethodikField("Häufiger Fehler", trapHtml, "fehler")}
+${family.officialTaskGap ? `<p class="klausurmethodik-gap-note">${renderSemanticPlainText(family.officialTaskGap)}</p>` : ""}
+${sourceFootnote}
 </div>
-<h4>${renderSemanticPlainText(family.title || family.id)}</h4>
-${meta ? `<p class="task-family-card__meta">${renderSemanticPlainText(meta)}</p>` : ""}
-${family.method ? `<p>${renderSemanticPlainText(family.method)}</p>` : ""}
-${list("Typische Fallen", family.commonTraps)}
-${list("Punkte gibt es für", family.gradingRubric)}
-${coverage ? `<p class="task-family-card__meta"><strong>Portalabdeckung:</strong> ${renderSemanticPlainText(coverage)}</p>` : ""}
-${family.officialTaskGap ? `<p class="task-family-card__warning">${renderSemanticPlainText(family.officialTaskGap)}</p>` : ""}
-</article>`;
+</details>`;
   }
 
   function toggleReveal(solutionId, buttonId) {
@@ -900,7 +942,7 @@ ${family.officialTaskGap ? `<p class="task-family-card__warning">${renderSemanti
         : "";
       html += `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
-<div class="f-label">${formula.label}</div>
+<div class="f-label">${renderMathTitle(formula.label)}</div>
 ${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
 ${formula.desc ? `<div class="f-desc">${renderTeachingProse(formula.desc)}</div>` : ""}
 ${varsHint}
@@ -933,7 +975,7 @@ ${formulaCards.map(renderFormulaCardProof).join("")}
       ? `<p class="f-var-hint formula-proof-meta">Quellanker: ${card.anchorIds.length} geprüfte Stelle${card.anchorIds.length === 1 ? "" : "n"}</p>`
       : "";
     return `<article class="formula-card formula-card--proof">
-<div class="f-label">${renderDecodedText(card.officialNotation || card.id)}</div>
+<div class="f-label">${renderMathTitle(card.officialNotation || card.id)}</div>
 ${hasMeaningfulDisplayContent(card.displayFormula) ? `<div class="f-eq">${renderSemanticBlock(card.displayFormula, { variant: "formula-card" })}</div>` : ""}
 ${card.intuition ? `<div class="f-desc">${renderTeachingProse(card.intuition)}</div>` : ""}
 ${steps.length ? `<ol class="exam-drill-steps formula-proof-steps">
@@ -1083,13 +1125,13 @@ ${renderExamPatterns(data)}
     updateTabButtons(activeTab, tabAvailability);
 
     if (breadcrumb) {
-      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / ${escapeHtml(chapter.cat)} / ${escapeHtml(chapter.title)}`;
+      breadcrumb.innerHTML = `<button class="breadcrumb-link" onclick="window.__renderHome()">Übersicht</button> / ${escapeHtml(chapter.cat)} / ${renderMathTitle(chapter.title)}`;
     }
 
     if (!entry) {
       content.innerHTML = `<div class="concept-header">
 <div class="concept-tag">${chapter.cat} · ${idx}</div>
-<h1 class="concept-title">${chapter.title}</h1>
+<h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>
 </div>
 <div class="section-block"><h3>Inhalt</h3><p>Nutze für dieses Thema die Kapitelverbindungen, den Schnelltest und die Wiederholung, um die Kernlogik im Kurszusammenhang zu sichern.</p></div>`;
       const emptyStrip = buildConceptProvenanceStripHtml({
@@ -1115,7 +1157,7 @@ ${renderExamPatterns(data)}
     const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
     const headerHTML = `<div class="concept-header">
 <div class="concept-tag">${escapeHtml(chapter.cat)} · Stelle ${syllabusIdx} von ${chapters.length}</div>
-<h1 class="concept-title">${escapeHtml(chapter.title)}</h1>
+<h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>
 ${motivationStrip}
 </div>`;
 
@@ -1273,7 +1315,7 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
     if (lastChapter) {
       html += `<div class="home-continue-card" onclick="window.__navigate('${lastChapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${lastChapter.id}')">
 <span class="hcc-label">Weitermachen</span>
-<span class="hcc-title">${lastChapter.title}</span>
+<span class="hcc-title">${renderMathTitle(lastChapter.title)}</span>
 <span class="hcc-cat">${lastChapter.cat}</span>
 </div>`;
     }
@@ -1291,7 +1333,7 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
 <div class="home-mini-grid">
 ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigate('${chapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')">
 <div class="hc-num">${chapter.cat}</div>
-<div class="hc-title">${chapter.title}</div>
+<div class="hc-title">${renderMathTitle(chapter.title)}</div>
 </div>`).join("")}
 </div>
 </div>`;
@@ -1302,7 +1344,7 @@ ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigat
       items.forEach((item) => {
         html += `<div class="home-card" onclick="window.__navigate('${item.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${item.id}')">
 <div class="hc-num">Konzept ${item.idx}</div>
-<div class="hc-title">${item.title}</div>
+<div class="hc-title">${renderMathTitle(item.title)}</div>
 ${renderHomeSourceBadge(item.id)}
 <div class="hc-cat">${item.cat}</div>
 </div>`;

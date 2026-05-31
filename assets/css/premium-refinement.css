@@ -2686,44 +2686,244 @@ body.light-mode #content .formula-card {
   margin: 18px 0 22px;
 }
 
+/* ── Klausurmethodik / Prüfungsvorbereitung visual system ─── */
+
+#content .klausurmethodik-panel,
 #content .formula-klausurmethodik {
   margin-top: 28px;
-  padding: 20px 18px 18px;
+  padding: clamp(18px, 2.5vw, 22px) clamp(16px, 2.5vw, 20px);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--r-lg, 16px);
   background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%);
+  width: min(100%, var(--content-rail-max, 1080px));
+  margin-inline: auto;
 }
 
+#content .klausurmethodik-kicker,
+#content .formula-klausurmethodik .klausurmethodik-kicker {
+  display: inline-block;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#content .klausurmethodik-heading,
 #content .formula-klausurmethodik h3 {
   margin: 0 0 8px;
-  font-size: 1.2rem;
+  font-size: var(--type-lg, 1.25rem);
   line-height: 1.3;
 }
 
+#content .klausurmethodik-intro,
 #content .formula-klausurmethodik-intro {
-  margin: 0 0 4px;
+  margin: 0 0 16px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--type-sm, 0.8125rem);
   line-height: 1.55;
   max-width: 42rem;
 }
 
-#content .task-family-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 16px;
-  margin-top: 14px;
+#content .klausurmethodik-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.55;
 }
 
-#content .task-family-card {
+#content .klausurmethodik-accordion-list,
+#content .task-family-grid {
   display: grid;
-  gap: 11px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+#content .klausurmethodik-accordion,
+#content .task-family-card {
+  display: block;
   min-width: 0;
-  padding: 18px;
   border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
-  border-radius: 16px;
+  border-radius: var(--r-md, 12px);
   background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 18%, transparent);
+  overflow: hidden;
+}
+
+#content .klausurmethodik-accordion[open] {
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  box-shadow: var(--shadow-sm);
+}
+
+#content .klausurmethodik-accordion-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+  min-height: 44px;
+}
+
+#content .klausurmethodik-accordion-head::-webkit-details-marker {
+  display: none;
+}
+
+#content .klausurmethodik-step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+#content .klausurmethodik-accordion-title-wrap {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+#content .klausurmethodik-accordion-title {
+  color: var(--text);
+  font-size: var(--type-base, 0.9375rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#content .klausurmethodik-time {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+#content .klausurmethodik-difficulty {
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: color-mix(in srgb, var(--surface2) 40%, transparent);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#content .klausurmethodik-difficulty--mittel {
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text) 30%);
+  border-color: color-mix(in srgb, var(--accent2) 24%, var(--border) 76%);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+}
+
+#content .klausurmethodik-difficulty--schwer {
+  color: color-mix(in srgb, var(--sys-orange, #ff9500) 78%, var(--text) 22%);
+  border-color: color-mix(in srgb, var(--sys-orange, #ff9500) 28%, var(--border) 72%);
+  background: color-mix(in srgb, var(--sys-orange, #ff9500) 8%, transparent);
+}
+
+#content .klausurmethodik-card-body {
+  display: grid;
+  gap: 14px;
+  padding: 0 16px 16px 56px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+}
+
+#content .klausurmethodik-field {
+  display: grid;
+  gap: 6px;
+}
+
+#content .klausurmethodik-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content .klausurmethodik-text {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.58;
+}
+
+#content .klausurmethodik-steps,
+#content .klausurmethodik-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.58;
+}
+
+#content .klausurmethodik-steps li + li,
+#content .klausurmethodik-list li + li {
+  margin-top: 6px;
+}
+
+#content .klausurmethodik-list--traps li {
+  color: color-mix(in srgb, var(--sys-orange, #ff9500) 72%, var(--text) 28%);
+}
+
+#content .klausurmethodik-gap-note {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px dashed color-mix(in srgb, var(--border) 82%, transparent);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#content .klausurmethodik-footnote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+#content .klausurmethodik-footnote-sep {
+  opacity: 0.55;
+}
+
+#content .klausurmethodik-source-link {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+#content .klausurmethodik-source-link:hover {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text) 18%);
+}
+
+#content .klausurmethodik-exam-transfer {
+  width: min(100%, var(--content-rail-max, 1080px));
+  margin-inline: auto;
+}
+
+#content .klausurmethodik-exam-transfer .practice-section-header {
+  margin-top: 4px;
 }
 
 #content .practice-source-notice {
@@ -2895,85 +3095,6 @@ body.light-mode #content .formula-card {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
-}
-
-#content .task-family-card h4 {
-  margin: 0;
-  color: var(--text);
-  font-size: 15px;
-  line-height: 1.35;
-}
-
-#content .task-family-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.58;
-}
-
-#content .task-family-card__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-}
-
-#content .task-family-card__status,
-#content .task-family-list > span {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-#content .task-family-card__status {
-  width: fit-content;
-  max-width: 100%;
-  padding: 3px 7px;
-  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--surface2) 18%, transparent);
-  overflow-wrap: anywhere;
-}
-
-#content .task-family-card__status--direct-source,
-#content .task-family-card__status--source-distilled,
-#content .task-family-card__status--official-task-source {
-  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
-  border-color: color-mix(in srgb, var(--accent2) 26%, var(--border) 74%);
-  background: color-mix(in srgb, var(--accent2) 10%, transparent);
-}
-
-#content .task-family-card__status--missing-official-task-source {
-  color: var(--sys-orange, #ff9500);
-  border-color: color-mix(in srgb, var(--sys-orange, #ff9500) 30%, var(--border) 70%);
-  background: color-mix(in srgb, var(--sys-orange, #ff9500) 10%, transparent);
-}
-
-#content .task-family-card__meta {
-  font-size: 12px;
-}
-
-#content .task-family-list {
-  display: grid;
-  gap: 7px;
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-#content .task-family-list ul {
-  margin: 0;
-  padding-left: 18px;
-}
-
-#content .task-family-list li + li {
-  margin-top: 5px;
-}
-
-#content .task-family-card__warning {
-  padding-top: 8px;
-  border-top: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
 }
 
 #content .mastery-evidence-panel {
@@ -5957,5 +6078,98 @@ body.light-mode #content .source-provenance-mark {
   #content .quellen-panel-layer-row {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+}
+
+/* ============================================================
+   PASS — Platform shell alignment (fleet-wide)
+   ============================================================ */
+
+:root {
+  --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
+  --content-body-max: min(100%, clamp(980px, 82vw, 1240px));
+  --content-rail-max: min(100%, 1080px);
+  --right-panel-width: clamp(232px, 18vw, 312px);
+  --tab-row-pad-x: clamp(12px, 3vw, 20px);
+}
+
+#content {
+  margin-inline: auto;
+}
+
+#rightPanel {
+  width: var(--right-panel-width);
+  min-width: 220px;
+  max-width: 320px;
+  flex-shrink: 0;
+}
+
+#tabRow.tab-row {
+  align-items: stretch;
+  padding-inline: var(--tab-row-pad-x);
+  padding-block: 6px;
+  gap: 4px;
+}
+
+#content .panel.active > .formula-grid,
+#content .panel.active > .section-block,
+#content .quellen-panel,
+#content .mikro1-practice,
+#content .exam-drill-panel {
+  width: min(100%, var(--content-rail-max));
+  margin-inline: auto;
+}
+
+#content .section-block {
+  margin-block: 0 20px;
+}
+
+#content .home-action-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
+  width: min(100%, var(--content-body-max));
+  margin-inline: auto;
+}
+
+#content .home-action-card {
+  min-height: 44px;
+}
+
+#content .home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
+  width: min(100%, var(--content-body-max));
+  margin-inline: auto;
+}
+
+.lp-shelf-grid,
+.lp-shelf-grid--trusted {
+  gap: clamp(12px, 2vw, 16px);
+  align-items: stretch;
+}
+
+@media (max-width: 480px) {
+  #content .klausurmethodik-card-body {
+    padding-left: 16px;
+    padding-right: 14px;
+  }
+
+  #content .klausurmethodik-accordion-head {
+    padding-inline: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  #content .klausurmethodik-accordion-head {
+    min-height: 44px;
+    gap: 8px;
+  }
+
+  #content .klausurmethodik-difficulty {
+    grid-column: 2 / -1;
+    justify-self: start;
+    margin-left: 40px;
   }
 }

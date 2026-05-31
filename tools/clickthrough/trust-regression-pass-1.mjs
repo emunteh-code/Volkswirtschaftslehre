@@ -209,7 +209,7 @@ async function runHeaderMathIntegrity(page) {
           why: `Formula card label #${badLabel.index} has .math-semantic spans: "${badLabel.text}"`
         });
       }
-      const needsTypeset = snap.formulaLabels.find((row) => /\$|x_1|x_2|lambda|\\lambda|GDP|Dist_/i.test(row.text) && !row.typeset);
+      const needsTypeset = snap.formulaLabels.find((row) => /\$[^$]+\$/.test(row.html) && !row.typeset);
       if (needsTypeset) {
         fail({
           system: 'header-math',

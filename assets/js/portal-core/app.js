@@ -370,6 +370,8 @@ export function createPortalApp({
 
   document.addEventListener("DOMContentLoaded", () => {
     window.__jsLoaded = true;
+    const jsError = document.getElementById("jsError");
+    if (jsError) jsError.style.display = "none";
     initTheme();
     buildNav(navigate);
 
@@ -388,6 +390,9 @@ export function createPortalApp({
 
     const searchInput = document.getElementById("navSearch");
     if (searchInput) {
+      if (!searchInput.getAttribute("aria-label")) {
+        searchInput.setAttribute("aria-label", "Konzepte durchsuchen");
+      }
       const debouncedFilter = debounce(() => filterNav(searchInput.value), 200);
       searchInput.addEventListener("input", debouncedFilter);
       searchInput.addEventListener("keydown", (event) => {

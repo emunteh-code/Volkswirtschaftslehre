@@ -117,8 +117,37 @@ Spot-check: `statistik/verteilungen`, `oekonometrie/confidence_intervals`, `math
 
 ---
 
-## Remaining intentional gaps
+## Pass 3 — Remaining intentional gaps closed (2026-05-31)
 
-- Statistik TUT_08 (needs `Zuckerrohr.csv`), z_test / zwei_stichproben (no VL R script in repo mapping).
-- Ökonometrie `consistency` (no standalone `.R` exercise file).
-- WebR numerical parity with desktop R — documented, not eliminated.
+| Gap | Resolution | Label |
+|-----|------------|-------|
+| **TUT_08 + Zuckerrohr.csv** | CSV in `source-materials/Statistik/.../Zuckerrohr.csv`; **34 Zeilen** ins WebR-Prelude als `zuckerrohr`. Block auf `bivariat` (2. Block): `head`, `colMeans`, `cov`, `cor`. | direct-source (data distilled) |
+| **z_test / zwei_stichproben** | Kein VL-TUT-Skript → je 1× **platform-added-drill** (`z`-Formel + `pnorm`; `t.test` Welch vs gepoolt). | platform-added-drill |
+| **Ökonometrie consistency** | Guided-style **live** Simulation (600× `lm`, `mean`/`sd` von β̂₂); Verweis auf `unbiasedness`, `asymptotic_normality`, `monte_carlo`. | platform-added-drill |
+| **WebR parity** | Truth banner + Selbstcheck verified; **collapsible FAQ** `WebR vs Desktop-R` once per R tab (`renderWebRParityFaq`). | permanent limitation (documented) |
+
+### Fleet counts (after pass 3)
+
+| Module | Concepts | Blocks | Δ pass 3 |
+|--------|----------|--------|----------|
+| statistik | 10 (+2) | 12 (+3) | `bivariat` TUT_08, `z_test`, `zwei_stichproben` |
+| oekonometrie | 32 (+1) | 32 (+1) | `consistency` |
+| mathematik | 8 | 8 | FAQ only |
+| **Total** | **50** | **52** | **+4 blocks, +3 concepts** |
+
+### Still no R tab (by design)
+
+| Item | Reason |
+|------|--------|
+| `wahrscheinlichkeit`, `schaetzen_verfahren`, `nichtparametrisch` | no VL `.R` in Statistik corpus |
+| `rlab` | orientation concept only |
+| TUT_08 `read.csv` path | VL-relative path; portal uses prelude `zuckerrohr` instead |
+
+**Pass 3 commit:** *(see git log after push)*
+
+---
+
+## Remaining permanent limitations
+
+- WebR ≠ Desktop-R (FAQ + banner; cannot eliminate).
+- Deploy does not ship `source-materials/`; Zuckerrohr replicated in prelude only.

@@ -872,7 +872,11 @@ df <- data.frame(x, y, group, z)
 pred_df <- data.frame(x = c(20, 24))
 anova_group <- factor(rep(c("Nord", "Mitte", "Sued"), each = 4))
 score <- c(72, 75, 74, 76, 68, 70, 69, 71, 81, 83, 82, 84)
-anova_df <- data.frame(group = anova_group, score)`;
+anova_df <- data.frame(group = anova_group, score)
+zuckerrohr <- data.frame(
+  Wasser = c(6.3, 6.3, 7.3, 11.3, 12.2, 12.2, 13.7, 15.5, 15.5, 15.5, 15.8, 16.5, 19, 20.3, 23.2, 23.7, 27, 29.9, 30.4, 32.3, 32.3, 35, 35.6, 41, 41.7, 42.3, 55, 57.2, 57.6, 57.8, 58.7, 60.3, 61, 61.7),
+  Kalorien = c(18.201, 17.976, 18.235, 17.41, 16.857, 16.882, 16.581, 16.398, 16.174, 15.528, 16.66, 16.217, 15.725, 15.677, 15.005, 15.465, 14.177, 12.928, 13.363, 14.095, 12.712, 12.378, 12.325, 11.733, 11.456, 11.416, 8.601, 8.534, 8.495, 8.46, 8.012, 7.821, 7.523, 7.378)
+)`;
 }
 
 function getRuntimePrelude(moduleSlug) {
@@ -997,6 +1001,22 @@ function inferSelfCheckLine(block) {
   if (block.selfCheckLine) return block.selfCheckLine;
   if (block.expectedOutputCheck) return block.expectedOutputCheck;
   return 'Vergleiche mit Soll-Output: Stimmt Vorzeichen, Größenordnung und die eine entscheidende Zeile? Kleine WebR-Abweichungen sind möglich — deine fachliche Deutung zählt.';
+}
+
+/** Once per R tab: permanent WebR vs Desktop-R limitation (pass 3). */
+function renderWebRParityFaq(moduleSlug = '') {
+  const bullets = [
+    'WebR lädt keine Zusatzpakete — `sandwich`, `lmtest` und ähnliche VL-Skripte gehören in Desktop-R (RStudio).',
+    'Zahlen und Plotdetails können leicht abweichen; für die Klausur zählt die fachliche Lesart, nicht Bit-genauigkeit im Browser.',
+    'Wenn „Ausführen“ scheitert: Soll-Output, Selbstcheck und Musterlösung sind der vorgesehene Lernpfad — kein Portal-Defekt.'
+  ];
+  if (moduleSlug === 'mathematik') {
+    bullets[0] = 'Mathematik nutzt nur Basis-R im Browser; Ökonometrie-Pakete und Regressions-Workflows findest du in den Modulen Ökonometrie oder Statistik.';
+  }
+  return `<details class="r-webr-parity-faq">
+<summary>WebR vs Desktop-R — Kurz-FAQ</summary>
+<ul>${bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+</details>`;
 }
 
 function shouldShowWebRFirstRunHint() {
@@ -1544,7 +1564,7 @@ export function renderRAnwendungTab(blocks, moduleSlug, options = {}) {
     return renderRLabSection(block, moduleSlug, index, total, { blockId, conceptId: options.conceptId });
   }).join('\n<div class="r-lab-divider" aria-hidden="true"></div>\n');
 
-  return `<div class="r-tab-panel">${renderRTruthBanner(moduleSlug)}${sectionsHtml}</div>`;
+  return `<div class="r-tab-panel">${renderRTruthBanner(moduleSlug)}${renderWebRParityFaq(moduleSlug)}${sectionsHtml}</div>`;
 }
 
 // ─── State & Mount Logic ────────────────────────────────────────────────────

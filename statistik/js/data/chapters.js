@@ -81,6 +81,87 @@ head(data.frame(x = df$x, y = df$y))`,
         'Spearman als “schlechteren Pearson” zu lesen statt als anderes Zusammenhangsmaß.',
         'Aus einem hohen Koeffizienten direkt auf Kausalität zu schließen.'
       ]
+    },
+    {
+      title: 'Zuckerrohr: Kovarianz und Korrelation lesen',
+      purpose: 'TUT_08 arbeitet mit dem VL-Datensatz Zuckerrohr.csv. Im Portal liegt `zuckerrohr` im WebR-Prelude (Quelle: source-materials/Statistik/.../Zuckerrohr.csv) — gleiche Spalten Wasser und Kalorien wie im Tutorium.',
+      script: 'Quelle: TUT_08 · Zuckerrohr.csv (Daten im Portal-Prelude als `zuckerrohr`)',
+      code: String.raw`head(zuckerrohr, 8)
+colMeans(zuckerrohr)
+cov(zuckerrohr)
+cor(zuckerrohr)`,
+      output: 'colMeans liefert die Randmittel, cov() die Kovarianzmatrix und cor() den Korrelationskoeffizienten. Genau diese drei Objekte verbinden bivariate Normalität mit R.',
+      taskPrompt: 'Berechne `cov(zuckerrohr)[1, 2]` und vergleiche das Vorzeichen mit `cor(zuckerrohr)`.',
+      miniTask: 'Ergänze eine Zeile `cov(zuckerrohr)[1, 2]` und formuliere danach in einem Satz, was Kovarianz und Korrelation gemeinsam über den Zusammenhang sagen.',
+      solution: 'Beide Maße zeigen dieselbe Richtung; die Korrelation normiert zusätzlich auf [-1, 1], die Kovarianz hängt von den Einheiten ab.',
+      solutionChanges: [
+        'Ergänze unter `cor(zuckerrohr)` genau eine Zeile: `cov(zuckerrohr)[1, 2]`.',
+        'Lass head, colMeans und cor stehen, damit du Randverteilung und Zusammenhang gemeinsam liest.'
+      ],
+      solutionCode: String.raw`head(zuckerrohr, 8)
+colMeans(zuckerrohr)
+cov(zuckerrohr)
+cor(zuckerrohr)
+cov(zuckerrohr)[1, 2]`,
+      pitfalls: [
+        'Kovarianz und Korrelation als identische Größen zu behandeln.',
+        'Nur cor() zu lesen, ohne die Einheiten der Variablen Wasser und Kalorien zu nennen.'
+      ]
+    }
+  ],
+  z_test: [
+    {
+      title: 'z-Statistik bei bekanntem σ',
+      purpose: 'platform-added-drill: Kein eigenes TUT-R-Skript — dieser Block übersetzt die z-Test-Theorie in einen minimalen R-Schritt (wie in den Aufgaben mit μ₀ und σ).',
+      script: 'platform-added-drill · z-Test Theorie (kein VL-TUT-Skript)',
+      code: String.raw`mu0 <- 50
+sigma <- 2
+xbar <- 50.8
+n <- 25
+z <- (xbar - mu0) / (sigma / sqrt(n))
+z
+2 * pnorm(abs(z), lower.tail = FALSE)`,
+      output: 'z vergleicht die Stichprobe mit μ₀ unter bekannter Streuung σ. Der zweite Wert ist der zweiseitige p-Wert unter Normalverteilung.',
+      taskPrompt: 'Ändere xbar auf 49,2 und prüfe, ob |z| kleiner wird.',
+      miniTask: 'Ersetze `xbar <- 50.8` durch `xbar <- 49.2`, führe aus und vergleiche z mit dem alten Wert.',
+      solution: 'Näher an μ₀ bedeutet kleineres |z| und größeren p-Wert — die Evidenz gegen H₀ wird schwächer.',
+      solutionChanges: [
+        'Ändere nur die Zeile `xbar <- 50.8` zu `xbar <- 49.2`.',
+        'Lass μ₀, σ und n stehen, damit nur die Abweichung vom Hypothesenwert variiert.'
+      ],
+      solutionCode: String.raw`mu0 <- 50
+sigma <- 2
+xbar <- 49.2
+n <- 25
+z <- (xbar - mu0) / (sigma / sqrt(n))
+z
+2 * pnorm(abs(z), lower.tail = FALSE)`,
+      pitfalls: [
+        'z-Test verwenden, obwohl σ in der Praxis unbekannt ist (dann t-Test).',
+        'Den p-Wert als Wahrscheinlichkeit von H₀ lesen.'
+      ]
+    }
+  ],
+  zwei_stichproben: [
+    {
+      title: 'Zwei Gruppenmittel: Welch vs gepoolt',
+      purpose: 'platform-added-drill: Kein TUT-R-Skript — trainiert `t.test` für unabhängige Stichproben wie in der Theorie (Welch vs var.equal=TRUE).',
+      script: 'platform-added-drill · Zwei-Stichproben-Theorie (kein VL-TUT-Skript)',
+      code: String.raw`t.test(x ~ group, data = df, var.equal = FALSE)
+t.test(x[group == "A"], x[group == "B"], var.equal = TRUE)`,
+      output: 'Der erste Aufruf ist der Welch-Test (ungleiche Varianzen). Der zweite der gepoolte t-Test unter Varianzhomogenität.',
+      taskPrompt: 'Lies beide Outputs und erkläre, welcher Test vorsichtiger ist, wenn die Streuung zwischen A und B stark differiert.',
+      miniTask: 'Vergleiche die p-Werte beider Aufrufe und formuliere, wann du standardmäßig Welch (`var.equal = FALSE`) wählst.',
+      solution: 'Welch ist robuster bei unterschiedlichen Varianzen; der gepoolte Test ist nur sinnvoll, wenn Homogenität plausibel ist.',
+      taskMode: 'interpret',
+      solutionChanges: [
+        'Keine Codeänderung: Vergleiche p-Wert, Freiheitsgrade und Konfidenzintervall der beiden Ausgaben.',
+        'Benenne explizit, welcher Aufruf Welch und welcher gepoolt ist.'
+      ],
+      pitfalls: [
+        'Immer var.equal = TRUE setzen, ohne die Varianzen zu prüfen.',
+        'Verbundenen und unverbundenen t-Test zu verwechseln.'
+      ]
     }
   ],
   schaetzen_eigenschaften_intervalle: [
@@ -247,7 +328,8 @@ function renderStatistikRLabTheory() {
       <ul>
         <li><strong>Deskriptive Statistik:</strong> Datensatz lesen, summary(), Histogramm und Streuung zusammen deuten.</li>
         <li><strong>Zufallsvariablen & Verteilungen:</strong> Stichprobe, Häufigkeit und relatives Histogramm (TUT_03).</li>
-        <li><strong>Bivariate Analyse:</strong> Pearson, Spearman und Kovarianz unterscheiden.</li>
+        <li><strong>Bivariate Analyse:</strong> Pearson, Spearman, Kovarianz; TUT_08 Zuckerrohr (Kovarianzmatrix).</li>
+        <li><strong>z-Test / Zwei-Stichproben:</strong> platform-added-drill zu z- und t.test-Logik (kein eigenes TUT-Skript).</li>
         <li><strong>Schätzereigenschaften & Konfidenzintervalle:</strong> Intervallbreite und Sicherheitsniveau lesen.</li>
         <li><strong>Hypothesentests:</strong> t-Test-Output in Entscheidungssprache übersetzen.</li>
         <li><strong>Regression:</strong> Koeffizienten, Intervalle und Prognosen sauber deuten.</li>

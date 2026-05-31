@@ -1399,7 +1399,28 @@ sd(b1)`,
       'Ich kann Konsistenz von Unverzerrtheit unterscheiden.',
       'Ich kann begründen, warum große Stichproben Endogenität nicht heilen.',
       'Ich kann Identifikation als Voraussetzung für Konsistenz benennen.'
-    ]
+    ],
+    rBlock: rBlock({
+      script: 'platform-added-drill · Konsistenz/plim (kein eigenes VL-.R; Simulation wie 03_Eigenschaften.R)',
+      purpose: 'Konsistenz ist eine Grenzaussage: Mit wachsendem n soll der Schätzer den wahren Parameter lernen — sofern das Modell identifiziert ist. Diese Übung simuliert viele Stichproben; volle VL-Skripte: `unbiasedness`, `asymptotic_normality`, `monte_carlo`.',
+      code: String.raw`set.seed(42)
+beta_hat <- numeric()
+for (i in 1:600) {
+  x <- rnorm(60)
+  u <- rnorm(60)
+  y <- 1.2 + 0.6 * x + u
+  beta_hat[i] <- coef(lm(y ~ x))[2]
+}
+mean(beta_hat)
+sd(beta_hat)`,
+      output: 'Der Mittelwert der wiederholten Schätzungen liegt nahe am wahren Wert 0,6; die Streuung zeigt die Präzision bei endlichem n. Endogenität würde den Mittelwert systematisch verschieben — mehr n heilt das nicht.',
+      miniTask: 'Vergleiche mean(beta_hat) mit 0,6 und erkläre in einem Satz, warum Konsistenz nicht dasselbe ist wie Unverzerrtheit in einer einzelnen Stichprobe.',
+      solution: 'Unverzerrtheit betrifft den Erwartungswert bei festem n; Konsistenz die Konvergenz, wenn n wächst. Beides kann gleichzeitig gelten, beantwortet aber verschiedene Fragen.',
+      pitfalls: [
+        'Großes n als Heilmittel für Endogenität lesen.',
+        'Simulationsmittelwert mit Konsistenz in einer realen Endogenitätsfrage gleichsetzen.'
+      ]
+    })
   },
   {
     id: 'error_variance',

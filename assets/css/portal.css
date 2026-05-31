@@ -670,6 +670,13 @@ html { scroll-behavior: smooth; }
   margin-top: 12px;
 }
 
+.lp-tile-exam-prep {
+  margin: 6px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--muted) 85%, var(--accent) 15%);
+}
+
 @media (max-width: 480px) {
   .lp-exam-cram-actions {
     flex-direction: column;

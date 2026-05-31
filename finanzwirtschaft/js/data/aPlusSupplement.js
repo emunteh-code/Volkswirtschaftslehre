@@ -43,6 +43,44 @@ export const A_PLUS_SUPPLEMENT = {
         ],
         "result": "Ein positiver Gesamtsaldo am Ende beantwortet noch nicht die Frage, ob zwischendurch eine kritische Finanzierungslücke entsteht.",
         "sourceStatus": "platform-added-drill"
+      },
+      {
+        "text": "Liquiditätsplan (Plattform-Übung): t₀ Auszahlung 180, t₁ Auszahlung 90, t₂ Einzahlung 110, t₃ Einzahlung 210. Berechne Periodensalden, kumulierten Saldo und maximalen Finanzierungsbedarf.",
+        "steps": [
+          { "text": "Saldo t₀ = −180; t₁ = −90; t₂ = +110; t₃ = +210.", "eq": null },
+          { "text": "KS: t₀ = −180; t₁ = −270; t₂ = −160; t₃ = +50.", "eq": null },
+          { "text": "Minimum KS = −270 in t₁ → Finanzierungsbedarf 270.", "eq": null }
+        ],
+        "result": "Maximaler Finanzierungsbedarf = 270 (tiefster kumulierter Saldo in t₁).",
+        "sourceStatus": "platform-added-drill"
+      }
+    ]
+  },
+  "izf_kapitalwertfunktion": {
+    "aufgaben": [
+      {
+        "text": "Investition: CF₀ = −100, CF₁ = 60, CF₂ = 60. Kalkulationszins i = 8 %. NPV? Entscheidung? (Plattform-Übung)",
+        "steps": [
+          { "text": "NPV = −100 + 60/1,08 + 60/1,08².", "eq": null },
+          { "text": "NPV ≈ −100 + 55,56 + 51,44 = +7,0.", "eq": null },
+          { "text": "NPV > 0 → Investition akzeptieren (NPV-Kriterium).", "eq": null }
+        ],
+        "result": "NPV ≈ +7 → Investition durchführen.",
+        "sourceStatus": "platform-added-drill"
+      }
+    ]
+  },
+  "izf_grenzen": {
+    "aufgaben": [
+      {
+        "text": "Klausurfalle (IZF-Grenzen): IRR vs. NPV bei unterschiedlichen Projekten — erkläre den Fehler.",
+        "steps": [
+          { "text": "Typischer Fehler: höchsten IRR wählen ohne Skalenvergleich.", "eq": null },
+          { "text": "IRR ignoriert Projektvolumen und Kapitalbudget — NPV vergleicht absoluten Wertbeitrag.", "eq": null },
+          { "text": "Bei mutually exclusive Projekten: höchster NPV, nicht höchster IRR.", "eq": null }
+        ],
+        "result": "NPV-Kriterium dominiert bei Projektwahl und Kapitalrationierung.",
+        "sourceStatus": "platform-added-drill"
       }
     ]
   }

@@ -44,6 +44,17 @@ export const THEORY_DEPTH_EXPANSIONS = {
       <p>Reine öffentliche Güter: $Rivalität=0$, $Ausschluss=0$. Sammlisches Gut: rival, nicht ausschließbar. Unterprovision weil $p=MC=0$ nicht finanzierbar — staatliche Bereitstellung oder Lindahl-Mechanismus qualitativ.</p>
     `)
   },
+  spieltheorie_statisch: {
+    html:
+      block('In der Klausur: Nash in Normalform', `
+      <p>Matrix aufstellen → beste Antwort auf gegebene Strategie des Gegners (BR) → Schnittpunkt der BR-Korrespondenzen = Nash. Strikte Dominanz zuerst prüfen — eliminiert Zeilen/Spalten.</p>
+      ${math('$$u_i(s_i^*, s_{-i}^*) \\geq u_i(s_i, s_{-i}^*)\\ \\forall s_i$$')}
+    `) +
+      block('Prüfungsstandard', `
+      <p>Reine vs. gemischte Strategien: bei keinem reinen Nash → gemischte mit Indifferenz (Gegner muss indifferent sein). Pareto vs. Nash trennen.</p>
+      ${warn('Dominanz ≠ Nash', 'Eliminierte Strategien nie im Nash — aber Nash kann existieren ohne dominante Strategie.')}
+    `)
+  },
   oligopol_stackelberg: {
     html:
       block('Stackelberg-Folger', `

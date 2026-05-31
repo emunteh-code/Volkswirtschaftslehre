@@ -20,7 +20,7 @@ import {
   initQuellenPanelInteractions
 } from "./quellenPanel.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
-import { studentizeMethodText, studentizeTaskGapNote } from "../utils/studentFacingText.js";
+import { studentizeMethodText, studentizeTaskGapNote, studentizeTheoryHtml } from "../utils/studentFacingText.js";
 import {
   FULL_EXAM_HOME_DESCRIPTION
 } from "../data/examDisclosure.js";
@@ -842,7 +842,6 @@ ${answerMarkup}
 <p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
 </div>
 </div>
-<p class="practice-klausur-link" role="note">Klausurmethode → <button type="button" class="link-btn practice-klausur-jump" onclick="window.__switchTab?.('formeln')">Formeln-Tab</button></p>
 <div class="practice-section-header">Geführte Aufgaben</div>
 ${renderGuidedTasks(tasks)}`;
     if (chapter) {
@@ -1005,14 +1004,7 @@ ${varsHint}
 ${supportNote}
 </div>`;
     }).join("")}</div>`;
-      if (hasKlausurmethodik) {
-        html += `<details class="formula-section-accordion">
-<summary class="formula-section-accordion-head"><span>Formeln & Merksätze</span><span class="formula-section-accordion-hint">aufklappen</span></summary>
-<div class="formula-section-accordion-body">${formulaBody}</div>
-</details>`;
-      } else {
-        html += formulaBody;
-      }
+      html += formulaBody;
     if (formulaCards.length) {
       html += `<div class="section-block formula-proof-layer">
 <h3>Herleitung & Einsatzgrenzen</h3>

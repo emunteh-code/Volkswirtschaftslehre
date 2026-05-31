@@ -44,6 +44,7 @@ export const MODULES = [
     title: "Mikroökonomik I",
     shortTitle: "Mikro I",
     summary: "Haushalts- und Unternehmenstheorie sowie Marktgleichgewicht.",
+    examPrepNote: "A−: Theorie, Graphen, stepped Aufgaben — Primär-Drill-Modul.",
     accent: "#7c3aed",
     difficulty: "Anfänger",
     time: "45h",
@@ -66,9 +67,10 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "beta",
+    examPrepNote: "A−: Oligopol & Spieltheorie exam-ready; Marktversagen ergänzend gekennzeichnet.",
     sourceCorpusInRepo: true,
     sourceStatusNote:
-      "Beta: Oligopol & Spieltheorie nutzbar. Supplemental-Kapitel im Modul gekennzeichnet."
+      "A−-tauglich: Oligopol & Spieltheorie VL-backed. Marktversagen = gekennzeichnete Ergänzung."
   },
   {
     slug: "makro1",
@@ -82,7 +84,8 @@ export const MODULES = [
     href: "./makro1/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta"
+    releaseTier: "beta",
+    examPrepNote: "A−: IS-LM, Konzept-Check, stepped Aufgaben + ILIAS für Randfälle."
   },
   {
     slug: "makro2",
@@ -96,7 +99,8 @@ export const MODULES = [
     href: "./makro2/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "core"
+    releaseTier: "core",
+    examPrepNote: "A−: Offene Volkswirtschaft, Konzept-Check, Probeklausur-Simulation."
   },
   {
     slug: "oekonometrie",
@@ -110,7 +114,8 @@ export const MODULES = [
     href: "./oekonometrie/index.html",
     status: "live",
     type: "quantitative_coding",
-    releaseTier: "core"
+    releaseTier: "core",
+    examPrepNote: "A−: Regression, Inferenz, R-Übung — ILIAS für Beweise."
   },
   {
     slug: "statistik",
@@ -124,7 +129,8 @@ export const MODULES = [
     href: "./statistik/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "core"
+    releaseTier: "core",
+    examPrepNote: "A−: Tests, KI, R-Übung, Konzept-Check — starke Drill-Basis."
   },
   {
     slug: "finanzwirtschaft",
@@ -138,7 +144,8 @@ export const MODULES = [
     href: "./finanzwirtschaft/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta"
+    releaseTier: "beta",
+    examPrepNote: "A−: NPV, Liquidität, IZF — Klausurtransfer + Konzept-Check."
   },
   {
     slug: "mathematik",
@@ -152,7 +159,8 @@ export const MODULES = [
     href: "./mathematik/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "core"
+    releaseTier: "core",
+    examPrepNote: "A−: Analysis, LA, Optimierung + R-Begleitpraxis."
   },
   {
     slug: "jahresabschluss",
@@ -166,7 +174,8 @@ export const MODULES = [
     href: "./jahresabschluss/index.html",
     status: "live",
     type: "mixed",
-    releaseTier: "beta"
+    releaseTier: "beta",
+    examPrepNote: "A−: Buchungssätze, Umlauf, GoB — nummerierte Klausurketten."
   },
   {
     slug: "recht",
@@ -180,7 +189,8 @@ export const MODULES = [
     href: "./recht/index.html",
     status: "live",
     type: "text_doctrinal",
-    releaseTier: "beta"
+    releaseTier: "beta",
+    examPrepNote: "A−: Mini-Gutachten, Norm-Zitate, Fall-Drills + Konzept-Check."
   },
   {
     slug: "internationale-wirtschaftsbeziehungen",
@@ -194,7 +204,8 @@ export const MODULES = [
     href: "./internationale-wirtschaftsbeziehungen/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta"
+    releaseTier: "beta",
+    examPrepNote: "A−: Ricardo, H-O, Zölle, Trilemma — Modellwahl + Konzept-Check."
   }
 ];
 

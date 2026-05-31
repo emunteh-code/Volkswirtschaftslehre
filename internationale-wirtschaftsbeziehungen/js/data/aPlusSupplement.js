@@ -27,6 +27,18 @@ export const A_PLUS_SUPPLEMENT = {
         },
         "sourceStatus": "source-distilled"
       }
+    ],
+    "aufgaben": [
+      {
+        "text": "Ricardo-Beispiel: Heim $a_{LX}=2, a_{LY}=4$; Ausland $a_{LX}=3, a_{LY}=3$. Wer exportiert X? Welcher Preisbereich $P_X/P_Y$ ermöglicht Handel?",
+        "steps": [
+          { "text": "OK_X Heim = 2/4 = 0,5; OK_X Ausland = 3/3 = 1.", "eq": null },
+          { "text": "Heim hat komparativen Vorteil in X (niedrigeres OK_X) → exportiert X.", "eq": null },
+          { "text": "Handelsgleichgewicht: $0{,}5 < P_X/P_Y < 1$ (zwischen Autarkie-Preisen).", "eq": null }
+        ],
+        "result": "Heim exportiert X; relativer Preis liegt zwischen den Autarkie-Opportunitätskosten.",
+        "sourceStatus": "platform-added-drill"
+      }
     ]
   },
   "heckscher_ohlin": {
@@ -39,6 +51,18 @@ export const A_PLUS_SUPPLEMENT = {
           "K/L": "Kapital-Arbeits-Verhältnis des Landes"
         },
         "sourceStatus": "source-distilled"
+      }
+    ],
+    "aufgaben": [
+      {
+        "text": "HO: Heim ist kapitalreich ($K/L$ hoch), Ausland arbeitsreich. Gut A ist kapitalintensiv, Gut B arbeitsintensiv. Wer exportiert was? Wer gewinnt/verliert real bei Handelsöffnung?",
+        "steps": [
+          { "text": "HO-Theorem: Heim exportiert kapitalintensives Gut A.", "eq": null },
+          { "text": "Stolper-Samuelson: Relativer Preis von A steigt → $r\\uparrow$, $w\\downarrow$ im Heim.", "eq": null },
+          { "text": "Arbeitsreicher Faktor im Heim verliert real — trotz Handelsgewinn aggregiert.", "eq": null }
+        ],
+        "result": "Export kapitalintensiver Güter; knapper Faktor (Arbeit) verliert real.",
+        "sourceStatus": "platform-added-drill"
       }
     ]
   },
@@ -89,6 +113,18 @@ export const A_PLUS_SUPPLEMENT = {
           "c": "konstante Grenzkosten"
         },
         "sourceStatus": "source-distilled"
+      }
+    ],
+    "aufgaben": [
+      {
+        "text": "Zwei ähnliche Länder, IRS in Automobilen, Liebhaber-Vielfalt. Warum intraindustrieller Handel trotz ähnlicher Faktorausstattung?",
+        "steps": [
+          { "text": "IRS: größerer Markt → niedrigere AC → mehr Vielfalt profitabel.", "eq": null },
+          { "text": "Konsumenten schätzen Vielfalt — ähnliche Güter werden in beide Richtungen gehandelt.", "eq": null },
+          { "text": "HO erklärt das nicht — Modellwahl: Krugman bei ähnlichen Ländern + IRS.", "eq": null }
+        ],
+        "result": "Intraindustrieller Handel durch Skalenerträge und Produktvielfalt, nicht Faktorreichtum.",
+        "sourceStatus": "platform-added-drill"
       }
     ]
   },
@@ -218,6 +254,34 @@ export const A_PLUS_SUPPLEMENT = {
         "desc": "Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.",
         "variables": {},
         "sourceStatus": "source-distilled"
+      }
+    ]
+  },
+  "quoten_sanktionen": {
+    "aufgaben": [
+      {
+        "text": "Importquote vs. Zoll im kleinen Land: Wirkung auf Inlandspreis, Konsumentenrente, Produzentenrente und totale Wohlfahrt.",
+        "steps": [
+          { "text": "Quote begrenzt Importmenge hart — Inlandspreis steigt bis Angebot = Nachfrage inkl. Quote.", "eq": null },
+          { "text": "Zoll erzeugt Staatseinnahmen; Quote erzeugt Quotenrente (oft an ausländische Exporteure oder Inlandsimporteure).", "eq": null },
+          { "text": "Beide: Konsumentenrente ↓, Produzentenrente ↑ — Wohlfahrtsverlust durch Verzerrung.", "eq": null }
+        ],
+        "result": "Quote und Zoll verschieben Preis nach oben; Verteilung der Rente unterscheidet sich.",
+        "sourceStatus": "platform-added-drill"
+      }
+    ]
+  },
+  "trilemma": {
+    "aufgaben": [
+      {
+        "text": "Fixer Wechselkurs + freie Kapitalmobilität: Warum verliert die Zentralbank Geldpolitik-Autonomie? Was passiert bei expansivem Geldmengenschock?",
+        "steps": [
+          { "text": "Trilemma: Fix + Kapitalmobilität → Zinsangleichung $i \\approx i^*$.", "eq": null },
+          { "text": "Expansion → Abwertungsdruck → Zentralbank verkauft Reserven, kauft Inlandswährung → Geldmenge wieder zurück.", "eq": null },
+          { "text": "Ergebnis: kurzfristig kein dauerhafter autonomer Effekt auf $i$ unter Fix + offene Kapitalmärkte.", "eq": null }
+        ],
+        "result": "Geldpolitik endogen — Reservenverkauf neutralisiert Expansion.",
+        "sourceStatus": "platform-added-drill"
       }
     ]
   },

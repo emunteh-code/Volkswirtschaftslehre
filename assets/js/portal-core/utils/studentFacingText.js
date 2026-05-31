@@ -51,3 +51,20 @@ export function studentizeTaskGapNote(gap) {
   }
   return raw;
 }
+
+/**
+ * Remove internal provenance labels from theory HTML before student render.
+ * @param {unknown} html
+ * @returns {string}
+ */
+export function studentizeTheoryHtml(html) {
+  let s = String(html ?? "");
+  if (!s) return s;
+  s = s.replace(/\(source-distilled\)/gi, "");
+  s = s.replace(/<em>\s*platform-added-explanation:\s*<\/em>/gi, "");
+  s = s.replace(/<em>\s*source-distilled\s*\/\s*platform-added-explanation:\s*<\/em>[^<]*/gi, "");
+  s = s.replace(/<p>\s*<em>\s*source_status:[^<]*<\/em>\s*<\/p>/gi, "");
+  s = s.replace(/<h3>\s*Klausurtransfer\s*\(\s*source-distilled\s*\)\s*<\/h3>/gi, "<h3>Klausurtransfer</h3>");
+  s = s.replace(/\s{2,}/g, " ");
+  return s;
+}

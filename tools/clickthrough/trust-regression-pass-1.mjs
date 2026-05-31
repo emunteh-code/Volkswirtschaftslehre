@@ -132,6 +132,95 @@ async function runMathLeak(page) {
   }
 }
 
+/** --- Theory body: KaTeX only — no .math-semantic fragmentation in section blocks --- */
+const THEORY_BODY_MATH_CASES = [
+  { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/theorie' },
+  { route: '/internationale-wirtschaftsbeziehungen/index.html', id: 'gravitation', label: 'iwb/gravitation/theorie' },
+  { route: '/oekonometrie/index.html', id: 'ols_objective', label: 'oeko/ols_objective/theorie' }
+];
+
+/** Heuristic garble signatures from letter-splitting (e.g. X1pX11, M1y, ô X21). */
+const THEORY_GARBLE_PATTERN = '(?:ô\\s+[A-Z]\\d|X\\d+[a-z]X\\d+|\\bM\\d+[a-z]\\b\\s+[A-Z]\\d)';
+
+async function runTheoryBodyMathIntegrity(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const t of THEORY_BODY_MATH_CASES) {
+    await gotoConcept(page, t.route, t.id);
+    await page.waitForTimeout(1400);
+    const snap = await page.evaluate((garblePattern) => {
+      const blocks = [...document.querySelectorAll('#content .section-block')];
+      const fragmented = blocks.some((block) => Boolean(block.querySelector('.math-semantic')));
+      const text = blocks.map((block) => block.innerText || '').join('\n');
+      let garbled = false;
+      try {
+        garbled = new RegExp(garblePattern, 'u').test(text);
+      } catch {
+        garbled = false;
+      }
+      return { fragmented, garbled, snippet: text.slice(0, 200) };
+    }, THEORY_GARBLE_PATTERN);
+    if (snap.fragmented) {
+      fail({
+        system: 'theory-body-math',
+        route: t.label,
+        surface: 'theorie',
+        viewport: '1280',
+        type: 'section-block-fragmented',
+        why: 'Theory .section-block still contains .math-semantic spans — use KaTeX/typesetMath only.'
+      });
+    }
+    if (snap.garbled) {
+      fail({
+        system: 'theory-body-math',
+        route: t.label,
+        surface: 'theorie',
+        viewport: '1280',
+        type: 'garbled-math-text',
+        why: `Theory text matches garble heuristic: "${snap.snippet}"`
+      });
+    }
+  }
+}
+
+/** --- Formeln: formula grid always visible (no collapsed formula-section accordion) --- */
+async function runFormelnAlwaysVisible(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const c of FORMELN_KLAUSURMETHODIK) {
+    await gotoConcept(page, c.route, c.id);
+    const opened = await clickTab(page, 'formeln');
+    if (!opened) continue;
+    await page.waitForTimeout(500);
+    const snap = await page.evaluate(() => ({
+      accordionCount: document.querySelectorAll('#content .formula-section-accordion').length,
+      closedAccordion: document.querySelectorAll('#content .formula-section-accordion:not([open])').length,
+      visibleCards: [...document.querySelectorAll('#content .formula-card')].filter((card) => {
+        const r = card.getBoundingClientRect();
+        return r.width > 1 && r.height > 1;
+      }).length
+    }));
+    if (snap.accordionCount > 0 || snap.closedAccordion > 0) {
+      fail({
+        system: 'formeln-always-visible',
+        route: c.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-accordion-present',
+        why: 'Formeln & Merksätze must not use formula-section-accordion when Klausurmethodik is present.'
+      });
+    }
+    if (snap.visibleCards < 1) {
+      fail({
+        system: 'formeln-always-visible',
+        route: c.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-cards-hidden',
+        why: 'Expected visible .formula-card elements without expanding an accordion.'
+      });
+    }
+  }
+}
+
 /** --- Header math: no semantic fragmentation; unicode titles should typeset --- */
 const HEADER_MATH_CASES = [
   { route: '/mikro1/index.html', id: 'lambda', tab: 'theorie', label: 'mikro1/lambda/theorie' },
@@ -461,6 +550,7 @@ async function runAufgabenPracticeOnly(page) {
       provenanceFooters: document.querySelectorAll('#content footer.source-provenance').length,
       taskFamilyLayers: document.querySelectorAll('#content .task-family-layer').length,
       practiceSourceNotices: document.querySelectorAll('#content .practice-source-notice').length,
+      klausurJumpLinks: document.querySelectorAll('#content .practice-klausur-link').length,
       klausurfamilienHeadings: [...document.querySelectorAll('#content h3')].filter(
         (node) => /Klausurfamilien/i.test(node.textContent || '')
       ).length
@@ -493,6 +583,16 @@ async function runAufgabenPracticeOnly(page) {
         viewport: '1280',
         type: 'practice-source-notice',
         why: `Expected no practice-source-notice on Aufgaben tab, found ${snap.practiceSourceNotices}.`
+      });
+    }
+    if (snap.klausurJumpLinks !== 0) {
+      fail({
+        system: 'aufgaben-practice-only',
+        route: c.label,
+        surface: 'aufgaben',
+        viewport: '1280',
+        type: 'klausur-formeln-jump',
+        why: `Expected no Aufgaben → Formeln Klausurmethode jump link, found ${snap.klausurJumpLinks}.`
       });
     }
   }
@@ -1405,10 +1505,12 @@ try {
   page.setDefaultTimeout(32000);
 
   await runMathLeak(page);
+  await runTheoryBodyMathIntegrity(page);
   await runHeaderMathIntegrity(page);
   await runProvenance(page);
   await runAufgabenPracticeOnly(page);
   await runFormelnKlausurmethodik(page);
+  await runFormelnAlwaysVisible(page);
   await runMikro1SourceCompanion(page);
   await runProvenanceFormelnSecondary(page);
   await runGraphIntegrity(page, 1400, 900, 'desktop-1400');

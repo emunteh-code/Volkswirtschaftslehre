@@ -44,6 +44,20 @@ export const THEORY_DEPTH_EXPANSIONS = {
       <p>Immer Zinssatz und Periodenkonvention (vorschüssig/nachschüssig). Investition und Finanzierung getrennt argumentieren (Fisher).</p>
     `)
   },
+  liquiditaetsplanung: {
+    html:
+      block('In der Klausur: Liquiditätsplan', `
+      <p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
+      ${math('$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$')}
+    `) +
+      block('Goldene Bilanzregel & Fristenkongruenz', `
+      <p>Mittelfristig: langfristiges AV langfristig finanzieren; kurzfristiges UV kurzfristig. Liquiditätsplan prüft ob Zwischenfinanzierung nötig — Endsaldo positiv reicht nicht.</p>
+    `) +
+      block('Klausurtransfer', `
+      <p>Schrittfolge: (1) Zahlungsströme je Periode. (2) Periodensaldo. (3) Kumulieren. (4) Minimum identifizieren. (5) Goldene Bilanzregel bewerten.</p>
+      ${warn('Endsaldo-Falle', 'Positiver Endsaldo kann trotzdem Zwischenliquiditätskrise verbergen — immer kumulieren.')}
+    `)
+  },
   annuitaeten_finanzplan: {
     html:
       block('In der Klausur: Annuität', `
@@ -59,15 +73,23 @@ export const THEORY_DEPTH_EXPANSIONS = {
     html:
       block('In der Klausur: Kapitalwertfunktion', `
       <p>$NPV(i)$ fällt in $i$ bei normalen Cashflows. IRR = Nullstelle von $NPV(i)$. Mehrere IRR bei nicht-monotonen Cashflows — dann NPV-Kriterium.</p>
+      ${math('$$NPV(i) = \\sum_{t=0}^{T} \\frac{CF_t}{(1+i)^t},\\quad NPV(i^*)=0 \\Rightarrow i^* = IRR$$')}
+    `) +
+      block('Klausurtransfer IZF', `
+      <p>Schrittfolge: (1) Cashflow-Profil notieren (Vorzeichen!). (2) $NPV(i)$ bei gegebenem $i$ berechnen. (3) Entscheidung: $NPV>0$ akzeptieren. (4) Optional IRR — nur bei eindeutiger Nullstelle.</p>
     `) +
       block('Prüfungsstandard', `
       <p>Graph $NPV(i)$ skizzieren; Schnitt mit Achse = IRR. Kapitalwertfunktion für Sensitivität nutzen.</p>
+      ${warn('IRR-Falle', 'Mehrere Vorzeichenwechsel → mehrere IRR — NPV-Kriterium hat Vorrang.')}
     `)
   },
   izf_grenzen: {
     html:
       block('In der Klausur: Grenzen NPV/IRR', `
       <p>Kapitalrationierung: Projektranking nach NPV pro eingesetztem Euro oder PI. Mutually exclusive: höchster NPV, nicht höchster IRR. Unterschiedliche Laufzeiten: Kettenmethode oder EAA.</p>
+    `) +
+      block('Klausurtransfer IZF-Grenzen', `
+      <p>Wiederanlageprämisse: IRR setzt Reinvestition zum IRR voraus — unrealistisch bei hohem IRR. Mehrdeutigkeit: Vorzeichenwechsel zählen. Referenz: NPV bei Kalkulationszins $i$.</p>
     `) +
       block('Prüfungsstandard', `
       <p>IRR-Falle bei Vorzeichenwechseln; qualitative Begründung wann NPV dominiert.</p>

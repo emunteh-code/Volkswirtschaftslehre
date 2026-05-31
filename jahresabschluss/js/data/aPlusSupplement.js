@@ -20,6 +20,32 @@ export const A_PLUS_SUPPLEMENT = {
         ],
         "result": "Viele Lernende sehen nur den Kontenplan. Für ordnungsmäßige Buchführung gehören aber immer auch Belege und Buchungsnachweise dazu.",
         "sourceStatus": "platform-added-drill"
+      },
+      {
+        "text": "Buchungskette (Plattform-Übung): Wareneingang 1.000 € netto auf Kredit — nummerierte Schritte von Beleg bis Buchungssatz.",
+        "steps": [
+          { "text": "1. Beleg prüfen (Rechnung, Lieferung, Bestellung).", "eq": null },
+          { "text": "2. Konten identifizieren: Warenbestand (UV) an Verbindlichkeiten LL.", "eq": null },
+          { "text": "3. Buchungssatz: Warenbestand an Verbindlichkeiten LL 1.000 €.", "eq": null },
+          { "text": "4. USt separat wenn ausweisbar (Vorsteuer an Verbindlichkeiten).", "eq": null }
+        ],
+        "result": "Warenbestand an Verbindlichkeiten — Beleg → Konten → Soll/Haben.",
+        "sourceStatus": "platform-added-drill"
+      }
+    ]
+  },
+  "buchen_konten": {
+    "aufgaben": [
+      {
+        "text": "Buchungswalkthrough (Plattform-Übung): Bareinkauf Büromaterial 119 € brutto (19 % USt). Nummerierte Soll/Haben-Schritte.",
+        "steps": [
+          { "text": "1. Netto = 100 €; Vorsteuer = 19 €.", "eq": null },
+          { "text": "2. Aufwand Bürobedarf (GuV) an Kasse 119 € — oder getrennt: Aufwand 100, Vorsteuer 19 an Kasse 119.", "eq": null },
+          { "text": "3. Bestandskonto (Kasse) im Soll/Haben: Kasse (haben) 119.", "eq": null },
+          { "text": "4. Erfolgskonto Aufwand im Soll — GuV-Wirkung Aufwand.", "eq": null }
+        ],
+        "result": "Aufwand + Vorsteuer an Kasse — Bestandskonto Kasse (haben), Erfolgskonto Aufwand (soll).",
+        "sourceStatus": "platform-added-drill"
       }
     ]
   },
@@ -65,6 +91,17 @@ export const A_PLUS_SUPPLEMENT = {
           }
         ],
         "result": "Umsatzsteuer ist kein Aufwand und keine Betriebseinnahme im engeren Sinn. Wer sie in der Erfolgsermittlung wie normalen Aufwand behandelt, verfehlt die Systematik.",
+        "sourceStatus": "platform-added-drill"
+      },
+      {
+        "text": "Umlauf-Buchungskette (Plattform-Übung): Warenverkauf 1.190 € brutto (19 % USt). Nummerierte Buchungssätze.",
+        "steps": [
+          { "text": "1. Netto = 1.190 / 1,19 = 1.000 €; USt = 190 €.", "eq": null },
+          { "text": "2. Forderungen an Umsatzerlöse 1.000 € + Umsatzsteuer 190 €.", "eq": null },
+          { "text": "3. Umsatzerlöse → GuV; USt → passive Verbindlichkeit (durchlaufend).", "eq": null },
+          { "text": "4. Warenbestand/HK der Ware separat als Aufwand (COGS) buchen.", "eq": null }
+        ],
+        "result": "Forderungen an Umsatzerlöse + USt — USt nicht als Aufwand.",
         "sourceStatus": "platform-added-drill"
       }
     ]

@@ -54,18 +54,27 @@ export const THEORY_DEPTH_EXPANSIONS = {
     html:
       block('Faktorreichtum', `
       <p>Land exportiert Güter, die seinen reichlich vorhandenen Faktoren intensiv nutzen. HO-Theorem: Handel gleicht Faktorpreise zwischen Ländern an (unter Annahmen).</p>
+      ${math('$$\\frac{K}{L}\\Big|_{H} > \\frac{K}{L}\\Big|_{F} \\Rightarrow \\text{Heim exportiert K-intensive Güter}$$')}
     `) +
       block('Stolper-Samuelson', `
       <p>Schutz des importkonkurrierenden Sektors begünstigt den reichlich vorhandenen Faktor, schadet dem knappen Faktor im Inland.</p>
+    `) +
+      block('In der Klausur: HO', `
+      <p>Modellwahl: Ricardo (1 Faktor) vs. HO (2 Faktoren). HO erklärt Faktorintensität und Handelsrichtung — nicht intraindustriellen Handel (→ Krugman).</p>
+      ${warn('FPE', 'Faktorpreisangleichung langfristig — kurzfristig Verteilungskonflikte (Stolper-Samuelson).')}
     `)
   },
   krugman: {
     html:
       block('IRS und intraindustrieller Handel', `
       <p>Steigende Skalenerträge + Liebhaber-Vielfalt → ähnliche Länder handeln ähnliche Güter (intraindustriell), nicht nur unterschiedliche Faktorenintensitäten.</p>
+      ${math('$$AC(q) = \\frac{F}{q} + c \\Rightarrow \\text{größeres } q \\Rightarrow \\text{niedrigere } AC$$')}
     `) +
       block('Prüfungsstandard', `
       <p>HO vs. Krugman: HO = Faktorreichtum; Krugman = Skalenerträge/Produktvielfalt. Aufgabenstellung entscheidet das Modell.</p>
+    `) +
+      block('In der Klausur: Krugman', `
+      <p>Monopolistischer Wettbewerb + IRS: Marktgröße und Vielfalt bestimmen Handelsmuster. Kein Faktorreichtum nötig — ähnliche Länder handeln ähnliche Güter.</p>
     `)
   },
   tarifmodell: {
@@ -112,6 +121,27 @@ export const THEORY_DEPTH_EXPANSIONS = {
     `) +
       block('Prüfungsstandard', `
       <p>Erklärt warum reiche Länder „teurer" sind ohne Fehlbewertung. Unterscheidet sich von kurzfristiger Überschießung (Dornbusch).</p>
+    `)
+  },
+  ricardo: {
+    html:
+      block('In der Klausur: Ricardo', `
+      <p>Arbeitswertmodell: $a_{LX}, a_{LY}$ gegeben. Opportunitätskosten $OK_X = a_{LX}/a_{LY}$. Spezialisierung auf komparativen Vorteil → Handel → beide Länder gewinnen (Grenzen der Theorie: 1 Faktor, Vollbeschäftigung).</p>
+      ${math('$$OK_X = \\frac{a_{LX}}{a_{LY}},\\quad \\frac{P_X}{P_Y} \\text{ zwischen } OK_X^{Heim} \\text{ und } OK_X^{Ausland}$$')}
+    `) +
+      block('Numerisches Beispiel', `
+      <p>Heim: $a_{LX}=2, a_{LY}=4$ → $OK_X=0{,}5$. Ausland: $a_{LX}=3, a_{LY}=3$ → $OK_X=1$. Heim exportiert X (niedrigeres $OK_X$). Relative Preise im Handelsgleichgewicht zwischen 0,5 und 1.</p>
+      ${warn('Autarkie-Preise', 'Handelsdreieck zeichnen: Autarkie vs. Handel — wer exportiert welches Gut?')}
+    `)
+  },
+  trilemma: {
+    html:
+      block('In der Klausur: Trilemma', `
+      <p>Mundell-Fleming-Trilemma: höchstens 2 von {fixer WK, freie Kapitalmobilität, autonome Geldpolitik}. Fix + Kapitalmobilität → $i=i^*$, Geldpolitik endogen. Flex → eigene Geldpolitik, WK passt sich an.</p>
+    `) +
+      block('Prüfungsstandard', `
+      <p>Regime zuerst benennen → Policy-Autonomie → Schockübertragung (M-F). Currency Board = rigide Fixierung über Reserven.</p>
+      ${warn('Trilemma ≠ immer Euro', 'Klausur: Mechanismus erklären, nicht nur Länderliste.')}
     `)
   }
 };

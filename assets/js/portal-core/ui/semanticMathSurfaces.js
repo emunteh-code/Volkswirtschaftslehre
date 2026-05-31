@@ -10,7 +10,7 @@ const SEMANTIC_MATH_HEADER_SKIP_SELECTOR =
   'h1, h2, h3, h4, h5, h6, .concept-title, .concept-tag, .klausurmethodik-accordion-title, .klausurmethodik-card-title, .klausurmethodik-heading, .klausurmethodik-label, .f-label, .formula-card-label, .formula-card-title, .quellen-panel-layer-k, .quellen-panel-anchor-group-label, .graph-panel-title, summary, [role="tab"]';
 
 const SEMANTIC_MATH_SKIP_SELECTOR =
-  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"]';
+  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"], .content-area, .theorie, .section-block, .formula-card, .formula-grid, .formula-section-accordion-body, .math-block, .math-inline, .warn-box, .warning-card, .f-eq, .f-desc, .f-variables, .merksatz';
 
 export function shouldSkipSemanticMath(el) {
   if (!el?.closest) return true;
@@ -355,9 +355,6 @@ export function createSemanticMathSurfaces({
 
   function decorateSemanticMathSurfaces() {
     [
-      '#content .section-block h3',
-      '#content .section-block p',
-      '#content .section-block li',
       '#content .formula-card .f-desc',
       '#content .formula-card .f-var-def',
       '#content .prob-text',
@@ -387,7 +384,6 @@ export function createSemanticMathSurfaces({
       });
     });
 
-    decorateSemanticMath(document.getElementById('content'));
     decorateSemanticMath(document.getElementById('rightPanel'));
   }
   return {

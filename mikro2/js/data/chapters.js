@@ -29,8 +29,7 @@ export const CHAPTERS = [
 const MARKET_FAILURE_SOURCE_BOUNDARY = String.raw`
     <div class="section-block source-boundary-notice platform-added-banner" role="note">
       <h3>Plattform-Ergänzung — kein VL-Primäranker</h3>
-      <p><strong>Exam-relevant, aber nicht VL-gemappt:</strong> Im offiziellen Mikro-II-Korpus (20 Vorlesungs-PDFs) wurden für Pigou/Coase/öffentliche Güter <em>keine</em> direkten Seitenanker gefunden. Nutze diesen Block zur Klausur-Einordnung von Marktversagen — Randnotation und Tiefe weiterhin in ILIAS-PDFs prüfen.</p>
-      <p><em>source_status: platform-added-explanation / platform-added-drill</em></p>
+      <p><strong>Klausurrelevanz (Plattform-Ergänzung):</strong> Marktversagen-Übung ohne VL-Seitenanker — für Einordnung von Pigou, Coase und öffentlichen Gütern. Primär-PDFs in ILIAS prüfen.</p>
     </div>
     `;
 

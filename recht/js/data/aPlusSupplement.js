@@ -66,6 +66,16 @@ export const A_PLUS_SUPPLEMENT = {
         ],
         "result": "Das bloße Lesen eines Angebots und inneres Zustimmen ersetzen keine Annahmeerklärung. Ohne Kundgabe kein Vertrag.",
         "sourceStatus": "platform-added-drill"
+      },
+      {
+        "text": "Fall (Plattform-Übung): A schickt schriftliches Angebot an B. B liest es, nickt innerlich, antwortet nicht. Vertrag zustande?",
+        "steps": [
+          { "text": "Angebot wirksam bei Empfang (§ 130 BGB) — prüfen ob bindend.", "eq": null },
+          { "text": "Annahme braucht empfangsbedürftige Willenserklärung (§ 130) — inneres Nicken reicht nicht.", "eq": null },
+          { "text": "Ergebnis: kein Vertragsschluss mangels Annahme.", "eq": null }
+        ],
+        "result": "Kein Vertrag — Annahme fehlt (§ 130 BGB: Kundgabe erforderlich).",
+        "sourceStatus": "platform-added-drill"
       }
     ]
   },
@@ -111,6 +121,56 @@ export const A_PLUS_SUPPLEMENT = {
           }
         ],
         "result": "„Der Minderjährige wollte es ja“ ersetzt keine Zustimmungslösung. Die rechtliche Prüfung läuft über §§ 104 ff. BGB.",
+        "sourceStatus": "platform-added-drill"
+      }
+    ]
+  },
+  "schuldrecht_intro": {
+    "aufgaben": [
+      {
+        "text": "Gutachten (Plattform-Übung): K verkauft M ein defektes Gerät. M verlangt Schadensersatz. Prüfe Anspruch aus § 280 Abs. 1 BGB — Schrittfolge.",
+        "steps": [
+          { "text": "1. Schuldverhältnis (Kaufvertrag § 433) — entstanden?", "eq": null },
+          { "text": "2. Pflichtverletzung (Mangel = Verletzung der Beschaffenheitspflicht)?", "eq": null },
+          { "text": "3. Vertretenmüssen (§ 280 Abs. 1 S. 2 — bei Kaufvertrag regelmäßig ja)?", "eq": null },
+          { "text": "4. Rechtsfolge: Schadensersatzanspruch — nicht automatisch Rücktritt.", "eq": null }
+        ],
+        "result": "Anspruch aus § 280 Abs. 1 BGB bei Pflichtverletzung + Vertretenmüssen — Rücktritt separat prüfen.",
+        "sourceStatus": "platform-added-drill"
+      },
+      {
+        "text": "Norm-Drill: Welche Norm prüfst du zuerst bei vertraglicher Hauptleistungsstörung — § 280 oder § 325?",
+        "steps": [
+          { "text": "§ 325 = allgemeine Rechtsfolgenlehre — nicht Einstieg bei konkretem Schadensersatz.", "eq": null },
+          { "text": "§ 280 Abs. 1 = spezieller Schadensersatzanspruch bei Pflichtverletzung.", "eq": null },
+          { "text": "Einstieg: Schuldverhältnis → § 280 (nicht mit Rücktritt vermischen).", "eq": null }
+        ],
+        "result": "Einstieg § 280 Abs. 1 BGB — nicht § 325 oder sofort § 437.",
+        "sourceStatus": "platform-added-drill"
+      }
+    ]
+  },
+  "ruecktritt": {
+    "aufgaben": [
+      {
+        "text": "Fall (Plattform-Übung): Käufer K will vom Kaufvertrag zurücktreten wegen Sachmangel. Prüfe Rücktrittsrecht — welche Normkette?",
+        "steps": [
+          { "text": "1. Kaufvertrag wirksam (§ 433)?", "eq": null },
+          { "text": "2. Mangel i.S.d. § 434? Erheblichkeit (§ 323 analog / § 437)?", "eq": null },
+          { "text": "3. Fristsetzung / Entbehrlichkeit (§ 323 Abs. 1)?", "eq": null },
+          { "text": "4. Rücktrittserklärung (§ 349) — ex nunc Wirkung.", "eq": null }
+        ],
+        "result": "Rücktritt über § 437 i.V.m. §§ 323, 349 BGB — Schadensersatz parallel prüfen.",
+        "sourceStatus": "platform-added-drill"
+      },
+      {
+        "text": "Norm-Drill: Rücktritt vs. Schadensersatz — gleicher Anspruchsgrund?",
+        "steps": [
+          { "text": "Schadensersatz: § 280 (Pflichtverletzung) — kann parallel zum Rücktritt.", "eq": null },
+          { "text": "Rücktritt: § 437 Nr. 2 — eigene Voraussetzungen (Mangel + Frist/Entbehrlichkeit).", "eq": null },
+          { "text": "Nicht vermischen: beide Institute separat prüfen.", "eq": null }
+        ],
+        "result": "Rücktritt und Schadensersatz sind getrennte Prüfpfade — nicht gegenseitig ersetzend.",
         "sourceStatus": "platform-added-drill"
       }
     ]

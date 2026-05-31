@@ -385,6 +385,7 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
         ${tierBadge}
       </div>
       <p class="lp-tile-summary">${module.summary}</p>
+      ${module.examPrepNote ? `<p class="lp-tile-exam-prep">${module.examPrepNote}</p>` : ""}
       ${specialStatus}
       <div class="lp-tile-footer">
         <span class="lp-tile-status${statusClass}">${statusLabel}</span>

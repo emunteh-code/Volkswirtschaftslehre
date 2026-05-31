@@ -1,3 +1,5 @@
+import { studentizeTheoryHtml } from "../utils/studentFacingText.js";
+
 function stripTrailingColon(value) {
   return String(value ?? "").replace(/[:\s]+$/u, "").trim();
 }
@@ -53,7 +55,7 @@ function normalizeWarningNode(node) {
  */
 
 export function getWarningSystemData(entry) {
-  const theoryHtml = entry?.theorie || "";
+  const theoryHtml = studentizeTheoryHtml(entry?.theorie || "");
   if (!theoryHtml || typeof DOMParser === "undefined") {
     return {
       theoryHtml,

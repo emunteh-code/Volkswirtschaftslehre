@@ -143,7 +143,7 @@ Spot-check: `statistik/verteilungen`, `oekonometrie/confidence_intervals`, `math
 | `rlab` | orientation concept only |
 | TUT_08 `read.csv` path | VL-relative path; portal uses prelude `zuckerrohr` instead |
 
-**Pass 3 commit:** *(see git log after push)*
+**Pass 3 commit:** `9b1a0df`
 
 ---
 

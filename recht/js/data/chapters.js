@@ -1,5 +1,6 @@
 import { referenceList, renderSemanticBlock, schemaPhrase, schemaSequence } from '../../../assets/js/portal-core/ui/semanticContent.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 
 function mergeAPlusEntry(id, base) {
   const sup = A_PLUS_SUPPLEMENT[id] || {};
@@ -952,6 +953,18 @@ for (const id of Object.keys(CONTENT)) {
   }
   if (sup.formeln?.length) {
     CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    entry.theorie = (typeof entry.theorie === 'string' ? entry.theorie : '') + depth.html;
+  }
+  if (depth?.formeln?.length) {
+    entry.formeln = [...(entry.formeln || []), ...depth.formeln];
   }
 }
 

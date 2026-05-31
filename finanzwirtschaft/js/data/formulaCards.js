@@ -115,20 +115,26 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p20.23-10-2024-georg-august-","finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p14.23-10-2024-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.finanz_denkweise.leitobjekt_merksatz',
+    id: 'finanzwirtschaft.finanz_denkweise.leitfrage_merksatz',
     conceptId: 'finanz_denkweise',
-    officialNotation: "",
-    displayFormula: {"mode":"schema","layout":"phrase","parts":["Zahlungsreihe { z_0, z_1, ..., z_n }"]},
-    intuition: "Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.",
+    officialNotation: "finanz_denkweise",
+    displayFormula: {"mode":"schema","layout":"chain","parts":["Zeitpunkt","+","Zahlung","+","Risiko","⇒","Entscheidung"]},
+    intuition: "Gute Finanzwirtschaft verbindet alle drei Ebenen.",
     derivationSteps: [
         {
-            "label": "Leitobjekt (Merksatz)",
+            "label": "Leitfrage (Merksatz)",
             "text": "23.10.2024                                       Georg-August-Universität Göttingen   20",
             "math": {
                 "mode": "schema",
-                "layout": "phrase",
+                "layout": "chain",
                 "parts": [
-                    "Zahlungsreihe { z_0, z_1, ..., z_n }"
+                    "Zeitpunkt",
+                    "+",
+                    "Zahlung",
+                    "+",
+                    "Risiko",
+                    "⇒",
+                    "Entscheidung"
                 ]
             }
         },
@@ -139,9 +145,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu finanz_denkweise","Leitobjekt (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu finanz_denkweise","Leitfrage (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Leitobjekt (Merksatz) — Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.",
+    examShortcut: "Merke: Leitfrage (Merksatz) — Gute Finanzwirtschaft verbindet alle drei Ebenen.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.finanz_denkweise-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p20.23-10-2024-georg-august-","finanzwirtschaft.finanz_denkweise.v1-studip-pdf.p14.23-10-2024-georg-august-"]
@@ -305,22 +311,26 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p16.06-11-2024-georg-august-","finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p07.06-11-2024-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.kapitalmarkt_bewertung.marktpreis_der_zeit_merksatz',
+    id: 'finanzwirtschaft.kapitalmarkt_bewertung.entscheidungslogik_merksatz',
     conceptId: 'kapitalmarkt_bewertung',
-    officialNotation: "Zins",
-    displayFormula: {"mode":"schema","layout":"chain","parts":["Zins","=","Preis des Zeittausches"]},
-    intuition: "Der Zins verbindet Gegenwarts- und Zukunftszahlungen.",
+    officialNotation: "kapitalmarkt_bewertung",
+    displayFormula: {"mode":"schema","layout":"chain","parts":["Zahlung","+","Zeitpunkt","+","Marktpreis","⇒","Bewertung"]},
+    intuition: "Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.",
     derivationSteps: [
         {
-            "label": "Marktpreis der Zeit (Merksatz)",
+            "label": "Entscheidungslogik (Merksatz)",
             "text": "06.11.2024                                         Georg-August-Universität Göttingen   16",
             "math": {
                 "mode": "schema",
                 "layout": "chain",
                 "parts": [
-                    "Zins",
-                    "=",
-                    "Preis des Zeittausches"
+                    "Zahlung",
+                    "+",
+                    "Zeitpunkt",
+                    "+",
+                    "Marktpreis",
+                    "⇒",
+                    "Bewertung"
                 ]
             }
         },
@@ -331,9 +341,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu kapitalmarkt_bewertung","Marktpreis der Zeit (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu kapitalmarkt_bewertung","Entscheidungslogik (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Marktpreis der Zeit (Merksatz) — Der Zins verbindet Gegenwarts- und Zukunftszahlungen.",
+    examShortcut: "Merke: Entscheidungslogik (Merksatz) — Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.kapitalmarkt_bewertung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p16.06-11-2024-georg-august-","finanzwirtschaft.kapitalmarkt_bewertung.v2-studip-pdf.p07.06-11-2024-georg-august-"]
@@ -409,24 +419,22 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p13.06-11-2024-georg-august-","finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p03.06-11-2024-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.institutionen_marktunvollkommenheit.marktunvollkommenheit_merksatz',
+    id: 'finanzwirtschaft.institutionen_marktunvollkommenheit.orientierungsfrage_merksatz',
     conceptId: 'institutionen_marktunvollkommenheit',
-    officialNotation: "",
-    displayFormula: {"mode":"schema","layout":"chain","parts":["Informationskosten","+","Transaktionskosten","⇒","Institutionen"]},
-    intuition: "Institutionen werden durch Friktionen wirtschaftlich sinnvoll.",
+    officialNotation: "institutionen_marktunvollkommenheit",
+    displayFormula: {"mode":"schema","layout":"chain","parts":["vollkommener Markt? Nein","⇒","Institution / Vertrag / Kontrolle prüfen"]},
+    intuition: "Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.",
     derivationSteps: [
         {
-            "label": "Marktunvollkommenheit (Merksatz)",
+            "label": "Orientierungsfrage (Merksatz)",
             "text": "06.11.2024                                    Georg-August-Universität Göttingen                             13",
             "math": {
                 "mode": "schema",
                 "layout": "chain",
                 "parts": [
-                    "Informationskosten",
-                    "+",
-                    "Transaktionskosten",
+                    "vollkommener Markt? Nein",
                     "⇒",
-                    "Institutionen"
+                    "Institution / Vertrag / Kontrolle prüfen"
                 ]
             }
         },
@@ -437,9 +445,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu institutionen_marktunvollkommenheit","Marktunvollkommenheit (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu institutionen_marktunvollkommenheit","Orientierungsfrage (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Marktunvollkommenheit (Merksatz) — Institutionen werden durch Friktionen wirtschaftlich sinnvoll.",
+    examShortcut: "Merke: Orientierungsfrage (Merksatz) — Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vorderg",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.institutionen_marktunvollkommenheit-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p13.06-11-2024-georg-august-","finanzwirtschaft.institutionen_marktunvollkommenheit.v2-studip-pdf.p03.06-11-2024-georg-august-"]
@@ -809,16 +817,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p11.11-12-2024-georg-august-","finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p08.11-12-2024-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.annuitaeten_finanzplan.annuit_t_aus_kapitalwert_merksat',
+    id: 'finanzwirtschaft.annuitaeten_finanzplan.wiedergewinnungsfaktor_merksatz',
     conceptId: 'annuitaeten_finanzplan',
-    officialNotation: "a, K_0, RBWF(n,i)",
-    displayFormula: "$$a = \\frac{K_0}{RBWF(n,i)}$$",
-    intuition: "Äquivalente konstante Periodenzahlung zum Kapitalwert.",
+    officialNotation: "annuitaeten_finanzplan",
+    displayFormula: "$$WGF(n,i) = \\frac{(1+i)^n i}{(1+i)^n-1}$$",
+    intuition: "Kehrwert des Rentenbarwertfaktors.",
     derivationSteps: [
         {
-            "label": "Annuität aus Kapitalwert (Merksatz)",
+            "label": "Wiedergewinnungsfaktor (Merksatz)",
             "text": "11.12.2024                                          Georg-August-Universität Göttingen                                                 11",
-            "math": "$$a = \\frac{K_0}{RBWF(n,i)}$$"
+            "math": "$$WGF(n,i) = \\frac{(1+i)^n i}{(1+i)^n-1}$$"
         },
         {
             "label": "Anwendung",
@@ -827,9 +835,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu annuitaeten_finanzplan","Annuität aus Kapitalwert (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu annuitaeten_finanzplan","Wiedergewinnungsfaktor (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Annuität aus Kapitalwert (Merksatz) — Äquivalente konstante Periodenzahlung zum Kapitalwert.",
+    examShortcut: "Merke: Wiedergewinnungsfaktor (Merksatz) — Kehrwert des Rentenbarwertfaktors.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.annuitaeten_finanzplan-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p11.11-12-2024-georg-august-","finanzwirtschaft.annuitaeten_finanzplan.v7-studip-pdf.p08.11-12-2024-georg-august-"]
@@ -1051,16 +1059,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.unsicherheit.v9-studip-pdf.p18.08-01-2025-georg-august-","finanzwirtschaft.unsicherheit.v9-studip-pdf.p25.08-01-2025-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.unsicherheit.erwartungswert_merksatz',
+    id: 'finanzwirtschaft.unsicherheit.varianz_merksatz',
     conceptId: 'unsicherheit',
-    officialNotation: "p_s, x_s",
-    displayFormula: "$$E(X) = \\sum_s p_s x_s$$",
-    intuition: "Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.",
+    officialNotation: "unsicherheit",
+    displayFormula: "$$Var(X)= \\sum_s p_s(x_s-E(X))^2$$",
+    intuition: "Streuungsmaß der Ergebnisse um ihren Erwartungswert.",
     derivationSteps: [
         {
-            "label": "Erwartungswert (Merksatz)",
+            "label": "Varianz (Merksatz)",
             "text": "08.01.2025                                           Georg-August-Universität Göttingen                    18",
-            "math": "$$E(X) = \\sum_s p_s x_s$$"
+            "math": "$$Var(X)= \\sum_s p_s(x_s-E(X))^2$$"
         },
         {
             "label": "Anwendung",
@@ -1069,9 +1077,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu unsicherheit","Erwartungswert (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu unsicherheit","Varianz (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Erwartungswert (Merksatz) — Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.",
+    examShortcut: "Merke: Varianz (Merksatz) — Streuungsmaß der Ergebnisse um ihren Erwartungswert.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.unsicherheit-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.unsicherheit.v9-studip-pdf.p18.08-01-2025-georg-august-","finanzwirtschaft.unsicherheit.v9-studip-pdf.p25.08-01-2025-georg-august-"]
@@ -1129,16 +1137,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p09.08-01-2025-georg-august-","finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p17.08-01-2025-georg-august-"]
   }),
   card({
-    id: 'finanzwirtschaft.risikoadjustierter_kapitalwert.risikozuschlag_merksatz',
+    id: 'finanzwirtschaft.risikoadjustierter_kapitalwert.sicherheitsabschlag_merksatz',
     conceptId: 'risikoadjustierter_kapitalwert',
-    officialNotation: "d, E(CF_t)",
-    displayFormula: "$$K_0^{risk} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)}{(1+i+d)^t}$$",
-    intuition: "Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.",
+    officialNotation: "D_t",
+    displayFormula: "$$K_0^{safe} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)-D_t}{(1+i)^t}$$",
+    intuition: "Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.",
     derivationSteps: [
         {
-            "label": "Risikozuschlag (Merksatz)",
+            "label": "Sicherheitsabschlag (Merksatz)",
             "text": "08.01.2025                                             Georg-August-Universität Göttingen                            9",
-            "math": "$$K_0^{risk} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)}{(1+i+d)^t}$$"
+            "math": "$$K_0^{safe} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)-D_t}{(1+i)^t}$$"
         },
         {
             "label": "Anwendung",
@@ -1147,9 +1155,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu risikoadjustierter_kapitalwert","Risikozuschlag (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu risikoadjustierter_kapitalwert","Sicherheitsabschlag (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Risikozuschlag (Merksatz) — Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.",
+    examShortcut: "Merke: Sicherheitsabschlag (Merksatz) — Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.",
     relatedTaskFamilies: ["finanzwirtschaft.taskfamily.risikoadjustierter_kapitalwert-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p09.08-01-2025-georg-august-","finanzwirtschaft.risikoadjustierter_kapitalwert.v9-studip-pdf.p17.08-01-2025-georg-august-"]

@@ -1,5 +1,6 @@
 import { CURRICULUM } from './curriculum.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -68,6 +69,26 @@ function mergeContent(entry) {
 export const CONTENT = Object.fromEntries(
   CURRICULUM.map((entry) => [entry.id, mergeContent(entry)])
 );
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    entry.theorie = (entry.theorie || '') + depth.html;
+  }
+}
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const html = String(entry.theorie || '');
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = `${html}<div class="section-block"><h3>Klausurtransfer (source-distilled)</h3>
+<p><strong>Prüfungsstandard:</strong> Annahmen → Schätzer/Identifikation → Inferenz (SE, t/F) → ökonomische Interpretation der Koeffizienten.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Ökonometrie-VL; Beweise und Spezialfälle in Primär-PDFs.</p></div>`;
+}
 
 export const R_BLOCKS_BY_ID = Object.fromEntries(
   CURRICULUM

@@ -97,32 +97,6 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.handelsfakten.intwb1-pdf.p31.allgemein-neubewertung-v","internationale-wirtschaftsbeziehungen.handelsfakten.intwb1-pdf.p03.vorlesung-wird-begleitet"]
   }),
   card({
-    id: 'internationale-wirtschaftsbeziehungen.handelsfakten.handelsquote_merksatz',
-    conceptId: 'handelsfakten',
-    officialNotation: "X, M, BIP",
-    displayFormula: "$$\\text{Handelsquote} = \\frac{X + M}{BIP}$$",
-    intuition: "Misst die Offenheit einer Volkswirtschaft.",
-    derivationSteps: [
-        {
-            "label": "Handelsquote (Merksatz)",
-            "text": "Allgemein: Neubewertung von politischen Risiken durch",
-            "math": "$$\\text{Handelsquote} = \\frac{X + M}{BIP}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu handelsfakten","Handelsquote (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Handelsquote (Merksatz) — Misst die Offenheit einer Volkswirtschaft.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.handelsfakten-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.handelsfakten.intwb1-pdf.p31.allgemein-neubewertung-v","internationale-wirtschaftsbeziehungen.handelsfakten.intwb1-pdf.p03.vorlesung-wird-begleitet"]
-  }),
-  card({
     id: 'internationale-wirtschaftsbeziehungen.ricardo.opportunit_tskosten_von_x',
     conceptId: 'ricardo',
     officialNotation: "a_{LX}, a_{LY}",
@@ -170,32 +144,6 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu ricardo","Spezialisierungsbedingung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Spezialisierungsbedingung — Exportgut hat die geringeren relativen Kosten.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.ricardo-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.ricardo.intwb2-pdf.p07.zusa-tzliche-einheit-wei","internationale-wirtschaftsbeziehungen.ricardo.intwb2-pdf.p20.kreickemeier-grundlagen-"]
-  }),
-  card({
-    id: 'internationale-wirtschaftsbeziehungen.ricardo.opportunit_tskosten_von_x_merksa',
-    conceptId: 'ricardo',
-    officialNotation: "a_{LX}, a_{LY}",
-    displayFormula: "$$OK_X = \\frac{a_{LX}}{a_{LY}}$$",
-    intuition: "Arbeitsstunden für X relativ zu Y.",
-    derivationSteps: [
-        {
-            "label": "Opportunitätskosten von X (Merksatz)",
-            "text": "zusätzliche Einheit Weizen aufgeben muss",
-            "math": "$$OK_X = \\frac{a_{LX}}{a_{LY}}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu ricardo","Opportunitätskosten von X (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Opportunitätskosten von X (Merksatz) — Arbeitsstunden für X relativ zu Y.",
     relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.ricardo-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["internationale-wirtschaftsbeziehungen.ricardo.intwb2-pdf.p07.zusa-tzliche-einheit-wei","internationale-wirtschaftsbeziehungen.ricardo.intwb2-pdf.p20.kreickemeier-grundlagen-"]
@@ -253,32 +201,6 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.heckscher_ohlin.intwb3-pdf.p15.produktivita-tsunterschi","internationale-wirtschaftsbeziehungen.heckscher_ohlin.intwb3-pdf.p23.gruppen-ist-reale-entloh"]
   }),
   card({
-    id: 'internationale-wirtschaftsbeziehungen.heckscher_ohlin.faktorreichlichkeit_merksatz',
-    conceptId: 'heckscher_ohlin',
-    officialNotation: "K/L",
-    displayFormula: "$$\\frac{K}{L}\\Big|_{H} > \\frac{K}{L}\\Big|_{F}$$",
-    intuition: "Home ist relativ kapitalreich.",
-    derivationSteps: [
-        {
-            "label": "Faktorreichlichkeit (Merksatz)",
-            "text": "Produktivitätsunterschiede zwischen den Ländern",
-            "math": "$$\\frac{K}{L}\\Big|_{H} > \\frac{K}{L}\\Big|_{F}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu heckscher_ohlin","Faktorreichlichkeit (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Faktorreichlichkeit (Merksatz) — Home ist relativ kapitalreich.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.heckscher_ohlin-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.heckscher_ohlin.intwb3-pdf.p15.produktivita-tsunterschi","internationale-wirtschaftsbeziehungen.heckscher_ohlin.intwb3-pdf.p23.gruppen-ist-reale-entloh"]
-  }),
-  card({
     id: 'internationale-wirtschaftsbeziehungen.verteilung_handel.stolper_samuelson',
     conceptId: 'verteilung_handel',
     officialNotation: "r, w",
@@ -326,32 +248,6 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu verteilung_handel","Verteilungslogik"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Verteilungslogik — Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.verteilung_handel-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p07.kapitalreich-relative-au","internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p21.relativem-faktorangebot-"]
-  }),
-  card({
-    id: 'internationale-wirtschaftsbeziehungen.verteilung_handel.stolper_samuelson_merksatz',
-    conceptId: 'verteilung_handel',
-    officialNotation: "r, w",
-    displayFormula: "$$P_{K\\text{-intensiv}} \\uparrow \\Rightarrow r \\uparrow,\\ w \\downarrow$$",
-    intuition: "Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.",
-    derivationSteps: [
-        {
-            "label": "Stolper-Samuelson (Merksatz)",
-            "text": "kapitalreich (relative Aussage über beide Länder)",
-            "math": "$$P_{K\\text{-intensiv}} \\uparrow \\Rightarrow r \\uparrow,\\ w \\downarrow$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu verteilung_handel","Stolper-Samuelson (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Stolper-Samuelson (Merksatz) — Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und ",
     relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.verteilung_handel-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p07.kapitalreich-relative-au","internationale-wirtschaftsbeziehungen.verteilung_handel.intwb3-pdf.p21.relativem-faktorangebot-"]
@@ -409,32 +305,6 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.krugman.intwb4-pdf.p22.i-gro-e-handelsvolumina-","internationale-wirtschaftsbeziehungen.krugman.intwb4-pdf.p16.markt-aus-konstanter-bes"]
   }),
   card({
-    id: 'internationale-wirtschaftsbeziehungen.krugman.durchschnittskosten_merksatz',
-    conceptId: 'krugman',
-    officialNotation: "F, q, c",
-    displayFormula: "$$AC(q) = \\frac{F}{q} + c$$",
-    intuition: "Fixkosten werden mit größerem Output verdünnt.",
-    derivationSteps: [
-        {
-            "label": "Durchschnittskosten (Merksatz)",
-            "text": "I große Handelsvolumina zwischen ähnlichen Ländern",
-            "math": "$$AC(q) = \\frac{F}{q} + c$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu krugman","Durchschnittskosten (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Durchschnittskosten (Merksatz) — Fixkosten werden mit größerem Output verdünnt.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.krugman-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.krugman.intwb4-pdf.p22.i-gro-e-handelsvolumina-","internationale-wirtschaftsbeziehungen.krugman.intwb4-pdf.p16.markt-aus-konstanter-bes"]
-  }),
-  card({
     id: 'internationale-wirtschaftsbeziehungen.gravitation.gravitation',
     conceptId: 'gravitation',
     officialNotation: "GDP_i, GDP_j, Dist_{ij}",
@@ -487,32 +357,6 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.gravitation.intwb4-pdf.p16.markt-aus-konstanter-bes","internationale-wirtschaftsbeziehungen.gravitation.intwb4-pdf.p02.kreickemeier-grundlagen-"]
   }),
   card({
-    id: 'internationale-wirtschaftsbeziehungen.gravitation.gravitation_merksatz',
-    conceptId: 'gravitation',
-    officialNotation: "GDP_i, GDP_j, Dist_{ij}",
-    displayFormula: "$$Trade_{ij} \\propto \\frac{GDP_i \\cdot GDP_j}{Dist_{ij}}$$",
-    intuition: "Große Länder handeln viel, Distanz bremst.",
-    derivationSteps: [
-        {
-            "label": "Gravitation (Merksatz)",
-            "text": "Markt aus (konstanter Bestand an Arbeitskräften)",
-            "math": "$$Trade_{ij} \\propto \\frac{GDP_i \\cdot GDP_j}{Dist_{ij}}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu gravitation","Gravitation (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Gravitation (Merksatz) — Große Länder handeln viel, Distanz bremst.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.gravitation-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.gravitation.intwb4-pdf.p16.markt-aus-konstanter-bes","internationale-wirtschaftsbeziehungen.gravitation.intwb4-pdf.p02.kreickemeier-grundlagen-"]
-  }),
-  card({
     id: 'internationale-wirtschaftsbeziehungen.tarifmodell.inlandspreis_mit_zoll',
     conceptId: 'tarifmodell',
     officialNotation: "tarifmodell",
@@ -560,32 +404,6 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu tarifmodell","Importmenge"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Importmenge — Importe als Lücke zwischen Nachfrage und Angebot.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.tarifmodell-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.tarifmodell.intwb5-pdf.p04.einfu-hrung-modellrahmen","internationale-wirtschaftsbeziehungen.tarifmodell.intwb5-pdf.p02.kreickemeier-grundlagen-"]
-  }),
-  card({
-    id: 'internationale-wirtschaftsbeziehungen.tarifmodell.inlandspreis_mit_zoll_merksatz',
-    conceptId: 'tarifmodell',
-    officialNotation: "",
-    displayFormula: "$$P_{in} = P_w + t$$",
-    intuition: "Preiswirkung im kleinen Land.",
-    derivationSteps: [
-        {
-            "label": "Inlandspreis mit Zoll (Merksatz)",
-            "text": "Einführung: Modellrahmen",
-            "math": "$$P_{in} = P_w + t$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu tarifmodell","Inlandspreis mit Zoll (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Inlandspreis mit Zoll (Merksatz) — Preiswirkung im kleinen Land.",
     relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.tarifmodell-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["internationale-wirtschaftsbeziehungen.tarifmodell.intwb5-pdf.p04.einfu-hrung-modellrahmen","internationale-wirtschaftsbeziehungen.tarifmodell.intwb5-pdf.p02.kreickemeier-grundlagen-"]
@@ -721,32 +539,6 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.wto_integration.intwb7-pdf.p17.zollunion-freihandelszon","internationale-wirtschaftsbeziehungen.wto_integration.intwb7-pdf.p06.i-diskriminierung-gegen-"]
   }),
   card({
-    id: 'internationale-wirtschaftsbeziehungen.wto_integration.trade_creation_merksatz',
-    conceptId: 'wto_integration',
-    officialNotation: "",
-    displayFormula: "$$\\Delta W > 0 \\text{ durch Ersatz teurer Inlandsproduktion}$$",
-    intuition: "Zollunion erhöht Effizienz.",
-    derivationSteps: [
-        {
-            "label": "Trade creation (Merksatz)",
-            "text": "Zollunion, Freihandelszone und Brexit",
-            "math": "$$\\Delta W > 0 \\text{ durch Ersatz teurer Inlandsproduktion}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu wto_integration","Trade creation (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Trade creation (Merksatz) — Zollunion erhöht Effizienz.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.wto_integration-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.wto_integration.intwb7-pdf.p17.zollunion-freihandelszon","internationale-wirtschaftsbeziehungen.wto_integration.intwb7-pdf.p06.i-diskriminierung-gegen-"]
-  }),
-  card({
     id: 'internationale-wirtschaftsbeziehungen.wechselkurssysteme.realer_wechselkurs',
     conceptId: 'wechselkurssysteme',
     officialNotation: "E, P^*, P",
@@ -794,32 +586,6 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu wechselkurssysteme","Reale Abwertung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Reale Abwertung — Exportgüter werden relativ günstiger.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.wechselkurssysteme-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.wechselkurssysteme.intwb8-pdf.p12.die-absolute-a-nderung-d","internationale-wirtschaftsbeziehungen.wechselkurssysteme.intwb8-pdf.p26.1-iac-1-i-fac-eac"]
-  }),
-  card({
-    id: 'internationale-wirtschaftsbeziehungen.wechselkurssysteme.realer_wechselkurs_merksatz',
-    conceptId: 'wechselkurssysteme',
-    officialNotation: "E, P^*, P",
-    displayFormula: "$$q = E \\cdot \\frac{P^*}{P}$$",
-    intuition: "Ausländische Güter relativ zu inländischen Gütern.",
-    derivationSteps: [
-        {
-            "label": "Realer Wechselkurs (Merksatz)",
-            "text": "Die absolute Änderung des Wechselkurses betrug",
-            "math": "$$q = E \\cdot \\frac{P^*}{P}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu wechselkurssysteme","Realer Wechselkurs (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Realer Wechselkurs (Merksatz) — Ausländische Güter relativ zu inländischen Gütern.",
     relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.wechselkurssysteme-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["internationale-wirtschaftsbeziehungen.wechselkurssysteme.intwb8-pdf.p12.die-absolute-a-nderung-d","internationale-wirtschaftsbeziehungen.wechselkurssysteme.intwb8-pdf.p26.1-iac-1-i-fac-eac"]
@@ -1111,32 +877,6 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["internationale-wirtschaftsbeziehungen.overshooting.intwb11-pdf.p27.erkla-rung-von-wechselku","internationale-wirtschaftsbeziehungen.overshooting.intwb11-pdf.p16.kurzen-und-der-langen-fr"]
   }),
   card({
-    id: 'internationale-wirtschaftsbeziehungen.overshooting.uip_logik_merksatz',
-    conceptId: 'overshooting',
-    officialNotation: "",
-    displayFormula: "$$i = i^* + \\frac{E^e - E}{E}$$",
-    intuition: "Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.",
-    derivationSteps: [
-        {
-            "label": "UIP-Logik (Merksatz)",
-            "text": "Erklärung von Wechselkursen",
-            "math": "$$i = i^* + \\frac{E^e - E}{E}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu overshooting","UIP-Logik (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: UIP-Logik (Merksatz) — Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.overshooting-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.overshooting.intwb11-pdf.p27.erkla-rung-von-wechselku","internationale-wirtschaftsbeziehungen.overshooting.intwb11-pdf.p16.kurzen-und-der-langen-fr"]
-  }),
-  card({
     id: 'internationale-wirtschaftsbeziehungen.trilemma.trilemma',
     conceptId: 'trilemma',
     officialNotation: "trilemma",
@@ -1262,32 +1002,6 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu balassa_samuelson","Interpretation"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Interpretation — Ein Teil der Abweichung kann strukturell sein.",
-    relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.balassa_samuelson-vl-pattern"],
-    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["internationale-wirtschaftsbeziehungen.balassa_samuelson.intwb12-pdf.p05.feenstra-taylor-internat","internationale-wirtschaftsbeziehungen.balassa_samuelson.intwb12-pdf.p01.i-das-trilemma-der-wa-hr"]
-  }),
-  card({
-    id: 'internationale-wirtschaftsbeziehungen.balassa_samuelson.balassa_samuelson_kette_merksatz',
-    conceptId: 'balassa_samuelson',
-    officialNotation: "",
-    displayFormula: "$$A_T \\uparrow \\Rightarrow w \\uparrow \\Rightarrow P_N \\uparrow \\Rightarrow q \\text{ verändert sich systematisch}$$",
-    intuition: "Produktivität im handelbaren Sektor treibt relative Preise.",
-    derivationSteps: [
-        {
-            "label": "Balassa-Samuelson-Kette (Merksatz)",
-            "text": "Feenstra/Taylor, International Economics, 5e, © 2021 Worth Publishers",
-            "math": "$$A_T \\uparrow \\Rightarrow w \\uparrow \\Rightarrow P_N \\uparrow \\Rightarrow q \\text{ verändert sich systematisch}$$"
-        },
-        {
-            "label": "Anwendung",
-            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
-            "math": null
-        }
-    ],
-    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu balassa_samuelson","Balassa-Samuelson-Kette (Merksatz)"],
-    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Balassa-Samuelson-Kette (Merksatz) — Produktivität im handelbaren Sektor treibt relative Preise.",
     relatedTaskFamilies: ["internationale-wirtschaftsbeziehungen.taskfamily.balassa_samuelson-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["internationale-wirtschaftsbeziehungen.balassa_samuelson.intwb12-pdf.p05.feenstra-taylor-internat","internationale-wirtschaftsbeziehungen.balassa_samuelson.intwb12-pdf.p01.i-das-trilemma-der-wa-hr"]

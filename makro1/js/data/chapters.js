@@ -4,6 +4,7 @@
 // ============================================================
 
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 // ============================================================
 
 const section = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
@@ -952,6 +953,18 @@ for (const id of Object.keys(CONTENT)) {
   }
   if (sup.formeln?.length) {
     CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    entry.theorie = (typeof entry.theorie === 'string' ? entry.theorie : '') + depth.html;
+  }
+  if (depth?.formeln?.length) {
+    entry.formeln = [...(entry.formeln || []), ...depth.formeln];
   }
 }
 

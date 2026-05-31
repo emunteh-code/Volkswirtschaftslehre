@@ -113,20 +113,24 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["recht.was_ist_recht.1-was-ist-recht-k-pdf.p08.anerkannten-ungeschriebe","recht.was_ist_recht.1-was-ist-recht-k-pdf.p02.legislative-exekutive-ju"]
   }),
   card({
-    id: 'recht.was_ist_recht.kernfrage_merksatz',
+    id: 'recht.was_ist_recht.normbezug_merksatz',
     conceptId: 'was_ist_recht',
-    officialNotation: "",
-    displayFormula: {"mode":"schema","layout":"phrase","parts":["Wer will was von wem woraus?"]},
-    intuition: "Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.",
+    officialNotation: "was_ist_recht",
+    displayFormula: {"mode":"schema","layout":"chain","parts":["Sachverhalt","→","Tatbestandsmerkmal","→","Rechtsfolge"]},
+    intuition: "Das ist die elementare Struktur juristischer Arbeit.",
     derivationSteps: [
         {
-            "label": "Kernfrage (Merksatz)",
+            "label": "Normbezug (Merksatz)",
             "text": "anerkannten ungeschriebenen Normen (Gewohnheitsrecht) verstanden",
             "math": {
                 "mode": "schema",
-                "layout": "phrase",
+                "layout": "chain",
                 "parts": [
-                    "Wer will was von wem woraus?"
+                    "Sachverhalt",
+                    "→",
+                    "Tatbestandsmerkmal",
+                    "→",
+                    "Rechtsfolge"
                 ]
             }
         },
@@ -137,9 +141,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu was_ist_recht","Kernfrage (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu was_ist_recht","Normbezug (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Kernfrage (Merksatz) — Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.",
+    examShortcut: "Merke: Normbezug (Merksatz) — Das ist die elementare Struktur juristischer Arbeit.",
     relatedTaskFamilies: ["recht.taskfamily.was_ist_recht-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["recht.was_ist_recht.1-was-ist-recht-k-pdf.p08.anerkannten-ungeschriebe","recht.was_ist_recht.1-was-ist-recht-k-pdf.p02.legislative-exekutive-ju"]
@@ -211,24 +215,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["recht.privatrecht.2-privatrecht-k-pdf.p03.privatrecht-deliktsrecht","recht.privatrecht.2-privatrecht-k-pdf.p07.2-privatrecht-erlas"]
   }),
   card({
-    id: 'recht.privatrecht.bgb_system_merksatz',
+    id: 'recht.privatrecht.normfinder',
     conceptId: 'privatrecht',
-    officialNotation: "",
-    displayFormula: {"mode":"schema","layout":"chain","parts":["AT","+","Besonderer Teil"]},
-    intuition: "Spezielle Normen bauen auf allgemeinen Regeln auf.",
+    officialNotation: "privatrecht",
+    displayFormula: "AT → Schuldrecht → ggf. Sachenrecht",
+    intuition: "Systematische Suchreihenfolge.",
     derivationSteps: [
         {
-            "label": "BGB-System (Merksatz)",
+            "label": "Normfinder",
             "text": "-> Privatrecht (Deliktsrecht)",
-            "math": {
-                "mode": "schema",
-                "layout": "chain",
-                "parts": [
-                    "AT",
-                    "+",
-                    "Besonderer Teil"
-                ]
-            }
+            "math": "AT → Schuldrecht → ggf. Sachenrecht"
         },
         {
             "label": "Anwendung",
@@ -237,9 +233,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu privatrecht","BGB-System (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu privatrecht","Normfinder"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: BGB-System (Merksatz) — Spezielle Normen bauen auf allgemeinen Regeln auf.",
+    examShortcut: "Merke: Normfinder — Systematische Suchreihenfolge.",
     relatedTaskFamilies: ["recht.taskfamily.privatrecht-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["recht.privatrecht.2-privatrecht-k-pdf.p03.privatrecht-deliktsrecht","recht.privatrecht.2-privatrecht-k-pdf.p07.2-privatrecht-erlas"]
@@ -451,24 +447,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["recht.willenserklaerung.4-willenserkl-rung-vertr.p16.a-vertragsschluss-am-17-","recht.willenserklaerung.4-willenserkl-rung-vertr.p18.dr-simon-gerdemann"]
   }),
   card({
-    id: 'recht.willenserklaerung.vertragsschluss_merksatz',
+    id: 'recht.willenserklaerung.zugang',
     conceptId: 'willenserklaerung',
-    officialNotation: "",
-    displayFormula: {"mode":"schema","layout":"chain","parts":["Angebot","+","Annahme"]},
-    intuition: "Zwei übereinstimmende Willenserklärungen.",
+    officialNotation: "willenserklaerung",
+    displayFormula: "§ 130 BGB",
+    intuition: "Wirksamkeit empfangsbedürftiger WE.",
     derivationSteps: [
         {
-            "label": "Vertragsschluss (Merksatz)",
+            "label": "Zugang",
             "text": "A. Vertragsschluss am 17.12.2021",
-            "math": {
-                "mode": "schema",
-                "layout": "chain",
-                "parts": [
-                    "Angebot",
-                    "+",
-                    "Annahme"
-                ]
-            }
+            "math": "§ 130 BGB"
         },
         {
             "label": "Anwendung",
@@ -477,9 +465,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu willenserklaerung","Vertragsschluss (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu willenserklaerung","Zugang"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Vertragsschluss (Merksatz) — Zwei übereinstimmende Willenserklärungen.",
+    examShortcut: "Merke: Zugang — Wirksamkeit empfangsbedürftiger WE.",
     relatedTaskFamilies: ["recht.taskfamily.willenserklaerung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["recht.willenserklaerung.4-willenserkl-rung-vertr.p16.a-vertragsschluss-am-17-","recht.willenserklaerung.4-willenserkl-rung-vertr.p18.dr-simon-gerdemann"]
@@ -814,22 +802,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["recht.trennung_abstraktion.6-verpflichtungs-und-ver.p09.6-verpflichtungs-und-ver","recht.trennung_abstraktion.6-verpflichtungs-und-ver.p02.einleitende-frage"]
   }),
   card({
-    id: 'recht.trennung_abstraktion.verpflichtung_merksatz',
+    id: 'recht.trennung_abstraktion.bereignung',
     conceptId: 'trennung_abstraktion',
-    officialNotation: "",
-    displayFormula: {"mode":"schema","layout":"phrase","parts":["schuldrechtliches Geschäft"]},
-    intuition: "Begründet Leistungspflichten.",
+    officialNotation: "trennung_abstraktion",
+    displayFormula: "§ 929 BGB",
+    intuition: "Verfügung über bewegliche Sache.",
     derivationSteps: [
         {
-            "label": "Verpflichtung (Merksatz)",
+            "label": "Übereignung",
             "text": "§ 6 Verpflichtungs- und Verfügungsgeschäfte",
-            "math": {
-                "mode": "schema",
-                "layout": "phrase",
-                "parts": [
-                    "schuldrechtliches Geschäft"
-                ]
-            }
+            "math": "§ 929 BGB"
         },
         {
             "label": "Anwendung",
@@ -838,9 +820,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu trennung_abstraktion","Verpflichtung (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu trennung_abstraktion","Übereignung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Verpflichtung (Merksatz) — Begründet Leistungspflichten.",
+    examShortcut: "Merke: Übereignung — Verfügung über bewegliche Sache.",
     relatedTaskFamilies: ["recht.taskfamily.trennung_abstraktion-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["recht.trennung_abstraktion.6-verpflichtungs-und-ver.p09.6-verpflichtungs-und-ver","recht.trennung_abstraktion.6-verpflichtungs-und-ver.p02.einleitende-frage"]
@@ -910,22 +892,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["recht.geschaeftsfaehigkeit.7-rechts-und-gesch-ftsf-.p02.vertr-ge-schlie-en","recht.geschaeftsfaehigkeit.7-rechts-und-gesch-ftsf-.p06.sind-auch-gesch-ftsf-hig"]
   }),
   card({
-    id: 'recht.geschaeftsfaehigkeit.beschr_nkt_gesch_ftsf_hig_merksa',
+    id: 'recht.geschaeftsfaehigkeit.taschengeld',
     conceptId: 'geschaeftsfaehigkeit',
-    officialNotation: "",
-    displayFormula: {"mode":"reference","layout":"stack","entries":["§§ 106 ff. BGB"]},
-    intuition: "Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.",
+    officialNotation: "geschaeftsfaehigkeit",
+    displayFormula: "§ 110 BGB",
+    intuition: "Wirksamkeit aus eigenen Mitteln.",
     derivationSteps: [
         {
-            "label": "Beschränkt geschäftsfähig (Merksatz)",
+            "label": "Taschengeld",
             "text": "• Verträge schließen",
-            "math": {
-                "mode": "reference",
-                "layout": "stack",
-                "entries": [
-                    "§§ 106 ff. BGB"
-                ]
-            }
+            "math": "§ 110 BGB"
         },
         {
             "label": "Anwendung",
@@ -934,9 +910,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu geschaeftsfaehigkeit","Beschränkt geschäftsfähig (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu geschaeftsfaehigkeit","Taschengeld"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Beschränkt geschäftsfähig (Merksatz) — Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.",
+    examShortcut: "Merke: Taschengeld — Wirksamkeit aus eigenen Mitteln.",
     relatedTaskFamilies: ["recht.taskfamily.geschaeftsfaehigkeit-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["recht.geschaeftsfaehigkeit.7-rechts-und-gesch-ftsf-.p02.vertr-ge-schlie-en","recht.geschaeftsfaehigkeit.7-rechts-und-gesch-ftsf-.p06.sind-auch-gesch-ftsf-hig"]

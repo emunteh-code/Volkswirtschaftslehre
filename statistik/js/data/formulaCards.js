@@ -617,16 +617,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["statistik.testen.vl10_3.p08.hypothesen","statistik.testen.vl10_3.p12.klassisch"]
   }),
   card({
-    id: 'statistik.testen.t_statistik_merksatz',
+    id: 'statistik.testen.power_merksatz',
     conceptId: 'testen',
-    officialNotation: "\\bar{x}, \\mu_0, s, n",
-    displayFormula: "$$t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}$$",
-    intuition: "Standardtest für den Mittelwert bei unbekannter Populationsstreuung",
+    officialNotation: "\\beta, 1-\\beta",
+    displayFormula: "$$\\text{Power} = 1-\\beta$$",
+    intuition: "Wahrscheinlichkeit, einen echten Effekt zu entdecken",
     derivationSteps: [
         {
-            "label": "t-Statistik (Merksatz)",
+            "label": "Power (Merksatz)",
             "text": "Induktive Statistik und Hypothesen",
-            "math": "$$t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}$$"
+            "math": "$$\\text{Power} = 1-\\beta$$"
         },
         {
             "label": "Anwendung",
@@ -635,9 +635,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu testen","t-Statistik (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu testen","Power (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: t-Statistik (Merksatz) — Standardtest für den Mittelwert bei unbekannter Populationsstreuung",
+    examShortcut: "Merke: Power (Merksatz) — Wahrscheinlichkeit, einen echten Effekt zu entdecken",
     relatedTaskFamilies: ["statistik.taskfamily.testen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["statistik.testen.vl10_3.p08.hypothesen","statistik.testen.vl10_3.p12.klassisch"]
@@ -695,16 +695,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["statistik.z_test.vl11.p18.motivation","statistik.z_test.vl11.p39.zweiseitig"]
   }),
   card({
-    id: 'statistik.z_test.z_statistik_merksatz',
+    id: 'statistik.z_test.z_test_anteil_merksatz',
     conceptId: 'z_test',
-    officialNotation: "",
-    displayFormula: "$$z = \\frac{\\bar{x} - \\mu_0}{\\sigma/\\sqrt{n}}$$",
-    intuition: "Bekannte Populationsvarianz",
+    officialNotation: "z_test",
+    displayFormula: "$$z = \\frac{\\hat{p} - p_0}{\\sqrt{p_0(1-p_0)/n}}$$",
+    intuition: "Anteilstest",
     derivationSteps: [
         {
-            "label": "z-Statistik (Merksatz)",
+            "label": "z-Test Anteil (Merksatz)",
             "text": "8.1 Motivation und erstes Beispiel",
-            "math": "$$z = \\frac{\\bar{x} - \\mu_0}{\\sigma/\\sqrt{n}}$$"
+            "math": "$$z = \\frac{\\hat{p} - p_0}{\\sqrt{p_0(1-p_0)/n}}$$"
         },
         {
             "label": "Anwendung",
@@ -713,9 +713,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu z_test","z-Statistik (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu z_test","z-Test Anteil (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: z-Statistik (Merksatz) — Bekannte Populationsvarianz",
+    examShortcut: "Merke: z-Test Anteil (Merksatz) — Anteilstest",
     relatedTaskFamilies: ["statistik.taskfamily.z_test-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["statistik.z_test.vl11.p18.motivation","statistik.z_test.vl11.p39.zweiseitig"]
@@ -1139,7 +1139,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.rlab.r_syntax_regression_merksatz',
     conceptId: 'rlab',
-    officialNotation: "",
+    officialNotation: "rlab",
     displayFormula: "\\texttt{lm(y \\sim x1 + x2, data)}",
     intuition: "Lineare Regression in R",
     derivationSteps: [
@@ -1165,7 +1165,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'statistik.rlab.r_syntax_regression_merksatz_mer',
     conceptId: 'rlab',
-    officialNotation: "",
+    officialNotation: "rlab",
     displayFormula: "\\texttt{lm(y \\sim x1 + x2, data)}",
     intuition: "Lineare Regression in R",
     derivationSteps: [

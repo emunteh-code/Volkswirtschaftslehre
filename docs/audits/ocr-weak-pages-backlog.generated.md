@@ -33,3 +33,13 @@ Generated from page index.
 
 3. Promote document-registry families to item-level `official-task-source` after review.
 
+## Status (2026-05-30 closure pass)
+
+- **Automation run:** `ocr-weak-pages.mjs --write` refreshed counts from `source-page-index.generated.json` (report-only; no Tesseract batch executed).
+
+- **official-task-source:** fleet count remains **0** — no item promoted without OCR text + human review evidence.
+
+- **Highest-yield backlog (weak %):** `oekonometrie` (14%), `statistik` (6%), `mikro2` (4%) — prioritize Probeklausur/Übung PDFs when OCR pipeline is wired.
+
+- **Blocked:** Mikro1 Probeklausur JPGs (`MIKRO1_PROBEKLAUSUR_REVIEW_STATUS`); finanz/jahresabschluss/makro2 have low weak-page rates but still need human mapping for any exam-item promotion.
+

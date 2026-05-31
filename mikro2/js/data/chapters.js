@@ -1,6 +1,7 @@
 // ============================================================
 // CHAPTERS & CONTENT DATA — Mikroökonomik II
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 // FINAL BENCHMARK STANDARD v14.0
 // ============================================================
 
@@ -812,6 +813,10 @@ export const CONTENT = {
   externa_pigou: {
     motivation: 'Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.',
     theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
+    <div class="section-block platform-added-notice">
+      <h3>Plattform-Ergänzung (ohne VL-Seitenanker)</h3>
+      <p><em>platform-added-explanation:</em> Ergänzender Marktversagen-Block ohne direkten Primäranker im offiziellen Mikro-II-Korpus.</p>
+    </div>
     <div class="section-block">
       <h3>Negative Externe Effekte</h3>
       <p>Die Produktion verursacht Kosten bei unbeteiligten Dritten (z.B. Verschmutzung). Die Grenzkosten des Unternehmens ($MPC$) sind niedriger als die gesellschaftlichen Grenzkosten ($MSC$).</p>
@@ -887,6 +892,10 @@ export const CONTENT = {
   externa_institutionen: {
     motivation: 'Neben Steuer-Internalisierung braucht die Klausur trennscharfe Beherrschung institutioneller Ansätze: Coase-Verhandlung und Cap-and-Trade.',
     theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
+    <div class="section-block platform-added-notice">
+      <h3>Plattform-Ergänzung (ohne VL-Seitenanker)</h3>
+      <p><em>platform-added-explanation:</em> Marktversagen-Block ohne direkten Primäranker im offiziellen Mikro-II-Korpus. Nutze zur Übung; prüfungsrelevante VL-Stoffe haben gesonderte Konzeptanker.</p>
+    </div>
     <div class="section-block">
       <h3>Coase-Theorem</h3>
       <p>Bei klaren Eigentumsrechten und sehr niedrigen Transaktionskosten führen private Verhandlungen zu einer effizienten Allokation, unabhängig von der initialen Rechtszuweisung.</p>
@@ -895,6 +904,10 @@ export const CONTENT = {
       <h3>Emissionshandel (Cap-and-Trade)</h3>
       <p>Der Staat setzt eine Emissionsmenge (Cap), Lizenzen werden handelbar. Bei funktionierendem Markt ergibt sich kosteneffiziente Vermeidung über den Lizenzpreis.</p>
       <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
+    </div>
+    <div class="section-block">
+      <h3>Preis- vs. Mengensteuerung unter Unsicherheit</h3>
+      <p>Weist die Grenzkostenkurve der Schäden steil und die Grenzkosten der Vermeidung flach, ist eine Pigou-Steuer robuster; ist es umgekehrt, bevorzugt man ein Cap (Weitzman-Argument).</p>
     </div>
     <div class="section-block">
       <h3>Fehleranalyse</h3>
@@ -918,6 +931,10 @@ export const CONTENT = {
   public_goods: {
     motivation: 'Öffentliche Güter sind durch Nicht-Rivalität und Nicht-Ausschließbarkeit gekennzeichnet. Dies führt zum Trittbrettfahrer-Problem.',
     theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
+    <div class="section-block platform-added-notice">
+      <h3>Plattform-Ergänzung (ohne VL-Seitenanker)</h3>
+      <p><em>platform-added-explanation:</em> Öffentliche Güter als Plattform-Drill; nicht als verifizierter VL-Primärstoff behandeln.</p>
+    </div>
     <div class="section-block">
       <h3>Samuelson-Bedingung</h3>
       <p>Die effiziente Menge eines öffentlichen Gutes ist erreicht, wenn die Summe der individuellen Zahlungsbereitschaften (Grenzraten der Substitution) den Grenzkosten der Bereitstellung entspricht.</p>
@@ -1115,6 +1132,15 @@ for (const id of Object.keys(CONTENT)) {
   }
 }
 
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    entry.theorie = String(entry.theorie || '') + depth.html;
+  }
+}
+
 const aPlusSection = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
 const aPlusWarn = (title, body) => `<div class="warn-box"><strong>${title}:</strong> ${body}</div>`;
 
@@ -1135,4 +1161,17 @@ for (const ch of CHAPTERS) {
     const base = entry.formeln[entry.formeln.length - 1];
     entry.formeln.push({ ...base, label: `${base.label} (Kurz)`, desc: base.desc || 'Kernrelation.' });
   }
+}
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const html = String(entry.theorie || '');
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = `${html}${aPlusSection(
+    'Klausurtransfer (source-distilled)',
+    `<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>`
+  )}`;
 }

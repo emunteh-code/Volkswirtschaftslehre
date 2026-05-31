@@ -97,16 +97,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.makro_rahmen.vl-1-pdf.p28.makroo-konomik-offener-v","makro1.makro_rahmen.vl-1-pdf.p14.1-rt-e"]
   }),
   card({
-    id: 'makro1.makro_rahmen.grundidentit_t_der_nachfrage_mer',
+    id: 'makro1.makro_rahmen.realzins_merksatz',
     conceptId: 'makro_rahmen',
-    officialNotation: "Y, C, I, G",
-    displayFormula: "$$Y = C + I + G$$",
-    intuition: "Geschlossene Volkswirtschaft ohne Außenbeitrag",
+    officialNotation: "i, \\pi^e",
+    displayFormula: "$$r \\approx i - \\pi^e$$",
+    intuition: "Nominalzins minus erwartete Inflation",
     derivationSteps: [
         {
-            "label": "Grundidentität der Nachfrage (Merksatz)",
+            "label": "Realzins (Merksatz)",
             "text": "Makroökonomik offener Volkswirtschaften) behandeln",
-            "math": "$$Y = C + I + G$$"
+            "math": "$$r \\approx i - \\pi^e$$"
         },
         {
             "label": "Anwendung",
@@ -115,9 +115,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu makro_rahmen","Grundidentität der Nachfrage (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu makro_rahmen","Realzins (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Grundidentität der Nachfrage (Merksatz) — Geschlossene Volkswirtschaft ohne Außenbeitrag",
+    examShortcut: "Merke: Realzins (Merksatz) — Nominalzins minus erwartete Inflation",
     relatedTaskFamilies: ["makro1.taskfamily.makro_rahmen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["makro1.makro_rahmen.vl-1-pdf.p28.makroo-konomik-offener-v","makro1.makro_rahmen.vl-1-pdf.p14.1-rt-e"]
@@ -196,6 +196,32 @@ export const FORMULA_CARDS = Object.freeze([
     appliesWhen: ["Klausuraufgaben zu vgr","Arbeitslosenquote"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
     examShortcut: "Merke: Arbeitslosenquote — Arbeitslose relativ zu Erwerbspersonen",
+    relatedTaskFamilies: ["makro1.taskfamily.vgr-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["makro1.vgr.vl-2-pdf.p36.das-bruttoinlandsprodukt","makro1.vgr.vl-2-pdf.p15.das-bruttoinlandsprodukt"]
+  }),
+  card({
+    id: 'makro1.vgr.ausgabenidentit_t',
+    conceptId: 'vgr',
+    officialNotation: "vgr",
+    displayFormula: "$$Y = C + I + G + NX$$",
+    intuition: "VGR Kern.",
+    derivationSteps: [
+        {
+            "label": "Ausgabenidentität",
+            "text": "Das Bruttoinlandsprodukt",
+            "math": "$$Y = C + I + G + NX$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu vgr","Ausgabenidentität"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Ausgabenidentität — VGR Kern.",
     relatedTaskFamilies: ["makro1.taskfamily.vgr-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["makro1.vgr.vl-2-pdf.p36.das-bruttoinlandsprodukt","makro1.vgr.vl-2-pdf.p15.das-bruttoinlandsprodukt"]
@@ -435,6 +461,32 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.geldnachfrage.vl-4-pdf.p07.entscheidung-u-ber-liqui","makro1.geldnachfrage.vl-4-pdf.p11.bargeld-sichteinlagen"]
   }),
   card({
+    id: 'makro1.geldnachfrage.geldnachfrage',
+    conceptId: 'geldnachfrage',
+    officialNotation: "geldnachfrage",
+    displayFormula: "$$M^d/P = L(i,Y)$$",
+    intuition: "Liquiditätspräferenz.",
+    derivationSteps: [
+        {
+            "label": "Geldnachfrage",
+            "text": "Entscheidung über Liquidität",
+            "math": "$$M^d/P = L(i,Y)$$"
+        },
+        {
+            "label": "Anwendung",
+            "text": "In der passenden Klausuraufgabe einsetzen und Zulässigkeitsbereich prüfen.",
+            "math": null
+        }
+    ],
+    assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
+    appliesWhen: ["Klausuraufgaben zu geldnachfrage","Geldnachfrage"],
+    failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
+    examShortcut: "Merke: Geldnachfrage — Liquiditätspräferenz.",
+    relatedTaskFamilies: ["makro1.taskfamily.geldnachfrage-vl-pattern"],
+    commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
+    anchorIds: ["makro1.geldnachfrage.vl-4-pdf.p07.entscheidung-u-ber-liqui","makro1.geldnachfrage.vl-4-pdf.p11.bargeld-sichteinlagen"]
+  }),
+  card({
     id: 'makro1.banken.einlagenmultiplikator',
     conceptId: 'banken',
     officialNotation: "\\theta",
@@ -487,16 +539,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.banken.vl-4-pdf.p07.entscheidung-u-ber-liqui","makro1.banken.vl-4-pdf.p11.bargeld-sichteinlagen"]
   }),
   card({
-    id: 'makro1.banken.einlagenmultiplikator_merksatz',
+    id: 'makro1.banken.geldbasis',
     conceptId: 'banken',
-    officialNotation: "\\theta",
-    displayFormula: "$$m_D = \\frac{1}{\\theta}$$",
-    intuition: "Vereinfachtes Multiplikatormodell",
+    officialNotation: "banken",
+    displayFormula: "$$M = m \\cdot B$$",
+    intuition: "Didaktischer Multiplikator.",
     derivationSteps: [
         {
-            "label": "Einlagenmultiplikator (Merksatz)",
+            "label": "Geldbasis",
             "text": "Entscheidung über Liquidität",
-            "math": "$$m_D = \\frac{1}{\\theta}$$"
+            "math": "$$M = m \\cdot B$$"
         },
         {
             "label": "Anwendung",
@@ -505,9 +557,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu banken","Einlagenmultiplikator (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu banken","Geldbasis"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Einlagenmultiplikator (Merksatz) — Vereinfachtes Multiplikatormodell",
+    examShortcut: "Merke: Geldbasis — Didaktischer Multiplikator.",
     relatedTaskFamilies: ["makro1.taskfamily.banken-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["makro1.banken.vl-4-pdf.p07.entscheidung-u-ber-liqui","makro1.banken.vl-4-pdf.p11.bargeld-sichteinlagen"]
@@ -721,16 +773,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.realzins_fisher_erwartungen.kap6-pdf.p23.die-auswirkungen-eines-s","makro1.realzins_fisher_erwartungen.kap6-pdf.p27.probleme-der-hohen-fremd"]
   }),
   card({
-    id: 'makro1.realzins_fisher_erwartungen.fisher_gleichung_merksatz',
+    id: 'makro1.realzins_fisher_erwartungen.exakte_fisher_schreibweise_merks',
     conceptId: 'realzins_fisher_erwartungen',
-    officialNotation: "r, i, \\pi^e",
-    displayFormula: "$$r \\approx i - \\pi^e$$",
-    intuition: "Realzins bei gegebener erwarteter Inflation",
+    officialNotation: "r_t, i_t, \\pi_{t+1}^e",
+    displayFormula: "$$1+r_t = \\frac{1+i_t}{1+\\pi_{t+1}^e}$$",
+    intuition: "Der ex ante Realzins folgt aus Nominalzins und erwartetem Preisniveau.",
     derivationSteps: [
         {
-            "label": "Fisher-Gleichung (Merksatz)",
+            "label": "Exakte Fisher-Schreibweise (Merksatz)",
             "text": "Die Auswirkungen eines Schocks im Finanzsektor",
-            "math": "$$r \\approx i - \\pi^e$$"
+            "math": "$$1+r_t = \\frac{1+i_t}{1+\\pi_{t+1}^e}$$"
         },
         {
             "label": "Anwendung",
@@ -739,9 +791,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu realzins_fisher_erwartungen","Fisher-Gleichung (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu realzins_fisher_erwartungen","Exakte Fisher-Schreibweise (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Fisher-Gleichung (Merksatz) — Realzins bei gegebener erwarteter Inflation",
+    examShortcut: "Merke: Exakte Fisher-Schreibweise (Merksatz) — Der ex ante Realzins folgt aus Nominalzins und erwartetem Preisniveau.",
     relatedTaskFamilies: ["makro1.taskfamily.realzins_fisher_erwartungen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["makro1.realzins_fisher_erwartungen.kap6-pdf.p23.die-auswirkungen-eines-s","makro1.realzins_fisher_erwartungen.kap6-pdf.p27.probleme-der-hohen-fremd"]
@@ -799,16 +851,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.realzins_risikopraemie_krisenkanal.kap6-pdf.p23.die-auswirkungen-eines-s","makro1.realzins_risikopraemie_krisenkanal.kap6-pdf.p27.probleme-der-hohen-fremd"]
   }),
   card({
-    id: 'makro1.realzins_risikopraemie_krisenkanal.kreditzins_merksatz',
+    id: 'makro1.realzins_risikopraemie_krisenkanal.realer_kreditzins_merksatz',
     conceptId: 'realzins_risikopraemie_krisenkanal',
-    officialNotation: "i_L, i, x",
-    displayFormula: "$$i_L = i + x$$",
-    intuition: "Leitzins plus Risikoprämie",
+    officialNotation: "r_L, \\pi^e",
+    displayFormula: "$$r_L \\approx i + x - \\pi^e$$",
+    intuition: "Relevant für Investitionsentscheidungen im Krisenkanal.",
     derivationSteps: [
         {
-            "label": "Kreditzins (Merksatz)",
+            "label": "Realer Kreditzins (Merksatz)",
             "text": "Die Auswirkungen eines Schocks im Finanzsektor",
-            "math": "$$i_L = i + x$$"
+            "math": "$$r_L \\approx i + x - \\pi^e$$"
         },
         {
             "label": "Anwendung",
@@ -817,9 +869,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu realzins_risikopraemie_krisenkanal","Kreditzins (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu realzins_risikopraemie_krisenkanal","Realer Kreditzins (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Kreditzins (Merksatz) — Leitzins plus Risikoprämie",
+    examShortcut: "Merke: Realer Kreditzins (Merksatz) — Relevant für Investitionsentscheidungen im Krisenkanal.",
     relatedTaskFamilies: ["makro1.taskfamily.realzins_risikopraemie_krisenkanal-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["makro1.realzins_risikopraemie_krisenkanal.kap6-pdf.p23.die-auswirkungen-eines-s","makro1.realzins_risikopraemie_krisenkanal.kap6-pdf.p27.probleme-der-hohen-fremd"]
@@ -877,16 +929,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["makro1.arbeitsmarkt.vl-7-pdf.p35.das-produktionspotential","makro1.arbeitsmarkt.vl-7-pdf.p23.preissetzungsgleichung"]
   }),
   card({
-    id: 'makro1.arbeitsmarkt.ws_kurve_merksatz',
+    id: 'makro1.arbeitsmarkt.ps_kurve_merksatz',
     conceptId: 'arbeitsmarkt',
-    officialNotation: "u, z",
-    displayFormula: "$$\\frac{W}{P} = F(u,z)$$",
-    intuition: "Reallohnforderung der Beschäftigten",
+    officialNotation: "\\mu",
+    displayFormula: "$$\\frac{W}{P} = \\frac{1}{1+\\mu}$$",
+    intuition: "Reallohn, den Firmen zahlen",
     derivationSteps: [
         {
-            "label": "WS-Kurve (Merksatz)",
+            "label": "PS-Kurve (Merksatz)",
             "text": "(das Produktionspotential).",
-            "math": "$$\\frac{W}{P} = F(u,z)$$"
+            "math": "$$\\frac{W}{P} = \\frac{1}{1+\\mu}$$"
         },
         {
             "label": "Anwendung",
@@ -895,9 +947,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu arbeitsmarkt","WS-Kurve (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu arbeitsmarkt","PS-Kurve (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: WS-Kurve (Merksatz) — Reallohnforderung der Beschäftigten",
+    examShortcut: "Merke: PS-Kurve (Merksatz) — Reallohn, den Firmen zahlen",
     relatedTaskFamilies: ["makro1.taskfamily.arbeitsmarkt-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["makro1.arbeitsmarkt.vl-7-pdf.p35.das-produktionspotential","makro1.arbeitsmarkt.vl-7-pdf.p23.preissetzungsgleichung"]

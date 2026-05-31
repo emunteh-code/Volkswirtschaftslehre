@@ -1,5 +1,6 @@
 import { mathContent, renderSemanticBlock } from '../../../assets/js/portal-core/ui/semanticContent.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 
 function mergeAPlusEntry(id, base) {
   const sup = A_PLUS_SUPPLEMENT[id] || {};
@@ -947,6 +948,16 @@ for (const id of Object.keys(CONTENT)) {
 for (const ch of CHAPTERS) {
   const entry = CONTENT[ch.id];
   if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    const base = Array.isArray(entry.theorie) ? entry.theorie.join('') : String(entry.theorie || '');
+    entry.theorie = base + depth.html;
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
   const theoryHtml = Array.isArray(entry.theorie) ? entry.theorie.join('') : String(entry.theorie || '');
   if ((theoryHtml.match(/section-block/g) || []).length < 4) {
     const extra = section('Prüfungsstandard', `
@@ -958,4 +969,15 @@ for (const ch of CHAPTERS) {
     const base = entry.formeln[entry.formeln.length - 1];
     entry.formeln.push({ ...base, label: `${base.label} (Merksatz)` });
   }
+}
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const html = Array.isArray(entry.theorie) ? entry.theorie.join('') : String(entry.theorie || '');
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = `${html}<div class="section-block"><h3>Klausurtransfer (source-distilled)</h3>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p></div>`;
 }

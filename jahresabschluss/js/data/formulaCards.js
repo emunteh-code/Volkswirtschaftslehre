@@ -487,16 +487,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.anlagevermoegen.kapitel5-pdf.p03.die-bilanz-bilanzpositio","jahresabschluss.anlagevermoegen.kapitel5-pdf.p13.t1-120-000-15-000-105-00"]
   }),
   card({
-    id: 'jahresabschluss.anlagevermoegen.lineare_afa_merksatz',
+    id: 'jahresabschluss.anlagevermoegen.buchwert_merksatz',
     conceptId: 'anlagevermoegen',
-    officialNotation: "",
-    displayFormula: "$$AfA = \\frac{AK - RW}{n}$$",
-    intuition: "Jährlicher planmäßiger Abschreibungsbetrag.",
+    officialNotation: "anlagevermoegen",
+    displayFormula: "$$BW_t = AK - t \\cdot AfA$$",
+    intuition: "Fortgeführter Wert nach t Jahren.",
     derivationSteps: [
         {
-            "label": "Lineare AfA (Merksatz)",
+            "label": "Buchwert (Merksatz)",
             "text": "DIE BILANZ – BILANZPOSITION",
-            "math": "$$AfA = \\frac{AK - RW}{n}$$"
+            "math": "$$BW_t = AK - t \\cdot AfA$$"
         },
         {
             "label": "Anwendung",
@@ -505,9 +505,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu anlagevermoegen","Lineare AfA (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu anlagevermoegen","Buchwert (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Lineare AfA (Merksatz) — Jährlicher planmäßiger Abschreibungsbetrag.",
+    examShortcut: "Merke: Buchwert (Merksatz) — Fortgeführter Wert nach t Jahren.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.anlagevermoegen-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.anlagevermoegen.kapitel5-pdf.p03.die-bilanz-bilanzpositio","jahresabschluss.anlagevermoegen.kapitel5-pdf.p13.t1-120-000-15-000-105-00"]
@@ -721,16 +721,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p20.s-umsatzsteuer-abschluss","jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p18.2800-bank-833-an-5000-um"]
   }),
   card({
-    id: 'jahresabschluss.umlauf_waren_ust.zahllast_merksatz',
+    id: 'jahresabschluss.umlauf_waren_ust.netto_aus_brutto_merksatz',
     conceptId: 'umlauf_waren_ust',
-    officialNotation: "",
-    displayFormula: "$$Zahllast = USt - VSt$$",
-    intuition: "Abzuführende Umsatzsteuer nach Vorsteuerabzug.",
+    officialNotation: "umlauf_waren_ust",
+    displayFormula: "$$Netto = \\frac{Brutto}{1 + Steuersatz}$$",
+    intuition: "Hilft bei Skonto- und Umsatzsteuerfällen.",
     derivationSteps: [
         {
-            "label": "Zahllast (Merksatz)",
+            "label": "Netto aus Brutto (Merksatz)",
             "text": "S                Umsatzsteuer-Abschlusskonto                                        H",
-            "math": "$$Zahllast = USt - VSt$$"
+            "math": "$$Netto = \\frac{Brutto}{1 + Steuersatz}$$"
         },
         {
             "label": "Anwendung",
@@ -739,9 +739,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu umlauf_waren_ust","Zahllast (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu umlauf_waren_ust","Netto aus Brutto (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Zahllast (Merksatz) — Abzuführende Umsatzsteuer nach Vorsteuerabzug.",
+    examShortcut: "Merke: Netto aus Brutto (Merksatz) — Hilft bei Skonto- und Umsatzsteuerfällen.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.umlauf_waren_ust-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p20.s-umsatzsteuer-abschluss","jahresabschluss.umlauf_waren_ust.kapitel6-6-6-7-pdf.p18.2800-bank-833-an-5000-um"]
@@ -877,16 +877,16 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p05.7-1-grundlagen-kapitalge","jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p13.7-2-kapitalgesellschafte"]
   }),
   card({
-    id: 'jahresabschluss.eigenkapital_personengesellschaften.privatkonto_abschluss_merksatz',
+    id: 'jahresabschluss.eigenkapital_personengesellschaften.gewinnzuweisung_merksatz',
     conceptId: 'eigenkapital_personengesellschaften',
-    officialNotation: "",
-    displayFormula: "\\text{Privatkonto} \\rightarrow \\text{Kapitalkonto}",
-    intuition: "Einlagen/Entnahmen werden periodisch überführt.",
+    officialNotation: "eigenkapital_personengesellschaften",
+    displayFormula: "\\text{GuV-Ergebnis} \\rightarrow \\text{Kapitalkonten der Gesellschafter}",
+    intuition: "Erfolgszuordnung nach Beteiligungslogik.",
     derivationSteps: [
         {
-            "label": "Privatkonto-Abschluss (Merksatz)",
+            "label": "Gewinnzuweisung (Merksatz)",
             "text": "7.1 GRUNDLAGEN – KAPITALGESELLSCHAFTEN",
-            "math": "\\text{Privatkonto} \\rightarrow \\text{Kapitalkonto}"
+            "math": "\\text{GuV-Ergebnis} \\rightarrow \\text{Kapitalkonten der Gesellschafter}"
         },
         {
             "label": "Anwendung",
@@ -895,9 +895,9 @@ export const FORMULA_CARDS = Object.freeze([
         }
     ],
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
-    appliesWhen: ["Klausuraufgaben zu eigenkapital_personengesellschaften","Privatkonto-Abschluss (Merksatz)"],
+    appliesWhen: ["Klausuraufgaben zu eigenkapital_personengesellschaften","Gewinnzuweisung (Merksatz)"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Privatkonto-Abschluss (Merksatz) — Einlagen/Entnahmen werden periodisch überführt.",
+    examShortcut: "Merke: Gewinnzuweisung (Merksatz) — Erfolgszuordnung nach Beteiligungslogik.",
     relatedTaskFamilies: ["jahresabschluss.taskfamily.eigenkapital_personengesellschaften-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
     anchorIds: ["jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p05.7-1-grundlagen-kapitalge","jahresabschluss.eigenkapital_personengesellschaften.kapitel7-pdf.p13.7-2-kapitalgesellschafte"]

@@ -1834,6 +1834,14 @@ integrate(f, lower = 1, upper = 2)`,
           'Genau diese Reihenfolge ist wichtig, damit R die Mathematik stützt statt sie zu verdecken.'
         ],
         sourceStatus: 'platform-added-explanation'
+      },
+      {
+        title: 'Zuordnung zu Kleinübungs-Sheets (VL)',
+        body: [
+          'Jedes R.E*/R.LA*/R.AN*/R.OP*-Sheet im Kurs verweist auf die passende Kleinübung (z. B. R.E2 zu Funktionen). Vor dem Ausführen: PDF-Aufgabe lesen, dann den Portal-Block als numerische Kontrolle nutzen.',
+          'Wenn Output und Handrechnung divergieren, zuerst die mathematische Modellierung prüfen (Definitionsbereich, Einheiten, Matrixdimension), nicht nur den R-Code.'
+        ],
+        sourceStatus: 'source-distilled'
       }
     ],
     warnings: [

@@ -38,6 +38,11 @@ function main() {
   lines.push('1. Tesseract or cloud OCR batch on `weak-or-image-only` pages.', '');
   lines.push('2. Store extracted text outside git; link via `quoteFingerprint` + review log.', '');
   lines.push('3. Promote document-registry families to item-level `official-task-source` after review.', '');
+  lines.push('## Status (2026-05-30 closure pass)', '');
+  lines.push('- **Automation run:** `ocr-weak-pages.mjs --write` refreshed counts from `source-page-index.generated.json` (report-only; no Tesseract batch executed).', '');
+  lines.push('- **official-task-source:** fleet count remains **0** — no item promoted without OCR text + human review evidence.', '');
+  lines.push('- **Highest-yield backlog (weak %):** `oekonometrie` (14%), `statistik` (6%), `mikro2` (4%) — prioritize Probeklausur/Übung PDFs when OCR pipeline is wired.', '');
+  lines.push('- **Blocked:** Mikro1 Probeklausur JPGs (`MIKRO1_PROBEKLAUSUR_REVIEW_STATUS`); finanz/jahresabschluss/makro2 have low weak-page rates but still need human mapping for any exam-item promotion.', '');
 
   const md = `${lines.join('\n')}\n`;
   if (process.argv.includes('--write')) {

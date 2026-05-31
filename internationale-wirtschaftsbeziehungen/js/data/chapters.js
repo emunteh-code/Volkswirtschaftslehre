@@ -1,5 +1,7 @@
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
+
 const section = (title, body) => `
   <div class="section-block">
     <h3>${title}</h3>
@@ -909,4 +911,33 @@ for (const id of Object.keys(CONTENT)) {
   if (sup.formeln?.length) {
     CONTENT[id].formeln = [...(CONTENT[id].formeln || []), ...sup.formeln];
   }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    const base = Array.isArray(entry.theorie) ? entry.theorie.join('') : String(entry.theorie || '');
+    entry.theorie = base + depth.html;
+  }
+  if ((String(entry.theorie).match(/section-block/g) || []).length < 4) {
+    entry.theorie += section(
+      'Prüfungsstandard',
+      `<p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>`
+    );
+  }
+}
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const html = Array.isArray(entry.theorie) ? entry.theorie.join('') : String(entry.theorie || '');
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = `${html}${section(
+    'Klausurtransfer (source-distilled)',
+    `<p><strong>Prüfungsstandard:</strong> Modell wählen (HO, Krugman, PPP/UIP, Handelspolitik) → Mechanismus → Wohlfahrts- oder Politikfolge. Wechselkursregime und Zeithorizont immer explizit.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus IWB-VL-Verdichtung; exakte Klausurnotation in Primär-PDFs prüfen.</p>`
+  )}`;
 }

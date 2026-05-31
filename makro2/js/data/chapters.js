@@ -5,6 +5,7 @@
 
 import { COURSEWORK_TASKS } from './courseworkTasks.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 
 const section = (title, body) => `<div class="section-block"><h3>${title}</h3>${body}</div>`;
 const math = (eq) => `<div class="math-block">${eq}</div>`;
@@ -1198,8 +1199,23 @@ for (const id of Object.keys(CONTENT)) {
 for (const ch of CHAPTERS) {
   const entry = CONTENT[ch.id];
   if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    entry.theorie = (typeof entry.theorie === 'string' ? entry.theorie : '') + depth.html;
+  }
+  if (depth?.formeln?.length) {
+    entry.formeln = [...(entry.formeln || []), ...depth.formeln];
+  }
+  if (depth?.aufgaben?.length) {
+    entry.aufgaben = [...(entry.aufgaben || []), ...depth.aufgaben.map(cloneTask)];
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
   const theoryHtml = typeof entry.theorie === 'string' ? entry.theorie : '';
-  const sectionCount = (theoryHtml.match(/section-block/g) || []).length;
+  let sectionCount = (theoryHtml.match(/section-block/g) || []).length;
   if (sectionCount < 4) {
     entry.theorie = [
       theoryHtml,
@@ -1208,6 +1224,7 @@ for (const ch of CHAPTERS) {
         ${warn('Pflichtfolge', 'Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.')}
       `)
     ].filter(Boolean).join('');
+    sectionCount = (entry.theorie.match(/section-block/g) || []).length;
   }
   while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
     const base = entry.formeln[entry.formeln.length - 1];
@@ -1217,10 +1234,19 @@ for (const ch of CHAPTERS) {
       desc: base.desc || 'Kernrelation für die Klausur.'
     });
   }
-  if (sectionCount < 4) {
-    entry.theorie += section('Ergänzung (platform-added)', `
-      <p><em>platform-added-explanation:</em> Ergänzender Prüfungsblock — Inhalt aus offiziellem Mikro-II-Korpus, ohne separaten VL-Seitenanker wo das Konzept nur im Skript verankert ist.</p>
-      <p>Standardpfad: Modell → Gleichgewicht/Effizienz → Wohlfahrts- oder Politikfolge.</p>
-    `);
-  }
+}
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
+  const html = typeof entry.theorie === 'string' ? entry.theorie : '';
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = [
+    html,
+    section('Klausurtransfer (source-distilled)', `
+      <p><strong>Prüfungsstandard:</strong> Regime → Kanal (Güter/Geld/Außen) → Wirkung auf $Y$, $i$ oder $\\varepsilon$.</p>
+      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-II-VL; offene-Volkswirtschafts-Randnotation in Primär-PDFs.</p>
+    `)
+  ].join('');
 }

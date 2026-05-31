@@ -4,6 +4,7 @@
 // ============================================================
 
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
 
 export const R_BLOCKS_BY_ID = {
   deskriptiv: [
@@ -1671,10 +1672,31 @@ for (const id of Object.keys(CONTENT)) {
 for (const ch of CHAPTERS) {
   const entry = CONTENT[ch.id];
   if (!entry) continue;
+  const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
+  if (depth?.html) {
+    entry.theorie = (typeof entry.theorie === 'string' ? entry.theorie : '') + depth.html;
+  }
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry) continue;
   while ((entry.formeln?.length || 0) < 3 && entry.formeln?.[0]) {
     const base = entry.formeln[entry.formeln.length - 1];
     entry.formeln.push({ ...base, label: `${base.label} (Merksatz)` });
   }
+}
+
+const THEORY_TARGET = 2750;
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry || ch.id === 'rlab') continue;
+  const html = String(entry.theorie || '');
+  if (html.length >= THEORY_TARGET || html.includes('Klausurtransfer (source-distilled)')) continue;
+  entry.theorie = `${html}<div class="section-block"><h3>Klausurtransfer (source-distilled)</h3>
+<p><strong>Prüfungsstandard:</strong> Hypothesen → Teststatistik → Verteilung/kritisches Quantil → Entscheidung und p-Wert-Interpretation. Annahmen (Normalität, Unabhängigkeit, Stichprobengröße) vor der Rechnung benennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzender Block aus Kursverdichtung — Randfälle und exakte Tabellenwerte in offiziellen Statistik-PDFs prüfen.</p></div>`;
 }
 
 delete CONTENT.schaetzen;

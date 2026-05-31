@@ -971,16 +971,32 @@ function setRunButtonState(blockEl, mode = 'idle') {
 function buildRuntimeExpectation(mode, runtimeNote) {
   if (runtimeNote) return runtimeNote;
   if (mode === 'guided') {
-    return 'Geführter Modus: Dieser Block nutzt vorbereiteten Kurscode oder Zusatzpakete. Übe bewusst Code-Lesen, Soll-Output und fachliche Deutung — ohne Live-Run ist das hier Absicht, kein Defekt.';
+    return 'Geführter Modus: Zusatzpakete laufen nicht in WebR. Desktop-R (RStudio) empfohlen — Skript zum Kopieren oben. Vergleiche Ausgabe mit Soll-Output und Musterlösung.';
   }
   return 'Live-Modus (WebR im Browser): didaktische Konzeptübung, kein Ersatz für lokales R oder die Prüfungsumgebung. Pakete und numerische Details können abweichen. Ohne erfolgreichen Start bleiben Soll-Output und Interpretation dein Belegpaket.';
 }
 
 /** Honest scope for all R practice surfaces (embedded + R-Anwendung tab). */
-function renderRTruthBanner() {
+function renderRTruthBanner(moduleSlug = '') {
+  const matheScope = moduleSlug === 'mathematik'
+    ? ' <strong>Mathematik:</strong> Basis-R (Plots, `optimize`, `integrate`, Matrizen) — keine Ökonometrie-Pakete. Für `sandwich`/`lmtest` und Regressions-Workflows: Modul <a href="../oekonometrie/index.html#matrix_notation/r-anwendung">Ökonometrie</a> oder <a href="../statistik/index.html#deskriptiv/r-anwendung">Statistik</a>.'
+    : '';
   return `<div class="r-practice-truth-banner" role="note">
-<p><strong>Browser-R (WebR):</strong> Geführte Konzeptübung im Portal — kein Ersatz für eine lokale R-Installation oder die Prüfungsumgebung. Paketversionen und Zahlen können abweichen. Fällt der Live-Run aus, bleiben Soll-Output, „Was zählt im Output“ und die Musterlösung dein inhaltlicher Anker.</p>
+<p><strong>Browser-R (WebR):</strong> Kann von Desktop-R abweichen (Pakete, Zahlen, Plotdetails). Kein Ersatz für RStudio in der Prüfung — bei Paket-Skripten lokal ausführen. WebR installiert keine Zusatzpakete. Fällt der Live-Run aus: Soll-Output, „Was zählt im Output“ und Musterlösung sind dein Beleg.${matheScope}</p>
 </div>`;
+}
+
+function renderGuidedDesktopBanner(config) {
+  return `<div class="r-guided-desktop-banner" role="note">
+<p><strong>Desktop-R empfohlen:</strong> Dieser Block nutzt Pakete oder VL-Skripte, die im Browser-R nicht laufen. Kopiere das Skript unten nach RStudio, vergleiche mit dem Soll-Output und der Musterlösung — nicht mit Live-„Ausführen“ im Portal.</p>
+<pre class="r-copy-paste-script" tabindex="0"><code>${escapeHtml(config.copyPasteCode || config.starterCode)}</code></pre>
+</div>`;
+}
+
+function inferSelfCheckLine(block) {
+  if (block.selfCheckLine) return block.selfCheckLine;
+  if (block.expectedOutputCheck) return block.expectedOutputCheck;
+  return 'Vergleiche mit Soll-Output: Stimmt Vorzeichen, Größenordnung und die eine entscheidende Zeile? Kleine WebR-Abweichungen sind möglich — deine fachliche Deutung zählt.';
 }
 
 function shouldShowWebRFirstRunHint() {
@@ -1131,7 +1147,9 @@ function buildConfig(block, options = {}) {
       : buildDefaultSolutionChanges(taskMode, changeFocus),
     pitfalls: Array.isArray(block.pitfalls) ? block.pitfalls : [],
     runtimeNote: buildRuntimeExpectation(runtimeMode, block.runtimeNote || ''),
-    outputPlaceholder: inferOutputPlaceholder(block, runtimeMode)
+    outputPlaceholder: inferOutputPlaceholder(block, runtimeMode),
+    selfCheckLine: inferSelfCheckLine(block),
+    copyPasteCode: normalizeCode(block.solutionCode || block.starterCode || block.code || '')
   };
 }
 
@@ -1233,7 +1251,8 @@ export function renderRPracticeMarkup(block, options = {}) {
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
   return `<div class="section-block r-application-block r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
-${renderRTruthBanner()}
+${renderRTruthBanner(config.moduleSlug)}
+${config.runtimeMode === 'guided' ? renderGuidedDesktopBanner(config) : ''}
 <div class="r-practice-head">
   <div class="r-practice-headline">
     <span class="r-application-kicker">R-Übung</span>
@@ -1280,6 +1299,7 @@ ${renderRTruthBanner()}
       ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
     </ul>
   </div>` : ''}
+  <p class="r-self-check-line"><strong>Selbstcheck:</strong> ${escapeHtml(config.selfCheckLine)}</p>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
   </div>
   </div>
@@ -1457,6 +1477,7 @@ function renderTabOutputCard(config) {
       ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
     </ul>
   </div>
+  <p class="r-self-check-line"><strong>Selbstcheck:</strong> ${escapeHtml(config.selfCheckLine)}</p>
   <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
   <div class="r-output-interp r-tab-output-readout">
     <div class="r-output-interp-kicker">Was der Output belegt</div>
@@ -1499,6 +1520,7 @@ function renderRLabSection(block, moduleSlug, index, total, options = {}) {
 
   return `<div class="r-lab-section r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
 ${renderTabOrientationCard(config, index, total)}
+${config.runtimeMode === 'guided' ? renderGuidedDesktopBanner(config) : ''}
 <div class="r-practice-workspace">
   <div class="r-execution-shell">
   <div class="r-execution-instrument">
@@ -1522,7 +1544,7 @@ export function renderRAnwendungTab(blocks, moduleSlug, options = {}) {
     return renderRLabSection(block, moduleSlug, index, total, { blockId, conceptId: options.conceptId });
   }).join('\n<div class="r-lab-divider" aria-hidden="true"></div>\n');
 
-  return `<div class="r-tab-panel">${renderRTruthBanner()}${sectionsHtml}</div>`;
+  return `<div class="r-tab-panel">${renderRTruthBanner(moduleSlug)}${sectionsHtml}</div>`;
 }
 
 // ─── State & Mount Logic ────────────────────────────────────────────────────

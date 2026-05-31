@@ -1810,7 +1810,7 @@ integrate(f, lower = 1, upper = 2)`,
       'Kleinübung/OP_2_-__Multivariate_Optimierung/R.OP_II_-_Aufgaben.pdf',
       'Kleinübung/AN_3_-_Intergralrechnung/R.AN_III_-_Aufgaben.pdf'
     ],
-    motivation: 'Die R-Begleitpraxis ist kein separates Coding-Spielzeug, sondern die rechnerische Begleitspur zu den Vorlesungs- und Kleinübungsinhalten der Mathematik.',
+    motivation: 'Die R-Begleitpraxis ist kein separates Coding-Spielzeug, sondern die rechnerische Begleitspur zu den Vorlesungs- und Kleinübungsinhalten der Mathematik. Im Portal läuft nur Basis-R (Plots, Matrizen, Optimierung, Integration) — Ökonometrie-Pakete wie sandwich/lmtest findest du im Modul Ökonometrie.',
     cardsTitle: 'So nutzt du die R-Begleitpraxis',
     cards: [
       { title: 'Zuerst', value: 'mathematisches Ziel klären', note: 'R kommt nach dem Fachverständnis, nicht davor.', sourceStatus: 'source-distilled' },

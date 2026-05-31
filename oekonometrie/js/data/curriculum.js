@@ -2157,7 +2157,26 @@ anova(model_r, model_ur)`,
       'Ich kann die Beziehung zwischen Intervall und zweiseitigem Test erklären.',
       'Ich kann Breite, Richtung und Nullbezug eines Intervalls interpretieren.',
       'Ich kann typische Fehlinterpretationen korrigieren.'
-    ]
+    ],
+    rBlock: rBlock({
+      script: 'R-Skriptpfad: 09_Intervallschätzung_Hypothesentests.R + lm-Inferenz',
+      purpose: 'Im Kurs werden Koeffizientenintervalle über die Standardfehlerlogik des geschätzten Modells gelesen — in R direkt mit confint(model).',
+      code: String.raw`model <- lm(y ~ x1 + x2, data = df)
+confint(model, level = 0.95)`,
+      output: 'Jede Zeile zeigt untere und obere Grenze für einen Koeffizienten. Enthält das Intervall die Null nicht, entspricht das dem Verwerfen von H₀: βⱼ = 0 auf dem gewählten Niveau.',
+      miniTask: 'Ändere das Niveau auf 0.99 und erkläre, warum die Intervalle breiter werden.',
+      solution: 'Höheres Sicherheitsniveau bedeutet breitere Intervalle: mehr plausible Parameterwerte werden abgedeckt, die Schätzung wirkt weniger präzise.',
+      solutionChanges: [
+        'Ändere im confint(...)-Aufruf nur `level = 0.95` zu `level = 0.99`.',
+        'Lass Modell und Daten unverändert, damit nur der Sicherheitseffekt sichtbar wird.'
+      ],
+      solutionCode: String.raw`model <- lm(y ~ x1 + x2, data = df)
+confint(model, level = 0.99)`,
+      pitfalls: [
+        'Das Intervall als Wahrscheinlichkeit für den wahren Parameter in dieser einen Realisierung lesen.',
+        'Nur die Breite zu nennen, ohne Vorzeichen und Nullbezug zu deuten.'
+      ]
+    })
   },
   {
     id: 'normal_linear_model_mle',
@@ -2545,7 +2564,28 @@ hist(beta_hat, breaks = 35, probability = TRUE)`,
       'Ich kann Lage und Streuung der Simulationsverteilung ökonometrisch deuten.',
       'Ich kann Unverzerrtheit und Präzision in Simulationen voneinander trennen.',
       'Ich kann die Grenze zwischen didaktischer Simulation und realer Anwendung benennen.'
-    ]
+    ],
+    rBlock: rBlock({
+      script: 'platform-added-drill · abgeleitet aus 10_Asymptotische_Eigenschaften.R',
+      purpose: 'Monte-Carlo-Muster aus der VL-Simulationslogik: viele Stichproben, Mittelwert und Streuung des Schätzers lesen.',
+      code: String.raw`set.seed(42)
+beta_hat <- numeric()
+for (i in 1:1500) {
+  x <- rnorm(60)
+  u <- rnorm(60)
+  y <- 1 + 0.8 * x + u
+  beta_hat[i] <- coef(lm(y ~ x))[2]
+}
+mean(beta_hat)
+sd(beta_hat)`,
+      output: 'Der Mittelwert der wiederholten Schätzungen liegt nahe am wahren Parameter 0,8; die Streuung zeigt die Präzision über viele künstliche Stichproben.',
+      miniTask: 'Vergleiche mean(beta_hat) mit 0,8 und erkläre in einem Satz, was sd(beta_hat) über die Präzision sagt.',
+      solution: 'Ein Mittelwert nahe 0,8 illustriert Unverzerrtheit im Labor; sd(beta_hat) misst, wie stark der Schätzer über Wiederholungen streut.',
+      pitfalls: [
+        'Die Simulation als Beweis für reale Daten lesen.',
+        'Mittelwert und Streuung nicht getrennt zu deuten.'
+      ]
+    })
   },
   {
     id: 'vif_collinearity',

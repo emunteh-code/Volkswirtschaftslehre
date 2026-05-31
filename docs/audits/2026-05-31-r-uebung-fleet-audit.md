@@ -1,108 +1,98 @@
-# R-Übung fleet audit — 2026-05-31
+# R-Übung fleet audit — 2026-05-31 (pass 2)
 
-**Mandate:** All R-Übung tabs functional, source-faithful where possible, trust-tested.  
-**Shared stack:** `assets/js/portal-core/features/rPractice.js`, `assets/css/r-practice.css`, `createRenderer` tab `r-anwendung` → label **R-Übung**.
+**Mandate:** Functional R-Übung tabs, source-faithful where possible, honest WebR boundaries.  
+**Pass 1 commit:** `b63de8c` · **Pass 2:** breadth + parity + Mathematik scope (this document).
 
-**Source materials consulted:**
-- `source-materials/Statistik/` (R-Tutorien TUT_01–11, induktive Statistik)
-- `source-materials/Ökonometrie/` (VL `.R` scripts referenced in `oekonometrie/js/data/curriculum.js` `script` fields)
-- `source-materials/Mathematik/` (Kleinübung `R.E*`, `R.LA*`, `R.AN*`, `R.OP*` paths in `mathematik/js/data/curriculum.js` `sourceRefs`)
+**Shared stack:** `assets/js/portal-core/features/rPractice.js`, `assets/css/r-practice.css`, tab `r-anwendung` → **R-Übung**.
 
 ---
 
-## Fleet counts
+## Fleet counts (after pass 2)
 
-| Module | Concepts with R tab | R blocks (total) | Tab wiring |
-|--------|---------------------:|-----------------:|------------|
-| **statistik** | 7 | 8 | `R_BLOCKS_BY_ID` in `statistik/js/data/chapters.js`; `hasRBlock` + `renderRAnwendungTab` |
-| **oekonometrie** | 29 | 29 | `CURRICULUM[].rBlock` → `R_BLOCKS_BY_ID` in `oekonometrie/js/data/chapters.js` |
-| **mathematik** | 8 | 8 | `curriculum.js` `rBlocks[]` → `mathematik/js/data/chapters.js` |
-| **Total** | **44** | **45** | |
+| Module | Concepts with R tab | R blocks | Δ pass 2 |
+|--------|---------------------:|---------:|---------:|
+| **statistik** | 8 (+1) | 9 (+1) | `verteilungen` ← TUT_03 |
+| **oekonometrie** | 31 (+2) | 31 (+2) | `confidence_intervals`, `monte_carlo` |
+| **mathematik** | 8 | 8 | scope note only (base R) |
+| **Total** | **47** | **48** | **+3 blocks** |
 
-No other fleet module exposes concept-level `r-anwendung` in this pass (grep: renderer hooks only above three + generated-portal).
-
----
-
-## Per-module audit
-
-### Statistik — pass
-
-| Concept | Blocks | Source anchor | Tab | Render | WebR / fallback |
-|---------|-------:|---------------|-----|--------|-----------------|
-| `deskriptiv` | 2 | TUT_01, TUT_02 | pass | pass | Live WebR + `buildStatisticsPrelude()` |
-| `bivariat` | 1 | TUT_04 | pass | pass | Live |
-| `schaetzen_eigenschaften_intervalle` | 1 | Induktive Statistik | pass | pass | Live |
-| `testen` | 1 | Einstichproben-t-Test | pass | pass | interpret mode (no code edit) |
-| `regression_schaetzung_inferenz` | 1 | Modellierung I | pass | pass | Live |
-| `regression_diagnostik_prognose` | 1 | Modellierung II | pass | pass | Live |
-| `varianzanalyse` | 1 | TUT_11 | pass | pass | Live |
-
-**Pedagogy:** Blocks tie to tutorium scripts via `script` + `purpose`; mini-tasks match Theorie/Aufgaben themes.  
-**Issues found:** None blocking.  
-**Fixes:** None required (already concept-linked, titles present).
+*Note: `autocorrelation` already had an R block from pass 1; not counted again.*
 
 ---
 
-### Ökonometrie — pass (after fixes)
+## Gap 1 — Breadth review (source scripts vs portal)
 
-| Area | Concepts | Source anchor | Status |
-|------|----------|---------------|--------|
-| Wiederholung | `matrix_notation`, `sample_moments`, `distributions_df` | VL `.R` paths in `script` | pass |
-| Modell / OLS | `model_objects` … `functional_forms` | `01_Das_lineare_Modell.R` | pass |
-| Annahmen / Inferenz | `exogeneity` … `f_test` | VL scripts | pass |
-| Diagnostik | `heteroskedasticity`, `hac_newey_west`, … | `11_*`, `12_*` | pass (guided where packages needed) |
+### Statistik — concepts reviewed
 
-**Issues found (broken → fixed):**
-1. **29× missing block `title`** — UI fell back to generic „Vom Modell zur Auswertung“ instead of chapter title. **Fixed:** merge `entry.title` + `taskPrompt` when building `R_BLOCKS_BY_ID` (`oekonometrie/js/data/chapters.js`).
-2. **2× package blocks** (`heteroskedasticity`, `hac_newey_west`) — `library(sandwich)` / `lmtest` cannot run in WebR. **Fixed:** explicit `runtimeMode: 'guided'` + `runtimeNote` in `curriculum.js` (auto-detect already worked; copy now upfront).
+| Concept | VL R script | Decision |
+|---------|-------------|----------|
+| `deskriptiv` | TUT_01, TUT_02 | already linked |
+| `verteilungen` | **TUT_03** | **added** (direct-source) |
+| `bivariat` | TUT_04 | already linked |
+| `wahrscheinlichkeit` | — | no dedicated TUT `.R` in corpus |
+| `schaetzen_verfahren` | — | no script |
+| `nichtparametrisch` | — | no script |
+| `schaetzen_eigenschaften_intervalle` | inductive / t.test | already linked |
+| `testen` | t.test | already linked |
+| `z_test`, `zwei_stichproben` | — | no TUT match |
+| `regression_*` | Modellierung | already linked |
+| `varianzanalyse` | TUT_11 | already linked |
+| `rlab` | orientation only | no tab (by design) |
+| TUT_08 | `Zuckerrohr.csv` | **not added** — external CSV not in WebR prelude |
 
-**Pedagogy:** `rBlock.script` points to official R filenames; code mirrors VL matrix/OLS/inference patterns.
+**Blocks added (Statistik):** 1 (`verteilungen`).
 
----
+### Ökonometrie — concepts reviewed
 
-### Mathematik — pass
+| Concept | VL `.R` in `source-materials/Ökonometrie/.../R/` | Decision |
+|---------|--------------------------------------------------|----------|
+| All with existing `rBlock` | 01–12, Wiederholung, Tutorium | pass |
+| `confidence_intervals` | 09 + `confint(lm)` workflow | **added** (direct-source) |
+| `monte_carlo` | 10 (simulation pattern) | **added** (`platform-added-drill`) |
+| `consistency` | — | no literal script — theory only |
+| `monte_carlo` vs `asymptotic_normality` | 10 | drill on MC concept, not duplicate tab on asymptotic |
 
-| Concept | Blocks | Source anchor | Status |
-|---------|-------:|---------------|--------|
-| `funktionen_gleichungen` | 1 | R.E2 | pass |
-| `summen_logik_beweise` | 1 | R.E3 | pass |
-| `lineare_algebra_grundlagen` | 1 | R.LA I | pass |
-| `lineare_algebra_struktur` | 1 | R.LA II | pass |
-| `univariate_optimierung` | 1 | R.OP I | pass |
-| `multivariate_optimierung` | 1 | R.OP II | pass |
-| `integralrechnung` | 1 | R.AN III | pass |
-| `r_begleitpraxis` | 1 | Kleinübung R sheets (meta) | pass — `platform-added-explanation` orientation |
+**Blocks added (Ökonometrie):** 2.
 
-**Issues found:** None blocking. Plot-heavy blocks use interpretive output placeholders (by design).  
-**Fixes:** Trust regression extended to this module (see below).
+### Mathematik
 
----
-
-## Shared UX / WebR
-
-| Check | Result |
-|-------|--------|
-| Tab visible when blocks exist (`updateTabButtons`, `hasRBlock`) | pass all 44 concepts |
-| Truth banner on every R surface | pass (`renderRTruthBanner`) |
-| Editor / output / run / reset / insert-solution | pass (trust shell) |
-| WebR live path | `ensureWebR()` → `webr.r-wasm.org`; module preludes for statistik + oekonometrie |
-| Guided mode (`library(...)`) | pass — run disabled, didactic copy |
-| First-run hint if WebR slow/unavailable (audit T8-M1) | **Added** — session dismissible `.r-webr-first-run-hint` in `rPractice.js` + CSS |
-
-**WebR status (CI / local trust pass):** Structural shell verified; **full WebR download not executed in trust:pass1** (by design — network flaky). Failure path shows `[Interaktive Laufzeit nicht verfügbar]` + fallback pill **Didaktischer Fallback**.
+All eight concepts already map to Kleinübung `R.E*` / `R.LA*` / `R.AN*` / `R.OP*` paths; no new blocks (base R only).
 
 ---
 
-## Fixes applied (summary)
+## Gap 2 — Numerical parity (WebR ≠ desktop R)
 
-| # | Issue | Files |
-|---|--------|-------|
-| 1 | Ökonometrie R blocks missing display titles | `oekonometrie/js/data/chapters.js` |
-| 2 | Package R blocks need explicit guided messaging | `oekonometrie/js/data/curriculum.js` (`rBlock` helper + 2 concepts) |
-| 3 | First-run WebR orientation hint | `assets/js/portal-core/features/rPractice.js`, `assets/css/r-practice.css` |
-| 4 | Trust regression: Mathematik R tab shell | `tools/clickthrough/trust-regression-pass-1.mjs` |
+| Change | Location |
+|--------|----------|
+| Truth banner: WebR can differ from Desktop-R; no package install; RStudio for exams | `renderRTruthBanner(moduleSlug)` in `rPractice.js` |
+| Mathematik cross-links in banner to Ökonometrie + Statistik for package workflows | same |
+| Guided blocks: **Desktop-R empfohlen** + copy-paste `<pre class="r-copy-paste-script">` | `renderGuidedDesktopBanner()` |
+| Default guided `runtimeNote` mentions RStudio + copy script | `buildRuntimeExpectation()` |
+| **Selbstcheck** on every block: compare with Soll-Output | `inferSelfCheckLine()` → `.r-self-check-line` |
+| No promise of `install.packages` in WebR | banner + guided copy |
 
-**Broken → fixed count:** **31** (29 titles + 2 guided-runtime copy clarifications). Shared hint + trust extension are hardening, not broken-tab recovery.
+**Banner text (canonical):**  
+*„Browser-R (WebR): Kann von Desktop-R abweichen (Pakete, Zahlen, Plotdetails). Kein Ersatz für RStudio in der Prüfung — bei Paket-Skripten lokal ausführen. WebR installiert keine Zusatzpakete.“*
+
+---
+
+## Gap 3 — Mathematik (base R only)
+
+| Item | Detail |
+|------|--------|
+| Scope note in truth banner | `renderRTruthBanner('mathematik')` — Basis-R, links to Ökonometrie/Statistik |
+| Module intro | `mathematik/js/data/curriculum.js` → `r_begleitpraxis` motivation |
+| Prelude | **No** stats/econ prelude (`getRuntimePrelude` returns `''` for mathematik) |
+| Package check | grep: no `library(` in mathematik `curriculum.js` rBlocks |
+| Cross-link | Relative links in banner: `../oekonometrie/...`, `../statistik/...` |
+
+---
+
+## Per-module status (unchanged concepts = pass)
+
+Statistik, Ökonometrie, Mathematik blocks from pass 1 remain valid. New blocks follow same `renderRAnwendungTab` pipeline.
+
+**Guided (package) blocks:** `heteroskedasticity`/`robust_gls` (sandwich path on robust_gls), `hac_newey_west` — desktop copy + no live run.
 
 ---
 
@@ -112,23 +102,23 @@ No other fleet module exposes concept-level `r-anwendung` in this pass (grep: re
 cd tools/clickthrough && npm run trust:pass1
 ```
 
-**Spot-check routes:** `statistik/deskriptiv`, `oekonometrie/matrix_notation`, `mathematik/funktionen_gleichungen` — R tab shell @ 1280 / 1199 / 390 px.
+Spot-check: `statistik/verteilungen`, `oekonometrie/confidence_intervals`, `mathematik/funktionen_gleichungen` R tabs.
 
 ---
 
-## Remaining gaps (documented, not invented)
+## Files changed (pass 2)
 
-- **Breadth:** Many Statistik/Ökonometrie concepts without R in source still have no tab (intentional — no `rBlock` data).
-- **Numerical parity:** WebR ≠ desktop R; students must use truth banner + guided blocks for package workflows.
-- **Mathematik:** No statistics/econometrics prelude in WebR — base R only (plots, `optimize`, `integrate`).
-
----
-
-## Files changed
-
-- `oekonometrie/js/data/chapters.js`
-- `oekonometrie/js/data/curriculum.js`
-- `assets/js/portal-core/features/rPractice.js`
-- `assets/css/r-practice.css`
-- `tools/clickthrough/trust-regression-pass-1.mjs`
+- `assets/js/portal-core/features/rPractice.js` — banners, guided desktop, self-check
+- `assets/css/r-practice.css` — guided + self-check styles
+- `statistik/js/data/chapters.js` — `verteilungen` R block + rlab list
+- `oekonometrie/js/data/curriculum.js` — `confidence_intervals`, `monte_carlo` blocks
+- `mathematik/js/data/curriculum.js` — scope note on `r_begleitpraxis`
 - `docs/audits/2026-05-31-r-uebung-fleet-audit.md` (this file)
+
+---
+
+## Remaining intentional gaps
+
+- Statistik TUT_08 (needs `Zuckerrohr.csv`), z_test / zwei_stichproben (no VL R script in repo mapping).
+- Ökonometrie `consistency` (no standalone `.R` exercise file).
+- WebR numerical parity with desktop R — documented, not eliminated.

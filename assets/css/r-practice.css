@@ -87,6 +87,44 @@
   border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
 }
 
+.r-guided-desktop-banner {
+  font-size: 12.75px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+  padding: 10px 12px;
+  margin: 0 0 8px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--border) 45%, #c2410c 22%);
+  background: color-mix(in srgb, var(--surface) 90%, #c2410c 10%);
+  display: grid;
+  gap: 8px;
+}
+
+.r-guided-desktop-banner p {
+  margin: 0;
+  max-width: none;
+}
+
+.r-copy-paste-script {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--surface2, var(--surface)) 88%, #000 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.r-self-check-line {
+  font-size: 12.5px;
+  line-height: 1.48;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+  margin: 0 0 6px;
+  max-width: none;
+}
+
 .r-orient-runtime,
 .r-practice-runtime-note {
   margin-top: 8px;

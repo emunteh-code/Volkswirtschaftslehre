@@ -174,6 +174,34 @@ predict(model, newdata = pred_df, interval = "confidence")`,
       ]
     }
   ],
+  verteilungen: [
+    {
+      title: 'Diskrete Zufallsvariable: Stichprobe und Häufigkeit',
+      purpose: 'Im R-Tutorium 3 wird eine diskrete Stichprobe erzeugt und als relative Häufigkeit gelesen — die Brücke von Würfelmodell zu empirischer Verteilung.',
+      script: 'Quelle: TUT_03 · Stichprobe, table(), prop.table(), Histogramm',
+      code: String.raw`set.seed(5)
+Stichprobe <- sample(0:6, 20, replace = TRUE)
+table(Stichprobe)
+prop.table(table(Stichprobe))`,
+      output: 'table() zählt absolute Häufigkeiten; prop.table() normiert auf 1 und macht die empirische Verteilung direkt lesbar.',
+      taskPrompt: 'Ergänze ein Histogramm mit relativen Häufigkeiten (`prob = TRUE`) und erkläre, was sich gegenüber den absoluten Zählungen ändert.',
+      miniTask: 'Füge `hist(Stichprobe, breaks = c(0, 2, 4, 6), prob = TRUE)` hinzu und formuliere danach die Verteilung in einem Satz.',
+      solution: 'Relative Häufigkeiten summieren sich auf 1; das Histogramm zeigt dieselbe Information wie prop.table(), nur als Fläche über Klassen.',
+      solutionChanges: [
+        'Ergänze unter den Zählbefehlen genau eine hist(..., prob = TRUE)-Zeile mit breaks = c(0, 2, 4, 6).',
+        'Lass set.seed, sample und table/prop.table stehen, damit Stichprobe und Häufigkeiten vergleichbar bleiben.'
+      ],
+      solutionCode: String.raw`set.seed(5)
+Stichprobe <- sample(0:6, 20, replace = TRUE)
+table(Stichprobe)
+prop.table(table(Stichprobe))
+hist(Stichprobe, breaks = c(0, 2, 4, 6), prob = TRUE)`,
+      pitfalls: [
+        'Absolute und relative Häufigkeiten sprachlich zu vermischen.',
+        'breaks ohne prob = TRUE lesen und die Skala falsch interpretieren.'
+      ]
+    }
+  ],
   varianzanalyse: [
     {
       title: 'ANOVA: Gruppenmittel und F-Test zusammen lesen',
@@ -218,6 +246,7 @@ function renderStatistikRLabTheory() {
       <h3>Wo du die R-Tabs jetzt findest</h3>
       <ul>
         <li><strong>Deskriptive Statistik:</strong> Datensatz lesen, summary(), Histogramm und Streuung zusammen deuten.</li>
+        <li><strong>Zufallsvariablen & Verteilungen:</strong> Stichprobe, Häufigkeit und relatives Histogramm (TUT_03).</li>
         <li><strong>Bivariate Analyse:</strong> Pearson, Spearman und Kovarianz unterscheiden.</li>
         <li><strong>Schätzereigenschaften & Konfidenzintervalle:</strong> Intervallbreite und Sicherheitsniveau lesen.</li>
         <li><strong>Hypothesentests:</strong> t-Test-Output in Entscheidungssprache übersetzen.</li>

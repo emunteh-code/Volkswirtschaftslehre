@@ -1449,6 +1449,10 @@ ${anchorBadge}
     }
 
     renderMath(content);
+    if (activeTab === "theorie") {
+      const theoryPanel = content.querySelector(".theory-tab-panel");
+      if (theoryPanel) renderMath(theoryPanel);
+    }
     initConceptMotivationClamp(content);
 
     if (scrollKernidee && activeTab === "theorie") {

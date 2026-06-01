@@ -7253,7 +7253,6 @@ body.light-mode #content .theory-recipe-card {
 }
 
 /* ── Section heading grid (Theorie / Formeln / Aufgaben) ──── */
-#content .theory-recipe-heading,
 #content .formula-tab-section-head {
   display: grid;
   grid-template-columns: var(--chrome-section-step) minmax(0, 1fr);
@@ -7261,7 +7260,6 @@ body.light-mode #content .theory-recipe-card {
   align-items: start;
 }
 
-#content .theory-recipe-step,
 #content .formula-tab-section-num,
 #content .klausurmethodik-step-num {
   width: var(--chrome-section-step);
@@ -7272,8 +7270,9 @@ body.light-mode #content .theory-recipe-card {
 }
 
 #content .theory-recipe-heading {
-  margin: 0 0 16px;
-  padding: 0 0 12px;
+  display: block;
+  margin: 0 0 14px;
+  padding: 0 0 10px;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
   font-size: var(--type-md, 1.0625rem);
   font-weight: 700;
@@ -7281,24 +7280,13 @@ body.light-mode #content .theory-recipe-card {
   color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
 }
 
+/* Legacy baked HTML may still ship step badges — hide them */
 #content .theory-recipe-step {
-  display: inline-grid;
-  place-items: center;
-  border-radius: 999px;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 11%, var(--surface2) 89%);
-  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  display: none !important;
 }
 
 #content .theory-recipe-placeholder {
-  margin: 0;
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-size: var(--type-sm, 0.9375rem);
-  line-height: 1.45;
-  color: color-mix(in srgb, var(--text-muted, var(--text)) 88%, var(--text) 12%);
-  background: color-mix(in srgb, var(--surface2) 92%, var(--accent) 8%);
-  border: 1px dashed color-mix(in srgb, var(--border) 85%, var(--accent) 15%);
+  display: none !important;
 }
 
 #content .formula-tab-section-head h3 {

@@ -98,11 +98,9 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
       warningNode.setAttribute("data-warning-placement", "theory-inset");
     });
 
+    Array.from(root.querySelectorAll(".theory-recipe-placeholder")).forEach((node) => node.remove());
+
     Array.from(root.querySelectorAll(".section-block, .theory-recipe-section")).forEach((section) => {
-      if (section.classList.contains("theory-recipe-section")) {
-        const placeholder = section.querySelector(".theory-recipe-placeholder");
-        if (placeholder) return;
-      }
       const hasContent = Array.from(section.children).some((child) => {
         if (child.tagName === "H3" || child.tagName === "H4") return false;
         if (child.classList?.contains("theory-recipe-heading")) return false;

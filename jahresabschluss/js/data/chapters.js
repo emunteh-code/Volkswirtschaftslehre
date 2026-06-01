@@ -44,39 +44,27 @@ export const CHAPTERS = [
 export const CONTENT = {
   rechnungswesen_intro: {
     motivation: 'Bevor einzelne Kontierungen Sinn ergeben, musst du die Logik des gesamten Rechnungswesens verstehen: Wer soll informiert werden, was misst Bilanz, was misst GuV, und warum bleibt die Bilanzgleichung immer erhalten?',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Bevor einzelne Kontierungen Sinn ergeben, musst du die Logik des gesamten Rechnungswesens verstehen: Wer soll informiert werden, was misst Bilanz, was misst GuV, und warum bleibt die Bilanzgleichung immer erhalten?</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Zweck des Jahresabschlusses</h4>
 <p>Der Jahresabschluss informiert externe und interne Adressaten über Vermögens-, Finanz- und Ertragslage. Für Gläubiger zählt insbesondere Vorsicht und Verlässlichkeit, für Eigentümer zusätzlich der Erfolgsnachweis und die Grundlage der Gewinnverwendung.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Einführung in Rechnungswesen und Erfolgsermittlung"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Bilanzgleichung</strong></p><div class="math-block">$$A = P = EK + FK$$</div><p>Mittelverwendung entspricht Mittelherkunft.</p>
 <p><strong>Jahresergebnis</strong></p><div class="math-block">$$Jahresergebnis = Erträge - Aufwendungen$$</div><p>Die GuV erklärt die Erfolgsänderung der Periode.</p>
-<p><strong>EK-Veränderung</strong></p><div class="math-block">$$\\\\\\\\Delta EK = Jahresergebnis \\\\\\\\pm \\\\\\\\text{Ergebnisverwendung}$$</div><p>GuV und Bilanz sind über das Eigenkapital verbunden.</p>
+<p><strong>EK-Veränderung</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta EK = Jahresergebnis \\\\\\\\\\\\\\\\pm \\\\\\\\\\\\\\\\text{Ergebnisverwendung}$$</div><p>GuV und Bilanz sind über das Eigenkapital verbunden.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bilanz und GuV als zwei Perspektiven</h4>
 <p>Die Bilanz ist stichtagsbezogen und zeigt Vermögen und Kapital am Abschlussstichtag. Die GuV ist periodenbezogen und erklärt, wie der Jahreserfolg entstanden ist. Beide zusammen liefern erst das vollständige Bild des Unternehmens.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\text{Aktiva} = \\\\\\\\\\\\\\\\text{Passiva} = \\\\\\\\\\\\\\\\text{Eigenkapital} + \\\\\\\\\\\\\\\\text{Fremdkapital}$$</div>
+         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Aktiva} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Passiva} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Eigenkapital} + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Fremdkapital}$$</div>
 
 
 <h4 class="theory-subsection-title">Doppelte Buchführung als Stabilitätsmechanismus</h4>
@@ -89,7 +77,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Rechnungswesen</h4>
 <p>GoB: Vollständigkeit, Richtigkeit, Klarheit, Fortführung, Periodengerechtigkeit. Bilanz = Vermögen (Aktiva) vs. Kapital (Passiva). GuV = Aufwendungen vs. Erträge — periodenbezogen.</p>
@@ -102,18 +90,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Einführung in Rechnungswesen und Erfolgsermittlung"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Einführung in Rechnungswesen und Erfolgsermittlung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -151,35 +127,23 @@ export const CONTENT = {
 
   gob_rechtsgrundlagen: {
     motivation: 'GoB und Rechtsgrundlagen bestimmen den normativen Rahmen der Rechnungslegung. Ohne diesen Rahmen bleibt unklar, welche Informations- und Vorsichtslogik der Abschluss erfüllen muss.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>GoB und Rechtsgrundlagen bestimmen den normativen Rahmen der Rechnungslegung. Ohne diesen Rahmen bleibt unklar, welche Informations- und Vorsichtslogik der Abschluss erfüllen muss.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">GoB und Rechtsrahmen</h4>
 <p>Die GoB sichern Klarheit, Vollständigkeit, Nachprüfbarkeit und Vorsicht. Für Klausuren besonders wichtig sind Realisationsprinzip, Imparitätsprinzip und Stetigkeit, weil sie entscheiden, wann Erfolg ausgewiesen werden darf und wann Risiken bereits zu erfassen sind.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „GoB und Rechtsgrundlagen der Rechnungslegung"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Realisationsprinzip</strong></p><div class="math-block">\\\\\\\\text{Gewinne erst bei Realisation}</div><p>Noch nicht realisierte Gewinne dürfen grundsätzlich nicht vorgezogen werden.</p>
-<p><strong>Imparitätsprinzip</strong></p><div class="math-block">\\\\\\\\text{Verluste früh, Gewinne spät}</div><p>Asymmetrische Vorsicht im HGB.</p>
-<p><strong>Latente Steuern (Richtung)</strong></p><div class="math-block">\\\\\\\\Delta_{HGB-Steuer} > 0 \\\\\\\\Rightarrow \\\\\\\\text{passive latent};\\\\\\\\; \\\\\\\\Delta_{HGB-Steuer} < 0 \\\\\\\\Rightarrow \\\\\\\\text{aktive latent}</div><p>Prüfungsnaher Merksatz zur Richtung zukünftiger Steuermehr-/-minderbelastung.</p>
+<p><strong>Realisationsprinzip</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Gewinne erst bei Realisation}</div><p>Noch nicht realisierte Gewinne dürfen grundsätzlich nicht vorgezogen werden.</p>
+<p><strong>Imparitätsprinzip</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Verluste früh, Gewinne spät}</div><p>Asymmetrische Vorsicht im HGB.</p>
+<p><strong>Latente Steuern (Richtung)</strong></p><div class="math-block">\\\\\\\\\\\\\\\\Delta_{HGB-Steuer} > 0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{passive latent};\\\\\\\\\\\\\\\\; \\\\\\\\\\\\\\\\Delta_{HGB-Steuer} < 0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{aktive latent}</div><p>Prüfungsnaher Merksatz zur Richtung zukünftiger Steuermehr-/-minderbelastung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Rechnungslegungsrecht als Strukturvorgabe</h4>
 <p>Die Rechnungslegung folgt nicht bloß Rechenregeln, sondern gesetzlichen Rahmenbedingungen (u.a. HGB). Für die Klausur heißt das: Rechtsgrundlage, GoB-Logik und Informationszweck sind zusammen zu denken.</p>
@@ -196,22 +160,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „GoB und Rechtsgrundlagen der Rechnungslegung"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „GoB und Rechtsgrundlagen der Rechnungslegung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -257,35 +209,23 @@ export const CONTENT = {
 
   inventur_inventar_bilanzansatz: {
     motivation: 'Inventur, Inventar und Bilanzansatz bilden die technische Eingangsschleuse in den Abschluss. Hier entscheidet sich, welche Posten überhaupt bilanziell erscheinen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Inventur, Inventar und Bilanzansatz bilden die technische Eingangsschleuse in den Abschluss. Hier entscheidet sich, welche Posten überhaupt bilanziell erscheinen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Inventur und Inventar</h4>
 <p>Die Inventur ist die tatsächliche Bestandsaufnahme. Ihr Ergebnis ist das Inventar als geordnetes Bestandsverzeichnis. Erst aus dieser Grundlage wird die Bilanz systematisch verdichtet.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Inventur, Inventar und Bilanzansatz"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Inventurfolge</strong></p><div class="math-block">\\\\\\\\text{Inventur} \\\\\\\\rightarrow \\\\\\\\text{Inventar} \\\\\\\\rightarrow \\\\\\\\text{Bilanz}</div><p>Vom Einzelbestand zur Abschlussverdichtung.</p>
-<p><strong>Prüfungsfolge</strong></p><div class="math-block">\\\\\\\\text{Ansatz} \\\\\\\\rightarrow \\\\\\\\text{Bewertung}</div><p>Existenzfrage vor Wertfrage.</p>
-<p><strong>Abschlusskette</strong></p><div class="math-block">\\\\\\\\text{Inventur} \\\\\\\\rightarrow \\\\\\\\text{Inventar} \\\\\\\\rightarrow \\\\\\\\text{Ansatz} \\\\\\\\rightarrow \\\\\\\\text{Bewertung} \\\\\\\\rightarrow \\\\\\\\text{Ausweis}</div><p>Vom Rohbestand bis zur sichtbaren Abschlusswirkung.</p>
+<p><strong>Inventurfolge</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Inventur} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Inventar} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Bilanz}</div><p>Vom Einzelbestand zur Abschlussverdichtung.</p>
+<p><strong>Prüfungsfolge</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Ansatz} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Bewertung}</div><p>Existenzfrage vor Wertfrage.</p>
+<p><strong>Abschlusskette</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Inventur} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Inventar} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Ansatz} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Bewertung} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Ausweis}</div><p>Vom Rohbestand bis zur sichtbaren Abschlusswirkung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bilanzansatz als Ob-Frage</h4>
 <p>Bilanzansatz fragt, ob ein Vermögensgegenstand oder eine Schuld überhaupt bilanziert werden darf oder muss. Das ist logisch von der späteren Wertfrage getrennt.</p>
@@ -302,22 +242,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Inventur, Inventar und Bilanzansatz"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Inventur, Inventar und Bilanzansatz"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -365,42 +293,23 @@ export const CONTENT = {
 
   buchen_konten: {
     motivation: 'Die doppelte Buchführung wird erst dann klausursicher, wenn du Bestands- und Erfolgskonten nicht nur benennen, sondern sauber in Soll und Haben denken kannst.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Die doppelte Buchführung wird erst dann klausursicher, wenn du Bestands- und Erfolgskonten nicht nur benennen, sondern sauber in Soll und Haben denken kannst.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Kontenrahmen-Logik</h4>
 <p>Aktiva: Soll = Zugang. Passiva/EK: Haben = Zugang. Erfolgskonten: Aufwand Soll, Ertrag Haben — Abschluss über GuV auf Eigenkapital.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Buchen auf Bestands- und Erfolgskonten"; siehe Kernidee.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Aktivkonto</strong></p><div class="math-block">\\\\\\\\text{AB im Soll,\\\\\\\\ Zugänge Soll,\\\\\\\\ Abgänge Haben}</div><p>Grundlogik eines Aktivkontos.</p>
-<p><strong>Passivkonto</strong></p><div class="math-block">\\\\\\\\text{AB im Haben,\\\\\\\\ Zugänge Haben,\\\\\\\\ Abgänge Soll}</div><p>Spiegelbildliche Logik des Passivkontos.</p>
-<p><strong>Buchungssatz</strong></p><div class="math-block">\\\\\\\\text{Soll an Haben}</div><p>Jeder Geschäftsvorfall berührt mindestens zwei Konten.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Kontenrahmen-Logik</h4>
-<p>Aktiva: Soll = Zugang. Passiva/EK: Haben = Zugang. Erfolgskonten: Aufwand Soll, Ertrag Haben — Abschluss über GuV auf Eigenkapital.</p>
+<p><strong>Aktivkonto</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{AB im Soll,\\\\\\\\\\\\\\\\ Zugänge Soll,\\\\\\\\\\\\\\\\ Abgänge Haben}</div><p>Grundlogik eines Aktivkontos.</p>
+<p><strong>Passivkonto</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{AB im Haben,\\\\\\\\\\\\\\\\ Zugänge Haben,\\\\\\\\\\\\\\\\ Abgänge Soll}</div><p>Spiegelbildliche Logik des Passivkontos.</p>
+<p><strong>Buchungssatz</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Soll an Haben}</div><p>Jeder Geschäftsvorfall berührt mindestens zwei Konten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Klausurtransfer</h4>
 <p>Immer beide Seiten der Buchung und die Bilanzwirkung nennen; „nur GuV" reicht in Klausuren nicht.</p>
@@ -408,18 +317,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Buchen auf Bestands- und Erfolgskonten"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Buchen auf Bestands- und Erfolgskonten"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -465,35 +362,23 @@ export const CONTENT = {
 
   buchfuehrung_orga: {
     motivation: 'Rechnungslegung ist nicht nur Kontierung, sondern auch Organisation: Ohne Belege, Bücher und Ordnungssysteme wäre der Abschluss weder prüfbar noch verlässlich.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Rechnungslegung ist nicht nur Kontierung, sondern auch Organisation: Ohne Belege, Bücher und Ordnungssysteme wäre der Abschluss weder prüfbar noch verlässlich.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Grundbuch, Hauptbuch und Nebenbücher</h4>
 <p>Das Grundbuch dokumentiert Geschäftsvorfälle chronologisch, das Hauptbuch systematisch nach Konten. Nebenbücher vertiefen spezielle Teilbereiche wie Debitoren, Kreditoren oder Anlagen. Zusammen schaffen sie Nachvollziehbarkeit und Ordnung.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Organisation der Buchführung und Handelsbücher"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Belegprinzip</strong></p><div class="math-block">\\\\\\\\text{Keine Buchung ohne Beleg}</div><p>Organisatorischer Kern ordnungsmäßiger Buchführung.</p>
-<p><strong>Systemlogik</strong></p><div class="math-block">\\\\\\\\text{chronologisch} \\\\\\\\rightarrow \\\\\\\\text{sachlich geordnet}</div><p>Vom Grundbuch zum Hauptbuch.</p>
-<p><strong>Nebenbücher</strong></p><div class="math-block">\\\\\\\\sum \\\\\\\\text{Nebenbuch} = \\\\\\\\text{Sammelkonto}</div><p>Detail- und Hauptbuch müssen konsistent sein.</p>
+<p><strong>Belegprinzip</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Keine Buchung ohne Beleg}</div><p>Organisatorischer Kern ordnungsmäßiger Buchführung.</p>
+<p><strong>Systemlogik</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{chronologisch} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{sachlich geordnet}</div><p>Vom Grundbuch zum Hauptbuch.</p>
+<p><strong>Nebenbücher</strong></p><div class="math-block">\\\\\\\\\\\\\\\\sum \\\\\\\\\\\\\\\\text{Nebenbuch} = \\\\\\\\\\\\\\\\text{Sammelkonto}</div><p>Detail- und Hauptbuch müssen konsistent sein.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Kontenrahmen und Kontenplan</h4>
 <p>Kontenrahmen bieten ein allgemeines Ordnungsschema, der Kontenplan konkretisiert es für das Unternehmen. In Klausuren hilft diese Struktur, Geschäftsvorfälle zügig der richtigen Kontenklasse zuzuordnen.</p>
@@ -509,7 +394,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Buchführung</h4>
 <p>Doppelte Buchführung: jeder Vorgang Soll und Haben. Kontenrahmen SKR03/04 — Sachkonten vs. Personenkonten. Beleg → Buchung → Journal → Hauptbuch → SuSa → Bilanz/GuV.</p>
@@ -521,18 +406,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Organisation der Buchführung und Handelsbücher"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Organisation der Buchführung und Handelsbücher"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -562,42 +435,23 @@ export const CONTENT = {
 
   anlagevermoegen: {
     motivation: 'Anlagevermögen und Abschreibungen prägen den langfristigen Bilanzaufbau. Gerade hier zeigt sich, wie Bewertung, Vorsicht und Erfolgsermittlung zusammenspielen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Anlagevermögen und Abschreibungen prägen den langfristigen Bilanzaufbau. Gerade hier zeigt sich, wie Bewertung, Vorsicht und Erfolgsermittlung zusammenspielen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Anschaffungskosten und AfA</h4>
 <p>Anschaffungskosten = Kaufpreis + Anschaffungsnebenkosten − Skonti. Planmäßige AfA linear oder degressiv nach Nutzungsdauer (AfA-Tabelle).</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Anlagevermögen und Abschreibungen"; siehe Kernidee.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Planmäßige und außerplanmäßige Abschreibung</h4>
 <p>Planmäßige Abschreibungen verteilen Anschaffungs- oder Herstellungskosten über die Nutzungsdauer. Außerplanmäßige Abschreibungen greifen bei Wertminderungen. Beide sind klausurtypisch, weil sie Bilanzwert und Periodenerfolg zugleich beeinflussen.</p>
-         <div class="math-block math-block--theory">$$AfA_{linear} = \\\\\\\\\\\\\\\\frac{AK - RW}{n}$$</div>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Anschaffungskosten und AfA</h4>
-<p>Anschaffungskosten = Kaufpreis + Anschaffungsnebenkosten − Skonti. Planmäßige AfA linear oder degressiv nach Nutzungsdauer (AfA-Tabelle).</p>
+         <div class="math-block math-block--theory">$$AfA_{linear} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{AK - RW}{n}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Investition: Aktivierung Anlagevermögen; jährliche AfA: Aufwand GuV, Wertminderung Bilanz. Sonder-AfA nur bei gesetzlicher/tatsächlicher Begründung.</p>
@@ -605,18 +459,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Anlagevermögen und Abschreibungen"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Anlagevermögen und Abschreibungen"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -647,35 +489,23 @@ export const CONTENT = {
 
   umlauf_bewertung_verfahren: {
     motivation: 'Bewertung des Umlaufvermögens ist klausurentscheidend, weil Verfahren und Niederstwertlogik direkt den ausgewiesenen Periodenerfolg beeinflussen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Bewertung des Umlaufvermögens ist klausurentscheidend, weil Verfahren und Niederstwertlogik direkt den ausgewiesenen Periodenerfolg beeinflussen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Grundlagen der UV-Bewertung</h4>
 <p>Zum Umlaufvermögen zählen u.a. Vorräte und kurzfristige Vermögensposten. Für die Klausur ist die Bewertungslogik zentral: Zugangsbewertung über Anschaffungs-/Herstellungskosten und stichtagsbezogene Folgebewertung.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen I: Bewertung und Verfahren"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Strenges Niederstwertprinzip</strong></p><div class="math-block">\\\\\\\\text{Bilanzwert} = \\\\\\\\min(AK,\\\\\\\\ beizulegender\\\\\\\\ Wert)</div><p>Beim Umlaufvermögen zählt stets der niedrigere Wert.</p>
-<p><strong>Durchschnittspreis</strong></p><div class="math-block">$$\\\\\\\\bar p = \\\\\\\\frac{\\\\\\\\sum Anschaffungskosten}{\\\\\\\\sum Menge}$$</div><p>Typische Bewertungsvereinfachung.</p>
-<p><strong>FIFO-Verbrauch</strong></p><div class="math-block">\\\\\\\\text{Verbrauch} = \\\\\\\\text{älteste Zugänge zuerst}</div><p>Endbestand enthält die jüngsten Einheiten.</p>
+<p><strong>Strenges Niederstwertprinzip</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Bilanzwert} = \\\\\\\\\\\\\\\\min(AK,\\\\\\\\\\\\\\\\ beizulegender\\\\\\\\\\\\\\\\ Wert)</div><p>Beim Umlaufvermögen zählt stets der niedrigere Wert.</p>
+<p><strong>Durchschnittspreis</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\bar p = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\sum Anschaffungskosten}{\\\\\\\\\\\\\\\\sum Menge}$$</div><p>Typische Bewertungsvereinfachung.</p>
+<p><strong>FIFO-Verbrauch</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Verbrauch} = \\\\\\\\\\\\\\\\text{älteste Zugänge zuerst}</div><p>Endbestand enthält die jüngsten Einheiten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bewertungsvereinfachungsverfahren</h4>
 <p>Verbrauchsfolgeverfahren wie FIFO, LIFO oder Durchschnittsmethode ordnen Zugangswerte dem Verbrauch bzw. Endbestand zu. In der Klausur musst du sauber rechnen und den Bestandswert methodisch begründen.</p>
@@ -688,12 +518,12 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">FIFO-Beispiel (Companion-Logik)</h4>
 <p>Zugänge: 100 Stück à 5 €, danach 50 Stück à 6 €. Verbrauch 120 Stück. FIFO ordnet zuerst die älteren, günstigeren Zugänge dem Verbrauch zu; der Endbestand enthält die jüngeren, teureren Einheiten.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\text{Verbrauchswert}_{FIFO} = 100\\\\\\\\\\\\\\\\cdot 5 + 20\\\\\\\\\\\\\\\\cdot 6 = 620,\\\\\\\\\\\\\\\\quad SB = 30\\\\\\\\\\\\\\\\cdot 6 = 180$$</div>
+         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Verbrauchswert}_{FIFO} = 100\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot 5 + 20\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot 6 = 620,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad SB = 30\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot 6 = 180$$</div>
          <p>Der Materialaufwand steigt gegenüber einer Durchschnittsmethode, wenn die jüngeren Zugänge teurer sind — der Periodengewinn fällt entsprechend.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Bewertung Umlauf</h4>
 <p>Niederstwertprinzip: Anschaffungskosten oder niedrigerer beizulegender Wert. FIFO/LIFO/Durchschnitt — Bestandsverbrauch und Endbestand. Stichtagsprinzip am Bilanzstichtag.</p>
@@ -706,18 +536,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen I: Bewertung und Verfahren"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen I: Bewertung und Verfahren"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -755,44 +573,32 @@ export const CONTENT = {
 
   werkstoffe_erzeugnisse_buchungen: {
     motivation: 'Werkstoff- und Erzeugnisbuchungen verbinden Lagerbewegung, Aufwandserfassung und GuV-Abschluss. Gerade hier entstehen typische mehrstufige Buchungsfehler.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Werkstoff- und Erzeugnisbuchungen verbinden Lagerbewegung, Aufwandserfassung und GuV-Abschluss. Gerade hier entstehen typische mehrstufige Buchungsfehler.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Werkstoffbuchungen</h4>
 <p>Roh-, Hilfs- und Betriebsstoffe werden über Bestandskonten und Aufwandskonten erfasst. Die Fortschreibungs- und Inventurmethode führen zum gleichen Verbrauch, aber über unterschiedliche Buchungswege.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen II: Werkstoffe und Erzeugnisbuchungen"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Inventurmethode</strong></p><div class="math-block">\\\\\\\\text{Verbrauch} = AB + Zugänge - SB</div><p>Verbrauchsermittlung über Bestandvergleich.</p>
-<p><strong>Fortschreibung</strong></p><div class="math-block">\\\\\\\\text{laufend: Material an Rohstoffe}</div><p>Verbrauch wird bei jeder Entnahme direkt erfasst.</p>
-<p><strong>Bestandsveränderung</strong></p><div class="math-block">\\\\\\\\Delta Bestand = SB - AB</div><p>Steuert die Erfolgswirkung bei Erzeugnissen.</p>
+<p><strong>Inventurmethode</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Verbrauch} = AB + Zugänge - SB</div><p>Verbrauchsermittlung über Bestandvergleich.</p>
+<p><strong>Fortschreibung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{laufend: Material an Rohstoffe}</div><p>Verbrauch wird bei jeder Entnahme direkt erfasst.</p>
+<p><strong>Bestandsveränderung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\Delta Bestand = SB - AB</div><p>Steuert die Erfolgswirkung bei Erzeugnissen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fortschreibungsmethode im Detail</h4>
 <p>Die Companion-Materialien betonen: Bei der Fortschreibungsmethode wird der Verbrauch laufend direkt gebucht (z. B. Material an Rohstoffe). Das Bestandskonto zeigt damit fortlaufend den aktuellen Bestand. Klausurstark ist die Unterscheidung: laufende Entnahmebuchung statt periodenendbezogener Verbrauchsermittlung.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\text{Entnahme: Material an Rohstoffe}$$</div>
+         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Entnahme: Material an Rohstoffe}$$</div>
 
 
 <h4 class="theory-subsection-title">Inventurmethode und Periodenabschluss</h4>
 <p>Bei der Inventurmethode bleibt der Verbrauch bis zur Inventur im Bestandskonto; erst am Periodenende wird der tatsächliche Verbrauch aus Anfangs- und Endbestand ermittelt und dann auf das Materialkonto umgebucht. Die Quelle fordert hier ausdrücklich Übungsrechnungen zu beiden Wegen.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\text{Verbrauch} = AB + Zugänge - SB$$</div>
+         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Verbrauch} = AB + Zugänge - SB$$</div>
 
 
 <h4 class="theory-subsection-title">Unfertige und fertige Erzeugnisse</h4>
@@ -805,7 +611,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Werkstoffe</h4>
 <p>Einkauf auf Lager: Wareneingang an Verbindlichkeiten (+ Vorsteuer). Verbrauch: Materialaufwand an Lager. Fertigung: Fertigungsmaterial, Fertigungslöhne, Gemeinkosten → Erzeugnisse.</p>
@@ -817,18 +623,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen II: Werkstoffe und Erzeugnisbuchungen"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen II: Werkstoffe und Erzeugnisbuchungen"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -874,42 +668,23 @@ export const CONTENT = {
 
   umlauf_waren_ust: {
     motivation: 'Sobald Warenverkehr und Umsatzsteuer hinzukommen, wird Jahresabschluss besonders klausurnah: Preisnachlässe, Vorsteuer, Zahllast und Warenkontensysteme greifen ineinander.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Sobald Warenverkehr und Umsatzsteuer hinzukommen, wird Jahresabschluss besonders klausurnah: Preisnachlässe, Vorsteuer, Zahllast und Warenkontensysteme greifen ineinander.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">USt auf Wareneinkauf</h4>
 <p>Vorsteuer auf Einkauf ist aktivisches Durchlaufkonto; Verbindlichkeit beim Lieferanten netto + USt. Bei Ist-Versteuerung: USt erst bei Zahlung ans Finanzamt.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen III: Waren und Umsatzsteuer"; siehe Kernidee.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Zahllast</strong></p><div class="math-block">$$Zahllast = USt - VSt$$</div><p>Abzuführende Umsatzsteuer nach Vorsteuerabzug.</p>
-<p><strong>Netto aus Brutto</strong></p><div class="math-block">$$Netto = \\\\\\\\frac{Brutto}{1 + Steuersatz}$$</div><p>Hilft bei Skonto- und Umsatzsteuerfällen.</p>
+<p><strong>Netto aus Brutto</strong></p><div class="math-block">$$Netto = \\\\\\\\\\\\\\\\frac{Brutto}{1 + Steuersatz}$$</div><p>Hilft bei Skonto- und Umsatzsteuerfällen.</p>
 <p><strong>Warenverbrauch</strong></p><div class="math-block">$$WB = Anfangsbestand + Zugänge - Endbestand$$</div><p>Getrenntes Warenkontensystem.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<h4 class="theory-subsection-title">USt auf Wareneinkauf</h4>
-<p>Vorsteuer auf Einkauf ist aktivisches Durchlaufkonto; Verbindlichkeit beim Lieferanten netto + USt. Bei Ist-Versteuerung: USt erst bei Zahlung ans Finanzamt.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Buchungssatz mit Vorsteuerkonto; Abschluss: Vorsteuer mit Finanzamt verrechnen. Periodengerecht: Umsatzsteuer-Zahllast zum Stichtag.</p>
@@ -917,18 +692,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen III: Waren und Umsatzsteuer"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Umlaufvermögen III: Waren und Umsatzsteuer"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -957,35 +720,23 @@ export const CONTENT = {
 
   eigenkapital_kapitalgesellschaften: {
     motivation: 'Eigenkapital in Kapitalgesellschaften folgt einer formal gegliederten Struktur mit Rücklagen- und Gewinnverwendungslogik. Diese Struktur ist eigenständig klausurrelevant.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Eigenkapital in Kapitalgesellschaften folgt einer formal gegliederten Struktur mit Rücklagen- und Gewinnverwendungslogik. Diese Struktur ist eigenständig klausurrelevant.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gliederung des Eigenkapitals</h4>
 <p>Bei Kapitalgesellschaften ist das Eigenkapital gegliedert, etwa in gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Gewinnvortrag und Jahresüberschuss. Diese Differenzierung spiegelt Haftungsstruktur und Ausschüttungslogik wider.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Eigenkapital in Kapitalgesellschaften"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Eigenkapitalquote</strong></p><div class="math-block">$$EK\\\\\\\\text{-Quote} = \\\\\\\\frac{EK}{Bilanzsumme}$$</div><p>Zentrale Kennzahl zur Finanzierungsstruktur.</p>
-<p><strong>Jahresüberschuss</strong></p><div class="math-block">\\\\\\\\text{Teil des Eigenkapitals nach Erfolgsrechnung}</div><p>Verbindet GuV und Bilanz.</p>
-<p><strong>Gesetzliche Rücklage</strong></p><div class="math-block">$$\\\\\\\\text{Einstellung} = 5\\\\\\\\% \\\\\\\\cdot Jahresüberschuss$$</div><p>Vereinfachte Klausurform (bis Obergrenze).</p>
+<p><strong>Eigenkapitalquote</strong></p><div class="math-block">$$EK\\\\\\\\\\\\\\\\text{-Quote} = \\\\\\\\\\\\\\\\frac{EK}{Bilanzsumme}$$</div><p>Zentrale Kennzahl zur Finanzierungsstruktur.</p>
+<p><strong>Jahresüberschuss</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Teil des Eigenkapitals nach Erfolgsrechnung}</div><p>Verbindet GuV und Bilanz.</p>
+<p><strong>Gesetzliche Rücklage</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Einstellung} = 5\\\\\\\\\\\\\\\\% \\\\\\\\\\\\\\\\cdot Jahresüberschuss$$</div><p>Vereinfachte Klausurform (bis Obergrenze).</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Rücklagen und Ausweisfragen</h4>
 <p>Gesetzliche und andere Gewinnrücklagen sowie die Ausweisvarianten des Ergebnisses prägen die Kapitalgesellschaftslogik. In Aufgaben ist die Reihenfolge von Jahresergebnis, Rücklageneinstellung und Gewinnverwendung zentral.</p>
@@ -998,11 +749,11 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Gesetzliche Gewinnrücklage</h4>
 <p>Bei Kapitalgesellschaften ist ein Teil des Jahresüberschusses in die gesetzliche Gewinnrücklage einzustellen (typisch 5 % des Jahresüberschusses, bis eine Obergrenze erreicht ist). Die Einstellung erhöht die Rücklagen und reduziert den ausschüttungsfähigen Bilanzgewinn — ein klassischer Abschluss-Schritt nach der GuV.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\text{Einstellung}_{ges.\\\\\\\\\\\\\\\\ Rücklage} = 0{,}05 \\\\\\\\\\\\\\\\cdot \\\\\\\\\\\\\\\\max(0,\\\\\\\\\\\\\\\\ Jahresüberschuss)$$</div>
+         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Einstellung}_{ges.\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ Rücklage} = 0{,}05 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\max(0,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ Jahresüberschuss)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: EK Kapitalgesellschaft</h4>
 <p>Gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Bilanzgewinn. Ausschüttung: Gewinnausschüttung an Bank (Vermögensminderung, nicht GuV-Aufwand). Jahresüberschuss aus GuV → Gewinnvortrag.</p>
@@ -1015,18 +766,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Eigenkapital in Kapitalgesellschaften"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Eigenkapital in Kapitalgesellschaften"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1056,42 +795,23 @@ export const CONTENT = {
 
   eigenkapital_personengesellschaften: {
     motivation: 'In Personengesellschaften ist Eigenkapital gesellschafterbezogen geführt. Kapitalkonten, Privatkonten und Gewinnanteile bilden eine eigene Abschlusslogik.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>In Personengesellschaften ist Eigenkapital gesellschafterbezogen geführt. Kapitalkonten, Privatkonten und Gewinnanteile bilden eine eigene Abschlusslogik.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Eigenkapital Personengesellschaft</h4>
 <p>Kapitalkonten der Gesellschafter (z.B. Kommandokapital) bilden das Eigenkapital. Entnahmen und Einlagen laufen über Privatkonten — nicht über Gewinn- und Verlustrechnung als „Gehalt“.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Eigenkapital in Personengesellschaften"; siehe Kernidee.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Privatkonto-Abschluss</strong></p><div class="math-block">\\\\\\\\text{Privatkonto} \\\\\\\\rightarrow \\\\\\\\text{Kapitalkonto}</div><p>Einlagen/Entnahmen werden periodisch überführt.</p>
-<p><strong>Gewinnzuweisung</strong></p><div class="math-block">\\\\\\\\text{GuV-Ergebnis} \\\\\\\\rightarrow \\\\\\\\text{Kapitalkonten der Gesellschafter}</div><p>Erfolgszuordnung nach Beteiligungslogik.</p>
-<p><strong>Gewinnanteil</strong></p><div class="math-block">$$\\\\\\\\text{Anteil}_i = \\\\\\\\text{GuV-Ergebnis} \\\\\\\\times \\\\\\\\text{Beteiligungsquote}_i$$</div><p>Verteilung auf Gesellschafterkonten.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Eigenkapital Personengesellschaft</h4>
-<p>Kapitalkonten der Gesellschafter (z.B. Kommandokapital) bilden das Eigenkapital. Entnahmen und Einlagen laufen über Privatkonten — nicht über Gewinn- und Verlustrechnung als „Gehalt“.</p>
+<p><strong>Privatkonto-Abschluss</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Privatkonto} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Kapitalkonto}</div><p>Einlagen/Entnahmen werden periodisch überführt.</p>
+<p><strong>Gewinnzuweisung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{GuV-Ergebnis} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Kapitalkonten der Gesellschafter}</div><p>Erfolgszuordnung nach Beteiligungslogik.</p>
+<p><strong>Gewinnanteil</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Anteil}_i = \\\\\\\\\\\\\\\\text{GuV-Ergebnis} \\\\\\\\\\\\\\\\times \\\\\\\\\\\\\\\\text{Beteiligungsquote}_i$$</div><p>Verteilung auf Gesellschafterkonten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Geschäftsvorfall → Soll/Haben → Wirkung auf Kapital- und Erfolgskonten. GoB: Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung.</p>
@@ -1100,18 +820,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Eigenkapital in Personengesellschaften"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Eigenkapital in Personengesellschaften"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1141,35 +849,23 @@ export const CONTENT = {
 
   verbindlichkeiten: {
     motivation: 'Verbindlichkeiten sind die sichere Fremdkapitalschiene. Für Klausuren ist die klare Abgrenzung zu Rückstellungen und die Bewertungslogik zentral.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Verbindlichkeiten sind die sichere Fremdkapitalschiene. Für Klausuren ist die klare Abgrenzung zu Rückstellungen und die Bewertungslogik zentral.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wesen der Verbindlichkeit</h4>
 <p>Verbindlichkeiten sind dem Grunde und der Höhe nach feststehende Schulden. Typische Fälle sind Lieferantenverbindlichkeiten, Darlehen oder Steuerverbindlichkeiten.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fremdkapital I: Verbindlichkeiten"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Verbindlichkeit</strong></p><div class="math-block">\\\\\\\\text{sicher dem Grunde und der Höhe nach}</div><p>Feste Schuldposition.</p>
-<p><strong>Bewertung</strong></p><div class="math-block">\\\\\\\\text{Ansatz zum Erfüllungsbetrag}</div><p>Maßgeblicher Bewertungsmaßstab nach HGB-Logik.</p>
-<p><strong>Prüfungskette</strong></p><div class="math-block">\\\\\\\\text{sichere Schuld} \\\\\\\\Rightarrow \\\\\\\\text{Verbindlichkeit} \\\\\\\\Rightarrow \\\\\\\\text{Erfüllungsbetrag} \\\\\\\\Rightarrow \\\\\\\\text{Folgeausweis}</div><p>Von der Klassifikation zur Abschlusswirkung.</p>
+<p><strong>Verbindlichkeit</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{sicher dem Grunde und der Höhe nach}</div><p>Feste Schuldposition.</p>
+<p><strong>Bewertung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Ansatz zum Erfüllungsbetrag}</div><p>Maßgeblicher Bewertungsmaßstab nach HGB-Logik.</p>
+<p><strong>Prüfungskette</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{sichere Schuld} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Verbindlichkeit} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Erfüllungsbetrag} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Folgeausweis}</div><p>Von der Klassifikation zur Abschlusswirkung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bewertung</h4>
 <p>Verbindlichkeiten werden mit dem Erfüllungsbetrag angesetzt. Bei Änderungen der Belastung sind die Bewertungsgrundsätze konsistent anzuwenden.</p>
@@ -1185,7 +881,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Verbindlichkeiten</h4>
 <p>LLF vs. kLF nach Restlaufzeit. Rückstellungen: ungewisse Verbindlichkeiten (Steuer, Pension, Gewährleistung) — Bildung GuV-Aufwand, Auflösung Ertrag. Abgrenzung zu Rücklagen (EK).</p>
@@ -1197,18 +893,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fremdkapital I: Verbindlichkeiten"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fremdkapital I: Verbindlichkeiten"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1256,35 +940,23 @@ export const CONTENT = {
 
   rueckstellungen: {
     motivation: 'Rückstellungen sind die ungewisse Fremdkapitalschiene und ein zentraler Prüfungsbereich. Entscheidend ist die Trennung von sicherer Schuld und wahrscheinlicher, aber unscharfer Verpflichtung.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Rückstellungen sind die ungewisse Fremdkapitalschiene und ein zentraler Prüfungsbereich. Entscheidend ist die Trennung von sicherer Schuld und wahrscheinlicher, aber unscharfer Verpflichtung.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wesen der Rückstellung</h4>
 <p>Rückstellungen erfassen ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Die Verpflichtung besteht dem Grunde nach, Höhe oder Fälligkeit sind aber noch unsicher.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fremdkapital II: Rückstellungen"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Rückstellung</strong></p><div class="math-block">\\\\\\\\text{ungewisse Verbindlichkeit}</div><p>Verpflichtung steht dem Grunde nach, Höhe/Fälligkeit sind unsicher.</p>
-<p><strong>Bewertung</strong></p><div class="math-block">\\\\\\\\text{notwendiger Erfüllungsbetrag nach kaufmännischer Beurteilung}</div><p>Schätzbasierter Ansatz.</p>
-<p><strong>Ansatzlogik</strong></p><div class="math-block">\\\\\\\\text{Aufwand} \\\\\\\\rightarrow \\\\\\\\text{Rückstellung} \\\\\\\\rightarrow \\\\\\\\text{spätere Inanspruchnahme / Auflösung}</div><p>Rückstellungen sind eine Periodisierungs- und Folgebuchungslogik, nicht nur ein Bilanzetikett.</p>
+<p><strong>Rückstellung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{ungewisse Verbindlichkeit}</div><p>Verpflichtung steht dem Grunde nach, Höhe/Fälligkeit sind unsicher.</p>
+<p><strong>Bewertung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{notwendiger Erfüllungsbetrag nach kaufmännischer Beurteilung}</div><p>Schätzbasierter Ansatz.</p>
+<p><strong>Ansatzlogik</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Aufwand} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Rückstellung} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{spätere Inanspruchnahme / Auflösung}</div><p>Rückstellungen sind eine Periodisierungs- und Folgebuchungslogik, nicht nur ein Bilanzetikett.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Abgrenzung: Rückstellung, Verbindlichkeit oder RAP?</h4>
 <p>Die erste Klausurfrage ist fast nie die Bewertung, sondern die richtige Schublade. Ist die Schuld dem Grunde und der Höhe nach sicher, spricht das für eine Verbindlichkeit. Geht es primär um Periodenzuordnung bereits gezahlter oder empfangener Beträge, ist eher Rechnungsabgrenzung zu prüfen. Rückstellungen bleiben für wirtschaftlich verursachte, aber noch ungewisse Belastungen.</p>
@@ -1305,22 +977,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fremdkapital II: Rückstellungen"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fremdkapital II: Rückstellungen"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1369,34 +1029,22 @@ export const CONTENT = {
   rechnungsabgrenzung: {
     motivation: 'Rechnungsabgrenzung macht Periodenerfolg erst sinnvoll: Ohne sie würden Zahlungen und Erfolg ständig in die falsche Periode rutschen.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum abgegrenzt wird</h4>
 <p>Die GuV soll nur die Aufwendungen und Erträge der laufenden Periode enthalten. Deshalb müssen Zahlungen, die wirtschaftlich in eine andere Periode gehören, abgegrenzt werden. Genau hier setzt die Rechnungsabgrenzung an.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Rechnungsabgrenzung"; siehe Orientierung.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Rechnungsabgrenzung"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Periodenzuordnung</strong></p><div class="math-block">\\\\\\\\text{wirtschaftliche Zugehörigkeit} \\\\\\\\neq \\\\\\\\text{Zahlungszeitpunkt}</div><p>Kernlogik der Rechnungsabgrenzung.</p>
-<p><strong>Aktiver / passiver RAP</strong></p><div class="math-block">\\\\\\\\text{Ausgabe heute, Aufwand morgen} \\\\\\\\Rightarrow aRAP \\\\\\\\qquad \\\\\\\\text{Einnahme heute, Ertrag morgen} \\\\\\\\Rightarrow pRAP</div><p>Merkschema für die transitorische Abgrenzung.</p>
-<p><strong>RAP</strong></p><div class="math-block">\\\\\\\\text{Zahlung heute, Erfolg teilweise morgen}</div><p>Transitorische Abgrenzung.</p>
+<p><strong>Periodenzuordnung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{wirtschaftliche Zugehörigkeit} \\\\\\\\\\\\\\\\neq \\\\\\\\\\\\\\\\text{Zahlungszeitpunkt}</div><p>Kernlogik der Rechnungsabgrenzung.</p>
+<p><strong>Aktiver / passiver RAP</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Ausgabe heute, Aufwand morgen} \\\\\\\\\\\\\\\\Rightarrow aRAP \\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\text{Einnahme heute, Ertrag morgen} \\\\\\\\\\\\\\\\Rightarrow pRAP</div><p>Merkschema für die transitorische Abgrenzung.</p>
+<p><strong>RAP</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Zahlung heute, Erfolg teilweise morgen}</div><p>Transitorische Abgrenzung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Transitorische und antizipative Abgrenzung</h4>
 <p>Transitorische Posten betreffen Zahlungen vor oder nach dem Stichtag, die wirtschaftlich teilweise in andere Perioden gehören. Antizipative Posten erfassen Erträge oder Aufwendungen, die wirtschaftlich bereits entstanden sind, aber erst später zahlungswirksam werden.</p>
@@ -1413,22 +1061,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Rechnungsabgrenzung"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Rechnungsabgrenzung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1477,7 +1113,7 @@ export const CONTENT = {
   erfolgsrechnung: {
     motivation: 'Mit GKV und UKV endet der Kurs dort, wo sich Bilanzierung, Bewertung und Periodisierung im Jahresergebnis bündeln.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum beide zum selben Ergebnis führen</h4>
 <p>GKV und UKV unterscheiden sich nicht im Jahresergebnis, sondern in der Darstellungslogik. Gerade diese Aussage gehört in fast jede Vergleichsaufgabe.</p>
@@ -1485,28 +1121,22 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gesamtkostenverfahren</h4>
 <p>Das GKV gliedert Aufwendungen nach Kostenarten. Bestandsveränderungen und aktivierte Eigenleistungen korrigieren dabei den Rohaufwand zu einem periodengerechten Ergebnis. Das Verfahren ist besonders anschlussfähig an die klassische Buchführungslogik.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erfolgsrechnung mit GKV und UKV"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Jahresergebnis</strong></p><div class="math-block">$$JÜ = Erträge - Aufwendungen$$</div><p>Beide Verfahren führen dorthin.</p>
-<p><strong>Kostenart vs. Funktion</strong></p><div class="math-block">\\\\\\\\text{GKV: Was für Kosten? \\\\\\\\quad UKV: Wofür Kosten?}</div><p>Merksatz zur Darstellungslogik.</p>
-<p><strong>Brückenlogik</strong></p><div class="math-block">\\\\\\\\text{Bestandsveränderung / HK der abgesetzten Leistung} \\\\\\\\Rightarrow \\\\\\\\text{periodengerechter Erfolg}</div><p>Die Brücke erklärt, warum GKV und UKV trotz anderer Zeilen zum gleichen Ergebnis führen.</p>
+<p><strong>Kostenart vs. Funktion</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{GKV: Was für Kosten? \\\\\\\\\\\\\\\\quad UKV: Wofür Kosten?}</div><p>Merksatz zur Darstellungslogik.</p>
+<p><strong>Brückenlogik</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Bestandsveränderung / HK der abgesetzten Leistung} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{periodengerechter Erfolg}</div><p>Die Brücke erklärt, warum GKV und UKV trotz anderer Zeilen zum gleichen Ergebnis führen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Umsatzkostenverfahren</h4>
 <p>Das UKV gliedert die Aufwendungen nach Funktionsbereichen, insbesondere Herstellung, Vertrieb und Verwaltung. Dadurch rückt stärker die Erfolgsbeziehung zu den umgesetzten Leistungen in den Vordergrund.</p>
@@ -1517,22 +1147,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. GoB-Prinzip explizit benennen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erfolgsrechnung mit GKV und UKV"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erfolgsrechnung mit GKV und UKV"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [

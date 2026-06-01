@@ -281,22 +281,39 @@ export function classifyTheorySection(heading, innerHtml, index = 0, total = 1) 
   return "mechanismus";
 }
 
-const PLACEHOLDER_REF = {
-  orientierung: "Kernidee",
-  kernidee: "Orientierung",
-  definitionen: "Kernidee",
-  formale: "Definitionen",
-  mechanismus: "Kernidee",
-  anwendung: "Mechanismus & Zusammenhänge",
-  fehler: "die übrigen Rezept-Schritte",
-  vor_aufgaben: "Kernidee und Definitionen"
-};
-
 /** @param {string} innerHtml */
 export function theoryBodyHasContent(innerHtml) {
-  const text = stripTags(innerHtml);
-  if (text.length < 12) return false;
-  return !/^kein separater vl-abschnitt/i.test(text);
+  const cleaned = stripPlaceholderMarkup(innerHtml);
+  const text = stripTags(cleaned);
+  return text.length >= 12;
+}
+
+/** @param {string} html */
+export function stripPlaceholderMarkup(html) {
+  return String(html ?? "")
+    .replace(/<p class="theory-recipe-placeholder">[\s\S]*?<\/p>/gi, "")
+    .trim();
+}
+
+/** @param {string} html */
+export function stripRecipeStepBadges(html) {
+  return String(html ?? "").replace(/<span class="theory-recipe-step"[^>]*>[\s\S]*?<\/span>\s*/gi, "");
+}
+
+/** @param {string} value */
+function theoryTextKey(value) {
+  return stripTags(value).toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+/** @param {string} a @param {string} b */
+export function isDuplicateTheoryText(a, b) {
+  const ka = theoryTextKey(a);
+  const kb = theoryTextKey(b);
+  if (!ka || !kb) return false;
+  if (ka === kb) return true;
+  const shorter = ka.length < kb.length ? ka : kb;
+  const longer = ka.length < kb.length ? kb : ka;
+  return shorter.length >= 48 && longer.includes(shorter);
 }
 
 /** @param {string} innerHtml */
@@ -309,10 +326,10 @@ export function normalizeSubsectionMarkup(innerHtml) {
 
 /** @param {{ id: string, heading: string, step: number }} spec @param {string} bodyHtml */
 export function buildRecipeSectionHtml(spec, bodyHtml) {
-  const body = normalizeSubsectionMarkup(bodyHtml).trim();
-  if (!body) return "";
+  const body = normalizeSubsectionMarkup(stripPlaceholderMarkup(bodyHtml)).trim();
+  if (!theoryBodyHasContent(body)) return "";
   return `<section class="theory-recipe-section theory-recipe-card theory-recipe-section--${spec.id}" data-theory-step="${spec.step}" aria-labelledby="theory-${spec.id}-h">
-<h3 class="theory-recipe-heading" id="theory-${spec.id}-h"><span class="theory-recipe-step" aria-hidden="true">${spec.step}</span> ${spec.heading}</h3>
+<h3 class="theory-recipe-heading" id="theory-${spec.id}-h">${spec.heading}</h3>
 <div class="theory-recipe-body">
 ${body}
 </div>
@@ -401,7 +418,7 @@ ${normalizeSubsectionMarkup(item.inner)}
  * @returns {string}
  */
 export function normalizeTheoryHtml(html) {
-  const raw = String(html ?? "").trim();
+  const raw = stripRecipeStepBadges(String(html ?? "")).trim();
   if (!raw) return raw;
   const flat = flattenTheoryToSections(raw);
   if (!flat.length) return raw;
@@ -409,39 +426,13 @@ export function normalizeTheoryHtml(html) {
 }
 
 /**
- * @param {string} stepId
- * @param {string} [chapterTitle]
- */
-export function placeholderForMissingStep(stepId, chapterTitle) {
-  const ref = PLACEHOLDER_REF[stepId] || "die anderen Rezept-Schritte";
-  const ch = chapterTitle ? `Kapitel „${chapterTitle}"` : "diesem Kapitel";
-  return `<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in ${ch}; siehe ${ref}.</p>`;
-}
-
-/**
  * Pull non-destructive fragments from chapter entry fields into recipe buckets.
+ * Motivation, objectives, formeln, and intuition are rendered elsewhere (header / Formeln tab / runtime fuse).
  * @param {object} entry
+ * @param {{ headerMotivationShown?: boolean, headerObjectivesShown?: boolean }} [meta]
  */
-export function collectEntryTheoryFragments(entry = {}) {
+export function collectEntryTheoryFragments(entry = {}, meta = {}) {
   const frags = {};
-
-  if (hasMeaningfulIntuitionText(entry.motivation)) {
-    frags.orientierung = `<p>${escapeHtml(stripTags(entry.motivation))}</p>`;
-  }
-
-  const intuition = normalizeIntuitionRecord(entry.intuition);
-  if (intuition) {
-    const built = buildIntuitionFusionFragments(intuition);
-    if (built.orientierung) {
-      frags.orientierung = [frags.orientierung, built.orientierung].filter(Boolean).join("\n");
-    }
-    if (built.kernidee) {
-      frags.kernidee = [frags.kernidee, built.kernidee].filter(Boolean).join("\n");
-    }
-    if (built.anwendung) {
-      frags.anwendung = [frags.anwendung, built.anwendung].filter(Boolean).join("\n");
-    }
-  }
 
   if (Array.isArray(entry.cards) && entry.cards.length) {
     const cardsHtml = `<div class="info-grid theory-entry-cards">
@@ -455,36 +446,32 @@ ${entry.cards
     frags.definitionen = [frags.definitionen, cardsHtml].filter(Boolean).join("\n");
   }
 
-  if (Array.isArray(entry.formeln) && entry.formeln.length) {
-    const formelnParts = entry.formeln.slice(0, 8).map((f) => {
-      const label = f.label ? `<p><strong>${escapeHtml(f.label)}</strong></p>` : "";
-      const eq = f.eq ? `<div class="math-block">${f.eq}</div>` : "";
-      const desc = f.desc ? `<p>${escapeHtml(f.desc)}</p>` : "";
-      return `${label}${eq}${desc}`;
-    });
-    frags.formale = [frags.formale, formelnParts.join("\n")].filter(Boolean).join("\n");
-  }
-
-  if (Array.isArray(entry.objectives) && entry.objectives.length) {
-    frags.vor_aufgaben = `<ul class="theory-pre-task-checklist">${entry.objectives
-      .map((o) => `<li>${escapeHtml(String(o))}</li>`)
-      .join("")}</ul>
-<p class="theory-pre-task-hint">Was du beherrschen solltest, bevor du zu Aufgaben gehst.</p>`;
-  }
-
+  void meta;
   return frags;
 }
 
+/** @param {string} html */
+export function countTheoryRecipeCards(html) {
+  return [...String(html ?? "").matchAll(/theory-recipe-section--([a-z_]+)/g)].length;
+}
+
 /**
- * Ensure all eight recipe cards exist; fill gaps from entry fragments or honest placeholders.
+ * Emit only recipe cards with substantive body content; omit placeholders and header duplicates.
  * @param {string} html
  * @param {object} [entry]
- * @param {{ chapterTitle?: string }} [meta]
+ * @param {{ chapterTitle?: string, headerMotivationShown?: boolean, headerObjectivesShown?: boolean }} [meta]
  */
 export function completeTheoryRecipe(html, entry = {}, meta = {}) {
   const grouped = groupTheorySections(flattenTheoryToSections(html));
-  const frags = collectEntryTheoryFragments(entry);
-  const title = meta.chapterTitle || entry.title || "";
+  const frags = collectEntryTheoryFragments(entry, meta);
+  const headerMotivation =
+    meta.headerMotivationShown !== false && hasMeaningfulIntuitionText(entry.motivation)
+      ? stripTags(entry.motivation)
+      : "";
+  const headerObjectives =
+    meta.headerObjectivesShown !== false && Array.isArray(entry.objectives)
+      ? entry.objectives.map((o) => stripTags(String(o))).filter(Boolean).join(" ")
+      : "";
 
   for (const spec of THEORY_SECTION_ORDER) {
     const existing = (grouped[spec.id] || []).map((i) => i.inner).join("\n");
@@ -493,16 +480,9 @@ export function completeTheoryRecipe(html, entry = {}, meta = {}) {
     }
   }
 
-  const kernBody = (grouped.kernidee || []).map((i) => i.inner).join("\n");
-  if (!theoryBodyHasContent(kernBody) && grouped.definitionen?.length) {
-    const defInner = grouped.definitionen.map((i) => i.inner).join("\n");
-    const firstP = defInner.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
-    if (firstP) {
-      grouped.kernidee = [{ heading: "", inner: `<p>${firstP[1]}</p>` }];
-    }
-  }
-
   const parts = [];
+  const emittedBodies = [];
+
   for (const spec of THEORY_SECTION_ORDER) {
     const items = grouped[spec.id] || [];
     const bodyParts = items.map((item) => {
@@ -512,12 +492,16 @@ export function completeTheoryRecipe(html, entry = {}, meta = {}) {
 ${normalizeSubsectionMarkup(item.inner)}
 </div>`;
     });
-    let body = bodyParts.join("\n").trim();
-    if (!theoryBodyHasContent(body)) {
-      body = placeholderForMissingStep(spec.id, title);
-    }
+    const body = stripPlaceholderMarkup(bodyParts.join("\n")).trim();
+    if (!theoryBodyHasContent(body)) continue;
+    if (headerMotivation && isDuplicateTheoryText(body, headerMotivation)) continue;
+    if (headerObjectives && spec.id === "vor_aufgaben") continue;
+    if (emittedBodies.some((prev) => isDuplicateTheoryText(body, prev))) continue;
+
     const section = buildRecipeSectionHtml(spec, body);
-    if (section) parts.push(section);
+    if (!section) continue;
+    emittedBodies.push(body);
+    parts.push(section);
   }
   return parts.join("\n");
 }
@@ -537,7 +521,11 @@ function escapeHtml(text) {
  */
 export function applyTheoryRecipeChrome(html, entry = {}, meta = {}) {
   const normalized = normalizeTheoryHtml(html);
-  return completeTheoryRecipe(normalized, entry, meta);
+  return completeTheoryRecipe(normalized, entry, {
+    headerMotivationShown: true,
+    headerObjectivesShown: true,
+    ...meta
+  });
 }
 
 function stripTags(text) {
@@ -645,6 +633,16 @@ ${intuition.exam
   };
 }
 
+function isSectionDuplicateOfBody(html, sectionId, fragment) {
+  const re = new RegExp(
+    `theory-recipe-section--${sectionId}[\\s\\S]*?<div class="theory-recipe-body">([\\s\\S]*?)</div>\\s*</section>`,
+    "i"
+  );
+  const match = html.match(re);
+  if (!match) return false;
+  return isDuplicateTheoryText(match[1], fragment);
+}
+
 function injectFragmentIntoRecipeSection(html, sectionId, fragment) {
   if (!fragment?.trim()) return html;
   const marker = `theory-recipe-section--${sectionId}`;
@@ -668,7 +666,11 @@ function injectFragmentIntoRecipeSection(html, sectionId, fragment) {
  * @param {{ formalAnchorHtml?: string, recognitionItems?: string[] }} [fusionOpts]
  */
 export function fuseIntuitionIntoTheoryHtml(html, intuitionRaw, entry = {}, fusionOpts = {}) {
-  const base = applyTheoryRecipeChrome(html, entry);
+  const base = completeTheoryRecipe(normalizeTheoryHtml(html), entry, {
+    chapterTitle: entry.title,
+    headerMotivationShown: true,
+    headerObjectivesShown: true
+  });
   const intuition = normalizeIntuitionRecord(intuitionRaw);
   if (!intuition) return base;
 
@@ -678,16 +680,19 @@ export function fuseIntuitionIntoTheoryHtml(html, intuitionRaw, entry = {}, fusi
   }
 
   let out = base;
-  out = injectFragmentIntoRecipeSection(out, "orientierung", fragments.orientierung);
-  out = injectFragmentIntoRecipeSection(out, "kernidee", fragments.kernidee);
-  out = injectFragmentIntoRecipeSection(out, "anwendung", fragments.anwendung);
+  if (fragments.orientierung && !isSectionDuplicateOfBody(out, "orientierung", fragments.orientierung)) {
+    out = injectFragmentIntoRecipeSection(out, "orientierung", fragments.orientierung);
+  }
+  if (fragments.kernidee && !isSectionDuplicateOfBody(out, "kernidee", fragments.kernidee)) {
+    out = injectFragmentIntoRecipeSection(out, "kernidee", fragments.kernidee);
+  }
+  if (fragments.anwendung && !isSectionDuplicateOfBody(out, "anwendung", fragments.anwendung)) {
+    out = injectFragmentIntoRecipeSection(out, "anwendung", fragments.anwendung);
+  }
 
   if (fragments.kernidee && !/theory-recipe-section--kernidee/i.test(out)) {
     const spec = SECTION_BY_ID.kernidee;
-    const kernSection = `<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="${spec.step}" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">${spec.step}</span> ${spec.heading}</h3>
-<div class="theory-recipe-body">${fragments.kernidee}</div>
-</section>`;
+    const kernSection = buildRecipeSectionHtml(spec, fragments.kernidee);
     const defIdx = out.indexOf("theory-recipe-section--definitionen");
     out =
       defIdx >= 0

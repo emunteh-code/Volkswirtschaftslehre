@@ -70,7 +70,9 @@ function finalizeTheory(entry, chapterTitle) {
     formeln: entry.formeln
   };
   return completeTheoryRecipe(normalizeTheoryHtml(entry.theorie || ''), mergeEntry, {
-    chapterTitle
+    chapterTitle,
+    headerMotivationShown: true,
+    headerObjectivesShown: Boolean(entry.objectives?.length)
   });
 }
 

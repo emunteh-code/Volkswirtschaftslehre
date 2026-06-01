@@ -44,36 +44,24 @@ export const CHAPTERS = [
 export const CONTENT = {
   handelsfakten: {
     motivation: 'Bevor Modelle überzeugen, musst du wissen, welches reale Phänomen sie überhaupt erklären sollen: Handel wächst, ist politisch umkämpft und besteht oft gerade zwischen ähnlichen Ländern.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Bevor Modelle überzeugen, musst du wissen, welches reale Phänomen sie überhaupt erklären sollen: Handel wächst, ist politisch umkämpft und besteht oft gerade zwischen ähnlichen Ländern.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Welche Beobachtungen der Kurs erklären will</h4>
 <p>Internationale Wirtschaftsbeziehungen beginnen nicht mit einer Formel, sondern mit drei robusten Fakten: Erstens ist der Welthandel langfristig stark gewachsen. Zweitens handeln vor allem große, produktive Volkswirtschaften intensiv miteinander. Drittens besteht ein erheblicher Teil des Handels aus dem gleichzeitigen Export und Import ähnlicher Güter.</p>
          <p>Diese Fakten zeigen sofort, dass kein einzelnes Modell alles leisten kann. Ricardo erklärt Handel durch Technologieunterschiede, Heckscher-Ohlin durch Faktorausstattung, Krugman durch Skalenerträge und Produktvielfalt.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Handelsfakten und Grundfragen"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Handelsquote</strong></p><div class="math-block">$$\\\\\\\\text{Handelsquote} = \\\\\\\\frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
-<p><strong>Terms of Trade</strong></p><div class="math-block">$$ToT = \\\\\\\\frac{P_X}{P_M}$$</div><p>Preis der Exporte relativ zu den Importen.</p>
-<p><strong>Handelsquote (Merksatz)</strong></p><div class="math-block">$$\\\\\\\\text{Handelsquote} = \\\\\\\\frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
+<p><strong>Handelsquote</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Handelsquote} = \\\\\\\\\\\\\\\\frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
+<p><strong>Terms of Trade</strong></p><div class="math-block">$$ToT = \\\\\\\\\\\\\\\\frac{P_X}{P_M}$$</div><p>Preis der Exporte relativ zu den Importen.</p>
+<p><strong>Handelsquote (Merksatz)</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Handelsquote} = \\\\\\\\\\\\\\\\frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Positive Analyse vs. normative Debatte</h4>
 <p>Die positive Frage lautet: <em>Warum</em> wird gehandelt? Die normative Frage lautet: <em>Soll</em> Handelspolitik eingreifen? Prüfungsaufgaben springen oft zwischen beiden Ebenen. Deshalb musst du sauber trennen, ob ein Modell ein Handelsmuster erklärt oder ob es eine politische Maßnahme bewertet.</p>
@@ -90,22 +78,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Handelsfakten und Grundfragen"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Handelsfakten und Grundfragen"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -142,35 +118,17 @@ export const CONTENT = {
 
   ricardo: {
     motivation: 'Ricardo liefert das Grundargument für Spezialisierung: Auch wenn ein Land in allem produktiver ist, lohnt sich Handel, sobald sich Opportunitätskosten unterscheiden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Ricardo liefert das Grundargument für Spezialisierung: Auch wenn ein Land in allem produktiver ist, lohnt sich Handel, sobald sich Opportunitätskosten unterscheiden.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Ricardo-Modell und komparativer Vorteil"; siehe Orientierung.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Ricardo-Modell und komparativer Vorteil"; siehe Kernidee.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Absolute und komparative Vorteile sauber trennen</h4>
 <p>Ein absoluter Vorteil bedeutet: Ein Land benötigt weniger Arbeit pro Einheit eines Gutes. Ein komparativer Vorteil bedeutet: Ein Land opfert relativ weniger vom anderen Gut. Für die Handelsrichtung zählt nicht die absolute Produktivität, sondern die Relation der Opportunitätskosten.</p>
-         <div class="math-block">$$OK_X = \\\\\\\\\\\\\\\\frac{a_{LX}}{a_{LY}}$$</div>
+         <div class="math-block">$$OK_X = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{a_{LX}}{a_{LY}}$$</div>
          <p>Genau deshalb kann ein Land mit absoluten Vorteilen in beiden Gütern dennoch nur eines exportieren: Dort ist sein relativer Kostenvorteil am größten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Numerisches Beispiel</h4>
 <p>Heim: $a_{LX}=2, a_{LY}=4$ → $OK_X=0{,}5$. Ausland: $a_{LX}=3, a_{LY}=3$ → $OK_X=1$. Heim exportiert X (niedrigeres $OK_X$). Relative Preise im Handelsgleichgewicht zwischen 0,5 und 1.</p>
@@ -178,7 +136,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Ricardo</h4>
 <p>Arbeitswertmodell: $a_{LX}, a_{LY}$ gegeben. Opportunitätskosten $OK_X = a_{LX}/a_{LY}$. Spezialisierung auf komparativen Vorteil → Handel → beide Länder gewinnen (Grenzen der Theorie: 1 Faktor, Vollbeschäftigung).</p>
@@ -187,18 +145,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Ricardo-Modell und komparativer Vorteil"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Ricardo-Modell und komparativer Vorteil"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -236,26 +182,8 @@ export const CONTENT = {
 
   heckscher_ohlin: {
     motivation: 'Heckscher-Ohlin verschiebt den Fokus von Technologie auf Faktorausstattung: Länder exportieren die Güter, die ihren reichlich vorhandenen Faktor intensiv nutzen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Heckscher-Ohlin verschiebt den Fokus von Technologie auf Faktorausstattung: Länder exportieren die Güter, die ihren reichlich vorhandenen Faktor intensiv nutzen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Heckscher-Ohlin und Faktorausstattung"; siehe Orientierung.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Heckscher-Ohlin und Faktorausstattung"; siehe Kernidee.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Faktorreichtum</h4>
 <p>Land exportiert Güter, die seinen reichlich vorhandenen Faktoren intensiv nutzen. HO-Theorem: Handel gleicht Faktorpreise zwischen Ländern an (unter Annahmen).</p>
@@ -263,14 +191,14 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stolper-Samuelson</h4>
 <p>Schutz des importkonkurrierenden Sektors begünstigt den reichlich vorhandenen Faktor, schadet dem knappen Faktor im Inland.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: HO</h4>
 <p>Modellwahl: Ricardo (1 Faktor) vs. HO (2 Faktoren). HO erklärt Faktorintensität und Handelsrichtung — nicht intraindustriellen Handel (→ Krugman).</p>
@@ -279,18 +207,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Heckscher-Ohlin und Faktorausstattung"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Heckscher-Ohlin und Faktorausstattung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -329,37 +245,31 @@ export const CONTENT = {
   verteilung_handel: {
     motivation: 'Die große Zusatzleistung von VL3 ist nicht nur die Handelsrichtung, sondern die Verteilungsfrage: Wer gewinnt und wer verliert innerhalb eines Landes durch Handel?',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum Verteilung hier zentral wird</h4>
 <p>Das Heckscher-Ohlin-Modell ist klausurrelevant, weil es erstmals nicht nur Ländergewinne, sondern auch Konflikte innerhalb eines Landes strukturiert. Genau deshalb ist das Stolper-Samuelson-Theorem kein Nebensatz, sondern die politische Pointe des Modells.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Worked intuition: kapitalreiches vs. arbeitsreiches Land</h4>
-<p>Home ist kapitalreich und exportiert das kapitalintensive Gut. Durch Handel steigt der Weltpreis dieses Gutes relativ. Home gewinnt real am Faktor Kapital ($r\\\\\\\\\\\\\\\\uparrow$), verliert am Faktor Arbeit ($w\\\\\\\\\\\\\\\\downarrow$ in realer Entlohnung). Foreign — arbeitsreich — erlebt das Spiegelbild. Die Summe der Handelsgewinne ist positiv, aber innerhalb jedes Landes gibt es distributive Verlierer.</p>
-         <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{P}_{K\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{-int}} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{r} > 0,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{w} < 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{ (in Home)}$$</div>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Stolper-Samuelson und Verteilungseffekte des Handels"; siehe Kernidee.</p>
+<p>Home ist kapitalreich und exportiert das kapitalintensive Gut. Durch Handel steigt der Weltpreis dieses Gutes relativ. Home gewinnt real am Faktor Kapital ($r\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow$), verliert am Faktor Arbeit ($w\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\downarrow$ in realer Entlohnung). Foreign — arbeitsreich — erlebt das Spiegelbild. Die Summe der Handelsgewinne ist positiv, aber innerhalb jedes Landes gibt es distributive Verlierer.</p>
+         <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{P}_{K\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{-int}} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{r} > 0,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{w} < 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{ (in Home)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Stolper-Samuelson</strong></p><div class="math-block">$$P_{K\\\\\\\\text{-intensiv}} \\\\\\\\uparrow \\\\\\\\Rightarrow r \\\\\\\\uparrow,\\\\\\\\ w \\\\\\\\downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
-<p><strong>Verteilungslogik</strong></p><div class="math-block">\\\\\\\\text{reichlicher Faktor} \\\\\\\\Rightarrow \\\\\\\\text{gewinnt relativ durch Handel}</div><p>Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.</p>
-<p><strong>Faktorpreis-Link</strong></p><div class="math-block">$$\\\\\\\\hat{P}_j \\\\\\\\uparrow \\\\\\\\Rightarrow \\\\\\\\text{Faktor des intensiv genutzten Gutes } j \\\\\\\\text{ gewinnt real}$$</div><p>Stolper-Samuelson-Kern.</p>
-<p><strong>Stolper-Samuelson (Merksatz)</strong></p><div class="math-block">$$P_{K\\\\\\\\text{-intensiv}} \\\\\\\\uparrow \\\\\\\\Rightarrow r \\\\\\\\uparrow,\\\\\\\\ w \\\\\\\\downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
+<p><strong>Stolper-Samuelson</strong></p><div class="math-block">$$P_{K\\\\\\\\\\\\\\\\text{-intensiv}} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow r \\\\\\\\\\\\\\\\uparrow,\\\\\\\\\\\\\\\\ w \\\\\\\\\\\\\\\\downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
+<p><strong>Verteilungslogik</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{reichlicher Faktor} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{gewinnt relativ durch Handel}</div><p>Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.</p>
+<p><strong>Faktorpreis-Link</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\hat{P}_j \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Faktor des intensiv genutzten Gutes } j \\\\\\\\\\\\\\\\text{ gewinnt real}$$</div><p>Stolper-Samuelson-Kern.</p>
+<p><strong>Stolper-Samuelson (Merksatz)</strong></p><div class="math-block">$$P_{K\\\\\\\\\\\\\\\\text{-intensiv}} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow r \\\\\\\\\\\\\\\\uparrow,\\\\\\\\\\\\\\\\ w \\\\\\\\\\\\\\\\downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stolper-Samuelson sauber lesen</h4>
 <p>Steigt durch Handel der relative Preis des kapitalintensiven Gutes, steigt die reale Entlohnung des Faktors Kapital und die reale Entlohnung des Faktors Arbeit sinkt. Umgekehrt profitiert im arbeitsreichen Land der Faktor Arbeit. Wichtig ist: Die Aussage ist eine <em>reale</em> Verteilungsaussage, nicht bloß eine nominale Lohnbeobachtung.</p>
@@ -371,22 +281,10 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Stolper-Samuelson und Verteilungseffekte des Handels"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Stolper-Samuelson und Verteilungseffekte des Handels"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -417,26 +315,14 @@ export const CONTENT = {
   krugman: {
     motivation: 'Die Neue Handelstheorie erklärt, warum ähnliche Länder ähnliche Güter gleichzeitig exportieren und importieren: Skalenerträge und Produktdifferenzierung erzeugen Handel auch ohne große Faktorunterschiede.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum Ricardo und H-O hier nicht reichen</h4>
 <p>Zwischen Deutschland und Frankreich werden Autos in beide Richtungen gehandelt. Das ist kein klassischer interindustrieller Handel, sondern intraindustrieller Handel. Klassische Modelle mit konstanten Skalenerträgen und homogener Ware erklären das nur unzureichend.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Intraindustrieller Handel und Krugman-Modell"; siehe Orientierung.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Intraindustrieller Handel und Krugman-Modell"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">IRS und intraindustrieller Handel</h4>
 <p>Steigende Skalenerträge + Liebhaber-Vielfalt → ähnliche Länder handeln ähnliche Güter (intraindustriell), nicht nur unterschiedliche Faktorenintensitäten.</p>
@@ -444,7 +330,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was Krugman erklärt, was Ricardo und H-O nicht erklären</h4>
 <p>Das Modell erklärt zwei Dinge gleichzeitig: warum ähnliche Länder intensiv miteinander handeln und warum sie ähnliche Güter in beide Richtungen handeln. Genau hier liegt sein Mehrwert gegenüber den klassischen Theorien.</p>
@@ -456,7 +342,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>HO vs. Krugman: HO = Faktorreichtum; Krugman = Skalenerträge/Produktvielfalt. Aufgabenstellung entscheidet das Modell.</p>
@@ -468,18 +354,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Intraindustrieller Handel und Krugman-Modell"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Intraindustrieller Handel und Krugman-Modell"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -517,58 +391,40 @@ export const CONTENT = {
   gravitation: {
     motivation: 'Die Gravitationsgleichung ist die empirische Verdichtung des Handelsmusters: Große Länder handeln viel, Distanz bremst, und genau das passt überraschend gut zu den Daten.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum sie gut zu Krugman passt</h4>
 <p>Die empirische Handelsstruktur aus der Gravitationsgleichung passt zur Idee großer Märkte und sinkender Durchschnittskosten. Sie ersetzt Krugman nicht, sondern liefert die datennahe Kurzform: große Länder handeln viel miteinander, Distanz verteuert Handel.</p>
-         <div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div>
+         <div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wofür die Gravitationsgleichung steht</h4>
 <p>Die Gravitationsgleichung beschreibt Handelsströme als steigende Funktion von Marktgröße und fallende Funktion von Distanz. Sie ist damit kein eigenständiges Wohlfahrtsmodell, sondern ein empirisch starkes Organisationsschema für Handelsdaten.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gravitationsgleichung und empirische Handelsmuster"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Gravitation</strong></p><div class="math-block">$$Trade_{ij} \\\\\\\\propto \\\\\\\\frac{GDP_i \\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
-<p><strong>Interpretation</strong></p><div class="math-block">\\\\\\\\text{Größe} \\\\\\\\uparrow \\\\\\\\Rightarrow Trade \\\\\\\\uparrow,\\\\\\\\quad \\\\\\\\text{Distanz} \\\\\\\\uparrow \\\\\\\\Rightarrow Trade \\\\\\\\downarrow</div><p>Richtung der Haupteffekte.</p>
-<p><strong>Gravitation (Merksatz)</strong></p><div class="math-block">$$Trade_{ij} \\\\\\\\propto \\\\\\\\frac{GDP_i \\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
+<p><strong>Gravitation</strong></p><div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
+<p><strong>Interpretation</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Größe} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow Trade \\\\\\\\\\\\\\\\uparrow,\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\text{Distanz} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow Trade \\\\\\\\\\\\\\\\downarrow</div><p>Richtung der Haupteffekte.</p>
+<p><strong>Gravitation (Merksatz)</strong></p><div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Log-linear Schätzung</h4>
 <p>Handelsströme steigen mit Wirtschaftsmasse ($GDP$) und sinken mit Distanz. Log-Spezifikation: $\\ln T_{ij} = \\beta_0 + \\beta_1 \\ln Y_i + \\beta_2 \\ln Y_j - \\gamma \\ln dist_{ij} + u$ — Koeffizienten sind Elastizitäten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gravitationsgleichung und empirische Handelsmuster"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gravitationsgleichung und empirische Handelsmuster"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -597,26 +453,8 @@ export const CONTENT = {
 
   tarifmodell: {
     motivation: 'Der Importzoll ist das Standardwerkzeug der Handelspolitik. Seine Analyse zeigt sauber, wie Preis, Menge, Wohlfahrt und Verteilung zusammenhängen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Der Importzoll ist das Standardwerkzeug der Handelspolitik. Seine Analyse zeigt sauber, wie Preis, Menge, Wohlfahrt und Verteilung zusammenhängen.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Importzoll, Wohlfahrt und Optimalzoll"; siehe Orientierung.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Importzoll, Wohlfahrt und Optimalzoll"; siehe Kernidee.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Kleines Land: Preiswirkung und Importmenge</h4>
 <p>Im kleinen Land ist der Weltmarktpreis exogen. Ein spezifischer Zoll erhöht den Inlandspreis um genau den Zollsatz:</p>
@@ -625,7 +463,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wohlfahrt: Gewinner, Verlierer und Deadweight Loss</h4>
 <p>Konsumenten verlieren wegen des höheren Preises und des geringeren Konsums. Produzenten gewinnen durch den Preisanstieg. Der Staat erzielt Zolleinnahmen. Netto bleibt im kleinen Land jedoch ein Wohlfahrtsverlust, weil Produktions- und Konsumverzerrung nicht kompensiert werden.</p>
@@ -638,7 +476,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Zolltarif</h4>
 <p>Kleines Land: Zoll → Inlandspreis steigt um Zoll, Menge fällt auf Importangebot/Nachfrage-Schnitt. Wohlfahrt: Produzentenrente↑, Konsumentenrente↓, Zolleinnahmen — DWL-Dreiecke.</p>
@@ -650,18 +488,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Importzoll, Wohlfahrt und Optimalzoll"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Importzoll, Wohlfahrt und Optimalzoll"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -699,7 +525,7 @@ export const CONTENT = {
   quoten_sanktionen: {
     motivation: 'Nicht jede Handelspolitik sieht wie ein klassischer Zoll aus. Quoten, Sanktionen und diskriminierende Maßnahmen wirken ähnlich, verteilen die Rente aber anders und erzeugen neue politische Probleme.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum Institutionen wichtig werden</h4>
 <p>Gerade Quoten und Sanktionen zeigen, warum internationale Regeln wichtig sind. Ohne übergeordnete Ordnung drohen Vergeltungsspiralen und ineffiziente Politikzyklen.</p>
@@ -707,29 +533,23 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Quote vs. Zoll</h4>
 <p>Eine äquivalente Importquote kann denselben Inlandspreis erzeugen wie ein Zoll. Der entscheidende Unterschied ist die Rentenverteilung: Beim Zoll fließen Einnahmen an den Staat, bei der Quote an die Inhaber der Importrechte.</p>
          <p>Bei steigender Nachfrage wird die Quote relativ restriktiver, weil die Menge fix ist. Genau deshalb ist die Wirkung dynamisch anders als beim Zoll.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Quoten, Sanktionen und diskriminierende Handelspolitik"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Quote als Mengenrestriktion</strong></p><div class="math-block">$$M \\\\\\\\leq \\\\\\\\bar M$$</div><p>Importmenge wird direkt begrenzt.</p>
-<p><strong>Quotenrente</strong></p><div class="math-block">$$\\\\\\\\text{Quotenrente} = (P_{in} - P_w)\\\\\\\\cdot M$$</div><p>Erlös aus der künstlichen Verknappung.</p>
-<p><strong>Zoll vs. Quote (Renten)</strong></p><div class="math-block">\\\\\\\\text{Zollrente} \\\\\\\\rightarrow \\\\\\\\text{Staat};\\\\\\\\quad \\\\\\\\text{Quotenrente} \\\\\\\\rightarrow \\\\\\\\text{Importrechte}</div><p>Gleicher Preis, unterschiedliche Verteilung.</p>
+<p><strong>Quote als Mengenrestriktion</strong></p><div class="math-block">$$M \\\\\\\\\\\\\\\\leq \\\\\\\\\\\\\\\\bar M$$</div><p>Importmenge wird direkt begrenzt.</p>
+<p><strong>Quotenrente</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Quotenrente} = (P_{in} - P_w)\\\\\\\\\\\\\\\\cdot M$$</div><p>Erlös aus der künstlichen Verknappung.</p>
+<p><strong>Zoll vs. Quote (Renten)</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Zollrente} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Staat};\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\text{Quotenrente} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Importrechte}</div><p>Gleicher Preis, unterschiedliche Verteilung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Sanktionen und diskriminierende Zölle</h4>
 <p>Sanktionen wirken oft nicht nur über Preise, sondern auch über Umleitungseffekte, Lieferketten und politische Gegensanktionen. Diskriminierende Zölle verletzen zudem die Idee nichtdiskriminierender Handelsbehandlung und können Drittlandeffekte auslösen.</p>
@@ -741,7 +561,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Quoten</h4>
 <p>Importquote: harte Mengenbeschränkung — Preis passt sich an. Lizenzinhaber erhalten Quotenrente. vs. Zoll: Staat erzielt Einnahmen statt Quotenrente bei Lizenzvergabe ohne Auktion.</p>
@@ -753,18 +573,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Quoten, Sanktionen und diskriminierende Handelspolitik"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Quoten, Sanktionen und diskriminierende Handelspolitik"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -803,35 +611,29 @@ export const CONTENT = {
   wto_integration: {
     motivation: 'Internationale Handelsordnung ist kein Randthema: WTO, Freihandelszonen und Zollunionen bestimmen, ob Handelskonflikte koordiniert oder eskalierend ausgetragen werden.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum Institutionen ökonomisch disziplinieren</h4>
 <p>VL7 nutzt das Gefangenendilemma ausdrücklich als Deutungsrahmen: Ohne Regelbindung haben große Länder Anreize zu wechselseitiger Terms-of-Trade-Politik. WTO und Integrationsverträge sind daher nicht nur juristische Hüllen, sondern Koordinationsinstrumente gegen eskalierende Vergeltung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">MFN, Gegenseitigkeit und Bindungen</h4>
 <p>Die WTO reduziert Unsicherheit, weil sie Zölle bindet, Transparenz schafft und Diskriminierung begrenzt. Das MFN-Prinzip verlangt, gleichartige Handelspartner gleich zu behandeln. Dadurch sinkt die Versuchung, unilateral immer wieder neue Barrieren zu errichten.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „WTO, Freihandelszonen, Zollunionen und Brexit"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Trade creation</strong></p><div class="math-block">$$\\\\\\\\Delta W > 0 \\\\\\\\text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
-<p><strong>Trade diversion</strong></p><div class="math-block">$$\\\\\\\\Delta W < 0 \\\\\\\\text{ möglich durch Ersatz billiger Drittlandimporte}$$</div><p>Präferenz kann Handel umlenken statt verbessern.</p>
-<p><strong>Trade creation (Merksatz)</strong></p><div class="math-block">$$\\\\\\\\Delta W > 0 \\\\\\\\text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
+<p><strong>Trade creation</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta W > 0 \\\\\\\\\\\\\\\\text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
+<p><strong>Trade diversion</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta W < 0 \\\\\\\\\\\\\\\\text{ möglich durch Ersatz billiger Drittlandimporte}$$</div><p>Präferenz kann Handel umlenken statt verbessern.</p>
+<p><strong>Trade creation (Merksatz)</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta W > 0 \\\\\\\\\\\\\\\\text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Freihandelszone vs. Zollunion</h4>
 <p>Eine Freihandelszone beseitigt Binnenzölle, lässt aber nationale Außenzölle bestehen. Eine Zollunion kombiniert Binnenfreihandel mit einem gemeinsamen Außenzoll. Prüfungsfragen fragen hier fast immer nach dem Unterschied zwischen <em>trade creation</em> und <em>trade diversion</em>.</p>
@@ -844,7 +646,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: WTO/Integration</h4>
 <p>MFN-Prinzip, Bindung von Zöllen, Streitbeilegung. Preferential Trade Agreements (PTA): Art. XXIV — Handelsumlenkung vs. Schaffung. Dynamische Effekte: Wettbewerb, Skaleneffekte.</p>
@@ -856,18 +658,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „WTO, Freihandelszonen, Zollunionen und Brexit"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „WTO, Freihandelszonen, Zollunionen und Brexit"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -904,36 +694,24 @@ export const CONTENT = {
 
   wechselkurssysteme: {
     motivation: 'Mit dem Makroteil verschiebt sich der Fokus von Gütern auf Preise, Zinsen und Erwartungen. Der erste Schritt ist die saubere Unterscheidung von nominalem Wechselkurs, realem Wechselkurs und Regimewahl.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Mit dem Makroteil verschiebt sich der Fokus von Gütern auf Preise, Zinsen und Erwartungen. Der erste Schritt ist die saubere Unterscheidung von nominalem Wechselkurs, realem Wechselkurs und Regimewahl.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Nominaler Kurs, Notation und Leserichtung</h4>
 <p>Bevor Paritäten oder Overshooting Sinn ergeben, muss klar sein, welche Kursnotation verwendet wird und wie Auf- und Abwertung gelesen werden. Der nominale Wechselkurs ist deshalb nicht bloß Symbolik, sondern die Sprache, in der alle späteren Makroaussagen formuliert werden.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Wechselkurse, reale Kurse und Wechselkursregime"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Realer Wechselkurs und Wettbewerbsfähigkeit</h4>
 <p>Der reale Wechselkurs korrigiert den nominalen Kurs um Preisniveaus:</p>
-         <div class="math-block">$$q = E \\\\\\\\\\\\\\\\cdot \\\\\\\\\\\\\\\\frac{P^*}{P}$$</div>
+         <div class="math-block">$$q = E \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{P^*}{P}$$</div>
          <p>Er zeigt, wie teuer ausländische Güter relativ zu inländischen Gütern sind. Genau deshalb ist für Wettbewerbsfähigkeit nicht nur der nominale, sondern der reale Kurs entscheidend.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fixe vs. flexible Regime</h4>
 <p>Unter flexiblen Kursen absorbiert der Wechselkurs einen Teil externer Schocks. Unter fixen Kursen wird diese Anpassung auf Zins, Reserven und Binnenwirtschaft verlagert. Deshalb ist die Regimefrage nie rein technisch, sondern immer eine Frage der politischen Prioritäten und der gewünschten Anpassungslast.</p>
@@ -945,7 +723,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: WK-Systeme</h4>
 <p>Fix: Zentralbank interveniert, Geldpolitik oft eingeschränkt (Trilemma). Flex: UIP/M-F Kanäle. Currency Board: $M$ an Reserven. Managed float: Intervention ohne festes Parität.</p>
@@ -958,18 +736,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Wechselkurse, reale Kurse und Wechselkursregime"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Wechselkurse, reale Kurse und Wechselkursregime"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1006,27 +772,15 @@ export const CONTENT = {
 
   zinsparitaet: {
     motivation: 'VL9 beginnt mit der Ertragslogik offener Finanzmärkte: Wechselkurse hängen kurzfristig nicht nur an Güterpreisen, sondern an Zinsen, Erwartungen und Arbitrage.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>VL9 beginnt mit der Ertragslogik offener Finanzmärkte: Wechselkurse hängen kurzfristig nicht nur an Güterpreisen, sondern an Zinsen, Erwartungen und Arbitrage.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gedeckte und ungedeckte Zinsparität</h4>
 <p>Die gedeckte Zinsparität arbeitet mit Terminwechselkursen und beobachtbaren Zinssätzen. Die ungedeckte Zinsparität (UIP) ersetzt den Terminwechselkurs durch den erwarteten zukünftigen Kassakurs. Genau das macht UIP für Wechselkurserwartungen zentral und für empirische Prüfungen heikel.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gedeckte und ungedeckte Zinsparität"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">UIP</h4>
 <p>$i \\approx i^* + \\mathbb{E}[\\Delta E/E]$. Höherer Inlandszins → Aufwertungserwartung → sofortige Aufwertung bei flexibler Kurve.</p>
@@ -1034,7 +788,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was die Vorzeichen bedeuten</h4>
 <p>Ist der Inlandszins höher, muss die Auslandsanlage durch erwartete Wechselkursbewegung aufholen. Genau hier passieren in Prüfungen die meisten Sign-Fehler: Du musst sauber lesen, ob eine erwartete Auf- oder Abwertung des Inlandes gemeint ist und welche Wechselkursnotation verwendet wird.</p>
@@ -1046,7 +800,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Bei Zinsschock immer Erwartungskomponente und Regime (Mundell-Fleming) mitdenken.</p>
@@ -1054,18 +808,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gedeckte und ungedeckte Zinsparität"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gedeckte und ungedeckte Zinsparität"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1096,7 +838,7 @@ export const CONTENT = {
   kaufkraftparitaet: {
     motivation: 'Kaufkraftparität verankert den Wechselkurs auf der Gütermarktseite: Preise, Inflation und reale Wechselkurse liefern die langfristige Preislogik hinter offenen Volkswirtschaften.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum PPP kein Naturgesetz ist</h4>
 <p>Transportkosten, nicht-handelbare Güter, unterschiedliche Warenkörbe und Marktsegmentierung verhindern einen permanent exakten Gleichlauf. Trotzdem bleibt PPP ein wichtiger Langfristanker.</p>
@@ -1104,20 +846,14 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gesetz des einheitlichen Preises</h4>
 <p>Das Gesetz des einheitlichen Preises gilt für identische handelbare Güter ohne Transport- und Handelskosten. In diesem Grenzfall gilt: Ein Gut kann nicht dauerhaft in zwei Ländern unterschiedliche Preise haben, wenn Arbitrage möglich ist.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gesetz des einheitlichen Preises und Kaufkraftparität"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Absolute und relative PPP</h4>
 <p>Absolute PPP: $E = P/P^*$. Relative PPP: Wechselkursänderung spiegelt Inflationsdifferenz. Kurzfristig oft verletzt wegen Preisrigiditäten und Güterarten.</p>
@@ -1125,14 +861,14 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Realer Wechselkurs als Prüfgröße</h4>
 <p>Der reale Wechselkurs $q = E cdot P^*/P$ zeigt, ob ausländische Güter relativ teuer oder billig sind. Genau deshalb ist er die richtige Größe, wenn die Aufgabe nach Wettbewerbsfähigkeit, Fehlbewertung oder PPP-Abweichungen fragt.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Immer Regime (fix/flexibel) und Horizont (kurz/lang) nennen. PPP ist Niveau-/Trendaussage, kein Tageshandelsgesetz.</p>
@@ -1141,18 +877,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gesetz des einheitlichen Preises und Kaufkraftparität"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gesetz des einheitlichen Preises und Kaufkraftparität"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1182,43 +906,24 @@ export const CONTENT = {
 
   monetaerer_ansatz: {
     motivation: 'Der monetäre Ansatz verbindet Geldmenge, Inflation, Zinsen und Wechselkurs im langen Horizont. Er liefert die Langfristlogik hinter PPP, Fisher-Effekt und realer Zinsparität.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Der monetäre Ansatz verbindet Geldmenge, Inflation, Zinsen und Wechselkurs im langen Horizont. Er liefert die Langfristlogik hinter PPP, Fisher-Effekt und realer Zinsparität.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Geldnachfrage und Wechselkurs</h4>
 <p>Überschuss Geldmenge → Abwertungsdruck. Finanzmarktansatz: $E$ passt sich sofort an, Gütermärkte träge.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Monetärer Ansatz, Fisher-Effekt und reale Zinsparität"; siehe Kernidee.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fisher-Effekt und reale Zinsparität</h4>
 <p>Der Fisher-Effekt verbindet Nominalzins und erwartete Inflation:</p>
-         <div class="math-block">$$i \\\\\\\\\\\\\\\\approx r + \\\\\\\\\\\\\\\\pi^e$$</div>
+         <div class="math-block">$$i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\approx r + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi^e$$</div>
          <p>Wenn Kapital international mobil ist und langfristig reale Renditen angeglichen werden, entsteht reale Zinsparität als weitere Langfristbeziehung.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Geldnachfrage und Wechselkurs</h4>
-<p>Überschuss Geldmenge → Abwertungsdruck. Finanzmarktansatz: $E$ passt sich sofort an, Gütermärkte träge.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Schock → LM/ Geldmenge → $i$ → $E$ (flexibles Regime). Fixer Kurs: Devisenintervention statt freier $E$-Anpassung.</p>
@@ -1226,18 +931,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Monetärer Ansatz, Fisher-Effekt und reale Zinsparität"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Monetärer Ansatz, Fisher-Effekt und reale Zinsparität"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1276,42 +969,29 @@ export const CONTENT = {
   overshooting: {
     motivation: 'Kurzfristig reagieren Wechselkurse oft viel stärker als Preisniveaus. Das Overshooting-Modell erklärt diese Überreaktion aus Finanzmarktgleichgewicht und trägen Güterpreisen.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum Wechselkurse springen, Preise aber nicht</h4>
 <p>Auf Finanzmärkten passen sich Vermögenspreise sofort an. Güterpreise sind kurzfristig träge. Nach einem monetären Schock muss der Wechselkurs deshalb oft mehr springen als langfristig nötig wäre, damit die erwartete spätere Gegenbewegung UIP-kompatibel bleibt.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Dornbusch-Logik</h4>
 <p>Güterpreise starr kurzfristig → Geldpolitik wirkt sofort über Zins und Erwartungen auf $E$; langfristig PPP-Niveau. Wechselkurs „overshootet“ Richtung neues Gleichgewicht.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Finanzmarktansatz und Overshooting"; siehe Kernidee.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>UIP-Logik</strong></p><div class="math-block">$$i = i^* + \\\\\\\\frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
+<p><strong>UIP-Logik</strong></p><div class="math-block">$$i = i^* + \\\\\\\\\\\\\\\\frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
 <p><strong>Overshooting-Idee</strong></p><div class="math-block">$$E_{kurz} > E_{lang}$$</div><p>Kurzfristiger Kurs liegt über dem langfristigen Endwert.</p>
-<p><strong>UIP-Logik (Merksatz)</strong></p><div class="math-block">$$i = i^* + \\\\\\\\frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Dornbusch-Logik</h4>
-<p>Güterpreise starr kurzfristig → Geldpolitik wirkt sofort über Zins und Erwartungen auf $E$; langfristig PPP-Niveau. Wechselkurs „overshootet“ Richtung neues Gleichgewicht.</p>
+<p><strong>UIP-Logik (Merksatz)</strong></p><div class="math-block">$$i = i^* + \\\\\\\\\\\\\\\\frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Zeichnung: $E$ springt über, dann Rückkehr zur PPP-Linie. UIP und Geldmengenexpansion gemeinsam erklären.</p>
@@ -1319,18 +999,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Finanzmarktansatz und Overshooting"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Finanzmarktansatz und Overshooting"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1368,36 +1036,24 @@ export const CONTENT = {
 
   trilemma: {
     motivation: 'Das Trilemma bündelt die offene Makroökonomik in einer prägnanten Einsicht: freie Kapitalmobilität, fixer Wechselkurs und autonome Geldpolitik sind nicht gleichzeitig vollständig erreichbar.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
-<div class="theory-recipe-body">
-<p>Das Trilemma bündelt die offene Makroökonomik in einer prägnanten Einsicht: freie Kapitalmobilität, fixer Wechselkurs und autonome Geldpolitik sind nicht gleichzeitig vollständig erreichbar.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die drei Ziele</h4>
 <p>Politisch attraktiv sind oft drei Dinge gleichzeitig: ein fester Wechselkurs, offene Kapitalmärkte und geldpolitische Autonomie. Das Trilemma besagt, dass nur zwei davon zugleich erreichbar sind.</p>
          <p>Ökonomisch folgt dies daraus, dass freie Kapitalbewegungen und ein fixer Kurs die Zinssetzung eng an das Ausland binden.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Trilemma der Währungspolitik und fixe Wechselkurse"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Trilemma</strong></p><div class="math-block">$$\\\\\\\\{\\\\\\\\text{Fixkurs},\\\\\\\\ \\\\\\\\text{Kapitalmobilität},\\\\\\\\ \\\\\\\\text{Geldpolitik}\\\\\\\\} \\\\\\\\Rightarrow \\\\\\\\text{nur zwei zugleich}$$</div><p>Makropolitischer Zielkonflikt.</p>
-<p><strong>Fixkurs-Folge</strong></p><div class="math-block">$$\\\\\\\\text{Fixkurs} + \\\\\\\\text{Kapitalmobilität} \\\\\\\\Rightarrow i = i^*$$</div><p>Monetäre Autonomie geht verloren.</p>
-<p><strong>Flex-Kurs-Folge</strong></p><div class="math-block">$$\\\\\\\\text{Kapitalmobilität} + \\\\\\\\text{Autonomie} \\\\\\\\Rightarrow \\\\\\\\text{flexibler } E$$</div><p>Wechselkurs übernimmt Anpassung.</p>
+<p><strong>Trilemma</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\{\\\\\\\\\\\\\\\\text{Fixkurs},\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{Kapitalmobilität},\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{Geldpolitik}\\\\\\\\\\\\\\\\} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{nur zwei zugleich}$$</div><p>Makropolitischer Zielkonflikt.</p>
+<p><strong>Fixkurs-Folge</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Fixkurs} + \\\\\\\\\\\\\\\\text{Kapitalmobilität} \\\\\\\\\\\\\\\\Rightarrow i = i^*$$</div><p>Monetäre Autonomie geht verloren.</p>
+<p><strong>Flex-Kurs-Folge</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Kapitalmobilität} + \\\\\\\\\\\\\\\\text{Autonomie} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{flexibler } E$$</div><p>Wechselkurs übernimmt Anpassung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fixe Wechselkurse als Politikfall</h4>
 <p>VL12 zeigt den Fixkursfall ausdrücklich: Bei fixer Wechselkursbindung und Kapitalmobilität erzwingt UIP die Anpassung an den Auslandszins. Damit verliert das Inland monetäre Autonomie. Dieser Fixkursfall ist kein Beispiel neben dem Trilemma, sondern dessen wichtigste konkrete Ausprägung.</p>
@@ -1417,7 +1073,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Trilemma</h4>
 <p>Mundell-Fleming-Trilemma: höchstens 2 von {fixer WK, freie Kapitalmobilität, autonome Geldpolitik}. Fix + Kapitalmobilität → $i=i^*$, Geldpolitik endogen. Flex → eigene Geldpolitik, WK passt sich an.</p>
@@ -1430,18 +1086,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Trilemma der Währungspolitik und fixe Wechselkurse"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Trilemma der Währungspolitik und fixe Wechselkurse"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1488,35 +1132,29 @@ export const CONTENT = {
   balassa_samuelson: {
     motivation: 'Balassa-Samuelson erklärt systematische reale Aufwertungen und PPP-Abweichungen aus Produktivitätsunterschieden zwischen handelbaren und nicht-handelbaren Sektoren.',
     theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
-<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum das zu systematischen PPP-Abweichungen führt</h4>
 <p>Das Gesamtpreisniveau steigt damit in produktiven Ländern relativ stärker an, obwohl bei handelbaren Gütern keine willkürliche Fehlbepreisung vorliegt. Genau deshalb kann ein Land real aufwerten, ohne dass daraus sofort eine Korrektur zurück auf „q = 1“ folgen muss.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
-<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die Ausgangsfrage</h4>
 <p>Warum wirken reiche Länder dauerhaft „teurer“, ohne dass dies einfach ein Zeichen von Fehlbewertung sein muss? Balassa-Samuelson beantwortet genau diese Frage und liefert damit eine strukturelle Korrektur zu einer zu naiven PPP-Lesart.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
-<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Balassa-Samuelson und systematische KKP-Abweichungen"; siehe Kernidee.</p>
-</div>
-</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Produktivitätsschub im handelbaren Sektor</h4>
 <p>Steigt die Produktivität im handelbaren Sektor, steigen dort Löhne. Wegen Arbeitsmobilität innerhalb des Landes müssen Löhne auch in den nicht-handelbaren Sektoren mithalten. Da dort die Produktivität nicht im selben Maß steigt, erhöhen sich vor allem die Preise der nicht-handelbaren Güter.</p>
-         <div class="math-block">$$A_T \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow w \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow P_N \\\\\\\\\\\\\\\\uparrow$$</div>
+         <div class="math-block">$$A_T \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow w \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow P_N \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was das Modell erklärt und was nicht</h4>
 <p>Balassa-Samuelson erklärt systematische Niveauunterschiede und ihren Wandel über die Zeit. Es erklärt nicht jede kurzfristige Wechselkursbewegung. Für Tages- und Krisendynamik brauchst du weiter UIP, Finanzmarktansatz oder Overshooting.</p>
@@ -1524,7 +1162,7 @@ export const CONTENT = {
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
-<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Balassa-Samuelson</h4>
 <p>Produktivitätsfortschritt im tradable Sektor → Löhne steigen → auch non-tradables teurer → höheres Preisniveau bei gleichem Kurs → PPP-Abweichung strukturell.</p>
@@ -1536,18 +1174,6 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge. Regime (fix/flex) und Notation aus der VL.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
-<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Balassa-Samuelson und systematische KKP-Abweichungen"; siehe die übrigen Rezept-Schritte.</p>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
-<div class="theory-recipe-body">
-<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Balassa-Samuelson und systematische KKP-Abweichungen"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [

@@ -11,6 +11,7 @@ import {
   normalizeTheoryHtml,
   completeTheoryRecipe,
   auditTheoryRecipeSteps,
+  countTheoryRecipeCards,
   theoryToHtml
 } from '../../assets/js/portal-core/theory/theoryStructure.js';
 
@@ -140,7 +141,11 @@ function buildMergeEntry(contentEntry, curriculumEntry) {
 
 function processTheoryPipeline(beforeHtml, mergeEntry, chapterTitle) {
   const normalized = normalizeTheoryHtml(beforeHtml);
-  const after = completeTheoryRecipe(normalized, mergeEntry, { chapterTitle });
+  const after = completeTheoryRecipe(normalized, mergeEntry, {
+    chapterTitle,
+    headerMotivationShown: true,
+    headerObjectivesShown: Boolean(mergeEntry?.objectives?.length)
+  });
   return {
     after,
     auditBefore: auditTheoryRecipeSteps(beforeHtml),
@@ -185,6 +190,7 @@ async function processChaptersFile(slug) {
   let beforeFilledTotal = 0;
   let afterFilledTotal = 0;
   let afterPlaceholderTotal = 0;
+  let afterCardTotal = 0;
   let conceptCount = 0;
 
   const persistedRecipe = {};
@@ -213,6 +219,7 @@ async function processChaptersFile(slug) {
     if (auditBefore.structuralEight) beforeStructural++;
     if (auditAfter.structuralEight) afterStructural++;
     afterPlaceholderTotal += auditAfter.placeholderCount;
+    afterCardTotal += countTheoryRecipeCards(after);
 
     const changed = after !== before;
 
@@ -288,6 +295,7 @@ async function processChaptersFile(slug) {
     avgFilledBefore: conceptCount ? Math.round((beforeFilledTotal / conceptCount) * 10) / 10 : 0,
     avgFilledAfter: conceptCount ? Math.round((afterFilledTotal / conceptCount) * 10) / 10 : 0,
     avgPlaceholdersAfter: conceptCount ? Math.round((afterPlaceholderTotal / conceptCount) * 10) / 10 : 0,
+    avgCardsAfter: conceptCount ? Math.round((afterCardTotal / conceptCount) * 10) / 10 : 0,
     rows
   };
 }

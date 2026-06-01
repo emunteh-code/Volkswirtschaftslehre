@@ -142,9 +142,19 @@ export function renderMath(el) {
 
   normalizeGermanCopy(target);
 
+  const typesetRoots = () => {
+    const roots = [target]
+    if (target.querySelectorAll) {
+      target.querySelectorAll(".formula-card .math-block, .formula-herleitung-math .math-block").forEach((node) => {
+        if (!roots.includes(node)) roots.push(node)
+      })
+    }
+    return roots
+  }
+
   const typeset = () => {
     if (window.MathJax?.typesetPromise) {
-      MathJax.typesetPromise([target]).catch((error) => console.warn("MathJax:", error));
+      MathJax.typesetPromise(typesetRoots()).catch((error) => console.warn("MathJax:", error));
     }
   };
 

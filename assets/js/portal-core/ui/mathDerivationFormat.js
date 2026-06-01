@@ -8,6 +8,9 @@
  *
  * **Pass Budgetmenge:** Exactly two clauses separated by `\qquad`, each an equality chain, become
  * a two-row `aligned` block — one row per LHS family (paired repeated-left-hand-side / parallel intercepts).
+ *
+ * **Pass GRS (2026-05-31):** Split only on top-level ` = ` (outside `{…}`), so subscripts like
+ * `_{\,u = \bar{u}}` are not broken into fake chains that yield MathJax "misplaced &".
  */
 
 /** At least three segments ⇒ at least two `=` signs in the chain. */
@@ -20,6 +23,61 @@ export const LAYOUT_CHAINED_EQUALITY = 'chained-equality-candidate'
 
 /** Class B/C/D / mixed: do not apply generic &= breaking. */
 export const LAYOUT_PRESERVE_AS_AUTHORED = 'preserve-as-authored'
+
+/**
+ * Split on spaced ` = ` only outside TeX `{…}` groups.
+ * @param {string} innerLatex stripped math (no $$ / $ delimiters)
+ * @returns {string[]}
+ */
+export function splitTopLevelChainedEquals(innerLatex) {
+  const s = String(innerLatex ?? '')
+  const parts = []
+  let buf = ''
+  let depth = 0
+
+  for (let i = 0; i < s.length; i += 1) {
+    const ch = s[i]
+    if (ch === '{') {
+      depth += 1
+      buf += ch
+      continue
+    }
+    if (ch === '}') {
+      depth = Math.max(0, depth - 1)
+      buf += ch
+      continue
+    }
+    if (ch === '=' && depth === 0) {
+      const before = s[i - 1] ?? ''
+      const after = s[i + 1] ?? ''
+      if (/\s/.test(before) && /\s/.test(after)) {
+        const seg = buf.trim()
+        if (seg) parts.push(seg)
+        buf = ''
+        i += 1
+        while (i < s.length && /\s/.test(s[i])) i += 1
+        i -= 1
+        continue
+      }
+    }
+    buf += ch
+  }
+
+  const tail = buf.trim()
+  if (tail) parts.push(tail)
+  return parts
+}
+
+function segmentsHaveBalancedBraces(segs) {
+  return segs.every((seg) => {
+    let depth = 0
+    for (const ch of seg) {
+      if (ch === '{') depth += 1
+      else if (ch === '}') depth = Math.max(0, depth - 1)
+    }
+    return depth === 0
+  })
+}
 
 /**
  * Heuristic: segment starts a *new* named quantity (second budget intercept, new head), not a
@@ -56,8 +114,8 @@ function tryFormatPairedQquadDoubleChain(innerLatex) {
 
   const rows = []
   for (const part of parts) {
-    const segs = part.split(/\s+=\s+/).map((p) => p.trim()).filter(Boolean)
-    if (segs.length < 2) return null
+    const segs = splitTopLevelChainedEquals(part)
+    if (segs.length < 2 || !segmentsHaveBalancedBraces(segs)) return null
     rows.push(`${segs[0]} &= ${segs.slice(1).join(' = ')}`)
   }
 
@@ -78,8 +136,10 @@ export function classifyEquationLayoutFamily(innerLatex) {
   // Class D: parallel presentation almost always uses \qquad between clauses
   if (/\\qquad/.test(s)) return LAYOUT_PRESERVE_AS_AUTHORED
 
-  const segs = s.split(/\s+=\s+/).map((p) => p.trim()).filter(Boolean)
-  if (segs.length < MIN_SEGMENTS_FOR_CHAIN) return LAYOUT_PRESERVE_AS_AUTHORED
+  const segs = splitTopLevelChainedEquals(s)
+  if (segs.length < MIN_SEGMENTS_FOR_CHAIN || !segmentsHaveBalancedBraces(segs)) {
+    return LAYOUT_PRESERVE_AS_AUTHORED
+  }
 
   for (let i = 1; i < segs.length; i += 1) {
     // \quad inside a “between-equals” segment usually means parallel layout (e.g. x1 max … x2 max)
@@ -108,7 +168,9 @@ export function formatChainedEqualitiesForDisplay(innerLatex) {
     return s
   }
 
-  const segs = s.split(/\s+=\s+/).map((p) => p.trim()).filter(Boolean)
+  const segs = splitTopLevelChainedEquals(s)
+  if (!segmentsHaveBalancedBraces(segs)) return s
+
   const shouldBreak = segs.length >= 4 || s.length >= MIN_CHARS_FOR_THREE_PART_CHAIN
 
   if (!shouldBreak) return s

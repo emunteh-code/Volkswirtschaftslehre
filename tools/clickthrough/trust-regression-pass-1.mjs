@@ -221,6 +221,100 @@ async function runFormelnAlwaysVisible(page) {
   }
 }
 
+/** --- Formula card bodies: no MathJax error text (e.g. misplaced &) --- */
+const FORMULA_EQ_INTEGRITY = [
+  { route: '/mikro1/index.html', id: 'grs', label: 'mikro1/grs/formeln', cardLabel: 'GRS Definition' },
+  { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/formeln', cardLabel: 'Budgetgerade' }
+];
+
+async function runFormulaEquationIntegrity(page) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const t of FORMULA_EQ_INTEGRITY) {
+    await gotoConcept(page, t.route, t.id);
+    const opened = await clickTab(page, 'formeln');
+    if (!opened) {
+      fail({
+        system: 'formula-eq-integrity',
+        route: t.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'tab-missing',
+        why: 'Cannot open Formeln tab for formula equation integrity scan.'
+      });
+      continue;
+    }
+    await page.waitForTimeout(1600);
+    const snap = await page.evaluate((cardLabel) => {
+      const cards = [...document.querySelectorAll('#content .formula-card')];
+      const card = cards.find((el) => (el.querySelector('.f-label')?.textContent || '').includes(cardLabel));
+      if (!card) return { missingCard: true };
+      const eq = card.querySelector('.f-eq');
+      const text = (eq?.textContent || '').trim();
+      return {
+        missingCard: false,
+        missingEq: !eq,
+        text: text.slice(0, 240),
+        misplaced: /misplaced\s*&/i.test(text),
+        typeset: Boolean(eq?.querySelector('mjx-container')),
+        hasGrs: /GRS/i.test(text),
+        hasFrac: /dx|∂|∣|‖/i.test(text) || Boolean(eq?.querySelector('mjx-container mjx-mfrac'))
+      };
+    }, t.cardLabel);
+    if (snap.missingCard) {
+      fail({
+        system: 'formula-eq-integrity',
+        route: t.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-card-missing',
+        why: `Expected formula card with label containing "${t.cardLabel}".`
+      });
+      continue;
+    }
+    if (snap.missingEq) {
+      fail({
+        system: 'formula-eq-integrity',
+        route: t.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-eq-missing',
+        why: 'Formula card has no .f-eq block.'
+      });
+      continue;
+    }
+    if (snap.misplaced) {
+      fail({
+        system: 'formula-eq-integrity',
+        route: t.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-eq-mathjax-error',
+        why: `Formula equation shows MathJax error text: "${snap.text}"`
+      });
+    }
+    if (!snap.typeset) {
+      fail({
+        system: 'formula-eq-integrity',
+        route: t.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-eq-not-typeset',
+        why: `Expected MathJax typesetting in .f-eq; got "${snap.text}"`
+      });
+    }
+    if (t.id === 'grs' && (!snap.hasGrs || snap.text.length < 8)) {
+      fail({
+        system: 'formula-eq-integrity',
+        route: t.label,
+        surface: 'formeln',
+        viewport: '1280',
+        type: 'formula-eq-truncated',
+        why: `GRS Definition equation looks truncated: "${snap.text}"`
+      });
+    }
+  }
+}
+
 /** --- Header math: no semantic fragmentation; unicode titles should typeset --- */
 const HEADER_MATH_CASES = [
   { route: '/mikro1/index.html', id: 'lambda', tab: 'theorie', label: 'mikro1/lambda/theorie' },
@@ -966,22 +1060,22 @@ async function runSolutionReveal(page) {
 async function runExamDrillToggle(page) {
   await page.setViewportSize({ width: 1280, height: 900 });
   await gotoConcept(page, '/mikro1/index.html', 'budget');
-  const okInt = await clickTab(page, 'intuition');
-  if (!okInt) {
+  const okAufgaben = await clickTab(page, 'aufgaben');
+  if (!okAufgaben) {
     fail({
       system: 'interaction-pruefungstransfer',
-      route: 'mikro1/budget/intuition',
-      surface: 'intuition',
+      route: 'mikro1/budget/aufgaben',
+      surface: 'aufgaben',
       viewport: '1280',
       type: 'tab-missing',
-      why: 'Intuition tab missing for drill scan.'
+      why: 'Aufgaben tab missing for exam drill scan.'
     });
     return;
   }
   await page.waitForTimeout(500);
   const drillBtn = page.locator('[id^="examDrillBtn_"]').first();
   if ((await drillBtn.count()) === 0) {
-    /* Not all concepts expose drills on intuition — skip without failure */
+    /* Not all concepts expose drills on Aufgaben — skip without failure */
     return;
   }
   await drillBtn.click();
@@ -993,8 +1087,8 @@ async function runExamDrillToggle(page) {
   if (!expanded) {
     fail({
       system: 'interaction-pruefungstransfer',
-      route: 'mikro1/budget/intuition',
-      surface: 'intuition',
+      route: 'mikro1/budget/aufgaben',
+      surface: 'aufgaben',
       viewport: '1280',
       type: 'exam-drill-not-opening',
       why: 'examDrill toggle did not open solution — __toggleExamDrill / renderer parity risk.'
@@ -1544,6 +1638,7 @@ try {
   await runMathLeak(page);
   await runTheoryBodyMathIntegrity(page);
   await runHeaderMathIntegrity(page);
+  await runFormulaEquationIntegrity(page);
   await runProvenance(page);
   await runAufgabenPracticeOnly(page);
   await runFormelnKlausurmethodik(page);

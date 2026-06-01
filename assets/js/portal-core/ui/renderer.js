@@ -871,8 +871,8 @@ ${renderGuidedTasks(tasks)}`;
   function renderKlausurmethodikField(label, contentHtml, variant = "") {
     if (!contentHtml) return "";
     const variantClass = variant ? ` klausurmethodik-field--${variant}` : "";
-    return `<div class="klausurmethodik-field${variantClass}">
-<span class="klausurmethodik-label">${label}</span>
+    return `<div class="formula-support-field klausurmethodik-field${variantClass}">
+<span class="formula-support-field-label klausurmethodik-label">${label}</span>
 ${contentHtml}
 </div>`;
   }
@@ -960,9 +960,9 @@ ${timeMeta ? `<span class="klausurmethodik-time">${renderSemanticPlainText(timeM
 ${renderKlausurmethodikDifficultyChip(family.difficulty)}
 </summary>
 <div class="klausurmethodik-card-body">
-${renderKlausurmethodikField("Ziel", ziel ? `<p class="klausurmethodik-text">${renderSemanticPlainText(ziel)}</p>` : "", "ziel")}
+${renderKlausurmethodikField("Ziel", ziel ? `<p class="formula-support-field-body klausurmethodik-text">${renderSemanticPlainText(ziel)}</p>` : "", "ziel")}
 ${renderKlausurmethodikField("Vorgehen", vorgehenHtml, "vorgehen")}
-${renderKlausurmethodikField("Typische Klausurfrage", typicalQuestion ? `<p class="klausurmethodik-text">${renderSemanticPlainText(typicalQuestion)}</p>` : "", "frage")}
+${renderKlausurmethodikField("Typische Klausurfrage", typicalQuestion ? `<p class="formula-support-field-body klausurmethodik-text">${renderSemanticPlainText(typicalQuestion)}</p>` : "", "frage")}
 ${renderKlausurmethodikField("Häufiger Fehler", trapHtml, "fehler")}
 ${family.officialTaskGap ? renderStudentTaskGapNote(family.officialTaskGap) : ""}
 ${sourceFootnote}
@@ -1148,9 +1148,8 @@ ${math}
 
     const { titleHtml } = renderFormulaSupportBlockHead(card);
 
-    return `<article class="formula-herleitung-block">
+    return `<article class="formula-support-card formula-herleitung-block">
 <div class="formula-herleitung-head">
-<span class="formula-herleitung-kicker">Ableitung</span>
 <h4 class="formula-herleitung-title">${titleHtml}</h4>
 </div>
 ${anchor}
@@ -1182,20 +1181,15 @@ ${stepsHtml}
 
     if (!groups.length && !shortcut && !anchorBadge) return "";
 
-    const trapIcon = `<span class="formula-einsatzgrenzen-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>`;
-
     const { titleHtml, subtitleHtml } = renderFormulaSupportBlockHead(card, {
       includeSubtitle: true,
       subtitleClass: "formula-einsatzgrenzen-subtitle"
     });
 
-    return `<article class="formula-einsatzgrenzen-block">
+    return `<article class="formula-support-card formula-einsatzgrenzen-block">
 <div class="formula-einsatzgrenzen-head">
-${trapIcon}
-<div class="formula-einsatzgrenzen-head-text">
 <h4 class="formula-einsatzgrenzen-title">${titleHtml}</h4>
 ${subtitleHtml}
-</div>
 </div>
 <div class="formula-einsatzgrenzen-body">
 ${groups.join("")}

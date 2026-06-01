@@ -2703,10 +2703,6 @@ body.light-mode #content .formula-card {
   color: color-mix(in srgb, var(--accent2) 78%, var(--text) 22%);
 }
 
-#content .formula-tab-section--limits .formula-tab-section-head h3 {
-  color: color-mix(in srgb, var(--warning-title) 72%, var(--text) 28%);
-}
-
 #content .formula-tab-section-lead {
   margin: 0;
   color: var(--muted);
@@ -2752,7 +2748,49 @@ body.light-mode #content .formula-card {
 }
 
 #content .formula-support-heading--limits {
-  color: color-mix(in srgb, var(--warning-title) 72%, var(--text) 28%);
+  color: inherit;
+}
+
+/* ── Formeln tab: one family, four roles (shared support-card shell) ─── */
+
+#content .formula-support-card {
+  position: relative;
+  margin: 0;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-width: 0;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  background: var(--card);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 22%, transparent);
+}
+
+body.light-mode #content .formula-support-card {
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 30%, transparent);
+}
+
+#content .formula-support-field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+#content .formula-support-field-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content .formula-support-field-body {
+  margin: 0;
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1.58;
+  min-width: 0;
 }
 
 #content .formula-herleitung-stack,
@@ -2762,47 +2800,33 @@ body.light-mode #content .formula-card {
 }
 
 #content .formula-herleitung-block {
-  margin: 0;
-  padding: clamp(14px, 2.5vw, 18px) clamp(14px, 3vw, 20px);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--math-ink) 22%);
-  border-left: 4px solid color-mix(in srgb, var(--math-ink-deep, var(--math-ink)) 70%, var(--accent) 30%);
-  border-radius: 0 var(--r-md, 12px) var(--r-md, 12px) 0;
-  background: color-mix(in srgb, var(--card) 90%, var(--math-ink) 6%);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 55%, transparent);
+  border-left: 3px solid color-mix(
+    in srgb,
+    var(--module-accent, var(--accent)) 40%,
+    var(--border) 60%
+  );
 }
 
 #content .formula-herleitung-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 12px;
-  margin-bottom: 10px;
-}
-
-#content .formula-herleitung-kicker {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--math-ink) 12%, var(--surface) 88%);
-  color: color-mix(in srgb, var(--math-ink) 78%, var(--text) 22%);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  margin: 0;
 }
 
 #content .formula-herleitung-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 12px;
   line-height: 1.35;
   font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text) 22%);
 }
 
 #content .formula-herleitung-anchor {
-  margin: 0 0 10px;
-  padding: 8px 0 10px 12px;
-  border-left: 3px solid color-mix(in srgb, var(--math-ink) 55%, transparent);
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, var(--text) 16%);
+  background: color-mix(in srgb, var(--card) 99%, var(--surface2) 1%);
 }
 
 #content .formula-herleitung-anchor .math-block {
@@ -2841,14 +2865,13 @@ body.light-mode #content .formula-card {
 }
 
 #content .formula-herleitung-step-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--math-ink) 14%, var(--surface) 86%);
-  color: color-mix(in srgb, var(--math-ink) 82%, var(--text) 18%);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface2) 89%);
+  color: var(--accent);
   font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
@@ -2876,8 +2899,10 @@ body.light-mode #content .formula-card {
 }
 
 #content .formula-herleitung-math {
-  padding: 4px 0 2px 10px;
-  border-left: 2px solid color-mix(in srgb, var(--math-ink) 35%, transparent);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--surface2) 28%, transparent);
 }
 
 #content .formula-herleitung-math .math-block {
@@ -2885,63 +2910,39 @@ body.light-mode #content .formula-card {
 }
 
 #content .formula-einsatzgrenzen-block {
-  margin: 0;
-  padding: clamp(14px, 2.5vw, 18px) clamp(14px, 3vw, 20px);
-  border: 1px solid var(--warning-border);
-  border-radius: var(--r-md, 12px);
-  background: linear-gradient(
-    165deg,
-    color-mix(in srgb, var(--warning-surface) 92%, var(--card) 8%) 0%,
-    color-mix(in srgb, var(--warning-surface-soft) 88%, var(--card) 12%) 100%
-  );
-  box-shadow: var(--warning-shadow);
-  color: var(--warning-body);
+  border-left: 3px solid color-mix(in srgb, var(--sys-orange, #d97706) 48%, var(--border) 52%);
 }
 
 #content .formula-einsatzgrenzen-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-#content .formula-einsatzgrenzen-head-text {
-  min-width: 0;
-  flex: 1;
+  margin: 0;
 }
 
 #content .formula-einsatzgrenzen-subtitle {
-  margin: 4px 0 0;
-  font-size: 13px;
-  line-height: 1.5;
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.58;
   font-weight: 450;
-  color: color-mix(in srgb, var(--warning-body) 88%, var(--warning-title) 12%);
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
   max-width: 68ch;
-}
-
-#content .formula-einsatzgrenzen-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: var(--warning-icon-surface);
-  color: var(--warning-title);
-  flex-shrink: 0;
 }
 
 #content .formula-einsatzgrenzen-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 12px;
   line-height: 1.35;
   font-weight: 650;
-  color: var(--warning-title);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text) 22%);
 }
 
 #content .formula-einsatzgrenzen-body {
   display: grid;
   gap: 12px;
+}
+
+#content .formula-einsatzgrenzen-group {
+  min-width: 0;
 }
 
 #content .formula-einsatzgrenzen-group-title {
@@ -2950,7 +2951,7 @@ body.light-mode #content .formula-card {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--warning-title) 80%, var(--warning-body) 20%);
+  color: var(--muted);
 }
 
 #content .formula-einsatzgrenzen-list {
@@ -2958,15 +2959,40 @@ body.light-mode #content .formula-card {
   padding-left: 1.15rem;
   font-size: 13.5px;
   line-height: 1.55;
+  color: var(--text);
 }
 
 #content .formula-einsatzgrenzen-list li + li {
   margin-top: 5px;
 }
 
+#content .formula-einsatzgrenzen-group--fails,
+#content .formula-einsatzgrenzen-group--mistakes {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--warning-border) 42%, var(--border) 58%);
+  border-left: 3px solid color-mix(in srgb, var(--sys-orange, #d97706) 52%, var(--border) 48%);
+  background: color-mix(in srgb, var(--warning-surface) 10%, var(--card) 90%);
+}
+
 #content .formula-einsatzgrenzen-group--fails .formula-einsatzgrenzen-group-title,
 #content .formula-einsatzgrenzen-group--mistakes .formula-einsatzgrenzen-group-title {
-  color: var(--warning-title);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: color-mix(in srgb, var(--sys-orange, #d97706) 70%, var(--text) 30%);
+}
+
+#content .formula-einsatzgrenzen-group--fails .formula-einsatzgrenzen-group-title::before,
+#content .formula-einsatzgrenzen-group--mistakes .formula-einsatzgrenzen-group-title::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.72;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E") center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 #content .formula-einsatzgrenzen-shortcut,
@@ -2974,11 +3000,12 @@ body.light-mode #content .formula-card {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.55;
-  color: color-mix(in srgb, var(--warning-body) 90%, var(--muted) 10%);
+  color: var(--muted);
 }
 
 #content .formula-einsatzgrenzen-shortcut strong {
-  color: var(--warning-title);
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+  font-weight: 650;
 }
 
 #content .task-family-layer {
@@ -2990,12 +3017,13 @@ body.light-mode #content .formula-card {
 #content .klausurmethodik-panel,
 #content .formula-klausurmethodik {
   margin: 0;
-  padding: clamp(18px, 2.5vw, 22px) clamp(16px, 2.5vw, 20px);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg, 16px);
-  background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: none;
 }
 
 #content .formula-tab-section--methodik .formula-tab-section-head h3 {
@@ -3048,16 +3076,16 @@ body.light-mode #content .formula-card {
 #content .task-family-card {
   display: block;
   min-width: 0;
-  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 12%);
-  border-radius: var(--r-md, 12px);
-  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 22%, transparent);
   overflow: hidden;
 }
 
 #content .klausurmethodik-accordion[open] {
-  border-color: color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
-  box-shadow: var(--shadow-sm);
+  border-color: color-mix(in srgb, var(--border) 86%, var(--text) 14%);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 28%, transparent);
 }
 
 #content .klausurmethodik-accordion-head {
@@ -3137,12 +3165,14 @@ body.light-mode #content .formula-card {
   border-top: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
 }
 
-#content .klausurmethodik-field {
+#content .klausurmethodik-field.formula-support-field,
+#content .formula-support-field.klausurmethodik-field {
   display: grid;
   gap: 6px;
 }
 
-#content .klausurmethodik-label {
+#content .klausurmethodik-label,
+#content .klausurmethodik-field .formula-support-field-label {
   color: var(--muted);
   font-size: 11px;
   font-weight: 800;
@@ -3150,10 +3180,11 @@ body.light-mode #content .formula-card {
   text-transform: uppercase;
 }
 
-#content .klausurmethodik-text {
+#content .klausurmethodik-text,
+#content .klausurmethodik-field .formula-support-field-body {
   margin: 0;
   color: var(--text);
-  font-size: var(--type-sm, 0.8125rem);
+  font-size: 13.5px;
   line-height: 1.58;
 }
 
@@ -3162,7 +3193,7 @@ body.light-mode #content .formula-card {
   margin: 0;
   padding-left: 18px;
   color: var(--text);
-  font-size: var(--type-sm, 0.8125rem);
+  font-size: 13.5px;
   line-height: 1.58;
 }
 
@@ -3171,8 +3202,16 @@ body.light-mode #content .formula-card {
   margin-top: 6px;
 }
 
+#content .klausurmethodik-field--fehler {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--warning-border) 42%, var(--border) 58%);
+  border-left: 3px solid color-mix(in srgb, var(--sys-orange, #d97706) 52%, var(--border) 48%);
+  background: color-mix(in srgb, var(--warning-surface) 10%, var(--card) 90%);
+}
+
 #content .klausurmethodik-list--traps li {
-  color: color-mix(in srgb, var(--sys-orange, #ff9500) 72%, var(--text) 28%);
+  color: var(--text);
 }
 
 #content .klausurmethodik-gap-note {
@@ -6842,5 +6881,65 @@ body.light-mode #content .source-provenance-mark {
   font-size: 0.8125rem;
   color: var(--muted);
   line-height: 1.5;
+}
+
+/* Theory tab — recipe-book sections (fleet-wide) */
+#content .theory-recipe-section {
+  margin-bottom: 18px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+#content .theory-recipe-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+  line-height: 1.35;
+}
+
+#content .theory-recipe-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+}
+
+#content .theory-recipe-body > .section-block {
+  margin-bottom: 12px;
+}
+
+#content .theory-recipe-body > .section-block:last-child {
+  margin-bottom: 0;
+}
+
+#content .theory-subsection-title {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+#content .theory-pre-task-checklist {
+  margin: 0 0 10px;
+  padding-left: 1.2rem;
+}
+
+#content .theory-pre-task-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
 }
 

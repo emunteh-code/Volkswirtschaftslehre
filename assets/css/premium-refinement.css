@@ -639,8 +639,8 @@ body:not(.light-mode) #rightPanel #rpMistakes .rp-mistake--rail:hover {
 
 #content .graph-container .ctrl-group label {
   color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%);
-  letter-spacing: 0.1em;
-  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+  font-size: 0.72rem;
 }
 
 /* Canvas = inset stage, not a nested card */
@@ -4999,13 +4999,62 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 }
 
 #content .graph-container .ctrl-group label {
-  font-size: 0.62rem !important;
-  letter-spacing: 0.09em !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.07em !important;
 }
 
 #content .graph-container .ctrl-group .val {
-  font-size: 10.5px !important;
-  opacity: 0.88;
+  font-size: 11.5px !important;
+  opacity: 0.92;
+}
+
+#content .graph-panel-subtitle {
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.45 !important;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%) !important;
+}
+
+#content .graph-control-hint {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  font-size: 0.8rem !important;
+  line-height: 1.4 !important;
+  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%) !important;
+}
+
+#content .graph-pedagogy-footer {
+  margin-top: 10px !important;
+  padding: 12px 0 4px !important;
+  border-top: 1px dashed color-mix(in srgb, var(--border) 58%, transparent) !important;
+}
+
+#content .graph-pedagogy-prompt {
+  margin: 0 0 8px !important;
+  font-size: 0.86rem !important;
+  line-height: 1.45 !important;
+  color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%) !important;
+}
+
+#content .graph-pedagogy-label {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--accent-soft, rgba(59, 130, 246, 0.12)) 100%, transparent);
+  color: var(--accent-strong, var(--accent));
+}
+
+#content .graph-pedagogy-notation {
+  margin: 0 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.4 !important;
+  color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%) !important;
 }
 
 /* Graph stage = hero (default graphs; Makro macro-focus shells keep engine heights) */

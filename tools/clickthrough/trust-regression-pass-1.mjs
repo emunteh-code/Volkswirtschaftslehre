@@ -795,6 +795,7 @@ async function runMikro1SourceCompanion(page) {
 /** --- Graph shell integrity --- */
 const GRAPH_CASES = [
   { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/graph' },
+  { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch/graph' },
   { route: '/makro1/index.html', id: 'islm', label: 'makro1/islm/graph' },
   { route: '/makro2/index.html', id: 'mundell_fleming', label: 'makro2/mundell_fleming/graph' },
   { route: '/statistik/index.html', id: 'bivariat', label: 'statistik/bivariat/graph' },
@@ -825,13 +826,19 @@ async function runGraphIntegrity(page, w, h, vpLabel) {
       const canvas = document.querySelector('#content #graph_canvas');
       const title = document.querySelector('#content .graph-panel-title');
       const err = document.querySelector('#content .empty-state-error');
+      const pedagogy = document.querySelector('#content .graph-pedagogy-footer');
+      const info = document.querySelector('#content #graph_info');
       const r = canvas?.getBoundingClientRect();
       return {
         hasCanvas: !!canvas,
         cw: r?.width || 0,
         ch: r?.height || 0,
         titleLen: (title?.textContent || '').trim().length,
-        errText: (err?.textContent || '').trim()
+        errText: (err?.textContent || '').trim(),
+        hasPedagogyFooter: !!pedagogy,
+        pedagogyLen: (pedagogy?.textContent || '').trim().length,
+        hasGraphInfo: !!info,
+        canvasAria: (canvas?.getAttribute('aria-label') || '').trim().length
       };
     });
     if (!res.hasCanvas || res.cw < 80 || res.ch < 80) {
@@ -862,6 +869,36 @@ async function runGraphIntegrity(page, w, h, vpLabel) {
         viewport: vpLabel,
         type: 'render-error-visible',
         why: `Empty-state error visible: ${res.errText}`
+      });
+    }
+    if (!res.hasPedagogyFooter || res.pedagogyLen < 20) {
+      fail({
+        system: 'graph-integrity',
+        route: g.label,
+        surface: 'graph',
+        viewport: vpLabel,
+        type: 'graph-pedagogy-footer-missing',
+        why: 'Fleet graph pedagogy footer (Vorhersage + Theorie-Link) missing or empty.'
+      });
+    }
+    if (!res.hasGraphInfo) {
+      fail({
+        system: 'graph-integrity',
+        route: g.label,
+        surface: 'graph',
+        viewport: vpLabel,
+        type: 'graph-info-mount-missing',
+        why: '#graph_info live interpretation mount missing.'
+      });
+    }
+    if (res.canvasAria < 12) {
+      fail({
+        system: 'graph-integrity',
+        route: g.label,
+        surface: 'graph',
+        viewport: vpLabel,
+        type: 'canvas-aria-missing',
+        why: 'Canvas aria-label too short for screen-reader graph description.'
       });
     }
   }

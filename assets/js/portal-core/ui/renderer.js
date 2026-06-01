@@ -30,6 +30,7 @@ import {
   renderOfficialMaterialsNoticeHtml,
   sourcePdfOpenDisabledByDefault
 } from "../utils/deployEnvironment.js";
+import { ensureGraphPedagogyChrome } from "./graphPedagogy.js";
 
 const HOME_ACTION_ACTIVATE = (handler) =>
   `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
@@ -1387,6 +1388,7 @@ ${motivationStrip}
           headerHTML + `<div class="panel active">${objectivesBlock}${theorySignals.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
+        ensureGraphPedagogyChrome(conceptId, content);
         if (initGraphFn) initGraphFn(conceptId);
       } else if (activeTab === "aufgaben") {
         const masteryHtml = renderMastery(conceptId);

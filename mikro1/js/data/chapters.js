@@ -345,7 +345,7 @@ export const CONTENT = {
 `,
  formeln: [
  { label:'Indifferenzkurve', eq: String.raw`$$\{\,(x_1, x_2) \in \mathbb{R}^2_+ \mid u(x_1, x_2) = \bar{u}\,\}$$`, desc:'Niveaumenge für konstantes ū', variables: { 'u(x_1,x_2)': 'Nutzenfunktion', '\\bar{u}': 'Konstantes Nutzenniveau' } },
- { label:'Beispiel (CD)', eq: String.raw`$$x_2 = \frac{\bar{u}}{x_1}$$`, desc:'Explizite Form bei u = x₁·x₂', variables: { 'x_2': 'Menge Gut 2', '\\bar{u}': 'Nutzenniveau', 'x_1': 'Menge Gut 1' } },
+ { label:'Beispiel (CD)', eq: String.raw`$$x_2 = \frac{\bar{u}}{x_1}$$`, desc:'Explizite Form bei $u = x_1 \\cdot x_2$', variables: { 'x_2': 'Menge Gut 2', '\\bar{u}': 'Nutzenniveau', 'x_1': 'Menge Gut 1' } },
  ],
  aufgaben: [
  {
@@ -431,7 +431,7 @@ export const CONTENT = {
 `,
  formeln: [
  { label:'GRS Definition', eq: String.raw`$$GRS = \left|\frac{dx_2}{dx_1}\right|_{\,u = \bar{u}}$$`, desc:'Betrag der Steigung der Indifferenzkurve', variables: { '\\left|\\tfrac{dx_2}{dx_1}\\right|': 'Betrag der Steigung der IK', '\\bar{u}': 'Konstantes Nutzenniveau' } },
- { label:'GRS via Grenznutzen', eq: String.raw`$$GRS = \frac{MU_1}{MU_2} = \frac{\partial u/\partial x_1}{\partial u/\partial x_2}$$`, desc:'Verhältnis der partiellen Ableitungen', variables: { 'MU_1': 'Grenznutzen Gut 1 = ∂u/∂x₁', 'MU_2': 'Grenznutzen Gut 2 = ∂u/∂x₂' } },
+ { label:'GRS via Grenznutzen', eq: String.raw`$$GRS = \frac{MU_1}{MU_2} = \frac{\partial u/\partial x_1}{\partial u/\partial x_2}$$`, desc:'Verhältnis der partiellen Ableitungen', variables: { 'MU_1': 'Grenznutzen Gut 1 = $\\partial u/\\partial x_1$', 'MU_2': 'Grenznutzen Gut 2 = $\\partial u/\\partial x_2$' } },
  ],
  aufgaben: [
  {

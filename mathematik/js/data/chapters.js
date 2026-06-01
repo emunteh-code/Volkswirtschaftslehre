@@ -1,5 +1,6 @@
 import { CURRICULUM } from './curriculum.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
+import { normalizeTheoryHtml } from '../../../assets/js/portal-core/theory/theoryStructure.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -41,11 +42,14 @@ ${entry.warnings.map((item) => `<div class="warn-box"><strong>${escapeHtml(item.
 }
 
 function renderTheoryHtml(entry) {
-  return [
+  const raw = [
     renderCards(entry),
     renderSections(entry),
     renderWarnings(entry)
-  ].filter(Boolean).join('');
+  ]
+    .filter(Boolean)
+    .join('');
+  return normalizeTheoryHtml(raw);
 }
 
 export const CHAPTERS = CURRICULUM.map(({ id, title, cat, short }) => ({

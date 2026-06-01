@@ -56,24 +56,50 @@ export const CHAPTERS = [
 export const CONTENT = {
   zahlungsbilanz: {
     motivation: 'Die Zahlungsbilanz ist die Buchhaltung der offenen Volkswirtschaft. Wer Leistungsbilanz, Kapitalbilanz und Nettoauslandsvermögen nicht sauber trennt, stolpert später bei Wechselkursen, Fiskalpolitik und Schuldenfragen.',
-    theorie: [
-      section('Buchhaltungssystem der offenen Volkswirtschaft', `
-        <p>Die Zahlungsbilanz zerlegt alle Transaktionen mit dem Ausland in Leistungsbilanz, Kapitalbilanz und gegebenenfalls Reserveveränderungen. Didaktisch wichtig ist: Es geht nicht zuerst um "gut" oder "schlecht", sondern um saubere Gegenbuchungen.</p>
-        ${math(String.raw`$$LB + KB + \Delta R = 0$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Buchhaltungssystem der offenen Volkswirtschaft</h4>
+<p>Die Zahlungsbilanz zerlegt alle Transaktionen mit dem Ausland in Leistungsbilanz, Kapitalbilanz und gegebenenfalls Reserveveränderungen. Didaktisch wichtig ist: Es geht nicht zuerst um "gut" oder "schlecht", sondern um saubere Gegenbuchungen.</p>
+        <div class="math-block">$$LB + KB + \\Delta R = 0$$</div>
         <p>Ein Leistungsbilanzdefizit heißt also nicht "Fehler", sondern: Es wird spiegelbildlich durch Kapitalzuflüsse oder Reserveabbau finanziert.</p>
-      `),
-      section('Leistungsbilanz, Ersparnis und Nettoauslandsvermögen', `
-        <p>Die Leistungsbilanz ist eng mit dem makroökonomischen Spar-Investitions-Saldo verbunden. Dauerhafte Defizite bedeuten: Das Land baut Nettoverbindlichkeiten gegenüber dem Ausland auf.</p>
-        ${math(String.raw`$$LB = S - I = NX + NI + NCT$$`)}
-        ${math(String.raw`$$\Delta NAV = LB$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Leistungsbilanz, Ersparnis und Nettoauslandsvermögen</h4>
+<p>Die Leistungsbilanz ist eng mit dem makroökonomischen Spar-Investitions-Saldo verbunden. Dauerhafte Defizite bedeuten: Das Land baut Nettoverbindlichkeiten gegenüber dem Ausland auf.</p>
+        <div class="math-block">$$LB = S - I = NX + NI + NCT$$</div>
+        <div class="math-block">$$\\Delta NAV = LB$$</div>
         <p>Für Klausuren ist entscheidend, ob gerade über Warenhandel, Primäreinkommen oder Finanzierung gesprochen wird.</p>
-      `),
-      section('Prüfungslogik', `
-        <p>Bei Transaktionsaufgaben immer in dieser Reihenfolge denken: Was passiert realwirtschaftlich? Welche Teilbilanz wird direkt berührt? Welche Gegenbuchung spiegelt die Finanzierung?</p>
-        ${warn('Leistungsbilanz vs. Handelsbilanz', 'Die Handelsbilanz ist nur ein Teil der Leistungsbilanz. Zinsen, Dividenden und Transfers können den Leistungsbilanzsaldo trotz ausgeglichener Warenströme verändern.')}
-        ${warn('Vorzeichen der Kapitalbilanz', 'Prüfen Sie immer die im Kurs verwendete Definition. Manche Skripte schreiben Kapitalimporte positiv, andere definieren Nettokapitalexporte positiv.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Leistungsbilanz und Finanzierung</h4>
+<p>Die Leistungsbilanz misst Waren-, Dienstleistungs- und Einkommensströme mit dem Ausland. Ein Defizit bedeutet: Die Volkswirtschaft konsumiert/ investiert mehr als sie spart — spiegelbildlich Kapitalimporte.</p>
+      <div class="math-block">$$CA + KA + \\Delta R = 0$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungslogik</h4>
+<p>Bei Transaktionsaufgaben immer in dieser Reihenfolge denken: Was passiert realwirtschaftlich? Welche Teilbilanz wird direkt berührt? Welche Gegenbuchung spiegelt die Finanzierung?</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Leistungsbilanz vs. Handelsbilanz:</strong> Die Handelsbilanz ist nur ein Teil der Leistungsbilanz. Zinsen, Dividenden und Transfers können den Leistungsbilanzsaldo trotz ausgeglichener Warenströme verändern.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Vorzeichen der Kapitalbilanz:</strong> Prüfen Sie immer die im Kurs verwendete Definition. Manche Skripte schreiben Kapitalimporte positiv, andere definieren Nettokapitalexporte positiv.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurfall: Transaktion zuordnen</h4>
+<p>Export von Maschinen → Leistungsbilanz; Kauf ausländischer Anleihen → Kapitalbilanz. Immer Gegenbuchung nennen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Handelsbilanz:</strong> Handelsbilanz ⊂ Leistungsbilanz; Zins- und Transferströme können den Saldo drehen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Regime → Kanal (Güter/Geld/Außen) → Wirkung auf $Y$, $i$ oder $\\varepsilon$.</p>
+      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-II-VL; offene-Volkswirtschafts-Randnotation in Primär-PDFs.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Zahlungsbilanzidentität', eq: String.raw`$$LB + KB + \Delta R = 0$$`, desc: 'Gesamtbuchhaltung der offenen Volkswirtschaft', variables: { 'LB': 'Leistungsbilanz', 'KB': 'Kapitalbilanz', '\\Delta R': 'Reserveveränderung' } },
       { label: 'Sparen und Investieren', eq: String.raw`$$LB = S - I$$`, desc: 'Makroökonomische Deutung des Leistungsbilanzsaldos', variables: { 'S': 'Ersparnis', 'I': 'Investitionen' } },
@@ -94,23 +120,53 @@ export const CONTENT = {
 
   wechselkurs: {
     motivation: 'Makro II arbeitet durchgehend mit Wechselkursnotation. Wer hier Mengennotierung, reale Auf- und Abwertung und Preisniveaulogik unsauber hält, verliert den Faden in PPP, UIP und Mundell-Fleming.',
-    theorie: [
-      section('Nominaler Wechselkurs in Mengen- und Preisnotierung', `
-        <p>Im Kurs wird mit der <strong>Mengennotierung</strong> gearbeitet: $E$ gibt an, wie viele Einheiten ausländischer Währung eine Einheit inländischer Währung kauft. Deshalb bedeutet $E \\uparrow$ eine nominale Aufwertung des Inlands.</p>
-        ${math(String.raw`$$E = \frac{\text{Fremdwährung}}{\text{Inlandswährung}}$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Nominaler Wechselkurs in Mengen- und Preisnotierung</h4>
+<p>Im Kurs wird mit der <strong>Mengennotierung</strong> gearbeitet: $E$ gibt an, wie viele Einheiten ausländischer Währung eine Einheit inländischer Währung kauft. Deshalb bedeutet $E \\uparrow$ eine nominale Aufwertung des Inlands.</p>
+        <div class="math-block">$$E = \\frac{\\text{Fremdwährung}}{\\text{Inlandswährung}}$$</div>
         <p>Wer zwischen Mengen- und Preisnotierung wechselt, muss die Richtung ökonomischer Aussagen sofort anpassen.</p>
-      `),
-      section('Realer Wechselkurs und Wettbewerbsfähigkeit', `
-        <p>Der reale Wechselkurs kombiniert nominalen Kurs und Preisniveaus. Er misst, wie teuer inländische Güter im Vergleich zu ausländischen Gütern sind.</p>
-        ${math(String.raw`$$\varepsilon = \frac{E \cdot P}{P^*}$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Realer Wechselkurs und Wettbewerbsfähigkeit</h4>
+<p>Der reale Wechselkurs kombiniert nominalen Kurs und Preisniveaus. Er misst, wie teuer inländische Güter im Vergleich zu ausländischen Gütern sind.</p>
+        <div class="math-block">$$\\varepsilon = \\frac{E \\cdot P}{P^*}$$</div>
         <p>Eine reale Aufwertung bedeutet: Inlandsproduktion wird relativ teuer, Nettoexporte geraten unter Druck. Eine reale Abwertung verbessert ceteris paribus die preisliche Wettbewerbsfähigkeit.</p>
-      `),
-      section('Klausurzugriff', `
-        <p>Bei Kursaufgaben zuerst die Notation fixieren, dann nominale und reale Bewegung trennen und erst danach ökonomisch interpretieren.</p>
-        ${warn('Notierung nicht verwechseln', 'Im Kurs bedeutet ein Anstieg von $E$ in Mengennotierung Aufwertung. In Preisnotierung wäre die Richtung genau umgekehrt.')}
-        ${warn('Nominal ist nicht real', 'Ein konstanter nominaler Wechselkurs kann mit unterschiedlicher Inflation trotzdem zu realer Auf- oder Abwertung führen.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Nominal vs. real</h4>
+<p>Der nominale Wechselkurs $E$ gibt Preis der ausländischen Währung; der reale Wechselkurs $\\varepsilon = E P^*/P$ berücksichtigt Preisniveaus.</p>
+      <div class="math-block">$$\\varepsilon = \\frac{E P^*}{P}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Appreciation und Wettbewerbsfähigkeit</h4>
+<p>Eine nominale Aufwertung bei gegebenen Preisniveaus verschlechtert die relative Wettbewerbsfähigkeit und drückt typischerweise $NX$.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Bei Kursaufgaben zuerst die Notation fixieren, dann nominale und reale Bewegung trennen und erst danach ökonomisch interpretieren.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Notierung nicht verwechseln:</strong> Im Kurs bedeutet ein Anstieg von $E$ in Mengennotierung Aufwertung. In Preisnotierung wäre die Richtung genau umgekehrt.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nominal ist nicht real:</strong> Ein konstanter nominaler Wechselkurs kann mit unterschiedlicher Inflation trotzdem zu realer Auf- oder Abwertung führen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Regime → Kanal (Güter/Geld/Außen) → Wirkung auf $Y$, $i$ oder $\\varepsilon$.</p>
+      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-II-VL; offene-Volkswirtschafts-Randnotation in Primär-PDFs.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Nominaler Wechselkurs', eq: String.raw`$$E = \frac{\text{Einheiten Ausland}}{\text{1 Einheit Inland}}$$`, desc: 'Mengennotierung', variables: { 'E': 'Nominaler Wechselkurs' } },
       { label: 'Realer Wechselkurs', eq: String.raw`$$\varepsilon = \frac{E \cdot P}{P^*}$$`, desc: 'Preisliche Wettbewerbsfähigkeit', variables: { 'P': 'Preisniveau Inland', 'P^*': 'Preisniveau Ausland' } }
@@ -139,23 +195,53 @@ export const CONTENT = {
 
   kaufkraftparitaet: {
     motivation: 'PPP ist der Brückensatz zwischen Preisniveaus und Wechselkursen. In Makro II wird damit sauber zwischen Niveauaussagen, Änderungsraten und systematischen Abweichungen unterschieden.',
-    theorie: [
-      section('Absolute Kaufkraftparität', `
-        <p>Die absolute PPP behauptet: Ein identischer Güterkorb kostet, nach Umrechnung über den Wechselkurs, in beiden Ländern gleich viel.</p>
-        ${math(String.raw`$$E_{PPP} = \frac{P^*}{P}$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Absolute Kaufkraftparität</h4>
+<p>Die absolute PPP behauptet: Ein identischer Güterkorb kostet, nach Umrechnung über den Wechselkurs, in beiden Ländern gleich viel.</p>
+        <div class="math-block">$$E_{PPP} = \\frac{P^*}{P}$$</div>
         <p>Sie ist ein Niveaukonzept. Für Klausuren ist wichtig, dass absolute PPP eher ein Referenzwert als eine exakte Kurzfristprognose ist.</p>
-      `),
-      section('Relative Kaufkraftparität', `
-        <p>Relative PPP betrachtet nicht Niveaus, sondern Änderungsraten. Der nominale Wechselkurs muss langfristig ungefähr um die Inflationsdifferenz reagieren.</p>
-        ${math(String.raw`$$\frac{\Delta E}{E} \approx \pi^* - \pi$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Relative Kaufkraftparität</h4>
+<p>Relative PPP betrachtet nicht Niveaus, sondern Änderungsraten. Der nominale Wechselkurs muss langfristig ungefähr um die Inflationsdifferenz reagieren.</p>
+        <div class="math-block">$$\\frac{\\Delta E}{E} \\approx \\pi^* - \\pi$$</div>
         <p>Diese Form ist empirisch plausibler und besonders klausurrelevant, wenn nach Auf- oder Abwertungsdruck bei unterschiedlichen Inflationsraten gefragt wird.</p>
-      `),
-      section('Grenzen und typische Abweichungen', `
-        <p>Nicht handelbare Güter, Transportkosten, Marktmacht und Produktivitätsunterschiede verhindern, dass PPP kurzfristig exakt gilt. Der Big-Mac-Index ist nützlich, aber kein vollwertiger Fehlbewertungsbeweis.</p>
-        ${warn('Absolute vs. relative PPP', 'Absolute PPP ist ein Niveauvergleich, relative PPP eine Aussage über Inflationsdifferenzen. Beide dürfen in Aufgaben nicht vermischt werden.')}
-        ${warn('Big-Mac nicht überdeuten', 'Wenn lokale Löhne, Mieten oder Steuern stark differieren, kann der Big-Mac-Index vom Marktkurs abweichen, ohne dass der Kurs "falsch" sein muss.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Relative PPP und Inflation</h4>
+<p>Relative PPP verknüpft Wechselkursänderung mit Inflationsdifferenz: höhere Inlandsinflation → Abwertungsdruck.</p>
+      <div class="math-block">$$\\hat{E} \\approx \\pi - \\pi^*$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Grenzen und typische Abweichungen</h4>
+<p>Nicht handelbare Güter, Transportkosten, Marktmacht und Produktivitätsunterschiede verhindern, dass PPP kurzfristig exakt gilt. Der Big-Mac-Index ist nützlich, aber kein vollwertiger Fehlbewertungsbeweis.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Absolute vs. relative PPP:</strong> Absolute PPP ist ein Niveauvergleich, relative PPP eine Aussage über Inflationsdifferenzen. Beide dürfen in Aufgaben nicht vermischt werden.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Big-Mac nicht überdeuten:</strong> Wenn lokale Löhne, Mieten oder Steuern stark differieren, kann der Big-Mac-Index vom Marktkurs abweichen, ohne dass der Kurs "falsch" sein muss.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Absolute PPP</h4>
+<p>Absolute Kaufkraftparität: gleiche Preisniveaus implizieren $E = P/P^*$. Langfristige Niveauaussage, kurzfristig oft verletzt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Regime → Kanal (Güter/Geld/Außen) → Wirkung auf $Y$, $i$ oder $\\varepsilon$.</p>
+      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-II-VL; offene-Volkswirtschafts-Randnotation in Primär-PDFs.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Absolute PPP', eq: String.raw`$$E_{PPP} = \frac{P^*}{P}$$`, desc: 'PPP-Kurs aus Preisniveaus', variables: { 'P': 'Preisniveau Inland', 'P^*': 'Preisniveau Ausland' } },
       { label: 'Relative PPP', eq: String.raw`$$\hat E \approx \pi^* - \pi$$`, desc: 'Änderungsratenform', variables: { '\\pi': 'Inflation Inland', '\\pi^*': 'Inflation Ausland' } }
@@ -175,23 +261,55 @@ export const CONTENT = {
 
   zinsparitaet: {
     motivation: 'Die ungedeckte Zinsparität ist die Arbitragegleichung der offenen Makro. Sie verknüpft Zinsdifferenzen, Wechselkurserwartungen und die unmittelbare Kursreaktion.',
-    theorie: [
-      section('Exakte UIP', `
-        <p>Bei perfekter Kapitalmobilität müssen erwartete Renditen in In- und Auslandswährung gleich sein. Sonst gäbe es eine risikolose Arbitragemöglichkeit.</p>
-        ${math(String.raw`$$1 + i_t = (1 + i_t^*) \frac{E_t}{E_{t+1}^e}$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Exakte UIP</h4>
+<p>Bei perfekter Kapitalmobilität müssen erwartete Renditen in In- und Auslandswährung gleich sein. Sonst gäbe es eine risikolose Arbitragemöglichkeit.</p>
+        <div class="math-block">$$1 + i_t = (1 + i_t^*) \\frac{E_t}{E_{t+1}^e}$$</div>
         <p>Ein scheinbar hoher Inlandszins ist deshalb kein Geschenk, sondern kompensiert eine erwartete Abwertung oder geringere erwartete Aufwertung.</p>
-      `),
-      section('Approximation und ökonomische Lesart', `
-        <p>Für kleine Zinssätze wird die Beziehung meist linear geschrieben:</p>
-        ${math(String.raw`$$i_t - i_t^* \approx - \frac{E_{t+1}^e - E_t}{E_t}$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Approximation und ökonomische Lesart</h4>
+<p>Für kleine Zinssätze wird die Beziehung meist linear geschrieben:</p>
+        <div class="math-block">$$i_t - i_t^* \\approx - \\frac{E_{t+1}^e - E_t}{E_t}$$</div>
         <p>Je höher der Inlandszins relativ zum Ausland, desto stärker muss aus Sicht der Märkte ein künftiger Kursverlust des Inlands eingepreist sein.</p>
-      `),
-      section('Klausurzugriff', `
-        <p>Rechnen Sie UIP-Aufgaben immer in drei Schritten: Erwartungen identifizieren, Arbitragegleichung aufstellen, Vorzeichen in Mengennotierung deuten.</p>
-        ${warn('Hoher Zins heißt nicht starke Währung', 'Ein hoher Inlandszins signalisiert bei UIP gerade nicht automatisch Attraktivität, sondern oft erwartete Abwertung.')}
-        ${warn('Erwarteter Kurs vs. aktueller Kurs', 'Viele Fehler entstehen, weil $E_t$ und $E_{t+1}^e$ vertauscht werden. Erst sauber notieren, dann umstellen.')}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Die exakte UIP $1+i = (1+i^*)E_t/E_{t+1}^e$ folgt aus risikoloser Arbitrage: Anleger sind indifferent zwischen Inlands- und Auslandsanlage. Bei erwarteter Abwertung muss der Inlandszins höher sein, um Kapitalexporte zu kompensieren. In der VL wird UIP oft mit Mundell-Fleming und ZP-Kurve kombiniert — Kapitalbilanz reagiert auf $i-i^*$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">UIP-Logik</h4>
+<p>Ungedeckte Zinsparität: erwartete Abwertung kompensiert Zinsdifferenz; bei hoher Kapitalmobilität $i \\approx i^* + \\mathbb{E}[\\Delta E/E]$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Geldpolitik unter UIP</h4>
+<p>Zinssenkung bei flexiblem Kurs → Abwertungserwartung → sofortige Abwertung → NX-Stützung des Gütermarkts.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Rechnen Sie UIP-Aufgaben immer in drei Schritten: Erwartungen identifizieren, Arbitragegleichung aufstellen, Vorzeichen in Mengennotierung deuten.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Hoher Zins heißt nicht starke Währung:</strong> Ein hoher Inlandszins signalisiert bei UIP gerade nicht automatisch Attraktivität, sondern oft erwartete Abwertung.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Erwarteter Kurs vs. aktueller Kurs:</strong> Viele Fehler entstehen, weil $E_t$ und $E_{t+1}^e$ vertauscht werden. Erst sauber notieren, dann umstellen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: UIP</h4>
+<p>Rechnen: $i-i^* \\approx -(E^e-E)/E$ in Mengennotierung. Hoher Inlandszins → erwartete Abwertung kompensiert. Geldpolitik unter flex: Zinssenkung → sofortige Abwertung → NX↑. Immer $E_t$ vs. $E_{t+1}^e$ trennen.</p><div class="warn-box" data-warning-placement="rail"><strong>UIP ist keine Prognose:</strong> UIP beschreibt Arbitragegleichgewicht, nicht kausal „Zins bestimmt Kurs". Erwartungen und Risikoprämien können UIP verletzen.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Exakte UIP', eq: String.raw`$$1 + i_t = (1 + i_t^*) \frac{E_t}{E_{t+1}^e}$$`, desc: 'Arbitragegleichgewicht', variables: { 'i_t': 'Inlandszins', 'i_t^*': 'Auslandszins', 'E_t': 'Aktueller WK', 'E_{t+1}^e': 'Erwarteter WK' } },
       { label: 'Approximative UIP', eq: String.raw`$$i_t - i_t^* \approx - \frac{E_{t+1}^e - E_t}{E_t}$$`, desc: 'Zinsdifferenz = erwartete Abwertungsrate', variables: {} }
@@ -220,22 +338,52 @@ export const CONTENT = {
 
   offene_is: {
     motivation: 'Der offene Gütermarkt erweitert die geschlossene Makro um Exportnachfrage, Importe und Multiplikatorleckagen. Genau hier beginnt der Übergang von Binnenlogik zu offener Makroökonomie.',
-    theorie: [
-      section('Nachfrage nach inländischen Gütern', `
-        <p>Im offenen Gütermarkt interessiert nicht bloß die Gesamtnachfrage, sondern die Nachfrage nach inländischer Produktion. Exporte kommen hinzu, Importe sind ein Nachfrageleck.</p>
-        ${math(String.raw`$$Y = C(Y-T) + I(Y,i) + G + X(Y^*,\varepsilon) - \frac{IM(Y,\varepsilon)}{\varepsilon}$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Nachfrage nach inländischen Gütern</h4>
+<p>Im offenen Gütermarkt interessiert nicht bloß die Gesamtnachfrage, sondern die Nachfrage nach inländischer Produktion. Exporte kommen hinzu, Importe sind ein Nachfrageleck.</p>
+        <div class="math-block">$$Y = C(Y-T) + I(Y,i) + G + X(Y^*,\\varepsilon) - \\frac{IM(Y,\\varepsilon)}{\\varepsilon}$$</div>
         <p>Die offene IS-Kurve ist deshalb flacher oder der Multiplikator kleiner als in der geschlossenen Volkswirtschaft.</p>
-      `),
-      section('Importleckagen und Multiplikator', `
-        <p>Steigt das Einkommen, steigen meist auch die Importe. Ein Teil jeder zusätzlichen Nachfrage läuft damit ins Ausland ab.</p>
-        ${math(String.raw`$$m_{offen} = \frac{1}{1 - c_1 - b_1 + q_1}$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Importleckagen und Multiplikator</h4>
+<p>Steigt das Einkommen, steigen meist auch die Importe. Ein Teil jeder zusätzlichen Nachfrage läuft damit ins Ausland ab.</p>
+        <div class="math-block">$$m_{offen} = \\frac{1}{1 - c_1 - b_1 + q_1}$$</div>
         <p>Je größer die marginale Importquote $q_1$, desto kleiner die inländische Produktionsreaktion auf Fiskalimpulse.</p>
-      `),
-      section('Ökonomische Interpretation', `
-        <p>Offene Makro heißt deshalb immer Mitdenken der Außenwirkung: Fiskalpolitik steigert oft die Produktion, aber gleichzeitig verschlechtert höheres Einkommen die Handelsbilanz.</p>
-        ${warn('DD ist nicht ZZ', 'Die Inlandsnachfragekurve DD und die Nachfrage nach inländischen Gütern ZZ sind nicht identisch. ZZ berücksichtigt Nettoexporte und liegt deshalb flacher.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">ZZ-Kurve und Inlandsnachfrage</h4>
+<p>Die Nachfrage nach inländischen Gütern (ZZ) ist flacher als die Gesamtnachfrage (DD), weil Importe mit $Y$ steigen.</p>
+      <div class="math-block">$$Y = C(Y-T) + I + G + NX(Y^*,\\varepsilon)$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Ökonomische Interpretation</h4>
+<p>Offene Makro heißt deshalb immer Mitdenken der Außenwirkung: Fiskalpolitik steigert oft die Produktion, aber gleichzeitig verschlechtert höheres Einkommen die Handelsbilanz.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>DD ist nicht ZZ:</strong> Die Inlandsnachfragekurve DD und die Nachfrage nach inländischen Gütern ZZ sind nicht identisch. ZZ berücksichtigt Nettoexporte und liegt deshalb flacher.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Multiplikator mit Importleckage</h4>
+<p>Marginale Importquote $m$ reduziert den Multiplikator: $1/(1-c_1-m)$ statt $1/(1-c_1)$.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Schock aus dem Ausland:</strong> Boom im Ausland ($Y^*$↑) wirkt über Exporte expansiv auf $Y$.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Offener Gütermarkt</h4>
+<p>Antwortschema: (1) ZZ-Gleichung aufschreiben mit NX-Kanal. (2) Multiplikator $1/(1-c_1-b_1+q_1)$ — Importleckage $q_1$ senkt Wirkung. (3) Fiskalimpuls: DD/ZZ nach rechts, aber Importe steigen mit $Y$. (4) Auslandsschock über $Y^*$: Exportkanal. Nie DD mit ZZ verwechseln.</p><div class="warn-box" data-warning-placement="rail"><strong>Multiplikator geschlossen vs. offen:</strong> Der geschlossene Multiplikator $1/(1-c_1)$ überschätzt die Wirkung: Importe sind eine Leckage aus dem Inland.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Offenes Gütermarktgleichgewicht', eq: String.raw`$$Y = C + I + G + NX$$`, desc: 'Gleichgewicht der Nachfrage nach inländischen Gütern', variables: { 'NX': 'Nettoexporte' } },
       { label: 'Offener Multiplikator', eq: String.raw`$$\frac{\partial Y}{\partial G} = \frac{1}{1 - c_1 - b_1 + q_1}$$`, desc: 'Importe dämpfen die Multiplikatorwirkung', variables: { 'q_1': 'Marginale Importquote' } }
@@ -245,21 +393,53 @@ export const CONTENT = {
 
   nettoexporte: {
     motivation: 'Nettoexporte sind das Gelenk zwischen Wechselkurs, Auslandskonjunktur und inländischer Nachfrage. Genau über sie laufen viele offene Schocks in Output und Beschäftigung hinein.',
-    theorie: [
-      section('Determinanten der Nettoexporte', `
-        <p>Nettoexporte steigen typischerweise mit der Auslandsnachfrage, sinken mit dem Inlandseinkommen und reagieren auf den realen Wechselkurs.</p>
-        ${math(String.raw`$$NX = X(Y^*, \varepsilon) - \frac{IM(Y,\varepsilon)}{\varepsilon}$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Determinanten der Nettoexporte</h4>
+<p>Nettoexporte steigen typischerweise mit der Auslandsnachfrage, sinken mit dem Inlandseinkommen und reagieren auf den realen Wechselkurs.</p>
+        <div class="math-block">$$NX = X(Y^*, \\varepsilon) - \\frac{IM(Y,\\varepsilon)}{\\varepsilon}$$</div>
         <p>Eine reale Abwertung macht Inlandsgüter billiger und wirkt damit exportfördernd sowie importdämpfend.</p>
-      `),
-      section('Transmissionskette', `
-        <p>In der offenen Makro laufen viele Politik- und Finanzmarkteffekte über den Wechselkurskanal: $i \\rightarrow E \\rightarrow \\varepsilon \\rightarrow NX \\rightarrow Y$.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Transmissionskette</h4>
+<p>In der offenen Makro laufen viele Politik- und Finanzmarkteffekte über den Wechselkurskanal: $i \\rightarrow E \\rightarrow \\varepsilon \\rightarrow NX \\rightarrow Y$.</p>
         <p>Deshalb muss in Regimefragen stets geklärt werden, ob der Wechselkurs reagieren darf oder politisch fixiert wird.</p>
-      `),
-      section('Klausurzugriff', `
-        <p>Fragen nach Nettoexporten sind selten nur Rechenaufgaben. Meist wird eine Richtungskette verlangt: Welcher Schock trifft welche Größe zuerst und wie wirkt das auf NX?</p>
-        ${warn('Y und Y* nicht verwechseln', 'Inlandseinkommen erhöht meist die Importe und drückt NX. Auslandsnachfrage erhöht Exporte und stärkt NX. Die Vorzeichen sind daher gegensätzlich.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Im Mundell-Fleming-System ist $NX$ der zentrale Gütermarkt-Übertragungskanal der Geldpolitik unter flexiblen Kursen: $M\\uparrow \\Rightarrow i\\downarrow \\Rightarrow E\\uparrow \\text{ (Abwertung)} \\Rightarrow \\varepsilon\\downarrow \\Rightarrow NX\\uparrow \\Rightarrow Y\\uparrow$. Bei Fiskalpolitik unter flex läuft die Kette oft umgekehrt über Aufwertung. Zeichne diese Kette immer explizit — nicht nur „NX steigt".</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Komparative Statik</h4>
+<p>$NX$ steigt mit $Y^*$ und realer Abwertung ($\\varepsilon\\uparrow$), fällt mit $Y$ (Importe).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">J-Kurve Kurzhinweis</h4>
+<p>Kurzfristig kann $NX$ nach Abwertung sinken (Verträge in Fremdwährung), mittelfristig steigt $NX$ (Marshall-Lerner).</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Fragen nach Nettoexporten sind selten nur Rechenaufgaben. Meist wird eine Richtungskette verlangt: Welcher Schock trifft welche Größe zuerst und wie wirkt das auf NX?</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Y und Y* nicht verwechseln:</strong> Inlandseinkommen erhöht meist die Importe und drückt NX. Auslandsnachfrage erhöht Exporte und stärkt NX. Die Vorzeichen sind daher gegensätzlich.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Nettoexporte</h4>
+<p>Standardpfad: Schock identifizieren ($Y$, $Y^*$, $\\varepsilon$, $i$) → Vorzeichen auf $X$ und $IM$ → $NX$-Shift → IS/ZZ-Verschiebung. Reale Abwertung ($\\varepsilon\\downarrow$ in Preisnotierung) stützt $NX$ langfristig (Marshall-Lerner), kurzfristig evtl. J-Kurve.</p><div class="warn-box" data-warning-placement="rail"><strong>Nominal vs. real:</strong> NX-Reaktionen laufen über den realen Wechselkurs $\\varepsilon = EP^*/P$. Nur nominale Kursänderung ohne Preisniveau reicht nicht.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Nettoexportfunktion', eq: String.raw`$$NX = X(Y^*,\varepsilon) - \frac{IM(Y,\varepsilon)}{\varepsilon}$$`, desc: 'Gütermarktkanal der offenen Volkswirtschaft', variables: { 'Y': 'Inlandseinkommen', 'Y^*': 'Auslandseinkommen', '\\varepsilon': 'Realer WK' } }
     ],
@@ -278,22 +458,59 @@ export const CONTENT = {
 
   marshall_lerner: {
     motivation: 'Eine Abwertung verbessert die Handelsbilanz nicht automatisch. Marshall-Lerner und J-Kurve trennen sauber zwischen langfristigen Elastizitätseffekten und kurzfristigen Vertragseffekten.',
-    theorie: [
-      section('Langfristbedingung', `
-        <p>Die Marshall-Lerner-Bedingung beschreibt, wann eine reale Abwertung die Handelsbilanz verbessert: Die Mengenreaktionen müssen den negativen Preiseffekt überwiegen.</p>
-        ${math(String.raw`$$|\eta_X| + |\eta_M| > 1$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Langfristbedingung</h4>
+<p>Die Marshall-Lerner-Bedingung beschreibt, wann eine reale Abwertung die Handelsbilanz verbessert: Die Mengenreaktionen müssen den negativen Preiseffekt überwiegen.</p>
+        <div class="math-block">$$|\\eta_X| + |\\eta_M| > 1$$</div>
         <p>Ökonomisch heißt das: Exporte und Importe müssen stark genug auf relative Preisänderungen reagieren.</p>
-      `),
-      section('J-Kurve', `
-        <p>Kurzfristig sind Mengen oft träge. Dann wird zuerst nur die bestehende Importrechnung teurer, bevor Mengen angepasst werden. Genau daraus entsteht die J-Kurve.</p>
-        ${math(String.raw`$$\frac{\partial NX}{\partial \varepsilon} < 0$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">J-Kurve</h4>
+<p>Kurzfristig sind Mengen oft träge. Dann wird zuerst nur die bestehende Importrechnung teurer, bevor Mengen angepasst werden. Genau daraus entsteht die J-Kurve.</p>
+        <div class="math-block">$$\\frac{\\partial NX}{\\partial \\varepsilon} < 0$$</div>
         <p>In Mengennotierung bedeutet eine Abwertung ein Sinken von $\\varepsilon$; wenn Marshall-Lerner gilt, steigt dann $NX$.</p>
-      `),
-      section('Fehleranalyse', `
-        ${warn('Langfristig vs. kurzfristig', 'Marshall-Lerner ist eine Langfristaussage über Elastizitäten. Für die unmittelbare Wirkung nach einer Abwertung muss zuerst an die J-Kurve gedacht werden.')}
-        ${warn('Vorzeichen in Mengennotierung', 'In der hier verwendeten Notation ist eine Abwertung ein Rückgang von $\\varepsilon$. Wer das übersieht, interpretiert Ableitungen schnell falsch.')}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Die Handelsbilanz $NX = p_X X - p_M M$ reagiert auf $\\varepsilon$ über Preis- und Mengeneffekt. Abwertung: Exporte billiger (Mengen↑), Importe teurer (Mengen↓). Marshall-Lerner: Summe der Elastizitäten > 1, damit Mengeneffekt den Preiseffekt überwiegt. J-Kurve: kurzfristig dominieren Preise bei fixen Verträgen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Bedingung</h4>
+<p>Marshall-Lerner: $| \\eta_X + \\eta_M | > 1$ für eine reale Abwertung, die $NX$ verbessert.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">J-Kurve</h4>
+<p>Zeitverzögerung: kurzfristig Preise fix → Handelsbilanz kann sich verschlechtern, später Mengenreaktion dominiert.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Marshall-Lerner</h4>
+<p>Langfrist: $|\\eta_X|+|\\eta_M|>1$ für Handelsbilanzverbesserung nach Abwertung. Kurzfrist: J-Kurve — Mengen träge, Importrechnung teurer → NX kann sinken. Klausur: beide Horizonte nennen, nicht nur eine Formel.</p><div class="warn-box" data-warning-placement="rail"><strong>Elastizitäten schätzen:</strong> In Aufgaben ohne gegebene Elastizitäten: qualitative Argumentation (Verträge, Anpassungszeit) statt willkürlicher Zahlen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Langfristig vs. kurzfristig:</strong> Marshall-Lerner ist eine Langfristaussage über Elastizitäten. Für die unmittelbare Wirkung nach einer Abwertung muss zuerst an die J-Kurve gedacht werden.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Vorzeichen in Mengennotierung:</strong> In der hier verwendeten Notation ist eine Abwertung ein Rückgang von $\\varepsilon$. Wer das übersieht, interpretiert Ableitungen schnell falsch.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Marshall-Lerner-Bedingung', eq: String.raw`$$|\eta_X| + |\eta_M| > 1$$`, desc: 'Langfristige Verbesserung der Handelsbilanz nach Abwertung', variables: { '\\eta_X': 'Preiselastizität der Exporte', '\\eta_M': 'Preiselastizität der Importe' } },
       { label: 'Richtungseffekt', eq: String.raw`$$\frac{\partial NX}{\partial \varepsilon} < 0$$`, desc: 'Bei Mengennotierung verbessert fallendes $\\varepsilon$ die Handelsbilanz', variables: {} }
@@ -322,21 +539,53 @@ export const CONTENT = {
 
   geldmengen: {
     motivation: 'Auch in Makro II bleibt der Geldmarkt zentral: Wechselkurse, UIP und Taylor-Regel setzen voraus, dass Zinssteuerung und LM-Logik sicher beherrscht werden.',
-    theorie: [
-      section('Geldmarktgleichgewicht', `
-        <p>Die reale Geldnachfrage steigt mit Einkommen und sinkt mit dem Zinssatz. Das Gleichgewicht am Geldmarkt verknüpft reale Geldmenge, Aktivität und Zins.</p>
-        ${math(String.raw`$$\frac{M}{P} = Y \cdot L(i)$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Geldmarktgleichgewicht</h4>
+<p>Die reale Geldnachfrage steigt mit Einkommen und sinkt mit dem Zinssatz. Das Gleichgewicht am Geldmarkt verknüpft reale Geldmenge, Aktivität und Zins.</p>
+        <div class="math-block">$$\\frac{M}{P} = Y \\cdot L(i)$$</div>
         <p>In der linearen Standardform ergibt sich daraus eine positiv geneigte LM-Kurve: Höheres Einkommen erzeugt mehr Transaktionsnachfrage und damit ceteris paribus höheren Zins.</p>
-      `),
-      section('Geldpolitik und offener Zusammenhang', `
-        <p>Eine expansive Geldpolitik verschiebt die LM-Kurve nach rechts bzw. unten. In der offenen Volkswirtschaft wird daraus über UIP und Wechselkurs ein zusätzlicher Außenkanal.</p>
-        ${math(String.raw`$$i = \frac{k}{h}Y - \frac{1}{h}\frac{M}{P}$$`)}
-      `),
-      section('Klausurzugriff', `
-        <p>Aufgaben fragen oft nicht nur nach der Richtung der LM-Verschiebung, sondern nach der kombinierten Reaktion von Zins, Wechselkurs und Output.</p>
-        ${warn('Nominal ist nicht real', 'Maßgeblich ist die reale Geldmenge $M/P$. Eine steigende Preisstufe kann die reale Geldmenge trotz konstantem $M$ verknappen.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Geldpolitik und offener Zusammenhang</h4>
+<p>Eine expansive Geldpolitik verschiebt die LM-Kurve nach rechts bzw. unten. In der offenen Volkswirtschaft wird daraus über UIP und Wechselkurs ein zusätzlicher Außenkanal.</p>
+        <div class="math-block">$$i = \\frac{k}{h}Y - \\frac{1}{h}\\frac{M}{P}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Die LM-Kurve entsteht aus $M/P = YL(i)$. Steigt $Y$, steigt Transaktionsnachfrage → bei gegebener $M/P$ muss $i$ steigen (Ausgleich). In offener VW koppelt LM über UIP an $E$ und $NX$. Liquiditätsfalle: $L_i \\to \\infty$ bei $i \\to 0$ — LM horizontal, klassische Geldpolitik wirkungslos, Fiskalpolitik wirksam (Keynes).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">LM in offener VW</h4>
+<p>Bei perfekter Kapitalmobilität und flexiblem Kurs ist LM effektiv horizontal bei $i=i^*$; Geldpolitik wirkt über $E$ und $NX$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zinssteuerung vs. Geldmenge</h4>
+<p>Moderne Zentralbanken steuern oft den Leitzins; im Modell ist das eine Verschiebung von LM bzw. Akkommodation am Geldmarkt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Aufgaben fragen oft nicht nur nach der Richtung der LM-Verschiebung, sondern nach der kombinierten Reaktion von Zins, Wechselkurs und Output.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nominal ist nicht real:</strong> Maßgeblich ist die reale Geldmenge $M/P$. Eine steigende Preisstufe kann die reale Geldmenge trotz konstantem $M$ verknappen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: LM und offene VW</h4>
+<p>LM: $M/P = YL(i)$ → $i = (k/h)Y - (1/h)(M/P)$. Geldpolitik: $M↑$ → $i↓$ → unter flex: Abwertung → NX↑. Real vs. nominal: nur $M/P$ wirkt. Liquiditätsfalle: horizontale LM, Geldpolitik wirkungslos.</p><div class="warn-box" data-warning-placement="rail"><strong>LM-Verschiebung vs. Drehung:</strong> Geldmenge verschiebt LM parallel; Einkommensschock bewegt entlang LM (höheres $Y$ → höheres $i$ ceteris paribus).</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Geldmarktgleichgewicht', eq: String.raw`$$\frac{M}{P} = Y \cdot L(i)$$`, desc: 'Reale Geldmenge = reale Geldnachfrage', variables: { 'M/P': 'Reale Geldmenge', 'L(i)': 'Liquiditätspräferenz' } },
       { label: 'Lineare LM', eq: String.raw`$$i = \frac{k}{h}Y - \frac{1}{h}\frac{M}{P}$$`, desc: 'Zins als Funktion von Einkommen und realer Geldmenge', variables: { 'k': 'Einkommenssensitivität', 'h': 'Zinssensitivität' } }
@@ -356,21 +605,54 @@ export const CONTENT = {
 
   mundell_fleming: {
     motivation: 'Mundell-Fleming ist das Standardmodell der kleinen offenen Volkswirtschaft. Es zeigt, warum das gleiche Politiktool unter flexiblem und festem Wechselkurs völlig unterschiedlich wirkt.',
-    theorie: [
-      section('Drei Märkte in einem System', `
-        <p>Das Modell verbindet offenen Gütermarkt, Geldmarkt und Außenbeziehung. Für flexible Wechselkurse ist vor allem die Kombination aus IS, LM und UIP zentral.</p>
-        ${math(String.raw`$$Y = C + I + G + NX(\varepsilon, Y, Y^*)$$`)}
-        ${math(String.raw`$$\frac{M}{P} = YL(i)$$`)}
-        ${math(String.raw`$$1+i = (1+i^*)\frac{E}{E^e}$$`)}
-      `),
-      section('Flexible Wechselkurse', `
-        <p>Bei flexiblem Wechselkurs ist Geldpolitik stark: Eine Zinssenkung löst Abwertung aus, verbessert Nettoexporte und stabilisiert den Gütermarkt. Fiskalpolitik verpufft stärker, weil höhere Zinsen Aufwertungsdruck erzeugen.</p>
-      `),
-      section('Klausurzugriff', `
-        <p>Fragen zu Mundell-Fleming sind fast immer Regimefragen. Nennen Sie zuerst das Wechselkursregime, dann den Finanzmarktkanal, dann die Gütermarktfolge.</p>
-        ${warn('Nicht mit geschlossener IS-LM verwechseln', 'In der offenen Volkswirtschaft kann derselbe Fiskal- oder Geldimpuls über den Wechselkurs zusätzliche Gegen- oder Verstärkungseffekte auslösen.')}
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Drei Märkte in einem System</h4>
+<p>Das Modell verbindet offenen Gütermarkt, Geldmarkt und Außenbeziehung. Für flexible Wechselkurse ist vor allem die Kombination aus IS, LM und UIP zentral.</p>
+        <div class="math-block">$$Y = C + I + G + NX(\\varepsilon, Y, Y^*)$$</div>
+        <div class="math-block">$$\\frac{M}{P} = YL(i)$$</div>
+        <div class="math-block">$$1+i = (1+i^*)\\frac{E}{E^e}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Flexible Wechselkurse</h4>
+<p>Bei flexiblem Wechselkurs ist Geldpolitik stark: Eine Zinssenkung löst Abwertung aus, verbessert Nettoexporte und stabilisiert den Gütermarkt. Fiskalpolitik verpufft stärker, weil höhere Zinsen Aufwertungsdruck erzeugen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Das $(Y,i)$-Diagramm mit IS, LM und ggf. ZP ist das Standardwerkzeug. Unter flex: IS-Verschiebung durch $G$ → $Y\\uparrow$ → $i\\uparrow$ → Kapitalexporte → Aufwertung → $NX\\downarrow$ → IS zurück. Unter fix: $G\\uparrow$ → Druck auf $i$ → ZB kauft Devisen, $M\\uparrow$ → LM nach rechts → stärkerer $Y$-Effekt.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Fester Wechselkurs</h4>
+<p>Unter fixem Kurs und hoher Kapitalmobilität muss die Zentralbank die Parität verteidigen: Fiskalimpuls → $M$↑ → LM nach rechts → $Y$ stärker.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Impossible Trinity</h4>
+<p>Trilemma: von {fester WK, freier Kapitalmobilität, autonomer Geldpolitik} sind höchstens zwei gleichzeitig erfüllbar.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Regime zuerst:</strong> Ohne Regime keine Politikbewertung im M-F-Modell.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Fragen zu Mundell-Fleming sind fast immer Regimefragen. Nennen Sie zuerst das Wechselkursregime, dann den Finanzmarktkanal, dann die Gütermarktfolge.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nicht mit geschlossener IS-LM verwechseln:</strong> In der offenen Volkswirtschaft kann derselbe Fiskal- oder Geldimpuls über den Wechselkurs zusätzliche Gegen- oder Verstärkungseffekte auslösen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Mundell-Fleming</h4>
+<p>Regime zuerst! Flex: $\\Delta M$ stark (über $E$, NX), $\\Delta G$ schwach (Aufwertung crowding-out). Fix: $\\Delta G$ stark (ZB akkommodiert $M$), $\\Delta M$ wirkungslos (Paritätszwang). Fünf Schritte: Regime → IS/LM-Impuls → $i$/Kapital → $E$/NX → $Y$.</p><div class="warn-box" data-warning-placement="rail"><strong>Kleine offene VW:</strong> M-F setzt kleines Land und hohe Kapitalmobilität voraus. Große Volkswirtschaften: UIP-Wirkung auf Weltzins.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'IS in offener VW', eq: String.raw`$$Y = C + I + G + NX(\varepsilon, Y, Y^*)$$`, desc: 'Gütermarkt mit Außenbeziehung', variables: {} },
       { label: 'UIP-Kanal', eq: String.raw`$$1+i = (1+i^*)\frac{E}{E^e}$$`, desc: 'Finanzmarktscharnier des Modells', variables: {} }
@@ -399,21 +681,55 @@ export const CONTENT = {
 
   zp_kurve: {
     motivation: 'Die ZP-Kurve ist die fehlende dritte Lesart zwischen IS und LM: Sie zeigt, bei welchen Kombinationen aus Einkommen und Zins die Zahlungsbilanz gerade ausgeglichen ist.',
-    theorie: [
-      section('Definition im (Y,i)-Raum', `
-        <p>Die ZP-Kurve beschreibt alle Kombinationen aus Einkommen und Zinssatz, für die Leistungsbilanz und Kapitalbilanz zusammen gerade null ergeben.</p>
-        ${math(String.raw`$$LB(Y,Y^*,\varepsilon) + KB(i-i^*) = 0$$`)}
-        <p>Mehr Einkommen verschlechtert typischerweise die Leistungsbilanz über höhere Importe; ein höherer Inlandszins zieht dagegen Kapitalzuflüsse an.</p>
-      `),
-      section('Warum die ZP-Kurve positiv steigt', `
-        <p>Wenn $Y$ steigt, verschlechtert sich ceteris paribus die Außenbilanz. Um trotzdem Zahlungsbilanzgleichgewicht zu halten, muss $i$ steigen und die Kapitalbilanz verbessern.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum die ZP-Kurve positiv steigt</h4>
+<p>Wenn $Y$ steigt, verschlechtert sich ceteris paribus die Außenbilanz. Um trotzdem Zahlungsbilanzgleichgewicht zu halten, muss $i$ steigen und die Kapitalbilanz verbessern.</p>
         <p>Die ZP-Kurve ist deshalb im Standardfall positiv geneigt. Je höher die Kapitalmobilität, desto flacher verläuft sie. Bei perfekter Kapitalmobilität wird sie praktisch horizontal bei $i=i^*$.</p>
-      `),
-      section('Lage relativ zur Kurve', `
-        <p>Oberhalb der ZP-Kurve liegt bei gegebenem Einkommen ein zu hoher Inlandszins vor: Kapitalzuflüsse dominieren und die Zahlungsbilanz weist Überschüsse auf. Unterhalb der Kurve ist $i$ zu niedrig oder $Y$ zu hoch; es entsteht ein Defizit.</p>
-        ${warn('ZP ist kein Gütermarkt', 'Die ZP-Kurve sagt nichts über Gütermarktgleichgewicht an sich aus. Sie ordnet nur Außenfinanzierung und Außenungleichgewichte im (Y,i)-Raum.')}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Definition im (Y,i)-Raum</h4>
+<p>Die ZP-Kurve beschreibt alle Kombinationen aus Einkommen und Zinssatz, für die Leistungsbilanz und Kapitalbilanz zusammen gerade null ergeben.</p>
+        <div class="math-block">$$LB(Y,Y^*,\\varepsilon) + KB(i-i^*) = 0$$</div>
+        <p>Mehr Einkommen verschlechtert typischerweise die Leistungsbilanz über höhere Importe; ein höherer Inlandszins zieht dagegen Kapitalzuflüsse an.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Lage relativ zur Kurve</h4>
+<p>Oberhalb der ZP-Kurve liegt bei gegebenem Einkommen ein zu hoher Inlandszins vor: Kapitalzuflüsse dominieren und die Zahlungsbilanz weist Überschüsse auf. Unterhalb der Kurve ist $i$ zu niedrig oder $Y$ zu hoch; es entsteht ein Defizit.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>ZP ist kein Gütermarkt:</strong> Die ZP-Kurve sagt nichts über Gütermarktgleichgewicht an sich aus. Sie ordnet nur Außenfinanzierung und Außenungleichgewichte im (Y,i)-Raum.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">ZP-Kurve im Diagramm</h4>
+<p>Die Zahlungsbilanzkurve (ZP) verknüpft $Y$ und $i$ bei gegebenem Wechselkurs: Zahlungsbilanzgleichgewicht bei $NX + KB_{netto} = 0$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Verschiebungen</h4>
+<p>Reale Abwertung verschiebt ZP nach rechts (höheres $Y$ bei gleichem $i$); ausländischer Boom über Exporte ebenfalls.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>ZP vs. BP:</strong> In manchen Skripten BP statt ZP — Bezeichnung aus VL übernehmen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: ZP-Kurve</h4>
+<p>ZP: $LB + KB = 0$ im $(Y,i)$-Raum. Positiv geneigt: $Y↑$ → Importe → LB↓ → braucht $i↑$ für KB↑. Oberhalb ZP: Überschuss; unterhalb: Defizit. Bei $i=i^*$ (perfekte Mobilität): ZP horizontal — Gleichgewicht am Schnitt IS-LM-ZP.</p><div class="warn-box" data-warning-placement="rail"><strong>ZP ≠ IS:</strong> ZP beschreibt Außenbilanzgleichgewicht, nicht Gütermarkt. Schnittpunkt aller drei Kurven bestimmt $(Y,i)$ im vollständigen offenen Modell.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Zahlungsbilanzgleichgewicht', eq: String.raw`$$LB(Y,Y^*,\varepsilon) + KB(i-i^*) = 0$$`, desc: 'Leistungs- und Kapitalbilanz müssen sich ausgleichen', variables: { 'LB': 'Leistungsbilanzsaldo', 'KB': 'Kapitalbilanzsaldo', 'i^*': 'Weltzins' } },
       { label: 'Perfekte Kapitalmobilität', eq: String.raw`$$i = i^*$$`, desc: 'Im Grenzfall wird die ZP-Kurve horizontal', variables: { 'i': 'Inlandszins', 'i^*': 'Auslandszins / Weltzins' } }
@@ -442,22 +758,62 @@ export const CONTENT = {
 
   wirtschaftspolitik_offen: {
     motivation: 'Die Klausur fragt selten nur nach dem Modell, sondern fast immer nach der Politik im Modell. Diese Seite verdichtet genau diese Regelfälle: welches Instrument wirkt unter welchem Regime und über welchen Kanal.',
-    theorie: [
-      section('Das Mundell-Fleming-Theorem', `
-        <p>Bei hoher bzw. perfekter Kapitalmobilität kippt die Wirksamkeit von Fiskal- und Geldpolitik mit dem Wechselkursregime.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Das Mundell-Fleming-Theorem</h4>
+<p>Bei hoher bzw. perfekter Kapitalmobilität kippt die Wirksamkeit von Fiskal- und Geldpolitik mit dem Wechselkursregime.</p>
         <p>Unter flexiblem Wechselkurs wirkt Geldpolitik stark über den Wechselkurskanal; Fiskalpolitik wird durch Aufwertung und Nettoexportverluste ausgebremst. Unter festem Wechselkurs ist es gerade umgekehrt.</p>
-      `),
-      section('Regimevergleich als Schockpfad', `
-        <p>Der saubere Klausurpfad lautet: <strong>Regime nennen → Erstimpuls benennen → Finanzmarkt-/Wechselkursreaktion → Nettoexportfolge → Endwirkung auf Y</strong>.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Regimevergleich als Schockpfad</h4>
+<p>Der saubere Klausurpfad lautet: <strong>Regime nennen → Erstimpuls benennen → Finanzmarkt-/Wechselkursreaktion → Nettoexportfolge → Endwirkung auf Y</strong>.</p>
         <p>Diese Reihenfolge verhindert den typischen Fehler, direkt ein Ergebnis zu behaupten, ohne den Gegenkanal mitzudenken.</p>
-        ${math(String.raw`$$\text{flexibler WK: } \Delta G \Rightarrow \text{Aufwertung} \Rightarrow NX\downarrow$$`)}
-        ${math(String.raw`$$\text{fester WK: } \Delta G \Rightarrow M\uparrow \Rightarrow \text{kein Aufwertungs-Crowding-out}$$`)}
-      `),
-      section('Politische Lesart unter Prüfungsdruck', `
-        ${warn('Regime zuerst', 'Ohne explizite Regimeangabe bleibt jede Politikantwort unvollständig. Dieselbe Maßnahme hat im flexiblen und fixen Regime unterschiedliche Endergebnisse.')}
-        ${warn('Nicht bei IS aufhören', 'Im offenen Modell reicht eine IS-Verschiebung nie als komplette Antwort. Erst der Wechselkurs- oder ZB-Kanal macht die Politikbewertung vollständig.')}
-      `)
-    ].join(''),
+        <div class="math-block">$$\\text{flexibler WK: } \\Delta G \\Rightarrow \\text{Aufwertung} \\Rightarrow NX\\downarrow$$</div>
+        <div class="math-block">$$\\text{fester WK: } \\Delta G \\Rightarrow M\\uparrow \\Rightarrow \\text{kein Aufwertungs-Crowding-out}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Politikmatrix</h4>
+<table><tr><th>Regime</th><th>Fiskal</th><th>Geld</th></tr>
+      <tr><td>Flexibel</td><td>schwächer</td><td>stark</td></tr>
+      <tr><td>Fix</td><td>stark</td><td>schwach</td></tr></table>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Diagrammfolge</h4>
+<p>Im (Y,i)-Diagramm: IS/LM/ZP verschieben, dann WK-Reaktion einzeichnen, dann NX-Rückwirkung auf IS.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Politik offen</h4>
+<p>M-F-Theorem auswendig: flex → Geld stark, Fiskal schwach; fix → umgekehrt. Jede Antwort: Regime → Kanal → Vorzeichen auf $Y$, $i$, $\\varepsilon$, NX. Trilemma: fix + freie Kapitalmobilität → keine autonome Geldpolitik.</p><div class="warn-box" data-warning-placement="rail"><strong>Partial crowding-out:</strong> Unter flex ist Fiskal-Crowding-out über Nettoexporte, nicht über Zins wie in geschlossener VW — Mechanismus benennen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Politische Lesart unter Prüfungsdruck</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Regime zuerst:</strong> Ohne explizite Regimeangabe bleibt jede Politikantwort unvollständig. Dieselbe Maßnahme hat im flexiblen und fixen Regime unterschiedliche Endergebnisse.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nicht bei IS aufhören:</strong> Im offenen Modell reicht eine IS-Verschiebung nie als komplette Antwort. Erst der Wechselkurs- oder ZB-Kanal macht die Politikbewertung vollständig.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Flexibler Wechselkurs', eq: String.raw`$$\Delta G>0 \Rightarrow \text{partielles oder starkes Crowding-out über } NX$$`, desc: 'Fiskalpolitik trifft auf den Aufwertungskanal', variables: { 'NX': 'Nettoexporte' } },
       { label: 'Fester Wechselkurs', eq: String.raw`$$\Delta G>0 \Rightarrow \Delta M>0 \Rightarrow \Delta Y \text{ stärker}$$`, desc: 'Die Paritätsverteidigung akkommodiert den Fiskalimpuls', variables: {} }
@@ -488,20 +844,62 @@ export const CONTENT = {
 
   wk_regime: {
     motivation: 'Feste Wechselkurse, autonome Geldpolitik und freier Kapitalverkehr sind nicht gleichzeitig zu haben. Genau dieser Zielkonflikt wird im Kurs über Trilemma und Paritätsverteidigung analysiert.',
-    theorie: [
-      section('Trilemma der offenen Volkswirtschaft', `
-        <p>Ein Land kann höchstens zwei der drei Ziele gleichzeitig wählen: festen Wechselkurs, freien Kapitalverkehr, autonome Geldpolitik.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Trilemma der offenen Volkswirtschaft</h4>
+<p>Ein Land kann höchstens zwei der drei Ziele gleichzeitig wählen: festen Wechselkurs, freien Kapitalverkehr, autonome Geldpolitik.</p>
         <p>Fixe Paritäten kaufen Wechselkursstabilität, verlangen aber meistens den Verzicht auf geldpolitische Autonomie.</p>
-      `),
-      section('Paritätsverteidigung', `
-        <p>Wird eine Abwertung erwartet, muss die Zentralbank den inländischen Zins anheben oder Reserven einsetzen, um den Kurs zu verteidigen. Bei unglaubwürdiger Parität kann das sehr schnell teuer werden.</p>
-        ${math(String.raw`$$i - i^* \approx \mathbb{E}\left[\frac{\Delta E}{E}\right]$$`)}
-      `),
-      section('Fehleranalyse', `
-        ${warn('Fester Kurs heißt nicht spannungsfrei', 'Gerade bei glaubwürdigkeitsschwachen Regimen kann ein fixer Wechselkurs den Anpassungsdruck erhöhen, statt ihn verschwinden zu lassen.')}
-        ${warn('Trilemma ist keine Meinung', 'Das Trilemma ist eine Restriktion. Wer drei Ziele gleichzeitig behauptet, muss zeigen, welche der Voraussetzungen tatsächlich verletzt ist.')}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Paritätsverteidigung</h4>
+<p>Wird eine Abwertung erwartet, muss die Zentralbank den inländischen Zins anheben oder Reserven einsetzen, um den Kurs zu verteidigen. Bei unglaubwürdiger Parität kann das sehr schnell teuer werden.</p>
+        <div class="math-block">$$i - i^* \\approx \\mathbb{E}\\left[\\frac{\\Delta E}{E}\\right]$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Mundells Trilemma ist die institutionelle Restriktion hinter Mundell-Fleming. Fix + Kapitalmobilität: inländischer Zins = Weltzins ($i=i^*$), Geldpolitik endogen. Flex: Zins durch Geldmarkt, Kurs passt sich an. Kapitalverkehrskontrollen erlauben teilweise Autonomie bei fixem Kurs — dritte Option im Trilemma.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Paritätsverteidigung</h4>
+<p>Bei festem Kurs kauft/verkauft die Zentralbank Devisen, um $E$ zu halten; Reserven sind die Grenze der Verteidigung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalverkehrskontrollen</h4>
+<p>Mit Kontrollen kann Geldpolitik teilweise autonom bleiben; das Modell ändert sich je nach Mobilitätsannahme.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Wechselkursregime</h4>
+<p>Trilemma: höchstens 2 von {fixer WK, freie Kapitalmobilität, autonome Geldpolitik}. Paritätsverteidigung: Reserven und/oder $i↑$. Kosten: Rezession, Bankenstress. Currency Board: $M$ an Reserven gebunden — rigide, aber glaubwürdig.</p><div class="warn-box" data-warning-placement="rail"><strong>Fix heißt nicht stabil:</strong> Fixe Kurse können real überbewertet sein. Anpassung dann über Binnenrezession statt externer Abwertung.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Fester Kurs heißt nicht spannungsfrei:</strong> Gerade bei glaubwürdigkeitsschwachen Regimen kann ein fixer Wechselkurs den Anpassungsdruck erhöhen, statt ihn verschwinden zu lassen.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Trilemma ist keine Meinung:</strong> Das Trilemma ist eine Restriktion. Wer drei Ziele gleichzeitig behauptet, muss zeigen, welche der Voraussetzungen tatsächlich verletzt ist.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Trilemma-Logik', eq: String.raw`$$\text{fixer WK} + \text{freie Kapitalmobilität} \Rightarrow \text{keine autonome Geldpolitik}$$`, desc: 'Politische Restriktion der offenen Makro', variables: {} }
     ],
@@ -547,28 +945,64 @@ export const CONTENT = {
 
   wk_krisen: {
     motivation: 'Währungskrisen sind der Stresstest fixer Regime. Im Kurs werden sie über Currency Boards, Glaubwürdigkeit und Krisendynamik analysiert, nicht nur als historische Anekdoten.',
-    theorie: [
-      section('Currency Boards und harte Paritäten', `
-        <p>Ein Currency Board bindet die Geldbasis hart an Reserven. Das erhöht Glaubwürdigkeit stärker als ein gewöhnlicher Peg, macht Anpassung aber auch rigider.</p>
-      `),
-      section('Krisenmechanik', `
-        <p>Verliert ein Regime Glaubwürdigkeit, steigen erwartete Abwertung und Verteidigungszins. Das verschlechtert Binnenkonjunktur und Bankenlage und kann die Krise selbst verstärken.</p>
-        <p>Im Unterricht dient Argentinien als Leitfall: nominale Stabilität, reale Aufwertung, Rezession, Vertrauensverlust.</p>
-      `),
-      section('First- und Second-Generation-Krisen', `
-        <p><strong>First generation (Krugman):</strong> Überbewerteter fixer Kurs + expansionäre Fiskalpolitik + schrumpfende Reserven → Spekulanten wetten auf Abwertung → selbsterfüllend. Die Fundamentaldaten (Budget, Reserven) sind schwach genug, dass Verteidigung nicht kostengünstig ist.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Currency Boards und harte Paritäten</h4>
+<p>Ein Currency Board bindet die Geldbasis hart an Reserven. Das erhöht Glaubwürdigkeit stärker als ein gewöhnlicher Peg, macht Anpassung aber auch rigider.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">First- und Second-Generation-Krisen</h4>
+<p><strong>First generation (Krugman):</strong> Überbewerteter fixer Kurs + expansionäre Fiskalpolitik + schrumpfende Reserven → Spekulanten wetten auf Abwertung → selbsterfüllend. Die Fundamentaldaten (Budget, Reserven) sind schwach genug, dass Verteidigung nicht kostengünstig ist.</p>
         <p><strong>Second generation:</strong> Fundamentale sind noch vertretbar, aber die Zentralbank zögert mit Verteidigung wegen hoher Zinskosten (Rezession, Bankennot). Erwartete Abwertung löst Kapitalflucht aus — die Krise entsteht durch Erwartungskoordination, nicht nur durch Reservearithmetik.</p>
-        ${math(String.raw`$$i = i^* + \\phi + \\mathbb{E}[\\Delta E/E]$$`)}
+        <div class="math-block">$$i = i^* + \\\\phi + \\\\mathbb{E}[\\\\Delta E/E]$$</div>
         <p>Der Aufschlag $\\phi$ steigt mit wahrgenommener Unglaubwürdigkeit; je höher $i$ zur Verteidigung, desto stärker die Binnenrezession und desto attraktiver die Abwertungserwartung.</p>
-      `),
-      section('Prüfungslogik', `
-        ${warn('Nicht nur Reserven zählen', 'Währungskrisen hängen nicht nur von Devisenreserven ab. Erwartungsbildung, reale Überbewertung, Bankenschwäche und politische Kosten der Verteidigung sind ebenso wichtig.')}
-        ${warn('Currency Board ≠ Garantie', 'Ein Currency Board erhöht Glaubwürdigkeit, eliminiert aber Anpassungsdruck nicht. Bei fixer Parität und divergierender Produktivität entsteht reale Überbewertung — genau der first-generation-Kanal.')}
-      `),
-      section('In der Klausur: Währungskrisen', `
-        <p>Antwortschema: (1) Regime benennen (fix, CB, flex). (2) Fundamentaldaten vs. Erwartungskanal trennen. (3) Verteidigungskosten (Zins, Rezession) gegen Nutzen der Parität abwägen. (4) Selbsterfüllende Erwartungen als Verstärker einordnen. Rechnen: Zahlungsbilanzidentität + Reservenveränderung; qualitative Faktoren mindestens drei nennen.</p>
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Krisenmechanik</h4>
+<p>Verliert ein Regime Glaubwürdigkeit, steigen erwartete Abwertung und Verteidigungszins. Das verschlechtert Binnenkonjunktur und Bankenlage und kann die Krise selbst verstärken.</p>
+        <p>Im Unterricht dient Argentinien als Leitfall: nominale Stabilität, reale Aufwertung, Rezession, Vertrauensverlust.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Selbsterfüllende Erwartungen</h4>
+<p>Erwartete Abwertung → Kapitalabzug → Zinsaufschlag → Rezession → bestätigt Abwertungsdruck.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">First-generation crisis</h4>
+<p>Überbewerteter fixer Kurs + schrumpfende Reserven + begrenzte Fiskalpolitik → Spekulationsangriff und Aufgabe des Pegs.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Währungskrisen</h4>
+<p>Antwortschema: (1) Regime benennen (fix, CB, flex). (2) Fundamentaldaten vs. Erwartungskanal trennen. (3) Verteidigungskosten (Zins, Rezession) gegen Nutzen der Parität abwägen. (4) Selbsterfüllende Erwartungen als Verstärker einordnen. Rechnen: Zahlungsbilanzidentität + Reservenveränderung; qualitative Faktoren mindestens drei nennen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungslogik</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Nicht nur Reserven zählen:</strong> Währungskrisen hängen nicht nur von Devisenreserven ab. Erwartungsbildung, reale Überbewertung, Bankenschwäche und politische Kosten der Verteidigung sind ebenso wichtig.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Currency Board ≠ Garantie:</strong> Ein Currency Board erhöht Glaubwürdigkeit, eliminiert aber Anpassungsdruck nicht. Bei fixer Parität und divergierender Produktivität entsteht reale Überbewertung — genau der first-generation-Kanal.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Erwartete Abwertung und Zinsaufschlag', eq: String.raw`$$i - i^* \approx \mathbb{E}\left[\frac{\Delta E}{E}\right]$$`, desc: 'Je unglaubwürdiger die Parität, desto höher der notwendige Zinsaufschlag', variables: {} }
     ],
@@ -577,19 +1011,56 @@ export const CONTENT = {
 
   opt_waehrungsraum: {
     motivation: 'Der optimale Währungsraum beantwortet die Klausurfrage hinter jeder Währungsunion: Wann lohnt sich der Verzicht auf den eigenen Wechselkurs überhaupt?',
-    theorie: [
-      section('OWR-Kriterien nach Mundell', `
-        <p>Ein Währungsraum ist dann "optimal", wenn der Verlust des eigenen Wechselkurses gut durch andere Anpassungsmechanismen aufgefangen wird.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">OWR-Kriterien nach Mundell</h4>
+<p>Ein Währungsraum ist dann "optimal", wenn der Verlust des eigenen Wechselkurses gut durch andere Anpassungsmechanismen aufgefangen wird.</p>
         <p>Prüfungsrelevant sind vor allem: Faktormobilität, Lohn- und Preisflexibilität, Fiskaltransfers und die Symmetrie von Schocks.</p>
-      `),
-      section('Kosten und Nutzen einer Währungsunion', `
-        <p>Nutzen entstehen durch geringere Transaktionskosten, weniger Wechselkursrisiko und mitunter importierte Glaubwürdigkeit. Kosten entstehen vor allem dort, wo asymmetrische Schocks auftreten und der Wechselkurs als Anpassungsinstrument fehlt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kosten und Nutzen einer Währungsunion</h4>
+<p>Nutzen entstehen durch geringere Transaktionskosten, weniger Wechselkursrisiko und mitunter importierte Glaubwürdigkeit. Kosten entstehen vor allem dort, wo asymmetrische Schocks auftreten und der Wechselkurs als Anpassungsinstrument fehlt.</p>
         <p>Die ökonomische Kernfrage lautet deshalb nicht "Euro gut oder schlecht?", sondern: <em>Welche Ersatzmechanismen stehen ohne eigenen Wechselkurs zur Verfügung?</em></p>
-      `),
-      section('Klausurzugriff auf die Eurozone', `
-        ${warn('Nicht nur Vorteile aufzählen', 'OWR-Fragen sind immer Abwägungsfragen. Handelsgewinne, Glaubwürdigkeit und Integration genügen nicht, wenn asymmetrische Schocks und starre Arbeitsmärkte die Anpassung blockieren.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Mundell (1961): optimale Währungsgebiete haben hohe Arbeitsmobilität oder Lohnflexibilität, damit asymmetrische Schocks ohne Wechselkursanpassung absorbiert werden. McKinnon: hohe Handelsintensität begünstigt WU. Kenen: Produktionsdiversifikation reduziert asymmetrische Schocks. Klausur: Kriterium nennen + auf Eurozone anwenden.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mundell-Kriterien im Detail</h4>
+<p>Arbeitsmobilität, Preis-/Lohnflexibilität, Fiskaltransfers und symmetrische Schocks bestimmen, ob ein gemeinsamer WK optimal ist.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Eurozone-Debatte</h4>
+<p>Asymmetrische Schocks (z.B. Südeuropa vs. Deutschland) ohne eigenen WK erfordern Ersatzmechanismen (Transfers, Strukturreformen).</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Optimaler Währungsraum</h4>
+<p>OWR-Abwägung: Nutzen (Transaktionskosten, WK-Risiko, Glaubwürdigkeit) vs. Kosten (asymmetrische Schocks ohne eigenen WK). Ersatzmechanismen: Arbeitsmobilität, Lohnflexibilität, Fiskaltransfers. Eurozone: immer Abwägung, nie Pro/Contra-Liste.</p><div class="warn-box" data-warning-placement="rail"><strong>OWR ≠ Optimal Currency Area Bewertung:</strong> Kriterien erklären Anpassungsfähigkeit ohne WK — nicht automatisch „WU immer gut".</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff auf die Eurozone</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Nicht nur Vorteile aufzählen:</strong> OWR-Fragen sind immer Abwägungsfragen. Handelsgewinne, Glaubwürdigkeit und Integration genügen nicht, wenn asymmetrische Schocks und starre Arbeitsmärkte die Anpassung blockieren.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'OWR-Abwägung', eq: String.raw`$$\text{Nutzen der Währungsunion} \gtrless \text{Kosten des Verzichts auf den eigenen WK}$$`, desc: 'Kein Rechengesetz, sondern die Prüfungslogik des Konzepts', variables: {} }
     ],
@@ -618,29 +1089,64 @@ export const CONTENT = {
 
   phillipskurve: {
     motivation: 'Die Phillipskurve verbindet Inflation, Erwartungen und Arbeitslosigkeit. Sie ist das Bindeglied zwischen Konjunktur, Disinflation und den Anreizproblemen der Geldpolitik.',
-    theorie: [
-      section('Erwartungsaugmentierte Phillipskurve', `
-        <p>Kurzfristig hängt die Inflation davon ab, wie stark die Arbeitslosigkeit von ihrem natürlichen Niveau abweicht und welche Inflation die Akteure bereits erwarten.</p>
-        ${math(String.raw`$$\pi_t = \pi_t^e - \alpha (u_t - u_n)$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Erwartungsaugmentierte Phillipskurve</h4>
+<p>Kurzfristig hängt die Inflation davon ab, wie stark die Arbeitslosigkeit von ihrem natürlichen Niveau abweicht und welche Inflation die Akteure bereits erwarten.</p>
+        <div class="math-block">$$\\pi_t = \\pi_t^e - \\alpha (u_t - u_n)$$</div>
         <p>Liegt die Arbeitslosigkeit unter $u_n$, entsteht positiver Inflationsdruck; liegt sie darüber, dämpft das die Preisentwicklung.</p>
-      `),
-      section('Kurzfristig vs. langfristig', `
-        <p>Kurzfristig gibt es einen Trade-off. Langfristig ziehen Erwartungen nach; deshalb ist die langfristige Phillipskurve vertikal bei $u=u_n$.</p>
-        <p>Diese Trennung ist zentral für Zeitinkonsistenz, Inflationsbias und Opferquoten bei Disinflation.</p>
-      `),
-      section('NAIRU und Ankerfunktion', `
-        <p>Die <strong>natürliche Arbeitslosigkeit</strong> $u_n$ (NAIRU) ist die Quote, bei der die Inflation weder beschleunigt noch verlangsamt — vorausgesetzt $\\pi^e$ ist stabil. Sie hängt von Strukturmerkmalen des Arbeitsmarkts ab (Matching, Institutionen, Mindestlöhne), nicht von der aktuellen Konjunktur.</p>
-        ${math(String.raw`$$\\pi = \\pi^e \\text{ wenn } u = u_n$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">NAIRU und Ankerfunktion</h4>
+<p>Die <strong>natürliche Arbeitslosigkeit</strong> $u_n$ (NAIRU) ist die Quote, bei der die Inflation weder beschleunigt noch verlangsamt — vorausgesetzt $\\pi^e$ ist stabil. Sie hängt von Strukturmerkmalen des Arbeitsmarkts ab (Matching, Institutionen, Mindestlöhne), nicht von der aktuellen Konjunktur.</p>
+        <div class="math-block">$$\\\\pi = \\\\pi^e \\\\text{ wenn } u = u_n$$</div>
         <p>Geldpolitik kann kurzfristig $u$ von $u_n$ abweichen lassen (Überraschungsinflation), aber langfristig kehrt die Wirtschaft zu $u_n$ zurück — dann bestimmt $\\pi^e$ das Inflationsniveau.</p>
-      `),
-      section('Fehleranalyse', `
-        ${warn('Keine dauerhafte Tauschbeziehung', 'Die Phillipskurve ist kein Menü, mit dem Politik dauerhaft weniger Arbeitslosigkeit gegen etwas mehr Inflation kaufen könnte. Langfristig verschwimmt der Trade-off.')}
-        ${warn('$u_n$ nicht mit $u=0$ verwechseln', 'Vollbeschäftigung im makroökonomischen Sinn bedeutet $u=u_n$, nicht null Arbeitslosigkeit. Strukturelle und friktionelle Arbeitslosigkeit bleiben auch im Gleichgewicht.')}
-      `),
-      section('In der Klausur: Phillipskurve', `
-        <p>Bei Rechenaufgaben: Formel einsetzen, $\\pi^e$ und $u_n$ aus der Aufgabenstellung übernehmen. Bei Interpretation: kurzfristiger Trade-off vs. langfristige Vertikalität unterscheiden. Disinflation (Senkung $\\pi$): Opferquote = temporär höheres $u$ über $u_n$ — Erwartungen passen sich nur langsam an (adaptive vs. rationale Erwartungen).</p>
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kurzfristig vs. langfristig</h4>
+<p>Kurzfristig gibt es einen Trade-off. Langfristig ziehen Erwartungen nach; deshalb ist die langfristige Phillipskurve vertikal bei $u=u_n$.</p>
+        <p>Diese Trennung ist zentral für Zeitinkonsistenz, Inflationsbias und Opferquoten bei Disinflation.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Erwartungsaugmentiert</h4>
+<p>Moderne Phillipskurve: $\\pi = \\pi^e + \\kappa u + \\ldots$; erwartete Inflation verschiebt die Kurve.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">NAIRU</h4>
+<p>NAIRU: Arbeitslosenquote ohne Beschleunigung der Inflation; Anker für mittelfristige Geldpolitik.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Phillipskurve</h4>
+<p>Bei Rechenaufgaben: Formel einsetzen, $\\pi^e$ und $u_n$ aus der Aufgabenstellung übernehmen. Bei Interpretation: kurzfristiger Trade-off vs. langfristige Vertikalität unterscheiden. Disinflation (Senkung $\\pi$): Opferquote = temporär höheres $u$ über $u_n$ — Erwartungen passen sich nur langsam an (adaptive vs. rationale Erwartungen).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Phillipskurve (Ergänzung)</h4>
+<p>Kurzfrist: $\\pi = \\pi^e - \\alpha(u-u_n)$ — Trade-off möglich. Langfrist: $\\pi^e$ passt sich an → vertikale PC bei $u_n$. Disinflation kostet Output (Opferquote). Adaptive Erwartungen: langsame Anpassung verlängert Kosten.</p><div class="warn-box" data-warning-placement="rail"><strong>Kein permanentes Menü:</strong> Politik kann nicht dauerhaft $u<u_n$ „kaufen" — Erwartungen ziehen nach.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Keine dauerhafte Tauschbeziehung:</strong> Die Phillipskurve ist kein Menü, mit dem Politik dauerhaft weniger Arbeitslosigkeit gegen etwas mehr Inflation kaufen könnte. Langfristig verschwimmt der Trade-off.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>$u_n$ nicht mit $u=0$ verwechseln:</strong> Vollbeschäftigung im makroökonomischen Sinn bedeutet $u=u_n$, nicht null Arbeitslosigkeit. Strukturelle und friktionelle Arbeitslosigkeit bleiben auch im Gleichgewicht.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Erwartungsaugmentierte Phillipskurve', eq: String.raw`$$\pi_t = \pi_t^e - \alpha (u_t - u_n)$$`, desc: 'Inflation, Erwartungen und Auslastung', variables: { 'u_n': 'Natürliche Arbeitslosigkeit', '\\alpha': 'Steigung' } }
     ],
@@ -659,19 +1165,55 @@ export const CONTENT = {
 
   zeitinkonsistenz: {
     motivation: 'Zeitinkonsistenz erklärt, warum eine ex ante vernünftige Geldpolitik ex post an Glaubwürdigkeit verliert. Ohne Bindung wächst der Anreiz zur Überraschungsinflation.',
-    theorie: [
-      section('Commitment vs. Diskretion', `
-        <p>Ex ante möchte die Zentralbank niedrige Inflation versprechen. Ex post hat sie aber einen Anreiz, über Überraschungsinflation die Arbeitslosigkeit unter ihr natürliches Niveau zu drücken.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Commitment vs. Diskretion</h4>
+<p>Ex ante möchte die Zentralbank niedrige Inflation versprechen. Ex post hat sie aber einen Anreiz, über Überraschungsinflation die Arbeitslosigkeit unter ihr natürliches Niveau zu drücken.</p>
         <p>Genau diese Differenz zwischen angekündigtem Plan und später optimal erscheinender Handlung heißt Zeitinkonsistenz.</p>
-      `),
-      section('Rolle der Erwartungen', `
-        <p>Je rationaler die privaten Erwartungen, desto schneller wird der Inflationsanreiz antizipiert. Dann bleibt am Ende höhere Inflation ohne dauerhaften Beschäftigungsgewinn.</p>
-      `),
-      section('Lösungen', `
-        <p>Regelbindung, unabhängige Zentralbanken, Reputation und klare Ziele sind institutionelle Antworten auf das Zeitinkonsistenzproblem.</p>
-        ${warn('Nicht mit Fehlentscheidung verwechseln', 'Zeitinkonsistenz bedeutet nicht, dass Politik "irrational" ist, sondern dass sich der Anreiz zwischen Ankündigungs- und Entscheidungszeitpunkt ändert.')}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rolle der Erwartungen</h4>
+<p>Je rationaler die privaten Erwartungen, desto schneller wird der Inflationsanreiz antizipiert. Dann bleibt am Ende höhere Inflation ohne dauerhaften Beschäftigungsgewinn.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Lösungen</h4>
+<p>Regelbindung, unabhängige Zentralbanken, Reputation und klare Ziele sind institutionelle Antworten auf das Zeitinkonsistenzproblem.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nicht mit Fehlentscheidung verwechseln:</strong> Zeitinkonsistenz bedeutet nicht, dass Politik "irrational" ist, sondern dass sich der Anreiz zwischen Ankündigungs- und Entscheidungszeitpunkt ändert.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Kydland-Prescott (1977): diskretionäre Politik führt zu suboptimalem Gleichgewicht, weil Erwartungen rational sind. Barro-Gordon formalisiert den Inflationsbias. Rogoff: konservativer Zentralbanker ($\\chi$ hoch) reduziert Bias. Spieltheoretisch: Zeitinkonsistenz = dynamische Inkonsistenz optimaler Pläne — Reputation als wiederholtes Spiel kann diskretionären Bias reduzieren.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>Beispiel Arbeitsmarkt: optimale Lohnsteuer heute niedrig (Anreize), ex post hohe Steuer (Arbeitsangebot fixiert). Lösungen: verbindliche Regeln, unabhängige Institution (CB), Reputation in wiederholten Spielen. Rogoff-Delegationsmodell: $L$ mit Gewicht auf Inflation vs. Output — trade-off explizit.</p><div class="warn-box" data-warning-placement="rail"><strong>Commitment-Technologie:</strong> Inflation Targeting und CB-Unabhängigkeit sind institutionelle Antworten — nicht automatisch optimal bei allen Schocks.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Commitment vs. Discretion</h4>
+<p>Regel (Taylor, Inflation Target) bindet zukünftiges Handeln und senkt $\\pi^e$; Diskretion erlaubt Überraschungsinflation.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Glaubwürdigkeit</h4>
+<p>Unabhängigkeit der Zentralbank ist institutionelles Commitment gegen politischen Inflationsdruck.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Zeitinkonsistenz</h4>
+<p>Ex ante: niedrige $\\pi$ versprechen. Ex post: Anreiz zu Überraschungs-$\\pi$ für $u<u_n$. Rational: $\\pi^e$ steigt → kein Beschäftigungsgewinn, nur höhere $\\pi$. Lösungen: Regeln, Unabhängigkeit, Reputation, Inflation Targeting.</p><div class="warn-box" data-warning-placement="rail"><strong>Diskretion ≠ Fehler:</strong> Zeitinkonsistenz ist struktureller Anreizkonflikt, nicht „dumme Politik". Institutionen binden ex-post-Handeln.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Phillips-Anreiz', eq: String.raw`$$u = u_n - \alpha(\pi - \pi^e)$$`, desc: 'Überraschungsinflation wirkt nur über Erwartungen', variables: {} }
     ],
@@ -690,21 +1232,53 @@ export const CONTENT = {
 
   barro_gordon: {
     motivation: 'Das Barro-Gordon-Modell formalisiert Zeitinkonsistenz. Es ist der Prüfungsfall, in dem Verlustfunktion, Phillipskurve und rationale Erwartungen sauber zusammengeführt werden.',
-    theorie: [
-      section('Modellbausteine', `
-        <p>Barro-Gordon kombiniert eine Zentralbank-Verlustfunktion mit der erwartungsaugmentierten Phillipskurve. So wird der Zielkonflikt zwischen Preisstabilität und Auslastungswunsch formal greifbar.</p>
-        ${math(String.raw`$$L = \frac{1}{2}\chi \pi^2 + \frac{1}{2}\lambda (u-u^*)^2$$`)}
-        ${math(String.raw`$$u = u_n - \alpha(\pi - \pi^e)$$`)}
-      `),
-      section('Diskretionärer Bias', `
-        <p>Unter Diskretion setzt die Zentralbank einen positiven Inflationsanreiz, solange sie $u^* < u_n$ anstrebt. Mit rationalen Erwartungen landet die Wirtschaft dann bei positiver Inflation, aber wieder bei natürlicher Arbeitslosigkeit.</p>
-        ${math(String.raw`$$\pi^{D} = \frac{\alpha \lambda}{\chi}(u_n-u^*)$$`)}
-      `),
-      section('Regeln und konservative Zentralbank', `
-        <p>Regelbindung eliminiert den Bias. Ein konservativer Zentralbanker reduziert ihn, weil Inflation in der Verlustfunktion stärker gewichtet wird.</p>
-        ${warn('Beschäftigungseffekt nicht doppelt zählen', 'Im diskretionären Gleichgewicht ist die Überraschungsinflation antizipiert. Deshalb gibt es keinen dauerhaften Beschäftigungsgewinn, obwohl die Inflation höher ist.')}
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Modellbausteine</h4>
+<p>Barro-Gordon kombiniert eine Zentralbank-Verlustfunktion mit der erwartungsaugmentierten Phillipskurve. So wird der Zielkonflikt zwischen Preisstabilität und Auslastungswunsch formal greifbar.</p>
+        <div class="math-block">$$L = \\frac{1}{2}\\chi \\pi^2 + \\frac{1}{2}\\lambda (u-u^*)^2$$</div>
+        <div class="math-block">$$u = u_n - \\alpha(\\pi - \\pi^e)$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Diskretionärer Bias</h4>
+<p>Unter Diskretion setzt die Zentralbank einen positiven Inflationsanreiz, solange sie $u^* < u_n$ anstrebt. Mit rationalen Erwartungen landet die Wirtschaft dann bei positiver Inflation, aber wieder bei natürlicher Arbeitslosigkeit.</p>
+        <div class="math-block">$$\\pi^{D} = \\frac{\\alpha \\lambda}{\\chi}(u_n-u^*)$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Regeln und konservative Zentralbank</h4>
+<p>Regelbindung eliminiert den Bias. Ein konservativer Zentralbanker reduziert ihn, weil Inflation in der Verlustfunktion stärker gewichtet wird.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Beschäftigungseffekt nicht doppelt zählen:</strong> Im diskretionären Gleichgewicht ist die Überraschungsinflation antizipiert. Deshalb gibt es keinen dauerhaften Beschäftigungsgewinn, obwohl die Inflation höher ist.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Herleitung: Zentralbank minimiert $L$ unter PC-Restriktion. FOC liefert $\\pi = \\pi^e + \\alpha\\lambda/\\chi (u_n - u^*)$. Mit $\\pi^e = \\pi$ im RE-Gleichgewicht: positiver Bias wenn $u^* < u_n$. Regelbindung ($\\pi=0$): kein Bias, aber Outputvolatilität. Klausur: Modellbausteine aufschreiben, nicht nur Ergebnis zitieren.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zeitinkonsistenz der Geldpolitik</h4>
+<p>Ex post will die Zentralbank höhere Inflation für Beschäftigungsgewinn; ex ante rational $\\pi^e$ steigt — kein dauerhafter Phillips-Trade-off.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Inflationsbias</h4>
+<p>Ohne Commitment (Regel, Unabhängigkeit) entsteht systematischer Inflationsbias bei kurzfristiger Arbeitslosigkeit.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Barro-Gordon</h4>
+<p>Verlust: $L = \\chi\\pi^2/2 + \\lambda(u-u^*)^2/2$. PC: $u = u_n - \\alpha(\\pi-\\pi^e)$. Diskretion: $\\pi^D = \\alpha\\lambda(u_n-u^*)/\\chi > 0$ bei $u^*<u_n$. Regel/ konservativer Banker reduziert Bias. Kein dauerhafter Phillips-Trade-off.</p><div class="warn-box" data-warning-placement="rail"><strong>Bias ≠ willkürliche Inflation:</strong> Inflationsbias entsteht aus strukturiertem Anreiz, nicht aus „schlechter" Zentralbank.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Verlustfunktion', eq: String.raw`$$L = \frac{1}{2}\chi \pi^2 + \frac{1}{2}\lambda (u-u^*)^2$$`, desc: 'Präferenzstruktur der Zentralbank', variables: { '\\chi': 'Inflationsgewicht', '\\lambda': 'Arbeitslosigkeitsgewicht' } },
       { label: 'Inflationsbias', eq: String.raw`$$\pi^{D} = \frac{\alpha \lambda}{\chi}(u_n-u^*)$$`, desc: 'Diskretionäres Gleichgewicht unter rationalen Erwartungen', variables: {} }
@@ -714,21 +1288,57 @@ export const CONTENT = {
 
   taylor_regel: {
     motivation: 'Die Taylor-Regel übersetzt geldpolitische Reaktion in eine einfache, klausurfeste Leitzinsregel. Sie verknüpft Inflationsziel, Outputlücke und Realzinslogik.',
-    theorie: [
-      section('Regelform', `
-        <p>Die Taylor-Regel beschreibt, wie der Leitzins auf Inflation und reale Über- bzw. Unterauslastung reagieren soll.</p>
-        ${math(String.raw`$$i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Regelform</h4>
+<p>Die Taylor-Regel beschreibt, wie der Leitzins auf Inflation und reale Über- bzw. Unterauslastung reagieren soll.</p>
+        <div class="math-block">$$i_t = r^* + \\pi_t + a(\\pi_t-\\pi^*) + b(y_t-y_n)$$</div>
         <p>Sie ist keine rein mechanische Wahrheit, aber ein sehr gutes Prüfungswerkzeug für stabilitätsorientierte Geldpolitik.</p>
-      `),
-      section('Taylor-Prinzip', `
-        <p>Auf Inflation muss der Nominalzins mehr als eins zu eins reagieren, damit auch der Realzins steigt und die Nachfrage tatsächlich gebremst wird.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Taylor-Prinzip</h4>
+<p>Auf Inflation muss der Nominalzins mehr als eins zu eins reagieren, damit auch der Realzins steigt und die Nachfrage tatsächlich gebremst wird.</p>
         <p>Genau diese Forderung heißt Taylor-Prinzip.</p>
-      `),
-      section('Politische Deutung', `
-        <p>In Aufgaben mit Arbeitslosigkeits- oder Outputlücke entscheidet die Regel darüber, ob die Zentralbank trotz zielgenauer Inflation lockern oder straffen sollte.</p>
-        ${warn('Nominalzins reicht nicht', 'Nicht die Höhe des Nominalzinses an sich stabilisiert, sondern die Reaktion des Realzinses relativ zur Inflation.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Politische Deutung</h4>
+<p>In Aufgaben mit Arbeitslosigkeits- oder Outputlücke entscheidet die Regel darüber, ob die Zentralbank trotz zielgenauer Inflation lockern oder straffen sollte.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nominalzins reicht nicht:</strong> Nicht die Höhe des Nominalzinses an sich stabilisiert, sondern die Reaktion des Realzinses relativ zur Inflation.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Taylor (1993): US-Leitzins 1987–1992 gut approximiert durch Regel mit $a \\approx 1{,}5$, $b \\approx 0{,}5$. Taylor-Prinzip ($a>1$): Realzins steigt bei Inflationsanstieg → dämpft Nachfrage. In DSGE-Modellen: Taylor-Prinzip als Stabilitätsbedingung. An ELB: Regel bricht zusammen — Forward Guidance und QE ergänzen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>Realzins-Form: $r_t = i_t - \\pi^e_t$. Taylor-Prinzip $a>1$ bedeutet: bei $\\pi > \\pi^* $ steigt $r$ überproportional — stabilisiert Nachfrage und Erwartungen. Output-Glied $b>0$: Unterauslastung senkt $i$. Klausur: Parameter $a,b$ interpretieren und Policy-Reaktion auf Schock skizzieren (Inflationsschock vs. Output-Gap).</p><div class="warn-box" data-warning-placement="rail"><strong>Regel vs. Diskretion:</strong> Taylor-Regel ist Commitment-Benchmark — reine Diskretion kann Inflationsbias erzeugen (Barro-Gordon).</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Taylor-Regel</h4>
+<p>$i_t = r^* + \\pi_t + \\phi_\\pi(\\pi_t-\\pi^*) + \\phi_y(y_t-y^n)$ — reagiert auf Inflations- und Output-Lücke.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Praxis EZB/Fed</h4>
+<p>Zentralbanken folgen approximativ einer Reaktionsfunktion; Abweichungen erklären Marktbewegungen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Taylor-Regel</h4>
+<p>$i_t = r^* + \\pi_t + a(\\pi_t-\\pi^*) + b(y_t-y_n)$. Taylor-Prinzip: $a>1$ — Nominalzins reagiert stärker als 1:1 auf Inflation, damit Realzins steigt. Rechenaufgabe: Werte einsetzen, ELB beachten ($i\\geq 0$).</p><div class="warn-box" data-warning-placement="rail"><strong>Taylor-Regel ist keine EZB-Vorschrift:</strong> Die Regel ist Modell/Heuristik. In der Klausur: Reaktionslogik erklären, nicht historische Zinsen exakt reproduzieren.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Taylor-Regel', eq: String.raw`$$i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$$`, desc: 'Reaktionsfunktion der Geldpolitik', variables: { 'r^*': 'Natürlicher Realzins', '\\pi^*': 'Inflationsziel' } }
     ],
@@ -756,20 +1366,48 @@ export const CONTENT = {
 
   inflation_targeting: {
     motivation: 'Inflation Targeting ist im Kurs kein bloßes Schlagwort, sondern ein geldpolitisches Regime: Zielgröße, Reaktionsfunktion, Kommunikation und Informationssatz greifen ineinander.',
-    theorie: [
-      section('Regimekern', `
-        <p>Inflation Targeting verbindet ein explizites Inflationsziel mit operativer Unabhängigkeit der Zentralbank. Der Prüfungszugriff lautet deshalb: <strong>Welche Zielabweichung wird beobachtet, welches Instrument wird bewegt und über welchen Horizont soll Preisstabilität gesichert werden?</strong></p>
-      `),
-      section('EZB-Strategie und Zwei-Säulen-Logik', `
-        <p>Im Kurs ist die EZB-Strategie als Mischform aus Zielorientierung und Informationsbreite relevant: Konjunktur- und Schockanalyse stehen neben monetären und finanziellen Indikatoren.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Regimekern</h4>
+<p>Inflation Targeting verbindet ein explizites Inflationsziel mit operativer Unabhängigkeit der Zentralbank. Der Prüfungszugriff lautet deshalb: <strong>Welche Zielabweichung wird beobachtet, welches Instrument wird bewegt und über welchen Horizont soll Preisstabilität gesichert werden?</strong></p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">EZB-Strategie und Zwei-Säulen-Logik</h4>
+<p>Im Kurs ist die EZB-Strategie als Mischform aus Zielorientierung und Informationsbreite relevant: Konjunktur- und Schockanalyse stehen neben monetären und finanziellen Indikatoren.</p>
         <p>Klausurtechnisch gilt: <strong>Monetäre Aggregate sind Informationsvariablen, nicht der alleinige Steueranker.</strong> Primär wird auf Preisstabilität relativ zum Ziel geschaut.</p>
-        ${warn('M3 nicht mechanisch lesen', 'Hohes Geldmengenwachstum ist kein automatischer Zinsstraffungsbefehl, wenn Geldnachfrage oder Finanzmarktstress das Signal verzerren.')}
-      `),
-      section('Vorteile, Grenzen und ELB-Bezug', `
-        <p>Inflation Targeting stärkt Glaubwürdigkeit und Erwartungsverankerung. Die Kehrseite zeigt sich bei sehr niedrigem natürlichen Zins oder an der effektiven Untergrenze: Dann wird der Spielraum über den Realzins kleiner und Kommunikation/Forward Guidance wichtiger.</p>
-        ${warn('Ziel nicht mit Instrument verwechseln', 'Die Zentralbank steuert nicht direkt die Inflation, sondern Zins, Erwartungen und Finanzierungsbedingungen. Zwischen Instrument und Ziel liegt immer ein Übertragungsmechanismus.')}
-      `)
-    ].join(''),
+        <div class="warn-box" data-warning-placement="rail"><strong>M3 nicht mechanisch lesen:</strong> Hohes Geldmengenwachstum ist kein automatischer Zinsstraffungsbefehl, wenn Geldnachfrage oder Finanzmarktstress das Signal verzerren.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Vorteile, Grenzen und ELB-Bezug</h4>
+<p>Inflation Targeting stärkt Glaubwürdigkeit und Erwartungsverankerung. Die Kehrseite zeigt sich bei sehr niedrigem natürlichen Zins oder an der effektiven Untergrenze: Dann wird der Spielraum über den Realzins kleiner und Kommunikation/Forward Guidance wichtiger.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Ziel nicht mit Instrument verwechseln:</strong> Die Zentralbank steuert nicht direkt die Inflation, sondern Zins, Erwartungen und Finanzierungsbedingungen. Zwischen Instrument und Ziel liegt immer ein Übertragungsmechanismus.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Inflationsziel</h4>
+<p>Explizites Ziel (z.B. 2%) verankert Erwartungen; Abweichungen erfordern Transparenz und Forward Guidance.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Flexibles Targeting</h4>
+<p>Kurzfristige Abweichungen bei Schocks erlaubt, mittelfristig Rückkehr zum Ziel — vermeidet prozyklische Überreaktion.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Inflation Targeting</h4>
+<p>Regime: explizites $\\pi^*$, operative Unabhängigkeit, Forward Guidance. Steueranker: $\\pi-\\pi^*$, nicht M3 mechanisch. ELB: bei $i=0$ weniger Realzins-Spielraum — höheres Trend-$\\pi$ vor Schock = mehr Puffer ($r\\approx i-\\pi$).</p><div class="warn-box" data-warning-placement="rail"><strong>IT ≠ direkte Inflationssteuerung:</strong> Zentralbank steuert $i$ und Erwartungen; Übertragung auf $\\pi$ braucht Zeit und funktionierende Kanäle.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Zielorientierte Reaktionsfunktion', eq: String.raw`$$i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$$`, desc: 'Inflationsziel und Auslastung fließen gemeinsam in den Zinsentscheid ein', variables: { 'r^*': 'Natürlicher Realzins', '\\pi_t': 'Aktuelle Inflation', '\\pi^*': 'Inflationsziel', 'y_t-y_n': 'Outputlücke' } },
       { label: 'Realzins an der Untergrenze', eq: String.raw`$$r_t \approx i_t - \pi_t$$`, desc: 'Bei gegebener ELB hängt der Stabilisierungsspielraum an der Inflation', variables: { 'r_t': 'Ex-post-Realzins', 'i_t': 'Nominalzins', '\\pi_t': 'Inflation' } }
@@ -798,21 +1436,58 @@ export const CONTENT = {
 
   inflation_kosten: {
     motivation: 'Inflation ist in Makro II nicht nur eine Prozentzahl, sondern ein Wohlfahrts- und Stabilitätsproblem. Genauso wichtig sind aber die Kosten, Inflation wieder herunterzuholen.',
-    theorie: [
-      section('Warum Inflation reale Kosten erzeugt', `
-        <p>Inflation verzerrt Kassenhaltung, Preisvergleich, Vertragsbeziehungen und relative Preise. Im Kurs sind besonders prüfungsrelevant: Schuhsohlenkosten, Menükosten, Inflationssteuer auf Nominalvermögen und Fehlallokation durch unsynchrone Preisanpassung.</p>
-      `),
-      section('Disinflation und Opferquote', `
-        <p>Eine disinflationäre Politik verschiebt kurzfristig Inflation und Auslastung entlang der Phillipslogik. Genau daraus ergeben sich Arbeitslosigkeits- und Outputkosten der Disinflation.</p>
-        ${math(String.raw`$$\Delta u \approx -\frac{\Delta \pi}{\alpha}$$`)}
-        ${math(String.raw`$$SR = \frac{\text{kumulierte Outputverluste}}{|\Delta \pi|}$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum Inflation reale Kosten erzeugt</h4>
+<p>Inflation verzerrt Kassenhaltung, Preisvergleich, Vertragsbeziehungen und relative Preise. Im Kurs sind besonders prüfungsrelevant: Schuhsohlenkosten, Menükosten, Inflationssteuer auf Nominalvermögen und Fehlallokation durch unsynchrone Preisanpassung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Disinflation und Opferquote</h4>
+<p>Eine disinflationäre Politik verschiebt kurzfristig Inflation und Auslastung entlang der Phillipslogik. Genau daraus ergeben sich Arbeitslosigkeits- und Outputkosten der Disinflation.</p>
+        <div class="math-block">$$\\Delta u \\approx -\\frac{\\Delta \\pi}{\\alpha}$$</div>
+        <div class="math-block">$$SR = \\frac{\\text{kumulierte Outputverluste}}{|\\Delta \\pi|}$$</div>
         <p>Klausurfragen verlangen hier fast immer: <strong>Inflationsrückgang nennen → kurzfristige Kosten benennen → Rolle der Glaubwürdigkeit ergänzen.</strong></p>
-      `),
-      section('Glaubwürdigkeit und Geschwindigkeit', `
-        <p>Je glaubwürdiger die Zentralbank, desto schneller sinken Inflationserwartungen und desto kleiner fällt die Opferquote aus. Ohne Glaubwürdigkeit braucht dieselbe Disinflation stärkere reale Dämpfung.</p>
-        ${warn('Nur auf die Zielinflation schauen reicht nicht', 'Eine erfolgreiche Disinflation wird nicht nur am Endwert der Inflation gemessen, sondern auch an Outputverlusten, Arbeitsmarktfolgen und Erwartungsanpassung.')}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Glaubwürdigkeit und Geschwindigkeit</h4>
+<p>Je glaubwürdiger die Zentralbank, desto schneller sinken Inflationserwartungen und desto kleiner fällt die Opferquote aus. Ohne Glaubwürdigkeit braucht dieselbe Disinflation stärkere reale Dämpfung.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nur auf die Zielinflation schauen reicht nicht:</strong> Eine erfolgreiche Disinflation wird nicht nur am Endwert der Inflation gemessen, sondern auch an Outputverlusten, Arbeitsmarktfolgen und Erwartungsanpassung.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Friedman: Inflation ist „always and everywhere" monetär — langfristig. Kurzfristig: unerwartete Inflation verteilt zwischen Gläubigern/Schuldnern (Inflationssteuer). Menu costs (Akerlof-Yellen): Preisanpassung verzögert relative Preise. Disinflation nach Volcker: hohe Opferquote, dann Erwartungsankerung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Menu costs &amp; shoe-leather</h4>
+<p>Inflation verzerrt Preisschilder (Menu Costs) und erhöht Opportunitätskosten der Giralgeldhaltung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Disinflation cost</h4>
+<p>Disinflation kann hohe Arbeitslosenkosten haben (Sacrifice Ratio), besonders wenn $\\pi^e$ träge sind.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Inflationskosten</h4>
+<p>Inflationskosten: Schuhsohle, Menü, Fehlallokation, Inflationssteuer auf Nominale. Disinflation: Opferquote $SR$ = kumulierter Outputverlust / $|\\Delta\\pi|$. $\\Delta u \\approx -\\Delta\\pi/\\alpha$. Glaubwürdigkeit senkt $SR$.</p><div class="warn-box" data-warning-placement="rail"><strong>Disinflation ≠ kostenlos:</strong> Auch „gute" Disinflation hat kurzfristige Arbeitsmarktkosten — Größenordnung mit Phillips nennen.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Disinflation und Arbeitslosigkeit', eq: String.raw`$$\Delta u \approx -\frac{\Delta \pi}{\alpha}$$`, desc: 'Schnelle Disinflation erzeugt bei gegebener Steigung reale Kosten', variables: { '\\Delta u': 'Änderung der Arbeitslosigkeit', '\\Delta \\pi': 'Inflationsänderung', '\\alpha': 'Steigung der Phillipskurve' } },
       { label: 'Opferquote', eq: String.raw`$$SR = \frac{\sum_t (Y_n-Y_t)/Y_n}{|\Delta \pi|}$$`, desc: 'Kumulierter Outputverlust je Prozentpunkt Disinflation', variables: { 'SR': 'Sacrifice Ratio', 'Y_n-Y_t': 'Outputlücke' } }
@@ -841,20 +1516,57 @@ export const CONTENT = {
 
   wachstum_fakten: {
     motivation: 'Wachstumstheorie beginnt nicht mit einer Gleichung, sondern mit den Datenmustern, die erklärt werden sollen. Die stilisierten Fakten sind deshalb der Prüfungsanker vor jedem Modell.',
-    theorie: [
-      section('Stilisierte Fakten des Wachstums', `
-        <p>Der Kurs nutzt die klassischen Wachstumsfakten als Orientierungsrahmen: langfristiges Wachstum von Output pro Kopf, steigende Kapitalintensität, relativ stabile Faktoranteile und deutliche Unterschiede zwischen Ländern.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Stilisierte Fakten des Wachstums</h4>
+<p>Der Kurs nutzt die klassischen Wachstumsfakten als Orientierungsrahmen: langfristiges Wachstum von Output pro Kopf, steigende Kapitalintensität, relativ stabile Faktoranteile und deutliche Unterschiede zwischen Ländern.</p>
         <p>Die erste Klausurfrage lautet daher oft nicht „Welche Formel?“, sondern: <strong>Welches empirische Muster soll das Modell überhaupt erfassen?</strong></p>
-      `),
-      section('Konvergenz und Divergenz', `
-        <p>Solow impliziert bedingte Konvergenz: Länder mit ähnlichen Strukturparametern nähern sich ähnlichen Steady States an. Große internationale Unterschiede bleiben bestehen, wenn Sparquote, Institutionen, Demografie oder Produktivitätspfad systematisch verschieden sind.</p>
-        ${warn('Arme Länder wachsen nicht automatisch schneller', 'Schnelleres Aufholen folgt nur bei ähnlichen Fundamentaldaten. Ohne institutionelle und technologische Voraussetzungen bleibt Konvergenz aus.')}
-      `),
-      section('Wachstumszerlegung', `
-        <p>Wachstum wird im Kurs über Faktorbeiträge und Produktivitätsrest gelesen. Genau daraus folgt der Übergang zu Produktionsfunktion, Solow-Residuum und langfristigen Institutionenfragen.</p>
-        ${math(String.raw`$$g_Y \approx g_A + \alpha_K g_K + (1-\alpha_K) g_N$$`)}
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Wachstumszerlegung</h4>
+<p>Wachstum wird im Kurs über Faktorbeiträge und Produktivitätsrest gelesen. Genau daraus folgt der Übergang zu Produktionsfunktion, Solow-Residuum und langfristigen Institutionenfragen.</p>
+        <div class="math-block">$$g_Y \\approx g_A + \\alpha_K g_K + (1-\\alpha_K) g_N$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Konvergenz und Divergenz</h4>
+<p>Solow impliziert bedingte Konvergenz: Länder mit ähnlichen Strukturparametern nähern sich ähnlichen Steady States an. Große internationale Unterschiede bleiben bestehen, wenn Sparquote, Institutionen, Demografie oder Produktivitätspfad systematisch verschieden sind.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Arme Länder wachsen nicht automatisch schneller:</strong> Schnelleres Aufholen folgt nur bei ähnlichen Fundamentaldaten. Ohne institutionelle und technologische Voraussetzungen bleibt Konvergenz aus.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Kaldor (1961): sechs stilisierte Fakten — u.a. konstante Kapitalrendite, stabile Kapital-Einkommens-Quote, hohe Varianz der Wachstumsraten zwischen Ländern. Solow erklärt Faktorenanteile und Konvergenz; endogenes Wachstum (Romer, Lucas) ergänzt $g_A$-Erklärung. Klausur: Faktum → passendes Modell zuordnen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kaldor-Stilisierte Fakten</h4>
+<p>Steady growth of Y/L, stable r, stable K/Y ratio über lange Horizonte — Motivation für Solow.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Konvergenz empirisch</h4>
+<p>Ärmere Länder wachsen oft schneller conditional on policies — $\\beta$-Konvergenz in Querchnittsregressionen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Wachstumsfakten</h4>
+<p>Stilisierte Fakten vor Modell: Pro-Kopf-Wachstum, steigende $K/L$, stabile Faktorenanteile (Kaldor), Konvergenz/Divergenz zwischen Ländern. Klausur: erst Muster benennen, dann Modell zuordnen (Solow vs. endogen).</p><div class="warn-box" data-warning-placement="rail"><strong>Fakten ≠ Theorie:</strong> Empirische Muster belegen nicht automatisch Solow — sie motivieren Modellwahl.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Wachstumszerlegung', eq: String.raw`$$g_Y \approx g_A + \alpha_K g_K + (1-\alpha_K) g_N$$`, desc: 'BIP-Wachstum als Summe aus Produktivität, Kapital- und Arbeitsbeitrag', variables: { 'g_Y': 'BIP-Wachstum', 'g_A': 'TFP-/Produktivitätswachstum', 'g_K': 'Kapitalwachstum', 'g_N': 'Beschäftigungs- bzw. Arbeitswachstum', '\\alpha_K': 'Kapitaleinkommensanteil' } }
     ],
@@ -882,22 +1594,54 @@ export const CONTENT = {
 
   aggregierte_pf: {
     motivation: 'Bevor das Solow-Modell gerechnet wird, muss die Produktionsseite sitzen: Grenzerträge, Skalenerträge und Pro-Kopf-Formen sind die formale Grundlage aller späteren Wachstumsaussagen.',
-    theorie: [
-      section('Aggregierte Produktionsfunktion', `
-        <p>Die gesamtwirtschaftliche Produktionsfunktion verknüpft Kapital, Arbeit und Produktivität. Für Makro II ist die Cobb-Douglas-Form der Standardfall.</p>
-        ${math(String.raw`$$Y = A K^{\alpha} N^{1-\alpha}$$`)}
-      `),
-      section('Grenzerträge und Skalenerträge', `
-        <p>Jeder einzelne Faktor unterliegt typischerweise abnehmenden Grenzerträgen. Gleichzeitig kann die Funktion konstante Skalenerträge haben, wenn sich die Exponenten zu eins addieren.</p>
-        ${math(String.raw`$$MP_K = \frac{\partial Y}{\partial K}, \qquad MP_N = \frac{\partial Y}{\partial N}$$`)}
-        ${math(String.raw`$$f(\lambda K,\lambda N)=\lambda f(K,N)\quad \text{bei CRS}$$`)}
-      `),
-      section('Pro-Kopf-Form', `
-        <p>Für Wachstum wird die Funktion in intensive Form überführt. Das erlaubt die Analyse von Kapitalintensität und Produktion pro Kopf.</p>
-        ${math(String.raw`$$y = \frac{Y}{N} = A k^{\alpha}, \qquad k = \frac{K}{N}$$`)}
-        ${warn('CRS ist nicht steigender Grenzertrag', 'Konstante Skalenerträge bedeuten nur, dass alle Inputs gemeinsam proportional vergrößert werden können. Einzelne Grenzerträge können trotzdem abnehmen.')}
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Aggregierte Produktionsfunktion</h4>
+<p>Die gesamtwirtschaftliche Produktionsfunktion verknüpft Kapital, Arbeit und Produktivität. Für Makro II ist die Cobb-Douglas-Form der Standardfall.</p>
+        <div class="math-block">$$Y = A K^{\\alpha} N^{1-\\alpha}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Grenzerträge und Skalenerträge</h4>
+<p>Jeder einzelne Faktor unterliegt typischerweise abnehmenden Grenzerträgen. Gleichzeitig kann die Funktion konstante Skalenerträge haben, wenn sich die Exponenten zu eins addieren.</p>
+        <div class="math-block">$$MP_K = \\frac{\\partial Y}{\\partial K}, \\qquad MP_N = \\frac{\\partial Y}{\\partial N}$$</div>
+        <div class="math-block">$$f(\\lambda K,\\lambda N)=\\lambda f(K,N)\\quad \\text{bei CRS}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Pro-Kopf-Form</h4>
+<p>Für Wachstum wird die Funktion in intensive Form überführt. Das erlaubt die Analyse von Kapitalintensität und Produktion pro Kopf.</p>
+        <div class="math-block">$$y = \\frac{Y}{N} = A k^{\\alpha}, \\qquad k = \\frac{K}{N}$$</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>CRS ist nicht steigender Grenzertrag:</strong> Konstante Skalenerträge bedeuten nur, dass alle Inputs gemeinsam proportional vergrößert werden können. Einzelne Grenzerträge können trotzdem abnehmen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Neoklassische PF: $Y=F(K,L)$ mit Grenzprodukten $F_K, F_L$. Euler-Theorem bei linearer Homogenität: Faktorenanteile = Elastizitäten. Solow nutzt $y=f(k)$ mit $f'(k)>0$, $f''(k)<0$. Break-even-Investition $(\\delta+n)k$ vs. $sf(k)$ im Diagramm — Standardzeichnung in VL.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Cobb-Douglas</h4>
+<p>$Y = A K^\\alpha L^{1-\\alpha}$; Grenzprodukte und Faktorentlohnung im Wettbewerb.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Skalenerträge</h4>
+<p>Langfristig oft konstante Skalenerträge angenommen; $\\alpha$ misst Kapitalanteil am Einkommen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Produktionsfunktion</h4>
+<p>Cobb-Douglas: $y = Ak^\\alpha$. Grenzprodukte: $MPK = \\alpha y/k$, $MPL = (1-\\alpha)y/l$. Skalenerträge: $\\alpha+\\beta$ bei $Y=F(K,L)$. Solow: $sf(k) = \\delta k$ im SS. Faktorenanteile bei CD konstant.</p><div class="warn-box" data-warning-placement="rail"><strong>MPK vs. Rendite:</strong> Grenzprodukt fällt in $k$ (Diminishing Returns); das bedeutet nicht automatisch negative Gesamtrendite.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Cobb-Douglas', eq: String.raw`$$Y = A K^{\alpha} N^{1-\alpha}$$`, desc: 'Standardfunktion des Solow-Modells', variables: { 'A': 'Produktivität', '\\alpha': 'Kapitalelastizität' } },
       { label: 'Pro-Kopf-Form', eq: String.raw`$$y = A k^{\alpha}$$`, desc: 'Intensive Form bei konstanten Skalenerträgen', variables: {} }
@@ -907,27 +1651,61 @@ export const CONTENT = {
 
   solow_basis: {
     motivation: 'Das Solow-Grundmodell erklärt, wie Sparen, Abschreibung und Kapitalintensität langfristiges Niveauwachstum bestimmen. Es trennt sauber zwischen Niveaueffekten und dauerhaften Wachstumsraten.',
-    theorie: [
-      section('Akkumulationsgleichung', `
-        <p>Im Grundmodell ohne technischen Fortschritt und ohne Bevölkerungswachstum wird Kapital pro Kopf durch Ersparnis aufgebaut und durch Abschreibung abgebaut.</p>
-        ${math(String.raw`$$\dot k = s f(k) - \delta k$$`)}
-      `),
-      section('Steady State', `
-        <p>Im Steady State kompensiert die Investition genau die Break-even-Investition. Dann bleibt $k$ konstant.</p>
-        ${math(String.raw`$$s f(k^*) = \delta k^*$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Akkumulationsgleichung</h4>
+<p>Im Grundmodell ohne technischen Fortschritt und ohne Bevölkerungswachstum wird Kapital pro Kopf durch Ersparnis aufgebaut und durch Abschreibung abgebaut.</p>
+        <div class="math-block">$$\\dot k = s f(k) - \\delta k$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Steady State</h4>
+<p>Im Steady State kompensiert die Investition genau die Break-even-Investition. Dann bleibt $k$ konstant.</p>
+        <div class="math-block">$$s f(k^*) = \\delta k^*$$</div>
         <p>Eine höhere Sparquote hebt das langfristige Niveau von $k$ und $y$, aber nicht die dauerhafte Wachstumsrate pro Kopf.</p>
-      `),
-      section('Konvergenzlogik', `
-        <p>Liegt die Wirtschaft links vom Steady State, übersteigt Investition die Abschreibung; rechts davon schrumpft die Kapitalintensität.</p>
-        ${warn('Mehr Sparen heißt nicht mehr Wachstum für immer', 'Im Solow-Grundmodell hebt mehr Sparen nur das Niveau. Dauerhaftes Pro-Kopf-Wachstum braucht technischen Fortschritt.')}
-      `),
-      section('Numerisches Beispiel', `
-        <p>Cobb-Douglas $f(k)=k^{0{,}5}$, $\\delta=0{,}05$, $s=0{,}2$. Steady State: $sk^{*\\alpha}=(\\delta+n)k^*$ → $k^*=(s/(\\delta+n))^{1/(1-\\alpha)}$. Ohne Bevölkerungswachstum ($n=0$): $k^*=(0{,}2/0{,}05)^2=16$, $y^*=4$. Liegt $k_0=4$, dann $\\dot k>0$ — die Wirtschaft konvergiert nach oben.</p>
-      `),
-      section('In der Klausur: Solow-Grundmodell', `
-        <p>Typische Aufgaben: (1) Steady State aus $sf(k^*)=\\delta k^*$ berechnen. (2) Richtungsaussage bei Parameteränderung ($s\\uparrow$ → $k^*\\uparrow$, Wachstumsrate unverändert). (3) Konvergenz: $k<k^*$ → Wachstum, $k>k^*$ → Schrumpfung. Immer Niveau vs. Rate trennen.</p>
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Konvergenzlogik</h4>
+<p>Liegt die Wirtschaft links vom Steady State, übersteigt Investition die Abschreibung; rechts davon schrumpft die Kapitalintensität.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Mehr Sparen heißt nicht mehr Wachstum für immer:</strong> Im Solow-Grundmodell hebt mehr Sparen nur das Niveau. Dauerhaftes Pro-Kopf-Wachstum braucht technischen Fortschritt.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Numerisches Beispiel</h4>
+<p>Cobb-Douglas $f(k)=k^{0{,}5}$, $\\delta=0{,}05$, $s=0{,}2$. Steady State: $sk^{*\\alpha}=(\\delta+n)k^*$ → $k^*=(s/(\\delta+n))^{1/(1-\\alpha)}$. Ohne Bevölkerungswachstum ($n=0$): $k^*=(0{,}2/0{,}05)^2=16$, $y^*=4$. Liegt $k_0=4$, dann $\\dot k>0$ — die Wirtschaft konvergiert nach oben.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Numerisches Beispiel</h4>
+<p>CD: $f(k)=k^{0{,}5}$, $\\delta=0{,}05$, $s=0{,}2$, $n=0$. Dann $k^*=(s/\\delta)^2=16$, $y^*=4$. Liegt $k_0=4$, gilt $\\dot k>0$ — die Wirtschaft konvergiert nach oben. Parameteränderung: $s\\uparrow$ verschiebt Investitionskurve nach oben → neues höheres $k^*$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Akkumulationsgleichung</h4>
+<p>$\\dot k = s f(k) - (\\delta+n)k$; Investition pro Kopf minus effektive Abschreibung und Bevölkerungswachstum.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Goldene Regel vs. goldenes Kapital</h4>
+<p>Goldene Regel maximiert Konsum im Steady State; goldene Sparquote $s^*$ ist nicht automatisch optimal für Konsum.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Solow-Grundmodell</h4>
+<p>Typische Aufgaben: (1) Steady State aus $sf(k^*)=\\delta k^*$ berechnen. (2) Richtungsaussage bei Parameteränderung ($s\\uparrow$ → $k^*\\uparrow$, Wachstumsrate unverändert). (3) Konvergenz: $k<k^*$ → Wachstum, $k>k^*$ → Schrumpfung. Immer Niveau vs. Rate trennen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Solow-Grundmodell</h4>
+<p>Akkumulation: $\\dot k = sf(k)-\\delta k$. SS: $sf(k^*)=\\delta k^*$. Mehr Sparen → höheres Niveau von $k^*, y^*$, aber ohne $g_A$ keine dauerhafte Wachstumsrate. Konvergenzdiagramm: Investitions- vs. Break-even-Kurve zeichnen.</p><div class="warn-box" data-warning-placement="rail"><strong>Sparen ≠ Wachstum:</strong> Höhere $s$ hebt das Niveau, nicht die Trendwachstumsrate pro Kopf — das kommt aus technischem Fortschritt.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Kapitaldynamik', eq: String.raw`$$\dot k = s f(k) - \delta k$$`, desc: 'Akkumulation im Grundmodell', variables: { 's': 'Sparquote', '\\delta': 'Abschreibung' } },
       { label: 'Steady-State-Bedingung', eq: String.raw`$$s f(k^*) = \delta k^*$$`, desc: 'Investition = Break-even-Investition', variables: {} }
@@ -937,20 +1715,56 @@ export const CONTENT = {
 
   steady_state: {
     motivation: 'Der Steady State ist die eigentliche Langfrist-Lesart des Solow-Modells: Dort entscheidet sich, welches Pro-Kopf-Niveau eine Volkswirtschaft bei gegebenen Parametern dauerhaft tragen kann.',
-    theorie: [
-      section('Steady-State-Bedingung', `
-        <p>Im Steady State sind Nettoinvestitionen pro Kopf null. Die Investitionskurve deckt gerade die Break-even-Investition.</p>
-        ${math(String.raw`$$s f(k^*) = (\delta + n)k^*$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Steady-State-Bedingung</h4>
+<p>Im Steady State sind Nettoinvestitionen pro Kopf null. Die Investitionskurve deckt gerade die Break-even-Investition.</p>
+        <div class="math-block">$$s f(k^*) = (\\delta + n)k^*$$</div>
         <p>Mit technischem Fortschritt wird aus \\(\\delta+n\\) die effektive Verlust-/Verdünnungsrate \\(\\delta+n+g_A\\).</p>
-      `),
-      section('Komparative Statik', `
-        <p>Mehr Sparen erhöht das Steady-State-Niveau, mehr Abschreibung oder schnelleres Bevölkerungswachstum drücken es. Genau diese Richtungsaussagen sind klausurrelevant, bevor überhaupt gerechnet wird.</p>
-        ${warn('Niveaueffekt nicht mit Dauerwachstum verwechseln', 'Eine höhere Sparquote hebt den Steady State an, erzeugt aber ohne technischen Fortschritt kein dauerhaft höheres Pro-Kopf-Wachstum.')}
-      `),
-      section('Konvergenzpfad', `
-        <p>Links vom Steady State gilt \\(sf(k)>(\\delta+n)k\\): Kapital pro Kopf steigt. Rechts davon schrumpft \\(k\\). Der Steady State ist deshalb der Anker für Konvergenzfragen und Übergangsdynamik.</p>
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>FOC im SS: $sf'(k^*) = \\delta + n$. Bei $f(k)=k^\\alpha$: $k^* = \\big(\\frac{s}{\\delta+n}\\big)^{1/(1-\\alpha)}$. Halbe Lebensdistanz: Zeit bis $k$ halbe Distanz zu $k^*$ zurückgelegt — qualitativ von $s$ und $\\alpha$ abhängig. Konvergenzgeschwindigkeit ist zentral für Wachstumstransitions-Aufgaben.</p><div class="warn-box" data-warning-placement="rail"><strong>SS vs. Goldene Regel:</strong> $k^*$ hängt von $s$ ab; $k_{gold}$ aus Technologie — beide im selben Diagramm, aber unterschiedliche Fragestellungen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Komparative Statik</h4>
+<p>Mehr Sparen erhöht das Steady-State-Niveau, mehr Abschreibung oder schnelleres Bevölkerungswachstum drücken es. Genau diese Richtungsaussagen sind klausurrelevant, bevor überhaupt gerechnet wird.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Niveaueffekt nicht mit Dauerwachstum verwechseln:</strong> Eine höhere Sparquote hebt den Steady State an, erzeugt aber ohne technischen Fortschritt kein dauerhaft höheres Pro-Kopf-Wachstum.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Konvergenzpfad</h4>
+<p>Links vom Steady State gilt \\(sf(k)>(\\delta+n)k\\): Kapital pro Kopf steigt. Rechts davon schrumpft \\(k\\). Der Steady State ist deshalb der Anker für Konvergenzfragen und Übergangsdynamik.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Transition dynamics: $\\dot k = sf(k)-(\\delta+n)k$ ist Autonomous Differential Equation. Stabilität: $f'(k^*) < \\delta+n$ garantiert Konvergenz. Goldene Regel vs. Steady State: $k^*$ aus $s$; $k_{gold}$ aus $f'(k)=\\delta+n$. Diagramm mit $sf(k)$ und $(\\delta+n)k$ ist Pflichtzeichnung in Solow-Klausuren.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Grafische Steady-State-Analyse</h4>
+<p>Schnitt von $sf(k)$ und $(\\delta+n)k$ bestimmt $k^*$; links davon $k$ steigt, rechts sinkt $k$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Vergleiche Statik</h4>
+<p>$n\\uparrow$ → $k^*$ sinkt; $s\\uparrow$ → $k^*$ steigt; $g_A\\uparrow$ → höheres Wachstum pro Kopf.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Steady State</h4>
+<p>SS: $sf(k^*) = (\\delta+n)k^*$. Cobb-Douglas: $k^* = (sA/(\\delta+n))^{1/(1-\\alpha)}$. $s↑$ → höheres Niveau, nicht höheres $g_y$ ohne $g_A$. Konvergenz: $k<k^*$ → Wachstum; $k>k^*$ → Schrumpfung.</p><div class="warn-box" data-warning-placement="rail"><strong>SS-Berechnung:</strong> Immer Break-even $(\\delta+n)k$ mit Investition $sf(k)$ gleichsetzen — nicht $s$ mit $\\delta$ verwechseln.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Steady-State-Bedingung', eq: String.raw`$$s f(k^*) = (\delta+n)k^*$$`, desc: 'Investition deckt Abschreibung und Verdünnung gerade ab', variables: { 'k^*': 'Kapital pro Kopf im Steady State', 'n': 'Bevölkerungswachstum', '\\delta': 'Abschreibung' } },
       { label: 'Cobb-Douglas-Steady-State', eq: String.raw`$$k^* = \left(\frac{sA}{\delta+n}\right)^{\!\frac{1}{1-\alpha}}$$`, desc: 'Explizite Lösung bei \\(y=Ak^\\alpha\\)', variables: { 'A': 'Produktivität', '\\alpha': 'Kapitalelastizität' } }
@@ -979,20 +1793,61 @@ export const CONTENT = {
 
   goldene_sparquote: {
     motivation: 'Nicht jeder Steady State ist normativ gut. Die Goldene Sparquote beantwortet die klausurrelevante Frage, bei welcher Kapitalintensität der langfristige Konsum maximal ist.',
-    theorie: [
-      section('Konsum im Steady State', `
-        <p>Im langfristigen Gleichgewicht gilt \\(c^* = f(k^*) - (\\delta+n)k^*\\). Mehr Sparen erhöht nicht automatisch den Konsum, weil ein Teil des Outputs nur noch zur Kapitalerhaltung gebraucht wird.</p>
-      `),
-      section('Goldene Regel', `
-        <p>Die Goldene Regel maximiert den Steady-State-Konsum. Dazu muss das Grenzprodukt des Kapitals gerade der Break-even-Belastung entsprechen.</p>
-        ${math(String.raw`$$f'(k_{gold}) = \delta + n$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Konsum im Steady State</h4>
+<p>Im langfristigen Gleichgewicht gilt \\(c^* = f(k^*) - (\\delta+n)k^*\\). Mehr Sparen erhöht nicht automatisch den Konsum, weil ein Teil des Outputs nur noch zur Kapitalerhaltung gebraucht wird.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Goldene Regel</h4>
+<p>Die Goldene Regel maximiert den Steady-State-Konsum. Dazu muss das Grenzprodukt des Kapitals gerade der Break-even-Belastung entsprechen.</p>
+        <div class="math-block">$$f'(k_{gold}) = \\delta + n$$</div>
         <p>Für Cobb-Douglas folgt im Standardfall: \\(s_{gold}=\\alpha\\). Das ist eine besonders klausurstabile Merkregel.</p>
-      `),
-      section('Über- und Unterakkumulation', `
-        <p>Liegt die Wirtschaft rechts vom goldenen Kapitalstock, wird „zu viel“ gespart: Weniger Sparen kann den Konsum erhöhen. Links davon ist zusätzlicher Kapitalaufbau konsumsteigernd.</p>
-        ${warn('Goldene Regel maximiert Konsum, nicht Output', 'Die outputmaximierende und die konsummaximierende Sparquote fallen nicht notwendig zusammen. In Klausuren ist genau diese Unterscheidung oft die Falle.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>Bei Cobb-Douglas $f(k)=k^\\alpha$: $k_{gold} = \\big(\\frac{\\alpha}{\\delta+n}\\big)^{1/(1-\\alpha)}$. Vergleiche $k^*$ bei gegebener Sparquote $s$ mit $k_{gold}$ — liegt $k^* > k_{gold}$, ist die Volkswirtschaft dynamisch ineffizient (zu viel Sparen). Klausur: Diagramm mit $sf(k)$, $(\\delta+n)k$ und $c^*$ markieren.</p><div class="warn-box" data-warning-placement="rail"><strong>Goldene Regel ≠ optimale Sparquote:</strong> Die goldene Regel maximiert Konsum pro Kopf im SS — nicht zwingend die utilitaristisch optimale Sparquote bei endlicher Zeitpräferenz.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Über- und Unterakkumulation</h4>
+<p>Liegt die Wirtschaft rechts vom goldenen Kapitalstock, wird „zu viel“ gespart: Weniger Sparen kann den Konsum erhöhen. Links davon ist zusätzlicher Kapitalaufbau konsumsteigernd.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Goldene Regel maximiert Konsum, nicht Output:</strong> Die outputmaximierende und die konsummaximierende Sparquote fallen nicht notwendig zusammen. In Klausuren ist genau diese Unterscheidung oft die Falle.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Phelps (1966): Goldene Regel unabhängig von Präferenzen — rein technisch aus PF. Konsum pro Kopf im SS: $c^* = f(k^*) - (\\delta+n)k^*$. Maximum bei $k_{gold}$ wo $f'(k_{gold})=\\delta+n$. Dynamische Ineffizienz wenn $k > k_{gold}$: zu viel Kapital bindet Ressourcen in Erhalt statt Konsum.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Goldene Regel</h4>
+<p>Maximiert $c^* = f(k^*) - (\\delta+n)k^*$; impliziert $MPK = \\delta+n$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Dynamische Ineffizienz</h4>
+<p>Zu viel Kapital ($k$ über goldener Regel) kann dynamisch ineffizient sein — zu wenig Konsum heute.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Goldene Sparquote</h4>
+<p>Maximiert $c^* = f(k^*)-(\\delta+n)k^*$. Bedingung: $f'(k_{gold}) = \\delta+n$. CD: $s_{gold}=\\alpha$. Rechts von $k_{gold}$: Überakkumulation — weniger Sparen kann $c^*$ erhöhen.</p><div class="warn-box" data-warning-placement="rail"><strong>Gold ≠ outputmaximierend:</strong> Maximaler Konsum und maximaler Output fallen bei $s_{gold}$ und $s_{max}$ auseinander.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Goldene Regel', eq: String.raw`$$f'(k_{gold}) = \delta + n$$`, desc: 'Grenzprodukt des Kapitals = Break-even-Belastung', variables: { 'k_{gold}': 'Goldener Kapitalstock' } },
       { label: 'Goldene Sparquote (Cobb-Douglas)', eq: String.raw`$$s_{gold} = \alpha$$`, desc: 'Bei \\(y=Ak^\\alpha\\) entspricht die optimale Sparquote dem Kapitalanteil', variables: { '\\alpha': 'Kapitalelastizität' } }
@@ -1021,21 +1876,53 @@ export const CONTENT = {
 
   tech_fortschritt: {
     motivation: 'Mit technischem Fortschritt wird aus dem Solow-Modell ein dauerhaft wachsendes System. Hier sitzt die eigentliche Langfristlogik des Pro-Kopf-Wachstums.',
-    theorie: [
-      section('Arbeitsvermehrender technischer Fortschritt', `
-        <p>Makro II verwendet den Standardfall arbeitsvermehrenden Fortschritts. Dann wird die Produktion pro Arbeitseffizienzeinheit analysiert.</p>
-        ${math(String.raw`$$Y = F(K, AN)$$`)}
-        ${math(String.raw`$$\dot{\tilde k} = s f(\tilde k) - (n + g_A + \delta)\tilde k$$`)}
-      `),
-      section('Wachstum im Steady State', `
-        <p>Im Steady State pro Arbeitseffizienzeinheit wachsen Output und Konsum pro Kopf mit der Rate des technischen Fortschritts $g_A$.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Arbeitsvermehrender technischer Fortschritt</h4>
+<p>Makro II verwendet den Standardfall arbeitsvermehrenden Fortschritts. Dann wird die Produktion pro Arbeitseffizienzeinheit analysiert.</p>
+        <div class="math-block">$$Y = F(K, AN)$$</div>
+        <div class="math-block">$$\\dot{\\tilde k} = s f(\\tilde k) - (n + g_A + \\delta)\\tilde k$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Wachstum im Steady State</h4>
+<p>Im Steady State pro Arbeitseffizienzeinheit wachsen Output und Konsum pro Kopf mit der Rate des technischen Fortschritts $g_A$.</p>
         <p>Deshalb erzeugt mehr Sparen auch hier vor allem Niveaueffekte, während dauerhafte Pro-Kopf-Wachstumsraten aus Produktivitätsfortschritt stammen.</p>
-      `),
-      section('Solow-Residuum und Institutionenlogik', `
-        <p>In empirischen Wachstumszerlegungen erscheint technischer Fortschritt oft als Residuum. Das ist kein „reiner Technikschock“, sondern eine Sammelgröße für Effizienz, Organisation, Wissen und institutionelle Rahmenbedingungen.</p>
-        ${warn('Residual nicht mystifizieren', 'Das Solow-Residuum misst alles nicht direkt beobachtete produktivitätsrelevante Wachstum. Es ist interpretierbar, aber nicht fehlerfrei „wahre Technologie“.')}
-      `)
-    ].join(''),
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Solow-Residuum und Institutionenlogik</h4>
+<p>In empirischen Wachstumszerlegungen erscheint technischer Fortschritt oft als Residuum. Das ist kein „reiner Technikschock“, sondern eine Sammelgröße für Effizienz, Organisation, Wissen und institutionelle Rahmenbedingungen.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Residual nicht mystifizieren:</strong> Das Solow-Residuum misst alles nicht direkt beobachtete produktivitätsrelevante Wachstum. Es ist interpretierbar, aber nicht fehlerfrei „wahre Technologie“.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Harrod-neutraler Fortschritt: $AN$ wächst mit Rate $g_A$ — effizienzsteigernd ohne Verzerrung der Faktorenanteile. Im $\\tilde k$-Raum: kein Wachstum im SS, aber $Y/L$ wächst mit $g_A$. TFP-Wachstum in Growth Accounting: $\\Delta \\ln Y - \\alpha \\Delta \\ln K - (1-\\alpha)\\Delta \\ln L$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Labor-augmenting</h4>
+<p>$Y = F(K, A L)$; $g_A$ treibt dauerhaftes Pro-Kopf-Wachstum im Balanced Growth Path.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">BGP</h4>
+<p>Alle Variablen in effizienzen Einheiten wachsen mit $g_A$; Kapitalquote stabil bei Cobb-Douglas.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Technischer Fortschritt</h4>
+<p>Arbeitsvermehrend: $\\tilde k = K/(AN)$, $\\dot{\\tilde k} = sf(\\tilde k)-(\\delta+n+g_A)\\tilde k$. Im SS: $g_{Y/N}=g_A$. Solow-Residuum: nicht beobachtetes Wachstum — Sammelgröße für Technologie, Institutionen, Human Capital.</p><div class="warn-box" data-warning-placement="rail"><strong>Residuum ≠ exogene Technologie:</strong> Das Residuum misst alles außer $K$- und $L$-Wachstum — Interpretation vorsichtig.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Solow mit technischem Fortschritt', eq: String.raw`$$\dot{\tilde k} = s f(\tilde k) - (n + g_A + \delta)\tilde k$$`, desc: 'Kapital pro Arbeitseffizienzeinheit', variables: { 'g_A': 'Technischer Fortschritt', 'n': 'Bevölkerungswachstum' } },
       { label: 'Wachstum pro Kopf im Steady State', eq: String.raw`$$g_{Y/N}=g_A$$`, desc: 'Dauerhaftes Pro-Kopf-Wachstum folgt dem technischen Fortschritt', variables: { 'g_A': 'Wachstum der Arbeitseffizienz' } }
@@ -1045,21 +1932,62 @@ export const CONTENT = {
 
   budgetrestriktion: {
     motivation: 'Die staatliche Budgetrestriktion ist die Buchhaltung hinter jeder Schuldenfrage. Ohne sie bleiben Tragfähigkeit, Primärsaldo und spätere Steuerlast begriffslos.',
-    theorie: [
-      section('Periodische Budgetrestriktion des Staates', `
-        <p>Neue Schulden entstehen aus alter Schuld, Zinslast und Primärsaldo. Diese Buchhaltung ist der Startpunkt jeder Schuldenfrage.</p>
-        ${math(String.raw`$$B_t = (1+r)B_{t-1} + G_t - T_t$$`)}
-      `),
-      section('Primärsaldo und intertemporale Lesart', `
-        <p>Der Primärsaldo trennt laufende Fiskalpolitik von Zinslasten. Über Vorwärtsiteration folgt daraus die intertemporale Budgetrestriktion: Heutige Schulden müssen durch künftige Primärüberschüsse oder Seigniorage gedeckt sein.</p>
-        ${math(String.raw`$$PD_t = G_t - T_t$$`)}
-        ${math(String.raw`$$B_0 = \sum_{t=1}^{\infty} \frac{T_t-G_t}{(1+r)^t}$$`)}
-      `),
-      section('Klausurfallen', `
-        ${warn('Primärsaldo ist nicht Gesamtsaldo', 'Wer Zinslasten und Primärsaldo nicht trennt, verwechselt laufende Fiskalentscheidung mit Altlastenproblem.')}
-        ${warn('Buchhaltung ist noch keine Tragfähigkeit', 'Die periodische Restriktion sagt, wie Schulden entstehen. Ob sie tragfähig sind, hängt erst an Wachstum, Zinsdifferenz und künftigen Primärpfaden.')}
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Periodische Budgetrestriktion des Staates</h4>
+<p>Neue Schulden entstehen aus alter Schuld, Zinslast und Primärsaldo. Diese Buchhaltung ist der Startpunkt jeder Schuldenfrage.</p>
+        <div class="math-block">$$B_t = (1+r)B_{t-1} + G_t - T_t$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Primärsaldo und intertemporale Lesart</h4>
+<p>Der Primärsaldo trennt laufende Fiskalpolitik von Zinslasten. Über Vorwärtsiteration folgt daraus die intertemporale Budgetrestriktion: Heutige Schulden müssen durch künftige Primärüberschüsse oder Seigniorage gedeckt sein.</p>
+        <div class="math-block">$$PD_t = G_t - T_t$$</div>
+        <div class="math-block">$$B_0 = \\sum_{t=1}^{\\infty} \\frac{T_t-G_t}{(1+r)^t}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>Diskontierte Staatsbudget: $B_0 = \\sum_{t=0}^{\\infty} \\frac{PS_t}{(1+r)^t}$ bei $r$ konstant. No-Ponzi: $\\lim_{T\\to\\infty} B_T/(1+r)^T \\geq 0$. Verbindung zu Haushalten: Ricardian equivalence wenn Haushalte dieselbe IR internalisieren. Tragfähigkeit: $b$ und $r-g$ gemeinsam bewerten.</p><div class="warn-box" data-warning-placement="rail"><strong>Intertemporale Konsistenz:</strong> Einmalige Schuldentilgung vs. dauerhafter Primärüberschuss — Klausur unterscheidet Niveau und Dynamik.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Barro (1979): Ricardianische Äquivalenz aus intertemporaler Budgetrestriktion der Haushalte. Fortschreibung $B_t = (1+r)B_{t-1} + PD_t$ ist Ausgangspunkt für Schuldenquoten-Dynamik. Intertemporale Budgetrestriktion verknüpft mit No-Ponzi-Game: Grenzschuld muss in Barwert null sein.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Intertemporale Budgetrestriktion</h4>
+<p>Staat muss langfristig Schulden bedienen; Primärsaldo und Wachstum bestimmen Tragfähigkeit.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Primärsaldo</h4>
+<p>Defizit minus Zinszahlungen: strukturelle Haushaltsdisziplin ohne Zinslast.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Budgetrestriktion</h4>
+<p>Periodisch: $B_t = (1+r)B_{t-1} + (G-T)_t$. Primärsaldo $PS = T-G$ separat von Zinslast. Intertemporal: $B_0 = \\sum (T-G)/(1+r)^t$. Buchhaltung ≠ Tragfähigkeit.</p><div class="warn-box" data-warning-placement="rail"><strong>Nominal vs. real:</strong> In Wachstumsmodellen oft reale Größen — Zins und Wachstum konsistent definieren.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Primärsaldo ist nicht Gesamtsaldo:</strong> Wer Zinslasten und Primärsaldo nicht trennt, verwechselt laufende Fiskalentscheidung mit Altlastenproblem.</div>
+        <div class="warn-box" data-warning-placement="rail"><strong>Buchhaltung ist noch keine Tragfähigkeit:</strong> Die periodische Restriktion sagt, wie Schulden entstehen. Ob sie tragfähig sind, hängt erst an Wachstum, Zinsdifferenz und künftigen Primärpfaden.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Periodische Budgetrestriktion', eq: String.raw`$$B_t = (1+r)B_{t-1} + G_t - T_t$$`, desc: 'Fortschreibung des nominalen Schuldenstands', variables: { 'B_t': 'Schuldenstand am Periodenende', 'G_t-T_t': 'Primärdefizit' } },
       { label: 'Intertemporale Restriktion', eq: String.raw`$$B_0 = \sum_{t=1}^{\infty} \frac{T_t-G_t}{(1+r)^t}$$`, desc: 'Heute bestehende Schuld = Barwert künftiger Primärüberschüsse', variables: { 'B_0': 'Anfangsschuld' } }
@@ -1088,22 +2016,58 @@ export const CONTENT = {
 
   schuldenquote_dynamik: {
     motivation: 'Für Makro II zählt die relative Größe zum BIP. Erst die Schuldenquote macht sichtbar, wann Zins, Wachstum und Primärsaldo den Pfad stabilisieren oder eskalieren.',
-    theorie: [
-      section('Schneeballeffekt und Stabilisierung', `
-        <p>Aus Budgetrestriktion und BIP-Normierung folgt näherungsweise die Dynamik der Schuldenquote.</p>
-        ${math(String.raw`$$\Delta b \approx (r-g)b - ps$$`)}
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Schneeballeffekt und Stabilisierung</h4>
+<p>Aus Budgetrestriktion und BIP-Normierung folgt näherungsweise die Dynamik der Schuldenquote.</p>
+        <div class="math-block">$$\\Delta b \\approx (r-g)b - ps$$</div>
         <p>Ist \\(r>g\\), wirkt der Schneeballeffekt gegen den Staat. Ein ausreichend hoher Primärüberschuss kann die Quote trotzdem stabilisieren.</p>
-      `),
-      section('Niveaulesart statt Schuldenstand-Fixierung', `
-        <p>Ein steigender nominaler Schuldenstand muss die Schuldenquote nicht erhöhen. Genau deshalb ist die Nennerlogik des BIP in Klausuren so wichtig.</p>
-        ${warn('Mehr Schuldstand heißt nicht automatisch höhere Quote', 'Wenn das BIP schneller wächst als der Schuldstand, kann die Quote trotz höherer Nominalschuld sinken.')}
-      `),
-      section('Stabilisierungsbedingung', `
-        <p>Zur Stabilisierung der Quote auf aktuellem Niveau muss gelten:</p>
-        ${math(String.raw`$$ps^* = (r-g)b$$`)}
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Stabilisierungsbedingung</h4>
+<p>Zur Stabilisierung der Quote auf aktuellem Niveau muss gelten:</p>
+        <div class="math-block">$$ps^* = (r-g)b$$</div>
         <p>Diese Formel ist das Standardwerkzeug für schnelle Prüfungsrechnungen und für politische Urteile über Tragfähigkeit.</p>
-      `)
-    ].join(''),
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Niveaulesart statt Schuldenstand-Fixierung</h4>
+<p>Ein steigender nominaler Schuldenstand muss die Schuldenquote nicht erhöhen. Genau deshalb ist die Nennerlogik des BIP in Klausuren so wichtig.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Mehr Schuldstand heißt nicht automatisch höhere Quote:</strong> Wenn das BIP schneller wächst als der Schuldstand, kann die Quote trotz höherer Nominalschuld sinken.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Herleitung: $b = B/Y$, $\\Delta b/b \\approx \\Delta B/B - \\Delta Y/Y$. Mit $B_t = (1+r)B_{t-1} - PS$ und $g$: $\\Delta b \\approx (r-g)b - ps$. Beispiel: $b=80\\%$, $r-g=3$ pp → $ps^* = 2{,}4\\%$ BIP für Stabilisierung. $r-g < 0$ kann Quote ohne Primärüberschuss fallen — aber nicht automatisch „Schulden unschädlich".</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>Primärsaldo $ps = PS/Y$ (Überschuss positiv). Stabilisierungsbedingung: $ps \\geq (r-g)\\,b$ hält $b$ konstant. Sinkt $g$ oder steigt $r$, steigt erforderlicher $ps$. OECD-Projektionen nutzen diese Näherung — in Klausur oft Zahlenbeispiel mit gegebenem $b$, $r$, $g$.</p><div class="warn-box" data-warning-placement="rail"><strong>Nominal vs. real:</strong> Formel setzt konsistente Definition von $r$ (real) und $g$ (real) voraus — Mischung verfälscht $r-g$.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Stabilitätsbedingung</h4>
+<p>Wenn $r < g$, kann Schuldenquote auch bei positivem Defizit fallen (Snowball-Effekt umgekehrt).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Nachhaltigkeit</h4>
+<p>Maastricht-Kriterien und nationale Regeln setzen Grenzen; politische Ökonomie der Verschuldung separat.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Schuldenquote</h4>
+<p>$\\Delta b \\approx (r-g)b - ps$. Stabilisierung: $ps^* = (r-g)b$. $r>g$: Schneeballeffekt gegen Staat. $r<g$: Schuldenquote kann ohne Primärüberschuss fallen. Immer Quote, nicht nur Nominalschuld.</p><div class="warn-box" data-warning-placement="rail"><strong>Eine Periodenrechnung reicht nicht:</strong> Stabilisierung ist Pfadfrage — dauerhafter Primärüberschuss nötig wenn $r>g$.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Schuldenquotendynamik', eq: String.raw`$$\Delta b \approx (r-g)b - ps$$`, desc: 'Zins-Wachstums-Differenz und Primärsaldo bestimmen den Pfad', variables: { 'b': 'Schuldenquote', 'ps': 'Primärsaldo in % des BIP', 'r-g': 'Zins-Wachstums-Differenz' } },
       { label: 'Stabilisierender Primärsaldo', eq: String.raw`$$ps^* = (r-g)b$$`, desc: 'Gerade ausreichender Primärüberschuss zur Stabilisierung', variables: {} }
@@ -1132,18 +2096,59 @@ export const CONTENT = {
 
   ricardianisch: {
     motivation: 'Ricardianische Äquivalenz ist die Gegenfrage jeder Defizitpolitik: Ist ein heutiger Steuererlass wirklich Vermögensgewinn oder nur verschobene Steuerlast?',
-    theorie: [
-      section('Kernidee', `
-        <p>Wenn Haushalte rational vorausblicken und künftige Steuerlast internalisieren, dann ist eine defizitfinanzierte Steuersenkung kein echtes Vermögensgeschenk. Der private Konsum steigt dann nicht automatisch.</p>
-      `),
-      section('Warum die Äquivalenz nicht immer gilt', `
-        <p>Liquiditätsbeschränkungen, endliche Horizonte, unvollständige Information oder fehlende Erbschaftsmotive durchbrechen die Äquivalenz. Genau deshalb ist sie im Kurs eher Benchmark als empirisches Naturgesetz.</p>
-        ${warn('Ricardo heißt nicht „Fiskalpolitik wirkt nie“', 'Die Äquivalenz zeigt eine Grenzlogik. In der Praxis wird der Multiplikator oft gedämpft, aber nicht zwangsläufig auf null gesetzt.')}
-      `),
-      section('Klausurzugriff', `
-        <p>Saubere Antworten trennen immer: <strong>Welcher fiskalische Impuls?</strong> <strong>Welche Voraussetzungen der Äquivalenz gelten?</strong> <strong>Wie verändert sich deshalb der private Konsum?</strong></p>
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum die Äquivalenz nicht immer gilt</h4>
+<p>Liquiditätsbeschränkungen, endliche Horizonte, unvollständige Information oder fehlende Erbschaftsmotive durchbrechen die Äquivalenz. Genau deshalb ist sie im Kurs eher Benchmark als empirisches Naturgesetz.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Ricardo heißt nicht „Fiskalpolitik wirkt nie“:</strong> Die Äquivalenz zeigt eine Grenzlogik. In der Praxis wird der Multiplikator oft gedämpft, aber nicht zwangsläufig auf null gesetzt.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kernidee</h4>
+<p>Wenn Haushalte rational vorausblicken und künftige Steuerlast internalisieren, dann ist eine defizitfinanzierte Steuersenkung kein echtes Vermögensgeschenk. Der private Konsum steigt dann nicht automatisch.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Barro (1974): endliche Lebensdauer + Altruismus/Vererbung → Haushalte internalisieren Staatsschuld wie eigene. Empirie: Tax smoothing, partial Ricardian equivalence. Liquiditätsbeschränkte Haushalte: MPC aus Steuersenkung > 0 — Multiplikator positiv.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation und Herleitung (VL-Basis)</h4>
+<p>Haushalts-Budget: $PV(C) = PV(Y) - PV(T)$. Steuerfinanzierter Transfer hebt $PV(T)$ und senkt $PV(C)$ um gleichen Betrag — Konsum unverändert wenn Kreditmarkt vollständig. Defizitfinanzierung: $T$ steigt später, Haushalte sparen heute. Klausur: Annahmenliste (unendlicher Horizont, keine Liquiditätsbeschränkung) explizit prüfen.</p><div class="warn-box" data-warning-placement="rail"><strong>Teilweise Ricardian equivalence:</strong> Empirisch: liquide Haushalte reagieren schwächer auf fiskalische Impulse als illiquide — Multiplikator > 0.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Barro-Ricardo</h4>
+<p>Steuerfinanzierung vs. Anleihefinanzierung äquivalent, wenn Haushalte intertemporal optimieren und Kinder erben.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Grenzen</h4>
+<p>Liquidity constraints, myopia, endliche Horizonte brechen Äquivalenz — Fiskalmultiplikator > 0.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Saubere Antworten trennen immer: <strong>Welcher fiskalische Impuls?</strong> <strong>Welche Voraussetzungen der Äquivalenz gelten?</strong> <strong>Wie verändert sich deshalb der private Konsum?</strong></p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Ricardianische Äquivalenz</h4>
+<p>Defizitfinanzierte Steuersenkung: Haushalte internalisieren künftige Steuern → $\\Delta C=0$ unter Annahmen. Brüche: Liquiditätsbeschränkung, endlicher Horizont, myope Haushalte. Fiskalmultiplikator gedämpft, nicht zwingend null.</p><div class="warn-box" data-warning-placement="rail"><strong>Ricardo als Benchmark:</strong> Empirisch oft partielle Äquivalenz — Voraussetzungen in Antwort explizit prüfen.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Äquivalenzlogik', eq: String.raw`$$\Delta T_1 = -\frac{\Delta T_2}{1+r} \Rightarrow \Delta C_1 = 0 \quad (\text{unter Ricardo-Annahmen})$$`, desc: 'Verschobene Steuern ändern den Barwert des verfügbaren Einkommens nicht', variables: { '\\Delta T_1': 'Steueränderung heute', '\\Delta T_2': 'Künftige Gegenfinanzierung' } }
     ],
@@ -1171,19 +2176,57 @@ export const CONTENT = {
 
   schuldenfinanzierung_monetarisierung: {
     motivation: 'Der Finanzierungsmodus ist eine eigene makroökonomische Entscheidung: Kreditaufnahme und Monetarisierung verschieben Lasten unterschiedlich zwischen Zinskanal, Inflation und Glaubwürdigkeit.',
-    theorie: [
-      section('Kreditfinanzierung', `
-        <p>Bei kreditfinanzierten Defiziten steigt der Schuldenstand; spätere Tragfähigkeit hängt an Zins-Wachstums-Differenz und Primärsaldo. Die Last liegt primär auf dem Schulden- und Refinanzierungspfad.</p>
-      `),
-      section('Monetarisierung', `
-        <p>Wird das Defizit über Geldschöpfung finanziert, fällt kurzfristig weniger Marktrefinanzierungsdruck an. Gleichzeitig entsteht aber ein zusätzlicher Preisniveau- und Erwartungskanal.</p>
-        ${math(String.raw`$$\text{Seigniorage} = \frac{\Delta M}{P}$$`)}
-      `),
-      section('Politische Abwägung', `
-        <p>Prüfungslogik: Monetarisierung ist kein kostenloser Ausweg aus der Budgetrestriktion, sondern ein Trade-off zwischen Schuldenentlastung und Preisstabilitätskosten.</p>
-        ${warn('Nicht „Schulden wegdrucken“ sagen ohne Zusatz', 'Wer Monetarisierung nennt, muss auch Inflations-, Glaubwürdigkeits- und Verteilungseffekte benennen.')}
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kreditfinanzierung</h4>
+<p>Bei kreditfinanzierten Defiziten steigt der Schuldenstand; spätere Tragfähigkeit hängt an Zins-Wachstums-Differenz und Primärsaldo. Die Last liegt primär auf dem Schulden- und Refinanzierungspfad.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Monetarisierung</h4>
+<p>Wird das Defizit über Geldschöpfung finanziert, fällt kurzfristig weniger Marktrefinanzierungsdruck an. Gleichzeitig entsteht aber ein zusätzlicher Preisniveau- und Erwartungskanal.</p>
+        <div class="math-block">$$\\text{Seigniorage} = \\frac{\\Delta M}{P}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Politische Abwägung</h4>
+<p>Prüfungslogik: Monetarisierung ist kein kostenloser Ausweg aus der Budgetrestriktion, sondern ein Trade-off zwischen Schuldenentlastung und Preisstabilitätskosten.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Nicht „Schulden wegdrucken“ sagen ohne Zusatz:</strong> Wer Monetarisierung nennt, muss auch Inflations-, Glaubwürdigkeits- und Verteilungseffekte benennen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>VL-Logik: Budgetrestriktion → Finanzierungswahl → makroökonomischer Kanal. Kreditfinanzierung wirkt über $r-g$ und Primärsaldo auf $b$. Monetarisierung wirkt über $M/P$, LM und Erwartungsbildung auf $\\pi$. In der Klausur immer beide Seiten der Budgetrestriktion mitdenken: Wer trägt die Last — Steuerzahler heute, Gläubiger morgen oder Geldhalter via Inflation?</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Schuldenfinanzierung</h4>
+<p>Staat finanziert Defizit über Anleihen → Zinslast und Tragfähigkeit; Crowding-out über Kapitalmarkt möglich.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Monetarisierung</h4>
+<p>Zentralbank kauft Staatsanleihen → Geldmenge↑ → Inflationsrisiko und Glaubwürdigkeitsverlust der Geldpolitik.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>EZB-Mandat:</strong> Primärziel Preisstabilität — dauerhafte Monetarisierung widerspricht Unabhängigkeit.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Finanzierungsmodus</h4>
+<p>Kredit: Schulden- und Zinslastpfad. Monetarisierung: Seigniorage $\\Delta M/P$ — entlastet Refinanzierung, belastet Preisniveau und Erwartungen. Kein kostenloser Lunch: Inflation vs. Schulden-Trade-off. Hyperinflation = Vertrauensverlust in Geld.</p><div class="warn-box" data-warning-placement="rail"><strong>Monetarisierung ≠ automatische Hyperinflation:</strong> Einmalige Monetarisierung ≠ dauerhafte Finanzierung — Erwartungskanal entscheidet.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Seigniorage', eq: String.raw`$$\text{Seigniorage} = \frac{\Delta M}{P}$$`, desc: 'Reale Finanzierung über Geldschöpfung', variables: { '\\Delta M': 'Geldmengenausweitung', 'P': 'Preisniveau' } }
     ],

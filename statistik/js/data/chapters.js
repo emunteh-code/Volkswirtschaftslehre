@@ -5,6 +5,7 @@
 
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
+import { normalizeTheoryHtml } from '../../../assets/js/portal-core/theory/theoryStructure.js';
 
 export const R_BLOCKS_BY_ID = {
   deskriptiv: [
@@ -312,7 +313,7 @@ mean(anova_df$score)`,
 };
 
 function renderStatistikRLabTheory() {
-  return String.raw`
+  return normalizeTheoryHtml(String.raw`
     <div class="section-block">
       <h3>R gehört jetzt in die Methoden-Konzepte</h3>
       <p>Die Live-R-Blöcke sitzen in Statistik nicht mehr gesammelt auf einer einzigen Praxis-Seite, sondern direkt dort, wo die Methode fachlich gelernt wird: bei Deskriptivstatistik, Bivariat, Intervallschätzung, Tests, Regression und ANOVA.</p>
@@ -344,7 +345,7 @@ function renderStatistikRLabTheory() {
       <h3>Transferregel für Klausuren</h3>
       <p>Saubere Statistikantworten aus dem R-Output folgen immer diesem Schema: <strong>1. Methode nennen.</strong> <strong>2. entscheidende Ausgabezeile als Beleg nennen.</strong> <strong>3. fachlich zurückübersetzen.</strong> Wer nur den Code oder nur den p-Wert nennt, lässt den Kernpunkt liegen.</p>
     </div>
-  `;
+  `);
 }
 
 export const CHAPTERS = [
@@ -367,33 +368,46 @@ export const CHAPTERS = [
 export const CONTENT = {
   deskriptiv: {
     motivation: 'Deskriptive Statistik ist die erste Filterstufe jeder Analyse: erst Verteilung lesen, dann Kennzahl wählen. Mittelwert ohne Formdeutung und Streuung ohne Kontext sind nicht klausurfest.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Worum es in DS1 wirklich geht</h3>
-      <p>Deskriptive Statistik beantwortet zuerst drei Fragen: <strong>Wo liegt das Zentrum?</strong> <strong>Wie breit streuen die Daten?</strong> <strong>Gibt es Schiefe, Klumpung oder Ausreißer?</strong> Genau diese Reihenfolge spiegelt die Vorlesungs- und Tutoriumslogik: Kennzahlen und Grafiken müssen sich gegenseitig absichern.</p>
-    </div>
-    <div class="section-block">
-      <h3>Lagemaße gezielt auswählen</h3>
-      <p>Das <strong>arithmetische Mittel</strong> $\bar{x}$ ist der rechnerische Schwerpunkt. Der <strong>Median</strong> $\tilde{x}$ halbiert die geordnete Reihe und bleibt auch dann stabil, wenn einzelne Extremwerte die Verteilung nach rechts oder links ziehen. Der <strong>Modus</strong> zeigt den häufigsten Wert, ist aber nur bei diskreten Daten oder klaren Klassenstrukturen wirklich informativ.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Worum es in DS1 wirklich geht</h4>
+<p>Deskriptive Statistik beantwortet zuerst drei Fragen: <strong>Wo liegt das Zentrum?</strong> <strong>Wie breit streuen die Daten?</strong> <strong>Gibt es Schiefe, Klumpung oder Ausreißer?</strong> Genau diese Reihenfolge spiegelt die Vorlesungs- und Tutoriumslogik: Kennzahlen und Grafiken müssen sich gegenseitig absichern.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Streuung und Form gehören zusammen</h4>
+<p>Die <strong>Varianz</strong> ($s^2$) misst die durchschnittliche quadrierte Abweichung vom Mittelwert. Die <strong>Standardabweichung</strong> ($s$) bringt dieselbe Information wieder in Originaleinheiten zurück. Der <strong>Interquartilsabstand</strong> (IQR) liest die mittleren 50% der Daten und ist robuster gegen Extremwerte als $s$.</p>
+      <div class="math-block">$$s^2 = \\\\frac{1}{n-1} \\\\sum_{i=1}^n (x_i - \\\\bar{x})^2$$</div>
+      <p>In den Vorlesungsfolien (VL 3, Maßzahlen für die Streuung) werden die Stichprobenvarianz mit Nenner $n$ und die <strong>Bessel-korrigierte</strong> empirische Varianz mit Nenner $(n-1)$ nebeneinander eingeführt. Dieses Portal nutzt in Deskriptiv- und Aufgabenteilen durchgängig die korrigierte Form mit $(n-1)$ — sie entspricht der in R und in der induktiven Statistik üblichen Schätzlogik für $\\\\sigma^2$.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Lagemaße gezielt auswählen</h4>
+<p>Das <strong>arithmetische Mittel</strong> $\\\\bar{x}$ ist der rechnerische Schwerpunkt. Der <strong>Median</strong> $\\\\tilde{x}$ halbiert die geordnete Reihe und bleibt auch dann stabil, wenn einzelne Extremwerte die Verteilung nach rechts oder links ziehen. Der <strong>Modus</strong> zeigt den häufigsten Wert, ist aber nur bei diskreten Daten oder klaren Klassenstrukturen wirklich informativ.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Median vs. Mittelwert</strong> Wenn Ausreißer oder starke Schiefe sichtbar sind, reicht der Mittelwert allein nicht. Dann muss der Median als robuste Gegenlesart mitberichtet werden.</div>
-    </div>
-    <div class="section-block">
-      <h3>Streuung und Form gehören zusammen</h3>
-      <p>Die <strong>Varianz</strong> ($s^2$) misst die durchschnittliche quadrierte Abweichung vom Mittelwert. Die <strong>Standardabweichung</strong> ($s$) bringt dieselbe Information wieder in Originaleinheiten zurück. Der <strong>Interquartilsabstand</strong> (IQR) liest die mittleren 50% der Daten und ist robuster gegen Extremwerte als $s$.</p>
-      <div class="math-block">$$s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$</div>
-      <p>In den Vorlesungsfolien (VL 3, Maßzahlen für die Streuung) werden die Stichprobenvarianz mit Nenner $n$ und die <strong>Bessel-korrigierte</strong> empirische Varianz mit Nenner $(n-1)$ nebeneinander eingeführt. Dieses Portal nutzt in Deskriptiv- und Aufgabenteilen durchgängig die korrigierte Form mit $(n-1)$ — sie entspricht der in R und in der induktiven Statistik üblichen Schätzlogik für $\sigma^2$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Boxplot-, Quantil- und Ausreißerlogik</h3>
-      <p>DS1 trainiert nicht nur Rechnen, sondern Lesen: Quartile, Boxplot und IQR helfen dir, Schiefe, Spannweite und Ausreißer systematisch zu beschreiben. Ein Boxplot ersetzt keine Kennzahlen, aber er zeigt sofort, ob eine Kennzahl kritisch gelesen werden muss.</p>
-      <p>Die klassische IQR-Regel lautet: Werte unter $Q_1 - 1{,}5\cdot IQR$ oder über $Q_3 + 1{,}5\cdot IQR$ sind potenzielle Ausreißer.</p>
-    </div>
-    <div class="section-block">
-      <h3>Klausurzugriff</h3>
-      <p>Prüfungssicher ist nie nur eine Zahl. Eine gute Antwort kombiniert <strong>Lage</strong>, <strong>Streuung</strong> und <strong>Formhinweis</strong>. Typischer Standardsatz: “Der Mittelwert liegt bei ..., der Median darunter/darüber, die Streuung beträgt ..., und die Verteilung wirkt wegen ... rechtsschief/linksschief/ausreißerbeeinflusst.”</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Variationskoeffizient</strong> Verwende $v = s / \bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Boxplot-, Quantil- und Ausreißerlogik</h4>
+<p>DS1 trainiert nicht nur Rechnen, sondern Lesen: Quartile, Boxplot und IQR helfen dir, Schiefe, Spannweite und Ausreißer systematisch zu beschreiben. Ein Boxplot ersetzt keine Kennzahlen, aber er zeigt sofort, ob eine Kennzahl kritisch gelesen werden muss.</p>
+      <p>Die klassische IQR-Regel lautet: Werte unter $Q_1 - 1{,}5\\\\cdot IQR$ oder über $Q_3 + 1{,}5\\\\cdot IQR$ sind potenzielle Ausreißer.</p>
+
+
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Prüfungssicher ist nie nur eine Zahl. Eine gute Antwort kombiniert <strong>Lage</strong>, <strong>Streuung</strong> und <strong>Formhinweis</strong>. Typischer Standardsatz: “Der Mittelwert liegt bei ..., der Median darunter/darüber, die Streuung beträgt ..., und die Verteilung wirkt wegen ... rechtsschief/linksschief/ausreißerbeeinflusst.”</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Variationskoeffizient</strong> Verwende $v = s / \\\\bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\\\\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
+
+</div>
+</section>`,
     formeln: [
       {
         label: 'Arithmetisches Mittel',
@@ -472,35 +486,53 @@ export const CONTENT = {
   },
   bivariat: {
     motivation: 'Bivariate Statistik fragt nicht nur, ob zwei Merkmale zusammenlaufen, sondern welcher Typ von Zusammenhang vorliegt: Häufigkeitsstruktur, Richtung, lineare Stärke, Ranglogik oder Ausreißerfalle.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Von der gemeinsamen Tabelle zum Streudiagramm</h3>
-      <p>DS2 beginnt nicht mit einer Formel, sondern mit der Frage, <strong>wie zwei Merkmale gemeinsam verteilt sind</strong>. Bei kategorialen Merkmalen helfen Kreuztabellen und bedingte Prozente; bei metrischen Merkmalen zeigt das Streudiagramm Richtung, Form und Ausreißer eines Zusammenhangs.</p>
-    </div>
-    <div class="section-block">
-      <h3>Kovarianz: Richtung, aber keine Normierung</h3>
-      <p>Die Kovarianz misst, ob hohe Werte von $x$ typischerweise mit hohen oder niedrigen Werten von $y$ zusammen auftreten. Ihr Vorzeichen ist informativ, ihre Größe hängt aber von den Einheiten beider Variablen ab.</p>
-      <div class="math-block">$$s_{xy} = \frac{1}{n-1} \sum (x_i - \bar{x})(y_i - \bar{y})$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Pearson-Korrelation</h3>
-      <p>Der Pearson-Koeffizient normiert die Kovarianz auf $[-1,1]$ und misst die Stärke eines <strong>linearen</strong> Zusammenhangs. Er reagiert empfindlich auf Ausreißer und kann bei gekrümmten Mustern klein sein, obwohl ein klarer systematischer Zusammenhang vorliegt.</p>
-      <div class="math-block">$$r_{xy} = \frac{s_{xy}}{s_x \cdot s_y}$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Von der gemeinsamen Tabelle zum Streudiagramm</h4>
+<p>DS2 beginnt nicht mit einer Formel, sondern mit der Frage, <strong>wie zwei Merkmale gemeinsam verteilt sind</strong>. Bei kategorialen Merkmalen helfen Kreuztabellen und bedingte Prozente; bei metrischen Merkmalen zeigt das Streudiagramm Richtung, Form und Ausreißer eines Zusammenhangs.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Kovarianz: Richtung, aber keine Normierung</h4>
+<p>Die Kovarianz misst, ob hohe Werte von $x$ typischerweise mit hohen oder niedrigen Werten von $y$ zusammen auftreten. Ihr Vorzeichen ist informativ, ihre Größe hängt aber von den Einheiten beider Variablen ab.</p>
+      <div class="math-block">$$s_{xy} = \\\\frac{1}{n-1} \\\\sum (x_i - \\\\bar{x})(y_i - \\\\bar{y})$$</div>
+
+
+<h4 class="theory-subsection-title">Pearson-Korrelation</h4>
+<p>Der Pearson-Koeffizient normiert die Kovarianz auf $[-1,1]$ und misst die Stärke eines <strong>linearen</strong> Zusammenhangs. Er reagiert empfindlich auf Ausreißer und kann bei gekrümmten Mustern klein sein, obwohl ein klarer systematischer Zusammenhang vorliegt.</p>
+      <div class="math-block">$$r_{xy} = \\\\frac{s_{xy}}{s_x \\\\cdot s_y}$$</div>
       <ul>
         <li>$r = 1$: Perfekter positiver linearer Zusammenhang.</li>
         <li>$r = 0$: Kein <em>linearer</em> Zusammenhang — nicht automatisch “gar kein Zusammenhang”.</li>
       </ul>
-    </div>
-    <div class="section-block">
-      <h3>Spearman und robuste Zusammenhangslogik</h3>
-      <p>Wenn nur Ränge verlässlich sind oder Ausreißer die metrische Skala verzerren, ist Spearman oft die bessere Wahl. Er fragt nach monotonichem statt streng linearem Zusammenhang.</p>
-    </div>
-    <div class="section-block">
-      <h3>Klausurfalle: Korrelation ist keine Kausalität</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>Korrelation vs. Kausalität</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang. Drittvariablen, gemeinsame Trends oder Selektion können denselben Befund erzeugen.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Spearman und robuste Zusammenhangslogik</h4>
+<p>Wenn nur Ränge verlässlich sind oder Ausreißer die metrische Skala verzerren, ist Spearman oft die bessere Wahl. Er fragt nach monotonichem statt streng linearem Zusammenhang.</p>
+
+
+<h4 class="theory-subsection-title">Klausurfalle: Korrelation ist keine Kausalität</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Korrelation vs. Kausalität</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang. Drittvariablen, gemeinsame Trends oder Selektion können denselben Befund erzeugen.</div>
       <p>Prüfungssicher ist deshalb: Richtung + Stärke nennen, dann sofort die Grenzen der Aussage markieren.</p>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+</div>
+</section>`,
     formeln: [
       {
         label: 'Kovarianz',
@@ -573,34 +605,63 @@ export const CONTENT = {
   },
   testen: {
     motivation: 'Hypothesentests sind Entscheidungslogik unter Unsicherheit. Die Klausur fragt nicht nur nach einer Teststatistik, sondern nach sauberer Hypothesenformulierung, Testwahl, p-Wert-Deutung und Fehlerkontrolle.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Hypothesenlogik vor jeder Rechnung</h3>
-      <p>Ein Test beginnt immer mit einem Entscheidungsproblem: Welcher Parameter wird geprüft? Was ist der Status quo ($H_0$)? Welche Abweichung interessiert als Alternative ($H_1$)? Erst danach darf gerechnet werden.</p>
-    </div>
-    <div class="section-block">
-      <h3>Teststatistik, kritischer Bereich und p-Wert</h3>
-      <p>Die Teststatistik misst, wie weit die Daten von der Nullhypothese entfernt liegen. Diese Entfernung wird entweder über den <strong>kritischen Bereich</strong> oder den <strong>p-Wert</strong> beurteilt.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Hypothesenlogik vor jeder Rechnung</h4>
+<p>Ein Test beginnt immer mit einem Entscheidungsproblem: Welcher Parameter wird geprüft? Was ist der Status quo ($H_0$)? Welche Abweichung interessiert als Alternative ($H_1$)? Erst danach darf gerechnet werden.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Testwahl als Entscheidungsbaum</h4>
+<p>Vor der Formel stehen Datentyp und Design: Mittelwert, Anteil oder Rang? Eine oder zwei Stichproben? Gepaart oder ungepaart? Bekannte oder unbekannte Streuung? Dieser Auswahlprozess ist selbst klausurrelevant.</p>
+
+
+<h4 class="theory-subsection-title">Teststatistik, kritischer Bereich und p-Wert</h4>
+<p>Die Teststatistik misst, wie weit die Daten von der Nullhypothese entfernt liegen. Diese Entfernung wird entweder über den <strong>kritischen Bereich</strong> oder den <strong>p-Wert</strong> beurteilt.</p>
       <ul>
         <li><strong>p-Wert:</strong> Unter der Annahme, dass $H_0$ wahr ist (und ggf. weitere Modellannahmen gelten), ist der p-Wert die Wahrscheinlichkeit, <strong>das beobachtete Ergebnis oder ein in Richtung der Alternativhypothese $H_1$ noch extremeres</strong> zu erhalten — wie in den Hypothesentest-Folien (IS 3) formuliert.</li>
-        <li><strong>Signifikanzniveau ($\alpha$):</strong> vorab festgelegte Obergrenze für die Wahrscheinlichkeit des Fehlers 1. Art (Schwellenwert zum Vergleich mit dem p-Wert).</li>
+        <li><strong>Signifikanzniveau ($\\\\alpha$):</strong> vorab festgelegte Obergrenze für die Wahrscheinlichkeit des Fehlers 1. Art (Schwellenwert zum Vergleich mit dem p-Wert).</li>
       </ul>
-      <p>Entscheidungsregel: <strong>$H_0$ ablehnen, wenn $p < \alpha$</strong> oder die Teststatistik im <strong>Ablehnungsbereich</strong> liegt.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehler 1. Art, Fehler 2. Art und Teststärke</h3>
-      <p><strong>Fehler 1. Art ($\alpha$):</strong> $H_0$ ablehnen, obwohl sie wahr ist. <strong>Fehler 2. Art ($\beta$):</strong> $H_0$ nicht ablehnen, obwohl sie falsch ist. Die <strong>Power</strong> $1-\beta$ misst, wie gut ein Test einen echten Effekt entdeckt.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Alpha-Beta-Tradeoff</strong> Bei festem Stichprobenumfang macht ein kleineres $\alpha$ den Test konservativer, senkt aber meist die Teststärke. Beide Fehler gleichzeitig zu reduzieren gelingt vor allem über größeres $n$ oder klarere Effekte.</div>
-    </div>
-    <div class="section-block">
-      <h3>Einseitig oder zweiseitig?</h3>
-      <p>Die Richtung folgt aus der Fragestellung, nicht aus dem beobachteten Datensignal. “Besser”, “höher” oder “größer” kann einen einseitigen Test rechtfertigen. Fehlt eine Richtung oder ist nur “anders” gefragt, ist der Test zweiseitig.</p>
-    </div>
-    <div class="section-block">
-      <h3>Testwahl als Entscheidungsbaum</h3>
-      <p>Vor der Formel stehen Datentyp und Design: Mittelwert, Anteil oder Rang? Eine oder zwei Stichproben? Gepaart oder ungepaart? Bekannte oder unbekannte Streuung? Dieser Auswahlprozess ist selbst klausurrelevant.</p>
-    </div>
-    `,
+      <p>Entscheidungsregel: <strong>$H_0$ ablehnen, wenn $p < \\\\alpha$</strong> oder die Teststatistik im <strong>Ablehnungsbereich</strong> liegt.</p>
+
+
+<h4 class="theory-subsection-title">Einseitig oder zweiseitig?</h4>
+<p>Die Richtung folgt aus der Fragestellung, nicht aus dem beobachteten Datensignal. “Besser”, “höher” oder “größer” kann einen einseitigen Test rechtfertigen. Fehlt eine Richtung oder ist nur “anders” gefragt, ist der Test zweiseitig.</p>
+
+
+<h4 class="theory-subsection-title">p-Wert Lesart</h4>
+<p>p-Wert = kleinstes $\\\\alpha$, bei dem $H_0$ noch abgelehnt würde. „$p<0{,}05$“ ist keine ökonomische Größeninterpretation.</p>
+
+
+<h4 class="theory-subsection-title">Fehler 1. Art, Fehler 2. Art und Teststärke</h4>
+<p><strong>Fehler 1. Art ($\\\\alpha$):</strong> $H_0$ ablehnen, obwohl sie wahr ist. <strong>Fehler 2. Art ($\\\\beta$):</strong> $H_0$ nicht ablehnen, obwohl sie falsch ist. Die <strong>Power</strong> $1-\\\\beta$ misst, wie gut ein Test einen echten Effekt entdeckt.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Alpha-Beta-Tradeoff</strong> Bei festem Stichprobenumfang macht ein kleineres $\\\\alpha$ den Test konservativer, senkt aber meist die Teststärke. Beide Fehler gleichzeitig zu reduzieren gelingt vor allem über größeres $n$ oder klarere Effekte.</div>
+
+
+<h4 class="theory-subsection-title">Fehlerarten und Power</h4>
+<p>$\\\\alpha$ = Fehler 1. Art; $\\\\beta$ = Fehler 2. Art; Power $=1-\\\\beta$. Kleines $n$ → hohes $\\\\beta$ bei kleinen Effekten.</p>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">p-Wert Lesart</h4>
+<p>p-Wert = kleinstes $\\alpha$, bei dem $H_0$ noch abgelehnt würde. „$p<0{,}05$“ ist keine ökonomische Größeninterpretation.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehlerarten und Power</h4>
+<p>$\\alpha$ = Fehler 1. Art; $\\beta$ = Fehler 2. Art; Power $=1-\\beta$. Kleines $n$ → hohes $\\beta$ bei kleinen Effekten.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       {
         label: 't-Statistik',
@@ -676,35 +737,86 @@ export const CONTENT = {
   },
   wahrscheinlichkeit: {
     motivation: 'Die Wahrscheinlichkeitsrechnung liefert die mathematische Sprache für Unsicherheit. Ohne sie sind weder Verteilungen noch statistische Schlüsse möglich.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Grundbegriffe</h3>
-      <p>Ein <strong>Zufallsexperiment</strong> hat mehrere mögliche Ergebnisse. Die Menge aller Ergebnisse heißt <strong>Ergebnisraum</strong> $\Omega$. Ein <strong>Ereignis</strong> ist eine Teilmenge von $\Omega$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Axiome von Kolmogorov</h3>
-      <ol>
-        <li>$P(A) \geq 0$ für jedes Ereignis $A$.</li>
-        <li>$P(\Omega) = 1$.</li>
-        <li>Für disjunkte Ereignisse: $P(A \cup B) = P(A) + P(B)$.</li>
-      </ol>
-    </div>
-    <div class="section-block">
-      <h3>Bedingte Wahrscheinlichkeit</h3>
-      <p>Die Wahrscheinlichkeit von $A$ gegeben $B$:</p>
-      <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$</div>
-      <p>Zwei Ereignisse sind <strong>unabhängig</strong>, wenn $P(A|B) = P(A)$, also $P(A \cap B) = P(A) \cdot P(B)$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Satz von Bayes</h3>
-      <div class="math-block">$$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Grundbegriffe</h4>
+<p>Ein <strong>Zufallsexperiment</strong> hat mehrere mögliche Ergebnisse. Die Menge aller Ergebnisse heißt <strong>Ergebnisraum</strong> $\\\\Omega$. Ein <strong>Ereignis</strong> ist eine Teilmenge von $\\\\Omega$.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Bedingte Wahrscheinlichkeit</h4>
+<p>Die Wahrscheinlichkeit von $A$ gegeben $B$:</p>
+      <div class="math-block">$$P(A|B) = \\\\frac{P(A \\\\cap B)}{P(B)}$$</div>
+      <p>Zwei Ereignisse sind <strong>unabhängig</strong>, wenn $P(A|B) = P(A)$, also $P(A \\\\cap B) = P(A) \\\\cdot P(B)$.</p>
+
+
+<h4 class="theory-subsection-title">Satz von Bayes</h4>
+<div class="math-block">$$P(A|B) = \\\\frac{P(B|A) \\\\cdot P(A)}{P(B)}$$</div>
       <p>Bayes erlaubt es, eine a-priori-Wahrscheinlichkeit $P(A)$ durch neue Daten $B$ zu aktualisieren.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>Unabhängigkeit vs. Disjunktheit:</strong> Disjunkte Ereignisse ($A \cap B = \emptyset$) sind in der Regel nicht unabhängig — im Gegenteil: wenn $A$ eintritt, ist $B$ ausgeschlossen.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Immer zuerst Ereignisraum und Zählregel klären (Laplace vs. bedingte Wahrscheinlichkeit). Bayes nur, wenn $P(A|B)$ und $P(B|A)$ sauber getrennt werden.</p>
+      <div class="math-block">$$P(A|B) = \\\\frac{P(A\\\\cap B)}{P(B)},\\\\quad P(A\\\\cup B) = P(A)+P(B)-P(A\\\\cap B)$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Axiome von Kolmogorov</h4>
+<ol>
+        <li>$P(A) \\\\geq 0$ für jedes Ereignis $A$.</li>
+        <li>$P(\\\\Omega) = 1$.</li>
+        <li>Für disjunkte Ereignisse: $P(A \\\\cup B) = P(A) + P(B)$.</li>
+      </ol>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Wahrscheinlichkeit</h4>
+<p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Bedingte Wahrscheinlichkeit: Ereignisraum einschränken. Unabhängigkeit: $P(A\\\\cap B)=P(A)P(B)$ nur nach Definition prüfen.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Randnotation der VL (Komplement, Schnitt) beibehalten.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Bayes-Richtung:</strong> Nicht $P(A|B)$ mit $P(B|A)$ vertauschen — Nenner ist immer $P(\\\\text{Bedingung})$.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Unabhängigkeit vs. Disjunktheit:</strong> Disjunkte Ereignisse ($A \\\\cap B = \\\\emptyset$) sind in der Regel nicht unabhängig — im Gegenteil: wenn $A$ eintritt, ist $B$ ausgeschlossen.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Immer zuerst Ereignisraum und Zählregel klären (Laplace vs. bedingte Wahrscheinlichkeit). Bayes nur, wenn $P(A|B)$ und $P(B|A)$ sauber getrennt werden.</p>
+      <div class="math-block">$$P(A|B) = \\frac{P(A\\cap B)}{P(B)},\\quad P(A\\cup B) = P(A)+P(B)-P(A\\cap B)$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Wahrscheinlichkeit</h4>
+<p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Bedingte Wahrscheinlichkeit: Ereignisraum einschränken. Unabhängigkeit: $P(A\\cap B)=P(A)P(B)$ nur nach Definition prüfen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Randnotation der VL (Komplement, Schnitt) beibehalten.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Bayes-Richtung:</strong> Nicht $P(A|B)$ mit $P(B|A)$ vertauschen — Nenner ist immer $P(\\text{Bedingung})$.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Bedingte Wkt.', eq: String.raw`$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$`, desc: 'Definition' },
       { label: 'Bayes', eq: String.raw`$$P(A|B) = \frac{P(B|A)\,P(A)}{P(B)}$$`, desc: 'Aktualisierung' },
@@ -750,35 +862,71 @@ export const CONTENT = {
   },
   verteilungen: {
     motivation: 'Zufallsvariablen ordnen jedem Ergebnis eine Zahl zu. Ihre Verteilung beschreibt, welche Werte wie wahrscheinlich sind.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Zufallsvariable</h3>
-      <p>Eine <strong>Zufallsvariable</strong> $X$ ist eine Funktion $X: \Omega \to \mathbb{R}$. Der <strong>Erwartungswert</strong> (Mittelwert der Verteilung) und die <strong>Varianz</strong> (Streuung) charakterisieren sie:</p>
-      <div class="math-block">$$E[X] = \sum_x x \cdot P(X=x) \quad\text{(diskret)}$$</div>
-      <div class="math-block">$$\text{Var}(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Binomialverteilung</h3>
-      <p>Zählt die Erfolge bei $n$ unabhängigen Versuchen mit Erfolgswahrscheinlichkeit $p$:</p>
-      <div class="math-block">$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$$</div>
-      <p>Erwartungswert $E[X] = np$, Varianz $\text{Var}(X) = np(1-p)$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Normalverteilung</h3>
-      <p>Die wichtigste stetige Verteilung. Die Dichte der Standardnormalverteilung ($\mu=0, \sigma=1$):</p>
-      <div class="math-block">$$\varphi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$$</div>
-      <p>Jede Normalverteilung $X \sim N(\mu, \sigma^2)$ kann standardisiert werden: $Z = (X - \mu)/\sigma$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Zentraler Grenzwertsatz</h3>
-      <p>Für eine Summe von $n$ unabhängigen, identisch verteilten Zufallsvariablen mit Erwartungswert $\mu$ und Varianz $\sigma^2$ gilt für großes $n$:</p>
-      <div class="math-block">$$\bar{X}_n \overset{approx}{\sim} N\!\left(\mu,\, \frac{\sigma^2}{n}\right)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>Varianz vs. Standardabweichung:</strong> Die Varianz hat die Einheit zum Quadrat. Für die Interpretation in Originaleinheiten immer die Standardabweichung $\sigma = \sqrt{\text{Var}}$ verwenden.</div>
-    </div>
-    `,
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Zufallsvariable</h4>
+<p>Eine <strong>Zufallsvariable</strong> $X$ ist eine Funktion $X: \\\\Omega \\\\to \\\\mathbb{R}$. Der <strong>Erwartungswert</strong> (Mittelwert der Verteilung) und die <strong>Varianz</strong> (Streuung) charakterisieren sie:</p>
+      <div class="math-block">$$E[X] = \\\\sum_x x \\\\cdot P(X=x) \\\\quad\\\\text{(diskret)}$$</div>
+      <div class="math-block">$$\\\\text{Var}(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2$$</div>
+
+
+<h4 class="theory-subsection-title">Binomialverteilung</h4>
+<p>Zählt die Erfolge bei $n$ unabhängigen Versuchen mit Erfolgswahrscheinlichkeit $p$:</p>
+      <div class="math-block">$$P(X=k) = \\\\binom{n}{k} p^k (1-p)^{n-k}$$</div>
+      <p>Erwartungswert $E[X] = np$, Varianz $\\\\text{Var}(X) = np(1-p)$.</p>
+
+
+<h4 class="theory-subsection-title">Normalverteilung</h4>
+<p>Die wichtigste stetige Verteilung. Die Dichte der Standardnormalverteilung ($\\\\mu=0, \\\\sigma=1$):</p>
+      <div class="math-block">$$\\\\varphi(z) = \\\\frac{1}{\\\\sqrt{2\\\\pi}} e^{-z^2/2}$$</div>
+      <p>Jede Normalverteilung $X \\\\sim N(\\\\mu, \\\\sigma^2)$ kann standardisiert werden: $Z = (X - \\\\mu)/\\\\sigma$.</p>
+
+
+<h4 class="theory-subsection-title">Zentraler Grenzwertsatz</h4>
+<p>Für eine Summe von $n$ unabhängigen, identisch verteilten Zufallsvariablen mit Erwartungswert $\\\\mu$ und Varianz $\\\\sigma^2$ gilt für großes $n$:</p>
+      <div class="math-block">$$\\\\bar{X}_n \\\\overset{approx}{\\\\sim} N\\\\!\\\\left(\\\\mu,\\\\, \\\\frac{\\\\sigma^2}{n}\\\\right)$$</div>
+
+
+<h4 class="theory-subsection-title">Notation aus der VL</h4>
+<p>$X \\\\sim N(\\\\mu,\\\\sigma^2)$: Parameter sind Erwartungswert und Varianz. Standardisierung $Z=(X-\\\\mu)/\\\\sigma$ für Tabellenarbeit.</p>
+      <div class="math-block">$$Z = \\\\frac{X-\\\\mu}{\\\\sigma} \\\\sim N(0,1)$$</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Notation aus der VL</h4>
+<p>$X \\sim N(\\mu,\\sigma^2)$: Parameter sind Erwartungswert und Varianz. Standardisierung $Z=(X-\\mu)/\\sigma$ für Tabellenarbeit.</p>
+      <div class="math-block">$$Z = \\frac{X-\\mu}{\\sigma} \\sim N(0,1)$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p>Bei $\\\\chi^2$, $t$, $F$: Freiheitsgrade nennen und Verteilung der Teststatistik unter $H_0$ zuordnen — nicht nur Formel einsetzen.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Varianz vs. Standardabweichung:</strong> Die Varianz hat die Einheit zum Quadrat. Für die Interpretation in Originaleinheiten immer die Standardabweichung $\\\\sigma = \\\\sqrt{\\\\text{Var}}$ verwenden.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p>Bei $\\chi^2$, $t$, $F$: Freiheitsgrade nennen und Verteilung der Teststatistik unter $H_0$ zuordnen — nicht nur Formel einsetzen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Erwartungswert', eq: String.raw`$$E[X] = \sum x\,P(X=x)$$`, desc: 'Diskret' },
       { label: 'Verschiebungssatz', eq: String.raw`$$\text{Var}(X) = E[X^2] - (E[X])^2$$`, desc: 'Varianzberechnung' },
@@ -1052,31 +1200,69 @@ export const CONTENT = {
   },
   z_test: {
     motivation: 'Der z-Test ist der einfachste Signifikanztest. Er ist anwendbar, wenn die Populationsvarianz bekannt ist oder der Stichprobenumfang groß genug für die Normalapproximation ist.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>z-Test für den Mittelwert (bekanntes $\sigma$)</h3>
-      <p>Ist die Populationsstandardabweichung $\sigma$ bekannt, nutzen wir die z-Statistik:</p>
-      <div class="math-block">$$z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">z-Test für den Mittelwert (bekanntes $\\\\sigma$)</h4>
+<p>Ist die Populationsstandardabweichung $\\\\sigma$ bekannt, nutzen wir die z-Statistik:</p>
+      <div class="math-block">$$z = \\\\frac{\\\\bar{x} - \\\\mu_0}{\\\\sigma / \\\\sqrt{n}}$$</div>
       <p>Unter $H_0$ folgt $z$ einer Standardnormalverteilung $N(0,1)$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Entscheidungsregeln</h3>
-      <ul>
-        <li><strong>Zweiseitig ($H_1: \mu \neq \mu_0$):</strong> $|z| > z_{1-\alpha/2}$ (z.B. $|z| > 1{,}96$ bei $\alpha=5\%$).</li>
-        <li><strong>Rechtsseitig ($H_1: \mu > \mu_0$):</strong> $z > z_{1-\alpha}$ (z.B. $z > 1{,}645$).</li>
-        <li><strong>Linksseitig ($H_1: \mu < \mu_0$):</strong> $z < -z_{1-\alpha}$.</li>
+
+
+<h4 class="theory-subsection-title">z-Test für Anteile</h4>
+<p>Für den Hypothesentest $H_0: p = p_0$ mit großem $n$:</p>
+      <div class="math-block">$$z = \\\\frac{\\\\hat{p} - p_0}{\\\\sqrt{p_0(1-p_0)/n}}$$</div>
+
+
+<h4 class="theory-subsection-title">KI–Test-Dualität</h4>
+<p>Beim zweiseitigen Test bei $\\\\alpha=5\\\\%$ gilt: $H_0$ wird nicht abgelehnt genau dann, wenn $\\\\mu_0$ im $95\\\\%$-Konfidenzintervall liegt (bei gleicher Stichprobe und $\\\\sigma$).</p>
+      <div class="math-block">$$\\\\left|\\\\frac{\\\\bar{x}-\\\\mu_0}{\\\\sigma/\\\\sqrt{n}}\\\\right| \\\\leq z_{1-\\\\alpha/2} \\\\iff \\\\mu_0 \\\\in \\\\text{KI}$$</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Unbekanntes $\\\\sigma$ bei kleinem $n$ → t-Test; z nur mit Begründung (bekanntes $\\\\sigma$ oder sehr großes $n$).</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">KI–Test-Dualität</h4>
+<p>Beim zweiseitigen Test bei $\\alpha=5\\%$ gilt: $H_0$ wird nicht abgelehnt genau dann, wenn $\\mu_0$ im $95\\%$-Konfidenzintervall liegt (bei gleicher Stichprobe und $\\sigma$).</p>
+      <div class="math-block">$$\\left|\\frac{\\bar{x}-\\mu_0}{\\sigma/\\sqrt{n}}\\right| \\leq z_{1-\\alpha/2} \\iff \\mu_0 \\in \\text{KI}$$</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Unbekanntes $\\sigma$ bei kleinem $n$ → t-Test; z nur mit Begründung (bekanntes $\\sigma$ oder sehr großes $n$).</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Entscheidungsregeln</h4>
+<ul>
+        <li><strong>Zweiseitig ($H_1: \\\\mu \\\\neq \\\\mu_0$):</strong> $|z| > z_{1-\\\\alpha/2}$ (z.B. $|z| > 1{,}96$ bei $\\\\alpha=5\\\\%$).</li>
+        <li><strong>Rechtsseitig ($H_1: \\\\mu > \\\\mu_0$):</strong> $z > z_{1-\\\\alpha}$ (z.B. $z > 1{,}645$).</li>
+        <li><strong>Linksseitig ($H_1: \\\\mu < \\\\mu_0$):</strong> $z < -z_{1-\\\\alpha}$.</li>
       </ul>
-    </div>
-    <div class="section-block">
-      <h3>z-Test für Anteile</h3>
-      <p>Für den Hypothesentest $H_0: p = p_0$ mit großem $n$:</p>
-      <div class="math-block">$$z = \frac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Den z-Test nur verwenden, wenn $\sigma$ wirklich bekannt ist. In der Praxis ist $\sigma$ fast nie bekannt — dann ist der t-Test korrekt. Bei sehr großem $n$ nähern sich $z$ und $t$ an, da $t_\infty = z$.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard: z-Test</h4>
+<p>Klausurpfad: $H_0$/$H_1$ → Teststatistik $z$ → kritisches Quantil oder p-Wert → Entscheidung in Worten. Bei bekanntem $\\\\sigma$ Standardnormalverteilung; sonst t-Test.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Den z-Test nur verwenden, wenn $\\\\sigma$ wirklich bekannt ist. In der Praxis ist $\\\\sigma$ fast nie bekannt — dann ist der t-Test korrekt. Bei sehr großem $n$ nähern sich $z$ und $t$ an, da $t_\\\\infty = z$.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard: z-Test</h4>
+<p>Klausurpfad: $H_0$/$H_1$ → Teststatistik $z$ → kritisches Quantil oder p-Wert → Entscheidung in Worten. Bei bekanntem $\\sigma$ Standardnormalverteilung; sonst t-Test.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'z-Statistik', eq: String.raw`$$z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}$$`, desc: 'Bekannte Populationsvarianz' },
       { label: 'z-Test Anteil', eq: String.raw`$$z = \frac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}$$`, desc: 'Anteilstest' }
@@ -1131,32 +1317,71 @@ export const CONTENT = {
   },
   zwei_stichproben: {
     motivation: 'Häufig interessiert uns nicht ein einzelner Mittelwert, sondern der Unterschied zwischen zwei Gruppen. Zwei-Stichproben-Tests vergleichen Mittelwerte, Varianzen oder Anteile.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Testwahl zuerst: gepaart oder ungepaart?</h3>
-      <p>Vor jeder Formel steht die Strukturfrage: dieselben Personen vor/nach einer Maßnahme oder zwei unabhängige Gruppen? Diese Entscheidung ist wichtiger als der spätere Taschenrechnerschritt.</p>
-    </div>
-    <div class="section-block">
-      <h3>Zwei-Stichproben t-Test (unverbunden)</h3>
-      <p>Vergleich zweier unabhängiger Gruppen. Pooled-t-Test bei Varianzhomogenität ($\sigma_1^2 = \sigma_2^2$):</p>
-      <div class="math-block">$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\tfrac{1}{n_1}+\tfrac{1}{n_2}}}, \quad s_p^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Testwahl zuerst: gepaart oder ungepaart?</h4>
+<p>Vor jeder Formel steht die Strukturfrage: dieselben Personen vor/nach einer Maßnahme oder zwei unabhängige Gruppen? Diese Entscheidung ist wichtiger als der spätere Taschenrechnerschritt.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Zwei-Stichproben t-Test (unverbunden)</h4>
+<p>Vergleich zweier unabhängiger Gruppen. Pooled-t-Test bei Varianzhomogenität ($\\\\sigma_1^2 = \\\\sigma_2^2$):</p>
+      <div class="math-block">$$t = \\\\frac{\\\\bar{x}_1 - \\\\bar{x}_2}{s_p\\\\sqrt{\\\\tfrac{1}{n_1}+\\\\tfrac{1}{n_2}}}, \\\\quad s_p^2 = \\\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$</div>
       <p>Welch-t-Test bei ungleichen Varianzen: angepasste Freiheitsgrade nach Satterthwaite.</p>
-    </div>
-    <div class="section-block">
-      <h3>Verbundener t-Test (Paarvergleich)</h3>
-      <p>Bei gepaarten Beobachtungen (z.B. Vor/Nachher) bildet man Differenzen $d_i = x_{1i} - x_{2i}$ und wendet einen Einstichproben-t-Test auf die Differenzen an:</p>
-      <div class="math-block">$$t = \frac{\bar{d}}{s_d/\sqrt{n}}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>F-Test auf Varianzhomogenität</h3>
-      <p>Vor dem Pooled-t-Test prüft man $H_0: \sigma_1^2 = \sigma_2^2$:</p>
-      <div class="math-block">$$F = \frac{s_1^2}{s_2^2} \sim F(n_1-1,\, n_2-1)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>Unverbunden vs. verbunden:</strong> Wird eine Paarstruktur ignoriert und stattdessen ein unverbundener Test durchgeführt, verliert man die Kontrolle über individuelle Unterschiede. Der verbundene Test hat bei echter Paarung mehr Teststärke.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Verbundener t-Test (Paarvergleich)</h4>
+<p>Bei gepaarten Beobachtungen (z.B. Vor/Nachher) bildet man Differenzen $d_i = x_{1i} - x_{2i}$ und wendet einen Einstichproben-t-Test auf die Differenzen an:</p>
+      <div class="math-block">$$t = \\\\frac{\\\\bar{d}}{s_d/\\\\sqrt{n}}$$</div>
+
+
+<h4 class="theory-subsection-title">F-Test auf Varianzhomogenität</h4>
+<p>Vor dem Pooled-t-Test prüft man $H_0: \\\\sigma_1^2 = \\\\sigma_2^2$:</p>
+      <div class="math-block">$$F = \\\\frac{s_1^2}{s_2^2} \\\\sim F(n_1-1,\\\\, n_2-1)$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Testauswahl</h4>
+<p>Unabhängige Stichproben: Welch-t oder gepoolter t je nach Varianzgleichheit. Paarige Stichproben: Differenzen $d_i$ einführen → Ein-Stichproben-t auf $\\\\bar{d}$.</p>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Hypothesen auf Differenz $\\\\mu_1-\\\\mu_2$ (oder $\\\\mu_d$) formulieren; Teststatistik und Freiheitsgrade explizit; Effektgröße/Praxisrelevanz kurz deuten.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Unverbunden vs. verbunden:</strong> Wird eine Paarstruktur ignoriert und stattdessen ein unverbundener Test durchgeführt, verliert man die Kontrolle über individuelle Unterschiede. Der verbundene Test hat bei echter Paarung mehr Teststärke.</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Testauswahl</h4>
+<p>Unabhängige Stichproben: Welch-t oder gepoolter t je nach Varianzgleichheit. Paarige Stichproben: Differenzen $d_i$ einführen → Ein-Stichproben-t auf $\\bar{d}$.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Hypothesen auf Differenz $\\mu_1-\\mu_2$ (oder $\\mu_d$) formulieren; Teststatistik und Freiheitsgrade explizit; Effektgröße/Praxisrelevanz kurz deuten.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       {
         label: 'Gepoolte Varianz',
@@ -1227,31 +1452,69 @@ export const CONTENT = {
   },
   varianzanalyse: {
     motivation: 'Die Varianzanalyse (ANOVA) erweitert den Gruppenvergleich auf mehr als zwei Gruppen. Sie testet, ob mindestens eine Gruppe einen anderen Mittelwert hat.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Einfaktorielle ANOVA</h3>
-      <p>Gegeben $k$ Gruppen mit Gesamtbeobachtungen $N$. Die Gesamtstreuung wird zerlegt:</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Einfaktorielle ANOVA</h4>
+<p>Gegeben $k$ Gruppen mit Gesamtbeobachtungen $N$. Die Gesamtstreuung wird zerlegt:</p>
       <div class="math-block">$$SST = SSB + SSW$$</div>
       <p>$SSB$ (Between): Streuung zwischen den Gruppen. $SSW$ (Within): Streuung innerhalb der Gruppen.</p>
-    </div>
-    <div class="section-block">
-      <h3>F-Test der ANOVA</h3>
-      <div class="math-block">$$F = \frac{SSB/(k-1)}{SSW/(N-k)} = \frac{MSB}{MSW}$$</div>
-      <p>Unter $H_0: \mu_1 = \dots = \mu_k$ folgt $F \sim F(k-1,\, N-k)$. Großes $F$ spricht gegen $H_0$.</p>
-    </div>
-    <div class="section-block">
-      <h3>Post-hoc-Tests</h3>
-      <p>Ein signifikanter F-Test sagt nur, dass <em>irgendeine</em> Gruppe verschieden ist. Post-hoc-Tests (Tukey, Bonferroni) identifizieren, welche Gruppen sich unterscheiden, und kontrollieren den familienweisen Fehler 1. Art.</p>
-    </div>
-    <div class="section-block">
-      <h3>Effektstärke und Interpretation</h3>
-      <p>Ein signifikanter F-Test beantwortet nur, ob nicht alle Gruppenmittel gleich sind. $\\eta^2 = SSB/SST$ misst, welcher Anteil der Gesamtstreuung durch Gruppenunterschiede erklärt wird — für die Klausur immer zusammen mit den Gruppenmitteln berichten.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei klaren Verletzungen darf der F-Test nicht blind weitergelesen werden; zuerst müssen Annahmenproblem und geeignete Alternative sauber begründet werden.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">F-Test der ANOVA</h4>
+<div class="math-block">$$F = \\\\frac{SSB/(k-1)}{SSW/(N-k)} = \\\\frac{MSB}{MSW}$$</div>
+      <p>Unter $H_0: \\\\mu_1 = \\\\dots = \\\\mu_k$ folgt $F \\\\sim F(k-1,\\\\, N-k)$. Großes $F$ spricht gegen $H_0$.</p>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard ANOVA</h4>
+<p>Varianzzerlegung: $SS_{\\\\text{ges}} = SS_{\\\\text{zw}} + SS_{\\\\text{in}}$. F-Statistik $F = MS_{\\\\text{zw}}/MS_{\\\\text{in}}$ unter $H_0$ (gleiche Erwartungswerte).</p>
+      <div class="math-block">$$F = \\\\frac{SS_{\\\\text{zw}}/(k-1)}{SS_{\\\\text{in}}/(n-k)}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Post-hoc-Tests</h4>
+<p>Ein signifikanter F-Test sagt nur, dass <em>irgendeine</em> Gruppe verschieden ist. Post-hoc-Tests (Tukey, Bonferroni) identifizieren, welche Gruppen sich unterscheiden, und kontrollieren den familienweisen Fehler 1. Art.</p>
+
+
+<h4 class="theory-subsection-title">Effektstärke und Interpretation</h4>
+<p>Ein signifikanter F-Test beantwortet nur, ob nicht alle Gruppenmittel gleich sind. $\\\\\\\\eta^2 = SSB/SST$ misst, welcher Anteil der Gesamtstreuung durch Gruppenunterschiede erklärt wird — für die Klausur immer zusammen mit den Gruppenmitteln berichten.</p>
+
+
+<h4 class="theory-subsection-title">Post-hoc Vorsicht</h4>
+<p>Signifikantes ANOVA-Ergebnis erlaubt paarweise Vergleiche nur mit Korrektur (Bonferroni/Tukey). Ohne Korrektur steigt die Fehlerwahrscheinlichkeit.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Modellannahmen:</strong> Normalität und Varianzhomogenität prüfen oder robuste Alternative nennen.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>ANOVA-Voraussetzungen:</strong> Normalverteilung innerhalb der Gruppen, Varianzhomogenität (Levene-Test), unabhängige Beobachtungen. Bei klaren Verletzungen darf der F-Test nicht blind weitergelesen werden; zuerst müssen Annahmenproblem und geeignete Alternative sauber begründet werden.</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Post-hoc Vorsicht</h4>
+<p>Signifikantes ANOVA-Ergebnis erlaubt paarweise Vergleiche nur mit Korrektur (Bonferroni/Tukey). Ohne Korrektur steigt die Fehlerwahrscheinlichkeit.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Modellannahmen:</strong> Normalität und Varianzhomogenität prüfen oder robuste Alternative nennen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard ANOVA</h4>
+<p>Varianzzerlegung: $SS_{\\text{ges}} = SS_{\\text{zw}} + SS_{\\text{in}}$. F-Statistik $F = MS_{\\text{zw}}/MS_{\\text{in}}$ unter $H_0$ (gleiche Erwartungswerte).</p>
+      <div class="math-block">$$F = \\frac{SS_{\\text{zw}}/(k-1)}{SS_{\\text{in}}/(n-k)}$$</div>
+</div>
+</div>
+</section>`,
     formeln: [
       {
         label: 'F-Statistik ANOVA',
@@ -1316,31 +1579,49 @@ export const CONTENT = {
   },
   nichtparametrisch: {
     motivation: 'Wenn kein plausibles parametrisches Modell vorgegeben ist, schätzt die Vorlesung die Dichte direkt aus den Daten: erst über Histogramme, dann über fließende Histogramme und Kerndichteschätzung. Nichtparametrisch heißt hier also nicht “Rangtest”, sondern “Verteilungsform ohne feste Familienannahme sichtbar machen”.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Wann die Vorlesung nichtparametrisch schätzt</h3>
-      <p>VL 09 öffnet den Block genau mit dieser Frage: <strong>Was tun, wenn kein spezielles parametrisches Modell sinnvoll vorgegeben ist?</strong> Dann wird die unbekannte Dichte direkt aus der Stichprobe geschätzt, statt erst eine Normal-, Exponential- oder andere Familie zu unterstellen.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Wann die Vorlesung nichtparametrisch schätzt</h4>
+<p>VL 09 öffnet den Block genau mit dieser Frage: <strong>Was tun, wenn kein spezielles parametrisches Modell sinnvoll vorgegeben ist?</strong> Dann wird die unbekannte Dichte direkt aus der Stichprobe geschätzt, statt erst eine Normal-, Exponential- oder andere Familie zu unterstellen.</p>
       <p>Der methodische Kern lautet deshalb: Nichtparametrische Schätzung ist eine Formfrage. Wie sieht die Verteilung aus, wo häufen sich Datenpunkte, und wie stark willst du glätten?</p>
-    </div>
-    <div class="section-block">
-      <h3>Histogramm als Dichteschätzer</h3>
-      <p>Das Histogramm ist im Kurs nicht nur Visualisierung, sondern ein erster Dichteschätzer: Die Balkenhöhe muss so skaliert werden, dass die Gesamtfläche interpretierbar bleibt. Genau deshalb hängt sie von Klassenhäufigkeit <em>und</em> Klassenbreite ab.</p>
-      <div class="math-block">$$\hat f(x)=\frac{H_j}{n\,b_j}, \qquad x \in I_j$$</div>
-      <p>$H_j$ zählt die Beobachtungen in Klasse $I_j$, $n$ ist der Stichprobenumfang und $b_j$ die Klassenbreite. Die Höhe misst also Dichte, nicht bloß rohe Häufigkeit.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fließendes Histogramm und Kernidee</h3>
-      <p>Die Vorlesung schärft das Histogramm dann zu einem lokalen Fensterzugriff: Für jeden Punkt $x$ wird gezählt, wie viele Beobachtungen in ein Intervall um $x$ fallen. Daraus entsteht das <strong>fließende Histogramm</strong>.</p>
-      <div class="math-block">$$\hat f(x)=\frac{1}{2b}\cdot\frac{\#\{x_i\in(x-b,x+b]\}}{n}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Fließendes Histogramm und Kernidee</h4>
+<p>Die Vorlesung schärft das Histogramm dann zu einem lokalen Fensterzugriff: Für jeden Punkt $x$ wird gezählt, wie viele Beobachtungen in ein Intervall um $x$ fallen. Daraus entsteht das <strong>fließende Histogramm</strong>.</p>
+      <div class="math-block">$$\\\\hat f(x)=\\\\frac{1}{2b}\\\\cdot\\\\frac{\\\\#\\\\{x_i\\\\in(x-b,x+b]\\\\}}{n}$$</div>
       <p>Die Kerndichteschätzung verallgemeinert diese Idee: Beobachtungen im Umfeld von $x$ werden nicht alle gleich gewichtet, sondern über eine Kernfunktion gewichtet.</p>
-      <div class="math-block">$$\hat f(x)=\frac{1}{nb}\sum_{i=1}^{n}K\!\left(\frac{x-x_i}{b}\right)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Bandbreite schlägt Kernform</h3>
-      <p>Der kursrelevante Steuerparameter ist die Bandbreite $b$. Kleine Bandbreiten machen die Schätzung sehr zackig und ausreißerempfindlich; große Bandbreiten glätten stark und können echte Struktur verdecken.</p>
+      <div class="math-block">$$\\\\hat f(x)=\\\\frac{1}{nb}\\\\sum_{i=1}^{n}K\\\\!\\\\left(\\\\frac{x-x_i}{b}\\\\right)$$</div>
+
+
+<h4 class="theory-subsection-title">Histogramm als Dichteschätzer</h4>
+<p>Das Histogramm ist im Kurs nicht nur Visualisierung, sondern ein erster Dichteschätzer: Die Balkenhöhe muss so skaliert werden, dass die Gesamtfläche interpretierbar bleibt. Genau deshalb hängt sie von Klassenhäufigkeit <em>und</em> Klassenbreite ab.</p>
+      <div class="math-block">$$\\\\hat f(x)=\\\\frac{H_j}{n\\\\,b_j}, \\\\qquad x \\\\in I_j$$</div>
+      <p>$H_j$ zählt die Beobachtungen in Klasse $I_j$, $n$ ist der Stichprobenumfang und $b_j$ die Klassenbreite. Die Höhe misst also Dichte, nicht bloß rohe Häufigkeit.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Bandbreite schlägt Kernform</h4>
+<p>Der kursrelevante Steuerparameter ist die Bandbreite $b$. Kleine Bandbreiten machen die Schätzung sehr zackig und ausreißerempfindlich; große Bandbreiten glätten stark und können echte Struktur verdecken.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Glättungsfalle:</strong> Zu kleines $b$ verkauft Stichprobenrauschen als “echte Struktur”. Zu großes $b$ bügelt lokale Unterschiede weg. Für die Klausur ist meist wichtiger, die Wirkung von $b$ zu lesen, als eine bestimmte Kernfunktion auswendig aufzuzählen.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+
+</div>
+</section>`,
     formeln: [
       { label: 'Histogramm als Dichteschätzer', eq: String.raw`$$\hat f(x)=\frac{H_j}{n\,b_j}, \qquad x \in I_j$$`, desc: 'Klassenhäufigkeit pro Stichprobenumfang und Klassenbreite.' },
       { label: 'Fließendes Histogramm', eq: String.raw`$$\hat f(x)=\frac{1}{2b}\cdot\frac{\#\{x_i\in(x-b,x+b]\}}{n}$$`, desc: 'Lokales Fenster der Breite $2b$ um den Auswertungspunkt $x$.' },
@@ -1383,34 +1664,52 @@ export const CONTENT = {
 // internal source material, but expose distinct benchmark-grade concept pages.
 CONTENT.schaetzen_verfahren = {
   motivation: 'Schätzverfahren beantworten die Konstruktionsfrage: Wie wird aus einer Stichprobe ein plausibler Parameterwert? In diesem Kapitel stehen MoM, ML, KQ-Perspektive und MSE-Logik im Vordergrund.',
-  theorie: String.raw`
-    <div class="section-block">
-      <h3>Vom Parameter zum Schätzer</h3>
-      <p>Ein <strong>Punktschätzer</strong> $\hat{\theta}$ ist eine Zufallsvariable auf Stichprobenbasis. Die Kernfrage lautet nicht nur “Wie rechne ich?”, sondern “Warum ist genau diese Rechenvorschrift für den Parameter sinnvoll?”</p>
-    </div>
-    <div class="section-block">
-      <h3>Methode der Momente (MoM)</h3>
-      <p>MoM setzt theoretische Momente der Verteilung mit empirischen Momenten gleich. Bei Bernoulli-Daten ist das besonders anschaulich: $E[X]=\pi$ wird durch den Stichprobenanteil $\bar X$ ersetzt.</p>
-    </div>
-    <div class="section-block">
-      <h3>Maximum Likelihood (ML)</h3>
-      <p>ML wählt den Parameterwert, unter dem die beobachteten Daten am plausibelsten sind. Im Bernoulli-/Binomial-Standardfall führt ML ebenfalls auf den Stichprobenanteil, aber die Begründung ist eine andere als bei MoM.</p>
-    </div>
-    <div class="section-block">
-      <h3>Qualitätskriterien: Bias, Varianz, MSE</h3>
-      <p>Ein Schätzer kann erwartungstreu und trotzdem unpräzise sein. Deshalb müssen <strong>Bias</strong>, <strong>Varianz</strong> und <strong>MSE</strong> getrennt gelesen werden.</p>
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vom Parameter zum Schätzer</h4>
+<p>Ein <strong>Punktschätzer</strong> $\\hat{\\theta}$ ist eine Zufallsvariable auf Stichprobenbasis. Die Kernfrage lautet nicht nur “Wie rechne ich?”, sondern “Warum ist genau diese Rechenvorschrift für den Parameter sinnvoll?”</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Methode der Momente (MoM)</h4>
+<p>MoM setzt theoretische Momente der Verteilung mit empirischen Momenten gleich. Bei Bernoulli-Daten ist das besonders anschaulich: $E[X]=\\pi$ wird durch den Stichprobenanteil $\\bar X$ ersetzt.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Maximum Likelihood (ML)</h4>
+<p>ML wählt den Parameterwert, unter dem die beobachteten Daten am plausibelsten sind. Im Bernoulli-/Binomial-Standardfall führt ML ebenfalls auf den Stichprobenanteil, aber die Begründung ist eine andere als bei MoM.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Qualitätskriterien: Bias, Varianz, MSE</h4>
+<p>Ein Schätzer kann erwartungstreu und trotzdem unpräzise sein. Deshalb müssen <strong>Bias</strong>, <strong>Varianz</strong> und <strong>MSE</strong> getrennt gelesen werden.</p>
       <ul>
         <li><strong>Bias:</strong> systematischer Abstand vom Zielparameter.</li>
         <li><strong>Varianz:</strong> Streuung des Schätzers über Wiederholungsstichproben.</li>
         <li><strong>MSE:</strong> Gesamtfehler aus Streuung und Verzerrung.</li>
       </ul>
-    </div>
-    <div class="section-block">
-      <h3>Klausurzugriff</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodenwahl ist Prüfungsstoff</strong> Wenn die Aufgabe nach Konstruktion oder Güte fragt, reicht ein Intervall nicht. Dann musst du Schätzverfahren und Qualitätsmaß aktiv voneinander trennen.</div>
-      <p>Merksatz: <strong>Verfahren</strong> beantwortet “Wie entsteht $\hat\theta$?”, <strong>Eigenschaft</strong> beantwortet “Wie gut ist $\hat\theta$?”.</p>
-    </div>
-  `,
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodenwahl ist Prüfungsstoff</strong> Wenn die Aufgabe nach Konstruktion oder Güte fragt, reicht ein Intervall nicht. Dann musst du Schätzverfahren und Qualitätsmaß aktiv voneinander trennen.</div>
+      <p>Merksatz: <strong>Verfahren</strong> beantwortet “Wie entsteht $\\hat\\theta$?”, <strong>Eigenschaft</strong> beantwortet “Wie gut ist $\\hat\\theta$?”.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</div>
+</section>`,
   formeln: [
     {
       label: 'Momentenbedingung',
@@ -1482,30 +1781,63 @@ CONTENT.schaetzen_verfahren = {
 
 CONTENT.schaetzen_eigenschaften_intervalle = {
   motivation: 'Dieses Kapitel fragt nicht nach der Konstruktion des Schätzers, sondern nach seiner Verlässlichkeit: Bias, Standardfehler, Intervallbreite und saubere Intervallinterpretation stehen im Zentrum.',
-  theorie: String.raw`
-    <div class="section-block">
-      <h3>Erwartungstreue, Effizienz, Konsistenz</h3>
-      <p>Ein guter Schätzer trifft den Parameter im Mittel (<strong>erwartungstreu</strong>), streut wenig (<strong>effizient</strong>) und nähert sich mit wachsendem $n$ dem wahren Wert an (<strong>konsistent</strong>).</p>
-    </div>
-    <div class="section-block">
-      <h3>Standardfehler und Intervallbreite</h3>
-      <p>Konfidenzintervalle basieren auf <strong>Punktschätzer ± kritischer Wert · Standardfehler</strong>. Je größer die Streuung und je kleiner $n$, desto breiter das Intervall.</p>
-    </div>
-    <div class="section-block">
-      <h3>z- und t-basierte Konfidenzintervalle</h3>
-      <p>Ist $\sigma$ bekannt, wird der z-Wert verwendet. In der Praxis ist $\sigma$ meist unbekannt; dann wird die t-Verteilung mit $n-1$ Freiheitsgraden genutzt.</p>
-      <div class="math-block">$$\bar{x} \pm z_{1-\alpha/2}\cdot \frac{\sigma}{\sqrt{n}} \qquad \bar{x} \pm t_{n-1,1-\alpha/2}\cdot \frac{s}{\sqrt{n}}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Interpretationsfalle Konfidenzintervall</h3>
-      <p>Ein 95%-Konfidenzintervall bedeutet: <strong>Die Methode</strong> erzeugt in 95% der Wiederholungsstichproben Intervalle, die den wahren Parameter enthalten. Es bedeutet nicht, dass der feste Parameter mit 95% Wahrscheinlichkeit im konkreten Intervall liegt.</p>
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Erwartungstreue, Effizienz, Konsistenz</h4>
+<p>Ein guter Schätzer trifft den Parameter im Mittel (<strong>erwartungstreu</strong>), streut wenig (<strong>effizient</strong>) und nähert sich mit wachsendem $n$ dem wahren Wert an (<strong>konsistent</strong>).</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">z- und t-basierte Konfidenzintervalle</h4>
+<p>Ist $\\sigma$ bekannt, wird der z-Wert verwendet. In der Praxis ist $\\sigma$ meist unbekannt; dann wird die t-Verteilung mit $n-1$ Freiheitsgraden genutzt.</p>
+      <div class="math-block">$$\\bar{x} \\pm z_{1-\\alpha/2}\\cdot \\frac{\\sigma}{\\sqrt{n}} \\qquad \\bar{x} \\pm t_{n-1,1-\\alpha/2}\\cdot \\frac{s}{\\sqrt{n}}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Interpretationsfalle Konfidenzintervall</h4>
+<p>Ein 95%-Konfidenzintervall bedeutet: <strong>Die Methode</strong> erzeugt in 95% der Wiederholungsstichproben Intervalle, die den wahren Parameter enthalten. Es bedeutet nicht, dass der feste Parameter mit 95% Wahrscheinlichkeit im konkreten Intervall liegt.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Breites Intervall</strong> Ein breites KI ist nicht “schlechter gerechnet”, sondern Ausdruck hoher Unsicherheit oder kleiner Stichprobe.</div>
-    </div>
-    <div class="section-block">
-      <h3>Dualität von Intervall und Test</h3>
-      <p>Bei zweiseitigen Tests gilt: Liegt der Nullwert $\theta_0$ außerhalb des $(1-\alpha)$-Konfidenzintervalls, wird $H_0$ auf Niveau $\alpha$ abgelehnt. Diese Verknüpfung spart in der Klausur Zeit.</p>
-    </div>
-  `,
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Dualität von Intervall und Test</h4>
+<p>Bei zweiseitigen Tests gilt: Liegt der Nullwert $\\theta_0$ außerhalb des $(1-\\alpha)$-Konfidenzintervalls, wird $H_0$ auf Niveau $\\alpha$ abgelehnt. Diese Verknüpfung spart in der Klausur Zeit.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Schätzer &amp; KI</h4>
+<p>Erwartungstreue: $E[\\hat\\theta]=\\theta$. Konsistenz: $\\hat\\theta \\xrightarrow{p} \\theta$. Effizienz: kleinste Varianz unter erwartungstreuen Schätzern (BLUE unter GM). KI: $\\bar x \\pm z_{1-\\alpha/2}\\,\\sigma/\\sqrt{n}$ bei bekanntem $\\sigma$.</p>
+      <div class="math-block">$$\\bar x \\pm t_{n-1,1-\\alpha/2}\\,\\frac{s}{\\sqrt{n}}\\quad\\text{(}\\sigma\\text{ unbekannt)}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Test–KI-Dualität: $H_0: \\mu=\\mu_0$ nicht abgelehnt $\\Leftrightarrow$ $\\mu_0$ im $(1-\\alpha)$-KI. Immer Verteilung der Pivot-Größe nennen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Interpretation KI:</strong> KI ist Intervallschätzer für $\\mu$, kein Wahrscheinlichkeitsstatement über $\\mu$ nach Beobachtung — Formulierung „95\\% der Intervalle" korrekt.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Standardfehler und Intervallbreite</h4>
+<p>Konfidenzintervalle basieren auf <strong>Punktschätzer ± kritischer Wert · Standardfehler</strong>. Je größer die Streuung und je kleiner $n$, desto breiter das Intervall.</p>
+</div>
+</div>
+</section>`,
   formeln: [
     {
       label: 'z-Konfidenzintervall',
@@ -1578,33 +1910,56 @@ CONTENT.schaetzen_eigenschaften_intervalle = {
 
 CONTENT.regression_schaetzung_inferenz = {
   motivation: 'Regression erklärt nicht nur eine Gleichung, sondern einen Zusammenhang unter Unsicherheit. Dieses Kapitel fokussiert Modellaufbau, OLS-Schätzung, Koeffizientenlesen, Signifikanz und Relevanz.',
-  theorie: String.raw`
-    <div class="section-block">
-      <h3>Modellidee</h3>
-      <p>Die lineare Regression beschreibt den mittleren Zusammenhang zwischen einer Zielgröße $Y$ und einem oder mehreren Regressoren $X$. In der einfachen Form gilt:</p>
-      <div class="math-block">$$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$$</div>
-      <p>$\beta_0$ ist das Grundniveau, $\beta_1$ die durchschnittliche Änderung von $Y$ je zusätzlicher Einheit in $X$.</p>
-    </div>
-    <div class="section-block">
-      <h3>OLS-Schätzung</h3>
-      <p>Die Kleinste-Quadrate-Methode wählt die Gerade so, dass die quadrierten Residuen möglichst klein werden. In der einfachen Regression gilt:</p>
-      <div class="math-block">$$\hat{\beta}_1 = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2} = \frac{s_{xy}}{s_x^2}, \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Inferenz auf Koeffizienten</h3>
-      <p>Eine geschätzte Steigung ist erst dann statistisch abgesichert, wenn Standardfehler, Konfidenzintervall oder t-Test dazukommen. Die Nullhypothese lautet oft $H_0:\beta_1=0$.</p>
-      <div class="math-block">$$t = \frac{\hat{\beta}_1}{SE(\hat{\beta}_1)}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>R², Signifikanz und Relevanz</h3>
-      <p>$R^2$ misst den erklärten Varianzanteil in der Stichprobe. Es sagt nichts darüber, ob der Effekt groß, kausal oder ökonomisch bedeutsam ist. Eine winzige Steigung kann bei großem $n$ signifikant werden, aber praktisch irrelevant bleiben.</p>
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Modellidee</h4>
+<p>Die lineare Regression beschreibt den mittleren Zusammenhang zwischen einer Zielgröße $Y$ und einem oder mehreren Regressoren $X$. In der einfachen Form gilt:</p>
+      <div class="math-block">$$Y_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i$$</div>
+      <p>$\\beta_0$ ist das Grundniveau, $\\beta_1$ die durchschnittliche Änderung von $Y$ je zusätzlicher Einheit in $X$.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">OLS-Schätzung</h4>
+<p>Die Kleinste-Quadrate-Methode wählt die Gerade so, dass die quadrierten Residuen möglichst klein werden. In der einfachen Regression gilt:</p>
+      <div class="math-block">$$\\hat{\\beta}_1 = \\frac{\\sum (x_i-\\bar{x})(y_i-\\bar{y})}{\\sum (x_i-\\bar{x})^2} = \\frac{s_{xy}}{s_x^2}, \\qquad \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1 \\bar{x}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Inferenz auf Koeffizienten</h4>
+<p>Eine geschätzte Steigung ist erst dann statistisch abgesichert, wenn Standardfehler, Konfidenzintervall oder t-Test dazukommen. Die Nullhypothese lautet oft $H_0:\\beta_1=0$.</p>
+      <div class="math-block">$$t = \\frac{\\hat{\\beta}_1}{SE(\\hat{\\beta}_1)}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">R², Signifikanz und Relevanz</h4>
+<p>$R^2$ misst den erklärten Varianzanteil in der Stichprobe. Es sagt nichts darüber, ob der Effekt groß, kausal oder ökonomisch bedeutsam ist. Eine winzige Steigung kann bei großem $n$ signifikant werden, aber praktisch irrelevant bleiben.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Kausalitätsfalle</strong> Weder ein signifikanter Koeffizient noch ein hohes $R^2$ beweisen einen kausalen Effekt. Design, Theorie und mögliche Drittvariablen bleiben entscheidend.</div>
-    </div>
-    <div class="section-block">
-      <h3>Klausurzugriff</h3>
-      <p>Die sichere Reihenfolge lautet: Modell benennen, Koeffizient sprachlich deuten, Signifikanz prüfen, Intervall/Unsicherheit ergänzen und erst danach eine inhaltliche Schlussfolgerung ziehen.</p>
-    </div>
-  `,
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurzugriff</h4>
+<p>Die sichere Reihenfolge lautet: Modell benennen, Koeffizient sprachlich deuten, Signifikanz prüfen, Intervall/Unsicherheit ergänzen und erst danach eine inhaltliche Schlussfolgerung ziehen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</div>
+</section>`,
   formeln: [
     {
       label: 'Regressionsmodell',
@@ -1677,29 +2032,56 @@ CONTENT.regression_schaetzung_inferenz = {
 
 CONTENT.regression_diagnostik_prognose = {
   motivation: 'Nach der Schätzung beginnt die Modellkritik: Residuen, Heteroskedastizität, Ausreißer und der Unterschied zwischen Erwartungswert- und Einzelprognose entscheiden, wie belastbar die Regression wirklich ist.',
-  theorie: String.raw`
-    <div class="section-block">
-      <h3>Diagnostik fragt nach Modelltragfähigkeit</h3>
-      <p>Eine Regressionsgleichung ist keine Endstation. Residuenplots, QQ-Plot, Ausreißer- und Hebelpunktdiagnostik prüfen, ob die Inferenzbedingungen plausibel bleiben.</p>
-    </div>
-    <div class="section-block">
-      <h3>Residuen und Heteroskedastizität</h3>
-      <p>Die Residuen $e_i = y_i - \hat y_i$ sollten kein systematisches Muster zeigen. Ein Trichter im Residuenplot deutet auf <strong>Heteroskedastizität</strong> hin: die Streuung der Fehler hängt dann von $x$ oder $\hat y$ ab.</p>
-    </div>
-    <div class="section-block">
-      <h3>Normalität, Ausreißer und Hebelpunkte</h3>
-      <p>Starke Ausreißer oder einflussreiche Beobachtungen können Koeffizienten und Standardfehler verzerren. Der QQ-Plot prüft, ob die Residuen grob normal wirken; Hebelpunkte sind x-seitig auffällige Beobachtungen mit großem Einfluss auf die Gerade.</p>
-    </div>
-    <div class="section-block">
-      <h3>Konfidenz- vs. Prognoseintervall</h3>
-      <p>Ein <strong>Konfidenzintervall</strong> beschreibt Unsicherheit um den erwarteten Mittelwert $E[Y|x_0]$. Ein <strong>Prognoseintervall</strong> ist breiter, weil zusätzlich die Reststreuung einer neuen Einzelbeobachtung einfließt.</p>
-    </div>
-    <div class="section-block">
-      <h3>Prüfungsrelevante Konsequenz</h3>
-      <div class="warn-box" data-warning-placement="rail"><strong>Diagnostikproblem heißt nicht sofort “alles falsch”</strong> Häufig bleibt die Schätzung nutzbar, aber Standardfehler, Testaussagen oder Prognosen müssen robuster abgesichert oder vorsichtiger interpretiert werden.</div>
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Diagnostik fragt nach Modelltragfähigkeit</h4>
+<p>Eine Regressionsgleichung ist keine Endstation. Residuenplots, QQ-Plot, Ausreißer- und Hebelpunktdiagnostik prüfen, ob die Inferenzbedingungen plausibel bleiben.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Residuen und Heteroskedastizität</h4>
+<p>Die Residuen $e_i = y_i - \\hat y_i$ sollten kein systematisches Muster zeigen. Ein Trichter im Residuenplot deutet auf <strong>Heteroskedastizität</strong> hin: die Streuung der Fehler hängt dann von $x$ oder $\\hat y$ ab.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Normalität, Ausreißer und Hebelpunkte</h4>
+<p>Starke Ausreißer oder einflussreiche Beobachtungen können Koeffizienten und Standardfehler verzerren. Der QQ-Plot prüft, ob die Residuen grob normal wirken; Hebelpunkte sind x-seitig auffällige Beobachtungen mit großem Einfluss auf die Gerade.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Konfidenz- vs. Prognoseintervall</h4>
+<p>Ein <strong>Konfidenzintervall</strong> beschreibt Unsicherheit um den erwarteten Mittelwert $E[Y|x_0]$. Ein <strong>Prognoseintervall</strong> ist breiter, weil zusätzlich die Reststreuung einer neuen Einzelbeobachtung einfließt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsrelevante Konsequenz</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Diagnostikproblem heißt nicht sofort “alles falsch”</strong> Häufig bleibt die Schätzung nutzbar, aber Standardfehler, Testaussagen oder Prognosen müssen robuster abgesichert oder vorsichtiger interpretiert werden.</div>
       <p>Die sichere Klausurantwort nennt immer: <strong>welches Muster sichtbar ist</strong>, <strong>welche Warnung daraus folgt</strong> und <strong>welche Inferenzgrenze sich daraus ergibt</strong>.</p>
-    </div>
-  `,
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Diagnostik</h4>
+<p>Residualplot: Muster → Heteroskedastizität oder fehlende Nichtlinearität. $R^2$ allein reicht nicht — adjusted $R^2$ bei Modellvergleich. Prognose: Vorhersageintervall breiter als Konfidenzband für $\\hat y$ (unsicherer Einzelwert).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>OLS-Reste sollten weißes Rauschen sein (GM4). Breusch-Pagan/White qualitativ: heteroskedastische SE oder robuste SE (HC). Outlier: Leverage/Cook's D erwähnen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Prognose vs. KI:</strong> Prognoseintervall für $y_{n+1}$ enthält $\\hat\\sigma$ und $x_{n+1}$ — nicht mit KI für $E[y|x]$ verwechseln.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</div>
+</section>`,
   formeln: [
     {
       label: 'Residuum',

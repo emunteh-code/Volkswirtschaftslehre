@@ -53,37 +53,50 @@ export const CHAPTERS = [
 export const CONTENT = {
   was_ist_recht: {
     motivation: 'Der Kurs beginnt nicht mit Spezialnormen, sondern mit der Grundfrage, was Recht überhaupt leisten soll: Verbindlichkeit, Konfliktlösung und Erwartungssicherheit.',
-    theorie: [
-      section(
-        'Recht als verbindliche Ordnung',
-        `<p>Recht ist ein System verbindlicher Normen, das gesellschaftliches Verhalten ordnet und Konflikte kanalisiert. Es schafft Erwartungssicherheit: Wer Verträge schließt, Eigentum überträgt oder Ansprüche geltend macht, muss darauf vertrauen können, dass Regeln gelten und durchsetzbar sind.</p>`
-      ),
-      section(
-        'Propädeutikum: Gewaltenteilung',
-        `<p>Die erste Vorlesungseinheit ordnet das Recht in die staatliche Gewaltenteilung ein: Die <strong>Legislative</strong> erlässt Gesetze, die <strong>Exekutive</strong> führt sie aus, die <strong>Judikative</strong> legt sie aus und entscheidet im Streit. Dieses Bild hilft später, Gesetzgebung, Verwaltung und Gerichte nicht zu vermischen.</p>`
-      ),
-      section(
-        'Blickwinkel auf „Recht“',
-        `<p>Die Vorlesung skizziert Recht aus mehreren Perspektiven: <strong>soziologisch</strong> als kulturelles Faktum und Herrschaftsinstrument, in dem außerrechtliche Faktoren mitwirken; <strong>(rechts-)philosophisch</strong> etwa als Gerechtigkeitsprojekt (einschließlich Naturrechtsdiskussion); <strong>ökonomisch</strong> als institutionelle Rahmenbedingung des Marktes und als Kostenfaktor. Für die Klausur bleibt zentral: Du arbeitest im Rahmen der positiven Rechtsordnung, nicht mit bloßem Wunschrecht.</p>`
-      ),
-      section(
-        'Recht und Rechtswissenschaft',
-        `<p>Die Einheit führt Rechtsfindungsrichtungen vor, die in der Juristenausbildung historisch und methodisch eine Rolle spielen: <strong>Rechtspositivismus</strong> (Lösung aus positivem Recht), <strong>Begriffsjurisprudenz</strong>, die <strong>reine Rechtslehre</strong> (Kelsen) als streng systematisch-deduktive Ausprägung, die abgelehnte <strong>Freirechtslehre</strong> (Ehrlich) sowie die <strong>Interessenjurisprudenz</strong> (Jhering, Heck u.a.). Das Fazit der Folien: In der Rechtsanwendung geht es primär um den <strong>Norminhalt</strong> und den <strong>Wortlaut</strong> des Gesetzes; Spielräume können im Einzelfall interessengerechte Auslegung erlauben — aber nicht „beliebig“.</p>`
-      ),
-      section(
-        'Gesetzliches Unrecht und Grenzen positiven Rechts',
-        `<p>Die Vorlesung diskutiert „gesetzliches Unrecht“ (Beispiele NS- und DDR-Recht) und die <strong>Radbruchsche Formel</strong>: Extrem ungerechtes positives Gesetz kann so weit von Gerechtigkeit entfernt stehen, dass es seiner Rechtsnatur verlustig geht. Ergänzend werden die Mauerschützen-Urteile und im Grundgesetz der Schutz durch <strong>Art. 79 Abs. 3 GG</strong> in Verbindung mit den Staatsstrukturprinzipien und der Menschenwürde genannt. Das ist Staats- und Rechtsphilosophie im Überblick — für Zivilrechtsklausuren meist Hintergrund, aber prägend für das Verständnis, dass „Gesetz“ und „Gerechtigkeit“ auseinanderfallen können.</p>`
-      ),
-      section(
-        'Rechtsquellen der deutschen Rechtsordnung',
-        `<p>Im Anschluss listet die Vorlesung die wichtigsten <strong>Rechtsquellen</strong>: Grundgesetz, Unionsrecht (Verträge, Richtlinien, Verordnungen), deutsche Gesetze und Rechtsverordnungen sowie Satzungen, dazu (bedeutungsarm gewordenes) Gewohnheitsrecht und private Verträge. <strong>Rechtsprechung</strong> und Auslegung treten dabei als Form der Normanwendung hinzu — in der Klausur entwickelst du Lösungen aus Normtext, Systematik und subsumtiver Fallarbeit, nicht aus bloßer Meinung.</p>`
-      ),
-      section(
-        'Warum der Kurs fallbezogen arbeitet',
-        `<p>Juristische Kompetenz zeigt sich nicht im bloßen Wiedergeben von Definitionen, sondern in der Subsumtion eines Sachverhalts unter gesetzliche Voraussetzungen. Der Fall ist deshalb kein Zusatz, sondern die eigentliche Arbeitsform des Rechts.</p>
-         ${warn('Fehlstart:', 'Viele Antworten beginnen mit Meinungen oder Alltagsgerechtigkeit. Im Gutachten zählt zuerst die gesetzliche Anknüpfung und erst dann die Wertung.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Propädeutikum: Gewaltenteilung</h4>
+<p>Die erste Vorlesungseinheit ordnet das Recht in die staatliche Gewaltenteilung ein: Die <strong>Legislative</strong> erlässt Gesetze, die <strong>Exekutive</strong> führt sie aus, die <strong>Judikative</strong> legt sie aus und entscheidet im Streit. Dieses Bild hilft später, Gesetzgebung, Verwaltung und Gerichte nicht zu vermischen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum der Kurs fallbezogen arbeitet</h4>
+<p>Juristische Kompetenz zeigt sich nicht im bloßen Wiedergeben von Definitionen, sondern in der Subsumtion eines Sachverhalts unter gesetzliche Voraussetzungen. Der Fall ist deshalb kein Zusatz, sondern die eigentliche Arbeitsform des Rechts.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Fehlstart:</strong> Viele Antworten beginnen mit Meinungen oder Alltagsgerechtigkeit. Im Gutachten zählt zuerst die gesetzliche Anknüpfung und erst dann die Wertung.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Recht als verbindliche Ordnung</h4>
+<p>Recht ist ein System verbindlicher Normen, das gesellschaftliches Verhalten ordnet und Konflikte kanalisiert. Es schafft Erwartungssicherheit: Wer Verträge schließt, Eigentum überträgt oder Ansprüche geltend macht, muss darauf vertrauen können, dass Regeln gelten und durchsetzbar sind.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Blickwinkel auf „Recht“</h4>
+<p>Die Vorlesung skizziert Recht aus mehreren Perspektiven: <strong>soziologisch</strong> als kulturelles Faktum und Herrschaftsinstrument, in dem außerrechtliche Faktoren mitwirken; <strong>(rechts-)philosophisch</strong> etwa als Gerechtigkeitsprojekt (einschließlich Naturrechtsdiskussion); <strong>ökonomisch</strong> als institutionelle Rahmenbedingung des Marktes und als Kostenfaktor. Für die Klausur bleibt zentral: Du arbeitest im Rahmen der positiven Rechtsordnung, nicht mit bloßem Wunschrecht.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Recht und Rechtswissenschaft</h4>
+<p>Die Einheit führt Rechtsfindungsrichtungen vor, die in der Juristenausbildung historisch und methodisch eine Rolle spielen: <strong>Rechtspositivismus</strong> (Lösung aus positivem Recht), <strong>Begriffsjurisprudenz</strong>, die <strong>reine Rechtslehre</strong> (Kelsen) als streng systematisch-deduktive Ausprägung, die abgelehnte <strong>Freirechtslehre</strong> (Ehrlich) sowie die <strong>Interessenjurisprudenz</strong> (Jhering, Heck u.a.). Das Fazit der Folien: In der Rechtsanwendung geht es primär um den <strong>Norminhalt</strong> und den <strong>Wortlaut</strong> des Gesetzes; Spielräume können im Einzelfall interessengerechte Auslegung erlauben — aber nicht „beliebig“.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Gesetzliches Unrecht und Grenzen positiven Rechts</h4>
+<p>Die Vorlesung diskutiert „gesetzliches Unrecht“ (Beispiele NS- und DDR-Recht) und die <strong>Radbruchsche Formel</strong>: Extrem ungerechtes positives Gesetz kann so weit von Gerechtigkeit entfernt stehen, dass es seiner Rechtsnatur verlustig geht. Ergänzend werden die Mauerschützen-Urteile und im Grundgesetz der Schutz durch <strong>Art. 79 Abs. 3 GG</strong> in Verbindung mit den Staatsstrukturprinzipien und der Menschenwürde genannt. Das ist Staats- und Rechtsphilosophie im Überblick — für Zivilrechtsklausuren meist Hintergrund, aber prägend für das Verständnis, dass „Gesetz“ und „Gerechtigkeit“ auseinanderfallen können.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Rechtsquellen der deutschen Rechtsordnung</h4>
+<p>Im Anschluss listet die Vorlesung die wichtigsten <strong>Rechtsquellen</strong>: Grundgesetz, Unionsrecht (Verträge, Richtlinien, Verordnungen), deutsche Gesetze und Rechtsverordnungen sowie Satzungen, dazu (bedeutungsarm gewordenes) Gewohnheitsrecht und private Verträge. <strong>Rechtsprechung</strong> und Auslegung treten dabei als Form der Normanwendung hinzu — in der Klausur entwickelst du Lösungen aus Normtext, Systematik und subsumtiver Fallarbeit, nicht aus bloßer Meinung.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Kernfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.' },
       { label: 'Normbezug', eq: schema(['Sachverhalt', '→', 'Tatbestandsmerkmal', '→', 'Rechtsfolge']), desc: 'Das ist die elementare Struktur juristischer Arbeit.' }
@@ -110,23 +123,39 @@ export const CONTENT = {
 
   privatrecht: {
     motivation: 'Bevor Einzelfälle lösbar werden, musst du wissen, wo im BGB du überhaupt suchst: Privatrecht ordnet Beziehungen zwischen Gleichgeordneten und bildet die Arbeitsgrundlage fast aller späteren Fälle.',
-    theorie: [
-      section(
-        'Privatrecht innerhalb der Rechtsordnung',
-        `<p>Das Privatrecht regelt Rechtsbeziehungen zwischen rechtlich Gleichgeordneten. Es unterscheidet sich damit vom öffentlichen Recht, in dem staatliche Über- und Unterordnungsverhältnisse dominieren. Die Vorlesungsgrafik führt daneben auch das <strong>Strafrecht</strong> als eigenes Rechtsgebiet; für diese Einführung bleibt das Zivilrecht jedoch das Arbeitspferd, weil Vertrags- und Haftungslogik den Kern der Fallbearbeitung bilden.</p>`
-      ),
-      section(
-        'Grundaufbau des BGB',
-        `<p>Das BGB ist kein loses Normbündel, sondern systematisch aufgebaut: Allgemeiner Teil, Schuldrecht, Sachenrecht, Familienrecht und Erbrecht. Klausuren arbeiten oft aus dem Allgemeinen Teil heraus, bevor sie in speziellere Anspruchsgrundlagen übergehen.</p>
-         ${scheme(schema(['AT', '→', 'Schuldrecht', '→', 'Sachenrecht / Sondermaterien']))}
-      `
-      ),
-      section(
-        'Warum die Systematik klausurentscheidend ist',
-        `<p>Wer die Stellung einer Norm im System kennt, findet schneller die passende Anspruchsgrundlage und vermeidet Doppelprüfungen. Gerade im ersten Kontakt mit dem BGB entscheidet der systematische Zugriff darüber, ob Fälle geordnet oder chaotisch bearbeitet werden.</p>
-         ${warn('Orientierungsfehler:', 'Viele Lernende merken sich Einzelnormen, ohne ihre Stellung im System zu kennen. Dann wird die Fallbearbeitung langsam und unsicher.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Privatrecht innerhalb der Rechtsordnung</h4>
+<p>Das Privatrecht regelt Rechtsbeziehungen zwischen rechtlich Gleichgeordneten. Es unterscheidet sich damit vom öffentlichen Recht, in dem staatliche Über- und Unterordnungsverhältnisse dominieren. Die Vorlesungsgrafik führt daneben auch das <strong>Strafrecht</strong> als eigenes Rechtsgebiet; für diese Einführung bleibt das Zivilrecht jedoch das Arbeitspferd, weil Vertrags- und Haftungslogik den Kern der Fallbearbeitung bilden.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Grundaufbau des BGB</h4>
+<p>Das BGB ist kein loses Normbündel, sondern systematisch aufgebaut: Allgemeiner Teil, Schuldrecht, Sachenrecht, Familienrecht und Erbrecht. Klausuren arbeiten oft aus dem Allgemeinen Teil heraus, bevor sie in speziellere Anspruchsgrundlagen übergehen.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">AT</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Schuldrecht</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Sachenrecht / Sondermaterien</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum die Systematik klausurentscheidend ist</h4>
+<p>Wer die Stellung einer Norm im System kennt, findet schneller die passende Anspruchsgrundlage und vermeidet Doppelprüfungen. Gerade im ersten Kontakt mit dem BGB entscheidet der systematische Zugriff darüber, ob Fälle geordnet oder chaotisch bearbeitet werden.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Orientierungsfehler:</strong> Viele Lernende merken sich Einzelnormen, ohne ihre Stellung im System zu kennen. Dann wird die Fallbearbeitung langsam und unsicher.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Sachenrecht und Familienrecht als Randzonen</h4>
+<p>Im Grundkurs bleibt der Fokus auf AT und Schuldrecht; Sachenrecht (§§ 929 ff. BGB) wird über Trennung/Abstraktion berührt. Familien- und Erbrecht sind eigene Bücher — in Klausuren selten Startpunkt, aber für Systematik nennbar.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Öffentliches Recht kurz abgrenzen</h4>
+<p>Hoheitliche Gewalt (Polizei, Steuern) folgt anderen Normen und Gerichtswegen. Verwechslung „BGB = alles Recht“ ist ein häufiger Anfängerfehler.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Prüfungsstart</strong> Bei zivilrechtlichen Fällen nicht mit Verwaltungsrecht oder Strafrecht beginnen, wenn die Fallfrage privatrechtlich ist.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'BGB-System', eq: schema(['AT', '+', 'Besonderer Teil']), desc: 'Spezielle Normen bauen auf allgemeinen Regeln auf.' },
       { label: 'Privatrecht', eq: phrase('Gleichordnung der Beteiligten'), desc: 'Grundidee der privatrechtlichen Beziehung.' }
@@ -153,35 +182,41 @@ export const CONTENT = {
 
   methodik: {
     motivation: 'Juristische Methodik ist das eigentliche Werkzeugfach des Moduls: Ohne Anspruchsaufbau, einleitenden und merkmalsbezogenen Obersätzen, Definition, Subsumtion, Zwischenergebnissen und sauberer Gliederung werden auch bekannte Normen in der Klausur wertlos.',
-    theorie: [
-      section(
-        'Anspruchsdenken',
-        `<p>Das Grundschema jeder zivilrechtlichen Fallbearbeitung lautet: Wer will was von wem woraus? Diese Frage zwingt dazu, Anspruchsgegner, Anspruchsziel und Anspruchsgrundlage präzise zu benennen. Genau dadurch wird der Fall prüfbar.</p>`
-      ),
-      section(
-        'Gutachtenstil',
-        `<p>Im Gutachten wird die <strong>Subsumtionstechnik</strong> zur Beantwortung der Fallfrage eingesetzt: Du ordnest den <strong>Sachverhalt</strong> unter den <strong>Tatbestand</strong> einer Norm und leitest die <strong>Rechtsfolge</strong> her (wenn-dann-Struktur). Nach der Vorlesung gliedert sich die Prüfung einzelner Ansprüche üblicherweise in einen <strong>einleitenden Obersatz</strong>, sodann für <strong>jedes Tatbestandsmerkmal</strong> einen <strong>Obersatz zum Merkmal</strong>, jeweils gefolgt von <strong>Definition</strong> und <strong>Subsumtion</strong>, und schließlich das <strong>Ergebnis</strong> der Anspruchsprüfung. Eine lineare Kette „einmal O–D–S–E“ genügt damit methodisch nicht, wenn mehrere Merkmale zu prüfen sind — die Merkmalskette wiederholt sich.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Anspruchsdenken</h4>
+<p>Das Grundschema jeder zivilrechtlichen Fallbearbeitung lautet: Wer will was von wem woraus? Diese Frage zwingt dazu, Anspruchsgegner, Anspruchsziel und Anspruchsgrundlage präzise zu benennen. Genau dadurch wird der Fall prüfbar.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Gutachtenstil</h4>
+<p>Im Gutachten wird die <strong>Subsumtionstechnik</strong> zur Beantwortung der Fallfrage eingesetzt: Du ordnest den <strong>Sachverhalt</strong> unter den <strong>Tatbestand</strong> einer Norm und leitest die <strong>Rechtsfolge</strong> her (wenn-dann-Struktur). Nach der Vorlesung gliedert sich die Prüfung einzelner Ansprüche üblicherweise in einen <strong>einleitenden Obersatz</strong>, sodann für <strong>jedes Tatbestandsmerkmal</strong> einen <strong>Obersatz zum Merkmal</strong>, jeweils gefolgt von <strong>Definition</strong> und <strong>Subsumtion</strong>, und schließlich das <strong>Ergebnis</strong> der Anspruchsprüfung. Eine lineare Kette „einmal O–D–S–E“ genügt damit methodisch nicht, wenn mehrere Merkmale zu prüfen sind — die Merkmalskette wiederholt sich.</p>
          <p>Zur <strong>Sprache</strong> (Vorlesung): Obersätze stehen typischerweise im <strong>Konjunktiv II</strong> (Modalverben wie „könnte“, „müsste“), Definition und Subsumtion im <strong>Indikativ</strong>; die Schlussfolgerung innerhalb der Subsumtion kennzeichnest du mit Wörtern wie „folglich“, „daher“ oder „somit“.</p>
-         ${scheme(schema(['Einleitender Obersatz', '→', 'pro TBM: Obersatz', '→', 'Definition', '→', 'Subsumtion', '→', 'Ergebnis']))}
-      `
-      ),
-      section(
-        'Anspruch entstanden, untergegangen, durchsetzbar',
-        `<p>Die Übungen arbeiten zusätzlich mit einer zweiten Ordnungsebene: Zuerst prüfst du, ob ein Anspruch entstanden ist. Danach fragst du, ob er untergegangen ist. Erst am Ende prüfst du, ob er durchsetzbar bleibt. Diese Kette verhindert, dass Einwendungen, Gestaltungsrechte und Einreden ungeordnet vermischt werden.</p>
-         ${scheme(schema(['Anspruch entstanden', '→', 'untergegangen', '→', 'durchsetzbar']))}
-      `
-      ),
-      section(
-        'Subsumtion als Kernleistung',
-        `<p>Die Subsumtion ist mehr als ein Wortersatz für „anwenden“: Du musst zeigen, <em>warum</em> konkrete Tatsachen ein Tatbestandsmerkmal erfüllen oder nicht erfüllen. Genau hier trennt sich reine Definitionenkenntnis von juristischem Arbeiten.</p>
-         ${warn('Methodikfehler:', 'Definitionen ohne anschließende Subsumtion sind fast wertlos. Die Klausur bewertet nicht bloßes Wissen, sondern die Anwendung auf den Sachverhalt.')}`
-      ),
-      section(
-        'Gliederungsebenen und Ergebniskontrolle',
-        `<p>Die Fallskripte und Methodikblätter zeigen, dass gute Klausuren nicht nur materiell richtig, sondern auch formal steuerbar sein müssen: Obersätze gehören auf die richtige Ebene, Zwischenergebnisse leiten zum nächsten Prüfungsabschnitt über, und Rechtsfolgen dürfen nie vor den Tatbestandsvoraussetzungen stehen. Gerade Mehranspruchsfälle leben von dieser Disziplin.</p>
-         ${warn('Strukturverlust:', 'Viele Bearbeitungen springen direkt zu Rückgewähr, Schadenshöhe oder „am Ende wohl ja“. Ohne klare Gliederung geht die Anspruchslogik verloren.')}`
-      )
-    ].join(''),
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Einleitender Obersatz</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">pro TBM: Obersatz</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Definition</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Subsumtion</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Ergebnis</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Anspruch entstanden, untergegangen, durchsetzbar</h4>
+<p>Die Übungen arbeiten zusätzlich mit einer zweiten Ordnungsebene: Zuerst prüfst du, ob ein Anspruch entstanden ist. Danach fragst du, ob er untergegangen ist. Erst am Ende prüfst du, ob er durchsetzbar bleibt. Diese Kette verhindert, dass Einwendungen, Gestaltungsrechte und Einreden ungeordnet vermischt werden.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Anspruch entstanden</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">untergegangen</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">durchsetzbar</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Subsumtion als Kernleistung</h4>
+<p>Die Subsumtion ist mehr als ein Wortersatz für „anwenden“: Du musst zeigen, <em>warum</em> konkrete Tatsachen ein Tatbestandsmerkmal erfüllen oder nicht erfüllen. Genau hier trennt sich reine Definitionenkenntnis von juristischem Arbeiten.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Methodikfehler:</strong> Definitionen ohne anschließende Subsumtion sind fast wertlos. Die Klausur bewertet nicht bloßes Wissen, sondern die Anwendung auf den Sachverhalt.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Gliederungsebenen und Ergebniskontrolle</h4>
+<p>Die Fallskripte und Methodikblätter zeigen, dass gute Klausuren nicht nur materiell richtig, sondern auch formal steuerbar sein müssen: Obersätze gehören auf die richtige Ebene, Zwischenergebnisse leiten zum nächsten Prüfungsabschnitt über, und Rechtsfolgen dürfen nie vor den Tatbestandsvoraussetzungen stehen. Gerade Mehranspruchsfälle leben von dieser Disziplin.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Strukturverlust:</strong> Viele Bearbeitungen springen direkt zu Rückgewähr, Schadenshöhe oder „am Ende wohl ja“. Ohne klare Gliederung geht die Anspruchslogik verloren.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Anspruchsfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Erste und wichtigste Sortierfrage des Falles.' },
       {
@@ -244,31 +279,52 @@ export const CONTENT = {
 
   willenserklaerung: {
     motivation: 'Willenserklärung und Vertragsschluss sind das Herzstück des Allgemeinen Teils. Wer Angebot, Annahme, Zugang und Erklärungshandlung nicht sauber prüft, verliert fast jeden schuldrechtlichen Fall schon am Anfang.',
-    theorie: [
-      section(
-        'Willenserklärung',
-        `<p>Eine Willenserklärung ist eine auf einen rechtlichen Erfolg gerichtete Erklärung. Sie setzt objektiven Erklärungswert und subjektive Elemente wie Handlungswillen voraus. Für die Klausur ist entscheidend: Nicht jedes innere Wollen wird rechtlich relevant, sondern nur das rechtlich erkennbare Erklären.</p>`
-      ),
-      section(
-        'Angebot, Annahme und Zugang',
-        `<p>Ein Vertrag setzt zwei korrespondierende Willenserklärungen voraus: Angebot und Annahme. Das Angebot muss so bestimmt sein, dass ein einfaches „Ja“ zum Vertrag führt. Die Annahme muss inhaltlich übereinstimmen und dem Angebotenden zugehen, soweit sie empfangsbedürftig ist.</p>
-         ${scheme(schema(['Vertrag', '=', 'Angebot', '+', 'Annahme']))}
-      `
-      ),
-      section(
-        'Grenzfälle in Klausuren',
-        `<p>Schweigen ist im Privatrecht grundsätzlich keine Annahme. Bloßes inneres Einverständnis reicht nicht. Wer nur „denkt“, aber nicht erklärt, schließt keinen Vertrag. Auch invitatio ad offerendum und rechtliche Bindungswirkung musst du sauber auseinanderhalten.</p>
-         ${warn('Klassiker:', 'Das bloße Lesen eines Angebots und inneres Zustimmen ersetzen keine Annahmeerklärung. Ohne Kundgabe kein Vertrag.')}`
-      ),
-      section(
-        'Mini-Gutachten (Normzitat)',
-        `<p><strong>Fall:</strong> A mailt B: „Ich verkaufe dir mein Fahrrad für 200 €.“ B liest die Mail, nickt innerlich — antwortet aber nicht. Ist ein Kaufvertrag zustande?</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Willenserklärung</h4>
+<p>Eine Willenserklärung ist eine auf einen rechtlichen Erfolg gerichtete Erklärung. Sie setzt objektiven Erklärungswert und subjektive Elemente wie Handlungswillen voraus. Für die Klausur ist entscheidend: Nicht jedes innere Wollen wird rechtlich relevant, sondern nur das rechtlich erkennbare Erklären.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Angebot, Annahme und Zugang</h4>
+<p>Ein Vertrag setzt zwei korrespondierende Willenserklärungen voraus: Angebot und Annahme. Das Angebot muss so bestimmt sein, dass ein einfaches „Ja“ zum Vertrag führt. Die Annahme muss inhaltlich übereinstimmen und dem Angebotenden zugehen, soweit sie empfangsbedürftig ist.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Vertrag</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">=</span></span><span class="semantic-schema__item">Angebot</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Annahme</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zugang und empfangsbedürftige Erklärungen</h4>
+<p>Willenserklärungen werden mit Zugang wirksam, wenn sie empfangsbedürftig sind (§ 130 BGB). Bei Angeboten und Annahmen ist der Zugang beim Empfänger maßgeblich — nicht das Absendedatum allein.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Angebot vs. invitatio ad offerendum</h4>
+<p>Supermarkt-Preisschilder, Schaufenster und Auktionskataloge sind regelmäßig nur Aufforderungen zur Abgabe eines Angebots. Das bindende Angebot kommt erst durch die Kundgabe des Kunden (z.B. an der Kasse).</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Schweigen</strong> Schweigen ist keine Annahme (§ 151 BGB Ausnahmen beachten).</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Grenzfälle in Klausuren</h4>
+<p>Schweigen ist im Privatrecht grundsätzlich keine Annahme. Bloßes inneres Einverständnis reicht nicht. Wer nur „denkt“, aber nicht erklärt, schließt keinen Vertrag. Auch invitatio ad offerendum und rechtliche Bindungswirkung musst du sauber auseinanderhalten.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Klassiker:</strong> Das bloße Lesen eines Angebots und inneres Zustimmen ersetzen keine Annahmeerklärung. Ohne Kundgabe kein Vertrag.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Mini-Gutachten (Normzitat)</h4>
+<p><strong>Fall:</strong> A mailt B: „Ich verkaufe dir mein Fahrrad für 200 €.“ B liest die Mail, nickt innerlich — antwortet aber nicht. Ist ein Kaufvertrag zustande?</p>
          <p><strong>Obersatz:</strong> Ein Kaufvertrag nach § 433 BGB setzt wirksamen Vertragsschluss voraus.</p>
          <p><strong>Definition/Subsumtion:</strong> A’s E-Mail ist ein bindendes Angebot (§ 145 BGB). B gibt keine empfangsbedürftige Annahmeerklärung ab — inneres Einverständnis genügt nicht (§ 151 BGB).</p>
          <p><strong>Ergebnis:</strong> Kein Vertrag, mangels Annahme.</p>
-         ${warn('Normzitat-Pflicht:', 'Jede Zwischenüberschrift braucht einen Anker (§ 433, § 145, § 130, § 151 BGB). Ohne Norm kein Gutachten-Punkt — auch wenn das Ergebnis stimmt.')}`
-      )
-    ].join(''),
+         <div class="warn-box" data-warning-placement="rail"><strong>Normzitat-Pflicht:</strong> Jede Zwischenüberschrift braucht einen Anker (§ 433, § 145, § 130, § 151 BGB). Ohne Norm kein Gutachten-Punkt — auch wenn das Ergebnis stimmt.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Vertragsschluss', eq: schema(['Angebot', '+', 'Annahme']), desc: 'Zwei übereinstimmende Willenserklärungen.' },
       { label: 'Angebot', eq: schema(['essentialia negotii', '+', 'Rechtsbindungswille']), desc: 'So bestimmt, dass ein einfaches Ja genügt.' }
@@ -296,27 +352,43 @@ export const CONTENT = {
 
   dissens: {
     motivation: 'Dissens ist kein nachträglicher Fehlerheilungsmechanismus, sondern die Frage, ob es überhaupt zu einer wirksamen Einigung gekommen ist. Genau daran scheitern Vertragsklausuren oft schon auf der ersten Stufe.',
-    theorie: [
-      section(
-        'Konsens nach objektivem Empfängerhorizont',
-        `<p>Ob Angebot und Annahme korrespondieren, bestimmst du nicht nach geheimen Vorstellungen, sondern nach der objektiven Auslegung empfangsbedürftiger Willenserklärungen gem. §§ 133, 157 BGB. Stimmen die Erklärungen danach überein, liegt grundsätzlich Konsens vor, auch wenn eine Partei innerlich etwas anderes wollte.</p>`
-      ),
-      section(
-        'Totaldissens und offener Dissens',
-        `<p>Fehlt die Einigung schon bei den <em>essentialia negotii</em>, kommt von vornherein kein Vertrag zustande. Beim offenen Dissens (§ 154 BGB) wissen die Parteien, dass noch ein Punkt offen ist; dann gilt im Zweifel: kein Vertrag. Der typische Klausurzugriff ist deshalb: erst Konsensfrage, dann erst überhaupt an Rechtsfolgen denken.</p>
-         ${scheme(schema(['kein Konsens über essentialia', '⇒', 'kein Vertrag']))}
-      `
-      ),
-      section(
-        'Versteckter Dissens und seine Seltenheit',
-        `<p>Beim versteckten Dissens (§ 155 BGB) glauben die Parteien an Einigkeit, obwohl sie objektiv aneinander vorbeireden. In der Vorlesung wird aber ausdrücklich betont, dass dieser Fall in Klausuren seltener ist, als viele denken: Häufig lässt sich über die objektive Auslegung doch eine Bedeutung feststellen, und dann liegt eher ein einseitiger Irrtum als echter Dissens vor.</p>
-         ${warn('Prüfungsfalle:', 'Nicht jeder innere Unterschied ist Dissens. Wenn die Erklärungen objektiv deckungsgleich sind, musst du aus dem Dissenspfad heraus und in die Anfechtungsebene wechseln.')}`
-      ),
-      section(
-        'Falsa demonstratio non nocet',
-        `<p>Ein Sonderfall ist die falsa demonstratio: Beide Parteien wollen objektiv dasselbe, benutzen aber übereinstimmend die falsche Bezeichnung. Dann schadet die falsche Benennung nicht. Genau dieser Sonderfall zeigt, dass im Dissensrecht die gemeinsame Bedeutung und der Verkehrsschutz sauber gegeneinander abgewogen werden müssen.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Konsens nach objektivem Empfängerhorizont</h4>
+<p>Ob Angebot und Annahme korrespondieren, bestimmst du nicht nach geheimen Vorstellungen, sondern nach der objektiven Auslegung empfangsbedürftiger Willenserklärungen gem. §§ 133, 157 BGB. Stimmen die Erklärungen danach überein, liegt grundsätzlich Konsens vor, auch wenn eine Partei innerlich etwas anderes wollte.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Totaldissens und offener Dissens</h4>
+<p>Fehlt die Einigung schon bei den <em>essentialia negotii</em>, kommt von vornherein kein Vertrag zustande. Beim offenen Dissens (§ 154 BGB) wissen die Parteien, dass noch ein Punkt offen ist; dann gilt im Zweifel: kein Vertrag. Der typische Klausurzugriff ist deshalb: erst Konsensfrage, dann erst überhaupt an Rechtsfolgen denken.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">kein Konsens über essentialia</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">kein Vertrag</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Versteckter Dissens und seine Seltenheit</h4>
+<p>Beim versteckten Dissens (§ 155 BGB) glauben die Parteien an Einigkeit, obwohl sie objektiv aneinander vorbeireden. In der Vorlesung wird aber ausdrücklich betont, dass dieser Fall in Klausuren seltener ist, als viele denken: Häufig lässt sich über die objektive Auslegung doch eine Bedeutung feststellen, und dann liegt eher ein einseitiger Irrtum als echter Dissens vor.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Prüfungsfalle:</strong> Nicht jeder innere Unterschied ist Dissens. Wenn die Erklärungen objektiv deckungsgleich sind, musst du aus dem Dissenspfad heraus und in die Anfechtungsebene wechseln.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Falsa demonstratio non nocet</h4>
+<p>Ein Sonderfall ist die falsa demonstratio: Beide Parteien wollen objektiv dasselbe, benutzen aber übereinstimmend die falsche Bezeichnung. Dann schadet die falsche Benennung nicht. Genau dieser Sonderfall zeigt, dass im Dissensrecht die gemeinsame Bedeutung und der Verkehrsschutz sauber gegeneinander abgewogen werden müssen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Dissens</h4>
+<p>Klausurpfad: Angebot und Annahme objektiv auslegen (§§ 133, 157 BGB) → deckungsgleich? → Konsens. Offener Dissens § 154: bewusst offener Punkt → kein Vertrag. Versteckter Dissens § 155: selten — oft objektive Auslegung oder Irrtum. Essentialia negotii fehlen → Totaldissens.</p><div class="warn-box" data-warning-placement="rail"><strong>Nicht jeder Irrtum ist Dissens</strong> Bei objektiver Deckungsgleichheit → Anfechtung (§§ 119 ff.), nicht Dissenspfad.</div><div class="warn-box" data-warning-placement="rail"><strong>Falsa demonstratio</strong> Gleiche objektive Bedeutung, falsche Bezeichnung → Vertrag trotzdem wirksam.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Konsensfrage', eq: schema(['Angebot', '↔', 'Annahme']), desc: 'Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.' },
       { label: 'Offener Dissens', eq: schema(['§ 154 BGB', '⇒', 'im Zweifel kein Vertrag']), desc: 'Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.' },
@@ -365,29 +437,35 @@ export const CONTENT = {
 
   anfechtung: {
     motivation: 'Die Anfechtung korrigiert keinen fehlenden Konsens, sondern einen zunächst wirksamen Vertrag oder eine zunächst wirksame Erklärung. Genau diese zeitliche und methodische Trennung macht sie klausurprägend.',
-    theorie: [
-      section(
-        'Warum es die Anfechtung braucht',
-        `<p>Wer eine Willenserklärung abgibt, ist daran grundsätzlich gebunden. Das Gesetz löst den Konflikt zwischen Privatautonomie und Verkehrsschutz über die Anfechtung: Nur bestimmte, gesetzlich geregelte Fehler berechtigen dazu, die Erklärung nachträglich zu beseitigen. Ohne Anfechtungsgrund bleibt der Erklärende gebunden.</p>`
-      ),
-      section(
-        'Anfechtungsgründe und Kausalität',
-        `<p>Die Vorlesung nennt als Kernfälle Inhaltsirrtum, Erklärungsirrtum, Eigenschaftsirrtum sowie Täuschung und Drohung. Der Anfechtungsgrund muss für die Erklärung kausal gewesen sein: Ohne den Fehler wäre die Erklärung nicht oder nicht mit diesem Inhalt abgegeben worden.</p>
-         ${scheme(schema(['Anfechtungsgrund', '+', 'Kausalität']))}
-      `
-      ),
-      section(
-        'Anfechtungserklärung und Frist',
-        `<p>Die Anfechtung ist ein Gestaltungsrecht. Deshalb braucht es eine Anfechtungserklärung gegenüber dem richtigen Gegner und die Einhaltung der gesetzlichen Frist. Bei Irrtumsanfechtung gilt § 121 BGB („unverzüglich“), bei Täuschung oder Drohung § 124 BGB. Wer nur den Irrtum sieht, aber Erklärung und Frist weglässt, bleibt klausurisch unvollständig.</p>
-         ${scheme(schema(['Anfechtungsgrund', '+', 'Erklärung', '+', 'Frist']))}
-      `
-      ),
-      section(
-        'Rechtsfolgen und § 122 BGB',
-        `<p>Die erfolgreiche Anfechtung vernichtet das Geschäft ex tunc. Gleichzeitig kann in den Irrtumsfällen ein Anspruch auf Vertrauensschaden nach § 122 BGB entstehen. Klausurtechnisch wichtig ist die Trennung: Erst Anfechtungstatbestand, dann Rechtsfolge, dann erst der separate § 122-Pfad.</p>
-         ${warn('Anfechtungsfalle:', 'Nicht jeder Fehlkalkulations- oder Motivirrtum trägt eine Anfechtung. Und § 122 BGB wird nicht in den Tatbestand der Anfechtung hineingemischt, sondern danach eigenständig geprüft.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum es die Anfechtung braucht</h4>
+<p>Wer eine Willenserklärung abgibt, ist daran grundsätzlich gebunden. Das Gesetz löst den Konflikt zwischen Privatautonomie und Verkehrsschutz über die Anfechtung: Nur bestimmte, gesetzlich geregelte Fehler berechtigen dazu, die Erklärung nachträglich zu beseitigen. Ohne Anfechtungsgrund bleibt der Erklärende gebunden.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Anfechtungsgründe und Kausalität</h4>
+<p>Die Vorlesung nennt als Kernfälle Inhaltsirrtum, Erklärungsirrtum, Eigenschaftsirrtum sowie Täuschung und Drohung. Der Anfechtungsgrund muss für die Erklärung kausal gewesen sein: Ohne den Fehler wäre die Erklärung nicht oder nicht mit diesem Inhalt abgegeben worden.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Anfechtungsgrund</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Kausalität</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Anfechtungserklärung und Frist</h4>
+<p>Die Anfechtung ist ein Gestaltungsrecht. Deshalb braucht es eine Anfechtungserklärung gegenüber dem richtigen Gegner und die Einhaltung der gesetzlichen Frist. Bei Irrtumsanfechtung gilt § 121 BGB („unverzüglich“), bei Täuschung oder Drohung § 124 BGB. Wer nur den Irrtum sieht, aber Erklärung und Frist weglässt, bleibt klausurisch unvollständig.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Anfechtungsgrund</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Erklärung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Frist</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Rechtsfolgen und § 122 BGB</h4>
+<p>Die erfolgreiche Anfechtung vernichtet das Geschäft ex tunc. Gleichzeitig kann in den Irrtumsfällen ein Anspruch auf Vertrauensschaden nach § 122 BGB entstehen. Klausurtechnisch wichtig ist die Trennung: Erst Anfechtungstatbestand, dann Rechtsfolge, dann erst der separate § 122-Pfad.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Anfechtungsfalle:</strong> Nicht jeder Fehlkalkulations- oder Motivirrtum trägt eine Anfechtung. Und § 122 BGB wird nicht in den Tatbestand der Anfechtung hineingemischt, sondern danach eigenständig geprüft.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Anfechtungsgründe', eq: ref('§ 119 BGB', '§ 123 BGB'), desc: 'Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.' },
       { label: 'Vollständige Prüfung', eq: schema(['Grund', '+', 'Erklärung', '+', 'Frist']), desc: 'Der Irrtum allein reicht nie für eine vollständige Lösung.' },
@@ -436,23 +514,53 @@ export const CONTENT = {
 
   trennung_abstraktion: {
     motivation: 'Das Trennungs- und Abstraktionsprinzip ist für viele Nichtjuristen der ungewohnteste, aber klausurprägendste Teil des deutschen Privatrechts.',
-    theorie: [
-      section(
-        'Trennungsprinzip',
-        `<p>Verpflichtungs- und Verfügungsgeschäft sind voneinander zu trennen. Der Kaufvertrag verpflichtet zur Übereignung, überträgt das Eigentum aber noch nicht. Erst das dingliche Verfügungsgeschäft bewirkt die Rechtsänderung am Gegenstand.</p>`
-      ),
-      section(
-        'Abstraktionsprinzip',
-        `<p>Die Wirksamkeit des Verfügungsgeschäfts hängt grundsätzlich nicht von der Wirksamkeit des Verpflichtungsgeschäfts ab. Deshalb kann eine Eigentumsübertragung trotz unwirksamen Kaufvertrags wirksam sein. Rückabwicklung läuft dann oft über Bereicherungsrecht.</p>
-         ${scheme(schema(['Kaufvertrag', '≠', 'Übereignung']))}
-      `
-      ),
-      section(
-        'Warum das klausurpraktisch wichtig ist',
-        `<p>Wer Verpflichtungs- und Verfügungsgeschäft vermischt, verliert Eigentums- und Anspruchslagen aus dem Blick. Das Prinzip wirkt kompliziert, macht die Fallprüfung aber systematisch beherrschbar.</p>
-         ${warn('Standardverwechslung:', '„Der Kaufvertrag ist unwirksam, also ging nie Eigentum über“ ist zu schnell. Zuerst musst du das Verfügungsgeschäft eigenständig prüfen.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum das klausurpraktisch wichtig ist</h4>
+<p>Wer Verpflichtungs- und Verfügungsgeschäft vermischt, verliert Eigentums- und Anspruchslagen aus dem Blick. Das Prinzip wirkt kompliziert, macht die Fallprüfung aber systematisch beherrschbar.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Standardverwechslung:</strong> „Der Kaufvertrag ist unwirksam, also ging nie Eigentum über“ ist zu schnell. Zuerst musst du das Verfügungsgeschäft eigenständig prüfen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Trennungsprinzip</h4>
+<p>Verpflichtungs- und Verfügungsgeschäft sind voneinander zu trennen. Der Kaufvertrag verpflichtet zur Übereignung, überträgt das Eigentum aber noch nicht. Erst das dingliche Verfügungsgeschäft bewirkt die Rechtsänderung am Gegenstand.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Abstraktionsprinzip</h4>
+<p>Die Wirksamkeit des Verfügungsgeschäfts hängt grundsätzlich nicht von der Wirksamkeit des Verpflichtungsgeschäfts ab. Deshalb kann eine Eigentumsübertragung trotz unwirksamen Kaufvertrags wirksam sein. Rückabwicklung läuft dann oft über Bereicherungsrecht.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Kaufvertrag</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">≠</span></span><span class="semantic-schema__item">Übereignung</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Beispielkette Kauf und Übereignung</h4>
+<p>Kaufvertrag (§ 433) begründet die Pflicht zur Übereignung; Eigentumsübergang erfordert ein wirksames Verfügungsgeschäft (§ 929) und ggf. gutgläubigen Erwerb (§ 932 ff.).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Bereicherungsrecht bei Abstraktion</h4>
+<p>Ist das Verpflichtungsgeschäft unwirksam, kann Eigentum dennoch übergegangen sein. Rückabwicklung läuft dann über §§ 812 ff. BGB (Leistungskondiktion), nicht „automatisch“ über Rücktritt vom Kauf.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Kurzschluss</strong> Erst Verpflichtungs- und Verfügungsgeschäft getrennt prüfen, dann Bereicherung — nicht umgekehrt.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Trennung und Abstraktion</h4>
+<p>Prüfungsstandard: Zwei Stränge parallel — (1) Verpflichtungsgeschäft (Wirksamkeit, Anfechtung, Rücktritt). (2) Verfügungsgeschäft (Eigentumsübertragung § 929 BGB) eigenständig prüfen. Unwirksamer Kauf ≠ automatisch kein Eigentumsübergang → Bereicherungsanspruch prüfen.</p><div class="warn-box" data-warning-placement="rail"><strong>Subsumtionsreihenfolge</strong> Erst Verpflichtung, dann Verfügung — nie aus Unwirksamkeit des einen auf den anderen schließen.</div><div class="warn-box" data-warning-placement="rail"><strong>Typischer Fall</strong> Nichtiger Kauf, aber wirksame Übergabe: Eigentum bei Käufer, § 812 Abs. 1 S. 1 Alt. 1 Bereicherung.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Verpflichtung', eq: phrase('schuldrechtliches Geschäft'), desc: 'Begründet Leistungspflichten.' },
       { label: 'Verfügung', eq: phrase('dingliche Rechtsänderung'), desc: 'Überträgt, belastet oder hebt ein Recht auf.' }
@@ -479,23 +587,39 @@ export const CONTENT = {
 
   geschaeftsfaehigkeit: {
     motivation: 'Geschäftsfähigkeit entscheidet, wer sich wirksam rechtlich binden kann. Gerade Minderjährigenfälle sind Standardstoff, weil sie Definition, Normlogik und Fallanwendung zugleich verlangen.',
-    theorie: [
-      section(
-        'Rechtsfähigkeit vs. Geschäftsfähigkeit',
-        `<p>Rechtsfähigkeit ist die Fähigkeit, Träger von Rechten und Pflichten zu sein. Geschäftsfähigkeit ist die Fähigkeit, durch eigene Willenserklärungen rechtliche Wirkungen herbeizuführen. Die Unterscheidung ist elementar und wird in Einsteigerklausuren häufig abgefragt.</p>`
-      ),
-      section(
-        'Geschäftsunfähigkeit und beschränkte Geschäftsfähigkeit',
-        `<p>Geschäftsunfähige können grundsätzlich keine wirksamen Willenserklärungen abgeben. Beschränkt Geschäftsfähige benötigen regelmäßig die Zustimmung der gesetzlichen Vertreter, soweit das Geschäft nicht lediglich rechtlich vorteilhaft ist oder vom Taschengeldparagraphen gedeckt wird.</p>
-         ${scheme(schema(['§ 106 BGB', '⇒', 'Wirksamkeit häufig nur mit Zustimmung']))}
-      `
-      ),
-      section(
-        'Minderjährigenfälle lesen',
-        `<p>Prüfungen verlangen hier meist kein bloßes Auswendiglernen, sondern eine saubere Fallreihenfolge: Alter, Art des Geschäfts, Vorteil/Nachteil, Zustimmung, Bewirkung mit eigenen Mitteln. Gerade diese Struktur musst du sicher beherrschen.</p>
-         ${warn('Kurzschluss:', '„Der Minderjährige wollte es ja“ ersetzt keine Zustimmungslösung. Die rechtliche Prüfung läuft über §§ 104 ff. BGB.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rechtsfähigkeit vs. Geschäftsfähigkeit</h4>
+<p>Rechtsfähigkeit ist die Fähigkeit, Träger von Rechten und Pflichten zu sein. Geschäftsfähigkeit ist die Fähigkeit, durch eigene Willenserklärungen rechtliche Wirkungen herbeizuführen. Die Unterscheidung ist elementar und wird in Einsteigerklausuren häufig abgefragt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Geschäftsunfähigkeit und beschränkte Geschäftsfähigkeit</h4>
+<p>Geschäftsunfähige können grundsätzlich keine wirksamen Willenserklärungen abgeben. Beschränkt Geschäftsfähige benötigen regelmäßig die Zustimmung der gesetzlichen Vertreter, soweit das Geschäft nicht lediglich rechtlich vorteilhaft ist oder vom Taschengeldparagraphen gedeckt wird.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">§ 106 BGB</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Wirksamkeit häufig nur mit Zustimmung</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Minderjährigenfälle lesen</h4>
+<p>Prüfungen verlangen hier meist kein bloßes Auswendiglernen, sondern eine saubere Fallreihenfolge: Alter, Art des Geschäfts, Vorteil/Nachteil, Zustimmung, Bewirkung mit eigenen Mitteln. Gerade diese Struktur musst du sicher beherrschen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kurzschluss:</strong> „Der Minderjährige wollte es ja“ ersetzt keine Zustimmungslösung. Die rechtliche Prüfung läuft über §§ 104 ff. BGB.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">§ 107 BGB — lediglich rechtlich vorteilhaft</h4>
+<p>Ein Geschäft ist nur dann ohne Zustimmung wirksam, wenn der Minderjährige rechtlich keinen Nachteil erleidet (keine Verpflichtung, kein Risiko). Ein günstiger Kaufpreis allein reicht nicht, wenn Raten oder Verbindlichkeiten entstehen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">§ 110 BGB — Taschengeld</h4>
+<p>Leistungen, die der Minderjährige aus Mitteln bewirkt, die ihm zur freien Verfügung überlassen wurden, sind wirksam. Grenze: Umfang des überlassenen Vermögens.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Zustimmung</strong> Fehlende Zustimmung macht das Geschäft schwebend unwirksam (§ 108), nicht automatisch nichtig.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Beschränkt geschäftsfähig', eq: ref('§§ 106 ff. BGB'), desc: 'Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.' },
       { label: 'Lediglich rechtlich vorteilhaft', eq: phrase('kein rechtlicher Nachteil'), desc: 'Dann ist keine Zustimmung nötig.' }
@@ -523,28 +647,40 @@ export const CONTENT = {
 
   stellvertretung: {
     motivation: 'Stellvertretung ist die Standardtechnik, mit der rechtliche Handlungen arbeitsteilig möglich werden. Im Wirtschaftsleben ist sie allgegenwärtig; in der Klausur verlangt sie einen klaren Dreischritt.',
-    theorie: [
-      section(
-        'Die drei Voraussetzungen',
-        `<p>Wirksame Stellvertretung verlangt eine eigene Willenserklärung des Vertreters, Handeln im fremden Namen und Vertretungsmacht. Diese drei Merkmale sind strikt nacheinander zu prüfen. Gerade die Offenkundigkeit wird in Fällen schnell übersehen.</p>
-         ${scheme(schema(['eigene WE', '+', 'fremder Name', '+', 'Vertretungsmacht']))}
-      `
-      ),
-      section(
-        'Vertretungsmacht und ihre Quellen',
-        `<p>Vertretungsmacht kann rechtsgeschäftlich, gesetzlich oder organschaftlich begründet sein. Fehlt sie, ist das Geschäft grundsätzlich schwebend unwirksam und hängt von der Genehmigung des Vertretenen ab. Die Vorlesung macht zudem deutlich, dass interne Weisungen und Außenvollmacht nicht vorschnell gleichgesetzt werden dürfen: Interne Grenzen schlagen nicht automatisch ins Außenverhältnis durch.</p>`
-      ),
-      section(
-        'Vertreter, Bote, Identitätstäuschung',
-        `<p>Der Vertreter gibt eine eigene Willenserklärung ab, der Bote übermittelt nur eine fremde. Handeln unter fremdem Namen ist wiederum keine Stellvertretung, sondern ein Problem des Identitätsschutzes. Diese Unterscheidungen sind klausurtypisch.</p>
-         ${warn('Vertreter-Boten-Falle:', 'Wer keine eigene Entscheidungsmacht hat, ist Bote und nicht Vertreter. Dann wird die fremde und nicht die eigene Erklärung zugerechnet.')}`
-      ),
-      section(
-        'Klausurfolge bei fehlender Vertretungsmacht',
-        `<p>Die saubere Reihenfolge lautet: erst Offenkundigkeit, dann Vertretungsmacht, dann Genehmigung und erst danach gegebenenfalls § 179 BGB. Gerade diese Reihenfolge verhindert, dass Eigenbindung, schwebende Unwirksamkeit und Vertreterhaftung durcheinandergeraten.</p>
-         ${warn('Folgenfehler:', '§ 179 BGB wird oft zu früh geprüft. Wenn schon keine Offenkundigkeit vorliegt, ist der Handelnde regelmäßig selbst Vertragspartner und nicht bloß falsus procurator.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Die drei Voraussetzungen</h4>
+<p>Wirksame Stellvertretung verlangt eine eigene Willenserklärung des Vertreters, Handeln im fremden Namen und Vertretungsmacht. Diese drei Merkmale sind strikt nacheinander zu prüfen. Gerade die Offenkundigkeit wird in Fällen schnell übersehen.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">eigene WE</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">fremder Name</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Vertretungsmacht</span></div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vertretungsmacht und ihre Quellen</h4>
+<p>Vertretungsmacht kann rechtsgeschäftlich, gesetzlich oder organschaftlich begründet sein. Fehlt sie, ist das Geschäft grundsätzlich schwebend unwirksam und hängt von der Genehmigung des Vertretenen ab. Die Vorlesung macht zudem deutlich, dass interne Weisungen und Außenvollmacht nicht vorschnell gleichgesetzt werden dürfen: Interne Grenzen schlagen nicht automatisch ins Außenverhältnis durch.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Vertreter, Bote, Identitätstäuschung</h4>
+<p>Der Vertreter gibt eine eigene Willenserklärung ab, der Bote übermittelt nur eine fremde. Handeln unter fremdem Namen ist wiederum keine Stellvertretung, sondern ein Problem des Identitätsschutzes. Diese Unterscheidungen sind klausurtypisch.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Vertreter-Boten-Falle:</strong> Wer keine eigene Entscheidungsmacht hat, ist Bote und nicht Vertreter. Dann wird die fremde und nicht die eigene Erklärung zugerechnet.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurfolge bei fehlender Vertretungsmacht</h4>
+<p>Die saubere Reihenfolge lautet: erst Offenkundigkeit, dann Vertretungsmacht, dann Genehmigung und erst danach gegebenenfalls § 179 BGB. Gerade diese Reihenfolge verhindert, dass Eigenbindung, schwebende Unwirksamkeit und Vertreterhaftung durcheinandergeraten.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Folgenfehler:</strong> § 179 BGB wird oft zu früh geprüft. Wenn schon keine Offenkundigkeit vorliegt, ist der Handelnde regelmäßig selbst Vertragspartner und nicht bloß falsus procurator.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Stellvertretung', eq: ref('§ 164 Abs. 1 BGB'), desc: 'Handeln in fremdem Namen mit Vertretungsmacht.' },
       { label: 'Vertretungsmacht', eq: schema(['rechtsgeschäftlich', '/', 'gesetzlich', '/', 'organschaftlich']), desc: 'Quellen der Zurechnungsmacht müssen sauber getrennt werden.' },
@@ -602,31 +738,38 @@ export const CONTENT = {
 
   agb: {
     motivation: 'AGB-Recht ist Massenvertragsrecht. Es verbindet Vertragstechnik mit Schutzgedanken und ist deshalb ein idealer Prüfungsstoff für saubere Einbeziehungs- und Kontrolllogik.',
-    theorie: [
-      section(
-        'Was überhaupt AGB sind',
-        `<p>AGB sind für eine Vielzahl von Verträgen vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt. Schon diese Ausgangsfrage musst du sauber von der späteren Einbeziehung und Kontrolle trennen. Nicht jede unangenehme Vertragsklausel ist automatisch AGB im technischen Sinn.</p>`
-      ),
-      section(
-        'Einbeziehung',
-        `<p>AGB gelten nicht automatisch. Sie müssen wirksam in den Vertrag einbezogen werden. Dazu gehören Hinweis, zumutbare Kenntnisnahmemöglichkeit und Einverständnis des Vertragspartners. Fehlt eines davon, scheitert bereits die Einbeziehung.</p>`
-      ),
-      section(
-        'Die Fünf-Stufen-Logik',
-        `<p>Die Vorlesung arbeitet mit einer festen Prüfungsreihenfolge: Anwendungsbereich, Vorliegen von AGB, Einbeziehung, überraschende Klauseln bzw. Vorrang individueller Abreden und erst dann die Inhaltskontrolle. Diese Reihenfolge ist der eigentliche Punkteträger, weil AGB-Fälle sonst vorschnell in die Wertung rutschen.</p>
-         ${scheme(schema(['Anwendungsbereich', '→', 'AGB', '→', 'Einbeziehung', '→', '§ 305b / § 305c', '→', '§§ 307-309']))}
-      `
-      ),
-      section(
-        'Inhaltskontrolle und Abredenkonkurrenz',
-        `<p>Nach wirksamer Einbeziehung folgt die Kontrolle auf unangemessene Benachteiligung, Überraschung und Transparenz. Zugleich darfst du nie vergessen, dass individuelle Abreden gem. § 305b BGB Vorrang haben. Viele Fälle lösen sich gerade dadurch, dass das mündlich Vereinbarte und das Kleingedruckte nicht deckungsgleich sind.</p>`
-      ),
-      section(
-        'AGB-Fälle lesen',
-        `<p>In AGB-Fällen darfst du nicht sofort „unwirksam“ rufen. Erst die saubere Prüfungsreihenfolge zeigt, ob die Klausel überhaupt Vertragsbestandteil wurde und auf welcher Stufe sie scheitert.</p>
-         ${warn('Prüfungsreihenfolge:', 'Wer sofort in die Inhaltskontrolle springt, ohne die Einbeziehung zu prüfen, verschenkt einen der wichtigsten Klausurpunkte.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Was überhaupt AGB sind</h4>
+<p>AGB sind für eine Vielzahl von Verträgen vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt. Schon diese Ausgangsfrage musst du sauber von der späteren Einbeziehung und Kontrolle trennen. Nicht jede unangenehme Vertragsklausel ist automatisch AGB im technischen Sinn.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Einbeziehung</h4>
+<p>AGB gelten nicht automatisch. Sie müssen wirksam in den Vertrag einbezogen werden. Dazu gehören Hinweis, zumutbare Kenntnisnahmemöglichkeit und Einverständnis des Vertragspartners. Fehlt eines davon, scheitert bereits die Einbeziehung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Die Fünf-Stufen-Logik</h4>
+<p>Die Vorlesung arbeitet mit einer festen Prüfungsreihenfolge: Anwendungsbereich, Vorliegen von AGB, Einbeziehung, überraschende Klauseln bzw. Vorrang individueller Abreden und erst dann die Inhaltskontrolle. Diese Reihenfolge ist der eigentliche Punkteträger, weil AGB-Fälle sonst vorschnell in die Wertung rutschen.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Anwendungsbereich</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">AGB</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Einbeziehung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">§ 305b / § 305c</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">§§ 307-309</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Inhaltskontrolle und Abredenkonkurrenz</h4>
+<p>Nach wirksamer Einbeziehung folgt die Kontrolle auf unangemessene Benachteiligung, Überraschung und Transparenz. Zugleich darfst du nie vergessen, dass individuelle Abreden gem. § 305b BGB Vorrang haben. Viele Fälle lösen sich gerade dadurch, dass das mündlich Vereinbarte und das Kleingedruckte nicht deckungsgleich sind.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">AGB-Fälle lesen</h4>
+<p>In AGB-Fällen darfst du nicht sofort „unwirksam“ rufen. Erst die saubere Prüfungsreihenfolge zeigt, ob die Klausel überhaupt Vertragsbestandteil wurde und auf welcher Stufe sie scheitert.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Prüfungsreihenfolge:</strong> Wer sofort in die Inhaltskontrolle springt, ohne die Einbeziehung zu prüfen, verschenkt einen der wichtigsten Klausurpunkte.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'AGB-Begriff', eq: schema(['vorformuliert', '+', 'für Vielzahl', '+', 'gestellt']), desc: 'Vorliegen von AGB ist eine eigene erste Sachfrage.' },
       { label: 'Einbeziehung', eq: schema(['Hinweis', '+', 'Kenntnisnahme', '+', 'Einverständnis']), desc: 'Erst dann werden AGB Vertragsbestandteil.' },
@@ -674,27 +817,48 @@ export const CONTENT = {
 
   schuldrecht_intro: {
     motivation: 'Mit dem Schuldrecht AT verschiebt sich der Fokus von der Entstehung des Vertrags auf seine Durchführung: Wer schuldet was, wann und mit welchen Pflichten?',
-    theorie: [
-      section(
-        'Schuldverhältnis und Anspruch',
-        `<p>Ein Schuldverhältnis ist die rechtliche Sonderbeziehung, aus der Leistungs- und Nebenpflichten folgen. Ein Anspruch ist demgegenüber das konkrete Recht, von einem anderen ein Tun oder Unterlassen zu verlangen. Diese Unterscheidung ist klausurpraktisch wichtig, weil du aus einem Schuldverhältnis mehrere verschiedene Ansprüche entwickeln kannst.</p>`
-      ),
-      section(
-        'Primär- und Nebenpflichten',
-        `<p>Primärpflichten betreffen die eigentliche Leistung, Nebenpflichten schützen Integritäts- und Vermögensinteressen. Gerade moderne Schadensersatzfälle hängen oft an Nebenpflichtverletzungen und nicht an der Hauptleistung.</p>`
-      ),
-      section(
-        'Anspruchsprüfung im Schuldrecht AT',
-        `<p>Die Übungen übertragen die allgemeine Methodik in das Schuldrecht: Anspruch entstanden, Anspruch untergegangen, Anspruch durchsetzbar. Gerade im Leistungsstörungsrecht schützt diese Reihenfolge davor, Rücktritt, Schadensersatz und Rückgewährfolgen unkontrolliert zu vermischen.</p>
-         ${scheme(schema(['Schuldverhältnis', '→', 'Pflicht', '→', 'Störung', '→', 'Rechtsfolge']))}
-      `
-      ),
-      section(
-        'Warum dieser Einstieg wichtig ist',
-        `<p>Viele Klausuren scheitern daran, dass Pflichtverletzung, Verzug, Unmöglichkeit und Rücktritt ohne sauberes Grundverständnis zusammengeworfen werden. Der Schuldrecht-Einstieg ordnet diese Institute als Reaktionsformen auf Störungen eines bestehenden Schuldverhältnisses.</p>
-         ${warn('Grundlagenfehler:', 'Schadensersatz setzt nicht „irgendwo einen Fehler“ voraus, sondern eine dem Schuldverhältnis zuordenbare Pflichtverletzung.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum dieser Einstieg wichtig ist</h4>
+<p>Viele Klausuren scheitern daran, dass Pflichtverletzung, Verzug, Unmöglichkeit und Rücktritt ohne sauberes Grundverständnis zusammengeworfen werden. Der Schuldrecht-Einstieg ordnet diese Institute als Reaktionsformen auf Störungen eines bestehenden Schuldverhältnisses.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Grundlagenfehler:</strong> Schadensersatz setzt nicht „irgendwo einen Fehler“ voraus, sondern eine dem Schuldverhältnis zuordenbare Pflichtverletzung.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Schuldverhältnis und Anspruch</h4>
+<p>Ein Schuldverhältnis ist die rechtliche Sonderbeziehung, aus der Leistungs- und Nebenpflichten folgen. Ein Anspruch ist demgegenüber das konkrete Recht, von einem anderen ein Tun oder Unterlassen zu verlangen. Diese Unterscheidung ist klausurpraktisch wichtig, weil du aus einem Schuldverhältnis mehrere verschiedene Ansprüche entwickeln kannst.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Primär- und Nebenpflichten</h4>
+<p>Primärpflichten betreffen die eigentliche Leistung, Nebenpflichten schützen Integritäts- und Vermögensinteressen. Gerade moderne Schadensersatzfälle hängen oft an Nebenpflichtverletzungen und nicht an der Hauptleistung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Anspruchsprüfung im Schuldrecht AT</h4>
+<p>Die Übungen übertragen die allgemeine Methodik in das Schuldrecht: Anspruch entstanden, Anspruch untergegangen, Anspruch durchsetzbar. Gerade im Leistungsstörungsrecht schützt diese Reihenfolge davor, Rücktritt, Schadensersatz und Rückgewährfolgen unkontrolliert zu vermischen.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Schuldverhältnis</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Pflicht</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Störung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Rechtsfolge</span></div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Schuldrecht AT</h4>
+<p>Anspruchsprüfung: Anspruch entstanden (Schuldverhältnis + Primärpflicht) → nicht untergegangen → durchsetzbar. Bei Störung: Verzug (§ 286), Unmöglichkeit (§ 275), Pflichtverletzung (§ 280) — Institute nicht vermischen. Nebenpflichtverletzung kann Schadensersatz auslösen ohne Hauptleistungsmangel.</p><div class="warn-box" data-warning-placement="rail"><strong>Schadensersatz braucht Pflichtverletzung</strong> Nicht jeder Vertragsbruch = sofort Rücktritt — Reihenfolge der Rechtsfolgen prüfen.</div><div class="warn-box" data-warning-placement="rail"><strong>Schuldverhältnis ≠ Anspruch</strong> Aus einem Schuldverhältnis können mehrere Ansprüche folgen — jeden separat prüfen.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Schuldverhältnis', eq: schema(['Leistungspflichten', '+', 'Nebenpflichten']), desc: 'Beide Ebenen können verletzt werden.' },
       { label: 'Anspruch', eq: phrase('Recht, ein Tun oder Unterlassen zu verlangen'), desc: 'Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.' },
@@ -741,31 +905,38 @@ export const CONTENT = {
 
   schadensersatz: {
     motivation: 'Schadensersatz ist die Kernreaktion auf Pflichtverletzungen. Die Kunst liegt darin, die Anspruchsgrundlage und ihre Voraussetzungen sauber in Reihenfolge zu prüfen.',
-    theorie: [
-      section(
-        'Überblick über § 280 ff. BGB',
-        `<p>Die Vorlesung ordnet den Schadensersatz nicht als Einzelnorm, sondern als System: Schadensersatz neben der Leistung, statt der Leistung, wegen Verzugs, wegen Unmöglichkeit und wegen Schutzpflichtverletzung. Gerade diese Einordnung hilft in Fällen mit mehreren Störungen, weil sie die richtige Anspruchsgrundlage vorgibt.</p>`
-      ),
-      section(
-        'Grundschema',
-        `<p>Das Grundschema des vertraglichen Schadensersatzes lautet: Schuldverhältnis, Pflichtverletzung, Vertretenmüssen, Schaden. Je nach Konstellation kommen zusätzliche Anforderungen wie Fristsetzung hinzu.</p>
-         ${scheme(schema(['Schuldverhältnis', '+', 'Pflichtverletzung', '+', 'Vertretenmüssen', '+', 'Schaden']))}
-      `
-      ),
-      section(
-        'Neben der Leistung vs. statt der Leistung',
-        `<p>Verzögerungsschäden und Integritätsschäden können Schadensersatz neben der Leistung auslösen. Schadensersatz statt der Leistung verlangt regelmäßig eine erfolglose Fristsetzung, weil dem Schuldner noch eine zweite Chance zur ordnungsgemäßen Leistung gegeben werden soll.</p>`
-      ),
-      section(
-        'Vertretenmüssen und Fristsetzung',
-        `<p>Das Vertretenmüssen wird grundsätzlich vermutet. Die Fristsetzung ist einer der häufigsten Klausurpunkte: Sie darf nicht vergessen werden und ist nur ausnahmsweise entbehrlich. Genau hier entscheidet sich, ob eine Lösung belastbar wirkt.</p>
-         ${warn('Klausurklassiker:', 'Bei Schadensersatz statt der Leistung wird die Fristsetzung besonders oft übersehen. Ohne sie bricht die Prüfung schnell weg.')}`
-      ),
-      section(
-        'Tatbestand und Rechtsfolge getrennt halten',
-        `<p>Der Schaden gehört als eigener Prüfungspunkt in den Tatbestand; Schadenshöhe und konkrete Berechnung gehören erst danach in die Rechtsfolge- bzw. Subsumtionsebene. Wer bereits bei der Fristsetzung mit der Schadenssumme argumentiert, verliert schnell die klare Struktur des Anspruchs.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Überblick über § 280 ff. BGB</h4>
+<p>Die Vorlesung ordnet den Schadensersatz nicht als Einzelnorm, sondern als System: Schadensersatz neben der Leistung, statt der Leistung, wegen Verzugs, wegen Unmöglichkeit und wegen Schutzpflichtverletzung. Gerade diese Einordnung hilft in Fällen mit mehreren Störungen, weil sie die richtige Anspruchsgrundlage vorgibt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Grundschema</h4>
+<p>Das Grundschema des vertraglichen Schadensersatzes lautet: Schuldverhältnis, Pflichtverletzung, Vertretenmüssen, Schaden. Je nach Konstellation kommen zusätzliche Anforderungen wie Fristsetzung hinzu.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Schuldverhältnis</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Pflichtverletzung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Vertretenmüssen</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Schaden</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Neben der Leistung vs. statt der Leistung</h4>
+<p>Verzögerungsschäden und Integritätsschäden können Schadensersatz neben der Leistung auslösen. Schadensersatz statt der Leistung verlangt regelmäßig eine erfolglose Fristsetzung, weil dem Schuldner noch eine zweite Chance zur ordnungsgemäßen Leistung gegeben werden soll.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Vertretenmüssen und Fristsetzung</h4>
+<p>Das Vertretenmüssen wird grundsätzlich vermutet. Die Fristsetzung ist einer der häufigsten Klausurpunkte: Sie darf nicht vergessen werden und ist nur ausnahmsweise entbehrlich. Genau hier entscheidet sich, ob eine Lösung belastbar wirkt.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Klausurklassiker:</strong> Bei Schadensersatz statt der Leistung wird die Fristsetzung besonders oft übersehen. Ohne sie bricht die Prüfung schnell weg.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Tatbestand und Rechtsfolge getrennt halten</h4>
+<p>Der Schaden gehört als eigener Prüfungspunkt in den Tatbestand; Schadenshöhe und konkrete Berechnung gehören erst danach in die Rechtsfolge- bzw. Subsumtionsebene. Wer bereits bei der Fristsetzung mit der Schadenssumme argumentiert, verliert schnell die klare Struktur des Anspruchs.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Schadensersatz neben der Leistung', eq: ref('§ 280 I BGB'), desc: 'Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.' },
       { label: 'Schadensersatz statt der Leistung', eq: ref('§§ 280 I, III, 281 BGB'), desc: 'Regelmäßig mit erfolgloser Fristsetzung.' },
@@ -812,29 +983,35 @@ export const CONTENT = {
 
   ruecktritt: {
     motivation: 'Der Rücktritt ist das klassische Lösungsrecht des Leistungsstörungsrechts. Er ist nicht bloß „Rückgängigmachung“, sondern ein streng aufgebautes Gestaltungsrecht mit eigener Frist- und Folgeebene.',
-    theorie: [
-      section(
-        'Rücktritt als Leistungsstörungsrecht',
-        `<p>Der Rücktritt gehört wie der Schadensersatz zum allgemeinen Leistungsstörungsrecht des Schuldrecht AT. Er setzt einen wirksamen gegenseitigen Vertrag voraus und reagiert auf Nicht-, Schlecht- oder Unmöglichkeitsfälle. Anders als beim Schadensersatz geht es nicht um Ersatz, sondern um Lösung vom Vertrag.</p>`
-      ),
-      section(
-        'Rücktrittsschemata',
-        `<p>Die Vorlesung arbeitet mit zwei Standardpfaden: Rücktritt wegen Nicht- oder Schlechtleistung über §§ 323, 346 BGB und Rücktritt wegen Unmöglichkeit über §§ 326 Abs. 5, 323, 346 BGB. Im ersten Pfad ist die Fristsetzung regelmäßig zentral, im zweiten tritt an ihre Stelle die Unmöglichkeit.</p>
-         ${scheme(schema(['gegenseitiger Vertrag', '+', 'Störung', '+', 'Frist / Unmöglichkeit', '+', 'Erklärung']))}
-      `
-      ),
-      section(
-        'Rücktrittserklärung und Rückgewähr',
-        `<p>Der Rücktritt braucht eine Erklärung nach § 349 BGB. Rechtsfolge ist das Rückgewährschuldverhältnis: Die ursprünglichen Hauptleistungspflichten kehren sich um. Dadurch unterscheidet sich der Rücktritt sowohl vom Schadensersatz als auch von der Anfechtung.</p>
-         ${scheme(schema(['Rücktritt', '⇒', 'Rückgewährschuldverhältnis']))}
-      `
-      ),
-      section(
-        'Abgrenzung zu Anfechtung und Schadensersatz',
-        `<p>Im Unterschied zur Anfechtung wirkt der Rücktritt nicht ex tunc, sondern stellt das Vertragsverhältnis erst ab der Ausübung auf Rückabwicklung um. Im Unterschied zum Schadensersatz erhält der Gläubiger grundsätzlich nicht den Erfüllungswert, sondern nur das bereits Geleistete zurück.</p>
-         ${warn('Standardfehler:', 'Rücktritt verlangt regelmäßig eine Leistungsstörung und oft eine Fristsetzung. Wer ihn wie eine freie „Umentscheidung“ behandelt, landet methodisch im falschen Institut.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rücktritt als Leistungsstörungsrecht</h4>
+<p>Der Rücktritt gehört wie der Schadensersatz zum allgemeinen Leistungsstörungsrecht des Schuldrecht AT. Er setzt einen wirksamen gegenseitigen Vertrag voraus und reagiert auf Nicht-, Schlecht- oder Unmöglichkeitsfälle. Anders als beim Schadensersatz geht es nicht um Ersatz, sondern um Lösung vom Vertrag.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rücktrittsschemata</h4>
+<p>Die Vorlesung arbeitet mit zwei Standardpfaden: Rücktritt wegen Nicht- oder Schlechtleistung über §§ 323, 346 BGB und Rücktritt wegen Unmöglichkeit über §§ 326 Abs. 5, 323, 346 BGB. Im ersten Pfad ist die Fristsetzung regelmäßig zentral, im zweiten tritt an ihre Stelle die Unmöglichkeit.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">gegenseitiger Vertrag</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Störung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Frist / Unmöglichkeit</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Erklärung</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Rücktrittserklärung und Rückgewähr</h4>
+<p>Der Rücktritt braucht eine Erklärung nach § 349 BGB. Rechtsfolge ist das Rückgewährschuldverhältnis: Die ursprünglichen Hauptleistungspflichten kehren sich um. Dadurch unterscheidet sich der Rücktritt sowohl vom Schadensersatz als auch von der Anfechtung.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Rücktritt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Rückgewährschuldverhältnis</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Abgrenzung zu Anfechtung und Schadensersatz</h4>
+<p>Im Unterschied zur Anfechtung wirkt der Rücktritt nicht ex tunc, sondern stellt das Vertragsverhältnis erst ab der Ausübung auf Rückabwicklung um. Im Unterschied zum Schadensersatz erhält der Gläubiger grundsätzlich nicht den Erfüllungswert, sondern nur das bereits Geleistete zurück.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Standardfehler:</strong> Rücktritt verlangt regelmäßig eine Leistungsstörung und oft eine Fristsetzung. Wer ihn wie eine freie „Umentscheidung“ behandelt, landet methodisch im falschen Institut.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Rücktritt wegen Schlechtleistung', eq: ref('§§ 323, 346 BGB'), desc: 'Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.' },
       { label: 'Rücktritt wegen Unmöglichkeit', eq: ref('§§ 326 V, 323, 346 BGB'), desc: 'Wichtiger Sonderpfad ohne klassische Nachfristlogik.' },
@@ -883,29 +1060,35 @@ export const CONTENT = {
 
   verbraucherwiderruf: {
     motivation: 'Der Verbraucherwiderruf ist kein Sanktionsrecht wegen Schlechterfüllung, sondern ein europarechtlich geprägtes Schutzrecht. Gerade deshalb muss er scharf vom Rücktritt getrennt werden.',
-    theorie: [
-      section(
-        'Widerruf als gesetzliches Schutzrecht',
-        `<p>Der Verbraucherwiderruf basiert auf § 355 BGB, setzt aber immer voraus, dass das Gesetz für einen bestimmten Vertragstyp überhaupt ein Widerrufsrecht eröffnet. § 355 BGB allein verleiht also noch kein allgemeines Widerrufsrecht. Diese Vorfrage ist im Gutachten der natürliche Einstieg.</p>`
-      ),
-      section(
-        'Vertragstyp und persönliche Voraussetzungen',
-        `<p>Geprüft werden müssen der widerrufsfähige Vertragstyp sowie Verbraucher- und Unternehmereigenschaft. Die Vorlesung nennt besonders Fernabsatz, Haustürsituationen, Verbraucherdarlehen und Ratenlieferungsverträge. Der Widerruf knüpft also an Schutzlage und Vertragstyp an, nicht an eine Pflichtverletzung.</p>
-         ${scheme(schema(['Widerrufsrecht', '+', 'Verbraucher', '+', 'Unternehmer']))}
-      `
-      ),
-      section(
-        'Erklärung und Frist',
-        `<p>Erforderlich ist eine gegenüber dem Unternehmer erklärte Widerrufsabsicht innerhalb der gesetzlichen Frist von grundsätzlich 14 Tagen. Eine Begründung ist nicht nötig. Klausurtypisch ist dabei die Klarstellung, dass für die Fristwahrung die rechtzeitige Absendung genügt.</p>
-         ${scheme(schema(['Widerrufserklärung', '+', '14 Tage']))}
-      `
-      ),
-      section(
-        'Rechtsfolge und Abgrenzung',
-        `<p>Auch der Widerruf führt zu einem Rückgewährschuldverhältnis. Dennoch bleibt die dogmatische Trennung entscheidend: Rücktritt reagiert auf Leistungsstörung, Widerruf auf Verbraucherschutz. Bei digitaler Nutzung oder starker Ingebrauchnahme können zusätzliche Folgefragen wie Wertersatz oder Nutzungsgrenzen aufkommen, aber erst nachdem der Tatbestand steht.</p>
-         ${warn('Normzweckfehler:', 'Wenn keine Leistungsstörung vorliegt, ist der Rücktritt nicht der natürliche Startpunkt. Der Widerruf wird nicht über Mängel, sondern über Schutzlage, Erklärung und Frist erschlossen.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Widerruf als gesetzliches Schutzrecht</h4>
+<p>Der Verbraucherwiderruf basiert auf § 355 BGB, setzt aber immer voraus, dass das Gesetz für einen bestimmten Vertragstyp überhaupt ein Widerrufsrecht eröffnet. § 355 BGB allein verleiht also noch kein allgemeines Widerrufsrecht. Diese Vorfrage ist im Gutachten der natürliche Einstieg.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vertragstyp und persönliche Voraussetzungen</h4>
+<p>Geprüft werden müssen der widerrufsfähige Vertragstyp sowie Verbraucher- und Unternehmereigenschaft. Die Vorlesung nennt besonders Fernabsatz, Haustürsituationen, Verbraucherdarlehen und Ratenlieferungsverträge. Der Widerruf knüpft also an Schutzlage und Vertragstyp an, nicht an eine Pflichtverletzung.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Widerrufsrecht</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Verbraucher</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Unternehmer</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Erklärung und Frist</h4>
+<p>Erforderlich ist eine gegenüber dem Unternehmer erklärte Widerrufsabsicht innerhalb der gesetzlichen Frist von grundsätzlich 14 Tagen. Eine Begründung ist nicht nötig. Klausurtypisch ist dabei die Klarstellung, dass für die Fristwahrung die rechtzeitige Absendung genügt.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Widerrufserklärung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">14 Tage</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Rechtsfolge und Abgrenzung</h4>
+<p>Auch der Widerruf führt zu einem Rückgewährschuldverhältnis. Dennoch bleibt die dogmatische Trennung entscheidend: Rücktritt reagiert auf Leistungsstörung, Widerruf auf Verbraucherschutz. Bei digitaler Nutzung oder starker Ingebrauchnahme können zusätzliche Folgefragen wie Wertersatz oder Nutzungsgrenzen aufkommen, aber erst nachdem der Tatbestand steht.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Normzweckfehler:</strong> Wenn keine Leistungsstörung vorliegt, ist der Rücktritt nicht der natürliche Startpunkt. Der Widerruf wird nicht über Mängel, sondern über Schutzlage, Erklärung und Frist erschlossen.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Basisnorm', eq: ref('§ 355 BGB'), desc: 'Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.' },
       { label: 'Persönliche Voraussetzungen', eq: schema(['Verbraucher', '+', 'Unternehmer']), desc: '§§ 13, 14 BGB sind Standardbausteine der Prüfung.' },

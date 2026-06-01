@@ -36,28 +36,66 @@ const MARKET_FAILURE_SOURCE_BOUNDARY = String.raw`
 export const CONTENT = {
   monopol_preissetzung: {
     motivation: 'Die ersten Mikro-II-Vorlesungen knüpfen an die Wettbewerbslogik an und fragen, wie ein Monopolist Preise setzt, warum Elastizitäten die Marktmacht begrenzen und wo Wohlfahrtsverluste entstehen.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Monopolpreis als Aufschlag auf Grenzkosten</h3>
-      <p>Der Monopolist wählt die Ausbringungsmenge so, dass Grenzerlös und Grenzkosten übereinstimmen. In der Kursnotation wird der Grenzerlös über Preis und Nachfrageelastizität geschrieben.</p>
-      <div class="math-block">$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Monopolpreis als Aufschlag auf Grenzkosten</h4>
+<p>Der Monopolist wählt die Ausbringungsmenge so, dass Grenzerlös und Grenzkosten übereinstimmen. In der Kursnotation wird der Grenzerlös über Preis und Nachfrageelastizität geschrieben.</p>
+      <div class="math-block">$$E'(y)=p(y)\\\\left(1-\\\\frac{1}{|\\\\varepsilon_{xp}|}\\\\right)$$</div>
       <p>Aus der Bedingung erster Ordnung $E'(y)=C'(y)$ folgt die Aufschlagsformel: Je unelastischer die Nachfrage, desto größer ist der Abstand zwischen Preis und Grenzkosten.</p>
-    </div>
-    <div class="section-block">
-      <h3>Wohlfahrtseffekt des Monopols</h3>
-      <p>Der Monopolpreis liegt über den Grenzkosten und die gehandelte Menge unter der effizienten Wettbewerbsmenge. Dadurch geht ein Teil der potentiellen Handelsgewinne als Deadweight Loss verloren.</p>
+
+
+<h4 class="theory-subsection-title">VL-Mechanismus: MR = MC</h4>
+<p>In Aufgaben mit linearer Nachfrage $p=a-by$ ist der Grenzerlös $MR=a-2by$. Setze $MR=MC$, bestimme $y^*$, dann $p^*$ — erst danach KR/PR/DWL zeichnen oder rechnen.</p>
+      <div class="math-block">$$MR(y)=a-2by,\\\\quad MR=MC \\\\Rightarrow y^*=\\\\frac{a-MC}{2b}$$</div>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Monopol</h4>
+<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\\\\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
+      <div class="math-block">$$MR = MC \\\\quad\\\\Rightarrow\\\\quad P\\\\left(1+\\\\frac{1}{\\\\eta}\\\\right) = MC$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Wohlfahrtseffekt des Monopols</h4>
+<p>Der Monopolpreis liegt über den Grenzkosten und die gehandelte Menge unter der effizienten Wettbewerbsmenge. Dadurch geht ein Teil der potentiellen Handelsgewinne als Deadweight Loss verloren.</p>
       <div class="warn-box"><strong>Klausurfehler:</strong> Der Monopolaufschlag ist keine beliebige Marge. Er ist über die Nachfrageelastizität gebunden; bei vollkommener Konkurrenz bzw. sehr elastischer Nachfrage nähert sich $p(y)$ den Grenzkosten.</div>
-    </div>
-    <div class="section-block">
-      <h3>VL-Mechanismus: MR = MC</h3>
-      <p>In Aufgaben mit linearer Nachfrage $p=a-by$ ist der Grenzerlös $MR=a-2by$. Setze $MR=MC$, bestimme $y^*$, dann $p^*$ — erst danach KR/PR/DWL zeichnen oder rechnen.</p>
-      <div class="math-block">$$MR(y)=a-2by,\quad MR=MC \Rightarrow y^*=\frac{a-MC}{2b}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Markup und Marktmacht</h3>
-      <p>Der Lerner-Index $(p-MC)/p = 1/|\varepsilon|$ verbindet Preisaufschlag und Elastizität. Je elastischer die Nachfrage, desto näher rückt das Monopol an die Wettbewerbslösung.</p>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Markup und Marktmacht</h4>
+<p>Der Lerner-Index $(p-MC)/p = 1/|\\\\varepsilon|$ verbindet Preisaufschlag und Elastizität. Je elastischer die Nachfrage, desto näher rückt das Monopol an die Wettbewerbslösung.</p>
+
+
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Monopolist internalisiert Preiseffekt auf Gesamtabsatz — deshalb $MR < P$. Bei linearer Nachfrage ist $MR$ doppelt so steil. Wohlfahrt: PS des Monopolisten kann steigen, CS sinkt; Gesamt-DWL positiv wenn $P>MC$.</p>
+      <div class="warn-box"><strong>MR vs. Nachfrage:</strong> MR-Kurve liegt unter Nachfrage — Schnitt mit MC bestimmt $Q_m$, Preis aus Nachfrage ablesen, nicht aus MR.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus und VL-Verknüpfung</h4>
+<p>Monopolist internalisiert Preiseffekt auf Gesamtabsatz — deshalb $MR < P$. Bei linearer Nachfrage ist $MR$ doppelt so steil. Wohlfahrt: PS des Monopolisten kann steigen, CS sinkt; Gesamt-DWL positiv wenn $P>MC$.</p>
+      <div class="warn-box"><strong>MR vs. Nachfrage:</strong> MR-Kurve liegt unter Nachfrage — Schnitt mit MC bestimmt $Q_m$, Preis aus Nachfrage ablesen, nicht aus MR.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Monopol</h4>
+<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
+      <div class="math-block">$$MR = MC \\quad\\Rightarrow\\quad P\\left(1+\\frac{1}{\\eta}\\right) = MC$$</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Grenzerlös im Monopol', eq: String.raw`$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$`, desc: 'Kursnotation für Grenzerlös bei fallender Nachfrage.', variables: { y: 'Outputmenge', p: 'inverse Nachfrage', epsilon: 'Preiselastizität der Nachfrage' } },
       { label: 'Monopolaufschlag', eq: String.raw`$$p(y)=\left(1-\frac{1}{|\varepsilon_{xp}|}\right)^{-1}C'(y)$$`, desc: 'Preis als Aufschlag auf Grenzkosten.' },
@@ -95,36 +133,65 @@ export const CONTENT = {
   },
   preisdiskriminierung: {
     motivation: 'Preisdiskriminierung ist der zweite offizielle Monopolblock: Die Portaloberfläche muss unterscheiden, ob der Monopolist Typen erkennt, Menüs anbietet oder Gruppen getrennt bepreist.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Dritter Grad: getrennte Kundengruppen</h3>
-      <p>Bei Preisdiskriminierung dritten Grades unterscheidet der Monopolist klar abgrenzbare Gruppen und setzt gruppenspezifische Preise. In der Zwei-Gruppen-Darstellung maximiert er die Summe der Erlöse abzüglich der Kosten der Gesamtproduktion.</p>
-      <div class="math-block">$$\max_{y_1,y_2}\ \pi(y_1,y_2)=E_1(y_1)+E_2(y_2)-C(y_1+y_2)$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Dritter Grad: getrennte Kundengruppen</h4>
+<p>Bei Preisdiskriminierung dritten Grades unterscheidet der Monopolist klar abgrenzbare Gruppen und setzt gruppenspezifische Preise. In der Zwei-Gruppen-Darstellung maximiert er die Summe der Erlöse abzüglich der Kosten der Gesamtproduktion.</p>
+      <div class="math-block">$$\\\\max_{y_1,y_2}\\\\ \\\\pi(y_1,y_2)=E_1(y_1)+E_2(y_2)-C(y_1+y_2)$$</div>
       <p>Die Bedingung erster Ordnung verlangt den Ausgleich der Grenzerlöse zwischen den Teilmärkten und den Grenzkosten der Gesamtproduktion.</p>
-    </div>
-    <div class="section-block">
-      <h3>Zweiter Grad: Selbstselektion</h3>
-      <p>Bei Preisdiskriminierung zweiten Grades kann der Monopolist Konsumenten nicht direkt unterscheiden. Er bietet Preis-Mengen- oder Preis-Qualitäts-Kombinationen an, aus denen die Konsumenten selbst wählen.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Zweiter Grad: Selbstselektion</h4>
+<p>Bei Preisdiskriminierung zweiten Grades kann der Monopolist Konsumenten nicht direkt unterscheiden. Er bietet Preis-Mengen- oder Preis-Qualitäts-Kombinationen an, aus denen die Konsumenten selbst wählen.</p>
       <div class="warn-box"><strong>Trennlinie:</strong> Dritter Grad trennt beobachtbare Gruppen. Zweiter Grad baut ein Menü, damit unterschiedliche Zahlungsbereitschaften sich selbst sortieren.</div>
-    </div>
-    <div class="section-block">
-      <h3>Erster Grad: vollständige Preisdiskriminierung</h3>
-      <p>Bei perfekter Information über jeden Konsumenten setzt der Monopolist den individuellen Reservationspreis. Die Nachfragekurve wird zum Grenzerlös — es gibt keinen Deadweight Loss, aber die gesamte Konsumentenrente wird absorbiert. In der VL-Notation: $E'(y)=p(y)$ statt $E'(y)<p(y)$ bei fallender Nachfrage.</p>
-    </div>
-    <div class="section-block">
-      <h3>Mechanismus: Grenzerlöse ausgleichen</h3>
-      <p>Bei drittem Grad gilt $E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$. Preise $p_1\\neq p_2$ sind möglich, weil die Nachfrageelastizitäten der Gruppen differieren: $p_i = C'(Y)/(1-1/|\\varepsilon_i|)$. Die Gruppe mit unelastischerer Nachfrage zahlt den höheren Preis.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Grad verwechseln</strong> Erster Grad = individuelle Preise (Reservationspreis). Zweiter Grad = Menü/Self-Selection ohne Typbeobachtung. Dritter Grad = beobachtbare Gruppen. In der Klausur zuerst fragen: Kann der Monopolist Typen erkennen?</div>
+
+
+<h4 class="theory-subsection-title">Erster Grad: vollständige Preisdiskriminierung</h4>
+<p>Bei perfekter Information über jeden Konsumenten setzt der Monopolist den individuellen Reservationspreis. Die Nachfragekurve wird zum Grenzerlös — es gibt keinen Deadweight Loss, aber die gesamte Konsumentenrente wird absorbiert. In der VL-Notation: $E'(y)=p(y)$ statt $E'(y)<p(y)$ bei fallender Nachfrage.</p>
+
+
+<h4 class="theory-subsection-title">Mechanismus: Grenzerlöse ausgleichen</h4>
+<p>Bei drittem Grad gilt $E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$. Preise $p_1\\\\\\\\neq p_2$ sind möglich, weil die Nachfrageelastizitäten der Gruppen differieren: $p_i = C'(Y)/(1-1/|\\\\\\\\varepsilon_i|)$. Die Gruppe mit unelastischerer Nachfrage zahlt den höheren Preis.</p>
+
+
+<h4 class="theory-subsection-title">Arten der Preisdiskriminierung</h4>
+<p>1. Grad: MR = MC je Markt. 2. Grad: Versionen/Self-Selection. 3. Grad: individuelles Pricing. Voraussetzung: Marktmacht + Arbitrage verhindern.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Preisdiskriminierung</h4>
+<p>Antwortschema: (1) Grad identifizieren. (2) Gewinnfunktion aufschreiben. (3) FOC: Grenzerlöse = Grenzkosten (ggf. über Teilmärkte). (4) Wohlfahrt: Erster Grad → keine DWL, dritter Grad → teilweise Rentenextraktion. Bei Menüs (2. Grad): IC- und IR-Bindungen der Typen prüfen.</p>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Wohlfahrtsvergleich Monopol einfach vs. perfekte Diskriminierung: DWL-Eliminierung bei 1. Grad; Konsumentenrente-Verteilung benennen.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Grad verwechseln</strong> Erster Grad = individuelle Preise (Reservationspreis). Zweiter Grad = Menü/Self-Selection ohne Typbeobachtung. Dritter Grad = beobachtbare Gruppen. In der Klausur zuerst fragen: Kann der Monopolist Typen erkennen?</div>
       <div class="warn-box"><strong>Gleicher Preis ≠ gleicher Grenzerlös</strong> Im Optimum des dritten Grades müssen Grenzerlöse übereinstimmen, nicht die Preise. Wer $p_1=p_2$ fordert, verwechselt Gleichgewichtsbedingung und Preisniveau.</div>
-    </div>
-    <div class="section-block">
-      <h3>In der Klausur: Preisdiskriminierung</h3>
-      <p>Antwortschema: (1) Grad identifizieren. (2) Gewinnfunktion aufschreiben. (3) FOC: Grenzerlöse = Grenzkosten (ggf. über Teilmärkte). (4) Wohlfahrt: Erster Grad → keine DWL, dritter Grad → teilweise Rentenextraktion. Bei Menüs (2. Grad): IC- und IR-Bindungen der Typen prüfen.</p>
-    </div>
-    `,
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Arten der Preisdiskriminierung</h4>
+<p>1. Grad: MR = MC je Markt. 2. Grad: Versionen/Self-Selection. 3. Grad: individuelles Pricing. Voraussetzung: Marktmacht + Arbitrage verhindern.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Wohlfahrtsvergleich Monopol einfach vs. perfekte Diskriminierung: DWL-Eliminierung bei 1. Grad; Konsumentenrente-Verteilung benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Preisdiskriminierung dritten Grades', eq: String.raw`$$E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$$`, desc: 'Grenzerlöse werden zwischen Teilmärkten ausgeglichen.' },
       { label: 'Gruppenerlös', eq: String.raw`$$E_i(y_i)=p_i(y_i)y_i,\quad i=1,2$$`, desc: 'Erlös je Kundengruppe.' }
@@ -152,34 +219,72 @@ export const CONTENT = {
   },
   spieltheorie_statisch: {
     motivation: 'In strategischen Situationen hängt das eigene Ergebnis nicht nur vom eigenen Handeln ab, sondern auch von den Entscheidungen anderer. Die Spieltheorie liefert das formale Instrumentarium hierfür.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Normalform-Spiele</h3>
-      <p>Ein Spiel in Normalform besteht aus einer Menge von Spielern $i \in \{1, \dots, n\}$, Strategieräumen $S_i$ und Auszahlungsfunktionen $u_i(s_1, \dots, s_n)$.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Normalform-Spiele</h4>
+<p>Ein Spiel in Normalform besteht aus einer Menge von Spielern $i \\\\in \\\\{1, \\\\dots, n\\\\}$, Strategieräumen $S_i$ und Auszahlungsfunktionen $u_i(s_1, \\\\dots, s_n)$.</p>
       <p>Die Normalform fasst alle Informationen eines simultanen Spiels in einer Auszahlungsmatrix zusammen — jede Zelle enthält die Auszahlungen beider Spieler für das jeweilige Strategieprofil.</p>
-    </div>
-    <div class="section-block">
-      <h3>Nash-Gleichgewicht (NG)</h3>
-      <p>Ein Strategieprofil $s^* = (s_1^*, \dots, s_n^*)$ ist ein <strong>Nash-Gleichgewicht</strong>, wenn für jeden Spieler $i$ gilt:</p>
-      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*) \quad \forall s_i \in S_i$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Nash-Gleichgewicht (NG)</h4>
+<p>Ein Strategieprofil $s^* = (s_1^*, \\\\dots, s_n^*)$ ist ein <strong>Nash-Gleichgewicht</strong>, wenn für jeden Spieler $i$ gilt:</p>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \\\\geq u_i(s_i, s_{-i}^*) \\\\quad \\\\forall s_i \\\\in S_i$$</div>
       <p>Niemand hat einen Anreiz, einseitig von seiner Strategie abzuweichen. Es ist eine gegenseitige beste Antwort.</p>
-    </div>
-    <div class="section-block">
-      <h3>Dominante Strategien</h3>
-      <p>Eine Strategie ist <strong>strikt dominant</strong>, wenn sie unabhängig vom Verhalten der anderen Spieler immer die höchste Auszahlung liefert. Existiert für alle Spieler eine dominante Strategie, ist das daraus resultierende Profil das eindeutige Nash-Gleichgewicht.</p>
+
+
+<h4 class="theory-subsection-title">Gemischte Strategien</h4>
+<p>Falls kein Nash-Gleichgewicht in reinen Strategien existiert, gibt es stets ein Gleichgewicht in gemischten Strategien. Spieler randomisieren so, dass der Gegner indifferent zwischen seinen reinen Strategien ist.</p>
+      <div class="math-block">$$E[u_i(\\\\sigma_i^*, \\\\sigma_{-i}^*)] \\\\geq E[u_i(\\\\sigma_i, \\\\sigma_{-i}^*)] \\\\quad \\\\forall \\\\sigma_i$$</div>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Nash in Normalform</h4>
+<p>Matrix aufstellen → beste Antwort auf gegebene Strategie des Gegners (BR) → Schnittpunkt der BR-Korrespondenzen = Nash. Strikte Dominanz zuerst prüfen — eliminiert Zeilen/Spalten.</p>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \\\\geq u_i(s_i, s_{-i}^*)\\\\ \\\\forall s_i$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Dominante Strategien</h4>
+<p>Eine Strategie ist <strong>strikt dominant</strong>, wenn sie unabhängig vom Verhalten der anderen Spieler immer die höchste Auszahlung liefert. Existiert für alle Spieler eine dominante Strategie, ist das daraus resultierende Profil das eindeutige Nash-Gleichgewicht.</p>
       <p>Iteration der Elimination dominierter Strategien (IESDS) kann das Spiel schrittweise vereinfachen und Nash-Gleichgewichte isolieren.</p>
-    </div>
-    <div class="section-block">
-      <h3>Gemischte Strategien</h3>
-      <p>Falls kein Nash-Gleichgewicht in reinen Strategien existiert, gibt es stets ein Gleichgewicht in gemischten Strategien. Spieler randomisieren so, dass der Gegner indifferent zwischen seinen reinen Strategien ist.</p>
-      <div class="math-block">$$E[u_i(\sigma_i^*, \sigma_{-i}^*)] \geq E[u_i(\sigma_i, \sigma_{-i}^*)] \quad \forall \sigma_i$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>NG vs. Pareto-Optimum:</strong> Ein Nash-Gleichgewicht muss nicht effizient sein (siehe Gefangenendilemma). Die Spieler optimieren individuell, nicht kollektiv.</div>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Reine vs. gemischte Strategien: bei keinem reinen Nash → gemischte mit Indifferenz (Gegner muss indifferent sein). Pareto vs. Nash trennen.</p>
+      <div class="warn-box"><strong>Dominanz ≠ Nash:</strong> Eliminierte Strategien nie im Nash — aber Nash kann existieren ohne dominante Strategie.</div>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>NG vs. Pareto-Optimum:</strong> Ein Nash-Gleichgewicht muss nicht effizient sein (siehe Gefangenendilemma). Die Spieler optimieren individuell, nicht kollektiv.</div>
       <div class="warn-box"><strong>Mehrfache NG:</strong> Ein Spiel kann mehrere Nash-Gleichgewichte haben (z.B. Koordinationsspiele). Das Nash-Konzept sagt nichts darüber, auf welches GG die Spieler sich koordinieren — Gleichgewichtsselektion erfordert verfeinerte Konzepte (z.B. Risicodominanz, Payoff-Dominanz).</div>
-    </div>
-    `,
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Nash in Normalform</h4>
+<p>Matrix aufstellen → beste Antwort auf gegebene Strategie des Gegners (BR) → Schnittpunkt der BR-Korrespondenzen = Nash. Strikte Dominanz zuerst prüfen — eliminiert Zeilen/Spalten.</p>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \\geq u_i(s_i, s_{-i}^*)\\ \\forall s_i$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Reine vs. gemischte Strategien: bei keinem reinen Nash → gemischte mit Indifferenz (Gegner muss indifferent sein). Pareto vs. Nash trennen.</p>
+      <div class="warn-box"><strong>Dominanz ≠ Nash:</strong> Eliminierte Strategien nie im Nash — aber Nash kann existieren ohne dominante Strategie.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Nash-Bedingung', eq: String.raw`$$s_i^* \in \arg\max_{s_i} u_i(s_i, s_{-i}^*)$$`, desc: 'Beste Antwort auf Gleichgewichtsstrategien', variables: { s_i: 'Strategie von Spieler i', s_minus_i: 'Strategien aller anderen Spieler' } }
     ],
@@ -218,27 +323,63 @@ export const CONTENT = {
   },
   spieltheorie_dynamisch: {
     motivation: 'Sobald reine Strategien nicht ausreichen, werden gemischte Strategien und wiederholte Interaktion prüfungsrelevant: Stabilität entsteht dann über Indifferenzbedingungen und Sanktionslogik.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Gemischte Strategien</h3>
-      <p>Existiert kein Nash-Gleichgewicht in reinen Strategien, randomisieren Spieler zwischen reinen Strategien. Ein gemischtes Gleichgewicht liegt vor, wenn jede gemischte Strategie eine beste Antwort auf die Mischung der Gegenseite ist.</p>
-      <div class="math-block">$$E[u_i(\sigma_i^*, \sigma_{-i}^*)] \geq E[u_i(\sigma_i, \sigma_{-i}^*)] \quad \forall \sigma_i$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Indifferenz als Rechenprinzip</h3>
-      <p>In 2x2-Spielen wird das Mischgleichgewicht über Indifferenz der Gegenseite bestimmt: Die Wahrscheinlichkeit wird so gewählt, dass der Gegner zwischen seinen reinen Strategien gerade indifferent ist.</p>
-    </div>
-    <div class="section-block">
-      <h3>Wiederholte Spiele und Kooperation</h3>
-      <p>Bei wiederholter Interaktion können Sanktionsstrategien Kooperation stützen. Entscheidend ist, ob zukünftige Kooperationsgewinne den kurzfristigen Abweichungsgewinn überwiegen.</p>
-      <div class="math-block">$$\delta \geq \frac{\pi_D - \pi_C}{\pi_D - \pi_P}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Mischungsfehler:</strong> Im gemischten Gleichgewicht werden nicht „beste Auszahlungen“ gemischt, sondern Wahrscheinlichkeiten so gewählt, dass der Gegner indifferent wird.</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Gemischte Strategien</h4>
+<p>Existiert kein Nash-Gleichgewicht in reinen Strategien, randomisieren Spieler zwischen reinen Strategien. Ein gemischtes Gleichgewicht liegt vor, wenn jede gemischte Strategie eine beste Antwort auf die Mischung der Gegenseite ist.</p>
+      <div class="math-block">$$E[u_i(\\\\sigma_i^*, \\\\sigma_{-i}^*)] \\\\geq E[u_i(\\\\sigma_i, \\\\sigma_{-i}^*)] \\\\quad \\\\forall \\\\sigma_i$$</div>
+
+
+<h4 class="theory-subsection-title">Wiederholte Spiele und Kooperation</h4>
+<p>Bei wiederholter Interaktion können Sanktionsstrategien Kooperation stützen. Entscheidend ist, ob zukünftige Kooperationsgewinne den kurzfristigen Abweichungsgewinn überwiegen.</p>
+      <div class="math-block">$$\\\\delta \\\\geq \\\\frac{\\\\pi_D - \\\\pi_C}{\\\\pi_D - \\\\pi_P}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Indifferenz als Rechenprinzip</h4>
+<p>In 2x2-Spielen wird das Mischgleichgewicht über Indifferenz der Gegenseite bestimmt: Die Wahrscheinlichkeit wird so gewählt, dass der Gegner zwischen seinen reinen Strategien gerade indifferent ist.</p>
+
+
+<h4 class="theory-subsection-title">Folk-Theorem und Kollusion</h4>
+<p>Unendlich wiederholtes Spiel: Abweichung heute vs. Bestrafung in Zukunft. Trigger-Strategien können kooperative Outcomes stützen, wenn Diskontierungsfaktor $\\\\delta$ hoch genug. Endliche Horizonte: Rückwärtsinduktion bricht Kollusion (Chain-Store Paradox didaktisch).</p>
+      <div class="warn-box"><strong>Zeit vs. Strategieraum:</strong> Dynamik = Reihenfolge und Information; nicht jede Wiederholung ist automatisch „dynamisches Spiel" ohne Entscheidungsbaum.</div>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Dynamische Spiele</h4>
+<p>Extensive Form: Entscheidungsknoten, Informationsmenge, Auszahlungen. Rückwärtsinduktion bei vollständiger Information: letzter Spieler optimal → Vorwärts auflösen. Subgame Perfect Nash (SPNE): Nash in jedem Teilspiel.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Mischungsfehler:</strong> Im gemischten Gleichgewicht werden nicht „beste Auszahlungen“ gemischt, sondern Wahrscheinlichkeiten so gewählt, dass der Gegner indifferent wird.</div>
       <div class="warn-box"><strong>Wiederholungsfehler:</strong> Wiederholung erzeugt nicht automatisch Kooperation. Ohne ausreichend hohen Diskontfaktor bleibt Defektion attraktiv.</div>
-    </div>
-    `,
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Folk-Theorem und Kollusion</h4>
+<p>Unendlich wiederholtes Spiel: Abweichung heute vs. Bestrafung in Zukunft. Trigger-Strategien können kooperative Outcomes stützen, wenn Diskontierungsfaktor $\\delta$ hoch genug. Endliche Horizonte: Rückwärtsinduktion bricht Kollusion (Chain-Store Paradox didaktisch).</p>
+      <div class="warn-box"><strong>Zeit vs. Strategieraum:</strong> Dynamik = Reihenfolge und Information; nicht jede Wiederholung ist automatisch „dynamisches Spiel" ohne Entscheidungsbaum.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Dynamische Spiele</h4>
+<p>Extensive Form: Entscheidungsknoten, Informationsmenge, Auszahlungen. Rückwärtsinduktion bei vollständiger Information: letzter Spieler optimal → Vorwärts auflösen. Subgame Perfect Nash (SPNE): Nash in jedem Teilspiel.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Gemischtes NG', eq: String.raw`$$\sigma_i^* \in \arg\max_{\sigma_i} E[u_i(\sigma_i,\sigma_{-i}^*)]$$`, desc: 'Beste Antwort in gemischten Strategien.' },
       { label: 'Kooperationsbedingung', eq: String.raw`$$\delta \geq \frac{\pi_D - \pi_C}{\pi_D - \pi_P}$$`, desc: 'Folk-Theorem-Logik für Trigger-Strategien.' }
@@ -268,28 +409,66 @@ export const CONTENT = {
   },
   oligopol_cournot_bertrand: {
     motivation: 'Oligopole beschreiben Märkte mit wenigen Anbietern, die strategisch interagieren. Wir unterscheiden Mengenwettbewerb (Cournot) und Preiswettbewerb (Bertrand).',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Cournot-Wettbewerb</h3>
-      <p>Unternehmen wählen gleichzeitig ihre Produktionsmengen $q_i$. Der Preis bildet sich über die Marktnachfrage $P(Q)$ mit $Q = \sum q_i$.</p>
-      <div class="math-block">$$\max_{q_i} \pi_i = P(q_i + q_{-i}) \cdot q_i - C_i(q_i)$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Cournot-Wettbewerb</h4>
+<p>Unternehmen wählen gleichzeitig ihre Produktionsmengen $q_i$. Der Preis bildet sich über die Marktnachfrage $P(Q)$ mit $Q = \\\\sum q_i$.</p>
+      <div class="math-block">$$\\\\max_{q_i} \\\\pi_i = P(q_i + q_{-i}) \\\\cdot q_i - C_i(q_i)$$</div>
       <p>Im Cournot-Nash-Gleichgewicht produziert jede Firma mehr als ein Monopolist, aber weniger als im vollkommenen Wettbewerb.</p>
-    </div>
-    <div class="section-block">
-      <h3>Reaktionsfunktionen</h3>
-      <p>Die Bedingung erster Ordnung ($MR_i = MC_i$) liefert die Reaktionsfunktion $q_i(q_{-i})$, welche die optimale Menge in Abhängigkeit der Konkurrenzmenge angibt.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Cournot vs. Bertrand</h4>
+<p>Cournot: Mengenwettbewerb, RR $q_i^*(q_j)$, Schnitt = Nash in Mengen. Homogene Güter + Bertrand: Preiswettbewerb → $P=MC$, wie Wettbewerb (Bertrand-Paradox). Differenzierung rettet $P>MC$.</p>
+      <div class="math-block">$$q_i^*:\\\\ \\\\frac{\\\\partial \\\\pi_i}{\\\\partial q_i} = 0 \\\\quad\\\\text{(Cournot)}\\\\qquad P_1=P_2=MC\\\\ \\\\text{(Bertrand, homogen)}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Reaktionsfunktionen</h4>
+<p>Die Bedingung erster Ordnung ($MR_i = MC_i$) liefert die Reaktionsfunktion $q_i(q_{-i})$, welche die optimale Menge in Abhängigkeit der Konkurrenzmenge angibt.</p>
       <p>Grafisch: Das Cournot-GG liegt im Schnittpunkt beider Reaktionsfunktionen. Jede Reaktionsfunktion hat eine negative Steigung — mehr des Konkurrenten impliziert weniger eigene optimale Menge.</p>
-    </div>
-    <div class="section-block">
-      <h3>Bertrand-Paradoxon</h3>
-      <p>Im Preiswettbewerb mit homogenen Gütern und konstanten Grenzkosten $c$ unterbieten sich die Firmen so lange, bis $P = c$ gilt. Das Ergebnis entspricht dem vollkommenen Wettbewerb, obwohl nur zwei Firmen am Markt sind.</p>
+
+
+<h4 class="theory-subsection-title">Bertrand-Paradoxon</h4>
+<p>Im Preiswettbewerb mit homogenen Gütern und konstanten Grenzkosten $c$ unterbieten sich die Firmen so lange, bis $P = c$ gilt. Das Ergebnis entspricht dem vollkommenen Wettbewerb, obwohl nur zwei Firmen am Markt sind.</p>
       <p>Auflösungen des Paradoxons: Kapazitätsbeschränkungen, Produktdifferenzierung oder wiederholte Interaktion können zu Preisen oberhalb der GK führen.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Cournot vs. Bertrand:</strong> Bei identischen Gütern und ohne Kapazitätsbeschränkungen führt Bertrand-Wettbewerb zu Wettbewerbspreisen — Cournot hingegen zu einem Ergebnis zwischen Monopol und Wettbewerb. Die Modellwahl hängt davon ab, ob Firmen über Preise oder Mengen entscheiden.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Immer Wettbewerbsvariable nennen (Menge vs. Preis). Bei Cournot: RR zeichnen, symmetrisches Duopol $q_1^*=q_2^*$. Bei Bertrand: Kapazitätsbindung oder Produktdifferenzierung als Realismus-Check erwähnen.</p>
+      <div class="warn-box"><strong>Paradox nicht vergessen:</strong> Bertrand mit homogenem Gut und $MC$ konstant → Preis = MC; Cournot bei gleichen Kosten → $P>MC$. Modellwahl entscheidet Marktergebnis.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Cournot vs. Bertrand:</strong> Bei identischen Gütern und ohne Kapazitätsbeschränkungen führt Bertrand-Wettbewerb zu Wettbewerbspreisen — Cournot hingegen zu einem Ergebnis zwischen Monopol und Wettbewerb. Die Modellwahl hängt davon ab, ob Firmen über Preise oder Mengen entscheiden.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Cournot vs. Bertrand</h4>
+<p>Cournot: Mengenwettbewerb, RR $q_i^*(q_j)$, Schnitt = Nash in Mengen. Homogene Güter + Bertrand: Preiswettbewerb → $P=MC$, wie Wettbewerb (Bertrand-Paradox). Differenzierung rettet $P>MC$.</p>
+      <div class="math-block">$$q_i^*:\\ \\frac{\\partial \\pi_i}{\\partial q_i} = 0 \\quad\\text{(Cournot)}\\qquad P_1=P_2=MC\\ \\text{(Bertrand, homogen)}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Immer Wettbewerbsvariable nennen (Menge vs. Preis). Bei Cournot: RR zeichnen, symmetrisches Duopol $q_1^*=q_2^*$. Bei Bertrand: Kapazitätsbindung oder Produktdifferenzierung als Realismus-Check erwähnen.</p>
+      <div class="warn-box"><strong>Paradox nicht vergessen:</strong> Bertrand mit homogenem Gut und $MC$ konstant → Preis = MC; Cournot bei gleichen Kosten → $P>MC$. Modellwahl entscheidet Marktergebnis.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Gewinnfunktion (i)', eq: String.raw`$$\pi_i = (a - b(q_i + q_j))q_i - c q_i$$`, desc: 'Lineare Nachfrage', variables: { a: 'Nachfrageabschnitt', b: 'Steigung der Nachfrage', c: 'Grenzkosten' } },
       { label: 'Cournot-Menge (symm.)', eq: String.raw`$$q^* = \frac{a-c}{3b}$$`, desc: 'Duopol-Gleichgewicht', variables: { a: 'Nachfrageabschnitt', c: 'Grenzkosten', b: 'Steigungsparameter' } }
@@ -337,26 +516,77 @@ export const CONTENT = {
   },
   oligopol_stackelberg: {
     motivation: 'Wenn Mengenentscheidungen sequenziell getroffen werden, entsteht eine Führungslogik: Der First-Mover antizipiert die Reaktion des Folgers und verschiebt damit das Gleichgewicht.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Stackelberg-Grundidee</h3>
-      <p>Im Stackelberg-Modell wählt der Führer seine Menge zuerst. Der Folger reagiert anschließend optimal auf diese Führungsmenge. Das Ergebnis ist kein simultanes Nash wie bei Cournot, sondern ein sequenzielles Gleichgewicht.</p>
-    </div>
-    <div class="section-block">
-      <h3>Rückwärtsinduktion</h3>
-      <p>Die Lösung erfolgt in zwei Schritten: Zuerst wird die Reaktionsfunktion des Folgers bestimmt, dann setzt der Führer diese in seine Gewinnfunktion ein und maximiert.</p>
-      <div class="math-block">$$q_1^{Stack} = \frac{a-c}{2b} > q^{Cournot} = \frac{a-c}{3b}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Ökonomische Interpretation</h3>
-      <p>Der Führer produziert typischerweise mehr als im Cournot-Fall, der Folger weniger. Dadurch verschiebt sich Gesamtmenge und Marktpreis relativ zum simultanen Mengenwettbewerb.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Timing-Fehler:</strong> Stackelberg darf nicht wie Cournot behandelt werden. Wer simultan statt sequentiell rechnet, verliert den Führervorteil rechnerisch.</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Stackelberg-Grundidee</h4>
+<p>Im Stackelberg-Modell wählt der Führer seine Menge zuerst. Der Folger reagiert anschließend optimal auf diese Führungsmenge. Das Ergebnis ist kein simultanes Nash wie bei Cournot, sondern ein sequenzielles Gleichgewicht.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Rückwärtsinduktion</h4>
+<p>Die Lösung erfolgt in zwei Schritten: Zuerst wird die Reaktionsfunktion des Folgers bestimmt, dann setzt der Führer diese in seine Gewinnfunktion ein und maximiert.</p>
+      <div class="math-block">$$q_1^{Stack} = \\\\frac{a-c}{2b} > q^{Cournot} = \\\\frac{a-c}{3b}$$</div>
+
+
+<h4 class="theory-subsection-title">Stackelberg-Folger</h4>
+<p>Folger wählt $q_2$ gegeben $q_1$ (Reaktionsfunktion). Leader internalisiert Folgerreaktion → höhere $q_1$ als Cournot bei symmetrischen Kosten.</p>
+      <div class="math-block">$$q_2 = RR_2(q_1),\\\\quad \\\\max_{q_1} \\\\pi_1(q_1, RR_2(q_1))$$</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Stackelberg-Folger</h4>
+<p>Folger wählt $q_2$ gegeben $q_1$ (Reaktionsfunktion). Leader internalisiert Folgerreaktion → höhere $q_1$ als Cournot bei symmetrischen Kosten.</p>
+      <div class="math-block">$$q_2 = RR_2(q_1),\\quad \\max_{q_1} \\pi_1(q_1, RR_2(q_1))$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Ökonomische Interpretation</h4>
+<p>Der Führer produziert typischerweise mehr als im Cournot-Fall, der Folger weniger. Dadurch verschiebt sich Gesamtmenge und Marktpreis relativ zum simultanen Mengenwettbewerb.</p>
+
+
+<h4 class="theory-subsection-title">Numerisches Beispiel</h4>
+<p>Symmetrisches linearer Fall: $P=a-bQ$, $MC=c$. RR Folger $q_2=(a-c-bq_1)/(2b)$. Leader: $q_1^*=(a-c)/(2b)$ — strikt über Cournot-$q$ bei gleichen Parametern.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Stackelberg</h4>
+<p>Reihenfolge: (1) RR des Folgers aus FOC. (2) Leader maximiert mit eingesetzter RR. (3) $q_1^*, q_2^*$; Leader-Menge typisch > Cournot-Menge des Leaders. First-mover advantage bei steigenden Grenzkosten des Folgers.</p>
+      <div class="warn-box"><strong>Commitment:</strong> Stackelberg setzt voraus, dass Leader-Menge bindend ist — sonst Cournot oder Bertrand je nach Modell.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Timing-Fehler:</strong> Stackelberg darf nicht wie Cournot behandelt werden. Wer simultan statt sequentiell rechnet, verliert den Führervorteil rechnerisch.</div>
       <div class="warn-box"><strong>Mechanik-Fehler:</strong> Der Führer maximiert nicht „gegen den Markt“, sondern gegen die antizipierte Folgerreaktion.</div>
-    </div>
-    `,
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Numerisches Beispiel</h4>
+<p>Symmetrisches linearer Fall: $P=a-bQ$, $MC=c$. RR Folger $q_2=(a-c-bq_1)/(2b)$. Leader: $q_1^*=(a-c)/(2b)$ — strikt über Cournot-$q$ bei gleichen Parametern.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Stackelberg</h4>
+<p>Reihenfolge: (1) RR des Folgers aus FOC. (2) Leader maximiert mit eingesetzter RR. (3) $q_1^*, q_2^*$; Leader-Menge typisch > Cournot-Menge des Leaders. First-mover advantage bei steigenden Grenzkosten des Folgers.</p>
+      <div class="warn-box"><strong>Commitment:</strong> Stackelberg setzt voraus, dass Leader-Menge bindend ist — sonst Cournot oder Bertrand je nach Modell.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Führermenge', eq: String.raw`$$q_1^{Stack} = \frac{a-c}{2b}$$`, desc: 'Optimale Menge des First Movers bei linearer Nachfrage.' },
       { label: 'Folgerreaktion', eq: String.raw`$$q_2(q_1)=\frac{a-c-bq_1}{2b}$$`, desc: 'Beste Antwort des Followers auf die Führermenge.' }
@@ -383,30 +613,68 @@ export const CONTENT = {
   },
   intertemporaler_konsum: {
     motivation: 'Vorlesung 12 überträgt die Mikro-I-Haushaltslogik auf zwei Perioden: Konsum heute und Konsum morgen werden als zwei Güter im intertemporalen Entscheidungsproblem behandelt.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Zwei Perioden, ein Konsumgut</h3>
-      <p>Der Haushalt lebt in Periode 1 und 2. Das Konsumgut hat in beiden Perioden den normierten Preis 1. Die Entscheidung lautet: heute konsumieren, sparen oder sich verschulden.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Zwei Perioden, ein Konsumgut</h4>
+<p>Der Haushalt lebt in Periode 1 und 2. Das Konsumgut hat in beiden Perioden den normierten Preis 1. Die Entscheidung lautet: heute konsumieren, sparen oder sich verschulden.</p>
       <p>Die offizielle Notation verwendet $c_1$ für Gegenwartskonsum, $c_2$ für Zukunftskonsum, $m_1$ und $m_2$ für Einkommen sowie $r$ für den Zinssatz.</p>
-    </div>
-    <div class="section-block">
-      <h3>Intertemporale Budgetbeschränkung</h3>
-      <p>In Gegenwartswerten darf der Gegenwartswert des Konsums den Gegenwartswert des Einkommens nicht überschreiten.</p>
-      <div class="math-block">$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Intertemporale Budgetbeschränkung</h4>
+<p>In Gegenwartswerten darf der Gegenwartswert des Konsums den Gegenwartswert des Einkommens nicht überschreiten.</p>
+      <div class="math-block">$$c_1+\\\\frac{c_2}{1+r}=m_1+\\\\frac{m_2}{1+r}$$</div>
       <p>Äquivalent lässt sich die Budgetgerade in Zukunftswerten schreiben. Die Steigung hängt vom Zinssatz ab und zeigt die Opportunitätskosten von Konsum heute.</p>
-    </div>
-    <div class="section-block">
-      <h3>Zinsänderung und Konsumplan</h3>
-      <p>Eine Zinsänderung dreht die Budgetgerade um den Ausstattungspunkt. Ob Gegenwartskonsum steigt oder fällt, hängt von Substitutions- und Einkommenseffekt sowie davon ab, ob der Haushalt Netto-Sparer oder Netto-Schuldner ist.</p>
+
+
+<h4 class="theory-subsection-title">Optimierung mit Nutzen $u(c_1,c_2)$</h4>
+<p>Bei additiver Nutzenfunktion $u(c_1,c_2)=u_1(c_1)+u_2(c_2)$ liefert die tangential optimale Konsumkombination die Euler-Gleichung: Der Grenznutzen heute muss mit dem diskontierten Grenznutzen morgen im Gleichgewicht übereinstimmen.</p>
+      <div class="math-block">$$u_1'(c_1^*)=\\\\frac{1}{1+r}u_2'(c_2^*)$$</div>
+      <p>Bei logarithmischem Nutzen $u_i(c)=\\\\ln c_i$ folgt unmittelbar $c_2^*=(1+r)c_1^*$: Konsum wächst mit dem Zinsfaktor.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Intertemporale Wahl</h4>
+<p>Zwei-Perioden-Budget: $c_1 + c_2/(1+r) = y_1 + y_2/(1+r)$. Euler-Gleichung bei CRRA/Log: $u'(c_1) = (1+r)\\\\beta u'(c_2)$. Zinssenkung: Substitution (mehr heute) vs. Einkommens-Effekt (mehr beide Perioden bei Sparer).</p>
+      <div class="math-block">$$c_1 + \\\\frac{c_2}{1+r} = y_1 + \\\\frac{y_2}{1+r}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Zinsänderung und Konsumplan</h4>
+<p>Eine Zinsänderung dreht die Budgetgerade um den Ausstattungspunkt. Ob Gegenwartskonsum steigt oder fällt, hängt von Substitutions- und Einkommenseffekt sowie davon ab, ob der Haushalt Netto-Sparer oder Netto-Schuldner ist.</p>
       <div class="warn-box"><strong>Klausurfehler:</strong> Nicht jede Zinserhöhung senkt automatisch $c_1$. Bei Netto-Sparern und Netto-Schuldnern wirken Einkommenseffekte in unterschiedliche Richtungen.</div>
-    </div>
-    <div class="section-block">
-      <h3>Optimierung mit Nutzen $u(c_1,c_2)$</h3>
-      <p>Bei additiver Nutzenfunktion $u(c_1,c_2)=u_1(c_1)+u_2(c_2)$ liefert die tangential optimale Konsumkombination die Euler-Gleichung: Der Grenznutzen heute muss mit dem diskontierten Grenznutzen morgen im Gleichgewicht übereinstimmen.</p>
-      <div class="math-block">$$u_1'(c_1^*)=\frac{1}{1+r}u_2'(c_2^*)$$</div>
-      <p>Bei logarithmischem Nutzen $u_i(c)=\ln c_i$ folgt unmittelbar $c_2^*=(1+r)c_1^*$: Konsum wächst mit dem Zinsfaktor.</p>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Mechanismus</h4>
+<p>Präferenz über $(c_1,c_2)$; $r$ ist Opportunitätskosten des heutigen Konsums. Bei $\\\\beta<1$ und $r=0$ tendiert Konsum zur Glättung. Liquidity constraint: $c_1$ kann $y_1$ nicht überschreiten — Euler bindet nicht.</p>
+      <div class="warn-box"><strong>Realzins:</strong> In Klausuren $r$ als realer Zins interpretieren, wenn Inflation nicht modelliert wird.</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus</h4>
+<p>Präferenz über $(c_1,c_2)$; $r$ ist Opportunitätskosten des heutigen Konsums. Bei $\\beta<1$ und $r=0$ tendiert Konsum zur Glättung. Liquidity constraint: $c_1$ kann $y_1$ nicht überschreiten — Euler bindet nicht.</p>
+      <div class="warn-box"><strong>Realzins:</strong> In Klausuren $r$ als realer Zins interpretieren, wenn Inflation nicht modelliert wird.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Intertemporale Wahl</h4>
+<p>Zwei-Perioden-Budget: $c_1 + c_2/(1+r) = y_1 + y_2/(1+r)$. Euler-Gleichung bei CRRA/Log: $u'(c_1) = (1+r)\\beta u'(c_2)$. Zinssenkung: Substitution (mehr heute) vs. Einkommens-Effekt (mehr beide Perioden bei Sparer).</p>
+      <div class="math-block">$$c_1 + \\frac{c_2}{1+r} = y_1 + \\frac{y_2}{1+r}$$</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Gegenwartswert-Budget', eq: String.raw`$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$`, desc: 'Intertemporale Budgetbeschränkung in Gegenwartswerten.' },
       { label: 'Zukunftswert-Budget', eq: String.raw`$$(1+r)c_1+c_2=(1+r)m_1+m_2$$`, desc: 'Äquivalente Schreibweise in Zukunftswerten.' },
@@ -443,28 +711,79 @@ export const CONTENT = {
   },
   unsicherheit_versicherung: {
     motivation: 'Vorlesungen 13 und 14 modellieren Unsicherheit als bedingten Konsum in Naturzuständen und leiten Erwartungsnutzen, Risikoaversion und Versicherungsnachfrage ab.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Bedingter Konsum</h3>
-      <p>Unsichere Ereignisse werden als Naturzustände modelliert. Konsum im Zustand „Schaden“ und Konsum im Zustand „kein Schaden“ sind die beiden Güter der Entscheidung.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Bedingter Konsum</h4>
+<p>Unsichere Ereignisse werden als Naturzustände modelliert. Konsum im Zustand „Schaden“ und Konsum im Zustand „kein Schaden“ sind die beiden Güter der Entscheidung.</p>
       <p>Die Kursnotation verwendet $c_1$ für Konsum im Schadenszustand, $c_2$ für Konsum ohne Schaden, $m_1=m-d$ und $m_2=m$ für die zustandsabhängigen Ausstattungen.</p>
-    </div>
-    <div class="section-block">
-      <h3>Erwartungsnutzen und Risikoeinstellung</h3>
-      <p>Beim Erwartungsnutzen werden zustandsabhängige Nutzenwerte mit Eintrittswahrscheinlichkeiten gewichtet. Risikoaversion zeigt sich in konkaver Nutzenfunktion, Risikoneutralität in linearer und Risikofreude in konvexer Nutzenfunktion.</p>
-      <div class="math-block">$$EU=\pi u(c_1)+(1-\pi)u(c_2)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Versicherungsmarkt</h3>
-      <p>Eine Versicherung verschiebt Konsum vom Zustand ohne Schaden in den Schadenszustand. Bei fairer Prämie und Risikoaversion ist Vollversicherung nutzenmaximierend.</p>
-      <div class="math-block">$$\gamma=\pi \quad \Rightarrow \quad \text{faire Versicherung}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Erwartungsnutzen und Risikoeinstellung</h4>
+<p>Beim Erwartungsnutzen werden zustandsabhängige Nutzenwerte mit Eintrittswahrscheinlichkeiten gewichtet. Risikoaversion zeigt sich in konkaver Nutzenfunktion, Risikoneutralität in linearer und Risikofreude in konvexer Nutzenfunktion.</p>
+      <div class="math-block">$$EU=\\\\pi u(c_1)+(1-\\\\pi)u(c_2)$$</div>
+
+
+<h4 class="theory-subsection-title">Versicherungsmarkt</h4>
+<p>Eine Versicherung verschiebt Konsum vom Zustand ohne Schaden in den Schadenszustand. Bei fairer Prämie und Risikoaversion ist Vollversicherung nutzenmaximierend.</p>
+      <div class="math-block">$$\\\\gamma=\\\\pi \\\\quad \\\\Rightarrow \\\\quad \\\\text{faire Versicherung}$$</div>
       <p>Das Ausmaß der Risikoaversion kann über Sicherheitsäquivalent und Risikoprämie beschrieben werden.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Zustandsfehler:</strong> $c_1$ und $c_2$ sind hier keine Zeitperioden, sondern Konsum in Naturzuständen. Nicht mit intertemporalem Konsum verwechseln.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Erwartungsnutzen &amp; Versicherung</h4>
+<p>Risikoaverse zahlen Prämie $>$ erwarteter Schaden für Aktuar-Fairness nicht zwingend — Risikoprämie. Vollversicherung bei NM-Utility und fairer Prämie.</p>
+      <div class="math-block">$$EU = \\\\sum_s \\\\pi_s u(w_s),\\\\quad u''<0 \\\\Rightarrow \\\\text{risk averse}$$</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Erwartungsnutzen &amp; Versicherung</h4>
+<p>Risikoaverse zahlen Prämie $>$ erwarteter Schaden für Aktuar-Fairness nicht zwingend — Risikoprämie. Vollversicherung bei NM-Utility und fairer Prämie.</p>
+      <div class="math-block">$$EU = \\sum_s \\pi_s u(w_s),\\quad u''<0 \\Rightarrow \\text{risk averse}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Moral Hazard / Adverse Selection</h4>
+<p>Ex-ante: Hidden characteristics → Adverse Selection. Ex-post: Hidden action → Moral Hazard; Vollversicherung dann typischerweise suboptimal.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Unsicherheit</h4>
+<p>State-contingent claims: Budget $p_1 x_1 + p_2 x_2 = W$. Fair odds: $p_s = \\\\pi_s$. Optimal: $u'(c_s)$ proportional zu $\\\\pi_s$ bei NM. Versicherung: Transfer zwischen Zuständen gegen Prämie.</p>
+      <div class="warn-box"><strong>NM vs. andere Utility:</strong> Vollversicherung bei fairer Prämie nur bei NM-Utility — bei DARA typischerweise unterversichert.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Zustandsfehler:</strong> $c_1$ und $c_2$ sind hier keine Zeitperioden, sondern Konsum in Naturzuständen. Nicht mit intertemporalem Konsum verwechseln.</div>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Moral Hazard / Adverse Selection</h4>
+<p>Ex-ante: Hidden characteristics → Adverse Selection. Ex-post: Hidden action → Moral Hazard; Vollversicherung dann typischerweise suboptimal.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Unsicherheit</h4>
+<p>State-contingent claims: Budget $p_1 x_1 + p_2 x_2 = W$. Fair odds: $p_s = \\pi_s$. Optimal: $u'(c_s)$ proportional zu $\\pi_s$ bei NM. Versicherung: Transfer zwischen Zuständen gegen Prämie.</p>
+      <div class="warn-box"><strong>NM vs. andere Utility:</strong> Vollversicherung bei fairer Prämie nur bei NM-Utility — bei DARA typischerweise unterversichert.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Erwartungsnutzen', eq: String.raw`$$EU=\pi u(c_1)+(1-\pi)u(c_2)$$`, desc: 'Nutzen über zwei Naturzustände.' },
       { label: 'Faire Prämie', eq: String.raw`$$\gamma=\pi$$`, desc: 'Nullgewinnbedingung im einfachen Versicherungsmodell.' },
@@ -501,33 +820,51 @@ export const CONTENT = {
   },
   gleichgewicht_tausch: {
     motivation: 'Bisher haben wir Märkte isoliert betrachtet (Partialanalyse). Das allgemeine Gleichgewicht betrachtet alle Märkte gleichzeitig und analysiert Tausch- und Produktionseffizienz.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Die Edgeworth-Box</h3>
-      <p>Zwei Konsumenten tauschen zwei Güter. Jeder Punkt in der Box stellt eine Aufteilung der Gesamtausstattung dar. Indifferenzkurven verlaufen für Konsument A vom Ursprung unten links, für B von oben rechts.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Die Edgeworth-Box</h4>
+<p>Zwei Konsumenten tauschen zwei Güter. Jeder Punkt in der Box stellt eine Aufteilung der Gesamtausstattung dar. Indifferenzkurven verlaufen für Konsument A vom Ursprung unten links, für B von oben rechts.</p>
       <p>Ein Tausch ist vorteilhaft, wenn er einen Konsumenten besser stellt, ohne den anderen schlechter zu stellen. Die Linse zwischen zwei sich schneidenden Indifferenzkurven zeigt alle solche Tauschrichtungen an.</p>
-    </div>
-    <div class="section-block">
-      <h3>Pareto-Effizienz</h3>
-      <p>Eine Allokation ist Pareto-effizient, wenn man keinen Spieler besser stellen kann, ohne einen anderen schlechter zu stellen. Grafisch sind dies die Tangentialpunkte der Indifferenzkurven.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Pareto-Effizienz</h4>
+<p>Eine Allokation ist Pareto-effizient, wenn man keinen Spieler besser stellen kann, ohne einen anderen schlechter zu stellen. Grafisch sind dies die Tangentialpunkte der Indifferenzkurven.</p>
       <div class="math-block">$$GRS^A = GRS^B$$</div>
       <p>Die Tangentialbedingung garantiert, dass keine weiteren Tauschgewinne mehr möglich sind.</p>
-    </div>
-    <div class="section-block">
-      <h3>Kontraktkurve</h3>
-      <p>Die Menge aller Pareto-effizienten Punkte in der Edgeworth-Box wird als Kontraktkurve bezeichnet. Auf dieser Kurve ist jede Verbesserung für eine Person mit einer Verschlechterung für die andere verbunden.</p>
-    </div>
-    <div class="section-block">
-      <h3>Walrasianisches Gleichgewicht</h3>
-      <p>Ein Preisvektor $p^*$ räumt alle Märkte gleichzeitig. Das Walrassche Gesetz besagt: Wenn $n-1$ Märkte im Gleichgewicht sind, ist auch der $n$-te Markt geräumt.</p>
-      <div class="math-block">$$\sum_i z_i(p) = 0 \quad \text{(Walrasches Gesetz)}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Pareto-Effizienz ≠ Gerechtigkeit:</strong> Ein Punkt auf der Kontraktkurve kann extrem ungleich verteilt sein. Pareto-Effizienz ist ein schwaches Kriterium — es urteilt nicht über Verteilungsgerechtigkeit.</div>
+
+
+<h4 class="theory-subsection-title">Walrasianisches Gleichgewicht</h4>
+<p>Ein Preisvektor $p^*$ räumt alle Märkte gleichzeitig. Das Walrassche Gesetz besagt: Wenn $n-1$ Märkte im Gleichgewicht sind, ist auch der $n$-te Markt geräumt.</p>
+      <div class="math-block">$$\\\\sum_i z_i(p) = 0 \\\\quad \\\\text{(Walrasches Gesetz)}$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Kontraktkurve</h4>
+<p>Die Menge aller Pareto-effizienten Punkte in der Edgeworth-Box wird als Kontraktkurve bezeichnet. Auf dieser Kurve ist jede Verbesserung für eine Person mit einer Verschlechterung für die andere verbunden.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Pareto-Effizienz ≠ Gerechtigkeit:</strong> Ein Punkt auf der Kontraktkurve kann extrem ungleich verteilt sein. Pareto-Effizienz ist ein schwaches Kriterium — es urteilt nicht über Verteilungsgerechtigkeit.</div>
       <div class="warn-box"><strong>Walrasianisches GG vs. allgemeines GG:</strong> Das Walrasianische GG setzt vollkommene Märkte, vollständige Information und Preisflexibilität voraus. In der Realität können Marktversagen und Preisrigiditäten ein allgemeines Ungleichgewicht erzeugen.</div>
-    </div>
-    `,
+
+</div>
+</section>`,
     formeln: [
       { label: 'Effizienzbedingung', eq: String.raw`$$\frac{MU_1^A}{MU_2^A} = \frac{MU_1^B}{MU_2^B}$$`, desc: 'Gleichheit der Grenzraten der Substitution', variables: { MU_1: 'Grenznutzen von Gut 1', MU_2: 'Grenznutzen von Gut 2' } }
     ],
@@ -574,33 +911,46 @@ export const CONTENT = {
   },
   gleichgewicht_walras: {
     motivation: 'Walrasianische Gleichgewichte fokussieren auf Preisvektoren und gleichzeitige Markt-Räumung statt auf reine Tauschgeometrie.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Überschussnachfrage und Preisvektor</h3>
-      <p>Ein Walrasianisches Gleichgewicht ist ein Preisvektor $p^*$, bei dem alle Märkte gleichzeitig geräumt sind. Haushalte maximieren Nutzen bei Budgetrestriktion, Unternehmen maximieren Gewinn; die aggregierte Überschussnachfrage verschwindet.</p>
-      <div class="math-block">$$z_i(p)=\sum_j x_{ij}(p)-\omega_i=0 \quad \forall i$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Überschussnachfrage und Preisvektor</h4>
+<p>Ein Walrasianisches Gleichgewicht ist ein Preisvektor $p^*$, bei dem alle Märkte gleichzeitig geräumt sind. Haushalte maximieren Nutzen bei Budgetrestriktion, Unternehmen maximieren Gewinn; die aggregierte Überschussnachfrage verschwindet.</p>
+      <div class="math-block">$$z_i(p)=\\\\sum_j x_{ij}(p)-\\\\omega_i=0 \\\\quad \\\\forall i$$</div>
       <p>Weil Preise nur bis auf einen positiven Skalar eindeutig sind, wird oft ein Numéraire-Gut mit Preis 1 gewählt.</p>
-    </div>
-    <div class="section-block">
-      <h3>Walrasches Gesetz</h3>
-      <p>Wenn die Budgetrestriktionen der Haushalte erfüllt sind und $n-1$ Märkte geräumt sind, ist auch der $n$-te Markt geräumt. Das Walrasche Gesetz reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
-      <div class="math-block">$$\sum_i z_i(p) = 0 \quad \text{(Walrasches Gesetz)}$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Von der Edgeworth-Box zum Preissystem</h3>
-      <p>Die Kontraktkurve beschreibt effiziente Allokationen im Tausch. Ein Walras-Preisvektor wählt aus diesen effizienten Allokationen diejenige, die mit gegebenen Anfangsausstattungen und optimierendem Verhalten kompatibel ist.</p>
-    </div>
-    <div class="section-block">
-      <h3>Homogenität der Überschussnachfrage</h3>
-      <p>Die aggregierte Überschussnachfrage ist homogen vom Grad 0: Verdoppeln aller Preise ändert reale Budgetmengen nicht, wenn Einkommen und Ausstattung proportional skaliert werden. Deshalb genügt ein relatives Preisverhältnis; das Numéraire-Gut mit $p_1=1$ fixiert die Skala.</p>
-      <div class="math-block">$$z_i(\lambda p) = z_i(p) \quad \forall \lambda > 0$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
+
+
+<h4 class="theory-subsection-title">Walrasches Gesetz</h4>
+<p>Wenn die Budgetrestriktionen der Haushalte erfüllt sind und $n-1$ Märkte geräumt sind, ist auch der $n$-te Markt geräumt. Das Walrasche Gesetz reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
+      <div class="math-block">$$\\\\sum_i z_i(p) = 0 \\\\quad \\\\text{(Walrasches Gesetz)}$$</div>
+
+
+<h4 class="theory-subsection-title">Homogenität der Überschussnachfrage</h4>
+<p>Die aggregierte Überschussnachfrage ist homogen vom Grad 0: Verdoppeln aller Preise ändert reale Budgetmengen nicht, wenn Einkommen und Ausstattung proportional skaliert werden. Deshalb genügt ein relatives Preisverhältnis; das Numéraire-Gut mit $p_1=1$ fixiert die Skala.</p>
+      <div class="math-block">$$z_i(\\\\lambda p) = z_i(p) \\\\quad \\\\forall \\\\lambda > 0$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Von der Edgeworth-Box zum Preissystem</h4>
+<p>Die Kontraktkurve beschreibt effiziente Allokationen im Tausch. Ein Walras-Preisvektor wählt aus diesen effizienten Allokationen diejenige, die mit gegebenen Anfangsausstattungen und optimierendem Verhalten kompatibel ist.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
       <div class="warn-box"><strong>Existenz vs. Eindeutigkeit:</strong> Das Walras-Theorem zur Existenz eines GG unter Standardannahmen ist kein Eindeutigkeitsresultat. Mehrere Gleichgewichte sind möglich.</div>
-    </div>
-    `,
+
+</div>
+</section>`,
     formeln: [
       { label: 'Markträumung', eq: String.raw`$$z_i(p^*)=0 \quad \forall i$$`, desc: 'Überschussnachfrage verschwindet im Gleichgewicht.' },
       { label: 'Walrasches Gesetz', eq: String.raw`$$\sum_i z_i(p) = 0$$`, desc: 'Aggregierte Überschussnachfrage über alle Märkte.' },
@@ -638,25 +988,61 @@ export const CONTENT = {
   },
   gleichgewicht_produktion: {
     motivation: 'Vorlesung 17 erweitert das allgemeine Gleichgewicht um Produktion: Aus einer reinen Tauschkiste wird eine Ökonomie mit Konsumenten, Gütern und Produktionsfaktoren.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Modellrahmen mit Produktion</h3>
-      <p>Die offizielle Darstellung betrachtet zwei Individuen, zwei Güter und zwei Produktionsfaktoren. Konsum wird wie bisher mit $(x_1^A,x_2^A)$ und $(x_1^B,x_2^B)$ bezeichnet; Produktion erfolgt über sektorale Produktionsfunktionen.</p>
-      <div class="math-block">$$F^1(K_1,L_1),\qquad F^2(K_2,L_2)$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Modellrahmen mit Produktion</h4>
+<p>Die offizielle Darstellung betrachtet zwei Individuen, zwei Güter und zwei Produktionsfaktoren. Konsum wird wie bisher mit $(x_1^A,x_2^A)$ und $(x_1^B,x_2^B)$ bezeichnet; Produktion erfolgt über sektorale Produktionsfunktionen.</p>
+      <div class="math-block">$$F^1(K_1,L_1),\\\\qquad F^2(K_2,L_2)$$</div>
       <p>Die Faktorausstattung ist vollständig auf beide Sektoren aufzuteilen.</p>
-      <div class="math-block">$$K_1+K_2=K,\qquad L_1+L_2=L$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Faktor-Box und Produktionseffizienz</h3>
-      <p>Die Faktor-Box zeigt, wie Kapital und Arbeit zwischen den beiden Gütersektoren verteilt werden. Produktionseffizienz liegt vor, wenn keine Reallokation der Faktoren mehr von einem Gut mehr produzieren kann, ohne die Produktion des anderen Gutes zu senken.</p>
+      <div class="math-block">$$K_1+K_2=K,\\\\qquad L_1+L_2=L$$</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Faktor-Box und Produktionseffizienz</h4>
+<p>Die Faktor-Box zeigt, wie Kapital und Arbeit zwischen den beiden Gütersektoren verteilt werden. Produktionseffizienz liegt vor, wenn keine Reallokation der Faktoren mehr von einem Gut mehr produzieren kann, ohne die Produktion des anderen Gutes zu senken.</p>
       <p>Grafisch liegen effiziente Produktionspunkte an Tangentialpunkten der Isoquanten; ihre Verbindung bildet die Effizienzkurve.</p>
-    </div>
-    <div class="section-block">
-      <h3>Gesamtwirtschaftliches Optimum</h3>
-      <p>Im Optimum müssen Produktion und Konsum zusammenpassen: Die Transformationsmöglichkeiten der Ökonomie und die Grenzraten der Substitution der Konsumenten dürfen nicht auseinanderlaufen.</p>
+
+
+<h4 class="theory-subsection-title">Gesamtwirtschaftliches Optimum</h4>
+<p>Im Optimum müssen Produktion und Konsum zusammenpassen: Die Transformationsmöglichkeiten der Ökonomie und die Grenzraten der Substitution der Konsumenten dürfen nicht auseinanderlaufen.</p>
       <div class="warn-box"><strong>Prüfungsfehler:</strong> Produktionseffizienz allein reicht nicht für ein gesamtwirtschaftliches Optimum. Zusätzlich muss die produzierte Güterkombination zur Konsumseite passen.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Wohlfahrtssätze</h4>
+<p>1. HS: Jede WE ist Pareto-effizient (bei vollständigen Märkten). 2. HS: Jede Pareto-effiziente Allokation ist WE bei passender Anfangsausstattung. Klausur: Diagramm + Intuition, nicht nur Sätze zitieren.</p>
+      <div class="warn-box"><strong>Annahmen:</strong> WE-Existenz braucht Konvexität, vollständige Märkte — bei Externalitäten scheitert 1. HS.</div>
+
+
+<h4 class="theory-subsection-title">In der Klausur: GE Produktion</h4>
+<p>Edgeworth-Box Produktion: $F^1 + F^2 = \\\\bar F$. Pareto-Effizienz: $MRTS^1 = MRTS^2$. Mit Preisen: $w/r = MRTS$ in jedem Sektor; Walras-Gleichgewicht = Preise + Allokation, die Märkte räumen.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Wohlfahrtssätze</h4>
+<p>1. HS: Jede WE ist Pareto-effizient (bei vollständigen Märkten). 2. HS: Jede Pareto-effiziente Allokation ist WE bei passender Anfangsausstattung. Klausur: Diagramm + Intuition, nicht nur Sätze zitieren.</p>
+      <div class="warn-box"><strong>Annahmen:</strong> WE-Existenz braucht Konvexität, vollständige Märkte — bei Externalitäten scheitert 1. HS.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: GE Produktion</h4>
+<p>Edgeworth-Box Produktion: $F^1 + F^2 = \\bar F$. Pareto-Effizienz: $MRTS^1 = MRTS^2$. Mit Preisen: $w/r = MRTS$ in jedem Sektor; Walras-Gleichgewicht = Preise + Allokation, die Märkte räumen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Vollbeschäftigung Kapital', eq: String.raw`$$K_1+K_2=K$$`, desc: 'Gesamtbestand Kapital wird zwischen Sektoren aufgeteilt.' },
       { label: 'Vollbeschäftigung Arbeit', eq: String.raw`$$L_1+L_2=L$$`, desc: 'Gesamtbestand Arbeit wird zwischen Sektoren aufgeteilt.' },
@@ -694,33 +1080,51 @@ export const CONTENT = {
   },
   wohlfahrt_theoreme: {
     motivation: 'Die Wohlfahrtstheoreme schlagen die Brücke zwischen Marktgleichgewicht und gesellschaftlicher Wünschenswertigkeit.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>1. Hauptsatz der Wohlfahrtsökonomik</h3>
-      <p>Jedes Wettbewerbsgleichgewicht (bei Abwesenheit von Marktversagen) führt zu einer Pareto-effizienten Allokation. Der Markt ist somit ein Mechanismus zur Erzielung von Effizienz.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">1. Hauptsatz der Wohlfahrtsökonomik</h4>
+<p>Jedes Wettbewerbsgleichgewicht (bei Abwesenheit von Marktversagen) führt zu einer Pareto-effizienten Allokation. Der Markt ist somit ein Mechanismus zur Erzielung von Effizienz.</p>
       <p>Voraussetzungen: Vollkommene Märkte, keine Externalitäten, keine öffentlichen Güter, vollständige Information. Bei Verletzung dieser Bedingungen ist Marktversagen möglich.</p>
-    </div>
-    <div class="section-block">
-      <h3>2. Hauptsatz der Wohlfahrtsökonomik</h3>
-      <p>Jede Pareto-effiziente Allokation kann als Wettbewerbsgleichgewicht realisiert werden, sofern eine geeignete Umverteilung der Anfangsausstattungen (via Pauschalsteuern) erfolgt.</p>
-      <p>Der 2. Hauptsatz trennt Effizienz von Verteilung: Der Staat kann gesellschaftliche Verteilungsziele durch Pauschalumverteilung erreichen und danach den Markt Effizienz erzeugen lassen.</p>
-    </div>
-    <div class="section-block">
-      <h3>Wohlfahrtsfunktionen</h3>
-      <p>Wie bewertet man verschiedene Pareto-effiziente Punkte? Utilitaristisch ($\sum u_i$) oder nach Rawls ($\min u_i$).</p>
-      <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Konsumenten- und Produzentenrente als Wohlfahrtsmaß</h3>
-      <p>Gesamtwohlfahrt $W = KR + PR$. Deadweight Loss (DWL): der Wohlfahrtsverlust durch Abweichung vom Wettbewerbsoptimum (z.B. Monopol, Steuer, Mindestpreis).</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Wohlfahrtsfunktionen</h4>
+<p>Wie bewertet man verschiedene Pareto-effiziente Punkte? Utilitaristisch ($\\\\sum u_i$) oder nach Rawls ($\\\\min u_i$).</p>
+      <div class="math-block">$$W_{util} = \\\\sum_{i=1}^n u_i \\\\qquad W_{Rawls} = \\\\min_i u_i$$</div>
+
+
+<h4 class="theory-subsection-title">Konsumenten- und Produzentenrente als Wohlfahrtsmaß</h4>
+<p>Gesamtwohlfahrt $W = KR + PR$. Deadweight Loss (DWL): der Wohlfahrtsverlust durch Abweichung vom Wettbewerbsoptimum (z.B. Monopol, Steuer, Mindestpreis).</p>
       <div class="math-block">$$DWL = W_{Wettbewerb} - (KR + PR)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Utilitarismus vs. Rawls:</strong> Beide Wohlfahrtsfunktionen können zu unterschiedlichen Politikempfehlungen führen. Ein utilitaristischer Planer kann extreme Ungleichheit tolerieren, wenn der Gesamtnutzen steigt — ein Rawlsianischer nicht.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">2. Hauptsatz der Wohlfahrtsökonomik</h4>
+<p>Jede Pareto-effiziente Allokation kann als Wettbewerbsgleichgewicht realisiert werden, sofern eine geeignete Umverteilung der Anfangsausstattungen (via Pauschalsteuern) erfolgt.</p>
+      <p>Der 2. Hauptsatz trennt Effizienz von Verteilung: Der Staat kann gesellschaftliche Verteilungsziele durch Pauschalumverteilung erreichen und danach den Markt Effizienz erzeugen lassen.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Utilitarismus vs. Rawls:</strong> Beide Wohlfahrtsfunktionen können zu unterschiedlichen Politikempfehlungen führen. Ein utilitaristischer Planer kann extreme Ungleichheit tolerieren, wenn der Gesamtnutzen steigt — ein Rawlsianischer nicht.</div>
       <div class="warn-box"><strong>Pauschalsteuern in der Praxis:</strong> Der 2. Hauptsatz erfordert beobachtbare individuelle Ausstattungen. Da diese Information oft nicht vorliegt (Informationsasymmetrie), ist die praktische Umsetzung stark eingeschränkt.</div>
-    </div>
-    `,
+
+</div>
+</section>`,
     formeln: [
       { label: 'Utilitaristisch', eq: String.raw`$$W = u_1 + u_2 + \dots + u_n$$`, desc: 'Summe der Nutzen', variables: { u_i: 'Nutzen von Person i' } },
       { label: 'Rawlsianisch', eq: String.raw`$$W = \min(u_1, \dots, u_n)$$`, desc: 'Fokus auf den Schwächsten', variables: { u_i: 'Nutzen von Person i' } }
@@ -767,33 +1171,69 @@ export const CONTENT = {
   },
   wohlfahrt_messung: {
     motivation: 'Wohlfahrtsmessung trennt normative Bewertungskriterien und messbare Surplus-/DWL-Rechnung als eigenen Klausurblock.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Wohlfahrtsfunktionen</h3>
-      <p>Allokationen können utilitaristisch ($\sum u_i$) oder Rawlsianisch ($\min u_i$) bewertet werden. Beide Kriterien ordnen Pareto-effiziente Punkte unterschiedlich — Effizienz und Verteilung bleiben getrennt.</p>
-      <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Konsumenten- und Produzentenrente</h3>
-      <p>Im partiellen Markt gilt bei linearer Nachfrage: $KR$ ist das Dreieck unter der Nachfragekurve über dem Gleichgewichtspreis, $PR$ das Dreieck über der Angebotskurve. Gesamtwohlfahrt $W=KR+PR$ im Wettbewerb.</p>
-      <div class="math-block">$$KR = \frac{1}{2}(P_{max}-P^*)Q^*, \qquad PR = \frac{1}{2}(P^*-P_{min})Q^*$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Wohlfahrtsfunktionen</h4>
+<p>Allokationen können utilitaristisch ($\\\\sum u_i$) oder Rawlsianisch ($\\\\min u_i$) bewertet werden. Beide Kriterien ordnen Pareto-effiziente Punkte unterschiedlich — Effizienz und Verteilung bleiben getrennt.</p>
+      <div class="math-block">$$W_{util} = \\\\sum_{i=1}^n u_i \\\\qquad W_{Rawls} = \\\\min_i u_i$$</div>
+
+
+<h4 class="theory-subsection-title">Konsumenten- und Produzentenrente</h4>
+<p>Im partiellen Markt gilt bei linearer Nachfrage: $KR$ ist das Dreieck unter der Nachfragekurve über dem Gleichgewichtspreis, $PR$ das Dreieck über der Angebotskurve. Gesamtwohlfahrt $W=KR+PR$ im Wettbewerb.</p>
+      <div class="math-block">$$KR = \\\\frac{1}{2}(P_{max}-P^*)Q^*, \\\\qquad PR = \\\\frac{1}{2}(P^*-P_{min})Q^*$$</div>
       <p>Bei $P_D=a-bQ$ und $P_S=c+dQ$ folgt $Q^*=(a-c)/(b+d)$ und die Dreiecksformeln direkt aus der Klausur-Standardgrafik.</p>
-    </div>
-    <div class="section-block">
-      <h3>Steuern, Monopol und DWL-Geometrie</h3>
-      <p>Eine Einheitssteuer $t$ verschiebt die effektive Angebotskurve nach oben; das Handelsvolumen sinkt. Der DWL ist das „verlorene“ Dreieck zwischen Nachfrage und (besteuertem) Angebot über der tatsächlich gehandelten Menge — typischer Klausurblock neben Monopol und Mindestpreis.</p>
-      <div class="math-block">$$DWL_{Steuer} \approx \frac{1}{2}\, t\,(Q^* - Q_t)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Deadweight Loss</h3>
-      <p>Monopol, Steuern, Mindestpreise oder Quoten erzeugen typischerweise einen DWL relativ zum Wettbewerbsoptimum — verlorene Handelsgewinne aus zu geringem Volumen.</p>
+
+
+<h4 class="theory-subsection-title">Steuern, Monopol und DWL-Geometrie</h4>
+<p>Eine Einheitssteuer $t$ verschiebt die effektive Angebotskurve nach oben; das Handelsvolumen sinkt. Der DWL ist das „verlorene“ Dreieck zwischen Nachfrage und (besteuertem) Angebot über der tatsächlich gehandelten Menge — typischer Klausurblock neben Monopol und Mindestpreis.</p>
+      <div class="math-block">$$DWL_{Steuer} \\\\approx \\\\frac{1}{2}\\\\, t\\\\,(Q^* - Q_t)$$</div>
+
+
+<h4 class="theory-subsection-title">Deadweight Loss</h4>
+<p>Monopol, Steuern, Mindestpreise oder Quoten erzeugen typischerweise einen DWL relativ zum Wettbewerbsoptimum — verlorene Handelsgewinne aus zu geringem Volumen.</p>
       <div class="math-block">$$DWL = W_{Wettbewerb} - (KR + PR)$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Surplus vs. Nutzen:</strong> KR/PR messen ökonomische Surplus in Geld, nicht Kardinalnutzen. Nutzenvergleiche über Personen sind mit Wohlfahrtsfunktionen zu begründen.</div>
-    </div>
-    `,
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\\\\frac{1}{2}|\\\\eta|\\\\,t^2\\\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
+      <div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">In der Klausur: Wohlfahrtsmessung</h4>
+<p>Kompensierende/äquivalente Variation vs. CS-Änderung bei Nachfrageverschiebung. Harberger-Dreieck für DWL bei $P\\\\neq MC$. Aggregationsproblem: utilitaristisch vs. Rawls vs. Pareto-Kriterium.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Surplus vs. Nutzen:</strong> KR/PR messen ökonomische Surplus in Geld, nicht Kardinalnutzen. Nutzenvergleiche über Personen sind mit Wohlfahrtsfunktionen zu begründen.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Wohlfahrtsmessung</h4>
+<p>Kompensierende/äquivalente Variation vs. CS-Änderung bei Nachfrageverschiebung. Harberger-Dreieck für DWL bei $P\\neq MC$. Aggregationsproblem: utilitaristisch vs. Rawls vs. Pareto-Kriterium.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\\frac{1}{2}|\\eta|\\,t^2\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
+      <div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Utilitaristisch', eq: String.raw`$$W = u_1 + u_2 + \dots + u_n$$`, desc: 'Summe der Nutzen.' },
       { label: 'Rawlsianisch', eq: String.raw`$$W = \min(u_1, \dots, u_n)$$`, desc: 'Fokus auf den Schwächsten.' },
@@ -829,43 +1269,71 @@ export const CONTENT = {
   },
   externa_pigou: {
     motivation: 'Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.',
-    theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
-    <div class="section-block platform-added-notice">
-      <h3>Plattform-Ergänzung (ohne VL-Seitenanker)</h3>
-      <p><em>platform-added-explanation:</em> Ergänzender Marktversagen-Block ohne direkten Primäranker im offiziellen Mikro-II-Korpus.</p>
-    </div>
-    <div class="section-block">
-      <h3>Negative Externe Effekte</h3>
-      <p>Die Produktion verursacht Kosten bei unbeteiligten Dritten (z.B. Verschmutzung). Die Grenzkosten des Unternehmens ($MPC$) sind niedriger als die gesellschaftlichen Grenzkosten ($MSC$).</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Negative Externe Effekte</h4>
+<p>Die Produktion verursacht Kosten bei unbeteiligten Dritten (z.B. Verschmutzung). Die Grenzkosten des Unternehmens ($MPC$) sind niedriger als die gesellschaftlichen Grenzkosten ($MSC$).</p>
       <div class="math-block">$$MSC = MPC + MEC$$</div>
       <p>Im Wettbewerb wird zu viel produziert ($Q_{mkt} > Q_{soc}$).</p>
-    </div>
-    <div class="section-block">
-      <h3>Internalisierung: Pigou-Steuer</h3>
-      <p>Eine Steuer $t$ in Höhe des Grenzschadens im Optimum ($MEC(Q^*)$) korrigiert das Marktverhalten exakt auf das gesellschaftliche Optimum.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Emissionshandel (Cap-and-Trade)</h4>
+<p>Alternative zur Pigou-Steuer: Der Staat setzt ein Mengenziel (Cap), verteilt Lizenzen und lässt diese handeln. Das Ergebnis ist effizient, wenn der Lizenzmarkt wettbewerblich ist.</p>
+      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \\quad \\Leftrightarrow \\quad \\text{Cap bei } Q^*$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Internalisierung: Pigou-Steuer</h4>
+<p>Eine Steuer $t$ in Höhe des Grenzschadens im Optimum ($MEC(Q^*)$) korrigiert das Marktverhalten exakt auf das gesellschaftliche Optimum.</p>
       <p>Das Instrument ist effizient, weil es Firmen Anreize gibt, Emissionen zu vermeiden — jede vermiedene Einheit spart Steuerkosten. Die Steuereinnahmen können für andere Zwecke verwendet werden (Doppeldividende).</p>
-    </div>
-    <div class="section-block">
-      <h3>Coase-Theorem</h3>
-      <p>Bei klar definierten Eigentumsrechten und null Transaktionskosten führen private Verhandlungen unabhängig von der Erstzuweisung der Rechte zu einer effizienten Lösung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Coase-Theorem</h4>
+<p>Bei klar definierten Eigentumsrechten und null Transaktionskosten führen private Verhandlungen unabhängig von der Erstzuweisung der Rechte zu einer effizienten Lösung.</p>
       <p>Praktische Grenzen: Transaktionskosten bei vielen Betroffenen (z.B. Klimawandel), strategisches Verhalten, Informationsasymmetrien zwischen Verhandlungspartnern.</p>
-    </div>
-    <div class="section-block">
-      <h3>Emissionshandel (Cap-and-Trade)</h3>
-      <p>Alternative zur Pigou-Steuer: Der Staat setzt ein Mengenziel (Cap), verteilt Lizenzen und lässt diese handeln. Das Ergebnis ist effizient, wenn der Lizenzmarkt wettbewerblich ist.</p>
-      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Pigou-Steuer bei Unsicherheit:</strong> Die optimale Pigou-Steuer erfordert Kenntnis des gesellschaftlichen Optimums. Bei Unsicherheit über $MEC$ kann die Steuer zu hoch oder zu niedrig sein — dann ist Cap-and-Trade der Steuer vorzuziehen (bei steilen Grenzkostenkurven).</div>
-      <div class="warn-box"><strong>Coase-Theorem in der Praxis:</strong> Das Coase-Theorem gilt nur bei null Transaktionskosten und wenigen Beteiligten. Bei Umweltproblemen mit vielen Betroffenen (Klimawandel, Luftverschmutzung) ist staatliche Intervention unumgänglich.</div>
-    </div>
-    <div class="section-block">
-      <h3>In der Klausur: Pigou-Internalisierung</h3>
-      <p><em>platform-added-explanation:</em> Standardfall: $MSC = MPC + MEC$, Markt liefert $Q_{mkt} > Q^*$. Pigou-Steuer $t = MEC(Q^*)$ → Markt liefert $Q^*$. DWL-Dreieck zeichnen zwischen $Q^*$ und $Q_{mkt}$. Coase nur bei wenigen Beteiligten und null Transaktionskosten.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Pigou-Internalisierung</h4>
+<p><em>platform-added-explanation:</em> Standardfall: $MSC = MPC + MEC$, Markt liefert $Q_{mkt} > Q^*$. Pigou-Steuer $t = MEC(Q^*)$ → Markt liefert $Q^*$. DWL-Dreieck zeichnen zwischen $Q^*$ und $Q_{mkt}$. Coase nur bei wenigen Beteiligten und null Transaktionskosten.</p>
       <div class="warn-box"><strong>Steuer vs. Subvention:</strong> Negative Externalität → Steuer; positive Externalität → Subvention auf $MEB$.</div>
-    </div>
-    `,
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurpfad Pigou</h4>
+<p><em>platform-added-explanation:</em> Markt $Q_m > Q^*$ bei negativer Externalität → Pigou-Steuer $t = MEC(Q^*)$ internalisiert.</p>
+      <div class="math-block">$$MSC = MPC + MEC$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Immer Markt- vs. Sozialoptimum zeichnen; Steuerhöhe am Grenzschaden im Optimum, nicht am aktuellen Marktoutput.</p>
+      <div class="warn-box"><strong>Instrument:</strong> Pigou-Steuer (Preis) vs. Cap-and-Trade (Menge) unter Unsicherheit unterschiedlich.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur (Plattform-Ergänzung)</h4>
+<p>Negativer Externer Effekt: $MSB < MPB$ → Überproduktion. Pigou: $t^* = MEC(Q^*)$. Positiver Externer Effekt: Subvention analog. Ohne Intervention DWL-Dreieck zwischen $Q_m$ und $Q^*$.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Pigou-Steuer bei Unsicherheit:</strong> Die optimale Pigou-Steuer erfordert Kenntnis des gesellschaftlichen Optimums. Bei Unsicherheit über $MEC$ kann die Steuer zu hoch oder zu niedrig sein — dann ist Cap-and-Trade der Steuer vorzuziehen (bei steilen Grenzkostenkurven).</div>
+      <div class="warn-box"><strong>Coase-Theorem in der Praxis:</strong> Das Coase-Theorem gilt nur bei null Transaktionskosten und wenigen Beteiligten. Bei Umweltproblemen mit vielen Betroffenen (Klimawandel, Luftverschmutzung) ist staatliche Intervention unumgänglich.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Pigou-Steuer', eq: String.raw`$$t = MEC(Q^*)$$`, desc: 'Steuer = Grenzschaden im Optimum', variables: { MEC: 'marginale externe Kosten', Q_star: 'gesellschaftlich optimale Menge' } }
     ],
@@ -913,35 +1381,67 @@ export const CONTENT = {
   },
   externa_institutionen: {
     motivation: 'Neben Steuer-Internalisierung braucht die Klausur trennscharfe Beherrschung institutioneller Ansätze: Coase-Verhandlung und Cap-and-Trade.',
-    theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
-    <div class="section-block platform-added-notice">
-      <h3>Plattform-Ergänzung (ohne VL-Seitenanker)</h3>
-      <p><em>platform-added-explanation:</em> Marktversagen-Block ohne direkten Primäranker im offiziellen Mikro-II-Korpus. Nutze zur Übung; prüfungsrelevante VL-Stoffe haben gesonderte Konzeptanker.</p>
-    </div>
-    <div class="section-block">
-      <h3>Coase-Theorem</h3>
-      <p>Bei klaren Eigentumsrechten und sehr niedrigen Transaktionskosten führen private Verhandlungen zu einer effizienten Allokation, unabhängig von der initialen Rechtszuweisung.</p>
-    </div>
-    <div class="section-block">
-      <h3>Emissionshandel (Cap-and-Trade)</h3>
-      <p>Der Staat setzt eine Emissionsmenge (Cap), Lizenzen werden handelbar. Bei funktionierendem Markt ergibt sich kosteneffiziente Vermeidung über den Lizenzpreis.</p>
-      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Preis- vs. Mengensteuerung unter Unsicherheit</h3>
-      <p>Weist die Grenzkostenkurve der Schäden steil und die Grenzkosten der Vermeidung flach, ist eine Pigou-Steuer robuster; ist es umgekehrt, bevorzugt man ein Cap (Weitzman-Argument).</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene und hohe Verhandlungskosten unterminieren private Effizienzverhandlungen.</div>
-      <div class="warn-box"><strong>Instrumentenfehler:</strong> Cap-and-Trade und Pigou-Steuer sind in der Zielsetzung verwandt, aber unterschiedlich in Preis- vs. Mengensteuerung unter Unsicherheit.</div>
-    </div>
-    <div class="section-block">
-      <h3>In der Klausur: Institutionelle Internalisierung</h3>
-      <p><em>platform-added-explanation:</em> Prüfungsstandard: (1) Marktversagen identifizieren. (2) Instrument: Pigou (Preis), Cap-and-Trade (Menge), Coase (Verhandlung). (3) Weitzman: Unsicherheit über Schadenskosten → Preis- vs. Mengensteuerung. (4) DWL und Verteilung nennen.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Coase-Theorem</h4>
+<p>Bei klaren Eigentumsrechten und sehr niedrigen Transaktionskosten führen private Verhandlungen zu einer effizienten Allokation, unabhängig von der initialen Rechtszuweisung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Emissionshandel (Cap-and-Trade)</h4>
+<p>Der Staat setzt eine Emissionsmenge (Cap), Lizenzen werden handelbar. Bei funktionierendem Markt ergibt sich kosteneffiziente Vermeidung über den Lizenzpreis.</p>
+      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \\quad \\Leftrightarrow \\quad \\text{Cap bei } Q^*$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Preis- vs. Mengensteuerung unter Unsicherheit</h4>
+<p>Weist die Grenzkostenkurve der Schäden steil und die Grenzkosten der Vermeidung flach, ist eine Pigou-Steuer robuster; ist es umgekehrt, bevorzugt man ein Cap (Weitzman-Argument).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Coase &amp; Handel</h4>
+<p><em>platform-added-explanation:</em> Bei klaren Eigentumsrechten und niedrigen Transaktionskosten private Verhandlung effizient; bei vielen Betroffenen scheitert Coase.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Emissionshandel</h4>
+<p>Cap setzt Menge; Lizenzpreis internalisiert Grenzkosten. Effizienz: heterogene Kosten → günstigste Vermeider kaufen weniger Lizenzen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Institutionelle Internalisierung</h4>
+<p><em>platform-added-explanation:</em> Prüfungsstandard: (1) Marktversagen identifizieren. (2) Instrument: Pigou (Preis), Cap-and-Trade (Menge), Coase (Verhandlung). (3) Weitzman: Unsicherheit über Schadenskosten → Preis- vs. Mengensteuerung. (4) DWL und Verteilung nennen.</p>
       <div class="warn-box"><strong>Instrumentenwahl unter Unsicherheit:</strong> Steile $MEC$-Kurve → Pigou robuster; steile Vermeidungskosten → Cap robuster.</div>
-    </div>
-    `,
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur (Plattform-Ergänzung)</h4>
+<p>Coase-Theorem: bei $TC=0$ und klaren Rechten effizientes Ergebnis unabhängig von initialer Rechteverteilung (nur Verteilung). Emissionshandel vs. Pigou-Steuer: Menge vs. Preis unter Unsicherheit.</p>
+      <div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene, unklare Rechte oder hohe Verhandlungskosten → staatliche Instrumente nötig.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene und hohe Verhandlungskosten unterminieren private Effizienzverhandlungen.</div>
+      <div class="warn-box"><strong>Instrumentenfehler:</strong> Cap-and-Trade und Pigou-Steuer sind in der Zielsetzung verwandt, aber unterschiedlich in Preis- vs. Mengensteuerung unter Unsicherheit.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Preis-Mengen-Äquivalenz', eq: String.raw`$$t_{Pigou} = MEC(Q^*) \Leftrightarrow \text{Cap auf }Q^*$$`, desc: 'Äquivalenzidee bei idealen Bedingungen.' }
     ],
@@ -957,42 +1457,68 @@ export const CONTENT = {
   },
   public_goods: {
     motivation: 'Öffentliche Güter sind durch Nicht-Rivalität und Nicht-Ausschließbarkeit gekennzeichnet. Dies führt zum Trittbrettfahrer-Problem.',
-    theorie: MARKET_FAILURE_SOURCE_BOUNDARY + String.raw`
-    <div class="section-block platform-added-notice">
-      <h3>Plattform-Ergänzung (ohne VL-Seitenanker)</h3>
-      <p><em>platform-added-explanation:</em> Öffentliche Güter als Plattform-Drill; nicht als verifizierter VL-Primärstoff behandeln.</p>
-    </div>
-    <div class="section-block">
-      <h3>Samuelson-Bedingung</h3>
-      <p>Die effiziente Menge eines öffentlichen Gutes ist erreicht, wenn die Summe der individuellen Zahlungsbereitschaften (Grenzraten der Substitution) den Grenzkosten der Bereitstellung entspricht.</p>
-      <div class="math-block">$$\sum_{i=1}^n GRS_i = MRT$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Samuelson-Bedingung</h4>
+<p>Die effiziente Menge eines öffentlichen Gutes ist erreicht, wenn die Summe der individuellen Zahlungsbereitschaften (Grenzraten der Substitution) den Grenzkosten der Bereitstellung entspricht.</p>
+      <div class="math-block">$$\\sum_{i=1}^n GRS_i = MRT$$</div>
       <p>Wichtig: Wir addieren die Zahlungsbereitschaften <strong>vertikal</strong>, nicht die Mengen horizontal.</p>
-    </div>
-    <div class="section-block">
-      <h3>Marktversagen und Free-Riding</h3>
-      <p>Auf dem Markt wird das öffentliche Gut oft gar nicht oder in zu geringer Menge bereitgestellt, da jeder hofft, dass die anderen die Kosten tragen (Free-Riding).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Bereitstellung und Lösungsansätze</h4>
+<p>Private Bereitstellung: zu gering (Trittbrettfahren). Staatliche Bereitstellung: möglich, aber erfordert Information über Präferenzen (Revelation-Problem). Lindahl-Mechanismus: Personalisierte Preise entsprechend individueller Zahlungsbereitschaft.</p>
+      <div class="math-block">$$P_i^{Lindahl} = MRS_i \\quad \\text{für alle } i$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Marktversagen und Free-Riding</h4>
+<p>Auf dem Markt wird das öffentliche Gut oft gar nicht oder in zu geringer Menge bereitgestellt, da jeder hofft, dass die anderen die Kosten tragen (Free-Riding).</p>
       <p>Das Free-Rider-Problem ist strukturell identisch mit dem Gefangenendilemma: Individuelle Rationalität führt zu kollektiver Ineffizienz.</p>
-    </div>
-    <div class="section-block">
-      <h3>Bereitstellung und Lösungsansätze</h3>
-      <p>Private Bereitstellung: zu gering (Trittbrettfahren). Staatliche Bereitstellung: möglich, aber erfordert Information über Präferenzen (Revelation-Problem). Lindahl-Mechanismus: Personalisierte Preise entsprechend individueller Zahlungsbereitschaft.</p>
-      <div class="math-block">$$P_i^{Lindahl} = MRS_i \quad \text{für alle } i$$</div>
-    </div>
-    <div class="section-block">
-      <h3>Reine vs. unreine öffentliche Güter</h3>
-      <p>Reine öffentliche Güter: vollständig nicht-rival und nicht-ausschließbar (nationale Verteidigung). Unreine öffentliche Güter (Klub-Güter, allmend-Ressourcen): teilweise Rivalität oder Ausschließbarkeit möglich.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Vertikale vs. horizontale Aggregation:</strong> Bei privaten Gütern addieren wir individuelle Nachfragen horizontal (gleicher Preis, verschiedene Mengen). Bei öffentlichen Gütern addieren wir Zahlungsbereitschaften vertikal (gleiche Menge, verschiedene Preise). Verwechslung führt zu falschen Optimalmengen.</div>
-      <div class="warn-box"><strong>Lindahl-Gleichgewicht und strategisches Verhalten:</strong> Der Lindahl-Mechanismus ist theoretisch effizient, aber praktisch problematisch: Individuen haben einen Anreiz, ihre Zahlungsbereitschaft zu untertreiben (Preference Revelation Problem).</div>
-    </div>
-    <div class="section-block">
-      <h3>In der Klausur: Öffentliche Güter</h3>
-      <p><em>platform-added-explanation:</em> Samuelson: $\\sum MRS_i = MRT$ (vertikale Addition der Zahlungsbereitschaften). Free-Rider → Unterprovisionierung. Lindahl: personalisierte Preise — strategisches Untertreiben der Zahlungsbereitschaft. Klubgüter: teilweise Rivalität/Ausschließbarkeit.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Reine vs. unreine öffentliche Güter</h4>
+<p>Reine öffentliche Güter: vollständig nicht-rival und nicht-ausschließbar (nationale Verteidigung). Unreine öffentliche Güter (Klub-Güter, allmend-Ressourcen): teilweise Rivalität oder Ausschließbarkeit möglich.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Non-Rivalität &amp; Non-Excludability</h4>
+<p><em>platform-added-explanation:</em> Öffentliches Gut: $MC_{extra}=0$; freiwillige Finanzierung führt zum Trittbrettfahren → Unterprovision.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Lindahl &amp; Nash</h4>
+<p>Lindahl-Preise individualisiert; Nash-Lösung bei freiwilliger Beitragswahl typischerweise unter dem effizienten Niveau.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Öffentliche Güter</h4>
+<p><em>platform-added-explanation:</em> Samuelson: $\\\\sum MRS_i = MRT$ (vertikale Addition der Zahlungsbereitschaften). Free-Rider → Unterprovisionierung. Lindahl: personalisierte Preise — strategisches Untertreiben der Zahlungsbereitschaft. Klubgüter: teilweise Rivalität/Ausschließbarkeit.</p>
       <div class="warn-box"><strong>Vertikal vs. horizontal:</strong> Private Güter: Nachfrage horizontal addieren; öffentliche: Zahlungsbereitschaften vertikal.</div>
-    </div>
-    `,
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur (Plattform-Ergänzung)</h4>
+<p>Reine öffentliche Güter: $Rivalität=0$, $Ausschluss=0$. Sammlisches Gut: rival, nicht ausschließbar. Unterprovision weil $p=MC=0$ nicht finanzierbar — staatliche Bereitstellung oder Lindahl-Mechanismus qualitativ.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Vertikale vs. horizontale Aggregation:</strong> Bei privaten Gütern addieren wir individuelle Nachfragen horizontal (gleicher Preis, verschiedene Mengen). Bei öffentlichen Gütern addieren wir Zahlungsbereitschaften vertikal (gleiche Menge, verschiedene Preise). Verwechslung führt zu falschen Optimalmengen.</div>
+      <div class="warn-box"><strong>Lindahl-Gleichgewicht und strategisches Verhalten:</strong> Der Lindahl-Mechanismus ist theoretisch effizient, aber praktisch problematisch: Individuen haben einen Anreiz, ihre Zahlungsbereitschaft zu untertreiben (Preference Revelation Problem).</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Samuelson', eq: String.raw`$$\sum_{i=1}^n MRS_i = MC$$`, desc: 'Effizienzbedingung für öffentliche Güter', variables: { MRS_i: 'Grenzrate der Substitution von Person i', MC: 'Grenzkosten der Bereitstellung' } }
     ],
@@ -1048,22 +1574,66 @@ export const CONTENT = {
   },
   information_adverse: {
     motivation: 'Adverse Selection behandelt ex-ante Informationsasymmetrien: verborgene Typen vor Vertragsabschluss können gute Qualität aus dem Markt drängen.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Adverse Selection (Negativauslese)</h3>
-      <p>Tritt <strong>vor</strong> Vertragsschluss auf. Beispiel "Lemons-Market": Käufer kennen die Qualität gebrauchter Autos nicht und zahlen nur den Durchschnittspreis. Verkäufer guter Autos ziehen sich zurück, die Qualität sinkt weiter.</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Adverse Selection (Negativauslese)</h4>
+<p>Tritt <strong>vor</strong> Vertragsschluss auf. Beispiel "Lemons-Market": Käufer kennen die Qualität gebrauchter Autos nicht und zahlen nur den Durchschnittspreis. Verkäufer guter Autos ziehen sich zurück, die Qualität sinkt weiter.</p>
       <p>Resultat: Nur schlechte Qualitäten bleiben am Markt ("race to the bottom"). Im Extremfall vollständiger Marktversagen.</p>
-    </div>
-    <div class="section-block">
-      <h3>Marktfolge und Selektionsspirale</h3>
-      <p>Sinkt wegen Informationsproblemen die Durchschnittsqualität, sinkt auch die Zahlungsbereitschaft der Käufer. Dadurch verlassen weitere Hochqualitätsanbieter den Markt — eine Endogenisierung der Qualitätsverschlechterung.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Mittelwert-Fehler:</strong> Der erwartete Käuferwert ist kein neutraler „Durchschnitt“, sondern kann den Markt selbst verändern, weil Hochqualitätsanbieter bei zu niedrigen Preisen aussteigen.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Marktfolge und Selektionsspirale</h4>
+<p>Sinkt wegen Informationsproblemen die Durchschnittsqualität, sinkt auch die Zahlungsbereitschaft der Käufer. Dadurch verlassen weitere Hochqualitätsanbieter den Markt — eine Endogenisierung der Qualitätsverschlechterung.</p>
+
+
+<h4 class="theory-subsection-title">Mechanismus</h4>
+<p>Separating vs. pooling Equilibrium: Typen trennen sich durch Wahl oder nicht. Ineffizienz: zu wenig Handel oder Überinvestition in Signal. Prüfungsfrage: Wer bewegt sich entlang welcher Kurve (Indifferenz vs. Zero-Profit)?</p>
+      <div class="warn-box"><strong>Ex-ante vs. ex-post:</strong> Adverse Selection = vor Vertrag (Typ unbekannt). Moral Hazard = nach Vertrag (Aktion unbeobachtbar) — nicht verwechseln.</div>
+
+
+<h4 class="theory-subsection-title">Numerisches Beispiel</h4>
+<p>Markt mit zwei Qualitäten: WTP hoch $=100$, niedrig $=60$; Angebot kostet $40$ bzw. $70$. Bei Durchschnittspreis $80$ bleiben nur niedrige Qualität — Markt bricht teilweise zusammen.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Adverse Selection</h4>
+<p>Hidden characteristics vor Vertrag: Akerlof-Markt für Zitronen — Durchschnittspreis → gute Anbieter scheiden aus → Death Spiral. Signaling (Spence): Bildung als Signal bei $c_s \\\\neq c_t$. Screening (Rothschild-Stiglitz): Vertragspartner bietet Menü.</p>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Mittelwert-Fehler:</strong> Der erwartete Käuferwert ist kein neutraler „Durchschnitt“, sondern kann den Markt selbst verändern, weil Hochqualitätsanbieter bei zu niedrigen Preisen aussteigen.</div>
       <div class="warn-box"><strong>Policy-Fehler:</strong> Bei Adverse Selection braucht es Typtransparenz (Screening, Zertifikate, Garantien) statt bloßer Verhaltenskontrolle.</div>
-    </div>
-    `,
+
+<div class="section-block">
+<h4 class="theory-subsection-title">Mechanismus</h4>
+<p>Separating vs. pooling Equilibrium: Typen trennen sich durch Wahl oder nicht. Ineffizienz: zu wenig Handel oder Überinvestition in Signal. Prüfungsfrage: Wer bewegt sich entlang welcher Kurve (Indifferenz vs. Zero-Profit)?</p>
+      <div class="warn-box"><strong>Ex-ante vs. ex-post:</strong> Adverse Selection = vor Vertrag (Typ unbekannt). Moral Hazard = nach Vertrag (Aktion unbeobachtbar) — nicht verwechseln.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Numerisches Beispiel</h4>
+<p>Markt mit zwei Qualitäten: WTP hoch $=100$, niedrig $=60$; Angebot kostet $40$ bzw. $70$. Bei Durchschnittspreis $80$ bleiben nur niedrige Qualität — Markt bricht teilweise zusammen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Adverse Selection</h4>
+<p>Hidden characteristics vor Vertrag: Akerlof-Markt für Zitronen — Durchschnittspreis → gute Anbieter scheiden aus → Death Spiral. Signaling (Spence): Bildung als Signal bei $c_s \\neq c_t$. Screening (Rothschild-Stiglitz): Vertragspartner bietet Menü.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Erwarteter Wert', eq: String.raw`$$E[v] = q \cdot v_H + (1-q) \cdot v_L$$`, desc: 'Preis bei Unwissenheit', variables: { q: 'Anteil hoher Qualität', v_H: 'Wert hoher Qualität', v_L: 'Wert niedriger Qualität' } }
     ],
@@ -1092,30 +1662,71 @@ export const CONTENT = {
   },
   information_moralhazard: {
     motivation: 'Moral Hazard und Signaling/Screening behandeln ex-post Handlungsprobleme bzw. Trennmechanismen bei asymmetrischer Information.',
-    theorie: String.raw`
-    <div class="section-block">
-      <h3>Moral Hazard (Hidden Action)</h3>
-      <p>Nach Vertragsabschluss kann der Prinzipal die Handlung des Agenten nur unvollständig beobachten. Ohne passende Anreize sinkt die gewünschte Anstrengung — klassisch: Versicherung senkt Vorsicht, Managervertrag ohne Performance-Kopplung.</p>
-    </div>
-    <div class="section-block">
-      <h3>Signaling und Screening</h3>
-      <p>Bei verborgenen Typen (Hidden Characteristics) kann die informierte Seite Signale senden (Signaling), die uninformierte Seite kann Vertragsmenüs zur Selbstselektion anbieten (Screening).</p>
-      <p>Separierende Gleichgewichte sind nur stabil, wenn Nachahmung für den ungeeigneten Typ hinreichend teuer ist.</p>
-    </div>
-    <div class="section-block">
-      <h3>Prinzipal-Agenten-Logik</h3>
-      <div class="math-block">$$E[\pi_P] = E[y] - w \quad \text{s.t.} \quad IC,\;PC$$</div>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Moral Hazard (Hidden Action)</h4>
+<p>Nach Vertragsabschluss kann der Prinzipal die Handlung des Agenten nur unvollständig beobachten. Ohne passende Anreize sinkt die gewünschte Anstrengung — klassisch: Versicherung senkt Vorsicht, Managervertrag ohne Performance-Kopplung.</p>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Prinzipal-Agenten-Logik</h4>
+<div class="math-block">$$E[\\\\pi_P] = E[y] - w \\\\quad \\\\text{s.t.} \\\\quad IC,\\\\;PC$$</div>
       <p>Verträge müssen gleichzeitig Teilnahmeanreiz (PC) und Anreizkompatibilität (IC) erfüllen. Performance-Löhne, Bonus-Malus und Selbstbehalte sind ökonomische Antworten auf Moral Hazard.</p>
-    </div>
-    <div class="section-block">
-      <h3>Managerverträge (VL 20)</h3>
-      <p>Ein Manager wählt Anstrengung $e$; der Erfolg ist stochastisch. Ein fixer Lohn erzeugt zu wenig Anstrengung, ein reiner Erfolgsbonus kann zu viel Risiko laden. Optimal ist oft eine Mischung aus Fixgehalt und variabler Komponente.</p>
-    </div>
-    <div class="section-block">
-      <h3>Fehleranalyse</h3>
-      <div class="warn-box"><strong>Adverse Selection vs. Moral Hazard:</strong> Ex-ante Typproblem (vor Vertrag) und ex-post Verhaltensproblem (nach Vertrag) erfordern unterschiedliche Instrumente.</div>
-    </div>
-    `,
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+
+<h4 class="theory-subsection-title">Signaling und Screening</h4>
+<p>Bei verborgenen Typen (Hidden Characteristics) kann die informierte Seite Signale senden (Signaling), die uninformierte Seite kann Vertragsmenüs zur Selbstselektion anbieten (Screening).</p>
+      <p>Separierende Gleichgewichte sind nur stabil, wenn Nachahmung für den ungeeigneten Typ hinreichend teuer ist.</p>
+
+
+<h4 class="theory-subsection-title">Managerverträge (VL 20)</h4>
+<p>Ein Manager wählt Anstrengung $e$; der Erfolg ist stochastisch. Ein fixer Lohn erzeugt zu wenig Anstrengung, ein reiner Erfolgsbonus kann zu viel Risiko laden. Optimal ist oft eine Mischung aus Fixgehalt und variabler Komponente.</p>
+
+
+<h4 class="theory-subsection-title">In der Klausur: Moral Hazard</h4>
+<p>Hidden action: Agent wählt Aufwand $a$ nach Vertrag. Erwartungsprinzipal maximiert $E[\\\\pi|a]$ minus Risikoaufschlag. Ergebnis: Teilversicherung optimal bei risikoaversem Agent — Vollversicherung zerstört Anreize.</p>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Trade-off Versicherung vs. Anreize zeichnen. Monitoring/Performance Pay als institutionelle Antwort. Bei Banken: Bailout erzeugt Ex-post-Moral Hazard (Risikoübernahme).</p>
+      <div class="warn-box"><strong>Partizipation vs. Anreiz:</strong> Beide Nebenbedingungen (IR + IC) prüfen — nur IC reicht nicht für Gleichgewicht.</div>
+
+
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge. Bei Marktversagen: Markt- vs. Sozialoptimum und Instrument.</p>
+<p><em>platform-added-explanation</em> wo kein VL-Seitenanker — Primär-PDF für Randnotation.</p>
+
+
+<h4 class="theory-subsection-title">Fehleranalyse</h4>
+<div class="warn-box"><strong>Adverse Selection vs. Moral Hazard:</strong> Ex-ante Typproblem (vor Vertrag) und ex-post Verhaltensproblem (nach Vertrag) erfordern unterschiedliche Instrumente.</div>
+
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Moral Hazard</h4>
+<p>Hidden action: Agent wählt Aufwand $a$ nach Vertrag. Erwartungsprinzipal maximiert $E[\\pi|a]$ minus Risikoaufschlag. Ergebnis: Teilversicherung optimal bei risikoaversem Agent — Vollversicherung zerstört Anreize.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Trade-off Versicherung vs. Anreize zeichnen. Monitoring/Performance Pay als institutionelle Antwort. Bei Banken: Bailout erzeugt Ex-post-Moral Hazard (Risikoübernahme).</p>
+      <div class="warn-box"><strong>Partizipation vs. Anreiz:</strong> Beide Nebenbedingungen (IR + IC) prüfen — nur IC reicht nicht für Gleichgewicht.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Prinzipalziel', eq: String.raw`$$\max_w E[\pi_P]=E[y]-w \;\;\text{s.t.}\;\; IC,PC$$`, desc: 'Vertragswahl unter versteckter Handlung.' },
       { label: 'IC-Bedingung', eq: String.raw`$$EU_A(w_A|e_H)\ge EU_A(w_A|e_L)$$`, desc: 'Agent wählt gewünschte Anstrengung.' },

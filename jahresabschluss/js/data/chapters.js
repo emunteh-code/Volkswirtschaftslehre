@@ -44,27 +44,53 @@ export const CHAPTERS = [
 export const CONTENT = {
   rechnungswesen_intro: {
     motivation: 'Bevor einzelne Kontierungen Sinn ergeben, musst du die Logik des gesamten Rechnungswesens verstehen: Wer soll informiert werden, was misst Bilanz, was misst GuV, und warum bleibt die Bilanzgleichung immer erhalten?',
-    theorie: [
-      section(
-        'Zweck des Jahresabschlusses',
-        `<p>Der Jahresabschluss informiert externe und interne Adressaten über Vermögens-, Finanz- und Ertragslage. Für Gläubiger zählt insbesondere Vorsicht und Verlässlichkeit, für Eigentümer zusätzlich der Erfolgsnachweis und die Grundlage der Gewinnverwendung.</p>`
-      ),
-      section(
-        'Bilanz und GuV als zwei Perspektiven',
-        `<p>Die Bilanz ist stichtagsbezogen und zeigt Vermögen und Kapital am Abschlussstichtag. Die GuV ist periodenbezogen und erklärt, wie der Jahreserfolg entstanden ist. Beide zusammen liefern erst das vollständige Bild des Unternehmens.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{Aktiva} = \text{Passiva} = \text{Eigenkapital} + \text{Fremdkapital}$$`))}
-      `
-      ),
-      section(
-        'Doppelte Buchführung als Stabilitätsmechanismus',
-        `<p>Jeder Geschäftsvorfall berührt mindestens zwei Konten. Dadurch bleibt die Bilanzgleichung erhalten und jede Veränderung wird nachvollziehbar dokumentiert. Genau diese Doppik ist die Grundlage der späteren Abschlusslogik.</p>
-         ${warn('Einstiegsfehler:', 'Viele Antworten behandeln Bilanz und GuV wie zwei unverbundene Tabellen. Tatsächlich erklärt die GuV die periodische Veränderung des Eigenkapitals.')}`
-      ),
-      section(
-        'Adressaten und Informationszweck',
-        `<p>Der Companion unterscheidet externe Adressaten (Gläubiger, Investoren, Behörden) von interner Steuerung. Für Gläubiger zählen Vorsicht und Verlässlichkeit; für Eigentümer zusätzlich Erfolgsnachweis und Ausschüttungsgrundlage. In Klausuren musst du deshalb nicht nur Konten kennen, sondern erklären, <em>welche</em> Information ein Posten für welchen Adressaten liefert.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Zweck des Jahresabschlusses</h4>
+<p>Der Jahresabschluss informiert externe und interne Adressaten über Vermögens-, Finanz- und Ertragslage. Für Gläubiger zählt insbesondere Vorsicht und Verlässlichkeit, für Eigentümer zusätzlich der Erfolgsnachweis und die Grundlage der Gewinnverwendung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Bilanz und GuV als zwei Perspektiven</h4>
+<p>Die Bilanz ist stichtagsbezogen und zeigt Vermögen und Kapital am Abschlussstichtag. Die GuV ist periodenbezogen und erklärt, wie der Jahreserfolg entstanden ist. Beide zusammen liefern erst das vollständige Bild des Unternehmens.</p>
+         <div class="math-block math-block--theory">$$\\text{Aktiva} = \\text{Passiva} = \\text{Eigenkapital} + \\text{Fremdkapital}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Doppelte Buchführung als Stabilitätsmechanismus</h4>
+<p>Jeder Geschäftsvorfall berührt mindestens zwei Konten. Dadurch bleibt die Bilanzgleichung erhalten und jede Veränderung wird nachvollziehbar dokumentiert. Genau diese Doppik ist die Grundlage der späteren Abschlusslogik.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Einstiegsfehler:</strong> Viele Antworten behandeln Bilanz und GuV wie zwei unverbundene Tabellen. Tatsächlich erklärt die GuV die periodische Veränderung des Eigenkapitals.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Adressaten und Informationszweck</h4>
+<p>Der Companion unterscheidet externe Adressaten (Gläubiger, Investoren, Behörden) von interner Steuerung. Für Gläubiger zählen Vorsicht und Verlässlichkeit; für Eigentümer zusätzlich Erfolgsnachweis und Ausschüttungsgrundlage. In Klausuren musst du deshalb nicht nur Konten kennen, sondern erklären, <em>welche</em> Information ein Posten für welchen Adressaten liefert.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Rechnungswesen</h4>
+<p>GoB: Vollständigkeit, Richtigkeit, Klarheit, Fortführung, Periodengerechtigkeit. Bilanz = Vermögen (Aktiva) vs. Kapital (Passiva). GuV = Aufwendungen vs. Erträge — periodenbezogen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung. Inventur/Inventar als Bestandsnachweis vor Abschluss.</p>
+      <div class="warn-box"><strong>GuV vs. Cashflow:</strong> Periodenerfolg ≠ Liquidität — Abschreibungen ohne Zahlungsabfluss.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Bilanzgleichung', eq: String.raw`$$A = P = EK + FK$$`, desc: 'Mittelverwendung entspricht Mittelherkunft.' },
       { label: 'Jahresergebnis', eq: String.raw`$$Jahresergebnis = Erträge - Aufwendungen$$`, desc: 'Die GuV erklärt die Erfolgsänderung der Periode.' },
@@ -100,32 +126,44 @@ export const CONTENT = {
 
   gob_rechtsgrundlagen: {
     motivation: 'GoB und Rechtsgrundlagen bestimmen den normativen Rahmen der Rechnungslegung. Ohne diesen Rahmen bleibt unklar, welche Informations- und Vorsichtslogik der Abschluss erfüllen muss.',
-    theorie: [
-      section(
-        'GoB und Rechtsrahmen',
-        `<p>Die GoB sichern Klarheit, Vollständigkeit, Nachprüfbarkeit und Vorsicht. Für Klausuren besonders wichtig sind Realisationsprinzip, Imparitätsprinzip und Stetigkeit, weil sie entscheiden, wann Erfolg ausgewiesen werden darf und wann Risiken bereits zu erfassen sind.</p>`
-      ),
-      section(
-        'Rechnungslegungsrecht als Strukturvorgabe',
-        `<p>Die Rechnungslegung folgt nicht bloß Rechenregeln, sondern gesetzlichen Rahmenbedingungen (u.a. HGB). Für die Klausur heißt das: Rechtsgrundlage, GoB-Logik und Informationszweck sind zusammen zu denken.</p>`
-      ),
-      section(
-        'Vorsicht als Leitplanke',
-        `<p>Realisations- und Imparitätsprinzip wirken als vorsichtsorientierte Leitplanken der Gewinnermittlung. In Prüfungen zeigt sich das an der asymmetrischen Behandlung von Chancen und Risiken.</p>
-         ${warn('Prüfungsfehler:', 'GoB werden oft nur genannt, aber nicht auf den Fall angewendet. Klausurstark ist erst die konkrete Ableitung der Bilanzierungsentscheidung aus dem Prinzip.')}`
-      ),
-      section(
-        '§ 252 HGB: Realisation und Vorsicht klausurnah verbinden',
-        `<p>In der Klausur werden Realisations- und Vorsichtsprinzip regelmäßig ausdrücklich mit § 252 HGB verknüpft. Methodisch wichtig ist: Gewinne werden erst bei Realisation erfasst; vorhersehbare Risiken und Verluste sind dagegen vorsichtig zu berücksichtigen.</p>
-         ${mathBlock(String.raw`\text{§ 252 HGB: Vorsicht + Realisation} \Rightarrow \text{asymmetrischer Erfolgsausweis}`)}
-      `
-      ),
-      section(
-        'Maßgeblichkeitsprinzip und latente Steuern',
-        `<p>Übungs- und Probeklausurmaterial fordert explizit den Maßgeblichkeitsgrundsatz samt Ausnahmen sowie die Funktion latenter Steuern. Latente Steuern zeigen zukünftige steuerliche Mehr- oder Minderbelastungen aus unterschiedlichen handels- und steuerrechtlichen Wertansätzen.</p>
-         ${warn('Exam-Trap:', 'Maßgeblichkeit und latente Steuern werden oft getrennt gelernt. Klausurstark ist die Brücke: Abweichende Wertansätze heute -> steuerliche Wirkungen in Folgeperioden.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">GoB und Rechtsrahmen</h4>
+<p>Die GoB sichern Klarheit, Vollständigkeit, Nachprüfbarkeit und Vorsicht. Für Klausuren besonders wichtig sind Realisationsprinzip, Imparitätsprinzip und Stetigkeit, weil sie entscheiden, wann Erfolg ausgewiesen werden darf und wann Risiken bereits zu erfassen sind.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rechnungslegungsrecht als Strukturvorgabe</h4>
+<p>Die Rechnungslegung folgt nicht bloß Rechenregeln, sondern gesetzlichen Rahmenbedingungen (u.a. HGB). Für die Klausur heißt das: Rechtsgrundlage, GoB-Logik und Informationszweck sind zusammen zu denken.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Vorsicht als Leitplanke</h4>
+<p>Realisations- und Imparitätsprinzip wirken als vorsichtsorientierte Leitplanken der Gewinnermittlung. In Prüfungen zeigt sich das an der asymmetrischen Behandlung von Chancen und Risiken.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Prüfungsfehler:</strong> GoB werden oft nur genannt, aber nicht auf den Fall angewendet. Klausurstark ist erst die konkrete Ableitung der Bilanzierungsentscheidung aus dem Prinzip.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Maßgeblichkeitsprinzip und latente Steuern</h4>
+<p>Übungs- und Probeklausurmaterial fordert explizit den Maßgeblichkeitsgrundsatz samt Ausnahmen sowie die Funktion latenter Steuern. Latente Steuern zeigen zukünftige steuerliche Mehr- oder Minderbelastungen aus unterschiedlichen handels- und steuerrechtlichen Wertansätzen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Exam-Trap:</strong> Maßgeblichkeit und latente Steuern werden oft getrennt gelernt. Klausurstark ist die Brücke: Abweichende Wertansätze heute -> steuerliche Wirkungen in Folgeperioden.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">§ 252 HGB: Realisation und Vorsicht klausurnah verbinden</h4>
+<p>In der Klausur werden Realisations- und Vorsichtsprinzip regelmäßig ausdrücklich mit § 252 HGB verknüpft. Methodisch wichtig ist: Gewinne werden erst bei Realisation erfasst; vorhersehbare Risiken und Verluste sind dagegen vorsichtig zu berücksichtigen.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">§ 252 HGB: Vorsicht</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Realisation</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">asymmetrischer Erfolgsausweis</span></div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Realisationsprinzip', eq: String.raw`\text{Gewinne erst bei Realisation}`, desc: 'Noch nicht realisierte Gewinne dürfen grundsätzlich nicht vorgezogen werden.' },
       { label: 'Imparitätsprinzip', eq: String.raw`\text{Verluste früh, Gewinne spät}`, desc: 'Asymmetrische Vorsicht im HGB.' },
@@ -169,31 +207,49 @@ export const CONTENT = {
 
   inventur_inventar_bilanzansatz: {
     motivation: 'Inventur, Inventar und Bilanzansatz bilden die technische Eingangsschleuse in den Abschluss. Hier entscheidet sich, welche Posten überhaupt bilanziell erscheinen.',
-    theorie: [
-      section(
-        'Inventur und Inventar',
-        `<p>Die Inventur ist die tatsächliche Bestandsaufnahme. Ihr Ergebnis ist das Inventar als geordnetes Bestandsverzeichnis. Erst aus dieser Grundlage wird die Bilanz systematisch verdichtet.</p>`
-      ),
-      section(
-        'Bilanzansatz als Ob-Frage',
-        `<p>Bilanzansatz fragt, ob ein Vermögensgegenstand oder eine Schuld überhaupt bilanziert werden darf oder muss. Das ist logisch von der späteren Wertfrage getrennt.</p>`
-      ),
-      section(
-        'Ansatz vor Bewertung',
-        `<p>In der Prüfung gilt: Erst Ansatzfähigkeit und Bilanzierungsfähigkeit klären, dann erst bewerten. Diese Reihenfolge ist methodisch zwingend und fehleranfällig.</p>
-         ${warn('Reihenfolgefehler:', 'Viele Lösungen springen direkt zur Zahl. Ohne geklärten Ansatz ist jede Bewertung methodisch verfrüht.')}`
-      ),
-      section(
-        'Vom Einzelbestand zum Abschlussausweis',
-        `<p>Zwischen Inventur und Bilanz liegt mehr als bloß ein Abschreibprozess. Aus dem Einzelbestand muss ein bilanzfähiger Posten mit richtiger Kategorie, Ansatzentscheidung und späterem Ausweis werden. Gerade diese Kette macht aus Rohdaten Abschlusswissen.</p>
-         <p>Deshalb genügt in Klausuren weder „ist da“ noch „hat einen Wert“. Erst die saubere Übersetzung vom realen Bestand zum Bilanzposten beantwortet die eigentliche Abschlussfrage.</p>`
-      ),
-      section(
-        'Prüfungskette statt Definitionsinsel',
-        `<p>Eine belastbare Lösung arbeitet deshalb in fester Reihenfolge: Bestand identifizieren, dem Abschlusszweck zuordnen, Ansatzfähigkeit prüfen, Bilanzansatz bejahen oder verneinen und erst anschließend zur Bewertung bzw. zum Ausweis weitergehen.</p>
-         ${warn('Körperliche Existenz überschätzen:', 'Dass etwas physisch vorhanden ist, entscheidet noch nicht allein über den Bilanzansatz. Eigentum, wirtschaftliche Zuordnung und Bilanzierungslogik müssen mitgeprüft werden.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Inventur und Inventar</h4>
+<p>Die Inventur ist die tatsächliche Bestandsaufnahme. Ihr Ergebnis ist das Inventar als geordnetes Bestandsverzeichnis. Erst aus dieser Grundlage wird die Bilanz systematisch verdichtet.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Bilanzansatz als Ob-Frage</h4>
+<p>Bilanzansatz fragt, ob ein Vermögensgegenstand oder eine Schuld überhaupt bilanziert werden darf oder muss. Das ist logisch von der späteren Wertfrage getrennt.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Ansatz vor Bewertung</h4>
+<p>In der Prüfung gilt: Erst Ansatzfähigkeit und Bilanzierungsfähigkeit klären, dann erst bewerten. Diese Reihenfolge ist methodisch zwingend und fehleranfällig.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Reihenfolgefehler:</strong> Viele Lösungen springen direkt zur Zahl. Ohne geklärten Ansatz ist jede Bewertung methodisch verfrüht.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Vom Einzelbestand zum Abschlussausweis</h4>
+<p>Zwischen Inventur und Bilanz liegt mehr als bloß ein Abschreibprozess. Aus dem Einzelbestand muss ein bilanzfähiger Posten mit richtiger Kategorie, Ansatzentscheidung und späterem Ausweis werden. Gerade diese Kette macht aus Rohdaten Abschlusswissen.</p>
+         <p>Deshalb genügt in Klausuren weder „ist da“ noch „hat einen Wert“. Erst die saubere Übersetzung vom realen Bestand zum Bilanzposten beantwortet die eigentliche Abschlussfrage.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungskette statt Definitionsinsel</h4>
+<p>Eine belastbare Lösung arbeitet deshalb in fester Reihenfolge: Bestand identifizieren, dem Abschlusszweck zuordnen, Ansatzfähigkeit prüfen, Bilanzansatz bejahen oder verneinen und erst anschließend zur Bewertung bzw. zum Ausweis weitergehen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Körperliche Existenz überschätzen:</strong> Dass etwas physisch vorhanden ist, entscheidet noch nicht allein über den Bilanzansatz. Eigentum, wirtschaftliche Zuordnung und Bilanzierungslogik müssen mitgeprüft werden.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Inventurfolge', eq: String.raw`\text{Inventur} \rightarrow \text{Inventar} \rightarrow \text{Bilanz}`, desc: 'Vom Einzelbestand zur Abschlussverdichtung.' },
       { label: 'Prüfungsfolge', eq: String.raw`\text{Ansatz} \rightarrow \text{Bewertung}`, desc: 'Existenzfrage vor Wertfrage.' },
@@ -239,31 +295,56 @@ export const CONTENT = {
 
   buchen_konten: {
     motivation: 'Die doppelte Buchführung wird erst dann klausursicher, wenn du Bestands- und Erfolgskonten nicht nur benennen, sondern sauber in Soll und Haben denken kannst.',
-    theorie: [
-      section(
-        'Bestandskonten',
-        `<p>Bestandskonten leiten sich direkt aus der Bilanz ab. Aktivkonten nehmen Zugänge im Soll und Abgänge im Haben auf; bei Passivkonten ist es umgekehrt. Dieses Grundschema trägt alle späteren Buchungssätze.</p>`
-      ),
-      section(
-        'Erfolgskonten',
-        `<p>Erfolgskonten erfassen Aufwendungen und Erträge und werden am Periodenende über die GuV abgeschlossen. Aufwendungen mindern das Eigenkapital, Erträge erhöhen es. Genau deshalb ist die Verbindung zur Bilanz immer mitzudenken.</p>`
-      ),
-      section(
-        'Buchungssätze lesen und bilden',
-        `<p>Der Buchungssatz folgt der Logik „Soll an Haben“. In Klausuren zählt nicht bloß das Ergebnis, sondern die Begründung über Kontenart und Bewegungsrichtung.</p>
-         ${warn('Kontenfehler:', 'Wenn Soll und Haben auswendig statt systematisch gelernt werden, kippen besonders gemischte Geschäftsvorfälle schnell in falsche Buchungssätze.')}`
-      ),
-      section(
-        'Erfolgskonten und GuV-Abschluss',
-        `<p>Erfolgskonten sammeln periodische Aufwendungen und Erträge. Am Periodenende werden sie über ein GuV-Konto abgeschlossen; das Ergebnis fließt in das Eigenkapital. Die Companion-Logik „Buchen auf Bestands- und Erfolgskonten“ verlangt deshalb immer die Verknüpfung: Buchungssatz → Erfolgswirkung → EK-Veränderung.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{GuV-Abschluss: Erfolgskonten} \rightarrow \text{GuV-Konto} \rightarrow \text{EK}$$`))}
-      `
-      ),
-      section(
-        'Prüfungsroutine für Buchungssätze',
-        `<p>Die Quelle arbeitet mit T-Konten und expliziten Soll-/Haben-Buchungen. Klausurstabil ist deshalb: (1) betroffene Konten benennen, (2) Kontenart bestimmen, (3) Zugang/Abgang zuordnen, (4) Buchungssatz formulieren, (5) Bilanz- oder Erfolgswirkung kurz erklären.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Bestandskonten</h4>
+<p>Bestandskonten leiten sich direkt aus der Bilanz ab. Aktivkonten nehmen Zugänge im Soll und Abgänge im Haben auf; bei Passivkonten ist es umgekehrt. Dieses Grundschema trägt alle späteren Buchungssätze.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Erfolgskonten</h4>
+<p>Erfolgskonten erfassen Aufwendungen und Erträge und werden am Periodenende über die GuV abgeschlossen. Aufwendungen mindern das Eigenkapital, Erträge erhöhen es. Genau deshalb ist die Verbindung zur Bilanz immer mitzudenken.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Buchungssätze lesen und bilden</h4>
+<p>Der Buchungssatz folgt der Logik „Soll an Haben“. In Klausuren zählt nicht bloß das Ergebnis, sondern die Begründung über Kontenart und Bewegungsrichtung.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kontenfehler:</strong> Wenn Soll und Haben auswendig statt systematisch gelernt werden, kippen besonders gemischte Geschäftsvorfälle schnell in falsche Buchungssätze.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Erfolgskonten und GuV-Abschluss</h4>
+<p>Erfolgskonten sammeln periodische Aufwendungen und Erträge. Am Periodenende werden sie über ein GuV-Konto abgeschlossen; das Ergebnis fließt in das Eigenkapital. Die Companion-Logik „Buchen auf Bestands- und Erfolgskonten“ verlangt deshalb immer die Verknüpfung: Buchungssatz → Erfolgswirkung → EK-Veränderung.</p>
+         <div class="math-block math-block--theory">$$\\text{GuV-Abschluss: Erfolgskonten} \\rightarrow \\text{GuV-Konto} \\rightarrow \\text{EK}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kontenrahmen-Logik</h4>
+<p>Aktiva: Soll = Zugang. Passiva/EK: Haben = Zugang. Erfolgskonten: Aufwand Soll, Ertrag Haben — Abschluss über GuV auf Eigenkapital.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsroutine für Buchungssätze</h4>
+<p>Die Quelle arbeitet mit T-Konten und expliziten Soll-/Haben-Buchungen. Klausurstabil ist deshalb: (1) betroffene Konten benennen, (2) Kontenart bestimmen, (3) Zugang/Abgang zuordnen, (4) Buchungssatz formulieren, (5) Bilanz- oder Erfolgswirkung kurz erklären.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p>Immer beide Seiten der Buchung und die Bilanzwirkung nennen; „nur GuV" reicht in Klausuren nicht.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Aktivkonto', eq: String.raw`\text{AB im Soll,\ Zugänge Soll,\ Abgänge Haben}`, desc: 'Grundlogik eines Aktivkontos.' },
       { label: 'Passivkonto', eq: String.raw`\text{AB im Haben,\ Zugänge Haben,\ Abgänge Soll}`, desc: 'Spiegelbildliche Logik des Passivkontos.' },
@@ -307,31 +388,56 @@ export const CONTENT = {
 
   buchfuehrung_orga: {
     motivation: 'Rechnungslegung ist nicht nur Kontierung, sondern auch Organisation: Ohne Belege, Bücher und Ordnungssysteme wäre der Abschluss weder prüfbar noch verlässlich.',
-    theorie: [
-      section(
-        'Grundbuch, Hauptbuch und Nebenbücher',
-        `<p>Das Grundbuch dokumentiert Geschäftsvorfälle chronologisch, das Hauptbuch systematisch nach Konten. Nebenbücher vertiefen spezielle Teilbereiche wie Debitoren, Kreditoren oder Anlagen. Zusammen schaffen sie Nachvollziehbarkeit und Ordnung.</p>`
-      ),
-      section(
-        'Kontenrahmen und Kontenplan',
-        `<p>Kontenrahmen bieten ein allgemeines Ordnungsschema, der Kontenplan konkretisiert es für das Unternehmen. In Klausuren hilft diese Struktur, Geschäftsvorfälle zügig der richtigen Kontenklasse zuzuordnen.</p>`
-      ),
-      section(
-        'Belegprinzip',
-        `<p>Keine Buchung ohne Beleg: Jeder Buchungssatz braucht eine nachvollziehbare Dokumentationsbasis. Dieses Prinzip ist organisatorisch und klausurmethodisch wichtig, weil es zeigt, dass Rechnungslegung prüfungs- und kontrollfähig bleiben muss.</p>
-         ${warn('Organisationsblindheit:', 'Viele Lernende sehen nur den Kontenplan. Für ordnungsmäßige Buchführung gehören aber immer auch Belege und Buchungsnachweise dazu.')}`
-      ),
-      section(
-        'Nebenbücher und Kontrollfunktion',
-        `<p>Debitoren-, Kreditoren- und Anlagennebenbücher entlasten das Hauptbuch und sichern Detailnachweise. In Klausuren zeigt sich die Kontrollfunktion: Summen der Nebenbücher müssen mit den Sammelkonten im Hauptbuch übereinstimmen.</p>`
-      ),
-      section(
-        'Prüfungsroutine Buchführungsorganisation',
-        `<p>Companion-Logik: Erst Belegart (Rechnung, Bank, Lohn), dann Buchungsweg (Grundbuch → Hauptbuch), dann Auswertungskonto. Fehler entstehen, wenn die chronologische Spur unterbrochen ist.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{Beleg} \rightarrow \text{Grundbuch} \rightarrow \text{Hauptbuch} \rightarrow \text{Bilanz/GuV}$$`))}
-      `
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Grundbuch, Hauptbuch und Nebenbücher</h4>
+<p>Das Grundbuch dokumentiert Geschäftsvorfälle chronologisch, das Hauptbuch systematisch nach Konten. Nebenbücher vertiefen spezielle Teilbereiche wie Debitoren, Kreditoren oder Anlagen. Zusammen schaffen sie Nachvollziehbarkeit und Ordnung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kontenrahmen und Kontenplan</h4>
+<p>Kontenrahmen bieten ein allgemeines Ordnungsschema, der Kontenplan konkretisiert es für das Unternehmen. In Klausuren hilft diese Struktur, Geschäftsvorfälle zügig der richtigen Kontenklasse zuzuordnen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Belegprinzip</h4>
+<p>Keine Buchung ohne Beleg: Jeder Buchungssatz braucht eine nachvollziehbare Dokumentationsbasis. Dieses Prinzip ist organisatorisch und klausurmethodisch wichtig, weil es zeigt, dass Rechnungslegung prüfungs- und kontrollfähig bleiben muss.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Organisationsblindheit:</strong> Viele Lernende sehen nur den Kontenplan. Für ordnungsmäßige Buchführung gehören aber immer auch Belege und Buchungsnachweise dazu.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Nebenbücher und Kontrollfunktion</h4>
+<p>Debitoren-, Kreditoren- und Anlagennebenbücher entlasten das Hauptbuch und sichern Detailnachweise. In Klausuren zeigt sich die Kontrollfunktion: Summen der Nebenbücher müssen mit den Sammelkonten im Hauptbuch übereinstimmen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsroutine Buchführungsorganisation</h4>
+<p>Companion-Logik: Erst Belegart (Rechnung, Bank, Lohn), dann Buchungsweg (Grundbuch → Hauptbuch), dann Auswertungskonto. Fehler entstehen, wenn die chronologische Spur unterbrochen ist.</p>
+         <div class="math-block math-block--theory">$$\\text{Beleg} \\rightarrow \\text{Grundbuch} \\rightarrow \\text{Hauptbuch} \\rightarrow \\text{Bilanz/GuV}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Buchführung</h4>
+<p>Doppelte Buchführung: jeder Vorgang Soll und Haben. Kontenrahmen SKR03/04 — Sachkonten vs. Personenkonten. Beleg → Buchung → Journal → Hauptbuch → SuSa → Bilanz/GuV.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Organisation: wer bucht, wer kontrolliert (Funktionstrennung). Periodengerechte Abgrenzung: aktive/passive Rechnungsabgrenzung.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Belegprinzip', eq: String.raw`\text{Keine Buchung ohne Beleg}`, desc: 'Organisatorischer Kern ordnungsmäßiger Buchführung.' },
       { label: 'Systemlogik', eq: String.raw`\text{chronologisch} \rightarrow \text{sachlich geordnet}`, desc: 'Vom Grundbuch zum Hauptbuch.' },
@@ -359,36 +465,61 @@ export const CONTENT = {
 
   anlagevermoegen: {
     motivation: 'Anlagevermögen und Abschreibungen prägen den langfristigen Bilanzaufbau. Gerade hier zeigt sich, wie Bewertung, Vorsicht und Erfolgsermittlung zusammenspielen.',
-    theorie: [
-      section(
-        'Was zum Anlagevermögen gehört',
-        `<p>Anlagevermögen umfasst Gegenstände, die dem Geschäftsbetrieb dauerhaft dienen. Dazu zählen immaterielle Vermögensgegenstände, Sachanlagen und Finanzanlagen. Die Zugehörigkeit richtet sich nicht nach dem Gegenstand an sich, sondern nach seiner betrieblichen Zweckbestimmung.</p>`
-      ),
-      section(
-        'Planmäßige und außerplanmäßige Abschreibung',
-        `<p>Planmäßige Abschreibungen verteilen Anschaffungs- oder Herstellungskosten über die Nutzungsdauer. Außerplanmäßige Abschreibungen greifen bei Wertminderungen. Beide sind klausurtypisch, weil sie Bilanzwert und Periodenerfolg zugleich beeinflussen.</p>
-         ${mathBlock(String.raw`$$AfA_{linear} = \frac{AK - RW}{n}$$`)}
-      `
-      ),
-      section(
-        'Zuschreibung und Grenzen',
-        `<p>Entfällt der Grund einer außerplanmäßigen Abschreibung, kann oder muss zugeschrieben werden, jedoch nur bis zu den fortgeführten Anschaffungskosten. Auch diese Obergrenze ist klausurwichtig.</p>
-         ${warn('Abschreibungsfehler:', 'Lineare AfA ist nur die Standardtechnik. In der Prüfung musst du trotzdem immer zuerst fragen, welche Wertminderung vorliegt und ob planmäßig oder außerplanmäßig abzuschreiben ist.')}`
-      ),
-      section(
-        'GWG und Aktivierungsschwelle',
-        `<p>Geringwertige Wirtschaftsgüter (GWG) bis 800 € netto (bzw. 1.000 € ab 2024 in der Praxis) können sofort als Aufwand gebucht werden (§ 6 Abs. 2 EStG / Sammelposten-Option). Liegt der Wert darüber, ist zu aktivieren und planmäßig abzuschreiben. Die Schwelle entscheidet über Bilanzposten vs. Sofortaufwand.</p>`
-      ),
-      section(
-        'Buchungskette Anlagenzugang',
-        `<p>Typischer Ablauf: (1) Anschaffung — Anlage an Verbindlichkeiten/Kasse. (2) Planmäßige AfA zum Jahresende — AfA an Anlage. (3) Außerplanmäßige AfA bei Wertminderung — außerplanm. AfA an Anlage. GuV-Wirkung: AfA mindert den Periodenerfolg; Bilanz-Wirkung: Anlagenbuchwert sinkt.</p>
-         ${warn('AfA vs. Zahlung', 'Abschreibung ist keine Zahlung, sondern periodische Kostenverteilung. Wer „AfA an Kasse" bucht, verwechselt Erfolgswirkung mit Liquidität.')}`
-      ),
-      section(
-        'In der Klausur: Anlagevermögen',
-        `<p>Standardpfad: Aktivierung ja/nein (GWG-Schwelle) → AfA-Methode und Nutzungsdauer → planmäßig/außerplanmäßig unterscheiden → Buchwert und GuV-Wirkung nennen. Bei Wertminderung: außerplanmäßige AfA bis zum niedrigeren beizulegenden Wert; Zuschreibung nur bis zu fortgeführten AK.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Was zum Anlagevermögen gehört</h4>
+<p>Anlagevermögen umfasst Gegenstände, die dem Geschäftsbetrieb dauerhaft dienen. Dazu zählen immaterielle Vermögensgegenstände, Sachanlagen und Finanzanlagen. Die Zugehörigkeit richtet sich nicht nach dem Gegenstand an sich, sondern nach seiner betrieblichen Zweckbestimmung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Planmäßige und außerplanmäßige Abschreibung</h4>
+<p>Planmäßige Abschreibungen verteilen Anschaffungs- oder Herstellungskosten über die Nutzungsdauer. Außerplanmäßige Abschreibungen greifen bei Wertminderungen. Beide sind klausurtypisch, weil sie Bilanzwert und Periodenerfolg zugleich beeinflussen.</p>
+         <div class="math-block math-block--theory">$$AfA_{linear} = \\frac{AK - RW}{n}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Zuschreibung und Grenzen</h4>
+<p>Entfällt der Grund einer außerplanmäßigen Abschreibung, kann oder muss zugeschrieben werden, jedoch nur bis zu den fortgeführten Anschaffungskosten. Auch diese Obergrenze ist klausurwichtig.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Abschreibungsfehler:</strong> Lineare AfA ist nur die Standardtechnik. In der Prüfung musst du trotzdem immer zuerst fragen, welche Wertminderung vorliegt und ob planmäßig oder außerplanmäßig abzuschreiben ist.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">GWG und Aktivierungsschwelle</h4>
+<p>Geringwertige Wirtschaftsgüter (GWG) bis 800 € netto (bzw. 1.000 € ab 2024 in der Praxis) können sofort als Aufwand gebucht werden (§ 6 Abs. 2 EStG / Sammelposten-Option). Liegt der Wert darüber, ist zu aktivieren und planmäßig abzuschreiben. Die Schwelle entscheidet über Bilanzposten vs. Sofortaufwand.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Buchungskette Anlagenzugang</h4>
+<p>Typischer Ablauf: (1) Anschaffung — Anlage an Verbindlichkeiten/Kasse. (2) Planmäßige AfA zum Jahresende — AfA an Anlage. (3) Außerplanmäßige AfA bei Wertminderung — außerplanm. AfA an Anlage. GuV-Wirkung: AfA mindert den Periodenerfolg; Bilanz-Wirkung: Anlagenbuchwert sinkt.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>AfA vs. Zahlung</strong> Abschreibung ist keine Zahlung, sondern periodische Kostenverteilung. Wer „AfA an Kasse" bucht, verwechselt Erfolgswirkung mit Liquidität.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Anschaffungskosten und AfA</h4>
+<p>Anschaffungskosten = Kaufpreis + Anschaffungsnebenkosten − Skonti. Planmäßige AfA linear oder degressiv nach Nutzungsdauer (AfA-Tabelle).</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Anlagevermögen</h4>
+<p>Standardpfad: Aktivierung ja/nein (GWG-Schwelle) → AfA-Methode und Nutzungsdauer → planmäßig/außerplanmäßig unterscheiden → Buchwert und GuV-Wirkung nennen. Bei Wertminderung: außerplanmäßige AfA bis zum niedrigeren beizulegenden Wert; Zuschreibung nur bis zu fortgeführten AK.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Investition: Aktivierung Anlagevermögen; jährliche AfA: Aufwand GuV, Wertminderung Bilanz. Sonder-AfA nur bei gesetzlicher/tatsächlicher Begründung.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Lineare AfA', eq: String.raw`$$AfA = \frac{AK - RW}{n}$$`, desc: 'Jährlicher planmäßiger Abschreibungsbetrag.' },
       { label: 'Buchwert', eq: String.raw`$$BW_t = AK - t \cdot AfA$$`, desc: 'Fortgeführter Wert nach t Jahren.' },
@@ -417,27 +548,54 @@ export const CONTENT = {
 
   umlauf_bewertung_verfahren: {
     motivation: 'Bewertung des Umlaufvermögens ist klausurentscheidend, weil Verfahren und Niederstwertlogik direkt den ausgewiesenen Periodenerfolg beeinflussen.',
-    theorie: [
-      section(
-        'Grundlagen der UV-Bewertung',
-        `<p>Zum Umlaufvermögen zählen u.a. Vorräte und kurzfristige Vermögensposten. Für die Klausur ist die Bewertungslogik zentral: Zugangsbewertung über Anschaffungs-/Herstellungskosten und stichtagsbezogene Folgebewertung.</p>`
-      ),
-      section(
-        'Bewertungsvereinfachungsverfahren',
-        `<p>Verbrauchsfolgeverfahren wie FIFO, LIFO oder Durchschnittsmethode ordnen Zugangswerte dem Verbrauch bzw. Endbestand zu. In der Klausur musst du sauber rechnen und den Bestandswert methodisch begründen.</p>`
-      ),
-      section(
-        'Strenges Niederstwertprinzip',
-        `<p>Beim Umlaufvermögen gilt das strenge Niederstwertprinzip: Liegt der beizulegende Wert unter den Anschaffungskosten, ist auf den niedrigeren Wert abzuschreiben. Genau hier zeigt sich die besondere Vorsicht des HGB.</p>
-         ${warn('Verbrauchsfehler:', 'FIFO oder Durchschnitt sind keine bloßen Rechentricks. Sie beeinflussen Endbestand, Aufwand und damit unmittelbar den Periodenerfolg.')}`
-      ),
-      section(
-        'FIFO-Beispiel (Companion-Logik)',
-        `<p>Zugänge: 100 Stück à 5 €, danach 50 Stück à 6 €. Verbrauch 120 Stück. FIFO ordnet zuerst die älteren, günstigeren Zugänge dem Verbrauch zu; der Endbestand enthält die jüngeren, teureren Einheiten.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{Verbrauchswert}_{FIFO} = 100\cdot 5 + 20\cdot 6 = 620,\quad SB = 30\cdot 6 = 180$$`))}
-         <p>Der Materialaufwand steigt gegenüber einer Durchschnittsmethode, wenn die jüngeren Zugänge teurer sind — der Periodengewinn fällt entsprechend.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Grundlagen der UV-Bewertung</h4>
+<p>Zum Umlaufvermögen zählen u.a. Vorräte und kurzfristige Vermögensposten. Für die Klausur ist die Bewertungslogik zentral: Zugangsbewertung über Anschaffungs-/Herstellungskosten und stichtagsbezogene Folgebewertung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Bewertungsvereinfachungsverfahren</h4>
+<p>Verbrauchsfolgeverfahren wie FIFO, LIFO oder Durchschnittsmethode ordnen Zugangswerte dem Verbrauch bzw. Endbestand zu. In der Klausur musst du sauber rechnen und den Bestandswert methodisch begründen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Strenges Niederstwertprinzip</h4>
+<p>Beim Umlaufvermögen gilt das strenge Niederstwertprinzip: Liegt der beizulegende Wert unter den Anschaffungskosten, ist auf den niedrigeren Wert abzuschreiben. Genau hier zeigt sich die besondere Vorsicht des HGB.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Verbrauchsfehler:</strong> FIFO oder Durchschnitt sind keine bloßen Rechentricks. Sie beeinflussen Endbestand, Aufwand und damit unmittelbar den Periodenerfolg.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">FIFO-Beispiel (Companion-Logik)</h4>
+<p>Zugänge: 100 Stück à 5 €, danach 50 Stück à 6 €. Verbrauch 120 Stück. FIFO ordnet zuerst die älteren, günstigeren Zugänge dem Verbrauch zu; der Endbestand enthält die jüngeren, teureren Einheiten.</p>
+         <div class="math-block math-block--theory">$$\\text{Verbrauchswert}_{FIFO} = 100\\cdot 5 + 20\\cdot 6 = 620,\\quad SB = 30\\cdot 6 = 180$$</div>
+         <p>Der Materialaufwand steigt gegenüber einer Durchschnittsmethode, wenn die jüngeren Zugänge teurer sind — der Periodengewinn fällt entsprechend.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Bewertung Umlauf</h4>
+<p>Niederstwertprinzip: Anschaffungskosten oder niedrigerer beizulegender Wert. FIFO/LIFO/Durchschnitt — Bestandsverbrauch und Endbestand. Stichtagsprinzip am Bilanzstichtag.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Bewertungsverfahren Auswirkung auf GuV (Materialaufwand) und Bilanz (Vorräte) erklären — nicht nur Methode nennen.</p>
+      <div class="warn-box"><strong>Permanenz:</strong> Bewertungsmethode über Jahre beibehalten — Wechsel nur begründet.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Strenges Niederstwertprinzip', eq: String.raw`\text{Bilanzwert} = \min(AK,\ beizulegender\ Wert)`, desc: 'Beim Umlaufvermögen zählt stets der niedrigere Wert.' },
       { label: 'Durchschnittspreis', eq: String.raw`$$\bar p = \frac{\sum Anschaffungskosten}{\sum Menge}$$`, desc: 'Typische Bewertungsvereinfachung.' },
@@ -473,33 +631,57 @@ export const CONTENT = {
 
   werkstoffe_erzeugnisse_buchungen: {
     motivation: 'Werkstoff- und Erzeugnisbuchungen verbinden Lagerbewegung, Aufwandserfassung und GuV-Abschluss. Gerade hier entstehen typische mehrstufige Buchungsfehler.',
-    theorie: [
-      section(
-        'Werkstoffbuchungen',
-        `<p>Roh-, Hilfs- und Betriebsstoffe werden über Bestandskonten und Aufwandskonten erfasst. Die Fortschreibungs- und Inventurmethode führen zum gleichen Verbrauch, aber über unterschiedliche Buchungswege.</p>`
-      ),
-      section(
-        'Fortschreibungsmethode im Detail',
-        `<p>Die Companion-Materialien betonen: Bei der Fortschreibungsmethode wird der Verbrauch laufend direkt gebucht (z. B. Material an Rohstoffe). Das Bestandskonto zeigt damit fortlaufend den aktuellen Bestand. Klausurstark ist die Unterscheidung: laufende Entnahmebuchung statt periodenendbezogener Verbrauchsermittlung.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{Entnahme: Material an Rohstoffe}$$`))}
-      `
-      ),
-      section(
-        'Inventurmethode und Periodenabschluss',
-        `<p>Bei der Inventurmethode bleibt der Verbrauch bis zur Inventur im Bestandskonto; erst am Periodenende wird der tatsächliche Verbrauch aus Anfangs- und Endbestand ermittelt und dann auf das Materialkonto umgebucht. Die Quelle fordert hier ausdrücklich Übungsrechnungen zu beiden Wegen.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{Verbrauch} = AB + Zugänge - SB$$`))}
-      `
-      ),
-      section(
-        'Unfertige und fertige Erzeugnisse',
-        `<p>Bestandsveränderungen unfertiger und fertiger Erzeugnisse wirken direkt in die Erfolgsrechnung hinein. Deshalb müssen Bestandskonto und GuV-Logik sauber verknüpft werden.</p>`
-      ),
-      section(
-        'Korrekturbuchungen im Materialfluss',
-        `<p>Rücksendungen, Gutschriften und Preisnachlässe sind keine Randnotiz, sondern verändern Bestände und Erfolgsgrößen unmittelbar. Korrekturbuchungen müssen daher kontensystematisch sauber erfolgen.</p>
-         ${warn('Buchungsfalle:', 'Wer nur den Zielbuchungssatz lernt, verpasst häufig die Bestandsveränderung und die korrekte GuV-Wirkung.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Werkstoffbuchungen</h4>
+<p>Roh-, Hilfs- und Betriebsstoffe werden über Bestandskonten und Aufwandskonten erfasst. Die Fortschreibungs- und Inventurmethode führen zum gleichen Verbrauch, aber über unterschiedliche Buchungswege.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fortschreibungsmethode im Detail</h4>
+<p>Die Companion-Materialien betonen: Bei der Fortschreibungsmethode wird der Verbrauch laufend direkt gebucht (z. B. Material an Rohstoffe). Das Bestandskonto zeigt damit fortlaufend den aktuellen Bestand. Klausurstark ist die Unterscheidung: laufende Entnahmebuchung statt periodenendbezogener Verbrauchsermittlung.</p>
+         <div class="math-block math-block--theory">$$\\text{Entnahme: Material an Rohstoffe}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Inventurmethode und Periodenabschluss</h4>
+<p>Bei der Inventurmethode bleibt der Verbrauch bis zur Inventur im Bestandskonto; erst am Periodenende wird der tatsächliche Verbrauch aus Anfangs- und Endbestand ermittelt und dann auf das Materialkonto umgebucht. Die Quelle fordert hier ausdrücklich Übungsrechnungen zu beiden Wegen.</p>
+         <div class="math-block math-block--theory">$$\\text{Verbrauch} = AB + Zugänge - SB$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Unfertige und fertige Erzeugnisse</h4>
+<p>Bestandsveränderungen unfertiger und fertiger Erzeugnisse wirken direkt in die Erfolgsrechnung hinein. Deshalb müssen Bestandskonto und GuV-Logik sauber verknüpft werden.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Korrekturbuchungen im Materialfluss</h4>
+<p>Rücksendungen, Gutschriften und Preisnachlässe sind keine Randnotiz, sondern verändern Bestände und Erfolgsgrößen unmittelbar. Korrekturbuchungen müssen daher kontensystematisch sauber erfolgen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Buchungsfalle:</strong> Wer nur den Zielbuchungssatz lernt, verpasst häufig die Bestandsveränderung und die korrekte GuV-Wirkung.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Werkstoffe</h4>
+<p>Einkauf auf Lager: Wareneingang an Verbindlichkeiten (+ Vorsteuer). Verbrauch: Materialaufwand an Lager. Fertigung: Fertigungsmaterial, Fertigungslöhne, Gemeinkosten → Erzeugnisse.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Bestandsveränderungen in GuV (Erhöhung mindert Aufwand). USt immer getrennt buchen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Inventurmethode', eq: String.raw`\text{Verbrauch} = AB + Zugänge - SB`, desc: 'Verbrauchsermittlung über Bestandvergleich.' },
       { label: 'Fortschreibung', eq: String.raw`\text{laufend: Material an Rohstoffe}`, desc: 'Verbrauch wird bei jeder Entnahme direkt erfasst.' },
@@ -543,36 +725,56 @@ export const CONTENT = {
 
   umlauf_waren_ust: {
     motivation: 'Sobald Warenverkehr und Umsatzsteuer hinzukommen, wird Jahresabschluss besonders klausurnah: Preisnachlässe, Vorsteuer, Zahllast und Warenkontensysteme greifen ineinander.',
-    theorie: [
-      section(
-        'Warenkontensysteme',
-        `<p>Waren können im gemischten oder getrennten Warenkonto erfasst werden. Für die Klausur ist entscheidend, wie der Warenverbrauch, der Warenbestand und der Erfolg sichtbar gemacht werden.</p>`
-      ),
-      section(
-        'Vorsteuer und Umsatzsteuer',
-        `<p>Die Umsatzsteuer ist für das Unternehmen regelmäßig ein durchlaufender Posten. Vorsteuer aus Eingangsrechnungen und Umsatzsteuer aus Ausgangsrechnungen werden am Ende zur Zahllast verrechnet.</p>
-         ${mathBlock(String.raw`$$Zahllast = Umsatzsteuer - Vorsteuer$$`)}
-      `
-      ),
-      section(
-        'Skonto, Rabatt und Rücksendung',
-        `<p>Preisnachlässe verändern nicht nur den Zahlungsvorgang, sondern auch die Steuerbasis. In diesen Fällen musst du daher immer an den Brutto-/Netto-Zusammenhang und die USt-Korrektur denken.</p>
-         ${warn('USt-Fehler:', 'Umsatzsteuer ist kein Aufwand und keine Betriebseinnahme im engeren Sinn. Wer sie in der Erfolgsermittlung wie normalen Aufwand behandelt, verfehlt die Systematik.')}`
-      ),
-      section(
-        'Durchgerechnetes Beispiel: Einkauf mit Vorsteuer',
-        `<p>Einkauf Waren netto 1.000 €, USt 19% = 190 €, Brutto 1.190 €. Buchung: Waren 1.000 an Verbindlichkeiten 1.190; Vorsteuer 190 an Verbindlichkeiten (oder Sammelbuchung: Waren 1.000, Vorsteuer 190 an Verbindlichkeiten 1.190). Bei Skonto 2% auf Netto: Warenkosten sinken um 20 €, Vorsteuer um 3,80 € — beides muss korrigiert werden, nicht nur der Lieferantenposten.</p>`
-      ),
-      section(
-        'Warenverbrauch und Bestandsveränderung',
-        `<p>Im gemischten Warenkonto wird der Wareneinkauf direkt als Aufwand gebucht; im getrennten System läuft der Einkauf über Wareneingang/Warenbestand und der Verbrauch über <em>Warenverbrauch = Anfangsbestand + Zugänge − Endbestand</em>. Die Wahl des Systems bestimmt, ob Inventur und Bestandsveränderung explizit sichtbar werden.</p>
-         ${warn('Bestand vergessen', 'Bei getrenntem Warenkonto muss zum Jahresende der Bestand ermittelt und abgegrenzt werden. Wer nur Einkäufe bucht, überschätzt den Aufwand.')}`
-      ),
-      section(
-        'In der Klausur: Waren und USt',
-        `<p>Prüfungsstandard: Brutto/Netto/USt sauber trennen → Buchungssatz mit korrekten Konten → Wirkung auf GuV (Warenverbrauch/Aufwand) und Bilanz (Vorsteuer, Verbindlichkeiten, Bestand). Bei Skonto/Rabatt: Steuerbasis mitkorrigieren. USt-Konten nie als Erfolgskonten behandeln.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warenkontensysteme</h4>
+<p>Waren können im gemischten oder getrennten Warenkonto erfasst werden. Für die Klausur ist entscheidend, wie der Warenverbrauch, der Warenbestand und der Erfolg sichtbar gemacht werden.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vorsteuer und Umsatzsteuer</h4>
+<p>Die Umsatzsteuer ist für das Unternehmen regelmäßig ein durchlaufender Posten. Vorsteuer aus Eingangsrechnungen und Umsatzsteuer aus Ausgangsrechnungen werden am Ende zur Zahllast verrechnet.</p>
+         <div class="math-block math-block--theory">$$Zahllast = Umsatzsteuer - Vorsteuer$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Skonto, Rabatt und Rücksendung</h4>
+<p>Preisnachlässe verändern nicht nur den Zahlungsvorgang, sondern auch die Steuerbasis. In diesen Fällen musst du daher immer an den Brutto-/Netto-Zusammenhang und die USt-Korrektur denken.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>USt-Fehler:</strong> Umsatzsteuer ist kein Aufwand und keine Betriebseinnahme im engeren Sinn. Wer sie in der Erfolgsermittlung wie normalen Aufwand behandelt, verfehlt die Systematik.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Durchgerechnetes Beispiel: Einkauf mit Vorsteuer</h4>
+<p>Einkauf Waren netto 1.000 €, USt 19% = 190 €, Brutto 1.190 €. Buchung: Waren 1.000 an Verbindlichkeiten 1.190; Vorsteuer 190 an Verbindlichkeiten (oder Sammelbuchung: Waren 1.000, Vorsteuer 190 an Verbindlichkeiten 1.190). Bei Skonto 2% auf Netto: Warenkosten sinken um 20 €, Vorsteuer um 3,80 € — beides muss korrigiert werden, nicht nur der Lieferantenposten.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Warenverbrauch und Bestandsveränderung</h4>
+<p>Im gemischten Warenkonto wird der Wareneinkauf direkt als Aufwand gebucht; im getrennten System läuft der Einkauf über Wareneingang/Warenbestand und der Verbrauch über <em>Warenverbrauch = Anfangsbestand + Zugänge − Endbestand</em>. Die Wahl des Systems bestimmt, ob Inventur und Bestandsveränderung explizit sichtbar werden.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Bestand vergessen</strong> Bei getrenntem Warenkonto muss zum Jahresende der Bestand ermittelt und abgegrenzt werden. Wer nur Einkäufe bucht, überschätzt den Aufwand.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">USt auf Wareneinkauf</h4>
+<p>Vorsteuer auf Einkauf ist aktivisches Durchlaufkonto; Verbindlichkeit beim Lieferanten netto + USt. Bei Ist-Versteuerung: USt erst bei Zahlung ans Finanzamt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Waren und USt</h4>
+<p>Prüfungsstandard: Brutto/Netto/USt sauber trennen → Buchungssatz mit korrekten Konten → Wirkung auf GuV (Warenverbrauch/Aufwand) und Bilanz (Vorsteuer, Verbindlichkeiten, Bestand). Bei Skonto/Rabatt: Steuerbasis mitkorrigieren. USt-Konten nie als Erfolgskonten behandeln.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurpfad</h4>
+<p>Buchungssatz mit Vorsteuerkonto; Abschluss: Vorsteuer mit Finanzamt verrechnen. Periodengerecht: Umsatzsteuer-Zahllast zum Stichtag.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Zahllast', eq: String.raw`$$Zahllast = USt - VSt$$`, desc: 'Abzuführende Umsatzsteuer nach Vorsteuerabzug.' },
       { label: 'Netto aus Brutto', eq: String.raw`$$Netto = \frac{Brutto}{1 + Steuersatz}$$`, desc: 'Hilft bei Skonto- und Umsatzsteuerfällen.' },
@@ -599,26 +801,53 @@ export const CONTENT = {
 
   eigenkapital_kapitalgesellschaften: {
     motivation: 'Eigenkapital in Kapitalgesellschaften folgt einer formal gegliederten Struktur mit Rücklagen- und Gewinnverwendungslogik. Diese Struktur ist eigenständig klausurrelevant.',
-    theorie: [
-      section(
-        'Gliederung des Eigenkapitals',
-        `<p>Bei Kapitalgesellschaften ist das Eigenkapital gegliedert, etwa in gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Gewinnvortrag und Jahresüberschuss. Diese Differenzierung spiegelt Haftungsstruktur und Ausschüttungslogik wider.</p>`
-      ),
-      section(
-        'Rücklagen und Ausweisfragen',
-        `<p>Gesetzliche und andere Gewinnrücklagen sowie die Ausweisvarianten des Ergebnisses prägen die Kapitalgesellschaftslogik. In Aufgaben ist die Reihenfolge von Jahresergebnis, Rücklageneinstellung und Gewinnverwendung zentral.</p>`
-      ),
-      section(
-        'Ergebnisverwendung',
-        `<p>Jahresüberschüsse werden nicht automatisch ausgeschüttet. Sie können eingestellt, vorgetragen oder ausgeschüttet werden. Gerade diese Übergänge sind in Abschlussaufgaben regelmäßig zu erklären.</p>
-         ${warn('Kapitalfehler:', 'Eigenkapital ist nicht einfach „Restgröße“. Seine Gliederung trägt konkrete Rechtsfolgen für Haftung, Ausschüttung und Bilanzanalyse.')}`
-      ),
-      section(
-        'Gesetzliche Gewinnrücklage',
-        `<p>Bei Kapitalgesellschaften ist ein Teil des Jahresüberschusses in die gesetzliche Gewinnrücklage einzustellen (typisch 5 % des Jahresüberschusses, bis eine Obergrenze erreicht ist). Die Einstellung erhöht die Rücklagen und reduziert den ausschüttungsfähigen Bilanzgewinn — ein klassischer Abschluss-Schritt nach der GuV.</p>
-         ${mathBlock(mathContent(String.raw`$$\text{Einstellung}_{ges.\ Rücklage} = 0{,}05 \cdot \max(0,\ Jahresüberschuss)$$`))}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Gliederung des Eigenkapitals</h4>
+<p>Bei Kapitalgesellschaften ist das Eigenkapital gegliedert, etwa in gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Gewinnvortrag und Jahresüberschuss. Diese Differenzierung spiegelt Haftungsstruktur und Ausschüttungslogik wider.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rücklagen und Ausweisfragen</h4>
+<p>Gesetzliche und andere Gewinnrücklagen sowie die Ausweisvarianten des Ergebnisses prägen die Kapitalgesellschaftslogik. In Aufgaben ist die Reihenfolge von Jahresergebnis, Rücklageneinstellung und Gewinnverwendung zentral.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Ergebnisverwendung</h4>
+<p>Jahresüberschüsse werden nicht automatisch ausgeschüttet. Sie können eingestellt, vorgetragen oder ausgeschüttet werden. Gerade diese Übergänge sind in Abschlussaufgaben regelmäßig zu erklären.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kapitalfehler:</strong> Eigenkapital ist nicht einfach „Restgröße“. Seine Gliederung trägt konkrete Rechtsfolgen für Haftung, Ausschüttung und Bilanzanalyse.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Gesetzliche Gewinnrücklage</h4>
+<p>Bei Kapitalgesellschaften ist ein Teil des Jahresüberschusses in die gesetzliche Gewinnrücklage einzustellen (typisch 5 % des Jahresüberschusses, bis eine Obergrenze erreicht ist). Die Einstellung erhöht die Rücklagen und reduziert den ausschüttungsfähigen Bilanzgewinn — ein klassischer Abschluss-Schritt nach der GuV.</p>
+         <div class="math-block math-block--theory">$$\\text{Einstellung}_{ges.\\ Rücklage} = 0{,}05 \\cdot \\max(0,\\ Jahresüberschuss)$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: EK Kapitalgesellschaft</h4>
+<p>Gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Bilanzgewinn. Ausschüttung: Gewinnausschüttung an Bank (Vermögensminderung, nicht GuV-Aufwand). Jahresüberschuss aus GuV → Gewinnvortrag.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Kapitalerhöhung: Bareinlage vs. Sacheinlage — Aktivierung und EK-Erhöhung. Thesaurierung vs. Ausschüttung Wirkung auf Liquidität und EK.</p>
+      <div class="warn-box"><strong>Ausschüttung:</strong> Dividende mindert EK/Bank, erscheint nicht als Aufwand in GuV.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Eigenkapitalquote', eq: String.raw`$$EK\text{-Quote} = \frac{EK}{Bilanzsumme}$$`, desc: 'Zentrale Kennzahl zur Finanzierungsstruktur.' },
       { label: 'Jahresüberschuss', eq: String.raw`\text{Teil des Eigenkapitals nach Erfolgsrechnung}`, desc: 'Verbindet GuV und Bilanz.' },
@@ -646,41 +875,63 @@ export const CONTENT = {
 
   eigenkapital_personengesellschaften: {
     motivation: 'In Personengesellschaften ist Eigenkapital gesellschafterbezogen geführt. Kapitalkonten, Privatkonten und Gewinnanteile bilden eine eigene Abschlusslogik.',
-    theorie: [
-      section(
-        'Gesellschafterbezogene Kapitalkonten',
-        `<p>Das Eigenkapital wird den Gesellschaftern über eigene Kapitalkonten zugeordnet. Dadurch unterscheidet sich die Darstellung deutlich von der formalisierten Kapitalgesellschaftsstruktur.</p>`
-      ),
-      section(
-        'Privatkonto-Logik',
-        `<p>Einlagen und Entnahmen werden über Privatkonten geführt und anschließend in die Kapitalkonten überführt. Diese Technik ist prüfungsrelevant, weil sie Bewegungen zwischen Unternehmen und Gesellschaftern sichtbar macht.</p>`
-      ),
-      section(
-        'Gewinnanteile und Abschluss',
-        `<p>Gewinnanteile werden den Kapitalkonten zugerechnet und verändern die Gesellschafterpositionen. Für die Klausur ist die saubere Abschlusskette Privatkonto → Kapitalkonto entscheidend.</p>
-         ${warn('Kontenfalle:', 'Einlagen/Entnahmen und Gewinnanteile werden oft auf derselben Ebene vermischt. Klausurstabil ist die getrennte Kontenführung mit anschließendem Abschluss.')}`
-      ),
-      section(
-        'Buchungstechnik nach VL 7.3',
-        `<p>Typische Buchungssätze aus dem Kurs (Kontenrahmen SKR03):</p>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Gesellschafterbezogene Kapitalkonten</h4>
+<p>Das Eigenkapital wird den Gesellschaftern über eigene Kapitalkonten zugeordnet. Dadurch unterscheidet sich die Darstellung deutlich von der formalisierten Kapitalgesellschaftsstruktur.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Privatkonto-Logik</h4>
+<p>Einlagen und Entnahmen werden über Privatkonten geführt und anschließend in die Kapitalkonten überführt. Diese Technik ist prüfungsrelevant, weil sie Bewegungen zwischen Unternehmen und Gesellschaftern sichtbar macht.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Gewinnanteile und Abschluss</h4>
+<p>Gewinnanteile werden den Kapitalkonten zugerechnet und verändern die Gesellschafterpositionen. Für die Klausur ist die saubere Abschlusskette Privatkonto → Kapitalkonto entscheidend.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kontenfalle:</strong> Einlagen/Entnahmen und Gewinnanteile werden oft auf derselben Ebene vermischt. Klausurstabil ist die getrennte Kontenführung mit anschließendem Abschluss.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Buchungstechnik nach VL 7.3</h4>
+<p>Typische Buchungssätze aus dem Kurs (Kontenrahmen SKR03):</p>
          <ul>
            <li><strong>Entnahme:</strong> Privatkonto A an Kasse — Gesellschafter zieht Mittel ab.</li>
            <li><strong>Einlage:</strong> Kasse an Privatkonto B — Gesellschafter bringt Kapital ein.</li>
            <li><strong>Abschluss Privatkonto:</strong> Kapitalkonto A an Privatkonto A — Saldo wird ins langfristige EK überführt.</li>
            <li><strong>Gewinnverteilung:</strong> GuV-Ergebnis an Kapitalkonto A (anteilig) — Periodenerfolg erhöht das EK des Gesellschafters.</li>
          </ul>
-         <p>Das Privatkonto ist ein <em>durchlaufendes</em> Hilfskonto; das Kapitalkonto trägt die dauerhafte Gesellschafterposition in der Bilanz.</p>`
-      ),
-      section(
-        'Abgrenzung zu Kapitalgesellschaften',
-        `<p>Bei AG/GmbH gibt es Gezeichnetes Kapital, Kapitalrücklagen und Gewinnrücklagen — formalisiert und nicht gesellschafterindividuell. Bei OHG/KG/GbR hingegen ist jedes Kapitalkonto ein Bilanzposten des jeweiligen Gesellschafters. Entnahmen bei Kapitalgesellschaften laufen über Gewinnausschüttungen, nicht über Privatkonten.</p>
-         ${warn('AG-Logik übertragen', 'Rücklagenbildung und Ausschüttungsbeschränkungen (§ 30 GmbHG) gelten für Kapitalgesellschaften — nicht für Personengesellschaften. Wer „Gewinnrücklage“ bei einer OHG bucht, verwechselt Rechtsformen.')}`
-      ),
-      section(
-        'In der Klausur: Personengesellschafts-EK',
-        `<p>Standardpfad: (1) Geschäftsvorfall klassifizieren — Einlage, Entnahme oder Erfolgsanteil? (2) Privatkonto oder direkt Kapitalkonto? (3) Abschlusskette bis Bilanzposten durchdenken. Bei Gewinnverteilung nach Beteiligungsquoten: Ergebnis × Quote → Kapitalkonto des Gesellschafters. Punkte gibt es für korrekte Kontenbezeichnung und die Trennung laufende Bewegung (Privatkonto) vs. Bilanzposition (Kapitalkonto).</p>`
-      )
-    ].join(''),
+         <p>Das Privatkonto ist ein <em>durchlaufendes</em> Hilfskonto; das Kapitalkonto trägt die dauerhafte Gesellschafterposition in der Bilanz.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Abgrenzung zu Kapitalgesellschaften</h4>
+<p>Bei AG/GmbH gibt es Gezeichnetes Kapital, Kapitalrücklagen und Gewinnrücklagen — formalisiert und nicht gesellschafterindividuell. Bei OHG/KG/GbR hingegen ist jedes Kapitalkonto ein Bilanzposten des jeweiligen Gesellschafters. Entnahmen bei Kapitalgesellschaften laufen über Gewinnausschüttungen, nicht über Privatkonten.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>AG-Logik übertragen</strong> Rücklagenbildung und Ausschüttungsbeschränkungen (§ 30 GmbHG) gelten für Kapitalgesellschaften — nicht für Personengesellschaften. Wer „Gewinnrücklage“ bei einer OHG bucht, verwechselt Rechtsformen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Eigenkapital Personengesellschaft</h4>
+<p>Kapitalkonten der Gesellschafter (z.B. Kommandokapital) bilden das Eigenkapital. Entnahmen und Einlagen laufen über Privatkonten — nicht über Gewinn- und Verlustrechnung als „Gehalt“.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Personengesellschafts-EK</h4>
+<p>Standardpfad: (1) Geschäftsvorfall klassifizieren — Einlage, Entnahme oder Erfolgsanteil? (2) Privatkonto oder direkt Kapitalkonto? (3) Abschlusskette bis Bilanzposten durchdenken. Bei Gewinnverteilung nach Beteiligungsquoten: Ergebnis × Quote → Kapitalkonto des Gesellschafters. Punkte gibt es für korrekte Kontenbezeichnung und die Trennung laufende Bewegung (Privatkonto) vs. Bilanzposition (Kapitalkonto).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Geschäftsvorfall → Soll/Haben → Wirkung auf Kapital- und Erfolgskonten. GoB: Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung.</p>
+      <div class="warn-box"><strong>Entnahme:</strong> Entnahme mindert Eigenkapital, ist aber kein Aufwand in der GuV.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Privatkonto-Abschluss', eq: String.raw`\text{Privatkonto} \rightarrow \text{Kapitalkonto}`, desc: 'Einlagen/Entnahmen werden periodisch überführt.' },
       { label: 'Gewinnzuweisung', eq: String.raw`\text{GuV-Ergebnis} \rightarrow \text{Kapitalkonten der Gesellschafter}`, desc: 'Erfolgszuordnung nach Beteiligungslogik.' },
@@ -708,30 +959,56 @@ export const CONTENT = {
 
   verbindlichkeiten: {
     motivation: 'Verbindlichkeiten sind die sichere Fremdkapitalschiene. Für Klausuren ist die klare Abgrenzung zu Rückstellungen und die Bewertungslogik zentral.',
-    theorie: [
-      section(
-        'Wesen der Verbindlichkeit',
-        `<p>Verbindlichkeiten sind dem Grunde und der Höhe nach feststehende Schulden. Typische Fälle sind Lieferantenverbindlichkeiten, Darlehen oder Steuerverbindlichkeiten.</p>`
-      ),
-      section(
-        'Bewertung',
-        `<p>Verbindlichkeiten werden mit dem Erfüllungsbetrag angesetzt. Bei Änderungen der Belastung sind die Bewertungsgrundsätze konsistent anzuwenden.</p>`
-      ),
-      section(
-        'Typische Klausurfälle',
-        `<p>Fremdwährungsverbindlichkeiten und Umgliederungen innerhalb der Verbindlichkeiten gehören zu den klassischen Prüfungsfällen. Zuerst wird klassifiziert, dann bewertet.</p>
-         ${warn('Abgrenzungsfalle:', 'Nicht jede unklare künftige Zahlung ist eine Verbindlichkeit. Verbindlichkeiten setzen eine ausreichend sichere Verpflichtung voraus.')}`
-      ),
-      section(
-        'Abgrenzung zu Rückstellung und RAP',
-        `<p>Die Verbindlichkeit ist die sichere Schuldkategorie. Fehlen sichere Höhe oder Fälligkeit, wandert der Fall eher in die Rückstellungsschiene. Geht es stattdessen primär um die periodische Zuordnung bereits gezahlter oder empfangener Beträge, ist Rechnungsabgrenzung zu prüfen.</p>
-         ${warn('Sichere Schuld zu schnell als Rückstellung lesen', 'In unsauberen Lösungen wird jede künftige Zahlung als „irgendwie ungewiss“ beschrieben. Entscheidend ist aber, ob die Verpflichtung in Grund und Höhe schon belastbar feststeht.')}`
-      ),
-      section(
-        'Von der Schuld zur Abschlusswirkung',
-        `<p>Prüfungsrelevant ist nicht nur der Ansatz, sondern die Folgefrage: Wie wirkt die Verbindlichkeit auf Bilanzstruktur, spätere Zahlung und Erfolgsrechnung? Gerade Tilgung, Umgliederung und Währungsfälle verlangen deshalb eine Kette aus Klassifikation -> Bewertung -> Folgeausweis.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Wesen der Verbindlichkeit</h4>
+<p>Verbindlichkeiten sind dem Grunde und der Höhe nach feststehende Schulden. Typische Fälle sind Lieferantenverbindlichkeiten, Darlehen oder Steuerverbindlichkeiten.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Bewertung</h4>
+<p>Verbindlichkeiten werden mit dem Erfüllungsbetrag angesetzt. Bei Änderungen der Belastung sind die Bewertungsgrundsätze konsistent anzuwenden.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Abgrenzung zu Rückstellung und RAP</h4>
+<p>Die Verbindlichkeit ist die sichere Schuldkategorie. Fehlen sichere Höhe oder Fälligkeit, wandert der Fall eher in die Rückstellungsschiene. Geht es stattdessen primär um die periodische Zuordnung bereits gezahlter oder empfangener Beträge, ist Rechnungsabgrenzung zu prüfen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Sichere Schuld zu schnell als Rückstellung lesen</strong> In unsauberen Lösungen wird jede künftige Zahlung als „irgendwie ungewiss“ beschrieben. Entscheidend ist aber, ob die Verpflichtung in Grund und Höhe schon belastbar feststeht.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Von der Schuld zur Abschlusswirkung</h4>
+<p>Prüfungsrelevant ist nicht nur der Ansatz, sondern die Folgefrage: Wie wirkt die Verbindlichkeit auf Bilanzstruktur, spätere Zahlung und Erfolgsrechnung? Gerade Tilgung, Umgliederung und Währungsfälle verlangen deshalb eine Kette aus Klassifikation -> Bewertung -> Folgeausweis.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Typische Klausurfälle</h4>
+<p>Fremdwährungsverbindlichkeiten und Umgliederungen innerhalb der Verbindlichkeiten gehören zu den klassischen Prüfungsfällen. Zuerst wird klassifiziert, dann bewertet.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Abgrenzungsfalle:</strong> Nicht jede unklare künftige Zahlung ist eine Verbindlichkeit. Verbindlichkeiten setzen eine ausreichend sichere Verpflichtung voraus.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Verbindlichkeiten</h4>
+<p>LLF vs. kLF nach Restlaufzeit. Rückstellungen: ungewisse Verbindlichkeiten (Steuer, Pension, Gewährleistung) — Bildung GuV-Aufwand, Auflösung Ertrag. Abgrenzung zu Rücklagen (EK).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Buchungssatz Verbindlichkeit vs. Rückstellung; Bewertung zum Erfüllungsbetrag. Passivierungswahl nur bei gesetzlichen Vorgaben.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Verbindlichkeit', eq: String.raw`\text{sicher dem Grunde und der Höhe nach}`, desc: 'Feste Schuldposition.' },
       { label: 'Bewertung', eq: String.raw`\text{Ansatz zum Erfüllungsbetrag}`, desc: 'Maßgeblicher Bewertungsmaßstab nach HGB-Logik.' },
@@ -777,30 +1054,48 @@ export const CONTENT = {
 
   rueckstellungen: {
     motivation: 'Rückstellungen sind die ungewisse Fremdkapitalschiene und ein zentraler Prüfungsbereich. Entscheidend ist die Trennung von sicherer Schuld und wahrscheinlicher, aber unscharfer Verpflichtung.',
-    theorie: [
-      section(
-        'Wesen der Rückstellung',
-        `<p>Rückstellungen erfassen ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Die Verpflichtung besteht dem Grunde nach, Höhe oder Fälligkeit sind aber noch unsicher.</p>`
-      ),
-      section(
-        'Abgrenzung: Rückstellung, Verbindlichkeit oder RAP?',
-        `<p>Die erste Klausurfrage ist fast nie die Bewertung, sondern die richtige Schublade. Ist die Schuld dem Grunde und der Höhe nach sicher, spricht das für eine Verbindlichkeit. Geht es primär um Periodenzuordnung bereits gezahlter oder empfangener Beträge, ist eher Rechnungsabgrenzung zu prüfen. Rückstellungen bleiben für wirtschaftlich verursachte, aber noch ungewisse Belastungen.</p>
-         ${warn('Abgrenzungsfehler:', 'Wer jede unklare künftige Zahlung vorschnell als Rückstellung bucht, verliert die saubere Trennung zu Verbindlichkeit und Rechnungsabgrenzung.')}`
-      ),
-      section(
-        'Bewertung der ungewissen Verpflichtung',
-        `<p>Rückstellungen folgen einer vernünftigen kaufmännischen Beurteilung des notwendigen Erfüllungsbetrags. Das verlangt risikosensitives Schätzen statt schematischer Einzelwerte.</p>`
-      ),
-      section(
-        'Ansatz -> Folgejahr -> Erfolgswirkung',
-        `<p>Prüfungsstabil wird das Thema erst, wenn der gesamte Pfad steht: Im Ansatzjahr wird Aufwand antizipiert, im Folgejahr entscheidet die tatsächliche Inanspruchnahme darüber, ob die Rückstellung passgenau war, aufgelöst werden muss oder nachdotiert wird. Genau diese Dreiteilung trennt gute Lösungen von reinen Definitionsantworten.</p>`
-      ),
-      section(
-        'Folgebuchungen und Auflösung',
-        `<p>Bei späterer Inanspruchnahme, Wegfall oder Mehrbelastung wirken sich Rückstellungen erfolgsseitig unterschiedlich aus. Diese Folgepfade sind klausurtypisch.</p>
-         ${warn('Bewertungsfalle:', 'Rückstellungen dürfen nicht pauschal als Restgröße angesetzt werden. Maßgeblich ist die nachvollziehbare Schätzung auf Basis der wirtschaftlichen Verhältnisse.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Wesen der Rückstellung</h4>
+<p>Rückstellungen erfassen ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Die Verpflichtung besteht dem Grunde nach, Höhe oder Fälligkeit sind aber noch unsicher.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Abgrenzung: Rückstellung, Verbindlichkeit oder RAP?</h4>
+<p>Die erste Klausurfrage ist fast nie die Bewertung, sondern die richtige Schublade. Ist die Schuld dem Grunde und der Höhe nach sicher, spricht das für eine Verbindlichkeit. Geht es primär um Periodenzuordnung bereits gezahlter oder empfangener Beträge, ist eher Rechnungsabgrenzung zu prüfen. Rückstellungen bleiben für wirtschaftlich verursachte, aber noch ungewisse Belastungen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Abgrenzungsfehler:</strong> Wer jede unklare künftige Zahlung vorschnell als Rückstellung bucht, verliert die saubere Trennung zu Verbindlichkeit und Rechnungsabgrenzung.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Bewertung der ungewissen Verpflichtung</h4>
+<p>Rückstellungen folgen einer vernünftigen kaufmännischen Beurteilung des notwendigen Erfüllungsbetrags. Das verlangt risikosensitives Schätzen statt schematischer Einzelwerte.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Ansatz -&gt; Folgejahr -&gt; Erfolgswirkung</h4>
+<p>Prüfungsstabil wird das Thema erst, wenn der gesamte Pfad steht: Im Ansatzjahr wird Aufwand antizipiert, im Folgejahr entscheidet die tatsächliche Inanspruchnahme darüber, ob die Rückstellung passgenau war, aufgelöst werden muss oder nachdotiert wird. Genau diese Dreiteilung trennt gute Lösungen von reinen Definitionsantworten.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Folgebuchungen und Auflösung</h4>
+<p>Bei späterer Inanspruchnahme, Wegfall oder Mehrbelastung wirken sich Rückstellungen erfolgsseitig unterschiedlich aus. Diese Folgepfade sind klausurtypisch.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Bewertungsfalle:</strong> Rückstellungen dürfen nicht pauschal als Restgröße angesetzt werden. Maßgeblich ist die nachvollziehbare Schätzung auf Basis der wirtschaftlichen Verhältnisse.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Rückstellung', eq: String.raw`\text{ungewisse Verbindlichkeit}`, desc: 'Verpflichtung steht dem Grunde nach, Höhe/Fälligkeit sind unsicher.' },
       { label: 'Bewertung', eq: String.raw`\text{notwendiger Erfüllungsbetrag nach kaufmännischer Beurteilung}`, desc: 'Schätzbasierter Ansatz.' },
@@ -846,30 +1141,48 @@ export const CONTENT = {
 
   rechnungsabgrenzung: {
     motivation: 'Rechnungsabgrenzung macht Periodenerfolg erst sinnvoll: Ohne sie würden Zahlungen und Erfolg ständig in die falsche Periode rutschen.',
-    theorie: [
-      section(
-        'Warum abgegrenzt wird',
-        `<p>Die GuV soll nur die Aufwendungen und Erträge der laufenden Periode enthalten. Deshalb müssen Zahlungen, die wirtschaftlich in eine andere Periode gehören, abgegrenzt werden. Genau hier setzt die Rechnungsabgrenzung an.</p>`
-      ),
-      section(
-        'Transitorische und antizipative Abgrenzung',
-        `<p>Transitorische Posten betreffen Zahlungen vor oder nach dem Stichtag, die wirtschaftlich teilweise in andere Perioden gehören. Antizipative Posten erfassen Erträge oder Aufwendungen, die wirtschaftlich bereits entstanden sind, aber erst später zahlungswirksam werden.</p>`
-      ),
-      section(
-        'Vier-Felder-Logik für die Klausur',
-        `<p>Eine robuste Lösung prüft immer zwei Fragen zusammen: <em>Wann fließt Geld?</em> und <em>Zu welcher Periode gehört der Erfolg wirtschaftlich?</em> Daraus entsteht die Vier-Felder-Logik aus Zahlung vor/nach dem Stichtag und Aufwand/Ertrag vor/nach dem Stichtag. Genau diese Ordnung trennt aktiven/passiven RAP von sonstigen Forderungen oder Verbindlichkeiten.</p>`
-      ),
-      section(
-        'Abgrenzung zu Forderungen und Verbindlichkeiten',
-        `<p>Rechnungsabgrenzung darf nicht mit sonstigen Forderungen oder Verbindlichkeiten verwechselt werden. In der Klausur entscheidet häufig der Satz „ist die wirtschaftliche Ursache schon in dieser Periode gesetzt?“ über die richtige Einordnung.</p>
-         ${warn('Zeitfehler:', 'Wer nur auf den Zahlungszeitpunkt schaut, verfehlt das Periodenprinzip. Für die Abgrenzung zählt die wirtschaftliche Zugehörigkeit.')}
-         ${warn('Nicht jede Jahresendposition ist RAP', 'Antizipative Fälle können auch als sonstige Forderung oder Verbindlichkeit zu lesen sein. Entscheidend ist, ob die Position primär Periodisierung oder Anspruch/Schuldcharakter abbildet.')}
-      `),
-      section(
-        'Von der Zahlung zum Abschlusseffekt',
-        `<p>Didaktisch wichtig ist die Kette Zahlung -> Bilanzposten -> Erfolgswirkung der richtigen Periode. Gute Klausurlösungen nennen nicht nur „aktiver/passiver RAP“, sondern schließen mit der Wirkung auf Aufwand, Ertrag und Bilanzgliederung ab.</p>`
-      ),
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum abgegrenzt wird</h4>
+<p>Die GuV soll nur die Aufwendungen und Erträge der laufenden Periode enthalten. Deshalb müssen Zahlungen, die wirtschaftlich in eine andere Periode gehören, abgegrenzt werden. Genau hier setzt die Rechnungsabgrenzung an.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Transitorische und antizipative Abgrenzung</h4>
+<p>Transitorische Posten betreffen Zahlungen vor oder nach dem Stichtag, die wirtschaftlich teilweise in andere Perioden gehören. Antizipative Posten erfassen Erträge oder Aufwendungen, die wirtschaftlich bereits entstanden sind, aber erst später zahlungswirksam werden.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Abgrenzung zu Forderungen und Verbindlichkeiten</h4>
+<p>Rechnungsabgrenzung darf nicht mit sonstigen Forderungen oder Verbindlichkeiten verwechselt werden. In der Klausur entscheidet häufig der Satz „ist die wirtschaftliche Ursache schon in dieser Periode gesetzt?“ über die richtige Einordnung.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Zeitfehler:</strong> Wer nur auf den Zahlungszeitpunkt schaut, verfehlt das Periodenprinzip. Für die Abgrenzung zählt die wirtschaftliche Zugehörigkeit.</div>
+         <div class="warn-box" data-warning-placement="rail"><strong>Nicht jede Jahresendposition ist RAP</strong> Antizipative Fälle können auch als sonstige Forderung oder Verbindlichkeit zu lesen sein. Entscheidend ist, ob die Position primär Periodisierung oder Anspruch/Schuldcharakter abbildet.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Von der Zahlung zum Abschlusseffekt</h4>
+<p>Didaktisch wichtig ist die Kette Zahlung -> Bilanzposten -> Erfolgswirkung der richtigen Periode. Gute Klausurlösungen nennen nicht nur „aktiver/passiver RAP“, sondern schließen mit der Wirkung auf Aufwand, Ertrag und Bilanzgliederung ab.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vier-Felder-Logik für die Klausur</h4>
+<p>Eine robuste Lösung prüft immer zwei Fragen zusammen: <em>Wann fließt Geld?</em> und <em>Zu welcher Periode gehört der Erfolg wirtschaftlich?</em> Daraus entsteht die Vier-Felder-Logik aus Zahlung vor/nach dem Stichtag und Aufwand/Ertrag vor/nach dem Stichtag. Genau diese Ordnung trennt aktiven/passiven RAP von sonstigen Forderungen oder Verbindlichkeiten.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Periodenzuordnung', eq: String.raw`\text{wirtschaftliche Zugehörigkeit} \neq \text{Zahlungszeitpunkt}`, desc: 'Kernlogik der Rechnungsabgrenzung.' },
       { label: 'Aktiver / passiver RAP', eq: String.raw`\text{Ausgabe heute, Aufwand morgen} \Rightarrow aRAP \qquad \text{Einnahme heute, Ertrag morgen} \Rightarrow pRAP`, desc: 'Merkschema für die transitorische Abgrenzung.' },
@@ -915,30 +1228,53 @@ export const CONTENT = {
 
   erfolgsrechnung: {
     motivation: 'Mit GKV und UKV endet der Kurs dort, wo sich Bilanzierung, Bewertung und Periodisierung im Jahresergebnis bündeln.',
-    theorie: [
-      section(
-        'Gesamtkostenverfahren',
-        `<p>Das GKV gliedert Aufwendungen nach Kostenarten. Bestandsveränderungen und aktivierte Eigenleistungen korrigieren dabei den Rohaufwand zu einem periodengerechten Ergebnis. Das Verfahren ist besonders anschlussfähig an die klassische Buchführungslogik.</p>`
-      ),
-      section(
-        'Umsatzkostenverfahren',
-        `<p>Das UKV gliedert die Aufwendungen nach Funktionsbereichen, insbesondere Herstellung, Vertrieb und Verwaltung. Dadurch rückt stärker die Erfolgsbeziehung zu den umgesetzten Leistungen in den Vordergrund.</p>`
-      ),
-      section(
-        'Von der Buchung zum Statement-Effekt',
-        `<p>Gerade in Prüfungen zählt nicht nur der Name des Verfahrens, sondern der Weg vom Einzelvorgang zur Ergebniszeile. Bestandsveränderungen, aktivierte Eigenleistungen und Herstellkosten der abgesetzten Leistungen sind die Brücken, über die Buchungen in die Erfolgsrechnung übersetzt werden.</p>`
-      ),
-      section(
-        'Warum beide zum selben Ergebnis führen',
-        `<p>GKV und UKV unterscheiden sich nicht im Jahresergebnis, sondern in der Darstellungslogik. Gerade diese Aussage gehört in fast jede Vergleichsaufgabe.</p>
-         ${warn('Vergleichsfehler:', 'Wer GKV und UKV wie alternative Gewinnermittlungen behandelt, verfehlt den Kern. Das Ergebnis ist gleich, nur die Struktur der Darstellung ändert sich.')}`
-      ),
-      section(
-        'Prüfungsschema für Vergleichsaufgaben',
-        `<p>Eine belastbare Antwort arbeitet deshalb in vier Schritten: Verfahren identifizieren, Ordnungskriterium nennen, Bestands-/Leistungsbrücke erklären und erst dann das Ergebnis vergleichen. Diese Reihenfolge macht aus einer Definitionsfrage eine echte Abschlussantwort.</p>
-         ${warn('Bestandsänderung nicht als Randnotiz behandeln', 'Gerade hier entscheidet sich oft, ob das Verfahren periodengerecht erklärt wird oder nur auswendig gelernt wirkt.')}
-      `)
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum beide zum selben Ergebnis führen</h4>
+<p>GKV und UKV unterscheiden sich nicht im Jahresergebnis, sondern in der Darstellungslogik. Gerade diese Aussage gehört in fast jede Vergleichsaufgabe.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Vergleichsfehler:</strong> Wer GKV und UKV wie alternative Gewinnermittlungen behandelt, verfehlt den Kern. Das Ergebnis ist gleich, nur die Struktur der Darstellung ändert sich.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Gesamtkostenverfahren</h4>
+<p>Das GKV gliedert Aufwendungen nach Kostenarten. Bestandsveränderungen und aktivierte Eigenleistungen korrigieren dabei den Rohaufwand zu einem periodengerechten Ergebnis. Das Verfahren ist besonders anschlussfähig an die klassische Buchführungslogik.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Umsatzkostenverfahren</h4>
+<p>Das UKV gliedert die Aufwendungen nach Funktionsbereichen, insbesondere Herstellung, Vertrieb und Verwaltung. Dadurch rückt stärker die Erfolgsbeziehung zu den umgesetzten Leistungen in den Vordergrund.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Von der Buchung zum Statement-Effekt</h4>
+<p>Gerade in Prüfungen zählt nicht nur der Name des Verfahrens, sondern der Weg vom Einzelvorgang zur Ergebniszeile. Bestandsveränderungen, aktivierte Eigenleistungen und Herstellkosten der abgesetzten Leistungen sind die Brücken, über die Buchungen in die Erfolgsrechnung übersetzt werden.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsschema für Vergleichsaufgaben</h4>
+<p>Eine belastbare Antwort arbeitet deshalb in vier Schritten: Verfahren identifizieren, Ordnungskriterium nennen, Bestands-/Leistungsbrücke erklären und erst dann das Ergebnis vergleichen. Diese Reihenfolge macht aus einer Definitionsfrage eine echte Abschlussantwort.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Bestandsänderung nicht als Randnotiz behandeln</strong> Gerade hier entscheidet sich oft, ob das Verfahren periodengerecht erklärt wird oder nur auswendig gelernt wirkt.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> Geschäftsvorfall → Buchungssatz (Soll/Haben) → Bilanz- und GuV-Wirkung; GoB-Prinzip (Vollständigkeit, Richtigkeit, periodengerechte Abgrenzung) benennen.</p>
+<p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Jahresabschluss-VL; Kontenrahmen-Details in offiziellen Unterlagen prüfen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Jahresergebnis', eq: String.raw`$$JÜ = Erträge - Aufwendungen$$`, desc: 'Beide Verfahren führen dorthin.' },
       { label: 'Kostenart vs. Funktion', eq: String.raw`\text{GKV: Was für Kosten? \quad UKV: Wofür Kosten?}`, desc: 'Merksatz zur Darstellungslogik.' },

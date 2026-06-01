@@ -1,4 +1,5 @@
 import { studentizeTheoryHtml } from "../utils/studentFacingText.js";
+import { applyTheoryRecipeChrome, theoryToHtml } from "../theory/theoryStructure.js";
 
 function stripTrailingColon(value) {
   return String(value ?? "").replace(/[:\s]+$/u, "").trim();
@@ -55,7 +56,7 @@ function normalizeWarningNode(node) {
  */
 
 export function getWarningSystemData(entry) {
-  const theoryHtml = studentizeTheoryHtml(entry?.theorie || "");
+  const theoryHtml = studentizeTheoryHtml(applyTheoryRecipeChrome(theoryToHtml(entry?.theorie), entry));
   if (!theoryHtml || typeof DOMParser === "undefined") {
     return {
       theoryHtml,
@@ -90,9 +91,10 @@ export function getWarningSystemData(entry) {
       warningNode.remove();
     });
 
-    Array.from(root.querySelectorAll(".section-block")).forEach((section) => {
+    Array.from(root.querySelectorAll(".section-block, .theory-recipe-section")).forEach((section) => {
       const hasContent = Array.from(section.children).some((child) => {
-        if (child.tagName === "H3") return false;
+        if (child.tagName === "H3" || child.tagName === "H4") return false;
+        if (child.classList?.contains("theory-recipe-heading")) return false;
         const text = child.textContent?.replace(/\s+/g, " ").trim() || "";
         return text.length > 0;
       });

@@ -51,30 +51,55 @@ export const CHAPTERS = [
 export const CONTENT = {
   finanz_denkweise: {
     motivation: 'Finanzwirtschaft beginnt nicht mit einer Rechenformel, sondern mit einer Perspektive: Welche Alternative bindet wann Mittel, welche Rückflüsse entstehen und welches Vermögen wird dadurch geschaffen oder vernichtet?',
-    theorie: [
-      section(
-        'Was Finanzwirtschaft betrachtet',
-        `<p>Finanzwirtschaft liest Unternehmen über Zahlungsströme, Zeitpunkte und Risiko. Anders als reine Buchungstechnik fragt sie nicht nur, wie ein Vorgang verbucht wird, sondern ob er Liquidität bindet, Wert schafft und künftige Handlungsspielräume erweitert oder verengt.</p>`
-      ),
-      section(
-        'Liquidität, Erfolg und Vermögen sauber trennen',
-        `<p>Ein Vorgang kann liquiditätswirksam, aber nicht sofort erfolgswirksam sein, oder umgekehrt bilanziell harmlos erscheinen und finanzwirtschaftlich gefährlich werden. Gerade diese Trennung ist klausurwichtig, weil viele Fragen zwischen Zahlungsfähigkeit, Gewinn und Vermögenswirkung unterscheiden.</p>`
-      ),
-      section(
-        'Die Leitfrage des ganzen Moduls',
-        `<p>Fast jedes Kapitel des Moduls beantwortet dieselbe Kernfrage auf einer neuen Ebene: Welche Alternative ist unter Zeit, Knappheit und Risiko die bessere? Später heißen die Werkzeuge dafür Kapitalwert, Endwert, IZF, Erwartungswert, WACC oder Leverage.</p>
-         ${warn('Einstiegsfehler:', 'Wer Finanzwirtschaft als bloße Sammlung von Kennzahlen lernt, erkennt später die gemeinsame Entscheidungslogik nicht wieder.')}`
-      ),
-      section(
-        'Zahlungsreihe als Grundobjekt',
-        `<p>Jede Investitions- oder Finanzierungsentscheidung lässt sich als Folge von Zahlungen $\\{z_0, z_1, \\ldots, z_n\\}$ darstellen. $z_0$ ist typischerweise die Anfangsinvestition (negativ), spätere $z_t$ sind Rückflüsse. Die Entscheidung vergleicht Alternativen über dieselbe Zahlungsstruktur — nicht über isolierte Kennzahlen.</p>
-         ${mathBlock(String.raw`$$z_t > 0 \\text{ (Einzahlung)},\\quad z_t < 0 \\text{ (Auszahlung)}$$`)}`
-      ),
-      section(
-        'In der Klausur: Finanzdenkweise',
-        `<p>Prüfungsstandard bei jeder Aufgabe: (1) Zahlungsreihe aufstellen — Vorzeichen und Zeitpunkte korrekt. (2) Entscheidungskriterium wählen (KW, IZF, EV). (3) Annahmen zu Zins/Risiko benennen. (4) Ergebnis als Empfehlung formulieren, nicht nur Zahl nennen. Liquidität ≠ Erfolg ≠ Vermögen — diese Trennung explizit machen.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Was Finanzwirtschaft betrachtet</h4>
+<p>Finanzwirtschaft liest Unternehmen über Zahlungsströme, Zeitpunkte und Risiko. Anders als reine Buchungstechnik fragt sie nicht nur, wie ein Vorgang verbucht wird, sondern ob er Liquidität bindet, Wert schafft und künftige Handlungsspielräume erweitert oder verengt.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Liquidität, Erfolg und Vermögen sauber trennen</h4>
+<p>Ein Vorgang kann liquiditätswirksam, aber nicht sofort erfolgswirksam sein, oder umgekehrt bilanziell harmlos erscheinen und finanzwirtschaftlich gefährlich werden. Gerade diese Trennung ist klausurwichtig, weil viele Fragen zwischen Zahlungsfähigkeit, Gewinn und Vermögenswirkung unterscheiden.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Die Leitfrage des ganzen Moduls</h4>
+<p>Fast jedes Kapitel des Moduls beantwortet dieselbe Kernfrage auf einer neuen Ebene: Welche Alternative ist unter Zeit, Knappheit und Risiko die bessere? Später heißen die Werkzeuge dafür Kapitalwert, Endwert, IZF, Erwartungswert, WACC oder Leverage.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Einstiegsfehler:</strong> Wer Finanzwirtschaft als bloße Sammlung von Kennzahlen lernt, erkennt später die gemeinsame Entscheidungslogik nicht wieder.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zahlungsreihe als Grundobjekt</h4>
+<p>Jede Investitions- oder Finanzierungsentscheidung lässt sich als Folge von Zahlungen $\\{z_0, z_1, \\ldots, z_n\\}$ darstellen. $z_0$ ist typischerweise die Anfangsinvestition (negativ), spätere $z_t$ sind Rückflüsse. Die Entscheidung vergleicht Alternativen über dieselbe Zahlungsstruktur — nicht über isolierte Kennzahlen.</p>
+         <div class="math-block math-block--theory">$$z_t > 0 \\\\text{ (Einzahlung)},\\\\quad z_t < 0 \\\\text{ (Auszahlung)}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Goldene Bilanzregel</h4>
+<p>Mittelfristig: Vermögen finanzieren langfristiges Vermögen; kurzfristiges Vermögen kurzfristig. Brücke zur Liquiditätsplanung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Finanzdenkweise</h4>
+<p>Prüfungsstandard bei jeder Aufgabe: (1) Zahlungsreihe aufstellen — Vorzeichen und Zeitpunkte korrekt. (2) Entscheidungskriterium wählen (KW, IZF, EV). (3) Annahmen zu Zins/Risiko benennen. (4) Ergebnis als Empfehlung formulieren, nicht nur Zahl nennen. Liquidität ≠ Erfolg ≠ Vermögen — diese Trennung explizit machen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Finanzentscheidungen = Bewertung zukünftiger Zahlungsströme unter Zielkonflikt Liquidität, Rendite, Risiko. Immer Zeitebene und Risikoprämie benennen.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Leitobjekt', eq: phrase('Zahlungsreihe { z_0, z_1, ..., z_n }'), desc: 'Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.' },
       { label: 'Leitfrage', eq: schema(['Zeitpunkt', '+', 'Zahlung', '+', 'Risiko', '⇒', 'Entscheidung']), desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' },
@@ -103,33 +128,58 @@ export const CONTENT = {
 
   liquiditaetsplanung: {
     motivation: 'Viele Unternehmen scheitern nicht an fehlenden Gewinnen, sondern an falscher Fristenstruktur. Genau deshalb beginnt die Finanzwirtschaft mit Liquiditätsplanung und Kapitalbedarf statt sofort mit Renditerechnung.',
-    theorie: [
-      section(
-        'Liquidität als Überlebensbedingung',
-        `<p>Liquidität fragt, ob ein Unternehmen seine fälligen Zahlungen zum richtigen Zeitpunkt leisten kann. Ein Projekt kann langfristig rentabel sein und trotzdem kurzfristig eine Finanzierungslücke erzeugen, wenn Auszahlungen früh und Rückflüsse spät anfallen.</p>`
-      ),
-      section(
-        'Goldene Bilanzregel und Fristenkongruenz',
-        `<p>Die goldene Bilanzregel fordert, dass langfristig gebundenes Vermögen mit langfristig verfügbarem Kapital finanziert wird. Sie ist keine ästhetische Bilanzkennzahl, sondern eine Fristenregel gegen permanenten Refinanzierungsdruck.</p>
-         ${mathBlock(schema(['langfristiges Vermögen', '≤', 'langfristiges Kapital']))}
-      `
-      ),
-      section(
-        'Kapitalbedarfsplanung',
-        `<p>Im Kapitalbedarfsplan werden Ein- und Auszahlungen über die Zeit kumuliert. Der tiefste Punkt der kumulierten Kurve zeigt den maximalen Finanzierungsbedarf und damit den Mindestpuffer, der zur Aufrechterhaltung der Zahlungsfähigkeit gebraucht wird.</p>
-         ${warn('Fristenfehler:', 'Ein positiver Gesamtsaldo am Ende beantwortet noch nicht die Frage, ob zwischendurch eine kritische Finanzierungslücke entsteht.')}`
-      ),
-      section(
-        'Zeitachse und Finanzierungslücke',
-        `<p>Die Vorlesung arbeitet mit periodischen Ein- und Auszahlungen. Klausurstabil ist: Zahlungen tabellieren, kumulieren, Minimum markieren — erst dann Kreditlinie oder Eigenkapitalbedarf ableiten.</p>
-         ${mathBlock(schema(['Zahlungsreihe', '→', 'Kumulierung', '→', 'Minimum', '→', 'Finanzierungsbedarf']))}
-      `
-      ),
-      section(
-        'Verbindung zur Investitionsrechnung',
-        `<p>Liquiditätsplanung und Kapitalwert sind komplementär: Ein positives $K_0$ beantwortet nicht automatisch die Zwischenfinanzierung. Deshalb gehört der Kapitalbedarfsplan zum vollständigen Finanzplan.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Liquidität als Überlebensbedingung</h4>
+<p>Liquidität fragt, ob ein Unternehmen seine fälligen Zahlungen zum richtigen Zeitpunkt leisten kann. Ein Projekt kann langfristig rentabel sein und trotzdem kurzfristig eine Finanzierungslücke erzeugen, wenn Auszahlungen früh und Rückflüsse spät anfallen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Goldene Bilanzregel und Fristenkongruenz</h4>
+<p>Die goldene Bilanzregel fordert, dass langfristig gebundenes Vermögen mit langfristig verfügbarem Kapital finanziert wird. Sie ist keine ästhetische Bilanzkennzahl, sondern eine Fristenregel gegen permanenten Refinanzierungsdruck.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">langfristiges Vermögen</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">≤</span></span><span class="semantic-schema__item">langfristiges Kapital</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalbedarfsplanung</h4>
+<p>Im Kapitalbedarfsplan werden Ein- und Auszahlungen über die Zeit kumuliert. Der tiefste Punkt der kumulierten Kurve zeigt den maximalen Finanzierungsbedarf und damit den Mindestpuffer, der zur Aufrechterhaltung der Zahlungsfähigkeit gebraucht wird.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Fristenfehler:</strong> Ein positiver Gesamtsaldo am Ende beantwortet noch nicht die Frage, ob zwischendurch eine kritische Finanzierungslücke entsteht.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zeitachse und Finanzierungslücke</h4>
+<p>Die Vorlesung arbeitet mit periodischen Ein- und Auszahlungen. Klausurstabil ist: Zahlungen tabellieren, kumulieren, Minimum markieren — erst dann Kreditlinie oder Eigenkapitalbedarf ableiten.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zahlungsreihe</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Kumulierung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Minimum</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Finanzierungsbedarf</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Verbindung zur Investitionsrechnung</h4>
+<p>Liquiditätsplanung und Kapitalwert sind komplementär: Ein positives $K_0$ beantwortet nicht automatisch die Zwischenfinanzierung. Deshalb gehört der Kapitalbedarfsplan zum vollständigen Finanzplan.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Goldene Bilanzregel &amp; Fristenkongruenz</h4>
+<p>Mittelfristig: langfristiges AV langfristig finanzieren; kurzfristiges UV kurzfristig. Liquiditätsplan prüft ob Zwischenfinanzierung nötig — Endsaldo positiv reicht nicht.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Liquiditätsplan</h4>
+<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
+      <div class="math-block">$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p>Schrittfolge: (1) Zahlungsströme je Periode. (2) Periodensaldo. (3) Kumulieren. (4) Minimum identifizieren. (5) Goldene Bilanzregel bewerten.</p>
+      <div class="warn-box"><strong>Endsaldo-Falle:</strong> Positiver Endsaldo kann trotzdem Zwischenliquiditätskrise verbergen — immer kumulieren.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Kumulierter Saldo', eq: String.raw`$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$`, desc: 'Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.' },
       { label: 'Goldene Bilanzregel', eq: schema(['AV', '≤', 'langfristiges Kapital']), desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' },
@@ -157,31 +207,52 @@ export const CONTENT = {
 
   kapitalmarkt_bewertung: {
     motivation: 'Sobald Finanzwirtschaft nicht mehr nur als Innenfinanzierung gelesen wird, tauchen Kapitalmarktpreise, Präferenzen und Institutionen auf. Genau hier beginnt die moderne Finanzierungstheorie.',
-    theorie: [
-      section(
-        'Moderne Betrachtungsweise als Perspektivwechsel',
-        `<p>Die moderne Finanzwirtschaft fragt nicht mehr nur nach Liquidität und Mittelherkunft, sondern nach wertmaximierenden Entscheidungen aus Sicht der Kapitalgeber. Marktpreise und Präferenzen werden damit zu Kernbausteinen der Analyse.</p>`
-      ),
-      section(
-        'Marktpreise als Tauschpreise über die Zeit',
-        `<p>Kapitalmärkte übersetzen Zeit in Preise. Zinssätze und Renditen sind damit keine Dekoration, sondern die objektive Marktlogik, mit der Gegenwarts- und Zukunftszahlungen gegeneinander bewertet werden.</p>
-         ${mathBlock(schema(['heutige Zahlung', { type: 'connector', text: '↔', note: 'Aufzinsung / Abzinsung' }, 'künftige Zahlung']))}
-      `
-      ),
-      section(
-        'Rolle von Präferenzen und Nutzen',
-        `<p>Entscheider bewerten Gegenwart und Zukunft nicht neutral. Zeitpräferenzen entscheiden darüber, ob heutiger Konsum, Ersparnis oder spätere Rückflüsse attraktiver wirken. Marktpreis und Präferenz treffen sich später in der intertemporalen Wahl.</p>`
-      ),
-      section(
-        'Kapitalmarktorientierung: Bewertung und Benchmark',
-        `<p>In der kapitalmarktorientierten Ausprägung stehen Preisbildung auf vollkommenen Märkten und die Ableitung von Bewertungs- und Entscheidungskriterien im Vordergrund. Der vollkommene Kapitalmarkt ist dabei ein analytischer Referenzpunkt: Er liefert klare Tausch- und Bewertungslogik, ersetzt aber nicht die Beschreibung realer Friktionen.</p>
-         ${warn('Verwechslungsfehler:', 'Kapitalmarktorientierung meint nicht „die Realität ist reibungslos“, sondern: Zins und Marktpreis strukturieren Vergleiche über die Zeit und liefern unter klaren Annahmen eindeutige Investitionsregeln.')}`
-      ),
-      section(
-        'Warum diese Seite klausurrelevant ist',
-        `<p>Viele Klausurfehler entstehen nicht in der Rechnung, sondern davor: Studierende sehen Zins, Preis und Präferenz nicht als gemeinsame Entscheidungslogik. Genau deshalb ist diese Seite kein Vorspann, sondern die methodische Brücke zum gesamten Investitionsblock.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum diese Seite klausurrelevant ist</h4>
+<p>Viele Klausurfehler entstehen nicht in der Rechnung, sondern davor: Studierende sehen Zins, Preis und Präferenz nicht als gemeinsame Entscheidungslogik. Genau deshalb ist diese Seite kein Vorspann, sondern die methodische Brücke zum gesamten Investitionsblock.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Moderne Betrachtungsweise als Perspektivwechsel</h4>
+<p>Die moderne Finanzwirtschaft fragt nicht mehr nur nach Liquidität und Mittelherkunft, sondern nach wertmaximierenden Entscheidungen aus Sicht der Kapitalgeber. Marktpreise und Präferenzen werden damit zu Kernbausteinen der Analyse.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Marktpreise als Tauschpreise über die Zeit</h4>
+<p>Kapitalmärkte übersetzen Zeit in Preise. Zinssätze und Renditen sind damit keine Dekoration, sondern die objektive Marktlogik, mit der Gegenwarts- und Zukunftszahlungen gegeneinander bewertet werden.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">heutige Zahlung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector-note">Aufzinsung / Abzinsung</span><span class="semantic-schema__connector" aria-hidden="true">↔</span></span><span class="semantic-schema__item">künftige Zahlung</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Rolle von Präferenzen und Nutzen</h4>
+<p>Entscheider bewerten Gegenwart und Zukunft nicht neutral. Zeitpräferenzen entscheiden darüber, ob heutiger Konsum, Ersparnis oder spätere Rückflüsse attraktiver wirken. Marktpreis und Präferenz treffen sich später in der intertemporalen Wahl.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalmarktorientierung: Bewertung und Benchmark</h4>
+<p>In der kapitalmarktorientierten Ausprägung stehen Preisbildung auf vollkommenen Märkten und die Ableitung von Bewertungs- und Entscheidungskriterien im Vordergrund. Der vollkommene Kapitalmarkt ist dabei ein analytischer Referenzpunkt: Er liefert klare Tausch- und Bewertungslogik, ersetzt aber nicht die Beschreibung realer Friktionen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Verwechslungsfehler:</strong> Kapitalmarktorientierung meint nicht „die Realität ist reibungslos“, sondern: Zins und Marktpreis strukturieren Vergleiche über die Zeit und liefern unter klaren Annahmen eindeutige Investitionsregeln.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Marktpreis der Zeit', eq: schema(['Zins', '=', 'Preis des Zeittausches']), desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.', variables: { 'Zins': 'Marktpreis, zu dem Konsum zwischen Zeitpunkten getauscht wird' } },
       { label: 'Entscheidungslogik', eq: schema(['Zahlung', '+', 'Zeitpunkt', '+', 'Marktpreis', '⇒', 'Bewertung']), desc: 'Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.' }
@@ -217,25 +288,55 @@ export const CONTENT = {
 
   institutionen_marktunvollkommenheit: {
     motivation: 'Institutionen werden finanzwirtschaftlich dort zentral, wo reale Kapitalmärkte unvollkommen sind und reine Preismechanik nicht mehr genügt.',
-    theorie: [
-      section(
-        'Warum Institutionen wie Banken entstehen',
-        `<p>In vollkommenen Märkten wären viele Finanzintermediäre theoretisch entbehrlich. In der Wirklichkeit senken Banken Suchkosten, bündeln Informationen, überwachen Kreditnehmer und transformieren Fristen. Sie sind damit Antworten auf Marktunvollkommenheit.</p>
-         ${warn('Abstraktionsfehler:', 'Die Theorie vollkommener Märkte ist ein Benchmark, keine Beschreibung der Wirklichkeit.')}`
-      ),
-      section(
-        'Welche Friktionen gemeint sind',
-        `<p>Die Quelle für Institutionen sind nicht bloß „komplizierte Märkte“, sondern konkrete Friktionen: Informationsasymmetrien, Suchkosten, Transaktionskosten, Überwachungsprobleme und unvollständige Verträge. Erst diese Reibungen machen Intermediation ökonomisch wertvoll.</p>`
-      ),
-      section(
-        'Kapitalmarktorientierung versus Institutionenorientierung',
-        `<p>Die kapitalmarktorientierte Sicht fragt: Was würden Preise auf vollkommenen Märkten leisten? Die institutionenorientierte Sicht fragt: Welche Organisationen und Regeln braucht man gerade deshalb, weil reale Märkte das nicht vollständig leisten?</p>`
-      ),
-      section(
-        'Klausurlogik',
-        `<p>Wenn in einer Aufgabe Banken, Crowdfunding, Überwachung oder asymmetrische Information auftauchen, ist das fast immer ein Signal dafür, dass nicht mehr nur die reine Zinslogik, sondern institutionelle Problemlösung erklärt werden soll.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum Institutionen wie Banken entstehen</h4>
+<p>In vollkommenen Märkten wären viele Finanzintermediäre theoretisch entbehrlich. In der Wirklichkeit senken Banken Suchkosten, bündeln Informationen, überwachen Kreditnehmer und transformieren Fristen. Sie sind damit Antworten auf Marktunvollkommenheit.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Abstraktionsfehler:</strong> Die Theorie vollkommener Märkte ist ein Benchmark, keine Beschreibung der Wirklichkeit.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Welche Friktionen gemeint sind</h4>
+<p>Die Quelle für Institutionen sind nicht bloß „komplizierte Märkte“, sondern konkrete Friktionen: Informationsasymmetrien, Suchkosten, Transaktionskosten, Überwachungsprobleme und unvollständige Verträge. Erst diese Reibungen machen Intermediation ökonomisch wertvoll.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalmarktorientierung versus Institutionenorientierung</h4>
+<p>Die kapitalmarktorientierte Sicht fragt: Was würden Preise auf vollkommenen Märkten leisten? Die institutionenorientierte Sicht fragt: Welche Organisationen und Regeln braucht man gerade deshalb, weil reale Märkte das nicht vollständig leisten?</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Asymmetrische Information</h4>
+<p>Adverse Selection vor Vertrag, Moral Hazard danach. Finanzmarkt: Screening, Signaling, Covenants als institutionelle Antworten.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurlogik</h4>
+<p>Wenn in einer Aufgabe Banken, Crowdfunding, Überwachung oder asymmetrische Information auftauchen, ist das fast immer ein Signal dafür, dass nicht mehr nur die reine Zinslogik, sondern institutionelle Problemlösung erklärt werden soll.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Institutionen</h4>
+<p>Principal-Agent: Anreizverträge, Monitoring-Kosten. Banken als Delegated Monitors (Diamond). Regulierung: Mindesteigenkapital, Deposit Insurance — Trade-off Moral Hazard vs. Stabilität.</p>
+      <div class="warn-box"><strong>Institution ≠ Details:</strong> Ökonomisches Problem und Wohlfahrtsfolge priorisieren — nicht nur Institutionen aufzählen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Ökonomisches Problem → Institution/Vertrag → Wohlfahrts- oder Effizienzfolge. Nicht nur Definition.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Marktunvollkommenheit', eq: schema(['Informationskosten', '+', 'Transaktionskosten', '⇒', 'Institutionen']), desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' },
       { label: 'Orientierungsfrage', eq: schema(['vollkommener Markt? Nein', '⇒', 'Institution / Vertrag / Kontrolle prüfen']), desc: 'Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.' }
@@ -270,33 +371,57 @@ export const CONTENT = {
 
   intertemporale_wahl: {
     motivation: 'Die intertemporale Wahl ist die Mikrostruktur fast aller Finanzierungsfragen: Sparen, Kreditaufnahme und Investition sind letztlich verschiedene Formen desselben Tauschs zwischen heute und morgen.',
-    theorie: [
-      section(
-        'Intertemporale Budgetgerade',
-        `<p>Die Budgetgerade zeigt, welche Kombinationen aus heutigem und zukünftigem Konsum bei gegebenem Ausstattungspunkt und Zinssatz erreichbar sind. Sie wird steiler, wenn der Markt Gegenwartskonsum teurer macht, also der Zins steigt.</p>
-         ${mathBlock(String.raw`$$c_1 = y_1 + (1+i)(y_0 - c_0)$$`)}
-      `
-      ),
-      section(
-        'Sparen und Kreditaufnahme',
-        `<p>Wer unterhalb des heutigen Ausstattungskonsums wählt, spart und verschiebt Kaufkraft in die Zukunft. Wer darüber wählt, nimmt Kredit auf und holt Zukunftskonsum in die Gegenwart. Die Richtung des Tauschs ist damit unmittelbar ökonomisch lesbar.</p>`
-      ),
-      section(
-        'Optimale Wahl',
-        `<p>Das Optimum liegt dort, wo die individuelle Grenzrate der Substitution zwischen heutigem und zukünftigem Konsum dem Marktpreis des Zeittauschs entspricht. Genau diese Tangentiallogik wird später zur Basis der Fisher-Separation.</p>
-         ${warn('Grafikfehler:', 'Die Budgetgerade ist keine bloße Skizze. Achsenabschnitte, Steigung und Ausstattungspunkt tragen jeweils eine finanzwirtschaftliche Aussage.')}`
-      ),
-      section(
-        'Investition als Verschiebung auf der Budgetgerade',
-        `<p>Eine Investition mit positivem Kapitalwert verschiebt den erreichbaren Konsumpfad nach außen: Der Haushalt kann später mehr konsumieren, ohne heute weniger zu haben als ohne Projekt. Deshalb ist intertemporale Wahl nicht nur Konsumpsychologie, sondern die Mikrobasis der Investitionsentscheidung.</p>`
-      ),
-      section(
-        'Fisher-Tangentialbedingung klausurnah',
-        `<p>In Grafikaufgaben zählt die Lesart: Steigung der Budgetgerade = 1+i; Tangentialpunkt = Optimum. Wer nur Koordinaten abliest, aber MRS und Marktpreis nicht verknüpft, verfehlt die ökonomische Aussage der Aufgabe.</p>
-         ${mathBlock(String.raw`$$MRS_{0,1} = 1+i$$`)}
-      `
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Intertemporale Budgetgerade</h4>
+<p>Die Budgetgerade zeigt, welche Kombinationen aus heutigem und zukünftigem Konsum bei gegebenem Ausstattungspunkt und Zinssatz erreichbar sind. Sie wird steiler, wenn der Markt Gegenwartskonsum teurer macht, also der Zins steigt.</p>
+         <div class="math-block math-block--theory">$$c_1 = y_1 + (1+i)(y_0 - c_0)$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Sparen und Kreditaufnahme</h4>
+<p>Wer unterhalb des heutigen Ausstattungskonsums wählt, spart und verschiebt Kaufkraft in die Zukunft. Wer darüber wählt, nimmt Kredit auf und holt Zukunftskonsum in die Gegenwart. Die Richtung des Tauschs ist damit unmittelbar ökonomisch lesbar.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Optimale Wahl</h4>
+<p>Das Optimum liegt dort, wo die individuelle Grenzrate der Substitution zwischen heutigem und zukünftigem Konsum dem Marktpreis des Zeittauschs entspricht. Genau diese Tangentiallogik wird später zur Basis der Fisher-Separation.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Grafikfehler:</strong> Die Budgetgerade ist keine bloße Skizze. Achsenabschnitte, Steigung und Ausstattungspunkt tragen jeweils eine finanzwirtschaftliche Aussage.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Investition als Verschiebung auf der Budgetgerade</h4>
+<p>Eine Investition mit positivem Kapitalwert verschiebt den erreichbaren Konsumpfad nach außen: Der Haushalt kann später mehr konsumieren, ohne heute weniger zu haben als ohne Projekt. Deshalb ist intertemporale Wahl nicht nur Konsumpsychologie, sondern die Mikrobasis der Investitionsentscheidung.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fisher-Tangentialbedingung klausurnah</h4>
+<p>In Grafikaufgaben zählt die Lesart: Steigung der Budgetgerade = 1+i; Tangentialpunkt = Optimum. Wer nur Koordinaten abliest, aber MRS und Marktpreis nicht verknüpft, verfehlt die ökonomische Aussage der Aufgabe.</p>
+         <div class="math-block math-block--theory">$$MRS_{0,1} = 1+i$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Intertemporale Wahl</h4>
+<p>Fisher-Trennung: Investitionsentscheidung (NPV) unabhängig von Finanzierung bei perfekten Märkten. Präferenz über $(c_0,c_1)$: Budget $c_0 + c_1/(1+i) = W$. Glättung des Konsums über Perioden.</p>
+      <div class="math-block">$$NPV = \\sum_t \\frac{CF_t}{(1+i)^t}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Immer Zinssatz und Periodenkonvention (vorschüssig/nachschüssig). Investition und Finanzierung getrennt argumentieren (Fisher).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Budgetgerade', eq: String.raw`$$c_1 = y_1 + (1+i)(y_0 - c_0)$$`, desc: 'Sie zeigt die marktbestimmten Tauschmöglichkeiten zwischen Gegenwart und Zukunft.' },
       { label: 'Tangentialbedingung', eq: String.raw`$$MRS_{0,1} = 1+i$$`, desc: 'Marktpreis und Zeitpräferenz stimmen im Optimum überein.' },
@@ -332,31 +457,57 @@ export const CONTENT = {
 
   kapitalwert_fisher: {
     motivation: 'Mit dem Kapitalwert beginnt die eigentliche Investitionstheorie: Aus einer Zahlungsreihe wird ein Vermögensurteil, und aus einer Vermögensregel folgt eine saubere Entscheidungslogik.',
-    theorie: [
-      section(
-        'Kapitalwert als Vermögenszuwachs',
-        `<p>Der Kapitalwert bringt alle projektbedingten Zahlungen auf einen gemeinsamen Gegenwartszeitpunkt. Ein positiver Kapitalwert bedeutet, dass das Projekt gegenüber der Kapitalmarktalternative Vermögen schafft; ein negativer Kapitalwert vernichtet Vermögen.</p>
-         ${mathBlock(String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+i)^t}$$`)}
-      `
-      ),
-      section(
-        'Welche Kosten in den Kapitalwert gehören',
-        `<p>Für die Kapitalwertrechnung zählen nur zahlungswirksame und entscheidungsrelevante Größen. Versunkene Kosten gehören nicht hinein; Opportunitätskosten dagegen schon. Genau diese Trennung ist im Kurs ausdrücklich klausurrelevant.</p>`
-      ),
-      section(
-        'Fisher-Separation',
-        `<p>Bei vollkommenem Kapitalmarkt kann die Investitionsentscheidung von der Konsumentscheidung getrennt werden. Zuerst wird das Projekt mit dem höchsten positiven Kapitalwert gewählt, anschließend wird entlang des Kapitalmarkts der individuell gewünschte Konsumpfad eingestellt.</p>`
-      ),
-      section(
-        'Grenzen am unvollkommenen Kapitalmarkt',
-        `<p>Unterscheiden sich Soll- und Habenzins oder sind Finanzierungsbedingungen asymmetrisch, zerfällt diese Trennung. Dann beeinflussen Marktunvollkommenheiten die Investitionsentscheidung direkt.</p>
-         ${warn('Kapitalwertfehler:', 'Der Kapitalwert ist kein „Gewinn in Prozent“, sondern ein absoluter Vermögenseffekt relativ zur Kapitalmarktalternative.')}`
-      ),
-      section(
-        'Entscheidungsprobleme sauber unterscheiden',
-        `<p>Der Kurs trennt drei Fälle: Vorteilhaftigkeitsproblem, mehrere voneinander unabhängige Projekte und Wahlproblem bei Ausschlussalternativen. Die Regel ändert sich leicht je nach Struktur, aber der Kapitalwert bleibt die führende Vermögensgröße.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalwert als Vermögenszuwachs</h4>
+<p>Der Kapitalwert bringt alle projektbedingten Zahlungen auf einen gemeinsamen Gegenwartszeitpunkt. Ein positiver Kapitalwert bedeutet, dass das Projekt gegenüber der Kapitalmarktalternative Vermögen schafft; ein negativer Kapitalwert vernichtet Vermögen.</p>
+         <div class="math-block math-block--theory">$$K_0 = -A_0 + \\sum_{t=1}^{n}\\frac{CF_t}{(1+i)^t}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">NPV-Regel</h4>
+<p>NPV $>0$ → Investition erhöht Vermögen (unter perfekten Kapitalmärkten und einheitlichem $i$). Fisher-Trennung: Investitions- und Finanzierungsentscheidung trennbar.</p>
+      <div class="math-block">$$NPV = \\sum_{t=0}^{T} \\frac{CF_t}{(1+i)^t}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Welche Kosten in den Kapitalwert gehören</h4>
+<p>Für die Kapitalwertrechnung zählen nur zahlungswirksame und entscheidungsrelevante Größen. Versunkene Kosten gehören nicht hinein; Opportunitätskosten dagegen schon. Genau diese Trennung ist im Kurs ausdrücklich klausurrelevant.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Fisher-Separation</h4>
+<p>Bei vollkommenem Kapitalmarkt kann die Investitionsentscheidung von der Konsumentscheidung getrennt werden. Zuerst wird das Projekt mit dem höchsten positiven Kapitalwert gewählt, anschließend wird entlang des Kapitalmarkts der individuell gewünschte Konsumpfad eingestellt.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Grenzen am unvollkommenen Kapitalmarkt</h4>
+<p>Unterscheiden sich Soll- und Habenzins oder sind Finanzierungsbedingungen asymmetrisch, zerfällt diese Trennung. Dann beeinflussen Marktunvollkommenheiten die Investitionsentscheidung direkt.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kapitalwertfehler:</strong> Der Kapitalwert ist kein „Gewinn in Prozent“, sondern ein absoluter Vermögenseffekt relativ zur Kapitalmarktalternative.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Entscheidungsprobleme sauber unterscheiden</h4>
+<p>Der Kurs trennt drei Fälle: Vorteilhaftigkeitsproblem, mehrere voneinander unabhängige Projekte und Wahlproblem bei Ausschlussalternativen. Die Regel ändert sich leicht je nach Struktur, aber der Kapitalwert bleibt die führende Vermögensgröße.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Grenzen</h4>
+<p>Bei Kapitalrationierung, strategischen Optionen oder nicht beobachtbarem Risiko: NPV allein reicht — qualitative Begründung ergänzen.</p>
+      <div class="warn-box"><strong>IRR-Falle:</strong> Bei mehrfachen Vorzeichenwechseln mehrere IRR möglich — NPV-Kriterium bevorzugen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Kapitalwert', eq: String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+i)^t}$$`, desc: 'Alle entscheidungsrelevanten Zahlungen werden auf t=0 bezogen.', variables: { 'A_0': 'Anfangsauszahlung / Anschaffungsauszahlung', 'CF_t': 'Nettozahlung der Periode t', 'i': 'relevanter Kalkulationszins', 'K_0': 'Vermögenszuwachs im Zeitpunkt 0' } },
       { label: 'Kapitalwertregel', eq: String.raw`$$K_0 > 0 \Rightarrow \text{vorteilhaft}$$`, desc: 'Positiver Kapitalwert bedeutet Vermögenszuwachs.' },
@@ -402,34 +553,48 @@ export const CONTENT = {
 
   auf_abzinsen: {
     motivation: 'Auf- und Abzinsung sind die Grammatik jeder dynamischen Investitionsrechnung. Wer diese Transformationslogik nicht sicher beherrscht, liest spätere Kapitalwert- und Endwertaufgaben unsauber.',
-    theorie: [
-      section(
-        'Warum Zeitwertrechnung nötig ist',
-        `<p>100 € heute und 100 € in einem Jahr sind finanziell nicht gleichwertig. Erst über Auf- oder Abzinsung werden Zahlungen auf einen gemeinsamen Bewertungszeitpunkt transformiert und damit vergleichbar.</p>`
-      ),
-      section(
-        'Aufzinsen und Abzinsen',
-        `<p>Aufzinsen bringt Zahlungen in die Zukunft, Abzinsen in die Gegenwart. Beide Operationen sind Spiegelbilder und müssen immer mit Blick auf den Zielzeitpunkt eingesetzt werden.</p>
-         ${mathBlock(String.raw`$$EW_n = BW_0 (1+i)^n \qquad BW_0 = \frac{EW_n}{(1+i)^n}$$`)}
-      `
-      ),
-      section(
-        'Variable Zinssätze',
-        `<p>Wenn sich der Zinssatz zwischen den Perioden ändert, muss periodenscharf transformiert werden. Genau hier passieren in Klausuren viele Fehler, weil stillschweigend mit einem konstanten Satz gerechnet wird.</p>
-         ${warn('Zeitachsenfehler:', 'Vor jeder Rechnung muss klar sein, auf welchen Zeitpunkt alle Zahlungen gebracht werden.')}`
-      ),
-      section(
-        'Zeitachse und Zielzeitpunkt',
-        `<p>Die Vorlesung „Aufzinsen und Abzinsen“ arbeitet mit expliziten Zeitpunkten t=0, t=1, …, t=n. Klausurstabil ist: Zahlungen eintragen, Zielzeitpunkt markieren, dann jeden Betrag mit dem passenden Faktor auf diesen Zeitpunkt bringen. Erst danach addieren oder vergleichen.</p>
-         ${mathBlock(schema(['Zahlungen', '→', 'Zeitachse', '→', 'Zielzeitpunkt', '→', 'Vergleich']))}
-      `
-      ),
-      section(
-        'Soll- und Habenzins als Marktunvollkommenheit',
-        `<p>Sobald Sollzins und Habenzins auseinanderlaufen, gibt es nicht mehr einen einzigen Marktpreis des Zeittauschs. Dann hängt die Bewertung davon ab, ob du sparst (Habenzins) oder finanzierst (Sollzins). Das ist die Brücke zum unvollkommenen Kapitalmarkt und zur späteren Fisher-Separation.</p>
-         ${warn('Ein-Zins-Fehler:', 'Bei is ≠ ih darf nicht pauschal ein Mittelwert verwendet werden, ohne die Rolle des Entscheiders zu klären.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum Zeitwertrechnung nötig ist</h4>
+<p>100 € heute und 100 € in einem Jahr sind finanziell nicht gleichwertig. Erst über Auf- oder Abzinsung werden Zahlungen auf einen gemeinsamen Bewertungszeitpunkt transformiert und damit vergleichbar.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Aufzinsen und Abzinsen</h4>
+<p>Aufzinsen bringt Zahlungen in die Zukunft, Abzinsen in die Gegenwart. Beide Operationen sind Spiegelbilder und müssen immer mit Blick auf den Zielzeitpunkt eingesetzt werden.</p>
+         <div class="math-block math-block--theory">$$\\begin{aligned}
+EW_n &= BW_0 (1+i)^n \\\\
+BW_0 &= \\frac{EW_n}{(1+i)^n}
+\\end{aligned}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Variable Zinssätze</h4>
+<p>Wenn sich der Zinssatz zwischen den Perioden ändert, muss periodenscharf transformiert werden. Genau hier passieren in Klausuren viele Fehler, weil stillschweigend mit einem konstanten Satz gerechnet wird.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Zeitachsenfehler:</strong> Vor jeder Rechnung muss klar sein, auf welchen Zeitpunkt alle Zahlungen gebracht werden.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zeitachse und Zielzeitpunkt</h4>
+<p>Die Vorlesung „Aufzinsen und Abzinsen“ arbeitet mit expliziten Zeitpunkten t=0, t=1, …, t=n. Klausurstabil ist: Zahlungen eintragen, Zielzeitpunkt markieren, dann jeden Betrag mit dem passenden Faktor auf diesen Zeitpunkt bringen. Erst danach addieren oder vergleichen.</p>
+         <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zahlungen</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Zeitachse</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Zielzeitpunkt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Vergleich</span></div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Soll- und Habenzins als Marktunvollkommenheit</h4>
+<p>Sobald Sollzins und Habenzins auseinanderlaufen, gibt es nicht mehr einen einzigen Marktpreis des Zeittauschs. Dann hängt die Bewertung davon ab, ob du sparst (Habenzins) oder finanzierst (Sollzins). Das ist die Brücke zum unvollkommenen Kapitalmarkt und zur späteren Fisher-Separation.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Ein-Zins-Fehler:</strong> Bei is ≠ ih darf nicht pauschal ein Mittelwert verwendet werden, ohne die Rolle des Entscheiders zu klären.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Endwert', eq: String.raw`$$EW_n = BW_0 (1+i)^n$$`, desc: 'Aus Gegenwartswert wird Zukunftswert.' },
       { label: 'Barwert', eq: String.raw`$$BW_0 = \frac{EW_n}{(1+i)^n}$$`, desc: 'Aus Zukunftswert wird Gegenwartswert.' },
@@ -466,25 +631,57 @@ export const CONTENT = {
 
   renten_endwert: {
     motivation: 'Mehrperiodige Investitionsaufgaben werden erst dann klausursicher, wenn regelmäßige Zahlungen sauber über Rentenfaktoren, Barwert und Endwert gelesen werden können.',
-    theorie: [
-      section(
-        'Rentenfaktoren',
-        `<p>Rentenbarwert- und Rentenendwertfaktoren fassen regelmäßige Zahlungen in kompakter Form zusammen. Dadurch werden mehrperiodige Zahlungsreihen mit konstanten periodischen Zahlungen rechnerisch beherrschbar.</p>
-         ${mathBlock(String.raw`$$RBWF = \frac{1-(1+i)^{-n}}{i} \qquad REWF = \frac{(1+i)^n-1}{i}$$`)}
-      `
-      ),
-      section(
-        'Barwert- und Endwertsicht',
-        `<p>Barwert- und Endwertmethode bewerten dieselbe Zahlungsreihe, nur auf unterschiedlichen Zeitpunkten. Barwert bezieht sich auf den Startpunkt, Endwert auf den Endpunkt. Bei konsistenter Anwendung führen beide zur gleichen Entscheidung.</p>
-         ${mathBlock(String.raw`$$EW_n = K_0(1+i)^n$$`)}
-      `
-      ),
-      section(
-        'Methodenauswahl in Aufgaben',
-        `<p>Wenn regelmäßige Zahlungen gegeben sind, ist nicht jede Aufgabe automatisch eine Annuitätenaufgabe. Erst die Zielgröße entscheidet: Wird ein Gegenwartswert, ein Zukunftswert oder eine periodische Äquivalentgröße gesucht? Genau diese Auswahl ist klausurentscheidend.</p>
-         ${warn('Methodenfehler:', 'Rentenfaktor, Barwert und Endwert sind keine konkurrierenden Regeln, sondern unterschiedliche Übersetzungen derselben Zahlungsstruktur.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Rentenfaktoren</h4>
+<p>Rentenbarwert- und Rentenendwertfaktoren fassen regelmäßige Zahlungen in kompakter Form zusammen. Dadurch werden mehrperiodige Zahlungsreihen mit konstanten periodischen Zahlungen rechnerisch beherrschbar.</p>
+         <div class="math-block math-block--theory">$$\\begin{aligned}
+RBWF &= \\frac{1-(1+i)^{-n}}{i} \\\\
+REWF &= \\frac{(1+i)^n-1}{i}
+\\end{aligned}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Rentenfaktor</h4>
+<p>Endwert einer Rente: $FV = C \\cdot \\frac{(1+i)^n-1}{i}$. Barwert: Division durch $(1+i)^n$ pro Periode.</p>
+      <div class="math-block">$$FV = C \\cdot \\frac{(1+i)^n-1}{i}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Barwert- und Endwertsicht</h4>
+<p>Barwert- und Endwertmethode bewerten dieselbe Zahlungsreihe, nur auf unterschiedlichen Zeitpunkten. Barwert bezieht sich auf den Startpunkt, Endwert auf den Endpunkt. Bei konsistenter Anwendung führen beide zur gleichen Entscheidung.</p>
+         <div class="math-block math-block--theory">$$EW_n = K_0(1+i)^n$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Methodenauswahl in Aufgaben</h4>
+<p>Wenn regelmäßige Zahlungen gegeben sind, ist nicht jede Aufgabe automatisch eine Annuitätenaufgabe. Erst die Zielgröße entscheidet: Wird ein Gegenwartswert, ein Zukunftswert oder eine periodische Äquivalentgröße gesucht? Genau diese Auswahl ist klausurentscheidend.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Methodenfehler:</strong> Rentenfaktor, Barwert und Endwert sind keine konkurrierenden Regeln, sondern unterschiedliche Übersetzungen derselben Zahlungsstruktur.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Renten</h4>
+<p>Nachschüssig vs. vorschüssig: Faktor $(1+i)$ multiplizieren bei vorschüssig. Barwert Rente: $PV = C \\cdot \\frac{1-(1+i)^{-n}}{i}$. Permanente Rente: $PV = C/i$ bei $n\\to\\infty$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurpfad</h4>
+<p>Zahlungszeitpunkt (nachschüssig/vorschüssig) prüfen — Faktor ändert sich. Zinseszins vs. einfacher Zins explizit.</p>
+      <div class="warn-box"><strong>Periodenkonvention:</strong> Excel/R-Reihenfolge (0 vs. 1 Start) in Klausur explizit — sonst Faktorfehler.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Rentenbarwertfaktor', eq: String.raw`$$RBWF = \frac{1-(1+i)^{-n}}{i}$$`, desc: 'Periodische Zahlungen werden auf den Gegenwartszeitpunkt gebracht.', variables: { 'i': 'periodischer Zinssatz', 'n': 'Anzahl der Perioden' } },
       { label: 'Rentenendwertfaktor', eq: String.raw`$$REWF = \frac{(1+i)^n-1}{i}$$`, desc: 'Periodische Zahlungen werden auf den Endzeitpunkt gebracht.', variables: { 'i': 'periodischer Zinssatz', 'n': 'Anzahl der Perioden' } },
@@ -521,27 +718,56 @@ export const CONTENT = {
 
   annuitaeten_finanzplan: {
     motivation: 'Annuität und vollständiger Finanzplan machen aus bloßer Zeitwertrechnung eine echte Entscheidungs- und Finanzierungslogik über mehrere Perioden.',
-    theorie: [
-      section(
-        'Annuität als äquivalente Periodengröße',
-        `<p>Die Annuitätenmethode drückt den Kapitalwert einer Investition als äquivalente konstante Periodenzahlung aus: dieselbe Zahlungsreihe wird in eine Rente mit gleichem Barwert übersetzt. Damit wird der Wertbeitrag einer Investition periodisch lesbar und mit anderen periodischen Größen vergleichbar.</p>
-         ${mathBlock(String.raw`$$a = \frac{K_0}{RBWF(n,i)} = K_0 \cdot WGF(n,i)$$`)}
-      `
-      ),
-      section(
-        'Vollständiger Finanzplan',
-        `<p>Der vollständige Finanzplan zeigt periodisch, wann Investition, Rückflüsse, Zinsen, Tilgung und möglicher Wertzuwachs anfallen. Dadurch wird sichtbar, dass Investitionsrechnung immer zugleich auch eine Finanzierungsrechnung ist.</p>`
-      ),
-      section(
-        'Wann die Annuität besonders nützlich ist',
-        `<p>Die Annuität ist besonders hilfreich, wenn Projekte mit unterschiedlichen Laufzeiten oder periodischen Finanzierungsraten verglichen werden sollen. Sie übersetzt den gesamten Vermögenseffekt in eine gleichmäßige periodische Entscheidungsgröße.</p>`
-      ),
-      section(
-        'Klausurfehler',
-        `<p>Typische Fehler sind: Kapitalwert und Annuität gegeneinander auszuspielen, Laufzeitäquivalenz zu ignorieren oder den vollständigen Finanzplan als bloßes Rechenschema statt als Kapitalbedarfslogik zu behandeln.</p>
-         ${warn('Äquivalenzfehler:', 'Annuitätenmethode und Kapitalwertmethode widersprechen sich nicht. Die Annuität ist nur eine andere Lesart desselben Vermögenseffekts.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Annuität als äquivalente Periodengröße</h4>
+<p>Die Annuitätenmethode drückt den Kapitalwert einer Investition als äquivalente konstante Periodenzahlung aus: dieselbe Zahlungsreihe wird in eine Rente mit gleichem Barwert übersetzt. Damit wird der Wertbeitrag einer Investition periodisch lesbar und mit anderen periodischen Größen vergleichbar.</p>
+         <div class="math-block math-block--theory">$$\\begin{aligned}
+a &= \\frac{K_0}{RBWF(n,i)} \\\\
+&= K_0 \\cdot WGF(n,i)
+\\end{aligned}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vollständiger Finanzplan</h4>
+<p>Der vollständige Finanzplan zeigt periodisch, wann Investition, Rückflüsse, Zinsen, Tilgung und möglicher Wertzuwachs anfallen. Dadurch wird sichtbar, dass Investitionsrechnung immer zugleich auch eine Finanzierungsrechnung ist.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Wann die Annuität besonders nützlich ist</h4>
+<p>Die Annuität ist besonders hilfreich, wenn Projekte mit unterschiedlichen Laufzeiten oder periodischen Finanzierungsraten verglichen werden sollen. Sie übersetzt den gesamten Vermögenseffekt in eine gleichmäßige periodische Entscheidungsgröße.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurfehler</h4>
+<p>Typische Fehler sind: Kapitalwert und Annuität gegeneinander auszuspielen, Laufzeitäquivalenz zu ignorieren oder den vollständigen Finanzplan als bloßes Rechenschema statt als Kapitalbedarfslogik zu behandeln.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Äquivalenzfehler:</strong> Annuitätenmethode und Kapitalwertmethode widersprechen sich nicht. Die Annuität ist nur eine andere Lesart desselben Vermögenseffekts.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Annuität</h4>
+<p>Annuität $A = K \\cdot \\frac{i(1+i)^n}{(1+i)^n-1}$. Tilgungsplan: Zinsanteil fällt, Tilgung steigt bei konstanter Annuität. Finanzplan: Liquidität periodengerecht — nicht nur NPV.</p>
+      <div class="math-block">$$A = K \\cdot \\frac{i(1+i)^n}{(1+i)^n-1}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Restschuld nach $t$ Perioden; Sondertilgung verschiebt Laufzeit oder senkt Rate — beides explizit.</p>
+      <div class="warn-box"><strong>Nominal vs. real:</strong> Realverzinsung bei Inflation separat — Klausur oft nominal.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Annuität aus Kapitalwert', eq: String.raw`$$a = \frac{K_0}{RBWF(n,i)}$$`, desc: 'Äquivalente konstante Periodenzahlung zum Kapitalwert.', variables: { 'a': 'äquivalente Periodenzahlung / Annuität', 'K_0': 'Kapitalwert im Zeitpunkt 0', 'RBWF(n,i)': 'Rentenbarwertfaktor bei Laufzeit n und Zinssatz i' } },
       { label: 'Wiedergewinnungsfaktor', eq: String.raw`$$WGF(n,i) = \frac{(1+i)^n i}{(1+i)^n-1}$$`, desc: 'Kehrwert des Rentenbarwertfaktors.' }
@@ -576,29 +802,54 @@ export const CONTENT = {
 
   izf_kapitalwertfunktion: {
     motivation: 'Der interne Zinsfuß bringt die Sprache der Rendite in die Investitionsrechnung. Genau deshalb muss er über die Kapitalwertfunktion sauber gelesen und gegen den Marktzinssatz gespiegelt werden.',
-    theorie: [
-      section(
-        'IZF als Nullstelle der Kapitalwertfunktion',
-        `<p>Der interne Zinsfuß ist der Zinssatz, bei dem der Kapitalwert einer Zahlungsreihe null wird. Er sagt also: Bei welchem Marktzinssatz wäre das Projekt gerade noch wertneutral?</p>
-         ${mathBlock(String.raw`$$0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}$$`)}
-      `
-      ),
-      section(
-        'Kapitalwertfunktion lesen',
-        `<p>Die Kapitalwertfunktion zeigt, wie empfindlich der Projektwert auf Änderungen des Kalkulationszinssatzes reagiert. Bei einer typischen Investition (Auszahlung zuerst, spätere Einzahlungen) fällt sie mit steigendem Zinssatz; bei einer Finanzierungskonstellation kann das Profil spiegelbildlich ansteigen. Für die Einordnung von IZF-Regeln ist diese Unterscheidung klausurrelevant.</p>`
-      ),
-      section(
-        'Entscheidungsregel',
-        `<p>Liegt der relevante Marktzinssatz unter dem internen Zinsfuß, ist der Kapitalwert positiv; liegt er darüber, ist der Kapitalwert negativ. Der IZF ist also nur im Zusammenspiel mit dem Vergleichszins sinnvoll interpretierbar.</p>
-         ${warn('Renditefehler:', 'Der IZF ist keine selbstständige Vermögensgröße. Er muss immer gegen Kapitalwert und Kalkulationszins gelesen werden.')}`
-      ),
-      section(
-        'Kapitalwertfunktion und IZF in der Rechnung',
-        `<p>Für $CF_0=-100$ und $CF_1=130$ gilt $K(r)=-100+130/(1+r)$. Der IZF löst $K(r^*)=0$, hier $r^*=30\%$. Am Marktzins $i=8\%$ ist $K(0{,}08)=20{,}37>0$ — Projekt vorteilhaft, obwohl beide Größen zusammen gelesen werden müssen.</p>
-         ${mathBlock(String.raw`$$K(r) = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}, \qquad r^*:\; K(r^*)=0$$`)}
-      `
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">IZF als Nullstelle der Kapitalwertfunktion</h4>
+<p>Der interne Zinsfuß ist der Zinssatz, bei dem der Kapitalwert einer Zahlungsreihe null wird. Er sagt also: Bei welchem Marktzinssatz wäre das Projekt gerade noch wertneutral?</p>
+         <div class="math-block math-block--theory">$$0 = -A_0 + \\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalwertfunktion und IZF in der Rechnung</h4>
+<p>Für $CF_0=-100$ und $CF_1=130$ gilt $K(r)=-100+130/(1+r)$. Der IZF löst $K(r^*)=0$, hier $r^*=30%$. Am Marktzins $i=8%$ ist $K(0{,}08)=20{,}37>0$ — Projekt vorteilhaft, obwohl beide Größen zusammen gelesen werden müssen.</p>
+         <div class="math-block math-block--theory">$$K(r) = -A_0 + \\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}, \\qquad r^*:\\; K(r^*)=0$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kapitalwertfunktion lesen</h4>
+<p>Die Kapitalwertfunktion zeigt, wie empfindlich der Projektwert auf Änderungen des Kalkulationszinssatzes reagiert. Bei einer typischen Investition (Auszahlung zuerst, spätere Einzahlungen) fällt sie mit steigendem Zinssatz; bei einer Finanzierungskonstellation kann das Profil spiegelbildlich ansteigen. Für die Einordnung von IZF-Regeln ist diese Unterscheidung klausurrelevant.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Entscheidungsregel</h4>
+<p>Liegt der relevante Marktzinssatz unter dem internen Zinsfuß, ist der Kapitalwert positiv; liegt er darüber, ist der Kapitalwert negativ. Der IZF ist also nur im Zusammenspiel mit dem Vergleichszins sinnvoll interpretierbar.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Renditefehler:</strong> Der IZF ist keine selbstständige Vermögensgröße. Er muss immer gegen Kapitalwert und Kalkulationszins gelesen werden.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Kapitalwertfunktion</h4>
+<p>$NPV(i)$ fällt in $i$ bei normalen Cashflows. IRR = Nullstelle von $NPV(i)$. Mehrere IRR bei nicht-monotonen Cashflows — dann NPV-Kriterium.</p>
+      <div class="math-block">$$NPV(i) = \\sum_{t=0}^{T} \\frac{CF_t}{(1+i)^t},\\quad NPV(i^*)=0 \\Rightarrow i^* = IRR$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer IZF</h4>
+<p>Schrittfolge: (1) Cashflow-Profil notieren (Vorzeichen!). (2) $NPV(i)$ bei gegebenem $i$ berechnen. (3) Entscheidung: $NPV>0$ akzeptieren. (4) Optional IRR — nur bei eindeutiger Nullstelle.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Graph $NPV(i)$ skizzieren; Schnitt mit Achse = IRR. Kapitalwertfunktion für Sensitivität nutzen.</p>
+      <div class="warn-box"><strong>IRR-Falle:</strong> Mehrere Vorzeichenwechsel → mehrere IRR — NPV-Kriterium hat Vorrang.</div>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'IZF-Definition', eq: String.raw`$$K(r^*) = 0$$`, desc: 'Beim internen Zinsfuß schneidet die Kapitalwertfunktion die Nulllinie.' },
       { label: 'Entscheidungsregel', eq: String.raw`$$r^* > i \Rightarrow K_0(i) > 0$$`, desc: 'Der Vergleichszins entscheidet über Vorteilhaftigkeit.' },
@@ -635,29 +886,59 @@ export const CONTENT = {
 
   izf_grenzen: {
     motivation: 'Gerade weil der IZF so eingängig wirkt, muss man seine Grenzen kennen: Wiederanlageprämisse, Mehrdeutigkeit und Größenunterschiede können Prozentzahlen täuschen.',
-    theorie: [
-      section(
-        'Wiederanlageprämisse',
-        `<p>Der IZF unterstellt implizit, dass Zwischenrückflüsse zum internen Zinsfuß wiederangelegt werden können. Diese Annahme ist oft stärker als diejenige der Kapitalwertmethode, die nur den Marktzinssatz als Maßstab braucht.</p>`
-      ),
-      section(
-        'Mehrdeutige Kapitalwertprofile',
-        `<p>Bei Zahlungsreihen mit mehreren Vorzeichenwechseln kann die Kapitalwertfunktion mehrere Nullstellen besitzen. Dann verliert der IZF seine Eindeutigkeit als Entscheidungsregel.</p>`
-      ),
-      section(
-        'Skalierungsproblem',
-        `<p>Ein kleines Projekt kann einen hohen IZF, aber einen geringen Kapitalwert haben. Bei Ausschlussalternativen bleibt deshalb der Kapitalwert das robustere Kriterium, wenn Vermögensmaximierung das Ziel ist.</p>
-         ${warn('Prozentfehler:', 'Eine hohe Renditezahl ersetzt kein Werturteil. Bei Projektvergleichen zählt die Frage, welches Projekt mehr Vermögen schafft.')}`
-      ),
-      section(
-        'Refinanzierungsprämisse',
-        `<p>Neben der Wiederanlage der Zwischenrückflüsse zum IZF gibt es die Refinanzierungsprämisse: Auszahlungen werden gedanklich zum IZF finanziert. Beide Prämissen sind stärker als die Kapitalwertlogik, die nur den Marktzinssatz als Vergleichsmaßstab braucht. Die Vorlesung nennt beide explizit als Grenzen des IZF.</p>`
-      ),
-      section(
-        'Wann der Kapitalwert die robuste Regel bleibt',
-        `<p>Bei mehreren Vorzeichenwechseln, unterschiedlichen Projektlaufzeiten oder konkurrierenden Projekten liefert der Kapitalwert am gegebenen Kalkulationszins ein eindeutiges Vermögensurteil. Der IZF bleibt als Sensitivitätsgröße nützlich, verliert aber seine Alleinstellung als Entscheidungsregel.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Wiederanlageprämisse</h4>
+<p>Der IZF unterstellt implizit, dass Zwischenrückflüsse zum internen Zinsfuß wiederangelegt werden können. Diese Annahme ist oft stärker als diejenige der Kapitalwertmethode, die nur den Marktzinssatz als Maßstab braucht.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Mehrdeutige Kapitalwertprofile</h4>
+<p>Bei Zahlungsreihen mit mehreren Vorzeichenwechseln kann die Kapitalwertfunktion mehrere Nullstellen besitzen. Dann verliert der IZF seine Eindeutigkeit als Entscheidungsregel.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Skalierungsproblem</h4>
+<p>Ein kleines Projekt kann einen hohen IZF, aber einen geringen Kapitalwert haben. Bei Ausschlussalternativen bleibt deshalb der Kapitalwert das robustere Kriterium, wenn Vermögensmaximierung das Ziel ist.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Prozentfehler:</strong> Eine hohe Renditezahl ersetzt kein Werturteil. Bei Projektvergleichen zählt die Frage, welches Projekt mehr Vermögen schafft.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Refinanzierungsprämisse</h4>
+<p>Neben der Wiederanlage der Zwischenrückflüsse zum IZF gibt es die Refinanzierungsprämisse: Auszahlungen werden gedanklich zum IZF finanziert. Beide Prämissen sind stärker als die Kapitalwertlogik, die nur den Marktzinssatz als Vergleichsmaßstab braucht. Die Vorlesung nennt beide explizit als Grenzen des IZF.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Wann der Kapitalwert die robuste Regel bleibt</h4>
+<p>Bei mehreren Vorzeichenwechseln, unterschiedlichen Projektlaufzeiten oder konkurrierenden Projekten liefert der Kapitalwert am gegebenen Kalkulationszins ein eindeutiges Vermögensurteil. Der IZF bleibt als Sensitivitätsgröße nützlich, verliert aber seine Alleinstellung als Entscheidungsregel.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Grenzen NPV/IRR</h4>
+<p>Kapitalrationierung: Projektranking nach NPV pro eingesetztem Euro oder PI. Mutually exclusive: höchster NPV, nicht höchster IRR. Unterschiedliche Laufzeiten: Kettenmethode oder EAA.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer IZF-Grenzen</h4>
+<p>Wiederanlageprämisse: IRR setzt Reinvestition zum IRR voraus — unrealistisch bei hohem IRR. Mehrdeutigkeit: Vorzeichenwechsel zählen. Referenz: NPV bei Kalkulationszins $i$.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>IRR-Falle bei Vorzeichenwechseln; qualitative Begründung wann NPV dominiert.</p>
+      <div class="warn-box"><strong>IRR vs. NPV:</strong> Bei unterschiedlichen Skalen oder Kapitalbudget immer NPV vergleichen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Mehrdeutigkeit', eq: schema(['mehrere Vorzeichenwechsel', '⇒', 'mehrere mögliche r*']), desc: 'Der IZF kann seine Eindeutigkeit verlieren.' },
       { label: 'Wiederanlageprämisse', eq: String.raw`\text{Zwischenüberschüsse werden zu } r^* \text{ reinvestiert}`, desc: 'Implizite und oft unrealistische Annahme des IZF.' },
@@ -693,27 +974,52 @@ export const CONTENT = {
 
   unsicherheit: {
     motivation: 'Sobald Rückflüsse nicht sicher sind, reicht die sichere Zeitwertrechnung nicht mehr. Dann müssen Zustände, Wahrscheinlichkeiten und Risikokorrekturen in die Entscheidung integriert werden.',
-    theorie: [
-      section(
-        'Alternativen, Umweltzustände und Ergebnisse',
-        `<p>Unsicherheit wird im Kurs über Zustände und zustandsabhängige Ergebnisse modelliert. Für jede Alternative wird gefragt, welche Auszahlung in welchem Zustand entsteht und wie plausibel diese Zustände sind.</p>`
-      ),
-      section(
-        'Dominanz als erste Vorauswahl',
-        `<p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Erst wenn keine Alternative dominiert wird, lohnt sich die feinere Analyse über Erwartungswert und Risiko.</p>`
-      ),
-      section(
-        'Erwartungswert, Varianz und Verlustseite',
-        `<p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Danach kommen Erwartungswert, Verlustwahrscheinlichkeit und gegebenenfalls weitere Risikomaße ins Spiel.</p>
-         ${mathBlock(String.raw`$$E(X) = \sum_{s} p_s x_s \qquad Var(X)= \sum_s p_s(x_s-E(X))^2$$`)}
-      `
-      ),
-      section(
-        'Interpretation statt bloßer Kennzahl',
-        `<p>Ein hoher Erwartungswert reicht nicht automatisch. Gerade im Kurs ist wichtig, dass Verlustwahrscheinlichkeit, downside risk und Streuung mitgelesen werden. Die Entscheidung ist deshalb immer eine Abwägung von Rendite und Risiko statt einer simplen Mittelwertregel.</p>
-         ${warn('Unsicherheitsfehler:', 'Ein hoher Erwartungswert genügt noch nicht, wenn die Verlustseite oder die Streuung des Projekts nicht mitgelesen wird.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Alternativen, Umweltzustände und Ergebnisse</h4>
+<p>Unsicherheit wird im Kurs über Zustände und zustandsabhängige Ergebnisse modelliert. Für jede Alternative wird gefragt, welche Auszahlung in welchem Zustand entsteht und wie plausibel diese Zustände sind.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Dominanz als erste Vorauswahl</h4>
+<p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Erst wenn keine Alternative dominiert wird, lohnt sich die feinere Analyse über Erwartungswert und Risiko.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Erwartungswert, Varianz und Verlustseite</h4>
+<p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Danach kommen Erwartungswert, Verlustwahrscheinlichkeit und gegebenenfalls weitere Risikomaße ins Spiel.</p>
+         <div class="math-block math-block--theory">$$E(X) = \\sum_{s} p_s x_s \\qquad Var(X)= \\sum_s p_s(x_s-E(X))^2$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Interpretation statt bloßer Kennzahl</h4>
+<p>Ein hoher Erwartungswert reicht nicht automatisch. Gerade im Kurs ist wichtig, dass Verlustwahrscheinlichkeit, downside risk und Streuung mitgelesen werden. Die Entscheidung ist deshalb immer eine Abwägung von Rendite und Risiko statt einer simplen Mittelwertregel.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Unsicherheitsfehler:</strong> Ein hoher Erwartungswert genügt noch nicht, wenn die Verlustseite oder die Streuung des Projekts nicht mitgelesen wird.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Unsicherheit</h4>
+<p>Erwartungswert-Kriterium: $E[NPV]$ bei Szenarien. Risikoaversion: Risikoadjustierung via höherem Diskontsatz oder CAPM ($k_E = r_f + \\beta(r_m-r_f)$).</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Szenarioanalyse vs. Sensitivität vs. Monte Carlo qualitativ unterscheiden. Entscheidung unter Unsicherheit ≠ Risiko neutral.</p>
+      <div class="warn-box"><strong>Erwartungswert:</strong> $E[NPV]$ optimal nur bei Risikoneutralität — sonst CE oder risikoadjustierter Diskontsatz.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Erwartungswert', eq: String.raw`$$E(X) = \sum_s p_s x_s$$`, desc: 'Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.', variables: { 'p_s': 'Wahrscheinlichkeit des Zustands s', 'x_s': 'Ergebnis / Auszahlung im Zustand s' } },
       { label: 'Varianz', eq: String.raw`$$Var(X)= \sum_s p_s(x_s-E(X))^2$$`, desc: 'Streuungsmaß der Ergebnisse um ihren Erwartungswert.' }
@@ -749,29 +1055,53 @@ export const CONTENT = {
 
   risikoadjustierter_kapitalwert: {
     motivation: 'Unsicherheit wird erst finanzwirtschaftlich entscheidungsrelevant, wenn sie wieder in eine Bewertungsregel übersetzt wird. Genau das leisten Risikozuschlag und Sicherheitsabschlag.',
-    theorie: [
-      section(
-        'Vom sicheren zum risikoadjustierten Kapitalwert',
-        `<p>Der sichere Kapitalwert vergleicht Zahlungen mit einem sicheren Kalkulationszins. Unter Unsicherheit muss zusätzlich geklärt werden, wie Risiko in die Bewertung eingeht: über einen Zuschlag im Diskontsatz oder über Abschläge direkt auf die erwarteten Zahlungen.</p>`
-      ),
-      section(
-        'Risikozuschlagsmethode',
-        `<p>Bei der Risikozuschlagsmethode wird der sichere Kalkulationszins um einen Zuschlag erhöht. Riskantere Projekte werden dadurch stärker abgezinst.</p>
-         ${mathBlock(String.raw`$$K_0^{risk} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)}{(1+i+d)^t}$$`)}
-      `
-      ),
-      section(
-        'Sicherheitsabschlag auf Cashflows',
-        `<p>Alternativ kann Risiko direkt auf der Zahlungsseite berücksichtigt werden: Statt die erwarteten Zahlungen unverändert zu verwenden, werden Risikoabschläge vorgenommen. So bleibt der Diskontsatz unverändert, während der Zahlungsstrom vorsichtiger angesetzt wird.</p>
-         ${mathBlock(String.raw`$$K_0^{safe} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)-D_t}{(1+i)^t}$$`)}
-      `
-      ),
-      section(
-        'Klausurfehler und Methodenwahl',
-        `<p>Beide Methoden wollen dasselbe: Risiko in eine Vermögensregel übersetzen. Typische Fehler sind, Risiko doppelt zu berücksichtigen oder die ökonomische Bedeutung des Zuschlags/Abschlags nicht zu erklären.</p>
-         ${warn('Doppelt-Risiko-Fehler:', 'Wer gleichzeitig den Diskontsatz erhöht und die Cashflows pauschal drückt, riskiert eine doppelte Risikobelastung ohne Begründung.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Vom sicheren zum risikoadjustierten Kapitalwert</h4>
+<p>Der sichere Kapitalwert vergleicht Zahlungen mit einem sicheren Kalkulationszins. Unter Unsicherheit muss zusätzlich geklärt werden, wie Risiko in die Bewertung eingeht: über einen Zuschlag im Diskontsatz oder über Abschläge direkt auf die erwarteten Zahlungen.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Risikozuschlagsmethode</h4>
+<p>Bei der Risikozuschlagsmethode wird der sichere Kalkulationszins um einen Zuschlag erhöht. Riskantere Projekte werden dadurch stärker abgezinst.</p>
+         <div class="math-block math-block--theory">$$K_0^{risk} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)}{(1+i+d)^t}$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Sicherheitsabschlag auf Cashflows</h4>
+<p>Alternativ kann Risiko direkt auf der Zahlungsseite berücksichtigt werden: Statt die erwarteten Zahlungen unverändert zu verwenden, werden Risikoabschläge vorgenommen. So bleibt der Diskontsatz unverändert, während der Zahlungsstrom vorsichtiger angesetzt wird.</p>
+         <div class="math-block math-block--theory">$$K_0^{safe} = -A_0 + \\sum_{t=1}^{n}\\frac{E(CF_t)-D_t}{(1+i)^t}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurfehler und Methodenwahl</h4>
+<p>Beide Methoden wollen dasselbe: Risiko in eine Vermögensregel übersetzen. Typische Fehler sind, Risiko doppelt zu berücksichtigen oder die ökonomische Bedeutung des Zuschlags/Abschlags nicht zu erklären.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Doppelt-Risiko-Fehler:</strong> Wer gleichzeitig den Diskontsatz erhöht und die Cashflows pauschal drückt, riskiert eine doppelte Risikobelastung ohne Begründung.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: Risikoadjustierter NPV</h4>
+<p>Certainty Equivalent oder risikoadjustierter Diskontsatz. CAPM: Projektrisiko über $\\beta$ — nicht Firmen-$\\beta$ blind übernehmen bei diversifiziertem Investor.</p>
+      <div class="math-block">$$k = r_f + \\beta (r_m - r_f)$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Systematisches vs. idiosynkratisches Risiko; Diversifikation eliminiert idiosynkratisches Risiko für Aktionäre.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Risikozuschlag', eq: String.raw`$$K_0^{risk} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)}{(1+i+d)^t}$$`, desc: 'Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.', variables: { 'd': 'Risikozuschlag auf den sicheren Kalkulationszins', 'E(CF_t)': 'erwarteter Cashflow der Periode t' } },
       { label: 'Sicherheitsabschlag', eq: String.raw`$$K_0^{safe} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)-D_t}{(1+i)^t}$$`, desc: 'Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.', variables: { 'D_t': 'Sicherheitsabschlag / Risikoabschlag in Periode t' } }
@@ -807,33 +1137,57 @@ export const CONTENT = {
 
   bezugsrecht: {
     motivation: 'Kapitalerhöhungen sind klausurtypisch, weil hier Marktwert, neue Mittelaufnahme und Schutz alter Aktionäre in einer einzigen Logik zusammenlaufen.',
-    theorie: [
-      section(
-        'Warum es ein Bezugsrecht gibt',
-        `<p>Bei einer ordentlichen Kapitalerhöhung werden neue Aktien oft unter dem alten Börsenkurs ausgegeben. Ohne Bezugsrecht würden Altaktionäre durch Verwässerung benachteiligt. Das Bezugsrecht gleicht genau diesen Nachteil aus.</p>`
-      ),
-      section(
-        'Theoretischer Ex-Kurs und Bezugsrechtswert',
-        `<p>Der theoretische Ex-Kurs ergibt sich aus dem Gesamtwert von alten und neuen Aktien nach der Kapitalerhöhung geteilt durch die neue Aktienzahl. Aus der Differenz zwischen altem Kurs und Ex-Kurs lässt sich der Wert des Bezugsrechts ableiten.</p>
-         ${mathBlock(String.raw`$$P_{ex} = \frac{nP_0 + mP_N}{n+m} \qquad BR = P_0 - P_{ex}$$`)}
-      `
-      ),
-      section(
-        'Ökonomische Interpretation',
-        `<p>Das Bezugsrecht ist kein Zusatzgeschenk, sondern ein Kompensationsmechanismus. Unter vollkommenem Kapitalmarkt bleibt die Vermögensposition des Altaktionärs bei korrekter Berücksichtigung des Bezugsrechts unverändert.</p>
-         ${warn('Verwässerungsfehler:', 'Ohne Bezug auf den Ex-Kurs bleibt oft unklar, warum Altaktionäre trotz niedrigen Emissionskurses wirtschaftlich nicht zwingend schlechter gestellt sind.')}`
-      ),
-      section(
-        'Bezugsverhältnis und Rechenroutine',
-        `<p>Klausursicher wird das Thema erst mit einer festen Rechenfolge: Zuerst das Bezugsverhältnis aus alten und neuen Aktien lesen, dann den theoretischen Ex-Kurs bestimmen, daraus den Bezugsrechtswert ableiten und erst anschließend die Vermögensposition des Altaktionärs interpretieren.</p>
-         <p>Diese Reihenfolge verhindert, dass Emissionskurs, Mischkurs und Bezugsrecht ungeordnet durcheinandergeraten.</p>`
-      ),
-      section(
-        'Cum-, Ex- und Vermögensposition sauber trennen',
-        `<p>Der alte Kurs <em>cum Bezugsrecht</em> und der neue Ex-Kurs beschreiben nicht dieselbe Vermögensposition. Erst wenn Kursdifferenz und Bezugsrecht gemeinsam gelesen werden, wird klar, dass das Bezugsrecht keine Gratiszugabe ist, sondern nur den Verwässerungseffekt neutralisiert.</p>
-         ${warn('Kursvergleichsfehler:', 'Wer nur P₀ mit P_N oder nur den Emissionskurs mit dem alten Börsenkurs vergleicht, verpasst die eigentliche Vermögenslogik der Kapitalerhöhung.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum es ein Bezugsrecht gibt</h4>
+<p>Bei einer ordentlichen Kapitalerhöhung werden neue Aktien oft unter dem alten Börsenkurs ausgegeben. Ohne Bezugsrecht würden Altaktionäre durch Verwässerung benachteiligt. Das Bezugsrecht gleicht genau diesen Nachteil aus.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Theoretischer Ex-Kurs und Bezugsrechtswert</h4>
+<p>Der theoretische Ex-Kurs ergibt sich aus dem Gesamtwert von alten und neuen Aktien nach der Kapitalerhöhung geteilt durch die neue Aktienzahl. Aus der Differenz zwischen altem Kurs und Ex-Kurs lässt sich der Wert des Bezugsrechts ableiten.</p>
+         <div class="math-block math-block--theory">$$\\begin{aligned}
+P_{ex} &= \\frac{nP_0 + mP_N}{n+m} \\\\
+BR &= P_0 - P_{ex}
+\\end{aligned}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Ökonomische Interpretation</h4>
+<p>Das Bezugsrecht ist kein Zusatzgeschenk, sondern ein Kompensationsmechanismus. Unter vollkommenem Kapitalmarkt bleibt die Vermögensposition des Altaktionärs bei korrekter Berücksichtigung des Bezugsrechts unverändert.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Verwässerungsfehler:</strong> Ohne Bezug auf den Ex-Kurs bleibt oft unklar, warum Altaktionäre trotz niedrigen Emissionskurses wirtschaftlich nicht zwingend schlechter gestellt sind.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Bezugsverhältnis und Rechenroutine</h4>
+<p>Klausursicher wird das Thema erst mit einer festen Rechenfolge: Zuerst das Bezugsverhältnis aus alten und neuen Aktien lesen, dann den theoretischen Ex-Kurs bestimmen, daraus den Bezugsrechtswert ableiten und erst anschließend die Vermögensposition des Altaktionärs interpretieren.</p>
+         <p>Diese Reihenfolge verhindert, dass Emissionskurs, Mischkurs und Bezugsrecht ungeordnet durcheinandergeraten.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Cum-, Ex- und Vermögensposition sauber trennen</h4>
+<p>Der alte Kurs <em>cum Bezugsrecht</em> und der neue Ex-Kurs beschreiben nicht dieselbe Vermögensposition. Erst wenn Kursdifferenz und Bezugsrecht gemeinsam gelesen werden, wird klar, dass das Bezugsrecht keine Gratiszugabe ist, sondern nur den Verwässerungseffekt neutralisiert.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kursvergleichsfehler:</strong> Wer nur P₀ mit P_N oder nur den Emissionskurs mit dem alten Börsenkurs vergleicht, verpasst die eigentliche Vermögenslogik der Kapitalerhöhung.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Theoretischer Ex-Kurs', eq: String.raw`$$P_{ex} = \frac{nP_0 + mP_N}{n+m}$$`, desc: 'Neuer Mischkurs nach Ausgabe alter und neuer Aktien.' },
       { label: 'Bezugsrechtswert', eq: String.raw`$$BR = P_0 - P_{ex}$$`, desc: 'Das Bezugsrecht gleicht den Verwässerungseffekt aus.' },
@@ -879,36 +1233,43 @@ export const CONTENT = {
 
   eigenkapitalkosten: {
     motivation: 'Eigen- und Fremdkapital haben keinen gleichen Preis. Gute Finanzentscheidungen hängen deshalb daran, wie sauber diese Kostenquellen gemessen und interpretiert werden.',
-    theorie: [
-      section(
-        'Eigenkapitalkosten über das Dividendenbarwertmodell',
-        `<p>Beim Dividendenbarwertmodell wird der Aktienpreis als Barwert erwarteter Dividenden gelesen. Daraus lässt sich die von den Eigenkapitalgebern geforderte Rendite ableiten.</p>
-         ${mathBlock(String.raw`$$k_E = \frac{D_1}{P_0} + g$$`)}
-      `
-      ),
-      section(
-        'Kurs, erwartete Rendite und Kalkulationszins',
-        `<p>Im Marktgleichgewicht entspricht der aus Kurs und erwarteten künftigen Zahlungen implizite Diskontierungssatz der erwarteten Eigenkapitalrendite. Diese Größe ist zugleich der Kalkulationszins für die Bewertung unsicherer Projekte bei reiner Eigenfinanzierung in der entsprechenden Modelllogik.</p>`
-      ),
-      section(
-        'Primär- und Sekundärmarkt sauber trennen',
-        `<p>Das Kursniveau am Sekundärmarkt ist nicht bloß „Hintergrund“. Es liefert den Preis, aus dem die geforderte Rendite rückwärts gelesen wird. Damit werden Eigenkapitalkosten marktbasiert bestimmt und nicht willkürlich gesetzt.</p>`
-      ),
-      section(
-        'Interpretation',
-        `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
-         ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
-      ),
-      section(
-        'Wann das Gordon-Modell passt und wann nicht',
-        `<p>Die Kurzformel <code>k_E = D₁ / P₀ + g</code> setzt mehr voraus, als viele Lösungen sichtbar machen: eine fortgeführte Dividendenpolitik, ein plausibel konstantes Wachstum und einen positiven Abstand zwischen geforderter Rendite und Wachstumsrate. Fehlt diese Stabilität, kippt das Modell schnell von einer Bewertungsstütze zu einer Scheingenauigkeit.</p>
-         ${warn('Modellblindheit:', 'Nicht jede Aktie mit Ausschüttung passt automatisch in das Gordon-Schema. Vor dem Rechnen ist zu prüfen, ob konstantes Wachstum und Dividendenkontinuität überhaupt plausibel sind.')}`
-      ),
-      section(
-        'D₁, D₀ und die Entscheidungslesart',
-        `<p>In Klausuren wird häufig die nächste erwartete Dividende <code>D₁</code> mit der zuletzt gezahlten Dividende <code>D₀</code> verwechselt. Das ist kein Detailfehler, sondern ändert unmittelbar den geforderten Renditesatz. Erst wenn klar ist, welche Ausschüttung der Markt heute bereits antizipiert, darf die Formel eingesetzt und das Ergebnis als Mindestverzinsung interpretiert werden.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Eigenkapitalkosten über das Dividendenbarwertmodell</h4>
+<p>Beim Dividendenbarwertmodell wird der Aktienpreis als Barwert erwarteter Dividenden gelesen. Daraus lässt sich die von den Eigenkapitalgebern geforderte Rendite ableiten.</p>
+         <div class="math-block math-block--theory">$$k_E = \\frac{D_1}{P_0} + g$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Kurs, erwartete Rendite und Kalkulationszins</h4>
+<p>Im Marktgleichgewicht entspricht der aus Kurs und erwarteten künftigen Zahlungen implizite Diskontierungssatz der erwarteten Eigenkapitalrendite. Diese Größe ist zugleich der Kalkulationszins für die Bewertung unsicherer Projekte bei reiner Eigenfinanzierung in der entsprechenden Modelllogik.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Primär- und Sekundärmarkt sauber trennen</h4>
+<p>Das Kursniveau am Sekundärmarkt ist nicht bloß „Hintergrund“. Es liefert den Preis, aus dem die geforderte Rendite rückwärts gelesen wird. Damit werden Eigenkapitalkosten marktbasiert bestimmt und nicht willkürlich gesetzt.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Interpretation</h4>
+<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kostenfehler:</strong> Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Wann das Gordon-Modell passt und wann nicht</h4>
+<p>Die Kurzformel <code>k_E = D₁ / P₀ + g</code> setzt mehr voraus, als viele Lösungen sichtbar machen: eine fortgeführte Dividendenpolitik, ein plausibel konstantes Wachstum und einen positiven Abstand zwischen geforderter Rendite und Wachstumsrate. Fehlt diese Stabilität, kippt das Modell schnell von einer Bewertungsstütze zu einer Scheingenauigkeit.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Modellblindheit:</strong> Nicht jede Aktie mit Ausschüttung passt automatisch in das Gordon-Schema. Vor dem Rechnen ist zu prüfen, ob konstantes Wachstum und Dividendenkontinuität überhaupt plausibel sind.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">D₁, D₀ und die Entscheidungslesart</h4>
+<p>In Klausuren wird häufig die nächste erwartete Dividende <code>D₁</code> mit der zuletzt gezahlten Dividende <code>D₀</code> verwechselt. Das ist kein Detailfehler, sondern ändert unmittelbar den geforderten Renditesatz. Erst wenn klar ist, welche Ausschüttung der Markt heute bereits antizipiert, darf die Formel eingesetzt und das Ergebnis als Mindestverzinsung interpretiert werden.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Eigenkapitalkosten', eq: String.raw`$$k_E = \frac{D_1}{P_0} + g$$`, desc: 'Gordon-Growth-Formel bei konstantem Dividendenwachstum.', variables: { 'D_1': 'erwartete Dividende der nächsten Periode', 'P_0': 'aktueller Aktienkurs', 'g': 'erwartete konstante Wachstumsrate der Dividenden' } },
       { label: 'Marktgleichgewichtslogik', eq: String.raw`$$P_0 = \sum_{t=1}^{\infty}\frac{E(D_t)}{(1+k_E)^t}$$`, desc: 'Der heutige Kurs ist der Barwert der erwarteten Ausschüttungen.' },
@@ -963,32 +1324,53 @@ export const CONTENT = {
 
   fremdkapitalkosten: {
     motivation: 'Fremdkapital ist mehr als Nominalzins: Entscheidend sind die tatsächlich verursachten Finanzierungskosten und ihre Interpretation als Opportunitätskosten.',
-    theorie: [
-      section(
-        'Nominalzins versus effektive Fremdkapitalkosten',
-        `<p>Fremdkapital ist nicht nur der Nominalzins eines Kredits. Effektive Kosten können über interne Zinsfüße, Skonto, Gebühren oder Risikoprämien steigen. Gerade Lieferantenkredit und Skonto sind typische Klausurklassiker.</p>`
-      ),
-      section(
-        'Fremdkapitalkosten als interner Zinsfuß der Finanzierungsreihe',
-        `<p>Im Kurs werden Fremdkapitalkosten prinzipiell als interner Zinsfuß der durch die Finanzierung ausgelösten Zahlungsreihe gelesen. Damit ist sofort klar: Auch Finanzierung wird über Zahlungsreihen und Vergleichszinsen beurteilt, nicht nur Investition.</p>`
-      ),
-      section(
-        'Skonto und Lieferantenkredit',
-        `<p>Wer auf Skonto verzichtet, nutzt implizit einen kurzfristigen Lieferantenkredit. Genau deshalb kann ein kleiner Skontosatz auf Jahresbasis sehr hohe effektive Fremdkapitalkosten bedeuten.</p>
-         ${mathBlock(String.raw`$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$`)}
-      `
-      ),
-      section(
-        'Zeiteinheit, Vorzeichen und Vergleichszins',
-        `<p>Viele Klausurfehler sind keine Rechenfehler, sondern Einheiten- und Interpretationsfehler: Skonto wird nicht annualisiert, Gebühren werden nicht in die Zahlungsreihe integriert oder Kreditaufnahme und Rückzahlung erhalten vertauschte Vorzeichen. Erst danach darf der gefundene Satz mit Alternativen wie Bankkredit oder Projektverzinsung verglichen werden.</p>
-         ${warn('Einheitenfehler:', 'Ein 30-Tage-Kredit mit 2 % Kosten ist nicht „nur 2 % pro Jahr“. Ohne Annualisierung unterschätzt du die Fremdkapitalkosten systematisch.')}`
-      ),
-      section(
-        'Interpretation und Fallen',
-        `<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
-         ${warn('Kostenfehler:', 'Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Nominalzins versus effektive Fremdkapitalkosten</h4>
+<p>Fremdkapital ist nicht nur der Nominalzins eines Kredits. Effektive Kosten können über interne Zinsfüße, Skonto, Gebühren oder Risikoprämien steigen. Gerade Lieferantenkredit und Skonto sind typische Klausurklassiker.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Skonto und Lieferantenkredit</h4>
+<p>Wer auf Skonto verzichtet, nutzt implizit einen kurzfristigen Lieferantenkredit. Genau deshalb kann ein kleiner Skontosatz auf Jahresbasis sehr hohe effektive Fremdkapitalkosten bedeuten.</p>
+         <div class="math-block math-block--theory">$$k_{Skonto} \\approx \\frac{s}{1-s}\\cdot\\frac{360}{T-Z}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Fremdkapitalkosten als interner Zinsfuß der Finanzierungsreihe</h4>
+<p>Im Kurs werden Fremdkapitalkosten prinzipiell als interner Zinsfuß der durch die Finanzierung ausgelösten Zahlungsreihe gelesen. Damit ist sofort klar: Auch Finanzierung wird über Zahlungsreihen und Vergleichszinsen beurteilt, nicht nur Investition.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Zeiteinheit, Vorzeichen und Vergleichszins</h4>
+<p>Viele Klausurfehler sind keine Rechenfehler, sondern Einheiten- und Interpretationsfehler: Skonto wird nicht annualisiert, Gebühren werden nicht in die Zahlungsreihe integriert oder Kreditaufnahme und Rückzahlung erhalten vertauschte Vorzeichen. Erst danach darf der gefundene Satz mit Alternativen wie Bankkredit oder Projektverzinsung verglichen werden.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Einheitenfehler:</strong> Ein 30-Tage-Kredit mit 2 % Kosten ist nicht „nur 2 % pro Jahr“. Ohne Annualisierung unterschätzt du die Fremdkapitalkosten systematisch.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Interpretation und Fallen</h4>
+<p>Kapitalkosten sind Opportunitätskosten der Mittelüberlassung. Deshalb zählen sie später in Investitions- und Kapitalstrukturfragen als Vergleichsgröße, nicht bloß als Bankdetail.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Kostenfehler:</strong> Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Skontokosten', eq: String.raw`$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$`, desc: 'Verzicht auf Skonto kann einen sehr hohen effektiven Kreditzins bedeuten.', variables: { 's': 'Skontosatz', 'T': 'Zahlungsziel', 'Z': 'Skontofrist' } },
       { label: 'Finanzierungs-IZF', eq: schema(['FK-Kosten', '=', 'r* der Finanzierungszahlungsreihe']), desc: 'Fremdfinanzierung wird finanzwirtschaftlich wie eine eigene Zahlungsreihe gelesen.' },
@@ -1033,33 +1415,53 @@ export const CONTENT = {
 
   wacc: {
     motivation: 'Bevor Leverage gelesen werden kann, muss klar sein, was die gemischte Finanzierung insgesamt kostet. Genau diese Aggregationslogik liefert der WACC.',
-    theorie: [
-      section(
-        'Gewichtete Gesamtkapitalkosten',
-        `<p>Der WACC fasst die Kosten von Eigen- und Fremdkapital entsprechend ihrer Anteile an der Finanzierung zusammen. Er ist damit die aggregierte Preisgröße der gesamten Kapitalstruktur.</p>
-         ${mathBlock(String.raw`$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$`)}
-      `
-      ),
-      section(
-        'Warum der WACC kein bloßer Durchschnitt ist',
-        `<p>Die Gewichte spiegeln die reale Finanzierungsmischung. Verändert sich diese Struktur, ändern sich nicht nur die Gewichte, sondern oft auch die zugrunde liegenden Risiko- und Renditeforderungen der Kapitalgeber.</p>`
-      ),
-      section(
-        'Wann der WACC als Kalkulationszins passt',
-        `<p>Der WACC ist nur dann als Diskontsatz brauchbar, wenn das Bewertungsobjekt dieselbe Risiko- und Kapitalstruktur aufweist wie die Größen, aus denen der WACC abgeleitet wurde. Genau deshalb ist er kein Universalwerkzeug für jedes Projekt, sondern ein konditional passender Satz.</p>
-         ${mathBlock(String.raw`$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+WACC)^t}$$`)}
-      `
-      ),
-      section(
-        'Methodenselektion: WACC, EK-Satz oder projektbezogener Satz',
-        `<p>Eine klausurstabile Antwort prüft deshalb zuerst das Risikoobjekt: Geht es um das Gesamtunternehmen, ein Projekt mit ähnlichem Risiko oder um ein deutlich riskanteres Teilvorhaben? Erst danach wird entschieden, ob der WACC, ein reiner Eigenkapitalkostensatz oder eine andere Risikoadjustierung fachlich trägt.</p>`
-      ),
-      section(
-        'Methodenwahl und Missbrauch',
-        `<p>Der WACC ist nur dann ein sinnvoller Kalkulationszins, wenn die Projekt- und Finanzierungsrisiken zur zugrunde gelegten Kapitalstruktur passen. Genau hier entsteht in Klausuren oft ein stiller Missbrauch: Der WACC wird mechanisch eingesetzt, obwohl die Voraussetzungen gar nicht erklärt wurden.</p>
-         ${warn('WACC-Fehler:', 'Ein WACC ist keine frei verfügbare Universalzahl. Er passt nur zu einer bestimmten Risiko- und Kapitalstruktur.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum der WACC kein bloßer Durchschnitt ist</h4>
+<p>Die Gewichte spiegeln die reale Finanzierungsmischung. Verändert sich diese Struktur, ändern sich nicht nur die Gewichte, sondern oft auch die zugrunde liegenden Risiko- und Renditeforderungen der Kapitalgeber.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Gewichtete Gesamtkapitalkosten</h4>
+<p>Der WACC fasst die Kosten von Eigen- und Fremdkapital entsprechend ihrer Anteile an der Finanzierung zusammen. Er ist damit die aggregierte Preisgröße der gesamten Kapitalstruktur.</p>
+         <div class="math-block math-block--theory">$$WACC = \\frac{E}{E+D}k_E + \\frac{D}{E+D}k_D$$</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Wann der WACC als Kalkulationszins passt</h4>
+<p>Der WACC ist nur dann als Diskontsatz brauchbar, wenn das Bewertungsobjekt dieselbe Risiko- und Kapitalstruktur aufweist wie die Größen, aus denen der WACC abgeleitet wurde. Genau deshalb ist er kein Universalwerkzeug für jedes Projekt, sondern ein konditional passender Satz.</p>
+         <div class="math-block math-block--theory">$$K_0 = -A_0 + \\sum_{t=1}^{n}\\frac{CF_t}{(1+WACC)^t}$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Methodenselektion: WACC, EK-Satz oder projektbezogener Satz</h4>
+<p>Eine klausurstabile Antwort prüft deshalb zuerst das Risikoobjekt: Geht es um das Gesamtunternehmen, ein Projekt mit ähnlichem Risiko oder um ein deutlich riskanteres Teilvorhaben? Erst danach wird entschieden, ob der WACC, ein reiner Eigenkapitalkostensatz oder eine andere Risikoadjustierung fachlich trägt.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Methodenwahl und Missbrauch</h4>
+<p>Der WACC ist nur dann ein sinnvoller Kalkulationszins, wenn die Projekt- und Finanzierungsrisiken zur zugrunde gelegten Kapitalstruktur passen. Genau hier entsteht in Klausuren oft ein stiller Missbrauch: Der WACC wird mechanisch eingesetzt, obwohl die Voraussetzungen gar nicht erklärt wurden.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>WACC-Fehler:</strong> Ein WACC ist keine frei verfügbare Universalzahl. Er passt nur zu einer bestimmten Risiko- und Kapitalstruktur.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'WACC', eq: String.raw`$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$`, desc: 'Gewichteter Preis der Finanzierungsmischung.', variables: { 'E': 'Marktwert des Eigenkapitals', 'D': 'Marktwert des Fremdkapitals', 'k_E': 'Eigenkapitalkosten', 'k_D': 'Fremdkapitalkosten' } },
       { label: 'Einsatzbedingung', eq: schema(['passender WACC', '⇒', 'Projekt- und Finanzierungsrisiko konsistent']), desc: 'Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.' },
@@ -1113,31 +1515,55 @@ export const CONTENT = {
 
   wacc_leverage: {
     motivation: 'Der Leverage-Effekt ist keine isolierte Prozentrechnung, sondern die systematische Frage, wie Verschuldung Ertrag und Risiko des Eigenkapitals gemeinsam verändert.',
-    theorie: [
-      section(
-        'Leverage-Ertrag',
-        `<p>Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen, solange die Rendite des Gesamtkapitals über den Fremdkapitalkosten liegt. Dann arbeitet der Hebel zugunsten der Eigentümer.</p>
-         ${mathBlock(String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`)}
-      `
-      ),
-      section(
-        'Leverage-Risiko',
-        `<p>Dieselbe Verschuldung verstärkt aber auch die Schwankung der Eigenkapitalrendite. Je kleiner der Eigenkapitalpuffer, desto stärker schlagen gute und schlechte Gesamtkapitalszenarien auf die Eigentümer durch.</p>`
-      ),
-      section(
-        'Positiver versus negativer Hebel',
-        `<p>Die Leverage-Formel ist kein Automatismus zugunsten der Eigentümer. Nur wenn die Gesamtkapitalrendite oberhalb der Fremdkapitalkosten liegt, wirkt der Hebel positiv. Fällt sie darunter, dreht sich derselbe Mechanismus gegen das Eigenkapital und verstärkt die Verluste.</p>`
-      ),
-      section(
-        'Brücke zu WACC und Kapitalstruktur',
-        `<p>Leverage ist deshalb nie isoliert zu lesen: Er verändert die Rendite-Risiko-Struktur des Eigenkapitals und damit mittelbar die Kostenlogik der Gesamtfinanzierung. Genau hier schließt die Diskussion an WACC und Modigliani-Miller an.</p>`
-      ),
-      section(
-        'Leverage nur zusammen lesen',
-        `<p>Der Kurs betont ausdrücklich: Leverage-Ertrag und Leverage-Risiko steigen gemeinsam. Wer nur den höheren Erwartungsertrag nennt, hat die Hälfte der ökonomischen Aussage übersehen.</p>
-         ${warn('Hebelfehler:', 'Mehr Verschuldung ist nicht „besser“, sondern nur ein stärkerer Hebel auf Chancen und Verluste.')}`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Leverage-Ertrag</h4>
+<p>Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen, solange die Rendite des Gesamtkapitals über den Fremdkapitalkosten liegt. Dann arbeitet der Hebel zugunsten der Eigentümer.</p>
+         <div class="math-block math-block--theory">$$r_E = r_U + \\frac{D}{E}(r_U-r_D)$$</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Leverage-Risiko</h4>
+<p>Dieselbe Verschuldung verstärkt aber auch die Schwankung der Eigenkapitalrendite. Je kleiner der Eigenkapitalpuffer, desto stärker schlagen gute und schlechte Gesamtkapitalszenarien auf die Eigentümer durch.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Positiver versus negativer Hebel</h4>
+<p>Die Leverage-Formel ist kein Automatismus zugunsten der Eigentümer. Nur wenn die Gesamtkapitalrendite oberhalb der Fremdkapitalkosten liegt, wirkt der Hebel positiv. Fällt sie darunter, dreht sich derselbe Mechanismus gegen das Eigenkapital und verstärkt die Verluste.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Brücke zu WACC und Kapitalstruktur</h4>
+<p>Leverage ist deshalb nie isoliert zu lesen: Er verändert die Rendite-Risiko-Struktur des Eigenkapitals und damit mittelbar die Kostenlogik der Gesamtfinanzierung. Genau hier schließt die Diskussion an WACC und Modigliani-Miller an.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Leverage nur zusammen lesen</h4>
+<p>Der Kurs betont ausdrücklich: Leverage-Ertrag und Leverage-Risiko steigen gemeinsam. Wer nur den höheren Erwartungsertrag nennt, hat die Hälfte der ökonomischen Aussage übersehen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Hebelfehler:</strong> Mehr Verschuldung ist nicht „besser“, sondern nur ein stärkerer Hebel auf Chancen und Verluste.</div>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">WACC</h4>
+<p>$WACC = w_E k_E + w_D k_D (1-\\tau)$. Leverage erhöht Eigenkapitalrendite (Leverage-Effekt), aber auch Risiko.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">MM-Hinweis</h4>
+<p>Ohne Steuern und mit perfekten Märkten ist Firmenwert unabhängig von Verschuldung; mit Steuervorteil der Fremdfinanzierung kann WACC sinken.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Leverage-Beziehung', eq: String.raw`$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$`, desc: 'Mehr Verschuldung verstärkt die Eigenkapitalrendite, solange die Gesamtkapitalrendite über dem Fremdkapitalzins liegt.', variables: { 'r_E': 'Eigenkapitalrendite', 'r_U': 'Gesamtkapitalrendite / ungehebelte Rendite', 'r_D': 'Fremdkapitalrendite bzw. Fremdkapitalkostensatz', 'D/E': 'Verschuldungsgrad' } },
       { label: 'Leverage-Regel', eq: schema(['r_U > r_D', '⇒', 'positiver Hebeleffekt auf r_E']), desc: 'Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.' },
@@ -1191,29 +1617,59 @@ export const CONTENT = {
 
   modigliani_miller: {
     motivation: 'Die Modigliani-Miller-Irrelevanzthese ist der zentrale Benchmark, um reale Werttreiber der Kapitalstruktur sichtbar zu machen.',
-    theorie: [
-      section(
-        'Modigliani-Miller als Benchmark',
-        `<p>Die Irrelevanzthese zeigt, dass Kapitalstruktur unter sehr strengen Annahmen keinen Einfluss auf den Unternehmenswert hätte. Gerade deshalb ist sie didaktisch wertvoll: Sie macht sichtbar, welche realen Friktionen den Unterschied erzeugen.</p>
-         ${warn('Benchmarkfehler:', 'Modigliani-Miller ist ein Referenzmodell unter starken Annahmen, keine 1:1-Beschreibung realer Kapitalmärkte.')}`
-      ),
-      section(
-        'Annahmenraum und Irrelevanz',
-        `<p>Unter vollkommenem und vollständigem Kapitalmarkt gleichen sich Ertrags- und Risikoeffekte einer höheren Verschuldung in der Benchmark-Logik aus: Weder die erwartete Gesamtkapitalrendite noch der Unternehmenswert hängen dann vom Verhältnis von Fremd- zu Eigenkapital ab. Leverage kann die Eigenkapitalrendite und das Eigenkapitalrisiko verändern, ohne den Gesamtwert zu verschieben.</p>`
-      ),
-      section(
-        'Wertneutralität heißt nicht Renditeneutralität',
-        `<p>Gerade hier entstehen typische Prüfungsfehler. MM sagt nicht, dass alle Renditen gleich bleiben. Im Gegenteil: Eigenkapitalrendite und -risiko reagieren auf Verschuldung. Wertneutral ist nur der Gesamtunternehmenswert im Benchmark-Modell.</p>`
-      ),
-      section(
-        'Warum MM direkt an WACC und Leverage anschließt',
-        `<p>MM erklärt, warum Leverage auf Eigentümerebene relevant sein kann, ohne dass der Unternehmenswert im Benchmark-Modell steigt. Genau deshalb ist MM kein Fremdkörper, sondern die theoretische Klammer um WACC- und Leverage-Debatten.</p>`
-      ),
-      section(
-        'Von der Theorie zu realen Kapitalmärkten',
-        `<p>Sobald Märkte unvollkommen oder unvollständig sind, gewinnen Steuern, Insolvenz- und Transaktionskosten, Informationsasymmetrien und unterschiedliche Finanzierungsbedingungen an Bedeutung. Genau diese Faktoren erklären, warum in der Praxis Kapitalstruktur doch wert- und entscheidungsrelevant werden kann.</p>`
-      )
-    ].join(''),
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Warum MM direkt an WACC und Leverage anschließt</h4>
+<p>MM erklärt, warum Leverage auf Eigentümerebene relevant sein kann, ohne dass der Unternehmenswert im Benchmark-Modell steigt. Genau deshalb ist MM kein Fremdkörper, sondern die theoretische Klammer um WACC- und Leverage-Debatten.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Modigliani-Miller als Benchmark</h4>
+<p>Die Irrelevanzthese zeigt, dass Kapitalstruktur unter sehr strengen Annahmen keinen Einfluss auf den Unternehmenswert hätte. Gerade deshalb ist sie didaktisch wertvoll: Sie macht sichtbar, welche realen Friktionen den Unterschied erzeugen.</p>
+         <div class="warn-box" data-warning-placement="rail"><strong>Benchmarkfehler:</strong> Modigliani-Miller ist ein Referenzmodell unter starken Annahmen, keine 1:1-Beschreibung realer Kapitalmärkte.</div>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Annahmenraum und Irrelevanz</h4>
+<p>Unter vollkommenem und vollständigem Kapitalmarkt gleichen sich Ertrags- und Risikoeffekte einer höheren Verschuldung in der Benchmark-Logik aus: Weder die erwartete Gesamtkapitalrendite noch der Unternehmenswert hängen dann vom Verhältnis von Fremd- zu Eigenkapital ab. Leverage kann die Eigenkapitalrendite und das Eigenkapitalrisiko verändern, ohne den Gesamtwert zu verschieben.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Wertneutralität heißt nicht Renditeneutralität</h4>
+<p>Gerade hier entstehen typische Prüfungsfehler. MM sagt nicht, dass alle Renditen gleich bleiben. Im Gegenteil: Eigenkapitalrendite und -risiko reagieren auf Verschuldung. Wertneutral ist nur der Gesamtunternehmenswert im Benchmark-Modell.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Von der Theorie zu realen Kapitalmärkten</h4>
+<p>Sobald Märkte unvollkommen oder unvollständig sind, gewinnen Steuern, Insolvenz- und Transaktionskosten, Informationsasymmetrien und unterschiedliche Finanzierungsbedingungen an Bedeutung. Genau diese Faktoren erklären, warum in der Praxis Kapitalstruktur doch wert- und entscheidungsrelevant werden kann.</p>
+</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">In der Klausur: MM</h4>
+<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \\tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Annahmen MM nennen (perfekte Märkte, keine Steuern/Insolvenzkosten). Trade-off-Theorie qualitativ.</p>
+</div>
+<div class="section-block">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) Zahlungsströme und Zeitpunkte tabellieren. (2) Diskontierung mit passendem Zinssatz (NPV/Barwert). (3) Entscheidungsregel (NPV &gt; 0, IRR vs. Kalkulationszins). Risiko, Steuern und Annahmen explizit benennen.</p>
+</div>
+</div>
+</section>`,
     formeln: [
       { label: 'Irrelevanz-Benchmark', eq: schema(['vollkommener Markt', '⇒', 'Kapitalstruktur wertneutral']), desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
       { label: 'Benchmark-Aussage', eq: phrase('Leverage verändert r_E und Risiko, aber nicht Value.'), desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' },

@@ -1,6 +1,7 @@
 import { CURRICULUM } from './curriculum.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
+import { normalizeTheoryHtml } from '../../../assets/js/portal-core/theory/theoryStructure.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -42,11 +43,14 @@ ${entry.warnings.map((warning) => `<div class="warn-box"><strong>${escapeHtml(wa
 }
 
 function renderTheoryHtml(entry) {
-  return [
+  const raw = [
     renderCards(entry),
     renderSections(entry),
     renderWarnings(entry)
-  ].filter(Boolean).join('');
+  ]
+    .filter(Boolean)
+    .join('');
+  return normalizeTheoryHtml(raw);
 }
 
 export const CHAPTERS = CURRICULUM.map(({ id, title, cat, short }) => ({
@@ -75,7 +79,7 @@ for (const ch of CHAPTERS) {
   if (!entry) continue;
   const depth = THEORY_DEPTH_EXPANSIONS[ch.id];
   if (depth?.html) {
-    entry.theorie = (entry.theorie || '') + depth.html;
+    entry.theorie = normalizeTheoryHtml((entry.theorie || '') + depth.html);
   }
 }
 

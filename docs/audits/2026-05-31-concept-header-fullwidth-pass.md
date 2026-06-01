@@ -57,6 +57,12 @@ Full `entry.motivation` is always rendered when `showConceptMotivationBanner` an
 npm run trust:pass1
 ```
 
+**Result:** all checks passed.
+
+## Commit
+
+`4b9ca6d` — pushed to `main`.
+
 ## Remaining notes
 
 - Category tag (`EINFÜHRUNG · STELLE 1 VON 4`) unchanged

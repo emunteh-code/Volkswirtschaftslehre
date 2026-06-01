@@ -1006,12 +1006,24 @@ ${supportNote}
     }).join("")}</div>`;
       html += formulaBody;
     if (formulaCards.length) {
-      html += `<div class="section-block formula-proof-layer">
-<h3>Herleitung & Einsatzgrenzen</h3>
-<div class="formula-grid formula-grid--proof-layer">
-${formulaCards.map(renderFormulaCardProof).join("")}
-</div>
-</div>`;
+      const herleitungBlocks = formulaCards.map(renderFormulaHerleitungBlock).filter(Boolean);
+      const einsatzgrenzenBlocks = formulaCards.map(renderFormulaEinsatzgrenzenBlock).filter(Boolean);
+      if (herleitungBlocks.length || einsatzgrenzenBlocks.length) {
+        html += '<div class="formula-support-layer">';
+        if (herleitungBlocks.length) {
+          html += `<section class="formula-herleitung-layer" aria-labelledby="formula-herleitung-heading">
+<h3 id="formula-herleitung-heading" class="formula-support-heading">Herleitungen</h3>
+<div class="formula-herleitung-stack">${herleitungBlocks.join("")}</div>
+</section>`;
+        }
+        if (einsatzgrenzenBlocks.length) {
+          html += `<section class="formula-einsatzgrenzen-layer" aria-labelledby="formula-einsatzgrenzen-heading">
+<h3 id="formula-einsatzgrenzen-heading" class="formula-support-heading formula-support-heading--limits">Einsatzgrenzen</h3>
+<div class="formula-einsatzgrenzen-stack">${einsatzgrenzenBlocks.join("")}</div>
+</section>`;
+        }
+        html += "</div>";
+      }
     }
     }
     if (taskFamiliesHtml) {
@@ -1021,27 +1033,81 @@ ${formulaCards.map(renderFormulaCardProof).join("")}
     return html;
   }
 
-  function renderFormulaCardProof(card) {
+  function renderFormulaHerleitungBlock(card) {
     const steps = Array.isArray(card.derivationSteps) ? card.derivationSteps : [];
-    const list = (title, items) => Array.isArray(items) && items.length
-      ? `<div class="formula-proof-list"><span>${title}</span><ul>${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul></div>`
+    const hasSteps = steps.length > 0;
+    const hasIntuition = hasMeaningfulText(card.intuition);
+    if (!hasSteps && !hasIntuition) return "";
+
+    const stepsHtml = hasSteps
+      ? `<ol class="formula-herleitung-steps">${steps.map((step, index) => {
+        const kicker = hasMeaningfulText(step.label)
+          ? `<span class="formula-herleitung-step-kicker">${renderDecodedText(step.label)}</span>`
+          : "";
+        const math = hasMeaningfulDisplayContent(step.math)
+          ? `<div class="formula-herleitung-math">${renderSemanticBlock(step.math, { variant: "formula-card" })}</div>`
+          : "";
+        return `<li class="formula-herleitung-step">
+<span class="formula-herleitung-step-num" aria-hidden="true">${index + 1}</span>
+<div class="formula-herleitung-step-body">
+${kicker}
+<span class="formula-herleitung-step-text">${renderSemanticPlainText(step.text || "")}</span>
+${math}
+</div>
+</li>`;
+      }).join("")}</ol>`
       : "";
+
+    const anchor = hasMeaningfulDisplayContent(card.displayFormula)
+      ? `<div class="formula-herleitung-anchor">${renderSemanticBlock(card.displayFormula, { variant: "formula-card" })}</div>`
+      : "";
+
+    return `<article class="formula-herleitung-block">
+<div class="formula-herleitung-head">
+<span class="formula-herleitung-kicker">Ableitung</span>
+<h4 class="formula-herleitung-title">${renderMathTitle(card.officialNotation || card.id)}</h4>
+</div>
+${anchor}
+${hasIntuition ? `<p class="formula-herleitung-intro">${renderTeachingProse(card.intuition)}</p>` : ""}
+${stepsHtml}
+</article>`;
+  }
+
+  function renderFormulaEinsatzgrenzenBlock(card) {
+    const groups = [];
+    const pushGroup = (modifier, title, items) => {
+      if (!Array.isArray(items) || !items.length) return;
+      groups.push(`<div class="formula-einsatzgrenzen-group formula-einsatzgrenzen-group--${modifier}">
+<h5 class="formula-einsatzgrenzen-group-title">${title}</h5>
+<ul class="formula-einsatzgrenzen-list">${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul>
+</div>`);
+    };
+    pushGroup("assumptions", "Annahmen", card.assumptions);
+    pushGroup("applies", "Gilt, wenn", card.appliesWhen);
+    pushGroup("fails", "Scheitert, wenn", card.failsWhen);
+    pushGroup("mistakes", "Typische Fehler", card.commonMistakes);
+
     const anchorBadge = Array.isArray(card.anchorIds) && card.anchorIds.length
-      ? `<p class="f-var-hint formula-proof-meta">Quellanker: ${card.anchorIds.length} geprüfte Stelle${card.anchorIds.length === 1 ? "" : "n"}</p>`
+      ? `<p class="formula-einsatzgrenzen-meta">Quellanker: ${card.anchorIds.length} geprüfte Stelle${card.anchorIds.length === 1 ? "" : "n"}</p>`
       : "";
-    return `<article class="formula-card formula-card--proof">
-<div class="f-label">${renderMathTitle(card.officialNotation || card.id)}</div>
-${hasMeaningfulDisplayContent(card.displayFormula) ? `<div class="f-eq">${renderSemanticBlock(card.displayFormula, { variant: "formula-card" })}</div>` : ""}
-${card.intuition ? `<div class="f-desc">${renderTeachingProse(card.intuition)}</div>` : ""}
-${steps.length ? `<ol class="exam-drill-steps formula-proof-steps">
-${steps.map((step) => `<li class="exam-drill-step"><div class="exam-drill-step-body"><span class="exam-drill-step-text">${renderSemanticPlainText(step.text || step.label || "")}</span>${hasMeaningfulDisplayContent(step.math) ? `<div class="exam-drill-step-math">${renderSemanticBlock(step.math, { variant: "formula-card" })}</div>` : ""}</div></li>`).join("")}
-</ol>` : ""}
-${list("Annahmen", card.assumptions)}
-${list("Gilt, wenn", card.appliesWhen)}
-${list("Scheitert, wenn", card.failsWhen)}
-${list("Typische Fehler", card.commonMistakes)}
-${card.examShortcut ? `<p class="f-var-hint formula-proof-meta"><strong>Klausurshortcut:</strong> ${renderSemanticPlainText(card.examShortcut)}</p>` : ""}
+    const shortcut = hasMeaningfulText(card.examShortcut)
+      ? `<p class="formula-einsatzgrenzen-shortcut"><strong>Klausurshortcut:</strong> ${renderSemanticPlainText(card.examShortcut)}</p>`
+      : "";
+
+    if (!groups.length && !shortcut && !anchorBadge) return "";
+
+    const trapIcon = `<span class="formula-einsatzgrenzen-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>`;
+
+    return `<article class="formula-einsatzgrenzen-block">
+<div class="formula-einsatzgrenzen-head">
+${trapIcon}
+<h4 class="formula-einsatzgrenzen-title">${renderMathTitle(card.officialNotation || card.id)}</h4>
+</div>
+<div class="formula-einsatzgrenzen-body">
+${groups.join("")}
+${shortcut}
 ${anchorBadge}
+</div>
 </article>`;
   }
 

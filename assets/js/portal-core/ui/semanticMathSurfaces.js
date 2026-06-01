@@ -7,10 +7,10 @@ const MATH_GREEK_CHARS = 'λμωπΔεαβρσθūȳℒ∞';
 const MATH_JOINER_REGEX = /^[\s0-9.,%()|=<>≤≥+\-−·/∂→↔*^:]+$/u;
 const MATH_TRAILING_NUMBER_REGEX = /^\s*(?:=|<|>|≤|≥)\s*\d+(?:[.,]\d+)?%?/u;
 const SEMANTIC_MATH_HEADER_SKIP_SELECTOR =
-  'h1, h2, h3, h4, h5, h6, .concept-title, .concept-tag, .klausurmethodik-accordion-title, .klausurmethodik-card-title, .klausurmethodik-heading, .klausurmethodik-label, .f-label, .formula-card-label, .formula-card-title, .quellen-panel-layer-k, .quellen-panel-anchor-group-label, .graph-panel-title, summary, [role="tab"]';
+  'h1, h2, h3, h4, h5, h6, .concept-title, .concept-tag, .klausurmethodik-accordion-title, .klausurmethodik-card-title, .klausurmethodik-heading, .klausurmethodik-label, .f-label, .formula-card-label, .formula-card-title, .formula-herleitung-title, .formula-einsatzgrenzen-title, .formula-einsatzgrenzen-group-title, .quellen-panel-layer-k, .quellen-panel-anchor-group-label, .graph-panel-title, summary, [role="tab"]';
 
 const SEMANTIC_MATH_SKIP_SELECTOR =
-  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"], .content-area, .theorie, .section-block, .formula-card, .formula-grid, .formula-section-accordion-body, .math-block, .math-inline, .warn-box, .warning-card, .f-eq, .f-desc, .f-variables, .merksatz';
+  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"], #content, .content-area, .theorie, .theorie-panel, .section-block, .formula-card, .formula-grid, .formula-support-layer, .formula-herleitung-block, .formula-herleitung-anchor, .formula-herleitung-math, .formula-einsatzgrenzen-block, .formula-section-accordion-body, .math-block, .math-inline, .warn-box, .warning-card, .f-eq, .f-desc, .f-body, .f-variables, .merksatz';
 
 export function shouldSkipSemanticMath(el) {
   if (!el?.closest) return true;
@@ -328,7 +328,7 @@ export function createSemanticMathSurfaces({
     if (Array.isArray(node)) {
       node.forEach((item, index) => {
         if (typeof item === 'string') {
-          node[index] = semanticizeMarkupString(item);
+          node[index] = formalizeMarkupString(item);
         } else {
           semanticizeDataStrings(item, seen);
         }

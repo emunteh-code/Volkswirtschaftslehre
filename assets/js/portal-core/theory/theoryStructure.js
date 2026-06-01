@@ -18,7 +18,11 @@ export const THEORY_SECTION_ORDER = [
       /\büberblick\b/i,
       /\bgrundaufbau\b/i,
       /\bprivatrecht innerhalb\b/i,
-      /\bvon der gemeinsamen\b/i
+      /\bvon der gemeinsamen\b/i,
+      /\bvoraussetzung/i,
+      /\bausgangspunkt\b/i,
+      /\bkontext\b/i,
+      /\bmodellrahmen\b/i
     ]
   },
   {
@@ -36,7 +40,11 @@ export const THEORY_SECTION_ORDER = [
       /\bhypothesenlogik\b/i,
       /\btestwahl\b/i,
       /\banspruchsdenken\b/i,
-      /\brecht als verbindliche\b/i
+      /\brecht als verbindliche\b/i,
+      /\bzusammenfassung\b/i,
+      /\bkern(aussage|logik)\b/i,
+      /\bmerkschema\b/i,
+      /\bdenkfigur\b/i
     ]
   },
   {
@@ -53,7 +61,10 @@ export const THEORY_SECTION_ORDER = [
       /\bwillenserklärung\b/i,
       /\bzufallsvariable\b/i,
       /\bpunktschätzer\b/i,
-      /\bergebnisraum\b/i
+      /\bergebnisraum\b/i,
+      /\bmerkpunkte\b/i,
+      /\bbegriff(e|sklärung)\b/i,
+      /\bgrundlagen\b/i
     ]
   },
   {
@@ -71,7 +82,11 @@ export const THEORY_SECTION_ORDER = [
       /\bkovarianz\b/i,
       /\bols\b/i,
       /\b$f-?test\b/i,
-      /\baxiome von kolmogorov\b/i
+      /\baxiome von kolmogorov\b/i,
+      /\bnormalgleichung/i,
+      /\bzielfunktion\b/i,
+      /\bbeweis\b/i,
+      /\brechnung\b/i
     ],
     prefersMath: true
   },
@@ -98,7 +113,13 @@ export const THEORY_SECTION_ORDER = [
       /\btrennungsprinzip\b/i,
       /\bangebot\b/i,
       /\bkonsens\b/i,
-      /\banfechtung\b/i
+      /\banfechtung\b/i,
+      /\bbeispiel\b/i,
+      /\bgrafisch/i,
+      /\bvisualisierung\b/i,
+      /\bablauf\b/i,
+      /\bmechanik\b/i,
+      /\bökonomische intuition\b/i
     ]
   },
   {
@@ -117,7 +138,11 @@ export const THEORY_SECTION_ORDER = [
       /\bwarum das klausur/i,
       /\bwarum die systematik\b/i,
       /\bentscheidungsregel\b/i,
-      /\btestwahl\b/i
+      /\btestwahl\b/i,
+      /\bin der klausur\b/i,
+      /\bklausurroutine\b/i,
+      /\bpolitikfolgerung\b/i,
+      /\brechenschema\b/i
     ]
   },
   {
@@ -233,7 +258,6 @@ export function classifyTheorySection(heading, innerHtml, index = 0, total = 1) 
   }
 
   for (const spec of THEORY_SECTION_ORDER) {
-    if (spec.id === "mechanismus" || spec.id === "vor_aufgaben") continue;
     if (spec.prefersMath && !hasMath) continue;
     if (spec.patterns.some((re) => re.test(h))) {
       if (spec.id === "definitionen" && /\bherleitung\b/i.test(lower)) {
@@ -257,54 +281,244 @@ export function classifyTheorySection(heading, innerHtml, index = 0, total = 1) 
   return "mechanismus";
 }
 
+const PLACEHOLDER_REF = {
+  orientierung: "Kernidee",
+  kernidee: "Orientierung",
+  definitionen: "Kernidee",
+  formale: "Definitionen",
+  mechanismus: "Kernidee",
+  anwendung: "Mechanismus & Zusammenhänge",
+  fehler: "die übrigen Rezept-Schritte",
+  vor_aufgaben: "Kernidee und Definitionen"
+};
+
+/** @param {string} innerHtml */
+export function theoryBodyHasContent(innerHtml) {
+  const text = stripTags(innerHtml);
+  if (text.length < 12) return false;
+  return !/^kein separater vl-abschnitt/i.test(text);
+}
+
+/** @param {string} innerHtml */
+export function normalizeSubsectionMarkup(innerHtml) {
+  return String(innerHtml ?? "").replace(/<h3(\s[^>]*)?>([\s\S]*?)<\/h3>/gi, (match, _attrs, content) => {
+    if (/theory-recipe-heading/i.test(match)) return match;
+    return `<h4 class="theory-subsection-title">${content}</h4>`;
+  });
+}
+
+/** @param {{ id: string, heading: string, step: number }} spec @param {string} bodyHtml */
+export function buildRecipeSectionHtml(spec, bodyHtml) {
+  const body = normalizeSubsectionMarkup(bodyHtml).trim();
+  if (!body) return "";
+  return `<section class="theory-recipe-section theory-recipe-card theory-recipe-section--${spec.id}" data-theory-step="${spec.step}" aria-labelledby="theory-${spec.id}-h">
+<h3 class="theory-recipe-heading" id="theory-${spec.id}-h"><span class="theory-recipe-step" aria-hidden="true">${spec.step}</span> ${spec.heading}</h3>
+<div class="theory-recipe-body">
+${body}
+</div>
+</section>`;
+}
+
+/** @returns {{ bucket: string, heading: string, inner: string }[]} */
+export function parseRecipeTheorySections(html) {
+  const raw = String(html ?? "");
+  const items = [];
+  const re = /<section\s+[^>]*theory-recipe-section--([a-z_]+)[^>]*>([\s\S]*?)<\/section>/gi;
+  let match;
+  while ((match = re.exec(raw))) {
+    const id = match[1];
+    const block = match[2];
+    const bodyMatch = block.match(
+      /<div\s+class=["']theory-recipe-body["'][^>]*>([\s\S]*)<\/div>\s*$/i
+    );
+    const inner = (bodyMatch ? bodyMatch[1] : block).trim();
+    const subs = parseLegacyTheorySections(inner);
+    if (subs.length) {
+      for (const sub of subs) {
+        items.push({ bucket: id, heading: sub.heading, inner: sub.inner });
+      }
+    } else if (inner) {
+      items.push({ bucket: id, heading: "", inner });
+    }
+  }
+  return items;
+}
+
+/** @returns {{ bucket: string, heading: string, inner: string }[]} */
+export function flattenTheoryToSections(html) {
+  const raw = String(html ?? "").trim();
+  if (!raw) return [];
+
+  if (/theory-recipe-section/.test(raw)) {
+    const fromRecipe = parseRecipeTheorySections(raw);
+    const withoutSections = raw.replace(/<section[\s\S]*?<\/section>/gi, "");
+    const legacy = parseLegacyTheorySections(withoutSections).map((sec, i, arr) => ({
+      ...sec,
+      bucket: classifyTheorySection(sec.heading, sec.inner, i, arr.length)
+    }));
+    return [...fromRecipe, ...legacy];
+  }
+
+  const parsed = parseLegacyTheorySections(raw);
+  return parsed.map((sec, i) => ({
+    ...sec,
+    bucket: classifyTheorySection(sec.heading, sec.inner, i, parsed.length)
+  }));
+}
+
+/** @param {{ bucket: string, heading: string, inner: string }[]} flatSections */
+export function groupTheorySections(flatSections) {
+  const grouped = Object.fromEntries(THEORY_SECTION_ORDER.map((s) => [s.id, []]));
+  for (const sec of flatSections) {
+    const bucket = sec.bucket || classifyTheorySection(sec.heading, sec.inner, 0, 1);
+    if (grouped[bucket]) grouped[bucket].push(sec);
+  }
+  return grouped;
+}
+
+/** @param {Record<string, { heading: string, inner: string }[]>} grouped */
+function renderGroupedSections(grouped) {
+  const parts = [];
+  for (const spec of THEORY_SECTION_ORDER) {
+    const items = grouped[spec.id] || [];
+    if (!items.length) continue;
+    const bodyParts = items.map((item) => {
+      if (!item.heading) return normalizeSubsectionMarkup(item.inner);
+      return `<div class="section-block">
+<h4 class="theory-subsection-title">${escapeHtml(item.heading)}</h4>
+${normalizeSubsectionMarkup(item.inner)}
+</div>`;
+    });
+    const section = buildRecipeSectionHtml(spec, bodyParts.join("\n"));
+    if (section) parts.push(section);
+  }
+  return parts.join("\n");
+}
+
 /**
- * Normalize raw theory HTML into recipe sections (idempotent if already wrapped).
+ * Normalize raw theory HTML into recipe sections (re-wraps existing recipe markup).
  * @param {string} html
  * @returns {string}
  */
 export function normalizeTheoryHtml(html) {
   const raw = String(html ?? "").trim();
   if (!raw) return raw;
-  if (/class=["']theory-recipe-section["']/i.test(raw)) {
-    return raw;
+  const flat = flattenTheoryToSections(raw);
+  if (!flat.length) return raw;
+  return renderGroupedSections(groupTheorySections(flat));
+}
+
+/**
+ * @param {string} stepId
+ * @param {string} [chapterTitle]
+ */
+export function placeholderForMissingStep(stepId, chapterTitle) {
+  const ref = PLACEHOLDER_REF[stepId] || "die anderen Rezept-Schritte";
+  const ch = chapterTitle ? `Kapitel „${chapterTitle}"` : "diesem Kapitel";
+  return `<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in ${ch}; siehe ${ref}.</p>`;
+}
+
+/**
+ * Pull non-destructive fragments from chapter entry fields into recipe buckets.
+ * @param {object} entry
+ */
+export function collectEntryTheoryFragments(entry = {}) {
+  const frags = {};
+
+  if (hasMeaningfulIntuitionText(entry.motivation)) {
+    frags.orientierung = `<p>${escapeHtml(stripTags(entry.motivation))}</p>`;
   }
 
-  const parsed = parseLegacyTheorySections(raw);
-  const sections = parsed.map((sec, i) => ({
-    ...sec,
-    bucket: classifyTheorySection(sec.heading, sec.inner, i, parsed.length)
-  }));
+  const intuition = normalizeIntuitionRecord(entry.intuition);
+  if (intuition) {
+    const built = buildIntuitionFusionFragments(intuition);
+    if (built.orientierung) {
+      frags.orientierung = [frags.orientierung, built.orientierung].filter(Boolean).join("\n");
+    }
+    if (built.kernidee) {
+      frags.kernidee = [frags.kernidee, built.kernidee].filter(Boolean).join("\n");
+    }
+    if (built.anwendung) {
+      frags.anwendung = [frags.anwendung, built.anwendung].filter(Boolean).join("\n");
+    }
+  }
 
-  if (!sections.length) return raw;
+  if (Array.isArray(entry.cards) && entry.cards.length) {
+    const cardsHtml = `<div class="info-grid theory-entry-cards">
+${entry.cards
+  .map(
+    (card) =>
+      `<div class="info-card info-card-concept-title"><div class="label">${escapeHtml(card.title)}</div><div class="value">${escapeHtml(card.value)}</div>${card.note ? `<p>${escapeHtml(card.note)}</p>` : ""}</div>`
+  )
+  .join("\n")}
+</div>`;
+    frags.definitionen = [frags.definitionen, cardsHtml].filter(Boolean).join("\n");
+  }
 
-  const grouped = Object.fromEntries(THEORY_SECTION_ORDER.map((s) => [s.id, []]));
-  for (const sec of sections) {
-    grouped[sec.bucket].push(sec);
+  if (Array.isArray(entry.formeln) && entry.formeln.length) {
+    const formelnParts = entry.formeln.slice(0, 8).map((f) => {
+      const label = f.label ? `<p><strong>${escapeHtml(f.label)}</strong></p>` : "";
+      const eq = f.eq ? `<div class="math-block">${f.eq}</div>` : "";
+      const desc = f.desc ? `<p>${escapeHtml(f.desc)}</p>` : "";
+      return `${label}${eq}${desc}`;
+    });
+    frags.formale = [frags.formale, formelnParts.join("\n")].filter(Boolean).join("\n");
+  }
+
+  if (Array.isArray(entry.objectives) && entry.objectives.length) {
+    frags.vor_aufgaben = `<ul class="theory-pre-task-checklist">${entry.objectives
+      .map((o) => `<li>${escapeHtml(String(o))}</li>`)
+      .join("")}</ul>
+<p class="theory-pre-task-hint">Was du beherrschen solltest, bevor du zu Aufgaben gehst.</p>`;
+  }
+
+  return frags;
+}
+
+/**
+ * Ensure all eight recipe cards exist; fill gaps from entry fragments or honest placeholders.
+ * @param {string} html
+ * @param {object} [entry]
+ * @param {{ chapterTitle?: string }} [meta]
+ */
+export function completeTheoryRecipe(html, entry = {}, meta = {}) {
+  const grouped = groupTheorySections(flattenTheoryToSections(html));
+  const frags = collectEntryTheoryFragments(entry);
+  const title = meta.chapterTitle || entry.title || "";
+
+  for (const spec of THEORY_SECTION_ORDER) {
+    const existing = (grouped[spec.id] || []).map((i) => i.inner).join("\n");
+    if (!theoryBodyHasContent(existing) && frags[spec.id]) {
+      grouped[spec.id] = [{ heading: "", inner: frags[spec.id] }];
+    }
+  }
+
+  const kernBody = (grouped.kernidee || []).map((i) => i.inner).join("\n");
+  if (!theoryBodyHasContent(kernBody) && grouped.definitionen?.length) {
+    const defInner = grouped.definitionen.map((i) => i.inner).join("\n");
+    const firstP = defInner.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+    if (firstP) {
+      grouped.kernidee = [{ heading: "", inner: `<p>${firstP[1]}</p>` }];
+    }
   }
 
   const parts = [];
   for (const spec of THEORY_SECTION_ORDER) {
-    const items = grouped[spec.id];
-    if (!items.length) continue;
-
+    const items = grouped[spec.id] || [];
     const bodyParts = items.map((item) => {
-      if (!item.heading) {
-        return item.inner;
-      }
+      if (!item.heading) return normalizeSubsectionMarkup(item.inner);
       return `<div class="section-block">
 <h4 class="theory-subsection-title">${escapeHtml(item.heading)}</h4>
-${item.inner}
+${normalizeSubsectionMarkup(item.inner)}
 </div>`;
     });
-
-    parts.push(`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--${spec.id}" data-theory-step="${spec.step}" aria-labelledby="theory-${spec.id}-h">
-<h3 class="theory-recipe-heading" id="theory-${spec.id}-h"><span class="theory-recipe-step" aria-hidden="true">${spec.step}</span> ${spec.heading}</h3>
-<div class="theory-recipe-body">
-${bodyParts.join("\n")}
-</div>
-</section>`);
+    let body = bodyParts.join("\n").trim();
+    if (!theoryBodyHasContent(body)) {
+      body = placeholderForMissingStep(spec.id, title);
+    }
+    const section = buildRecipeSectionHtml(spec, body);
+    if (section) parts.push(section);
   }
-
   return parts.join("\n");
 }
 
@@ -321,21 +535,9 @@ function escapeHtml(text) {
  * @param {string} html
  * @param {{ objectives?: string[] }} [entry]
  */
-export function applyTheoryRecipeChrome(html, entry = {}) {
-  let out = normalizeTheoryHtml(html);
-  const objectives = Array.isArray(entry.objectives) ? entry.objectives.filter(Boolean) : [];
-  if (objectives.length && !/theory-recipe-section--vor_aufgaben/i.test(out)) {
-    const checklist = `<ul class="theory-pre-task-checklist">${objectives
-      .map((o) => `<li>${escapeHtml(String(o))}</li>`)
-      .join("")}</ul>
-<p class="theory-pre-task-hint">Was du beherrschen solltest, bevor du zu Aufgaben gehst.</p>`;
-    const spec = SECTION_BY_ID.vor_aufgaben;
-    out += `<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="${spec.step}" aria-labelledby="theory-vor_aufgaben-h">
-<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">${spec.step}</span> ${spec.heading}</h3>
-<div class="theory-recipe-body">${checklist}</div>
-</section>`;
-  }
-  return out;
+export function applyTheoryRecipeChrome(html, entry = {}, meta = {}) {
+  const normalized = normalizeTheoryHtml(html);
+  return completeTheoryRecipe(normalized, entry, meta);
 }
 
 function stripTags(text) {
@@ -503,13 +705,64 @@ export function fuseIntuitionIntoTheoryHtml(html, intuitionRaw, entry = {}, fusi
   return out;
 }
 
-export function auditTheoryStructure(html) {
+export function auditTheoryRecipeSteps(html) {
   const raw = String(html ?? "");
   const wrapped = /theory-recipe-section/.test(raw);
-  const sectionCount = (raw.match(/theory-recipe-section/g) || []).length;
-  const legacyBlocks = (raw.match(/<div class="section-block">/g) || []).length;
-  const topLevelLegacy = wrapped
-    ? 0
-    : legacyBlocks;
-  return { wrapped, sectionCount, legacyBlocks, topLevelLegacy };
+  const byStep = Object.fromEntries(THEORY_SECTION_ORDER.map((s) => [s.id, { present: false, filled: false }]));
+
+  for (const spec of THEORY_SECTION_ORDER) {
+    const re = new RegExp(
+      `theory-recipe-section--${spec.id}[\\s\\S]*?<div class="theory-recipe-body">([\\s\\S]*?)</div>\\s*</section>`,
+      "i"
+    );
+    const match = raw.match(re);
+    if (!match) continue;
+    byStep[spec.id].present = true;
+    byStep[spec.id].filled = theoryBodyHasContent(match[1]);
+  }
+
+  const filledSteps = THEORY_SECTION_ORDER.filter((s) => byStep[s.id].filled).map((s) => s.id);
+  const placeholderSteps = THEORY_SECTION_ORDER.filter((s) => {
+    if (!byStep[s.id].present || byStep[s.id].filled) return false;
+    const re = new RegExp(
+      `theory-recipe-section--${s.id}[\\s\\S]*?<div class="theory-recipe-body">([\\s\\S]*?)</div>\\s*</section>`,
+      "i"
+    );
+    const match = raw.match(re);
+    return match && /<p class="theory-recipe-placeholder"/i.test(match[1]);
+  }).map((s) => s.id);
+  const emptySteps = THEORY_SECTION_ORDER.filter(
+    (s) => byStep[s.id].present && !byStep[s.id].filled && !placeholderSteps.includes(s.id)
+  ).map((s) => s.id);
+  const missingSteps = THEORY_SECTION_ORDER.filter((s) => !byStep[s.id].present).map((s) => s.id);
+  const presentCount = THEORY_SECTION_ORDER.filter((s) => byStep[s.id].present).length;
+
+  return {
+    wrapped,
+    sectionCount: presentCount,
+    filledCount: filledSteps.length,
+    placeholderCount: placeholderSteps.length,
+    filledSteps,
+    placeholderSteps,
+    emptySteps,
+    missingSteps,
+    structuralEight: presentCount === 8,
+    fullEight: filledSteps.length === 8,
+    byStep
+  };
+}
+
+export function auditTheoryStructure(html) {
+  const recipe = auditTheoryRecipeSteps(html);
+  const legacyBlocks = (html.match(/<div class="section-block">/g) || []).length;
+  return {
+    wrapped: recipe.wrapped,
+    sectionCount: recipe.sectionCount,
+    legacyBlocks,
+    topLevelLegacy: recipe.wrapped ? 0 : legacyBlocks,
+    filledCount: recipe.filledCount,
+    fullEight: recipe.fullEight,
+    structuralEight: recipe.structuralEight,
+    placeholderCount: recipe.placeholderCount
+  };
 }

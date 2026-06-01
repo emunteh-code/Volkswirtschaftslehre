@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Map existing theory HTML into canonical recipe-book sections (no content deletion).
+ * Map existing theory HTML into canonical 8-step recipe sections (no content deletion).
  * Usage: node tools/exam-os/normalize-theory-structure.mjs [--write] [--report] [slug ...]
  */
 import fs from 'node:fs';
@@ -9,7 +9,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   THEORY_SECTION_ORDER,
   normalizeTheoryHtml,
-  auditTheoryStructure
+  completeTheoryRecipe,
+  auditTheoryRecipeSteps,
+  theoryToHtml
 } from '../../assets/js/portal-core/theory/theoryStructure.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -33,11 +35,7 @@ const ALL_SLUGS = [
 
 const slugs = slugsArg.length ? slugsArg.filter((s) => ALL_SLUGS.includes(s)) : ALL_SLUGS;
 
-function theoryToHtml(theorie) {
-  if (typeof theorie === 'string') return theorie;
-  if (Array.isArray(theorie)) return theorie.join('');
-  return '';
-}
+const PERSISTED_MODULES = new Set(['oekonometrie', 'mathematik']);
 
 function escapeForTemplateLiteral(str) {
   return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
@@ -115,10 +113,7 @@ function replaceTheorieField(src, conceptId, newHtml) {
   } else if (slice.startsWith('[')) {
     const joinIdx = src.indexOf('].join', valueStart);
     if (joinIdx < 0 || joinIdx > bounds.end) return { src, ok: false };
-    valueEnd = joinIdx + '].join(\'\')'.length;
-    if (src.slice(joinIdx, joinIdx + 10).includes("''")) {
-      valueEnd = joinIdx + "].join('')".length;
-    }
+    valueEnd = joinIdx + "].join('')".length;
   } else if (/^renderTheoryHtml/.test(slice)) {
     return { src, ok: false, skip: 'dynamic-render' };
   } else {
@@ -130,67 +125,256 @@ function replaceTheorieField(src, conceptId, newHtml) {
   return { src: next, ok: true };
 }
 
-async function processChaptersFile(slug) {
+function buildMergeEntry(contentEntry, curriculumEntry) {
+  return {
+    ...curriculumEntry,
+    ...contentEntry,
+    motivation: contentEntry?.motivation ?? curriculumEntry?.motivation,
+    objectives: contentEntry?.objectives ?? curriculumEntry?.objectives,
+    formeln: contentEntry?.formeln ?? curriculumEntry?.formeln,
+    cards: curriculumEntry?.cards ?? contentEntry?.cards,
+    intuition: curriculumEntry?.intuition ?? contentEntry?.intuition,
+    title: curriculumEntry?.title ?? contentEntry?.title
+  };
+}
+
+function processTheoryPipeline(beforeHtml, mergeEntry, chapterTitle) {
+  const normalized = normalizeTheoryHtml(beforeHtml);
+  const after = completeTheoryRecipe(normalized, mergeEntry, { chapterTitle });
+  return {
+    after,
+    auditBefore: auditTheoryRecipeSteps(beforeHtml),
+    auditAfter: auditTheoryRecipeSteps(after)
+  };
+}
+
+async function loadModule(slug) {
   const chaptersPath = path.join(repoRoot, slug, 'js/data/chapters.js');
   if (!fs.existsSync(chaptersPath)) return null;
 
-  let src = fs.readFileSync(chaptersPath, 'utf8');
   const mod = await import(`${pathToFileURL(chaptersPath).href}?norm=${Date.now()}`);
   const content = mod.CONTENT || mod.content;
   const chapters = mod.CHAPTERS || mod.chapters;
   if (!content || !chapters) return null;
 
+  let curriculumById = {};
+  const curriculumPath = path.join(repoRoot, slug, 'js/data/curriculum.js');
+  if (fs.existsSync(curriculumPath)) {
+    const cur = await import(`${pathToFileURL(curriculumPath).href}?norm=${Date.now()}`);
+    const list = cur.CURRICULUM || cur.curriculum || [];
+    curriculumById = Object.fromEntries(list.map((e) => [e.id, e]));
+  }
+
+  return { slug, chaptersPath, content, chapters, curriculumById };
+}
+
+async function processChaptersFile(slug) {
+  const loaded = await loadModule(slug);
+  if (!loaded) return null;
+
+  let src = fs.readFileSync(loaded.chaptersPath, 'utf8');
+  const { content, chapters, curriculumById, chaptersPath } = loaded;
+
   const rows = [];
   let touched = 0;
   let skippedDynamic = 0;
+  let beforeFull = 0;
+  let afterFull = 0;
+  let beforeStructural = 0;
+  let afterStructural = 0;
+  let beforeFilledTotal = 0;
+  let afterFilledTotal = 0;
+  let afterPlaceholderTotal = 0;
+  let conceptCount = 0;
+
+  const persistedRecipe = {};
 
   for (const ch of chapters) {
-    const entry = content[ch.id];
-    if (!entry?.theorie) continue;
-    const before = theoryToHtml(entry.theorie);
+    const contentEntry = content[ch.id];
+    if (!contentEntry?.theorie) continue;
+
+    const before = theoryToHtml(contentEntry.theorie);
     if (!before.trim()) continue;
-    if (typeof entry.theorie !== 'string' && !Array.isArray(entry.theorie)) {
+
+    if (typeof contentEntry.theorie !== 'string' && !Array.isArray(contentEntry.theorie)) {
       skippedDynamic++;
       rows.push({ id: ch.id, title: ch.title, status: 'skip-dynamic' });
       continue;
     }
-    const after = normalizeTheoryHtml(before);
-    const auditBefore = auditTheoryStructure(before);
-    const auditAfter = auditTheoryStructure(after);
+
+    conceptCount++;
+    const mergeEntry = buildMergeEntry(contentEntry, curriculumById[ch.id] || {});
+    const { after, auditBefore, auditAfter } = processTheoryPipeline(before, mergeEntry, ch.title);
+
+    beforeFilledTotal += auditBefore.filledCount;
+    afterFilledTotal += auditAfter.filledCount;
+    if (auditBefore.fullEight) beforeFull++;
+    if (auditAfter.fullEight) afterFull++;
+    if (auditBefore.structuralEight) beforeStructural++;
+    if (auditAfter.structuralEight) afterStructural++;
+    afterPlaceholderTotal += auditAfter.placeholderCount;
+
     const changed = after !== before;
 
-    if (changed && write) {
-      const rep = replaceTheorieField(src, ch.id, after);
-      if (rep.skip) {
-        skippedDynamic++;
-        rows.push({ id: ch.id, title: ch.title, status: 'skip-dynamic' });
-      } else if (rep.ok) {
-        src = rep.src;
-        touched++;
+    if (PERSISTED_MODULES.has(slug)) {
+      persistedRecipe[ch.id] = after;
+    }
+
+    if (write) {
+      if (PERSISTED_MODULES.has(slug)) {
         rows.push({
           id: ch.id,
           title: ch.title,
-          status: 'normalized',
-          sections: auditAfter.sectionCount
+          status: 'persist-recipe',
+          filledBefore: auditBefore.filledCount,
+          filledAfter: auditAfter.filledCount,
+          structuralAfter: auditAfter.structuralEight
         });
-      } else {
-        rows.push({ id: ch.id, title: ch.title, status: 'replace-failed' });
+        touched++;
+      } else if (changed) {
+        const rep = replaceTheorieField(src, ch.id, after);
+        if (rep.skip) {
+          skippedDynamic++;
+          rows.push({ id: ch.id, title: ch.title, status: 'skip-dynamic' });
+        } else if (rep.ok) {
+          src = rep.src;
+          touched++;
+          rows.push({
+            id: ch.id,
+            title: ch.title,
+            status: 'normalized',
+            filledBefore: auditBefore.filledCount,
+            filledAfter: auditAfter.filledCount
+          });
+        } else {
+          rows.push({ id: ch.id, title: ch.title, status: 'replace-failed' });
+        }
       }
     } else {
       rows.push({
         id: ch.id,
         title: ch.title,
         status: changed ? 'would-normalize' : auditBefore.wrapped ? 'already-wrapped' : 'unchanged',
-        sections: auditAfter.sectionCount
+        filledBefore: auditBefore.filledCount,
+        filledAfter: auditAfter.filledCount
       });
     }
   }
 
-  if (write && touched) {
+  if (write && touched && !PERSISTED_MODULES.has(slug)) {
     fs.writeFileSync(chaptersPath, src);
   }
 
-  return { slug, touched, skippedDynamic, concepts: rows.length, rows };
+  if (write && PERSISTED_MODULES.has(slug) && Object.keys(persistedRecipe).length) {
+    writePersistedTheoryRecipe(slug, persistedRecipe);
+  }
+
+  const pctBefore = conceptCount ? Math.round((beforeFull / conceptCount) * 1000) / 10 : 0;
+  const pctAfter = conceptCount ? Math.round((afterFull / conceptCount) * 1000) / 10 : 0;
+  const pctStructuralAfter = conceptCount ? Math.round((afterStructural / conceptCount) * 1000) / 10 : 0;
+
+  return {
+    slug,
+    touched,
+    skippedDynamic,
+    concepts: conceptCount,
+    beforeFull,
+    afterFull,
+    beforeStructural,
+    afterStructural,
+    pctBefore,
+    pctAfter,
+    pctStructuralAfter,
+    avgFilledBefore: conceptCount ? Math.round((beforeFilledTotal / conceptCount) * 10) / 10 : 0,
+    avgFilledAfter: conceptCount ? Math.round((afterFilledTotal / conceptCount) * 10) / 10 : 0,
+    avgPlaceholdersAfter: conceptCount ? Math.round((afterPlaceholderTotal / conceptCount) * 10) / 10 : 0,
+    rows
+  };
+}
+
+function writePersistedTheoryRecipe(slug, recipeById) {
+  const outPath = path.join(repoRoot, slug, 'js/data/theoryRecipe.js');
+  const lines = [
+    '// AUTO-GENERATED by tools/exam-os/normalize-theory-structure.mjs — do not hand-edit',
+    `// Generated: ${new Date().toISOString().slice(0, 10)}`,
+    '',
+    'export const THEORY_RECIPE = {'
+  ];
+  for (const [id, html] of Object.entries(recipeById)) {
+    lines.push(`  ${id}: String.raw\`${escapeForTemplateLiteral(html.trim())}\`,`);
+  }
+  lines.push('};', '');
+  fs.writeFileSync(outPath, lines.join('\n'));
+}
+
+function writeFleetAuditReport(fleet) {
+  const reportPath = path.join(repoRoot, 'docs/audits/2026-05-31-theory-recipe-fleet-fill-pass.md');
+  const totalConcepts = fleet.reduce((n, m) => n + m.concepts, 0);
+  const totalBeforeFull = fleet.reduce((n, m) => n + m.beforeFull, 0);
+  const totalAfterFull = fleet.reduce((n, m) => n + m.afterFull, 0);
+  const totalAfterStructural = fleet.reduce((n, m) => n + m.afterStructural, 0);
+  const pctBefore = totalConcepts ? Math.round((totalBeforeFull / totalConcepts) * 1000) / 10 : 0;
+  const pctAfter = totalConcepts ? Math.round((totalAfterFull / totalConcepts) * 1000) / 10 : 0;
+  const pctStructuralAfter = totalConcepts
+    ? Math.round((totalAfterStructural / totalConcepts) * 1000) / 10
+    : 0;
+
+  const lines = [
+    '# Theory recipe fleet fill pass',
+    '',
+    `Date: 2026-05-31`,
+    `Mode: ${write ? 'write' : reportOnly ? 'report' : 'dry-run'}`,
+    '',
+    '## Canonical 8-step recipe',
+    '',
+    ...THEORY_SECTION_ORDER.map((s) => `${s.step}. **${s.heading}** (\`${s.id}\`)`),
+    '',
+    '## Fleet summary',
+    '',
+    `| Metric | Before | After |`,
+    `|--------|--------|-------|`,
+    `| Concepts audited | ${totalConcepts} | ${totalConcepts} |`,
+    `| Concepts with 8 **filled** steps (substantive VL content) | ${totalBeforeFull} (${pctBefore}%) | ${totalAfterFull} (${pctAfter}%) |`,
+    `| Concepts with 8 **structural** cards (incl. honest placeholders) | — | ${totalAfterStructural} (${pctStructuralAfter}%) |`,
+    '',
+    '| Module | Concepts | Structural 8 after | Avg filled after | Avg placeholders | Normalized |',
+    '|--------|----------|--------------------|------------------|--------------------|------------|',
+    ...fleet.map((m) => {
+      const normalized = m.rows.filter((r) => r.status === 'normalized' || r.status === 'persist-recipe').length;
+      return `| ${m.slug} | ${m.concepts} | ${m.afterStructural} | ${m.avgFilledAfter} | ${m.avgPlaceholdersAfter} | ${normalized} |`;
+    }),
+    '',
+    '## Implementation',
+    '',
+    '| Layer | File | Role |',
+    '|-------|------|------|',
+    '| Core | `assets/js/portal-core/theory/theoryStructure.js` | Re-wrap, classify, `completeTheoryRecipe`, `auditTheoryRecipeSteps` |',
+    '| Migration | `tools/exam-os/normalize-theory-structure.mjs` | Fleet `--write`; persists `theoryRecipe.js` for ökonometrie/mathematik |',
+    '| Render | `assets/js/portal-core/ui/warningSystem.js` | Keeps placeholder cards; warn-box rail |',
+    '| Styles | `assets/css/premium-refinement.css` | Recipe cards + placeholder styling |',
+    '',
+    'Empty steps after normalization receive honest one-line placeholders or content merged from `motivation`, `objectives`, `formeln`, `cards`, `intuition` — no invented VL prose.',
+    '',
+    '## Per-concept detail (filled step counts)',
+    ''
+  ];
+
+  for (const m of fleet) {
+    lines.push(`### ${m.slug}`, '');
+    lines.push('| Concept | Status | Filled before → after |', '|---------|--------|----------------------|');
+    for (const r of m.rows) {
+      const fill =
+        r.filledBefore != null ? `${r.filledBefore} → ${r.filledAfter}` : '—';
+      lines.push(`| ${r.id} | ${r.status} | ${fill} |`);
+    }
+    lines.push('');
+  }
+
+  lines.push('## Validation', '', '| Check | Result |', '|-------|--------|', '| `npm run validate` | see CI |', '| `npm run trust:pass1` | see CI |', '');
+
+  fs.mkdirSync(path.dirname(reportPath), { recursive: true });
+  fs.writeFileSync(reportPath, lines.join('\n'));
+  return reportPath;
 }
 
 async function main() {
@@ -200,46 +384,33 @@ async function main() {
     if (result) fleet.push(result);
   }
 
-  const reportPath = path.join(repoRoot, 'docs/audits/2026-05-31-theory-tab-recipe-structure-pass.md');
+  const reportPath = writeFleetAuditReport(fleet);
+  const totalConcepts = fleet.reduce((n, m) => n + m.concepts, 0);
+  const totalAfterFull = fleet.reduce((n, m) => n + m.afterFull, 0);
+  const totalAfterStructural = fleet.reduce((n, m) => n + m.afterStructural, 0);
+  const pctStructuralAfter = totalConcepts
+    ? Math.round((totalAfterStructural / totalConcepts) * 1000) / 10
+    : 0;
 
-  const lines = [
-    '# Theory tab recipe structure pass',
-    '',
-    `Date: 2026-05-31`,
-    `Mode: ${write ? 'write' : reportOnly ? 'report' : 'dry-run'}`,
-    '',
-    '## Canonical section order',
-    '',
-    ...THEORY_SECTION_ORDER.map(
-      (s) => `${s.step}. **${s.heading}** (\`${s.id}\`)`
-    ),
-    '',
-    '## Fleet compliance',
-    '',
-    '| Module | Concepts | Normalized | Skipped (dynamic) |',
-    '|--------|----------|------------|-------------------|',
-    ...fleet.map((m) => {
-      const normalized = m.rows.filter((r) => r.status === 'normalized' || r.status === 'would-normalize').length;
-      return `| ${m.slug} | ${m.concepts} | ${normalized} | ${m.skippedDynamic} |`;
-    }),
-    '',
-    '## Per-concept detail',
-    ''
-  ];
-
-  for (const m of fleet) {
-    lines.push(`### ${m.slug}`, '');
-    lines.push('| Concept | Status | Recipe sections |', '|---------|--------|-------------------|');
-    for (const r of m.rows) {
-      lines.push(`| ${r.id} | ${r.status} | ${r.sections ?? '—'} |`);
-    }
-    lines.push('');
-  }
-
-  fs.mkdirSync(path.dirname(reportPath), { recursive: true });
-  fs.writeFileSync(reportPath, lines.join('\n'));
-
-  console.log(JSON.stringify({ fleet: fleet.map((m) => ({ slug: m.slug, touched: m.touched, concepts: m.concepts })), reportPath }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        fleet: fleet.map((m) => ({
+          slug: m.slug,
+          touched: m.touched,
+          concepts: m.concepts,
+          pctStructuralAfter: m.pctStructuralAfter,
+          pctFilledAfter: m.pctAfter
+        })),
+        totalConcepts,
+        pctStructuralAfter,
+        pctFilledAfter: totalConcepts ? Math.round((totalAfterFull / totalConcepts) * 1000) / 10 : 0,
+        reportPath
+      },
+      null,
+      2
+    )
+  );
 }
 
 main().catch((err) => {

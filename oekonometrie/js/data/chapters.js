@@ -1,7 +1,13 @@
 import { CURRICULUM } from './curriculum.js';
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
-import { normalizeTheoryHtml } from '../../../assets/js/portal-core/theory/theoryStructure.js';
+import { THEORY_RECIPE } from './theoryRecipe.js';
+import {
+  completeTheoryRecipe,
+  normalizeTheoryHtml
+} from '../../../assets/js/portal-core/theory/theoryStructure.js';
+
+const CURRICULUM_BY_ID = Object.fromEntries(CURRICULUM.map((entry) => [entry.id, entry]));
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -42,7 +48,10 @@ ${entry.warnings.map((warning) => `<div class="warn-box"><strong>${escapeHtml(wa
 </div>`;
 }
 
-function renderTheoryHtml(entry) {
+function renderTheoryHtml(entry, chapterTitle = entry.title) {
+  if (THEORY_RECIPE[entry.id]) {
+    return THEORY_RECIPE[entry.id];
+  }
   const raw = [
     renderCards(entry),
     renderSections(entry),
@@ -50,7 +59,20 @@ function renderTheoryHtml(entry) {
   ]
     .filter(Boolean)
     .join('');
-  return normalizeTheoryHtml(raw);
+  return completeTheoryRecipe(normalizeTheoryHtml(raw), entry, { chapterTitle });
+}
+
+function finalizeTheory(entry, chapterTitle) {
+  const curriculumEntry = CURRICULUM_BY_ID[entry.id] || entry;
+  const mergeEntry = {
+    ...curriculumEntry,
+    motivation: entry.motivation ?? curriculumEntry.motivation,
+    objectives: entry.objectives,
+    formeln: entry.formeln
+  };
+  return completeTheoryRecipe(normalizeTheoryHtml(entry.theorie || ''), mergeEntry, {
+    chapterTitle
+  });
 }
 
 export const CHAPTERS = CURRICULUM.map(({ id, title, cat, short }) => ({
@@ -62,9 +84,10 @@ export const CHAPTERS = CURRICULUM.map(({ id, title, cat, short }) => ({
 
 function mergeContent(entry) {
   const sup = A_PLUS_SUPPLEMENT[entry.id] || {};
+  const chapter = CHAPTERS.find((ch) => ch.id === entry.id);
   return {
     motivation: entry.motivation,
-    theorie: renderTheoryHtml(entry),
+    theorie: renderTheoryHtml(entry, chapter?.title || entry.title),
     formeln: [...(entry.formeln || []), ...(sup.formeln || [])],
     aufgaben: [...(entry.aufgaben || []), ...(sup.aufgaben || [])]
   };
@@ -187,6 +210,12 @@ for (const ch of CHAPTERS) {
   entry.theorie = `${html}<div class="section-block"><h3>Klausurtransfer (source-distilled)</h3>
 <p><strong>Prüfungsstandard:</strong> Annahmen → Schätzer/Identifikation → Inferenz (SE, t/F) → ökonomische Interpretation der Koeffizienten.</p>
 <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Ökonometrie-VL; Beweise und Spezialfälle in Primär-PDFs.</p></div>`;
+}
+
+for (const ch of CHAPTERS) {
+  const entry = CONTENT[ch.id];
+  if (!entry || THEORY_RECIPE[ch.id]) continue;
+  entry.theorie = finalizeTheory(entry, ch.title);
 }
 
 export const R_BLOCKS_BY_ID = Object.fromEntries(

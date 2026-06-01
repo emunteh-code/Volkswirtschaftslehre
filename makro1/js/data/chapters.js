@@ -34,44 +34,59 @@ export const CHAPTERS = [
 export const CONTENT = {
   makro_rahmen: {
     motivation: 'Makroökonomik beginnt nicht mit einer einzelnen Formel, sondern mit einer Landkarte: Welche Größen bewegen sich gemeinsam, auf welchem Zeithorizont denken wir und über welche Märkte laufen die zentralen Anpassungen?',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Makroökonomik beginnt nicht mit einer einzelnen Formel, sondern mit einer Landkarte: Welche Größen bewegen sich gemeinsam, auf welchem Zeithorizont denken wir und über welche Märkte laufen die zentralen Anpassungen?</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Kurze, mittlere und lange Frist sauber trennen</h4>
-<p>Im Kurs werden drei Horizonte unterschieden. In der <strong>kurzen Frist</strong> reagieren Produktion und Beschäftigung auf Nachfrage, während Preise weitgehend träge sind. In der <strong>mittleren Frist</strong> passen sich Löhne und Preise an; dann rücken Arbeitsmarkt und Inflationsdynamik in den Mittelpunkt. In der <strong>langen Frist</strong> geht es um Kapital, Produktivität und Wachstum.</p>
-        <p>Diese Einteilung ist keine bloße Einleitung, sondern die Logik des ganzen Moduls: Gütermarkt und Finanzmarkt erklären die kurze Frist, WS-PS und Phillipskurve die mittlere Frist, Erwartungsbildung verbindet beide Ebenen.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Sektoren und Denkfluss</h4>
-<p>Haushalte entscheiden über Konsum, Sparen und Geldhaltung. Unternehmen investieren und setzen Preise. Banken vermitteln Kredit und Einlagen. Die Zentralbank steuert Zins oder Geldmenge. Der Staat wirkt über Ausgaben und Steuern. Gute Klausurlösungen benennen deshalb immer zuerst, welcher Sektor auf den Schock reagiert und über welchen Kanal sich der Effekt fortsetzt.</p>
-        <div class="warn-box" data-warning-placement="rail"><strong>Nicht sofort rechnen:</strong> Makrofehler entstehen oft schon vor der Rechnung: Wer Zins, Realzins, Preisniveau und Inflation nicht sauber trennt, setzt zwar Zahlen richtig ein, interpretiert aber den falschen Mechanismus.</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>Frist nicht vermischen:</strong> Gütermarktlogik mit fixerem Preisniveau und Phillipskurvenlogik mit endogener Inflation gehören nicht in dieselbe Kurzantwort, wenn die Aufgabe nur die kurze Frist fragt.</div>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">Sektoren und Märkte</h4>
 <p>Haushalte, Unternehmen, Staat und Ausland sind die Standardakteure. Güter-, Geld- und Arbeitsmarkt tragen die kurzfristige Anpassung; Finanzmärkte verbinden Sparen und Investieren.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Makroökonomik als Denkrahmen: Fristen, Variablen und Sektoren"; siehe Kernidee.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Die Kernvariablen der Makroökonomik</h4>
-<p>Makro I arbeitet immer wieder mit denselben Größen: Produktion $Y$, Konsum $C$, Investitionen $I$, Staatsausgaben $G$, Steuern $T$, Geldmenge $M$, Zins $i$, Realzins $r$, Preisniveau $P$, Inflation $\\pi$ und Arbeitslosenquote $u$.</p>
+<p>Makro I arbeitet immer wieder mit denselben Größen: Produktion $Y$, Konsum $C$, Investitionen $I$, Staatsausgaben $G$, Steuern $T$, Geldmenge $M$, Zins $i$, Realzins $r$, Preisniveau $P$, Inflation $\\\\\\\\\\\\\\\\pi$ und Arbeitslosenquote $u$.</p>
         <div class="math-block">$$Y = C + I + G$$</div>
         <p>Wichtig ist, dass dieselbe Variable je nach Kapitel eine andere Rolle spielt: $Y$ ist im Gütermarkt das Gleichgewichtsergebnis, im Arbeitsmarkt aber mit Beschäftigung und Produktionspotenzial verknüpft.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Nominal vs. real</h4>
 <p>Reale Größen deflatieren mit dem Preisindex; Inflations- und Arbeitslosigkeitsziele sind getrennte Politikziele mit unterschiedlichen Trade-offs.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Makroökonomik als Denkrahmen: Fristen, Variablen und Sektoren"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Makroökonomik als Denkrahmen: Fristen, Variablen und Sektoren"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -102,54 +117,58 @@ export const CONTENT = {
 
   vgr: {
     motivation: 'Makroökonomische Modelle brauchen Messgrößen. Ohne saubere VGR ist nicht klar, was Produktion, Preisniveau, Wachstum oder Arbeitslosigkeit in den späteren Kapiteln überhaupt bedeuten.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Makroökonomische Modelle brauchen Messgrößen. Ohne saubere VGR ist nicht klar, was Produktion, Preisniveau, Wachstum oder Arbeitslosigkeit in den späteren Kapiteln überhaupt bedeuten.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Volkswirtschaftliche Gesamtrechnung, Inflation und Arbeitslosigkeit"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Volkswirtschaftliche Gesamtrechnung, Inflation und Arbeitslosigkeit"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">BIP auf drei Seiten lesen</h4>
-<p>Das Bruttoinlandsprodukt kann von der Entstehungs-, Verwendungs- und Verteilungsseite gemessen werden. Ökonomisch steckt dahinter dieselbe Größe: der Wert der im Inland erzeugten Endproduktion in einem Zeitraum.</p>
-        <div class="math-block">$$Y = C + I + G + NX$$</div>
-        <p>Für Makro I ist die Verwendungsseite besonders wichtig, weil sie die direkte Brücke zum Gütermarkt bildet. Konsum, Investitionen und Staatsausgaben tauchen später als Nachfrageblöcke im Modell wieder auf.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Nominal, real und Preisniveau</h4>
-<p>Nominales BIP bewertet Mengen zu aktuellen Preisen; reales BIP hält Preise eines Basisjahres konstant. Nur das reale BIP misst deshalb Mengenbewegungen. Der Deflator oder Verbraucherpreisindex übersetzt diese Differenz in ein Preisniveau.</p>
-        <div class="math-block">$$BIP_{real} = \\frac{BIP_{nom}}{P}$$</div>
-        <div class="math-block">$$\\pi_t = \\frac{P_t - P_{t-1}}{P_{t-1}}$$</div>
-        <p>In Klausuren reicht oft die Faustregel: nominales Wachstum = reales Wachstum + Inflation, jedenfalls näherungsweise für moderate Änderungsraten.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Arbeitslosigkeit und Erwerbspersonen</h4>
-<p>Die Arbeitslosenquote misst den Anteil der Arbeitslosen an den Erwerbspersonen, nicht an der Gesamtbevölkerung. Deshalb muss immer sauber zwischen Bevölkerung, Erwerbsbevölkerung, Beschäftigung und Arbeitslosigkeit unterschieden werden.</p>
-        <div class="math-block">$$u = \\frac{U}{L}, \\qquad L = N + U$$</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>Bestands- und Stromgröße nicht mischen:</strong> Das BIP ist eine Stromgröße pro Zeitraum. Vermögen, Staatsschuld oder Geldmenge sind Bestandsgrößen zu einem Zeitpunkt.</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>Arbeitslosenquote falsch bezogen:</strong> Wer durch die Gesamtbevölkerung teilt, misst nicht die Arbeitslosenquote, sondern etwas völlig anderes.</div>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">BIP und Komponenten</h4>
 <p>$Y = C + I + G + NX$ (Ausgabenseite). Produktionsseite: Wertschöpfungssumme. Beide Messungen sollten im Gleichgewicht übereinstimmen.</p>
       <div class="math-block">$$Y = C + I + G + NX$$</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Deflator und CPI</h4>
 <p>BIP-Deflator vs. Verbraucherpreisindex: unterschiedliche Warenkörbe; für Makropolitik beide Deutungen kennen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Nominal BIP:</strong> Hohes nominales BIP-Wachstum kann rein inflationär sein — immer real prüfen.</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
-<p><strong>Prüfungsstandard:</strong> Frist → Kanal (Güter/Geld/Arbeit) → Wirkung auf $Y$, $i$, $\\pi$ oder $u$.</p>
-      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-I-VL; Randnotation in Primär-PDFs prüfen.</p>
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Volkswirtschaftliche Gesamtrechnung, Inflation und Arbeitslosigkeit"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Volkswirtschaftliche Gesamtrechnung, Inflation und Arbeitslosigkeit"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -181,53 +200,71 @@ export const CONTENT = {
 
   guetermarkt: {
     motivation: 'Makro I startet in der kurzen Frist mit einer einfachen, aber mächtigen Idee: Produktion passt sich der geplanten Nachfrage an. Daraus entstehen Gleichgewicht, 45°-Diagramm und später der Multiplikator.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Makro I startet in der kurzen Frist mit einer einfachen, aber mächtigen Idee: Produktion passt sich der geplanten Nachfrage an. Daraus entstehen Gleichgewicht, 45°-Diagramm und später der Multiplikator.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gütermarkt und geplante Nachfrage"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gütermarkt und geplante Nachfrage"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Geplante Nachfrage und Konsumfunktion</h4>
 <p>Die geplante Nachfrage $Z$ setzt sich aus Konsum, Investitionen und Staatsausgaben zusammen. Der Konsum hängt positiv vom verfügbaren Einkommen ab.</p>
         <div class="math-block">$$Z = C + I + G$$</div>
-        <div class="math-block">$$C = c_0 + c_1(Y - T), \\qquad 0 < c_1 < 1$$</div>
+        <div class="math-block">$$C = c_0 + c_1(Y - T), \\\\\\\\\\\\\\\\qquad 0 < c_1 < 1$$</div>
         <p>$c_0$ ist autonomer Konsum, $c_1$ die marginale Konsumquote. Weil nur ein Teil jedes zusätzlichen Einkommens konsumiert wird, bleibt die Nachfragekurve flacher als die 45°-Linie.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Gütermarktgleichgewicht im Keynes-Kreuz</h4>
 <p>Im Gleichgewicht ist die Produktion genau so hoch wie die geplante Nachfrage.</p>
         <div class="math-block">$$Y = Z$$</div>
         <p>Im Keynes-Kreuz ist die 45°-Linie die Menge aller Punkte, an denen Nachfrage und Produktion gleich sind. Die Nachfragegerade schneidet sie im kurzfristigen Gleichgewicht $Y^*$.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Was verschiebt die Nachfrage?</h4>
 <p>Höheres autonomes Konsumverhalten, höhere Investitionen, höhere Staatsausgaben oder niedrigere Steuern verschieben $Z$ nach oben. Bei gegebenem Preisniveau steigt deshalb die Gleichgewichtsproduktion.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Y ist gleichzeitig Einkommen und Output:</strong> Gerade weil Einkommen die Nachfrage beeinflusst, entsteht der Rückkopplungsmechanismus. Wer $Y$ als rein exogen behandelt, verpasst die eigentliche Logik des Modells.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Z und Y nicht verwechseln:</strong> Im Diagramm ist $Z$ die geplante Nachfragekurve, $Y$ die 45°-Linie. Erst ihr Schnittpunkt liefert das Gleichgewicht.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Von der Grafik zur Politikfolgerung</h4>
 <p>Ein Nachfrageschock wirkt nur dann expansiv, wenn das Modell kurzfristig gilt: Preise träge, Kapazität nicht bindend. Für Fiskalpolitik heißt das: Die Wirkung von $G$ hängt von $c_1$ ab, nicht von bloßer politischer Absicht.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Klausurroutine: Gleichgewicht algebraisch lösen</h4>
-<p>Typische Aufgaben kombinieren Konsumfunktion, Steuern und exogene Blöcke. Setze $Y=Z$, löse nach $Y$ auf und prüfe, ob $c_1<1$ erfüllt ist — sonst existiert kein stabiles Gütermarktgleichgewicht in dieser Form.</p>
-        <div class="math-block">$$Y^* = \\frac{c_0 + I + G - c_1 T}{1-c_1}$$</div>
-        <p>Interpretiere den Nenner: Je höher die marginale Konsumquote, desto stärker verstärkt sich jeder Nachfrageimpuls über Einkommensrückkopplungen.</p>
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
-<p><strong>Prüfungsstandard:</strong> Frist → Kanal (Güter/Geld/Arbeit) → Wirkung auf $Y$, $i$, $\\pi$ oder $u$.</p>
-      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-I-VL; Randnotation in Primär-PDFs prüfen.</p>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gütermarkt und geplante Nachfrage"; siehe die übrigen Rezept-Schritte.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Gütermarkt und geplante Nachfrage"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -268,48 +305,72 @@ export const CONTENT = {
 
   multiplikator: {
     motivation: 'Der Multiplikator ist die eigentliche Konjunkturmechanik des Gütermarkts. Er erklärt, warum ein erster Nachfrageimpuls eine größere Gesamtwirkung auf Einkommen und Produktion entfalten kann.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Herleitung des Multiplikators</h4>
-<p>Aus $Y = c_0 + c_1(Y-T) + I + G$ folgt nach Auflösen nach $Y$:</p>
-        <div class="math-block">$$Y = \\frac{1}{1-c_1}\\left(c_0 + I + G - c_1T\\right)$$</div>
-        <p>Der Faktor $1/(1-c_1)$ ist der Multiplikator. Je größer $c_1$, desto stärker reagiert die Produktion auf autonome Nachfrageimpulse.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Staatsausgaben-, Steuer- und Sparparadox</h4>
-<p>Eine Erhöhung der Staatsausgaben wirkt direkt auf die Nachfrage und wird dann über weitere Konsumrunden verstärkt. Steuersenkungen wirken ebenfalls expansiv, aber etwas schwächer, weil nur der konsumierte Teil des zusätzlichen verfügbaren Einkommens nachfragewirksam wird.</p>
-        <div class="math-block">$$\\frac{\\partial Y}{\\partial G} = \\frac{1}{1-c_1}, \\qquad \\frac{\\partial Y}{\\partial T} = -\\frac{c_1}{1-c_1}$$</div>
-        <p>Das Sparparadox beschreibt, dass der Versuch aller Haushalte, mehr zu sparen, das Einkommen senkt. Aggregiert kann dadurch die tatsächliche Ersparnis kaum steigen oder sogar unverändert bleiben.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Ausgaben- und Einkommensmultiplikator</h4>
-<p>Der <strong>Ausgabenmultiplikator</strong> $1/(1-c_1)$ misst die Wirkung autonomer Nachfrage auf $Y$. Der <strong>Einkommensmultiplikator</strong> (Steuermultiplikator) $-c_1/(1-c_1)$ ist kleiner, weil Steuerentlastung nur den konsumierten Anteil $(1-s)$ des zusätzlichen Einkommens aktiviert.</p>
-        <div class="math-block">$$\\Delta Y = \\frac{1}{1-c_1}\\Delta A + \\frac{-c_1}{1-c_1}\\Delta T$$</div>
-        <p>Bei ausgeglichenem Haushalt ($Delta G = Delta T$) bleibt ein positiver Nettoeffekt — das ist der klassische balanced-budget-Multiplikator von 1 in der einfachen Form ohne proportionale Steuern.</p>
-</div>
+<p>Der Multiplikator ist die eigentliche Konjunkturmechanik des Gütermarkts. Er erklärt, warum ein erster Nachfrageimpuls eine größere Gesamtwirkung auf Einkommen und Produktion entfalten kann.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Multiplikator, Sparparadox und Fiskalimpulse"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Multiplikator, Sparparadox und Fiskalimpulse"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Herleitung des Multiplikators</h4>
+<p>Aus $Y = c_0 + c_1(Y-T) + I + G$ folgt nach Auflösen nach $Y$:</p>
+        <div class="math-block">$$Y = \\\\\\\\\\\\\\\\frac{1}{1-c_1}\\\\\\\\\\\\\\\\left(c_0 + I + G - c_1T\\\\\\\\\\\\\\\\right)$$</div>
+        <p>Der Faktor $1/(1-c_1)$ ist der Multiplikator. Je größer $c_1$, desto stärker reagiert die Produktion auf autonome Nachfrageimpulse.</p>
+
+
+<h4 class="theory-subsection-title">Staatsausgaben-, Steuer- und Sparparadox</h4>
+<p>Eine Erhöhung der Staatsausgaben wirkt direkt auf die Nachfrage und wird dann über weitere Konsumrunden verstärkt. Steuersenkungen wirken ebenfalls expansiv, aber etwas schwächer, weil nur der konsumierte Teil des zusätzlichen verfügbaren Einkommens nachfragewirksam wird.</p>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial Y}{\\\\\\\\\\\\\\\\partial G} = \\\\\\\\\\\\\\\\frac{1}{1-c_1}, \\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial Y}{\\\\\\\\\\\\\\\\partial T} = -\\\\\\\\\\\\\\\\frac{c_1}{1-c_1}$$</div>
+        <p>Das Sparparadox beschreibt, dass der Versuch aller Haushalte, mehr zu sparen, das Einkommen senkt. Aggregiert kann dadurch die tatsächliche Ersparnis kaum steigen oder sogar unverändert bleiben.</p>
+
+
+<h4 class="theory-subsection-title">Ausgaben- und Einkommensmultiplikator</h4>
+<p>Der <strong>Ausgabenmultiplikator</strong> $1/(1-c_1)$ misst die Wirkung autonomer Nachfrage auf $Y$. Der <strong>Einkommensmultiplikator</strong> (Steuermultiplikator) $-c_1/(1-c_1)$ ist kleiner, weil Steuerentlastung nur den konsumierten Anteil $(1-s)$ des zusätzlichen Einkommens aktiviert.</p>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\Delta Y = \\\\\\\\\\\\\\\\frac{1}{1-c_1}\\\\\\\\\\\\\\\\Delta A + \\\\\\\\\\\\\\\\frac{-c_1}{1-c_1}\\\\\\\\\\\\\\\\Delta T$$</div>
+        <p>Bei ausgeglichenem Haushalt ($Delta G = Delta T$) bleibt ein positiver Nettoeffekt — das ist der klassische balanced-budget-Multiplikator von 1 in der einfachen Form ohne proportionale Steuern.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Automatische Stabilisatoren</h4>
 <p>Proportionale Steuern oder Transfers dämpfen den Multiplikator, weil mit steigendem Einkommen automatisch Kaufkraft abgeschöpft bzw. gestützt wird. Genau deshalb sind reale Fiskalsysteme weniger extrem schwankungsanfällig als das nackte Grundmodell.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Erstimpuls und Gesamteffekt trennen:</strong> Ein Ausgabenimpuls von 100 erhöht die Produktion nicht nur um 100. Die Folgerunden sind gerade der Kern des Multiplikators.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Steuer- und Staatsausgabenmultiplikator nicht gleichsetzen:</strong> Staatsausgaben wirken eins zu eins in der ersten Runde; Steuersenkungen nur über zusätzlichen Konsum. Deshalb ist der Steuermultiplikator kleiner.</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
-<p><strong>Prüfungsstandard:</strong> Frist → Kanal (Güter/Geld/Arbeit) → Wirkung auf $Y$, $i$, $\\pi$ oder $u$.</p>
-      <p><em>source-distilled / platform-added-explanation:</em> Ergänzung aus Makro-I-VL; Randnotation in Primär-PDFs prüfen.</p>
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Multiplikator, Sparparadox und Fiskalimpulse"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Multiplikator, Sparparadox und Fiskalimpulse"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -350,54 +411,57 @@ export const CONTENT = {
 
   geldnachfrage: {
     motivation: 'Der Finanzmarktblock erklärt, warum der Zins als Preis der Liquidität bestimmt wird. Haushalte verteilen Vermögen zwischen Geld und Anleihen; die Zentralbank verändert diese Entscheidung über ihr Geldangebot oder über eine Zinsregel.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Der Finanzmarktblock erklärt, warum der Zins als Preis der Liquidität bestimmt wird. Haushalte verteilen Vermögen zwischen Geld und Anleihen; die Zentralbank verändert diese Entscheidung über ihr Geldangebot oder über eine Zinsregel.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Geld, Anleihen und Geldnachfrage"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Geld, Anleihen und Geldnachfrage"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Geld versus Anleihen</h4>
-<p>Geld ist liquide, trägt aber keinen Zins. Anleihen sind weniger liquide, werfen aber Zinszahlungen ab. Deshalb hängt die Geldnachfrage positiv vom Einkommen und negativ vom Nominalzins ab.</p>
-        <div class="math-block">$$\\frac{M^d}{P} = L(i,Y), \\qquad L_i < 0,\\; L_Y > 0$$</div>
-        <p>Mehr Einkommen bedeutet mehr Transaktionen; ein höherer Zins macht Geldhaltung relativ unattraktiver.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Gleichgewicht auf dem Geldmarkt</h4>
-<p>Bei gegebenem Preisniveau trifft die reale Geldmenge $M/P$ auf die reale Geldnachfrage. Im Gleichgewicht gilt:</p>
-        <div class="math-block">$$\\frac{M}{P} = L(i,Y)$$</div>
-        <p>Eine Erhöhung von $M$ verschiebt das Gleichgewicht zu einem niedrigeren Zins. Eine Erhöhung von $Y$ erhöht die Geldnachfrage und damit ceteris paribus den Zins.</p>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">Liquiditätspräferenz</h4>
 <p>Geldnachfrage steigt mit Einkommen und sinkt mit Zins (Opportunitätskosten der Kassenhaltung). Portfolio: Geld vs. Anleihen.</p>
       <div class="math-block">$$M^d/P = L(i, Y)$$</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Anleihenpreise und Liquiditätsfalle</h4>
-<p>Der Anleihenpreis und der Zins bewegen sich gegenläufig. Kauft die Zentralbank Anleihen, steigt ihr Preis und der Zins sinkt. In der Liquiditätsfalle wird die Geldnachfrage bei sehr niedrigem Zins nahezu unendlich elastisch; zusätzliche Geldmenge senkt den Zins dann kaum noch.</p>
-        <div class="warn-box" data-warning-placement="rail"><strong>Preis einer Anleihe und Zins laufen gegenläufig:</strong> Wer beide Größen in dieselbe Richtung laufen lässt, verpasst den Kern der Offenmarktpolitik.</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>Nominalzins ist nicht Realzins:</strong> Im Geldmarktmodell wird zunächst mit dem Nominalzins i gearbeitet. Der Realzins wird erst mit Inflationserwartungen gebildet.</div>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Komparative Statik und IS-LM-Verknüpfung</h4>
-<p>$M\\uparrow$ → $i\\downarrow$ → $I\\uparrow$ → $Y\\uparrow$ (über Investitionskanal). $Y\\uparrow$ → höhere Geldnachfrage → $i\\uparrow$ (Teilcrowding-out bei Fiskalpolitik). In IS-LM: LM verschiebt sich bei Geldpolitik, IS bei Fiskalpolitik; Schnittpunkt bestimmt Gleichgewicht $(Y,i)$.</p>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">LM-Verschiebung</h4>
 <p>Geldpolitik verschiebt LM; bei Zinssteuerung passt die Zentralbank die Geldmenge an den Zielzins an.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">In der Klausur: Geldmarkt</h4>
-<p>Standardpfad: (1) $M/P = L(i,Y)$ aufschreiben. (2) Vorzeichen $L_i<0$, $L_Y>0$ nennen. (3) Schock interpretieren — Geldmenge, Einkommen oder Zinsregel. (4) Wirkung auf $i$ und über Investitionskanal auf $Y$. Bei Liquiditätsfalle: horizontale LM, Geldpolitik wirkungslos, Fiskalpolitik wirksam.</p>
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Geld, Anleihen und Geldnachfrage"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Geld, Anleihen und Geldnachfrage"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -429,55 +493,65 @@ export const CONTENT = {
 
   banken: {
     motivation: 'Makro I hört beim Geldmarkt nicht auf. Banken, Reserven und Kreditvergabe erklären, wie aus Zentralbankgeld ein viel größeres Einlagen- und Kreditvolumen entstehen kann und warum Geldpolitik auch über das Bankensystem wirkt.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Makro I hört beim Geldmarkt nicht auf. Banken, Reserven und Kreditvergabe erklären, wie aus Zentralbankgeld ein viel größeres Einlagen- und Kreditvolumen entstehen kann und warum Geldpolitik auch über das Bankensystem wirkt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Banken als Bilanzintermediäre</h4>
-<p>Geschäftsbanken halten auf der Aktivseite Reserven und Kredite, auf der Passivseite Einlagen. Wenn eine Bank einen Kredit vergibt, entsteht typischerweise zugleich eine Einlage. Damit schafft das Bankensystem Giralgeld.</p>
-        <p>Für Klausuren ist die Bilanzlogik zentral: Jede Kreditvergabe verändert gleichzeitig Aktiv- und Passivseite.</p>
-</div>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
-<div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Mindestreserve und Geldschöpfung</h4>
-<p>Bei einem Mindestreservesatz $	heta$ muss ein Teil der Einlagen als Reserve gehalten werden. In einem stark vereinfachten Modell ergibt sich daraus ein Einlagenmultiplikator.</p>
-        <div class="math-block">$$m_D = \\frac{1}{\\theta}$$</div>
-        <p>Je niedriger die Reservequote, desto größer kann bei gegebenem Zentralbankgeldbestand das Einlagenvolumen werden. Real ist die Geldschöpfung aber nicht nur durch Reserven, sondern auch durch Kapitalvorschriften, Risikoprämien und Kreditnachfrage begrenzt.</p>
-</div>
-</div>
-</section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
-<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
-<div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Zentralbank und Bankenkrisen</h4>
-<p>Die Zentralbank versorgt Banken mit Reserven, wirkt als Lender of Last Resort und stabilisiert im Krisenfall die Zahlungsfähigkeit. Bei Vertrauensverlust kann dennoch ein Bank-Run entstehen: Banken sind liquide verwundbar, weil Einlagen kurzfristig abziehbar sind, Kredite aber langfristig gebunden.</p>
-        <div class="warn-box" data-warning-placement="rail"><strong>Geldmultiplikator nicht mechanisch überdehnen:</strong> Im einfachen Lehrbuchmodell ist $1/\\theta$ nur eine Näherung. In modernen Systemen wird Kreditvergabe nicht allein durch Mindestreserven beschränkt.</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>Ein Kredit ist nicht bloß Weitergabe vorhandener Einlagen:</strong> Im Bankensystem entstehen neue Einlagen oft gerade durch Kreditvergabe.</div>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">Geldschöpfung</h4>
 <p>Kreditvergabe schafft Einlagen (Giralgeld); Mindestreserven und Refinanzierung begrenzen die Ausweitung. Nicht „nur" Zentralbank druckt Masse.</p>
 </div>
-<div class="section-block">
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Banken, Mindestreserven und Geldschöpfung"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Mindestreserve und Geldschöpfung</h4>
+<p>Bei einem Mindestreservesatz $	heta$ muss ein Teil der Einlagen als Reserve gehalten werden. In einem stark vereinfachten Modell ergibt sich daraus ein Einlagenmultiplikator.</p>
+        <div class="math-block">$$m_D = \\\\\\\\\\\\\\\\frac{1}{\\\\\\\\\\\\\\\\theta}$$</div>
+        <p>Je niedriger die Reservequote, desto größer kann bei gegebenem Zentralbankgeldbestand das Einlagenvolumen werden. Real ist die Geldschöpfung aber nicht nur durch Reserven, sondern auch durch Kapitalvorschriften, Risikoprämien und Kreditnachfrage begrenzt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Geldmultiplikator Vorsicht</h4>
 <p>Der einfache Multiplikator $M = m \\cdot B$ ist didaktisch; in der Praxis dominieren Zinssteuerung und Kreditnachfrage.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Endogenes Geld:</strong> Geldmenge folgt oft dem Zinsziel, nicht umgekehrt.</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">In der Klausur: Banken und Geld</h4>
 <p>Kreditmultiplikator didaktisch: $\\Delta M \\approx m \\cdot \\Delta B$ bei Reservequote. Endogenes Geld: ZB steuert Leitzins → Banken passen Kreditvergabe an. Finanzkrise: Bilanzschocks → Kreditrationierung → $I\\downarrow$, $Y\\downarrow$ (Finanzielle Akzelerator).</p>
       <div class="math-block">$$M = m \\cdot B,\\quad m = \\frac{1+r}{r}$$</div>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Banken, Mindestreserven und Geldschöpfung"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Banken, Mindestreserven und Geldschöpfung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -508,44 +582,78 @@ export const CONTENT = {
 
   islm: {
     motivation: 'Im IS-LM-Modell treffen Gütermarkt und Finanzmarkt aufeinander. Erst hier werden Einkommen und Zins gemeinsam bestimmt und Fiskal- bzw. Geldpolitik in einem gemeinsamen Diagramm analysierbar.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Im IS-LM-Modell treffen Gütermarkt und Finanzmarkt aufeinander. Erst hier werden Einkommen und Zins gemeinsam bestimmt und Fiskal- bzw. Geldpolitik in einem gemeinsamen Diagramm analysierbar.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-Grundmodell bei Zinssteuerung"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-Grundmodell bei Zinssteuerung"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">IS-Kurve: Gleichgewicht auf dem Gütermarkt</h4>
 <p>Die IS-Kurve beschreibt alle Kombinationen aus Produktion $Y$ und Zins $i$, bei denen der Gütermarkt im Gleichgewicht ist.</p>
         <div class="math-block">$$Y = C(Y-T) + I(Y,i) + G$$</div>
         <p>Sie verläuft fallend: Ein höherer Zins dämpft Investitionen, dadurch sinkt die Nachfrage und das Gütermarktgleichgewicht verschiebt sich zu niedrigerem Output.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">LM-Kurve bzw. Zinssteuerung</h4>
 <p>Im traditionellen Modell kommt der Geldmarkt als steigende LM-Kurve hinzu. Im Kurs wird häufig mit Zinssteuerung gearbeitet: Die Zentralbank setzt den Zinssatz direkt, sodass die monetäre Bedingung eher als horizontale Zinsregel gelesen wird.</p>
-        <div class="math-block">$$i = \\bar{i}$$</div>
+        <div class="math-block">$$i = \\\\\\\\\\\\\\\\bar{i}$$</div>
         <p>Das ändert die Politiklogik erheblich: Bei horizontaler Zinsregel entfällt das klassische Crowding-Out über steigende Zinsen.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Verschiebung versus Bewegung im Diagramm</h4>
 <p>Im IS-LM-Diagramm ist die erste Klausurfrage fast immer: <em>Was verschiebt die Kurve und was ist nur eine Bewegung entlang?</em> Ein Fiskalimpuls über $G$ oder $T$ verschiebt die IS-Kurve. Ein monetärer Zinsimpuls verschiebt die Zinsregel bzw. LM. Der neue Schnittpunkt erzeugt dann eine Bewegung entlang der jeweils anderen Kurve.</p>
         <p>Genau diese Trennung verhindert den Standardfehler „IS verschiebt sich, weil der Zins fällt“. Sinkende Zinsen bewegen dich entlang der IS; die IS selbst verschiebt sich erst, wenn eine autonome Nachfragekomponente wechselt.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Verschiebung ist nicht Bewegung:</strong> Ein neuer Gleichgewichtspunkt nach Zinsänderung ist noch keine IS-Verschiebung. Für eine Verschiebung brauchst du einen eigenen Gütermarktschock wie G, T oder Investitionsvertrauen.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Gemeinsames Gleichgewicht</h4>
 <p>Das makroökonomische Gleichgewicht liegt dort, wo Gütermarkt und Finanzmarkt gleichzeitig im Gleichgewicht sind. Fiskalpolitik verschiebt die IS-Kurve; Geldpolitik verschiebt die Zinsregel bzw. im klassischen Modell die LM-Kurve.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>IS-LM ist Kurzfristlogik:</strong> Das Modell erklärt Nachfrage, Output und Zins bei gegebenem Preisniveau. Arbeitsmarkt und Inflationsdynamik gehören noch nicht in dieselbe Antwort.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>LM nicht automatisch steigend zeichnen:</strong> Wenn der Kurs ausdrücklich Zinssteuerung verwendet, ist die relevante monetäre Beziehung horizontal.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Politikvergleich und Anschluss an die mittlere Frist</h4>
 <p>Das Modell ist klausurstark, weil es Politikvergleiche strukturiert: Fiskalpolitik verschiebt die Nachfrage direkt, Geldpolitik verändert die Finanzierungsbedingung. Die richtige Antwort nennt deshalb immer <em>Schock → betroffene Kurve → neues Gleichgewicht → ökonomische Deutung</em>.</p>
         <p>Gleichzeitig muss die Grenze des Modells sichtbar bleiben: IS-LM sagt noch nicht, wie Inflation, Erwartungen oder Arbeitslosigkeit mittelfristig reagieren. Genau dieser Anschluss erfolgt erst im IS-LM-PC-Rahmen.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Kurzfristige Gleichgewichte nicht überdehnen:</strong> Ein höheres Y im IS-LM-Diagramm ist kein Beweis für dauerhaft höheres Produktionspotenzial. Dafür brauchst du die mittelfristige Angebots- und Inflationslogik.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-Grundmodell bei Zinssteuerung"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-Grundmodell bei Zinssteuerung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -605,48 +713,74 @@ export const CONTENT = {
 
   politikmix: {
     motivation: 'Erst mit Politikschocks wird das IS-LM-Modell klausurpraktisch. Hier wird trainiert, wie Fiskal- und Geldpolitik Kurven verschieben, wann Crowding-Out entsteht und wie ein Policy-Mix die Wirkung verändert.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Erst mit Politikschocks wird das IS-LM-Modell klausurpraktisch. Hier wird trainiert, wie Fiskal- und Geldpolitik Kurven verschieben, wann Crowding-Out entsteht und wie ein Policy-Mix die Wirkung verändert.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Fiskalpolitik im IS-LM</h4>
 <p>Eine Erhöhung von $G$ oder eine Senkung von $T$ verschiebt die IS-Kurve nach rechts. Ob daraus vor allem höherer Output oder vor allem höherer Zins folgt, hängt von der monetären Reaktion ab.</p>
         <p>Bei horizontaler Zinsregel bleibt der Zins konstant und die Fiskalpolitik entfaltet nahezu den vollen Gütermarkt-Multiplikator. Bei steigendem Geldmarktzins kommt es dagegen zu Zinsanstieg und teilweisem Crowding-Out der Investitionen.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fiskalpolitik, Geldpolitik und Crowding-Out"; siehe Kernidee.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Geldpolitik und Crowding-Out</h4>
 <p>Eine Zinssenkung verschiebt die monetäre Kurve nach unten und erhöht die Nachfrage. Umgekehrt kann eine restriktive Geldpolitik einen Fiskalimpuls teilweise neutralisieren. Genau diese Kombinationen werden in Klausuren oft als Policy-Mix abgefragt.</p>
-        <div class="math-block">$$\\Delta Y = \\text{direkter Nachfrageimpuls} - \\text{verdrängte Investitionen}$$</div>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\Delta Y = \\\\\\\\\\\\\\\\text{direkter Nachfrageimpuls} - \\\\\\\\\\\\\\\\text{verdrängte Investitionen}$$</div>
         <p>Je steiler die LM-Kurve bzw. je stärker der Zins auf Einkommen reagiert, desto größer ist das Crowding-Out.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Sonderfälle: Liquiditätsfalle und straffe Geldpolitik</h4>
 <p>In der Liquiditätsfalle ist die Geldpolitik schwach, Fiskalpolitik aber stark. Bei sehr straffer Geldpolitik kann selbst ein großer fiskalischer Impuls fast vollständig über steigende Zinsen neutralisiert werden.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Crowding-Out heißt nicht Wirkungslosigkeit:</strong> Auch bei Crowding-Out steigt der Output häufig noch an; nur der Effekt ist kleiner als im reinen Gütermarktmodell.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Immer die monetäre Reaktion nennen:</strong> Die gleiche Fiskalmaßnahme kann je nach LM- oder Zinsregel zu ganz unterschiedlichen Ergebnissen führen.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Shift vs. Movement im Policy-Diagramm</h4>
 <p>Die saubere Klausurantwort trennt immer zwei Ebenen: <strong>der Schock</strong> verschiebt eine Kurve, <strong>die Reaktion des Gleichgewichts</strong> erzeugt Bewegungen auf bereits verschobenen Kurven. Genau hier kippen viele Lösungen sprachlich und graphisch.</p>
         <p>Mehr Staatsausgaben verschieben die IS-Kurve. Der anschließende Zinsanstieg ist keine zweite IS-Verschiebung, sondern Teil des neuen Schnittpunkts mit der monetären Bedingung. Umgekehrt verschiebt eine Zinssenkung die LM- bzw. Zinsregel; die resultierende Investitionsreaktion ist dann die Bewegung auf der IS-Kurve.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Schock doppelt zählen:</strong> Wer nach einer Fiskalexpansion zusätzlich noch von einer "Investitionsverschiebung wegen höherem Zins" spricht, vermischt Gleichgewichtsbewegung und eigenständigen Kurvenschock.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Von der kurzen zur mittleren Frist weiterdenken</h4>
 <p>Ein starker Nachfrageimpuls endet klausurtypisch nicht im ersten Diagramm. Wenn der Output über das Produktionspotenzial steigt, folgen in der mittleren Frist Lohn-, Preis- und Inflationsreaktionen. Die Kurzfristanalyse ist daher oft nur der erste Schritt einer längeren Wirkungsargumentation.</p>
         <p>Gute Lösungen schließen den Policy-Mix deshalb mit einem Halbsatz zur Anschlusslogik: höherer Output kann Inflationsdruck auslösen, der die reale Geld- und Zinslage später wieder verändert.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Kurzfristgleichgewicht als Endpunkt verkaufen:</strong> Im IS-LM-Teil wird häufig korrekt gerechnet, aber die Anschlussfrage zur mittleren Frist ignoriert. Das kostet in Transferaufgaben unnötig Punkte.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fiskalpolitik, Geldpolitik und Crowding-Out"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Fiskalpolitik, Geldpolitik und Crowding-Out"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -723,55 +857,79 @@ export const CONTENT = {
 
   realzins_fisher_erwartungen: {
     motivation: 'Kapitel 6 trennt zuerst sauber zwischen Nominalzins, erwartetem Preisniveau und Realzins. Diese Fisher-Logik ist ein eigener Prüfungsbaustein, bevor Risikoaufschläge und Krisenkanäle dazukommen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Erwartungen entscheiden darüber, wie stark Politik wirkt. In Makro I wird deshalb sauber zwischen angekündigten und überraschenden Maßnahmen, Glaubwürdigkeit und Zeitkonsistenz unterschieden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erwartungen, Glaubwürdigkeit und Politik"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erwartungen, Glaubwürdigkeit und Politik"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Erwartungen in Konsum, Investition und Zinsstruktur</h4>
 <p>Haushalte orientieren ihren Konsum nicht nur am heutigen Einkommen, sondern am erwarteten Lebenseinkommen. Unternehmen investieren auf Basis des erwarteten Barwerts künftiger Gewinne. Und langfristige Zinsen hängen von erwarteten künftigen Kurzfristzinsen ab.</p>
         <div class="math-block">$$V_t = \\sum_{k=0}^{\\infty}\\frac{\\pi^e_{t+k}}{(1+r)^k}$$</div>
         <div class="math-block">$$i_{lang} \\approx \\frac{1}{n}\\sum_{k=0}^{n-1} i^e_{t+k}$$</div>
         <p>Darum wirkt glaubwürdige Politik oft schon über Erwartungen, bevor sich aktuelle Größen mechanisch ändern.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Temporäre versus permanente Politik</h4>
 <p>Eine einmalige Steuersenkung erhöht das erwartete Lebenseinkommen viel weniger als eine dauerhafte Senkung. Deshalb fällt der Konsumimpuls deutlich schwächer aus. Derselbe Gedanke gilt für Zinsankündigungen: Eine glaubwürdige Zukunftsankündigung kann sofort lange Zinsen bewegen.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Glaubwürdigkeit und Zeitinkonsistenz</h4>
 <p>Politik wirkt nur, wenn private Akteure die Ankündigung ernst nehmen. Eine Zentralbank, die niedrige Inflation ankündigt, aber später doch Beschäftigung kurzfristig über Überraschungsinflation stützen möchte, leidet unter Zeitinkonsistenz. Regeln, Reputation und Unabhängigkeit sind institutionelle Antworten auf dieses Problem.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Ankündigung ist nicht Wirkung:</strong> Ob eine Politikmaßnahme sofort wirkt, hängt davon ab, ob sie glaubwürdig ist und wie stark sie Erwartungen verändert.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Temporär und permanent trennen:</strong> Viele Klausurfehler entstehen, weil eine einmalige Maßnahme fälschlich wie eine dauerhafte bewertet wird.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Ankündigung, Überraschung und Timing</h4>
 <p>Viele Klausurfragen leben davon, ob eine Maßnahme <strong>angekündigt</strong>, <strong>glaubwürdig</strong> und <strong>überraschend</strong> ist. Eine angekündigte künftige Zinssenkung kann heutige Langfristzinsen bewegen. Eine nicht glaubwürdige Ankündigung verpufft. Eine Überraschungsmaßnahme wirkt oft anders als eine vollständig erwartete Politik.</p>
         <p>Die Standardfrage lautet deshalb nicht nur „Was macht die Politik?“, sondern „<em>Wann</em> wird sie erwartet und über welchen Kanal wirkt sie sofort?“</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Zeitpunkt der Erwartungsbildung ausblenden:</strong> Wer nur den späteren Politikschritt nennt, aber nicht erklärt, warum Märkte oder Haushalte schon heute reagieren, beantwortet den Erwartungskanal unvollständig.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Adaptive vs. rationale Erwartungen</h4>
 <p>Adaptive: $\\pi^e$ folgt vergangener Inflation. Rational: keine systematischen Fehler — Policy-Regeln wirken nur bei Überraschungen.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Glaubwürdigkeit</h4>
 <p>Unabhängige Zentralbank und klare Ziele verankern $\\pi^e$; ohne Glaubwürdigkeit kein dauerhafter Phillips-Trade-off.</p>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Prüfungsmuster: erst Erwartungskanal, dann aktuelle Größe</h4>
 <p>Eine belastbare Antwort arbeitet in vier Schritten: Maßnahme klassifizieren, permanent vs. temporär trennen, Glaubwürdigkeit prüfen und erst dann die aktuelle Wirkung auf Konsum, Investition, Langfristzins oder Inflation ableiten.</p>
         <p>So wird auch sichtbar, warum dieselbe nominelle Ankündigung ganz unterschiedlich wirken kann: Entweder über Glaubwürdigkeitsgewinn sofort stark oder ohne Vertrauen fast gar nicht.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erwartungen, Glaubwürdigkeit und Politik"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Erwartungen, Glaubwürdigkeit und Politik"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -811,50 +969,62 @@ export const CONTENT = {
 
   realzins_risikopraemie_krisenkanal: {
     motivation: 'Kapitel 6 erweitert die reine Fisher-Logik um Kreditaufschläge, Bankenbilanzen und Krisentransmission. Damit wird sichtbar, warum ein unveränderter Leitzins in einer Finanzkrise kein neutraler Zustand ist.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Kapitel 6 erweitert die reine Fisher-Logik um Kreditaufschläge, Bankenbilanzen und Krisentransmission. Damit wird sichtbar, warum ein unveränderter Leitzins in einer Finanzkrise kein neutraler Zustand ist.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Risikoprämie, Kreditzins und Krisenkanal"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Risikoprämie, Kreditzins und Krisenkanal"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Leitzins vs. Kreditzins</h4>
-<p>Im erweiterten IS-LM-Modell ist für Unternehmen oft nicht der Leitzins, sondern der Kreditzins entscheidend. Er setzt sich aus Zentralbankzins und Risikoaufschlag zusammen.</p>
-        <div class="math-block">$$i_L = i + x$$</div>
-        <p>Steigt die Risikoprämie $x$, wird Kredit teurer, Investitionen sinken und die IS-Kurve verschiebt sich nach links. Der Kurs behandelt diesen Kanal ausdrücklich als eigene Schockquelle.</p>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">Risikoprämie</h4>
 <p>$i = r + \\text{Risikoprämie}$. In Krisen steigt die Prämie — Kredit wird teurer unabhängig von Leitzins.</p>
       <div class="math-block">$$i = r + rp$$</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Spread-Logik und Finanzkrise</h4>
-<p>Kapitel 6 illustriert die Krisentransmission über Spreads wie den TED-Spread: Ein steigender Aufschlag signalisiert höheres Ausfall- und Liquiditätsrisiko und geht mit restriktiverer Kreditvergabe einher.</p>
-        <p>Didaktisch wichtig ist: Ein unveränderter Leitzins bedeutet nicht, dass sich die Finanzierungsbedingungen nicht verschlechtern. Der relevante Aufschlag kann gleichzeitig stark steigen.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">ELB, Deflationsangst und unvollständige Gegensteuerung</h4>
-<p>Der Krisenkanal wird besonders hartnäckig, wenn fallende Inflationserwartungen und höhere Risikoprämien gleichzeitig auftreten. Dann müsste die Zentralbank den Realzins stark senken, stößt aber womöglich an die effektive Zinsuntergrenze.</p>
-        <div class="warn-box" data-warning-placement="rail"><strong>Kreditzins statt Leitzins lesen:</strong> Im Krisenfall entscheidet die Aufgabe oft über den Aufschlag x, nicht über eine direkte Leitzinsänderung.</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>Spread nicht nur beschreiben:</strong> Ein höherer Spread ist in Makro I kein Finanzmarkt-Detail, sondern ein Schock mit Nachfrage- und Beschäftigungsfolgen.</div>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">Finanzielle Akzelerator</h4>
 <p>Sinkende Vermögenswerte verschlechtern Sicherheiten → weniger Kredit → weniger $I$ und $Y$.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Leitzins vs. Marktzins:</strong> Unternehmen zahlen $i$ mit Risikoprämie — nicht identisch mit ZB-Leitzins.</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">In der Klausur: Krisenkanal</h4>
 <p>Spread $rp$ steigt bei Unsicherheit → Investition $I(r+rp)$ sinkt. Finanzielle Akzelerator: fallende Vermögenspreise → schlechtere Sicherheiten → höheres $rp$ → weiterer $I$-Rückgang. Leitzinssenkung kann wirkungslos sein, wenn $rp$ dominiert (Liquiditätsfalle des Kreditmarkts).</p>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Risikoprämie, Kreditzins und Krisenkanal"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Risikoprämie, Kreditzins und Krisenkanal"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -895,52 +1065,62 @@ export const CONTENT = {
 
   arbeitsmarkt: {
     motivation: 'Sobald Preise und Löhne reagieren, reicht reine Nachfrageanalyse nicht mehr. Der Arbeitsmarktblock zeigt, wie Verhandlungsmacht, Markups und Institutionen das mittelfristige Produktionspotenzial bestimmen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
+<div class="theory-recipe-body">
+<p>Sobald Preise und Löhne reagieren, reicht reine Nachfrageanalyse nicht mehr. Der Arbeitsmarktblock zeigt, wie Verhandlungsmacht, Markups und Institutionen das mittelfristige Produktionspotenzial bestimmen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Arbeitsmarkt, Lohnsetzung und Preissetzung"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Arbeitsmarkt, Lohnsetzung und Preissetzung"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Lohnsetzung: WS-Kurve</h4>
-<p>Arbeitnehmer und Unternehmen handeln Nominallöhne aus. Je höher die Arbeitslosigkeit, desto schwächer ist typischerweise die Verhandlungsmacht der Beschäftigten; je günstiger Institutionen für Arbeitnehmer sind, desto höher fallen Lohnforderungen aus.</p>
-        <div class="math-block">$$W = P^e F(u,z), \\qquad F_u < 0,\\; F_z > 0$$</div>
-        <p>In Reallohnschreibweise ergibt sich $W/P = F(u,z)$. Die WS-Kurve verläuft im $(u, W/P)$-Diagramm fallend.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Preissetzung: PS-Kurve</h4>
-<p>Firmen setzen Preise mit einem Markup $\\mu$ auf die Grenzkosten. Bei einfacher Produktionsstruktur gilt:</p>
-        <div class="math-block">$$P = (1+\\mu)W \\qquad \\Rightarrow \\qquad \\frac{W}{P} = \\frac{1}{1+\\mu}$$</div>
-        <p>Die PS-Kurve ist horizontal: Der von Unternehmen gezahlte Reallohn hängt in diesem einfachen Modell nicht von der Arbeitslosenquote ab, sondern vom Markup.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Natürliche Arbeitslosigkeit und Produktionspotenzial</h4>
-<p>Im Schnittpunkt von WS und PS liegt die natürliche Arbeitslosenquote $u_n$. Sie steigt, wenn Verhandlungsmacht bzw. institutionelle Faktoren $z$ zunehmen oder wenn Firmenmarktmacht $\\mu$ steigt.</p>
-        <div class="math-block">$$F(u_n,z) = \\frac{1}{1+\\mu}$$</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>WS ist keine klassische Arbeitsangebotskurve:</strong> Es geht um das Ergebnis von Lohnverhandlungen, nicht um reine individuelle Arbeitsangebotsentscheidungen.</div>
-        <div class="warn-box" data-warning-placement="rail"><strong>u_n ist veränderlich:</strong> Die natürliche Arbeitslosenquote hängt von Institutionen, Marktmacht und Erwartungsbildung ab und ist daher kein Naturgesetz.</div>
-</div>
-<div class="section-block">
 <h4 class="theory-subsection-title">WS-Kurve</h4>
 <p>Lohnsetzung: nominaler Lohn reagiert auf Arbeitslosigkeit und Erwartungen. Kurzfristig können Reallöhne träge sein.</p>
       <div class="math-block">$$W = P \\cdot w,\\quad w = f(u, \\pi^e)$$</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Preissetzung</h4>
 <p>PS-Kurve: Preisniveau-Anpassung zur Arbeitsmarktlage; Verbindung zu Phillipskurve in mittlerer Frist.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Nominal vs. real:</strong> Lohnverhandlungen oft nominal — Reallohn folgt aus $W/P$ und Preisniveau.</div>
 </div>
-</div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">In der Klausur: Arbeitsmarkt</h4>
 <p>WS/PS-Modell: Arbeitslosigkeit $u$ und Preissetzung bestimmen kurzfristige Phillips-Beziehung. Lohnrigidität erklärt Persistenz von $u>u_n$. Strukturell vs. konjunkturell unterscheiden — nicht alles ist „Keynesianisch".</p>
+
+
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Arbeitsmarkt, Lohnsetzung und Preissetzung"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Arbeitsmarkt, Lohnsetzung und Preissetzung"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -971,46 +1151,80 @@ export const CONTENT = {
 
   phillips: {
     motivation: 'Die Phillipskurve übersetzt Arbeitsmarktspannung in Inflationsdynamik. Sie ist der Schlüssel, um zu verstehen, warum ein Boom nicht nur Output, sondern auch Preisentwicklung verändert.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Erwartungsaugmentierte Phillipskurve</h4>
-<p>Inflation hängt von erwarteter Inflation, Markups und der Lage des Arbeitsmarkts ab. Je niedriger die Arbeitslosigkeit relativ zur natürlichen Rate, desto stärker steigen Löhne und Preise.</p>
-        <div class="math-block">$$\\pi_t = \\pi_t^e + (\\mu + z) - \\alpha u_t$$</div>
-        <div class="math-block">$$\\pi_t - \\pi_t^e = -\\alpha (u_t - u_n)$$</div>
-        <p>Die zweite Schreibweise macht den Kern sichtbar: Inflation steigt, wenn $u_t$ unter $u_n$ liegt.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">NAIRU und Inflationsbeschleunigung</h4>
-<p>Die NAIRU ist die Arbeitslosenquote, bei der Inflation weder steigt noch fällt. Unter adaptiven Erwartungen gilt näherungsweise:</p>
-        <div class="math-block">$$\\pi_t - \\pi_{t-1} = -\\alpha (u_t - u_n)$$</div>
-        <p>Liegt die Arbeitslosigkeit unter $u_n$, beschleunigt sich die Inflation; liegt sie darüber, sinkt die Inflation.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Angebotsschocks und Lohnindexierung</h4>
-<p>Die Vorlesung zeigt ausdrücklich, dass nicht nur Erwartungen, sondern auch Angebotsschocks und institutionelle Lohnanpassung die Phillipskurve verändern. Ein negativer Angebotsschock kann Inflation und Arbeitslosigkeit gleichzeitig steigen lassen.</p>
-        <div class="math-block">$$\\pi_t - \\pi_{t-1} = -\\frac{\\alpha}{1-\\lambda}(u_t-u_n)$$</div>
-        <p>Wenn ein Teil $\\lambda$ der Lohnverträge indexiert ist, reagieren Löhne und Preise stärker auf aktuelle Inflation. Dann wird derselbe Arbeitslosigkeitsschock in stärkere Inflationsänderungen übersetzt.</p>
-</div>
+<p>Die Phillipskurve übersetzt Arbeitsmarktspannung in Inflationsdynamik. Sie ist der Schlüssel, um zu verstehen, warum ein Boom nicht nur Output, sondern auch Preisentwicklung verändert.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Phillipskurve, NAIRU und Inflationsdynamik"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Phillipskurve, NAIRU und Inflationsdynamik"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Erwartungsaugmentierte Phillipskurve</h4>
+<p>Inflation hängt von erwarteter Inflation, Markups und der Lage des Arbeitsmarkts ab. Je niedriger die Arbeitslosigkeit relativ zur natürlichen Rate, desto stärker steigen Löhne und Preise.</p>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\pi_t = \\\\\\\\\\\\\\\\pi_t^e + (\\\\\\\\\\\\\\\\mu + z) - \\\\\\\\\\\\\\\\alpha u_t$$</div>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\pi_t^e = -\\\\\\\\\\\\\\\\alpha (u_t - u_n)$$</div>
+        <p>Die zweite Schreibweise macht den Kern sichtbar: Inflation steigt, wenn $u_t$ unter $u_n$ liegt.</p>
+
+
+<h4 class="theory-subsection-title">NAIRU und Inflationsbeschleunigung</h4>
+<p>Die NAIRU ist die Arbeitslosenquote, bei der Inflation weder steigt noch fällt. Unter adaptiven Erwartungen gilt näherungsweise:</p>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\pi_{t-1} = -\\\\\\\\\\\\\\\\alpha (u_t - u_n)$$</div>
+        <p>Liegt die Arbeitslosigkeit unter $u_n$, beschleunigt sich die Inflation; liegt sie darüber, sinkt die Inflation.</p>
+
+
+<h4 class="theory-subsection-title">Angebotsschocks und Lohnindexierung</h4>
+<p>Die Vorlesung zeigt ausdrücklich, dass nicht nur Erwartungen, sondern auch Angebotsschocks und institutionelle Lohnanpassung die Phillipskurve verändern. Ein negativer Angebotsschock kann Inflation und Arbeitslosigkeit gleichzeitig steigen lassen.</p>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\pi_{t-1} = -\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\alpha}{1-\\\\\\\\\\\\\\\\lambda}(u_t-u_n)$$</div>
+        <p>Wenn ein Teil $\\\\\\\\\\\\\\\\lambda$ der Lohnverträge indexiert ist, reagieren Löhne und Preise stärker auf aktuelle Inflation. Dann wird derselbe Arbeitslosigkeitsschock in stärkere Inflationsänderungen übersetzt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Erwartungen und Verschiebungen</h4>
 <p>Steigen Inflationserwartungen, verschiebt sich die kurzfristige Phillipskurve nach oben. Langfristig verschwindet der Trade-off: Dann liegt die Wirtschaft wieder bei der natürlichen Arbeitslosenquote, nur womöglich bei höherer Inflationsrate.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>u_n ist kein Zielwert für Null-Inflation:</strong> u_n stabilisiert die Inflation; er bedeutet nicht automatisch, dass Inflation null ist.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Kurzfristig vs. langfristig:</strong> Ein kurzfristiger Trade-off zwischen Inflation und Arbeitslosigkeit heißt nicht, dass dauerhaft niedrigere Arbeitslosigkeit durch mehr Inflation gekauft werden kann.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Deflation und Grenzen der Standard-Phillipskurve</h4>
 <p>Die Quelle behandelt auch den Grenzfall sehr niedriger Inflation: Bei hoher Arbeitslosigkeit würde die Standard-Phillipskurve eigentlich Deflation prognostizieren, tatsächlich wird diese Dynamik oft durch nach unten starre Nominallöhne oder fest verankerte Erwartungen abgefedert.</p>
         <p>Deshalb ist Deflation in Klausuren kein bloßes Vorzeichenproblem. Gute Antworten nennen die Grenze der Modellmechanik: Niedrige Inflation, starre Löhne und verankerte Erwartungen können die Fallhöhe der Phillipskurve sichtbar begrenzen.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Angebotsschock nicht als Bewegung fehllesen:</strong> Steigt Inflation trotz höherer Arbeitslosigkeit, liegt typischerweise ein Shift durch Angebotsschock oder Erwartungsänderung vor, nicht eine Bewegung auf derselben Kurve.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Deflation nicht mechanisch behaupten:</strong> Sehr hohe Arbeitslosigkeit impliziert im Kurs nicht automatisch eine beobachtete Deflationsspirale; Lohnrigiditäten und Ankererwartungen sind mitzudenken.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Phillipskurve, NAIRU und Inflationsdynamik"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „Phillipskurve, NAIRU und Inflationsdynamik"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [
@@ -1088,55 +1302,89 @@ export const CONTENT = {
 
   islmpc: {
     motivation: 'Das IS-LM-PC-Modell verbindet die Nachfragewelt der kurzen Frist mit der Inflations- und Arbeitsmarktlogik der mittleren Frist. Es erklärt, warum Konjunkturimpulse nicht dauerhaft zu höherem Output führen, wohl aber zu einer Anpassungsdynamik von Inflation und Zins.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
-<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h"><span class="theory-recipe-step" aria-hidden="true">1</span> Orientierung</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
-<h4 class="theory-subsection-title">Die drei Bausteine zusammenführen</h4>
-<p>Im Gütermarkt bestimmt die IS-Beziehung die Produktionslücke, im Arbeitsmarkt bzw. über Okun die Arbeitslosenlücke und über die Phillipskurve die Inflationsdynamik. Die Zentralbank reagiert schließlich mit einer Zinsregel.</p>
-        <div class="math-block">$$\\pi_t - \\pi_{t-1} = -\\alpha(u_t-u_n)$$</div>
-        <div class="math-block">$$r_t = \\bar r + \\lambda(\\pi_t - \\bar \\pi)$$</div>
-        <p>Genau dieses Zusammenspiel beschreibt, wie ein Boom über Inflation eine geldpolitische Reaktion auslöst, die die Wirtschaft wieder Richtung Potenzial zurückführt.</p>
-</div>
-<div class="section-block">
-<h4 class="theory-subsection-title">Okun-Gesetz als Brücke</h4>
-<p>Um Produktionslücke und Arbeitslosigkeit zu verknüpfen, wird Okuns Gesetz verwendet. Übersteigt der Output sein natürliches Niveau, fällt die Arbeitslosigkeit unter die natürliche Rate.</p>
-        <div class="math-block">$$u_t - u_n = -\\beta \\frac{Y_t - Y_n}{Y_n}$$</div>
-        <p>Damit wird klar, warum ein Nachfrageschock nicht nur das Einkommen verschiebt, sondern mit Verzögerung auch den Inflationsdruck verändert.</p>
-</div>
+<p>Das IS-LM-PC-Modell verbindet die Nachfragewelt der kurzen Frist mit der Inflations- und Arbeitsmarktlogik der mittleren Frist. Es erklärt, warum Konjunkturimpulse nicht dauerhaft zu höherem Output führen, wohl aber zu einer Anpassungsdynamik von Inflation und Zins.</p>
 </div>
 </section>
-<section class="theory-recipe-section theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h"><span class="theory-recipe-step" aria-hidden="true">2</span> Kernidee</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-PC: Rückkehr zur mittleren Frist"; siehe Orientierung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h"><span class="theory-recipe-step" aria-hidden="true">3</span> Definitionen</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-PC: Rückkehr zur mittleren Frist"; siehe Kernidee.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+<h3 class="theory-recipe-heading" id="theory-formale-h"><span class="theory-recipe-step" aria-hidden="true">4</span> Formale Darstellung</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Die drei Bausteine zusammenführen</h4>
+<p>Im Gütermarkt bestimmt die IS-Beziehung die Produktionslücke, im Arbeitsmarkt bzw. über Okun die Arbeitslosenlücke und über die Phillipskurve die Inflationsdynamik. Die Zentralbank reagiert schließlich mit einer Zinsregel.</p>
+        <div class="math-block">$$\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\pi_{t-1} = -\\\\\\\\\\\\\\\\alpha(u_t-u_n)$$</div>
+        <div class="math-block">$$r_t = \\\\\\\\\\\\\\\\bar r + \\\\\\\\\\\\\\\\lambda(\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\bar \\\\\\\\\\\\\\\\pi)$$</div>
+        <p>Genau dieses Zusammenspiel beschreibt, wie ein Boom über Inflation eine geldpolitische Reaktion auslöst, die die Wirtschaft wieder Richtung Potenzial zurückführt.</p>
+
+
+<h4 class="theory-subsection-title">Okun-Gesetz als Brücke</h4>
+<p>Um Produktionslücke und Arbeitslosigkeit zu verknüpfen, wird Okuns Gesetz verwendet. Übersteigt der Output sein natürliches Niveau, fällt die Arbeitslosigkeit unter die natürliche Rate.</p>
+        <div class="math-block">$$u_t - u_n = -\\\\\\\\\\\\\\\\beta \\\\\\\\\\\\\\\\frac{Y_t - Y_n}{Y_n}$$</div>
+        <p>Damit wird klar, warum ein Nachfrageschock nicht nur das Einkommen verschiebt, sondern mit Verzögerung auch den Inflationsdruck verändert.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h"><span class="theory-recipe-step" aria-hidden="true">5</span> Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
-<div class="section-block">
 <h4 class="theory-subsection-title">Realkette: Produktionslücke -&gt; Inflation -&gt; Realzins</h4>
 <p>Die mittelfristige Rückkehr entsteht nicht automatisch, sondern über eine klare Realkette. Liegt $Y_t$ über $Y_n$, fällt die Arbeitslosigkeit unter $u_n$, Inflation steigt, und die Zentralbank hebt den Realzins an. Genau dadurch wird die Nachfrage wieder gebremst.</p>
         <p>Die didaktische Kernregel lautet deshalb: Nicht nur den ersten Boom nennen, sondern immer den Rückkanal über Inflation und Realzins mitsprechen.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Zwei Diagramme: Oberes (Y, i) und unteres (u, π)</h4>
 <p>Im Kurs wird die mittelfristige Logik nicht durch ein einziges zusammengepresstes Koordinatensystem ersetzt, sondern über die <strong>Verbindung</strong> von Gütermarkt und Phillipsseite gedacht. Im Graphen-Tab zu diesem Kapitel ist das sichtbar umgesetzt: oben IS-Kurve und Zinsregel im (Y, i)-Raum, unten die Phillipskurve im (u, π)-Raum.</p>
         <p>Die Koppelung folgt derselben Reihenfolge wie in der Theorie: Okun übersetzt $Y$ relativ zu $Y_n$ in $u$ relativ zu $u_n$, die Phillipskurve übersetzt die Arbeitsmarktlage in $pi$, und die Zinsregel macht aus der Inflation den Zins, der wieder über die IS die Produktion zurückführt. Wer nur das obere Feld betrachtet, sieht diese Kette nicht.</p>
         <p>Im Diagramm sind die Kurven und Referenzlinien bewusst über die <strong>Legende</strong> benannt (statt vieler Textboxen auf den Kurven), damit die Darstellung einer Vorlesungsfigur näherkommt und Lesarten nicht visuell kollidieren.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Negative Angebotsschocks und die Phillipskurve</h4>
 <p>Wie in der Einheit zur Phillipskurve: negative Angebotsschocks (in Vorlesungsbeispielen oft über Energie- oder Rohstoffpreise motiviert) verschieben die kurzfristige Phillipskurve nach oben. Im gekoppelten Bild heißt das: schon bei gegebener Arbeitslosigkeit steigt der Inflationsdruck; über die Zinsregel wird die Geldpolitik restriktiver und bremst die Nachfrage. Inflation und Arbeitslosigkeit können gleichzeitig steigen — das ist ein <strong>Kurvenshift</strong>, keine Bewegung entlang der alten PC.</p>
         <p>Im interaktiven Graph kannst du den Regler „Angebotsschock“ erhöhen: die untere PC verschiebt sich nach oben, und du siehst, wie sich das Gleichgewicht über die Zinsregel zurück ins obere Feld fortsetzt.</p>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Anpassungsdynamik</h4>
 <p>Nach einer expansiven Fiskalpolitik steigt der Output zunächst über $Y_n$. Die Arbeitslosigkeit fällt unter $u_n$, Inflation zieht an, die Zentralbank erhöht den Realzins und drückt die Nachfrage wieder zurück. Mittelfristig kehrt die Wirtschaft zu $Y_n$ zurück.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Kurzfristiger Boom ist nicht dauerhaftes Wachstum:</strong> Im IS-LM-PC-Modell kehrt der Output zur natürlichen Produktion zurück. Dauerhafte Nachfragepolitik verschiebt also nicht das Produktionspotenzial.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Zinsregel ersetzt die alte LM-Logik:</strong> Spätestens hier muss klar sein, ob die Zentralbank Geldmenge oder Zins setzt. Für die Dynamik zählt die Reaktion des Realzinses auf Inflation.</div>
-</div>
-<div class="section-block">
+
+
 <h4 class="theory-subsection-title">Zeitachsen- und Graphlesart</h4>
 <p>Im Diagramm werden häufig Kurzfrist- und Mittelfristpunkt verwechselt. Die saubere Antwort benennt daher explizit die Zeitachse: <em>zuerst</em> IS-Verschiebung und Produktionslücke, <em>dann</em> Arbeitslosen- und Inflationsreaktion, <em>danach</em> Zinsanpassung und Rückführung Richtung $Y_n$.</p>
         <p>Wer alle Schritte in einen einzigen Vergleichspunkt presst, verpasst den Kern dieses Modells: Es ist ein Anpassungspfad, keine statische Ein-Gleichung-Antwort.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Nominal- und Realzins nicht mischen:</strong> Für die Stabilisierung zählt im Modell die Reaktion des Realzinses auf Inflation. Ein unveränderter Nominalzins kann bei fallender Inflation bereits restriktiver wirken.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h"><span class="theory-recipe-step" aria-hidden="true">6</span> Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Prüfungsstandard</h4>
+<p>Klausurpfad: <strong>Frist</strong> klären → <strong>Kanal</strong> (Güter-, Geld-, Arbeitsmarkt) → <strong>Gleichgewichtseffekt</strong> auf $Y$, $i$, $pi$ oder $u$.</p>
+        <div class="warn-box" data-warning-placement="rail"><strong>Fristfehler:</strong> Kurzfristige Gütermarktlogik und mittelfristige Phillipskurve nicht in einer Antwort vermischen, wenn die Aufgabe nur eine Frist fragt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h"><span class="theory-recipe-step" aria-hidden="true">7</span> Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-PC: Rückkehr zur mittleren Frist"; siehe die übrigen Rezept-Schritte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h"><span class="theory-recipe-step" aria-hidden="true">8</span> Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<p class="theory-recipe-placeholder">Kein separater VL-Abschnitt in Kapitel „IS-LM-PC: Rückkehr zur mittleren Frist"; siehe Kernidee und Definitionen.</p>
 </div>
 </section>`,
     formeln: [

@@ -57,7 +57,7 @@ async function gotoConcept(page, urlPath, conceptId) {
 }
 
 async function clickTab(page, tab) {
-  if (tab === 'theorie') return;
+  if (tab === 'theorie') return true;
   const btn = page.locator(`button[data-tab="${tab}"]`);
   if ((await btn.count()) === 0 || (await btn.isHidden())) return false;
   await btn.click();
@@ -498,10 +498,11 @@ const PROVENANCE_EXPECT = [
   { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch', expectCoverage: 'page-anchors' }
 ];
 
-/** Provenance strip must survive non-theorie tabs (same createRenderer path). Aufgaben is practice-only — no strip. */
-const PROVENANCE_TAB_EXTRA = [
+/** Non-Quellen tabs must not show the legacy footer strip (provenance lives in Quellen only). */
+const PROVENANCE_ABSENT_TABS = [
+  { route: '/mikro1/index.html', id: 'budget', tab: 'theorie', label: 'mikro1/budget/theorie' },
   { route: '/statistik/index.html', id: 'bivariat', tab: 'graph', label: 'statistik/bivariat/graph' },
-  { route: '/oekonometrie/index.html', id: 'matrix_notation', tab: 'r-anwendung', label: 'oeko/matrix_notation/r-anwendung' }
+  { route: '/mikro1/index.html', id: 'budget', tab: 'formeln', label: 'mikro1/budget/formeln' }
 ];
 
 /** Aufgaben tab must stay practice-only: no provenance strip, no task-family layer, no practice-source notice. */
@@ -520,105 +521,135 @@ async function runProvenance(page) {
   await page.setViewportSize({ width: 1280, height: 900 });
   for (const p of PROVENANCE_EXPECT) {
     await gotoConcept(page, p.route, p.id);
-    await clickTab(page, 'theorie');
+    const opened = await clickTab(page, 'quellen');
+    if (!opened) {
+      fail({
+        system: 'provenance-quellen',
+        route: p.label,
+        surface: 'quellen',
+        viewport: '1280',
+        type: 'tab-missing',
+        why: 'Quellen tab missing for provenance spot check.'
+      });
+      continue;
+    }
+    await page.waitForTimeout(400);
     const snap = await page.evaluate(() => {
+      const panel = document.querySelector('#content .quellen-panel');
+      const summary = document.querySelector('#content .quellen-panel-summary-line');
       const foot = document.querySelector('#content footer.source-provenance');
-      const mark = document.querySelector('#content footer.source-provenance .source-provenance-mark');
-      const line = document.querySelector('#content footer.source-provenance .source-provenance-line');
+      const inspector = document.querySelectorAll('#content .quellen-panel .source-provenance-inspector-row').length;
       return {
+        panelCount: document.querySelectorAll('#content .quellen-panel').length,
+        summaryLen: (summary?.textContent || '').trim().length,
         footCount: document.querySelectorAll('#content footer.source-provenance').length,
-        hasMark: !!mark,
-        lineLen: (line?.textContent || '').trim().length,
-        coverage: foot?.getAttribute('data-provenance-coverage') || '',
-        lineSnippet: (line?.textContent || '').trim().slice(0, 120)
+        inspectorRows: inspector,
+        lineSnippet: (summary?.textContent || '').trim().slice(0, 120)
       };
     });
-    if (snap.footCount !== 1) {
+    if (snap.panelCount !== 1) {
       fail({
-        system: 'provenance-footer',
+        system: 'provenance-quellen',
         route: p.label,
-        surface: 'theorie',
+        surface: 'quellen',
         viewport: '1280',
-        type: 'footer-count',
-        why: `Expected exactly one #content footer.source-provenance, found ${snap.footCount}.`
+        type: 'panel-count',
+        why: `Expected exactly one .quellen-panel, found ${snap.panelCount}.`
       });
     }
-    if (!snap.hasMark) {
+    if (snap.footCount !== 0) {
       fail({
-        system: 'provenance-footer',
+        system: 'provenance-quellen',
         route: p.label,
-        surface: 'theorie',
+        surface: 'quellen',
         viewport: '1280',
-        type: 'missing-mark',
-        why: 'source-provenance-mark (ⓘ) missing — parity / trust signal regression.'
+        type: 'legacy-footer-on-quellen',
+        why: `Legacy footer.source-provenance must not appear on Quellen tab (found ${snap.footCount}).`
       });
     }
-    if (snap.lineLen < 8) {
+    if (snap.summaryLen < 8) {
       fail({
-        system: 'provenance-footer',
+        system: 'provenance-quellen',
         route: p.label,
-        surface: 'theorie',
+        surface: 'quellen',
         viewport: '1280',
         type: 'empty-summary-line',
-        why: 'source-provenance-line too short or empty.'
+        why: 'quellen-panel-summary-line too short or empty.'
       });
     }
-    if (p.expectCoverage && snap.coverage !== p.expectCoverage) {
+    if (p.expectCoverage === 'page-anchors' && snap.inspectorRows < 1) {
       fail({
-        system: 'provenance-footer',
+        system: 'provenance-quellen',
         route: p.label,
-        surface: 'theorie',
+        surface: 'quellen',
         viewport: '1280',
-        type: 'provenance-coverage-mismatch',
-        why: `Expected data-provenance-coverage="${p.expectCoverage}", got "${snap.coverage}". Line: ${snap.lineSnippet}`
+        type: 'anchor-inspector-missing',
+        why: `Expected page-anchor inspector rows on Quellen tab; summary: ${snap.lineSnippet}`
       });
     }
-    if (p.expectCoverage === 'manifest-only' && !/Primäranker|Primärdatei/i.test(snap.lineSnippet)) {
+    if (p.expectCoverage === 'manifest-only' && !/Primäranker|Primärdatei|Portal|Manifest|Didaktische/i.test(snap.lineSnippet)) {
       fail({
-        system: 'provenance-footer',
+        system: 'provenance-quellen',
         route: p.label,
-        surface: 'theorie',
+        surface: 'quellen',
         viewport: '1280',
         type: 'manifest-only-wording',
-        why: `Manifest-only footer should mention missing primary anchors; got: ${snap.lineSnippet}`
+        why: `Manifest-only Quellen summary should state traceability; got: ${snap.lineSnippet}`
       });
     }
   }
 
-  for (const p of PROVENANCE_TAB_EXTRA) {
+  for (const p of PROVENANCE_ABSENT_TABS) {
     await gotoConcept(page, p.route, p.id);
     const opened = await clickTab(page, p.tab);
     if (!opened) {
       fail({
-        system: 'provenance-footer-tabs',
+        system: 'provenance-absent-tabs',
         route: p.label,
         surface: p.tab,
         viewport: '1280',
         type: 'tab-missing',
-        why: `Tab ${p.tab} missing for provenance spot check.`
+        why: `Tab ${p.tab} missing for provenance-absence spot check.`
       });
       continue;
     }
-    await page.waitForTimeout(500);
-    const snap = await page.evaluate(() => {
-      const foot = document.querySelector('#content footer.source-provenance');
-      const mark = document.querySelector('#content footer.source-provenance .source-provenance-mark');
-      const line = document.querySelector('#content footer.source-provenance .source-provenance-line');
-      return {
-        footCount: document.querySelectorAll('#content footer.source-provenance').length,
-        hasMark: !!mark,
-        lineLen: (line?.textContent || '').trim().length
-      };
-    });
-    if (snap.footCount !== 1 || !snap.hasMark || snap.lineLen < 8) {
+    await page.waitForTimeout(400);
+    const snap = await page.evaluate(() => ({
+      footCount: document.querySelectorAll('#content footer.source-provenance').length,
+      headerPills: document.querySelectorAll('#content .concept-header .platform-chrome-badge').length,
+      theoryPanel: document.querySelectorAll('#content .theory-tab-panel').length
+    }));
+    if (snap.footCount !== 0) {
       fail({
-        system: 'provenance-footer-tabs',
+        system: 'provenance-absent-tabs',
         route: p.label,
         surface: p.tab,
         viewport: '1280',
-        type: 'footer-regression',
-        why: `Provenance strip missing or weak on tab (foot=${snap.footCount}, mark=${snap.hasMark}, len=${snap.lineLen}).`
+        type: 'legacy-footer-present',
+        why: `Expected no footer.source-provenance on ${p.tab} tab, found ${snap.footCount}.`
       });
+    }
+    if (p.tab === 'theorie') {
+      if (snap.theoryPanel !== 1) {
+        fail({
+          system: 'provenance-absent-tabs',
+          route: p.label,
+          surface: 'theorie',
+          viewport: '1280',
+          type: 'theory-panel-missing',
+          why: 'Expected .theory-tab-panel wrapper on Theorie tab.'
+        });
+      }
+      if (snap.headerPills !== 0) {
+        fail({
+          system: 'provenance-absent-tabs',
+          route: p.label,
+          surface: 'theorie',
+          viewport: '1280',
+          type: 'source-pill-on-theorie',
+          why: `Expected no Quelle pills in concept header on Theorie, found ${snap.headerPills}.`
+        });
+      }
     }
   }
 }
@@ -736,7 +767,7 @@ async function runFormelnKlausurmethodik(page) {
   }
 }
 
-/** Provenance strip on Formeln tab (secondary layer must not lose trust signal on notation-heavy surface). */
+/** Formeln tab: Klausurmethodik present; provenance footer must stay off (Quellen tab only). */
 async function runProvenanceFormelnSecondary(page) {
   await page.setViewportSize({ width: 1280, height: 900 });
   for (const p of SECONDARY_STABILITY) {
@@ -744,54 +775,27 @@ async function runProvenanceFormelnSecondary(page) {
     const opened = await clickTab(page, 'formeln');
     if (!opened) {
       fail({
-        system: 'provenance-footer-formeln',
+        system: 'provenance-absent-formeln',
         route: `${p.label}/formeln`,
         surface: 'formeln',
         viewport: '1280',
         type: 'tab-missing',
-        why: 'Formeln tab missing for provenance check.'
+        why: 'Formeln tab missing for provenance-absence check.'
       });
       continue;
     }
     await page.waitForTimeout(400);
-    const snap = await page.evaluate(() => {
-      const foot = document.querySelector('#content footer.source-provenance');
-      const mark = document.querySelector('#content footer.source-provenance .source-provenance-mark');
-      const line = document.querySelector('#content footer.source-provenance .source-provenance-line');
-      return {
-        footCount: document.querySelectorAll('#content footer.source-provenance').length,
-        hasMark: !!mark,
-        lineLen: (line?.textContent || '').trim().length
-      };
-    });
-    if (snap.footCount !== 1) {
+    const footCount = await page.evaluate(
+      () => document.querySelectorAll('#content footer.source-provenance').length
+    );
+    if (footCount !== 0) {
       fail({
-        system: 'provenance-footer-formeln',
+        system: 'provenance-absent-formeln',
         route: `${p.label}/formeln`,
         surface: 'formeln',
         viewport: '1280',
-        type: 'footer-count',
-        why: `Expected exactly one #content footer.source-provenance on Formeln tab, found ${snap.footCount}.`
-      });
-    }
-    if (!snap.hasMark) {
-      fail({
-        system: 'provenance-footer-formeln',
-        route: `${p.label}/formeln`,
-        surface: 'formeln',
-        viewport: '1280',
-        type: 'missing-mark',
-        why: 'source-provenance-mark (ⓘ) missing on Formeln tab.'
-      });
-    }
-    if (snap.lineLen < 8) {
-      fail({
-        system: 'provenance-footer-formeln',
-        route: `${p.label}/formeln`,
-        surface: 'formeln',
-        viewport: '1280',
-        type: 'empty-summary-line',
-        why: 'source-provenance-line too short or empty on Formeln tab.'
+        type: 'legacy-footer-present',
+        why: `Expected no footer.source-provenance on Formeln tab, found ${footCount}.`
       });
     }
   }
@@ -851,23 +855,30 @@ async function runMikro1SourceCompanion(page) {
   }
 
   await gotoConcept(page, '/mikro1/index.html', 'budget');
-  await clickTab(page, 'theorie');
-  const expandBtn = page.locator('#content footer.source-provenance .source-provenance-expand').first();
-  if ((await expandBtn.count()) > 0) {
-    await expandBtn.click();
-    await page.waitForTimeout(300);
+  const quellenOpened = await clickTab(page, 'quellen');
+  if (!quellenOpened) {
+    fail({
+      system: 'source-companion',
+      route: 'mikro1/budget/quellen',
+      surface: 'quellen',
+      viewport: '1280',
+      type: 'tab-missing',
+      why: 'Quellen tab missing for companion bridge check.'
+    });
+    return;
   }
-  const anchorBrowser = page.locator('.source-provenance-companion').first();
-  const refBrowser = page.locator('.source-provenance-companion-path').first();
+  await page.waitForTimeout(400);
+  const anchorBrowser = page.locator('#content .quellen-panel .source-provenance-companion').first();
+  const refBrowser = page.locator('#content .quellen-panel .source-provenance-companion-path').first();
   const bridge = (await anchorBrowser.count()) > 0 ? anchorBrowser : refBrowser;
   if ((await bridge.count()) === 0) {
     fail({
       system: 'source-companion',
-      route: 'mikro1/budget/theorie',
+      route: 'mikro1/budget/quellen',
       surface: 'provenance-inspector',
       viewport: '1280',
       type: 'companion-bridge-missing',
-      why: 'Page anchor or file-level ref should expose Quellenbrowser bridge button'
+      why: 'Page anchor or file-level ref should expose Quellenbrowser bridge button in Quellen panel'
     });
     return;
   }

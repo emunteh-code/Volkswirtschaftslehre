@@ -7083,6 +7083,20 @@ body.light-mode #content .theory-recipe-card {
   margin-bottom: 28px;
 }
 
+#content .concept-header--theorie {
+  width: min(100%, var(--content-body-max));
+}
+
+#content .panel.active.theory-tab-panel,
+#content .panel.active.theory-tab-panel > .concept-objectives,
+#content .panel.active.theory-tab-panel > .theory-recipe-section,
+#content .panel.active.theory-tab-panel > .section-block,
+#content .panel.active.theory-tab-panel > .content-fallback {
+  width: min(100%, var(--content-body-max));
+  margin-inline: auto;
+  max-width: none;
+}
+
 #content .concept-header-row--tag {
   min-height: 1.5rem;
   display: flex;
@@ -7274,6 +7288,17 @@ body.light-mode #content .theory-recipe-card {
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 11%, var(--surface2) 89%);
   border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+}
+
+#content .theory-recipe-placeholder {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: var(--type-sm, 0.9375rem);
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text-muted, var(--text)) 88%, var(--text) 12%);
+  background: color-mix(in srgb, var(--surface2) 92%, var(--accent) 8%);
+  border: 1px dashed color-mix(in srgb, var(--border) 85%, var(--accent) 15%);
 }
 
 #content .formula-tab-section-head h3 {

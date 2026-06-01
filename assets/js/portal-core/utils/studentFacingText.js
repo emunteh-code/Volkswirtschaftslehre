@@ -6,6 +6,9 @@ const INTERNAL_ANCHOR_ID = /\b[a-z][a-z0-9-]*\.[a-z0-9_.-]+\b/gi;
 const DEV_JARGON =
   /(?:item-level\s+(?:Aufgaben-)?Mapping|OCR\/Review|official-task-source|Nur Metadaten bis OCR|mapping blockiert|Probeklausur item-level)/i;
 
+const SOURCE_STATUS_EM =
+  /<em>\s*(?:(?:source-distilled|platform-added-explanation|platform-added-drill|direct-source|cross-link)(?:\s*\/\s*(?:source-distilled|platform-added-explanation|platform-added-drill|direct-source|cross-link))*[^<]*)<\/em>/gi;
+
 /**
  * @param {unknown} value
  * @returns {string}
@@ -54,17 +57,33 @@ export function studentizeTaskGapNote(gap) {
 
 /**
  * Remove internal provenance labels from theory HTML before student render.
+ * Source mapping is shown only in the Quellen tab.
  * @param {unknown} html
  * @returns {string}
  */
 export function studentizeTheoryHtml(html) {
   let s = String(html ?? "");
   if (!s) return s;
+
+  s = s.replace(
+    /<div[^>]*class="[^"]*\b(?:source-boundary-notice|platform-added-banner)\b[^"]*"[^>]*>[\s\S]*?<\/div>/gi,
+    ""
+  );
+  s = s.replace(SOURCE_STATUS_EM, "");
   s = s.replace(/\(source-distilled\)/gi, "");
+  s = s.replace(/\(direct-source\)/gi, "");
+  s = s.replace(/\(platform-added-explanation\)/gi, "");
+  s = s.replace(/\(platform-added-drill\)/gi, "");
   s = s.replace(/<em>\s*platform-added-explanation:\s*<\/em>/gi, "");
   s = s.replace(/<em>\s*source-distilled\s*\/\s*platform-added-explanation:\s*<\/em>[^<]*/gi, "");
   s = s.replace(/<p>\s*<em>\s*source_status:[^<]*<\/em>\s*<\/p>/gi, "");
   s = s.replace(/<h3>\s*Klausurtransfer\s*\(\s*source-distilled\s*\)\s*<\/h3>/gi, "<h3>Klausurtransfer</h3>");
+  s = s.replace(/<span[^>]*class="[^"]*\bplatform-chrome-badge\b[^"]*"[^>]*>[\s\S]*?<\/span>/gi, "");
+  s = s.replace(
+    /<p[^>]*class="[^"]*\b(?:klausurmethodik-footnote|theory-source-footnote)\b[^"]*"[^>]*>[\s\S]*?<\/p>/gi,
+    ""
+  );
+  s = s.replace(/<button[^>]*class="[^"]*\bklausurmethodik-source-link\b[^"]*"[^>]*>[\s\S]*?<\/button>/gi, "");
   s = s.replace(/\s{2,}/g, " ");
   return s;
 }

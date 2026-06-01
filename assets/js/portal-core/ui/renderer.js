@@ -11,16 +11,12 @@ import { renderTeachingProse } from "./teachingProse.js"
 import { buildConceptConnectionsHtml } from "./rightPanel.js"
 import { getWarningSystemData, renderMainFlowMistakesSection, renderTaskWarningCard } from "./warningSystem.js";
 import {
-  buildConceptProvenanceStripHtml,
-  initConceptProvenanceInteractions
-} from "./sourceProvenanceUi.js";
-import {
   buildQuellenPanelHtml,
   hasConceptQuellenContent,
   initQuellenPanelInteractions
 } from "./quellenPanel.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
-import { studentizeMethodText, studentizeTaskGapNote, studentizeTheoryHtml } from "../utils/studentFacingText.js";
+import { studentizeMethodText, studentizeTaskGapNote } from "../utils/studentFacingText.js";
 import { enrichTaskFamilyForDisplay } from "./klausurmethodikEnrichment.js";
 import {
   FULL_EXAM_HOME_DESCRIPTION
@@ -123,7 +119,7 @@ export function createRenderer({
     return `<span class="platform-chrome-badge platform-chrome-badge--source platform-chrome-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</span>`;
   }
 
-  function buildConceptHeaderHtml(chapter, entry, conceptId) {
+  function buildConceptHeaderHtml(chapter, entry, conceptId, { hideSourceChrome = false } = {}) {
     const catPos = getCategoryPosition(conceptId);
     const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
     const tagLabel = catPos
@@ -133,8 +129,11 @@ export function createRenderer({
       chapter?.short && String(chapter.short).trim()
         ? `<p class="concept-subtitle">${escapeHtml(String(chapter.short).trim())}</p>`
         : "";
-    const pillInner = buildConceptPillHtml(conceptId);
-    const pillsRow = `<div class="concept-header-row concept-header-row--pills" aria-label="Konzept-Kennzeichnung"><div class="concept-pill-row">${pillInner || '<span class="concept-pill-placeholder" aria-hidden="true"></span>'}</div></div>`;
+    const pillInner = hideSourceChrome ? "" : buildConceptPillHtml(conceptId);
+    const pillsRow = hideSourceChrome
+      ? ""
+      : `<div class="concept-header-row concept-header-row--pills" aria-label="Konzept-Kennzeichnung"><div class="concept-pill-row">${pillInner || '<span class="concept-pill-placeholder" aria-hidden="true"></span>'}</div></div>`;
+    const headerClass = hideSourceChrome ? "concept-header concept-header--theorie" : "concept-header";
 
     let motivationRow = "";
     if (showConceptMotivationBanner) {
@@ -144,7 +143,7 @@ export function createRenderer({
         : `<div class="concept-header-row concept-header-row--motivation concept-header-row--empty" aria-hidden="true"></div>`;
     }
 
-    return `<div class="concept-header">
+    return `<div class="${headerClass}">
 <div class="concept-header-row concept-header-row--tag"><span class="concept-tag">${tagLabel}</span></div>
 <div class="concept-header-row concept-header-row--title"><h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>${subtitle}</div>
 ${pillsRow}
@@ -1366,18 +1365,8 @@ ${anchorBadge}
     }
 
     if (!entry) {
-      content.innerHTML = `${buildConceptHeaderHtml(chapter, null, conceptId)}
+      content.innerHTML = `${buildConceptHeaderHtml(chapter, null, conceptId, { hideSourceChrome: activeTab === "theorie" })}
 <div class="section-block"><h3>Inhalt</h3><p>Nutze für dieses Thema die Kapitelverbindungen, den Schnelltest und die Wiederholung, um die Kernlogik im Kurszusammenhang zu sichern.</p></div>`;
-      const emptyStrip = buildConceptProvenanceStripHtml({
-        conceptId,
-        activeTab,
-        layers: getConceptProvenance(conceptId),
-        sourceMaterialBaseUrl
-      });
-      if (emptyStrip) {
-        content.insertAdjacentHTML("beforeend", emptyStrip);
-        initConceptProvenanceInteractions(content);
-      }
       renderMath(content);
       return;
     }
@@ -1385,7 +1374,9 @@ ${anchorBadge}
     const objectivesBlock = Array.isArray(entry.objectives) && entry.objectives.length
       ? `<div class="concept-objectives" role="region" aria-label="Lernziele"><h3>Lernziele</h3><ul>${entry.objectives.map((o) => `<li>${escapeHtml(String(o))}</li>`).join("")}</ul><p class="concept-objectives-hint">Nach diesem Block kannst du die Lernziele selbst abhaken.</p></div>`
       : "";
-    const headerHTML = buildConceptHeaderHtml(chapter, entry, conceptId);
+    const headerHTML = buildConceptHeaderHtml(chapter, entry, conceptId, {
+      hideSourceChrome: activeTab === "theorie"
+    });
 
     content.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -1398,7 +1389,7 @@ ${anchorBadge}
         );
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
         content.innerHTML =
-          headerHTML + `<div class="panel active">${objectivesBlock}${warningData.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
+          headerHTML + `<div class="panel active theory-tab-panel">${objectivesBlock}${warningData.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         ensureGraphPedagogyChrome(conceptId, content);
@@ -1453,18 +1444,7 @@ ${anchorBadge}
       );
     }
 
-    if (activeTab !== "quellen" && activeTab !== "aufgaben") {
-      const provenanceStrip = buildConceptProvenanceStripHtml({
-        conceptId,
-        activeTab,
-        layers: getConceptProvenance(conceptId),
-        sourceMaterialBaseUrl
-      });
-      if (provenanceStrip && !String(window.__lastRenderError || "").length) {
-        content.insertAdjacentHTML("beforeend", provenanceStrip);
-        initConceptProvenanceInteractions(content);
-      }
-    } else if (!String(window.__lastRenderError || "").length) {
+    if (activeTab === "quellen" && !String(window.__lastRenderError || "").length) {
       initQuellenPanelInteractions(content);
     }
 

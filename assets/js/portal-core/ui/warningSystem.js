@@ -83,6 +83,10 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
 
     const railWarnings = [];
 
+    Array.from(
+      root.querySelectorAll(".source-boundary-notice, .platform-added-banner, .platform-chrome-badge")
+    ).forEach((node) => node.remove());
+
     Array.from(root.querySelectorAll(".warn-box")).forEach((warningNode) => {
       const warning = normalizeWarningNode(warningNode);
       if (!warning.bodyHtml) {
@@ -95,9 +99,16 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
     });
 
     Array.from(root.querySelectorAll(".section-block, .theory-recipe-section")).forEach((section) => {
+      if (section.classList.contains("theory-recipe-section")) {
+        const placeholder = section.querySelector(".theory-recipe-placeholder");
+        if (placeholder) return;
+      }
       const hasContent = Array.from(section.children).some((child) => {
         if (child.tagName === "H3" || child.tagName === "H4") return false;
         if (child.classList?.contains("theory-recipe-heading")) return false;
+        if (child.classList?.contains("theory-recipe-body")) {
+          return (child.textContent?.replace(/\s+/g, " ").trim() || "").length > 0;
+        }
         const text = child.textContent?.replace(/\s+/g, " ").trim() || "";
         return text.length > 0;
       });

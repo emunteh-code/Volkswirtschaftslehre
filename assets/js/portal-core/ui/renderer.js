@@ -25,6 +25,7 @@ import {
   FULL_EXAM_HOME_DESCRIPTION
 } from "../data/examDisclosure.js";
 import { renderMathTitle } from "./formatMathInTitle.js";
+import { resolveEinsatzgrenzenDisplayTitle } from "./resolveEinsatzgrenzenDisplayTitle.js";
 import {
   renderOfficialMaterialsNoticeHtml,
   sourcePdfOpenDisabledByDefault
@@ -886,23 +887,45 @@ ${contentHtml}
     return `<span class="klausurmethodik-difficulty klausurmethodik-difficulty--${tone}">${renderSemanticPlainText(difficulty)}</span>`;
   }
 
-  function renderTaskFamilyPanel(conceptId) {
-    const families = filterStudentVisibleTaskFamilies(taskFamiliesByConcept[conceptId]);
-    if (!families.length) {
-      return `<div class="section-block task-family-layer formula-klausurmethodik klausurmethodik-panel klausurmethodik-panel--empty">
-<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
-<h3 class="klausurmethodik-heading">Klausurmethodik</h3>
-<p class="klausurmethodik-empty">Für dieses Konzept sind noch keine Klausurfamilien hinterlegt.</p>
+  function renderFormulaTabSectionHead(sectionNum, title, lead, headingId = "") {
+    const idAttr = headingId ? ` id="${headingId}"` : "";
+    return `<div class="formula-tab-section-head">
+<span class="formula-tab-section-num" aria-hidden="true">${sectionNum}</span>
+<div class="formula-tab-section-head-copy">
+<h3${idAttr}>${title}</h3>
+${lead ? `<p class="formula-tab-section-lead">${lead}</p>` : ""}
+</div>
 </div>`;
-    }
-    return `<div class="section-block task-family-layer formula-klausurmethodik klausurmethodik-panel">
-<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
+  }
+
+  function renderTaskFamilyPanel(conceptId, { sectionNum = null, headingId = "" } = {}) {
+    const families = filterStudentVisibleTaskFamilies(taskFamiliesByConcept[conceptId]);
+    const sectionHead = Number.isFinite(sectionNum)
+      ? renderFormulaTabSectionHead(
+        sectionNum,
+        "Klausurmethodik",
+        "Typische Klausuraufgabentypen — Methode, Fallen und Bewertungslogik. Üben im Tab <strong>Aufgaben</strong>.",
+        headingId || "formula-tab-methodik-heading"
+      )
+      : `<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
 <h3 class="klausurmethodik-heading">Klausurmethodik</h3>
-<p class="klausurmethodik-intro">Typische Klausuraufgabentypen — Methode, Fallen und Bewertungslogik auf einen Blick. Üben im Tab <strong>Aufgaben</strong>.</p>
+<p class="klausurmethodik-intro">Typische Klausuraufgabentypen — Methode, Fallen und Bewertungslogik auf einen Blick. Üben im Tab <strong>Aufgaben</strong>.</p>`;
+    if (!families.length) {
+      return `<section class="formula-tab-section formula-tab-section--methodik task-family-layer" aria-labelledby="${headingId || "formula-tab-methodik-heading"}">
+${sectionHead}
+<div class="formula-klausurmethodik klausurmethodik-panel klausurmethodik-panel--empty">
+<p class="klausurmethodik-empty">Für dieses Konzept sind noch keine Klausurfamilien hinterlegt.</p>
+</div>
+</section>`;
+    }
+    return `<section class="formula-tab-section formula-tab-section--methodik task-family-layer" aria-labelledby="${headingId || "formula-tab-methodik-heading"}">
+${sectionHead}
+<div class="formula-klausurmethodik klausurmethodik-panel">
 <div class="klausurmethodik-accordion-list task-family-grid">
 ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
 </div>
-</div>`;
+</div>
+</section>`;
   }
 
   function renderTaskFamilyCard(family, index = 0) {
@@ -969,33 +992,52 @@ ${sourceFootnote}
   }
 
   function renderFormulaPanel(entry) {
-    const taskFamiliesHtml = renderTaskFamilyPanel(current);
     const formulaCards = Array.isArray(formulaCardsByConcept[current]) ? formulaCardsByConcept[current] : [];
     const hasFormulaGrid = hasFormulas(entry);
     const hasKlausurmethodik = hasTaskFamilies(current);
-    if (!hasFormulaGrid && !taskFamiliesHtml) {
+    const herleitungBlocks = formulaCards.map(renderFormulaHerleitungBlock).filter(Boolean);
+    const einsatzgrenzenBlocks = formulaCards.map(renderFormulaEinsatzgrenzenBlock).filter(Boolean);
+    if (!hasFormulaGrid && !hasKlausurmethodik) {
       return '<div class="panel active"></div>';
     }
-    let html = '<div class="panel active">';
+
+    const introLead = hasFormulaGrid && hasKlausurmethodik
+      ? "Kernformeln zum schnellen Abruf, Herleitung und Einsatzgrenzen — danach Klausurmethodik für den Prüfungstransfer."
+      : hasFormulaGrid
+        ? "Kernformeln, Herleitungen und Einsatzgrenzen für dieses Konzept — kompakt und klausurnah."
+        : "Klausurmethodik für dieses Konzept: typische Aufgabentypen mit Methode und Fallen.";
+
+    let sectionNum = 0;
+    const nextSection = () => {
+      sectionNum += 1;
+      return sectionNum;
+    };
+
+    let html = `<div class="panel active formula-tab-panel">
+<header class="formula-tab-intro">
+<p class="formula-tab-intro-lead">${introLead}</p>
+</header>`;
+
     if (hasFormulaGrid) {
-      const formulaBody = `<div class="formula-grid">${entry.formeln.map((formula, formulaIndex) => {
-      const layoutClass = classifyFormulaCardLayout(formula);
-      const displayMode = getDisplayMode(formula.eq) || "math";
-      const explicitVariables = Object.entries(formula.variables || {}).filter(([, value]) => hasMeaningfulText(value));
-      const inferredVariables = displayMode === "math" && !explicitVariables.length ? inferFormulaVariables(formula) : [];
-      const variableEntries = explicitVariables.length ? explicitVariables : inferredVariables;
-      const varsHtml = variableEntries.length
-        ? `<ul class="f-variables">${variableEntries.map(([key, value]) =>
-            `<li><span class="f-var-key">$${key}$</span><span class="f-var-sep">-</span><span class="f-var-def">${value}</span></li>`
-          ).join("")}</ul>`
-        : "";
-      const varsHintMuted =
-        'font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:52rem';
-      const varsHint = displayMode === "math" ? varsHtml : "";
-      const supportNote = displayMode === "math" && inferredVariables.length
-        ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
-        : "";
-      return `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
+      const cardsNum = nextSection();
+      const formulaGridHtml = entry.formeln.map((formula, formulaIndex) => {
+        const layoutClass = classifyFormulaCardLayout(formula);
+        const displayMode = getDisplayMode(formula.eq) || "math";
+        const explicitVariables = Object.entries(formula.variables || {}).filter(([, value]) => hasMeaningfulText(value));
+        const inferredVariables = displayMode === "math" && !explicitVariables.length ? inferFormulaVariables(formula) : [];
+        const variableEntries = explicitVariables.length ? explicitVariables : inferredVariables;
+        const varsHtml = variableEntries.length
+          ? `<ul class="f-variables">${variableEntries.map(([key, value]) =>
+              `<li><span class="f-var-key">$${key}$</span><span class="f-var-sep">-</span><span class="f-var-def">${value}</span></li>`
+            ).join("")}</ul>`
+          : "";
+        const varsHintMuted =
+          'font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:52rem';
+        const varsHint = displayMode === "math" ? varsHtml : "";
+        const supportNote = displayMode === "math" && inferredVariables.length
+          ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
+          : "";
+        return `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
 <button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
 <div class="f-label">${renderMathTitle(formula.label)}</div>
 ${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
@@ -1003,34 +1045,75 @@ ${formula.desc ? `<div class="f-desc">${renderTeachingProse(formula.desc)}</div>
 ${varsHint}
 ${supportNote}
 </div>`;
-    }).join("")}</div>`;
-      html += formulaBody;
-    if (formulaCards.length) {
-      const herleitungBlocks = formulaCards.map(renderFormulaHerleitungBlock).filter(Boolean);
-      const einsatzgrenzenBlocks = formulaCards.map(renderFormulaEinsatzgrenzenBlock).filter(Boolean);
-      if (herleitungBlocks.length || einsatzgrenzenBlocks.length) {
-        html += '<div class="formula-support-layer">';
-        if (herleitungBlocks.length) {
-          html += `<section class="formula-herleitung-layer" aria-labelledby="formula-herleitung-heading">
-<h3 id="formula-herleitung-heading" class="formula-support-heading">Herleitungen</h3>
+      }).join("");
+
+      html += `<section class="formula-tab-section formula-tab-section--cards" aria-labelledby="formula-tab-cards-heading">
+${renderFormulaTabSectionHead(
+  cardsNum,
+  "Formeln & Merksätze",
+  "Notation und Kurzbeschreibung — Karten bleiben immer sichtbar.",
+  "formula-tab-cards-heading"
+)}
+<div class="formula-grid">${formulaGridHtml}</div>
+</section>`;
+
+      if (herleitungBlocks.length) {
+        const herleitungNum = nextSection();
+        html += `<section class="formula-tab-section formula-tab-section--herleitung formula-herleitung-layer" aria-labelledby="formula-tab-herleitung-heading">
+${renderFormulaTabSectionHead(
+  herleitungNum,
+  "Herleitungen",
+  "Schrittweise Ableitung der zentralen Formeln.",
+  "formula-tab-herleitung-heading"
+)}
 <div class="formula-herleitung-stack">${herleitungBlocks.join("")}</div>
 </section>`;
-        }
-        if (einsatzgrenzenBlocks.length) {
-          html += `<section class="formula-einsatzgrenzen-layer" aria-labelledby="formula-einsatzgrenzen-heading">
-<h3 id="formula-einsatzgrenzen-heading" class="formula-support-heading formula-support-heading--limits">Einsatzgrenzen</h3>
+      }
+
+      if (einsatzgrenzenBlocks.length) {
+        const limitsNum = nextSection();
+        html += `<section class="formula-tab-section formula-tab-section--limits formula-einsatzgrenzen-layer" aria-labelledby="formula-tab-limits-heading">
+${renderFormulaTabSectionHead(
+  limitsNum,
+  "Einsatzgrenzen",
+  "Annahmen, Gültigkeit und typische Klausurfehler.",
+  "formula-tab-limits-heading"
+)}
 <div class="formula-einsatzgrenzen-stack">${einsatzgrenzenBlocks.join("")}</div>
 </section>`;
-        }
-        html += "</div>";
       }
     }
+
+    if (hasKlausurmethodik) {
+      html += renderTaskFamilyPanel(current, {
+        sectionNum: nextSection(),
+        headingId: "formula-tab-methodik-heading"
+      });
     }
-    if (taskFamiliesHtml) {
-      html += taskFamiliesHtml;
-    }
+
     html += "</div>";
     return html;
+  }
+
+  function getFormulaSupportConceptContext() {
+    return {
+      chapter: chapterMap[current] || null,
+      entry: contentById[current] || null
+    };
+  }
+
+  function renderFormulaSupportBlockHead(card, { includeSubtitle = false, subtitleClass = "formula-support-subtitle" } = {}) {
+    const { title, subtitle } = resolveEinsatzgrenzenDisplayTitle(
+      card,
+      card,
+      getFormulaSupportConceptContext()
+    );
+    const titleHtml = renderMathTitle(title);
+    const subtitleHtml =
+      includeSubtitle && hasMeaningfulText(subtitle)
+        ? `<p class="${subtitleClass}">${renderTeachingProse(subtitle)}</p>`
+        : "";
+    return { titleHtml, subtitleHtml };
   }
 
   function renderFormulaHerleitungBlock(card) {
@@ -1062,10 +1145,12 @@ ${math}
       ? `<div class="formula-herleitung-anchor">${renderSemanticBlock(card.displayFormula, { variant: "formula-card" })}</div>`
       : "";
 
+    const { titleHtml } = renderFormulaSupportBlockHead(card);
+
     return `<article class="formula-herleitung-block">
 <div class="formula-herleitung-head">
 <span class="formula-herleitung-kicker">Ableitung</span>
-<h4 class="formula-herleitung-title">${renderMathTitle(card.officialNotation || card.id)}</h4>
+<h4 class="formula-herleitung-title">${titleHtml}</h4>
 </div>
 ${anchor}
 ${hasIntuition ? `<p class="formula-herleitung-intro">${renderTeachingProse(card.intuition)}</p>` : ""}
@@ -1098,10 +1183,18 @@ ${stepsHtml}
 
     const trapIcon = `<span class="formula-einsatzgrenzen-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>`;
 
+    const { titleHtml, subtitleHtml } = renderFormulaSupportBlockHead(card, {
+      includeSubtitle: true,
+      subtitleClass: "formula-einsatzgrenzen-subtitle"
+    });
+
     return `<article class="formula-einsatzgrenzen-block">
 <div class="formula-einsatzgrenzen-head">
 ${trapIcon}
-<h4 class="formula-einsatzgrenzen-title">${renderMathTitle(card.officialNotation || card.id)}</h4>
+<div class="formula-einsatzgrenzen-head-text">
+<h4 class="formula-einsatzgrenzen-title">${titleHtml}</h4>
+${subtitleHtml}
+</div>
 </div>
 <div class="formula-einsatzgrenzen-body">
 ${groups.join("")}

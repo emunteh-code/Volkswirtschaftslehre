@@ -655,6 +655,7 @@ body {
 #content[data-tab="graph"] > * {
   width: min(100%, var(--graph-shell-max));
 }
+.panel.active > .formula-tab-panel,
 .panel.active > .section-block,
 .panel.active > .formula-grid,
 .mikro1-practice > .practice-section-header,
@@ -704,6 +705,7 @@ body {
 }
 .concept-header + .panel.active,
 .concept-header + .mikro1-practice,
+.concept-header + .formula-tab-panel,
 .concept-header + .formula-grid,
 .concept-header + .concept-links {
   width: min(100%, 1080px);

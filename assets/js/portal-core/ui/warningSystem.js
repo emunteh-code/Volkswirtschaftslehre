@@ -1,5 +1,5 @@
 import { studentizeTheoryHtml } from "../utils/studentFacingText.js";
-import { applyTheoryRecipeChrome, theoryToHtml } from "../theory/theoryStructure.js";
+import { fuseIntuitionIntoTheoryHtml, theoryToHtml } from "../theory/theoryStructure.js";
 
 function stripTrailingColon(value) {
   return String(value ?? "").replace(/[:\s]+$/u, "").trim();
@@ -55,8 +55,10 @@ function normalizeWarningNode(node) {
  * (`#rpMistakes` / „Häufige Fehler“). `data-warning-placement` is ignored for placement.
  */
 
-export function getWarningSystemData(entry) {
-  const theoryHtml = studentizeTheoryHtml(applyTheoryRecipeChrome(theoryToHtml(entry?.theorie), entry));
+export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
+  const theoryHtml = studentizeTheoryHtml(
+    fuseIntuitionIntoTheoryHtml(theoryToHtml(entry?.theorie), intuition, entry, fusionOpts)
+  );
   if (!theoryHtml || typeof DOMParser === "undefined") {
     return {
       theoryHtml,
@@ -88,7 +90,8 @@ export function getWarningSystemData(entry) {
         return;
       }
       railWarnings.push(warning);
-      warningNode.remove();
+      warningNode.classList.add("warn-box--theory-inset", "warning-card");
+      warningNode.setAttribute("data-warning-placement", "theory-inset");
     });
 
     Array.from(root.querySelectorAll(".section-block, .theory-recipe-section")).forEach((section) => {

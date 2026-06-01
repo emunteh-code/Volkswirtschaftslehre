@@ -117,6 +117,63 @@ export function createRenderer({
     return { category: chapter.cat, index: localIdx + 1, total: items.length };
   }
 
+  function buildConceptPillHtml(conceptId) {
+    const summary = getConceptSourceSummary(conceptId);
+    if (!summary?.label || !summary?.status) return "";
+    return `<span class="platform-chrome-badge platform-chrome-badge--source platform-chrome-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</span>`;
+  }
+
+  function buildConceptHeaderHtml(chapter, entry, conceptId) {
+    const catPos = getCategoryPosition(conceptId);
+    const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
+    const tagLabel = catPos
+      ? `${escapeHtml(catPos.category)} · Stelle ${catPos.index} von ${catPos.total}`
+      : `${escapeHtml(chapter.cat)} · ${syllabusIdx}`;
+    const subtitle =
+      chapter?.short && String(chapter.short).trim()
+        ? `<p class="concept-subtitle">${escapeHtml(String(chapter.short).trim())}</p>`
+        : "";
+    const pillInner = buildConceptPillHtml(conceptId);
+    const pillsRow = `<div class="concept-header-row concept-header-row--pills" aria-label="Konzept-Kennzeichnung"><div class="concept-pill-row">${pillInner || '<span class="concept-pill-placeholder" aria-hidden="true"></span>'}</div></div>`;
+
+    let motivationRow = "";
+    if (showConceptMotivationBanner) {
+      const motivationText = entry?.motivation ? String(entry.motivation).trim() : "";
+      motivationRow = motivationText
+        ? `<div class="concept-header-row concept-header-row--motivation"><div class="concept-motivation-shell" data-motivation-clamp><p class="concept-motivation" role="note">${escapeHtml(motivationText)}</p><button type="button" class="concept-motivation-toggle" hidden>Mehr</button></div></div>`
+        : `<div class="concept-header-row concept-header-row--motivation concept-header-row--empty" aria-hidden="true"></div>`;
+    }
+
+    return `<div class="concept-header">
+<div class="concept-header-row concept-header-row--tag"><span class="concept-tag">${tagLabel}</span></div>
+<div class="concept-header-row concept-header-row--title"><h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>${subtitle}</div>
+${pillsRow}
+${motivationRow}
+</div>`;
+  }
+
+  function initConceptMotivationClamp(root) {
+    if (!root?.querySelectorAll) return;
+    root.querySelectorAll("[data-motivation-clamp]").forEach((shell) => {
+      const text = shell.querySelector(".concept-motivation");
+      const btn = shell.querySelector(".concept-motivation-toggle");
+      if (!text || !btn || btn.dataset.bound === "1") return;
+      btn.dataset.bound = "1";
+      const syncToggle = () => {
+        if (shell.classList.contains("concept-motivation-shell--expanded")) return;
+        btn.hidden = text.scrollHeight <= text.clientHeight + 2;
+        btn.textContent = "Mehr";
+      };
+      syncToggle();
+      requestAnimationFrame(syncToggle);
+      btn.addEventListener("click", () => {
+        const expanded = shell.classList.toggle("concept-motivation-shell--expanded");
+        btn.textContent = expanded ? "Weniger" : "Mehr";
+        if (!expanded) requestAnimationFrame(syncToggle);
+      });
+    });
+  }
+
   function findWeakestConcept(progress) {
     const candidates = chapters
       .map((chapter) => {
@@ -330,7 +387,7 @@ export function createRenderer({
 
   function buildSupplementalPracticeTasks(chapter, entry, intuition) {
     const supplements = [];
-    const { sections, warnings } = extractTheorySignals(entry);
+    const { sections, warnings } = extractTheorySignals(entry, chapter.id);
     const normalizedIntuition = normalizeIntuitionData(intuition);
     const links = conceptLinks[chapter.id] || { uses: [], usedBy: [] };
 
@@ -466,11 +523,20 @@ export function createRenderer({
   function updateTabButtons(activeTab, availability) {
     document.querySelectorAll("#tabRow button[data-tab]").forEach((button) => {
       const { tab } = button.dataset;
+      if (tab === "intuition") {
+        button.hidden = true;
+        button.setAttribute("aria-hidden", "true");
+        button.tabIndex = -1;
+        return;
+      }
       // r-anwendung is opt-in: must be explicitly true to show
       const visible = tab === "theorie"
         || tab === "aufgaben"
         || (tab === "r-anwendung" ? availability[tab] === true : availability[tab] !== false);
+      button.classList.toggle("tab-btn--unavailable", !visible);
       button.style.display = visible ? "" : "none";
+      button.setAttribute("aria-hidden", visible ? "false" : "true");
+      button.tabIndex = visible ? 0 : -1;
       const isActive = visible && tab === activeTab;
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-selected", isActive ? "true" : "false");
@@ -482,8 +548,40 @@ export function createRenderer({
     });
   }
 
-  function extractTheorySignals(entry) {
-    const warningData = getWarningSystemData(entry);
+  function buildIntuitionFusionOpts(entry, conceptId) {
+    const intuition = normalizeIntuitionData(intuitionById[conceptId]);
+    const formula = entry?.formeln?.[0];
+    let formalAnchorHtml = "";
+    if (formula && (hasMeaningfulDisplayContent(formula.eq) || hasMeaningfulText(formula.desc))) {
+      formalAnchorHtml = `<span class="theory-intuition-callout-label">Formaler Anker</span>
+<div class="theory-intuition-callout-body">
+${hasMeaningfulDisplayContent(formula.eq) ? `<div class="theory-intuition-callout-anchor">${renderFormulaEq(formula.eq)}</div>` : ""}
+${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${renderTeachingProse(formula.desc)}</p>` : ""}
+</div>`;
+    }
+    const recognitionItems = [];
+    if (intuition?.exam?.length) {
+      recognitionItems.push(
+        ...intuition.exam.slice(0, 2).map((pattern) => `Wenn ${pattern.if}, dann ${pattern.then}.`)
+      );
+    }
+    const { sections: theorySections } = extractTheorySignals(entry, conceptId, { skipFusion: true });
+    if (theorySections[0]) {
+      recognitionItems.push(
+        `Achte auf ${theorySections[0].heading.toLowerCase()}: ${theorySections[0].paragraph}`
+      );
+    }
+    return { formalAnchorHtml, recognitionItems: recognitionItems.slice(0, 4) };
+  }
+
+  function extractTheorySignals(entry, conceptId = null, opts = {}) {
+    const warningData = opts.skipFusion
+      ? getWarningSystemData(entry)
+      : getWarningSystemData(
+          entry,
+          conceptId ? intuitionById[conceptId] : null,
+          buildIntuitionFusionOpts(entry, conceptId)
+        );
     if (!warningData.theoryHtml || typeof DOMParser === "undefined") {
       return {
         sections: [],
@@ -548,13 +646,6 @@ export function createRenderer({
         theoryHtml: warningData.theoryHtml
       };
     }
-  }
-
-  /** Intuition tab can show theory-derived Fehleranalyse / Vertiefung even when INTUITION data is thin. */
-  function hasPortalIntuitionSurface(conceptId) {
-    const entry = contentById[conceptId];
-    const { sections, warnings } = extractTheorySignals(entry);
-    return (warnings && warnings.length > 0) || (sections && sections.length > 1);
   }
 
   function renderNotationList(variables = {}) {
@@ -632,7 +723,7 @@ ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(t
 
   function buildExamDrills(chapter, entry, intuition) {
     const drills = [];
-    const { sections } = extractTheorySignals(entry);
+    const { sections } = extractTheorySignals(entry, chapter.id);
     const formula = entry?.formeln?.[0];
     const section = sections[0];
     const secondSection = sections[1];
@@ -1231,83 +1322,7 @@ ${anchorBadge}
     }).catch(() => {});
   }
 
-  function renderIntuitionPanel(id) {
-    const data = normalizeIntuitionData(intuitionById[id]) || { core: "", analogy: "", bridge: "", exam: [] };
-    if (!hasMeaningfulIntuition(data) && !hasPortalIntuitionSurface(id)) {
-      return '<div class="panel active"></div>';
-    }
-
-    const chapter = chapters.find((entry) => entry.id === id);
-    const entry = contentById[id];
-    const formula = entry?.formeln?.[0];
-    const { sections: theorySections } = extractTheorySignals(entry);
-    const recognitionItems = [
-      ...(Array.isArray(data.exam) ? data.exam.slice(0, 2).map((pattern) => `Wenn ${pattern.if}, dann ${pattern.then}.`) : []),
-      ...(theorySections[0] ? [`Achte auf ${theorySections[0].heading.toLowerCase()}: ${theorySections[0].paragraph}`] : [])
-    ].slice(0, 4);
-
-    function renderExamPatterns(intuition) {
-      const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
-      if (!patterns.length) return "";
-      return `<div class="intuition-detail intuition-patterns">
-<span class="intuition-detail-label">Klausurmuster</span>
-<div class="intuition-detail-copy">
-${patterns.map((pattern) => `<div class="intuition-pattern-row">
-<span class="intuition-pattern-if">Wenn</span>
-<span class="intuition-pattern-then">${renderSemanticPlainText(pattern.if)}</span>
-<span class="intuition-pattern-arrow" aria-hidden="true">→</span>
-<span class="intuition-pattern-then">${renderSemanticPlainText(pattern.then)}</span>
-</div>`).join("")}
-</div>
-</div>`;
-    }
-
-    return `<div class="panel active mikro1-intuition">
-<div class="section-block intuition-hero">
-<h3>Worum es wirklich geht</h3>
-<p class="intuition-lead">${data.core || entry?.motivation || `${chapter.title} ordnet einen zentralen Mechanismus aus ${chapter.cat}.`}</p>
-${formula && (hasMeaningfulDisplayContent(formula.eq) || hasMeaningfulText(formula.desc)) ? `<div class="intuition-callout">
-<span class="intuition-callout-label">Formaler Anker</span>
-<div class="intuition-callout-body">
-${hasMeaningfulDisplayContent(formula.eq) ? `<div class="intuition-callout-anchor">${renderFormulaEq(formula.eq)}</div>` : ""}
-${hasMeaningfulText(formula.desc) ? `<p class="intuition-callout-desc">${renderTeachingProse(formula.desc)}</p>` : ""}
-</div>
-</div>` : ""}
-</div>
-
-<div class="intuition-grid">
-<div class="section-block intuition-card">
-<h3>Denkbild</h3>
-<p>${data.analogy || entry?.motivation || `${chapter.title} lässt sich am besten als geordnete Entscheidung unter gegebenen Bedingungen lesen.`}</p>
-${theorySections[0] ? `<p class="intuition-support"><strong>${renderDecodedText(theorySections[0].heading)}:</strong> ${renderSemanticPlainText(theorySections[0].paragraph)}</p>` : ""}
-</div>
-
-<div class="section-block intuition-card">
-<h3>Woran du das Konzept erkennst</h3>
-<ul class="intuition-bullets">
-${recognitionItems.map((item) => `<li>${renderSemanticPlainText(item, { stripMarkup: true })}</li>`).join("")}
-</ul>
-</div>
-</div>
-
-<div class="section-block intuition-bridge">
-<div class="intuition-bridge-head">
-<span class="intuition-bridge-kicker">Transferpfad</span>
-<h3 class="intuition-bridge-title">Vom Bild zur Theorie</h3>
-<p class="intuition-bridge-copy">${data.bridge || entry?.motivation || `${chapter.title} verbindet ökonomische Intuition mit einem formalen Prüfungszugriff.`}</p>
-</div>
-${theorySections[1] || (Array.isArray(data.exam) && data.exam.length) ? `<div class="intuition-detail-list">
-${theorySections[1] ? `<div class="intuition-detail">
-<span class="intuition-detail-label">Theoretische Vertiefung</span>
-<div class="intuition-detail-copy"><strong>${renderDecodedText(theorySections[1].heading)}:</strong> ${renderSemanticPlainText(theorySections[1].paragraph)}</div>
-</div>` : ""}
-${renderExamPatterns(data)}
-</div>` : ""}
-</div>
-</div>`;
-  }
-
-  function renderContent(conceptId, tab, initGraphFn) {
+  function renderContent(conceptId, tab, initGraphFn, options = {}) {
     current = conceptId;
     currentTab = tab;
     window.__lastRenderError = "";
@@ -1326,24 +1341,22 @@ ${renderExamPatterns(data)}
 
     const chapter = chapters.find((entry) => entry.id === conceptId);
     const entry = contentById[conceptId];
-    const idx = chapters.findIndex((item) => item.id === conceptId) + 1;
+    const scrollKernidee = Boolean(options.scrollKernidee) || tab === "intuition";
 
     const tabAvailability = {
       graph: graphConcepts.has(conceptId),
       formeln: hasFormulas(entry) || hasTaskFamilies(conceptId),
-      intuition:
-        hasMeaningfulIntuition(intuitionById[conceptId]) || hasPortalIntuitionSurface(conceptId),
       quellen: hasConceptQuellenContent(getConceptProvenance(conceptId)),
       "r-anwendung": Boolean(renderRAnwendungPanel) && hasRBlock(conceptId)
     };
 
-    const activeTab = (tab === "graph" && !tabAvailability.graph)
-      || (tab === "formeln" && !tabAvailability.formeln)
-      || (tab === "intuition" && !tabAvailability.intuition)
-      || (tab === "quellen" && !tabAvailability.quellen)
-      || (tab === "r-anwendung" && !tabAvailability["r-anwendung"])
+    const resolvedTab = tab === "intuition" ? "theorie" : tab;
+    const activeTab = (resolvedTab === "graph" && !tabAvailability.graph)
+      || (resolvedTab === "formeln" && !tabAvailability.formeln)
+      || (resolvedTab === "quellen" && !tabAvailability.quellen)
+      || (resolvedTab === "r-anwendung" && !tabAvailability["r-anwendung"])
       ? "theorie"
-      : tab;
+      : resolvedTab;
 
     currentTab = activeTab;
     updateTabButtons(activeTab, tabAvailability);
@@ -1353,10 +1366,7 @@ ${renderExamPatterns(data)}
     }
 
     if (!entry) {
-      content.innerHTML = `<div class="concept-header">
-<div class="concept-tag">${chapter.cat} · ${idx}</div>
-<h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>
-</div>
+      content.innerHTML = `${buildConceptHeaderHtml(chapter, null, conceptId)}
 <div class="section-block"><h3>Inhalt</h3><p>Nutze für dieses Thema die Kapitelverbindungen, den Schnelltest und die Wiederholung, um die Kernlogik im Kurszusammenhang zu sichern.</p></div>`;
       const emptyStrip = buildConceptProvenanceStripHtml({
         conceptId,
@@ -1372,29 +1382,23 @@ ${renderExamPatterns(data)}
       return;
     }
 
-    const motivationStrip = showConceptMotivationBanner && entry.motivation
-      ? `<div class="concept-motivation" role="note">${entry.motivation}</div>`
-      : "";
     const objectivesBlock = Array.isArray(entry.objectives) && entry.objectives.length
       ? `<div class="concept-objectives" role="region" aria-label="Lernziele"><h3>Lernziele</h3><ul>${entry.objectives.map((o) => `<li>${escapeHtml(String(o))}</li>`).join("")}</ul><p class="concept-objectives-hint">Nach diesem Block kannst du die Lernziele selbst abhaken.</p></div>`
       : "";
-    const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
-    const catPos = getCategoryPosition(conceptId);
-    const headerHTML = `<div class="concept-header">
-<div class="concept-tag">${catPos ? `${escapeHtml(catPos.category)} · Stelle ${catPos.index} von ${catPos.total}` : `${escapeHtml(chapter.cat)} · ${syllabusIdx}`}</div>
-<h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>
-${motivationStrip}
-</div>`;
+    const headerHTML = buildConceptHeaderHtml(chapter, entry, conceptId);
 
     content.scrollTo({ top: 0, behavior: "smooth" });
 
     try {
       if (activeTab === "theorie") {
-        const theorySignals = extractTheorySignals(entry);
-        const warningData = getWarningSystemData(entry);
+        const warningData = getWarningSystemData(
+          entry,
+          intuitionById[conceptId],
+          buildIntuitionFusionOpts(entry, conceptId)
+        );
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
         content.innerHTML =
-          headerHTML + `<div class="panel active">${objectivesBlock}${theorySignals.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
+          headerHTML + `<div class="panel active">${objectivesBlock}${warningData.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         ensureGraphPedagogyChrome(conceptId, content);
@@ -1404,8 +1408,6 @@ ${motivationStrip}
         content.innerHTML = headerHTML + renderPracticePanel(entry, conceptId) + masteryHtml;
       } else if (activeTab === "formeln") {
         content.innerHTML = headerHTML + renderFormulaPanel(entry);
-      } else if (activeTab === "intuition") {
-        content.innerHTML = headerHTML + renderIntuitionPanel(conceptId);
       } else if (activeTab === "quellen") {
         content.innerHTML = headerHTML + buildQuellenPanelHtml({
           conceptId,
@@ -1467,6 +1469,14 @@ ${motivationStrip}
     }
 
     renderMath(content);
+    initConceptMotivationClamp(content);
+
+    if (scrollKernidee && activeTab === "theorie") {
+      requestAnimationFrame(() => {
+        const kernAnchor = content.querySelector("#theory-kernidee-h, .theory-recipe-section--kernidee");
+        kernAnchor?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   }
 
   function renderHome() {

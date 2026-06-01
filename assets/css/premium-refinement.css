@@ -6514,6 +6514,7 @@ body.light-mode #content .source-provenance-mark {
 #content .panel.active > .formula-tab-panel,
 #content .panel.active > .formula-grid,
 #content .panel.active > .section-block,
+#content .panel.active > .theory-recipe-section,
 #content .quellen-panel,
 #content .mikro1-practice,
 #content .exam-drill-panel {
@@ -6883,46 +6884,66 @@ body.light-mode #content .source-provenance-mark {
   line-height: 1.5;
 }
 
-/* Theory tab — recipe-book sections (fleet-wide) */
-#content .theory-recipe-section {
-  margin-bottom: 18px;
+/* Theory tab — recipe cards (formula-card visual family) */
+#content .theory-recipe-section,
+#content .theory-recipe-card {
+  position: relative;
+  display: grid;
+  gap: 0;
+  min-width: 0;
+  margin: 0 auto 20px;
+  padding: clamp(18px, 2vw, 22px) clamp(18px, 2.2vw, 24px);
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--text) 10%);
+  background: var(--card);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 22%, transparent);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+#content .theory-recipe-section:hover,
+#content .theory-recipe-card:hover {
+  border-color: color-mix(in srgb, var(--border) 78%, var(--accent) 18%);
+  box-shadow: var(--shadow-md);
+}
+
+body.light-mode #content .theory-recipe-section,
+body.light-mode #content .theory-recipe-card {
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 30%, transparent);
+}
+
+#content .theory-recipe-body {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* Subsections stay flat inside the outer recipe card (no card-in-card) */
+#content .theory-recipe-body > .section-block {
+  margin: 0;
   padding: 0;
   border: none;
+  border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
-#content .theory-recipe-heading {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 12px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
-  line-height: 1.35;
+#content .theory-recipe-body > .section-block:hover {
+  border-color: transparent;
+  box-shadow: none;
 }
 
-#content .theory-recipe-step {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.65rem;
-  height: 1.65rem;
-  border-radius: 999px;
-  font-size: 0.8125rem;
-  font-weight: 800;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 14%, var(--card));
-  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+#content .theory-recipe-body > .section-block > h3::before {
+  display: none;
 }
 
-#content .theory-recipe-body > .section-block {
-  margin-bottom: 12px;
-}
-
-#content .theory-recipe-body > .section-block:last-child {
-  margin-bottom: 0;
+#content .theory-recipe-section .warn-box.warn-box--theory-inset,
+#content .theory-recipe-card .warn-box.warn-box--theory-inset {
+  margin: 4px 0 0;
+  padding: 16px 18px;
+  border-radius: 14px;
+  box-shadow: none;
 }
 
 #content .theory-subsection-title {
@@ -6941,5 +6962,374 @@ body.light-mode #content .source-provenance-mark {
   margin: 0;
   font-size: 0.875rem;
   color: var(--muted);
+}
+
+/* Intuition layer fused into Theorie recipe (Kernidee / Orientierung / Anwendung) */
+#content .theory-intuition-lead {
+  margin: 0 0 12px;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+#content .theory-intuition-embed {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  background: color-mix(in srgb, var(--accent) 6%, var(--card));
+}
+
+#content .theory-intuition-bridge-kicker {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+#content .theory-intuition-bridge-copy {
+  margin: 0;
+  line-height: 1.5;
+}
+
+#content .theory-intuition-callout-label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+#content .theory-intuition-recognition {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+#content .theory-intuition-pattern-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: 6px 8px;
+  align-items: baseline;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+#content .theory-intuition-pattern-if,
+#content .theory-intuition-pattern-arrow {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ============================================================
+   PASS — Platform chrome alignment (fleet-wide, 2026-05-31)
+   Concept header slots, typography scale, tab row, section heads,
+   badge family, right-rail offset. Loads after module styles.css.
+   ============================================================ */
+
+:root {
+  --chrome-topbar-main-h: 50px;
+  --chrome-tab-row-h: 44px;
+  --chrome-title-size: clamp(1.75rem, 3.2vw, 2.375rem);
+  --chrome-title-line: 1.12;
+  --chrome-title-min-h: calc(2 * var(--chrome-title-size) * var(--chrome-title-line));
+  --chrome-subtitle-size: var(--type-sm, 0.8125rem);
+  --chrome-pill-row-min-h: 1.625rem;
+  --chrome-motivation-size: var(--type-base, 0.9375rem);
+  --chrome-motivation-line: 1.5;
+  --chrome-motivation-min-h: calc(2 * var(--chrome-motivation-size) * var(--chrome-motivation-line));
+  --chrome-section-step: 28px;
+  --chrome-badge-size: 0.625rem;
+}
+
+#topbar-main {
+  min-height: var(--chrome-topbar-main-h);
+  align-items: center;
+}
+
+.breadcrumb {
+  min-height: 1.25rem;
+  align-items: center;
+}
+
+#tabRow.tab-row {
+  min-height: var(--chrome-tab-row-h);
+  align-items: center;
+}
+
+#tabRow .tab-btn.tab-btn--unavailable {
+  display: none !important;
+}
+
+#app:has(#tabRow.visible) #rightPanel {
+  top: calc(var(--chrome-topbar-main-h) + var(--chrome-tab-row-h));
+  height: calc(100dvh - var(--chrome-topbar-main-h) - var(--chrome-tab-row-h));
+}
+
+#rightPanel {
+  top: var(--chrome-topbar-main-h);
+  height: calc(100dvh - var(--chrome-topbar-main-h));
+}
+
+/* ── Concept header shell (fixed row slots) ───────────────── */
+#content .concept-header {
+  display: grid;
+  gap: 10px;
+  width: min(100%, var(--content-rail-max, 1080px));
+  margin-inline: auto;
+  margin-bottom: 28px;
+}
+
+#content .concept-header-row--tag {
+  min-height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+#content .concept-header-row--title {
+  min-height: var(--chrome-title-min-h);
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+
+#content .concept-header-row--pills {
+  min-height: var(--chrome-pill-row-min-h);
+  display: flex;
+  align-items: center;
+}
+
+#content .concept-header-row--motivation {
+  min-height: var(--chrome-motivation-min-h);
+}
+
+#content .concept-header-row--motivation.concept-header-row--empty {
+  min-height: var(--chrome-motivation-min-h);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#content .concept-tag {
+  margin: 0;
+}
+
+#content .concept-title {
+  margin: 0;
+  max-width: none;
+  font-size: var(--chrome-title-size);
+  font-weight: 700;
+  line-height: var(--chrome-title-line);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+#content .concept-subtitle {
+  margin: 0;
+  font-size: var(--chrome-subtitle-size);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+#content .concept-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  align-items: center;
+  min-height: var(--chrome-pill-row-min-h);
+  width: 100%;
+}
+
+#content .concept-pill-placeholder {
+  display: block;
+  min-height: var(--chrome-pill-row-min-h);
+  width: 0;
+}
+
+#content .concept-motivation {
+  display: block;
+  margin: 0;
+  font-size: var(--chrome-motivation-size);
+  line-height: var(--chrome-motivation-line);
+  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
+  max-width: 62ch;
+}
+
+#content .concept-motivation::before {
+  content: none;
+}
+
+#content .concept-motivation-shell:not(.concept-motivation-shell--expanded) .concept-motivation {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+#content .concept-motivation-toggle {
+  margin: 6px 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: var(--chrome-subtitle-size);
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#content .concept-motivation-toggle:hover {
+  color: var(--accent2, var(--accent));
+}
+
+#content .concept-motivation-toggle:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Unified platform badge / pill family ─────────────────── */
+.platform-chrome-badge,
+.practice-platform-badge,
+.hc-source-badge,
+.home-action-sim-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: var(--chrome-badge-size);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.platform-chrome-badge--anchored,
+.hc-source-badge--anchored {
+  color: color-mix(in srgb, var(--accent) 85%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.platform-chrome-badge--referenced,
+.hc-source-badge--referenced {
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 75%, var(--text));
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 30%, var(--border));
+}
+
+.platform-chrome-badge--supplemental,
+.platform-chrome-badge--platform,
+.hc-source-badge--supplemental,
+.hc-source-badge--platform {
+  background: color-mix(in srgb, var(--accent, #6366f1) 8%, transparent);
+  color: var(--text);
+}
+
+.practice-platform-badge--panel {
+  margin-top: 0;
+}
+
+/* ── Section heading grid (Theorie / Formeln / Aufgaben) ──── */
+#content .theory-recipe-heading,
+#content .formula-tab-section-head {
+  display: grid;
+  grid-template-columns: var(--chrome-section-step) minmax(0, 1fr);
+  gap: 12px 14px;
+  align-items: start;
+}
+
+#content .theory-recipe-step,
+#content .formula-tab-section-num,
+#content .klausurmethodik-step-num {
+  width: var(--chrome-section-step);
+  height: var(--chrome-section-step);
+  min-width: var(--chrome-section-step);
+  font-size: 0.8125rem;
+  font-weight: 800;
+}
+
+#content .theory-recipe-heading {
+  margin: 0 0 16px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  font-size: var(--type-md, 1.0625rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+}
+
+#content .theory-recipe-step {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface2) 89%);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+}
+
+#content .formula-tab-section-head h3 {
+  margin: 0 0 4px;
+  font-size: var(--type-md, 1.0625rem);
+  line-height: 1.35;
+}
+
+#content .formula-tab-section-lead,
+#content .formula-support-field-label,
+#content .klausurmethodik-label {
+  font-size: var(--chrome-subtitle-size);
+  line-height: 1.4;
+}
+
+#content .klausurmethodik-difficulty {
+  font-size: var(--chrome-badge-size);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#content .practice-section-header {
+  display: grid;
+  grid-template-columns: var(--chrome-section-step) minmax(0, 1fr);
+  gap: 12px 14px;
+  align-items: center;
+  min-height: var(--chrome-section-step);
+  margin: 0 0 12px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  font-size: var(--type-md, 1.0625rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text) 18%);
+}
+
+#content .practice-section-header::before {
+  content: "";
+  width: var(--chrome-section-step);
+  height: var(--chrome-section-step);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+}
+
+@media (max-width: 428px) {
+  :root {
+    --chrome-title-min-h: calc(2 * 1.75rem * var(--chrome-title-line));
+    --chrome-motivation-min-h: calc(2 * 0.875rem * var(--chrome-motivation-line));
+  }
+
+  #content .concept-header {
+    margin-bottom: 22px;
+    gap: 8px;
+  }
 }
 

@@ -11,6 +11,7 @@ export function renderGraphPanel(id) {
   const graphConfigs = {
     bivariat: renderGraphShell({
       conceptId: id,
+      moduleHint: 'statistik',
       title: 'Streudiagramm und Korrelationsrichtung',
       controls: `
       <div class="ctrl-group"><label for="g_biv_rho">Korrelation $r$</label><input type="range" id="g_biv_rho" min="-0.9" max="0.9" step="0.1" value="0.6" oninput="window.initGraph('bivariat', false)"><div class="val" id="v_biv_rho" aria-live="polite">0.60</div></div>
@@ -20,6 +21,7 @@ export function renderGraphPanel(id) {
     }),
     schaetzen_eigenschaften_intervalle: renderGraphShell({
       conceptId: id,
+      moduleHint: 'statistik',
       title: 'Konfidenzintervall und Präzision',
       controls: `
       <div class="ctrl-group"><label for="g_ci_xbar">Stichprobenmittel $\\bar{x}$</label><input type="range" id="g_ci_xbar" min="40" max="90" step="1" value="64" oninput="window.initGraph('schaetzen_eigenschaften_intervalle', false)"><div class="val" id="v_ci_xbar" aria-live="polite">64</div></div>
@@ -30,6 +32,7 @@ export function renderGraphPanel(id) {
     }),
     regression_schaetzung_inferenz: renderGraphShell({
       conceptId: id,
+      moduleHint: 'statistik',
       title: 'Regression: Datenwolke und Schätzgerade',
       controls: `
       <div class="ctrl-group"><label for="g_reg_b0">Achsenabschnitt $\\beta_0$</label><input type="range" id="g_reg_b0" min="0" max="8" step="0.5" value="2" oninput="window.initGraph('regression_schaetzung_inferenz', false)"><div class="val" id="v_reg_b0" aria-live="polite">2.0</div></div>
@@ -40,6 +43,7 @@ export function renderGraphPanel(id) {
     }),
     regression_diagnostik_prognose: renderGraphShell({
       conceptId: id,
+      moduleHint: 'statistik',
       title: 'Prognoseintervall und Residuenlogik',
       controls: `
       <div class="ctrl-group"><label for="g_diag_b1">Steigung $\\beta_1$</label><input type="range" id="g_diag_b1" min="0.4" max="2.0" step="0.1" value="1.1" oninput="window.initGraph('regression_diagnostik_prognose', false)"><div class="val" id="v_diag_b1" aria-live="polite">1.10</div></div>

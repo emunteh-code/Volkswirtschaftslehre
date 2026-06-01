@@ -1,6 +1,7 @@
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
+import { getSemanticGraphColors } from '../../../assets/js/portal-core/ui/graphTheme.js';
 
 let rafId = null;
 
@@ -22,22 +23,7 @@ function animateGraph(drawFn) {
 }
 
 function readColors() {
-  const s = getComputedStyle(document.body);
-  const pick = (name, fallback) => s.getPropertyValue(name).trim() || fallback;
-  return {
-    bg: pick('--bg', '#f2f2f7'),
-    card: pick('--card', '#ffffff'),
-    border: pick('--border', '#d1d1d6'),
-    axis: pick('--muted', '#6c6c70'),
-    text: pick('--text', '#1c1c1e'),
-    accent: pick('--accent', '#2c6fba'),
-    accent2: pick('--accent2', '#3a7ab8'),
-    warn: pick('--accent3', '#c0392b'),
-    math: pick('--math-ink', '#E03AFB'),
-    green: pick('--semantic-green', '#2d8659'),
-    fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif'),
-    fontMono: pick('--font-mono', 'SF Mono, Menlo, monospace')
-  };
+  return getSemanticGraphColors();
 }
 
 function withAlpha(color, alpha) {

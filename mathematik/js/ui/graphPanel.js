@@ -13,6 +13,7 @@ export function renderGraphPanel(id) {
   const graphConfigs = {
     funktionen_gleichungen: renderGraphShell({
       conceptId: id,
+      moduleHint: 'mathematik',
       title: 'Transformationen einer quadratischen Funktion',
       controls: `
       <div class="ctrl-group"><label for="g_fun_a">Streckung $a$</label><input type="range" id="g_fun_a" min="-2" max="2" step="0.5" value="1" oninput="window.initGraph('funktionen_gleichungen', false)"><div class="val" id="v_fun_a" aria-live="polite">1.0</div></div>
@@ -23,6 +24,7 @@ export function renderGraphPanel(id) {
     }),
     analysis_ableitung_grundlagen: renderGraphShell({
       conceptId: id,
+      moduleHint: 'mathematik',
       title: 'Tangente und momentane Änderungsrate',
       controls: `
       <div class="ctrl-group"><label for="g_der_x0">Stelle $x_0$</label><input type="range" id="g_der_x0" min="-3" max="3" step="0.25" value="1" oninput="window.initGraph('analysis_ableitung_grundlagen', false)"><div class="val" id="v_der_x0" aria-live="polite">1.00</div></div>
@@ -31,6 +33,7 @@ export function renderGraphPanel(id) {
     }),
     univariate_optimierung: renderGraphShell({
       conceptId: id,
+      moduleHint: 'mathematik',
       title: 'Gewinnparabel und Optimum',
       controls: `
       <div class="ctrl-group"><label for="g_opt_b">lineares Glied $b$</label><input type="range" id="g_opt_b" min="4" max="12" step="0.5" value="8" oninput="window.initGraph('univariate_optimierung', false)"><div class="val" id="v_opt_b" aria-live="polite">8.0</div></div>
@@ -39,6 +42,7 @@ export function renderGraphPanel(id) {
     }),
     analysis_multivariat: renderGraphShell({
       conceptId: id,
+      moduleHint: 'mathematik',
       title: 'Niveaukurven und Gradient',
       controls: `
       <div class="ctrl-group"><label for="g_multi_x">Punkt $x$</label><input type="range" id="g_multi_x" min="-3" max="3" step="0.25" value="1.5" oninput="window.initGraph('analysis_multivariat', false)"><div class="val" id="v_multi_x" aria-live="polite">1.50</div></div>
@@ -48,6 +52,7 @@ export function renderGraphPanel(id) {
     }),
     lagrange: renderGraphShell({
       conceptId: id,
+      moduleHint: 'mathematik',
       title: 'Niveaukurven mit Nebenbedingung',
       controls: `
       <div class="ctrl-group"><label for="g_lag_m">Restriktionswert $m$</label><input type="range" id="g_lag_m" min="4" max="12" step="0.5" value="8" oninput="window.initGraph('lagrange', false)"><div class="val" id="v_lag_m" aria-live="polite">8.0</div></div>
@@ -56,6 +61,7 @@ export function renderGraphPanel(id) {
     }),
     integralrechnung: renderGraphShell({
       conceptId: id,
+      moduleHint: 'mathematik',
       title: 'Bestimmtes Integral als akkumulierte Fläche',
       controls: `
       <div class="ctrl-group"><label for="g_int_a">untere Grenze $a$</label><input type="range" id="g_int_a" min="0" max="3" step="0.25" value="0.5" oninput="window.initGraph('integralrechnung', false)"><div class="val" id="v_int_a" aria-live="polite">0.50</div></div>

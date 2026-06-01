@@ -1,7 +1,36 @@
 /**
  * Pass 61 — Canvas graph annotations cannot render LaTeX/MathJax.
  * Normalizes any TeX-like source into short, student-facing German labels.
+ *
+ * Pass 74 (fleet graph pedagogy) — fixed exam-ready strings for recurring motifs.
  */
+
+/** @type {Record<string, string>} */
+export const GRAPH_CANVAS_LABELS = {
+  o_a: "O_A",
+  o_b: "O_B",
+  x1_a: "x₁ (A)",
+  x2_a: "x₂ (A)",
+  x1_b: "x₁ (B)",
+  x2_b: "x₂ (B)",
+  endowment: "E — Endausstattung",
+  contract: "C — Vertragspunkt",
+  ic_a: "Indifferenz A",
+  ic_b: "Indifferenz B",
+  contract_curve: "Kontraktkurve",
+  trade_lens: "Tauschrichtung"
+};
+
+/**
+ * @param {keyof typeof GRAPH_CANVAS_LABELS | string} key
+ * @returns {string}
+ */
+export function graphCanvasLabel(key) {
+  if (key && Object.prototype.hasOwnProperty.call(GRAPH_CANVAS_LABELS, key)) {
+    return GRAPH_CANVAS_LABELS[key];
+  }
+  return sanitizeGraphCanvasLabel(key);
+}
 
 function collapseWs(s) {
   return String(s || "").replace(/\s+/g, " ").trim()
@@ -30,8 +59,17 @@ export function sanitizeGraphCanvasLabel(raw) {
   const flat = spaced.replace(/\s/g, "")
 
   if (!/\\/.test(s)) {
+    const subSup = s.replace(/\^A\b/g, " (A)").replace(/\^B\b/g, " (B)");
+    if (subSup !== s) return collapseWs(subSup);
     return s
   }
+
+  if (/O[_\s]?A/i.test(flat) && flat.length <= 4) return GRAPH_CANVAS_LABELS.o_a
+  if (/O[_\s]?B/i.test(flat) && flat.length <= 4) return GRAPH_CANVAS_LABELS.o_b
+  if (/x[_\s]?1\^?A/i.test(flat) || /x_1\^\{A\}/i.test(spaced)) return GRAPH_CANVAS_LABELS.x1_a
+  if (/x[_\s]?2\^?A/i.test(flat) || /x_2\^\{A\}/i.test(spaced)) return GRAPH_CANVAS_LABELS.x2_a
+  if (/x[_\s]?1\^?B/i.test(flat) || /x_1\^\{B\}/i.test(spaced)) return GRAPH_CANVAS_LABELS.x1_b
+  if (/x[_\s]?2\^?B/i.test(flat) || /x_2\^\{B\}/i.test(spaced)) return GRAPH_CANVAS_LABELS.x2_b
 
   if (
     /\\hat\{?y\}?\s*=\s*\\hat\{?\\beta\}_0\s*\+\s*\\hat\{?\\beta\}_1\s*x/i.test(spaced)

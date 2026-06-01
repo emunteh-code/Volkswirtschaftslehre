@@ -7,6 +7,7 @@ import GraphEngine from './graphEngine.js';
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
+import { SCENE_PAD } from '../../../assets/js/portal-core/ui/graphLayout.js';
 
 const PHILLIPS_CURVE_CURVATURE = 0.075;
 
@@ -38,10 +39,10 @@ function setupPlot(xLabel, yLabel, ranges, layout = {}) {
   if (!ctx || !w || !h) return null;
 
   const pad = {
-    left: layout.pad?.left ?? 74,
-    right: layout.pad?.right ?? 28,
-    top: layout.pad?.top ?? 26,
-    bottom: layout.pad?.bottom ?? 58
+    left: layout.pad?.left ?? SCENE_PAD.left,
+    right: layout.pad?.right ?? SCENE_PAD.right,
+    top: layout.pad?.top ?? SCENE_PAD.top,
+    bottom: layout.pad?.bottom ?? SCENE_PAD.bottom
   };
   const xMin = ranges.xMin;
   const xMax = ranges.xMax;

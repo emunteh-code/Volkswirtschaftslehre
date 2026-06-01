@@ -1,6 +1,7 @@
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
 import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
+import { getSemanticGraphColors } from '../../../assets/js/portal-core/ui/graphTheme.js';
 
 let rafId = null;
 
@@ -22,21 +23,7 @@ function animateGraph(drawFn) {
 }
 
 function readColors() {
-  const s = getComputedStyle(document.body);
-  const pick = (name, fallback) => s.getPropertyValue(name).trim() || fallback;
-  return {
-    bg: pick('--bg', '#0f1114'),
-    card: pick('--card', '#1a1d21'),
-    border: pick('--border', '#2e3338'),
-    axis: pick('--muted', '#8a8f98'),
-    text: pick('--text', '#e8e8ed'),
-    accent: pick('--accent', '#4a90d9'),
-    accent2: pick('--accent2', '#5a9fd4'),
-    warn: pick('--accent3', '#e05252'),
-    math: pick('--math-ink', '#E03AFB'),
-    green: pick('--semantic-green', '#4caf7c'),
-    fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif')
-  };
+  return getSemanticGraphColors();
 }
 
 function setValue(id, value, digits = 2) {

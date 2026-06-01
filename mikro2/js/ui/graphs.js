@@ -1,6 +1,10 @@
 import { renderMath } from '../utils/mathjax.js';
 import { ensureMathJaxEquationHtml } from '../../../assets/js/portal-core/ui/mathDelimiters.js';
-import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
+import {
+  graphCanvasLabel,
+  sanitizeGraphCanvasLabel
+} from '../../../assets/js/portal-core/utils/graphLabels.js';
+import { getSemanticGraphColors } from '../../../assets/js/portal-core/ui/graphTheme.js';
 
 let rafId = null;
 
@@ -22,22 +26,7 @@ function animateGraph(drawFn) {
 }
 
 function readColors() {
-  const s = getComputedStyle(document.body);
-  const pick = (name, fallback) => s.getPropertyValue(name).trim() || fallback;
-  return {
-    bg: pick('--bg', '#f2f2f7'),
-    card: pick('--card', '#ffffff'),
-    border: pick('--border', '#d1d1d6'),
-    axis: pick('--muted', '#6c6c70'),
-    text: pick('--text', '#1c1c1e'),
-    accent: pick('--accent', '#2c6fba'),
-    accent2: pick('--accent2', '#3a7ab8'),
-    warn: pick('--accent3', '#c0392b'),
-    math: pick('--math-ink', '#E03AFB'),
-    green: pick('--semantic-green', '#2d8659'),
-    fontBody: pick('--font-body', s.fontFamily || 'system-ui, sans-serif'),
-    fontMono: pick('--font-mono', 'SF Mono, Menlo, monospace')
-  };
+  return getSemanticGraphColors();
 }
 
 function withAlpha(color, alpha) {
@@ -412,60 +401,233 @@ function drawStackelberg(progress = 1) {
   }));
 }
 
+function drawPixelTag(ctx, colors, px, py, text, color, align = 'left') {
+  const label = sanitizeGraphCanvasLabel(text);
+  ctx.save();
+  ctx.font = `600 12px ${colors.fontBody}`;
+  const width = ctx.measureText(label).width + 14;
+  const height = 24;
+  const padX = align === 'right' ? px - width + 4 : px - 4;
+  ctx.fillStyle = withAlpha(colors.card, 0.95);
+  ctx.strokeStyle = withAlpha(color, 0.75);
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(padX, py - height + 5, width, height, 8);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.textBaseline = 'middle';
+  ctx.fillText(label, padX + 7, py - 6);
+  ctx.restore();
+}
+
 function drawEdgeworth(progress = 1) {
   const base = setupCanvas();
   if (!base) return;
   const { ctx, colors, width, height } = base;
-  const x = 130;
-  const y = 90;
-  const boxW = 620;
-  const boxH = 340;
+  const margin = { left: 78, right: 250, top: 52, bottom: 72 };
+  const boxX = margin.left;
+  const boxY = margin.top;
+  const boxW = width - margin.left - margin.right;
+  const boxH = height - margin.top - margin.bottom;
+
+  const toPx = (x1a, x2a) => ({
+    px: boxX + x1a * boxW,
+    py: boxY + boxH - x2a * boxH
+  });
+
+  const drawIndifferenceA = (level, alpha = 1) => {
+    ctx.save();
+    ctx.strokeStyle = withAlpha(colors.accent2, alpha);
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    let started = false;
+    const x1Min = 0.11;
+    const x1Max = x1Min + (0.92 - x1Min) * progress;
+    for (let u = x1Min; u <= x1Max; u += 0.008) {
+      const x2a = level / u;
+      if (x2a <= 0.06 || x2a >= 0.96) continue;
+      const { px, py } = toPx(u, x2a);
+      if (!started) {
+        ctx.moveTo(px, py);
+        started = true;
+      } else {
+        ctx.lineTo(px, py);
+      }
+    }
+    if (started) ctx.stroke();
+    ctx.restore();
+  };
+
+  const drawIndifferenceB = (level, alpha = 1) => {
+    ctx.save();
+    ctx.strokeStyle = withAlpha(colors.warn, alpha * 0.85);
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    let started = false;
+    const x1Min = 0.08;
+    const x1Max = x1Min + (0.9 - x1Min) * progress;
+    for (let x1a = x1Min; x1a <= x1Max; x1a += 0.008) {
+      const x1b = 1 - x1a;
+      const x2b = level / x1b;
+      const x2a = 1 - x2b;
+      if (x2a <= 0.06 || x2a >= 0.96) continue;
+      const { px, py } = toPx(x1a, x2a);
+      if (!started) {
+        ctx.moveTo(px, py);
+        started = true;
+      } else {
+        ctx.lineTo(px, py);
+      }
+    }
+    if (started) ctx.stroke();
+    ctx.restore();
+  };
+
+  const drawContractCurve = () => {
+    ctx.save();
+    ctx.strokeStyle = colors.accent;
+    ctx.lineWidth = 2.6;
+    ctx.beginPath();
+    const steps = Math.max(2, Math.floor(48 * progress));
+    for (let i = 0; i <= steps; i += 1) {
+      const t = i / steps;
+      const x1a = 0.1 + t * 0.8;
+      const x2a = 1 - x1a;
+      const { px, py } = toPx(x1a, x2a);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    ctx.restore();
+  };
+
   ctx.strokeStyle = colors.axis;
   ctx.lineWidth = 2;
-  ctx.strokeRect(x, y, boxW, boxH);
-  ctx.font = `600 13px ${colors.fontBody}`;
+  ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+  const oA = toPx(0, 0);
+  const oB = toPx(1, 1);
+  const arrow = (x1, y1, x2, y2) => {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const head = 7;
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - head * Math.cos(angle - 0.42), y2 - head * Math.sin(angle - 0.42));
+    ctx.lineTo(x2 - head * Math.cos(angle + 0.42), y2 - head * Math.sin(angle + 0.42));
+    ctx.closePath();
+    ctx.fill();
+  };
+
+  ctx.fillStyle = colors.axis;
+  ctx.strokeStyle = colors.axis;
+  ctx.lineWidth = 1.4;
+  arrow(oA.px, oA.py, oA.px + 42, oA.py);
+  arrow(oA.px, oA.py, oA.px, oA.py - 42);
+  arrow(oB.px, oB.py, oB.px - 42, oB.py);
+  arrow(oB.px, oB.py, oB.px, oB.py + 42);
+
+  if (progress > 0.2) {
+    drawIndifferenceA(0.14, 0.55);
+    drawIndifferenceA(0.22, 0.7);
+    if (progress > 0.35) drawIndifferenceB(0.12, 0.55);
+    if (progress > 0.45) drawIndifferenceB(0.2, 0.7);
+  }
+  if (progress > 0.55) drawContractCurve();
+
+  const endowment = { x1a: 0.34, x2a: 0.66 };
+  const contract = { x1a: 0.5, x2a: 0.5 };
+  const ePt = toPx(endowment.x1a, endowment.x2a);
+  const cPt = toPx(contract.x1a, contract.x2a);
+
+  ctx.font = `700 13px ${colors.fontBody}`;
   ctx.fillStyle = colors.text;
-  ctx.fillText('Haushalt A', x + 8, y - 14);
-  ctx.fillText('Haushalt B', x + boxW - 86, y + boxH + 28);
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText(graphCanvasLabel('o_a'), oA.px + 6, oA.py - 20);
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText(graphCanvasLabel('o_b'), oB.px - 6, oB.py + 20);
 
-  ctx.strokeStyle = colors.accent;
-  ctx.lineWidth = 2.6;
-  ctx.beginPath();
-  ctx.moveTo(x + 80, y + boxH - 34);
-  ctx.bezierCurveTo(x + 210, y + 250, x + 390, y + 140, x + 530, y + 60);
-  ctx.stroke();
+  ctx.font = `600 12px ${colors.fontBody}`;
+  ctx.fillStyle = colors.axis;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText(graphCanvasLabel('x1_a'), boxX + boxW / 2, boxY + boxH + 10);
+  ctx.save();
+  ctx.translate(boxX - 14, boxY + boxH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillText(graphCanvasLabel('x2_a'), 0, 0);
+  ctx.restore();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText(graphCanvasLabel('x1_b'), boxX + boxW / 2, boxY - 10);
+  ctx.save();
+  ctx.translate(boxX + boxW + 14, boxY + boxH / 2);
+  ctx.rotate(Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillText(graphCanvasLabel('x2_b'), 0, 0);
+  ctx.restore();
 
-  ctx.fillStyle = colors.warn;
-  ctx.beginPath();
-  ctx.arc(x + 220, y + 220, 6, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = colors.warn;
-  ctx.fillText('E', x + 234, y + 224);
+  if (progress > 0.78) {
+    ctx.fillStyle = colors.warn;
+    ctx.beginPath();
+    ctx.arc(ePt.px, ePt.py, 6, 0, Math.PI * 2);
+    ctx.fill();
+    drawPixelTag(ctx, colors, ePt.px + 10, ePt.py - 8, graphCanvasLabel('endowment'), colors.warn);
+  }
 
-  ctx.fillStyle = colors.green;
-  ctx.beginPath();
-  ctx.arc(x + 408, y + 160, 6, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = colors.green;
-  ctx.fillText('C', x + 420, y + 164);
+  if (progress > 0.86) {
+    ctx.fillStyle = colors.green;
+    ctx.beginPath();
+    ctx.arc(cPt.px, cPt.py, 6, 0, Math.PI * 2);
+    ctx.fill();
+    drawPixelTag(ctx, colors, cPt.px + 10, cPt.py - 10, graphCanvasLabel('contract'), colors.green);
+  }
 
-  if (progress > 0.6) {
-    ctx.strokeStyle = withAlpha(colors.accent2, 0.75);
+  if (progress > 0.92) {
+    ctx.strokeStyle = withAlpha(colors.accent2, 0.8);
     ctx.lineWidth = 1.5;
     ctx.setLineDash([6, 5]);
     ctx.beginPath();
-    ctx.moveTo(x + 220, y + 220);
-    ctx.lineTo(x + 408, y + 160);
+    ctx.moveTo(ePt.px, ePt.py);
+    ctx.lineTo(cPt.px, cPt.py);
     ctx.stroke();
     ctx.setLineDash([]);
   }
 
+  drawLegend(
+    { ctx, colors, width },
+    [
+      { label: graphCanvasLabel('ic_a'), color: colors.accent2 },
+      { label: graphCanvasLabel('ic_b'), color: colors.warn },
+      { label: graphCanvasLabel('contract_curve'), color: colors.accent, lineWidth: 2.6 },
+      { label: graphCanvasLabel('endowment'), color: colors.warn, dot: true },
+      { label: graphCanvasLabel('contract'), color: colors.green, dot: true }
+    ]
+  );
+
   setGraphInfo(buildGraphInfo({
-    equation: String.raw`MRS_A = MRS_B`,
+    equation: String.raw`GRS^A = GRS^B`,
     rows: [
-      { title: 'Endausstattung', body: 'E markiert den Ausgangspunkt der Tauschbeziehungen in der Box.' },
-      { title: 'Kontraktkurve', body: 'Die blaue Kurve sammelt Pareto-effiziente Allokationen, bei denen sich die Indifferenzkurven gerade tangieren.' },
-      { title: 'Prüfungslesart', body: 'Bei Edgeworth-Aufgaben immer zuerst sagen, wessen Ursprung wo liegt und was “Pareto-besser” geometrisch bedeutet.' }
+      {
+        title: 'Ursprünge und Güter',
+        body: 'O_A unten links und O_B oben rechts; die Achsen zeigen die Allokation von Gut 1 und Gut 2 für A bzw. B. Indifferenzkurven sind jeweils zum eigenen Ursprung konvex.'
+      },
+      {
+        title: 'Endausstattung und Vertrag',
+        body: 'E (Endausstattung) ist der Ausgangspunkt vor dem Tausch. C (Vertragspunkt) liegt auf der Kontraktkurve, wo sich die Kurven tangieren und keine Pareto-Verbesserung mehr möglich ist.'
+      },
+      {
+        title: 'Prüfungslesart',
+        body: 'Zuerst Ursprünge und Güterachsen benennen, dann prüfen, ob E in einer Linse liegt (Pareto-Verbesserung möglich) oder ob bereits GRS^A = GRS^B gilt.'
+      }
     ]
   }));
 }

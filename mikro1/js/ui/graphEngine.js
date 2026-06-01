@@ -4,6 +4,8 @@
 // ============================================================
 
 import { sanitizeGraphCanvasLabel } from '../../../assets/js/portal-core/utils/graphLabels.js';
+import { getSemanticGraphColors } from '../../../assets/js/portal-core/ui/graphTheme.js';
+import { SCENE_PAD, sceneFontSizes, legendPlacement } from '../../../assets/js/portal-core/ui/graphLayout.js';
 
 // ── Colour helper ──────────────────────────────────────────
 /** Convert a 3- or 6-digit hex colour + alpha (0-1) to an rgba() string. */
@@ -297,70 +299,7 @@ class GraphEngine {
     // Must read from document.body (not documentElement) so that
     // body.light-mode custom property overrides are correctly resolved.
     refreshColors() {
-      const s = getComputedStyle(document.body);
-      const cv = n => s.getPropertyValue(n).trim();
-      // Use the browser's resolved font so canvas always matches page typography
-      const resolvedFont = s.fontFamily || cv('--font-body') || 'system-ui, sans-serif';
-      const isLight = document.body.classList.contains('light-mode');
-      const accent = '#2f77c7';
-      const mathInk = cv('--math-ink') || '#E03AFB';
-      const warningRed = cv('--accent3') || '#e05252';
-      const reference = isLight ? '#1c2530' : '#dde4ec';
-      const optimum = reference;
-      const budgetShift = '#cf4352';
-      const budgetComp = '#228a5b';
-      const indiffBase = mathInk;
-      const indiffAlt = isLight ? '#465467' : '#d6dfe8';
-      const isoquantBase = '#2f8f58';
-      const isoquantAlt = '#79bf87';
-      const tangent = '#d98223';
-      const effectSub = '#d98223';
-      const effectIncome = '#8b3ea8';
-      const competition = reference;
-      const supply = '#2f8f58';
-      const mc = tangent;
-      this._col = {
-        bg:       cv('--bg')        || '#0f1114',
-        grid:     cv('--border')    || '#2e3338',
-        axis:     cv('--muted')     || '#8a8f98',
-        tick:     cv('--muted')     || '#8a8f98',
-        muted:    cv('--muted')     || '#8a8f98',
-        label:    cv('--text')      || '#e8e8ed',
-        text:     cv('--text')      || '#e8e8ed',
-        accent:   accent,
-        accent2:  cv('--accent2')   || '#5a9fd4',
-        warn:     warningRed,
-        card:     cv('--card')      || '#1a1d21',
-        fontMono: cv('--font-mono') || resolvedFont,
-        fontBody: resolvedFont,
-        math: mathInk,
-        reference,
-        budgetBase: accent,
-        budgetShift,
-        budgetComp,
-        budgetFill: hexToRgba(accent, 0.14),
-        indiffBase,
-        indiffAlt,
-        isoquantBase,
-        isoquantAlt,
-        optimum,
-        tangent,
-        demand: accent,
-        supply,
-        mr: '#8f2436',
-        mc,
-        monopoly: budgetShift,
-        competition,
-        effectSub,
-        effectIncome,
-        welfare: warningRed,
-        welfareFill: hexToRgba(warningRed, 0.22),
-        profit: tangent,
-        profitFill: hexToRgba(tangent, 0.18),
-        consumerFill: hexToRgba(accent, 0.16),
-        producerFill: hexToRgba(supply, 0.18),
-        guide: reference
-      };
+      this._col = getSemanticGraphColors();
       return this._col;
     }
 
@@ -368,13 +307,11 @@ class GraphEngine {
     // xLabel/yLabel default to 'x₁ (Menge Gut 1)' / 'x₂ (Menge Gut 2)'
     drawScene(w, h, ctx, axMax, xLabel, yLabel) {
       const col = this._col;
-      const PAD = 75;
-      const PW = w - PAD - 40;
-      const PH = h - PAD - 50;
-
-      // Responsive font sizes
-      const fsSm = Math.max(11, Math.round(Math.min(w, h) * 0.026));
-      const fsMd = Math.max(12, Math.round(Math.min(w, h) * 0.032));
+      const pad = SCENE_PAD;
+      const PAD = pad.left;
+      const PW = w - pad.left - pad.right;
+      const PH = h - pad.top - pad.bottom;
+      const { tick: fsSm, label: fsMd } = sceneFontSizes(w, h);
 
       // Background
       ctx.fillStyle = col.bg;
@@ -385,19 +322,19 @@ class GraphEngine {
       for (let i = 1; i <= 5; i++) {
         const gv = (axMax / 5) * i;
         const gx = PAD + (gv / axMax) * PW;
-        const gy = h - PAD - (gv / axMax) * PH;
+        const gy = h - pad.bottom - (gv / axMax) * PH;
 
         ctx.strokeStyle = col.grid;
         ctx.globalAlpha = 0.55;
         ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(PAD, gy);     ctx.lineTo(w - 30, gy);    ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(gx, h - PAD); ctx.lineTo(gx, 40);        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(PAD, gy);     ctx.lineTo(w - pad.right, gy);    ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(gx, h - pad.bottom); ctx.lineTo(gx, pad.top);        ctx.stroke();
         ctx.globalAlpha = 1;
 
         ctx.fillStyle = col.tick;
         ctx.font = `${fsSm}px ${col.fontBody}`;
-        ctx.textAlign = 'center'; ctx.fillText(gv.toFixed(0), gx, h - PAD + 16);
-        ctx.textAlign = 'right';  ctx.fillText(gv.toFixed(0), PAD - 6, gy + 4);
+        ctx.textAlign = 'center'; ctx.fillText(gv.toFixed(0), gx, h - pad.bottom + 18);
+        ctx.textAlign = 'right';  ctx.fillText(gv.toFixed(0), PAD - 8, gy + 4);
       }
       ctx.setLineDash([]);
 
@@ -405,25 +342,25 @@ class GraphEngine {
       ctx.strokeStyle = col.axis;
       ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.moveTo(PAD, 40);
-      ctx.lineTo(PAD, h - PAD);
-      ctx.lineTo(w - 30, h - PAD);
+      ctx.moveTo(PAD, pad.top);
+      ctx.lineTo(PAD, h - pad.bottom);
+      ctx.lineTo(w - pad.right, h - pad.bottom);
       ctx.stroke();
 
       // Axis name labels
       ctx.fillStyle = col.label;
       ctx.font = `bold ${fsMd}px ${col.fontBody}`;
       ctx.textAlign = 'center';
-      ctx.fillText(sanitizeGraphCanvasLabel(xLabel || 'x₁ (Menge Gut 1)'), PAD + PW / 2, h - PAD + 34);
+      ctx.fillText(sanitizeGraphCanvasLabel(xLabel || 'x₁ (Menge Gut 1)'), PAD + PW / 2, h - pad.bottom + 38);
       ctx.save();
-      ctx.translate(16, h - PAD - PH / 2);
+      ctx.translate(22, pad.top + PH / 2);
       ctx.rotate(-Math.PI / 2);
       ctx.fillText(sanitizeGraphCanvasLabel(yLabel || 'x₂ (Menge Gut 2)'), 0, 0);
       ctx.restore();
 
       const sx = x => PAD + (x / axMax) * PW;
-      const sy = y => h - PAD - (y / axMax) * PH;
-      return { PAD, PW, PH, sx, sy };
+      const sy = y => h - pad.bottom - (y / axMax) * PH;
+      return { PAD, PW, PH, sx, sy, pad };
     }
 
     // Draw indifference curve u = x·y = const (Cobb-Douglas α = 0.5)
@@ -470,19 +407,30 @@ class GraphEngine {
       const lh = 20;
       const swatchW = 20;
       const textX = swatchW + 6;
-      const rightMargin = (typeof margin === 'number') ? margin : 14;
+      const legendConfig = typeof margin === 'number'
+        ? { rightMargin: margin, top: 50 }
+        : { ...legendPlacement(w, entries.length), ...(margin || {}) };
       const padX = 8, padY = 6;
 
-      ctx.font = `13px ${col.fontBody}`;
+      ctx.font = `12px ${col.fontBody}`;
       let maxW = 0;
       entries.forEach(e => {
         const tw = ctx.measureText(sanitizeGraphCanvasLabel(e.label)).width;
         if (tw > maxW) maxW = tw;
       });
       const blockW = textX + maxW + 4;
-      let x = w - blockW - rightMargin;
-      if (x < 20) x = 20;
-      const y = 46;
+      const h = this._h || ctx.canvas.height / (window.devicePixelRatio || 1);
+      let x;
+      let y;
+      if (legendConfig.corner === 'bottom-left') {
+        x = legendConfig.left ?? 14;
+        y = h - (entries.length * lh + padY * 2) - (legendConfig.bottom ?? 14);
+      } else {
+        const rightMargin = legendConfig.rightMargin ?? 16;
+        x = w - blockW - rightMargin;
+        if (x < 20) x = 20;
+        y = legendConfig.top ?? 50;
+      }
 
       ctx.save();
       ctx.textBaseline = 'middle';

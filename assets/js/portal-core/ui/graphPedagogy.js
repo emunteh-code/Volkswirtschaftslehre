@@ -2,6 +2,11 @@
  * Fleet graph pedagogy chrome — prediction prompt + Theorie notation link.
  * Canvas cannot render LaTeX; prompts stay in HTML (MathJax in theory tab).
  */
+import {
+  getGraphClarity,
+  renderGraphLegendHtml,
+  renderGraphSeeLine
+} from "./graphClarity.js";
 
 const DEFAULT_PROMPT =
   "Bevor Sie die Regler bewegen: Welche Kurve oder welcher Punkt sollte sich ändern — und welche Größe bleibt zunächst fix?";
@@ -53,6 +58,15 @@ const PEDAGOGY_BY_CONCEPT = {
     prompt: "Markieren Sie zuerst die beste Antwort auf die gegnerische Strategie — wo liegt das Nash-Gleichgewicht?",
     notation: "Auszahlungsmatrix — Theorie Spieltheorie."
   },
+  gleichgewicht_tausch: {
+    prompt:
+      "Lesen Sie zuerst O_A und O_B: Welche Indifferenzkurven gehören zu wem — und was zeigt die Linse zwischen zwei sich schneidenden Kurven?",
+    notation: "$x_1^A, x_2^A, GRS^A = GRS^B$, Kontraktkurve — Tab Theorie Edgeworth-Box."
+  },
+  gleichgewicht_walras: {
+    prompt: "Wo schneidet die Überschussnachfrage die Null-Linie — und was bedeutet das für die Markträumung?",
+    notation: "$z(p^*) = 0$, Walrasches Gesetz — Theorie allgemeines Gleichgewicht."
+  },
   funktionen_gleichungen: {
     prompt: "Verändern Sie $a$ und $c$: Verschiebt sich der Scheitel horizontal, vertikal oder beides?",
     notation: "Transformationen $f(x)=a(x-c)^2+d$ — Theorie Funktionen."
@@ -63,12 +77,17 @@ const PEDAGOGY_BY_CONCEPT = {
  * @param {string} conceptId
  * @returns {string} HTML for static pedagogy footer (below live graph_info).
  */
-export function renderGraphPedagogyFooter(conceptId) {
+export function renderGraphPedagogyFooter(conceptId, moduleHint = "") {
   const entry = PEDAGOGY_BY_CONCEPT[conceptId] || {};
+  const clarity = getGraphClarity(conceptId, moduleHint);
   const prompt = entry.prompt || DEFAULT_PROMPT;
   const notation = entry.notation || DEFAULT_NOTATION;
+  const sliderLine = clarity.sliderEffect
+    ? `<p class="graph-pedagogy-slider"><span class="graph-pedagogy-label">Regler</span> ${clarity.sliderEffect}</p>`
+    : "";
   return `<footer class="graph-pedagogy-footer" aria-label="Grafik-Lernhilfe">
 <p class="graph-pedagogy-prompt"><span class="graph-pedagogy-label">Vorhersage</span> ${prompt}</p>
+${sliderLine}
 <p class="graph-pedagogy-notation">${notation}</p>
 </footer>`;
 }
@@ -78,24 +97,37 @@ export function renderGraphPedagogyFooter(conceptId) {
  * @param {string} conceptId
  * @param {ParentNode} [root]
  */
-export function ensureGraphPedagogyChrome(conceptId, root = document) {
+export function ensureGraphPedagogyChrome(conceptId, root = document, moduleHint = "") {
   const container = root.querySelector?.(".graph-container") || root.querySelector?.("#content .graph-container");
   if (!container) return;
 
+  const title = container.querySelector(".graph-panel-title");
+  const clarity = getGraphClarity(conceptId, moduleHint);
+  if (!container.querySelector(".graph-see-line") && !container.querySelector(".graph-panel-subtitle")) {
+    const anchor = title || container.firstElementChild;
+    if (anchor) {
+      anchor.insertAdjacentHTML(
+        "afterend",
+        renderGraphSeeLine(conceptId, moduleHint) + renderGraphLegendHtml(clarity.legend)
+      );
+    }
+  } else if (!container.querySelector(".graph-legend-econ")) {
+    const legendEl = container.querySelector(".graph-see-line") || title;
+    legendEl?.insertAdjacentHTML("afterend", renderGraphLegendHtml(clarity.legend));
+  }
+
   if (!container.querySelector(".graph-control-hint") && container.querySelector(".graph-controls")) {
-    const title = container.querySelector(".graph-panel-title");
     const hint = document.createElement("p");
     hint.className = "graph-control-hint";
-    hint.textContent = "Regler anpassen, dann die Kurveninterpretation unten prüfen.";
-    if (title?.nextSibling) {
-      title.insertAdjacentElement("afterend", hint);
-    } else {
-      container.prepend(hint);
-    }
+    hint.textContent = `Regler anpassen — ${clarity.sliderEffect || "dann die Kurveninterpretation unten prüfen."}`;
+    const canvas = container.querySelector("canvas");
+    if (canvas) container.insertBefore(hint, canvas);
+    else if (title?.nextSibling) title.insertAdjacentElement("afterend", hint);
+    else container.appendChild(hint);
   }
 
   if (!container.querySelector(".graph-pedagogy-footer")) {
-    container.insertAdjacentHTML("beforeend", renderGraphPedagogyFooter(conceptId));
+    container.insertAdjacentHTML("beforeend", renderGraphPedagogyFooter(conceptId, moduleHint));
   }
 
   container.classList.add("graph-shell");

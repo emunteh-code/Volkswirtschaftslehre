@@ -136,7 +136,8 @@ function buildFormulaCards(slug, anchorsByConcept, contentById) {
       cards.push({
         id: `${slug}.${conceptId}.${labelSlug}`,
         conceptId,
-        officialNotation: primary.variables ? Object.keys(primary.variables).join(', ') : conceptId,
+        label: primary.label || '',
+        officialNotation: primary.variables ? Object.keys(primary.variables).join(', ') : '',
         displayFormula: primary.eq,
         intuition:
           primary.desc ||
@@ -212,6 +213,7 @@ function renderFormulaCardsFile(slug, meta, cards) {
         '  card({',
         `    id: '${c.id}',`,
         `    conceptId: '${c.conceptId}',`,
+        `    label: ${JSON.stringify(c.label || '')},`,
         `    officialNotation: ${JSON.stringify(c.officialNotation)},`,
         `    displayFormula: ${JSON.stringify(c.displayFormula)},`,
         `    intuition: ${JSON.stringify(c.intuition)},`,
@@ -239,6 +241,7 @@ const MODULE = '${slug}';
 function card({
   id,
   conceptId,
+  label = '',
   officialNotation,
   displayFormula,
   intuition,
@@ -257,6 +260,7 @@ function card({
     id,
     module: MODULE,
     conceptId,
+    label,
     officialNotation,
     displayFormula,
     intuition,

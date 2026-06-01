@@ -47,7 +47,7 @@ export function studentizeTaskGapNote(gap) {
   const raw = String(gap ?? "").trim();
   if (!raw) return "";
   if (DEV_JARGON.test(raw) || /portalabdeckung|partial|not yet represented|missing-official/i.test(raw)) {
-    return "Übungsformat (Plattform) — keine item-für-item Übernahme offizieller Klausuraufgaben.";
+    return "Übungen auf der Plattform — nicht jede offizielle Klausuraufgabe ist hier einzeln abgebildet.";
   }
   return raw;
 }

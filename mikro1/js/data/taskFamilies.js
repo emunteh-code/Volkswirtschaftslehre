@@ -14,6 +14,7 @@ function family({
   title,
   topic,
   method,
+  examPedagogy = null,
   sourceStatus = 'direct-source',
   sourceAnchorIds,
   difficulty,
@@ -31,6 +32,7 @@ function family({
     title,
     topic,
     method,
+    examPedagogy,
     sourceStatus,
     sourceAnchorIds,
     difficulty,
@@ -136,6 +138,23 @@ const VL_GROUNDED_FAMILIES = [
     title: "Mikroökonomik I: Exkurs: Maximierung unter einer Nebenbedingung",
     topic: "Exkurs: Maximierung unter einer Nebenbedingung",
     method: "VL-Abschnitt(e) lesen, Methode aus Ankern (mikro1.lagrange.vl02.p17.nebenbedingung, mikro1.lagrange.vl02.p20.nebenbedingungen) ableiten und mit Kapitelaufgaben abgleichen.",
+    examPedagogy: {
+      shortTitle: "Exkurs: Maximierung unter einer Nebenbedingung",
+      ziel: "Nach 10 Min kannst du $\\mathcal{L}=u+\\lambda(m-p_1x_1-p_2x_2)$ aufstellen, drei FOCs (inkl. Budget) ableiten, die Tangentialbedingung $MU_1/MU_2=p_1/p_2$ nutzen und $\\lambda$ als Grenznutzen des Einkommens erklären.",
+      vorgehen: [
+        "Lagrange-Funktion $\\mathcal{L}=u(x_1,x_2)+\\lambda(m-p_1x_1-p_2x_2)$ aufstellen (Vorzeichenkonvention festhalten).",
+        "FOCs: $\\partial\\mathcal{L}/\\partial x_1=0$, $\\partial\\mathcal{L}/\\partial x_2=0$, $\\partial\\mathcal{L}/\\partial\\lambda=0$ (Budget).",
+        "Aus den ersten beiden FOCs Tangentialbedingung $MU_1/MU_2=p_1/p_2$ ableiten.",
+        "Optional: $x_2$ als Funktion von $x_1$ aus der Tangentialbedingung und in die Budgetrestriktion einsetzen.",
+        "$\\lambda$ als $MU_i/p_i$ interpretieren (Grenznutzen pro Euro im Optimum)."
+      ],
+      typicalQuestion: "Gegeben $u(x_1,x_2)$ und Budget $p_1x_1+p_2x_2=m$. Stellen Sie $\\mathcal{L}$ auf, leiten Sie die FOCs her und formulieren Sie die Tangentialbedingung.",
+      traps: [
+        "Dritte FOC nicht vergessen — Ableitung nach $\\lambda$ liefert die Budgetrestriktion.",
+        "Vorzeichen bei $\\mathcal{L}=u-\\lambda(\\cdots)$ vertauscht — $\\lambda$ ändert dann das Vorzeichen.",
+        "Tangentialbedingung mit Budgetsteigung $-p_1/p_2$ verwechseln — GRS ist $MU_1/MU_2>0$."
+      ]
+    },
     sourceStatus: "direct-source",
     sourceAnchorIds: ["mikro1.lagrange.vl02.p17.nebenbedingung","mikro1.lagrange.vl02.p20.nebenbedingungen"],
     difficulty: "mittel",
@@ -151,6 +170,23 @@ const VL_GROUNDED_FAMILIES = [
     title: "Mikroökonomik I: Haushaltsoptimum, analytische Bestimmung",
     topic: "Haushaltsoptimum, analytische Bestimmung",
     method: "Klausurtyp aus VL (mikro1.lagrange.vl02.p20.nebenbedingungen, mikro1.lagrange.vl04.p04.haushaltsoptimum): Rechen- oder Interpretationsschritte mit Portal-Aufgaben verknüpfen und typische Fehlerquellen prüfen.",
+    examPedagogy: {
+      shortTitle: "Haushaltsoptimum (Lagrange rechnen)",
+      ziel: "Nach 10 Min kannst du aus $u$, Preisen und $m$ die optimalen Mengen $x_1^*, x_2^*$ und $\\lambda^*$ berechnen und $\\lambda$ als Grenznutzen des Einkommens deuten.",
+      vorgehen: [
+        "$\\mathcal{L}=u(x_1,x_2)+\\lambda(m-p_1x_1-p_2x_2)$ aufstellen und drei FOCs ableiten.",
+        "Tangentialbedingung $MU_1/MU_2=p_1/p_2$ bilden; eine Menge als Funktion der anderen ausdrücken.",
+        "In die Budgetrestriktion einsetzen und $x_1^*$, $x_2^*$ lösen.",
+        "$\\lambda^*$ aus $MU_i/p_i$ im Optimum berechnen.",
+        "Probe: Budget bindet; kurze Interpretation von $\\lambda$."
+      ],
+      typicalQuestion: "Gegeben $u(x_1,x_2)=x_1^{1/2}x_2^{1/2}$, $p_1=2$, $p_2=4$, $m=40$. Bestimmen Sie $x_1^*$, $x_2^*$ und $\\lambda^*$. Was misst $\\lambda$?",
+      traps: [
+        "Nur Tangentialbedingung lösen — Budgetrestriktion fehlt im Gleichungssystem.",
+        "FOC nach $\\lambda$ überspringen — dann ist die Budgetbindung nicht gesichert.",
+        "$\\lambda$ mit $p_i$ verwechseln — $\\lambda$ ist Grenznutzen des Einkommens, nicht Güterpreis."
+      ]
+    },
     sourceStatus: "direct-source",
     sourceAnchorIds: ["mikro1.lagrange.vl02.p20.nebenbedingungen","mikro1.lagrange.vl04.p04.haushaltsoptimum"],
     difficulty: "schwer",

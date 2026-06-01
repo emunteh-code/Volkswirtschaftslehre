@@ -493,33 +493,6 @@ html { scroll-behavior: smooth; }
   flex: 1;
 }
 
-.lp-tier-badge {
-  flex-shrink: 0;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-family: var(--font-mono);
-}
-
-.lp-tier--core {
-  color: color-mix(in srgb, var(--accent) 85%, var(--text));
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
-}
-
-.lp-tier--beta {
-  color: #fbbf24;
-  border-color: color-mix(in srgb, #fbbf24 40%, var(--border));
-}
-
-.lp-tier--structural {
-  color: var(--muted);
-}
-
 .lp-shelf-note--exam-policy {
   font-size: 0.875rem;
   margin-top: -4px;
@@ -534,46 +507,6 @@ html { scroll-behavior: smooth; }
 .lp-shelf--exam-ready,
 .lp-shelf--trusted-core {
   /* alias */
-}
-
-.lp-activity-chooser {
-  padding: 12px 0 20px;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
-  background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%);
-}
-
-.lp-activity-label {
-  margin: 0 0 10px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.lp-activity-strip {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-}
-
-.lp-activity-link {
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--text);
-  text-decoration: none;
-  padding: 6px 0;
-}
-
-.lp-activity-link:hover,
-.lp-activity-link:focus-visible {
-  color: var(--accent);
-}
-
-.lp-activity-sep {
-  color: var(--muted);
-  user-select: none;
 }
 
 .lp-tile-note-link {
@@ -595,53 +528,6 @@ html { scroll-behavior: smooth; }
   overflow: hidden;
 }
 
-.lp-shelf--exam-cram {
-  padding-top: 8px;
-  padding-bottom: 36px;
-  border-top: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
-}
-
-.lp-shelf-note--exam-cram {
-  font-size: 0.875rem;
-  margin-top: -4px;
-  margin-bottom: 16px;
-  color: var(--muted);
-}
-
-.lp-exam-cram-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.lp-exam-cram-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 12px 18px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-}
-
-.lp-exam-cram-btn:hover,
-.lp-exam-cram-btn:focus-visible {
-  border-color: var(--accent);
-  transform: translateY(-1px);
-}
-
-.lp-exam-cram-btn--primary {
-  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-}
-
-.lp-ilias-btn,
 .official-materials-ilias-btn {
   display: inline-flex;
   align-items: center;
@@ -658,16 +544,10 @@ html { scroll-behavior: smooth; }
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.lp-ilias-btn:hover,
-.lp-ilias-btn:focus-visible,
 .official-materials-ilias-btn:hover,
 .official-materials-ilias-btn:focus-visible {
   border-color: var(--accent);
   transform: translateY(-1px);
-}
-
-.lp-shelf-note--ilias {
-  margin-top: 12px;
 }
 
 .lp-tile-exam-prep {
@@ -675,16 +555,6 @@ html { scroll-behavior: smooth; }
   font-size: 0.8125rem;
   line-height: 1.45;
   color: color-mix(in srgb, var(--muted) 85%, var(--accent) 15%);
-}
-
-@media (max-width: 480px) {
-  .lp-exam-cram-actions {
-    flex-direction: column;
-  }
-
-  .lp-exam-cram-btn {
-    width: 100%;
-  }
 }
 
 .lp-shelf--further-modules {

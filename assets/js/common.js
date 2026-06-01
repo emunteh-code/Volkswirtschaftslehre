@@ -2,10 +2,7 @@ import {
   PUBLIC_MODULES,
   getModuleBySlug,
   getExamReadyCoreModules,
-  getNonCorePublicModules,
-  getReleaseTierLabel,
-  getReleaseTierTooltip,
-  RELEASE_TIERS
+  getNonCorePublicModules
 } from "./modules.js";
 import { SITE_CONFIG } from "./siteConfig.js";
 import { getModuleConceptCount } from "./module-progress-meta.js";
@@ -309,8 +306,8 @@ async function updateHeroShelf(module) {
     if (desc) desc.textContent = "Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.";
     if (meta) meta.innerHTML = "";
     if (btn) {
-      btn.textContent = "Zum empfohlenen Einstieg";
-      btn.href = "#trusted-core";
+      btn.textContent = "Module ansehen";
+      btn.href = "#exam-ready-core";
     }
     return;
   }
@@ -370,19 +367,11 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
       ? `<p class="lp-tile-note">${module.sourceStatusNote} <a class="lp-tile-note-link" href="${module.href}">Modul öffnen →</a></p>`
       : "";
   const coreClass = examReadyCore ? " lp-tile--exam-ready" : "";
-  const tier = module.releaseTier || "beta";
-  const tierLabel = getReleaseTierLabel(tier);
-  const tierTooltip = getReleaseTierTooltip(tier);
-  const tierClass = tier === RELEASE_TIERS.core ? " lp-tier--core" : tier === RELEASE_TIERS.structural ? " lp-tier--structural" : " lp-tier--beta";
-  const tierBadge = tier !== RELEASE_TIERS.core
-    ? `<span class="lp-tier-badge${tierClass}" title="${tierTooltip.replace(/"/g, "&quot;")}">${tierLabel}</span>`
-    : `<span class="lp-tier-badge lp-tier--core" title="${tierTooltip.replace(/"/g, "&quot;")}">${tierLabel}</span>`;
 
   return `
     <a href="${module.href}" class="lp-tile${coreClass}" role="option" data-slug="${module.slug}" id="lpTile_${module.slug}" aria-selected="false" tabindex="-1">
       <div class="lp-tile-head">
         <h3 class="lp-tile-title">${module.title}</h3>
-        ${tierBadge}
       </div>
       <p class="lp-tile-summary">${module.summary}</p>
       ${module.examPrepNote ? `<p class="lp-tile-exam-prep">${module.examPrepNote}</p>` : ""}
@@ -405,25 +394,6 @@ async function renderLandingPage() {
 
   const countLabel = document.getElementById("moduleCountLabel");
   if (countLabel) countLabel.textContent = `${furtherModules.length} Module`;
-
-  const examCramNode = document.getElementById("examCramActions");
-  if (examCramNode) {
-    examCramNode.innerHTML = `
-      <a class="lp-exam-cram-btn lp-exam-cram-btn--primary" href="./mikro1/index.html#budget/aufgaben">
-        Mikro I: Budget + Aufgaben starten →
-      </a>
-      <a class="lp-exam-cram-btn" href="./statistik/index.html#deskriptiv/aufgaben">
-        Statistik: Deskriptiv + Aufgaben →
-      </a>
-    `;
-  }
-
-  const iliasCta = document.getElementById("officialMaterialsLandingCta");
-  const iliasUrl = SITE_CONFIG?.officialMaterialsUrl;
-  if (iliasCta && iliasUrl) {
-    iliasCta.hidden = false;
-    iliasCta.innerHTML = `<a class="lp-ilias-btn" href="${iliasUrl}" target="_blank" rel="noopener noreferrer">Kursmaterialien in ILIAS öffnen</a>`;
-  }
 
   const lastModule = pickInitialLandingModule();
   const defaultModule = lastModule || coreModules[0] || PUBLIC_MODULES[0] || null;
@@ -499,7 +469,7 @@ async function renderLandingPage() {
 
       if (trustedGrid && trustedSnapshots.length) {
         trustedGrid.innerHTML = trustedSnapshots
-          .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot, { trustedCore: true }))
+          .map(({ module, snapshot }) => buildLandingTileHtml(module, snapshot, { examReadyCore: true }))
           .join("");
       }
       if (furtherSnapshots.length) {

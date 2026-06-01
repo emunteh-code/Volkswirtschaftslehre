@@ -66,11 +66,10 @@ export const MODULES = [
     href: "./mikro2/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta",
+    releaseTier: "core",
     examPrepNote: "A−: Oligopol & Spieltheorie exam-ready; Marktversagen ergänzend gekennzeichnet.",
     sourceCorpusInRepo: true,
-    sourceStatusNote:
-      "A−-tauglich: Oligopol & Spieltheorie VL-backed. Marktversagen = gekennzeichnete Ergänzung."
+    sourceStatusNote: "VL-Quellen im Repo; Ergänzungen gekennzeichnet."
   },
   {
     slug: "makro1",
@@ -84,7 +83,7 @@ export const MODULES = [
     href: "./makro1/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta",
+    releaseTier: "core",
     examPrepNote: "A−: IS-LM, Konzept-Check, stepped Aufgaben + ILIAS für Randfälle."
   },
   {
@@ -144,7 +143,7 @@ export const MODULES = [
     href: "./finanzwirtschaft/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta",
+    releaseTier: "core",
     examPrepNote: "A−: NPV, Liquidität, IZF — Klausurtransfer + Konzept-Check."
   },
   {
@@ -174,7 +173,7 @@ export const MODULES = [
     href: "./jahresabschluss/index.html",
     status: "live",
     type: "mixed",
-    releaseTier: "beta",
+    releaseTier: "core",
     examPrepNote: "A−: Buchungssätze, Umlauf, GoB — nummerierte Klausurketten."
   },
   {
@@ -189,7 +188,7 @@ export const MODULES = [
     href: "./recht/index.html",
     status: "live",
     type: "text_doctrinal",
-    releaseTier: "beta",
+    releaseTier: "core",
     examPrepNote: "A−: Mini-Gutachten, Norm-Zitate, Fall-Drills + Konzept-Check."
   },
   {
@@ -204,7 +203,7 @@ export const MODULES = [
     href: "./internationale-wirtschaftsbeziehungen/index.html",
     status: "live",
     type: "quantitative",
-    releaseTier: "beta",
+    releaseTier: "core",
     examPrepNote: "A−: Ricardo, H-O, Zölle, Trilemma — Modellwahl + Konzept-Check."
   }
 ];

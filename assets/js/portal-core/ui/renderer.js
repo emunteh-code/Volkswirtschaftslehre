@@ -21,6 +21,7 @@ import {
 } from "./quellenPanel.js";
 import { filterStudentVisibleTaskFamilies } from "../data/officialTaskIngestion.js";
 import { studentizeMethodText, studentizeTaskGapNote, studentizeTheoryHtml } from "../utils/studentFacingText.js";
+import { enrichTaskFamilyForDisplay } from "./klausurmethodikEnrichment.js";
 import {
   FULL_EXAM_HOME_DESCRIPTION
 } from "../data/examDisclosure.js";
@@ -57,7 +58,7 @@ export function createRenderer({
   homeIntro,
   chapters,
   contentById,
-  intuitionById,
+  intuitionById = {},
   conceptLinks,
   renderGraphPanel,
   graphConcepts,
@@ -933,10 +934,24 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
     const stepNum = index + 1;
     const openAttr = index === 0 && !hasTaskFamilies(current) ? " open" : "";
     const familyKey = escapeHtml(String(family.id || `family-${index}`).replace(/[^\w.-]/g, "_"));
-    const ziel = family.topic || family.title || "";
-    const vorgehen = methodToVorgehenBullets(family.method);
-    const typicalQuestion = family.title || family.topic || "";
-    const traps = Array.isArray(family.commonTraps) ? family.commonTraps : [];
+    const enriched = enrichTaskFamilyForDisplay(family, {
+      conceptId: current,
+      contentEntry: contentById[current],
+      intuitionEntry: intuitionById[current],
+      formulaCards: formulaCardsByConcept[current],
+      courseLabel
+    });
+    const ziel = enriched.ziel;
+    const vorgehen = enriched.vorgehenSteps.length
+      ? enriched.vorgehenSteps
+      : methodToVorgehenBullets(family.method);
+    const typicalQuestion = enriched.typicalQuestion;
+    const traps = enriched.traps.length
+      ? enriched.traps
+      : (Array.isArray(family.commonTraps) ? family.commonTraps : []).filter(
+        (trap) => !/Anker|Übungsblatt-Muster/i.test(String(trap))
+      );
+    const displayTitle = enriched.displayTitle || family.title || family.id;
     const timeMeta = Number.isFinite(family.expectedTimeMinutes)
       ? `${family.expectedTimeMinutes} Min.`
       : "";
@@ -948,13 +963,13 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
       ? `<ul class="klausurmethodik-list klausurmethodik-list--traps">${traps.map((trap) => `<li>${renderSemanticPlainText(trap)}</li>`).join("")}</ul>`
       : "";
     const sourceFootnote = hasAnchors
-      ? `<p class="klausurmethodik-footnote"><button type="button" class="klausurmethodik-source-link" onclick="window.__openQuellen?.()">Quellen anzeigen</button><span class="klausurmethodik-footnote-sep" aria-hidden="true">·</span><span>${family.sourceAnchorIds.length} VL-Stelle${family.sourceAnchorIds.length === 1 ? "" : "n"}</span></p>`
+      ? `<p class="klausurmethodik-footnote"><button type="button" class="klausurmethodik-source-link" onclick="window.__openQuellen?.()">Zur Vorlesung</button></p>`
       : "";
     return `<details class="task-family-card klausurmethodik-accordion"${openAttr} data-family-id="${familyKey}">
 <summary class="klausurmethodik-accordion-head">
 <span class="klausurmethodik-step-num" aria-hidden="true">${stepNum}</span>
 <span class="klausurmethodik-accordion-title-wrap">
-<span class="klausurmethodik-accordion-title">${renderMathTitle(family.title || family.id)}</span>
+<span class="klausurmethodik-accordion-title">${renderMathTitle(displayTitle)}</span>
 ${timeMeta ? `<span class="klausurmethodik-time">${renderSemanticPlainText(timeMeta)}</span>` : ""}
 </span>
 ${renderKlausurmethodikDifficultyChip(family.difficulty)}

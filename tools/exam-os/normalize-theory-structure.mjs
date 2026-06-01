@@ -14,6 +14,7 @@ import {
   countTheoryRecipeCards,
   theoryToHtml
 } from '../../assets/js/portal-core/theory/theoryStructure.js';
+import { collapseOverEscapedLatex } from '../../assets/js/portal-core/utils/latexProtect.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const write = process.argv.includes('--write');
@@ -38,8 +39,9 @@ const slugs = slugsArg.length ? slugsArg.filter((s) => ALL_SLUGS.includes(s)) : 
 
 const PERSISTED_MODULES = new Set(['oekonometrie', 'mathematik']);
 
+/** String.raw templates must not double backslashes — only escape delimiters. */
 function escapeForTemplateLiteral(str) {
-  return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+  return collapseOverEscapedLatex(str).replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
 }
 
 function findConceptBlockBounds(src, conceptId) {

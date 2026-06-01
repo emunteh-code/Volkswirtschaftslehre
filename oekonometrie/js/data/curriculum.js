@@ -517,7 +517,7 @@ resid(reg1)`,
           'Prüfungsstandard: (1) Zielfunktion SSR(β) = Σ(y_i − x_i\'β)² aufschreiben. (2) Begründen, warum quadriert (kein Wegheben, große Fehler stärker gewichtet). (3) Verbindung zu Normalgleichungen X\'(y − Xβ̂) = 0 herstellen. (4) Ausreißer-Effekt über Quadratisierung erklären.',
           'Bei Interpretation: OLS minimiert nicht jeden Punkt, sondern die Gesamtabweichung — Residuen sind der unvermeidbare Modellrest, kein Rechenfehler.'
         ],
-        math: [String.raw`$$\\frac{\\partial SSR}{\\partial \\beta} = -2X'(y-X\\beta) = 0 \\Rightarrow X'(y-X\\hat{\\beta})=0$$`]
+        math: [String.raw`$$\frac{\partial SSR}{\partial \beta} = -2X'(y-X\beta) = 0 \Rightarrow X'(y-X\hat{\beta})=0$$`]
       }
     ],
     warnings: [

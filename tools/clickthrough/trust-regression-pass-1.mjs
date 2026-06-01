@@ -136,8 +136,13 @@ async function runMathLeak(page) {
 const THEORY_BODY_MATH_CASES = [
   { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/theorie' },
   { route: '/internationale-wirtschaftsbeziehungen/index.html', id: 'gravitation', label: 'iwb/gravitation/theorie' },
-  { route: '/oekonometrie/index.html', id: 'ols_objective', label: 'oeko/ols_objective/theorie' }
+  { route: '/oekonometrie/index.html', id: 'ols_objective', label: 'oeko/ols_objective/theorie' },
+  { route: '/mathematik/index.html', id: 'algebra_mengen', label: 'mathematik/algebra_mengen/theorie' }
 ];
+
+/** Bare TeX command fragments visible when backslashes were stripped (e.g. lebi f f). */
+const BARE_TEX_COMMAND_PATTERN =
+  /(?:^|[^\\a-zA-Z])(?:\|\s*[^|]+\|\s*)?(?:le|ge|iff)\b(?:\s+[a-z]\s+){0,3}[a-z](?:\s|$)/i;
 
 /** Heuristic garble signatures from letter-splitting (e.g. X1pX11, M1y, ô X21). */
 const THEORY_GARBLE_PATTERN = '(?:ô\\s+[A-Z]\\d|X\\d+[a-z]X\\d+|\\bM\\d+[a-z]\\b\\s+[A-Z]\\d)';
@@ -146,19 +151,33 @@ async function runTheoryBodyMathIntegrity(page) {
   await page.setViewportSize({ width: 1280, height: 900 });
   for (const t of THEORY_BODY_MATH_CASES) {
     await gotoConcept(page, t.route, t.id);
+    await clickTab(page, 'theorie');
     await page.waitForTimeout(1400);
-    const snap = await page.evaluate((garblePattern) => {
-      const blocks = [...document.querySelectorAll('#content .section-block')];
-      const fragmented = blocks.some((block) => Boolean(block.querySelector('.math-semantic')));
-      const text = blocks.map((block) => block.innerText || '').join('\n');
-      let garbled = false;
-      try {
-        garbled = new RegExp(garblePattern, 'u').test(text);
-      } catch {
-        garbled = false;
-      }
-      return { fragmented, garbled, snippet: text.slice(0, 200) };
-    }, THEORY_GARBLE_PATTERN);
+    const snap = await page.evaluate(
+      ({ garblePattern, bareTexPattern }) => {
+        const blocks = [
+          ...document.querySelectorAll(
+            '#content .section-block, #content .theory-recipe-section, #content .theory-tab-panel'
+          )
+        ];
+        const fragmented = blocks.some((block) => Boolean(block.querySelector('.math-semantic')));
+        const text = blocks.map((block) => block.innerText || '').join('\n');
+        let garbled = false;
+        let bareTexCommand = false;
+        try {
+          garbled = new RegExp(garblePattern, 'u').test(text);
+        } catch {
+          garbled = false;
+        }
+        try {
+          bareTexCommand = new RegExp(bareTexPattern, 'u').test(text);
+        } catch {
+          bareTexCommand = false;
+        }
+        return { fragmented, garbled, bareTexCommand, snippet: text.slice(0, 240) };
+      },
+      { garblePattern: THEORY_GARBLE_PATTERN, bareTexPattern: BARE_TEX_COMMAND_PATTERN }
+    );
     if (snap.fragmented) {
       fail({
         system: 'theory-body-math',
@@ -177,6 +196,16 @@ async function runTheoryBodyMathIntegrity(page) {
         viewport: '1280',
         type: 'garbled-math-text',
         why: `Theory text matches garble heuristic: "${snap.snippet}"`
+      });
+    }
+    if (snap.bareTexCommand) {
+      fail({
+        system: 'theory-body-math',
+        route: t.label,
+        surface: 'theorie',
+        viewport: '1280',
+        type: 'bare-tex-command',
+        why: `Theory shows stripped TeX commands (le/ge/iff): "${snap.snippet}"`
       });
     }
   }

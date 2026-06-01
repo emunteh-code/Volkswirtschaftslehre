@@ -56,7 +56,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <p><strong>Bilanzgleichung</strong></p><div class="math-block">$$A = P = EK + FK$$</div><p>Mittelverwendung entspricht Mittelherkunft.</p>
 <p><strong>Jahresergebnis</strong></p><div class="math-block">$$Jahresergebnis = Erträge - Aufwendungen$$</div><p>Die GuV erklärt die Erfolgsänderung der Periode.</p>
-<p><strong>EK-Veränderung</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta EK = Jahresergebnis \\\\\\\\\\\\\\\\pm \\\\\\\\\\\\\\\\text{Ergebnisverwendung}$$</div><p>GuV und Bilanz sind über das Eigenkapital verbunden.</p>
+<p><strong>EK-Veränderung</strong></p><div class="math-block">$$\Delta EK = Jahresergebnis \pm \text{Ergebnisverwendung}$$</div><p>GuV und Bilanz sind über das Eigenkapital verbunden.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -64,7 +64,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bilanz und GuV als zwei Perspektiven</h4>
 <p>Die Bilanz ist stichtagsbezogen und zeigt Vermögen und Kapital am Abschlussstichtag. Die GuV ist periodenbezogen und erklärt, wie der Jahreserfolg entstanden ist. Beide zusammen liefern erst das vollständige Bild des Unternehmens.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Aktiva} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Passiva} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Eigenkapital} + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Fremdkapital}$$</div>
+         <div class="math-block math-block--theory">$$\text{Aktiva} = \text{Passiva} = \text{Eigenkapital} + \text{Fremdkapital}$$</div>
 
 
 <h4 class="theory-subsection-title">Doppelte Buchführung als Stabilitätsmechanismus</h4>
@@ -447,7 +447,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Planmäßige und außerplanmäßige Abschreibung</h4>
 <p>Planmäßige Abschreibungen verteilen Anschaffungs- oder Herstellungskosten über die Nutzungsdauer. Außerplanmäßige Abschreibungen greifen bei Wertminderungen. Beide sind klausurtypisch, weil sie Bilanzwert und Periodenerfolg zugleich beeinflussen.</p>
-         <div class="math-block math-block--theory">$$AfA_{linear} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{AK - RW}{n}$$</div>
+         <div class="math-block math-block--theory">$$AfA_{linear} = \frac{AK - RW}{n}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -500,7 +500,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Strenges Niederstwertprinzip</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Bilanzwert} = \\\\\\\\\\\\\\\\min(AK,\\\\\\\\\\\\\\\\ beizulegender\\\\\\\\\\\\\\\\ Wert)</div><p>Beim Umlaufvermögen zählt stets der niedrigere Wert.</p>
-<p><strong>Durchschnittspreis</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\bar p = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\sum Anschaffungskosten}{\\\\\\\\\\\\\\\\sum Menge}$$</div><p>Typische Bewertungsvereinfachung.</p>
+<p><strong>Durchschnittspreis</strong></p><div class="math-block">$$\bar p = \frac{\sum Anschaffungskosten}{\sum Menge}$$</div><p>Typische Bewertungsvereinfachung.</p>
 <p><strong>FIFO-Verbrauch</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Verbrauch} = \\\\\\\\\\\\\\\\text{älteste Zugänge zuerst}</div><p>Endbestand enthält die jüngsten Einheiten.</p>
 </div>
 </section>
@@ -518,7 +518,7 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">FIFO-Beispiel (Companion-Logik)</h4>
 <p>Zugänge: 100 Stück à 5 €, danach 50 Stück à 6 €. Verbrauch 120 Stück. FIFO ordnet zuerst die älteren, günstigeren Zugänge dem Verbrauch zu; der Endbestand enthält die jüngeren, teureren Einheiten.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Verbrauchswert}_{FIFO} = 100\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot 5 + 20\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot 6 = 620,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad SB = 30\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot 6 = 180$$</div>
+         <div class="math-block math-block--theory">$$\text{Verbrauchswert}_{FIFO} = 100\cdot 5 + 20\cdot 6 = 620,\quad SB = 30\cdot 6 = 180$$</div>
          <p>Der Materialaufwand steigt gegenüber einer Durchschnittsmethode, wenn die jüngeren Zugänge teurer sind — der Periodengewinn fällt entsprechend.</p>
 </div>
 </section>
@@ -593,12 +593,12 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fortschreibungsmethode im Detail</h4>
 <p>Die Companion-Materialien betonen: Bei der Fortschreibungsmethode wird der Verbrauch laufend direkt gebucht (z. B. Material an Rohstoffe). Das Bestandskonto zeigt damit fortlaufend den aktuellen Bestand. Klausurstark ist die Unterscheidung: laufende Entnahmebuchung statt periodenendbezogener Verbrauchsermittlung.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Entnahme: Material an Rohstoffe}$$</div>
+         <div class="math-block math-block--theory">$$\text{Entnahme: Material an Rohstoffe}$$</div>
 
 
 <h4 class="theory-subsection-title">Inventurmethode und Periodenabschluss</h4>
 <p>Bei der Inventurmethode bleibt der Verbrauch bis zur Inventur im Bestandskonto; erst am Periodenende wird der tatsächliche Verbrauch aus Anfangs- und Endbestand ermittelt und dann auf das Materialkonto umgebucht. Die Quelle fordert hier ausdrücklich Übungsrechnungen zu beiden Wegen.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Verbrauch} = AB + Zugänge - SB$$</div>
+         <div class="math-block math-block--theory">$$\text{Verbrauch} = AB + Zugänge - SB$$</div>
 
 
 <h4 class="theory-subsection-title">Unfertige und fertige Erzeugnisse</h4>
@@ -679,7 +679,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Zahllast</strong></p><div class="math-block">$$Zahllast = USt - VSt$$</div><p>Abzuführende Umsatzsteuer nach Vorsteuerabzug.</p>
-<p><strong>Netto aus Brutto</strong></p><div class="math-block">$$Netto = \\\\\\\\\\\\\\\\frac{Brutto}{1 + Steuersatz}$$</div><p>Hilft bei Skonto- und Umsatzsteuerfällen.</p>
+<p><strong>Netto aus Brutto</strong></p><div class="math-block">$$Netto = \frac{Brutto}{1 + Steuersatz}$$</div><p>Hilft bei Skonto- und Umsatzsteuerfällen.</p>
 <p><strong>Warenverbrauch</strong></p><div class="math-block">$$WB = Anfangsbestand + Zugänge - Endbestand$$</div><p>Getrenntes Warenkontensystem.</p>
 </div>
 </section>
@@ -730,9 +730,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Eigenkapitalquote</strong></p><div class="math-block">$$EK\\\\\\\\\\\\\\\\text{-Quote} = \\\\\\\\\\\\\\\\frac{EK}{Bilanzsumme}$$</div><p>Zentrale Kennzahl zur Finanzierungsstruktur.</p>
+<p><strong>Eigenkapitalquote</strong></p><div class="math-block">$$EK\text{-Quote} = \frac{EK}{Bilanzsumme}$$</div><p>Zentrale Kennzahl zur Finanzierungsstruktur.</p>
 <p><strong>Jahresüberschuss</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Teil des Eigenkapitals nach Erfolgsrechnung}</div><p>Verbindet GuV und Bilanz.</p>
-<p><strong>Gesetzliche Rücklage</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Einstellung} = 5\\\\\\\\\\\\\\\\% \\\\\\\\\\\\\\\\cdot Jahresüberschuss$$</div><p>Vereinfachte Klausurform (bis Obergrenze).</p>
+<p><strong>Gesetzliche Rücklage</strong></p><div class="math-block">$$\text{Einstellung} = 5\\% \cdot Jahresüberschuss$$</div><p>Vereinfachte Klausurform (bis Obergrenze).</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -749,7 +749,7 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Gesetzliche Gewinnrücklage</h4>
 <p>Bei Kapitalgesellschaften ist ein Teil des Jahresüberschusses in die gesetzliche Gewinnrücklage einzustellen (typisch 5 % des Jahresüberschusses, bis eine Obergrenze erreicht ist). Die Einstellung erhöht die Rücklagen und reduziert den ausschüttungsfähigen Bilanzgewinn — ein klassischer Abschluss-Schritt nach der GuV.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Einstellung}_{ges.\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ Rücklage} = 0{,}05 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\max(0,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ Jahresüberschuss)$$</div>
+         <div class="math-block math-block--theory">$$\text{Einstellung}_{ges.\\ Rücklage} = 0{,}05 \cdot \max(0,\\ Jahresüberschuss)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -807,7 +807,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <p><strong>Privatkonto-Abschluss</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Privatkonto} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Kapitalkonto}</div><p>Einlagen/Entnahmen werden periodisch überführt.</p>
 <p><strong>Gewinnzuweisung</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{GuV-Ergebnis} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Kapitalkonten der Gesellschafter}</div><p>Erfolgszuordnung nach Beteiligungslogik.</p>
-<p><strong>Gewinnanteil</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Anteil}_i = \\\\\\\\\\\\\\\\text{GuV-Ergebnis} \\\\\\\\\\\\\\\\times \\\\\\\\\\\\\\\\text{Beteiligungsquote}_i$$</div><p>Verteilung auf Gesellschafterkonten.</p>
+<p><strong>Gewinnanteil</strong></p><div class="math-block">$$\text{Anteil}_i = \text{GuV-Ergebnis} \times \text{Beteiligungsquote}_i$$</div><p>Verteilung auf Gesellschafterkonten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">

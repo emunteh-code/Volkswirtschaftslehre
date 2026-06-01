@@ -63,7 +63,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <p><strong>Leitobjekt</strong></p><div class="math-block">[object Object]</div><p>Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.</p>
 <p><strong>Leitfrage</strong></p><div class="math-block">[object Object]</div><p>Gute Finanzwirtschaft verbindet alle drei Ebenen.</p>
-<p><strong>Zeitwert</strong></p><div class="math-block">$$BW = \\\\\\\\\\\\\\\\sum_{t=0}^{n} \\\\\\\\\\\\\\\\frac{z_t}{(1+i)^t}$$</div><p>Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</p>
+<p><strong>Zeitwert</strong></p><div class="math-block">$$BW = \sum_{t=0}^{n} \frac{z_t}{(1+i)^t}$$</div><p>Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -122,9 +122,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Kumulierter Saldo</strong></p><div class="math-block">$$K_t = \\\\\\\\\\\\\\\\sum_{\\\\\\\\\\\\\\\\tau=0}^{t} Ein_\\\\\\\\\\\\\\\\tau - \\\\\\\\\\\\\\\\sum_{\\\\\\\\\\\\\\\\tau=0}^{t} Aus_\\\\\\\\\\\\\\\\tau$$</div><p>Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</p>
+<p><strong>Kumulierter Saldo</strong></p><div class="math-block">$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$</div><p>Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</p>
 <p><strong>Goldene Bilanzregel</strong></p><div class="math-block">[object Object]</div><p>Langfristige Bindung verlangt langfristige Finanzierung.</p>
-<p><strong>Maximaler Bedarf</strong></p><div class="math-block">$$KB_{max} = -\\\\\\\\\\\\\\\\min_t K_t$$</div><p>Finanzierungsbedarf aus tiefstem kumulierten Saldo.</p>
+<p><strong>Maximaler Bedarf</strong></p><div class="math-block">$$KB_{max} = -\min_t K_t$$</div><p>Finanzierungsbedarf aus tiefstem kumulierten Saldo.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -138,8 +138,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Liquiditätsplan</h4>
-<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
-      <div class="math-block">$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$</div>
+<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\min_t KS_t|$ (tiefster Punkt).</p>
+      <div class="math-block">$$KS_t = \sum_{s=0}^{t} Saldo_s,\quad \text{Bedarf} = |\min_t KS_t|$$</div>
 
 
 <h4 class="theory-subsection-title">Klausurtransfer</h4>
@@ -369,7 +369,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Intertemporale Wahl</h4>
 <p>Fisher-Trennung: Investitionsentscheidung (NPV) unabhängig von Finanzierung bei perfekten Märkten. Präferenz über $(c_0,c_1)$: Budget $c_0 + c_1/(1+i) = W$. Glättung des Konsums über Perioden.</p>
-      <div class="math-block">$$NPV = \\sum_t \\frac{CF_t}{(1+i)^t}$$</div>
+      <div class="math-block">$$NPV = \sum_t \frac{CF_t}{(1+i)^t}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -420,7 +420,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">NPV-Regel</h4>
 <p>NPV $>0$ → Investition erhöht Vermögen (unter perfekten Kapitalmärkten und einheitlichem $i$). Fisher-Trennung: Investitions- und Finanzierungsentscheidung trennbar.</p>
-      <div class="math-block">$$NPV = \\sum_{t=0}^{T} \\frac{CF_t}{(1+i)^t}$$</div>
+      <div class="math-block">$$NPV = \sum_{t=0}^{T} \frac{CF_t}{(1+i)^t}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -495,10 +495,10 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Aufzinsen und Abzinsen</h4>
 <p>Aufzinsen bringt Zahlungen in die Zukunft, Abzinsen in die Gegenwart. Beide Operationen sind Spiegelbilder und müssen immer mit Blick auf den Zielzeitpunkt eingesetzt werden.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\begin{aligned}
-EW_n &= BW_0 (1+i)^n \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-BW_0 &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{EW_n}{(1+i)^n}
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end{aligned}$$</div>
+         <div class="math-block math-block--theory">$$\begin{aligned}
+EW_n &= BW_0 (1+i)^n \\
+BW_0 &= \frac{EW_n}{(1+i)^n}
+\end{aligned}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -566,8 +566,8 @@ BW_0 &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{EW_n}{(1+i)^n}
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Rentenfaktor</h4>
-<p>Endwert einer Rente: $FV = C \\cdot \\frac{(1+i)^n-1}{i}$. Barwert: Division durch $(1+i)^n$ pro Periode.</p>
-      <div class="math-block">$$FV = C \\cdot \\frac{(1+i)^n-1}{i}$$</div>
+<p>Endwert einer Rente: $FV = C \cdot \frac{(1+i)^n-1}{i}$. Barwert: Division durch $(1+i)^n$ pro Periode.</p>
+      <div class="math-block">$$FV = C \cdot \frac{(1+i)^n-1}{i}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -587,7 +587,7 @@ BW_0 &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{EW_n}{(1+i)^n}
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Renten</h4>
-<p>Nachschüssig vs. vorschüssig: Faktor $(1+i)$ multiplizieren bei vorschüssig. Barwert Rente: $PV = C \\cdot \\frac{1-(1+i)^{-n}}{i}$. Permanente Rente: $PV = C/i$ bei $n\\to\\infty$.</p>
+<p>Nachschüssig vs. vorschüssig: Faktor $(1+i)$ multiplizieren bei vorschüssig. Barwert Rente: $PV = C \cdot \frac{1-(1+i)^{-n}}{i}$. Permanente Rente: $PV = C/i$ bei $n\to\infty$.</p>
 
 
 <h4 class="theory-subsection-title">Klausurpfad</h4>
@@ -640,10 +640,10 @@ BW_0 &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{EW_n}{(1+i)^n}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Annuität als äquivalente Periodengröße</h4>
 <p>Die Annuitätenmethode drückt den Kapitalwert einer Investition als äquivalente konstante Periodenzahlung aus: dieselbe Zahlungsreihe wird in eine Rente mit gleichem Barwert übersetzt. Damit wird der Wertbeitrag einer Investition periodisch lesbar und mit anderen periodischen Größen vergleichbar.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\begin{aligned}
-a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-&= K_0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot WGF(n,i)
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end{aligned}$$</div>
+         <div class="math-block math-block--theory">$$\begin{aligned}
+a &= \frac{K_0}{RBWF(n,i)} \\
+&= K_0 \cdot WGF(n,i)
+\end{aligned}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -661,8 +661,8 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Annuität</h4>
-<p>Annuität $A = K \\cdot \\frac{i(1+i)^n}{(1+i)^n-1}$. Tilgungsplan: Zinsanteil fällt, Tilgung steigt bei konstanter Annuität. Finanzplan: Liquidität periodengerecht — nicht nur NPV.</p>
-      <div class="math-block">$$A = K \\cdot \\frac{i(1+i)^n}{(1+i)^n-1}$$</div>
+<p>Annuität $A = K \cdot \frac{i(1+i)^n}{(1+i)^n-1}$. Tilgungsplan: Zinsanteil fällt, Tilgung steigt bei konstanter Annuität. Finanzplan: Liquidität periodengerecht — nicht nur NPV.</p>
+      <div class="math-block">$$A = K \cdot \frac{i(1+i)^n}{(1+i)^n-1}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -713,12 +713,12 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">IZF als Nullstelle der Kapitalwertfunktion</h4>
 <p>Der interne Zinsfuß ist der Zinssatz, bei dem der Kapitalwert einer Zahlungsreihe null wird. Er sagt also: Bei welchem Marktzinssatz wäre das Projekt gerade noch wertneutral?</p>
-         <div class="math-block math-block--theory">$$0 = -A_0 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{t=1}^{n}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{CF_t}{(1+r)^t}$$</div>
+         <div class="math-block math-block--theory">$$0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}$$</div>
 
 
 <h4 class="theory-subsection-title">Kapitalwertfunktion und IZF in der Rechnung</h4>
 <p>Für $CF_0=-100$ und $CF_1=130$ gilt $K(r)=-100+130/(1+r)$. Der IZF löst $K(r^*)=0$, hier $r^*=30%$. Am Marktzins $i=8%$ ist $K(0{,}08)=20{,}37>0$ — Projekt vorteilhaft, obwohl beide Größen zusammen gelesen werden müssen.</p>
-         <div class="math-block math-block--theory">$$K(r) = -A_0 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{t=1}^{n}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{CF_t}{(1+r)^t}, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad r^*:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\; K(r^*)=0$$</div>
+         <div class="math-block math-block--theory">$$K(r) = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}, \qquad r^*:\\; K(r^*)=0$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -733,7 +733,7 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Kapitalwertfunktion</h4>
 <p>$NPV(i)$ fällt in $i$ bei normalen Cashflows. IRR = Nullstelle von $NPV(i)$. Mehrere IRR bei nicht-monotonen Cashflows — dann NPV-Kriterium.</p>
-      <div class="math-block">$$NPV(i) = \\sum_{t=0}^{T} \\frac{CF_t}{(1+i)^t},\\quad NPV(i^*)=0 \\Rightarrow i^* = IRR$$</div>
+      <div class="math-block">$$NPV(i) = \sum_{t=0}^{T} \frac{CF_t}{(1+i)^t},\quad NPV(i^*)=0 \Rightarrow i^* = IRR$$</div>
 
 
 <h4 class="theory-subsection-title">Klausurtransfer IZF</h4>
@@ -885,9 +885,9 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Erwartungswert</strong></p><div class="math-block">$$E(X) = \\\\\\\\\\\\\\\\sum_s p_s x_s$$</div><p>Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.</p>
-<p><strong>Varianz</strong></p><div class="math-block">$$Var(X)= \\\\\\\\\\\\\\\\sum_s p_s(x_s-E(X))^2$$</div><p>Streuungsmaß der Ergebnisse um ihren Erwartungswert.</p>
-<p><strong>Varianz (Merksatz)</strong></p><div class="math-block">$$Var(X)= \\\\\\\\\\\\\\\\sum_s p_s(x_s-E(X))^2$$</div><p>Streuungsmaß der Ergebnisse um ihren Erwartungswert.</p>
+<p><strong>Erwartungswert</strong></p><div class="math-block">$$E(X) = \sum_s p_s x_s$$</div><p>Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.</p>
+<p><strong>Varianz</strong></p><div class="math-block">$$Var(X)= \sum_s p_s(x_s-E(X))^2$$</div><p>Streuungsmaß der Ergebnisse um ihren Erwartungswert.</p>
+<p><strong>Varianz (Merksatz)</strong></p><div class="math-block">$$Var(X)= \sum_s p_s(x_s-E(X))^2$$</div><p>Streuungsmaß der Ergebnisse um ihren Erwartungswert.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -899,7 +899,7 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 
 <h4 class="theory-subsection-title">Erwartungswert, Varianz und Verlustseite</h4>
 <p>Dominanz ist das erste Filtersieb: Wer in jedem Zustand schlechter ist, muss nicht weiter diskutiert werden. Danach kommen Erwartungswert, Verlustwahrscheinlichkeit und gegebenenfalls weitere Risikomaße ins Spiel.</p>
-         <div class="math-block math-block--theory">$$E(X) = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{s} p_s x_s \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad Var(X)= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_s p_s(x_s-E(X))^2$$</div>
+         <div class="math-block math-block--theory">$$E(X) = \sum_{s} p_s x_s \qquad Var(X)= \sum_s p_s(x_s-E(X))^2$$</div>
 
 
 <h4 class="theory-subsection-title">Interpretation statt bloßer Kennzahl</h4>
@@ -911,7 +911,7 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Unsicherheit</h4>
-<p>Erwartungswert-Kriterium: $E[NPV]$ bei Szenarien. Risikoaversion: Risikoadjustierung via höherem Diskontsatz oder CAPM ($k_E = r_f + \\beta(r_m-r_f)$).</p>
+<p>Erwartungswert-Kriterium: $E[NPV]$ bei Szenarien. Risikoaversion: Risikoadjustierung via höherem Diskontsatz oder CAPM ($k_E = r_f + \beta(r_m-r_f)$).</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -970,20 +970,20 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Risikozuschlagsmethode</h4>
 <p>Bei der Risikozuschlagsmethode wird der sichere Kalkulationszins um einen Zuschlag erhöht. Riskantere Projekte werden dadurch stärker abgezinst.</p>
-         <div class="math-block math-block--theory">$$K_0^{risk} = -A_0 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{t=1}^{n}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{E(CF_t)}{(1+i+d)^t}$$</div>
+         <div class="math-block math-block--theory">$$K_0^{risk} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)}{(1+i+d)^t}$$</div>
 
 
 <h4 class="theory-subsection-title">Sicherheitsabschlag auf Cashflows</h4>
 <p>Alternativ kann Risiko direkt auf der Zahlungsseite berücksichtigt werden: Statt die erwarteten Zahlungen unverändert zu verwenden, werden Risikoabschläge vorgenommen. So bleibt der Diskontsatz unverändert, während der Zahlungsstrom vorsichtiger angesetzt wird.</p>
-         <div class="math-block math-block--theory">$$K_0^{safe} = -A_0 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{t=1}^{n}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{E(CF_t)-D_t}{(1+i)^t}$$</div>
+         <div class="math-block math-block--theory">$$K_0^{safe} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)-D_t}{(1+i)^t}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Risikoadjustierter NPV</h4>
-<p>Certainty Equivalent oder risikoadjustierter Diskontsatz. CAPM: Projektrisiko über $\\beta$ — nicht Firmen-$\\beta$ blind übernehmen bei diversifiziertem Investor.</p>
-      <div class="math-block">$$k = r_f + \\beta (r_m - r_f)$$</div>
+<p>Certainty Equivalent oder risikoadjustierter Diskontsatz. CAPM: Projektrisiko über $\beta$ — nicht Firmen-$\beta$ blind übernehmen bei diversifiziertem Investor.</p>
+      <div class="math-block">$$k = r_f + \beta (r_m - r_f)$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -1041,10 +1041,10 @@ a &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{K_0}{RBWF(n,i)} \\\\\\\\\\\\\\\\\\\\\\
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Theoretischer Ex-Kurs und Bezugsrechtswert</h4>
 <p>Der theoretische Ex-Kurs ergibt sich aus dem Gesamtwert von alten und neuen Aktien nach der Kapitalerhöhung geteilt durch die neue Aktienzahl. Aus der Differenz zwischen altem Kurs und Ex-Kurs lässt sich der Wert des Bezugsrechts ableiten.</p>
-         <div class="math-block math-block--theory">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\begin{aligned}
-P_{ex} &= \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{nP_0 + mP_N}{n+m} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+         <div class="math-block math-block--theory">$$\begin{aligned}
+P_{ex} &= \frac{nP_0 + mP_N}{n+m} \\
 BR &= P_0 - P_{ex}
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end{aligned}$$</div>
+\end{aligned}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1122,7 +1122,7 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Eigenkapitalkosten über das Dividendenbarwertmodell</h4>
 <p>Beim Dividendenbarwertmodell wird der Aktienpreis als Barwert erwarteter Dividenden gelesen. Daraus lässt sich die von den Eigenkapitalgebern geforderte Rendite ableiten.</p>
-         <div class="math-block math-block--theory">$$k_E = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{D_1}{P_0} + g$$</div>
+         <div class="math-block math-block--theory">$$k_E = \frac{D_1}{P_0} + g$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1223,7 +1223,7 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Skonto und Lieferantenkredit</h4>
 <p>Wer auf Skonto verzichtet, nutzt implizit einen kurzfristigen Lieferantenkredit. Genau deshalb kann ein kleiner Skontosatz auf Jahresbasis sehr hohe effektive Fremdkapitalkosten bedeuten.</p>
-         <div class="math-block math-block--theory">$$k_{Skonto} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\approx \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{s}{1-s}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{360}{T-Z}$$</div>
+         <div class="math-block math-block--theory">$$k_{Skonto} \approx \frac{s}{1-s}\cdot\frac{360}{T-Z}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1306,12 +1306,12 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gewichtete Gesamtkapitalkosten</h4>
 <p>Der WACC fasst die Kosten von Eigen- und Fremdkapital entsprechend ihrer Anteile an der Finanzierung zusammen. Er ist damit die aggregierte Preisgröße der gesamten Kapitalstruktur.</p>
-         <div class="math-block math-block--theory">$$WACC = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{E}{E+D}k_E + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{D}{E+D}k_D$$</div>
+         <div class="math-block math-block--theory">$$WACC = \frac{E}{E+D}k_E + \frac{D}{E+D}k_D$$</div>
 
 
 <h4 class="theory-subsection-title">Wann der WACC als Kalkulationszins passt</h4>
 <p>Der WACC ist nur dann als Diskontsatz brauchbar, wenn das Bewertungsobjekt dieselbe Risiko- und Kapitalstruktur aufweist wie die Größen, aus denen der WACC abgeleitet wurde. Genau deshalb ist er kein Universalwerkzeug für jedes Projekt, sondern ein konditional passender Satz.</p>
-         <div class="math-block math-block--theory">$$K_0 = -A_0 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{t=1}^{n}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{CF_t}{(1+WACC)^t}$$</div>
+         <div class="math-block math-block--theory">$$K_0 = -A_0 + \sum_{t=1}^{n}\frac{CF_t}{(1+WACC)^t}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1390,7 +1390,7 @@ BR &= P_0 - P_{ex}
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">WACC</h4>
-<p>$WACC = w_E k_E + w_D k_D (1-\\tau)$. Leverage erhöht Eigenkapitalrendite (Leverage-Effekt), aber auch Risiko.</p>
+<p>$WACC = w_E k_E + w_D k_D (1-\tau)$. Leverage erhöht Eigenkapitalrendite (Leverage-Effekt), aber auch Risiko.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1398,7 +1398,7 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Leverage-Ertrag</h4>
 <p>Mehr Fremdkapital kann die Eigenkapitalrendite erhöhen, solange die Rendite des Gesamtkapitals über den Fremdkapitalkosten liegt. Dann arbeitet der Hebel zugunsten der Eigentümer.</p>
-         <div class="math-block math-block--theory">$$r_E = r_U + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{D}{E}(r_U-r_D)$$</div>
+         <div class="math-block math-block--theory">$$r_E = r_U + \frac{D}{E}(r_U-r_D)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1510,7 +1510,7 @@ BR &= P_0 - P_{ex}
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: MM</h4>
-<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \\tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
+<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>

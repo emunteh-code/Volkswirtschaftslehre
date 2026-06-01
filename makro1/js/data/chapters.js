@@ -45,7 +45,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die Kernvariablen der Makroökonomik</h4>
-<p>Makro I arbeitet immer wieder mit denselben Größen: Produktion $Y$, Konsum $C$, Investitionen $I$, Staatsausgaben $G$, Steuern $T$, Geldmenge $M$, Zins $i$, Realzins $r$, Preisniveau $P$, Inflation $\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi$ und Arbeitslosenquote $u$.</p>
+<p>Makro I arbeitet immer wieder mit denselben Größen: Produktion $Y$, Konsum $C$, Investitionen $I$, Staatsausgaben $G$, Steuern $T$, Geldmenge $M$, Zins $i$, Realzins $r$, Preisniveau $P$, Inflation $\pi$ und Arbeitslosenquote $u$.</p>
         <div class="math-block">$$Y = C + I + G$$</div>
         <p>Wichtig ist, dass dieselbe Variable je nach Kapitel eine andere Rolle spielt: $Y$ ist im Gütermarkt das Gleichgewichtsergebnis, im Arbeitsmarkt aber mit Beschäftigung und Produktionspotenzial verknüpft.</p>
 </div>
@@ -152,7 +152,7 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Geplante Nachfrage und Konsumfunktion</h4>
 <p>Die geplante Nachfrage $Z$ setzt sich aus Konsum, Investitionen und Staatsausgaben zusammen. Der Konsum hängt positiv vom verfügbaren Einkommen ab.</p>
         <div class="math-block">$$Z = C + I + G$$</div>
-        <div class="math-block">$$C = c_0 + c_1(Y - T), \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad 0 < c_1 < 1$$</div>
+        <div class="math-block">$$C = c_0 + c_1(Y - T), \qquad 0 < c_1 < 1$$</div>
         <p>$c_0$ ist autonomer Konsum, $c_1$ die marginale Konsumquote. Weil nur ein Teil jedes zusätzlichen Einkommens konsumiert wird, bleibt die Nachfragekurve flacher als die 45°-Linie.</p>
 
 
@@ -226,19 +226,19 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Herleitung des Multiplikators</h4>
 <p>Aus $Y = c_0 + c_1(Y-T) + I + G$ folgt nach Auflösen nach $Y$:</p>
-        <div class="math-block">$$Y = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{1-c_1}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\left(c_0 + I + G - c_1T\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\right)$$</div>
+        <div class="math-block">$$Y = \frac{1}{1-c_1}\left(c_0 + I + G - c_1T\right)$$</div>
         <p>Der Faktor $1/(1-c_1)$ ist der Multiplikator. Je größer $c_1$, desto stärker reagiert die Produktion auf autonome Nachfrageimpulse.</p>
 
 
 <h4 class="theory-subsection-title">Staatsausgaben-, Steuer- und Sparparadox</h4>
 <p>Eine Erhöhung der Staatsausgaben wirkt direkt auf die Nachfrage und wird dann über weitere Konsumrunden verstärkt. Steuersenkungen wirken ebenfalls expansiv, aber etwas schwächer, weil nur der konsumierte Teil des zusätzlichen verfügbaren Einkommens nachfragewirksam wird.</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial Y}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial G} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{1-c_1}, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial Y}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial T} = -\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{c_1}{1-c_1}$$</div>
+        <div class="math-block">$$\frac{\partial Y}{\partial G} = \frac{1}{1-c_1}, \qquad \frac{\partial Y}{\partial T} = -\frac{c_1}{1-c_1}$$</div>
         <p>Das Sparparadox beschreibt, dass der Versuch aller Haushalte, mehr zu sparen, das Einkommen senkt. Aggregiert kann dadurch die tatsächliche Ersparnis kaum steigen oder sogar unverändert bleiben.</p>
 
 
 <h4 class="theory-subsection-title">Ausgaben- und Einkommensmultiplikator</h4>
 <p>Der <strong>Ausgabenmultiplikator</strong> $1/(1-c_1)$ misst die Wirkung autonomer Nachfrage auf $Y$. Der <strong>Einkommensmultiplikator</strong> (Steuermultiplikator) $-c_1/(1-c_1)$ ist kleiner, weil Steuerentlastung nur den konsumierten Anteil $(1-s)$ des zusätzlichen Einkommens aktiviert.</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Delta Y = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{1-c_1}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Delta A + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{-c_1}{1-c_1}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Delta T$$</div>
+        <div class="math-block">$$\Delta Y = \frac{1}{1-c_1}\Delta A + \frac{-c_1}{1-c_1}\Delta T$$</div>
         <p>Bei ausgeglichenem Haushalt ($Delta G = Delta T$) bleibt ein positiver Nettoeffekt — das ist der klassische balanced-budget-Multiplikator von 1 in der einfachen Form ohne proportionale Steuern.</p>
 </div>
 </section>
@@ -361,7 +361,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Mindestreserve und Geldschöpfung</h4>
 <p>Bei einem Mindestreservesatz $	heta$ muss ein Teil der Einlagen als Reserve gehalten werden. In einem stark vereinfachten Modell ergibt sich daraus ein Einlagenmultiplikator.</p>
-        <div class="math-block">$$m_D = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\theta}$$</div>
+        <div class="math-block">$$m_D = \frac{1}{\theta}$$</div>
         <p>Je niedriger die Reservequote, desto größer kann bei gegebenem Zentralbankgeldbestand das Einlagenvolumen werden. Real ist die Geldschöpfung aber nicht nur durch Reserven, sondern auch durch Kapitalvorschriften, Risikoprämien und Kreditnachfrage begrenzt.</p>
 </div>
 </section>
@@ -369,7 +369,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Geldmultiplikator Vorsicht</h4>
-<p>Der einfache Multiplikator $M = m \\cdot B$ ist didaktisch; in der Praxis dominieren Zinssteuerung und Kreditnachfrage.</p>
+<p>Der einfache Multiplikator $M = m \cdot B$ ist didaktisch; in der Praxis dominieren Zinssteuerung und Kreditnachfrage.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Endogenes Geld:</strong> Geldmenge folgt oft dem Zinsziel, nicht umgekehrt.</div>
 </div>
 </section>
@@ -377,8 +377,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Banken und Geld</h4>
-<p>Kreditmultiplikator didaktisch: $\\Delta M \\approx m \\cdot \\Delta B$ bei Reservequote. Endogenes Geld: ZB steuert Leitzins → Banken passen Kreditvergabe an. Finanzkrise: Bilanzschocks → Kreditrationierung → $I\\downarrow$, $Y\\downarrow$ (Finanzielle Akzelerator).</p>
-      <div class="math-block">$$M = m \\cdot B,\\quad m = \\frac{1+r}{r}$$</div>
+<p>Kreditmultiplikator didaktisch: $\Delta M \approx m \cdot \Delta B$ bei Reservequote. Endogenes Geld: ZB steuert Leitzins → Banken passen Kreditvergabe an. Finanzkrise: Bilanzschocks → Kreditrationierung → $I\downarrow$, $Y\downarrow$ (Finanzielle Akzelerator).</p>
+      <div class="math-block">$$M = m \cdot B,\quad m = \frac{1+r}{r}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -425,7 +425,7 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">LM-Kurve bzw. Zinssteuerung</h4>
 <p>Im traditionellen Modell kommt der Geldmarkt als steigende LM-Kurve hinzu. Im Kurs wird häufig mit Zinssteuerung gearbeitet: Die Zentralbank setzt den Zinssatz direkt, sodass die monetäre Bedingung eher als horizontale Zinsregel gelesen wird.</p>
-        <div class="math-block">$$i = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\bar{i}$$</div>
+        <div class="math-block">$$i = \bar{i}$$</div>
         <p>Das ändert die Politiklogik erheblich: Bei horizontaler Zinsregel entfällt das klassische Crowding-Out über steigende Zinsen.</p>
 </div>
 </section>
@@ -528,7 +528,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Geldpolitik und Crowding-Out</h4>
 <p>Eine Zinssenkung verschiebt die monetäre Kurve nach unten und erhöht die Nachfrage. Umgekehrt kann eine restriktive Geldpolitik einen Fiskalimpuls teilweise neutralisieren. Genau diese Kombinationen werden in Klausuren oft als Policy-Mix abgefragt.</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Delta Y = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{direkter Nachfrageimpuls} - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{verdrängte Investitionen}$$</div>
+        <div class="math-block">$$\Delta Y = \text{direkter Nachfrageimpuls} - \text{verdrängte Investitionen}$$</div>
         <p>Je steiler die LM-Kurve bzw. je stärker der Zins auf Einkommen reagiert, desto größer ist das Crowding-Out.</p>
 </div>
 </section>
@@ -640,8 +640,8 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungen in Konsum, Investition und Zinsstruktur</h4>
 <p>Haushalte orientieren ihren Konsum nicht nur am heutigen Einkommen, sondern am erwarteten Lebenseinkommen. Unternehmen investieren auf Basis des erwarteten Barwerts künftiger Gewinne. Und langfristige Zinsen hängen von erwarteten künftigen Kurzfristzinsen ab.</p>
-        <div class="math-block">$$V_t = \\sum_{k=0}^{\\infty}\\frac{\\pi^e_{t+k}}{(1+r)^k}$$</div>
-        <div class="math-block">$$i_{lang} \\approx \\frac{1}{n}\\sum_{k=0}^{n-1} i^e_{t+k}$$</div>
+        <div class="math-block">$$V_t = \sum_{k=0}^{\infty}\frac{\pi^e_{t+k}}{(1+r)^k}$$</div>
+        <div class="math-block">$$i_{lang} \approx \frac{1}{n}\sum_{k=0}^{n-1} i^e_{t+k}$$</div>
         <p>Darum wirkt glaubwürdige Politik oft schon über Erwartungen, bevor sich aktuelle Größen mechanisch ändern.</p>
 </div>
 </section>
@@ -665,11 +665,11 @@ export const CONTENT = {
 
 
 <h4 class="theory-subsection-title">Adaptive vs. rationale Erwartungen</h4>
-<p>Adaptive: $\\pi^e$ folgt vergangener Inflation. Rational: keine systematischen Fehler — Policy-Regeln wirken nur bei Überraschungen.</p>
+<p>Adaptive: $\pi^e$ folgt vergangener Inflation. Rational: keine systematischen Fehler — Policy-Regeln wirken nur bei Überraschungen.</p>
 
 
 <h4 class="theory-subsection-title">Glaubwürdigkeit</h4>
-<p>Unabhängige Zentralbank und klare Ziele verankern $\\pi^e$; ohne Glaubwürdigkeit kein dauerhafter Phillips-Trade-off.</p>
+<p>Unabhängige Zentralbank und klare Ziele verankern $\pi^e$; ohne Glaubwürdigkeit kein dauerhafter Phillips-Trade-off.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -721,7 +721,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Risikoprämie</h4>
-<p>$i = r + \\text{Risikoprämie}$. In Krisen steigt die Prämie — Kredit wird teurer unabhängig von Leitzins.</p>
+<p>$i = r + \text{Risikoprämie}$. In Krisen steigt die Prämie — Kredit wird teurer unabhängig von Leitzins.</p>
       <div class="math-block">$$i = r + rp$$</div>
 </div>
 </section>
@@ -788,7 +788,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">WS-Kurve</h4>
 <p>Lohnsetzung: nominaler Lohn reagiert auf Arbeitslosigkeit und Erwartungen. Kurzfristig können Reallöhne träge sein.</p>
-      <div class="math-block">$$W = P \\cdot w,\\quad w = f(u, \\pi^e)$$</div>
+      <div class="math-block">$$W = P \cdot w,\quad w = f(u, \pi^e)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -844,21 +844,21 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungsaugmentierte Phillipskurve</h4>
 <p>Inflation hängt von erwarteter Inflation, Markups und der Lage des Arbeitsmarkts ab. Je niedriger die Arbeitslosigkeit relativ zur natürlichen Rate, desto stärker steigen Löhne und Preise.</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t^e + (\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\mu + z) - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\alpha u_t$$</div>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t^e = -\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\alpha (u_t - u_n)$$</div>
+        <div class="math-block">$$\pi_t = \pi_t^e + (\mu + z) - \alpha u_t$$</div>
+        <div class="math-block">$$\pi_t - \pi_t^e = -\alpha (u_t - u_n)$$</div>
         <p>Die zweite Schreibweise macht den Kern sichtbar: Inflation steigt, wenn $u_t$ unter $u_n$ liegt.</p>
 
 
 <h4 class="theory-subsection-title">NAIRU und Inflationsbeschleunigung</h4>
 <p>Die NAIRU ist die Arbeitslosenquote, bei der Inflation weder steigt noch fällt. Unter adaptiven Erwartungen gilt näherungsweise:</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_{t-1} = -\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\alpha (u_t - u_n)$$</div>
+        <div class="math-block">$$\pi_t - \pi_{t-1} = -\alpha (u_t - u_n)$$</div>
         <p>Liegt die Arbeitslosigkeit unter $u_n$, beschleunigt sich die Inflation; liegt sie darüber, sinkt die Inflation.</p>
 
 
 <h4 class="theory-subsection-title">Angebotsschocks und Lohnindexierung</h4>
 <p>Die Vorlesung zeigt ausdrücklich, dass nicht nur Erwartungen, sondern auch Angebotsschocks und institutionelle Lohnanpassung die Phillipskurve verändern. Ein negativer Angebotsschock kann Inflation und Arbeitslosigkeit gleichzeitig steigen lassen.</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_{t-1} = -\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\alpha}{1-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\lambda}(u_t-u_n)$$</div>
-        <p>Wenn ein Teil $\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\lambda$ der Lohnverträge indexiert ist, reagieren Löhne und Preise stärker auf aktuelle Inflation. Dann wird derselbe Arbeitslosigkeitsschock in stärkere Inflationsänderungen übersetzt.</p>
+        <div class="math-block">$$\pi_t - \pi_{t-1} = -\frac{\alpha}{1-\lambda}(u_t-u_n)$$</div>
+        <p>Wenn ein Teil $\lambda$ der Lohnverträge indexiert ist, reagieren Löhne und Preise stärker auf aktuelle Inflation. Dann wird derselbe Arbeitslosigkeitsschock in stärkere Inflationsänderungen übersetzt.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -965,14 +965,14 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die drei Bausteine zusammenführen</h4>
 <p>Im Gütermarkt bestimmt die IS-Beziehung die Produktionslücke, im Arbeitsmarkt bzw. über Okun die Arbeitslosenlücke und über die Phillipskurve die Inflationsdynamik. Die Zentralbank reagiert schließlich mit einer Zinsregel.</p>
-        <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_{t-1} = -\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\alpha(u_t-u_n)$$</div>
-        <div class="math-block">$$r_t = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\bar r + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\lambda(\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_t - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\bar \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi)$$</div>
+        <div class="math-block">$$\pi_t - \pi_{t-1} = -\alpha(u_t-u_n)$$</div>
+        <div class="math-block">$$r_t = \bar r + \lambda(\pi_t - \bar \pi)$$</div>
         <p>Genau dieses Zusammenspiel beschreibt, wie ein Boom über Inflation eine geldpolitische Reaktion auslöst, die die Wirtschaft wieder Richtung Potenzial zurückführt.</p>
 
 
 <h4 class="theory-subsection-title">Okun-Gesetz als Brücke</h4>
 <p>Um Produktionslücke und Arbeitslosigkeit zu verknüpfen, wird Okuns Gesetz verwendet. Übersteigt der Output sein natürliches Niveau, fällt die Arbeitslosigkeit unter die natürliche Rate.</p>
-        <div class="math-block">$$u_t - u_n = -\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\beta \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{Y_t - Y_n}{Y_n}$$</div>
+        <div class="math-block">$$u_t - u_n = -\beta \frac{Y_t - Y_n}{Y_n}$$</div>
         <p>Damit wird klar, warum ein Nachfrageschock nicht nur das Einkommen verschiebt, sondern mit Verzögerung auch den Inflationsdruck verändert.</p>
 </div>
 </section>

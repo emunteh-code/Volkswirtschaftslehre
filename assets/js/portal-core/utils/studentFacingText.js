@@ -1,3 +1,5 @@
+import { protectLatexInHtml, repairLatexInHtml } from './latexProtect.js';
+
 /**
  * Strip dev/registry jargon from strings shown on student surfaces.
  */
@@ -62,8 +64,11 @@ export function studentizeTaskGapNote(gap) {
  * @returns {string}
  */
 export function studentizeTheoryHtml(html) {
-  let s = String(html ?? "");
+  let s = repairLatexInHtml(html);
   if (!s) return s;
+
+  const { html: shielded, restore } = protectLatexInHtml(s);
+  s = shielded;
 
   s = s.replace(
     /<div[^>]*class="[^"]*\b(?:source-boundary-notice|platform-added-banner)\b[^"]*"[^>]*>[\s\S]*?<\/div>/gi,
@@ -85,5 +90,5 @@ export function studentizeTheoryHtml(html) {
   );
   s = s.replace(/<button[^>]*class="[^"]*\bklausurmethodik-source-link\b[^"]*"[^>]*>[\s\S]*?<\/button>/gi, "");
   s = s.replace(/\s{2,}/g, " ");
-  return s;
+  return restore(repairLatexInHtml(s));
 }

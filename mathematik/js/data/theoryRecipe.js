@@ -14,7 +14,7 @@ export const THEORY_RECIPE = {
 </div><div class="info-card info-card-concept-title">
 <div class="label">Absolutbetrag</div>
 <div class="value">immer als Distanz lesen</div>
-<p>$|x-a| \\\\\\\\\\\\\\\\le b$ ist ein Intervall um $a$; $|x-a| \\\\\\\\\\\\\\\\ge b$ liefert die Außenzonen.</p>
+<p>$|x-a| \le b$ ist ein Intervall um $a$; $|x-a| \ge b$ liefert die Außenzonen.</p>
 </div><div class="info-card info-card-concept-title">
 <div class="label">Mengenaufgabe</div>
 <div class="value">sprachlich und symbolisch lesen</div>
@@ -32,17 +32,17 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Reelle Zahlen und Regeln der Algebra</h4>
 <p>Im Einstieg werden Rechenregeln nicht als Selbstzweck gebraucht, sondern als Prüfwerkzeug: Brüche, Potenzen, Wurzeln und Vorzeichen müssen so beherrscht werden, dass spätere Funktions- und Ableitungsaufgaben nicht an elementaren Umformungen scheitern.</p><p>Besonders klausurrelevant ist die saubere Trennung zwischen äquivalentem Umformen und unzulässigem Kürzen. Wer etwa über Summanden „kürzt“ oder das Vorzeichen beim Multiplizieren mit einer negativen Zahl nicht dreht, zerstört den gesamten Lösungsweg schon im ersten Schritt.</p>
-<div class="math-block">$$a(b+c)=ab+ac,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\frac{a}{b}+\\\\\\\\\\\\\\\\frac{c}{d}=\\\\\\\\\\\\\\\\frac{ad+bc}{bd}$$</div>
+<div class="math-block">$$a(b+c)=ab+ac,\qquad \frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}$$</div>
 
 
 <h4 class="theory-subsection-title">Ungleichungen, Intervalle und Absolutbetrag</h4>
-<p>Ungleichungen werden in der Mathematik für Wirtschaftswissenschaftler fast immer als Bereichsaufgaben geprüft: Welche Werte sind zulässig, wo ist der Ausdruck positiv, und welche Intervalle erfüllen die Nebenbedingung?</p><p>Der Absolutbetrag ist dabei kein Sondermonster, sondern eine Distanzschreibweise. Genau diese Lesart macht Aufgaben schneller: $|x-a|\\\\\\\\\\\\\\\\le b$ bedeutet „x liegt höchstens b Einheiten von a entfernt“.</p>
-<div class="math-block">$$|x-a|\\\\\\\\\\\\\\\\le b \\\\\\\\\\\\\\\\iff a-b \\\\\\\\\\\\\\\\le x \\\\\\\\\\\\\\\\le a+b$$</div><div class="math-block">$$|x-a|\\\\\\\\\\\\\\\\ge b \\\\\\\\\\\\\\\\iff x \\\\\\\\\\\\\\\\le a-b \\\\\\\\\\\\\\\\;\\\\\\\\\\\\\\\\text{ oder }\\\\\\\\\\\\\\\\; x \\\\\\\\\\\\\\\\ge a+b$$</div>
+<p>Ungleichungen werden in der Mathematik für Wirtschaftswissenschaftler fast immer als Bereichsaufgaben geprüft: Welche Werte sind zulässig, wo ist der Ausdruck positiv, und welche Intervalle erfüllen die Nebenbedingung?</p><p>Der Absolutbetrag ist dabei kein Sondermonster, sondern eine Distanzschreibweise. Genau diese Lesart macht Aufgaben schneller: $|x-a|\le b$ bedeutet „x liegt höchstens b Einheiten von a entfernt“.</p>
+<div class="math-block">$$|x-a|\le b \iff a-b \le x \le a+b$$</div><div class="math-block">$$|x-a|\ge b \iff x \le a-b \;\text{ oder }\; x \ge a+b$$</div>
 
 
 <h4 class="theory-subsection-title">Mengenlehre als Sprache für Definitionsbereiche</h4>
 <p>Mengenlehre taucht später nicht isoliert auf, sondern in Definitionsbereichen, Lösungs- und Zulässigkeitsmengen. Deshalb ist nicht die abstrakte Symbolsammlung wichtig, sondern das Übersetzen zwischen Sprache, Intervallschreibweise und Mengenoperation.</p><p>Wer eine Aufgabe mit „für alle“, „es existiert“, „Teilmenge“ oder Intervallgrenzen nicht sauber liest, baut oft schon vor dem Rechnen die falsche Lösungsmenge.</p>
-<div class="math-block">$$A\\\\\\\\\\\\\\\\cap B = \\\\\\\\\\\\\\\\{x \\\\\\\\\\\\\\\\mid x\\\\\\\\\\\\\\\\in A \\\\\\\\\\\\\\\\text{ und } x\\\\\\\\\\\\\\\\in B\\\\\\\\\\\\\\\\},\\\\\\\\\\\\\\\\qquad A\\\\\\\\\\\\\\\\cup B = \\\\\\\\\\\\\\\\{x \\\\\\\\\\\\\\\\mid x\\\\\\\\\\\\\\\\in A \\\\\\\\\\\\\\\\text{ oder } x\\\\\\\\\\\\\\\\in B\\\\\\\\\\\\\\\\}$$</div>
+<div class="math-block">$$A\cap B = \{x \mid x\in A \text{ und } x\in B\},\qquad A\cup B = \{x \mid x\in A \text{ oder } x\in B\}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -113,12 +113,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Funktion, Definitionsbereich und Wertebereich</h4>
 <p>Eine Funktion ordnet jedem zulässigen Input genau einen Output zu. In den Übungen wird das nicht abstrakt, sondern sehr konkret geprüft: Werte berechnen, zusammengesetzte Argumente wie $f(1-s)$ einsetzen, Definitions- und Wertebereich benennen.</p><p>Gerade in wirtschaftswissenschaftlichen Anwendungen ist der Definitionsbereich nicht Beiwerk. Preis, Menge, Kapital oder Zeit sind oft nur auf Teilmengen sinnvoll; genau deshalb ist „wo ist die Funktion definiert?“ eine Standardfrage.</p>
-<div class="math-block">$$f\\\\\\\\\\\\\\\\colon D\\\\\\\\\\\\\\\\to W,\\\\\\\\\\\\\\\\qquad x\\\\\\\\\\\\\\\\mapsto f(x)$$</div>
+<div class="math-block">$$f\colon D\to W,\qquad x\mapsto f(x)$$</div>
 
 
 <h4 class="theory-subsection-title">Geraden, Polynome und Gleichungen</h4>
 <p>Die Kleinübungen prüfen lineare und quadratische Gleichungen besonders oft über Geometrie: Gerade aus zwei Punkten, graphischer Schnitt zweier Geraden, Nullstellen und Extrempunkt einer quadratischen Funktion.</p><p>Die sichere Klausurlesart lautet deshalb: Funktionsklasse erkennen, Standardparameter bestimmen und das Ergebnis anschließend grafisch oder ökonomisch deuten.</p>
-<div class="math-block">$$y=mx+n,\\\\\\\\\\\\\\\\qquad m=\\\\\\\\\\\\\\\\frac{y_2-y_1}{x_2-x_1}$$</div><div class="math-block">$$x_{1,2}=\\\\\\\\\\\\\\\\frac{-b\\\\\\\\\\\\\\\\pm\\\\\\\\\\\\\\\\sqrt{b^2-4ac}}{2a}$$</div>
+<div class="math-block">$$y=mx+n,\qquad m=\frac{y_2-y_1}{x_2-x_1}$$</div><div class="math-block">$$x_{1,2}=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$</div>
 
 
 <h4 class="theory-subsection-title">Graphen lesen und verschobene Strukturen erkennen</h4>
@@ -190,17 +190,17 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Potenz versus Exponentialfunktion</h4>
 <p>Die beiden Klassen werden in Klausuren gern verwechselt, obwohl sie unterschiedliche ökonomische Geschichten erzählen: Potenzfunktionen modellieren elastische Krümmung oder Skaleneigenschaften, Exponentialfunktionen stetiges Wachstum oder Zerfall.</p><p>Die erste saubere Lesefrage lautet daher: Steht die Variable in der Basis oder im Exponenten? Erst danach lohnt Rechnen.</p>
-<div class="math-block">$$f(x)=x^a,\\\\\\\\\\\\\\\\qquad g(x)=b^x,\\\\\\\\\\\\\\\\qquad h(x)=e^{kx}$$</div>
+<div class="math-block">$$f(x)=x^a,\qquad g(x)=b^x,\qquad h(x)=e^{kx}$$</div>
 
 
 <h4 class="theory-subsection-title">Logarithmus als Umkehrung und Rechenwerkzeug</h4>
 <p>Der natürliche Logarithmus ist die Umkehrfunktion von $e^x$. Im Kurs ist er vor allem ein Werkzeug zum Lösen exponentieller Gleichungen und zum Umschreiben von Produkten, Quotienten und Potenzen.</p><p>Die wichtigste Domänenregel ist nicht verhandelbar: Der Logarithmus ist nur für strikt positive Argumente definiert.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\ln(ab)=\\\\\\\\\\\\\\\\ln a+\\\\\\\\\\\\\\\\ln b,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\ln\\\\\\\\\\\\\\\\!\\\\\\\\\\\\\\\\left(\\\\\\\\\\\\\\\\frac{a}{b}\\\\\\\\\\\\\\\\right)=\\\\\\\\\\\\\\\\ln a-\\\\\\\\\\\\\\\\ln b,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\ln(a^n)=n\\\\\\\\\\\\\\\\ln a$$</div><div class="math-block">$$\\\\\\\\\\\\\\\\ln(e^x)=x,\\\\\\\\\\\\\\\\qquad e^{\\\\\\\\\\\\\\\\ln x}=x\\\\\\\\\\\\\\\\;(x>0)$$</div>
+<div class="math-block">$$\ln(ab)=\ln a+\ln b,\qquad \ln\\!\left(\frac{a}{b}\right)=\ln a-\ln b,\qquad \ln(a^n)=n\ln a$$</div><div class="math-block">$$\ln(e^x)=x,\qquad e^{\ln x}=x\\;(x>0)$$</div>
 
 
 <h4 class="theory-subsection-title">Domäne, Monotonie und Invertierbarkeit</h4>
 <p>Nicht jede Funktion darf global invertiert oder logarithmiert werden. Für den Logarithmus muss das Argument positiv sein; für eine globale Umkehrfunktion brauchst du eine eindeutige Zuordnung, meist abgesichert durch Monotonie auf dem relevanten Bereich.</p><p>Genau diese Zulässigkeitsprüfung gehört in Klausuren vor jedes Rechnen. Viele Fehler entstehen nicht bei der Umformung, sondern schon bei der stillschweigenden Annahme, die Funktion sei überall umkehrbar.</p>
-<div class="math-block">$$x>0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\ln(x)\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{zulässig},\\\\\\\\\\\\\\\\qquad f'\\\\\\\\\\\\\\\\gtrless 0 \\\\\\\\\\\\\\\\Rightarrow f \\\\\\\\\\\\\\\\text{ auf dem Bereich invertierbar}$$</div>
+<div class="math-block">$$x>0 \Rightarrow \ln(x)  \text{zulässig},\qquad f'\gtrless 0 \Rightarrow f \text{ auf dem Bereich invertierbar}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -208,7 +208,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Inverse Funktionen und inverse Nachfrage</h4>
 <p>Eine Umkehrfunktion beantwortet dieselbe Beziehung aus der anderen Richtung: statt „welche Menge bei gegebenem Preis?“ nun „welcher Preis bei gegebener Menge?“.</p><p>Gerade für ökonomische Anwendungen ist das wichtig, weil Graphen oft in inverser Form gelesen werden. Wer $Q(P)$ und $P(Q)$ vertauscht, liest Achsen und Steigungen falsch.</p>
-<div class="math-block">$$y=f(x)\\\\\\\\\\\\\\\\;\\\\\\\\\\\\\\\\Rightarrow\\\\\\\\\\\\\\\\;x=f^{-1}(y)$$</div>
+<div class="math-block">$$y=f(x)\\;\Rightarrow\\;x=f^{-1}(y)$$</div>
 
 
 <h4 class="theory-subsection-title">Erkennungssignale in Gleichungen und Graphen</h4>
@@ -219,7 +219,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Typische Fehler</h4>
-<div class="warn-box"><strong>Logarithmus ohne Positivität:</strong> $\\\\\\\\\\\\\\\\ln(x)$, $\\\\\\\\\\\\\\\\ln(2x-1)$ oder $\\\\\\\\\\\\\\\\ln(a/b)$ sind nur sinnvoll, wenn das gesamte Argument positiv ist.</div><div class="warn-box"><strong>Inverse Nachfrage vertauscht:</strong> Bei $Q(P)$ und $P(Q)$ ändern sich nicht nur Symbole, sondern auch Achsenrolle und Steigungsinterpretation.</div><div class="warn-box"><strong>Potenz und Exponential verwechselt:</strong> „+3 pro Schritt“ ist linear, „mal 1,03 pro Schritt“ ist exponentiell; $x^a$ ist wieder etwas anderes.</div><div class="warn-box"><strong>Umkehrfunktion ohne Monotonie:</strong> Nicht jede Beziehung ist global invertierbar. Wenn die Zuordnung nicht eindeutig ist, musst du den Bereich einschränken oder die Inversenidee verwerfen.</div>
+<div class="warn-box"><strong>Logarithmus ohne Positivität:</strong> $\ln(x)$, $\ln(2x-1)$ oder $\ln(a/b)$ sind nur sinnvoll, wenn das gesamte Argument positiv ist.</div><div class="warn-box"><strong>Inverse Nachfrage vertauscht:</strong> Bei $Q(P)$ und $P(Q)$ ändern sich nicht nur Symbole, sondern auch Achsenrolle und Steigungsinterpretation.</div><div class="warn-box"><strong>Potenz und Exponential verwechselt:</strong> „+3 pro Schritt“ ist linear, „mal 1,03 pro Schritt“ ist exponentiell; $x^a$ ist wieder etwas anderes.</div><div class="warn-box"><strong>Umkehrfunktion ohne Monotonie:</strong> Nicht jede Beziehung ist global invertierbar. Wenn die Zuordnung nicht eindeutig ist, musst du den Bereich einschränken oder die Inversenidee verwerfen.</div>
 </div>
 </section>`,
   summen_logik_beweise: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -252,12 +252,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Summenzeichen, Doppelsummen und Produktzeichen</h4>
 <p>Das Summenzeichen ist die kompakte Schreibweise für wiederholtes Addieren. Klausurrelevant ist dabei weniger eine einzelne Spezialformel als das sichere Lesen: Startindex, Endindex und Summand sauber identifizieren.</p><p>Genau dieselbe Logik trägt später Matrixnotation, Statistikformeln und Regressionsschreibweisen.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\sum_{i=1}^n a_i,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\sum_{i=1}^n\\\\\\\\\\\\\\\\sum_{j=1}^m a_{ij},\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\prod_{i=1}^n a_i$$</div>
+<div class="math-block">$$\sum_{i=1}^n a_i,\qquad \sum_{i=1}^n\sum_{j=1}^m a_{ij},\qquad \prod_{i=1}^n a_i$$</div>
 
 
 <h4 class="theory-subsection-title">Logik als Lesewerkzeug</h4>
 <p>Viele mathematische Fehler sind in Wahrheit Logikfehler: eine Implikation als Äquivalenz lesen, Quantoren vertauschen oder eine Negation falsch setzen.</p><p>Deshalb gehört Logik in dieses Modul nicht als Philosophie, sondern als Werkzeug zum Lesen und Prüfen von Behauptungen.</p>
-<div class="math-block">$$A\\\\\\\\\\\\\\\\Rightarrow B,\\\\\\\\\\\\\\\\qquad A\\\\\\\\\\\\\\\\Leftrightarrow B,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\neg A,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\forall x,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\exists x$$</div>
+<div class="math-block">$$A\Rightarrow B,\qquad A\Leftrightarrow B,\qquad \neg A,\qquad \forall x,\qquad \exists x$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -334,18 +334,18 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Matrizen, Vektoren und Typen</h4>
-<p>Die Vorlesung startet nicht mit großen Algorithmen, sondern mit Ordnung: Was ist eine $m\\\\\\\\\\\\\\\\times n$-Matrix, was ist ein Zeilen- oder Spaltenvektor, und welche Informationen trägt die Dimensionsangabe?</p><p>Gerade diese Sprachpräzision wird in Klausuren schnell abgefragt, weil viele Rechenfehler nur verkleidete Dimensionsfehler sind.</p>
-<div class="math-block">$$A\\\\\\\\\\\\\\\\in\\\\\\\\\\\\\\\\mathbb{R}^{m\\\\\\\\\\\\\\\\times n},\\\\\\\\\\\\\\\\qquad x\\\\\\\\\\\\\\\\in\\\\\\\\\\\\\\\\mathbb{R}^n,\\\\\\\\\\\\\\\\qquad b\\\\\\\\\\\\\\\\in\\\\\\\\\\\\\\\\mathbb{R}^m$$</div>
+<p>Die Vorlesung startet nicht mit großen Algorithmen, sondern mit Ordnung: Was ist eine $m\times n$-Matrix, was ist ein Zeilen- oder Spaltenvektor, und welche Informationen trägt die Dimensionsangabe?</p><p>Gerade diese Sprachpräzision wird in Klausuren schnell abgefragt, weil viele Rechenfehler nur verkleidete Dimensionsfehler sind.</p>
+<div class="math-block">$$A\in\mathbb{R}^{m\times n},\qquad x\in\mathbb{R}^n,\qquad b\in\mathbb{R}^m$$</div>
 
 
 <h4 class="theory-subsection-title">Operationen und Matrixprodukte</h4>
 <p>Addition und Skalarmultiplikation laufen elementweise. Die eigentliche Kurslogik steckt aber im Matrixprodukt: eine lineare Kombination von Spalten bzw. Zeile-mal-Spalte für jeden Eintrag.</p><p>Genau deshalb ist Matrixmultiplikation im Allgemeinen nicht kommutativ. Dieser Punkt ist im Kurs nicht Nebensache, sondern Kernverständnis.</p>
-<div class="math-block">$$(AB)_{ij}=\\\\\\\\\\\\\\\\sum_{k=1}^n a_{ik}b_{kj}$$</div><div class="math-block">$$(AB)^T=B^TA^T$$</div>
+<div class="math-block">$$(AB)_{ij}=\sum_{k=1}^n a_{ik}b_{kj}$$</div><div class="math-block">$$(AB)^T=B^TA^T$$</div>
 
 
 <h4 class="theory-subsection-title">Matrixform linearer Gleichungssysteme</h4>
 <p>Ein lineares Gleichungssystem wird in der Matrixform $Ax=b$ lesbar und damit strukturell analysierbar. Die Frage ist dann nicht mehr nur „wie rechne ich?“, sondern „welche Matrixeigenschaft entscheidet über Lösbarkeit und Eindeutigkeit?“.</p><p>Diese Umstellung ist didaktisch wichtig, weil sie direkt zu Rang, Determinante, Inverser und Eigenwerten überleitet.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\begin{aligned} a_{11}x_1+\\\\\\\\\\\\\\\\dots+a_{1n}x_n&=b_1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\vdots \\\\\\\\\\\\\\\\qquad\\\\\\\\\\\\\\\\qquad&\\\\\\\\\\\\\\\\vdots\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ a_{m1}x_1+\\\\\\\\\\\\\\\\dots+a_{mn}x_n&=b_m \\\\\\\\\\\\\\\\end{aligned}\\\\\\\\\\\\\\\\quad\\\\\\\\\\\\\\\\Longleftrightarrow\\\\\\\\\\\\\\\\quad Ax=b$$</div>
+<div class="math-block">$$\begin{aligned} a_{11}x_1+\dots+a_{1n}x_n&=b_1\\ \vdots \qquad\qquad&\vdots\\ a_{m1}x_1+\dots+a_{mn}x_n&=b_m \end{aligned}\quad\Longleftrightarrow\quad Ax=b$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -402,7 +402,7 @@ export const THEORY_RECIPE = {
 </div><div class="info-card info-card-concept-title">
 <div class="label">Determinante</div>
 <div class="value">regulär oder singulär?</div>
-<p>Für quadratische Matrizen liefert $\\\\\\\\\\\\\\\\det(A)\\\\\\\\\\\\\\\\neq 0$ die Invertierbarkeit.</p>
+<p>Für quadratische Matrizen liefert $\det(A)\neq 0$ die Invertierbarkeit.</p>
 </div><div class="info-card info-card-concept-title">
 <div class="label">Eigenwerte</div>
 <div class="value">Skalierungsrichtungen</div>
@@ -416,17 +416,17 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Spur und Rang als Strukturmaße</h4>
 <p>Die Spur ist die Summe der Diagonalelemente. Sie ist leicht zu berechnen, aber ihre Aussagekraft ist begrenzt. Der Rang ist wichtiger: Er misst, wie viele Richtungen im System wirklich unabhängig sind.</p><p>Genau deshalb fragen die Kleinübungen häufig nicht nur nach dem numerischen Rang, sondern nach der Begründung über lineare Unabhängigkeit oder Gauß.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{tr}(A)=\\\\\\\\\\\\\\\\sum_{i=1}^n a_{ii},\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\operatorname{rg}(A)=\\\\\\\\\\\\\\\\text{Anzahl linear unabhängiger Zeilen/Spalten}$$</div>
+<div class="math-block">$$\operatorname{tr}(A)=\sum_{i=1}^n a_{ii},\qquad \operatorname{rg}(A)=\text{Anzahl linear unabhängiger Zeilen/Spalten}$$</div>
 
 
 <h4 class="theory-subsection-title">Determinante, Inverse und Eindeutigkeit</h4>
-<p>Für quadratische Matrizen gilt die zentrale Logik: $\\\\\\\\\\\\\\\\det(A)\\\\\\\\\\\\\\\\neq 0$ genau dann, wenn $A$ regulär und damit invertierbar ist. Dann hat $Ax=b$ für jedes $b$ genau eine Lösung.</p><p>Die Inverse ist also kein isolierter Rechenkunstgriff, sondern das algebraische Zeichen dafür, dass die Matrixinformation vollständig und nicht redundant ist.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\det\\\\\\\\\\\\\\\\begin{pmatrix}a&b\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ c&d\\\\\\\\\\\\\\\\end{pmatrix}=ad-bc$$</div><div class="math-block">$$A^{-1}=\\\\\\\\\\\\\\\\frac{1}{ad-bc}\\\\\\\\\\\\\\\\begin{pmatrix}d&-b\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -c&a\\\\\\\\\\\\\\\\end{pmatrix}\\\\\\\\\\\\\\\\qquad(\\\\\\\\\\\\\\\\det(A)\\\\\\\\\\\\\\\\neq 0)$$</div>
+<p>Für quadratische Matrizen gilt die zentrale Logik: $\det(A)\neq 0$ genau dann, wenn $A$ regulär und damit invertierbar ist. Dann hat $Ax=b$ für jedes $b$ genau eine Lösung.</p><p>Die Inverse ist also kein isolierter Rechenkunstgriff, sondern das algebraische Zeichen dafür, dass die Matrixinformation vollständig und nicht redundant ist.</p>
+<div class="math-block">$$\det\begin{pmatrix}a&b\\ c&d\end{pmatrix}=ad-bc$$</div><div class="math-block">$$A^{-1}=\frac{1}{ad-bc}\begin{pmatrix}d&-b\\ -c&a\end{pmatrix}\qquad(\det(A)\neq 0)$$</div>
 
 
 <h4 class="theory-subsection-title">Eigenwerte und Eigenvektoren</h4>
-<p>Eigenwerte beschreiben Skalierung in einer Richtung, Eigenvektoren die dazugehörigen Richtungen selbst. In der Vorlesung ist das kein Selbstzweck, sondern ein Standardzugang, um lineare Abbildungen strukturell zu lesen.</p><p>Praktisch heißt das: Charakteristische Gleichung aufstellen, Eigenwerte bestimmen, dann zu jedem Eigenwert einen Eigenvektor aus $(A-\\\\\\\\\\\\\\\\lambda I)x=0$ berechnen.</p>
-<div class="math-block">$$Ax=\\\\\\\\\\\\\\\\lambda x\\\\\\\\\\\\\\\\qquad\\\\\\\\\\\\\\\\Longleftrightarrow\\\\\\\\\\\\\\\\qquad (A-\\\\\\\\\\\\\\\\lambda I)x=0$$</div>
+<p>Eigenwerte beschreiben Skalierung in einer Richtung, Eigenvektoren die dazugehörigen Richtungen selbst. In der Vorlesung ist das kein Selbstzweck, sondern ein Standardzugang, um lineare Abbildungen strukturell zu lesen.</p><p>Praktisch heißt das: Charakteristische Gleichung aufstellen, Eigenwerte bestimmen, dann zu jedem Eigenwert einen Eigenvektor aus $(A-\lambda I)x=0$ berechnen.</p>
+<div class="math-block">$$Ax=\lambda x\qquad\Longleftrightarrow\qquad (A-\lambda I)x=0$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -464,7 +464,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Typische Fehler</h4>
-<div class="warn-box"><strong>Determinante als bloße Zahl:</strong> Die Determinante ist nicht nur ein Rechenergebnis, sondern das Signal für regulär versus singulär.</div><div class="warn-box"><strong>Rang und Spur verwechselt:</strong> Die Spur sagt nichts über lineare Unabhängigkeit; für Eindeutigkeit ist der Rang zentral.</div><div class="warn-box"><strong>Eigenvektor ohne Nullgleichung:</strong> Nach dem Eigenwert muss immer $(A-\\\\\\\\\\\\\\\\lambda I)x=0$ gelöst werden, nicht einfach irgendein Vektor geraten.</div>
+<div class="warn-box"><strong>Determinante als bloße Zahl:</strong> Die Determinante ist nicht nur ein Rechenergebnis, sondern das Signal für regulär versus singulär.</div><div class="warn-box"><strong>Rang und Spur verwechselt:</strong> Die Spur sagt nichts über lineare Unabhängigkeit; für Eindeutigkeit ist der Rang zentral.</div><div class="warn-box"><strong>Eigenvektor ohne Nullgleichung:</strong> Nach dem Eigenwert muss immer $(A-\lambda I)x=0$ gelöst werden, nicht einfach irgendein Vektor geraten.</div>
 </div>
 </section>`,
   analysis_ableitung_grundlagen: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -493,17 +493,17 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Von Sekante zu Tangente</h4>
 <p>Die Vorlesung beginnt bewusst geometrisch: Die Ableitung ist nicht zuerst eine Regel, sondern die Steigung der Tangente. Genau deshalb tauchen Differenzenquotient, Sekante und Grenzübergang schon im ersten Aufgabenblock der Kleinübung auf.</p><p>Diese Lesart ist für die Klausur zentral, weil man damit Steigung, Änderungsrate und Grenzgröße als dieselbe Idee erkennt.</p>
-<div class="math-block">$$f'(x_0)=\\\\\\\\\\\\\\\\lim_{\\\\\\\\\\\\\\\\Delta x\\\\\\\\\\\\\\\\to 0}\\\\\\\\\\\\\\\\frac{f(x_0+\\\\\\\\\\\\\\\\Delta x)-f(x_0)}{\\\\\\\\\\\\\\\\Delta x}$$</div>
+<div class="math-block">$$f'(x_0)=\lim_{\Delta x\to 0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$$</div>
 
 
 <h4 class="theory-subsection-title">Ableitungsregeln als Standardschemata</h4>
 <p>Die Regeln sind im Kurs Mittel zum Zweck: Potenz-, Produkt-, Quotienten- und Kettenregel decken den Großteil der Rechenfamilien ab. Klausurnah ist deshalb nicht das Auswendiglernen von Einzelfällen, sondern das Erkennen der Struktur.</p><p>Gerade die Kleinübung AN I zeigt, dass derselbe Ausdruck oft auf mehreren Wegen differenziert werden kann. Das Ziel ist Regelkontrolle, nicht Regelmagie.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\frac{d}{dx}x^n=nx^{n-1},\\\\\\\\\\\\\\\\qquad (uv)'=u'v+uv',\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\left(\\\\\\\\\\\\\\\\frac{u}{v}\\\\\\\\\\\\\\\\right)'=\\\\\\\\\\\\\\\\frac{u'v-uv'}{v^2}$$</div><div class="math-block">$$\\\\\\\\\\\\\\\\frac{d}{dx}f(g(x))=f'(g(x))\\\\\\\\\\\\\\\\cdot g'(x)$$</div>
+<div class="math-block">$$\frac{d}{dx}x^n=nx^{n-1},\qquad (uv)'=u'v+uv',\qquad \left(\frac{u}{v}\right)'=\frac{u'v-uv'}{v^2}$$</div><div class="math-block">$$\frac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x)$$</div>
 
 
 <h4 class="theory-subsection-title">Exponential-, Logarithmus- und implizites Differenzieren</h4>
-<p>AN I behandelt ausdrücklich auch die Differentiation von $e^x$, $\\\\\\\\\\\\\\\\ln x$ und implizit gegebenen Zusammenhängen. Das ist prüfungsrelevant, weil diese Familien häufig in Wirtschaftsmodellen auftauchen.</p><p>Die inhaltliche Pointe bleibt dieselbe: erst Struktur erkennen, dann Regel sauber anwenden.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\frac{d}{dx}e^{ax}=ae^{ax},\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\frac{d}{dx}\\\\\\\\\\\\\\\\ln x=\\\\\\\\\\\\\\\\frac{1}{x}\\\\\\\\\\\\\\\\;(x>0)$$</div>
+<p>AN I behandelt ausdrücklich auch die Differentiation von $e^x$, $\ln x$ und implizit gegebenen Zusammenhängen. Das ist prüfungsrelevant, weil diese Familien häufig in Wirtschaftsmodellen auftauchen.</p><p>Die inhaltliche Pointe bleibt dieselbe: erst Struktur erkennen, dann Regel sauber anwenden.</p>
+<div class="math-block">$$\frac{d}{dx}e^{ax}=ae^{ax},\qquad \frac{d}{dx}\ln x=\frac{1}{x}\\;(x>0)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -554,19 +554,19 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Monotonie und Ableitungen höherer Ordnung</h4>
 <p>Aus der ersten Ableitung folgt die Richtung: positiv bedeutet steigend, negativ fallend. Die zweite Ableitung beschreibt die Krümmung und wird damit zum Klassifikationswerkzeug für lokale Veränderungen.</p><p>Im Kurs ist das keine reine Analysisästhetik, sondern die Basis für ökonomische Begriffe wie abnehmende Grenzerträge oder steigende Grenzkosten.</p>
-<div class="math-block">$$f'(x)>0 \\\\\\\\\\\\\\\\Rightarrow f \\\\\\\\\\\\\\\\text{ steigt},\\\\\\\\\\\\\\\\qquad f'(x)<0 \\\\\\\\\\\\\\\\Rightarrow f \\\\\\\\\\\\\\\\text{ fällt}$$</div><div class="math-block">$$f''(x)>0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{konvex},\\\\\\\\\\\\\\\\qquad f''(x)<0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{konkav}$$</div>
+<div class="math-block">$$f'(x)>0 \Rightarrow f \text{ steigt},\qquad f'(x)<0 \Rightarrow f \text{ fällt}$$</div><div class="math-block">$$f''(x)>0 \Rightarrow \text{konvex},\qquad f''(x)<0 \Rightarrow \text{konkav}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stetigkeit, Grenzwerte und L’Hôpital</h4>
-<p>AN I behandelt Grenzwerte ausdrücklich als Prüfgegenstand. Dabei ist die entscheidende Frage nicht nur „welcher Wert?“, sondern ob der Ausdruck überhaupt stetig ist oder ob eine unbestimmte Form vorliegt.</p><p>L’Hôpital ist im Kurs kein Universalwerkzeug, sondern ein Sonderzugriff für echte Quotienten der Form $0/0$ oder $\\\\\\\\\\\\\\\\infty/\\\\\\\\\\\\\\\\infty$.</p>
+<p>AN I behandelt Grenzwerte ausdrücklich als Prüfgegenstand. Dabei ist die entscheidende Frage nicht nur „welcher Wert?“, sondern ob der Ausdruck überhaupt stetig ist oder ob eine unbestimmte Form vorliegt.</p><p>L’Hôpital ist im Kurs kein Universalwerkzeug, sondern ein Sonderzugriff für echte Quotienten der Form $0/0$ oder $\infty/\infty$.</p>
 
 
 <h4 class="theory-subsection-title">Approximationen, Differentiale und Newton-Verfahren</h4>
 <p>Die lineare Approximation nutzt die Tangente als lokale Ersatzfunktion. Genau daraus entwickelt sich das Newton-Verfahren: Tangente bilden, Nullstelle der Tangente nehmen, wiederholen.</p><p>Diese Stufung ist didaktisch wichtig, weil sie Rechnen, Geometrie und numerische Logik verbindet.</p>
-<div class="math-block">$$f(x)\\\\\\\\\\\\\\\\approx f(x_0)+f'(x_0)(x-x_0)$$</div><div class="math-block">$$x_{n+1}=x_n-\\\\\\\\\\\\\\\\frac{f(x_n)}{f'(x_n)}$$</div>
+<div class="math-block">$$f(x)\approx f(x_0)+f'(x_0)(x-x_0)$$</div><div class="math-block">$$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -604,7 +604,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Typische Fehler</h4>
-<div class="warn-box"><strong>Monotonie nur an einem Punkt:</strong> Für Monotonieintervalle musst du das Vorzeichen von $f&#39;$ auf Bereichen prüfen, nicht an einer Einzelstelle.</div><div class="warn-box"><strong>L’Hôpital zu früh:</strong> Erst prüfen, ob wirklich die Form $0/0$ oder $\\\\\\\\\\\\\\\\infty/\\\\\\\\\\\\\\\\infty$ vorliegt.</div><div class="warn-box"><strong>Newton ohne Startwertkontrolle:</strong> Ein schlechter Startwert kann das Verfahren weg vom gesuchten Nullstellenbereich treiben.</div>
+<div class="warn-box"><strong>Monotonie nur an einem Punkt:</strong> Für Monotonieintervalle musst du das Vorzeichen von $f&#39;$ auf Bereichen prüfen, nicht an einer Einzelstelle.</div><div class="warn-box"><strong>L’Hôpital zu früh:</strong> Erst prüfen, ob wirklich die Form $0/0$ oder $\infty/\infty$ vorliegt.</div><div class="warn-box"><strong>Newton ohne Startwertkontrolle:</strong> Ein schlechter Startwert kann das Verfahren weg vom gesuchten Nullstellenbereich treiben.</div>
 </div>
 </section>`,
   univariate_optimierung: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -633,12 +633,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erstordnung, Zweitordnung und Randlogik</h4>
 <p>Für innere lokale Optima ist $f&#39;(x)=0$ die notwendige Bedingung erster Ordnung. Die zweite Ableitung oder ein Vorzeichenwechsel von $f&#39;$ entscheidet dann über Maximum oder Minimum.</p><p>Bei Intervallaufgaben ist das vollständige Schema entscheidend: innere Kandidaten, Randpunkte, Funktionswerte vergleichen.</p>
-<div class="math-block">$$f'(x^\\\\\\\\\\\\\\\\*)=0,\\\\\\\\\\\\\\\\qquad f''(x^\\\\\\\\\\\\\\\\*)<0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{lokales Maximum},\\\\\\\\\\\\\\\\qquad f''(x^\\\\\\\\\\\\\\\\*)>0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{lokales Minimum}$$</div>
+<div class="math-block">$$f'(x^\*)=0,\qquad f''(x^\*)<0 \Rightarrow \text{lokales Maximum},\qquad f''(x^\*)>0 \Rightarrow \text{lokales Minimum}$$</div>
 
 
 <h4 class="theory-subsection-title">Wenn die zweite Ableitung nicht reicht</h4>
 <p>In vielen Aufgaben liefert $f&#39;&#39;(x^*)$ sofort die Klassifikation. Es gibt aber genau den klausurtypischen Restfall $f&#39;&#39;(x^*)=0$. Dann brauchst du den Vorzeichenwechsel von $f&#39;$ oder einen direkten Funktionswertvergleich und darfst nicht einfach „kein Ergebnis“ stehen lassen.</p><p>Diese Reserve-Logik macht den Unterschied zwischen mechanischem Ableiten und echter Prüfungskompetenz.</p>
-<div class="math-block">$$f'(x)\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{wechselt von }+\\\\\\\\\\\\\\\\text{ nach }- \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Maximum},\\\\\\\\\\\\\\\\qquad f'(x)\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{wechselt von }-\\\\\\\\\\\\\\\\text{ nach }+ \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Minimum}$$</div>
+<div class="math-block">$$f'(x)  \text{wechselt von }+\text{ nach }- \Rightarrow \text{Maximum},\qquad f'(x)  \text{wechselt von }-\text{ nach }+ \Rightarrow \text{Minimum}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -723,7 +723,7 @@ export const THEORY_RECIPE = {
 
 <h4 class="theory-subsection-title">Partielle, totale und implizite Ableitungen</h4>
 <p>Die partielle Ableitung misst die marginale Wirkung einer Variablen bei festgehaltenen übrigen Variablen. Die totale Ableitung sammelt dagegen alle Veränderungskanäle ein.</p><p>Damit wird klar, warum partielle und totale Lesart nicht verwechselt werden dürfen: Sie beantworten unterschiedliche Fragen.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial f}{\\\\\\\\\\\\\\\\partial x},\\\\\\\\\\\\\\\\qquad df=f_x\\\\\\\\\\\\\\\\,dx+f_y\\\\\\\\\\\\\\\\,dy$$</div><div class="math-block">$$\\\\\\\\\\\\\\\\frac{dz}{dt}=f_x\\\\\\\\\\\\\\\\frac{dx}{dt}+f_y\\\\\\\\\\\\\\\\frac{dy}{dt}$$</div>
+<div class="math-block">$$\frac{\partial f}{\partial x},\qquad df=f_x\\,dx+f_y\\,dy$$</div><div class="math-block">$$\frac{dz}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}$$</div>
 
 
 <h4 class="theory-subsection-title">Homogenität, Geometrie und lineare Approximation</h4>
@@ -733,7 +733,7 @@ export const THEORY_RECIPE = {
 
 <h4 class="theory-subsection-title">Gradient und Niveau-Linien als Lesewerkzeug</h4>
 <p>Eine zentrale Prüfungskompetenz besteht darin, Richtungs- und Konturlogik nicht zu vermischen. Niveau-Linien zeigen Kombinationen mit gleichem Funktionswert; der Gradient zeigt die Richtung des stärksten Anstiegs und steht lokal senkrecht auf diesen Konturen.</p><p>Damit wird aus einer formalen Ableitungsrechnung ein graphisches Lesewerkzeug für spätere Isoquanten-, Indifferenz- und Lagrange-Aufgaben.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\nabla f(x,y)=\\\\\\\\\\\\\\\\begin{pmatrix}f_x(x,y)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ f_y(x,y)\\\\\\\\\\\\\\\\end{pmatrix}$$</div>
+<div class="math-block">$$\nabla f(x,y)=\begin{pmatrix}f_x(x,y)\\ f_y(x,y)\end{pmatrix}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -811,12 +811,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stationäre Punkte mehrerer Variablen</h4>
 <p>Die notwendige Bedingung erster Ordnung verallgemeinert sich direkt: Für innere Kandidaten müssen alle partiellen Ableitungen erster Ordnung null sein.</p><p>Die Kleinübung OP II trainiert genau diese Routine in vielen Varianten und macht klar, dass stationär nicht automatisch optimal heißt.</p>
-<div class="math-block">$$f_x(x^\\\\\\\\\\\\\\\\*,y^\\\\\\\\\\\\\\\\*)=0,\\\\\\\\\\\\\\\\qquad f_y(x^\\\\\\\\\\\\\\\\*,y^\\\\\\\\\\\\\\\\*)=0$$</div>
+<div class="math-block">$$f_x(x^\*,y^\*)=0,\qquad f_y(x^\*,y^\*)=0$$</div>
 
 
 <h4 class="theory-subsection-title">Hesse-Matrix und Klassifikation</h4>
 <p>Im bivariaten Fall liefert die Hesse-Matrix die lokale Krümmungsinformation. Für die Klausur ist die 2×2-Determinantenlogik besonders wichtig, weil sie Maximum, Minimum und Sattelpunkt trennt.</p><p>Die Vorlesung betont dabei zu Recht: selbst negative Krümmung in einzelnen Achsenschnitten reicht noch nicht aus — die gemischten Ableitungen zählen mit.</p>
-<div class="math-block">$$H=\\\\\\\\\\\\\\\\begin{pmatrix}f_{xx}&f_{xy}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ f_{yx}&f_{yy}\\\\\\\\\\\\\\\\end{pmatrix},\\\\\\\\\\\\\\\\qquad D=f_{xx}f_{yy}-f_{xy}^2$$</div><div class="math-block">$$D>0,\\\\\\\\\\\\\\\\ f_{xx}>0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{lokales Minimum};\\\\\\\\\\\\\\\\quad D>0,\\\\\\\\\\\\\\\\ f_{xx}<0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{lokales Maximum};\\\\\\\\\\\\\\\\quad D<0 \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Sattelpunkt}$$</div>
+<div class="math-block">$$H=\begin{pmatrix}f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{pmatrix},\qquad D=f_{xx}f_{yy}-f_{xy}^2$$</div><div class="math-block">$$D>0,\\ f_{xx}>0 \Rightarrow \text{lokales Minimum};\quad D>0,\\ f_{xx}<0 \Rightarrow \text{lokales Maximum};\quad D<0 \Rightarrow \text{Sattelpunkt}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -883,7 +883,7 @@ export const THEORY_RECIPE = {
 <p>Sie ersetzt die vollständige Lösung des Systems nicht.</p>
 </div><div class="info-card info-card-concept-title">
 <div class="label">Schattenpreis</div>
-<div class="value">$\\\\\\\\\\\\\\\\lambda$ deuten</div>
+<div class="value">$\lambda$ deuten</div>
 <p>Wert einer marginalen Lockerung der Restriktion.</p>
 </div>
 </div>
@@ -894,19 +894,19 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Aufbau der Lagrange-Funktion</h4>
 <p>Sobald eine Gleichungsnebenbedingung vorliegt, wird die Zielfunktion um die Restriktion erweitert. Damit wird aus einem eingeschränkten Problem wieder ein Gleichungssystem in mehreren Unbekannten inklusive Multiplikator.</p><p>Für die Klausur zählt vor allem das saubere Schema: Zielfunktion, Restriktion, Lagrange-Funktion, FOCs, Rückeinsetzen.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\mathcal{L}(x,y,\\\\\\\\\\\\\\\\lambda)=f(x,y)+\\\\\\\\\\\\\\\\lambda\\\\\\\\\\\\\\\\,(c-g(x,y))$$</div>
+<div class="math-block">$$\mathcal{L}(x,y,\lambda)=f(x,y)+\lambda\\,(c-g(x,y))$$</div>
 
 
 <h4 class="theory-subsection-title">FOCs, Tangentialbedingung und Lösung</h4>
 <p>Aus der Lagrange-Funktion entstehen die ersten Ableitungen nach allen Variablen und nach dem Multiplikator. Erst gemeinsam liefern sie die zulässige Lösung.</p><p>Die bekannte Tangentialbedingung ist nur eine Lesart dieser FOCs: Sie erklärt, warum sich Niveaukurve und Restriktionskurve im Optimum berühren.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial\\\\\\\\\\\\\\\\mathcal{L}}{\\\\\\\\\\\\\\\\partial x}=0,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial\\\\\\\\\\\\\\\\mathcal{L}}{\\\\\\\\\\\\\\\\partial y}=0,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial\\\\\\\\\\\\\\\\mathcal{L}}{\\\\\\\\\\\\\\\\partial \\\\\\\\\\\\\\\\lambda}=0$$</div>
+<div class="math-block">$$\frac{\partial\mathcal{L}}{\partial x}=0,\qquad \frac{\partial\mathcal{L}}{\partial y}=0,\qquad \frac{\partial\mathcal{L}}{\partial \lambda}=0$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Interpretation von λ und Erweiterungen</h4>
-<p>Der Multiplikator $\\\\\\\\\\\\\\\\lambda$ misst den Wert einer marginalen Lockerung der Restriktion. Genau deshalb spricht man vom Schattenpreis.</p><p>Die erweiterten Lagrange-Inhalte sind im Kurs keine neue Grundidee, sondern Variationen desselben Schemas: mehrere Restriktionen, andere Nebenbedingungen oder zusätzliche Randüberlegungen.</p>
+<p>Der Multiplikator $\lambda$ misst den Wert einer marginalen Lockerung der Restriktion. Genau deshalb spricht man vom Schattenpreis.</p><p>Die erweiterten Lagrange-Inhalte sind im Kurs keine neue Grundidee, sondern Variationen desselben Schemas: mehrere Restriktionen, andere Nebenbedingungen oder zusätzliche Randüberlegungen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -944,7 +944,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Typische Fehler</h4>
-<div class="warn-box"><strong>Nebenbedingung vergessen:</strong> Die Ableitung nach $\\\\\\\\\\\\\\\\lambda$ reproduziert die Restriktion — sie darf nie fehlen.</div><div class="warn-box"><strong>Tangentialbedingung als Endpunkt:</strong> Aus dem Ableitungsverhältnis allein folgt noch keine vollständige zulässige Lösung.</div><div class="warn-box"><strong>λ ohne ökonomische Lesart:</strong> Der Multiplikator ist nicht nur Hilfsvariable, sondern ein inhaltlich interpretierbarer Schattenpreis.</div>
+<div class="warn-box"><strong>Nebenbedingung vergessen:</strong> Die Ableitung nach $\lambda$ reproduziert die Restriktion — sie darf nie fehlen.</div><div class="warn-box"><strong>Tangentialbedingung als Endpunkt:</strong> Aus dem Ableitungsverhältnis allein folgt noch keine vollständige zulässige Lösung.</div><div class="warn-box"><strong>λ ohne ökonomische Lesart:</strong> Der Multiplikator ist nicht nur Hilfsvariable, sondern ein inhaltlich interpretierbarer Schattenpreis.</div>
 </div>
 </section>`,
   integralrechnung: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -977,7 +977,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Grundlagen und Hauptsatz</h4>
 <p>Die Integralrechnung startet im Kurs mit dem engen Zusammenhang zwischen Stammfunktion und bestimmtem Integral. Dadurch wird klar: Integration ist das Gegenstück zum Ableiten, aber nicht bloß dessen „Umkehrknopf“.</p><p>Besonders prüfungsrelevant ist die saubere Unterscheidung zwischen unbestimmtem Integral, bestimmtem Integral und Flächeninhalt.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\int f(x)\\\\\\\\\\\\\\\\,dx=F(x)+C,\\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\int_a^b f(x)\\\\\\\\\\\\\\\\,dx=F(b)-F(a)$$</div>
+<div class="math-block">$$\int f(x)\\,dx=F(x)+C,\qquad \int_a^b f(x)\\,dx=F(b)-F(a)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -985,7 +985,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Partielle Integration und Substitution</h4>
 <p>AN III trennt die beiden Standardmethoden explizit. Genau deshalb muss eine klausurfeste Lösung nicht nur rechnen, sondern zuerst erkennen, welche Struktur vorliegt: Produkt mit „abnehmender“ Ableitungsstufe oder verketteter Ausdruck mit passendem inneren Term.</p><p>Die Kleinübungen verbinden diese Methoden auch mit bestimmten Integralen und später mit numerischer Kontrolle in R.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\int u\\\\\\\\\\\\\\\\,v'\\\\\\\\\\\\\\\\,dx=uv-\\\\\\\\\\\\\\\\int u'v\\\\\\\\\\\\\\\\,dx$$</div><div class="math-block">$$\\\\\\\\\\\\\\\\int f(g(x))g'(x)\\\\\\\\\\\\\\\\,dx=\\\\\\\\\\\\\\\\int f(u)\\\\\\\\\\\\\\\\,du$$</div>
+<div class="math-block">$$\int u\\,v'\\,dx=uv-\int u'v\\,dx$$</div><div class="math-block">$$\int f(g(x))g'(x)\\,dx=\int f(u)\\,du$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1061,9 +1061,9 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Plot-Workflow</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\texttt{curve(f,\\\\\\\\\\\\\\\\ from=a,\\\\\\\\\\\\\\\\ to=b)}$$</div><p>Kurven einer Funktion im gewählten Intervall sichtbar machen.</p>
-<p><strong>Matrix-Workflow</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\texttt{A \\\\\\\\\\\\\\\\%*\\\\\\\\\\\\\\\\% B},\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\texttt{solve(A)},\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\texttt{eigen(A)}$$</div><p>Standardbefehle für Produkt, Inverse und Eigenwertkontrolle.</p>
-<p><strong>Numerische Methoden</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\texttt{optimize(...)} ,\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\texttt{optim(...)} ,\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\texttt{integrate(...)}$$</div><p>Kontrollbefehle für Optimierungs- und Integrationsaufgaben.</p>
+<p><strong>Plot-Workflow</strong></p><div class="math-block">$$\texttt{curve(f,\\ from=a,\\ to=b)}$$</div><p>Kurven einer Funktion im gewählten Intervall sichtbar machen.</p>
+<p><strong>Matrix-Workflow</strong></p><div class="math-block">$$\texttt{A \\%*\\% B},  \texttt{solve(A)},  \texttt{eigen(A)}$$</div><p>Standardbefehle für Produkt, Inverse und Eigenwertkontrolle.</p>
+<p><strong>Numerische Methoden</strong></p><div class="math-block">$$\texttt{optimize(...)} ,  \texttt{optim(...)} ,  \texttt{integrate(...)}$$</div><p>Kontrollbefehle für Optimierungs- und Integrationsaufgaben.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">

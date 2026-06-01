@@ -32,12 +32,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Vom Einzelbeobachtungsmodell zur kompakten Schreibweise</h4>
 <p>Im multiplen linearen Modell werden viele Einzelgleichungen zu einem einzigen Modellobjekt zusammengefasst. Dadurch wird sofort sichtbar, welche Größen Daten sind, welche Größen geschätzt werden und wo die Fehlerstruktur sitzt.</p><p>Die Matrixnotation spart nicht nur Platz. Sie macht Rangbedingungen, Projektionen und die Logik der OLS-Lösung überhaupt erst transparent.</p>
-<div class="math-block">$$y = X\\\\\\\\\\\\\\\\beta + u$$</div>
+<div class="math-block">$$y = X\beta + u$$</div>
 
 
 <h4 class="theory-subsection-title">Dimensionskontrolle ist echte Ökonometrie</h4>
 <p>Bevor gerechnet wird, muss geprüft werden, ob Produkte wie X&#39;X, X&#39;y und y - Xβ überhaupt definiert sind. Dimensionsfehler zeigen fast immer, dass Rollen von Daten, Parametern und Schätzern durcheinandergeraten sind.</p><p>Gerade in Klausuren ist diese Kontrolle ein Zeitsparer: Wer die Formen der Objekte sauber bestimmt, vermeidet lange Ketten falscher Umformungen.</p>
-<div class="math-block">$$X:(n \\\\\\\\\\\\\\\\times k),\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\beta:(k \\\\\\\\\\\\\\\\times 1),\\\\\\\\\\\\\\\\ y:(n \\\\\\\\\\\\\\\\times 1)$$</div>
+<div class="math-block">$$X:(n \times k),\\ \beta:(k \times 1),\\ y:(n \times 1)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -90,7 +90,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Mittelwert, Varianz und Kovarianz als empirische Bausteine</h4>
 <p>Die OLS-Formeln bestehen inhaltlich aus nichts anderem als gut organisierten Stichprobenmomenten. Mittelwerte beschreiben Lage, Varianzen die Eigenstreuung einer Variable und Kovarianzen die gemeinsame Bewegung zweier Größen.</p><p>Gerade die Steigung im einfachen Regressionsmodell liest sich ökonomisch als Verhältnis von gemeinsamer Bewegung in y und x zur Eigenvariation von x.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_1 = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\operatorname{Cov}(x,y)}{\\\\\\\\\\\\\\\\operatorname{Var}(x)}$$</div>
+<div class="math-block">$$\hat{\beta}_1 = \frac{\operatorname{Cov}(x,y)}{\operatorname{Var}(x)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -108,7 +108,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Stichprobenmomente</h4>
-<p>Konsistenz und Normalität basieren auf LLN und CLT für Stichprobenmomente ($\\bar y$, $\\overline{xy}$). $\\hat\\beta$ ist Funktion von Momenten → plim und asymptotische Verteilung über Delta-Methode/Slutsky. Unterscheide Population vs. Stichprobe klar.</p><div class="warn-box"><strong>Plim vs. Erwartungswert:</strong> Unverzerrtheit ist Eigenschaft endlicher Stichproben; Konsistenz asymptotisch.</div><div class="warn-box"><strong>Stichproben ≠ Population:</strong> Momentenbedingungen in GMM/IV analog zu Normalgleichungen.</div>
+<p>Konsistenz und Normalität basieren auf LLN und CLT für Stichprobenmomente ($\bar y$, $\overline{xy}$). $\hat\beta$ ist Funktion von Momenten → plim und asymptotische Verteilung über Delta-Methode/Slutsky. Unterscheide Population vs. Stichprobe klar.</p><div class="warn-box"><strong>Plim vs. Erwartungswert:</strong> Unverzerrtheit ist Eigenschaft endlicher Stichproben; Konsistenz asymptotisch.</div><div class="warn-box"><strong>Stichproben ≠ Population:</strong> Momentenbedingungen in GMM/IV analog zu Normalgleichungen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -150,7 +150,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Freiheitsgrade der OLS-Inferenz</strong></p><div class="math-block">$$df = n-k$$</div><p>Anzahl der Beobachtungen minus Anzahl der geschätzten Parameter.</p>
-<p><strong>Kritische Quantile</strong></p><div class="math-block">$$t_{1-\\\\\\\\\\\\\\\\alpha/2,\\\\\\\\\\\\\\\\, n-k}, \\\\\\\\\\\\\\\\qquad F_{1-\\\\\\\\\\\\\\\\alpha,\\\\\\\\\\\\\\\\, J,\\\\\\\\\\\\\\\\, n-k}$$</div><p>Die Ablehnungsgrenzen für Einzel- und Joint-Tests.</p>
+<p><strong>Kritische Quantile</strong></p><div class="math-block">$$t_{1-\alpha/2,\\, n-k}, \qquad F_{1-\alpha,\\, J,\\, n-k}$$</div><p>Die Ablehnungsgrenzen für Einzel- und Joint-Tests.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -229,12 +229,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Das Populationsmodell</h4>
 <p>Das theoretische Modell beschreibt den Erwartungszusammenhang in der Grundgesamtheit. Der Fehlerterm sammelt alle Einflüsse, die nicht explizit in X stehen, aber auf y wirken.</p><p>Ökonometrie beginnt damit, diese unbeobachtete Restgröße nicht zu ignorieren, sondern methodisch mitzudenken.</p>
-<div class="math-block">$$y_i = \\\\\\\\\\\\\\\\beta_0 + \\\\\\\\\\\\\\\\beta_1 x_{i1} + \\\\\\\\\\\\\\\\dots + \\\\\\\\\\\\\\\\beta_k x_{ik} + u_i$$</div>
+<div class="math-block">$$y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_k x_{ik} + u_i$$</div>
 
 
 <h4 class="theory-subsection-title">Von der Population zur Stichprobe</h4>
 <p>In der Stichprobe kennen wir die wahren β nicht. Wir ersetzen sie durch Schätzer und erzeugen daraus vorhergesagte Werte sowie Residuen.</p><p>Gerade in Klausuren ist die Trennung zentral: Residuen sind beobachtbar und datenabhängig, Fehlerterme nicht.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{y}_i = x_i'\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}, \\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\hat{u}_i = y_i - \\\\\\\\\\\\\\\\hat{y}_i$$</div>
+<div class="math-block">$$\hat{y}_i = x_i'\hat{\beta}, \qquad \hat{u}_i = y_i - \hat{y}_i$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -270,7 +270,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum quadrierte Residuen?</h4>
 <p>Die OLS-Zielfunktion gewichtet große Abweichungen stärker als kleine und verhindert, dass positive und negative Fehler sich einfach wegheben.</p><p>Gerade dadurch entsteht eine glatte Zielfunktion mit eindeutigen Bedingungen erster Ordnung.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\min_{\\\\\\\\\\\\\\\\beta}\\\\\\\\\\\\\\\\sum_{i=1}^n (y_i - x_i'\\\\\\\\\\\\\\\\beta)^2$$</div>
+<div class="math-block">$$\min_{\beta}\sum_{i=1}^n (y_i - x_i'\beta)^2$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -288,7 +288,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: OLS-Zielfunktion</h4>
 <p>Prüfungsstandard: (1) Zielfunktion SSR(β) = Σ(y_i − x_i&#39;β)² aufschreiben. (2) Begründen, warum quadriert (kein Wegheben, große Fehler stärker gewichtet). (3) Verbindung zu Normalgleichungen X&#39;(y − Xβ̂) = 0 herstellen. (4) Ausreißer-Effekt über Quadratisierung erklären.</p><p>Bei Interpretation: OLS minimiert nicht jeden Punkt, sondern die Gesamtabweichung — Residuen sind der unvermeidbare Modellrest, kein Rechenfehler.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial SSR}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\beta} = -2X'(y-X\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\beta) = 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow X'(y-X\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\beta})=0$$</div>
+<div class="math-block">$$\frac{\partial SSR}{\partial \beta} = -2X'(y-X\beta) = 0 \Rightarrow X'(y-X\hat{\beta})=0$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -306,7 +306,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: OLS-Zielfunktion (Ergänzung)</h4>
-<p>Minimiere $SSR(\\beta) = \\sum (y_i - x_i'\\beta)^2$. FOC → Normalgleichungen. Quadratische Strafe → große Residuen wiegen schwer. Geometrie: orthogonale Projektion von $y$ auf $\\mathcal{C}(X)$.</p><div class="warn-box"><strong>SSR vs TSS:</strong> Nicht verwechseln in $R^2$-Formel.</div><div class="warn-box"><strong>Ausreißer:</strong> Quadratische Zielfunktion empfindlich — robuste Alternativen (LAD) bei Bedarf.</div>
+<p>Minimiere $SSR(\beta) = \sum (y_i - x_i'\beta)^2$. FOC → Normalgleichungen. Quadratische Strafe → große Residuen wiegen schwer. Geometrie: orthogonale Projektion von $y$ auf $\mathcal{C}(X)$.</p><div class="warn-box"><strong>SSR vs TSS:</strong> Nicht verwechseln in $R^2$-Formel.</div><div class="warn-box"><strong>Ausreißer:</strong> Quadratische Zielfunktion empfindlich — robuste Alternativen (LAD) bei Bedarf.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -331,12 +331,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bedingungen erster Ordnung</h4>
 <p>Leitet man die Zielfunktion nach β ab, entsteht die Bedingung X&#39;(y - Xβ̂) = 0. Genau diese Gleichung verbindet das Optimierungsproblem mit der linearen Algebra.</p><p>Sie sagt: Nach der Schätzung darf in den Residuen keine lineare Information mehr stecken, die systematisch mit den Regressoren zusammenhängt.</p>
-<div class="math-block">$$X'(y - X\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}) = 0$$</div>
+<div class="math-block">$$X'(y - X\hat{\beta}) = 0$$</div>
 
 
 <h4 class="theory-subsection-title">Die geschlossene OLS-Lösung</h4>
 <p>Wenn X&#39;X invertierbar ist, kann die Normalgleichung nach β̂ aufgelöst werden. Damit wird sichtbar, wie Datenmatrix und Zielvariable gemeinsam den Schätzer bestimmen.</p><p>Die Lösung ist kompakt, aber inhaltlich reich: Viel Variation in X stabilisiert die Inversion und verbessert die Präzision der Schätzung.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta} = (X'X)^{-1}X'y$$</div>
+<div class="math-block">$$\hat{\beta} = (X'X)^{-1}X'y$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -350,7 +350,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Normalgleichungen</h4>
-<p>FOC von OLS: $X'(y - X\\hat\\beta) = 0$ ↔ Residuen orthogonal zu allen Regressoren. Lösung: $\\hat\\beta = (X'X)^{-1}X'y$ wenn $X'X$ invertierbar. Geometrie: Projektion von $y$ auf Spaltenraum von $X$.</p><div class="warn-box"><strong>Singularität:</strong> $X'X$ nicht invertierbar bei perfekter Kollinearität.</div><div class="warn-box"><strong>Orthogonalität ≠ Unabhängigkeit:</strong> $\\hat u \\perp X$ in Stichprobe bedeutet nicht $u \\perp X$ in Population.</div>
+<p>FOC von OLS: $X'(y - X\hat\beta) = 0$ ↔ Residuen orthogonal zu allen Regressoren. Lösung: $\hat\beta = (X'X)^{-1}X'y$ wenn $X'X$ invertierbar. Geometrie: Projektion von $y$ auf Spaltenraum von $X$.</p><div class="warn-box"><strong>Singularität:</strong> $X'X$ nicht invertierbar bei perfekter Kollinearität.</div><div class="warn-box"><strong>Orthogonalität ≠ Unabhängigkeit:</strong> $\hat u \perp X$ in Stichprobe bedeutet nicht $u \perp X$ in Population.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -375,7 +375,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Koeffizienten sind partielle Steigungen</h4>
 <p>Im multiplen linearen Modell misst β_j die Änderung des bedingten Erwartungswerts von y, wenn x_j um eine Einheit steigt und alle anderen Regressoren konstant bleiben.</p><p>Gerade dieses ceteris-paribus-Element unterscheidet Regressionsinterpretation von reiner Korrelation.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\partial E(y\\\\\\\\\\\\\\\\mid X)}{\\\\\\\\\\\\\\\\partial x_j} = \\\\\\\\\\\\\\\\beta_j$$</div>
+<div class="math-block">$$\frac{\partial E(y\mid X)}{\partial x_j} = \beta_j$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -393,7 +393,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Partielle Effekte</h4>
-<p>Bei $Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + u$: $\\beta_1$ = ceteris paribus Effekt von $X_1$ auf $E[Y|X]$, alle anderen Regressoren fixiert. Bei Log-Modellen: log-level, log-log, level-log Unterscheidung für Elastizität vs. semi-Elastizität.</p><div class="warn-box"><strong>Marginal vs. durchschnittlich:</strong> $\\beta_1$ ist partieller Effekt am Mittel, nicht automatisch kausale Wirkung.</div><div class="warn-box"><strong>Nichtlinearität:</strong> Bei $X^2$ ist Grenzeffekt $\\beta_1 + 2\\beta_2 X$ — abhängig vom Ausgangsniveau.</div>
+<p>Bei $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + u$: $\beta_1$ = ceteris paribus Effekt von $X_1$ auf $E[Y|X]$, alle anderen Regressoren fixiert. Bei Log-Modellen: log-level, log-log, level-log Unterscheidung für Elastizität vs. semi-Elastizität.</p><div class="warn-box"><strong>Marginal vs. durchschnittlich:</strong> $\beta_1$ ist partieller Effekt am Mittel, nicht automatisch kausale Wirkung.</div><div class="warn-box"><strong>Nichtlinearität:</strong> Bei $X^2$ ist Grenzeffekt $\beta_1 + 2\beta_2 X$ — abhängig vom Ausgangsniveau.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -438,8 +438,8 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Log-Log-Modell</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\log(y_i) = \\\\\\\\\\\\\\\\beta_0 + \\\\\\\\\\\\\\\\beta_1 \\\\\\\\\\\\\\\\log(x_i) + u_i$$</div><p>β_1 ist hier direkt eine Elastizität.</p>
-<p><strong>Interaktionsmodell</strong></p><div class="math-block">$$y_i = \\\\\\\\\\\\\\\\beta_0 + \\\\\\\\\\\\\\\\beta_1 x_i + \\\\\\\\\\\\\\\\beta_2 d_i + \\\\\\\\\\\\\\\\beta_3 (x_i d_i) + u_i$$</div><p>Die Steigung von x hängt hier davon ab, ob d_i = 0 oder 1 ist.</p>
+<p><strong>Log-Log-Modell</strong></p><div class="math-block">$$\log(y_i) = \beta_0 + \beta_1 \log(x_i) + u_i$$</div><p>β_1 ist hier direkt eine Elastizität.</p>
+<p><strong>Interaktionsmodell</strong></p><div class="math-block">$$y_i = \beta_0 + \beta_1 x_i + \beta_2 d_i + \beta_3 (x_i d_i) + u_i$$</div><p>Die Steigung von x hängt hier davon ab, ob d_i = 0 oder 1 ist.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -486,7 +486,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum OLS vollen Spaltenrang braucht</h4>
 <p>Ist ein Regressor exakt aus anderen Regressoren konstruierbar, bringt er keine eigene Information. Dann wird X&#39;X singulär und die OLS-Lösung ist nicht eindeutig.</p><p>Perfekte Multikollinearität ist daher keine kleine Störung, sondern ein Identifikationsbruch.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{rank}(X) = k \\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\Longleftrightarrow \\\\\\\\\\\\\\\\qquad (X'X)^{-1}\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{existiert}$$</div>
+<div class="math-block">$$\operatorname{rank}(X) = k \qquad \Longleftrightarrow \qquad (X'X)^{-1}  \text{existiert}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -502,7 +502,7 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Vollrangbedingung</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{rank}(X) = k$$</div><p>Nur bei vollem Spaltenrang ist das OLS-Problem eindeutig lösbar.</p>
+<p><strong>Vollrangbedingung</strong></p><div class="math-block">$$\operatorname{rank}(X) = k$$</div><p>Nur bei vollem Spaltenrang ist das OLS-Problem eindeutig lösbar.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -520,7 +520,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Keine perfekte Multikollinearität</h4>
-<p>Annahme MLR.3: Keine Spalte von $X$ ist exakte Linearkombination anderer. Verletzung: $(X'X)$ singulär → $\\hat\\beta$ nicht eindeutig. Perfect collinearity vs. hohe (imperfekte) Multikollinearität unterscheiden — letztere erhöht SE, ersteres macht Schätzung unmöglich.</p><div class="warn-box"><strong>Dummy-Trap:</strong> $k$ Kategorien → $k-1$ Dummies plus Intercept, sonst perfekte Kollinearität.</div><div class="warn-box"><strong>Imperfekt ≠ Verletzung:</strong> Hohe Korrelation unter Regressoren ist kein MLR-Verstoß, aber VIF/Condition Number prüfen.</div>
+<p>Annahme MLR.3: Keine Spalte von $X$ ist exakte Linearkombination anderer. Verletzung: $(X'X)$ singulär → $\hat\beta$ nicht eindeutig. Perfect collinearity vs. hohe (imperfekte) Multikollinearität unterscheiden — letztere erhöht SE, ersteres macht Schätzung unmöglich.</p><div class="warn-box"><strong>Dummy-Trap:</strong> $k$ Kategorien → $k-1$ Dummies plus Intercept, sonst perfekte Kollinearität.</div><div class="warn-box"><strong>Imperfekt ≠ Verletzung:</strong> Hohe Korrelation unter Regressoren ist kein MLR-Verstoß, aber VIF/Condition Number prüfen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -552,21 +552,21 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was E(u|X) = 0 wirklich bedeutet</h4>
 <p>Exogenität verlangt, dass nach Kontrolle der Regressoren keine systematische Information im Fehlerterm übrig bleibt, die mit X zusammenhängt.</p><p>Genau deshalb ist die Annahme kein Statistikdetail, sondern die Verbindung zwischen ökonomischer Modellierung und unverzerrter Schätzung.</p>
-<div class="math-block">$$E(u \\\\\\\\\\\\\\\\mid X) = 0$$</div>
+<div class="math-block">$$E(u \mid X) = 0$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Strenge vs. schwache Exogenität</h4>
-<p>Streng: $E(u|X)=0$. Schwach: $E(u)=0$ und $\\text{Cov}(x_j,u)=0$. Verletzung → verzerrte OLS, Instrumente/2SLS.</p>
+<p>Streng: $E(u|X)=0$. Schwach: $E(u)=0$ und $\text{Cov}(x_j,u)=0$. Verletzung → verzerrte OLS, Instrumente/2SLS.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Exogenität</h4>
-<p>Strikte Exogenität: $E[u|X] = 0$ → OLS unverzerrt. Schwache Exogenität für Konsistenz. Predetermined vs. endogen. IV-Lösung: $Cov(Z,u)=0$, $Cov(Z,X) \\neq 0$ (Relevanz). Exogenitäts-Tests (Hausman) nur mit Vorsicht.</p><div class="warn-box"><strong>Auslassungsbias:</strong> Relevante Variable in $u$ → $X$ korreliert mit $u$.</div><div class="warn-box"><strong>Reverse Causality:</strong> $Y$ beeinflusst $X$ → simultane Gleichung, OLS verzerrt.</div>
+<p>Strikte Exogenität: $E[u|X] = 0$ → OLS unverzerrt. Schwache Exogenität für Konsistenz. Predetermined vs. endogen. IV-Lösung: $Cov(Z,u)=0$, $Cov(Z,X) \neq 0$ (Relevanz). Exogenitäts-Tests (Hausman) nur mit Vorsicht.</p><div class="warn-box"><strong>Auslassungsbias:</strong> Relevante Variable in $u$ → $X$ korreliert mit $u$.</div><div class="warn-box"><strong>Reverse Causality:</strong> $Y$ beeinflusst $X$ → simultane Gleichung, OLS verzerrt.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -591,7 +591,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die zwei Bedingungen des OVB</h4>
 <p>Eine ausgelassene Variable z erzeugt nur dann Bias, wenn sie erstens einen eigenen Effekt auf y hat und zweitens mit dem interessierenden Regressor x korreliert.</p><p>Fehlt nur eine der beiden Bedingungen, entsteht kein systematischer Omitted Variable Bias.</p>
-<div class="math-block">$$E[\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\gamma}_1] = \\\\\\\\\\\\\\\\beta_1 + \\\\\\\\\\\\\\\\beta_2 \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\operatorname{Cov}(x,z)}{\\\\\\\\\\\\\\\\operatorname{Var}(x)}$$</div>
+<div class="math-block">$$E[\hat{\gamma}_1] = \beta_1 + \beta_2 \frac{\operatorname{Cov}(x,z)}{\operatorname{Var}(x)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -609,7 +609,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Endogenität und OVB</h4>
-<p>OVB: $\\text{bias}(\\hat\\beta_1) = \\beta_2 \\cdot \\delta_1$ mit $\\delta_1$ aus Regress $X_2$ auf $X_1$. Endogenität wenn $Cov(X,u) \\neq 0$ — OLS verzerrt und inkonsistent. Lösungen: IV/2SLS, natürliche Experimente, Fixed Effects — je nach Datenstruktur.</p><div class="warn-box"><strong>OVB-Richtung:</strong> Vorzeichen des Bias aus Korrelation $X_1,X_2$ und Effekt $\\beta_2$ ableiten — nicht raten.</div><div class="warn-box"><strong>Signifikanz täuscht:</strong> Verzerrter $\\hat\\beta$ kann trotzdem „signifikant" sein.</div>
+<p>OVB: $\text{bias}(\hat\beta_1) = \beta_2 \cdot \delta_1$ mit $\delta_1$ aus Regress $X_2$ auf $X_1$. Endogenität wenn $Cov(X,u) \neq 0$ — OLS verzerrt und inkonsistent. Lösungen: IV/2SLS, natürliche Experimente, Fixed Effects — je nach Datenstruktur.</p><div class="warn-box"><strong>OVB-Richtung:</strong> Vorzeichen des Bias aus Korrelation $X_1,X_2$ und Effekt $\beta_2$ ableiten — nicht raten.</div><div class="warn-box"><strong>Signifikanz täuscht:</strong> Verzerrter $\hat\beta$ kann trotzdem „signifikant" sein.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -641,7 +641,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungswert statt Einzelfall</h4>
 <p>Ein unverzerrter Schätzer ist im Durchschnitt vieler möglicher Stichproben richtig. Das heißt ausdrücklich nicht, dass jede einzelne Schätzung präzise oder exakt sein muss.</p><p>Gerade diese Unterscheidung wird in Prüfungen häufig unterschlagen.</p>
-<div class="math-block">$$E(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}\\\\\\\\\\\\\\\\mid X) = \\\\\\\\\\\\\\\\beta$$</div>
+<div class="math-block">$$E(\hat{\beta}\mid X) = \beta$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -655,7 +655,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Unverzerrtheit</h4>
-<p>$E[\\hat\\beta|X] = \\beta$ unter $E[u|X]=0$ (MLR.4). Beweis: $E[(X'X)^{-1}X'u|X] = 0$. Verletzung: OVB, Endogenität. Unverzerrtheit ist bedingt auf $X$ — nicht bedeutungslos bei kleinem $n$.</p><div class="warn-box"><strong>Bedingt auf X:</strong> Unverzerrtheit gilt für gegebene Regressor-Matrix.</div><div class="warn-box"><strong>Konsistenz wichtiger:</strong> In großen Stichproben zählt plim; Unverzerrtheit allein reicht nicht.</div>
+<p>$E[\hat\beta|X] = \beta$ unter $E[u|X]=0$ (MLR.4). Beweis: $E[(X'X)^{-1}X'u|X] = 0$. Verletzung: OVB, Endogenität. Unverzerrtheit ist bedingt auf $X$ — nicht bedeutungslos bei kleinem $n$.</p><div class="warn-box"><strong>Bedingt auf X:</strong> Unverzerrtheit gilt für gegebene Regressor-Matrix.</div><div class="warn-box"><strong>Konsistenz wichtiger:</strong> In großen Stichproben zählt plim; Unverzerrtheit allein reicht nicht.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -700,9 +700,9 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Gauss-Markov-Aussage</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{Var}(c'\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}\\\\\\\\\\\\\\\\mid X) \\\\\\\\\\\\\\\\le \\\\\\\\\\\\\\\\operatorname{Var}(c'\\\\\\\\\\\\\\\\tilde{\\\\\\\\\\\\\\\\beta}\\\\\\\\\\\\\\\\mid X)$$</div><p>Für jede Linearkombination der Parameter (Gewichtsvektor c) hat der OLS-Schätzer unter den klassischen Annahmen die kleinstmögliche Varianz verglichen mit jedem anderen linearen unverzerrten Schätzer derselben Linearkombination — genau das meint BLUE.</p>
-<p><strong>Varianz von OLS (homoskedastisch)</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{Var}(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}\\\\\\\\\\\\\\\\mid X)=\\\\\\\\\\\\\\\\sigma^2(X'X)^{-1}$$</div><p>Präzisionsmaß des Schätzers unter klassischen Annahmen.</p>
-<p><strong>BLUE-Merksatz</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{OLS ist BLUE unter GM-Annahmen}$$</div><p>Best Linear Unbiased Estimator innerhalb der linearen unverzerrten Klasse.</p>
+<p><strong>Gauss-Markov-Aussage</strong></p><div class="math-block">$$\operatorname{Var}(c'\hat{\beta}\mid X) \le \operatorname{Var}(c'\tilde{\beta}\mid X)$$</div><p>Für jede Linearkombination der Parameter (Gewichtsvektor c) hat der OLS-Schätzer unter den klassischen Annahmen die kleinstmögliche Varianz verglichen mit jedem anderen linearen unverzerrten Schätzer derselben Linearkombination — genau das meint BLUE.</p>
+<p><strong>Varianz von OLS (homoskedastisch)</strong></p><div class="math-block">$$\operatorname{Var}(\hat{\beta}\mid X)=\sigma^2(X'X)^{-1}$$</div><p>Präzisionsmaß des Schätzers unter klassischen Annahmen.</p>
+<p><strong>BLUE-Merksatz</strong></p><div class="math-block">$$\text{OLS ist BLUE unter GM-Annahmen}$$</div><p>Best Linear Unbiased Estimator innerhalb der linearen unverzerrten Klasse.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -751,8 +751,8 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Konsistenz</h4>
-<p>$\\text{plim}\\,\\hat{\\beta}=\\beta$ wenn $n\\to\\infty$ und Annahmen gelten. Schwächer als Unverzerrtheit für endliches $n$, stärker asymptotisch.</p>
-      <div class="math-block">$$\\text{plim}_{n\\to\\infty}\\hat{\\beta} = \\beta$$</div>
+<p>$\text{plim}\,\hat{\beta}=\beta$ wenn $n\to\infty$ und Annahmen gelten. Schwächer als Unverzerrtheit für endliches $n$, stärker asymptotisch.</p>
+      <div class="math-block">$$\text{plim}_{n\to\infty}\hat{\beta} = \beta$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -766,7 +766,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Konsistenz</h4>
-<p>$\\text{plim}(\\hat\\beta) = \\beta$ wenn $X'X/n \\xrightarrow{p} Q$ positiv definit und $X'u/n \\xrightarrow{p} 0$ (Exogenität). Verletzung bei Endogenität: inkonsistent. Monte Carlo illustriert: mit wachsendem $n$ streut $\\hat\\beta$ um wahren Wert.</p><div class="warn-box"><strong>Unverzerrt ≠ konsistent:</strong> Verzerrter Schätzer kann konsistent sein (Bias → 0).</div><div class="warn-box"><strong>Endogenität:</strong> Hauptgrund für Inkonsistenz von OLS in Anwendungen.</div>
+<p>$\text{plim}(\hat\beta) = \beta$ wenn $X'X/n \xrightarrow{p} Q$ positiv definit und $X'u/n \xrightarrow{p} 0$ (Exogenität). Verletzung bei Endogenität: inkonsistent. Monte Carlo illustriert: mit wachsendem $n$ streut $\hat\beta$ um wahren Wert.</p><div class="warn-box"><strong>Unverzerrt ≠ konsistent:</strong> Verzerrter Schätzer kann konsistent sein (Bias → 0).</div><div class="warn-box"><strong>Endogenität:</strong> Hauptgrund für Inkonsistenz von OLS in Anwendungen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -781,7 +781,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum durch n-k geteilt wird</h4>
 <p>Die Residuen sind nicht frei, weil sie bereits die OLS-Restriktionen erfüllen. Mit jedem geschätzten Parameter geht deshalb ein Freiheitsgrad verloren.</p><p>Teilt man durch n statt durch n-k, wird die Fehlervarianz systematisch zu klein geschätzt. Genau diese Korrektur macht die klassische Schätzung unverzerrt.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\sigma}^2 = \\\\\\\\\\\\\\\\frac{SSR}{n-k}$$</div>
+<div class="math-block">$$\hat{\sigma}^2 = \frac{SSR}{n-k}$$</div>
 
 
 <h4 class="theory-subsection-title">Warum das für Standardfehler entscheidend ist</h4>
@@ -795,7 +795,7 @@ export const THEORY_RECIPE = {
 <div class="info-grid">
 <div class="info-card info-card-concept-title">
 <div class="label">SSR</div>
-<div class="value">$\\\\\\\\\\\\\\\\sum \\\\\\\\\\\\\\\\hat{u}_i^2$</div>
+<div class="value">$\sum \hat{u}_i^2$</div>
 <p>Residual Sum of Squares als gemessene Reststreuung</p>
 </div><div class="info-card info-card-concept-title">
 <div class="label">n-k</div>
@@ -812,8 +812,8 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Residual Sum of Squares</strong></p><div class="math-block">$$SSR = \\\\\\\\\\\\\\\\sum_{i=1}^n \\\\\\\\\\\\\\\\hat{u}_i^2$$</div><p>Misst die gesamte verbleibende Modellabweichung in der Stichprobe.</p>
-<p><strong>Fehlervarianzschätzer</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\sigma}^2 = \\\\\\\\\\\\\\\\frac{SSR}{n-k}$$</div><p>Klassische Schätzung der Fehlerstreuung unter dem linearen Modell.</p>
+<p><strong>Residual Sum of Squares</strong></p><div class="math-block">$$SSR = \sum_{i=1}^n \hat{u}_i^2$$</div><p>Misst die gesamte verbleibende Modellabweichung in der Stichprobe.</p>
+<p><strong>Fehlervarianzschätzer</strong></p><div class="math-block">$$\hat{\sigma}^2 = \frac{SSR}{n-k}$$</div><p>Klassische Schätzung der Fehlerstreuung unter dem linearen Modell.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -842,7 +842,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum die Fehlervarianz nicht beobachtbar ist</h4>
 <p>Die wahre Fehlervarianz beschreibt die Streuung des unbeobachteten Fehlerterms u. In der Stichprobe sehen wir aber nur Residuen û, also die nach der OLS-Anpassung verbleibenden Abweichungen.</p><p>Deshalb wird σ² aus der Residuenquadratsumme approximiert. Das ist eine Schätzung von Unsicherheit, keine direkt beobachtete Modellgröße.</p>
-<div class="math-block">$$SSR = \\\\\\\\\\\\\\\\hat{u}'\\\\\\\\\\\\\\\\hat{u} = \\\\\\\\\\\\\\\\sum_{i=1}^n \\\\\\\\\\\\\\\\hat{u}_i^2$$</div>
+<div class="math-block">$$SSR = \hat{u}'\hat{u} = \sum_{i=1}^n \hat{u}_i^2$$</div>
 
 
 <h4 class="theory-subsection-title">Typische Fehler</h4>
@@ -871,7 +871,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die Matrix hinter allen Standardfehlern</h4>
 <p>Unter Homoskedastizität gilt die klassische OLS-Formel für die bedingte Kovarianzmatrix des Schätzers. Sie zeigt unmittelbar, wovon Unsicherheit abhängt: von σ² und von der Geometrie der Regressoren.</p><p>Große Reststreuung macht alle Schätzer unsicherer; gut getrennte, informative Regressoren machen sie präziser.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{Var}(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}\\\\\\\\\\\\\\\\mid X) = \\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\sigma}^2 (X'X)^{-1}$$</div>
+<div class="math-block">$$\operatorname{Var}(\hat{\beta}\mid X) = \hat{\sigma}^2 (X'X)^{-1}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -885,7 +885,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Kovarianzmatrix von OLS</h4>
-<p>$Var(\\hat\\beta) = \\sigma^2 (X'X)^{-1}$ unter Homoskedastizität. Schätzer: $\\widehat{Var}(\\hat\\beta) = \\hat\\sigma^2 (X'X)^{-1}$. Standardfehler = Wurzel aus Diagonalelementen. Korrelationen zwischen $\\hat\\beta_j$ aus Nicht-Diagonal-Elementen.</p><div class="warn-box"><strong>SE skaliert mit $\\sigma$:</strong> Größere Streuung von $u$ → breitere Konfidenzintervalle.</div><div class="warn-box"><strong>Mehr Daten helfen:</strong> $X'X$ wächst mit $n$ → präzisere Schätzung.</div>
+<p>$Var(\hat\beta) = \sigma^2 (X'X)^{-1}$ unter Homoskedastizität. Schätzer: $\widehat{Var}(\hat\beta) = \hat\sigma^2 (X'X)^{-1}$. Standardfehler = Wurzel aus Diagonalelementen. Korrelationen zwischen $\hat\beta_j$ aus Nicht-Diagonal-Elementen.</p><div class="warn-box"><strong>SE skaliert mit $\sigma$:</strong> Größere Streuung von $u$ → breitere Konfidenzintervalle.</div><div class="warn-box"><strong>Mehr Daten helfen:</strong> $X'X$ wächst mit $n$ → präzisere Schätzung.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -910,7 +910,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was die Punktprognose ausdrückt</h4>
 <p>Setzt man einen neuen Kovariatenvektor x₀ in das geschätzte Modell ein, erhält man die Prognose des bedingten Erwartungswerts. Die Formel ist damit keine beliebige Rechenschablone, sondern die geschätzte mittlere Antwort des Modells.</p><p>Fitted values innerhalb der Stichprobe und neue Prognosen außerhalb der Stichprobe folgen derselben Logik.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{y}_0 = x_0'\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}$$</div>
+<div class="math-block">$$\hat{y}_0 = x_0'\hat{\beta}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -928,7 +928,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Prognose mit OLS</h4>
-<p>Punktprognose: $\\hat{y}_0 = x_0'\\hat\\beta$. Prognosefehler = Schätzfehler + Störterm. Für erwarteten Wert reicht $x_0'\\hat\\beta$; für Einzelbeobachtung zusätzliche $\\hat\\sigma^2$. Immer Regressorvektor $x_0$ exakt angeben.</p><div class="warn-box"><strong>Extrapolation:</strong> Prognose außerhalb Stichprobenbereich von $X$ ist unsicher — Modell spezifikation extrapoliert.</div><div class="warn-box"><strong>Prognose ≠ Kausalität:</strong> $\\hat{y}_0$ ist conditional prediction, kein counterfactual policy effect.</div>
+<p>Punktprognose: $\hat{y}_0 = x_0'\hat\beta$. Prognosefehler = Schätzfehler + Störterm. Für erwarteten Wert reicht $x_0'\hat\beta$; für Einzelbeobachtung zusätzliche $\hat\sigma^2$. Immer Regressorvektor $x_0$ exakt angeben.</p><div class="warn-box"><strong>Extrapolation:</strong> Prognose außerhalb Stichprobenbereich von $X$ ist unsicher — Modell spezifikation extrapoliert.</div><div class="warn-box"><strong>Prognose ≠ Kausalität:</strong> $\hat{y}_0$ ist conditional prediction, kein counterfactual policy effect.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -953,12 +953,12 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Intervall für den bedingten Mittelwert</h4>
 <p>Das Konfidenzintervall um E(y₀|x₀) misst nur die Unsicherheit über den unbekannten Mittelwert. Es berücksichtigt also, dass β unbekannt ist, aber nicht die zusätzliche Zufallsschwankung einer einzelnen neuen Beobachtung.</p><p>Deshalb ist dieses Intervall enger und für Aussagen über den durchschnittlichen Zusammenhang gedacht.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{y}_0 \\\\\\\\\\\\\\\\pm t_{\\\\\\\\\\\\\\\\alpha/2,n-k}\\\\\\\\\\\\\\\\, se(\\\\\\\\\\\\\\\\hat{y}_0)$$</div>
+<div class="math-block">$$\hat{y}_0 \pm t_{\alpha/2,n-k}\\, se(\hat{y}_0)$$</div>
 
 
 <h4 class="theory-subsection-title">Intervall für eine neue Beobachtung</h4>
 <p>Das Prognoseintervall muss zusätzlich den neuen Fehlerterm u₀ tragen. Es ist deshalb immer breiter als das Intervall für den Mittelwert.</p><p>Wer diese Zusatzunsicherheit vergisst, unterschätzt das Vorhersagerisiko systematisch.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{y}_0 \\\\\\\\\\\\\\\\pm t_{\\\\\\\\\\\\\\\\alpha/2,n-k}\\\\\\\\\\\\\\\\, \\\\\\\\\\\\\\\\sqrt{se(\\\\\\\\\\\\\\\\hat{y}_0)^2 + \\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\sigma}^2}$$</div>
+<div class="math-block">$$\hat{y}_0 \pm t_{\alpha/2,n-k}\\, \sqrt{se(\hat{y}_0)^2 + \hat{\sigma}^2}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -972,7 +972,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Prognoseintervalle</h4>
-<p>KI für $E[Y|x_0]$ schmaler als PI für einzelne $Y_{neu}$ — PI enthält zusätzlich $\\sigma^2$. Formeln aus VL: Varianz der Prognose = Schätzvarianz von $x_0'\\hat\\beta$ plus Fehlervarianz. Immer Intervallbreite und Freiheitsgrade nennen.</p><div class="warn-box"><strong>PI breiter als KI:</strong> Häufige Klausurfalle — Einzelprognose hat mehr Unsicherheit.</div><div class="warn-box"><strong>Conditional on x:</strong> Intervalle gelten bei gegebenem $x_0$, nicht für unbeobachtete Regressorwerte.</div>
+<p>KI für $E[Y|x_0]$ schmaler als PI für einzelne $Y_{neu}$ — PI enthält zusätzlich $\sigma^2$. Formeln aus VL: Varianz der Prognose = Schätzvarianz von $x_0'\hat\beta$ plus Fehlervarianz. Immer Intervallbreite und Freiheitsgrade nennen.</p><div class="warn-box"><strong>PI breiter als KI:</strong> Häufige Klausurfalle — Einzelprognose hat mehr Unsicherheit.</div><div class="warn-box"><strong>Conditional on x:</strong> Intervalle gelten bei gegebenem $x_0$, nicht für unbeobachtete Regressorwerte.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -987,7 +987,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum das adjustierte R² existiert</h4>
 <p>Das einfache R² steigt nie, wenn zusätzliche Regressoren aufgenommen werden. Deshalb bestraft das adjustierte R² unnötige Komplexität und ist für Modellvergleiche oft informativer.</p><p>Es verhindert nicht jede Überanpassung, ist aber ein besseres Warnsignal als das rohe R².</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\bar{R}^2 = 1 - \\\\\\\\\\\\\\\\frac{SSR/(n-k)}{TSS/(n-1)}$$</div>
+<div class="math-block">$$\bar{R}^2 = 1 - \frac{SSR/(n-k)}{TSS/(n-1)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -997,15 +997,15 @@ export const THEORY_RECIPE = {
 <div class="info-grid">
 <div class="info-card info-card-concept-title">
 <div class="label">TSS / SST</div>
-<div class="value">$\\\\\\\\\\\\\\\\sum (y_i-\\\\\\\\\\\\\\\\bar{y})^2$</div>
+<div class="value">$\sum (y_i-\bar{y})^2$</div>
 <p>Gesamtvariation der Zielvariable</p>
 </div><div class="info-card info-card-concept-title">
 <div class="label">ESS</div>
-<div class="value">$\\\\\\\\\\\\\\\\sum (\\\\\\\\\\\\\\\\hat{y}_i-\\\\\\\\\\\\\\\\bar{y})^2$</div>
+<div class="value">$\sum (\hat{y}_i-\bar{y})^2$</div>
 <p>Erklärte Variation durch das Modell</p>
 </div><div class="info-card info-card-concept-title">
 <div class="label">SSR</div>
-<div class="value">$\\\\\\\\\\\\\\\\sum \\\\\\\\\\\\\\\\hat{u}_i^2$</div>
+<div class="value">$\sum \hat{u}_i^2$</div>
 <p>Nicht erklärte Variation</p>
 </div>
 </div>
@@ -1016,14 +1016,14 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was R² eigentlich misst</h4>
 <p>R² misst, welcher Anteil der Variation von y durch das Modell erklärt wird. Es ist also eine Fit-Kennzahl, kein Kausalitäts- oder Qualitätsurteil über die inhaltliche Modellidee.</p><p>Gerade deshalb kann ein Modell mit hohem R² kausal wertlos sein und ein kausal sinnvolles Modell durchaus ein moderates R² haben.</p>
-<div class="math-block">$$R^2 = 1 - \\\\\\\\\\\\\\\\frac{SSR}{TSS}$$</div>
+<div class="math-block">$$R^2 = 1 - \frac{SSR}{TSS}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: R² und adj. R²</h4>
-<p>$R^2 = 1 - SSR/TSS$ — erklärter Anteil der Varianz von $y$. $\\bar{R}^2$ bestraft zusätzliche Regressoren. Hohes $R^2$ ≠ kausales Modell, ≠ gute Prognose out-of-sample. Vergleich nur bei gleicher $y$-Variable.</p><div class="warn-box"><strong>R² steigt mit Regressoren:</strong> Deshalb $\\bar{R}^2$ für Modellvergleich.</div><div class="warn-box"><strong>Within-R² in FE:</strong> In Panel-Fixed-Effects anders interpretieren als pooled $R^2$.</div>
+<p>$R^2 = 1 - SSR/TSS$ — erklärter Anteil der Varianz von $y$. $\bar{R}^2$ bestraft zusätzliche Regressoren. Hohes $R^2$ ≠ kausales Modell, ≠ gute Prognose out-of-sample. Vergleich nur bei gleicher $y$-Variable.</p><div class="warn-box"><strong>R² steigt mit Regressoren:</strong> Deshalb $\bar{R}^2$ für Modellvergleich.</div><div class="warn-box"><strong>Within-R² in FE:</strong> In Panel-Fixed-Effects anders interpretieren als pooled $R^2$.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1045,13 +1045,13 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Hypothesenlogik für einen Koeffizienten</h4>
 <p>Beim t-Test wird geprüft, ob ein einzelner Koeffizient mit einer hypothetischen Null oder einem anderen Referenzwert vereinbar ist. Meist lautet die Nullhypothese βⱼ = 0.</p><p>Der Test vergleicht die beobachtete Abweichung vom Hypothesenwert mit dem geschätzten Standardfehler.</p><p>Unter den klassischen Annahmen des linearen Modells (strikte Exogenität, Homoskedastizität, keine perfekte Multikollinearität) und Normalität der Fehler ist die Teststatistik exakt t-verteilt mit n−k Freiheitsgraden; bei Verletzung der Normalität dient dieselbe Statistik oft als asymptotische Approximation bei großem n.</p>
-<div class="math-block">$$t = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j - \\\\\\\\\\\\\\\\beta_{j,0}}{se(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j)}$$</div>
+<div class="math-block">$$t = \frac{\hat{\beta}_j - \beta_{j,0}}{se(\hat{\beta}_j)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>t-Statistik</strong></p><div class="math-block">$$t = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j - \\\\\\\\\\\\\\\\beta_{j,0}}{se(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j)}$$</div><p>Einzeltest auf eine lineare Restriktion für einen Koeffizienten.</p>
+<p><strong>t-Statistik</strong></p><div class="math-block">$$t = \frac{\hat{\beta}_j - \beta_{j,0}}{se(\hat{\beta}_j)}$$</div><p>Einzeltest auf eine lineare Restriktion für einen Koeffizienten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1065,7 +1065,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: t-Test</h4>
-<p>$t = \\hat\\beta_j / SE(\\hat\\beta_j)$ unter $H_0: \\beta_j = 0$. Vergleich mit $t_{n-k-1}$ oder p-Wert. Einseitig vs. zweiseitig. Bei heteroskedastischen Fehlern: robuste t-Statistik mit korrigierten SE.</p><div class="warn-box"><strong>df nicht vergessen:</strong> $n-k-1$, nicht $n$ oder $n-k$.</div><div class="warn-box"><strong>Ökonomische vs. statistische Signifikanz:</strong> Kleines SE kann irrelevanten Effekt signifikant machen.</div>
+<p>$t = \hat\beta_j / SE(\hat\beta_j)$ unter $H_0: \beta_j = 0$. Vergleich mit $t_{n-k-1}$ oder p-Wert. Einseitig vs. zweiseitig. Bei heteroskedastischen Fehlern: robuste t-Statistik mit korrigierten SE.</p><div class="warn-box"><strong>df nicht vergessen:</strong> $n-k-1$, nicht $n$ oder $n-k$.</div><div class="warn-box"><strong>Ökonomische vs. statistische Signifikanz:</strong> Kleines SE kann irrelevanten Effekt signifikant machen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1087,7 +1087,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Restricted vs. unrestricted model</h4>
 <p>In vielen Klausuraufgaben wird der F-Test als Vergleich zwischen einem eingeschränkten und einem uneingeschränkten Modell formuliert. Die Frage lautet dann: Verbessert das weniger eingeschränkte Modell den Fit stark genug, um die zusätzlichen Freiheitsgrade zu rechtfertigen?</p><p>Die Teststatistik basiert genau auf diesem zusätzlichen Fit relativ zur verbleibenden Reststreuung.</p>
-<div class="math-block">$$F = \\\\\\\\\\\\\\\\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$</div>
+<div class="math-block">$$F = \frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1101,7 +1101,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: F-Test</h4>
-<p>Testet lineare Restriktionen auf $\\beta$: $H_0: R\\beta = r$. $F = \\frac{(SSR_r - SSR_u)/q}{SSR_u/(n-k-1)} \\sim F_{q,n-k-1}$ unter $H_0$ und MLR. Spezialfall $q=1$: $F = t^2$. Gesamttest: alle Slope-Koeffizienten = 0.</p><div class="warn-box"><strong>Eingeschränkt vs. uneingeschränkt:</strong> SSR muss steigen unter $H_0$ — sonst Rechenfehler.</div><div class="warn-box"><strong>F vs. t:</strong> Einzelhypothese → t; mehrere gemeinsame Restriktionen → F.</div>
+<p>Testet lineare Restriktionen auf $\beta$: $H_0: R\beta = r$. $F = \frac{(SSR_r - SSR_u)/q}{SSR_u/(n-k-1)} \sim F_{q,n-k-1}$ unter $H_0$ und MLR. Spezialfall $q=1$: $F = t^2$. Gesamttest: alle Slope-Koeffizienten = 0.</p><div class="warn-box"><strong>Eingeschränkt vs. uneingeschränkt:</strong> SSR muss steigen unter $H_0$ — sonst Rechenfehler.</div><div class="warn-box"><strong>F vs. t:</strong> Einzelhypothese → t; mehrere gemeinsame Restriktionen → F.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1126,7 +1126,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Intervalllogik statt Punktwertfixierung</h4>
 <p>Ein Koeffizientenschätzer ist nur zusammen mit seiner Unsicherheitsumgebung sinnvoll interpretierbar. Das Konfidenzintervall gibt genau diese Umgebung auf dem gewählten Sicherheitsniveau an.</p><p>Je enger das Intervall, desto präziser die Schätzung; je näher es an null liegt oder null enthält, desto schwächer die Evidenz gegen H₀: βⱼ = 0.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j \\\\\\\\\\\\\\\\pm t_{\\\\\\\\\\\\\\\\alpha/2,n-k}\\\\\\\\\\\\\\\\, se(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j)$$</div>
+<div class="math-block">$$\hat{\beta}_j \pm t_{\alpha/2,n-k}\\, se(\hat{\beta}_j)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1144,7 +1144,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Konfidenzintervalle</h4>
-<p>$\\hat\\beta_j \\pm t_{n-k-1,\\alpha/2} \\cdot SE(\\hat\\beta_j)$. Interpretation: Wiederholungslogik — $(1-\\alpha)$% der Intervalle enthalten wahren $\\beta_j$. Äquivalenz zum zweiseitigen t-Test: $H_0: \\beta_j = \\beta_{j0}$ ablehnen ⟺ $\\beta_{j0}$ nicht im KI.</p><div class="warn-box"><strong>KI ≠ Wahrscheinlichkeit für $\\beta$:</strong> Parameter ist fix; Intervall ist zufällig.</div><div class="warn-box"><strong>Breite:</strong> Hängt von $n$, $SE$ und $\\alpha$ ab — engeres KI ≠ besseres Modell.</div>
+<p>$\hat\beta_j \pm t_{n-k-1,\alpha/2} \cdot SE(\hat\beta_j)$. Interpretation: Wiederholungslogik — $(1-\alpha)$% der Intervalle enthalten wahren $\beta_j$. Äquivalenz zum zweiseitigen t-Test: $H_0: \beta_j = \beta_{j0}$ ablehnen ⟺ $\beta_{j0}$ nicht im KI.</p><div class="warn-box"><strong>KI ≠ Wahrscheinlichkeit für $\beta$:</strong> Parameter ist fix; Intervall ist zufällig.</div><div class="warn-box"><strong>Breite:</strong> Hängt von $n$, $SE$ und $\alpha$ ab — engeres KI ≠ besseres Modell.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1169,19 +1169,19 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Normalitätsannahme und Likelihood</h4>
 <p>Im normalen linearen Modell wird der Fehlervektor als normalverteilt mit konstanter Varianz modelliert. Daraus folgt eine geschlossene Log-Likelihood in β und σ².</p><p>Diese Darstellung ist nicht nur formal: Sie verbindet Schätzung, Verteilungsannahme und Inferenz in einem gemeinsamen Rahmen.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\ell(\\\\\\\\\\\\\\\\beta,\\\\\\\\\\\\\\\\sigma^2\\\\\\\\\\\\\\\\mid y,X)=-\\\\\\\\\\\\\\\\frac{T}{2}\\\\\\\\\\\\\\\\ln(2\\\\\\\\\\\\\\\\pi)-\\\\\\\\\\\\\\\\frac{T}{2}\\\\\\\\\\\\\\\\ln(\\\\\\\\\\\\\\\\sigma^2)-\\\\\\\\\\\\\\\\frac{(y-X\\\\\\\\\\\\\\\\beta)'(y-X\\\\\\\\\\\\\\\\beta)}{2\\\\\\\\\\\\\\\\sigma^2}$$</div>
+<div class="math-block">$$\ell(\beta,\sigma^2\mid y,X)=-\frac{T}{2}\ln(2\pi)-\frac{T}{2}\ln(\sigma^2)-\frac{(y-X\beta)'(y-X\beta)}{2\sigma^2}$$</div>
 
 
 <h4 class="theory-subsection-title">Beziehung zwischen OLS und MLE</h4>
 <p>Unter Normalität maximiert dieselbe β-Lösung wie bei OLS die Likelihood. Das erklärt, warum OLS- und MLE-Koeffizienten hier übereinstimmen.</p><p>Der Unterschied liegt in der Begründungslogik: OLS als Quadratsummenminimum, MLE als Wahrscheinlichkeitsmaximum.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_{MLE}=(X'X)^{-1}X'y=\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_{OLS}$$</div>
+<div class="math-block">$$\hat{\beta}_{MLE}=(X'X)^{-1}X'y=\hat{\beta}_{OLS}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: ML unter Normalität</h4>
-<p>Bei $u \\sim N(0,\\sigma^2 I)$: ML-Schätzer für $\\beta$ = OLS. ML für $\\sigma^2$: $SSR/n$ (nicht $n-k-1$). Normalität liefert exakte t/F-Verteilungen in endlichen Stichproben. Gauss-Markov + Normalität → BLUE und effizient.</p><div class="warn-box"><strong>ML $\\sigma^2$ vs. unbiased:</strong> $SSR/n$ verzerrt; $SSR/(n-k-1)$ ist unverzerrt für $\\sigma^2$.</div><div class="warn-box"><strong>Normalität testen:</strong> Jarque-Bera, Residuenplot — vor exakter Inferenz prüfen.</div>
+<p>Bei $u \sim N(0,\sigma^2 I)$: ML-Schätzer für $\beta$ = OLS. ML für $\sigma^2$: $SSR/n$ (nicht $n-k-1$). Normalität liefert exakte t/F-Verteilungen in endlichen Stichproben. Gauss-Markov + Normalität → BLUE und effizient.</p><div class="warn-box"><strong>ML $\sigma^2$ vs. unbiased:</strong> $SSR/n$ verzerrt; $SSR/(n-k-1)$ ist unverzerrt für $\sigma^2$.</div><div class="warn-box"><strong>Normalität testen:</strong> Jarque-Bera, Residuenplot — vor exakter Inferenz prüfen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1206,26 +1206,26 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Restriktionen als Matrixaussage</h4>
 <p>Lineare Restriktionen werden kompakt als Rβ = r formuliert. Das schafft einen einheitlichen Rahmen für Einzel-, Block- und Gleichheitsrestriktionen.</p><p>Die Restricted-Spezifikation setzt diese Bedingungen durch; das Unrestricted-Modell lässt sie frei.</p>
-<div class="math-block">$$H_0: R\\\\\\\\\\\\\\\\beta = r \\\\\\\\\\\\\\\\qquad \\\\\\\\\\\\\\\\text{gegen} \\\\\\\\\\\\\\\\qquad H_1: R\\\\\\\\\\\\\\\\beta \\\\\\\\\\\\\\\\neq r$$</div>
+<div class="math-block">$$H_0: R\beta = r \qquad \text{gegen} \qquad H_1: R\beta \neq r$$</div>
 
 
 <h4 class="theory-subsection-title">R/UR-Entscheidungslogik</h4>
 <p>Die zentrale Frage lautet: Reicht das eingeschränkte Modell aus, oder verbessert das freie Modell den Fit pro zusätzlichem Freiheitsgrad ausreichend?</p><p>Diese Logik wird über den F-Test operationalisiert und passt genau zu Klausuraufgaben mit Modellvergleich.</p>
-<div class="math-block">$$F = \\\\\\\\\\\\\\\\frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$</div>
+<div class="math-block">$$F = \frac{(SSR_R - SSR_{UR})/J}{SSR_{UR}/(n-k)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">F-Test linearer Restriktionen</h4>
-<p>$H_0: R\\beta = r$. F-Statistik vergleicht eingeschränktes und uneingeschränktes Modell (SSR oder $R^2$).</p>
+<p>$H_0: R\beta = r$. F-Statistik vergleicht eingeschränktes und uneingeschränktes Modell (SSR oder $R^2$).</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Lineare Restriktionen</h4>
-<p>Uneingeschränktes Modell vs. eingeschränktes unter $R\\beta = r$. Wald, LR, F-Äquivalenz bei Normalität. Spezialfälle: Gleichheit mehrerer Koeffizienten, Joint significance. Immer beide Modelle oder F-Formel vollständig.</p><div class="warn-box"><strong>Restriktion formulieren:</strong> $H_0$ als $R\\beta = r$ aufschreiben bevor F berechnet wird.</div><div class="warn-box"><strong>Nesting:</strong> Eingeschränktes Modell muss Spezialfall des uneingeschränkten sein.</div>
+<p>Uneingeschränktes Modell vs. eingeschränktes unter $R\beta = r$. Wald, LR, F-Äquivalenz bei Normalität. Spezialfälle: Gleichheit mehrerer Koeffizienten, Joint significance. Immer beide Modelle oder F-Formel vollständig.</p><div class="warn-box"><strong>Restriktion formulieren:</strong> $H_0$ als $R\beta = r$ aufschreiben bevor F berechnet wird.</div><div class="warn-box"><strong>Nesting:</strong> Eingeschränktes Modell muss Spezialfall des uneingeschränkten sein.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1257,7 +1257,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die Grenzverteilung des skalierten Schätzfehlers</h4>
 <p>Asymptotische Normalität betrachtet nicht β̂ direkt, sondern den mit √n skalierten Schätzfehler. Dadurch wird sichtbar, dass die Stichprobenverteilung mit wachsendem n eine stabile Form annimmt.</p><p>Diese Grenzform ist die Grundlage moderner großer-Stichproben-Inferenz.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\sqrt{n}(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}-\\\\\\\\\\\\\\\\beta)\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\xrightarrow{d}\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\mathcal{N}(0,\\\\\\\\\\\\\\\\Omega)$$</div>
+<div class="math-block">$$\sqrt{n}(\hat{\beta}-\beta)\\ \xrightarrow{d}\\ \mathcal{N}(0,\Omega)$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1271,7 +1271,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Asymptotische Normalität</h4>
-<p>Unter MLR.1–MLR.5: $\\sqrt{n}(\\hat\\beta-\\beta) \\xrightarrow{d} N(0, \\sigma^2 Q^{-1})$ mit $Q = \\text{plim}(X'X/n)$. Rechtfertigt t- und F-Tests bei großem $n$ auch bei nicht-normalen $u$. Unterscheide endliche Stichprobe (Normalverteilung von $u$ für exakte t-Verteilung) vs. asymptotisch.</p><div class="warn-box"><strong>Asymptotik ≠ kleines n:</strong> Bei $n=30$ kann Normalapproximation schlecht sein — Freiheitsgrade beachten.</div><div class="warn-box"><strong>Robuste Inferenz:</strong> Asymptotische Normalität von $\\hat\\beta$ heiß nicht, dass klassische SE korrekt sind bei Hetero/AC.</div>
+<p>Unter MLR.1–MLR.5: $\sqrt{n}(\hat\beta-\beta) \xrightarrow{d} N(0, \sigma^2 Q^{-1})$ mit $Q = \text{plim}(X'X/n)$. Rechtfertigt t- und F-Tests bei großem $n$ auch bei nicht-normalen $u$. Unterscheide endliche Stichprobe (Normalverteilung von $u$ für exakte t-Verteilung) vs. asymptotisch.</p><div class="warn-box"><strong>Asymptotik ≠ kleines n:</strong> Bei $n=30$ kann Normalapproximation schlecht sein — Freiheitsgrade beachten.</div><div class="warn-box"><strong>Robuste Inferenz:</strong> Asymptotische Normalität von $\hat\beta$ heiß nicht, dass klassische SE korrekt sind bei Hetero/AC.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1298,9 +1298,9 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Simulationsmittelwert</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\overline{\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}} = \\\\\\\\\\\\\\\\frac{1}{S}\\\\\\\\\\\\\\\\sum_{s=1}^S \\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}^{(s)}$$</div><p>Der Durchschnitt vieler Wiederholungsschätzungen macht Unverzerrtheit sichtbar.</p>
-<p><strong>Simulationsstreuung</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\widehat{\\\\\\\\\\\\\\\\operatorname{Var}}(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}) \\\\\\\\\\\\\\\\approx \\\\\\\\\\\\\\\\frac{1}{S-1}\\\\\\\\\\\\\\\\sum_{s=1}^S\\\\\\\\\\\\\\\\left(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}^{(s)}-\\\\\\\\\\\\\\\\overline{\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}}\\\\\\\\\\\\\\\\right)^2$$</div><p>Empirische Streuung über Wiederholungen.</p>
-<p><strong>Fixiertes DGP</strong></p><div class="math-block">$$y^{(s)} = X^{(s)}\\\\\\\\\\\\\\\\beta + u^{(s)}$$</div><p>Datengenerierungsprozess bleibt über Simulationen konstant.</p>
+<p><strong>Simulationsmittelwert</strong></p><div class="math-block">$$\overline{\hat{\beta}} = \frac{1}{S}\sum_{s=1}^S \hat{\beta}^{(s)}$$</div><p>Der Durchschnitt vieler Wiederholungsschätzungen macht Unverzerrtheit sichtbar.</p>
+<p><strong>Simulationsstreuung</strong></p><div class="math-block">$$\widehat{\operatorname{Var}}(\hat{\beta}) \approx \frac{1}{S-1}\sum_{s=1}^S\left(\hat{\beta}^{(s)}-\overline{\hat{\beta}}\right)^2$$</div><p>Empirische Streuung über Wiederholungen.</p>
+<p><strong>Fixiertes DGP</strong></p><div class="math-block">$$y^{(s)} = X^{(s)}\beta + u^{(s)}$$</div><p>Datengenerierungsprozess bleibt über Simulationen konstant.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1346,7 +1346,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Der VIF als Diagnosezahl</h4>
 <p>Der VIF misst, wie stark die Varianz eines Koeffizienten durch lineare Abhängigkeit zu den anderen Regressoren aufgeblasen wird. Je näher das Hilfsregressions-R² an eins liegt, desto problematischer wird die Trennung.</p><p>Damit ist der VIF keine exotische Kennzahl, sondern direkt mit der Schätzpräzision verbunden.</p>
-<div class="math-block">$$VIF_j = \\\\\\\\\\\\\\\\frac{1}{1-R_j^2}$$</div>
+<div class="math-block">$$VIF_j = \frac{1}{1-R_j^2}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1360,7 +1360,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: VIF und Multikollinearität</h4>
-<p>$VIF_j = 1/(1-R_j^2)$ aus Hilfsregression $X_j$ auf alle anderen $X$. $VIF > 10$ (Regel) signalisiert problematische Multikollinearität — große SE, instabile $\\hat\\beta$, aber kein Bias. Lösung: weniger Regressoren, Transformation, mehr Daten — nicht „Modell verwerfen" ohne Diagnose.</p><div class="warn-box"><strong>VIF misst keinen Bias:</strong> Multikollinearität verschlechtert Präzision, nicht Erwartungswert von OLS.</div><div class="warn-box"><strong>Signifikanz paradox:</strong> Modell $R^2$ hoch, einzelne t-Werte niedrig — klassisches Kollinearitäts-Symptom.</div>
+<p>$VIF_j = 1/(1-R_j^2)$ aus Hilfsregression $X_j$ auf alle anderen $X$. $VIF > 10$ (Regel) signalisiert problematische Multikollinearität — große SE, instabile $\hat\beta$, aber kein Bias. Lösung: weniger Regressoren, Transformation, mehr Daten — nicht „Modell verwerfen" ohne Diagnose.</p><div class="warn-box"><strong>VIF misst keinen Bias:</strong> Multikollinearität verschlechtert Präzision, nicht Erwartungswert von OLS.</div><div class="warn-box"><strong>Signifikanz paradox:</strong> Modell $R^2$ hoch, einzelne t-Werte niedrig — klassisches Kollinearitäts-Symptom.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1375,7 +1375,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum das für Interpretation und Diagnose hilft</h4>
 <p>FWL macht unmittelbar sichtbar, warum hohe Kollinearität Standardfehler vergrößert: Wenn nach der Bereinigung kaum noch Variation in xⱼ übrig bleibt, wird der partielle Zusammenhang schwer messbar.</p><p>Gleichzeitig ist das Theorem die sauberste Übersetzung der multiplen Koeffizienteninterpretation in eine zweistufige Rechenlogik.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\tilde{x}_j'\\\\\\\\\\\\\\\\tilde{y}}{\\\\\\\\\\\\\\\\tilde{x}_j'\\\\\\\\\\\\\\\\tilde{x}_j}$$</div>
+<div class="math-block">$$\hat{\beta}_j = \frac{\tilde{x}_j'\tilde{y}}{\tilde{x}_j'\tilde{x}_j}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -1388,7 +1388,7 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>FWL-Steigung</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\tilde{x}_j'\\\\\\\\\\\\\\\\tilde{y}}{\\\\\\\\\\\\\\\\tilde{x}_j'\\\\\\\\\\\\\\\\tilde{x}_j}$$</div><p>Regressiere Residuen von y auf Residuen von xⱼ nach Herausrechnung der anderen Regressoren.</p>
+<p><strong>FWL-Steigung</strong></p><div class="math-block">$$\hat{\beta}_j = \frac{\tilde{x}_j'\tilde{y}}{\tilde{x}_j'\tilde{x}_j}$$</div><p>Regressiere Residuen von y auf Residuen von xⱼ nach Herausrechnung der anderen Regressoren.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1402,7 +1402,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Frisch-Waugh-Lovell</h4>
-<p>FWL: $\\hat\\beta_1$ aus multiplem OLS = Koeffizient aus Regression von $M_2 Y$ auf $M_2 X_1$, wobei $M_2$ Residuen von $X_2$ projiziert. Partieller Effekt = Variation in $X_1$, die nicht durch $X_2$ erklärt wird. Grundlage für partial regression plots.</p><div class="warn-box"><strong>Reihenfolge egal:</strong> Partieller Effekt von $X_1$ unabhängig von Reihenfolge der Regressoren.</div><div class="warn-box"><strong>Interpretation:</strong> FWL erklärt ceteris paribus — nicht kausale Isolation ohne Exogenität.</div>
+<p>FWL: $\hat\beta_1$ aus multiplem OLS = Koeffizient aus Regression von $M_2 Y$ auf $M_2 X_1$, wobei $M_2$ Residuen von $X_2$ projiziert. Partieller Effekt = Variation in $X_1$, die nicht durch $X_2$ erklärt wird. Grundlage für partial regression plots.</p><div class="warn-box"><strong>Reihenfolge egal:</strong> Partieller Effekt von $X_1$ unabhängig von Reihenfolge der Regressoren.</div><div class="warn-box"><strong>Interpretation:</strong> FWL erklärt ceteris paribus — nicht kausale Isolation ohne Exogenität.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1434,7 +1434,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was Heteroskedastizität bedeutet</h4>
 <p>Heteroskedastizität liegt vor, wenn die Fehlervarianz nicht konstant ist, sondern mit X oder systematisch mit dem Niveau der Beobachtungen variiert.</p><p>Typisch sind Fächerformen in Residuenplots: Bei kleinen x ist die Streuung gering, bei großen x stark.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{Var}(u_i\\\\\\\\\\\\\\\\mid X_i) = \\\\\\\\\\\\\\\\sigma_i^2 \\\\\\\\\\\\\\\\neq \\\\\\\\\\\\\\\\sigma^2$$</div>
+<div class="math-block">$$\operatorname{Var}(u_i\mid X_i) = \sigma_i^2 \neq \sigma^2$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1445,14 +1445,14 @@ export const THEORY_RECIPE = {
 
 
 <h4 class="theory-subsection-title">Breusch-Pagan / White</h4>
-<p>Test auf heteroskedastische Varianz; bei Ablehnung von $H_0$ Inferenz mit robusten SE oder Modell für $\\text{Var}(u|X)$.</p>
+<p>Test auf heteroskedastische Varianz; bei Ablehnung von $H_0$ Inferenz mit robusten SE oder Modell für $\text{Var}(u|X)$.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Heteroskedastizität</h4>
-<p>$Var(u_i|X) \\neq \\sigma^2$ — MLR.5 verletzt. OLS bleibt unverzerrt/konsistent, aber SE verzerrt → falsche t/F. Breusch-Pagan, White-Test zur Diagnose. Remedies: robuste SE (White/HAC), WLS, Log-Transformation.</p><div class="warn-box"><strong>BLUE verloren:</strong> OLS nicht mehr effizient — GLS/WLS besser wenn Form bekannt.</div><div class="warn-box"><strong>Graphische Diagnose:</strong> Residuen vs. $\\hat y$ oder $x_j$ — Trichterform = hetero.</div>
+<p>$Var(u_i|X) \neq \sigma^2$ — MLR.5 verletzt. OLS bleibt unverzerrt/konsistent, aber SE verzerrt → falsche t/F. Breusch-Pagan, White-Test zur Diagnose. Remedies: robuste SE (White/HAC), WLS, Log-Transformation.</p><div class="warn-box"><strong>BLUE verloren:</strong> OLS nicht mehr effizient — GLS/WLS besser wenn Form bekannt.</div><div class="warn-box"><strong>Graphische Diagnose:</strong> Residuen vs. $\hat y$ oder $x_j$ — Trichterform = hetero.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1477,7 +1477,7 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">WLS und GLS als alternative Schätzlogik</h4>
 <p>Wenn die Struktur der Fehlerstreuung bekannt oder gut modellierbar ist, kann statt OLS ein gewichtetes oder generalisiertes Verfahren effizienter sein. Dann wird nicht nur die Unsicherheitsrechnung, sondern schon die Schätzregel selbst angepasst.</p><p>WLS/GLS sind damit nicht bloß robuste Standardfehler unter anderem Namen, sondern echte Alternativen zur OLS-Schätzung.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_{GLS} = (X'\\\\\\\\\\\\\\\\Omega^{-1}X)^{-1}X'\\\\\\\\\\\\\\\\Omega^{-1}y$$</div>
+<div class="math-block">$$\hat{\beta}_{GLS} = (X'\Omega^{-1}X)^{-1}X'\Omega^{-1}y$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1491,7 +1491,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Robust GLS / WLS</h4>
-<p>Bei bekannter Heteroskedastizitätsstruktur $\\Omega$: GLS $\\hat\\beta_{GLS} = (X'\\Omega^{-1}X)^{-1}X'\\Omega^{-1}y$ ist BLUE. WLS: Transformation mit $\\sqrt{w_i}$. Fehlerspezifikation von $\\Omega$ → ineffizient aber ggf. noch konsistent. Robust: White-SE ohne $\\Omega$ zu schätzen.</p><div class="warn-box"><strong>GLS vs. robust OLS:</strong> GLS effizienter wenn $\\Omega$ richtig; robust OLS sicherer bei Zweifel.</div><div class="warn-box"><strong>Gewichtung:</strong> WLS-Transformation explizit zeigen — nicht nur „robust schätzen" behaupten.</div>
+<p>Bei bekannter Heteroskedastizitätsstruktur $\Omega$: GLS $\hat\beta_{GLS} = (X'\Omega^{-1}X)^{-1}X'\Omega^{-1}y$ ist BLUE. WLS: Transformation mit $\sqrt{w_i}$. Fehlerspezifikation von $\Omega$ → ineffizient aber ggf. noch konsistent. Robust: White-SE ohne $\Omega$ zu schätzen.</p><div class="warn-box"><strong>GLS vs. robust OLS:</strong> GLS effizienter wenn $\Omega$ richtig; robust OLS sicherer bei Zweifel.</div><div class="warn-box"><strong>Gewichtung:</strong> WLS-Transformation explizit zeigen — nicht nur „robust schätzen" behaupten.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1520,26 +1520,26 @@ export const THEORY_RECIPE = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was serielle Abhängigkeit bedeutet</h4>
 <p>Autokorrelation liegt vor, wenn Fehlerterme über die Zeit systematisch zusammenhängen. Positive Autokorrelation bedeutet etwa, dass ein positiver Fehler heute einen positiven Fehler morgen wahrscheinlicher macht.</p><p>Gerade bei Zeitreihen ist diese Verletzung strukturell plausibel, weil Schocks oft nicht sofort vollständig verschwinden.</p>
-<div class="math-block">$$\\\\\\\\\\\\\\\\operatorname{Cov}(u_t,u_{t-1}) \\\\\\\\\\\\\\\\neq 0$$</div>
+<div class="math-block">$$\operatorname{Cov}(u_t,u_{t-1}) \neq 0$$</div>
 
 
 <h4 class="theory-subsection-title">Durbin-Watson und intuitive Diagnose</h4>
 <p>Der Durbin-Watson-Gedanke misst, ob aufeinanderfolgende Residuen systematisch ähnlich sind. Werte deutlich unter zwei deuten auf positive Autokorrelation.</p><p>Noch vor dem Test hilft oft schon ein Residuen-gegen-Zeit-Plot: glatte Laufmuster statt zufälliger Zickzackformen sind verdächtig.</p>
-<div class="math-block">$$DW \\\\\\\\\\\\\\\\approx 2(1-\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\rho})$$</div>
+<div class="math-block">$$DW \approx 2(1-\hat{\rho})$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Serielle Korrelation</h4>
-<p>$\\text{Cov}(u_t,u_s)\\neq 0$ für $t\\neq s$ — häufig bei Zeitreihen. OLS-Schätzer können ineffizient sein; SE falsch.</p>
+<p>$\text{Cov}(u_t,u_s)\neq 0$ für $t\neq s$ — häufig bei Zeitreihen. OLS-Schätzer können ineffizient sein; SE falsch.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Autokorrelation</h4>
-<p>$Cov(u_i,u_j|X) \\neq 0$ für $i \\neq j$ — typisch bei Zeitreihen. OLS unverzerrt, aber SE falsch. Durbin-Watson, Breusch-Godfrey-Test. AR(1)-Fehler: GLS (Cochrane-Orcutt) oder HAC-SE. Erste Differenzen bei Random Walk.</p><div class="warn-box"><strong>DW nur AR(1):</strong> Durbin-Watson testet spezifische Alternative — nicht alle AC-Formen.</div><div class="warn-box"><strong>Spurious regression:</strong> Nicht-stationäre Reihen ohne Cointegration → hohes $R^2$, nonsense t.</div>
+<p>$Cov(u_i,u_j|X) \neq 0$ für $i \neq j$ — typisch bei Zeitreihen. OLS unverzerrt, aber SE falsch. Durbin-Watson, Breusch-Godfrey-Test. AR(1)-Fehler: GLS (Cochrane-Orcutt) oder HAC-SE. Erste Differenzen bei Random Walk.</p><div class="warn-box"><strong>DW nur AR(1):</strong> Durbin-Watson testet spezifische Alternative — nicht alle AC-Formen.</div><div class="warn-box"><strong>Spurious regression:</strong> Nicht-stationäre Reihen ohne Cointegration → hohes $R^2$, nonsense t.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1569,9 +1569,9 @@ export const THEORY_RECIPE = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>HAC-Idee</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\widehat{\\\\\\\\\\\\\\\\operatorname{Var}}_{HAC}(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}) = (X'X)^{-1}\\\\\\\\\\\\\\\\hat{S}_{NW}(X'X)^{-1}$$</div><p>Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.</p>
-<p><strong>White vs HAC</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{White: nur Heteroskedastizität; HAC: Hetero + Autokorrelation}$$</div><p>Merksatz für die Wahl der robusten Kovarianz.</p>
-<p><strong>t-Statistik mit HAC</strong></p><div class="math-block">$$t_j = \\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j}{\\\\\\\\\\\\\\\\widehat{se}_{HAC}(\\\\\\\\\\\\\\\\hat{\\\\\\\\\\\\\\\\beta}_j)}$$</div><p>Inferenz mit korrigierten Standardfehlern.</p>
+<p><strong>HAC-Idee</strong></p><div class="math-block">$$\widehat{\operatorname{Var}}_{HAC}(\hat{\beta}) = (X'X)^{-1}\hat{S}_{NW}(X'X)^{-1}$$</div><p>Robuste Varianzmatrix mit Heteroskedastizität und serieller Abhängigkeit.</p>
+<p><strong>White vs HAC</strong></p><div class="math-block">$$\text{White: nur Heteroskedastizität; HAC: Hetero + Autokorrelation}$$</div><p>Merksatz für die Wahl der robusten Kovarianz.</p>
+<p><strong>t-Statistik mit HAC</strong></p><div class="math-block">$$t_j = \frac{\hat{\beta}_j}{\widehat{se}_{HAC}(\hat{\beta}_j)}$$</div><p>Inferenz mit korrigierten Standardfehlern.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1589,7 +1589,7 @@ export const THEORY_RECIPE = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: HAC / Newey-West</h4>
-<p>Bei heteroskedastischen und/oder autokorrelierten Fehlern sind klassische OLS-Standardfehler verzerrt. HAC-Schätzer (Newey-West) korrigieren die Varianz-Kovarianz-Matrix $\\widehat{V}(\\hat\\beta)$ mit Bandbreitenwahl. Antwortschema: Diagnose (AC/Hetero) → robuste SE wählen → t/F mit korrigierten SE → gleiche $\\hat\\beta$, andere Inferenz.</p><div class="warn-box"><strong>Robuste SE heilen kein Modell:</strong> HAC korrigiert Inferenz, nicht verzerrte $\\hat\\beta$ bei Endogenität.</div><div class="warn-box"><strong>Bandbreite:</strong> Zu kleine Bandbreite unterschätzt Autokorrelation; in Aufgaben meist gegeben oder „floor rule" nennen.</div>
+<p>Bei heteroskedastischen und/oder autokorrelierten Fehlern sind klassische OLS-Standardfehler verzerrt. HAC-Schätzer (Newey-West) korrigieren die Varianz-Kovarianz-Matrix $\widehat{V}(\hat\beta)$ mit Bandbreitenwahl. Antwortschema: Diagnose (AC/Hetero) → robuste SE wählen → t/F mit korrigierten SE → gleiche $\hat\beta$, andere Inferenz.</p><div class="warn-box"><strong>Robuste SE heilen kein Modell:</strong> HAC korrigiert Inferenz, nicht verzerrte $\hat\beta$ bei Endogenität.</div><div class="warn-box"><strong>Bandbreite:</strong> Zu kleine Bandbreite unterschätzt Autokorrelation; in Aufgaben meist gegeben oder „floor rule" nennen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">

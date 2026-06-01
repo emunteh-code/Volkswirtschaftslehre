@@ -1624,13 +1624,13 @@ optim(c(0, 0), f)$par`,
         String.raw`Das Optimum liegt bei $(4,4)$. Die Tangentialbedingung liefert nur zusammen mit der Nebenbedingung die zulässige Lösung.`
       ),
       task(
-        String.raw`Erläutern Sie die ökonomische Bedeutung des Multiplikators $\\lambda$ in einem Satz und geben Sie ein typisches Klausurbeispiel an.`,
+        String.raw`Erläutern Sie die ökonomische Bedeutung des Multiplikators $\lambda$ in einem Satz und geben Sie ein typisches Klausurbeispiel an.`,
         [
           step('Interpretation als marginale Lockerung formulieren.', null),
           step('Ressourcen- oder Budgetbeispiel nennen.', null),
           step('Grenzlesart explizit machen.', null)
         ],
-        String.raw`$\\lambda$ misst den marginalen Wert einer zusätzlichen Einheit der knappen Ressource, zum Beispiel eines zusätzlichen Euro Budget oder einer weiteren Kapazitätseinheit.`
+        String.raw`$\lambda$ misst den marginalen Wert einer zusätzlichen Einheit der knappen Ressource, zum Beispiel eines zusätzlichen Euro Budget oder einer weiteren Kapazitätseinheit.`
       )
     ],
     intuition: {

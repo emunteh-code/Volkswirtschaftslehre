@@ -55,9 +55,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Handelsquote</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Handelsquote} = \\\\\\\\\\\\\\\\frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
-<p><strong>Terms of Trade</strong></p><div class="math-block">$$ToT = \\\\\\\\\\\\\\\\frac{P_X}{P_M}$$</div><p>Preis der Exporte relativ zu den Importen.</p>
-<p><strong>Handelsquote (Merksatz)</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Handelsquote} = \\\\\\\\\\\\\\\\frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
+<p><strong>Handelsquote</strong></p><div class="math-block">$$\text{Handelsquote} = \frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
+<p><strong>Terms of Trade</strong></p><div class="math-block">$$ToT = \frac{P_X}{P_M}$$</div><p>Preis der Exporte relativ zu den Importen.</p>
+<p><strong>Handelsquote (Merksatz)</strong></p><div class="math-block">$$\text{Handelsquote} = \frac{X + M}{BIP}$$</div><p>Misst die Offenheit einer Volkswirtschaft.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -123,7 +123,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Absolute und komparative Vorteile sauber trennen</h4>
 <p>Ein absoluter Vorteil bedeutet: Ein Land benötigt weniger Arbeit pro Einheit eines Gutes. Ein komparativer Vorteil bedeutet: Ein Land opfert relativ weniger vom anderen Gut. Für die Handelsrichtung zählt nicht die absolute Produktivität, sondern die Relation der Opportunitätskosten.</p>
-         <div class="math-block">$$OK_X = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{a_{LX}}{a_{LY}}$$</div>
+         <div class="math-block">$$OK_X = \frac{a_{LX}}{a_{LY}}$$</div>
          <p>Genau deshalb kann ein Land mit absoluten Vorteilen in beiden Gütern dennoch nur eines exportieren: Dort ist sein relativer Kostenvorteil am größten.</p>
 </div>
 </section>
@@ -140,7 +140,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Ricardo</h4>
 <p>Arbeitswertmodell: $a_{LX}, a_{LY}$ gegeben. Opportunitätskosten $OK_X = a_{LX}/a_{LY}$. Spezialisierung auf komparativen Vorteil → Handel → beide Länder gewinnen (Grenzen der Theorie: 1 Faktor, Vollbeschäftigung).</p>
-      <div class="math-block">$$OK_X = \\frac{a_{LX}}{a_{LY}},\\quad \\frac{P_X}{P_Y} \\text{ zwischen } OK_X^{Heim} \\text{ und } OK_X^{Ausland}$$</div>
+      <div class="math-block">$$OK_X = \frac{a_{LX}}{a_{LY}},\quad \frac{P_X}{P_Y} \text{ zwischen } OK_X^{Heim} \text{ und } OK_X^{Ausland}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -187,7 +187,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Faktorreichtum</h4>
 <p>Land exportiert Güter, die seinen reichlich vorhandenen Faktoren intensiv nutzen. HO-Theorem: Handel gleicht Faktorpreise zwischen Ländern an (unter Annahmen).</p>
-      <div class="math-block">$$\\frac{K}{L}\\Big|_{H} > \\frac{K}{L}\\Big|_{F} \\Rightarrow \\text{Heim exportiert K-intensive Güter}$$</div>
+      <div class="math-block">$$\frac{K}{L}\Big|_{H} > \frac{K}{L}\Big|_{F} \Rightarrow \text{Heim exportiert K-intensive Güter}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -255,17 +255,17 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Worked intuition: kapitalreiches vs. arbeitsreiches Land</h4>
-<p>Home ist kapitalreich und exportiert das kapitalintensive Gut. Durch Handel steigt der Weltpreis dieses Gutes relativ. Home gewinnt real am Faktor Kapital ($r\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow$), verliert am Faktor Arbeit ($w\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\downarrow$ in realer Entlohnung). Foreign — arbeitsreich — erlebt das Spiegelbild. Die Summe der Handelsgewinne ist positiv, aber innerhalb jedes Landes gibt es distributive Verlierer.</p>
-         <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{P}_{K\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{-int}} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{r} > 0,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\hat{w} < 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{ (in Home)}$$</div>
+<p>Home ist kapitalreich und exportiert das kapitalintensive Gut. Durch Handel steigt der Weltpreis dieses Gutes relativ. Home gewinnt real am Faktor Kapital ($r\uparrow$), verliert am Faktor Arbeit ($w\downarrow$ in realer Entlohnung). Foreign — arbeitsreich — erlebt das Spiegelbild. Die Summe der Handelsgewinne ist positiv, aber innerhalb jedes Landes gibt es distributive Verlierer.</p>
+         <div class="math-block">$$\hat{P}_{K\text{-int}} \uparrow \Rightarrow \hat{r} > 0,\\ \hat{w} < 0 \text{ (in Home)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Stolper-Samuelson</strong></p><div class="math-block">$$P_{K\\\\\\\\\\\\\\\\text{-intensiv}} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow r \\\\\\\\\\\\\\\\uparrow,\\\\\\\\\\\\\\\\ w \\\\\\\\\\\\\\\\downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
+<p><strong>Stolper-Samuelson</strong></p><div class="math-block">$$P_{K\text{-intensiv}} \uparrow \Rightarrow r \uparrow,\\ w \downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
 <p><strong>Verteilungslogik</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{reichlicher Faktor} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{gewinnt relativ durch Handel}</div><p>Politische Gewinner und Verlierer ergeben sich aus der Faktorlage des Landes.</p>
-<p><strong>Faktorpreis-Link</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\hat{P}_j \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{Faktor des intensiv genutzten Gutes } j \\\\\\\\\\\\\\\\text{ gewinnt real}$$</div><p>Stolper-Samuelson-Kern.</p>
-<p><strong>Stolper-Samuelson (Merksatz)</strong></p><div class="math-block">$$P_{K\\\\\\\\\\\\\\\\text{-intensiv}} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow r \\\\\\\\\\\\\\\\uparrow,\\\\\\\\\\\\\\\\ w \\\\\\\\\\\\\\\\downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
+<p><strong>Faktorpreis-Link</strong></p><div class="math-block">$$\hat{P}_j \uparrow \Rightarrow \text{Faktor des intensiv genutzten Gutes } j \text{ gewinnt real}$$</div><p>Stolper-Samuelson-Kern.</p>
+<p><strong>Stolper-Samuelson (Merksatz)</strong></p><div class="math-block">$$P_{K\text{-intensiv}} \uparrow \Rightarrow r \uparrow,\\ w \downarrow$$</div><p>Steigt der relative Preis des kapitalintensiven Gutes, gewinnt Kapital real und Arbeit verliert real.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -326,7 +326,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">IRS und intraindustrieller Handel</h4>
 <p>Steigende Skalenerträge + Liebhaber-Vielfalt → ähnliche Länder handeln ähnliche Güter (intraindustriell), nicht nur unterschiedliche Faktorenintensitäten.</p>
-      <div class="math-block">$$AC(q) = \\frac{F}{q} + c \\Rightarrow \\text{größeres } q \\Rightarrow \\text{niedrigere } AC$$</div>
+      <div class="math-block">$$AC(q) = \frac{F}{q} + c \Rightarrow \text{größeres } q \Rightarrow \text{niedrigere } AC$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -395,7 +395,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Warum sie gut zu Krugman passt</h4>
 <p>Die empirische Handelsstruktur aus der Gravitationsgleichung passt zur Idee großer Märkte und sinkender Durchschnittskosten. Sie ersetzt Krugman nicht, sondern liefert die datennahe Kurzform: große Länder handeln viel miteinander, Distanz verteuert Handel.</p>
-         <div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div>
+         <div class="math-block">$$Trade_{ij} \propto \frac{GDP_i \cdot GDP_j}{Dist_{ij}}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
@@ -408,16 +408,16 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Gravitation</strong></p><div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
+<p><strong>Gravitation</strong></p><div class="math-block">$$Trade_{ij} \propto \frac{GDP_i \cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
 <p><strong>Interpretation</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Größe} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow Trade \\\\\\\\\\\\\\\\uparrow,\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\text{Distanz} \\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\Rightarrow Trade \\\\\\\\\\\\\\\\downarrow</div><p>Richtung der Haupteffekte.</p>
-<p><strong>Gravitation (Merksatz)</strong></p><div class="math-block">$$Trade_{ij} \\\\\\\\\\\\\\\\propto \\\\\\\\\\\\\\\\frac{GDP_i \\\\\\\\\\\\\\\\cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
+<p><strong>Gravitation (Merksatz)</strong></p><div class="math-block">$$Trade_{ij} \propto \frac{GDP_i \cdot GDP_j}{Dist_{ij}}$$</div><p>Große Länder handeln viel, Distanz bremst.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Log-linear Schätzung</h4>
-<p>Handelsströme steigen mit Wirtschaftsmasse ($GDP$) und sinken mit Distanz. Log-Spezifikation: $\\ln T_{ij} = \\beta_0 + \\beta_1 \\ln Y_i + \\beta_2 \\ln Y_j - \\gamma \\ln dist_{ij} + u$ — Koeffizienten sind Elastizitäten.</p>
+<p>Handelsströme steigen mit Wirtschaftsmasse ($GDP$) und sinken mit Distanz. Log-Spezifikation: $\ln T_{ij} = \beta_0 + \beta_1 \ln Y_i + \beta_2 \ln Y_j - \gamma \ln dist_{ij} + u$ — Koeffizienten sind Elastizitäten.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -543,8 +543,8 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Quote als Mengenrestriktion</strong></p><div class="math-block">$$M \\\\\\\\\\\\\\\\leq \\\\\\\\\\\\\\\\bar M$$</div><p>Importmenge wird direkt begrenzt.</p>
-<p><strong>Quotenrente</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Quotenrente} = (P_{in} - P_w)\\\\\\\\\\\\\\\\cdot M$$</div><p>Erlös aus der künstlichen Verknappung.</p>
+<p><strong>Quote als Mengenrestriktion</strong></p><div class="math-block">$$M \leq \bar M$$</div><p>Importmenge wird direkt begrenzt.</p>
+<p><strong>Quotenrente</strong></p><div class="math-block">$$\text{Quotenrente} = (P_{in} - P_w)\cdot M$$</div><p>Erlös aus der künstlichen Verknappung.</p>
 <p><strong>Zoll vs. Quote (Renten)</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Zollrente} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Staat};\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\text{Quotenrente} \\\\\\\\\\\\\\\\rightarrow \\\\\\\\\\\\\\\\text{Importrechte}</div><p>Gleicher Preis, unterschiedliche Verteilung.</p>
 </div>
 </section>
@@ -627,9 +627,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Trade creation</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta W > 0 \\\\\\\\\\\\\\\\text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
-<p><strong>Trade diversion</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta W < 0 \\\\\\\\\\\\\\\\text{ möglich durch Ersatz billiger Drittlandimporte}$$</div><p>Präferenz kann Handel umlenken statt verbessern.</p>
-<p><strong>Trade creation (Merksatz)</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\Delta W > 0 \\\\\\\\\\\\\\\\text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
+<p><strong>Trade creation</strong></p><div class="math-block">$$\Delta W > 0 \text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
+<p><strong>Trade diversion</strong></p><div class="math-block">$$\Delta W < 0 \text{ möglich durch Ersatz billiger Drittlandimporte}$$</div><p>Präferenz kann Handel umlenken statt verbessern.</p>
+<p><strong>Trade creation (Merksatz)</strong></p><div class="math-block">$$\Delta W > 0 \text{ durch Ersatz teurer Inlandsproduktion}$$</div><p>Zollunion erhöht Effizienz.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -706,7 +706,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Realer Wechselkurs und Wettbewerbsfähigkeit</h4>
 <p>Der reale Wechselkurs korrigiert den nominalen Kurs um Preisniveaus:</p>
-         <div class="math-block">$$q = E \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{P^*}{P}$$</div>
+         <div class="math-block">$$q = E \cdot \frac{P^*}{P}$$</div>
          <p>Er zeigt, wie teuer ausländische Güter relativ zu inländischen Gütern sind. Genau deshalb ist für Wettbewerbsfähigkeit nicht nur der nominale, sondern der reale Kurs entscheidend.</p>
 </div>
 </section>
@@ -783,8 +783,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">UIP</h4>
-<p>$i \\approx i^* + \\mathbb{E}[\\Delta E/E]$. Höherer Inlandszins → Aufwertungserwartung → sofortige Aufwertung bei flexibler Kurve.</p>
-      <div class="math-block">$$i \\approx i^* + \\mathbb{E}[\\Delta E/E]$$</div>
+<p>$i \approx i^* + \mathbb{E}[\Delta E/E]$. Höherer Inlandszins → Aufwertungserwartung → sofortige Aufwertung bei flexibler Kurve.</p>
+      <div class="math-block">$$i \approx i^* + \mathbb{E}[\Delta E/E]$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -857,7 +857,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Absolute und relative PPP</h4>
 <p>Absolute PPP: $E = P/P^*$. Relative PPP: Wechselkursänderung spiegelt Inflationsdifferenz. Kurzfristig oft verletzt wegen Preisrigiditäten und Güterarten.</p>
-      <div class="math-block">$$\\hat{E} \\approx \\pi - \\pi^*$$</div>
+      <div class="math-block">$$\hat{E} \approx \pi - \pi^*$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -918,7 +918,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fisher-Effekt und reale Zinsparität</h4>
 <p>Der Fisher-Effekt verbindet Nominalzins und erwartete Inflation:</p>
-         <div class="math-block">$$i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\approx r + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi^e$$</div>
+         <div class="math-block">$$i \approx r + \pi^e$$</div>
          <p>Wenn Kapital international mobil ist und langfristig reale Renditen angeglichen werden, entsteht reale Zinsparität als weitere Langfristbeziehung.</p>
 </div>
 </section>
@@ -985,9 +985,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>UIP-Logik</strong></p><div class="math-block">$$i = i^* + \\\\\\\\\\\\\\\\frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
+<p><strong>UIP-Logik</strong></p><div class="math-block">$$i = i^* + \frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
 <p><strong>Overshooting-Idee</strong></p><div class="math-block">$$E_{kurz} > E_{lang}$$</div><p>Kurzfristiger Kurs liegt über dem langfristigen Endwert.</p>
-<p><strong>UIP-Logik (Merksatz)</strong></p><div class="math-block">$$i = i^* + \\\\\\\\\\\\\\\\frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
+<p><strong>UIP-Logik (Merksatz)</strong></p><div class="math-block">$$i = i^* + \frac{E^e - E}{E}$$</div><p>Niedrigerer Inlandszins verlangt erwartete Aufwertung des Inlandes.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -1047,9 +1047,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Trilemma</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\{\\\\\\\\\\\\\\\\text{Fixkurs},\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{Kapitalmobilität},\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\text{Geldpolitik}\\\\\\\\\\\\\\\\} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{nur zwei zugleich}$$</div><p>Makropolitischer Zielkonflikt.</p>
-<p><strong>Fixkurs-Folge</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Fixkurs} + \\\\\\\\\\\\\\\\text{Kapitalmobilität} \\\\\\\\\\\\\\\\Rightarrow i = i^*$$</div><p>Monetäre Autonomie geht verloren.</p>
-<p><strong>Flex-Kurs-Folge</strong></p><div class="math-block">$$\\\\\\\\\\\\\\\\text{Kapitalmobilität} + \\\\\\\\\\\\\\\\text{Autonomie} \\\\\\\\\\\\\\\\Rightarrow \\\\\\\\\\\\\\\\text{flexibler } E$$</div><p>Wechselkurs übernimmt Anpassung.</p>
+<p><strong>Trilemma</strong></p><div class="math-block">$$\\{\text{Fixkurs},  \text{Kapitalmobilität},  \text{Geldpolitik}\\} \Rightarrow \text{nur zwei zugleich}$$</div><p>Makropolitischer Zielkonflikt.</p>
+<p><strong>Fixkurs-Folge</strong></p><div class="math-block">$$\text{Fixkurs} + \text{Kapitalmobilität} \Rightarrow i = i^*$$</div><p>Monetäre Autonomie geht verloren.</p>
+<p><strong>Flex-Kurs-Folge</strong></p><div class="math-block">$$\text{Kapitalmobilität} + \text{Autonomie} \Rightarrow \text{flexibler } E$$</div><p>Wechselkurs übernimmt Anpassung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1150,7 +1150,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Produktivitätsschub im handelbaren Sektor</h4>
 <p>Steigt die Produktivität im handelbaren Sektor, steigen dort Löhne. Wegen Arbeitsmobilität innerhalb des Landes müssen Löhne auch in den nicht-handelbaren Sektoren mithalten. Da dort die Produktivität nicht im selben Maß steigt, erhöhen sich vor allem die Preise der nicht-handelbaren Güter.</p>
-         <div class="math-block">$$A_T \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow w \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow P_N \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\uparrow$$</div>
+         <div class="math-block">$$A_T \uparrow \Rightarrow w \uparrow \Rightarrow P_N \uparrow$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">

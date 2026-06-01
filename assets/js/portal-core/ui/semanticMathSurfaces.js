@@ -10,7 +10,9 @@ const SEMANTIC_MATH_HEADER_SKIP_SELECTOR =
   'h1, h2, h3, h4, h5, h6, .concept-title, .concept-subtitle, .concept-tag, .platform-chrome-badge, .formula-tab-section-head h3, .klausurmethodik-accordion-title, .klausurmethodik-card-title, .klausurmethodik-heading, .klausurmethodik-label, .f-label, .formula-card-label, .formula-card-title, .formula-herleitung-title, .formula-einsatzgrenzen-title, .formula-einsatzgrenzen-group-title, .quellen-panel-layer-k, .quellen-panel-anchor-group-label, .graph-panel-title, summary, [role="tab"]';
 
 const SEMANTIC_MATH_SKIP_SELECTOR =
-  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .concept-motivation, .concept-motivation-toggle, .concept-pill-row, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"], #content, .content-area, .theorie, .theorie-panel, .section-block, .formula-tab-panel, .formula-tab-section, .formula-card, .formula-grid, .formula-support-layer, .formula-support-card, .formula-herleitung-block, .formula-herleitung-anchor, .formula-herleitung-math, .formula-einsatzgrenzen-block, .formula-section-accordion-body, .math-block, .math-inline, .warn-box, .warning-card, .f-eq, .f-desc, .f-body, .f-variables, .merksatz';
+  'button, a, .btn, .nav-item, .breadcrumb, .breadcrumb-link, .concept-motivation, .concept-motivation-toggle, .concept-pill-row, .lp-tile, .lp-hero-btn, .tab-row, #tabRow, .home-action-card, .home-action-row, .home-card, .home-continue-card, .home-mini-card, .home-mini-grid, .hero, .stat-row, .hac-title, .hac-desc, .hc-title, .hcc-title, .mastery-check button, .source-provenance, .source-companion, .empty-state-actions, [role="button"], #content, .content-area, .theorie, .theorie-panel, .theory-tab-panel, .theory-recipe-section, .theory-recipe-card, .theory-recipe-body, .section-block, .formula-tab-panel, .formula-tab-section, .formula-card, .formula-grid, .formula-support-layer, .formula-support-card, .formula-herleitung-block, .formula-herleitung-anchor, .formula-herleitung-math, .formula-einsatzgrenzen-block, .formula-section-accordion-body, .math-block, .math-inline, .warn-box, .warning-card, .f-eq, .f-desc, .f-body, .f-variables, .merksatz';
+
+const LATEX_COMMAND_IN_TEXT = /\\(?:le|ge|leq|geq|iff|text|frac|left|right|qquad|cdot|sum|ln|Delta|min|max|Rightarrow)\b/;
 
 export function shouldSkipSemanticMath(el) {
   if (!el?.closest) return true;
@@ -151,6 +153,7 @@ export function createSemanticMathSurfaces({
   }
 
   function hasSemanticMathToken(value) {
+    if (LATEX_COMMAND_IN_TEXT.test(value)) return false;
     return collectMathRanges(value).length > 0;
   }
 
@@ -272,7 +275,15 @@ export function createSemanticMathSurfaces({
         const parent = node.parentElement;
         if (!parent) return NodeFilter.FILTER_REJECT;
 
-        if (parent.closest('mjx-container, script, style, textarea, input, select, option, canvas, svg, .math-block, .math-inline, .math-semantic')) {
+        if (
+          parent.closest(
+            'mjx-container, .MathJax, script, style, textarea, input, select, option, canvas, svg, .math-block, .math-inline, .math-semantic'
+          )
+        ) {
+          return NodeFilter.FILTER_REJECT;
+        }
+
+        if (LATEX_COMMAND_IN_TEXT.test(value)) {
           return NodeFilter.FILTER_REJECT;
         }
 

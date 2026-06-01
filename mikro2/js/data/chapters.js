@@ -41,18 +41,18 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Monopolpreis als Aufschlag auf Grenzkosten</h4>
 <p>Der Monopolist wählt die Ausbringungsmenge so, dass Grenzerlös und Grenzkosten übereinstimmen. In der Kursnotation wird der Grenzerlös über Preis und Nachfrageelastizität geschrieben.</p>
-      <div class="math-block">$$E'(y)=p(y)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\left(1-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\varepsilon_{xp}|}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\right)$$</div>
+      <div class="math-block">$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$</div>
       <p>Aus der Bedingung erster Ordnung $E'(y)=C'(y)$ folgt die Aufschlagsformel: Je unelastischer die Nachfrage, desto größer ist der Abstand zwischen Preis und Grenzkosten.</p>
 
 
 <h4 class="theory-subsection-title">VL-Mechanismus: MR = MC</h4>
 <p>In Aufgaben mit linearer Nachfrage $p=a-by$ ist der Grenzerlös $MR=a-2by$. Setze $MR=MC$, bestimme $y^*$, dann $p^*$ — erst danach KR/PR/DWL zeichnen oder rechnen.</p>
-      <div class="math-block">$$MR(y)=a-2by,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad MR=MC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow y^*=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{a-MC}{2b}$$</div>
+      <div class="math-block">$$MR(y)=a-2by,\quad MR=MC \Rightarrow y^*=\frac{a-MC}{2b}$$</div>
 
 
 <h4 class="theory-subsection-title">In der Klausur: Monopol</h4>
-<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
-      <div class="math-block">$$MR = MC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Rightarrow\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad P\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\left(1+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\eta}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\right) = MC$$</div>
+<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
+      <div class="math-block">$$MR = MC \quad\Rightarrow\quad P\left(1+\frac{1}{\eta}\right) = MC$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -67,8 +67,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Monopol</h4>
-<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
-      <div class="math-block">$$MR = MC \\quad\\Rightarrow\\quad P\\left(1+\\frac{1}{\\eta}\\right) = MC$$</div>
+<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
+      <div class="math-block">$$MR = MC \quad\Rightarrow\quad P\left(1+\frac{1}{\eta}\right) = MC$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -130,7 +130,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Dritter Grad: getrennte Kundengruppen</h4>
 <p>Bei Preisdiskriminierung dritten Grades unterscheidet der Monopolist klar abgrenzbare Gruppen und setzt gruppenspezifische Preise. In der Zwei-Gruppen-Darstellung maximiert er die Summe der Erlöse abzüglich der Kosten der Gesamtproduktion.</p>
-      <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\max_{y_1,y_2}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi(y_1,y_2)=E_1(y_1)+E_2(y_2)-C(y_1+y_2)$$</div>
+      <div class="math-block">$$\max_{y_1,y_2}\\ \pi(y_1,y_2)=E_1(y_1)+E_2(y_2)-C(y_1+y_2)$$</div>
       <p>Die Bedingung erster Ordnung verlangt den Ausgleich der Grenzerlöse zwischen den Teilmärkten und den Grenzkosten der Gesamtproduktion.</p>
 </div>
 </section>
@@ -182,7 +182,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Normalform-Spiele</h4>
-<p>Ein Spiel in Normalform besteht aus einer Menge von Spielern $i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\in \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\{1, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\dots, n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\}$, Strategieräumen $S_i$ und Auszahlungsfunktionen $u_i(s_1, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\dots, s_n)$.</p>
+<p>Ein Spiel in Normalform besteht aus einer Menge von Spielern $i \in \\{1, \dots, n\\}$, Strategieräumen $S_i$ und Auszahlungsfunktionen $u_i(s_1, \dots, s_n)$.</p>
       <p>Die Normalform fasst alle Informationen eines simultanen Spiels in einer Auszahlungsmatrix zusammen — jede Zelle enthält die Auszahlungen beider Spieler für das jeweilige Strategieprofil.</p>
 </div>
 </section>
@@ -190,19 +190,19 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Nash-Gleichgewicht (NG)</h4>
-<p>Ein Strategieprofil $s^* = (s_1^*, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\dots, s_n^*)$ ist ein <strong>Nash-Gleichgewicht</strong>, wenn für jeden Spieler $i$ gilt:</p>
-      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\geq u_i(s_i, s_{-i}^*) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\forall s_i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\in S_i$$</div>
+<p>Ein Strategieprofil $s^* = (s_1^*, \dots, s_n^*)$ ist ein <strong>Nash-Gleichgewicht</strong>, wenn für jeden Spieler $i$ gilt:</p>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*) \quad \forall s_i \in S_i$$</div>
       <p>Niemand hat einen Anreiz, einseitig von seiner Strategie abzuweichen. Es ist eine gegenseitige beste Antwort.</p>
 
 
 <h4 class="theory-subsection-title">Gemischte Strategien</h4>
 <p>Falls kein Nash-Gleichgewicht in reinen Strategien existiert, gibt es stets ein Gleichgewicht in gemischten Strategien. Spieler randomisieren so, dass der Gegner indifferent zwischen seinen reinen Strategien ist.</p>
-      <div class="math-block">$$E[u_i(\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_i^*, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_{-i}^*)] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\geq E[u_i(\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_i, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_{-i}^*)] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\forall \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_i$$</div>
+      <div class="math-block">$$E[u_i(\sigma_i^*, \sigma_{-i}^*)] \geq E[u_i(\sigma_i, \sigma_{-i}^*)] \quad \forall \sigma_i$$</div>
 
 
 <h4 class="theory-subsection-title">In der Klausur: Nash in Normalform</h4>
 <p>Matrix aufstellen → beste Antwort auf gegebene Strategie des Gegners (BR) → Schnittpunkt der BR-Korrespondenzen = Nash. Strikte Dominanz zuerst prüfen — eliminiert Zeilen/Spalten.</p>
-      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\geq u_i(s_i, s_{-i}^*)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\forall s_i$$</div>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*)\\ \forall s_i$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -228,7 +228,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Nash in Normalform</h4>
 <p>Matrix aufstellen → beste Antwort auf gegebene Strategie des Gegners (BR) → Schnittpunkt der BR-Korrespondenzen = Nash. Strikte Dominanz zuerst prüfen — eliminiert Zeilen/Spalten.</p>
-      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \\geq u_i(s_i, s_{-i}^*)\\ \\forall s_i$$</div>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*)\\ \forall s_i$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -289,19 +289,19 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gemischte Strategien</h4>
 <p>Existiert kein Nash-Gleichgewicht in reinen Strategien, randomisieren Spieler zwischen reinen Strategien. Ein gemischtes Gleichgewicht liegt vor, wenn jede gemischte Strategie eine beste Antwort auf die Mischung der Gegenseite ist.</p>
-      <div class="math-block">$$E[u_i(\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_i^*, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_{-i}^*)] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\geq E[u_i(\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_i, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_{-i}^*)] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\forall \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sigma_i$$</div>
+      <div class="math-block">$$E[u_i(\sigma_i^*, \sigma_{-i}^*)] \geq E[u_i(\sigma_i, \sigma_{-i}^*)] \quad \forall \sigma_i$$</div>
 
 
 <h4 class="theory-subsection-title">Wiederholte Spiele und Kooperation</h4>
 <p>Bei wiederholter Interaktion können Sanktionsstrategien Kooperation stützen. Entscheidend ist, ob zukünftige Kooperationsgewinne den kurzfristigen Abweichungsgewinn überwiegen.</p>
-      <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\delta \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\geq \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_D - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_C}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_D - \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_P}$$</div>
+      <div class="math-block">$$\delta \geq \frac{\pi_D - \pi_C}{\pi_D - \pi_P}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Folk-Theorem und Kollusion</h4>
-<p>Unendlich wiederholtes Spiel: Abweichung heute vs. Bestrafung in Zukunft. Trigger-Strategien können kooperative Outcomes stützen, wenn Diskontierungsfaktor $\\delta$ hoch genug. Endliche Horizonte: Rückwärtsinduktion bricht Kollusion (Chain-Store Paradox didaktisch).</p>
+<p>Unendlich wiederholtes Spiel: Abweichung heute vs. Bestrafung in Zukunft. Trigger-Strategien können kooperative Outcomes stützen, wenn Diskontierungsfaktor $\delta$ hoch genug. Endliche Horizonte: Rückwärtsinduktion bricht Kollusion (Chain-Store Paradox didaktisch).</p>
       <div class="warn-box"><strong>Zeit vs. Strategieraum:</strong> Dynamik = Reihenfolge und Information; nicht jede Wiederholung ist automatisch „dynamisches Spiel" ohne Entscheidungsbaum.</div>
 </div>
 </section>
@@ -355,14 +355,14 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Cournot-Wettbewerb</h4>
-<p>Unternehmen wählen gleichzeitig ihre Produktionsmengen $q_i$. Der Preis bildet sich über die Marktnachfrage $P(Q)$ mit $Q = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum q_i$.</p>
-      <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\max_{q_i} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_i = P(q_i + q_{-i}) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\cdot q_i - C_i(q_i)$$</div>
+<p>Unternehmen wählen gleichzeitig ihre Produktionsmengen $q_i$. Der Preis bildet sich über die Marktnachfrage $P(Q)$ mit $Q = \sum q_i$.</p>
+      <div class="math-block">$$\max_{q_i} \pi_i = P(q_i + q_{-i}) \cdot q_i - C_i(q_i)$$</div>
       <p>Im Cournot-Nash-Gleichgewicht produziert jede Firma mehr als ein Monopolist, aber weniger als im vollkommenen Wettbewerb.</p>
 
 
 <h4 class="theory-subsection-title">In der Klausur: Cournot vs. Bertrand</h4>
 <p>Cournot: Mengenwettbewerb, RR $q_i^*(q_j)$, Schnitt = Nash in Mengen. Homogene Güter + Bertrand: Preiswettbewerb → $P=MC$, wie Wettbewerb (Bertrand-Paradox). Differenzierung rettet $P>MC$.</p>
-      <div class="math-block">$$q_i^*:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_i}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\partial q_i} = 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{(Cournot)}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad P_1=P_2=MC\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{(Bertrand, homogen)}$$</div>
+      <div class="math-block">$$q_i^*:\\ \frac{\partial \pi_i}{\partial q_i} = 0 \quad\text{(Cournot)}\qquad P_1=P_2=MC  \text{(Bertrand, homogen)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -397,7 +397,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Cournot vs. Bertrand</h4>
 <p>Cournot: Mengenwettbewerb, RR $q_i^*(q_j)$, Schnitt = Nash in Mengen. Homogene Güter + Bertrand: Preiswettbewerb → $P=MC$, wie Wettbewerb (Bertrand-Paradox). Differenzierung rettet $P>MC$.</p>
-      <div class="math-block">$$q_i^*:\\ \\frac{\\partial \\pi_i}{\\partial q_i} = 0 \\quad\\text{(Cournot)}\\qquad P_1=P_2=MC\\ \\text{(Bertrand, homogen)}$$</div>
+      <div class="math-block">$$q_i^*:\\ \frac{\partial \pi_i}{\partial q_i} = 0 \quad\text{(Cournot)}\qquad P_1=P_2=MC  \text{(Bertrand, homogen)}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -474,7 +474,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stackelberg-Folger</h4>
 <p>Folger wählt $q_2$ gegeben $q_1$ (Reaktionsfunktion). Leader internalisiert Folgerreaktion → höhere $q_1$ als Cournot bei symmetrischen Kosten.</p>
-      <div class="math-block">$$q_2 = RR_2(q_1),\\quad \\max_{q_1} \\pi_1(q_1, RR_2(q_1))$$</div>
+      <div class="math-block">$$q_2 = RR_2(q_1),\quad \max_{q_1} \pi_1(q_1, RR_2(q_1))$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -536,26 +536,26 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Intertemporale Budgetbeschränkung</h4>
 <p>In Gegenwartswerten darf der Gegenwartswert des Konsums den Gegenwartswert des Einkommens nicht überschreiten.</p>
-      <div class="math-block">$$c_1+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{c_2}{1+r}=m_1+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{m_2}{1+r}$$</div>
+      <div class="math-block">$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$</div>
       <p>Äquivalent lässt sich die Budgetgerade in Zukunftswerten schreiben. Die Steigung hängt vom Zinssatz ab und zeigt die Opportunitätskosten von Konsum heute.</p>
 
 
 <h4 class="theory-subsection-title">Optimierung mit Nutzen $u(c_1,c_2)$</h4>
 <p>Bei additiver Nutzenfunktion $u(c_1,c_2)=u_1(c_1)+u_2(c_2)$ liefert die tangential optimale Konsumkombination die Euler-Gleichung: Der Grenznutzen heute muss mit dem diskontierten Grenznutzen morgen im Gleichgewicht übereinstimmen.</p>
-      <div class="math-block">$$u_1'(c_1^*)=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{1+r}u_2'(c_2^*)$$</div>
-      <p>Bei logarithmischem Nutzen $u_i(c)=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ln c_i$ folgt unmittelbar $c_2^*=(1+r)c_1^*$: Konsum wächst mit dem Zinsfaktor.</p>
+      <div class="math-block">$$u_1'(c_1^*)=\frac{1}{1+r}u_2'(c_2^*)$$</div>
+      <p>Bei logarithmischem Nutzen $u_i(c)=\ln c_i$ folgt unmittelbar $c_2^*=(1+r)c_1^*$: Konsum wächst mit dem Zinsfaktor.</p>
 
 
 <h4 class="theory-subsection-title">In der Klausur: Intertemporale Wahl</h4>
-<p>Zwei-Perioden-Budget: $c_1 + c_2/(1+r) = y_1 + y_2/(1+r)$. Euler-Gleichung bei CRRA/Log: $u'(c_1) = (1+r)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\beta u'(c_2)$. Zinssenkung: Substitution (mehr heute) vs. Einkommens-Effekt (mehr beide Perioden bei Sparer).</p>
-      <div class="math-block">$$c_1 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{c_2}{1+r} = y_1 + \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{y_2}{1+r}$$</div>
+<p>Zwei-Perioden-Budget: $c_1 + c_2/(1+r) = y_1 + y_2/(1+r)$. Euler-Gleichung bei CRRA/Log: $u'(c_1) = (1+r)\beta u'(c_2)$. Zinssenkung: Substitution (mehr heute) vs. Einkommens-Effekt (mehr beide Perioden bei Sparer).</p>
+      <div class="math-block">$$c_1 + \frac{c_2}{1+r} = y_1 + \frac{y_2}{1+r}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Mechanismus</h4>
-<p>Präferenz über $(c_1,c_2)$; $r$ ist Opportunitätskosten des heutigen Konsums. Bei $\\beta<1$ und $r=0$ tendiert Konsum zur Glättung. Liquidity constraint: $c_1$ kann $y_1$ nicht überschreiten — Euler bindet nicht.</p>
+<p>Präferenz über $(c_1,c_2)$; $r$ ist Opportunitätskosten des heutigen Konsums. Bei $\beta<1$ und $r=0$ tendiert Konsum zur Glättung. Liquidity constraint: $c_1$ kann $y_1$ nicht überschreiten — Euler bindet nicht.</p>
       <div class="warn-box"><strong>Realzins:</strong> In Klausuren $r$ als realer Zins interpretieren, wenn Inflation nicht modelliert wird.</div>
 </div>
 </section>
@@ -563,8 +563,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Intertemporale Wahl</h4>
-<p>Zwei-Perioden-Budget: $c_1 + c_2/(1+r) = y_1 + y_2/(1+r)$. Euler-Gleichung bei CRRA/Log: $u'(c_1) = (1+r)\\beta u'(c_2)$. Zinssenkung: Substitution (mehr heute) vs. Einkommens-Effekt (mehr beide Perioden bei Sparer).</p>
-      <div class="math-block">$$c_1 + \\frac{c_2}{1+r} = y_1 + \\frac{y_2}{1+r}$$</div>
+<p>Zwei-Perioden-Budget: $c_1 + c_2/(1+r) = y_1 + y_2/(1+r)$. Euler-Gleichung bei CRRA/Log: $u'(c_1) = (1+r)\beta u'(c_2)$. Zinssenkung: Substitution (mehr heute) vs. Einkommens-Effekt (mehr beide Perioden bei Sparer).</p>
+      <div class="math-block">$$c_1 + \frac{c_2}{1+r} = y_1 + \frac{y_2}{1+r}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -626,7 +626,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungsnutzen &amp; Versicherung</h4>
 <p>Risikoaverse zahlen Prämie $>$ erwarteter Schaden für Aktuar-Fairness nicht zwingend — Risikoprämie. Vollversicherung bei NM-Utility und fairer Prämie.</p>
-      <div class="math-block">$$EU = \\sum_s \\pi_s u(w_s),\\quad u''<0 \\Rightarrow \\text{risk averse}$$</div>
+      <div class="math-block">$$EU = \sum_s \pi_s u(w_s),\quad u''<0 \Rightarrow \text{risk averse}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -640,7 +640,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Unsicherheit</h4>
-<p>State-contingent claims: Budget $p_1 x_1 + p_2 x_2 = W$. Fair odds: $p_s = \\pi_s$. Optimal: $u'(c_s)$ proportional zu $\\pi_s$ bei NM. Versicherung: Transfer zwischen Zuständen gegen Prämie.</p>
+<p>State-contingent claims: Budget $p_1 x_1 + p_2 x_2 = W$. Fair odds: $p_s = \pi_s$. Optimal: $u'(c_s)$ proportional zu $\pi_s$ bei NM. Versicherung: Transfer zwischen Zuständen gegen Prämie.</p>
       <div class="warn-box"><strong>NM vs. andere Utility:</strong> Vollversicherung bei fairer Prämie nur bei NM-Utility — bei DARA typischerweise unterversichert.</div>
 
 
@@ -704,7 +704,7 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Walrasianisches Gleichgewicht</h4>
 <p>Ein Preisvektor $p^*$ räumt alle Märkte gleichzeitig. Das Walrassche Gesetz besagt: Wenn $n-1$ Märkte im Gleichgewicht sind, ist auch der $n$-te Markt geräumt.</p>
-      <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_i z_i(p) = 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{(Walrasches Gesetz)}$$</div>
+      <div class="math-block">$$\sum_i z_i(p) = 0 \quad \text{(Walrasches Gesetz)}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -788,18 +788,18 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Überschussnachfrage und Preisvektor</h4>
 <p>Ein Walrasianisches Gleichgewicht ist ein Preisvektor $p^*$, bei dem alle Märkte gleichzeitig geräumt sind. Haushalte maximieren Nutzen bei Budgetrestriktion, Unternehmen maximieren Gewinn; die aggregierte Überschussnachfrage verschwindet.</p>
-      <div class="math-block">$$z_i(p)=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_j x_{ij}(p)-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\omega_i=0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\forall i$$</div>
+      <div class="math-block">$$z_i(p)=\sum_j x_{ij}(p)-\omega_i=0 \quad \forall i$$</div>
       <p>Weil Preise nur bis auf einen positiven Skalar eindeutig sind, wird oft ein Numéraire-Gut mit Preis 1 gewählt.</p>
 
 
 <h4 class="theory-subsection-title">Walrasches Gesetz</h4>
 <p>Wenn die Budgetrestriktionen der Haushalte erfüllt sind und $n-1$ Märkte geräumt sind, ist auch der $n$-te Markt geräumt. Das Walrasche Gesetz reduziert die Zahl unabhängiger Gleichgewichtsbedingungen.</p>
-      <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_i z_i(p) = 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{(Walrasches Gesetz)}$$</div>
+      <div class="math-block">$$\sum_i z_i(p) = 0 \quad \text{(Walrasches Gesetz)}$$</div>
 
 
 <h4 class="theory-subsection-title">Homogenität der Überschussnachfrage</h4>
 <p>Die aggregierte Überschussnachfrage ist homogen vom Grad 0: Verdoppeln aller Preise ändert reale Budgetmengen nicht, wenn Einkommen und Ausstattung proportional skaliert werden. Deshalb genügt ein relatives Preisverhältnis; das Numéraire-Gut mit $p_1=1$ fixiert die Skala.</p>
-      <div class="math-block">$$z_i(\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\lambda p) = z_i(p) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\forall \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\lambda > 0$$</div>
+      <div class="math-block">$$z_i(\lambda p) = z_i(p) \quad \forall \lambda > 0$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -874,9 +874,9 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Modellrahmen mit Produktion</h4>
 <p>Die offizielle Darstellung betrachtet zwei Individuen, zwei Güter und zwei Produktionsfaktoren. Konsum wird wie bisher mit $(x_1^A,x_2^A)$ und $(x_1^B,x_2^B)$ bezeichnet; Produktion erfolgt über sektorale Produktionsfunktionen.</p>
-      <div class="math-block">$$F^1(K_1,L_1),\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad F^2(K_2,L_2)$$</div>
+      <div class="math-block">$$F^1(K_1,L_1),\qquad F^2(K_2,L_2)$$</div>
       <p>Die Faktorausstattung ist vollständig auf beide Sektoren aufzuteilen.</p>
-      <div class="math-block">$$K_1+K_2=K,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad L_1+L_2=L$$</div>
+      <div class="math-block">$$K_1+K_2=K,\qquad L_1+L_2=L$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -891,7 +891,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: GE Produktion</h4>
-<p>Edgeworth-Box Produktion: $F^1 + F^2 = \\bar F$. Pareto-Effizienz: $MRTS^1 = MRTS^2$. Mit Preisen: $w/r = MRTS$ in jedem Sektor; Walras-Gleichgewicht = Preise + Allokation, die Märkte räumen.</p>
+<p>Edgeworth-Box Produktion: $F^1 + F^2 = \bar F$. Pareto-Effizienz: $MRTS^1 = MRTS^2$. Mit Preisen: $w/r = MRTS$ in jedem Sektor; Walras-Gleichgewicht = Preise + Allokation, die Märkte räumen.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -953,8 +953,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wohlfahrtsfunktionen</h4>
-<p>Wie bewertet man verschiedene Pareto-effiziente Punkte? Utilitaristisch ($\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum u_i$) oder nach Rawls ($\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\min u_i$).</p>
-      <div class="math-block">$$W_{util} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{i=1}^n u_i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad W_{Rawls} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\min_i u_i$$</div>
+<p>Wie bewertet man verschiedene Pareto-effiziente Punkte? Utilitaristisch ($\sum u_i$) oder nach Rawls ($\min u_i$).</p>
+      <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
 
 
 <h4 class="theory-subsection-title">Konsumenten- und Produzentenrente als Wohlfahrtsmaß</h4>
@@ -1043,19 +1043,19 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wohlfahrtsfunktionen</h4>
-<p>Allokationen können utilitaristisch ($\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum u_i$) oder Rawlsianisch ($\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\min u_i$) bewertet werden. Beide Kriterien ordnen Pareto-effiziente Punkte unterschiedlich — Effizienz und Verteilung bleiben getrennt.</p>
-      <div class="math-block">$$W_{util} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{i=1}^n u_i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad W_{Rawls} = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\min_i u_i$$</div>
+<p>Allokationen können utilitaristisch ($\sum u_i$) oder Rawlsianisch ($\min u_i$) bewertet werden. Beide Kriterien ordnen Pareto-effiziente Punkte unterschiedlich — Effizienz und Verteilung bleiben getrennt.</p>
+      <div class="math-block">$$W_{util} = \sum_{i=1}^n u_i \qquad W_{Rawls} = \min_i u_i$$</div>
 
 
 <h4 class="theory-subsection-title">Konsumenten- und Produzentenrente</h4>
 <p>Im partiellen Markt gilt bei linearer Nachfrage: $KR$ ist das Dreieck unter der Nachfragekurve über dem Gleichgewichtspreis, $PR$ das Dreieck über der Angebotskurve. Gesamtwohlfahrt $W=KR+PR$ im Wettbewerb.</p>
-      <div class="math-block">$$KR = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{2}(P_{max}-P^*)Q^*, \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\qquad PR = \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{2}(P^*-P_{min})Q^*$$</div>
+      <div class="math-block">$$KR = \frac{1}{2}(P_{max}-P^*)Q^*, \qquad PR = \frac{1}{2}(P^*-P_{min})Q^*$$</div>
       <p>Bei $P_D=a-bQ$ und $P_S=c+dQ$ folgt $Q^*=(a-c)/(b+d)$ und die Dreiecksformeln direkt aus der Klausur-Standardgrafik.</p>
 
 
 <h4 class="theory-subsection-title">Steuern, Monopol und DWL-Geometrie</h4>
 <p>Eine Einheitssteuer $t$ verschiebt die effektive Angebotskurve nach oben; das Handelsvolumen sinkt. Der DWL ist das „verlorene“ Dreieck zwischen Nachfrage und (besteuertem) Angebot über der tatsächlich gehandelten Menge — typischer Klausurblock neben Monopol und Mindestpreis.</p>
-      <div class="math-block">$$DWL_{Steuer} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\approx \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{2}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\, t\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\,(Q^* - Q_t)$$</div>
+      <div class="math-block">$$DWL_{Steuer} \approx \frac{1}{2}\\, t\\,(Q^* - Q_t)$$</div>
 
 
 <h4 class="theory-subsection-title">Deadweight Loss</h4>
@@ -1064,7 +1064,7 @@ export const CONTENT = {
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
-<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\frac{1}{2}|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\eta|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\,t^2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
+<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\frac{1}{2}|\eta|\\,t^2\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
       <div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
 </div>
 </section>
@@ -1072,7 +1072,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Wohlfahrtsmessung</h4>
-<p>Kompensierende/äquivalente Variation vs. CS-Änderung bei Nachfrageverschiebung. Harberger-Dreieck für DWL bei $P\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\neq MC$. Aggregationsproblem: utilitaristisch vs. Rawls vs. Pareto-Kriterium.</p>
+<p>Kompensierende/äquivalente Variation vs. CS-Änderung bei Nachfrageverschiebung. Harberger-Dreieck für DWL bei $P\neq MC$. Aggregationsproblem: utilitaristisch vs. Rawls vs. Pareto-Kriterium.</p>
 
 
 <h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
@@ -1088,11 +1088,11 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Wohlfahrtsmessung</h4>
-<p>Kompensierende/äquivalente Variation vs. CS-Änderung bei Nachfrageverschiebung. Harberger-Dreieck für DWL bei $P\\neq MC$. Aggregationsproblem: utilitaristisch vs. Rawls vs. Pareto-Kriterium.</p>
+<p>Kompensierende/äquivalente Variation vs. CS-Änderung bei Nachfrageverschiebung. Harberger-Dreieck für DWL bei $P\neq MC$. Aggregationsproblem: utilitaristisch vs. Rawls vs. Pareto-Kriterium.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
-<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\\frac{1}{2}|\\eta|\\,t^2\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
+<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\frac{1}{2}|\eta|\\,t^2\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
       <div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
 
 
@@ -1152,7 +1152,7 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Emissionshandel (Cap-and-Trade)</h4>
 <p>Alternative zur Pigou-Steuer: Der Staat setzt ein Mengenziel (Cap), verteilt Lizenzen und lässt diese handeln. Das Ergebnis ist effizient, wenn der Lizenzmarkt wettbewerblich ist.</p>
-      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Leftrightarrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Cap bei } Q^*$$</div>
+      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1257,7 +1257,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Emissionshandel (Cap-and-Trade)</h4>
 <p>Der Staat setzt eine Emissionsmenge (Cap), Lizenzen werden handelbar. Bei funktionierendem Markt ergibt sich kosteneffiziente Vermeidung über den Lizenzpreis.</p>
-      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Leftrightarrow \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Cap bei } Q^*$$</div>
+      <div class="math-block">$$t_{Pigou} = MEC(Q^*) \quad \Leftrightarrow \quad \text{Cap bei } Q^*$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1315,13 +1315,13 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Samuelson-Bedingung</h4>
 <p>Die effiziente Menge eines öffentlichen Gutes ist erreicht, wenn die Summe der individuellen Zahlungsbereitschaften (Grenzraten der Substitution) den Grenzkosten der Bereitstellung entspricht.</p>
-      <div class="math-block">$$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\sum_{i=1}^n GRS_i = MRT$$</div>
+      <div class="math-block">$$\sum_{i=1}^n GRS_i = MRT$$</div>
       <p>Wichtig: Wir addieren die Zahlungsbereitschaften <strong>vertikal</strong>, nicht die Mengen horizontal.</p>
 
 
 <h4 class="theory-subsection-title">Bereitstellung und Lösungsansätze</h4>
 <p>Private Bereitstellung: zu gering (Trittbrettfahren). Staatliche Bereitstellung: möglich, aber erfordert Information über Präferenzen (Revelation-Problem). Lindahl-Mechanismus: Personalisierte Preise entsprechend individueller Zahlungsbereitschaft.</p>
-      <div class="math-block">$$P_i^{Lindahl} = MRS_i \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{für alle } i$$</div>
+      <div class="math-block">$$P_i^{Lindahl} = MRS_i \quad \text{für alle } i$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1417,9 +1417,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Erwarteter Wert</strong></p><div class="math-block">$$E[v] = q \\\\\\\\\\\\\\\\cdot v_H + (1-q) \\\\\\\\\\\\\\\\cdot v_L$$</div><p>Preis bei Unwissenheit</p>
-<p><strong>Erwarteter Wert (Kurz)</strong></p><div class="math-block">$$E[v] = q \\\\\\\\\\\\\\\\cdot v_H + (1-q) \\\\\\\\\\\\\\\\cdot v_L$$</div><p>Preis bei Unwissenheit</p>
-<p><strong>Erwarteter Wert (Kurz) (Kurz)</strong></p><div class="math-block">$$E[v] = q \\\\\\\\\\\\\\\\cdot v_H + (1-q) \\\\\\\\\\\\\\\\cdot v_L$$</div><p>Preis bei Unwissenheit</p>
+<p><strong>Erwarteter Wert</strong></p><div class="math-block">$$E[v] = q \cdot v_H + (1-q) \cdot v_L$$</div><p>Preis bei Unwissenheit</p>
+<p><strong>Erwarteter Wert (Kurz)</strong></p><div class="math-block">$$E[v] = q \cdot v_H + (1-q) \cdot v_L$$</div><p>Preis bei Unwissenheit</p>
+<p><strong>Erwarteter Wert (Kurz) (Kurz)</strong></p><div class="math-block">$$E[v] = q \cdot v_H + (1-q) \cdot v_L$$</div><p>Preis bei Unwissenheit</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1438,7 +1438,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Adverse Selection</h4>
-<p>Hidden characteristics vor Vertrag: Akerlof-Markt für Zitronen — Durchschnittspreis → gute Anbieter scheiden aus → Death Spiral. Signaling (Spence): Bildung als Signal bei $c_s \\neq c_t$. Screening (Rothschild-Stiglitz): Vertragspartner bietet Menü.</p>
+<p>Hidden characteristics vor Vertrag: Akerlof-Markt für Zitronen — Durchschnittspreis → gute Anbieter scheiden aus → Death Spiral. Signaling (Spence): Bildung als Signal bei $c_s \neq c_t$. Screening (Rothschild-Stiglitz): Vertragspartner bietet Menü.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -1485,7 +1485,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prinzipal-Agenten-Logik</h4>
-<div class="math-block">$$E[\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi_P] = E[y] - w \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{s.t.} \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\quad IC,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\;PC$$</div>
+<div class="math-block">$$E[\pi_P] = E[y] - w \quad \text{s.t.} \quad IC,\\;PC$$</div>
       <p>Verträge müssen gleichzeitig Teilnahmeanreiz (PC) und Anreizkompatibilität (IC) erfüllen. Performance-Löhne, Bonus-Malus und Selbstbehalte sind ökonomische Antworten auf Moral Hazard.</p>
 </div>
 </section>
@@ -1502,7 +1502,7 @@ export const CONTENT = {
 
 
 <h4 class="theory-subsection-title">In der Klausur: Moral Hazard</h4>
-<p>Hidden action: Agent wählt Aufwand $a$ nach Vertrag. Erwartungsprinzipal maximiert $E[\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pi|a]$ minus Risikoaufschlag. Ergebnis: Teilversicherung optimal bei risikoaversem Agent — Vollversicherung zerstört Anreize.</p>
+<p>Hidden action: Agent wählt Aufwand $a$ nach Vertrag. Erwartungsprinzipal maximiert $E[\pi|a]$ minus Risikoaufschlag. Ergebnis: Teilversicherung optimal bei risikoaversem Agent — Vollversicherung zerstört Anreize.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -1523,7 +1523,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Moral Hazard</h4>
-<p>Hidden action: Agent wählt Aufwand $a$ nach Vertrag. Erwartungsprinzipal maximiert $E[\\pi|a]$ minus Risikoaufschlag. Ergebnis: Teilversicherung optimal bei risikoaversem Agent — Vollversicherung zerstört Anreize.</p>
+<p>Hidden action: Agent wählt Aufwand $a$ nach Vertrag. Erwartungsprinzipal maximiert $E[\pi|a]$ minus Risikoaufschlag. Ergebnis: Teilversicherung optimal bei risikoaversem Agent — Vollversicherung zerstört Anreize.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>

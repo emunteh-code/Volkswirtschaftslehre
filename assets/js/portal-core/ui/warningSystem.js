@@ -95,7 +95,11 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
         return;
       }
       railWarnings.push(warning);
-      warningNode.classList.add("warn-box--theory-inset", "warning-card");
+      warningNode.classList.add(
+        "warn-box--theory-inset",
+        "warning-card",
+        "learning-trap"
+      );
       warningNode.setAttribute("data-warning-placement", "theory-inset");
     });
 

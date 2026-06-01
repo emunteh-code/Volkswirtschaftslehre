@@ -7409,3 +7409,221 @@ body.light-mode #content .theory-recipe-card {
   }
 }
 
+/* ============================================================
+   PASS — Learning visual distinction (fleet-wide)
+   Key terms, task data, traps, theory callouts, WCAG contrast
+   ============================================================ */
+
+:root {
+  --learning-highlight: var(--module-accent, var(--accent));
+  --learning-data: color-mix(in srgb, var(--learning-highlight) 72%, var(--text) 28%);
+  --learning-trap-border: color-mix(in srgb, var(--sys-orange, #d97706) 55%, var(--border) 45%);
+  --learning-trap-surface: color-mix(in srgb, var(--card) 94%, var(--sys-orange, #d97706) 6%);
+  --learning-compare-border: color-mix(in srgb, var(--accent) 48%, var(--border) 52%);
+  --learning-compare-surface: color-mix(in srgb, var(--card) 92%, var(--accent) 8%);
+  --text-muted: color-mix(in srgb, var(--text) 78%, var(--muted) 22%);
+}
+
+body.light-mode:not([data-page="landing"]) {
+  --text-muted: color-mix(in srgb, var(--text) 72%, var(--muted) 28%);
+  --learning-trap-surface: color-mix(in srgb, var(--card) 96%, var(--sys-orange, #d97706) 4%);
+  --learning-compare-surface: color-mix(in srgb, var(--card) 94%, var(--accent) 6%);
+}
+
+#content .text-muted,
+#content .klausurmethodik-intro,
+#content .formula-tab-section-lead,
+#content .practice-surface-column p {
+  color: var(--text-muted);
+}
+
+/* Key terms & definitions */
+#content .learning-term,
+#content .learning-key,
+#content .theory-recipe-body p > strong,
+#content .theory-recipe-body li > strong {
+  font-weight: 650;
+  color: var(--learning-highlight);
+}
+
+#content .learning-definition,
+#content .theory-recipe-section--definitionen .theory-recipe-body > p {
+  margin: 0;
+  padding: 12px 14px 12px 16px;
+  border-left: 3px solid color-mix(in srgb, var(--learning-highlight) 55%, var(--border) 45%);
+  border-radius: 0 10px 10px 0;
+  background: color-mix(in srgb, var(--card) 96%, var(--learning-highlight) 4%);
+  color: var(--text);
+  line-height: 1.62;
+}
+
+/* Task dataset values */
+#content .task-data {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--learning-data);
+  white-space: nowrap;
+}
+
+#content .prob-text .task-data,
+#content .step-text .task-data,
+#content .result-badge .task-data {
+  padding: 0 0.12em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--learning-highlight) 10%, transparent);
+}
+
+/* Exam traps — unified left-border callout (theory + klausurmethodik) */
+#content .learning-trap.warn-box--theory-inset,
+#content .learning-trap.warning-card.warn-box--theory-inset {
+  margin: 10px 0 0;
+  padding: 12px 14px 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--learning-trap-border) 42%, var(--border) 58%);
+  border-left: 3px solid var(--learning-trap-border);
+  border-radius: 0 12px 12px 0;
+  background: var(--learning-trap-surface);
+  box-shadow: none;
+  color: var(--text);
+  gap: 8px;
+}
+
+#content .learning-trap .warning-card-title,
+#content .learning-trap strong {
+  color: color-mix(in srgb, var(--sys-orange, #d97706) 82%, var(--text) 18%);
+  font-weight: 650;
+}
+
+#content .learning-trap .warning-card-body {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+#content .learning-compare {
+  margin: 10px 0 0;
+  padding: 12px 14px 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--learning-compare-border) 38%, var(--border) 62%);
+  border-left: 3px solid var(--learning-compare-border);
+  border-radius: 0 12px 12px 0;
+  background: var(--learning-compare-surface);
+}
+
+/* Theory: compact inline chips for short statutory refs (no display math) */
+#content .theory-recipe-body p + .math-block:not(:has(mjx-container[display="true"])),
+#content .theory-recipe-section--formale .theory-recipe-body > .math-block:not(:has(mjx-container[display="true"])) {
+  display: inline-block;
+  vertical-align: baseline;
+  width: auto;
+  max-width: 100%;
+  margin: 0.15em 0 0.35em;
+  padding: 0.2em 0.55em;
+  font-size: 0.95em;
+  line-height: 1.45;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 18%);
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+  box-shadow: none;
+}
+
+#content .theory-recipe-body p + .math-block:not(:has(mjx-container[display="true"])) mjx-container,
+#content .theory-recipe-section--formale .theory-recipe-body > .math-block:not(:has(mjx-container[display="true"])) mjx-container {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+#content .theory-recipe-body .math-block:has(mjx-container[display="true"]) {
+  display: block;
+  margin: 12px 0;
+  padding: 16px 20px;
+}
+
+/* Practice surface intro — readable contrast cards */
+#content .practice-surface-intro {
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--text) 14%);
+  background: color-mix(in srgb, var(--card) 94%, var(--surface2) 6%);
+  border-bottom: none;
+}
+
+#content .practice-surface-column {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--card) 88%, var(--accent) 4%);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+#content .practice-surface-kicker {
+  color: var(--learning-highlight);
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 12px;
+}
+
+#content .practice-surface-column p {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+/* Klausurmethodik — sentence-case field labels, formula-support alignment */
+#content .klausurmethodik-label,
+#content .klausurmethodik-field .formula-support-field-label {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 12px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+}
+
+#content .klausurmethodik-field--ziel,
+#content .klausurmethodik-field--vorgehen,
+#content .klausurmethodik-field--frage {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  background: color-mix(in srgb, var(--card) 97%, var(--surface2) 3%);
+}
+
+#content .klausurmethodik-field--fehler {
+  padding: 10px 12px 10px 14px;
+  border-radius: 0 10px 10px 0;
+  border: 1px solid color-mix(in srgb, var(--learning-trap-border) 35%, var(--border) 65%);
+  border-left: 3px solid var(--learning-trap-border);
+  background: var(--learning-trap-surface);
+  box-shadow: none;
+}
+
+#content .klausurmethodik-heading,
+#content .formula-klausurmethodik h3 {
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+#content .klausurmethodik-kicker {
+  text-transform: none;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Single platform badge on practice panel header only */
+#content .mikro1-practice .problem-card .practice-platform-badge,
+#content .mikro1-practice .exam-drill-card .practice-platform-badge {
+  display: none !important;
+}
+
+.practice-panel-header .practice-platform-badge--panel {
+  margin-bottom: 4px;
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--learning-highlight) 28%, var(--border) 72%);
+  background: color-mix(in srgb, var(--learning-highlight) 8%, var(--card) 92%);
+}
+
+/* Math in tasks: no orphan accent purple on prose numbers */
+#content .prob-text mjx-container:not([display="true"]),
+#content .step-text mjx-container:not([display="true"]) {
+  color: var(--math-ink, var(--text));
+}
+

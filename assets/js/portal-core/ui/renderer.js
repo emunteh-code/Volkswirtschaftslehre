@@ -28,6 +28,10 @@ import {
   sourcePdfOpenDisabledByDefault
 } from "../utils/deployEnvironment.js";
 import { ensureGraphPedagogyChrome } from "./graphPedagogy.js";
+import {
+  extractConceptHighlightTerms,
+  highlightPracticeText
+} from "../utils/learningHighlights.js";
 
 const HOME_ACTION_ACTIVATE = (handler) =>
   `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
@@ -633,7 +637,13 @@ ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${
       .join("")}</ul>`;
   }
 
-  function renderGuidedTasks(tasks) {
+  function renderHighlightedPracticeText(value, highlightTerms = []) {
+    const prose = renderSemanticPlainText(value);
+    if (!highlightTerms.length) return prose;
+    return highlightPracticeText(prose, { terms: highlightTerms });
+  }
+
+  function renderGuidedTasks(tasks, highlightTerms = []) {
     if (!tasks.length) {
       return `<div class="section-block">
 <h3>Geführte Aufgaben</h3>
@@ -643,7 +653,7 @@ ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${
 
     return tasks.map((task, index) => renderQuestionCard({
       label: `Aufgabe ${index + 1}`,
-      question: task.text,
+      questionHtml: renderHighlightedPracticeText(task.text, highlightTerms),
       buttonId: `solBtn_${index}`,
       answerId: `sol_${index}`,
       toggleCall: `window.__toggleSolution(${index})`,
@@ -652,12 +662,12 @@ ${(task.steps || []).map((step, stepIndex) => `
 <div class="step">
 <div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
 <div class="step-body">
-<div class="step-text">${renderSemanticPlainText(step.text || "")}</div>
+<div class="step-text">${renderHighlightedPracticeText(step.text || "", highlightTerms)}</div>
 <div class="step-math-slot">${renderTaskMathBlock(step.eq)}</div>
 </div>
 </div>`).join("")}
 ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), "Klausurhinweis") : ""}
-<div class="result-badge">Ergebnis: ${renderSemanticPlainText(task.result || "Arbeite das Ergebnis formal zu Ende aus.")}</div>`
+<div class="result-badge">Ergebnis: ${renderHighlightedPracticeText(task.result || "Arbeite das Ergebnis formal zu Ende aus.", highlightTerms)}</div>`
     })).join("");
   }
 
@@ -807,7 +817,7 @@ ${intuition?.analogy ? `<div class="exam-drill-line">
     return drills.slice(0, 8);
   }
 
-  function renderExamDrillDeck(chapter, entry, intuition) {
+  function renderExamDrillDeck(chapter, entry, intuition, highlightTerms = []) {
     const drills = Array.isArray(examDrillsById?.[chapter.id]) && examDrillsById[chapter.id].length
       ? examDrillsById[chapter.id]
       : buildExamDrills(chapter, entry, intuition);
@@ -828,9 +838,9 @@ ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, "_")}_${index}`;
   const cardLabel = `Prüfungsfrage ${index + 1}`;
   const metaLabel = resolveExamDrillMetaLabel(drill.tag, cardLabel);
-  return renderQuestionCard({
+      return renderQuestionCard({
     label: cardLabel,
-    question: drill.question,
+    questionHtml: renderHighlightedPracticeText(drill.question, highlightTerms),
     buttonId: `examDrillBtn_${drillId}`,
     buttonText: "Lösung anzeigen",
     openButtonText: "Lösung verbergen",
@@ -849,6 +859,7 @@ ${drill.answer}`
   function renderQuestionCard({
     label,
     question,
+    questionHtml = "",
     buttonId,
     answerId,
     toggleCall,
@@ -858,17 +869,17 @@ ${drill.answer}`
     cardClass = ""
   }) {
     const classes = ["problem-card", cardClass].filter(Boolean).join(" ");
+    const probBody = questionHtml || renderSemanticPlainText(question);
 
     return `<div class="${classes}">
 <div class="prob-num">${label}</div>
-<div class="prob-text">${renderSemanticPlainText(question)}</div>
+<div class="prob-text">${probBody}</div>
 <div class="prob-actions">
 <button class="btn" id="${buttonId}" data-closed-label="${buttonText}" data-open-label="${openButtonText}" onclick="${toggleCall}">${buttonText}</button>
 </div>
 <div class="solution-block${cardClass ? ` ${cardClass.replace("card", "answer")}` : ""}" id="${answerId}" aria-expanded="false">
 ${answerMarkup}
 </div>
-<span class="practice-platform-badge" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
 </div>`;
   }
 
@@ -884,6 +895,7 @@ ${answerMarkup}
   function renderPracticePanel(entry, conceptId) {
     const chapter = chapters.find((item) => item.id === conceptId);
     const intuition = intuitionById[conceptId];
+    const highlightTerms = extractConceptHighlightTerms(entry, intuition);
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     if (!tasks.length) {
       if (chapter) {
@@ -891,7 +903,7 @@ ${answerMarkup}
 <div class="practice-panel-header">
 <span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
 </div>
-<div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition)}</div>`;
+<div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition, highlightTerms)}</div>`;
       }
       return `<div class="panel active mikro1-practice">
 <div class="practice-panel-header">
@@ -914,9 +926,9 @@ ${answerMarkup}
 </div>
 </div>
 <div class="practice-section-header">Geführte Aufgaben</div>
-${renderGuidedTasks(tasks)}`;
+${renderGuidedTasks(tasks, highlightTerms)}`;
     if (chapter) {
-      html += renderExamDrillDeck(chapter, entry, intuition);
+      html += renderExamDrillDeck(chapter, entry, intuition, highlightTerms);
     }
     html += "</div>";
     return html;

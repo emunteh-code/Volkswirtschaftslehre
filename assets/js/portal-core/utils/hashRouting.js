@@ -9,7 +9,8 @@ const TAB_ALIASES = Object.freeze({
   theorie: "theorie",
   aufgaben: "aufgaben",
   formeln: "formeln",
-  intuition: "intuition",
+  /** Legacy hash — fused into Theorie (scroll to Kernidee). */
+  intuition: "theorie",
   quellen: "quellen",
   r: "r-anwendung",
   "r-anwendung": "r-anwendung",
@@ -36,13 +37,16 @@ export function normalizeConceptTab(tab) {
  */
 export function parseConceptHash(rawHash = typeof location !== "undefined" ? location.hash : "") {
   const raw = String(rawHash || "").replace(/^#/, "").trim();
-  if (!raw) return { conceptId: null, tab: null };
+  if (!raw) return { conceptId: null, tab: null, scrollKernidee: false };
   const parts = raw.split("/").filter(Boolean);
-  if (!parts.length) return { conceptId: null, tab: null };
+  if (!parts.length) return { conceptId: null, tab: null, scrollKernidee: false };
   const [conceptId, tabPart] = parts;
+  const rawTab = tabPart ? String(tabPart).trim().toLowerCase() : null;
+  const scrollKernidee = rawTab === "intuition";
   return {
     conceptId: conceptId || null,
-    tab: tabPart ? normalizeConceptTab(tabPart) : null
+    tab: tabPart ? normalizeConceptTab(tabPart) : null,
+    scrollKernidee
   };
 }
 
@@ -92,7 +96,8 @@ export function isTabAvailable(tabRow, tab) {
  * @returns {string}
  */
 export function resolveAvailableTab(tabRow, preferred) {
-  const candidates = [preferred, "theorie", "aufgaben", "formeln", "intuition", "quellen", "graph", "r-anwendung"].filter(
+  const normalizedPreferred = preferred === "intuition" ? "theorie" : preferred;
+  const candidates = [normalizedPreferred, "theorie", "aufgaben", "formeln", "quellen", "graph", "r-anwendung"].filter(
     Boolean
   );
   for (const tab of candidates) {

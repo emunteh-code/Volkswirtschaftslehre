@@ -30,7 +30,6 @@ const LAYER_ORDER = [
   ['graph', 'Grafik'],
   ['tasks', 'Aufgaben'],
   ['stepProblems', 'Prüfungstransfer'],
-  ['intuition', 'Intuition']
 ];
 
 const SOURCE_STATUS_LABELS = Object.freeze({

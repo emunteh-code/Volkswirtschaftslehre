@@ -121,10 +121,12 @@ export function createPortalApp({
 
   let applyingHashRoute = false;
 
-  function navigate(id, { tab = "theorie", updateHash = true } = {}) {
+  function navigate(id, { tab = "theorie", updateHash = true, scrollKernidee = false } = {}) {
     const tabRow = document.getElementById("tabRow");
     if (id && tabRow) tabRow.classList.add("visible");
-    const resolvedTab = id ? resolveAvailableTab(tabRow, tab) : "theorie";
+    const scrollToKernidee = scrollKernidee || tab === "intuition";
+    const requestedTab = tab === "intuition" ? "theorie" : tab;
+    const resolvedTab = id ? resolveAvailableTab(tabRow, requestedTab) : "theorie";
 
     appState.setCurrent(id);
     appState.setCurrentTab(resolvedTab);
@@ -140,7 +142,7 @@ export function createPortalApp({
       window.__currentGraphId = id;
       updateProgressUI(loadProgress());
       updateNavBadges();
-      renderContent(id, resolvedTab, initGraph);
+      renderContent(id, resolvedTab, initGraph, { scrollKernidee: scrollToKernidee });
       renderRightPanel(id, { navigate, currentTab: resolvedTab });
       syncRightPanelVisibility();
       setActiveTab(resolvedTab);
@@ -172,7 +174,7 @@ export function createPortalApp({
   }
 
   function applyConceptHashRoute({ updateHash = false } = {}) {
-    const { conceptId, tab } = parseConceptHash();
+    const { conceptId, tab, scrollKernidee } = parseConceptHash();
     if (!conceptId) {
       if (appState.current) navigate(null, { updateHash });
       else renderHome();
@@ -183,9 +185,14 @@ export function createPortalApp({
     applyingHashRoute = true;
     try {
       if (appState.current !== conceptId) {
-        navigate(conceptId, { tab: tab || "theorie", updateHash });
+        navigate(conceptId, { tab: tab || "theorie", updateHash, scrollKernidee });
       } else if (tab && tab !== appState.currentTab) {
         switchTab(tab, { updateHash });
+        if (scrollKernidee) {
+          renderContent(conceptId, tab, initGraph, { scrollKernidee: true });
+        }
+      } else if (scrollKernidee) {
+        renderContent(conceptId, tab || appState.currentTab, initGraph, { scrollKernidee: true });
       }
     } finally {
       applyingHashRoute = false;
@@ -510,7 +517,8 @@ export function createPortalApp({
       try {
         navigate(hashChapter.id, {
           tab: hashRoute.tab || "theorie",
-          updateHash: false
+          updateHash: false,
+          scrollKernidee: hashRoute.scrollKernidee
         });
         if (hashRoute.tab && appState.currentTab !== hashRoute.tab) {
           switchTab(hashRoute.tab, { updateHash: false });

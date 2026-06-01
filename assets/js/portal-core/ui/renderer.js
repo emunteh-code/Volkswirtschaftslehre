@@ -138,9 +138,9 @@ export function createRenderer({
     let motivationRow = "";
     if (showConceptMotivationBanner) {
       const motivationText = entry?.motivation ? String(entry.motivation).trim() : "";
-      motivationRow = motivationText
-        ? `<div class="concept-header-row concept-header-row--motivation"><div class="concept-motivation-shell" data-motivation-clamp><p class="concept-motivation" role="note">${escapeHtml(motivationText)}</p><button type="button" class="concept-motivation-toggle" hidden>Mehr</button></div></div>`
-        : `<div class="concept-header-row concept-header-row--motivation concept-header-row--empty" aria-hidden="true"></div>`;
+      if (motivationText) {
+        motivationRow = `<div class="concept-header-row concept-header-row--motivation"><p class="concept-motivation" role="note">${escapeHtml(motivationText)}</p></div>`;
+      }
     }
 
     return `<div class="${headerClass}">
@@ -149,28 +149,6 @@ export function createRenderer({
 ${pillsRow}
 ${motivationRow}
 </div>`;
-  }
-
-  function initConceptMotivationClamp(root) {
-    if (!root?.querySelectorAll) return;
-    root.querySelectorAll("[data-motivation-clamp]").forEach((shell) => {
-      const text = shell.querySelector(".concept-motivation");
-      const btn = shell.querySelector(".concept-motivation-toggle");
-      if (!text || !btn || btn.dataset.bound === "1") return;
-      btn.dataset.bound = "1";
-      const syncToggle = () => {
-        if (shell.classList.contains("concept-motivation-shell--expanded")) return;
-        btn.hidden = text.scrollHeight <= text.clientHeight + 2;
-        btn.textContent = "Mehr";
-      };
-      syncToggle();
-      requestAnimationFrame(syncToggle);
-      btn.addEventListener("click", () => {
-        const expanded = shell.classList.toggle("concept-motivation-shell--expanded");
-        btn.textContent = expanded ? "Weniger" : "Mehr";
-        if (!expanded) requestAnimationFrame(syncToggle);
-      });
-    });
   }
 
   function findWeakestConcept(progress) {
@@ -1453,8 +1431,6 @@ ${anchorBadge}
       const theoryPanel = content.querySelector(".theory-tab-panel");
       if (theoryPanel) renderMath(theoryPanel);
     }
-    initConceptMotivationClamp(content);
-
     if (scrollKernidee && activeTab === "theorie") {
       requestAnimationFrame(() => {
         const kernAnchor = content.querySelector("#theory-kernidee-h, .theory-recipe-section--kernidee");

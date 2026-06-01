@@ -669,8 +669,7 @@ body {
 .concept-header {
   display: grid;
   gap: 14px;
-  justify-items: start;
-  width: min(100%, 1080px);
+  width: min(100%, var(--content-body-max, 1080px));
   margin-inline: auto;
   margin-bottom: 34px;
 }
@@ -696,12 +695,8 @@ body {
   letter-spacing: -0.8px;
   line-height: 1.12;
   margin-bottom: 10px;
-  max-width: min(18ch, 100%);
+  max-width: 100%;
   text-wrap: balance;
-}
-
-.concept-motivation {
-  display: none;
 }
 .concept-header + .panel.active,
 .concept-header + .mikro1-practice,

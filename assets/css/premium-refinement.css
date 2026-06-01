@@ -7039,8 +7039,7 @@ body.light-mode #content .theory-recipe-card {
   --chrome-subtitle-size: var(--type-sm, 0.8125rem);
   --chrome-pill-row-min-h: 1.625rem;
   --chrome-motivation-size: var(--type-base, 0.9375rem);
-  --chrome-motivation-line: 1.5;
-  --chrome-motivation-min-h: calc(2 * var(--chrome-motivation-size) * var(--chrome-motivation-line));
+  --chrome-motivation-line: 1.55;
   --chrome-section-step: 28px;
   --chrome-badge-size: 0.625rem;
 }
@@ -7078,13 +7077,14 @@ body.light-mode #content .theory-recipe-card {
 #content .concept-header {
   display: grid;
   gap: 10px;
-  width: min(100%, var(--content-rail-max, 1080px));
+  width: min(100%, var(--content-body-max));
   margin-inline: auto;
   margin-bottom: 28px;
 }
 
-#content .concept-header--theorie {
-  width: min(100%, var(--content-body-max));
+#content .concept-header-row {
+  width: 100%;
+  min-width: 0;
 }
 
 #content .panel.active.theory-tab-panel,
@@ -7117,13 +7117,7 @@ body.light-mode #content .theory-recipe-card {
 }
 
 #content .concept-header-row--motivation {
-  min-height: var(--chrome-motivation-min-h);
-}
-
-#content .concept-header-row--motivation.concept-header-row--empty {
-  min-height: var(--chrome-motivation-min-h);
-  visibility: hidden;
-  pointer-events: none;
+  display: block;
 }
 
 #content .concept-tag {
@@ -7168,45 +7162,14 @@ body.light-mode #content .theory-recipe-card {
 #content .concept-motivation {
   display: block;
   margin: 0;
+  max-width: 100%;
   font-size: var(--chrome-motivation-size);
   line-height: var(--chrome-motivation-line);
   color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
-  max-width: 62ch;
 }
 
 #content .concept-motivation::before {
   content: none;
-}
-
-#content .concept-motivation-shell:not(.concept-motivation-shell--expanded) .concept-motivation {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-#content .concept-motivation-toggle {
-  margin: 6px 0 0;
-  padding: 0;
-  border: none;
-  background: none;
-  font: inherit;
-  font-size: var(--chrome-subtitle-size);
-  font-weight: 600;
-  color: var(--accent);
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-#content .concept-motivation-toggle:hover {
-  color: var(--accent2, var(--accent));
-}
-
-#content .concept-motivation-toggle:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  outline-offset: 2px;
-  border-radius: 2px;
 }
 
 /* ── Unified platform badge / pill family ─────────────────── */
@@ -7337,7 +7300,6 @@ body.light-mode #content .theory-recipe-card {
 @media (max-width: 428px) {
   :root {
     --chrome-title-min-h: calc(2 * 1.75rem * var(--chrome-title-line));
-    --chrome-motivation-min-h: calc(2 * 0.875rem * var(--chrome-motivation-line));
   }
 
   #content .concept-header {

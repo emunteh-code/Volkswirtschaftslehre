@@ -930,6 +930,7 @@ async function runMikro1SourceCompanion(page) {
 const GRAPH_CASES = [
   { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/graph' },
   { route: '/mikro2/index.html', id: 'spieltheorie_statisch', label: 'mikro2/spieltheorie_statisch/graph' },
+  { route: '/mikro2/index.html', id: 'gleichgewicht_tausch', label: 'mikro2/gleichgewicht_tausch/graph' },
   { route: '/makro1/index.html', id: 'islm', label: 'makro1/islm/graph' },
   { route: '/makro2/index.html', id: 'mundell_fleming', label: 'makro2/mundell_fleming/graph' },
   { route: '/statistik/index.html', id: 'bivariat', label: 'statistik/bivariat/graph' },
@@ -961,6 +962,8 @@ async function runGraphIntegrity(page, w, h, vpLabel) {
       const title = document.querySelector('#content .graph-panel-title');
       const err = document.querySelector('#content .empty-state-error');
       const pedagogy = document.querySelector('#content .graph-pedagogy-footer');
+      const seeLine = document.querySelector('#content .graph-see-line');
+      const legend = document.querySelector('#content .graph-legend-econ');
       const info = document.querySelector('#content #graph_info');
       const r = canvas?.getBoundingClientRect();
       return {
@@ -971,6 +974,9 @@ async function runGraphIntegrity(page, w, h, vpLabel) {
         errText: (err?.textContent || '').trim(),
         hasPedagogyFooter: !!pedagogy,
         pedagogyLen: (pedagogy?.textContent || '').trim().length,
+        hasSeeLine: !!seeLine,
+        seeLen: (seeLine?.textContent || '').trim().length,
+        hasLegend: !!legend,
         hasGraphInfo: !!info,
         canvasAria: (canvas?.getAttribute('aria-label') || '').trim().length
       };
@@ -1003,6 +1009,26 @@ async function runGraphIntegrity(page, w, h, vpLabel) {
         viewport: vpLabel,
         type: 'render-error-visible',
         why: `Empty-state error visible: ${res.errText}`
+      });
+    }
+    if (!res.hasSeeLine || res.seeLen < 24) {
+      fail({
+        system: 'graph-integrity',
+        route: g.label,
+        surface: 'graph',
+        viewport: vpLabel,
+        type: 'graph-see-line-missing',
+        why: 'Fleet "Was du siehst" clarity line missing or empty.'
+      });
+    }
+    if (!res.hasLegend) {
+      fail({
+        system: 'graph-integrity',
+        route: g.label,
+        surface: 'graph',
+        viewport: vpLabel,
+        type: 'graph-legend-missing',
+        why: 'Economic color legend (.graph-legend-econ) missing.'
       });
     }
     if (!res.hasPedagogyFooter || res.pedagogyLen < 20) {
@@ -1393,6 +1419,41 @@ async function runSecondaryOverflow(page) {
 }
 
 /** --- Hash routing #concept/tab (shareable deep links) --- */
+/** --- Theorie tab: no [object Object] from stringified formula objects --- */
+async function runTheoryFormelDisplay(page) {
+  const targets = [
+    { route: '/recht/index.html', id: 'willenserklaerung', label: 'recht/willenserklaerung/theorie' },
+    { route: '/mathematik/index.html', id: 'algebra_mengen', label: 'mathematik/algebra_mengen/theorie' }
+  ];
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const t of targets) {
+    await gotoConcept(page, t.route, t.id);
+    const bad = await page.evaluate(() => {
+      const panel = document.querySelector('#content .panel.active') || document.getElementById('content');
+      const text = panel?.innerText || '';
+      if (text.includes('[object Object]')) return text.slice(0, 240);
+      const formal = document.querySelector('.theory-recipe-section--formale .theory-recipe-body');
+      if (formal && !formal.querySelector('.semantic-display, .math-block mjx-container, .math-block')) {
+        const labels = [...formal.querySelectorAll('p > strong')].map((n) => n.textContent?.trim()).filter(Boolean);
+        if (labels.length && !formal.textContent?.includes('§')) return `empty-formal:${labels.slice(0, 2).join(',')}`;
+      }
+      return null;
+    });
+    if (bad) {
+      fail({
+        system: 'theory-formel-display',
+        route: t.label,
+        surface: 'theorie',
+        viewport: '1280',
+        type: bad.startsWith('empty-formal') ? 'formal-empty' : 'object-object-theory',
+        why: bad.startsWith('empty-formal')
+          ? `Formale Darstellung missing rendered schema/math: ${bad}`
+          : `Theorie contains [object Object]: ${bad}`
+      });
+    }
+  }
+}
+
 async function runMasteryLabels(page) {
   const targets = [
     { route: '/mikro1/index.html', id: 'budget', label: 'mikro1/budget/aufgaben' },
@@ -1701,6 +1762,7 @@ try {
   await runHashRouting(page);
   await runMobileShell375(page);
   await runMasteryLabels(page);
+  await runTheoryFormelDisplay(page);
   await runKlausurmethodikStudentText(page);
   await runPracticePanelHeader(page);
   await runJsErrorRemoved(page);

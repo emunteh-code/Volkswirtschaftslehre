@@ -5096,6 +5096,68 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
   color: color-mix(in srgb, var(--muted) 80%, var(--text) 20%) !important;
 }
 
+#content .graph-pedagogy-slider {
+  margin: 0 0 8px !important;
+  font-size: 0.82rem !important;
+  line-height: 1.4 !important;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%) !important;
+}
+
+#content .graph-see-line {
+  margin: 0 0 10px !important;
+  font-size: 0.88rem !important;
+  line-height: 1.45 !important;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
+}
+
+#content .graph-see-label {
+  display: inline-block;
+  margin-right: 6px;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong, var(--accent));
+}
+
+#content .graph-legend-econ {
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  list-style: none !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px 14px !important;
+}
+
+#content .graph-legend-econ-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.78rem !important;
+  color: color-mix(in srgb, var(--muted) 75%, var(--text) 25%) !important;
+}
+
+#content .graph-legend-swatch {
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+#content .graph-legend-swatch--demand { background: var(--accent, #2f77c7); }
+#content .graph-legend-swatch--supply { background: var(--semantic-green, #2f8f58); }
+#content .graph-legend-swatch--budget { background: var(--accent, #2f77c7); }
+#content .graph-legend-swatch--indifference { background: var(--math-ink, #c45ae0); }
+#content .graph-legend-swatch--mc { background: #d98223; }
+#content .graph-legend-swatch--mr { background: #8f2436; }
+#content .graph-legend-swatch--isCurve { background: var(--accent, #2f77c7); }
+#content .graph-legend-swatch--lmCurve { background: var(--semantic-green, #2f8f58); }
+#content .graph-legend-swatch--optimum { background: color-mix(in srgb, var(--text) 70%, var(--muted) 30%); }
+#content .graph-legend-swatch--data { background: color-mix(in srgb, var(--accent) 55%, var(--muted) 45%); }
+#content .graph-legend-swatch--fit { background: var(--accent, #2f77c7); }
+#content .graph-legend-swatch--residual { background: var(--accent3, #e05252); }
+#content .graph-legend-swatch--reference { background: color-mix(in srgb, var(--muted) 60%, var(--text) 40%); }
+
 /* Graph stage = hero (default graphs; Makro macro-focus shells keep engine heights) */
 #content .graph-container:not(.graph-container--macro-focus) canvas,
 #content .graph-container:not(.graph-container--macro-focus) .graph-canvas {
@@ -6917,6 +6979,32 @@ body.light-mode #content .theory-recipe-card {
   display: grid;
   gap: 14px;
   min-width: 0;
+  text-align: left;
+}
+
+#content .theory-recipe-section--formale .theory-recipe-body > p > strong {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 0.875rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+}
+
+#content .theory-recipe-section--formale .theory-recipe-body .math-block,
+#content .theory-recipe-section--formale .theory-recipe-body .semantic-display {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+#content .theory-recipe-section--formale .semantic-schema {
+  justify-content: flex-start;
+}
+
+#content .theory-recipe-section--kernidee .theory-subsection-title {
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 /* Subsections stay flat inside the outer recipe card (no card-in-card) */
@@ -6972,11 +7060,24 @@ body.light-mode #content .theory-recipe-card {
 }
 
 #content .theory-intuition-embed {
+  width: 100%;
+  max-width: none;
   margin: 0 0 14px;
   padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
   background: color-mix(in srgb, var(--accent) 6%, var(--card));
+  box-sizing: border-box;
+}
+
+#content .theory-recipe-body .theory-intuition-embed {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#content .theory-recipe-body .theory-intuition-embed .theory-intuition-embed {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #content .theory-intuition-bridge-kicker {

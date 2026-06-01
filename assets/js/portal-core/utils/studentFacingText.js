@@ -1,4 +1,5 @@
 import { protectLatexInHtml, repairLatexInHtml } from './latexProtect.js';
+import { prepareTheoryHtmlForStudent } from './formelDisplay.js';
 
 /**
  * Strip dev/registry jargon from strings shown on student surfaces.
@@ -63,9 +64,20 @@ export function studentizeTaskGapNote(gap) {
  * @param {unknown} html
  * @returns {string}
  */
-export function studentizeTheoryHtml(html) {
+/**
+ * @param {unknown} html
+ * @param {{ formeln?: Array<{ label?: string, eq?: unknown }> }} [entry]
+ * @returns {string}
+ */
+export function studentizeTheoryHtml(html, entry = null) {
   let s = repairLatexInHtml(html);
   if (!s) return s;
+
+  if (entry && typeof entry === "object") {
+    s = prepareTheoryHtmlForStudent(s, entry);
+  } else if (s.includes("[object Object]")) {
+    s = prepareTheoryHtmlForStudent(s, {});
+  }
 
   const { html: shielded, restore } = protectLatexInHtml(s);
   s = shielded;

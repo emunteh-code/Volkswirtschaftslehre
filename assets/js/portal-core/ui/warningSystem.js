@@ -57,7 +57,8 @@ function normalizeWarningNode(node) {
 
 export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
   const theoryHtml = studentizeTheoryHtml(
-    fuseIntuitionIntoTheoryHtml(theoryToHtml(entry?.theorie), intuition, entry, fusionOpts)
+    fuseIntuitionIntoTheoryHtml(theoryToHtml(entry?.theorie), intuition, entry, fusionOpts),
+    entry
   );
   if (!theoryHtml || typeof DOMParser === "undefined") {
     return {

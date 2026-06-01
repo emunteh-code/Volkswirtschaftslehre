@@ -79,9 +79,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Kernfrage</strong></p><div class="math-block">[object Object]</div><p>Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.</p>
-<p><strong>Normbezug</strong></p><div class="math-block">[object Object]</div><p>Das ist die elementare Struktur juristischer Arbeit.</p>
-<p><strong>Normbezug (Merksatz)</strong></p><div class="math-block">[object Object]</div><p>Das ist die elementare Struktur juristischer Arbeit.</p>
+<p><strong>Kernfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Wer will was von wem woraus?</span></div><p>Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.</p>
+<p><strong>Normbezug</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Sachverhalt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Tatbestandsmerkmal</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Rechtsfolge</span></div><p>Das ist die elementare Struktur juristischer Arbeit.</p>
+<p><strong>Normbezug (Merksatz)</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Sachverhalt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Tatbestandsmerkmal</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">Rechtsfolge</span></div><p>Das ist die elementare Struktur juristischer Arbeit.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -106,7 +106,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Kernfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.' },
       { label: 'Normbezug', eq: schema(['Sachverhalt', '→', 'Tatbestandsmerkmal', '→', 'Rechtsfolge']), desc: 'Das ist die elementare Struktur juristischer Arbeit.' }
@@ -160,8 +168,8 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>BGB-System</strong></p><div class="math-block">[object Object]</div><p>Spezielle Normen bauen auf allgemeinen Regeln auf.</p>
-<p><strong>Privatrecht</strong></p><div class="math-block">[object Object]</div><p>Grundidee der privatrechtlichen Beziehung.</p>
+<p><strong>BGB-System</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">AT</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Besonderer Teil</span></div><p>Spezielle Normen bauen auf allgemeinen Regeln auf.</p>
+<p><strong>Privatrecht</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Gleichordnung der Beteiligten</span></div><p>Grundidee der privatrechtlichen Beziehung.</p>
 <p><strong>Normfinder</strong></p><div class="math-block">AT → Schuldrecht → ggf. Sachenrecht</div><p>Systematische Suchreihenfolge.</p>
 </div>
 </section>
@@ -180,7 +188,30 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Sachenrecht und Familienrecht als Randzonen</h3>
+    
+      <p>Im Grundkurs bleibt der Fokus auf AT und Schuldrecht; Sachenrecht (§§ 929 ff. BGB) wird über Trennung/Abstraktion berührt. Familien- und Erbrecht sind eigene Bücher — in Klausuren selten Startpunkt, aber für Systematik nennbar.</p>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Öffentliches Recht kurz abgrenzen</h3>
+    
+      <p>Hoheitliche Gewalt (Polizei, Steuern) folgt anderen Normen und Gerichtswegen. Verwechslung „BGB = alles Recht“ ist ein häufiger Anfängerfehler.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Prüfungsstart</strong> Bei zivilrechtlichen Fällen nicht mit Verwaltungsrecht oder Strafrecht beginnen, wenn die Fallfrage privatrechtlich ist.</div>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'BGB-System', eq: schema(['AT', '+', 'Besonderer Teil']), desc: 'Spezielle Normen bauen auf allgemeinen Regeln auf.' },
       { label: 'Privatrecht', eq: phrase('Gleichordnung der Beteiligten'), desc: 'Grundidee der privatrechtlichen Beziehung.' }
@@ -217,10 +248,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Anspruchsfrage</strong></p><div class="math-block">[object Object]</div><p>Erste und wichtigste Sortierfrage des Falles.</p>
-<p><strong>Gutachtenstil</strong></p><div class="math-block">[object Object]</div><p>Einleitender Obersatz, dann je Tatbestandsmerkmal: Obersatz zum Merkmal, Definition, Subsumtion; abschließend Ergebnis. Obersätze i.d.R. Konjunktiv II, Definition/Subsumtion Indikativ.</p>
-<p><strong>Anspruchskette</strong></p><div class="math-block">[object Object]</div><p>Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.</p>
-<p><strong>Tatbestand vor Rechtsfolge</strong></p><div class="math-block">[object Object]</div><p>Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.</p>
+<p><strong>Anspruchsfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Wer will was von wem woraus?</span></div><p>Erste und wichtigste Sortierfrage des Falles.</p>
+<p><strong>Gutachtenstil</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">O</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">–</span></span><span class="semantic-schema__item">D</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">–</span></span><span class="semantic-schema__item">S</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">–</span></span><span class="semantic-schema__item">E</span></div><p>Einleitender Obersatz, dann je Tatbestandsmerkmal: Obersatz zum Merkmal, Definition, Subsumtion; abschließend Ergebnis. Obersätze i.d.R. Konjunktiv II, Definition/Subsumtion Indikativ.</p>
+<p><strong>Anspruchskette</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">entstanden</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">untergegangen</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">durchsetzbar</span></div><p>Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.</p>
+<p><strong>Tatbestand vor Rechtsfolge</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">erst Voraussetzungen, dann Folgen</span></div><p>Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -254,7 +285,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Anspruchsfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Erste und wichtigste Sortierfrage des Falles.' },
       {
@@ -334,8 +373,8 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Vertragsschluss</strong></p><div class="math-block">[object Object]</div><p>Zwei übereinstimmende Willenserklärungen.</p>
-<p><strong>Angebot</strong></p><div class="math-block">[object Object]</div><p>So bestimmt, dass ein einfaches Ja genügt.</p>
+<p><strong>Vertragsschluss</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Angebot</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Annahme</span></div><p>Zwei übereinstimmende Willenserklärungen.</p>
+<p><strong>Angebot</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">essentialia negotii</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Rechtsbindungswille</span></div><p>So bestimmt, dass ein einfaches Ja genügt.</p>
 <p><strong>Zugang</strong></p><div class="math-block">§ 130 BGB</div><p>Wirksamkeit empfangsbedürftiger WE.</p>
 </div>
 </section>
@@ -354,7 +393,30 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Zugang und empfangsbedürftige Erklärungen</h3>
+    
+      <p>Willenserklärungen werden mit Zugang wirksam, wenn sie empfangsbedürftig sind (§ 130 BGB). Bei Angeboten und Annahmen ist der Zugang beim Empfänger maßgeblich — nicht das Absendedatum allein.</p>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Angebot vs. invitatio ad offerendum</h3>
+    
+      <p>Supermarkt-Preisschilder, Schaufenster und Auktionskataloge sind regelmäßig nur Aufforderungen zur Abgabe eines Angebots. Das bindende Angebot kommt erst durch die Kundgabe des Kunden (z.B. an der Kasse).</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Schweigen</strong> Schweigen ist keine Annahme (§ 151 BGB Ausnahmen beachten).</div>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Vertragsschluss', eq: schema(['Angebot', '+', 'Annahme']), desc: 'Zwei übereinstimmende Willenserklärungen.' },
       { label: 'Angebot', eq: schema(['essentialia negotii', '+', 'Rechtsbindungswille']), desc: 'So bestimmt, dass ein einfaches Ja genügt.' }
@@ -392,10 +454,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Konsensfrage</strong></p><div class="math-block">[object Object]</div><p>Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.</p>
-<p><strong>Offener Dissens</strong></p><div class="math-block">[object Object]</div><p>Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.</p>
-<p><strong>Versteckter Dissens</strong></p><div class="math-block">[object Object]</div><p>Nur bei wirklichem Nichtübereinstimmen und fortbestehendem Vertragswillen relevant.</p>
-<p><strong>Falsa demonstratio</strong></p><div class="math-block">[object Object]</div><p>Gemeinsam gewollter Inhalt bleibt trotz falscher Bezeichnung maßgeblich.</p>
+<p><strong>Konsensfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Angebot</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">↔</span></span><span class="semantic-schema__item">Annahme</span></div><p>Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.</p>
+<p><strong>Offener Dissens</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">§ 154 BGB</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">im Zweifel kein Vertrag</span></div><p>Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.</p>
+<p><strong>Versteckter Dissens</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 155 BGB</span></div></div><p>Nur bei wirklichem Nichtübereinstimmen und fortbestehendem Vertragswillen relevant.</p>
+<p><strong>Falsa demonstratio</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">falsa demonstratio non nocet</span></div><p>Gemeinsam gewollter Inhalt bleibt trotz falscher Bezeichnung maßgeblich.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -426,7 +488,20 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>In der Klausur: Dissens</h3>
+    <p>Klausurpfad: Angebot und Annahme objektiv auslegen (§§ 133, 157 BGB) → deckungsgleich? → Konsens. Offener Dissens § 154: bewusst offener Punkt → kein Vertrag. Versteckter Dissens § 155: selten — oft objektive Auslegung oder Irrtum. Essentialia negotii fehlen → Totaldissens.</p><div class="warn-box" data-warning-placement="rail"><strong>Nicht jeder Irrtum ist Dissens</strong> Bei objektiver Deckungsgleichheit → Anfechtung (§§ 119 ff.), nicht Dissenspfad.</div><div class="warn-box" data-warning-placement="rail"><strong>Falsa demonstratio</strong> Gleiche objektive Bedeutung, falsche Bezeichnung → Vertrag trotzdem wirksam.</div>
+  </div>
+
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Konsensfrage', eq: schema(['Angebot', '↔', 'Annahme']), desc: 'Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.' },
       { label: 'Offener Dissens', eq: schema(['§ 154 BGB', '⇒', 'im Zweifel kein Vertrag']), desc: 'Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.' },
@@ -485,10 +560,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Anfechtungsgründe</strong></p><div class="math-block">[object Object]</div><p>Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.</p>
-<p><strong>Vollständige Prüfung</strong></p><div class="math-block">[object Object]</div><p>Der Irrtum allein reicht nie für eine vollständige Lösung.</p>
-<p><strong>Rechtsfolge</strong></p><div class="math-block">[object Object]</div><p>Das Geschäft wird rückwirkend beseitigt.</p>
-<p><strong>Vertrauensschaden</strong></p><div class="math-block">[object Object]</div><p>Eigener Folgeanspruch nach wirksamer Irrtumsanfechtung.</p>
+<p><strong>Anfechtungsgründe</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--stack semantic-display--pres-contrast" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 119 BGB</span></div><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 123 BGB</span></div></div><p>Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.</p>
+<p><strong>Vollständige Prüfung</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Grund</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Erklärung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Frist</span></div><p>Der Irrtum allein reicht nie für eine vollständige Lösung.</p>
+<p><strong>Rechtsfolge</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">ex tunc nichtig</span></div><p>Das Geschäft wird rückwirkend beseitigt.</p>
+<p><strong>Vertrauensschaden</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 122 BGB</span></div></div><p>Eigener Folgeanspruch nach wirksamer Irrtumsanfechtung.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -516,7 +591,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Anfechtungsgründe', eq: ref('§ 119 BGB', '§ 123 BGB'), desc: 'Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.' },
       { label: 'Vollständige Prüfung', eq: schema(['Grund', '+', 'Erklärung', '+', 'Frist']), desc: 'Der Irrtum allein reicht nie für eine vollständige Lösung.' },
@@ -583,8 +666,8 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Verpflichtung</strong></p><div class="math-block">[object Object]</div><p>Begründet Leistungspflichten.</p>
-<p><strong>Verfügung</strong></p><div class="math-block">[object Object]</div><p>Überträgt, belastet oder hebt ein Recht auf.</p>
+<p><strong>Verpflichtung</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">schuldrechtliches Geschäft</span></div><p>Begründet Leistungspflichten.</p>
+<p><strong>Verfügung</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">dingliche Rechtsänderung</span></div><p>Überträgt, belastet oder hebt ein Recht auf.</p>
 <p><strong>Übereignung</strong></p><div class="math-block">§ 929 BGB</div><p>Verfügung über bewegliche Sache.</p>
 </div>
 </section>
@@ -611,7 +694,35 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>In der Klausur: Trennung und Abstraktion</h3>
+    <p>Prüfungsstandard: Zwei Stränge parallel — (1) Verpflichtungsgeschäft (Wirksamkeit, Anfechtung, Rücktritt). (2) Verfügungsgeschäft (Eigentumsübertragung § 929 BGB) eigenständig prüfen. Unwirksamer Kauf ≠ automatisch kein Eigentumsübergang → Bereicherungsanspruch prüfen.</p><div class="warn-box" data-warning-placement="rail"><strong>Subsumtionsreihenfolge</strong> Erst Verpflichtung, dann Verfügung — nie aus Unwirksamkeit des einen auf den anderen schließen.</div><div class="warn-box" data-warning-placement="rail"><strong>Typischer Fall</strong> Nichtiger Kauf, aber wirksame Übergabe: Eigentum bei Käufer, § 812 Abs. 1 S. 1 Alt. 1 Bereicherung.</div>
+  </div>
+
+  <div class="section-block">
+    <h3>Beispielkette Kauf und Übereignung</h3>
+    
+      <p>Kaufvertrag (§ 433) begründet die Pflicht zur Übereignung; Eigentumsübergang erfordert ein wirksames Verfügungsgeschäft (§ 929) und ggf. gutgläubigen Erwerb (§ 932 ff.).</p>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Bereicherungsrecht bei Abstraktion</h3>
+    
+      <p>Ist das Verpflichtungsgeschäft unwirksam, kann Eigentum dennoch übergegangen sein. Rückabwicklung läuft dann über §§ 812 ff. BGB (Leistungskondiktion), nicht „automatisch“ über Rücktritt vom Kauf.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Kurzschluss</strong> Erst Verpflichtungs- und Verfügungsgeschäft getrennt prüfen, dann Bereicherung — nicht umgekehrt.</div>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Verpflichtung', eq: phrase('schuldrechtliches Geschäft'), desc: 'Begründet Leistungspflichten.' },
       { label: 'Verfügung', eq: phrase('dingliche Rechtsänderung'), desc: 'Überträgt, belastet oder hebt ein Recht auf.' }
@@ -648,8 +759,8 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Beschränkt geschäftsfähig</strong></p><div class="math-block">[object Object]</div><p>Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.</p>
-<p><strong>Lediglich rechtlich vorteilhaft</strong></p><div class="math-block">[object Object]</div><p>Dann ist keine Zustimmung nötig.</p>
+<p><strong>Beschränkt geschäftsfähig</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 106 ff. BGB</span></div></div><p>Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.</p>
+<p><strong>Lediglich rechtlich vorteilhaft</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">kein rechtlicher Nachteil</span></div><p>Dann ist keine Zustimmung nötig.</p>
 <p><strong>Taschengeld</strong></p><div class="math-block">§ 110 BGB</div><p>Wirksamkeit aus eigenen Mitteln.</p>
 </div>
 </section>
@@ -668,7 +779,30 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>§ 107 BGB — lediglich rechtlich vorteilhaft</h3>
+    
+      <p>Ein Geschäft ist nur dann ohne Zustimmung wirksam, wenn der Minderjährige rechtlich keinen Nachteil erleidet (keine Verpflichtung, kein Risiko). Ein günstiger Kaufpreis allein reicht nicht, wenn Raten oder Verbindlichkeiten entstehen.</p>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>§ 110 BGB — Taschengeld</h3>
+    
+      <p>Leistungen, die der Minderjährige aus Mitteln bewirkt, die ihm zur freien Verfügung überlassen wurden, sind wirksam. Grenze: Umfang des überlassenen Vermögens.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Zustimmung</strong> Fehlende Zustimmung macht das Geschäft schwebend unwirksam (§ 108), nicht automatisch nichtig.</div>
+    
+  </div>
+
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Beschränkt geschäftsfähig', eq: ref('§§ 106 ff. BGB'), desc: 'Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.' },
       { label: 'Lediglich rechtlich vorteilhaft', eq: phrase('kein rechtlicher Nachteil'), desc: 'Dann ist keine Zustimmung nötig.' }
@@ -707,10 +841,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Stellvertretung</strong></p><div class="math-block">[object Object]</div><p>Handeln in fremdem Namen mit Vertretungsmacht.</p>
-<p><strong>Vertretungsmacht</strong></p><div class="math-block">[object Object]</div><p>Quellen der Zurechnungsmacht müssen sauber getrennt werden.</p>
-<p><strong>Ohne Vertretungsmacht</strong></p><div class="math-block">[object Object]</div><p>Geschäft schwebend unwirksam bis zur Genehmigung.</p>
-<p><strong>Haftung des falsus procurator</strong></p><div class="math-block">[object Object]</div><p>Folgeebene erst nach Offenkundigkeit und ausbleibender Genehmigung prüfen.</p>
+<p><strong>Stellvertretung</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 164 Abs. 1 BGB</span></div></div><p>Handeln in fremdem Namen mit Vertretungsmacht.</p>
+<p><strong>Vertretungsmacht</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">rechtsgeschäftlich</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">/</span></span><span class="semantic-schema__item">gesetzlich</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">/</span></span><span class="semantic-schema__item">organschaftlich</span></div><p>Quellen der Zurechnungsmacht müssen sauber getrennt werden.</p>
+<p><strong>Ohne Vertretungsmacht</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 177 BGB</span></div></div><p>Geschäft schwebend unwirksam bis zur Genehmigung.</p>
+<p><strong>Haftung des falsus procurator</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 179 BGB</span></div></div><p>Folgeebene erst nach Offenkundigkeit und ausbleibender Genehmigung prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -732,7 +866,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Stellvertretung', eq: ref('§ 164 Abs. 1 BGB'), desc: 'Handeln in fremdem Namen mit Vertretungsmacht.' },
       { label: 'Vertretungsmacht', eq: schema(['rechtsgeschäftlich', '/', 'gesetzlich', '/', 'organschaftlich']), desc: 'Quellen der Zurechnungsmacht müssen sauber getrennt werden.' },
@@ -800,11 +942,11 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>AGB-Begriff</strong></p><div class="math-block">[object Object]</div><p>Vorliegen von AGB ist eine eigene erste Sachfrage.</p>
-<p><strong>Einbeziehung</strong></p><div class="math-block">[object Object]</div><p>Erst dann werden AGB Vertragsbestandteil.</p>
-<p><strong>Vorrang Individualabrede</strong></p><div class="math-block">[object Object]</div><p>Das konkret Vereinbarte verdrängt kollidierende AGB.</p>
-<p><strong>Überraschende Klausel</strong></p><div class="math-block">[object Object]</div><p>Kann schon vor der eigentlichen Inhaltskontrolle ausscheiden.</p>
-<p><strong>Kontrolle</strong></p><div class="math-block">[object Object]</div><p>Inhaltskontrolle kommt erst nach Einbeziehung und Vorfragen.</p>
+<p><strong>AGB-Begriff</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">vorformuliert</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">für Vielzahl</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">gestellt</span></div><p>Vorliegen von AGB ist eine eigene erste Sachfrage.</p>
+<p><strong>Einbeziehung</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Hinweis</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Kenntnisnahme</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Einverständnis</span></div><p>Erst dann werden AGB Vertragsbestandteil.</p>
+<p><strong>Vorrang Individualabrede</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 305b BGB</span></div></div><p>Das konkret Vereinbarte verdrängt kollidierende AGB.</p>
+<p><strong>Überraschende Klausel</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 305c BGB</span></div></div><p>Kann schon vor der eigentlichen Inhaltskontrolle ausscheiden.</p>
+<p><strong>Kontrolle</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 307-309 BGB</span></div></div><p>Inhaltskontrolle kommt erst nach Einbeziehung und Vorfragen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -835,7 +977,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'AGB-Begriff', eq: schema(['vorformuliert', '+', 'für Vielzahl', '+', 'gestellt']), desc: 'Vorliegen von AGB ist eine eigene erste Sachfrage.' },
       { label: 'Einbeziehung', eq: schema(['Hinweis', '+', 'Kenntnisnahme', '+', 'Einverständnis']), desc: 'Erst dann werden AGB Vertragsbestandteil.' },
@@ -901,10 +1051,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Schuldverhältnis</strong></p><div class="math-block">[object Object]</div><p>Beide Ebenen können verletzt werden.</p>
-<p><strong>Anspruch</strong></p><div class="math-block">[object Object]</div><p>Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.</p>
-<p><strong>Pflichtverletzung</strong></p><div class="math-block">[object Object]</div><p>Ausgangspunkt vieler Ansprüche im Schuldrecht AT.</p>
-<p><strong>Prüfungskette</strong></p><div class="math-block">[object Object]</div><p>Auch im Schuldrecht bleibt die Methodik leitend.</p>
+<p><strong>Schuldverhältnis</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Leistungspflichten</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Nebenpflichten</span></div><p>Beide Ebenen können verletzt werden.</p>
+<p><strong>Anspruch</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Recht, ein Tun oder Unterlassen zu verlangen</span></div><p>Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.</p>
+<p><strong>Pflichtverletzung</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Abweichung von Leistung oder Rücksichtnahme</span></div><p>Ausgangspunkt vieler Ansprüche im Schuldrecht AT.</p>
+<p><strong>Prüfungskette</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">entstanden</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">untergegangen</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">→</span></span><span class="semantic-schema__item">durchsetzbar</span></div><p>Auch im Schuldrecht bleibt die Methodik leitend.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -930,7 +1080,20 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>In der Klausur: Schuldrecht AT</h3>
+    <p>Anspruchsprüfung: Anspruch entstanden (Schuldverhältnis + Primärpflicht) → nicht untergegangen → durchsetzbar. Bei Störung: Verzug (§ 286), Unmöglichkeit (§ 275), Pflichtverletzung (§ 280) — Institute nicht vermischen. Nebenpflichtverletzung kann Schadensersatz auslösen ohne Hauptleistungsmangel.</p><div class="warn-box" data-warning-placement="rail"><strong>Schadensersatz braucht Pflichtverletzung</strong> Nicht jeder Vertragsbruch = sofort Rücktritt — Reihenfolge der Rechtsfolgen prüfen.</div><div class="warn-box" data-warning-placement="rail"><strong>Schuldverhältnis ≠ Anspruch</strong> Aus einem Schuldverhältnis können mehrere Ansprüche folgen — jeden separat prüfen.</div>
+  </div>
+
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Schuldverhältnis', eq: schema(['Leistungspflichten', '+', 'Nebenpflichten']), desc: 'Beide Ebenen können verletzt werden.' },
       { label: 'Anspruch', eq: phrase('Recht, ein Tun oder Unterlassen zu verlangen'), desc: 'Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.' },
@@ -987,10 +1150,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Schadensersatz neben der Leistung</strong></p><div class="math-block">[object Object]</div><p>Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.</p>
-<p><strong>Schadensersatz statt der Leistung</strong></p><div class="math-block">[object Object]</div><p>Regelmäßig mit erfolgloser Fristsetzung.</p>
-<p><strong>Verzugsschaden</strong></p><div class="math-block">[object Object]</div><p>Eigene Schiene bei Verzögerung der Leistung.</p>
-<p><strong>Unmöglichkeit</strong></p><div class="math-block">[object Object]</div><p>Schadensersatzpfad bei endgültiger Leistungshindernis.</p>
+<p><strong>Schadensersatz neben der Leistung</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 280 I BGB</span></div></div><p>Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.</p>
+<p><strong>Schadensersatz statt der Leistung</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 280 I, III, 281 BGB</span></div></div><p>Regelmäßig mit erfolgloser Fristsetzung.</p>
+<p><strong>Verzugsschaden</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 280 I, II, 286 BGB</span></div></div><p>Eigene Schiene bei Verzögerung der Leistung.</p>
+<p><strong>Unmöglichkeit</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 280 I, III, 283 BGB</span></div></div><p>Schadensersatzpfad bei endgültiger Leistungshindernis.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1021,7 +1184,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Schadensersatz neben der Leistung', eq: ref('§ 280 I BGB'), desc: 'Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.' },
       { label: 'Schadensersatz statt der Leistung', eq: ref('§§ 280 I, III, 281 BGB'), desc: 'Regelmäßig mit erfolgloser Fristsetzung.' },
@@ -1078,10 +1249,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Rücktritt wegen Schlechtleistung</strong></p><div class="math-block">[object Object]</div><p>Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.</p>
-<p><strong>Rücktritt wegen Unmöglichkeit</strong></p><div class="math-block">[object Object]</div><p>Wichtiger Sonderpfad ohne klassische Nachfristlogik.</p>
-<p><strong>Rücktrittserklärung</strong></p><div class="math-block">[object Object]</div><p>Gestaltungsrecht braucht eine klare Erklärung.</p>
-<p><strong>Rechtsfolge</strong></p><div class="math-block">[object Object]</div><p>Rückgewähr und ggf. Wertersatz gehören auf die Folgeebene.</p>
+<p><strong>Rücktritt wegen Schlechtleistung</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 323, 346 BGB</span></div></div><p>Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.</p>
+<p><strong>Rücktritt wegen Unmöglichkeit</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§§ 326 V, 323, 346 BGB</span></div></div><p>Wichtiger Sonderpfad ohne klassische Nachfristlogik.</p>
+<p><strong>Rücktrittserklärung</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 349 BGB</span></div></div><p>Gestaltungsrecht braucht eine klare Erklärung.</p>
+<p><strong>Rechtsfolge</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 346 BGB</span></div></div><p>Rückgewähr und ggf. Wertersatz gehören auf die Folgeebene.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1109,7 +1280,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Rücktritt wegen Schlechtleistung', eq: ref('§§ 323, 346 BGB'), desc: 'Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.' },
       { label: 'Rücktritt wegen Unmöglichkeit', eq: ref('§§ 326 V, 323, 346 BGB'), desc: 'Wichtiger Sonderpfad ohne klassische Nachfristlogik.' },
@@ -1168,10 +1347,10 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Basisnorm</strong></p><div class="math-block">[object Object]</div><p>Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.</p>
-<p><strong>Persönliche Voraussetzungen</strong></p><div class="math-block">[object Object]</div><p>§§ 13, 14 BGB sind Standardbausteine der Prüfung.</p>
-<p><strong>Frist</strong></p><div class="math-block">[object Object]</div><p>Regelmäßig ab Vertragsschluss; rechtzeitige Absendung genügt.</p>
-<p><strong>Rechtsfolge</strong></p><div class="math-block">[object Object]</div><p>Ähnelt dem Rücktritt, beruht aber auf anderem Normzweck.</p>
+<p><strong>Basisnorm</strong></p><div class="semantic-display semantic-display--reference semantic-display--theory semantic-reference semantic-reference--pill semantic-display--pres-anchor" role="group"><div class="semantic-reference__entry"><span class="semantic-reference__term">§ 355 BGB</span></div></div><p>Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.</p>
+<p><strong>Persönliche Voraussetzungen</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Verbraucher</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Unternehmer</span></div><p>§§ 13, 14 BGB sind Standardbausteine der Prüfung.</p>
+<p><strong>Frist</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">14 Tage</span></div><p>Regelmäßig ab Vertragsschluss; rechtzeitige Absendung genügt.</p>
+<p><strong>Rechtsfolge</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Rückgewährschuldverhältnis</span></div><p>Ähnelt dem Rücktritt, beruht aber auf anderem Normzweck.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -1199,7 +1378,15 @@ export const CONTENT = {
 <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
+      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+    
+  </div>
+`,
     formeln: [
       { label: 'Basisnorm', eq: ref('§ 355 BGB'), desc: 'Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.' },
       { label: 'Persönliche Voraussetzungen', eq: schema(['Verbraucher', '+', 'Unternehmer']), desc: '§§ 13, 14 BGB sind Standardbausteine der Prüfung.' },

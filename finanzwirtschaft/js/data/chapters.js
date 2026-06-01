@@ -61,9 +61,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Leitobjekt</strong></p><div class="math-block">[object Object]</div><p>Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.</p>
-<p><strong>Leitfrage</strong></p><div class="math-block">[object Object]</div><p>Gute Finanzwirtschaft verbindet alle drei Ebenen.</p>
-<p><strong>Zeitwert</strong></p><div class="math-block">$$BW = \sum_{t=0}^{n} \frac{z_t}{(1+i)^t}$$</div><p>Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</p>
+<p><strong>Leitobjekt</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Zahlungsreihe { z_0, z_1, ..., z_n }</span></div><p>Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.</p>
+<p><strong>Leitfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zeitpunkt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Zahlung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Risiko</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Entscheidung</span></div><p>Gute Finanzwirtschaft verbindet alle drei Ebenen.</p>
+<p><strong>Zeitwert</strong></p><div class="math-block">$$BW = \\sum_{t=0}^{n} \\frac{z_t}{(1+i)^t}$$</div><p>Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -83,7 +83,18 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section>`,
+</section><div class="section-block"><h3>Prüfungsstandard</h3>
+      <p>Finanzentscheidungen = Bewertung zukünftiger Zahlungsströme unter Zielkonflikt Liquidität, Rendite, Risiko. Immer Zeitebene und Risikoprämie benennen.</p>
+    </div><div class="section-block"><h3>Goldene Bilanzregel</h3>
+      <p>Mittelfristig: Vermögen finanzieren langfristiges Vermögen; kurzfristiges Vermögen kurzfristig. Brücke zur Liquiditätsplanung.</p>
+    </div>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+    
+  </div>
+`,
     formeln: [
       { label: 'Leitobjekt', eq: phrase('Zahlungsreihe { z_0, z_1, ..., z_n }'), desc: 'Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.' },
       { label: 'Leitfrage', eq: schema(['Zeitpunkt', '+', 'Zahlung', '+', 'Risiko', '⇒', 'Entscheidung']), desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' },
@@ -122,9 +133,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Kumulierter Saldo</strong></p><div class="math-block">$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$</div><p>Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</p>
-<p><strong>Goldene Bilanzregel</strong></p><div class="math-block">[object Object]</div><p>Langfristige Bindung verlangt langfristige Finanzierung.</p>
-<p><strong>Maximaler Bedarf</strong></p><div class="math-block">$$KB_{max} = -\min_t K_t$$</div><p>Finanzierungsbedarf aus tiefstem kumulierten Saldo.</p>
+<p><strong>Kumulierter Saldo</strong></p><div class="math-block">$$K_t = \\sum_{\\tau=0}^{t} Ein_\\tau - \\sum_{\\tau=0}^{t} Aus_\\tau$$</div><p>Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</p>
+<p><strong>Goldene Bilanzregel</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">AV</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">≤</span></span><span class="semantic-schema__item">langfristiges Kapital</span></div><p>Langfristige Bindung verlangt langfristige Finanzierung.</p>
+<p><strong>Maximaler Bedarf</strong></p><div class="math-block">$$KB_{max} = -\\min_t K_t$$</div><p>Finanzierungsbedarf aus tiefstem kumulierten Saldo.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -138,8 +149,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Liquiditätsplan</h4>
-<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\min_t KS_t|$ (tiefster Punkt).</p>
-      <div class="math-block">$$KS_t = \sum_{s=0}^{t} Saldo_s,\quad \text{Bedarf} = |\min_t KS_t|$$</div>
+<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
+      <div class="math-block">$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$</div>
 
 
 <h4 class="theory-subsection-title">Klausurtransfer</h4>
@@ -150,7 +161,22 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section>`,
+</section><div class="section-block"><h3>In der Klausur: Liquiditätsplan</h3>
+      <p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
+      <div class="math-block">$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$</div>
+    </div><div class="section-block"><h3>Goldene Bilanzregel & Fristenkongruenz</h3>
+      <p>Mittelfristig: langfristiges AV langfristig finanzieren; kurzfristiges UV kurzfristig. Liquiditätsplan prüft ob Zwischenfinanzierung nötig — Endsaldo positiv reicht nicht.</p>
+    </div><div class="section-block"><h3>Klausurtransfer</h3>
+      <p>Schrittfolge: (1) Zahlungsströme je Periode. (2) Periodensaldo. (3) Kumulieren. (4) Minimum identifizieren. (5) Goldene Bilanzregel bewerten.</p>
+      <div class="warn-box"><strong>Endsaldo-Falle:</strong> Positiver Endsaldo kann trotzdem Zwischenliquiditätskrise verbergen — immer kumulieren.</div>
+    </div>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+    
+  </div>
+`,
     formeln: [
       { label: 'Kumulierter Saldo', eq: String.raw`$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$`, desc: 'Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.' },
       { label: 'Goldene Bilanzregel', eq: schema(['AV', '≤', 'langfristiges Kapital']), desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' },
@@ -195,9 +221,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Marktpreis der Zeit</strong></p><div class="math-block">[object Object]</div><p>Der Zins verbindet Gegenwarts- und Zukunftszahlungen.</p>
-<p><strong>Entscheidungslogik</strong></p><div class="math-block">[object Object]</div><p>Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.</p>
-<p><strong>Entscheidungslogik (Merksatz)</strong></p><div class="math-block">[object Object]</div><p>Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.</p>
+<p><strong>Marktpreis der Zeit</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zins</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">=</span></span><span class="semantic-schema__item">Preis des Zeittausches</span></div><p>Der Zins verbindet Gegenwarts- und Zukunftszahlungen.</p>
+<p><strong>Entscheidungslogik</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zahlung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Zeitpunkt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Marktpreis</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Bewertung</span></div><p>Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.</p>
+<p><strong>Entscheidungslogik (Merksatz)</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zahlung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Zeitpunkt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Marktpreis</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Bewertung</span></div><p>Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -223,7 +249,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section>`,
+</section>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+    
+  </div>
+`,
     formeln: [
       { label: 'Marktpreis der Zeit', eq: schema(['Zins', '=', 'Preis des Zeittausches']), desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.', variables: { 'Zins': 'Marktpreis, zu dem Konsum zwischen Zeitpunkten getauscht wird' } },
       { label: 'Entscheidungslogik', eq: schema(['Zahlung', '+', 'Zeitpunkt', '+', 'Marktpreis', '⇒', 'Bewertung']), desc: 'Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.' }
@@ -277,9 +310,9 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Marktunvollkommenheit</strong></p><div class="math-block">[object Object]</div><p>Institutionen werden durch Friktionen wirtschaftlich sinnvoll.</p>
-<p><strong>Orientierungsfrage</strong></p><div class="math-block">[object Object]</div><p>Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</p>
-<p><strong>Orientierungsfrage (Merksatz)</strong></p><div class="math-block">[object Object]</div><p>Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</p>
+<p><strong>Marktunvollkommenheit</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Informationskosten</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Transaktionskosten</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Institutionen</span></div><p>Institutionen werden durch Friktionen wirtschaftlich sinnvoll.</p>
+<p><strong>Orientierungsfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">vollkommener Markt? Nein</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Institution / Vertrag / Kontrolle prüfen</span></div><p>Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</p>
+<p><strong>Orientierungsfrage (Merksatz)</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">vollkommener Markt? Nein</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Institution / Vertrag / Kontrolle prüfen</span></div><p>Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -297,7 +330,21 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section>`,
+</section><div class="section-block"><h3>Asymmetrische Information</h3>
+      <p>Adverse Selection vor Vertrag, Moral Hazard danach. Finanzmarkt: Screening, Signaling, Covenants als institutionelle Antworten.</p>
+    </div><div class="section-block"><h3>In der Klausur: Institutionen</h3>
+      <p>Principal-Agent: Anreizverträge, Monitoring-Kosten. Banken als Delegated Monitors (Diamond). Regulierung: Mindesteigenkapital, Deposit Insurance — Trade-off Moral Hazard vs. Stabilität.</p>
+      <div class="warn-box"><strong>Institution ≠ Details:</strong> Ökonomisches Problem und Wohlfahrtsfolge priorisieren — nicht nur Institutionen aufzählen.</div>
+    </div><div class="section-block"><h3>Prüfungsstandard</h3>
+      <p>Ökonomisches Problem → Institution/Vertrag → Wohlfahrts- oder Effizienzfolge. Nicht nur Definition.</p>
+    </div>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+    
+  </div>
+`,
     formeln: [
       { label: 'Marktunvollkommenheit', eq: schema(['Informationskosten', '+', 'Transaktionskosten', '⇒', 'Institutionen']), desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' },
       { label: 'Orientierungsfrage', eq: schema(['vollkommener Markt? Nein', '⇒', 'Institution / Vertrag / Kontrolle prüfen']), desc: 'Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.' }
@@ -795,9 +842,9 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Mehrdeutigkeit</strong></p><div class="math-block">[object Object]</div><p>Der IZF kann seine Eindeutigkeit verlieren.</p>
-<p><strong>Wiederanlageprämisse</strong></p><div class="math-block">\\\\\\\\\\\\\\\\text{Zwischenüberschüsse werden zu } r^* \\\\\\\\\\\\\\\\text{ reinvestiert}</div><p>Implizite und oft unrealistische Annahme des IZF.</p>
-<p><strong>Referenzregel</strong></p><div class="math-block">\\\\\\\\\\\\\\\\max K_0</div><p>Bei Konflikten bleibt der Kapitalwert die Vermögensregel.</p>
+<p><strong>Mehrdeutigkeit</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">mehrere Vorzeichenwechsel</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">mehrere mögliche r*</span></div><p>Der IZF kann seine Eindeutigkeit verlieren.</p>
+<p><strong>Wiederanlageprämisse</strong></p><div class="math-block">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{Zwischenüberschüsse werden zu } r^* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\text{ reinvestiert}</div><p>Implizite und oft unrealistische Annahme des IZF.</p>
+<p><strong>Referenzregel</strong></p><div class="math-block">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\max K_0</div><p>Bei Konflikten bleibt der Kapitalwert die Vermögensregel.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -839,7 +886,21 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section>`,
+</section><div class="section-block"><h3>In der Klausur: Grenzen NPV/IRR</h3>
+      <p>Kapitalrationierung: Projektranking nach NPV pro eingesetztem Euro oder PI. Mutually exclusive: höchster NPV, nicht höchster IRR. Unterschiedliche Laufzeiten: Kettenmethode oder EAA.</p>
+    </div><div class="section-block"><h3>Klausurtransfer IZF-Grenzen</h3>
+      <p>Wiederanlageprämisse: IRR setzt Reinvestition zum IRR voraus — unrealistisch bei hohem IRR. Mehrdeutigkeit: Vorzeichenwechsel zählen. Referenz: NPV bei Kalkulationszins $i$.</p>
+    </div><div class="section-block"><h3>Prüfungsstandard</h3>
+      <p>IRR-Falle bei Vorzeichenwechseln; qualitative Begründung wann NPV dominiert.</p>
+      <div class="warn-box"><strong>IRR vs. NPV:</strong> Bei unterschiedlichen Skalen oder Kapitalbudget immer NPV vergleichen.</div>
+    </div>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+    
+  </div>
+`,
     formeln: [
       { label: 'Mehrdeutigkeit', eq: schema(['mehrere Vorzeichenwechsel', '⇒', 'mehrere mögliche r*']), desc: 'Der IZF kann seine Eindeutigkeit verlieren.' },
       { label: 'Wiederanlageprämisse', eq: String.raw`\text{Zwischenüberschüsse werden zu } r^* \text{ reinvestiert}`, desc: 'Implizite und oft unrealistische Annahme des IZF.' },
@@ -1486,8 +1547,8 @@ BR &= P_0 - P_{ex}
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Irrelevanz-Benchmark</strong></p><div class="math-block">[object Object]</div><p>Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.</p>
-<p><strong>Benchmark-Aussage</strong></p><div class="math-block">[object Object]</div><p>Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.</p>
+<p><strong>Irrelevanz-Benchmark</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">vollkommener Markt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Kapitalstruktur wertneutral</span></div><p>Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.</p>
+<p><strong>Benchmark-Aussage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Leverage verändert r_E und Risiko, aber nicht Value.</span></div><p>Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.</p>
 <p><strong>Wertvergleich</strong></p><div class="math-block">$$V_L = V_U$$</div><p>Im MM-Benchmark haben verschuldetes und unverschuldetes Unternehmen denselben Gesamtwert.</p>
 </div>
 </section>
@@ -1510,7 +1571,7 @@ BR &= P_0 - P_{ex}
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: MM</h4>
-<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
+<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \\tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -1520,7 +1581,18 @@ BR &= P_0 - P_{ex}
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section>`,
+</section><div class="section-block"><h3>In der Klausur: MM</h3>
+      <p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \\tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
+    </div><div class="section-block"><h3>Prüfungsstandard</h3>
+      <p>Annahmen MM nennen (perfekte Märkte, keine Steuern/Insolvenzkosten). Trade-off-Theorie qualitativ.</p>
+    </div>
+  <div class="section-block">
+    <h3>Prüfungsstandard</h3>
+    
+      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+    
+  </div>
+`,
     formeln: [
       { label: 'Irrelevanz-Benchmark', eq: schema(['vollkommener Markt', '⇒', 'Kapitalstruktur wertneutral']), desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
       { label: 'Benchmark-Aussage', eq: phrase('Leverage verändert r_E und Risiko, aber nicht Value.'), desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' },

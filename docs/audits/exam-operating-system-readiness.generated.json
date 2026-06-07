@@ -17,17 +17,17 @@
       "conceptsWithSourceAnchors": 33,
       "sourceRefCoveragePct": 100,
       "sourceAnchorCoveragePct": 100,
-      "sourceAnchors": 98,
-      "taskFamilies": 85,
-      "sourceGroundedTaskFamilies": 84,
-      "officialTaskSourceFamilies": 0,
+      "sourceAnchors": 99,
+      "taskFamilies": 86,
+      "sourceGroundedTaskFamilies": 85,
+      "officialTaskSourceFamilies": 1,
       "officialDocumentRegistryFamilies": 18,
       "officialFormulaCards": 100,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
       "examBankComplete": false,
-      "examBankStatus": "official source docs present; no reviewed official-task-source families",
+      "examBankStatus": "official-task-source pilot present (1); 18 document-registry placeholders still unresolved",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
       "adaptiveReady": false,
@@ -369,7 +369,7 @@
   "blockers": [
     {
       "module": "mikro1",
-      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+      "reason": "official exam bank incomplete (official-task-source pilot present (1); 18 document-registry placeholders still unresolved)"
     },
     {
       "module": "mikro1",

@@ -44,8 +44,14 @@ function docKey(doc) {
   return doc?.id || doc?.path || '';
 }
 
+function isKnownNonItemTemplate(doc) {
+  const pathValue = String(doc?.path || '');
+  return /Mikro[öo]konomik I\/Weitere_Unterlagen\/Klausur_Mikro1_ohneechtentext\.pdf$/i.test(pathValue);
+}
+
 function reviewStage(doc) {
   if (!doc) return 'missing';
+  if (isKnownNonItemTemplate(doc)) return 'template-not-item-bank';
   if (doc.pageCount && doc.weakPageCount === 0 && doc.taskSignalPageCount > 0) return 'ready-for-human-task-mapping';
   if (doc.pageCount && doc.weakPageCount === 0) return 'ready-for-human-review';
   if (doc.pageCount && doc.weakPageCount > 0) return 'ocr-needed-before-review';
@@ -53,6 +59,7 @@ function reviewStage(doc) {
 }
 
 function priorityScore(doc, registryDoc) {
+  if (isKnownNonItemTemplate(registryDoc) || isKnownNonItemTemplate(doc)) return 1;
   const kind = registryDoc?.kind || doc?.kind || '';
   const base = KIND_WEIGHT[kind] || 100;
   const taskSignals = doc?.taskSignalPageCount || 0;

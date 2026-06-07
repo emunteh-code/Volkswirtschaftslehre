@@ -41,7 +41,10 @@ const modules = current.modules.map((module) => {
     concepts > 0 &&
     conceptsWithSourceRefs === concepts &&
     conceptsWithSourceAnchors === concepts;
-  const examBankComplete = officialTaskSourceFamilies > 0;
+  const examBankComplete =
+    officialTaskSourceDocs > 0 &&
+    officialTaskSourceFamilies >= officialTaskSourceDocs &&
+    officialDocumentRegistryFamilies === 0;
   const provenanceComplete = anchorComplete && (module.sourceAnchors || 0) >= concepts;
   const adaptiveReady =
     (masteryDimensions >= 4 || masteryItems >= concepts * 3) &&
@@ -56,8 +59,10 @@ const modules = current.modules.map((module) => {
       ? 'official source docs present; no reviewed official-task-source families'
       : officialTaskSourceFamilies === 0 && officialTaskSourceDocs === 0
         ? 'official task source corpus missing or unavailable'
-        : officialTaskSourceDocs > 0
-          ? 'official sources present; bank not fully mapped'
+        : officialTaskSourceDocs > 0 && officialDocumentRegistryFamilies > 0
+          ? `official-task-source pilot present (${officialTaskSourceFamilies}); ${officialDocumentRegistryFamilies} document-registry placeholders still unresolved`
+          : officialTaskSourceDocs > 0
+            ? `official sources present; reviewed families ${officialTaskSourceFamilies}/${officialTaskSourceDocs}`
           : 'task families only; official tasks missing';
   const provenanceStatus = provenanceComplete
     ? 'complete'

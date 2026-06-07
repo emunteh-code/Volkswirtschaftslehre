@@ -67,6 +67,16 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Budgetgerade: Diskussion',
       fingerprint: 'f1b7c9e0284a5d63',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8767.a1.1-3',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8767',
+      sourcePath: 'Probeklausur/IMG_8767.JPG',
+      publicLabel: 'Probeklausur',
+      page: 2,
+      section: 'Aufgabe 1, Teilaufgaben 1-3: Budgetmenge und Relativpreis',
+      fingerprint: 'ae99f72e5f3ee907',
+      confidence: 0.84
     })
   ],
   praeferenz: [

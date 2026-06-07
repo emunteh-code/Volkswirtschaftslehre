@@ -3,7 +3,11 @@
 // VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
-import { buildMikro1OfficialTaskPlaceholders, MIKRO1_OFFICIAL_TASK_DOC_BASELINE_2026_05_28 } from './officialTaskIngestion.js';
+import {
+  assertMikro1OfficialTaskSourcePolicy,
+  buildMikro1OfficialTaskPlaceholders,
+  MIKRO1_OFFICIAL_TASK_DOC_BASELINE_2026_05_28
+} from './officialTaskIngestion.js';
 
 const MODULE = 'mikro1';
 const OFFICIAL_TASK_GAP = "Probeklausur item-level mapping blockiert bis OCR/Review.";
@@ -42,7 +46,7 @@ function family({
     gradingRubric,
     currentCoverage,
     officialTaskCoverage,
-    officialTaskGap: OFFICIAL_TASK_GAP
+    officialTaskGap: officialTaskCoverage === 'official-task-source' ? null : OFFICIAL_TASK_GAP
   };
 }
 
@@ -1479,8 +1483,43 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
   }
 ];
 
+const OFFICIAL_TASK_SOURCE_FAMILIES = [
+  family({
+    id: 'mikro1.official-task.probeklausur-a1-budget-true-false',
+    conceptId: 'budget',
+    title: 'Probeklausur Aufgabe 1.1-1.3: Budgetmenge und Relativpreis beurteilen',
+    topic: 'Budgetrestriktion, maximale Konsummenge, Preisänderung, Relativpreis',
+    method: 'Offizielle Probeklausur, Aufgabe 1 (40 Punkte), Teilaufgaben 1-3: Wahr/Falsch-Urteile zu Budgetmenge und Relativpreis mit optionaler Begründung. Quelle ist IMG_8767.JPG; OCR wurde mit visueller Seitenprüfung gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8767.a1.1-3'],
+    difficulty: 'leicht-mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Maximale Menge von Gut 1 mit dem Preis von Gut 2 verwechseln',
+      'Eine Preissenkung nur als Mengenänderung eines einzelnen Gutes lesen statt als Ausweitung der Budgetmenge',
+      'Relativpreisrichtung vertauschen: p2/p1 beschreibt Einheiten von Gut 1 pro aufgegebener Einheit von Gut 2'
+    ],
+    gradingRubric: [
+      '2 Punkte je korrekt gesetztem Wahr/Falsch-Kreuz',
+      '1 Punkt möglich, wenn das Kreuz falsch ist, die Erläuterung aber fachlich korrekt ist',
+      'Keine Minuspunkte für fehlende, fehlerhafte oder sonstige Erläuterungen'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8767.JPG',
+      page: 'Probeklausur Seite 2',
+      task: 'Aufgabe 1, Teilaufgaben 1-3',
+      review: 'OCR-assisted + visual human review, 2026-06-07'
+    },
+    officialTaskCoverage: 'official-task-source'
+  })
+];
+
+OFFICIAL_TASK_SOURCE_FAMILIES.forEach((item) => assertMikro1OfficialTaskSourcePolicy(item));
+
 export const TASK_FAMILIES = Object.freeze([
   ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_TASK_SOURCE_FAMILIES,
   ...OFFICIAL_DOCUMENT_FAMILIES,
   ...buildMikro1OfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);
@@ -1492,4 +1531,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

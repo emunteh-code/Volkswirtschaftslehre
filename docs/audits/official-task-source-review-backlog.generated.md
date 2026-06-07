@@ -9,7 +9,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Official task documents in registry: **276**
 - Modules with task corpus: **8**
 - Modules missing task corpus: **3**
-- Reviewed official-task-source families: **0**
+- Reviewed official-task-source families: **1**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
 
@@ -23,7 +23,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | `makro1` | 29 | 29 | 0 | 86 | 0 (0%) | 70 | 29 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `makro2` | 22 | 22 | 0 | 34 | 0 (0%) | 34 | 22 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `mikro1` | 18 | 18 | 0 | 10 | 0 (0%) | 10 | 1 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `mikro1` | 18 | 18 | 1 | 10 | 0 (0%) | 10 | 0 | 0 | Review documents manually and classify task relevance. |
 | `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `oekonometrie` | 33 | 33 | 0 | 53 | 0 (0%) | 41 | 29 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `recht` | 17 | 17 | 0 | 313 | 2 (1%) | 32 | 9 | 2 | Start human task-family mapping on ready documents with task signals. |
@@ -34,7 +34,6 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | Priority | Module | Kind | Title | Pages | Weak | Task signals | Review stage | Path |
 |---:|---|---|---|---:|---:|---:|---|---|
 | 1567 | `statistik` | exam | Teil_A_Klausur.pdf | 27 | 0 | 27 | ready-for-human-task-mapping | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf` |
-| 1210 | `mikro1` | exam | Klausur_Mikro1_ohneechtentext.pdf | 10 | 0 | 10 | ready-for-human-task-mapping | `source-materials/Mikroökonomik I/Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf` |
 | 1189 | `statistik` | exam | KlausurE2122K1_upd.pdf | 9 | 0 | 9 | ready-for-human-task-mapping | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf` |
 | 1179 | `jahresabschluss` | exam | Probeklausur_JA.pdf | 19 | 0 | 8 | ready-for-human-task-mapping | `source-materials/Jahresabschluss/Probeklausur/Probeklausur_JA.pdf` |
 | 1157 | `mathematik` | exercise | AN_I_-_Aufgaben.pdf | 17 | 0 | 17 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/AN_1_-_Univariate_Differenzialrechnung/AN_I_-_Aufgaben.pdf` |
@@ -93,6 +92,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | 863 | `mathematik` | exercise | R.E1_-_Aufgaben.pdf | 3 | 0 | 3 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/E_1_-_Algebra_und_Mengenlehre/R.E1_-_Aufgaben.pdf` |
 | 858 | `recht` | exercise | Ipsen_Rehder_ZJS_2023,_751_.pdf | 18 | 0 | 2 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/Ipsen_Rehder_ZJS_2023,_751_.pdf` |
 | 857 | `mathematik` | solution | OP_II_-_Lösungen.pdf | 17 | 0 | 17 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/OP_2_-__Multivariate_Optimierung/OP_II_-_Lösungen.pdf` |
+| 853 | `recht` | exercise | SoSe_2025_Einheit_4.pdf | 33 | 0 | 1 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/SoSe_2025_Einheit_4.pdf` |
 
 ## Promotion Checklist
 

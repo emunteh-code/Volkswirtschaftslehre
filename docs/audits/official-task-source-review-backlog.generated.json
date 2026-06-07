@@ -5,7 +5,7 @@
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 0,
+    "officialTaskSourceFamilies": 1,
     "weakPages": 25,
     "taskSignalPages": 989
   },
@@ -103,17 +103,17 @@
     {
       "module": "mikro1",
       "officialTaskDocuments": 18,
-      "officialTaskSourceFamilies": 0,
+      "officialTaskSourceFamilies": 1,
       "documentRegistryFamilies": 18,
       "pageCount": 10,
       "weakPageCount": 0,
       "weakPagePct": 0,
       "taskSignalPageCount": 10,
-      "readyForMapping": 1,
+      "readyForMapping": 0,
       "ocrNeeded": 0,
       "imageOrNonPdf": 17,
       "missingCorpus": false,
-      "nextAction": "Start human task-family mapping on ready documents with task signals."
+      "nextAction": "Review documents manually and classify task relevance."
     },
     {
       "module": "mikro2",
@@ -194,24 +194,6 @@
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
       "priorityScore": 1567
-    },
-    {
-      "id": "mikro1-exam-mikrookonomik-i-weitere-unterlagen-klausur-mikro1-ohneechtentext",
-      "module": "mikro1",
-      "moduleTitle": "Mikroökonomik I",
-      "kind": "exam",
-      "title": "Klausur_Mikro1_ohneechtentext.pdf",
-      "group": "Weitere_Unterlagen",
-      "path": "source-materials/Mikroökonomik I/Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf",
-      "extension": "pdf",
-      "registryPages": 10,
-      "pageCount": 10,
-      "weakPageCount": 0,
-      "taskSignalPageCount": 10,
-      "formulaSignalPageCount": 1,
-      "extractionStatus": "indexed",
-      "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1210
     },
     {
       "id": "statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-klausure2122k1-upd",
@@ -5144,6 +5126,24 @@
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
       "priorityScore": 481
+    },
+    {
+      "id": "mikro1-exam-mikrookonomik-i-weitere-unterlagen-klausur-mikro1-ohneechtentext",
+      "module": "mikro1",
+      "moduleTitle": "Mikroökonomik I",
+      "kind": "exam",
+      "title": "Klausur_Mikro1_ohneechtentext.pdf",
+      "group": "Weitere_Unterlagen",
+      "path": "source-materials/Mikroökonomik I/Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf",
+      "extension": "pdf",
+      "registryPages": 10,
+      "pageCount": 10,
+      "weakPageCount": 0,
+      "taskSignalPageCount": 10,
+      "formulaSignalPageCount": 1,
+      "extractionStatus": "indexed",
+      "reviewStage": "template-not-item-bank",
+      "priorityScore": 1
     }
   ]
 }

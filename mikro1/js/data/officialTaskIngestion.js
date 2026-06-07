@@ -8,21 +8,27 @@ import { CHAPTERS } from './chapters.js';
 export const MIKRO1_TASK_PLACEHOLDER_POLICY =
   'Platzhalter sind explizit als non-deceptive markiert und enthalten keine erfundenen Mikro-I-Aufgabeninhalte.';
 
-/** Probeklausur JPGs are not OCR-reviewed; companion PDF is a layout template (Lorem ipsum), not exam substance. */
+/** Probeklausur JPGs are only partially OCR-reviewed; companion PDF is a layout template (Lorem ipsum), not exam substance. */
 export const MIKRO1_PROBEKLAUSUR_INGEST_BLOCKERS = Object.freeze([
-  'exam-artefacts-are-jpg-without-reviewed-ocr',
+  'most-exam-artefacts-are-jpg-without-reviewed-ocr',
   'klausur-pdf-is-template-not-item-bank'
 ]);
 
-/** Inventory snapshot from source-corpus-registry (2026-05-28); no item-level OCR review. */
+export const MIKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
+  'mikro1.official-task.probeklausur-a1-budget-true-false'
+]);
+
+/** Inventory snapshot from source-corpus-registry (2026-05-28); item-level OCR review is partial. */
 export const MIKRO1_PROBEKLAUSUR_REVIEW_STATUS = Object.freeze({
-  ocrReviewed: false,
-  humanItemMappingReviewed: false,
+  ocrReviewed: 'partial',
+  humanItemMappingReviewed: 'partial',
   jpgPageCount: 17,
+  reviewedJpgPages: ['IMG_8767.JPG'],
   templatePdfPath: 'Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf',
   templatePdfUsableAsItemBank: false,
-  officialTaskSourceAllowed: false,
-  nextStep: 'OCR + human review of Probeklausur JPGs before any official-task-source family'
+  officialTaskSourceAllowed: 'reviewed-family-ids-only',
+  reviewedOfficialTaskFamilyIds: MIKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS,
+  nextStep: 'Continue OCR + human review for remaining Probeklausur JPGs before broader official-task-source promotion'
 });
 
 /**
@@ -30,9 +36,12 @@ export const MIKRO1_PROBEKLAUSUR_REVIEW_STATUS = Object.freeze({
  * @param {{ officialTaskCoverage?: string }} family
  */
 export function assertMikro1OfficialTaskSourcePolicy(family) {
-  if (family?.officialTaskCoverage === 'official-task-source' && !MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.officialTaskSourceAllowed) {
+  if (
+    family?.officialTaskCoverage === 'official-task-source' &&
+    !MIKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS.includes(family?.id)
+  ) {
     throw new Error(
-      'Mikro1 official-task-source blocked until Probeklausur OCR/human review completes (see MIKRO1_PROBEKLAUSUR_REVIEW_STATUS).'
+      'Mikro1 official-task-source blocked unless the family id is explicitly listed in MIKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS.'
     );
   }
 }

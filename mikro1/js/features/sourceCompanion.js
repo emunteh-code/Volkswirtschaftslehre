@@ -75,7 +75,8 @@ ${familiesWithoutOfficialTasks
 </div>
 <ul class="source-companion-note" style="margin:0.75rem 0 0;padding-left:1.1rem">
 ${MIKRO1_PROBEKLAUSUR_INGEST_BLOCKERS.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
-<li>OCR reviewed: ${MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.ocrReviewed ? 'yes' : 'no'} · Item mapping reviewed: ${MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.humanItemMappingReviewed ? 'yes' : 'no'}</li>
+<li>OCR reviewed: ${escapeHtml(MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.ocrReviewed)} · Item mapping reviewed: ${escapeHtml(MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.humanItemMappingReviewed)}</li>
+<li>Reviewed JPG pages: ${escapeHtml((MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.reviewedJpgPages || []).join(', ') || 'none')}</li>
 <li>${escapeHtml(MIKRO1_PROBEKLAUSUR_REVIEW_STATUS.jpgPageCount)} JPG pages · Template PDF not an item bank</li>
 </ul>
 <p class="source-companion-note">Mikro I bleibt der interaktive Benchmark. <code>exam-bank-complete</code> bleibt blockiert, bis Probeklausur-Aufgaben nach OCR/Review in Familien mit <code>official-task-source</code> zerlegt sind.</p>

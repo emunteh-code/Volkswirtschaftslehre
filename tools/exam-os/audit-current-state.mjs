@@ -148,7 +148,9 @@ function scoreAgainstBenchmark(moduleSummary, benchmark) {
   const taskStatus = taskRatio >= 0.9 ? 'A' : taskRatio >= 0.45 ? 'B' : 'C';
   const provenanceStatus = provenanceRatio >= 1 && sourceStatus === 'A' ? 'B' : provenanceRatio >= 0.9 ? 'C' : 'D';
   const adaptiveStatus = moduleSummary.masteryItems >= moduleSummary.concepts * 3 ? 'B' : 'C';
-  const hasReviewedOfficialTaskSources = moduleSummary.officialTaskSourceFamilies > 0;
+  const hasCompleteReviewedOfficialTaskSources =
+    moduleSummary.officialTaskSourceFamilies > 0 &&
+    moduleSummary.officialDocumentRegistryFamilies === 0;
   const sourceAnchorsCoverConcepts = moduleSummary.sourceAnchors >= moduleSummary.concepts && moduleSummary.conceptsWithSourceAnchors === moduleSummary.concepts;
   const canClaimMikro1Depth =
     sourceStatus === 'A' &&
@@ -156,7 +158,7 @@ function scoreAgainstBenchmark(moduleSummary, benchmark) {
     formulaStatus !== 'C' &&
     taskStatus !== 'C' &&
     sourceAnchorsCoverConcepts &&
-    hasReviewedOfficialTaskSources;
+    hasCompleteReviewedOfficialTaskSources;
 
   return {
     conceptGranularity: conceptStatus,

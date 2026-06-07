@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-01",
-  "definitionOfDone": "A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.",
+  "generatedAt": "2026-06-07",
+  "definitionOfDone": "A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true. Exam-bank completeness requires reviewed official-task-source families, not only portal simulations or document registry metadata.",
   "modules": [
     {
       "module": "mikro1",
@@ -21,17 +21,19 @@
       "taskFamilies": 85,
       "sourceGroundedTaskFamilies": 84,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 18,
       "officialFormulaCards": 100,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "benchmark cockpit; official task-source review pending"
     },
     {
       "module": "mikro2",
@@ -52,17 +54,19 @@
       "taskFamilies": 34,
       "sourceGroundedTaskFamilies": 30,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 0,
       "officialFormulaCards": 46,
       "masteryDimensions": 4,
-      "anchorComplete": true,
-      "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
-      "provenanceComplete": true,
-      "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "anchorComplete": false,
+      "anchorStatus": "partial",
+      "examBankComplete": false,
+      "examBankStatus": "official task source corpus missing or unavailable",
+      "provenanceComplete": false,
+      "provenanceStatus": "partial",
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "makro1",
@@ -83,17 +87,19 @@
       "taskFamilies": 58,
       "sourceGroundedTaskFamilies": 57,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 29,
       "officialFormulaCards": 44,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "makro2",
@@ -114,17 +120,19 @@
       "taskFamilies": 83,
       "sourceGroundedTaskFamilies": 82,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 22,
       "officialFormulaCards": 110,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "near, but official task-source review pending"
     },
     {
       "module": "oekonometrie",
@@ -145,17 +153,19 @@
       "taskFamilies": 98,
       "sourceGroundedTaskFamilies": 97,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 33,
       "officialFormulaCards": 101,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "near, but official task-source review pending"
     },
     {
       "module": "statistik",
@@ -176,17 +186,19 @@
       "taskFamilies": 133,
       "sourceGroundedTaskFamilies": 132,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 104,
       "officialFormulaCards": 44,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "finanzwirtschaft",
@@ -207,17 +219,19 @@
       "taskFamilies": 39,
       "sourceGroundedTaskFamilies": 38,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 0,
       "officialFormulaCards": 57,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official task source corpus missing or unavailable",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "mathematik",
@@ -238,17 +252,19 @@
       "taskFamilies": 69,
       "sourceGroundedTaskFamilies": 68,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 40,
       "officialFormulaCards": 55,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "jahresabschluss",
@@ -269,17 +285,19 @@
       "taskFamilies": 44,
       "sourceGroundedTaskFamilies": 43,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 13,
       "officialFormulaCards": 45,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "recht",
@@ -300,17 +318,19 @@
       "taskFamilies": 46,
       "sourceGroundedTaskFamilies": 45,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 17,
       "officialFormulaCards": 52,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official source docs present; no reviewed official-task-source families",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     },
     {
       "module": "internationale-wirtschaftsbeziehungen",
@@ -331,18 +351,161 @@
       "taskFamilies": 33,
       "sourceGroundedTaskFamilies": 32,
       "officialTaskSourceFamilies": 0,
+      "officialDocumentRegistryFamilies": 0,
       "officialFormulaCards": 49,
       "masteryDimensions": 4,
       "anchorComplete": true,
       "anchorStatus": "complete",
-      "examBankComplete": true,
-      "examBankStatus": "complete",
+      "examBankComplete": false,
+      "examBankStatus": "official task source corpus missing or unavailable",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
-      "adaptiveReady": true,
-      "adaptiveStatus": "ready",
-      "mikro1DepthAchieved": true
+      "adaptiveReady": false,
+      "adaptiveStatus": "mastery items present; exam-bank or anchor gate open",
+      "mikro1DepthAchieved": false,
+      "scorecardDepth": "not achieved"
     }
   ],
-  "blockers": []
+  "blockers": [
+    {
+      "module": "mikro1",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "mikro1",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "mikro1",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "mikro2",
+      "reason": "page/slide/task anchors incomplete (83% concept coverage)"
+    },
+    {
+      "module": "mikro2",
+      "reason": "official exam bank incomplete (official task source corpus missing or unavailable)"
+    },
+    {
+      "module": "mikro2",
+      "reason": "item-level provenance incomplete (partial)"
+    },
+    {
+      "module": "mikro2",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "mikro2",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "makro1",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "makro1",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "makro1",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "makro2",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "makro2",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "makro2",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "oekonometrie",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "statistik",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "statistik",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "statistik",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "official exam bank incomplete (official task source corpus missing or unavailable)"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "finanzwirtschaft",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "mathematik",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "mathematik",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "mathematik",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "jahresabschluss",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "recht",
+      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+    },
+    {
+      "module": "recht",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "recht",
+      "reason": "Mikro1-depth equality not certified"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "official exam bank incomplete (official task source corpus missing or unavailable)"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)"
+    },
+    {
+      "module": "internationale-wirtschaftsbeziehungen",
+      "reason": "Mikro1-depth equality not certified"
+    }
+  ]
 }

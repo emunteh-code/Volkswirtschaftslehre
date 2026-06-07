@@ -44,10 +44,25 @@ export const CHAPTERS = [
 export const CONTENT = {
  kmm: {
  motivation: 'Bevor ökonomische Beschränkungen wie Einkommen betrachtet werden, muss der logische Handlungsraum des Haushalts definiert werden: die KMM.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Konsummöglichkeitenmenge</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Konsummöglichkeitenmenge (KMM)</strong> umfasst alle prinzipiell konsumierbaren Güterbündel. Ein Bündel wird als Vektor $(x_1, x_2, \dots, x_n)$ dargestellt, wobei $x_i$ die Menge von Gut $i$ bezeichnet.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>KMM</strong> — Definitionsmenge aller konsumierbaren Bündel</li><li><strong>Konvexkombination</strong> — Mischbündel zweier Bündel a, b mit λ ∈ [0,1]</li><li><strong>KMM (Merksatz)</strong> — Definitionsmenge aller konsumierbaren Bündel</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -89,6 +104,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Verwechslung mit Budgetmenge</strong> Die KMM ist unbegrenzt (der gesamte erste Quadrant). Die Budgetmenge ist begrenzt durch Einkommen und Preise. Eine Preiserhöhung verkleinert die Budgetmenge, nicht die KMM.</div>
 <div class="warn-box"><strong>Negative Werte</strong> $x_i < 0$ ist kein Element der KMM (erst im Modell mit Anfangsausstattung relevant, wo Nettokauf negativ sein kann).</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -145,10 +168,25 @@ export const CONTENT = {
    'Du kannst Güterbündel als budgetkonform oder nicht einordnen.'
  ],
  motivation: 'Die Budgetmenge beantwortet: Welche Güterbündel kann sich der Haushalt bei gegebenen Preisen und Einkommen tatsächlich leisten?',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Budgetmenge &amp; Budgetgerade</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Budgetmenge</strong> enthält alle Güterbündel $(x_1, x_2)$, die sich der Haushalt bei Preisen $p_1, p_2 > 0$ und Einkommen $m \geq 0$ leisten kann:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Budgetungleichung</strong> — Menge aller erschwinglichen Bündel</li><li><strong>Budgetgerade</strong> — Vollständige Ausgabe des Einkommens</li><li><strong>Steigung</strong> — Opportunitätskosten (x₂ je Einheit x₁)</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -246,10 +284,25 @@ export const CONTENT = {
  },
  praeferenz: {
  motivation: 'Die Präferenzrelation modelliert, was der Konsument will. Sie liefert das Auswahlkriterium innerhalb der Budgetmenge.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Präferenzrelation</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Präferenzrelation</strong> $\succeq$ beschreibt die Vorlieben des Haushalts über Güterbündel. Sie ist die Grundlage jeder Konsumtheorie und wird in drei Relationen unterteilt:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Strikte Präferenz</strong> — Definition über schwache Präferenz</li><li><strong>Indifferenz</strong> — Wechselseitige schwache Präferenz</li><li><strong>Strikte Präferenz (Merksatz)</strong> — Definition über schwache Präferenz</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -288,6 +341,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Schwach vs. Strikt</strong> $a \succeq b$ schließt $a \sim b$ ein. Strikte Präferenz $a \succ b$ liegt erst vor, wenn zusätzlich $\neg(b \succeq a)$ gilt.</div>
 <div class="warn-box"><strong>Transitivität bei Indifferenz</strong> Wenn $a \sim b$ und $b \sim c$, dann muss $a \sim c$ gelten (Transitivität der Indifferenz). Verletzung würde Irrationalität bedeuten.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -340,10 +401,25 @@ export const CONTENT = {
  },
  indiff: {
  motivation: 'Indifferenzkurven visualisieren die Präferenzstruktur in der Güterebene — alle Bündel mit gleichem Nutzenniveau.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Indifferenzkurven</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Eine <strong>Indifferenzkurve</strong> ist die Menge aller Güterbündel $(x_1, x_2)$, die dem Haushalt denselben Nutzen stiften. Formal ist sie die Niveaumenge (Höhenlinie) der Nutzenfunktion zum Nutzenniveau $\bar{u}$:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Indifferenzkurve</strong> — Niveaumenge für konstantes ū</li><li><strong>Beispiel (CD)</strong> — Explizite Form bei $u = x_1 \cdot x_2$</li><li><strong>Indifferenzkurve (Merksatz)</strong> — Niveaumenge für konstantes ū</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -384,6 +460,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Schnittpunkt</strong> Indifferenzkurven schneiden sich nie. Ein Schnittpunkt impliziert einen Widerspruch zur Transitivität der Präferenzen.</div>
 <div class="warn-box"><strong>Positive Steigung</strong> Bei positiven Grenznutzen ist eine positiv geneigte Indifferenzkurve unmöglich: Ein Bündel mit mehr von beiden Gütern hätte höheren Nutzen und könnte nicht auf derselben IK liegen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -435,10 +519,25 @@ export const CONTENT = {
  },
  grs: {
  motivation: 'Die GRS quantifiziert das subjektive Tauschverhältnis des Konsumenten: wie viel x₂ er maximal für eine marginale Einheit x₁ opfert.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Grenzrate der Substitution (GRS)</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Grenzrate der Substitution (GRS)</strong> misst die subjektive Wertschätzung zweier Güter: Wie viele Einheiten von Gut 2 ist der Haushalt bereit aufzugeben, um eine zusätzliche Einheit von Gut 1 zu erhalten, ohne sich besser oder schlechter zu stellen?</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>GRS Definition</strong> — Betrag der Steigung der Indifferenzkurve</li><li><strong>GRS via Grenznutzen</strong> — Verhältnis der partiellen Ableitungen</li><li><strong>GRS Definition (Merksatz)</strong> — Betrag der Steigung der Indifferenzkurve</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -485,6 +584,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Verwechslung mit Budgetsteigung</strong> GRS = $MU_1/MU_2$ ist subjektiv (Präferenzen). Das Preisverhältnis $p_1/p_2$ ist objektiv (Markt). Im Optimum sind beide gleich, aber konzeptionell verschieden.</div>
 <div class="warn-box"><strong>Vorzeichen</strong> Die Steigung der IK ist negativ ($dx_2/dx_1 < 0$), aber die GRS wird als positiver Betrag angegeben: $GRS = |dx_2/dx_1| = MU_1/MU_2 > 0$.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -533,7 +640,28 @@ export const CONTENT = {
  },
  lagrange: {
  motivation: 'Die Lagrange-Methode löst das Nutzenmaximierungsproblem unter Budgetbeschränkung systematisch und exakt.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Lagrange-Methode</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Lagrange-Methode löst das Nutzenmaximierungsproblem unter Budgetbeschränkung systematisch und exakt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Lagrange-Funktion</strong> — Zielfunktion + λ·Nebenbedingung</li><li><strong>Tangentialbedingung</strong> — GRS = Preisverhältnis im Optimum</li><li><strong>Grenznutzen Einkommen</strong> — Schattenpreis der Budgetrestriktion</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Das Verfahren</h4>
@@ -581,6 +709,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Dritte FOC nicht vergessen</strong> Die Ableitung nach $\lambda$ liefert die Budgetrestriktion. Sie wird oft vergessen, ist aber essenziell (sonst zu wenige Gleichungen).</div>
 <div class="warn-box"><strong>Vorzeichenkonvention</strong> Standardform: $\mathcal{L} = u + \lambda[m - p_1 x_1 - p_2 x_2]$. Alternative: $\mathcal{L} = u - \lambda[p_1 x_1 + p_2 x_2 - m]$. Beide liefern dasselbe Ergebnis, aber $\lambda$ hat dann das entgegengesetzte Vorzeichen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -634,10 +770,25 @@ export const CONTENT = {
  },
  cobbd: {
  motivation: 'Die Cobb-Douglas-Funktion erlaubt geschlossene Nachfragelösungen und zeigt konstante Budgetanteile.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Cobb-Douglas-Nutzenfunktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Cobb-Douglas-Nutzenfunktion</strong> ist eine der wichtigsten Nutzenfunktionen der Mikroökonomik. Sie modelliert Präferenzen, bei denen der Haushalt stets konstante Einkommensanteile für jedes Gut ausgibt:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>CD-Nutzenfunktion</strong> — 0 &lt; α &lt; 1</li><li><strong>Nachfrage $x_1^*$</strong> — Konstanter Budgetanteil α</li><li><strong>Nachfrage $x_2^*$</strong> — Konstanter Budgetanteil (1−α)</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -662,6 +813,14 @@ export const CONTENT = {
 <p>Allgemeiner: $u = x_1^a x_2^b$ mit $a, b > 0$ ist ebenfalls CD. Man setzt $\alpha = a/(a+b)$, sodass der Exponent auf 1 normiert wird.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
@@ -676,6 +835,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Exponent bei $MU_2$</strong> $MU_2$ hat den Exponenten $(1-\alpha)$ für $x_1$ und $(-\alpha)$ für $x_2$, nicht umgekehrt. Häufig verwechselt.</div>
 <div class="warn-box"><strong>Kreuzpreiselastizität ist nicht null</strong> Bei der Marshallschen Nachfrage ist die Kreuzpreiselastizität zwar 0, aber bei der Hicksschen Nachfrage ist sie positiv (Brutto-unabhängig, aber netto Substitute).</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -715,10 +882,25 @@ export const CONTENT = {
  },
  ces_u: {
  motivation: 'Die CES-Funktion verallgemeinert CD und erlaubt beliebige Substitutionselastizitäten σ ∈ [0, ∞).',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>CES-Nutzenfunktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>CES-Nutzenfunktion</strong> (Constant Elasticity of Substitution) ist eine flexible Nutzenfunktion, die verschiedene Substitutionsmuster als Spezialfälle enthält:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>CES Nutzenfunktion</strong> — ρ &lt; 1, symmetrische Form</li><li><strong>Substitutionselastizität</strong> — Maß für Substituierbarkeit</li><li><strong>CES Nachfrage</strong> — Allgemeine Form</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -766,6 +948,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Vorzeichen von $\rho$</strong> Für $\rho < 0$ gilt $\sigma < 1$ (schwache Substituierbarkeit). Für $\rho > 0$ gilt $\sigma > 1$ (starke Substituierbarkeit). Verwechslungsgefahr: Höheres $\rho$ bedeutet höheres $\sigma$, nicht umgekehrt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'CES Nutzenfunktion', eq: String.raw`$$u(x_1, x_2) = \left(x_1^\rho + x_2^\rho\right)^{1/\rho}, \quad \rho < 1$$`, desc:'ρ < 1, symmetrische Form', variables: { '\\rho': 'Substitutionsparameter (ρ<1)', 'x_1,x_2': 'Gütermengen' } },
@@ -806,7 +996,28 @@ export const CONTENT = {
  },
  hausopt: {
  motivation: 'Das Haushaltsoptimum ist der Punkt, an dem der höchste erreichbare Nutzen unter der Budgetbeschränkung realisiert wird.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Haushaltsoptimum</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Das Haushaltsoptimum ist der Punkt, an dem der höchste erreichbare Nutzen unter der Budgetbeschränkung realisiert wird.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Tangentialbedingung</strong> — GRS = relatives Preisverhältnis</li><li><strong>Budgetgleichung</strong> — 2. Gleichung zur Bestimmung des Optimums</li><li><strong>Tangentialbedingung (Merksatz)</strong> — GRS = relatives Preisverhältnis</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Das Optimierungsproblem</h4>
@@ -853,6 +1064,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>GRS = Preisverhältnis, nicht Steigung</strong> Die Tangentialbedingung lautet $MU_1/MU_2 = p_1/p_2$, nicht $= -p_1/p_2$. Die Steigungen sind zwar negativ, aber die GRS wird als positiver Betrag verwendet.</div>
 <div class="warn-box"><strong>Budgetrestriktion nicht vergessen</strong> Die Tangentialbedingung allein reicht nicht. Sie muss zusammen mit $p_1 x_1 + p_2 x_2 = m$ gelöst werden (zwei Gleichungen, zwei Unbekannte).</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -903,10 +1122,25 @@ export const CONTENT = {
  },
  psubst: {
  motivation: 'Perfekte Substitute modellieren Güter, die in festem Verhältnis austauschbar sind. Die Lösung liegt stets an einer Ecke der Budgetgeraden.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Perfekte Substitute</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p><strong>Perfekte Substitute</strong> sind Güter, die der Haushalt als vollständig austauschbar betrachtet. Die Nutzenfunktion ist linear:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Perfekte Substitute</strong> — Lineare Nutzenfunktion</li><li><strong>GRS</strong> — Unabhängig von Mengen</li><li><strong>Perfekte Substitute (Merksatz)</strong> — Lineare Nutzenfunktion</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -948,6 +1182,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Lagrange funktioniert nicht zuverlässig</strong> Bei perfekten Substituten liegt das Optimum typischerweise am Rand. Die Tangentialbedingung $GRS = p_1/p_2$ hat im Allgemeinen keine innere Lösung.</div>
 <div class="warn-box"><strong>Gerade, nicht konvexe Indifferenzkurven</strong> Indifferenzkurven bei perfekten Substituten sind gerade Linien, nicht konvex zum Ursprung. Strenge Konvexität der Präferenzen ist verletzt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Perfekte Substitute', eq: String.raw`$$u(x_1, x_2) = a x_1 + b x_2, \quad a, b > 0$$`, desc:'Lineare Nutzenfunktion', variables: { 'a': 'Nutzenbeitrag Gut 1 je Einheit', 'b': 'Nutzenbeitrag Gut 2 je Einheit', 'x_1,x_2': 'Gütermengen' } },
@@ -986,10 +1228,25 @@ export const CONTENT = {
  },
  pkomp: {
  motivation: 'Perfekte Komplemente (Leontief) modellieren Güter, die nur zusammen genutzt werden. Das Optimum liegt stets im Knick der L-förmigen Indifferenzkurven.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Perfekte Komplemente</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p><strong>Perfekte Komplemente</strong> (Leontief-Präferenzen) beschreiben Situationen, in denen zwei Güter nur in einem festen Verhältnis konsumiert werden. Die Nutzenfunktion lautet:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Leontief-Nutzenfunktion</strong> — Perfekte Komplemente</li><li><strong>Optimalbedingung</strong> — Kein Gut wird verschwendet</li><li><strong>Nachfrage $x_1^*$</strong> — Aus Knick + Budget</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1020,7 +1277,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Perfekte Komplemente</h4>
-<p>$u = \min\\{ax_1, bx_2\\}$ → Knick auf $ax_1 = bx_2$. Optimum: Budgetgerade durch Knick. Nachfrage: $x_1 = m/(p_1 + p_2 b/a)$ bei Standardform.</p><div class="warn-box"><strong>Kein Lagrange-Standard:</strong> Optimum am Knick, nicht wo $MRS = p_1/p_2$ im Innern.</div><div class="warn-box"><strong>Proportion fix:</strong> $x_2/x_1 = a/b$ im Optimum — immer auf Strahl.</div>
+<p>$u = \min\{ax_1, bx_2\}$ → Knick auf $ax_1 = bx_2$. Optimum: Budgetgerade durch Knick. Nachfrage: $x_1 = m/(p_1 + p_2 b/a)$ bei Standardform.</p><div class="warn-box"><strong>Kein Lagrange-Standard:</strong> Optimum am Knick, nicht wo $MRS = p_1/p_2$ im Innern.</div><div class="warn-box"><strong>Proportion fix:</strong> $x_2/x_1 = a/b$ im Optimum — immer auf Strahl.</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -1034,6 +1291,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Lagrange nicht anwendbar</strong> Die Min-Funktion ist im Knickpunkt nicht differenzierbar. Stattdessen wird über die Gleichgewichtsbedingung $ax_1 = bx_2$ zusammen mit der Budgetrestriktion gelöst.</div>
 <div class="warn-box"><strong>Verhältnisrichtung beachten</strong> Bei $\min\\{x_1, 2x_2\\}$ ist das Verhältnis $x_1:x_2 = 2:1$ (nicht $1:2$!). Der Koeffizient 2 steht bei $x_2$, also braucht man doppelt so viel $x_1$.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -1076,10 +1341,25 @@ export const CONTENT = {
  },
  elast: {
  motivation: 'Elastizitäten sind einheitenlose Maße für Reaktionsstärken — sie ermöglichen Vergleiche unabhängig von Maßeinheiten.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Elastizitätskonzepte</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Eine <strong>Elastizität</strong> misst die prozentuale Änderung einer abhängigen Variable als Reaktion auf eine 1%ige Änderung einer unabhängigen Variable. Sie ist dimensionslos und ermöglicht Vergleiche zwischen verschiedenen Gütern und Märkten.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Allg. Elastizität</strong> — Relative Änderung A je 1% Änderung B</li><li><strong>Einkommenselastizität</strong> — &gt;1 Luxus, &lt;1 notwendig, &lt;0 inferior</li><li><strong>Preiselastizität</strong> — Normalfall &lt; 0</li><li><strong>Kreuzpreiselastizität</strong> — &gt;0 Substitute, &lt;0 Komplemente</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1111,6 +1391,14 @@ export const CONTENT = {
 <p>Die mit den Ausgabenanteilen $s_i$ gewichteten Einkommenselastizitäten summieren sich zu 1. Daraus folgt: Nicht alle Güter können gleichzeitig inferior sein ($\varepsilon_m < 0$) oder Luxusgüter ($\varepsilon_m > 1$).</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
@@ -1124,6 +1412,14 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Brutto- vs. Netto-Substitute</strong> Die Kreuzpreiselastizität der Marshallschen Nachfrage misst Brutto-Effekte (inkl. EE). Die Hickssche Kreuzpreiselastizität misst Netto-Substitution (nur SE). Güter können Brutto-Komplemente, aber Netto-Substitute sein.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -1165,7 +1461,14 @@ export const CONTENT = {
  },
  normal: {
  motivation: 'Normale vs. inferiore Güter beschreiben, wie die Nachfrage auf Einkommensänderungen reagiert — und warum nicht alle Güter zugleich inferior sein können.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Normale &amp; inferiore Güter</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Klassifikation nach Einkommensreaktion</h4>
@@ -1176,6 +1479,14 @@ export const CONTENT = {
 <div class="info-card"><div class="label">Luxusgut</div><div class="value">$\varepsilon_m > 1$</div><p>Ausgabenanteil steigt mit dem Einkommen. Sonderfall eines normalen Gutes.</p></div>
 <div class="info-card"><div class="label">Notwendiges Gut</div><div class="value">$0 < \varepsilon_m < 1$</div><p>Ausgabenanteil sinkt mit dem Einkommen. Sonderfall eines normalen Gutes.</p></div>
 </div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Normales Gut</strong> — Mehr Einkommen → mehr Konsum</li><li><strong>Inferiores Gut</strong> — Mehr Einkommen → weniger Konsum</li><li><strong>Walras-Identität</strong> — Budgetbindung impliziert min. 1 normales Gut</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1207,6 +1518,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Inferior ist nicht Giffen</strong> Inferiorität ist notwendig, aber nicht hinreichend für ein Giffen-Gut. Viele inferiore Güter haben trotzdem eine fallende Nachfragekurve, weil der SE den EE dominiert.</div>
 <div class="warn-box"><strong>Aggregationsgesetz</strong> Nicht alle Güter können gleichzeitig inferior sein. Die ausgabengewichteten Einkommenselastizitäten müssen sich zu 1 summieren (Engelsches Aggregationsgesetz).</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -1248,10 +1567,25 @@ export const CONTENT = {
  },
  hicks: {
  motivation: 'Die Hickssche Nachfrage hält das Nutzenniveau konstant und isoliert so den reinen Substitutionseffekt einer Preisänderung.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Hickssche Nachfrage</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Hickssche (kompensierte) Nachfragefunktion</strong> $h_i(p_1, p_2, \bar{u})$ gibt die kostenminimale Menge von Gut $i$ an, um ein vorgegebenes Nutzenniveau $\bar{u}$ bei gegebenen Preisen zu erreichen. Sie löst das duale Problem:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Hicks-Nachfrage</strong> — Minimale Ausgaben bei gegebenem Nutzen</li><li><strong>Identität im Optimum</strong> — Wenn m = e(p,ū)</li><li><strong>Hicks-Nachfrage (Merksatz)</strong> — Minimale Ausgaben bei gegebenem Nutzen</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1294,6 +1628,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Argumente beachten</strong> Hickssche Nachfrage: $h_i(p_1, p_2, \bar{u})$ (Nutzenniveau, nicht Einkommen). Marshallsche Nachfrage: $x_i^*(p_1, p_2, m)$ (Einkommen, nicht Nutzen). Verwechslung ist häufig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Hicks-Nachfrage', eq: String.raw`$$h_i = h_i(p_1, p_2, \bar{u})$$`, desc:'Minimale Ausgaben bei gegebenem Nutzen', variables: { 'h_i': 'Kompensierte Nachfrage Gut i', 'p_1,p_2': 'Güterpreise', '\\bar{u}': 'Konstantes Nutzenniveau' } },
@@ -1332,10 +1674,25 @@ export const CONTENT = {
  ] },
  ausgaben: {
  motivation: 'Die Ausgabenfunktion gibt an, wie viel ein Haushalt mindestens ausgeben muss, um ein bestimmtes Nutzenniveau zu erreichen.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Ausgabenfunktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Ausgabenfunktion</strong> (Expenditure Function) $e(p_1, p_2, \bar{u})$ gibt die minimalen Ausgaben an, die nötig sind, um bei gegebenen Preisen $(p_1, p_2)$ ein vorgegebenes Nutzenniveau $\bar{u}$ zu erreichen. Sie ist die Lösung des dualen Minimierungsproblems:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Ausgabenfunktion</strong> — Minimale Kosten für Nutzenniveau ū</li><li><strong>Beispiel CD ($u=x_1 x_2$)</strong> — Für symmetrische CD-Funktion</li><li><strong>Ausgabenfunktion (Merksatz)</strong> — Minimale Kosten für Nutzenniveau ū</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1382,6 +1739,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Argumente beachten</strong> $e$ ist Funktion von $(p_1, p_2, \bar{u})$, nicht von $m$. Sie beantwortet: "Was kostet Nutzenniveau $\bar{u}$ mindestens?"</div>
 <div class="warn-box"><strong>Homogenitätsgrad 1, nicht 0</strong> Im Gegensatz zur Nachfragefunktion (Grad 0 in Preisen und Einkommen) ist die Ausgabenfunktion homogen vom Grad 1 in Preisen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Ausgabenfunktion', eq: String.raw`$$e(p,\bar{u}) = p_1 h_1(p,\bar{u}) + p_2 h_2(p,\bar{u})$$`, desc:'Minimale Kosten für Nutzenniveau ū', variables: { 'e(p,\\bar{u})': 'Mindestausgaben für Nutzenniveau ū', 'h_1,h_2': 'Hickssche Nachfragen' } },
@@ -1419,7 +1784,28 @@ export const CONTENT = {
  },
  shephard: {
  motivation: 'Shephards Lemma erlaubt es, Hickssche Nachfragen direkt aus der Ausgabenfunktion abzuleiten — ohne das Optimierungsproblem neu zu lösen.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Shephards Lemma</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Shephards Lemma erlaubt es, Hickssche Nachfragen direkt aus der Ausgabenfunktion abzuleiten — ohne das Optimierungsproblem neu zu lösen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Shephards Lemma</strong> — Hickssche Nachfrage aus Ausgabenfunktion</li><li><strong>Konkavität</strong> — Hickssche Nachfrage fällt im eigenen Preis</li><li><strong>Shephards Lemma (Merksatz)</strong> — Hickssche Nachfrage aus Ausgabenfunktion</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Shephards Lemma (Konsumtheorie)</h4>
@@ -1432,6 +1818,14 @@ export const CONTENT = {
 <p>In der Produktionstheorie gilt das analoge Ergebnis für die bedingte Faktornachfrage und die Kostenfunktion:</p>
 <div class="math-block">$$x_i^c(w_1, w_2, y) = \frac{\partial C(w_1, w_2, y)}{\partial w_i}$$</div>
 <p>$x_i^c$ ist die kostenminimale Menge von Faktor $i$ für Output $y$, $C$ ist die Kostenfunktion, und $w_i$ ist der Faktorpreis. Die bedingte Faktornachfrage ergibt sich also durch Ableitung der Kostenfunktion nach dem Faktorpreis.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -1452,6 +1846,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Richtung der Ableitung</strong> Shephards Lemma: Ableitung der Ausgabenfunktion (oder Kostenfunktion) nach dem Preis, nicht umgekehrt. Die Ausgabenfunktion wird nach $p_i$ abgeleitet, nicht nach Mengen.</div>
 <div class="warn-box"><strong>Bedingte vs. unbedingte Faktornachfrage</strong> Shephards Lemma liefert die bedingte Faktornachfrage $x_i^c(w, y)$ (bei gegebenem Output), nicht die unbedingte (gewinnmaximale) Faktornachfrage.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -1492,7 +1894,28 @@ export const CONTENT = {
  },
  indnutzen: {
  motivation: 'Die indirekte Nutzenfunktion fasst den maximalen erreichbaren Nutzen als Funktion von Preisen und Einkommen zusammen. Roys Identität leitet daraus die Marshallsche Nachfrage ab.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Indirekte Nutzenfunktion &amp; Roys Identität</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die indirekte Nutzenfunktion fasst den maximalen erreichbaren Nutzen als Funktion von Preisen und Einkommen zusammen. Roys Identität leitet daraus die Marshallsche Nachfrage ab.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Indirekte Nutzenfunktion</strong> — Max. Nutzen als Funktion von Preisen/Einkommen</li><li><strong>Roys Identität</strong> — Marshall-Nachfrage aus indirekter NF</li><li><strong>Indirekte Nutzenfunktion (Merksatz)</strong> — Max. Nutzen als Funktion von Preisen/Einkommen</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Indirekte Nutzenfunktion</h4>
@@ -1543,6 +1966,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Vorzeichen bei Roys Identität</strong> Das Minuszeichen ist entscheidend: $x_i = -(\partial v/\partial p_i)/(\partial v/\partial m)$. Ohne das Minus erhält man eine negative Nachfrage.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Indirekte Nutzenfunktion', eq: String.raw`$$v(p,m) = u\bigl[x_1(p,m),\; x_2(p,m)\bigr]$$`, desc:'Max. Nutzen als Funktion von Preisen/Einkommen', variables: { 'v(p,m)': 'Maximaler Nutzen bei Preisen p und Einkommen m', 'x_1,x_2': 'Marshallsche Nachfragen' } },
@@ -1580,10 +2011,25 @@ export const CONTENT = {
  },
  lambda: {
  motivation: 'Der Lagrange-Multiplikator λ hat eine präzise ökonomische Bedeutung: Er misst den Grenznutzen des Einkommens.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Lagrange-Multiplikator $\lambda$</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Der <strong>Lagrange-Multiplikator $\lambda$</strong> entsteht als dritte Variable bei der Lösung des Haushaltsoptimierungsproblems mittels Lagrange-Methode. Er misst den <strong>Schattenpreis der Budgetrestriktion</strong>, also den Grenznutzen einer zusätzlichen Geldeinheit Einkommen im Optimum.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Lagrange-Multiplikator</strong> — Grenznutzen des Einkommens</li><li><strong>Lagrange-Multiplikator (Merksatz)</strong> — Grenznutzen des Einkommens</li><li><strong>Lagrange-Multiplikator (Merksatz) (Merksatz)</strong> — Grenznutzen des Einkommens</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1621,6 +2067,14 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Ordinalität beachten</strong> Monotone Transformationen der Nutzenfunktion verändern den Wert von $\lambda$. Interpersonelle Vergleiche von $\lambda$ sind daher ökonomisch nicht sinnvoll.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -1660,7 +2114,28 @@ export const CONTENT = {
  },
  slutsky: {
  motivation: 'Die Slutsky-Gleichung zerlegt den Gesamteffekt einer Preisänderung in Substitutionseffekt (SE) und Einkommenseffekt (EE).',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Slutsky-Zerlegung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Slutsky-Gleichung zerlegt den Gesamteffekt einer Preisänderung in Substitutionseffekt (SE) und Einkommenseffekt (EE).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Slutsky (Eigenpreis)</strong> — GE = SE + EE</li><li><strong>Slutsky (Kreuzpreis)</strong> — EE enthält Menge xᵢ (des Gutes mit Preisänderung)</li><li><strong>Slutsky (Eigenpreis) (Merksatz)</strong> — GE = SE + EE</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Slutsky-Gleichung</h4>
@@ -1706,6 +2181,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Vorzeichen im EE</strong> In der Slutsky-Gleichung steht ein Minus vor dem EE-Term: $GE = SE - x_1(\partial x_1/\partial m)$. Das Minus ist Teil der Formel und darf nicht vergessen werden.</div>
 <div class="warn-box"><strong>Menge im Kreuzpreis-EE</strong> Im Kreuzpreis-EE (Effekt von $p_j$ auf $x_i$) taucht die Menge $x_j$ auf (nicht $x_i$!): $EE_{ij} = -x_j \cdot \partial x_i/\partial m$.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Slutsky (Eigenpreis)', eq: String.raw`$$\frac{\partial x_i}{\partial p_i} = \underbrace{\frac{\partial h_i}{\partial p_i}}_{\text{SE}\leq 0} - \underbrace{\frac{\partial x_i}{\partial m}\, x_i}_{\text{EE}}$$`, desc:'GE = SE + EE', variables: { '\\partial x_i/\\partial p_i': 'Gesamteffekt (Marshallsch)', '\\partial h_i/\\partial p_i': 'Substitutionseffekt (SE ≤ 0)', '\\partial x_i/\\partial m': 'Einkommenseffekt', 'x_i': 'Nachgefragte Menge' } },
@@ -1746,7 +2229,28 @@ export const CONTENT = {
  },
  anfang: {
  motivation: 'Bei Anfangsausstattung ist das Einkommen endogen: m = p₁ω₁ + p₂ω₂. Eine Preisänderung ändert auch den Wert der Ausstattung.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Slutsky bei Anfangsausstattung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Bei Anfangsausstattung ist das Einkommen endogen: m = p₁ω₁ + p₂ω₂. Eine Preisänderung ändert auch den Wert der Ausstattung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Slutsky bei Ausstattung</strong> — SE + modifizierter EE</li><li><strong>Slutsky bei Ausstattung (Merksatz)</strong> — SE + modifizierter EE</li><li><strong>Slutsky bei Ausstattung (Merksatz) (Merksatz)</strong> — SE + modifizierter EE</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Modell mit Anfangsausstattung</h4>
@@ -1761,6 +2265,14 @@ export const CONTENT = {
 <p>Der entscheidende Unterschied zum Standardmodell: Der Einkommenseffekt enthält den Term $(\omega_1 - x_1^*)$ statt $(-x_1^*)$.</p>
 <p><strong>Nettokäufer</strong> ($x_1^* > \omega_1$): Der Haushalt kauft mehr als er besitzt. Eine Preiserhöhung von $p_1$ macht ihn ärmer (ähnlich wie im Standardmodell, EE negativ bei normalen Gütern).</p>
 <p><strong>Nettoverkäufer</strong> ($x_1^* < \omega_1$): Der Haushalt verkauft einen Teil seiner Ausstattung. Eine Preiserhöhung von $p_1$ macht ihn reicher (EE positiv bei normalen Gütern).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -1781,6 +2293,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Vorzeichen des modifizierten EE</strong> Bei einem Nettoverkäufer normaler Güter ist der EE positiv (Preiserhöhung macht reicher). Das kann dazu führen, dass die Nachfrage bei steigendem Preis steigt, ohne dass das Gut ein Giffen-Gut ist.</div>
 <div class="warn-box"><strong>Nettokäufer vs. Nettoverkäufer</strong> $\omega_1 - x_1^*$ wechselt das Vorzeichen je nach Position. Immer prüfen, ob der Haushalt Nettokäufer oder -verkäufer ist.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -1821,7 +2341,28 @@ export const CONTENT = {
  },
  arbeit: {
  motivation: 'Im Arbeitsangebotsmodell wählt der Haushalt zwischen Freizeit und Konsum. Eine Lohnerhöhung hat zwei entgegengesetzte Effekte.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Arbeitsangebot</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Im Arbeitsangebotsmodell wählt der Haushalt zwischen Freizeit und Konsum. Eine Lohnerhöhung hat zwei entgegengesetzte Effekte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Budgetgerade (Arbeit)</strong> — Freizeit-Konsum-Tradeoff</li><li><strong>Slutsky (Freizeit)</strong> — SE (neg.) + EE (pos.) auf Freizeit</li><li><strong>Budgetgerade (Arbeit) (Merksatz)</strong> — Freizeit-Konsum-Tradeoff</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Modell</h4>
@@ -1865,6 +2406,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Lohn ist der Preis der Freizeit</strong> Eine Lohnerhöhung verteuert Freizeit relativ zum Konsum. Der Substitutionseffekt geht immer in Richtung weniger Freizeit (mehr Arbeit).</div>
 <div class="warn-box"><strong>Backward-bending heißt nicht Giffen</strong> Eine rückwärtsgebogene Arbeitsangebotskurve entsteht, weil Freizeit ein normales Gut ist und der Ausstattungseffekt dominiert. Freizeit ist dabei kein Giffen-Gut.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Budgetgerade (Arbeit)', eq: String.raw`$$x = \frac{wT}{p} - \frac{w}{p}\,f$$`, desc:'Freizeit-Konsum-Tradeoff', variables: { 'x': 'Konsummenge', 'w': 'Lohnsatz', 'T': 'Zeitbudget gesamt', 'p': 'Konsumpreis', 'f': 'Freizeitkonsum' } },
@@ -1904,11 +2453,26 @@ export const CONTENT = {
  },
  cv_ev: {
  motivation: 'CV und EV messen Nutzenänderungen in Geldeinheiten — ohne kardinalem Nutzen zu benötigen. ΔKR ist die praktische Approximation.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>CV, EV &amp; Konsumentenrente</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Motivation</h4>
 <p>Die <strong>Kompensierende Variation (CV)</strong> und die <strong>Äquivalente Variation (EV)</strong> sind exakte Wohlfahrtsmaße, die auf der Ausgabenfunktion basieren. Sie messen den Geldwert einer Preisänderung für den Haushalt, im Gegensatz zur Konsumentenrente (KR), die nur eine Approximation ist.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>CV</strong> — Altes Nutzenniveau als Referenz</li><li><strong>EV</strong> — Neues Nutzenniveau als Referenz</li><li><strong>ΔKR</strong> — Marshallsche Nachfrage, Approximation</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1938,6 +2502,14 @@ export const CONTENT = {
 <p>Der Unterschied: CV verwendet die Hickssche NF zum alten Nutzenniveau $u^0$, EV zum neuen $u^1$.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
@@ -1952,6 +2524,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Referenzniveaus nicht vertauschen</strong> CV bezieht sich auf $u^0$ (altes Nutzenniveau), EV auf $u^1$ (neues Nutzenniveau). Verwechslung ist der häufigste Fehler.</div>
 <div class="warn-box"><strong>Vorzeichen</strong> Bei Preissenkung: Beide $CV, EV > 0$. Bei Preiserhöhung: Beide $< 0$. Das Vorzeichen gibt die Richtung des Wohlfahrtseffekts an.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -2003,7 +2583,28 @@ export const CONTENT = {
  },
  produktion: {
  motivation: 'Die Produktionsfunktion definiert die technische Transformationsregel von Inputs zu Output — die Grundlage aller Unternehmenstheorie.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Produktionsfunktion &amp; Isoquanten</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Produktionsfunktion definiert die technische Transformationsregel von Inputs zu Output — die Grundlage aller Unternehmenstheorie.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Produktionsfunktion</strong> — Maximaler Output bei gegebenem Input</li><li><strong>Isoquante</strong> — Niveaumenge für konstantes ȳ</li><li><strong>Produktionsfunktion (Merksatz)</strong> — Maximaler Output bei gegebenem Input</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Produktionsfunktion</h4>
@@ -2050,6 +2651,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Kardinalität beachten</strong> $F = L^{0.5}K^{0.5}$ und $G = LK$ beschreiben verschiedene Technologien (unterschiedliche Skalenerträge), obwohl $G = F^2$ eine monotone Transformation ist.</div>
 <div class="warn-box"><strong>Isoquante ist nicht Isokostengerade</strong> Isoquante: gleicher Output. Isokostengerade: gleiche Kosten ($w_1 x_1 + w_2 x_2 = C$). Im Kostenminimum sind sie tangential.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Produktionsfunktion', eq: String.raw`$$y = F(K, L)$$`, desc:'Maximaler Output bei gegebenem Input', variables: { 'y': 'Output (kardinal)', 'F': 'Produktionstechnologie', 'K': 'Kapitalinput', 'L': 'Arbeitsinput' } },
@@ -2089,10 +2698,25 @@ export const CONTENT = {
  },
  grts: {
  motivation: 'Die GRTS quantifiziert das technische Tauschverhältnis zwischen Arbeit und Kapital bei konstantem Output — das Produktionsäquivalent zur GRS.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Grenzrate der Technischen Substitution</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Grenzrate der Technischen Substitution (GRTS)</strong> misst, wie viele Einheiten von Faktor 2 (z.B. Kapital $K$) ein Unternehmen einsparen kann, wenn es eine zusätzliche Einheit von Faktor 1 (z.B. Arbeit $L$) einsetzt, wobei der Output $y$ konstant bleibt. Die GRTS ist das produktionstheoretische Analogon zur GRS in der Haushaltstheorie.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>GRTS</strong> — Betrag der Isoquantensteigung</li><li><strong>GRTS (Merksatz)</strong> — Betrag der Isoquantensteigung</li><li><strong>GRTS (Merksatz) (Merksatz)</strong> — Betrag der Isoquantensteigung</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -2141,6 +2765,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Zahlenwert-Verwechslung</strong> GRTS = MP_L/MP_K (Preise spielen keine Rolle in der Definition). Erst im Optimum wird GRTS = w/r gesetzt.</div>
 <div class="warn-box"><strong>Vorzeichen</strong> Die GRTS wird als positiver Betrag angegeben. Die Steigung der Isoquante ist negativ, aber GRTS = |Steigung|.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'GRTS', eq: String.raw`$$GRTS = \frac{MP_L}{MP_K} = \frac{F_L}{F_K}$$`, desc:'Betrag der Isoquantensteigung', variables: { 'MP_L': 'Grenzprodukt der Arbeit: \(\partial F/\partial L\)', 'MP_K': 'Grenzprodukt des Kapitals: \(\partial F/\partial K\)' } },
@@ -2177,10 +2809,25 @@ export const CONTENT = {
  },
  skalener: {
  motivation: 'Skalenerträge beschreiben, was passiert, wenn alle Inputs proportional erhöht werden — und bestimmen damit die Kostenstruktur.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Skalenerträge &amp; Homogenität</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p><strong>Skalenerträge</strong> beschreiben, was mit dem Output passiert, wenn alle Inputs proportional um den Faktor $\lambda > 1$ erhöht werden. Der Homogenitätsgrad $k$ der Produktionsfunktion bestimmt die Art der Skalenerträge:</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Homogenitätsgrad</strong> — k = Skalenelastizität</li><li><strong>Euler-Theorem</strong> — Für homogene Funktionen vom Grad k</li><li><strong>Wicksell-Johnson</strong> — Skalenelastizität = Summe der Teile</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -2200,6 +2847,14 @@ export const CONTENT = {
 <p>$\varepsilon_{C,y} = 1/k$ ist die Kostenelastizität des Outputs. Steigende Skalenerträge bedeuten sinkende Durchschnittskosten (Economies of Scale).</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
@@ -2214,6 +2869,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Skalenertrag ist nicht Grenzertrag</strong> Sinkende Skalenerträge ($k < 1$) bedeuten nicht, dass Grenzprodukte negativ sind. Beide Grenzprodukte können positiv sein; die Summe der Elastizitäten ist lediglich kleiner als 1.</div>
 <div class="warn-box"><strong>CRS und Gewinn</strong> Bei konstanten Skalenerträgen und vollkommenem Wettbewerb ist der Gewinn im Gleichgewicht null (nicht Verlust). Die Faktorentlohnung erschöpft den Output vollständig (Euler-Theorem).</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -2253,7 +2916,28 @@ export const CONTENT = {
  },
  kosten: {
  motivation: 'Kostenminimierung bestimmt, welche Input-Kombination einen gegebenen Output y zu minimalen Kosten produziert.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Kostenminimierung &amp; Kostenfunktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Kostenminimierung bestimmt, welche Input-Kombination einen gegebenen Output y zu minimalen Kosten produziert.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Minimalkostenbedingung</strong> — GRTS = Faktorpreisverhältnis</li><li><strong>Kostenfunktion</strong> — Optimalwertfunktion</li><li><strong>Shephard (Produktion)</strong> — Bedingte Arbeitsnachfrage</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Kostenminimierungsproblem</h4>
@@ -2289,6 +2973,14 @@ export const CONTENT = {
 <p>wobei $\kappa$ eine Konstante ist, die nur von $\alpha$ und $\beta$ abhängt. Bei konstanten Skalenerträgen ($k=1$) ist $C$ linear in $y$.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
@@ -2302,6 +2994,14 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Bedingt vs. unbedingt</strong> Bedingte Faktornachfrage $L^*(w,r,y)$: Output $y$ ist vorgegeben (Kostenminimierung). Unbedingte Faktornachfrage $L^*(w,r,p)$: Output wird gewinnmaximierend gewählt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -2334,7 +3034,14 @@ export const CONTENT = {
  },
  gk_dk: {
  motivation: 'Grenzkosten (p=MC im Optimum) und Stückkosten (Marktaustrittssignal) sind die zentralen Entscheidungsgrößen des Unternehmens.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Grenzkosten, Stückkosten, Kurzfrist</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Kostenbegriffe</h4>
@@ -2345,6 +3052,14 @@ export const CONTENT = {
 <div class="info-card"><div class="label">Durchschn. variable Kosten</div><div class="value">$AVC(y) = VC(y)/y$</div><p>Variable Kosten pro Stück.</p></div>
 <div class="info-card"><div class="label">Durchschn. Fixkosten</div><div class="value">$AFC(y) = FC/y$</div><p>Fixkosten pro Stück. Sinken monoton mit $y$.</p></div>
 </div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Grenzkosten</strong> — Kosten der letzten Einheit</li><li><strong>Stückkosten</strong> — Durchschnittliche Kosten pro Einheit</li><li><strong>Kostenelastizität</strong> — Kehrwert der Skalenelastizität</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -2383,6 +3098,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>MC durch AC von unten, nicht von oben</strong> MC schneidet AC immer im Minimum von unten nach oben. Wenn MC monoton steigend ist, gibt es genau einen Schnittpunkt.</div>
 <div class="warn-box"><strong>Kurzfristige Stilllegung vs. langfristiger Marktaustritt</strong> Kurzfristig: Produktion einstellen wenn $p < \min AVC$. Langfristig: Markt verlassen wenn $p < \min AC$. Die Schwellen sind verschieden.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -2424,7 +3147,28 @@ export const CONTENT = {
  },
  gewinn: {
  motivation: 'Gewinnmaximierung bestimmt die optimale Outputmenge. Im Gleichgewicht: p = MC. Daraus folgt die Angebotsfunktion.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Gewinnmaximierung &amp; Angebot</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Gewinnmaximierung bestimmt die optimale Outputmenge. Im Gleichgewicht: p = MC. Daraus folgt die Angebotsfunktion.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Gewinnmaximum</strong> — Grenzerlös = Grenzkosten</li><li><strong>Wertgrenzprodukt</strong> — Direkte Optimierung in Faktoren</li><li><strong>Hotellings Lemma</strong> — Angebot und Faktornachfrage aus Gewinnfunktion</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gewinnmaximierung</h4>
@@ -2471,6 +3215,14 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Kurzfristig vs. langfristig</strong> Kurzfristige Stilllegung: $p < \min AVC$. Langfristiger Marktaustritt: $p < \min AC$. Die Schwellen unterscheiden sich, weil kurzfristig Fixkosten sowieso anfallen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -2521,7 +3273,28 @@ export const CONTENT = {
  },
  markt: {
  motivation: 'Das Wettbewerbsgleichgewicht koordiniert dezentrale Entscheidungen über den Preismechanismus und führt zur effizienten Allokation.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Marktgleichgewicht &amp; Wohlfahrt</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Das Wettbewerbsgleichgewicht koordiniert dezentrale Entscheidungen über den Preismechanismus und führt zur effizienten Allokation.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Gleichgewichtsbedingung</strong> — Angebot = Nachfrage</li><li><strong>Effizienzbedingung</strong> — Soziales Optimum</li><li><strong>Wohlfahrt</strong> — Summe der Renten</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Marktgleichgewicht</h4>
@@ -2549,6 +3322,14 @@ export const CONTENT = {
 <div class="math-block">$$DWL = W_{\text{Wettbewerb}} - W_{\text{mit Eingriff}} > 0$$</div>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
@@ -2563,6 +3344,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Horizontale, nicht vertikale Aggregation</strong> Marktnachfrage: Bei gegebenem Preis werden die Mengen addiert ($D = \sum x_i$). Die inverse Nachfrage wird danach umgeformt.</div>
 <div class="warn-box"><strong>KR-Approximation</strong> Die Konsumentenrente unter der Marshallschen Nachfrage ist nur eine Approximation des wahren Wohlfahrtsmaßes. Bei quasi-linearen Präferenzen ist sie exakt, sonst nicht.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [
@@ -2640,6 +3429,14 @@ export const CONTENT = {
 <p>Die <strong>inverse Nachfragefunktion</strong> $p(y)$ gibt den Preis an, zu dem der Monopolist $y$ Einheiten absetzen kann. Sie ist fallend: $p'(y) < 0$.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Grenzerlös</strong> — Immer kleiner als Preis</li><li><strong>Cournotscher Punkt</strong> — Optimale Monopolmenge</li><li><strong>DWL</strong> — Harberger-Dreieck</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -2685,6 +3482,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>MR liegt unter der Nachfragekurve</strong> Der Monopolpreis $p_m$ wird NICHT am Schnittpunkt $MR = MC$ abgelesen, sondern auf der Nachfragekurve bei $y_m$: Erst $y_m$ aus $MR = MC$, dann $p_m = p(y_m)$.</div>
 <div class="warn-box"><strong>Elastischer Bereich</strong> Der Monopolist produziert nie im unelastischen Bereich der Nachfrage, da dort $MR < 0$ und somit der Gewinn durch Mengenreduktion gesteigert werden könnte.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Grenzerlös', eq: String.raw`$$E'(y) = p(y) + p'(y) \cdot y$$`, desc:'Immer kleiner als Preis' },
@@ -2729,10 +3534,25 @@ export const CONTENT = {
  },
  homothet: {
  motivation: 'Homothetische Präferenzen implizieren Engel-Kurven als Ursprungsgeraden: Das Konsumverhältnis ist einkommensunabhängig.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Homothetische Nutzenfunktionen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Eine Nutzenfunktion $u(x_1, x_2)$ heißt <strong>homothetisch</strong>, wenn sie als positiv monotone Transformation einer homogenen Funktion darstellbar ist. Formal: $u(x_1,x_2) = g(f(x_1,x_2))$ wobei $f$ homogen vom Grad $k$ ist und $g$ streng monoton steigend.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Homothetie-Bedingung</strong> — GRS hängt nur von Ratio ab</li><li><strong>Einkommenselastizität</strong> — Für alle Güter bei homothetischen Präferenzen</li><li><strong>Homothetie-Bedingung (Merksatz)</strong> — GRS hängt nur von Ratio ab</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -2776,6 +3596,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Homothetisch ist nicht gleich linear-homogen</strong> $u = (x_1 x_2)^2$ ist homothetisch (monotone Transformation von $x_1 x_2$, das homogen Grad 2 ist), aber selbst homogen vom Grad 4. Homothetizität ist die allgemeinere Eigenschaft.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Homothetie-Bedingung', eq: String.raw`$$GRS(x_1, x_2) = f\!\left(\frac{x_2}{x_1}\right)$$`, desc:'GRS hängt nur von Ratio ab', variables: { 'GRS': 'Grenzrate der Substitution', 'x_2/x_1': 'Konsumverhältnis' } },
@@ -2813,7 +3641,28 @@ export const CONTENT = {
  },
  ordinal: {
  motivation: 'Nutzen ist ordinal: Nur die Rangfolge zählt. Deshalb sind positiv-monotone Transformationen der Nutzenfunktion ökonomisch äquivalent.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Ordinalität &amp; Monotone Transformationen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Nutzen ist ordinal: Nur die Rangfolge zählt. Deshalb sind positiv-monotone Transformationen der Nutzenfunktion ökonomisch äquivalent.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Positiv-monotone Transformation</strong> — Äquivalente Nutzendarstellung</li><li><strong>GRS invariant</strong> — Kettenregel: f kürzt sich heraus</li><li><strong>Positiv-monotone Transformation (Merksatz)</strong> — Äquivalente Nutzendarstellung</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Ordinalität des Nutzens</h4>
@@ -2860,6 +3709,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Grenznutzen ist nicht ordinal</strong> Obwohl $MU_i$ sich unter monotonen Transformationen ändert, ist das Verhältnis $MU_1/MU_2$ (die GRS) invariant. Aussagen über den absoluten Grenznutzen sind ökonomisch nicht interpretierbar.</div>
 <div class="warn-box"><strong>Nicht-monotone Transformationen sind verboten</strong> $v = -u$ oder $v = u^2$ mit negativen $u$-Werten können die Rangfolge umkehren und repräsentieren dann andere Präferenzen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
  formeln: [
  { label:'Positiv-monotone Transformation', eq: String.raw`$$v = f(u(\mathbf{x})),\quad f' > 0$$`, desc:'Äquivalente Nutzendarstellung' },
@@ -2897,10 +3754,25 @@ aufgaben: [
  },
  marshall: {
  motivation: 'Marshallsche Nachfragefunktionen beschreiben, wie die optimale Konsummenge von Preisen und Einkommen abhängt.',
- theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+ theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Marshallsche Nachfrage</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <p>Die <strong>Marshallsche (gewöhnliche) Nachfragefunktion</strong> $x_i^*(p_1, p_2, m)$ gibt die nutzenmaximierende Menge von Gut $i$ in Abhängigkeit von allen Preisen und dem Einkommen $m$ an. Sie ergibt sich als Lösung des Haushaltsoptimierungsproblems $\max u(x_1,x_2)$ unter der Budgetrestriktion $p_1 x_1 + p_2 x_2 \leq m$.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Marshall-Nachfrage</strong> — Nutzenmaximierende Menge bei Preisen (p₁,p₂) und Einkommen m; aus GRS = p₁/p₂ und Budget.</li><li><strong>Homogenität</strong> — Keine Geldillusion (Grad 0)</li><li><strong>Marshall-Nachfrage (Merksatz)</strong> — Nutzenmaximierende Menge bei Preisen (p₁,p₂) und Einkommen m; aus GRS = p₁/p₂ und Budget.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -2939,6 +3811,14 @@ aufgaben: [
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Marshallsche vs. Hickssche Nachfrage</strong> Die Marshallsche Nachfrage hält das Einkommen $m$ konstant. Die Hickssche Nachfrage hält das Nutzenniveau $\bar{u}$ konstant. Beide stimmen nur im Ausgangspunkt überein.</div>
 <div class="warn-box"><strong>Randlösungen</strong> Bei perfekten Substituten oder bei Ecklösungen versagt die Tangentialbedingung. Dann muss direkt über Nutzenvergleich optimiert werden.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
  formeln: [

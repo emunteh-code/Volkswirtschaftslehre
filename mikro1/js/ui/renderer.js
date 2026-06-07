@@ -54,6 +54,7 @@ if (typeof window !== 'undefined') {
 prepareSemanticMathData();
 baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
+  moduleSlug: COURSE_CONFIG.slug,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
   chapters: CHAPTERS,
@@ -74,7 +75,9 @@ baseRenderer = createRenderer({
   getConceptSourceSummary,
   sourceMaterialBaseUrl: '../source-materials/Mikroökonomik I/',
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
-  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
+  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT,
+  recommendedStartConceptId: COURSE_CONFIG.recommendedStartConceptId,
+  recommendedStartTab: COURSE_CONFIG.recommendedStartTab
 });
 
 function markRenderSettled(isSettled) {

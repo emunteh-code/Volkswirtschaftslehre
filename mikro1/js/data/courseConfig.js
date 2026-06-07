@@ -5,6 +5,8 @@ export const COURSE_CONFIG = {
   /** Metadata layer; see mikro1/js/data/contentManifest.js */
   contentManifestVersion: '2026.1',
   homeIntro: 'Alle zentralen Konzepte der Vorlesung mit interaktiven Grafiken, Schritt-fuer-Schritt-Loesungen und kompakten Formelsammlungen.',
+  recommendedStartConceptId: 'budget',
+  recommendedStartTab: 'aufgaben',
   consentKey: 'mikro_consent_v1',
   examCollectionTitle: 'Probeklausuren Mikroökonomik I'
 };

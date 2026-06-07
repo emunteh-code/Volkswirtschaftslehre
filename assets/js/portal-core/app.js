@@ -5,13 +5,16 @@ import {
 import {
   parseConceptHash,
   replaceConceptHash,
-  resolveAvailableTab
+  resolveAvailableTab,
+  resolveConceptHashId
 } from './utils/hashRouting.js';
 
 export function createPortalApp({
   courseLabel,
   consentKey,
   chapters,
+  /** Optional map of short hash slugs → canonical chapter ids */
+  conceptHashAliases = {},
   appState,
   storage,
   navigation,
@@ -120,6 +123,14 @@ export function createPortalApp({
   }
 
   let applyingHashRoute = false;
+  const chapterIds = chapters.map((chapter) => chapter.id);
+
+  function resolveHashChapterId(rawConceptId) {
+    return resolveConceptHashId(rawConceptId, {
+      chapterIds,
+      aliases: conceptHashAliases
+    });
+  }
 
   function navigate(id, { tab = "theorie", updateHash = true, scrollKernidee = false } = {}) {
     const tabRow = document.getElementById("tabRow");
@@ -180,19 +191,20 @@ export function createPortalApp({
       else renderHome();
       return;
     }
-    const chapter = chapters.find((entry) => entry.id === conceptId);
+    const resolvedId = resolveHashChapterId(conceptId);
+    const chapter = resolvedId ? chapters.find((entry) => entry.id === resolvedId) : null;
     if (!chapter) return;
     applyingHashRoute = true;
     try {
-      if (appState.current !== conceptId) {
-        navigate(conceptId, { tab: tab || "theorie", updateHash, scrollKernidee });
+      if (appState.current !== chapter.id) {
+        navigate(chapter.id, { tab: tab || "theorie", updateHash, scrollKernidee });
       } else if (tab && tab !== appState.currentTab) {
         switchTab(tab, { updateHash });
         if (scrollKernidee) {
-          renderContent(conceptId, tab, initGraph, { scrollKernidee: true });
+          renderContent(chapter.id, tab, initGraph, { scrollKernidee: true });
         }
       } else if (scrollKernidee) {
-        renderContent(conceptId, tab || appState.currentTab, initGraph, { scrollKernidee: true });
+        renderContent(chapter.id, tab || appState.currentTab, initGraph, { scrollKernidee: true });
       }
     } finally {
       applyingHashRoute = false;
@@ -507,8 +519,10 @@ export function createPortalApp({
     portalBridge?.();
 
     const hashRoute = parseConceptHash();
-    const hashChapter =
-      hashRoute.conceptId && chapters.find((chapter) => chapter.id === hashRoute.conceptId);
+    const hashResolvedId = hashRoute.conceptId ? resolveHashChapterId(hashRoute.conceptId) : null;
+    const hashChapter = hashResolvedId
+      ? chapters.find((chapter) => chapter.id === hashResolvedId)
+      : null;
     const lastId = loadLastId();
     const lastExists = lastId && chapters.find((chapter) => chapter.id === lastId);
 

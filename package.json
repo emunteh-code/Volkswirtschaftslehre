@@ -8,6 +8,7 @@
     "trust:pass1": "npm run trust:pass1 --prefix tools/clickthrough",
     "build:pages-dist": "node tools/build-pages-dist.mjs",
     "build:module-meta": "node tools/exam-os/build-module-progress-meta.mjs --write",
+    "audit:official-tasks": "node tools/exam-os/build-official-task-review-backlog.mjs --write",
     "check": "npm run validate && npm run trust:pass1"
   },
   "engines": {

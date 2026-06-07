@@ -105,3 +105,23 @@ export function resolveAvailableTab(tabRow, preferred) {
   }
   return "theorie";
 }
+
+/**
+ * Map hash slug to a live chapter id (exact id, alias table, or unique prefix).
+ * @param {string|null|undefined} rawId
+ * @param {{ chapterIds?: string[], aliases?: Record<string, string> }} [opts]
+ * @returns {string|null}
+ */
+export function resolveConceptHashId(rawId, { chapterIds = [], aliases = {} } = {}) {
+  if (!rawId) return null;
+  const id = String(rawId).trim();
+  if (!id) return null;
+  if (chapterIds.includes(id)) return id;
+  const aliased = aliases[id];
+  if (aliased && chapterIds.includes(aliased)) return aliased;
+  const prefixMatches = chapterIds.filter(
+    (chapterId) => chapterId === id || chapterId.startsWith(`${id}_`)
+  );
+  if (prefixMatches.length === 1) return prefixMatches[0];
+  return null;
+}

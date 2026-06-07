@@ -37,37 +37,28 @@ const modules = current.modules.map((module) => {
   const masteryDimensions = module.masteryDimensions || 0;
   const masteryItems = module.masteryItems || 0;
   const officialFormulaCards = module.officialFormulaCards || 0;
-  const sourcedConcepts = conceptsWithSourceRefs;
   const anchorComplete =
-    sourcedConcepts > 0 &&
-    conceptsWithSourceAnchors === sourcedConcepts &&
-    (conceptsWithSourceRefs === concepts || conceptsWithoutSourceRefs > 0);
-  const examBankComplete =
-    officialTaskSourceDocs === 0
-      ? officialDocumentRegistryFamilies === 0 && taskFamilies > 0
-      : officialDocumentRegistryFamilies >= officialTaskSourceDocs;
-  const provenanceComplete = anchorComplete && sourcedConcepts > 0;
+    concepts > 0 &&
+    conceptsWithSourceRefs === concepts &&
+    conceptsWithSourceAnchors === concepts;
+  const examBankComplete = officialTaskSourceFamilies > 0;
+  const provenanceComplete = anchorComplete && (module.sourceAnchors || 0) >= concepts;
   const adaptiveReady =
     (masteryDimensions >= 4 || masteryItems >= concepts * 3) &&
     examBankComplete &&
     anchorComplete;
-  let mikro1DepthAchieved = false;
-  const parityPath = path.join(repoRoot, 'docs/audits/module-parity-vs-mikro1.generated.json');
-  if (fs.existsSync(parityPath)) {
-    const parity = readJson('docs/audits/module-parity-vs-mikro1.generated.json');
-    const row = (parity.modules || []).find((m) => m.slug === module.slug);
-    if (row) {
-      mikro1DepthAchieved = Boolean(row.anchorParity && row.formulaParity && row.taskFamilyParity);
-    }
-  }
+  const scorecardDepth = current.scorecard?.[module.slug]?.mikro1DepthAchieved || '';
+  const mikro1DepthAchieved = scorecardDepth === 'achieved';
   const anchorStatus = anchorComplete ? 'complete' : conceptsWithSourceAnchors > 0 ? 'partial' : 'missing';
   const examBankStatus = examBankComplete
     ? 'complete'
-    : officialTaskSourceDocs > 0
-      ? 'official sources present; bank not mapped'
-      : taskFamilies > 0
-        ? 'task families only; official tasks missing'
-        : 'missing';
+    : officialTaskSourceFamilies === 0 && officialTaskSourceDocs > 0
+      ? 'official source docs present; no reviewed official-task-source families'
+      : officialTaskSourceFamilies === 0 && officialTaskSourceDocs === 0
+        ? 'official task source corpus missing or unavailable'
+        : officialTaskSourceDocs > 0
+          ? 'official sources present; bank not fully mapped'
+          : 'task families only; official tasks missing';
   const provenanceStatus = provenanceComplete
     ? 'complete'
     : conceptsWithSourceRefs > 0 || conceptsWithSourceAnchors > 0
@@ -97,6 +88,7 @@ const modules = current.modules.map((module) => {
     taskFamilies,
     sourceGroundedTaskFamilies,
     officialTaskSourceFamilies,
+    officialDocumentRegistryFamilies,
     officialFormulaCards,
     masteryDimensions,
     anchorComplete,
@@ -107,14 +99,15 @@ const modules = current.modules.map((module) => {
     provenanceStatus,
     adaptiveReady,
     adaptiveStatus,
-    mikro1DepthAchieved
+    mikro1DepthAchieved,
+    scorecardDepth
   };
 });
 
 const report = {
   generatedAt: current.generatedAt,
   definitionOfDone:
-    'A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true.',
+    'A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true. Exam-bank completeness requires reviewed official-task-source families, not only portal simulations or document registry metadata.',
   modules,
   blockers: modules.flatMap((module) => {
     const blockers = [];
@@ -149,21 +142,21 @@ function toMarkdown(value) {
   lines.push('');
   lines.push('## Evidence Snapshot');
   lines.push('');
-  lines.push('| Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Official task families | Formula cards | Mastery dimensions |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|');
+  lines.push('| Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Official task families | Formula cards | Mastery dimensions |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|');
   for (const module of value.modules) {
     lines.push(
-      `| \`${module.module}\` | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
+      `| \`${module.module}\` | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialDocumentRegistryFamilies} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
     );
   }
   lines.push('');
   lines.push('## Gate Status Detail');
   lines.push('');
-  lines.push('| Module | Anchor status | Exam-bank status | Provenance status | Adaptive status |');
-  lines.push('|---|---|---|---|---|');
+  lines.push('| Module | Anchor status | Exam-bank status | Provenance status | Adaptive status | Scorecard depth |');
+  lines.push('|---|---|---|---|---|---|');
   for (const module of value.modules) {
     lines.push(
-      `| \`${module.module}\` | ${module.anchorStatus} | ${module.examBankStatus} | ${module.provenanceStatus} | ${module.adaptiveStatus} |`
+      `| \`${module.module}\` | ${module.anchorStatus} | ${module.examBankStatus} | ${module.provenanceStatus} | ${module.adaptiveStatus} | ${module.scorecardDepth || 'not certified'} |`
     );
   }
   lines.push('');

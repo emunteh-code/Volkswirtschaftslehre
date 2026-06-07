@@ -44,7 +44,7 @@ export const MODULES = [
     title: "Mikroökonomik I",
     shortTitle: "Mikro I",
     summary: "Haushalts- und Unternehmenstheorie sowie Marktgleichgewicht.",
-    examPrepNote: "A−: Theorie, Graphen, stepped Aufgaben — Primär-Drill-Modul.",
+    examPrepNote: "Theorie, Graphen und stepped Aufgaben — starker Drill-Einstieg.",
     accent: "#7c3aed",
     difficulty: "Anfänger",
     time: "45h",
@@ -67,9 +67,9 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: Oligopol & Spieltheorie exam-ready; Marktversagen ergänzend gekennzeichnet.",
+    examPrepNote: "Oligopol, Spieltheorie und GE — Ergänzungen sind gekennzeichnet.",
     sourceCorpusInRepo: true,
-    sourceStatusNote: "VL-Quellen im Repo; Ergänzungen gekennzeichnet."
+    sourceStatusNote: "Offizielle VL-PDFs im Kurs in ILIAS; Ergänzungen im Portal gekennzeichnet."
   },
   {
     slug: "makro1",
@@ -84,7 +84,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: IS-LM, Konzept-Check, stepped Aufgaben + ILIAS für Randfälle."
+    examPrepNote: "IS-LM, Konzept-Check und stepped Aufgaben — Randfälle in ILIAS."
   },
   {
     slug: "makro2",
@@ -99,7 +99,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: Offene Volkswirtschaft, Konzept-Check, Probeklausur-Simulation."
+    examPrepNote: "Offene Volkswirtschaft, Konzept-Check und Probeklausur-Simulation."
   },
   {
     slug: "oekonometrie",
@@ -114,7 +114,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative_coding",
     releaseTier: "core",
-    examPrepNote: "A−: Regression, Inferenz, R-Übung — ILIAS für Beweise."
+    examPrepNote: "Regression, Inferenz und R-Übung — Beweise in ILIAS."
   },
   {
     slug: "statistik",
@@ -129,7 +129,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: Tests, KI, R-Übung, Konzept-Check — starke Drill-Basis."
+    examPrepNote: "Tests, Konfidenzintervalle, R-Übung und Konzept-Check."
   },
   {
     slug: "finanzwirtschaft",
@@ -144,7 +144,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: NPV, Liquidität, IZF — Klausurtransfer + Konzept-Check."
+    examPrepNote: "NPV, Liquidität, IZF — Klausurtransfer und Konzept-Check."
   },
   {
     slug: "mathematik",
@@ -159,7 +159,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: Analysis, LA, Optimierung + R-Begleitpraxis."
+    examPrepNote: "Analysis, Lineare Algebra, Optimierung und R-Begleitpraxis."
   },
   {
     slug: "jahresabschluss",
@@ -174,7 +174,7 @@ export const MODULES = [
     status: "live",
     type: "mixed",
     releaseTier: "core",
-    examPrepNote: "A−: Buchungssätze, Umlauf, GoB — nummerierte Klausurketten."
+    examPrepNote: "Buchungssätze, Umlauf und GoB — nummerierte Klausurketten."
   },
   {
     slug: "recht",
@@ -189,7 +189,7 @@ export const MODULES = [
     status: "live",
     type: "text_doctrinal",
     releaseTier: "core",
-    examPrepNote: "A−: Mini-Gutachten, Norm-Zitate, Fall-Drills + Konzept-Check."
+    examPrepNote: "Mini-Gutachten, Norm-Zitate, Fall-Drills und Konzept-Check."
   },
   {
     slug: "internationale-wirtschaftsbeziehungen",
@@ -204,7 +204,7 @@ export const MODULES = [
     status: "live",
     type: "quantitative",
     releaseTier: "core",
-    examPrepNote: "A−: Ricardo, H-O, Zölle, Trilemma — Modellwahl + Konzept-Check."
+    examPrepNote: "Ricardo, H-O, Zölle, Trilemma — Modellwahl und Konzept-Check."
   }
 ];
 

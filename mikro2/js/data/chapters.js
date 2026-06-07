@@ -36,7 +36,28 @@ const MARKET_FAILURE_SOURCE_BOUNDARY = String.raw`
 export const CONTENT = {
   monopol_preissetzung: {
     motivation: 'Die ersten Mikro-II-Vorlesungen knüpfen an die Wettbewerbslogik an und fragen, wie ein Monopolist Preise setzt, warum Elastizitäten die Marktmacht begrenzen und wo Wohlfahrtsverluste entstehen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Monopol: Preissetzung, Elastizität und Wohlfahrt</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die ersten Mikro-II-Vorlesungen knüpfen an die Wettbewerbslogik an und fragen, wie ein Monopolist Preise setzt, warum Elastizitäten die Marktmacht begrenzen und wo Wohlfahrtsverluste entstehen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Grenzerlös im Monopol</strong> — Kursnotation für Grenzerlös bei fallender Nachfrage.</li><li><strong>Monopolaufschlag</strong> — Preis als Aufschlag auf Grenzkosten.</li><li><strong>Lerner-Index</strong> — Markup steigt mit Marktmacht.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Monopolpreis als Aufschlag auf Grenzkosten</h4>
@@ -67,7 +88,7 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Monopol</h4>
-<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
+<p>Standardpfad: Nachfrage $P(Q)$ → $TR=PQ$ → $MR = P + Q\,P'(Q)$ → $MR=MC$ → $Q_m$, $P_m$. Markup: Lerner-Index $(P-MC)/P = -1/\eta$. DWL = Dreieck zwischen $Q_m$ und $Q_c$ bei $P>MC$.</p>
       <div class="math-block">$$MR = MC \quad\Rightarrow\quad P\left(1+\frac{1}{\eta}\right) = MC$$</div>
 
 
@@ -79,6 +100,23 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>MR vs. Nachfrage:</strong> MR-Kurve liegt unter Nachfrage — Schnitt mit MC bestimmt $Q_m$, Preis aus Nachfrage ablesen, nicht aus MR.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -118,11 +156,26 @@ export const CONTENT = {
   },
   preisdiskriminierung: {
     motivation: 'Preisdiskriminierung ist der zweite offizielle Monopolblock: Die Portaloberfläche muss unterscheiden, ob der Monopolist Typen erkennt, Menüs anbietet oder Gruppen getrennt bepreist.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Monopolistische Preisdiskriminierung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Arten der Preisdiskriminierung</h4>
 <p>1. Grad: MR = MC je Markt. 2. Grad: Versionen/Self-Selection. 3. Grad: individuelles Pricing. Voraussetzung: Marktmacht + Arbitrage verhindern.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Preisdiskriminierung dritten Grades</strong> — Grenzerlöse werden zwischen Teilmärkten ausgeglichen.</li><li><strong>Gruppenerlös</strong> — Erlös je Kundengruppe.</li><li><strong>Gruppenerlös (Kurz)</strong> — Erlös je Kundengruppe.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -132,6 +185,16 @@ export const CONTENT = {
 <p>Bei Preisdiskriminierung dritten Grades unterscheidet der Monopolist klar abgrenzbare Gruppen und setzt gruppenspezifische Preise. In der Zwei-Gruppen-Darstellung maximiert er die Summe der Erlöse abzüglich der Kosten der Gesamtproduktion.</p>
       <div class="math-block">$$\max_{y_1,y_2}\\ \pi(y_1,y_2)=E_1(y_1)+E_2(y_2)-C(y_1+y_2)$$</div>
       <p>Die Bedingung erster Ordnung verlangt den Ausgleich der Grenzerlöse zwischen den Teilmärkten und den Grenzkosten der Gesamtproduktion.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -149,6 +212,21 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<div class="warn-box" data-warning-placement="rail"><strong>Grenzerlös ≠ Preis:</strong> Optimum aus $E_i'(y_i)=C'(y_1+y_2)$, Preise dann aus Nachfragekurven ablesen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Arbitrage ignorieren:</strong> Ohne Trennung der Teilmärkte kollabiert Diskriminierung zum einheitlichen Preis.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -178,12 +256,27 @@ export const CONTENT = {
   },
   spieltheorie_statisch: {
     motivation: 'In strategischen Situationen hängt das eigene Ergebnis nicht nur vom eigenen Handeln ab, sondern auch von den Entscheidungen anderer. Die Spieltheorie liefert das formale Instrumentarium hierfür.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Spieltheorie: Normalform &amp; Nash-Gleichgewicht</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Normalform-Spiele</h4>
 <p>Ein Spiel in Normalform besteht aus einer Menge von Spielern $i \in \\{1, \dots, n\\}$, Strategieräumen $S_i$ und Auszahlungsfunktionen $u_i(s_1, \dots, s_n)$.</p>
       <p>Die Normalform fasst alle Informationen eines simultanen Spiels in einer Auszahlungsmatrix zusammen — jede Zelle enthält die Auszahlungen beider Spieler für das jeweilige Strategieprofil.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Nash-Bedingung</strong> — Beste Antwort auf Gleichgewichtsstrategien</li><li><strong>Nash-Bedingung (Kurz)</strong> — Beste Antwort auf Gleichgewichtsstrategien</li><li><strong>Nash-Bedingung (Kurz) (Kurz)</strong> — Beste Antwort auf Gleichgewichtsstrategien</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -228,7 +321,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Nash in Normalform</h4>
 <p>Matrix aufstellen → beste Antwort auf gegebene Strategie des Gegners (BR) → Schnittpunkt der BR-Korrespondenzen = Nash. Strikte Dominanz zuerst prüfen — eliminiert Zeilen/Spalten.</p>
-      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*)\\ \forall s_i$$</div>
+      <div class="math-block">$$u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*)\ \forall s_i$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -244,6 +337,26 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Dominanz ≠ Nash:</strong> Eliminierte Strategien nie im Nash — aber Nash kann existieren ohne dominante Strategie.</div>
+<div class="warn-box"><strong>NG vs. Pareto-Optimum:</strong> Ein Nash-Gleichgewicht muss nicht effizient sein (siehe Gefangenendilemma). Die Spieler optimieren individuell, nicht kollektiv.</div>
+<div class="warn-box"><strong>Mehrfache NG:</strong> Ein Spiel kann mehrere Nash-Gleichgewichte haben (z.B. Koordinationsspiele). Das Nash-Konzept sagt nichts darüber, auf welches GG die Spieler sich koordinieren — Gleichgewichtsselektion erfordert verfeinerte Konzepte (z.B. Risicodominanz, Payoff-Dominanz).</div>
+<div class="warn-box"><strong>Dominanz ≠ Nash:</strong> Eliminierte Strategien nie im Nash — aber Nash kann existieren ohne dominante Strategie.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -284,7 +397,28 @@ export const CONTENT = {
   },
   spieltheorie_dynamisch: {
     motivation: 'Sobald reine Strategien nicht ausreichen, werden gemischte Strategien und wiederholte Interaktion prüfungsrelevant: Stabilität entsteht dann über Indifferenzbedingungen und Sanktionslogik.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Spieltheorie: Gemischte Strategien &amp; Wiederholung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Sobald reine Strategien nicht ausreichen, werden gemischte Strategien und wiederholte Interaktion prüfungsrelevant: Stabilität entsteht dann über Indifferenzbedingungen und Sanktionslogik.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Gemischtes NG</strong> — Beste Antwort in gemischten Strategien.</li><li><strong>Kooperationsbedingung</strong> — Folk-Theorem-Logik für Trigger-Strategien.</li><li><strong>Kooperationsbedingung (Kurz)</strong> — Folk-Theorem-Logik für Trigger-Strategien.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Gemischte Strategien</h4>
@@ -321,6 +455,23 @@ export const CONTENT = {
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Zeit vs. Strategieraum:</strong> Dynamik = Reihenfolge und Information; nicht jede Wiederholung ist automatisch „dynamisches Spiel" ohne Entscheidungsbaum.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Gemischtes NG', eq: String.raw`$$\sigma_i^* \in \arg\max_{\sigma_i} E[u_i(\sigma_i,\sigma_{-i}^*)]$$`, desc: 'Beste Antwort in gemischten Strategien.' },
@@ -351,7 +502,28 @@ export const CONTENT = {
   },
   oligopol_cournot_bertrand: {
     motivation: 'Oligopole beschreiben Märkte mit wenigen Anbietern, die strategisch interagieren. Wir unterscheiden Mengenwettbewerb (Cournot) und Preiswettbewerb (Bertrand).',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Oligopol: Cournot- und Bertrand-Wettbewerb</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Oligopole beschreiben Märkte mit wenigen Anbietern, die strategisch interagieren. Wir unterscheiden Mengenwettbewerb (Cournot) und Preiswettbewerb (Bertrand).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Gewinnfunktion (i)</strong> — Lineare Nachfrage</li><li><strong>Cournot-Menge (symm.)</strong> — Duopol-Gleichgewicht</li><li><strong>Cournot-Menge (symm.) (Kurz)</strong> — Duopol-Gleichgewicht</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Cournot-Wettbewerb</h4>
@@ -397,7 +569,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Cournot vs. Bertrand</h4>
 <p>Cournot: Mengenwettbewerb, RR $q_i^*(q_j)$, Schnitt = Nash in Mengen. Homogene Güter + Bertrand: Preiswettbewerb → $P=MC$, wie Wettbewerb (Bertrand-Paradox). Differenzierung rettet $P>MC$.</p>
-      <div class="math-block">$$q_i^*:\\ \frac{\partial \pi_i}{\partial q_i} = 0 \quad\text{(Cournot)}\qquad P_1=P_2=MC  \text{(Bertrand, homogen)}$$</div>
+      <div class="math-block">$$q_i^*:\ \frac{\partial \pi_i}{\partial q_i} = 0 \quad\text{(Cournot)}\qquad P_1=P_2=MC\ \text{(Bertrand, homogen)}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -413,6 +585,25 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Paradox nicht vergessen:</strong> Bertrand mit homogenem Gut und $MC$ konstant → Preis = MC; Cournot bei gleichen Kosten → $P>MC$. Modellwahl entscheidet Marktergebnis.</div>
+<div class="warn-box"><strong>Cournot vs. Bertrand:</strong> Bei identischen Gütern und ohne Kapazitätsbeschränkungen führt Bertrand-Wettbewerb zu Wettbewerbspreisen — Cournot hingegen zu einem Ergebnis zwischen Monopol und Wettbewerb. Die Modellwahl hängt davon ab, ob Firmen über Preise oder Mengen entscheiden.</div>
+<div class="warn-box"><strong>Paradox nicht vergessen:</strong> Bertrand mit homogenem Gut und $MC$ konstant → Preis = MC; Cournot bei gleichen Kosten → $P>MC$. Modellwahl entscheidet Marktergebnis.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -462,11 +653,26 @@ export const CONTENT = {
   },
   oligopol_stackelberg: {
     motivation: 'Wenn Mengenentscheidungen sequenziell getroffen werden, entsteht eine Führungslogik: Der First-Mover antizipiert die Reaktion des Folgers und verschiebt damit das Gleichgewicht.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Oligopol: Stackelberg und Führerschaft</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stackelberg-Grundidee</h4>
 <p>Im Stackelberg-Modell wählt der Führer seine Menge zuerst. Der Folger reagiert anschließend optimal auf diese Führungsmenge. Das Ergebnis ist kein simultanes Nash wie bei Cournot, sondern ein sequenzielles Gleichgewicht.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Führermenge</strong> — Optimale Menge des First Movers bei linearer Nachfrage.</li><li><strong>Folgerreaktion</strong> — Beste Antwort des Followers auf die Führermenge.</li><li><strong>Folgerreaktion (Kurz)</strong> — Beste Antwort des Followers auf die Führermenge.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -496,6 +702,22 @@ export const CONTENT = {
 <p>Klausurpfad: Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Commitment:</strong> Stackelberg setzt voraus, dass Leader-Menge bindend ist — sonst Cournot oder Bertrand je nach Modell.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Führermenge', eq: String.raw`$$q_1^{Stack} = \frac{a-c}{2b}$$`, desc: 'Optimale Menge des First Movers bei linearer Nachfrage.' },
@@ -523,12 +745,27 @@ export const CONTENT = {
   },
   intertemporaler_konsum: {
     motivation: 'Vorlesung 12 überträgt die Mikro-I-Haushaltslogik auf zwei Perioden: Konsum heute und Konsum morgen werden als zwei Güter im intertemporalen Entscheidungsproblem behandelt.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Intertemporaler Konsum</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Zwei Perioden, ein Konsumgut</h4>
 <p>Der Haushalt lebt in Periode 1 und 2. Das Konsumgut hat in beiden Perioden den normierten Preis 1. Die Entscheidung lautet: heute konsumieren, sparen oder sich verschulden.</p>
       <p>Die offizielle Notation verwendet $c_1$ für Gegenwartskonsum, $c_2$ für Zukunftskonsum, $m_1$ und $m_2$ für Einkommen sowie $r$ für den Zinssatz.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Gegenwartswert-Budget</strong> — Intertemporale Budgetbeschränkung in Gegenwartswerten.</li><li><strong>Zukunftswert-Budget</strong> — Äquivalente Schreibweise in Zukunftswerten.</li><li><strong>Euler-Gleichung</strong> — Gleichgewichtsbedingung bei additiver Nutzenfunktion.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -576,6 +813,23 @@ export const CONTENT = {
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Realzins:</strong> In Klausuren $r$ als realer Zins interpretieren, wenn Inflation nicht modelliert wird.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Gegenwartswert-Budget', eq: String.raw`$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$`, desc: 'Intertemporale Budgetbeschränkung in Gegenwartswerten.' },
@@ -613,12 +867,27 @@ export const CONTENT = {
   },
   unsicherheit_versicherung: {
     motivation: 'Vorlesungen 13 und 14 modellieren Unsicherheit als bedingten Konsum in Naturzuständen und leiten Erwartungsnutzen, Risikoaversion und Versicherungsnachfrage ab.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Unsicherheit, Erwartungsnutzen und Versicherung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Bedingter Konsum</h4>
 <p>Unsichere Ereignisse werden als Naturzustände modelliert. Konsum im Zustand „Schaden“ und Konsum im Zustand „kein Schaden“ sind die beiden Güter der Entscheidung.</p>
       <p>Die Kursnotation verwendet $c_1$ für Konsum im Schadenszustand, $c_2$ für Konsum ohne Schaden, $m_1=m-d$ und $m_2=m$ für die zustandsabhängigen Ausstattungen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Erwartungsnutzen</strong> — Nutzen über zwei Naturzustände.</li><li><strong>Faire Prämie</strong> — Nullgewinnbedingung im einfachen Versicherungsmodell.</li><li><strong>Risikoprämie</strong> — Differenz zwischen Erwartungswert und Sicherheitsäquivalent.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -647,6 +916,22 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>NM vs. andere Utility:</strong> Vollversicherung bei fairer Prämie nur bei NM-Utility — bei DARA typischerweise unterversichert.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -685,12 +970,27 @@ export const CONTENT = {
   },
   gleichgewicht_tausch: {
     motivation: 'Bisher haben wir Märkte isoliert betrachtet (Partialanalyse). Das allgemeine Gleichgewicht betrachtet alle Märkte gleichzeitig und analysiert Tausch- und Produktionseffizienz.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Allgemeines Gleichgewicht: Tausch, Edgeworth, Kontraktkurve</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die Edgeworth-Box</h4>
 <p>Zwei Konsumenten tauschen zwei Güter. Jeder Punkt in der Box stellt eine Aufteilung der Gesamtausstattung dar. Indifferenzkurven verlaufen für Konsument A vom Ursprung unten links, für B von oben rechts.</p>
       <p>Ein Tausch ist vorteilhaft, wenn er einen Konsumenten besser stellt, ohne den anderen schlechter zu stellen. Die Linse zwischen zwei sich schneidenden Indifferenzkurven zeigt alle solche Tauschrichtungen an.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Effizienzbedingung</strong> — Gleichheit der Grenzraten der Substitution</li><li><strong>Effizienzbedingung (Kurz)</strong> — Gleichheit der Grenzraten der Substitution</li><li><strong>Effizienzbedingung (Kurz) (Kurz)</strong> — Gleichheit der Grenzraten der Substitution</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -735,6 +1035,24 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Pareto-Effizienz ≠ Gerechtigkeit:</strong> Ein Punkt auf der Kontraktkurve kann extrem ungleich verteilt sein. Pareto-Effizienz ist ein schwaches Kriterium — es urteilt nicht über Verteilungsgerechtigkeit.</div>
+<div class="warn-box"><strong>Walrasianisches GG vs. allgemeines GG:</strong> Das Walrasianische GG setzt vollkommene Märkte, vollständige Information und Preisflexibilität voraus. In der Realität können Marktversagen und Preisrigiditäten ein allgemeines Ungleichgewicht erzeugen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -783,7 +1101,28 @@ export const CONTENT = {
   },
   gleichgewicht_walras: {
     motivation: 'Walrasianische Gleichgewichte fokussieren auf Preisvektoren und gleichzeitige Markt-Räumung statt auf reine Tauschgeometrie.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Allgemeines Gleichgewicht: Walras &amp; Markt-Räumung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Walrasianische Gleichgewichte fokussieren auf Preisvektoren und gleichzeitige Markt-Räumung statt auf reine Tauschgeometrie.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Markträumung</strong> — Überschussnachfrage verschwindet im Gleichgewicht.</li><li><strong>Walrasches Gesetz</strong> — Aggregierte Überschussnachfrage über alle Märkte.</li><li><strong>Budgetrestriktion</strong> — Haushalt i kann Endowment nicht überschreiten.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Überschussnachfrage und Preisvektor</h4>
@@ -831,6 +1170,24 @@ export const CONTENT = {
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Preis- statt Geometriefehler:</strong> In Walras-Aufgaben muss über Budgeteinkommen, Nachfragefunktionen und Räumungsbedingungen argumentiert werden, nicht nur über Tangentialbilder.</div>
+<div class="warn-box"><strong>Existenz vs. Eindeutigkeit:</strong> Das Walras-Theorem zur Existenz eines GG unter Standardannahmen ist kein Eindeutigkeitsresultat. Mehrere Gleichgewichte sind möglich.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Markträumung', eq: String.raw`$$z_i(p^*)=0 \quad \forall i$$`, desc: 'Überschussnachfrage verschwindet im Gleichgewicht.' },
@@ -869,7 +1226,28 @@ export const CONTENT = {
   },
   gleichgewicht_produktion: {
     motivation: 'Vorlesung 17 erweitert das allgemeine Gleichgewicht um Produktion: Aus einer reinen Tauschkiste wird eine Ökonomie mit Konsumenten, Gütern und Produktionsfaktoren.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Allgemeines Gleichgewicht mit Produktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Vorlesung 17 erweitert das allgemeine Gleichgewicht um Produktion: Aus einer reinen Tauschkiste wird eine Ökonomie mit Konsumenten, Gütern und Produktionsfaktoren.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Vollbeschäftigung Kapital</strong> — Gesamtbestand Kapital wird zwischen Sektoren aufgeteilt.</li><li><strong>Vollbeschäftigung Arbeit</strong> — Gesamtbestand Arbeit wird zwischen Sektoren aufgeteilt.</li><li><strong>Produktionseffizienz</strong> — Tangentialbedingung der Isoquanten in der Faktor-Box.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Modellrahmen mit Produktion</h4>
@@ -902,6 +1280,23 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Annahmen:</strong> WE-Existenz braucht Konvexität, vollständige Märkte — bei Externalitäten scheitert 1. HS.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -941,12 +1336,27 @@ export const CONTENT = {
   },
   wohlfahrt_theoreme: {
     motivation: 'Die Wohlfahrtstheoreme schlagen die Brücke zwischen Marktgleichgewicht und gesellschaftlicher Wünschenswertigkeit.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Wohlfahrt: 1./2. Hauptsatz</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">1. Hauptsatz der Wohlfahrtsökonomik</h4>
 <p>Jedes Wettbewerbsgleichgewicht (bei Abwesenheit von Marktversagen) führt zu einer Pareto-effizienten Allokation. Der Markt ist somit ein Mechanismus zur Erzielung von Effizienz.</p>
       <p>Voraussetzungen: Vollkommene Märkte, keine Externalitäten, keine öffentlichen Güter, vollständige Information. Bei Verletzung dieser Bedingungen ist Marktversagen möglich.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Utilitaristisch</strong> — Summe der Nutzen</li><li><strong>Rawlsianisch</strong> — Fokus auf den Schwächsten</li><li><strong>Rawlsianisch (Kurz)</strong> — Fokus auf den Schwächsten</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -991,6 +1401,24 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Utilitarismus vs. Rawls:</strong> Beide Wohlfahrtsfunktionen können zu unterschiedlichen Politikempfehlungen führen. Ein utilitaristischer Planer kann extreme Ungleichheit tolerieren, wenn der Gesamtnutzen steigt — ein Rawlsianischer nicht.</div>
+<div class="warn-box"><strong>Pauschalsteuern in der Praxis:</strong> Der 2. Hauptsatz erfordert beobachtbare individuelle Ausstattungen. Da diese Information oft nicht vorliegt (Informationsasymmetrie), ist die praktische Umsetzung stark eingeschränkt.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1039,7 +1467,28 @@ export const CONTENT = {
   },
   wohlfahrt_messung: {
     motivation: 'Wohlfahrtsmessung trennt normative Bewertungskriterien und messbare Surplus-/DWL-Rechnung als eigenen Klausurblock.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Wohlfahrt: Messung (KR, PR, DWL, SWF)</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Wohlfahrtsmessung trennt normative Bewertungskriterien und messbare Surplus-/DWL-Rechnung als eigenen Klausurblock.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Utilitaristisch</strong> — Summe der Nutzen.</li><li><strong>Rawlsianisch</strong> — Fokus auf den Schwächsten.</li><li><strong>Konsumentenrente (linear)</strong> — Dreieck unter der Nachfrage.</li><li><strong>DWL</strong> — Verlust gegenüber Wettbewerbsoptimum.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wohlfahrtsfunktionen</h4>
@@ -1092,7 +1541,7 @@ export const CONTENT = {
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
-<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\frac{1}{2}|\eta|\\,t^2\\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
+<p>Policy-Bewertung: Gewinner/Verlierer benennen; Kompensation hypothetisch (Kaldor-Hicks). Steuer-DWL: $\frac{1}{2}|\eta|\,t^2\,P_0 Q_0$ Näherung bei kleinem $t$.</p>
       <div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
 
 
@@ -1104,6 +1553,25 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
+<div class="warn-box"><strong>Surplus vs. Nutzen:</strong> KR/PR messen ökonomische Surplus in Geld, nicht Kardinalnutzen. Nutzenvergleiche über Personen sind mit Wohlfahrtsfunktionen zu begründen.</div>
+<div class="warn-box"><strong>CS vs. CV/EV:</strong> Konsumentenrente ist Näherung bei kleinen Preisänderungen — bei großen Schocks CV/EV präziser.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1141,7 +1609,28 @@ export const CONTENT = {
   },
   externa_pigou: {
     motivation: 'Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Externe Effekte: Pigou-Internalisierung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Marktversagen tritt auf, wenn Marktpreise nicht die wahren gesellschaftlichen Kosten oder Nutzen widerspiegeln. Externe Effekte sind das klassische Beispiel.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Pigou-Steuer</strong> — Steuer = Grenzschaden im Optimum</li><li><strong>Pigou-Steuer (Kurz)</strong> — Steuer = Grenzschaden im Optimum</li><li><strong>Pigou-Steuer (Kurz) (Kurz)</strong> — Steuer = Grenzschaden im Optimum</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Negative Externe Effekte</h4>
@@ -1197,6 +1686,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Pigou-Steuer bei Unsicherheit:</strong> Die optimale Pigou-Steuer erfordert Kenntnis des gesellschaftlichen Optimums. Bei Unsicherheit über $MEC$ kann die Steuer zu hoch oder zu niedrig sein — dann ist Cap-and-Trade der Steuer vorzuziehen (bei steilen Grenzkostenkurven).</div>
       <div class="warn-box"><strong>Coase-Theorem in der Praxis:</strong> Das Coase-Theorem gilt nur bei null Transaktionskosten und wenigen Beteiligten. Bei Umweltproblemen mit vielen Betroffenen (Klimawandel, Luftverschmutzung) ist staatliche Intervention unumgänglich.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Pigou-Steuer', eq: String.raw`$$t = MEC(Q^*)$$`, desc: 'Steuer = Grenzschaden im Optimum', variables: { MEC: 'marginale externe Kosten', Q_star: 'gesellschaftlich optimale Menge' } }
@@ -1245,11 +1742,26 @@ export const CONTENT = {
   },
   externa_institutionen: {
     motivation: 'Neben Steuer-Internalisierung braucht die Klausur trennscharfe Beherrschung institutioneller Ansätze: Coase-Verhandlung und Cap-and-Trade.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Externe Effekte: Coase &amp; Emissionshandel</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Coase &amp; Handel</h4>
 <p><em>platform-added-explanation:</em> Bei klaren Eigentumsrechten und niedrigen Transaktionskosten private Verhandlung effizient; bei vielen Betroffenen scheitert Coase.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Preis-Mengen-Äquivalenz</strong> — Äquivalenzidee bei idealen Bedingungen.</li><li><strong>Preis-Mengen-Äquivalenz (Kurz)</strong> — Äquivalenzidee bei idealen Bedingungen.</li><li><strong>Preis-Mengen-Äquivalenz (Kurz) (Kurz)</strong> — Äquivalenzidee bei idealen Bedingungen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1287,6 +1799,14 @@ export const CONTENT = {
 <div class="warn-box"><strong>Coase-Grenzen:</strong> Viele Betroffene und hohe Verhandlungskosten unterminieren private Effizienzverhandlungen.</div>
       <div class="warn-box"><strong>Instrumentenfehler:</strong> Cap-and-Trade und Pigou-Steuer sind in der Zielsetzung verwandt, aber unterschiedlich in Preis- vs. Mengensteuerung unter Unsicherheit.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Preis-Mengen-Äquivalenz', eq: String.raw`$$t_{Pigou} = MEC(Q^*) \Leftrightarrow \text{Cap auf }Q^*$$`, desc: 'Äquivalenzidee bei idealen Bedingungen.' }
@@ -1303,11 +1823,26 @@ export const CONTENT = {
   },
   public_goods: {
     motivation: 'Öffentliche Güter sind durch Nicht-Rivalität und Nicht-Ausschließbarkeit gekennzeichnet. Dies führt zum Trittbrettfahrer-Problem.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Öffentliche Güter</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Non-Rivalität &amp; Non-Excludability</h4>
 <p><em>platform-added-explanation:</em> Öffentliches Gut: $MC_{extra}=0$; freiwillige Finanzierung führt zum Trittbrettfahren → Unterprovision.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Samuelson</strong> — Effizienzbedingung für öffentliche Güter</li><li><strong>Samuelson (Kurz)</strong> — Effizienzbedingung für öffentliche Güter</li><li><strong>Samuelson (Kurz) (Kurz)</strong> — Effizienzbedingung für öffentliche Güter</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1349,6 +1884,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box"><strong>Vertikale vs. horizontale Aggregation:</strong> Bei privaten Gütern addieren wir individuelle Nachfragen horizontal (gleicher Preis, verschiedene Mengen). Bei öffentlichen Gütern addieren wir Zahlungsbereitschaften vertikal (gleiche Menge, verschiedene Preise). Verwechslung führt zu falschen Optimalmengen.</div>
       <div class="warn-box"><strong>Lindahl-Gleichgewicht und strategisches Verhalten:</strong> Der Lindahl-Mechanismus ist theoretisch effizient, aber praktisch problematisch: Individuen haben einen Anreiz, ihre Zahlungsbereitschaft zu untertreiben (Preference Revelation Problem).</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1406,12 +1949,27 @@ export const CONTENT = {
   },
   information_adverse: {
     motivation: 'Adverse Selection behandelt ex-ante Informationsasymmetrien: verborgene Typen vor Vertragsabschluss können gute Qualität aus dem Markt drängen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Asymmetrische Information: Adverse Selection</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Adverse Selection (Negativauslese)</h4>
 <p>Tritt <strong>vor</strong> Vertragsschluss auf. Beispiel "Lemons-Market": Käufer kennen die Qualität gebrauchter Autos nicht und zahlen nur den Durchschnittspreis. Verkäufer guter Autos ziehen sich zurück, die Qualität sinkt weiter.</p>
       <p>Resultat: Nur schlechte Qualitäten bleiben am Markt ("race to the bottom"). Im Extremfall vollständiger Marktversagen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Erwarteter Wert</strong> — Preis bei Unwissenheit</li><li><strong>Erwarteter Wert (Kurz)</strong> — Preis bei Unwissenheit</li><li><strong>Erwarteter Wert (Kurz) (Kurz)</strong> — Preis bei Unwissenheit</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1445,6 +2003,22 @@ export const CONTENT = {
 <p>Klausurpfad: Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Ex-ante vs. ex-post:</strong> Adverse Selection = vor Vertrag (Typ unbekannt). Moral Hazard = nach Vertrag (Aktion unbeobachtbar) — nicht verwechseln.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Erwarteter Wert', eq: String.raw`$$E[v] = q \cdot v_H + (1-q) \cdot v_L$$`, desc: 'Preis bei Unwissenheit', variables: { q: 'Anteil hoher Qualität', v_H: 'Wert hoher Qualität', v_L: 'Wert niedriger Qualität' } }
@@ -1474,11 +2048,26 @@ export const CONTENT = {
   },
   information_moralhazard: {
     motivation: 'Moral Hazard und Signaling/Screening behandeln ex-post Handlungsprobleme bzw. Trennmechanismen bei asymmetrischer Information.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Asymmetrische Information: Moral Hazard, Signaling &amp; Screening</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Moral Hazard (Hidden Action)</h4>
 <p>Nach Vertragsabschluss kann der Prinzipal die Handlung des Agenten nur unvollständig beobachten. Ohne passende Anreize sinkt die gewünschte Anstrengung — klassisch: Versicherung senkt Vorsicht, Managervertrag ohne Performance-Kopplung.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Prinzipalziel</strong> — Vertragswahl unter versteckter Handlung.</li><li><strong>IC-Bedingung</strong> — Agent wählt gewünschte Anstrengung.</li><li><strong>Separierendes Signal</strong> — Beispielbereich Spence-Signaling (qualitativ).</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1539,6 +2128,25 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurpfad</h4>
 <p>Ergänzung (platform-added-explanation) aus offiziellem Mikro-II-Korpus.</p>
       <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Partizipation vs. Anreiz:</strong> Beide Nebenbedingungen (IR + IC) prüfen — nur IC reicht nicht für Gleichgewicht.</div>
+<div class="warn-box"><strong>Adverse Selection vs. Moral Hazard:</strong> Ex-ante Typproblem (vor Vertrag) und ex-post Verhaltensproblem (nach Vertrag) erfordern unterschiedliche Instrumente.</div>
+<div class="warn-box"><strong>Partizipation vs. Anreiz:</strong> Beide Nebenbedingungen (IR + IC) prüfen — nur IC reicht nicht für Gleichgewicht.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [

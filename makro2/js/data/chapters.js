@@ -56,12 +56,41 @@ export const CHAPTERS = [
 export const CONTENT = {
   zahlungsbilanz: {
     motivation: 'Die Zahlungsbilanz ist die Buchhaltung der offenen Volkswirtschaft. Wer Leistungsbilanz, Kapitalbilanz und Nettoauslandsvermögen nicht sauber trennt, stolpert später bei Wechselkursen, Fiskalpolitik und Schuldenfragen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Zahlungsbilanz &amp; Nettoauslandsvermögen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Zahlungsbilanz ist die Buchhaltung der offenen Volkswirtschaft. Wer Leistungsbilanz, Kapitalbilanz und Nettoauslandsvermögen nicht sauber trennt, stolpert später bei Wechselkursen, Fiskalpolitik und Schuldenfragen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Zahlungsbilanzidentität</strong> — Gesamtbuchhaltung der offenen Volkswirtschaft</li><li><strong>Sparen und Investieren</strong> — Makroökonomische Deutung des Leistungsbilanzsaldos</li><li><strong>Nettoauslandsvermögen</strong> — Leistungsbilanz verändert die Nettoauslandsposition</li><li><strong>S-I Identität offen</strong> — Leistungsbilanz und Ersparnis-Investitions-Saldo.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Leistungsbilanz und Finanzierung</h4>
 <p>Die Leistungsbilanz misst Waren-, Dienstleistungs- und Einkommensströme mit dem Ausland. Ein Defizit bedeutet: Die Volkswirtschaft konsumiert/ investiert mehr als sie spart — spiegelbildlich Kapitalimporte.</p>
       <div class="math-block">$$CA + KA + \Delta R = 0$$</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -75,6 +104,22 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Handelsbilanz:</strong> Handelsbilanz ⊂ Leistungsbilanz; Zins- und Transferströme können den Saldo drehen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -97,7 +142,28 @@ export const CONTENT = {
 
   wechselkurs: {
     motivation: 'Makro II arbeitet durchgehend mit Wechselkursnotation. Wer hier Mengennotierung, reale Auf- und Abwertung und Preisniveaulogik unsauber hält, verliert den Faden in PPP, UIP und Mundell-Fleming.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Nominaler und realer Wechselkurs</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Makro II arbeitet durchgehend mit Wechselkursnotation. Wer hier Mengennotierung, reale Auf- und Abwertung und Preisniveaulogik unsauber hält, verliert den Faden in PPP, UIP und Mundell-Fleming.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Nominaler Wechselkurs</strong> — Mengennotierung</li><li><strong>Realer Wechselkurs</strong> — Preisliche Wettbewerbsfähigkeit</li><li><strong>Nominaler Wechselkurs (Merksatz)</strong> — Mengennotierung</li><li><strong>Realer Wechselkurs</strong> — Preisniveau-Korrektur.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Nominal vs. real</h4>
@@ -110,6 +176,8 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Appreciation und Wettbewerbsfähigkeit</h4>
 <p>Eine nominale Aufwertung bei gegebenen Preisniveaus verschlechtert die relative Wettbewerbsfähigkeit und drückt typischerweise $NX$.</p>
+<p><strong>Mengennotation (VL):</strong> Steigt $E$ in „Einheiten Ausland pro Inland“, kauft eine Inlandseinheit mehr Fremdwährung — das ist nominale Aufwertung, nicht Abwertung. Erst $\varepsilon = E P^*/P$ verbindet Nominalkurs und Preisniveaus für die Wettbewerbsfähigkeit.</p>
+<p><em>source-distilled:</em> Aus Makro-II-VL und Übungs-Trap-Checks; Notation in Primär-PDFs prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -118,6 +186,21 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -148,11 +231,26 @@ export const CONTENT = {
 
   kaufkraftparitaet: {
     motivation: 'PPP ist der Brückensatz zwischen Preisniveaus und Wechselkursen. In Makro II wird damit sauber zwischen Niveauaussagen, Änderungsraten und systematischen Abweichungen unterschieden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Kaufkraftparität</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Absolute PPP</h4>
 <p>Absolute Kaufkraftparität: gleiche Preisniveaus implizieren $E = P/P^*$. Langfristige Niveauaussage, kurzfristig oft verletzt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Absolute PPP</strong> — PPP-Kurs aus Preisniveaus</li><li><strong>Relative PPP</strong> — Änderungsratenform</li><li><strong>Absolute PPP (Merksatz)</strong> — PPP-Kurs aus Preisniveaus</li><li><strong>Relative PPP</strong> — Inflationsdifferenz und WK-Entwicklung.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -163,12 +261,37 @@ export const CONTENT = {
       <div class="math-block">$$\hat{E} \approx \pi - \pi^*$$</div>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<div class="section-block">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
+</div>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -190,7 +313,28 @@ export const CONTENT = {
 
   zinsparitaet: {
     motivation: 'Die ungedeckte Zinsparität ist die Arbitragegleichung der offenen Makro. Sie verknüpft Zinsdifferenzen, Wechselkurserwartungen und die unmittelbare Kursreaktion.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Ungedeckte Zinsparität</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die ungedeckte Zinsparität ist die Arbitragegleichung der offenen Makro. Sie verknüpft Zinsdifferenzen, Wechselkurserwartungen und die unmittelbare Kursreaktion.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Exakte UIP</strong> — Arbitragegleichgewicht</li><li><strong>Approximative UIP</strong> — Zinsdifferenz = erwartete Abwertungsrate</li><li><strong>Exakte UIP (Merksatz)</strong> — Arbitragegleichgewicht</li><li><strong>UIP</strong> — Zins- und Erwartungskanal.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Exakte UIP</h4>
@@ -227,6 +371,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>UIP ist keine Prognose:</strong> UIP beschreibt Arbitragegleichgewicht, nicht kausal „Zins bestimmt Kurs". Erwartungen und Risikoprämien können UIP verletzen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Exakte UIP', eq: String.raw`$$1 + i_t = (1 + i_t^*) \frac{E_t}{E_{t+1}^e}$$`, desc: 'Arbitragegleichgewicht', variables: { 'i_t': 'Inlandszins', 'i_t^*': 'Auslandszins', 'E_t': 'Aktueller WK', 'E_{t+1}^e': 'Erwarteter WK' } },
@@ -256,7 +416,28 @@ export const CONTENT = {
 
   offene_is: {
     motivation: 'Der offene Gütermarkt erweitert die geschlossene Makro um Exportnachfrage, Importe und Multiplikatorleckagen. Genau hier beginnt der Übergang von Binnenlogik zu offener Makroökonomie.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Offener Gütermarkt &amp; Multiplikator</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Der offene Gütermarkt erweitert die geschlossene Makro um Exportnachfrage, Importe und Multiplikatorleckagen. Genau hier beginnt der Übergang von Binnenlogik zu offener Makroökonomie.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Offenes Gütermarktgleichgewicht</strong> — Gleichgewicht der Nachfrage nach inländischen Gütern</li><li><strong>Offener Multiplikator</strong> — Importe dämpfen die Multiplikatorwirkung</li><li><strong>Offenes Gütermarktgleichgewicht (Merksatz)</strong> — Gleichgewicht der Nachfrage nach inländischen Gütern</li><li><strong>Offener Multiplikator</strong> — Importleckage $m$.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">ZZ-Kurve und Inlandsnachfrage</h4>
@@ -283,6 +464,23 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Schock aus dem Ausland:</strong> Boom im Ausland ($Y^*$↑) wirkt über Exporte expansiv auf $Y$.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Multiplikator geschlossen vs. offen:</strong> Der geschlossene Multiplikator $1/(1-c_1)$ überschätzt die Wirkung: Importe sind eine Leckage aus dem Inland.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Offenes Gütermarktgleichgewicht', eq: String.raw`$$Y = C + I + G + NX$$`, desc: 'Gleichgewicht der Nachfrage nach inländischen Gütern', variables: { 'NX': 'Nettoexporte' } },
@@ -293,7 +491,28 @@ export const CONTENT = {
 
   nettoexporte: {
     motivation: 'Nettoexporte sind das Gelenk zwischen Wechselkurs, Auslandskonjunktur und inländischer Nachfrage. Genau über sie laufen viele offene Schocks in Output und Beschäftigung hinein.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Nettoexporte &amp; Wettbewerbsfähigkeit</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Nettoexporte sind das Gelenk zwischen Wechselkurs, Auslandskonjunktur und inländischer Nachfrage. Genau über sie laufen viele offene Schocks in Output und Beschäftigung hinein.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Nettoexportfunktion</strong> — Gütermarktkanal der offenen Volkswirtschaft</li><li><strong>Nettoexportfunktion (Merksatz)</strong> — Gütermarktkanal der offenen Volkswirtschaft</li><li><strong>NX-Funktion</strong> — Export minus Import.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Determinanten der Nettoexporte</h4>
@@ -324,6 +543,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Nominal vs. real:</strong> NX-Reaktionen laufen über den realen Wechselkurs $\varepsilon = EP^*/P$. Nur nominale Kursänderung ohne Preisniveau reicht nicht.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Nettoexportfunktion', eq: String.raw`$$NX = X(Y^*,\varepsilon) - \frac{IM(Y,\varepsilon)}{\varepsilon}$$`, desc: 'Gütermarktkanal der offenen Volkswirtschaft', variables: { 'Y': 'Inlandseinkommen', 'Y^*': 'Auslandseinkommen', '\\varepsilon': 'Realer WK' } }
@@ -343,7 +578,28 @@ export const CONTENT = {
 
   marshall_lerner: {
     motivation: 'Eine Abwertung verbessert die Handelsbilanz nicht automatisch. Marshall-Lerner und J-Kurve trennen sauber zwischen langfristigen Elastizitätseffekten und kurzfristigen Vertragseffekten.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Marshall-Lerner-Bedingung &amp; J-Kurve</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Eine Abwertung verbessert die Handelsbilanz nicht automatisch. Marshall-Lerner und J-Kurve trennen sauber zwischen langfristigen Elastizitätseffekten und kurzfristigen Vertragseffekten.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Marshall-Lerner-Bedingung</strong> — Langfristige Verbesserung der Handelsbilanz nach Abwertung</li><li><strong>Richtungseffekt</strong> — Bei Mengennotierung verbessert fallendes $\varepsilon$ die Handelsbilanz</li><li><strong>Marshall-Lerner-Bedingung (Merksatz)</strong> — Langfristige Verbesserung der Handelsbilanz nach Abwertung</li><li><strong>Marshall-Lerner</strong> — Elastizitätssumme.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Langfristbedingung</h4>
@@ -388,6 +644,14 @@ export const CONTENT = {
 <div class="warn-box" data-warning-placement="rail"><strong>Langfristig vs. kurzfristig:</strong> Marshall-Lerner ist eine Langfristaussage über Elastizitäten. Für die unmittelbare Wirkung nach einer Abwertung muss zuerst an die J-Kurve gedacht werden.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Vorzeichen in Mengennotierung:</strong> In der hier verwendeten Notation ist eine Abwertung ein Rückgang von $\varepsilon$. Wer das übersieht, interpretiert Ableitungen schnell falsch.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Marshall-Lerner-Bedingung', eq: String.raw`$$|\eta_X| + |\eta_M| > 1$$`, desc: 'Langfristige Verbesserung der Handelsbilanz nach Abwertung', variables: { '\\eta_X': 'Preiselastizität der Exporte', '\\eta_M': 'Preiselastizität der Importe' } },
@@ -417,7 +681,28 @@ export const CONTENT = {
 
   geldmengen: {
     motivation: 'Auch in Makro II bleibt der Geldmarkt zentral: Wechselkurse, UIP und Taylor-Regel setzen voraus, dass Zinssteuerung und LM-Logik sicher beherrscht werden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Geldmarkt, LM-Kurve &amp; Zinssteuerung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Auch in Makro II bleibt der Geldmarkt zentral: Wechselkurse, UIP und Taylor-Regel setzen voraus, dass Zinssteuerung und LM-Logik sicher beherrscht werden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Geldmarktgleichgewicht</strong> — Reale Geldmenge = reale Geldnachfrage</li><li><strong>Lineare LM</strong> — Zins als Funktion von Einkommen und realer Geldmenge</li><li><strong>Geldmarktgleichgewicht (Merksatz)</strong> — Reale Geldmenge = reale Geldnachfrage</li><li><strong>LM offen</strong> — Grenzfall perfekte Kapitalmobilität.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Geldmarktgleichgewicht</h4>
@@ -453,6 +738,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>LM-Verschiebung vs. Drehung:</strong> Geldmenge verschiebt LM parallel; Einkommensschock bewegt entlang LM (höheres $Y$ → höheres $i$ ceteris paribus).</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Geldmarktgleichgewicht', eq: String.raw`$$\frac{M}{P} = Y \cdot L(i)$$`, desc: 'Reale Geldmenge = reale Geldnachfrage', variables: { 'M/P': 'Reale Geldmenge', 'L(i)': 'Liquiditätspräferenz' } },
@@ -473,7 +774,28 @@ export const CONTENT = {
 
   mundell_fleming: {
     motivation: 'Mundell-Fleming ist das Standardmodell der kleinen offenen Volkswirtschaft. Es zeigt, warum das gleiche Politiktool unter flexiblem und festem Wechselkurs völlig unterschiedlich wirkt.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Mundell-Fleming bei flexiblem Wechselkurs</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Mundell-Fleming ist das Standardmodell der kleinen offenen Volkswirtschaft. Es zeigt, warum das gleiche Politiktool unter flexiblem und festem Wechselkurs völlig unterschiedlich wirkt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>IS in offener VW</strong> — Gütermarkt mit Außenbeziehung</li><li><strong>UIP-Kanal</strong> — Finanzmarktscharnier des Modells</li><li><strong>IS in offener VW (Merksatz)</strong> — Gütermarkt mit Außenbeziehung</li><li><strong>Fiskal unter fix</strong> — Kein NX-Crowding-out über WK.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Drei Märkte in einem System</h4>
@@ -505,6 +827,23 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Regime zuerst:</strong> Ohne Regime keine Politikbewertung im M-F-Modell.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Kleine offene VW:</strong> M-F setzt kleines Land und hohe Kapitalmobilität voraus. Große Volkswirtschaften: UIP-Wirkung auf Weltzins.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -549,6 +888,14 @@ export const CONTENT = {
 <p>Die ZP-Kurve beschreibt alle Kombinationen aus Einkommen und Zinssatz, für die Leistungsbilanz und Kapitalbilanz zusammen gerade null ergeben.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Zahlungsbilanzgleichgewicht</strong> — Leistungs- und Kapitalbilanz müssen sich ausgleichen</li><li><strong>Perfekte Kapitalmobilität</strong> — Im Grenzfall wird die ZP-Kurve horizontal</li><li><strong>Zahlungsbilanzgleichgewicht (Merksatz)</strong> — Leistungs- und Kapitalbilanz müssen sich ausgleichen</li><li><strong>ZP</strong> — Zahlungsbilanzgleichgewicht.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -581,6 +928,23 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>ZP vs. BP:</strong> In manchen Skripten BP statt ZP — Bezeichnung aus VL übernehmen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>ZP ≠ IS:</strong> ZP beschreibt Außenbilanzgleichgewicht, nicht Gütermarkt. Schnittpunkt aller drei Kurven bestimmt $(Y,i)$ im vollständigen offenen Modell.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Zahlungsbilanzgleichgewicht', eq: String.raw`$$LB(Y,Y^*,\varepsilon) + KB(i-i^*) = 0$$`, desc: 'Leistungs- und Kapitalbilanz müssen sich ausgleichen', variables: { 'LB': 'Leistungsbilanzsaldo', 'KB': 'Kapitalbilanzsaldo', 'i^*': 'Weltzins' } },
@@ -610,12 +974,27 @@ export const CONTENT = {
 
   wirtschaftspolitik_offen: {
     motivation: 'Die Klausur fragt selten nur nach dem Modell, sondern fast immer nach der Politik im Modell. Diese Seite verdichtet genau diese Regelfälle: welches Instrument wirkt unter welchem Regime und über welchen Kanal.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Wirtschaftspolitik im Mundell-Fleming-Modell</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Das Mundell-Fleming-Theorem</h4>
 <p>Bei hoher bzw. perfekter Kapitalmobilität kippt die Wirksamkeit von Fiskal- und Geldpolitik mit dem Wechselkursregime.</p>
         <p>Unter flexiblem Wechselkurs wirkt Geldpolitik stark über den Wechselkurskanal; Fiskalpolitik wird durch Aufwertung und Nettoexportverluste ausgebremst. Unter festem Wechselkurs ist es gerade umgekehrt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Flexibler Wechselkurs</strong> — Fiskalpolitik trifft auf den Aufwertungskanal</li><li><strong>Fester Wechselkurs</strong> — Die Paritätsverteidigung akkommodiert den Fiskalimpuls</li><li><strong>Flexibler Wechselkurs (Merksatz)</strong> — Fiskalpolitik trifft auf den Aufwertungskanal</li><li><strong>M-F Theorem</strong> — Kapitalmobilität vorausgesetzt.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -660,6 +1039,14 @@ export const CONTENT = {
 <div class="warn-box" data-warning-placement="rail"><strong>Regime zuerst:</strong> Ohne explizite Regimeangabe bleibt jede Politikantwort unvollständig. Dieselbe Maßnahme hat im flexiblen und fixen Regime unterschiedliche Endergebnisse.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Nicht bei IS aufhören:</strong> Im offenen Modell reicht eine IS-Verschiebung nie als komplette Antwort. Erst der Wechselkurs- oder ZB-Kanal macht die Politikbewertung vollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Flexibler Wechselkurs', eq: String.raw`$$\Delta G>0 \Rightarrow \text{partielles oder starkes Crowding-out über } NX$$`, desc: 'Fiskalpolitik trifft auf den Aufwertungskanal', variables: { 'NX': 'Nettoexporte' } },
@@ -691,12 +1078,27 @@ export const CONTENT = {
 
   wk_regime: {
     motivation: 'Feste Wechselkurse, autonome Geldpolitik und freier Kapitalverkehr sind nicht gleichzeitig zu haben. Genau dieser Zielkonflikt wird im Kurs über Trilemma und Paritätsverteidigung analysiert.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Feste Wechselkurse, Trilemma &amp; Paritätsverteidigung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Trilemma der offenen Volkswirtschaft</h4>
 <p>Ein Land kann höchstens zwei der drei Ziele gleichzeitig wählen: festen Wechselkurs, freien Kapitalverkehr, autonome Geldpolitik.</p>
         <p>Fixe Paritäten kaufen Wechselkursstabilität, verlangen aber meistens den Verzicht auf geldpolitische Autonomie.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Trilemma-Logik</strong> — Politische Restriktion der offenen Makro</li><li><strong>Trilemma-Logik (Merksatz)</strong> — Politische Restriktion der offenen Makro</li><li><strong>Devisenintervention</strong> — Reserven und Kapitalbilanz.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -736,6 +1138,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Fehleranalyse</h4>
 <div class="warn-box" data-warning-placement="rail"><strong>Fester Kurs heißt nicht spannungsfrei:</strong> Gerade bei glaubwürdigkeitsschwachen Regimen kann ein fixer Wechselkurs den Anpassungsdruck erhöhen, statt ihn verschwinden zu lassen.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Trilemma ist keine Meinung:</strong> Das Trilemma ist eine Restriktion. Wer drei Ziele gleichzeitig behauptet, muss zeigen, welche der Voraussetzungen tatsächlich verletzt ist.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -783,11 +1193,26 @@ export const CONTENT = {
 
   wk_krisen: {
     motivation: 'Währungskrisen sind der Stresstest fixer Regime. Im Kurs werden sie über Currency Boards, Glaubwürdigkeit und Krisendynamik analysiert, nicht nur als historische Anekdoten.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Currency Boards &amp; Währungskrisen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Selbsterfüllende Erwartungen</h4>
 <p>Erwartete Abwertung → Kapitalabzug → Zinsaufschlag → Rezession → bestätigt Abwertungsdruck.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Erwartete Abwertung und Zinsaufschlag</strong> — Je unglaubwürdiger die Parität, desto höher der notwendige Zinsaufschlag</li><li><strong>Erwartete Abwertung und Zinsaufschlag (Merksatz)</strong> — Je unglaubwürdiger die Parität, desto höher der notwendige Zinsaufschlag</li><li><strong>Risikoprämie</strong> — Aufschlag bei Unglaubwürdigkeit.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -822,6 +1247,14 @@ export const CONTENT = {
 <div class="warn-box" data-warning-placement="rail"><strong>Nicht nur Reserven zählen:</strong> Währungskrisen hängen nicht nur von Devisenreserven ab. Erwartungsbildung, reale Überbewertung, Bankenschwäche und politische Kosten der Verteidigung sind ebenso wichtig.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Currency Board ≠ Garantie:</strong> Ein Currency Board erhöht Glaubwürdigkeit, eliminiert aber Anpassungsdruck nicht. Bei fixer Parität und divergierender Produktivität entsteht reale Überbewertung — genau der first-generation-Kanal.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Erwartete Abwertung und Zinsaufschlag', eq: String.raw`$$i - i^* \approx \mathbb{E}\left[\frac{\Delta E}{E}\right]$$`, desc: 'Je unglaubwürdiger die Parität, desto höher der notwendige Zinsaufschlag', variables: {} }
@@ -831,12 +1264,27 @@ export const CONTENT = {
 
   opt_waehrungsraum: {
     motivation: 'Der optimale Währungsraum beantwortet die Klausurfrage hinter jeder Währungsunion: Wann lohnt sich der Verzicht auf den eigenen Wechselkurs überhaupt?',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Optimaler Währungsraum &amp; Währungsunion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">OWR-Kriterien nach Mundell</h4>
 <p>Ein Währungsraum ist dann "optimal", wenn der Verlust des eigenen Wechselkurses gut durch andere Anpassungsmechanismen aufgefangen wird.</p>
         <p>Prüfungsrelevant sind vor allem: Faktormobilität, Lohn- und Preisflexibilität, Fiskaltransfers und die Symmetrie von Schocks.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>OWR-Abwägung</strong> — Kein Rechengesetz, sondern die Prüfungslogik des Konzepts</li><li><strong>OWR-Abwägung (Merksatz)</strong> — Kein Rechengesetz, sondern die Prüfungslogik des Konzepts</li><li><strong>OWR-Trade-off</strong> — Abwägung.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -876,6 +1324,14 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurzugriff auf die Eurozone</h4>
 <div class="warn-box" data-warning-placement="rail"><strong>Nicht nur Vorteile aufzählen:</strong> OWR-Fragen sind immer Abwägungsfragen. Handelsgewinne, Glaubwürdigkeit und Integration genügen nicht, wenn asymmetrische Schocks und starre Arbeitsmärkte die Anpassung blockieren.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'OWR-Abwägung', eq: String.raw`$$\text{Nutzen der Währungsunion} \gtrless \text{Kosten des Verzichts auf den eigenen WK}$$`, desc: 'Kein Rechengesetz, sondern die Prüfungslogik des Konzepts', variables: {} }
@@ -905,7 +1361,28 @@ export const CONTENT = {
 
   phillipskurve: {
     motivation: 'Die Phillipskurve verbindet Inflation, Erwartungen und Arbeitslosigkeit. Sie ist das Bindeglied zwischen Konjunktur, Disinflation und den Anreizproblemen der Geldpolitik.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Phillipskurve &amp; Inflationserwartungen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Phillipskurve verbindet Inflation, Erwartungen und Arbeitslosigkeit. Sie ist das Bindeglied zwischen Konjunktur, Disinflation und den Anreizproblemen der Geldpolitik.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Erwartungsaugmentierte Phillipskurve</strong> — Inflation, Erwartungen und Auslastung</li><li><strong>Erwartungsaugmentierte Phillipskurve (Merksatz)</strong> — Inflation, Erwartungen und Auslastung</li><li><strong>PC</strong> — Erwartungen eingebaut.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungsaugmentierte Phillipskurve</h4>
@@ -950,6 +1427,14 @@ export const CONTENT = {
 <div class="warn-box" data-warning-placement="rail"><strong>Keine dauerhafte Tauschbeziehung:</strong> Die Phillipskurve ist kein Menü, mit dem Politik dauerhaft weniger Arbeitslosigkeit gegen etwas mehr Inflation kaufen könnte. Langfristig verschwimmt der Trade-off.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>$u_n$ nicht mit $u=0$ verwechseln:</strong> Vollbeschäftigung im makroökonomischen Sinn bedeutet $u=u_n$, nicht null Arbeitslosigkeit. Strukturelle und friktionelle Arbeitslosigkeit bleiben auch im Gleichgewicht.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Erwartungsaugmentierte Phillipskurve', eq: String.raw`$$\pi_t = \pi_t^e - \alpha (u_t - u_n)$$`, desc: 'Inflation, Erwartungen und Auslastung', variables: { 'u_n': 'Natürliche Arbeitslosigkeit', '\\alpha': 'Steigung' } }
@@ -969,12 +1454,27 @@ export const CONTENT = {
 
   zeitinkonsistenz: {
     motivation: 'Zeitinkonsistenz erklärt, warum eine ex ante vernünftige Geldpolitik ex post an Glaubwürdigkeit verliert. Ohne Bindung wächst der Anreiz zur Überraschungsinflation.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Zeitinkonsistenz &amp; Commitment</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Commitment vs. Diskretion</h4>
 <p>Ex ante möchte die Zentralbank niedrige Inflation versprechen. Ex post hat sie aber einen Anreiz, über Überraschungsinflation die Arbeitslosigkeit unter ihr natürliches Niveau zu drücken.</p>
         <p>Genau diese Differenz zwischen angekündigtem Plan und später optimal erscheinender Handlung heißt Zeitinkonsistenz.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Phillips-Anreiz</strong> — Überraschungsinflation wirkt nur über Erwartungen</li><li><strong>Phillips-Anreiz (Merksatz)</strong> — Überraschungsinflation wirkt nur über Erwartungen</li><li><strong>Kydland-Prescott</strong> — Bias unter Diskretion.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1007,6 +1507,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Diskretion ≠ Fehler:</strong> Zeitinkonsistenz ist struktureller Anreizkonflikt, nicht „dumme Politik". Institutionen binden ex-post-Handeln.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Phillips-Anreiz', eq: String.raw`$$u = u_n - \alpha(\pi - \pi^e)$$`, desc: 'Überraschungsinflation wirkt nur über Erwartungen', variables: {} }
@@ -1026,7 +1542,28 @@ export const CONTENT = {
 
   barro_gordon: {
     motivation: 'Das Barro-Gordon-Modell formalisiert Zeitinkonsistenz. Es ist der Prüfungsfall, in dem Verlustfunktion, Phillipskurve und rationale Erwartungen sauber zusammengeführt werden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Barro-Gordon &amp; Inflationsbias</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Das Barro-Gordon-Modell formalisiert Zeitinkonsistenz. Es ist der Prüfungsfall, in dem Verlustfunktion, Phillipskurve und rationale Erwartungen sauber zusammengeführt werden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Verlustfunktion</strong> — Präferenzstruktur der Zentralbank</li><li><strong>Inflationsbias</strong> — Diskretionäres Gleichgewicht unter rationalen Erwartungen</li><li><strong>Verlustfunktion (Merksatz)</strong> — Präferenzstruktur der Zentralbank</li><li><strong>Verlustfunktion</strong> — Zielkonflikt.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Modellbausteine</h4>
@@ -1062,6 +1599,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Bias ≠ willkürliche Inflation:</strong> Inflationsbias entsteht aus strukturiertem Anreiz, nicht aus „schlechter" Zentralbank.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Verlustfunktion', eq: String.raw`$$L = \frac{1}{2}\chi \pi^2 + \frac{1}{2}\lambda (u-u^*)^2$$`, desc: 'Präferenzstruktur der Zentralbank', variables: { '\\chi': 'Inflationsgewicht', '\\lambda': 'Arbeitslosigkeitsgewicht' } },
@@ -1072,7 +1625,28 @@ export const CONTENT = {
 
   taylor_regel: {
     motivation: 'Die Taylor-Regel übersetzt geldpolitische Reaktion in eine einfache, klausurfeste Leitzinsregel. Sie verknüpft Inflationsziel, Outputlücke und Realzinslogik.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Taylor-Regel &amp; geldpolitische Reaktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Taylor-Regel übersetzt geldpolitische Reaktion in eine einfache, klausurfeste Leitzinsregel. Sie verknüpft Inflationsziel, Outputlücke und Realzinslogik.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Taylor-Regel</strong> — Reaktionsfunktion der Geldpolitik</li><li><strong>Taylor-Regel (Merksatz)</strong> — Reaktionsfunktion der Geldpolitik</li><li><strong>Taylor</strong> — Leitzinsregel.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Regelform</h4>
@@ -1103,6 +1677,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Taylor-Regel ist keine EZB-Vorschrift:</strong> Die Regel ist Modell/Heuristik. In der Klausur: Reaktionslogik erklären, nicht historische Zinsen exakt reproduzieren.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Taylor-Regel', eq: String.raw`$$i_t = r^* + \pi_t + a(\pi_t-\pi^*) + b(y_t-y_n)$$`, desc: 'Reaktionsfunktion der Geldpolitik', variables: { 'r^*': 'Natürlicher Realzins', '\\pi^*': 'Inflationsziel' } }
@@ -1131,11 +1721,26 @@ export const CONTENT = {
 
   inflation_targeting: {
     motivation: 'Inflation Targeting ist im Kurs kein bloßes Schlagwort, sondern ein geldpolitisches Regime: Zielgröße, Reaktionsfunktion, Kommunikation und Informationssatz greifen ineinander.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Inflation Targeting &amp; EZB-Strategie</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Regimekern</h4>
 <p>Inflation Targeting verbindet ein explizites Inflationsziel mit operativer Unabhängigkeit der Zentralbank. Der Prüfungszugriff lautet deshalb: <strong>Welche Zielabweichung wird beobachtet, welches Instrument wird bewegt und über welchen Horizont soll Preisstabilität gesichert werden?</strong></p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Zielorientierte Reaktionsfunktion</strong> — Inflationsziel und Auslastung fließen gemeinsam in den Zinsentscheid ein</li><li><strong>Realzins an der Untergrenze</strong> — Bei gegebener ELB hängt der Stabilisierungsspielraum an der Inflation</li><li><strong>Zielorientierte Reaktionsfunktion (Merksatz)</strong> — Inflationsziel und Auslastung fließen gemeinsam in den Zinsentscheid ein</li><li><strong>Zielpfad</strong> — Mittelfristiger Anker.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1168,6 +1773,22 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>IT ≠ direkte Inflationssteuerung:</strong> Zentralbank steuert $i$ und Erwartungen; Übertragung auf $\pi$ braucht Zeit und funktionierende Kanäle.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1205,6 +1826,20 @@ export const CONTENT = {
 <p>Inflation verzerrt Kassenhaltung, Preisvergleich, Vertragsbeziehungen und relative Preise. Im Kurs sind besonders prüfungsrelevant: Schuhsohlenkosten, Menükosten, Inflationssteuer auf Nominalvermögen und Fehlallokation durch unsynchrone Preisanpassung.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Inflation ist in Makro II nicht nur eine Prozentzahl, sondern ein Wohlfahrts- und Stabilitätsproblem. Genauso wichtig sind aber die Kosten, Inflation wieder herunterzuholen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Disinflation und Arbeitslosigkeit</strong> — Schnelle Disinflation erzeugt bei gegebener Steigung reale Kosten</li><li><strong>Opferquote</strong> — Kumulierter Outputverlust je Prozentpunkt Disinflation</li><li><strong>Disinflation und Arbeitslosigkeit (Merksatz)</strong> — Schnelle Disinflation erzeugt bei gegebener Steigung reale Kosten</li><li><strong>Sacrifice ratio</strong> — Arbeitslosigkeit pro Inflationspunkt Senkung.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -1237,6 +1872,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Disinflation ≠ kostenlos:</strong> Auch „gute" Disinflation hat kurzfristige Arbeitsmarktkosten — Größenordnung mit Phillips nennen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Disinflation und Arbeitslosigkeit', eq: String.raw`$$\Delta u \approx -\frac{\Delta \pi}{\alpha}$$`, desc: 'Schnelle Disinflation erzeugt bei gegebener Steigung reale Kosten', variables: { '\\Delta u': 'Änderung der Arbeitslosigkeit', '\\Delta \\pi': 'Inflationsänderung', '\\alpha': 'Steigung der Phillipskurve' } },
@@ -1266,12 +1917,27 @@ export const CONTENT = {
 
   wachstum_fakten: {
     motivation: 'Wachstumstheorie beginnt nicht mit einer Gleichung, sondern mit den Datenmustern, die erklärt werden sollen. Die stilisierten Fakten sind deshalb der Prüfungsanker vor jedem Modell.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Stilisierte Fakten des Wachstums</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Stilisierte Fakten des Wachstums</h4>
 <p>Der Kurs nutzt die klassischen Wachstumsfakten als Orientierungsrahmen: langfristiges Wachstum von Output pro Kopf, steigende Kapitalintensität, relativ stabile Faktoranteile und deutliche Unterschiede zwischen Ländern.</p>
         <p>Die erste Klausurfrage lautet daher oft nicht „Welche Formel?“, sondern: <strong>Welches empirische Muster soll das Modell überhaupt erfassen?</strong></p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Wachstumszerlegung</strong> — BIP-Wachstum als Summe aus Produktivität, Kapital- und Arbeitsbeitrag</li><li><strong>Wachstumszerlegung (Merksatz)</strong> — BIP-Wachstum als Summe aus Produktivität, Kapital- und Arbeitsbeitrag</li><li><strong>Pro-Kopf-Wachstum</strong> — Technik + Bevölkerung.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1304,6 +1970,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Fakten ≠ Theorie:</strong> Empirische Muster belegen nicht automatisch Solow — sie motivieren Modellwahl.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Wachstumszerlegung', eq: String.raw`$$g_Y \approx g_A + \alpha_K g_K + (1-\alpha_K) g_N$$`, desc: 'BIP-Wachstum als Summe aus Produktivität, Kapital- und Arbeitsbeitrag', variables: { 'g_Y': 'BIP-Wachstum', 'g_A': 'TFP-/Produktivitätswachstum', 'g_K': 'Kapitalwachstum', 'g_N': 'Beschäftigungs- bzw. Arbeitswachstum', '\\alpha_K': 'Kapitaleinkommensanteil' } }
@@ -1332,7 +2014,28 @@ export const CONTENT = {
 
   aggregierte_pf: {
     motivation: 'Bevor das Solow-Modell gerechnet wird, muss die Produktionsseite sitzen: Grenzerträge, Skalenerträge und Pro-Kopf-Formen sind die formale Grundlage aller späteren Wachstumsaussagen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Produktionsfunktion, Grenzerträge &amp; Skalenerträge</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Bevor das Solow-Modell gerechnet wird, muss die Produktionsseite sitzen: Grenzerträge, Skalenerträge und Pro-Kopf-Formen sind die formale Grundlage aller späteren Wachstumsaussagen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Cobb-Douglas</strong> — Standardfunktion des Solow-Modells</li><li><strong>Pro-Kopf-Form</strong> — Intensive Form bei konstanten Skalenerträgen</li><li><strong>Cobb-Douglas (Merksatz)</strong> — Standardfunktion des Solow-Modells</li><li><strong>PF</strong> — Aggregierte Produktion.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Aggregierte Produktionsfunktion</h4>
@@ -1374,6 +2077,23 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>CRS ist nicht steigender Grenzertrag:</strong> Konstante Skalenerträge bedeuten nur, dass alle Inputs gemeinsam proportional vergrößert werden können. Einzelne Grenzerträge können trotzdem abnehmen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>MPK vs. Rendite:</strong> Grenzprodukt fällt in $k$ (Diminishing Returns); das bedeutet nicht automatisch negative Gesamtrendite.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Cobb-Douglas', eq: String.raw`$$Y = A K^{\alpha} N^{1-\alpha}$$`, desc: 'Standardfunktion des Solow-Modells', variables: { 'A': 'Produktivität', '\\alpha': 'Kapitalelastizität' } },
@@ -1384,7 +2104,28 @@ export const CONTENT = {
 
   solow_basis: {
     motivation: 'Das Solow-Grundmodell erklärt, wie Sparen, Abschreibung und Kapitalintensität langfristiges Niveauwachstum bestimmen. Es trennt sauber zwischen Niveaueffekten und dauerhaften Wachstumsraten.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Solow-Grundmodell &amp; Kapitalakkumulation</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Das Solow-Grundmodell erklärt, wie Sparen, Abschreibung und Kapitalintensität langfristiges Niveauwachstum bestimmen. Es trennt sauber zwischen Niveaueffekten und dauerhaften Wachstumsraten.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Kapitaldynamik</strong> — Akkumulation im Grundmodell</li><li><strong>Steady-State-Bedingung</strong> — Investition = Break-even-Investition</li><li><strong>Kapitaldynamik (Merksatz)</strong> — Akkumulation im Grundmodell</li><li><strong>Kapitaldynamik</strong> — Solow Kern.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Akkumulationsgleichung</h4>
@@ -1419,6 +2160,21 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">In der Klausur: Solow-Grundmodell</h4>
 <p>Akkumulation: $\dot k = sf(k)-\delta k$. SS: $sf(k^*)=\delta k^*$. Mehr Sparen → höheres Niveau von $k^*, y^*$, aber ohne $g_A$ keine dauerhafte Wachstumsrate. Konvergenzdiagramm: Investitions- vs. Break-even-Kurve zeichnen.</p><div class="warn-box" data-warning-placement="rail"><strong>Sparen ≠ Wachstum:</strong> Höhere $s$ hebt das Niveau, nicht die Trendwachstumsrate pro Kopf — das kommt aus technischem Fortschritt.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Sparen ≠ Wachstum:</strong> Höhere $s$ hebt das Niveau, nicht die Trendwachstumsrate pro Kopf — das kommt aus technischem Fortschritt.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Kapitaldynamik', eq: String.raw`$$\dot k = s f(k) - \delta k$$`, desc: 'Akkumulation im Grundmodell', variables: { 's': 'Sparquote', '\\delta': 'Abschreibung' } },
@@ -1429,7 +2185,28 @@ export const CONTENT = {
 
   steady_state: {
     motivation: 'Der Steady State ist die eigentliche Langfrist-Lesart des Solow-Modells: Dort entscheidet sich, welches Pro-Kopf-Niveau eine Volkswirtschaft bei gegebenen Parametern dauerhaft tragen kann.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Steady State &amp; Konvergenz</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Der Steady State ist die eigentliche Langfrist-Lesart des Solow-Modells: Dort entscheidet sich, welches Pro-Kopf-Niveau eine Volkswirtschaft bei gegebenen Parametern dauerhaft tragen kann.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Steady-State-Bedingung</strong> — Investition deckt Abschreibung und Verdünnung gerade ab</li><li><strong>Cobb-Douglas-Steady-State</strong> — Explizite Lösung bei \(y=Ak^\alpha\)</li><li><strong>Steady-State-Bedingung (Merksatz)</strong> — Investition deckt Abschreibung und Verdünnung gerade ab</li><li><strong>Steady state</strong> — Gleichgewicht.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Steady-State-Bedingung</h4>
@@ -1464,6 +2241,23 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>SS vs. Goldene Regel:</strong> $k^*$ hängt von $s$ ab; $k_{gold}$ aus Technologie — beide im selben Diagramm, aber unterschiedliche Fragestellungen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>SS-Berechnung:</strong> Immer Break-even $(\delta+n)k$ mit Investition $sf(k)$ gleichsetzen — nicht $s$ mit $\delta$ verwechseln.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Steady-State-Bedingung', eq: String.raw`$$s f(k^*) = (\delta+n)k^*$$`, desc: 'Investition deckt Abschreibung und Verdünnung gerade ab', variables: { 'k^*': 'Kapital pro Kopf im Steady State', 'n': 'Bevölkerungswachstum', '\\delta': 'Abschreibung' } },
@@ -1493,11 +2287,26 @@ export const CONTENT = {
 
   goldene_sparquote: {
     motivation: 'Nicht jeder Steady State ist normativ gut. Die Goldene Sparquote beantwortet die klausurrelevante Frage, bei welcher Kapitalintensität der langfristige Konsum maximal ist.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Goldene Sparquote &amp; Konsummaximum</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Konsum im Steady State</h4>
 <p>Im langfristigen Gleichgewicht gilt \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\(c^* = f(k^*) - (\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\delta+n)k^*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\). Mehr Sparen erhöht nicht automatisch den Konsum, weil ein Teil des Outputs nur noch zur Kapitalerhaltung gebraucht wird.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Goldene Regel</strong> — Grenzprodukt des Kapitals = Break-even-Belastung</li><li><strong>Goldene Sparquote (Cobb-Douglas)</strong> — Bei \(y=Ak^\alpha\) entspricht die optimale Sparquote dem Kapitalanteil</li><li><strong>Goldene Regel (Merksatz)</strong> — Grenzprodukt des Kapitals = Break-even-Belastung</li><li><strong>Goldene Regel</strong> — MPK = effektive Verlustrate.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1535,6 +2344,23 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Goldene Regel ≠ optimale Sparquote:</strong> Die goldene Regel maximiert Konsum pro Kopf im SS — nicht zwingend die utilitaristisch optimale Sparquote bei endlicher Zeitpräferenz.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Gold ≠ outputmaximierend:</strong> Maximaler Konsum und maximaler Output fallen bei $s_{gold}$ und $s_{max}$ auseinander.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Goldene Regel', eq: String.raw`$$f'(k_{gold}) = \delta + n$$`, desc: 'Grenzprodukt des Kapitals = Break-even-Belastung', variables: { 'k_{gold}': 'Goldener Kapitalstock' } },
@@ -1564,7 +2390,28 @@ export const CONTENT = {
 
   tech_fortschritt: {
     motivation: 'Mit technischem Fortschritt wird aus dem Solow-Modell ein dauerhaft wachsendes System. Hier sitzt die eigentliche Langfristlogik des Pro-Kopf-Wachstums.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Technischer Fortschritt &amp; langfristiges Wachstum</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Mit technischem Fortschritt wird aus dem Solow-Modell ein dauerhaft wachsendes System. Hier sitzt die eigentliche Langfristlogik des Pro-Kopf-Wachstums.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Solow mit technischem Fortschritt</strong> — Kapital pro Arbeitseffizienzeinheit</li><li><strong>Wachstum pro Kopf im Steady State</strong> — Dauerhaftes Pro-Kopf-Wachstum folgt dem technischen Fortschritt</li><li><strong>Solow mit technischem Fortschritt (Merksatz)</strong> — Kapital pro Arbeitseffizienzeinheit</li><li><strong>BGP</strong> — Langfristiges Pro-Kopf-Wachstum.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Arbeitsvermehrender technischer Fortschritt</h4>
@@ -1595,6 +2442,22 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Residuum ≠ exogene Technologie:</strong> Das Residuum misst alles außer $K$- und $L$-Wachstum — Interpretation vorsichtig.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Solow mit technischem Fortschritt', eq: String.raw`$$\dot{\tilde k} = s f(\tilde k) - (n + g_A + \delta)\tilde k$$`, desc: 'Kapital pro Arbeitseffizienzeinheit', variables: { 'g_A': 'Technischer Fortschritt', 'n': 'Bevölkerungswachstum' } },
@@ -1605,7 +2468,28 @@ export const CONTENT = {
 
   budgetrestriktion: {
     motivation: 'Die staatliche Budgetrestriktion ist die Buchhaltung hinter jeder Schuldenfrage. Ohne sie bleiben Tragfähigkeit, Primärsaldo und spätere Steuerlast begriffslos.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Staatliche Budgetrestriktion &amp; Primärsaldo</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die staatliche Budgetrestriktion ist die Buchhaltung hinter jeder Schuldenfrage. Ohne sie bleiben Tragfähigkeit, Primärsaldo und spätere Steuerlast begriffslos.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Periodische Budgetrestriktion</strong> — Fortschreibung des nominalen Schuldenstands</li><li><strong>Intertemporale Restriktion</strong> — Heute bestehende Schuld = Barwert künftiger Primärüberschüsse</li><li><strong>Periodische Budgetrestriktion (Merksatz)</strong> — Fortschreibung des nominalen Schuldenstands</li><li><strong>Schulden dynamik</strong> — Schuldenquote $b$.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Periodische Budgetrestriktion des Staates</h4>
@@ -1653,6 +2537,14 @@ export const CONTENT = {
 <div class="warn-box" data-warning-placement="rail"><strong>Primärsaldo ist nicht Gesamtsaldo:</strong> Wer Zinslasten und Primärsaldo nicht trennt, verwechselt laufende Fiskalentscheidung mit Altlastenproblem.</div>
         <div class="warn-box" data-warning-placement="rail"><strong>Buchhaltung ist noch keine Tragfähigkeit:</strong> Die periodische Restriktion sagt, wie Schulden entstehen. Ob sie tragfähig sind, hängt erst an Wachstum, Zinsdifferenz und künftigen Primärpfaden.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Periodische Budgetrestriktion', eq: String.raw`$$B_t = (1+r)B_{t-1} + G_t - T_t$$`, desc: 'Fortschreibung des nominalen Schuldenstands', variables: { 'B_t': 'Schuldenstand am Periodenende', 'G_t-T_t': 'Primärdefizit' } },
@@ -1682,7 +2574,28 @@ export const CONTENT = {
 
   schuldenquote_dynamik: {
     motivation: 'Für Makro II zählt die relative Größe zum BIP. Erst die Schuldenquote macht sichtbar, wann Zins, Wachstum und Primärsaldo den Pfad stabilisieren oder eskalieren.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Schuldenquote &amp; Stabilisierung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Für Makro II zählt die relative Größe zum BIP. Erst die Schuldenquote macht sichtbar, wann Zins, Wachstum und Primärsaldo den Pfad stabilisieren oder eskalieren.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Schuldenquotendynamik</strong> — Zins-Wachstums-Differenz und Primärsaldo bestimmen den Pfad</li><li><strong>Stabilisierender Primärsaldo</strong> — Gerade ausreichender Primärüberschuss zur Stabilisierung</li><li><strong>Schuldenquotendynamik (Merksatz)</strong> — Zins-Wachstums-Differenz und Primärsaldo bestimmen den Pfad</li><li><strong>Schuldenquote</strong> — Dynamik.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Schneeballeffekt und Stabilisierung</h4>
@@ -1718,6 +2631,22 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Eine Periodenrechnung reicht nicht:</strong> Stabilisierung ist Pfadfrage — dauerhafter Primärüberschuss nötig wenn $r>g$.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1763,6 +2692,14 @@ export const CONTENT = {
 <p>Wenn Haushalte rational vorausblicken und künftige Steuerlast internalisieren, dann ist eine defizitfinanzierte Steuersenkung kein echtes Vermögensgeschenk. Der private Konsum steigt dann nicht automatisch.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Äquivalenzlogik</strong> — Verschobene Steuern ändern den Barwert des verfügbaren Einkommens nicht</li><li><strong>Äquivalenzlogik (Merksatz)</strong> — Verschobene Steuern ändern den Barwert des verfügbaren Einkommens nicht</li><li><strong>Äquivalenz</strong> — Unter Annahmen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -1793,6 +2730,23 @@ export const CONTENT = {
 <p>Klausurantwort: <strong>Regime</strong> → <strong>Kanal</strong> (Güter/Geld/Außen) → <strong>Wirkung</strong> auf $Y$, $i$ oder $arepsilon$.</p>
         <div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Ricardo heißt nicht „Fiskalpolitik wirkt nie“:</strong> Die Äquivalenz zeigt eine Grenzlogik. In der Praxis wird der Multiplikator oft gedämpft, aber nicht zwangsläufig auf null gesetzt.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Ricardo als Benchmark:</strong> Empirisch oft partielle Äquivalenz — Voraussetzungen in Antwort explizit prüfen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Pflichtfolge:</strong> Offene-Volkswirtschaft-Antworten ohne Wechselkursregime sind strukturell unvollständig.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Äquivalenzlogik', eq: String.raw`$$\Delta T_1 = -\frac{\Delta T_2}{1+r} \Rightarrow \Delta C_1 = 0 \quad (\text{unter Ricardo-Annahmen})$$`, desc: 'Verschobene Steuern ändern den Barwert des verfügbaren Einkommens nicht', variables: { '\\Delta T_1': 'Steueränderung heute', '\\Delta T_2': 'Künftige Gegenfinanzierung' } }
@@ -1821,11 +2775,26 @@ export const CONTENT = {
 
   schuldenfinanzierung_monetarisierung: {
     motivation: 'Der Finanzierungsmodus ist eine eigene makroökonomische Entscheidung: Kreditaufnahme und Monetarisierung verschieben Lasten unterschiedlich zwischen Zinskanal, Inflation und Glaubwürdigkeit.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Schuldenfinanzierung &amp; Monetarisierung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Kreditfinanzierung</h4>
 <p>Bei kreditfinanzierten Defiziten steigt der Schuldenstand; spätere Tragfähigkeit hängt an Zins-Wachstums-Differenz und Primärsaldo. Die Last liegt primär auf dem Schulden- und Refinanzierungspfad.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Seigniorage</strong> — Reale Finanzierung über Geldschöpfung</li><li><strong>Seigniorage (Merksatz)</strong> — Reale Finanzierung über Geldschöpfung</li><li><strong>Fiskal-Monetär</strong> — Finanzierungskanal.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1857,6 +2826,22 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Finanzierungsmodus</h4>
 <p>Kredit: Schulden- und Zinslastpfad. Monetarisierung: Seigniorage $\Delta M/P$ — entlastet Refinanzierung, belastet Preisniveau und Erwartungen. Kein kostenloser Lunch: Inflation vs. Schulden-Trade-off. Hyperinflation = Vertrauensverlust in Geld.</p><div class="warn-box" data-warning-placement="rail"><strong>Monetarisierung ≠ automatische Hyperinflation:</strong> Einmalige Monetarisierung ≠ dauerhafte Finanzierung — Erwartungskanal entscheidet.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>EZB-Mandat:</strong> Primärziel Preisstabilität — dauerhafte Monetarisierung widerspricht Unabhängigkeit.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Monetarisierung ≠ automatische Hyperinflation:</strong> Einmalige Monetarisierung ≠ dauerhafte Finanzierung — Erwartungskanal entscheidet.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [

@@ -1,4 +1,4 @@
-import { createRenderer, buildKonzeptCheckHomeCardHtml } from '../../../assets/js/portal-core/ui/renderer.js';
+import { createRenderer } from '../../../assets/js/portal-core/ui/renderer.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { CHAPTERS, CONTENT } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
@@ -27,6 +27,7 @@ export const {
   revealTaskStep
 } = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
+  moduleSlug: COURSE_CONFIG.slug,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
   chapters: CHAPTERS,
@@ -47,6 +48,5 @@ export const {
   getConceptSourceSummary,
   sourceMaterialBaseUrl: '../source-materials/Makroökonomik II/',
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
-  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT,
-  extraHomeActionCardsHtml: buildKonzeptCheckHomeCardHtml(true)
+  taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT
 });

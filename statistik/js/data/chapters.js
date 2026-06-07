@@ -5,7 +5,7 @@
 
 import { A_PLUS_SUPPLEMENT } from './aPlusSupplement.js';
 import { THEORY_DEPTH_EXPANSIONS } from './theoryDepthExpansions.js';
-import { normalizeTheoryHtml } from '../../../assets/js/portal-core/theory/theoryStructure.js';
+import { completeTheoryRecipe, normalizeTheoryHtml } from '../../../assets/js/portal-core/theory/theoryStructure.js';
 
 export const R_BLOCKS_BY_ID = {
   deskriptiv: [
@@ -313,7 +313,7 @@ mean(anova_df$score)`,
 };
 
 function renderStatistikRLabTheory() {
-  return normalizeTheoryHtml(String.raw`
+  const raw = normalizeTheoryHtml(String.raw`
     <div class="section-block">
       <h3>R gehört jetzt in die Methoden-Konzepte</h3>
       <p>Die Live-R-Blöcke sitzen in Statistik nicht mehr gesammelt auf einer einzigen Praxis-Seite, sondern direkt dort, wo die Methode fachlich gelernt wird: bei Deskriptivstatistik, Bivariat, Intervallschätzung, Tests, Regression und ANOVA.</p>
@@ -346,6 +346,15 @@ function renderStatistikRLabTheory() {
       <p>Saubere Statistikantworten aus dem R-Output folgen immer diesem Schema: <strong>1. Methode nennen.</strong> <strong>2. entscheidende Ausgabezeile als Beleg nennen.</strong> <strong>3. fachlich zurückübersetzen.</strong> Wer nur den Code oder nur den p-Wert nennt, lässt den Kernpunkt liegen.</p>
     </div>
   `);
+  return completeTheoryRecipe(
+    raw,
+    {
+      motivation:
+        'R ist die Standardsprache für statistische Analysen in der Wissenschaft. Hier verbinden wir die gelernten Konzepte mit der praktischen Umsetzung.',
+      formeln: [{ label: 'R-Syntax Regression', desc: 'Lineare Regression in R' }]
+    },
+    { chapterTitle: 'R-Statistik Praxis', moduleSlug: 'statistik', headerObjectivesShown: false }
+  );
 }
 
 export const CHAPTERS = [
@@ -368,11 +377,26 @@ export const CHAPTERS = [
 export const CONTENT = {
   deskriptiv: {
     motivation: 'Deskriptive Statistik ist die erste Filterstufe jeder Analyse: erst Verteilung lesen, dann Kennzahl wählen. Mittelwert ohne Formdeutung und Streuung ohne Kontext sind nicht klausurfest.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Deskriptive Statistik</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Worum es in DS1 wirklich geht</h4>
 <p>Deskriptive Statistik beantwortet zuerst drei Fragen: <strong>Wo liegt das Zentrum?</strong> <strong>Wie breit streuen die Daten?</strong> <strong>Gibt es Schiefe, Klumpung oder Ausreißer?</strong> Genau diese Reihenfolge spiegelt die Vorlesungs- und Tutoriumslogik: Kennzahlen und Grafiken müssen sich gegenseitig absichern.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Arithmetisches Mittel</strong> — Rechnerischer Schwerpunkt der Stichprobe</li><li><strong>Stichprobenvarianz</strong> — Korrigierte mittlere quadratische Abweichung</li><li><strong>Standardabweichung</strong> — Streuung in Originaleinheiten</li><li><strong>Variationskoeffizient</strong> — Relative Streuung bei vergleichbarer Skala</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -400,6 +424,31 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurzugriff</h4>
 <p>Prüfungssicher ist nie nur eine Zahl. Eine gute Antwort kombiniert <strong>Lage</strong>, <strong>Streuung</strong> und <strong>Formhinweis</strong>. Typischer Standardsatz: “Der Mittelwert liegt bei ..., der Median darunter/darüber, die Streuung beträgt ..., und die Verteilung wirkt wegen ... rechtsschief/linksschief/ausreißerbeeinflusst.”</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Variationskoeffizient</strong> Verwende $v = s / \bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p><strong>Klausurpfad:</strong> Hypothesen → Teststatistik → Verteilung/kritischer Wert → Entscheidung + p-Wert-Interpretation.</p>
+<p><strong>Kernrelationen:</strong> Arithmetisches Mittel, Stichprobenvarianz, Standardabweichung — Variablen vor Rechnung zuordnen.</p>
+<p><em>platform-added-explanation:</em> Prüfungsblock aus Kursverdichtung; Randnotation in offiziellen PDFs prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Median vs. Mittelwert</strong> Wenn Ausreißer oder starke Schiefe sichtbar sind, reicht der Mittelwert allein nicht. Dann muss der Median als robuste Gegenlesart mitberichtet werden.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Variationskoeffizient</strong> Verwende $v = s / \bar{x}$ nur, wenn Verhältnisskalen vorliegen und $\bar{x}$ sinnvoll von null entfernt ist. Er ist nützlich für relative Streuungsvergleiche, nicht für jede Rohdatenbeschreibung.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -480,11 +529,26 @@ export const CONTENT = {
   },
   bivariat: {
     motivation: 'Bivariate Statistik fragt nicht nur, ob zwei Merkmale zusammenlaufen, sondern welcher Typ von Zusammenhang vorliegt: Häufigkeitsstruktur, Richtung, lineare Stärke, Ranglogik oder Ausreißerfalle.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Bivariate Analyse</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Von der gemeinsamen Tabelle zum Streudiagramm</h4>
 <p>DS2 beginnt nicht mit einer Formel, sondern mit der Frage, <strong>wie zwei Merkmale gemeinsam verteilt sind</strong>. Bei kategorialen Merkmalen helfen Kreuztabellen und bedingte Prozente; bei metrischen Merkmalen zeigt das Streudiagramm Richtung, Form und Ausreißer eines Zusammenhangs.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Kovarianz</strong> — Richtung der gemeinsamen Streuung</li><li><strong>Pearson-Korrelation</strong> — Normierte lineare Zusammenhangsstärke</li><li><strong>OLS-Steigung (bivariate Brücke)</strong> — Verbindet bivariate Streuung mit dem linearen Regressionsanstieg</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -519,6 +583,30 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
 <p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
 <p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p><strong>Klausurpfad:</strong> Hypothesen → Teststatistik → Verteilung/kritischer Wert → Entscheidung + p-Wert-Interpretation.</p>
+<p><strong>Kernrelationen:</strong> Kovarianz, Pearson-Korrelation, OLS-Steigung (bivariate Brücke) — Variablen vor Rechnung zuordnen.</p>
+<p><em>platform-added-explanation:</em> Prüfungsblock aus Kursverdichtung; Randnotation in offiziellen PDFs prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Korrelation vs. Kausalität</strong> Ein hoher Korrelationskoeffizient beweist keinen ursächlichen Zusammenhang. Drittvariablen, gemeinsame Trends oder Selektion können denselben Befund erzeugen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -593,11 +681,26 @@ export const CONTENT = {
   },
   testen: {
     motivation: 'Hypothesentests sind Entscheidungslogik unter Unsicherheit. Die Klausur fragt nicht nur nach einer Teststatistik, sondern nach sauberer Hypothesenformulierung, Testwahl, p-Wert-Deutung und Fehlerkontrolle.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Hypothesentests</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Hypothesenlogik vor jeder Rechnung</h4>
 <p>Ein Test beginnt immer mit einem Entscheidungsproblem: Welcher Parameter wird geprüft? Was ist der Status quo ($H_0$)? Welche Abweichung interessiert als Alternative ($H_1$)? Erst danach darf gerechnet werden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>t-Statistik</strong> — Standardtest für den Mittelwert bei unbekannter Populationsstreuung</li><li><strong>Power</strong> — Wahrscheinlichkeit, einen echten Effekt zu entdecken</li><li><strong>Power (Merksatz)</strong> — Wahrscheinlichkeit, einen echten Effekt zu entdecken</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -615,11 +718,27 @@ export const CONTENT = {
 <p>p-Wert = kleinstes $\alpha$, bei dem $H_0$ noch abgelehnt würde. „$p<0{,}05$“ ist keine ökonomische Größeninterpretation.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
+<p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
+<p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
 <h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fehlerarten und Power</h4>
 <p>$\alpha$ = Fehler 1. Art; $\beta$ = Fehler 2. Art; Power $=1-\beta$. Kleines $n$ → hohes $\beta$ bei kleinen Effekten.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -697,11 +816,26 @@ export const CONTENT = {
   },
   wahrscheinlichkeit: {
     motivation: 'Die Wahrscheinlichkeitsrechnung liefert die mathematische Sprache für Unsicherheit. Ohne sie sind weder Verteilungen noch statistische Schlüsse möglich.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Wahrscheinlichkeitsrechnung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Grundbegriffe</h4>
 <p>Ein <strong>Zufallsexperiment</strong> hat mehrere mögliche Ergebnisse. Die Menge aller Ergebnisse heißt <strong>Ergebnisraum</strong> $\Omega$. Ein <strong>Ereignis</strong> ist eine Teilmenge von $\Omega$.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Bedingte Wkt.</strong> — Definition</li><li><strong>Bayes</strong> — Aktualisierung</li><li><strong>Totale Wkt.</strong> — Zerlegung</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -768,6 +902,23 @@ export const CONTENT = {
 <p>Typische Aufgabe: Venn-Diagramm oder Baumdiagramm → Formel → numerischer Wert. Randnotation der VL (Komplement, Schnitt) beibehalten.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Bayes-Richtung:</strong> Nicht $P(A|B)$ mit $P(B|A)$ vertauschen — Nenner ist immer $P(\text{Bedingung})$.</div>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Bayes-Richtung:</strong> Nicht $P(A|B)$ mit $P(B|A)$ vertauschen — Nenner ist immer $P(\text{Bedingung})$.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Unabhängigkeit vs. Disjunktheit:</strong> Disjunkte Ereignisse ($A \cap B = \emptyset$) sind in der Regel nicht unabhängig — im Gegenteil: wenn $A$ eintritt, ist $B$ ausgeschlossen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Bayes-Richtung:</strong> Nicht $P(A|B)$ mit $P(B|A)$ vertauschen — Nenner ist immer $P(\text{Bedingung})$.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Bedingte Wkt.', eq: String.raw`$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$`, desc: 'Definition' },
@@ -814,7 +965,28 @@ export const CONTENT = {
   },
   verteilungen: {
     motivation: 'Zufallsvariablen ordnen jedem Ergebnis eine Zahl zu. Ihre Verteilung beschreibt, welche Werte wie wahrscheinlich sind.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Zufallsvariablen &amp; Verteilungen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Zufallsvariablen ordnen jedem Ergebnis eine Zahl zu. Ihre Verteilung beschreibt, welche Werte wie wahrscheinlich sind.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Erwartungswert</strong> — Diskret</li><li><strong>Verschiebungssatz</strong> — Varianzberechnung</li><li><strong>Binomial</strong> — Erfolge bei n Versuchen</li><li><strong>Standardisierung</strong> — Transformation auf N(0,1)</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Notation aus der VL</h4>
@@ -842,7 +1014,23 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Klausurtransfer</h4>
-<p>Bei $\chi^2$, $t$, $F$: Freiheitsgrade nennen und Verteilung der Teststatistik unter $H_0$ zuordnen — nicht nur Formel einsetzen.</p>
+<p><strong>Klausurpfad:</strong> Verteilung und Parameter ($\mu$, $\sigma$, $n$, $p$, Freiheitsgrade) benennen → Wahrscheinlichkeit, Quantil oder Erwartungswert berechnen → Ergebnis in Kontext übersetzen.</p>
+<p><em>source-distilled:</em> Aus Statistik-VL/Tutorium; exakte Tabellennotation in Primär-PDFs prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Varianz vs. Standardabweichung:</strong> Die Varianz hat die Einheit zum Quadrat. Für die Interpretation in Originaleinheiten immer die Standardabweichung $\sigma = \sqrt{\text{Var}}$ verwenden.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1118,11 +1306,32 @@ export const CONTENT = {
   },
   z_test: {
     motivation: 'Der z-Test ist der einfachste Signifikanztest. Er ist anwendbar, wenn die Populationsvarianz bekannt ist oder der Stichprobenumfang groß genug für die Normalapproximation ist.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>z-Test &amp; Normalverteilungstest</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Der z-Test ist der einfachste Signifikanztest. Er ist anwendbar, wenn die Populationsvarianz bekannt ist oder der Stichprobenumfang groß genug für die Normalapproximation ist.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>z-Statistik</strong> — Bekannte Populationsvarianz</li><li><strong>z-Test Anteil</strong> — Anteilstest</li><li><strong>z-Test Anteil (Merksatz)</strong> — Anteilstest</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">KI–Test-Dualität</h4>
-<p>Beim zweiseitigen Test bei $\alpha=5\\%$ gilt: $H_0$ wird nicht abgelehnt genau dann, wenn $\mu_0$ im $95\\%$-Konfidenzintervall liegt (bei gleicher Stichprobe und $\sigma$).</p>
+<p>Beim zweiseitigen Test bei $\alpha=5\%$ gilt: $H_0$ wird nicht abgelehnt genau dann, wenn $\mu_0$ im $95\%$-Konfidenzintervall liegt (bei gleicher Stichprobe und $\sigma$).</p>
       <div class="math-block">$$\left|\frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}\right| \leq z_{1-\alpha/2} \iff \mu_0 \in \text{KI}$$</div>
       <div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Unbekanntes $\sigma$ bei kleinem $n$ → t-Test; z nur mit Begründung (bekanntes $\sigma$ oder sehr großes $n$).</div>
 </div>
@@ -1154,8 +1363,25 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Prüfungsstandard: z-Test</h4>
-<p>Klausurpfad: $H_0$/$H_1$ → Teststatistik $z$ → kritisches Quantil oder p-Wert → Entscheidung in Worten. Bei bekanntem $\sigma$ Standardnormalverteilung; sonst t-Test.</p>
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p><strong>Klausurpfad:</strong> $H_0$/$H_1$ → Teststatistik $z$ → kritisches Quantil oder p-Wert → Entscheidung in Worten. Bei bekanntem $\sigma$ Standardnormalverteilung; sonst t-Test begründen.</p>
+<p><em>source-distilled:</em> Aus Statistik-VL; KI–Test-Dualität bei gleicher Stichprobe explizit nennen, wenn gefragt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Unbekanntes $\sigma$ bei kleinem $n$ → t-Test; z nur mit Begründung (bekanntes $\sigma$ oder sehr großes $n$).</div>
+<div class="warn-box" data-warning-placement="rail"><strong>z vs. t:</strong> Den z-Test nur verwenden, wenn $\sigma$ wirklich bekannt ist. In der Praxis ist $\sigma$ fast nie bekannt — dann ist der t-Test korrekt. Bei sehr großem $n$ nähern sich $z$ und $t$ an, da $t_\infty = z$.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1212,11 +1438,26 @@ export const CONTENT = {
   },
   zwei_stichproben: {
     motivation: 'Häufig interessiert uns nicht ein einzelner Mittelwert, sondern der Unterschied zwischen zwei Gruppen. Zwei-Stichproben-Tests vergleichen Mittelwerte, Varianzen oder Anteile.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Zwei-Stichproben-Tests</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Testwahl zuerst: gepaart oder ungepaart?</h4>
 <p>Vor jeder Formel steht die Strukturfrage: dieselben Personen vor/nach einer Maßnahme oder zwei unabhängige Gruppen? Diese Entscheidung ist wichtiger als der spätere Taschenrechnerschritt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Gepoolte Varianz</strong> — Varianzschätzer bei Varianzhomogenität</li><li><strong>Verbundener t-Test</strong> — Test auf den Mittelwert der Paar-Differenzen</li><li><strong>F-Test auf Varianzgleichheit</strong> — Vorprüfung für pooled vs. Welch</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1250,6 +1491,23 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Hypothesen auf Differenz $\mu_1-\mu_2$ (oder $\mu_d$) formulieren; Teststatistik und Freiheitsgrade explizit; Effektgröße/Praxisrelevanz kurz deuten.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Standardfehler</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Annahmen vergessen:</strong> Verteilung, Regime, Rechtsfolge oder Marktform vor der Rechnung explizit benennen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>
+<p><em>platform-added-explanation:</em> Generische Prüfungsfallen; konzeptspezifische Fehler stehen in VL-Material.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1322,7 +1580,28 @@ export const CONTENT = {
   },
   varianzanalyse: {
     motivation: 'Die Varianzanalyse (ANOVA) erweitert den Gruppenvergleich auf mehr als zwei Gruppen. Sie testet, ob mindestens eine Gruppe einen anderen Mittelwert hat.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Varianzanalyse (ANOVA)</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Varianzanalyse (ANOVA) erweitert den Gruppenvergleich auf mehr als zwei Gruppen. Sie testet, ob mindestens eine Gruppe einen anderen Mittelwert hat.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>F-Statistik ANOVA</strong> — Varianzzerlegung in systematische und unsystematische Streuung</li><li><strong>Varianzzerlegung</strong> — Gesamtstreuung zerfällt in Zwischen- und Innergruppenanteil</li><li><strong>Effektmaß</strong> — Anteil der Gesamtstreuung, der auf Gruppenunterschiede entfällt</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Einfaktorielle ANOVA</h4>
@@ -1352,9 +1631,24 @@ export const CONTENT = {
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
-<h4 class="theory-subsection-title">Prüfungsstandard ANOVA</h4>
-<p>Varianzzerlegung: $SS_{\text{ges}} = SS_{\text{zw}} + SS_{\text{in}}$. F-Statistik $F = MS_{\text{zw}}/MS_{\text{in}}$ unter $H_0$ (gleiche Erwartungswerte).</p>
-      <div class="math-block">$$F = \frac{SS_{\text{zw}}/(k-1)}{SS_{\text{in}}/(n-k)}$$</div>
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p><strong>Klausurpfad:</strong> Varianzzerlegung $SST=SSB+SSW$ → $F=MSB/MSW$ → kritisches $F$ oder p-Wert → bei Ablehnung: welche Gruppe(n) differieren (Post-hoc nur mit Korrektur).</p>
+<p><em>source-distilled:</em> Aus Statistik-VL ANOVA-Block; Annahmen vor Inferenz nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Modellannahmen:</strong> Normalität und Varianzhomogenität prüfen oder robuste Alternative nennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1421,12 +1715,27 @@ export const CONTENT = {
   },
   nichtparametrisch: {
     motivation: 'Wenn kein plausibles parametrisches Modell vorgegeben ist, schätzt die Vorlesung die Dichte direkt aus den Daten: erst über Histogramme, dann über fließende Histogramme und Kerndichteschätzung. Nichtparametrisch heißt hier also nicht “Rangtest”, sondern “Verteilungsform ohne feste Familienannahme sichtbar machen”.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Nichtparametrische Dichteschätzung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wann die Vorlesung nichtparametrisch schätzt</h4>
 <p>VL 09 öffnet den Block genau mit dieser Frage: <strong>Was tun, wenn kein spezielles parametrisches Modell sinnvoll vorgegeben ist?</strong> Dann wird die unbekannte Dichte direkt aus der Stichprobe geschätzt, statt erst eine Normal-, Exponential- oder andere Familie zu unterstellen.</p>
       <p>Der methodische Kern lautet deshalb: Nichtparametrische Schätzung ist eine Formfrage. Wie sieht die Verteilung aus, wo häufen sich Datenpunkte, und wie stark willst du glätten?</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Histogramm als Dichteschätzer</strong> — Klassenhäufigkeit pro Stichprobenumfang und Klassenbreite.</li><li><strong>Fließendes Histogramm</strong> — Lokales Fenster der Breite $2b$ um den Auswertungspunkt $x$.</li><li><strong>Kerndichteschätzung</strong> — Die Bandbreite $b$ steuert die Glättung; die Kernfunktion gewichtet Beobachtungen im Umfeld von $x$.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1456,6 +1765,30 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
 <p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
 <p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
+<h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Klausurtransfer</h4>
+<p><strong>Klausurpfad:</strong> Hypothesen → Teststatistik → Verteilung/kritischer Wert → Entscheidung + p-Wert-Interpretation.</p>
+<p><strong>Kernrelationen:</strong> Histogramm als Dichteschätzer, Fließendes Histogramm, Kerndichteschätzung — Variablen vor Rechnung zuordnen.</p>
+<p><em>platform-added-explanation:</em> Prüfungsblock aus Kursverdichtung; Randnotation in offiziellen PDFs prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Glättungsfalle:</strong> Zu kleines $b$ verkauft Stichprobenrauschen als “echte Struktur”. Zu großes $b$ bügelt lokale Unterschiede weg. Für die Klausur ist meist wichtiger, die Wirkung von $b$ zu lesen, als eine bestimmte Kernfunktion auswendig aufzuzählen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1500,11 +1833,26 @@ export const CONTENT = {
 // internal source material, but expose distinct benchmark-grade concept pages.
 CONTENT.schaetzen_verfahren = {
   motivation: 'Schätzverfahren beantworten die Konstruktionsfrage: Wie wird aus einer Stichprobe ein plausibler Parameterwert? In diesem Kapitel stehen MoM, ML, KQ-Perspektive und MSE-Logik im Vordergrund.',
-  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Schätzverfahren (MoM, KQ, ML)</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Vom Parameter zum Schätzer</h4>
 <p>Ein <strong>Punktschätzer</strong> $\hat{\theta}$ ist eine Zufallsvariable auf Stichprobenbasis. Die Kernfrage lautet nicht nur “Wie rechne ich?”, sondern “Warum ist genau diese Rechenvorschrift für den Parameter sinnvoll?”</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Momentenbedingung</strong> — Theoretisches Moment wird durch empirisches Moment ersetzt</li><li><strong>MSE-Zerlegung</strong> — Gesamtgüte eines Schätzers</li><li><strong>Bernoulli-Standardschätzer</strong> — Standardfall, in dem MoM und ML zusammenfallen</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1546,6 +1894,21 @@ CONTENT.schaetzen_verfahren = {
 <h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
 <p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
 <p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodenwahl ist Prüfungsstoff</strong> Wenn die Aufgabe nach Konstruktion oder Güte fragt, reicht ein Intervall nicht. Dann musst du Schätzverfahren und Qualitätsmaß aktiv voneinander trennen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
   formeln: [
@@ -1619,11 +1982,26 @@ CONTENT.schaetzen_verfahren = {
 
 CONTENT.schaetzen_eigenschaften_intervalle = {
   motivation: 'Dieses Kapitel fragt nicht nach der Konstruktion des Schätzers, sondern nach seiner Verlässlichkeit: Bias, Standardfehler, Intervallbreite und saubere Intervallinterpretation stehen im Zentrum.',
-  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Schätzereigenschaften &amp; Konfidenzintervalle</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungstreue, Effizienz, Konsistenz</h4>
 <p>Ein guter Schätzer trifft den Parameter im Mittel (<strong>erwartungstreu</strong>), streut wenig (<strong>effizient</strong>) und nähert sich mit wachsendem $n$ dem wahren Wert an (<strong>konsistent</strong>).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>z-Konfidenzintervall</strong> — Intervall bei bekannter Populationsstreuung</li><li><strong>t-Konfidenzintervall</strong> — Standardintervall bei unbekannter Populationsstreuung</li><li><strong>Standardfehler</strong> — Präzision des Mittelwertschätzers</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1650,13 +2028,13 @@ CONTENT.schaetzen_eigenschaften_intervalle = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Schätzer &amp; KI</h4>
-<p>Erwartungstreue: $E[\hat\theta]=\theta$. Konsistenz: $\hat\theta \xrightarrow{p} \theta$. Effizienz: kleinste Varianz unter erwartungstreuen Schätzern (BLUE unter GM). KI: $\bar x \pm z_{1-\alpha/2}\\,\sigma/\sqrt{n}$ bei bekanntem $\sigma$.</p>
-      <div class="math-block">$$\bar x \pm t_{n-1,1-\alpha/2}\\,\frac{s}{\sqrt{n}}\quad\text{(}\sigma\text{ unbekannt)}$$</div>
+<p>Erwartungstreue: $E[\hat\theta]=\theta$. Konsistenz: $\hat\theta \xrightarrow{p} \theta$. Effizienz: kleinste Varianz unter erwartungstreuen Schätzern (BLUE unter GM). KI: $\bar x \pm z_{1-\alpha/2}\,\sigma/\sqrt{n}$ bei bekanntem $\sigma$.</p>
+      <div class="math-block">$$\bar x \pm t_{n-1,1-\alpha/2}\,\frac{s}{\sqrt{n}}\quad\text{(}\sigma\text{ unbekannt)}$$</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Test–KI-Dualität: $H_0: \mu=\mu_0$ nicht abgelehnt $\Leftrightarrow$ $\mu_0$ im $(1-\alpha)$-KI. Immer Verteilung der Pivot-Größe nennen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Interpretation KI:</strong> KI ist Intervallschätzer für $\mu$, kein Wahrscheinlichkeitsstatement über $\mu$ nach Beobachtung — Formulierung „95\\% der Intervalle" korrekt.</div>
+      <div class="warn-box" data-warning-placement="rail"><strong>Interpretation KI:</strong> KI ist Intervallschätzer für $\mu$, kein Wahrscheinlichkeitsstatement über $\mu$ nach Beobachtung — Formulierung „95\% der Intervalle" korrekt.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
@@ -1664,6 +2042,14 @@ CONTENT.schaetzen_eigenschaften_intervalle = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Standardfehler und Intervallbreite</h4>
 <p>Konfidenzintervalle basieren auf <strong>Punktschätzer ± kritischer Wert · Standardfehler</strong>. Je größer die Streuung und je kleiner $n$, desto breiter das Intervall.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
   formeln: [
@@ -1738,13 +2124,28 @@ CONTENT.schaetzen_eigenschaften_intervalle = {
 
 CONTENT.regression_schaetzung_inferenz = {
   motivation: 'Regression erklärt nicht nur eine Gleichung, sondern einen Zusammenhang unter Unsicherheit. Dieses Kapitel fokussiert Modellaufbau, OLS-Schätzung, Koeffizientenlesen, Signifikanz und Relevanz.',
-  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Regression: Schätzung &amp; Inferenz</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Modellidee</h4>
 <p>Die lineare Regression beschreibt den mittleren Zusammenhang zwischen einer Zielgröße $Y$ und einem oder mehreren Regressoren $X$. In der einfachen Form gilt:</p>
       <div class="math-block">$$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$$</div>
       <p>$\beta_0$ ist das Grundniveau, $\beta_1$ die durchschnittliche Änderung von $Y$ je zusätzlicher Einheit in $X$.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Regressionsmodell</strong> — Einfaches lineares Modell</li><li><strong>OLS-Steigung</strong> — Schätzer der durchschnittlichen marginalen Änderung</li><li><strong>Bestimmtheitsmaß</strong> — Anteil der erklärten Gesamtstreuung</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1778,6 +2179,21 @@ CONTENT.regression_schaetzung_inferenz = {
 <h4 class="theory-subsection-title">Klausurtransfer (source-distilled)</h4>
 <p><strong>Prüfungsstandard:</strong> (1) $H_0$ und $H_1$ aus Aufgabenstellung fixieren. (2) Teststatistik und Verteilung ($t$, $\chi^2$, …) zuordnen. (3) Kritisches Quantil oder p-Wert. (4) Entscheidung in Kontext interpretieren — Annahmen ($n$, Normalität, Unabhängigkeit) vor der Rechnung nennen.</p>
 <p><strong>Notation:</strong> VL-Symbole für $H_0$, $H_1$, $\alpha$, $n$ und Freiheitsgrade beibehalten; Stichprobe vs. Population strikt trennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Kausalitätsfalle</strong> Weder ein signifikanter Koeffizient noch ein hohes $R^2$ beweisen einen kausalen Effekt. Design, Theorie und mögliche Drittvariablen bleiben entscheidend.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
   formeln: [
@@ -1852,11 +2268,26 @@ CONTENT.regression_schaetzung_inferenz = {
 
 CONTENT.regression_diagnostik_prognose = {
   motivation: 'Nach der Schätzung beginnt die Modellkritik: Residuen, Heteroskedastizität, Ausreißer und der Unterschied zwischen Erwartungswert- und Einzelprognose entscheiden, wie belastbar die Regression wirklich ist.',
-  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+  theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Regression: Diagnostik &amp; Prognose</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Diagnostik fragt nach Modelltragfähigkeit</h4>
 <p>Eine Regressionsgleichung ist keine Endstation. Residuenplots, QQ-Plot, Ausreißer- und Hebelpunktdiagnostik prüfen, ob die Inferenzbedingungen plausibel bleiben.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Residuum</strong> — Abweichung zwischen Beobachtung und modelliertem Wert</li><li><strong>Konfidenzintervall im Modell</strong> — Intervall für den Erwartungswert bei gegebenem x_0</li><li><strong>Prognoseintervall</strong> — Intervall für eine neue Einzelbeobachtung</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1892,6 +2323,21 @@ CONTENT.regression_diagnostik_prognose = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>OLS-Reste sollten weißes Rauschen sein (GM4). Breusch-Pagan/White qualitativ: heteroskedastische SE oder robuste SE (HC). Outlier: Leverage/Cook's D erwähnen.</p>
       <div class="warn-box" data-warning-placement="rail"><strong>Prognose vs. KI:</strong> Prognoseintervall für $y_{n+1}$ enthält $\hat\sigma$ und $x_{n+1}$ — nicht mit KI für $E[y|x]$ verwechseln.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Prognose vs. KI:</strong> Prognoseintervall für $y_{n+1}$ enthält $\hat\sigma$ und $x_{n+1}$ — nicht mit KI für $E[y|x]$ verwechseln.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
   formeln: [

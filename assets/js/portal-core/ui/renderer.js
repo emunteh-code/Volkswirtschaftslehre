@@ -50,7 +50,7 @@ export function buildKonzeptCheckHomeCardHtml(enabled = false) {
 }
 
 export const KONCEPT_CHECK_SCOPE_NOTE =
-  "Konzept-Check: in Makro I, Statistik und Makro II — andere Module nutzen Schnelltest & Aufgaben.";
+  "Konzept-Check (5 Min.): Makro I, Statistik, Makro II, Finanz, Recht und IWB — sonst Schnelltest & Aufgaben.";
 
 export function createRenderer({
   courseLabel,
@@ -75,6 +75,9 @@ export function createRenderer({
   examDrillsById = null,
   /** Raw HTML inserted inside the home action row (optional; e.g. Konzept-Check card) */
   extraHomeActionCardsHtml = '',
+  /** First-visit primary CTA when no local progress (e.g. budget, deskriptiv). */
+  recommendedStartConceptId = null,
+  recommendedStartTab = "aufgaben",
   /** One-line disclosure under the Lern-Dashboard home card (fleet-wide default). */
   homeLernDashboardPilotNote = HOME_DASHBOARD_DISCLOSURE_NOTE,
   /** Show gemischter Schnelltest card (within-module interleaving; cross-module backlog). */
@@ -91,8 +94,10 @@ export function createRenderer({
   sourceMaterialBaseUrl = '',
   /** Optional: exam-OS formula cards keyed by concept id. */
   formulaCardsByConcept = {},
-  /** Optional: source-grounded task-family taxonomy keyed by concept id. */
-  taskFamiliesByConcept = {}
+  /** Optional: exam-OS task-family taxonomy keyed by concept id. */
+  taskFamiliesByConcept = {},
+  /** Module slug for recipe synthesis (e.g. mikro1, statistik). */
+  moduleSlug = ""
 }) {
   let current = null;
   let currentTab = "theorie";
@@ -556,12 +561,20 @@ ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${
   }
 
   function extractTheorySignals(entry, conceptId = null, opts = {}) {
+    const chapterTitle = conceptId ? chapterMap[conceptId]?.title : entry?.title;
+    const fusionBase = opts.skipFusion
+      ? { moduleSlug, chapterTitle }
+      : {
+        ...buildIntuitionFusionOpts(entry, conceptId),
+        moduleSlug,
+        chapterTitle
+      };
     const warningData = opts.skipFusion
-      ? getWarningSystemData(entry)
+      ? getWarningSystemData(entry, null, fusionBase)
       : getWarningSystemData(
           entry,
           conceptId ? intuitionById[conceptId] : null,
-          buildIntuitionFusionOpts(entry, conceptId)
+          fusionBase
         );
     if (!warningData.theoryHtml || typeof DOMParser === "undefined") {
       return {
@@ -1375,14 +1388,18 @@ ${anchorBadge}
         const warningData = getWarningSystemData(
           entry,
           intuitionById[conceptId],
-          buildIntuitionFusionOpts(entry, conceptId)
+          {
+            ...buildIntuitionFusionOpts(entry, conceptId),
+            moduleSlug,
+            chapterTitle: chapter.title
+          }
         );
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
         content.innerHTML =
           headerHTML + `<div class="panel active theory-tab-panel">${objectivesBlock}${warningData.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
-        ensureGraphPedagogyChrome(conceptId, content);
+        ensureGraphPedagogyChrome(conceptId, content, moduleSlug);
         if (initGraphFn) initGraphFn(conceptId);
       } else if (activeTab === "aufgaben") {
         const masteryHtml = renderMastery(conceptId);
@@ -1516,8 +1533,26 @@ ${anchorBadge}
 </div>`
       : "";
 
+    const startChapter =
+      !seenCount && !lastChapter && recommendedStartConceptId
+        ? chapters.find((chapter) => chapter.id === recommendedStartConceptId)
+        : null;
+    const firstVisitCard =
+      startChapter && !quickStartCard
+        ? `<div class="home-action-card home-action-card--primary" onclick="window.__navigate('${startChapter.id}', { tab: '${recommendedStartTab}' })" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE(`window.__navigate('${startChapter.id}', { tab: '${recommendedStartTab}' })`)}>
+<div class="hac-title">Hier starten</div>
+<div class="hac-desc">${renderMathTitle(startChapter.title)} — ${recommendedStartTab === "aufgaben" ? "Aufgaben" : "Theorie"}</div>
+<span class="home-action-sim-badge">Plattform-Übung</span>
+</div>`
+        : "";
+
+    const konzeptCheckCardHtml =
+      typeof window !== "undefined" && typeof window.__startConceptSchnelltest === "function"
+        ? KONCEPT_CHECK_HOME_ACTION_CARD_HTML
+        : "";
+
     html += `<div class="home-action-row">
-${quickStartCard}
+${quickStartCard || firstVisitCard}
 <div class="home-action-card" onclick="window.__showDashboard()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showDashboard()")}>
 <div class="hac-title">Lern-Dashboard</div>
 <div class="hac-desc">Fortschritt, schwache Bereiche, Wiederholungen</div>
@@ -1534,7 +1569,7 @@ ${showInterleavedExamCard && typeof window !== "undefined" && typeof window.__st
 <div class="hac-desc">Wie Schnelltest — Themenwechsel im Modul (Pilot)</div>
 <span class="home-action-sim-badge">Plattform-Simulation</span>
 </div>` : ""}
-${extraHomeActionCardsHtml}
+${konzeptCheckCardHtml}${extraHomeActionCardsHtml}
 <div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showSRSReview()")}>
 <div class="hac-title">Wiederholung${due.length > 0 ? ` (${due.length})` : ""}</div>
 <div class="hac-desc">Spaced Repetition für heute</div>
@@ -1548,7 +1583,7 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
 ` : ""}
 </div>`;
 
-    if (!extraHomeActionCardsHtml) {
+    if (!konzeptCheckCardHtml && !extraHomeActionCardsHtml) {
       html += `<p class="home-konzept-check-note" role="note">${KONCEPT_CHECK_SCOPE_NOTE}</p>`;
     }
 

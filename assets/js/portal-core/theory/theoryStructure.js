@@ -455,11 +455,163 @@ export function countTheoryRecipeCards(html) {
   return [...String(html ?? "").matchAll(/theory-recipe-section--([a-z_]+)/g)].length;
 }
 
+const MODULE_EXAM_PATH = {
+  mikro1: "Modell → FOC/Gleichgewicht → Comparative Statics → Klausurfehler benennen.",
+  mikro2: "Mechanismus → Gleichgewicht/Effizienz → Wohlfahrts- oder Politikfolge; Markt vs. Sozialoptimum.",
+  makro1: "Regime/Modell → Kanal (Güter/Geld/Arbeit) → Wirkung auf Y, i oder Erwartungen.",
+  makro2: "Regime → Kanal (Güter/Geld/Außen) → Wirkung auf Y, i oder ε; Wechselkursregime nicht weglassen.",
+  statistik: "Hypothesen → Teststatistik → Verteilung/kritischer Wert → Entscheidung + p-Wert-Interpretation.",
+  oekonometrie: "Annahmen → Schätzer/Identifikation → Inferenz (SE, t/F) → ökonomische Lesart.",
+  mathematik: "Definition/Objekt → Rechenschritt → ökonomische oder statistische Interpretation.",
+  finanzwirtschaft: "Cashflow/Zeitpunkt → Bewertungsrelation → Entscheidungsregel (NPV/IRR/WACC).",
+  jahresabschluss: "Geschäftsvorfall → Buchungssatz → Bilanz/GuV-Wirkung; GoB-Prinzip explizit.",
+  recht: "Obersatz → Merkmalskette/Tatbestand → Subsumtion → Ergebnis.",
+  "internationale-wirtschaftsbeziehungen":
+    "Modellannahmen → Gleichgewicht/Identität → Wohlfahrts- oder Politikfolge → Regime/Instrument benennen."
+};
+
+/** @param {Record<string, { heading: string, inner: string }[]>} grouped */
+function bucketBody(grouped, id) {
+  return (grouped[id] || []).map((i) => i.inner).join("\n");
+}
+
+/** @param {string} innerHtml */
+function extractWarnBoxes(innerHtml) {
+  return [...String(innerHtml ?? "").matchAll(/<div class="warn-box"[^>]*>([\s\S]*?)<\/div>/gi)].map(
+    (m) => m[0]
+  );
+}
+
 /**
- * Emit only recipe cards with substantive body content; omit placeholders and header duplicates.
+ * Fill missing recipe buckets from entry metadata (platform-added where noted).
+ * @param {Record<string, { heading: string, inner: string }[]>} grouped
+ * @param {object} entry
+ * @param {{ chapterTitle?: string, moduleSlug?: string }} meta
+ */
+export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
+  const title = meta.chapterTitle || "Konzept";
+  const slug = meta.moduleSlug || "";
+  const examPath = MODULE_EXAM_PATH[slug] || MODULE_EXAM_PATH.mikro1;
+  const motivation = hasMeaningfulIntuitionText(entry.motivation) ? String(entry.motivation).trim() : "";
+
+  if (!theoryBodyHasContent(bucketBody(grouped, "orientierung"))) {
+    grouped.orientierung = [
+      {
+        heading: "",
+        inner: `<p><strong>${escapeHtml(title)}</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>`
+      }
+    ];
+  }
+
+  if (!theoryBodyHasContent(bucketBody(grouped, "kernidee")) && motivation) {
+    grouped.kernidee = [{ heading: "", inner: `<p>${motivation}</p>` }];
+  }
+
+  if (!theoryBodyHasContent(bucketBody(grouped, "mechanismus"))) {
+    grouped.mechanismus = [
+      {
+        heading: "Ablauf",
+        inner: `<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>`
+      }
+    ];
+  }
+
+  if (!theoryBodyHasContent(bucketBody(grouped, "definitionen"))) {
+    let defInner = "";
+    if (Array.isArray(entry.formeln) && entry.formeln.length) {
+      const items = entry.formeln
+        .slice(0, 6)
+        .map((f) => {
+          const label = f?.label ? escapeHtml(stripTags(f.label)) : "";
+          const desc = f?.desc ? escapeHtml(stripTags(f.desc)) : "";
+          return label ? `<li><strong>${label}</strong>${desc ? ` — ${desc}` : ""}</li>` : "";
+        })
+        .filter(Boolean)
+        .join("");
+      if (items) {
+        defInner = `<ul>${items}</ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>`;
+      }
+    }
+    if (!defInner && Array.isArray(entry.cards) && entry.cards.length) {
+      const items = entry.cards
+        .slice(0, 6)
+        .map((c) => {
+          const title = c?.title ? escapeHtml(stripTags(c.title)) : "";
+          const value = c?.value ? escapeHtml(stripTags(c.value)) : "";
+          return title ? `<li><strong>${title}</strong>${value ? ` — ${value}` : ""}</li>` : "";
+        })
+        .filter(Boolean)
+        .join("");
+      if (items) {
+        defInner = `<ul>${items}</ul>
+<p><em>source-distilled:</em> Merkpunkte aus Kursmaterial; Details in VL-PDFs (Quellen-Tab).</p>`;
+      }
+    }
+    if (defInner) {
+      grouped.definitionen = [{ heading: "Kerngrößen", inner: defInner }];
+    }
+  }
+
+  const warnFromBody = THEORY_SECTION_ORDER.filter((s) => s.id !== "fehler").flatMap((s) =>
+    extractWarnBoxes(bucketBody(grouped, s.id))
+  );
+  if (!theoryBodyHasContent(bucketBody(grouped, "fehler")) && warnFromBody.length) {
+    grouped.fehler = [{ heading: "Typische Prüfungsfallen", inner: warnFromBody.join("\n") }];
+  } else if (!theoryBodyHasContent(bucketBody(grouped, "fehler"))) {
+    grouped.fehler = [
+      {
+        heading: "Standardfehler",
+        inner: `<div class="warn-box" data-warning-placement="rail"><strong>Annahmen vergessen:</strong> Verteilung, Regime, Rechtsfolge oder Marktform vor der Rechnung explizit benennen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>
+<p><em>platform-added-explanation:</em> Generische Prüfungsfallen; konzeptspezifische Fehler stehen in VL-Material.</p>`
+      }
+    ];
+  }
+
+  if (!theoryBodyHasContent(bucketBody(grouped, "anwendung"))) {
+    const formulaLabels = (entry.formeln || [])
+      .slice(0, 3)
+      .map((f) => f?.label)
+      .filter(Boolean)
+      .join(", ");
+    grouped.anwendung = [
+      {
+        heading: "Klausurtransfer",
+        inner: `<p><strong>Klausurpfad:</strong> ${escapeHtml(examPath)}</p>
+${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabels)} — Variablen vor Rechnung zuordnen.</p>` : ""}
+<p><em>platform-added-explanation:</em> Prüfungsblock aus Kursverdichtung; Randnotation in offiziellen PDFs prüfen.</p>`
+      }
+    ];
+  }
+
+  if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben")) && Array.isArray(entry.objectives) && entry.objectives.length) {
+    const items = entry.objectives.map((o) => `<li>${escapeHtml(stripTags(String(o)))}</li>`).join("");
+    grouped.vor_aufgaben = [
+      {
+        heading: "Checkliste",
+        inner: `<ul class="theory-objectives-checklist">${items}</ul>
+<p>Vor den Aufgaben: jede Formel verbal deuten können; Grafik-Skizze mit Achsenbeschriftung parat haben.</p>`
+      }
+    ];
+  } else if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben"))) {
+    grouped.vor_aufgaben = [
+      {
+        heading: "Vor den Aufgaben",
+        inner: `<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>`
+      }
+    ];
+  }
+}
+
+/**
+ * Emit recipe cards with substantive body content; synthesize honest gaps from entry metadata.
  * @param {string} html
  * @param {object} [entry]
- * @param {{ chapterTitle?: string, headerMotivationShown?: boolean, headerObjectivesShown?: boolean }} [meta]
+ * @param {{ chapterTitle?: string, headerMotivationShown?: boolean, headerObjectivesShown?: boolean, moduleSlug?: string }} [meta]
  */
 export function completeTheoryRecipe(html, entry = {}, meta = {}) {
   const grouped = groupTheorySections(flattenTheoryToSections(html));
@@ -480,6 +632,8 @@ export function completeTheoryRecipe(html, entry = {}, meta = {}) {
     }
   }
 
+  synthesizeRecipeGaps(grouped, entry, meta);
+
   const parts = [];
   const emittedBodies = [];
 
@@ -494,9 +648,14 @@ ${normalizeSubsectionMarkup(item.inner)}
     });
     const body = stripPlaceholderMarkup(bodyParts.join("\n")).trim();
     if (!theoryBodyHasContent(body)) continue;
-    if (headerMotivation && isDuplicateTheoryText(body, headerMotivation)) continue;
+    if (spec.id === "orientierung" && headerMotivation && isDuplicateTheoryText(body, headerMotivation)) continue;
     if (headerObjectives && spec.id === "vor_aufgaben") continue;
-    if (emittedBodies.some((prev) => isDuplicateTheoryText(body, prev))) continue;
+    if (
+      spec.id !== "definitionen" &&
+      emittedBodies.some((prev) => isDuplicateTheoryText(body, prev))
+    ) {
+      continue;
+    }
 
     const section = buildRecipeSectionHtml(spec, body);
     if (!section) continue;
@@ -667,9 +826,10 @@ function injectFragmentIntoRecipeSection(html, sectionId, fragment) {
  */
 export function fuseIntuitionIntoTheoryHtml(html, intuitionRaw, entry = {}, fusionOpts = {}) {
   const base = completeTheoryRecipe(normalizeTheoryHtml(html), entry, {
-    chapterTitle: entry.title,
-    headerMotivationShown: true,
-    headerObjectivesShown: true
+    chapterTitle: fusionOpts.chapterTitle || entry.title,
+    moduleSlug: fusionOpts.moduleSlug || entry.moduleSlug || "",
+    headerMotivationShown: fusionOpts.headerMotivationShown !== false,
+    headerObjectivesShown: fusionOpts.headerObjectivesShown !== false
   });
   const intuition = normalizeIntuitionRecord(intuitionRaw);
   if (!intuition) return base;

@@ -5,6 +5,7 @@
  */
 import { createPortalApp } from '../../assets/js/portal-core/app.js';
 import { COURSE_CONFIG } from './data/courseConfig.js';
+import { CONCEPT_HASH_ALIASES } from './data/conceptHashAliases.js';
 import * as appState from './state/appState.js';
 import * as storage from './state/storage.js';
 import { CHAPTERS } from './data/chapters.js';
@@ -28,6 +29,7 @@ createPortalApp({
   courseLabel: COURSE_CONFIG.courseLabel,
   consentKey: COURSE_CONFIG.consentKey,
   chapters: CHAPTERS,
+  conceptHashAliases: CONCEPT_HASH_ALIASES,
   appState,
   storage,
   navigation,

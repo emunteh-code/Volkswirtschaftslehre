@@ -51,11 +51,26 @@ export const CHAPTERS = [
 export const CONTENT = {
   finanz_denkweise: {
     motivation: 'Finanzwirtschaft beginnt nicht mit einer Rechenformel, sondern mit einer Perspektive: Welche Alternative bindet wann Mittel, welche Rückflüsse entstehen und welches Vermögen wird dadurch geschaffen oder vernichtet?',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Einführung in die finanzwirtschaftliche Denkweise</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was Finanzwirtschaft betrachtet</h4>
 <p>Finanzwirtschaft liest Unternehmen über Zahlungsströme, Zeitpunkte und Risiko. Anders als reine Buchungstechnik fragt sie nicht nur, wie ein Vorgang verbucht wird, sondern ob er Liquidität bindet, Wert schafft und künftige Handlungsspielräume erweitert oder verengt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Leitobjekt</strong> — Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.</li><li><strong>Leitfrage</strong> — Gute Finanzwirtschaft verbindet alle drei Ebenen.</li><li><strong>Zeitwert</strong> — Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -63,7 +78,7 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <p><strong>Leitobjekt</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--phrase semantic-display--pres-anchor" role="group"><span class="semantic-schema__item">Zahlungsreihe { z_0, z_1, ..., z_n }</span></div><p>Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.</p>
 <p><strong>Leitfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Zeitpunkt</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Zahlung</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Risiko</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Entscheidung</span></div><p>Gute Finanzwirtschaft verbindet alle drei Ebenen.</p>
-<p><strong>Zeitwert</strong></p><div class="math-block">$$BW = \\sum_{t=0}^{n} \\frac{z_t}{(1+i)^t}$$</div><p>Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</p>
+<p><strong>Zeitwert</strong></p><div class="math-block">$$BW = \sum_{t=0}^{n} \frac{z_t}{(1+i)^t}$$</div><p>Grundidee der Abzinsung — Vorausschau auf Kapitalwert.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -83,18 +98,24 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section><div class="section-block"><h3>Prüfungsstandard</h3>
-      <p>Finanzentscheidungen = Bewertung zukünftiger Zahlungsströme unter Zielkonflikt Liquidität, Rendite, Risiko. Immer Zeitebene und Risikoprämie benennen.</p>
-    </div><div class="section-block"><h3>Goldene Bilanzregel</h3>
-      <p>Mittelfristig: Vermögen finanzieren langfristiges Vermögen; kurzfristiges Vermögen kurzfristig. Brücke zur Liquiditätsplanung.</p>
-    </div>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
-    
-  </div>
-`,
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Standardfehler</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Annahmen vergessen:</strong> Verteilung, Regime, Rechtsfolge oder Marktform vor der Rechnung explizit benennen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>
+<p><em>platform-added-explanation:</em> Generische Prüfungsfallen; konzeptspezifische Fehler stehen in VL-Material.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Leitobjekt', eq: phrase('Zahlungsreihe { z_0, z_1, ..., z_n }'), desc: 'Die Zahlungsreihe ist die gemeinsame Sprache des Moduls.' },
       { label: 'Leitfrage', eq: schema(['Zeitpunkt', '+', 'Zahlung', '+', 'Risiko', '⇒', 'Entscheidung']), desc: 'Gute Finanzwirtschaft verbindet alle drei Ebenen.' },
@@ -123,19 +144,34 @@ export const CONTENT = {
 
   liquiditaetsplanung: {
     motivation: 'Viele Unternehmen scheitern nicht an fehlenden Gewinnen, sondern an falscher Fristenstruktur. Genau deshalb beginnt die Finanzwirtschaft mit Liquiditätsplanung und Kapitalbedarf statt sofort mit Renditerechnung.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Liquiditätsplanung, Fristenkongruenz und goldene Bilanzregel</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Liquidität als Überlebensbedingung</h4>
 <p>Liquidität fragt, ob ein Unternehmen seine fälligen Zahlungen zum richtigen Zeitpunkt leisten kann. Ein Projekt kann langfristig rentabel sein und trotzdem kurzfristig eine Finanzierungslücke erzeugen, wenn Auszahlungen früh und Rückflüsse spät anfallen.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Kumulierter Saldo</strong> — Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</li><li><strong>Goldene Bilanzregel</strong> — Langfristige Bindung verlangt langfristige Finanzierung.</li><li><strong>Maximaler Bedarf</strong> — Finanzierungsbedarf aus tiefstem kumulierten Saldo.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
-<p><strong>Kumulierter Saldo</strong></p><div class="math-block">$$K_t = \\sum_{\\tau=0}^{t} Ein_\\tau - \\sum_{\\tau=0}^{t} Aus_\\tau$$</div><p>Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</p>
+<p><strong>Kumulierter Saldo</strong></p><div class="math-block">$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$</div><p>Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.</p>
 <p><strong>Goldene Bilanzregel</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">AV</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">≤</span></span><span class="semantic-schema__item">langfristiges Kapital</span></div><p>Langfristige Bindung verlangt langfristige Finanzierung.</p>
-<p><strong>Maximaler Bedarf</strong></p><div class="math-block">$$KB_{max} = -\\min_t K_t$$</div><p>Finanzierungsbedarf aus tiefstem kumulierten Saldo.</p>
+<p><strong>Maximaler Bedarf</strong></p><div class="math-block">$$KB_{max} = -\min_t K_t$$</div><p>Finanzierungsbedarf aus tiefstem kumulierten Saldo.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -149,8 +185,8 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Liquiditätsplan</h4>
-<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
-      <div class="math-block">$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$</div>
+<p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\min_t KS_t|$ (tiefster Punkt).</p>
+      <div class="math-block">$$KS_t = \sum_{s=0}^{t} Saldo_s,\quad \text{Bedarf} = |\min_t KS_t|$$</div>
 
 
 <h4 class="theory-subsection-title">Klausurtransfer</h4>
@@ -161,22 +197,22 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section><div class="section-block"><h3>In der Klausur: Liquiditätsplan</h3>
-      <p>Periodenweise Salden: $Saldo_t = Einzahlungen_t - Auszahlungen_t$. Kumulierter Saldo $KS_t = \\sum_{s=0}^{t} Saldo_s$. Maximaler Finanzierungsbedarf = $|\\min_t KS_t|$ (tiefster Punkt).</p>
-      <div class="math-block">$$KS_t = \\sum_{s=0}^{t} Saldo_s,\\quad \\text{Bedarf} = |\\min_t KS_t|$$</div>
-    </div><div class="section-block"><h3>Goldene Bilanzregel & Fristenkongruenz</h3>
-      <p>Mittelfristig: langfristiges AV langfristig finanzieren; kurzfristiges UV kurzfristig. Liquiditätsplan prüft ob Zwischenfinanzierung nötig — Endsaldo positiv reicht nicht.</p>
-    </div><div class="section-block"><h3>Klausurtransfer</h3>
-      <p>Schrittfolge: (1) Zahlungsströme je Periode. (2) Periodensaldo. (3) Kumulieren. (4) Minimum identifizieren. (5) Goldene Bilanzregel bewerten.</p>
-      <div class="warn-box"><strong>Endsaldo-Falle:</strong> Positiver Endsaldo kann trotzdem Zwischenliquiditätskrise verbergen — immer kumulieren.</div>
-    </div>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
-    
-  </div>
-`,
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Endsaldo-Falle:</strong> Positiver Endsaldo kann trotzdem Zwischenliquiditätskrise verbergen — immer kumulieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Kumulierter Saldo', eq: String.raw`$$K_t = \sum_{\tau=0}^{t} Ein_\tau - \sum_{\tau=0}^{t} Aus_\tau$$`, desc: 'Der tiefste kumulierte Saldo markiert den maximalen Kapitalbedarf.' },
       { label: 'Goldene Bilanzregel', eq: schema(['AV', '≤', 'langfristiges Kapital']), desc: 'Langfristige Bindung verlangt langfristige Finanzierung.' },
@@ -218,6 +254,14 @@ export const CONTENT = {
 <p>Die moderne Finanzwirtschaft fragt nicht mehr nur nach Liquidität und Mittelherkunft, sondern nach wertmaximierenden Entscheidungen aus Sicht der Kapitalgeber. Marktpreise und Präferenzen werden damit zu Kernbausteinen der Analyse.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Marktpreis der Zeit</strong> — Der Zins verbindet Gegenwarts- und Zukunftszahlungen.</li><li><strong>Entscheidungslogik</strong> — Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.</li><li><strong>Entscheidungslogik (Merksatz)</strong> — Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -250,13 +294,21 @@ export const CONTENT = {
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Verwechslungsfehler:</strong> Kapitalmarktorientierung meint nicht „die Realität ist reibungslos“, sondern: Zins und Marktpreis strukturieren Vergleiche über die Zeit und liefern unter klaren Annahmen eindeutige Investitionsregeln.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Marktpreis der Zeit', eq: schema(['Zins', '=', 'Preis des Zeittausches']), desc: 'Der Zins verbindet Gegenwarts- und Zukunftszahlungen.', variables: { 'Zins': 'Marktpreis, zu dem Konsum zwischen Zeitpunkten getauscht wird' } },
       { label: 'Entscheidungslogik', eq: schema(['Zahlung', '+', 'Zeitpunkt', '+', 'Marktpreis', '⇒', 'Bewertung']), desc: 'Finanzentscheidungen entstehen aus Zahlungen, Zeitstruktur und Vergleichsmaßstab.' }
@@ -307,12 +359,28 @@ export const CONTENT = {
 <p>Adverse Selection vor Vertrag, Moral Hazard danach. Finanzmarkt: Screening, Signaling, Covenants als institutionelle Antworten.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Marktunvollkommenheit</strong> — Institutionen werden durch Friktionen wirtschaftlich sinnvoll.</li><li><strong>Orientierungsfrage</strong> — Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</li><li><strong>Orientierungsfrage (Merksatz)</strong> — Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <p><strong>Marktunvollkommenheit</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">Informationskosten</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Transaktionskosten</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Institutionen</span></div><p>Institutionen werden durch Friktionen wirtschaftlich sinnvoll.</p>
 <p><strong>Orientierungsfrage</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">vollkommener Markt? Nein</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Institution / Vertrag / Kontrolle prüfen</span></div><p>Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</p>
 <p><strong>Orientierungsfrage (Merksatz)</strong></p><div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">vollkommener Markt? Nein</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">⇒</span></span><span class="semantic-schema__item">Institution / Vertrag / Kontrolle prüfen</span></div><p>Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -325,26 +393,24 @@ export const CONTENT = {
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Ökonomisches Problem → Institution/Vertrag → Wohlfahrts- oder Effizienzfolge. Nicht nur Definition.</p>
-
-
-<h4 class="theory-subsection-title">Prüfungsstandard</h4>
-<p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section><div class="section-block"><h3>Asymmetrische Information</h3>
-      <p>Adverse Selection vor Vertrag, Moral Hazard danach. Finanzmarkt: Screening, Signaling, Covenants als institutionelle Antworten.</p>
-    </div><div class="section-block"><h3>In der Klausur: Institutionen</h3>
-      <p>Principal-Agent: Anreizverträge, Monitoring-Kosten. Banken als Delegated Monitors (Diamond). Regulierung: Mindesteigenkapital, Deposit Insurance — Trade-off Moral Hazard vs. Stabilität.</p>
-      <div class="warn-box"><strong>Institution ≠ Details:</strong> Ökonomisches Problem und Wohlfahrtsfolge priorisieren — nicht nur Institutionen aufzählen.</div>
-    </div><div class="section-block"><h3>Prüfungsstandard</h3>
-      <p>Ökonomisches Problem → Institution/Vertrag → Wohlfahrts- oder Effizienzfolge. Nicht nur Definition.</p>
-    </div>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
-    
-  </div>
-`,
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Abstraktionsfehler:</strong> Die Theorie vollkommener Märkte ist ein Benchmark, keine Beschreibung der Wirklichkeit.</div>
+<div class="warn-box"><strong>Institution ≠ Details:</strong> Ökonomisches Problem und Wohlfahrtsfolge priorisieren — nicht nur Institutionen aufzählen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Marktunvollkommenheit', eq: schema(['Informationskosten', '+', 'Transaktionskosten', '⇒', 'Institutionen']), desc: 'Institutionen werden durch Friktionen wirtschaftlich sinnvoll.' },
       { label: 'Orientierungsfrage', eq: schema(['vollkommener Markt? Nein', '⇒', 'Institution / Vertrag / Kontrolle prüfen']), desc: 'Wenn Preismechanik nicht reicht, rückt institutionelle Gestaltung in den Vordergrund.' }
@@ -379,12 +445,27 @@ export const CONTENT = {
 
   intertemporale_wahl: {
     motivation: 'Die intertemporale Wahl ist die Mikrostruktur fast aller Finanzierungsfragen: Sparen, Kreditaufnahme und Investition sind letztlich verschiedene Formen desselben Tauschs zwischen heute und morgen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Intertemporale Wahl, Zeitpräferenzen und Budgetgerade</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Intertemporale Budgetgerade</h4>
 <p>Die Budgetgerade zeigt, welche Kombinationen aus heutigem und zukünftigem Konsum bei gegebenem Ausstattungspunkt und Zinssatz erreichbar sind. Sie wird steiler, wenn der Markt Gegenwartskonsum teurer macht, also der Zins steigt.</p>
          <div class="math-block math-block--theory">$$c_1 = y_1 + (1+i)(y_0 - c_0)$$</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Budgetgerade</strong> — Sie zeigt die marktbestimmten Tauschmöglichkeiten zwischen Gegenwart und Zukunft.</li><li><strong>Tangentialbedingung</strong> — Marktpreis und Zeitpräferenz stimmen im Optimum überein.</li><li><strong>Investitionsverschiebung</strong> — Positiver Kapitalwert erweitert die Erreichbarkeit.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -426,6 +507,21 @@ export const CONTENT = {
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Grafikfehler:</strong> Die Budgetgerade ist keine bloße Skizze. Achsenabschnitte, Steigung und Ausstattungspunkt tragen jeweils eine finanzwirtschaftliche Aussage.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Budgetgerade', eq: String.raw`$$c_1 = y_1 + (1+i)(y_0 - c_0)$$`, desc: 'Sie zeigt die marktbestimmten Tauschmöglichkeiten zwischen Gegenwart und Zukunft.' },
@@ -462,7 +558,28 @@ export const CONTENT = {
 
   kapitalwert_fisher: {
     motivation: 'Mit dem Kapitalwert beginnt die eigentliche Investitionstheorie: Aus einer Zahlungsreihe wird ein Vermögensurteil, und aus einer Vermögensregel folgt eine saubere Entscheidungslogik.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Kapitalwert, Fisher-Separation und unvollkommener Kapitalmarkt</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Mit dem Kapitalwert beginnt die eigentliche Investitionstheorie: Aus einer Zahlungsreihe wird ein Vermögensurteil, und aus einer Vermögensregel folgt eine saubere Entscheidungslogik.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Kapitalwert</strong> — Alle entscheidungsrelevanten Zahlungen werden auf t=0 bezogen.</li><li><strong>Kapitalwertregel</strong> — Positiver Kapitalwert bedeutet Vermögenszuwachs.</li><li><strong>Wahlregel</strong> — Bei Ausschlussalternativen wählt man das Projekt mit dem höchsten positiven Kapitalwert.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">NPV-Regel</h4>
@@ -475,6 +592,9 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Grenzen</h4>
 <p>Bei Kapitalrationierung, strategischen Optionen oder nicht beobachtbarem Risiko: NPV allein reicht — qualitative Begründung ergänzen.</p>
+<h4 class="theory-subsection-title">Fisher-Separation</h4>
+<p>Bei perfektem Kapitalmarkt und einheitlichem Zins $i$ trennt sich die Investitions- von der Finanzierungsentscheidung: Projekte nach $K_0>0$ wählen, Finanzierung separat am Marktzins — die Trennung bricht bei Rationierung, asymmetrischen Zinsen oder strategischen Interdependenzen.</p>
+<p><em>source-distilled:</em> Finanzwirtschaft-VL Kapitalwert/Fisher; Randfälle in Übungs-PDFs.</p>
       <div class="warn-box"><strong>IRR-Falle:</strong> Bei mehrfachen Vorzeichenwechseln mehrere IRR möglich — NPV-Kriterium bevorzugen.</div>
 </div>
 </section>
@@ -483,6 +603,21 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>IRR-Falle:</strong> Bei mehrfachen Vorzeichenwechseln mehrere IRR möglich — NPV-Kriterium bevorzugen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -537,6 +672,20 @@ export const CONTENT = {
 <p>100 € heute und 100 € in einem Jahr sind finanziell nicht gleichwertig. Erst über Auf- oder Abzinsung werden Zahlungen auf einen gemeinsamen Bewertungszeitpunkt transformiert und damit vergleichbar.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Auf- und Abzinsung sind die Grammatik jeder dynamischen Investitionsrechnung. Wer diese Transformationslogik nicht sicher beherrscht, liest spätere Kapitalwert- und Endwertaufgaben unsauber.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Endwert</strong> — Aus Gegenwartswert wird Zukunftswert.</li><li><strong>Barwert</strong> — Aus Zukunftswert wird Gegenwartswert.</li><li><strong>Variable Zinsen</strong> — Periodenscharfe Abzinsung bei wechselnden Sätzen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -571,6 +720,22 @@ BW_0 &= \frac{EW_n}{(1+i)^n}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Zeitachsenfehler:</strong> Vor jeder Rechnung muss klar sein, auf welchen Zeitpunkt alle Zahlungen gebracht werden.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Ein-Zins-Fehler:</strong> Bei is ≠ ih darf nicht pauschal ein Mittelwert verwendet werden, ohne die Rolle des Entscheiders zu klären.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -609,7 +774,28 @@ BW_0 &= \frac{EW_n}{(1+i)^n}
 
   renten_endwert: {
     motivation: 'Mehrperiodige Investitionsaufgaben werden erst dann klausursicher, wenn regelmäßige Zahlungen sauber über Rentenfaktoren, Barwert und Endwert gelesen werden können.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Rentenfaktoren, Barwert und Endwert</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Mehrperiodige Investitionsaufgaben werden erst dann klausursicher, wenn regelmäßige Zahlungen sauber über Rentenfaktoren, Barwert und Endwert gelesen werden können.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Rentenbarwertfaktor</strong> — Periodische Zahlungen werden auf den Gegenwartszeitpunkt gebracht.</li><li><strong>Rentenendwertfaktor</strong> — Periodische Zahlungen werden auf den Endzeitpunkt gebracht.</li><li><strong>Äquivalenz</strong> — Endwert und Kapitalwert führen bei gleichem Zinssatz zum selben Urteil.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Rentenfaktor</h4>
@@ -644,6 +830,22 @@ BW_0 &= \frac{EW_n}{(1+i)^n}
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodenfehler:</strong> Rentenfaktor, Barwert und Endwert sind keine konkurrierenden Regeln, sondern unterschiedliche Übersetzungen derselben Zahlungsstruktur.</div>
+<div class="warn-box"><strong>Periodenkonvention:</strong> Excel/R-Reihenfolge (0 vs. 1 Start) in Klausur explizit — sonst Faktorfehler.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -682,7 +884,28 @@ BW_0 &= \frac{EW_n}{(1+i)^n}
 
   annuitaeten_finanzplan: {
     motivation: 'Annuität und vollständiger Finanzplan machen aus bloßer Zeitwertrechnung eine echte Entscheidungs- und Finanzierungslogik über mehrere Perioden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Annuitätenmethode und vollständiger Finanzplan</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Annuität und vollständiger Finanzplan machen aus bloßer Zeitwertrechnung eine echte Entscheidungs- und Finanzierungslogik über mehrere Perioden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Annuität aus Kapitalwert</strong> — Äquivalente konstante Periodenzahlung zum Kapitalwert.</li><li><strong>Wiedergewinnungsfaktor</strong> — Kehrwert des Rentenbarwertfaktors.</li><li><strong>Wiedergewinnungsfaktor (Merksatz)</strong> — Kehrwert des Rentenbarwertfaktors.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Annuität als äquivalente Periodengröße</h4>
@@ -720,6 +943,21 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>Nominal vs. real:</strong> Realverzinsung bei Inflation separat — Klausur oft nominal.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Annuität aus Kapitalwert', eq: String.raw`$$a = \frac{K_0}{RBWF(n,i)}$$`, desc: 'Äquivalente konstante Periodenzahlung zum Kapitalwert.', variables: { 'a': 'äquivalente Periodenzahlung / Annuität', 'K_0': 'Kapitalwert im Zeitpunkt 0', 'RBWF(n,i)': 'Rentenbarwertfaktor bei Laufzeit n und Zinssatz i' } },
@@ -755,7 +993,28 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 
   izf_kapitalwertfunktion: {
     motivation: 'Der interne Zinsfuß bringt die Sprache der Rendite in die Investitionsrechnung. Genau deshalb muss er über die Kapitalwertfunktion sauber gelesen und gegen den Marktzinssatz gespiegelt werden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Interner Zinsfuß und Kapitalwertfunktion</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Der interne Zinsfuß bringt die Sprache der Rendite in die Investitionsrechnung. Genau deshalb muss er über die Kapitalwertfunktion sauber gelesen und gegen den Marktzinssatz gespiegelt werden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>IZF-Definition</strong> — Beim internen Zinsfuß schneidet die Kapitalwertfunktion die Nulllinie.</li><li><strong>Entscheidungsregel</strong> — Der Vergleichszins entscheidet über Vorteilhaftigkeit.</li><li><strong>Kapitalwertfunktion</strong> — Grundlage für IZF und Sensitivität.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">IZF als Nullstelle der Kapitalwertfunktion</h4>
@@ -795,6 +1054,21 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box"><strong>IRR-Falle:</strong> Mehrere Vorzeichenwechsel → mehrere IRR — NPV-Kriterium hat Vorrang.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'IZF-Definition', eq: String.raw`$$K(r^*) = 0$$`, desc: 'Beim internen Zinsfuß schneidet die Kapitalwertfunktion die Nulllinie.' },
@@ -832,11 +1106,26 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 
   izf_grenzen: {
     motivation: 'Gerade weil der IZF so eingängig wirkt, muss man seine Grenzen kennen: Wiederanlageprämisse, Mehrdeutigkeit und Größenunterschiede können Prozentzahlen täuschen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>IZF: Wiederanlageprämisse, Mehrdeutigkeit und Grenzen</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Wiederanlageprämisse</h4>
 <p>Der IZF unterstellt implizit, dass Zwischenrückflüsse zum internen Zinsfuß wiederangelegt werden können. Diese Annahme ist oft stärker als diejenige der Kapitalwertmethode, die nur den Marktzinssatz als Maßstab braucht.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Mehrdeutigkeit</strong> — Der IZF kann seine Eindeutigkeit verlieren.</li><li><strong>Wiederanlageprämisse</strong> — Implizite und oft unrealistische Annahme des IZF.</li><li><strong>Referenzregel</strong> — Bei Konflikten bleibt der Kapitalwert die Vermögensregel.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -886,21 +1175,23 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section><div class="section-block"><h3>In der Klausur: Grenzen NPV/IRR</h3>
-      <p>Kapitalrationierung: Projektranking nach NPV pro eingesetztem Euro oder PI. Mutually exclusive: höchster NPV, nicht höchster IRR. Unterschiedliche Laufzeiten: Kettenmethode oder EAA.</p>
-    </div><div class="section-block"><h3>Klausurtransfer IZF-Grenzen</h3>
-      <p>Wiederanlageprämisse: IRR setzt Reinvestition zum IRR voraus — unrealistisch bei hohem IRR. Mehrdeutigkeit: Vorzeichenwechsel zählen. Referenz: NPV bei Kalkulationszins $i$.</p>
-    </div><div class="section-block"><h3>Prüfungsstandard</h3>
-      <p>IRR-Falle bei Vorzeichenwechseln; qualitative Begründung wann NPV dominiert.</p>
-      <div class="warn-box"><strong>IRR vs. NPV:</strong> Bei unterschiedlichen Skalen oder Kapitalbudget immer NPV vergleichen.</div>
-    </div>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
-    
-  </div>
-`,
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Prozentfehler:</strong> Eine hohe Renditezahl ersetzt kein Werturteil. Bei Projektvergleichen zählt die Frage, welches Projekt mehr Vermögen schafft.</div>
+<div class="warn-box"><strong>IRR vs. NPV:</strong> Bei unterschiedlichen Skalen oder Kapitalbudget immer NPV vergleichen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Mehrdeutigkeit', eq: schema(['mehrere Vorzeichenwechsel', '⇒', 'mehrere mögliche r*']), desc: 'Der IZF kann seine Eindeutigkeit verlieren.' },
       { label: 'Wiederanlageprämisse', eq: String.raw`\text{Zwischenüberschüsse werden zu } r^* \text{ reinvestiert}`, desc: 'Implizite und oft unrealistische Annahme des IZF.' },
@@ -936,11 +1227,26 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 
   unsicherheit: {
     motivation: 'Sobald Rückflüsse nicht sicher sind, reicht die sichere Zeitwertrechnung nicht mehr. Dann müssen Zustände, Wahrscheinlichkeiten und Risikokorrekturen in die Entscheidung integriert werden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Unsicherheit: Zustände, Dominanz und Erwartungswert</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Alternativen, Umweltzustände und Ergebnisse</h4>
 <p>Unsicherheit wird im Kurs über Zustände und zustandsabhängige Ergebnisse modelliert. Für jede Alternative wird gefragt, welche Auszahlung in welchem Zustand entsteht und wie plausibel diese Zustände sind.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Erwartungswert</strong> — Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.</li><li><strong>Varianz</strong> — Streuungsmaß der Ergebnisse um ihren Erwartungswert.</li><li><strong>Varianz (Merksatz)</strong> — Streuungsmaß der Ergebnisse um ihren Erwartungswert.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -983,6 +1289,22 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Unsicherheitsfehler:</strong> Ein hoher Erwartungswert genügt noch nicht, wenn die Verlustseite oder die Streuung des Projekts nicht mitgelesen wird.</div>
+<div class="warn-box"><strong>Erwartungswert:</strong> $E[NPV]$ optimal nur bei Risikoneutralität — sonst CE oder risikoadjustierter Diskontsatz.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
 </section>`,
     formeln: [
       { label: 'Erwartungswert', eq: String.raw`$$E(X) = \sum_s p_s x_s$$`, desc: 'Gewichteter Durchschnitt zustandsabhängiger Ergebnisse.', variables: { 'p_s': 'Wahrscheinlichkeit des Zustands s', 'x_s': 'Ergebnis / Auszahlung im Zustand s' } },
@@ -1019,11 +1341,26 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 
   risikoadjustierter_kapitalwert: {
     motivation: 'Unsicherheit wird erst finanzwirtschaftlich entscheidungsrelevant, wenn sie wieder in eine Bewertungsregel übersetzt wird. Genau das leisten Risikozuschlag und Sicherheitsabschlag.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Risikoadjustierter Kapitalwert und Sicherheitsabschläge</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Vom sicheren zum risikoadjustierten Kapitalwert</h4>
 <p>Der sichere Kapitalwert vergleicht Zahlungen mit einem sicheren Kalkulationszins. Unter Unsicherheit muss zusätzlich geklärt werden, wie Risiko in die Bewertung eingeht: über einen Zuschlag im Diskontsatz oder über Abschläge direkt auf die erwarteten Zahlungen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Risikozuschlag</strong> — Risiko geht über einen zusätzlichen Zuschlag im Diskontsatz ein.</li><li><strong>Sicherheitsabschlag</strong> — Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.</li><li><strong>Sicherheitsabschlag (Merksatz)</strong> — Risiko wird direkt als Abschlag auf die erwarteten Zahlungen modelliert.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1037,6 +1374,14 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <h4 class="theory-subsection-title">Sicherheitsabschlag auf Cashflows</h4>
 <p>Alternativ kann Risiko direkt auf der Zahlungsseite berücksichtigt werden: Statt die erwarteten Zahlungen unverändert zu verwenden, werden Risikoabschläge vorgenommen. So bleibt der Diskontsatz unverändert, während der Zahlungsstrom vorsichtiger angesetzt wird.</p>
          <div class="math-block math-block--theory">$$K_0^{safe} = -A_0 + \sum_{t=1}^{n}\frac{E(CF_t)-D_t}{(1+i)^t}$$</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
+<h3 class="theory-recipe-heading" id="theory-mechanismus-h">Mechanismus & Zusammenhänge</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Ablauf</h4>
+<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">
@@ -1053,6 +1398,23 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Standardfehler</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Annahmen vergessen:</strong> Verteilung, Regime, Rechtsfolge oder Marktform vor der Rechnung explizit benennen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>
+<p><em>platform-added-explanation:</em> Generische Prüfungsfallen; konzeptspezifische Fehler stehen in VL-Material.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1097,6 +1459,20 @@ a &= \frac{K_0}{RBWF(n,i)} \\
 <p>Bei einer ordentlichen Kapitalerhöhung werden neue Aktien oft unter dem alten Börsenkurs ausgegeben. Ohne Bezugsrecht würden Altaktionäre durch Verwässerung benachteiligt. Das Bezugsrecht gleicht genau diesen Nachteil aus.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Kapitalerhöhungen sind klausurtypisch, weil hier Marktwert, neue Mittelaufnahme und Schutz alter Aktionäre in einer einzigen Logik zusammenlaufen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Theoretischer Ex-Kurs</strong> — Neuer Mischkurs nach Ausgabe alter und neuer Aktien.</li><li><strong>Bezugsrechtswert</strong> — Das Bezugsrecht gleicht den Verwässerungseffekt aus.</li><li><strong>Vermögensgleichheit</strong> — Alter Kurs, Ex-Kurs und Bezugsrechtswert gehören zu derselben Vermögensposition.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -1131,6 +1507,22 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Verwässerungsfehler:</strong> Ohne Bezug auf den Ex-Kurs bleibt oft unklar, warum Altaktionäre trotz niedrigen Emissionskurses wirtschaftlich nicht zwingend schlechter gestellt sind.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Kursvergleichsfehler:</strong> Wer nur P₀ mit P_N oder nur den Emissionskurs mit dem alten Börsenkurs vergleicht, verpasst die eigentliche Vermögenslogik der Kapitalerhöhung.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1178,7 +1570,28 @@ BR &= P_0 - P_{ex}
 
   eigenkapitalkosten: {
     motivation: 'Eigen- und Fremdkapital haben keinen gleichen Preis. Gute Finanzentscheidungen hängen deshalb daran, wie sauber diese Kostenquellen gemessen und interpretiert werden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Kosten des Eigenkapitals</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Eigen- und Fremdkapital haben keinen gleichen Preis. Gute Finanzentscheidungen hängen deshalb daran, wie sauber diese Kostenquellen gemessen und interpretiert werden.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Eigenkapitalkosten</strong> — Gordon-Growth-Formel bei konstantem Dividendenwachstum.</li><li><strong>Marktgleichgewichtslogik</strong> — Der heutige Kurs ist der Barwert der erwarteten Ausschüttungen.</li><li><strong>Gordon-Bedingung</strong> — Nur bei dauerhaftem Wachstum unterhalb der geforderten Rendite ist die Gordon-Logik sinnvoll interpretierbar.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Eigenkapitalkosten über das Dividendenbarwertmodell</h4>
@@ -1216,6 +1629,22 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Kostenfehler:</strong> Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Modellblindheit:</strong> Nicht jede Aktie mit Ausschüttung passt automatisch in das Gordon-Schema. Vor dem Rechnen ist zu prüfen, ob konstantes Wachstum und Dividendenkontinuität überhaupt plausibel sind.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1272,11 +1701,26 @@ BR &= P_0 - P_{ex}
 
   fremdkapitalkosten: {
     motivation: 'Fremdkapital ist mehr als Nominalzins: Entscheidend sind die tatsächlich verursachten Finanzierungskosten und ihre Interpretation als Opportunitätskosten.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Kosten des Fremdkapitals</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Nominalzins versus effektive Fremdkapitalkosten</h4>
 <p>Fremdkapital ist nicht nur der Nominalzins eines Kredits. Effektive Kosten können über interne Zinsfüße, Skonto, Gebühren oder Risikoprämien steigen. Gerade Lieferantenkredit und Skonto sind typische Klausurklassiker.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Skontokosten</strong> — Verzicht auf Skonto kann einen sehr hohen effektiven Kreditzins bedeuten.</li><li><strong>Finanzierungs-IZF</strong> — Fremdfinanzierung wird finanzwirtschaftlich wie eine eigene Zahlungsreihe gelesen.</li><li><strong>Interpretationsregel</strong> — Zusatzkosten, Fristen und Risikoprämien können den Effektivsatz deutlich erhöhen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1309,6 +1753,22 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Einheitenfehler:</strong> Ein 30-Tage-Kredit mit 2 % Kosten ist nicht „nur 2 % pro Jahr“. Ohne Annualisierung unterschätzt du die Fremdkapitalkosten systematisch.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Kostenfehler:</strong> Billiges Fremdkapital ist nicht automatisch „besseres“ Kapital, wenn damit andere Risiken oder Folgeansprüche steigen.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1362,6 +1822,20 @@ BR &= P_0 - P_{ex}
 <p>Die Gewichte spiegeln die reale Finanzierungsmischung. Verändert sich diese Struktur, ändern sich nicht nur die Gewichte, sondern oft auch die zugrunde liegenden Risiko- und Renditeforderungen der Kapitalgeber.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Bevor Leverage gelesen werden kann, muss klar sein, was die gemischte Finanzierung insgesamt kostet. Genau diese Aggregationslogik liefert der WACC.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>WACC</strong> — Gewichteter Preis der Finanzierungsmischung.</li><li><strong>Einsatzbedingung</strong> — Der WACC muss zur Risiko- und Kapitalstruktur des Bewertungsobjekts passen.</li><li><strong>WACC in der Bewertung</strong> — Nur zulässig, wenn die WACC-Annahmen zur Aufgabe passen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -1392,6 +1866,21 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>WACC-Fehler:</strong> Ein WACC ist keine frei verfügbare Universalzahl. Er passt nur zu einer bestimmten Risiko- und Kapitalstruktur.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1447,11 +1936,26 @@ BR &= P_0 - P_{ex}
 
   wacc_leverage: {
     motivation: 'Der Leverage-Effekt ist keine isolierte Prozentrechnung, sondern die systematische Frage, wie Verschuldung Ertrag und Risiko des Eigenkapitals gemeinsam verändert.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Leverage-Effekt</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">WACC</h4>
 <p>$WACC = w_E k_E + w_D k_D (1-\tau)$. Leverage erhöht Eigenkapitalrendite (Leverage-Effekt), aber auch Risiko.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Leverage-Beziehung</strong> — Mehr Verschuldung verstärkt die Eigenkapitalrendite, solange die Gesamtkapitalrendite über dem Fremdkapitalzins liegt.</li><li><strong>Leverage-Regel</strong> — Nur dann wirkt Fremdkapital renditesteigernd auf das Eigenkapital.</li><li><strong>Spannendiagnose</strong> — Vor jeder Interpretation muss die Renditespanne zwischen Gesamtkapital und Fremdkapital gelesen werden.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1474,6 +1978,23 @@ BR &= P_0 - P_{ex}
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Standardfehler</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Annahmen vergessen:</strong> Verteilung, Regime, Rechtsfolge oder Marktform vor der Rechnung explizit benennen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>
+<p><em>platform-added-explanation:</em> Generische Prüfungsfallen; konzeptspezifische Fehler stehen in VL-Material.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
 </div>
 </section>`,
     formeln: [
@@ -1544,6 +2065,14 @@ BR &= P_0 - P_{ex}
          <div class="warn-box" data-warning-placement="rail"><strong>Benchmarkfehler:</strong> Modigliani-Miller ist ein Referenzmodell unter starken Annahmen, keine 1:1-Beschreibung realer Kapitalmärkte.</div>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Irrelevanz-Benchmark</strong> — Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.</li><li><strong>Benchmark-Aussage</strong> — Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.</li><li><strong>Wertvergleich</strong> — Im MM-Benchmark haben verschuldetes und unverschuldetes Unternehmen denselben Gesamtwert.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -1571,7 +2100,7 @@ BR &= P_0 - P_{ex}
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: MM</h4>
-<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \\tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
+<p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
@@ -1581,18 +2110,22 @@ BR &= P_0 - P_{ex}
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
 <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
 </div>
-</section><div class="section-block"><h3>In der Klausur: MM</h3>
-      <p>Prop. I (ohne Steuern): $V_L = V_U$. Prop. II: $k_E = k_U + (D/E)(k_U - k_D)$. Mit Steuern: $V_L = V_U + \\tau D$ — Schuldvorteil, aber Agency/Bankruptcy Costs begrenzen optimal leverage.</p>
-    </div><div class="section-block"><h3>Prüfungsstandard</h3>
-      <p>Annahmen MM nennen (perfekte Märkte, keine Steuern/Insolvenzkosten). Trade-off-Theorie qualitativ.</p>
-    </div>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Cashflows → Diskontierung → Entscheidungsregel (NPV/IZF). Immer Kalkulationszins und Prämisse nennen.</p>
-    
-  </div>
-`,
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Benchmarkfehler:</strong> Modigliani-Miller ist ein Referenzmodell unter starken Annahmen, keine 1:1-Beschreibung realer Kapitalmärkte.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Irrelevanz-Benchmark', eq: schema(['vollkommener Markt', '⇒', 'Kapitalstruktur wertneutral']), desc: 'Unter Benchmark-Annahmen beeinflusst die Finanzierungsmischung den Unternehmenswert nicht.' },
       { label: 'Benchmark-Aussage', eq: phrase('Leverage verändert r_E und Risiko, aber nicht Value.'), desc: 'Unter MM wird der Unternehmenswert nicht durch die Kapitalstruktur getrieben.' },

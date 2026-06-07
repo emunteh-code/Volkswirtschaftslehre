@@ -419,7 +419,8 @@ function drawGeldnachfrage() {
     [
       { label: 'Gleichgewicht', body: `Bei Y = ${y.toFixed(0)} ergibt sich aktuell ein Gleichgewichtszins von ${iStar.toFixed(2)}.` },
       { label: 'Einkommenseffekt', body: 'Ein höheres Einkommen verschiebt die Geldnachfrage nach rechts und erhöht bei gegebenem Angebot den Zins.' },
-      { label: 'Geldpolitik', body: 'Mehr reale Geldmenge verschiebt das vertikale Angebot nach rechts und senkt den Gleichgewichtszins.' }
+      { label: 'Geldpolitik', body: 'Mehr reale Geldmenge verschiebt das vertikale Angebot nach rechts und senkt den Gleichgewichtszins.' },
+      { label: 'Klausurlesart', body: 'Vertikales Angebot M/P vs. fallende Geldnachfrage L(i,Y): Überschussnachfrage nach Geld → Zins steigt, bis Portfolio wieder passt.' }
     ]
   ));
 }
@@ -452,7 +453,8 @@ function drawISLM() {
     [
       { label: 'Gleichgewicht', body: `Die Güternachfrage ist bei Y = ${yStar.toFixed(0)} mit dem Zielzins ī = ${iBar.toFixed(2)} vereinbar.` },
       { label: 'Fiskalpolitik', body: 'Mehr autonome Nachfrage verschiebt die IS-Kurve nach rechts und hebt bei gegebenem Zielzins den Output.' },
-      { label: 'Geldpolitik', body: 'Eine Zinssenkung verschiebt die horizontale Zinsregel nach unten und stimuliert Investitionen sowie Produktion.' }
+      { label: 'Geldpolitik', body: 'Eine Zinssenkung verschiebt die horizontale Zinsregel nach unten und stimuliert Investitionen sowie Produktion.' },
+      { label: 'Klausurlesart', body: 'Immer zuerst: Welche Kurve verschiebt sich (IS vs. Zinsregel/LM)? Dann neue Schnittmenge (Y, i) und ökonomische Deutung — Frist und Erwartungen nicht vergessen.' }
     ]
   ));
 }

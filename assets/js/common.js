@@ -11,6 +11,13 @@ import { mountRLabs } from "./r-lab.js";
 const THEME_KEY = "lernportal_theme_v1";
 const ONBOARDING_KEY = "lernportal_onboarding_v1";
 
+/** Minimal exam-week drill links (hash routes match module shells). */
+const EXAM_QUICK_LINKS = Object.freeze([
+  { label: "Mikro I — Budget", href: "./mikro1/index.html#budget/aufgaben" },
+  { label: "Statistik — Deskriptiv", href: "./statistik/index.html#deskriptiv/aufgaben" },
+  { label: "Makro I — IS-LM", href: "./makro1/index.html#islm/aufgaben" }
+]);
+
 function hexToSoft(hex, alpha = 0.14) {
   const normalized = hex.replace("#", "");
   const value = normalized.length === 3
@@ -355,12 +362,51 @@ async function updateHeroShelf(module) {
   }
 }
 
+function escapeAttr(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;");
+}
+
+function renderLandingIliasCta() {
+  const url = SITE_CONFIG?.officialMaterialsUrl;
+  if (!url || typeof url !== "string") return "";
+  return `<p class="official-materials-ilias-link"><a class="official-materials-ilias-btn" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer">Zum Kurs in ILIAS</a></p>`;
+}
+
+function mountExamQuickLinks() {
+  const nav = document.getElementById("examQuickLinks");
+  if (!nav) return;
+  nav.innerHTML = EXAM_QUICK_LINKS.map(
+    ({ label, href }) =>
+      `<a class="lp-exam-quick-link" href="${escapeAttr(href)}">${label}</a>`
+  ).join("");
+}
+
+function mountLandingIliasCta() {
+  const host = document.getElementById("examReadyShelfIlias");
+  if (!host) return;
+  const html = renderLandingIliasCta();
+  if (!html) {
+    host.hidden = true;
+    return;
+  }
+  host.innerHTML = html;
+  host.hidden = false;
+}
+
 function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) {
   const statusClass = snapshot.started ? " started" : "";
-  const statusLabel = snapshot.started ? `${snapshot.percent}%` : "Neu";
-  const progressBar = snapshot.started
-    ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
+  const statusLabel = snapshot.started
+    ? snapshot.percent >= 10
+      ? `${snapshot.percent}%`
+      : "Begonnen"
     : "";
+  const progressBar =
+    snapshot.started && snapshot.percent >= 10
+      ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
+      : "";
   const specialStatus = module.sourceCorpusInRepo === false
     ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
     : module.sourceStatusNote
@@ -377,7 +423,7 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
       ${module.examPrepNote ? `<p class="lp-tile-exam-prep">${module.examPrepNote}</p>` : ""}
       ${specialStatus}
       <div class="lp-tile-footer">
-        <span class="lp-tile-status${statusClass}">${statusLabel}</span>
+        ${statusLabel ? `<span class="lp-tile-status${statusClass}">${statusLabel}</span>` : ""}
         ${progressBar}
       </div>
     </a>
@@ -385,6 +431,9 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
 }
 
 async function renderLandingPage() {
+  mountExamQuickLinks();
+  mountLandingIliasCta();
+
   const trustedGrid = document.getElementById("trustedCoreGrid");
   const gridNode = document.getElementById("moduleGrid");
   if (!gridNode) return;

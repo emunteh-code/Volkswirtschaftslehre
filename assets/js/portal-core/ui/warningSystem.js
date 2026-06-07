@@ -56,8 +56,13 @@ function normalizeWarningNode(node) {
  */
 
 export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
+  const moduleSlug = fusionOpts.moduleSlug || entry?.moduleSlug || "";
   const theoryHtml = studentizeTheoryHtml(
-    fuseIntuitionIntoTheoryHtml(theoryToHtml(entry?.theorie), intuition, entry, fusionOpts),
+    fuseIntuitionIntoTheoryHtml(theoryToHtml(entry?.theorie), intuition, entry, {
+      ...fusionOpts,
+      moduleSlug,
+      chapterTitle: fusionOpts.chapterTitle || entry?.title
+    }),
     entry
   );
   if (!theoryHtml || typeof DOMParser === "undefined") {

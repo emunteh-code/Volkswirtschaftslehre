@@ -413,6 +413,64 @@ html { scroll-behavior: smooth; }
   border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
 }
 
+/* ── Exam-week quick drill (landing) ───────────────────────── */
+.lp-exam-quick {
+  padding: 20px 0 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+.lp-exam-quick-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.lp-exam-quick-note {
+  margin: 0 0 14px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  line-height: 1.45;
+  max-width: 42rem;
+}
+
+.lp-exam-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lp-exam-quick-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border));
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.lp-exam-quick-link:hover,
+.lp-exam-quick-link:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.lp-shelf-footer-ilias {
+  margin-top: 20px;
+  padding-top: 4px;
+}
+
+.lp-shelf-footer-ilias .official-materials-ilias-link {
+  margin: 0;
+}
+
 /* ── Module Shelf ──────────────────────────────────────────── */
 .lp-shelf {
   padding: 40px 0 64px;

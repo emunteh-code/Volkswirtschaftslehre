@@ -46,6 +46,26 @@ const PEDAGOGY_BY_CONCEPT = {
     prompt: "Welche Punkte zieht die OLS-Linie am stärksten — die Ausreißer oder die Mitte der Wolke?",
     notation: "OLS-Residuenquadrate — Theorie Schätzung."
   },
+  guetermarkt: {
+    prompt: "Verschiebt sich die geplante Nachfrage Z oder die Autonomie A — wo liegt das neue Gleichgewicht Y*?",
+    notation: "45°-Linie, Z(Y), A — Theorie Gütermarkt / Keynes-Kreuz."
+  },
+  geldnachfrage: {
+    prompt: "Verschiebt sich die Geldnachfrage nach rechts (höheres Y) oder das Angebot M/P — was passiert mit i*?",
+    notation: "$L(i,Y)$, $M/P$ vertikal — Theorie Geldmarkt / LM."
+  },
+  phillips: {
+    prompt: "Erwartungsanpassung: Verschiebt sich die Kurve parallel (π^e) oder bewegen Sie entlang der Kurve (nur π)?",
+    notation: "Phillipskurve $\pi = \pi^e + \ldots$ — Theorie Inflation/Erwartungen."
+  },
+  arbeitsmarkt: {
+    prompt: "Wo schneiden sich Lohn und Beschäftigung — und was ändert ein Mindestlohn qualitativ?",
+    notation: "Arbeitsangebot/-nachfrage, Lohn $w$ — Theorie Arbeitsmarkt."
+  },
+  vgr: {
+    prompt: "Welcher Sektor treibt Y — Konsum, Investition, Staat oder Nettoexporte?",
+    notation: "VGR-Identität $Y=C+I+G+NX$ — Theorie VGR."
+  },
   islm: {
     prompt: "Expansive Fiskalpolitik: Verschiebt sich IS oder LM — und was passiert mit $(Y,i)$?",
     notation: "IS-LM-Achsen $(Y,i)$ — Theorie IS-LM."

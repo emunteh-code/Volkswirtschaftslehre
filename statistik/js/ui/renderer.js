@@ -1,4 +1,4 @@
-import { createRenderer, buildKonzeptCheckHomeCardHtml } from '../../../assets/js/portal-core/ui/renderer.js';
+import { createRenderer } from '../../../assets/js/portal-core/ui/renderer.js';
 import { COURSE_CONFIG } from '../data/courseConfig.js';
 import { CHAPTERS, CONTENT, R_BLOCKS_BY_ID } from '../data/chapters.js';
 import { STEP_PROBLEMS } from '../data/stepProblems.js';
@@ -18,6 +18,7 @@ import { TASK_FAMILIES_BY_CONCEPT } from '../data/taskFamilies.js';
 
 const baseRenderer = createRenderer({
   courseLabel: COURSE_CONFIG.courseLabel,
+  moduleSlug: COURSE_CONFIG.slug,
   courseTitle: COURSE_CONFIG.courseTitle,
   homeIntro: COURSE_CONFIG.homeIntro,
   chapters: CHAPTERS,
@@ -45,7 +46,8 @@ const baseRenderer = createRenderer({
   sourceMaterialBaseUrl: '../source-materials/Statistik/',
   formulaCardsByConcept: FORMULA_CARDS_BY_CONCEPT,
   taskFamiliesByConcept: TASK_FAMILIES_BY_CONCEPT,
-  extraHomeActionCardsHtml: buildKonzeptCheckHomeCardHtml(true)
+  recommendedStartConceptId: COURSE_CONFIG.recommendedStartConceptId,
+  recommendedStartTab: COURSE_CONFIG.recommendedStartTab
 });
 
 export function renderContent(conceptId, tab, initGraphFn) {

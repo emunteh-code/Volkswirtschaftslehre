@@ -76,6 +76,14 @@ export const CONTENT = {
 <p>Die Vorlesung skizziert Recht aus mehreren Perspektiven: <strong>soziologisch</strong> als kulturelles Faktum und Herrschaftsinstrument, in dem außerrechtliche Faktoren mitwirken; <strong>(rechts-)philosophisch</strong> etwa als Gerechtigkeitsprojekt (einschließlich Naturrechtsdiskussion); <strong>ökonomisch</strong> als institutionelle Rahmenbedingung des Marktes und als Kostenfaktor. Für die Klausur bleibt zentral: Du arbeitest im Rahmen der positiven Rechtsordnung, nicht mit bloßem Wunschrecht.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Kernfrage</strong> — Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.</li><li><strong>Normbezug</strong> — Das ist die elementare Struktur juristischer Arbeit.</li><li><strong>Normbezug (Merksatz)</strong> — Das ist die elementare Struktur juristischer Arbeit.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -107,14 +115,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Fehlstart:</strong> Viele Antworten beginnen mit Meinungen oder Alltagsgerechtigkeit. Im Gutachten zählt zuerst die gesetzliche Anknüpfung und erst dann die Wertung.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Kernfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Juristische Anspruchsarbeit beginnt mit einer präzisen Ausgangsfrage.' },
       { label: 'Normbezug', eq: schema(['Sachverhalt', '→', 'Tatbestandsmerkmal', '→', 'Rechtsfolge']), desc: 'Das ist die elementare Struktur juristischer Arbeit.' }
@@ -165,6 +181,14 @@ export const CONTENT = {
 <p>Im Grundkurs bleibt der Fokus auf AT und Schuldrecht; Sachenrecht (§§ 929 ff. BGB) wird über Trennung/Abstraktion berührt. Familien- und Erbrecht sind eigene Bücher — in Klausuren selten Startpunkt, aber für Systematik nennbar.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>BGB-System</strong> — Spezielle Normen bauen auf allgemeinen Regeln auf.</li><li><strong>Privatrecht</strong> — Grundidee der privatrechtlichen Beziehung.</li><li><strong>Normfinder</strong> — Systematische Suchreihenfolge.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -189,29 +213,23 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Sachenrecht und Familienrecht als Randzonen</h3>
-    
-      <p>Im Grundkurs bleibt der Fokus auf AT und Schuldrecht; Sachenrecht (§§ 929 ff. BGB) wird über Trennung/Abstraktion berührt. Familien- und Erbrecht sind eigene Bücher — in Klausuren selten Startpunkt, aber für Systematik nennbar.</p>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Öffentliches Recht kurz abgrenzen</h3>
-    
-      <p>Hoheitliche Gewalt (Polizei, Steuern) folgt anderen Normen und Gerichtswegen. Verwechslung „BGB = alles Recht“ ist ein häufiger Anfängerfehler.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Prüfungsstart</strong> Bei zivilrechtlichen Fällen nicht mit Verwaltungsrecht oder Strafrecht beginnen, wenn die Fallfrage privatrechtlich ist.</div>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Orientierungsfehler:</strong> Viele Lernende merken sich Einzelnormen, ohne ihre Stellung im System zu kennen. Dann wird die Fallbearbeitung langsam und unsicher.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Prüfungsstart</strong> Bei zivilrechtlichen Fällen nicht mit Verwaltungsrecht oder Strafrecht beginnen, wenn die Fallfrage privatrechtlich ist.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'BGB-System', eq: schema(['AT', '+', 'Besonderer Teil']), desc: 'Spezielle Normen bauen auf allgemeinen Regeln auf.' },
       { label: 'Privatrecht', eq: phrase('Gleichordnung der Beteiligten'), desc: 'Grundidee der privatrechtlichen Beziehung.' }
@@ -238,11 +256,26 @@ export const CONTENT = {
 
   methodik: {
     motivation: 'Juristische Methodik ist das eigentliche Werkzeugfach des Moduls: Ohne Anspruchsaufbau, einleitenden und merkmalsbezogenen Obersätzen, Definition, Subsumtion, Zwischenergebnissen und sauberer Gliederung werden auch bekannte Normen in der Klausur wertlos.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Juristische Methodik und Gutachtenstil</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Anspruchsdenken</h4>
 <p>Das Grundschema jeder zivilrechtlichen Fallbearbeitung lautet: Wer will was von wem woraus? Diese Frage zwingt dazu, Anspruchsgegner, Anspruchsziel und Anspruchsgrundlage präzise zu benennen. Genau dadurch wird der Fall prüfbar.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Anspruchsfrage</strong> — Erste und wichtigste Sortierfrage des Falles.</li><li><strong>Gutachtenstil</strong> — Einleitender Obersatz, dann je Tatbestandsmerkmal: Obersatz zum Merkmal, Definition, Subsumtion; abschließend Ergebnis. Obersätze i.d.R. Konjunktiv II, Definition/Subsumtion Indikativ.</li><li><strong>Anspruchskette</strong> — Saubere Ordnung für Einwendungen, Einreden und Gestaltungsrechte.</li><li><strong>Tatbestand vor Rechtsfolge</strong> — Rückgewähr, Schadenshöhe und Konkurrenzfragen kommen erst nach tragfähigem Tatbestand.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -286,14 +319,23 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodikfehler:</strong> Definitionen ohne anschließende Subsumtion sind fast wertlos. Die Klausur bewertet nicht bloßes Wissen, sondern die Anwendung auf den Sachverhalt.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Strukturverlust:</strong> Viele Bearbeitungen springen direkt zu Rückgewähr, Schadenshöhe oder „am Ende wohl ja“. Ohne klare Gliederung geht die Anspruchslogik verloren.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Anspruchsfrage', eq: phrase('Wer will was von wem woraus?'), desc: 'Erste und wichtigste Sortierfrage des Falles.' },
       {
@@ -356,7 +398,14 @@ export const CONTENT = {
 
   willenserklaerung: {
     motivation: 'Willenserklärung und Vertragsschluss sind das Herzstück des Allgemeinen Teils. Wer Angebot, Annahme, Zugang und Erklärungshandlung nicht sauber prüft, verliert fast jeden schuldrechtlichen Fall schon am Anfang.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Willenserklärung und Vertragsschluss</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Zugang und empfangsbedürftige Erklärungen</h4>
@@ -394,29 +443,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Zugang und empfangsbedürftige Erklärungen</h3>
-    
-      <p>Willenserklärungen werden mit Zugang wirksam, wenn sie empfangsbedürftig sind (§ 130 BGB). Bei Angeboten und Annahmen ist der Zugang beim Empfänger maßgeblich — nicht das Absendedatum allein.</p>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Angebot vs. invitatio ad offerendum</h3>
-    
-      <p>Supermarkt-Preisschilder, Schaufenster und Auktionskataloge sind regelmäßig nur Aufforderungen zur Abgabe eines Angebots. Das bindende Angebot kommt erst durch die Kundgabe des Kunden (z.B. an der Kasse).</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Schweigen</strong> Schweigen ist keine Annahme (§ 151 BGB Ausnahmen beachten).</div>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Schweigen</strong> Schweigen ist keine Annahme (§ 151 BGB Ausnahmen beachten).</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Vertragsschluss', eq: schema(['Angebot', '+', 'Annahme']), desc: 'Zwei übereinstimmende Willenserklärungen.' },
       { label: 'Angebot', eq: schema(['essentialia negotii', '+', 'Rechtsbindungswille']), desc: 'So bestimmt, dass ein einfaches Ja genügt.' }
@@ -444,11 +486,26 @@ export const CONTENT = {
 
   dissens: {
     motivation: 'Dissens ist kein nachträglicher Fehlerheilungsmechanismus, sondern die Frage, ob es überhaupt zu einer wirksamen Einigung gekommen ist. Genau daran scheitern Vertragsklausuren oft schon auf der ersten Stufe.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Dissens</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Konsens nach objektivem Empfängerhorizont</h4>
 <p>Ob Angebot und Annahme korrespondieren, bestimmst du nicht nach geheimen Vorstellungen, sondern nach der objektiven Auslegung empfangsbedürftiger Willenserklärungen gem. §§ 133, 157 BGB. Stimmen die Erklärungen danach überein, liegt grundsätzlich Konsens vor, auch wenn eine Partei innerlich etwas anderes wollte.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Konsensfrage</strong> — Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.</li><li><strong>Offener Dissens</strong> — Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.</li><li><strong>Versteckter Dissens</strong> — Nur bei wirklichem Nichtübereinstimmen und fortbestehendem Vertragswillen relevant.</li><li><strong>Falsa demonstratio</strong> — Gemeinsam gewollter Inhalt bleibt trotz falscher Bezeichnung maßgeblich.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -489,19 +546,24 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>In der Klausur: Dissens</h3>
-    <p>Klausurpfad: Angebot und Annahme objektiv auslegen (§§ 133, 157 BGB) → deckungsgleich? → Konsens. Offener Dissens § 154: bewusst offener Punkt → kein Vertrag. Versteckter Dissens § 155: selten — oft objektive Auslegung oder Irrtum. Essentialia negotii fehlen → Totaldissens.</p><div class="warn-box" data-warning-placement="rail"><strong>Nicht jeder Irrtum ist Dissens</strong> Bei objektiver Deckungsgleichheit → Anfechtung (§§ 119 ff.), nicht Dissenspfad.</div><div class="warn-box" data-warning-placement="rail"><strong>Falsa demonstratio</strong> Gleiche objektive Bedeutung, falsche Bezeichnung → Vertrag trotzdem wirksam.</div>
-  </div>
-
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Prüfungsfalle:</strong> Nicht jeder innere Unterschied ist Dissens. Wenn die Erklärungen objektiv deckungsgleich sind, musst du aus dem Dissenspfad heraus und in die Anfechtungsebene wechseln.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Nicht jeder Irrtum ist Dissens</strong> Bei objektiver Deckungsgleichheit → Anfechtung (§§ 119 ff.), nicht Dissenspfad.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Falsa demonstratio</strong> Gleiche objektive Bedeutung, falsche Bezeichnung → Vertrag trotzdem wirksam.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Konsensfrage', eq: schema(['Angebot', '↔', 'Annahme']), desc: 'Zuerst prüfen, ob die Erklärungen objektiv korrespondieren.' },
       { label: 'Offener Dissens', eq: schema(['§ 154 BGB', '⇒', 'im Zweifel kein Vertrag']), desc: 'Bewusst offengelassener Punkt blockiert den Vertragsschluss regelmäßig.' },
@@ -557,6 +619,20 @@ export const CONTENT = {
 <p>Wer eine Willenserklärung abgibt, ist daran grundsätzlich gebunden. Das Gesetz löst den Konflikt zwischen Privatautonomie und Verkehrsschutz über die Anfechtung: Nur bestimmte, gesetzlich geregelte Fehler berechtigen dazu, die Erklärung nachträglich zu beseitigen. Ohne Anfechtungsgrund bleibt der Erklärende gebunden.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+<h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
+<div class="theory-recipe-body">
+<p>Die Anfechtung korrigiert keinen fehlenden Konsens, sondern einen zunächst wirksamen Vertrag oder eine zunächst wirksame Erklärung. Genau diese zeitliche und methodische Trennung macht sie klausurprägend.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Anfechtungsgründe</strong> — Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.</li><li><strong>Vollständige Prüfung</strong> — Der Irrtum allein reicht nie für eine vollständige Lösung.</li><li><strong>Rechtsfolge</strong> — Das Geschäft wird rückwirkend beseitigt.</li><li><strong>Vertrauensschaden</strong> — Eigener Folgeanspruch nach wirksamer Irrtumsanfechtung.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -592,14 +668,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Anfechtungsfalle:</strong> Nicht jeder Fehlkalkulations- oder Motivirrtum trägt eine Anfechtung. Und § 122 BGB wird nicht in den Tatbestand der Anfechtung hineingemischt, sondern danach eigenständig geprüft.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Anfechtungsgründe', eq: ref('§ 119 BGB', '§ 123 BGB'), desc: 'Irrtums-, Täuschungs- und Drohungsfälle nur innerhalb des gesetzlichen Katalogs.' },
       { label: 'Vollständige Prüfung', eq: schema(['Grund', '+', 'Erklärung', '+', 'Frist']), desc: 'Der Irrtum allein reicht nie für eine vollständige Lösung.' },
@@ -663,6 +747,14 @@ export const CONTENT = {
 <p>Verpflichtungs- und Verfügungsgeschäft sind voneinander zu trennen. Der Kaufvertrag verpflichtet zur Übereignung, überträgt das Eigentum aber noch nicht. Erst das dingliche Verfügungsgeschäft bewirkt die Rechtsänderung am Gegenstand.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Verpflichtung</strong> — Begründet Leistungspflichten.</li><li><strong>Verfügung</strong> — Überträgt, belastet oder hebt ein Recht auf.</li><li><strong>Übereignung</strong> — Verfügung über bewegliche Sache.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -695,34 +787,25 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>In der Klausur: Trennung und Abstraktion</h3>
-    <p>Prüfungsstandard: Zwei Stränge parallel — (1) Verpflichtungsgeschäft (Wirksamkeit, Anfechtung, Rücktritt). (2) Verfügungsgeschäft (Eigentumsübertragung § 929 BGB) eigenständig prüfen. Unwirksamer Kauf ≠ automatisch kein Eigentumsübergang → Bereicherungsanspruch prüfen.</p><div class="warn-box" data-warning-placement="rail"><strong>Subsumtionsreihenfolge</strong> Erst Verpflichtung, dann Verfügung — nie aus Unwirksamkeit des einen auf den anderen schließen.</div><div class="warn-box" data-warning-placement="rail"><strong>Typischer Fall</strong> Nichtiger Kauf, aber wirksame Übergabe: Eigentum bei Käufer, § 812 Abs. 1 S. 1 Alt. 1 Bereicherung.</div>
-  </div>
-
-  <div class="section-block">
-    <h3>Beispielkette Kauf und Übereignung</h3>
-    
-      <p>Kaufvertrag (§ 433) begründet die Pflicht zur Übereignung; Eigentumsübergang erfordert ein wirksames Verfügungsgeschäft (§ 929) und ggf. gutgläubigen Erwerb (§ 932 ff.).</p>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Bereicherungsrecht bei Abstraktion</h3>
-    
-      <p>Ist das Verpflichtungsgeschäft unwirksam, kann Eigentum dennoch übergegangen sein. Rückabwicklung läuft dann über §§ 812 ff. BGB (Leistungskondiktion), nicht „automatisch“ über Rücktritt vom Kauf.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Kurzschluss</strong> Erst Verpflichtungs- und Verfügungsgeschäft getrennt prüfen, dann Bereicherung — nicht umgekehrt.</div>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Standardverwechslung:</strong> „Der Kaufvertrag ist unwirksam, also ging nie Eigentum über“ ist zu schnell. Zuerst musst du das Verfügungsgeschäft eigenständig prüfen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Kurzschluss</strong> Erst Verpflichtungs- und Verfügungsgeschäft getrennt prüfen, dann Bereicherung — nicht umgekehrt.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Subsumtionsreihenfolge</strong> Erst Verpflichtung, dann Verfügung — nie aus Unwirksamkeit des einen auf den anderen schließen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Typischer Fall</strong> Nichtiger Kauf, aber wirksame Übergabe: Eigentum bei Käufer, § 812 Abs. 1 S. 1 Alt. 1 Bereicherung.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Verpflichtung', eq: phrase('schuldrechtliches Geschäft'), desc: 'Begründet Leistungspflichten.' },
       { label: 'Verfügung', eq: phrase('dingliche Rechtsänderung'), desc: 'Überträgt, belastet oder hebt ein Recht auf.' }
@@ -749,11 +832,26 @@ export const CONTENT = {
 
   geschaeftsfaehigkeit: {
     motivation: 'Geschäftsfähigkeit entscheidet, wer sich wirksam rechtlich binden kann. Gerade Minderjährigenfälle sind Standardstoff, weil sie Definition, Normlogik und Fallanwendung zugleich verlangen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Rechts- und Geschäftsfähigkeit</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">§ 107 BGB — lediglich rechtlich vorteilhaft</h4>
 <p>Ein Geschäft ist nur dann ohne Zustimmung wirksam, wenn der Minderjährige rechtlich keinen Nachteil erleidet (keine Verpflichtung, kein Risiko). Ein günstiger Kaufpreis allein reicht nicht, wenn Raten oder Verbindlichkeiten entstehen.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Beschränkt geschäftsfähig</strong> — Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.</li><li><strong>Lediglich rechtlich vorteilhaft</strong> — Dann ist keine Zustimmung nötig.</li><li><strong>Taschengeld</strong> — Wirksamkeit aus eigenen Mitteln.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -780,29 +878,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>§ 107 BGB — lediglich rechtlich vorteilhaft</h3>
-    
-      <p>Ein Geschäft ist nur dann ohne Zustimmung wirksam, wenn der Minderjährige rechtlich keinen Nachteil erleidet (keine Verpflichtung, kein Risiko). Ein günstiger Kaufpreis allein reicht nicht, wenn Raten oder Verbindlichkeiten entstehen.</p>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>§ 110 BGB — Taschengeld</h3>
-    
-      <p>Leistungen, die der Minderjährige aus Mitteln bewirkt, die ihm zur freien Verfügung überlassen wurden, sind wirksam. Grenze: Umfang des überlassenen Vermögens.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Zustimmung</strong> Fehlende Zustimmung macht das Geschäft schwebend unwirksam (§ 108), nicht automatisch nichtig.</div>
-    
-  </div>
-
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Zustimmung</strong> Fehlende Zustimmung macht das Geschäft schwebend unwirksam (§ 108), nicht automatisch nichtig.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Beschränkt geschäftsfähig', eq: ref('§§ 106 ff. BGB'), desc: 'Zwischen völliger Unfähigkeit und voller Geschäftsfähigkeit.' },
       { label: 'Lediglich rechtlich vorteilhaft', eq: phrase('kein rechtlicher Nachteil'), desc: 'Dann ist keine Zustimmung nötig.' }
@@ -830,12 +921,27 @@ export const CONTENT = {
 
   stellvertretung: {
     motivation: 'Stellvertretung ist die Standardtechnik, mit der rechtliche Handlungen arbeitsteilig möglich werden. Im Wirtschaftsleben ist sie allgegenwärtig; in der Klausur verlangt sie einen klaren Dreischritt.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Stellvertretung</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Die drei Voraussetzungen</h4>
 <p>Wirksame Stellvertretung verlangt eine eigene Willenserklärung des Vertreters, Handeln im fremden Namen und Vertretungsmacht. Diese drei Merkmale sind strikt nacheinander zu prüfen. Gerade die Offenkundigkeit wird in Fällen schnell übersehen.</p>
          <div class="semantic-display semantic-display--schema semantic-display--theory semantic-schema semantic-schema--chain semantic-display--pres-bridge" role="group"><span class="semantic-schema__item">eigene WE</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">fremder Name</span><span class="semantic-schema__connector-wrap"><span class="semantic-schema__connector" aria-hidden="true">+</span></span><span class="semantic-schema__item">Vertretungsmacht</span></div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Stellvertretung</strong> — Handeln in fremdem Namen mit Vertretungsmacht.</li><li><strong>Vertretungsmacht</strong> — Quellen der Zurechnungsmacht müssen sauber getrennt werden.</li><li><strong>Ohne Vertretungsmacht</strong> — Geschäft schwebend unwirksam bis zur Genehmigung.</li><li><strong>Haftung des falsus procurator</strong> — Folgeebene erst nach Offenkundigkeit und ausbleibender Genehmigung prüfen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -867,14 +973,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Vertreter-Boten-Falle:</strong> Wer keine eigene Entscheidungsmacht hat, ist Bote und nicht Vertreter. Dann wird die fremde und nicht die eigene Erklärung zugerechnet.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Stellvertretung', eq: ref('§ 164 Abs. 1 BGB'), desc: 'Handeln in fremdem Namen mit Vertretungsmacht.' },
       { label: 'Vertretungsmacht', eq: schema(['rechtsgeschäftlich', '/', 'gesetzlich', '/', 'organschaftlich']), desc: 'Quellen der Zurechnungsmacht müssen sauber getrennt werden.' },
@@ -932,11 +1046,26 @@ export const CONTENT = {
 
   agb: {
     motivation: 'AGB-Recht ist Massenvertragsrecht. Es verbindet Vertragstechnik mit Schutzgedanken und ist deshalb ein idealer Prüfungsstoff für saubere Einbeziehungs- und Kontrolllogik.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>AGB-Recht</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Was überhaupt AGB sind</h4>
 <p>AGB sind für eine Vielzahl von Verträgen vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt. Schon diese Ausgangsfrage musst du sauber von der späteren Einbeziehung und Kontrolle trennen. Nicht jede unangenehme Vertragsklausel ist automatisch AGB im technischen Sinn.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>AGB-Begriff</strong> — Vorliegen von AGB ist eine eigene erste Sachfrage.</li><li><strong>Einbeziehung</strong> — Erst dann werden AGB Vertragsbestandteil.</li><li><strong>Vorrang Individualabrede</strong> — Das konkret Vereinbarte verdrängt kollidierende AGB.</li><li><strong>Überraschende Klausel</strong> — Kann schon vor der eigentlichen Inhaltskontrolle ausscheiden.</li><li><strong>Kontrolle</strong> — Inhaltskontrolle kommt erst nach Einbeziehung und Vorfragen.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -978,14 +1107,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Prüfungsreihenfolge:</strong> Wer sofort in die Inhaltskontrolle springt, ohne die Einbeziehung zu prüfen, verschenkt einen der wichtigsten Klausurpunkte.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'AGB-Begriff', eq: schema(['vorformuliert', '+', 'für Vielzahl', '+', 'gestellt']), desc: 'Vorliegen von AGB ist eine eigene erste Sachfrage.' },
       { label: 'Einbeziehung', eq: schema(['Hinweis', '+', 'Kenntnisnahme', '+', 'Einverständnis']), desc: 'Erst dann werden AGB Vertragsbestandteil.' },
@@ -1048,6 +1185,14 @@ export const CONTENT = {
 <p>Ein Schuldverhältnis ist die rechtliche Sonderbeziehung, aus der Leistungs- und Nebenpflichten folgen. Ein Anspruch ist demgegenüber das konkrete Recht, von einem anderen ein Tun oder Unterlassen zu verlangen. Diese Unterscheidung ist klausurpraktisch wichtig, weil du aus einem Schuldverhältnis mehrere verschiedene Ansprüche entwickeln kannst.</p>
 </div>
 </section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Schuldverhältnis</strong> — Beide Ebenen können verletzt werden.</li><li><strong>Anspruch</strong> — Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.</li><li><strong>Pflichtverletzung</strong> — Ausgangspunkt vieler Ansprüche im Schuldrecht AT.</li><li><strong>Prüfungskette</strong> — Auch im Schuldrecht bleibt die Methodik leitend.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
+</div>
+</section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
@@ -1081,19 +1226,24 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>In der Klausur: Schuldrecht AT</h3>
-    <p>Anspruchsprüfung: Anspruch entstanden (Schuldverhältnis + Primärpflicht) → nicht untergegangen → durchsetzbar. Bei Störung: Verzug (§ 286), Unmöglichkeit (§ 275), Pflichtverletzung (§ 280) — Institute nicht vermischen. Nebenpflichtverletzung kann Schadensersatz auslösen ohne Hauptleistungsmangel.</p><div class="warn-box" data-warning-placement="rail"><strong>Schadensersatz braucht Pflichtverletzung</strong> Nicht jeder Vertragsbruch = sofort Rücktritt — Reihenfolge der Rechtsfolgen prüfen.</div><div class="warn-box" data-warning-placement="rail"><strong>Schuldverhältnis ≠ Anspruch</strong> Aus einem Schuldverhältnis können mehrere Ansprüche folgen — jeden separat prüfen.</div>
-  </div>
-
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Grundlagenfehler:</strong> Schadensersatz setzt nicht „irgendwo einen Fehler“ voraus, sondern eine dem Schuldverhältnis zuordenbare Pflichtverletzung.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Schadensersatz braucht Pflichtverletzung</strong> Nicht jeder Vertragsbruch = sofort Rücktritt — Reihenfolge der Rechtsfolgen prüfen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Schuldverhältnis ≠ Anspruch</strong> Aus einem Schuldverhältnis können mehrere Ansprüche folgen — jeden separat prüfen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Schuldverhältnis', eq: schema(['Leistungspflichten', '+', 'Nebenpflichten']), desc: 'Beide Ebenen können verletzt werden.' },
       { label: 'Anspruch', eq: phrase('Recht, ein Tun oder Unterlassen zu verlangen'), desc: 'Ein Schuldverhältnis kann mehrere konkrete Ansprüche enthalten.' },
@@ -1140,11 +1290,26 @@ export const CONTENT = {
 
   schadensersatz: {
     motivation: 'Schadensersatz ist die Kernreaktion auf Pflichtverletzungen. Die Kunst liegt darin, die Anspruchsgrundlage und ihre Voraussetzungen sauber in Reihenfolge zu prüfen.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Schuldrecht AT: Schadensersatz</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Überblick über § 280 ff. BGB</h4>
 <p>Die Vorlesung ordnet den Schadensersatz nicht als Einzelnorm, sondern als System: Schadensersatz neben der Leistung, statt der Leistung, wegen Verzugs, wegen Unmöglichkeit und wegen Schutzpflichtverletzung. Gerade diese Einordnung hilft in Fällen mit mehreren Störungen, weil sie die richtige Anspruchsgrundlage vorgibt.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Schadensersatz neben der Leistung</strong> — Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.</li><li><strong>Schadensersatz statt der Leistung</strong> — Regelmäßig mit erfolgloser Fristsetzung.</li><li><strong>Verzugsschaden</strong> — Eigene Schiene bei Verzögerung der Leistung.</li><li><strong>Unmöglichkeit</strong> — Schadensersatzpfad bei endgültiger Leistungshindernis.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1185,14 +1350,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Klausurklassiker:</strong> Bei Schadensersatz statt der Leistung wird die Fristsetzung besonders oft übersehen. Ohne sie bricht die Prüfung schnell weg.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Schadensersatz neben der Leistung', eq: ref('§ 280 I BGB'), desc: 'Pflichtverletzung genügt, wenn keine Ersatzleistung an die Stelle der Hauptleistung tritt.' },
       { label: 'Schadensersatz statt der Leistung', eq: ref('§§ 280 I, III, 281 BGB'), desc: 'Regelmäßig mit erfolgloser Fristsetzung.' },
@@ -1239,11 +1412,26 @@ export const CONTENT = {
 
   ruecktritt: {
     motivation: 'Der Rücktritt ist das klassische Lösungsrecht des Leistungsstörungsrechts. Er ist nicht bloß „Rückgängigmachung“, sondern ein streng aufgebautes Gestaltungsrecht mit eigener Frist- und Folgeebene.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Rücktritt</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Rücktritt als Leistungsstörungsrecht</h4>
 <p>Der Rücktritt gehört wie der Schadensersatz zum allgemeinen Leistungsstörungsrecht des Schuldrecht AT. Er setzt einen wirksamen gegenseitigen Vertrag voraus und reagiert auf Nicht-, Schlecht- oder Unmöglichkeitsfälle. Anders als beim Schadensersatz geht es nicht um Ersatz, sondern um Lösung vom Vertrag.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Rücktritt wegen Schlechtleistung</strong> — Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.</li><li><strong>Rücktritt wegen Unmöglichkeit</strong> — Wichtiger Sonderpfad ohne klassische Nachfristlogik.</li><li><strong>Rücktrittserklärung</strong> — Gestaltungsrecht braucht eine klare Erklärung.</li><li><strong>Rechtsfolge</strong> — Rückgewähr und ggf. Wertersatz gehören auf die Folgeebene.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1281,14 +1469,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Standardfehler:</strong> Rücktritt verlangt regelmäßig eine Leistungsstörung und oft eine Fristsetzung. Wer ihn wie eine freie „Umentscheidung“ behandelt, landet methodisch im falschen Institut.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Rücktritt wegen Schlechtleistung', eq: ref('§§ 323, 346 BGB'), desc: 'Standardpfad bei Nicht- oder Schlechtleistung trotz Fristsetzung.' },
       { label: 'Rücktritt wegen Unmöglichkeit', eq: ref('§§ 326 V, 323, 346 BGB'), desc: 'Wichtiger Sonderpfad ohne klassische Nachfristlogik.' },
@@ -1337,11 +1533,26 @@ export const CONTENT = {
 
   verbraucherwiderruf: {
     motivation: 'Der Verbraucherwiderruf ist kein Sanktionsrecht wegen Schlechterfüllung, sondern ein europarechtlich geprägtes Schutzrecht. Gerade deshalb muss er scharf vom Rücktritt getrennt werden.',
-    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
+    theorie: String.raw`<section class="theory-recipe-section theory-recipe-card theory-recipe-section--orientierung" data-theory-step="1" aria-labelledby="theory-orientierung-h">
+<h3 class="theory-recipe-heading" id="theory-orientierung-h">Orientierung</h3>
+<div class="theory-recipe-body">
+<p><strong>Verbraucherwiderruf</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
+<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--kernidee" data-theory-step="2" aria-labelledby="theory-kernidee-h">
 <h3 class="theory-recipe-heading" id="theory-kernidee-h">Kernidee</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Widerruf als gesetzliches Schutzrecht</h4>
 <p>Der Verbraucherwiderruf basiert auf § 355 BGB, setzt aber immer voraus, dass das Gesetz für einen bestimmten Vertragstyp überhaupt ein Widerrufsrecht eröffnet. § 355 BGB allein verleiht also noch kein allgemeines Widerrufsrecht. Diese Vorfrage ist im Gutachten der natürliche Einstieg.</p>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--definitionen" data-theory-step="3" aria-labelledby="theory-definitionen-h">
+<h3 class="theory-recipe-heading" id="theory-definitionen-h">Definitionen</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Kerngrößen</h4>
+<ul><li><strong>Basisnorm</strong> — Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.</li><li><strong>Persönliche Voraussetzungen</strong> — §§ 13, 14 BGB sind Standardbausteine der Prüfung.</li><li><strong>Frist</strong> — Regelmäßig ab Vertragsschluss; rechtzeitige Absendung genügt.</li><li><strong>Rechtsfolge</strong> — Ähnelt dem Rücktritt, beruht aber auf anderem Normzweck.</li></ul>
+<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--formale" data-theory-step="4" aria-labelledby="theory-formale-h">
@@ -1379,14 +1590,22 @@ export const CONTENT = {
       <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
 </div>
 </section>
-  <div class="section-block">
-    <h3>Prüfungsstandard</h3>
-    
-      <p>Klausurpfad: Tatbestand → Rechtsfolge → Subsumtion. Zivilrecht: zuerst Anspruchsgrundlage, dann Einwendungen.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
-    
-  </div>
-`,
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
+<h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
+<div class="warn-box" data-warning-placement="rail"><strong>Normzweckfehler:</strong> Wenn keine Leistungsstörung vorliegt, ist der Rücktritt nicht der natürliche Startpunkt. Der Widerruf wird nicht über Mängel, sondern über Schutzlage, Erklärung und Frist erschlossen.</div>
+<div class="warn-box" data-warning-placement="rail"><strong>Methodik</strong> Rechtsfolge nie vor vollständigem Tatbestand diskutieren.</div>
+</div>
+</section>
+<section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
+<h3 class="theory-recipe-heading" id="theory-vor_aufgaben-h">Vor den Aufgaben</h3>
+<div class="theory-recipe-body">
+<h4 class="theory-subsection-title">Vor den Aufgaben</h4>
+<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
+<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>
+</div>
+</section>`,
     formeln: [
       { label: 'Basisnorm', eq: ref('§ 355 BGB'), desc: 'Regelt Erklärung, Frist und Rechtsfolge, schafft aber nicht allein den Vertragstyp.' },
       { label: 'Persönliche Voraussetzungen', eq: schema(['Verbraucher', '+', 'Unternehmer']), desc: '§§ 13, 14 BGB sind Standardbausteine der Prüfung.' },

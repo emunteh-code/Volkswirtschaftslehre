@@ -14,10 +14,21 @@ const PORT = Number(process.env.TRUST_REGRESSION_PORT || 8900);
 const base = `http://127.0.0.1:${PORT}`;
 
 const failures = [];
+const DEBUG_STEPS = process.env.TRUST_REGRESSION_DEBUG === '1';
 
 function fail(row) {
   failures.push(row);
   console.error('FAIL:', JSON.stringify(row, null, 2));
+}
+
+async function runStep(name, fn) {
+  if (DEBUG_STEPS) console.error(`[trust] start ${name}`);
+  const startedAt = Date.now();
+  try {
+    await fn();
+  } finally {
+    if (DEBUG_STEPS) console.error(`[trust] done ${name} ${Date.now() - startedAt}ms`);
+  }
 }
 
 const server = spawn('python3', ['-m', 'http.server', String(PORT), '--bind', '127.0.0.1'], {
@@ -1736,37 +1747,37 @@ try {
   const page = await browser.newPage();
   page.setDefaultTimeout(32000);
 
-  await runMathLeak(page);
-  await runTheoryBodyMathIntegrity(page);
-  await runHeaderMathIntegrity(page);
-  await runFormulaEquationIntegrity(page);
-  await runProvenance(page);
-  await runAufgabenPracticeOnly(page);
-  await runFormelnKlausurmethodik(page);
-  await runFormelnAlwaysVisible(page);
-  await runMikro1SourceCompanion(page);
-  await runProvenanceFormelnSecondary(page);
-  await runGraphIntegrity(page, 1400, 900, 'desktop-1400');
-  await runGraphIntegrity(page, 1199, 900, 'edge-1199');
-  await runSolutionReveal(page);
-  await runExamDrillToggle(page);
-  await runRightPanelFallback(page);
-  await runSecondaryRightPanelFallback(page);
-  await runFocusModeParity(page);
-  await runRShellMatrix(page, 1280, 900, 'desktop-1280');
-  await runRShellMatrix(page, 1199, 900, 'tablet-1199');
-  await runRShellMatrix(page, 390, 844, 'mobile-390');
-  await runOverflow(page, 390, 844, 'mobile-390');
-  await runOverflow(page, 1200, 900, 'tablet-1200');
-  await runSecondaryOverflow(page);
-  await runHashRouting(page);
-  await runMobileShell375(page);
-  await runMasteryLabels(page);
-  await runTheoryFormelDisplay(page);
-  await runKlausurmethodikStudentText(page);
-  await runPracticePanelHeader(page);
-  await runJsErrorRemoved(page);
-  await runOfficialMaterialsLink(page);
+  await runStep('math-leak', () => runMathLeak(page));
+  await runStep('theory-body-math-integrity', () => runTheoryBodyMathIntegrity(page));
+  await runStep('header-math-integrity', () => runHeaderMathIntegrity(page));
+  await runStep('formula-equation-integrity', () => runFormulaEquationIntegrity(page));
+  await runStep('provenance', () => runProvenance(page));
+  await runStep('aufgaben-practice-only', () => runAufgabenPracticeOnly(page));
+  await runStep('formeln-klausurmethodik', () => runFormelnKlausurmethodik(page));
+  await runStep('formeln-always-visible', () => runFormelnAlwaysVisible(page));
+  await runStep('mikro1-source-companion', () => runMikro1SourceCompanion(page));
+  await runStep('provenance-formeln-secondary', () => runProvenanceFormelnSecondary(page));
+  await runStep('graph-integrity-desktop-1400', () => runGraphIntegrity(page, 1400, 900, 'desktop-1400'));
+  await runStep('graph-integrity-edge-1199', () => runGraphIntegrity(page, 1199, 900, 'edge-1199'));
+  await runStep('solution-reveal', () => runSolutionReveal(page));
+  await runStep('exam-drill-toggle', () => runExamDrillToggle(page));
+  await runStep('right-panel-fallback', () => runRightPanelFallback(page));
+  await runStep('secondary-right-panel-fallback', () => runSecondaryRightPanelFallback(page));
+  await runStep('focus-mode-parity', () => runFocusModeParity(page));
+  await runStep('r-shell-desktop-1280', () => runRShellMatrix(page, 1280, 900, 'desktop-1280'));
+  await runStep('r-shell-tablet-1199', () => runRShellMatrix(page, 1199, 900, 'tablet-1199'));
+  await runStep('r-shell-mobile-390', () => runRShellMatrix(page, 390, 844, 'mobile-390'));
+  await runStep('overflow-mobile-390', () => runOverflow(page, 390, 844, 'mobile-390'));
+  await runStep('overflow-tablet-1200', () => runOverflow(page, 1200, 900, 'tablet-1200'));
+  await runStep('secondary-overflow', () => runSecondaryOverflow(page));
+  await runStep('hash-routing', () => runHashRouting(page));
+  await runStep('mobile-shell-375', () => runMobileShell375(page));
+  await runStep('mastery-labels', () => runMasteryLabels(page));
+  await runStep('theory-formel-display', () => runTheoryFormelDisplay(page));
+  await runStep('klausurmethodik-student-text', () => runKlausurmethodikStudentText(page));
+  await runStep('practice-panel-header', () => runPracticePanelHeader(page));
+  await runStep('js-error-removed', () => runJsErrorRemoved(page));
+  await runStep('official-materials-link', () => runOfficialMaterialsLink(page));
 
   await page.close();
 

@@ -141,10 +141,11 @@ function buildMergeEntry(contentEntry, curriculumEntry) {
   };
 }
 
-function processTheoryPipeline(beforeHtml, mergeEntry, chapterTitle) {
+function processTheoryPipeline(beforeHtml, mergeEntry, chapterTitle, moduleSlug = '') {
   const normalized = normalizeTheoryHtml(beforeHtml);
   const after = completeTheoryRecipe(normalized, mergeEntry, {
     chapterTitle,
+    moduleSlug,
     headerMotivationShown: true,
     headerObjectivesShown: Boolean(mergeEntry?.objectives?.length)
   });
@@ -212,7 +213,7 @@ async function processChaptersFile(slug) {
 
     conceptCount++;
     const mergeEntry = buildMergeEntry(contentEntry, curriculumById[ch.id] || {});
-    const { after, auditBefore, auditAfter } = processTheoryPipeline(before, mergeEntry, ch.title);
+    const { after, auditBefore, auditAfter } = processTheoryPipeline(before, mergeEntry, ch.title, slug);
 
     beforeFilledTotal += auditBefore.filledCount;
     afterFilledTotal += auditAfter.filledCount;

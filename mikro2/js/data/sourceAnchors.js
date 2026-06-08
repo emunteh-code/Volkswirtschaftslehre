@@ -5,8 +5,14 @@
 // is a short hash of the reviewed topic phrase.
 // ============================================================
 
-const REVIEWED_AT = '2026-05-27';
-const REVIEWED_BY = 'codex-source-pass-3';
+// Page locators re-verified against the official VL PDFs on 2026-06-03 by
+// reading each anchored slide; drifted page numbers corrected to the slide
+// where the topic actually appears (see
+// docs/audits/2026-06-03-mikro2-source-metadata-readiness-pass.md). Anchor
+// id strings keep their historical pNN label for stable cross-references in
+// taskFamilies.js / formulaCards.js; locator.page is the verified truth.
+const REVIEWED_AT = '2026-06-03';
+const REVIEWED_BY = 'codex-source-verify-pass-2026-06-03';
 
 function anchor({
   id,
@@ -108,8 +114,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-9',
       sourcePath: 'Vorlesungsfolien/Mikro2_9.pdf',
       publicLabel: 'Vorlesung 9',
-      page: 5,
-      section: 'Nash-Gleichgewicht in reinen Strategien',
+      page: 6,
+      section: 'Nash-Gleichgewicht (in reinen Strategien)',
       fingerprint: 'f885f7f94c9f1ec8',
       confidence: 0.92
     }),
@@ -172,7 +178,7 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-6',
       sourcePath: 'Vorlesungsfolien/Mikro2_6.pdf',
       publicLabel: 'Vorlesung 6',
-      page: 3,
+      page: 4,
       section: 'Reaktionsfunktionen und Cournot-Gleichgewicht',
       fingerprint: '2523a6a149b28afe',
       confidence: 0.93
@@ -193,7 +199,7 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourcePath: 'Vorlesungsfolien/Mikro2_8.pdf',
       publicLabel: 'Vorlesung 8',
       page: 3,
-      section: 'Bertrand-Paradox und Erweiterungen',
+      section: 'Preiswettbewerb mit identischen Gütern: Marktergebnis (p = c, Bertrand-Paradox)',
       fingerprint: '52de0cbf2d6d4eb7',
       confidence: 0.9
     })
@@ -214,8 +220,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-5',
       sourcePath: 'Vorlesungsfolien/Mikro2_5.pdf',
       publicLabel: 'Vorlesung 5',
-      page: 2,
-      section: 'Stackelberg-Modell: Führer und Folger',
+      page: 3,
+      section: 'Das Stackelberg-Modell: Führer und Folger',
       fingerprint: '2523a6a149b28afe',
       confidence: 0.95
     }),
@@ -288,8 +294,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-14',
       sourcePath: 'Vorlesungsfolien/Mikro2_14.pdf',
       publicLabel: 'Vorlesung 14',
-      page: 3,
-      section: 'Sicherheitsäquivalent und Risikoprämie',
+      page: 5,
+      section: 'Versicherung, Sicherheitsäquivalent und Risikoprämie',
       fingerprint: '4603c215f9f1b1ed',
       confidence: 0.94
     })
@@ -352,8 +358,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-16',
       sourcePath: 'Vorlesungsfolien/Mikro2_16.pdf',
       publicLabel: 'Vorlesung 16',
-      page: 5,
-      section: 'Pareto-Effizienz und Kontraktkurve',
+      page: 6,
+      section: 'Pareto-Effizienz und die Kontraktkurve',
       fingerprint: '6c69af476a21a519',
       confidence: 0.93
     })
@@ -374,8 +380,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-15',
       sourcePath: 'Vorlesungsfolien/Mikro2_15.pdf',
       publicLabel: 'Vorlesung 15',
-      page: 2,
-      section: 'Robinson-Crusoe-Ökonomie',
+      page: 3,
+      section: 'Die Robinson-Crusoe-Ökonomie',
       fingerprint: '26c7a21ad26bad3a',
       confidence: 0.93
     }),
@@ -384,7 +390,7 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-16',
       sourcePath: 'Vorlesungsfolien/Mikro2_16.pdf',
       publicLabel: 'Vorlesung 16',
-      page: 9,
+      page: 11,
       section: 'Güterpreise im allgemeinen Gleichgewicht',
       fingerprint: '26c7a21ad26bad3a',
       confidence: 0.88
@@ -428,7 +434,7 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro-2-2',
       sourcePath: 'Vorlesungsfolien/Mikro_2_2.pdf',
       publicLabel: 'Vorlesung 2',
-      page: 5,
+      page: 7,
       section: 'Wohlfahrtswirkung des Monopols',
       fingerprint: '01c5da58796e79b1',
       confidence: 0.95
@@ -438,8 +444,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro-2-2',
       sourcePath: 'Vorlesungsfolien/Mikro_2_2.pdf',
       publicLabel: 'Vorlesung 2',
-      page: 9,
-      section: 'Konsumentenrente, Produzentenrente und Wohlfahrtsverlust',
+      page: 11,
+      section: 'Wohlfahrt im Monopol und bei vollkommener Konkurrenz (KR, PR, Wohlfahrtsverlust)',
       fingerprint: '01c5da58796e79b1',
       confidence: 0.92
     }),
@@ -470,8 +476,8 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-18',
       sourcePath: 'Vorlesungsfolien/Mikro2_18.pdf',
       publicLabel: 'Vorlesung 18',
-      page: 3,
-      section: 'Adverse Selektion',
+      page: 4,
+      section: 'Unvollständige Information: Adverse Selektion',
       fingerprint: '480be150e9950e84',
       confidence: 0.93
     }),
@@ -512,7 +518,7 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-18',
       sourcePath: 'Vorlesungsfolien/Mikro2_18.pdf',
       publicLabel: 'Vorlesung 18',
-      page: 4,
+      page: 5,
       section: 'Prinzipal-Agenten-Theorie',
       fingerprint: '480be150e9950e84',
       confidence: 0.92
@@ -532,7 +538,7 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-20',
       sourcePath: 'Vorlesungsfolien/Mikro2_20.pdf',
       publicLabel: 'Vorlesung 20',
-      page: 2,
+      page: 3,
       section: 'Managervertrag als Prinzipal-Agenten-Problem',
       fingerprint: '76e5c1d92e263b02',
       confidence: 0.93

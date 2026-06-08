@@ -524,6 +524,39 @@ const VL_GROUNDED_FAMILIES = [
 
 const OFFICIAL_TASK_SOURCE_FAMILIES = [
   family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a1-grundlagen-gob',
+    conceptId: 'gob_rechtsgrundlagen',
+    title: 'Probeklausur Aufgabe 1: Grundlagen & GoB',
+    topic: 'Zwecke des Jahresabschlusses, Realisationsprinzip, Vorsichtsprinzip, § 252 HGB',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 1: drei Zwecke des Jahresabschlusses nennen und Realisationsprinzip sowie Vorsichtsprinzip gemäß § 252 HGB erläutern. Die Musterlösung bewertet die Zwecknennung mit 2 Punkten und die GoB-Erläuterung mit 4 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a1.p1.grundlagen-gob',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a1.p1.grundlagen-gob'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Zwecke des Jahresabschlusses nur allgemein als Information beschreiben und Dokumentation, Rechenschaft oder Zahlungsbemessung nicht trennen',
+      'Realisationsprinzip mit Zahlungseingang statt Realisation gleichsetzen',
+      'Vorsichtsprinzip nur als vorsichtig bewerten wiedergeben, ohne Risiken/Verluste sofort und Gewinne erst bei Realisation zu unterscheiden',
+      'Den expliziten § 252 HGB-Bezug der Aufgabenstellung auslassen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält 6 sichtbare Punkte',
+      'Teil a: drei Zwecke wie Dokumentation, Information, Rechenschaft oder Zahlungsbemessung nennen, 2 Punkte',
+      'Teil b: Realisationsprinzip als Ertrag erst bei Realisation, nicht bei Zahlung; Vorsichtsprinzip als Risiken und Verluste sofort, Gewinne erst bei Realisation, 4 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 1',
+      task: 'Aufgabe 1',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
     id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a5-anlagevermoegen-afa-verkauf',
     conceptId: 'anlagevermoegen',
     title: 'Probeklausur Aufgabe 5: Abschreibung und Anlagenverkauf',

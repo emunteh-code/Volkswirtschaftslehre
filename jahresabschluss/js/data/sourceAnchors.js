@@ -80,6 +80,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "− Ansatz mit den fortgeführten Erfüllungsbeträgen",
       fingerprint: 'cff081aba4102beb',
       confidence: 0.84
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a1.p1.grundlagen-gob',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 1: Grundlagen & GoB (6 Punkte)',
+      fingerprint: 'a7c77103d9e8aad8',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-7',
+      reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a1.p1.grundlagen-gob',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 1 – Grundlagen & GoB (6 Punkte)',
+      fingerprint: '9ae1b3976e4e36e2',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-7',
+      reviewedAt: '2026-06-09'
     })
   ],
   inventur_inventar_bilanzansatz: [

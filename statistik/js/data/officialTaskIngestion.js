@@ -10,7 +10,9 @@ export const STATISTIK_TASK_PLACEHOLDER_POLICY =
 
 export const STATISTIK_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'statistik.official-task.teil-a-klausur-2022-a1-a2-descriptive-core',
-  'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core'
+  'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core',
+  'statistik.official-task.teil-a-klausur-2022-a5-regression-output',
+  'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality'
 ]);
 
 export const STATISTIK_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -19,18 +21,20 @@ export const STATISTIK_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
   reviewedDocuments: [
     {
       path: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
-      reviewedPages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      reviewedPages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
       reviewedTaskFamilies: [
         'statistik.official-task.teil-a-klausur-2022-a1-a2-descriptive-core',
-        'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core'
+        'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core',
+        'statistik.official-task.teil-a-klausur-2022-a5-regression-output',
+        'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality'
       ],
       reviewedAt: '2026-06-08',
-      reviewedBy: 'codex-official-task-review-statistik-pass-2'
+      reviewedBy: 'codex-official-task-review-statistik-pass-3'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',
   reviewedOfficialTaskFamilyIds: STATISTIK_REVIEWED_OFFICIAL_TASK_FAMILY_IDS,
-  nextStep: 'Continue native-text extraction plus visual review for Aufgaben 5-9 and the image-only Klausurfragen PDFs before broader official-task-source promotion'
+  nextStep: 'Continue native-text extraction plus visual review for Aufgaben 7-9 and the image-only Klausurfragen PDFs before broader official-task-source promotion'
 });
 
 /**

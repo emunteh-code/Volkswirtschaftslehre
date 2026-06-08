@@ -581,6 +581,80 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a5-regression-output',
+    conceptId: 'regression_schaetzung_inferenz',
+    title: 'Klausur Statistik 04.03.2022 Aufgabe 5: R-Regressionsoutput auswerten',
+    topic: 'Lineare Regression, R-Output, Koeffizienteninterpretation, Stichprobenumfang aus Freiheitsgraden, Konfidenzintervall, Signifikanztest, Prognose',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgabe 5: ein R-Modell Fund ~ BevDichte + Stud mit fehlenden p-Werten lesen, den Regressionskoeffizienten von Stud interpretieren, den Stichprobenumfang aus den Freiheitsgraden ableiten, ein 90%-Konfidenzintervall für beta_BevDichte berechnen, die Nullhypothese beta_BevDichte = 0 bei 10% Signifikanzniveau begründet beurteilen und eine Modellprognose für Göttingen berechnen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a5.p11-p13.regression-output-inference-prediction'
+    ],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 12,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Koeffizient von Stud ohne ceteris-paribus-Bezug interpretieren',
+      'Stichprobenumfang nicht aus Residual-DF plus Parameterzahl ableiten',
+      '90%-Intervall mit falschem z-Quantil oder falschem Standardfehler bilden',
+      'Signifikanzentscheidung ohne Bezug zu Nullhypothese und Signifikanzniveau begründen',
+      'Prognose ohne Intercept oder mit Prozentwert von Stud falsch skaliert einsetzen'
+    ],
+    gradingRubric: [
+      'Aufgabe 5 enthält 12 sichtbare Punkte',
+      'Aufgabe 5a: Regressionskoeffizient von Stud interpretieren, 4 Punkte',
+      'Aufgabe 5b: Anzahl der untersuchten Städte bzw. Stichprobenumfang angeben, 1 Punkt',
+      'Aufgabe 5c: 90%-Konfidenzintervall für beta_BevDichte berechnen, 3 Punkte',
+      'Aufgabe 5d: H0: beta_BevDichte = 0 bei 10% Signifikanzniveau verwerfen oder nicht, mit Begründung, 2 Punkte',
+      'Aufgabe 5e: erwartete Anzahl abgegebener Gegenstände für Göttingen auf Basis des geschätzten Modells berechnen, 2 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Klausurseiten 11-13',
+      task: 'Aufgabe 5',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality',
+    conceptId: 'bivariat',
+    title: 'Klausur Statistik 04.03.2022 Aufgabe 6: Varianz, Korrelation und Kausalität',
+    topic: 'Empirische Varianz, Korrelationskoeffizient, Interpretation von rho, Korrelation versus Kausalität, Streudiagramm bei rho = 0',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgabe 6: aus sechs Trainingseinheiten die empirische Varianz der Schießfehler berechnen, mit vorgegebenen stark gerundeten Hilfswerten den Korrelationskoeffizienten rho_xy ermitteln und interpretieren, eine Kausalitätsbehauptung zum Korrelationskoeffizienten beurteilen und ein mögliches Streudiagramm bei rho_xy = 0 skizzieren. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a6.p14-p17.correlation-causality-scatter'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 11,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Empirische Varianz mit falschem Mittelwert oder falschem Nenner berechnen',
+      'Gerundete Hilfswerte in Aufgabe 6b nicht wie vorgegeben verwenden',
+      'Korrelationskoeffizient als Kausalitätsbeweis interpretieren',
+      'Interpretation von rho nur als Vorzeichen nennen, ohne Stärke und Richtung einzuordnen',
+      'Bei rho = 0 ein streng monoton fallendes oder steigendes Streudiagramm skizzieren'
+    ],
+    gradingRubric: [
+      'Aufgabe 6 enthält 11 sichtbare Punkte',
+      'Aufgabe 6a: empirische Varianz für Schießfehler mit Lösungsweg, 2 Punkte',
+      'Aufgabe 6b: Korrelationskoeffizient rho_xy mit Lösungsweg, 3 Punkte',
+      'Aufgabe 6b: berechneten Wert interpretieren oder Ersatzwert rho_xy = 0.2 interpretieren, 2 Punkte',
+      'Aufgabe 6c: Kausalitätsaussage zum hohen Korrelationskoeffizienten in 1-2 Sätzen beurteilen, 2 Punkte',
+      'Aufgabe 6d: mögliches Streudiagramm bei rho_xy = 0 skizzieren, 2 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Klausurseiten 14-17',
+      task: 'Aufgabe 6',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

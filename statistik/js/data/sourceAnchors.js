@@ -128,6 +128,19 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'Scatterplot (Sepal Length and Width)',
       fingerprint: '6b3d9f0e2a1c8745',
       confidence: 0.9
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a6.p14-p17.correlation-causality-scatter',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 16,
+      section: 'Aufgabe 6: Empirische Varianz, Korrelationskoeffizient, Kausalität und Streudiagramm',
+      task: 'Aufgabe 6',
+      fingerprint: 'c53f8fab90d2d0963ff685f8944ac5a91dc4b3e8a05b6b30d8584ffc2e7a0f41',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-3',
+      reviewedAt: '2026-06-08'
     })
   ],
   wahrscheinlichkeit: [
@@ -475,6 +488,19 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'Galtonbsp., Regression',
       fingerprint: '2d7f9e4a8160c3b5',
       confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a5.p11-p13.regression-output-inference-prediction',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 13,
+      section: 'Aufgabe 5: R-Regressionsoutput, Koeffizienteninterpretation, Konfidenzintervall, Test und Prognose',
+      task: 'Aufgabe 5',
+      fingerprint: '8248b284b3cc5e5b7e71d4d20b903f472aa7f0c780ef6af649837df946e84a86',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-3',
+      reviewedAt: '2026-06-08'
     })
   ],
   regression_diagnostik_prognose: [

@@ -32,7 +32,7 @@ Local source files: **693**.
 | `makro1` | 14 | 14 | 0 | 190 | 44 | 62 | 55 | 36 | 3 | 56 | 4 | 21 | 36 | 21/21 | 0 | not achieved |
 | `makro2` | 30 | 30 | 0 | 496 | 110 | 85 | 117 | 64 | 3 | 120 | 4 | 25 | 62 | 25/25 | 0 | near, but official task-source review pending |
 | `oekonometrie` | 32 | 32 | 0 | 415 | 101 | 99 | 96 | 70 | 3 | 128 | 4 | 19 | 65 | 19/19 | 0 | near, but official task-source review pending |
-| `statistik` | 14 | 14 | 0 | 215 | 44 | 135 | 65 | 32 | 3 | 56 | 4 | 18 | 46 | 18/18 | 0 | not achieved |
+| `statistik` | 14 | 14 | 0 | 215 | 44 | 137 | 65 | 32 | 3 | 56 | 4 | 18 | 48 | 18/18 | 0 | not achieved |
 | `finanzwirtschaft` | 19 | 19 | 0 | 282 | 57 | 39 | 71 | 56 | 3 | 76 | 4 | 12 | 38 | 12/12 | 0 | not achieved |
 | `mathematik` | 14 | 14 | 0 | 332 | 55 | 69 | 45 | 28 | 3 | 56 | 4 | 30 | 42 | 30/30 | 0 | not achieved |
 | `jahresabschluss` | 15 | 15 | 0 | 135 | 45 | 44 | 56 | 35 | 3 | 60 | 4 | 12 | 30 | 12/12 | 0 | not achieved |

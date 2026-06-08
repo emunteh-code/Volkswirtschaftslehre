@@ -3,7 +3,10 @@
 // VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
-import { buildMakro1OfficialTaskPlaceholders } from './officialTaskIngestion.js';
+import {
+  assertMakro1OfficialTaskSourcePolicy,
+  buildMakro1OfficialTaskPlaceholders
+} from './officialTaskIngestion.js';
 
 const MODULE = 'makro1';
 const OFFICIAL_TASK_GAP = "Offizielle Aufgaben-Mappings nur nach Review; VL-Familien folgen Seitenankern.";
@@ -40,7 +43,7 @@ function family({
     gradingRubric,
     currentCoverage,
     officialTaskCoverage,
-    officialTaskGap: OFFICIAL_TASK_GAP
+    officialTaskGap: officialTaskCoverage === 'official-task-source' ? null : OFFICIAL_TASK_GAP
   };
 }
 
@@ -491,6 +494,51 @@ const VL_GROUNDED_FAMILIES = [
     currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   })
 ];
+
+const OFFICIAL_TASK_SOURCE_FAMILIES = [
+  family({
+    id: 'makro1.official-task.klausur-2022-nachtermin-a1-short-answer-core',
+    conceptId: 'makro_rahmen',
+    title: 'Klausur 2022 Nachtermin Aufgabe 1: Makro-I Kurzfragen beantworten',
+    topic: 'BIP, BNE, Inflation, Deflation, ZZ-Kurve, IS-LM bei Zinssteuerung, Zentralbankbilanz, Finanzkrise, Risikoprämie, Inflationserwartungen',
+    method: 'Offizielle Makroökonomik-I-Klausur Sommersemester 2022 Nachtermin, Aufgabe 1: Zehn Kurzfragen mit wenigen Worten/Sätzen beantworten. Jede Frage ist mit 3 Punkten bewertet; Quellen sind Seiten 1-2 von Klausur_2022_Nachtermin (1).pdf. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'makro1.klausur2022-nachtermin.a1.p1.vgr-inflation-bne',
+      'makro1.klausur2022-nachtermin.a1.p2.islm-fiskalpolitik',
+      'makro1.klausur2022-nachtermin.a1.p2.zentralbankbilanz',
+      'makro1.klausur2022-nachtermin.a1.p2.krise-risikopraemie',
+      'makro1.klausur2022-nachtermin.a1.p2.inflationserwartungen'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 30,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Reales und nominales BIP ohne Preisniveauänderung gleichsetzen',
+      'BIP und BNE nach Wohnort statt Produktionsort bzw. Inländerprinzip zuordnen',
+      'Disinflation mit Deflation verwechseln',
+      'Marginale Konsumneigung als Kurvenverschiebung statt Steigungsänderung der ZZ-Kurve lesen',
+      'Zinssteuerung im IS-LM-Modell übersehen und fälschlich Zinsänderungen ableiten',
+      'Risikoprämie mit Zentralbankleitzins gleichsetzen',
+      'Adaptive Inflationserwartungen als glaubwürdigkeitsfördernd missdeuten'
+    ],
+    gradingRubric: [
+      '30 Punkte insgesamt',
+      '10 Kurzfragen mit je 3 Punkten',
+      'Antworten müssen knapp begründen; reine Schlagworte ohne Begründung sind nicht ausreichend',
+      'Bei Rechen- oder Wirkungsfragen zählt die korrekte ökonomische Richtung plus kurzer Mechanismus'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_2022_Nachtermin (1).pdf',
+      page: 'Klausurseiten 1-2',
+      task: 'Aufgabe 1, Fragen 1-10',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  })
+];
+
+OFFICIAL_TASK_SOURCE_FAMILIES.forEach((item) => assertMakro1OfficialTaskSourcePolicy(item));
 
 const OFFICIAL_DOCUMENT_FAMILIES = [
   {
@@ -1113,6 +1161,7 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
 
 export const TASK_FAMILIES = Object.freeze([
   ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_TASK_SOURCE_FAMILIES,
   ...OFFICIAL_DOCUMENT_FAMILIES,
   ...buildMakro1OfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);

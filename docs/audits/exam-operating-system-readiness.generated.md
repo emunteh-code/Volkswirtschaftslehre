@@ -24,7 +24,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | `mikro1` | 33 | 0 | 100% | 100% | 110 | 95 | 18 | 18 | 0 | 10 | 100 | 4 |
 | `mikro2` | 15 | 3 | 100% | 100% | 47 | 34 | 0 | 0 | 0 | 0 | 46 | 4 |
-| `makro1` | 14 | 0 | 100% | 100% | 28 | 58 | 29 | 28 | 1 | 0 | 44 | 4 |
+| `makro1` | 14 | 0 | 100% | 100% | 33 | 59 | 29 | 28 | 1 | 1 | 44 | 4 |
 | `makro2` | 30 | 0 | 100% | 100% | 60 | 83 | 22 | 22 | 0 | 0 | 110 | 4 |
 | `oekonometrie` | 32 | 0 | 100% | 100% | 64 | 98 | 33 | 33 | 0 | 0 | 101 | 4 |
 | `statistik` | 14 | 0 | 100% | 100% | 42 | 133 | 104 | 104 | 0 | 0 | 44 | 4 |
@@ -40,7 +40,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 |---|---|---|---|---|---|
 | `mikro1` | complete | official-task-source pilot present (10); 18 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | benchmark cockpit; official task-source review pending |
 | `mikro2` | complete | official task source corpus missing or unavailable | complete | mastery items present; exam-bank or anchor gate open | not achieved |
-| `makro1` | complete | official source docs present; no reviewed official-task-source families; 1 module-mismatch document(s) need review | complete | mastery items present; exam-bank or anchor gate open | not achieved |
+| `makro1` | complete | official-task-source pilot present (1); 28 document-registry placeholders still unresolved; 1 module-mismatch document(s) need review | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `makro2` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
 | `oekonometrie` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
 | `statistik` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | not achieved |
@@ -58,7 +58,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `mikro2`: official exam bank incomplete (official task source corpus missing or unavailable)
 - `mikro2`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `mikro2`: Mikro1-depth equality not certified
-- `makro1`: official exam bank incomplete (official source docs present; no reviewed official-task-source families; 1 module-mismatch document(s) need review)
+- `makro1`: official exam bank incomplete (official-task-source pilot present (1); 28 document-registry placeholders still unresolved; 1 module-mismatch document(s) need review)
 - `makro1`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `makro1`: Mikro1-depth equality not certified
 - `makro2`: official exam bank incomplete (official source docs present; no reviewed official-task-source families)

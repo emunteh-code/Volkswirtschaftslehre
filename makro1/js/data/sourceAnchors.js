@@ -14,7 +14,9 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.82
+  confidence = 0.82,
+  reviewedBy = REVIEWED_BY,
+  reviewedAt = REVIEWED_AT
 }) {
   return {
     id,
@@ -30,8 +32,8 @@ function anchor({
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -78,6 +80,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: "Das Bruttoinlandsprodukt",
       fingerprint: '33d378b3b5e38312',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a1.p1.vgr-inflation-bne',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: 1,
+      section: 'Aufgabe 1, Fragen 1-5: Reales/nominales BIP, Kriegseffekte, BIP/BNE, Deflation und ZZ-Kurve',
+      fingerprint: '64aa9bae96bf11c7',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   guetermarkt: [
@@ -166,6 +180,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: "Bargeld + Sichteinlagen",
       fingerprint: '9f5a0e1dd986f839',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a1.p2.zentralbankbilanz',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: 2,
+      section: 'Aufgabe 1, Frage 7: Zentralbankgeschäft ohne Bilanzverlängerung oder -verkürzung',
+      fingerprint: '64aa9bae96bf11c7',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   islm: [
@@ -188,6 +214,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: "1   Feststellen, ob sich durch eine Politikveränderung die IS- oder die",
       fingerprint: 'fc65005a68bcc02f',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a1.p2.islm-fiskalpolitik',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: 2,
+      section: 'Aufgabe 1, Frage 6: IS-LM mit Zinssteuerung und Staatsausgabensenkung',
+      fingerprint: '64aa9bae96bf11c7',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   politikmix: [
@@ -254,6 +292,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: "Probleme der hohen Fremdfinanzierung:",
       fingerprint: '9b71d333cad6e285',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a1.p2.krise-risikopraemie',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: 2,
+      section: 'Aufgabe 1, Fragen 8-9: Finanzkrise 2008/09 und Risikoprämie im erweiterten IS-LM-Modell',
+      fingerprint: '64aa9bae96bf11c7',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   arbeitsmarkt: [
@@ -342,7 +392,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: ", erwartete Inflation",
       fingerprint: '6f4edd04063194ee',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a1.p2.inflationserwartungen',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: 2,
+      section: 'Aufgabe 1, Frage 10: Inflationsbekämpfung bei adaptiven Erwartungen',
+      fingerprint: '64aa9bae96bf11c7',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ]
 });
-

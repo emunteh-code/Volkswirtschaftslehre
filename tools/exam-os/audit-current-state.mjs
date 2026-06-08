@@ -22,6 +22,7 @@ const MODULES = [
 
 const TRUSTED_CORE = new Set(['mikro1', 'statistik', 'recht', 'oekonometrie']);
 const BENCHMARK_SLUG = 'mikro1';
+const PLATFORM_BOUNDARY_STATUSES = new Set(['platform-added-explanation', 'platform-added-drill']);
 
 function countStrings(value) {
   if (!value) return 0;
@@ -105,6 +106,18 @@ function conceptHasAnySourceAnchor(layers) {
   return Object.values(layers).some((layer) => Array.isArray(layer?.source_anchors) && layer.source_anchors.length > 0);
 }
 
+function conceptIsExplicitPlatformBoundary(layers) {
+  if (!layers || typeof layers !== 'object') return false;
+  const layerValues = Object.values(layers).filter((layer) => layer && typeof layer === 'object');
+  if (!layerValues.length) return false;
+  const hasSourceRef = layerValues.some((layer) => Array.isArray(layer.source_refs) && layer.source_refs.length > 0);
+  const hasSourceAnchor = layerValues.some(
+    (layer) => Array.isArray(layer.source_anchors) && layer.source_anchors.length > 0
+  );
+  if (hasSourceRef || hasSourceAnchor) return false;
+  return layerValues.every((layer) => PLATFORM_BOUNDARY_STATUSES.has(layer.source_status));
+}
+
 function collectLayerStatuses(layers, statuses = new Map()) {
   if (!layers || typeof layers !== 'object') return statuses;
   for (const layer of Object.values(layers)) {
@@ -140,7 +153,10 @@ function scoreAgainstBenchmark(moduleSummary, benchmark) {
   const conceptRatio = ratio(moduleSummary.concepts, benchmark.concepts);
   const formulaRatio = ratio(moduleSummary.formulaBlocks, benchmark.formulaBlocks);
   const taskRatio = ratio(moduleSummary.portalTaskBlocks + moduleSummary.stepDrills, benchmark.portalTaskBlocks + benchmark.stepDrills);
-  const provenanceRatio = ratio(moduleSummary.conceptsWithSourceRefs, moduleSummary.concepts || 1);
+  const provenanceRatio = ratio(
+    moduleSummary.sourceEligibleConceptsWithSourceRefs,
+    moduleSummary.sourceEligibleConcepts || 1
+  );
 
   const sourceStatus = moduleSummary.missingSourceFiles === 0 && moduleSummary.uniqueSourceFiles > 0 ? 'A' : 'D';
   const conceptStatus = conceptRatio >= 0.9 ? 'A' : conceptRatio >= 0.55 ? 'B' : 'C';
@@ -151,13 +167,15 @@ function scoreAgainstBenchmark(moduleSummary, benchmark) {
   const hasCompleteReviewedOfficialTaskSources =
     moduleSummary.officialTaskSourceFamilies > 0 &&
     moduleSummary.officialDocumentRegistryFamilies === 0;
-  const sourceAnchorsCoverConcepts = moduleSummary.sourceAnchors >= moduleSummary.concepts && moduleSummary.conceptsWithSourceAnchors === moduleSummary.concepts;
+  const sourceAnchorsCoverEligibleConcepts =
+    moduleSummary.sourceEligibleConcepts > 0 &&
+    moduleSummary.sourceEligibleConceptsWithSourceAnchors === moduleSummary.sourceEligibleConcepts;
   const canClaimMikro1Depth =
     sourceStatus === 'A' &&
     conceptStatus === 'A' &&
     formulaStatus !== 'C' &&
     taskStatus !== 'C' &&
-    sourceAnchorsCoverConcepts &&
+    sourceAnchorsCoverEligibleConcepts &&
     hasCompleteReviewedOfficialTaskSources;
 
   return {
@@ -228,8 +246,22 @@ async function summarizeModule(slug, localSourceFiles) {
     }
   }
   const provenance = manifestMod.PROVENANCE_BY_CONCEPT || {};
+  const provenanceEntries = Object.entries(provenance);
+  const sourceBoundaryConceptIds = provenanceEntries
+    .filter(([, layers]) => conceptIsExplicitPlatformBoundary(layers))
+    .map(([conceptId]) => conceptId)
+    .sort();
+  const sourceBoundaryConcepts = sourceBoundaryConceptIds.length;
+  const sourceEligibleEntries = provenanceEntries.filter(([conceptId]) => !sourceBoundaryConceptIds.includes(conceptId));
+  const sourceEligibleConcepts = Math.max(0, chapters.length - sourceBoundaryConcepts);
   const conceptsWithSourceRefs = Object.values(provenance).filter(conceptHasAnySourceRef).length;
   const conceptsWithSourceAnchors = Object.values(provenance).filter(conceptHasAnySourceAnchor).length;
+  const sourceEligibleConceptsWithSourceRefs = sourceEligibleEntries.filter(([, layers]) =>
+    conceptHasAnySourceRef(layers)
+  ).length;
+  const sourceEligibleConceptsWithSourceAnchors = sourceEligibleEntries.filter(([, layers]) =>
+    conceptHasAnySourceAnchor(layers)
+  ).length;
   const layerStatuses = new Map();
   for (const layers of Object.values(provenance)) collectLayerStatuses(layers, layerStatuses);
 
@@ -259,10 +291,15 @@ async function summarizeModule(slug, localSourceFiles) {
     masteryDimensions: masteryDimensions.size,
     theoryCharacters,
     provenanceConcepts: Object.keys(provenance).length,
+    sourceEligibleConcepts,
+    sourceBoundaryConcepts,
+    sourceBoundaryConceptIds,
+    sourceEligibleConceptsWithSourceRefs,
+    sourceEligibleConceptsWithSourceAnchors,
     conceptsWithSourceRefs,
     conceptsWithSourceAnchors,
-    conceptsWithoutSourceAnchors: Math.max(0, chapters.length - conceptsWithSourceAnchors),
-    conceptsWithoutSourceRefs: Math.max(0, chapters.length - conceptsWithSourceRefs),
+    conceptsWithoutSourceAnchors: Math.max(0, sourceEligibleConcepts - sourceEligibleConceptsWithSourceAnchors),
+    conceptsWithoutSourceRefs: Math.max(0, sourceEligibleConcepts - sourceEligibleConceptsWithSourceRefs),
     sourceRefs: refs.length,
     sourceAnchors: anchors.length,
     uniqueSourceFiles: uniqueSourceFiles.length,
@@ -291,12 +328,12 @@ function toMarkdown(report) {
   lines.push('');
   lines.push('## Module Coverage');
   lines.push('');
-  lines.push('| Module | Concepts | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
+  lines.push('| Module | Concepts | Source-eligible | Platform boundary | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
   for (const mod of report.modules) {
     const score = report.scorecard[mod.slug];
     lines.push(
-      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.formulaBlocks} | ${mod.officialFormulaCards} | ${mod.taskFamilies} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.masteryDimensions} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
+      `| \`${mod.slug}\` | ${mod.concepts} | ${mod.sourceEligibleConcepts} | ${mod.sourceBoundaryConcepts} | ${mod.formulaBlocks} | ${mod.officialFormulaCards} | ${mod.taskFamilies} | ${mod.portalTaskBlocks} | ${mod.stepDrills} | ${mod.fullExamCount} | ${mod.masteryItems} | ${mod.masteryDimensions} | ${mod.sourceRefs} | ${mod.sourceAnchors} | ${mod.presentSourceFiles}/${mod.uniqueSourceFiles} | ${mod.missingSourceFiles} | ${score.mikro1DepthAchieved} |`
     );
   }
   lines.push('');

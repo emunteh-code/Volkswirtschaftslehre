@@ -25,26 +25,26 @@ Local source files: **693**.
 
 ## Module Coverage
 
-| Module | Concepts | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| `mikro1` | 33 | 634 | 100 | 95 | 110 | 39 | 2 | 132 | 4 | 19 | 110 | 19/19 | 0 | benchmark cockpit; official task-source review pending |
-| `mikro2` | 18 | 213 | 46 | 34 | 60 | 33 | 1 | 69 | 4 | 28 | 47 | 28/28 | 0 | not achieved |
-| `makro1` | 14 | 190 | 44 | 58 | 55 | 36 | 3 | 56 | 4 | 21 | 28 | 21/21 | 0 | not achieved |
-| `makro2` | 30 | 496 | 110 | 83 | 117 | 64 | 3 | 120 | 4 | 25 | 60 | 25/25 | 0 | near, but official task-source review pending |
-| `oekonometrie` | 32 | 415 | 101 | 98 | 96 | 70 | 3 | 128 | 4 | 19 | 64 | 19/19 | 0 | near, but official task-source review pending |
-| `statistik` | 14 | 215 | 44 | 133 | 65 | 32 | 3 | 56 | 4 | 18 | 42 | 18/18 | 0 | not achieved |
-| `finanzwirtschaft` | 19 | 282 | 57 | 39 | 71 | 56 | 3 | 76 | 4 | 12 | 38 | 12/12 | 0 | not achieved |
-| `mathematik` | 14 | 332 | 55 | 69 | 45 | 28 | 3 | 56 | 4 | 30 | 42 | 30/30 | 0 | not achieved |
-| `jahresabschluss` | 15 | 135 | 45 | 44 | 56 | 35 | 3 | 60 | 4 | 12 | 30 | 12/12 | 0 | not achieved |
-| `recht` | 14 | 305 | 52 | 46 | 58 | 39 | 3 | 56 | 4 | 17 | 28 | 17/17 | 0 | not achieved |
-| `internationale-wirtschaftsbeziehungen` | 16 | 201 | 49 | 33 | 54 | 32 | 3 | 64 | 4 | 14 | 32 | 14/14 | 0 | not achieved |
+| Module | Concepts | Source-eligible | Platform boundary | Formulas | Formula cards | Task families | Tasks | Step drills | Exams | Mastery | Mastery dimensions | Source refs | Page anchors | Source files local | Missing files | Mikro1 depth |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| `mikro1` | 33 | 33 | 0 | 634 | 100 | 95 | 110 | 39 | 2 | 132 | 4 | 19 | 110 | 19/19 | 0 | benchmark cockpit; official task-source review pending |
+| `mikro2` | 18 | 15 | 3 | 213 | 46 | 34 | 60 | 33 | 1 | 69 | 4 | 28 | 47 | 28/28 | 0 | not achieved |
+| `makro1` | 14 | 14 | 0 | 190 | 44 | 58 | 55 | 36 | 3 | 56 | 4 | 21 | 28 | 21/21 | 0 | not achieved |
+| `makro2` | 30 | 30 | 0 | 496 | 110 | 83 | 117 | 64 | 3 | 120 | 4 | 25 | 60 | 25/25 | 0 | near, but official task-source review pending |
+| `oekonometrie` | 32 | 32 | 0 | 415 | 101 | 98 | 96 | 70 | 3 | 128 | 4 | 19 | 64 | 19/19 | 0 | near, but official task-source review pending |
+| `statistik` | 14 | 14 | 0 | 215 | 44 | 133 | 65 | 32 | 3 | 56 | 4 | 18 | 42 | 18/18 | 0 | not achieved |
+| `finanzwirtschaft` | 19 | 19 | 0 | 282 | 57 | 39 | 71 | 56 | 3 | 76 | 4 | 12 | 38 | 12/12 | 0 | not achieved |
+| `mathematik` | 14 | 14 | 0 | 332 | 55 | 69 | 45 | 28 | 3 | 56 | 4 | 30 | 42 | 30/30 | 0 | not achieved |
+| `jahresabschluss` | 15 | 15 | 0 | 135 | 45 | 44 | 56 | 35 | 3 | 60 | 4 | 12 | 30 | 12/12 | 0 | not achieved |
+| `recht` | 14 | 14 | 0 | 305 | 52 | 46 | 58 | 39 | 3 | 56 | 4 | 17 | 28 | 17/17 | 0 | not achieved |
+| `internationale-wirtschaftsbeziehungen` | 16 | 16 | 0 | 201 | 49 | 33 | 54 | 32 | 3 | 64 | 4 | 14 | 32 | 14/14 | 0 | not achieved |
 
 ## Scorecard
 
 | Module | Concepts | Formulas | Tasks | Local sources | Provenance | Mock exams | Adaptive |
 |---|---|---|---|---|---|---|---|
 | `mikro1` | A | A | A | A | B | C | B |
-| `mikro2` | C | C | B | A | D | C | B |
+| `mikro2` | C | C | B | A | B | C | B |
 | `makro1` | C | C | B | A | B | B | B |
 | `makro2` | A | B | A | A | B | B | B |
 | `oekonometrie` | A | B | A | A | B | B | B |

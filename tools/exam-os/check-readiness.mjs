@@ -23,11 +23,19 @@ const modules = current.modules.map((module) => {
   const pageSummary = pageIndex?.byModule?.[module.slug] || null;
   const pageIndexed = Boolean(pageSummary && pageSummary.pages > 0);
   const concepts = module.concepts || 0;
+  const sourceEligibleConcepts = module.sourceEligibleConcepts ?? concepts;
+  const sourceBoundaryConcepts = module.sourceBoundaryConcepts || 0;
   const conceptsWithSourceRefs = module.conceptsWithSourceRefs || 0;
   const conceptsWithSourceAnchors = module.conceptsWithSourceAnchors || 0;
-  const conceptsWithoutSourceRefs = module.conceptsWithoutSourceRefs || 0;
-  const sourceRefCoveragePct = concepts ? Math.round((conceptsWithSourceRefs / concepts) * 100) : 0;
-  const sourceAnchorCoveragePct = concepts ? Math.round((conceptsWithSourceAnchors / concepts) * 100) : 0;
+  const sourceEligibleConceptsWithSourceRefs = module.sourceEligibleConceptsWithSourceRefs ?? conceptsWithSourceRefs;
+  const sourceEligibleConceptsWithSourceAnchors =
+    module.sourceEligibleConceptsWithSourceAnchors ?? conceptsWithSourceAnchors;
+  const sourceRefCoveragePct = sourceEligibleConcepts
+    ? Math.round((sourceEligibleConceptsWithSourceRefs / sourceEligibleConcepts) * 100)
+    : 0;
+  const sourceAnchorCoveragePct = sourceEligibleConcepts
+    ? Math.round((sourceEligibleConceptsWithSourceAnchors / sourceEligibleConcepts) * 100)
+    : 0;
   const officialTaskSourceDocs =
     (registryKinds.exercise || 0) + (registryKinds.solution || 0) + (registryKinds.tutorial || 0) + (registryKinds.exam || 0);
   const taskFamilies = module.taskFamilies || 0;
@@ -38,9 +46,9 @@ const modules = current.modules.map((module) => {
   const masteryItems = module.masteryItems || 0;
   const officialFormulaCards = module.officialFormulaCards || 0;
   const anchorComplete =
-    concepts > 0 &&
-    conceptsWithSourceRefs === concepts &&
-    conceptsWithSourceAnchors === concepts;
+    sourceEligibleConcepts > 0 &&
+    sourceEligibleConceptsWithSourceRefs === sourceEligibleConcepts &&
+    sourceEligibleConceptsWithSourceAnchors === sourceEligibleConcepts;
   const examBankComplete =
     officialTaskSourceDocs > 0 &&
     officialTaskSourceFamilies >= officialTaskSourceDocs &&
@@ -85,8 +93,12 @@ const modules = current.modules.map((module) => {
     taskSignalPages: pageSummary?.taskSignalPages || 0,
     formulaSignalPages: pageSummary?.formulaSignalPages || 0,
     concepts,
+    sourceEligibleConcepts,
+    sourceBoundaryConcepts,
     conceptsWithSourceRefs,
     conceptsWithSourceAnchors,
+    sourceEligibleConceptsWithSourceRefs,
+    sourceEligibleConceptsWithSourceAnchors,
     sourceRefCoveragePct,
     sourceAnchorCoveragePct,
     sourceAnchors: module.sourceAnchors || 0,
@@ -147,11 +159,11 @@ function toMarkdown(value) {
   lines.push('');
   lines.push('## Evidence Snapshot');
   lines.push('');
-  lines.push('| Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Official task families | Formula cards | Mastery dimensions |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|');
+  lines.push('| Module | Source-eligible concepts | Platform boundary concepts | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Official task families | Formula cards | Mastery dimensions |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|');
   for (const module of value.modules) {
     lines.push(
-      `| \`${module.module}\` | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialDocumentRegistryFamilies} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
+      `| \`${module.module}\` | ${module.sourceEligibleConcepts} | ${module.sourceBoundaryConcepts} | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialDocumentRegistryFamilies} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
     );
   }
   lines.push('');

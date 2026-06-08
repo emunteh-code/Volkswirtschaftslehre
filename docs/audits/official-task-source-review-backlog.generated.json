@@ -5,7 +5,7 @@
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 28,
+    "officialTaskSourceFamilies": 29,
     "weakPages": 25,
     "taskSignalPages": 989,
     "moduleMismatchDocuments": 1
@@ -46,7 +46,7 @@
     {
       "module": "jahresabschluss",
       "officialTaskDocuments": 13,
-      "officialTaskSourceFamilies": 1,
+      "officialTaskSourceFamilies": 2,
       "documentRegistryFamilies": 13,
       "pageCount": 43,
       "weakPageCount": 0,

@@ -556,6 +556,39 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a6-vorraete-durchschnitt-fifo',
+    conceptId: 'umlauf_bewertung_verfahren',
+    title: 'Probeklausur Aufgabe 6: Bewertung von Vorräten',
+    topic: 'Durchschnittsmethode, FIFO-Methode, Vorratsverbrauch, Lagerzugänge',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 6: aus drei Lagerzugängen den Verbrauch von 500 Stück nach Durchschnittsmethode und FIFO-Methode ermitteln. Die Musterlösung bewertet Durchschnittspreis und FIFO-Verbrauch getrennt mit jeweils 3 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a6.p1.vorraete-durchschnitt-fifo',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a6.p1.vorraete-durchschnitt-fifo'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Durchschnittspreis durch den Verbrauch von 500 Stück statt durch den Gesamtbestand von 600 Stück teilen',
+      'Verbrauch und Endbestand verwechseln',
+      'FIFO als Verbrauch der neuesten statt der ältesten Lagerzugänge rechnen',
+      'Den Durchschnittspreis zu früh runden und dadurch vom Lösungsmuster abweichen'
+    ],
+    gradingRubric: [
+      'Aufgabe 6 enthält 6 sichtbare Punkte',
+      'Durchschnitt: (100×10 + 200×12 + 300×13) / 600 = 12,33 € und Verbrauch 500 Stück = 6.165 €, 3 Punkte',
+      'FIFO: 100×10 + 200×12 + 200×13 = 6.000 €, 3 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 1',
+      task: 'Aufgabe 6',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

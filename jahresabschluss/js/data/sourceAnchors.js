@@ -214,6 +214,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "Aufwendungen f. Rohstoffe                                   Bestandserhöhung",
       fingerprint: 'b557c2a3e746b324',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a6.p1.vorraete-durchschnitt-fifo',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 6: Bewertung von Vorräten (6 Punkte)',
+      fingerprint: '225639cc0abe7601',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-2',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a6.p1.vorraete-durchschnitt-fifo',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 6 – Vorräte (6 Punkte)',
+      fingerprint: '3e30103eb50d56cd',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   werkstoffe_erzeugnisse_buchungen: [

@@ -622,6 +622,39 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a10-gkv-ukv',
+    conceptId: 'erfolgsrechnung',
+    title: 'Probeklausur Aufgabe 10: GKV vs. UKV',
+    topic: 'Gesamtkostenverfahren, Umsatzkostenverfahren, Bestandsveränderungen, Periodenzuordnung',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 10: zwei Unterschiede zwischen Gesamtkostenverfahren und Umsatzkostenverfahren nennen und erklären, warum beide Verfahren langfristig zum gleichen Ergebnis führen. Die Musterlösung nennt Bestandsveränderungen und Eigenleistungen beim GKV, verkaufte Produkte beim UKV und die langfristig gleiche Erfolgswirkung durch andere Periodenzuordnung. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a10.p2.gkv-ukv',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a10.p2.gkv-ukv'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 4,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'GKV und UKV nur als Gliederungsnamen wiedergeben, ohne den Bestandsveränderungs-/Verkaufsbezug zu nennen',
+      'Eigenleistungen beim GKV vergessen',
+      'Langfristig gleiche Erfolgswirkung als identische Periodenergebnisse missverstehen',
+      'Umsatzkostenverfahren mit Umsatzsteuer verwechseln'
+    ],
+    gradingRubric: [
+      'Aufgabe 10 enthält 4 sichtbare Punkte',
+      'Teil a: GKV mit Bestandsveränderungen und Eigenleistungen sowie UKV mit nur verkauften Produkten abgrenzen, 2 Punkte',
+      'Teil b: langfristig gleicher Erfolg durch unterschiedliche Periodenzuordnung, 2 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 2',
+      task: 'Aufgabe 10',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

@@ -438,6 +438,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "die Herstellungskosten zur Wertuntergrenze angesetzt werden)",
       fingerprint: '553d008c4de44ba9',
       confidence: 0.84
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a10.p2.gkv-ukv',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 2,
+      section: 'Aufgabe 10: GKV vs. UKV (4 Punkte)',
+      fingerprint: '79ce6ccb4cbdc8d3',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-4',
+      reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a10.p2.gkv-ukv',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 2,
+      section: 'Aufgabe 10 – GKV vs. UKV (4 Punkte)',
+      fingerprint: 'f760032e2b4d9bed',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-4',
+      reviewedAt: '2026-06-09'
     })
   ]
 });

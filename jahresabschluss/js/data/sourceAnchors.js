@@ -304,6 +304,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "100.000 Aktien zum Nennwert von 2,-- EUR/Stück für 3,-- EUR/Stück platziert. Das Geld",
       fingerprint: '51244e6703e64246',
       confidence: 0.84
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a7.p1.eigenkapitalgliederung',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 7: Eigenkapitalgliederung (6 Punkte)',
+      fingerprint: '0767bf690e02dcfc',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-6',
+      reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a7.p1-p2.eigenkapitalgliederung',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: '1-2',
+      section: 'Aufgabe 7 – Eigenkapital (6 Punkte)',
+      fingerprint: '57b40510ce4af54d',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-6',
+      reviewedAt: '2026-06-09'
     })
   ],
   eigenkapital_personengesellschaften: [

@@ -689,6 +689,40 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a7-eigenkapitalgliederung',
+    conceptId: 'eigenkapital_kapitalgesellschaften',
+    title: 'Probeklausur Aufgabe 7: Eigenkapitalgliederung',
+    topic: 'Eigenkapitalgliederung, Kapitalrücklage, Gewinnrücklage, Gewinnverteilung bei Personengesellschaften',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 7: Eigenkapital bei Kapitalgesellschaften nach § 266 HGB gliedern, Kapitalrücklage von Gewinnrücklage unterscheiden und Gewinnverteilung bei Personengesellschaften benennen. Die Musterlösung bewertet die drei Teilfragen jeweils mit 2 Punkten; der Lösungstext zu Teil b/c läuft über den Seitenwechsel von Seite 1 auf Seite 2. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a7.p1.eigenkapitalgliederung',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a7.p1-p2.eigenkapitalgliederung'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Eigenkapitalgliederung nach § 266 HGB unvollständig wiedergeben',
+      'Kapitalrücklage und Gewinnrücklage beide nur als Rücklage bezeichnen, ohne Agio bzw. thesaurierten Gewinn zu trennen',
+      'Gewinnverteilung bei Personengesellschaften wie bei Kapitalgesellschaften behandeln',
+      'Gesellschaftsvertrag und HGB-Vorschriften als maßgebliche Verteilungsgrundlage vergessen'
+    ],
+    gradingRubric: [
+      'Aufgabe 7 enthält 6 sichtbare Punkte',
+      'Teil a: Gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Gewinn-/Verlustvortrag und Jahresüberschuss nennen, 2 Punkte',
+      'Teil b: Kapitalrücklage z. B. Agio bei Kapitalerhöhung; Gewinnrücklage als thesaurierter Gewinn, 2 Punkte',
+      'Teil c: Gewinnverteilung nach Gesellschaftsvertrag oder HGB-Vorschriften (§ 121 HGB), 2 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'Aufgabe Seite 1; Musterlösung Seiten 1-2',
+      task: 'Aufgabe 7',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

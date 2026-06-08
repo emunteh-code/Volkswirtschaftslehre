@@ -1,15 +1,137 @@
 /**
- * Shared typography scale tokens for module shells (import after mikro1 base).
+ * Shared design-system tokens for module shells.
+ * Import after module base styles.css; premium-refinement.css consumes these.
  */
 :root {
-  --type-xs: 0.75rem;
-  --type-sm: 0.8125rem;
-  --type-base: 0.9375rem;
-  --type-md: 1.0625rem;
-  --type-lg: 1.25rem;
-  --type-xl: 1.5rem;
-  --type-2xl: 1.875rem;
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
+  /* ── Typography scale ───────────────────────────────────── */
+  --type-micro: 0.6875rem;   /* 11px — micro labels */
+  --type-xs: 0.75rem;        /* 12px */
+  --type-sm: 0.8125rem;      /* 13px */
+  --type-base: 0.9375rem;    /* 15px — body */
+  --type-md: 1.125rem;       /* 18px — section */
+  --type-lg: 1.25rem;        /* 20px */
+  --type-xl: 1.75rem;        /* 28px — page title */
+  --type-2xl: 2rem;          /* 32px */
+
+  --leading-tight: 1.3;
+  --leading-normal: 1.55;
   --leading-relaxed: 1.65;
+
+  /* ── Spacing scale ──────────────────────────────────────── */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* ── Radius scale ─────────────────────────────────────── */
+  --r-xs: 6px;
+  --r-sm: 8px;               /* buttons, badges */
+  --r-md: 12px;              /* cards */
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* ── Layout measure ───────────────────────────────────── */
+  --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
+  --content-body-max: min(100%, clamp(900px, 82vw, 980px));
+  --content-rail-max: min(100%, 980px);
+  --reading-measure: 72ch;
+
+  /* ── Semantic colors (overridden per theme in premium-refinement) ── */
+  --accent: #3b82f6;
+  --accent-strong: #2563eb;
+  --accent-soft: rgba(59, 130, 246, 0.1);
+  --accent-fg: #ffffff;
+
+  --semantic-green: #34d399;
+  --semantic-amber: #f59e0b;
+  --semantic-amber-soft: rgba(245, 158, 11, 0.1);
+  --math-ink: #C91FEA;
+  --math-ink-deep: #B018D0;
+  --math-soft: rgba(201, 31, 234, 0.1);
+
+  /* ── Surfaces (dark default; light-mode overrides in premium-refinement) ── */
+  --bg: #0f1218;
+  --surface: #181c24;
+  --surface2: #1e232d;
+  --surface-elevated: #222832;
+  --card: #161a22;
+  --border: #2a3140;
+  --text: #e8eaed;
+  --muted: #9aa3b2;
+
+  /* ── Shadows (sparingly) ──────────────────────────────── */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.14);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.24), 0 16px 40px rgba(0, 0, 0, 0.18);
+
+  /* ── Warning (soft amber) ─────────────────────────────── */
+  --warning-surface: #2a2318;
+  --warning-surface-soft: #322a1e;
+  --warning-border: rgba(245, 158, 11, 0.32);
+  --warning-title: #fbbf24;
+  --warning-body: #e8eaed;
+  --warning-icon-surface: rgba(251, 191, 36, 0.14);
+  --warning-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+
+  /* ── Badge families (meta / status / action) ──────────── */
+  --badge-meta-fg: var(--muted);
+  --badge-meta-bg: transparent;
+  --badge-meta-border: transparent;
+  --badge-status-fg: var(--muted);
+  --badge-status-bg: color-mix(in srgb, var(--surface2) 80%, var(--card) 20%);
+  --badge-status-border: color-mix(in srgb, var(--border) 90%, transparent);
+  --badge-status-accent-fg: var(--accent-strong, var(--accent));
+  --badge-status-accent-bg: var(--accent-soft);
+  --badge-status-accent-border: color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  --badge-action-fg: var(--accent-strong, var(--accent));
+  --badge-action-bg: transparent;
+
+  /* ── Progress pill (shared track) ─────────────────────── */
+  --progress-track-h: 4px;
+  --progress-track-bg: color-mix(in srgb, var(--border) 80%, transparent);
+  --progress-fill-bg: var(--accent);
+
+  /* ── Motion ───────────────────────────────────────────── */
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-hover: 140ms;
+  --duration-tab: 200ms;
+  --duration-enter: 250ms;
+}
+
+body.light-mode {
+  --bg: #f6f6f4;
+  --surface: #f0f1ee;
+  --surface2: #eaebe7;
+  --surface-elevated: #ffffff;
+  --card: #ffffff;
+  --border: #d8dcd4;
+  --text: #111827;
+  --muted: #4b5563;
+
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --semantic-green: #10b981;
+  --semantic-amber: #d97706;
+  --semantic-amber-soft: rgba(217, 119, 6, 0.08);
+
+  --warning-surface: #fffbeb;
+  --warning-surface-soft: #fef3c7;
+  --warning-border: #fcd34d;
+  --warning-title: #b45309;
+  --warning-body: #111827;
+  --warning-icon-surface: rgba(217, 119, 6, 0.12);
+  --warning-shadow: 0 2px 8px rgba(180, 83, 9, 0.08);
+
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04), 0 3px 10px rgba(17, 24, 39, 0.05);
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: 0 4px 10px rgba(17, 24, 39, 0.06), 0 10px 26px rgba(17, 24, 39, 0.07);
+
+  --badge-status-bg: color-mix(in srgb, var(--surface2) 70%, var(--card) 30%);
+  --badge-status-border: color-mix(in srgb, var(--border) 85%, transparent);
 }

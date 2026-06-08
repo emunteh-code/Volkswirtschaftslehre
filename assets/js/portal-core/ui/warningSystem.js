@@ -38,6 +38,26 @@ function buildTheorieFallbackEntryHtml(warning) {
 </div>`;
 }
 
+function dedupeRailWarnings(warnings = []) {
+  const merged = new Map();
+  warnings.forEach((warning) => {
+    const key = String(warning.title || "").trim().toLowerCase();
+    if (!key) return;
+    const existing = merged.get(key);
+    if (!existing) {
+      merged.set(key, { ...warning });
+      return;
+    }
+    const bodyText = String(warning.bodyText || "").trim();
+    const existingText = String(existing.bodyText || "").trim();
+    if (bodyText && bodyText !== existingText && !existingText.includes(bodyText)) {
+      existing.bodyHtml = `${existing.bodyHtml}<p class="rp-mistake-body-addendum">${warning.bodyHtml}</p>`;
+      existing.bodyText = `${existingText} ${bodyText}`.trim();
+    }
+  });
+  return Array.from(merged.values());
+}
+
 function normalizeWarningNode(node) {
   const clone = node.cloneNode(true);
   const strong = clone.querySelector("strong");
@@ -123,11 +143,13 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
       if (!hasContent) section.remove();
     });
 
+    const dedupedRailWarnings = dedupeRailWarnings(railWarnings);
+
     return {
       theoryHtml: root.innerHTML,
       inlineWarnings: [],
-      railWarnings,
-      allWarnings: [...railWarnings]
+      railWarnings: dedupedRailWarnings,
+      allWarnings: [...dedupedRailWarnings]
     };
   } catch {
     return {

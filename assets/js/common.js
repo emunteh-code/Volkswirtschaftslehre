@@ -345,7 +345,7 @@ async function updateHeroShelf(module) {
       if (snapshot.started) {
         items.push(`
           <span class="lp-hero-progress">
-            <span class="lp-hero-progress-bar"><span class="lp-hero-progress-fill" style="width:${snapshot.percent}%"></span></span>
+            <span class="progress-pill lp-hero-progress-bar"><span class="progress-pill__fill lp-hero-progress-fill" style="width:${snapshot.percent}%"></span></span>
             ${snapshot.percent}%
           </span>
         `);
@@ -405,7 +405,7 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
     : "";
   const progressBar =
     snapshot.started && snapshot.percent >= 10
-      ? `<span class="lp-tile-progress"><span class="lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
+      ? `<span class="progress-pill lp-tile-progress"><span class="progress-pill__fill lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
       : "";
   const specialStatus = module.sourceCorpusInRepo === false
     ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
@@ -423,7 +423,7 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
       ${module.examPrepNote ? `<p class="lp-tile-exam-prep">${module.examPrepNote}</p>` : ""}
       ${specialStatus}
       <div class="lp-tile-footer">
-        ${statusLabel ? `<span class="lp-tile-status${statusClass}">${statusLabel}</span>` : ""}
+        ${statusLabel ? `<span class="badge badge--status lp-tile-status${statusClass}">${statusLabel}</span>` : ""}
         ${progressBar}
       </div>
     </a>
@@ -592,7 +592,7 @@ async function renderModulePage() {
     <aside class="module-meta-card">
       <div class="portal-progress-card">
         <strong>Dein Lernstand</strong>
-        <div class="progress-meter"><div class="progress-meter-fill" style="width:${snapshot.percent}%"></div></div>
+        <div class="progress-pill progress-meter"><div class="progress-pill__fill progress-meter-fill" style="width:${snapshot.percent}%"></div></div>
         <div class="resume-meta"><span>${snapshot.percent}% abgeschlossen</span><span>Zuletzt: ${visitLabel}</span></div>
       </div>
     </aside>

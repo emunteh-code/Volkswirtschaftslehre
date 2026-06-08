@@ -29,9 +29,11 @@ body[data-page="landing"] {
   --shadow-md: inset 0 1px 0 rgba(255,255,255,0.035), 0 4px 10px rgba(0,0,0,0.28), 0 12px 28px rgba(0,0,0,0.22);
   --shadow-lg: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.35), 0 24px 52px rgba(0,0,0,0.28);
 
-  --r-sm: 10px;
+  --r-sm: 8px;
   --r-md: 12px;
-  --r-lg: 18px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+  --progress-track-h: 4px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -324,16 +326,16 @@ html { scroll-behavior: smooth; }
 
 .lp-hero-progress-bar {
   width: 80px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
+  height: var(--progress-track-h, 4px);
+  background: color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--r-pill, 999px);
   overflow: hidden;
 }
 
 .lp-hero-progress-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 2px;
+  border-radius: var(--r-pill, 999px);
   transition: width 0.4s var(--ease-out);
 }
 
@@ -656,27 +658,28 @@ html { scroll-behavior: smooth; }
 .lp-tile {
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 18px;
-  background: var(--surface);
+  padding: 18px 18px 16px;
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-md);
   text-decoration: none;
   color: var(--text);
   cursor: pointer;
   position: relative;
   outline: none;
-  min-height: 210px;
-  transition: transform 0.22s var(--ease-out),
-              box-shadow 0.22s var(--ease-out),
-              border-color 0.2s ease,
-              background-color 0.2s ease;
+  min-height: 200px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s var(--ease-out),
+              box-shadow 0.18s var(--ease-out),
+              border-color 0.18s ease,
+              background-color 0.18s ease;
 }
 
 .lp-tile:hover,
 .lp-tile:focus-visible {
-  transform: translateY(-3px) scale(1.015);
-  border-color: var(--accent);
-  box-shadow: var(--shadow-lg), 0 0 0 1px var(--accent);
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+  box-shadow: var(--shadow-md);
   z-index: 2;
 }
 
@@ -684,10 +687,8 @@ html { scroll-behavior: smooth; }
 .lp-tile.is-focused,
 .lp-tile[aria-selected="true"] {
   border-color: var(--accent);
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--surface) 84%, var(--surface2)) 0%,
-    color-mix(in srgb, var(--surface2) 88%, var(--surface)) 100%);
-  box-shadow: var(--shadow-md), 0 0 0 2px color-mix(in srgb, var(--accent) 55%, transparent);
+  background: var(--card);
+  box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
   z-index: 2;
 }
 
@@ -740,7 +741,7 @@ html { scroll-behavior: smooth; }
 }
 
 .lp-tile-status {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -753,17 +754,17 @@ html { scroll-behavior: smooth; }
 }
 
 .lp-tile-progress {
-  width: 60px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
+  width: 72px;
+  height: var(--progress-track-h, 4px);
+  background: color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--r-pill, 999px);
   overflow: hidden;
 }
 
 .lp-tile-progress-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 2px;
+  border-radius: var(--r-pill, 999px);
 }
 
 /* ── Footer ────────────────────────────────────────────────── */

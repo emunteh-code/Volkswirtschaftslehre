@@ -241,10 +241,12 @@ export function createPortalApp({
 <div class="home-grid">`;
 
     due.forEach((chapter) => {
-      html += `<div class="home-card" onclick="window.__navigate('${chapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')">
-<div class="hc-num srs-due-dot">Wiederholen</div>
-<div class="hc-title">${chapter.title}</div>
-<div class="hc-cat">${chapter.cat}</div>
+      html += `<div class="home-card module-lesson-card" onclick="window.__navigate('${chapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')">
+<div class="module-lesson-card__body">
+<h3 class="module-lesson-card__title hc-title">${chapter.title}</h3>
+<p class="badge badge--meta module-lesson-card__meta">${chapter.cat}</p>
+</div>
+<span class="badge badge--action module-lesson-card__action" aria-hidden="true">Wiederholen →</span>
 </div>`;
     });
 

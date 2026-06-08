@@ -125,15 +125,23 @@ export function createRenderer({
   function buildConceptPillHtml(conceptId) {
     const summary = getConceptSourceSummary(conceptId);
     if (!summary?.label || !summary?.status) return "";
-    return `<span class="platform-chrome-badge platform-chrome-badge--source platform-chrome-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</span>`;
+    return `<span class="badge badge--status platform-chrome-badge platform-chrome-badge--source platform-chrome-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</span>`;
+  }
+
+  function formatLessonPositionLabel(index, total) {
+    if (index > 0 && total > 0) return `Lektion ${index}/${total}`;
+    return "";
   }
 
   function buildConceptHeaderHtml(chapter, entry, conceptId, { hideSourceChrome = false } = {}) {
     const catPos = getCategoryPosition(conceptId);
     const syllabusIdx = chapters.findIndex((item) => item.id === conceptId) + 1;
+    const positionLabel = catPos
+      ? formatLessonPositionLabel(catPos.index, catPos.total)
+      : (syllabusIdx > 0 ? `Abschnitt ${syllabusIdx}` : "");
     const tagLabel = catPos
-      ? `${escapeHtml(catPos.category)} · Stelle ${catPos.index} von ${catPos.total}`
-      : `${escapeHtml(chapter.cat)} · ${syllabusIdx}`;
+      ? `${escapeHtml(catPos.category)} · ${positionLabel}`
+      : `${escapeHtml(chapter.cat)} · ${positionLabel}`;
     const subtitle =
       chapter?.short && String(chapter.short).trim()
         ? `<p class="concept-subtitle">${escapeHtml(String(chapter.short).trim())}</p>`
@@ -153,7 +161,7 @@ export function createRenderer({
     }
 
     return `<div class="${headerClass}">
-<div class="concept-header-row concept-header-row--tag"><span class="concept-tag">${tagLabel}</span></div>
+<div class="concept-header-row concept-header-row--tag"><span class="badge badge--meta concept-tag">${tagLabel}</span></div>
 <div class="concept-header-row concept-header-row--title"><h1 class="concept-title">${renderMathTitle(chapter.title)}</h1>${subtitle}</div>
 ${pillsRow}
 ${motivationRow}
@@ -174,10 +182,63 @@ ${motivationRow}
     return candidates[0]?.chapter || null;
   }
 
-  function renderHomeSourceBadge(conceptId) {
-    const summary = getConceptSourceSummary(conceptId);
-    if (!summary?.label || !summary?.status) return "";
-    return `<div class="hc-source-badge hc-source-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</div>`;
+  function conceptHasGraph(conceptId) {
+    if (!graphConcepts) return false;
+    if (graphConcepts instanceof Set) return graphConcepts.has(conceptId);
+    if (Array.isArray(graphConcepts)) return graphConcepts.includes(conceptId);
+    return false;
+  }
+
+  function getLessonContentTypeLabel(conceptId) {
+    if (typeof hasRBlock === "function" && hasRBlock(conceptId)) return "Anwendung";
+    if (conceptHasGraph(conceptId)) return "Interaktiv";
+    return "Theorie";
+  }
+
+  function getLessonCardActionLabel(conceptId, progress, lastId) {
+    const entry = progress?.[conceptId];
+    if (lastId === conceptId || entry?.lastSeen || (entry?.views || 0) > 0) {
+      return "Weiterlernen →";
+    }
+    return "Öffnen →";
+  }
+
+  function buildLessonCardSubtitle(chapter) {
+    const motivation = chapter?.motivation ? String(chapter.motivation).trim() : "";
+    if (motivation && motivation.length <= 96) {
+      return `<p class="module-lesson-card__subtitle">${escapeHtml(motivation)}</p>`;
+    }
+    return "";
+  }
+
+  function buildLessonCardMetaLine(conceptId, { category = "", index = 0, total = 0, includeCategory = false } = {}) {
+    const parts = [];
+    if (includeCategory && category) parts.push(escapeHtml(category));
+    if (index > 0 && total > 0) parts.push(`Lektion ${index}/${total}`);
+    parts.push(escapeHtml(getLessonContentTypeLabel(conceptId)));
+    return parts.join(" · ");
+  }
+
+  const LESSON_CARD_ACTIVATE = (id) =>
+    `onclick="window.__navigate('${id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${id}')"`;
+
+  function buildHomeLessonCardHtml(item, { category, localIdx, total, progress, lastId, includeCategory = false, actionLabel = null } = {}) {
+    const meta = buildLessonCardMetaLine(item.id, {
+      category,
+      index: localIdx + 1,
+      total,
+      includeCategory
+    });
+    const action = actionLabel || getLessonCardActionLabel(item.id, progress, lastId);
+    const subtitle = buildLessonCardSubtitle(item);
+    return `<div class="home-card module-lesson-card" ${LESSON_CARD_ACTIVATE(item.id)}>
+<div class="module-lesson-card__body">
+<h3 class="module-lesson-card__title hc-title">${renderMathTitle(item.title)}</h3>
+${subtitle}
+<p class="badge badge--meta module-lesson-card__meta">${meta}</p>
+</div>
+<span class="badge badge--action module-lesson-card__action" aria-hidden="true">${escapeHtml(action)}</span>
+</div>`;
   }
 
   function renderSemanticPlainText(value, options = {}) {
@@ -914,19 +975,19 @@ ${answerMarkup}
       if (chapter) {
         return `<div class="panel active mikro1-practice">
 <div class="practice-panel-header">
-<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+<span class="badge badge--status practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
 </div>
 <div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition, highlightTerms)}</div>`;
       }
       return `<div class="panel active mikro1-practice">
 <div class="practice-panel-header">
-<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+<span class="badge badge--status practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
 </div>
 <div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>`;
     }
     let html = `<div class="panel active mikro1-practice">
 <div class="practice-panel-header">
-<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
+<span class="badge badge--status practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
 </div>
 <div class="practice-surface-intro">
 <div class="practice-surface-column">
@@ -1529,7 +1590,7 @@ ${anchorBadge}
       ? `<div class="home-action-card home-action-card--primary" onclick="window.__navigate('${lastChapter.id}', { tab: 'aufgaben' })" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE(`window.__navigate('${lastChapter.id}', { tab: 'aufgaben' })`)}>
 <div class="hac-title">Aufgaben-Schnellstart</div>
 <div class="hac-desc">${renderMathTitle(lastChapter.title)} — direkt üben</div>
-<span class="home-action-sim-badge">Plattform-Übung</span>
+<span class="badge badge--status home-action-sim-badge">Plattform-Übung</span>
 </div>`
       : "";
 
@@ -1542,7 +1603,7 @@ ${anchorBadge}
         ? `<div class="home-action-card home-action-card--primary" onclick="window.__navigate('${startChapter.id}', { tab: '${recommendedStartTab}' })" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE(`window.__navigate('${startChapter.id}', { tab: '${recommendedStartTab}' })`)}>
 <div class="hac-title">Hier starten</div>
 <div class="hac-desc">${renderMathTitle(startChapter.title)} — ${recommendedStartTab === "aufgaben" ? "Aufgaben" : "Theorie"}</div>
-<span class="home-action-sim-badge">Plattform-Übung</span>
+<span class="badge badge--status home-action-sim-badge">Plattform-Übung</span>
 </div>`
         : "";
 
@@ -1561,13 +1622,13 @@ ${pilotDashNote ? `<p class="hac-pilot-note">${pilotDashNote}</p>` : ""}
 <div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startExam()")}>
 <div class="hac-title">Schnelltest</div>
 <div class="hac-desc">20 Minuten, gemischte Konzepte</div>
-<span class="home-action-sim-badge">Plattform-Simulation</span>
+<span class="badge badge--status home-action-sim-badge">Plattform-Simulation</span>
 </div>
 ${showInterleavedExamCard && typeof window !== "undefined" && typeof window.__startInterleavedExam === "function" ? `
 <div class="home-action-card" onclick="window.__startInterleavedExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startInterleavedExam()")}>
 <div class="hac-title">Gemischter Schnelltest</div>
 <div class="hac-desc">Wie Schnelltest — Themenwechsel im Modul (Pilot)</div>
-<span class="home-action-sim-badge">Plattform-Simulation</span>
+<span class="badge badge--status home-action-sim-badge">Plattform-Simulation</span>
 </div>` : ""}
 ${konzeptCheckCardHtml}${extraHomeActionCardsHtml}
 <div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showSRSReview()")}>
@@ -1578,7 +1639,7 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
 <div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showFullExamSelect()")}>
 <div class="hac-title">Probeklausuren</div>
 <div class="hac-desc">${renderDecodedText(fullExamHomeDescription)}</div>
-<span class="home-action-sim-badge">Plattform-Simulation</span>
+<span class="badge badge--status home-action-sim-badge">Plattform-Simulation</span>
 </div>
 ` : ""}
 </div>`;
@@ -1592,10 +1653,22 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
     }
 
     if (lastChapter) {
-      html += `<div class="home-continue-card" onclick="window.__navigate('${lastChapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${lastChapter.id}')">
-<span class="hcc-label">Weitermachen</span>
-<span class="hcc-title">${renderMathTitle(lastChapter.title)}</span>
-<span class="hcc-cat">${lastChapter.cat}</span>
+      const continuePos = getCategoryPosition(lastChapter.id);
+      const continueMeta = continuePos
+        ? buildLessonCardMetaLine(lastChapter.id, {
+            category: continuePos.category,
+            index: continuePos.index,
+            total: continuePos.total,
+            includeCategory: true
+          })
+        : buildLessonCardMetaLine(lastChapter.id, { includeCategory: true, category: lastChapter.cat });
+      html += `<div class="home-continue-card module-lesson-card module-lesson-card--continue" onclick="window.__navigate('${lastChapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${lastChapter.id}')">
+<div class="module-lesson-card__body">
+<span class="badge badge--meta hcc-label">Weitermachen</span>
+<span class="module-lesson-card__title hcc-title">${renderMathTitle(lastChapter.title)}</span>
+<p class="badge badge--meta module-lesson-card__meta">${continueMeta}</p>
+</div>
+<span class="badge badge--action module-lesson-card__action" aria-hidden="true">Weiterlernen →</span>
 </div>`;
     }
 
@@ -1610,10 +1683,21 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
       html += `<div class="home-recent-strip">
 <div class="section-sep">Zuletzt geöffnet</div>
 <div class="home-mini-grid">
-${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigate('${chapter.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${chapter.id}')">
-<div class="hc-num">${chapter.cat}</div>
-<div class="hc-title">${renderMathTitle(chapter.title)}</div>
-</div>`).join("")}
+${recent.map((chapter) => {
+        const pos = getCategoryPosition(chapter.id);
+        const meta = pos
+          ? buildLessonCardMetaLine(chapter.id, {
+              category: pos.category,
+              index: pos.index,
+              total: pos.total,
+              includeCategory: true
+            })
+          : buildLessonCardMetaLine(chapter.id, { includeCategory: true, category: chapter.cat });
+        return `<div class="home-mini-card module-lesson-card module-lesson-card--mini" ${LESSON_CARD_ACTIVATE(chapter.id)}>
+<h3 class="module-lesson-card__title hc-title">${renderMathTitle(chapter.title)}</h3>
+<p class="badge badge--meta module-lesson-card__meta">${meta}</p>
+</div>`;
+      }).join("")}
 </div>
 </div>`;
     }
@@ -1621,12 +1705,14 @@ ${recent.map((chapter) => `<div class="home-mini-card" onclick="window.__navigat
     Object.entries(categories).forEach(([category, items]) => {
       html += `<div class="section-sep">${category}</div><div class="home-grid">`;
       items.forEach((item, localIdx) => {
-        html += `<div class="home-card" onclick="window.__navigate('${item.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter')window.__navigate('${item.id}')">
-<div class="hc-num">${escapeHtml(category)} · Stelle ${localIdx + 1} von ${items.length}</div>
-<div class="hc-title">${renderMathTitle(item.title)}</div>
-${renderHomeSourceBadge(item.id)}
-<div class="hc-cat">${item.cat}</div>
-</div>`;
+        html += buildHomeLessonCardHtml(item, {
+          category,
+          localIdx,
+          total: items.length,
+          progress,
+          lastId,
+          includeCategory: false
+        });
       });
       html += "</div>";
     });

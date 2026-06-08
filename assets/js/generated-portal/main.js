@@ -2955,7 +2955,6 @@ function buildShell(module, chapterCount) {
         <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false" tabindex="0" style="display:none">Grafik</button>
         <button class="tab-btn" data-tab="aufgaben" role="tab" aria-selected="false" tabindex="0">Aufgaben</button>
         <button class="tab-btn" data-tab="formeln" role="tab" aria-selected="false" tabindex="0">Formeln</button>
-        <button class="tab-btn" data-tab="intuition" role="tab" aria-selected="false" tabindex="0">Intuition</button>
       </div>
     </div>
 

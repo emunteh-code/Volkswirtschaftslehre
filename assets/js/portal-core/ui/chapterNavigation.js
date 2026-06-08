@@ -25,7 +25,7 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
         el.setAttribute("tabindex", "0");
         el.setAttribute(
           "aria-label",
-          `${item.title} (${cat}, Stelle ${displayNum} von ${items.length})`
+          `${item.title} (${cat}, Lektion ${displayNum}/${items.length})`
         );
         el.innerHTML = `<span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span>${item.title}</span>`;
         el.onclick = () => onNavigate(item.id);

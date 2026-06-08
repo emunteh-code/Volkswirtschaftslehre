@@ -535,6 +535,105 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro1.official-task.klausur-2022-nachtermin-a2-goods-market-tax-multiplier',
+    conceptId: 'multiplikator',
+    title: 'Klausur 2022 Nachtermin Aufgabe 2: Gütermarkt-Multiplikator mit Steuerregimen',
+    topic: 'Konsumfunktion, Investitionsfunktion, zentralbankgesetzter Zins, fixe Steuer, einkommensabhängige Steuer, autonomer Nachfrageschock, IS-LM-Schaubild',
+    method: 'Offizielle Makroökonomik-I-Klausur Sommersemester 2022 Nachtermin, Aufgabe 2: Gütermarktgleichgewicht und Ausgabenmultiplikator für fixe Steuer und einkommensabhängige Steuer berechnen, Schockwirkung bestimmen, IS-LM-Schaubild beschriften und automatische Stabilisierungswirkung verbal vergleichen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro1.klausur2022-nachtermin.a2.p3-p5.goods-market-tax-multiplier'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 28,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Prozentangabe des Zinssatzes nicht als Dezimalzahl einsetzen',
+      'Verfügbares Einkommen bei fixer Steuer und bei T = tY gleich behandeln',
+      'Ausgabenmultiplikator aus dem falschen Steuerregime auf den Schock anwenden',
+      'IS-LM-Achsen, Kurvennamen, Gleichgewichte oder Verschiebungen unbeschriftet lassen',
+      'Den Vergleich fixer Steuer versus einkommensabhängiger Steuer nur rechnerisch, aber ohne Intuition erklären'
+    ],
+    gradingRubric: [
+      '28 Punkte insgesamt',
+      'a) 6 Punkte: Gleichgewichtsproduktion und Ausgabenmultiplikator bei fixer Steuer',
+      'b) 3 Punkte: kurzfristige Produktionsänderung nach autonomem Konsumschock',
+      'c) 4 Punkte: IS-LM-Schaubild mit Achsen, Kurven, Gleichgewichten und Verschiebungen',
+      'd) 7 Punkte: Gleichgewichtsproduktion und Ausgabenmultiplikator bei T = tY',
+      'e) 3 Punkte: kurzfristige Produktionsänderung im proportionalen Steuersystem',
+      'f) 5 Punkte: Vergleich und intuitive Begründung ohne zusätzliche Rechnung'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_2022_Nachtermin (1).pdf',
+      page: 'Klausurseiten 3-5',
+      task: 'Aufgabe 2, Teile a-f',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro1.official-task.klausur-2022-nachtermin-a3-ws-ps-markup-shock',
+    conceptId: 'arbeitsmarkt',
+    title: 'Klausur 2022 Nachtermin Aufgabe 3: WS-PS-Gleichgewicht und Gewinnaufschlagsschock',
+    topic: 'Lohnsetzung, Preissetzung, F(u,z), natürlicher Arbeitslosenquote, Reallohn, Gewinnaufschlag, Arbeitsmarkt-Schaubild',
+    method: 'Offizielle Makroökonomik-I-Klausur Sommersemester 2022 Nachtermin, Aufgabe 3: Lohn- und Preissetzungsgleichungen auswerten, natürliche Arbeitslosenquote und Reallohn im mittelfristigen Gleichgewicht berechnen, höheren Gewinnaufschlag einarbeiten und den Effekt graphisch darstellen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro1.klausur2022-nachtermin.a3.p5-p6.ws-ps-markup-shock'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 16,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Pe = P im mittelfristigen Gleichgewicht übersehen',
+      'Preissetzungsgleichung und Lohnsetzungsgleichung graphisch vertauschen',
+      'Gewinnaufschlag µ nicht in den Reallohnkanal übersetzen',
+      'Natürliche Arbeitslosenquote und Reallohn nur verbal statt rechnerisch ausweisen',
+      'Schaubild ohne Achsen, Kurvennamen, Gleichgewichte oder Verschiebungen abgeben'
+    ],
+    gradingRubric: [
+      '16 Punkte insgesamt',
+      'a) 7 Punkte: natürliche Arbeitslosenquote und Reallohn im mittelfristigen Gleichgewicht',
+      'b) 5 Punkte: Auswirkungen eines höheren Gewinnaufschlags auf natürliche Arbeitslosenquote und Reallohn',
+      'c) 4 Punkte: geeignetes Schaubild mit Achsen, Kurven, Gleichgewichten und Verschiebungen'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_2022_Nachtermin (1).pdf',
+      page: 'Klausurseiten 5-6',
+      task: 'Aufgabe 3, Teile a-c',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro1.official-task.klausur-2022-nachtermin-a4-islmpc-energy-price-shock',
+    conceptId: 'islmpc',
+    title: 'Klausur 2022 Nachtermin Aufgabe 4: IS-LM-PC-Energiepreisschock analysieren',
+    topic: 'IS-LM-PC-Modell, Phillipskurvenbeziehung, natürliches Outputniveau, Energiepreisschock, Zentralbankreaktion, Realitätsübertragung',
+    method: 'Offizielle Makroökonomik-I-Klausur Sommersemester 2022 Nachtermin, Aufgabe 4: Ausgangszustand und Phillipskurvenänderung nach sinkendem natürlichem Outputniveau im IS-LM-PC-Diagramm skizzieren und die notwendige Zentralbankmaßnahme samt Übertragbarkeit auf aktuelle Energiepreis-Inflation diskutieren. Die offizielle Aufgabenbezeichnung springt von Teil a) zu Teil c); diese Struktur wird unverändert dokumentiert.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro1.klausur2022-nachtermin.a4.p7.islmpc-energy-price-shock'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 16,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Natürliches Outputniveau vor und nach dem Schock nicht getrennt markieren',
+      'Phillipskurvenbeziehung ohne Produktionslücke interpretieren',
+      'IS-LM-PC-Diagramm nur teilweise beschriften',
+      'Zentralbankmaßnahme ohne Bezug zum mittelfristigen Gleichgewicht diskutieren',
+      'Realitätsübertragung ohne mögliche Zielkonflikte oder Nebenwirkungen beantworten'
+    ],
+    gradingRubric: [
+      '16 Punkte insgesamt',
+      'a) 7 Punkte: IS-LM-PC-Diagramm mit Ausgangszustand, Phillipskurvenänderung, Achsen, Kurven, Gleichgewichten und Verschiebungen',
+      'c) 9 Punkte: Zentralbankmaßnahme, Rückkehr zum mittelfristigen Gleichgewicht, Übertragbarkeit und mögliche Probleme kurz diskutieren',
+      'Offizielle Teilbezeichnung springt von a) zu c); kein Teil b) ist auf der gerenderten Seite sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_2022_Nachtermin (1).pdf',
+      page: 'Klausurseite 7',
+      task: 'Aufgabe 4, Teile a und c laut sichtbarer Aufgabenstellung',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

@@ -136,6 +136,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: "Formale Analyse",
       fingerprint: '3c70ec341c243f62',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a2.p3-p5.goods-market-tax-multiplier',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: '3-5',
+      section: 'Aufgabe 2: Gütermarkt, fixe Steuer, einkommensabhängige Steuer, Multiplikator und IS-LM-Schaubild',
+      fingerprint: 'b67df569a0cf9953',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   geldnachfrage: [
@@ -326,6 +338,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: "Preissetzungsgleichung",
       fingerprint: '0a9bf8e507700ba1',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a3.p5-p6.ws-ps-markup-shock',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: '5-6',
+      section: 'Aufgabe 3: Lohnsetzung, Preissetzung, natürliche Arbeitslosenquote, Reallohn und Gewinnaufschlagsschock',
+      fingerprint: 'e46956ab430f3981',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   phillips: [
@@ -370,6 +394,18 @@ export const MAKRO1_SOURCE_ANCHORS = Object.freeze({
       section: ", erwartete Inflation",
       fingerprint: '6f4edd04063194ee',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro1.klausur2022-nachtermin.a4.p7.islmpc-energy-price-shock',
+      sourceId: 'makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1',
+      sourcePath: 'Klausur_2022_Nachtermin (1).pdf',
+      publicLabel: 'Klausur 2022 Nachtermin',
+      page: 7,
+      section: 'Aufgabe 4: IS-LM-PC, Energiepreisschock, sinkendes natürliches Outputniveau und Zentralbankreaktion',
+      fingerprint: '2fae00e0d254142d',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   erwartungen: [

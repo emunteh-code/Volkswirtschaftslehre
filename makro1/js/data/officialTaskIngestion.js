@@ -9,7 +9,10 @@ export const MAKRO1_TASK_PLACEHOLDER_POLICY =
   'Platzhalter sind explizit als non-deceptive markiert und enthalten keine erfundenen Makro-I-Aufgabeninhalte.';
 
 export const MAKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
-  'makro1.official-task.klausur-2022-nachtermin-a1-short-answer-core'
+  'makro1.official-task.klausur-2022-nachtermin-a1-short-answer-core',
+  'makro1.official-task.klausur-2022-nachtermin-a2-goods-market-tax-multiplier',
+  'makro1.official-task.klausur-2022-nachtermin-a3-ws-ps-markup-shock',
+  'makro1.official-task.klausur-2022-nachtermin-a4-islmpc-energy-price-shock'
 ]);
 
 export const MAKRO1_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -18,15 +21,20 @@ export const MAKRO1_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
   reviewedDocuments: [
     {
       path: 'Makroökonomik I/Klausur_2022_Nachtermin (1).pdf',
-      reviewedPages: [1, 2],
-      reviewedTaskFamilies: ['makro1.official-task.klausur-2022-nachtermin-a1-short-answer-core'],
+      reviewedPages: [1, 2, 3, 4, 5, 6, 7],
+      reviewedTaskFamilies: [
+        'makro1.official-task.klausur-2022-nachtermin-a1-short-answer-core',
+        'makro1.official-task.klausur-2022-nachtermin-a2-goods-market-tax-multiplier',
+        'makro1.official-task.klausur-2022-nachtermin-a3-ws-ps-markup-shock',
+        'makro1.official-task.klausur-2022-nachtermin-a4-islmpc-energy-price-shock'
+      ],
       reviewedAt: '2026-06-08',
-      reviewedBy: 'codex-official-task-review-makro1-pass-1'
+      reviewedBy: 'codex-official-task-review-makro1-pass-2'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',
   reviewedOfficialTaskFamilyIds: MAKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS,
-  nextStep: 'Continue native-text extraction plus visual review for Aufgabe 2-4 and older Makro-I exams before broader official-task-source promotion'
+  nextStep: 'Continue native-text extraction plus visual review for older Makro-I exams and add solution-key grading checklists only when official solutions are available'
 });
 
 /**

@@ -29,7 +29,7 @@ Local source files: **693**.
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | `mikro1` | 33 | 33 | 0 | 634 | 100 | 95 | 110 | 39 | 2 | 132 | 4 | 19 | 110 | 19/19 | 0 | benchmark cockpit; official task-source review pending |
 | `mikro2` | 18 | 15 | 3 | 213 | 46 | 34 | 60 | 33 | 1 | 69 | 4 | 28 | 47 | 28/28 | 0 | not achieved |
-| `makro1` | 14 | 14 | 0 | 190 | 44 | 59 | 55 | 36 | 3 | 56 | 4 | 21 | 33 | 21/21 | 0 | not achieved |
+| `makro1` | 14 | 14 | 0 | 190 | 44 | 62 | 55 | 36 | 3 | 56 | 4 | 21 | 36 | 21/21 | 0 | not achieved |
 | `makro2` | 30 | 30 | 0 | 496 | 110 | 83 | 117 | 64 | 3 | 120 | 4 | 25 | 60 | 25/25 | 0 | near, but official task-source review pending |
 | `oekonometrie` | 32 | 32 | 0 | 415 | 101 | 98 | 96 | 70 | 3 | 128 | 4 | 19 | 64 | 19/19 | 0 | near, but official task-source review pending |
 | `statistik` | 14 | 14 | 0 | 215 | 44 | 133 | 65 | 32 | 3 | 56 | 4 | 18 | 42 | 18/18 | 0 | not achieved |

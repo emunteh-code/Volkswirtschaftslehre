@@ -521,18 +521,23 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
   if (!theoryBodyHasContent(bucketBody(grouped, "definitionen"))) {
     let defInner = "";
     if (Array.isArray(entry.formeln) && entry.formeln.length) {
-      const items = entry.formeln
+      const rows = entry.formeln
         .slice(0, 6)
-        .map((f) => {
+        .map((f, index) => {
           const label = f?.label ? escapeHtml(stripTags(f.label)) : "";
           const desc = f?.desc ? escapeHtml(stripTags(f.desc)) : "";
-          return label ? `<li><strong>${label}</strong>${desc ? ` — ${desc}` : ""}</li>` : "";
+          if (!label) return "";
+          return `<div class="theory-glossary-row">
+<button type="button" class="theory-glossary-term" onclick="window.__scrollToFormulaCard?.(${index})" aria-label="Zur Formel ${label} springen">${label}</button>
+<p class="theory-glossary-def">${desc || "Siehe Formeln-Tab für Notation und Anwendung."}</p>
+</div>`;
         })
         .filter(Boolean)
         .join("");
-      if (items) {
-        defInner = `<ul>${items}</ul>
-<p><em>source-distilled:</em> Begriffe aus Formeln-Tab; exakte VL-Notation in Primärquellen prüfen.</p>`;
+      if (rows) {
+        defInner = `<p class="theory-glossary-sub">Kerngrößen für diesen Aufgabentyp</p>
+<div class="theory-glossary-rows">${rows}</div>
+<p class="theory-glossary-footer">Notation mit offiziellen Vorlesungsunterlagen abgleichen.</p>`;
       }
     }
     if (!defInner && Array.isArray(entry.cards) && entry.cards.length) {
@@ -551,7 +556,7 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
       }
     }
     if (defInner) {
-      grouped.definitionen = [{ heading: "Kerngrößen", inner: defInner }];
+      grouped.definitionen = [{ heading: "Definitionen", inner: defInner }];
     }
   }
 
@@ -591,7 +596,7 @@ ${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabel
     const items = entry.objectives.map((o) => `<li>${escapeHtml(stripTags(String(o)))}</li>`).join("");
     grouped.vor_aufgaben = [
       {
-        heading: "Checkliste",
+        heading: "Bereitschaft prüfen",
         inner: `<ul class="theory-objectives-checklist">${items}</ul>
 <p>Vor den Aufgaben: jede Formel verbal deuten können; Grafik-Skizze mit Achsenbeschriftung parat haben.</p>`
       }
@@ -600,8 +605,13 @@ ${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabel
     grouped.vor_aufgaben = [
       {
         heading: "Vor den Aufgaben",
-        inner: `<p>Kernrelationen aus dem Formeln-Tab aktivieren; eine Skizze (Grafik oder Ablauf) ohne Rechnung erklären können; typische Fehler bewusst vermeiden.</p>
-<p><em>platform-added-explanation:</em> Lern-Checkliste.</p>`
+        inner: `<ul class="readiness-checklist">
+<li>Kann ich die Kerngrößen benennen, ohne ins Formelblatt zu schauen?</li>
+<li>Kann ich die zentrale Relation in einem Satz erklären?</li>
+<li>Kann ich den ersten Rechenschritt bei einer Standardaufgabe skizzieren?</li>
+<li>Habe ich typische Fehler aus „Häufige Fehler" aktiv geprüft?</li>
+</ul>
+<p><em>platform-added-explanation:</em> Bereitschaftscheck vor dem Aufgaben-Tab.</p>`
       }
     ];
   }
@@ -737,7 +747,7 @@ export function buildIntuitionFusionFragments(intuition, opts = {}) {
 
   const orientierung = intuition.bridge
     ? `<div class="theory-intuition-embed theory-intuition-bridge">
-<p class="theory-intuition-bridge-kicker">Transferpfad</p>
+<p class="theory-intuition-bridge-kicker">So erkennst du das in Aufgaben</p>
 <p class="theory-intuition-bridge-copy">${intuition.bridge}</p>
 </div>`
     : "";

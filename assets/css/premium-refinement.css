@@ -8391,3 +8391,869 @@ body.light-mode #shortcutHint .sc-key {
   color: var(--muted);
 }
 
+/* ── Pedagogy Pass 1 (fleet; uses existing tokens) ─────────── */
+.lp-hero-trust {
+  margin: 10px 0 0;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.55);
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+.lp-hero-featured {
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-md, 8px);
+  background: color-mix(in srgb, var(--card) 92%, var(--accent) 8%);
+  max-width: 36rem;
+}
+
+.lp-hero-featured-kicker {
+  margin: 0 0 4px;
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lp-hero-featured-title {
+  margin: 0 0 6px;
+  font-size: var(--type-lg, 1.125rem);
+  font-weight: 600;
+}
+
+.lp-hero-featured-summary {
+  margin: 0 0 10px;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.55);
+  color: var(--muted);
+}
+
+.lp-hero-featured-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: var(--type-xs, 0.75rem);
+}
+
+.lp-hero-featured-link {
+  font-size: var(--type-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.lp-hero-featured-link:hover {
+  text-decoration: underline;
+}
+
+.tab-workflow-hint {
+  margin: 0;
+  padding: 6px var(--tab-row-pad-x, 16px) 8px;
+  font-size: var(--type-xs, 0.75rem);
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg) 8%);
+}
+
+.tab-workflow-hint__label {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.lesson-outcomes {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-md, 8px);
+  background: color-mix(in srgb, var(--card) 94%, var(--accent) 6%);
+}
+
+.lesson-outcomes__title {
+  margin: 0 0 8px;
+  font-size: var(--type-md, 1rem);
+  font-weight: 600;
+}
+
+.lesson-outcomes__list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.6);
+}
+
+.pedagogy-source-note {
+  margin: 8px 0 0;
+  font-size: var(--type-xs, 0.75rem);
+  line-height: var(--leading-normal, 1.45);
+  color: var(--muted);
+}
+
+.mastery-checkpoint,
+.exam-recognition,
+.fehler-checklist,
+.confidence-checkpoint {
+  margin: 24px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md, 8px);
+  background: var(--card);
+}
+
+.mastery-checkpoint__list,
+.exam-recognition__dl {
+  margin: 8px 0 0;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.6);
+}
+
+.review-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.review-control-btn,
+.confidence-btn {
+  font-size: var(--type-xs, 0.75rem);
+  padding: 6px 10px;
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.review-control-btn.is-active,
+.confidence-btn.is-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
+}
+
+.prob-actions--staged {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.staged-reveal {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--surface2) 55%, transparent);
+  border-radius: 0 var(--r-sm, 8px) var(--r-sm, 8px) 0;
+  font-size: var(--type-sm, 0.875rem);
+}
+
+.formula-pedagogy-extras {
+  margin-top: 10px;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.55);
+  color: var(--muted);
+}
+
+.density-intuition-diagram {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md, 8px);
+  background: color-mix(in srgb, var(--surface2) 40%, transparent);
+  font-size: var(--type-sm, 0.875rem);
+}
+
+.density-diagram-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.density-diagram-label {
+  min-width: 6.5rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.lp-tile-action {
+  margin-left: auto;
+}
+
+.micro-retrieval-check {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px dashed var(--border);
+  border-radius: var(--r-md, 8px);
+  background: color-mix(in srgb, var(--surface2) 35%, transparent);
+}
+
+.micro-retrieval-check__q {
+  margin: 0 0 8px;
+  font-size: var(--type-sm, 0.875rem);
+  font-weight: 600;
+}
+
+.micro-retrieval-check__a {
+  margin-top: 8px;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.55);
+  color: var(--muted);
+}
+
+.formula-herleitung-layer--collapsible {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md, 8px);
+  padding: 0 12px 12px;
+  margin-top: 16px;
+}
+
+.formula-tab-section-summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0;
+  font-weight: 600;
+}
+
+.formula-tab-section-summary::-webkit-details-marker {
+  display: none;
+}
+
+.formula-tab-section-sub {
+  font-weight: 400;
+  font-size: var(--type-sm, 0.875rem);
+  color: var(--muted);
+}
+
+.formula-herleitung-step-role {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  border-radius: var(--r-sm, 6px);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface2) 90%);
+  color: var(--muted);
+}
+
+/* Prevent orphan line breaks for short inline math (e.g. $b$) */
+#content .theory-recipe-body p mjx-container:not([display="true"]),
+#content .f-desc mjx-container:not([display="true"]),
+#content .formula-pedagogy-extras mjx-container:not([display="true"]),
+#content .prob-text mjx-container:not([display="true"]) {
+  white-space: nowrap;
+}
+
+/* ============================================================
+   FORMULA / PRACTICE / RAIL TAB POLISH — 2026-06-03
+   Presentation-only; same IA and content types.
+   ============================================================ */
+
+/* ── Formula reference cards ─────────────────────────────── */
+#content .formula-ref-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px 12px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, var(--accent) 12%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--card) 96%, var(--surface2) 4%) 0%,
+    var(--card) 100%
+  );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--border) 25%, transparent);
+}
+
+#content .formula-ref-card.formula-card--highlight {
+  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
+}
+
+#content .f-ref-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#content .formula-ref-card .f-label {
+  margin: 0;
+  font-size: var(--type-md, 0.9375rem);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--text);
+}
+
+#content .f-eq-panel {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--accent) 20%);
+  background: color-mix(in srgb, var(--surface2) 42%, var(--card) 58%);
+}
+
+#content .f-meaning {
+  margin: 0;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+#content .f-vars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 6px 14px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface2) 30%, transparent);
+}
+
+#content .f-var-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 8px;
+  align-items: baseline;
+  min-width: 0;
+}
+
+#content .f-var-row dt {
+  margin: 0;
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text) 30%);
+}
+
+#content .f-var-row dd {
+  margin: 0;
+  font-size: var(--type-xs, 0.75rem);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+#content .formula-pedagogy-extras {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  display: grid;
+  gap: 4px;
+  font-size: var(--type-xs, 0.75rem);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+#content .formula-pedagogy-extras p {
+  margin: 0;
+}
+
+#content .formula-pedagogy-extras__tag {
+  display: inline-block;
+  min-width: 3.2rem;
+  margin-right: 6px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 75%, var(--muted) 25%);
+}
+
+#content .f-var-hint {
+  margin: 0;
+  font-size: var(--type-xs, 0.6875rem);
+  color: var(--muted);
+}
+
+/* ── Derivation timeline ─────────────────────────────────── */
+#content .formula-derivation-chain {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--card) 98%, var(--surface2) 2%);
+}
+
+#content .formula-derivation-chain__title {
+  margin: 0;
+  font-size: var(--type-sm, 0.875rem);
+  font-weight: 650;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text);
+}
+
+#content .formula-derivation-chain__intro {
+  margin: 6px 0 0;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+#content .formula-derivation-chain__anchor {
+  margin: 10px 0 4px;
+}
+
+#content .formula-derivation-timeline {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-left: 2px solid color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  margin-left: 6px;
+}
+
+#content .formula-derivation-step {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px 12px;
+  padding: 10px 0 10px 14px;
+  position: relative;
+}
+
+#content .formula-derivation-step__num {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
+}
+
+#content .formula-derivation-step__role {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: var(--type-xs, 0.6875rem);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+#content .formula-derivation-step__text {
+  margin: 0;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.52;
+}
+
+#content .formula-derivation-step__math {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface2) 35%, transparent);
+}
+
+/* ── Einsatzgrenzen diagnostic rows ──────────────────────── */
+#content .formula-limits-card {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  background: var(--card);
+}
+
+#content .formula-limits-card__title {
+  margin: 0;
+  font-size: var(--type-sm, 0.875rem);
+  font-weight: 650;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+#content .formula-limits-card__subtitle {
+  margin: 4px 0 0;
+  font-size: var(--type-sm, 0.8125rem);
+  color: var(--muted);
+}
+
+#content .formula-limits-rows {
+  display: grid;
+  gap: 0;
+  margin-top: 10px;
+}
+
+#content .formula-limits-row {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 10px 14px;
+  padding: 9px 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+#content .formula-limits-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+#content .formula-limits-row__label {
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 78%, var(--muted) 22%);
+}
+
+#content .formula-limits-row--fails,
+#content .formula-limits-row--mistakes {
+  border-left: 3px solid color-mix(in srgb, var(--sys-orange, #d97706) 55%, transparent);
+  padding-left: 10px;
+}
+
+#content .formula-limits-row__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.48;
+}
+
+#content .formula-limits-row__list li + li {
+  margin-top: 4px;
+}
+
+#content .formula-limits-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: var(--type-xs, 0.6875rem);
+  color: var(--muted);
+}
+
+/* ── Klausurmethodik action cards ────────────────────────── */
+#content .klausur-action-grid {
+  display: grid;
+  gap: 12px;
+}
+
+#content .klausur-action-card {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--accent) 14%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--card) 94%, var(--accent) 6%) 0%,
+    var(--card) 100%
+  );
+}
+
+#content .klausur-action-card__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px 12px;
+  align-items: start;
+}
+
+#content .klausur-action-card__num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
+}
+
+#content .klausur-action-card__title {
+  margin: 0 0 4px;
+  font-size: var(--type-md, 0.9375rem);
+  font-weight: 650;
+}
+
+#content .klausur-action-card__field-label {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%);
+}
+
+#content .klausur-action-card__prueft,
+#content .klausur-action-card__erkennen {
+  margin: 8px 0 0;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+}
+
+#content .klausur-action-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--type-xs, 0.6875rem);
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+#content .klausur-action-card__detail {
+  margin-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  padding-top: 8px;
+}
+
+#content .klausur-action-card__detail-summary {
+  cursor: pointer;
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+#content .klausur-action-card__detail-body {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+#content .klausur-action-detail-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+#content .klausur-action-card__footer {
+  margin-top: 8px;
+  font-size: var(--type-xs, 0.6875rem);
+}
+
+#content .klausur-action-source-link {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+}
+
+/* ── Practice tab polish ─────────────────────────────────── */
+#content .practice-mode-header {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--accent) 14%);
+  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%);
+}
+
+#content .practice-mode-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+#content .practice-mode-kicker {
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--accent2) 75%, var(--text) 25%);
+}
+
+#content .practice-mode-badge {
+  font-size: var(--type-xs, 0.6875rem);
+  color: var(--muted);
+}
+
+#content .practice-mode-lead {
+  margin: 0 0 12px;
+  font-size: var(--type-sm, 0.875rem);
+  color: var(--text);
+}
+
+#content .practice-mode-tracks {
+  display: grid;
+  gap: 10px;
+}
+
+#content .practice-mode-track {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px 12px;
+  align-items: start;
+}
+
+#content .practice-mode-track-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2) 88%);
+}
+
+#content .practice-mode-track-copy strong {
+  display: block;
+  font-size: var(--type-sm, 0.8125rem);
+  margin-bottom: 2px;
+}
+
+#content .practice-mode-track-copy p {
+  margin: 0;
+  font-size: var(--type-xs, 0.75rem);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+#content .practice-section-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px 12px;
+  align-items: start;
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+#content .practice-section-head__num {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface2) 90%);
+}
+
+#content .practice-section-head__title {
+  margin: 0 0 2px;
+  font-size: var(--type-md, 1rem);
+  font-weight: 650;
+}
+
+#content .practice-section-head__purpose {
+  margin: 0;
+  font-size: var(--type-sm, 0.8125rem);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+#content .practice-readiness-bridge {
+  margin: 8px 0 4px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px dashed color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+  background: color-mix(in srgb, var(--surface2) 25%, transparent);
+}
+
+#content .practice-readiness-bridge__title {
+  margin: 0 0 8px;
+  font-size: var(--type-sm, 0.8125rem);
+  font-weight: 600;
+}
+
+#content .practice-readiness-bridge__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--type-xs, 0.75rem);
+  display: grid;
+  gap: 6px;
+}
+
+#content .exam-drill-panel-intro {
+  margin: 0 0 10px;
+  font-size: var(--type-sm, 0.8125rem);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ── Right rail formula index ────────────────────────────── */
+#rightPanel .rp-formula-index {
+  display: grid;
+  gap: 6px;
+}
+
+#rightPanel .rp-formula-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--accent) 18%);
+  background: color-mix(in srgb, var(--surface2) 55%, var(--card) 45%);
+  color: var(--text);
+  font-size: var(--type-xs, 0.75rem);
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+#rightPanel .rp-formula-chip:hover,
+#rightPanel .rp-formula-chip:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface2) 92%);
+  outline: none;
+}
+
+#rightPanel .rp-formula-chip-arrow {
+  color: color-mix(in srgb, var(--accent) 70%, var(--muted) 30%);
+  font-weight: 700;
+}
+
+/* ── Theory glossary (Definitions) ───────────────────────── */
+#content .theory-glossary-sub {
+  margin: 0 0 10px;
+  font-size: var(--type-sm, 0.8125rem);
+  color: var(--muted);
+}
+
+#content .theory-glossary-rows {
+  display: grid;
+  gap: 0;
+}
+
+#content .theory-glossary-row {
+  display: grid;
+  gap: 4px;
+  padding: 10px 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+#content .theory-glossary-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+#content .theory-glossary-term {
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: left;
+  font-size: var(--type-sm, 0.875rem);
+  font-weight: 650;
+  color: color-mix(in srgb, var(--accent2) 72%, var(--text) 28%);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#content .theory-glossary-term:hover {
+  color: var(--accent);
+}
+
+#content .theory-glossary-def {
+  margin: 0;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+}
+
+#content .theory-glossary-footer {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  font-size: var(--type-xs, 0.6875rem);
+  color: var(--muted);
+}

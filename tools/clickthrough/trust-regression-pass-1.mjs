@@ -1105,7 +1105,7 @@ async function runSolutionReveal(page) {
       continue;
     }
     await page.waitForTimeout(500);
-    const btn = page.getByRole('button', { name: /Lösung anzeigen|Lösung zeigen/i }).first();
+    const btn = page.getByRole('button', { name: /Lösung anzeigen|Lösung zeigen|Vollständige Lösung|Hinweis\s*\/\s*Lösung/i }).first();
     if ((await btn.count()) === 0) {
       fail({
         system: 'interaction-reveal',

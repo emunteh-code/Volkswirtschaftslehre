@@ -95,11 +95,15 @@ export function createRightPanelRenderer({
     if (mistakesSection) mistakesSection.classList.add("rp-section--mistakes");
 
     if (formulasNode) {
-      const hasFormulaCards = Array.isArray(formulaCardsByConcept[id]) && formulaCardsByConcept[id].length > 0;
-      const hideRailFormulas = isFormulaTab || Boolean(entry?.formeln?.length) || hasFormulaCards;
-      if (hideRailFormulas) {
-        formulasNode.innerHTML = "";
-        if (formulasSection) formulasSection.hidden = true;
+      const formulas = Array.isArray(entry?.formeln) ? entry.formeln.filter((f) => f?.label) : [];
+      if (formulas.length) {
+        const rows = formulas.slice(0, 5).map((formula, index) => {
+          const label = String(formula.label || "").trim();
+          const safeLabel = label.replace(/"/g, "&quot;");
+          return `<button type="button" class="rp-formula-chip" data-formula-index="${index}" onclick="window.__scrollToFormulaCard?.(${index})" aria-label="Springe zur Formel ${safeLabel}"><span class="rp-formula-chip-arrow" aria-hidden="true">→</span> ${label}</button>`;
+        });
+        formulasNode.innerHTML = `<div class="rp-formula-index">${rows.join("")}</div>`;
+        if (formulasSection) formulasSection.hidden = false;
       } else {
         formulasNode.innerHTML = "";
         if (formulasSection) formulasSection.hidden = true;

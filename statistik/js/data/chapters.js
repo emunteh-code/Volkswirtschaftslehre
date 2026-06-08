@@ -1742,7 +1742,13 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Fließendes Histogramm und Kernidee</h4>
 <p>Die Vorlesung schärft das Histogramm dann zu einem lokalen Fensterzugriff: Für jeden Punkt $x$ wird gezählt, wie viele Beobachtungen in ein Intervall um $x$ fallen. Daraus entsteht das <strong>fließende Histogramm</strong>.</p>
-      <div class="math-block">$$\hat f(x)=\frac{1}{2b}\cdot\frac{\\#\\{x_i\in(x-b,x+b]\\}}{n}$$</div>
+      <div class="density-intuition-diagram" role="img" aria-label="Histogramm, gleitendes Fenster und Kernkurve">
+<div class="density-diagram-row"><span class="density-diagram-label">Histogramm</span><span class="density-diagram-bars" aria-hidden="true">▁▃▅▇▅▃▁</span></div>
+<div class="density-diagram-row"><span class="density-diagram-label">Fenster 2b</span><span class="density-diagram-window" aria-hidden="true">[──●──]</span></div>
+<div class="density-diagram-row"><span class="density-diagram-label">Kernkurve</span><span class="density-diagram-curve" aria-hidden="true">╱╲_╱╲</span></div>
+<p class="density-diagram-caption"><em>platform-added-explanation:</em> Intuition vor der Formel — kleines $b$ = zackig, großes $b$ = geglättet.</p>
+</div>
+      <div class="math-block">$$\hat f(x)=\frac{1}{2b}\cdot\frac{\left|\{x_i\in(x-b,x+b]\}\right|}{n}$$</div>
       <p>Die Kerndichteschätzung verallgemeinert diese Idee: Beobachtungen im Umfeld von $x$ werden nicht alle gleich gewichtet, sondern über eine Kernfunktion gewichtet.</p>
       <div class="math-block">$$\hat f(x)=\frac{1}{nb}\sum_{i=1}^{n}K\\!\left(\frac{x-x_i}{b}\right)$$</div>
 
@@ -1792,7 +1798,7 @@ export const CONTENT = {
 </section>`,
     formeln: [
       { label: 'Histogramm als Dichteschätzer', eq: String.raw`$$\hat f(x)=\frac{H_j}{n\,b_j}, \qquad x \in I_j$$`, desc: 'Klassenhäufigkeit pro Stichprobenumfang und Klassenbreite.' },
-      { label: 'Fließendes Histogramm', eq: String.raw`$$\hat f(x)=\frac{1}{2b}\cdot\frac{\#\{x_i\in(x-b,x+b]\}}{n}$$`, desc: 'Lokales Fenster der Breite $2b$ um den Auswertungspunkt $x$.' },
+      { label: 'Fließendes Histogramm', eq: String.raw`$$\hat f(x)=\frac{1}{2b}\cdot\frac{\left|\{x_i\in(x-b,x+b]\}\right|}{n}$$`, desc: 'Lokales Fenster der Breite $2b$ um den Auswertungspunkt $x$.' },
       { label: 'Kerndichteschätzung', eq: String.raw`$$\hat f(x)=\frac{1}{nb}\sum_{i=1}^{n}K\!\left(\frac{x-x_i}{b}\right)$$`, desc: 'Die Bandbreite $b$ steuert die Glättung; die Kernfunktion gewichtet Beobachtungen im Umfeld von $x$.' }
     ],
     aufgaben: [

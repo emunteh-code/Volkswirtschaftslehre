@@ -32,6 +32,20 @@ import {
   extractConceptHighlightTerms,
   highlightPracticeText
 } from "../utils/learningHighlights.js";
+import {
+  LEARNER_LABELS,
+  renderLessonOutcomes,
+  renderMasteryCheckpoint,
+  renderConfidenceCheckpoint,
+  renderReviewControls,
+  renderFehlerChecklist,
+  renderExamRecognitionBlock,
+  renderStagedPracticeCard,
+  renderFormulaPedagogyExtras,
+  renderSourceUsePedagogy,
+  buildTheoryMicroCheck,
+  getDerivationStepRole
+} from "../pedagogy/learnerPedagogy.js";
 
 const HOME_ACTION_ACTIVATE = (handler) =>
   `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${handler}}"`;
@@ -600,7 +614,7 @@ ${subtitle}
     const formula = entry?.formeln?.[0];
     let formalAnchorHtml = "";
     if (formula && (hasMeaningfulDisplayContent(formula.eq) || hasMeaningfulText(formula.desc))) {
-      formalAnchorHtml = `<span class="theory-intuition-callout-label">Formaler Anker</span>
+      formalAnchorHtml = `<span class="theory-intuition-callout-label">${LEARNER_LABELS.formalerAnker}</span>
 <div class="theory-intuition-callout-body">
 ${hasMeaningfulDisplayContent(formula.eq) ? `<div class="theory-intuition-callout-anchor">${renderFormulaEq(formula.eq)}</div>` : ""}
 ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${renderTeachingProse(formula.desc)}</p>` : ""}
@@ -725,13 +739,9 @@ ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${
 </div>`;
     }
 
-    return tasks.map((task, index) => renderQuestionCard({
-      label: `Aufgabe ${index + 1}`,
-      questionHtml: renderHighlightedPracticeText(task.text, highlightTerms),
-      buttonId: `solBtn_${index}`,
-      answerId: `sol_${index}`,
-      toggleCall: `window.__toggleSolution(${index})`,
-      answerMarkup: `<h4>Musterlösung</h4>
+    return tasks.map((task, index) => {
+      const hasSimilarTask = index < tasks.length - 1;
+      const answerMarkup = `<h4>Musterlösung</h4>
 ${(task.steps || []).map((step, stepIndex) => `
 <div class="step">
 <div class="step-num" aria-hidden="true">${stepIndex + 1}</div>
@@ -741,8 +751,18 @@ ${(task.steps || []).map((step, stepIndex) => `
 </div>
 </div>`).join("")}
 ${hasMeaningfulText(task.hint) ? renderTaskWarningCard(renderSemanticPlainText(task.hint), "Klausurhinweis") : ""}
-<div class="result-badge">Ergebnis: ${renderHighlightedPracticeText(task.result || "Arbeite das Ergebnis formal zu Ende aus.", highlightTerms)}</div>`
-    })).join("");
+<div class="result-badge">Ergebnis: ${renderHighlightedPracticeText(task.result || "Arbeite das Ergebnis formal zu Ende aus.", highlightTerms)}</div>`;
+      return renderStagedPracticeCard({
+        label: `Aufgabe ${index + 1}`,
+        questionHtml: renderHighlightedPracticeText(task.text, highlightTerms),
+        taskIndex: index,
+        hint: task.hint || "",
+        steps: task.steps || [],
+        result: task.result || "",
+        answerMarkupFull: answerMarkup,
+        hasSimilarTask
+      });
+    }).join("");
   }
 
   function classifyFormulaCardLayout(formula) {
@@ -809,7 +829,7 @@ ${intuition?.bridge ? `<div class="exam-drill-line">
         tag: formula.label,
         question: `Welche formale Beziehung trägt "${chapter.title}" in der Prüfung, und wie liest du sie richtig?`,
         answer: `<div class="exam-drill-line">
-<span class="exam-drill-key">Formaler Anker</span>
+<span class="exam-drill-key">${LEARNER_LABELS.formalerAnker}</span>
 ${renderFormulaEq(formula.eq)}
 </div>
 <div class="exam-drill-line">
@@ -905,8 +925,7 @@ ${intuition?.analogy ? `<div class="exam-drill-line">
     }
 
     return `<div class="exam-drill-panel klausurmethodik-exam-transfer">
-<span class="klausurmethodik-kicker">Prüfungsvorbereitung</span>
-<div class="practice-section-header">Prüfungstransfer</div>
+<p class="exam-drill-panel-intro">Kompakter als die geführten Aufgaben — näher am Klausurblatt. Hinweis vor Lösung, nicht umgekehrt.</p>
 <div class="exam-drill-grid">
 ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, "_")}_${index}`;
@@ -916,7 +935,7 @@ ${drills.map((drill, index) => {
     label: cardLabel,
     questionHtml: renderHighlightedPracticeText(drill.question, highlightTerms),
     buttonId: `examDrillBtn_${drillId}`,
-    buttonText: "Lösung anzeigen",
+    buttonText: "Hinweis / Lösung",
     openButtonText: "Lösung verbergen",
     toggleCall: `window.__toggleExamDrill('${drillId}')`,
     answerId: `examDrill_${drillId}`,
@@ -973,35 +992,22 @@ ${answerMarkup}
     const tasks = chapter ? buildPracticeTasks(chapter, entry, intuition) : getPracticeTasks(conceptId, entry);
     if (!tasks.length) {
       if (chapter) {
-        return `<div class="panel active mikro1-practice">
-<div class="practice-panel-header">
-<span class="badge badge--status practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
-</div>
-<div class="section-block"><h3>Geführte Aufgaben</h3><p>Für dieses Konzept liegt der Schwerpunkt im Prüfungstransfer. Nutze die Fragen unten, um Definition, Richtungsaussage und formalen Zugriff klausurfest zu machen.</p></div>${renderExamDrillDeck(chapter, entry, intuition, highlightTerms)}</div>`;
+        return `<div class="panel active mikro1-practice practice-tab-panel">
+${renderPracticeModeIntro(true)}
+${renderPracticeSectionHead(2, "Prüfungstransfer", "Bearbeite diese Aufgaben erst ohne Hilfe. Nutze danach die Lösung nur zur Kontrolle.")}
+${renderExamDrillDeck(chapter, entry, intuition, highlightTerms)}</div>`;
       }
-      return `<div class="panel active mikro1-practice">
-<div class="practice-panel-header">
-<span class="badge badge--status practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
-</div>
-<div class="section-block"><h3>Aufgaben</h3><p>Arbeite hier mit Theorie, Verbindungen und Wiederholung weiter, bis neue Aufgabenbausteine geladen sind.</p></div></div>`;
+      return `<div class="panel active mikro1-practice practice-tab-panel">
+${renderPracticeModeIntro(false)}
+<div class="practice-empty-state"><p>Für diese Lektion sind noch keine Aufgaben hinterlegt.</p></div></div>`;
     }
-    let html = `<div class="panel active mikro1-practice">
-<div class="practice-panel-header">
-<span class="badge badge--status practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
-</div>
-<div class="practice-surface-intro">
-<div class="practice-surface-column">
-<span class="practice-surface-kicker">Geführte Aufgaben</span>
-<p>Hier trainierst du den vollständigen Lösungsweg Schritt für Schritt. Ziel ist nicht nur das Ergebnis, sondern die saubere Reihenfolge der Argumentation.</p>
-</div>
-<div class="practice-surface-column">
-<span class="practice-surface-kicker">Prüfungstransfer</span>
-<p>Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</p>
-</div>
-</div>
-<div class="practice-section-header">Geführte Aufgaben</div>
+    let html = `<div class="panel active mikro1-practice practice-tab-panel">
+${renderPracticeModeIntro(Boolean(chapter))}
+${renderPracticeSectionHead(1, "Geführte Aufgaben", "Schrittweise üben, bevor du die vollständige Lösung ansiehst.")}
 ${renderGuidedTasks(tasks, highlightTerms)}`;
     if (chapter) {
+      html += renderTransferReadinessBridge();
+      html += renderPracticeSectionHead(2, "Prüfungstransfer", "Klausurähnliche Aufgaben ohne starke Führung — nach den geführten Aufgaben.");
       html += renderExamDrillDeck(chapter, entry, intuition, highlightTerms);
     }
     html += "</div>";
@@ -1025,10 +1031,61 @@ ${renderGuidedTasks(tasks, highlightTerms)}`;
 
   function renderKlausurmethodikField(label, contentHtml, variant = "") {
     if (!contentHtml) return "";
-    const variantClass = variant ? ` klausurmethodik-field--${variant}` : "";
-    return `<div class="formula-support-field klausurmethodik-field${variantClass}">
-<span class="formula-support-field-label klausurmethodik-label">${label}</span>
-${contentHtml}
+    const variantClass = variant ? ` klausur-action-detail-row--${variant}` : "";
+    return `<div class="klausur-action-detail-row${variantClass}">
+<span class="klausur-action-detail-label">${label}</span>
+<div class="klausur-action-detail-body">${contentHtml}</div>
+</div>`;
+  }
+
+  function renderPracticeModeIntro(hasTransfer = true) {
+    const transferTrack = hasTransfer
+      ? `<div class="practice-mode-track">
+<span class="practice-mode-track-num" aria-hidden="true">2</span>
+<div class="practice-mode-track-copy">
+<strong>Prüfungstransfer</strong>
+<p>Klausurähnliche Aufgaben ohne starke Führung — erst nach den geführten Aufgaben.</p>
+</div>
+</div>`
+      : "";
+    return `<header class="practice-mode-header">
+<div class="practice-mode-header__top">
+<span class="practice-mode-kicker">Übungsmodus</span>
+<span class="practice-mode-badge">${LEARNER_LABELS.plattformSimulation}</span>
+</div>
+<p class="practice-mode-lead">Trainiere erst geführt, dann im Klausurformat.</p>
+<div class="practice-mode-tracks">
+<div class="practice-mode-track">
+<span class="practice-mode-track-num" aria-hidden="true">1</span>
+<div class="practice-mode-track-copy">
+<strong>Geführte Aufgaben</strong>
+<p>Schrittweiser Lösungsweg mit Hinweisen und Fehlerkontrolle.</p>
+</div>
+</div>
+${transferTrack}
+</div>
+</header>`;
+  }
+
+  function renderPracticeSectionHead(stepNum, title, purpose) {
+    return `<div class="practice-section-head">
+<span class="practice-section-head__num" aria-hidden="true">${stepNum}</span>
+<div class="practice-section-head__copy">
+<h3 class="practice-section-head__title">${title}</h3>
+<p class="practice-section-head__purpose">${purpose}</p>
+</div>
+</div>`;
+  }
+
+  function renderTransferReadinessBridge() {
+    return `<div class="practice-readiness-bridge" role="group" aria-labelledby="practice-readiness-h">
+<h4 class="practice-readiness-bridge__title" id="practice-readiness-h">Bereit für Prüfungstransfer?</h4>
+<ul class="practice-readiness-bridge__list">
+<li><label><input type="checkbox" /> Ich erkenne den Aufgabentyp.</label></li>
+<li><label><input type="checkbox" /> Ich kenne den ersten Rechenschritt.</label></li>
+<li><label><input type="checkbox" /> Ich kann die zentrale Formel ohne Nachschauen wählen.</label></li>
+<li><label><input type="checkbox" /> Ich kenne die häufigste Falle.</label></li>
+</ul>
 </div>`;
   }
 
@@ -1077,7 +1134,7 @@ ${sectionHead}
     return `<section class="formula-tab-section formula-tab-section--methodik task-family-layer" aria-labelledby="${headingId || "formula-tab-methodik-heading"}">
 ${sectionHead}
 <div class="formula-klausurmethodik klausurmethodik-panel">
-<div class="klausurmethodik-accordion-list task-family-grid">
+<div class="klausur-action-grid task-family-grid">
 ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
 </div>
 </div>
@@ -1086,7 +1143,6 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
 
   function renderTaskFamilyCard(family, index = 0) {
     const stepNum = index + 1;
-    const openAttr = index === 0 && !hasTaskFamilies(current) ? " open" : "";
     const familyKey = escapeHtml(String(family.id || `family-${index}`).replace(/[^\w.-]/g, "_"));
     const enriched = enrichTaskFamilyForDisplay(family, {
       conceptId: current,
@@ -1117,26 +1173,35 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
       ? `<ul class="klausurmethodik-list klausurmethodik-list--traps">${traps.map((trap) => `<li>${renderSemanticPlainText(trap)}</li>`).join("")}</ul>`
       : "";
     const sourceFootnote = hasAnchors
-      ? `<p class="klausurmethodik-footnote"><button type="button" class="klausurmethodik-source-link" onclick="window.__openQuellen?.()">Zur Vorlesung</button></p>`
+      ? `<span class="klausur-action-card__source"><button type="button" class="klausur-action-source-link" onclick="window.__openQuellen?.()">Quellen anzeigen →</button></span>`
       : "";
-    return `<details class="task-family-card klausurmethodik-accordion"${openAttr} data-family-id="${familyKey}">
-<summary class="klausurmethodik-accordion-head">
-<span class="klausurmethodik-step-num" aria-hidden="true">${stepNum}</span>
-<span class="klausurmethodik-accordion-title-wrap">
-<span class="klausurmethodik-accordion-title">${renderMathTitle(displayTitle)}</span>
-${timeMeta ? `<span class="klausurmethodik-time">${renderSemanticPlainText(timeMeta)}</span>` : ""}
-</span>
-${renderKlausurmethodikDifficultyChip(family.difficulty)}
-</summary>
-<div class="klausurmethodik-card-body">
-${renderKlausurmethodikField("Ziel", ziel ? `<p class="formula-support-field-body klausurmethodik-text">${renderSemanticPlainText(ziel)}</p>` : "", "ziel")}
-${renderKlausurmethodikField("Vorgehen", vorgehenHtml, "vorgehen")}
-${renderKlausurmethodikField("Typische Klausurfrage", typicalQuestion ? `<p class="formula-support-field-body klausurmethodik-text">${renderSemanticPlainText(typicalQuestion)}</p>` : "", "frage")}
-${renderKlausurmethodikField("Häufiger Fehler", trapHtml, "fehler")}
-${family.officialTaskGap ? renderStudentTaskGapNote(family.officialTaskGap) : ""}
-${sourceFootnote}
+    const prueftText = ziel ? renderSemanticPlainText(ziel) : "";
+    const erkennenText = typicalQuestion ? renderSemanticPlainText(typicalQuestion) : "";
+    const metaParts = [timeMeta, family.difficulty && String(family.difficulty).toLowerCase() !== "offen" ? String(family.difficulty) : ""].filter(Boolean);
+    const metaHtml = metaParts.length
+      ? `<div class="klausur-action-card__meta">${metaParts.map((part) => `<span>${renderSemanticPlainText(part)}</span>`).join("")}</div>`
+      : "";
+    const detailBody = [
+      renderKlausurmethodikField("Vorgehen", vorgehenHtml, "vorgehen"),
+      renderKlausurmethodikField("Häufige Falle", trapHtml, "fehler"),
+      family.officialTaskGap ? renderStudentTaskGapNote(family.officialTaskGap) : ""
+    ].filter(Boolean).join("");
+    return `<article class="klausur-action-card task-family-card" data-family-id="${familyKey}">
+<header class="klausur-action-card__head">
+<span class="klausur-action-card__num" aria-hidden="true">${stepNum}</span>
+<div class="klausur-action-card__main">
+<h4 class="klausur-action-card__title">${renderMathTitle(displayTitle)}</h4>
+${prueftText ? `<p class="klausur-action-card__prueft"><span class="klausur-action-card__field-label">Prüft:</span> ${prueftText}</p>` : ""}
 </div>
-</details>`;
+${metaHtml}
+</header>
+${erkennenText ? `<p class="klausur-action-card__erkennen"><span class="klausur-action-card__field-label">Erkennen:</span> ${erkennenText}</p>` : ""}
+${detailBody ? `<details class="klausur-action-card__detail"${index === 0 ? " open" : ""}>
+<summary class="klausur-action-card__detail-summary">Methode &amp; Fallen</summary>
+<div class="klausur-action-card__detail-body">${detailBody}</div>
+</details>` : ""}
+<footer class="klausur-action-card__footer">${sourceFootnote}</footer>
+</article>`;
   }
 
   function toggleReveal(solutionId, buttonId) {
@@ -1197,24 +1262,29 @@ ${sourceFootnote}
         const inferredVariables = displayMode === "math" && !explicitVariables.length ? inferFormulaVariables(formula) : [];
         const variableEntries = explicitVariables.length ? explicitVariables : inferredVariables;
         const varsHtml = variableEntries.length
-          ? `<ul class="f-variables">${variableEntries.map(([key, value]) =>
-              `<li><span class="f-var-key">$${key}$</span><span class="f-var-sep">-</span><span class="f-var-def">${value}</span></li>`
-            ).join("")}</ul>`
+          ? `<dl class="f-vars-grid">${variableEntries.map(([key, value]) =>
+              `<div class="f-var-row"><dt class="f-var-key">$${key}$</dt><dd class="f-var-def">${value}</dd></div>`
+            ).join("")}</dl>`
           : "";
-        const varsHintMuted =
-          'font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:52rem';
         const varsHint = displayMode === "math" ? varsHtml : "";
         const supportNote = displayMode === "math" && inferredVariables.length
-          ? `<p class="f-var-hint" style="${varsHintMuted}">Automatisch ergänzte Symbolhilfe aus der Formelnotation; für modul-spezifische Feinheiten bleibt die Vorlesungsnotation maßgeblich.</p>`
+          ? `<p class="f-var-hint">Automatisch ergänzte Symbolhilfe — VL-Notation in Quellen prüfen.</p>`
           : "";
-        return `<div class="formula-card formula-card--${displayMode} ${layoutClass}">
-<button class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
-<div class="f-label">${renderMathTitle(formula.label)}</div>
-${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
-${formula.desc ? `<div class="f-desc">${renderTeachingProse(formula.desc)}</div>` : ""}
+        const meaning = formula.desc
+          ? `<p class="f-meaning">${renderTeachingProse(formula.desc)}</p>`
+          : "";
+        const pedagogy = renderFormulaPedagogyExtras(formula);
+        return `<article class="formula-card formula-ref-card formula-card--${displayMode} ${layoutClass}" id="formula-card-${formulaIndex}">
+<header class="f-ref-head">
+<h4 class="f-label">${renderMathTitle(formula.label)}</h4>
+<button type="button" class="f-copy-btn" aria-label="Formel kopieren" onclick="window.__copyFormula(${formulaIndex}, event)">Kopieren</button>
+</header>
+${hasMeaningfulDisplayContent(formula.eq) ? `<div class="f-eq-panel f-eq">${renderSemanticBlock(formula.eq, { variant: "formula-card" })}</div>` : ""}
+${meaning}
 ${varsHint}
+${pedagogy}
 ${supportNote}
-</div>`;
+</article>`;
       }).join("");
 
       html += `<section class="formula-tab-section formula-tab-section--cards" aria-labelledby="formula-tab-cards-heading">
@@ -1229,15 +1299,14 @@ ${renderFormulaTabSectionHead(
 
       if (herleitungBlocks.length) {
         const herleitungNum = nextSection();
-        html += `<section class="formula-tab-section formula-tab-section--herleitung formula-herleitung-layer" aria-labelledby="formula-tab-herleitung-heading">
-${renderFormulaTabSectionHead(
-  herleitungNum,
-  "Herleitungen",
-  "Schrittweise Ableitung der zentralen Formeln.",
-  "formula-tab-herleitung-heading"
-)}
+        html += `<details class="formula-tab-section formula-tab-section--herleitung formula-herleitung-layer formula-herleitung-layer--collapsible" open>
+<summary class="formula-tab-section-summary">
+<span class="formula-tab-section-num" aria-hidden="true">${herleitungNum}</span>
+<span class="formula-tab-section-title">Herleitungen</span>
+<span class="formula-tab-section-sub">Schrittweise Ableitung — Ausgangspunkt, Schritte, Ergebnis</span>
+</summary>
 <div class="formula-herleitung-stack">${herleitungBlocks.join("")}</div>
-</section>`;
+</details>`;
       }
 
       if (einsatzgrenzenBlocks.length) {
@@ -1292,23 +1361,38 @@ ${renderFormulaTabSectionHead(
     const hasIntuition = hasMeaningfulText(card.intuition);
     if (!hasSteps && !hasIntuition) return "";
 
-    const stepsHtml = hasSteps
-      ? `<ol class="formula-herleitung-steps">${steps.map((step, index) => {
+    const stepsInner = hasSteps
+      ? steps.map((step, index) => {
+        const role = getDerivationStepRole(index, steps.length, step);
+        const roleBadge = `<span class="formula-derivation-step__role">${escapeHtml(role)}</span>`;
         const kicker = hasMeaningfulText(step.label)
-          ? `<span class="formula-herleitung-step-kicker">${renderDecodedText(step.label)}</span>`
+          ? `<span class="formula-derivation-step__kicker">${renderDecodedText(step.label)}</span>`
+          : "";
+        const why = step.whyAllowed || step.why
+          ? `<p class="formula-derivation-step__why"><strong>Warum erlaubt?</strong> ${renderSemanticPlainText(String(step.whyAllowed || step.why))}</p>`
+          : "";
+        const meaning = step.meaning
+          ? `<p class="formula-derivation-step__meaning"><strong>Bedeutung:</strong> ${renderSemanticPlainText(String(step.meaning))}</p>`
+          : "";
+        const examRule = step.examRule || step.klausurregel
+          ? `<p class="formula-derivation-step__rule"><strong>Klausurregel:</strong> ${renderSemanticPlainText(String(step.examRule || step.klausurregel))}</p>`
           : "";
         const math = hasMeaningfulDisplayContent(step.math)
-          ? `<div class="formula-herleitung-math">${renderSemanticBlock(step.math, { variant: "formula-card" })}</div>`
+          ? `<div class="formula-derivation-step__math">${renderSemanticBlock(step.math, { variant: "formula-card" })}</div>`
           : "";
-        return `<li class="formula-herleitung-step">
-<span class="formula-herleitung-step-num" aria-hidden="true">${index + 1}</span>
-<div class="formula-herleitung-step-body">
+        return `<li class="formula-derivation-step">
+<span class="formula-derivation-step__num" aria-hidden="true">${index + 1}</span>
+<div class="formula-derivation-step__body">
+${roleBadge}
 ${kicker}
-<span class="formula-herleitung-step-text">${renderSemanticPlainText(step.text || "")}</span>
+<p class="formula-derivation-step__text">${renderSemanticPlainText(step.text || "")}</p>
+${why}
 ${math}
+${meaning}
+${examRule}
 </div>
 </li>`;
-      }).join("")}</ol>`
+      }).join("")
       : "";
 
     const anchor = hasMeaningfulDisplayContent(card.displayFormula)
@@ -1317,54 +1401,52 @@ ${math}
 
     const { titleHtml } = renderFormulaSupportBlockHead(card);
 
-    return `<article class="formula-support-card formula-herleitung-block">
-<div class="formula-herleitung-head">
-<h4 class="formula-herleitung-title">${titleHtml}</h4>
-</div>
-${anchor}
-${hasIntuition ? `<p class="formula-herleitung-intro">${renderTeachingProse(card.intuition)}</p>` : ""}
-${stepsHtml}
+    return `<article class="formula-derivation-chain formula-herleitung-block">
+<header class="formula-derivation-chain__head">
+<h4 class="formula-derivation-chain__title">${titleHtml}</h4>
+${hasIntuition ? `<p class="formula-derivation-chain__intro">${renderTeachingProse(card.intuition)}</p>` : ""}
+</header>
+${anchor ? `<div class="formula-derivation-chain__anchor">${anchor}</div>` : ""}
+${stepsInner ? `<ol class="formula-derivation-timeline">${stepsInner}</ol>` : ""}
 </article>`;
   }
 
   function renderFormulaEinsatzgrenzenBlock(card) {
-    const groups = [];
-    const pushGroup = (modifier, title, items) => {
+    const rows = [];
+    const pushRow = (modifier, title, items) => {
       if (!Array.isArray(items) || !items.length) return;
-      groups.push(`<div class="formula-einsatzgrenzen-group formula-einsatzgrenzen-group--${modifier}">
-<h5 class="formula-einsatzgrenzen-group-title">${title}</h5>
-<ul class="formula-einsatzgrenzen-list">${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul>
+      rows.push(`<div class="formula-limits-row formula-limits-row--${modifier}">
+<span class="formula-limits-row__label">${title}</span>
+<ul class="formula-limits-row__list">${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul>
 </div>`);
     };
-    pushGroup("assumptions", "Annahmen", card.assumptions);
-    pushGroup("applies", "Gilt, wenn", card.appliesWhen);
-    pushGroup("fails", "Scheitert, wenn", card.failsWhen);
-    pushGroup("mistakes", "Typische Fehler", card.commonMistakes);
+    pushRow("assumptions", "Annahmen", card.assumptions);
+    pushRow("applies", "Gilt, wenn", card.appliesWhen);
+    pushRow("fails", "Scheitert, wenn", card.failsWhen);
+    pushRow("mistakes", "Typische Fehler", card.commonMistakes);
 
     const anchorBadge = Array.isArray(card.anchorIds) && card.anchorIds.length
-      ? `<p class="formula-einsatzgrenzen-meta">Quellanker: ${card.anchorIds.length} geprüfte Stelle${card.anchorIds.length === 1 ? "" : "n"}</p>`
+      ? `<span class="formula-limits-footer__meta">Quellen geprüft · ${card.anchorIds.length} Stelle${card.anchorIds.length === 1 ? "" : "n"}</span>`
       : "";
     const shortcut = hasMeaningfulText(card.examShortcut)
-      ? `<p class="formula-einsatzgrenzen-shortcut"><strong>Klausurshortcut:</strong> ${renderSemanticPlainText(card.examShortcut)}</p>`
+      ? `<span class="formula-limits-footer__shortcut"><strong>Merke:</strong> ${renderSemanticPlainText(card.examShortcut)}</span>`
       : "";
+    const footer = [shortcut, anchorBadge].filter(Boolean).join("");
 
-    if (!groups.length && !shortcut && !anchorBadge) return "";
+    if (!rows.length && !footer) return "";
 
     const { titleHtml, subtitleHtml } = renderFormulaSupportBlockHead(card, {
       includeSubtitle: true,
-      subtitleClass: "formula-einsatzgrenzen-subtitle"
+      subtitleClass: "formula-limits-card__subtitle"
     });
 
-    return `<article class="formula-support-card formula-einsatzgrenzen-block">
-<div class="formula-einsatzgrenzen-head">
-<h4 class="formula-einsatzgrenzen-title">${titleHtml}</h4>
+    return `<article class="formula-limits-card formula-einsatzgrenzen-block">
+<header class="formula-limits-card__head">
+<h4 class="formula-limits-card__title">${titleHtml}</h4>
 ${subtitleHtml}
-</div>
-<div class="formula-einsatzgrenzen-body">
-${groups.join("")}
-${shortcut}
-${anchorBadge}
-</div>
+</header>
+<div class="formula-limits-rows">${rows.join("")}</div>
+${footer ? `<footer class="formula-limits-footer">${footer}</footer>` : ""}
 </article>`;
   }
 
@@ -1435,9 +1517,8 @@ ${anchorBadge}
       return;
     }
 
-    const objectivesBlock = Array.isArray(entry.objectives) && entry.objectives.length
-      ? `<div class="concept-objectives" role="region" aria-label="Lernziele"><h3>Lernziele</h3><ul>${entry.objectives.map((o) => `<li>${escapeHtml(String(o))}</li>`).join("")}</ul><p class="concept-objectives-hint">Nach diesem Block kannst du die Lernziele selbst abhaken.</p></div>`
-      : "";
+    const outcomesBlock = renderLessonOutcomes(entry, chapter?.title);
+    const microCheckBlock = buildTheoryMicroCheck(entry, chapter?.title);
     const headerHTML = buildConceptHeaderHtml(chapter, entry, conceptId, {
       hideSourceChrome: activeTab === "theorie"
     });
@@ -1456,8 +1537,19 @@ ${anchorBadge}
           }
         );
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
+        const fehlerChecklist = renderFehlerChecklist(
+          warningData.railWarnings.map((w) => ({ title: w.title, body: w.bodyHtml }))
+        );
+        const pedagogyTail = [
+          renderExamRecognitionBlock(chapter, entry, intuitionById[conceptId]),
+          renderMasteryCheckpoint(entry, conceptId, chapter.title),
+          renderConfidenceCheckpoint(conceptId),
+          renderReviewControls(conceptId),
+          renderSourceUsePedagogy()
+        ].join("");
         content.innerHTML =
-          headerHTML + `<div class="panel active theory-tab-panel">${objectivesBlock}${warningData.theoryHtml || entry.theorie}${mistakesMirror}</div>`;
+          headerHTML
+          + `<div class="panel active theory-tab-panel">${outcomesBlock}${microCheckBlock}${warningData.theoryHtml || entry.theorie}${fehlerChecklist}${mistakesMirror}${pedagogyTail}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         ensureGraphPedagogyChrome(conceptId, content, moduleSlug);
@@ -1590,7 +1682,7 @@ ${anchorBadge}
       ? `<div class="home-action-card home-action-card--primary" onclick="window.__navigate('${lastChapter.id}', { tab: 'aufgaben' })" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE(`window.__navigate('${lastChapter.id}', { tab: 'aufgaben' })`)}>
 <div class="hac-title">Aufgaben-Schnellstart</div>
 <div class="hac-desc">${renderMathTitle(lastChapter.title)} — direkt üben</div>
-<span class="badge badge--status home-action-sim-badge">Plattform-Übung</span>
+<span class="badge badge--status home-action-sim-badge">Klausurähnliche Übung</span>
 </div>`
       : "";
 
@@ -1603,7 +1695,7 @@ ${anchorBadge}
         ? `<div class="home-action-card home-action-card--primary" onclick="window.__navigate('${startChapter.id}', { tab: '${recommendedStartTab}' })" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE(`window.__navigate('${startChapter.id}', { tab: '${recommendedStartTab}' })`)}>
 <div class="hac-title">Hier starten</div>
 <div class="hac-desc">${renderMathTitle(startChapter.title)} — ${recommendedStartTab === "aufgaben" ? "Aufgaben" : "Theorie"}</div>
-<span class="badge badge--status home-action-sim-badge">Plattform-Übung</span>
+<span class="badge badge--status home-action-sim-badge">Klausurähnliche Übung</span>
 </div>`
         : "";
 
@@ -1622,13 +1714,13 @@ ${pilotDashNote ? `<p class="hac-pilot-note">${pilotDashNote}</p>` : ""}
 <div class="home-action-card" onclick="window.__startExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startExam()")}>
 <div class="hac-title">Schnelltest</div>
 <div class="hac-desc">20 Minuten, gemischte Konzepte</div>
-<span class="badge badge--status home-action-sim-badge">Plattform-Simulation</span>
+<span class="badge badge--status home-action-sim-badge">Klausurähnliche Übung</span>
 </div>
 ${showInterleavedExamCard && typeof window !== "undefined" && typeof window.__startInterleavedExam === "function" ? `
 <div class="home-action-card" onclick="window.__startInterleavedExam()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__startInterleavedExam()")}>
 <div class="hac-title">Gemischter Schnelltest</div>
 <div class="hac-desc">Wie Schnelltest — Themenwechsel im Modul (Pilot)</div>
-<span class="badge badge--status home-action-sim-badge">Plattform-Simulation</span>
+<span class="badge badge--status home-action-sim-badge">Klausurähnliche Übung</span>
 </div>` : ""}
 ${konzeptCheckCardHtml}${extraHomeActionCardsHtml}
 <div class="home-action-card" onclick="window.__showSRSReview()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showSRSReview()")}>
@@ -1639,7 +1731,7 @@ ${typeof window !== "undefined" && typeof window.__showFullExamSelect === "funct
 <div class="home-action-card" onclick="window.__showFullExamSelect()" tabindex="0" role="button" ${HOME_ACTION_ACTIVATE("window.__showFullExamSelect()")}>
 <div class="hac-title">Probeklausuren</div>
 <div class="hac-desc">${renderDecodedText(fullExamHomeDescription)}</div>
-<span class="badge badge--status home-action-sim-badge">Plattform-Simulation</span>
+<span class="badge badge--status home-action-sim-badge">Klausurähnliche Übung</span>
 </div>
 ` : ""}
 </div>`;

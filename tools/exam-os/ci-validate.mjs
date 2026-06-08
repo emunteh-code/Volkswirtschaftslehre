@@ -107,7 +107,9 @@ async function main() {
     'audit-current-state.mjs',
     'check-readiness.mjs',
     'generate-vl-layers.mjs',
-    'check-portal-shell.mjs'
+    'check-portal-shell.mjs',
+    'check-math-literals.mjs',
+    'check-right-rail.mjs'
   ];
   for (const t of tools) syntaxCheck(path.join(repoRoot, 'tools/exam-os', t));
 
@@ -117,15 +119,27 @@ async function main() {
   });
   if (shellCheck.status !== 0) ok = false;
 
+  const mathCheck = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os/check-math-literals.mjs')], {
+    encoding: 'utf8',
+    stdio: 'inherit'
+  });
+  if (mathCheck.status !== 0) ok = false;
+
+  const railCheck = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os/check-right-rail.mjs')], {
+    encoding: 'utf8',
+    stdio: 'inherit'
+  });
+  if (railCheck.status !== 0) ok = false;
+
   for (const slug of MODULES) {
     await validateModule(slug);
   }
 
-  if (process.exitCode) {
+  if (!ok || process.exitCode) {
     console.error('CI validate failed.');
-  } else if (ok) {
-    console.log('CI validate OK (exam-OS layers + generated audits).');
+    process.exit(1);
   }
+  console.log('CI validate OK (exam-OS layers + generated audits).');
 }
 
 main().catch((e) => {

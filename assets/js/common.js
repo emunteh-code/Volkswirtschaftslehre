@@ -296,69 +296,81 @@ function showOnboarding(force = false) {
   });
 }
 
+function renderFeaturedModuleCard(module, snapshot) {
+  const nextAction = getLandingNextAction(snapshot);
+  const progressBar =
+    snapshot.started && snapshot.percent >= 10
+      ? `<span class="progress-pill lp-featured-progress"><span class="progress-pill__fill" style="width:${snapshot.percent}%"></span></span>`
+      : "";
+  return `<div class="lp-hero-featured-inner">
+<p class="lp-hero-featured-kicker">Empfohlener nächster Schritt</p>
+<h2 class="lp-hero-featured-title">${module.title}</h2>
+<p class="lp-hero-featured-summary">${module.summary}</p>
+<div class="lp-hero-featured-meta">
+<span class="lp-hero-meta-item">Dauer: <strong>${module.time}</strong></span>
+${module.prereq !== "Keine" ? `<span class="lp-hero-meta-item">Voraussetzung: <strong>${module.prereq}</strong></span>` : ""}
+${progressBar}
+<span class="badge badge--action lp-hero-featured-action">${nextAction}</span>
+</div>
+<a class="lp-hero-featured-link" href="${module.href}">${snapshot.started ? "Fortsetzen" : "Modul starten"} →</a>
+</div>`;
+}
+
 async function updateHeroShelf(module) {
   const renderToken = ++heroRenderToken;
   const kicker = document.getElementById("heroKicker");
   const title = document.getElementById("heroTitle");
   const desc = document.getElementById("heroDesc");
   const meta = document.getElementById("heroMeta");
+  const featured = document.getElementById("heroFeatured");
   const btn = document.getElementById("heroBtn");
   const content = document.getElementById("heroContent");
   if (!title) return;
 
-  if (!module) {
-    // Default state
+  const applyPortalHero = () => {
     if (kicker) kicker.textContent = "Willkommen";
     title.textContent = "VWL Lernportal";
-    if (desc) desc.textContent = "Wähle ein Modul, um mit der Klausurvorbereitung zu beginnen.";
+    if (desc) {
+      desc.textContent =
+        "Strukturierte Klausurvorbereitung für B.Sc. VWL — Theorie, Formeln, Aufgaben und Quellen an einem Ort.";
+    }
     if (meta) meta.innerHTML = "";
     if (btn) {
       btn.textContent = "Module ansehen";
       btn.href = "#exam-ready-core";
     }
+  };
+
+  const applyFeatured = (featuredModule) => {
+    if (!featured || !featuredModule) {
+      if (featured) {
+        featured.hidden = true;
+        featured.innerHTML = "";
+      }
+      return;
+    }
+    const snapshot = getModuleSnapshot(featuredModule);
+    featured.innerHTML = renderFeaturedModuleCard(featuredModule, snapshot);
+    featured.hidden = false;
+  };
+
+  applyPortalHero();
+
+  if (!module) {
+    applyFeatured(null);
     return;
   }
 
-  const snapshot = getModuleSnapshot(module);
   if (renderToken !== heroRenderToken) return;
 
-  // Animate transition
   if (content) {
     content.classList.add("transitioning");
     setTimeout(() => {
-      applyHero();
+      applyFeatured(module);
       content.classList.remove("transitioning");
     }, 150);
   } else {
-    applyHero();
-  }
-
-  function applyHero() {
-    if (kicker) kicker.textContent = module.difficulty;
-    title.textContent = module.title;
-    if (desc) desc.textContent = module.summary;
-    if (meta) {
-      const items = [`<span class="lp-hero-meta-item">Dauer: <strong>${module.time}</strong></span>`];
-      if (module.prereq !== "Keine") {
-        items.push(`<span class="lp-hero-meta-item">Voraussetzung: <strong>${module.prereq}</strong></span>`);
-      }
-      if (snapshot.started) {
-        items.push(`
-          <span class="lp-hero-progress">
-            <span class="progress-pill lp-hero-progress-bar"><span class="progress-pill__fill lp-hero-progress-fill" style="width:${snapshot.percent}%"></span></span>
-            ${snapshot.percent}%
-          </span>
-        `);
-      }
-      if (module.sourceCorpusInRepo === false) {
-        items.push(`<span class="lp-hero-meta-item lp-hero-meta-item-status">Quellenstatus: <strong>Sonderstatus</strong></span>`);
-      }
-      meta.innerHTML = items.join("");
-    }
-    if (btn) {
-      btn.textContent = snapshot.started ? "Fortsetzen →" : "Modul starten →";
-      btn.href = module.href;
-    }
+    applyFeatured(module);
   }
 }
 
@@ -396,21 +408,24 @@ function mountLandingIliasCta() {
   host.hidden = false;
 }
 
+function getLandingNextAction(snapshot) {
+  if (snapshot.due > 0) return "Wiederholen →";
+  if (!snapshot.started) return "Starten →";
+  if (snapshot.percent >= 70) return "Test starten →";
+  return "Weiterlernen →";
+}
+
 function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) {
   const statusClass = snapshot.started ? " started" : "";
-  const statusLabel = snapshot.started
-    ? snapshot.percent >= 10
-      ? `${snapshot.percent}%`
-      : "Begonnen"
-    : "";
+  const nextAction = getLandingNextAction(snapshot);
+  const statusLabel = snapshot.started && snapshot.percent >= 10 ? `${snapshot.percent}%` : "";
   const progressBar =
     snapshot.started && snapshot.percent >= 10
       ? `<span class="progress-pill lp-tile-progress"><span class="progress-pill__fill lp-tile-progress-fill" style="width:${snapshot.percent}%"></span></span>`
       : "";
-  const specialStatus = module.sourceCorpusInRepo === false
-    ? `<p class="lp-tile-note">Sonderstatus: offizieller Mikro-II-Quellenkorpus noch nicht im Repo.</p>`
-    : module.sourceStatusNote
-      ? `<p class="lp-tile-note">${module.sourceStatusNote} <a class="lp-tile-note-link" href="${module.href}">Modul öffnen →</a></p>`
+  const specialStatus =
+    module.sourceCorpusInRepo === false
+      ? `<p class="lp-tile-note">Ergänzungen im Portal gekennzeichnet — VL-PDFs in ILIAS.</p>`
       : "";
   const coreClass = examReadyCore ? " lp-tile--exam-ready" : "";
 
@@ -425,6 +440,7 @@ function buildLandingTileHtml(module, snapshot, { examReadyCore = false } = {}) 
       <div class="lp-tile-footer">
         ${statusLabel ? `<span class="badge badge--status lp-tile-status${statusClass}">${statusLabel}</span>` : ""}
         ${progressBar}
+        <span class="badge badge--action lp-tile-action">${nextAction}</span>
       </div>
     </a>
   `;

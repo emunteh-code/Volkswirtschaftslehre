@@ -40,6 +40,8 @@ export function createPortalApp({
 }) {
   const {
     loadProgress,
+    loadSRS,
+    saveSRS,
     loadStreak,
     recordView,
     loadLastId,
@@ -70,7 +72,7 @@ export function createPortalApp({
   const { startExam, submitExamAnswer, skipExamQ } = quickExam;
   const { startFullExam, feSelectWF, feCheckText, feRevealAnswer, feText, submitFE, showFullExamSelect } = fullExam;
   const { toggleMastery } = mastery;
-  const { getDueCards } = srs;
+  const { getDueCards, updateSRS } = srs;
   const { drawHicksGraph, drawDemandGraph, drawIsoquantGraph } = examGraphs;
   const { toggleTheme, initTheme } = theme;
   const { initKeyboard } = keyboard;
@@ -132,9 +134,136 @@ export function createPortalApp({
     });
   }
 
+  function ensureTabWorkflowHint() {
+    const tabRow = document.getElementById("tabRow");
+    if (!tabRow || document.getElementById("tabWorkflowHint")) return;
+    const hint = document.createElement("p");
+    hint.id = "tabWorkflowHint";
+    hint.className = "tab-workflow-hint";
+    hint.setAttribute("role", "note");
+    hint.hidden = true;
+    hint.innerHTML =
+      '<span class="tab-workflow-hint__label">Empfohlener Ablauf:</span> Theorie lesen → Formeln sichern → Aufgaben lösen → Quellen prüfen';
+    tabRow.insertAdjacentElement("afterend", hint);
+  }
+
+  function setTabWorkflowVisible(visible) {
+    const hint = document.getElementById("tabWorkflowHint");
+    if (hint) hint.hidden = !visible;
+  }
+
+  function toggleReveal(id, button) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const show = el.hidden;
+    el.hidden = !show;
+    if (button?.dataset) {
+      const openLabel = button.dataset.openLabel || "Verbergen";
+      const closedLabel = button.dataset.closedLabel || "Anzeigen";
+      button.textContent = show ? openLabel : closedLabel;
+      button.setAttribute("aria-expanded", show ? "true" : "false");
+    }
+    if (show) renderMath(el);
+  }
+
+  function toggleMicroCheck(id, button) {
+    toggleReveal(id, button);
+  }
+
+  function initPedagogyControls(root = document) {
+    root.querySelectorAll(".confidence-checkpoint__scale").forEach((scale) => {
+      const conceptId = scale.dataset.conceptId || "";
+      scale.querySelectorAll(".confidence-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          scale.querySelectorAll(".confidence-btn").forEach((b) => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          const level = Number(btn.dataset.level || 0);
+          try {
+            localStorage.setItem(`lp_confidence_${conceptId}`, String(level));
+          } catch (_) { /* ignore */ }
+          if (conceptId && loadSRS && saveSRS) {
+            if (level <= 1) {
+              const srsData = loadSRS();
+              if (!srsData[conceptId]) {
+                srsData[conceptId] = { interval: 1, ease: 2.5, due: Date.now(), reviews: 0 };
+              }
+              srsData[conceptId].due = Date.now();
+              srsData[conceptId].interval = 1;
+              saveSRS(srsData);
+              updateNavBadges?.();
+            } else if (level >= 3 && typeof updateSRS === "function") {
+              updateSRS(conceptId, true);
+              updateNavBadges?.();
+            }
+          }
+        });
+      });
+    });
+    root.querySelectorAll(".review-controls").forEach((group) => {
+      const conceptId = group.dataset.conceptId || "";
+      group.querySelectorAll(".review-control-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          group.querySelectorAll(".review-control-btn").forEach((b) => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          const review = btn.dataset.review || "";
+          try {
+            localStorage.setItem(`lp_review_${conceptId}`, review);
+          } catch (_) { /* ignore */ }
+          if (conceptId && loadSRS && saveSRS) {
+            const srsData = loadSRS();
+            if (!srsData[conceptId]) {
+              srsData[conceptId] = { interval: 1, ease: 2.5, due: Date.now(), reviews: 0 };
+            }
+            const card = srsData[conceptId];
+            if (review === "mastered" && typeof updateSRS === "function") {
+              updateSRS(conceptId, true);
+            } else if (review === "repeat" || review === "unsure") {
+              card.interval = 1;
+              card.due = Date.now();
+              card.reviews = (card.reviews || 0) + 1;
+              saveSRS(srsData);
+            }
+            updateNavBadges?.();
+            updateProgressUI?.(loadProgress());
+          }
+          showToast?.(`Markiert: ${btn.textContent}`);
+        });
+      });
+    });
+  }
+
+  function scrollToFormulaCard(index) {
+    const conceptId = appState.current;
+    if (!conceptId) return;
+    const tabRow = document.getElementById("tabRow");
+    const formelnBtn = tabRow?.querySelector('[data-tab="formeln"]');
+    if (formelnBtn && !formelnBtn.hidden) {
+      navigate(conceptId, { tab: "formeln", updateHash: true });
+    }
+    requestAnimationFrame(() => {
+      const card = document.getElementById(`formula-card-${index}`);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "start" });
+        card.classList.add("formula-card--highlight");
+        setTimeout(() => card.classList.remove("formula-card--highlight"), 1800);
+      }
+    });
+  }
+
+  function scrollToSimilarTask(nextIndex) {
+    const el = document.getElementById(`prob_card_${nextIndex}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      showToast?.("Nächste Aufgabe — zuerst selbst versuchen.");
+      return;
+    }
+    showToast?.("Keine weitere Aufgabe in dieser Liste — Konzept-Check oder Wiederholung nutzen.");
+  }
+
   function navigate(id, { tab = "theorie", updateHash = true, scrollKernidee = false } = {}) {
     const tabRow = document.getElementById("tabRow");
     if (id && tabRow) tabRow.classList.add("visible");
+    setTabWorkflowVisible(Boolean(id));
     const scrollToKernidee = scrollKernidee || tab === "intuition";
     const requestedTab = tab === "intuition" ? "theorie" : tab;
     const resolvedTab = id ? resolveAvailableTab(tabRow, requestedTab) : "theorie";
@@ -166,8 +295,10 @@ export function createPortalApp({
       renderHome();
       clearRightPanel();
       syncRightPanelVisibility();
+      setTabWorkflowVisible(false);
       if (updateHash && !applyingHashRoute) replaceConceptHash("", "theorie");
     }
+    initPedagogyControls(document.getElementById("content") || document);
   }
 
   function switchTab(tab, { updateHash = true } = {}) {
@@ -418,6 +549,10 @@ export function createPortalApp({
   window.__feText = feText;
   window.__submitFE = submitFE;
   window.__toggleSolution = toggleSolution;
+  window.__toggleReveal = toggleReveal;
+  window.__toggleMicroCheck = toggleMicroCheck;
+  window.__scrollToSimilarTask = scrollToSimilarTask;
+  window.__scrollToFormulaCard = scrollToFormulaCard;
   window.__toggleExamDrill = toggleExamDrill;
   window.__copyFormula = copyFormula;
   window.__toggleMastery = (conceptId, itemIdx, checkbox) => {
@@ -472,6 +607,8 @@ export function createPortalApp({
     }
     initTheme();
     buildNav(navigate);
+
+    ensureTabWorkflowHint();
 
     const tabRow = document.getElementById("tabRow");
     if (tabRow) {

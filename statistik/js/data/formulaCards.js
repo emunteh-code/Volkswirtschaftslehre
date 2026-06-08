@@ -906,13 +906,13 @@ export const FORMULA_CARDS = Object.freeze([
     id: 'statistik.nichtparametrisch.flie_endes_histogramm',
     conceptId: 'nichtparametrisch',
     officialNotation: "nichtparametrisch",
-    displayFormula: "$$\\hat f(x)=\\frac{1}{2b}\\cdot\\frac{\\#\\{x_i\\in(x-b,x+b]\\}}{n}$$",
+    displayFormula: "$$\\hat f(x)=\\frac{1}{2b}\\cdot\\frac{\\left|\\{x_i\\in(x-b,x+b]\\}\\right|}{n}$$",
     intuition: "Lokales Fenster der Breite $2b$ um den Auswertungspunkt $x$.",
     derivationSteps: [
         {
             "label": "Fließendes Histogramm",
             "text": "6.3 Histogramme als Schätzer für Dichten",
-            "math": "$$\\hat f(x)=\\frac{1}{2b}\\cdot\\frac{\\#\\{x_i\\in(x-b,x+b]\\}}{n}$$"
+            "math": "$$\\hat f(x)=\\frac{1}{2b}\\cdot\\frac{\\left|\\{x_i\\in(x-b,x+b]\\}\\right|}{n}$$"
         },
         {
             "label": "Anwendung",

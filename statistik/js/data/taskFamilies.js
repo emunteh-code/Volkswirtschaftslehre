@@ -542,6 +542,45 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core',
+    conceptId: 'wahrscheinlichkeit',
+    title: 'Klausur Statistik 04.03.2022 Aufgaben 3-4: Bedingte Wahrscheinlichkeit und Laplace-Mengen',
+    topic: 'Bedingte Wahrscheinlichkeit, totale Wahrscheinlichkeit, Bayes-Umkehrung, Gegenwahrscheinlichkeit, Laplace-Experiment, Mengenkomplement, Schnitt, Vereinigung',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgaben 3-4: aus Bestehenswahrscheinlichkeit und Lernstrategie-Anteilen unbedingte, bedingte und umgekehrte bedingte Wahrscheinlichkeiten bestimmen, eine mindestens-eine-Person-Wahrscheinlichkeit über die Gegenwahrscheinlichkeit vereinfachen, Mächtigkeiten von Mengenoperationen im Laplace-Ergebnisraum berechnen und die passende bedingte Wahrscheinlichkeit samt Notation eintragen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a3.p7-p9.conditional-bayes-binomial',
+      'statistik.klausur-2022-teil-a.a4.p10.sets-laplace-conditional'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 21,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Strategie-Wahrscheinlichkeiten bedingt auf Bestehen und Nicht-Bestehen nicht auf eins ergänzen',
+      'P(Strategie 2 | Bestehen) mit P(Bestehen | Strategie 2) verwechseln',
+      'Mindestens eine Person direkt addieren statt über die Gegenwahrscheinlichkeit zu vereinfachen',
+      'Komplemente von A und B im falschen Ergebnisraum bilden',
+      'Die gesuchte bedingte Wahrscheinlichkeit ohne korrekte Notation in die Lücken eintragen'
+    ],
+    gradingRubric: [
+      'Aufgabe 3 enthält 15 sichtbare Punkte',
+      'Aufgabe 3a: P(Nicht-Bestehen), P(Strategie 3 | Bestehen), P(Strategie 3 | Nicht Bestehen) und unbedingte Wahrscheinlichkeit für Strategie 3, 7 Punkte',
+      'Aufgabe 3b: P(Bestehen | Strategie 2) mit Lösungsweg, 4 Punkte',
+      'Aufgabe 3c: Wahrscheinlichkeit für mindestens eine nicht bestandene Person unter den ersten zehn Befragten, unabhängig und zufällig, 4 Punkte',
+      'Aufgabe 4 enthält 6 sichtbare Punkte',
+      'Aufgabe 4a: Mächtigkeiten |A ∩ B̄| und |Ā ∪ B| bestimmen',
+      'Aufgabe 4b: bedingte Wahrscheinlichkeit für A bei nicht eingetretenem B samt Notation eintragen',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Klausurseiten 7-10',
+      tasks: 'Aufgaben 3-4',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

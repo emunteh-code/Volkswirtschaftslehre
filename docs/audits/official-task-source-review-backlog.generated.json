@@ -5,7 +5,7 @@
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 18,
+    "officialTaskSourceFamilies": 19,
     "weakPages": 25,
     "taskSignalPages": 989,
     "moduleMismatchDocuments": 1
@@ -174,7 +174,7 @@
     {
       "module": "statistik",
       "officialTaskDocuments": 104,
-      "officialTaskSourceFamilies": 1,
+      "officialTaskSourceFamilies": 2,
       "documentRegistryFamilies": 104,
       "pageCount": 684,
       "weakPageCount": 23,

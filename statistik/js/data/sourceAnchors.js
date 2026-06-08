@@ -160,6 +160,32 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'Bedingte Wahrscheinlichkeit',
       fingerprint: 'f3a0c58e71b294d6',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a3.p7-p9.conditional-bayes-binomial',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 9,
+      section: 'Aufgabe 3: Bedingte Wahrscheinlichkeit, totale Wahrscheinlichkeit, Bayes und mindestens ein Ereignis',
+      task: 'Aufgabe 3',
+      fingerprint: '7083232b6a4948d2fdb8d3f6b8a9c249fd855e0d66efc17fa85b237d1f6e7084',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-2',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a4.p10.sets-laplace-conditional',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 12,
+      section: 'Aufgabe 4: Mengenoperationen im Laplace-Experiment und bedingte Wahrscheinlichkeit',
+      task: 'Aufgabe 4',
+      fingerprint: 'c88c496d028200fe296956510263ce2635dde23b9887d2105fb63f5d702506fa',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   verteilungen: [

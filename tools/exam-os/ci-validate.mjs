@@ -103,8 +103,19 @@ async function main() {
     }
   }
 
-  const tools = ['audit-current-state.mjs', 'check-readiness.mjs', 'generate-vl-layers.mjs'];
+  const tools = [
+    'audit-current-state.mjs',
+    'check-readiness.mjs',
+    'generate-vl-layers.mjs',
+    'check-portal-shell.mjs'
+  ];
   for (const t of tools) syntaxCheck(path.join(repoRoot, 'tools/exam-os', t));
+
+  const shellCheck = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os/check-portal-shell.mjs')], {
+    encoding: 'utf8',
+    stdio: 'inherit'
+  });
+  if (shellCheck.status !== 0) ok = false;
 
   for (const slug of MODULES) {
     await validateModule(slug);

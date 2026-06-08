@@ -19,8 +19,8 @@
   --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Courier New',
                'Inconsolata', monospace;
 
-  /* Module layout exceptions (wider theory column than fleet default) */
-  --content-body-max: min(100%, clamp(980px, 82vw, 1240px));
+  /* Module layout: fleet reading width; wider shell only for graphs/interactive */
+  --content-body-max: min(100%, clamp(900px, 82vw, 980px));
   --graph-shell-max: min(100%, clamp(1080px, 88vw, 1400px));
   --reading-measure: 78ch;
 
@@ -600,8 +600,15 @@ body {
   width: min(100%, var(--content-body-max));
   margin-inline: auto;
 }
+/* Theory/reading: readable line length (graphs use wider shell below) */
+#content > .concept-header,
+#content > .panel.active.theory-tab-panel {
+  width: min(100%, var(--reading-measure));
+  max-width: var(--reading-measure);
+}
 #content[data-tab="graph"] > * {
   width: min(100%, var(--graph-shell-max));
+  max-width: none;
 }
 .panel.active > .formula-tab-panel,
 .panel.active > .section-block,
@@ -766,21 +773,12 @@ body {
   color: inherit;
 }
 
-/* ── Warn boxes ────────────────────────────────────────────── */
+/* Trap/warn: fleet .learning-trap in premium-refinement.css — spacing only here */
 .warn-box {
-  background: rgba(255,69,58,0.08);
-  border: 1px solid rgba(255,69,58,0.22);
-  border-left: 3px solid var(--sys-red);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  padding: 14px 18px;
   margin: 14px 0;
   font-size: 14px;
-  color: var(--text);
   line-height: 1.6;
-  transition: background 0.15s;
 }
-.warn-box:hover { background: rgba(255,69,58,0.11); }
-.warn-box strong { color: var(--sys-red); display: block; margin-bottom: 4px; font-weight: 600; }
 
 /* ── Info grid ─────────────────────────────────────────────── */
 .info-grid {
@@ -2024,8 +2022,7 @@ canvas {
   font-family: var(--font-heading);
   font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3;
 }
-.home-card .hc-num { font-size: 10px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; }
-.home-card .hc-cat { font-size: 10px; color: var(--accent2); opacity: 0.8; }
+/* Legacy hc-num/hc-cat removed — module-lesson-card__meta in premium-refinement.css */
 
 /* SRS due indicator in home grid */
 .home-card .hc-num.srs-due-dot {

@@ -99,16 +99,17 @@ async function main() {
   const hintText = await page.locator(".graph-reading-hint").innerText();
   record(hintText.includes("Interpretation"), "mikro2:graph-hint-has-interpretation-label", hintText.slice(0, 80));
 
-  // --- Intuition: Transferpfad (portal) on jahresabschluss (Klausurmuster always present) ---
+  // --- Theorie: Klausurtransfer / bridge content (Intuition fused into Theorie) ---
   await page.goto(`${BASE}/jahresabschluss/index.html`, { waitUntil: "load", timeout: 60000 });
   await page.waitForSelector(".nav-item", { timeout: 30000 });
   await page.locator(".nav-item").first().click();
   await page.waitForTimeout(400);
-  await page.locator('#tabRow button[data-tab="intuition"]').click();
+  await page.locator('#tabRow button[data-tab="theorie"]').click();
   await page.waitForTimeout(500);
-  const transferKicker = page.locator(".intuition-bridge-kicker");
-  record((await transferKicker.count()) > 0, "jahresabschluss:intuition-transferpfad-kicker");
-  record(((await transferKicker.first().textContent()) || "").includes("Transferpfad"), "jahresabschluss:transferpfad-text");
+  const transferKicker = page.locator(".intuition-bridge-kicker, .theory-recipe-section--anwendung");
+  record((await transferKicker.count()) > 0, "jahresabschluss:theorie-transfer-section");
+  const transferText = (await page.locator("#content").innerText()) || "";
+  record(/Klausur|Transfer|Anwendung/i.test(transferText), "jahresabschluss:theorie-has-exam-transfer");
 
   // --- R-Übung: tab label + block kicker (ökonometrie) ---
   await page.goto(`${BASE}/oekonometrie/index.html`, { waitUntil: "load", timeout: 60000 });

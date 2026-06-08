@@ -59,7 +59,6 @@ export const THEORY_DEPTH_EXPANSIONS = {
     `) +
       block('Post-hoc Vorsicht', `
       <p>Signifikantes ANOVA-Ergebnis erlaubt paarweise Vergleiche nur mit Korrektur (Bonferroni/Tukey). Ohne Korrektur steigt die Fehlerwahrscheinlichkeit.</p>
-      ${warn('Modellannahmen', 'Normalität und Varianzhomogenität prüfen oder robuste Alternative nennen.')}
     `)
   },
   zwei_stichproben: {

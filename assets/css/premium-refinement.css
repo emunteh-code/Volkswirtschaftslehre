@@ -6543,7 +6543,7 @@ body.light-mode #content .source-provenance-mark {
 
 :root {
   --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
-  --content-body-max: min(100%, clamp(980px, 82vw, 1240px));
+  /* --content-body-max / --reading-measure: module-tokens.css */
   --content-rail-max: min(100%, 1080px);
   --right-panel-width: clamp(232px, 18vw, 312px);
   --tab-row-pad-x: clamp(12px, 3vw, 20px);

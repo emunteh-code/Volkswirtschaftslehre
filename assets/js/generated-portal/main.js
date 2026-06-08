@@ -2950,6 +2950,7 @@ function buildShell(module, chapterCount) {
           <button id="mobileMenuBtn" onclick="window.__toggleSidebar()" title="Navigation" aria-label="Seitenleiste öffnen" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
         </div>
       </div>
+      <!-- Tab row: canonical markup — tools/exam-os/snippets/portal-tab-row.html (no Intuition tab) -->
       <div class="tab-row" id="tabRow" role="tablist" aria-label="Inhalt">
         <button class="tab-btn active" data-tab="theorie" role="tab" aria-selected="true" tabindex="0">Theorie</button>
         <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false" tabindex="0" style="display:none">Grafik</button>

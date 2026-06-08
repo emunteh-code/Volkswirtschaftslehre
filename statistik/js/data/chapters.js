@@ -1625,7 +1625,6 @@ export const CONTENT = {
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Post-hoc Vorsicht</h4>
 <p>Signifikantes ANOVA-Ergebnis erlaubt paarweise Vergleiche nur mit Korrektur (Bonferroni/Tukey). Ohne Korrektur steigt die Fehlerwahrscheinlichkeit.</p>
-      <div class="warn-box" data-warning-placement="rail"><strong>Modellannahmen:</strong> Normalität und Varianzhomogenität prüfen oder robuste Alternative nennen.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--anwendung" data-theory-step="6" aria-labelledby="theory-anwendung-h">

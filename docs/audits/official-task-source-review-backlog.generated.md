@@ -9,7 +9,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Official task documents in registry: **276**
 - Modules with task corpus: **8**
 - Modules missing task corpus: **3**
-- Reviewed official-task-source families: **17**
+- Reviewed official-task-source families: **18**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
 - Module-mismatch documents needing review: **1**
@@ -28,7 +28,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `oekonometrie` | 33 | 33 | 1 | 53 | 0 (0%) | 41 | 29 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `recht` | 17 | 17 | 0 | 313 | 2 (1%) | 32 | 9 | 2 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `statistik` | 104 | 104 | 0 | 684 | 23 (3%) | 552 | 80 | 7 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `statistik` | 104 | 104 | 1 | 684 | 23 (3%) | 552 | 80 | 7 | 0 | Start human task-family mapping on ready documents with task signals. |
 
 ## Highest-Priority Documents
 

@@ -15,7 +15,10 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.9
+  confidence = 0.9,
+  reviewedBy = REVIEWED_BY,
+  reviewedAt = REVIEWED_AT,
+  task = null
 }) {
   return {
     id,
@@ -26,13 +29,13 @@ function anchor({
       page,
       slide: page,
       section,
-      task: null,
+      task,
       line: null
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -67,6 +70,32 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'DS1.3 Maßzahlen nutzen',
       fingerprint: '7d2b5f1a9c8e4036',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a1.p1-p2.descriptive-measures',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 3,
+      section: 'Aufgabe 1: Skalenniveau, Lage- und Streuungsparameter',
+      task: 'Aufgabe 1',
+      fingerprint: 'e623d553087beae78b88673b02e4a3bb402a99ec76b57cf1388bba7cdd4b68c3',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-1',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a2.p3-p6.descriptive-data-analysis',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 5,
+      section: 'Aufgabe 2: Mittelwert, Streuung, Skalenniveau, empirische Verteilungsfunktion und klassierte Daten',
+      task: 'Aufgabe 2',
+      fingerprint: '1b6c40094afc945b538c6c32c443f1859a9174b0091692f7192a8ffa49fee8ee',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   bivariat: [

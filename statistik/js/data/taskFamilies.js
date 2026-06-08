@@ -3,7 +3,10 @@
 // VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
-import { buildStatistikOfficialTaskPlaceholders } from './officialTaskIngestion.js';
+import {
+  assertStatistikOfficialTaskSourcePolicy,
+  buildStatistikOfficialTaskPlaceholders
+} from './officialTaskIngestion.js';
 
 const MODULE = 'statistik';
 const OFFICIAL_TASK_GAP = "Offizielle Aufgaben-Mappings nur nach Review; VL-Familien folgen Seitenankern.";
@@ -24,6 +27,11 @@ function family({
   currentCoverage,
   officialTaskCoverage = 'missing-official-task-source'
 }) {
+  const officialTaskGap =
+    officialTaskCoverage === 'official-task-source'
+      ? null
+      : OFFICIAL_TASK_GAP;
+
   return {
     id,
     module: MODULE,
@@ -40,7 +48,7 @@ function family({
     gradingRubric,
     currentCoverage,
     officialTaskCoverage,
-    officialTaskGap: OFFICIAL_TASK_GAP
+    officialTaskGap
   };
 }
 
@@ -491,6 +499,53 @@ const VL_GROUNDED_FAMILIES = [
     currentCoverage: { portalTasks: 'concept tasks', stepProblems: 'partial', mockExam: 'not yet represented' }
   })
 ];
+
+const OFFICIAL_TASK_SOURCE_FAMILIES = [
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a1-a2-descriptive-core',
+    conceptId: 'deskriptiv',
+    title: 'Klausur Statistik 04.03.2022 Aufgaben 1-2: Deskriptive Statistik und Skalenniveaus',
+    topic: 'Skalenniveau, Modus, Median, arithmetisches Mittel, empirische Varianz/Standardabweichung, empirische Verteilungsfunktion, klassierte Daten',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgaben 1-2: Skalenniveau eines binären Merkmals angeben, Lage- und Streuungsparameter für eine sortierte 0/1-Reihe berechnen oder begründet ausschließen, Mittelwert und empirische Standardabweichung aus Summenhinweisen bestimmen, Lagemaß für ein nominales Merkmal wählen, Merkmalstyp und Skalenniveau bestimmen, empirische Verteilungsfunktion zeichnen und klassierte Daten mitteln. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a1.p1-p2.descriptive-measures',
+      'statistik.klausur-2022-teil-a.a2.p3-p6.descriptive-data-analysis'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 31,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Nominales Skalenniveau trotz 0/1-Codierung mit metrischem Rechnen verwechseln',
+      'Nicht sinnvolle Lage- oder Streuungsparameter ohne Begründung eintragen',
+      'Empirische Standardabweichung mit falschem Nenner oder gerundeten Zwischenschritten berechnen',
+      'Stetiges und diskretes Merkmal mit Skalenniveau vermischen',
+      'Empirische Verteilungsfunktion ohne Sprungstellen oder mit falschen Klassenrändern zeichnen',
+      'Klassenmittelwerte bei klassierten Daten durch Rohdatenwerte ersetzen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält 10 sichtbare Punkte',
+      'Aufgabe 1a fragt nach dem Skalenniveau der Korrektheit von Vorhersagen',
+      'Aufgabe 1b fragt xmod, xmed, xbar und Sx^2 für die Variable Vorhersagen ab und fordert bei nicht sinnvoll angebbaren Parametern eine kurze Begründung',
+      'Aufgabe 2 enthält 21 sichtbare Punkte',
+      'Aufgabe 2a: Mittelwert und empirische Standardabweichung für X, 5 Punkte',
+      'Aufgabe 2b: geeignetes Lagemaß für Y bestimmen, 2 Punkte',
+      'Aufgabe 2c: diskret/stetig und Skalenniveau für X und Y bestimmen, 4 Punkte',
+      'Aufgabe 2d: empirische Verteilungsfunktion für X zeichnen, 6 Punkte',
+      'Aufgabe 2e: Klassen K1 = [0, 10), K2 = [10, 20] und Mittelwert für klassierte Daten, 4 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Deckblatt/Hinweise plus Klausurseiten 1-6',
+      tasks: 'Aufgaben 1-2',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  })
+];
+
+OFFICIAL_TASK_SOURCE_FAMILIES.forEach((item) => assertStatistikOfficialTaskSourcePolicy(item));
 
 const OFFICIAL_DOCUMENT_FAMILIES = [
   {
@@ -2681,6 +2736,7 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
 
 export const TASK_FAMILIES = Object.freeze([
   ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_TASK_SOURCE_FAMILIES,
   ...OFFICIAL_DOCUMENT_FAMILIES,
   ...buildStatistikOfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);
@@ -2692,4 +2748,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

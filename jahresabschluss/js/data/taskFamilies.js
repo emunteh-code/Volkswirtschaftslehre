@@ -655,6 +655,40 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a8-rueckstellungen-verbindlichkeiten',
+    conceptId: 'rueckstellungen',
+    title: 'Probeklausur Aufgabe 8: Rückstellungen und Verbindlichkeiten',
+    topic: 'Rückstellungsansatz, Rückstellungsauflösung, Fremdwährungsverbindlichkeiten, Imparitätsprinzip',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 8: Rückstellungen definieren und Pflicht zur Bildung nennen, eine Rückstellung über 10.000 € bei Auszahlung von 7.000 € im Folgejahr auflösen und Fremdwährungsverbindlichkeiten zum Bilanzstichtag bewerten. Die Musterlösung bewertet die drei Teilfragen jeweils mit 2 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a8.p2.rueckstellungen-verbindlichkeiten',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a8.p2.rueckstellungen-verbindlichkeiten'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Rückstellungen mit sicheren Verbindlichkeiten gleichsetzen und die Ungewissheit der Höhe vergessen',
+      'Bei Auszahlung von 7.000 € die verbleibenden 3.000 € nicht als Ertrag aus Rückstellungsauflösung buchen',
+      'Fremdwährungsverbindlichkeiten mit dem niedrigeren statt dem höheren Erfüllungsbetrag bewerten',
+      'Das Imparitätsprinzip nur nennen, ohne die Kurs-/Erfüllungsbetragsfolge zu erklären'
+    ],
+    gradingRubric: [
+      'Aufgabe 8 enthält 6 sichtbare Punkte',
+      'Teil a: wahrscheinliche, wirtschaftlich belastende Verpflichtung mit ungewisser Höhe, 2 Punkte',
+      'Teil b: Rückstellung an Bank 7.000 € und Rückstellung an Ertrag Rückstellungsauflösung 3.000 €, 2 Punkte',
+      'Teil c: höherer Kurs bedeutet höherer Erfüllungsbetrag; Bewertung mit dem höheren Betrag nach Imparitätsprinzip, 2 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 2',
+      task: 'Aufgabe 8',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

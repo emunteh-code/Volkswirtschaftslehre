@@ -9,7 +9,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Official task documents in registry: **276**
 - Modules with task corpus: **8**
 - Modules missing task corpus: **3**
-- Reviewed official-task-source families: **31**
+- Reviewed official-task-source families: **32**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
 - Module-mismatch documents needing review: **1**
@@ -20,7 +20,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | `finanzwirtschaft` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `internationale-wirtschaftsbeziehungen` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
-| `jahresabschluss` | 13 | 13 | 4 | 43 | 0 (0%) | 23 | 13 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `jahresabschluss` | 13 | 13 | 5 | 43 | 0 (0%) | 23 | 13 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `makro1` | 29 | 28 | 4 | 86 | 0 (0%) | 70 | 28 | 0 | 1 | Start human task-family mapping on ready documents with task signals. |
 | `makro2` | 22 | 22 | 2 | 34 | 0 (0%) | 34 | 22 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |

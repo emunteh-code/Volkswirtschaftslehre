@@ -370,6 +370,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "8.2 VERBINDLICHKEITEN – BEISPIEL",
       fingerprint: 'f84068554b6be084',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a8.p2.rueckstellungen-verbindlichkeiten',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 2,
+      section: 'Aufgabe 8: Rückstellungen und Verbindlichkeiten (6 Punkte)',
+      fingerprint: '9bde2a74cb6160aa',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-5',
+      reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a8.p2.rueckstellungen-verbindlichkeiten',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 2,
+      section: 'Aufgabe 8 – Rückstellungen & Verb. (6 Punkte)',
+      fingerprint: '18ed5bcf29a05105',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-5',
+      reviewedAt: '2026-06-09'
     })
   ],
   rechnungsabgrenzung: [

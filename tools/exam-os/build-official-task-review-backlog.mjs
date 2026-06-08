@@ -49,9 +49,22 @@ function isKnownNonItemTemplate(doc) {
   return /Mikro[öo]konomik I\/Weitere_Unterlagen\/Klausur_Mikro1_ohneechtentext\.pdf$/i.test(pathValue);
 }
 
+function knownModuleMismatch(doc) {
+  const pathValue = String(doc?.path || '');
+  if (/Makro[öo]konomik I\/Klausur_Februar_2024_260119_141838\.pdf$/i.test(pathValue)) {
+    return {
+      expectedModule: 'makro2',
+      evidence:
+        'PDF footer says "Klausur Makroökonomik 2"; task topics include open-economy IS-LM, Barro-Gordon, debt dynamics, and Solow.'
+    };
+  }
+  return null;
+}
+
 function reviewStage(doc) {
   if (!doc) return 'missing';
   if (isKnownNonItemTemplate(doc)) return 'template-not-item-bank';
+  if (knownModuleMismatch(doc)) return 'module-mismatch-review-needed';
   if (doc.pageCount && doc.weakPageCount === 0 && doc.taskSignalPageCount > 0) return 'ready-for-human-task-mapping';
   if (doc.pageCount && doc.weakPageCount === 0) return 'ready-for-human-review';
   if (doc.pageCount && doc.weakPageCount > 0) return 'ocr-needed-before-review';
@@ -60,6 +73,7 @@ function reviewStage(doc) {
 
 function priorityScore(doc, registryDoc) {
   if (isKnownNonItemTemplate(registryDoc) || isKnownNonItemTemplate(doc)) return 1;
+  if (knownModuleMismatch(registryDoc) || knownModuleMismatch(doc)) return 2;
   const kind = registryDoc?.kind || doc?.kind || '';
   const base = KIND_WEIGHT[kind] || 100;
   const taskSignals = doc?.taskSignalPageCount || 0;
@@ -85,6 +99,7 @@ function buildBacklog() {
     .map((doc) => {
       const pageDoc = pageDocsById.get(doc.id) || null;
       const stage = reviewStage(pageDoc || doc);
+      const mismatch = knownModuleMismatch(doc) || knownModuleMismatch(pageDoc);
       return {
         id: doc.id,
         module: doc.module,
@@ -101,7 +116,9 @@ function buildBacklog() {
         formulaSignalPageCount: pageDoc?.formulaSignalPageCount || 0,
         extractionStatus: pageDoc?.extractionStatus || doc.extractionStatus || 'unknown',
         reviewStage: stage,
-        priorityScore: priorityScore(pageDoc, doc)
+        priorityScore: priorityScore(pageDoc, doc),
+        expectedModule: mismatch?.expectedModule || null,
+        reviewNote: mismatch?.evidence || null
       };
     })
     .sort((a, b) => b.priorityScore - a.priorityScore || String(a.path).localeCompare(String(b.path), 'de', { numeric: true }));
@@ -116,6 +133,7 @@ function buildBacklog() {
     const readyForMapping = docs.filter((doc) => doc.reviewStage === 'ready-for-human-task-mapping').length;
     const ocrNeeded = docs.filter((doc) => doc.reviewStage === 'ocr-needed-before-review').length;
     const imageOrNonPdf = docs.filter((doc) => doc.reviewStage === 'non-pdf-or-image-review-needed').length;
+    const moduleMismatch = docs.filter((doc) => doc.reviewStage === 'module-mismatch-review-needed').length;
     return {
       module,
       officialTaskDocuments: docs.length,
@@ -128,9 +146,12 @@ function buildBacklog() {
       readyForMapping,
       ocrNeeded,
       imageOrNonPdf,
+      moduleMismatch,
       missingCorpus,
       nextAction: missingCorpus
         ? 'Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness.'
+        : moduleMismatch > 0 && readyForMapping === 0
+          ? 'Resolve module-mismatch documents before item-level task promotion.'
         : readyForMapping > 0
           ? 'Start human task-family mapping on ready documents with task signals.'
           : ocrNeeded > 0
@@ -148,7 +169,8 @@ function buildBacklog() {
       modulesMissingTaskCorpus: byModule.filter((module) => module.missingCorpus).length,
       officialTaskSourceFamilies: byModule.reduce((sum, module) => sum + module.officialTaskSourceFamilies, 0),
       weakPages: byModule.reduce((sum, module) => sum + module.weakPageCount, 0),
-      taskSignalPages: byModule.reduce((sum, module) => sum + module.taskSignalPageCount, 0)
+      taskSignalPages: byModule.reduce((sum, module) => sum + module.taskSignalPageCount, 0),
+      moduleMismatchDocuments: byModule.reduce((sum, module) => sum + module.moduleMismatch, 0)
     },
     byModule,
     documents
@@ -171,24 +193,25 @@ function toMarkdown(report) {
   lines.push(`- Reviewed official-task-source families: **${report.totals.officialTaskSourceFamilies}**`);
   lines.push(`- Weak pages inside official task docs: **${report.totals.weakPages}**`);
   lines.push(`- Task-signal pages inside official task docs: **${report.totals.taskSignalPages}**`);
+  lines.push(`- Module-mismatch documents needing review: **${report.totals.moduleMismatchDocuments}**`);
   lines.push('');
   lines.push('## Module Queue');
   lines.push('');
-  lines.push('| Module | Task docs | Registry families | Official task-source families | Pages | Weak | Task-signal pages | Ready docs | OCR docs | Next action |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---|');
+  lines.push('| Module | Task docs | Registry families | Official task-source families | Pages | Weak | Task-signal pages | Ready docs | OCR docs | Module mismatch | Next action |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|');
   for (const module of report.byModule) {
     lines.push(
-      `| \`${module.module}\` | ${module.officialTaskDocuments} | ${module.documentRegistryFamilies} | ${module.officialTaskSourceFamilies} | ${module.pageCount} | ${module.weakPageCount} (${module.weakPagePct}%) | ${module.taskSignalPageCount} | ${module.readyForMapping} | ${module.ocrNeeded} | ${module.nextAction} |`
+      `| \`${module.module}\` | ${module.officialTaskDocuments} | ${module.documentRegistryFamilies} | ${module.officialTaskSourceFamilies} | ${module.pageCount} | ${module.weakPageCount} (${module.weakPagePct}%) | ${module.taskSignalPageCount} | ${module.readyForMapping} | ${module.ocrNeeded} | ${module.moduleMismatch} | ${module.nextAction} |`
     );
   }
   lines.push('');
   lines.push('## Highest-Priority Documents');
   lines.push('');
-  lines.push('| Priority | Module | Kind | Title | Pages | Weak | Task signals | Review stage | Path |');
-  lines.push('|---:|---|---|---|---:|---:|---:|---|---|');
+  lines.push('| Priority | Module | Kind | Title | Pages | Weak | Task signals | Review stage | Expected module | Path |');
+  lines.push('|---:|---|---|---|---:|---:|---:|---|---|---|');
   for (const doc of report.documents.slice(0, 60)) {
     lines.push(
-      `| ${doc.priorityScore} | \`${doc.module}\` | ${doc.kind} | ${doc.title} | ${doc.pageCount || ''} | ${doc.weakPageCount} | ${doc.taskSignalPageCount} | ${doc.reviewStage} | \`${doc.path}\` |`
+      `| ${doc.priorityScore} | \`${doc.module}\` | ${doc.kind} | ${doc.title} | ${doc.pageCount || ''} | ${doc.weakPageCount} | ${doc.taskSignalPageCount} | ${doc.reviewStage} | ${doc.expectedModule ? `\`${doc.expectedModule}\`` : ''} | \`${doc.path}\` |`
     );
   }
   lines.push('');

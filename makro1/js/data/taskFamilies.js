@@ -610,11 +610,18 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
     difficulty: 'offen',
     expectedTimeMinutes: null,
     examRelevance: 'hoch',
-    commonTraps: ['Dokument-Registry mit extrahierten Einzelaufgaben verwechseln'],
-    gradingRubric: ['Nur Metadaten bis OCR/Review'],
-    currentCoverage: { registry: "Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf", mapping: 'document-level' },
-    officialTaskCoverage: 'official-document-registry',
-    officialTaskGap: "Nur Dokument-Metadaten wurden ingestiert. Aufgabenfamilien bleiben bis zu explizitem Task-Mapping als Platzhalter markiert.",
+    commonTraps: [
+      'Dokument-Registry mit extrahierten Einzelaufgaben verwechseln',
+      'Footer "Klausur Makroökonomik 2" trotz Ablage im Makro-I-Quellordner übersehen'
+    ],
+    gradingRubric: ['Keine Makro-I-Aufgabenpromotion bis die Modulzuordnung geklärt ist'],
+    currentCoverage: {
+      registry: "Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf",
+      mapping: 'module-mismatch-review-needed',
+      evidence: 'PDF-Footer nennt "Klausur Makroökonomik 2"; Aufgaben behandeln offene Volkswirtschaft, Barro-Gordon, Staatsschuld und Solow.'
+    },
+    officialTaskCoverage: 'module-mismatch-review-needed',
+    officialTaskGap: "Dokument liegt im Makro-I-Korpus, wirkt nach Footer und Themen aber wie Makroökonomik II. Keine item-level Promotion in Makro I ohne manuelle Modulklärung.",
     registryDocumentId: "makro1-exam-makrookonomik-i-klausur-februar-2024-260119-141838",
     registryPath: "Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf",
     registryKind: "exam"
@@ -1117,4 +1124,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

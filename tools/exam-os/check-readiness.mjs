@@ -41,6 +41,7 @@ const modules = current.modules.map((module) => {
   const taskFamilies = module.taskFamilies || 0;
   const officialTaskSourceFamilies = module.officialTaskSourceFamilies || 0;
   const officialDocumentRegistryFamilies = module.officialDocumentRegistryFamilies || 0;
+  const moduleMismatchTaskFamilies = module.moduleMismatchTaskFamilies || 0;
   const sourceGroundedTaskFamilies = module.sourceGroundedTaskFamilies || 0;
   const masteryDimensions = module.masteryDimensions || 0;
   const masteryItems = module.masteryItems || 0;
@@ -64,13 +65,13 @@ const modules = current.modules.map((module) => {
   const examBankStatus = examBankComplete
     ? 'complete'
     : officialTaskSourceFamilies === 0 && officialTaskSourceDocs > 0
-      ? 'official source docs present; no reviewed official-task-source families'
+      ? `official source docs present; no reviewed official-task-source families${moduleMismatchTaskFamilies ? `; ${moduleMismatchTaskFamilies} module-mismatch document(s) need review` : ''}`
       : officialTaskSourceFamilies === 0 && officialTaskSourceDocs === 0
         ? 'official task source corpus missing or unavailable'
         : officialTaskSourceDocs > 0 && officialDocumentRegistryFamilies > 0
-          ? `official-task-source pilot present (${officialTaskSourceFamilies}); ${officialDocumentRegistryFamilies} document-registry placeholders still unresolved`
+          ? `official-task-source pilot present (${officialTaskSourceFamilies}); ${officialDocumentRegistryFamilies} document-registry placeholders still unresolved${moduleMismatchTaskFamilies ? `; ${moduleMismatchTaskFamilies} module-mismatch document(s) need review` : ''}`
           : officialTaskSourceDocs > 0
-            ? `official sources present; reviewed families ${officialTaskSourceFamilies}/${officialTaskSourceDocs}`
+            ? `official sources present; reviewed families ${officialTaskSourceFamilies}/${officialTaskSourceDocs}${moduleMismatchTaskFamilies ? `; ${moduleMismatchTaskFamilies} module-mismatch document(s) need review` : ''}`
           : 'task families only; official tasks missing';
   const provenanceStatus = provenanceComplete
     ? 'complete'
@@ -106,6 +107,7 @@ const modules = current.modules.map((module) => {
     sourceGroundedTaskFamilies,
     officialTaskSourceFamilies,
     officialDocumentRegistryFamilies,
+    moduleMismatchTaskFamilies,
     officialFormulaCards,
     masteryDimensions,
     anchorComplete,
@@ -159,11 +161,11 @@ function toMarkdown(value) {
   lines.push('');
   lines.push('## Evidence Snapshot');
   lines.push('');
-  lines.push('| Module | Source-eligible concepts | Platform boundary concepts | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Official task families | Formula cards | Mastery dimensions |');
-  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|');
+  lines.push('| Module | Source-eligible concepts | Platform boundary concepts | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Module-mismatch docs | Official task families | Formula cards | Mastery dimensions |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|');
   for (const module of value.modules) {
     lines.push(
-      `| \`${module.module}\` | ${module.sourceEligibleConcepts} | ${module.sourceBoundaryConcepts} | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialDocumentRegistryFamilies} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
+      `| \`${module.module}\` | ${module.sourceEligibleConcepts} | ${module.sourceBoundaryConcepts} | ${module.sourceRefCoveragePct}% | ${module.sourceAnchorCoveragePct}% | ${module.sourceAnchors} | ${module.taskFamilies} | ${module.officialTaskSourceDocs} | ${module.officialDocumentRegistryFamilies} | ${module.moduleMismatchTaskFamilies} | ${module.officialTaskSourceFamilies} | ${module.officialFormulaCards} | ${module.masteryDimensions} |`
     );
   }
   lines.push('');

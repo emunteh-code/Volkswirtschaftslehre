@@ -22,7 +22,8 @@ export const QUICK_EXAM_DISCLOSURE = Object.freeze({
 export const OFFICIAL_TASK_COVERAGE_LABELS = Object.freeze({
   "official-task-source": "Offizielle Aufgabe (geprüft)",
   "missing-official-task-source": "Plattform-Übung",
-  "official-document-registry": "Dokument-Register (kein Item-Mapping)"
+  "official-document-registry": "Dokument-Register (kein Item-Mapping)",
+  "module-mismatch-review-needed": "Modulzuordnung prüfen"
 });
 
 export function withPlatformExamDisclosure(exam) {

@@ -12,87 +12,88 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Reviewed official-task-source families: **10**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
+- Module-mismatch documents needing review: **1**
 
 ## Module Queue
 
-| Module | Task docs | Registry families | Official task-source families | Pages | Weak | Task-signal pages | Ready docs | OCR docs | Next action |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| `finanzwirtschaft` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
-| `internationale-wirtschaftsbeziehungen` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
-| `jahresabschluss` | 13 | 13 | 0 | 43 | 0 (0%) | 23 | 13 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `makro1` | 29 | 29 | 0 | 86 | 0 (0%) | 70 | 29 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `makro2` | 22 | 22 | 0 | 34 | 0 (0%) | 34 | 22 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `mikro1` | 18 | 18 | 10 | 10 | 0 (0%) | 10 | 0 | 0 | Review documents manually and classify task relevance. |
-| `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
-| `oekonometrie` | 33 | 33 | 0 | 53 | 0 (0%) | 41 | 29 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `recht` | 17 | 17 | 0 | 313 | 2 (1%) | 32 | 9 | 2 | Start human task-family mapping on ready documents with task signals. |
-| `statistik` | 104 | 104 | 0 | 684 | 23 (3%) | 552 | 80 | 7 | Start human task-family mapping on ready documents with task signals. |
+| Module | Task docs | Registry families | Official task-source families | Pages | Weak | Task-signal pages | Ready docs | OCR docs | Module mismatch | Next action |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| `finanzwirtschaft` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
+| `internationale-wirtschaftsbeziehungen` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
+| `jahresabschluss` | 13 | 13 | 0 | 43 | 0 (0%) | 23 | 13 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `makro1` | 29 | 28 | 0 | 86 | 0 (0%) | 70 | 28 | 0 | 1 | Start human task-family mapping on ready documents with task signals. |
+| `makro2` | 22 | 22 | 0 | 34 | 0 (0%) | 34 | 22 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `mikro1` | 18 | 18 | 10 | 10 | 0 (0%) | 10 | 0 | 0 | 0 | Review documents manually and classify task relevance. |
+| `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
+| `oekonometrie` | 33 | 33 | 0 | 53 | 0 (0%) | 41 | 29 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `recht` | 17 | 17 | 0 | 313 | 2 (1%) | 32 | 9 | 2 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `statistik` | 104 | 104 | 0 | 684 | 23 (3%) | 552 | 80 | 7 | 0 | Start human task-family mapping on ready documents with task signals. |
 
 ## Highest-Priority Documents
 
-| Priority | Module | Kind | Title | Pages | Weak | Task signals | Review stage | Path |
-|---:|---|---|---|---:|---:|---:|---|---|
-| 1567 | `statistik` | exam | Teil_A_Klausur.pdf | 27 | 0 | 27 | ready-for-human-task-mapping | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf` |
-| 1189 | `statistik` | exam | KlausurE2122K1_upd.pdf | 9 | 0 | 9 | ready-for-human-task-mapping | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf` |
-| 1179 | `jahresabschluss` | exam | Probeklausur_JA.pdf | 19 | 0 | 8 | ready-for-human-task-mapping | `source-materials/Jahresabschluss/Probeklausur/Probeklausur_JA.pdf` |
-| 1157 | `mathematik` | exercise | AN_I_-_Aufgaben.pdf | 17 | 0 | 17 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/AN_1_-_Univariate_Differenzialrechnung/AN_I_-_Aufgaben.pdf` |
-| 1126 | `makro1` | exam | Klausur_Februar_2024_260119_141838.pdf | 6 | 0 | 6 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf` |
-| 1108 | `makro1` | exam | Klausur_2022_Nachtermin (1).pdf | 8 | 0 | 5 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Klausur_2022_Nachtermin (1).pdf` |
-| 1107 | `makro1` | exam | Klausur_2018_Nachtermin (1).pdf | 7 | 0 | 5 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Klausur_2018_Nachtermin (1).pdf` |
-| 1107 | `makro1` | exam | Klausur_2018_Nachtermin_260202_170633.pdf | 7 | 0 | 5 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Klausur_2018_Nachtermin_260202_170633.pdf` |
-| 1094 | `mathematik` | exercise | E_2_-_Aufgaben.pdf | 14 | 0 | 14 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/E_2_-_Funktionen_und_Gleichungen/E_2_-_Aufgaben.pdf` |
-| 1089 | `oekonometrie` | exam | Probeklausur_2.pdf | 9 | 0 | 4 | ready-for-human-task-mapping | `source-materials/Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_2.pdf` |
-| 1088 | `oekonometrie` | exam | Probeklausur_3.pdf | 8 | 0 | 4 | ready-for-human-task-mapping | `source-materials/Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_3.pdf` |
-| 1087 | `makro1` | exam | Klausur_2018_Haupttermin (1).pdf | 7 | 0 | 4 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Klausur_2018_Haupttermin (1).pdf` |
-| 1087 | `makro1` | exam | Klausur_2022_Haupttermin (1).pdf | 7 | 0 | 4 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Klausur_2022_Haupttermin (1).pdf` |
-| 1087 | `makro1` | exam | Probeklausur aus 2018 Haupttermin_260128_190434.pdf | 7 | 0 | 4 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Probeklausur aus 2018 Haupttermin_260128_190434.pdf` |
-| 1087 | `oekonometrie` | exam | Probeklausur_1.pdf | 7 | 0 | 4 | ready-for-human-task-mapping | `source-materials/Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_1.pdf` |
-| 1076 | `recht` | exercise | Körber_JuS_2008,_289.pdf | 16 | 0 | 13 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/Körber_JuS_2008,_289.pdf` |
-| 1042 | `jahresabschluss` | exam | Musterloesung_Probeklausur_Jahresabschluss.pdf | 2 | 0 | 2 | ready-for-human-task-mapping | `source-materials/Jahresabschluss/Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf` |
-| 1042 | `jahresabschluss` | exam | Probeklausur_Jahresabschluss.pdf | 2 | 0 | 2 | ready-for-human-task-mapping | `source-materials/Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf` |
-| 1010 | `mathematik` | exercise | OP_II_-_Aufgaben.pdf | 10 | 0 | 10 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/OP_2_-__Multivariate_Optimierung/OP_II_-_Aufgaben.pdf` |
-| 1000 | `mikro1` | exam | IMG_8766.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8766.JPG` |
-| 1000 | `mikro1` | exam | IMG_8767.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8767.JPG` |
-| 1000 | `mikro1` | exam | IMG_8768.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8768.JPG` |
-| 1000 | `mikro1` | exam | IMG_8769.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8769.JPG` |
-| 1000 | `mikro1` | exam | IMG_8770.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8770.JPG` |
-| 1000 | `mikro1` | exam | IMG_8771.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8771.JPG` |
-| 1000 | `mikro1` | exam | IMG_8772.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8772.JPG` |
-| 1000 | `mikro1` | exam | IMG_8773.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8773.JPG` |
-| 1000 | `mikro1` | exam | IMG_8774.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8774.JPG` |
-| 1000 | `mikro1` | exam | IMG_8775.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8775.JPG` |
-| 1000 | `mikro1` | exam | IMG_8776.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8776.JPG` |
-| 1000 | `mikro1` | exam | IMG_8777.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8777.JPG` |
-| 1000 | `mikro1` | exam | IMG_8778.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8778.JPG` |
-| 1000 | `mikro1` | exam | IMG_8779.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8779.JPG` |
-| 1000 | `mikro1` | exam | IMG_8780.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8780.JPG` |
-| 1000 | `mikro1` | exam | IMG_8781.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8781.JPG` |
-| 1000 | `mikro1` | exam | IMG_8782.JPG |  | 0 | 0 | non-pdf-or-image-review-needed | `source-materials/Mikroökonomik I/Probeklausur/IMG_8782.JPG` |
-| 996 | `statistik` | exam | 04KlausurfrageG2mitschrift.pdf | 1 | 1 | 0 | ocr-needed-before-review | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/04KlausurfrageG2mitschrift.pdf` |
-| 996 | `statistik` | exam | 04KlausurfragenG2.pdf | 1 | 1 | 0 | ocr-needed-before-review | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/04KlausurfragenG2.pdf` |
-| 984 | `statistik` | exam | 01u02StatKlausurfragenG1uDS1.pdf | 4 | 4 | 0 | ocr-needed-before-review | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/01u02StatKlausurfragenG1uDS1.pdf` |
-| 984 | `statistik` | exam | 03ProbeklausurDS2.pdf | 4 | 4 | 0 | ocr-needed-before-review | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/03ProbeklausurDS2.pdf` |
-| 984 | `statistik` | exam | 01u02StatKlausurfragenG1uDS1.pdf | 4 | 4 | 0 | ocr-needed-before-review | `source-materials/Statistik/PräsenzveranstaltungenSilbersdorff/01u02StatKlausurfragenG1uDS1.pdf` |
-| 947 | `mathematik` | exercise | E1_-_Aufgaben.pdf | 7 | 0 | 7 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/E_1_-_Algebra_und_Mengenlehre/E1_-_Aufgaben.pdf` |
-| 928 | `recht` | exercise | Thum_JuS_2014,_418.pdf | 8 | 0 | 6 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/Thum_JuS_2014,_418.pdf` |
-| 926 | `mathematik` | exercise | AN_III_-_Aufgaben.pdf | 6 | 0 | 6 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/AN_3_-_Intergralrechnung/AN_III_-_Aufgaben.pdf` |
-| 926 | `mathematik` | exercise | LA_I_-_Aufgaben.pdf | 6 | 0 | 6 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/LA_1_-_Matrizen_und_Matrix-Algebra/LA_I_-_Aufgaben.pdf` |
-| 926 | `mathematik` | exercise | LA_II_-_Aufgaben.pdf | 6 | 0 | 6 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/LA_2_-_Maßzahlen_von_Matrizen_und_inverse_Matrizen/LA_II_-_Aufgaben.pdf` |
-| 905 | `mathematik` | exercise | E_3_-_Aufgaben.pdf | 5 | 0 | 5 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/E_3_-_Summen_und_Logik/E_3_-_Aufgaben.pdf` |
-| 905 | `mathematik` | exercise | OP_I_-_Aufgaben.pdf | 5 | 0 | 5 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/OP_1_-_Univariate_Optimierung/OP_I_-_Aufgaben.pdf` |
-| 899 | `mathematik` | solution | AN_I_-_Lösungen.pdf | 19 | 0 | 19 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/AN_1_-_Univariate_Differenzialrechnung/AN_I_-_Lösungen.pdf` |
-| 899 | `mathematik` | solution | E_2_-_Lösungen.pdf | 19 | 0 | 19 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/E_2_-_Funktionen_und_Gleichungen/E_2_-_Lösungen.pdf` |
-| 870 | `recht` | exercise | SoSe2025_Einheit_1.pdf | 50 | 0 | 1 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/SoSe2025_Einheit_1.pdf` |
-| 868 | `recht` | exercise | Lorenz_JuS_2019,_852_.pdf | 8 | 0 | 3 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/Lorenz_JuS_2019,_852_.pdf` |
-| 868 | `recht` | exercise | Lorenz_JuS_2019,_852_2.pdf | 8 | 0 | 3 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/Lorenz_JuS_2019,_852_2.pdf` |
-| 865 | `recht` | exercise | SoSe_2025_Einheit_3.pdf | 50 | 1 | 1 | ocr-needed-before-review | `source-materials/Recht/Übungen/SoSe_2025_Einheit_3.pdf` |
-| 863 | `makro1` | exercise | Übung1.pdf | 3 | 0 | 3 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Übungen/Übung1.pdf` |
-| 863 | `makro1` | exercise | Übungsblatt_1 (1).pdf | 3 | 0 | 3 | ready-for-human-task-mapping | `source-materials/Makroökonomik I/Übungen/Übungsblatt_1 (1).pdf` |
-| 863 | `mathematik` | exercise | R.E1_-_Aufgaben.pdf | 3 | 0 | 3 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/E_1_-_Algebra_und_Mengenlehre/R.E1_-_Aufgaben.pdf` |
-| 858 | `recht` | exercise | Ipsen_Rehder_ZJS_2023,_751_.pdf | 18 | 0 | 2 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/Ipsen_Rehder_ZJS_2023,_751_.pdf` |
-| 857 | `mathematik` | solution | OP_II_-_Lösungen.pdf | 17 | 0 | 17 | ready-for-human-task-mapping | `source-materials/Mathematik/Kleinübung/OP_2_-__Multivariate_Optimierung/OP_II_-_Lösungen.pdf` |
-| 853 | `recht` | exercise | SoSe_2025_Einheit_4.pdf | 33 | 0 | 1 | ready-for-human-task-mapping | `source-materials/Recht/Übungen/SoSe_2025_Einheit_4.pdf` |
+| Priority | Module | Kind | Title | Pages | Weak | Task signals | Review stage | Expected module | Path |
+|---:|---|---|---|---:|---:|---:|---|---|---|
+| 1567 | `statistik` | exam | Teil_A_Klausur.pdf | 27 | 0 | 27 | ready-for-human-task-mapping |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf` |
+| 1189 | `statistik` | exam | KlausurE2122K1_upd.pdf | 9 | 0 | 9 | ready-for-human-task-mapping |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf` |
+| 1179 | `jahresabschluss` | exam | Probeklausur_JA.pdf | 19 | 0 | 8 | ready-for-human-task-mapping |  | `source-materials/Jahresabschluss/Probeklausur/Probeklausur_JA.pdf` |
+| 1157 | `mathematik` | exercise | AN_I_-_Aufgaben.pdf | 17 | 0 | 17 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/AN_1_-_Univariate_Differenzialrechnung/AN_I_-_Aufgaben.pdf` |
+| 1108 | `makro1` | exam | Klausur_2022_Nachtermin (1).pdf | 8 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2022_Nachtermin (1).pdf` |
+| 1107 | `makro1` | exam | Klausur_2018_Nachtermin (1).pdf | 7 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2018_Nachtermin (1).pdf` |
+| 1107 | `makro1` | exam | Klausur_2018_Nachtermin_260202_170633.pdf | 7 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2018_Nachtermin_260202_170633.pdf` |
+| 1094 | `mathematik` | exercise | E_2_-_Aufgaben.pdf | 14 | 0 | 14 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/E_2_-_Funktionen_und_Gleichungen/E_2_-_Aufgaben.pdf` |
+| 1089 | `oekonometrie` | exam | Probeklausur_2.pdf | 9 | 0 | 4 | ready-for-human-task-mapping |  | `source-materials/Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_2.pdf` |
+| 1088 | `oekonometrie` | exam | Probeklausur_3.pdf | 8 | 0 | 4 | ready-for-human-task-mapping |  | `source-materials/Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_3.pdf` |
+| 1087 | `makro1` | exam | Klausur_2018_Haupttermin (1).pdf | 7 | 0 | 4 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2018_Haupttermin (1).pdf` |
+| 1087 | `makro1` | exam | Klausur_2022_Haupttermin (1).pdf | 7 | 0 | 4 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2022_Haupttermin (1).pdf` |
+| 1087 | `makro1` | exam | Probeklausur aus 2018 Haupttermin_260128_190434.pdf | 7 | 0 | 4 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Probeklausur aus 2018 Haupttermin_260128_190434.pdf` |
+| 1087 | `oekonometrie` | exam | Probeklausur_1.pdf | 7 | 0 | 4 | ready-for-human-task-mapping |  | `source-materials/Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_1.pdf` |
+| 1076 | `recht` | exercise | Körber_JuS_2008,_289.pdf | 16 | 0 | 13 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/Körber_JuS_2008,_289.pdf` |
+| 1042 | `jahresabschluss` | exam | Musterloesung_Probeklausur_Jahresabschluss.pdf | 2 | 0 | 2 | ready-for-human-task-mapping |  | `source-materials/Jahresabschluss/Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf` |
+| 1042 | `jahresabschluss` | exam | Probeklausur_Jahresabschluss.pdf | 2 | 0 | 2 | ready-for-human-task-mapping |  | `source-materials/Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf` |
+| 1010 | `mathematik` | exercise | OP_II_-_Aufgaben.pdf | 10 | 0 | 10 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/OP_2_-__Multivariate_Optimierung/OP_II_-_Aufgaben.pdf` |
+| 1000 | `mikro1` | exam | IMG_8766.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8766.JPG` |
+| 1000 | `mikro1` | exam | IMG_8767.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8767.JPG` |
+| 1000 | `mikro1` | exam | IMG_8768.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8768.JPG` |
+| 1000 | `mikro1` | exam | IMG_8769.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8769.JPG` |
+| 1000 | `mikro1` | exam | IMG_8770.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8770.JPG` |
+| 1000 | `mikro1` | exam | IMG_8771.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8771.JPG` |
+| 1000 | `mikro1` | exam | IMG_8772.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8772.JPG` |
+| 1000 | `mikro1` | exam | IMG_8773.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8773.JPG` |
+| 1000 | `mikro1` | exam | IMG_8774.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8774.JPG` |
+| 1000 | `mikro1` | exam | IMG_8775.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8775.JPG` |
+| 1000 | `mikro1` | exam | IMG_8776.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8776.JPG` |
+| 1000 | `mikro1` | exam | IMG_8777.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8777.JPG` |
+| 1000 | `mikro1` | exam | IMG_8778.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8778.JPG` |
+| 1000 | `mikro1` | exam | IMG_8779.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8779.JPG` |
+| 1000 | `mikro1` | exam | IMG_8780.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8780.JPG` |
+| 1000 | `mikro1` | exam | IMG_8781.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8781.JPG` |
+| 1000 | `mikro1` | exam | IMG_8782.JPG |  | 0 | 0 | non-pdf-or-image-review-needed |  | `source-materials/Mikroökonomik I/Probeklausur/IMG_8782.JPG` |
+| 996 | `statistik` | exam | 04KlausurfrageG2mitschrift.pdf | 1 | 1 | 0 | ocr-needed-before-review |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/04KlausurfrageG2mitschrift.pdf` |
+| 996 | `statistik` | exam | 04KlausurfragenG2.pdf | 1 | 1 | 0 | ocr-needed-before-review |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/04KlausurfragenG2.pdf` |
+| 984 | `statistik` | exam | 01u02StatKlausurfragenG1uDS1.pdf | 4 | 4 | 0 | ocr-needed-before-review |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/01u02StatKlausurfragenG1uDS1.pdf` |
+| 984 | `statistik` | exam | 03ProbeklausurDS2.pdf | 4 | 4 | 0 | ocr-needed-before-review |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/03ProbeklausurDS2.pdf` |
+| 984 | `statistik` | exam | 01u02StatKlausurfragenG1uDS1.pdf | 4 | 4 | 0 | ocr-needed-before-review |  | `source-materials/Statistik/PräsenzveranstaltungenSilbersdorff/01u02StatKlausurfragenG1uDS1.pdf` |
+| 947 | `mathematik` | exercise | E1_-_Aufgaben.pdf | 7 | 0 | 7 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/E_1_-_Algebra_und_Mengenlehre/E1_-_Aufgaben.pdf` |
+| 928 | `recht` | exercise | Thum_JuS_2014,_418.pdf | 8 | 0 | 6 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/Thum_JuS_2014,_418.pdf` |
+| 926 | `mathematik` | exercise | AN_III_-_Aufgaben.pdf | 6 | 0 | 6 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/AN_3_-_Intergralrechnung/AN_III_-_Aufgaben.pdf` |
+| 926 | `mathematik` | exercise | LA_I_-_Aufgaben.pdf | 6 | 0 | 6 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/LA_1_-_Matrizen_und_Matrix-Algebra/LA_I_-_Aufgaben.pdf` |
+| 926 | `mathematik` | exercise | LA_II_-_Aufgaben.pdf | 6 | 0 | 6 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/LA_2_-_Maßzahlen_von_Matrizen_und_inverse_Matrizen/LA_II_-_Aufgaben.pdf` |
+| 905 | `mathematik` | exercise | E_3_-_Aufgaben.pdf | 5 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/E_3_-_Summen_und_Logik/E_3_-_Aufgaben.pdf` |
+| 905 | `mathematik` | exercise | OP_I_-_Aufgaben.pdf | 5 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/OP_1_-_Univariate_Optimierung/OP_I_-_Aufgaben.pdf` |
+| 899 | `mathematik` | solution | AN_I_-_Lösungen.pdf | 19 | 0 | 19 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/AN_1_-_Univariate_Differenzialrechnung/AN_I_-_Lösungen.pdf` |
+| 899 | `mathematik` | solution | E_2_-_Lösungen.pdf | 19 | 0 | 19 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/E_2_-_Funktionen_und_Gleichungen/E_2_-_Lösungen.pdf` |
+| 870 | `recht` | exercise | SoSe2025_Einheit_1.pdf | 50 | 0 | 1 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/SoSe2025_Einheit_1.pdf` |
+| 868 | `recht` | exercise | Lorenz_JuS_2019,_852_.pdf | 8 | 0 | 3 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/Lorenz_JuS_2019,_852_.pdf` |
+| 868 | `recht` | exercise | Lorenz_JuS_2019,_852_2.pdf | 8 | 0 | 3 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/Lorenz_JuS_2019,_852_2.pdf` |
+| 865 | `recht` | exercise | SoSe_2025_Einheit_3.pdf | 50 | 1 | 1 | ocr-needed-before-review |  | `source-materials/Recht/Übungen/SoSe_2025_Einheit_3.pdf` |
+| 863 | `makro1` | exercise | Übung1.pdf | 3 | 0 | 3 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Übungen/Übung1.pdf` |
+| 863 | `makro1` | exercise | Übungsblatt_1 (1).pdf | 3 | 0 | 3 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Übungen/Übungsblatt_1 (1).pdf` |
+| 863 | `mathematik` | exercise | R.E1_-_Aufgaben.pdf | 3 | 0 | 3 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/E_1_-_Algebra_und_Mengenlehre/R.E1_-_Aufgaben.pdf` |
+| 858 | `recht` | exercise | Ipsen_Rehder_ZJS_2023,_751_.pdf | 18 | 0 | 2 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/Ipsen_Rehder_ZJS_2023,_751_.pdf` |
+| 857 | `mathematik` | solution | OP_II_-_Lösungen.pdf | 17 | 0 | 17 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/OP_2_-__Multivariate_Optimierung/OP_II_-_Lösungen.pdf` |
+| 853 | `recht` | exercise | SoSe_2025_Einheit_4.pdf | 33 | 0 | 1 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/SoSe_2025_Einheit_4.pdf` |
+| 842 | `makro2` | exercise | Uebungsblatt_6.pdf | 2 | 0 | 2 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik II/Übungen/Uebungsblatt_6.pdf` |
 
 ## Promotion Checklist
 

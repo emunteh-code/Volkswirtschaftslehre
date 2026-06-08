@@ -20,19 +20,19 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 ## Evidence Snapshot
 
-| Module | Source-eligible concepts | Platform boundary concepts | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Official task families | Formula cards | Mastery dimensions |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `mikro1` | 33 | 0 | 100% | 100% | 110 | 95 | 18 | 18 | 10 | 100 | 4 |
-| `mikro2` | 15 | 3 | 100% | 100% | 47 | 34 | 0 | 0 | 0 | 46 | 4 |
-| `makro1` | 14 | 0 | 100% | 100% | 28 | 58 | 29 | 29 | 0 | 44 | 4 |
-| `makro2` | 30 | 0 | 100% | 100% | 60 | 83 | 22 | 22 | 0 | 110 | 4 |
-| `oekonometrie` | 32 | 0 | 100% | 100% | 64 | 98 | 33 | 33 | 0 | 101 | 4 |
-| `statistik` | 14 | 0 | 100% | 100% | 42 | 133 | 104 | 104 | 0 | 44 | 4 |
-| `finanzwirtschaft` | 19 | 0 | 100% | 100% | 38 | 39 | 0 | 0 | 0 | 57 | 4 |
-| `mathematik` | 14 | 0 | 100% | 100% | 42 | 69 | 40 | 40 | 0 | 55 | 4 |
-| `jahresabschluss` | 15 | 0 | 100% | 100% | 30 | 44 | 13 | 13 | 0 | 45 | 4 |
-| `recht` | 14 | 0 | 100% | 100% | 28 | 46 | 17 | 17 | 0 | 52 | 4 |
-| `internationale-wirtschaftsbeziehungen` | 16 | 0 | 100% | 100% | 32 | 33 | 0 | 0 | 0 | 49 | 4 |
+| Module | Source-eligible concepts | Platform boundary concepts | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Module-mismatch docs | Official task families | Formula cards | Mastery dimensions |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `mikro1` | 33 | 0 | 100% | 100% | 110 | 95 | 18 | 18 | 0 | 10 | 100 | 4 |
+| `mikro2` | 15 | 3 | 100% | 100% | 47 | 34 | 0 | 0 | 0 | 0 | 46 | 4 |
+| `makro1` | 14 | 0 | 100% | 100% | 28 | 58 | 29 | 28 | 1 | 0 | 44 | 4 |
+| `makro2` | 30 | 0 | 100% | 100% | 60 | 83 | 22 | 22 | 0 | 0 | 110 | 4 |
+| `oekonometrie` | 32 | 0 | 100% | 100% | 64 | 98 | 33 | 33 | 0 | 0 | 101 | 4 |
+| `statistik` | 14 | 0 | 100% | 100% | 42 | 133 | 104 | 104 | 0 | 0 | 44 | 4 |
+| `finanzwirtschaft` | 19 | 0 | 100% | 100% | 38 | 39 | 0 | 0 | 0 | 0 | 57 | 4 |
+| `mathematik` | 14 | 0 | 100% | 100% | 42 | 69 | 40 | 40 | 0 | 0 | 55 | 4 |
+| `jahresabschluss` | 15 | 0 | 100% | 100% | 30 | 44 | 13 | 13 | 0 | 0 | 45 | 4 |
+| `recht` | 14 | 0 | 100% | 100% | 28 | 46 | 17 | 17 | 0 | 0 | 52 | 4 |
+| `internationale-wirtschaftsbeziehungen` | 16 | 0 | 100% | 100% | 32 | 33 | 0 | 0 | 0 | 0 | 49 | 4 |
 
 ## Gate Status Detail
 
@@ -40,7 +40,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 |---|---|---|---|---|---|
 | `mikro1` | complete | official-task-source pilot present (10); 18 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | benchmark cockpit; official task-source review pending |
 | `mikro2` | complete | official task source corpus missing or unavailable | complete | mastery items present; exam-bank or anchor gate open | not achieved |
-| `makro1` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | not achieved |
+| `makro1` | complete | official source docs present; no reviewed official-task-source families; 1 module-mismatch document(s) need review | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `makro2` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
 | `oekonometrie` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
 | `statistik` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | not achieved |
@@ -58,7 +58,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `mikro2`: official exam bank incomplete (official task source corpus missing or unavailable)
 - `mikro2`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `mikro2`: Mikro1-depth equality not certified
-- `makro1`: official exam bank incomplete (official source docs present; no reviewed official-task-source families)
+- `makro1`: official exam bank incomplete (official source docs present; no reviewed official-task-source families; 1 module-mismatch document(s) need review)
 - `makro1`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `makro1`: Mikro1-depth equality not certified
 - `makro2`: official exam bank incomplete (official source docs present; no reviewed official-task-source families)

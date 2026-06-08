@@ -7,7 +7,8 @@
     "modulesMissingTaskCorpus": 3,
     "officialTaskSourceFamilies": 10,
     "weakPages": 25,
-    "taskSignalPages": 989
+    "taskSignalPages": 989,
+    "moduleMismatchDocuments": 1
   },
   "byModule": [
     {
@@ -22,6 +23,7 @@
       "readyForMapping": 0,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": true,
       "nextAction": "Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness."
     },
@@ -37,6 +39,7 @@
       "readyForMapping": 0,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": true,
       "nextAction": "Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness."
     },
@@ -52,6 +55,7 @@
       "readyForMapping": 13,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     },
@@ -59,14 +63,15 @@
       "module": "makro1",
       "officialTaskDocuments": 29,
       "officialTaskSourceFamilies": 0,
-      "documentRegistryFamilies": 29,
+      "documentRegistryFamilies": 28,
       "pageCount": 86,
       "weakPageCount": 0,
       "weakPagePct": 0,
       "taskSignalPageCount": 70,
-      "readyForMapping": 29,
+      "readyForMapping": 28,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 1,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     },
@@ -82,6 +87,7 @@
       "readyForMapping": 22,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     },
@@ -97,6 +103,7 @@
       "readyForMapping": 40,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     },
@@ -112,6 +119,7 @@
       "readyForMapping": 0,
       "ocrNeeded": 0,
       "imageOrNonPdf": 17,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Review documents manually and classify task relevance."
     },
@@ -127,6 +135,7 @@
       "readyForMapping": 0,
       "ocrNeeded": 0,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": true,
       "nextAction": "Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness."
     },
@@ -142,6 +151,7 @@
       "readyForMapping": 29,
       "ocrNeeded": 0,
       "imageOrNonPdf": 4,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     },
@@ -157,6 +167,7 @@
       "readyForMapping": 9,
       "ocrNeeded": 2,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     },
@@ -172,6 +183,7 @@
       "readyForMapping": 80,
       "ocrNeeded": 7,
       "imageOrNonPdf": 0,
+      "moduleMismatch": 0,
       "missingCorpus": false,
       "nextAction": "Start human task-family mapping on ready documents with task signals."
     }
@@ -193,7 +205,9 @@
       "formulaSignalPageCount": 20,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1567
+      "priorityScore": 1567,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-klausure2122k1-upd",
@@ -211,7 +225,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1189
+      "priorityScore": 1189,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-ja",
@@ -229,7 +245,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1179
+      "priorityScore": 1179,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-an-1-univariate-differenzialrechnung-an-i-aufgaben",
@@ -247,25 +265,9 @@
       "formulaSignalPageCount": 17,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1157
-    },
-    {
-      "id": "makro1-exam-makrookonomik-i-klausur-februar-2024-260119-141838",
-      "module": "makro1",
-      "moduleTitle": "Makroökonomik I",
-      "kind": "exam",
-      "title": "Klausur_Februar_2024_260119_141838.pdf",
-      "group": "root",
-      "path": "source-materials/Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf",
-      "extension": "pdf",
-      "registryPages": 6,
-      "pageCount": 6,
-      "weakPageCount": 0,
-      "taskSignalPageCount": 6,
-      "formulaSignalPageCount": 4,
-      "extractionStatus": "indexed",
-      "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1126
+      "priorityScore": 1157,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exam-makrookonomik-i-klausur-2022-nachtermin-1",
@@ -283,7 +285,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1108
+      "priorityScore": 1108,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exam-makrookonomik-i-klausur-2018-nachtermin-1",
@@ -301,7 +305,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1107
+      "priorityScore": 1107,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exam-makrookonomik-i-klausur-2018-nachtermin-260202-170633",
@@ -319,7 +325,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1107
+      "priorityScore": 1107,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-e-2-funktionen-und-gleichungen-e-2-aufgaben",
@@ -337,7 +345,9 @@
       "formulaSignalPageCount": 13,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1094
+      "priorityScore": 1094,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exam-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-probeklausuren-probeklausur-2",
@@ -355,7 +365,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1089
+      "priorityScore": 1089,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exam-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-probeklausuren-probeklausur-3",
@@ -373,7 +385,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1088
+      "priorityScore": 1088,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exam-makrookonomik-i-klausur-2018-haupttermin-1",
@@ -391,7 +405,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1087
+      "priorityScore": 1087,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exam-makrookonomik-i-klausur-2022-haupttermin-1",
@@ -409,7 +425,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1087
+      "priorityScore": 1087,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exam-makrookonomik-i-probeklausur-aus-2018-haupttermin-260128-190434",
@@ -427,7 +445,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1087
+      "priorityScore": 1087,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exam-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-probeklausuren-probeklausur-1",
@@ -445,7 +465,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1087
+      "priorityScore": 1087,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-korber-jus-2008-289",
@@ -463,7 +485,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1076
+      "priorityScore": 1076,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss",
@@ -481,7 +505,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1042
+      "priorityScore": 1042,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss",
@@ -499,7 +525,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1042
+      "priorityScore": 1042,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-op-2-multivariate-optimierung-op-ii-aufgaben",
@@ -517,7 +545,9 @@
       "formulaSignalPageCount": 10,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 1010
+      "priorityScore": 1010,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8766",
@@ -535,7 +565,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8767",
@@ -553,7 +585,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8768",
@@ -571,7 +605,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8769",
@@ -589,7 +625,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8770",
@@ -607,7 +645,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8771",
@@ -625,7 +665,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8772",
@@ -643,7 +685,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8773",
@@ -661,7 +705,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8774",
@@ -679,7 +725,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8775",
@@ -697,7 +745,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8776",
@@ -715,7 +765,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8777",
@@ -733,7 +785,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8778",
@@ -751,7 +805,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8779",
@@ -769,7 +825,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8780",
@@ -787,7 +845,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8781",
@@ -805,7 +865,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-probeklausur-img-8782",
@@ -823,7 +885,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 1000
+      "priorityScore": 1000,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-04klausurfrageg2mitschrift",
@@ -841,7 +905,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 996
+      "priorityScore": 996,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-04klausurfrageng2",
@@ -859,7 +925,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 996
+      "priorityScore": 996,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-01u02statklausurfrageng1uds1",
@@ -877,7 +945,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 984
+      "priorityScore": 984,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-03probeklausurds2",
@@ -895,7 +965,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 984
+      "priorityScore": 984,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exam-statistik-prasenzveranstaltungensilbersdorff-01u02statklausurfrageng1uds1",
@@ -913,7 +985,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 984
+      "priorityScore": 984,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-e-1-algebra-und-mengenlehre-e1-aufgaben",
@@ -931,7 +1005,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 947
+      "priorityScore": 947,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-thum-jus-2014-418",
@@ -949,7 +1025,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 928
+      "priorityScore": 928,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-an-3-intergralrechnung-an-iii-aufgaben",
@@ -967,7 +1045,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 926
+      "priorityScore": 926,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-la-1-matrizen-und-matrix-algebra-la-i-aufgaben",
@@ -985,7 +1065,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 926
+      "priorityScore": 926,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-la-2-ma-zahlen-von-matrizen-und-inverse-matrizen-la-ii-aufgaben",
@@ -1003,7 +1085,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 926
+      "priorityScore": 926,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-e-3-summen-und-logik-e-3-aufgaben",
@@ -1021,7 +1105,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 905
+      "priorityScore": 905,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-op-1-univariate-optimierung-op-i-aufgaben",
@@ -1039,7 +1125,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 905
+      "priorityScore": 905,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-an-1-univariate-differenzialrechnung-an-i-losungen",
@@ -1057,7 +1145,9 @@
       "formulaSignalPageCount": 19,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 899
+      "priorityScore": 899,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-e-2-funktionen-und-gleichungen-e-2-losungen",
@@ -1075,7 +1165,9 @@
       "formulaSignalPageCount": 19,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 899
+      "priorityScore": 899,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-sose2025-einheit-1",
@@ -1093,7 +1185,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 870
+      "priorityScore": 870,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-lorenz-jus-2019-852",
@@ -1111,7 +1205,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 868
+      "priorityScore": 868,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-lorenz-jus-2019-852-2",
@@ -1129,7 +1225,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 868
+      "priorityScore": 868,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-sose-2025-einheit-3",
@@ -1147,7 +1245,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 865
+      "priorityScore": 865,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubung1",
@@ -1165,7 +1265,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 863
+      "priorityScore": 863,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubungsblatt-1-1",
@@ -1183,7 +1285,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 863
+      "priorityScore": 863,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-e-1-algebra-und-mengenlehre-r-e1-aufgaben",
@@ -1201,7 +1305,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 863
+      "priorityScore": 863,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-ipsen-rehder-zjs-2023-751",
@@ -1219,7 +1325,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 858
+      "priorityScore": 858,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-op-2-multivariate-optimierung-op-ii-losungen",
@@ -1237,7 +1345,9 @@
       "formulaSignalPageCount": 16,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 857
+      "priorityScore": 857,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-sose-2025-einheit-4",
@@ -1255,7 +1365,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 853
+      "priorityScore": 853,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-6",
@@ -1273,7 +1385,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-8",
@@ -1291,7 +1405,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-an-1-univariate-differenzialrechnung-r-an-i-aufgaben",
@@ -1309,7 +1425,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-e-2-funktionen-und-gleichungen-r-e2-aufgaben",
@@ -1327,7 +1445,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-e-3-summen-und-logik-r-e3-aufgaben",
@@ -1345,7 +1465,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-la-1-matrizen-und-matrix-algebra-r-la-i-aufgaben",
@@ -1363,7 +1485,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-op-1-univariate-optimierung-r-op-i-aufgaben",
@@ -1381,7 +1505,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-op-2-multivariate-optimierung-r-op-ii-aufgaben",
@@ -1399,7 +1525,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 842
+      "priorityScore": 842,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-sose-5-5-2025-2-einheit",
@@ -1417,7 +1545,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 836
+      "priorityScore": 836,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-5-einheit-sose2025-26-5-2025",
@@ -1435,7 +1565,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 828
+      "priorityScore": 828,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-max-zjs-2022-135",
@@ -1453,7 +1585,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 826
+      "priorityScore": 826,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-lorenz-jus-2020-821",
@@ -1471,7 +1605,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 825
+      "priorityScore": 825,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-makro-1-wise2025-2-2",
@@ -1489,7 +1625,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubung2",
@@ -1507,7 +1645,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubung3",
@@ -1525,7 +1665,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubung4",
@@ -1543,7 +1685,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubung5",
@@ -1561,7 +1705,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubungsblatt-2-3",
@@ -1579,7 +1725,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubungsblatt-5-2",
@@ -1597,7 +1745,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubungsblatt-6-1",
@@ -1615,7 +1765,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-exercise-makrookonomik-i-ubungen-ubungsblatt-7-1",
@@ -1633,7 +1785,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-1",
@@ -1651,7 +1805,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-2",
@@ -1669,7 +1825,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-3",
@@ -1687,7 +1845,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-4",
@@ -1705,7 +1865,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-5",
@@ -1723,7 +1885,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-7",
@@ -1741,7 +1905,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-9",
@@ -1759,7 +1925,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-10",
@@ -1777,7 +1945,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-an-2-funktionen-mehrerer-variablen-und-multivariate-differenzialrech",
@@ -1795,7 +1965,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-an-2-funktionen-mehrerer-variablen-und-multivariate-differenzialrech",
@@ -1813,7 +1985,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-an-3-intergralrechnung-r-an-iii-aufgaben",
@@ -1831,7 +2005,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-exercise-mathematik-kleinubung-la-2-ma-zahlen-von-matrizen-und-inverse-matrizen-r-la-ii-aufgaben",
@@ -1849,7 +2025,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-wiederholung-1",
@@ -1867,7 +2045,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-wiederholung-2",
@@ -1885,7 +2065,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-01",
@@ -1903,7 +2085,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-02",
@@ -1921,7 +2105,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-03",
@@ -1939,7 +2125,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-04",
@@ -1957,7 +2145,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-05",
@@ -1975,7 +2165,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-06",
@@ -1993,7 +2185,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-07",
@@ -2011,7 +2205,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-08",
@@ -2029,7 +2225,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-09",
@@ -2047,7 +2245,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-10",
@@ -2065,7 +2265,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-11",
@@ -2083,7 +2285,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-bungsbl-tter-bung-12",
@@ -2101,7 +2305,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 821
+      "priorityScore": 821,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-fallskript-sose2025-aktualisiert",
@@ -2119,7 +2325,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 818
+      "priorityScore": 818,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-fallskript-sose2025",
@@ -2137,7 +2345,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 818
+      "priorityScore": 818,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-gro-ubung-coaching-ubung-1",
@@ -2155,7 +2365,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 807
+      "priorityScore": 807,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-1",
@@ -2173,7 +2385,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 807
+      "priorityScore": 807,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-gro-ubung-coaching-ubung-3",
@@ -2191,7 +2405,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 806
+      "priorityScore": 806,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-3",
@@ -2209,7 +2425,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 806
+      "priorityScore": 806,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-5",
@@ -2227,7 +2445,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 805
+      "priorityScore": 805,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-gro-ubung-coaching-ubung-2",
@@ -2245,7 +2465,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 804
+      "priorityScore": 804,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-2",
@@ -2263,7 +2485,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 804
+      "priorityScore": 804,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-einheit-3-ubersicht-beschr-geschaftsfahigkeit",
@@ -2281,7 +2505,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 803
+      "priorityScore": 803,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-4",
@@ -2299,7 +2525,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 803
+      "priorityScore": 803,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-ubersicht-definitionen",
@@ -2317,7 +2545,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 802
+      "priorityScore": 802,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-4-aufgabe5-ausfuhrlich",
@@ -2335,7 +2565,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 802
+      "priorityScore": 802,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "recht-exercise-recht-ubungen-juristische-gliederungsebenen-im-gutachten",
@@ -2353,7 +2585,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 801
+      "priorityScore": 801,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-gro-ubung-coaching-digitales-coaching-sose25",
@@ -2371,7 +2605,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 801
+      "priorityScore": 801,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung",
@@ -2389,7 +2625,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 800
+      "priorityScore": 800,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-r-rhistory",
@@ -2407,7 +2645,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 800
+      "priorityScore": 800,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium4-ausfuhrliche-losungen-upd",
@@ -2425,7 +2665,9 @@
       "formulaSignalPageCount": 14,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 794
+      "priorityScore": 794,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-4-tutorium4-ausfuhrliche-losungen",
@@ -2443,7 +2685,9 @@
       "formulaSignalPageCount": 14,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 794
+      "priorityScore": 794,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-exercise-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-3-6-10-ausfuhrlich",
@@ -2461,7 +2705,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 793
+      "priorityScore": 793,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium-1",
@@ -2479,7 +2725,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 776
+      "priorityScore": 776,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium4",
@@ -2497,7 +2745,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 776
+      "priorityScore": 776,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-1-tutorium-1",
@@ -2515,7 +2765,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 776
+      "priorityScore": 776,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-4-tutorium4",
@@ -2533,7 +2785,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 776
+      "priorityScore": 776,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium11-ausfuhrliche-losungen",
@@ -2551,7 +2805,9 @@
       "formulaSignalPageCount": 12,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 773
+      "priorityScore": 773,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium12-ausfuhrliche-losungen",
@@ -2569,7 +2825,9 @@
       "formulaSignalPageCount": 13,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 773
+      "priorityScore": 773,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-11-tutorium11-ausfuhrliche-losungen",
@@ -2587,7 +2845,9 @@
       "formulaSignalPageCount": 12,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 773
+      "priorityScore": 773,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-12-tutorium12-ausfuhrliche-losungen",
@@ -2605,7 +2865,9 @@
       "formulaSignalPageCount": 13,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 773
+      "priorityScore": 773,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium2",
@@ -2623,7 +2885,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 755
+      "priorityScore": 755,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium3",
@@ -2641,7 +2905,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 755
+      "priorityScore": 755,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium11",
@@ -2659,7 +2925,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 755
+      "priorityScore": 755,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-2-tutorium2",
@@ -2677,7 +2945,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 755
+      "priorityScore": 755,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-3-tutorium3",
@@ -2695,7 +2965,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 755
+      "priorityScore": 755,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-11-tutorium11",
@@ -2713,7 +2985,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 755
+      "priorityScore": 755,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutrium2-ausfuhrliche-losungen",
@@ -2731,7 +3005,9 @@
       "formulaSignalPageCount": 11,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 752
+      "priorityScore": 752,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-2-tutrium2-ausfuhrliche-losungen",
@@ -2749,7 +3025,9 @@
       "formulaSignalPageCount": 11,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 752
+      "priorityScore": 752,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium5",
@@ -2767,7 +3045,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 734
+      "priorityScore": 734,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium7-kurzubung",
@@ -2785,7 +3065,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 734
+      "priorityScore": 734,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium12",
@@ -2803,7 +3085,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 734
+      "priorityScore": 734,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-5-tutorium5",
@@ -2821,7 +3105,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 734
+      "priorityScore": 734,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-7-tutorium7-kurzubung",
@@ -2839,7 +3125,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 734
+      "priorityScore": 734,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-12-tutorium12",
@@ -2857,7 +3145,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 734
+      "priorityScore": 734,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium6",
@@ -2875,7 +3165,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium7",
@@ -2893,7 +3185,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium9",
@@ -2911,7 +3205,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium10",
@@ -2929,7 +3225,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium13",
@@ -2947,7 +3245,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-6-tutorium6",
@@ -2965,7 +3265,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-7-tutorium7",
@@ -2983,7 +3285,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-9-tutorium9",
@@ -3001,7 +3305,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-10-tutorium10",
@@ -3019,7 +3325,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-13-tutorium13",
@@ -3037,7 +3345,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 713
+      "priorityScore": 713,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium5-ausfuhrliche-losungen",
@@ -3055,7 +3365,9 @@
       "formulaSignalPageCount": 10,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 710
+      "priorityScore": 710,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-5-tutorium5-ausfuhrliche-losungen",
@@ -3073,7 +3385,9 @@
       "formulaSignalPageCount": 10,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 710
+      "priorityScore": 710,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel10",
@@ -3091,7 +3405,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-makro1-tutorienblatt2",
@@ -3109,7 +3425,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorienblatt-3",
@@ -3127,7 +3445,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorienblatt-4-makroi",
@@ -3145,7 +3465,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorienblatt-5-makroi",
@@ -3163,7 +3485,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorienblatt-6-makro-1",
@@ -3181,7 +3505,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorienblatt-1",
@@ -3199,7 +3525,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorium1",
@@ -3217,7 +3545,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorium2",
@@ -3235,7 +3565,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorium3",
@@ -3253,7 +3585,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorium4",
@@ -3271,7 +3605,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro1-tutorial-makrookonomik-i-tutorium-tutorium5",
@@ -3289,7 +3625,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-1",
@@ -3307,7 +3645,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-3",
@@ -3325,7 +3665,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-4",
@@ -3343,7 +3685,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-5",
@@ -3361,7 +3705,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-6",
@@ -3379,7 +3725,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-12",
@@ -3397,7 +3745,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-32",
@@ -3415,7 +3765,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-42",
@@ -3433,7 +3785,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-52",
@@ -3451,7 +3805,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-62",
@@ -3469,7 +3825,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt04",
@@ -3487,7 +3845,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt07",
@@ -3505,7 +3865,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt11",
@@ -3523,7 +3885,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium8-upd",
@@ -3541,7 +3905,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-tutorien-tutorium-8-tutorium8",
@@ -3559,7 +3925,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 692
+      "priorityScore": 692,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-e-1-algebra-und-mengenlehre-e1-losungen",
@@ -3577,7 +3945,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium-1-ausfuhrliche-losung",
@@ -3595,7 +3965,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium3-ausfuhrliche-losungen",
@@ -3613,7 +3985,9 @@
       "formulaSignalPageCount": 9,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium6-ausfuhrliche-losungen",
@@ -3631,7 +4005,9 @@
       "formulaSignalPageCount": 9,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-1-tutorium-1-ausfuhrliche-losung",
@@ -3649,7 +4025,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-3-tutorium3-ausfuhrliche-losungen",
@@ -3667,7 +4045,9 @@
       "formulaSignalPageCount": 9,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-6-tutorium6-ausfuhrliche-losungen",
@@ -3685,7 +4065,9 @@
       "formulaSignalPageCount": 9,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 689
+      "priorityScore": 689,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel1",
@@ -3703,7 +4085,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel2",
@@ -3721,7 +4105,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel3",
@@ -3739,7 +4125,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel4",
@@ -3757,7 +4145,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel5",
@@ -3775,7 +4165,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel6",
@@ -3793,7 +4185,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel7",
@@ -3811,7 +4205,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel8",
@@ -3829,7 +4225,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel9",
@@ -3847,7 +4245,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 672
+      "priorityScore": 672,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-2",
@@ -3865,7 +4265,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-22",
@@ -3883,7 +4285,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt01",
@@ -3901,7 +4305,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt02",
@@ -3919,7 +4325,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt03",
@@ -3937,7 +4345,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt05-2",
@@ -3955,7 +4365,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt05",
@@ -3973,7 +4385,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt06",
@@ -3991,7 +4405,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt08",
@@ -4009,7 +4425,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt9",
@@ -4027,7 +4445,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-aufgabenblatt10",
@@ -4045,7 +4465,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 671
+      "priorityScore": 671,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-la-1-matrizen-und-matrix-algebra-la-i-losungen",
@@ -4063,7 +4485,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-la-2-ma-zahlen-von-matrizen-und-inverse-matrizen-la-ii-losungen",
@@ -4081,7 +4505,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium-1-kurzlosung",
@@ -4099,7 +4525,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium2-kurzlosung",
@@ -4117,7 +4545,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium4-kurzlosung",
@@ -4135,7 +4565,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium5-kurzlosung",
@@ -4153,7 +4585,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium11-kurzlosung",
@@ -4171,7 +4605,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium12-kurzlosung",
@@ -4189,7 +4625,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-1-tutorium-1-kurzlosung",
@@ -4207,7 +4645,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-2-tutorium2-kurzlosung",
@@ -4225,7 +4665,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-4-tutorium4-kurzlosung",
@@ -4243,7 +4685,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-5-tutorium5-kurzlosung",
@@ -4261,7 +4705,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-11-tutorium11-kurzlosung",
@@ -4279,7 +4725,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-12-tutorium12-kurzlosung",
@@ -4297,7 +4745,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 668
+      "priorityScore": 668,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-zuteilungen-tutorien",
@@ -4315,7 +4765,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 660
+      "priorityScore": 660,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-tutorial-statistik-zuteilungen-tutorien",
@@ -4333,7 +4785,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 660
+      "priorityScore": 660,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium",
@@ -4351,7 +4805,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 650
+      "priorityScore": 650,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "oekonometrie-tutorial-okonometrie-tutorial-einfuhrung-in-die-okonometrie-tutorium-r-lohn",
@@ -4369,7 +4825,9 @@
       "formulaSignalPageCount": 0,
       "extractionStatus": "indexed",
       "reviewStage": "non-pdf-or-image-review-needed",
-      "priorityScore": 650
+      "priorityScore": 650,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-op-1-univariate-optimierung-op-i-losungen",
@@ -4387,7 +4845,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium7-ausfuhrliche-losungen",
@@ -4405,7 +4865,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium8-ausfuhrliche-losungen-upd",
@@ -4423,7 +4885,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium9-ausfuhrliche-losungen",
@@ -4441,7 +4905,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium10-ausfuhrliche-losungen",
@@ -4459,7 +4925,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium13-ausfuhrliche-losungen",
@@ -4477,7 +4945,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-7-tutorium7-ausfuhrliche-losungen",
@@ -4495,7 +4965,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-8-tutorium8-ausfuhrliche-losungen",
@@ -4513,7 +4985,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-9-tutorium9-ausfuhrliche-losungen",
@@ -4531,7 +5005,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-10-tutorium10-ausfuhrliche-losungen",
@@ -4549,7 +5025,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-13-tutorium13-ausfuhrliche-losungen",
@@ -4567,7 +5045,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 647
+      "priorityScore": 647,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-an-3-intergralrechnung-an-iii-losungen",
@@ -4585,7 +5065,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 626
+      "priorityScore": 626,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium3-kurzlosungen",
@@ -4603,7 +5085,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 626
+      "priorityScore": 626,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium6-kurzlosung",
@@ -4621,7 +5105,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 626
+      "priorityScore": 626,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-3-tutorium3-kurzlosungen",
@@ -4639,7 +5125,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 626
+      "priorityScore": 626,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-6-tutorium6-kurzlosung",
@@ -4657,7 +5145,9 @@
       "formulaSignalPageCount": 6,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 626
+      "priorityScore": 626,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-e-1-algebra-und-mengenlehre-r-e1-losungen",
@@ -4675,7 +5165,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 605
+      "priorityScore": 605,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-e-3-summen-und-logik-e-3-losungen",
@@ -4693,7 +5185,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 605
+      "priorityScore": 605,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium8-kurzlosung-upd",
@@ -4711,7 +5205,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 605
+      "priorityScore": 605,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium9-kurzlosung",
@@ -4729,7 +5225,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 605
+      "priorityScore": 605,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-8-tutorium8-kurzlosung",
@@ -4747,7 +5245,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 605
+      "priorityScore": 605,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-9-tutorium9-kurzlosung",
@@ -4765,7 +5265,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 605
+      "priorityScore": 605,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-e-2-funktionen-und-gleichungen-r-e2-losungen",
@@ -4783,7 +5285,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-la-1-matrizen-und-matrix-algebra-r-la-i-losungen",
@@ -4801,7 +5305,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-op-1-univariate-optimierung-r-op-i-losungen",
@@ -4819,7 +5325,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-op-2-multivariate-optimierung-r-op-ii-losungen",
@@ -4837,7 +5345,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutorium10-kurzlosung",
@@ -4855,7 +5365,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-tutoroum13-kurzlosung",
@@ -4873,7 +5385,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-10-tutorium10-kurzlosung",
@@ -4891,7 +5405,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-tutorien-tutorium-13-tutoroum13-kurzlosung",
@@ -4909,7 +5425,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 584
+      "priorityScore": 584,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-an-1-univariate-differenzialrechnung-r-an-i-losungen",
@@ -4927,7 +5445,9 @@
       "formulaSignalPageCount": 3,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 563
+      "priorityScore": 563,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-e-3-summen-und-logik-r-e3-losungen",
@@ -4945,7 +5465,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 563
+      "priorityScore": 563,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-an-2-funktionen-mehrerer-variablen-und-multivariate-differenzialrech",
@@ -4963,7 +5485,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 542
+      "priorityScore": 542,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-an-2-funktionen-mehrerer-variablen-und-multivariate-differenzialrech",
@@ -4981,7 +5505,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 542
+      "priorityScore": 542,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-la-2-ma-zahlen-von-matrizen-und-inverse-matrizen-r-la-ii-losungen",
@@ -4999,7 +5525,9 @@
       "formulaSignalPageCount": 2,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 542
+      "priorityScore": 542,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "mathematik-solution-mathematik-kleinubung-an-3-intergralrechnung-r-an-iii-losungen",
@@ -5017,7 +5545,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-task-mapping",
-      "priorityScore": 521
+      "priorityScore": 521,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-1-losungen",
@@ -5035,7 +5565,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 510
+      "priorityScore": 510,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-5-losungen",
@@ -5053,7 +5585,9 @@
       "formulaSignalPageCount": 8,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 508
+      "priorityScore": 508,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-3-losungen",
@@ -5071,7 +5605,9 @@
       "formulaSignalPageCount": 7,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 507
+      "priorityScore": 507,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-4-losungen",
@@ -5089,7 +5625,9 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 505
+      "priorityScore": 505,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-2-losungen",
@@ -5107,7 +5645,9 @@
       "formulaSignalPageCount": 4,
       "extractionStatus": "indexed",
       "reviewStage": "ready-for-human-review",
-      "priorityScore": 504
+      "priorityScore": 504,
+      "expectedModule": null,
+      "reviewNote": null
     },
     {
       "id": "statistik-solution-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-ubung-5-ausfuhrliche-losungen",
@@ -5125,7 +5665,29 @@
       "formulaSignalPageCount": 5,
       "extractionStatus": "indexed",
       "reviewStage": "ocr-needed-before-review",
-      "priorityScore": 481
+      "priorityScore": 481,
+      "expectedModule": null,
+      "reviewNote": null
+    },
+    {
+      "id": "makro1-exam-makrookonomik-i-klausur-februar-2024-260119-141838",
+      "module": "makro1",
+      "moduleTitle": "Makroökonomik I",
+      "kind": "exam",
+      "title": "Klausur_Februar_2024_260119_141838.pdf",
+      "group": "root",
+      "path": "source-materials/Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf",
+      "extension": "pdf",
+      "registryPages": 6,
+      "pageCount": 6,
+      "weakPageCount": 0,
+      "taskSignalPageCount": 6,
+      "formulaSignalPageCount": 4,
+      "extractionStatus": "indexed",
+      "reviewStage": "module-mismatch-review-needed",
+      "priorityScore": 2,
+      "expectedModule": "makro2",
+      "reviewNote": "PDF footer says \"Klausur Makroökonomik 2\"; task topics include open-economy IS-LM, Barro-Gordon, debt dynamics, and Solow."
     },
     {
       "id": "mikro1-exam-mikrookonomik-i-weitere-unterlagen-klausur-mikro1-ohneechtentext",
@@ -5143,7 +5705,9 @@
       "formulaSignalPageCount": 1,
       "extractionStatus": "indexed",
       "reviewStage": "template-not-item-bank",
-      "priorityScore": 1
+      "priorityScore": 1,
+      "expectedModule": null,
+      "reviewNote": null
     }
   ]
 }

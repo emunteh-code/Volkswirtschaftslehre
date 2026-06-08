@@ -230,6 +230,9 @@ async function summarizeModule(slug, localSourceFiles) {
   const officialDocumentRegistryFamilies = taskFamilies.filter(
     (item) => item?.officialTaskCoverage === 'official-document-registry'
   ).length;
+  const moduleMismatchTaskFamilies = taskFamilies.filter(
+    (item) => item?.officialTaskCoverage === 'module-mismatch-review-needed'
+  ).length;
   const masteryItems = Object.values(masteryMod.MASTERY || {}).reduce(
     (sum, value) => sum + (Array.isArray(value) ? value.length : 0),
     0
@@ -284,6 +287,7 @@ async function summarizeModule(slug, localSourceFiles) {
     sourceGroundedTaskFamilies,
     officialTaskSourceFamilies,
     officialDocumentRegistryFamilies,
+    moduleMismatchTaskFamilies,
     portalTaskBlocks,
     stepDrills,
     fullExamCount: fullExams.length,

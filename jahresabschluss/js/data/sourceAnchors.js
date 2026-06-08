@@ -392,6 +392,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "Transitorische                 Zahlungsvorgang                                       Erfolgsvorgang",
       fingerprint: '4e248b7f13a81202',
       confidence: 0.84
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a9.p2.rechnungsabgrenzung-arap-miete',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 2,
+      section: 'Aufgabe 9: Rechnungsabgrenzung (6 Punkte)',
+      fingerprint: '77395d46ad3acc0f',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-3',
+      reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a9.p2.rechnungsabgrenzung-arap-miete',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 2,
+      section: 'Aufgabe 9 – Rechnungsabgrenzung (6 Punkte)',
+      fingerprint: '423c9bcaa928b144',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-3',
+      reviewedAt: '2026-06-09'
     })
   ],
   erfolgsrechnung: [

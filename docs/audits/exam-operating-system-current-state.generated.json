@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08",
+  "generatedAt": "2026-06-09",
   "benchmark": "mikro1",
   "sourceTree": {
     "totalFiles": 693,
@@ -359,9 +359,9 @@
       "concepts": 15,
       "formulaBlocks": 135,
       "officialFormulaCards": 45,
-      "taskFamilies": 46,
-      "sourceGroundedTaskFamilies": 45,
-      "officialTaskSourceFamilies": 2,
+      "taskFamilies": 47,
+      "sourceGroundedTaskFamilies": 46,
+      "officialTaskSourceFamilies": 3,
       "officialDocumentRegistryFamilies": 13,
       "moduleMismatchTaskFamilies": 0,
       "portalTaskBlocks": 56,
@@ -381,7 +381,7 @@
       "conceptsWithoutSourceAnchors": 0,
       "conceptsWithoutSourceRefs": 0,
       "sourceRefs": 12,
-      "sourceAnchors": 34,
+      "sourceAnchors": 36,
       "uniqueSourceFiles": 12,
       "presentSourceFiles": 12,
       "missingSourceFiles": 0,

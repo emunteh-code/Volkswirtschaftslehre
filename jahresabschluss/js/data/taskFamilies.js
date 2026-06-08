@@ -589,6 +589,39 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a9-rechnungsabgrenzung-arap-miete',
+    conceptId: 'rechnungsabgrenzung',
+    title: 'Probeklausur Aufgabe 9: Rechnungsabgrenzung mit ARAP',
+    topic: 'Aktive Rechnungsabgrenzung, Mietvorauszahlung, Periodenaufwand, Buchungssätze',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 9: eine Mietvorauszahlung von 12.000 € am 01.10.t1 für 12 Monate periodengerecht auf t1 und t2 verteilen und die ARAP-Buchungssätze in t1 und t2 angeben. Die Musterlösung bewertet Aufwandsverteilung mit 2 Punkten und Buchungssätze mit 4 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a9.p2.rechnungsabgrenzung-arap-miete',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a9.p2.rechnungsabgrenzung-arap-miete'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Zwölf Monate vollständig t1 zuordnen, obwohl ab 01.10.t1 nur drei Monate in t1 liegen',
+      'Aktive und passive Rechnungsabgrenzung verwechseln',
+      'ARAP nur im Zahlungsjahr buchen und die Auflösung in t2 vergessen',
+      'Aufwandskonto und ARAP im Buchungssatz vertauschen'
+    ],
+    gradingRubric: [
+      'Aufgabe 9 enthält 6 sichtbare Punkte',
+      'Teil a: t1-Aufwand 3.000 € und t2-Aufwand 9.000 €, 2 Punkte',
+      'Teil b: t1-Buchung Zahlung 12.000 € und ARAP-Abgrenzung 9.000 €, danach t2-Auflösung 9.000 €, 4 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 2',
+      task: 'Aufgabe 9',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-08",
+  "generatedAt": "2026-06-09",
   "policy": "No official-task-source promotion without OCR/native text plus human review log.",
   "totals": {
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 29,
+    "officialTaskSourceFamilies": 30,
     "weakPages": 25,
     "taskSignalPages": 989,
     "moduleMismatchDocuments": 1
@@ -46,7 +46,7 @@
     {
       "module": "jahresabschluss",
       "officialTaskDocuments": 13,
-      "officialTaskSourceFamilies": 2,
+      "officialTaskSourceFamilies": 3,
       "documentRegistryFamilies": 13,
       "pageCount": 43,
       "weakPageCount": 0,

@@ -94,6 +94,11 @@ export function studentizeTheoryHtml(html, entry = null) {
   s = s.replace(/<em>\s*platform-added-explanation:\s*<\/em>/gi, "");
   s = s.replace(/<em>\s*source-distilled\s*\/\s*platform-added-explanation:\s*<\/em>[^<]*/gi, "");
   s = s.replace(/<p>\s*<em>\s*source_status:[^<]*<\/em>\s*<\/p>/gi, "");
+  s = s.replace(/<p[^>]*class="[^"]*\bpedagogy-source-note\b[^"]*"[^>]*>[\s\S]*?<\/p>/gi, "");
+  s = s.replace(/<span[^>]*class="[^"]*\bpedagogy-source-note\b[^"]*"[^>]*>[\s\S]*?<\/span>/gi, "");
+  s = s.replace(/<p>\s*<em>\s*platform-added-(?:explanation|drill):\s*[^<]*<\/em>\s*<\/p>/gi, "");
+  s = s.replace(/<p>\s*<em>\s*source-distilled:\s*[^<]*<\/em>\s*<\/p>/gi, "");
+  s = s.replace(/<p>\s*<em>\s*Lern-Checkliste\.?\s*<\/em>\s*<\/p>/gi, "");
   s = s.replace(/<h3>\s*Klausurtransfer\s*\(\s*source-distilled\s*\)\s*<\/h3>/gi, "<h3>Klausurtransfer</h3>");
   s = s.replace(/<span[^>]*class="[^"]*\bplatform-chrome-badge\b[^"]*"[^>]*>[\s\S]*?<\/span>/gi, "");
   s = s.replace(

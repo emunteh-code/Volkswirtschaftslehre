@@ -498,8 +498,7 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
     grouped.orientierung = [
       {
         heading: "",
-        inner: `<p><strong>${escapeHtml(title)}</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>
-<p><em>platform-added-explanation:</em> Orientierungshilfe; fachliche Tiefe in VL-PDFs (Quellen-Tab).</p>`
+        inner: `<p><strong>${escapeHtml(title)}</strong> — Block im Modul einordnen: Voraussetzungen aktivieren, dann Formeln-Tab und Grafik als Brücke zur Aufgabenlogik nutzen.</p>`
       }
     ];
   }
@@ -512,8 +511,7 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
     grouped.mechanismus = [
       {
         heading: "Ablauf",
-        inner: `<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
-<p><em>platform-added-explanation:</em> Generischer Mechanismus-Pfad; konzeptspezifische Kausalität in VL-Folien und Grafik.</p>`
+        inner: `<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>`
       }
     ];
   }
@@ -541,18 +539,23 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
       }
     }
     if (!defInner && Array.isArray(entry.cards) && entry.cards.length) {
-      const items = entry.cards
+      const rows = entry.cards
         .slice(0, 6)
-        .map((c) => {
-          const title = c?.title ? escapeHtml(stripTags(c.title)) : "";
-          const value = c?.value ? escapeHtml(stripTags(c.value)) : "";
-          return title ? `<li><strong>${title}</strong>${value ? ` — ${value}` : ""}</li>` : "";
+        .map((c, index) => {
+          const term = c?.title ? escapeHtml(stripTags(c.title)) : "";
+          const desc = c?.value ? escapeHtml(stripTags(c.value)) : "";
+          if (!term) return "";
+          return `<div class="theory-glossary-row">
+<button type="button" class="theory-glossary-term" onclick="window.__scrollToFormulaCard?.(${index})" aria-label="Zur Formel ${term} springen">${term}</button>
+<p class="theory-glossary-def">${desc || "Siehe Formeln-Tab für Notation und Anwendung."}</p>
+</div>`;
         })
         .filter(Boolean)
         .join("");
-      if (items) {
-        defInner = `<ul>${items}</ul>
-<p><em>source-distilled:</em> Merkpunkte aus Kursmaterial; Details in VL-PDFs (Quellen-Tab).</p>`;
+      if (rows) {
+        defInner = `<p class="theory-glossary-sub">Kerngrößen für diesen Aufgabentyp</p>
+<div class="theory-glossary-rows">${rows}</div>
+<p class="theory-glossary-footer">Notation mit offiziellen Vorlesungsunterlagen abgleichen.</p>`;
       }
     }
     if (defInner) {
@@ -570,8 +573,7 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
       {
         heading: "Standardfehler",
         inner: `<div class="warn-box" data-warning-placement="rail"><strong>Annahmen vergessen:</strong> Verteilung, Regime, Rechtsfolge oder Marktform vor der Rechnung explizit benennen.</div>
-<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>
-<p><em>platform-added-explanation:</em> Generische Prüfungsfallen; konzeptspezifische Fehler stehen in VL-Material.</p>`
+<div class="warn-box" data-warning-placement="rail"><strong>Nur Endergebnis:</strong> Zwischenschritte und ökonomische Deutung sind Klausurpunkte — nicht nur die Zahl am Ende.</div>`
       }
     ];
   }
@@ -586,19 +588,24 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
       {
         heading: "Klausurtransfer",
         inner: `<p><strong>Klausurpfad:</strong> ${escapeHtml(examPath)}</p>
-${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabels)} — Variablen vor Rechnung zuordnen.</p>` : ""}
-<p><em>platform-added-explanation:</em> Prüfungsblock aus Kursverdichtung; Randnotation in offiziellen PDFs prüfen.</p>`
+${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabels)} — Variablen vor Rechnung zuordnen.</p>` : ""}`
       }
     ];
   }
 
   if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben")) && Array.isArray(entry.objectives) && entry.objectives.length) {
-    const items = entry.objectives.map((o) => `<li>${escapeHtml(stripTags(String(o)))}</li>`).join("");
+    const prefixes = ["Ich kann …", "Ich erkenne …", "Ich kenne …"];
+    const items = entry.objectives.slice(0, 5).map((o, i) => {
+      const text = stripTags(String(o));
+      const prefix = prefixes[i % prefixes.length];
+      const line = /^(ich\s+(kann|erkenne|kenne|weiß))/i.test(text) ? text : `${prefix.replace(" …", "")} ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+      return `<li>${escapeHtml(line)}</li>`;
+    }).join("");
     grouped.vor_aufgaben = [
       {
         heading: "Bereitschaft prüfen",
-        inner: `<ul class="theory-objectives-checklist">${items}</ul>
-<p>Vor den Aufgaben: jede Formel verbal deuten können; Grafik-Skizze mit Achsenbeschriftung parat haben.</p>`
+        inner: `<ul class="readiness-checklist">${items}</ul>
+<p class="readiness-checklist__footer">Vor den Aufgaben: jede Formel verbal deuten können; Grafik-Skizze mit Achsenbeschriftung parat haben.</p>`
       }
     ];
   } else if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben"))) {
@@ -606,12 +613,11 @@ ${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabel
       {
         heading: "Vor den Aufgaben",
         inner: `<ul class="readiness-checklist">
-<li>Kann ich die Kerngrößen benennen, ohne ins Formelblatt zu schauen?</li>
-<li>Kann ich die zentrale Relation in einem Satz erklären?</li>
-<li>Kann ich den ersten Rechenschritt bei einer Standardaufgabe skizzieren?</li>
-<li>Habe ich typische Fehler aus „Häufige Fehler" aktiv geprüft?</li>
-</ul>
-<p><em>platform-added-explanation:</em> Bereitschaftscheck vor dem Aufgaben-Tab.</p>`
+<li>Ich kann die Kerngrößen benennen, ohne ins Formelblatt zu schauen.</li>
+<li>Ich erkenne den Aufgabentyp an Stichworten und Datenlayout.</li>
+<li>Ich kenne den ersten Rechenschritt bei einer Standardaufgabe.</li>
+<li>Ich habe typische Fehler aus „Häufige Fehler" aktiv geprüft.</li>
+</ul>`
       }
     ];
   }

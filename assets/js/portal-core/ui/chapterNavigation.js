@@ -1,6 +1,24 @@
 /**
  * Shared sidebar navigation (category-local numbering avoids global "Konzept" gaps).
  */
+export function resolveLessonNavStatus(entry) {
+  if (!entry || typeof entry !== "object") return "not-started";
+  const total = (entry.correct || 0) + (entry.wrong || 0);
+  if (total > 0) {
+    const accuracy = Math.round(((entry.correct || 0) / total) * 100);
+    if (accuracy >= 80) return "completed";
+    return "in-progress";
+  }
+  if ((entry.views || 0) >= 1 || (entry.solved || 0) >= 1) return "in-progress";
+  return "not-started";
+}
+
+const STATUS_ARIA = Object.freeze({
+  "not-started": "Noch nicht begonnen",
+  "in-progress": "In Bearbeitung",
+  completed: "Abgeschlossen"
+});
+
 export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
   function buildNav(onNavigate) {
     const cats = {};
@@ -14,20 +32,24 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
     Object.entries(cats).forEach(([cat, items]) => {
       const sec = document.createElement("div");
       sec.className = "nav-section";
-      sec.innerHTML = `<div class="nav-section-title">${cat}</div>`;
+      sec.innerHTML = `<div class="nav-section-title">
+<span class="nav-section-title__text">${cat}</span>
+<span class="nav-section-title__count" aria-label="${items.length} Lektionen">${items.length}</span>
+</div>`;
       items.forEach((item, localIdx) => {
         const displayNum = localIdx + 1;
         const el = document.createElement("div");
         el.className = "nav-item";
         el.id = "nav-" + item.id;
         el.dataset.id = item.id;
+        el.dataset.status = "not-started";
         el.setAttribute("role", "button");
         el.setAttribute("tabindex", "0");
         el.setAttribute(
           "aria-label",
-          `${item.title} (${cat}, Lektion ${displayNum}/${items.length})`
+          `${item.title} (${cat}, Lektion ${displayNum}/${items.length}, ${STATUS_ARIA["not-started"]})`
         );
-        el.innerHTML = `<span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span>${item.title}</span>`;
+        el.innerHTML = `<span class="nav-item__marker" aria-hidden="true"></span><span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span class="nav-item__title">${item.title}</span><span class="nav-item__aside"></span>`;
         el.onclick = () => onNavigate(item.id);
         el.onkeydown = (e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -64,42 +86,39 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
     const now = Date.now();
     document.querySelectorAll(".nav-item[data-id]").forEach((el) => {
       const id = el.dataset.id;
-      let badge = el.querySelector(".mastery");
-      if (!badge) {
-        badge = document.createElement("span");
-        badge.className = "mastery";
-        el.appendChild(badge);
-      }
-      const oldDot = el.querySelector(".nav-due-dot");
-      if (oldDot) oldDot.remove();
+      el.querySelector(".mastery")?.remove();
+      el.querySelector(".nav-due-dot")?.remove();
+
       const entry = p[id];
-      if (entry) {
-        const total = (entry.correct || 0) + (entry.wrong || 0);
-        const acc = total > 0 ? Math.round(((entry.correct || 0) / total) * 100) : null;
-        if (acc !== null && acc >= 80) {
-          badge.textContent = acc + "%";
-          badge.className = "mastery done";
-        } else if (acc !== null) {
-          badge.textContent = acc + "%";
-          badge.className = "mastery partial";
-        } else if (entry.views >= 1) {
-          badge.textContent = "·";
-          badge.className = "mastery partial";
-        } else {
-          badge.textContent = "";
-          badge.className = "mastery";
+      const status = resolveLessonNavStatus(entry);
+      el.dataset.status = status;
+
+      const titleEl = el.querySelector(".nav-item__title");
+      const catSection = el.closest(".nav-section");
+      const catLabel = catSection?.querySelector(".nav-section-title__text")?.textContent?.trim() || "";
+      const numLabel = el.querySelector(".num")?.textContent?.trim() || "";
+      const sectionCount = catSection?.querySelectorAll(".nav-item").length || "";
+      const title = titleEl?.textContent?.trim() || "";
+      const statusLabel = STATUS_ARIA[status] || STATUS_ARIA["not-started"];
+      el.setAttribute(
+        "aria-label",
+        sectionCount && numLabel
+          ? `${title} (${catLabel}, Lektion ${numLabel}/${sectionCount}, ${statusLabel})`
+          : `${title} (${statusLabel})`
+      );
+
+      const aside = el.querySelector(".nav-item__aside");
+      if (aside) {
+        aside.innerHTML = "";
+        const srsCard = srs[id];
+        if (srsCard && srsCard.due <= now) {
+          const srsBadge = document.createElement("span");
+          srsBadge.className = "nav-item__srs badge badge--meta";
+          srsBadge.textContent = "Wdh.";
+          srsBadge.title = "Wiederholung fällig";
+          srsBadge.setAttribute("aria-label", "Wiederholung fällig");
+          aside.appendChild(srsBadge);
         }
-      } else {
-        badge.textContent = "";
-        badge.className = "mastery";
-      }
-      const srsCard = srs[id];
-      if (srsCard && srsCard.due <= now) {
-        const dot = document.createElement("span");
-        dot.className = "nav-due-dot";
-        dot.title = "Wiederholung fällig";
-        dot.setAttribute("aria-label", "Wiederholung fällig");
-        el.appendChild(dot);
       }
     });
   }

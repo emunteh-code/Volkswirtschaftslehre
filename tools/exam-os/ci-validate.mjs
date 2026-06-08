@@ -109,7 +109,8 @@ async function main() {
     'generate-vl-layers.mjs',
     'check-portal-shell.mjs',
     'check-math-literals.mjs',
-    'check-right-rail.mjs'
+    'check-right-rail.mjs',
+    'check-learner-ui-literals.mjs'
   ];
   for (const t of tools) syntaxCheck(path.join(repoRoot, 'tools/exam-os', t));
 
@@ -130,6 +131,12 @@ async function main() {
     stdio: 'inherit'
   });
   if (railCheck.status !== 0) ok = false;
+
+  const learnerUiCheck = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os/check-learner-ui-literals.mjs')], {
+    encoding: 'utf8',
+    stdio: 'inherit'
+  });
+  if (learnerUiCheck.status !== 0) ok = false;
 
   for (const slug of MODULES) {
     await validateModule(slug);

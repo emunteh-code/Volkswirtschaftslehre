@@ -1206,16 +1206,20 @@ ${detailBody ? `<details class="klausur-action-card__detail"${index === 0 ? " op
 
   function toggleReveal(solutionId, buttonId) {
     const solution = document.getElementById(solutionId);
-    const button = document.getElementById(buttonId);
+    const button = typeof buttonId === "string" ? document.getElementById(buttonId) : buttonId;
     if (!solution) return;
-    const isVisible = solution.classList.toggle("show");
-    solution.setAttribute("aria-expanded", isVisible ? "true" : "false");
-    if (button) {
+    const forwardOnly = button?.dataset?.forwardOnly === "1";
+    const isVisible = solution.classList.contains("show");
+    if (forwardOnly && isVisible) return;
+    const nowVisible = solution.classList.toggle("show");
+    solution.setAttribute("aria-expanded", nowVisible ? "true" : "false");
+    if (button?.dataset && !forwardOnly) {
       const openLabel = button.dataset.openLabel || "Lösung verbergen";
       const closedLabel = button.dataset.closedLabel || "Lösung anzeigen";
-      button.textContent = isVisible ? openLabel : closedLabel;
+      button.textContent = nowVisible ? openLabel : closedLabel;
     }
-    if (isVisible) renderMath(solution);
+    if (button) button.setAttribute("aria-expanded", nowVisible ? "true" : "false");
+    if (nowVisible) renderMath(solution);
   }
 
   function toggleSolution(idx) {

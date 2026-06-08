@@ -110,7 +110,7 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
     const railWarnings = [];
 
     Array.from(
-      root.querySelectorAll(".source-boundary-notice, .platform-added-banner, .platform-chrome-badge")
+      root.querySelectorAll(".source-boundary-notice, .platform-added-banner, .platform-chrome-badge, .pedagogy-source-note, .mastery-checkpoint__note")
     ).forEach((node) => node.remove());
 
     Array.from(root.querySelectorAll(".warn-box")).forEach((warningNode) => {

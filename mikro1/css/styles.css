@@ -379,23 +379,7 @@ body {
 }
 .nav-item.active .num { color: var(--nav-active-num); opacity: 0.9; }
 
-/* Mastery badges */
-.nav-item .mastery {
-  margin-left: auto;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 5px;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-.nav-item .mastery.done    { background: rgba(76,175,124,0.12); color: var(--semantic-green); }
-.nav-item .mastery.partial { background: rgba(74,144,217,0.10); color: var(--accent2); }
-.nav-due-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent3);
-  margin-left: auto; flex-shrink: 0;
-}
+/* Sidebar lesson status — fleet rules in premium-refinement.css */
 
 /* Nav animation delays */
 .nav-section:nth-child(1) .nav-item { animation-delay: 0.04s; }

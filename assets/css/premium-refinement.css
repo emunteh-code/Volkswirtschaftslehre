@@ -7832,11 +7832,36 @@ body.light-mode:not([data-page="landing"]) {
 }
 
 #sidebar .nav-section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs, 8px);
   font-size: var(--type-micro, 0.6875rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  padding: var(--space-sm, 12px) 14px var(--space-xs, 8px);
+  padding: var(--space-sm, 12px) 14px var(--space-2xs, 4px) 10px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#sidebar .nav-section-title__count {
+  font-size: var(--type-micro, 0.6875rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: color-mix(in srgb, var(--muted) 72%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+#sidebar .nav-section {
+  padding: 2px 0 var(--space-xs, 8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+}
+
+#sidebar .nav-section:last-child {
+  border-bottom: none;
+  padding-bottom: var(--space-sm, 12px);
 }
 
 /* ── Component: Badge (.Badge) ───────────────────────────── */
@@ -8106,7 +8131,6 @@ body:not(.light-mode) #content .formula-card {
 .practice-platform-badge,
 .home-action-sim-badge,
 #sidebar .nav-badge,
-#sidebar .nav-item .mastery,
 .lp-tile-status.started {
   display: inline-flex;
   align-items: center;
@@ -8145,17 +8169,10 @@ body:not(.light-mode) #content .formula-card {
   border-color: color-mix(in srgb, var(--border) 85%, transparent);
 }
 
-.lp-tile-status.started,
-#sidebar .nav-item .mastery.partial {
+.lp-tile-status.started {
   color: var(--badge-status-accent-fg);
   background: var(--badge-status-accent-bg);
   border-color: var(--badge-status-accent-border);
-}
-
-#sidebar .nav-item .mastery.done {
-  color: var(--semantic-green);
-  background: color-mix(in srgb, var(--semantic-green) 10%, var(--card) 90%);
-  border-color: color-mix(in srgb, var(--semantic-green) 22%, var(--border) 78%);
 }
 
 .badge--action,
@@ -8210,7 +8227,15 @@ body:not(.light-mode) #content .formula-card {
 
 /* ── Left sidebar simplification ──────────────────────────── */
 #sidebar .nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs, 8px);
+  min-height: 36px;
+  padding: 7px 12px 7px 10px;
+  margin-left: 4px;
   border-radius: 0 var(--r-sm, 8px) var(--r-sm, 8px) 0;
+  font-weight: 500;
+  line-height: var(--leading-snug, 1.35);
   transition:
     background var(--duration-hover) var(--ease-premium),
     color var(--duration-hover) var(--ease-premium),
@@ -8222,15 +8247,100 @@ body:not(.light-mode) #content .formula-card {
   color: var(--text);
 }
 
-#sidebar .nav-item .num {
+#sidebar .nav-item.active {
+  font-weight: 600;
+}
+
+#sidebar .nav-item__title {
+  flex: 1;
+  min-width: 0;
+}
+
+#sidebar .nav-item__aside {
+  flex-shrink: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+#sidebar .nav-item__srs.badge--meta {
+  padding: 1px 6px;
   font-size: var(--type-micro, 0.6875rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--semantic-amber, #d97706);
+  background: color-mix(in srgb, var(--semantic-amber, #d97706) 8%, var(--card) 92%);
+  border: 1px solid color-mix(in srgb, var(--semantic-amber, #d97706) 24%, var(--border) 76%);
+}
+
+#sidebar .nav-item .num {
+  flex-shrink: 0;
+  min-width: 1.25rem;
+  font-size: var(--type-micro, 0.6875rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   color: var(--muted);
-  opacity: 0.75;
+  opacity: 0.8;
+  line-height: 1;
 }
 
 #sidebar .nav-item.active .num {
   color: var(--accent);
-  opacity: 0.85;
+  opacity: 0.9;
+}
+
+#sidebar .nav-item__marker {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+#sidebar .nav-item[data-status="not-started"]:not(.active) .nav-item__marker {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid color-mix(in srgb, var(--muted) 38%, var(--border) 62%);
+  border-radius: 50%;
+  background: transparent;
+}
+
+#sidebar .nav-item[data-status="in-progress"]:not(.active) .nav-item__marker {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid color-mix(in srgb, var(--muted) 28%, var(--border) 72%);
+  border-top-color: var(--accent);
+  border-right-color: var(--accent);
+  border-radius: 50%;
+  background: transparent;
+}
+
+#sidebar .nav-item[data-status="completed"]:not(.active) .nav-item__marker {
+  width: auto;
+  height: auto;
+  color: var(--semantic-green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+#sidebar .nav-item[data-status="completed"]:not(.active) .nav-item__marker::before {
+  content: "✓";
+}
+
+#sidebar .nav-item.active .nav-item__marker {
+  width: 8px;
+  height: 8px;
+  border: none;
+  border-radius: var(--r-pill, 999px);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+#sidebar .nav-item.active .nav-item__marker::before {
+  content: none;
 }
 
 /* ── Homepage grid rhythm ─────────────────────────────────── */
@@ -8452,20 +8562,6 @@ body.light-mode #shortcutHint .sc-key {
   text-decoration: underline;
 }
 
-.tab-workflow-hint {
-  margin: 0;
-  padding: 6px var(--tab-row-pad-x, 16px) 8px;
-  font-size: var(--type-xs, 0.75rem);
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--surface) 92%, var(--bg) 8%);
-}
-
-.tab-workflow-hint__label {
-  font-weight: 600;
-  margin-right: 6px;
-}
-
 .lesson-outcomes {
   margin: 0 0 20px;
   padding: 14px 16px;
@@ -8513,6 +8609,137 @@ body.light-mode #shortcutHint .sc-key {
   line-height: var(--leading-normal, 1.6);
 }
 
+.mastery-checkpoint__rows {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mastery-checkpoint__row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+.mastery-checkpoint__label,
+.exam-recognition__label {
+  margin: 0;
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mastery-checkpoint__prompt,
+.exam-recognition__value {
+  margin: 0;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.55);
+}
+
+.exam-recognition__dl {
+  display: grid;
+  gap: 10px;
+}
+
+.exam-recognition__row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+.exam-recognition__row--core .exam-recognition__value {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.staged-reveal {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm, 8px);
+  font-size: var(--type-sm, 0.875rem);
+}
+
+.staged-reveal[hidden] {
+  display: none !important;
+}
+
+.staged-reveal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.staged-reveal__label {
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.staged-reveal__body {
+  line-height: var(--leading-normal, 1.55);
+}
+
+.staged-reveal__body p {
+  margin: 0;
+}
+
+.staged-reveal__checklist {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.staged-reveal__collapse.btn--xs {
+  padding: 2px 8px;
+  font-size: var(--type-xs, 0.6875rem);
+  min-height: 0;
+}
+
+.staged-reveal--hint {
+  border-left: 3px solid color-mix(in srgb, var(--accent2) 55%, var(--border) 45%);
+  background: color-mix(in srgb, var(--accent2) 6%, var(--surface2) 94%);
+}
+
+.staged-reveal--approach {
+  border-left: 3px solid color-mix(in srgb, var(--accent) 50%, var(--border) 50%);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface2) 95%);
+}
+
+.staged-reveal--step {
+  border-left: 3px solid color-mix(in srgb, var(--success, #3ecf8e) 45%, var(--border) 55%);
+  background: color-mix(in srgb, var(--success, #3ecf8e) 5%, var(--surface2) 95%);
+}
+
+.staged-reveal--fehlercheck {
+  border-left: 3px solid color-mix(in srgb, var(--warning, #e8a838) 50%, var(--border) 50%);
+  background: color-mix(in srgb, var(--warning, #e8a838) 6%, var(--surface2) 94%);
+}
+
+.staged-reveal--solution.show {
+  border-left: 3px solid color-mix(in srgb, var(--accent) 65%, var(--border) 35%);
+  background: color-mix(in srgb, var(--accent) 4%, var(--surface2) 96%);
+}
+
+.readiness-checklist {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.6);
+}
+
+.readiness-checklist__footer {
+  margin: 10px 0 0;
+  font-size: var(--type-xs, 0.75rem);
+  color: var(--muted);
+}
+
 .review-controls {
   display: flex;
   flex-wrap: wrap;
@@ -8543,20 +8770,8 @@ body.light-mode #shortcutHint .sc-key {
   gap: 8px;
 }
 
-.staged-reveal {
-  margin-top: 10px;
-  padding: 10px 12px;
-  border-left: 3px solid var(--accent);
-  background: color-mix(in srgb, var(--surface2) 55%, transparent);
-  border-radius: 0 var(--r-sm, 8px) var(--r-sm, 8px) 0;
-  font-size: var(--type-sm, 0.875rem);
-}
-
-.formula-pedagogy-extras {
-  margin-top: 10px;
-  font-size: var(--type-sm, 0.875rem);
-  line-height: var(--leading-normal, 1.55);
-  color: var(--muted);
+.staged-reveal--solution.show {
+  display: grid;
 }
 
 .density-intuition-diagram {
@@ -8661,8 +8876,8 @@ body.light-mode #shortcutHint .sc-key {
 /* ── Formula reference cards ─────────────────────────────── */
 #content .formula-ref-card {
   display: grid;
-  gap: 10px;
-  padding: 14px 16px 12px;
+  gap: 6px;
+  padding: 12px 14px 10px;
   border-radius: 14px;
   border: 1px solid color-mix(in srgb, var(--border) 88%, var(--accent) 12%);
   background: linear-gradient(

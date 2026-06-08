@@ -1,6 +1,6 @@
 /**
  * Fleet learner-effectiveness helpers (Pass 1).
- * platform-added-explanation where content is synthesized.
+ * platform-added-explanation where content is synthesized (author-only; not shown to learners).
  */
 
 import { escapeHtml } from "../ui/semanticContent.js";
@@ -14,11 +14,18 @@ export const LEARNER_LABELS = Object.freeze({
   pruefungsvorbereitung: "Klausurerkennung"
 });
 
-export function renderTabWorkflowHint() {
-  return `<p class="tab-workflow-hint" id="tabWorkflowHint" role="note" hidden>
-<span class="tab-workflow-hint__label">Empfohlener Ablauf:</span>
-Theorie lesen → Formeln sichern → Aufgaben lösen → Quellen prüfen
-</p>`;
+function collapseBtn(panelId, label) {
+  return `<button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__closeReveal('${panelId}')" aria-label="${escapeHtml(label)} schließen">Schließen</button>`;
+}
+
+function stagedPanel(id, kind, label, bodyHtml) {
+  return `<div class="staged-reveal staged-reveal--${kind}" id="${id}" hidden>
+<div class="staged-reveal__head">
+<span class="staged-reveal__label">${escapeHtml(label)}</span>
+${collapseBtn(id, label)}
+</div>
+<div class="staged-reveal__body">${bodyHtml}</div>
+</div>`;
 }
 
 /**
@@ -36,11 +43,24 @@ export function renderLessonOutcomes(entry, chapterTitle = "") {
     .map((o) => (verbs.test(o) ? o : `erklären: ${o}`));
 
   if (!items.length && chapterTitle) {
+    const formulaLabels = (entry?.formeln || [])
+      .slice(0, 3)
+      .map((f) => (f?.label ? String(f.label).trim() : ""))
+      .filter(Boolean);
+    const title = chapterTitle.trim();
     items = [
-      `erklären, worin das Kernproblem von „${chapterTitle}" besteht`,
-      "die zentrale Formel oder Methode der Aufgabe zuordnen",
-      "typische Klausurfehler vor der Rechnung benennen"
+      `erklären, worin das Kernproblem von „${title}" besteht`,
+      formulaLabels.length
+        ? `die Größen ${formulaLabels.join(", ")} in Klausuraufgaben zuordnen`
+        : "die zentrale Formel oder Methode der Aufgabe zuordnen",
+      `typische Klausurfehler zu „${title}" vor der Rechnung benennen`
     ];
+    if (entry?.motivation) {
+      const snippet = String(entry.motivation).trim().slice(0, 80);
+      if (snippet) {
+        items.push(`erkennen, wann Stichworte wie „${snippet.replace(/[.!?…]+$/, "")}…" auf dieses Konzept hindeuten`);
+      }
+    }
   }
   if (!items.length) return "";
 
@@ -48,7 +68,6 @@ export function renderLessonOutcomes(entry, chapterTitle = "") {
   return `<aside class="lesson-outcomes" role="region" aria-labelledby="lesson-outcomes-h">
 <h2 class="lesson-outcomes__title" id="lesson-outcomes-h">Nach dieser Lektion kannst du …</h2>
 <ul class="lesson-outcomes__list">${lis}</ul>
-<p class="pedagogy-source-note"><em>platform-added-explanation:</em> Lernziele aus Modulmetadaten und Kursstruktur verdichtet.</p>
 </aside>`;
 }
 
@@ -60,7 +79,6 @@ export function renderSourceUsePedagogy() {
 <li>Offizielle Definitionen und Randfälle nachlesen</li>
 <li>Bei Widersprüchen: ILIAS-PDF hat Vorrang</li>
 </ul>
-<p class="pedagogy-source-note"><em>platform-added-explanation:</em> Quellen-Nutzungsregel des Portals.</p>
 </details>`;
 }
 
@@ -75,16 +93,27 @@ export function renderMasteryCheckpoint(entry, conceptId, chapterTitle = "") {
   const title = escapeHtml(chapterTitle || "dieses Konzept");
   return `<section class="mastery-checkpoint" role="region" aria-labelledby="mastery-check-h">
 <h2 class="mastery-checkpoint__title" id="mastery-check-h">Mastery Check</h2>
-<ol class="mastery-checkpoint__list">
-<li><strong>Konzept:</strong> Erkläre in einem Satz, wann ${title} in der Klausur relevant ist.</li>
-<li><strong>Formel:</strong> Welche Größe liefert „${escapeHtml(formulaLabel)}" — ohne Rechnung?</li>
-<li><strong>Anwendung:</strong> Nenne den ersten sinnvollen Rechenschritt bei einer Standardaufgabe.</li>
-<li><strong>Fehler:</strong> Welche Annahme vergisst du am häufigsten?</li>
-</ol>
+<div class="mastery-checkpoint__rows">
+<div class="mastery-checkpoint__row">
+<span class="mastery-checkpoint__label">Konzept</span>
+<p class="mastery-checkpoint__prompt">Erkläre in einem Satz, wann ${title} in der Klausur relevant ist.</p>
+</div>
+<div class="mastery-checkpoint__row">
+<span class="mastery-checkpoint__label">Formel</span>
+<p class="mastery-checkpoint__prompt">Welche Größe liefert „${escapeHtml(formulaLabel)}" — ohne Rechnung?</p>
+</div>
+<div class="mastery-checkpoint__row">
+<span class="mastery-checkpoint__label">Anwendung</span>
+<p class="mastery-checkpoint__prompt">Nenne den ersten sinnvollen Rechenschritt bei einer Standardaufgabe.</p>
+</div>
+<div class="mastery-checkpoint__row">
+<span class="mastery-checkpoint__label">Fehler</span>
+<p class="mastery-checkpoint__prompt">Welche Annahme vergisst du am häufigsten?</p>
+</div>
+</div>
 <p class="mastery-checkpoint__cta">
 <button type="button" class="btn btn--soft-primary mastery-checkpoint__link" onclick="window.__switchTab('aufgaben')">Zum Aufgaben-Tab →</button>
 </p>
-<p class="mastery-checkpoint__note"><em>platform-added-drill:</em> Selbsttest vor den Aufgaben.</p>
 </section>`;
 }
 
@@ -96,7 +125,6 @@ export function renderConfidenceCheckpoint(conceptId) {
 <div class="confidence-checkpoint__scale" data-concept-id="${id}">
 ${[0, 1, 2, 3].map((n) => `<button type="button" class="confidence-btn" data-level="${n}" aria-label="Stufe ${n}">${n}</button>`).join("")}
 </div>
-<p class="pedagogy-source-note"><em>platform-added-drill:</em> Selbsteinschätzung für Wiederholungsplanung.</p>
 </section>`;
 }
 
@@ -106,7 +134,6 @@ export function renderReviewControls(conceptId) {
 <button type="button" class="review-control-btn" data-review="unsure">Unsicher</button>
 <button type="button" class="review-control-btn" data-review="repeat">Wiederholen</button>
 <button type="button" class="review-control-btn" data-review="mastered">Beherrscht</button>
-<span class="pedagogy-source-note review-controls__note"><em>platform-added-drill:</em> Wiederholungsstatus im Browser speichern.</span>
 </div>`;
 }
 
@@ -121,10 +148,9 @@ export function renderFehlerChecklist(warnings = []) {
     const prompt = title.endsWith("?") ? title : `Habe ich „${title}" beachtet?`;
     return `<li><label class="fehler-check-item"><input type="checkbox" /> ${escapeHtml(prompt)}</label></li>`;
   });
-return `<section class="fehler-checklist" role="region" aria-labelledby="fehler-check-h">
+  return `<section class="fehler-checklist" role="region" aria-labelledby="fehler-check-h">
 <h3 class="fehler-checklist__title" id="fehler-check-h">Selbsttest vor der Klausur</h3>
 <ul class="fehler-checklist__list">${items.join("")}</ul>
-<p class="pedagogy-source-note"><em>platform-added-drill:</em> Aus Warnhinweisen als aktive Checkliste abgeleitet.</p>
 </section>`;
 }
 
@@ -145,17 +171,27 @@ export function renderExamRecognitionBlock(chapter, entry, intuition = null) {
   return `<section class="exam-recognition" role="region" aria-labelledby="exam-rec-h">
 <h3 class="exam-recognition__title" id="exam-rec-h">${LEARNER_LABELS.pruefungsvorbereitung}</h3>
 <dl class="exam-recognition__dl">
-<dt>Woran erkennst du den Aufgabentyp?</dt>
-<dd>Stichworte zu „${title}" in Aufgabenstellung oder Datenlayout.</dd>
-<dt>Erste Entscheidung</dt>
-<dd>Modell/Annahme benennen, dann ${method} zuordnen.</dd>
-<dt>Erster Rechenschritt</dt>
-<dd>Größen und Einheiten notieren; $H_0$ / Notation aus der VL fixieren.</dd>
-<dt>Häufige Falle</dt>
-<dd>Stichprobe und Population, bzw. Parameter und Schätzer, nicht vermischen.</dd>
+<div class="exam-recognition__row">
+<dt class="exam-recognition__label">Erkennen</dt>
+<dd class="exam-recognition__value">Stichworte zu „${title}" in Aufgabenstellung oder Datenlayout.</dd>
+</div>
+<div class="exam-recognition__row">
+<dt class="exam-recognition__label">Erste Entscheidung</dt>
+<dd class="exam-recognition__value">Modell/Annahme benennen, dann ${method} zuordnen.</dd>
+</div>
+<div class="exam-recognition__row">
+<dt class="exam-recognition__label">Erster Rechenschritt</dt>
+<dd class="exam-recognition__value">Größen und Einheiten notieren; $H_0$ / Notation aus der VL fixieren.</dd>
+</div>
+<div class="exam-recognition__row">
+<dt class="exam-recognition__label">Häufige Falle</dt>
+<dd class="exam-recognition__value">Stichprobe und Population, bzw. Parameter und Schätzer, nicht vermischen.</dd>
+</div>
+${core ? `<div class="exam-recognition__row exam-recognition__row--core">
+<dt class="exam-recognition__label">Kernsatz</dt>
+<dd class="exam-recognition__value">${core}</dd>
+</div>` : ""}
 </dl>
-${core ? `<p class="exam-recognition__core"><strong>Kernsatz:</strong> ${core}</p>` : ""}
-<p class="exam-recognition__note"><em>platform-added-explanation:</em> Klausurerkennung aus Konzeptmetadaten.</p>
 </section>`;
 }
 
@@ -184,9 +220,11 @@ export function renderMicroRetrievalCheck(question, answer) {
   const id = `mc_${Math.random().toString(36).slice(2, 9)}`;
   return `<div class="micro-retrieval-check">
 <p class="micro-retrieval-check__q">${q}</p>
-<button type="button" class="btn btn--soft-primary micro-retrieval-check__btn" aria-expanded="false" aria-controls="${id}" onclick="window.__toggleMicroCheck('${id}', this)">Antwort prüfen</button>
-<div class="micro-retrieval-check__a" id="${id}" hidden>${a}</div>
-<p class="pedagogy-source-note"><em>platform-added-drill:</em> Abrufcheck vor dem Weiterlesen.</p>
+<button type="button" class="btn btn--soft-primary micro-retrieval-check__btn" data-forward-only="1" aria-expanded="false" aria-controls="${id}" onclick="window.__toggleReveal('${id}', this)">Antwort prüfen</button>
+<div class="micro-retrieval-check__a" id="${id}" hidden>
+${collapseBtn(id, "Antwort")}
+<p>${a}</p>
+</div>
 </div>`;
 }
 
@@ -211,15 +249,12 @@ export function renderStagedPracticeCard({
   const errId = `err_${idx}`;
 
   const firstStep = steps[0]?.text ? escapeHtml(steps[0].text) : "Ersten Lösungsschritt skizzieren.";
-  const hintBtn = hint
-    ? `<button type="button" class="btn btn--soft-primary" onclick="window.__toggleReveal('${hintId}', this)" data-closed-label="Hinweis anzeigen" data-open-label="Hinweis verbergen">Hinweis anzeigen</button>`
-    : "";
-  const approachBtn = steps.length
-    ? `<button type="button" class="btn btn--soft-primary" onclick="window.__toggleReveal('${approachId}', this)" data-closed-label="Ansatz anzeigen" data-open-label="Ansatz verbergen">Ansatz anzeigen</button>`
-    : "";
-  const stepBtn = steps.length
-    ? `<button type="button" class="btn btn--soft-primary" onclick="window.__toggleReveal('${stepId}', this)" data-closed-label="Nächster Schritt" data-open-label="Schritt verbergen">Nächster Schritt</button>`
-    : "";
+  const forwardBtn = (panelId, text, variant = "soft-primary") =>
+    `<button type="button" class="btn btn--${variant}" data-forward-only="1" onclick="window.__toggleReveal('${panelId}', this)" aria-controls="${panelId}">${text}</button>`;
+
+  const hintBtn = hint ? forwardBtn(hintId, "Hinweis anzeigen") : "";
+  const approachBtn = steps.length ? forwardBtn(approachId, "Ansatz anzeigen") : "";
+  const stepBtn = steps.length ? forwardBtn(stepId, "Nächster Schritt") : "";
 
   const similarBtn = hasSimilarTask
     ? `<button type="button" class="btn btn--ghost" onclick="window.__scrollToSimilarTask(${idx + 1})">Ähnliche Aufgabe</button>`
@@ -232,22 +267,30 @@ export function renderStagedPracticeCard({
 ${hintBtn}
 ${approachBtn}
 ${stepBtn}
-<button type="button" class="btn btn--soft-primary" id="solBtn_${idx}" data-closed-label="Vollständige Lösung" data-open-label="Lösung verbergen" onclick="window.__toggleSolution(${idx})">Vollständige Lösung</button>
-<button type="button" class="btn btn--ghost" onclick="window.__toggleReveal('${errId}', this)" data-closed-label="Fehlercheck" data-open-label="Fehlercheck schließen">Fehlercheck</button>
+<button type="button" class="btn btn--soft-primary" id="solBtn_${idx}" data-forward-only="1" onclick="window.__toggleSolution(${idx})">Lösung prüfen</button>
+${forwardBtn(errId, "Fehlercheck", "ghost")}
 ${similarBtn}
 </div>
-${hint ? `<div class="staged-reveal" id="${hintId}" hidden><strong>Hinweis:</strong> ${escapeHtml(hint)}</div>` : ""}
-${steps.length ? `<div class="staged-reveal" id="${approachId}" hidden><strong>Ansatz:</strong> Zielgröße benennen, dann Formel aus dem Formeln-Tab zuordnen.</div>` : ""}
-${steps.length ? `<div class="staged-reveal" id="${stepId}" hidden><strong>Schritt 1:</strong> ${firstStep}</div>` : ""}
-<div class="staged-reveal fehler-check-inline" id="${errId}" hidden>
-<ul>
+${hint ? stagedPanel(hintId, "hint", "Hinweis", `<p>${escapeHtml(hint)}</p>`) : ""}
+${steps.length ? stagedPanel(approachId, "approach", "Ansatz", "<p>Zielgröße benennen, dann Formel aus dem Formeln-Tab zuordnen.</p>") : ""}
+${steps.length ? stagedPanel(stepId, "step", "Schritt 1", `<p>${firstStep}</p>`) : ""}
+${stagedPanel(
+  errId,
+  "fehlercheck",
+  "Selbstcheck vor der Abgabe",
+  `<ul class="staged-reveal__checklist">
 <li>Habe ich die richtige Formel/Methode gewählt?</li>
 <li>Sind Einheiten und Stichprobengröße konsistent?</li>
 <li>Habe ich Annahmen (Verteilung, Unabhängigkeit) genannt?</li>
-</ul>
-<p class="pedagogy-source-note"><em>platform-added-drill:</em> Generischer Fehlercheck, nicht offizielle Lösung.</p>
+</ul>`
+)}
+<div class="solution-block staged-reveal staged-reveal--solution" id="${solId}" aria-expanded="false">
+<div class="staged-reveal__head">
+<span class="staged-reveal__label">Lösung</span>
+<button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__toggleSolution(${idx})" aria-label="Lösung schließen">Schließen</button>
 </div>
-<div class="solution-block" id="${solId}" aria-expanded="false">${answerMarkupFull || `<p>${escapeHtml(result || "Musterlösung im Modul ergänzen.")}</p>`}</div>
+<div class="staged-reveal__body">${answerMarkupFull || `<p>${escapeHtml(result || "Musterlösung im Modul ergänzen.")}</p>`}</div>
+</div>
 </div>`;
 }
 

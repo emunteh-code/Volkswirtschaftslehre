@@ -134,36 +134,28 @@ export function createPortalApp({
     });
   }
 
-  function ensureTabWorkflowHint() {
-    const tabRow = document.getElementById("tabRow");
-    if (!tabRow || document.getElementById("tabWorkflowHint")) return;
-    const hint = document.createElement("p");
-    hint.id = "tabWorkflowHint";
-    hint.className = "tab-workflow-hint";
-    hint.setAttribute("role", "note");
-    hint.hidden = true;
-    hint.innerHTML =
-      '<span class="tab-workflow-hint__label">Empfohlener Ablauf:</span> Theorie lesen → Formeln sichern → Aufgaben lösen → Quellen prüfen';
-    tabRow.insertAdjacentElement("afterend", hint);
-  }
-
-  function setTabWorkflowVisible(visible) {
-    const hint = document.getElementById("tabWorkflowHint");
-    if (hint) hint.hidden = !visible;
-  }
-
   function toggleReveal(id, button) {
     const el = document.getElementById(id);
     if (!el) return;
+    const forwardOnly = button?.dataset?.forwardOnly === "1";
+    if (forwardOnly && !el.hidden) return;
     const show = el.hidden;
     el.hidden = !show;
-    if (button?.dataset) {
+    if (button?.dataset && !forwardOnly) {
       const openLabel = button.dataset.openLabel || "Verbergen";
       const closedLabel = button.dataset.closedLabel || "Anzeigen";
       button.textContent = show ? openLabel : closedLabel;
-      button.setAttribute("aria-expanded", show ? "true" : "false");
     }
+    if (button) button.setAttribute("aria-expanded", show ? "true" : "false");
     if (show) renderMath(el);
+  }
+
+  function closeReveal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.hidden = true;
+    el.classList?.remove("show");
+    el.setAttribute?.("aria-expanded", "false");
   }
 
   function toggleMicroCheck(id, button) {
@@ -263,7 +255,6 @@ export function createPortalApp({
   function navigate(id, { tab = "theorie", updateHash = true, scrollKernidee = false } = {}) {
     const tabRow = document.getElementById("tabRow");
     if (id && tabRow) tabRow.classList.add("visible");
-    setTabWorkflowVisible(Boolean(id));
     const scrollToKernidee = scrollKernidee || tab === "intuition";
     const requestedTab = tab === "intuition" ? "theorie" : tab;
     const resolvedTab = id ? resolveAvailableTab(tabRow, requestedTab) : "theorie";
@@ -295,7 +286,6 @@ export function createPortalApp({
       renderHome();
       clearRightPanel();
       syncRightPanelVisibility();
-      setTabWorkflowVisible(false);
       if (updateHash && !applyingHashRoute) replaceConceptHash("", "theorie");
     }
     initPedagogyControls(document.getElementById("content") || document);
@@ -550,6 +540,7 @@ export function createPortalApp({
   window.__submitFE = submitFE;
   window.__toggleSolution = toggleSolution;
   window.__toggleReveal = toggleReveal;
+  window.__closeReveal = closeReveal;
   window.__toggleMicroCheck = toggleMicroCheck;
   window.__scrollToSimilarTask = scrollToSimilarTask;
   window.__scrollToFormulaCard = scrollToFormulaCard;
@@ -607,8 +598,6 @@ export function createPortalApp({
     }
     initTheme();
     buildNav(navigate);
-
-    ensureTabWorkflowHint();
 
     const tabRow = document.getElementById("tabRow");
     if (tabRow) {

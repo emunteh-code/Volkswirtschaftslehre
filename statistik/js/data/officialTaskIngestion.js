@@ -12,7 +12,10 @@ export const STATISTIK_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'statistik.official-task.teil-a-klausur-2022-a1-a2-descriptive-core',
   'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core',
   'statistik.official-task.teil-a-klausur-2022-a5-regression-output',
-  'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality'
+  'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality',
+  'statistik.official-task.teil-a-klausur-2022-a7-weibull-ml',
+  'statistik.official-task.teil-a-klausur-2022-a8-unbiased-estimator',
+  'statistik.official-task.teil-a-klausur-2022-a9-normal-test-anova'
 ]);
 
 export const STATISTIK_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -21,20 +24,23 @@ export const STATISTIK_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
   reviewedDocuments: [
     {
       path: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
-      reviewedPages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+      reviewedPages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
       reviewedTaskFamilies: [
         'statistik.official-task.teil-a-klausur-2022-a1-a2-descriptive-core',
         'statistik.official-task.teil-a-klausur-2022-a3-a4-probability-core',
         'statistik.official-task.teil-a-klausur-2022-a5-regression-output',
-        'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality'
+        'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality',
+        'statistik.official-task.teil-a-klausur-2022-a7-weibull-ml',
+        'statistik.official-task.teil-a-klausur-2022-a8-unbiased-estimator',
+        'statistik.official-task.teil-a-klausur-2022-a9-normal-test-anova'
       ],
       reviewedAt: '2026-06-08',
-      reviewedBy: 'codex-official-task-review-statistik-pass-3'
+      reviewedBy: 'codex-official-task-review-statistik-pass-4'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',
   reviewedOfficialTaskFamilyIds: STATISTIK_REVIEWED_OFFICIAL_TASK_FAMILY_IDS,
-  nextStep: 'Continue native-text extraction plus visual review for Aufgaben 7-9 and the image-only Klausurfragen PDFs before broader official-task-source promotion'
+  nextStep: 'Continue native-text extraction plus visual review for additional Statistik exams/exercises and OCR the image-only Klausurfragen PDFs before broader official-task-source promotion'
 });
 
 /**

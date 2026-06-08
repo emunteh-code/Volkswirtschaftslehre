@@ -263,6 +263,19 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'IS1.3 Methode der kleinsten Quadrate',
       fingerprint: '5a1b7d3e82f9c041',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a7.p18-p20.weibull-ml',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 20,
+      section: 'Aufgabe 7: Weibull-Verteilung, Log-Likelihood, ML-Schätzer und zweite Ordnung',
+      task: 'Aufgabe 7',
+      fingerprint: '4760d51e1842077656e3aff24e0d021c819ec81bba9f9baec249de884e6d2be4',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-4',
+      reviewedAt: '2026-06-08'
     })
   ],
   schaetzen_eigenschaften_intervalle: [
@@ -296,6 +309,19 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
         '7.2 Konstruktion von Konfidenzintervallen bei normalverteilter Grundgesamtheit',
       fingerprint: 'd1a5e8c4072f9b18',
       confidence: 0.92
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a8.p21.unbiased-estimator',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 23,
+      section: 'Aufgabe 8: Unverzerrtheit eines Schätzers prüfen',
+      task: 'Aufgabe 8',
+      fingerprint: 'b822df55094da0aae04900906a0ecf8eb2cbe2d80c3110ac30b5b1730f5d4241',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-4',
+      reviewedAt: '2026-06-08'
     })
   ],
   testen: [
@@ -328,6 +354,19 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: '8.4 Allgemeine Prinzipien des statistischen Testens',
       fingerprint: '2a7e9c4d81f5036b',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-a.a9.p22-p25.normal-test-anova',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-teil-a-klausur',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      publicLabel: 'Klausur Statistik, 04.03.2022',
+      page: 24,
+      section: 'Aufgabe 9: Normalverteilung, t-Test, R-Code-Wahl und ANOVA-F-Test',
+      task: 'Aufgabe 9',
+      fingerprint: '94d9988789d8b7d5095bd0edbc3102aee65ea194e9820e555c0a836c4d4a1f5a',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-4',
+      reviewedAt: '2026-06-08'
     })
   ],
   z_test: [

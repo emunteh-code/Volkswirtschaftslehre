@@ -655,6 +655,114 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a7-weibull-ml',
+    conceptId: 'schaetzen_verfahren',
+    title: 'Klausur Statistik 04.03.2022 Aufgabe 7: Weibull-ML-Schätzer herleiten',
+    topic: 'Weibull-Verteilung, Log-Likelihood, Maximum-Likelihood-Schätzung, erste und zweite Ordnung',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgabe 7: für eine Weibull-verteilte Lebensdauervariable mit vorgegebener Dichte und Verteilungsfunktion sowie r = 1 die Log-Likelihood für eine iid-Stichprobe aufstellen, daraus den ML-Schätzer für lambda bestimmen und die hinreichende Bedingung beziehungsweise zweite Ordnung prüfen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a7.p18-p20.weibull-ml'
+    ],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 12,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'r als unbekannten Parameter behandeln, obwohl die Aufgabe r = 1 vorgibt',
+      'Dichte und Verteilungsfunktion nicht auf die Log-Likelihood der iid-Stichprobe übertragen',
+      'Produktform und Log-Transformation unvollständig vereinfachen',
+      'Ableitung nach lambda mit Vorzeichen- oder Potenzfehlern bilden',
+      'Die zweite Ordnung beziehungsweise hinreichende Bedingung weglassen',
+      'Die offizielle Stützbedingung im Prompt umformulieren statt die Aufgabe wie gestellt zu bearbeiten'
+    ],
+    gradingRubric: [
+      'Aufgabe 7 enthält 12 sichtbare Punkte',
+      'Aufgabe 7a: Log-Likelihood-Funktion aufstellen und vollständig vereinfachen',
+      'Aufgabe 7b: ML-Schätzer auf Basis von Aufgabe 7a mit vollständigem Weg bestimmen',
+      'Aufgabe 7c: hinreichende Bedingung beziehungsweise zweite Ordnung prüfen',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Klausurseiten 18-20',
+      task: 'Aufgabe 7',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a8-unbiased-estimator',
+    conceptId: 'schaetzen_eigenschaften_intervalle',
+    title: 'Klausur Statistik 04.03.2022 Aufgabe 8: Unverzerrtheit eines Schätzers prüfen',
+    topic: 'Erwartungswert, Stichprobe, Schätzer, Unverzerrtheit',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgabe 8: für iid-Zufallsvariablen mit E(X) = alpha/4 prüfen, ob der im Prompt angegebene Schätzer unverzerrt für alpha ist. Native Text wurde extrahiert; die vom Text-Extractor verzerrte Produkt- und Bruchschreibweise wurde zusätzlich über den Seitenrender visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a8.p21.unbiased-estimator'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 5,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Produktindizes im Schätzer falsch lesen',
+      'Quotient, Produktterm und additiven Korrekturterm nicht getrennt behandeln',
+      'Unabhängigkeit der Stichprobenvariablen implizit falsch verwenden',
+      'E(X) = alpha/4 mit alpha selbst verwechseln',
+      'Nur ein Zahlenresultat nennen, ohne die Unverzerrtheit über den Erwartungswert zu prüfen'
+    ],
+    gradingRubric: [
+      'Aufgabe 8 enthält 5 sichtbare Punkte',
+      'Geprüft wird, ob der im Prompt angegebene Schätzer unverzerrt für alpha ist',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Klausurseite 21',
+      task: 'Aufgabe 8',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-a-klausur-2022-a9-normal-test-anova',
+    conceptId: 'testen',
+    title: 'Klausur Statistik 04.03.2022 Aufgabe 9: Normaltest, R-Code-Wahl und ANOVA',
+    topic: 'Normalverteilung, Hypothesentest, t-Test/R-Code, Testentscheidung, ANOVA, F-Test, Ablehnungsbereich',
+    method: 'Offizielle Statistik-Klausur, Teil A, Aufgabe 9: anhand von je vier Skisprungweiten für Stahlbichler und Fiedler Hypothesen formulieren, Teststatistik und Verteilung angeben, den passenden R-Code aus drei t-Test-Ausgaben wählen, die Testentscheidung begründen und anschließend über ANOVA-Ausgabe, R-Quantil- und p-Wert-Ausgaben einen 10%-F-Test auf Unterschied der Springer durchführen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-a.a9.p22-p25.normal-test-anova'
+    ],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 15,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Hypothesenrichtung beim einseitigen Test vertauschen',
+      'Stahlbichler- und Fiedler-Stichproben oder deren Mittelwerte verwechseln',
+      'R-Code-Auswahl ohne Bezug zur Alternative und zum verwendeten Datensatz treffen',
+      'p-Wert-Entscheidung ohne Signifikanzniveau und Hypothese begründen',
+      'Mathematische und verbale ANOVA-Hypothesen nicht konsistent formulieren',
+      'Freiheitsgrade oder Ablehnungsbereich beim F-Test aus der ANOVA-Ausgabe falsch übernehmen'
+    ],
+    gradingRubric: [
+      'Aufgabe 9 enthält 15 sichtbare Punkte',
+      'Aufgabe 9a: Hypothesenpaar formulieren, 2 Punkte',
+      'Aufgabe 9b: Teststatistik und Verteilung berechnen beziehungsweise angeben, 3 Punkte',
+      'Aufgabe 9c: korrekten R-Code per Nummer auswählen, 1 Punkt',
+      'Aufgabe 9c: Testentscheidung treffen und begründen, 2 Punkte',
+      'Aufgabe 9d: ANOVA-Hypothesen mathematisch und in eigenen Worten formulieren, 2 Punkte',
+      'Aufgabe 9d: Ablehnungsbereich bei alpha = 10% mithilfe des R-Outputs bestimmen und Entscheidung treffen, 5 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/Teil_A_Klausur.pdf',
+      pages: 'Klausurseiten 22-25',
+      task: 'Aufgabe 9',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

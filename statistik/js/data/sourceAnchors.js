@@ -604,6 +604,45 @@ export const STATISTIK_SOURCE_ANCHORS = Object.freeze({
       section: 'Einlesen von Daten',
       fingerprint: '6b3d9f0e2a1c8745',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-b.a8a-e.p1-p2.r-data-descriptive',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-klausure2122k1-upd',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      publicLabel: 'Klausur Statistik (Teil B), 04.03.2022',
+      page: 5,
+      section: 'Aufgabe 8a-e: R-Working-Directory, Datenimport, Objekttypen, Kennzahlen und Histogramm',
+      task: 'Aufgabe 8a-e',
+      fingerprint: '19c1c033473960208158c812f097bf8bfb3b25b3185a7848ea2d4f05e4d0fa9d',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-5',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-b.a8f-g.p2-p3.poisson-likelihood-ml',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-klausure2122k1-upd',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      publicLabel: 'Klausur Statistik (Teil B), 04.03.2022',
+      page: 6,
+      section: 'Aufgabe 8f-g: Poisson-Likelihood, Likelihood-Funktion in R und ML-Schätzer',
+      task: 'Aufgabe 8f-g',
+      fingerprint: 'e16ac18dff15942326e9090c035a59cd2a988bdf2265bdd17ba01ede3e03dcb0',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-5',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'statistik.klausur-2022-teil-b.a8h.p3-p4.r-function-yennefer',
+      sourceId: 'statistik-exam-statistik-lecture-statistik-b-wiwi-oph-0006-vorlesung-klausure2122k1-upd',
+      sourcePath: 'Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      publicLabel: 'Klausur Statistik (Teil B), 04.03.2022',
+      page: 7,
+      section: 'Aufgabe 8h: R-Funktion YenneferZahl.fun mit paste und for-Schleife',
+      task: 'Aufgabe 8h',
+      fingerprint: '2d8765dae8b53d59ed27b2adf369fba63c1654cdf5151fd51277b6919366d953',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-statistik-pass-5',
+      reviewedAt: '2026-06-08'
     })
   ]
 });

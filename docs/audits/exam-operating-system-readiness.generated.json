@@ -211,10 +211,10 @@
       "sourceEligibleConceptsWithSourceAnchors": 14,
       "sourceRefCoveragePct": 100,
       "sourceAnchorCoveragePct": 100,
-      "sourceAnchors": 51,
-      "taskFamilies": 140,
-      "sourceGroundedTaskFamilies": 139,
-      "officialTaskSourceFamilies": 7,
+      "sourceAnchors": 54,
+      "taskFamilies": 143,
+      "sourceGroundedTaskFamilies": 142,
+      "officialTaskSourceFamilies": 10,
       "officialDocumentRegistryFamilies": 104,
       "moduleMismatchTaskFamilies": 0,
       "officialFormulaCards": 44,
@@ -222,7 +222,7 @@
       "anchorComplete": true,
       "anchorStatus": "complete",
       "examBankComplete": false,
-      "examBankStatus": "official-task-source pilot present (7); 104 document-registry placeholders still unresolved",
+      "examBankStatus": "official-task-source pilot present (10); 104 document-registry placeholders still unresolved",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
       "adaptiveReady": false,
@@ -484,7 +484,7 @@
     },
     {
       "module": "statistik",
-      "reason": "official exam bank incomplete (official-task-source pilot present (7); 104 document-registry placeholders still unresolved)"
+      "reason": "official exam bank incomplete (official-task-source pilot present (10); 104 document-registry placeholders still unresolved)"
     },
     {
       "module": "statistik",

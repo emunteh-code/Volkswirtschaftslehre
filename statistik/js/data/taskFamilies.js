@@ -763,6 +763,110 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-b-klausur-2022-a8a-e-r-data-descriptive',
+    conceptId: 'rlab',
+    title: 'Klausur Statistik Teil B 04.03.2022 Aufgabe 8a-e: R-Datenworkflow und deskriptive Ausgabe',
+    topic: 'R-Working-Directory, CSV-Import, Data Frame, Objekttypen, arithmetisches Mittel, unverzerrte Standardabweichung, Histogrammexport',
+    method: 'Offizielle Statistik-Klausur, Teil B, Aufgabe 8a-e: mit `setwd(path.expand("~"))` im Ordner Dokumente arbeiten, `WitcherData1.csv` als Data Frame `d` einlesen, die ersten sechs Zeilen ausgeben, die Objekttypen von `Tal` und `Muenzen` per passendem R-Befehl bestimmen, für `Muenzen` arithmetisches Mittel und unverzerrten Standardabweichungsschätzer auf drei Nachkommastellen nennen und ein Histogramm mit vorgegebenen Klassengrenzen, Achsenbeschriftungen, Titelvorgabe und PDF-Dateiname `Histogramm1.pdf` erstellen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-b.a8a-e.p1-p2.r-data-descriptive'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 22,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Working Directory nicht wie gefordert über `setwd(path.expand("~"))` setzen',
+      'Data Frame nicht unter dem offiziellen Objektnamen `d` speichern',
+      'Objekttypen von `Tal` und `Muenzen` ohne passenden R-Befehl oder für falsche Variablen bestimmen',
+      'Standardabweichung als Populationsgröße statt als unverzerrten Schätzer ausgeben',
+      'Histogramm mit falschen Intervallgrenzen oder falscher y-Achsen-Skalierung erstellen',
+      'PDF-Dateiname, Titelbestandteile oder Achsenbeschriftungen nicht exakt gemäß Prompt setzen'
+    ],
+    gradingRubric: [
+      'Aufgabe 8 enthält 45 sichtbare Punkte',
+      'Aufgabe 8a: Working Directory setzen, 2 Punkte',
+      'Aufgabe 8b: Daten als Data Frame `d` speichern und erste sechs Zeilen wiedergeben, 4 Punkte',
+      'Aufgabe 8c: Objekttypen von `Tal` und `Muenzen` per passendem R-Befehl bestimmen, 4 Punkte',
+      'Aufgabe 8d: arithmetisches Mittel und unverzerrten Standardabweichungsschätzer für `Muenzen` auf drei Nachkommastellen nennen, 4 Punkte',
+      'Aufgabe 8e: Histogramm mit vorgegebenen Intervallgrenzen, Titel, Achsen und PDF-Upload `Histogramm1.pdf`, 8 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      pages: 'Klausur Teil B Seiten 1-2',
+      task: 'Aufgabe 8a-e',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-b-klausur-2022-a8f-g-poisson-likelihood-ml',
+    conceptId: 'rlab',
+    title: 'Klausur Statistik Teil B 04.03.2022 Aufgabe 8f-g: Poisson-Likelihood und ML in R',
+    topic: 'Poissonverteilung, individuelle Likelihoods, Gesamtlikelihood, wissenschaftliche Schreibweise, R-Funktion, diskrete Lambda-Suche, Maximum-Likelihood-Schätzer',
+    method: 'Offizielle Statistik-Klausur, Teil B, Aufgabe 8f-g: für `Muenzen` als Realisationen einer Poissonverteilung zunächst bei `lambda = 20` individuelle Likelihoods in einer neuen Spalte `iL20` berechnen, daraus die Likelihood aller Beobachtungen in der Form `X × 10^Y` angeben, anschließend eine R-Funktion `Likelihood.pois(lambda,x)` für beliebige Parameterwerte schreiben, die Likelihood für alle natürlichen `lambda` von 17 bis 23 bestimmen und aus dieser Menge den Maximum-Likelihood-Schätzer wählen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-b.a8f-g.p2-p3.poisson-likelihood-ml'
+    ],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 15,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Poisson-Wahrscheinlichkeitsfunktion nicht beobachtungsweise auf alle `Muenzen`-Werte anwenden',
+      'Neue Spalte `iL20` anders benennen oder nicht im Data Frame `d` ablegen',
+      'Einzelwahrscheinlichkeiten addieren statt zur Gesamtlikelihood zu multiplizieren',
+      'Wissenschaftliche Schreibweise `X × 10^Y` nicht mit drei Nachkommastellen für `X` angeben',
+      'Die Funktion `Likelihood.pois(lambda,x)` nicht für beliebige `lambda` und Beobachtungsvektor schreiben',
+      'Den ML-Schätzer außerhalb der vorgegebenen Menge `{lambda ∈ N : 17 ≤ lambda ≤ 23}` suchen'
+    ],
+    gradingRubric: [
+      'Aufgabe 8f: Spalte `iL20`, individuelle Likelihoods und Gesamtlikelihood für `lambda = 20`, 6 Punkte',
+      'Aufgabe 8g: Funktion `Likelihood.pois(lambda,x)`, Likelihoods für `lambda = 17,...,23` und ML-Schätzer aus dieser Menge, 9 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      pages: 'Klausur Teil B Seiten 2-3',
+      task: 'Aufgabe 8f-g',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'statistik.official-task.teil-b-klausur-2022-a8h-r-function-yennefer',
+    conceptId: 'rlab',
+    title: 'Klausur Statistik Teil B 04.03.2022 Aufgabe 8h: R-Funktion zur Yennefer-Zahl',
+    topic: 'R-Funktionen, Zeichenkettenverkettung, for-Schleife, natürliche Zahlen, Nachkommastellenkonstruktion',
+    method: 'Offizielle Statistik-Klausur, Teil B, Aufgabe 8h: aus der Definition der Yennefer-Zahl eine R-Funktion `YenneferZahl.fun` schreiben, die für ein gegebenes `n ∈ N` die durch Aneinanderreihung der natürlichen Zahlen bis `n` gebildete Nachkommastellenzahl bestimmt, und diese Funktion nutzen, um die Yennefer-Zahl bis zur 99. Nachkommastelle anzugeben. Der Prompt nennt `paste` und die `for`-Schleife als hilfreiche Befehle. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'statistik.klausur-2022-teil-b.a8h.p3-p4.r-function-yennefer'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 8,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Die Funktion nur für den Beispielwert statt für beliebiges `n` schreiben',
+      'Natürliche Zahlen nicht in aufsteigender Reihenfolge verketten',
+      'Zahl und Zeichenkette beim Aufbau der Nachkommastellen unkontrolliert vermischen',
+      'Nicht bis zur 99. Nachkommastelle ausgeben',
+      'Den im Prompt genannten Funktionsnamen `YenneferZahl.fun` verfehlen'
+    ],
+    gradingRubric: [
+      'Aufgabe 8h: Funktion `YenneferZahl.fun` und Ausgabe der Yennefer-Zahl bis zur 99. Nachkommastelle, 8 Punkte',
+      'Keine offiziellen Lösungen wurden in diesem Pass reviewt'
+    ],
+    currentCoverage: {
+      source: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      pages: 'Klausur Teil B Seiten 3-4',
+      task: 'Aufgabe 8h',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

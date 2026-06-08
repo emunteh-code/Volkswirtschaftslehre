@@ -15,7 +15,10 @@ export const STATISTIK_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'statistik.official-task.teil-a-klausur-2022-a6-correlation-causality',
   'statistik.official-task.teil-a-klausur-2022-a7-weibull-ml',
   'statistik.official-task.teil-a-klausur-2022-a8-unbiased-estimator',
-  'statistik.official-task.teil-a-klausur-2022-a9-normal-test-anova'
+  'statistik.official-task.teil-a-klausur-2022-a9-normal-test-anova',
+  'statistik.official-task.teil-b-klausur-2022-a8a-e-r-data-descriptive',
+  'statistik.official-task.teil-b-klausur-2022-a8f-g-poisson-likelihood-ml',
+  'statistik.official-task.teil-b-klausur-2022-a8h-r-function-yennefer'
 ]);
 
 export const STATISTIK_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -36,6 +39,17 @@ export const STATISTIK_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
       ],
       reviewedAt: '2026-06-08',
       reviewedBy: 'codex-official-task-review-statistik-pass-4'
+    },
+    {
+      path: 'Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf',
+      reviewedPages: [1, 2, 3, 4, 5],
+      reviewedTaskFamilies: [
+        'statistik.official-task.teil-b-klausur-2022-a8a-e-r-data-descriptive',
+        'statistik.official-task.teil-b-klausur-2022-a8f-g-poisson-likelihood-ml',
+        'statistik.official-task.teil-b-klausur-2022-a8h-r-function-yennefer'
+      ],
+      reviewedAt: '2026-06-08',
+      reviewedBy: 'codex-official-task-review-statistik-pass-5'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',

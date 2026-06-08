@@ -1,4 +1,4 @@
-# Exam Operating System Readiness Gate — 2026-06-07
+# Exam Operating System Readiness Gate — 2026-06-08
 
 A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true. Exam-bank completeness requires reviewed official-task-source families, not only portal simulations or document registry metadata.
 
@@ -22,7 +22,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Ref coverage | Anchor coverage | Page anchors | Task families | Official task docs | Document-registry families | Official task families | Formula cards | Mastery dimensions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `mikro1` | 100% | 100% | 99 | 86 | 18 | 18 | 1 | 100 | 4 |
+| `mikro1` | 100% | 100% | 107 | 92 | 18 | 18 | 7 | 100 | 4 |
 | `mikro2` | 83% | 83% | 47 | 34 | 0 | 0 | 0 | 46 | 4 |
 | `makro1` | 100% | 100% | 28 | 58 | 29 | 29 | 0 | 44 | 4 |
 | `makro2` | 100% | 100% | 60 | 83 | 22 | 22 | 0 | 110 | 4 |
@@ -38,7 +38,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 | Module | Anchor status | Exam-bank status | Provenance status | Adaptive status | Scorecard depth |
 |---|---|---|---|---|---|
-| `mikro1` | complete | official-task-source pilot present (1); 18 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | benchmark cockpit; official task-source review pending |
+| `mikro1` | complete | official-task-source pilot present (7); 18 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | benchmark cockpit; official task-source review pending |
 | `mikro2` | partial | official task source corpus missing or unavailable | partial | mastery items present; exam-bank or anchor gate open | not achieved |
 | `makro1` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `makro2` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
@@ -52,7 +52,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 
 ## Blockers
 
-- `mikro1`: official exam bank incomplete (official-task-source pilot present (1); 18 document-registry placeholders still unresolved)
+- `mikro1`: official exam bank incomplete (official-task-source pilot present (7); 18 document-registry placeholders still unresolved)
 - `mikro1`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `mikro1`: Mikro1-depth equality not certified
 - `mikro2`: page/slide/task anchors incomplete (83% concept coverage)

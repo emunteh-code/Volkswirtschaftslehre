@@ -15,7 +15,9 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.9
+  confidence = 0.9,
+  reviewedBy = REVIEWED_BY,
+  reviewedAt = REVIEWED_AT
 }) {
   return {
     id,
@@ -31,8 +33,8 @@ function anchor({
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -109,6 +111,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Grenzrate der Substitution',
       fingerprint: 'e4a8c2f9170d3b61',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8768.a1.4-6',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8768',
+      sourcePath: 'Probeklausur/IMG_8768.JPG',
+      publicLabel: 'Probeklausur',
+      page: 3,
+      section: 'Aufgabe 1, Teilaufgaben 4-6: Präferenzen, Konvexität und Indifferenz',
+      fingerprint: '199fd83b409e51e4',
+      confidence: 0.84,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   lagrange: [
@@ -173,6 +187,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Marshallsche Nachfrage bei CES Nutzenfunktion',
       fingerprint: '3f0c6e8a29b5d173',
       confidence: 0.92
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8769.a1.9-15',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8769',
+      sourcePath: 'Probeklausur/IMG_8769.JPG',
+      publicLabel: 'Probeklausur',
+      page: 4,
+      section: 'Aufgabe 1, Teilaufgaben 9-15: Nachfrage, Elastizität, Shephard, Variation und Gewinnmaximierung',
+      fingerprint: '9f8a6ce38859c2a1',
+      confidence: 0.83,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   slutsky: [
@@ -237,6 +263,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Skalenerträge',
       fingerprint: '9f6a3c1d62b4e530',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8770.a1.16-18',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8770',
+      sourcePath: 'Probeklausur/IMG_8770.JPG',
+      publicLabel: 'Probeklausur',
+      page: 5,
+      section: 'Aufgabe 1, Teilaufgaben 16-18: Skalenerträge und Faktornachfrage',
+      fingerprint: '9e4bc76c25e12259',
+      confidence: 0.83,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   kosten: [
@@ -269,6 +307,30 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Die Kostenfunktion',
       fingerprint: 'c29d6f4a95e7b863',
       confidence: 0.93
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8770.a1.19',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8770',
+      sourcePath: 'Probeklausur/IMG_8770.JPG',
+      publicLabel: 'Probeklausur',
+      page: 5,
+      section: 'Aufgabe 1, Teilaufgabe 19: Kostenfunktion und Durchschnittskostenminimum',
+      fingerprint: '9e4bc76c25e12259',
+      confidence: 0.83,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8773-8774.a3',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8773',
+      sourcePath: 'Probeklausur/IMG_8773.JPG',
+      publicLabel: 'Probeklausur',
+      page: 8,
+      section: 'Aufgabe 3: Kostenfunktion, Grenzkosten, Durchschnittskosten und kurzfristige Produktion',
+      fingerprint: '30b30629936169d2',
+      confidence: 0.84,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   gewinn: [
@@ -365,6 +427,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Wohlfahrtswirkung des Monopols',
       fingerprint: '5bc6f23d8e16415c',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8770.a1.20',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8770',
+      sourcePath: 'Probeklausur/IMG_8770.JPG',
+      publicLabel: 'Probeklausur',
+      page: 5,
+      section: 'Aufgabe 1, Teilaufgabe 20: Monopolmenge bei linearer Nachfrage und Grenzkostensteigung',
+      fingerprint: '9e4bc76c25e12259',
+      confidence: 0.83,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   elast: [
@@ -461,6 +535,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Die Indirekte Nutzenfunktion und Roys Identität',
       fingerprint: 'e45f2c2661afdae5',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8771-8772.a2',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8771',
+      sourcePath: 'Probeklausur/IMG_8771.JPG',
+      publicLabel: 'Probeklausur',
+      page: 6,
+      section: 'Aufgabe 2: Hicks-Zerlegung, Güterarten und ordinale Transformation',
+      fingerprint: '6ae2809e1750f6af',
+      confidence: 0.84,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   ausgaben: [
@@ -845,6 +931,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Haushaltsoptimum, graphische Bestimmung',
       fingerprint: '28934bbb9f4d2e29',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8768.a1.7-8',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8768',
+      sourcePath: 'Probeklausur/IMG_8768.JPG',
+      publicLabel: 'Probeklausur',
+      page: 3,
+      section: 'Aufgabe 1, Teilaufgaben 7-8: perfekte Substitute und Optimumsbedingung',
+      fingerprint: '07d77c0b49ce8873',
+      confidence: 0.82,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-2',
+      reviewedAt: '2026-06-08'
     })
   ],
   shephard: [

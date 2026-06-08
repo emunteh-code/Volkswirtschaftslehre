@@ -15,7 +15,13 @@ export const MIKRO1_PROBEKLAUSUR_INGEST_BLOCKERS = Object.freeze([
 ]);
 
 export const MIKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
-  'mikro1.official-task.probeklausur-a1-budget-true-false'
+  'mikro1.official-task.probeklausur-a1-budget-true-false',
+  'mikro1.official-task.probeklausur-a1-preferences-convexity',
+  'mikro1.official-task.probeklausur-a1-household-optimum-true-false',
+  'mikro1.official-task.probeklausur-a1-consumer-theory-mixed-true-false',
+  'mikro1.official-task.probeklausur-a1-production-cost-monopoly-true-false',
+  'mikro1.official-task.probeklausur-a2-hicks-decomposition',
+  'mikro1.official-task.probeklausur-a3-cost-function'
 ]);
 
 /** Inventory snapshot from source-corpus-registry (2026-05-28); item-level OCR review is partial. */
@@ -23,7 +29,16 @@ export const MIKRO1_PROBEKLAUSUR_REVIEW_STATUS = Object.freeze({
   ocrReviewed: 'partial',
   humanItemMappingReviewed: 'partial',
   jpgPageCount: 17,
-  reviewedJpgPages: ['IMG_8767.JPG'],
+  reviewedJpgPages: [
+    'IMG_8767.JPG',
+    'IMG_8768.JPG',
+    'IMG_8769.JPG',
+    'IMG_8770.JPG',
+    'IMG_8771.JPG',
+    'IMG_8772.JPG',
+    'IMG_8773.JPG',
+    'IMG_8774.JPG'
+  ],
   templatePdfPath: 'Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf',
   templatePdfUsableAsItemBank: false,
   officialTaskSourceAllowed: 'reviewed-family-ids-only',

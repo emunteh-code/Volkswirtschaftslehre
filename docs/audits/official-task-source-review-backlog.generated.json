@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-07",
+  "generatedAt": "2026-06-08",
   "policy": "No official-task-source promotion without OCR/native text plus human review log.",
   "totals": {
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 1,
+    "officialTaskSourceFamilies": 7,
     "weakPages": 25,
     "taskSignalPages": 989
   },
@@ -103,7 +103,7 @@
     {
       "module": "mikro1",
       "officialTaskDocuments": 18,
-      "officialTaskSourceFamilies": 1,
+      "officialTaskSourceFamilies": 7,
       "documentRegistryFamilies": 18,
       "pageCount": 10,
       "weakPageCount": 0,

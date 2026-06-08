@@ -1512,6 +1512,188 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'OCR-assisted + visual human review, 2026-06-07'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a1-preferences-convexity',
+    conceptId: 'praeferenz',
+    title: 'Probeklausur Aufgabe 1.4-1.6: Präferenzen und strenge Konvexität prüfen',
+    topic: 'Präferenzrelation, Indifferenz, strenge Konvexität, Güterbündelvergleich',
+    method: 'Offizielle Probeklausur, Aufgabe 1, Teilaufgaben 4-6: Wahr/Falsch-Urteile zu vollständigen, reflexiven, transitiven, streng konvexen und streng monotonen Präferenzen. Quelle ist IMG_8768.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8768.a1.4-6'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 7,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Indifferenztransitivität ohne die konkrete Bündelkoordinate anwenden',
+      'Strenge Konvexität mit Linearität oder Gleichgültigkeit verwechseln',
+      'Mischbündel nicht als Konvexkombination der gegebenen Bündel erkennen'
+    ],
+    gradingRubric: [
+      '2 Punkte je korrekt gesetztem Wahr/Falsch-Kreuz',
+      'Begründung kann bei falschem Kreuz Teilpunkte retten',
+      'Begriffe Präferenz, strenge Präferenz und Indifferenz müssen sauber getrennt werden'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8768.JPG',
+      page: 'Probeklausur Seite 3',
+      task: 'Aufgabe 1, Teilaufgaben 4-6',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a1-household-optimum-true-false',
+    conceptId: 'hausopt',
+    title: 'Probeklausur Aufgabe 1.7-1.8: Optimumsbedingung bei perfekten Substituten',
+    topic: 'Perfekte Substitute, Haushaltsoptimum, Grenzrate der Substitution, Preisverhältnis',
+    method: 'Offizielle Probeklausur, Aufgabe 1, Teilaufgaben 7-8: Wahr/Falsch-Urteile zu perfekten Substituten und zur Optimumsbedingung im Haushaltsproblem. Quelle ist IMG_8768.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8768.a1.7-8'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 5,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Tangentialbedingung blind auf perfekte Substitute anwenden',
+      'GRS-Vorzeichen und Budgetgeradensteigung verwechseln',
+      'Randlösung nicht prüfen'
+    ],
+    gradingRubric: [
+      '2 Punkte je korrekt gesetztem Wahr/Falsch-Kreuz',
+      'Begründung sollte zwischen innerem Tangentialoptimum und Randlösung unterscheiden',
+      'Preisverhältnis und GRS müssen mit konsistenter Vorzeichenkonvention verwendet werden'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8768.JPG',
+      page: 'Probeklausur Seite 3',
+      task: 'Aufgabe 1, Teilaufgaben 7-8',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a1-consumer-theory-mixed-true-false',
+    conceptId: 'marshall',
+    title: 'Probeklausur Aufgabe 1.9-1.15: Konsumententheorie gemischt beurteilen',
+    topic: 'GRS, Nutzenhomogenität, Nachfrage, Kreuzpreiselastizität, Shephard, CV, Gewinnmaximierung',
+    method: 'Offizielle Probeklausur, Aufgabe 1, Teilaufgaben 9-15: gemischte Wahr/Falsch-Theoriefragen mit Schwerpunkt Nachfrage- und Wohlfahrtsbegriffe. Quelle ist IMG_8769.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8769.a1.9-15'],
+    difficulty: 'mittel-schwer',
+    expectedTimeMinutes: 12,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Negative Kreuzpreiselastizität fälschlich als Substitute lesen',
+      'Marshallsche Nachfrage immer als fallend unterstellen',
+      'Shephards Lemma, Hickssche Nachfrage und Ausgabenfunktion durcheinanderwerfen',
+      'Kompensierende Variation bei Preisänderungen in die falsche Geldflussrichtung deuten'
+    ],
+    gradingRubric: [
+      '2 Punkte je korrekt gesetztem Wahr/Falsch-Kreuz',
+      'Kurze Begründung sollte den zentralen Begriff nennen, nicht nur ein Beispiel',
+      'Bei gemischten Theoriefragen zählt saubere Definition mehr als Rechenroutine'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8769.JPG',
+      page: 'Probeklausur Seite 4',
+      task: 'Aufgabe 1, Teilaufgaben 9-15',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a1-production-cost-monopoly-true-false',
+    conceptId: 'produktion',
+    title: 'Probeklausur Aufgabe 1.16-1.20: Produktions-, Kosten- und Monopoltheorie beurteilen',
+    topic: 'Skalenerträge, Faktornachfrage, Kostenfunktion, Durchschnittskostenminimum, Monopolmenge',
+    method: 'Offizielle Probeklausur, Aufgabe 1, Teilaufgaben 16-20: Wahr/Falsch-Theoriefragen zu Unternehmenstheorie und Monopol. Quelle ist IMG_8770.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'mikro1.probeklausur.img8770.a1.16-18',
+      'mikro1.probeklausur.img8770.a1.19',
+      'mikro1.probeklausur.img8770.a1.20'
+    ],
+    difficulty: 'mittel-schwer',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Skalenerträge und partielle Produktionselastizität gleichsetzen',
+      'Shephard-Ableitung aus Kostenfunktion mit unbedingter Faktornachfrage verwechseln',
+      'Monopoloptimum im unelastischen Nachfragebereich behaupten',
+      'Durchschnittskostenminimum ohne Vergleich zu Grenzkosten prüfen'
+    ],
+    gradingRubric: [
+      '2 Punkte je korrekt gesetztem Wahr/Falsch-Kreuz',
+      'Begründung sollte die jeweilige Bedingung oder Gegenbedingung nennen',
+      'Monopol- und Kostenfragen verlangen Vorzeichen-/Elastizitätslogik, nicht nur Schlagworte'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8770.JPG',
+      page: 'Probeklausur Seite 5',
+      task: 'Aufgabe 1, Teilaufgaben 16-20',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a2-hicks-decomposition',
+    conceptId: 'hicks',
+    title: 'Probeklausur Aufgabe 2: Hicks-Zerlegung grafisch darstellen',
+    topic: 'Hicks-Zerlegung, normale Güter, Substitutions-, Einkommens- und Gesamteffekt, ordinale Transformation',
+    method: 'Offizielle Probeklausur, Aufgabe 2: grafische Hicks-Zerlegung einer Preissenkung für Gut 1, Stellungnahme zum Einkommenseffekt und positive monotone Transformationen. Quellen sind IMG_8771.JPG und IMG_8772.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8771-8772.a2'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Substitutions- und Einkommenseffekt für das falsche Gut markieren',
+      'Normale Güter ohne Richtung des Einkommenseffekts auswerten',
+      'Kompensierte Budgetgerade nicht parallel zur neuen Budgetgerade zeichnen',
+      'Positive monotone Transformation mit beliebiger Transformation verwechseln'
+    ],
+    gradingRubric: [
+      '6 Punkte für korrekte grafische Hicks-Zerlegung mit markierten Effekten',
+      '2 Punkte für begründete Aussage zum Einkommenseffekt und Güterarten',
+      '2 Punkte für zwei zulässige positive monotone Transformationen'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8771.JPG + IMG_8772.JPG',
+      page: 'Probeklausur Seiten 6-7',
+      task: 'Aufgabe 2',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a3-cost-function',
+    conceptId: 'kosten',
+    title: 'Probeklausur Aufgabe 3: Kostenfunktion auswerten',
+    topic: 'Grenzkosten, Durchschnittskosten, durchschnittliche variable Kosten, kurzfristige Produktionsentscheidung',
+    method: 'Offizielle Probeklausur, Aufgabe 3: Kostenfunktion ableiten, Durchschnittsgrößen bilden, Minimum der durchschnittlichen variablen Kosten bestimmen und kurzfristige Produktionsbedingung verbal begründen. Quellen sind IMG_8773.JPG und IMG_8774.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8773-8774.a3'],
+    difficulty: 'mittel-schwer',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Fixkosten in die durchschnittlichen variablen Kosten aufnehmen',
+      'Grenzkosten, Durchschnittskosten und variable Durchschnittskosten nicht getrennt ausweisen',
+      'Betriebsminimum mit Gewinnschwelle verwechseln',
+      'Kurzfristige Produktionsentscheidung ohne Preis-Vergleich begründen'
+    ],
+    gradingRubric: [
+      '6 Punkte für allgemeine Funktionen und Einsetzen der gegebenen Kostenfunktion',
+      '2 Punkte für Minimum der durchschnittlichen variablen Kosten und Grenzkosten-Gleichheit',
+      '2 Punkte für verbale kurzfristige Produktionsbedingung'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8773.JPG + IMG_8774.JPG',
+      page: 'Probeklausur Seiten 8-9',
+      task: 'Aufgabe 3',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

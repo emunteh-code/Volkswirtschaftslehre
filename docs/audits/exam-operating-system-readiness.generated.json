@@ -135,10 +135,10 @@
       "sourceEligibleConceptsWithSourceAnchors": 30,
       "sourceRefCoveragePct": 100,
       "sourceAnchorCoveragePct": 100,
-      "sourceAnchors": 60,
-      "taskFamilies": 83,
-      "sourceGroundedTaskFamilies": 82,
-      "officialTaskSourceFamilies": 0,
+      "sourceAnchors": 62,
+      "taskFamilies": 85,
+      "sourceGroundedTaskFamilies": 84,
+      "officialTaskSourceFamilies": 2,
       "officialDocumentRegistryFamilies": 22,
       "moduleMismatchTaskFamilies": 0,
       "officialFormulaCards": 110,
@@ -146,7 +146,7 @@
       "anchorComplete": true,
       "anchorStatus": "complete",
       "examBankComplete": false,
-      "examBankStatus": "official source docs present; no reviewed official-task-source families",
+      "examBankStatus": "official-task-source pilot present (2); 22 document-registry placeholders still unresolved",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
       "adaptiveReady": false,
@@ -460,7 +460,7 @@
     },
     {
       "module": "makro2",
-      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+      "reason": "official exam bank incomplete (official-task-source pilot present (2); 22 document-registry placeholders still unresolved)"
     },
     {
       "module": "makro2",

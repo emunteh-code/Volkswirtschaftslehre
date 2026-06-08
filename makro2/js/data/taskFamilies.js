@@ -3,7 +3,10 @@
 // VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
-import { buildMakro2OfficialTaskPlaceholders } from './officialTaskIngestion.js';
+import {
+  assertMakro2OfficialTaskSourcePolicy,
+  buildMakro2OfficialTaskPlaceholders
+} from './officialTaskIngestion.js';
 
 const MODULE = 'makro2';
 const OFFICIAL_TASK_GAP = "Offizielle Aufgaben-Mappings nur nach Review; VL-Familien folgen Seitenankern.";
@@ -40,7 +43,7 @@ function family({
     gradingRubric,
     currentCoverage,
     officialTaskCoverage,
-    officialTaskGap: OFFICIAL_TASK_GAP
+    officialTaskGap: officialTaskCoverage === 'official-task-source' ? null : OFFICIAL_TASK_GAP
   };
 }
 
@@ -972,6 +975,79 @@ const VL_GROUNDED_FAMILIES = [
   })
 ];
 
+const OFFICIAL_TASK_SOURCE_FAMILIES = [
+  family({
+    id: 'makro2.official-task.uebungsblatt-1-a1-ppp-exchange-rate-notation',
+    conceptId: 'kaufkraftparitaet',
+    title: 'Uebungsblatt 1 Aufgabe 1: Kaufkraftparität und Wechselkursbestimmung',
+    topic: 'Mengennotierung, Preisnotierung, absolute Kaufkraftparität, nominaler Wechselkurs, reale Aufwertung und Abwertung',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 1, Aufgabe 1: Wechselkurs aus Sicht von Land A und Land B einordnen, Preis- und Mengennotierung unterscheiden, nominalen Wechselkurs unter absoluter Kaufkraftparität berechnen und reale Auf- oder Abwertung beurteilen. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt1.a1.p1.ppp-exchange-rate-notation'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 18,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Mengennotierung und Preisnotierung aus Sicht des falschen Landes verwenden',
+      'Abwertung der heimischen Währung ohne Notierungswechsel interpretieren',
+      'Inflationsraten in der Kaufkraftparität nicht konsistent auf die Preisniveaus anwenden',
+      'Nominalen und realen Wechselkurs verwechseln',
+      'Aufwertung oder Abwertung ohne Bezug zur Mark-Schilling-Relation begründen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält vier sichtbare Teilaufgaben a-d',
+      'a) Mengennotierung und Preisnotierung aus Sicht von Land A',
+      'b) Abwertung aus Sicht von Land B bei Preisnotierung',
+      'c) nominaler Wechselkurs am 1.1.2018 bei absoluter Kaufkraftparität',
+      'd) reale Auf- oder Abwertung der Mark gegenüber dem Schilling beurteilen',
+      'Keine Punktwerte sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_1.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-d',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-1-a2-interest-parity-credit-choice',
+    conceptId: 'zinsparitaet',
+    title: 'Uebungsblatt 1 Aufgabe 2: Zinsparität und Kreditwahl interpretieren',
+    topic: 'Nominalzins, Realzins, erwartete Inflation, Zinsparität, erwartete Wechselkursentwicklung, Kreditentscheidung',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 1, Aufgabe 2: Kreditfinanzierung in Deutschland oder der Schweiz beurteilen, Nominal- und Realzinsbeziehung interpretieren, Zinsparität auf erwartete Wechselkursentwicklung anwenden und Konsistenz der Antworten prüfen. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt1.a2.p1.interest-parity-credit-choice'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 18,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Nominalzinsdifferenz als sichere Ersparnis behandeln',
+      'Wechselkursrisiko bei Fremdwährungskredit ignorieren',
+      'Fisher-Beziehung und Zinsparität vermischen ohne Erwartungen sauber zu trennen',
+      'Zinsunterschied ohne erwartete Wechselkursänderung interpretieren',
+      'Konsistenzfrage nur mit Ja/Nein statt mit Mechanismus beantworten'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 enthält vier sichtbare Teilaufgaben a-d',
+      'a) Kreditvorschlag bei 8% Deutschland und 5% Schweiz kritisch beurteilen',
+      'b) Realzinsgleichheit über Nominalzins- und Inflationserwartungen interpretieren',
+      'c) Zinsparität auf erwartete Wechselkursentwicklung anwenden',
+      'd) Konsistenz der Antworten zu b) und c) prüfen',
+      'Keine Punktwerte sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_1.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 2, Teile a-d',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  })
+];
+
+OFFICIAL_TASK_SOURCE_FAMILIES.forEach((item) => assertMakro2OfficialTaskSourcePolicy(item));
+
 const OFFICIAL_DOCUMENT_FAMILIES = [
   {
     id: 'makro2.official-doc.makro2-tutorial-makrookonomik-ii-tutorien-tutorienblatt-1',
@@ -1439,6 +1515,7 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
 
 export const TASK_FAMILIES = Object.freeze([
   ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_TASK_SOURCE_FAMILIES,
   ...OFFICIAL_DOCUMENT_FAMILIES,
   ...buildMakro2OfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);
@@ -1450,4 +1527,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

@@ -14,7 +14,9 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.82
+  confidence = 0.82,
+  reviewedBy = REVIEWED_BY,
+  reviewedAt = REVIEWED_AT
 }) {
   return {
     id,
@@ -30,8 +32,8 @@ function anchor({
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -100,6 +102,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Offene Gütermärkte",
       fingerprint: '372e11928632c289',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt1.a1.p1.ppp-exchange-rate-notation',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-1',
+      sourcePath: 'Übungen/Uebungsblatt_1.pdf',
+      publicLabel: 'Uebungsblatt_1',
+      page: 1,
+      section: 'Aufgabe 1: Kaufkraftparität und Wechselkursbestimmung',
+      fingerprint: '7b85f9a2f7ed3128',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro2-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   zinsparitaet: [
@@ -122,6 +136,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Offene Gütermärkte",
       fingerprint: '372e11928632c289',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt1.a2.p1.interest-parity-credit-choice',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-1',
+      sourcePath: 'Übungen/Uebungsblatt_1.pdf',
+      publicLabel: 'Uebungsblatt_1',
+      page: 1,
+      section: 'Aufgabe 2: Zinsparität',
+      fingerprint: '683c28a03a04ae48',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-makro2-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   offene_is: [
@@ -697,4 +723,3 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
     })
   ]
 });
-

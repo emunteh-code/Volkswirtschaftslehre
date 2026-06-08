@@ -8,6 +8,46 @@ import { CHAPTERS } from './chapters.js';
 export const MAKRO2_TASK_PLACEHOLDER_POLICY =
   'Platzhalter sind explizit als non-deceptive markiert und enthalten keine erfundenen Makro-II-Aufgabeninhalte.';
 
+export const MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
+  'makro2.official-task.uebungsblatt-1-a1-ppp-exchange-rate-notation',
+  'makro2.official-task.uebungsblatt-1-a2-interest-parity-credit-choice'
+]);
+
+export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
+  ocrReviewed: 'native-text-plus-visual-page-review',
+  humanItemMappingReviewed: 'partial',
+  reviewedDocuments: [
+    {
+      path: 'Makroökonomik II/Übungen/Uebungsblatt_1.pdf',
+      reviewedPages: [1],
+      reviewedTaskFamilies: [
+        'makro2.official-task.uebungsblatt-1-a1-ppp-exchange-rate-notation',
+        'makro2.official-task.uebungsblatt-1-a2-interest-parity-credit-choice'
+      ],
+      reviewedAt: '2026-06-08',
+      reviewedBy: 'codex-official-task-review-makro2-pass-1'
+    }
+  ],
+  officialTaskSourceAllowed: 'reviewed-family-ids-only',
+  reviewedOfficialTaskFamilyIds: MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS,
+  nextStep: 'Continue native-text extraction plus visual review for Uebungsblatt_2-10 and Tutorienblaetter before broader official-task-source promotion'
+});
+
+/**
+ * Guards task-family authoring: never emit official-task-source without reviewed mapping.
+ * @param {{ officialTaskCoverage?: string, id?: string }} family
+ */
+export function assertMakro2OfficialTaskSourcePolicy(family) {
+  if (
+    family?.officialTaskCoverage === 'official-task-source' &&
+    !MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS.includes(family?.id)
+  ) {
+    throw new Error(
+      'Makro2 official-task-source blocked unless the family id is explicitly listed in MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS.'
+    );
+  }
+}
+
 export function normalizeMakro2OfficialTaskDocuments(docs) {
   return normalizeOfficialTaskDocuments(docs, { sourceRoot: 'source-materials' }).filter((doc) => doc.module === 'makro2');
 }

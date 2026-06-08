@@ -1694,6 +1694,101 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'OCR-assisted + visual human review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a4-market-demand-equilibrium',
+    conceptId: 'markt',
+    title: 'Probeklausur Aufgabe 4: Marktnachfrage und Marktgleichgewicht bestimmen',
+    topic: 'Marktnachfrage, inverse Nachfrage, Preiselastizität, Angebot, Gleichgewicht, Konsumentenrente',
+    method: 'Offizielle Probeklausur, Aufgabe 4: Drei Nachfragetypen aggregieren, inverse Marktnachfrage bestimmen, Preiselastizität auswerten, Nachfrage zeichnen, Angebotsfunktion ergänzen und Marktgleichgewicht samt Konsumierendenrente markieren. Quellen sind IMG_8775.JPG, IMG_8776.JPG und IMG_8777.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8775-8777.a4'],
+    difficulty: 'mittel-schwer',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Individuelle Nachfragefunktionen ohne aktive Preisbereiche aggregieren',
+      'Direkte und inverse Marktnachfrage algebraisch vertauschen',
+      'Preiselastizität ohne Vorzeichen- und Mengenabhängigkeit angeben',
+      'Konsumierendenrente nicht als Fläche zwischen Nachfragekurve und Gleichgewichtspreis markieren'
+    ],
+    gradingRubric: [
+      '2 Punkte für die Marktnachfrage',
+      '2 Punkte für die inverse Marktnachfrage',
+      '2 Punkte für Preiselastizität und Mengenabhängigkeit',
+      '1 Punkt für die Nachfragezeichnung',
+      '3 Punkte für Angebot, Gleichgewicht und Konsumierendenrente'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8775.JPG + IMG_8776.JPG + IMG_8777.JPG',
+      page: 'Probeklausur Seiten 10-12',
+      task: 'Aufgabe 4',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a5-household-lagrange-demand',
+    conceptId: 'marshall',
+    title: 'Probeklausur Aufgabe 5: Cobb-Douglas-Nachfrage mit Lagrange herleiten',
+    topic: 'Cobb-Douglas-Nutzen, Lagrange-Ansatz, Marshallsche Nachfrage, Grenzrate der Substitution, Einkommenselastizität',
+    method: 'Offizielle Probeklausur, Aufgabe 5: Marshallsche Nachfragefunktionen für beide Güter mit Lagrange-Ansatz herleiten, Betrag der Grenzrate der Substitution berechnen und die Einkommenselastizität der Nachfrage nach Gut 2 ermitteln. Quellen sind IMG_8778.JPG und IMG_8779.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8778-8779.a5'],
+    difficulty: 'mittel-schwer',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Cobb-Douglas-Exponenten nicht als Ausgabenanteile normalisieren',
+      'Budgetrestriktion im Lagrange-Ansatz unvollständig einsetzen',
+      'Betrag der GRS mit dem Vorzeichen der Indifferenzkurvensteigung verwechseln',
+      'Einkommenselastizität aus der falschen Nachfragefunktion ableiten'
+    ],
+    gradingRubric: [
+      '6 Punkte für die Herleitung beider Marshallschen Nachfragefunktionen mit Lagrange',
+      '2 Punkte für den Betrag der Grenzrate der Substitution',
+      '2 Punkte für die Einkommenselastizität der Nachfrage nach Gut 2'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8778.JPG + IMG_8779.JPG',
+      page: 'Probeklausur Seiten 13-14',
+      task: 'Aufgabe 5',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'mikro1.official-task.probeklausur-a6-production-cost-minimization',
+    conceptId: 'kosten',
+    title: 'Probeklausur Aufgabe 6: Produktionsfunktion und Kostenminimum analysieren',
+    topic: 'Produktionsfunktion, konstante Skalenerträge, Grenzproduktivität, technische Rate der Substitution, bedingte Faktornachfrage, Isokostengerade',
+    method: 'Offizielle Probeklausur, Aufgabe 6: Für die Produktionsfunktion y = (x_1^(1/3) + x_2^(1/3))^3 Skalenerträge und abnehmende Grenzproduktivitäten zeigen, TRS im Kostenminimum berechnen, bedingte Nachfrage nach Faktor 1 in Abhängigkeit von y ermitteln und die minimale Isokostengerade für y = 27, w_1 = 1, w_2 = 4 einzeichnen. Quellen sind IMG_8780.JPG, IMG_8781.JPG und IMG_8782.JPG; OCR wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['mikro1.probeklausur.img8780-8782.a6'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Die äußere dritte Potenz bei Skalenerträgen übersehen',
+      'Abnehmende Grenzproduktivität nur verbal behaupten statt über partielle Ableitungen zu zeigen',
+      'TRS und Faktorpreisverhältnis mit vertauschter Faktorordnung gleichsetzen',
+      'Bedingte Faktornachfrage nicht aus Kostenminimum und Outputbedingung gemeinsam lösen',
+      'Isokostengerade mit falschem Achsenabschnitt oder falscher Steigung zeichnen'
+    ],
+    gradingRubric: [
+      '2 Punkte für den Nachweis konstanter Skalenerträge',
+      '2 Punkte für abnehmende Grenzproduktivität beider Inputs',
+      '2 Punkte für den Betrag der TRS im Kostenminimum',
+      '2 Punkte für die bedingte Nachfrage nach dem ersten Produktionsfaktor',
+      '2 Punkte für minimale Isokostengerade und kostenminimierenden Punkt'
+    ],
+    currentCoverage: {
+      source: 'Mikroökonomik I/Probeklausur/IMG_8780.JPG + IMG_8781.JPG + IMG_8782.JPG',
+      page: 'Probeklausur Seiten 15-17',
+      task: 'Aufgabe 6',
+      review: 'OCR-assisted + visual human review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

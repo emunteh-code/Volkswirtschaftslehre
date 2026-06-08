@@ -189,6 +189,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.92
     }),
     anchor({
+      id: 'mikro1.probeklausur.img8778-8779.a5',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8778',
+      sourcePath: 'Probeklausur/IMG_8778.JPG',
+      publicLabel: 'Probeklausur',
+      page: 13,
+      section: 'Aufgabe 5: Cobb-Douglas Haushalt, Lagrange, GRS und Einkommenselastizität',
+      fingerprint: 'ba1dcbed8dcb4edf',
+      confidence: 0.84,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-3',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
       id: 'mikro1.probeklausur.img8769.a1.9-15',
       sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8769',
       sourcePath: 'Probeklausur/IMG_8769.JPG',
@@ -331,6 +343,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.84,
       reviewedBy: 'codex-official-task-review-mikro1-pass-2',
       reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8780-8782.a6',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8780',
+      sourcePath: 'Probeklausur/IMG_8780.JPG',
+      publicLabel: 'Probeklausur',
+      page: 15,
+      section: 'Aufgabe 6: Produktionsfunktion, Skalenerträge, Grenzproduktivität, TRS und bedingte Faktornachfrage',
+      fingerprint: '36626251d1aee9c9',
+      confidence: 0.84,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-3',
+      reviewedAt: '2026-06-08'
     })
   ],
   gewinn: [
@@ -395,6 +419,18 @@ export const MIKRO1_SOURCE_ANCHORS = Object.freeze({
       section: 'Wohlfahrt',
       fingerprint: '28f3cf0a5be31e29',
       confidence: 0.91
+    }),
+    anchor({
+      id: 'mikro1.probeklausur.img8775-8777.a4',
+      sourceId: 'mikro1-exam-mikrookonomik-i-probeklausur-img-8775',
+      sourcePath: 'Probeklausur/IMG_8775.JPG',
+      publicLabel: 'Probeklausur',
+      page: 10,
+      section: 'Aufgabe 4: Marktnachfrage, Elastizität, Angebot und Marktgleichgewicht',
+      fingerprint: '3c59a8c81582a655',
+      confidence: 0.84,
+      reviewedBy: 'codex-official-task-review-mikro1-pass-3',
+      reviewedAt: '2026-06-08'
     })
   ],
   monopol: [

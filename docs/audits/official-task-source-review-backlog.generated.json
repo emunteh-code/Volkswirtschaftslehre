@@ -5,7 +5,7 @@
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 7,
+    "officialTaskSourceFamilies": 10,
     "weakPages": 25,
     "taskSignalPages": 989
   },
@@ -103,7 +103,7 @@
     {
       "module": "mikro1",
       "officialTaskDocuments": 18,
-      "officialTaskSourceFamilies": 7,
+      "officialTaskSourceFamilies": 10,
       "documentRegistryFamilies": 18,
       "pageCount": 10,
       "weakPageCount": 0,

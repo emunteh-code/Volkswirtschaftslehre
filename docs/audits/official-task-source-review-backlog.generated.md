@@ -9,7 +9,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Official task documents in registry: **276**
 - Modules with task corpus: **8**
 - Modules missing task corpus: **3**
-- Reviewed official-task-source families: **7**
+- Reviewed official-task-source families: **10**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
 
@@ -23,7 +23,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | `makro1` | 29 | 29 | 0 | 86 | 0 (0%) | 70 | 29 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `makro2` | 22 | 22 | 0 | 34 | 0 (0%) | 34 | 22 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `mikro1` | 18 | 18 | 7 | 10 | 0 (0%) | 10 | 0 | 0 | Review documents manually and classify task relevance. |
+| `mikro1` | 18 | 18 | 10 | 10 | 0 (0%) | 10 | 0 | 0 | Review documents manually and classify task relevance. |
 | `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `oekonometrie` | 33 | 33 | 0 | 53 | 0 (0%) | 41 | 29 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `recht` | 17 | 17 | 0 | 313 | 2 (1%) | 32 | 9 | 2 | Start human task-family mapping on ready documents with task signals. |

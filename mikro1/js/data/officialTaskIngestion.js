@@ -21,7 +21,10 @@ export const MIKRO1_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'mikro1.official-task.probeklausur-a1-consumer-theory-mixed-true-false',
   'mikro1.official-task.probeklausur-a1-production-cost-monopoly-true-false',
   'mikro1.official-task.probeklausur-a2-hicks-decomposition',
-  'mikro1.official-task.probeklausur-a3-cost-function'
+  'mikro1.official-task.probeklausur-a3-cost-function',
+  'mikro1.official-task.probeklausur-a4-market-demand-equilibrium',
+  'mikro1.official-task.probeklausur-a5-household-lagrange-demand',
+  'mikro1.official-task.probeklausur-a6-production-cost-minimization'
 ]);
 
 /** Inventory snapshot from source-corpus-registry (2026-05-28); item-level OCR review is partial. */
@@ -37,7 +40,15 @@ export const MIKRO1_PROBEKLAUSUR_REVIEW_STATUS = Object.freeze({
     'IMG_8771.JPG',
     'IMG_8772.JPG',
     'IMG_8773.JPG',
-    'IMG_8774.JPG'
+    'IMG_8774.JPG',
+    'IMG_8775.JPG',
+    'IMG_8776.JPG',
+    'IMG_8777.JPG',
+    'IMG_8778.JPG',
+    'IMG_8779.JPG',
+    'IMG_8780.JPG',
+    'IMG_8781.JPG',
+    'IMG_8782.JPG'
   ],
   templatePdfPath: 'Weitere_Unterlagen/Klausur_Mikro1_ohneechtentext.pdf',
   templatePdfUsableAsItemBank: false,

@@ -4,8 +4,8 @@
 import { renderGraphPedagogyFooter } from "./graphPedagogy.js";
 import {
   getGraphClarity,
-  renderGraphLegendHtml,
-  renderGraphSeeLine
+  renderGraphContextBlock,
+  renderGraphLegendHtml
 } from "./graphClarity.js";
 
 /**
@@ -29,24 +29,22 @@ export function renderGraphShell({
   extraHtml = ""
 }) {
   const clarity = getGraphClarity(conceptId, moduleHint);
-  const subtitleBlock = subtitle
-    ? `<p class="graph-panel-subtitle">${subtitle}</p>`
-    : renderGraphSeeLine(conceptId, moduleHint);
-  const hintBlock = controls
-    ? `<p class="graph-control-hint">Regler anpassen — ${clarity.sliderEffect || "dann Kurven mit der Interpretation unten vergleichen."}</p>`
-    : "";
+  const contextBlock = renderGraphContextBlock(conceptId, moduleHint);
   const controlsBlock = controls
     ? `<div class="graph-controls" role="group" aria-label="Grafikparameter">${controls}</div>`
     : "";
-  const legendBlock = renderGraphLegendHtml(clarity.legend);
+  const legendBlock = clarity.legend?.length
+    ? `<div class="graph-legend-wrap">${renderGraphLegendHtml(clarity.legend)}</div>`
+    : "";
 
   return `${extraHtml}<div class="graph-container graph-shell" data-graph-concept="${conceptId}">
 <h3 class="graph-panel-title">${title}</h3>
-${subtitleBlock}
-${legendBlock}
-${hintBlock}
+${contextBlock}
 ${controlsBlock}
-<canvas id="graph_canvas" width="920" height="560" role="img" aria-label="${ariaLabel}"></canvas>
+<div class="graph-stage">
+${legendBlock}
+<canvas id="graph_canvas" width="1100" height="660" role="img" aria-label="${ariaLabel}"></canvas>
+</div>
 <div id="graph_info" class="graph-info" aria-live="polite"></div>
 ${renderGraphPedagogyFooter(conceptId, moduleHint)}
 </div>`;

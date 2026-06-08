@@ -37,6 +37,7 @@
   /* ── Layout measure ───────────────────────────────────── */
   --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
   --content-body-max: min(100%, clamp(900px, 82vw, 980px));
+  --graph-shell-max: min(100%, clamp(1120px, 90vw, 1480px));
   --content-rail-max: min(100%, 980px);
   --reading-measure: 72ch;
 

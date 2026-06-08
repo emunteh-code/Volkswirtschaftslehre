@@ -4,8 +4,8 @@
  */
 import {
   getGraphClarity,
-  renderGraphLegendHtml,
-  renderGraphSeeLine
+  renderGraphContextBlock,
+  renderGraphLegendHtml
 } from "./graphClarity.js";
 
 const DEFAULT_PROMPT =
@@ -99,15 +99,10 @@ const PEDAGOGY_BY_CONCEPT = {
  */
 export function renderGraphPedagogyFooter(conceptId, moduleHint = "") {
   const entry = PEDAGOGY_BY_CONCEPT[conceptId] || {};
-  const clarity = getGraphClarity(conceptId, moduleHint);
   const prompt = entry.prompt || DEFAULT_PROMPT;
   const notation = entry.notation || DEFAULT_NOTATION;
-  const sliderLine = clarity.sliderEffect
-    ? `<p class="graph-pedagogy-slider"><span class="graph-pedagogy-label">Regler</span> ${clarity.sliderEffect}</p>`
-    : "";
   return `<footer class="graph-pedagogy-footer" aria-label="Grafik-Lernhilfe">
 <p class="graph-pedagogy-prompt"><span class="graph-pedagogy-label">Vorhersage</span> ${prompt}</p>
-${sliderLine}
 <p class="graph-pedagogy-notation">${notation}</p>
 </footer>`;
 }
@@ -123,27 +118,26 @@ export function ensureGraphPedagogyChrome(conceptId, root = document, moduleHint
 
   const title = container.querySelector(".graph-panel-title");
   const clarity = getGraphClarity(conceptId, moduleHint);
-  if (!container.querySelector(".graph-see-line") && !container.querySelector(".graph-panel-subtitle")) {
+  if (!container.querySelector(".graph-context")) {
     const anchor = title || container.firstElementChild;
     if (anchor) {
-      anchor.insertAdjacentHTML(
-        "afterend",
-        renderGraphSeeLine(conceptId, moduleHint) + renderGraphLegendHtml(clarity.legend)
-      );
+      anchor.insertAdjacentHTML("afterend", renderGraphContextBlock(conceptId, moduleHint));
     }
-  } else if (!container.querySelector(".graph-legend-econ")) {
-    const legendEl = container.querySelector(".graph-see-line") || title;
-    legendEl?.insertAdjacentHTML("afterend", renderGraphLegendHtml(clarity.legend));
   }
 
-  if (!container.querySelector(".graph-control-hint") && container.querySelector(".graph-controls")) {
-    const hint = document.createElement("p");
-    hint.className = "graph-control-hint";
-    hint.textContent = `Regler anpassen — ${clarity.sliderEffect || "dann die Kurveninterpretation unten prüfen."}`;
+  const stage = container.querySelector(".graph-stage") || container.querySelector("canvas")?.parentElement;
+  if (!container.querySelector(".graph-legend-econ") && clarity.legend?.length) {
+    const legendHtml = renderGraphLegendHtml(clarity.legend);
     const canvas = container.querySelector("canvas");
-    if (canvas) container.insertBefore(hint, canvas);
-    else if (title?.nextSibling) title.insertAdjacentElement("afterend", hint);
-    else container.appendChild(hint);
+    if (canvas) {
+      if (!stage?.classList.contains("graph-stage")) {
+        canvas.insertAdjacentHTML("beforebegin", `<div class="graph-legend-wrap">${legendHtml}</div>`);
+      } else {
+        stage.insertAdjacentHTML("afterbegin", `<div class="graph-legend-wrap">${legendHtml}</div>`);
+      }
+    } else if (title) {
+      title.insertAdjacentHTML("afterend", legendHtml);
+    }
   }
 
   if (!container.querySelector(".graph-pedagogy-footer")) {

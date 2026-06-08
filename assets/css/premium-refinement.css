@@ -63,7 +63,7 @@ body {
 }
 
 #content[data-tab="graph"] {
-  max-width: min(100%, clamp(1120px, 90vw, 1480px));
+  max-width: min(100%, var(--graph-shell-max, clamp(1120px, 90vw, 1480px)));
   min-width: 0;
 }
 
@@ -4994,9 +4994,9 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 #content .graph-container {
   display: flex !important;
   flex-direction: column !important;
-  gap: 14px !important;
-  padding: clamp(14px, 1.6vw, 22px) clamp(16px, 2vw, 26px) clamp(18px, 2vw, 28px) !important;
-  margin: 0 auto 12px !important;
+  gap: 8px !important;
+  padding: clamp(10px, 1.2vw, 16px) clamp(12px, 1.6vw, 20px) clamp(14px, 1.6vw, 18px) !important;
+  margin: 0 auto 10px !important;
   max-width: 100% !important;
   border: 1px solid color-mix(in srgb, var(--border) 88%, var(--text) 5%) !important;
   background: var(--card) !important;
@@ -5005,40 +5005,105 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 
 #content .graph-container .graph-panel-title {
   margin: 0 !important;
-  padding: 0 0 10px !important;
+  padding: 0 0 6px !important;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 62%, transparent) !important;
 }
 
-/* Control strip = precision toolbar (lighter than per-control mini-cards) */
+#content .graph-context {
+  display: grid;
+  gap: 4px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#content .graph-regler-hint {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.35 !important;
+  color: color-mix(in srgb, var(--muted) 76%, var(--text) 24%) !important;
+}
+
+#content .graph-regler-label {
+  display: inline-block;
+  margin-right: 6px;
+  font-weight: 600;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 70%, var(--text) 30%);
+}
+
+/* Control strip = label | slider | value rows in one toolbar */
 #content .graph-controls,
 #content .graph-container .graph-controls {
   margin: 0 !important;
-  padding: 9px 11px !important;
-  border: none !important;
-  border-radius: 10px !important;
-  background: color-mix(in srgb, var(--surface2) 18%, var(--card) 82%) !important;
+  padding: 7px 10px !important;
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent) !important;
+  border-radius: 8px !important;
+  background: color-mix(in srgb, var(--surface2) 12%, var(--card) 88%) !important;
   box-shadow: none !important;
   border-top: none !important;
-  gap: 8px 10px !important;
+  gap: 5px !important;
   align-items: stretch !important;
 }
 
 #content .graph-container .ctrl-group {
-  padding: 5px 7px 5px !important;
-  border-radius: 8px !important;
-  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent) !important;
-  background: color-mix(in srgb, var(--card) 96%, var(--surface2) 4%) !important;
+  display: grid !important;
+  grid-template-columns: minmax(7.5rem, 22%) minmax(0, 1fr) minmax(2.75rem, auto) !important;
+  gap: 8px 12px !important;
+  align-items: center !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
   box-shadow: none !important;
 }
 
 #content .graph-container .ctrl-group label {
   font-size: 0.72rem !important;
-  letter-spacing: 0.07em !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+  margin: 0 !important;
 }
 
 #content .graph-container .ctrl-group .val {
-  font-size: 11.5px !important;
+  font-size: 11px !important;
+  text-align: right !important;
   opacity: 0.92;
+  margin: 0 !important;
+}
+
+#content .graph-container .ctrl-group input[type="range"] {
+  margin: 0 !important;
+}
+
+#content .graph-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+#content .graph-legend-wrap {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 2;
+  max-width: min(48%, 320px);
+  pointer-events: none;
+}
+
+#content .graph-legend-wrap .graph-legend-econ {
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  border-radius: 8px !important;
+  background: color-mix(in srgb, var(--card) 88%, var(--bg) 12%) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  justify-content: flex-end !important;
 }
 
 #content .graph-panel-subtitle {
@@ -5050,23 +5115,19 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 }
 
 #content .graph-control-hint {
-  margin: 0 0 8px !important;
-  padding: 0 !important;
-  font-size: 0.8rem !important;
-  line-height: 1.4 !important;
-  color: color-mix(in srgb, var(--muted) 78%, var(--text) 22%) !important;
+  display: none !important;
 }
 
 #content .graph-pedagogy-footer {
-  margin-top: 10px !important;
-  padding: 12px 0 4px !important;
+  margin-top: 8px !important;
+  padding: 10px 0 2px !important;
   border-top: 1px dashed color-mix(in srgb, var(--border) 58%, transparent) !important;
 }
 
 #content .graph-pedagogy-prompt {
-  margin: 0 0 8px !important;
-  font-size: 0.86rem !important;
-  line-height: 1.45 !important;
+  margin: 0 0 6px !important;
+  font-size: 0.84rem !important;
+  line-height: 1.42 !important;
   color: color-mix(in srgb, var(--text) 92%, var(--muted) 8%) !important;
 }
 
@@ -5091,16 +5152,13 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 }
 
 #content .graph-pedagogy-slider {
-  margin: 0 0 8px !important;
-  font-size: 0.82rem !important;
-  line-height: 1.4 !important;
-  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%) !important;
+  display: none !important;
 }
 
 #content .graph-see-line {
-  margin: 0 0 10px !important;
-  font-size: 0.88rem !important;
-  line-height: 1.45 !important;
+  margin: 0 !important;
+  font-size: 0.84rem !important;
+  line-height: 1.42 !important;
   color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%) !important;
 }
 
@@ -5115,20 +5173,20 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 }
 
 #content .graph-legend-econ {
-  margin: 0 0 12px !important;
+  margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 8px 14px !important;
+  gap: 6px 10px !important;
 }
 
 #content .graph-legend-econ-item {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  font-size: 0.78rem !important;
-  color: color-mix(in srgb, var(--muted) 75%, var(--text) 25%) !important;
+  gap: 5px !important;
+  font-size: 0.72rem !important;
+  color: color-mix(in srgb, var(--muted) 72%, var(--text) 28%) !important;
 }
 
 #content .graph-legend-swatch {
@@ -5158,10 +5216,10 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
-  max-height: clamp(320px, 54vh, 580px) !important;
-  min-height: clamp(260px, 36vh, 440px) !important;
-  margin: 2px 0 0 !important;
-  aspect-ratio: 23 / 14 !important;
+  max-height: clamp(280px, 50vh, 580px) !important;
+  min-height: clamp(220px, 32vh, 380px) !important;
+  margin: 0 !important;
+  aspect-ratio: 5 / 3 !important;
 }
 
 #content .graph-container.graph-container--macro-focus .graph-plot-shell--macro .graph-canvas,
@@ -5188,8 +5246,8 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 
 /* Interpretation readout: attached strip, not a second card stack */
 #content .graph-info {
-  margin-top: 4px !important;
-  padding: 14px 0 6px !important;
+  margin-top: 2px !important;
+  padding: 10px 0 4px !important;
   background: transparent !important;
   border: none !important;
   border-top: 1px solid color-mix(in srgb, var(--border) 52%, transparent) !important;
@@ -6752,6 +6810,35 @@ body.light-mode #content .source-provenance-mark {
 
   #content[data-tab="graph"] {
     max-width: 100% !important;
+  }
+
+  #content .graph-legend-wrap {
+    position: static;
+    max-width: 100%;
+    margin-bottom: 6px;
+  }
+
+  #content .graph-legend-wrap .graph-legend-econ {
+    justify-content: flex-start !important;
+  }
+
+  #content .graph-container .ctrl-group {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "label val"
+      "slider slider" !important;
+  }
+
+  #content .graph-container .ctrl-group label {
+    grid-area: label;
+  }
+
+  #content .graph-container .ctrl-group .val {
+    grid-area: val;
+  }
+
+  #content .graph-container .ctrl-group input[type="range"] {
+    grid-area: slider;
   }
 
   #rightPanel,

@@ -354,5 +354,18 @@ export function renderGraphLegendHtml(items) {
  */
 export function renderGraphSeeLine(conceptId, moduleHint) {
   const { see } = getGraphClarity(conceptId, moduleHint);
-  return `<p class="graph-see-line"><span class="graph-see-label">Was du siehst</span> ${see}</p>`;
+  return `<p class="graph-see-line"><span class="graph-see-label">Was du sehen sollst</span> ${see}</p>`;
+}
+
+/**
+ * Compact teaching context: one see-line + short Regler hint (no duplicate footer copy).
+ * @param {string} conceptId
+ * @param {string} [moduleHint]
+ */
+export function renderGraphContextBlock(conceptId, moduleHint = "") {
+  const { sliderEffect } = getGraphClarity(conceptId, moduleHint);
+  const regler = sliderEffect
+    ? `<p class="graph-regler-hint"><span class="graph-regler-label">Regler</span> ${sliderEffect}</p>`
+    : "";
+  return `<div class="graph-context">${renderGraphSeeLine(conceptId, moduleHint)}${regler}</div>`;
 }

@@ -238,9 +238,9 @@ Maps to `conceptLinks.js` per concept.
 | `concepts` | `concept[]` | yes | Flattened navigable concepts (today equals all `CHAPTERS` rows). |
 | `full_exams` | `record<string, fullExamDocument>` | no | Maps to `FULL_EXAMS` (see §4.10). |
 | `portal_profile` | `object` | no | **Non-breaking** flags mirroring repo reality: `renderer: 'portal-core' \| 'portal-core+mikro1-overlay' \| 'portal-core+oekonometrie-overlay'`, `delivery: 'module-folder' \| 'generated-portal'`. |
-| `landing_content_ref` | `string` | no | Key into `module-content.js` narrative (`makro1`, `"internationale-wirtschaftsbeziehungen"`, `r`). **Absent** for `mikro1` / `mikro2` today — schema allows `null` to record the gap. |
+| `landing_content_ref` | `string` | no | Key into `module-content.js` narrative (`mikro1`, `mikro2`, `makro1`, `"internationale-wirtschaftsbeziehungen"`, `r`). Schema allows `null` for modules whose landing narrative is intentionally absent or generated elsewhere. |
 
-**`mikro2` guard:** This module has **no** `contentManifest.js` and **no** in-repo Mikro II corpus; do not assume the rows above are populated for `mikro2` the same way as for curated modules — see `docs/audits/mikro2-status-guard-pass-2.md`.
+**`mikro2` guard:** This module now has a local official Mikro II lecture corpus and `mikro2/js/data/contentManifest.js`, but it is still not full source-parity complete: three current concepts remain `platform-added-*`, and the official exercise / solution / exam archive is still missing. Treat `docs/audits/mikro2-official-source-ingest-pass-1.md` and `docs/audits/2026-06-03-mikro2-source-metadata-readiness-pass.md` as the current source-status baseline; older quarantine docs are historical.
 
 ### 4.2 `chapter`
 

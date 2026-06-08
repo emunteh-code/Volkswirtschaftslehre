@@ -69,7 +69,7 @@ export const MODULES = [
     releaseTier: "core",
     examPrepNote: "Oligopol, Spieltheorie und GE — Ergänzungen sind gekennzeichnet.",
     sourceCorpusInRepo: true,
-    sourceStatusNote: "Offizielle VL-PDFs im Kurs in ILIAS; Ergänzungen im Portal gekennzeichnet."
+    sourceStatusNote: "Offizielle Mikro-II-VL-PDFs liegen lokal unter source-materials/Mikroökonomik II/; Ergänzungen und fehlende offizielle Aufgabenarchive sind im Portal gekennzeichnet."
   },
   {
     slug: "makro1",

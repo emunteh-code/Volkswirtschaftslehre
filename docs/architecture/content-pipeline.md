@@ -193,7 +193,7 @@ These are the **deployable backbone**; modules plug data and graphs into them.
 
 ### Phase 1 — Metadata parity (low risk)
 
-- **`mikro1` / `mikro2`** in `module-content.js`: done for source narrative; **`mikro2`** explicitly non-corpus (`module-content-parity-cleanup-pass-1.md`).
+- **`mikro1` / `mikro2`** in `module-content.js`: done for source narrative; **`mikro2`** is now local-corpus-backed but still partial (`mikro2-official-source-ingest-pass-1.md`, `2026-06-03-mikro2-source-metadata-readiness-pass.md`).
 - **`internationale-wirtschaftsbeziehungen`:** quoted **`module-content.js`** key; **`contentManifest.js`** + provenance: **`docs/audits/iwb-provenance-curation-pass-1.md`**.
 - Remove **`sourceRoot`** from shared `modules.js` (or replace with empty string + comment).
 

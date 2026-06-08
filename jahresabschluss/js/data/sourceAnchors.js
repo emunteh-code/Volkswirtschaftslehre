@@ -14,7 +14,9 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.82
+  confidence = 0.82,
+  reviewedBy = REVIEWED_BY,
+  reviewedAt = REVIEWED_AT
 }) {
   return {
     id,
@@ -30,8 +32,8 @@ function anchor({
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -166,6 +168,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "t1         120.000,--                             15.000,--                                 105.000,--",
       fingerprint: '6748ad22eca338bb',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a5.p1.anlagevermoegen-afa-verkauf',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 5: Abschreibung und Anlagenverkauf (8 Punkte)',
+      fingerprint: 'fabd491c27afd8fe',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-1',
+      reviewedAt: '2026-06-08'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a5.p1.anlagevermoegen-afa-verkauf',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 5 – Anlagevermögen (8 Punkte)',
+      fingerprint: '05889e099c633cc3',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   umlauf_bewertung_verfahren: [
@@ -367,4 +393,3 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
     })
   ]
 });
-

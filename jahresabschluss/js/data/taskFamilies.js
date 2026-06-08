@@ -522,6 +522,43 @@ const VL_GROUNDED_FAMILIES = [
   })
 ];
 
+const OFFICIAL_TASK_SOURCE_FAMILIES = [
+  family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a5-anlagevermoegen-afa-verkauf',
+    conceptId: 'anlagevermoegen',
+    title: 'Probeklausur Aufgabe 5: Abschreibung und Anlagenverkauf',
+    topic: 'Lineare AfA, Buchwert, Anlagenverkauf, Gewinn/Verlust, Bruttomethode',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 5: jährliche lineare Abschreibung für eine Maschine mit AK 60.000 €, ND 5 Jahre berechnen, beim Verkauf am 01.07.t2 für 35.000 € Buchwert und Gewinn/Verlust ermitteln und den Buchungssatz nach der Bruttomethode angeben. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a5.p1.anlagevermoegen-afa-verkauf',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a5.p1.anlagevermoegen-afa-verkauf'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 8,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Verkaufszeitpunkt 01.07.t2 als volle drei Jahre statt 2,5 Jahre Nutzungsdauer lesen',
+      'Lineare AfA nur für ein Jahr berechnen und den kumulierten Abschreibungsbetrag vergessen',
+      'Buchwert und Verkaufspreis vertauschen oder den Gewinn als Verlust ausweisen',
+      'Bruttomethode ohne getrennte Konten für Erlöse aus Anlagenabgängen, Anlagenabgang und kumulierte AfA buchen'
+    ],
+    gradingRubric: [
+      'Aufgabe 5 enthält 8 sichtbare Punkte',
+      'Teil a: 60.000 € / 5 = 12.000 € jährliche AfA, 2 Punkte',
+      'Teil b: 2,5 Jahre AfA = 30.000 €, Buchwert = 30.000 €, Verkaufspreis 35.000 € und Gewinn = 5.000 €, 4 Punkte',
+      'Teil c: Bruttomethoden-Buchung mit Bank, Erlöse aus Anlagenabgängen, Anlagenabgang, Maschine und AfA, 2 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 1',
+      task: 'Aufgabe 5',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  })
+];
+
 const OFFICIAL_DOCUMENT_FAMILIES = [
   {
     id: 'jahresabschluss.official-doc.jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
@@ -800,6 +837,7 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
 
 export const TASK_FAMILIES = Object.freeze([
   ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_TASK_SOURCE_FAMILIES,
   ...OFFICIAL_DOCUMENT_FAMILIES,
   ...buildJahresabschlussOfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);
@@ -811,4 +849,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

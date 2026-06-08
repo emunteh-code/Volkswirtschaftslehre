@@ -3,7 +3,10 @@
 // VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
-import { buildOekonometrieOfficialTaskPlaceholders } from './officialTaskIngestion.js';
+import {
+  assertOekonometrieOfficialTaskSourcePolicy,
+  buildOekonometrieOfficialTaskPlaceholders
+} from './officialTaskIngestion.js';
 
 const MODULE = 'oekonometrie';
 const OFFICIAL_TASK_GAP = "VL-Anker gesetzt; item-level Klausur-Mapping offen.";
@@ -40,7 +43,7 @@ function family({
     gradingRubric,
     currentCoverage,
     officialTaskCoverage,
-    officialTaskGap: OFFICIAL_TASK_GAP
+    officialTaskGap: officialTaskCoverage === 'official-task-source' ? null : OFFICIAL_TASK_GAP
   };
 }
 
@@ -1032,6 +1035,50 @@ const VL_GROUNDED_FAMILIES = [
   })
 ];
 
+const OFFICIAL_TASK_SOURCE_FAMILIES = [
+  family({
+    id: 'oekonometrie.official-task.probeklausur-1-a1-loglog-ols-inference',
+    conceptId: 'matrix_notation',
+    title: 'Probeklausur 1 Aufgabe 1: Log-log OLS-Modell auswerten',
+    topic: 'Matrixnotation, log-log Koeffizienteninterpretation, t-Test, Konfidenzintervall, Signifikanzwege, R², angepasstes R², F-Test, Prognose',
+    method: 'Offizielle Probeklausur I Einführung in die Ökonometrie, Aufgabe 1: geschätztes log-log OLS-Modell zur Reisproduktion mit 43 Farmen auswerten. Die Aufgabe verlangt Matrixnotation mit Dimensionen, Interpretation von b2, Teststatistik und Konfidenzintervall für b3, drei Signifikanzprüfwege, R² und angepasstes R², gemeinsamen F-Test und Prognose für gegebene Arbeit- und Düngereinsätze. Native Text wurde extrahiert und die gerenderte Aufgabenseite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['oekonometrie.probeklausur1.a1.p2.loglog-ols-inference'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 35,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Log-log-Koeffizienten als Niveauänderung statt Elastizität interpretieren',
+      'Matrixdimensionen ohne Intercept oder mit falscher Beobachtungszahl angeben',
+      't-Statistik mit falschem Standardfehler oder falschem Vorzeichen berechnen',
+      'Konfidenzintervall ohne Freiheitsgrade oder ohne inhaltliche Interpretation abgeben',
+      'R² und angepasstes R² verwechseln',
+      'Gemeinsamen F-Test wie mehrere getrennte t-Tests behandeln',
+      'Prognosewerte nicht logarithmisch konsistent einsetzen'
+    ],
+    gradingRubric: [
+      '35 Punkte insgesamt',
+      'a) 3 Punkte: Modell in Matrixnotation mit Dimensionen',
+      'b) 2 Punkte: Interpretation des geschätzten Parameters b2',
+      'c) 3 Punkte: Teststatistik für b3',
+      'd) 5 Punkte: Konfidenzintervall für β3 bei α = 0.05 berechnen und interpretieren',
+      'e) 6 Punkte: drei Wege zur Signifikanzprüfung von b3 erklären',
+      'f) 9 Punkte: R² und angepasstes R² berechnen, R² interpretieren',
+      'g) 4 Punkte: gemeinsamer Hypothesentest aller Koeffizienten bei α = 0.05',
+      'h) 3 Punkte: Reisproduktion für gegebene Arbeit und Düngereinsatz prognostizieren'
+    ],
+    currentCoverage: {
+      source: 'Ökonometrie/Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_1.pdf',
+      page: 'Seite II',
+      task: 'Aufgabe 1, Teile a-h',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
+    },
+    officialTaskCoverage: 'official-task-source'
+  })
+];
+
+OFFICIAL_TASK_SOURCE_FAMILIES.forEach((item) => assertOekonometrieOfficialTaskSourcePolicy(item));
+
 const OFFICIAL_DOCUMENT_FAMILIES = [
   {
     id: 'oekonometrie.official-doc.oekonometrie-exercise-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung',
@@ -1730,6 +1777,7 @@ const OFFICIAL_DOCUMENT_FAMILIES = [
 
 export const TASK_FAMILIES = Object.freeze([
   ...VL_GROUNDED_FAMILIES,
+  ...OFFICIAL_TASK_SOURCE_FAMILIES,
   ...OFFICIAL_DOCUMENT_FAMILIES,
   ...buildOekonometrieOfficialTaskPlaceholders([]).map((placeholder) => familyFromPlaceholder(placeholder))
 ]);
@@ -1741,4 +1789,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

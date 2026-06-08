@@ -173,10 +173,10 @@
       "sourceEligibleConceptsWithSourceAnchors": 32,
       "sourceRefCoveragePct": 100,
       "sourceAnchorCoveragePct": 100,
-      "sourceAnchors": 64,
-      "taskFamilies": 98,
-      "sourceGroundedTaskFamilies": 97,
-      "officialTaskSourceFamilies": 0,
+      "sourceAnchors": 65,
+      "taskFamilies": 99,
+      "sourceGroundedTaskFamilies": 98,
+      "officialTaskSourceFamilies": 1,
       "officialDocumentRegistryFamilies": 33,
       "moduleMismatchTaskFamilies": 0,
       "officialFormulaCards": 101,
@@ -184,7 +184,7 @@
       "anchorComplete": true,
       "anchorStatus": "complete",
       "examBankComplete": false,
-      "examBankStatus": "official source docs present; no reviewed official-task-source families",
+      "examBankStatus": "official-task-source pilot present (1); 33 document-registry placeholders still unresolved",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
       "adaptiveReady": false,
@@ -472,7 +472,7 @@
     },
     {
       "module": "oekonometrie",
-      "reason": "official exam bank incomplete (official source docs present; no reviewed official-task-source families)"
+      "reason": "official exam bank incomplete (official-task-source pilot present (1); 33 document-registry placeholders still unresolved)"
     },
     {
       "module": "oekonometrie",

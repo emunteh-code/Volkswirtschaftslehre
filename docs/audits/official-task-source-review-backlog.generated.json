@@ -5,7 +5,7 @@
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 16,
+    "officialTaskSourceFamilies": 17,
     "weakPages": 25,
     "taskSignalPages": 989,
     "moduleMismatchDocuments": 1
@@ -142,7 +142,7 @@
     {
       "module": "oekonometrie",
       "officialTaskDocuments": 33,
-      "officialTaskSourceFamilies": 0,
+      "officialTaskSourceFamilies": 1,
       "documentRegistryFamilies": 33,
       "pageCount": 53,
       "weakPageCount": 0,

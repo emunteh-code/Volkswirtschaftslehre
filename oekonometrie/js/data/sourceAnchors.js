@@ -14,7 +14,9 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.82
+  confidence = 0.82,
+  reviewedBy = REVIEWED_BY,
+  reviewedAt = REVIEWED_AT
 }) {
   return {
     id,
@@ -30,8 +32,8 @@ function anchor({
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -56,6 +58,18 @@ export const OEKONOMETRIE_SOURCE_ANCHORS = Object.freeze({
       section: "P22  22        0",
       fingerprint: '4103214c08d67bbd',
       confidence: 0.84
+    }),
+    anchor({
+      id: 'oekonometrie.probeklausur1.a1.p2.loglog-ols-inference',
+      sourceId: 'oekonometrie-exam-okonometrie-exercises-einfuhrung-in-die-okonometrie-ubung-probeklausuren-probeklausur-1',
+      sourcePath: 'Exercises_Einführung_in_die_Ökonometrie_Übung/Probeklausuren/Probeklausur_1.pdf',
+      publicLabel: 'Probeklausur_1',
+      page: 2,
+      section: 'Aufgabe 1: Log-log OLS-Modell Reisproduktion, Matrixnotation, Inferenz, R², F-Test und Prognose',
+      fingerprint: 'e4f9148f61066ed2',
+      confidence: 0.9,
+      reviewedBy: 'codex-official-task-review-oekonometrie-pass-1',
+      reviewedAt: '2026-06-08'
     })
   ],
   sample_moments: [
@@ -741,4 +755,3 @@ export const OEKONOMETRIE_SOURCE_ANCHORS = Object.freeze({
     })
   ]
 });
-

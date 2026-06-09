@@ -40,7 +40,8 @@ const FORBIDDEN_IN_PEDAGOGY_HTML = [
   { re: /<\/strong(?!>)/g, label: "broken </strong tag in template" },
   { re: /&lt;\/?strong&gt;/g, label: "escaped strong tag in pedagogy HTML" },
   { re: /&lt;\/?em&gt;/g, label: "escaped em tag in pedagogy HTML" },
-  { re: /&lt;br\s*\/?&gt;/g, label: "escaped br tag in pedagogy HTML" }
+  { re: /&lt;br\s*\/?&gt;/g, label: "escaped br tag in pedagogy HTML" },
+  { re: /•\s*☐/g, label: "raw bullet-checkbox pattern in pedagogy HTML" }
 ];
 
 /** Whole-repo learner chrome — plain text grep (not only template literals). */

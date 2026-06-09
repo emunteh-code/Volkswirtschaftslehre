@@ -8553,6 +8553,40 @@ body:not(.light-mode) #content .formula-card {
   line-height: var(--leading-normal, 1.55);
 }
 
+.concept-anchor__row--formula {
+  grid-template-columns: 6.5rem 1fr;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface2) 92%, var(--accent) 8%);
+}
+
+.concept-anchor__value-wrap--formula {
+  display: grid;
+  gap: 6px;
+}
+
+.concept-anchor__value-wrap--formula .theory-intuition-callout-label {
+  display: none;
+}
+
+.concept-anchor__value-wrap--formula .theory-intuition-callout-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  font-size: var(--type-xs, 0.75rem);
+  line-height: 1.4;
+}
+
+.concept-anchor__value-wrap--formula .theory-intuition-callout-anchor {
+  flex-shrink: 0;
+}
+
+.concept-anchor__value-wrap--formula .theory-intuition-callout-desc {
+  margin: 0;
+  color: var(--muted);
+}
+
 .rp-formula-fallback__hint {
   margin: 6px 0 0;
   font-size: var(--type-xs, 0.75rem);
@@ -9101,7 +9135,8 @@ body.light-mode #shortcutHint .sc-key {
 .fehler-checklist__row {
   min-height: 32px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding: 2px 0;
 }
 
 .fehler-checklist__label {

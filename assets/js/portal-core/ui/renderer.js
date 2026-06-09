@@ -643,11 +643,12 @@ ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${
   function extractTheorySignals(entry, conceptId = null, opts = {}) {
     const chapterTitle = conceptId ? chapterMap[conceptId]?.title : entry?.title;
     const fusionBase = opts.skipFusion
-      ? { moduleSlug, chapterTitle }
+      ? { moduleSlug, chapterTitle, conceptId: conceptId || "" }
       : {
         ...buildIntuitionFusionOpts(entry, conceptId),
         moduleSlug,
-        chapterTitle
+        chapterTitle,
+        conceptId: conceptId || ""
       };
     const warningData = opts.skipFusion
       ? getWarningSystemData(entry, null, fusionBase)
@@ -1591,7 +1592,8 @@ ${sourceMeta}
           {
             ...buildIntuitionFusionOpts(entry, conceptId),
             moduleSlug,
-            chapterTitle: chapter.title
+            chapterTitle: chapter.title,
+            conceptId
           }
         );
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);

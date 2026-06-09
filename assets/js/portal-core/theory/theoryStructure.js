@@ -335,6 +335,43 @@ function isVagueReadinessContent(innerHtml) {
   return VAGUE_READINESS_RE.test(text) && !/ich\s+(kann|erkenne|kenne|weiß)/i.test(text);
 }
 
+/** @param {{ chapterTitle?: string, conceptId?: string }} meta */
+function getConceptReadinessFallback(meta = {}) {
+  const title = String(meta.chapterTitle || "").toLowerCase();
+  const slug = String(meta.conceptId || "").toLowerCase();
+  const key = slug || title;
+
+  if (/deskriptiv/.test(key)) {
+    return [
+      "Ich kann Lage (Mittelwert/Median) und Streuung (Varianz, Standardabweichung) aus Rohdaten berechnen.",
+      "Ich erkenne, wann Ausreißer oder Schiefe den Median dem Mittelwert vorziehen lassen.",
+      "Ich kenne die Bessel-korrigierte Stichprobenvarianz mit Nenner (n−1).",
+      "Ich weiß, Lage, Streuung und Formhinweis in einer Klausurantwort zu verbinden."
+    ];
+  }
+  if (/anova|varianzanalyse/.test(key)) {
+    return [
+      "Ich kann F-Test und Gruppenmittel aus dem ANOVA-Output gemeinsam lesen.",
+      "Ich erkenne Aufgaben mit mehreren Gruppen und einer metrischen Zielgröße als ANOVA-Kandidaten.",
+      "Ich kenne den Unterschied zwischen globalem F-Test und paarweisen Nachprüfungen.",
+      "Ich weiß, Post-hoc-Ergebnisse nur bei abgelehntem H₀ fachlich zu interpretieren."
+    ];
+  }
+  return [
+    "Ich kann die Kerngrößen benennen, ohne ins Formelblatt zu schauen.",
+    "Ich erkenne den Aufgabentyp an Stichworten und Datenlayout.",
+    "Ich kenne den ersten Rechenschritt bei einer Standardaufgabe.",
+    "Ich weiß, welche typischen Fehler ich vor der Rechnung prüfen muss."
+  ];
+}
+
+/** @param {string[]} items */
+function buildReadinessChecklistHtml(items) {
+  const lis = items.map((line) => `<li class="readiness-checklist__item">${escapeHtml(line)}</li>`).join("");
+  return `<p class="readiness-checklist__intro">Prüfe kurz, ob du bereit bist:</p>
+<ul class="readiness-checklist">${lis}</ul>`;
+}
+
 /**
  * Convert legacy definition bullet lists to glossary rows (no bullets, no blockquote markers).
  * @param {string} innerHtml
@@ -673,13 +710,7 @@ ${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabel
     grouped.vor_aufgaben = [
       {
         heading: "Vor den Aufgaben",
-        inner: `<p class="readiness-checklist__intro">Prüfe kurz, ob du bereit bist:</p>
-<ul class="readiness-checklist">
-<li class="readiness-checklist__item">Ich kann die Kerngrößen benennen, ohne ins Formelblatt zu schauen.</li>
-<li class="readiness-checklist__item">Ich erkenne den Aufgabentyp an Stichworten und Datenlayout.</li>
-<li class="readiness-checklist__item">Ich kenne den ersten Rechenschritt bei einer Standardaufgabe.</li>
-<li class="readiness-checklist__item">Ich weiß, welche typischen Fehler ich vor der Rechnung prüfen muss.</li>
-</ul>`
+        inner: buildReadinessChecklistHtml(getConceptReadinessFallback(meta))
       }
     ];
   }
@@ -913,6 +944,7 @@ function injectFragmentIntoRecipeSection(html, sectionId, fragment) {
 export function fuseIntuitionIntoTheoryHtml(html, intuitionRaw, entry = {}, fusionOpts = {}) {
   const base = completeTheoryRecipe(normalizeTheoryHtml(html), entry, {
     chapterTitle: fusionOpts.chapterTitle || entry.title,
+    conceptId: fusionOpts.conceptId || "",
     moduleSlug: fusionOpts.moduleSlug || entry.moduleSlug || "",
     headerMotivationShown: fusionOpts.headerMotivationShown !== false,
     headerObjectivesShown: fusionOpts.headerObjectivesShown !== false

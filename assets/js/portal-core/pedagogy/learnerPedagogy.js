@@ -313,13 +313,13 @@ export function renderExamRecognitionBlock(chapter, entry, intuition = null) {
       ? escapeHtml(
           intuition.exam
             .slice(0, 2)
-            .map((p) => String(p.if || "").trim())
+            .map((p) => sanitizeLearnerPlainText(p.if || ""))
             .filter(Boolean)
             .join(" · ")
         )
       : `Stichworte zu „${title}" in Aufgabenstellung, Datenlayout oder gesuchter Größe.`;
   const ersteEntscheidung = intuition?.bridge
-    ? escapeHtml(stripHtml(String(intuition.bridge)).slice(0, 220))
+    ? escapeHtml(sanitizeLearnerPlainText(intuition.bridge).slice(0, 220))
     : `Modell/Annahme benennen, dann ${method} zuordnen.`;
   const ersterRechenschritt = "Größen und Einheiten notieren; Notation aus der Vorlesung fixieren, dann ersten formalen Schritt skizzieren.";
   const haeufigeFalle = "Stichprobe und Population bzw. Parameter und Schätzer nicht vermischen; Annahmen vor der Rechnung benennen.";

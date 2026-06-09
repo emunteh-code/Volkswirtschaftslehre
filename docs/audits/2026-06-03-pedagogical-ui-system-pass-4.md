@@ -4,16 +4,17 @@ Fleet implementation via `portal-core` + shared CSS. No route/IA changes.
 
 ## Post-Pass 4 defect fix (2026-06-09)
 
-| Defect | Before | After |
-|--------|--------|-------|
-| Raw HTML leakage (`<strong>`, `<em>`, `<br>`, entity-escaped tags) | Tags visible in Kernsatz, Klausurerkennung, theory body | `studentizeTheoryHtml` strips inline tags + entities; `sanitizeLearnerPlainText` at extraction; CI escaped-tag patterns |
-| Markdown `>` markers | Glossary terms like `>Arithmetisches Mittel` | `sanitizeLearnerPlainText` strips leading `>`; CI line-start blockquote scan |
-| Definitionen glossary rows | Bullet `<ul><li><strong>…</strong>` lists | `convertDefinitionListsToGlossary` → `theory-glossary-*` rows; formeln-linked terms; CSS no bullets |
-| Vor den Aufgaben | “Lern-Checkliste.” / vague “Kernrelationen aktivieren” fallback | Vague paragraphs stripped; concrete Ich kann/erkenne/kenne/weiß synthesis from objectives; CI warns on Lern-Checkliste |
-| Selbsttest vor der Klausur | Raw `• ☐` pattern | Structured `fehler-checklist__*` checkbox rows; concept-specific prompts from warning title + body |
-| Klausurerkennung grid | Cramped 140px labels, tight gap | Grid 150px label column, 20px gap, 9px row padding; highlighted Kernsatz row |
-| Right rail warnings | Full-length bodies | Truncate at 320 chars with “Mehr anzeigen”; max 2 rows + overflow disclosure |
-| ConceptAnchor density | Long Kernsatz blocks, raw HTML | Split labelled rows; “Mehr anzeigen” over 200 chars; Kernsatz highlight row |
+| Defect | Before | After | Status |
+|--------|--------|-------|--------|
+| Raw HTML leakage (`<strong>`, `<em>`, `<br>`, entity-escaped tags) | Tags visible in Kernsatz, Klausurerkennung, theory body | `studentizeTheoryHtml` strips inline tags + entities; `sanitizeLearnerPlainText` at extraction; CI escaped-tag patterns | **Fixed** |
+| Markdown `>` markers | Glossary terms like `>Arithmetisches Mittel` | `sanitizeLearnerPlainText` strips leading `>`; CI line-start blockquote scan | **Fixed** |
+| Definitionen glossary rows | Bullet `<ul><li><strong>…</strong>` lists | `convertDefinitionListsToGlossary` → `theory-glossary-*` rows; formeln-linked terms; CSS no bullets | **Fixed** |
+| Vor den Aufgaben | “Lern-Checkliste.” / vague “Kernrelationen aktivieren” fallback | Vague paragraphs stripped; concrete Ich kann/erkenne/kenne/weiß synthesis from objectives; deskriptiv/ANOVA concept fallbacks; CI warns on Lern-Checkliste | **Fixed** |
+| Selbsttest vor der Klausur | Raw `• ☐` pattern | Structured `fehler-checklist__*` checkbox rows (min 32px); subtitle present; CI `• ☐` guard | **Fixed** |
+| Klausurerkennung grid | Cramped 140px labels, tight gap | Grid 150px label column, 20px gap, 9px row padding; highlighted Kernsatz row; sanitized exam cues | **Fixed** |
+| Right rail warnings | Full-length bodies | Truncate at 320 chars with “Mehr anzeigen”; max 2 rows + overflow disclosure | **Fixed** |
+| ConceptAnchor density | Long Kernsatz blocks, raw HTML | Split labelled rows; “Mehr anzeigen” over 200 chars; Kernsatz highlight row; formula mini-row CSS | **Fixed** |
+| CI + validation | Partial guards | `check-learner-ui-literals.mjs` extended (raw HTML, `>`, Lern-Checkliste, `• ☐`, platform-added-*); `npm run validate` OK | **Fixed** |
 
 ## Task matrix
 
@@ -40,12 +41,16 @@ Fleet implementation via `portal-core` + shared CSS. No route/IA changes.
 | 19 | Validation extended | **Done** | `check-sidebar-markers.mjs`, updated `check-right-rail.mjs` |
 | 20 | Audit doc | **Done** | This file |
 
-## Validation
+## Validation (2026-06-09)
 
 ```bash
-npm run validate
+npm run validate   # OK — portal-shell, math-literals, right-rail, learner-ui-literals, sidebar-markers, check-r-tab-lab
 npm run trust:pass1
 ```
+
+Grep verification (learner render paths):
+- `Lern-Checkliste` — only in strip/filter logic (`studentFacingText.js`, `warningSystem.js`), not emitted
+- Raw `<strong` — none in `learnerPedagogy.js` output strings; theory synthesis uses escaped plain text at extraction
 
 ## Manual inspect checklist
 

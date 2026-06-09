@@ -840,3 +840,21 @@ body.light-mode #content .mikro1-intuition .intuition-callout {
 body.light-mode #content .mikro1-intuition .intuition-callout-anchor {
   background: color-mix(in srgb, var(--surface2) 20%, var(--card) 80%);
 }
+
+/* Graph labels — neutral, not faux-links */
+#content .graph-interpretation-label,
+#content .graph-insight-label,
+#content .graph-info .gi-label,
+#content .graph-info strong {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.density-intuition-diagram {
+  margin: 12px 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface2);
+  min-height: 120px;
+}

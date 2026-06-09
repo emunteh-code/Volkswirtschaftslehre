@@ -1210,3 +1210,576 @@ pre mjx-container,
 code mjx-container {
   color: var(--text);
 }
+
+/* ============================================================
+   THEORY RECIPE — ported from legacy layer (neutral cards)
+   ============================================================ */
+#content .theory-recipe-section,
+#content .theory-recipe-card {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+  margin: 0 auto 20px;
+  padding: clamp(18px, 2vw, 22px) clamp(18px, 2.2vw, 24px);
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+#content .theory-recipe-body {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  text-align: left;
+}
+
+#content .theory-recipe-heading {
+  margin: 0 0 14px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  font-size: var(--type-md);
+  font-weight: 650;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+#content .theory-subsection-title {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+#content .theory-recipe-step,
+#content .theory-recipe-placeholder {
+  display: none;
+}
+
+#content .theory-recipe-body > .section-block {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#content .theory-recipe-body > .section-block:hover {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+#content .theory-recipe-body .warn-box:not(.warning-card) {
+  margin: 4px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--warning-border) 55%, var(--border) 45%);
+  border-left: 3px solid var(--warning-border);
+  background: var(--warning-surface);
+  font-size: var(--type-sm);
+  line-height: 1.6;
+  color: var(--warning-body);
+}
+
+#content .theory-intuition-embed {
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+#content .theory-intuition-bridge-kicker,
+#content .theory-intuition-callout-label {
+  margin: 0 0 6px;
+  font-size: var(--type-xs);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+#content .theory-intuition-pattern-if,
+#content .theory-intuition-pattern-arrow {
+  color: var(--muted);
+  font-size: var(--type-xs);
+  font-weight: 600;
+}
+
+#content mjx-merror {
+  display: none;
+}
+
+/* ── Pedagogy tail cards ─────────────────────────────────── */
+.concept-anchor-card,
+.concept-anchor {
+  margin: 0 0 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+.concept-anchor__title {
+  margin: 0 0 8px;
+  font-size: var(--type-sm);
+  font-weight: 650;
+  color: var(--text);
+}
+
+.concept-anchor__rows {
+  display: grid;
+  gap: 8px;
+}
+
+.concept-anchor__row {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 8px 16px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+}
+
+.concept-anchor__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.concept-anchor__row--core {
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--border) 60%, var(--muted) 40%);
+  background: transparent;
+}
+
+.concept-anchor__label {
+  margin: 0;
+  font-size: var(--type-xs);
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.concept-anchor__value {
+  margin: 0;
+  font-size: var(--type-sm);
+  line-height: var(--leading-normal);
+  color: var(--text);
+}
+
+.concept-anchor__more-summary {
+  cursor: pointer;
+  font-size: var(--type-xs);
+  font-weight: 600;
+  color: var(--accent);
+  list-style: none;
+}
+
+.concept-anchor__more-summary::-webkit-details-marker {
+  display: none;
+}
+
+.mastery-checkpoint,
+.exam-recognition,
+.fehler-checklist,
+.confidence-checkpoint {
+  margin: 24px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--card);
+}
+
+.mastery-checkpoint__title,
+.exam-recognition__title,
+.fehler-checklist__title,
+.confidence-checkpoint__title {
+  margin: 0 0 8px;
+  font-size: var(--type-md);
+  font-weight: 650;
+  color: var(--text);
+}
+
+.mastery-checkpoint__intro,
+.fehler-checklist__intro,
+.confidence-checkpoint__intro {
+  margin: 4px 0 0;
+  font-size: var(--type-sm);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.mastery-checkpoint__rows {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mastery-checkpoint__row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 12px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+}
+
+.mastery-checkpoint__row:last-child {
+  border-bottom: none;
+}
+
+.mastery-checkpoint__label,
+.exam-recognition__label {
+  margin: 0;
+  font-size: var(--type-xs);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mastery-checkpoint__prompt,
+.exam-recognition__value {
+  margin: 0;
+  font-size: var(--type-sm);
+  line-height: var(--leading-normal);
+  color: var(--text);
+}
+
+.exam-recognition__dl {
+  display: grid;
+  gap: 10px;
+  margin: 8px 0 0;
+}
+
+.exam-recognition__row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 8px 24px;
+  padding: 10px 0;
+  align-items: baseline;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+}
+
+.exam-recognition__row:last-child {
+  border-bottom: none;
+}
+
+.exam-recognition__row--core {
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--border) 60%, var(--muted) 40%);
+  background: transparent;
+}
+
+.mastery-checkpoint__cta {
+  display: flex;
+  justify-content: flex-end;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+.fehler-checklist__rows {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.fehler-checklist__label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--r-sm);
+  background: var(--surface2);
+  cursor: pointer;
+}
+
+.confidence-segmented {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.confidence-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 52px;
+  padding: 6px 4px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.confidence-segment__num {
+  font-size: var(--type-sm);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.confidence-segment__label {
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.confidence-segment.is-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 100%, transparent);
+}
+
+.confidence-checkpoint__storage-note {
+  margin: 8px 0 0;
+  font-size: var(--type-micro);
+  color: var(--muted);
+}
+
+/* ── Staged reveal (Aufgaben panels) ─────────────────────── */
+.staged-reveal {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  font-size: var(--type-sm);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: var(--surface2);
+}
+
+.staged-reveal[hidden] {
+  display: none;
+}
+
+.staged-reveal__label {
+  font-size: var(--type-xs);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.staged-reveal--hint {
+  border-left: 3px solid color-mix(in srgb, var(--border) 65%, var(--muted) 35%);
+}
+
+.staged-reveal--approach,
+.staged-reveal--step,
+.staged-reveal--fehlercheck,
+.staged-reveal--solution.show {
+  border-left: 3px solid color-mix(in srgb, var(--border) 65%, var(--muted) 35%);
+}
+
+/* ============================================================
+   FORMELN TAB — reference sheet structure
+   ============================================================ */
+#content .formula-tab-panel {
+  display: grid;
+  gap: clamp(26px, 3.5vw, 38px);
+  width: min(100%, var(--content-formeln-max));
+  margin-inline: auto;
+  min-width: 0;
+}
+
+#content .formula-tab-intro-lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--type-sm);
+  line-height: 1.58;
+  max-width: 52ch;
+}
+
+#content .formula-tab-section {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+#content .formula-tab-section-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 14px;
+  align-items: start;
+}
+
+#content .formula-tab-section-num {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#content .formula-tab-section-head h3 {
+  margin: 0 0 4px;
+  font-size: var(--type-lg);
+  line-height: 1.3;
+  color: var(--text);
+}
+
+#content .formula-tab-section-lead,
+#content .formula-support-field-label,
+#content .klausurmethodik-label {
+  margin: 0;
+  font-size: var(--type-sm);
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+#content .formula-tab-panel .formula-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+#content .klausur-playbook-grid,
+#content .klausur-action-grid {
+  display: grid;
+  gap: 14px;
+}
+
+#content .klausur-playbook-card,
+#content .klausur-action-card {
+  padding: 18px 20px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+#content .klausur-playbook-card__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px 12px;
+  align-items: start;
+}
+
+#content .klausur-playbook-card__num {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+#content .klausur-playbook-card__title {
+  margin: 0;
+  font-size: var(--type-md);
+  font-weight: 650;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+#content .klausur-playbook-card__rows {
+  margin-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+#content .klausur-playbook-row {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 8px 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+}
+
+#content .klausur-playbook-row:last-child {
+  border-bottom: none;
+}
+
+#content .klausur-playbook-row__label {
+  font-size: var(--type-xs);
+  font-weight: 650;
+  color: var(--muted);
+}
+
+#content .klausur-playbook-row__body {
+  font-size: var(--type-sm);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+#content .formula-derivation-chain {
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+#content .formula-derivation-chain__title {
+  margin: 0;
+  font-size: var(--type-sm);
+  font-weight: 650;
+  color: var(--text);
+}
+
+#content .formula-derivation-chain__intro {
+  margin: 6px 0 0;
+  font-size: var(--type-sm);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+#content .formula-derivation-timeline {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-left: 2px solid color-mix(in srgb, var(--border) 75%, transparent);
+  margin-left: 6px;
+}
+
+#content .formula-derivation-step {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px 12px;
+  padding: 10px 0 10px 14px;
+}
+
+#content .formula-derivation-step__num {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-pill);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--surface2);
+}
+
+#content .formula-derivation-step__math {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  background: var(--surface2);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+#content .rule-card,
+#content .formula-limits-card {
+  padding: 18px 20px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+#content .formula-einsatzgrenzen-stack {
+  display: grid;
+  gap: 16px;
+}

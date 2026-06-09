@@ -113,6 +113,15 @@ function buildLessonOutcomeItems(entry, chapterTitle = "") {
         "Richtung und Stärke eines Zusammenhangs ohne Überinterpretation deuten",
         "typische Fehler bei n, Einheiten und Linearität vor der Rechnung prüfen"
       ];
+    } else if (/wahrscheinlichkeit|bedingte|binom|poisson|zufallsvariable/.test(key)) {
+      items = [
+        "Ereignisse, Unabhängigkeit und bedingte Wahrscheinlichkeit in Aufgaben unterscheiden",
+        "Baumdiagramm oder Formelpfad (Satz von Bayes, Total) passend wählen",
+        formulaLabels.length
+          ? `${formulaLabels.join(", ")} bei gegebenen p, n oder λ zuordnen`
+          : "diskrete Modelle (Binomial, Poisson) an Aufgabenstellungen anknüpfen",
+        "Punkt- vs. Bereichswahrscheinlichkeit bei stetigen Verteilungen nicht verwechseln"
+      ];
     } else if (/cobb|douglas|produktion/.test(key)) {
       items = [
         "Isoquanten und Grenzprodukte einer CD-Produktionsfunktion interpretieren",
@@ -154,22 +163,31 @@ export function renderLessonOutcomes(entry, chapterTitle = "") {
 export function renderLessonIntroCard(entry, chapterTitle = "", intuition = null) {
   const title = String(chapterTitle || "").trim();
   const kurz = sanitizeLearnerPlainText(
-    (entry?.motivation ? stripHtml(String(entry.motivation)) : "") ||
-      (intuition?.core ? stripHtml(String(intuition.core)) : "") ||
+    (intuition?.core ? stripHtml(String(intuition.core)) : "") ||
+      (entry?.motivation ? stripHtml(String(entry.motivation)) : "") ||
       (title ? `${title} strukturiert den Klausurpfad in diesem Modulblock.` : "")
+  );
+  const warum = sanitizeLearnerPlainText(
+    (intuition?.bridge ? stripHtml(String(intuition.bridge)) : "") ||
+      (Array.isArray(intuition?.exam) && intuition.exam[0]?.then
+        ? stripHtml(String(intuition.exam[0].then))
+        : "") ||
+      (title
+        ? `In Klausuraufgaben erkennst du ${title} an Stichworten, Datenlayout und der gesuchten Größe — dann Formeln-Tab und Aufgaben nutzen.`
+        : "Verbinde Begriff, Formel und typische Aufgabenstellung, bevor du rechnest.")
   );
   const outcomes = buildLessonOutcomeItems(entry, chapterTitle);
   const microCheck = buildTheoryMicroCheck(entry, chapterTitle);
 
-  const outcomesHtml = outcomes.length
-    ? `<div class="lesson-hero-card__col lesson-hero-card__col--outcomes">
-<h3 class="lesson-hero-card__label">Nach dieser Lektion kannst du …</h3>
-<ul class="lesson-hero-card__list">${outcomes.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
-</div>`
-    : `<div class="lesson-hero-card__col lesson-hero-card__col--outcomes">
-<h3 class="lesson-hero-card__label">Nach dieser Lektion kannst du …</h3>
-<p class="lesson-hero-card__copy lesson-hero-card__copy--muted">Lernziele im Formeln-Tab und in den Aufgaben vertiefen.</p>
-</div>`;
+  const chipsHtml = outcomes.length
+    ? `<div class="lesson-hero-card__chips" aria-label="Lernziele">${outcomes
+        .slice(0, 5)
+        .map((t) => {
+          const short = t.length > 72 ? `${t.slice(0, 69).trim()}…` : t;
+          return `<span class="lesson-hero-chip">${escapeHtml(short)}</span>`;
+        })
+        .join("")}</div>`
+    : "";
 
   return `<section class="lesson-hero-card" role="region" aria-labelledby="lesson-hero-h">
 <h2 class="lesson-hero-card__title" id="lesson-hero-h">Lektionseinstieg</h2>
@@ -178,8 +196,12 @@ export function renderLessonIntroCard(entry, chapterTitle = "", intuition = null
 <h3 class="lesson-hero-card__label">Kurz erklärt</h3>
 <p class="lesson-hero-card__copy">${escapeHtml(kurz)}</p>
 </div>
-${outcomesHtml}
+<div class="lesson-hero-card__col lesson-hero-card__col--why">
+<h3 class="lesson-hero-card__label">Warum wichtig?</h3>
+<p class="lesson-hero-card__copy">${escapeHtml(warum)}</p>
 </div>
+</div>
+${chipsHtml}
 ${microCheck ? `<div class="lesson-hero-card__micro-strip">${microCheck}</div>` : ""}
 </section>`;
 }
@@ -278,15 +300,115 @@ export function renderMasteryCheckpoint(entry, conceptId, chapterTitle = "") {
 </section>`;
 }
 
+const CONFIDENCE_LEVELS = Object.freeze([
+  { level: 0, label: "Nicht verstanden" },
+  { level: 1, label: "Wiedererkannt" },
+  { level: 2, label: "Kann erklären" },
+  { level: 3, label: "Kann anwenden" }
+]);
+
+/** @returns {boolean} */
+export function canUseLearnerLocalStorage() {
+  try {
+    const probe = "__lp_storage_probe__";
+    localStorage.setItem(probe, "1");
+    localStorage.removeItem(probe);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function renderConfidenceCheckpoint(conceptId) {
+  if (!canUseLearnerLocalStorage()) return "";
   const id = escapeHtml(conceptId || "");
+  const segments = CONFIDENCE_LEVELS.map(
+    ({ level, label }) =>
+      `<button type="button" class="confidence-segment" data-level="${level}" aria-label="Stufe ${level}: ${escapeHtml(label)}">
+<span class="confidence-segment__num" aria-hidden="true">${level}</span>
+<span class="confidence-segment__label">${escapeHtml(label)}</span>
+</button>`
+  ).join("");
   return `<section class="confidence-checkpoint" role="group" aria-labelledby="confidence-h-${id}">
 <h3 class="confidence-checkpoint__title" id="confidence-h-${id}">Wie sicher bist du?</h3>
-<p class="confidence-checkpoint__hint">0 = nicht verstanden · 1 = wiedererkannt · 2 = kann erklären · 3 = kann anwenden</p>
-<div class="confidence-checkpoint__scale" data-concept-id="${id}">
-${[0, 1, 2, 3].map((n) => `<button type="button" class="confidence-btn" data-level="${n}" aria-label="Stufe ${n}">${n}</button>`).join("")}
+<div class="confidence-checkpoint__scale confidence-segmented" data-concept-id="${id}" role="radiogroup" aria-label="Selbsteinschätzung">
+${segments}
 </div>
+<p class="confidence-checkpoint__storage-note">Gespeichert nur in diesem Browser (localStorage).</p>
 </section>`;
+}
+
+/**
+ * Tab-aware next-step footer for concept views.
+ * @param {string} activeTab
+ * @param {object} chapter
+ * @param {object} entry
+ * @param {{ tabAvailability?: object, chapters?: object[], conceptId?: string }} [opts]
+ */
+export function renderLessonNextStepFooter(activeTab, chapter, entry, opts = {}) {
+  if (!chapter || !activeTab || activeTab === "quellen") return "";
+  const { tabAvailability = {}, chapters = [], conceptId = "" } = opts;
+  const idx = chapters.findIndex((c) => c.id === conceptId);
+  const nextChapter = idx >= 0 && idx < chapters.length - 1 ? chapters[idx + 1] : null;
+
+  let title = "Weiter im Lernpfad";
+  let body = "";
+  let cta = "";
+
+  switch (activeTab) {
+    case "theorie":
+      if (tabAvailability.formeln) {
+        body = "Formeln und Merksätze festigen, bevor du rechnest.";
+        cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('formeln')">Zum Formeln-Tab →</button>`;
+      } else if (tabAvailability.graph) {
+        body = "Die Grafik vertieft das Verständnis — danach Aufgaben üben.";
+        cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('graph')">Zur Grafik →</button>`;
+      } else {
+        body = "Jetzt mit einer Klausuraufgabe prüfen, ob du es anwenden kannst.";
+        cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('aufgaben')">Zu den Aufgaben →</button>`;
+      }
+      break;
+    case "formeln":
+      body = "Methode notiert — als Nächstes rechnen und Fehler checken.";
+      cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('aufgaben')">Zu den Aufgaben →</button>`;
+      break;
+    case "graph":
+      body = tabAvailability["r-anwendung"]
+        ? "Grafik verstanden? Optional R-Übung, dann Aufgaben."
+        : "Grafik verstanden? Jetzt Aufgaben üben.";
+      cta = tabAvailability["r-anwendung"]
+        ? `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('r-anwendung')">Zur R-Übung →</button>`
+        : `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('aufgaben')">Zu den Aufgaben →</button>`;
+      break;
+    case "r-anwendung":
+    case "r-practice":
+    case "r":
+      body = "Code nachvollzogen? Aufgaben festigen den Transfer.";
+      cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__switchTab('aufgaben')">Zu den Aufgaben →</button>`;
+      break;
+    case "aufgaben":
+      if (nextChapter) {
+        title = "Nächstes Konzept";
+        body = `„${sanitizeLearnerPlainText(nextChapter.title)}" setzt hier an.`;
+        cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__navigate('${escapeHtml(nextChapter.id)}')">Weiter: ${escapeHtml(nextChapter.title)} →</button>`;
+      } else {
+        title = "Block abgeschlossen";
+        body = "Wiederholung oder Schnelltest sichert den Stoff.";
+        cta = `<button type="button" class="btn btn--secondary lesson-next-step-footer__cta" onclick="window.__showSRSReview?.()">Wiederholung starten →</button>`;
+      }
+      break;
+    default:
+      return "";
+  }
+
+  return `<footer class="lesson-next-step-footer" role="navigation" aria-label="Nächster Lernschritt">
+<div class="lesson-next-step-footer__copy">
+<span class="lesson-next-step-footer__eyebrow">Nächster Schritt</span>
+<h3 class="lesson-next-step-footer__title">${escapeHtml(title)}</h3>
+<p class="lesson-next-step-footer__body">${escapeHtml(body)}</p>
+</div>
+<div class="lesson-next-step-footer__actions">${cta}</div>
+</footer>`;
 }
 
 export function renderReviewControls(conceptId) {
@@ -380,17 +502,42 @@ ${core ? `<div class="exam-recognition__row exam-recognition__row--core">
 /** One lightweight recall prompt from lesson objectives or concept title. */
 export function buildTheoryMicroCheck(entry, chapterTitle = "") {
   const title = String(chapterTitle || "").trim();
+  const key = title.toLowerCase();
   const objective = Array.isArray(entry?.objectives) ? String(entry.objectives[0] || "").trim() : "";
   if (objective) {
     return renderMicroRetrievalCheck(
-      `Kannst du „${objective}" in eigenen Worten erklären — ohne ins Skript zu schauen?`,
-      objective
+      `Kannst du „${sanitizeLearnerPlainText(objective)}" in eigenen Worten erklären — ohne ins Skript zu schauen?`,
+      sanitizeLearnerPlainText(objective)
+    );
+  }
+  if (/wahrscheinlichkeit|bedingte/.test(key)) {
+    return renderMicroRetrievalCheck(
+      "Wann nutzt du bedingte Wahrscheinlichkeit statt Unabhängigkeit?",
+      "Wenn neue Information die Eintrittswahrscheinlichkeit ändert — sonst P(A∩B)=P(A)P(B) prüfen."
+    );
+  }
+  if (/deskriptiv/.test(key)) {
+    return renderMicroRetrievalCheck(
+      "Wann wählst du Median statt Mittelwert?",
+      "Bei Ausreißern, starker Schiefe oder ordinalen Daten — Lage und Streuung gemeinsam berichten."
+    );
+  }
+  if (/bivariat|korrelation|regression/.test(key)) {
+    return renderMicroRetrievalCheck(
+      "Was unterscheidet Kovarianz von Korrelation in der Interpretation?",
+      "Kovarianz hängt von Einheiten ab; Korrelation standardisiert auf [−1, 1] und misst lineare Stärke."
+    );
+  }
+  if (/cobb|douglas/.test(key)) {
+    return renderMicroRetrievalCheck(
+      "Was sagt α+β bei einer Cobb-Douglas-Produktionsfunktion aus?",
+      "Skalenelastizität: α+β>1 steigende, =1 lineare, <1 fallende Skalenerträge."
     );
   }
   if (title) {
     return renderMicroRetrievalCheck(
       `Wann ist „${title}" in einer Klausuraufgabe das richtige Werkzeug?`,
-      "Wenn Stichworte, Datenlayout oder die gesuchte Größe zum Konzept passen — dann Formel-Tab und Klausurerkennung prüfen."
+      "Wenn Stichworte, Datenlayout oder die gesuchte Größe zum Konzept passen — dann Formeln-Tab und Klausurerkennung prüfen."
     );
   }
   return "";
@@ -402,7 +549,7 @@ export function renderMicroRetrievalCheck(question, answer) {
   const id = `mc_${Math.random().toString(36).slice(2, 9)}`;
   return `<div class="micro-retrieval-check">
 <p class="micro-retrieval-check__q">${q}</p>
-<button type="button" class="btn btn--soft-primary micro-retrieval-check__btn" data-forward-only="1" aria-expanded="false" aria-controls="${id}" onclick="window.__toggleReveal('${id}', this)">Antwort prüfen</button>
+<button type="button" class="btn btn--secondary micro-retrieval-check__btn" data-forward-only="1" aria-expanded="false" aria-controls="${id}" onclick="window.__toggleReveal('${id}', this)">Mini-Check starten</button>
 <div class="micro-retrieval-check__a" id="${id}" hidden>
 ${collapseBtn(id, "Antwort")}
 <p>${a}</p>
@@ -431,12 +578,12 @@ export function renderStagedPracticeCard({
   const errId = `err_${idx}`;
 
   const firstStep = steps[0]?.text ? escapeHtml(steps[0].text) : "Ersten Lösungsschritt skizzieren.";
-  const forwardBtn = (panelId, text, variant = "soft-primary") =>
+  const forwardBtn = (panelId, text, variant = "tertiary") =>
     `<button type="button" class="btn btn--${variant}" data-forward-only="1" onclick="window.__toggleReveal('${panelId}', this)" aria-controls="${panelId}">${text}</button>`;
 
-  const hintBtn = hint ? forwardBtn(hintId, "Hinweis anzeigen") : "";
-  const approachBtn = steps.length ? forwardBtn(approachId, "Ansatz anzeigen") : "";
-  const stepBtn = steps.length ? forwardBtn(stepId, "Nächster Schritt") : "";
+  const hintBtn = hint ? forwardBtn(hintId, "Hinweis", "tertiary") : "";
+  const approachBtn = steps.length ? forwardBtn(approachId, "Ansatz", "tertiary") : "";
+  const stepBtn = steps.length ? forwardBtn(stepId, "Nächster Schritt", "tertiary") : "";
 
   const similarBtn = hasSimilarTask
     ? `<button type="button" class="btn btn--ghost" onclick="window.__scrollToSimilarTask(${idx + 1})">Ähnliche Aufgabe</button>`
@@ -449,7 +596,7 @@ export function renderStagedPracticeCard({
 ${hintBtn}
 ${approachBtn}
 ${stepBtn}
-<button type="button" class="btn btn--soft-primary" id="solBtn_${idx}" data-forward-only="1" onclick="window.__toggleSolution(${idx})">Lösung prüfen</button>
+<button type="button" class="btn btn--secondary" id="solBtn_${idx}" data-forward-only="1" onclick="window.__toggleSolution(${idx})">Lösung prüfen</button>
 ${forwardBtn(errId, "Fehlercheck", "ghost")}
 ${similarBtn}
 </div>

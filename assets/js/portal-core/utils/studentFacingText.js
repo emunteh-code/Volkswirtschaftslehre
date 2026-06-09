@@ -19,6 +19,36 @@ const VAGUE_READINESS_PARAGRAPH =
 const BLOCKQUOTE_GT = /^>\s+/gm;
 const PLATFORM_ADDED_INLINE = /\bplatform-added-(?:explanation|drill)\b/gi;
 
+/** Forbidden learner-facing phrases → student-safe replacements (§4 product QA). */
+const FORBIDDEN_LEARNER_REPLACEMENTS = [
+  [/Kernbaustein für Klausurtransfer/gi, "Kernbaustein im Modul"],
+  [/Kernrelationen:\s*/gi, ""],
+  [/Kernrelationen aus dem Formeln-Tab aktivieren/gi, "Formeln-Tab für Kernrelationen nutzen"],
+  [/Begriffe aus Formeln-Tab/gi, "Begriffe im Formeln-Tab nachschlagen"],
+  [/Lern-Checkliste/gi, "Selbsttest"],
+  [/Generischer Fehlercheck/gi, "Selbsttest vor der Klausur"],
+  [/Generischer Mechanismus-Pfad/gi, ""],
+  [/Orientierungshilfe/gi, ""],
+  [/Empfohlener Ablauf/gi, ""],
+  [/Plattform-Übung/gi, "Übung"],
+  [/PLATTFORM-ÜBUNG/gi, "Übung"],
+  [/&#36;/g, "$"],
+  [/&amp;#36;/g, "$"]
+];
+
+/**
+ * @param {string} text
+ * @returns {string}
+ */
+export function replaceForbiddenLearnerPhrases(text) {
+  let out = String(text ?? "");
+  for (const [re, replacement] of FORBIDDEN_LEARNER_REPLACEMENTS) {
+    re.lastIndex = 0;
+    out = out.replace(re, replacement);
+  }
+  return out.replace(/\s{2,}/g, " ").trim();
+}
+
 /**
  * Plain learner text: decode entities, strip tags, remove markdown blockquote markers.
  * @param {unknown} value
@@ -28,6 +58,7 @@ export function sanitizeLearnerPlainText(value) {
   let text = decodeHtmlEntities(stripHtml(String(value ?? "")));
   text = text.replace(/^>\s+/gm, "").replace(/\s+/g, " ").trim();
   text = text.replace(PLATFORM_ADDED_INLINE, "").trim();
+  text = replaceForbiddenLearnerPhrases(text);
   return text;
 }
 

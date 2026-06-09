@@ -6610,9 +6610,9 @@ body.light-mode #content .source-provenance-mark {
 
 :root {
   --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
-  /* --content-body-max / --reading-measure: module-tokens.css */
-  --content-rail-max: min(100%, 1080px);
-  --right-panel-width: clamp(232px, 18vw, 312px);
+  /* --content-body-max / tab widths: module-tokens.css */
+  --content-rail-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --right-panel-width: clamp(250px, 19vw, 280px);
   --tab-row-pad-x: clamp(12px, 3vw, 20px);
 }
 
@@ -6622,8 +6622,8 @@ body.light-mode #content .source-provenance-mark {
 
 #rightPanel {
   width: var(--right-panel-width);
-  min-width: 220px;
-  max-width: 320px;
+  min-width: 250px;
+  max-width: 280px;
   flex-shrink: 0;
 }
 
@@ -7800,8 +7800,14 @@ body:not([data-page="landing"]) {
   --surface-elevated: #222832;
   --card: #161a22;
   --border: #2a3140;
-  --content-body-max: min(100%, clamp(900px, 82vw, 980px));
-  --content-rail-max: min(100%, 980px);
+  --content-body-max: min(100%, clamp(980px, 72vw, 1160px));
+  --content-theorie-max: min(100%, clamp(980px, 72vw, 1160px));
+  --content-formeln-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --content-aufgaben-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --content-graph-max: min(100%, clamp(1120px, 82vw, 1360px));
+  --content-rail-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --graph-shell-max: min(100%, clamp(1120px, 82vw, 1280px));
+  --right-panel-width: clamp(250px, 19vw, 280px);
 }
 
 body.light-mode:not([data-page="landing"]) {
@@ -10188,4 +10194,587 @@ body.light-mode #shortcutHint .sc-key {
   border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
   font-size: var(--type-xs, 0.6875rem);
   color: var(--muted);
+}
+
+/* ============================================================
+   UI CONSISTENCY PASS — horizontal space, hierarchy, buttons
+   ============================================================ */
+
+#content[data-tab="theorie"] {
+  --content-body-max: var(--content-theorie-max);
+}
+
+#content[data-tab="formeln"] {
+  --content-body-max: var(--content-formeln-max);
+}
+
+#content[data-tab="aufgaben"] {
+  --content-body-max: var(--content-aufgaben-max);
+}
+
+#content[data-tab="graph"],
+#content[data-tab="r-anwendung"],
+#content[data-tab="r-practice"],
+#content[data-tab="r"] {
+  --content-body-max: var(--content-graph-max);
+}
+
+#content .concept-header {
+  width: min(100%, var(--content-body-max));
+  margin-bottom: 32px;
+  gap: 12px;
+}
+
+#content .concept-title {
+  font-size: clamp(1.875rem, 2.6vw, 2.125rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  max-width: 28ch;
+}
+
+#content .concept-motivation {
+  margin: 0;
+  max-width: 82ch;
+  font-size: var(--type-base, 0.9375rem);
+  line-height: var(--leading-relaxed, 1.65);
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+#content .concept-source-link {
+  font-weight: 500;
+  font-size: var(--type-xs, 0.75rem);
+  color: color-mix(in srgb, var(--muted) 78%, var(--accent) 22%);
+}
+
+#content .concept-source-link:hover {
+  color: var(--accent);
+}
+
+/* Unified button hierarchy */
+#content .btn--primary,
+#content .btn.btn--primary {
+  min-height: 36px;
+  padding: 8px 18px;
+  background: var(--accent-strong, var(--accent));
+  color: var(--accent-fg, #fff);
+  border: 1px solid color-mix(in srgb, var(--accent-strong, var(--accent)) 85%, transparent);
+}
+
+#content .btn--secondary,
+#content .btn.btn--secondary,
+#content .btn.btn--soft-primary {
+  min-height: 36px;
+  padding: 8px 16px;
+  background: color-mix(in srgb, var(--accent-soft) 100%, transparent);
+  color: var(--accent-strong, var(--accent));
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border) 76%);
+  box-shadow: none;
+}
+
+#content .btn--tertiary,
+#content .btn.btn--tertiary {
+  min-height: 36px;
+  padding: 8px 14px;
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+#content .btn--ghost,
+#content .btn.btn--ghost,
+#content .staged-reveal__collapse {
+  min-height: 34px;
+  padding: 6px 12px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  box-shadow: none;
+  font-weight: 500;
+}
+
+#content .prob-actions--staged .btn--soft-primary {
+  background: color-mix(in srgb, var(--accent-soft) 100%, transparent);
+}
+
+#content .prob-actions--staged .btn:not(.btn--soft-primary):not(.btn--ghost) {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Card system — unified radius + padding */
+#content .section-block,
+#content .problem-card,
+#content .exam-drill-card,
+#content .theory-recipe-card,
+#content .formula-card {
+  border-radius: var(--r-lg, 18px);
+  padding: clamp(20px, 2.2vw, 24px);
+}
+
+.lesson-hero-card {
+  border-radius: var(--r-lg, 18px);
+  padding: clamp(20px, 2.2vw, 24px);
+}
+
+.lesson-hero-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.lesson-hero-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: var(--r-pill, 999px);
+  font-size: var(--type-xs, 0.75rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: color-mix(in srgb, var(--accent-strong, var(--accent)) 82%, var(--text) 18%);
+  background: color-mix(in srgb, var(--accent-soft) 100%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border) 80%);
+}
+
+.lesson-hero-card__micro-strip .micro-retrieval-check__btn {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Exam task layout */
+#content .exam-drill-card .prob-eyebrow,
+#content .problem-card--staged .prob-eyebrow {
+  display: block;
+  margin: 0 0 6px;
+  font-size: var(--type-micro, 0.6875rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 65%, var(--muted) 35%);
+}
+
+#content .exam-task-blocks {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+#content .exam-task-block {
+  padding: 10px 12px;
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--surface2) 35%, var(--card) 65%);
+}
+
+#content .exam-task-block__label {
+  display: block;
+  margin: 0 0 4px;
+  font-size: var(--type-micro, 0.6875rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+#content .exam-task-block__body {
+  margin: 0;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.55;
+}
+
+#content .exam-drill-card .prob-actions--staged {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Solution panel — numbered steps */
+#content .solution-block.staged-reveal--solution {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: var(--r-md, 16px);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--accent) 12%);
+  background: color-mix(in srgb, var(--surface2) 42%, var(--card) 58%);
+}
+
+#content .solution-block .step {
+  padding: 10px 0;
+}
+
+/* Mechanismus — In der Klausur highlight */
+#content .theory-recipe-section--mechanismus .theory-klausur-highlight {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: var(--r-sm, 8px);
+  border-left: 3px solid var(--semantic-amber, #f59e0b);
+  background: color-mix(in srgb, var(--semantic-amber-soft, rgba(245, 158, 11, 0.1)) 100%, transparent);
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.5;
+}
+
+#content .theory-recipe-section--mechanismus .theory-klausur-highlight strong {
+  color: var(--warning-title, #fbbf24);
+}
+
+/* Right rail formula anchors */
+#rightPanel .rp-formula-chip {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 42px;
+  padding: 9px 11px;
+  overflow: visible;
+}
+
+#rightPanel .rp-formula-chip-label {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  font-size: var(--type-sm, 0.8125rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#rightPanel .rp-formula-chip-hint {
+  font-size: var(--type-micro, 0.6875rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 75%, var(--accent) 25%);
+}
+
+#rightPanel .rp-formula-chip-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#rightPanel .rp-formula-chip {
+  position: relative;
+  padding-right: 28px;
+}
+
+/* Grafik shell */
+#content[data-tab="graph"] {
+  max-width: min(100%, var(--graph-shell-max, 1280px));
+}
+
+#content .graph-container:not(.graph-container--macro-focus) canvas,
+#content .graph-container:not(.graph-container--macro-focus) .graph-canvas {
+  min-height: clamp(420px, 44vh, 520px) !important;
+  max-height: clamp(520px, 56vh, 620px) !important;
+}
+
+/* ============================================================
+   PRODUCT QA EDGE PASS — shell, rails, pedagogy, dark, mobile
+   ============================================================ */
+
+:root {
+  --chrome-sidebar-width: clamp(240px, 18vw, 260px);
+  --chrome-tab-segment-r: 10px;
+  --chrome-content-tab-gap: clamp(24px, 2.5vw, 32px);
+}
+
+.breadcrumb {
+  font-size: var(--type-xs, 12px);
+  color: var(--muted);
+  margin: 0 0 8px;
+  width: min(100%, var(--content-body-max, var(--content-shell-max)));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+
+#tabRow.tab-row {
+  min-height: 44px;
+  max-height: 48px;
+  padding-block: 4px;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg) 8%);
+}
+
+#tabRow .tab-btn {
+  min-height: 36px;
+  border-radius: var(--chrome-tab-segment-r, 10px);
+  padding-inline: 14px;
+}
+
+#tabRow .tab-btn.active {
+  background: color-mix(in srgb, var(--accent-soft) 100%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border) 72%);
+  border-radius: var(--chrome-tab-segment-r, 10px);
+}
+
+#tabRow .tab-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+#content[data-tab] {
+  padding-top: var(--chrome-content-tab-gap);
+}
+
+#sidebar {
+  width: var(--chrome-sidebar-width);
+  min-width: 240px;
+  max-width: 260px;
+}
+
+#sidebar .nav-item {
+  min-height: 38px;
+  align-items: flex-start;
+}
+
+#sidebar .nav-item__main {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs, 8px);
+  flex: 1;
+  min-width: 0;
+}
+
+#sidebar .nav-item__title {
+  flex: 1;
+  min-width: 0;
+  line-height: var(--leading-snug, 1.35);
+  text-wrap: pretty;
+}
+
+#sidebar .nav-item__aside {
+  align-self: center;
+  padding-top: 1px;
+}
+
+#sidebar .nav-item__srs.badge--meta {
+  font-size: 10.5px;
+  padding: 2px 7px;
+  line-height: 1.25;
+}
+
+#rightPanel .rp-conn,
+#content .cf-conn {
+  min-height: 34px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm, 8px);
+  font-size: var(--type-sm, 0.8125rem);
+}
+
+.formula-pedagogy-extras {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  display: grid;
+  gap: 8px;
+  font-size: var(--type-sm, 0.8125rem);
+  line-height: 1.5;
+}
+
+.formula-pedagogy-extras__tag {
+  display: inline-block;
+  min-width: 3.25rem;
+  font-size: var(--type-micro, 0.6875rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.confidence-segmented {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.confidence-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 52px;
+  padding: 6px 4px;
+  border-radius: var(--chrome-tab-segment-r, 10px);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  cursor: pointer;
+  text-align: center;
+}
+
+.confidence-segment__num {
+  font-size: var(--type-sm, 0.8125rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.confidence-segment__label {
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.confidence-segment.is-active,
+.confidence-btn.is-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 100%, transparent);
+}
+
+.confidence-segment.is-active .confidence-segment__label {
+  color: var(--text);
+}
+
+.confidence-checkpoint__storage-note {
+  margin: 8px 0 0;
+  font-size: var(--type-micro, 0.6875rem);
+  color: var(--muted);
+}
+
+.lesson-next-step-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 20px;
+  margin: 28px 0 0;
+  padding: 16px 18px;
+  border-radius: var(--r-lg, 18px);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--card) 45%);
+}
+
+.lesson-next-step-footer__eyebrow {
+  display: block;
+  margin: 0 0 4px;
+  font-size: var(--type-micro, 0.6875rem);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 70%, var(--muted) 30%);
+}
+
+.lesson-next-step-footer__title {
+  margin: 0 0 4px;
+  font-size: var(--type-md, 1.0625rem);
+  font-weight: 650;
+}
+
+.lesson-next-step-footer__body {
+  margin: 0;
+  font-size: var(--type-sm, 0.8125rem);
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  max-width: 52ch;
+}
+
+.lesson-next-step-footer__actions {
+  flex-shrink: 0;
+}
+
+/* Dark mode — pedagogy + rails */
+body:not(.light-mode) .lesson-hero-card {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 9%, var(--card) 91%) 0%,
+      color-mix(in srgb, var(--accent2, var(--accent)) 5%, var(--card) 95%) 55%,
+      var(--card) 100%
+    );
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border) 72%);
+}
+
+body:not(.light-mode) .rule-card,
+body:not(.light-mode) .formula-einsatzgrenzen-block {
+  background: color-mix(in srgb, var(--surface2) 38%, var(--card) 62%);
+  border-color: color-mix(in srgb, var(--border) 88%, var(--accent) 12%);
+}
+
+body:not(.light-mode) #rightPanel {
+  background: color-mix(in srgb, var(--bg) 94%, var(--surface) 6%);
+  border-left-color: color-mix(in srgb, var(--border) 90%, var(--accent) 10%);
+}
+
+body:not(.light-mode) #rightPanel .rp-mistake--rail {
+  background: color-mix(in srgb, var(--warning-surface) 88%, var(--card) 12%);
+}
+
+body:not(.light-mode) .confidence-checkpoint,
+body:not(.light-mode) .lesson-next-step-footer {
+  background: color-mix(in srgb, var(--surface2) 42%, var(--card) 58%);
+  border-color: color-mix(in srgb, var(--border) 82%, var(--accent) 18%);
+}
+
+body:not(.light-mode) .r-practice-lab,
+body:not(.light-mode) .r-uebung-panel,
+body:not(.light-mode) .r-lab-shell {
+  background: color-mix(in srgb, var(--surface2) 35%, var(--card) 65%);
+  border-color: color-mix(in srgb, var(--border) 85%, var(--accent) 15%);
+}
+
+/* Mobile — 375 / 430 / 768 */
+@media (max-width: 768px) {
+  #rightPanel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  #content .content-fallback--connections,
+  #content .content-fallback--mistakes {
+    margin-top: 20px;
+  }
+
+  .confidence-segmented {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lesson-next-step-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lesson-next-step-footer__actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  #tabRow.tab-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #tabRow.tab-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  #content .formula-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-hero-card__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 375px) {
+  .breadcrumb {
+    font-size: 11px;
+  }
+
+  #tabRow .tab-btn {
+    padding-inline: 10px;
+    font-size: 11.5px;
+  }
+
+  .confidence-segment__label {
+    font-size: 9px;
+  }
 }

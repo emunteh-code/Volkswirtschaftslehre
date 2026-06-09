@@ -29,17 +29,22 @@
   /* ── Radius scale ─────────────────────────────────────── */
   --r-xs: 6px;
   --r-sm: 8px;               /* buttons, badges */
-  --r-md: 12px;              /* cards */
-  --r-lg: 16px;
+  --r-md: 16px;              /* cards */
+  --r-lg: 18px;
   --r-xl: 20px;
   --r-pill: 999px;
 
   /* ── Layout measure ───────────────────────────────────── */
   --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
-  --content-body-max: min(100%, clamp(900px, 82vw, 980px));
-  --graph-shell-max: min(100%, clamp(1180px, 88vw, 1320px));
-  --content-rail-max: min(100%, 980px);
-  --reading-measure: 72ch;
+  --content-body-max: min(100%, clamp(980px, 72vw, 1160px));
+  --content-theorie-max: min(100%, clamp(980px, 72vw, 1160px));
+  --content-formeln-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --content-aufgaben-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --content-graph-max: min(100%, clamp(1120px, 82vw, 1360px));
+  --graph-shell-max: min(100%, clamp(1120px, 82vw, 1280px));
+  --content-rail-max: min(100%, clamp(1040px, 76vw, 1220px));
+  --reading-measure: 78ch;
+  --right-panel-width: clamp(250px, 19vw, 280px);
 
   /* ── Semantic colors (overridden per theme in premium-refinement) ── */
   --accent: #3b82f6;

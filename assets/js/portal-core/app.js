@@ -165,9 +165,18 @@ export function createPortalApp({
   function initPedagogyControls(root = document) {
     root.querySelectorAll(".confidence-checkpoint__scale").forEach((scale) => {
       const conceptId = scale.dataset.conceptId || "";
-      scale.querySelectorAll(".confidence-btn").forEach((btn) => {
+      const buttons = scale.querySelectorAll(".confidence-segment, .confidence-btn");
+      let savedLevel = null;
+      try {
+        const raw = localStorage.getItem(`lp_confidence_${conceptId}`);
+        if (raw != null && raw !== "") savedLevel = Number(raw);
+      } catch (_) { /* ignore */ }
+      buttons.forEach((btn) => {
+        if (savedLevel != null && Number(btn.dataset.level) === savedLevel) {
+          btn.classList.add("is-active");
+        }
         btn.addEventListener("click", () => {
-          scale.querySelectorAll(".confidence-btn").forEach((b) => b.classList.remove("is-active"));
+          buttons.forEach((b) => b.classList.remove("is-active"));
           btn.classList.add("is-active");
           const level = Number(btn.dataset.level || 0);
           try {

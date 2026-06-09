@@ -49,7 +49,7 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
           "aria-label",
           `${item.title} (${cat}, Lektion ${displayNum}/${items.length}, ${STATUS_ARIA["not-started"]})`
         );
-        el.innerHTML = `<span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span class="nav-item__title">${item.title}</span><span class="nav-item__aside"></span>`;
+        el.innerHTML = `<span class="nav-item__main"><span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span class="nav-item__title">${item.title}</span></span><span class="nav-item__aside"></span>`;
         el.onclick = () => onNavigate(item.id);
         el.onkeydown = (e) => {
           if (e.key === "Enter" || e.key === " ") {

@@ -42,10 +42,15 @@ const FORBIDDEN_IN_PEDAGOGY_HTML = [
   { re: /&lt;\/?em&gt;/g, label: "escaped em tag in pedagogy HTML" },
   { re: /&lt;br\s*\/?&gt;/g, label: "escaped br tag in pedagogy HTML" },
   { re: /lesson-intro-card/g, label: "legacy lesson-intro-card class in pedagogy HTML" },
-  { re: /Warum wichtig\?/g, label: "removed Warum wichtig hero column" },
+  { re: /Hinweis\s*\/\s*Lösung/g, label: "combined Hinweis/Lösung exam button label" },
+  { re: /&#36;/g, label: "undecoded dollar HTML entity in pedagogy HTML" },
   { re: /Kernrelationen:/g, label: "Kernrelationen boilerplate in pedagogy HTML" },
   { re: /Kernbaustein für Klausurtransfer/g, label: "generic hero fallback phrase" },
-  { re: /•\s*☐/g, label: "raw bullet-checkbox pattern in pedagogy HTML" }
+  { re: /•\s*☐/g, label: "raw bullet-checkbox pattern in pedagogy HTML" },
+  { re: /&amp;#36;/g, label: "double-encoded dollar entity in pedagogy HTML" },
+  { re: /Antwort prüfen/g, label: "legacy mini-check button label" },
+  { re: /Hinweis anzeigen/g, label: "legacy staged hint button label" },
+  { re: /Ansatz anzeigen/g, label: "legacy staged approach button label" }
 ];
 
 /** Whole-repo learner chrome — plain text grep (not only template literals). */
@@ -60,6 +65,9 @@ const FLEET_FORBIDDEN_GREP = [
   { re: /PLATTFORM-ÜBUNG/gi, label: "PLATTFORM-ÜBUNG in fleet learner chrome" },
   { re: /platform-chrome-badge--source[^"]*"[^>]*>\s*QUELLE\s*</gi, label: "QUELLE source badge in fleet chrome" }
 ];
+
+/** Sanitizer registries may list forbidden phrases as replacement sources. */
+const FLEET_GREP_SKIP = new Set(["assets/js/portal-core/utils/studentFacingText.js"]);
 
 const SYNTH_FORBIDDEN = FORBIDDEN_IN_PEDAGOGY_HTML;
 
@@ -121,6 +129,7 @@ function scanFleetGrep() {
       : [fullRoot];
     for (const file of files) {
       const rel = path.relative(repoRoot, file);
+      if (FLEET_GREP_SKIP.has(rel)) continue;
       const text = fs.readFileSync(file, "utf8");
       for (const { re, label } of FLEET_FORBIDDEN_GREP) {
         re.lastIndex = 0;

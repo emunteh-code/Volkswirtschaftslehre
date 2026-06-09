@@ -104,10 +104,8 @@ export function createRightPanelRenderer({
           const handler = onFormelnTab
             ? `window.__scrollToFormulaCard?.(${index})`
             : `window.__switchTab?.('formeln');window.__scrollToFormulaCard?.(${index})`;
-          const hint = onFormelnTab
-            ? ""
-            : `<span class="rp-formula-chip-hint">Im Formeln-Tab anzeigen</span>`;
-          return `<button type="button" class="rp-formula-chip" data-formula-index="${index}" onclick="${handler}" aria-label="${onFormelnTab ? `Springe zur Formel ${safeLabel}` : `${safeLabel} — Im Formeln-Tab anzeigen`}"><span class="rp-formula-chip-arrow" aria-hidden="true">→</span> <span class="rp-formula-chip-label">${label}</span>${hint}</button>`;
+          const hint = `<span class="rp-formula-chip-hint">${onFormelnTab ? "Formeln-Tab" : "Formeln-Tab →"}</span>`;
+          return `<button type="button" class="rp-formula-chip" data-formula-index="${index}" onclick="${handler}" aria-label="${onFormelnTab ? `Springe zur Formel ${safeLabel}` : `${safeLabel} — Im Formeln-Tab anzeigen`}"><span class="rp-formula-chip-label">${label}</span>${hint}<span class="rp-formula-chip-arrow" aria-hidden="true">→</span></button>`;
         });
         formulasNode.innerHTML = `<div class="rp-formula-index">${rows.join("")}</div>`;
         if (formulasSection) formulasSection.hidden = false;

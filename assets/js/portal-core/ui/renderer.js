@@ -39,6 +39,7 @@ import {
   renderLessonIntroCard,
   renderMasteryCheckpoint,
   renderConfidenceCheckpoint,
+  renderLessonNextStepFooter,
   renderReviewControls,
   renderFehlerChecklist,
   renderExamRecognitionBlock,
@@ -140,9 +141,9 @@ export function createRenderer({
   function buildConceptPillHtml(conceptId) {
     const summary = getConceptSourceSummary(conceptId);
     if (!summary?.status) return "";
-    let label = "Quellen anzeigen →";
-    if (summary.status === "anchored") label = "Quellen geprüft";
-    else if (summary.status === "referenced") label = "Mit Quellen verknüpft";
+    let label = "Quelle";
+    if (summary.status === "anchored") label = "Quelle geprüft";
+    else if (summary.status === "referenced") label = "Quelle verknüpft";
     const title = summary.title || summary.label || label;
     return `<button type="button" class="concept-source-link" onclick="window.__openQuellen?.()" title="${escapeHtml(title)}">${escapeHtml(label)}</button>`;
   }
@@ -917,6 +918,110 @@ ${intuition?.analogy ? `<div class="exam-drill-line">
     return drills.slice(0, 8);
   }
 
+  function parseExamTaskBlocks(questionText) {
+    const decoded = decodeHtmlEntities(String(questionText ?? "")).trim();
+    if (!decoded) return { lead: "", gegeben: "", gesucht: "", remainder: "" };
+
+    const gegebenMatch = decoded.match(/\bGegeben\b\s*:?\s*/i);
+    const gesuchtMatch = decoded.match(/\bGesucht\b\s*:?\s*/i);
+
+    if (gegebenMatch || gesuchtMatch) {
+      const gegebenStart = gegebenMatch ? gegebenMatch.index + gegebenMatch[0].length : -1;
+      const gesuchtStart = gesuchtMatch ? gesuchtMatch.index : -1;
+      const lead = gegebenMatch
+        ? decoded.slice(0, gegebenMatch.index).trim()
+        : gesuchtMatch
+          ? decoded.slice(0, gesuchtMatch.index).trim()
+          : "";
+      const gegeben =
+        gegebenStart >= 0
+          ? decoded
+              .slice(gegebenStart, gesuchtStart >= 0 ? gesuchtStart : undefined)
+              .replace(/^[:\s—–-]+/, "")
+              .trim()
+          : "";
+      const gesucht =
+        gesuchtStart >= 0
+          ? decoded.slice(gesuchtStart + (gesuchtMatch?.[0]?.length || 0)).replace(/^[:\s—–-]+/, "").trim()
+          : "";
+      return { lead, gegeben, gesucht, remainder: decoded };
+    }
+
+    return { lead: "", gegeben: "", gesucht: "", remainder: decoded };
+  }
+
+  function renderExamTaskBlocksHtml(questionText, highlightTerms = []) {
+    const { lead, gegeben, gesucht, remainder } = parseExamTaskBlocks(questionText);
+    const renderLine = (text) => renderHighlightedPracticeText(text, highlightTerms);
+    const blocks = [];
+
+    if (gegeben) {
+      blocks.push(`<div class="exam-task-block exam-task-block--gegeben">
+<span class="exam-task-block__label">Gegeben</span>
+<p class="exam-task-block__body">${renderLine(gegeben)}</p>
+</div>`);
+    }
+    if (gesucht) {
+      blocks.push(`<div class="exam-task-block exam-task-block--gesucht">
+<span class="exam-task-block__label">Gesucht</span>
+<p class="exam-task-block__body">${renderLine(gesucht)}</p>
+</div>`);
+    }
+
+    if (blocks.length) {
+      const leadHtml = lead ? `<p class="exam-task-lead">${renderLine(lead)}</p>` : "";
+      return `${leadHtml}<div class="exam-task-blocks">${blocks.join("")}</div>`;
+    }
+
+    return renderLine(remainder || questionText);
+  }
+
+  function renderExamDrillCard({
+    eyebrow,
+    questionText,
+    highlightTerms,
+    drillId,
+    hintMarkup,
+    approachMarkup,
+    answerMarkup,
+    metaLabel = ""
+  }) {
+    const hintId = `exam_hint_${drillId}`;
+    const approachId = `exam_approach_${drillId}`;
+    const solId = `examDrill_${drillId}`;
+    const questionHtml = renderExamTaskBlocksHtml(questionText, highlightTerms);
+    const forwardBtn = (panelId, text) =>
+      `<button type="button" class="btn btn--tertiary" data-forward-only="1" onclick="window.__toggleReveal('${panelId}', this)" aria-controls="${panelId}">${text}</button>`;
+
+    return `<div class="problem-card exam-drill-card problem-card--staged" id="exam_card_${drillId}">
+<span class="prob-eyebrow">${escapeHtml(eyebrow)}</span>
+<div class="prob-text">${questionHtml}</div>
+<div class="prob-actions prob-actions--staged">
+${hintMarkup ? forwardBtn(hintId, "Hinweis") : ""}
+${approachMarkup ? forwardBtn(approachId, "Ansatz") : ""}
+<button type="button" class="btn btn--secondary" id="examDrillBtn_${drillId}" data-forward-only="1" onclick="window.__toggleExamDrill('${drillId}')" aria-controls="${solId}">Lösung prüfen</button>
+</div>
+${hintMarkup ? `<div class="staged-reveal staged-reveal--hint" id="${hintId}" hidden>
+<div class="staged-reveal__head"><span class="staged-reveal__label">Hinweis</span><button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__closeReveal('${hintId}')" aria-label="Hinweis schließen">Schließen</button></div>
+<div class="staged-reveal__body">${hintMarkup}</div>
+</div>` : ""}
+${approachMarkup ? `<div class="staged-reveal staged-reveal--approach" id="${approachId}" hidden>
+<div class="staged-reveal__head"><span class="staged-reveal__label">Ansatz</span><button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__closeReveal('${approachId}')" aria-label="Ansatz schließen">Schließen</button></div>
+<div class="staged-reveal__body">${approachMarkup}</div>
+</div>` : ""}
+<div class="solution-block staged-reveal staged-reveal--solution exam-drill-answer" id="${solId}" aria-expanded="false">
+<div class="staged-reveal__head">
+<span class="staged-reveal__label">Musterlösung</span>
+<button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__toggleExamDrill('${drillId}')" aria-label="Lösung schließen">Schließen</button>
+</div>
+<div class="staged-reveal__body">
+${metaLabel ? `<div class="exam-drill-meta">${escapeHtml(metaLabel)}</div>` : ""}
+${answerMarkup}
+</div>
+</div>
+</div>`;
+  }
+
   function renderExamDrillDeck(chapter, entry, intuition, highlightTerms = []) {
     const drills = Array.isArray(examDrillsById?.[chapter.id]) && examDrillsById[chapter.id].length
       ? examDrillsById[chapter.id]
@@ -937,18 +1042,20 @@ ${drills.map((drill, index) => {
   const drillId = `${chapter.id.replace(/[^a-zA-Z0-9_]/g, "_")}_${index}`;
   const cardLabel = `Prüfungsfrage ${index + 1}`;
   const metaLabel = resolveExamDrillMetaLabel(drill.tag, cardLabel);
-      return renderQuestionCard({
-    label: cardLabel,
-    questionHtml: renderHighlightedPracticeText(drill.question, highlightTerms),
-    buttonId: `examDrillBtn_${drillId}`,
-    buttonText: "Hinweis / Lösung",
-    openButtonText: "Lösung verbergen",
-    toggleCall: `window.__toggleExamDrill('${drillId}')`,
-    answerId: `examDrill_${drillId}`,
-    cardClass: "exam-drill-card",
-    answerMarkup: `<div class="exam-drill-answer-head">Musterlösung</div>
-${metaLabel ? `<div class="exam-drill-meta">${metaLabel}</div>` : ""}
-${drill.answer}`
+  const decodedQuestion = decodeHtmlEntities(String(drill.question ?? ""));
+  const hintMarkup = metaLabel
+    ? `<p>${renderSemanticPlainText(`Typ: ${metaLabel}. Lies die Aufgabe erst ohne Hilfe — dann Formel aus dem Formeln-Tab zuordnen.`)}</p>`
+    : `<p>${renderSemanticPlainText("Notiere Größen, Einheiten und Annahmen, bevor du rechnest.")}</p>`;
+  const approachMarkup = `<p>${renderSemanticPlainText("Zielgröße benennen, passende Formel/Methode wählen, dann ersten formalen Schritt skizzieren.")}</p>`;
+  return renderExamDrillCard({
+    eyebrow: cardLabel,
+    questionText: decodedQuestion,
+    highlightTerms,
+    drillId,
+    hintMarkup,
+    approachMarkup,
+    answerMarkup: drill.answer,
+    metaLabel
   });
 }).join("")}
 </div>
@@ -1666,6 +1773,16 @@ ${sourceMeta}
 
     if (activeTab === "quellen" && !String(window.__lastRenderError || "").length) {
       initQuellenPanelInteractions(content);
+    }
+
+    const nextStepFooter = renderLessonNextStepFooter(activeTab, chapter, entry, {
+      tabAvailability,
+      chapters,
+      conceptId
+    });
+    if (nextStepFooter && entry && !String(window.__lastRenderError || "").length) {
+      const panel = content.querySelector(".panel.active") || content;
+      panel.insertAdjacentHTML("beforeend", nextStepFooter);
     }
 
     renderMath(content);

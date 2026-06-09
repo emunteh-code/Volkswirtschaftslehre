@@ -398,15 +398,22 @@ export function convertDefinitionListsToGlossary(innerHtml, entry = {}) {
         if (!termMatch) return "";
         const term = sanitizeLearnerPlainText(termMatch[1]);
         if (!term) return "";
-        const desc = sanitizeLearnerPlainText(
+        let desc = sanitizeLearnerPlainText(
           liContent.replace(termMatch[0], "").replace(/^[—\-–:\s>]+/, "")
         );
         const formulaIndex = formulaByLabel.get(term.toLowerCase());
+        const linkedFormula =
+          formulaIndex !== undefined ? (entry.formeln || [])[formulaIndex] : null;
+        if (!desc || /^definition$/i.test(desc) || desc === "—") {
+          desc = linkedFormula?.desc
+            ? sanitizeLearnerPlainText(linkedFormula.desc)
+            : `${term}: Kerngröße — Notation und Anwendung im Formeln-Tab.`;
+        }
         const termEl =
           formulaIndex !== undefined
             ? `<button type="button" class="theory-glossary-term" onclick="window.__scrollToFormulaCard?.(${formulaIndex})" aria-label="Zur Formel ${escapeHtml(term)} springen">${escapeHtml(term)}</button>`
             : `<span class="theory-glossary-term theory-glossary-term--plain">${escapeHtml(term)}</span>`;
-        return `<div class="theory-glossary-row">${termEl}<p class="theory-glossary-def">${escapeHtml(desc || "Siehe Formeln-Tab für Notation und Anwendung.")}</p></div>`;
+        return `<div class="theory-glossary-row">${termEl}<p class="theory-glossary-def">${escapeHtml(desc)}</p></div>`;
       })
       .filter(Boolean)
       .join("");
@@ -607,7 +614,8 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
     grouped.mechanismus = [
       {
         heading: "Ablauf",
-        inner: `<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>`
+        inner: `<p><strong>Schrittfolge:</strong> (1) Annahmen und Notation aus der VL festlegen, (2) formale Relation aus dem Formeln-Tab aufschreiben, (3) algebraisch/ökonomisch umformen oder lösen, (4) Ergebnis fachlich deuten — nicht nur die Zahl nennen.</p>
+<p class="theory-klausur-highlight"><strong>In der Klausur:</strong> ${escapeHtml(examPath)}</p>`
       }
     ];
   }
@@ -688,27 +696,40 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
   }
 
   if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben")) && Array.isArray(entry.objectives) && entry.objectives.length) {
-    const prefixes = ["Ich kann …", "Ich erkenne …", "Ich kenne …", "Ich weiß …"];
-    const items = entry.objectives.slice(0, 5).map((o, i) => {
+    const prefixes = ["Ich kann", "Ich erkenne", "Ich kenne", "Ich weiß"];
+    let lines = entry.objectives.slice(0, 6).map((o, i) => {
       const text = stripTags(String(o));
       const prefix = prefixes[i % prefixes.length];
-      const line = /^(ich\s+(kann|erkenne|kenne|weiß))/i.test(text) ? text : `${prefix.replace(" …", "")} ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
-      return `<li class="readiness-checklist__item">${escapeHtml(line)}</li>`;
-    }).join("");
-    grouped.vor_aufgaben = [
-      {
-        heading: "Vor den Aufgaben",
-        inner: `<p class="readiness-checklist__intro">Prüfe kurz, ob du bereit bist:</p>
+      return /^(ich\s+(kann|erkenne|kenne|weiß))/i.test(text)
+        ? text
+        : `${prefix} ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+    });
+    const fallback = getConceptReadinessFallback(meta);
+    while (lines.length < 4 && fallback.length) {
+      const next = fallback[lines.length % fallback.length];
+      if (!lines.includes(next)) lines.push(next);
+      else break;
+    }
+    if (lines.length >= 4) {
+      const items = lines.slice(0, 5).map((line) => `<li class="readiness-checklist__item">${escapeHtml(line)}</li>`).join("");
+      grouped.vor_aufgaben = [
+        {
+          heading: "Vor den Aufgaben",
+          inner: `<p class="readiness-checklist__intro">Prüfe kurz, ob du bereit bist:</p>
 <ul class="readiness-checklist">${items}</ul>`
-      }
-    ];
+        }
+      ];
+    }
   } else if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben"))) {
-    grouped.vor_aufgaben = [
-      {
-        heading: "Vor den Aufgaben",
-        inner: buildReadinessChecklistHtml(getConceptReadinessFallback(meta))
-      }
-    ];
+    const fallback = getConceptReadinessFallback(meta);
+    if (fallback.length >= 4) {
+      grouped.vor_aufgaben = [
+        {
+          heading: "Vor den Aufgaben",
+          inner: buildReadinessChecklistHtml(fallback)
+        }
+      ];
+    }
   }
 }
 
@@ -753,6 +774,10 @@ ${normalizeSubsectionMarkup(item.inner)}
     });
     const body = stripPlaceholderMarkup(bodyParts.join("\n")).trim();
     if (!theoryBodyHasContent(body)) continue;
+    if (spec.id === "vor_aufgaben") {
+      const checklistCount = (body.match(/readiness-checklist__item/g) || []).length;
+      if (checklistCount < 4) continue;
+    }
     if (spec.id === "orientierung" && headerMotivation && isDuplicateTheoryText(body, headerMotivation)) continue;
     if (headerObjectives && spec.id === "vor_aufgaben") continue;
     if (

@@ -2191,8 +2191,9 @@ body.light-mode .r-execution-instrument {
   }
 }
 
-@media (max-width: 359px) {
-  .r-execution-shell .r-execution-instrument {
+@media (max-width: 360px) {
+  .r-execution-shell .r-execution-instrument,
+  .r-practice-workspace .r-execution-instrument {
     grid-template-columns: 1fr !important;
   }
 

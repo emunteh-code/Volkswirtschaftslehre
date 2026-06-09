@@ -954,22 +954,48 @@ function getBlockRunState(blockEl) {
 
 function setRunButtonState(blockEl, mode = 'idle') {
   const runButton = blockEl.querySelector('[data-r-action="run"]');
-  blockEl.querySelectorAll('[data-r-action="reset"], [data-r-action="insert-solution"]').forEach((button) => {
-    button.disabled = mode === 'running' || mode === 'stopping';
+  const busy = mode === 'running' || mode === 'stopping';
+  blockEl.querySelectorAll('[data-r-action="reset"], [data-r-action="insert-solution"], [data-r-action="show-tip"], [data-r-action="check-solution"], [data-r-action="toggle-solution"]').forEach((button) => {
+    button.disabled = busy;
   });
   if (!runButton) return;
   if (mode === 'running') {
     runButton.textContent = 'Stoppen';
     runButton.dataset.mode = 'running';
+    runButton.setAttribute('aria-label', 'Ausführung stoppen');
     return;
   }
   if (mode === 'stopping') {
     runButton.textContent = 'Anhalten…';
     runButton.dataset.mode = 'stopping';
+    runButton.setAttribute('aria-label', 'Ausführung wird angehalten');
     return;
   }
   runButton.textContent = 'Ausführen';
   runButton.dataset.mode = 'idle';
+  runButton.setAttribute('aria-label', 'Code ausführen');
+}
+
+const OUTPUT_STATE_LABELS = {
+  idle: 'Bereit',
+  running: 'Läuft…',
+  success: 'Erfolg',
+  error: 'Fehler',
+  correct: 'Zielzeile passt',
+  wrong: 'Zielzeile prüfen'
+};
+
+function setOutputState(blockEl, state = 'idle', message = '') {
+  const output = blockEl.querySelector('[data-r-output]');
+  const pill = blockEl.querySelector('[data-r-output-state-pill]');
+  if (output) {
+    output.dataset.outputState = state;
+    if (message) output.setAttribute('aria-label', `R-Ausgabe: ${message}`);
+  }
+  if (pill) {
+    pill.textContent = OUTPUT_STATE_LABELS[state] || OUTPUT_STATE_LABELS.idle;
+    pill.dataset.state = state;
+  }
 }
 
 function buildRuntimeExpectation(mode, runtimeNote) {
@@ -980,14 +1006,65 @@ function buildRuntimeExpectation(mode, runtimeNote) {
   return 'Live-Modus (WebR im Browser): didaktische Konzeptübung, kein Ersatz für lokales R oder die Prüfungsumgebung. Pakete und numerische Details können abweichen. Ohne erfolgreichen Start bleiben Soll-Output und Interpretation dein Belegpaket.';
 }
 
-/** Honest scope for all R practice surfaces (embedded + R-Anwendung tab). */
-function renderRTruthBanner(moduleSlug = '') {
+function getModuleIdeaLabel(moduleSlug = '') {
+  if (moduleSlug === 'statistik') return 'Statistik-Idee';
+  if (moduleSlug === 'oekonometrie') return 'Ökonometrie-Idee';
+  if (moduleSlug === 'mathematik') return 'Mathe-Idee';
+  return 'Fachidee';
+}
+
+function normalizeCodeForCompare(code) {
+  return normalizeCode(code).replace(/\s+/g, ' ');
+}
+
+function codesMatch(editorCode, targetCode) {
+  if (!targetCode) return false;
+  return normalizeCodeForCompare(editorCode) === normalizeCodeForCompare(targetCode);
+}
+
+function inferSelfCheckItems(block, config) {
+  if (Array.isArray(block.selfCheckItems) && block.selfCheckItems.length) {
+    return block.selfCheckItems;
+  }
+  const items = [];
+  if (config.selfCheckLine) items.push(config.selfCheckLine);
+  (config.outputChecklist || []).slice(0, 3).forEach((entry) => {
+    if (!items.includes(entry)) items.push(entry);
+  });
+  if (!items.length) {
+    items.push('Vergleiche Vorzeichen, Größenordnung und die eine entscheidende Output-Zeile mit dem Erfolgskriterium.');
+  }
+  return items.slice(0, 4);
+}
+
+/** Compact collapsible environment note (Browser-R scope). */
+function renderEnvironmentNote(moduleSlug = '') {
   const matheScope = moduleSlug === 'mathematik'
-    ? ' <strong>Mathematik:</strong> Basis-R (Plots, `optimize`, `integrate`, Matrizen) — keine Ökonometrie-Pakete. Für `sandwich`/`lmtest` und Regressions-Workflows: Modul <a href="../oekonometrie/index.html#matrix_notation/r-anwendung">Ökonometrie</a> oder <a href="../statistik/index.html#deskriptiv/r-anwendung">Statistik</a>.'
+    ? '<p><strong>Mathematik:</strong> Basis-R (Plots, <code>optimize</code>, <code>integrate</code>, Matrizen) — keine Ökonometrie-Pakete. Für <code>sandwich</code>/<code>lmtest</code> und Regressions-Workflows: Modul <a href="../oekonometrie/index.html#matrix_notation/r-anwendung">Ökonometrie</a> oder <a href="../statistik/index.html#deskriptiv/r-anwendung">Statistik</a>.</p>'
     : '';
-  return `<div class="r-practice-truth-banner" role="note">
-<p><strong>Browser-R (WebR):</strong> Kann von Desktop-R abweichen (Pakete, Zahlen, Plotdetails). Kein Ersatz für RStudio in der Prüfung — bei Paket-Skripten lokal ausführen. WebR installiert keine Zusatzpakete. Fällt der Live-Run aus: Soll-Output, „Was zählt im Output“ und Musterlösung sind dein Beleg.${matheScope}</p>
-</div>`;
+  const bullets = [
+    'WebR lädt keine Zusatzpakete — VL-Skripte mit Zusatzpaketen gehören in Desktop-R (RStudio).',
+    'Zahlen und Plotdetails können leicht abweichen; für die Klausur zählt die fachliche Lesart.',
+    'Fällt „Ausführen“ aus: Soll-Output, Selbstcheck und Musterlösung sind der vorgesehene Lernpfad.'
+  ];
+  if (moduleSlug === 'mathematik') {
+    bullets[0] = 'Mathematik nutzt nur Basis-R im Browser; Ökonometrie-Pakete findest du in Ökonometrie oder Statistik.';
+  }
+  return `<details class="r-lab-environment">
+<summary>Laufumgebung: Browser-R</summary>
+<div class="r-lab-environment-body">
+<div class="r-practice-truth-banner" role="note">
+<p>Browser-R (WebR) kann von Desktop-R abweichen (Pakete, Zahlen, Plotdetails). Kein Ersatz für RStudio in der Prüfung. WebR installiert keine Zusatzpakete. Fällt der Live-Run aus: Soll-Output, „Was zählt im Output?“ und Musterlösung sind dein Beleg.</p>
+${matheScope}
+</div>
+<ul class="r-lab-environment-list">${bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+</div>
+</details>`;
+}
+
+/** @deprecated Use renderEnvironmentNote — kept for embedded surfaces that still call it directly. */
+function renderRTruthBanner(moduleSlug = '') {
+  return renderEnvironmentNote(moduleSlug);
 }
 
 function renderGuidedDesktopBanner(config) {
@@ -1046,9 +1123,9 @@ function renderWebRFirstRunHint() {
 function maybeMountWebRFirstRunHint(blockEl) {
   if (!blockEl || !shouldShowWebRFirstRunHint()) return;
   if (blockEl.querySelector('[data-r-webr-first-run]')) return;
-  const truth = blockEl.querySelector('.r-practice-truth-banner');
-  if (!truth) return;
-  truth.insertAdjacentHTML('afterend', renderWebRFirstRunHint());
+  const anchor = blockEl.querySelector('.r-lab-environment') || blockEl.querySelector('.r-practice-truth-banner');
+  if (!anchor) return;
+  anchor.insertAdjacentHTML('afterend', renderWebRFirstRunHint());
   blockEl.querySelector('[data-r-action="dismiss-webr-hint"]')?.addEventListener('click', () => {
     dismissWebRFirstRunHint();
     blockEl.querySelectorAll('[data-r-webr-first-run]').forEach((node) => node.remove());
@@ -1169,6 +1246,15 @@ function buildConfig(block, options = {}) {
     runtimeNote: buildRuntimeExpectation(runtimeMode, block.runtimeNote || ''),
     outputPlaceholder: inferOutputPlaceholder(block, runtimeMode),
     selfCheckLine: inferSelfCheckLine(block),
+    selfCheckItems: inferSelfCheckItems(block, {
+      selfCheckLine: inferSelfCheckLine(block),
+      outputChecklist: inferOutputChecklist(block, {
+        taskMode,
+        outputEvidenceHint: inferOutputEvidenceHint(block),
+        transferRule: inferTransferRule(block),
+        firstStep: inferFirstStep(block, taskMode, coreTarget)
+      })
+    }),
     copyPasteCode: normalizeCode(block.solutionCode || block.starterCode || block.code || '')
   };
 }
@@ -1182,55 +1268,67 @@ function renderPitfalls(pitfalls) {
 }
 
 function renderTaskBriefs(config) {
+  const ideaLabel = getModuleIdeaLabel(config.moduleSlug);
   const mathMap = (config.mathCodeMap || []).map((entry) => `
   <div class="r-map-row">
-    <div class="r-map-math"><span class="r-map-cell-label">Matheobjekt</span>${escapeHtml(entry.math || '')}</div>
-    <div class="r-map-code"><span class="r-map-cell-label">Code-Stelle</span><code>${escapeHtml(entry.code || '')}</code></div>
+    <div class="r-map-math"><span class="r-map-cell-label">${ideaLabel}</span>${escapeHtml(entry.math || '')}</div>
+    <div class="r-map-code"><span class="r-map-cell-label">R-Übersetzung</span><code>${escapeHtml(entry.code || '')}</code></div>
     <div class="r-map-meaning">${escapeHtml(entry.meaning || '')}</div>
   </div>`).join('');
 
-  const taskFlow = Array.isArray(config.taskSteps) && config.taskSteps.length
-    ? config.taskSteps
-    : [
-      config.firstStep,
-      config.taskMode === 'interpret'
-        ? `Lies danach genau diese Output-Evidenz: ${config.outputEvidenceHint}`
-        : `Führe danach aus und prüfe genau diese Output-Evidenz: ${config.outputEvidenceHint}`,
-      `Behalte als Transferregel: ${config.transferRule}`
-    ];
+  const pitfallsBlock = config.pitfalls?.length
+    ? `<details class="r-lesson-pitfalls-fold">
+<summary>Fehler vermeiden</summary>
+<ul class="r-lesson-pitfalls-list">${config.pitfalls.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+</details>`
+    : '';
 
   return `<div class="r-lesson-flow">
   <div class="r-lesson-intro">
     <div class="r-orient-panel-kicker">Idee</div>
     ${config.ideeLeadParagraph ? `<p class="r-lesson-lead">${escapeHtml(config.ideeLeadParagraph)}</p>` : ''}
     ${config.goalBullets?.length ? `<ul class="r-goal-list">${config.goalBullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
-    ${config.showIdeeSuccess ? `<p class="r-goal-success"><strong>Ziel:</strong> ${escapeHtml(config.successSignal)}</p>` : ''}
+    ${config.showIdeeSuccess ? `<p class="r-goal-success">${escapeHtml(config.successSignal)}</p>` : ''}
   </div>
-  <div class="r-translation-block">
-    <div class="r-orient-panel-kicker">Mathe ↔ R</div>
-    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Parameter → R-Ausdruck → Bedeutung</div>'}</div>
+  <div class="r-lesson-change-goal">
+    <div class="r-orient-panel-kicker">Ziel der Änderung</div>
+    <p class="r-change-focus">${escapeHtml(config.changeFocus)}</p>
+    <p class="r-change-effect">${escapeHtml(config.coreLineEffects?.effect || '')}</p>
   </div>
-  <div class="r-core-line">
-    <span class="r-core-line-kicker">Kernzeile</span>
+  <details class="r-translation-block" open>
+    <summary class="r-orient-panel-kicker r-translation-summary">${ideaLabel} → R</summary>
+    <div class="r-map-grid">${mathMap || '<div class="r-map-fallback">Fachidee → R-Ausdruck → Bedeutung</div>'}</div>
+  </details>
+  <div class="r-core-line r-target-line" data-r-target-line="${config.coreLineAnchor?.lineNo || ''}">
+    <span class="r-core-line-kicker">Zielzeile</span>
     <div class="r-core-line-meta">
-      ${config.coreLineAnchor?.lineNo ? `<span class="r-core-line-line">Zeile ${config.coreLineAnchor.lineNo}</span>` : '<span class="r-core-line-line">Zielzeile</span>'}
+      ${config.coreLineAnchor?.lineNo ? `<span class="r-core-line-line">Zeile ${config.coreLineAnchor.lineNo}</span>` : ''}
       <span class="r-core-line-fragment">${escapeHtml(config.coreCue || 'Nur diese Expression ändern.')}</span>
     </div>
     <pre class="r-core-line-code"><code>${escapeHtml(config.coreLineAnchor?.expression || config.coreLine)}</code></pre>
-    <div class="r-core-line-effects">
-      <p><strong>Änderung →</strong> ${escapeHtml(config.coreLineEffects.effect)}</p>
-      <p><strong>Invariant:</strong> ${escapeHtml(config.coreLineEffects.invariant)}</p>
-    </div>
+    <p class="r-core-line-invariant"><span class="r-map-cell-label">Nicht ändern</span> ${escapeHtml(config.keepHint)}</p>
   </div>
   <div class="r-task-flow">
     <div class="r-orient-panel-kicker">Auftrag</div>
     <p class="r-task-prompt">${escapeHtml(config.taskPrompt || config.miniTask || 'Code lesen, Output prüfen, Aufgabe lösen.')}</p>
-    <ol class="r-task-steps">
-      ${taskFlow.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}
-    </ol>
-    <p class="r-task-guard"><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
   </div>
+  ${pitfallsBlock}
   </div>`;
+}
+
+function renderTaskContract(config) {
+  const assignment = config.miniTask || config.taskPrompt || 'Lies den Code, führe aus und deute den Output.';
+  const criterion = config.successSignal || 'Deine Änderung erzeugt einen Output, den du fachlich begründen kannst.';
+  return `<div class="r-task-contract" aria-label="Auftrag und Erfolgskriterium">
+  <div class="r-task-contract-row">
+    <span class="r-task-contract-label">Dein Auftrag</span>
+    <p>${escapeHtml(assignment)}</p>
+  </div>
+  <div class="r-task-contract-row">
+    <span class="r-task-contract-label">Erfolgskriterium</span>
+    <p>${escapeHtml(criterion)}</p>
+  </div>
+</div>`;
 }
 
 function renderSolutionDetails(config) {
@@ -1271,78 +1369,34 @@ export function renderRPracticeMarkup(block, options = {}) {
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
   return `<div class="section-block r-application-block r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
-${renderRTruthBanner(config.moduleSlug)}
+${renderEnvironmentNote(config.moduleSlug)}
+<div class="r-lab-grid">
+<div class="r-orient-card r-lab-explain">
+${renderExerciseHeader(config, 0, 1)}
+${renderTaskBriefs(config)}
+<div class="r-orient-first-action">
+  <span class="r-orient-action-label">Erster Schritt</span> ${escapeHtml(config.firstStep)}
+</div>
+</div>
+<div class="r-lab-workspace r-practice-workspace">
 ${config.runtimeMode === 'guided' ? renderGuidedDesktopBanner(config) : ''}
-<div class="r-practice-head">
-  <div class="r-practice-headline">
-    <span class="r-application-kicker">R-Übung</span>
-    <h3>${escapeHtml(config.title)}</h3>
-  </div>
-  ${config.headerPurpose ? `<p class="r-practice-bridge">${escapeHtml(config.headerPurpose)}</p>` : ''}
-  ${renderTaskBriefs(config)}
-  <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep)}
-  </div>
-  ${config.runtimeNote ? `<div class="r-runtime-note r-practice-runtime-note">${escapeHtml(config.runtimeNote)}</div>` : ''}
+${renderTaskContract(config)}
+<div class="r-execution-shell">
+<div class="r-execution-instrument">
+${renderHighlightEditor(config)}
+${renderTabOutputCard(config)}
 </div>
-<div class="r-practice-workspace">
-  <div class="r-execution-shell">
-  <div class="r-execution-instrument">
-  <div class="r-practice-editor-card">
-    <div class="r-practice-toolbar">
-      <div>
-        <div class="r-practice-toolbar-title">Nur die Kernzeile ändern</div>
-      </div>
-      <span class="r-runtime-pill" data-r-runtime-status>${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
-    </div>
-    <textarea class="r-practice-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
-    <div class="r-practice-actions">
-      <button type="button" class="btn" data-r-action="run"${config.runtimeMode === 'guided' ? ' disabled' : ''}>${config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen'}</button>
-      <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
-      <button type="button" class="btn secondary" data-r-action="insert-solution">Lösung einfügen</button>
-    </div>
-<div class="r-practice-help">
-      <p><strong>Ändern:</strong> ${escapeHtml(config.changeFocus)}</p>
-      <p><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
-    </div>
-  </div>
-  <div class="r-practice-output-card r-tab-output-card">
-  <div class="r-tab-output-evidence-stack">
-  <div class="r-practice-output-head r-tab-output-guide-head">
-    <div>
-      <div class="r-practice-toolbar-title">Was zählt im Output</div>
-    </div>
-  </div>
-  ${(config.outputChecklist || []).length ? `<div class="r-output-focus">
-    <div class="r-output-interp-kicker">Darauf achten</div>
-    <ul class="r-output-focus-list">
-      ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
-    </ul>
-  </div>` : ''}
-  <p class="r-self-check-line"><strong>Selbstcheck:</strong> ${escapeHtml(config.selfCheckLine)}</p>
-  <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
-  </div>
-  </div>
-  </div>
-  </div>
 </div>
-<div class="r-practice-support-surface" aria-label="Output-Deutung, Aufgabe und Transfer">
-  <div class="r-practice-support-section r-practice-support--evidence">
-    <h4>Output-Beweis</h4>
-    <p>${escapeHtml(config.interpretation)}</p>
-    <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
-  </div>
+</div>
+</div>
+<div class="r-practice-support-surface" aria-label="Transfer und Musterlösung">
   <div class="r-practice-support-section r-practice-support--task">
-    <h4>Aufgabe</h4>
-    <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
-    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
     </div>
   </div>
 </div>
-${renderPitfalls(config.pitfalls)}
 </div>`;
 }
 
@@ -1387,22 +1441,33 @@ function tokenizeR(code) {
   return tokens;
 }
 
-function renderHighlightedR(code) {
-  return tokenizeR(code).map(({ type, value }) => {
-    const esc = escapeHtml(value);
-    if (type === 'ws' || type === 'other') return esc;
-    return `<span class="r-t-${type}">${esc}</span>`;
-  }).join('');
+function renderHighlightedR(code, targetLineNo = null) {
+  const lines = String(code ?? '').split('\n');
+  return lines.map((line, index) => {
+    const lineNo = index + 1;
+    const highlighted = tokenizeR(line).map(({ type, value }) => {
+      const esc = escapeHtml(value);
+      if (type === 'ws' || type === 'other') return esc;
+      return `<span class="r-t-${type}">${esc}</span>`;
+    }).join('');
+    const isTarget = targetLineNo && lineNo === Number(targetLineNo);
+    const inner = highlighted || '\u200b';
+    return isTarget
+      ? `<span class="r-hl-target-line" data-line="${lineNo}">${inner}</span>`
+      : `${inner}`;
+  }).join('\n');
 }
 
 function mountHighlighter(blockEl) {
   const editor = blockEl.querySelector('[data-r-editor]');
   const display = blockEl.querySelector('[data-r-highlight]');
+  const wrap = blockEl.querySelector('[data-r-target-line]') || blockEl.querySelector('.r-highlight-wrap');
   if (!editor || !display) return;
 
+  const targetLineNo = wrap?.dataset?.rTargetLine ? Number(wrap.dataset.rTargetLine) : null;
+
   function update() {
-    // Append a trailing space so last-line height stays accurate
-    display.innerHTML = renderHighlightedR(editor.value) + '\u200b';
+    display.innerHTML = renderHighlightedR(editor.value, targetLineNo) + '\u200b';
     display.scrollTop = editor.scrollTop;
     display.scrollLeft = editor.scrollLeft;
   }
@@ -1428,82 +1493,96 @@ ${steps.map((label, i) => `<div class="r-flow-step"><span class="r-step-num">${i
 </div>`;
 }
 
-function renderTabOrientationCard(config, index, total) {
+function renderExerciseHeader(config, index, total) {
   const isMulti = total > 1;
   const indexLabel = isMulti ? ` · ${index + 1} / ${total}` : '';
+  const badge = config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv';
+  const shortGoal = config.headerPurpose || config.ideeLeadParagraph || config.learningGoal || '';
+  return `<header class="r-lab-header">
+  <div class="r-lab-header-top">
+    <div class="r-lab-header-copy">
+      <span class="r-orient-kicker">R-Übung${indexLabel}</span>
+      <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
+      ${shortGoal ? `<p class="r-lab-header-goal">${escapeHtml(shortGoal)}</p>` : ''}
+    </div>
+    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}" aria-label="Laufmodus: ${badge}">${badge}</span>
+  </div>
+</header>`;
+}
+
+function renderTabOrientationCard(config, index, total) {
   const firstAction = config.runtimeMode === 'guided'
     ? 'Lies den Code durch. Nutze Interpretation und Aufgabe — ein Live-Run ist hier nicht nötig.'
-    : 'Lies den Code einmal durch, dann „Code ausführen". Danach: Output → Interpretation → Aufgabe.';
+    : 'Lies den Code einmal durch, dann „Ausführen". Danach: Output lesen und mit dem Erfolgskriterium vergleichen.';
 
-  return `<div class="r-orient-card">
-  <div class="r-orient-top">
-    <div class="r-orient-head">
-      <div class="r-orient-kicker">R-Übung${indexLabel}</div>
-      <h3 class="r-orient-title">${escapeHtml(config.title)}</h3>
-    </div>
-    <span class="r-runtime-pill r-orient-pill" data-r-runtime-status data-status="${escapeHtml(config.runtimeMode === 'guided' ? 'guided' : '')}">${config.runtimeMode === 'guided' ? 'Geführt' : 'Interaktiv'}</span>
-  </div>
-  ${config.headerPurpose ? `<p class="r-orient-purpose">${escapeHtml(config.headerPurpose)}</p>` : ''}
+  return `<div class="r-orient-card r-lab-explain">
+  ${renderExerciseHeader(config, index, total)}
   ${renderTaskBriefs(config)}
   <div class="r-orient-first-action">
-    <span class="r-orient-action-label">Erster Schritt:</span> ${escapeHtml(config.firstStep || firstAction)}
+    <span class="r-orient-action-label">Erster Schritt</span> ${escapeHtml(config.firstStep || firstAction)}
   </div>
-  ${config.runtimeNote ? `<div class="r-runtime-note r-orient-runtime">${escapeHtml(config.runtimeNote)}</div>` : ''}
   ${config.script ? `<div class="r-orient-script">${escapeHtml(config.script)}</div>` : ''}
 </div>`;
 }
 
 function renderHighlightEditor(config) {
-  const editHint = config.runtimeMode === 'guided'
-    ? 'Lies Code und Output als gemeinsames Belegpaket.'
-    : `Ändern: ${config.changeFocus}`;
-
-  const actionLabel = config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen';
   const runDisabled = config.runtimeMode === 'guided' ? ' disabled' : '';
+  const runLabel = config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen';
+  const targetLineNo = config.coreLineAnchor?.lineNo || '';
 
   return `<div class="r-practice-editor-card">
   <div class="r-practice-toolbar">
-      <div>
-        <div class="r-practice-toolbar-title">Nur die Kernzeile ändern</div>
-      </div>
+    <div class="r-practice-toolbar-title" id="r-editor-label-${escapeHtml(config.blockId)}">Code bearbeiten</div>
   </div>
-  <div class="r-highlight-wrap">
+  <div class="r-highlight-wrap" data-r-target-line="${targetLineNo}">
     <div class="r-highlight-display" data-r-highlight aria-hidden="true"></div>
-    <textarea class="r-practice-editor r-hl-editor" data-r-editor spellcheck="false">${escapeHtml(config.starterCode)}</textarea>
+    <textarea class="r-practice-editor r-hl-editor" data-r-editor spellcheck="false" aria-labelledby="r-editor-label-${escapeHtml(config.blockId)}" rows="12">${escapeHtml(config.starterCode)}</textarea>
   </div>
-  <div class="r-practice-actions">
-    <button type="button" class="btn" data-r-action="run"${runDisabled}>${escapeHtml(actionLabel)}</button>
-    <button type="button" class="btn secondary" data-r-action="reset">Zurücksetzen</button>
-    <button type="button" class="btn secondary" data-r-action="insert-solution">Lösung einfügen</button>
+  <div class="r-practice-actions r-practice-actions--staged">
+    <button type="button" class="btn btn-primary" data-r-action="run"${runDisabled} aria-label="Code ausführen">${escapeHtml(runLabel)}</button>
+    <button type="button" class="btn secondary" data-r-action="show-tip" aria-label="Tipp anzeigen">Tipp anzeigen</button>
+    <button type="button" class="btn secondary" data-r-action="check-solution" aria-label="Lösung prüfen">Lösung prüfen</button>
+    <button type="button" class="btn tertiary" data-r-action="reset" aria-label="Code zurücksetzen">Zurücksetzen</button>
   </div>
-  <div class="r-practice-help">
-    <p>${escapeHtml(editHint)}</p>
-    <p class="r-practice-help-subtle"><strong>Nicht ändern:</strong> ${escapeHtml(config.keepHint)}</p>
+  <div class="r-practice-actions-secondary">
+    <button type="button" class="r-inline-toggle r-inline-toggle--low" data-r-action="toggle-solution" aria-label="Musterlösung anzeigen">Lösung anzeigen</button>
+    <button type="button" class="btn-ghost" data-r-action="insert-solution" aria-label="Lösung in Editor einsetzen">Lösung einsetzen</button>
   </div>
+  <div class="r-practice-tip" data-r-tip hidden>
+    <p><strong>Tipp:</strong> ${escapeHtml(config.changeFocus)}</p>
+    <p class="r-practice-tip-sub">${escapeHtml(config.coreCue || '')}</p>
+  </div>
+  <div class="r-solution-check-feedback" data-r-check-feedback role="status" aria-live="polite" aria-atomic="true"></div>
 </div>`;
+}
+
+function renderSelfCheckPanel(config) {
+  const items = config.selfCheckItems || [config.selfCheckLine];
+  return `<div class="r-selfcheck-panel">
+    <div class="r-output-interp-kicker">Selbstcheck</div>
+    <ul class="r-selfcheck-list" role="list">
+      ${items.map((item) => `<li><span class="r-selfcheck-box" aria-hidden="true"></span>${escapeHtml(item)}</li>`).join('')}
+    </ul>
+  </div>`;
 }
 
 function renderTabOutputCard(config) {
   return `<div class="r-practice-output-card r-tab-output-card">
   <div class="r-tab-output-evidence-stack">
   <div class="r-practice-output-head r-tab-output-guide-head">
-    <div>
-      <div class="r-practice-toolbar-title">Was zählt im Output</div>
-    </div>
+    <div class="r-practice-toolbar-title">Output</div>
+    <span class="r-output-state-pill" data-r-output-state-pill aria-hidden="true">Bereit</span>
   </div>
-  <div class="r-output-focus">
-    <div class="r-output-interp-kicker">Darauf achten</div>
+  <pre class="r-practice-output" data-r-output data-output-state="idle" role="region" aria-label="R-Ausgabe" aria-live="polite">${escapeHtml(config.outputPlaceholder)}</pre>
+  <div class="r-output-interp r-tab-output-readout">
+    <div class="r-output-interp-kicker">Was zählt im Output?</div>
     <ul class="r-output-focus-list">
       ${(config.outputChecklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
     </ul>
-  </div>
-  <p class="r-self-check-line"><strong>Selbstcheck:</strong> ${escapeHtml(config.selfCheckLine)}</p>
-  <pre class="r-practice-output" data-r-output>${escapeHtml(config.outputPlaceholder)}</pre>
-  <div class="r-output-interp r-tab-output-readout">
-    <div class="r-output-interp-kicker">Was der Output belegt</div>
-    <p>${escapeHtml(config.interpretation)}</p>
+    ${config.interpretation ? `<p class="r-output-interp-lead">${escapeHtml(config.interpretation)}</p>` : ''}
     <p class="r-output-proof">${escapeHtml(config.outputEvidenceHint)}</p>
   </div>
+  ${renderSelfCheckPanel(config)}
   </div>
 </div>`;
 }
@@ -1521,7 +1600,7 @@ function renderTabBottomRow(config) {
     <p>${escapeHtml(config.miniTask)}</p>
     <p class="r-transfer-prompt">${escapeHtml(config.transferPrompt)}</p>
     <p class="r-transfer-rule"><strong>Prüfungsregel:</strong> ${escapeHtml(config.transferRule)}</p>
-    <button type="button" class="r-inline-toggle" data-r-action="toggle-solution">Musterlösung anzeigen</button>
+    <button type="button" class="r-inline-toggle r-inline-toggle--low" data-r-action="toggle-solution" aria-label="Musterlösung anzeigen">Lösung anzeigen</button>
     <div class="r-practice-solution" data-r-solution hidden>
       ${renderSolutionDetails(config)}
     </div>
@@ -1535,19 +1614,22 @@ function renderRLabSection(block, moduleSlug, index, total, options = {}) {
   const blockId = options.blockId || (conceptKey
     ? `rtab_${moduleSlug}_${conceptKey}_${index}`
     : `rtab_${moduleSlug}_${index}`);
-  const config = buildConfig(block, { moduleSlug, blockId });
+  const config = buildConfig(block, { moduleSlug, blockId, conceptId: options.conceptId });
   practiceRegistry.set(`${config.moduleSlug}:${config.blockId}`, config);
 
   return `<div class="r-lab-section r-practice-block" data-r-practice-root data-module-slug="${escapeHtml(config.moduleSlug)}" data-block-id="${escapeHtml(config.blockId)}" data-runtime-mode="${escapeHtml(config.runtimeMode)}">
+<div class="r-lab-grid">
 ${renderTabOrientationCard(config, index, total)}
+<div class="r-lab-workspace r-practice-workspace">
 ${config.runtimeMode === 'guided' ? renderGuidedDesktopBanner(config) : ''}
-<div class="r-practice-workspace">
-  <div class="r-execution-shell">
-  <div class="r-execution-instrument">
-  ${renderHighlightEditor(config)}
-  ${renderTabOutputCard(config)}
-  </div>
-  </div>
+${renderTaskContract(config)}
+<div class="r-execution-shell">
+<div class="r-execution-instrument">
+${renderHighlightEditor(config)}
+${renderTabOutputCard(config)}
+</div>
+</div>
+</div>
 </div>
 ${renderTabBottomRow(config)}
 </div>`;
@@ -1564,7 +1646,7 @@ export function renderRAnwendungTab(blocks, moduleSlug, options = {}) {
     return renderRLabSection(block, moduleSlug, index, total, { blockId, conceptId: options.conceptId });
   }).join('\n<div class="r-lab-divider" aria-hidden="true"></div>\n');
 
-  return `<div class="r-tab-panel">${renderRTruthBanner(moduleSlug)}${renderWebRParityFaq(moduleSlug)}${sectionsHtml}</div>`;
+  return `<div class="r-tab-panel">${renderEnvironmentNote(moduleSlug)}${sectionsHtml}</div>`;
 }
 
 // ─── State & Mount Logic ────────────────────────────────────────────────────
@@ -1599,12 +1681,44 @@ function hydrateOutput(blockEl, config, state) {
   output.textContent = state.lastOutput || config.outputPlaceholder;
 }
 
+function toggleTip(blockEl) {
+  const tip = blockEl.querySelector('[data-r-tip]');
+  if (!tip) return;
+  tip.hidden = !tip.hidden;
+  blockEl.querySelectorAll('[data-r-action="show-tip"]').forEach((button) => {
+    button.textContent = tip.hidden ? 'Tipp anzeigen' : 'Tipp ausblenden';
+    button.setAttribute('aria-expanded', tip.hidden ? 'false' : 'true');
+  });
+}
+
+function checkSolutionAgainstEditor(blockEl, config) {
+  const editor = blockEl.querySelector('[data-r-editor]');
+  const feedback = blockEl.querySelector('[data-r-check-feedback]');
+  if (!editor || !feedback) return;
+
+  if (config.taskMode === 'interpret') {
+    feedback.textContent = 'Interpretationsblock: Keine Codeänderung nötig — prüfe deine Output-Deutung gegen das Erfolgskriterium.';
+    setOutputState(blockEl, 'idle', 'Interpretationsaufgabe');
+    return;
+  }
+
+  const matches = codesMatch(editor.value, config.solutionCode);
+  if (matches) {
+    feedback.textContent = 'Zielzeile passt: Dein Code entspricht der Musterlösung. Führe aus und vergleiche den Output mit dem Erfolgskriterium.';
+    setOutputState(blockEl, 'correct', 'Zielzeile passt');
+  } else {
+    feedback.textContent = 'Noch nicht die Zielzeile: Arbeite nur an der markierten Stelle — der restliche Startcode bleibt unverändert.';
+    setOutputState(blockEl, 'wrong', 'Zielzeile noch nicht erreicht');
+  }
+}
+
 function toggleSolution(blockEl) {
   const solution = blockEl.querySelector('[data-r-solution]');
   if (!solution) return;
   solution.hidden = !solution.hidden;
   blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
-    button.textContent = solution.hidden ? 'Musterlösung anzeigen' : 'Musterlösung ausblenden';
+    button.textContent = solution.hidden ? 'Lösung anzeigen' : 'Lösung ausblenden';
+    button.setAttribute('aria-expanded', solution.hidden ? 'false' : 'true');
   });
   if (!solution.hidden && window.MathJax?.typesetPromise) {
     window.MathJax.typesetPromise([solution]).catch(() => {});
@@ -1669,6 +1783,7 @@ async function handleRun(blockEl, config) {
   const runToken = state.runToken;
   setRunButtonState(blockEl, 'running');
   output.textContent = 'Code wird ausgeführt…';
+  setOutputState(blockEl, 'running', 'Code wird ausgeführt');
   setRuntimeStatus(status, 'R wird gestartet…', 'loading');
 
   try {
@@ -1677,6 +1792,7 @@ async function handleRun(blockEl, config) {
     if (state.stopRequested) {
       const stoppedMessage = '[Ausführung angehalten]\nDu kannst den Code jetzt anpassen oder erneut ausführen.';
       output.textContent = stoppedMessage;
+      setOutputState(blockEl, 'idle', 'Ausführung angehalten');
       setRuntimeStatus(status, 'Ausführung angehalten', '');
       saveState(config.moduleSlug, config.blockId, {
         code,
@@ -1686,6 +1802,8 @@ async function handleRun(blockEl, config) {
       return;
     }
     output.textContent = result;
+    const solutionMatch = codesMatch(code, config.solutionCode);
+    setOutputState(blockEl, solutionMatch ? 'correct' : 'success', solutionMatch ? 'Zielzeile passt — Output bereit' : 'Output bereit zur Deutung');
     setRuntimeStatus(status, 'Interaktiv aktiv', 'success');
     saveState(config.moduleSlug, config.blockId, {
       code,
@@ -1698,6 +1816,7 @@ async function handleRun(blockEl, config) {
     if (state.stopRequested || /interrupt|interrupted|abort|aborted|cancel/i.test(message)) {
       const stoppedMessage = '[Ausführung angehalten]\nDu kannst den Code jetzt anpassen oder erneut ausführen.';
       output.textContent = stoppedMessage;
+      setOutputState(blockEl, 'idle', 'Ausführung angehalten');
       setRuntimeStatus(status, 'Ausführung angehalten', '');
       saveState(config.moduleSlug, config.blockId, {
         code,
@@ -1706,7 +1825,8 @@ async function handleRun(blockEl, config) {
       });
       return;
     }
-    output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, „Was zählt im Output“ und die Musterlösung als ehrlichen Lern-Fallback.\n\nOptional: denselben Code in R auf dem Rechner ausführen und nur die für die Aufgabe relevanten Zeilen vergleichen — nicht jede Abweichung ist ein Fehler in deiner Arbeit.`;
+    output.textContent = `[Interaktive Laufzeit nicht verfügbar]\n${message}\n\nNutze jetzt Soll-Output, „Was zählt im Output?“ und die Musterlösung als ehrlichen Lern-Fallback.\n\nOptional: denselben Code in R auf dem Rechner ausführen und nur die für die Aufgabe relevanten Zeilen vergleichen — nicht jede Abweichung ist ein Fehler in deiner Arbeit.`;
+    setOutputState(blockEl, 'error', 'Laufzeit nicht verfügbar');
     setRuntimeStatus(status, 'Didaktischer Fallback', 'fallback');
     saveState(config.moduleSlug, config.blockId, {
       code,
@@ -1737,13 +1857,15 @@ function mountBlock(blockEl) {
   }
 
   hydrateOutput(blockEl, config, state);
+  setOutputState(blockEl, 'idle');
 
   if (state.solutionOpen) {
     const solution = blockEl.querySelector('[data-r-solution]');
     if (solution) {
       solution.hidden = false;
       blockEl.querySelectorAll('[data-r-action="toggle-solution"]').forEach((button) => {
-        button.textContent = 'Musterlösung ausblenden';
+        button.textContent = 'Lösung ausblenden';
+        button.setAttribute('aria-expanded', 'true');
       });
     }
   }
@@ -1774,6 +1896,8 @@ function mountBlock(blockEl) {
       editor.dispatchEvent(new Event('input'));
     }
     hydrateOutput(blockEl, config, {});
+    setOutputState(blockEl, 'idle');
+    blockEl.querySelector('[data-r-check-feedback]') && (blockEl.querySelector('[data-r-check-feedback]').textContent = '');
     if (config.runtimeMode === 'guided') {
       setRuntimeStatus(status, 'Geführt', 'guided');
     } else {
@@ -1792,8 +1916,17 @@ function mountBlock(blockEl) {
     }
   });
 
+  blockEl.querySelector('[data-r-action="show-tip"]')?.addEventListener('click', () => {
+    toggleTip(blockEl);
+  });
+
+  blockEl.querySelector('[data-r-action="check-solution"]')?.addEventListener('click', () => {
+    checkSolutionAgainstEditor(blockEl, config);
+  });
+
   blockEl.querySelector('[data-r-action="insert-solution"]')?.addEventListener('click', () => {
     insertSolutionCode(blockEl, config);
+    checkSolutionAgainstEditor(blockEl, config);
     saveState(config.moduleSlug, config.blockId, {
       ...loadState(config.moduleSlug, config.blockId),
       code: blockEl.querySelector('[data-r-editor]')?.value || config.solutionCode || config.starterCode,

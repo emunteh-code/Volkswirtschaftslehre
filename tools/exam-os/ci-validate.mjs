@@ -111,7 +111,8 @@ async function main() {
     'check-math-literals.mjs',
     'check-right-rail.mjs',
     'check-learner-ui-literals.mjs',
-    'check-sidebar-markers.mjs'
+    'check-sidebar-markers.mjs',
+    'check-r-tab-lab.mjs'
   ];
   for (const t of tools) syntaxCheck(path.join(repoRoot, 'tools/exam-os', t));
 
@@ -144,6 +145,12 @@ async function main() {
     stdio: 'inherit'
   });
   if (sidebarCheck.status !== 0) ok = false;
+
+  const rTabLabCheck = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os/check-r-tab-lab.mjs')], {
+    encoding: 'utf8',
+    stdio: 'inherit'
+  });
+  if (rTabLabCheck.status !== 0) ok = false;
 
   for (const slug of MODULES) {
     await validateModule(slug);

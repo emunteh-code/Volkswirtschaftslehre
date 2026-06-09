@@ -1311,13 +1311,15 @@ async function runRShellFor(page, route, conceptId, routeLabel, w, h, vpLabel) {
     const run = document.querySelector('#content [data-r-action="run"]');
     const reset = document.querySelector('#content [data-r-action="reset"]');
     const insert = document.querySelector('#content [data-r-action="insert-solution"]');
-    const banner = document.querySelector('#content .r-practice-truth-banner');
-    const toolbarKern = [...document.querySelectorAll('#content .r-practice-toolbar-title')].some((n) =>
-      (n.textContent || '').includes('Kernzeile')
+    const envNote = document.querySelector('#content .r-lab-environment, #content .r-practice-truth-banner');
+    const toolbarCode = [...document.querySelectorAll('#content .r-practice-toolbar-title')].some((n) =>
+      (n.textContent || '').includes('Code bearbeiten')
     );
-    const kickerKern = [...document.querySelectorAll('#content .r-core-line-kicker')].some((n) =>
-      (n.textContent || '').includes('Kernzeile')
+    const kickerTarget = [...document.querySelectorAll('#content .r-core-line-kicker')].some((n) =>
+      (n.textContent || '').includes('Zielzeile')
     );
+    const hasCheck = !!document.querySelector('#content [data-r-action="check-solution"]');
+    const hasTip = !!document.querySelector('#content [data-r-action="show-tip"]');
     const re = ed?.getBoundingClientRect();
     const ro = out?.getBoundingClientRect();
     return {
@@ -1326,8 +1328,11 @@ async function runRShellFor(page, route, conceptId, routeLabel, w, h, vpLabel) {
       hasRun: !!run && v(run),
       hasReset: !!reset && v(reset),
       hasInsert: !!insert && v(insert),
-      hasTruthBanner: v(banner),
-      kernzeileSurface: toolbarKern || kickerKern,
+      hasEnvironmentNote: !!envNote,
+      hasCodeEditorLabel: toolbarCode,
+      zielzeileSurface: kickerTarget,
+      hasCheckSolution: hasCheck,
+      hasShowTip: hasTip,
       ew: re?.width || 0,
       oh: ro?.height || 0
     };
@@ -1372,24 +1377,44 @@ async function runRShellFor(page, route, conceptId, routeLabel, w, h, vpLabel) {
       why: 'Reset or insert-solution control missing or not visible.'
     });
   }
-  if (!shell.hasTruthBanner) {
+  if (!shell.hasEnvironmentNote) {
     fail({
       system: 'r-tab-shell',
       route: `${routeLabel}/r-anwendung`,
       surface: 'r-anwendung',
       viewport: vpLabel,
-      type: 'truth-banner-missing',
-      why: 'Browser-R truth boundary banner missing or collapsed.'
+      type: 'environment-note-missing',
+      why: 'Browser-R environment note (.r-lab-environment) missing.'
     });
   }
-  if (!shell.kernzeileSurface) {
+  if (!shell.zielzeileSurface) {
     fail({
       system: 'r-tab-shell',
       route: `${routeLabel}/r-anwendung`,
       surface: 'r-anwendung',
       viewport: vpLabel,
-      type: 'kernzeile-missing',
-      why: 'No Kernzeile teaching surface (toolbar or kicker) in #content.'
+      type: 'zielzeile-missing',
+      why: 'No Zielzeile teaching surface in #content.'
+    });
+  }
+  if (!shell.hasCodeEditorLabel) {
+    fail({
+      system: 'r-tab-shell',
+      route: `${routeLabel}/r-anwendung`,
+      surface: 'r-anwendung',
+      viewport: vpLabel,
+      type: 'editor-label-missing',
+      why: 'Code editor missing "Code bearbeiten" label.'
+    });
+  }
+  if (!shell.hasCheckSolution || !shell.hasShowTip) {
+    fail({
+      system: 'r-tab-shell',
+      route: `${routeLabel}/r-anwendung`,
+      surface: 'r-anwendung',
+      viewport: vpLabel,
+      type: 'staged-controls-missing',
+      why: 'R lab missing Tipp anzeigen or Lösung prüfen control.'
     });
   }
 }

@@ -1,3 +1,5 @@
+import { wrapCappedActionButtons } from '../pedagogy/learnerPedagogy.js';
+
 const WEBR_MODULE_URL = 'https://webr.r-wasm.org/latest/webr.mjs';
 const STORAGE_PREFIX = 'portal_r_practice_v1';
 const WEBR_FIRST_RUN_KEY = 'portal_r_webr_first_run_hint_v1';
@@ -1530,6 +1532,15 @@ function renderHighlightEditor(config) {
   const runLabel = config.runtimeMode === 'guided' ? 'Nicht nötig' : 'Ausführen';
   const targetLineNo = config.coreLineAnchor?.lineNo || '';
 
+  const actionButtons = wrapCappedActionButtons([
+    `<button type="button" class="btn btn-primary" data-r-action="run"${runDisabled} aria-label="Code ausführen">${escapeHtml(runLabel)}</button>`,
+    `<button type="button" class="btn secondary" data-r-action="show-tip" aria-label="Tipp anzeigen">Tipp anzeigen</button>`,
+    `<button type="button" class="btn secondary" data-r-action="check-solution" aria-label="Lösung prüfen">Lösung prüfen</button>`,
+    `<button type="button" class="btn tertiary" data-r-action="reset" aria-label="Code zurücksetzen">Zurücksetzen</button>`,
+    `<button type="button" class="r-inline-toggle r-inline-toggle--low" data-r-action="toggle-solution" aria-label="Musterlösung anzeigen">Lösung anzeigen</button>`,
+    `<button type="button" class="btn-ghost" data-r-action="insert-solution" aria-label="Lösung in Editor einsetzen">Lösung einsetzen</button>`
+  ]);
+
   return `<div class="r-practice-editor-card">
   <div class="r-practice-toolbar">
     <div class="r-practice-toolbar-title" id="r-editor-label-${escapeHtml(config.blockId)}">Code bearbeiten</div>
@@ -1538,16 +1549,7 @@ function renderHighlightEditor(config) {
     <div class="r-highlight-display" data-r-highlight aria-hidden="true"></div>
     <textarea class="r-practice-editor r-hl-editor" data-r-editor spellcheck="false" aria-labelledby="r-editor-label-${escapeHtml(config.blockId)}" rows="12">${escapeHtml(config.starterCode)}</textarea>
   </div>
-  <div class="r-practice-actions r-practice-actions--staged">
-    <button type="button" class="btn btn-primary" data-r-action="run"${runDisabled} aria-label="Code ausführen">${escapeHtml(runLabel)}</button>
-    <button type="button" class="btn secondary" data-r-action="show-tip" aria-label="Tipp anzeigen">Tipp anzeigen</button>
-    <button type="button" class="btn secondary" data-r-action="check-solution" aria-label="Lösung prüfen">Lösung prüfen</button>
-    <button type="button" class="btn tertiary" data-r-action="reset" aria-label="Code zurücksetzen">Zurücksetzen</button>
-  </div>
-  <div class="r-practice-actions-secondary">
-    <button type="button" class="r-inline-toggle r-inline-toggle--low" data-r-action="toggle-solution" aria-label="Musterlösung anzeigen">Lösung anzeigen</button>
-    <button type="button" class="btn-ghost" data-r-action="insert-solution" aria-label="Lösung in Editor einsetzen">Lösung einsetzen</button>
-  </div>
+  ${actionButtons}
   <div class="r-practice-tip" data-r-tip hidden>
     <p><strong>Tipp:</strong> ${escapeHtml(config.changeFocus)}</p>
     <p class="r-practice-tip-sub">${escapeHtml(config.coreCue || '')}</p>

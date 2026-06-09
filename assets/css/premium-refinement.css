@@ -11130,3 +11130,191 @@ body:not(.light-mode) #rightPanel #rpMistakes .rp-mistake--rail {
   background: color-mix(in srgb, var(--surface2) 50%, var(--card) 50%);
   border-color: color-mix(in srgb, var(--border) 88%, transparent);
 }
+
+/* ============================================================
+   DESIGN CLOSURE PASS 2 — specificity fixes (subtraction)
+   Earlier passes used equal/higher-specificity accent rules;
+   these selectors win at the end of the cascade.
+   ============================================================ */
+
+/* Headings & labels — neutral, not faux-links */
+#content .section-block > h3,
+#content .theory-recipe-section > h3,
+#content .theory-recipe-heading,
+#content .formula-tab-section > h3,
+#content .graph-panel-title,
+#content .practice-section-header,
+#content .practice-surface-kicker,
+#content .theory-intuition-bridge-kicker,
+#content .theory-subsection-title,
+.mikro1-practice > .practice-section-header {
+  color: var(--text);
+}
+
+#content .section-block > h3::before,
+#content .graph-panel-title::before {
+  background: color-mix(in srgb, var(--border) 70%, var(--muted) 30%);
+}
+
+#content .practice-section-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+#content .practice-section-header::before,
+#content .practice-section-header::after {
+  display: none;
+}
+
+#content .problem-card .prob-num,
+#content .exam-drill-card .prob-num,
+.exam-drill-card .prob-num,
+.problem-card .prob-num {
+  color: var(--muted);
+}
+
+#content .graph-interpretation-label,
+#content .graph-insight-label,
+#content .graph-info .gi-label,
+#content .graph-info strong {
+  color: var(--muted);
+}
+
+#content .solution-block .step-num {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+/* Colored bands → thin borders only */
+#content .theory-intuition-embed,
+#content .practice-surface-intro,
+#content .practice-surface-column,
+#content .learning-trap.warn-box--theory-inset,
+#content .learning-trap.warning-card.warn-box--theory-inset,
+#content .learning-compare,
+#content .learning-definition,
+#content .theory-recipe-section--definitionen .theory-recipe-body > p,
+#content .warn-box.warning-card,
+#content .warning-card,
+#content .warning-card.warning-card--task,
+#content .theory-recipe-section--mechanismus .theory-klausur-highlight,
+.exam-recognition__row--core,
+.concept-anchor__row--core,
+#rightPanel .rp-mistake--rail,
+#rightPanel #rpMistakes .rp-mistake--rail,
+#rightPanel .warning-card {
+  background: transparent;
+  box-shadow: none;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--border) 70%, var(--muted) 30%);
+  border-radius: var(--r-sm, 8px);
+}
+
+#content .learning-trap .warning-card-title,
+#content .learning-trap strong,
+#rightPanel .rp-mistake-title {
+  color: var(--text);
+  font-weight: 650;
+}
+
+#content .learning-trap .warning-card-body,
+#rightPanel .rp-mistake-body {
+  color: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+}
+
+/* Sidebar — calm active state, no accent halos */
+#sidebar .nav-item.active {
+  background: color-mix(in srgb, var(--surface2) 70%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--text) 35%, var(--border) 65%);
+}
+
+#sidebar .nav-item.active .num {
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+/* Tabs — underline only, not pills */
+#tabRow.tab-row .tab-btn {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#tabRow.tab-row .tab-btn.active {
+  color: var(--text);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent-soft) 65%, transparent);
+  border-bottom: 2px solid var(--accent);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+#tabRow.tab-row .tab-btn.active::after {
+  display: none;
+}
+
+#tabRow.tab-row .tab-btn.active[data-tab="r"],
+#tabRow.tab-row .tab-btn.active[data-tab="r-practice"],
+#tabRow.tab-row .tab-btn.active[data-tab="r-anwendung"] {
+  color: var(--accent-strong, var(--accent));
+  background: color-mix(in srgb, var(--accent-soft) 80%, transparent);
+  border-bottom-color: var(--accent);
+}
+
+/* R practice — reuse capped prob-actions row */
+.r-practice-editor-card .prob-actions {
+  margin-top: 12px;
+}
+
+.r-practice-editor-card .prob-actions__overflow-inner .r-inline-toggle,
+.r-practice-editor-card .prob-actions__overflow-inner .btn-ghost {
+  font-size: inherit;
+}
+
+.r-orient-kicker,
+.r-orient-panel-kicker,
+.r-output-interp-kicker,
+.r-lesson-flow .r-orient-panel-kicker {
+  color: var(--muted);
+}
+
+#content .intuition-text strong,
+#content .fe-context-block strong,
+#content .prob-text strong.learning-key,
+#content .prob-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#content .info-card {
+  background: var(--card);
+}
+
+#rightPanel .rp-f-eq,
+#rightPanel .rp-formula .rp-f-eq {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================
+   DESIGN CLOSURE — neutral rendered math (no global magenta/blue)
+   ============================================================ */
+
+#content mjx-container,
+#content mjx-container *,
+#rightPanel mjx-container,
+#rightPanel mjx-container * {
+  color: var(--math-ink, color-mix(in srgb, var(--text) 90%, var(--muted) 10%));
+}
+
+body:not(.light-mode):not([data-page="landing"]) {
+  --math-ink: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+  --math-ink-deep: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+  --math-soft: color-mix(in srgb, var(--text) 6%, transparent);
+}

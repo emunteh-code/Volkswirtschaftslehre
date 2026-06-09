@@ -55,8 +55,10 @@ export function wrapCappedActionButtons(buttonFragments, maxVisible = MAX_VISIBL
   if (buttons.length <= maxVisible) {
     return `<div class="prob-actions prob-actions--staged">\n${buttons.join("\n")}\n</div>`;
   }
-  const primary = buttons.slice(0, maxVisible);
-  const overflow = buttons.slice(maxVisible);
+  // Reserve one slot for the quiet "Mehr" disclosure — max 3 visible controls total.
+  const primaryCount = Math.max(1, maxVisible - 1);
+  const primary = buttons.slice(0, primaryCount);
+  const overflow = buttons.slice(primaryCount);
   return `<div class="prob-actions prob-actions--staged prob-actions--capped">
 ${primary.join("\n")}
 <details class="prob-actions__overflow">

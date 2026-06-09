@@ -123,6 +123,8 @@ export function studentizeTheoryHtml(html, entry = null) {
   let s = repairLatexInHtml(html);
   if (!s) return s;
 
+  s = s.replace(/&#36;|&amp;#36;/g, "$");
+
   if (entry && typeof entry === "object") {
     s = prepareTheoryHtmlForStudent(s, entry);
   } else if (s.includes("[object Object]")) {

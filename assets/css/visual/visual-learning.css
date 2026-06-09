@@ -1783,3 +1783,87 @@ code mjx-container {
   display: grid;
   gap: 16px;
 }
+
+/* ── Main-flow mistake mirror + warning icons (size SVG alert glyphs) ── */
+#content .content-fallback__title {
+  font-size: var(--type-sm);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+#content .content-fallback--mistakes,
+#content .content-fallback--connections {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+#content .theorie-fallback-support {
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, var(--warning-border) 15%);
+  border-left: 3px solid var(--warning-border);
+  background: var(--warning-surface);
+  overflow: hidden;
+}
+
+#content .theorie-fallback-entry {
+  padding: 14px 18px 16px;
+}
+
+#content .theorie-fallback-entry + .theorie-fallback-entry {
+  border-top: 1px solid color-mix(in srgb, var(--border) 65%, var(--warning-border) 35%);
+}
+
+#content .theorie-fallback-entry__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#content .theorie-fallback-entry__icon,
+#content .warning-card .warning-card-icon,
+#rightPanel .warning-card .warning-card-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin-top: 1px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--warning-title);
+  background: var(--warning-icon-surface);
+}
+
+#content .theorie-fallback-entry__icon svg,
+#content .warning-card .warning-card-icon svg,
+#rightPanel .warning-card .warning-card-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+#content .theorie-fallback-entry__title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--warning-title);
+  margin: 0;
+}
+
+#content .theorie-fallback-entry__body {
+  margin-top: 8px;
+  padding-left: 28px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--warning-body);
+}
+
+#content .warning-card .warning-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}

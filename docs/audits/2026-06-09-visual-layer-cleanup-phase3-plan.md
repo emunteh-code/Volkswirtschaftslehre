@@ -1,6 +1,6 @@
 # Visual layer cleanup — Phase 3 plan
 
-**Status:** planning PR (post-merge of #33)  
+**Status:** implemented in PR #34 (cleanup + hardening; no UI redesign)  
 **Base:** `main` @ merge `5b69a22` (clean visual layer Phase 2)  
 **Prerequisite:** PR #33 merged — runtime now uses `assets/css/visual/*` via `mikro1/css/styles.css` shim.
 

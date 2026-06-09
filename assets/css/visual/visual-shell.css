@@ -1,6 +1,6 @@
 /**
  * Visual layer: shell
- * Clean rebuild — no premium-refinement dependency.
+ * App chrome: sidebar, tabs, header, right rail layout.
  */
 
 /* ============================================================
@@ -166,7 +166,7 @@
 }
 .portal-switcher-link.is-active {
   border-color: var(--module-accent);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, white 6%, transparent);
 }
 .portal-switcher-title {
   font-size: 13px;
@@ -224,7 +224,7 @@
 }
 .search-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(10,132,255,0.2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 .search-input::placeholder { color: var(--muted); }
 
@@ -276,7 +276,7 @@
 }
 .nav-item.active .num { color: var(--nav-active-num); opacity: 0.9; }
 
-/* Sidebar lesson status — fleet rules in premium-refinement.css */
+/* Sidebar lesson status */
 
 /* Nav animation delays */
 .nav-section:nth-child(1) .nav-item { animation-delay: 0.04s; }
@@ -402,7 +402,7 @@
   background: var(--accent);
   color: var(--accent-fg);
   font-weight: 600;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  box-shadow: 0 1px 4px color-mix(in srgb, black 18%, transparent);
 }
 .tab-btn:active { transform: scale(0.96); }
 
@@ -656,7 +656,7 @@
   color: inherit;
 }
 
-/* Trap/warn: fleet .learning-trap in premium-refinement.css — spacing only here */
+/* Trap/warn: fleet .learning-trap spacing */
 .warn-box {
   margin: 14px 0;
   font-size: 14px;
@@ -777,7 +777,7 @@ body.focus-mode #rightPanel { display: none; }
   gap: 8px;
 }
 
-/* Mistakes use shared warning-card stack (see premium-refinement.css); keep layout stable if premium loads late */
+/* Mistakes use shared warning-card stack in visual-learning.css */
 #rpMistakes {
   display: flex;
   flex-direction: column;
@@ -856,8 +856,8 @@ body.focus-mode #rightPanel { display: none; }
 
 /* Legacy err/fix cards only — rail „Häufige Fehler“ uses `.warning-card` (Pass 23) */
 .rp-mistake:not(.warning-card):not(.rp-mistake--rail) {
-  background: rgba(255,69,58,0.06);
-  border: 1px solid rgba(255,69,58,0.18);
+  background: color-mix(in srgb, var(--semantic-red) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--semantic-red) 18%, transparent);
   border-radius: var(--r-md);
   padding: 10px 11px 11px;
   margin-bottom: 0;
@@ -918,7 +918,7 @@ body.focus-mode #rightPanel { display: none; }
   z-index: 9999;
   display: none;
   place-items: center;
-  background: rgba(0, 0, 0, 0.6);
+  background: color-mix(in srgb, black 60%, transparent);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -962,7 +962,7 @@ body.focus-mode #rightPanel { display: none; }
    ============================================================ */
 #sidebarOverlay {
   display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.55); z-index: 99;
+  background: color-mix(in srgb, black 55%, transparent); z-index: 99;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }

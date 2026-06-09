@@ -1,6 +1,6 @@
 /**
  * Visual layer: primitives
- * Clean rebuild — no premium-refinement dependency.
+ * Cards, buttons, badges, and shared primitives.
  */
 
 /* ============================================================
@@ -52,7 +52,7 @@ mjx-container[jax="CHTML"][display="true"] {
   display: block;
   margin: 0.8em auto;
   padding: 0.4em 0.7em;
-  background: rgba(255,255,255,0.02);
+  background: color-mix(in srgb, white 2%, transparent);
   border-left: 3px solid var(--math-ink);
   border-radius: 0 5px 5px 0;
   overflow-x: auto;
@@ -158,12 +158,12 @@ mjx-container[jax="CHTML"][display="true"]:hover {
    ============================================================ */
 .solve-trigger {
   display: inline-flex; align-items: center; gap: 5px; margin-top: 8px;
-  background: rgba(74,144,217,0.07); border: 1px solid rgba(74,144,217,0.18);
+  background: color-mix(in srgb, var(--accent) 7%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
   color: var(--accent); border-radius: var(--r-sm);
   padding: 5px 13px; font-size: 12px; font-weight: 500;
   cursor: pointer; font-family: var(--font-body); transition: background 0.15s;
 }
-.solve-trigger:hover { background: rgba(74,144,217,0.10); }
+.solve-trigger:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
 #content p { max-width: none; }
 .section { margin-bottom: 30px; }
@@ -171,7 +171,7 @@ mjx-container[jax="CHTML"][display="true"]:hover {
 /* Input transitions */
 input, .sStep-input, .exam-input, .search-input { transition: border-color 0.2s, box-shadow 0.2s; }
 input:focus, .sStep-input:focus, .exam-input:focus, .search-input:focus {
-  box-shadow: 0 0 0 3px rgba(74,144,217,0.10);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .fade-in { animation: fadeIn 0.22s ease both; }

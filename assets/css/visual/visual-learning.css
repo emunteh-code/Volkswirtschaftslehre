@@ -1,6 +1,6 @@
 /**
  * Visual layer: learning
- * Clean rebuild — no premium-refinement dependency.
+ * Theory, Aufgaben, Formeln, and pedagogy surfaces.
  */
 
    PRACTICE PANEL (Aufgaben)
@@ -105,7 +105,7 @@
 .step-num {
   min-width: 24px;
   height: 24px;
-  background: rgba(74,144,217,0.08);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -619,7 +619,7 @@
 
 .exam-q-card {
   background: var(--card);
-  border: 1px solid rgba(74,144,217,0.12);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
   border-radius: var(--r-lg);
   padding: 24px;
   margin-bottom: 14px;
@@ -657,7 +657,7 @@
 }
 .exam-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(74,144,217,0.10);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .exam-actions { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -696,13 +696,13 @@
   transition: all 0.2s;
 }
 .check-result.correct {
-  background: rgba(76,175,124,0.08);
-  border: 1px solid rgba(76,175,124,0.22);
+  background: color-mix(in srgb, var(--semantic-green) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--semantic-green) 22%, transparent);
   color: var(--semantic-green);
 }
 .check-result.wrong {
-  background: rgba(255,69,58,0.08);
-  border: 1px solid rgba(255,69,58,0.28);
+  background: color-mix(in srgb, var(--semantic-red) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--semantic-red) 28%, transparent);
   color: var(--accent3);
 }
 
@@ -764,7 +764,7 @@
 #fe-live-score {
   font-family: var(--font-body); font-weight: 700; font-size: 12px;
   color: var(--accent); padding: 3px 9px;
-  background: rgba(74,144,217,0.06); border: 1px solid rgba(74,144,217,0.12);
+  background: color-mix(in srgb, var(--accent) 6%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
   border-radius: 6px;
 }
 .fe-q-pts { transition: color 0.3s; }
@@ -778,9 +778,9 @@
   transition: border-color 0.15s;
   box-shadow: var(--shadow-sm);
 }
-.fe-question.answered { border-color: rgba(74,144,217,0.18); }
-.fe-question.correct-review { border-color: rgba(76,175,124,0.30); }
-.fe-question.wrong-review { border-color: rgba(255,69,58,0.35); }
+.fe-question.answered { border-color: color-mix(in srgb, var(--accent) 18%, transparent); }
+.fe-question.correct-review { border-color: color-mix(in srgb, var(--semantic-green) 30%, transparent); }
+.fe-question.wrong-review { border-color: color-mix(in srgb, var(--semantic-red) 35%, transparent); }
 
 .fe-q-head {
   display: flex; justify-content: space-between;
@@ -803,16 +803,16 @@
 }
 .fe-mc-label:hover { border-color: var(--accent); }
 .fe-mc-label input { accent-color: var(--accent); cursor: pointer; }
-.fe-mc-label.selected      { border-color: var(--accent); background: rgba(74,144,217,0.05); }
-.fe-mc-label.review-correct{ border-color: var(--semantic-green);  background: rgba(76,175,124,0.08); }
-.fe-mc-label.review-wrong  { border-color: var(--accent3); background: rgba(255,69,58,0.08); }
+.fe-mc-label.selected      { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.fe-mc-label.review-correct{ border-color: var(--semantic-green);  background: color-mix(in srgb, var(--semantic-green) 8%, transparent); }
+.fe-mc-label.review-wrong  { border-color: var(--accent3); background: color-mix(in srgb, var(--semantic-red) 8%, transparent); }
 
 .fe-input {
   width: 100%; background: var(--surface2); border: 1px solid var(--border);
   border-radius: var(--r-sm); padding: 9px 13px; color: var(--text);
   font-family: var(--font-mono); font-size: 13px; outline: none; transition: border-color 0.2s;
 }
-.fe-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(74,144,217,0.10); }
+.fe-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent); }
 .fe-textarea { min-height: 65px; resize: vertical; }
 
 .fe-feedback {
@@ -821,12 +821,12 @@
 }
 .fe-feedback.show { display: block; animation: fadeIn 0.2s ease; }
 .fe-feedback.fb-correct {
-  background: rgba(74,144,217,0.06);
-  border: 1px solid rgba(74,144,217,0.18); color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
 }
 .fe-feedback.fb-wrong {
-  background: rgba(255,69,58,0.07);
-  border: 1px solid rgba(255,69,58,0.28); color: var(--accent3);
+  background: color-mix(in srgb, var(--semantic-red) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--semantic-red) 28%, transparent); color: var(--accent3);
 }
 
 .fe-submit-row { text-align: center; padding: 18px 0; }
@@ -866,7 +866,7 @@
 }
 
 /* ============================================================/**
- * Fleet pedagogy + formeln styles migrated from premium-refinement (tokenized).
+ * Fleet pedagogy + formeln styles (tokenized).
  */
 
 /* ── Tabs (single definition) ───────────────────────────── */

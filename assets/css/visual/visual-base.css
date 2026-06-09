@@ -1,6 +1,6 @@
 /**
  * Visual layer: base
- * Clean rebuild — no premium-refinement dependency.
+ * Base resets, typography, and tab/button foundations.
  */
 
 /* ============================================================
@@ -80,9 +80,9 @@ body {
   100% { transform: scale(1);  opacity: 1; }
 }
 @keyframes stepActivate {
-  0%   { border-color: rgba(74,144,217,0); background: rgba(74,144,217,0); }
-  45%  { border-color: rgba(74,144,217,0.35); background: rgba(74,144,217,0.05); }
-  100% { border-color: rgba(74,144,217,0.22);  background: rgba(74,144,217,0.04); }
+  0%   { border-color: transparent; background: transparent; }
+  45%  { border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
+  100% { border-color: color-mix(in srgb, var(--accent) 22%, transparent);  background: color-mix(in srgb, var(--accent) 4%, transparent); }
 }
 
 /* Animated counters and bars */
@@ -94,7 +94,7 @@ body {
 body.light-mode .nav-item.active { background: var(--nav-active-bg); }
 body.light-mode .section-block  { box-shadow: var(--shadow-sm); }
 body.light-mode .home-card:hover { box-shadow: var(--shadow-md); }
-body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
+body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px color-mix(in srgb, black 14%, transparent); }
 
 /* ============================================================
    UTILITY CLASSES (replaces recurring static inline styles)
@@ -216,8 +216,8 @@ body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
 
 /* Dashboard focus recommendation box */
 .dash-focus-rec {
-  background: rgba(255, 59, 48, 0.07);
-  border: 1px solid rgba(255, 59, 48, 0.18);
+  background: color-mix(in srgb, var(--semantic-red) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--semantic-red) 18%, transparent);
   border-radius: var(--r-md);
   padding: 14px 18px;
   margin-bottom: 20px;
@@ -236,7 +236,7 @@ body.light-mode .tab-btn.active  { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
   max-width: none;
 }
 body.light-mode .dash-focus-rec {
-  background: rgba(255, 59, 48, 0.05);
+  background: color-mix(in srgb, var(--semantic-red) 5%, transparent);
 }
 
 /* Fehlerprotokoll / backbone parity surfaces */

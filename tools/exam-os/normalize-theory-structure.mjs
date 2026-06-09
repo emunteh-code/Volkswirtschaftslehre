@@ -362,7 +362,7 @@ function writeFleetAuditReport(fleet) {
     '| Core | `assets/js/portal-core/theory/theoryStructure.js` | Re-wrap, classify, `completeTheoryRecipe`, `auditTheoryRecipeSteps` |',
     '| Migration | `tools/exam-os/normalize-theory-structure.mjs` | Fleet `--write`; persists `theoryRecipe.js` for ökonometrie/mathematik |',
     '| Render | `assets/js/portal-core/ui/warningSystem.js` | Keeps placeholder cards; warn-box rail |',
-    '| Styles | `assets/css/premium-refinement.css` | Recipe cards + placeholder styling |',
+    '| Styles | `assets/css/visual/visual-learning.css` | Recipe cards + placeholder styling |',
     '',
     'Empty steps after normalization receive honest one-line placeholders or content merged from `motivation`, `objectives`, `formeln`, `cards`, `intuition` — no invented VL prose.',
     '',

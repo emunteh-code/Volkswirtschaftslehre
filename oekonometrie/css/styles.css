@@ -1,3 +1,2 @@
-/* Ökonometrie — inherit Mikro I shell + shared R practice styles */
+/* Ökonometrie — inherit Mikro I shell (visual-labs imports r-practice.css) */
 @import url('../../mikro1/css/styles.css');
-@import url('../../assets/css/r-practice.css');

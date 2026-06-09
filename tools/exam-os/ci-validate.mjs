@@ -154,7 +154,7 @@ async function main() {
   });
   if (rTabLabCheck.status !== 0) ok = false;
 
-  for (const script of ['check-math-ink.mjs', 'check-visual-tokens.mjs']) {
+  for (const script of ['check-math-ink.mjs', 'check-visual-tokens.mjs', 'check-css-orphans.mjs']) {
     const r = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os', script)], {
       encoding: 'utf8',
       stdio: 'inherit'

@@ -1,0 +1,21 @@
+/**
+ * Visual layer: theme scope (load last).
+ */
+
+body:not(.light-mode) {
+  color-scheme: dark;
+}
+
+body.light-mode {
+  color-scheme: light;
+}
+
+body.light-mode:not([data-page="landing"]) {
+  --warning-surface: var(--warning-surface-module);
+  --warning-surface-soft: var(--warning-surface-soft-module);
+  --warning-border: var(--warning-border-module);
+  --warning-title: var(--warning-title-module);
+  --warning-body: var(--warning-body-module);
+  --warning-icon-surface: var(--warning-icon-surface-module);
+  --warning-shadow: var(--warning-shadow-module);
+}

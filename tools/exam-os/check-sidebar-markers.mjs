@@ -11,7 +11,8 @@ const repoRoot = path.resolve(__dirname, "../..");
 const SOURCES = [
   "assets/js/portal-core/ui/chapterNavigation.js",
   "assets/js/generated-portal/main.js",
-  "assets/css/premium-refinement.css"
+  "assets/css/visual/visual-shell.css",
+  "assets/css/visual/visual-learning.css"
 ];
 
 const FORBIDDEN = [

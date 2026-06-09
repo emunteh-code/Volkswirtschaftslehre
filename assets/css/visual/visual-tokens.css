@@ -1,0 +1,213 @@
+/**
+ * Visual layer tokens — single source of truth for hex/rgb values.
+ * All other visual-*.css files must reference these custom properties only.
+ */
+:root {
+  /* Typography */
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', 'Inconsolata', monospace;
+
+  --type-micro: 0.6875rem;
+  --type-xs: 0.75rem;
+  --type-sm: 0.8125rem;
+  --type-base: 0.9375rem;
+  --type-md: 1.125rem;
+  --type-lg: 1.25rem;
+  --type-xl: 1.75rem;
+  --type-2xl: 2rem;
+
+  --leading-tight: 1.3;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.65;
+
+  /* Spacing */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Radius */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 18px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* Layout widths */
+  --content-shell-max: min(100%, clamp(1120px, 88vw, 1540px));
+  --content-body-max: min(100%, clamp(940px, 76vw, 1040px));
+  --content-theorie-max: min(100%, clamp(700px, 62vw, 740px));
+  --content-formeln-max: min(100%, clamp(1040px, 78vw, 1120px));
+  --content-aufgaben-max: min(100%, clamp(1040px, 78vw, 1120px));
+  --content-graph-max: min(100%, clamp(1180px, 84vw, 1280px));
+  --graph-shell-max: min(100%, clamp(1180px, 84vw, 1280px));
+  --content-rail-max: min(100%, clamp(1040px, 78vw, 1120px));
+  --landing-hero-max: min(100%, 760px);
+  --landing-grid-max: min(100%, 1120px);
+  --reading-measure: 68ch;
+  --chrome-sidebar-width: clamp(240px, 18vw, 260px);
+  --chrome-rail-width: clamp(260px, 19vw, 280px);
+  --right-panel-width: var(--chrome-rail-width);
+
+  /* Interaction — blue only for interactive affordances */
+  --accent: #3b82f6;
+  --accent-strong: #2563eb;
+  --accent-soft: rgba(59, 130, 246, 0.1);
+  --accent-fg: #ffffff;
+
+  /* Math — magenta invariant */
+  --math-ink: #E879F9;
+  --math-ink-deep: #D946EF;
+  --math-soft: color-mix(in srgb, var(--math-ink) 8%, transparent);
+
+  /* Semantic */
+  --semantic-green: #34d399;
+  --semantic-amber: #f59e0b;
+  --semantic-amber-soft: rgba(245, 158, 11, 0.1);
+  --semantic-red: #f87171;
+
+  /* Rule-zone semantic bands (tokenized, not raw hex in selectors) */
+  --zone-use-fg: var(--semantic-green);
+  --zone-use-border: color-mix(in srgb, var(--semantic-green) 35%, var(--border));
+  --zone-use-bg: color-mix(in srgb, var(--semantic-green) 6%, var(--card));
+  --zone-assumptions-fg: var(--muted);
+  --zone-assumptions-border: var(--border);
+  --zone-assumptions-bg: var(--surface2);
+  --zone-invalid-fg: var(--semantic-amber);
+  --zone-invalid-border: color-mix(in srgb, var(--semantic-amber) 35%, var(--border));
+  --zone-invalid-bg: color-mix(in srgb, var(--semantic-amber) 6%, var(--card));
+  --zone-mistakes-fg: var(--semantic-amber);
+  --zone-mistakes-border: color-mix(in srgb, var(--semantic-amber) 28%, var(--border));
+  --zone-mistakes-bg: color-mix(in srgb, var(--semantic-amber) 5%, var(--card));
+
+  /* Surfaces — dark default */
+  --bg: #0f1218;
+  --surface: #181c24;
+  --surface2: #1e232d;
+  --surface3: #252b36;
+  --surface-elevated: #222832;
+  --card: #161a22;
+  --border: #2a3140;
+  --text: #e8eaed;
+  --muted: #9aa3b2;
+
+  /* Nav */
+  --nav-active-bg: color-mix(in srgb, var(--accent) 12%, transparent);
+  --nav-active-border: var(--accent);
+  --nav-active-text: var(--text);
+  --nav-active-num: var(--muted);
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.14);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.24), 0 16px 40px rgba(0, 0, 0, 0.18);
+
+  /* Warning */
+  --warning-surface: #2a2318;
+  --warning-surface-soft: #322a1e;
+  --warning-border: rgba(245, 158, 11, 0.32);
+  --warning-title: #fbbf24;
+  --warning-body: #e8eaed;
+  --warning-icon-surface: rgba(251, 191, 36, 0.14);
+  --warning-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+
+  /* Badges */
+  --badge-meta-fg: var(--muted);
+  --badge-meta-bg: transparent;
+  --badge-meta-border: transparent;
+  --badge-status-fg: var(--muted);
+  --badge-status-bg: color-mix(in srgb, var(--surface2) 80%, var(--card) 20%);
+  --badge-status-border: color-mix(in srgb, var(--border) 90%, transparent);
+  --badge-status-accent-fg: var(--accent-strong);
+  --badge-status-accent-bg: var(--accent-soft);
+  --badge-status-accent-border: color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  --badge-action-fg: var(--accent-strong);
+  --badge-action-bg: transparent;
+
+  /* Progress */
+  --progress-track-h: 4px;
+  --progress-track-bg: color-mix(in srgb, var(--border) 80%, transparent);
+  --progress-fill-bg: var(--accent);
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-hover: 140ms;
+  --duration-tab: 200ms;
+  --duration-enter: 250ms;
+
+  /* Aliases */
+  --border-color: var(--border);
+  --text-primary: var(--text);
+  --text-secondary: var(--muted);
+  --module-accent: var(--accent);
+}
+
+body.light-mode {
+  --warning-surface-module: #fff6f1;
+  --warning-surface-soft-module: #fff0e8;
+  --warning-border-module: #efc1b4;
+  --warning-title-module: #c55638;
+  --warning-body-module: #111827;
+  --warning-icon-surface-module: rgba(197, 86, 56, 0.12);
+  --warning-shadow-module: 0 12px 28px rgba(125, 53, 33, 0.08);
+
+  --bg: #f6f6f4;
+  --surface: #f0f1ee;
+  --surface2: #eaebe7;
+  --surface3: #dfe6f2;
+  --surface-elevated: #ffffff;
+  --card: #ffffff;
+  --border: #d8dcd4;
+  --text: #111827;
+  --muted: #4b5563;
+
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --accent-fg: #ffffff;
+
+  --math-ink: #C026D3;
+  --math-ink-deep: #A21CAF;
+  --math-soft: color-mix(in srgb, var(--math-ink) 6%, transparent);
+
+  --semantic-green: #10b981;
+  --semantic-amber: #d97706;
+  --semantic-amber-soft: rgba(217, 119, 6, 0.08);
+  --semantic-red: #ef4444;
+
+  --nav-active-bg: color-mix(in srgb, var(--accent) 8%, transparent);
+  --nav-active-text: #111827;
+  --nav-active-num: #4b5563;
+
+  --warning-surface: var(--warning-surface-module, #fffbeb);
+  --warning-surface-soft: var(--warning-surface-soft-module, #fef3c7);
+  --warning-border: var(--warning-border-module, #fcd34d);
+  --warning-title: var(--warning-title-module, #b45309);
+  --warning-body: var(--warning-body-module, #111827);
+  --warning-icon-surface: var(--warning-icon-surface-module, rgba(217, 119, 6, 0.12));
+  --warning-shadow: var(--warning-shadow-module, 0 2px 8px rgba(180, 83, 9, 0.08));
+
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04), 0 3px 10px rgba(17, 24, 39, 0.05);
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: 0 4px 10px rgba(17, 24, 39, 0.06), 0 10px 26px rgba(17, 24, 39, 0.07);
+
+  --badge-status-bg: color-mix(in srgb, var(--surface2) 70%, var(--card) 30%);
+  --badge-status-border: color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+/* Landing page scope */
+body[data-page="landing"] {
+  --font-heading: 'Syne', var(--font-heading);
+  --landing-hero-max: min(100%, 760px);
+  --landing-grid-max: min(100%, 1120px);
+}
+
+body[data-page="landing"].theme-light {
+  --math-ink: #C026D3;
+}

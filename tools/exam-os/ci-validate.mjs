@@ -112,7 +112,9 @@ async function main() {
     'check-right-rail.mjs',
     'check-learner-ui-literals.mjs',
     'check-sidebar-markers.mjs',
-    'check-r-tab-lab.mjs'
+    'check-r-tab-lab.mjs',
+    'check-math-ink.mjs',
+    'check-visual-tokens.mjs'
   ];
   for (const t of tools) syntaxCheck(path.join(repoRoot, 'tools/exam-os', t));
 
@@ -151,6 +153,14 @@ async function main() {
     stdio: 'inherit'
   });
   if (rTabLabCheck.status !== 0) ok = false;
+
+  for (const script of ['check-math-ink.mjs', 'check-visual-tokens.mjs']) {
+    const r = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os', script)], {
+      encoding: 'utf8',
+      stdio: 'inherit'
+    });
+    if (r.status !== 0) ok = false;
+  }
 
   for (const slug of MODULES) {
     await validateModule(slug);

@@ -5044,13 +5044,14 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
 #content .graph-controls,
 #content .graph-container .graph-controls {
   margin: 0 !important;
-  padding: 7px 10px !important;
+  padding: 10px 14px !important;
+  min-height: 64px;
   border: 1px solid color-mix(in srgb, var(--border) 72%, transparent) !important;
-  border-radius: 8px !important;
-  background: color-mix(in srgb, var(--surface2) 12%, var(--card) 88%) !important;
-  box-shadow: none !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--surface2) 16%, var(--card) 84%) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 6%, transparent) !important;
   border-top: none !important;
-  gap: 5px !important;
+  gap: 8px !important;
   align-items: stretch !important;
 }
 
@@ -5222,10 +5223,12 @@ body.light-mode #content .exam-drill-answer .semantic-reference__term {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
-  max-height: clamp(280px, 50vh, 580px) !important;
-  min-height: clamp(220px, 32vh, 380px) !important;
+  max-height: clamp(320px, 52vh, 620px) !important;
+  min-height: clamp(260px, 36vh, 420px) !important;
   margin: 0 !important;
-  aspect-ratio: 5 / 3 !important;
+  aspect-ratio: 16 / 9 !important;
+  border-radius: 12px !important;
+  border: 1px solid color-mix(in srgb, var(--border) 75%, transparent) !important;
 }
 
 #content .graph-container.graph-container--macro-focus .graph-plot-shell--macro .graph-canvas,
@@ -8424,67 +8427,116 @@ body:not(.light-mode) #content .formula-card {
   text-decoration: underline;
 }
 
-.lesson-intro-card {
-  margin: 0 0 20px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--r-md, 8px);
-  background: color-mix(in srgb, var(--card) 94%, var(--accent) 6%);
+.lesson-hero-card {
+  margin: 0 0 24px;
+  padding: 20px 22px 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  border-left: 4px solid var(--accent);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 7%, var(--card) 93%) 0%,
+      color-mix(in srgb, var(--accent2, var(--accent)) 4%, var(--card) 96%) 55%,
+      var(--card) 100%
+    );
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent),
+    0 12px 28px color-mix(in srgb, var(--accent) 6%, transparent);
 }
 
-.lesson-intro-card__title {
-  margin: 0 0 12px;
-  font-size: var(--type-md, 1rem);
-  font-weight: 600;
+body.light-mode .lesson-hero-card {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 5%, #fff 95%) 0%,
+      color-mix(in srgb, var(--accent2, var(--accent)) 3%, #fff 97%) 55%,
+      #fff 100%
+    );
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--accent) 10%, transparent),
+    0 10px 24px color-mix(in srgb, var(--text) 4%, transparent);
 }
 
-.lesson-intro-card__grid {
+.lesson-hero-card__title {
+  margin: 0 0 14px;
+  font-size: var(--type-md, 1.0625rem);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.lesson-hero-card__grid {
   display: grid;
-  gap: 12px;
+  gap: 16px 24px;
 }
 
 @media (min-width: 720px) {
-  .lesson-intro-card__grid {
+  .lesson-hero-card__grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .lesson-intro-card__block--outcomes {
-    grid-column: 1 / -1;
+    align-items: start;
   }
 }
 
-.lesson-intro-card__label {
-  margin: 0 0 6px;
+.lesson-hero-card__label {
+  margin: 0 0 8px;
   font-size: var(--type-xs, 0.75rem);
-  font-weight: 650;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 55%, var(--muted) 45%);
+}
+
+.lesson-hero-card__copy,
+.lesson-hero-card__list {
+  margin: 0;
+  font-size: var(--type-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.62);
+}
+
+.lesson-hero-card__copy--muted {
   color: var(--muted);
 }
 
-.lesson-intro-card__copy,
-.lesson-intro-card__list {
+.lesson-hero-card__list {
+  padding-left: 1.15rem;
+}
+
+.lesson-hero-card__list li + li {
+  margin-top: 6px;
+}
+
+.lesson-hero-card__micro-strip {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 14%, var(--border) 86%);
+}
+
+.lesson-hero-card__micro-strip .micro-retrieval-check {
   margin: 0;
-  font-size: var(--type-sm, 0.875rem);
-  line-height: var(--leading-normal, 1.6);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
 }
 
-.lesson-intro-card__list {
-  padding-left: 1.2rem;
-}
-
-.lesson-intro-card__micro {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
-}
-
+.concept-anchor-card,
 .concept-anchor {
-  margin: 0 0 12px;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md, 8px);
-  background: color-mix(in srgb, var(--card) 96%, var(--accent) 4%);
+  margin: 0 0 16px;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, var(--text) 8%);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--card) 98%, #fff 2%);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--text) 4%, transparent),
+    0 8px 22px color-mix(in srgb, var(--text) 5%, transparent);
+}
+
+body.light-mode .concept-anchor-card,
+body.light-mode .concept-anchor {
+  background: #fff;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--text) 3%, transparent),
+    0 8px 20px color-mix(in srgb, var(--text) 4%, transparent);
 }
 
 .concept-anchor__title {
@@ -9015,8 +9067,8 @@ body.light-mode #shortcutHint .sc-key {
 .exam-recognition__row {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
-  gap: 9px 20px;
-  padding: 9px 0;
+  gap: 8px 24px;
+  padding: 10px 0;
   align-items: baseline;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
 }
@@ -9026,10 +9078,15 @@ body.light-mode #shortcutHint .sc-key {
 }
 
 .exam-recognition__row--core {
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 12px;
   border-bottom: none;
-  background: color-mix(in srgb, var(--accent) 6%, var(--surface2) 94%);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent) 10%, var(--surface2) 90%) 0%,
+    color-mix(in srgb, var(--accent) 4%, var(--surface2) 96%) 100%
+  );
+  border-left: 3px solid var(--accent);
 }
 
 .exam-recognition__row--core .exam-recognition__value {
@@ -9125,32 +9182,51 @@ body.light-mode #shortcutHint .sc-key {
 }
 
 .fehler-checklist__rows {
-  margin: 10px 0 0;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .fehler-checklist__row {
-  min-height: 32px;
+  min-height: 44px;
   display: flex;
-  align-items: flex-start;
-  padding: 2px 0;
+  align-items: stretch;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface2) 35%, var(--card) 65%);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.fehler-checklist__row:has(.fehler-checklist__check:checked) {
+  border-color: color-mix(in srgb, var(--success, #3ecf8e) 45%, var(--border) 55%);
+  background: color-mix(in srgb, var(--success, #3ecf8e) 6%, var(--card) 94%);
 }
 
 .fehler-checklist__label {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
   font-size: var(--type-sm, 0.875rem);
-  line-height: 1.4;
+  line-height: 1.45;
   cursor: pointer;
 }
 
+.fehler-checklist__text {
+  flex: 1;
+  min-width: 0;
+}
+
 .fehler-checklist__check {
-  margin-top: 2px;
+  margin-top: 3px;
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
 }
 
 .readiness-checklist__intro {
@@ -9161,26 +9237,33 @@ body.light-mode #shortcutHint .sc-key {
 
 .readiness-checklist {
   margin: 0;
-  padding: 0;
+  padding: 12px 14px;
   list-style: none;
   display: grid;
-  gap: 8px;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--surface2) 30%, var(--card) 70%);
 }
 
 .readiness-checklist__item {
   position: relative;
-  padding-left: 1.35rem;
+  padding: 8px 10px 8px 2rem;
   font-size: var(--type-sm, 0.875rem);
   line-height: 1.5;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card) 90%, var(--accent) 10%);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
 }
 
 .readiness-checklist__item::before {
-  content: "□";
+  content: "☐";
   position: absolute;
-  left: 0;
-  top: 0;
-  color: color-mix(in srgb, var(--accent) 55%, var(--muted) 45%);
+  left: 10px;
+  top: 8px;
+  color: color-mix(in srgb, var(--accent) 65%, var(--muted) 35%);
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .review-controls {
@@ -9246,9 +9329,9 @@ body.light-mode #shortcutHint .sc-key {
 .micro-retrieval-check {
   margin: 0 0 18px;
   padding: 12px 14px;
-  border: 1px dashed var(--border);
-  border-radius: var(--r-md, 8px);
-  background: color-mix(in srgb, var(--surface2) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border) 82%);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 4%, var(--surface2) 96%);
 }
 
 .micro-retrieval-check__q {
@@ -9582,21 +9665,23 @@ body.light-mode #shortcutHint .sc-key {
 }
 
 #content .rule-zone--use {
-  background: color-mix(in srgb, var(--success, #3ecf8e) 8%, var(--surface2) 92%);
-  border-left: 3px solid color-mix(in srgb, var(--success, #3ecf8e) 55%, transparent);
+  background: color-mix(in srgb, var(--success, #3ecf8e) 14%, var(--surface2) 86%);
+  border-left: 4px solid color-mix(in srgb, var(--success, #3ecf8e) 70%, transparent);
 }
 
 #content .rule-zone--assumptions {
-  background: color-mix(in srgb, var(--surface2) 35%, var(--card) 65%);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface2) 94%);
+  border-left: 4px solid color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 #content .rule-zone--invalid {
-  background: color-mix(in srgb, var(--sys-orange, #d97706) 8%, var(--surface2) 92%);
-  border-left: 3px solid color-mix(in srgb, var(--sys-orange, #d97706) 52%, transparent);
+  background: color-mix(in srgb, var(--sys-orange, #d97706) 14%, var(--surface2) 86%);
+  border-left: 4px solid color-mix(in srgb, var(--sys-orange, #d97706) 65%, transparent);
 }
 
 #content .rule-zone--mistakes {
-  background: color-mix(in srgb, var(--warning, #e8a838) 7%, var(--surface2) 93%);
+  background: color-mix(in srgb, var(--warning, #e8a838) 12%, var(--surface2) 88%);
+  border-left: 4px solid color-mix(in srgb, var(--warning, #e8a838) 55%, transparent);
 }
 
 #content .rule-zone__overflow {
@@ -9673,10 +9758,15 @@ body.light-mode #shortcutHint .sc-key {
 
 #content .klausur-playbook-card,
 #content .klausur-action-card {
-  padding: 18px 18px 16px;
+  padding: 20px 20px 18px;
   border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border) 84%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 4%, var(--card) 96%) 0%,
+    var(--card) 100%
+  );
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--text) 5%, transparent);
 }
 
 #content .klausur-playbook-card__head,

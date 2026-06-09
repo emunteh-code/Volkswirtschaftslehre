@@ -490,6 +490,8 @@
 .r-lab-section {
   display: grid;
   gap: 14px;
+  max-width: min(100%, clamp(1100px, 94vw, 1380px));
+  margin-inline: auto;
 }
 
 @media (min-width: 1200px) {
@@ -2183,9 +2185,20 @@ body.light-mode .r-execution-instrument {
 
 @media (min-width: 1100px) {
   .r-lab-grid {
-    grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
-    gap: 28px;
+    grid-template-columns: minmax(0, 44fr) minmax(0, 56fr);
+    gap: 32px;
     align-items: start;
+  }
+}
+
+@media (max-width: 359px) {
+  .r-execution-shell .r-execution-instrument {
+    grid-template-columns: 1fr !important;
+  }
+
+  .r-execution-shell .r-execution-instrument .r-practice-editor-card,
+  .r-execution-shell .r-execution-instrument .r-practice-output-card {
+    min-width: 0;
   }
 }
 
@@ -2261,11 +2274,16 @@ body.light-mode .r-execution-instrument {
 .r-task-contract {
   display: grid;
   gap: 10px;
-  margin-bottom: 12px;
-  padding: 10px 12px;
-  border-radius: var(--r-sm);
-  border: 1px solid color-mix(in srgb, var(--border) 42%, var(--accent) 10%);
-  background: color-mix(in srgb, var(--accent) 3%, var(--surface) 97%);
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border) 78%);
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent) 5%, var(--surface) 95%) 0%,
+    var(--surface) 100%
+  );
 }
 
 .r-task-contract-row {

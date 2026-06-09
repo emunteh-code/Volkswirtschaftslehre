@@ -15,7 +15,9 @@ const SOURCE_STATUS_EM =
 
 const ESCAPED_INLINE_TAG = /&lt;\/?(?:strong|em|br)\s*\/?&gt;/gi;
 const VAGUE_READINESS_PARAGRAPH =
-  /<p[^>]*>\s*Kernrelationen aus dem Formeln-Tab aktivieren[^<]*<\/p>/gi;
+  /<p[^>]*>\s*(?:Kernrelationen aus dem Formeln-Tab aktivieren|Begriffe aus Formeln-Tab|Lern-Checkliste)[^<]*<\/p>/gi;
+const BLOCKQUOTE_GT = /^>\s+/gm;
+const PLATFORM_ADDED_INLINE = /\bplatform-added-(?:explanation|drill)\b/gi;
 
 /**
  * Plain learner text: decode entities, strip tags, remove markdown blockquote markers.
@@ -25,6 +27,7 @@ const VAGUE_READINESS_PARAGRAPH =
 export function sanitizeLearnerPlainText(value) {
   let text = decodeHtmlEntities(stripHtml(String(value ?? "")));
   text = text.replace(/^>\s+/gm, "").replace(/\s+/g, " ").trim();
+  text = text.replace(PLATFORM_ADDED_INLINE, "").trim();
   return text;
 }
 
@@ -129,6 +132,9 @@ export function studentizeTheoryHtml(html, entry = null) {
   s = s.replace(/<\/?(?:strong|em)>/gi, "");
   s = s.replace(/<br\s*\/?>/gi, " ");
   s = s.replace(VAGUE_READINESS_PARAGRAPH, "");
+  s = s.replace(/<p[^>]*>\s*<strong>\s*Kernrelationen:\s*<\/strong>[^<]*<\/p>/gi, "");
+  s = s.replace(/<p[^>]*>\s*>\s*[^<]*<\/p>/gi, "");
+  s = s.replace(BLOCKQUOTE_GT, "");
   s = s.replace(
     /<p[^>]*class="[^"]*\b(?:klausurmethodik-footnote|theory-source-footnote)\b[^"]*"[^>]*>[\s\S]*?<\/p>/gi,
     ""

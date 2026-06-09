@@ -41,6 +41,10 @@ const FORBIDDEN_IN_PEDAGOGY_HTML = [
   { re: /&lt;\/?strong&gt;/g, label: "escaped strong tag in pedagogy HTML" },
   { re: /&lt;\/?em&gt;/g, label: "escaped em tag in pedagogy HTML" },
   { re: /&lt;br\s*\/?&gt;/g, label: "escaped br tag in pedagogy HTML" },
+  { re: /lesson-intro-card/g, label: "legacy lesson-intro-card class in pedagogy HTML" },
+  { re: /Warum wichtig\?/g, label: "removed Warum wichtig hero column" },
+  { re: /Kernrelationen:/g, label: "Kernrelationen boilerplate in pedagogy HTML" },
+  { re: /Kernbaustein für Klausurtransfer/g, label: "generic hero fallback phrase" },
   { re: /•\s*☐/g, label: "raw bullet-checkbox pattern in pedagogy HTML" }
 ];
 

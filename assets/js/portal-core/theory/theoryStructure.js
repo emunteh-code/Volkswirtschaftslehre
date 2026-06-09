@@ -327,7 +327,7 @@ export function normalizeSubsectionMarkup(innerHtml) {
   });
 }
 
-const VAGUE_READINESS_RE = /^Kernrelationen aus dem Formeln-Tab aktivieren/i;
+const VAGUE_READINESS_RE = /^(?:Kernrelationen aus dem Formeln-Tab aktivieren|Begriffe aus Formeln-Tab|Lern-Checkliste)/i;
 
 /** @param {string} innerHtml */
 function isVagueReadinessContent(innerHtml) {
@@ -384,11 +384,12 @@ export function convertDefinitionListsToGlossary(innerHtml, entry = {}) {
     if (label) formulaByLabel.set(label.toLowerCase(), index);
   });
 
-  return String(innerHtml ?? "").replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (match, listInner) => {
+  let html = String(innerHtml ?? "");
+  html = html.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (match, listInner) => {
     const items = [...listInner.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)];
     if (!items.length) return match;
     const glossaryItems = items.filter((item) => /<strong/i.test(item[1]));
-    if (glossaryItems.length !== items.length) return match;
+    if (!glossaryItems.length) return match;
 
     const rows = glossaryItems
       .map((item) => {
@@ -398,7 +399,7 @@ export function convertDefinitionListsToGlossary(innerHtml, entry = {}) {
         const term = sanitizeLearnerPlainText(termMatch[1]);
         if (!term) return "";
         const desc = sanitizeLearnerPlainText(
-          liContent.replace(termMatch[0], "").replace(/^[—\-–:\s]+/, "")
+          liContent.replace(termMatch[0], "").replace(/^[—\-–:\s>]+/, "")
         );
         const formulaIndex = formulaByLabel.get(term.toLowerCase());
         const termEl =
@@ -413,6 +414,7 @@ export function convertDefinitionListsToGlossary(innerHtml, entry = {}) {
     if (!rows) return match;
     return `<div class="theory-glossary-rows">${rows}</div>`;
   });
+  return html.replace(/^>\s+/gm, "");
 }
 
 /** @param {{ id: string, heading: string, step: number }} spec @param {string} bodyHtml @param {object} [entry] */
@@ -673,16 +675,10 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
   }
 
   if (!theoryBodyHasContent(bucketBody(grouped, "anwendung"))) {
-    const formulaLabels = (entry.formeln || [])
-      .slice(0, 3)
-      .map((f) => f?.label)
-      .filter(Boolean)
-      .join(", ");
     grouped.anwendung = [
       {
         heading: "Klausurtransfer",
-        inner: `<p><strong>Klausurpfad:</strong> ${escapeHtml(examPath)}</p>
-${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabels)} — Variablen vor Rechnung zuordnen.</p>` : ""}`
+        inner: `<p><strong>Klausurpfad:</strong> ${escapeHtml(examPath)}</p>`
       }
     ];
   }

@@ -75,28 +75,60 @@ ${collapseBtn(id, label)}
  */
 function buildLessonOutcomeItems(entry, chapterTitle = "") {
   const raw = Array.isArray(entry?.objectives) ? entry.objectives : [];
-  const verbs = /^(erkennen|erklären|unterscheiden|berechnen|anwenden|prüfen|ableiten|interpretieren|formulieren|zuordnen)/i;
+  const verbs = /^(erkennen|erklären|unterscheiden|berechnen|anwenden|prüfen|ableiten|interpretieren|formulieren|zuordnen|nennen|lesen|deuten)/i;
   let items = raw
-    .map((o) => String(o).trim())
+    .map((o) => sanitizeLearnerPlainText(o))
     .filter(Boolean)
     .slice(0, 5)
     .map((o) => (verbs.test(o) ? o : `erklären: ${o}`));
 
   if (!items.length && chapterTitle) {
+    const title = chapterTitle.trim();
+    const key = title.toLowerCase();
     const formulaLabels = (entry?.formeln || [])
       .slice(0, 3)
-      .map((f) => (f?.label ? String(f.label).trim() : ""))
+      .map((f) => sanitizeLearnerPlainText(f?.label || ""))
       .filter(Boolean);
-    const title = chapterTitle.trim();
-    items = [
-      `erklären, worin das Kernproblem von „${title}" besteht`,
-      formulaLabels.length
-        ? `die Größen ${formulaLabels.join(", ")} in Klausuraufgaben zuordnen`
-        : "die zentrale Formel oder Methode der Aufgabe zuordnen",
-      `typische Klausurfehler zu „${title}" vor der Rechnung benennen`
-    ];
-    if (items.length < 4) {
-      items.push(`typische Aufgabenstellungen und Stichworte zu „${title}" sicher zuordnen`);
+
+    if (/deskriptiv/.test(key)) {
+      items = [
+        "Lage (Mittelwert/Median) und Streuung (Varianz, s) aus Rohdaten berechnen",
+        "erkennen, wann Ausreißer oder Schiefe den Median dem Mittelwert vorziehen",
+        "die Bessel-korrigierte Stichprobenvarianz mit Nenner (n−1) anwenden",
+        "Lage, Streuung und Formhinweis in einer Klausurantwort verbinden"
+      ];
+    } else if (/anova|varianzanalyse/.test(key)) {
+      items = [
+        "F-Test und Gruppenmittel aus dem ANOVA-Output gemeinsam lesen",
+        "Aufgaben mit mehreren Gruppen und einer metrischen Zielgröße als ANOVA zuordnen",
+        "den Unterschied zwischen globalem F-Test und paarweisen Nachprüfungen benennen",
+        "Post-hoc-Ergebnisse nur bei abgelehntem H₀ fachlich interpretieren"
+      ];
+    } else if (/bivariat|korrelation|regression/.test(key)) {
+      items = [
+        "Kovarianz, Korrelation und Steigung in Aufgabenstellungen unterscheiden",
+        formulaLabels.length
+          ? `${formulaLabels.join(", ")} aus Tabellen oder R-Output zuordnen`
+          : "bivariate Kennzahlen aus Tabellen oder R-Output zuordnen",
+        "Richtung und Stärke eines Zusammenhangs ohne Überinterpretation deuten",
+        "typische Fehler bei n, Einheiten und Linearität vor der Rechnung prüfen"
+      ];
+    } else if (/cobb|douglas|produktion/.test(key)) {
+      items = [
+        "Isoquanten und Grenzprodukte einer CD-Produktionsfunktion interpretieren",
+        "Skalenelastizität α+β und ihre ökonomische Bedeutung erklären",
+        "Kostenminimierung und Faktornachfrage aus der Produktion ableiten",
+        "Marshallsche Nachfrage und Einkommens-/Preiselastizität bei CD-Nutzen zuordnen"
+      ];
+    } else {
+      items = [
+        formulaLabels.length
+          ? `${formulaLabels.join(", ")} in Klausuraufgaben zuordnen`
+          : `die zentrale Methode von „${title}" benennen`,
+        `den ersten sinnvollen Rechenschritt bei Standardaufgaben zu „${title}" skizzieren`,
+        `typische Klausurfehler zu „${title}" vor der Rechnung benennen`,
+        `Stichworte und Datenlayout von „${title}" sicher erkennen`
+      ];
     }
   }
   return items;
@@ -121,39 +153,34 @@ export function renderLessonOutcomes(entry, chapterTitle = "") {
  */
 export function renderLessonIntroCard(entry, chapterTitle = "", intuition = null) {
   const title = String(chapterTitle || "").trim();
-  const kurz =
-    (entry?.motivation ? stripHtml(String(entry.motivation)).trim() : "") ||
-    (intuition?.core ? stripHtml(String(intuition.core)).trim() : "") ||
-    (title ? `${title} — Kernbaustein für Klausurtransfer in diesem Modulblock.` : "");
-  const warum =
-    (intuition?.bridge ? stripHtml(String(intuition.bridge)).trim() : "") ||
-    (title
-      ? `In Klausuren zählt der sichere Zugriff auf Notation, Formelwahl und typische Fallen zu „${title}".`
-      : "");
+  const kurz = sanitizeLearnerPlainText(
+    (entry?.motivation ? stripHtml(String(entry.motivation)) : "") ||
+      (intuition?.core ? stripHtml(String(intuition.core)) : "") ||
+      (title ? `${title} strukturiert den Klausurpfad in diesem Modulblock.` : "")
+  );
   const outcomes = buildLessonOutcomeItems(entry, chapterTitle);
   const microCheck = buildTheoryMicroCheck(entry, chapterTitle);
 
   const outcomesHtml = outcomes.length
-    ? `<div class="lesson-intro-card__block lesson-intro-card__block--outcomes">
-<h3 class="lesson-intro-card__label">Nach dieser Lektion kannst du …</h3>
-<ul class="lesson-intro-card__list">${outcomes.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
+    ? `<div class="lesson-hero-card__col lesson-hero-card__col--outcomes">
+<h3 class="lesson-hero-card__label">Nach dieser Lektion kannst du …</h3>
+<ul class="lesson-hero-card__list">${outcomes.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
 </div>`
-    : "";
+    : `<div class="lesson-hero-card__col lesson-hero-card__col--outcomes">
+<h3 class="lesson-hero-card__label">Nach dieser Lektion kannst du …</h3>
+<p class="lesson-hero-card__copy lesson-hero-card__copy--muted">Lernziele im Formeln-Tab und in den Aufgaben vertiefen.</p>
+</div>`;
 
-  return `<section class="lesson-intro-card" role="region" aria-labelledby="lesson-intro-h">
-<h2 class="lesson-intro-card__title" id="lesson-intro-h">Lektionseinstieg</h2>
-<div class="lesson-intro-card__grid">
-<div class="lesson-intro-card__block">
-<h3 class="lesson-intro-card__label">Kurz erklärt</h3>
-<p class="lesson-intro-card__copy">${escapeHtml(kurz)}</p>
-</div>
-<div class="lesson-intro-card__block">
-<h3 class="lesson-intro-card__label">Warum wichtig?</h3>
-<p class="lesson-intro-card__copy">${escapeHtml(warum)}</p>
+  return `<section class="lesson-hero-card" role="region" aria-labelledby="lesson-hero-h">
+<h2 class="lesson-hero-card__title" id="lesson-hero-h">Lektionseinstieg</h2>
+<div class="lesson-hero-card__grid">
+<div class="lesson-hero-card__col">
+<h3 class="lesson-hero-card__label">Kurz erklärt</h3>
+<p class="lesson-hero-card__copy">${escapeHtml(kurz)}</p>
 </div>
 ${outcomesHtml}
 </div>
-${microCheck ? `<div class="lesson-intro-card__micro">${microCheck}</div>` : ""}
+${microCheck ? `<div class="lesson-hero-card__micro-strip">${microCheck}</div>` : ""}
 </section>`;
 }
 
@@ -198,7 +225,7 @@ export function renderConceptAnchor(intuition, entry, formalAnchorHtml = "") {
     .filter(Boolean)
     .join("");
 
-  return `<aside class="concept-anchor" role="region" aria-labelledby="concept-anchor-h">
+  return `<aside class="concept-anchor concept-anchor-card" role="region" aria-labelledby="concept-anchor-h">
 <h3 class="concept-anchor__title" id="concept-anchor-h">Kernidee</h3>
 <div class="concept-anchor__rows">${rows}</div>
 </aside>`;
@@ -285,7 +312,7 @@ export function renderFehlerChecklist(warnings = []) {
       : title.endsWith("?")
         ? title
         : `Habe ich „${title}" beachtet?`;
-    return `<li class="fehler-checklist__row"><label class="fehler-checklist__label"><input type="checkbox" class="fehler-checklist__check" /> ${escapeHtml(prompt)}</label></li>`;
+    return `<li class="fehler-checklist__row"><label class="fehler-checklist__label"><input type="checkbox" class="fehler-checklist__check" aria-label="Prüfpunkt abhaken" /><span class="fehler-checklist__text">${escapeHtml(prompt)}</span></label></li>`;
   });
   return `<section class="fehler-checklist" role="region" aria-labelledby="fehler-check-h">
 <h3 class="fehler-checklist__title" id="fehler-check-h">Selbsttest vor der Klausur</h3>

@@ -101,6 +101,7 @@ export function studentizeTheoryHtml(html, entry = null) {
   s = s.replace(/<p>\s*<em>\s*Lern-Checkliste\.?\s*<\/em>\s*<\/p>/gi, "");
   s = s.replace(/<h3>\s*Klausurtransfer\s*\(\s*source-distilled\s*\)\s*<\/h3>/gi, "<h3>Klausurtransfer</h3>");
   s = s.replace(/<span[^>]*class="[^"]*\bplatform-chrome-badge\b[^"]*"[^>]*>[\s\S]*?<\/span>/gi, "");
+  s = s.replace(/<\/?strong(?=[\s>/])/gi, "");
   s = s.replace(
     /<p[^>]*class="[^"]*\b(?:klausurmethodik-footnote|theory-source-footnote)\b[^"]*"[^>]*>[\s\S]*?<\/p>/gi,
     ""

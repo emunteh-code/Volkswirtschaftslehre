@@ -3,6 +3,8 @@
  * Content is classified by subsection h3 keywords; nothing is dropped.
  */
 
+import { renderConceptAnchor } from "../pedagogy/learnerPedagogy.js";
+
 export const THEORY_SECTION_ORDER = [
   {
     id: "orientierung",
@@ -759,17 +761,22 @@ export function buildIntuitionFusionFragments(intuition, opts = {}) {
     : "";
 
   const kernParts = [];
-  if (intuition.core) {
-    kernParts.push(`<p class="theory-intuition-lead">${intuition.core}</p>`);
-  }
-  if (intuition.analogy) {
-    kernParts.push(`<div class="theory-intuition-embed">
+  const conceptAnchor = renderConceptAnchor(intuition, opts.entry || {}, opts.formalAnchorHtml || "");
+  if (conceptAnchor) {
+    kernParts.push(conceptAnchor);
+  } else {
+    if (intuition.core) {
+      kernParts.push(`<p class="theory-intuition-lead">${intuition.core}</p>`);
+    }
+    if (intuition.analogy) {
+      kernParts.push(`<div class="theory-intuition-embed">
 <h4 class="theory-subsection-title">Denkbild</h4>
 <p>${intuition.analogy}</p>
 </div>`);
-  }
-  if (opts.formalAnchorHtml) {
-    kernParts.push(`<div class="theory-intuition-embed theory-intuition-formal-anchor">${opts.formalAnchorHtml}</div>`);
+    }
+    if (opts.formalAnchorHtml) {
+      kernParts.push(`<div class="theory-intuition-embed theory-intuition-formal-anchor">${opts.formalAnchorHtml}</div>`);
+    }
   }
   if (intuition.embed) {
     kernParts.push(`<div class="theory-intuition-embed theory-intuition-interactive">${intuition.embed}</div>`);
@@ -850,7 +857,7 @@ export function fuseIntuitionIntoTheoryHtml(html, intuitionRaw, entry = {}, fusi
   const intuition = normalizeIntuitionRecord(intuitionRaw);
   if (!intuition) return base;
 
-  const fragments = buildIntuitionFusionFragments(intuition, fusionOpts);
+  const fragments = buildIntuitionFusionFragments(intuition, { ...fusionOpts, entry });
   if (/data-theory-intuition-fused/i.test(base)) {
     return base;
   }

@@ -105,8 +105,8 @@ export function createRightPanelRenderer({
         formulasNode.innerHTML = `<div class="rp-formula-index">${rows.join("")}</div>`;
         if (formulasSection) formulasSection.hidden = false;
       } else {
-        formulasNode.innerHTML = "";
-        if (formulasSection) formulasSection.hidden = true;
+        formulasNode.innerHTML = `<div class="rp-formula-fallback"><button type="button" class="rp-formula-chip rp-formula-chip--fallback" onclick="window.__switchTab?.('formeln')" aria-label="Zum Formeln-Tab wechseln"><span class="rp-formula-chip-arrow" aria-hidden="true">→</span> Formeln-Tab</button><p class="rp-formula-fallback__hint">Notation und Herleitung findest du im Formeln-Tab.</p></div>`;
+        if (formulasSection) formulasSection.hidden = false;
       }
     }
 

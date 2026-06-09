@@ -234,7 +234,7 @@ function createNavigation(chapters, loadProgress, loadSRS) {
           "aria-label",
           `${item.title} (${category}, Lektion ${displayNum}/${items.length}, ${NAV_STATUS_ARIA["not-started"]})`
         );
-        element.innerHTML = `<span class="nav-item__marker" aria-hidden="true"></span><span class="num" aria-hidden="true" title="Reihenfolge in ${category}">${displayNum}</span><span class="nav-item__title">${item.title}</span><span class="nav-item__aside"></span>`;
+        element.innerHTML = `<span class="num" aria-hidden="true" title="Reihenfolge in ${category}">${displayNum}</span><span class="nav-item__title">${item.title}</span><span class="nav-item__aside"></span>`;
         element.onclick = () => onNavigate(item.id);
         element.onkeydown = (event) => {
           if (event.key === "Enter" || event.key === " ") {
@@ -273,7 +273,6 @@ function createNavigation(chapters, loadProgress, loadSRS) {
     document.querySelectorAll(".nav-item[data-id]").forEach((element) => {
       const id = element.dataset.id;
       element.querySelector(".mastery")?.remove();
-      element.querySelector(".nav-due-dot")?.remove();
 
       const entry = progress[id];
       const status = resolveLessonNavStatus(entry);
@@ -296,6 +295,14 @@ function createNavigation(chapters, loadProgress, loadSRS) {
       const aside = element.querySelector(".nav-item__aside");
       if (aside) {
         aside.innerHTML = "";
+        if (status === "completed") {
+          const doneBadge = document.createElement("span");
+          doneBadge.className = "nav-item__done";
+          doneBadge.textContent = "✓";
+          doneBadge.title = "Abgeschlossen";
+          doneBadge.setAttribute("aria-label", "Abgeschlossen");
+          aside.appendChild(doneBadge);
+        }
         const srsEntry = srs[id];
         if (srsEntry && srsEntry.due <= now) {
           const srsBadge = document.createElement("span");

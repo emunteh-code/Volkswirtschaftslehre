@@ -1556,7 +1556,7 @@ async function runKlausurmethodikStudentText(page) {
   }
 }
 
-/** --- Aufgaben panel Plattform-Übung header on concept view --- */
+/** --- Aufgaben panel Übungsmodus header on concept view (Pass 4) --- */
 async function runPracticePanelHeader(page) {
   await page.setViewportSize({ width: 1280, height: 900 });
   await gotoConcept(page, '/mikro1/index.html', 'budget');
@@ -1573,17 +1573,29 @@ async function runPracticePanelHeader(page) {
     return;
   }
   await page.waitForTimeout(400);
-  const hasHeader = await page.evaluate(() =>
-    Boolean(document.querySelector('#content .practice-panel-header .practice-platform-badge'))
-  );
-  if (!hasHeader) {
+  const snap = await page.evaluate(() => ({
+    hasModeHeader: Boolean(document.querySelector('#content .practice-mode-header')),
+    kicker: document.querySelector('#content .practice-mode-kicker')?.textContent?.trim() || '',
+    hasStaged: Boolean(document.querySelector('#content .problem-card--staged'))
+  }));
+  if (!snap.hasModeHeader || !/Übungsmodus/i.test(snap.kicker)) {
     fail({
       system: 'practice-panel-header',
       route: 'mikro1/budget/aufgaben',
       surface: 'aufgaben',
       viewport: '1280',
       type: 'header-missing',
-      why: 'Expected .practice-panel-header with Plattform-Übung badge on concept Aufgaben panel.'
+      why: 'Expected fleet .practice-mode-header with Übungsmodus kicker on concept Aufgaben panel.'
+    });
+  }
+  if (!snap.hasStaged) {
+    fail({
+      system: 'practice-panel-header',
+      route: 'mikro1/budget/aufgaben',
+      surface: 'aufgaben',
+      viewport: '1280',
+      type: 'staged-missing',
+      why: 'Expected staged .problem-card--staged on fleet Aufgaben panel.'
     });
   }
 }

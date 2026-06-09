@@ -34,7 +34,7 @@ import {
 } from "../utils/learningHighlights.js";
 import {
   LEARNER_LABELS,
-  renderLessonOutcomes,
+  renderLessonIntroCard,
   renderMasteryCheckpoint,
   renderConfidenceCheckpoint,
   renderReviewControls,
@@ -43,7 +43,6 @@ import {
   renderStagedPracticeCard,
   renderFormulaPedagogyExtras,
   renderSourceUsePedagogy,
-  buildTheoryMicroCheck,
   getDerivationStepRole
 } from "../pedagogy/learnerPedagogy.js";
 
@@ -138,8 +137,12 @@ export function createRenderer({
 
   function buildConceptPillHtml(conceptId) {
     const summary = getConceptSourceSummary(conceptId);
-    if (!summary?.label || !summary?.status) return "";
-    return `<span class="badge badge--status platform-chrome-badge platform-chrome-badge--source platform-chrome-badge--${escapeHtml(summary.status)}" title="${escapeHtml(summary.title || summary.label)}">${escapeHtml(summary.label)}</span>`;
+    if (!summary?.status) return "";
+    let label = "Quellen anzeigen →";
+    if (summary.status === "anchored") label = "Quellen geprüft";
+    else if (summary.status === "referenced") label = "Mit Quellen verknüpft";
+    const title = summary.title || summary.label || label;
+    return `<button type="button" class="concept-source-link" onclick="window.__openQuellen?.()" title="${escapeHtml(title)}">${escapeHtml(label)}</button>`;
   }
 
   function formatLessonPositionLabel(index, total) {
@@ -163,7 +166,7 @@ export function createRenderer({
     const pillInner = hideSourceChrome ? "" : buildConceptPillHtml(conceptId);
     const pillsRow = hideSourceChrome
       ? ""
-      : `<div class="concept-header-row concept-header-row--pills" aria-label="Konzept-Kennzeichnung"><div class="concept-pill-row">${pillInner || '<span class="concept-pill-placeholder" aria-hidden="true"></span>'}</div></div>`;
+      : `<div class="concept-header-row concept-header-row--pills" aria-label="Quellenbezug"><div class="concept-pill-row">${pillInner}</div></div>`;
     const headerClass = hideSourceChrome ? "concept-header concept-header--theorie" : "concept-header";
 
     let motivationRow = "";
@@ -632,7 +635,7 @@ ${hasMeaningfulText(formula.desc) ? `<p class="theory-intuition-callout-desc">${
         `Achte auf ${theorySections[0].heading.toLowerCase()}: ${theorySections[0].paragraph}`
       );
     }
-    return { formalAnchorHtml, recognitionItems: recognitionItems.slice(0, 4) };
+    return { formalAnchorHtml, recognitionItems: recognitionItems.slice(0, 4), entry };
   }
 
   function extractTheorySignals(entry, conceptId = null, opts = {}) {
@@ -1521,8 +1524,7 @@ ${footer ? `<footer class="formula-limits-footer">${footer}</footer>` : ""}
       return;
     }
 
-    const outcomesBlock = renderLessonOutcomes(entry, chapter?.title);
-    const microCheckBlock = buildTheoryMicroCheck(entry, chapter?.title);
+    const lessonIntro = renderLessonIntroCard(entry, chapter?.title, intuitionById[conceptId]);
     const headerHTML = buildConceptHeaderHtml(chapter, entry, conceptId, {
       hideSourceChrome: activeTab === "theorie"
     });
@@ -1553,7 +1555,7 @@ ${footer ? `<footer class="formula-limits-footer">${footer}</footer>` : ""}
         ].join("");
         content.innerHTML =
           headerHTML
-          + `<div class="panel active theory-tab-panel">${outcomesBlock}${microCheckBlock}${warningData.theoryHtml || entry.theorie}${fehlerChecklist}${mistakesMirror}${pedagogyTail}</div>`;
+          + `<div class="panel active theory-tab-panel">${lessonIntro}${warningData.theoryHtml || entry.theorie}${fehlerChecklist}${mistakesMirror}${pedagogyTail}</div>`;
       } else if (activeTab === "graph") {
         content.innerHTML = headerHTML + renderGraphPanel(conceptId);
         ensureGraphPedagogyChrome(conceptId, content, moduleSlug);

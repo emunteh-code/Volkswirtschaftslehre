@@ -150,7 +150,7 @@ export function createFullExamModule({
   function renderExamSourceNotice(exam) {
     const disclosed = withPlatformExamDisclosure(exam);
     if (!disclosed?.sourceStatus && !disclosed?.officialTaskCoverage && !disclosed?.sourceNote) return "";
-    const sourceLabel = disclosed.sourceLabel || disclosed.sourceStatus || "Plattform-Übung";
+    const sourceLabel = disclosed.sourceLabel || disclosed.sourceStatus || "Klausurähnliche Übung";
     const officialLabel = disclosed.officialTaskLabel || disclosed.officialTaskCoverage || "";
     const note = disclosed.sourceNote || "Plattform-Simulation — keine offizielle Klausur.";
     const evidence = disclosed.sourceEvidence || "";

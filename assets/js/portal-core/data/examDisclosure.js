@@ -5,7 +5,7 @@
 export const PLATFORM_EXAM_DISCLOSURE = Object.freeze({
   sourceStatus: "platform-added-drill",
   officialTaskCoverage: "missing-official-task-source",
-  sourceLabel: "Plattform-Übung",
+  sourceLabel: "Klausurähnliche Übung",
   officialTaskLabel: "Simulation — keine offizielle Klausur",
   sourceNote:
     "Diese Klausur ist eine portal-authored Plattform-Simulation aus source-backed Themenfamilien. Sie ist nicht aus einer offiziellen Probeklausur, Altklausur oder einem Lösungsschlüssel rekonstruiert.",
@@ -21,7 +21,7 @@ export const QUICK_EXAM_DISCLOSURE = Object.freeze({
 
 export const OFFICIAL_TASK_COVERAGE_LABELS = Object.freeze({
   "official-task-source": "Offizielle Aufgabe (geprüft)",
-  "missing-official-task-source": "Plattform-Übung",
+  "missing-official-task-source": "Klausurähnliche Übung",
   "official-document-registry": "Dokument-Register (kein Item-Mapping)",
   "module-mismatch-review-needed": "Modulzuordnung prüfen"
 });

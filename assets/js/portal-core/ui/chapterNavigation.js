@@ -49,7 +49,7 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
           "aria-label",
           `${item.title} (${cat}, Lektion ${displayNum}/${items.length}, ${STATUS_ARIA["not-started"]})`
         );
-        el.innerHTML = `<span class="nav-item__marker" aria-hidden="true"></span><span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span class="nav-item__title">${item.title}</span><span class="nav-item__aside"></span>`;
+        el.innerHTML = `<span class="num" aria-hidden="true" title="Reihenfolge in ${cat}">${displayNum}</span><span class="nav-item__title">${item.title}</span><span class="nav-item__aside"></span>`;
         el.onclick = () => onNavigate(item.id);
         el.onkeydown = (e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -87,7 +87,6 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
     document.querySelectorAll(".nav-item[data-id]").forEach((el) => {
       const id = el.dataset.id;
       el.querySelector(".mastery")?.remove();
-      el.querySelector(".nav-due-dot")?.remove();
 
       const entry = p[id];
       const status = resolveLessonNavStatus(entry);
@@ -110,6 +109,14 @@ export function createChapterNavigation({ chapters, loadProgress, loadSRS }) {
       const aside = el.querySelector(".nav-item__aside");
       if (aside) {
         aside.innerHTML = "";
+        if (status === "completed") {
+          const doneBadge = document.createElement("span");
+          doneBadge.className = "nav-item__done";
+          doneBadge.textContent = "✓";
+          doneBadge.title = "Abgeschlossen";
+          doneBadge.setAttribute("aria-label", "Abgeschlossen");
+          aside.appendChild(doneBadge);
+        }
         const srsCard = srs[id];
         if (srsCard && srsCard.due <= now) {
           const srsBadge = document.createElement("span");

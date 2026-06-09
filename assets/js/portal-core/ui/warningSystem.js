@@ -161,16 +161,21 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
   }
 }
 
-/** Compact right-rail mistake note — no icon, not `.warning-card` (Pass 24). */
-export function renderRightRailWarnings(warnings = []) {
-  return warnings
-    .map(
-      (warning) => `<article class="rp-mistake rp-mistake--rail" data-warning-placement="rail">
+/** Compact right-rail mistake note — cap visible rows; overflow behind disclosure. */
+export function renderRightRailWarnings(warnings = [], { expandedLimit = 2 } = {}) {
+  if (!warnings.length) return "";
+  const renderRow = (warning) =>
+    `<article class="rp-mistake rp-mistake--rail" data-warning-placement="rail">
 <div class="rp-mistake-title">${escapeHtmlText(warning.title)}</div>
 <div class="rp-mistake-body">${warning.bodyHtml}</div>
-</article>`
-    )
-    .join("");
+</article>`;
+  const primary = warnings.slice(0, expandedLimit).map(renderRow).join("");
+  const overflow = warnings.slice(expandedLimit);
+  if (!overflow.length) return primary;
+  return `${primary}<details class="rp-mistakes-overflow">
+<summary class="rp-mistakes-overflow__summary">Weitere Fehler anzeigen (${overflow.length})</summary>
+<div class="rp-mistakes-overflow__body">${overflow.map(renderRow).join("")}</div>
+</details>`;
 }
 
 /**

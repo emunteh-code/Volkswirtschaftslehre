@@ -110,7 +110,8 @@ async function main() {
     'check-portal-shell.mjs',
     'check-math-literals.mjs',
     'check-right-rail.mjs',
-    'check-learner-ui-literals.mjs'
+    'check-learner-ui-literals.mjs',
+    'check-sidebar-markers.mjs'
   ];
   for (const t of tools) syntaxCheck(path.join(repoRoot, 'tools/exam-os', t));
 
@@ -137,6 +138,12 @@ async function main() {
     stdio: 'inherit'
   });
   if (learnerUiCheck.status !== 0) ok = false;
+
+  const sidebarCheck = spawnSync(process.execPath, [path.join(repoRoot, 'tools/exam-os/check-sidebar-markers.mjs')], {
+    encoding: 'utf8',
+    stdio: 'inherit'
+  });
+  if (sidebarCheck.status !== 0) ok = false;
 
   for (const slug of MODULES) {
     await validateModule(slug);

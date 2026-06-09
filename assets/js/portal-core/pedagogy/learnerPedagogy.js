@@ -33,7 +33,7 @@ ${collapseBtn(id, label)}
  * @param {object} entry
  * @param {string} chapterTitle
  */
-export function renderLessonOutcomes(entry, chapterTitle = "") {
+function buildLessonOutcomeItems(entry, chapterTitle = "") {
   const raw = Array.isArray(entry?.objectives) ? entry.objectives : [];
   const verbs = /^(erkennen|erklären|unterscheiden|berechnen|anwenden|prüfen|ableiten|interpretieren|formulieren|zuordnen)/i;
   let items = raw
@@ -62,12 +62,106 @@ export function renderLessonOutcomes(entry, chapterTitle = "") {
       }
     }
   }
+  return items;
+}
+
+export function renderLessonOutcomes(entry, chapterTitle = "") {
+  const items = buildLessonOutcomeItems(entry, chapterTitle);
   if (!items.length) return "";
 
   const lis = items.map((t) => `<li>${escapeHtml(t)}</li>`).join("");
   return `<aside class="lesson-outcomes" role="region" aria-labelledby="lesson-outcomes-h">
 <h2 class="lesson-outcomes__title" id="lesson-outcomes-h">Nach dieser Lektion kannst du …</h2>
 <ul class="lesson-outcomes__list">${lis}</ul>
+</aside>`;
+}
+
+/**
+ * Integrated theory opening card (Pass 4): Kurz erklärt, Warum wichtig?, outcomes, optional Mini-Check.
+ * @param {object} entry
+ * @param {string} chapterTitle
+ * @param {object|null} [intuition]
+ */
+export function renderLessonIntroCard(entry, chapterTitle = "", intuition = null) {
+  const title = String(chapterTitle || "").trim();
+  const kurz =
+    (entry?.motivation ? String(entry.motivation).trim() : "") ||
+    (intuition?.core ? String(intuition.core).trim() : "") ||
+    (title ? `${title} — Kernbaustein für Klausurtransfer in diesem Modulblock.` : "");
+  const warum =
+    (intuition?.bridge ? String(intuition.bridge).trim() : "") ||
+    (title
+      ? `In Klausuren zählt der sichere Zugriff auf Notation, Formelwahl und typische Fallen zu „${title}".`
+      : "");
+  const outcomes = buildLessonOutcomeItems(entry, chapterTitle);
+  const microCheck = buildTheoryMicroCheck(entry, chapterTitle);
+
+  const outcomesHtml = outcomes.length
+    ? `<div class="lesson-intro-card__block lesson-intro-card__block--outcomes">
+<h3 class="lesson-intro-card__label">Nach dieser Lektion kannst du …</h3>
+<ul class="lesson-intro-card__list">${outcomes.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
+</div>`
+    : "";
+
+  return `<section class="lesson-intro-card" role="region" aria-labelledby="lesson-intro-h">
+<h2 class="lesson-intro-card__title" id="lesson-intro-h">Lektionseinstieg</h2>
+<div class="lesson-intro-card__grid">
+<div class="lesson-intro-card__block">
+<h3 class="lesson-intro-card__label">Kurz erklärt</h3>
+<p class="lesson-intro-card__copy">${escapeHtml(kurz)}</p>
+</div>
+<div class="lesson-intro-card__block">
+<h3 class="lesson-intro-card__label">Warum wichtig?</h3>
+<p class="lesson-intro-card__copy">${escapeHtml(warum)}</p>
+</div>
+${outcomesHtml}
+</div>
+${microCheck ? `<div class="lesson-intro-card__micro">${microCheck}</div>` : ""}
+</section>`;
+}
+
+/**
+ * Kernidee ConceptAnchor: Kernsatz, Denkbild, Beispiel, Brücke zur Formel.
+ * @param {object|null} intuition
+ * @param {object} entry
+ * @param {string} [formalAnchorHtml]
+ */
+export function renderConceptAnchor(intuition, entry, formalAnchorHtml = "") {
+  const core = intuition?.core
+    ? String(intuition.core).trim()
+    : entry?.motivation
+      ? String(entry.motivation).trim()
+      : "";
+  const analogy = intuition?.analogy ? String(intuition.analogy).trim() : "";
+  const example =
+    Array.isArray(intuition?.exam) && intuition.exam[0]?.if
+      ? `${String(intuition.exam[0].if).trim()} → ${String(intuition.exam[0].then || "").trim()}`
+      : Array.isArray(entry?.cards) && entry.cards[0]?.note
+        ? String(entry.cards[0].note).trim()
+        : "";
+  const bridge = intuition?.bridge ? String(intuition.bridge).trim() : "";
+  if (!core && !analogy && !example && !formalAnchorHtml && !bridge) return "";
+
+  const rows = [
+    core
+      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Kernsatz</span><p class="concept-anchor__value">${escapeHtml(core)}</p></div>`
+      : "",
+    analogy
+      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Denkbild</span><p class="concept-anchor__value">${escapeHtml(analogy)}</p></div>`
+      : "",
+    example
+      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Beispiel</span><p class="concept-anchor__value">${escapeHtml(example)}</p></div>`
+      : "",
+    bridge || formalAnchorHtml
+      ? `<div class="concept-anchor__row concept-anchor__row--formula"><span class="concept-anchor__label">Brücke zur Formel</span><div class="concept-anchor__value">${bridge ? `<p>${escapeHtml(bridge)}</p>` : ""}${formalAnchorHtml || ""}</div></div>`
+      : ""
+  ]
+    .filter(Boolean)
+    .join("");
+
+  return `<aside class="concept-anchor" role="region" aria-labelledby="concept-anchor-h">
+<h3 class="concept-anchor__title" id="concept-anchor-h">Kernidee</h3>
+<div class="concept-anchor__rows">${rows}</div>
 </aside>`;
 }
 
@@ -168,19 +262,29 @@ export function renderExamRecognitionBlock(chapter, entry, intuition = null) {
     : entry?.motivation
       ? escapeHtml(String(entry.motivation).slice(0, 200))
       : "";
+  const signalWords =
+    Array.isArray(intuition?.exam) && intuition.exam.length
+      ? escapeHtml(
+          intuition.exam
+            .slice(0, 2)
+            .map((p) => String(p.if || "").trim())
+            .filter(Boolean)
+            .join(" · ")
+        )
+      : `Stichworte zu „${title}" in Aufgabenstellung, Datenlayout oder gesuchter Größe.`;
   return `<section class="exam-recognition" role="region" aria-labelledby="exam-rec-h">
 <h3 class="exam-recognition__title" id="exam-rec-h">${LEARNER_LABELS.pruefungsvorbereitung}</h3>
 <dl class="exam-recognition__dl">
 <div class="exam-recognition__row">
-<dt class="exam-recognition__label">Erkennen</dt>
-<dd class="exam-recognition__value">Stichworte zu „${title}" in Aufgabenstellung oder Datenlayout.</dd>
+<dt class="exam-recognition__label">Signalwörter</dt>
+<dd class="exam-recognition__value">${signalWords}</dd>
 </div>
 <div class="exam-recognition__row">
-<dt class="exam-recognition__label">Erste Entscheidung</dt>
+<dt class="exam-recognition__label">Erster Gedanke</dt>
 <dd class="exam-recognition__value">Modell/Annahme benennen, dann ${method} zuordnen.</dd>
 </div>
 <div class="exam-recognition__row">
-<dt class="exam-recognition__label">Erster Rechenschritt</dt>
+<dt class="exam-recognition__label">Erster Schritt</dt>
 <dd class="exam-recognition__value">Größen und Einheiten notieren; $H_0$ / Notation aus der VL fixieren.</dd>
 </div>
 <div class="exam-recognition__row">

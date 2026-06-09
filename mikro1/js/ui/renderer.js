@@ -367,30 +367,6 @@ ${drill.answer}`
 </div>`;
 }
 
-function buildMicroPracticePanel(conceptId) {
-  const entry = CONTENT[conceptId];
-  const tasks = Array.isArray(entry?.aufgaben) ? entry.aufgaben : [];
-
-  return `<div class="panel active mikro1-practice">
-<div class="practice-panel-header">
-<span class="practice-platform-badge practice-platform-badge--panel" title="Plattform-Übung — kein offizielles Übungsblatt">Plattform-Übung</span>
-</div>
-<div class="section-block">
-<div class="exam-drill-line">
-<span class="exam-drill-key">Geführte Aufgaben</span>
-<div class="exam-drill-copy">Hier trainierst du den vollständigen Lösungsweg Schritt für Schritt. Ziel ist nicht nur das Ergebnis, sondern die saubere Reihenfolge der Argumentation.</div>
-</div>
-<div class="exam-drill-line">
-<span class="exam-drill-key">Prüfungstransfer</span>
-<div class="exam-drill-copy">Hier musst du zeigen, dass du Formel, Intuition und Fehlerkontrolle auch in komprimierter Klausurform sicher abrufen kannst.</div>
-</div>
-</div>
-<div class="practice-section-header">Geführte Aufgaben</div>
-${renderGuidedTasks(tasks)}
-${renderExamDrillDeck(conceptId)}
-</div>`;
-}
-
 function renderExamPatterns(intuition) {
   const patterns = Array.isArray(intuition?.exam) ? intuition.exam : [];
   if (!patterns.length) return '';
@@ -565,13 +541,6 @@ function enhanceRenderedSurface(conceptId) {
   decorateConceptLinks();
   stripExamTransferIntro();
   if (conceptId) {
-    if (activeTab === 'aufgaben' && CONTENT[conceptId]) {
-      const panel = content.querySelector('.panel.active');
-      if (panel) {
-        panel.outerHTML = buildMicroPracticePanel(conceptId);
-      }
-    }
-
     if (activeTab === 'intuition' && CONTENT[conceptId]) {
       const panel = content.querySelector('.panel.active');
       const intuitionMarkup = buildMicroIntuitionPanel(conceptId);

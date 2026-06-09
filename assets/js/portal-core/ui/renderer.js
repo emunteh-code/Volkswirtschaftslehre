@@ -34,6 +34,8 @@ import {
 } from "../utils/learningHighlights.js";
 import {
   LEARNER_LABELS,
+  FORMULA_RULE_LABELS,
+  KLAUSUR_METHOD_LABELS,
   renderLessonIntroCard,
   renderMasteryCheckpoint,
   renderConfidenceCheckpoint,
@@ -289,14 +291,14 @@ ${subtitle}
       : [];
 
     const core = hasMeaningfulText(data.core)
-      ? data.core
-      : mentalModel[0]?.body || "";
+      ? stripHtml(String(data.core))
+      : stripHtml(String(mentalModel[0]?.body || ""));
 
     const analogy = hasMeaningfulText(data.analogy)
-      ? data.analogy
-      : mentalModel[1]?.body || "";
+      ? stripHtml(String(data.analogy))
+      : stripHtml(String(mentalModel[1]?.body || ""));
 
-    const bridge = hasMeaningfulText(data.bridge) ? data.bridge : "";
+    const bridge = hasMeaningfulText(data.bridge) ? stripHtml(String(data.bridge)) : "";
     const exam = Array.isArray(data.exam)
       ? data.exam.filter((entry) => hasMeaningfulText(entry?.if) && hasMeaningfulText(entry?.then))
       : [];
@@ -1099,8 +1101,41 @@ ${transferTrack}
       ? "schwer"
       : normalized.includes("mittel")
         ? "mittel"
-        : "neutral";
+        : normalized.includes("leicht")
+          ? "leicht"
+          : "neutral";
     return `<span class="klausurmethodik-difficulty klausurmethodik-difficulty--${tone}">${renderSemanticPlainText(difficulty)}</span>`;
+  }
+
+  function renderKlausurmethodikDurationChip(minutes) {
+    if (!Number.isFinite(minutes)) return "";
+    return `<span class="klausurmethodik-duration">${minutes} Min.</span>`;
+  }
+
+  function renderKlausurPlaybookRow(label, contentHtml) {
+    if (!contentHtml) return "";
+    return `<div class="klausur-playbook-row">
+<span class="klausur-playbook-row__label">${label}</span>
+<div class="klausur-playbook-row__body">${contentHtml}</div>
+</div>`;
+  }
+
+  function renderRuleZone(modifier, label, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    const visible = items.slice(0, modifier === "mistakes" ? 3 : items.length);
+    const overflow = modifier === "mistakes" ? items.slice(3) : [];
+    const listHtml = `<ul class="rule-zone__list">${visible.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul>`;
+    const overflowHtml = overflow.length
+      ? `<details class="rule-zone__overflow">
+<summary class="rule-zone__overflow-summary">Weitere Hinweise anzeigen (${overflow.length})</summary>
+<ul class="rule-zone__list">${overflow.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul>
+</details>`
+      : "";
+    return `<section class="rule-zone rule-zone--${modifier}">
+<h5 class="rule-zone__label">${label}</h5>
+${listHtml}
+${overflowHtml}
+</section>`;
   }
 
   function renderFormulaTabSectionHead(sectionNum, title, lead, headingId = "") {
@@ -1165,9 +1200,6 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
         (trap) => !/Anker|Übungsblatt-Muster/i.test(String(trap))
       );
     const displayTitle = enriched.displayTitle || family.title || family.id;
-    const timeMeta = Number.isFinite(family.expectedTimeMinutes)
-      ? `${family.expectedTimeMinutes} Min.`
-      : "";
     const hasAnchors = Array.isArray(family.sourceAnchorIds) && family.sourceAnchorIds.length > 0;
     const vorgehenHtml = vorgehen.length
       ? `<ol class="klausurmethodik-steps">${vorgehen.map((step) => `<li>${renderSemanticPlainText(step)}</li>`).join("")}</ol>`
@@ -1175,35 +1207,49 @@ ${families.map((family, index) => renderTaskFamilyCard(family, index)).join("")}
     const trapHtml = traps.length
       ? `<ul class="klausurmethodik-list klausurmethodik-list--traps">${traps.map((trap) => `<li>${renderSemanticPlainText(trap)}</li>`).join("")}</ul>`
       : "";
-    const sourceFootnote = hasAnchors
-      ? `<span class="klausur-action-card__source"><button type="button" class="klausur-action-source-link" onclick="window.__openQuellen?.()">Quellen anzeigen →</button></span>`
+    const pruefungslogikHtml = enriched.pruefungslogik
+      ? `<p class="klausurmethodik-text">${renderSemanticPlainText(enriched.pruefungslogik)}</p>`
       : "";
-    const prueftText = ziel ? renderSemanticPlainText(ziel) : "";
     const erkennenText = typicalQuestion ? renderSemanticPlainText(typicalQuestion) : "";
-    const metaParts = [timeMeta, family.difficulty && String(family.difficulty).toLowerCase() !== "offen" ? String(family.difficulty) : ""].filter(Boolean);
-    const metaHtml = metaParts.length
-      ? `<div class="klausur-action-card__meta">${metaParts.map((part) => `<span>${renderSemanticPlainText(part)}</span>`).join("")}</div>`
+    const firstThoughtText = enriched.firstThought ? renderSemanticPlainText(enriched.firstThought) : "";
+    const firstStepText = enriched.firstStep ? renderSemanticPlainText(enriched.firstStep) : "";
+    const durationChip = renderKlausurmethodikDurationChip(family.expectedTimeMinutes);
+    const difficultyChip = renderKlausurmethodikDifficultyChip(family.difficulty);
+    const metaChips = [durationChip, difficultyChip].filter(Boolean).join("");
+    const metaHtml = metaChips
+      ? `<div class="klausur-playbook-card__meta">${metaChips}</div>`
       : "";
+    const playbookRows = [
+      renderKlausurPlaybookRow(KLAUSUR_METHOD_LABELS.recognize, erkennenText),
+      renderKlausurPlaybookRow(KLAUSUR_METHOD_LABELS.firstThought, firstThoughtText),
+      renderKlausurPlaybookRow(KLAUSUR_METHOD_LABELS.firstStep, firstStepText)
+    ].filter(Boolean).join("");
     const detailBody = [
-      renderKlausurmethodikField("Vorgehen", vorgehenHtml, "vorgehen"),
-      renderKlausurmethodikField("Häufige Falle", trapHtml, "fehler"),
+      renderKlausurmethodikField(KLAUSUR_METHOD_LABELS.vorgehen, vorgehenHtml, "vorgehen"),
+      renderKlausurmethodikField(KLAUSUR_METHOD_LABELS.trap, trapHtml, "fehler"),
+      pruefungslogikHtml ? renderKlausurmethodikField(KLAUSUR_METHOD_LABELS.grading, pruefungslogikHtml, "grading") : "",
       family.officialTaskGap ? renderStudentTaskGapNote(family.officialTaskGap) : ""
     ].filter(Boolean).join("");
-    return `<article class="klausur-action-card task-family-card" data-family-id="${familyKey}">
-<header class="klausur-action-card__head">
-<span class="klausur-action-card__num" aria-hidden="true">${stepNum}</span>
-<div class="klausur-action-card__main">
-<h4 class="klausur-action-card__title">${renderMathTitle(displayTitle)}</h4>
-${prueftText ? `<p class="klausur-action-card__prueft"><span class="klausur-action-card__field-label">Prüft:</span> ${prueftText}</p>` : ""}
+    const footerActions = [
+      hasAnchors
+        ? `<button type="button" class="klausur-playbook-card__action" onclick="window.__openQuellen?.()">${KLAUSUR_METHOD_LABELS.sources}</button>`
+        : "",
+      `<button type="button" class="klausur-playbook-card__action" onclick="window.__switchTab?.('aufgaben')">${KLAUSUR_METHOD_LABELS.toTask}</button>`
+    ].filter(Boolean).join("");
+    return `<article class="klausur-playbook-card klausur-action-card task-family-card" data-family-id="${familyKey}">
+<header class="klausur-playbook-card__head">
+<span class="klausur-playbook-card__num" aria-hidden="true">${stepNum}</span>
+<div class="klausur-playbook-card__title-wrap">
+<h4 class="klausur-playbook-card__title">${renderMathTitle(displayTitle)}</h4>
 </div>
 ${metaHtml}
 </header>
-${erkennenText ? `<p class="klausur-action-card__erkennen"><span class="klausur-action-card__field-label">Erkennen:</span> ${erkennenText}</p>` : ""}
-${detailBody ? `<details class="klausur-action-card__detail"${index === 0 ? " open" : ""}>
-<summary class="klausur-action-card__detail-summary">Methode &amp; Fallen</summary>
-<div class="klausur-action-card__detail-body">${detailBody}</div>
+${playbookRows ? `<div class="klausur-playbook-card__rows">${playbookRows}</div>` : ""}
+${detailBody ? `<details class="klausur-playbook-card__disclosure"${index === 0 ? " open" : ""}>
+<summary class="klausur-playbook-card__disclosure-summary">${KLAUSUR_METHOD_LABELS.disclose}</summary>
+<div class="klausur-playbook-card__disclosure-body">${detailBody}</div>
 </details>` : ""}
-<footer class="klausur-action-card__footer">${sourceFootnote}</footer>
+<footer class="klausur-playbook-card__footer">${footerActions}</footer>
 </article>`;
   }
 
@@ -1419,41 +1465,47 @@ ${stepsInner ? `<ol class="formula-derivation-timeline">${stepsInner}</ol>` : ""
   }
 
   function renderFormulaEinsatzgrenzenBlock(card) {
-    const rows = [];
-    const pushRow = (modifier, title, items) => {
-      if (!Array.isArray(items) || !items.length) return;
-      rows.push(`<div class="formula-limits-row formula-limits-row--${modifier}">
-<span class="formula-limits-row__label">${title}</span>
-<ul class="formula-limits-row__list">${items.map((item) => `<li>${renderSemanticPlainText(item)}</li>`).join("")}</ul>
-</div>`);
-    };
-    pushRow("assumptions", "Annahmen", card.assumptions);
-    pushRow("applies", "Gilt, wenn", card.appliesWhen);
-    pushRow("fails", "Scheitert, wenn", card.failsWhen);
-    pushRow("mistakes", "Typische Fehler", card.commonMistakes);
-
-    const anchorBadge = Array.isArray(card.anchorIds) && card.anchorIds.length
-      ? `<span class="formula-limits-footer__meta">Quellen geprüft · ${card.anchorIds.length} Stelle${card.anchorIds.length === 1 ? "" : "n"}</span>`
-      : "";
-    const shortcut = hasMeaningfulText(card.examShortcut)
-      ? `<span class="formula-limits-footer__shortcut"><strong>Merke:</strong> ${renderSemanticPlainText(card.examShortcut)}</span>`
-      : "";
-    const footer = [shortcut, anchorBadge].filter(Boolean).join("");
-
-    if (!rows.length && !footer) return "";
-
     const { titleHtml, subtitleHtml } = renderFormulaSupportBlockHead(card, {
       includeSubtitle: true,
-      subtitleClass: "formula-limits-card__subtitle"
+      subtitleClass: "rule-card__function"
     });
 
-    return `<article class="formula-limits-card formula-einsatzgrenzen-block">
-<header class="formula-limits-card__head">
-<h4 class="formula-limits-card__title">${titleHtml}</h4>
+    const formulaChip = hasMeaningfulDisplayContent(card.displayFormula)
+      ? `<div class="rule-card__formula-chip">${renderSemanticBlock(card.displayFormula, { variant: "formula-card" })}</div>`
+      : "";
+
+    const zones = [
+      renderRuleZone("use", FORMULA_RULE_LABELS.useWhen, (card.appliesWhen || []).slice(0, 2)),
+      renderRuleZone("assumptions", FORMULA_RULE_LABELS.mustHold, card.assumptions),
+      renderRuleZone("invalid", FORMULA_RULE_LABELS.doNotUse, card.failsWhen),
+      renderRuleZone("mistakes", FORMULA_RULE_LABELS.mistakes, card.commonMistakes)
+    ].filter(Boolean).join("");
+
+    const shortcut = hasMeaningfulText(card.examShortcut)
+      ? `<footer class="rule-card__shortcut">
+<span class="rule-card__shortcut-label">${FORMULA_RULE_LABELS.shortcut}</span>
+<p class="rule-card__shortcut-text">${renderSemanticPlainText(card.examShortcut)}</p>
+</footer>`
+      : "";
+
+    const sourceMeta = Array.isArray(card.anchorIds) && card.anchorIds.length
+      ? `<details class="rule-card__source-meta">
+<summary class="rule-card__source-summary">Quellenbezug (${card.anchorIds.length})</summary>
+<p class="rule-card__source-copy">Mit Vorlesungs-PDFs abgeglichen — Details im Quellen-Tab.</p>
+</details>`
+      : "";
+
+    if (!zones && !shortcut && !sourceMeta) return "";
+
+    return `<article class="rule-card formula-einsatzgrenzen-block formula-limits-card">
+<header class="rule-card__head">
+<h4 class="rule-card__title">${titleHtml}</h4>
 ${subtitleHtml}
+${formulaChip}
 </header>
-<div class="formula-limits-rows">${rows.join("")}</div>
-${footer ? `<footer class="formula-limits-footer">${footer}</footer>` : ""}
+${zones ? `<div class="rule-card__zones">${zones}</div>` : ""}
+${shortcut}
+${sourceMeta}
 </article>`;
   }
 
@@ -1544,7 +1596,7 @@ ${footer ? `<footer class="formula-limits-footer">${footer}</footer>` : ""}
         );
         const mistakesMirror = renderMainFlowMistakesSection(warningData.railWarnings);
         const fehlerChecklist = renderFehlerChecklist(
-          warningData.railWarnings.map((w) => ({ title: w.title, body: w.bodyHtml }))
+          warningData.railWarnings.map((w) => ({ title: w.title, body: w.bodyText || w.bodyHtml }))
         );
         const pedagogyTail = [
           renderExamRecognitionBlock(chapter, entry, intuitionById[conceptId]),

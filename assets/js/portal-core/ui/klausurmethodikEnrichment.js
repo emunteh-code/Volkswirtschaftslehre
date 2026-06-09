@@ -161,8 +161,27 @@ export function enrichTaskFamilyForDisplay(
     ziel,
     vorgehenSteps: vorgehenSteps.slice(0, 5),
     typicalQuestion,
-    traps: traps.slice(0, 3)
+    traps: traps.slice(0, 3),
+    firstThought: buildFirstThought({ ziel, intuitionEntry, displayTitle }),
+    firstStep: vorgehenSteps[0] || "",
+    pruefungslogik: buildPruefungslogik({ ziel, family, displayTitle })
   };
+}
+
+function buildFirstThought({ ziel, intuitionEntry, displayTitle }) {
+  const bridge = stripHtml(intuitionEntry?.bridge ?? "").trim();
+  if (bridge) return bridge.length > 180 ? `${bridge.slice(0, 177)}…` : bridge;
+  const z = stripHtml(String(ziel ?? "")).trim();
+  if (z && z.length > 24) return z.length > 180 ? `${z.slice(0, 177)}…` : z;
+  return `Aufgabentyp „${displayTitle}" zuordnen — welche Annahme und welche Größe ist gesucht?`;
+}
+
+function buildPruefungslogik({ ziel, family, displayTitle }) {
+  const rubric = stripHtml(String(family?.gradingRubric ?? "")).trim();
+  if (rubric) return rubric.length > 220 ? `${rubric.slice(0, 217)}…` : rubric;
+  const z = stripHtml(String(ziel ?? "")).trim();
+  if (z) return z.length > 220 ? `${z.slice(0, 217)}…` : z;
+  return `In der Klausur zählen saubere Zwischenschritte, korrekte Notation und eine kurze Deutung zu „${displayTitle}".`;
 }
 
 function buildZiel({ apply, intuitionEntry, displayTitle, conceptId }) {

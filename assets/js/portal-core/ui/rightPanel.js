@@ -96,17 +96,24 @@ export function createRightPanelRenderer({
 
     if (formulasNode) {
       const formulas = Array.isArray(entry?.formeln) ? entry.formeln.filter((f) => f?.label) : [];
+      const onFormelnTab = isFormulaTab;
       if (formulas.length) {
         const rows = formulas.slice(0, 5).map((formula, index) => {
           const label = String(formula.label || "").trim();
           const safeLabel = label.replace(/"/g, "&quot;");
-          return `<button type="button" class="rp-formula-chip" data-formula-index="${index}" onclick="window.__scrollToFormulaCard?.(${index})" aria-label="Springe zur Formel ${safeLabel}"><span class="rp-formula-chip-arrow" aria-hidden="true">→</span> ${label}</button>`;
+          const handler = onFormelnTab
+            ? `window.__scrollToFormulaCard?.(${index})`
+            : `window.__switchTab?.('formeln');window.__scrollToFormulaCard?.(${index})`;
+          const hint = onFormelnTab
+            ? ""
+            : `<span class="rp-formula-chip-hint">Im Formeln-Tab anzeigen</span>`;
+          return `<button type="button" class="rp-formula-chip" data-formula-index="${index}" onclick="${handler}" aria-label="${onFormelnTab ? `Springe zur Formel ${safeLabel}` : `${safeLabel} — Im Formeln-Tab anzeigen`}"><span class="rp-formula-chip-arrow" aria-hidden="true">→</span> <span class="rp-formula-chip-label">${label}</span>${hint}</button>`;
         });
         formulasNode.innerHTML = `<div class="rp-formula-index">${rows.join("")}</div>`;
         if (formulasSection) formulasSection.hidden = false;
       } else {
-        formulasNode.innerHTML = `<div class="rp-formula-fallback"><button type="button" class="rp-formula-chip rp-formula-chip--fallback" onclick="window.__switchTab?.('formeln')" aria-label="Zum Formeln-Tab wechseln"><span class="rp-formula-chip-arrow" aria-hidden="true">→</span> Formeln-Tab</button><p class="rp-formula-fallback__hint">Notation und Herleitung findest du im Formeln-Tab.</p></div>`;
-        if (formulasSection) formulasSection.hidden = false;
+        formulasNode.innerHTML = "";
+        if (formulasSection) formulasSection.hidden = true;
       }
     }
 

@@ -1,0 +1,59 @@
+/**
+ * Visual layer: responsive
+ * Clean rebuild — no premium-refinement dependency.
+ */
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  #rightPanel { display: none; }
+  #shortcutHint { right: 0; }
+}
+
+@media (max-width: 900px) {
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.open { transform: none; }
+  #main { margin-left: 0; margin-right: 0; }
+  #content {
+    max-width: 100%;
+    padding: 24px clamp(18px, 4vw, 30px) 70px;
+  }
+  .info-grid { grid-template-columns: 1fr; }
+  .concept-title { font-size: 28px; }
+  .hero h1 { font-size: 26px; }
+  .dash-stats { grid-template-columns: repeat(2, 1fr); }
+  #mobileMenuBtn { display: block; }
+  #shortcutHint { left: 0; right: 0; }
+  body.focus-mode #sidebar { transform: translateX(-100%); }
+  body.focus-mode #main { margin-left: 0; }
+  .focus-btn { display: none; }
+  #topbar-main { padding: 10px 14px; }
+  .breadcrumb { font-size: 11.5px; }
+}
+
+@media (max-width: 600px) {
+  .formula-grid { grid-template-columns: 1fr; }
+  .home-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
+  .home-action-row { flex-direction: column; }
+  .home-action-card { min-width: unset; }
+  .section-block { padding: 16px 16px; }
+  .problem-card { padding: 16px 18px; }
+  .dash-stats { grid-template-columns: repeat(2, 1fr); }
+  .exam-q-card { padding: 18px; }
+  #content { padding: 18px 14px 60px; }
+  .tab-btn { padding: 6px 12px; font-size: 12px; }
+  .theme-btn span { display: none; }
+  .graph-container { padding: 18px 16px; }
+  .intuition-grid { grid-template-columns: 1fr; }
+  .concept-motivation {
+    padding: 12px 14px 14px;
+    font-size: 15px;
+  }
+  .concept-motivation::before {
+    font-size: 9px;
+    padding: 4px 9px;
+  }
+}
+
+/* ============================================================

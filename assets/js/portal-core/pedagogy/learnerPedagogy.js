@@ -41,6 +41,33 @@ function collapseBtn(panelId, label) {
   return `<button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__closeReveal('${panelId}')" aria-label="${escapeHtml(label)} schließen">Schließen</button>`;
 }
 
+export const MAX_VISIBLE_ACTION_BUTTONS = 3;
+
+/**
+ * Cap visible action buttons on Aufgaben cards; overflow behind a quiet disclosure.
+ * @param {string[]} buttonFragments
+ * @param {number} [maxVisible]
+ * @returns {string}
+ */
+export function wrapCappedActionButtons(buttonFragments, maxVisible = MAX_VISIBLE_ACTION_BUTTONS) {
+  const buttons = buttonFragments.filter(Boolean);
+  if (!buttons.length) return "";
+  if (buttons.length <= maxVisible) {
+    return `<div class="prob-actions prob-actions--staged">\n${buttons.join("\n")}\n</div>`;
+  }
+  const primary = buttons.slice(0, maxVisible);
+  const overflow = buttons.slice(maxVisible);
+  return `<div class="prob-actions prob-actions--staged prob-actions--capped">
+${primary.join("\n")}
+<details class="prob-actions__overflow">
+<summary class="btn btn--ghost prob-actions__overflow-toggle" aria-label="Weitere Aktionen">Mehr</summary>
+<div class="prob-actions__overflow-inner">
+${overflow.join("\n")}
+</div>
+</details>
+</div>`;
+}
+
 const CONCEPT_ANCHOR_PREVIEW_LEN = 200;
 
 /** @param {string} text @param {string} [modifier] */
@@ -589,17 +616,19 @@ export function renderStagedPracticeCard({
     ? `<button type="button" class="btn btn--ghost" onclick="window.__scrollToSimilarTask(${idx + 1})">Ähnliche Aufgabe</button>`
     : "";
 
+  const actionButtons = wrapCappedActionButtons([
+    hintBtn,
+    approachBtn,
+    stepBtn,
+    `<button type="button" class="btn btn--secondary" id="solBtn_${idx}" data-forward-only="1" onclick="window.__toggleSolution(${idx})">Lösung prüfen</button>`,
+    forwardBtn(errId, "Fehlercheck", "ghost"),
+    similarBtn
+  ]);
+
   return `<div class="problem-card problem-card--staged" id="prob_card_${idx}">
 <div class="prob-num">${escapeHtml(label)}</div>
 <div class="prob-text">${questionHtml}</div>
-<div class="prob-actions prob-actions--staged">
-${hintBtn}
-${approachBtn}
-${stepBtn}
-<button type="button" class="btn btn--secondary" id="solBtn_${idx}" data-forward-only="1" onclick="window.__toggleSolution(${idx})">Lösung prüfen</button>
-${forwardBtn(errId, "Fehlercheck", "ghost")}
-${similarBtn}
-</div>
+${actionButtons}
 ${hint ? stagedPanel(hintId, "hint", "Hinweis", `<p>${escapeHtml(hint)}</p>`) : ""}
 ${steps.length ? stagedPanel(approachId, "approach", "Ansatz", "<p>Zielgröße benennen, dann Formel aus dem Formeln-Tab zuordnen.</p>") : ""}
 ${steps.length ? stagedPanel(stepId, "step", "Schritt 1", `<p>${firstStep}</p>`) : ""}

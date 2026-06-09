@@ -490,7 +490,7 @@
 .r-lab-section {
   display: grid;
   gap: 14px;
-  max-width: min(100%, clamp(1100px, 94vw, 1380px));
+  max-width: min(100%, clamp(1180px, 84vw, 1280px));
   margin-inline: auto;
 }
 

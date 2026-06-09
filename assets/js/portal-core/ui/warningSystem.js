@@ -175,7 +175,7 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
 }
 
 /** Compact right-rail mistake note — cap visible rows; overflow behind disclosure. */
-const RAIL_BODY_PREVIEW_LEN = 280;
+const RAIL_BODY_PREVIEW_LEN = 220;
 
 function renderRailWarningBody(warning) {
   const plain = String(warning.bodyText || stripHtml(warning.bodyHtml || "")).replace(/\s+/g, " ").trim();

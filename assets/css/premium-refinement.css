@@ -10778,3 +10778,355 @@ body:not(.light-mode) .r-lab-shell {
     font-size: 9px;
   }
 }
+
+/* ============================================================
+   DESIGN CLOSURE PASS — restrained academic UI (subtraction-first)
+   Blue = interaction only; thin borders; quiet tabs; neutral math.
+   ============================================================ */
+
+:root {
+  --learning-highlight: color-mix(in srgb, var(--text) 88%, var(--muted) 12%);
+  --learning-data: color-mix(in srgb, var(--text) 92%, var(--muted) 8%);
+  --learning-compare-surface: var(--card);
+  --learning-trap-surface: color-mix(in srgb, var(--surface2) 40%, var(--card) 60%);
+}
+
+#content .learning-term,
+#content .learning-key,
+#content .theory-recipe-body p > strong,
+#content .theory-recipe-body li > strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#content .task-data {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#content .learning-definition,
+#content .theory-recipe-section--definitionen .theory-recipe-body > p {
+  border-left: 2px solid color-mix(in srgb, var(--border) 75%, var(--muted) 25%);
+  background: transparent;
+}
+
+/* Shell widths: sidebar 240–260 | main | rail 260–280 (flex shell unchanged) */
+#sidebar {
+  width: var(--chrome-sidebar-width, clamp(240px, 18vw, 260px));
+  min-width: 240px;
+  max-width: 260px;
+}
+
+#main {
+  margin-left: var(--chrome-sidebar-width, clamp(240px, 18vw, 260px));
+}
+
+#rightPanel {
+  width: var(--chrome-rail-width, var(--right-panel-width, clamp(260px, 19vw, 280px)));
+  min-width: 260px;
+  max-width: 280px;
+}
+
+/* Quieter tabs — underline, not pills */
+#tabRow.tab-row {
+  gap: 0;
+  padding-inline: 0;
+  background: transparent;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
+}
+
+#tabRow .tab-btn {
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  box-shadow: none;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+#tabRow .tab-btn:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface2) 55%, transparent);
+  border-color: transparent;
+}
+
+#tabRow .tab-btn.active {
+  color: var(--text);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent-soft) 65%, transparent);
+  border-bottom-color: var(--accent);
+  box-shadow: none;
+}
+
+#tabRow .tab-btn.active[data-tab="r"],
+#tabRow .tab-btn.active[data-tab="r-practice"],
+#tabRow .tab-btn.active[data-tab="r-anwendung"] {
+  color: var(--accent-strong, var(--accent));
+  background: color-mix(in srgb, var(--accent-soft) 80%, transparent);
+  border-bottom-color: var(--accent);
+}
+
+/* Blue = interaction only */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content .theory-recipe-heading,
+#content .formula-tab-section-head h3,
+#content .formula-einsatzgrenzen-title,
+#content .formula-herleitung-title,
+#content .klausurmethodik-heading,
+#content .concept-title,
+#content .lesson-hero-card__title,
+#content .lesson-hero-card__label,
+#content .prob-num,
+#content .prob-eyebrow,
+#content .f-label,
+#content .theory-glossary-term:not(.theory-glossary-term--link) {
+  color: var(--text);
+}
+
+#content .concept-motivation,
+#content .theory-recipe-body,
+#content .section-block p,
+#content .intuition-text {
+  color: color-mix(in srgb, var(--text) 90%, var(--muted) 10%);
+}
+
+#content a:not(.btn):not(.nav-item):not(.tab-btn):not(.rp-formula-chip):not(.cf-conn):not(.rp-conn),
+#content button.concept-source-link,
+#content .breadcrumb-link,
+#content .link-btn {
+  color: var(--accent-strong, var(--accent));
+}
+
+#content .theory-glossary-term.theory-glossary-term--link,
+#content button.theory-glossary-term {
+  color: var(--accent-strong, var(--accent));
+}
+
+/* Calm lesson header + Lektionseinstieg */
+.lesson-hero-card {
+  border: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-radius: var(--r-lg, 18px);
+  background: var(--card);
+  box-shadow: none;
+}
+
+.lesson-hero-chip {
+  color: var(--text);
+  background: var(--surface2);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.lesson-next-step-footer {
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.lesson-next-step-footer__eyebrow {
+  color: var(--muted);
+}
+
+/* Formeln — reference sheet; thin borders, no colored bands */
+#content .formula-einsatzgrenzen-block {
+  border-left: 1px solid var(--border);
+}
+
+#content .formula-einsatzgrenzen-group--fails,
+#content .formula-einsatzgrenzen-group--mistakes,
+#content .klausurmethodik-field--fehler {
+  padding: 10px 12px;
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--border) 70%, var(--muted) 30%);
+  background: transparent;
+}
+
+#content .formula-einsatzgrenzen-group--fails .formula-einsatzgrenzen-group-title,
+#content .formula-einsatzgrenzen-group--mistakes .formula-einsatzgrenzen-group-title {
+  color: var(--muted);
+}
+
+#content .formula-einsatzgrenzen-group--fails .formula-einsatzgrenzen-group-title::before,
+#content .formula-einsatzgrenzen-group--mistakes .formula-einsatzgrenzen-group-title::before {
+  display: none;
+}
+
+#content .formula-support-card,
+#content .formula-card {
+  box-shadow: none;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  background: var(--card);
+}
+
+#content .formula-herleitung-block {
+  border-left: 2px solid color-mix(in srgb, var(--border) 75%, var(--muted) 25%);
+}
+
+#content .rule-zone,
+#content .rule-zone--use,
+#content .rule-zone--assumptions,
+#content .rule-zone--invalid,
+#content .rule-zone--mistakes {
+  padding: 10px 12px;
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--border) 70%, var(--muted) 30%);
+  background: transparent;
+}
+
+#content .rule-zone__label {
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--type-micro, 0.6875rem);
+}
+
+#rightPanel .rp-conn,
+#content .cf-conn {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+#content .theory-recipe-section--mechanismus .theory-klausur-highlight {
+  border-left: 2px solid color-mix(in srgb, var(--border) 70%, var(--muted) 30%);
+  background: color-mix(in srgb, var(--surface2) 35%, var(--card) 65%);
+}
+
+#content .theory-recipe-section--mechanismus .theory-klausur-highlight strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Definition rows — neutral */
+#content .theory-glossary-row {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+#content .theory-glossary-term {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Aufgaben button cap */
+.prob-actions--capped .prob-actions__overflow {
+  display: inline-flex;
+}
+
+.prob-actions__overflow-toggle {
+  list-style: none;
+  cursor: pointer;
+}
+
+.prob-actions__overflow-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.prob-actions__overflow-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+#content .exam-task-block {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+}
+
+#content .exam-drill-card .prob-eyebrow,
+#content .problem-card--staged .prob-eyebrow {
+  color: var(--muted);
+}
+
+/* Sidebar — calmer curriculum map */
+#sidebar .nav-item.active {
+  background: color-mix(in srgb, var(--surface2) 70%, transparent);
+  border-left-color: color-mix(in srgb, var(--text) 35%, var(--border) 65%);
+}
+
+#sidebar .nav-item.active .num {
+  color: var(--muted);
+}
+
+#sidebar .nav-item__srs.badge--meta {
+  color: var(--muted);
+  background: var(--surface2);
+  border-color: color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+#sidebar .nav-item__done {
+  color: color-mix(in srgb, var(--muted) 70%, var(--text) 30%);
+}
+
+/* Right rail */
+#rightPanel .rp-formula-chip-hint {
+  color: var(--muted);
+}
+
+#rightPanel .rp-mistake-body-more__summary {
+  color: var(--accent-strong, var(--accent));
+}
+
+/* Landing — calm hero */
+body[data-page="landing"] .lp-hero {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+body[data-page="landing"] .lp-hero-title {
+  color: var(--text);
+  letter-spacing: -0.03em;
+}
+
+body[data-page="landing"] .lp-hero-desc,
+body[data-page="landing"] .lp-hero-trust {
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+}
+
+body[data-page="landing"] .lp-hero-btn {
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+body[data-page="landing"] .lp-hero-featured {
+  border: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  background: var(--card);
+}
+
+body[data-page="landing"] .lp-tile {
+  box-shadow: none;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+body.light-mode[data-page="landing"] .lp-hero-btn {
+  background: var(--text);
+  color: #f6f6f4;
+}
+
+/* Dark mode closure */
+body:not(.light-mode):not([data-page="landing"]) .lesson-hero-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+body:not(.light-mode) #rightPanel {
+  background: var(--surface);
+  border-left-color: var(--border);
+}
+
+body:not(.light-mode) #rightPanel #rpMistakes .rp-mistake--rail {
+  background: color-mix(in srgb, var(--surface2) 50%, var(--card) 50%);
+  border-color: color-mix(in srgb, var(--border) 88%, transparent);
+}

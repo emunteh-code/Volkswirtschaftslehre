@@ -50,7 +50,10 @@ const FORBIDDEN_IN_PEDAGOGY_HTML = [
   { re: /&amp;#36;/g, label: "double-encoded dollar entity in pedagogy HTML" },
   { re: /Antwort prüfen/g, label: "legacy mini-check button label" },
   { re: /Hinweis anzeigen/g, label: "legacy staged hint button label" },
-  { re: /Ansatz anzeigen/g, label: "legacy staged approach button label" }
+  { re: /Ansatz anzeigen/g, label: "legacy staged approach button label" },
+  { re: /prob-actions--staged[^"]*"[^>]*>[\s\S]{0,400}<button[^>]*>[\s\S]{0,400}<button[^>]*>[\s\S]{0,400}<button[^>]*>[\s\S]{0,400}<button/g, label: "uncapped fourth action button in staged prob-actions" },
+  { re: /color:\s*#(?:2563eb|3b82f6)/gi, label: "hardcoded blue hex in pedagogy HTML" },
+  { re: /formula-einsatzgrenzen-group--(?:fails|mistakes)[^>]*style="/gi, label: "inline style on einsatzgrenzen band" }
 ];
 
 /** Whole-repo learner chrome — plain text grep (not only template literals). */

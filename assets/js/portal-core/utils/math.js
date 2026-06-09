@@ -136,10 +136,43 @@ export function ensureMathJax() {
   document.head.appendChild(script);
 }
 
+const RAW_TAG_ENTITY_RE = /&lt;\/?(?:strong|em|br)\s*\/?&gt;/gi;
+const DOLLAR_ENTITY_RE = /&amp;#36;|&#36;/g;
+
+/** Decode stray entities / escaped tags in text nodes before MathJax typesets. */
+function prepareMathDom(root) {
+  if (!root || typeof document === "undefined" || !document.createTreeWalker) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node?.nodeValue?.trim()) return NodeFilter.FILTER_REJECT;
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (parent.closest("mjx-container, script, style, noscript, textarea, pre, code")) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach((node) => {
+    let text = node.nodeValue;
+    if (!text) return;
+    const normalized = text
+      .replace(DOLLAR_ENTITY_RE, "$")
+      .replace(RAW_TAG_ENTITY_RE, "");
+    if (normalized !== text) node.nodeValue = normalized;
+  });
+}
+
 export function renderMath(el) {
   const target = el || document.getElementById("content");
   if (!target) return;
 
+  prepareMathDom(target);
   normalizeGermanCopy(target);
 
   const typesetRoots = () => {

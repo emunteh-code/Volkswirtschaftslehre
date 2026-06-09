@@ -44,6 +44,7 @@ import {
   renderFehlerChecklist,
   renderExamRecognitionBlock,
   renderStagedPracticeCard,
+  wrapCappedActionButtons,
   renderFormulaPedagogyExtras,
   renderSourceUsePedagogy,
   getDerivationStepRole
@@ -993,14 +994,16 @@ ${intuition?.analogy ? `<div class="exam-drill-line">
     const forwardBtn = (panelId, text) =>
       `<button type="button" class="btn btn--tertiary" data-forward-only="1" onclick="window.__toggleReveal('${panelId}', this)" aria-controls="${panelId}">${text}</button>`;
 
+    const actionButtons = wrapCappedActionButtons([
+      hintMarkup ? forwardBtn(hintId, "Hinweis") : "",
+      approachMarkup ? forwardBtn(approachId, "Ansatz") : "",
+      `<button type="button" class="btn btn--secondary" id="examDrillBtn_${drillId}" data-forward-only="1" onclick="window.__toggleExamDrill('${drillId}')" aria-controls="${solId}">Lösung prüfen</button>`
+    ]);
+
     return `<div class="problem-card exam-drill-card problem-card--staged" id="exam_card_${drillId}">
 <span class="prob-eyebrow">${escapeHtml(eyebrow)}</span>
 <div class="prob-text">${questionHtml}</div>
-<div class="prob-actions prob-actions--staged">
-${hintMarkup ? forwardBtn(hintId, "Hinweis") : ""}
-${approachMarkup ? forwardBtn(approachId, "Ansatz") : ""}
-<button type="button" class="btn btn--secondary" id="examDrillBtn_${drillId}" data-forward-only="1" onclick="window.__toggleExamDrill('${drillId}')" aria-controls="${solId}">Lösung prüfen</button>
-</div>
+${actionButtons}
 ${hintMarkup ? `<div class="staged-reveal staged-reveal--hint" id="${hintId}" hidden>
 <div class="staged-reveal__head"><span class="staged-reveal__label">Hinweis</span><button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__closeReveal('${hintId}')" aria-label="Hinweis schließen">Schließen</button></div>
 <div class="staged-reveal__body">${hintMarkup}</div>

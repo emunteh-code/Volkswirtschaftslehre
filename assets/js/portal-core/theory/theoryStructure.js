@@ -4,6 +4,7 @@
  */
 
 import { renderConceptAnchor } from "../pedagogy/learnerPedagogy.js";
+import { sanitizeLearnerPlainText } from "../utils/studentFacingText.js";
 
 export const THEORY_SECTION_ORDER = [
   {
@@ -326,9 +327,63 @@ export function normalizeSubsectionMarkup(innerHtml) {
   });
 }
 
-/** @param {{ id: string, heading: string, step: number }} spec @param {string} bodyHtml */
-export function buildRecipeSectionHtml(spec, bodyHtml) {
-  const body = normalizeSubsectionMarkup(stripPlaceholderMarkup(bodyHtml)).trim();
+const VAGUE_READINESS_RE = /^Kernrelationen aus dem Formeln-Tab aktivieren/i;
+
+/** @param {string} innerHtml */
+function isVagueReadinessContent(innerHtml) {
+  const text = sanitizeLearnerPlainText(innerHtml);
+  return VAGUE_READINESS_RE.test(text) && !/ich\s+(kann|erkenne|kenne|weiß)/i.test(text);
+}
+
+/**
+ * Convert legacy definition bullet lists to glossary rows (no bullets, no blockquote markers).
+ * @param {string} innerHtml
+ * @param {object} [entry]
+ */
+export function convertDefinitionListsToGlossary(innerHtml, entry = {}) {
+  const formulaByLabel = new Map();
+  (entry.formeln || []).forEach((f, index) => {
+    const label = sanitizeLearnerPlainText(f?.label || "");
+    if (label) formulaByLabel.set(label.toLowerCase(), index);
+  });
+
+  return String(innerHtml ?? "").replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (match, listInner) => {
+    const items = [...listInner.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)];
+    if (!items.length) return match;
+    const glossaryItems = items.filter((item) => /<strong/i.test(item[1]));
+    if (glossaryItems.length !== items.length) return match;
+
+    const rows = glossaryItems
+      .map((item) => {
+        const liContent = item[1];
+        const termMatch = liContent.match(/<strong[^>]*>([\s\S]*?)<\/strong>/i);
+        if (!termMatch) return "";
+        const term = sanitizeLearnerPlainText(termMatch[1]);
+        if (!term) return "";
+        const desc = sanitizeLearnerPlainText(
+          liContent.replace(termMatch[0], "").replace(/^[—\-–:\s]+/, "")
+        );
+        const formulaIndex = formulaByLabel.get(term.toLowerCase());
+        const termEl =
+          formulaIndex !== undefined
+            ? `<button type="button" class="theory-glossary-term" onclick="window.__scrollToFormulaCard?.(${formulaIndex})" aria-label="Zur Formel ${escapeHtml(term)} springen">${escapeHtml(term)}</button>`
+            : `<span class="theory-glossary-term theory-glossary-term--plain">${escapeHtml(term)}</span>`;
+        return `<div class="theory-glossary-row">${termEl}<p class="theory-glossary-def">${escapeHtml(desc || "Siehe Formeln-Tab für Notation und Anwendung.")}</p></div>`;
+      })
+      .filter(Boolean)
+      .join("");
+
+    if (!rows) return match;
+    return `<div class="theory-glossary-rows">${rows}</div>`;
+  });
+}
+
+/** @param {{ id: string, heading: string, step: number }} spec @param {string} bodyHtml @param {object} [entry] */
+export function buildRecipeSectionHtml(spec, bodyHtml, entry = null) {
+  let body = normalizeSubsectionMarkup(stripPlaceholderMarkup(bodyHtml)).trim();
+  if (spec.id === "definitionen") {
+    body = convertDefinitionListsToGlossary(body, entry || {});
+  }
   if (!theoryBodyHasContent(body)) return "";
   return `<section class="theory-recipe-section theory-recipe-card theory-recipe-section--${spec.id}" data-theory-step="${spec.step}" aria-labelledby="theory-${spec.id}-h">
 <h3 class="theory-recipe-heading" id="theory-${spec.id}-h">${spec.heading}</h3>
@@ -524,8 +579,8 @@ export function synthesizeRecipeGaps(grouped, entry = {}, meta = {}) {
       const rows = entry.formeln
         .slice(0, 6)
         .map((f, index) => {
-          const label = f?.label ? escapeHtml(stripTags(f.label)) : "";
-          const desc = f?.desc ? escapeHtml(stripTags(f.desc)) : "";
+          const label = f?.label ? escapeHtml(sanitizeLearnerPlainText(f.label)) : "";
+          const desc = f?.desc ? escapeHtml(sanitizeLearnerPlainText(f.desc)) : "";
           if (!label) return "";
           return `<div class="theory-glossary-row">
 <button type="button" class="theory-glossary-term" onclick="window.__scrollToFormulaCard?.(${index})" aria-label="Zur Formel ${label} springen">${label}</button>
@@ -595,30 +650,35 @@ ${formulaLabels ? `<p><strong>Kernrelationen:</strong> ${escapeHtml(formulaLabel
     ];
   }
 
+  if (grouped.vor_aufgaben?.length) {
+    grouped.vor_aufgaben = grouped.vor_aufgaben.filter((item) => !isVagueReadinessContent(item.inner));
+  }
+
   if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben")) && Array.isArray(entry.objectives) && entry.objectives.length) {
-    const prefixes = ["Ich kann …", "Ich erkenne …", "Ich kenne …"];
+    const prefixes = ["Ich kann …", "Ich erkenne …", "Ich kenne …", "Ich weiß …"];
     const items = entry.objectives.slice(0, 5).map((o, i) => {
       const text = stripTags(String(o));
       const prefix = prefixes[i % prefixes.length];
       const line = /^(ich\s+(kann|erkenne|kenne|weiß))/i.test(text) ? text : `${prefix.replace(" …", "")} ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
-      return `<li>${escapeHtml(line)}</li>`;
+      return `<li class="readiness-checklist__item">${escapeHtml(line)}</li>`;
     }).join("");
     grouped.vor_aufgaben = [
       {
-        heading: "Bereitschaft prüfen",
-        inner: `<ul class="readiness-checklist">${items}</ul>
-<p class="readiness-checklist__footer">Vor den Aufgaben: jede Formel verbal deuten können; Grafik-Skizze mit Achsenbeschriftung parat haben.</p>`
+        heading: "Vor den Aufgaben",
+        inner: `<p class="readiness-checklist__intro">Prüfe kurz, ob du bereit bist:</p>
+<ul class="readiness-checklist">${items}</ul>`
       }
     ];
   } else if (!theoryBodyHasContent(bucketBody(grouped, "vor_aufgaben"))) {
     grouped.vor_aufgaben = [
       {
         heading: "Vor den Aufgaben",
-        inner: `<ul class="readiness-checklist">
-<li>Ich kann die Kerngrößen benennen, ohne ins Formelblatt zu schauen.</li>
-<li>Ich erkenne den Aufgabentyp an Stichworten und Datenlayout.</li>
-<li>Ich kenne den ersten Rechenschritt bei einer Standardaufgabe.</li>
-<li>Ich habe typische Fehler aus „Häufige Fehler" aktiv geprüft.</li>
+        inner: `<p class="readiness-checklist__intro">Prüfe kurz, ob du bereit bist:</p>
+<ul class="readiness-checklist">
+<li class="readiness-checklist__item">Ich kann die Kerngrößen benennen, ohne ins Formelblatt zu schauen.</li>
+<li class="readiness-checklist__item">Ich erkenne den Aufgabentyp an Stichworten und Datenlayout.</li>
+<li class="readiness-checklist__item">Ich kenne den ersten Rechenschritt bei einer Standardaufgabe.</li>
+<li class="readiness-checklist__item">Ich weiß, welche typischen Fehler ich vor der Rechnung prüfen muss.</li>
 </ul>`
       }
     ];
@@ -675,7 +735,7 @@ ${normalizeSubsectionMarkup(item.inner)}
       continue;
     }
 
-    const section = buildRecipeSectionHtml(spec, body);
+    const section = buildRecipeSectionHtml(spec, body, entry);
     if (!section) continue;
     emittedBodies.push(body);
     parts.push(section);
@@ -706,7 +766,7 @@ export function applyTheoryRecipeChrome(html, entry = {}, meta = {}) {
 }
 
 function stripTags(text) {
-  return String(text ?? "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return sanitizeLearnerPlainText(text);
 }
 
 function hasMeaningfulIntuitionText(value) {
@@ -726,11 +786,13 @@ export function normalizeIntuitionRecord(data) {
     ? data.mentalModel.filter((entry) => hasMeaningfulIntuitionText(entry?.body))
     : [];
 
-  const core = hasMeaningfulIntuitionText(data.core) ? String(data.core) : mentalModel[0]?.body || "";
+  const core = hasMeaningfulIntuitionText(data.core)
+    ? stripTags(String(data.core))
+    : stripTags(String(mentalModel[0]?.body || ""));
   const analogy = hasMeaningfulIntuitionText(data.analogy)
-    ? String(data.analogy)
-    : mentalModel[1]?.body || "";
-  const bridge = hasMeaningfulIntuitionText(data.bridge) ? String(data.bridge) : "";
+    ? stripTags(String(data.analogy))
+    : stripTags(String(mentalModel[1]?.body || ""));
+  const bridge = hasMeaningfulIntuitionText(data.bridge) ? stripTags(String(data.bridge)) : "";
   const exam = Array.isArray(data.exam)
     ? data.exam.filter((entry) => hasMeaningfulIntuitionText(entry?.if) && hasMeaningfulIntuitionText(entry?.then))
     : [];
@@ -756,7 +818,7 @@ export function buildIntuitionFusionFragments(intuition, opts = {}) {
   const orientierung = intuition.bridge
     ? `<div class="theory-intuition-embed theory-intuition-bridge">
 <p class="theory-intuition-bridge-kicker">So erkennst du das in Aufgaben</p>
-<p class="theory-intuition-bridge-copy">${intuition.bridge}</p>
+<p class="theory-intuition-bridge-copy">${escapeHtml(intuition.bridge)}</p>
 </div>`
     : "";
 
@@ -766,12 +828,13 @@ export function buildIntuitionFusionFragments(intuition, opts = {}) {
     kernParts.push(conceptAnchor);
   } else {
     if (intuition.core) {
-      kernParts.push(`<p class="theory-intuition-lead">${intuition.core}</p>`);
+      const coreText = String(intuition.core).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      if (coreText) kernParts.push(`<p class="theory-intuition-lead">${escapeHtml(coreText)}</p>`);
     }
     if (intuition.analogy) {
       kernParts.push(`<div class="theory-intuition-embed">
 <h4 class="theory-subsection-title">Denkbild</h4>
-<p>${intuition.analogy}</p>
+<p>${escapeHtml(intuition.analogy)}</p>
 </div>`);
     }
     if (opts.formalAnchorHtml) {

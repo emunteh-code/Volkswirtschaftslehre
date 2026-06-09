@@ -32,8 +32,15 @@ const FORBIDDEN_IN_PEDAGOGY_HTML = [
   { re: />\s*QUELLE\s*</g, label: "QUELLE pill badge" },
   { re: /Orientierungshilfe/g, label: "Orientierungshilfe internal footnote" },
   { re: /Generischer Mechanismus-Pfad/g, label: "Generischer Mechanismus-Pfad dev note" },
+  { re: /formula-limits-row/g, label: "legacy table-style Einsatzgrenzen rows" },
+  { re: />\s*Annahmen\s*</g, label: "legacy Einsatzgrenzen label Annahmen" },
+  { re: />\s*Gilt, wenn\s*</g, label: "legacy Einsatzgrenzen label Gilt, wenn" },
+  { re: /Merke:/g, label: "legacy Merke shortcut label" },
   { re: /<strong(?!>)/g, label: "broken <strong tag in template" },
-  { re: /<\/strong(?!>)/g, label: "broken </strong tag in template" }
+  { re: /<\/strong(?!>)/g, label: "broken </strong tag in template" },
+  { re: /&lt;\/?strong&gt;/g, label: "escaped strong tag in pedagogy HTML" },
+  { re: /&lt;\/?em&gt;/g, label: "escaped em tag in pedagogy HTML" },
+  { re: /&lt;br\s*\/?&gt;/g, label: "escaped br tag in pedagogy HTML" }
 ];
 
 /** Whole-repo learner chrome — plain text grep (not only template literals). */
@@ -72,6 +79,9 @@ function scanPedagogyFile(rel) {
     for (const { re, label } of FORBIDDEN_IN_PEDAGOGY_HTML) {
       re.lastIndex = 0;
       if (re.test(literal)) hits.push({ file: rel, label });
+    }
+    if (/^\s*>\s+[A-Za-zÄÖÜäöüß]/m.test(literal)) {
+      hits.push({ file: rel, label: "markdown blockquote at line start in pedagogy HTML" });
     }
   }
 

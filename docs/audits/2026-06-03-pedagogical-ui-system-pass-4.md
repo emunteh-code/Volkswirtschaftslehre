@@ -2,6 +2,19 @@
 
 Fleet implementation via `portal-core` + shared CSS. No route/IA changes.
 
+## Post-Pass 4 defect fix (2026-06-09)
+
+| Defect | Before | After |
+|--------|--------|-------|
+| Raw HTML leakage (`<strong>`, `<em>`, `<br>`, entity-escaped tags) | Tags visible in Kernsatz, Klausurerkennung, theory body | `studentizeTheoryHtml` strips inline tags + entities; `sanitizeLearnerPlainText` at extraction; CI escaped-tag patterns |
+| Markdown `>` markers | Glossary terms like `>Arithmetisches Mittel` | `sanitizeLearnerPlainText` strips leading `>`; CI line-start blockquote scan |
+| Definitionen glossary rows | Bullet `<ul><li><strong>…</strong>` lists | `convertDefinitionListsToGlossary` → `theory-glossary-*` rows; formeln-linked terms; CSS no bullets |
+| Vor den Aufgaben | “Lern-Checkliste.” / vague “Kernrelationen aktivieren” fallback | Vague paragraphs stripped; concrete Ich kann/erkenne/kenne/weiß synthesis from objectives; CI warns on Lern-Checkliste |
+| Selbsttest vor der Klausur | Raw `• ☐` pattern | Structured `fehler-checklist__*` checkbox rows; concept-specific prompts from warning title + body |
+| Klausurerkennung grid | Cramped 140px labels, tight gap | Grid 150px label column, 20px gap, 9px row padding; highlighted Kernsatz row |
+| Right rail warnings | Full-length bodies | Truncate at 320 chars with “Mehr anzeigen”; max 2 rows + overflow disclosure |
+| ConceptAnchor density | Long Kernsatz blocks, raw HTML | Split labelled rows; “Mehr anzeigen” over 200 chars; Kernsatz highlight row |
+
 ## Task matrix
 
 | # | Requirement | Status | Implementation |

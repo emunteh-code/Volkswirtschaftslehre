@@ -1,5 +1,6 @@
 import { protectLatexInHtml, repairLatexInHtml } from './latexProtect.js';
 import { prepareTheoryHtmlForStudent } from './formelDisplay.js';
+import { decodeHtmlEntities, stripHtml } from '../ui/semanticContent.js';
 
 /**
  * Strip dev/registry jargon from strings shown on student surfaces.
@@ -11,6 +12,21 @@ const DEV_JARGON =
 
 const SOURCE_STATUS_EM =
   /<em>\s*(?:(?:source-distilled|platform-added-explanation|platform-added-drill|direct-source|cross-link)(?:\s*\/\s*(?:source-distilled|platform-added-explanation|platform-added-drill|direct-source|cross-link))*[^<]*)<\/em>/gi;
+
+const ESCAPED_INLINE_TAG = /&lt;\/?(?:strong|em|br)\s*\/?&gt;/gi;
+const VAGUE_READINESS_PARAGRAPH =
+  /<p[^>]*>\s*Kernrelationen aus dem Formeln-Tab aktivieren[^<]*<\/p>/gi;
+
+/**
+ * Plain learner text: decode entities, strip tags, remove markdown blockquote markers.
+ * @param {unknown} value
+ * @returns {string}
+ */
+export function sanitizeLearnerPlainText(value) {
+  let text = decodeHtmlEntities(stripHtml(String(value ?? "")));
+  text = text.replace(/^>\s+/gm, "").replace(/\s+/g, " ").trim();
+  return text;
+}
 
 /**
  * @param {unknown} value
@@ -99,9 +115,20 @@ export function studentizeTheoryHtml(html, entry = null) {
   s = s.replace(/<p>\s*<em>\s*platform-added-(?:explanation|drill):\s*[^<]*<\/em>\s*<\/p>/gi, "");
   s = s.replace(/<p>\s*<em>\s*source-distilled:\s*[^<]*<\/em>\s*<\/p>/gi, "");
   s = s.replace(/<p>\s*<em>\s*Lern-Checkliste\.?\s*<\/em>\s*<\/p>/gi, "");
+  s = s.replace(
+    /<p[^>]*>\s*<em>\s*(?:platform-added-(?:explanation|drill)|source-distilled|direct-source|cross-link)\s*:\s*<\/em>[\s\S]*?<\/p>/gi,
+    ""
+  );
+  s = s.replace(
+    /<p[^>]*>\s*(?:Orientierungshilfe[^<]*|Generischer Mechanismus-Pfad[^<]*|Lern-Checkliste\.?|Begriffe aus Formeln-Tab[^<]*)<\/p>/gi,
+    ""
+  );
   s = s.replace(/<h3>\s*Klausurtransfer\s*\(\s*source-distilled\s*\)\s*<\/h3>/gi, "<h3>Klausurtransfer</h3>");
   s = s.replace(/<span[^>]*class="[^"]*\bplatform-chrome-badge\b[^"]*"[^>]*>[\s\S]*?<\/span>/gi, "");
-  s = s.replace(/<\/?strong(?=[\s>/])/gi, "");
+  s = s.replace(ESCAPED_INLINE_TAG, "");
+  s = s.replace(/<\/?(?:strong|em)>/gi, "");
+  s = s.replace(/<br\s*\/?>/gi, " ");
+  s = s.replace(VAGUE_READINESS_PARAGRAPH, "");
   s = s.replace(
     /<p[^>]*class="[^"]*\b(?:klausurmethodik-footnote|theory-source-footnote)\b[^"]*"[^>]*>[\s\S]*?<\/p>/gi,
     ""

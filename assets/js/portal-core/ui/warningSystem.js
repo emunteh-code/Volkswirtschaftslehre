@@ -1,5 +1,6 @@
 import { studentizeTheoryHtml } from "../utils/studentFacingText.js";
 import { fuseIntuitionIntoTheoryHtml, theoryToHtml } from "../theory/theoryStructure.js";
+import { stripHtml } from "./semanticContent.js";
 
 function stripTrailingColon(value) {
   return String(value ?? "").replace(/[:\s]+$/u, "").trim();
@@ -113,6 +114,18 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
       root.querySelectorAll(".source-boundary-notice, .platform-added-banner, .platform-chrome-badge, .pedagogy-source-note, .mastery-checkpoint__note")
     ).forEach((node) => node.remove());
 
+    const FOOTNOTE_ONLY =
+      /^(?:Orientierungshilfe|Generischer Mechanismus-Pfad|Lern-Checkliste|Begriffe aus Formeln-Tab)/i;
+    Array.from(root.querySelectorAll("p")).forEach((node) => {
+      const em = node.querySelector("em");
+      if (em && /^(?:platform-added-|source-distilled|direct-source|cross-link)/i.test(em.textContent || "")) {
+        node.remove();
+        return;
+      }
+      const text = (node.textContent || "").replace(/\s+/g, " ").trim();
+      if (FOOTNOTE_ONLY.test(text)) node.remove();
+    });
+
     Array.from(root.querySelectorAll(".warn-box")).forEach((warningNode) => {
       const warning = normalizeWarningNode(warningNode);
       if (!warning.bodyHtml) {
@@ -162,12 +175,29 @@ export function getWarningSystemData(entry, intuition = null, fusionOpts = {}) {
 }
 
 /** Compact right-rail mistake note — cap visible rows; overflow behind disclosure. */
+const RAIL_BODY_PREVIEW_LEN = 320;
+
+function renderRailWarningBody(warning) {
+  const plain = String(warning.bodyText || stripHtml(warning.bodyHtml || "")).replace(/\s+/g, " ").trim();
+  if (plain.length <= RAIL_BODY_PREVIEW_LEN) {
+    return `<div class="rp-mistake-body">${warning.bodyHtml}</div>`;
+  }
+  const preview = escapeHtmlText(plain.slice(0, RAIL_BODY_PREVIEW_LEN).trim()) + "…";
+  return `<div class="rp-mistake-body rp-mistake-body--truncated">
+<p class="rp-mistake-body-preview">${preview}</p>
+<details class="rp-mistake-body-more">
+<summary class="rp-mistake-body-more__summary">Mehr anzeigen</summary>
+<div class="rp-mistake-body-full">${warning.bodyHtml}</div>
+</details>
+</div>`;
+}
+
 export function renderRightRailWarnings(warnings = [], { expandedLimit = 2 } = {}) {
   if (!warnings.length) return "";
   const renderRow = (warning) =>
     `<article class="rp-mistake rp-mistake--rail" data-warning-placement="rail">
 <div class="rp-mistake-title">${escapeHtmlText(warning.title)}</div>
-<div class="rp-mistake-body">${warning.bodyHtml}</div>
+${renderRailWarningBody(warning)}
 </article>`;
   const primary = warnings.slice(0, expandedLimit).map(renderRow).join("");
   const overflow = warnings.slice(expandedLimit);

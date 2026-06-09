@@ -14,19 +14,21 @@ const text = fs.readFileSync(rightPanelPath, "utf8");
 const warningText = fs.readFileSync(warningPath, "utf8");
 
 const required = [
-  { pattern: /formulasSection\.hidden\s*=\s*false/, label: "show Formeln section with fallback" },
-  { pattern: /rp-formula-fallback/, label: "formula rail fallback when empty" },
+  { pattern: /formulasSection\.hidden\s*=\s*false/, label: "show Formeln section when formulas exist" },
+  { pattern: /formulasSection\.hidden\s*=\s*true/, label: "hide empty Formeln section" },
+  { pattern: /Im Formeln-Tab anzeigen/, label: "cross-tab formula anchor label" },
   { pattern: /connectionsSection\.hidden\s*=\s*!connHtml/, label: "hide empty Verbindungen section" },
   { pattern: /mistakesSection\.hidden\s*=\s*true/, label: "hide empty Häufige Fehler section" },
   { pattern: /rp-formula-chip/, label: "compact formula index chips" },
-  { pattern: /Weitere Fehler anzeigen/, label: "cap expanded rail warnings" }
+  { pattern: /Weitere Fehler anzeigen/, label: "cap expanded rail warnings" },
+  { pattern: /Mehr anzeigen/, label: "truncate long rail warning bodies" }
 ];
 
 let failed = false;
 for (const { pattern, label } of required) {
-  const source = label.includes("cap expanded") ? warningText : text;
+  const source = /cap expanded|truncate long rail/i.test(label) ? warningText : text;
   if (!pattern.test(source)) {
-    console.error(`right-rail: missing ${label} in ${label.includes("cap expanded") ? "warningSystem.js" : "rightPanel.js"}`);
+    console.error(`right-rail: missing ${label} in ${/cap expanded|truncate long rail/i.test(label) ? "warningSystem.js" : "rightPanel.js"}`);
     failed = true;
   }
 }

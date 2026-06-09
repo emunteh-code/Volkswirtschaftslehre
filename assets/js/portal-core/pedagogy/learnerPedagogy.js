@@ -3,7 +3,8 @@
  * platform-added-explanation where content is synthesized (author-only; not shown to learners).
  */
 
-import { escapeHtml } from "../ui/semanticContent.js";
+import { escapeHtml, stripHtml } from "../ui/semanticContent.js";
+import { sanitizeLearnerPlainText } from "../utils/studentFacingText.js";
 
 /** Learner-facing label renames */
 export const LEARNER_LABELS = Object.freeze({
@@ -14,8 +15,47 @@ export const LEARNER_LABELS = Object.freeze({
   pruefungsvorbereitung: "Klausurerkennung"
 });
 
+/** Einsatzgrenzen rule-card zone labels (§3) */
+export const FORMULA_RULE_LABELS = Object.freeze({
+  useWhen: "Wann du es benutzt",
+  mustHold: "Das muss gelten",
+  doNotUse: "Nicht verwenden, wenn",
+  mistakes: "Häufige Fehler",
+  shortcut: "Klausur-Shortcut"
+});
+
+/** Klausurmethodik playbook labels (§3) */
+export const KLAUSUR_METHOD_LABELS = Object.freeze({
+  recognize: "Woran du es erkennst",
+  firstThought: "Erster Gedanke",
+  firstStep: "Erster Schritt",
+  disclose: "Methode & Fallen anzeigen",
+  vorgehen: "Vorgehen",
+  trap: "Häufige Falle",
+  grading: "Prüfungslogik",
+  sources: "Quellen ansehen",
+  toTask: "Zur passenden Aufgabe"
+});
+
 function collapseBtn(panelId, label) {
   return `<button type="button" class="staged-reveal__collapse btn btn--ghost btn--xs" onclick="window.__closeReveal('${panelId}')" aria-label="${escapeHtml(label)} schließen">Schließen</button>`;
+}
+
+const CONCEPT_ANCHOR_PREVIEW_LEN = 200;
+
+/** @param {string} text @param {string} [modifier] */
+function renderConceptAnchorValue(text, modifier = "") {
+  const clean = sanitizeLearnerPlainText(text);
+  if (!clean) return "";
+  const modClass = modifier ? ` concept-anchor__value-wrap--${modifier}` : "";
+  if (clean.length <= CONCEPT_ANCHOR_PREVIEW_LEN) {
+    return `<div class="concept-anchor__value-wrap${modClass}"><p class="concept-anchor__value">${escapeHtml(clean)}</p></div>`;
+  }
+  const preview = `${escapeHtml(clean.slice(0, CONCEPT_ANCHOR_PREVIEW_LEN).trim())}…`;
+  return `<div class="concept-anchor__value-wrap concept-anchor__value-wrap--expandable${modClass}">
+<p class="concept-anchor__value concept-anchor__value--preview">${preview}</p>
+<details class="concept-anchor__more"><summary class="concept-anchor__more-summary">Mehr anzeigen</summary><p class="concept-anchor__value">${escapeHtml(clean)}</p></details>
+</div>`;
 }
 
 function stagedPanel(id, kind, label, bodyHtml) {
@@ -55,11 +95,8 @@ function buildLessonOutcomeItems(entry, chapterTitle = "") {
         : "die zentrale Formel oder Methode der Aufgabe zuordnen",
       `typische Klausurfehler zu „${title}" vor der Rechnung benennen`
     ];
-    if (entry?.motivation) {
-      const snippet = String(entry.motivation).trim().slice(0, 80);
-      if (snippet) {
-        items.push(`erkennen, wann Stichworte wie „${snippet.replace(/[.!?…]+$/, "")}…" auf dieses Konzept hindeuten`);
-      }
+    if (items.length < 4) {
+      items.push(`typische Aufgabenstellungen und Stichworte zu „${title}" sicher zuordnen`);
     }
   }
   return items;
@@ -85,11 +122,11 @@ export function renderLessonOutcomes(entry, chapterTitle = "") {
 export function renderLessonIntroCard(entry, chapterTitle = "", intuition = null) {
   const title = String(chapterTitle || "").trim();
   const kurz =
-    (entry?.motivation ? String(entry.motivation).trim() : "") ||
-    (intuition?.core ? String(intuition.core).trim() : "") ||
+    (entry?.motivation ? stripHtml(String(entry.motivation)).trim() : "") ||
+    (intuition?.core ? stripHtml(String(intuition.core)).trim() : "") ||
     (title ? `${title} — Kernbaustein für Klausurtransfer in diesem Modulblock.` : "");
   const warum =
-    (intuition?.bridge ? String(intuition.bridge).trim() : "") ||
+    (intuition?.bridge ? stripHtml(String(intuition.bridge)).trim() : "") ||
     (title
       ? `In Klausuren zählt der sichere Zugriff auf Notation, Formelwahl und typische Fallen zu „${title}".`
       : "");
@@ -128,32 +165,34 @@ ${microCheck ? `<div class="lesson-intro-card__micro">${microCheck}</div>` : ""}
  */
 export function renderConceptAnchor(intuition, entry, formalAnchorHtml = "") {
   const core = intuition?.core
-    ? String(intuition.core).trim()
+    ? sanitizeLearnerPlainText(intuition.core)
     : entry?.motivation
-      ? String(entry.motivation).trim()
+      ? sanitizeLearnerPlainText(entry.motivation)
       : "";
-  const analogy = intuition?.analogy ? String(intuition.analogy).trim() : "";
+  const analogy = intuition?.analogy ? sanitizeLearnerPlainText(intuition.analogy) : "";
   const example =
     Array.isArray(intuition?.exam) && intuition.exam[0]?.if
-      ? `${String(intuition.exam[0].if).trim()} → ${String(intuition.exam[0].then || "").trim()}`
+      ? sanitizeLearnerPlainText(
+          `${String(intuition.exam[0].if).trim()} → ${String(intuition.exam[0].then || "").trim()}`
+        )
       : Array.isArray(entry?.cards) && entry.cards[0]?.note
-        ? String(entry.cards[0].note).trim()
+        ? sanitizeLearnerPlainText(entry.cards[0].note)
         : "";
-  const bridge = intuition?.bridge ? String(intuition.bridge).trim() : "";
+  const bridge = intuition?.bridge ? sanitizeLearnerPlainText(intuition.bridge) : "";
   if (!core && !analogy && !example && !formalAnchorHtml && !bridge) return "";
 
   const rows = [
     core
-      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Kernsatz</span><p class="concept-anchor__value">${escapeHtml(core)}</p></div>`
+      ? `<div class="concept-anchor__row concept-anchor__row--core"><span class="concept-anchor__label">Kernsatz</span>${renderConceptAnchorValue(core, "core")}</div>`
       : "",
     analogy
-      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Denkbild</span><p class="concept-anchor__value">${escapeHtml(analogy)}</p></div>`
+      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Denkbild</span>${renderConceptAnchorValue(analogy)}</div>`
       : "",
     example
-      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Beispiel</span><p class="concept-anchor__value">${escapeHtml(example)}</p></div>`
+      ? `<div class="concept-anchor__row"><span class="concept-anchor__label">Beispiel</span>${renderConceptAnchorValue(example)}</div>`
       : "",
     bridge || formalAnchorHtml
-      ? `<div class="concept-anchor__row concept-anchor__row--formula"><span class="concept-anchor__label">Brücke zur Formel</span><div class="concept-anchor__value">${bridge ? `<p>${escapeHtml(bridge)}</p>` : ""}${formalAnchorHtml || ""}</div></div>`
+      ? `<div class="concept-anchor__row concept-anchor__row--formula"><span class="concept-anchor__label">Brücke zur Formel</span><div class="concept-anchor__value-wrap concept-anchor__value-wrap--formula">${bridge ? renderConceptAnchorValue(bridge) : ""}${formalAnchorHtml || ""}</div></div>`
       : ""
   ]
     .filter(Boolean)
@@ -187,6 +226,7 @@ export function renderMasteryCheckpoint(entry, conceptId, chapterTitle = "") {
   const title = escapeHtml(chapterTitle || "dieses Konzept");
   return `<section class="mastery-checkpoint" role="region" aria-labelledby="mastery-check-h">
 <h2 class="mastery-checkpoint__title" id="mastery-check-h">Mastery Check</h2>
+<p class="mastery-checkpoint__intro">Prüfe, ob du die Lektion wirklich abrufen kannst.</p>
 <div class="mastery-checkpoint__rows">
 <div class="mastery-checkpoint__row">
 <span class="mastery-checkpoint__label">Konzept</span>
@@ -238,13 +278,19 @@ export function renderReviewControls(conceptId) {
 export function renderFehlerChecklist(warnings = []) {
   if (!warnings.length) return "";
   const items = warnings.slice(0, 6).map((w) => {
-    const title = String(w.title || "Prüfpunkt").trim();
-    const prompt = title.endsWith("?") ? title : `Habe ich „${title}" beachtet?`;
-    return `<li><label class="fehler-check-item"><input type="checkbox" /> ${escapeHtml(prompt)}</label></li>`;
+    const title = sanitizeLearnerPlainText(w.title || "Prüfpunkt");
+    const bodyHint = w.body ? sanitizeLearnerPlainText(w.body).slice(0, 140) : "";
+    const prompt = bodyHint
+      ? `Habe ich „${title}" beachtet — ${bodyHint}${bodyHint.length >= 140 ? "…" : ""}?`
+      : title.endsWith("?")
+        ? title
+        : `Habe ich „${title}" beachtet?`;
+    return `<li class="fehler-checklist__row"><label class="fehler-checklist__label"><input type="checkbox" class="fehler-checklist__check" /> ${escapeHtml(prompt)}</label></li>`;
   });
   return `<section class="fehler-checklist" role="region" aria-labelledby="fehler-check-h">
 <h3 class="fehler-checklist__title" id="fehler-check-h">Selbsttest vor der Klausur</h3>
-<ul class="fehler-checklist__list">${items.join("")}</ul>
+<p class="fehler-checklist__intro">Prüfe die häufigsten Fehler, bevor du weitergehst.</p>
+<ul class="fehler-checklist__rows">${items.join("")}</ul>
 </section>`;
 }
 
@@ -258,11 +304,11 @@ export function renderExamRecognitionBlock(chapter, entry, intuition = null) {
   const formula = entry?.formeln?.[0];
   const method = formula?.label ? escapeHtml(String(formula.label)) : "passende Formel/Methode";
   const core = intuition?.core
-    ? escapeHtml(String(intuition.core).slice(0, 200))
+    ? escapeHtml(sanitizeLearnerPlainText(intuition.core).slice(0, 200))
     : entry?.motivation
-      ? escapeHtml(String(entry.motivation).slice(0, 200))
+      ? escapeHtml(sanitizeLearnerPlainText(entry.motivation).slice(0, 200))
       : "";
-  const signalWords =
+  const erkennen =
     Array.isArray(intuition?.exam) && intuition.exam.length
       ? escapeHtml(
           intuition.exam
@@ -272,24 +318,29 @@ export function renderExamRecognitionBlock(chapter, entry, intuition = null) {
             .join(" · ")
         )
       : `Stichworte zu „${title}" in Aufgabenstellung, Datenlayout oder gesuchter Größe.`;
+  const ersteEntscheidung = intuition?.bridge
+    ? escapeHtml(stripHtml(String(intuition.bridge)).slice(0, 220))
+    : `Modell/Annahme benennen, dann ${method} zuordnen.`;
+  const ersterRechenschritt = "Größen und Einheiten notieren; Notation aus der Vorlesung fixieren, dann ersten formalen Schritt skizzieren.";
+  const haeufigeFalle = "Stichprobe und Population bzw. Parameter und Schätzer nicht vermischen; Annahmen vor der Rechnung benennen.";
   return `<section class="exam-recognition" role="region" aria-labelledby="exam-rec-h">
 <h3 class="exam-recognition__title" id="exam-rec-h">${LEARNER_LABELS.pruefungsvorbereitung}</h3>
 <dl class="exam-recognition__dl">
 <div class="exam-recognition__row">
-<dt class="exam-recognition__label">Signalwörter</dt>
-<dd class="exam-recognition__value">${signalWords}</dd>
+<dt class="exam-recognition__label">Erkennen</dt>
+<dd class="exam-recognition__value">${erkennen}</dd>
 </div>
 <div class="exam-recognition__row">
-<dt class="exam-recognition__label">Erster Gedanke</dt>
-<dd class="exam-recognition__value">Modell/Annahme benennen, dann ${method} zuordnen.</dd>
+<dt class="exam-recognition__label">Erste Entscheidung</dt>
+<dd class="exam-recognition__value">${ersteEntscheidung}</dd>
 </div>
 <div class="exam-recognition__row">
-<dt class="exam-recognition__label">Erster Schritt</dt>
-<dd class="exam-recognition__value">Größen und Einheiten notieren; $H_0$ / Notation aus der VL fixieren.</dd>
+<dt class="exam-recognition__label">Erster Rechenschritt</dt>
+<dd class="exam-recognition__value">${ersterRechenschritt}</dd>
 </div>
 <div class="exam-recognition__row">
 <dt class="exam-recognition__label">Häufige Falle</dt>
-<dd class="exam-recognition__value">Stichprobe und Population, bzw. Parameter und Schätzer, nicht vermischen.</dd>
+<dd class="exam-recognition__value">${haeufigeFalle}</dd>
 </div>
 ${core ? `<div class="exam-recognition__row exam-recognition__row--core">
 <dt class="exam-recognition__label">Kernsatz</dt>

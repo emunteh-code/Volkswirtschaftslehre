@@ -30,7 +30,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `statistik` | 14 | 0 | 100% | 100% | 54 | 143 | 104 | 104 | 0 | 10 | 44 | 4 |
 | `finanzwirtschaft` | 19 | 0 | 100% | 100% | 38 | 39 | 0 | 0 | 0 | 0 | 57 | 4 |
 | `mathematik` | 14 | 0 | 100% | 100% | 42 | 69 | 40 | 40 | 0 | 0 | 55 | 4 |
-| `jahresabschluss` | 15 | 0 | 100% | 100% | 46 | 52 | 13 | 13 | 0 | 8 | 45 | 4 |
+| `jahresabschluss` | 15 | 0 | 100% | 100% | 48 | 53 | 13 | 13 | 0 | 9 | 45 | 4 |
 | `recht` | 14 | 0 | 100% | 100% | 28 | 46 | 17 | 17 | 0 | 0 | 52 | 4 |
 | `internationale-wirtschaftsbeziehungen` | 16 | 0 | 100% | 100% | 32 | 33 | 0 | 0 | 0 | 0 | 49 | 4 |
 
@@ -46,7 +46,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `statistik` | complete | official-task-source pilot present (10); 104 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `finanzwirtschaft` | complete | official task source corpus missing or unavailable | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `mathematik` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | not achieved |
-| `jahresabschluss` | complete | official-task-source pilot present (8); 13 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | not achieved |
+| `jahresabschluss` | complete | official-task-source pilot present (9); 13 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `recht` | complete | official source docs present; no reviewed official-task-source families | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `internationale-wirtschaftsbeziehungen` | complete | official task source corpus missing or unavailable | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 
@@ -76,7 +76,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `mathematik`: official exam bank incomplete (official source docs present; no reviewed official-task-source families)
 - `mathematik`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `mathematik`: Mikro1-depth equality not certified
-- `jahresabschluss`: official exam bank incomplete (official-task-source pilot present (8); 13 document-registry placeholders still unresolved)
+- `jahresabschluss`: official exam bank incomplete (official-task-source pilot present (9); 13 document-registry placeholders still unresolved)
 - `jahresabschluss`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `jahresabschluss`: Mikro1-depth equality not certified
 - `recht`: official exam bank incomplete (official source docs present; no reviewed official-task-source families)

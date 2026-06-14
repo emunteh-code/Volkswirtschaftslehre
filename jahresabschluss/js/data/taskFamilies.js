@@ -590,6 +590,40 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
     officialTaskCoverage: 'official-task-source'
   }),
   family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a3-buchfuehrung-kontenrahmen-belege',
+    conceptId: 'buchfuehrung_orga',
+    title: 'Probeklausur Aufgabe 3: Buchführung und Kontenrahmen',
+    topic: 'Grundbuch, Hauptbuch, Nebenbücher, Kontenrahmen, Kontenplan, Beleganforderungen',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 3: drei Ebenen der Buchführung nennen, Kontenrahmen und Kontenplan unterscheiden und Anforderungen an Belege benennen. Die Musterlösung bewertet jede Teilfrage mit 2 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a3.p1.buchfuehrung-kontenrahmen',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a3.p1.buchfuehrung-belege'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Grundbuch, Hauptbuch und Nebenbücher nicht als drei Ebenen der Buchführung trennen',
+      'Kontenrahmen und Kontenplan beide nur als Kontenliste beschreiben, ohne allgemeines System und betriebsindividuelle Konkretisierung zu unterscheiden',
+      'Beleganforderungen zu allgemein als Nachweis formulieren und Datum, Betrag, Buchungstext, Nummer oder sachliche Richtigkeit nicht nennen',
+      'Die Organisationsfrage mit einer reinen Buchungssatzfrage verwechseln'
+    ],
+    gradingRubric: [
+      'Aufgabe 3 enthält 6 sichtbare Punkte',
+      'Teil a: Grundbuch, Hauptbuch und Nebenbücher nennen, 2 Punkte',
+      'Teil b: Kontenrahmen als allgemeines System und Kontenplan als betriebsindividuell unterscheiden, 2 Punkte',
+      'Teil c: Beleg mit Datum, Betrag, Buchungstext, Nummer und sachlicher Richtigkeit beschreiben, 2 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 1',
+      task: 'Aufgabe 3',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
     id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a5-anlagevermoegen-afa-verkauf',
     conceptId: 'anlagevermoegen',
     title: 'Probeklausur Aufgabe 5: Abschreibung und Anlagenverkauf',

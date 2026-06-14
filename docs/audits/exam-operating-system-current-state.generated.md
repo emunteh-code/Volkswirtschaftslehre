@@ -35,7 +35,7 @@ Local source files: **693**.
 | `statistik` | 14 | 14 | 0 | 215 | 44 | 143 | 65 | 32 | 3 | 56 | 4 | 18 | 54 | 18/18 | 0 | not achieved |
 | `finanzwirtschaft` | 19 | 19 | 0 | 282 | 57 | 39 | 71 | 56 | 3 | 76 | 4 | 12 | 38 | 12/12 | 0 | not achieved |
 | `mathematik` | 14 | 14 | 0 | 332 | 55 | 69 | 45 | 28 | 3 | 56 | 4 | 30 | 42 | 30/30 | 0 | not achieved |
-| `jahresabschluss` | 15 | 15 | 0 | 135 | 45 | 52 | 56 | 35 | 3 | 60 | 4 | 12 | 46 | 12/12 | 0 | not achieved |
+| `jahresabschluss` | 15 | 15 | 0 | 135 | 45 | 53 | 56 | 35 | 3 | 60 | 4 | 12 | 48 | 12/12 | 0 | not achieved |
 | `recht` | 14 | 14 | 0 | 305 | 52 | 46 | 58 | 39 | 3 | 56 | 4 | 17 | 28 | 17/17 | 0 | not achieved |
 | `internationale-wirtschaftsbeziehungen` | 16 | 16 | 0 | 201 | 49 | 33 | 54 | 32 | 3 | 64 | 4 | 14 | 32 | 14/14 | 0 | not achieved |
 

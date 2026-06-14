@@ -194,6 +194,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "Kontenrahmens in Kontengruppen, -arten und –unterarten.",
       fingerprint: '7071c9f389ce8711',
       confidence: 0.84
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a3.p1.buchfuehrung-kontenrahmen',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 3: Buchführung und Kontenrahmen (6 Punkte)',
+      fingerprint: 'd7f5595bf46a403b',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-9',
+      reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a3.p1.buchfuehrung-belege',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 3 – Buchführung & Belege (6 Punkte)',
+      fingerprint: '418c28d84760360e',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-9',
+      reviewedAt: '2026-06-15'
     })
   ],
   anlagevermoegen: [

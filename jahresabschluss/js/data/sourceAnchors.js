@@ -630,6 +630,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.95,
       reviewedBy: 'codex-official-task-review-ja-pass-4',
       reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.tutorium-kapitel3.a2.p1.erfolgskonten-guv',
+      sourceId: 'jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel3',
+      sourcePath: 'Tutorium/Tutorium_Kapitel3.pdf',
+      publicLabel: 'Tutorium Kapitel 3',
+      page: 1,
+      section: 'Aufgabe 2: Erfolgskonten und GuV-Abschluss (10 Punkte)',
+      fingerprint: '909fc4616d2d711f',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-tutorium-k3-pass-2',
+      reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'jahresabschluss.tutorium-kapitel3.loesung-a2.p1-p2.erfolgskonten-guv',
+      sourceId: 'jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel3',
+      sourcePath: 'Tutorium/Tutorium_Kapitel3.pdf',
+      publicLabel: 'Tutorium Kapitel 3',
+      page: '1-2',
+      section: 'Lösung zu Aufgabe 2',
+      fingerprint: 'abb41a35b9ed1d8a',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-tutorium-k3-pass-2',
+      reviewedAt: '2026-06-15'
     })
   ]
 });

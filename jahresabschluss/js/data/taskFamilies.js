@@ -891,6 +891,40 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.tutorium-kapitel3-a2-erfolgskonten-guv',
+    conceptId: 'erfolgsrechnung',
+    title: 'Tutorium Kapitel 3 Aufgabe 2: Erfolgskonten und GuV-Abschluss',
+    topic: 'Aufwandskonten, Ertragskonten, GuV-Abschluss, Eigenkapitalabschluss, Gehaltsaufwand, Zinserträge',
+    method: 'Offizielles Tutorium Kapitel 3, Aufgabe 2: Aufwands- und Ertragskonten unterscheiden, den Abschluss von Erfolgskonten über das GuV-Konto erklären und die Zahlung von Gehältern sowie den Geldeingang aus Zinserträgen buchen. Die Lösung bewertet die Teilfragen mit 3, 4 und 3 Punkten; der Lösungsteil c steht nach dem Seitenwechsel auf Seite 2. Quelle und Lösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.tutorium-kapitel3.a2.p1.erfolgskonten-guv',
+      'jahresabschluss.tutorium-kapitel3.loesung-a2.p1-p2.erfolgskonten-guv'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Aufwandskonten und Ertragskonten nur als Kontoarten benennen, ohne Eigenkapitalminderung bzw. Eigenkapitalmehrung zu erklären',
+      'Beim Abschluss der Erfolgskonten den Saldo der GuV nicht ins Eigenkapital übertragen',
+      'Gehaltszahlung als Bank an Gehaltsaufwand statt Gehaltsaufwand an Bank buchen',
+      'Zinsertragseingang als Zinserträge an Bank statt Bank an Zinserträge buchen'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 enthält 10 sichtbare Punkte',
+      'Teil a: Aufwandskonten als Werteverzehr/Eigenkapitalminderung und Ertragskonten als Wertezuwachs/Eigenkapitalmehrung erklären, 3 Punkte',
+      'Teil b: Erfolgskonten über GuV abschließen und den GuV-Saldo auf Eigenkapital übertragen, 4 Punkte',
+      'Teil c: 3.000 € Gehaltsaufwand an Bank und 500 € Bank an Zinserträge buchen, 3 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Tutorium/Tutorium_Kapitel3.pdf',
+      page: 'Aufgabe Seite 1; Lösung Seiten 1-2',
+      task: 'Aufgabe 2',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

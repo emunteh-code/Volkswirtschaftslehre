@@ -172,6 +172,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       section: "AB                                                                                           AB",
       fingerprint: 'f4aa4d69fa0c14dd',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a4.p1.buchungstechnik-guv',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 4: Buchungstechnik und GuV (6 Punkte)',
+      fingerprint: '907b63780b0693bb',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-10',
+      reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a4.p1.buchung-guv',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 4 – Buchung & GuV (6 Punkte)',
+      fingerprint: '9325dce88829a17f',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-10',
+      reviewedAt: '2026-06-15'
     })
   ],
   buchfuehrung_orga: [

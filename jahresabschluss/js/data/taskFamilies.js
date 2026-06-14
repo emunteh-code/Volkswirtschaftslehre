@@ -624,6 +624,40 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
     officialTaskCoverage: 'official-task-source'
   }),
   family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a4-buchungstechnik-guv',
+    conceptId: 'buchen_konten',
+    title: 'Probeklausur Aufgabe 4: Buchungstechnik und GuV',
+    topic: 'Buchungssatz Barkauf, Aufwandskonten, Ertragskonten, Abschluss der Erfolgskonten',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 4: Barkauf eines PCs für 2.000 € buchen, je zwei typische Aufwands- und Ertragskonten nennen und den Abschluss der Erfolgskonten erklären. Die Musterlösung bewertet jede Teilfrage mit 2 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a4.p1.buchungstechnik-guv',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a4.p1.buchung-guv'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Barkauf des PCs als Aufwand statt als BGA-Aktivierung buchen',
+      'Soll/Haben vertauschen und Kasse im Soll statt im Haben erfassen',
+      'Aufwands- und Ertragskonten mit Bestandskonten verwechseln',
+      'Abschluss der Erfolgskonten beim GuV-Konto stoppen lassen und die Überleitung ins Eigenkapital vergessen'
+    ],
+    gradingRubric: [
+      'Aufgabe 4 enthält 6 sichtbare Punkte',
+      'Teil a: 0840 BGA an 1000 Kasse 2.000 € buchen, 2 Punkte',
+      'Teil b: typische Aufwandskonten wie Miete und Gehälter sowie Ertragskonten wie Umsatzerlöse und Zinsen nennen, 2 Punkte',
+      'Teil c: Erfolgskonten schließen über GuV und anschließend ins Eigenkapital ab, 2 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 1',
+      task: 'Aufgabe 4',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
     id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a5-anlagevermoegen-afa-verkauf',
     conceptId: 'anlagevermoegen',
     title: 'Probeklausur Aufgabe 5: Abschreibung und Anlagenverkauf',

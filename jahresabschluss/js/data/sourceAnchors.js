@@ -196,6 +196,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.95,
       reviewedBy: 'codex-official-task-review-ja-pass-10',
       reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'jahresabschluss.tutorium-kapitel3.a1.p1.bestandskonten',
+      sourceId: 'jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel3',
+      sourcePath: 'Tutorium/Tutorium_Kapitel3.pdf',
+      publicLabel: 'Tutorium Kapitel 3',
+      page: 1,
+      section: 'Aufgabe 1: Buchen auf Bestandskonten (10 Punkte)',
+      fingerprint: '2f958dad5d72823c',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-tutorium-k3-pass-1',
+      reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'jahresabschluss.tutorium-kapitel3.loesung-a1.p1.bestandskonten',
+      sourceId: 'jahresabschluss-tutorial-jahresabschluss-tutorium-tutorium-kapitel3',
+      sourcePath: 'Tutorium/Tutorium_Kapitel3.pdf',
+      publicLabel: 'Tutorium Kapitel 3',
+      page: 1,
+      section: 'Lösung zu Aufgabe 1',
+      fingerprint: '4b71106ee744136b',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-tutorium-k3-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   buchfuehrung_orga: [

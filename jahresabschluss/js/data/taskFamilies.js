@@ -857,6 +857,40 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-09'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'jahresabschluss.official-task.tutorium-kapitel3-a1-bestandskonten',
+    conceptId: 'buchen_konten',
+    title: 'Tutorium Kapitel 3 Aufgabe 1: Buchen auf Bestandskonten',
+    topic: 'Aktivkonten, Passivkonten, Aktivtausch, Passivtausch, Aktiv-Passiv-Mehrung, Aktiv-Passiv-Minderung, Rohstoff-Barkauf',
+    method: 'Offizielles Tutorium Kapitel 3, Aufgabe 1: Aktiv- und Passivkonten nach Buchung und Saldo unterscheiden, Beispiele für vier bilanzielle Wertbewegungen nennen und den Barkauf von Rohstoffen im Wert von 2.000 € buchen. Die Tutoriumslösung bewertet die Teilfragen mit 3, 4 und 3 Punkten. Quelle und Lösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.tutorium-kapitel3.a1.p1.bestandskonten',
+      'jahresabschluss.tutorium-kapitel3.loesung-a1.p1.bestandskonten'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 10,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Aktivkonten und Passivkonten mit gleicher Soll/Haben-Logik behandeln',
+      'Saldo-Seite bei Aktiv- und Passivkonten vertauschen',
+      'Aktivtausch, Passivtausch, Aktiv-Passiv-Mehrung und Aktiv-Passiv-Minderung nicht sauber trennen',
+      'Barkauf von Rohstoffen als Rohstoffe an Verbindlichkeiten statt Rohstoffe an Kasse buchen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält 10 sichtbare Punkte',
+      'Teil a: Aktivkonten mit Zugängen im Soll, Abgängen im Haben und Saldo im Haben sowie Passivkonten spiegelbildlich erklären, 3 Punkte',
+      'Teil b: je ein Beispiel für Aktivtausch, Passivtausch, Aktiv-Passiv-Mehrung und Aktiv-Passiv-Minderung nennen, 4 Punkte',
+      'Teil c: Barkauf von Rohstoffen als 2.000 € Rohstoffe an Kasse buchen, 3 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Tutorium/Tutorium_Kapitel3.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

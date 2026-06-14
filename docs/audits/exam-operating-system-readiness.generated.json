@@ -325,10 +325,10 @@
       "sourceEligibleConceptsWithSourceAnchors": 15,
       "sourceRefCoveragePct": 100,
       "sourceAnchorCoveragePct": 100,
-      "sourceAnchors": 50,
-      "taskFamilies": 54,
-      "sourceGroundedTaskFamilies": 53,
-      "officialTaskSourceFamilies": 10,
+      "sourceAnchors": 52,
+      "taskFamilies": 55,
+      "sourceGroundedTaskFamilies": 54,
+      "officialTaskSourceFamilies": 11,
       "officialDocumentRegistryFamilies": 13,
       "moduleMismatchTaskFamilies": 0,
       "officialFormulaCards": 45,
@@ -336,7 +336,7 @@
       "anchorComplete": true,
       "anchorStatus": "complete",
       "examBankComplete": false,
-      "examBankStatus": "official-task-source pilot present (10); 13 document-registry placeholders still unresolved",
+      "examBankStatus": "official-task-source pilot present (11); 13 document-registry placeholders still unresolved",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
       "adaptiveReady": false,
@@ -520,7 +520,7 @@
     },
     {
       "module": "jahresabschluss",
-      "reason": "official exam bank incomplete (official-task-source pilot present (10); 13 document-registry placeholders still unresolved)"
+      "reason": "official exam bank incomplete (official-task-source pilot present (11); 13 document-registry placeholders still unresolved)"
     },
     {
       "module": "jahresabschluss",

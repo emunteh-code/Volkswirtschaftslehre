@@ -104,6 +104,30 @@ export const JAHRESABSCHLUSS_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.95,
       reviewedBy: 'codex-official-task-review-ja-pass-7',
       reviewedAt: '2026-06-09'
+    }),
+    anchor({
+      id: 'jahresabschluss.probeklausur-jahresabschluss.a2.p1.massgeblichkeit-latente-steuern',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 2: Maßgeblichkeitsprinzip & latente Steuern (6 Punkte)',
+      fingerprint: '9800d3bb12289879',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-8',
+      reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a2.p1.massgeblichkeit-latente-steuern',
+      sourceId: 'jahresabschluss-exam-jahresabschluss-probeklausur-musterloesung-probeklausur-jahresabschluss',
+      sourcePath: 'Probeklausur/Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      publicLabel: 'Musterlösung Probeklausur Jahresabschluss',
+      page: 1,
+      section: 'Aufgabe 2 – Maßgeblichkeit & latente Steuern (6 Punkte)',
+      fingerprint: '9e17528cad5e8d66',
+      confidence: 0.95,
+      reviewedBy: 'codex-official-task-review-ja-pass-8',
+      reviewedAt: '2026-06-15'
     })
   ],
   inventur_inventar_bilanzansatz: [

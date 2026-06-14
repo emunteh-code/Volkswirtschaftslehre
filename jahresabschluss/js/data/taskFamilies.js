@@ -557,6 +557,39 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
     officialTaskCoverage: 'official-task-source'
   }),
   family({
+    id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a2-massgeblichkeit-latente-steuern',
+    conceptId: 'gob_rechtsgrundlagen',
+    title: 'Probeklausur Aufgabe 2: Maßgeblichkeitsprinzip & latente Steuern',
+    topic: 'Maßgeblichkeitsprinzip, Steuerbilanz, steuerliches Aktivierungsverbot, aktive latente Steuern',
+    method: 'Offizielle Probeklausur Jahresabschluss, Aufgabe 2: Maßgeblichkeitsprinzip samt Ausnahme benennen und erklären, wann aktive latente Steuern entstehen. Die Musterlösung bewertet Maßgeblichkeit und Ausnahme mit 3 Punkten sowie aktive latente Steuern mit 3 Punkten. Quelle und Musterlösung wurden per nativer Textextraktion und visuellem Seitenrender gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: [
+      'jahresabschluss.probeklausur-jahresabschluss.a2.p1.massgeblichkeit-latente-steuern',
+      'jahresabschluss.musterloesung-probeklausur-jahresabschluss.a2.p1.massgeblichkeit-latente-steuern'
+    ],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 6,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Maßgeblichkeit nur als allgemeine Verbindung von Handels- und Steuerbilanz beschreiben, ohne Handelsbilanz als Grundlage der Steuerbilanz zu nennen',
+      'Die Ausnahme steuerliches Aktivierungsverbot nach § 5 Abs. 2 EStG auslassen',
+      'Aktive latente Steuern mit passiven latenten Steuern verwechseln',
+      'Den temporären Unterschied handelsrechtlicher Aufwand, steuerlich nicht, nicht als Auslöser aktiver latenter Steuern erkennen'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 enthält 6 sichtbare Punkte',
+      'Teil a: Maßgeblichkeit als Handelsbilanz -> Grundlage für Steuerbilanz nach § 5 EStG und Ausnahme steuerliches Aktivierungsverbot nach § 5 Abs. 2 EStG, 3 Punkte',
+      'Teil b: aktive latente Steuer entsteht bei temporärem Fall handelsrechtlich Aufwand, steuerlich nicht, 3 Punkte'
+    ],
+    currentCoverage: {
+      source: 'Jahresabschluss/Probeklausur/Probeklausur_Jahresabschluss.pdf + Musterloesung_Probeklausur_Jahresabschluss.pdf',
+      page: 'jeweils Seite 1',
+      task: 'Aufgabe 2',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
     id: 'jahresabschluss.official-task.probeklausur-jahresabschluss-a5-anlagevermoegen-afa-verkauf',
     conceptId: 'anlagevermoegen',
     title: 'Probeklausur Aufgabe 5: Abschreibung und Anlagenverkauf',

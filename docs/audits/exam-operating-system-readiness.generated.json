@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09",
+  "generatedAt": "2026-06-15",
   "definitionOfDone": "A module is final only when sourceComplete, pageIndexed, anchorComplete, examBankComplete, provenanceComplete, adaptiveReady, and mikro1DepthAchieved are all true. Exam-bank completeness requires reviewed official-task-source families, not only portal simulations or document registry metadata.",
   "modules": [
     {
@@ -325,10 +325,10 @@
       "sourceEligibleConceptsWithSourceAnchors": 15,
       "sourceRefCoveragePct": 100,
       "sourceAnchorCoveragePct": 100,
-      "sourceAnchors": 44,
-      "taskFamilies": 51,
-      "sourceGroundedTaskFamilies": 50,
-      "officialTaskSourceFamilies": 7,
+      "sourceAnchors": 46,
+      "taskFamilies": 52,
+      "sourceGroundedTaskFamilies": 51,
+      "officialTaskSourceFamilies": 8,
       "officialDocumentRegistryFamilies": 13,
       "moduleMismatchTaskFamilies": 0,
       "officialFormulaCards": 45,
@@ -336,7 +336,7 @@
       "anchorComplete": true,
       "anchorStatus": "complete",
       "examBankComplete": false,
-      "examBankStatus": "official-task-source pilot present (7); 13 document-registry placeholders still unresolved",
+      "examBankStatus": "official-task-source pilot present (8); 13 document-registry placeholders still unresolved",
       "provenanceComplete": true,
       "provenanceStatus": "complete",
       "adaptiveReady": false,
@@ -520,7 +520,7 @@
     },
     {
       "module": "jahresabschluss",
-      "reason": "official exam bank incomplete (official-task-source pilot present (7); 13 document-registry placeholders still unresolved)"
+      "reason": "official exam bank incomplete (official-task-source pilot present (8); 13 document-registry placeholders still unresolved)"
     },
     {
       "module": "jahresabschluss",

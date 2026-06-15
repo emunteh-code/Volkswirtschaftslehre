@@ -540,6 +540,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Moderne Konzepte der Geldpolitik",
       fingerprint: '187e1d332ecdbc23',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt7.a3.p1-taylor-rule-demand-shock',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-7',
+      sourcePath: 'Übungen/Uebungsblatt_7.pdf',
+      publicLabel: 'Uebungsblatt_7',
+      page: 1,
+      section: 'Aufgabe 3: Taylor-Regel',
+      fingerprint: 'cb59fac5867ef5853993ede4c9ea9f93d3f297a966ddaf1b5e96c1ae01265025',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-7-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   inflation_targeting: [

@@ -25,7 +25,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `mikro1` | 33 | 0 | 100% | 100% | 110 | 95 | 18 | 18 | 0 | 10 | 100 | 4 |
 | `mikro2` | 15 | 3 | 100% | 100% | 72 | 51 | 0 | 0 | 0 | 0 | 59 | 4 |
 | `makro1` | 14 | 0 | 100% | 100% | 36 | 62 | 28 | 28 | 1 | 4 | 44 | 4 |
-| `makro2` | 30 | 0 | 100% | 100% | 73 | 96 | 23 | 22 | 0 | 13 | 110 | 4 |
+| `makro2` | 30 | 0 | 100% | 100% | 74 | 97 | 23 | 22 | 0 | 14 | 110 | 4 |
 | `oekonometrie` | 32 | 0 | 100% | 100% | 65 | 99 | 33 | 33 | 0 | 1 | 101 | 4 |
 | `statistik` | 14 | 0 | 100% | 100% | 54 | 143 | 104 | 104 | 0 | 10 | 44 | 4 |
 | `finanzwirtschaft` | 19 | 0 | 100% | 100% | 38 | 39 | 0 | 0 | 0 | 0 | 57 | 4 |
@@ -41,7 +41,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 | `mikro1` | complete | official-task-source pilot present (10); 18 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | benchmark cockpit; official task-source review pending |
 | `mikro2` | complete | official task source corpus missing or unavailable | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `makro1` | complete | official-task-source pilot present (4); 28 document-registry placeholders still unresolved; 1 module-mismatch document(s) need review | complete | mastery items present; exam-bank or anchor gate open | not achieved |
-| `makro2` | complete | official-task-source pilot present (13); 22 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
+| `makro2` | complete | official-task-source pilot present (14); 22 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
 | `oekonometrie` | complete | official-task-source pilot present (1); 33 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | near, but official task-source review pending |
 | `statistik` | complete | official-task-source pilot present (10); 104 document-registry placeholders still unresolved | complete | mastery items present; exam-bank or anchor gate open | not achieved |
 | `finanzwirtschaft` | complete | official task source corpus missing or unavailable | complete | mastery items present; exam-bank or anchor gate open | not achieved |
@@ -61,7 +61,7 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 - `makro1`: official exam bank incomplete (official-task-source pilot present (4); 28 document-registry placeholders still unresolved; 1 module-mismatch document(s) need review)
 - `makro1`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `makro1`: Mikro1-depth equality not certified
-- `makro2`: official exam bank incomplete (official-task-source pilot present (13); 22 document-registry placeholders still unresolved)
+- `makro2`: official exam bank incomplete (official-task-source pilot present (14); 22 document-registry placeholders still unresolved)
 - `makro2`: adaptive mastery not evidence-based (mastery items present; exam-bank or anchor gate open)
 - `makro2`: Mikro1-depth equality not certified
 - `oekonometrie`: official exam bank incomplete (official-task-source pilot present (1); 33 document-registry placeholders still unresolved)

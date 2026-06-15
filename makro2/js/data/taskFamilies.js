@@ -1425,6 +1425,39 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-7-a3-taylor-rule-demand-shock',
+    conceptId: 'taylor_regel',
+    title: 'Uebungsblatt 7 Aufgabe 3: Taylor-Regel bei Nachfrage- und Zielkonflikten',
+    topic: 'Taylor-Regel, Inflationsabweichung, Arbeitslosigkeitsabweichung, negativer Nachfrageschock, Zielkonflikt und Preisstabilitätsmandat',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 7, Aufgabe 3: die Taylor-Regel it=i*+alpha(pi_t-pi*)-beta(u_t-u_n) anwenden, Reaktion auf einen negativen Nachfrageschock beschreiben, die Situation pi_t>pi* und u_t>u_n beurteilen und erklären, wie sich die Regel bei ausschließlichem Preisstabilitätsziel verändert. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt7.a3.p1-taylor-rule-demand-shock'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 25,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Vorzeichen des Arbeitslosigkeitsterms in der Taylor-Regel falsch lesen',
+      'Nachfrageschock nur verbal beschreiben, ohne die Zentralbankreaktion aus der Regel abzuleiten',
+      'Gleichzeitige Abweichungen pi_t>pi* und u_t>u_n als eindeutige Richtung behandeln, ohne den Zielkonflikt zu erklären',
+      'Preisstabilitätsmandat nicht als Änderung der Reaktionsregel formulieren',
+      'u_t und u_n mit Inflationsgrößen vermischen'
+    ],
+    gradingRubric: [
+      'Aufgabe 3 enthält sichtbare Teilaufgaben a-c',
+      'a) Auswirkungen eines negativen Nachfrageschocks beschreiben und Zentralbankreaktion erklären',
+      'b) Situation pi_t>pi* und u_t>u_n gemäß Taylor-Regel beurteilen und kurz erklären',
+      'c) Veränderung der Taylor-Regel bei ausschließlichem Preisstabilitätsziel und optimale Strategie für Fall b) angeben',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_7.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 3, Teile a-c',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

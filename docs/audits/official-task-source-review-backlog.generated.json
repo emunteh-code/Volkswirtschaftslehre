@@ -5,7 +5,7 @@
     "officialTaskDocuments": 276,
     "modulesWithTaskCorpus": 8,
     "modulesMissingTaskCorpus": 3,
-    "officialTaskSourceFamilies": 48,
+    "officialTaskSourceFamilies": 50,
     "weakPages": 25,
     "taskSignalPages": 989,
     "moduleMismatchDocuments": 0
@@ -78,7 +78,7 @@
     {
       "module": "makro2",
       "officialTaskDocuments": 23,
-      "officialTaskSourceFamilies": 11,
+      "officialTaskSourceFamilies": 13,
       "documentRegistryFamilies": 22,
       "pageCount": 40,
       "weakPageCount": 0,

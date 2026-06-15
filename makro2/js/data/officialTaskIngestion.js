@@ -21,7 +21,8 @@ export const MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'makro2.official-task.uebungsblatt-4-a1-currency-board-real-exchange-rate',
   'makro2.official-task.uebungsblatt-5-a1-barro-gordon-commitment',
   'makro2.official-task.uebungsblatt-6-a1-debt-repayment-stabilization',
-  'makro2.official-task.uebungsblatt-6-a2-debt-monetization-is-lm-pc'
+  'makro2.official-task.uebungsblatt-6-a2-debt-monetization-is-lm-pc',
+  'makro2.official-task.uebungsblatt-7-a3-taylor-rule-demand-shock'
 ]);
 
 export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -98,6 +99,15 @@ export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
       ],
       reviewedAt: '2026-06-15',
       reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-6-pass-1'
+    },
+    {
+      path: 'Makroökonomik II/Übungen/Uebungsblatt_7.pdf',
+      reviewedPages: [1],
+      reviewedTaskFamilies: [
+        'makro2.official-task.uebungsblatt-7-a3-taylor-rule-demand-shock'
+      ],
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-7-pass-1'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',

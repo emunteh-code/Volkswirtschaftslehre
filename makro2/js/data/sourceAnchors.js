@@ -784,6 +784,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.94,
       reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
       reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt6.a1.p1-debt-repayment-stabilization',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-6',
+      sourcePath: 'Übungen/Uebungsblatt_6.pdf',
+      publicLabel: 'Uebungsblatt_6',
+      page: 1,
+      section: 'Aufgabe 1: Rückzahlung der Staatsschulden',
+      fingerprint: 'f682093ccd5e9aa80efc93149d9b474a91fb7d66f161221b8500784cf05d59cf',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-6-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   ricardianisch: [
@@ -828,6 +840,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Die Gefahren sehr hoher Staatsverschuldung",
       fingerprint: 'ae4245a7c15a9886',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt6.a2.p2-debt-monetization-is-lm-pc',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-6',
+      sourcePath: 'Übungen/Uebungsblatt_6.pdf',
+      publicLabel: 'Uebungsblatt_6',
+      page: 2,
+      section: 'Aufgabe 2: Monetarisierung der Staatsschuld und hohe Inflation',
+      fingerprint: 'f682093ccd5e9aa80efc93149d9b474a91fb7d66f161221b8500784cf05d59cf',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-6-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ]
 });

@@ -1354,6 +1354,77 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-6-a1-debt-repayment-stabilization',
+    conceptId: 'schuldenquote_dynamik',
+    title: 'Uebungsblatt 6 Aufgabe 1: Rückzahlung der Staatsschulden und Schuldenquote',
+    topic: 'Staatliche Budgetrestriktion, einmalige Steuersenkung, Schuldentilgung, Primärdefizit, Steuererhöhung, Schuldenquote und Stabilisierung',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 6, Aufgabe 1: mit der staatlichen Budgetrestriktion Bt=(1+r)Bt-1+Gt-Tt eine einmalige Steuersenkung, spätere Schuldentilgung in t=4 oder t=10, ökonomischen Vergleich, dauerhafte Stabilisierung über Steueranpassung, Schuldenquote in t-1 und t sowie die Gleichung zur Veränderung der Schuldenquote analysieren. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt6.a1.p1-debt-repayment-stabilization'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 45,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Primärdefizit mit Zinszahlungen vermischen',
+      'Tilgungszeitpunkt t=4 und t=10 ohne Zinseszinsvergleich behandeln',
+      'T0, T1 und spätere zusätzliche Steuereinnahmen nicht sauber periodisieren',
+      'Schuldenstand B mit Schuldenquote B/Y verwechseln',
+      'r, g und P inkonsistent in nominalen und realen Größen verwenden'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a.i-a.iii und b.i-b.iii',
+      'a.i) zusätzliche Steuereinnahmen in t=4 zur Tilgung berechnen',
+      'a.ii) Steuereinnahmen in t=10 zur Tilgung berechnen',
+      'a.iii) Ergebnisse ökonomisch vergleichen',
+      'b.i) nötige Steuererhöhung zur Stabilisierung der Staatsverschuldung berechnen',
+      'b.ii) Schuldenquote in t-1 und t berechnen und Veränderung begründen',
+      'b.iii) Gleichung zur Veränderung der Schuldenquote angeben und ökonomisch interpretieren',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_6.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a.i-a.iii und b.i-b.iii',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-6-a2-debt-monetization-is-lm-pc',
+    conceptId: 'schuldenfinanzierung_monetarisierung',
+    title: 'Uebungsblatt 6 Aufgabe 2: Monetarisierung der Staatsschuld im IS-LM-PC-Modell',
+    topic: 'Finanzierung zusätzlicher Staatsausgaben über Kredite oder Geldschöpfung, IS-LM-PC-Modell, kurzfristige und mittelfristige Effekte auf Produktion, Zinssatz und Inflation',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 6, Aufgabe 2: zwei Finanzierungsalternativen für zusätzliche Staatsausgaben grafisch im IS-LM-PC-Modell vergleichen, kurz- und mittelfristige Auswirkungen auf Produktion, Zinssatz und Inflation zeigen und die Mechanismen erläutern. Ausgangspunkt ist ein mittelfristiges Gleichgewicht. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt6.a2.p2-debt-monetization-is-lm-pc'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 35,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Kreditfinanzierung und Geldschöpfung im gleichen Diagramm ohne getrennte Wirkungskanäle darstellen',
+      'Kurzfristige von mittelfristigen Effekten nicht trennen',
+      'Inflation im PC-Teil ohne Anpassungsmechanismus behandeln',
+      'Zinssatzwirkung im LM-Kanal auslassen',
+      'Ausgangslage als nicht mittelfristiges Gleichgewicht zeichnen'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 verlangt eine grafische Analyse anhand des IS-LM-PC-Modells',
+      'Kreditfinanzierung als erste Alternative darstellen',
+      'Geldschöpfung bzw. Monetarisierung der Staatsschulden als zweite Alternative darstellen',
+      'Kurzfristige Auswirkungen auf Produktion, Zinssatz und Inflation zeigen',
+      'Mittelfristige Auswirkungen auf Produktion, Zinssatz und Inflation zeigen',
+      'Mechanismen kurz erläutern',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_6.pdf',
+      page: 'Seite 2',
+      task: 'Aufgabe 2',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

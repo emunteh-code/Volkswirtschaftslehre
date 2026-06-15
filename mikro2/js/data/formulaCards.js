@@ -536,7 +536,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Gegenwartswert-Budget — Intertemporale Budgetbeschränkung in Gegenwartswerten.",
     relatedTaskFamilies: ["mikro2.taskfamily.intertemporaler_konsum-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.intertemporaler_konsum.vl12.p01.programm","mikro2.intertemporaler_konsum.vl12.p05.budget"]
+    anchorIds: ["mikro2.intertemporaler_konsum.vl12.p05.budget","mikro2.intertemporaler_konsum.vl12.p08.present-future-value"]
   }),
   card({
     id: 'mikro2.intertemporaler_konsum.zukunftswert_budget',
@@ -562,19 +562,19 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Zukunftswert-Budget — Äquivalente Schreibweise in Zukunftswerten.",
     relatedTaskFamilies: ["mikro2.taskfamily.intertemporaler_konsum-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.intertemporaler_konsum.vl12.p01.programm","mikro2.intertemporaler_konsum.vl12.p05.budget"]
+    anchorIds: ["mikro2.intertemporaler_konsum.vl12.p05.budget","mikro2.intertemporaler_konsum.vl12.p08.present-future-value"]
   }),
   card({
     id: 'mikro2.intertemporaler_konsum.euler_gleichung',
     conceptId: 'intertemporaler_konsum',
     officialNotation: "intertemporaler_konsum",
-    displayFormula: "$$u_1'(c_1^*)=\\frac{1}{1+r}u_2'(c_2^*)$$",
-    intuition: "Gleichgewichtsbedingung bei additiver Nutzenfunktion.",
+    displayFormula: "$$\\frac{\\partial u/\\partial c_1}{\\partial u/\\partial c_2}=1+r$$",
+    intuition: "GRS des Gegenwartskonsums entspricht dem relativen Preis.",
     derivationSteps: [
         {
             "label": "Euler-Gleichung",
             "text": "Intertemporaler Konsum",
-            "math": "$$u_1'(c_1^*)=\\frac{1}{1+r}u_2'(c_2^*)$$"
+            "math": "$$\\frac{\\partial u/\\partial c_1}{\\partial u/\\partial c_2}=1+r$$"
         },
         {
             "label": "Anwendung",
@@ -585,10 +585,10 @@ export const FORMULA_CARDS = Object.freeze([
     assumptions: ["Notation wie in der Vorlesung","Zulässigkeitsbereich der Aufgabe beachten"],
     appliesWhen: ["Klausuraufgaben zu intertemporaler_konsum","Euler-Gleichung"],
     failsWhen: ["Voraussetzungen der VL-Ableitung verletzt","falsche Formel für den Aufgabentyp gewählt"],
-    examShortcut: "Merke: Euler-Gleichung — Gleichgewichtsbedingung bei additiver Nutzenfunktion.",
+    examShortcut: "Merke: Euler-Gleichung — GRS des Gegenwartskonsums entspricht dem relativen Preis.",
     relatedTaskFamilies: ["mikro2.taskfamily.intertemporaler_konsum-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.intertemporaler_konsum.vl12.p01.programm","mikro2.intertemporaler_konsum.vl12.p05.budget"]
+    anchorIds: ["mikro2.intertemporaler_konsum.vl12.p11.optimum-foc"]
   }),
   card({
     id: 'mikro2.unsicherheit_versicherung.erwartungsnutzen',
@@ -1249,4 +1249,3 @@ export const FORMULA_CARDS_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

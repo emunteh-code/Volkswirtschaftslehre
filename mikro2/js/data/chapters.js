@@ -778,8 +778,9 @@ export const CONTENT = {
 
 
 <h4 class="theory-subsection-title">Optimierung mit Nutzen $u(c_1,c_2)$</h4>
-<p>Bei additiver Nutzenfunktion $u(c_1,c_2)=u_1(c_1)+u_2(c_2)$ liefert die tangential optimale Konsumkombination die Euler-Gleichung: Der Grenznutzen heute muss mit dem diskontierten Grenznutzen morgen im Gleichgewicht übereinstimmen.</p>
-      <div class="math-block">$$u_1'(c_1^*)=\frac{1}{1+r}u_2'(c_2^*)$$</div>
+<p>Die Vorlesung formuliert die Optimalitätsbedingung als Gleichheit von Grenzrate der Substitution und relativem Preis des Gegenwartskonsums.</p>
+      <div class="math-block">$$\frac{\partial u/\partial c_1}{\partial u/\partial c_2}=1+r$$</div>
+      <p>Bei additiver Nutzenfunktion $u(c_1,c_2)=u_1(c_1)+u_2(c_2)$ entspricht das $u_1'(c_1^*)=(1+r)u_2'(c_2^*)$.</p>
       <p>Bei logarithmischem Nutzen $u_i(c)=\ln c_i$ folgt unmittelbar $c_2^*=(1+r)c_1^*$: Konsum wächst mit dem Zinsfaktor.</p>
 
 
@@ -834,7 +835,7 @@ export const CONTENT = {
     formeln: [
       { label: 'Gegenwartswert-Budget', eq: String.raw`$$c_1+\frac{c_2}{1+r}=m_1+\frac{m_2}{1+r}$$`, desc: 'Intertemporale Budgetbeschränkung in Gegenwartswerten.' },
       { label: 'Zukunftswert-Budget', eq: String.raw`$$(1+r)c_1+c_2=(1+r)m_1+m_2$$`, desc: 'Äquivalente Schreibweise in Zukunftswerten.' },
-      { label: 'Euler-Gleichung', eq: String.raw`$$u_1'(c_1^*)=\frac{1}{1+r}u_2'(c_2^*)$$`, desc: 'Gleichgewichtsbedingung bei additiver Nutzenfunktion.' }
+      { label: 'Euler-Gleichung', eq: String.raw`$$\frac{\partial u/\partial c_1}{\partial u/\partial c_2}=1+r$$`, desc: 'GRS des Gegenwartskonsums entspricht dem relativen Preis.' }
     ],
     aufgaben: [
       {
@@ -849,7 +850,7 @@ export const CONTENT = {
         text: String.raw`Logarithmischer Nutzen $u(c_1,c_2)=\ln c_1+\ln c_2$, $m_1=80$, $m_2=0$, $r=25\%$. Bestimmen Sie $c_1^*$ und $c_2^*$ mit Budget und Euler-Gleichung.`,
         steps: [
           { text: String.raw`Budget in GW:`, eq: String.raw`c_1+\frac{c_2}{1{,}25}=80` },
-          { text: String.raw`Euler: $1/c_1^*=1/(1{,}25)c_2^*$.`, eq: String.raw`c_2^*=1{,}25c_1^*` },
+          { text: String.raw`Euler: $(1/c_1^*)/(1/c_2^*)=1{,}25$.`, eq: String.raw`c_2^*=1{,}25c_1^*` },
           { text: String.raw`Einsetzen:`, eq: String.raw`c_1^*+\frac{1{,}25c_1^*}{1{,}25}=80 \Rightarrow 2c_1^*=80 \Rightarrow c_1^*=40,\; c_2^*=50` }
         ],
         result: String.raw`$c_1^*=40$, $c_2^*=50$. Der Haushalt spart in die Zukunft, weil Perioden-2-Einkommen fehlt und der Zins Konsumverschiebung belohnt.`

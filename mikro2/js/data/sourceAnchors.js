@@ -11,8 +11,8 @@
 // docs/audits/2026-06-03-mikro2-source-metadata-readiness-pass.md). Anchor
 // id strings keep their historical pNN label for stable cross-references in
 // taskFamilies.js / formulaCards.js; locator.page is the verified truth.
-const REVIEWED_AT = '2026-06-03';
-const REVIEWED_BY = 'codex-source-verify-pass-2026-06-03';
+const DEFAULT_REVIEWED_AT = '2026-06-03';
+const DEFAULT_REVIEWED_BY = 'codex-source-verify-pass-2026-06-03';
 
 function anchor({
   id,
@@ -22,7 +22,9 @@ function anchor({
   page,
   section,
   fingerprint,
-  confidence = 0.88
+  confidence = 0.88,
+  reviewedAt = DEFAULT_REVIEWED_AT,
+  reviewedBy = DEFAULT_REVIEWED_BY
 }) {
   return {
     id,
@@ -38,8 +40,8 @@ function anchor({
     },
     quoteFingerprint: `sha256:${fingerprint}`,
     confidence,
-    reviewedBy: REVIEWED_BY,
-    reviewedAt: REVIEWED_AT
+    reviewedBy,
+    reviewedAt
   };
 }
 
@@ -252,10 +254,60 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-12',
       sourcePath: 'Vorlesungsfolien/Mikro2_12.pdf',
       publicLabel: 'Vorlesung 12',
-      page: 5,
+      page: 6,
       section: 'Intertemporale Budgetgleichung',
-      fingerprint: '3f87bdd6bbf165de',
-      confidence: 0.9
+      fingerprint: 'c851f638034f90fb',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.intertemporaler_konsum.vl12.p07.relative-price',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-12',
+      sourcePath: 'Vorlesungsfolien/Mikro2_12.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 7,
+      section: 'Zinsfaktor als relativer Preis des Gegenwartskonsums',
+      fingerprint: 'ce15a8b3a07984fd',
+      confidence: 0.94,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.intertemporaler_konsum.vl12.p08.present-future-value',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-12',
+      sourcePath: 'Vorlesungsfolien/Mikro2_12.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 8,
+      section: 'Gegenwartswert- und Zukunftswertdarstellung der intertemporalen Budgetgleichung',
+      fingerprint: 'ed960bc6d2226aaa',
+      confidence: 0.95,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.intertemporaler_konsum.vl12.p11.optimum-foc',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-12',
+      sourcePath: 'Vorlesungsfolien/Mikro2_12.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 11,
+      section: 'Optimaler intertemporaler Konsum und Bedingung erster Ordnung',
+      fingerprint: '67f0a237c5e8e552',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.intertemporaler_konsum.vl12.p13.interest-effect',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-12',
+      sourcePath: 'Vorlesungsfolien/Mikro2_12.pdf',
+      publicLabel: 'Vorlesung 12',
+      page: 13,
+      section: 'Effekt einer Zinsänderung auf Gegenwarts- und Zukunftskonsum',
+      fingerprint: 'bed64cf8f622b4fb',
+      confidence: 0.95,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     })
   ],
   unsicherheit_versicherung: [

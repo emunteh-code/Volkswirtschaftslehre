@@ -255,9 +255,9 @@ const VL_GROUNDED_FAMILIES = [
     conceptId: 'intertemporaler_konsum',
     title: "Mikroökonomik II: Intertemporaler Konsum",
     topic: "Intertemporaler Konsum",
-    method: "VL-Abschnitt(e) lesen, Methode aus Ankern (mikro2.intertemporaler_konsum.vl12.p01.programm, mikro2.intertemporaler_konsum.vl12.p05.budget) ableiten und mit Kapitelaufgaben abgleichen.",
+    method: "VL-Abschnitt(e) lesen, Methode aus Ankern (mikro2.intertemporaler_konsum.vl12.p05.budget, mikro2.intertemporaler_konsum.vl12.p08.present-future-value, mikro2.intertemporaler_konsum.vl12.p11.optimum-foc) ableiten und mit Kapitelaufgaben abgleichen.",
     sourceStatus: "direct-source",
-    sourceAnchorIds: ["mikro2.intertemporaler_konsum.vl12.p01.programm","mikro2.intertemporaler_konsum.vl12.p05.budget"],
+    sourceAnchorIds: ["mikro2.intertemporaler_konsum.vl12.p05.budget","mikro2.intertemporaler_konsum.vl12.p08.present-future-value","mikro2.intertemporaler_konsum.vl12.p11.optimum-foc"],
     difficulty: "mittel",
     expectedTimeMinutes: 10,
     examRelevance: 'hoch',
@@ -270,9 +270,9 @@ const VL_GROUNDED_FAMILIES = [
     conceptId: 'intertemporaler_konsum',
     title: "Mikroökonomik II: Intertemporaler Konsum — Klausurtyp",
     topic: "Intertemporaler Konsum — Klausurtyp",
-    method: "Klausurtyp aus VL (mikro2.intertemporaler_konsum.vl12.p01.programm, mikro2.intertemporaler_konsum.vl12.p05.budget): Rechen- oder Interpretationsschritte mit Portal-Aufgaben verknüpfen und typische Fehlerquellen prüfen.",
+    method: "Klausurtyp aus VL (mikro2.intertemporaler_konsum.vl12.p05.budget, mikro2.intertemporaler_konsum.vl12.p11.optimum-foc, mikro2.intertemporaler_konsum.vl12.p13.interest-effect): Rechen- oder Interpretationsschritte mit Portal-Aufgaben verknüpfen und typische Fehlerquellen prüfen.",
     sourceStatus: "direct-source",
-    sourceAnchorIds: ["mikro2.intertemporaler_konsum.vl12.p01.programm","mikro2.intertemporaler_konsum.vl12.p05.budget"],
+    sourceAnchorIds: ["mikro2.intertemporaler_konsum.vl12.p05.budget","mikro2.intertemporaler_konsum.vl12.p11.optimum-foc","mikro2.intertemporaler_konsum.vl12.p13.interest-effect"],
     difficulty: "schwer",
     expectedTimeMinutes: 12,
     examRelevance: 'hoch',
@@ -584,4 +584,3 @@ export const TASK_FAMILIES_BY_CONCEPT = Object.freeze(
     return acc;
   }, {})
 );
-

@@ -9,7 +9,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Official task documents in registry: **276**
 - Modules with task corpus: **8**
 - Modules missing task corpus: **3**
-- Reviewed official-task-source families: **39**
+- Reviewed official-task-source families: **43**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
 - Module-mismatch documents needing review: **0**
@@ -22,7 +22,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | `internationale-wirtschaftsbeziehungen` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `jahresabschluss` | 13 | 13 | 12 | 43 | 0 (0%) | 23 | 13 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `makro1` | 28 | 28 | 4 | 80 | 0 (0%) | 64 | 28 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `makro2` | 23 | 22 | 2 | 40 | 0 (0%) | 40 | 23 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `makro2` | 23 | 22 | 6 | 40 | 0 (0%) | 40 | 23 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mikro1` | 18 | 18 | 10 | 10 | 0 (0%) | 10 | 0 | 0 | 0 | Review documents manually and classify task relevance. |
 | `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |

@@ -10,7 +10,11 @@ export const MAKRO2_TASK_PLACEHOLDER_POLICY =
 
 export const MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'makro2.official-task.uebungsblatt-1-a1-ppp-exchange-rate-notation',
-  'makro2.official-task.uebungsblatt-1-a2-interest-parity-credit-choice'
+  'makro2.official-task.uebungsblatt-1-a2-interest-parity-credit-choice',
+  'makro2.official-task.klausur-feb-2024-a1-open-is-lm-flexible-exchange',
+  'makro2.official-task.klausur-feb-2024-a2-barro-gordon-phillips',
+  'makro2.official-task.klausur-feb-2024-a3-debt-dynamics-price-level',
+  'makro2.official-task.klausur-feb-2024-a4-solow-technology-savings-shock'
 ]);
 
 export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -26,11 +30,25 @@ export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
       ],
       reviewedAt: '2026-06-08',
       reviewedBy: 'codex-official-task-review-makro2-pass-1'
+    },
+    {
+      path: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      storageModule: 'makro1',
+      academicModule: 'makro2',
+      reviewedPages: [1, 2, 3, 4, 5, 6],
+      reviewedTaskFamilies: [
+        'makro2.official-task.klausur-feb-2024-a1-open-is-lm-flexible-exchange',
+        'makro2.official-task.klausur-feb-2024-a2-barro-gordon-phillips',
+        'makro2.official-task.klausur-feb-2024-a3-debt-dynamics-price-level',
+        'makro2.official-task.klausur-feb-2024-a4-solow-technology-savings-shock'
+      ],
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',
   reviewedOfficialTaskFamilyIds: MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS,
-  nextStep: 'Continue native-text extraction plus visual review for Uebungsblatt_2-10 and Tutorienblaetter before broader official-task-source promotion'
+  nextStep: 'Continue native-text extraction plus visual review for remaining Uebungsblaetter, Tutorienblaetter, and solution-key material before broader official-task-source promotion'
 });
 
 /**

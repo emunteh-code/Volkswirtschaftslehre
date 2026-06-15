@@ -258,6 +258,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Das Gleichgewicht auf dem Gütermarkt",
       fingerprint: '8f908df9df52a6b2',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.klausur-feb-2024.a1.p1-open-is-lm-flexible-exchange',
+      sourceId: 'makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838',
+      sourcePath: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      publicLabel: 'Klausur Februar 2024',
+      page: 1,
+      section: 'Aufgabe 1: Offenes IS-LM-Modell bei flexiblem Wechselkurs',
+      fingerprint: 'ad95b53418806b7ed24a774e1b905ec42de188d25fe5e36ede3a97ce1839eb6d',
+      confidence: 0.93,
+      reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   zp_kurve: [
@@ -434,6 +446,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Politökonomische Aspekte",
       fingerprint: 'b12776f4fb6832df',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.klausur-feb-2024.a2.p3-barro-gordon-phillips',
+      sourceId: 'makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838',
+      sourcePath: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      publicLabel: 'Klausur Februar 2024',
+      page: 3,
+      section: 'Aufgabe 2: Barro-Gordon und adaptive Phillipskurve',
+      fingerprint: '8849b0aad8a0f2af167ea7ce9b7defdd7d107cdae6c7aad5295ba8164df18935',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   taylor_regel: [
@@ -632,6 +656,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Beispiel: Wechselkursbewegungen seit dem Ende des Bretton Woods-",
       fingerprint: 'c5d58060fcae0fcd',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.klausur-feb-2024.a4.p5-p6-solow-technology-savings-shock',
+      sourceId: 'makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838',
+      sourcePath: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      publicLabel: 'Klausur Februar 2024',
+      page: 5,
+      section: 'Aufgabe 4: Solow-Modell mit technischem Fortschritt',
+      fingerprint: '27629cf235de32cc3820425da623085806a05b4f983b9d76367d56f1b29ee7ff',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   budgetrestriktion: [
@@ -676,6 +712,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Die Gefahren sehr hoher Staatsverschuldung",
       fingerprint: 'ae4245a7c15a9886',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.klausur-feb-2024.a3.p4-debt-dynamics-price-level',
+      sourceId: 'makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838',
+      sourcePath: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      publicLabel: 'Klausur Februar 2024',
+      page: 4,
+      section: 'Aufgabe 3: Staatsschuldendynamik und Preisniveau',
+      fingerprint: 'd8284122be13efbcba013b4bf6b5e8af195be8d246e3f75571f9826eeb46ff2a',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   ricardianisch: [

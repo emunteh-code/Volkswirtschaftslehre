@@ -1043,6 +1043,145 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-08'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.klausur-feb-2024-a1-open-is-lm-flexible-exchange',
+    conceptId: 'mundell_fleming',
+    title: 'Klausur Februar 2024 Aufgabe 1: Offenes IS-LM-Modell bei flexiblem Wechselkurs',
+    topic: 'Offene kleine Volkswirtschaft, IS-LM, Zinsparität, Gütermarkt, Nettoexporte, flexibler Wechselkurs',
+    method: 'Offizielle Klausur Makroökonomik 2, Aufgabe 1: Ausgangsgleichgewicht in vier Diagrammen markieren, exogenen Anstieg von Y* graphisch übertragen und Vorzeichenvergleich für Y, C, YV, E, NX, i und MD ausfüllen. Native Text wurde extrahiert; Seiten 1-2 wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.klausur-feb-2024.a1.p1-open-is-lm-flexible-exchange'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 31,
+    examRelevance: 'sehr hoch',
+    commonTraps: [
+      'Wechselkursregime nicht als flexible Wechselkurse fixieren',
+      'Ausländisches Einkommen Y* mit inländischem Einkommen Y verwechseln',
+      'Zinsparitätsdiagramm isoliert vom IS-LM-Gleichgewicht behandeln',
+      'Nettoexportreaktion ohne Vorzeichenannahme ∂NX/∂i < 0 interpretieren',
+      'Vorzeichentabelle ohne Bezug auf Punkt A und Punkt B ausfüllen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 hat 31 sichtbare Punkte',
+      'a) Ausgangsgleichgewicht in IS-LM-, Zinsparitäten-, Gütermarkt- und Nettoexportdiagramm mit Punkt A markieren (14 Punkte)',
+      'b.i) Auswirkungen eines einmaligen exogenen Anstiegs von Y* bei konstantem i* und erwartetem Wechselkurs graphisch als Punkt B zeigen (10 Punkte)',
+      'b.ii) Vorzeichenvergleich für Y, C, YV, E, NX, i und MD eintragen (7 Punkte)',
+      'Keine offizielle Lösung oder Punkteverteilung unterhalb der sichtbaren Teilaufgaben wurde ingestiert'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      academicModule: 'Makroökonomik II',
+      pages: 'Seiten 1-2',
+      task: 'Aufgabe 1',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.klausur-feb-2024-a2-barro-gordon-phillips',
+    conceptId: 'barro_gordon',
+    title: 'Klausur Februar 2024 Aufgabe 2: Barro-Gordon und adaptive Phillipskurve',
+    topic: 'Barro-Gordon-Modell, kurzfristige Phillipskurve, adaptive Erwartungen, Inflationsziel und glaubwürdige Ankündigung',
+    method: 'Offizielle Klausur Makroökonomik 2, Aufgabe 2: Wohlfahrtsoptimale Kombinationen und natürliche Arbeitslosenquote einzeichnen, kurzfristige Phillipskurven in t=1 und t=2 bestimmen, mittelfristiges Gleichgewicht und glaubwürdige Politik für πt=0 darstellen. Native Text wurde extrahiert; Seite 3 wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.klausur-feb-2024.a2.p3-barro-gordon-phillips'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 18,
+    examRelevance: 'sehr hoch',
+    commonTraps: [
+      'πt = πte - (ut - un) ohne Erwartungsverschiebung verwenden',
+      'Wohlfahrtsoptimales Verhältnis πt/ut = 3/2 nicht als Gerade einzeichnen',
+      'Adaptive Erwartungen zwischen t=1 und t=2 nicht aktualisieren',
+      'Mittelfristiges Gleichgewicht mit kurzfristigem Punkt verwechseln',
+      'Glaubwürdige Nullinflationspolitik nur verbal nennen, aber Punkt D nicht einzeichnen'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 hat 18 sichtbare Punkte',
+      'a) Wohlfahrtsoptimale Kombinationen und natürliche Arbeitslosenquote einzeichnen (2 Punkte)',
+      'b) kurzfristige Phillipskurve in t=1 und gewählten Punkt A bestimmen (4 Punkte)',
+      'c) kurzfristige Phillipskurve in t=2 und Punkt B bestimmen (4 Punkte)',
+      'd) mittelfristige Kombination mit Punkt C und entsprechender Phillipskurve eintragen (4 Punkte)',
+      'e) glaubwürdige Politik für πt = 0 und mittelfristigen Punkt D darstellen (4 Punkte)',
+      'Keine offizielle Lösung wurde ingestiert'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      academicModule: 'Makroökonomik II',
+      pages: 'Seite 3',
+      task: 'Aufgabe 2',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.klausur-feb-2024-a3-debt-dynamics-price-level',
+    conceptId: 'schuldenquote_dynamik',
+    title: 'Klausur Februar 2024 Aufgabe 3: Staatsschuldendynamik und Preisniveau',
+    topic: 'Staatliche Budgetrestriktion, Primärdefizit, Realzins, Schuldenstand und Schuldenquote',
+    method: 'Offizielle Klausur Makroökonomik 2, Aufgabe 3: Tabellenwerte für Gt, Gt-Tt, Bt-1 und Bt=(1+r)Bt-1+Gt-Tt ergänzen und den Effekt eines einmaligen Preisniveauanstiegs auf die Schuldenquote begründen. Native Text wurde extrahiert; Seite 4 wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.klausur-feb-2024.a3.p4-debt-dynamics-price-level'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 15,
+    examRelevance: 'sehr hoch',
+    commonTraps: [
+      'Primärdefizit Gt - Tt mit Gesamtdefizit inklusive Zins verwechseln',
+      'Bt-1 in Periode 1 nicht als Anfangsschuldenstand B0 lesen',
+      'Tilgung in t=3 ohne Rückwärtslogik aus der Budgetgleichung bestimmen',
+      'Preisniveauanstieg auf nominalen Schuldenstand statt auf reale Quote beziehen',
+      'Schuldenquote statt Schuldenstand nicht sauber benennen'
+    ],
+    gradingRubric: [
+      'Aufgabe 3 hat 15 sichtbare Punkte',
+      'a) Tabelle für Perioden 1-3 mit Rechenweg ergänzen (12 Punkte)',
+      'b) Wirkung eines einmaligen Preisniveauanstiegs in Periode 2 auf die Schuldenquote kurz begründen (5 Punkte)',
+      'Hinweis: Die sichtbaren Teilpunkte summieren sich im PDF zu 17; die Aufgabenüberschrift nennt 15 Punkte. Diese Inkonsistenz wird nicht korrigiert oder interpretiert.',
+      'Keine offizielle Lösung wurde ingestiert'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      academicModule: 'Makroökonomik II',
+      pages: 'Seite 4',
+      task: 'Aufgabe 3',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.klausur-feb-2024-a4-solow-technology-savings-shock',
+    conceptId: 'tech_fortschritt',
+    title: 'Klausur Februar 2024 Aufgabe 4: Solow-Modell mit technischem Fortschritt',
+    topic: 'Solow mit arbeitsvermehrendem technischem Fortschritt, effektive Pro-Kopf-Größen, Sparquotenschock, Zeitpfade',
+    method: 'Offizielle Klausur Makroökonomik 2, Aufgabe 4: Produktionsfunktion in effektiven Pro-Kopf-Einheiten, Kapitaldynamik und Konsumrelation verwenden, Steady State einzeichnen, Sparquotensenkung graphisch analysieren, Zeitpfade und neue Steady-State-Vorzeichen eintragen. Native Text wurde extrahiert; Seiten 5-6 wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.klausur-feb-2024.a4.p5-p6-solow-technology-savings-shock'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 26,
+    examRelevance: 'sehr hoch',
+    commonTraps: [
+      'Effektive Pro-Kopf-Größen kt und yt mit Pro-Kopf-Größen Kt/N oder Ct/N verwechseln',
+      'gA + δ in der Kapitaldynamik vergessen',
+      'Sparquotensenkung als dauerhafte Änderung der Pro-Kopf-Wachstumsrate von kt interpretieren',
+      'Zeitpfade von kt, log(Kt/N) und log(Ct/N) gleich behandeln',
+      'Steady-State-Niveau und Wachstumsrate in der Vorzeichentabelle vermischen'
+    ],
+    gradingRubric: [
+      'Aufgabe 4 hat 26 sichtbare Punkte',
+      'a) Kapitalbestand und Einkommen in effektiven Pro-Kopf-Einheiten im Steady State im Solow-Diagramm markieren (6 Punkte)',
+      'b.i) Sparquotensenkung und neuen Steady State graphisch zeigen (6 Punkte)',
+      'b.ii) Zeitpfade für kt, log(Kt/N) und log(Ct/N) darstellen (9 Punkte)',
+      'b.iii) Vorzeichenvergleich im neuen Steady State für Wachstumsrate von kt, yt, Wachstumsrate von Ct/N, At und Yt eintragen (5 Punkte)',
+      'Keine offizielle Lösung wurde ingestiert'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf',
+      academicModule: 'Makroökonomik II',
+      pages: 'Seiten 5-6',
+      task: 'Aufgabe 4',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

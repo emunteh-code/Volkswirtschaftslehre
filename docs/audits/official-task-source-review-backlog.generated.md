@@ -12,7 +12,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 - Reviewed official-task-source families: **39**
 - Weak pages inside official task docs: **25**
 - Task-signal pages inside official task docs: **989**
-- Module-mismatch documents needing review: **1**
+- Module-mismatch documents needing review: **0**
 
 ## Module Queue
 
@@ -21,8 +21,8 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | `finanzwirtschaft` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `internationale-wirtschaftsbeziehungen` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
 | `jahresabschluss` | 13 | 13 | 12 | 43 | 0 (0%) | 23 | 13 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
-| `makro1` | 29 | 28 | 4 | 86 | 0 (0%) | 70 | 28 | 0 | 1 | Start human task-family mapping on ready documents with task signals. |
-| `makro2` | 22 | 22 | 2 | 34 | 0 (0%) | 34 | 22 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `makro1` | 28 | 28 | 4 | 80 | 0 (0%) | 64 | 28 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
+| `makro2` | 23 | 22 | 2 | 40 | 0 (0%) | 40 | 23 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mathematik` | 40 | 40 | 0 | 227 | 0 (0%) | 227 | 40 | 0 | 0 | Start human task-family mapping on ready documents with task signals. |
 | `mikro1` | 18 | 18 | 10 | 10 | 0 (0%) | 10 | 0 | 0 | 0 | Review documents manually and classify task relevance. |
 | `mikro2` | 0 | 0 | 0 | 0 | 0 (0%) | 0 | 0 | 0 | 0 | Upload official exercises, tutorials, solutions, or exams before this module can reach final exam-bank completeness. |
@@ -38,6 +38,7 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | 1189 | `statistik` | exam | KlausurE2122K1_upd.pdf | 9 | 0 | 9 | ready-for-human-task-mapping |  | `source-materials/Statistik/Lecture_Statistik_B.WIWI-OPH.0006_Vorlesung/KlausurE2122K1_upd.pdf` |
 | 1179 | `jahresabschluss` | exam | Probeklausur_JA.pdf | 19 | 0 | 8 | ready-for-human-task-mapping |  | `source-materials/Jahresabschluss/Probeklausur/Probeklausur_JA.pdf` |
 | 1157 | `mathematik` | exercise | AN_I_-_Aufgaben.pdf | 17 | 0 | 17 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/AN_1_-_Univariate_Differenzialrechnung/AN_I_-_Aufgaben.pdf` |
+| 1126 | `makro2` | exam | Klausur_Februar_2024_260119_141838.pdf | 6 | 0 | 6 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf` |
 | 1108 | `makro1` | exam | Klausur_2022_Nachtermin (1).pdf | 8 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2022_Nachtermin (1).pdf` |
 | 1107 | `makro1` | exam | Klausur_2018_Nachtermin (1).pdf | 7 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2018_Nachtermin (1).pdf` |
 | 1107 | `makro1` | exam | Klausur_2018_Nachtermin_260202_170633.pdf | 7 | 0 | 5 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik I/Klausur_2018_Nachtermin_260202_170633.pdf` |
@@ -93,7 +94,6 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 | 858 | `recht` | exercise | Ipsen_Rehder_ZJS_2023,_751_.pdf | 18 | 0 | 2 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/Ipsen_Rehder_ZJS_2023,_751_.pdf` |
 | 857 | `mathematik` | solution | OP_II_-_Lösungen.pdf | 17 | 0 | 17 | ready-for-human-task-mapping |  | `source-materials/Mathematik/Kleinübung/OP_2_-__Multivariate_Optimierung/OP_II_-_Lösungen.pdf` |
 | 853 | `recht` | exercise | SoSe_2025_Einheit_4.pdf | 33 | 0 | 1 | ready-for-human-task-mapping |  | `source-materials/Recht/Übungen/SoSe_2025_Einheit_4.pdf` |
-| 842 | `makro2` | exercise | Uebungsblatt_6.pdf | 2 | 0 | 2 | ready-for-human-task-mapping |  | `source-materials/Makroökonomik II/Übungen/Uebungsblatt_6.pdf` |
 
 ## Promotion Checklist
 
@@ -102,3 +102,4 @@ Policy: **No official-task-source promotion without OCR/native text plus human r
 3. Create task-family entries with `officialTaskCoverage: "official-task-source"`.
 4. Attach source anchors, `quoteFingerprint`, reviewer, and review date.
 5. Re-run `audit-current-state.mjs` and `check-readiness.mjs --strict`.
+

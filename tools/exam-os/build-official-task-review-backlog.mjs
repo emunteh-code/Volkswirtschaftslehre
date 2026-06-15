@@ -51,7 +51,7 @@ function isKnownNonItemTemplate(doc) {
 
 function knownModuleMismatch(doc) {
   const pathValue = String(doc?.path || '');
-  if (/Makro[öo]konomik I\/Klausur_Februar_2024_260119_141838\.pdf$/i.test(pathValue)) {
+  if (/Makro[öo]konomik I\/Klausur_Februar_2024_260119_141838\.pdf$/i.test(pathValue) && doc?.module !== 'makro2') {
     return {
       expectedModule: 'makro2',
       evidence:

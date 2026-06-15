@@ -29,6 +29,21 @@ const MODULE_FOLDER_MAP = {
   Politikwissenschaft: { module: 'politikwissenschaft', title: 'Politikwissenschaft' }
 };
 
+const SOURCE_DOCUMENT_OVERRIDES = [
+  {
+    pathPattern: /Makro[öo]konomik I\/Klausur_Februar_2024_260119_141838\.pdf$/i,
+    moduleInfo: { module: 'makro2', title: 'Makroökonomik II' },
+    idSource: 'Makroökonomik II/Klausur_Februar_2024_260119_141838',
+    reason:
+      'Visual and native-text review show the PDF footer/title is "Klausur Makroökonomik 2"; topics include open-economy IS-LM, Barro-Gordon, debt dynamics, and Solow.'
+  }
+];
+
+function sourceDocumentOverride(sourceRelative) {
+  const normalized = sourceRelative.replace(/\\/g, '/').normalize('NFC');
+  return SOURCE_DOCUMENT_OVERRIDES.find((override) => override.pathPattern.test(normalized)) || null;
+}
+
 function walkFiles(dir) {
   if (!fs.existsSync(dir)) return [];
   const out = [];
@@ -125,15 +140,18 @@ function buildRegistry() {
     const sourceRelative = path.relative(sourceRoot, file);
     const parts = sourceRelative.split(path.sep);
     const topLevel = parts[0];
-    const moduleInfo = MODULE_FOLDER_MAP[topLevel] || {
+    const folderModuleInfo = MODULE_FOLDER_MAP[topLevel] || {
       module: slugify(topLevel),
       title: topLevel
     };
+    const override = sourceDocumentOverride(sourceRelative);
+    const moduleInfo = override?.moduleInfo || folderModuleInfo;
     const stats = fs.statSync(file);
     const kind = classifyKind(sourceRelative);
     const normalizedBase = path.basename(file).normalize('NFC');
-    const id = `${moduleInfo.module}-${kind}-${slugify(sourceRelative.replace(path.extname(sourceRelative), ''))}`;
-    return {
+    const idSource = override?.idSource || sourceRelative.replace(path.extname(sourceRelative), '');
+    const id = `${moduleInfo.module}-${kind}-${slugify(idSource)}`;
+    const doc = {
       id,
       module: moduleInfo.module,
       moduleTitle: moduleInfo.title,
@@ -148,6 +166,12 @@ function buildRegistry() {
       fileHash: `sha256:${sha256(file)}`,
       extractionStatus: 'indexed'
     };
+    if (override) {
+      doc.storageModule = folderModuleInfo.module;
+      doc.storageModuleTitle = folderModuleInfo.title;
+      doc.moduleOverrideReason = override.reason;
+    }
+    return doc;
   });
 
   const byModule = {};

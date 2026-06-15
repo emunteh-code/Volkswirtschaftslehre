@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-27",
+  "generatedAt": "2026-06-15",
   "sourceRoot": "source-materials",
   "totalDocuments": 692,
   "totalBytes": 977860070,
@@ -40,10 +40,10 @@
       }
     },
     "makro1": {
-      "documents": 49,
-      "bytes": 47053984,
+      "documents": 48,
+      "bytes": 46822800,
       "kinds": {
-        "exam": 7,
+        "exam": 6,
         "exercise": 11,
         "lecture-slide": 18,
         "supplement": 2,
@@ -51,9 +51,10 @@
       }
     },
     "makro2": {
-      "documents": 32,
-      "bytes": 87679519,
+      "documents": 33,
+      "bytes": 87910703,
       "kinds": {
+        "exam": 1,
         "exercise": 10,
         "lecture-slide": 8,
         "supplement": 2,
@@ -1232,9 +1233,9 @@
       "extractionStatus": "indexed"
     },
     {
-      "id": "makro1-exam-makrookonomik-i-klausur-februar-2024-260119-141838",
-      "module": "makro1",
-      "moduleTitle": "Makroökonomik I",
+      "id": "makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838",
+      "module": "makro2",
+      "moduleTitle": "Makroökonomik II",
       "topLevelFolder": "Makroökonomik I",
       "group": "root",
       "kind": "exam",
@@ -1244,7 +1245,11 @@
       "bytes": 231184,
       "pages": 6,
       "fileHash": "sha256:aba1e3a2f72b624b8373ca1d3eb1aad2f25490f95966c13b7e487be786a8030d",
-      "extractionStatus": "indexed"
+      "extractionStatus": "indexed",
+      "storageModule": "makro1",
+      "storageModuleTitle": "Makroökonomik I",
+      "moduleOverrideReason": "Visual and native-text review show the PDF footer/title is \"Klausur Makroökonomik 2\"; topics include open-economy IS-LM, Barro-Gordon, debt dynamics, and Solow.",
+      "sourceId": "makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838"
     },
     {
       "id": "makro1-supplement-makrookonomik-i-makro-buch-2",

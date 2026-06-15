@@ -8,8 +8,8 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 |---|---|---|---|---|---|---|---|---:|---:|---:|
 | `mikro1` | yes | yes | yes | no | yes | no | no | 4 | 18 | 233 |
 | `mikro2` | yes | yes | yes | no | yes | no | no | 13 | 11 | 190 |
-| `makro1` | yes | yes | yes | no | yes | no | no | 6 | 115 | 335 |
-| `makro2` | yes | yes | yes | no | yes | no | no | 1 | 46 | 249 |
+| `makro1` | yes | yes | yes | no | yes | no | no | 6 | 109 | 331 |
+| `makro2` | yes | yes | yes | no | yes | no | no | 1 | 52 | 253 |
 | `oekonometrie` | yes | yes | yes | no | yes | no | no | 180 | 298 | 811 |
 | `statistik` | yes | yes | yes | no | yes | no | no | 132 | 619 | 1046 |
 | `finanzwirtschaft` | yes | yes | yes | no | yes | no | no | 0 | 8 | 118 |
@@ -24,8 +24,8 @@ A module is final only when sourceComplete, pageIndexed, anchorComplete, examBan
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | `mikro1` | 33 | 0 | 100% | 100% | 110 | 95 | 18 | 18 | 0 | 10 | 100 | 4 |
 | `mikro2` | 15 | 3 | 100% | 100% | 47 | 34 | 0 | 0 | 0 | 0 | 46 | 4 |
-| `makro1` | 14 | 0 | 100% | 100% | 36 | 62 | 29 | 28 | 1 | 4 | 44 | 4 |
-| `makro2` | 30 | 0 | 100% | 100% | 62 | 85 | 22 | 22 | 0 | 2 | 110 | 4 |
+| `makro1` | 14 | 0 | 100% | 100% | 36 | 62 | 28 | 28 | 1 | 4 | 44 | 4 |
+| `makro2` | 30 | 0 | 100% | 100% | 62 | 85 | 23 | 22 | 0 | 2 | 110 | 4 |
 | `oekonometrie` | 32 | 0 | 100% | 100% | 65 | 99 | 33 | 33 | 0 | 1 | 101 | 4 |
 | `statistik` | 14 | 0 | 100% | 100% | 54 | 143 | 104 | 104 | 0 | 10 | 44 | 4 |
 | `finanzwirtschaft` | 19 | 0 | 100% | 100% | 38 | 39 | 0 | 0 | 0 | 0 | 57 | 4 |

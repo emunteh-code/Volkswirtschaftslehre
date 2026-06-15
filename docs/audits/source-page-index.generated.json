@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-27",
+  "generatedAt": "2026-06-15",
   "sourceRegistry": "docs/audits/source-corpus-registry.generated.json",
   "note": "No page text is stored here. Page records contain extraction health, signal counts, and text fingerprints for anchor review.",
   "totals": {
@@ -38,20 +38,20 @@
       "graphSignalPages": 3
     },
     "makro1": {
-      "pdfDocuments": 47,
-      "pages": 701,
+      "pdfDocuments": 46,
+      "pages": 695,
       "weakPages": 6,
-      "taskSignalPages": 115,
-      "formulaSignalPages": 335,
-      "graphSignalPages": 210
+      "taskSignalPages": 109,
+      "formulaSignalPages": 331,
+      "graphSignalPages": 206
     },
     "makro2": {
-      "pdfDocuments": 32,
-      "pages": 408,
+      "pdfDocuments": 33,
+      "pages": 414,
       "weakPages": 1,
-      "taskSignalPages": 46,
-      "formulaSignalPages": 249,
-      "graphSignalPages": 14
+      "taskSignalPages": 52,
+      "formulaSignalPages": 253,
+      "graphSignalPages": 18
     },
     "mathematik": {
       "pdfDocuments": 50,
@@ -14218,8 +14218,8 @@
       ]
     },
     {
-      "sourceId": "makro1-exam-makrookonomik-i-klausur-februar-2024-260119-141838",
-      "module": "makro1",
+      "sourceId": "makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838",
+      "module": "makro2",
       "kind": "exam",
       "path": "source-materials/Makroökonomik I/Klausur_Februar_2024_260119_141838.pdf",
       "pageCount": 6,
@@ -14295,7 +14295,8 @@
           "graphSignals": 3,
           "anchorId": "p006"
         }
-      ]
+      ],
+      "id": "makro2-exam-makrookonomik-ii-klausur-februar-2024-260119-141838"
     },
     {
       "sourceId": "makro1-supplement-makrookonomik-i-makro-buch-2",

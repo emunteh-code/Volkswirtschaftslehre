@@ -332,6 +332,66 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.95
     }),
     anchor({
+      id: 'mikro2.unsicherheit_versicherung.vl13.p05.insurance-budget',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-13',
+      sourcePath: 'Vorlesungsfolien/Mikro2_13.pdf',
+      publicLabel: 'Vorlesung 13',
+      page: 5,
+      section: 'Versicherung und zustandsabhängige Budgetbeschränkung',
+      fingerprint: '9536d27fa6256e6a',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.unsicherheit_versicherung.vl13.p10.expected-utility',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-13',
+      sourcePath: 'Vorlesungsfolien/Mikro2_13.pdf',
+      publicLabel: 'Vorlesung 13',
+      page: 10,
+      section: 'Erwartungsnutzenhypothese und VNM-Nutzenfunktion',
+      fingerprint: '13954371bd633fa7',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.unsicherheit_versicherung.vl13.p12.risk-aversion',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-13',
+      sourcePath: 'Vorlesungsfolien/Mikro2_13.pdf',
+      publicLabel: 'Vorlesung 13',
+      page: 12,
+      section: 'Risikoaversion',
+      fingerprint: 'e192c04ae1add4c4',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.unsicherheit_versicherung.vl13.p15.insurance-demand-foc',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-13',
+      sourcePath: 'Vorlesungsfolien/Mikro2_13.pdf',
+      publicLabel: 'Vorlesung 13',
+      page: 15,
+      section: 'Nachfrage nach Versicherung und Bedingung erster Ordnung',
+      fingerprint: '1907d0923b2bf9f4',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.unsicherheit_versicherung.vl13.p17.fair-premium-full-insurance',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-13',
+      sourcePath: 'Vorlesungsfolien/Mikro2_13.pdf',
+      publicLabel: 'Vorlesung 13',
+      page: 17,
+      section: 'Faire Prämie und Vollversicherung',
+      fingerprint: '6cd2968bc30c6bdc',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
       id: 'mikro2.unsicherheit_versicherung.vl14.p02.fair-insurance',
       sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-14',
       sourcePath: 'Vorlesungsfolien/Mikro2_14.pdf',
@@ -350,6 +410,18 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       section: 'Versicherung, Sicherheitsäquivalent und Risikoprämie',
       fingerprint: '4603c215f9f1b1ed',
       confidence: 0.94
+    }),
+    anchor({
+      id: 'mikro2.unsicherheit_versicherung.vl14.p06.risk-aversion-measures',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-14',
+      sourcePath: 'Vorlesungsfolien/Mikro2_14.pdf',
+      publicLabel: 'Vorlesung 14',
+      page: 6,
+      section: 'Koeffizienten der absoluten und relativen Risikoaversion',
+      fingerprint: '20a100096a12be19',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     })
   ],
   gleichgewicht_produktion: [

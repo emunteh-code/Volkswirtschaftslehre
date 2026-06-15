@@ -895,8 +895,12 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-formale-h">Formale Darstellung</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Erwartungsnutzen &amp; Versicherung</h4>
-<p>Risikoaverse zahlen Prämie $>$ erwarteter Schaden für Aktuar-Fairness nicht zwingend — Risikoprämie. Vollversicherung bei NM-Utility und fairer Prämie.</p>
-      <div class="math-block">$$EU = \sum_s \pi_s u(w_s),\quad u''<0 \Rightarrow \text{risk averse}$$</div>
+<p>Die Vorlesung modelliert Versicherung als Verschiebung von Konsum zwischen den Naturzuständen Schaden und kein Schaden. Mit Versicherungssumme $K$ und Prämienfaktor $\gamma$ gilt:</p>
+      <div class="math-block">$$c_1=m_1+(1-\gamma)K,\qquad c_2=m_2-\gamma K$$</div>
+      <p>Durch Substitution von $K$ folgt die zustandsabhängige Budgetbeschränkung:</p>
+      <div class="math-block">$$\gamma c_1+(1-\gamma)c_2=\gamma m_1+(1-\gamma)m_2$$</div>
+      <p>Der optimale Versicherungsplan erfüllt:</p>
+      <div class="math-block">$$\frac{\pi u'(c_1)}{(1-\pi)u'(c_2)}=\frac{\gamma}{1-\gamma}$$</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--mechanismus" data-theory-step="5" aria-labelledby="theory-mechanismus-h">
@@ -910,21 +914,21 @@ export const CONTENT = {
 <h3 class="theory-recipe-heading" id="theory-anwendung-h">Anwendung & Klausurtransfer</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">In der Klausur: Unsicherheit</h4>
-<p>State-contingent claims: Budget $p_1 x_1 + p_2 x_2 = W$. Fair odds: $p_s = \pi_s$. Optimal: $u'(c_s)$ proportional zu $\pi_s$ bei NM. Versicherung: Transfer zwischen Zuständen gegen Prämie.</p>
-      <div class="warn-box"><strong>NM vs. andere Utility:</strong> Vollversicherung bei fairer Prämie nur bei NM-Utility — bei DARA typischerweise unterversichert.</div>
+<p>Fair ist die Versicherung in der Vorlesungsnotation bei $\gamma=\pi$, weil dann die Prämie $\gamma K$ dem Erwartungswert der Auszahlung $\pi K$ entspricht. Bei Risikoaversion impliziert die BEO dann $u'(c_1)=u'(c_2)$ und damit Vollversicherung $c_1=c_2$.</p>
+      <div class="warn-box"><strong>Prämienfall sauber trennen:</strong> $\gamma=\pi$ führt im VL-Modell zu Vollversicherung; bei $\gamma>\pi$ ist nur partielle Versicherung optimal.</div>
 
 
 <h4 class="theory-subsection-title">Prüfungsstandard</h4>
-<p>Klausurpfad: Mechanismus → Gleichgewicht → Wohlfahrts-/Politikfolge.</p>
-      <div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<p>Klausurpfad: Naturzustände definieren, Budgetgerade in $c_2$-$c_1$-Notation aufstellen, BEO interpretieren und den Prämienfall einordnen.</p>
+      <div class="warn-box"><strong>Notation nicht drehen:</strong> $c_1$ ist Konsum im Schadenszustand, $c_2$ Konsum ohne Schaden; die Steigung der Budgetgeraden ist $-\gamma/(1-\gamma)$.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--fehler" data-theory-step="7" aria-labelledby="theory-fehler-h">
 <h3 class="theory-recipe-heading" id="theory-fehler-h">Häufige Fehler</h3>
 <div class="theory-recipe-body">
 <h4 class="theory-subsection-title">Typische Prüfungsfallen</h4>
-<div class="warn-box"><strong>NM vs. andere Utility:</strong> Vollversicherung bei fairer Prämie nur bei NM-Utility — bei DARA typischerweise unterversichert.</div>
-<div class="warn-box"><strong>Standardfehler:</strong> Bei Marktversagen immer Markt- vs. Sozialoptimum und Instrument (Pigou/Coase/Regulierung) trennen.</div>
+<div class="warn-box"><strong>Prämienfall sauber trennen:</strong> $\gamma=\pi$ führt im VL-Modell zu Vollversicherung; bei $\gamma>\pi$ ist nur partielle Versicherung optimal.</div>
+<div class="warn-box"><strong>Risikomaße:</strong> Absolute Risikoaversion nutzt $r_a(c)=-u''(c)/u'(c)$; relative Risikoaversion multipliziert zusätzlich mit $c$.</div>
 </div>
 </section>
 <section class="theory-recipe-section theory-recipe-card theory-recipe-section--vor_aufgaben" data-theory-step="8" aria-labelledby="theory-vor_aufgaben-h">
@@ -937,8 +941,12 @@ export const CONTENT = {
 </section>`,
     formeln: [
       { label: 'Erwartungsnutzen', eq: String.raw`$$EU=\pi u(c_1)+(1-\pi)u(c_2)$$`, desc: 'Nutzen über zwei Naturzustände.' },
+      { label: 'Versicherungsbudget', eq: String.raw`$$\gamma c_1+(1-\gamma)c_2=\gamma m_1+(1-\gamma)m_2$$`, desc: 'Budgetbeschränkung im Schadens-/Nichtschadenszustand.' },
+      { label: 'Versicherungs-FOC', eq: String.raw`$$\frac{\pi u'(c_1)}{(1-\pi)u'(c_2)}=\frac{\gamma}{1-\gamma}$$`, desc: 'GRS entspricht im Optimum dem Preisverhältnis.' },
       { label: 'Faire Prämie', eq: String.raw`$$\gamma=\pi$$`, desc: 'Nullgewinnbedingung im einfachen Versicherungsmodell.' },
-      { label: 'Risikoprämie', eq: String.raw`$$RP=E[x]-CE$$`, desc: 'Differenz zwischen Erwartungswert und Sicherheitsäquivalent.' }
+      { label: 'Risikoprämie', eq: String.raw`$$RP=E[x]-CE$$`, desc: 'Differenz zwischen Erwartungswert und Sicherheitsäquivalent.' },
+      { label: 'Absolute Risikoaversion', eq: String.raw`$$r_a(c)=-\frac{u''(c)}{u'(c)}$$`, desc: 'Koeffizient der absoluten Risikoaversion.' },
+      { label: 'Relative Risikoaversion', eq: String.raw`$$r_r(c)=-\frac{u''(c)c}{u'(c)}$$`, desc: 'Koeffizient der relativen Risikoaversion.' }
     ],
     aufgaben: [
       {

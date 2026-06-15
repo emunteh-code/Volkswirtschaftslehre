@@ -593,7 +593,7 @@ export const FORMULA_CARDS = Object.freeze([
   card({
     id: 'mikro2.unsicherheit_versicherung.erwartungsnutzen',
     conceptId: 'unsicherheit_versicherung',
-    officialNotation: "unsicherheit_versicherung",
+    officialNotation: "U(\\pi_1,\\pi_2,c_1,c_2)=\\pi u(c_1)+(1-\\pi)u(c_2)",
     displayFormula: "$$EU=\\pi u(c_1)+(1-\\pi)u(c_2)$$",
     intuition: "Nutzen über zwei Naturzustände.",
     derivationSteps: [
@@ -614,7 +614,59 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Erwartungsnutzen — Nutzen über zwei Naturzustände.",
     relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p01.programm","mikro2.unsicherheit_versicherung.vl13.p03.conditional-consumption"]
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p10.expected-utility"]
+  }),
+  card({
+    id: 'mikro2.unsicherheit_versicherung.versicherungsbudget',
+    conceptId: 'unsicherheit_versicherung',
+    officialNotation: "c_1, c_2, m_1, m_2, gamma",
+    displayFormula: "$$\\gamma c_1+(1-\\gamma)c_2=\\gamma m_1+(1-\\gamma)m_2$$",
+    intuition: "Zustandsabhängige Budgetbeschränkung nach Substitution der Versicherungssumme.",
+    derivationSteps: [
+        {
+            "label": "Konsum im Schadens- und Nichtschadenszustand",
+            "text": "Aus c_1=m_1+(1-\\gamma)K und c_2=m_2-\\gamma K wird K eliminiert.",
+            "math": "$$\\gamma c_1+(1-\\gamma)c_2=\\gamma m_1+(1-\\gamma)m_2$$"
+        },
+        {
+            "label": "Preisinterpretation",
+            "text": "Der relative Preis von Konsum im Schadensfall ist \\gamma/(1-\\gamma).",
+            "math": "$$\\frac{p_1}{p_2}=\\frac{\\gamma}{1-\\gamma}$$"
+        }
+    ],
+    assumptions: ["Einperioden-Welt der VL13","Versicherungsprämie proportional zur Versicherungssumme"],
+    appliesWhen: ["Klausuraufgaben zu Versicherung","Budgetgerade im c_2-c_1-Diagramm"],
+    failsWhen: ["Mehrperiodenproblem aus VL12 statt Naturzustandsmodell","Prämiennotation nicht aus der Aufgabe übernommen"],
+    examShortcut: "Budget zuerst über Zustände aufstellen, dann erst Nutzen maximieren.",
+    relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-pattern"],
+    commonMistakes: ["c_1/c_2-Zustände vertauschen","Steigung als -\\gamma statt -\\gamma/(1-\\gamma) verwenden"],
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p05.insurance-budget"]
+  }),
+  card({
+    id: 'mikro2.unsicherheit_versicherung.versicherungs_foc',
+    conceptId: 'unsicherheit_versicherung',
+    officialNotation: "pi, gamma, u'(c_1), u'(c_2)",
+    displayFormula: "$$\\frac{\\pi u'(c_1)}{(1-\\pi)u'(c_2)}=\\frac{\\gamma}{1-\\gamma}$$",
+    intuition: "Im Optimum entspricht die GRS dem Preisverhältnis der Zustände.",
+    derivationSteps: [
+        {
+            "label": "Optimierungsproblem",
+            "text": "Maximiere Erwartungsnutzen unter der Versicherungsbudgetgeraden.",
+            "math": "$$\\max_{c_1,c_2}\\; \\pi u(c_1)+(1-\\pi)u(c_2)$$"
+        },
+        {
+            "label": "Bedingung erster Ordnung",
+            "text": "Die gewichteten Grenznutzen werden an das Prämien-Preisverhältnis angepasst.",
+            "math": "$$\\frac{\\pi u'(c_1)}{(1-\\pi)u'(c_2)}=\\frac{\\gamma}{1-\\gamma}$$"
+        }
+    ],
+    assumptions: ["VNM-Nutzenfunktion wie in VL13","Strikt konkave Nutzenfunktion für Risikoaversion"],
+    appliesWhen: ["Optimale Versicherungsnachfrage","Vergleich faire und unfaire Prämie"],
+    failsWhen: ["Keine innere Tangentiallösung","Zustandswahrscheinlichkeiten fehlen"],
+    examShortcut: "Bei \\gamma=\\pi kürzt sich die FOC zu u'(c_1)=u'(c_2).",
+    relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-apply"],
+    commonMistakes: ["\\pi und \\gamma verwechseln","FOC ohne ökonomische Interpretation hinschreiben"],
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p15.insurance-demand-foc","mikro2.unsicherheit_versicherung.vl13.p17.fair-premium-full-insurance"]
   }),
   card({
     id: 'mikro2.unsicherheit_versicherung.faire_pr_mie',
@@ -640,7 +692,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Faire Prämie — Nullgewinnbedingung im einfachen Versicherungsmodell.",
     relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p01.programm","mikro2.unsicherheit_versicherung.vl13.p03.conditional-consumption"]
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p17.fair-premium-full-insurance","mikro2.unsicherheit_versicherung.vl14.p02.fair-insurance"]
   }),
   card({
     id: 'mikro2.unsicherheit_versicherung.risikopr_mie',
@@ -666,7 +718,49 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Risikoprämie — Differenz zwischen Erwartungswert und Sicherheitsäquivalent.",
     relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.unsicherheit_versicherung.vl13.p01.programm","mikro2.unsicherheit_versicherung.vl13.p03.conditional-consumption"]
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl14.p03.risk-premium"]
+  }),
+  card({
+    id: 'mikro2.unsicherheit_versicherung.absolute_risikoaversion',
+    conceptId: 'unsicherheit_versicherung',
+    officialNotation: "r_a(c)",
+    displayFormula: "$$r_a(c)=-\\frac{u''(c)}{u'(c)}$$",
+    intuition: "Maßzahl für absolute Risikoaversion, invariant gegenüber positiv-affinen Transformationen der VNM-Nutzenfunktion.",
+    derivationSteps: [
+        {
+            "label": "Definition",
+            "text": "Die VL14 definiert den Koeffizienten der absoluten Risikoaversion über Krümmung relativ zum Grenznutzen.",
+            "math": "$$r_a(c)=-\\frac{u''(c)}{u'(c)}$$"
+        }
+    ],
+    assumptions: ["VNM-Nutzenfunktion","u'(c)>0 im relevanten Bereich"],
+    appliesWhen: ["Risikoaversion quantifizieren","CARA-Funktion prüfen"],
+    failsWhen: ["Nutzenfunktion nicht differenzierbar","positiv-affine VNM-Struktur nicht gegeben"],
+    examShortcut: "Absolute RA: zweite Ableitung durch erste Ableitung, negatives Vorzeichen.",
+    relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-pattern"],
+    commonMistakes: ["Minuszeichen vergessen","relative und absolute Risikoaversion vertauschen"],
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl14.p06.risk-aversion-measures"]
+  }),
+  card({
+    id: 'mikro2.unsicherheit_versicherung.relative_risikoaversion',
+    conceptId: 'unsicherheit_versicherung',
+    officialNotation: "r_r(c)",
+    displayFormula: "$$r_r(c)=-\\frac{u''(c)c}{u'(c)}$$",
+    intuition: "Maßzahl für relative Risikoaversion; gegenüber absoluter Risikoaversion kommt der Faktor c hinzu.",
+    derivationSteps: [
+        {
+            "label": "Definition",
+            "text": "Die VL14 definiert den Koeffizienten der relativen Risikoaversion mit zusätzlicher Skalierung durch c.",
+            "math": "$$r_r(c)=-\\frac{u''(c)c}{u'(c)}$$"
+        }
+    ],
+    assumptions: ["VNM-Nutzenfunktion","u'(c)>0 im relevanten Bereich","c positiv"],
+    appliesWhen: ["Risikoaversion quantifizieren","CRRA-Funktion prüfen"],
+    failsWhen: ["Konsum nicht positiv","Nutzenfunktion nicht differenzierbar"],
+    examShortcut: "Relative RA: absolute RA mal c.",
+    relatedTaskFamilies: ["mikro2.taskfamily.unsicherheit_versicherung-vl-pattern"],
+    commonMistakes: ["Faktor c vergessen","CRRA- und CARA-Fall vermischen"],
+    anchorIds: ["mikro2.unsicherheit_versicherung.vl14.p06.risk-aversion-measures"]
   }),
   card({
     id: 'mikro2.gleichgewicht_produktion.vollbesch_ftigung_kapital',

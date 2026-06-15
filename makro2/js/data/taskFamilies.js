@@ -1182,6 +1182,39 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-2-a1-open-goods-market-dd-aa-zz-nx',
+    conceptId: 'marshall_lerner',
+    title: 'Uebungsblatt 2 Aufgabe 1: Gütermarkt in einer offenen Volkswirtschaft',
+    topic: 'DD-, AA-, ZZ- und NX-Geraden, expansive Fiskalpolitik, nominale Abwertung, Handelsbilanz und Marshall-Lerner-Bedingung',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 2, Aufgabe 1: offene Gütermarkt-Schaubilder herleiten, Mechanismen erklären, Handelsbilanzgleichgewicht beurteilen, Steuersenkungsschock bei konstantem Wechselkurs analysieren und nominale Dollar-Abwertung bei geltender Marshall-Lerner-Bedingung einordnen. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt2.a1.p1-open-goods-market-dd-aa-zz-nx'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 28,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'DD-, AA-, ZZ- und NX-Geraden ohne Wirkungsmechanismus nur zeichnen',
+      'Handelsbilanz im Gleichgewicht automatisch als ausgeglichen behandeln',
+      'Steuersenkungsschock mit Wechselkursänderung vermischen, obwohl E und G in Teil b konstant bleiben',
+      'Nominale Abwertung bei konstanten Preisniveaus nicht als reale Abwertung lesen',
+      'Marshall-Lerner-Bedingung nennen, aber nicht auf Handelsbilanzdefizit und Fiskalpolitik-Effekt beziehen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a-c',
+      'a) DD-, AA-, ZZ- und NX-Geraden in geeigneten Schaubildern herleiten, Wirkungsmechanismen erklären und Handelsbilanzausgleich im Gleichgewicht beurteilen',
+      'b) expansive Fiskalpolitik durch sinkendes T bei konstantem Wechselkurs und konstantem G auf Produktion und Handelsbilanz der USA analysieren',
+      'c) nominale Dollar-Abwertung bei konstanten Preisniveaus und geltender Marshall-Lerner-Bedingung auf Produktion und Handelsbilanzdefizit beziehen',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_2.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-c',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

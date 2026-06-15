@@ -214,6 +214,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Komparative Statik: Nachfrageveränderungen",
       fingerprint: '23b0f3c61a11ef69',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt2.a1.p1-open-goods-market-dd-aa-zz-nx',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-2',
+      sourcePath: 'Übungen/Uebungsblatt_2.pdf',
+      publicLabel: 'Uebungsblatt_2',
+      page: 1,
+      section: 'Aufgabe 1: Gütermarkt in einer offenen Volkswirtschaft',
+      fingerprint: '4a3718c7dce45bbfc3ddcf66b4fead21add9bb1ab44918f4fd64c03ed62a0937',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-2-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   geldmengen: [

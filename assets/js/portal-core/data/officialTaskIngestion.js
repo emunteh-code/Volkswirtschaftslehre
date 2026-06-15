@@ -141,6 +141,9 @@ export function buildOfficialDocumentRegistryFamilies({
 
 export function buildOfficialTaskFamilyPlaceholders({ moduleSlug, chapterIds = [], documents = [] }) {
   const summary = summarizeOfficialTaskDocuments(documents);
+  const officialTaskGap = summary.total === 0
+    ? 'Expliziter Platzhalter: Keine offiziellen Aufgaben-Dokumente sind im Modul registriert; item-level Mapping ist erst nach Upload offizieller Aufgabenquellen möglich.'
+    : `Expliziter Platzhalter: ${summary.total} offizielle Aufgaben-Dokumente sind im Modul registriert, aber diese Konzeptfamilie ist noch nicht auf konkrete Aufgaben gemappt.`;
   return chapterIds.map((conceptId) => ({
     id: `${moduleSlug}.official-task.placeholder.${conceptId}`,
     module: moduleSlug,
@@ -148,8 +151,7 @@ export function buildOfficialTaskFamilyPlaceholders({ moduleSlug, chapterIds = [
     title: `Official-task mapping placeholder (${conceptId})`,
     sourceStatus: 'platform-added-explanation',
     officialTaskCoverage: 'missing-official-task-source',
-    officialTaskGap:
-      `Expliziter Platzhalter: ${summary.total} offizielle Aufgaben-Dokumente sind im Modul registriert, aber diese Konzeptfamilie ist noch nicht auf konkrete Aufgaben gemappt.`,
+    officialTaskGap,
     placeholderLabel: 'non-deceptive-placeholder'
   }));
 }

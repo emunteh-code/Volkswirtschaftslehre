@@ -8,6 +8,9 @@ import { CHAPTERS } from './chapters.js';
 export const MIKRO2_TASK_PLACEHOLDER_POLICY =
   'Platzhalter sind explizit als non-deceptive markiert und enthalten keine erfundenen Aufgabeninhalte.';
 
+export const MIKRO2_OFFICIAL_TASK_SOURCE_GAP =
+  'Der aktuelle Mikro-II-Korpus enthält Vorlesungsfolien, Zusatzliteratur und CDF-Dateien, aber keine offiziellen Übungsblätter, Tutoriumslösungen, Probeklausuren oder Altklausuren.';
+
 export const MIKRO2_OFFICIAL_TASK_DOC_BASELINE = Object.freeze({
   exercise: 0,
   solution: 0,
@@ -26,7 +29,7 @@ export function summarizeMikro2OfficialTaskDocuments(docs) {
 }
 
 export function buildMikro2OfficialTaskPlaceholders(docs) {
-  const chapterIds = CHAPTERS.slice(0, 1).map((chapter) => chapter.id);
+  const chapterIds = CHAPTERS.map((chapter) => chapter.id);
   return buildOfficialTaskFamilyPlaceholders({
     moduleSlug: 'mikro2',
     chapterIds,

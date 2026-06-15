@@ -14,7 +14,7 @@ export const FULL_EXAMS = {
     sourceLabel: 'Portal-Simulation',
     officialTaskLabel: 'Keine offizielle Klausurquelle',
     sourceNote: 'Diese Probeklausur ist eine portal-authored Simulation aus source-backed Themenfamilien. Sie ist nicht aus einer offiziellen Mikro-II-Probeklausur, Altklausur oder einem Lösungsschlüssel rekonstruiert.',
-    sourceEvidence: '0 offizielle Klausur-/Übungsquellen im aktuellen Mikro-II-Korpus',
+    sourceEvidence: '0 offizielle Klausur-/Übungsquellen im aktuellen Mikro-II-Korpus (Inventarprüfung 2026-06-15)',
     aufgaben: [
       {
         label: 'Block A',

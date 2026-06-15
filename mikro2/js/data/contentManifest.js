@@ -111,7 +111,7 @@ const BASE_PROVENANCE_BY_CONCEPT = buildProvenanceByConceptFromPrimaryRefs({
     motivation: NOTES_SOURCED,
     theory: NOTES_SOURCED,
     formulas: NOTES_SOURCED,
-    tasks: 'Portal-authored practice aligned to source topics where refs exist; not a verbatim official exercise archive.',
+    tasks: 'Portal-authored practice aligned to source-backed topics. The current Mikro II corpus contains no official exercise, tutorial, Probeklausur, old-exam or solution-key files, so this is not a verbatim official task archive.',
     intuition: 'Compressed recall layer for the closed learning loop.',
     graph: 'Interactive graphs for exam-style intuition; not a single fixed course figure.',
     stepProblems: 'Step-problem Schnelltest items; platform-added drills aligned to source topics where refs exist.'

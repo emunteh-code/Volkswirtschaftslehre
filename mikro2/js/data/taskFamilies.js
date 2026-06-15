@@ -3,10 +3,14 @@
 // VL-anchor-grounded exam-pattern layer.
 // ============================================================
 
-import { buildMikro2OfficialTaskPlaceholders, MIKRO2_OFFICIAL_TASK_DOC_BASELINE } from './officialTaskIngestion.js';
+import {
+  buildMikro2OfficialTaskPlaceholders,
+  MIKRO2_OFFICIAL_TASK_DOC_BASELINE,
+  MIKRO2_OFFICIAL_TASK_SOURCE_GAP
+} from './officialTaskIngestion.js';
 
 const MODULE = 'mikro2';
-const OFFICIAL_TASK_GAP = "Keine offiziellen Klausur-Artefakte im Korpus; Übungs-Mapping offen.";
+const OFFICIAL_TASK_GAP = MIKRO2_OFFICIAL_TASK_SOURCE_GAP;
 
 function family({
   id,
@@ -51,7 +55,7 @@ function familyFromPlaceholder(placeholder) {
     conceptId: placeholder.conceptId,
     title: `Mikroökonomik II official-task mapping placeholder (${placeholder.conceptId})`,
     topic: 'Official task ingestion',
-    method: 'Dokumente registriert; item-level Mapping steht aus.',
+    method: 'Keine offiziellen Aufgaben-/Klausurdokumente im aktuellen Korpus; item-level Mapping erst nach Upload offizieller Aufgabenquellen möglich.',
     sourceStatus: placeholder.sourceStatus,
     sourceAnchorIds: [],
     difficulty: 'offen',

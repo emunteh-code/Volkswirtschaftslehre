@@ -41,6 +41,8 @@ const DOLLAR_ENTITY = "&#36;"
 function isProbableInlineMathInner(inner) {
   const t = String(inner ?? "").trim()
   if (!t || t.length > 220) return false
+  if (/^\(?\s*[+-]?\d+(?:[,.]\d+)?\s*,\s*[+-]?\d+(?:[,.]\d+)?\s*\)?$/.test(t)) return true
+  if (/^(?:\(?\s*[+-]?\d+(?:[,.]\d+)?\s*,\s*[+-]?\d+(?:[,.]\d+)?\s*\)?)(?:\s*,\s*\(?\s*[+-]?\d+(?:[,.]\d+)?\s*,\s*[+-]?\d+(?:[,.]\d+)?\s*\)?)+$/.test(t)) return true
   if (/\\|\^|_|\{,\}|\\hat|\\bar|\\mu|\\sigma|\\alpha|\\beta|\\rho|\\varepsilon|\\delta|\\partial|\\frac|\\sqrt|\\sum|\\int|\\text|\\implies|\\quad|\\cdot|\\times|\\leq|\\geq|\\neq|\\in|\\sim/.test(t)) return true
   if (/[=<>≤≥≠]/.test(t) && /\d/.test(t)) return true
   if (/^(?:H_[01]|df|r|t|p|n|F|z)(?:\s*[=<>≤≥]|\s*\\in\b|\s*:)/i.test(t)) return true

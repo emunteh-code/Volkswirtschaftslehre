@@ -7,7 +7,6 @@ import {
   renderGraphContextBlock,
   renderGraphLegendHtml
 } from "./graphClarity.js";
-import { renderMicroRetrievalCheck } from "../pedagogy/learnerPedagogy.js";
 
 const DEFAULT_PROMPT =
   "Bevor Sie die Regler bewegen: Welche Kurve oder welcher Punkt sollte sich ändern — und welche Größe bleibt zunächst fix?";
@@ -102,14 +101,9 @@ export function renderGraphPedagogyFooter(conceptId, moduleHint = "") {
   const entry = PEDAGOGY_BY_CONCEPT[conceptId] || {};
   const prompt = entry.prompt || DEFAULT_PROMPT;
   const notation = entry.notation || DEFAULT_NOTATION;
-  const microCheck = renderMicroRetrievalCheck(
-    "Kannst du die Achsen und die Hauptkurve benennen — ohne ins Theorie-Tab zu schauen?",
-    notation.replace(/<[^>]+>/g, " ").trim() || "Notation im Tab Theorie nachlesen."
-  );
   return `<footer class="graph-pedagogy-footer" aria-label="Grafik-Lernhilfe">
 <p class="graph-pedagogy-prompt"><span class="graph-pedagogy-label">Vorhersage</span> ${prompt}</p>
 <p class="graph-pedagogy-notation">${notation}</p>
-<div class="graph-pedagogy-micro">${microCheck}</div>
 </footer>`;
 }
 

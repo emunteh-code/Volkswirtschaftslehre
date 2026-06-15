@@ -8982,6 +8982,193 @@ body.light-mode #shortcutHint .sc-key {
   text-decoration: underline;
 }
 
+/* ── Landing hero and lesson-entry visual correction — 2026-06-15 ── */
+body[data-page="landing"] .lp-hero {
+  min-height: clamp(420px, 58vh, 620px);
+  padding: clamp(54px, 7vw, 86px) 0 clamp(46px, 6vw, 76px);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--surface) 94%, var(--accent) 6%) 0%, var(--surface) 58%, color-mix(in srgb, var(--surface2) 88%, var(--accent) 12%) 100%);
+}
+
+body[data-page="landing"] .lp-hero::before {
+  background:
+    linear-gradient(color-mix(in srgb, var(--border) 54%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border) 48%, transparent) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 86%, transparent 100%);
+  opacity: 0.26;
+}
+
+body[data-page="landing"] .lp-hero::after {
+  content: "";
+  position: absolute;
+  right: max(28px, calc((100vw - 1360px) / 2 + 36px));
+  top: 50%;
+  width: clamp(300px, 31vw, 470px);
+  aspect-ratio: 1.25;
+  transform: translateY(-50%);
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 72%, var(--accent) 28%);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 72%, #fff 28%) 0 9%, transparent 9% 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--text) 88%, transparent) 0 7%, transparent 7% 100%),
+    linear-gradient(90deg, transparent 0 15%, color-mix(in srgb, var(--accent) 18%, transparent) 15% 45%, transparent 45% 49%, color-mix(in srgb, var(--math-ink, #C91FEA) 18%, transparent) 49% 74%, transparent 74% 100%),
+    repeating-linear-gradient(180deg, transparent 0 22px, color-mix(in srgb, var(--border) 72%, transparent) 22px 23px, transparent 23px 46px),
+    color-mix(in srgb, var(--card) 92%, var(--surface) 8%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 24%, transparent),
+    0 24px 58px color-mix(in srgb, #000 18%, transparent);
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+body[data-page="landing"] .lp-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-page="landing"] .lp-hero-content {
+  max-width: min(100%, 650px);
+  min-height: 0;
+}
+
+body[data-page="landing"] .lp-hero-title {
+  max-width: 12ch;
+  margin-bottom: 16px;
+  letter-spacing: 0;
+}
+
+body[data-page="landing"] .lp-hero-desc {
+  max-width: 38rem;
+  color: color-mix(in srgb, var(--text) 74%, var(--muted) 26%);
+}
+
+body[data-page="landing"] .lp-hero-trust {
+  margin: 12px 0 18px;
+  padding-left: 12px;
+  border-left: 2px solid color-mix(in srgb, var(--math-ink, #C91FEA) 72%, var(--accent) 28%);
+  color: color-mix(in srgb, var(--muted) 86%, var(--text) 14%);
+}
+
+body[data-page="landing"] .lp-hero-btn {
+  border-radius: var(--r-sm, 8px);
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 76%, var(--math-ink, #C91FEA) 24%));
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+body[data-page="landing"] .lp-hero-featured {
+  margin: 18px 0 0;
+  max-width: 33rem;
+  padding: 16px 18px;
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 66%, var(--accent) 34%);
+  border-left: 4px solid color-mix(in srgb, var(--accent) 74%, var(--math-ink, #C91FEA) 26%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 94%, #fff 6%), color-mix(in srgb, var(--card) 98%, var(--accent) 2%));
+  box-shadow: 0 18px 42px color-mix(in srgb, #000 12%, transparent);
+}
+
+body[data-page="landing"] .lp-hero-featured-title {
+  font-size: var(--type-lg, 1.25rem);
+  letter-spacing: 0;
+}
+
+body[data-page="landing"].theme-light .lp-hero {
+  background:
+    linear-gradient(90deg, #f7f8f6 0%, #f1f4f8 58%, #edf4ff 100%);
+}
+
+body[data-page="landing"].theme-light .lp-hero-featured {
+  background:
+    linear-gradient(180deg, #ffffff, color-mix(in srgb, #ffffff 94%, var(--accent) 6%));
+}
+
+@media (max-width: 980px) {
+  body[data-page="landing"] .lp-hero::after {
+    opacity: 0.18;
+    right: 20px;
+    width: min(62vw, 420px);
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-page="landing"] .lp-hero {
+    min-height: auto;
+  }
+
+  body[data-page="landing"] .lp-hero::after {
+    display: none;
+  }
+
+  body[data-page="landing"] .lp-hero-title {
+    max-width: none;
+  }
+}
+
+#content .lesson-hero-card {
+  border-radius: var(--r-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, var(--accent) 40%);
+  border-left: 4px solid color-mix(in srgb, var(--accent) 74%, var(--math-ink, #C91FEA) 26%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 96%, var(--accent) 4%), var(--card));
+  box-shadow: 0 14px 34px color-mix(in srgb, #000 10%, transparent);
+}
+
+body.light-mode #content .lesson-hero-card {
+  background:
+    linear-gradient(180deg, #fff, color-mix(in srgb, #fff 94%, var(--accent) 6%));
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+#content .lesson-hero-card__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+#content .lesson-hero-card__title::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--math-ink, #C91FEA);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--math-ink, #C91FEA) 14%, transparent);
+  flex: 0 0 auto;
+}
+
+#content .lesson-hero-card__grid {
+  gap: 18px 26px;
+}
+
+@media (min-width: 720px) {
+  #content .lesson-hero-card__col--why {
+    padding-left: 24px;
+    border-left: 1px solid color-mix(in srgb, var(--border) 76%, var(--accent) 24%);
+  }
+}
+
+#content .lesson-hero-card__label {
+  color: color-mix(in srgb, var(--accent) 70%, var(--math-ink, #C91FEA) 30%);
+}
+
+#content .lesson-hero-chip {
+  border-radius: var(--r-sm, 8px);
+  color: color-mix(in srgb, var(--accent) 72%, var(--math-ink, #C91FEA) 28%);
+  background: color-mix(in srgb, var(--accent-soft) 70%, var(--math-soft, transparent) 30%);
+}
+
+#content mjx-container,
+#content .math-inline,
+#content .math-block mjx-container,
+#content .prob-text mjx-container,
+#content .step-text mjx-container,
+#content .result-badge mjx-container,
+#content .f-eq mjx-container,
+#rightPanel mjx-container {
+  color: var(--math-ink, #C91FEA) !important;
+}
+
 .lesson-outcomes {
   margin: 0 0 20px;
   padding: 14px 16px;

@@ -640,6 +640,30 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Beispiel: Wechselkursbewegungen seit dem Ende des Bretton Woods-",
       fingerprint: 'c5d58060fcae0fcd',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt8.a1.p1-cobb-douglas-production-function',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-8',
+      sourcePath: 'Übungen/Uebungsblatt_8.pdf',
+      publicLabel: 'Uebungsblatt_8',
+      page: 1,
+      section: 'Aufgabe 1: Produktionsfunktion',
+      fingerprint: 'fd12331f3bfc45987c5135ef96a24ab6b3796b448870337d17f120d015aded9f',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-8-pass-1',
+      reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt8.a2.p2-easterlin-paradox-wellbeing',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-8',
+      sourcePath: 'Übungen/Uebungsblatt_8.pdf',
+      publicLabel: 'Uebungsblatt_8',
+      page: 2,
+      section: 'Aufgabe 2: BIP, Glück und das Easterlin-Paradox',
+      fingerprint: 'fd12331f3bfc45987c5135ef96a24ab6b3796b448870337d17f120d015aded9f',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-8-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   solow_basis: [

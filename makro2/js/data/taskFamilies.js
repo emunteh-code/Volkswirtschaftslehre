@@ -1458,6 +1458,75 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-8-a1-cobb-douglas-production-function',
+    conceptId: 'aggregierte_pf',
+    title: 'Uebungsblatt 8 Aufgabe 1: Cobb-Douglas-Produktionsfunktion',
+    topic: 'Produktionsfunktion, fallende Grenzerträge, Grenzerträge, Skalenerträge, Kapitalintensität, Produktion pro Kopf und Kapitalproduktivität',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 8, Aufgabe 1: Cobb-Douglas-Produktionsfunktion grafisch, verbal und formal zur Erklärung fallender Grenzerträge nutzen, Grenzerträge und Skalenerträge unterscheiden, Y=K^0.5 N^0.5 für K=21 und N=7 auswerten, Verdreifachung der Faktorausstattung analysieren, einseitige Faktorerhöhung vergleichen und die Funktion in Pro-Kopf-Größen umformen. Native Text wurde extrahiert und die gerenderten Seiten wurden visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt8.a1.p1-cobb-douglas-production-function'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 40,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Fallende Grenzerträge mit fallenden Skalenerträgen verwechseln',
+      'Kapitalintensität K/N, Produktion pro Kopf Y/N und Produktion pro Kapitaleinheit Y/K vermischen',
+      'Verdreifachung beider Faktoren wie eine einseitige Faktorerhöhung behandeln',
+      'Cobb-Douglas-Exponenten nicht zur Skalenertragsklassifikation nutzen',
+      'Pro-Kopf-Produktionsfunktion ohne Division durch N herleiten'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a-f',
+      'a) fallende Grenzerträge anhand einer Cobb-Douglas-Produktionsfunktion grafisch, verbal und formal erläutern',
+      'b) Unterschied zwischen Grenzerträgen und Skalenerträgen erklären',
+      'c) Gesamtproduktion, Kapitalintensität, Produktion pro Kopf und Produktion pro Kapitaleinheit für K=21 und N=7 bestimmen',
+      'd) dieselben Größen bei Verdreifachung von Kapital und Arbeit bestimmen und Skalenertragsart benennen',
+      'e) Produktionsänderung bei isolierter Erhöhung jeweils eines Faktors um 10 Einheiten vergleichen und erläutern',
+      'f) Pro-Kopf-Produktionsfunktion formulieren und Pro-Kopf-Output für Teil c) bestimmen',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_8.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-f',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-8-a2-easterlin-paradox-wellbeing',
+    conceptId: 'aggregierte_pf',
+    title: 'Uebungsblatt 8 Aufgabe 2: BIP, Glück und Easterlin-Paradox',
+    topic: 'BIP als Wohlstandsindikator, Easterlin-Paradox, Wellbeing-Messung, Bruttonationalglück, World Happiness Report und Entwicklungsindikatoren',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 8, Aufgabe 2: den angegebenen VOXEU-Beitrag von Sriram Balasubramanian als externe Lektüre verwenden, Evidenz für das Easterlin-Paradox anhand Tabelle 1 diskutieren, Bhutans Bruttonationalglück mit dem World-Happiness-Report-Index vergleichen und die weltweite Einführung von Bruttonationalglück als Entwicklungsindikator diskutieren. Nur die sichtbare Aufgabenstellung wurde ingestiert; der externe Artikelinhalt selbst ist nicht Teil des bereitgestellten Corpus.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt8.a2.p2-easterlin-paradox-wellbeing'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 35,
+    examRelevance: 'mittel',
+    commonTraps: [
+      'Den externen VOXEU-Artikel als bereits ingestierten Portalinhalt behandeln',
+      'BIP und Lebenszufriedenheit ohne Messkonzept zu vergleichen',
+      'Easterlin-Paradox nur definieren, aber nicht anhand der im Artikel genannten Tabelle diskutieren',
+      'Bruttonationalglück und World Happiness Report als identische Indizes behandeln',
+      'Normative Empfehlung ohne Bezug auf die im Prompt geforderten Argumente formulieren'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 enthält sichtbare Teilaufgaben a-c',
+      'a) Evidenz für das Easterlin-Paradox anhand der in Tabelle 1 aufgeführten Länder diskutieren',
+      'b) Bhutans Bruttonationalglück vom Index der Lebenszufriedenheit des World Happiness Reports unterscheiden und recherchieren',
+      'c) weltweite Einführung von Bruttonationalglück als Entwicklungsindikator diskutieren und Argumente des Autors aufnehmen',
+      'Keine Punktwerte, offizielle Lösung oder externer Artikelinhalt wurden ingestiert'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_8.pdf',
+      page: 'Seite 2',
+      task: 'Aufgabe 2, Teile a-c',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

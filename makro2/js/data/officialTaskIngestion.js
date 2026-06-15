@@ -24,7 +24,8 @@ export const MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'makro2.official-task.uebungsblatt-6-a2-debt-monetization-is-lm-pc',
   'makro2.official-task.uebungsblatt-7-a3-taylor-rule-demand-shock',
   'makro2.official-task.uebungsblatt-8-a1-cobb-douglas-production-function',
-  'makro2.official-task.uebungsblatt-8-a2-easterlin-paradox-wellbeing'
+  'makro2.official-task.uebungsblatt-8-a2-easterlin-paradox-wellbeing',
+  'makro2.official-task.uebungsblatt-9-a1-solow-graph-golden-rule'
 ]);
 
 export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -120,6 +121,15 @@ export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
       ],
       reviewedAt: '2026-06-15',
       reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-8-pass-1'
+    },
+    {
+      path: 'Makroökonomik II/Übungen/Uebungsblatt_9.pdf',
+      reviewedPages: [1],
+      reviewedTaskFamilies: [
+        'makro2.official-task.uebungsblatt-9-a1-solow-graph-golden-rule'
+      ],
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-9-pass-1'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',

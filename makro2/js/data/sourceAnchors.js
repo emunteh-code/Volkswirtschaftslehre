@@ -730,6 +730,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "Beispiel: Wechselkursbewegungen seit dem Ende des Bretton Woods-",
       fingerprint: 'c5d58060fcae0fcd',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt9.a1.p1-solow-graph-golden-rule',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-9',
+      sourcePath: 'Übungen/Uebungsblatt_9.pdf',
+      publicLabel: 'Uebungsblatt_9',
+      page: 1,
+      section: 'Aufgabe 1: Solow Grundmodell graphisch',
+      fingerprint: 'ad9bc83e64189f1eefe95edec4545f54485194749efd2f2f59fb3a6502586f05',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-9-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   tech_fortschritt: [

@@ -1527,6 +1527,42 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-9-a1-solow-graph-golden-rule',
+    conceptId: 'goldene_sparquote',
+    title: 'Uebungsblatt 9 Aufgabe 1: Solow-Grundmodell graphisch und Goldene Regel',
+    topic: 'Solow-Grundmodell, konstante Bevölkerung, konstante Arbeitseffizienz, Produktion pro Kopf, Kapitalintensität, Ersparnis, Investitionen, Abschreibungen, Steady State, Sparquotenerhöhung und Goldene Regel',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 9, Aufgabe 1: für eine Volkswirtschaft mit konstanter Bevölkerung und konstanter Arbeitseffizienz das Solow-Grundmodell graphisch darstellen, Kurven für Produktion, Ersparnis, Investitionen und Abschreibungen pro Kopf in Abhängigkeit von Kapitalintensität erklären, Konsum, Investition und Ersparnis im Steady State markieren, Konvergenz zum Wachstumsgleichgewicht begründen, Sparquotenerhöhung graphisch analysieren und den Zusammenhang zwischen Konsum pro Kopf und Sparquote mit der Sparquote der Goldenen Regel kennzeichnen. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt9.a1.p1-solow-graph-golden-rule'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 45,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Kapitalintensität und Produktion pro Kopf auf derselben Achse verwechseln',
+      'Ersparnis pro Kopf und Investitionen pro Kopf im Steady State unterschiedlich einzeichnen',
+      'Abschreibungen nicht als lineare Funktion der Kapitalintensität darstellen',
+      'Steady-State-Konvergenz nur als Auswendigtext ohne Kurvenvergleich erklären',
+      'Sparquotenerhöhung als dauerhaft höheres Pro-Kopf-Wachstum statt als Niveau- und Übergangseffekt behandeln',
+      'Goldene-Regel-Sparquote mit maximaler Produktion statt maximalem Konsum pro Kopf begründen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a-e',
+      'a) Grafik für Produktion, Ersparnis, Investitionen und Abschreibungen jeweils in Beziehung zur Kapitalintensität erstellen und Kurvenverlauf erklären',
+      'b) Konsum, Investition und Ersparnis jeweils pro Kopf im Steady State in der Grafik zeigen',
+      'c) knapp schildern, wie und warum die Volkswirtschaft dem Wachstumsgleichgewicht zustrebt',
+      'd) Wirkungen einer Sparquotenerhöhung auf Kapitalintensität, Produktion und Produktionswachstum pro Kopf anhand einer Grafik erläutern',
+      'e) Zusammenhang zwischen Konsum pro Kopf und Sparquote grafisch darstellen sowie Sparquote der Goldenen Regel kennzeichnen und beschreiben',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_9.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-e',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

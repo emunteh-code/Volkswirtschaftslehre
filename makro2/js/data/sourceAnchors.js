@@ -372,6 +372,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.93,
       reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-3-pass-1',
       reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt4.a1.p1-currency-board-real-exchange-rate',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-4',
+      sourcePath: 'Übungen/Uebungsblatt_4.pdf',
+      publicLabel: 'Uebungsblatt_4',
+      page: 1,
+      section: 'Aufgabe 1: Currency Board',
+      fingerprint: '8921673129d432a1c0111cbdc6f30745bc32725f37984d251b8fd697e06006c3',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-4-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   wk_krisen: [

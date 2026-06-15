@@ -17,7 +17,8 @@ export const MAKRO2_REVIEWED_OFFICIAL_TASK_FAMILY_IDS = Object.freeze([
   'makro2.official-task.klausur-feb-2024-a4-solow-technology-savings-shock',
   'makro2.official-task.uebungsblatt-2-a1-open-goods-market-dd-aa-zz-nx',
   'makro2.official-task.uebungsblatt-3-a1-mundell-fleming-equilibrium',
-  'makro2.official-task.uebungsblatt-3-a2-fixed-exchange-trilemma'
+  'makro2.official-task.uebungsblatt-3-a2-fixed-exchange-trilemma',
+  'makro2.official-task.uebungsblatt-4-a1-currency-board-real-exchange-rate'
 ]);
 
 export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
@@ -66,6 +67,15 @@ export const MAKRO2_OFFICIAL_TASK_REVIEW_STATUS = Object.freeze({
       ],
       reviewedAt: '2026-06-15',
       reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-3-pass-1'
+    },
+    {
+      path: 'Makroökonomik II/Übungen/Uebungsblatt_4.pdf',
+      reviewedPages: [1],
+      reviewedTaskFamilies: [
+        'makro2.official-task.uebungsblatt-4-a1-currency-board-real-exchange-rate'
+      ],
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-4-pass-1'
     }
   ],
   officialTaskSourceAllowed: 'reviewed-family-ids-only',

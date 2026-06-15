@@ -1280,6 +1280,41 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-4-a1-currency-board-real-exchange-rate',
+    conceptId: 'wk_regime',
+    title: 'Uebungsblatt 4 Aufgabe 1: Currency Board und realer Wechselkurs Argentiniens',
+    topic: 'Currency Board, fester Wechselkurs, Inflation, realer Wechselkurs, Wettbewerbsfähigkeit und Argentinien-Krise',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 4, Aufgabe 1: Inflationsdaten für Argentinien und die USA nutzen, die Entwicklung des realen Wechselkurses 1992-1996 und 1996-2002 berechnen, volkswirtschaftliche Konsequenzen beschreiben, Festhalten am Currency Board einordnen und Krisenursachen diskutieren. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt4.a1.p1-currency-board-real-exchange-rate'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 35,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Nominalen festen Wechselkurs mit konstantem realem Wechselkurs gleichsetzen',
+      'Inflationsdifferenzen zwischen Argentinien und den USA nicht kumulativ interpretieren',
+      'Reale Aufwertung/Abwertung ohne Wettbewerbsfähigkeitsfolge beschreiben',
+      'Currency Board nur als Wechselkursfixierung und nicht als Glaubwürdigkeitsinstrument lesen',
+      'Rechercheteile mit nicht bereitgestellten Quellen als Portalwissen ausgeben'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a-e',
+      'a) realen Wechselkurs Argentiniens gegenüber den USA von 1992 bis Anfang 1996 berechnen',
+      'b) Konsequenzen der Entwicklung des realen Wechselkurses für Argentinien beschreiben',
+      'c) Gründe für das Festhalten am Currency Board recherchieren',
+      'd) realen Wechselkurs Argentiniens gegenüber den USA von 1996 bis Anfang 2002 berechnen',
+      'e) mögliche Ursachen der Argentinien-Krise diskutieren und recherchieren',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_4.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-e',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

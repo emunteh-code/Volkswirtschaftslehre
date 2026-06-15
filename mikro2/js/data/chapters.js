@@ -614,7 +614,10 @@ export const CONTENT = {
       { label: 'Cournot-Menge (symm.)', eq: String.raw`$$q^* = \frac{a-c}{3b}$$`, desc: 'Duopol-Gleichgewicht', variables: { a: 'Nachfrageabschnitt', c: 'Grenzkosten', b: 'Steigungsparameter' } },
       { label: 'Cournot-Output (VL-Normalform)', eq: String.raw`$$y_i^C=\frac{1-2c_i+c_j}{3}$$`, desc: 'Cournot-Output bei $p=1-y_i-y_j$.' },
       { label: 'Cournot identisch (VL)', eq: String.raw`$$y^C=\frac{1-c}{3},\quad p^C=\frac{1+2c}{3},\quad \pi^C=\frac{(1-c)^2}{9}$$`, desc: 'Symmetrisches Cournot-Duopol in VL6.' },
-      { label: 'Bertrand-Paradox', eq: String.raw`$$p=c,\quad \pi_i=0$$`, desc: 'Preiswettbewerb mit identischen Gütern führt zur Konkurrenzlösung.' }
+      { label: 'Bertrand-Paradox', eq: String.raw`$$p=c,\quad \pi_i=0$$`, desc: 'Preiswettbewerb mit identischen Gütern führt zur Konkurrenzlösung.' },
+      { label: 'Bertrand differenziert: Preis', eq: String.raw`$$p^B=\frac{1-\gamma+c}{2-\gamma}$$`, desc: 'Gleichgewichtspreis bei differenzierten Gütern und identischen Grenzkosten.' },
+      { label: 'Bertrand differenziert: Menge', eq: String.raw`$$y^B=\frac{1-c}{(1+\gamma)(2-\gamma)}$$`, desc: 'Gleichgewichtsmenge je Unternehmen in VL8.' },
+      { label: 'Bertrand differenziert: Gewinn', eq: String.raw`$$\pi^B=\frac{(1-\gamma)(1-c)^2}{(1+\gamma)(2-\gamma)^2}$$`, desc: 'Unternehmensgewinn im differenzierten Bertrand-Gleichgewicht.' }
     ],
     aufgaben: [
       {

@@ -298,6 +298,66 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.97,
       reviewedAt: '2026-06-15',
       reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl08.p05.diff-demand',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-8',
+      sourcePath: 'Vorlesungsfolien/Mikro2_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 5,
+      section: 'Preiswettbewerb mit differenzierten Gütern: direktes Nachfragesystem',
+      fingerprint: 'ff76d410e734ea7e',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl08.p07.diff-reaction',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-8',
+      sourcePath: 'Vorlesungsfolien/Mikro2_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 7,
+      section: 'Preiswettbewerb mit differenzierten Gütern: Reaktionsfunktionen',
+      fingerprint: '59466cd9e5d8a4b6',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl08.p08.diff-price',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-8',
+      sourcePath: 'Vorlesungsfolien/Mikro2_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 8,
+      section: 'Preiswettbewerb mit differenzierten Gütern: Gleichgewichtspreis',
+      fingerprint: '0d05262fd6094b35',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl08.p10.diff-quantity',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-8',
+      sourcePath: 'Vorlesungsfolien/Mikro2_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 10,
+      section: 'Preiswettbewerb mit differenzierten Gütern: Gleichgewichtsmenge',
+      fingerprint: '336528fef5d68f38',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl08.p12.diff-profit',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-8',
+      sourcePath: 'Vorlesungsfolien/Mikro2_8.pdf',
+      publicLabel: 'Vorlesung 8',
+      page: 12,
+      section: 'Preiswettbewerb mit differenzierten Gütern: Gewinn im Bertrand-Gleichgewicht',
+      fingerprint: 'f74773739c9625ec',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     })
   ],
   oligopol_stackelberg: [

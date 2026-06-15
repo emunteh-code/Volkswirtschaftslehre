@@ -540,6 +540,69 @@ export const FORMULA_CARDS = Object.freeze([
     anchorIds: ["mikro2.oligopol_cournot_bertrand.vl08.p03.bertrand-paradox"]
   }),
   card({
+    id: 'mikro2.oligopol_cournot_bertrand.bertrand_differenziert_preis',
+    conceptId: 'oligopol_cournot_bertrand',
+    officialNotation: "p^B",
+    displayFormula: "$$p^B=\\frac{1-\\gamma+c}{2-\\gamma}$$",
+    intuition: "Gleichgewichtspreis im Bertrand-Modell mit differenzierten Gütern und identischen Grenzkosten.",
+    derivationSteps: [
+        {
+            "label": "Preisreaktionsfunktionen",
+            "text": "VL8 setzt die Reaktionsfunktion des Konkurrenten ein und löst den symmetrischen Preis.",
+            "math": "$$p^B=\\frac{1-\\gamma+c}{2-\\gamma}$$"
+        }
+    ],
+    assumptions: ["Differenzierte Güter","Identische Grenzkosten c_i=c_j=c","Direkte Nachfrage D_i(p_1,p_2)=a-bp_i+dp_j"],
+    appliesWhen: ["Bertrand-Wettbewerb mit differenzierten Gütern","Vergleich Produktdifferenzierung und Preisniveau"],
+    failsWhen: ["Homogene Güter mit Bertrand-Paradox","Mengenwettbewerb statt Preiswettbewerb"],
+    examShortcut: "Sinkendes gamma bedeutet stärkere Differenzierung und höheren Preis.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-apply"],
+    commonMistakes: ["Homogenen Bertrand p=c anwenden","gamma-Wirkung falsch herum interpretieren"],
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl08.p07.diff-reaction","mikro2.oligopol_cournot_bertrand.vl08.p08.diff-price"]
+  }),
+  card({
+    id: 'mikro2.oligopol_cournot_bertrand.bertrand_differenziert_menge',
+    conceptId: 'oligopol_cournot_bertrand',
+    officialNotation: "y^B",
+    displayFormula: "$$y^B=\\frac{1-c}{(1+\\gamma)(2-\\gamma)}$$",
+    intuition: "Gleichgewichtsmenge je identischem Unternehmen im differenzierten Bertrand-Modell.",
+    derivationSteps: [
+        {
+            "label": "Nachfrage nach Einsetzen von p^B",
+            "text": "VL8 nutzt a=b-d=1/(1+gamma) und setzt den Gleichgewichtspreis in die Nachfrage ein.",
+            "math": "$$y^B=\\frac{1-c}{(1+\\gamma)(2-\\gamma)}$$"
+        }
+    ],
+    assumptions: ["Differenzierte Güter","Identische Unternehmen","VL8-Nachfragesystem"],
+    appliesWhen: ["Mengen im differenzierten Bertrand-Gleichgewicht","Vergleich von gamma-Fällen"],
+    failsWhen: ["Asymmetrische Kosten","Homogene Bertrand-Aufgabe ohne Differenzierung"],
+    examShortcut: "Menge ist in gamma nicht monoton; VL8 betont beide Randfälle gamma=0 und gamma=1.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-apply"],
+    commonMistakes: ["Menge monoton in gamma behaupten","p^B nicht zuerst einsetzen"],
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl08.p10.diff-quantity"]
+  }),
+  card({
+    id: 'mikro2.oligopol_cournot_bertrand.bertrand_differenziert_gewinn',
+    conceptId: 'oligopol_cournot_bertrand',
+    officialNotation: "pi^B",
+    displayFormula: "$$\\pi^B=\\frac{(1-\\gamma)(1-c)^2}{(1+\\gamma)(2-\\gamma)^2}$$",
+    intuition: "Unternehmensgewinn im differenzierten Bertrand-Gleichgewicht.",
+    derivationSteps: [
+        {
+            "label": "Gewinn im Bertrand-Gleichgewicht",
+            "text": "VL8 berechnet den Gewinn aus (p^B-c)y^B.",
+            "math": "$$\\pi^B=(p^B-c)y^B=\\frac{(1-\\gamma)(1-c)^2}{(1+\\gamma)(2-\\gamma)^2}$$"
+        }
+    ],
+    assumptions: ["Differenzierte Güter","Identische Grenzkosten","Gleichgewichtspreis und -menge aus VL8"],
+    appliesWhen: ["Gewinnvergleich Cournot vs. Bertrand","Produktdifferenzierung und Marktmacht"],
+    failsWhen: ["gamma=1 als homogene Güter: Bertrand-Paradox","Nicht-VL8-Nachfrageform"],
+    examShortcut: "Bei gamma=1 ist der Gewinn null; bei gamma=0 entspricht er dem Monopolgewinn.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-apply"],
+    commonMistakes: ["Vorzeichen von 1-gamma verlieren","Cournot-Gewinnformel aus VL7 einsetzen"],
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl08.p12.diff-profit"]
+  }),
+  card({
     id: 'mikro2.oligopol_stackelberg.f_hrermenge',
     conceptId: 'oligopol_stackelberg',
     officialNotation: "oligopol_stackelberg",

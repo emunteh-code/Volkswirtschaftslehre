@@ -64,8 +64,46 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       publicLabel: 'Vorlesung 2',
       page: 2,
       section: 'Preissetzung und Preiselastizität der Nachfrage',
-      fingerprint: '372887c7f7512d78',
-      confidence: 0.95
+      fingerprint: '01a453da911b12dd',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.monopol_preissetzung.vl02.p02.monopoly-markup',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro-2-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_2_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 2,
+      section: 'Monopolpreis als Aufschlag auf Grenzkosten',
+      fingerprint: 'c0af93852ecf369f',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.monopol_preissetzung.vl02.p10.linear-monopoly',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro-2-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_2_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 10,
+      section: 'Zahlenbeispiel zum linearen Monopol',
+      fingerprint: '3467ec718fd1c439',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.monopol_preissetzung.vl02.p11.monopoly-welfare',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro-2-2',
+      sourcePath: 'Vorlesungsfolien/Mikro_2_2.pdf',
+      publicLabel: 'Vorlesung 2',
+      page: 11,
+      section: 'Wohlfahrt im Monopol und bei vollkommener Konkurrenz',
+      fingerprint: '5dfd287a193b37d6',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     })
   ],
   preisdiskriminierung: [
@@ -86,8 +124,22 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       publicLabel: 'Vorlesung 3',
       page: 3,
       section: 'Ausgleich der Grenzerlöse zwischen Teilmärkten',
-      fingerprint: '4cd0ceaf50856fcb',
-      confidence: 0.95
+      fingerprint: '31e06bc97d67af06',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.preisdiskriminierung.vl03.p04.elasticity-price-rule',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro-2-3',
+      sourcePath: 'Vorlesungsfolien/Mikro_2_3.pdf',
+      publicLabel: 'Vorlesung 3',
+      page: 4,
+      section: 'Elastizitätenregel bei Preisdiskriminierung dritten Grades',
+      fingerprint: '72b15baca41916a1',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     }),
     anchor({
       id: 'mikro2.preisdiskriminierung.vl04.p02.second-degree',
@@ -96,8 +148,10 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       publicLabel: 'Vorlesung 4',
       page: 2,
       section: 'Preisdiskriminierung zweiten Grades',
-      fingerprint: 'fa6cd11e07fd2eb5',
-      confidence: 0.93
+      fingerprint: '629de34f946cdf51',
+      confidence: 0.95,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     })
   ],
   spieltheorie_statisch: [

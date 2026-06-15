@@ -68,7 +68,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Grenzerlös im Monopol — Kursnotation für Grenzerlös bei fallender Nachfrage.",
     relatedTaskFamilies: ["mikro2.taskfamily.monopol_preissetzung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.monopol_preissetzung.vl02.p01.programm","mikro2.monopol_preissetzung.vl02.p02.markup"]
+    anchorIds: ["mikro2.monopol_preissetzung.vl02.p02.markup"]
   }),
   card({
     id: 'mikro2.monopol_preissetzung.monopolaufschlag',
@@ -94,7 +94,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Monopolaufschlag — Preis als Aufschlag auf Grenzkosten.",
     relatedTaskFamilies: ["mikro2.taskfamily.monopol_preissetzung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.monopol_preissetzung.vl02.p01.programm","mikro2.monopol_preissetzung.vl02.p02.markup"]
+    anchorIds: ["mikro2.monopol_preissetzung.vl02.p02.monopoly-markup"]
   }),
   card({
     id: 'mikro2.monopol_preissetzung.lerner_index',
@@ -120,7 +120,49 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Lerner-Index — Markup steigt mit Marktmacht.",
     relatedTaskFamilies: ["mikro2.taskfamily.monopol_preissetzung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.monopol_preissetzung.vl02.p01.programm","mikro2.monopol_preissetzung.vl02.p02.markup"]
+    anchorIds: ["mikro2.monopol_preissetzung.vl02.p02.monopoly-markup"]
+  }),
+  card({
+    id: 'mikro2.monopol_preissetzung.lineares_monopol',
+    conceptId: 'monopol_preissetzung',
+    officialNotation: "p(y)=1-y, C'(y)=c",
+    displayFormula: "$$y^M=\\frac{1-c}{2},\\quad p^M=\\frac{1+c}{2},\\quad \\pi^M=\\frac{(1-c)^2}{4}$$",
+    intuition: "VL2-Zahlenmodell für ein lineares Monopol mit konstanten Grenzkosten.",
+    derivationSteps: [
+        {
+            "label": "Lineares Monopol",
+            "text": "Aus p(y)=1-y und konstanten Grenzkosten c folgen Monopolmenge, Monopolpreis und Gewinn.",
+            "math": "$$y^M=\\frac{1-c}{2},\\quad p^M=\\frac{1+c}{2},\\quad \\pi^M=\\frac{(1-c)^2}{4}$$"
+        }
+    ],
+    assumptions: ["Inverse Nachfrage p(y)=1-y","Konstante Grenz- und Stückkosten c","Keine Fixkosten"],
+    appliesWhen: ["VL2-Zahlenbeispiel zum Monopol","Vergleich mit Oligopol-/Wettbewerbsmodellen"],
+    failsWhen: ["Nichtlineare Nachfrage","Fixkosten oder nicht konstante Grenzkosten"],
+    examShortcut: "Bei p(y)=1-y liegt die Monopolmenge halb zwischen Null und Wettbewerbsmenge 1-c.",
+    relatedTaskFamilies: ["mikro2.taskfamily.monopol_preissetzung-vl-apply"],
+    commonMistakes: ["p^M vor y^M bestimmen","Gewinn mit Erlös verwechseln"],
+    anchorIds: ["mikro2.monopol_preissetzung.vl02.p10.linear-monopoly"]
+  }),
+  card({
+    id: 'mikro2.monopol_preissetzung.monopol_wohlfahrtsverlust',
+    conceptId: 'monopol_preissetzung',
+    officialNotation: "DWL^M",
+    displayFormula: "$$DWL^M=\\frac{(1-c)^2}{8}$$",
+    intuition: "Wohlfahrtsverlust des linearen Monopols gegenüber vollkommener Konkurrenz.",
+    derivationSteps: [
+        {
+            "label": "Wohlfahrtsvergleich",
+            "text": "VL2 gibt Konsumentenrente, Produzentenrente und Wohlfahrtsverlust für das lineare Monopolmodell an.",
+            "math": "$$KR^M=\\frac{(1-c)^2}{8},\\quad PR^M=\\frac{(1-c)^2}{4},\\quad DWL^M=\\frac{(1-c)^2}{8}$$"
+        }
+    ],
+    assumptions: ["Lineares VL2-Monopolmodell","Vollkommene Konkurrenz als Referenz","Keine Fixkosten"],
+    appliesWhen: ["Wohlfahrtsvergleich Monopol vs. Konkurrenz","DWL-Rechnung im linearen Modell"],
+    failsWhen: ["Andere Nachfrage- oder Kostenfunktion","Keine Wettbewerbsreferenz gegeben"],
+    examShortcut: "Im VL2-Linearmodell entspricht der Monopol-DWL der Monopol-KR: (1-c)^2/8.",
+    relatedTaskFamilies: ["mikro2.taskfamily.monopol_preissetzung-vl-apply"],
+    commonMistakes: ["DWL mit Monopolgewinn verwechseln","Konkurrenzwohlfahrt nicht als Referenz setzen"],
+    anchorIds: ["mikro2.monopol_preissetzung.vl02.p11.monopoly-welfare"]
   }),
   card({
     id: 'mikro2.preisdiskriminierung.preisdiskriminierung_dritten_gra',
@@ -146,7 +188,28 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Preisdiskriminierung dritten Grades — Grenzerlöse werden zwischen Teilmärkten ausgeglichen.",
     relatedTaskFamilies: ["mikro2.taskfamily.preisdiskriminierung-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.preisdiskriminierung.vl03.p02.third-degree","mikro2.preisdiskriminierung.vl03.p03.mr-equalization"]
+    anchorIds: ["mikro2.preisdiskriminierung.vl03.p03.mr-equalization"]
+  }),
+  card({
+    id: 'mikro2.preisdiskriminierung.elastizitaetenregel_dritter_grad',
+    conceptId: 'preisdiskriminierung',
+    officialNotation: "p_1/p_2",
+    displayFormula: "$$\\frac{p_1}{p_2}=\\frac{1-|\\varepsilon_2|^{-1}}{1-|\\varepsilon_1|^{-1}}$$",
+    intuition: "Der Monopolist setzt den höheren Preis im Teilmarkt mit weniger preiselastischer Nachfrage.",
+    derivationSteps: [
+        {
+            "label": "Elastizitätenschreibweise",
+            "text": "Aus dem Ausgleich der Grenzerlöse folgt die Preisrelation zwischen den Teilmärkten.",
+            "math": "$$\\frac{p_1}{p_2}=\\frac{1-|\\varepsilon_2|^{-1}}{1-|\\varepsilon_1|^{-1}}$$"
+        }
+    ],
+    assumptions: ["Klar getrennte Teilmärkte","Keine Arbitrage zwischen Gruppen","Grenzerlöse in Elastizitätenschreibweise"],
+    appliesWhen: ["Preisdiskriminierung dritten Grades","Preisvergleich über Nachfrageelastizitäten"],
+    failsWhen: ["Gruppen nicht trennbar","Zweiter Grad oder perfekte Preisdiskriminierung"],
+    examShortcut: "Weniger elastische Gruppe zahlt den höheren Preis.",
+    relatedTaskFamilies: ["mikro2.taskfamily.preisdiskriminierung-vl-pattern"],
+    commonMistakes: ["Elastizitätenrichtung umdrehen","Preisverhältnis statt Mengenverhältnis interpretieren"],
+    anchorIds: ["mikro2.preisdiskriminierung.vl03.p04.elasticity-price-rule"]
   }),
   card({
     id: 'mikro2.preisdiskriminierung.gruppenerl_s',

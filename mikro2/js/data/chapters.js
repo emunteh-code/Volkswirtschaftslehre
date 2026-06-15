@@ -122,7 +122,9 @@ export const CONTENT = {
     formeln: [
       { label: 'Grenzerlös im Monopol', eq: String.raw`$$E'(y)=p(y)\left(1-\frac{1}{|\varepsilon_{xp}|}\right)$$`, desc: 'Kursnotation für Grenzerlös bei fallender Nachfrage.', variables: { y: 'Outputmenge', p: 'inverse Nachfrage', epsilon: 'Preiselastizität der Nachfrage' } },
       { label: 'Monopolaufschlag', eq: String.raw`$$p(y)=\left(1-\frac{1}{|\varepsilon_{xp}|}\right)^{-1}C'(y)$$`, desc: 'Preis als Aufschlag auf Grenzkosten.' },
-      { label: 'Lerner-Index', eq: String.raw`$$\frac{p-MC}{p}=\frac{1}{|\varepsilon|}$$`, desc: 'Markup steigt mit Marktmacht.' }
+      { label: 'Lerner-Index', eq: String.raw`$$\frac{p-MC}{p}=\frac{1}{|\varepsilon|}$$`, desc: 'Markup steigt mit Marktmacht.' },
+      { label: 'Lineares Monopol', eq: String.raw`$$y^M=\frac{1-c}{2},\quad p^M=\frac{1+c}{2},\quad \pi^M=\frac{(1-c)^2}{4}$$`, desc: 'VL2-Zahlenmodell mit $p(y)=1-y$ und konstanten Grenzkosten $c$.' },
+      { label: 'Monopol-Wohlfahrtsverlust', eq: String.raw`$$DWL^M=\frac{(1-c)^2}{8}$$`, desc: 'Wohlfahrtsverlust des linearen Monopols relativ zur vollkommenen Konkurrenz.' }
     ],
     aufgaben: [
       {
@@ -231,6 +233,7 @@ export const CONTENT = {
 </section>`,
     formeln: [
       { label: 'Preisdiskriminierung dritten Grades', eq: String.raw`$$E_1'(y_1)=E_2'(y_2)=C'(y_1+y_2)$$`, desc: 'Grenzerlöse werden zwischen Teilmärkten ausgeglichen.' },
+      { label: 'Elastizitätenregel', eq: String.raw`$$\frac{p_1}{p_2}=\frac{1-|\varepsilon_2|^{-1}}{1-|\varepsilon_1|^{-1}}$$`, desc: 'Höherer Preis im Teilmarkt mit weniger preiselastischer Nachfrage.' },
       { label: 'Gruppenerlös', eq: String.raw`$$E_i(y_i)=p_i(y_i)y_i,\quad i=1,2$$`, desc: 'Erlös je Kundengruppe.' }
     ],
     aufgaben: [

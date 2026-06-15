@@ -506,6 +506,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.94,
       reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
       reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt5.a1.p1-barro-gordon-commitment',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-5',
+      sourcePath: 'Übungen/Uebungsblatt_5.pdf',
+      publicLabel: 'Uebungsblatt_5',
+      page: 1,
+      section: 'Aufgabe 1: Barro-Gordon Modell',
+      fingerprint: '5cc62331ed0c1473fa0a86d120f5196c01fd19edc9bac8c4240d1165a1c53601',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-5-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   taylor_regel: [

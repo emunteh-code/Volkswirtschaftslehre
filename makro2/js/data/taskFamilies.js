@@ -1315,6 +1315,45 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-5-a1-barro-gordon-commitment',
+    conceptId: 'barro_gordon',
+    title: 'Uebungsblatt 5 Aufgabe 1: Barro-Gordon-Modell und Commitment',
+    topic: 'Barro-Gordon-Modell, Verlustfunktion, Phillipskurve, Reaktionsfunktion, rationale Erwartungen, First-Best, Second-Best und Commitment',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 5, Aufgabe 1: Zielarbeitslosigkeit unterhalb der natürlichen Quote, Verlustfunktion, Phillipskurve, First-Best, Zentralbank-Reaktionsfunktion, rationale Erwartungen, resultierende Arbeitslosigkeit und Wohlfahrtsverlust, Ankündigung ohne Bindung, glaubwürdiges Commitment und Vergleich der Lösungen analysieren. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt5.a1.p1-barro-gordon-commitment'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 40,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Zielarbeitslosigkeit u* = un - Delta mit natürlicher Arbeitslosenquote un verwechseln',
+      'Inflationserwartungen pi^e als exogen lassen, obwohl rationale Erwartungen in Teil d gefragt sind',
+      'Reaktionsfunktion ohne Phillipskurve und Verlustfunktion gemeinsam abzuleiten',
+      'Ankündigung ohne Commitment mit glaubwürdiger Vorabbindung verwechseln',
+      'First-Best, diskretionäre Lösung und Commitment-Lösung nicht sauber im Diagramm trennen'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a-i',
+      'a) Verlustfunktion erläutern und Iso-Verlustkurven der Zentralbank skizzieren',
+      'b) First-Best-Lösung erklären',
+      'c) Zentralbank-Reaktionsfunktion bei gegebenen Inflationserwartungen bestimmen',
+      'd) rationale Inflationserwartungen aus der Reaktionsfunktion ableiten',
+      'e) resultierende Arbeitslosenquote und Wohlfahrtsverlust berechnen',
+      'f) Wirkung einer bloßen Inflationsankündigung vor Erwartungsbildung beurteilen',
+      'g) glaubwürdiges Commitment, gewählte Inflationsrate, Arbeitslosenquote und Wohlfahrtsverlust bestimmen',
+      'h) Lösungen aus b), e) und g) skizzieren und vergleichen',
+      'i) erklären, warum die Zentralbank ohne geeigneten Mechanismus Second-Best nicht erreicht',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_5.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-i',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

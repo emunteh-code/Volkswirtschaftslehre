@@ -1215,6 +1215,71 @@ const OFFICIAL_TASK_SOURCE_FAMILIES = [
       review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
     },
     officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-3-a1-mundell-fleming-equilibrium',
+    conceptId: 'mundell_fleming',
+    title: 'Uebungsblatt 3 Aufgabe 1: Mundell-Fleming-Modell',
+    topic: 'Mundell-Fleming-Gleichgewicht, Gütermarkt, Geldmarkt, Zinsparität, Staatsausgabenmultiplikator und ausländischer Zinsschock',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 3, Aufgabe 1: Gleichgewicht einer kleinen Volkswirtschaft mit Gütermarkt-, Geldmarkt- und Zinsparitätsgleichung grafisch darstellen, gesamtwirtschaftliches Gleichgewicht und Staatsausgabenmultiplikator berechnen, Offenheitsvergleich einordnen und eine Erhöhung von i* grafisch/ökonomisch erklären. Native Text wurde extrahiert und die gerenderte Seite wurde visuell gegengeprüft.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt3.a1.p1-mundell-fleming-equilibrium'],
+    difficulty: 'schwer',
+    expectedTimeMinutes: 35,
+    examRelevance: 'hoch',
+    commonTraps: [
+      'Mengennotierung des Wechselkurses E aus Sicht des Inlands ignorieren',
+      'Gütermarkt-, Geldmarkt- und Zinsparitätsgleichung nicht als gemeinsames Gleichgewichtssystem behandeln',
+      'b2Y und -f2Y in der Gütermarktgleichung algebraisch falsch zusammenführen',
+      'Staatsausgabenmultiplikator ohne Offenheitsvergleich interpretieren',
+      'Erhöhung von i* ohne Wechselkurs- und Gütermarktkanal erklären'
+    ],
+    gradingRubric: [
+      'Aufgabe 1 enthält sichtbare Teilaufgaben a-c',
+      'a) Gleichgewicht in geeignetem Schaubild grafisch darstellen',
+      'b) gesamtwirtschaftliches Gleichgewicht und Staatsausgabenmultiplikator berechnen; geschlossene/weniger offene Volkswirtschaft mit offenerer Volkswirtschaft vergleichen',
+      'c) kontraktivere ausländische Geldpolitik bzw. höheres i* grafisch zeigen und ökonomisch erklären',
+      'Keine Punktwerte oder offizielle Lösung sind auf dem Aufgabenblatt sichtbar'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_3.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 1, Teile a-c',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
+  }),
+  family({
+    id: 'makro2.official-task.uebungsblatt-3-a2-fixed-exchange-trilemma',
+    conceptId: 'wk_regime',
+    title: 'Uebungsblatt 3 Aufgabe 2: Fester Wechselkurs und Trilemma der Geldpolitik',
+    topic: 'Fester Wechselkurs, geldpolitisches Trilemma, Kapitalverkehr, geldpolitische Autonomie und China-Beispiel',
+    method: 'Offizielles Makroökonomik-II-Aufgabenblatt 3, Aufgabe 2: den genannten Blogeintrag als externe Lektüre verwenden, Chinas Situation anhand des geldpolitischen Trilemmas beschreiben, Umgehungsstrategien diskutieren und Chinas gewählten Lösungsweg recherchieren. Nur die sichtbare Aufgabenstellung wurde ingestiert; der Bloginhalt selbst ist nicht Teil des bereitgestellten Corpus.',
+    sourceStatus: 'direct-source',
+    sourceAnchorIds: ['makro2.uebungsblatt3.a2.p1-fixed-exchange-trilemma'],
+    difficulty: 'mittel',
+    expectedTimeMinutes: 25,
+    examRelevance: 'mittel',
+    commonTraps: [
+      'Festen Wechselkurs, freien Kapitalverkehr und autonome Geldpolitik gleichzeitig als erreichbar darstellen',
+      'Externe Blog-Lektüre mit bereitgestellter offizieller Corpusquelle verwechseln',
+      'China-Beispiel ohne Bezug auf Trilemma-Ziele analysieren',
+      'Rechercheteil als reine Meinung statt als begründete Einordnung behandeln'
+    ],
+    gradingRubric: [
+      'Aufgabe 2 enthält sichtbare Teilaufgaben a-c',
+      'a) Situation Chinas anhand des geldpolitischen Trilemmas beschreiben',
+      'b) Umgehbarkeit des Trilemmas und Chinas Strategie diskutieren',
+      'c) Chinas gewählten Lösungsweg recherchieren',
+      'Keine Punktwerte, offizielle Lösung oder Bloginhalt wurden ingestiert'
+    ],
+    currentCoverage: {
+      source: 'Makroökonomik II/Übungen/Uebungsblatt_3.pdf',
+      page: 'Seite 1',
+      task: 'Aufgabe 2, Teile a-c',
+      review: 'Native pdftotext extraction + visual page render review, 2026-06-15'
+    },
+    officialTaskCoverage: 'official-task-source'
   })
 ];
 

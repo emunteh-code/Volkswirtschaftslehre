@@ -282,6 +282,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       confidence: 0.93,
       reviewedBy: 'codex-official-task-review-makro2-feb-2024-pass-1',
       reviewedAt: '2026-06-15'
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt3.a1.p1-mundell-fleming-equilibrium',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-3',
+      sourcePath: 'Übungen/Uebungsblatt_3.pdf',
+      publicLabel: 'Uebungsblatt_3',
+      page: 1,
+      section: 'Aufgabe 1: Mundell-Fleming Modell',
+      fingerprint: '0a5e54c8b3a2d20a2aa094d56f92f1c7812dec032a29a64a8e823653d89ff049',
+      confidence: 0.94,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-3-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   zp_kurve: [
@@ -348,6 +360,18 @@ export const MAKRO2_SOURCE_ANCHORS = Object.freeze({
       section: "asymmetrischen Schocks ausgesetzt sind",
       fingerprint: 'a58091654b3e5dde',
       confidence: 0.88
+    }),
+    anchor({
+      id: 'makro2.uebungsblatt3.a2.p1-fixed-exchange-trilemma',
+      sourceId: 'makro2-exercise-makrookonomik-ii-ubungen-uebungsblatt-3',
+      sourcePath: 'Übungen/Uebungsblatt_3.pdf',
+      publicLabel: 'Uebungsblatt_3',
+      page: 1,
+      section: 'Aufgabe 2: Fester Wechselkurs und das Trilemma der Geldpolitik',
+      fingerprint: '0a5e54c8b3a2d20a2aa094d56f92f1c7812dec032a29a64a8e823653d89ff049',
+      confidence: 0.93,
+      reviewedBy: 'codex-official-task-review-makro2-uebungsblatt-3-pass-1',
+      reviewedAt: '2026-06-15'
     })
   ],
   wk_krisen: [

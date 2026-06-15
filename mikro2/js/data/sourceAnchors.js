@@ -236,8 +236,46 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       publicLabel: 'Vorlesung 6',
       page: 4,
       section: 'Reaktionsfunktionen und Cournot-Gleichgewicht',
-      fingerprint: '2523a6a149b28afe',
-      confidence: 0.93
+      fingerprint: 'e1d584d6cd3a2e7a',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl06.p06.cournot-output',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-6',
+      sourcePath: 'Vorlesungsfolien/Mikro2_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 6,
+      section: 'Cournot-Output bei unterschiedlichen Grenzkosten',
+      fingerprint: '7cb54f135d97890d',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl06.p11.symmetric-cournot',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-6',
+      sourcePath: 'Vorlesungsfolien/Mikro2_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 11,
+      section: 'Cournot-Modell mit identischen Unternehmen',
+      fingerprint: '0ac891cdc3f132e8',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_cournot_bertrand.vl06.p16.n-firm-cournot',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-6',
+      sourcePath: 'Vorlesungsfolien/Mikro2_6.pdf',
+      publicLabel: 'Vorlesung 6',
+      page: 16,
+      section: 'Cournot-Modell mit n identischen Unternehmen',
+      fingerprint: 'f97aa10c3cb39ec1',
+      confidence: 0.96,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     }),
     anchor({
       id: 'mikro2.oligopol_cournot_bertrand.vl08.p01.bertrand',
@@ -256,8 +294,10 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       publicLabel: 'Vorlesung 8',
       page: 3,
       section: 'Preiswettbewerb mit identischen Gütern: Marktergebnis (p = c, Bertrand-Paradox)',
-      fingerprint: '52de0cbf2d6d4eb7',
-      confidence: 0.9
+      fingerprint: 'f4d4f41e318de4f8',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     })
   ],
   oligopol_stackelberg: [
@@ -280,6 +320,42 @@ export const MIKRO2_SOURCE_ANCHORS = Object.freeze({
       section: 'Das Stackelberg-Modell: Führer und Folger',
       fingerprint: '2523a6a149b28afe',
       confidence: 0.95
+    }),
+    anchor({
+      id: 'mikro2.oligopol_stackelberg.vl05.p07.follower-reaction',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-5',
+      sourcePath: 'Vorlesungsfolien/Mikro2_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 7,
+      section: 'Reaktionsfunktion des Stackelberg-Folgers',
+      fingerprint: '3fbdf2866dd72802',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_stackelberg.vl05.p10.stackelberg-quantities',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-5',
+      sourcePath: 'Vorlesungsfolien/Mikro2_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 10,
+      section: 'Mengen beider Unternehmen im Stackelberg-Gleichgewicht',
+      fingerprint: '73c0d7ac36b6bfc4',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
+    }),
+    anchor({
+      id: 'mikro2.oligopol_stackelberg.vl05.p13.stackelberg-market-result',
+      sourceId: 'mikro2-lecture-slide-mikrookonomik-ii-vorlesungsfolien-mikro2-5',
+      sourcePath: 'Vorlesungsfolien/Mikro2_5.pdf',
+      publicLabel: 'Vorlesung 5',
+      page: 13,
+      section: 'Stackelberg-Modell Marktergebnis',
+      fingerprint: 'c14e7db03ddc7552',
+      confidence: 0.97,
+      reviewedAt: '2026-06-15',
+      reviewedBy: 'codex-source-verify-pass-2026-06-15'
     }),
     anchor({
       id: 'mikro2.oligopol_stackelberg.vl06.p01.cournot-contrast',

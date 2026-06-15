@@ -443,7 +443,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Gewinnfunktion (i) — Lineare Nachfrage",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p01.programm","mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"]
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"]
   }),
   card({
     id: 'mikro2.oligopol_cournot_bertrand.cournot_menge_symm',
@@ -469,7 +469,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Cournot-Menge (symm.) — Duopol-Gleichgewicht",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p01.programm","mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"]
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p11.symmetric-cournot"]
   }),
   card({
     id: 'mikro2.oligopol_cournot_bertrand.cournot_menge_symm_kurz',
@@ -495,7 +495,49 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Cournot-Menge (symm.) (Kurz) — Duopol-Gleichgewicht",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p01.programm","mikro2.oligopol_cournot_bertrand.vl06.p03.reaction"]
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p11.symmetric-cournot"]
+  }),
+  card({
+    id: 'mikro2.oligopol_cournot_bertrand.cournot_output_asymmetrisch_vl',
+    conceptId: 'oligopol_cournot_bertrand',
+    officialNotation: "y_i^C",
+    displayFormula: "$$y_i^C=\\frac{1-2c_i+c_j}{3}$$",
+    intuition: "Cournot-Output bei linearer inverser Nachfrage p=1-y_i-y_j und unterschiedlichen Grenzkosten.",
+    derivationSteps: [
+        {
+            "label": "Cournot-Reaktionsfunktionen einsetzen",
+            "text": "VL6 löst die Reaktionsfunktionen im Gleichgewicht und erhält den Output von Unternehmen i.",
+            "math": "$$y_i^C=\\frac{1-2c_i+c_j}{3}$$"
+        }
+    ],
+    assumptions: ["Inverse Nachfrage p=1-y_i-y_j","Konstante Grenzkosten c_i und c_j","Simultane Mengenwahl"],
+    appliesWhen: ["Cournot-Duopol mit unterschiedlichen Kosten","Vergleich eigener und fremder Grenzkosten"],
+    failsWhen: ["Preiswettbewerb statt Mengenwettbewerb","Nichtlineare Nachfrage ohne Normalisierung"],
+    examShortcut: "Eigene Grenzkosten zählen doppelt negativ, fremde Grenzkosten positiv.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-pattern"],
+    commonMistakes: ["c_i und c_j vertauschen","Stackelberg-Reihenfolge in Cournot-Aufgabe hineinlesen"],
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl06.p06.cournot-output"]
+  }),
+  card({
+    id: 'mikro2.oligopol_cournot_bertrand.bertrand_paradox',
+    conceptId: 'oligopol_cournot_bertrand',
+    officialNotation: "p=c",
+    displayFormula: "$$p=c,\\quad \\pi_i=0$$",
+    intuition: "Bei Preiswettbewerb mit identischen Gütern führt schon ein Duopol zur Konkurrenzlösung.",
+    derivationSteps: [
+        {
+            "label": "Unterbietungslogik",
+            "text": "Solange p_i>c ist, kann ein Unternehmen den Konkurrenten profitabel unterbieten und die gesamte Nachfrage gewinnen.",
+            "math": "$$p=c,\\quad \\pi_i=0$$"
+        }
+    ],
+    assumptions: ["Identische Güter","Konstante Grenzkosten","Keine Kapazitätsbeschränkungen","Vollkommene Information"],
+    appliesWhen: ["Bertrand-Modell mit homogenen Gütern","Cournot-vs.-Bertrand-Vergleich"],
+    failsWhen: ["Produktdifferenzierung","Kapazitätsbeschränkungen","Unterschiedliche Grenzkosten"],
+    examShortcut: "Homogener Bertrand: Preis gleich Grenzkosten, Nullgewinn.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_cournot_bertrand-vl-apply"],
+    commonMistakes: ["Cournot-Markup auf Bertrand übertragen","Nullgewinnbedingung vergessen"],
+    anchorIds: ["mikro2.oligopol_cournot_bertrand.vl08.p03.bertrand-paradox"]
   }),
   card({
     id: 'mikro2.oligopol_stackelberg.f_hrermenge',
@@ -521,7 +563,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Führermenge — Optimale Menge des First Movers bei linearer Nachfrage.",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_stackelberg-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p01.programm","mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model"]
+    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p10.stackelberg-quantities"]
   }),
   card({
     id: 'mikro2.oligopol_stackelberg.folgerreaktion',
@@ -547,7 +589,7 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Folgerreaktion — Beste Antwort des Followers auf die Führermenge.",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_stackelberg-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p01.programm","mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model"]
+    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p07.follower-reaction"]
   }),
   card({
     id: 'mikro2.oligopol_stackelberg.folgerreaktion_kurz',
@@ -573,7 +615,28 @@ export const FORMULA_CARDS = Object.freeze([
     examShortcut: "Merke: Folgerreaktion (Kurz) — Beste Antwort des Followers auf die Führermenge.",
     relatedTaskFamilies: ["mikro2.taskfamily.oligopol_stackelberg-vl-pattern"],
     commonMistakes: ["Formel ohne Kontext anwenden","VL-Notation mit Übungsblatt-Notation verwechseln"],
-    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p01.programm","mikro2.oligopol_stackelberg.vl05.p02.stackelberg-model"]
+    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p07.follower-reaction"]
+  }),
+  card({
+    id: 'mikro2.oligopol_stackelberg.stackelberg_marktergebnis_vl',
+    conceptId: 'oligopol_stackelberg',
+    officialNotation: "p^S, pi_1^S, pi_2^S",
+    displayFormula: "$$p^S=\\frac{1+3c}{4},\\quad \\pi_1^S=\\frac{(1-c)^2}{8},\\quad \\pi_2^S=\\frac{(1-c)^2}{16}$$",
+    intuition: "VL5-Marktergebnis des Stackelberg-Duopols im normalisierten linearen Modell.",
+    derivationSteps: [
+        {
+            "label": "Marktpreis und Gewinne",
+            "text": "Nach Einsetzen der Stackelberg-Mengen folgen Preis, Führergewinn und Folgergewinn.",
+            "math": "$$p^S=\\frac{1+3c}{4},\\quad \\pi_1^S=\\frac{(1-c)^2}{8},\\quad \\pi_2^S=\\frac{(1-c)^2}{16}$$"
+        }
+    ],
+    assumptions: ["Inverse Nachfrage p=1-y_1-y_2","Identische konstante Grenzkosten c","Sequentielle Mengenwahl mit bindender Führermenge"],
+    appliesWhen: ["Stackelberg-Vergleich mit Monopol oder Cournot","First-mover advantage quantifizieren"],
+    failsWhen: ["Simultane Entscheidung","Nicht bindendes Commitment","Preiswettbewerb"],
+    examShortcut: "Führergewinn ist im VL5-Normalmodell doppelt so hoch wie Folgergewinn.",
+    relatedTaskFamilies: ["mikro2.taskfamily.oligopol_stackelberg-vl-apply"],
+    commonMistakes: ["Cournot-Mengen einsetzen","Folgergewinn mit Führergewinn verwechseln"],
+    anchorIds: ["mikro2.oligopol_stackelberg.vl05.p13.stackelberg-market-result"]
   }),
   card({
     id: 'mikro2.intertemporaler_konsum.gegenwartswert_budget',

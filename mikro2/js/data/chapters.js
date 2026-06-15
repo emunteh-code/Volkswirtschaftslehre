@@ -611,7 +611,10 @@ export const CONTENT = {
 </section>`,
     formeln: [
       { label: 'Gewinnfunktion (i)', eq: String.raw`$$\pi_i = (a - b(q_i + q_j))q_i - c q_i$$`, desc: 'Lineare Nachfrage', variables: { a: 'Nachfrageabschnitt', b: 'Steigung der Nachfrage', c: 'Grenzkosten' } },
-      { label: 'Cournot-Menge (symm.)', eq: String.raw`$$q^* = \frac{a-c}{3b}$$`, desc: 'Duopol-Gleichgewicht', variables: { a: 'Nachfrageabschnitt', c: 'Grenzkosten', b: 'Steigungsparameter' } }
+      { label: 'Cournot-Menge (symm.)', eq: String.raw`$$q^* = \frac{a-c}{3b}$$`, desc: 'Duopol-Gleichgewicht', variables: { a: 'Nachfrageabschnitt', c: 'Grenzkosten', b: 'Steigungsparameter' } },
+      { label: 'Cournot-Output (VL-Normalform)', eq: String.raw`$$y_i^C=\frac{1-2c_i+c_j}{3}$$`, desc: 'Cournot-Output bei $p=1-y_i-y_j$.' },
+      { label: 'Cournot identisch (VL)', eq: String.raw`$$y^C=\frac{1-c}{3},\quad p^C=\frac{1+2c}{3},\quad \pi^C=\frac{(1-c)^2}{9}$$`, desc: 'Symmetrisches Cournot-Duopol in VL6.' },
+      { label: 'Bertrand-Paradox', eq: String.raw`$$p=c,\quad \pi_i=0$$`, desc: 'Preiswettbewerb mit identischen Gütern führt zur Konkurrenzlösung.' }
     ],
     aufgaben: [
       {
@@ -724,7 +727,9 @@ export const CONTENT = {
 </section>`,
     formeln: [
       { label: 'Führermenge', eq: String.raw`$$q_1^{Stack} = \frac{a-c}{2b}$$`, desc: 'Optimale Menge des First Movers bei linearer Nachfrage.' },
-      { label: 'Folgerreaktion', eq: String.raw`$$q_2(q_1)=\frac{a-c-bq_1}{2b}$$`, desc: 'Beste Antwort des Followers auf die Führermenge.' }
+      { label: 'Folgerreaktion', eq: String.raw`$$q_2(q_1)=\frac{a-c-bq_1}{2b}$$`, desc: 'Beste Antwort des Followers auf die Führermenge.' },
+      { label: 'Stackelberg-Mengen (VL)', eq: String.raw`$$y_1^S=\frac{1-c}{2},\quad y_2^S=\frac{1-c}{4}$$`, desc: 'Gleichgewichtsmengen im VL5-Normalmodell.' },
+      { label: 'Stackelberg-Marktergebnis (VL)', eq: String.raw`$$p^S=\frac{1+3c}{4},\quad \pi_1^S=\frac{(1-c)^2}{8},\quad \pi_2^S=\frac{(1-c)^2}{16}$$`, desc: 'Preis und Gewinne im Stackelberg-Gleichgewicht.' }
     ],
     aufgaben: [
       {
